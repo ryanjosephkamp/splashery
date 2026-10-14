@@ -1,0 +1,562 @@
+#------------------------------------------------------------------------------
+#$Date: 2023-10-07 00:56:35 +0300 (Sat, 07 Oct 2023) $
+#$Revision: 286826 $
+#$URL: file:///home/coder/svn-repositories/_RELOADED_COD/cod-reloaded/cif/7/13/21/7132177.cif $
+#------------------------------------------------------------------------------
+#
+# This file is available in the Crystallography Open Database (COD),
+# http://www.crystallography.net/
+#
+# All data on this site have been placed in the public domain by the
+# contributors.
+#
+data_7132177
+loop_
+_publ_author_name
+'Mettler, Marie'
+'Dewandre, Adrien'
+'Tumanov, Nikolay'
+'Wouters, Johan'
+'Septavaux, Jean'
+_publ_section_title
+;
+ Single crystal formation in core-shell capsules.
+;
+_journal_name_full               'Chemical communications (Cambridge, England)'
+_journal_paper_doi               10.1039/d3cc03727d
+_journal_year                    2023
+_chemical_formula_moiety         'Cl Na'
+_chemical_formula_sum            'Cl Na'
+_chemical_formula_weight         58.44
+_chemical_name_common            'rock salt'
+_chemical_name_systematic        'sodium chloride'
+_space_group_crystal_system      cubic
+_space_group_IT_number           225
+_space_group_name_Hall           '-F 4 2 3'
+_space_group_name_H-M_alt        'F m -3 m'
+_atom_sites_solution_primary     dual
+_atom_sites_solution_secondary   dual
+_audit_creation_date             2023-04-05
+_audit_creation_method
+;
+Olex2 1.5
+(compiled 2021.12.09 svn.r5202d8cf for OlexSys, GUI svn.r6439)
+;
+_cell_angle_alpha                90
+_cell_angle_beta                 90
+_cell_angle_gamma                90
+_cell_formula_units_Z            4
+_cell_length_a                   5.6357(3)
+_cell_length_b                   5.6357(3)
+_cell_length_c                   5.6357(3)
+_cell_measurement_reflns_used    206
+_cell_measurement_temperature    295(2)
+_cell_measurement_theta_max      32.2330
+_cell_measurement_theta_min      6.2540
+_cell_volume                     178.996(17)
+_computing_cell_refinement       'CrysAlisPro 1.171.40.53 (Rigaku OD, 2019)'
+_computing_data_collection       'CrysAlisPro 1.171.40.53 (Rigaku OD, 2019)'
+_computing_data_reduction        'CrysAlisPro 1.171.40.53 (Rigaku OD, 2019)'
+_computing_molecular_graphics    'Olex2 1.5 (Dolomanov et al., 2009)'
+_computing_publication_material  'Olex2 1.5 (Dolomanov et al., 2009)'
+_computing_structure_refinement  'SHELXL 2019/3 (Sheldrick, 2015)'
+_computing_structure_solution    'SHELXT 2014/5 (Sheldrick, 2014)'
+_diffrn_ambient_temperature      295(2)
+_diffrn_detector                 'CCD plate'
+_diffrn_detector_area_resol_mean 10.3712
+_diffrn_detector_type            Ruby
+_diffrn_measured_fraction_theta_full 1.000
+_diffrn_measured_fraction_theta_max 1.000
+_diffrn_measurement_details
+;
+List of Runs (angles in degrees, time in seconds):
+
+  # Type    Start    End  Width  t~exp~   \w     \q     \k     \f   Frames
+--------------------------------------------------------------------------
+  1  \w     -6.00  38.00   1.00    5.00    --   19.07  77.00-150.00   44
+  2  \w    -17.00  35.00   1.00    5.00    --   19.07 -77.00 -30.00   52
+  3  \w    -83.00 -20.00   1.00    5.00    --  -19.23 -38.00  60.00   63
+;
+_diffrn_measurement_device       'four-circle diffractometer'
+_diffrn_measurement_device_type  'Xcalibur, Ruby, Gemini ultra'
+_diffrn_measurement_method       '\w scans'
+_diffrn_orient_matrix_type
+'CrysAlisPro convention (1999,Acta A55,543-557)'
+_diffrn_orient_matrix_UB_11      -0.1023072000
+_diffrn_orient_matrix_UB_12      -0.0683046000
+_diffrn_orient_matrix_UB_13      -0.0265340000
+_diffrn_orient_matrix_UB_21      0.0181122000
+_diffrn_orient_matrix_UB_22      0.0204207000
+_diffrn_orient_matrix_UB_23      -0.1228213000
+_diffrn_orient_matrix_UB_31      0.0709564000
+_diffrn_orient_matrix_UB_32      -0.1038025000
+_diffrn_orient_matrix_UB_33      -0.0067250000
+_diffrn_radiation_monochromator  graphite
+_diffrn_radiation_probe          x-ray
+_diffrn_radiation_type           'Mo K\a'
+_diffrn_radiation_wavelength     0.71073
+_diffrn_reflns_av_R_equivalents  0.0228
+_diffrn_reflns_av_unetI/netI     0.0131
+_diffrn_reflns_Laue_measured_fraction_full 1.000
+_diffrn_reflns_Laue_measured_fraction_max 1.000
+_diffrn_reflns_limit_h_max       3
+_diffrn_reflns_limit_h_min       -8
+_diffrn_reflns_limit_k_max       6
+_diffrn_reflns_limit_k_min       -8
+_diffrn_reflns_limit_l_max       8
+_diffrn_reflns_limit_l_min       -3
+_diffrn_reflns_number            212
+_diffrn_reflns_point_group_measured_fraction_full 1.000
+_diffrn_reflns_point_group_measured_fraction_max 1.000
+_diffrn_reflns_theta_full        25.242
+_diffrn_reflns_theta_max         30.295
+_diffrn_reflns_theta_min         6.270
+_diffrn_source                   'fine-focus sealed X-ray tube'
+_diffrn_source_type              'Enhance (Mo) X-ray Source'
+_exptl_absorpt_coefficient_mu    1.774
+_exptl_absorpt_correction_T_max  0.904
+_exptl_absorpt_correction_T_min  0.833
+_exptl_absorpt_correction_type   analytical
+_exptl_absorpt_process_details
+;
+CrysAlisPro 1.171.40.53 (Rigaku Oxford Diffraction, 2019)
+Analytical numeric absorption correction using a multifaceted crystal
+			model based on expressions derived by R.C. Clark & J.S. Reid.
+(Clark, R. C. & Reid, J. S. (1995). Acta Cryst. A51, 887-897)
+Empirical absorption correction using spherical harmonics,
+ implemented in SCALE3 ABSPACK scaling algorithm.
+;
+_exptl_crystal_colour            colourless
+_exptl_crystal_density_diffrn    2.169
+_exptl_crystal_description       block
+_exptl_crystal_F_000             112
+_exptl_crystal_preparation
+;
+crystallized and measured in a plactic sphere
+;
+_exptl_crystal_size_max          0.15
+_exptl_crystal_size_mid          0.12
+_exptl_crystal_size_min          0.059
+_refine_diff_density_max         0.107
+_refine_diff_density_min         -0.092
+_refine_diff_density_rms         0.032
+_refine_ls_extinction_coef       0.044(9)
+_refine_ls_extinction_expression Fc^*^=kFc[1+0.001xFc^2^\l^3^/sin(2\q)]^-1/4^
+_refine_ls_extinction_method     'SHELXL-2019/2 (Sheldrick 2019)'
+_refine_ls_goodness_of_fit_ref   1.246
+_refine_ls_hydrogen_treatment    undef
+_refine_ls_matrix_type           full
+_refine_ls_number_parameters     4
+_refine_ls_number_reflns         26
+_refine_ls_number_restraints     0
+_refine_ls_restrained_S_all      1.246
+_refine_ls_R_factor_all          0.0102
+_refine_ls_R_factor_gt           0.0102
+_refine_ls_shift/su_max          0.000
+_refine_ls_shift/su_mean         0.000
+_refine_ls_structure_factor_coef Fsqd
+_refine_ls_weighting_details
+'w=1/[\s^2^(Fo^2^)+0.1711P] where P=(Fo^2^+2Fc^2^)/3'
+_refine_ls_weighting_scheme      calc
+_refine_ls_wR_factor_gt          0.0239
+_refine_ls_wR_factor_ref         0.0239
+_reflns_Friedel_coverage         0.000
+_reflns_number_gt                26
+_reflns_number_total             26
+_reflns_threshold_expression     'I > 2\s(I)'
+_cod_data_source_file            d3cc03727d2.cif
+_cod_data_source_block           nt1009_NaCl_in_capsule
+_cod_original_cell_volume        179.00(3)
+_cod_database_code               7132177
+_shelx_shelxl_version_number     2019/3
+_chemical_oxdiff_formula         NaCl
+_shelx_space_group_comment
+;
+The symmetry employed for this shelxl refinement is uniquely defined
+by the following loop, which should always be used as a source of
+symmetry information in preference to the above space-group names.
+They are only intended as comments.
+;
+_shelx_estimated_absorpt_t_max   0.903
+_shelx_estimated_absorpt_t_min   0.777
+_olex2_refinement_description
+;
+;
+_olex2_submission_special_instructions 'No special instructions were received'
+_oxdiff_exptl_absorpt_empirical_details
+;
+Empirical correction (ABSPACK) includes:
+- Absorption correction using spherical harmonics
+- Frame scaling
+;
+_oxdiff_exptl_absorpt_empirical_full_max 1.085
+_oxdiff_exptl_absorpt_empirical_full_min 0.912
+loop_
+_space_group_symop_operation_xyz
+'x, y, z'
+'-x, -y, z'
+'-x, y, -z'
+'x, -y, -z'
+'z, x, y'
+'z, -x, -y'
+'-z, -x, y'
+'-z, x, -y'
+'y, z, x'
+'-y, z, -x'
+'y, -z, -x'
+'-y, -z, x'
+'y, x, -z'
+'-y, -x, -z'
+'y, -x, z'
+'-y, x, z'
+'x, z, -y'
+'-x, z, y'
+'-x, -z, -y'
+'x, -z, y'
+'z, y, -x'
+'z, -y, x'
+'-z, y, x'
+'-z, -y, -x'
+'x, y+1/2, z+1/2'
+'-x, -y+1/2, z+1/2'
+'-x, y+1/2, -z+1/2'
+'x, -y+1/2, -z+1/2'
+'z, x+1/2, y+1/2'
+'z, -x+1/2, -y+1/2'
+'-z, -x+1/2, y+1/2'
+'-z, x+1/2, -y+1/2'
+'y, z+1/2, x+1/2'
+'-y, z+1/2, -x+1/2'
+'y, -z+1/2, -x+1/2'
+'-y, -z+1/2, x+1/2'
+'y, x+1/2, -z+1/2'
+'-y, -x+1/2, -z+1/2'
+'y, -x+1/2, z+1/2'
+'-y, x+1/2, z+1/2'
+'x, z+1/2, -y+1/2'
+'-x, z+1/2, y+1/2'
+'-x, -z+1/2, -y+1/2'
+'x, -z+1/2, y+1/2'
+'z, y+1/2, -x+1/2'
+'z, -y+1/2, x+1/2'
+'-z, y+1/2, x+1/2'
+'-z, -y+1/2, -x+1/2'
+'x+1/2, y, z+1/2'
+'-x+1/2, -y, z+1/2'
+'-x+1/2, y, -z+1/2'
+'x+1/2, -y, -z+1/2'
+'z+1/2, x, y+1/2'
+'z+1/2, -x, -y+1/2'
+'-z+1/2, -x, y+1/2'
+'-z+1/2, x, -y+1/2'
+'y+1/2, z, x+1/2'
+'-y+1/2, z, -x+1/2'
+'y+1/2, -z, -x+1/2'
+'-y+1/2, -z, x+1/2'
+'y+1/2, x, -z+1/2'
+'-y+1/2, -x, -z+1/2'
+'y+1/2, -x, z+1/2'
+'-y+1/2, x, z+1/2'
+'x+1/2, z, -y+1/2'
+'-x+1/2, z, y+1/2'
+'-x+1/2, -z, -y+1/2'
+'x+1/2, -z, y+1/2'
+'z+1/2, y, -x+1/2'
+'z+1/2, -y, x+1/2'
+'-z+1/2, y, x+1/2'
+'-z+1/2, -y, -x+1/2'
+'x+1/2, y+1/2, z'
+'-x+1/2, -y+1/2, z'
+'-x+1/2, y+1/2, -z'
+'x+1/2, -y+1/2, -z'
+'z+1/2, x+1/2, y'
+'z+1/2, -x+1/2, -y'
+'-z+1/2, -x+1/2, y'
+'-z+1/2, x+1/2, -y'
+'y+1/2, z+1/2, x'
+'-y+1/2, z+1/2, -x'
+'y+1/2, -z+1/2, -x'
+'-y+1/2, -z+1/2, x'
+'y+1/2, x+1/2, -z'
+'-y+1/2, -x+1/2, -z'
+'y+1/2, -x+1/2, z'
+'-y+1/2, x+1/2, z'
+'x+1/2, z+1/2, -y'
+'-x+1/2, z+1/2, y'
+'-x+1/2, -z+1/2, -y'
+'x+1/2, -z+1/2, y'
+'z+1/2, y+1/2, -x'
+'z+1/2, -y+1/2, x'
+'-z+1/2, y+1/2, x'
+'-z+1/2, -y+1/2, -x'
+'-x, -y, -z'
+'x, y, -z'
+'x, -y, z'
+'-x, y, z'
+'-z, -x, -y'
+'-z, x, y'
+'z, x, -y'
+'z, -x, y'
+'-y, -z, -x'
+'y, -z, x'
+'-y, z, x'
+'y, z, -x'
+'-y, -x, z'
+'y, x, z'
+'-y, x, -z'
+'y, -x, -z'
+'-x, -z, y'
+'x, -z, -y'
+'x, z, y'
+'-x, z, -y'
+'-z, -y, x'
+'-z, y, -x'
+'z, -y, -x'
+'z, y, x'
+'-x, -y+1/2, -z+1/2'
+'x, y+1/2, -z+1/2'
+'x, -y+1/2, z+1/2'
+'-x, y+1/2, z+1/2'
+'-z, -x+1/2, -y+1/2'
+'-z, x+1/2, y+1/2'
+'z, x+1/2, -y+1/2'
+'z, -x+1/2, y+1/2'
+'-y, -z+1/2, -x+1/2'
+'y, -z+1/2, x+1/2'
+'-y, z+1/2, x+1/2'
+'y, z+1/2, -x+1/2'
+'-y, -x+1/2, z+1/2'
+'y, x+1/2, z+1/2'
+'-y, x+1/2, -z+1/2'
+'y, -x+1/2, -z+1/2'
+'-x, -z+1/2, y+1/2'
+'x, -z+1/2, -y+1/2'
+'x, z+1/2, y+1/2'
+'-x, z+1/2, -y+1/2'
+'-z, -y+1/2, x+1/2'
+'-z, y+1/2, -x+1/2'
+'z, -y+1/2, -x+1/2'
+'z, y+1/2, x+1/2'
+'-x+1/2, -y, -z+1/2'
+'x+1/2, y, -z+1/2'
+'x+1/2, -y, z+1/2'
+'-x+1/2, y, z+1/2'
+'-z+1/2, -x, -y+1/2'
+'-z+1/2, x, y+1/2'
+'z+1/2, x, -y+1/2'
+'z+1/2, -x, y+1/2'
+'-y+1/2, -z, -x+1/2'
+'y+1/2, -z, x+1/2'
+'-y+1/2, z, x+1/2'
+'y+1/2, z, -x+1/2'
+'-y+1/2, -x, z+1/2'
+'y+1/2, x, z+1/2'
+'-y+1/2, x, -z+1/2'
+'y+1/2, -x, -z+1/2'
+'-x+1/2, -z, y+1/2'
+'x+1/2, -z, -y+1/2'
+'x+1/2, z, y+1/2'
+'-x+1/2, z, -y+1/2'
+'-z+1/2, -y, x+1/2'
+'-z+1/2, y, -x+1/2'
+'z+1/2, -y, -x+1/2'
+'z+1/2, y, x+1/2'
+'-x+1/2, -y+1/2, -z'
+'x+1/2, y+1/2, -z'
+'x+1/2, -y+1/2, z'
+'-x+1/2, y+1/2, z'
+'-z+1/2, -x+1/2, -y'
+'-z+1/2, x+1/2, y'
+'z+1/2, x+1/2, -y'
+'z+1/2, -x+1/2, y'
+'-y+1/2, -z+1/2, -x'
+'y+1/2, -z+1/2, x'
+'-y+1/2, z+1/2, x'
+'y+1/2, z+1/2, -x'
+'-y+1/2, -x+1/2, z'
+'y+1/2, x+1/2, z'
+'-y+1/2, x+1/2, -z'
+'y+1/2, -x+1/2, -z'
+'-x+1/2, -z+1/2, y'
+'x+1/2, -z+1/2, -y'
+'x+1/2, z+1/2, y'
+'-x+1/2, z+1/2, -y'
+'-z+1/2, -y+1/2, x'
+'-z+1/2, y+1/2, -x'
+'z+1/2, -y+1/2, -x'
+'z+1/2, y+1/2, x'
+loop_
+_atom_site_label
+_atom_site_type_symbol
+_atom_site_fract_x
+_atom_site_fract_y
+_atom_site_fract_z
+_atom_site_U_iso_or_equiv
+_atom_site_adp_type
+_atom_site_occupancy
+_atom_site_site_symmetry_order
+_atom_site_calc_flag
+_atom_site_refinement_flags_posn
+_atom_site_refinement_flags_adp
+_atom_site_refinement_flags_occupancy
+_atom_site_disorder_assembly
+_atom_site_disorder_group
+Cl1 Cl 0.500000 1.000000 0.500000 0.0204(4) Uani 1 48 d S T P . .
+Na1 Na 0.500000 0.500000 0.500000 0.0231(5) Uani 1 48 d S T P . .
+loop_
+_atom_site_aniso_label
+_atom_site_aniso_U_11
+_atom_site_aniso_U_22
+_atom_site_aniso_U_33
+_atom_site_aniso_U_23
+_atom_site_aniso_U_13
+_atom_site_aniso_U_12
+Cl1 0.0204(4) 0.0204(4) 0.0204(4) 0.000 0.000 0.000
+Na1 0.0231(5) 0.0231(5) 0.0231(5) 0.000 0.000 0.000
+loop_
+_atom_type_symbol
+_atom_type_description
+_atom_type_scat_dispersion_real
+_atom_type_scat_dispersion_imag
+_atom_type_scat_source
+Cl Cl 0.1484 0.1585 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
+Na Na 0.0362 0.0249 'International Tables Vol C Tables 4.2.6.8 and 6.1.1.4'
+loop_
+_exptl_crystal_face_index_h
+_exptl_crystal_face_index_k
+_exptl_crystal_face_index_l
+_exptl_crystal_face_perp_dist
+0 1 0 0.0436
+1 0 0 0.0614
+1 1 0 0.0482
+1 -1 0 0.0817
+0 -1 0 0.0846
+0 0 1 0.0295
+0 0 -1 0.0295
+-4 -7 1 0.0624
+-3 7 0 0.0464
+-8 0 2 0.0669
+loop_
+_geom_angle_atom_site_label_1
+_geom_angle_atom_site_label_2
+_geom_angle_atom_site_label_3
+_geom_angle
+_geom_angle_site_symmetry_1
+_geom_angle_site_symmetry_3
+_geom_angle_publ_flag
+Na1 Cl1 Na1 90.0 73 . ?
+Na1 Cl1 Na1 90.0 1_565 25 ?
+Na1 Cl1 Na1 90.0 1_565 73_455 ?
+Na1 Cl1 Na1 90.0 73 1_565 ?
+Na1 Cl1 Na1 180.0 73 73_455 ?
+Na1 Cl1 Na1 180.0 . 1_565 ?
+Na1 Cl1 Na1 90.0 . 25 ?
+Na1 Cl1 Na1 90.0 73 25_554 ?
+Na1 Cl1 Na1 180.0 25_554 25 ?
+Na1 Cl1 Na1 90.0 . 25_554 ?
+Na1 Cl1 Na1 90.0 . 73_455 ?
+Na1 Cl1 Na1 90.0 1_565 25_554 ?
+Na1 Cl1 Na1 90.0 25_554 73_455 ?
+Na1 Cl1 Na1 90.0 73 25 ?
+Na1 Cl1 Na1 90.0 25 73_455 ?
+Cl1 Na1 Cl1 90.0 73_545 . ?
+Cl1 Na1 Cl1 90.0 1_545 25_545 ?
+Cl1 Na1 Cl1 90.0 1_545 73_445 ?
+Cl1 Na1 Cl1 90.0 73_545 1_545 ?
+Cl1 Na1 Cl1 180.0 73_545 73_445 ?
+Cl1 Na1 Cl1 180.0 . 1_545 ?
+Cl1 Na1 Cl1 90.0 . 25_545 ?
+Cl1 Na1 Cl1 90.0 73_545 25_544 ?
+Cl1 Na1 Cl1 180.0 25_544 25_545 ?
+Cl1 Na1 Cl1 90.0 . 25_544 ?
+Cl1 Na1 Cl1 90.0 . 73_445 ?
+Cl1 Na1 Cl1 90.0 1_545 25_544 ?
+Cl1 Na1 Cl1 90.0 25_544 73_445 ?
+Cl1 Na1 Cl1 90.0 73_545 25_545 ?
+Cl1 Na1 Cl1 90.0 25_545 73_445 ?
+Cl1 Na1 Na1 90.0 . 49_454 ?
+Cl1 Na1 Na1 45.0 73_445 73_445 ?
+Cl1 Na1 Na1 45.0 . 25 ?
+Cl1 Na1 Na1 45.0 25_544 49_454 ?
+Cl1 Na1 Na1 135.0 25_544 49 ?
+Cl1 Na1 Na1 45.0 73_445 49_454 ?
+Cl1 Na1 Na1 90.0 73_445 25 ?
+Cl1 Na1 Na1 90.0 25_544 73 ?
+Cl1 Na1 Na1 90.0 . 49 ?
+Cl1 Na1 Na1 90.0 25_545 73 ?
+Cl1 Na1 Na1 135.0 73_445 49 ?
+Cl1 Na1 Na1 135.0 73_445 73 ?
+Cl1 Na1 Na1 135.0 25_544 25 ?
+Cl1 Na1 Na1 90.0 73_545 25_544 ?
+Cl1 Na1 Na1 90.0 25_545 73_445 ?
+Cl1 Na1 Na1 135.0 . 25_544 ?
+Cl1 Na1 Na1 45.0 73_545 49 ?
+Cl1 Na1 Na1 45.0 1_545 25_544 ?
+Cl1 Na1 Na1 90.0 1_545 49 ?
+Cl1 Na1 Na1 45.0 25_544 25_544 ?
+Cl1 Na1 Na1 45.0 25_545 49 ?
+Cl1 Na1 Na1 90.0 73_445 25_544 ?
+Cl1 Na1 Na1 90.0 73_545 25 ?
+Cl1 Na1 Na1 135.0 73_545 73_445 ?
+Cl1 Na1 Na1 135.0 1_545 25 ?
+Cl1 Na1 Na1 135.0 . 73_445 ?
+Cl1 Na1 Na1 45.0 25_545 25 ?
+Cl1 Na1 Na1 45.0 1_545 73_445 ?
+Cl1 Na1 Na1 135.0 73_545 49_454 ?
+Cl1 Na1 Na1 90.0 25_544 73_445 ?
+Cl1 Na1 Na1 90.0 1_545 49_454 ?
+Cl1 Na1 Na1 45.0 73_545 73 ?
+Cl1 Na1 Na1 135.0 25_545 49_454 ?
+Cl1 Na1 Na1 45.0 . 73 ?
+Cl1 Na1 Na1 135.0 1_545 73 ?
+Cl1 Na1 Na1 135.0 25_545 25_544 ?
+Na1 Na1 Na1 60.0 73 25 ?
+Na1 Na1 Na1 120.0 73 25_544 ?
+Na1 Na1 Na1 60.0 73_445 49_454 ?
+Na1 Na1 Na1 180.0 25_544 25 ?
+Na1 Na1 Na1 120.0 73 49_454 ?
+Na1 Na1 Na1 120.0 73_445 25 ?
+Na1 Na1 Na1 120.0 25_544 49 ?
+Na1 Na1 Na1 60.0 49 25 ?
+Na1 Na1 Na1 60.0 73 49 ?
+Na1 Na1 Na1 120.0 73_445 49 ?
+Na1 Na1 Na1 60.0 25_544 49_454 ?
+Na1 Na1 Na1 180.0 73 73_445 ?
+Na1 Na1 Na1 180.0 49 49_454 ?
+Na1 Na1 Na1 60.0 25_544 73_445 ?
+Na1 Na1 Na1 120.0 25 49_454 ?
+loop_
+_geom_bond_atom_site_label_1
+_geom_bond_atom_site_label_2
+_geom_bond_distance
+_geom_bond_site_symmetry_2
+_geom_bond_publ_flag
+Cl1 Na1 2.81785(15) 73 ?
+Cl1 Na1 2.81785(15) 25 ?
+Cl1 Na1 2.81785(15) 25_554 ?
+Cl1 Na1 2.81785(15) . ?
+Cl1 Na1 2.81785(14) 1_565 ?
+Cl1 Na1 2.81785(15) 73_455 ?
+Na1 Na1 3.9850(2) 73 ?
+Na1 Na1 3.9850(2) 25 ?
+Na1 Na1 3.9850(2) 49 ?
+Na1 Na1 3.9850(2) 25_544 ?
+Na1 Na1 3.9850(2) 49_454 ?
+Na1 Na1 3.9850(2) 73_445 ?
+loop_
+_exptl_oxdiff_crystal_face_indexfrac_h
+_exptl_oxdiff_crystal_face_indexfrac_k
+_exptl_oxdiff_crystal_face_indexfrac_l
+_exptl_oxdiff_crystal_face_x
+_exptl_oxdiff_crystal_face_y
+_exptl_oxdiff_crystal_face_z
+-0.0000 0.9999 0.0001 -0.0683 0.0204 -0.1038
+1.0000 0.0001 -0.0000 -0.1023 0.0181 0.0709
+0.9999 0.9999 0.0001 -0.1706 0.0385 -0.0328
+1.0000 -0.9998 -0.0001 -0.0340 -0.0023 0.1747
+0.0000 -0.9999 -0.0001 0.0683 -0.0204 0.1038
+-0.0001 -0.0002 1.0001 -0.0265 -0.1228 -0.0067
+0.0001 0.0002 -1.0001 0.0265 0.1228 0.0067
+-4.1240 -6.6264 1.4889 0.8350 -0.3929 0.3852
+-3.4617 7.1439 0.2013 -0.1391 0.0585 -0.9885
+-7.7349 -0.3696 1.7975 0.7689 -0.3684 -0.5226

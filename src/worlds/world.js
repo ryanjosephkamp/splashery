@@ -25,6 +25,10 @@ const FOLIAGE = ["palm", "pine", "oak", "bush"];
 
 const DEG = 180 / Math.PI;
 const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
+// Without a painted progress bar (paintProgress false: ?clock=manual, for tests and clips) the
+// build only yields to the page between steps instead of waiting for a drawn frame each time.
+// Each frame of the loading view takes about a second in the software renderer.
+const nextTask = () => new Promise((r) => setTimeout(r, 0));
 
 export class World {
   // mode: "splats" or "hybrid" (docs/WORLDS.md, "Rendering").
@@ -39,10 +43,12 @@ export class World {
       shadows = true,
       characterModel = def.character.model,
       frame = null,
+      paintProgress = true,
     } = {},
   ) {
     // prettier-ignore
     this.view = view;
+    this.yieldStep = paintProgress ? nextFrame : nextTask;
     this.def = def;
     this.tier = tier;
     this.mode = mode === "hybrid" ? "hybrid" : "splats";
@@ -160,7 +166,7 @@ export class World {
       i++;
       if (i % 2 === 0) {
         progress(0.9 + 0.1 * (1 - this.queue.length / total), "Growing the grass…");
-        await nextFrame();
+        await this.yieldStep();
       }
     }
     this.applyPlan();
@@ -186,7 +192,7 @@ export class World {
     app.root.addChild(dome);
     this.sky = dome;
     progress(0.04, "Laying out the ground…");
-    await nextFrame();
+    await this.yieldStep();
     const mat = groundMaterial(assets, this.terrain);
     const step = this.tier === "low" ? 1 : 0.5;
     this.groundTiles = groundTiles(view.device, this.terrain, { step, above: this.terrain.water - this.def.terrain.clearDepth - 4, color: groundColor(this.terrain) }); // prettier-ignore
@@ -287,7 +293,7 @@ export class World {
       const key = `${p.type}|${p.seed}|${p.detail}|${JSON.stringify(p.options)}`;
       if (!bakes.has(key)) {
         progress(0.05 + 0.7 * (done / kinds.size), `Growing the ${p.type}…`);
-        await nextFrame();
+        await this.yieldStep();
         const baked = await bakeProp(p.type, {
           seed: p.seed,
           options: p.options,

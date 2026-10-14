@@ -8,3 +8,6 @@ playwright-report/
 package-lock.json
 SPEC.md
 docs/SPEC-v1-planet-painter.md
+
+# grooph hook scripts, copied as installed
+.grooph/hooks/

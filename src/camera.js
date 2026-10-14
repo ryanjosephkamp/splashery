@@ -1,11 +1,15 @@
 // Orbit camera around the toy, plus a small gesture recognizer.
 //
 // The camera moves; the toy stays put. State is yaw/pitch/roll/distance so it
-// serialises cleanly. Motion is damped: input moves targets, the rendered
-// pose eases towards them, and a released drag coasts to a stop. An idle
+// serializes cleanly. Motion is damped: input moves targets, the rendered
+// pose eases toward them, and a released drag coasts to a stop. An idle
 // turntable starts after a pause (never under prefers-reduced-motion).
 // With the tilt locked (lane Viewer), a drag only spins the toy around its
-// vertical axis: pitch and roll stay at the toy's home pose.
+// vertical axis: pitch and roll stay at the toy's home pose. A toy may also
+// keep the tilt within its own range (setPitchRange, lane Live input r3).
+// A toy seen from inside (setInside, lane Night sky) puts the camera at the
+// target, looking out the way the orbit camera would look in, so a drag still
+// moves the view the way the finger goes and a pinch narrows the field of view.
 
 const TAU = Math.PI * 2;
 const PITCH_LIMIT = 1.45;
@@ -30,7 +34,7 @@ export class OrbitCamera {
     this.maxDistance = 9;
     this.radius = 1;
     this.target = [0, 0, 0];
-    // UI r2 (pan): the point the view eases towards (target follows it), and
+    // UI r2 (pan): the point the view eases toward (target follows it), and
     // the toy's own center, where Reset puts it back.
     this.aim = [0, 0, 0];
     this.center = [0, 0, 0];
@@ -38,22 +42,45 @@ export class OrbitCamera {
     // camera move the target itself, so a page's focus glide (which sets the
     // target) is never pulled back.
     this.easeAim = false;
-    this.follow = [0, 0, 0]; // extra target offset the camera eases towards
+    this.follow = [0, 0, 0]; // extra target offset the camera eases toward
     this.offset = [0, 0, 0];
     this.turntable = !reducedMotion;
     this.tiltLock = false;
+    this.pitchRange = null; // [low, high] radians, or the usual limits
+    this.inside = null; // { fov } in degrees for a toy seen from inside, or null (lane Night sky)
     this.turntableSpeed = 0.18;
     this.idleDelay = 2.5;
     this.idleFor = 0;
     this.ramp = 0;
     this.dragging = false;
     this.viewportHeight = 800;
+    this.viewportWidth = 0; // lane Fix10: CSS pixels, when known (0: as tall as wide)
     this.shake = { last: 0, flips: 0, sign: 0, time: 0 };
     this.onShake = null;
   }
 
   setTurntable(on) {
     this.turntable = !!on && !this.reducedMotion;
+  }
+
+  // Keeps the tilt between low and high (radians; positive looks down), or
+  // within the usual limits with null (lane Live input r3).
+  setPitchRange(range) {
+    const ok = Array.isArray(range) && range.length === 2 && range.every(Number.isFinite);
+    this.pitchRange = ok ? [Math.max(-PITCH_LIMIT, range[0]), Math.min(PITCH_LIMIT, range[1])] : null; // prettier-ignore
+    this.tgt.pitch = this.clampPitch(this.tgt.pitch);
+  }
+
+  // Lane Night sky: a toy seen from inside ({ fov } in degrees at the home
+  // distance; a pinch scales it with the distance), or null for the usual orbit.
+  setInside(opts) {
+    const fov = Number(opts?.fov ?? 70);
+    this.inside = opts && Number.isFinite(fov) && fov > 0 ? { fov: Math.min(120, fov) } : null;
+  }
+
+  clampPitch(p) {
+    const [lo, hi] = this.pitchRange || [-PITCH_LIMIT, PITCH_LIMIT];
+    return Math.min(hi, Math.max(lo, p));
   }
 
   // Locks or frees the tilt. Locking eases pitch and roll back home.
@@ -99,16 +126,35 @@ export class OrbitCamera {
 
   // Drag in CSS pixels. A full viewport-height drag turns about 1.4 turns.
   rotateBy(dx, dy, dt = 1 / 60) {
-    const k = (TAU * 1.4) / Math.max(200, this.viewportHeight);
+    // Lane Powers of ten: a toy that takes the zoom takes a drag as a zoom
+    // too (up zooms in, a viewport height about a hundredfold), and the
+    // view keeps still.
+    if (this.zoomTaker && dy) {
+      this.zoomBy(Math.exp((dy * 4.6) / Math.max(200, this.viewportHeight)));
+      return;
+    }
+    if (this.zoomTaker) return;
+    let k = (TAU * 1.4) / Math.max(200, this.viewportHeight);
+    // Lane Fix10: from inside, the view turns with the finger, so the star under it stays under
+    // it: a pixel turns as much as a pixel spans at the middle of the view (the field of view
+    // spans the narrower side), and a sideways drag turns further when the view looks up.
+    let kYaw = k;
+    if (this.inside) {
+      const fov = this.pose().fov * (Math.PI / 180);
+      const narrow = Math.max(200, Math.min(this.viewportWidth || Infinity, this.viewportHeight));
+      k = (2 * Math.tan(fov / 2)) / narrow;
+      // (Negative: looking out, a sideways drag turns the view the other way from the orbit's.)
+      kYaw = -k / Math.max(0.35, Math.cos(this.cur.pitch));
+    }
     const c = Math.cos(-this.cur.roll);
     const s = Math.sin(-this.cur.roll);
     // Locked, a sideways drag spins the toy and nothing tilts it.
     const rx = this.tiltLock ? dx : dx * c - dy * s;
     const ry = this.tiltLock ? 0 : dx * s + dy * c;
-    const dYaw = -rx * k;
+    const dYaw = -rx * kYaw;
     const dPitch = ry * k;
     this.tgt.yaw += dYaw;
-    this.tgt.pitch = clampPitch(this.tgt.pitch + dPitch);
+    this.tgt.pitch = this.clampPitch(this.tgt.pitch + dPitch);
     if (dt > 0) {
       const inv = 1 / Math.max(dt, 1 / 240);
       this.vel.yaw = this.vel.yaw * 0.5 + dYaw * inv * 0.5;
@@ -144,6 +190,9 @@ export class OrbitCamera {
   }
 
   zoomBy(factor) {
+    // Lane Powers of ten: a toy may take the zoom itself (zoomTaker returns
+    // true), so the camera keeps still.
+    if (this.zoomTaker?.(factor)) return this.interact();
     this.tgt.distance = Math.min(
       this.maxDistance,
       Math.max(this.minDistance, this.tgt.distance * factor),
@@ -155,6 +204,7 @@ export class OrbitCamera {
   // the toy follows the finger. The aim stays within the toy's bounds (a box
   // of its radius round its center), so the toy never leaves the screen.
   panBy(dx, dy) {
+    if (this.inside) return; // lane Night sky: the view from inside stays at its center
     const pose = this.pose();
     const k = (2 * this.cur.distance * Math.tan((19 * Math.PI) / 180)) / Math.max(200, this.viewportHeight); // prettier-ignore
     const R = this.radius;
@@ -213,7 +263,7 @@ export class OrbitCamera {
     const n = (v, d) => (Number.isFinite(v) ? v : d);
     const next = {
       yaw: n(s?.yaw, DEFAULT_CAMERA.yaw),
-      pitch: clampPitch(n(s?.pitch, DEFAULT_CAMERA.pitch)),
+      pitch: this.clampPitch(n(s?.pitch, DEFAULT_CAMERA.pitch)),
       roll: wrapAngle(n(s?.roll, 0)),
       distance: Math.min(
         this.maxDistance,
@@ -235,8 +285,8 @@ export class OrbitCamera {
       const coast = Math.abs(this.vel.yaw) + Math.abs(this.vel.pitch) > 1e-3;
       if (coast) {
         this.tgt.yaw += this.vel.yaw * dt;
-        this.tgt.pitch = clampPitch(this.tgt.pitch + this.vel.pitch * dt);
-        const f = Math.exp(-dt / 0.22);
+        this.tgt.pitch = this.clampPitch(this.tgt.pitch + this.vel.pitch * dt);
+        const f = Math.exp(-dt / (this.inside ? 0.1 : 0.22)); // Fix10: a short coast from inside
         this.vel.yaw *= f;
         this.vel.pitch *= f;
       } else {
@@ -299,6 +349,22 @@ export class OrbitCamera {
       this.target[1] + this.offset[1],
       this.target[2] + this.offset[2],
     ];
+    // Lane Night sky: from inside, the camera stands at the target and looks
+    // out along `back` (a half turn about its own up), with a field of view
+    // that a pinch narrows or widens.
+    if (this.inside) {
+      const qi = quatMul(q, [0, 1, 0, 0]);
+      const fov = this.inside.fov * (distance / Math.max(1e-6, this.home.distance));
+      return {
+        distance,
+        position: t,
+        rotation: qi,
+        right: rotate(qi, [1, 0, 0]),
+        up: rotate(qi, [0, 1, 0]),
+        forward: back,
+        fov: Math.min(120, Math.max(10, fov)),
+      };
+    }
     return {
       distance,
       position: [t[0] + back[0] * distance, t[1] + back[1] * distance, t[2] + back[2] * distance],
@@ -308,10 +374,6 @@ export class OrbitCamera {
       forward: [-back[0], -back[1], -back[2]],
     };
   }
-}
-
-function clampPitch(p) {
-  return Math.min(PITCH_LIMIT, Math.max(-PITCH_LIMIT, p));
 }
 
 function wrapAngle(a) {

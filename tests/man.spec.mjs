@@ -62,7 +62,7 @@ test.describe("the splat equation reader", () => {
     fails(() => readExpr("a*u"), /“a” can't be used here\. Use u, v and t\./);
     fails(() => readExpr("q"), /I don't know “q”\. Try something like cos\(u\)·sin\(v\)\./);
     fails(() => readExpr("sin(u"), /check the brackets/);
-    fails(() => readExpr("u".repeat(121)), /over 120 characters/);
+    fails(() => readExpr("u".repeat(241)), /over 240 characters/); // lane Kit lab: 240 since October 2026
   });
 
   test("statements: one or many, each field its own message", () => {
@@ -214,9 +214,10 @@ test("the manual page opens, and every example link opens the toy with its progr
 }) => {
   const problems = [];
   page.on("pageerror", (e) => problems.push(e.message));
-  await page.goto("/manual/");
+  await page.goto("/manual/all.html");
   await expect(page.locator("h1")).toHaveText(/Tinkerer's Manual/);
-  const links = await page.locator("a[href*='#s=']").evaluateAll((as) => as.map((a) => a.getAttribute("href"))); // prettier-ignore
+  // (The chapters from Manual r7b also link to other toys, with plain-JSON scene links, "#s=j.")
+  const links = (await page.locator("a[href*='#s=']").evaluateAll((as) => as.map((a) => a.getAttribute("href")))).filter((h) => !h.includes("#s=j.")); // prettier-ignore
   expect(links.length).toBeGreaterThanOrEqual(8);
   const { decodeSceneHash } = await import("../src/codec.js");
   for (const href of links) {
@@ -259,7 +260,7 @@ test("splat equation mid-tap screenshots at 390x844 and 1440x900", async ({ brow
     await page.evaluate(() => window.__splashery.player.act(null));
     await page.waitForTimeout(1600);
     await page.screenshot({ path: path.join(SHOTS, `man-splat-equation-${w}x${h}.png`) });
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     await page.waitForLoadState("load");
     await page.screenshot({ path: path.join(SHOTS, `man-manual-${w}x${h}.png`) });
     expect(problems).toEqual([]);
@@ -282,6 +283,6 @@ test("the manual's example recipe builds, and its gust ends where the sails woul
   expect(angle(1e-9) - angle(0)).toBeCloseTo(2 * Math.PI, 5);
   expect(angle(1)).toBeCloseTo(angle(0), 9);
   // The page shows the same code.
-  const html = fs.readFileSync("manual/index.html", "utf8");
+  const html = fs.readFileSync("manual/all.html", "utf8");
   expect(html).toContain("const extra = 2 * Math.PI * g * g * (3 - 2 * g);");
 });

@@ -9,6 +9,7 @@
 // tools/models.json.
 
 import { clamp, smoothstep, mix, quatAxisAngle, quatFromTo, quatMul, quatRotate } from "../kit.js";
+import { surfacePoints } from "../physics/world.js"; // lanes Hands-on H1 and H3
 
 // ---- The baked models ------------------------------------------------------------------------
 
@@ -67,27 +68,75 @@ const BASE = 0.01;
 
 // Adds the scan's splats as a cloud: `share` of the toy's budget (the file's first splats, an
 // even sample, grown to close the surface when fewer are used). `parts[i]` is the kit part for
-// the file's part i; `color(c, i, filePart)` may recolor a splat.
-export function addScan(k, scan, { share = 0.86, parts = [], color, keep } = {}) {
+// the file's part i; `color(c, i, filePart)` may recolor a splat. `pattern` (true, or
+// (filePart) => true) lets the flag and pattern layer reach those splats (lane Fix7: the clothes'
+// cloth); by default the scan keeps its own colors under any flag.
+// Lane Sharpness A's options (off unless a toy asks): `sizeMul` scales every splat, `exact` keeps
+// each splat's own size (no random size jitter, which frays the outline), and `smooth` (0..1)
+// blends each splat's color toward the mean of its neighbors within `cell` model units, to calm a
+// scan's speckled texture. `partOf(filePart, i)` may pick a splat's kit part itself (lane Hands-on
+// H1: a sleeve cut at its elbow).
+export function addScan(
+  k,
+  scan,
+  {
+    share = 0.86,
+    parts = [],
+    color,
+    keep,
+    pattern = false,
+    sizeMul = 1,
+    exact = false,
+    smooth = 0,
+    cell = 0.012,
+    partOf,
+  } = {},
+) {
   k.data = k.data || {}; // sortWhileMoving keeps its state here
   const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * share)));
   const grow = Math.sqrt(scan.n / m);
   const list = [];
   for (let i = 0; i < m; i++) if (!keep || keep(scan.part[i], i)) list.push(i);
+  let mean = null;
+  if (smooth > 0) {
+    // Mean color per grid cell (and part), over every splat in the file.
+    const sums = new Map();
+    const key = (i) =>
+      `${Math.floor(scan.pos[i * 3] / cell)},${Math.floor(scan.pos[i * 3 + 1] / cell)},${Math.floor(scan.pos[i * 3 + 2] / cell)},${scan.part[i]}`;
+    for (let i = 0; i < scan.n; i++) {
+      const kk = key(i);
+      let e = sums.get(kk);
+      if (!e) sums.set(kk, (e = [0, 0, 0, 0]));
+      e[0] += scan.rgb[i * 3];
+      e[1] += scan.rgb[i * 3 + 1];
+      e[2] += scan.rgb[i * 3 + 2];
+      e[3]++;
+    }
+    mean = (i) => {
+      const e = sums.get(key(i));
+      return [e[0] / e[3], e[1] / e[3], e[2] / e[3]];
+    };
+  }
   const item = k.cloud({ count: (list.length * 160000) / k.count, pattern: false }, (_r, j) => {
     const i = list[j];
     if (i === undefined) return null;
     const fp = scan.part[i];
     let c = [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]];
+    if (mean) {
+      const a = mean(i);
+      c = c.map((v, j) => v + (a[j] - v) * smooth);
+    }
     if (color) c = color(c, i, fp) || c;
     return {
       p: [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]],
       n: [scan.nrm[i * 3], scan.nrm[i * 3 + 1], scan.nrm[i * 3 + 2]],
-      size: (scan.sig[i] * grow) / BASE,
+      size: (scan.sig[i] * grow * sizeMul) / BASE,
+      ...(exact ? { jitter: 0 } : {}),
       flat: 0.14,
       color: c,
       opacity: 1,
-      part: parts[fp] ?? 0,
+      part: (partOf && partOf(fp, i)) ?? parts[fp] ?? 0,
+      pattern: typeof pattern === "function" ? !!pattern(fp) : pattern,
     };
   });
   // The tests find the model's splats in the buffer through this (item.start, item.end).
@@ -502,8 +551,23 @@ function childOf(qF, o, h, qH) {
 const SUNGLASSES = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
+  // The clear lenses are faint (0.1 to 0.4): a tap finds them at a lower
+  // alpha than the pick pass's usual, so a tap on a lens starts it (lane Fix7).
+  pickAlpha: 0.06,
   controls: [{ key: "flip", label: "Fold and flip", type: "pulse", ease: SG.T }],
   action: { key: "flip", label: "Fold, flip and darken" },
+  // Hands-on (lane Hands-on H1): fold each arm in on its hinge, and out
+  // again; an arm stays where it is left, as a real one does, and stops at
+  // open and at folded. (The frame keeps its resting turn: a locked hinge the
+  // arms ride on.)
+  hands: {
+    floor: -0.3,
+    joints: [
+      { type: "hinge", part: "front", name: "front", pivot: SG.center, axis: [0, 1, 0], min: SG.rest, max: SG.rest, start: () => SG.rest, gravity: false, pos: [0, 0, 0.62], pick: [0.001, 0.001, 0.001] }, // prettier-ignore
+      { type: "hinge", part: "armR", parent: "front", pivot: SG.hingeR, axis: [0, 1, 0], min: 0, max: 1.53, gravity: false, friction: 6, bounce: 0.1, pos: [0.52, 0, 0.1], pick: [0.12, 0.12, 0.45], sound: (ev, vol) => ({ voice: "click", f: 2600, vol: 0.3 + 0.3 * vol }) }, // prettier-ignore
+      { type: "hinge", part: "armL", parent: "front", pivot: SG.hingeL, axis: [0, 1, 0], min: -1.36, max: 0, gravity: false, friction: 6, bounce: 0.1, pos: [-0.52, 0, 0.1], pick: [0.12, 0.12, 0.45], sound: (ev, vol) => ({ voice: "click", f: 2400, vol: 0.3 + 0.3 * vol }) }, // prettier-ignore
+    ],
+  },
   credits: [
     {
       label: "Sunglasses",
@@ -545,7 +609,8 @@ const SUNGLASSES = {
     const front = k.part("front", { pivot: SG.center });
     const armL = k.part("armL", { pivot: SG.hingeL });
     const armR = k.part("armR", { pivot: SG.hingeR });
-    addScan(k, scan, { share: 0.78, parts: [front, armL, armR] });
+    // The frame takes flag colors (lane Fix7); the lenses keep theirs.
+    addScan(k, scan, { share: 0.78, parts: [front, armL, armR], pattern: true });
     const L = SG.lens;
     const nLens = Math.round(k.count * 0.05);
     for (const side of [-1, 1]) {
@@ -568,6 +633,14 @@ const SUNGLASSES = {
       };
       addCloud(k, nLens, (i, n) => lens(i, n, false));
       addCloud(k, nLens, (i, n) => lens(i, n, true));
+      // A few bigger, faint splats over the lens, so a tap on the glass finds
+      // it (the lens's own splats are too small and faint for the pick pass).
+      addCloud(k, 37, (i, n) => {
+        const r = L.r * 0.9 * Math.sqrt((i + 0.5) / n);
+        const a = i * 2.39996323;
+        const z = L.z + 0.03 * (1 - (r / L.r) ** 2) - 0.002;
+        return { p: [side * L.x + r * Math.cos(a), r * Math.sin(a), z], n: [0, 0, 1], size: L.r * 0.3, color: [0.78, 0.82, 0.86], opacity: 0.08, part: front }; // prettier-ignore
+      });
     }
     k.reach([0, 0.55, 0.7]);
     k.reach([0, -0.45, -0.2]);
@@ -600,12 +673,44 @@ const hexRgb = (h) => [1, 3, 5].map((i) => parseInt(h.slice(i, i + 2), 16) / 255
 // rim at y -0.37 and its button at y 0.377. It sits on a kit-built wooden stand.
 
 const BC = { T: 3, pivot: [0, -0.05, -0.2], rim: -0.37, base: -1.3 };
+// Hands-on: the walnut stand's dome (filling the crown) and post, fixed (lane Hands-on H1).
+const CAP_STAND = [
+  { type: "ellipsoid", r: [0.44, 0.58, 0.44], at: [0, BC.rim, -0.2] },
+  { type: "cylinder", r: 0.06, h: (BC.rim - BC.base) / 2, at: [0, (BC.rim + BC.base) / 2, -0.2] },
+];
+// Hands-on: the cap's outside, about its pivot (lane Hands-on H1): its rim's
+// ring, the brim reaching forward and the crown's top.
+const CAP_POINTS = [
+  ...Array.from({ length: 10 }, (_, i) => [0.43 * Math.cos((i / 10) * 2 * Math.PI), BC.rim - BC.pivot[1], 0.43 * Math.sin((i / 10) * 2 * Math.PI)]), // prettier-ignore
+  [0, BC.rim - BC.pivot[1] + 0.02, 0.8],
+  [0.25, BC.rim - BC.pivot[1] + 0.02, 0.7],
+  [-0.25, BC.rim - BC.pivot[1] + 0.02, 0.7], // prettier-ignore
+  [0, 0.43, 0],
+  [0.25, 0.3, 0],
+  [-0.25, 0.3, 0],
+  [0, 0.3, -0.25],
+];
 
 const BASEBALL_CAP = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "toss", label: "Toss", type: "pulse", ease: BC.T }],
   action: { key: "toss", label: "Flip and spin" },
+  // Hands-on (lane Hands-on H1): lift the cap off its stand and throw it
+  // like a flying disc, flat and with a flick: it spins and glides a little
+  // on its brim before it lands soft. (The stand stays where it is.)
+  hands: {
+    floor: BC.base - 0.03,
+    area: 2.2,
+    place: false,
+    material: "baseball-cap", // (turns on the materials; the piece's own is what flies)
+    pieces: () => [
+      { part: "cap", pos: BC.pivot, pivot: BC.pivot, points: CAP_POINTS, radius: 0.03, pick: [0.5, 0.42, 0.6], mass: 1, friction: 0.8, restitution: 0.15, damping: 0.05, angDamping: 0.5, material: "baseball-cap" }, // prettier-ignore
+      // The stand stays, for the cap to land on: its dome and its post.
+      ...CAP_STAND.map((solid) => ({ pos: solid.at, solid, points: surfacePoints(solid, 3), fixed: true, friction: 0.8, restitution: 0.15 })), // prettier-ignore
+    ],
+    sound: (hit, vol) => ({ voice: "thud", f: 220, bright: 0.1, decay: 0.4, vol: vol * 0.5 }),
+  },
   credits: [
     {
       label: "Baseball cap",
@@ -658,7 +763,8 @@ const BASEBALL_CAP = {
   build(k) {
     const scan = SCANS.get("baseball-cap");
     const cap = k.part("cap", { pivot: BC.pivot });
-    addScan(k, scan, { share: 0.78, parts: [cap] });
+    // The cap takes flag colors (lane Fix7); its stand keeps its walnut.
+    addScan(k, scan, { share: 0.78, parts: [cap], pattern: true });
     // The stand: one turned walnut profile (a round foot, a slim post and a dome that fills the
     // crown), placed evenly (a golden-angle spiral) so its edges stay crisp.
     const zc = -0.2;
@@ -734,8 +840,61 @@ function fpPen(s) {
   return { q, tip, u };
 }
 
+// Lane Hands-on H3: the pen's cap by hand, as a loose piece (an ellipsoid
+// about its middle), and the pen lying under it as ground.
+// (Its full length, end to end, so a cap that tumbles never sinks into the
+// paper: the owner's note of October 8, 2026.)
+const FP_CAP = { type: "ellipsoid", r: [0.48, 0.07, 0.07] };
+const FP_BODY = { type: "box", half: [0.97, 0.06, 0.06] };
+// The cap's place by hand, coarsely (null at home), and whether it moved
+// enough to sort the splats again: splats sort in the pose they were built
+// in, so a cap set down on the paper in front of the pen sorted as if still
+// on the nib, and the paper drew over it (the owner's note: the cap went
+// under the paper).
+const FP_HAND = { key: null, resort: false };
+
 const FOUNTAIN_PEN = {
   alive: false,
+  // Hands-on (lane Hands-on H3): pull the cap off the nib (it holds, then
+  // comes free with a click), and push it onto the back end, where it posts
+  // turned half round, or back over the nib. It holds fast wherever it
+  // clicks on; dropped, it lands on the notepad.
+  hands: {
+    floor: FP.paper,
+    pieces: () => [
+      { part: "cap", pos: FP.capC.slice(), pivot: FP.capC.slice(), solid: FP_CAP, points: surfacePoints(FP_CAP, 1), pick: [0.3, 0.13, 0.13], mass: 0.2, friction: 0.7, restitution: 0.2 }, // prettier-ignore
+      // The pen: ground for the cap, never picked up (the cap is how it's held).
+      { pos: [-0.015, FP.axis[1], FP.axis[2]], solid: FP_BODY, pick: [1e-3, 1e-3, 1e-3] },
+    ],
+    joints: [
+      {
+        type: "break",
+        part: "cap",
+        at: [FP.capC[0] + 0.24, FP.capC[1], FP.capC[2]],
+        pull: 0.14,
+        give: 0.02,
+        // (Held as it was pulled off, never hanging down past the paper.)
+        steady: true,
+        also: (v, parts) => {
+          const p = parts.cap;
+          const key = p ? [...(p.offset || []).map((x) => Math.round(x / 0.03)), ...(p.quat || []).map((x) => Math.round(x * 10))].join() : null; // prettier-ignore
+          if (key !== FP_HAND.key) FP_HAND.resort = true;
+          FP_HAND.key = key;
+        },
+        reseat: {
+          snap: 0.25,
+          seats: [{ pos: [2 * FP.post - FP.capC[0] - 0.12, FP.capC[1], FP.capC[2]], quat: quatAxisAngle([0, 1, 0], Math.PI) }], // prettier-ignore
+        },
+        sound: (ev) =>
+          ev.kind === "snap"
+            ? { voice: "click", f: 1500, decay: 0.06, vol: 0.6 }
+            : ev.kind === "socket"
+              ? { voice: "click", f: 2100, decay: 0.05, vol: 0.6 }
+              : undefined,
+      },
+    ],
+    sound: (hit, vol) => ({ voice: "clack", f: 900, decay: 0.06, vol: vol * 0.5 }),
+  },
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "write", label: "Write", type: "pulse", ease: FP.T }],
   action: { key: "write", label: "Uncap and write" },
@@ -780,6 +939,11 @@ const FOUNTAIN_PEN = {
     const dry = seg(s, 2.25, 3.3) * (1 - back);
     out.morph = [wet * 1.02, dry * 1.02, 0, 0];
     sortWhileMoving(out, info, s, on && s < FP.T, 0.06);
+    // By hand: sorted again as the cap moves (lane Hands-on H3).
+    if (FP_HAND.resort) {
+      out.resortPose = true;
+      FP_HAND.resort = false;
+    }
   },
   build(k) {
     const scan = SCANS.get("fountain-pen");
@@ -872,7 +1036,7 @@ const FOUNTAIN_PEN = {
 // kit-built cork coaster, where the foam lands.
 
 const SC = {
-  T: 3.5,
+  T: 4.0,
   floor: -0.794,
   lid: 0.787,
   rivet: [0, 0.787, 0],
@@ -881,6 +1045,11 @@ const SC = {
   drops: 26, // the spatter: tokens 22..47
   coaster: 0.95,
   spray: [1.0, 1.95], // the jet runs between these tap times
+  // Fix9 (the owner's walkthrough, October 6, 2026): the suds well up out of the opening from
+  // spill[0], cover the lid, spill over the rim and run down the can until spill[1], then
+  // shrink away between gone[0] and gone[1] (opaque all the while).
+  spill: [1.15, 2.65],
+  gone: [3.1, 3.55],
 };
 const hash = (i, k) => {
   const x = Math.sin(i * 127.1 + k * 311.7) * 43758.5453;
@@ -894,6 +1063,88 @@ function scJet(e) {
   return [0.25 * Math.sin(e * 9.1) + 0.12, up, 0.2 * Math.sin(e * 7.3 + 1) + 0.18];
 }
 const SC_G = 7.5;
+
+// The can's radius at height y (from the scan): straight sides up to y 0.6, the neck tapering
+// in to the rim (radius 0.37, its top at y 0.8).
+const scRadius = (y) => (y > 0.74 ? 0.37 : y > 0.6 ? 0.431 - 0.067 * smoothstep(0.6, 0.74, y) : 0.431); // prettier-ignore
+// The suds' tongues down the side: [angle about y from +Z (the opening's side), how far down
+// they reach, half width (radians)]. The front runs longest.
+const SC_TONGUES = [
+  [0.1, 1.05, 0.2],
+  [-0.62, 0.72, 0.17],
+  [0.78, 0.85, 0.18],
+  [-1.35, 0.5, 0.16],
+  [1.5, 0.42, 0.15],
+  [2.2, 0.36, 0.15],
+  [-2.1, 0.3, 0.15],
+  [3.0, 0.25, 0.16],
+];
+// When the flow reaches a point (seconds after the spill starts): across the lid from the
+// opening, then down the side, slowing as it goes.
+const SC_SPREAD = 2.4; // units per second across the lid
+const SC_RUN = 1.0; // units per second down the side, at first
+function scArrive(a, d) {
+  const rim = [0.37 * Math.sin(a), 0.37 * Math.cos(a)];
+  const t0 = Math.hypot(rim[0] - SC.mouth[0], rim[1] - SC.mouth[2]) / SC_SPREAD;
+  return t0 + (d / SC_RUN) * (1 + 0.35 * d);
+}
+function addSuds(k) {
+  const suds = k.part("suds", { pivot: [0, SC.floor, 0] });
+  const len = SC.spill[1] - SC.spill[0];
+  const foam = (rand, n, shade) => {
+    // Cream foam with a faint amber; small bubbles a little darker or brighter.
+    const b = rand < 0.12 ? 0.8 : rand > 0.9 ? 1.04 : 0.93 + 0.08 * rand;
+    return lit([0.97 * b, 0.92 * b, 0.8 * b * shade], n, { soft: 0.35, sheen: 0.25, tight: 18 });
+  };
+  const at = (u) => clamp(u / len, 0, 0.985);
+  const N = Math.round(k.count * 0.045);
+  addCloud(k, N, (i) => {
+    const r1 = hash(i, 11);
+    const r2 = hash(i, 12);
+    const r3 = hash(i, 13);
+    if (hash(i, 10) < 0.3) {
+      // The cap of foam on the lid: thickest by the opening, a rounded edge at the rim.
+      const r = 0.37 * Math.sqrt(r1);
+      const a = 2 * Math.PI * r2;
+      const x = r * Math.sin(a);
+      const z = r * Math.cos(a);
+      const dm = Math.hypot(x - SC.mouth[0], z - SC.mouth[2]);
+      const h = 0.035 + 0.05 * Math.exp(-dm * dm * 12) - 0.02 * smoothstep(0.3, 0.37, r);
+      const y = 0.8 + h * Math.sqrt(r3);
+      const nn = [x * 0.6, 1, z * 0.6];
+      const l = Math.hypot(...nn);
+      return { p: [x, y, z], n: nn.map((v) => v / l), size: 0.016, color: foam(hash(i, 14), nn.map((v) => v / l), 1), part: suds, kind: "fade", params: [at(dm / SC_SPREAD), -0.03], channel: 1 }; // prettier-ignore
+    }
+    // The sheet over the rim and its tongues down the side: pick an angle, then a depth below
+    // the rim's top within how far the foam runs there.
+    const a = Math.PI * (2 * r1 - 1);
+    let reach = 0.1;
+    let tip = null;
+    for (const [ta, tl, tw] of SC_TONGUES) {
+      let da = Math.abs(a - ta);
+      if (da > Math.PI) da = 2 * Math.PI - da;
+      if (da > tw) continue;
+      // A tongue narrows toward its rounded head.
+      const w = Math.sqrt(1 - (da / tw) ** 2);
+      const l = 0.1 + (tl - 0.1) * w;
+      if (l > reach) {
+        reach = l;
+        tip = tl;
+      }
+    }
+    const d = reach * Math.sqrt(r2);
+    const y = 0.8 - d;
+    // A drip's head is fuller than its trail; the sheet is fullest over the rim.
+    const head = tip ? Math.exp(-(((reach - d) / 0.06) ** 2)) : 0;
+    const th = 0.018 + 0.016 * Math.exp(-d / 0.08) + 0.018 * head;
+    const R = scRadius(y) + th * r3 + 0.004;
+    const nn = [Math.sin(a), d < 0.03 ? 0.6 : 0.1, Math.cos(a)];
+    const l = Math.hypot(...nn);
+    const nrm = nn.map((v) => v / l);
+    // Where the foam thins on the side, the soda shows through it a little: more amber.
+    return { p: [R * Math.sin(a), y, R * Math.cos(a)], n: nrm, size: 0.015, color: foam(hash(i, 14), nrm, 1 - 0.18 * smoothstep(0.1, 0.6, d) * (1 - head)), part: suds, kind: "fade", params: [at(scArrive(a, d)), -0.03], channel: 1 }; // prettier-ignore
+  });
+}
 
 const SODA_CAN = {
   alive: false,
@@ -934,7 +1185,13 @@ const SODA_CAN = {
     void rr;
     out.parts.tab = { quat: qTab, offset: canOff };
     // The opening shows as the tab's nose pushes the panel in, and closes up again at the end.
-    out.morph = [ease(seg(s, 0.95, 1.08)) * (1 - ease(seg(s, 3.0, 3.4))), 0, 0, 0];
+    // The suds: once they have run down, they shrink back into the foam and are gone; then
+    // their channel and place go back to rest (unseen), so the tap ends where it started.
+    const gone = on ? ease(seg(s, SC.gone[0], SC.gone[1])) : 0;
+    const left = on && gone < 1;
+    const spill = left ? seg(s, SC.spill[0], SC.spill[1]) : 0;
+    out.morph = [ease(seg(s, 0.95, 1.08)) * (1 - ease(seg(s, 3.5, 3.9))), spill, 0, 0];
+    out.parts.suds = { visible: left && s > SC.spill[0] ? 1 - gone : 0, offset: [0, left ? -0.04 * gone : 0, 0] }; // prettier-ignore
     // The jet: foam leaves the opening from spray[0] to spray[1]; every bit flies on its own arc,
     // and the bits in the air are drawn as overlapping pieces along the flow.
     const tokens = [];
@@ -1007,7 +1264,7 @@ const SODA_CAN = {
     const scan = SCANS.get("soda-can");
     const can = k.part("can", { pivot: [0, SC.floor, 0] });
     const tab = k.part("tab", { pivot: SC.rivet, axis: [1, 0, 0] });
-    addScan(k, scan, { share: 0.74, parts: [can, tab] });
+    addScan(k, scan, { share: 0.7, parts: [can, tab] }); // (0.74 before Fix9's suds)
     // The opening: a dark rounded slot in front of the rivet, fading in on channel 0 (the panel
     // pushed in), just above the lid.
     addCloud(k, Math.round(k.count * 0.008), (i, n) => {
@@ -1018,6 +1275,11 @@ const SODA_CAN = {
       const g = 0.05 + 0.06 * r;
       return { p: [x, SC.lid + 0.003, z], n: [0, 1, 0], size: 0.012, color: [g, g * 0.9, g * 0.8], part: can, kind: "fade", params: [0, -0.4], channel: 0 }; // prettier-ignore
     });
+    // The suds (Fix9): foam that wells up out of the opening, covers the lid, spills over the
+    // rim and runs down the can in a sheet that breaks into tongues of different lengths, each
+    // with a rounded head. Each bit shows when the flow reaches it (channel 1, a sharp front),
+    // so the foam stays solid and opaque as it runs.
+    addSuds(k);
     // The coaster: pressed cork, round, just under the can.
     const R = SC.coaster;
     addCloud(k, Math.round(k.count * 0.1), (i, n) => {
@@ -1172,11 +1434,93 @@ function rsLace(which, s) {
   });
 }
 
+// The bow holds (shape memory) until a lace is pulled out (lane Hands-on H1).
+const RS_TIED = { keep: 9, undone: false };
+const v3dist = (a, b) => Math.hypot(a[0] - b[0], a[1] - b[1], a[2] - b[2]);
+
+// The shoe's top, every 0.1 along it (x from -0.8 at the toe) and across it (z from -0.3),
+// measured from the scan, the ankle opening filled and the collar flaps left out (lane
+// Hands-on H1).
+const RS_TOP = [
+  [null, -0.22, -0.17, -0.15, -0.13, -0.13, -0.1, -0.03, 0.13, 0.16, 0.15, 0.1, 0.05, 0.01, -0.26, null, null],
+  [-0.19, -0.13, -0.11, -0.11, -0.1, -0.03, 0.03, 0.09, 0.16, 0.16, 0.16, 0.12, 0.05, 0.08, 0.09, -0.03, -0.28],
+  [-0.16, -0.11, -0.1, -0.1, -0.07, -0.01, 0.04, 0.12, 0.16, 0.16, 0.16, 0.1, 0.1, 0.1, 0.13, 0.24, -0.21],
+  [-0.16, -0.11, -0.1, -0.1, -0.08, -0.01, 0.03, 0.11, 0.16, 0.16, 0.16, 0.11, 0.1, 0.12, 0.15, 0.24, -0.2],
+  [-0.23, -0.15, -0.12, -0.11, -0.11, -0.03, 0.02, 0.08, 0.16, 0.16, 0.16, 0.1, 0.06, 0.13, 0.14, 0.03, -0.23],
+  [null, -0.26, -0.2, -0.16, -0.15, -0.15, -0.11, -0.04, 0.14, 0.16, 0.15, 0.1, 0.06, 0.05, -0.03, -0.23, null],
+  [null, null, null, null, -0.32, -0.25, -0.24, -0.22, -0.2, -0.19, null, null, null, null, null, null, null],
+]; // prettier-ignore
+// A shell of spheres just under that top and inside the shoe's sides, so a loose lace drapes
+// over the shoe and down its outside instead of falling through it.
+const RS_SHELL = (() => {
+  const r = 0.075;
+  const top = (i, j) => RS_TOP[j]?.[i] ?? null;
+  const out = [];
+  for (let j = 0; j < RS_TOP.length; j++)
+    for (let i = 0; i < RS_TOP[j].length; i++) {
+      const t = top(i, j);
+      if (t == null) continue;
+      const x = -0.8 + 0.1 * i;
+      const z = -0.3 + 0.1 * j;
+      // A column is filled down to its lowest neighbor's top (the floor at the edge), so the
+      // shoe's sides are covered too.
+      const nb = Math.min(...[[1, 0], [-1, 0], [0, 1], [0, -1]].map(([a, b]) => top(i + a, j + b) ?? -0.5)); // prettier-ignore
+      const low = Math.min(t, Math.max(-0.5, nb) + r) - r;
+      // The top sphere stands a little proud of the measured top, so a lace lying across the
+      // lacing clears the eyelet tabs and the tongue between them.
+      const ys = [];
+      for (let y = t + 0.015 - r; y > low + 0.03; y -= 0.1) ys.push(y);
+      ys.push(low);
+      for (const y of ys) out.push({ at: [x, y, z], r });
+    }
+  return out;
+})();
+
 const RUNNING_SHOE = {
   alive: false,
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "tie", label: "Tie the laces", type: "pulse", ease: RS.T }],
   action: { key: "tie", label: "Untie and tie again" },
+  // Hands-on (lane Hands-on H1): the laces are two ropes, tied in their bow.
+  // Pull a lace end out and the bow comes undone: both laces fall loose and
+  // drape over the shoe and down its outside (RS_SHELL). ↺ ties them again.
+  hands: {
+    floor: -0.5,
+    ropes: () =>
+      ["A", "B"].map((key, w) => ({
+        name: "lace" + key,
+        points: RS_SHAPES[key].bow,
+        tokens: RS_SHAPES[key].bow.map((p, i) => w * RS.joints + i),
+        pin: [0],
+        grab: [RS.joints - 1, RS.joints - 2, RS.joints - 3],
+        pick: 0.12,
+        keep: RS_TIED.keep,
+        bend: 0.25,
+        drag: 2,
+        radius: 0.012,
+        avoid: RS_SHELL,
+        update: (strand, dt, soft) => {
+          // Pulled out past this far, the bow lets go (both laces).
+          const n = soft.nodes[strand.first + RS.joints - 1];
+          if (v3dist(n.x, n.home) > 0.22) RS_TIED.undone = true;
+          strand.def.keep = RS_TIED.undone ? 0 : RS_TIED.keep;
+          // Only the shell's spheres near this lace, for speed.
+          const lo = [Infinity, Infinity, Infinity];
+          const hi = [-Infinity, -Infinity, -Infinity];
+          for (let i = 0; i < RS.joints; i++)
+            for (let k = 0; k < 3; k++) {
+              const v = soft.nodes[strand.first + i].x[k];
+              lo[k] = Math.min(lo[k], v);
+              hi[k] = Math.max(hi[k], v);
+            }
+          strand.def.avoid = RS_SHELL.filter((sp) => sp.at.every((v, k) => v > lo[k] - 0.2 && v < hi[k] + 0.2)); // prettier-ignore
+        },
+        reset: (strand) => {
+          RS_TIED.undone = false;
+          strand.def.keep = RS_TIED.keep;
+        },
+      })),
+  },
   credits: [
     {
       label: "Running shoe",
@@ -1229,7 +1573,17 @@ const RUNNING_SHOE = {
   build(k) {
     const scan = SCANS.get("running-shoe");
     const shoe = k.part("shoe", { pivot: RS.heel, axis: [0, 0, 1] });
-    addScan(k, scan, { share: 0.82, parts: [shoe, shoe], keep: (fp) => fp === 0 });
+    // The shoe takes flag colors (lane Fix7); its laces keep theirs. (Lane Sharpness A: exact,
+    // slightly smaller splats for a crisp outline, and a calmer fabric texture.)
+    addScan(k, scan, {
+      share: 0.82,
+      parts: [shoe, shoe],
+      keep: (fp) => fp === 0,
+      pattern: true,
+      exact: true,
+      sizeMul: 0.9,
+      smooth: 0.45,
+    });
     // The laces: round splats along each chain, each following the two joints it lies between.
     const n = RS.joints;
     const per = Math.max(30, Math.round((k.count * 0.05) / (2 * (n - 1))));
@@ -1285,6 +1639,11 @@ const HD = {
   armpit: -0.1, // the lowest point of an armhole
   shoulderL: [-0.36, 0.17, -0.06],
   shoulderR: [0.36, 0.17, -0.06],
+  // Lane Hands-on H1: each sleeve is cut at its elbow (the middle of the sleeve there), and the
+  // forearm keeps a band of the upper sleeve's cloth above the cut, so a bent elbow shows cloth.
+  elbowL: [-0.36, -0.3, -0.06],
+  elbowR: [0.36, -0.3, -0.06],
+  elbowBand: 0.08,
   // Where each sleeve points when crossed (the left one over the right).
   crossL: [0.47, 0.28, 0.84],
   crossR: [-0.45, 0.05, 0.89],
@@ -1293,6 +1652,32 @@ const HD = {
     { top: [0.022, 0.337, 0.158], len: 0.24 },
   ],
 };
+
+// Hands-on (lane Hands engine C): the hood is the scan's own hood part, cut
+// out with hard edges, on a sprung hinge across the neck (the tap's hinge).
+// A short rope from the neck to the hood's crown takes the finger; the hood
+// turns about the hinge as far as the crown has swung forward or back, so
+// it flops as one solid piece and swings back up.
+const HOOD = { crown: [0, 0.8, 0.02], min: -0.22, max: 0.55 };
+HOOD.angle = (strand, soft) => {
+  const a = soft.nodes[strand.first].x;
+  const b = soft.nodes[strand.first + 1].x;
+  const now = Math.atan2(b[2] - a[2], b[1] - a[1]);
+  const rest = Math.atan2(HOOD.crown[2] - HD.neck[2], HOOD.crown[1] - HD.neck[1]);
+  return Math.max(HOOD.min, Math.min(HOOD.max, now - rest));
+};
+
+// Keeps a sleeve's cuff from swinging in past its hanging line, seen from the front (lane
+// Hands-on H1).
+function hdSleeveOut(a, b, side) {
+  const rest = Math.atan2(b.home[0] - a.home[0], a.home[1] - b.home[1]);
+  const d = [b.x[0] - a.x[0], b.x[1] - a.x[1]];
+  if (side * (Math.atan2(d[0], -d[1]) - rest) >= 0) return;
+  const r = Math.hypot(d[0], d[1]);
+  b.x = [a.x[0] + r * Math.sin(rest), a.x[1] - r * Math.cos(rest), b.x[2]];
+  b.p = b.x.slice();
+  b.v = [0, 0, b.v[2]];
+}
 
 // A damped swing that starts at `a` and dies away by the end.
 const swing = (s, a, amp, w = 11, k = 2.2) =>
@@ -1303,6 +1688,35 @@ const HOODIE = {
   density: 1.5, // as the Model to splats toy: 300,000 splats on the high tier
   controls: [{ key: "flip", label: "Flip the hood", type: "pulse", ease: HD.T }],
   action: { key: "flip", label: "Hood flip and cross the sleeves" },
+  // Hands-on (lane Hands engine C): pull the hood and it flops forward or back
+  // then springs back up into its shape.
+  hands: {
+    floor: -1,
+    area: 1.4,
+    ropes: () => [
+      {
+        name: "hood",
+        points: [HD.neck, HOOD.crown],
+        grab: [1],
+        pick: 0.3,
+        reach: 1.02,
+        maxPull: 0.35,
+        weight: 0,
+        keep: 6,
+        drag: 3,
+        pieces: [{ part: "hood", node: 0, turn: false, spin: HOOD.angle, axis: [1, 0, 0] }],
+      },
+      // Lane Hands-on H1: lift a sleeve by its cuff and it bends at the
+      // elbow, as an empty sleeve does; the upper sleeve stays as it hangs,
+      // joined at the shoulder and under the arm. Let go and the forearm
+      // swings back down. It never swings in past where it hangs (the body
+      // is there).
+      ...[
+        ["forearmL", HD.elbowL, [-0.5, -0.78, -0.02], -1],
+        ["forearmR", HD.elbowR, [0.5, -0.78, -0.02], 1],
+      ].map(([part, top, cuff, side]) => ({ name: part, points: [top, cuff], pin: [0], grab: [1], pick: 0.3, reach: 1.02, maxPull: 0.35, weight: 0, keep: 5, drag: 2, pieces: [{ part, from: 0, to: 1 }], update: (strand, dt, soft) => hdSleeveOut(soft.nodes[strand.first], soft.nodes[strand.first + 1], side) })), // prettier-ignore
+    ],
+  },
   credits: [
     {
       label: "Hoodie",
@@ -1336,6 +1750,16 @@ const HOODIE = {
     };
     out.parts.sleeveL = { quat: quatMul(quatAxisAngle([0, 0, 1], sway), toward(HD.crossL, inL)) };
     out.parts.sleeveR = { quat: quatMul(quatAxisAngle([0, 0, 1], -sway), toward(HD.crossR, inR)) };
+    // Each forearm moves with its sleeve as one piece (turned about the shoulder, not the elbow).
+    for (const [f, sl, S, E] of [
+      ["forearmL", "sleeveL", HD.shoulderL, HD.elbowL],
+      ["forearmR", "sleeveR", HD.shoulderR, HD.elbowR],
+    ]) {
+      const q = out.parts[sl].quat;
+      const d = [S[0] - E[0], S[1] - E[1], S[2] - E[2]];
+      const r = quatRotate(q, d);
+      out.parts[f] = { quat: q, offset: [d[0] - r[0], d[1] - r[1], d[2] - r[2]] };
+    }
     // The drawstrings swing, kicked by the hood and again by the sleeves.
     const kick = (ph) => swing(s, 0.05, 0.55, 10, 2.4) + swing(s, 1.2, 0.3 * ph, 9, 2) + swing(s, 2.95, 0.3, 9, 2); // prettier-ignore
     out.parts.stringL = { quat: quatMul(quatAxisAngle([0, 0, 1], kick(1)), quatAxisAngle([1, 0, 0], -0.6 * kick(0.6))) }; // prettier-ignore
@@ -1347,9 +1771,37 @@ const HOODIE = {
     const hood = k.part("hood", { pivot: HD.neck, axis: [1, 0, 0] });
     const sleeveL = k.part("sleeveL", { pivot: HD.shoulderL });
     const sleeveR = k.part("sleeveR", { pivot: HD.shoulderR });
+    const forearmL = k.part("forearmL", { pivot: HD.elbowL });
+    const forearmR = k.part("forearmR", { pivot: HD.elbowR });
+    const forearmOf = (fp) => (fp === 2 ? forearmL : fp === 3 ? forearmR : null);
     const stringL = k.part("stringL", { pivot: HD.strings[0].top });
     const stringR = k.part("stringR", { pivot: HD.strings[1].top });
-    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4 });
+    // The cloth takes flag colors (lane Fix7); the drawstrings keep theirs.
+    const elbowY = HD.elbowR[1];
+    addScan(k, scan, { share: 0.86, parts: [0, hood, sleeveL, sleeveR], keep: (fp) => fp < 4, pattern: true, partOf: (fp, i) => (scan.pos[i * 3 + 1] < elbowY ? forearmOf(fp) : null) }); // prettier-ignore
+    // The band above each elbow, again on the forearm (lane Hands-on H1): at rest it lies on the
+    // upper sleeve's own splats; with the elbow bent it covers the opened side of the cut.
+    {
+      const m = Math.min(scan.n, Math.max(1000, Math.floor(k.count * 0.86)));
+      const grow = Math.sqrt(scan.n / m);
+      const band = [];
+      for (let i = 0; i < m; i++) {
+        const y = scan.pos[i * 3 + 1];
+        if (forearmOf(scan.part[i]) && y >= elbowY && y < elbowY + HD.elbowBand) band.push(i);
+      }
+      addCloud(k, band.length, (j) => {
+        const i = band[j];
+        return {
+          p: [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]],
+          n: [scan.nrm[i * 3], scan.nrm[i * 3 + 1], scan.nrm[i * 3 + 2]],
+          size: scan.sig[i] * grow,
+          flat: 0.14,
+          color: [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]],
+          part: forearmOf(scan.part[i]),
+          pattern: true,
+        };
+      });
+    }
     // The armholes: each is closed with fabric that follows the opening's own outline (the
     // sleeve's splats that touch the body, above the armpit, laid flat on the plane that fits
     // them best), one patch on the body and one on the sleeve's top, so a raised sleeve shows
@@ -1431,7 +1883,7 @@ const HOODIE = {
           const r = f * rad[Math.floor(((t / (2 * Math.PI)) % 1) * bins)] * 0.97;
           const [u, v] = [r * Math.cos(t), r * Math.sin(t)];
           const p = [0, 1, 2].map((q) => c[q] + u * e1[q] + v * e2[q] + off * nrm[q]);
-          return { p, n: nrm.map((q) => q * face), size, color: col.map((q) => q * (0.86 + 0.1 * f)), part }; // prettier-ignore
+          return { p, n: nrm.map((q) => q * face), size, color: col.map((q) => q * (0.86 + 0.1 * f)), part, pattern: true }; // prettier-ignore
         });
       }
     }
@@ -1452,6 +1904,81 @@ const HOODIE = {
         const sh = 0.8 + 0.35 * Math.max(0, Math.cos(g - 0.8));
         const col = tip ? [0.12, 0.12, 0.13] : [0.8, 0.76, 0.64];
         return { p, size: 0.006, color: col.map((v) => Math.min(1, v * sh)), part };
+      });
+    }
+    // Lane Fix7: the cuffs, gathered shut. A raised sleeve points its cuff
+    // toward the viewer, and its open end read as a hole: a disc of the
+    // cuff's own cloth closes it, a little inside the rim, darker toward the
+    // middle and creased where the rib gathers.
+    for (const [fp, sleeve] of [
+      [2, forearmL],
+      [3, forearmR],
+    ]) {
+      const ids = [];
+      for (let i = 0; i < scan.n; i++) if (scan.part[i] === fp) ids.push(i);
+      if (ids.length < 50) continue;
+      let ymin = Infinity;
+      for (const i of ids) ymin = Math.min(ymin, scan.pos[i * 3 + 1]);
+      const P = (i) => [scan.pos[i * 3], scan.pos[i * 3 + 1], scan.pos[i * 3 + 2]];
+      const avg = (list, f) => [0, 1, 2].map((q) => list.reduce((t, i) => t + f(i)[q], 0) / list.length); // prettier-ignore
+      const end = ids.filter((i) => scan.pos[i * 3 + 1] < ymin + 0.025);
+      const near = ids.filter((i) => scan.pos[i * 3 + 1] < ymin + 0.15);
+      if (end.length < 10) continue;
+      const c = avg(end, P);
+      const axis = (() => {
+        const a = c.map((v, q) => v - avg(near, P)[q]);
+        const l = Math.hypot(...a) || 1;
+        return a.map((v) => v / l);
+      })();
+      const dot3 = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+      let rad = 0;
+      for (const i of end) {
+        const d = P(i).map((v, q) => v - c[q]);
+        const along = dot3(d, axis);
+        rad = Math.max(rad, Math.hypot(...d.map((v, q) => v - along * axis[q])));
+      }
+      const col = avg(end, (i) => [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]]);
+      const t1 = (() => {
+        const a = Math.abs(axis[1]) < 0.9 ? [0, 1, 0] : [1, 0, 0];
+        const x = [axis[1] * a[2] - axis[2] * a[1], axis[2] * a[0] - axis[0] * a[2], axis[0] * a[1] - axis[1] * a[0]]; // prettier-ignore
+        const l = Math.hypot(...x) || 1;
+        return x.map((v) => v / l);
+      })();
+      const t2 = [axis[1] * t1[2] - axis[2] * t1[1], axis[2] * t1[0] - axis[0] * t1[2], axis[0] * t1[1] - axis[1] * t1[0]]; // prettier-ignore
+      const n = Math.round(k.count * 0.004);
+      const size = Math.sqrt((Math.PI * rad * rad) / (n * Math.PI)) * 1.4;
+      addCloud(k, n, (i) => {
+        const f = Math.sqrt((i + 0.5) / n);
+        const a = i * 2.39996323;
+        const r = f * rad * 0.96;
+        const p = [0, 1, 2].map((q) => c[q] - axis[q] * (0.012 * (1 - f * f)) + r * (Math.cos(a) * t1[q] + Math.sin(a) * t2[q])); // prettier-ignore
+        const crease = 0.9 + 0.1 * Math.cos(a * 9);
+        return { p, n: axis, size, color: col.map((v) => v * (0.62 + 0.3 * f) * crease), part: sleeve, pattern: true }; // prettier-ignore
+      });
+    }
+    // Lane Fix7: when the hood nods forward its back edge lifts off the
+    // neck; a band of the hood's own cloth stays on the body under that
+    // edge, so the gap shows cloth, not the inside of the garment.
+    {
+      const ids = [];
+      let ymin = Infinity;
+      for (let i = 0; i < scan.n; i++) {
+        // (The back half of the hood: its low edge there is what lifts.)
+        if (scan.part[i] !== 1 || scan.pos[i * 3 + 2] > HD.neck[2] - 0.02) continue;
+        ids.push(i);
+        ymin = Math.min(ymin, scan.pos[i * 3 + 1]);
+      }
+      const band = ids.filter((i) => scan.pos[i * 3 + 1] < ymin + 0.1);
+      const step = Math.max(1, Math.floor(band.length / Math.round(k.count * 0.006)));
+      const pick = band.filter((_, j) => j % step === 0);
+      addCloud(k, pick.length, (j) => {
+        const i = pick[j];
+        const nrm = [scan.nrm[i * 3], scan.nrm[i * 3 + 1], scan.nrm[i * 3 + 2]];
+        const p = [0, 1, 2].map((q) => scan.pos[i * 3 + q] - nrm[q] * 0.006);
+        const col = [scan.rgb[i * 3], scan.rgb[i * 3 + 1], scan.rgb[i * 3 + 2]].map(
+          (v) => v * 0.85,
+        );
+        return { p, n: nrm, size: scan.sig[i] * 1.3, color: col, part: 0, pattern: true };
       });
     }
     k.reach([0, 0.62, -0.6]);

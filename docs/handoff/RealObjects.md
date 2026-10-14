@@ -14,10 +14,9 @@ file: docs/handoff/RealObjects.md.
 
 The owner approved these everyday objects on the Toy Ideas page
 (https://claude.ai/artifact/5TukiuV3mCt3G3zk6Arx9S; read collection `ideas` and `marks` with
-ArtifactData for the full text, and never write to them). His note on each of them, word for word:
-"This should be a real life splat if you can find it. I do not want this to be a cartoon or an
-illustration. If we cannot find a suitable real life splat for this object, only then can you make
-it a cartoon."
+ArtifactData for the full text, and never write to them). His note on each of them: it should be a
+real life splat if one can be found, not a cartoon or an illustration; only if no suitable real life
+splat exists may it be made a cartoon.
 
 The toys, with his approved taps (the ideas' ids are the toy ids):
 
@@ -37,7 +36,7 @@ The toys, with his approved taps (the ideas' ids are the toy ids):
    its drawstrings swing, then the sleeves (cut at the shoulders) swing in and cross, and it all
    settles back (4.5 s)." No logos.
 6. **Sunglasses** (`sunglasses`, Clothing): "The arms fold in on their hinges one after the other,
-   the glasses flip to face you and the lenses darken from clear to deep grey like light-changing
+   the glasses flip to face you and the lenses darken from clear to deep gray like light-changing
    lenses; then they unfold (3.5 s)."
 7. **Baseball cap** (`baseball-cap`, Clothing): "It flips up off its stand, spins flat like a flying
    disc and lands brim-backwards; then a second flip turns it round the right way (3 s)." No logos.

@@ -5,13 +5,16 @@
 import { EFFECTS, AXES } from "./effects.js";
 import { SHAPES, PALETTES, PROFILES } from "./generators.js";
 import { TOYS, thumbURL, shelfCategories, searchToys, onShelf, holdsStill } from "./toys.js";
+import { labsOn } from "./toys.js"; // lane PDF lab
 import { IDLE_EFFECTS, formatCount, formatBytes } from "./state.js";
 import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
 import { initLive, renderLive } from "./live/panel.js"; // lane Live input
 import { ui2On } from "./player.js"; // UI r2
+import { SITE_TOY_IDS } from "./site-toy-pages.js";
 
 const $ = (id) => document.getElementById(id);
+const siteToyIds = new Set(SITE_TOY_IDS);
 
 const SWATCHES = [
   "#e63b2e",
@@ -39,6 +42,8 @@ function pct(v) {
 }
 
 export function createUI(app) {
+  let inputDrop = null; // lane Molecule viewer (engine): the toy's own drop, or null
+  let inputShown = null; // and its "what is showing" line
   initLive(app); // lane Live input: the live sources, and Clap to tap (labs)
   const els = {
     panel: $("panel"),
@@ -56,6 +61,16 @@ export function createUI(app) {
     flagToggle: $("flag-toggle"), // UI r3
     flagPop: $("flag-pop"), // UI r3
     flagGlobal: $("flag-global"), // UI r3
+    popToggle: $("pop-toggle"), // lane Pages r6
+    toySlider: $("toy-slider"), // lane Pages r6
+    toySliderLabel: $("toy-slider-label"),
+    toySliderInput: $("toy-slider-input"),
+    stageDial: $("stage-dial"), // Live r8
+    stage: $("stage"), // (lane Photo depth: the slider is placed over it)
+    stageDialInput: $("stage-dial-input"),
+    stageDialLabel: $("stage-dial-label"),
+    stageDialHide: $("stage-dial-hide"),
+    stageDialShow: $("stage-dial-show"),
     tabs: $("tabs"),
     panes: $("panes"),
     shelf: $("shelf"),
@@ -140,6 +155,10 @@ export function createUI(app) {
     lookBgColor: $("look-bg-color"),
     lookTheme: $("look-theme"),
     lookDetail: $("look-detail"),
+    lookSplats: $("look-splats"), // lane Kit lab
+    lookSplatsValue: $("look-splats-value"),
+    lookSplatsRow: $("look-splats-row"),
+    lookSplatsNote: $("look-splats-note"),
     lookAccent: $("look-accent"),
     lookAccentColor: $("look-accent-color"),
     lookSize: $("look-size"),
@@ -160,6 +179,7 @@ export function createUI(app) {
     byoAnyway: $("byo-anyway"),
     byoCancel: $("byo-cancel"),
     shareLink: $("share-link"),
+    shareQr: $("share-qr"), // lane QR r4 part 2: the scene as a QR code (labs)
     linkNote: $("link-note"),
     exportJson: $("export-json"),
     importJson: $("import-json"),
@@ -171,6 +191,8 @@ export function createUI(app) {
     webmRow: $("webm-row"),
     webmSeconds: $("webm-seconds"),
     exportWebm: $("export-webm"),
+    pdfRow: $("pdf-row"), // lane PDF lab
+    exportPdf: $("export-pdf"), // lane PDF lab
     webmUnavailable: $("webm-unavailable"),
     recordRow: $("record-row"), // UI r5
     recordStart: $("record-start"),
@@ -293,6 +315,25 @@ export function createUI(app) {
     for (const [id, b] of chips)
       b.setAttribute("aria-pressed", String(!q && id === shelf.category));
     revealCurrent();
+    requestAnimationFrame(fitLabels);
+  }
+
+  // Fix11: on a phone a name wraps onto two lines (styles.css); one that still needs a third with
+  // this device's font ("Leaning Tower of Pisa") steps its letters down a little, to 9 px at the
+  // least, so no name is cut. The card keeps its size. Measured again for the row and the grid
+  // (whose cards are wider).
+  function fitLabels() {
+    const spans = [...els.shelf.children].map((b) => b.querySelector("span")).filter(Boolean);
+    for (const s of spans) if (s.style.fontSize) s.style.fontSize = s.style.minHeight = "";
+    if (!narrow.matches) return;
+    const over = (s) => s.clientHeight > 0 && s.scrollHeight > s.clientHeight + 1;
+    let todo = spans.filter(over);
+    for (const s of todo) s.style.minHeight = getComputedStyle(s).minHeight;
+    for (const px of [10, 9.5, 9]) {
+      for (const s of todo) s.style.fontSize = `${px}px`;
+      todo = todo.filter(over);
+      if (!todo.length) break;
+    }
   }
 
   function revealCurrent() {
@@ -366,7 +407,7 @@ export function createUI(app) {
   for (const b of els.tools.querySelectorAll("button")) {
     b.addEventListener("click", () => {
       app.setTool(b.dataset.tool);
-      // A tool with settings (paint colours, clay, strength) opens them.
+      // A tool with settings (paint colors, clay, strength) opens them.
       if (b.dataset.tool !== "orbit") showTab("tools");
     });
   }
@@ -375,7 +416,7 @@ export function createUI(app) {
     b.type = "button";
     b.style.background = hex;
     b.dataset.color = hex;
-    b.setAttribute("aria-label", `Paint colour ${hex}`);
+    b.setAttribute("aria-label", `Paint color ${hex}`);
     b.setAttribute("aria-pressed", "false");
     b.addEventListener("click", () => app.setEffectParam("paint", "color", hex));
     els.swatches.appendChild(b);
@@ -513,6 +554,7 @@ export function createUI(app) {
     controlInputs.clear();
     for (const c of recipe?.controls || []) {
       if (c.type === "pulse") continue;
+      if (c.global) continue; // lane Pages r6: set from the top bar
       if (c.type === "toggle") {
         if (recipe.action?.key === c.key) continue;
         const row = document.createElement("label");
@@ -566,11 +608,20 @@ export function createUI(app) {
       let input;
       if (o.type === "select") {
         input = document.createElement("select");
-        for (const ch of o.choices) input.add(new Option(ch.label, ch.id));
+        // Choices with a `group` are listed under that heading (an optgroup).
+        let group = null;
+        for (const ch of o.choices) {
+          if (ch.group && ch.group !== group?.label) {
+            group = document.createElement("optgroup");
+            group.label = ch.group;
+            input.appendChild(group);
+          } else if (!ch.group) group = null;
+          (group ?? input).appendChild(new Option(ch.label, ch.id));
+        }
         input.value = value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else if (o.type === "flag") {
-        // A country's flag, from the flag catalogue (the Moon's flag).
+        // A country's flag, from the flag catalog (the Moon's flag).
         input = document.createElement("select");
         input.add(new Option(value.toUpperCase(), value));
         input.value = value;
@@ -599,6 +650,20 @@ export function createUI(app) {
         input.className = "switch";
         input.checked = !!value;
         input.addEventListener("change", () => app.setToyOption(o.key, input.checked));
+      } else if (o.type === "text") {
+        // A short line of text the toy reads itself (the Enigma's plugboard
+        // pairs); it applies when the box is left or Enter is pressed.
+        input = document.createElement("input");
+        input.type = "text";
+        input.className = "option-text";
+        input.id = `opt-${o.key}`;
+        input.value = String(value ?? "");
+        input.spellcheck = false;
+        input.autocomplete = "off";
+        if (o.placeholder) input.placeholder = o.placeholder;
+        if (o.maxLength) input.maxLength = o.maxLength;
+        input.setAttribute("aria-label", o.label);
+        input.addEventListener("change", () => app.setToyOption(o.key, input.value));
       } else {
         input = document.createElement("input");
         input.type = "range";
@@ -611,6 +676,9 @@ export function createUI(app) {
       row.appendChild(input);
       els.toyOptions.appendChild(row);
     }
+    renderStageDial(info, recipe); // Live r8
+    inputDrop = null;
+    inputShown = null;
     if (recipe?.input) renderInputPanel(recipe.input);
     els.toyNote.textContent = recipe
       ? recipe.note || ""
@@ -1554,10 +1622,9 @@ export function createUI(app) {
     open.textContent = input.fileButton || "Open a file…";
     open.addEventListener("click", () => file.click());
     fileRow.append(open);
-    file.addEventListener("change", async () => {
-      const files = [...(file.files || [])];
+    // Lane Molecule viewer (engine): the same path for picked and dropped files.
+    const take = async (files) => {
       const f = files[0];
-      file.value = "";
       if (!f) return;
       // input.maxBytes: a recipe's own cap, a number (the song landscape, lane
       // Live input r2, which streams its file) or a function of nothing (UI r5:
@@ -1571,7 +1638,30 @@ export function createUI(app) {
       }
       if (input.binary) apply("", f.name, f, files);
       else apply(await f.text(), f.name);
+    };
+    file.addEventListener("change", () => {
+      const files = [...(file.files || [])];
+      file.value = "";
+      take(files);
     });
+    // A recipe with input.drop takes a file dropped anywhere on the page when
+    // its extension is one input.accept lists; other toys never see drops.
+    const kinds = String(input.accept || "")
+      .split(",")
+      .map((x) => x.trim().toLowerCase())
+      .filter((x) => x.startsWith("."));
+    inputDrop = input.drop
+      ? (f) => {
+          const ext = (/\.[^.]+$/.exec(f.name)?.[0] ?? "").toLowerCase();
+          if (!kinds.includes(ext)) return false;
+          take([f]);
+          return true;
+        }
+      : null;
+    inputShown = () => {
+      shown.textContent = input.shown?.() || "";
+      shown.hidden = !shown.textContent;
+    };
     const note = document.createElement("p");
     note.className = "note";
     note.textContent = input.note || "";
@@ -1874,7 +1964,7 @@ export function createUI(app) {
   // The flag list is small; fetch it soon after start so pickers are full
   // before anyone opens them.
   setTimeout(listFlags, 1500);
-  // The quick "Flag colours" picker in the Play tab.
+  // The quick "Flag colors" picker in the Play tab.
   els.toyFlag.addEventListener("focus", listFlags);
   els.toyFlag.addEventListener("pointerdown", listFlags);
   els.toyFlag.addEventListener("change", () => {
@@ -1893,6 +1983,13 @@ export function createUI(app) {
     showFlagPop(false);
     els.flagToggle.focus();
   });
+  els.popToggle.addEventListener("click", () => app.togglePopOut()); // lane Pages r6
+  // On a phone, where the row of round buttons is full, Pop out takes the
+  // turntable button's place (a page toy holds still).
+  function placePopToggle() {
+    els.popToggle.style.right = narrow.matches ? getComputedStyle(els.turntableToggle).right : "";
+  }
+  addEventListener("resize", placePopToggle);
   els.flagGlobal.addEventListener("change", () => {
     app.setGlobalFlag(els.flagGlobal.value);
     showFlagPop(false);
@@ -2037,6 +2134,13 @@ export function createUI(app) {
   for (const b of els.lookDetail.querySelectorAll("button")) {
     b.addEventListener("click", () => app.setDetail(b.dataset.detail));
   }
+  // Lane Kit lab: the Detail slider, labs only. The label follows the drag;
+  // the toy rebuilds when the finger lets go.
+  els.lookSplatsRow.hidden = els.lookSplatsNote.hidden = !labsOn();
+  els.lookSplats.addEventListener("input", () => {
+    els.lookSplatsValue.value = splatsLabel(Number(els.lookSplats.value));
+  });
+  els.lookSplats.addEventListener("change", () => app.setSplats(Number(els.lookSplats.value)));
   for (const e of IDLE_EFFECTS) els.autoEffect.add(new Option(e.label, e.id));
   // Reset everything: a second tap within a few seconds confirms.
   let resetArmed = null;
@@ -2077,6 +2181,9 @@ export function createUI(app) {
 
   // ---- Share -------------------------------------------------------------------
   els.shareLink.addEventListener("click", () => app.copyLink());
+  // Lane QR r4 part 2: the scene's link as a QR code (labs).
+  els.shareQr.hidden = !labsOn();
+  els.shareQr.addEventListener("click", () => app.openShareQR());
   els.exportJson.addEventListener("click", () => app.exportJSON());
   els.importJson.addEventListener("change", () => {
     const f = els.importJson.files && els.importJson.files[0];
@@ -2092,6 +2199,9 @@ export function createUI(app) {
     }),
   );
   els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
+  // Lane PDF lab: Save as PDF (labs).
+  els.pdfRow.hidden = !labsOn();
+  els.exportPdf.addEventListener("click", () => app.openPdfExport());
   // UI r5: Record (the Share tab starts it; the pill on the stage stops and saves it).
   els.recordStart.addEventListener("click", () => (app.recording ? app.stopRecord() : app.startRecord())); // prettier-ignore
   els.recStop.addEventListener("click", () => app.stopRecord());
@@ -2277,6 +2387,7 @@ export function createUI(app) {
     // handle, a swipe down, a pick or a tap on the toy closes the grid.
     els.sheetToggle.textContent = m === "panel" ? "Done" : "More";
     refreshDock();
+    requestAnimationFrame(fitLabels); // Fix11: the row's and the grid's cards differ in width
   };
   function setMode(m, fill = false) {
     if (m === "grid" && !SHELF_GRID) m = "panel";
@@ -2295,6 +2406,7 @@ export function createUI(app) {
   // UI r2: the maximize button fills the screen with the grid or the panel.
   els.sheetMax.addEventListener("click", () => setMode(mode, !full));
   narrow.addEventListener("change", applySheet);
+  document.fonts?.ready.then(() => requestAnimationFrame(fitLabels));
 
   // The handle: swipe up for the grid, down for the row, tap to toggle. The
   // tab bar takes the same swipes but keeps the panel open when swiped up.
@@ -2543,12 +2655,24 @@ export function createUI(app) {
   // ---- UI r3: the action button pauses and resumes a long effect ---------------------
   // While a long tap effect (a tune, a long demo) runs, the Toy tab's action
   // button reads Pause; while it is paused, Resume.
+  // Arcade r2: a game reports its own state, and the ▶ over the stage shows
+  // pause while the game plays (one button plays and pauses).
+  const playPath = els.handsPlay.querySelector("path");
+  const playD = playPath?.getAttribute("d");
   app.player?.on("frame", () => {
     const base = app.player.toyInfo?.recipe?.action?.label;
     if (!base) return;
-    const st = app.player.motion?.effectState?.();
+    const arc = app.player.arcade;
+    const st = arc?.effectState ? arc.effectState() : app.player.motion?.effectState?.();
     const label = st === "running" ? "Pause" : st === "paused" ? "Resume" : base;
     if (els.toyAction.textContent !== label) els.toyAction.textContent = label;
+    const pause = !!arc && st === "running";
+    if (playPath && els.handsPlay.dataset.pause !== String(pause)) {
+      els.handsPlay.dataset.pause = String(pause);
+      playPath.setAttribute("d", pause ? "M7 5.5h3.5v13H7zM13.5 5.5H17v13h-3.5z" : playD);
+      els.handsPlay.setAttribute("aria-label", pause ? "Pause" : "Play");
+      els.handsPlay.title = pause ? "Pause the game" : "Play (the toy's tap)";
+    }
   });
 
   // ---- A toy's labels (lane Anatomy) ------------------------------------------------
@@ -2577,6 +2701,16 @@ export function createUI(app) {
     for (const it of lg.items || []) {
       const li = document.createElement("li");
       li.textContent = it.text;
+      // Lane Powers of ten: a scale bar, `ruler: { size }` long in recipe
+      // units at the toy's center as the camera sees it now (at most the
+      // box's width), its text under it.
+      if (it.ruler) {
+        const bar = document.createElement("span");
+        bar.className = "toy-legend-ruler";
+        bar.style.width = `${Math.round(rulerPixels(it.ruler.size))}px`;
+        li.prepend(bar);
+        li.classList.add("ruler");
+      }
       if (it.head) li.classList.add("head");
       if (it.on) li.classList.add("on");
       if (it.dim) li.classList.add("dim");
@@ -2584,6 +2718,227 @@ export function createUI(app) {
     }
     legendBox.appendChild(list);
   });
+
+  // Lane Powers of ten: how many CSS pixels `size` recipe units span at the
+  // toy's center, across the screen.
+  function rulerPixels(size) {
+    const st = app.player.stage;
+    const s = app.player.proc?.ctx?.transform?.scale ?? 1;
+    const n = Number(size) * s;
+    if (!st?.toScreen || !(n > 0)) return 0;
+    const a = st.toScreen([0, 0, 0]);
+    const b = st.toScreen([n, 0, 0]);
+    return Math.min(140, Math.hypot(b[0] - a[0], b[1] - a[1]));
+  }
+
+  // ---- The slider over the stage (lane Pages r6) ------------------------------------
+  // A kit toy's drive() may set out.slider = { id, label, value } (value 0
+  // to 1): a slider shown over the stage while it is set (a risen figure's
+  // depth). Its value is set from the drive when the id changes; moving it
+  // hands { id, value } to the next drive as info.slider.
+  let sliderId = null;
+  app.player?.on("frame", () => {
+    const sl = app.player.motion?.out?.slider || null;
+    const id = sl ? String(sl.id) : null;
+    els.toySlider.hidden = !sl;
+    if (id === sliderId) return;
+    sliderId = id;
+    if (!sl) return;
+    els.toySliderLabel.textContent = sl.label || "";
+    els.toySliderInput.value = String(Math.round(1000 * Math.min(1, Math.max(0, sl.value || 0))));
+    els.toySliderInput.setAttribute("aria-label", sl.label || "Amount");
+  });
+  els.toySliderInput.addEventListener("input", () => {
+    if (sliderId !== null)
+      app.player.sliderInput(sliderId, Number(els.toySliderInput.value) / 1000);
+  });
+
+  // ---- The depth slider over the stage (lane Live r8) ------------------------------
+  // A kit toy's slider option marked `stage: true` (the Splat mirror's depth)
+  // also shows as a small vertical slider over the stage's right edge, page
+  // controls rather than splats. It sets the same option as the Toy tab's
+  // slider (on release, so the toy rebuilds once), and follows it. The ×
+  // hides it and a small button with its name brings it back; that choice is
+  // remembered on this device (one choice for every toy).
+  const DIAL_KEY = "splashery.stageDialHidden";
+  let dialOption = null;
+  let dialHide = false;
+  try {
+    dialHide = localStorage.getItem(DIAL_KEY) === "1";
+  } catch {
+    // No storage: shown, and a hide lasts this visit.
+  }
+  function setDialHidden(on) {
+    dialHide = on;
+    try {
+      if (on) localStorage.setItem(DIAL_KEY, "1");
+      else localStorage.removeItem(DIAL_KEY);
+    } catch {
+      // No storage: it still hides now.
+    }
+    showDial();
+  }
+  function showDial() {
+    els.stageDial.hidden = !dialOption || dialHide;
+    els.stageDialShow.hidden = !dialOption || !dialHide;
+    document.body.classList.toggle("has-stage-dial", !!dialOption);
+  }
+  function renderStageDial(info, recipe) {
+    const o = (recipe?.options || []).find((x) => x.stage && (x.type === "slider" || !x.type));
+    dialOption = o || null;
+    if (o) {
+      const input = els.stageDialInput;
+      input.min = String(o.min ?? 0);
+      input.max = String(o.max ?? 1);
+      input.step = String(o.step ?? 0.01);
+      input.value = String(info.options?.[o.key] ?? o.default);
+      input.setAttribute("aria-label", o.label);
+      els.stageDialLabel.textContent = o.label;
+      els.stageDialShow.textContent = o.label;
+      els.stageDialShow.setAttribute("aria-label", `Show the ${o.label.toLowerCase()} slider`);
+      els.stageDialHide.setAttribute("aria-label", `Hide the ${o.label.toLowerCase()} slider`);
+    }
+    showDial();
+  }
+  els.stageDialInput.addEventListener("change", () => {
+    if (dialOption) app.setToyOption(dialOption.key, Number(els.stageDialInput.value));
+  });
+  els.stageDialHide.addEventListener("click", () => {
+    setDialHidden(true);
+    els.stageDialShow.focus();
+  });
+  els.stageDialShow.addEventListener("click", (e) => {
+    if (dialDrag.moved) return e.preventDefault(); // (the end of a drag, not a tap)
+    setDialHidden(false);
+    els.stageDialInput.focus();
+  });
+
+  // Lane Photo depth: the slider (and its small button when hidden) can be dragged anywhere over the
+  // stage, by its frame or its name (not the range itself). One place for both, kept as the center's
+  // share of the stage's width and height, so it stays put when the stage changes size (full screen,
+  // the desktop panel folded, a turned phone) and is clamped inside it. Remembered on this device,
+  // one place for phones and one for wider screens. A double-click or Home puts it back; with its
+  // name (or the small button) focused, the arrow keys move it.
+  const POS_KEY = "splashery.stageDialPos";
+  const layout = () => (matchMedia("(max-width: 760px)").matches ? "phone" : "wide");
+  let dialPos = {};
+  try {
+    dialPos = JSON.parse(localStorage.getItem(POS_KEY) || "{}") || {};
+  } catch {
+    // No storage (or a bad entry): it starts at its usual place.
+  }
+  const dialDrag = { moved: false };
+  function saveDialPos() {
+    try {
+      localStorage.setItem(POS_KEY, JSON.stringify(dialPos));
+    } catch {
+      // No storage: it stays where it was put for this visit.
+    }
+  }
+  // Puts both the slider and its button at the remembered place (or their usual one).
+  function placeDial() {
+    const at = dialPos[layout()];
+    const stage = els.stage.getBoundingClientRect();
+    for (const el of [els.stageDial, els.stageDialShow]) {
+      if (!at || !stage.width) {
+        el.style.left = el.style.top = el.style.right = el.style.transform = "";
+        el.classList.remove("placed");
+        continue;
+      }
+      el.classList.add("placed");
+      el.style.right = "auto";
+      el.style.transform = "none";
+      if (el.hidden) continue; // (measured when it shows)
+      const w = el.offsetWidth;
+      const h = el.offsetHeight;
+      const m = 4;
+      const cx = stage.left + at[0] * stage.width;
+      const cy = stage.top + at[1] * stage.height;
+      const x = Math.min(stage.right - w - m, Math.max(stage.left + m, cx - w / 2));
+      const y = Math.min(stage.bottom - h - m, Math.max(stage.top + m, cy - h / 2));
+      el.style.left = `${Math.round(x)}px`;
+      el.style.top = `${Math.round(y)}px`;
+    }
+  }
+  // Moves the place so the element's center lands at (x, y) on screen, clamped inside the stage.
+  function moveDialTo(el, x, y) {
+    const stage = els.stage.getBoundingClientRect();
+    if (!stage.width || !stage.height) return;
+    const hw = el.offsetWidth / 2 + 4;
+    const hh = el.offsetHeight / 2 + 4;
+    x = Math.min(stage.right - hw, Math.max(stage.left + hw, x));
+    y = Math.min(stage.bottom - hh, Math.max(stage.top + hh, y));
+    dialPos[layout()] = [
+      +((x - stage.left) / stage.width).toFixed(4),
+      +((y - stage.top) / stage.height).toFixed(4),
+    ];
+    placeDial();
+  }
+  function resetDial() {
+    delete dialPos[layout()];
+    saveDialPos();
+    placeDial();
+  }
+  function dragDial(el) {
+    el.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0 || e.target.closest("input, #stage-dial-hide")) return;
+      const r = el.getBoundingClientRect();
+      const dx = e.clientX - (r.left + r.width / 2);
+      const dy = e.clientY - (r.top + r.height / 2);
+      const x0 = e.clientX;
+      const y0 = e.clientY;
+      dialDrag.moved = false;
+      let live = false;
+      const move = (ev) => {
+        if (!live && Math.hypot(ev.clientX - x0, ev.clientY - y0) < 6) return;
+        if (!live) {
+          live = true;
+          dialDrag.moved = true;
+          el.classList.add("dragging");
+        }
+        ev.preventDefault();
+        moveDialTo(el, ev.clientX - dx, ev.clientY - dy);
+      };
+      const up = () => {
+        removeEventListener("pointermove", move);
+        removeEventListener("pointerup", up);
+        removeEventListener("pointercancel", up);
+        el.classList.remove("dragging");
+        if (live) saveDialPos();
+        // (the click that ends a drag is let through once, then taps work again)
+        setTimeout(() => (dialDrag.moved = false), 0);
+      };
+      addEventListener("pointermove", move, { passive: false });
+      addEventListener("pointerup", up);
+      addEventListener("pointercancel", up);
+    });
+    el.addEventListener("dblclick", (e) => {
+      if (!e.target.closest("input, #stage-dial-hide")) resetDial();
+    });
+  }
+  dragDial(els.stageDial);
+  dragDial(els.stageDialShow);
+  for (const el of [els.stageDialLabel, els.stageDialShow])
+    el.addEventListener("keydown", (e) => {
+      const box = el === els.stageDialShow ? el : els.stageDial;
+      if (e.key === "Home") {
+        e.preventDefault();
+        return resetDial();
+      }
+      const step = e.shiftKey ? 40 : 10;
+      const d = { ArrowLeft: [-step, 0], ArrowRight: [step, 0], ArrowUp: [0, -step], ArrowDown: [0, step] }[e.key]; // prettier-ignore
+      if (!d) return;
+      e.preventDefault();
+      const r = box.getBoundingClientRect();
+      moveDialTo(box, r.left + r.width / 2 + d[0], r.top + r.height / 2 + d[1]);
+      saveDialPos();
+    });
+  // (the stage changes size with full screen, focus mode, the panel and a turned phone)
+  if (typeof ResizeObserver !== "undefined") new ResizeObserver(() => placeDial()).observe(els.stage); // prettier-ignore
+  addEventListener("resize", () => placeDial());
+  new MutationObserver(() => placeDial()).observe(els.stageDial, { attributes: true, attributeFilter: ["hidden"] }); // prettier-ignore
+  new MutationObserver(() => placeDial()).observe(els.stageDialShow, { attributes: true, attributeFilter: ["hidden"] }); // prettier-ignore
+  placeDial();
 
   // ---- Toy help (lane Help) ---------------------------------------------------------
   // A short how-to-play line when a new toy opens (picked from the shelf,
@@ -2605,6 +2960,8 @@ export function createUI(app) {
     aboutText: $("toy-about-text"),
     howTo: $("toy-about-howto"),
     can: $("toy-about-can"),
+    siteRow: $("toy-site-row"),
+    siteLink: $("toy-site-link"),
   };
   let helpModule = null;
   let helpKey = null;
@@ -2712,6 +3069,13 @@ export function createUI(app) {
   }
   async function setToyHelp(info) {
     helpInfo = info;
+    // The site build records only toy pages that exist. Scene files and old
+    // share links reach this same path; a file or a toy made here has no page.
+    const id = info?.id;
+    const hasPage = siteToyIds.has(id);
+    help.siteRow.hidden = !hasPage;
+    if (hasPage) help.siteLink.setAttribute("href", `./site/toys/${encodeURIComponent(id)}/`);
+    else help.siteLink.removeAttribute("href");
     // A new toy shows the line; the same toy rebuilt (an option, the detail
     // tier) only updates the text.
     const key = info ? `${info.kind}:${info.id ?? info.label}` : null;
@@ -2869,10 +3233,15 @@ export function createUI(app) {
       }
       document.documentElement.dataset.theme = resolvedTheme;
     },
-    setDetail(detail) {
+    setDetail(detail, splats = null) {
       for (const b of els.lookDetail.querySelectorAll("button")) {
-        b.setAttribute("aria-pressed", String(b.dataset.detail === detail));
+        b.setAttribute("aria-pressed", String(!splats && b.dataset.detail === detail));
       }
+      // Lane Kit lab: the slider shows its own count, or the tier's.
+      const tier = app.player?.profile;
+      const n = splats || PROFILES[tier]?.defaultCount || 140000;
+      els.lookSplats.value = String(n);
+      els.lookSplatsValue.value = splatsLabel(n, splats ? null : tier);
     },
     setAutoplay(a, reducedMotion) {
       els.autoTurntable.checked = a.turntable;
@@ -2939,6 +3308,7 @@ export function createUI(app) {
         els.exportPng,
         els.genMake,
         els.shareLink,
+        els.shareQr,
       ]) {
         b.disabled = on;
       }
@@ -2999,6 +3369,60 @@ export function createUI(app) {
       clearTimeout(toastTimer);
       toastTimer = setTimeout(() => els.toast.classList.remove("show"), ms);
     },
+    // Lane Books r5: a link in a page asks before it opens. The address
+    // shows in full; Open is a real link (a new tab, with no access back to
+    // this page), so it opens from the visitor's own tap on every browser.
+    // Only addresses Pictures.openLink let through (http:, https:, mailto:).
+    confirmLink(url) {
+      let u;
+      try {
+        u = new URL(url);
+      } catch {
+        return;
+      }
+      if (!["http:", "https:", "mailto:"].includes(u.protocol)) return;
+      let bar = document.getElementById("link-confirm");
+      if (!bar) {
+        bar = document.createElement("div");
+        bar.id = "link-confirm";
+        bar.className = "link-confirm";
+        bar.setAttribute("role", "dialog");
+        bar.setAttribute("aria-label", "Open a link");
+        const text = document.createElement("p");
+        text.className = "link-confirm-text";
+        const addr = document.createElement("p");
+        addr.className = "link-confirm-url";
+        const row = document.createElement("div");
+        row.className = "button-row";
+        const open = document.createElement("a");
+        open.className = "button primary";
+        open.id = "link-confirm-open";
+        open.target = "_blank";
+        open.rel = "noopener noreferrer";
+        open.textContent = "Open";
+        const cancel = document.createElement("button");
+        cancel.type = "button";
+        cancel.id = "link-confirm-cancel";
+        cancel.textContent = "Cancel";
+        const close = () => (bar.hidden = true);
+        open.addEventListener("click", () => setTimeout(close, 0));
+        cancel.addEventListener("click", close);
+        bar.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") close();
+        });
+        row.append(open, cancel);
+        bar.append(text, addr, row);
+        document.body.appendChild(bar);
+      }
+      const name = u.protocol === "mailto:" ? `Write to ${decodeURIComponent(u.pathname)}?` : `Open ${u.hostname.replace(/^www\./, "")}?`; // prettier-ignore
+      bar.querySelector(".link-confirm-text").textContent = name;
+      bar.querySelector(".link-confirm-url").textContent = u.href;
+      const open = bar.querySelector("#link-confirm-open");
+      open.href = u.href;
+      open.target = u.protocol === "mailto:" ? "_self" : "_blank";
+      bar.hidden = false;
+      open.focus({ preventScroll: true });
+    },
     progress: {
       show(label) {
         els.progressLabel.textContent = label || "Loading…";
@@ -3019,6 +3443,15 @@ export function createUI(app) {
     showDrop(on) {
       els.dropOverlay.hidden = !on;
     },
+    // Lane Molecule viewer (engine): a dropped file for the toy's own panel
+    // (input.drop); true when the toy took it.
+    dropOnToy(f) {
+      return inputDrop ? inputDrop(f) : false;
+    },
+    // Lane Molecule viewer (engine): updates the panel's "what is showing" line.
+    refreshInputShown() {
+      inputShown?.();
+    },
     collapseSheet() {
       setMode("row");
     },
@@ -3035,6 +3468,16 @@ export function createUI(app) {
       else setMode(stop);
     },
     toggleFocus: () => setFocus(!focusOn),
+    // Lane Pages r6: the top bar's Pop out, shown while a page toy is open.
+    setPopOut(available, on) {
+      els.popToggle.hidden = !available;
+      document.body.classList.toggle("pop-toy", !!available);
+      placePopToggle();
+      els.popToggle.setAttribute("aria-pressed", String(!!on));
+      els.popToggle.title = on
+        ? "Pop out: on (tap a figure to raise it)"
+        : "Pop out: off (turn it on, then tap a figure)";
+    },
     // UI r3: the flag button shows whether a flag is set for every toy.
     setGlobalFlag(code) {
       els.flagToggle.setAttribute("aria-pressed", String(!!code));
@@ -3064,4 +3507,11 @@ export function createUI(app) {
     },
   };
   return ui;
+}
+
+// Lane Kit lab: the Detail slider's label, "140k" (or "140k · mid" while the
+// tier, not the slider, sets the count).
+function splatsLabel(n, tier = null) {
+  const k = `${Math.round(n / 1000)}k`;
+  return tier ? `${k} · ${tier}` : k;
 }

@@ -8,6 +8,7 @@
 import { mix, shade, quatFromTo, quatAxisAngle } from "../kit.js";
 import { BITMAP } from "../font.js";
 import { ELEMENT_LIST, elementOf, fillOrder, packNucleus } from "../chem/atom-model.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H5
 
 const TAU = Math.PI * 2;
 
@@ -30,6 +31,44 @@ const band = (x, a, b) => clamp01((x - a) / (b - a));
 const bump = (x, a, b, c, d) => band(x, a, b) * (1 - band(x, c, d));
 const progress = (v) => (v > 0 ? 1 - v : 1);
 const MEM = new WeakMap();
+// Sound C: a faint, soft tick as each proton and neutron packs into the
+// nucleus (each fades in at its own point of channel 0, from the middle out;
+// protons a little brighter). The ticks come in batches a moment ahead, each
+// scheduled for its own moment (`at`, from how fast the atom is building), so
+// they stay in sync at any frame rate (and one cue every 0.2 s or so, as the
+// site spaces a toy's cues 60 ms apart). A big nucleus ticks every few
+// nucleons (at most about 40 a second), more softly.
+function nucleonTicks(D, m, u, down, time, out) {
+  const list = D.nucleons;
+  if (!list?.length) return;
+  const A = list.length;
+  const uOf = (i) => 0.1 + 0.4 * Math.min(1, (0.96 * i) / A + 0.02);
+  if (down || m.tickT === undefined || u < m.tickLast - 1e-6) {
+    // Lowering (or a fresh build): ticks start again from here.
+    [m.tickU, m.tickT, m.tickLast] = [u, time, u];
+    return;
+  }
+  const rate = (u - m.tickLast) / Math.max(1e-3, time - m.tickT);
+  [m.tickT, m.tickLast] = [time, u];
+  if (rate <= 0 || m.tickU - u > rate * 0.06 || m.tickU >= 0.5) return;
+  const reach = Math.min(1, u + rate * 0.25);
+  const every = Math.max(1, Math.ceil((rate * A * 0.4) / 40));
+  const vol = 0.2 / Math.sqrt(every);
+  const ticks = [];
+  for (let i = 0; i < A; i += every) {
+    const ui = uOf(i);
+    if (ui <= m.tickU || ui > reach) continue;
+    // Lane Elements (the owner's walkthrough, October 6, 2026: the clacks at 2.7 to 3.3 kHz were
+    // "like nails on a chalkboard"): a soft pebble's click, like the splat simulator's sorting,
+    // each a little different, protons a touch higher than neutrons.
+    const h = (i * 0.618034) % 1;
+    const f = (list[i] ? 2100 : 1750) * (0.85 + 0.3 * h);
+    ticks.push({ voice: "pebble", f, vol: vol * (0.8 + 0.4 * ((i * 0.381966) % 1)), at: Math.max(0, (ui - u) / rate) }); // prettier-ignore
+  }
+  m.tickU = reach;
+  if (ticks.length) out.cues.push(ticks);
+}
+
 function mem(c) {
   let m = MEM.get(c);
   if (!m) MEM.set(c, (m = {}));
@@ -154,6 +193,15 @@ const DEPTH = 0.3;
 const TOP_Y = 3.5;
 const tilePos = (col, row) => [(col - 9.5) * PITCH, TOP_Y - (row - 1) * PITCH, 0];
 
+// Lane Fix7: the wide (32-column) table, with the lanthanoids and actinoids
+// in their periods (columns 3 to 17), so groups 3 to 18 move 14 columns over.
+function wideCellOf(z) {
+  const [col, row] = cellOf(z);
+  if (row > 7) return [col, row - 2.45];
+  return [col <= 2 ? col : col + 14, row];
+}
+const wideTilePos = (col, row) => [(col - 16.5) * PITCH, TOP_Y - (row - 1) * PITCH, 0];
+
 // The rim of a tile, u = 0..1 round its four sides.
 function rimPoint(u) {
   const h = TILE / 2;
@@ -195,24 +243,49 @@ const INK_SIZE = 5;
 const BOARD = "#232a38";
 
 // Every tile's place: the elements, and the two markers in group 3 that
-// point to the lanthanoid and actinoid rows.
-const TILES = [
-  ...ELEMENT_LIST.map((e) => {
-    const [col, row] = cellOf(e.z);
-    return { el: e, col, row, pos: tilePos(col, row), family: e.family };
-  }),
-  { marker: "57-71", col: 3, row: 6, pos: tilePos(3, 6), family: "lanthanide" },
-  { marker: "89-103", col: 3, row: 7, pos: tilePos(3, 7), family: "actinide" },
+// point to the lanthanoid and actinoid rows (the usual table); or, in the
+// wide table (lane Fix7), every element in its period and no markers.
+function tilesOf(wide) {
+  if (wide)
+    return ELEMENT_LIST.map((e) => {
+      const [col, row] = wideCellOf(e.z);
+      return { el: e, col, row, pos: wideTilePos(col, row), family: e.family };
+    });
+  return [
+    ...ELEMENT_LIST.map((e) => {
+      const [col, row] = cellOf(e.z);
+      return { el: e, col, row, pos: tilePos(col, row), family: e.family };
+    }),
+    { marker: "57-71", col: 3, row: 6, pos: tilePos(3, 6), family: "lanthanide", f: 0 },
+    { marker: "89-103", col: 3, row: 7, pos: tilePos(3, 7), family: "actinide", f: 1 },
+  ];
+}
+// The layout shown: set by the build (the wide table is an option).
+let TILES = tilesOf(false);
+let TILE_OF = new Map(TILES.filter((t) => t.el).map((t) => [t.el.symbol, t]));
+// The two f-block rows under the usual table (their first and last tiles).
+const F_ROWS = [
+  [tilePos(3, 8.45), tilePos(17, 8.45)],
+  [tilePos(3, 9.45), tilePos(17, 9.45)],
 ];
-const TILE_OF = new Map(TILES.filter((t) => t.el).map((t) => [t.el.symbol, t]));
 
 // The table's bounds and the place the atom rises to: out of the gap above
 // the transition metals, well toward the viewer. The atom is left out of
 // the fit (its pieces have fit: false) and stays inside the table's own
 // frame, so the table is framed the same, whichever atom it holds.
-const BOARD_LO = [-8.5 * PITCH - 0.55, tilePos(1, 9.45)[1] - 0.6, -0.12];
-const BOARD_HI = [8.5 * PITCH + 0.55, TOP_Y + 0.6, 0];
-const ATOM_AT = [-1.8, 1.9, 4.2];
+let BOARD_LO = [-8.5 * PITCH - 0.55, tilePos(1, 9.45)[1] - 0.6, -0.12];
+let BOARD_HI = [8.5 * PITCH + 0.55, TOP_Y + 0.6, 0];
+let ATOM_AT = [-1.8, 1.9, 4.2];
+// Lane Fix7: switches the module's layout to the usual or the wide table.
+function setLayout(wide) {
+  TILES = tilesOf(wide);
+  TILE_OF = new Map(TILES.filter((t) => t.el).map((t) => [t.el.symbol, t]));
+  const half = (wide ? 15.5 : 8.5) * PITCH + 0.55;
+  BOARD_LO = [-half, (wide ? tilePos(1, 7) : tilePos(1, 9.45))[1] - 0.6, -0.12];
+  BOARD_HI = [half, TOP_Y + 0.6, 0];
+  // In the gap above the transition metals, toward the viewer.
+  ATOM_AT = wide ? [-2.0, 1.9, 4.2] : [-1.8, 1.9, 4.2];
+}
 
 // ---- The atom ------------------------------------------------------------------------------
 
@@ -288,6 +361,8 @@ function atomCounts(N, layout) {
 // Whichever element the table showed last, for the tap (action.at has no
 // build data).
 const SHOWN = { symbol: "C" };
+// How long a marker's row stays lit (lane Fix7).
+const ROW_SECS = 3.5;
 
 // The tour (lane Fix6): a tap on the board's background walks through the
 // elements, each atom rising for about two seconds with its tile lit. It
@@ -322,6 +397,8 @@ export const RECIPES = {
         default: "C",
         choices: ELEMENT_LIST.map((e) => ({ id: e.symbol, label: `${e.z} ${e.name}` })),
       },
+      // Lane Fix7: the f-block in its periods (the 32-column table).
+      { key: "wide", label: "Wide table", type: "switch", default: false },
       {
         key: "tour",
         label: "Tour order",
@@ -337,6 +414,8 @@ export const RECIPES = {
       { key: "up", label: "Build the atom", type: "toggle", default: 0, ease: 5 },
       { key: "shine", label: "Excite an electron", type: "pulse", ease: 3.2 },
       { key: "walk", label: "Tour", type: "pulse", ease: 0.3 },
+      // Lane Fix7: a tap on a "57-71" or "89-103" marker lights its row.
+      { key: "row", label: "Show the row", type: "pulse", ease: ROW_SECS },
     ],
     action: {
       key: "up",
@@ -364,6 +443,7 @@ export const RECIPES = {
           if (tile?.el && tile.el.symbol !== SHOWN.symbol)
             return { options: { element: tile.el.symbol }, key: "up" };
           if (tile?.el) return "up";
+          if (tile?.marker) return { key: "row", pick: tile.f };
         }
         // The board's background (not a tile, not the atom): the tour.
         if (p[2] < DEPTH + 0.4) {
@@ -393,6 +473,35 @@ export const RECIPES = {
         licenseUrl: "https://www.ncbi.nlm.nih.gov/home/about/policies/",
       },
     ],
+    // Hands-on (lane Hands-on H5): pull the shown element's tile out of
+    // its slot (it comes free with a click and is carried level), set it
+    // down, and bring it back to its slot: it glides in and holds fast
+    // again. (Tap another tile first to pick which one.)
+    hands: {
+      // (The table the board stands on, under its bottom edge.)
+      floor: () => BOARD_LO[1],
+      area: 1.2,
+      pieces: (d) =>
+        d?.tileAt
+          ? [
+              {
+                part: "tile",
+                pos: [d.tileAt[0], d.tileAt[1], DEPTH / 2],
+                solid: { type: "box", half: [TILE / 2, TILE / 2, DEPTH / 2] },
+                points: surfacePoints({ type: "box", half: [TILE / 2, TILE / 2, DEPTH / 2] }, 2),
+                radius: 0.01,
+                pick: [TILE / 2 + 0.05, TILE / 2 + 0.05, DEPTH],
+                mass: 1,
+                friction: 0.6,
+                restitution: 0.2,
+              },
+            ]
+          : [],
+      joints: (d) =>
+        d?.tileAt
+          ? [{ type: "break", part: "tile", at: [d.tileAt[0], d.tileAt[1], 0], pull: 0.035, give: 0.006, reseat: { snap: 0.06 }, steady: true }] // prettier-ignore
+          : [],
+    },
     // Points for the clip tool and the tests: an element's tile, the atom.
     tileAt: (symbol) => {
       const t = TILE_OF.get(symbol);
@@ -457,7 +566,13 @@ export const RECIPES = {
       const vis = rise > 0.002 ? 1 : 0;
       const sc = (0.12 + 0.88 * rise) * (rise > 0 ? 1 + (D.show - 1) * rise : 1);
       const off = mul(D.home, 1 - rise);
-      out.morph = [nuc, ele, 0, 0];
+      // A marker's row lights up (channel 2 the lanthanoids, 3 the
+      // actinoids): it comes on, holds, and fades.
+      const rp = progress(c.row);
+      const shine = c.row > 0 ? ease(band(rp, 0, 0.08)) * (1 - ease(band(rp, 0.75, 1))) : 0;
+      const which = info.tap?.key === "row" ? info.tap.pick : null;
+      out.morph = [nuc, ele, which === 0 ? shine : 0, which === 1 ? shine : 0];
+      nucleonTicks(D, m, u, m.dir === -1, info.time, out);
       const lift = [0, 0, 0.28 * (m.dir === -1 ? rise : ease(band(u, 0, 0.12)))];
       out.parts.tile = { offset: lift };
       // The tour lights the shown element's tile.
@@ -519,6 +634,7 @@ export const RECIPES = {
       m.p = on ? p : undefined;
     },
     build(k, o) {
+      setLayout(!!o.wide);
       const el = elementOf(o.element) || elementOf("C");
       SHOWN.symbol = el.symbol;
       const mode = o.tour === "shuffle" ? "shuffle" : "number";
@@ -812,6 +928,7 @@ export const RECIPES = {
         electrons: Z,
         shellCounts: counts.slice(),
         home: sub([home.pos[0], home.pos[1], DEPTH], ATOM_AT),
+        tileAt: [home.pos[0], home.pos[1], DEPTH], // (lane Hands-on H5)
         shells: L.shellR,
         shellStarts,
         jumpShell,
@@ -819,6 +936,7 @@ export const RECIPES = {
         rHigh: L.rHigh,
         show: L.show,
         ping: { voice: "ding", f: pingNote(el), decay: 1.4, vol: 0.7 },
+        nucleons: L.nucleus.proton.slice(), // Sound C: a tick as each one packs in
       };
       // A lit frame round the shown tile, on during the tour (last, and the
       // same size for every element, so the table is built the same).
@@ -847,6 +965,49 @@ export const RECIPES = {
           color: (c) => keep(mix("#ffffff", "#ffd23a", Math.min(1, c.v * 1.4))),
         },
       );
+      // Lane Fix7: each f-block row's light (hidden until its marker is
+      // tapped): a frame round the marker and round its row, fading in on
+      // its channel. Built for both layouts, so
+      // every build has the same splats; the wide table never lights them.
+      F_ROWS.forEach(([a, b], f) => {
+        const marker = tilePos(3, 6 + f);
+        const frames = [
+          [marker, marker],
+          [a, b],
+        ];
+        for (const [lo, hi] of frames) {
+          const w = hi[0] - lo[0] + TILE + 0.12;
+          const hgt = TILE + 0.12;
+          const cx = (lo[0] + hi[0]) / 2;
+          k.add(
+            k.param(
+              (u, v) => {
+                const q = u * 4;
+                const g = q - Math.floor(q);
+                const side = Math.min(3, Math.floor(q));
+                const d = v * 0.13;
+                const [hw, hh] = [w / 2 + d, hgt / 2 + d];
+                const xy = [[-hw + 2 * hw * g, -hh], [hw, -hh + 2 * hh * g], [hw - 2 * hw * g, hh], [-hw, hh - 2 * hh * g]][side]; // prettier-ignore
+                return [cx + xy[0], lo[1] + xy[1], DEPTH + 0.02];
+              },
+              { grid: 48 },
+            ),
+            {
+              even: true,
+              flat: 0.2,
+              opacity: 1,
+              jitter: 0,
+              weight: 3,
+              size: 1.2,
+              pattern: false,
+              kind: "fade",
+              channel: 2 + f,
+              params: [0.05, -0.3],
+              color: (c) => keep(mix("#ffffff", "#ffd23a", Math.min(1, c.v * 1.4))),
+            },
+          );
+        }
+      });
     },
   },
 };

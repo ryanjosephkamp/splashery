@@ -14,7 +14,7 @@ import { RECIPES as PICTURE_EXAMPLES } from "../manual/example-pictures.js";
 import { RECIPES as INPUT_EXAMPLES } from "../manual/example-input.js";
 import { RECIPES as WINDMILL } from "../manual/example-recipe.js";
 
-const html = fs.readFileSync("manual/index.html", "utf8");
+const html = fs.readFileSync("manual/all.html", "utf8");
 const indexHtml = fs.readFileSync("index.html", "utf8");
 const squash = (s) => s.replace(/\s+/g, "");
 const unescape = (s) => s.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&amp;/g, "&");
@@ -41,7 +41,7 @@ test.describe("the manual's claims match the code", () => {
   });
 
   test("every behavior the manual names exists", () => {
-    const para = html.match(/<h3>Behaviors<\/h3>([\s\S]*?)<h3>/)[1];
+    const para = html.match(/<h3[^>]*>Behaviors<\/h3>([\s\S]*?)<h3/)[1];
     const kinds = [...para.matchAll(/kind: "(\w+)"|<code>"(\w+)"<\/code>/g)].map((m) => m[1] || m[2]); // prettier-ignore
     expect(kinds.length).toBeGreaterThan(4);
     for (const k of kinds) expect(KINDS[k], k).toBeDefined();
@@ -57,7 +57,7 @@ test.describe("the manual's claims match the code", () => {
     const quick = [...html.matchAll(/<b>Functions<\/b>:\s*([^<]*)/g)].pop()[1];
     for (const f of named.filter((f) => f !== "log")) expect(quick, f).toContain(f);
     // Every field the manual's table lists is a field, and the other way round.
-    const table = html.match(/<h3>The fields<\/h3>([\s\S]*?)<h3>Expressions/)[1];
+    const table = html.match(/<h3[^>]*>The fields<\/h3>([\s\S]*?)<h3[^>]*>Expressions/)[1];
     const listed = new Set([...table.matchAll(/<td>\s*<code>(\w+)<\/code>/g)].map((m) => m[1]));
     for (const m of table.matchAll(/<code>(x|y|z|r|g|b)<\/code>/g)) listed.add(m[1]);
     for (const f of FIELDS) expect(listed.has(f), f).toBe(true);
@@ -135,7 +135,8 @@ test.describe("the manual's code samples", () => {
 
   test("each JavaScript sample is a piece of a file in manual/ that builds", () => {
     const files = ["example-recipe.js", "example-pictures.js", "example-input.js"].map((f) => squash(fs.readFileSync(`manual/${f}`, "utf8"))); // prettier-ignore
-    const js = blocks.filter((b) => /^(import |\s*"little-book")/.test(b) || b.includes("export const RECIPES")); // prettier-ignore
+    // The Card's "A recipe" block is a grammar sketch with placeholders (Manual r7b), not a file piece.
+    const js = blocks.filter((b) => /^(import |\s*"little-book")/.test(b) || (b.includes("export const RECIPES") && !b.startsWith('export const RECIPES = { "my-toy"'))); // prettier-ignore
     expect(js.length).toBe(4);
     for (const b of js)
       expect(
@@ -243,7 +244,7 @@ test.describe("the manual page", () => {
     // prettier-ignore
     const problems = [];
     page.on("pageerror", (e) => problems.push(e.message));
-    await page.goto("/manual/");
+    await page.goto("/manual/all.html");
     const hrefs = await page.locator("a[href]").evaluateAll((as) => as.map((a) => a.getAttribute("href"))); // prettier-ignore
     for (const h of hrefs) {
       if (h.startsWith("#") && !h.startsWith("#s="))
@@ -252,9 +253,9 @@ test.describe("the manual page", () => {
         expect(fs.existsSync(path.join("manual", h.split("#")[0])), h).toBe(true);
       }
     }
-    // Every web link goes to this project's site or its source, or a paper.
+    // Every web link goes to this project's site or its source, a paper, a source named in the References or Further reading (checked October 12, 2026; the XPBD paper and the Open Library record of Meeus were added for references 12 and 17 in Manual r8), or a Wikipedia article.
     for (const h of hrefs.filter((h) => /^https?:/.test(h)))
-      expect(h, h).toMatch(/^https:\/\/(ryanjosephkamp\.github\.io\/splashery|github\.com\/ryanjosephkamp\/splashery)/); // prettier-ignore
+      expect(h, h).toMatch(/^https:\/\/(ryanjosephkamp\.github\.io\/splashery|playcanvas\.com\/|keithp\.com\/~keithp\/porterduff\/|github\.com\/ryanjosephkamp\/splashery|repo-sam\.inria\.fr\/fungraph\/3d-gaussian-splatting\/|arxiv\.org\/pdf\/2308\.04079|www\.cs\.umd\.edu\/~zwicker\/|niujinshuchong\.github\.io\/mip-splatting\/|surfsplatting\.github\.io\/|anttwo\.github\.io\/sugar\/|doi\.org\/10\.(1145|1111|1093|1137)\/|arxiv\.org\/abs\/\d{4}\.\d{5}$|earthquake\.usgs\.gov\/earthquakes\/feed\/v1\.0\/geojson\.php$|www\.astronexus\.com\/projects\/hyg$|ssd\.jpl\.nasa\.gov\/planets\/approx_pos\.html$|www\.nayuki\.io\/page\/qr-code-generator-library$|mozilla\.github\.io\/pdf\.js\/$|matthias-research\.github\.io\/pages\/publications\/XPBD\.pdf$|openlibrary\.org\/isbn\/9780943396613$|github\.com\/(ArthurBrussee\/brush|antimatter15\/splat|arrival-space\/splat\.js|nerfstudio-project\/gsplat|playcanvas\/supersplat|sparkjsdev\/spark|KhronosGroup\/glTF\/tree\/main\/extensions\/2\.0\/Khronos\/KHR_gaussian_splatting)$|en\.wikipedia\.org\/wiki\/)/); // prettier-ignore
     const imgs = await page.locator("img").evaluateAll((is) => is.map((i) => [i.getAttribute("src"), i.complete && i.naturalWidth > 0, i.alt])); // prettier-ignore
     expect(imgs.length).toBeGreaterThan(30);
     for (const [src, ok, alt] of imgs) {
@@ -262,7 +263,7 @@ test.describe("the manual page", () => {
       expect(alt.length, `${src} has alt text`).toBeGreaterThan(5);
     }
     const toc = await page.locator("nav.toc a").evaluateAll((as) => as.map((a) => a.textContent)); // prettier-ignore
-    for (const level of ["Level 1", "Level 2", "Level 3", "Level 4", "Level 5"])
+    for (const level of ["Chapter 1", "Chapter 2", "Chapter 3", "Chapter 4", "Chapter 5"])
       expect(
         toc.some((t) => t.startsWith(level)),
         level,
@@ -308,7 +309,7 @@ test.describe("the manual page", () => {
       // prettier-ignore
       const ctx = await browser.newContext({ viewport: { width: w, height: h }, ...(w < 500 ? { hasTouch: true, isMobile: true } : {}) }); // prettier-ignore
       const page = await ctx.newPage();
-      await page.goto("/manual/");
+      await page.goto("/manual/all.html");
       await page.waitForLoadState("load");
       const wide = await page.evaluate(() => {
         const de = document.documentElement;
@@ -334,7 +335,7 @@ test.describe("the manual page", () => {
     const pdf = fs.readFileSync("manual/tinkerers-manual.pdf");
     const pages = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
     expect(pages).toBeGreaterThanOrEqual(25);
-    expect(pdf.length).toBeLessThan(6e6);
+    expect(pdf.length).toBeLessThan(8e6); // 7 MB with the print stills of the live demos (Manual r4)
   });
 });
 

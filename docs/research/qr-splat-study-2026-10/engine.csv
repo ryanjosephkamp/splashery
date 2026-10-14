@@ -1,0 +1,7 @@
+text,version,yaw,splats,perModule,mae,corr,shift,scale,engine_jsqr,engine_zxing,engine_zxingcpp,engine_phone_jsqr,engine_phone_zxing,engine_phone_zxingcpp,ours_jsqr,ours_zxing,ours_zxingcpp,ours_phone_jsqr,ours_phone_zxing,ours_phone_zxingcpp
+short,2,0,81701,5,2.9,0.998,"0,0",1,1,0,1,1,0,1,1,0,1,1,0,1
+short,2,20,81701,5,4,0.998,"0,0",1,1,0,1,1,0,1,1,0,1,1,0,1
+url,4,0,127549,5,4.3,0.996,"0,0",1,1,1,1,1,1,1,1,1,1,1,1,1
+url,4,20,127549,5,4.6,0.996,"0,0",1,1,1,1,1,1,1,1,1,1,1,1,1
+long,9,0,290556,5,7.6,0.989,"0,0",1,1,1,1,1,1,1,0,0,1,1,1,1
+long,9,20,290556,5,6.7,0.992,"0,0",1,1,0,1,0,0,1,0,0,1,0,0,1

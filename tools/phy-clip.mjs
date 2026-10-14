@@ -18,6 +18,7 @@
 //        the same, from and to recipe points (a piece's home, a spot)
 //   { "tap": [dx, dy] }                     a tap there
 //   { "tap3": [x, y, z] }                   a tap on a recipe point
+//   { "toy": "id" }                         opens another toy (one clip, several toys)
 // Writes <out-dir>/<name>.mp4 and <name>-strip.png (8 frames).
 
 import { chromium } from "@playwright/test";
@@ -131,7 +132,17 @@ const step = 1 / fps;
 await shoot();
 for (const s of script) {
   if (s.wait) for (let t = 0; t < s.wait - 1e-6; t += step) await shoot();
-  else if (s.button) {
+  else if (s.toy) {
+    await page.evaluate(async (id) => {
+      const { app, player } = window.__splashery;
+      await app.chooseToy(id);
+      player.opts.idleDelay = 1e9;
+      player.idle.weight = 0;
+      player.scene.autoplay.turntable = false;
+      player.camera.turntable = false;
+    }, s.toy);
+    await page.waitForTimeout(1500);
+  } else if (s.button) {
     const box = await page.locator(`#${s.button}`).boundingBox();
     const at = [box.x + box.width / 2, box.y + box.height / 2];
     await page.evaluate((at) => (window.__clip.finger = at), at);

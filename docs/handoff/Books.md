@@ -12,16 +12,13 @@ lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons: [history.md](histo
 (Written by the Operator on September 28, 2026, from the owner's notes and the Pages into Splats
 plan he accepted the same day; step 3 of ROADMAP.md, "Pictures and pages")
 
-The owner's words: "Allowing people to put the pages of a PDF, such as their own research article or
-their own book or something like that, into a virtual Gaussian splat book, kind of like our
-storybook, but you can actually flip every page, and each page is the proper corresponding page of
-the PDF that the person uploaded." "You can configure settings about, like, what else you want to be
-in the toy. Like maybe if you want, like, there to be, like, a book cover, if you want it to be a
-book, or, like, a magazine, or something like that. You can maybe choose how it looks, like if it's
-bound or something." "I honestly want to support, like, an arbitrary number of pages." "A scrapbook,
-like a photo album. Somebody could upload, you know, a little folder or a set of their own photos,
-family photos or something, put them in there, and then they have a virtual digital storybook." The
-accepted plan adds a picture frame.
+The owner's call: let people put the pages of a PDF (such as their own research article or book)
+into a virtual Gaussian splat book, like the storybook, where every page flips and each page is the
+matching page of the uploaded PDF. Settings configure what else is in the toy: a book cover, a book
+or magazine style, and how it looks (for example, bound). It should support an arbitrary number of
+pages. He also wants a scrapbook, like a photo album, where someone uploads a folder or set of their
+own photos (family photos, say) into a virtual digital storybook. The accepted plan adds a picture
+frame.
 
 Build three toys on the "Pictures and pages" shelf, all `labs: true`:
 
@@ -113,13 +110,12 @@ Pictures set it up), except where this brief names another shelf. The owner turn
 `?labs=1` and tries the toys on his phone. The labs switch comes off in a later small Ops change,
 when he says so.
 
-The owner's words (docs/reviews/2026-09-28-pictures/review.md, word for word): "It should all still
-be Gaussian splats, like the rest of it is." "There needs to be enough resolution for it to still
-resemble the original article. It doesn't have to be perfectly legible." "It's okay if we allow the
-toys to be bigger than usual, possibly even larger in file size than usual, in order for the
-resolution and quality to be better." Samples only under CC0, CC BY or public domain, checked on the
-live source page and credited (CREDITS.md and the toy's in-app credit); no logos, brand names or
-insignia. The laptop stays exactly as it is.
+The owner's call (the owner's notes are private; the Operator's summary is here): it should all
+still be Gaussian splats, like the rest of the site. There needs to be enough resolution for the
+result to still resemble the original article, though it need not be perfectly legible. Toys may be
+bigger than usual, possibly larger in file size, for better resolution and quality. Samples only
+under CC0, CC BY or public domain, checked on the live source page and credited (CREDITS.md and the
+toy's in-app credit); no logos, brand names or insignia. The laptop stays exactly as it is.
 
 ### How this lane runs
 
@@ -170,10 +166,10 @@ carries them too until then.
 ## r2: a sharper book body (September 29, 2026)
 
 The owner's marks: the frame's two clips good; the book's three and the album's "fix", each with the
-note "Looks nearly perfect; mechanics seem perfect, basically. The book itself (not the pages) just
-seem a little bit blurry or grainy, especially around the edges." Branch `claude/lane-books`
-restarted from main; PR "Phase Books r2: a sharper book body". Only the book's and the album's own
-kit parts changed (pages, the page engine and the turns as they were):
+note that it looks nearly perfect and the mechanics are right, but the book itself (not the pages)
+looks a little blurry or grainy, especially around the edges. Branch `claude/lane-books` restarted
+from main; PR "Phase Books r2: a sharper book body". Only the book's and the album's own kit parts
+changed (pages, the page engine and the turns as they were):
 
 - `rect()` (every cover, board, spine, band, page block and card face) lays a staggered lattice of
   flat discs that stops two splat widths short of the face's edges, a band of discs half the size
@@ -192,8 +188,8 @@ kit parts changed (pages, the page engine and the turns as they were):
 
 ## r3: pages you tap and pull (September 29, 2026)
 
-The owner reviewed the Pictures and pages shelf (docs/reviews/2026-09-29-new-toys/review.md). The
-Operator's brief for r3, word for word:
+The owner reviewed the Pictures and pages shelf (the owner's notes are private; the Operator's
+summary is in the brief). The Operator's brief for r3, with his words paraphrased:
 
 > a. Taps that know where they land (action.at(point, c), PACKS.md "Action"):
 >
@@ -203,45 +199,39 @@ Operator's brief for r3, word for word:
 > - Stapled paper (turns upward): a tap in the top quarter of a page goes back; a tap anywhere below
 >   it goes forward; the cover opens as now.
 > - Picture lab: a tap on the left of the page goes back, on the right (or the middle) goes forward.
->   Its pages keep sliding without a flip: he likes that ("I like that the pages don't flip like a
->   real book").
+>   Its pages keep sliding without a flip: he likes that they don't flip like a real book.
 > - On the last page, forward closes the book, as now.
 >
-> b. Your book's page turn: "it feels unnatural and awkward, like something incorrect happens before
-> the page actually turns." Find the glitch frame by frame (tools/effect-strip.mjs): a jump, a
-> re-sort, the content swapping or the page lifting wrong before the turn. Make the turn one
-> continuous motion, with no pop at the start or the end. The album's turn is "a bit better" and
-> needs little.
+> b. Your book's page turn feels unnatural and awkward, as if something incorrect happens before the
+> page actually turns. Find the glitch frame by frame (tools/effect-strip.mjs): a jump, a re-sort,
+> the content swapping or the page lifting wrong before the turn. Make the turn one continuous
+> motion, with no pop at the start or the end. The album's turn is a bit better and needs little.
 >
 > c. Pull a page to turn it (recipe.drag, PACKS.md; drag.at claims only presses that land on a page,
-> so a drag anywhere else still turns the view). "A click without a drag should be an automatic page
-> turn, with the direction depending on where the user has clicked; a drag/pull of the page should
-> peel the page in a natural manner and require the user to actually move the page sufficiently far
-> for the page to turn, like a real physical book would." So: the grabbed corner or edge follows the
-> finger and the paper curls from it. Let go past about halfway, or with a quick flick, and it
-> finishes the turn; otherwise it falls back. The album's pages are heavier ("the manual drag/pull
-> page turning can feel slightly slower or otherwise subtly reflect that additional weight"): follow
-> the finger with a little lag, fall back more readily, and settle with less flutter. Stapled paper
-> pulls upward.
+> so a drag anywhere else still turns the view). A click without a drag should be an automatic page
+> turn, with the direction depending on where the click lands; a drag or pull should peel the page
+> naturally and need to move far enough to turn it, as in a real book. So: the grabbed corner or
+> edge follows the finger and the paper curls from it. Let go past about halfway, or with a quick
+> flick, and it finishes the turn; otherwise it falls back. The album's pages are heavier, so the
+> pull should reflect that weight: follow the finger with a little lag, fall back more readily, and
+> settle with less flutter. Stapled paper pulls upward.
 >
-> d. The Picture lab's background rectangle "is a bit grainy, especially around the edges": Fidelity
+> d. The Picture lab's background rectangle is a bit grainy, especially around the edges: Fidelity
 > A's method, clean edges.
 >
 > e. Picture frame:
 >
-> - The gold frame "is a little too basic and grainy and should look more realistic": a real molded
->   profile (a bead, a cove and a flat, like a gilded frame), burnished highlights on the raised
->   parts and darker recesses, sharp edges; not a flat yellow band.
-> - GIFs and videos in every frame style: "I can upload GIFs, but they just don't play." Add "gif"
->   and "video" to the frame's accept list; a GIF plays on a loop, a video plays muted on a loop
->   (sound with the speaker button, as on the Screen), and the tap still swings the frame on its
->   nail.
-> - The digital frame: "allow users to see the uploaded images/GIFs/videos and rearrange them to be
->   in their desired order, or choose random." A list in the Toy tab of what was opened (a small
->   thumbnail and name each), to reorder (buttons to move up or down, and dragging if it's easy),
->   plus an Order choice: In order or Random. If the list needs a change in src/ui.js, make that a
->   small additive engine PR on claude/lane-books-engine-2 (titled "Engine: …"), merged first, as
->   with #74.
+> - The gold frame is too basic and grainy and should look more realistic: a real molded parts and
+>   darker recesses, sharp edges; not a flat yellow band.
+> - GIFs and videos in every frame style: GIFs uploaded to a frame did not play. Add "gif" and
+>   "video" to the frame's accept list; a GIF plays on a loop, a video plays muted on a loop (sound
+>   with the speaker button, as on the Screen), and the tap still swings the frame on its nail.
+> - The digital frame: let users see the uploaded images, GIFs, and videos and put them in their
+>   preferred order, or choose random. A list in the Toy tab of what was opened (a small thumbnail
+>   and name each), to reorder (buttons to move up or down, and dragging if it's easy), plus an
+>   Order choice: In order or Random. If the list needs a change in src/ui.js, make that a small
+>   additive engine PR on claude/lane-books-engine-2 (titled "Engine: …"), merged first, as with
+>   #74.
 > - The web-address box that says "a PDF, picture, GIF or video" on a frame: I'm fixing that in the
 >   engine myself (the box will name only what the toy opens, from its accept list), so leave it.
 >

@@ -1,0 +1,47 @@
+{
+  "toy": "star-systems",
+  "checked": "2026-10-05",
+  "summary": "Real planetary systems from the NASA Exoplanet Archive: each planet's orbit size and period are the archive's, and the planets go round at those rates, sped up as labeled. The star's and the planets' sizes are enlarged and their colors unknown, and the toy says both.",
+  "claims": [
+    {
+      "claim": "The planets' orbit sizes, periods and radii are the NASA Exoplanet Archive's composite values.",
+      "how": "tools/sp2-systems.mjs reads them from the archive's Planetary Systems Composite Parameters table through its TAP service.",
+      "where": "tools/sp2-systems.mjs",
+      "sources": [
+        {
+          "title": "NASA Science Data License",
+          "publisher": "NASA",
+          "url": "https://science.data.nasa.gov/about/license",
+          "says": "Data ... from a NASA-led mission ... are licensed as Creative Commons Zero. There are no restrictions on the usage of these data."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:347",
+      "note": ""
+    },
+    {
+      "claim": "Each planet goes once round its star in its measured period (sped up by the chosen factor).",
+      "how": "The drive adds the elapsed days over each planet's period to its angle; the test checks the angles after 12 days.",
+      "where": "src/packs/space-r2.js:855",
+      "sources": [
+        {
+          "title": "Planetary Systems table columns",
+          "publisher": "NASA Exoplanet Archive",
+          "url": "https://exoplanetarchive.ipac.caltech.edu/docs/API_PS_columns.html",
+          "says": "pl_orbper: Orbital Period [days], time the planet takes to make a complete orbit; pl_orbsmax: Orbit Semi-Major Axis [au]; pl_rade: Planet Radius [Earth Radius]."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:347",
+      "note": "Kepler's third law holds within each system to better than 1%, except 55 Cancri e, whose orbit size the archive takes from a paper with another stellar mass (13%)."
+    }
+  ],
+  "simplified": [
+    "The star and the planets are drawn far larger than the orbits' scale (said in the toy).",
+    "Orbits are drawn as circles in one plane; the real ones are very slightly oval and tilted a little to each other.",
+    "The planets' colors are not known; they are colored by size class (said in the toy).",
+    "Each planet starts at an arbitrary place on its orbit, not where it is today.",
+    "Spread out (not to scale) places the orbits by the square root of their sizes."
+  ],
+  "fixes": []
+}

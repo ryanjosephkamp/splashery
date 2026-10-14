@@ -1,0 +1,8 @@
+{
+  "source": "docs/audits/pdf-motion-2026-10/qr-poster.png",
+  "decoder": "jsqr 1.4.0",
+  "width": 619,
+  "height": 800,
+  "decoded": "https://ryanjosephkamp.github.io/splashery/embed/?toy=grapes",
+  "passed": true
+}

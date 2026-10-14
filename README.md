@@ -34,7 +34,7 @@ Splashery v1, a planet you could paint, lives on the `checkpoint/v1-planet-paint
 | 25 sports balls               | Pack (Balls)          | Basketball, soccer ball, American football, tennis ball, baseball, softball, beach ball, golf ball, rugby ball, volleyball, water polo ball, ping-pong ball, cricket ball, bowling ball, pool ball (cue and 1 to 15), pickleball, dodgeball, medicine ball, lacrosse ball, squash ball, bouncy ball, marble, hockey puck, shuttlecock and flying disc. Seams and stitching stay put under any flag or pattern. |
 | 23 space toys                 | Pack (Space)          | The Sun, the eight planets (Saturn's and Uranus's rings, Jupiter's Great Red Spot), the Moon, an aurora world, a solar system that orbits, an asteroid, a comet, a meteor, a star, a pulsar, a black hole with its disc, a star cluster, a ring nebula, a nebula with its pillars, a supernova and a spiral galaxy.                                                                                            |
 | 18 tiny-world toys            | Pack (Tiny world)     | Virus, bacteriophage (tap to inject DNA), bacterium, red and white blood cells, neuron (fire a signal), astrocyte, microglia, animal cell and mitochondrion with cutaways, DNA that unzips, chromosome, diatom, tardigrade, pollen grains, snowflakes, paramecium and amoeba.                                                                                                                                  |
-| 5 atoms toys                  | Pack (Atoms)          | Electron orbitals (1s to 4f), a Bohr atom for 44 elements, molecules (water to caffeine and C60, or your own from a name, formula, SMILES string or MOL/SDF/XYZ/PDB file), crystal lattices (salt, diamond, graphite, ice) and proteins (ubiquitin, insulin, GFP, haemoglobin, or your own PDB or mmCIF file).                                                                                                 |
+| 5 atoms toys                  | Pack (Atoms)          | Electron orbitals (1s to 4f), a Bohr atom for 44 elements, molecules (water to caffeine and C60, or your own from a name, formula, SMILES string or MOL/SDF/XYZ/PDB file), crystal lattices (salt, diamond, graphite, ice) and proteins (ubiquitin, insulin, GFP, hemoglobin, or your own PDB or mmCIF file).                                                                                                  |
 | 9 gems                        | Pack (Gems)           | Diamond, ruby, emerald and sapphire cuts, an amethyst geode and a pearl in its oyster that open, a quartz cluster, opals and a crystal ball.                                                                                                                                                                                                                                                                   |
 | 5 more body toys              | Pack (Body)           | Brain, eye (shine a light), lungs that breathe, tooth and kidney; Slice shows the insides.                                                                                                                                                                                                                                                                                                                     |
 | 23 nature toys                | Pack (Nature)         | Oak (four seasons), pine, palm, cherry blossom, maple, bonsai, weeping willow, sunflower, rose, dandelion (blow the seeds), tulips, daisies, lotus, toadstool, fern, saguaro, coral reef, pinecone, acorns, succulent, bamboo, pebbles and kelp. Trees and flowers sway.                                                                                                                                       |
@@ -42,7 +42,7 @@ Splashery v1, a planet you could paint, lives on the `checkpoint/v1-planet-paint
 | 27 food toys                  | Pack (Food)           | Ice cream that melts, watermelon (take a slice), birthday cake (blow out the candles), popcorn that pops, jelly that wobbles, pancakes (flip the top one), cupcake, lollipop, candy canes, macarons, gummy bear (squish), pretzel, croissant, pizza, burger (explode view), sushi, taco, boiled egg (crack it), coffee (stir it), apple, bananas, orange, kiwi, pineapple, cherries, grapes and avocado.       |
 | 15 toys                       | Pack (Toys)           | Building bricks (each tap builds a new model), rubber duck (squeak), spinning top, dice (roll), Newton's cradle (drag a ball out and let go), teddy bear (wave hello), yo-yo, puzzle cube (swipe to turn its layers, tap to scramble or solve), spring toy (make it walk), kite, paper plane, origami crane, balloon dog, soap bubbles and a wind-up robot.                                                    |
 | Chess set                     | Pack (Games)          | A walnut board that plays Morphy's Opera Game (Paris, 1858), or any game from a PGN file you open or paste, move by move. While it is paused, tap a piece and then a square to play your own moves.                                                                                                                                                                                                            |
-| 11 maths toys                 | Pack (Maths)          | Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, hypercube, torus knot, gyroid, Mandelbulb, Sierpinski tetrahedron, the five Platonic solids and a seashell spiral.                                                                                                                                                                                                                                |
+| 11 math toys                  | Pack (Math)           | Lorenz attractor, Möbius strip, Klein bottle, Menger sponge, hypercube, torus knot, gyroid, Mandelbulb, Sierpinski tetrahedron, the five Platonic solids and a seashell spiral.                                                                                                                                                                                                                                |
 | 10 more things that open      | Pack (Open me)        | Storybook, laptop, music box, alarm clock (ring the bell), gift box (open the present), umbrella, desk fan, desk lamp, potion bottle (pop the cork) and a telescope that extends.                                                                                                                                                                                                                              |
 | 9 medieval toys               | Pack (Medieval)       | Sword in the stone (pull it), heraldic shield, bow and target, trebuchet (launch), crossbow, knight's helmet (open the visor), crown, dragon egg (hatch) and a wizard's orb (cast). No guns.                                                                                                                                                                                                                   |
 | 13 animals                    | Pack (Animals)        | Jellyfish, school of fish, butterfly, pufferfish (poke it), nautilus, ladybug (open the wings), snail (hide in the shell), octopus (squirt ink), starfish, sea urchin, frog, penguin and owl (turn the head).                                                                                                                                                                                                  |
@@ -60,7 +60,7 @@ credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**
 
 **Make a toy** builds a new one in the browser: pick a shape (sphere, noise blob, torus, capsule,
 knot), a palette, a seed, the number of splats (up to 300,000 on desktops, 240,000 on phones; see
-Detail below), size jitter, roughness and colour noise. The **Clay** tool then adds lumps where you
+Detail below), size jitter, roughness and color noise. The **Clay** tool then adds lumps where you
 drag, or erases them. Everything is seeded, so a saved scene rebuilds exactly the same toy.
 
 ### Toys from packs
@@ -71,14 +71,14 @@ cones, tori, discs, surfaces of revolution, tubes along curves, parametric and r
 free point clouds) that shares the splat budget by surface area so the whole toy has an even
 density. A pack only downloads when one of its toys is picked. Recipes can give a toy:
 
-- **behaviours** that run on the GPU per splat: orbit, beat, breathe, flame, rise, fall, twinkle,
+- **behaviors** that run on the GPU per splat: orbit, beat, breathe, flame, rise, fall, twinkle,
   sway, grow, melt, a glow that pulses along a path, wave and glint;
 - **parts** (up to 15 rigid groups) that hinge, spin or slide, driven by the recipe each frame (a
   turning part can hide its far side), and up to 48 **tokens** (pieces picked per splat: chess
   pieces, an asteroid's rubble, a molecule's atoms);
 - **controls** (sliders, switches, one-shot pulses) and an **action** that a tap on the toy runs
   (open the lid, stoke the fire);
-- **options** that rebuild the toy (a style, a colour).
+- **options** that rebuild the toy (a style, a color).
 
 Clay works on pack toys too.
 
@@ -89,19 +89,20 @@ Clay works on pack toys too.
 - **Pattern** (Look tab, any toy, captured ones included): stripes, bands, polka dots, checks,
   stars, hearts, zigzag, gradient, rainbow, marble, or a **national flag** (196 public-domain flags
   from Wikimedia Commons). It wraps around the toy, across its front, like a globe, or from above
-  over a flat toy (the chess board takes flag colours on its squares and pieces), keeps as much of
+  over a flat toy (the chess board takes flag colors on its squares and pieces), keeps as much of
   the toy's own shading as you like, and leaves details such as flames or coins alone. The status
-  line says "in the colours of …".
-- **Sound** (the speaker button): every toy has its own tap sound, synthesised from a library of
+  line says "in the colors of …".
+- **Sound** (the speaker button): every toy has its own tap sound, synthesized from a library of
   about 80 voices (plucked strings, bells, xylophone bars, drums, insect buzz, a quack and other
   creature voices, crunch, splash, wind, engines, horns) with a small note sequencer for tunes: the
   guitar strums a chord progression, Big Ben plays the Westminster quarters, the music box plays a
   melody. Pokes, paint, clay and the effect switches have their own soft sounds. Off until you turn
-  it on; embeds are always silent.
+  it on; embeds are silent unless the link has `sound=on`, which plays the toy's tap sound and adds
+  a mute button.
 - **Taps know where they land.** A toy can react to the spot you tap: tap one xylophone bar and the
   mallet strikes that bar and plays its note; tap elsewhere and it plays the scale.
 - **Scan rigs.** Captured toys can have moving parts: the cat statue turns its head and flicks its
-  tail, the bee buzzes its wings and lifts off, the horse rears. Rigs can also pick splats by colour
+  tail, the bee buzzes its wings and lifts off, the horse rears. Rigs can also pick splats by color
   (strawberry seeds, the cookie's jam heart), run whole-body effects (the raspberry's ripple, the
   star cookie crumbling, the blob splitting in three) and show a small kit-built add-on with the
   scan (the lantern's flame, the cactus's flowers, the marble bust's speech bubble). Every scan and
@@ -121,11 +122,11 @@ Clay works on pack toys too.
   has its own arc, spin and bounce (a cold squash ball warms up, a robot hand spins the basketball
   on a fingertip); the Eiffel Tower lights up gold with fireworks, the Colosseum holds a chariot
   race, Galileo drops two balls from the Leaning Tower, and the snowman melts and builds itself
-  again. The lava lamp lets you choose its colours, how many blobs it has and their size and shape.
+  again. The lava lamp lets you choose its colors, how many blobs it has and their size and shape.
 - **Your own molecules and proteins.** Type a molecule's name (about sixty, from aspirin to ATP), a
   formula (H2O, C9H8O4 or CH3COOH) or a SMILES string, or open a MOL, SDF, XYZ or PDB file, and the
   molecule toy lays it out in 3D with its bonds. The protein toy shows ubiquitin, insulin, GFP or
-  haemoglobin as a cartoon of helices, strands and loops, or any PDB or mmCIF file you open (from
+  hemoglobin as a cartoon of helices, strands and loops, or any PDB or mmCIF file you open (from
   rcsb.org); tap it to pull it apart into its pieces. Everything is read in the browser; nothing is
   uploaded.
 - **Drag to stretch.** Drag the gummy bear (with the Orbit tool, starting on the bear) to stretch
@@ -155,19 +156,19 @@ and each has one or two sliders.
 The shelf sits at the top of the panel: search it, filter it by category, or press **Surprise me**
 for a random toy. Below the tools, tabs hold everything else: **Toy** (the main tab: the toy's
 action, controls and options, Motion with the **Turntable when idle** switch, and Quick settings
-with flag colours, **Detail** and **Reset everything**), **Tools** (the picked tool's settings,
-which open by themselves when you pick Paint, Magnet, Poke or Clay, and the effects), **Look**,
-**Make**, **Share** and **About** (the ⓘ). **Reset everything** (tap it twice) takes the toy back to
-how it started: no flag colours or pattern, paint, clay, effects, option or look changes, Detail on
-Auto and the view reset. On a wide screen, drag the panel's left edge to make it (and the shelf,
-which gains columns) wider, and the grip under the shelf to show more rows; double-click either grip
-for a big size. The sizes stay in this browser. On a phone the panel is a bottom sheet. The shelf
-row and tools always show, with toy names on up to two lines. Dragging the handle or the row up
-opens the shelf into a grid of toys that fills the sheet (the chips and search stay on top); picking
-a toy folds it back to the row. **More** or a tab opens the rest. The toy shrinks to fit above the
-sheet so you can watch your changes. Tap the toy, swipe down, press **Done** or Escape to close
-either one again. The grid can be switched off with `SHELF_GRID` in `src/ui.js`; the handle then
-opens the panel, as before.
+with flag colors, **Detail** and **Reset everything**), **Tools** (the picked tool's settings, which
+open by themselves when you pick Paint, Magnet, Poke or Clay, and the effects), **Look**, **Make**,
+**Share** and **About** (the ⓘ). **Reset everything** (tap it twice) takes the toy back to how it
+started: no flag colors or pattern, paint, clay, effects, option or look changes, Detail on Auto and
+the view reset. On a wide screen, drag the panel's left edge to make it (and the shelf, which gains
+columns) wider, and the grip under the shelf to show more rows; double-click either grip for a big
+size. The sizes stay in this browser. On a phone the panel is a bottom sheet. The shelf row and
+tools always show, with toy names on up to two lines. Dragging the handle or the row up opens the
+shelf into a grid of toys that fills the sheet (the chips and search stay on top); picking a toy
+folds it back to the row. **More** or a tab opens the rest. The toy shrinks to fit above the sheet
+so you can watch your changes. Tap the toy, swipe down, press **Done** or Escape to close either one
+again. The grid can be switched off with `SHELF_GRID` in `src/ui.js`; the handle then opens the
+panel, as before.
 
 ## Controls
 
@@ -196,6 +197,15 @@ can carry a web address instead, so a link or an embed opens the picture from yo
 (docs/SCENE-SCHEMA.md). For now the toys are behind a labs switch: open the site with `?labs=1` to
 see the **Picture lab** on the "Pictures and pages" shelf (`?labs=0` hides it again).
 
+## Photos and videos in 3D (labs)
+
+**Photo to 3D** and **Moving photo to 3D** turn a photo, a GIF or a video into a 3D relief, with
+depth worked out on your device. Each shows the picture two ways: **Sharp picture** (the default),
+the picture itself at full size on the relief, so small text stays readable, and **Splats**, the
+picture rebuilt from Gaussian splats, which the splat tools and effects work on. A saved scene or
+link remembers the choice. How the two differ, what each costs and how they are built:
+[docs/PHOTO-VIEWS.md](docs/PHOTO-VIEWS.md).
+
 ## The Tinkerer's Manual
 
 [The Tinkerer's Manual](https://ryanjosephkamp.github.io/splashery/manual/) (`manual/`, linked from
@@ -221,8 +231,8 @@ them.
 
 ## Look and autoplay
 
-Background (page colour, transparent or any colour), theme (auto, light or dark; auto follows the
-page), accent colour, splat size and exposure. When idle the toy can turn slowly and play one gentle
+Background (page color, transparent or any color), theme (auto, light or dark; auto follows the
+page), accent color, splat size and exposure. When idle the toy can turn slowly and play one gentle
 effect: a breeze, little pokes, a slow twist, or dissolve and rebuild.
 
 **Detail** (Auto, High or Max) sets how many splats toys get and how sharp the canvas is. Auto picks
@@ -297,7 +307,7 @@ The `<splashery-toy>` element embeds a toy without an iframe, with one script ta
 
 Attributes: `scene` (a share payload), `toy`, `theme` (`auto`, `light`, `dark`; auto follows the
 page, including a `paper-theme-change` event on `document` and `data-resolved-theme` on `<html>`),
-`background` (`transparent`, `page` or a colour), `autoplay`, `turntable="off"`, `zoom` (0.5 to 2),
+`background` (`transparent`, `page` or a color), `autoplay`, `turntable="off"`, `zoom` (0.5 to 2),
 `controls="0"` and `label`. It is 4:3 unless you size it, starts when scrolled into view and pauses
 when scrolled away. See [embed/demo.html](embed/demo.html) for both side by side.
 
@@ -345,7 +355,7 @@ its credit to `src/toys.js`, and add it to [CREDITS.md](CREDITS.md).
 Some photoreal toys start as textured 3D models rather than scans.
 [tools/mesh-to-splats.mjs](tools/mesh-to-splats.mjs) turns the CC0 models listed in
 [tools/models.json](tools/models.json) into splats: it downloads each glTF from Poly Haven, scatters
-splats over the surfaces by area, colours each one from the model's textures, skips glass so the
+splats over the surfaces by area, colors each one from the model's textures, skips glass so the
 insides show, and writes `.cache/models/<id>/<id>.ply`, which `tools/prepare-assets.mjs` then packs
 like any scan:
 
@@ -357,7 +367,7 @@ node tools/prepare-assets.mjs ukulele
 
 It reads each texture at the mip level that matches a splat's footprint, so busy textures do not
 alias into grain. Options per model in `tools/models.json` (documented at the top of the tool) can
-bake soft studio light into the colours using the model's normal and occlusion maps, draw lenses as
+bake soft studio light into the colors using the model's normal and occlusion maps, draw lenses as
 dark glass, and paint out printed brand names.
 
 `tools/toy-shots.mjs <out-dir> id ...` renders toys at their home view to PNG files for before and
@@ -371,7 +381,7 @@ point (recipe coordinates) instead of pressing the action.
 
 `tools/rig-map.mjs <out-dir> id ...` renders a scan from the front, right, top and back with an
 orthographic camera and a world grid (0.1 apart), for placing rig regions; `--rig` tints the rig
-parts and colour keys, `--at=0.9` taps and renders the pose that long after.
+parts and color keys, `--at=0.9` taps and renders the pose that long after.
 
 `tools/sound-check.mjs [id ...]` renders every toy's sound offline in headless Chromium and checks
 that it is audible, does not clip and ends within 5 s (`--sheet=out.png` draws spectrograms,
@@ -420,7 +430,7 @@ src/motion.js, patterns.js      whole-toy motion, parts and controls; the patter
 src/sound.js, voices.js         WebAudio output and the voice library (sound specs)
 src/toy-sounds.js               every toy's own sound spec
 src/toy-help.js                 every toy's how-to line and About text (toy help)
-src/rig.js, rigs.js, rig-fx.js  rigs: parts, colour keys, effects and add-ons for scans and shapes
+src/rig.js, rigs.js, rig-fx.js  rigs: parts, color keys, effects and add-ons for scans and shapes
 src/font.js                     5x7 bitmap font (storybook pages, speech bubble)
 src/chess.js                    chess rules, SAN and PGN (the chess set's games)
 src/chem/                       elements, SMILES, 3D layout, molecule files, PDB/mmCIF proteins

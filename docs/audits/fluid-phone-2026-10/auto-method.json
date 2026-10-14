@@ -1,0 +1,112 @@
+{
+  "startedAt": "2026-10-03T23:28:34.419Z",
+  "baseline": "aba77089cd935f20358302a8ba8c7b39215b7f2d",
+  "browser": "154.0.8037.95",
+  "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "args": [
+    "--use-angle=metal",
+    "--enable-webgl",
+    "--ignore-gpu-blocklist",
+    "--enable-unsafe-webgpu",
+    "--disable-background-timer-throttling",
+    "--disable-renderer-backgrounding",
+    "--disable-backgrounding-occluded-windows",
+    "--enable-precise-memory-info"
+  ],
+  "host": {
+    "platform": "darwin",
+    "release": "25.3.0",
+    "cpu": "Apple M3 Pro",
+    "totalMemory": 19327352832
+  },
+  "cells": [
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "auto6",
+      "profile": "auto",
+      "rate": 6,
+      "adaptive": true,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "auto6",
+      "profile": "auto",
+      "rate": 6,
+      "adaptive": true,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "auto6",
+      "profile": "auto",
+      "rate": 6,
+      "adaptive": true,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "auto6",
+      "profile": "auto",
+      "rate": 6,
+      "adaptive": true,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "auto6",
+      "profile": "auto",
+      "rate": 6,
+      "adaptive": true,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "auto6",
+      "profile": "auto",
+      "rate": 6,
+      "adaptive": true,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "auto6",
+      "profile": "auto",
+      "rate": 6,
+      "adaptive": true,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "auto6",
+      "profile": "auto",
+      "rate": 6,
+      "adaptive": true,
+      "renderer": "webgpu"
+    }
+  ],
+  "windowMs": {
+    "idle": 5000,
+    "action": 6000
+  },
+  "seed": 424242,
+  "workerMode": "explicit fluids=worker",
+  "modifications": "worker exposes a read-only snapshot getter; lower settings alter module responses, never checkout source",
+  "gpuMemory": "engine texture accounting plus named storage-buffer byte sizes; excludes driver, framebuffer and process memory"
+}

@@ -1,6 +1,6 @@
 // Sports balls. Generic designs only: classic panels, seams and stitching,
 // no logos or league marks. Seams and stitches are kept out of the pattern
-// layer, so a ball in the colours of a flag keeps its seams. Tap a ball to
+// layer, so a ball in the colors of a flag keeps its seams. Tap a ball to
 // make it hop; Move > Bounce keeps it bouncing.
 
 import {
@@ -34,8 +34,8 @@ const keep = (c, size) => ({ c, keep: true, size });
 const pebble = (c, col, amount = 0.08, f = 38) =>
   shade(col, 1 - amount * 0.5 + amount * c.noise(c.lp[0] * f, c.lp[1] * f, c.lp[2] * f));
 
-// Soft studio light baked into the colours (splats are unlit): a key light
-// from the upper left and a highlight where it glints towards the home view.
+// Soft studio light baked into the colors (splats are unlit): a key light
+// from the upper left and a highlight where it glints toward the home view.
 // Materials read from this, not from random speckle.
 const LIGHT = unit([-0.35, 0.8, 0.5]);
 const VIEW = unit([0.5, 0.28, 0.82]);
@@ -98,7 +98,7 @@ function pebbled(c, f, depth = 0.5) {
   };
 }
 
-// A pebbled, lit surface colour.
+// A pebbled, lit surface color.
 function grip(
   c,
   col,
@@ -159,8 +159,8 @@ function sub(a, b) {
   return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
 }
 
-// A plain ball body with a darker core for Slice. Colour noise is low: the
-// material comes from the colour function.
+// A plain ball body with a darker core for Slice. Color noise is low: the
+// material comes from the color function.
 // The shell is part "ball" and its inside part "core", so a tap can spin
 // it (see "Real throws and bounces").
 function body(k, color, opts = {}) {
@@ -194,7 +194,7 @@ function poleCap(k, s, a = 0.14) {
 // Leather ball with stitched seam (baseball, softball).
 function stitchedBall(k, leather, stitch, { a = 0.72, n = 108 } = {}) {
   const seam = seamCurve(a);
-  // Its colours and what it is (for the light): groove, stitch, band or
+  // Its colors and what it is (for the light): groove, stitch, band or
   // leather.
   const part = (c) => {
     const s = seam(c.ln);
@@ -224,7 +224,7 @@ function stitchedBall(k, leather, stitch, { a = 0.72, n = 108 } = {}) {
 }
 
 // Truncated icosahedron faces (soccer ball): 12 pentagon and 20 hexagon
-// centres; a point belongs to the face its ray meets first.
+// centers; a point belongs to the face its ray meets first.
 function soccerFaces() {
   const pent = [];
   for (const s1 of [-1, 1])
@@ -237,14 +237,14 @@ function soccerFaces() {
   const ip = 1 / PHI;
   for (const s1 of [-1, 1])
     for (const s2 of [-1, 1]) {
-      // Face centres of the icosahedron above (its dual dodecahedron).
+      // Face centers of the icosahedron above (its dual dodecahedron).
       hex.push(
         unit([0, s1 * PHI, s2 * ip]),
         unit([s2 * ip, 0, s1 * PHI]),
         unit([s1 * PHI, s2 * ip, 0]),
       );
     }
-  // Face distances from the centre for edge length 1.
+  // Face distances from the center for edge length 1.
   const faces = [
     ...pent.map((n) => ({ n, h: 2.3274, pent: true })),
     ...hex.map((n) => ({ n, h: 2.2673, pent: false })),
@@ -351,7 +351,7 @@ function segDist(px, py, [x0, y0, x1, y1]) {
   const t = clamp(((px - x0) * dx + (py - y0) * dy) / (dx * dx + dy * dy || 1), 0, 1);
   return Math.hypot(px - x0 - dx * t, py - y0 - dy * t);
 }
-// Distance from (x, y) to the strokes of a number centred at the origin,
+// Distance from (x, y) to the strokes of a number centered at the origin,
 // in units where a digit is `h` tall.
 function numberDist(text, x, y, h) {
   const s = h / 2;
@@ -432,7 +432,7 @@ const arc = (f, peak) => peak * 4 * f * (1 - f);
 // little bigger to close the gaps the far side filled, and its inside
 // ("core", for Slice) hides. The whole toy squashes on the floor (body).
 
-// The home view: across the screen (to the right) and towards the camera,
+// The home view: across the screen (to the right) and toward the camera,
 // both along the floor.
 const ACROSS = unit([VIEW[2], 0, -VIEW[0]]);
 const TOWARD = unit([VIEW[0], 0, VIEW[2]]);
@@ -442,14 +442,14 @@ const CULL_SIZE = 1.15;
 const add3 = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
 const scale3 = (a, s) => [a[0] * s, a[1] * s, a[2] * s];
 const lerp3 = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t]; // prettier-ignore
-// A point on the floor plan: x across the screen, z towards the camera, y up.
+// A point on the floor plan: x across the screen, z toward the camera, y up.
 const at3 = (x, y = 0, z = 0) => add3(add3(scale3(ACROSS, x), scale3(TOWARD, z)), [0, y, 0]);
 // The axis a ball rolls about when it moves along d (topspin for d).
 const rollAxis = (d) => unit(cross(UP, d));
 const easeOut = (x) => 1 - (1 - x) * (1 - x);
 const EASE = { linear: (x) => x, out: easeOut, inout: easeIO, in: (x) => x * x };
 // Each ball's gravity, in its own radii per second squared: a slowed-down
-// real g over the real ball's radius (metres), so a big ball falls slowly
+// real g over the real ball's radius (meters), so a big ball falls slowly
 // for its size and a small one snaps.
 const grav = (r) => 1.4 / r;
 const KICK = [
@@ -703,7 +703,7 @@ function showBall(out, { p, q, squash }, more = {}) {
   // A see-through rim shell (dark balls) only moves: it looks the same turned.
   out.parts.rim = { offset: p };
   if (squash) {
-    // The squash widens the toy about its centre: keep the ball's place.
+    // The squash widens the toy about its center: keep the ball's place.
     const k = 1 + 0.5 * squash;
     const o = [p[0] / k, p[1], p[2] / k];
     out.parts.ball.offset = out.parts.core.offset = out.parts.rim.offset = o;
@@ -711,10 +711,10 @@ function showBall(out, { p, q, squash }, more = {}) {
   }
 }
 
-// Spinning a glossy ball. Its light is baked into its colours, so a copy
+// Spinning a glossy ball. Its light is baked into its colors, so a copy
 // that spins would carry its highlight round with it (a rolling pool ball
 // would look like glass). While it moves it shows instead an unlit copy that
-// spins ("spin": built tiny at the centre, so it always sorts behind, and
+// spins ("spin": built tiny at the center, so it always sorts behind, and
 // grown to size by its part) under a fixed layer of light ("light": a
 // see-through shell that darkens and brightens what is under it just as
 // the baked light did: out = a * base + b). At rest the ball is itself.
@@ -723,7 +723,7 @@ function showBall(out, { p, q, squash }, more = {}) {
 const SPIN_R = 0.04;
 const SPIN_SCALE = 1 / SPIN_R;
 // How many light splats cover a point, as a power (calibrated on renders
-// against the ball at rest); more towards the outline, where the eye looks
+// against the ball at rest); more toward the outline, where the eye looks
 // along the layer.
 const LIGHT_OVERLAP = 3.1;
 const lightOverlap = (n) => LIGHT_OVERLAP * (1 + 1.5 * (1 - Math.max(0, dot(n, VIEW))) ** 2);
@@ -880,7 +880,7 @@ const BASKETBALL_HAND = (() => {
 // The basketball's robot hand: the index finger points up under the ball,
 // the other fingers curl into a fist with the thumb across them, and the
 // wrist and forearm come up from below. It is seen from the palm side,
-// turned a little towards the thumb. Its own frame: x along the knuckles towards the
+// turned a little toward the thumb. Its own frame: x along the knuckles toward the
 // thumb, y up the finger, z out of the palm; sizes in ball radii (times
 // HAND_SIZE). It is built at half size inside the ball's sphere (the toy is
 // framed by all its splats) and grown and moved into place by its parts,
@@ -893,7 +893,7 @@ const HAND_Q = (() => {
 const HAND_SIZE = 1.12;
 const handDir = (l) => quatRotate(HAND_Q, scale3(l, HAND_SIZE));
 const HAND_BUILT = 0.5;
-// The hand's knuckle (its origin) as built: the hand centred in the ball.
+// The hand's knuckle (its origin) as built: the hand centered in the ball.
 const HAND_AT = scale3(handDir([0.14, 0.52, 0]), HAND_BUILT);
 const handB = (l) => add3(HAND_AT, scale3(handDir(l), HAND_BUILT));
 // The index finger's joints up from its knuckle, its length and its joints
@@ -1078,7 +1078,7 @@ const TENNIS_HITS = plan(TN_G, TENNIS).segs.filter((s) => s.L.hit !== undefined)
 // land at its spot, where it takes a dead little bounce (0.5 of its speed).
 const CURVE_AXIS = unit(add3(scale3(ACROSS, -0.87), scale3(UP, 0.5)));
 const BASEBALL = [
-  // The wind-up: back towards the camera and up, in the hand.
+  // The wind-up: back toward the camera and up, in the hand.
   { path: 0.24, pos: (u) => lerp3([0, 0, 0], at3(0.08, 0.28, 0.4), easeIO(u)) },
   {
     path: 0.58,
@@ -1504,7 +1504,7 @@ const WP_RINGS = [0, 0.3, 0.9];
 const GLASS = {
   edge: 0.12,
   band: 0.08,
-  tint: 0.015,
+  tint: 0.2,
   fin: 0.02,
   size: 0.45,
   count: 30000,
@@ -1526,17 +1526,51 @@ const MARBLE = (() => {
   ];
 })();
 
+// ---- Hands-on landings (lane Hands-on H1) -------------------------------------------
+// Each ball lands in Hands-on with its own sound, from its own tap's cues: a
+// hit is { speed (toy radii per second), body }, vol (0.12 to 0.8) how hard.
+const LANDS = {
+  "soccer-ball": (v) => ({ voice: "thud", f: 100, bright: 0.45, vol: v * 1.1 }),
+  "american-football": (v) => ({ voice: "thud", f: 95, bright: 0.3, vol: v }),
+  "tennis-ball": (v) => POCK(820, v),
+  baseball: (v) => ({ voice: "thud", f: 150, bright: 0.5, decay: 0.6, vol: v }),
+  softball: (v) => THUD_SOFT(v),
+  "golf-ball": (v) => ({ voice: "clack", f: 3000, decay: 0.6, vol: v * 0.7 }),
+  "rugby-ball": (v) => ({ voice: "thud", f: 90, bright: 0.35, decay: 1, vol: v }),
+  volleyball: (v) => ({ voice: "thud", f: 120, bright: 0.5, vol: v }),
+  "ping-pong-ball": (v) => ({ voice: "pock", f: 2000, bright: 0.7, decay: 0.5, vol: 0.3 + v }),
+  "cricket-ball": (v) => ({ voice: "thud", f: 140, bright: 0.55, decay: 0.6, vol: v }),
+  "bowling-ball": (v) => ({ voice: "thud", f: 60, bright: 0.2, decay: 1.4, vol: 0.3 + v }),
+  "pool-ball": (v) => ({ voice: "clack", f: 1800, decay: 0.7, vol: v }),
+  pickleball: (v) => ({ voice: "pock", f: 1100, bright: 0.2, decay: 0.8, vol: v }),
+  dodgeball: (v) => BWONG(v),
+  "medicine-ball": (v) => ({ voice: "thud", f: 55, bright: 0.15, decay: 1.6, vol: 0.3 + v }),
+  "lacrosse-ball": (v) => ({ voice: "pock", f: 620, bright: 0.8, vol: v }),
+  "bouncy-ball": (v) => ({ voice: "boing", f: 300, to: 2.6, rate: 16, decay: 0.5, vol: v }),
+  // The marble's clink on a hard landing; a soft one rolls on quietly.
+  marble: (v, hit) => (hit.speed > 1 ? { voice: "clack", f: 2600, decay: 0.5, vol: v * 0.8 } : null), // prettier-ignore
+  "hockey-puck": (v) => ({ voice: "slap", f: 1500, vol: v * 0.8 }),
+  shuttlecock: (v) => ({ voice: "pock", f: 1500, bright: 0.6, decay: 0.5, vol: v * 0.5 }),
+  "flying-disc": (v) => ({ voice: "slap", f: 700, vol: v * 0.6 }),
+};
+// The squash ball's thock brightens as it warms (its bounce grows each throw).
+LANDS["squash-ball"] = (v, hit) => THOCK(Math.round(((hit.body?.restitution ?? 0.25) - 0.25) * 40), v); // prettier-ignore
+const land = (id) => (hit, vol) => LANDS[id](vol, hit);
+
 export const RECIPES = {
   basketball: {
     // A few more splats (as far as the device allows) for the robot hand, so
     // the ball at rest keeps its own.
     density: 1.13,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d9632b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d9632b" }],
     // Dribble: four fast, low bounces, each pushed back down by an unseen
     // hand; then a toss onto the fingertip of a robot hand that comes up
     // from below, where it spins with a slight wobble, and it drops off,
     // bouncing lower each time (about 0.78 of its speed kept), still
     // spinning down.
+    // Hands-on (lane Hands engine A): a basketball's own bounce and grip; an
+    // upward flick while holding it spins it on the fingertip.
+    hands: { material: "basketball" },
     ...throwBall("dribble", "Dribble and spin", grav(0.12), BASKETBALL, {
       extra(e, pose, c, out) {
         showHand(out, e, pose);
@@ -1556,6 +1590,8 @@ export const RECIPES = {
   },
 
   "soccer-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "soccer-ball", sound: land("soccer-ball") },
     options: [
       { key: "panels", label: "Panels", type: "color", default: "#151515" },
       { key: "base", label: "Base", type: "color", default: "#f4f4f2" },
@@ -1592,6 +1628,13 @@ export const RECIPES = {
   },
 
   "american-football": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "american-football", mass: 0.411, r: 0.141, spin: 0.08 },
+      sound: land("american-football"),
+    },
     // Twice the splats (as far as the device allows): it is built twice.
     density: 2,
     options: [{ key: "color", label: "Leather", type: "color", default: "#7a3b1a" }],
@@ -1599,7 +1642,7 @@ export const RECIPES = {
     // axis (six whole turns, so it lands laces up as it started), the nose
     // tipping over at the top, and lands with a wobble. Splats sort in their
     // built pose, so the ball is built twice (PACKS.md 7b, rule 1): the
-    // second copy half a turn round about its long axis, coloured as the
+    // second copy half a turn round about its long axis, colored as the
     // first would be there, and whichever copy is within a quarter turn of
     // its built pose is shown. Its inside hides while it spins.
     ...throwPulse("pass", "Throw a spiral", 2.4),
@@ -1679,6 +1722,13 @@ export const RECIPES = {
   },
 
   "tennis-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "tennis-ball", mass: 0.0577 },
+      sound: land("tennis-ball"),
+    },
     options: [{ key: "color", label: "Felt", type: "color", default: "#cfe23b" }],
     // Slammed onto the floor: it squashes hard and shoots up high with
     // topspin, the felt's fuzz fluffing out at each hit, then bounces lower
@@ -1739,6 +1789,13 @@ export const RECIPES = {
   },
 
   baseball: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "baseball", r: 0.0369 },
+      sound: land("baseball"),
+    },
     // Twice the splats (as far as the device allows): the unlit copy and the
     // light for its spin (glossSpin) take a share, and the ball at rest keeps
     // its own.
@@ -1753,6 +1810,13 @@ export const RECIPES = {
   },
 
   softball: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "softball", mass: 0.188 },
+      sound: land("softball"),
+    },
     // Twice the splats (as far as the device allows): the unlit copy and the
     // light for its spin (glossSpin) take a share, and the ball at rest keeps
     // its own.
@@ -1768,13 +1832,16 @@ export const RECIPES = {
 
   "beach-ball": {
     options: [
-      { key: "c1", label: "Colour 1", type: "color", default: "#e63946" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#f4d35e" },
-      { key: "c3", label: "Colour 3", type: "color", default: "#1d70b8" },
+      { key: "c1", label: "Color 1", type: "color", default: "#e63946" },
+      { key: "c2", label: "Color 2", type: "color", default: "#f4d35e" },
+      { key: "c3", label: "Color 3", type: "color", default: "#1d70b8" },
     ],
     // Punched up, the air slows it at once; it floats down slowly, drifting
     // and turning lazily, lands soft with a wobble and bobs to a stop.
     ...throwBall("toss", "Toss it up", 2.5, BEACH),
+    // Hands-on (lane Hands engine A): light and big, the air holds it up; it
+    // drifts as it falls and lands soft.
+    hands: { material: "beach-ball" },
     build(k, o) {
       const gores = [o.c1, "#fafafa", o.c2, "#2a9d8f", o.c3, "#f77f00"];
       body(
@@ -1794,6 +1861,8 @@ export const RECIPES = {
   },
 
   "golf-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "golf-ball", sound: land("golf-ball") },
     // A chip: it pops up with heavy backspin, lands, checks with a tiny hop,
     // and the backspin grips and pulls it back to its spot.
     ...throwBall("chip", "Chip it", 28, GOLF),
@@ -1801,7 +1870,7 @@ export const RECIPES = {
       const dimples = fibonacciSphere(336);
       const R = 0.088;
       const cosR = Math.cos(R);
-      // Fibonacci neighbours within a dimple's radius sit within ~R*n/2
+      // Fibonacci neighbors within a dimple's radius sit within ~R*n/2
       // indices of the point's own latitude, so only those are checked.
       const n = dimples.length;
       const span = Math.ceil((R * n) / 2) + 6;
@@ -1853,6 +1922,13 @@ export const RECIPES = {
   },
 
   "rugby-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "rugby-ball", mass: 0.435, r: 0.145 },
+      sound: land("rugby-ball"),
+    },
     options: [{ key: "color", label: "Bands", type: "color", default: "#1d4e89" }],
     // A punt: it tumbles end over end up and down, then lands on a point and
     // takes an awkward, lopsided bounce before settling.
@@ -1897,9 +1973,11 @@ export const RECIPES = {
   },
 
   volleyball: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "volleyball", sound: land("volleyball") },
     options: [
-      { key: "c1", label: "Colour 1", type: "color", default: "#f7c948" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#1f4e9c" },
+      { key: "c1", label: "Color 1", type: "color", default: "#f7c948" },
+      { key: "c2", label: "Color 2", type: "color", default: "#1f4e9c" },
     ],
     // A soft set straight up with no spin, then a spike drives it down hard
     // with topspin; it slams into the floor, kicks up and bounces out.
@@ -1918,6 +1996,9 @@ export const RECIPES = {
   "water-polo-ball": {
     // Tossed up, it plunges into the water with a splash, pops back up and
     // bobs on the water line, each bob sending out a ripple.
+    // Hands-on (lane Hands engine A): it floats on a pool, a third under
+    // water; dropped in, it plunges, pops up and bobs to rest.
+    hands: { material: "water-polo-ball", water: true },
     ...throwBall("toss", "Toss it in", WP_G, WATERPOLO, {
       extra(e, pose, c, out) {
         const m = [0, 0, 0, 0];
@@ -1977,13 +2058,15 @@ export const RECIPES = {
   },
 
   "ping-pong-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "ping-pong-ball", sound: land("ping-pong-ball") },
     // Flicked up, it bounces on and on, each bounce lower and quicker, till
     // it buzzes to a stop.
     ...throwBall("flick", "Drop it", PP_G, PINGPONG),
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "white",
         choices: [
@@ -2002,6 +2085,13 @@ export const RECIPES = {
   },
 
   "cricket-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "cricket-ball", mass: 0.159 },
+      sound: land("cricket-ball"),
+    },
     // Twice the splats (as far as the device allows): the unlit copy and the
     // light for its spin (glossSpin) take a share, and the ball at rest keeps
     // its own.
@@ -2012,7 +2102,7 @@ export const RECIPES = {
     ...throwBall("flick", "Seam-up flick", grav(0.036), CRICKET, { gloss: true }),
     build(k) {
       const leather = "#8f1d1d";
-      // lit: (colour, normal, light) => colour. Unlit (for the spinning
+      // lit: (color, normal, light) => color. Unlit (for the spinning
       // copy), the seam keeps the shading of its ridge.
       const paint = (c, lit) => {
         const [x, y] = c.ln;
@@ -2026,7 +2116,7 @@ export const RECIPES = {
           return keep(lit(dash ? "#f2ead4" : shade(leather, 0.8), ridge, { sheen: 0.3 }), 0.6);
         }
         if (Math.abs(x) < 0.008) return keep(lit(shade(leather, 0.7), c.n));
-        // Polished red leather: deep colour and a bright, tight shine.
+        // Polished red leather: deep color and a bright, tight shine.
         return lit(leather, c.n, { sheen: 0.6, tight: 40, soft: 0.3 });
       };
       body(k, (c) => paint(c, lit));
@@ -2039,9 +2129,16 @@ export const RECIPES = {
   },
 
   "bowling-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "bowling-ball", mass: 6.8 },
+      sound: land("bowling-ball"),
+    },
     options: [
-      { key: "c1", label: "Colour 1", type: "color", default: "#3a1f78" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#d946ef" },
+      { key: "c1", label: "Color 1", type: "color", default: "#3a1f78" },
+      { key: "c2", label: "Color 2", type: "color", default: "#d946ef" },
     ],
     // A heavy roll with a hook: it drops onto the lane, rolls away straight
     // and hooks across; the pins crash far off, and it rolls back home.
@@ -2070,6 +2167,13 @@ export const RECIPES = {
   },
 
   "pool-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "pool-ball", mass: 0.163 },
+      sound: land("pool-ball"),
+    },
     // Twice the splats (as far as the device allows): the unlit copy and the
     // light for its spin (glossSpin) take a share, and the ball at rest keeps
     // its own.
@@ -2094,8 +2198,8 @@ export const RECIPES = {
         const x = rgb(base);
         return [0, 1, 2].map((i) => clamp(x[i] * a + b[i], 0, 1));
       };
-      // Its colours, before the light: the number circle on the front and
-      // back, the stripe or the solid colour.
+      // Its colors, before the light: the number circle on the front and
+      // back, the stripe or the solid color.
       const paint = (c) => {
         const [x, y, z] = c.ln;
         if (n > 0 && Math.abs(z) > 0.93) {
@@ -2120,7 +2224,14 @@ export const RECIPES = {
   },
 
   pickleball: {
-    options: [{ key: "color", label: "Colour", type: "color", default: "#dce83a" }],
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "pickleball", mass: 0.0243, bounce: 0.62 },
+      sound: land("pickleball"),
+    },
+    options: [{ key: "color", label: "Color", type: "color", default: "#dce83a" }],
     // Popped up twice, the light holed ball slows fast in the air and
     // knuckles, then lands with a hollow click and a small, dead bounce.
     ...throwBall("pop", "Pop it up", 10, PICKLE),
@@ -2148,7 +2259,14 @@ export const RECIPES = {
   },
 
   dodgeball: {
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d7263d" }],
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "dodgeball", mass: 0.14, r: 0.089 },
+      sound: land("dodgeball"),
+    },
+    options: [{ key: "color", label: "Color", type: "color", default: "#d7263d" }],
     // Lifted and slammed down: the soft rubber squashes flat and wobbles,
     // and it bounces up lively, squashing again.
     ...throwBall("slam", "Slam it down", DB_G, DODGEBALL),
@@ -2158,6 +2276,8 @@ export const RECIPES = {
   },
 
   "medicine-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "medicine-ball", sound: land("medicine-ball") },
     // Heaved up only a little, slowly, it drops with a thud and a big, slow
     // squash, no bounce at all, and a puff of dust.
     ...throwBall("heave", "Heave and drop", MB_G, MEDICINE, {
@@ -2200,7 +2320,9 @@ export const RECIPES = {
   },
 
   "lacrosse-ball": {
-    options: [{ key: "color", label: "Colour", type: "color", default: "#f4f3ef" }],
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "lacrosse-ball", sound: land("lacrosse-ball") },
+    options: [{ key: "color", label: "Color", type: "color", default: "#f4f3ef" }],
     // Slammed down, the hard rubber ball rockets up and bounces hard and
     // fast, the liveliest ball on the shelf.
     ...throwBall("slam", "Slam it down", LX_G, LACROSSE),
@@ -2210,6 +2332,13 @@ export const RECIPES = {
   },
 
   "squash-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "squash-ball", bounce: 0.25 },
+      sound: land("squash-ball"),
+    },
     // Cold, it is dead: dropped, it hardly bounces. Hit over and over, it
     // warms, glows faintly and bounces higher and faster; let go, it bounces
     // out and cools.
@@ -2241,10 +2370,12 @@ export const RECIPES = {
   },
 
   "bouncy-ball": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, soft: 0.15, material: "bouncy-ball", sound: land("bouncy-ball") },
     options: [
-      { key: "c1", label: "Colour 1", type: "color", default: "#ff2e88" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#27e1c1" },
-      { key: "c3", label: "Colour 3", type: "color", default: "#ffe14d" },
+      { key: "c1", label: "Color 1", type: "color", default: "#ff2e88" },
+      { key: "c2", label: "Color 2", type: "color", default: "#27e1c1" },
+      { key: "c3", label: "Color 3", type: "color", default: "#ffe14d" },
     ],
     // Thrown down hard, it ricochets all over, its spin flipping at every
     // bounce, then comes home and settles.
@@ -2255,6 +2386,8 @@ export const RECIPES = {
   },
 
   marble: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "marble", sound: land("marble") },
     // The glass's fins need numbers to read as one clean edge (lane Fix4).
     density: 2,
     options: [{ key: "color", label: "Swirl", type: "color", default: "#1e88e5" }],
@@ -2270,14 +2403,14 @@ export const RECIPES = {
       },
     }),
     build(k, o) {
-      // Clear glass that glints, with twisted vanes of colour inside. The
+      // Clear glass that glints, with twisted vanes of color inside. The
       // vanes turn when it rolls (part "ball"); the glass only moves.
       const glass = k.part("glass");
       const ball = k.part("ball");
       // The glass (lane Fix4). Real glass is clear face on and shows a bright,
       // crisp edge where it turns away. Splats can't see the camera, so the
       // edge is built from "fins": thin splats standing on edge across the
-      // surface, each in a plane through the centre. Face on, the eye sees
+      // surface, each in a plane through the center. Face on, the eye sees
       // every fin edge on, as a hairline, so the glass is nearly clear; at
       // the rim it sees them side on, stacked along its line of sight, so
       // they add up to a solid edge from any side. A dark fin layer outside
@@ -2310,15 +2443,26 @@ export const RECIPES = {
       };
       fins(0.99, "#2c4452", GLASS.edge, GLASS.count);
       fins(0.965, "#f6fcff", GLASS.band, GLASS.count);
-      // A faint tint over the whole ball, face on.
+      // A faint tint over the whole ball. Lane Fix7: stronger toward the rim
+      // than face on (as glass reflects more where it turns away), and it
+      // reflects the room as polished glass does (the light sky above, a
+      // soft horizon, the darker floor below), so the shell reads as a
+      // surface without fogging what is inside.
       k.add(k.sphere(1), {
         even: true,
         jitter: 0,
         part: glass,
         flat: 0.05,
         opacity: GLASS.tint,
+        // Like real glass, clearer face on and denser where it turns away.
+        kind: "rim",
+        params: [0.22, 2.5],
         pattern: false,
-        color: "#cfe6ea",
+        color: (c) => {
+          const y = c.n[1];
+          const sky = mix("#cfe6ea", "#f2f8fb", smoothstep(0.1, 0.8, y));
+          return mix(sky, "#56656e", smoothstep(0.05, -0.35, y));
+        },
       });
       // A highlight up and to the left, crisp at its edge, and its small
       // reflection low on the right (the light coming back off the far
@@ -2371,6 +2515,14 @@ export const RECIPES = {
   },
 
   "hockey-puck": {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      friction: 0.04,
+      material: { preset: "hockey-puck", mass: 0.163 },
+      sound: land("hockey-puck"),
+    },
     density: 2,
     // A slap shot: ice chips spray from the stick, and the puck glides flat
     // across the ice, spinning fast, runs round a wide loop as it slows and
@@ -2453,6 +2605,13 @@ export const RECIPES = {
   },
 
   shuttlecock: {
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: {
+      area: 3,
+      view: 0.6,
+      material: { preset: "shuttlecock", cd: 0.7 },
+      sound: land("shuttlecock"),
+    },
     // Hit up: it flips over cork first and flies up spinning, turns over at
     // the top and floats back down cork first, spinning slower as it falls.
     ...throwPulse("hit", "Hit it", 3),
@@ -2521,7 +2680,9 @@ export const RECIPES = {
   },
 
   "flying-disc": {
-    options: [{ key: "color", label: "Colour", type: "color", default: "#ff5a36" }],
+    // Hands-on (lane Hands-on H1): its own material and landing sound.
+    hands: { area: 3, view: 0.6, material: "flying-disc", sound: land("flying-disc") },
+    options: [{ key: "color", label: "Color", type: "color", default: "#ff5a36" }],
     // A throw: it spins fast and flat, banks into a curve, glides round a
     // loop like a returning throw and settles back, still spinning down.
     ...throwPulse("throw", "Throw", 3),
@@ -2560,7 +2721,7 @@ export const RECIPES = {
         color: (c) => {
           const r = Math.hypot(c.lp[0], c.lp[2]);
           const top = c.lp[1] > 0.06;
-          // Moulded flight rings: two low ridges, lit on one side and shaded
+          // molded flight rings: two low ridges, lit on one side and shaded
           // on the other, and a groove.
           if (top && Math.abs(r - 0.55) < 0.02) return keep(lit(shade(o.color, 0.72), c.n), 0.7);
           let n = c.n;

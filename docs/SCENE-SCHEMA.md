@@ -63,7 +63,7 @@ Saving always writes version 3.
 | `createdAt` | string | ISO time the file was saved (informational).                                                                |
 | `seed`      | int    | 0 to 16,777,215. Seeds every per-splat random choice in the effects, idle pokes and paint splashes.         |
 | `toy`       | object | Which toy; see below.                                                                                       |
-| `look`      | object | Background, theme, accent colour, splat size and exposure.                                                  |
+| `look`      | object | Background, theme, accent color, splat size and exposure.                                                   |
 | `effects`   | object | Every effect's switch and slider values, whether or not it is on.                                           |
 | `paint`     | object | `stamps`: the paint, as a list of brush stamps replayed in order (at most 4,000).                           |
 | `camera`    | object | Orbit pose. `distance` is in multiples of the toy's radius, so it fits any toy.                             |
@@ -90,8 +90,16 @@ One of three kinds:
   The generated shelf toys use the device's default splat count. Toys built from a pack recipe can
   also carry:
   - `options`: the recipe's choices, such as `{ "style": "love", "color": "#c42f3c" }`. At most 16
-    keys; values are numbers, `true`/`false`, `#rrggbb` colours or short lower-case words. The
-    recipe checks their meaning when it builds, so unknown options are ignored.
+    keys; values are numbers, `true`/`false`, `#rrggbb` colors, short lower-case words, or plain
+    ASCII text of up to 24,000 characters (only the printable characters from space to `~`, kept as
+    typed; the equation and QR toys' input). The recipe checks their meaning when it builds, so
+    unknown options are ignored.
+    - Photo to 3D and Moving photo to 3D (`photo-3d`, `moving-photo-3d`; added October 8, 2026, lane
+      Photo sharp view r2): `view` is `"sharp"` (Sharp picture: the picture itself on a 3D relief)
+      or `"splats"` (Splats). It is written when someone picks a view, without rebuilding the toy. A
+      scene without it, such as every scene and link saved before, opens in Sharp picture, the
+      default. Splats' own look is the recipe option `detail`: `"photo"` (Fine, the default) or
+      `"splats"` (One color per splat). See [PHOTO-VIEWS.md](PHOTO-VIEWS.md).
   - `clay`: clay edits, as for generated toys below.
 
   - `media` (picture toys, such as the Picture lab; added September 28, 2026): what the toy's
@@ -111,14 +119,22 @@ One of three kinds:
     `page` is the page showing, counted from 0 (left out on the first page). Scenes without `media`
     load exactly as before.
 
-  All three are left out when empty.
+  - `figures` (page toys, such as Your book; added October 5, 2026, lane Pages r6): the figures an
+    author raised deeper than the toy's own depth, so a page opens with them at that depth:
+    `[{ "page": 3, "box": [0.1, 0.2, 0.6, 0.55], "depth": 2.5 }]`. `page` counts from 0; `box` is
+    `[x0, y0, x1, y1]` in fractions of the page from its top-left corner; `depth` multiplies the
+    toy's own depth, from 1 to 6. At most 64; anything else is dropped. Scenes without it (every
+    scene saved before) raise every figure at the toy's own depth, as before.
+
+  All four are left out when empty.
 
 - `{ "kind": "procedural", "id": null, "generator": {…}, "clay": […] }`: a generated toy.
   - `generator.shape`: `sphere`, `blob`, `torus`, `capsule` or `knot`.
   - `generator.palette`: `candy`, `ocean`, `meadow`, `sunset`, `ink`, `neon`, `planet` or
     `frosting`.
   - `generator.seed`: 0 to 4,294,967,295.
-  - `generator.count`: splats, 2,000 to 300,000 (clamped to 120,000 on weak devices).
+  - `generator.count`: splats, 2,000 up to the tier's ceiling (clamped to 120,000 on Low, 240,000 on
+    Mid, 300,000 on High, and 400,000 on Max).
   - `generator.sizeJitter`, `generator.roughness`, `generator.colorNoise`: 0 to 1.
   - `clay`: clay edits replayed in order after generation, each `["a" | "e", x, y, z, radius]` in
     the toy's own coordinates (`a` adds a lump, `e` erases everything inside the sphere). At most
@@ -130,13 +146,13 @@ One of three kinds:
 
 ### `look`
 
-| Key          | Values                                                                             |
-| ------------ | ---------------------------------------------------------------------------------- |
-| `background` | `"page"` (the theme's page colour), `"transparent"`, or a colour like `"#f4efe6"`. |
-| `theme`      | `"auto"` (follow the page or system), `"light"` or `"dark"`.                       |
-| `accent`     | `"auto"` (the theme's accent) or a colour. Used by the slice edge and magnet glow. |
-| `splatScale` | 0.3 to 2.5, multiplies every splat's size.                                         |
-| `exposure`   | 0.3 to 2.5, multiplies colour.                                                     |
+| Key          | Values                                                                            |
+| ------------ | --------------------------------------------------------------------------------- |
+| `background` | `"page"` (the theme's page color), `"transparent"`, or a color like `"#f4efe6"`.  |
+| `theme`      | `"auto"` (follow the page or system), `"light"` or `"dark"`.                      |
+| `accent`     | `"auto"` (the theme's accent) or a color. Used by the slice edge and magnet glow. |
+| `splatScale` | 0.3 to 2.5, multiplies every splat's size.                                        |
+| `exposure`   | 0.3 to 2.5, multiplies color.                                                     |
 
 ### `effects`
 
@@ -144,16 +160,16 @@ All sliders are 0 to 1 unless noted. Tools (`poke`, `magnet`, `paint`) act where
 the toy; their `on` is always `false` in a file. Ambient effects run by themselves while `on`.
 `drop` and `dissolve` never run together.
 
-| Effect     | Keys                                                                                     |
-| ---------- | ---------------------------------------------------------------------------------------- |
-| `poke`     | `strength`, `wobble` (how long the ripples ring)                                         |
-| `wind`     | `strength`, `direction` (0 to 360 degrees; 0 blows towards the right edge of the screen) |
-| `dissolve` | `spread`, `speed`                                                                        |
-| `drop`     | `bounce`, `scatter`                                                                      |
-| `magnet`   | `strength` (-1 to 1: negative scatters, positive attracts), `radius`                     |
-| `twist`    | `amount` (-1 to 1), `wobble` (0 holds the twist still), `axis` (`x`, `y` or `z`)         |
-| `slice`    | `position` (-1 to 1), `sweep` (0 holds the plane still), `axis` (`x`, `y` or `z`)        |
-| `paint`    | `size`, `splash`, `color` (the brush)                                                    |
+| Effect     | Keys                                                                                    |
+| ---------- | --------------------------------------------------------------------------------------- |
+| `poke`     | `strength`, `wobble` (how long the ripples ring)                                        |
+| `wind`     | `strength`, `direction` (0 to 360 degrees; 0 blows toward the right edge of the screen) |
+| `dissolve` | `spread`, `speed`                                                                       |
+| `drop`     | `bounce`, `scatter`                                                                     |
+| `magnet`   | `strength` (-1 to 1: negative scatters, positive attracts), `radius`                    |
+| `twist`    | `amount` (-1 to 1), `wobble` (0 holds the twist still), `axis` (`x`, `y` or `z`)        |
+| `slice`    | `position` (-1 to 1), `sweep` (0 holds the plane still), `axis` (`x`, `y` or `z`)       |
+| `paint`    | `size`, `splash`, `color` (the brush)                                                   |
 
 ### `pattern`
 
@@ -163,18 +179,18 @@ the toy; their `on` is always `false` in a file. Ambient effects run by themselv
 | `flag`       | For `flag`: a country code from `assets/flags/flags.json` (ISO 3166 alpha-2, plus `xk` for Kosovo).                   |
 | `projection` | `wrap` (around the toy's up axis), `front` (straight through from the front) or `globe` (latitude and longitude).     |
 | `repeats`    | 1 to 4: how many times the design goes around (not used by `front`).                                                  |
-| `colors`     | Three colours for the patterns that use them.                                                                         |
+| `colors`     | Three colors for the patterns that use them.                                                                          |
 | `scale`      | 0 to 1: how big the stripes, dots or checks are.                                                                      |
-| `amount`     | 0 to 1: how strongly the pattern covers the toy's own colours.                                                        |
+| `amount`     | 0 to 1: how strongly the pattern covers the toy's own colors.                                                         |
 | `detail`     | 0 to 1: how much of the toy's own light and shade shows through.                                                      |
 
-Seams, stitching, flames and similar details that a recipe marks keep their own colours.
+Seams, stitching, flames and similar details that a recipe marks keep their own colors.
 
 ### `motion`
 
 | Key        | Values                                                                                                  |
 | ---------- | ------------------------------------------------------------------------------------------------------- |
-| `alive`    | `true` lets a pack toy's own behaviours run (flames flicker, hearts beat).                              |
+| `alive`    | `true` lets a pack toy's own behaviors run (flames flicker, hearts beat).                               |
 | `move`     | `still`, `bounce`, `spin`, `wobble` or `float`: how the whole toy moves (any toy).                      |
 | `speed`    | 0 to 1.                                                                                                 |
 | `controls` | A pack toy's control values, 0 to 1 (for example `open` for the treasure chest's lid). At most 16 keys. |

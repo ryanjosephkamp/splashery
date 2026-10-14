@@ -62,7 +62,7 @@ or reformat anyone else's lines, so git can merge the lanes line by line.
 - `src/toy-sounds.js` (each toy's sound spec)
 - `src/toy-help.js` (each toy's how-to line and About text, in its shelf's section)
 - `tools/toy-plan.json` (each toy's plan entry: `"v": "keep"` and `improved` when finished)
-- `src/toys.js` (the shelf catalogue: only new toys add rows)
+- `src/toys.js` (the shelf catalog: only new toys add rows)
 - `src/rigs.js` (a scan's rig)
 - `tools/assets.json`, `tools/models.json`, `CREDITS.md`, `LICENSES.md` (add your lines)
 
@@ -114,9 +114,9 @@ reconciles the worker sessions and brings him finished work.
 3. **Model and effort.** Each worker runs its lane's assigned model (Opus 5.5 or Sonnet 5.5); any
    other model needs the owner's permission first. At every check-in the Operator reads the worker's
    session record, and if it has run on another model (a fallback), the Operator stops it and tells
-   the owner. Effort is the default for now, a trial the owner chose. If either of them thinks it
-   isn't enough, the owner adds `CLAUDE_CODE_EFFORT_LEVEL=xhigh` to the environment's variables, and
-   every new session runs at Extra High. Helpers use the worker's own model.
+   the owner. Effort is high for every worker, lanes and Integrators alike (the owner's call of
+   October 8, 2026). The Operator checks it in the session record too and tells the owner if a
+   worker runs at another level. Helpers use the worker's own model.
 4. **Messages.** A worker never asks the owner. It ends each working turn with a short final
    message: "READY:" (PR link, card ids, test results, anything for the Operator), "WORKING:" (what
    is left) or "BLOCKED:" (exactly what it needs). The Operator reads it from the session record,
@@ -160,13 +160,14 @@ site.
 
 1. **Notes.** The owner sends notes as a Markdown file (voice-typed is fine). He names only the toys
    he wants to comment on; any toy he doesn't mention stays as it is.
-2. **Filed.** The Operator keeps the notes word for word in `docs/reviews/sounds-<date>.md` and
-   writes a clean version per toy into `tools/sound-review.json`:
-   `{ "round", "note", "toys": { "<toy id>": { "status", "said", "note", "plan", "candidates" } } }`.
+2. **Filed.** The owner's notes stay private (CLAUDE.md, "Ground rules"). The Operator writes a
+   clean version per toy, in its own words, into `tools/sound-review.json`:
+   `{ "round", "note", "toys": { "<toy id>": { "status", "note", "plan", "candidates" } } }`.
    `status` is `keep`, `change`, `ready` (a new sound to hear), `approved` or `site` (in the site);
-   `said` is his words, `note` the clean version, `plan` what the new sound will be. The Sound Board
-   shows each toy's line, with filters (All, To change, Ready to hear, Approved), "Play through"
-   (the filtered toys one after another, the name shown large) and optional marks.
+   `note` is the clean version, `plan` what the new sound will be. (Older entries had a `said` field
+   with his words; it is being removed.) The Sound Board shows each toy's line, with filters (All,
+   To change, Ready to hear, Approved), "Play through" (the filtered toys one after another, the
+   name shown large) and optional marks.
 3. **New sounds, on the board only.** Sound lanes add candidates to their toys' entries:
    `candidates: [{ "id": "a", "label": "New A", "sound": <spec> }]`, with the same specs as
    `src/toy-sounds.js`. New voices go in `tools/sound-voices-next.js` as `VOICES.name = { … };`
@@ -236,6 +237,51 @@ board with its lane's review.
 - A lane's own extra tests go in `tests/<prefix>.spec.mjs` (for example `tests/e5.spec.mjs`). Don't
   edit the other spec files; a change to one is a shared change for the Operator.
 
+### Running the suite fast
+
+The Integrators' command for the full run in the cloud container (lane Suite speed, October 8,
+2026):
+
+```
+node tools/suite.mjs --gl=llvmpipe --jobs=2
+```
+
+- `tools/suite.mjs` runs every spec file in its own single-worker Playwright process, with a JSON
+  report per file in `.cache/suite/`. **It picks up where it stopped**: the container restarts when
+  a session sits idle for a while, which kills a plain `npx playwright test` run and all its
+  results; after a restart, run the same command again and only the unfinished files run. Start a
+  new run with `--fresh`. It prints (and saves as `.cache/suite/summary.md`) the failures, the
+  slowest files and the slowest tests; `--report` prints that again without running anything.
+- `--gl=llvmpipe` draws WebGL2 with Mesa's llvmpipe (on a virtual display the tool starts) instead
+  of SwiftShader: the same frames, two to three times faster. `--jobs=2` runs two files at once,
+  longest first. Together they took the full run from 5 h 24 min (170 files, one at a time, on
+  SwiftShader) to 2 h 45 min (183 files; lane Suite speed, October 8, 2026), and the Worlds files
+  boot about ten times faster than before. Three at once was faster still but made a timing test
+  fail; keep it at two.
+- `tools/suite.json` holds each file's time (refresh with `--save-times`) and two short lists:
+  `solo`, files that check the wall clock and fail beside another file (they run at the end, one at
+  a time), and `swiftshader`, files that fail on llvmpipe (they run on SwiftShader in a
+  `--gl=llvmpipe` run). The tests themselves never change for speed.
+- **A failure in a fast run.** Add `--recheck` (or run the same command again with it once the run
+  is done): each file that failed runs once more, alone, and the summary lists which ones passed
+  alone. The failures still count and the exit code stays 1; a test that passes alone is a
+  wall-clock check that a busy CPU upset. Put its file on `solo` (or, if it fails only on llvmpipe,
+  on `swiftshader`) in your PR with the evidence, and report the failure as you would any other. A
+  test that fails alone too is a real failure.
+- Same tests, same config, no retries: nothing is skipped or loosened. The default
+  (`npx playwright test`, SwiftShader, headless) is unchanged, and the owner's Mac keeps its own
+  GPU.
+- Long runs: start it in the background, check on it every 30 to 60 minutes, and rerun the command
+  if the container restarted. Don't wait in short polls.
+- Two sessions can share a run: `--shard=1/2` in one and `--shard=2/2` in the other split the files
+  by time.
+- One file: `node tools/suite.mjs --files=kit,taps` (or `npx playwright test tests/kit.spec.mjs` as
+  before). Anything after `--` goes to Playwright (`-- --trace=on`).
+- Screenshots from a fast run look the same but are not byte-for-byte the ones a SwiftShader run
+  writes (llvmpipe rounds a few pixels differently, and effects are caught at slightly different
+  moments). Restore the standard ones as usual (below); a lane's own screenshots can come from
+  either.
+
 ## Screenshots
 
 - CLAUDE.md asks for screenshots at 390×844 and 1440×900. A lane saves its own as
@@ -266,8 +312,12 @@ clips and cards at the same time without republishing it. The collections (the s
   else "(No note; plan: …)" with the plan's effect), `now` what the tap does now in plain words with
   its length, `asset` the uploaded clip's id, `at` the date (YYYY-MM-DD). Older cards use `clip` (a
   file published with the page, such as `e4/oak.gif`) instead of `asset`.
-- `verdicts/<card id>`: the owner's marks, `{ verdict: "good" | "fix" | "", note, at }`. Only the
-  owner writes these.
+- `verdicts/<card id>`: the owner's marks,
+  `{ verdict: "good" | "fix" | "", note, at, sharper, images }` (`sharper: true` marks a "Just
+  sharper" fix on page 2, below). Only the owner writes these. On page 2, `images` (since October
+  9, 2026) lists the asset ids of screenshots the owner attached to the note, shrunk to JPEG at most
+  2000 pixels long; a lane reads each one with the Artifact tool's `read` (`url` the page, `path`
+  the id) and looks at it before fixing the card.
 
 Card ids are `<prefix>-<toy id>`, with a variant after it (`e5-cherries-pair`). A clip redone after
 the owner's note gets the old card's id plus `-r2` (then `-r3`), in the old card's lane. A card's
@@ -326,7 +376,7 @@ simulations, not novelty toys. Its collections:
 - `ideas/<idea id>`:
   `{ day, order, name, kind: "kit" | "scan", shelf, tap, sound, why, notes, source, lane, reply, revised, set, setNote, from }`.
   The id is a slug of the name. A scan idea's `source` is `{ title, url, licence, author }`, with
-  the licence checked on the live source page (CC0 or CC BY only). `set` groups ideas under a
+  the license checked on the live source page (CC0 or CC BY only). `set` groups ideas under a
   heading within their day (`setNote` is its line), and `from: "owner"` tags the owner's own ideas.
   Only the Operator writes ideas.
 - `marks/<idea id>`: the owner's marks, `{ mark: "approve" | "change" | "skip" | "", note, at }`.
@@ -357,7 +407,7 @@ phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules
   force-push a branch that has been pushed. The session's PR watcher does this when a merge-conflict
   notice arrives, and at each check-in.
 - Resolving:
-  - Shared lists (`src/toy-sounds.js`, `tools/toy-plan.json`, `src/toys.js`, credits, licences,
+  - Shared lists (`src/toy-sounds.js`, `tools/toy-plan.json`, `src/toys.js`, credits, licenses,
     asset lists): keep both sides' lines.
   - `docs/TOY-PLAN.md`: take main's copy (`git checkout origin/main -- docs/TOY-PLAN.md`), then
     regenerate it as above.
@@ -377,6 +427,69 @@ phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules
 - While lanes run in parallel, a lane uses at most one helper subagent at a time. The Operator uses
   none.
 - The Operator starts the next lane when a slot is free, in the order in ROADMAP.md.
+
+### The save point (when an account's weekly usage is nearly gone)
+
+The owner's request of October 3, 2026: when an account is in its last 5% or so of weekly usage, all
+work on it is saved and easy to pick up after the reset (automatic or manual). The owner says "save
+point" (naming the account), or reports 95% or more.
+
+1. The Operator tells every lane on that account at once: a PR comment starting "From the Operator:
+   save point" for each cloud lane, and one paste line for the owner's local tabs: "Save point:
+   commit and push your work now, set State to PAUSED with your next step, then stop."
+2. Each lane, right away:
+   - commits its work in progress (a commit titled "WIP (save point): …" is fine) and pushes its
+     branch; it stops any test run that is going;
+   - sets its handoff file's State line to "PAUSED (save point): <the exact next step>", and lists
+     what is half done, the last test results and any clip not yet posted;
+   - pushes that, and stops: no new turns, no check-ins.
+3. The Operator:
+   - merges nothing and starts nothing;
+   - cancels its check-ins except one set for just after the reset;
+   - writes the resume list (each lane, its branch and its next step) into HANDOFF.md, or into the
+     backup kit if there's too little usage left for a PR;
+   - sends the owner a fresh backup kit.
+4. After the reset, the owner says "resume". The Operator restarts each lane with "Read
+   docs/handoff/<lane>.md and continue from its State line", oldest first, within the usual limits.
+
+If the Operator's own account is the one running out, it does steps 1 to 3 first, then stops.
+
+## Local lanes (the second account, on the owner's Mac)
+
+Since October 3, 2026 (the owner's call that afternoon), some lanes run in Claude Code on the
+owner's Mac, signed in to his second Claude account, so they use that account's weekly usage. The
+Operator still writes their briefs, reviews their PRs and clips, and merges; only the mechanics
+differ. A local lane's brief says "Local lane" at the top. Its session:
+
+- **Starts** from the owner, in a terminal, in the lane's own folder (a git worktree on the lane's
+  branch), with the one-line prompt "Read docs/handoff/<lane>.md in this repository and do it." Its
+  brief is already in that file, so it adds "## State" below it instead of copying it.
+- **Has its own port.** Several lanes share one computer, and the test server reuses whatever
+  already answers on its port, so a lane on another lane's port tests the wrong files. Before any
+  test or tool, in each new shell:
+  `export SPLASHERY_PORT=<its port> SPLASHERY_URL=http://127.0.0.1:<its port>/`, and start the
+  tools' server from the lane's own folder with
+  `python3 -m http.server <its port> --bind 127.0.0.1`. Never use 4173 there. Most tools read
+  `SPLASHERY_URL`; `tools/sound-check.mjs` takes `--base=http://127.0.0.1:<its port>` instead.
+- **Tests** its own spec files, plus `tests/kit.spec.mjs`, `tests/taps.spec.mjs`,
+  `tests/help.spec.mjs` and `tests/unit.spec.mjs`, on its port. Four files still expect 4173 (`bk`,
+  `pic`, `smoke`, `vw`): skip them locally and say so in the PR; the Integrators run the full suite
+  in the cloud before anything merges. On the Mac, leave `SPLASHERY_CHROMIUM` unset (the owner
+  installed Playwright's own Chromium once); never run `playwright install`.
+- **Gets messages** as comments on its own PR that start "From the Operator". It reads them
+  (`gh api repos/ryanjosephkamp/splashery/issues/<PR>/comments`) when it starts each item of its
+  brief and before every push, and does what they say.
+- **Reports** in its handoff file: the first line under "## State" is "READY:", "WORKING:" or
+  "BLOCKED:" with the date and time, kept current and pushed, because the Operator can't read a
+  local session. It ends its session with the same line.
+- **Posts clips** as in "Steps for a lane" if its Artifact tools can read page 2 (the owner shares
+  page 2 with his second account). If they can't, it pushes the MP4 clips and a `cards.json` (the
+  card documents of step 4, with `"file"` naming each clip in place of `"asset"`) to its own branch
+  `claude/clips-<lane>` (never merged), and the Operator posts them. The owner's marks then reach it
+  through the owner, never through the repo or a PR.
+- **Keeps going** while the owner is away: when one item is blocked, it says so in "State" and moves
+  on to the next item of its brief. It pushes only its own branches, never merges, and never asks
+  the owner anything in the terminal.
 
 ## Branches and PRs
 
@@ -413,7 +526,58 @@ phone with `grooph share docs/lane-loop.grooph.json`. Update it when these rules
    screenshots back, and `npx prettier --check .` is clean.
 5. Your handoff file says what was done, the known issues, and anything for the Operator.
 6. The PR is ready for the owner. Finish with "READY:" for the Operator. Keep the PR mergeable, and
-   fix whatever the owner marks "Needs work" in the same PR.
+   fix whatever the owner marks "Needs work" in the same PR. Since October 3, 2026 a "fix" mark on
+   Effect review page 2 is stored only when the owner sends it with its note, so every "fix" a lane
+   reads carries his note; act on the note, and if a "fix" ever comes without one, ask the Operator
+   instead of guessing. Since October 7, 2026 page 2 also has a **"Just sharper"** button: one tap
+   stores a "fix" with `sharper: true` and the note "Everything else looks right. Just make it
+   sharper and less grainy (finer, denser splats where it shows; no blur, no speckle)." Read it as
+   exactly that: keep the effect, its motion, colors and timing as they are, and only sharpen it
+   (finer, denser splats where it shows, solid opaque materials, no blur or speckle, still smooth on
+   a phone). Post the sharper clip as the card's replacement. If something else also needs work, the
+   owner uses "Needs work" with his own note instead.
+
+## The merge tool (the Operator)
+
+`tools/op-merge.mjs` (the owner's pick of October 7, 2026) does the Operator's merge routine in one
+command, so a merge costs a few lines of output instead of a long session:
+
+```sh
+node tools/op-merge.mjs --topic oct7c --trailer-file .cache/trailers.txt \
+  --pr 389:<full sha> --title 389="Phase Showcase: the galaxy-box caption fits again" \
+  --pr 391:<full sha> --title 391="Phase Space r3: handoff after merge"
+```
+
+1. It fetches main (and any PR head it lacks, as `pull/<n>/head`), makes
+   `claude/operator-merge-<topic>` from `origin/main` and merges each head in the order given with
+   `--no-ff` and the message "Merge #<n> (<title>)" plus the trailer lines.
+2. A conflict in a generated file (site/ apart from the hand-written site/assets/, docs/TOY-PLAN.md,
+   src/showcase/facts.json) takes one side and is rebuilt in step 4. A conflict in
+   `tools/sound-review.json` is merged toy by toy (3-way, per key under "toys"). Anything else stops
+   with the files named and the merge left in progress: resolve them, `git add` them and rerun the
+   same command with `--continue` (or `git merge --abort`).
+3. It checks that `src/toys.js`, `src/toy-help.js` and `src/toy-sounds.js` parse and that the four
+   JSON lists are valid.
+4. It runs `toy-plan.mjs`, `site-build.mjs` and `shw-facts.mjs`, formats their output, runs both
+   `--check`s and commits "Ops: rebuild site/ after #a, #b" when anything changed.
+5. It runs the specs the PRs touched with `--workers=1`, restores the screenshots, and runs
+   `npx prettier --check .` and `node tools/us-english.mjs --diff`. The specs (the PR body says why
+   each one ran):
+   - changed specs, and specs whose prefix starts a changed file's name in src/, tools/ or
+     tests/screenshots/;
+   - taps, hta, help, unit and kit when `src/toys.js`, `src/toy-help.js` or `src/toy-sounds.js`
+     changes or a PR adds a kit toy;
+   - for a changed `src/packs/<pack>.js`, every spec that names one of that pack's toy ids;
+   - smoke (the embed transfer ≤ 30 MB test) when anything under assets/ changes;
+   - site, spg and tpg when a PR changes site/.
+6. It writes the PR body (the five sections) to `.cache/op-merge/<topic>-pr.md` and prints a title.
+   The full output is in `.cache/op-merge/<topic>.log` (and `<topic>-tests.log`).
+
+`--dry-run` predicts each merge (clean, settles itself, or stops on which files) and the specs it
+would run, without touching a branch. `--no-tests` skips the specs; `--spec <file>` adds one. Exit
+code 0 means all green, 1 a stop, 3 finished with a failing check (under Known issues). The tool
+never pushes, opens or merges a PR: push the branch, open the PR with the body (add your own
+footer), and merge it through GitHub as before.
 
 ## Upkeep after a merge (the Operator)
 

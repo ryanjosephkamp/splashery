@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>What Splashery can do</title>
+    <meta
+      name="description"
+      content="A live reel of Splashery's toys: each scene builds a toy of 3D Gaussian splats on your device and plays its effect, with a line on why it matters."
+    />
+    <meta name="robots" content="noindex" />
+    <meta name="color-scheme" content="dark" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cg opacity='.92'%3E%3Cellipse cx='24' cy='26' rx='14' ry='11' fill='%23ff5fa2'/%3E%3Cellipse cx='40' cy='24' rx='12' ry='13' fill='%237bdff2'/%3E%3Cellipse cx='33' cy='41' rx='15' ry='11' fill='%23ffd166'/%3E%3C/g%3E%3C/svg%3E"
+    />
+    <link rel="stylesheet" href="../src/showcase/showcase.css" />
+    <script>
+      // The reel is a labs page and plays labs toys with their labs looks, so
+      // it opens with the labs switch on, as the Worlds link does.
+      if (!/[?&]labs=/.test(location.search)) {
+        const q = new URLSearchParams(location.search);
+        q.set("labs", "1");
+        history.replaceState(null, "", `${location.pathname}?${q}${location.hash}`);
+      }
+    </script>
+    <link rel="modulepreload" href="../vendor/playcanvas/playcanvas.min.mjs" />
+    <script type="module" src="../src/showcase/reel.js"></script>
+  </head>
+  <body>
+    <div class="shw">
+      <header class="shw-top">
+        <a class="shw-brand" href="../?labs=1">Splashery</a>
+        <span class="shw-labs">Labs</span>
+        <span class="shw-chapter" id="shw-chapter"></span>
+        <ol class="shw-progress" id="shw-progress" aria-label="Scenes"></ol>
+      </header>
+
+      <div class="shw-stage">
+        <canvas
+          id="stage"
+          tabindex="0"
+          role="img"
+          aria-label="The toy playing in this scene"
+        ></canvas>
+        <p class="shw-loading" id="shw-loading" hidden>Building…</p>
+      </div>
+
+      <section class="shw-caption" id="shw-caption" aria-live="polite">
+        <p class="shw-kicker" id="shw-kicker"></p>
+        <h1 class="shw-name" id="shw-name">What Splashery can do</h1>
+        <p class="shw-what" id="shw-what"></p>
+        <p class="shw-why" id="shw-why"></p>
+        <p class="shw-fact" id="shw-fact"></p>
+      </section>
+
+      <nav class="shw-controls" aria-label="Reel controls">
+        <button type="button" id="shw-prev" aria-label="Previous scene">⏮</button>
+        <button type="button" id="shw-play" class="shw-main" aria-label="Pause">⏸</button>
+        <button type="button" id="shw-next" aria-label="Next scene">⏭</button>
+        <button
+          type="button"
+          id="shw-chapters"
+          aria-haspopup="dialog"
+          aria-label="Chapters"
+          title="Chapters"
+        >
+          ☰
+        </button>
+        <button type="button" id="shw-sound" aria-pressed="false" aria-label="Sound off">🔇</button>
+        <a id="shw-open" class="shw-open" href="../?labs=1" target="_blank" rel="noopener"
+          >Open this toy</a
+        >
+      </nav>
+
+      <div class="shw-intro" id="shw-intro">
+        <div class="shw-intro-card">
+          <p class="shw-kicker">Splashery · Labs</p>
+          <h2 id="shw-intro-title">What Splashery can do</h2>
+          <p id="shw-intro-text"></p>
+          <button type="button" id="shw-start" class="shw-start">Play the reel</button>
+          <p class="shw-small" id="shw-intro-small"></p>
+        </div>
+      </div>
+
+      <dialog id="shw-list" class="shw-list" aria-labelledby="shw-list-title">
+        <form method="dialog" class="shw-list-head">
+          <h2 id="shw-list-title">Chapters</h2>
+          <button type="submit" aria-label="Close">✕</button>
+        </form>
+        <ol id="shw-list-items"></ol>
+      </dialog>
+
+      <section class="shw-fallback" id="shw-fallback" hidden>
+        <p>
+          This browser cannot start WebGL2 or WebGPU, so the toys cannot play here. Try another
+          browser or device.
+        </p>
+      </section>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,727 @@
+{
+  "toy": "powers-of-ten",
+  "checked": "2026-10-06",
+  "summary": "One zoom through real scales, each stop a real picture or real data at its true size, centered on a garden beside the Smithsonian Castle. Each stop's label names its size; the list below gives each size and where it comes from. The planets, the Moon and the stars are placed for one real moment (16:54 UTC, October 7, 2026), straight up from the garden.",
+  "stops": [
+    {
+      "id": "galaxy",
+      "power": 21,
+      "label": "The Milky Way, about 100,000 light-years across. No one can photograph it from outside: this is M83, a spiral galaxy much like it, set at our galaxy's size and tilt.",
+      "size_m": 946070000000000000000,
+      "sizeInLabel": "100,000 light-years",
+      "how": "M83's picture (ESO), its disk masked, is laid in the galactic plane at 100,000 light-years across, its center at the real galactic center 8,178 pc from the Sun in the real direction (the J2000 galactic frame), seen from straight up over the garden at the zoom's moment.",
+      "where": "src/packs/powers-of-ten.js (buildGalaxy); src/powers/sky.js (GALACTIC)",
+      "verdict": "simplified",
+      "sources": [
+        {
+          "title": "The Milky Way Galaxy",
+          "publisher": "NASA Goddard (Imagine the Universe)",
+          "url": "https://imagine.gsfc.nasa.gov/features/cosmic/milkyway_info.html",
+          "says": "The Milky Way is about 1,000,000,000,000,000,000 km (about 100,000 light years or about 30 kpc) across. ... It lies about 8 kpc from the center."
+        },
+        {
+          "title": "A geometric distance measurement to the Galactic center black hole with 0.3% uncertainty (A&A 625, L10, 2019)",
+          "publisher": "GRAVITY Collaboration, via arXiv",
+          "url": "https://arxiv.org/abs/1904.05721",
+          "says": "This yields a geometric distance estimate: R0 = 8178 ± 13 (stat.) ± 22 (sys.) pc."
+        },
+        {
+          "title": "M83 (eso0825a)",
+          "publisher": "ESO",
+          "url": "https://www.eso.org/public/images/eso0825a/",
+          "says": "The picture used, CC BY 4.0."
+        }
+      ],
+      "note": "The Milky Way can't be photographed from outside; M83 is a stand-in, scaled from its own size (about 55,000 light-years) to the Milky Way's."
+    },
+    {
+      "id": "stars-local",
+      "power": 19.4,
+      "label": "About 98,000 stars within 1,600 light-years of the Sun, where they really are.",
+      "size_m": 15140000000000000000,
+      "sizeInLabel": "1,600 light-years",
+      "how": "tools/pot-stars.mjs keeps the 97,823 HYG v4.4 stars with a distance up to 500 pc (1,631 light-years) and places each at its catalog x, y, z (equatorial J2000); dot sizes show brightness, colors temperature from B−V.",
+      "where": "tools/pot-stars.mjs; src/packs/powers-of-ten.js (buildLocalStars)",
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "sources": [
+        {
+          "title": "HYG database v4.4",
+          "publisher": "David Nash (astronexus), Codeberg",
+          "url": "https://codeberg.org/astronexus/hyg",
+          "says": "Hipparcos, Yale Bright Star and Gliese catalogs combined, with positions in parsecs (x, y, z). Licensed CC BY-SA 4.0."
+        }
+      ],
+      "note": "Hipparcos distances beyond a few hundred parsecs carry large errors; phones show the brightest 25,000 to 45,000 of the stars."
+    },
+    {
+      "id": "stars-near",
+      "power": 18,
+      "label": "Every known star within 65 light-years of the Sun: about 2,200.",
+      "size_m": 615000000000000000,
+      "sizeInLabel": "65 light-years",
+      "how": "Space r2's file of the stars within 20 pc (65.2 light-years): Gaia's nearby-star catalog plus the brightest stars it lacks from HYG, at their galactic x, y, z.",
+      "where": "assets/toys/nearby-stars/stars.json; src/packs/powers-of-ten.js (buildNearStars)",
+      "verdict": "correct",
+      "sources": [
+        {
+          "title": "Gaia Early Data Release 3: The Gaia Catalogue of Nearby Stars (A&A 649, A6, 2021)",
+          "publisher": "Gaia Collaboration, Smart et al., via CDS VizieR",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/649/A6",
+          "says": "Gaia Catalogue of Nearby Stars - GCNS (Gaia collaboration, 2021): the stars within 100 pc of the Sun; the toy keeps those within 20 pc."
+        }
+      ]
+    },
+    {
+      "id": "sun-alone",
+      "power": 16,
+      "label": "One light-year: the Sun alone. Its Oort cloud of comets may reach this far, too small and dark to see.",
+      "size_m": 9460700000000000,
+      "sizeInLabel": "One light-year",
+      "how": "Only the Sun shows, as one bright dot, between the planets' orbits and the nearest stars.",
+      "where": "src/packs/powers-of-ten.js (buildSunAlone)",
+      "verdict": "correct",
+      "sources": [
+        {
+          "title": "Oort cloud",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Oort_cloud",
+          "says": "Icy planetesimals surrounding the Sun at distances ranging from 2,000 to 200,000 AU (0.03 to 3.2 light-years)."
+        },
+        {
+          "title": "Light-year",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Light-year",
+          "says": "Exactly 9,460,730,472,580.8 km, which is approximately 9.46 trillion kilometres ... as defined by the International Astronomical Union."
+        }
+      ]
+    },
+    {
+      "id": "outer",
+      "power": 13.3,
+      "label": "The Sun and the planets' orbits out to Neptune's, about 60 AU (9 billion km) across.",
+      "size_m": 9000000000000,
+      "sizeInLabel": "60 AU",
+      "how": "Each planet's orbit and its place at 16:54 UTC on October 7, 2026, from JPL's Keplerian elements and rates (Table 1, 1800 to 2050), solved for the eccentric anomaly; Neptune's orbit (a = 30.07 AU) is about 60 AU across.",
+      "where": "src/powers/sky.js (PLANETS, planetEcl, orbitPath)",
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "sources": [
+        {
+          "title": "Approximate Positions of the Planets",
+          "publisher": "JPL Solar System Dynamics (E. M. Standish)",
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "says": "Keplerian elements and their rates, with respect to the mean ecliptic and equinox of J2000, valid for the time-interval 1800 AD - 2050 AD ... Neptune 30.06992276 0.00859048 ..."
+        }
+      ],
+      "note": "The dots mark the planets' places; at this scale the planets themselves would be far smaller than a pixel."
+    },
+    {
+      "id": "inner",
+      "power": 11.9,
+      "label": "Mercury, Venus, the Earth and Mars: Mars's orbit is about 3 AU (456 million km) across.",
+      "size_m": 456000000000,
+      "sizeInLabel": "3 AU",
+      "how": "The same elements for Mercury to Mars; Mars's orbit (a = 1.524 AU) is about 3.05 AU across.",
+      "where": "src/powers/sky.js",
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "sources": [
+        {
+          "title": "Approximate Positions of the Planets",
+          "publisher": "JPL Solar System Dynamics (E. M. Standish)",
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "says": "Mars 1.52371034 0.09339410 1.84969142 ..."
+        }
+      ]
+    },
+    {
+      "id": "moon",
+      "power": 9,
+      "label": "The Earth and the Moon, about 384,400 km apart on average, and the Moon's path for a month.",
+      "size_m": 384400000,
+      "sizeInLabel": "384,400 km",
+      "how": "The Moon's place and its path over one month from the main terms of its longitude, latitude and distance (after Meeus), the Earth and the Moon at their true sizes, colored from NASA's maps.",
+      "where": "src/powers/sky.js (moonEcl, moonPath); src/packs/powers-of-ten.js (buildMoon)",
+      "verdict": "close",
+      "test": "tests/pot.spec.mjs",
+      "sources": [
+        {
+          "title": "Earth's Moon: Facts",
+          "publisher": "NASA Science",
+          "url": "https://science.nasa.gov/moon/facts/",
+          "says": "The Moon is an average of 238,855 miles (384,400 kilometers) away."
+        }
+      ],
+      "note": "The short lunar theory is good to about a degree, plenty at this scale."
+    },
+    {
+      "id": "earth",
+      "power": 7.1,
+      "label": "The Earth, about 12,700 km across.",
+      "size_m": 12742000,
+      "sizeInLabel": "12,700 km",
+      "how": "The half of the Earth facing the garden, from NASA's Blue Marble (through USGS's imagery service), on a ball of the Earth's mean radius.",
+      "where": "tools/pot-maps.mjs; src/packs/powers-of-ten.js (buildGlobe)",
+      "verdict": "correct",
+      "sources": [
+        {
+          "title": "Earth Fact Sheet",
+          "publisher": "NASA NSSDCA",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "says": "Volumetric mean radius (km) 6371.000"
+        }
+      ]
+    },
+    {
+      "id": "region",
+      "power": 6,
+      "label": "The Chesapeake Bay, about 320 km long, and the Mid-Atlantic coast.",
+      "size_m": 322000,
+      "sizeInLabel": "320 km",
+      "how": "Sentinel-2 cloudless (2016) cut 1,000 km and 316 km square round the garden and draped on the round Earth.",
+      "where": "tools/pot-maps.mjs; src/packs/powers-of-ten.js (buildAerial)",
+      "verdict": "correct",
+      "sources": [
+        {
+          "title": "Chesapeake Bay",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Chesapeake_Bay",
+          "says": "Length 200 mi (320 km); width 30 mi."
+        }
+      ]
+    },
+    {
+      "id": "city",
+      "power": 4.6,
+      "label": "Washington, D.C., on the Potomac River, about 16 km across.",
+      "size_m": 16000,
+      "sizeInLabel": "16 km",
+      "how": "Sentinel-2 cloudless (2016) cut 100 km to 10 km square round the garden.",
+      "where": "tools/pot-maps.mjs",
+      "verdict": "correct",
+      "sources": [
+        {
+          "title": "Washington, D.C.",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Washington,_D.C.",
+          "says": "The initial shape of the federal district was a square measuring 10 miles (16 km) on each side."
+        }
+      ],
+      "note": "The District's side across the Potomac (Arlington) was returned to Virginia in 1846; the label gives the original square's side."
+    },
+    {
+      "id": "mall",
+      "power": 3.3,
+      "label": "The National Mall, about 3.2 km from the Capitol to the Lincoln Memorial.",
+      "size_m": 3200,
+      "sizeInLabel": "3.2 km",
+      "how": "USGS's NAIP mosaic (3 km) and D.C.'s 2023 aerial photo (1 km) round the garden.",
+      "where": "tools/pot-maps.mjs",
+      "verdict": "correct",
+      "sources": [
+        {
+          "title": "National Mall and Memorial Parks",
+          "publisher": "National Park Service",
+          "url": "https://www.nps.gov/nama/index.htm",
+          "says": "A 2 mile stretch view of the National Mall from Lincoln Memorial to US Capitol."
+        }
+      ]
+    },
+    {
+      "id": "garden",
+      "power": 2,
+      "label": "The Enid A. Haupt Garden beside the Smithsonian Castle, about 130 m across (4.2 acres).",
+      "size_m": 130,
+      "sizeInLabel": "130 m",
+      "how": "D.C.'s 2023 aerial photo at 8 cm a pixel, cut 316 m, 100 m and 32 m square round the garden. 4.2 acres is 17,000 square meters, a square about 130 m on a side.",
+      "where": "tools/pot-maps.mjs",
+      "verdict": "close",
+      "sources": [
+        {
+          "title": "Enid A. Haupt Garden",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Enid_A._Haupt_Garden",
+          "says": "The Enid A. Haupt Garden is a 4.2 acre public garden in the Smithsonian complex."
+        },
+        {
+          "title": "Aerial Photography (Orthophoto) 2023",
+          "publisher": "District of Columbia, Office of the Chief Technology Officer",
+          "url": "https://opendata.dc.gov/",
+          "says": "4-band digital orthophotography with a 3 inch/0.08 meter pixel resolution ... licensed under a Creative Commons Attribution 4.0 International License."
+        }
+      ]
+    },
+    {
+      "id": "bed",
+      "power": 0.6,
+      "label": "A garden bed with a young full-moon maple, about 2 m long.",
+      "size_m": 2,
+      "sizeInLabel": "2 m",
+      "how": "Joshua Trapani's 3D capture of a raised garden bed with a young full-moon maple, turned to be seen from above and scaled so the bed is 2 m long.",
+      "where": "src/packs/powers-of-ten.js (buildBed)",
+      "verdict": "simplified",
+      "sources": [
+        {
+          "title": "Golden Fullmoon Maple",
+          "publisher": "SuperSplat (Joshua Trapani)",
+          "url": "https://superspl.at/scene/f233b115",
+          "says": "The capture (CC BY 4.0); it gives no size."
+        }
+      ],
+      "note": "The capture states no size: 2 m is an estimate from the bed's boards and the young tree. It was captured elsewhere and is set in the garden."
+    },
+    {
+      "id": "crown",
+      "power": -0.5,
+      "label": "The golden full-moon maple's leaves, each about 9 cm across (an estimate: they are 6 to 12 cm).",
+      "size_m": 0.09,
+      "sizeInLabel": "9 cm",
+      "how": "Megan Hansen's photo of a golden full-moon maple's leaves seen from above (the same kind of tree as the garden bed's capture), cut 22 cm square on its middle leaf (tools/pot-micro.mjs). The photo gives no scale: its middle leaf spans about 200 of 1,023 columns and is taken as 9 cm across, inside the species' range.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "verdict": "simplified",
+      "sources": [
+        {
+          "title": "Acer shirasawanum 'Aureum'",
+          "publisher": "Flickr (Megan Hansen), CC BY-SA 2.0",
+          "url": "https://www.flickr.com/photos/24495410@N03/4714538293",
+          "says": "The photo used; its page gives CC BY-SA 2.0 and no size."
+        },
+        {
+          "title": "Acer shirasawanum",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Acer_shirasawanum",
+          "says": "The leaves are rounded, 4.5–8 cm long and 6–12 cm broad, palmately veined and lobed, with 9–13 (rarely 7) serrate shallowly incised lobes."
+        }
+      ],
+      "note": "The size is an estimate within the species' range."
+    },
+    {
+      "id": "leaf",
+      "power": -1.3,
+      "label": "One of its leaves, lit from behind: about 9 cm across, its veins fanning out.",
+      "size_m": 0.09,
+      "sizeInLabel": "9 cm",
+      "how": "susteph's photo of one golden full-moon maple leaf lit from behind, cut 7.1 cm and 2.5 cm square on its blade (tools/pot-micro.mjs); its blade spans about 680 of 1,024 columns, taken as 9 cm.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "verdict": "simplified",
+      "sources": [
+        {
+          "title": "Golden Full Moon Maple",
+          "publisher": "Flickr (susteph), CC BY 2.0",
+          "url": "https://www.flickr.com/photos/28012136@N08/2649442904",
+          "says": "The photo used; its page gives CC BY 2.0 and no size."
+        },
+        {
+          "title": "Acer shirasawanum",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Acer_shirasawanum",
+          "says": "The leaves are rounded, 4.5–8 cm long and 6–12 cm broad."
+        }
+      ],
+      "note": "The size is an estimate within the species' range."
+    },
+    {
+      "id": "cells",
+      "power": -4,
+      "label": "Cells inside a leaf, packed with chloroplasts (red in this false-color confocal picture, 200 µm wide).",
+      "size_m": 0.0002,
+      "sizeInLabel": "200 µm",
+      "how": "Wellcome's confocal picture, cut into squares 158, 50 and 16 µm wide round one chloroplast, from its stated width (tools/pot-micro.mjs).",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "verdict": "correct",
+      "sources": [
+        {
+          "title": "Arabidopsis thaliana plant cells containing chloroplasts, LM",
+          "publisher": "Wellcome Collection (Fernán Federici), CC BY 4.0",
+          "url": "https://wellcomecollection.org/works/gwmfux6b",
+          "says": "Confocal micrograph of cells inside a leaf from the plant Arabidopsis thaliana ... Mesophyll cells (blue; round/oval shape) containing chloroplasts (red) ... Width of image is 200 micrometres."
+        }
+      ],
+      "note": "A thale cress leaf, not a maple's; the colors are the microscope's false colors."
+    },
+    {
+      "id": "chloroplast",
+      "power": -5.6,
+      "label": "A chloroplast, where a leaf turns light into food, about 3.5 µm long: an electron micrograph (false color).",
+      "size_m": 0.0000035,
+      "sizeInLabel": "3.5 µm",
+      "how": "Wellcome's electron micrograph, cut into squares 3.16 and 1 µm wide inside the chloroplast; its length, about 620 of the picture's 800 columns of a 4.5 µm width, is about 3.5 µm.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "verdict": "close",
+      "sources": [
+        {
+          "title": "Chloroplast in a bean leaf, TEM",
+          "publisher": "Wellcome Collection (Kevin Mackenzie, University of Aberdeen), CC BY 4.0",
+          "url": "https://wellcomecollection.org/works/bx3dctp2",
+          "says": "False-colour transmission electron micrograph of a chloroplast in a bean leaf ... grana ... and lamellae ... are visible here. Width of image is 4.5 micrometres."
+        }
+      ],
+      "note": "A bean's chloroplast, set inside the thale cress cell's; the length is measured on the picture."
+    },
+    {
+      "id": "ribosome",
+      "power": -7.4,
+      "label": "A ribosome, the machine that builds proteins, about 20 nm across: its RNA orange, its proteins blue.",
+      "size_m": 2e-8,
+      "sizeInLabel": "20 nm",
+      "how": "Science r3's cryo-EM map of the E. coli 70S ribosome, its surface at EMDB's recommended level, one splat per surface voxel (1 Å = 1e-10 m); RNA and protein from the nearest chain of the fitted model.",
+      "where": "src/packs/powers-of-ten.js (buildRibosome); src/science/density.js",
+      "verdict": "correct",
+      "sources": [
+        {
+          "title": "EMD-48329: Structure of arbekacin bound Escherichia coli 70S ribosome",
+          "publisher": "EMDB",
+          "url": "https://www.ebi.ac.uk/emdb/EMD-48329",
+          "says": "Single-particle, 3.2 Å; sample: Escherichia coli 70S ribosome bound to tRNA-fMet, mRNA and arbekacin; fitted model 9mkk."
+        },
+        {
+          "title": "Ribosome",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ribosome",
+          "says": "Bacterial ribosomes are around 20 nm (200 Å) in diameter and are composed of 65% rRNA and 35% ribosomal proteins."
+        }
+      ],
+      "note": "A bacterium's ribosome; a chloroplast's ribosomes are of the same 70S kind."
+    }
+  ],
+  "claims": [
+    {
+      "claim": "The Milky Way, about 100,000 light-years across. No one can photograph it from outside: this is M83, a spiral galaxy much like it, set at our galaxy's size and tilt.",
+      "how": "M83's picture (ESO), its disk masked, is laid in the galactic plane at 100,000 light-years across, its center at the real galactic center 8,178 pc from the Sun in the real direction (the J2000 galactic frame), seen from straight up over the garden at the zoom's moment.",
+      "where": "src/packs/powers-of-ten.js (buildGalaxy); src/powers/sky.js (GALACTIC)",
+      "sources": [
+        {
+          "title": "The Milky Way Galaxy",
+          "publisher": "NASA Goddard (Imagine the Universe)",
+          "url": "https://imagine.gsfc.nasa.gov/features/cosmic/milkyway_info.html",
+          "says": "The Milky Way is about 1,000,000,000,000,000,000 km (about 100,000 light years or about 30 kpc) across. ... It lies about 8 kpc from the center."
+        },
+        {
+          "title": "A geometric distance measurement to the Galactic center black hole with 0.3% uncertainty (A&A 625, L10, 2019)",
+          "publisher": "GRAVITY Collaboration, via arXiv",
+          "url": "https://arxiv.org/abs/1904.05721",
+          "says": "This yields a geometric distance estimate: R0 = 8178 ± 13 (stat.) ± 22 (sys.) pc."
+        },
+        {
+          "title": "M83 (eso0825a)",
+          "publisher": "ESO",
+          "url": "https://www.eso.org/public/images/eso0825a/",
+          "says": "The picture used, CC BY 4.0."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/pot.spec.mjs",
+      "note": "The Milky Way can't be photographed from outside; M83 is a stand-in, scaled from its own size (about 55,000 light-years) to the Milky Way's."
+    },
+    {
+      "claim": "About 98,000 stars within 1,600 light-years of the Sun, where they really are.",
+      "how": "tools/pot-stars.mjs keeps the 97,823 HYG v4.4 stars with a distance up to 500 pc (1,631 light-years) and places each at its catalog x, y, z (equatorial J2000); dot sizes show brightness, colors temperature from B−V.",
+      "where": "tools/pot-stars.mjs; src/packs/powers-of-ten.js (buildLocalStars)",
+      "sources": [
+        {
+          "title": "HYG database v4.4",
+          "publisher": "David Nash (astronexus), Codeberg",
+          "url": "https://codeberg.org/astronexus/hyg",
+          "says": "Hipparcos, Yale Bright Star and Gliese catalogs combined, with positions in parsecs (x, y, z). Licensed CC BY-SA 4.0."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": "Hipparcos distances beyond a few hundred parsecs carry large errors; phones show the brightest 25,000 to 45,000 of the stars."
+    },
+    {
+      "claim": "Every known star within 65 light-years of the Sun: about 2,200.",
+      "how": "Space r2's file of the stars within 20 pc (65.2 light-years): Gaia's nearby-star catalog plus the brightest stars it lacks from HYG, at their galactic x, y, z.",
+      "where": "assets/toys/nearby-stars/stars.json; src/packs/powers-of-ten.js (buildNearStars)",
+      "sources": [
+        {
+          "title": "Gaia Early Data Release 3: The Gaia Catalogue of Nearby Stars (A&A 649, A6, 2021)",
+          "publisher": "Gaia Collaboration, Smart et al., via CDS VizieR",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/649/A6",
+          "says": "Gaia Catalogue of Nearby Stars - GCNS (Gaia collaboration, 2021): the stars within 100 pc of the Sun; the toy keeps those within 20 pc."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": ""
+    },
+    {
+      "claim": "One light-year: the Sun alone. Its Oort cloud of comets may reach this far, too small and dark to see.",
+      "how": "Only the Sun shows, as one bright dot, between the planets' orbits and the nearest stars.",
+      "where": "src/packs/powers-of-ten.js (buildSunAlone)",
+      "sources": [
+        {
+          "title": "Oort cloud",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Oort_cloud",
+          "says": "Icy planetesimals surrounding the Sun at distances ranging from 2,000 to 200,000 AU (0.03 to 3.2 light-years)."
+        },
+        {
+          "title": "Light-year",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Light-year",
+          "says": "Exactly 9,460,730,472,580.8 km, which is approximately 9.46 trillion kilometres ... as defined by the International Astronomical Union."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": ""
+    },
+    {
+      "claim": "The Sun and the planets' orbits out to Neptune's, about 60 AU (9 billion km) across.",
+      "how": "Each planet's orbit and its place at 16:54 UTC on October 7, 2026, from JPL's Keplerian elements and rates (Table 1, 1800 to 2050), solved for the eccentric anomaly; Neptune's orbit (a = 30.07 AU) is about 60 AU across.",
+      "where": "src/powers/sky.js (PLANETS, planetEcl, orbitPath)",
+      "sources": [
+        {
+          "title": "Approximate Positions of the Planets",
+          "publisher": "JPL Solar System Dynamics (E. M. Standish)",
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "says": "Keplerian elements and their rates, with respect to the mean ecliptic and equinox of J2000, valid for the time-interval 1800 AD - 2050 AD ... Neptune 30.06992276 0.00859048 ..."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": "The dots mark the planets' places; at this scale the planets themselves would be far smaller than a pixel."
+    },
+    {
+      "claim": "Mercury, Venus, the Earth and Mars: Mars's orbit is about 3 AU (456 million km) across.",
+      "how": "The same elements for Mercury to Mars; Mars's orbit (a = 1.524 AU) is about 3.05 AU across.",
+      "where": "src/powers/sky.js",
+      "sources": [
+        {
+          "title": "Approximate Positions of the Planets",
+          "publisher": "JPL Solar System Dynamics (E. M. Standish)",
+          "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+          "says": "Mars 1.52371034 0.09339410 1.84969142 ..."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": ""
+    },
+    {
+      "claim": "The Earth and the Moon, about 384,400 km apart on average, and the Moon's path for a month.",
+      "how": "The Moon's place and its path over one month from the main terms of its longitude, latitude and distance (after Meeus), the Earth and the Moon at their true sizes, colored from NASA's maps.",
+      "where": "src/powers/sky.js (moonEcl, moonPath); src/packs/powers-of-ten.js (buildMoon)",
+      "sources": [
+        {
+          "title": "Earth's Moon: Facts",
+          "publisher": "NASA Science",
+          "url": "https://science.nasa.gov/moon/facts/",
+          "says": "The Moon is an average of 238,855 miles (384,400 kilometers) away."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/pot.spec.mjs",
+      "note": "The short lunar theory is good to about a degree, plenty at this scale."
+    },
+    {
+      "claim": "The Earth, about 12,700 km across.",
+      "how": "The half of the Earth facing the garden, from NASA's Blue Marble (through USGS's imagery service), on a ball of the Earth's mean radius.",
+      "where": "tools/pot-maps.mjs; src/packs/powers-of-ten.js (buildGlobe)",
+      "sources": [
+        {
+          "title": "Earth Fact Sheet",
+          "publisher": "NASA NSSDCA",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html",
+          "says": "Volumetric mean radius (km) 6371.000"
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": ""
+    },
+    {
+      "claim": "The Chesapeake Bay, about 320 km long, and the Mid-Atlantic coast.",
+      "how": "Sentinel-2 cloudless (2016) cut 1,000 km and 316 km square round the garden and draped on the round Earth.",
+      "where": "tools/pot-maps.mjs; src/packs/powers-of-ten.js (buildAerial)",
+      "sources": [
+        {
+          "title": "Chesapeake Bay",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Chesapeake_Bay",
+          "says": "Length 200 mi (320 km); width 30 mi."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": ""
+    },
+    {
+      "claim": "Washington, D.C., on the Potomac River, about 16 km across.",
+      "how": "Sentinel-2 cloudless (2016) cut 100 km to 10 km square round the garden.",
+      "where": "tools/pot-maps.mjs",
+      "sources": [
+        {
+          "title": "Washington, D.C.",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Washington,_D.C.",
+          "says": "The initial shape of the federal district was a square measuring 10 miles (16 km) on each side."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": "The District's side across the Potomac (Arlington) was returned to Virginia in 1846; the label gives the original square's side."
+    },
+    {
+      "claim": "The National Mall, about 3.2 km from the Capitol to the Lincoln Memorial.",
+      "how": "USGS's NAIP mosaic (3 km) and D.C.'s 2023 aerial photo (1 km) round the garden.",
+      "where": "tools/pot-maps.mjs",
+      "sources": [
+        {
+          "title": "National Mall and Memorial Parks",
+          "publisher": "National Park Service",
+          "url": "https://www.nps.gov/nama/index.htm",
+          "says": "A 2 mile stretch view of the National Mall from Lincoln Memorial to US Capitol."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": ""
+    },
+    {
+      "claim": "The Enid A. Haupt Garden beside the Smithsonian Castle, about 130 m across (4.2 acres).",
+      "how": "D.C.'s 2023 aerial photo at 8 cm a pixel, cut 316 m, 100 m and 32 m square round the garden. 4.2 acres is 17,000 square meters, a square about 130 m on a side.",
+      "where": "tools/pot-maps.mjs",
+      "sources": [
+        {
+          "title": "Enid A. Haupt Garden",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Enid_A._Haupt_Garden",
+          "says": "The Enid A. Haupt Garden is a 4.2 acre public garden in the Smithsonian complex."
+        },
+        {
+          "title": "Aerial Photography (Orthophoto) 2023",
+          "publisher": "District of Columbia, Office of the Chief Technology Officer",
+          "url": "https://opendata.dc.gov/",
+          "says": "4-band digital orthophotography with a 3 inch/0.08 meter pixel resolution ... licensed under a Creative Commons Attribution 4.0 International License."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/pot.spec.mjs",
+      "note": ""
+    },
+    {
+      "claim": "A garden bed with a young full-moon maple, about 2 m long.",
+      "how": "Joshua Trapani's 3D capture of a raised garden bed with a young full-moon maple, turned to be seen from above and scaled so the bed is 2 m long.",
+      "where": "src/packs/powers-of-ten.js (buildBed)",
+      "sources": [
+        {
+          "title": "Golden Fullmoon Maple",
+          "publisher": "SuperSplat (Joshua Trapani)",
+          "url": "https://superspl.at/scene/f233b115",
+          "says": "The capture (CC BY 4.0); it gives no size."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/pot.spec.mjs",
+      "note": "The capture states no size: 2 m is an estimate from the bed's boards and the young tree. It was captured elsewhere and is set in the garden."
+    },
+    {
+      "claim": "The golden full-moon maple's leaves, each about 9 cm across (an estimate: they are 6 to 12 cm).",
+      "how": "Megan Hansen's photo of a golden full-moon maple's leaves seen from above (the same kind of tree as the garden bed's capture), cut 22 cm square on its middle leaf (tools/pot-micro.mjs). The photo gives no scale: its middle leaf spans about 200 of 1,023 columns and is taken as 9 cm across, inside the species' range.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "sources": [
+        {
+          "title": "Acer shirasawanum 'Aureum'",
+          "publisher": "Flickr (Megan Hansen), CC BY-SA 2.0",
+          "url": "https://www.flickr.com/photos/24495410@N03/4714538293",
+          "says": "The photo used; its page gives CC BY-SA 2.0 and no size."
+        },
+        {
+          "title": "Acer shirasawanum",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Acer_shirasawanum",
+          "says": "The leaves are rounded, 4.5–8 cm long and 6–12 cm broad, palmately veined and lobed, with 9–13 (rarely 7) serrate shallowly incised lobes."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/pot.spec.mjs",
+      "note": "The size is an estimate within the species' range."
+    },
+    {
+      "claim": "One of its leaves, lit from behind: about 9 cm across, its veins fanning out.",
+      "how": "susteph's photo of one golden full-moon maple leaf lit from behind, cut 7.1 cm and 2.5 cm square on its blade (tools/pot-micro.mjs); its blade spans about 680 of 1,024 columns, taken as 9 cm.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "sources": [
+        {
+          "title": "Golden Full Moon Maple",
+          "publisher": "Flickr (susteph), CC BY 2.0",
+          "url": "https://www.flickr.com/photos/28012136@N08/2649442904",
+          "says": "The photo used; its page gives CC BY 2.0 and no size."
+        },
+        {
+          "title": "Acer shirasawanum",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Acer_shirasawanum",
+          "says": "The leaves are rounded, 4.5–8 cm long and 6–12 cm broad."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/pot.spec.mjs",
+      "note": "The size is an estimate within the species' range."
+    },
+    {
+      "claim": "Cells inside a leaf, packed with chloroplasts (red in this false-color confocal picture, 200 µm wide).",
+      "how": "Wellcome's confocal picture, cut into squares 158, 50 and 16 µm wide round one chloroplast, from its stated width (tools/pot-micro.mjs).",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "sources": [
+        {
+          "title": "Arabidopsis thaliana plant cells containing chloroplasts, LM",
+          "publisher": "Wellcome Collection (Fernán Federici), CC BY 4.0",
+          "url": "https://wellcomecollection.org/works/gwmfux6b",
+          "says": "Confocal micrograph of cells inside a leaf from the plant Arabidopsis thaliana ... Mesophyll cells (blue; round/oval shape) containing chloroplasts (red) ... Width of image is 200 micrometres."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": "A thale cress leaf, not a maple's; the colors are the microscope's false colors."
+    },
+    {
+      "claim": "A chloroplast, where a leaf turns light into food, about 3.5 µm long: an electron micrograph (false color).",
+      "how": "Wellcome's electron micrograph, cut into squares 3.16 and 1 µm wide inside the chloroplast; its length, about 620 of the picture's 800 columns of a 4.5 µm width, is about 3.5 µm.",
+      "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
+      "sources": [
+        {
+          "title": "Chloroplast in a bean leaf, TEM",
+          "publisher": "Wellcome Collection (Kevin Mackenzie, University of Aberdeen), CC BY 4.0",
+          "url": "https://wellcomecollection.org/works/bx3dctp2",
+          "says": "False-colour transmission electron micrograph of a chloroplast in a bean leaf ... grana ... and lamellae ... are visible here. Width of image is 4.5 micrometres."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/pot.spec.mjs",
+      "note": "A bean's chloroplast, set inside the thale cress cell's; the length is measured on the picture."
+    },
+    {
+      "claim": "A ribosome, the machine that builds proteins, about 20 nm across: its RNA orange, its proteins blue.",
+      "how": "Science r3's cryo-EM map of the E. coli 70S ribosome, its surface at EMDB's recommended level, one splat per surface voxel (1 Å = 1e-10 m); RNA and protein from the nearest chain of the fitted model.",
+      "where": "src/packs/powers-of-ten.js (buildRibosome); src/science/density.js",
+      "sources": [
+        {
+          "title": "EMD-48329: Structure of arbekacin bound Escherichia coli 70S ribosome",
+          "publisher": "EMDB",
+          "url": "https://www.ebi.ac.uk/emdb/EMD-48329",
+          "says": "Single-particle, 3.2 Å; sample: Escherichia coli 70S ribosome bound to tRNA-fMet, mRNA and arbekacin; fitted model 9mkk."
+        },
+        {
+          "title": "Ribosome",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Ribosome",
+          "says": "Bacterial ribosomes are around 20 nm (200 Å) in diameter and are composed of 65% rRNA and 35% ribosomal proteins."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/pot.spec.mjs",
+      "note": "A bacterium's ribosome; a chloroplast's ribosomes are of the same 70S kind."
+    }
+  ],
+  "simplified": [
+    "The Milky Way is M83, a similar galaxy, scaled to the Milky Way's size and laid at its real tilt and place.",
+    "Planet and star dots are far bigger than the bodies would be at their scale; their places are real.",
+    "The garden bed is a 3D capture made elsewhere, set in the garden at an estimated size.",
+    "Below the garden the pictures come from different plants (thale cress cells, a bean's chloroplast, a bacterium's ribosome), each at its true size, nested as they would be in one leaf."
+  ],
+  "fixes": []
+}

@@ -269,11 +269,11 @@ export function buildLook(k, look, { view, backdrop, nf }) {
     // Across: SUBF needles per band, the last band's one alone.
     for (let s = 0; s < S; s++)
       for (let f = 0; f < K; f++)
-        for (let q = 0; q < (f < K - 1 ? SUBF : 1); q++) needle(list, [xk(f + q / SUBF), 0, zs(s)], [1, 0, 0], (W / K / SUBF) * 1.6, look === "lines" ? 0.0046 : 0.0034, [s, f, 0, q]); // prettier-ignore
+        for (let q = 0; q < (f < K - 1 ? SUBF : 1); q++) needle(list, [xk(f + q / SUBF), 0, zs(s)], [1, 0, 0], (W / K / SUBF) * 1.6, look === "lines" ? 0.0068 : 0.005, [s, f, 0, q]); // prettier-ignore
     if (look === "mesh")
       for (let f = 1; f < K; f += 4)
         for (let s = 0; s < S; s++)
-          for (let h = 0; h < SUB; h++) needle(list, [xk(f), 0, zs(s, h)], [0, 0, 1], (dz / SUB) * 1.6, 0.0034, [s, f, 1, h]); // prettier-ignore
+          for (let h = 0; h < SUB; h++) needle(list, [xk(f), 0, zs(s, h)], [0, 0, 1], (dz / SUB) * 1.6, 0.005, [s, f, 1, h]); // prettier-ignore
     lift = 0.7;
     geo = { axis: "z", W, D, dz, K };
     // The gate: a line across the front.
@@ -513,22 +513,32 @@ export { F_MIN, F_MAX };
 // from relief splats so a long song's landscape fills in as its frames are
 // measured instead of waiting for all of them. Each cell is its slot's
 // loudest moment in its band; a lower splat under each cell makes a ridge a
-// wall from the side. In the Live view what has played clears as it
-// crosses the line at the front.
+// wall from the side. In the Live view (Live r7) the land rises at the line
+// at the front as it is heard and recedes behind it, from an empty plain.
 
 export function buildLandscapeLong(k, { nf, duration, look, live, W, H, songColor }) {
   const D = Math.min(8, 1.2 + 0.08 * duration);
-  const nt = Math.max(40, Math.min(1600, Math.floor((k.count * 0.33) / (nf * 2))));
+  // (Live r7 polish: three splats a cell, the top and two lower down, on half
+  // as big a budget again (the recipe's density 1.5), so a tall cell is a
+  // wall with no floor showing through under it, at the same detail.)
+  const nt = Math.max(40, Math.min(1600, Math.floor((k.count * 0.33) / (nf * 3))));
   const cw = W / nf;
   const cd = D / nt;
   const x = (f) => (f / (nf - 1) - 0.5) * W;
-  const z = (t) => D / 2 - ((t + 0.5) / nt) * D;
+  // Live r7 (the owner's push notes of October 4, 2026: the landscape
+  // "shouldn't be there automatically … it should appear when somebody
+  // plays"): in Live the land grows as the song is heard. The slot heard now
+  // rises at the line at the front and what has played recedes behind it,
+  // so the song's landscape builds up, from an empty plain, as it plays. The
+  // slots rest from the back (the start) to the front (the end), and drive
+  // slides them back by what has played (liveOffset).
+  const z = live ? (t) => -D / 2 + (t / nt) * D : (t) => D / 2 - ((t + 0.5) / nt) * D;
   const part = k.part("look");
   const list = [];
   const sizeOf = Math.max(cw, cd) * 1.5;
   for (let t = 0; t < nt; t++)
     for (let f = 0; f < nf; f++)
-      for (let l = 0; l < 2; l++) list.push({ p: [x(f), 0.01, z(t)], role: [t, f, l] });
+      for (let l = 0; l < 3; l++) list.push({ p: [x(f), 0.01, z(t)], role: [t, f, l] });
   // The waveform along the left edge: the slot's loudness, mirrored.
   for (let t = 0; t < nt; t++) for (let l = 0; l < 3; l++) list.push({ p: [-W / 2 - 0.18, 0.4, z(t)], role: [t, -1, l] }); // prettier-ignore
   const n = list.length;
@@ -539,21 +549,49 @@ export function buildLandscapeLong(k, { nf, duration, look, live, W, H, songColo
     const s = list[i];
     if (!s) return null;
     const wave = s.role[1] < 0;
-    return { p: s.p, n: wave ? [0, 0, 1] : s.role[2] === 0 ? [0, 1, 0] : [0, 0, 1], flat: 0.05, size: (wave ? cd * 3 : sizeOf) / 0.025 * 1.0, color: "#888888", opacity: 0.98, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, lift], part, pattern: false }; // prettier-ignore
+    // (Live r7 polish: the waveform's lines are round splats, so they read as
+    // clean lines from any side; flat discs facing the front showed as beads.)
+    if (wave) return { p: s.p, flat: 1, size: (Math.max(cd * 2.4, 0.014) / 0.025) * 1.0, color: "#888888", opacity: 0.98, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, lift], part, pattern: false }; // prettier-ignore
+    return { p: s.p, n: s.role[2] === 0 ? [0, 1, 0] : [0, 0, 1], flat: 0.05, size: (sizeOf / 0.025) * (s.role[2] === 0 ? 1.3 : 1), color: "#888888", opacity: 0.98, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, lift], part, pattern: false }; // prettier-ignore
   });
-  // The floor under it, on the same part.
+  // The floor under it, on the same part (Live r7: in Live it stays put, the
+  // plain the land rises from).
   const fl = [];
   const fc = 90;
   const fr = Math.max(8, Math.round((fc * D) / W));
+  // (Live r7 polish: the sheet stops a little short of the edge, and a band
+  // of small discs draws the edge itself, straight and crisp; the big discs'
+  // edge was soft and wavy.)
+  // (A splat reads about 2.5 sizes across: the sheet's discs, 1.75 cells
+  // across, overlap; the edge band's are about 1.4 cm.)
+  const FW = W + 0.16;
+  const FD = D + 0.16;
+  const cell = FW / fc;
+  const fin = cell * 0.95;
   for (let j = 0; j < fr; j++)
-    for (let i = 0; i < fc; i++) fl.push({ p: [((i + 0.5) / fc - 0.5) * (W + 0.16), -0.005, ((j + 0.5) / fr - 0.5) * (D + 0.16)], n: [0, 1, 0], flat: 0.03, size: ((W / fc) * 1.6) / 0.01, color: "#2a303a", opacity: 1, part, pattern: false }); // prettier-ignore
+    for (let i = 0; i < fc; i++) fl.push({ p: [((i + 0.5) / fc - 0.5) * (FW - 2 * fin), -0.005, ((j + 0.5) / fr - 0.5) * (FD - 2 * fin)], n: [0, 1, 0], flat: 0.03, size: (cell * 0.7) / 0.01, color: "#2a303a", opacity: 1, part: live ? 0 : part, pattern: false }); // prettier-ignore
+  const es = 0.008;
+  const bandRows = Math.ceil((fin + cell) / es);
+  for (const [len, across, alongX] of [
+    [FW, FD, true],
+    [FD, FW, false],
+  ])
+    for (let i = 0, n = Math.round(len / es); i < n; i++)
+      for (const sg of [-1, 1])
+        for (let r = 0; r < bandRows; r++) {
+          const a = ((i + 0.5) / n - 0.5) * len;
+          const b = sg * (across / 2 - es * (0.75 + r));
+          fl.push({ p: alongX ? [a, -0.005, b] : [b, -0.005, a], n: [0, 1, 0], flat: 0.03, size: (es * 0.7) / 0.01, color: "#2a303a", opacity: 1, part: live ? 0 : part, pattern: false }); // prettier-ignore
+        }
   k.cloud({ share: fl.length / k.count, pattern: false }, (rand, i) => fl[i] || null);
   // The marker at the front, and (Live) the caps that ride the loudness there.
   const marker = k.part("marker");
   const mk = [];
   for (let i = 0; i < 160; i++) {
     const xx = ((i + 0.5) / 160 - 0.5) * (W + 0.1);
-    mk.push({ p: [xx, 0.02, D / 2], color: "#fff3b0", size: 1.1, opacity: 1, part: marker, pattern: false }); // prettier-ignore
+    // (Live r7 polish: drawn out along the line, so it is one clean line
+    // rather than a row of dots.)
+    mk.push({ p: [xx, 0.02, D / 2], dir: [1, 0, 0], stretch: 3, size: 0.9, color: "#fff3b0", opacity: 1, part: marker, pattern: false }); // prettier-ignore
   }
   k.cloud({ share: mk.length / k.count, pattern: false }, (rand, i) => mk[i] || null);
   const caps = [];
@@ -643,6 +681,35 @@ function colorTable(L) {
   return lut;
 }
 
+// Live r7 polish: the waveform's envelope, smoothed over about a fortieth
+// of the song (its loudest within a few slots, then averaged), so its lines
+// are clean curves; slot by slot they jumped and read as scattered beads.
+export function waveEnvelope(L) {
+  const w = L.wave;
+  if (!w) return new Float32Array(L.nt);
+  if (L.ws && L.wsFor === L.hVersion) return L.ws;
+  const nt = L.nt;
+  const r = Math.max(3, Math.round(nt / 80));
+  const peak = new Float32Array(nt);
+  for (let t = 0; t < nt; t++) {
+    let m = 0;
+    for (let j = Math.max(0, t - r); j <= Math.min(nt - 1, t + r); j++) m = Math.max(m, w[j]);
+    peak[t] = m;
+  }
+  const out = (L.ws ||= new Float32Array(nt));
+  for (let t = 0; t < nt; t++) {
+    let sum = 0;
+    let n = 0;
+    for (let j = Math.max(0, t - r); j <= Math.min(nt - 1, t + r); j++) {
+      sum += peak[j];
+      n++;
+    }
+    out[t] = sum / n;
+  }
+  L.wsFor = L.hVersion;
+  return out;
+}
+
 const GOLD = [217, 165, 32];
 const GRAY = [138, 147, 166];
 
@@ -653,7 +720,10 @@ export function drawLandscapeLong(g, L, an, now, duration) {
   const h = landscapeHeights(L, an);
   const lut = colorTable(L);
   const lift2 = 2 * L.lift;
-  const played = L.live && duration > 0 ? Math.floor((now / duration) * L.nt) : -1;
+  const ws = waveEnvelope(L);
+  // Live r7: in Live only what has been heard shows; the slot heard now
+  // rises as it is heard (grow, 0..1).
+  const heard = L.live && duration > 0 ? (Math.min(now, duration) / duration) * L.nt : Infinity;
   for (let i = 0; i < L.n; i++) {
     const [t, f, l] = L.roles[i];
     const R = L.rest[i];
@@ -661,18 +731,23 @@ export function drawLandscapeLong(g, L, an, now, duration) {
     const r = Math.floor(i / cols);
     const o = (r * cols * 2 + c) * 4;
     const q = (r * cols * 2 + cols + c) * 4;
-    let show = !!(h && L.ok[t]) && !(L.live && t < played);
+    let show = !!(h && L.ok[t]) && t < heard;
+    const grow = Math.min(1, heard - t);
     let y = R[1];
     if (show && f >= 0) {
-      const v = h[t * L.nf + f];
-      y = v * L.H * (l === 0 ? 1 : 0.5) + 0.01;
-      if (l === 1 && v < 0.12) show = false;
+      const v = h[t * L.nf + f] * grow;
+      // The top, and the cell's wall three fifths and a fifth of the way up,
+      // a little darker each (Live r7 polish: was one wall splat at a half,
+      // shown from 0.12 up, and the floor showed through under a tall cell).
+      y = v * L.H * (l === 0 ? 1 : l === 1 ? 0.6 : 0.2) + 0.01;
+      if (l > 0 && v < 0.06) show = false;
       const k = (f * LEVELS + Math.round(v * (LEVELS - 1))) * 6 + (l === 0 ? 0 : 3);
-      px[o] = lut[k];
-      px[o + 1] = lut[k + 1];
-      px[o + 2] = lut[k + 2];
+      const dim = l === 2 ? 0.84 : 1;
+      px[o] = lut[k] * dim;
+      px[o + 1] = lut[k + 1] * dim;
+      px[o + 2] = lut[k + 2] * dim;
     } else if (show) {
-      const a = (L.wave[t] / L.wtop) * 0.3;
+      const a = (ws[t] / L.wtop) * 0.3 * grow;
       y = 0.4 + (l === 0 ? a : l === 1 ? -a : 0);
       const col = l === 2 ? GRAY : GOLD;
       px[o] = col[0];
@@ -687,6 +762,11 @@ export function drawLandscapeLong(g, L, an, now, duration) {
   }
   g.putImageData(L.img, 0, 0);
 }
+
+// Live r7: how far back the Live landscape's slots slide at `now`, so the
+// slot heard now sits just behind the line at the front (recipe units).
+export const liveOffset = (L, now, duration) =>
+  (1 - Math.min(1, Math.max(0, now / Math.max(1e-6, duration)))) * L.D;
 
 // The Live caps' heights at the front line (48 tokens), from the measured
 // frame playing now.

@@ -8,12 +8,10 @@ From the Operator: a new round, UI r4, from the owner's review of October 1, 202
 First finish what's open: the main merge into #131 (Integrator 2 is testing #131 at 5688d4d; a later
 main merge is fine, but never rebase), and #146. Then start r4.
 
-Owner, word for word: "I'd like for the user to be able to basically click on a key and then click
-and hold it, right? So to be able to click and hold on a key and then, like, move their cursor to
-the left or to the right or up or whatever, and it will just sort of, like, play all the keys that
-it touches… if I'm sitting at a physical keyboard and I stick my finger down on a key and then I
-just drag it across the keyboard, it makes, like, a really nice ascent or descent… So that should
-apply for all of the keyboards."
+The owner's request (his notes are private; the Operator's summary): a glissando on every keyboard.
+He wants to click and hold a key and move the cursor left, right, or up, playing every key it
+touches, like dragging a finger across a physical keyboard for a smooth ascent or descent. It should
+apply to all of the keyboards.
 
 A glissando on every keyboard:
 

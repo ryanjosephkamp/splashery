@@ -1,0 +1,135 @@
+[
+  {
+    "id": "strawberry",
+    "site": "supersplat",
+    "url": "https://superspl.at/s?id=84df8849&noanim&noui",
+    "reframing": {
+      "phoneScroll": 0.5,
+      "desktopUp": 0.2,
+      "settled": true
+    },
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "desktopURL": "https://superspl.at/s?id=84df8849&noanim&noui",
+    "images": [
+      "screenshots/supersplat-strawberry-390x844.jpg",
+      "screenshots/supersplat-strawberry-1440x900.jpg"
+    ]
+  },
+  {
+    "id": "strawberry",
+    "site": "splashery",
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=strawberry&turntable=off&controls=0&bg=black&profile=weak&adapt=off",
+    "desktopURL": "https://ryanjosephkamp.github.io/splashery/embed/?toy=strawberry&turntable=off&controls=0&bg=black&profile=high&adapt=off",
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "images": [
+      "screenshots/splashery-strawberry-390x844.jpg",
+      "screenshots/splashery-strawberry-1440x900.jpg"
+    ]
+  },
+  {
+    "id": "bee",
+    "site": "supersplat",
+    "url": "https://superspl.at/s?id=ae58ed2c&noanim&noui",
+    "desktopURL": "https://superspl.at/s?id=ae58ed2c&noanim&noui",
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "reframing": {
+      "narrowScrollSequence": ["down 1.2", "down 0.7", "up 0.18"],
+      "desktopAfterResize": ["up 0.25"],
+      "note": "Scroll input page units; final camera transform not captured."
+    },
+    "images": ["screenshots/supersplat-bee-390x844.jpg", "screenshots/supersplat-bee-1440x900.jpg"]
+  },
+  {
+    "id": "bee",
+    "site": "splashery",
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=bee&turntable=off&controls=0&profile=weak",
+    "desktopURL": "https://ryanjosephkamp.github.io/splashery/embed/?toy=bee&turntable=off&controls=0&profile=high",
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "reframing": "Final per-viewport pose is in screenshot-poses.json; replaces the initial capture recipe.",
+    "images": ["screenshots/splashery-bee-390x844.jpg", "screenshots/splashery-bee-1440x900.jpg"]
+  },
+  {
+    "id": "bmx-bike",
+    "site": "supersplat",
+    "url": "https://superspl.at/s?id=e95011f3&noanim&noui",
+    "desktopURL": "https://superspl.at/s?id=e95011f3&noanim&noui",
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "reframing": {
+      "narrowScrollDown": 0.5,
+      "desktop": "resize with no further scroll",
+      "note": "Ground and camera orientation differ from Splashery."
+    },
+    "images": [
+      "screenshots/supersplat-bmx-bike-390x844.jpg",
+      "screenshots/supersplat-bmx-bike-1440x900.jpg"
+    ]
+  },
+  {
+    "id": "bmx-bike",
+    "site": "splashery",
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=bmx-bike&turntable=off&controls=0&bg=black&profile=weak&adapt=off",
+    "desktopURL": "https://ryanjosephkamp.github.io/splashery/embed/?toy=bmx-bike&turntable=off&controls=0&bg=black&profile=high&adapt=off",
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "images": [
+      "screenshots/splashery-bmx-bike-390x844.jpg",
+      "screenshots/splashery-bmx-bike-1440x900.jpg"
+    ]
+  },
+  {
+    "id": "cave-lioness",
+    "site": "supersplat",
+    "url": "https://superspl.at/s?id=7e4e9bcb&noanim&noui",
+    "desktopURL": "https://superspl.at/s?id=7e4e9bcb&noanim&noui",
+    "reframing": {
+      "phoneScrollDown": 0.05,
+      "desktopScrollDown": 0.12,
+      "settled": true
+    },
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "images": [
+      "screenshots/supersplat-cave-lioness-390x844.jpg",
+      "screenshots/supersplat-cave-lioness-1440x900.jpg"
+    ]
+  },
+  {
+    "id": "cave-lioness",
+    "site": "splashery",
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=cave-lioness&turntable=off&controls=0&profile=weak",
+    "desktopURL": "https://ryanjosephkamp.github.io/splashery/embed/?toy=cave-lioness&turntable=off&controls=0&profile=high",
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "reframing": "Final per-viewport pose is in screenshot-poses.json; replaces the initial capture recipe.",
+    "images": [
+      "screenshots/splashery-cave-lioness-390x844.jpg",
+      "screenshots/splashery-cave-lioness-1440x900.jpg"
+    ]
+  },
+  {
+    "id": "toy-trex",
+    "site": "supersplat",
+    "url": "https://superspl.at/s?id=d281a49d&noanim&noui",
+    "desktopURL": "https://superspl.at/s?id=d281a49d&noanim&noui",
+    "reframing": {
+      "initialNarrow": ["up 0.15"],
+      "desktopAfterResize": ["up 0.15", "down 0.35"],
+      "narrowAfterDesktopResize": ["down 0.15"],
+      "note": "Final corrected captures replace the earlier cropped ones; camera transform not captured."
+    },
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "images": [
+      "screenshots/supersplat-toy-trex-390x844.jpg",
+      "screenshots/supersplat-toy-trex-1440x900.jpg"
+    ]
+  },
+  {
+    "id": "toy-trex",
+    "site": "splashery",
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=toy-trex&turntable=off&controls=0&profile=weak",
+    "desktopURL": "https://ryanjosephkamp.github.io/splashery/embed/?toy=toy-trex&turntable=off&controls=0&profile=high",
+    "captureMethod": "Viewport JPEG screenshot; native background/exposure; camera motion stopped; UI hidden where supported.",
+    "reframing": "Final per-viewport pose is in screenshot-poses.json; replaces the initial capture recipe.",
+    "images": [
+      "screenshots/splashery-toy-trex-390x844.jpg",
+      "screenshots/splashery-toy-trex-1440x900.jpg"
+    ]
+  }
+]

@@ -1,0 +1,1213 @@
+{
+  "about": "A Learn more link per public toy, shown on its page under About, in a new tab (lane Toy pages r2). Each is an English Wikipedia article about that exact thing. Left out where nothing fits (the splat mirror, invented worlds, one-off objects) and, at build time, where the toy has an evidence file, because its page then cites its sources. Check every link with: node tools/tpg-links.mjs --online",
+  "links": {
+    "cactus": {
+      "url": "https://en.wikipedia.org/wiki/Cactus",
+      "label": "Cactus on Wikipedia"
+    },
+    "strawberry": {
+      "url": "https://en.wikipedia.org/wiki/Strawberry",
+      "label": "Strawberry on Wikipedia"
+    },
+    "bee": {
+      "url": "https://en.wikipedia.org/wiki/Western_honey_bee",
+      "label": "Western honey bee on Wikipedia"
+    },
+    "torus": {
+      "url": "https://en.wikipedia.org/wiki/Torus",
+      "label": "Torus on Wikipedia"
+    },
+    "cluster-fly": {
+      "url": "https://en.wikipedia.org/wiki/Pollenia_rudis",
+      "label": "Pollenia rudis on Wikipedia"
+    },
+    "may-beetle": {
+      "url": "https://en.wikipedia.org/wiki/Cockchafer",
+      "label": "Cockchafer on Wikipedia"
+    },
+    "millipede": {
+      "url": "https://en.wikipedia.org/wiki/Millipede",
+      "label": "Millipede on Wikipedia"
+    },
+    "bumblebee": {
+      "url": "https://en.wikipedia.org/wiki/Brown-banded_carder_bee",
+      "label": "Brown-banded carder bee on Wikipedia"
+    },
+    "raspberry": {
+      "url": "https://en.wikipedia.org/wiki/Raspberry",
+      "label": "Raspberry on Wikipedia"
+    },
+    "blackberry": {
+      "url": "https://en.wikipedia.org/wiki/Blackberry",
+      "label": "Blackberry on Wikipedia"
+    },
+    "blueberry": {
+      "url": "https://en.wikipedia.org/wiki/Blueberry",
+      "label": "Blueberry on Wikipedia"
+    },
+    "grape": {
+      "url": "https://en.wikipedia.org/wiki/Grape",
+      "label": "Grape on Wikipedia"
+    },
+    "star-cookie": {
+      "url": "https://en.wikipedia.org/wiki/Zimtstern",
+      "label": "Zimtstern on Wikipedia"
+    },
+    "tomatoes": {
+      "url": "https://en.wikipedia.org/wiki/Tomato",
+      "label": "Tomato on Wikipedia"
+    },
+    "basket": {
+      "url": "https://en.wikipedia.org/wiki/Basket",
+      "label": "Basket on Wikipedia"
+    },
+    "rubber-duck-real": {
+      "url": "https://en.wikipedia.org/wiki/Rubber_duck",
+      "label": "Rubber duck on Wikipedia"
+    },
+    "garden-gnome": {
+      "url": "https://en.wikipedia.org/wiki/Garden_gnome",
+      "label": "Garden gnome on Wikipedia"
+    },
+    "marble-bust": {
+      "url": "https://en.wikipedia.org/wiki/Bust_(sculpture)",
+      "label": "Bust (sculpture) on Wikipedia"
+    },
+    "ukulele": {
+      "url": "https://en.wikipedia.org/wiki/Ukulele",
+      "label": "Ukulele on Wikipedia"
+    },
+    "alarm-clock": {
+      "url": "https://en.wikipedia.org/wiki/Alarm_clock",
+      "label": "Alarm clock on Wikipedia"
+    },
+    "vintage-camera": {
+      "url": "https://en.wikipedia.org/wiki/Camera",
+      "label": "Camera on Wikipedia"
+    },
+    "boombox": {
+      "url": "https://en.wikipedia.org/wiki/Boombox",
+      "label": "Boombox on Wikipedia"
+    },
+    "croissant-real": {
+      "url": "https://en.wikipedia.org/wiki/Croissant",
+      "label": "Croissant on Wikipedia"
+    },
+    "carrot-cake": {
+      "url": "https://en.wikipedia.org/wiki/Carrot_cake",
+      "label": "Carrot cake on Wikipedia"
+    },
+    "pomegranate": {
+      "url": "https://en.wikipedia.org/wiki/Pomegranate",
+      "label": "Pomegranate on Wikipedia"
+    },
+    "lantern": {
+      "url": "https://en.wikipedia.org/wiki/Lantern",
+      "label": "Lantern on Wikipedia"
+    },
+    "pencil-real": {
+      "url": "https://en.wikipedia.org/wiki/Pencil",
+      "label": "Pencil on Wikipedia"
+    },
+    "tin-can-real": {
+      "url": "https://en.wikipedia.org/wiki/Steel_and_tin_cans",
+      "label": "Steel and tin cans on Wikipedia"
+    },
+    "basketball": {
+      "url": "https://en.wikipedia.org/wiki/Basketball",
+      "label": "Basketball on Wikipedia"
+    },
+    "soccer-ball": {
+      "url": "https://en.wikipedia.org/wiki/Ball_(association_football)",
+      "label": "Ball (association football) on Wikipedia"
+    },
+    "american-football": {
+      "url": "https://en.wikipedia.org/wiki/American_football",
+      "label": "American football on Wikipedia"
+    },
+    "tennis-ball": {
+      "url": "https://en.wikipedia.org/wiki/Tennis_ball",
+      "label": "Tennis ball on Wikipedia"
+    },
+    "baseball": {
+      "url": "https://en.wikipedia.org/wiki/Baseball_(ball)",
+      "label": "Baseball (ball) on Wikipedia"
+    },
+    "softball": {
+      "url": "https://en.wikipedia.org/wiki/Softball",
+      "label": "Softball on Wikipedia"
+    },
+    "beach-ball": {
+      "url": "https://en.wikipedia.org/wiki/Beach_ball",
+      "label": "Beach ball on Wikipedia"
+    },
+    "golf-ball": {
+      "url": "https://en.wikipedia.org/wiki/Golf_ball",
+      "label": "Golf ball on Wikipedia"
+    },
+    "rugby-ball": {
+      "url": "https://en.wikipedia.org/wiki/Rugby_ball",
+      "label": "Rugby ball on Wikipedia"
+    },
+    "volleyball": {
+      "url": "https://en.wikipedia.org/wiki/Volleyball",
+      "label": "Volleyball on Wikipedia"
+    },
+    "water-polo-ball": {
+      "url": "https://en.wikipedia.org/wiki/Water_polo",
+      "label": "Water polo on Wikipedia"
+    },
+    "ping-pong-ball": {
+      "url": "https://en.wikipedia.org/wiki/Table_tennis",
+      "label": "Table tennis on Wikipedia"
+    },
+    "cricket-ball": {
+      "url": "https://en.wikipedia.org/wiki/Cricket_ball",
+      "label": "Cricket ball on Wikipedia"
+    },
+    "bowling-ball": {
+      "url": "https://en.wikipedia.org/wiki/Bowling_ball",
+      "label": "Bowling ball on Wikipedia"
+    },
+    "pool-ball": {
+      "url": "https://en.wikipedia.org/wiki/Billiard_ball",
+      "label": "Billiard ball on Wikipedia"
+    },
+    "pickleball": {
+      "url": "https://en.wikipedia.org/wiki/Pickleball",
+      "label": "Pickleball on Wikipedia"
+    },
+    "dodgeball": {
+      "url": "https://en.wikipedia.org/wiki/Dodgeball",
+      "label": "Dodgeball on Wikipedia"
+    },
+    "medicine-ball": {
+      "url": "https://en.wikipedia.org/wiki/Medicine_ball",
+      "label": "Medicine ball on Wikipedia"
+    },
+    "lacrosse-ball": {
+      "url": "https://en.wikipedia.org/wiki/Lacrosse",
+      "label": "Lacrosse on Wikipedia"
+    },
+    "squash-ball": {
+      "url": "https://en.wikipedia.org/wiki/Squash_(sport)",
+      "label": "Squash (sport) on Wikipedia"
+    },
+    "bouncy-ball": {
+      "url": "https://en.wikipedia.org/wiki/Bouncy_ball",
+      "label": "Bouncy ball on Wikipedia"
+    },
+    "marble": {
+      "url": "https://en.wikipedia.org/wiki/Marble_(toy)",
+      "label": "Marble (toy) on Wikipedia"
+    },
+    "hockey-puck": {
+      "url": "https://en.wikipedia.org/wiki/Hockey_puck",
+      "label": "Hockey puck on Wikipedia"
+    },
+    "shuttlecock": {
+      "url": "https://en.wikipedia.org/wiki/Shuttlecock",
+      "label": "Shuttlecock on Wikipedia"
+    },
+    "flying-disc": {
+      "url": "https://en.wikipedia.org/wiki/Frisbee",
+      "label": "Flying disc on Wikipedia"
+    },
+    "heart": {
+      "url": "https://en.wikipedia.org/wiki/Heart",
+      "label": "Heart on Wikipedia"
+    },
+    "campfire": {
+      "url": "https://en.wikipedia.org/wiki/Campfire",
+      "label": "Campfire on Wikipedia"
+    },
+    "chest": {
+      "url": "https://en.wikipedia.org/wiki/Chest_(furniture)",
+      "label": "Chest (furniture) on Wikipedia"
+    },
+    "sun": {
+      "url": "https://en.wikipedia.org/wiki/Sun",
+      "label": "Sun on Wikipedia"
+    },
+    "solar-system": {
+      "url": "https://en.wikipedia.org/wiki/Solar_System",
+      "label": "Solar System on Wikipedia"
+    },
+    "mercury": {
+      "url": "https://en.wikipedia.org/wiki/Mercury_(planet)",
+      "label": "Mercury (planet) on Wikipedia"
+    },
+    "venus": {
+      "url": "https://en.wikipedia.org/wiki/Venus",
+      "label": "Venus on Wikipedia"
+    },
+    "earth": {
+      "url": "https://en.wikipedia.org/wiki/Earth",
+      "label": "Earth on Wikipedia"
+    },
+    "moon": {
+      "url": "https://en.wikipedia.org/wiki/Moon",
+      "label": "Moon on Wikipedia"
+    },
+    "mars": {
+      "url": "https://en.wikipedia.org/wiki/Mars",
+      "label": "Mars on Wikipedia"
+    },
+    "jupiter": {
+      "url": "https://en.wikipedia.org/wiki/Jupiter",
+      "label": "Jupiter on Wikipedia"
+    },
+    "saturn": {
+      "url": "https://en.wikipedia.org/wiki/Saturn",
+      "label": "Saturn on Wikipedia"
+    },
+    "uranus": {
+      "url": "https://en.wikipedia.org/wiki/Uranus",
+      "label": "Uranus on Wikipedia"
+    },
+    "neptune": {
+      "url": "https://en.wikipedia.org/wiki/Neptune",
+      "label": "Neptune on Wikipedia"
+    },
+    "asteroid": {
+      "url": "https://en.wikipedia.org/wiki/Asteroid",
+      "label": "Asteroid on Wikipedia"
+    },
+    "comet": {
+      "url": "https://en.wikipedia.org/wiki/Comet",
+      "label": "Comet on Wikipedia"
+    },
+    "meteor": {
+      "url": "https://en.wikipedia.org/wiki/Meteoroid",
+      "label": "Meteoroid on Wikipedia"
+    },
+    "star": {
+      "url": "https://en.wikipedia.org/wiki/Star",
+      "label": "Star on Wikipedia"
+    },
+    "pulsar": {
+      "url": "https://en.wikipedia.org/wiki/Pulsar",
+      "label": "Pulsar on Wikipedia"
+    },
+    "black-hole": {
+      "url": "https://en.wikipedia.org/wiki/Black_hole",
+      "label": "Black hole on Wikipedia"
+    },
+    "star-cluster": {
+      "url": "https://en.wikipedia.org/wiki/Star_cluster",
+      "label": "Star cluster on Wikipedia"
+    },
+    "planetary-nebula": {
+      "url": "https://en.wikipedia.org/wiki/Ring_Nebula",
+      "label": "Ring Nebula on Wikipedia"
+    },
+    "nebula": {
+      "url": "https://en.wikipedia.org/wiki/Nebula",
+      "label": "Nebula on Wikipedia"
+    },
+    "supernova": {
+      "url": "https://en.wikipedia.org/wiki/Supernova",
+      "label": "Supernova on Wikipedia"
+    },
+    "spiral-galaxy": {
+      "url": "https://en.wikipedia.org/wiki/Spiral_galaxy",
+      "label": "Spiral galaxy on Wikipedia"
+    },
+    "virus": {
+      "url": "https://en.wikipedia.org/wiki/Virus",
+      "label": "Virus on Wikipedia"
+    },
+    "bacteriophage": {
+      "url": "https://en.wikipedia.org/wiki/Bacteriophage",
+      "label": "Bacteriophage on Wikipedia"
+    },
+    "bacterium": {
+      "url": "https://en.wikipedia.org/wiki/Bacteria",
+      "label": "Bacteria on Wikipedia"
+    },
+    "red-blood-cell": {
+      "url": "https://en.wikipedia.org/wiki/Red_blood_cell",
+      "label": "Red blood cell on Wikipedia"
+    },
+    "neuron": {
+      "url": "https://en.wikipedia.org/wiki/Neuron",
+      "label": "Neuron on Wikipedia"
+    },
+    "astrocyte": {
+      "url": "https://en.wikipedia.org/wiki/Astrocyte",
+      "label": "Astrocyte on Wikipedia"
+    },
+    "animal-cell": {
+      "url": "https://en.wikipedia.org/wiki/Cell_(biology)",
+      "label": "Cell (biology) on Wikipedia"
+    },
+    "dna": {
+      "url": "https://en.wikipedia.org/wiki/DNA",
+      "label": "DNA on Wikipedia"
+    },
+    "white-blood-cell": {
+      "url": "https://en.wikipedia.org/wiki/White_blood_cell",
+      "label": "White blood cell on Wikipedia"
+    },
+    "microglia": {
+      "url": "https://en.wikipedia.org/wiki/Microglia",
+      "label": "Microglia on Wikipedia"
+    },
+    "diatom": {
+      "url": "https://en.wikipedia.org/wiki/Diatom",
+      "label": "Diatom on Wikipedia"
+    },
+    "tardigrade": {
+      "url": "https://en.wikipedia.org/wiki/Tardigrade",
+      "label": "Tardigrade on Wikipedia"
+    },
+    "pollen": {
+      "url": "https://en.wikipedia.org/wiki/Pollen",
+      "label": "Pollen on Wikipedia"
+    },
+    "snowflake": {
+      "url": "https://en.wikipedia.org/wiki/Snowflake",
+      "label": "Snowflake on Wikipedia"
+    },
+    "chromosome": {
+      "url": "https://en.wikipedia.org/wiki/Chromosome",
+      "label": "Chromosome on Wikipedia"
+    },
+    "mitochondrion": {
+      "url": "https://en.wikipedia.org/wiki/Mitochondria",
+      "label": "Mitochondria on Wikipedia"
+    },
+    "paramecium": {
+      "url": "https://en.wikipedia.org/wiki/Paramecium",
+      "label": "Paramecium on Wikipedia"
+    },
+    "amoeba": {
+      "url": "https://en.wikipedia.org/wiki/Amoeba",
+      "label": "Amoeba on Wikipedia"
+    },
+    "orbital": {
+      "url": "https://en.wikipedia.org/wiki/Atomic_orbital",
+      "label": "Atomic orbital on Wikipedia"
+    },
+    "atom": {
+      "url": "https://en.wikipedia.org/wiki/Atom",
+      "label": "Atom on Wikipedia"
+    },
+    "molecule": {
+      "url": "https://en.wikipedia.org/wiki/Molecule",
+      "label": "Molecule on Wikipedia"
+    },
+    "protein": {
+      "url": "https://en.wikipedia.org/wiki/Protein",
+      "label": "Protein on Wikipedia"
+    },
+    "crystal-lattice": {
+      "url": "https://en.wikipedia.org/wiki/Crystal_structure",
+      "label": "Crystal structure on Wikipedia"
+    },
+    "periodic-table": {
+      "url": "https://en.wikipedia.org/wiki/Periodic_table",
+      "label": "Periodic table on Wikipedia"
+    },
+    "diamond": {
+      "url": "https://en.wikipedia.org/wiki/Diamond",
+      "label": "Diamond on Wikipedia"
+    },
+    "ruby": {
+      "url": "https://en.wikipedia.org/wiki/Ruby",
+      "label": "Ruby on Wikipedia"
+    },
+    "emerald": {
+      "url": "https://en.wikipedia.org/wiki/Emerald",
+      "label": "Emerald on Wikipedia"
+    },
+    "amethyst-geode": {
+      "url": "https://en.wikipedia.org/wiki/Amethyst",
+      "label": "Amethyst on Wikipedia"
+    },
+    "sapphire": {
+      "url": "https://en.wikipedia.org/wiki/Sapphire",
+      "label": "Sapphire on Wikipedia"
+    },
+    "quartz-cluster": {
+      "url": "https://en.wikipedia.org/wiki/Quartz",
+      "label": "Quartz on Wikipedia"
+    },
+    "opal": {
+      "url": "https://en.wikipedia.org/wiki/Opal",
+      "label": "Opal on Wikipedia"
+    },
+    "pearl": {
+      "url": "https://en.wikipedia.org/wiki/Pearl",
+      "label": "Pearl on Wikipedia"
+    },
+    "brain": {
+      "url": "https://en.wikipedia.org/wiki/Human_brain",
+      "label": "Human brain on Wikipedia"
+    },
+    "eye": {
+      "url": "https://en.wikipedia.org/wiki/Human_eye",
+      "label": "Human eye on Wikipedia"
+    },
+    "lungs": {
+      "url": "https://en.wikipedia.org/wiki/Lung",
+      "label": "Lung on Wikipedia"
+    },
+    "tooth": {
+      "url": "https://en.wikipedia.org/wiki/Tooth",
+      "label": "Tooth on Wikipedia"
+    },
+    "kidney": {
+      "url": "https://en.wikipedia.org/wiki/Kidney",
+      "label": "Kidney on Wikipedia"
+    },
+    "oak": {
+      "url": "https://en.wikipedia.org/wiki/Oak",
+      "label": "Oak on Wikipedia"
+    },
+    "pine": {
+      "url": "https://en.wikipedia.org/wiki/Pine",
+      "label": "Pine on Wikipedia"
+    },
+    "palm": {
+      "url": "https://en.wikipedia.org/wiki/Arecaceae",
+      "label": "Arecaceae on Wikipedia"
+    },
+    "cherry-blossom": {
+      "url": "https://en.wikipedia.org/wiki/Cherry_blossom",
+      "label": "Cherry blossom on Wikipedia"
+    },
+    "maple": {
+      "url": "https://en.wikipedia.org/wiki/Maple",
+      "label": "Maple on Wikipedia"
+    },
+    "bonsai": {
+      "url": "https://en.wikipedia.org/wiki/Bonsai",
+      "label": "Bonsai on Wikipedia"
+    },
+    "willow": {
+      "url": "https://en.wikipedia.org/wiki/Salix_babylonica",
+      "label": "Salix babylonica on Wikipedia"
+    },
+    "sunflower": {
+      "url": "https://en.wikipedia.org/wiki/Common_sunflower",
+      "label": "Common sunflower on Wikipedia"
+    },
+    "rose": {
+      "url": "https://en.wikipedia.org/wiki/Rose",
+      "label": "Rose on Wikipedia"
+    },
+    "dandelion": {
+      "url": "https://en.wikipedia.org/wiki/Taraxacum",
+      "label": "Taraxacum on Wikipedia"
+    },
+    "tulip": {
+      "url": "https://en.wikipedia.org/wiki/Tulip",
+      "label": "Tulip on Wikipedia"
+    },
+    "daisy": {
+      "url": "https://en.wikipedia.org/wiki/Bellis_perennis",
+      "label": "Bellis perennis on Wikipedia"
+    },
+    "lotus": {
+      "url": "https://en.wikipedia.org/wiki/Nelumbo_nucifera",
+      "label": "Nelumbo nucifera on Wikipedia"
+    },
+    "mushroom": {
+      "url": "https://en.wikipedia.org/wiki/Mushroom",
+      "label": "Mushroom on Wikipedia"
+    },
+    "fern": {
+      "url": "https://en.wikipedia.org/wiki/Fern",
+      "label": "Fern on Wikipedia"
+    },
+    "saguaro": {
+      "url": "https://en.wikipedia.org/wiki/Saguaro",
+      "label": "Saguaro on Wikipedia"
+    },
+    "coral": {
+      "url": "https://en.wikipedia.org/wiki/Coral_reef",
+      "label": "Coral reef on Wikipedia"
+    },
+    "pinecone": {
+      "url": "https://en.wikipedia.org/wiki/Cone_(botany)",
+      "label": "Cone (botany) on Wikipedia"
+    },
+    "acorn": {
+      "url": "https://en.wikipedia.org/wiki/Acorn",
+      "label": "Acorn on Wikipedia"
+    },
+    "succulent": {
+      "url": "https://en.wikipedia.org/wiki/Succulent_plant",
+      "label": "Succulent plant on Wikipedia"
+    },
+    "bamboo": {
+      "url": "https://en.wikipedia.org/wiki/Bamboo",
+      "label": "Bamboo on Wikipedia"
+    },
+    "rocks": {
+      "url": "https://en.wikipedia.org/wiki/Pebble",
+      "label": "Pebble on Wikipedia"
+    },
+    "kelp": {
+      "url": "https://en.wikipedia.org/wiki/Kelp",
+      "label": "Kelp on Wikipedia"
+    },
+    "storm-cloud": {
+      "url": "https://en.wikipedia.org/wiki/Cumulonimbus_cloud",
+      "label": "Cumulonimbus cloud on Wikipedia"
+    },
+    "lava-lamp": {
+      "url": "https://en.wikipedia.org/wiki/Lava_lamp",
+      "label": "Lava lamp on Wikipedia"
+    },
+    "snow-globe": {
+      "url": "https://en.wikipedia.org/wiki/Snow_globe",
+      "label": "Snow globe on Wikipedia"
+    },
+    "volcano": {
+      "url": "https://en.wikipedia.org/wiki/Volcano",
+      "label": "Volcano on Wikipedia"
+    },
+    "ice-statue": {
+      "url": "https://en.wikipedia.org/wiki/Ice_sculpture",
+      "label": "Ice sculpture on Wikipedia"
+    },
+    "candle": {
+      "url": "https://en.wikipedia.org/wiki/Candle",
+      "label": "Candle on Wikipedia"
+    },
+    "tornado": {
+      "url": "https://en.wikipedia.org/wiki/Tornado",
+      "label": "Tornado on Wikipedia"
+    },
+    "rainbow": {
+      "url": "https://en.wikipedia.org/wiki/Rainbow",
+      "label": "Rainbow on Wikipedia"
+    },
+    "iceberg": {
+      "url": "https://en.wikipedia.org/wiki/Iceberg",
+      "label": "Iceberg on Wikipedia"
+    },
+    "waterfall": {
+      "url": "https://en.wikipedia.org/wiki/Waterfall",
+      "label": "Waterfall on Wikipedia"
+    },
+    "ocean-wave": {
+      "url": "https://en.wikipedia.org/wiki/Wind_wave",
+      "label": "Wind wave on Wikipedia"
+    },
+    "geyser": {
+      "url": "https://en.wikipedia.org/wiki/Geyser",
+      "label": "Geyser on Wikipedia"
+    },
+    "ice-cream": {
+      "url": "https://en.wikipedia.org/wiki/Ice_cream",
+      "label": "Ice cream on Wikipedia"
+    },
+    "watermelon": {
+      "url": "https://en.wikipedia.org/wiki/Watermelon",
+      "label": "Watermelon on Wikipedia"
+    },
+    "birthday-cake": {
+      "url": "https://en.wikipedia.org/wiki/Birthday_cake",
+      "label": "Birthday cake on Wikipedia"
+    },
+    "popcorn": {
+      "url": "https://en.wikipedia.org/wiki/Popcorn",
+      "label": "Popcorn on Wikipedia"
+    },
+    "jelly": {
+      "url": "https://en.wikipedia.org/wiki/Gelatine_dessert",
+      "label": "Gelatine dessert on Wikipedia"
+    },
+    "pancakes": {
+      "url": "https://en.wikipedia.org/wiki/Pancake",
+      "label": "Pancake on Wikipedia"
+    },
+    "cupcake": {
+      "url": "https://en.wikipedia.org/wiki/Cupcake",
+      "label": "Cupcake on Wikipedia"
+    },
+    "lollipop": {
+      "url": "https://en.wikipedia.org/wiki/Lollipop",
+      "label": "Lollipop on Wikipedia"
+    },
+    "candy-cane": {
+      "url": "https://en.wikipedia.org/wiki/Candy_cane",
+      "label": "Candy cane on Wikipedia"
+    },
+    "macarons": {
+      "url": "https://en.wikipedia.org/wiki/Macaron",
+      "label": "Macaron on Wikipedia"
+    },
+    "donut": {
+      "url": "https://en.wikipedia.org/wiki/Doughnut",
+      "label": "Doughnut on Wikipedia"
+    },
+    "gummy-bear": {
+      "url": "https://en.wikipedia.org/wiki/Gummy_bear",
+      "label": "Gummy bear on Wikipedia"
+    },
+    "pretzel": {
+      "url": "https://en.wikipedia.org/wiki/Pretzel",
+      "label": "Pretzel on Wikipedia"
+    },
+    "croissant": {
+      "url": "https://en.wikipedia.org/wiki/Croissant",
+      "label": "Croissant on Wikipedia"
+    },
+    "pizza": {
+      "url": "https://en.wikipedia.org/wiki/Pizza",
+      "label": "Pizza on Wikipedia"
+    },
+    "burger": {
+      "url": "https://en.wikipedia.org/wiki/Hamburger",
+      "label": "Hamburger on Wikipedia"
+    },
+    "sushi": {
+      "url": "https://en.wikipedia.org/wiki/Sushi",
+      "label": "Sushi on Wikipedia"
+    },
+    "taco": {
+      "url": "https://en.wikipedia.org/wiki/Taco",
+      "label": "Taco on Wikipedia"
+    },
+    "egg": {
+      "url": "https://en.wikipedia.org/wiki/Boiled_egg",
+      "label": "Boiled egg on Wikipedia"
+    },
+    "coffee": {
+      "url": "https://en.wikipedia.org/wiki/Coffee",
+      "label": "Coffee on Wikipedia"
+    },
+    "apple": {
+      "url": "https://en.wikipedia.org/wiki/Apple",
+      "label": "Apple on Wikipedia"
+    },
+    "banana": {
+      "url": "https://en.wikipedia.org/wiki/Banana",
+      "label": "Banana on Wikipedia"
+    },
+    "orange": {
+      "url": "https://en.wikipedia.org/wiki/Orange_(fruit)",
+      "label": "Orange (fruit) on Wikipedia"
+    },
+    "kiwi": {
+      "url": "https://en.wikipedia.org/wiki/Kiwifruit",
+      "label": "Kiwifruit on Wikipedia"
+    },
+    "pineapple": {
+      "url": "https://en.wikipedia.org/wiki/Pineapple",
+      "label": "Pineapple on Wikipedia"
+    },
+    "cherries": {
+      "url": "https://en.wikipedia.org/wiki/Cherry",
+      "label": "Cherry on Wikipedia"
+    },
+    "grapes": {
+      "url": "https://en.wikipedia.org/wiki/Grape",
+      "label": "Grape on Wikipedia"
+    },
+    "avocado": {
+      "url": "https://en.wikipedia.org/wiki/Avocado",
+      "label": "Avocado on Wikipedia"
+    },
+    "bricks": {
+      "url": "https://en.wikipedia.org/wiki/Toy_block",
+      "label": "Toy block on Wikipedia"
+    },
+    "rubber-duck": {
+      "url": "https://en.wikipedia.org/wiki/Rubber_duck",
+      "label": "Rubber duck on Wikipedia"
+    },
+    "spinning-top": {
+      "url": "https://en.wikipedia.org/wiki/Spinning_top",
+      "label": "Spinning top on Wikipedia"
+    },
+    "dice": {
+      "url": "https://en.wikipedia.org/wiki/Dice",
+      "label": "Dice on Wikipedia"
+    },
+    "newtons-cradle": {
+      "url": "https://en.wikipedia.org/wiki/Newton's_cradle",
+      "label": "Newton's cradle on Wikipedia"
+    },
+    "teddy-bear": {
+      "url": "https://en.wikipedia.org/wiki/Teddy_bear",
+      "label": "Teddy bear on Wikipedia"
+    },
+    "yo-yo": {
+      "url": "https://en.wikipedia.org/wiki/Yo-yo",
+      "label": "Yo-yo on Wikipedia"
+    },
+    "puzzle-cube": {
+      "url": "https://en.wikipedia.org/wiki/Combination_puzzle",
+      "label": "Combination puzzle on Wikipedia"
+    },
+    "kite": {
+      "url": "https://en.wikipedia.org/wiki/Kite",
+      "label": "Kite on Wikipedia"
+    },
+    "paper-plane": {
+      "url": "https://en.wikipedia.org/wiki/Paper_plane",
+      "label": "Paper plane on Wikipedia"
+    },
+    "origami-crane": {
+      "url": "https://en.wikipedia.org/wiki/Orizuru",
+      "label": "Orizuru on Wikipedia"
+    },
+    "balloon-dog": {
+      "url": "https://en.wikipedia.org/wiki/Balloon_modelling",
+      "label": "Balloon modelling on Wikipedia"
+    },
+    "soap-bubbles": {
+      "url": "https://en.wikipedia.org/wiki/Soap_bubble",
+      "label": "Soap bubble on Wikipedia"
+    },
+    "robot": {
+      "url": "https://en.wikipedia.org/wiki/Wind-up_toy",
+      "label": "Wind-up toy on Wikipedia"
+    },
+    "chess-set": {
+      "url": "https://en.wikipedia.org/wiki/Chess",
+      "label": "Chess on Wikipedia"
+    },
+    "lorenz": {
+      "url": "https://en.wikipedia.org/wiki/Lorenz_system",
+      "label": "Lorenz system on Wikipedia"
+    },
+    "mobius": {
+      "url": "https://en.wikipedia.org/wiki/M%C3%B6bius_strip",
+      "label": "Möbius strip on Wikipedia"
+    },
+    "klein-bottle": {
+      "url": "https://en.wikipedia.org/wiki/Klein_bottle",
+      "label": "Klein bottle on Wikipedia"
+    },
+    "menger-sponge": {
+      "url": "https://en.wikipedia.org/wiki/Menger_sponge",
+      "label": "Menger sponge on Wikipedia"
+    },
+    "hypercube": {
+      "url": "https://en.wikipedia.org/wiki/Hypercube",
+      "label": "Hypercube on Wikipedia"
+    },
+    "torus-knot": {
+      "url": "https://en.wikipedia.org/wiki/Torus_knot",
+      "label": "Torus knot on Wikipedia"
+    },
+    "gyroid": {
+      "url": "https://en.wikipedia.org/wiki/Gyroid",
+      "label": "Gyroid on Wikipedia"
+    },
+    "mandelbulb": {
+      "url": "https://en.wikipedia.org/wiki/Mandelbulb",
+      "label": "Mandelbulb on Wikipedia"
+    },
+    "sierpinski": {
+      "url": "https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle",
+      "label": "Sierpiński triangle on Wikipedia"
+    },
+    "platonic": {
+      "url": "https://en.wikipedia.org/wiki/Platonic_solid",
+      "label": "Platonic solid on Wikipedia"
+    },
+    "seashell-spiral": {
+      "url": "https://en.wikipedia.org/wiki/Logarithmic_spiral",
+      "label": "Logarithmic spiral on Wikipedia"
+    },
+    "graph-plotter": {
+      "url": "https://en.wikipedia.org/wiki/Graph_of_a_function",
+      "label": "Graph of a function on Wikipedia"
+    },
+    "unit-circle": {
+      "url": "https://en.wikipedia.org/wiki/Unit_circle",
+      "label": "Unit circle on Wikipedia"
+    },
+    "fourier-circles": {
+      "url": "https://en.wikipedia.org/wiki/Fourier_series",
+      "label": "Fourier series on Wikipedia"
+    },
+    "pythagoras-proof": {
+      "url": "https://en.wikipedia.org/wiki/Pythagorean_theorem",
+      "label": "Pythagorean theorem on Wikipedia"
+    },
+    "book": {
+      "url": "https://en.wikipedia.org/wiki/Picture_book",
+      "label": "Picture book on Wikipedia"
+    },
+    "laptop": {
+      "url": "https://en.wikipedia.org/wiki/Laptop",
+      "label": "Laptop on Wikipedia"
+    },
+    "music-box": {
+      "url": "https://en.wikipedia.org/wiki/Music_box",
+      "label": "Music box on Wikipedia"
+    },
+    "clock": {
+      "url": "https://en.wikipedia.org/wiki/Alarm_clock",
+      "label": "Alarm clock on Wikipedia"
+    },
+    "gift-box": {
+      "url": "https://en.wikipedia.org/wiki/Gift_wrapping",
+      "label": "Gift wrapping on Wikipedia"
+    },
+    "umbrella": {
+      "url": "https://en.wikipedia.org/wiki/Umbrella",
+      "label": "Umbrella on Wikipedia"
+    },
+    "desk-fan": {
+      "url": "https://en.wikipedia.org/wiki/Fan_(machine)",
+      "label": "Fan (machine) on Wikipedia"
+    },
+    "telescope": {
+      "url": "https://en.wikipedia.org/wiki/Telescope",
+      "label": "Telescope on Wikipedia"
+    },
+    "fountain-pen": {
+      "url": "https://en.wikipedia.org/wiki/Fountain_pen",
+      "label": "Fountain pen on Wikipedia"
+    },
+    "running-shoe": {
+      "url": "https://en.wikipedia.org/wiki/Sneakers",
+      "label": "Sneakers on Wikipedia"
+    },
+    "hoodie": {
+      "url": "https://en.wikipedia.org/wiki/Hoodie",
+      "label": "Hoodie on Wikipedia"
+    },
+    "sunglasses": {
+      "url": "https://en.wikipedia.org/wiki/Sunglasses",
+      "label": "Sunglasses on Wikipedia"
+    },
+    "baseball-cap": {
+      "url": "https://en.wikipedia.org/wiki/Baseball_cap",
+      "label": "Baseball cap on Wikipedia"
+    },
+    "sword-in-stone": {
+      "url": "https://en.wikipedia.org/wiki/Excalibur",
+      "label": "Excalibur on Wikipedia"
+    },
+    "shield": {
+      "url": "https://en.wikipedia.org/wiki/Escutcheon_(heraldry)",
+      "label": "Escutcheon (heraldry) on Wikipedia"
+    },
+    "bow-and-target": {
+      "url": "https://en.wikipedia.org/wiki/Bow_and_arrow",
+      "label": "Bow and arrow on Wikipedia"
+    },
+    "trebuchet": {
+      "url": "https://en.wikipedia.org/wiki/Trebuchet",
+      "label": "Trebuchet on Wikipedia"
+    },
+    "crossbow": {
+      "url": "https://en.wikipedia.org/wiki/Crossbow",
+      "label": "Crossbow on Wikipedia"
+    },
+    "knights-helmet": {
+      "url": "https://en.wikipedia.org/wiki/Great_helm",
+      "label": "Great helm on Wikipedia"
+    },
+    "crown": {
+      "url": "https://en.wikipedia.org/wiki/Crown",
+      "label": "Crown on Wikipedia"
+    },
+    "crystal-ball": {
+      "url": "https://en.wikipedia.org/wiki/Crystal_ball",
+      "label": "Crystal ball on Wikipedia"
+    },
+    "jellyfish": {
+      "url": "https://en.wikipedia.org/wiki/Jellyfish",
+      "label": "Jellyfish on Wikipedia"
+    },
+    "fish-school": {
+      "url": "https://en.wikipedia.org/wiki/Shoaling_and_schooling",
+      "label": "Shoaling and schooling on Wikipedia"
+    },
+    "butterfly": {
+      "url": "https://en.wikipedia.org/wiki/Butterfly",
+      "label": "Butterfly on Wikipedia"
+    },
+    "pufferfish": {
+      "url": "https://en.wikipedia.org/wiki/Tetraodontidae",
+      "label": "Tetraodontidae on Wikipedia"
+    },
+    "nautilus": {
+      "url": "https://en.wikipedia.org/wiki/Nautilus",
+      "label": "Nautilus on Wikipedia"
+    },
+    "ladybug": {
+      "url": "https://en.wikipedia.org/wiki/Coccinellidae",
+      "label": "Coccinellidae on Wikipedia"
+    },
+    "snail": {
+      "url": "https://en.wikipedia.org/wiki/Snail",
+      "label": "Snail on Wikipedia"
+    },
+    "octopus": {
+      "url": "https://en.wikipedia.org/wiki/Octopus",
+      "label": "Octopus on Wikipedia"
+    },
+    "starfish": {
+      "url": "https://en.wikipedia.org/wiki/Starfish",
+      "label": "Starfish on Wikipedia"
+    },
+    "sea-urchin": {
+      "url": "https://en.wikipedia.org/wiki/Sea_urchin",
+      "label": "Sea urchin on Wikipedia"
+    },
+    "frog": {
+      "url": "https://en.wikipedia.org/wiki/Frog",
+      "label": "Frog on Wikipedia"
+    },
+    "penguin": {
+      "url": "https://en.wikipedia.org/wiki/Penguin",
+      "label": "Penguin on Wikipedia"
+    },
+    "owl": {
+      "url": "https://en.wikipedia.org/wiki/Owl",
+      "label": "Owl on Wikipedia"
+    },
+    "jack-o-lantern": {
+      "url": "https://en.wikipedia.org/wiki/Jack-o'-lantern",
+      "label": "Jack-o'-lantern on Wikipedia"
+    },
+    "snowman": {
+      "url": "https://en.wikipedia.org/wiki/Snowman",
+      "label": "Snowman on Wikipedia"
+    },
+    "fireworks": {
+      "url": "https://en.wikipedia.org/wiki/Fireworks",
+      "label": "Fireworks on Wikipedia"
+    },
+    "decorated-tree": {
+      "url": "https://en.wikipedia.org/wiki/Christmas_tree",
+      "label": "Christmas tree on Wikipedia"
+    },
+    "patterned-egg": {
+      "url": "https://en.wikipedia.org/wiki/Easter_egg",
+      "label": "Easter egg on Wikipedia"
+    },
+    "paper-lantern": {
+      "url": "https://en.wikipedia.org/wiki/Paper_lantern",
+      "label": "Paper lantern on Wikipedia"
+    },
+    "diya": {
+      "url": "https://en.wikipedia.org/wiki/Diya_(lamp)",
+      "label": "Diya (lamp) on Wikipedia"
+    },
+    "menorah": {
+      "url": "https://en.wikipedia.org/wiki/Hanukkah_menorah",
+      "label": "Hanukkah menorah on Wikipedia"
+    },
+    "guitar": {
+      "url": "https://en.wikipedia.org/wiki/Acoustic_guitar",
+      "label": "Acoustic guitar on Wikipedia"
+    },
+    "drum": {
+      "url": "https://en.wikipedia.org/wiki/Snare_drum",
+      "label": "Snare drum on Wikipedia"
+    },
+    "xylophone": {
+      "url": "https://en.wikipedia.org/wiki/Xylophone",
+      "label": "Xylophone on Wikipedia"
+    },
+    "toy-piano": {
+      "url": "https://en.wikipedia.org/wiki/Toy_piano",
+      "label": "Toy piano on Wikipedia"
+    },
+    "grand-piano": {
+      "url": "https://en.wikipedia.org/wiki/Piano",
+      "label": "Piano on Wikipedia"
+    },
+    "upright-piano": {
+      "url": "https://en.wikipedia.org/wiki/Piano",
+      "label": "Piano on Wikipedia"
+    },
+    "harpsichord": {
+      "url": "https://en.wikipedia.org/wiki/Harpsichord",
+      "label": "Harpsichord on Wikipedia"
+    },
+    "electronic-keyboard": {
+      "url": "https://en.wikipedia.org/wiki/Electronic_keyboard",
+      "label": "Electronic keyboard on Wikipedia"
+    },
+    "rocket": {
+      "url": "https://en.wikipedia.org/wiki/Rocket",
+      "label": "Rocket on Wikipedia"
+    },
+    "helicopter": {
+      "url": "https://en.wikipedia.org/wiki/Helicopter",
+      "label": "Helicopter on Wikipedia"
+    },
+    "hot-air-balloon": {
+      "url": "https://en.wikipedia.org/wiki/Hot_air_balloon",
+      "label": "Hot air balloon on Wikipedia"
+    },
+    "steam-train": {
+      "url": "https://en.wikipedia.org/wiki/Steam_locomotive",
+      "label": "Steam locomotive on Wikipedia"
+    },
+    "ocean-liner": {
+      "url": "https://en.wikipedia.org/wiki/Ocean_liner",
+      "label": "Ocean liner on Wikipedia"
+    },
+    "sports-car": {
+      "url": "https://en.wikipedia.org/wiki/Sports_car",
+      "label": "Sports car on Wikipedia"
+    },
+    "bus": {
+      "url": "https://en.wikipedia.org/wiki/Bus",
+      "label": "Bus on Wikipedia"
+    },
+    "propeller-plane": {
+      "url": "https://en.wikipedia.org/wiki/Airplane",
+      "label": "Airplane on Wikipedia"
+    },
+    "jet": {
+      "url": "https://en.wikipedia.org/wiki/Jet_airliner",
+      "label": "Jet airliner on Wikipedia"
+    },
+    "sailboat": {
+      "url": "https://en.wikipedia.org/wiki/Sailboat",
+      "label": "Sailboat on Wikipedia"
+    },
+    "submarine": {
+      "url": "https://en.wikipedia.org/wiki/Submarine",
+      "label": "Submarine on Wikipedia"
+    },
+    "bicycle": {
+      "url": "https://en.wikipedia.org/wiki/Bicycle",
+      "label": "Bicycle on Wikipedia"
+    },
+    "tractor": {
+      "url": "https://en.wikipedia.org/wiki/Tractor",
+      "label": "Tractor on Wikipedia"
+    },
+    "ufo": {
+      "url": "https://en.wikipedia.org/wiki/Flying_saucer",
+      "label": "Flying saucer on Wikipedia"
+    },
+    "eiffel-tower": {
+      "url": "https://en.wikipedia.org/wiki/Eiffel_Tower",
+      "label": "Eiffel Tower on Wikipedia"
+    },
+    "washington-monument": {
+      "url": "https://en.wikipedia.org/wiki/Washington_Monument",
+      "label": "Washington Monument on Wikipedia"
+    },
+    "pyramids": {
+      "url": "https://en.wikipedia.org/wiki/Giza_pyramid_complex",
+      "label": "Giza pyramid complex on Wikipedia"
+    },
+    "lighthouse": {
+      "url": "https://en.wikipedia.org/wiki/Lighthouse",
+      "label": "Lighthouse on Wikipedia"
+    },
+    "statue-of-liberty": {
+      "url": "https://en.wikipedia.org/wiki/Statue_of_Liberty",
+      "label": "Statue of Liberty on Wikipedia"
+    },
+    "white-house": {
+      "url": "https://en.wikipedia.org/wiki/White_House",
+      "label": "White House on Wikipedia"
+    },
+    "leaning-tower": {
+      "url": "https://en.wikipedia.org/wiki/Leaning_Tower_of_Pisa",
+      "label": "Leaning Tower of Pisa on Wikipedia"
+    },
+    "colosseum": {
+      "url": "https://en.wikipedia.org/wiki/Colosseum",
+      "label": "Colosseum on Wikipedia"
+    },
+    "parthenon": {
+      "url": "https://en.wikipedia.org/wiki/Parthenon",
+      "label": "Parthenon on Wikipedia"
+    },
+    "stonehenge": {
+      "url": "https://en.wikipedia.org/wiki/Stonehenge",
+      "label": "Stonehenge on Wikipedia"
+    },
+    "big-ben": {
+      "url": "https://en.wikipedia.org/wiki/Big_Ben",
+      "label": "Big Ben on Wikipedia"
+    },
+    "taj-mahal": {
+      "url": "https://en.wikipedia.org/wiki/Taj_Mahal",
+      "label": "Taj Mahal on Wikipedia"
+    },
+    "castle": {
+      "url": "https://en.wikipedia.org/wiki/Castle",
+      "label": "Castle on Wikipedia"
+    },
+    "pagoda": {
+      "url": "https://en.wikipedia.org/wiki/Pagoda",
+      "label": "Pagoda on Wikipedia"
+    },
+    "windmill": {
+      "url": "https://en.wikipedia.org/wiki/Windmill",
+      "label": "Windmill on Wikipedia"
+    },
+    "perceptron": {
+      "url": "https://en.wikipedia.org/wiki/Perceptron",
+      "label": "Perceptron on Wikipedia"
+    },
+    "multilayer-perceptron": {
+      "url": "https://en.wikipedia.org/wiki/Multilayer_perceptron",
+      "label": "Multilayer perceptron on Wikipedia"
+    },
+    "neural-network": {
+      "url": "https://en.wikipedia.org/wiki/Neural_network_(machine_learning)",
+      "label": "Neural network (machine learning) on Wikipedia"
+    },
+    "cnn": {
+      "url": "https://en.wikipedia.org/wiki/Convolutional_neural_network",
+      "label": "Convolutional neural network on Wikipedia"
+    },
+    "rnn": {
+      "url": "https://en.wikipedia.org/wiki/Recurrent_neural_network",
+      "label": "Recurrent neural network on Wikipedia"
+    },
+    "transformer": {
+      "url": "https://en.wikipedia.org/wiki/Transformer_(deep_learning)",
+      "label": "Transformer (deep learning) on Wikipedia"
+    },
+    "diffusion-model": {
+      "url": "https://en.wikipedia.org/wiki/Diffusion_model",
+      "label": "Diffusion model on Wikipedia"
+    },
+    "gradient-descent": {
+      "url": "https://en.wikipedia.org/wiki/Gradient_descent",
+      "label": "Gradient descent on Wikipedia"
+    },
+    "word-vectors": {
+      "url": "https://en.wikipedia.org/wiki/Word_embedding",
+      "label": "Word embedding on Wikipedia"
+    },
+    "sorting-machine": {
+      "url": "https://en.wikipedia.org/wiki/Sorting_algorithm",
+      "label": "Sorting algorithm on Wikipedia"
+    },
+    "half-adder": {
+      "url": "https://en.wikipedia.org/wiki/Adder_(electronics)",
+      "label": "Adder (electronics) on Wikipedia"
+    },
+    "turing-machine": {
+      "url": "https://en.wikipedia.org/wiki/Turing_machine",
+      "label": "Turing machine on Wikipedia"
+    },
+    "difference-engine": {
+      "url": "https://en.wikipedia.org/wiki/Difference_engine",
+      "label": "Difference engine on Wikipedia"
+    },
+    "enigma-machine": {
+      "url": "https://en.wikipedia.org/wiki/Enigma_machine",
+      "label": "Enigma machine on Wikipedia"
+    },
+    "bombe": {
+      "url": "https://en.wikipedia.org/wiki/Bombe",
+      "label": "Bombe on Wikipedia"
+    }
+  }
+}

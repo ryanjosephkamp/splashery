@@ -7,6 +7,7 @@
 // larger, coarser one. Both are drawn by the surface pass.
 
 import { GasGrid } from "./gas.js";
+import { PHONE_ENV } from "../phone.js";
 
 const hex = (h) => {
   const n = parseInt((h || "#999999").slice(1), 16);
@@ -14,7 +15,7 @@ const hex = (h) => {
 };
 
 export class GasScene {
-  constructor(device, specs, { profile = "high" } = {}) {
+  constructor(device, specs, { profile = "high", phone = false } = {}) {
     this.flame = specs.find((s) => s.kind === "flame") || null;
     this.gases = specs.filter((s) => s.kind === "gas");
     this.names = new Set([...this.gases.map((s) => s.name), this.flame?.name].filter(Boolean));
@@ -22,6 +23,7 @@ export class GasScene {
     for (const s of this.gases) this.state.set(s.name, { on: s.source?.on ?? true, flow: 1, wind: [0, 0, 0] }); // prettier-ignore
     if (this.flame) this.state.set(this.flame.name, { on: this.flame.on ?? true, wind: [0, 0, 0] });
     this.profile = profile;
+    this.gasN = phone ? PHONE_ENV.gasN : 0; // r7
     this.steps = profile === "low" ? 18 : profile === "mid" ? 28 : 56;
     if (this.flame) this.makeFlame(device);
     if (this.gases.some((s) => s.source)) this.makeSmoke(device);
@@ -33,7 +35,7 @@ export class GasScene {
     // The grid is a little taller than the recipe's flame and about a third
     // as wide.
     const w = Math.max(0.1, H * 0.45);
-    const g = new GasGrid(device, { at: [f.at[0], f.at[1] - 0.02, f.at[2]], size: [w, H * 1.3, w], profile: this.profile }); // prettier-ignore
+    const g = new GasGrid(device, { at: [f.at[0], f.at[1] - 0.02, f.at[2]], size: [w, H * 1.3, w], profile: this.profile, n: this.gasN }); // prettier-ignore
     const c = g.cell;
     // The flame's gas is fast for its size: small steps (120 a second).
     g.hz = 120;
@@ -61,7 +63,7 @@ export class GasScene {
     this.steam = steam;
     const at = srcs[0].at;
     const w = Math.max(steam ? 0.6 : 0.4, 2 * r + 0.3);
-    const g = new GasGrid(device, { at: [at[0], at[1] - 0.04, at[2]], size: [w, 1.3, w], profile: this.profile }); // prettier-ignore
+    const g = new GasGrid(device, { at: [at[0], at[1] - 0.04, at[2]], size: [w, 1.3, w], profile: this.profile, n: this.gasN }); // prettier-ignore
     const c = g.cell;
     Object.assign(g.params, {
       heatLift: (steam ? 3 : 9) / c,

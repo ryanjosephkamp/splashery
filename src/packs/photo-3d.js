@@ -9,6 +9,10 @@
 // three samples come with their depth maps, made by tools/p3d-depth.mjs.
 
 import { smoothstep, quatAxisAngle } from "../kit.js";
+import { minimumField } from "../photo3d/background.js";
+import { borderSplats } from "../photo3d/border.js";
+import { discardSurface, retireBitmap } from "../photo3d/bitmaps.js";
+import { setFilledBackground } from "../photo-splats.js";
 import {
   buildPhotoSplats,
   PHOTO_DENSITY,
@@ -16,9 +20,176 @@ import {
   LAYERS,
   SPLAT_OPACITY,
   SPLAT_FLAT,
+  FLAT_KEEP,
 } from "./photo-3d-core.js";
+import { DOT_SAMPLES } from "./dot-samples.js"; // lane Dot samples: the AI-made pictures
 
 export { PHOTO_BUDGETS };
+import {
+  sharpEntry,
+  sharpPhoto,
+  sharpDrive,
+  SHARP_CELLS,
+  prepareSharpPhoto,
+} from "./photo-sharp.js"; // lane Photo sharp view
+import { SAMPLES as SOUND_FILES, specFor } from "../voices.js"; // lane Photo depth
+
+// ---- The depth sound (lane Photo depth) ---------------------------------------------
+// The owner's walkthrough of October 9, 2026: pick the tap's sound in the Toy tab. Paper (the
+// sound since Sound B), a soft chime, pop-up layers (a pluck as each layer rises, a step higher
+// each, and down again as they settle), a water drop, none, or your own sound. No wind and no
+// whoosh (his note on the Sound Board). The choice is the toy option `sound`, saved with the scene
+// and its link. Your own sound stays in this page's memory: it is played from an object URL, and
+// never uploaded or put in the scene, the link or storage; a scene that says "custom" without it
+// (opened again, or on another device) plays Paper.
+// (the plucks land as each layer's rise is about half done: layerMorph over the 3.2 s ease)
+const PLUCKS = [0.42, 0.78, 1.12, 1.46];
+export const DEPTH_SOUNDS = [
+  { id: "paper", label: "Paper", spec: null }, // (src/toy-sounds.js, "photo-3d")
+  {
+    id: "chime",
+    label: "Soft chime",
+    spec: {
+      on: [
+        { voice: "bell", f: 784, bright: 0.25, decay: 1.4, vol: 0.22 },
+        { voice: "bell", at: 0.55, f: 1175, bright: 0.2, decay: 1.6, vol: 0.16 },
+      ],
+      off: [
+        { voice: "bell", f: 1175, bright: 0.2, decay: 1.2, vol: 0.16 },
+        { voice: "bell", at: 0.55, f: 784, bright: 0.25, decay: 1.6, vol: 0.2 },
+      ],
+    },
+  },
+  {
+    id: "layers",
+    label: "Pop-up layers",
+    spec: {
+      on: [392, 494, 587, 784].map((f, i) => ({ voice: "harp", at: PLUCKS[i], f, vol: 0.32 })),
+      off: [784, 587, 494, 392].map((f, i) => ({ voice: "harp", at: PLUCKS[i], f, vol: 0.28 })),
+    },
+  },
+  {
+    id: "drop",
+    label: "Water drop",
+    spec: {
+      on: [
+        { voice: "drip", f: 820, n: 1, vol: 0.5 },
+        { voice: "drip", at: 1.5, f: 1150, n: 1, vol: 0.22 },
+      ],
+      off: [
+        { voice: "drip", f: 1050, n: 1, vol: 0.45 },
+        { voice: "drip", at: 1.3, f: 720, n: 1, vol: 0.2 },
+      ],
+    },
+  },
+  { id: "none", label: "None", spec: [] },
+];
+const OWN = { key: null, url: null, name: "", n: 0 };
+const ownSpec = () => ({ voice: "sample", file: OWN.key, vol: 0.8, len: 6 });
+
+// The tap's sound for the toy's options (src/app.js asks; null is Paper, the toy's own).
+export function depthSound(o = {}) {
+  if (o.sound === "custom") return OWN.key ? ownSpec() : null;
+  return DEPTH_SOUNDS.find((x) => x.id === o.sound)?.spec ?? null;
+}
+
+const soundPick = () => {
+  const t = globalThis.window?.__splashery?.player?.scene?.toy;
+  const v = t?.id === "photo-3d" ? t.options?.sound : null;
+  return v === "custom" && !OWN.key ? "paper" : v || "paper";
+};
+
+// Picks the sound: into the scene's options (so a saved scene and its link keep it; the toy isn't
+// rebuilt), and plays it once so it is heard.
+function setDepthSound(id) {
+  const w = globalThis.window?.__splashery;
+  const t = w?.player?.scene?.toy;
+  if (!t || t.id !== "photo-3d") return;
+  t.options = { ...(t.options || {}), sound: id };
+  const spec = depthSound(t.options);
+  const sound = w.app?.sound;
+  if (sound?.enabled && spec) sound.play(specFor(spec, true), { key: "toy" });
+  for (const fn of SOUND_LISTENERS) fn();
+}
+const SOUND_LISTENERS = new Set();
+
+// Your own sound: kept in memory as an object URL for the sample voice (never uploaded or stored).
+function useOwnSound(file) {
+  if (OWN.url) URL.revokeObjectURL(OWN.url);
+  if (OWN.key) delete SOUND_FILES.data[OWN.key];
+  OWN.key = `pdp-own-${++OWN.n}`; // (a new name each time, so the decoded copy is the new file's)
+  OWN.url = URL.createObjectURL(file);
+  OWN.name = file.name || "Your sound";
+  SOUND_FILES.data[OWN.key] = OWN.url;
+  setDepthSound("custom");
+}
+
+// The choice, for the toy's input panel (`input.live`).
+function soundEntry() {
+  return {
+    render() {
+      const box = document.createElement("div");
+      box.className = "pdp-sound";
+      const title = document.createElement("p");
+      title.className = "note";
+      title.textContent = "Sound of the depth rising and settling:";
+      const row = document.createElement("div");
+      row.className = "button-row";
+      row.setAttribute("role", "group");
+      row.setAttribute("aria-label", "Sound");
+      const chips = [];
+      for (const x of DEPTH_SOUNDS) {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "chip";
+        b.id = `pdp-sound-${x.id}`;
+        b.textContent = x.label;
+        b.addEventListener("click", () => setDepthSound(x.id));
+        chips.push([x.id, b]);
+        row.append(b);
+      }
+      const own = document.createElement("button");
+      own.type = "button";
+      own.className = "chip";
+      own.id = "pdp-sound-custom";
+      own.textContent = "Use my own sound…";
+      const input = document.createElement("input");
+      input.type = "file";
+      input.accept = "audio/*,.mp3,.m4a,.wav,.ogg,.aac,.flac";
+      input.hidden = true;
+      input.id = "pdp-sound-file";
+      own.addEventListener("click", () => input.click());
+      input.addEventListener("change", () => {
+        if (input.files?.[0]) useOwnSound(input.files[0]);
+        input.value = "";
+      });
+      row.append(own, input);
+      chips.push(["custom", own]);
+      const note = document.createElement("p");
+      note.className = "note";
+      box.append(title, row, note);
+      const paint = () => {
+        const v = soundPick();
+        for (const [id, b] of chips) b.setAttribute("aria-pressed", String(v === id));
+        note.textContent =
+          v === "custom"
+            ? `Your sound: ${OWN.name}. It stays on this device, in this page only: it isn't uploaded or saved with the scene or its link.`
+            : "Your own sound stays on this device: it isn't uploaded or saved with the scene or its link.";
+      };
+      paint();
+      SOUND_LISTENERS.add(paint);
+      const gone = new MutationObserver(() => {
+        if (!box.isConnected) {
+          SOUND_LISTENERS.delete(paint);
+          gone.disconnect();
+        }
+      });
+      requestAnimationFrame(() => box.parentNode && gone.observe(document.body, { childList: true, subtree: true })); // prettier-ignore
+      return box;
+    },
+  };
+}
+// ---- End of the depth sound -----------------------------------------------------------
 
 // ---- Live input (lane Live input): the camera's live view ----------------------------
 // With the camera on, the toy shows what the camera sees, in depth, before
@@ -61,13 +232,177 @@ export const SAMPLES = [
     license: "CC0 1.0",
     licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
   },
+  {
+    id: "spiral-stairs",
+    label: "Spiral staircase",
+    title: "Spiral Staircase, Keck Center (U.S. National Academies)",
+    author: "Jorge Mendoza",
+    source:
+      "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
+  {
+    id: "palace-stairs",
+    label: "Palace staircase",
+    title: "Escalier monumental, Neue Burg, Vienna",
+    author: "Jebulon",
+    source: "https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
+  {
+    id: "wildflowers",
+    label: "Wildflowers up close",
+    title: "Wildflowers in foreground",
+    author: "PookieFugglestein",
+    source: "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+    license: "CC0 1.0",
+    licenseUrl: "https://creativecommons.org/publicdomain/zero/1.0/",
+  },
 ];
+
+// Every sample the picker offers: the CC0 photos above, then the AI-made pictures (lane Dot samples;
+// SAMPLES stays the CC0 six, which p3d.spec builds on every tier).
+export const ALL_SAMPLES = [...SAMPLES, ...DOT_SAMPLES];
+
+// Smd r2: the backing layer of a built photo: a coarse grid of splats, each at the deepest depth of
+// the splats near it and in their color (the far side of a depth edge), a little behind them.
+// Seen face-on they are hidden; seen from the side they fill what a near part uncovers.
+export function backingOf(s, rows = 56, reach = Math.round(rows * 0.22)) {
+  if (s.background) {
+    const b = s.background;
+    const cols = Math.max(2, Math.round(rows * s.aspect));
+    const size = 0.9 * Math.max(s.aspect / cols, 1 / rows);
+    const n = cols * rows;
+    const pos = new Float32Array(n * 3),
+      rgb = new Float32Array(n * 3);
+    const channel = new Uint8Array(n);
+    const photo = new Uint8Array(n);
+    const local = minimumField(s.edgeDepth || s.depth, s.gx, s.gy, Math.ceil(3 * size * s.gy));
+    for (let y = 0; y < rows; y++)
+      for (let x = 0; x < cols; x++) {
+        const i = y * cols + x;
+        const k =
+          Math.min(b.h - 1, Math.floor(((y + 0.5) * b.h) / rows)) * b.w +
+          Math.min(b.w - 1, Math.floor(((x + 0.5) * b.w) / cols));
+        const ex = s.aspect / 2 - 2.4 * size,
+          ey = 0.5 - 2.4 * size;
+        const px = Math.max(-ex, Math.min(ex, ((x + 0.5) / cols - 0.5) * s.aspect));
+        const py = Math.max(-ey, Math.min(ey, 0.5 - (y + 0.5) / rows));
+        const cell =
+          Math.min(s.gy - 1, Math.floor((0.5 - py) * s.gy)) * s.gx +
+          Math.min(s.gx - 1, Math.floor((px / s.aspect + 0.5) * s.gx));
+        // Each disc has a constant height: the minimum of all photographed
+        // points its footprint covers. Unlike a raised coarse mesh rim, it
+        // cannot interpolate up through the foreground between its samples.
+        const d = Math.min(local[cell], b.depth[k]);
+        const z = s.stats.relief * (d - 0.5) - 0.014;
+        pos.set(
+          [
+            Math.max(-ex, Math.min(ex, ((x + 0.5) / cols - 0.5) * s.aspect)),
+            Math.max(-ey, Math.min(ey, 0.5 - (y + 0.5) / rows)),
+            z,
+          ],
+          i * 3,
+        );
+        rgb.set([b.rgba[k * 4] / 255, b.rgba[k * 4 + 1] / 255, b.rgba[k * 4 + 2] / 255], i * 3);
+        channel[i] = z > 0 ? LAYERS - 1 : 0;
+        photo[i] = b.donor[k] === k ? 1 : 0;
+      }
+    return { n, pos, rgb, size, channel, photo };
+  }
+  const cols = Math.max(2, Math.round(rows * s.aspect));
+  const w = s.aspect / cols; // a cell's width, in picture heights
+  const h = 1 / rows;
+  const size = 0.9 * Math.max(w, h);
+  const half = 2.4 * size; // (a splat reaches about 2.4 of its sizes)
+  const zmin = new Float32Array(cols * rows).fill(Infinity);
+  const col = new Float32Array(cols * rows * 3);
+  for (let i = 0; i < s.n; i++) {
+    const cx = Math.min(
+      cols - 1,
+      Math.max(0, Math.floor((s.relief[i * 3] / s.aspect + 0.5) * cols)),
+    );
+    const cy = Math.min(rows - 1, Math.max(0, Math.floor((0.5 - s.relief[i * 3 + 1]) * rows)));
+    const c = cy * cols + cx;
+    if (s.relief[i * 3 + 2] < zmin[c]) {
+      zmin[c] = s.relief[i * 3 + 2];
+      col.set([s.rgb[i * 3], s.rgb[i * 3 + 1], s.rgb[i * 3 + 2]], c * 3);
+    }
+  }
+  const pos = new Float32Array(cols * rows * 3);
+  const rgb = new Float32Array(cols * rows * 3);
+  const channel = new Uint8Array(cols * rows);
+  let n = 0;
+  for (let j = 0; j < rows; j++)
+    for (let i = 0; i < cols; i++) {
+      let best = Infinity;
+      let from = -1;
+      for (let dj = -reach; dj <= reach; dj++)
+        for (let di = -reach; di <= reach; di++) {
+          const x = i + di;
+          const y = j + dj;
+          if (x < 0 || y < 0 || x >= cols || y >= rows) continue;
+          const c = y * cols + x;
+          if (zmin[c] < best) {
+            best = zmin[c];
+            from = c;
+          }
+        }
+      if (from < 0) continue;
+      // (kept inside the picture: a splat on the edge would otherwise reach past it)
+      const x = ((i + 0.5) / cols - 0.5) * s.aspect;
+      const y = 0.5 - (j + 0.5) / rows;
+      const ex = s.aspect / 2 - half;
+      const ey = 0.5 - half;
+      pos.set(
+        [Math.max(-ex, Math.min(ex, x)), Math.max(-ey, Math.min(ey, y)), best - 0.012],
+        n * 3,
+      );
+      rgb.set(col.subarray(from * 3, from * 3 + 3), n * 3);
+      // Lane Photo depth: which tap channel it moves with, so it stays behind the surface at every
+      // moment of the rise and the flatten, not only at their ends. Behind the flat picture (all
+      // its surface within reach is at least as far back as `best`), it rises with the first
+      // layer, as before: nothing near it stays further back than that. In front of it (all its
+      // surface near), it rises with the last layer: nothing near it rises later.
+      channel[n] = best > 0 ? LAYERS - 1 : 0;
+      n++;
+    }
+  return { n, pos, rgb, size, channel };
+}
+
+// Studio media: "Show the original": the flat photo in a corner card (src/compare.js, loaded only when
+// it is switched on).
+function showOriginal() {
+  if (typeof document === "undefined") return;
+  const mod = P3D.compare;
+  if (!P3D.original) {
+    if (mod?.original) mod.original("photo-3d").hide();
+    P3D.cardKey = null;
+    return;
+  }
+  if (!mod) {
+    P3D.compare = false;
+    import("../compare.js").then((m) => (P3D.compare = m));
+    return;
+  }
+  if (!mod.original) return;
+  const card = mod.original("photo-3d");
+  const src = P3D.original;
+  if (P3D.cardKey !== src.uid || !card.state.kind) {
+    P3D.cardKey = src.uid;
+    card.image({ ...src.photo, label: `Original: ${src.name}` });
+  }
+  card.sync();
+}
 
 const P3D = {
   samples: new Map(), // sample id -> { photo, depth, uid, name }
   custom: null, // the photo somebody opened: { photo, depth, uid, name, ms }
   want: null,
   uid: 0,
+  preparing: 0,
   cache: new Map(),
   info: null, // what the last build made, for shown() and the tests
 };
@@ -81,6 +416,15 @@ const MAX_SIDE = 2048; // a bigger photo is reduced on the way in (memory)
 export async function decodePhoto(source) {
   if (typeof createImageBitmap === "function" && typeof document !== "undefined") {
     const blob = source instanceof Blob ? source : new Blob([source]);
+    if (typeof Worker !== "undefined" && typeof OffscreenCanvas !== "undefined") {
+      try {
+        const { decodeBytes } = await import("../photo3d/decode.js");
+        return await decodeBytes(blob, MAX_SIDE);
+      } catch {
+        // Older worker decoders may support fewer formats than the window.
+        // Keep the window decoder and its existing format-specific error below.
+      }
+    }
     let bmp;
     try {
       bmp = await createImageBitmap(blob, { imageOrientation: "from-image" });
@@ -168,11 +512,13 @@ async function readBytes(rel) {
 }
 
 async function loadSample(id) {
-  const s = SAMPLES.find((x) => x.id === id) || SAMPLES[0];
+  const s = ALL_SAMPLES.find((x) => x.id === id) || SAMPLES[0];
   if (!P3D.samples.has(s.id)) {
+    const dir = s.dir ? `${s.dir}/` : ""; // (lane Dot samples: the AI-made ones are in ai/)
+    const file = s.file || s.id;
     const [jpg, dep] = await Promise.all([
-      readBytes(`../../assets/toys/photo-3d/${s.id}.jpg`),
-      readBytes(`../../assets/toys/photo-3d/${s.id}.depth`),
+      readBytes(`../../assets/toys/photo-3d/${dir}${file}.${s.ext || "jpg"}`),
+      readBytes(`../../assets/toys/photo-3d/${dir}${file}.depth`),
     ]);
     P3D.samples.set(s.id, {
       photo: await decodePhoto(jpg),
@@ -195,14 +541,24 @@ export function usePhoto(photo, depth, name = "Your photo") {
 // works out the depth. Returns what the toy shows.
 export async function openPhoto(file, name) {
   const photo = await decodePhoto(file);
-  const { estimateDepth } = await import("./photo-3d-depth.js");
-  const depth = await estimateDepth(photo);
-  const p = usePhoto(photo, { w: depth.w, h: depth.h, d: depth.d }, name || "Your photo");
-  p.ms = depth.ms;
-  return p;
+  const { photoPreview } = await import("../photo3d/preview.js");
+  const close = photoPreview(photo);
+  try {
+    const { estimateDepth } = await import("./photo-3d-depth.js");
+    const depth = await estimateDepth(photo);
+    const p = usePhoto(photo, { w: depth.w, h: depth.h, d: depth.d }, name || "Your photo");
+    p.ms = depth.ms;
+    return p;
+  } finally {
+    close();
+  }
 }
 
 const fmt = (n) => Math.round(n).toLocaleString("en-US");
+// Option normalization can turn .95 into .9500000000000001 between prepare
+// and build. Both must select the same worker result, including its Sharp grid.
+const surfaceKey = (src, budget, depth, profile = "mid") =>
+  `${src.uid}/${budget}/${Math.round((depth ?? 0.5) * 1e6)}/${SHARP_CELLS[profile]}`;
 
 // The tap: the layers rise out of the flat picture one after another, the far one first.
 // `r` is how far it has risen (0 flat, 1 with its depth); returns each layer's morph (1 flat, 0 risen).
@@ -211,8 +567,41 @@ export function layerMorph(r, layer) {
   return 1 - smoothstep(0, 1, (r - start) / 0.64);
 }
 
+// Lane Photo fidelity: the photo itself, for the photo-textured splats (src/photo-splats.js).
+function photoCanvas(sh) {
+  if (P3D.canvasFor === sh.uid) return P3D.canvas;
+  retireBitmap(P3D.canvas, globalThis.window?.__splashery?.player?.stage);
+  if (sh.bitmap) {
+    P3D.canvas = sh.bitmap;
+    P3D.canvasFor = sh.uid;
+    return sh.bitmap;
+  }
+  const c = document.createElement("canvas");
+  c.width = sh.photo.w;
+  c.height = sh.photo.h;
+  // Keep static pixel painting on the CPU; PlayCanvas uploads the texture once.
+  c.getContext("2d", { willReadFrequently: true }).putImageData(new ImageData(new Uint8ClampedArray(sh.photo.data.buffer, sh.photo.data.byteOffset, sh.photo.data.byteLength), sh.photo.w, sh.photo.h), 0, 0); // prettier-ignore
+  P3D.canvas = c;
+  P3D.canvasFor = sh.uid;
+  return c;
+}
+
+let inputRead = 0;
+let stopInputWarning = () => {};
 const PHOTO_3D = {
   density: PHOTO_DENSITY,
+  photo: {
+    on: (o) => o.detail !== "splats",
+    rect: () => {
+      const a = P3D.shown?.aspect ?? 1;
+      return [-a / 2, -0.5, a / 2, 0.5];
+    },
+    version: () => P3D.shown?.uid ?? 0,
+    source: () => (P3D.shown && typeof document !== "undefined" ? photoCanvas(P3D.shown) : null),
+  },
+  // Smd r2: the Lab lane's sharper falloff (labs only, docs/lab/KERNELS.md): edges 13 to 19% crisper
+  // on the relief at phone size (2.72 to 2.36 px, 3.45 to 2.78 px zoomed in).
+  kernel: "sharp",
   turntable: false,
   options: [
     {
@@ -221,12 +610,48 @@ const PHOTO_3D = {
       type: "select",
       default: "forest",
       choices: [
-        ...SAMPLES.map((s) => ({ id: s.id, label: s.label })),
+        ...ALL_SAMPLES.map((s) => ({
+          id: s.id,
+          label: s.label,
+          ...(s.group && { group: s.group }),
+        })),
         { id: "custom", label: "Your photo (open one below)" },
       ],
     },
-    { key: "depth", label: "Depth", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 },
+    // Live r8: also a slider over the stage.
+    {
+      key: "depth",
+      label: "Depth",
+      type: "slider",
+      min: 0,
+      max: 1,
+      step: 0.05,
+      default: 0.5,
+      stage: true,
+    },
+    {
+      key: "original",
+      label: "Show the original",
+      type: "select",
+      default: "off",
+      choices: [
+        { id: "off", label: "Off" },
+        { id: "on", label: "On: the flat photo in a corner" },
+      ],
+    },
+    {
+      key: "detail",
+      label: "Detail",
+      type: "select",
+      default: "photo",
+      choices: [
+        { id: "photo", label: "Fine: each splat shows the photo's own pixels" },
+        { id: "splats", label: "One color per splat" },
+      ],
+    },
     { key: "photoName", label: "Photo name", type: "text", default: "", hidden: true },
+    // Lane Photo depth: the tap's sound, picked in the input panel (soundEntry).
+    { key: "sound", label: "Sound", type: "text", default: "paper", hidden: true },
   ],
   controls: [
     // "Flat" is on at first (the picture lies flat); the tap switches it off and the depth rises.
@@ -234,6 +659,8 @@ const PHOTO_3D = {
     { key: "layers", label: "Layers", type: "toggle", default: 0, ease: 1 },
   ],
   action: { key: "flat", label: "Raise or flatten the depth" },
+  toySound: depthSound, // lane Photo depth: the Sound choice (src/app.js, ownSound)
+  sounds: (o) => (o.sound === "custom" && OWN.key ? [ownSpec()] : []),
   input: {
     title: "Your own photo",
     accept:
@@ -243,14 +670,34 @@ const PHOTO_3D = {
     note: "Open a JPEG, PNG or WebP photo (HEIC too, where the browser can read it). Large photos are scaled down to 2,048 pixels on the long side, and turned upright by their camera tag. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Your photo never leaves your device. It takes a few seconds, longer on a phone.",
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a photo.");
-      const p = await openPhoto(
-        file,
-        (file.name || fileName || "Your photo").replace(/\.[^.]+$/, ""),
-      );
-      return { source: "custom", photoName: p.name };
+      const version = ++inputRead;
+      stopInputWarning();
+      const panel = globalThis.document?.getElementById("toy-input");
+      try {
+        const p = await openPhoto(
+          file,
+          (file.name || fileName || "Your photo").replace(/\.[^.]+$/, ""),
+        );
+        return { source: "custom", photoName: p.name };
+      } catch (error) {
+        const pl = globalThis.window?.__splashery?.player;
+        const source = pl?.scene?.toy?.options?.source;
+        if (panel) {
+          const { preserveInputWarning } = await import("../photo3d/input-warning.js");
+          stopInputWarning = preserveInputWarning(
+            panel,
+            error.message,
+            () =>
+              version === inputRead &&
+              pl?.scene?.toy?.id === "photo-3d" &&
+              pl.scene.toy.options?.source === source,
+          );
+        }
+        throw error;
+      }
     },
     // Lane Live input: the camera, and a button that takes the picture.
-    live: [{ kind: "camera", capture: { button: "Take the picture", name: "Camera picture.jpg" }, status: mirrorStatus }], // prettier-ignore
+    live: [{ kind: "camera", capture: { button: "Take the picture", name: "Camera picture.jpg" }, status: mirrorStatus }, sharpEntry("photo-3d"), soundEntry()], // prettier-ignore
     shown() {
       if (liveOn()) return "Live: what the camera sees, in depth. Take the picture to keep it."; // lane Live input
       const i = P3D.info;
@@ -259,7 +706,7 @@ const PHOTO_3D = {
       return `${i.name}: ${fmt(i.splats)} splats in ${i.pieces} pieces of surface.${took}`;
     },
   },
-  credits: SAMPLES.map((s) => ({
+  credits: ALL_SAMPLES.map((s) => ({
     label: s.label,
     title: s.title,
     source: s.source,
@@ -267,12 +714,76 @@ const PHOTO_3D = {
     license: s.license,
     licenseUrl: s.licenseUrl,
   })),
-  async prepare(o) {
-    if (o.source === "custom" && P3D.custom) P3D.want = P3D.custom;
-    else P3D.want = await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
+  async prepare(o, _help, { profile = "mid" } = {}) {
+    const generation = ++P3D.preparing;
+    const pl = globalThis.window?.__splashery?.player;
+    const token = pl?.loadToken;
+    const current = () => generation === P3D.preparing && (!pl || token === pl.loadToken);
+    const src =
+      o.source === "custom" && P3D.custom
+        ? P3D.custom
+        : await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
+    if (!current()) return;
+    P3D.want = src;
+    if (typeof window !== "undefined" && typeof Worker !== "undefined" && !liveOn()) {
+      const count = pl?.splatBudget?.(PHOTO_DENSITY) ?? PHOTO_BUDGETS[profile];
+      const budget = Math.max(100, Math.floor(count * 0.95));
+      const key = surfaceKey(src, budget, o.depth, profile);
+      const { prepareSurface, cancelSurface, cancelPendingSurface } =
+        await import("../photo3d/prepare.js");
+      if (!current()) return;
+      // A cached choice also supersedes pending work and its stale preview.
+      cancelPendingSurface();
+      if (!P3D.cache.has(key)) {
+        const { photoPreview } = await import("../photo3d/preview.js");
+        if (!current()) return;
+        const close = photoPreview(
+          src.photo,
+          cancelSurface,
+          () => !pl?.loading && pl?.proc?.ctx?.kit?.data?.photo?.uid === src.uid,
+        );
+        try {
+          await prepareSharpPhoto();
+          if (!current()) {
+            close(true);
+            return;
+          }
+          const s = await prepareSurface(
+            src.photo,
+            src.depth,
+            {
+              count: budget,
+              depth: o.depth ?? 0.5,
+              keepFlat: src === P3D.custom,
+              bitmap: P3D.canvasFor !== src.uid || !P3D.canvas,
+            },
+            SHARP_CELLS[profile],
+          );
+          if (!s || !current()) {
+            discardSurface(s, P3D.canvas);
+            close(true);
+            return;
+          }
+          if (P3D.canvasFor === src.uid && P3D.canvas) {
+            discardSurface(s, P3D.canvas);
+            s.bitmap = typeof P3D.canvas.close === "function" ? P3D.canvas : null;
+          }
+          for (const old of P3D.cache.values()) discardSurface(old, P3D.canvas);
+          P3D.cache.clear();
+          P3D.cache.set(key, s);
+        } catch (error) {
+          close(true);
+          throw error;
+        } finally {
+          close();
+        }
+      }
+      P3D.want = src;
+    }
   },
   screen: mirrorScreen, // lane Live input: the live view's colors and depth
   drive(t, c, out) {
+    showOriginal();
     if (liveOn() && MIRROR.cam) {
       // Lane Live input: the live view shows its depth at once; a tap flattens it.
       MIRROR.gain = Math.min(1, 1.6 * MIRROR.depth) * (c.flat ?? 1);
@@ -287,9 +798,12 @@ const PHOTO_3D = {
     // "Layers" pulls the depth bands apart along the view direction.
     const L = c.layers ?? 0;
     for (let b = 0; b < LAYERS; b++) out.parts[`layer${b}`] = { offset: [0, 0, (b - (LAYERS - 1) / 2) * 0.22 * L] }; // prettier-ignore
+    sharpDrive(out); // lane Photo sharp view
   },
   build(k, o) {
+    P3D.original = null;
     if (liveOn()) {
+      setFilledBackground(globalThis.window?.__splashery?.player?.stage, null, null);
       // Lane Live input: the camera's live view.
       MIRROR.depth = o.depth ?? 0.5;
       buildMirror(k, { width: 2, lift: 0.9 });
@@ -299,13 +813,17 @@ const PHOTO_3D = {
     }
     MIRROR.cam?.close(); // lane Live input: the live view ends
     MIRROR.cam = null;
+    MIRROR.back = false; // (r5: the splat mirror's background layer isn't this toy's)
+    MIRROR.stillBack = null;
     const src = P3D.want;
     if (!src) throw new Error("There is no photo to show.");
-    const budget = Math.max(100, Math.floor(k.count * 0.98));
-    const key = `${src.uid}/${budget}/${o.depth}`;
+    P3D.original = o.original === "on" ? src : null;
+    const budget = Math.max(100, Math.floor(k.count * 0.95));
+    const key = surfaceKey(src, budget, o.depth, globalThis.window?.__splashery?.player?.profile);
     let s = P3D.cache.get(key);
     if (!s) {
-      s = buildPhotoSplats(src.photo, src.depth, { count: budget, depth: o.depth ?? 0.5 });
+      s = buildPhotoSplats(src.photo, src.depth, { count: budget, depth: o.depth ?? 0.5, keepFlat: src === P3D.custom }); // prettier-ignore
+      for (const old of P3D.cache.values()) discardSurface(old, P3D.canvas);
       P3D.cache.clear();
       P3D.cache.set(key, s);
     }
@@ -313,27 +831,116 @@ const PHOTO_3D = {
     const parts = [];
     for (let b = 0; b < LAYERS; b++) parts.push(k.part(`layer${b}`, { pivot: [0, 0, 0], axis: [0, 0, 1] })); // prettier-ignore
     const unit = 1 / 0.01; // a cloud-only recipe's base splat size is 0.01
-    const share = Math.min(1, s.n / k.count);
-    k.cloud({ share, pattern: false }, (_r, i) => {
-      if (i >= s.n) return null;
-      const b = s.band[i];
-      return {
-        p: [s.relief[i * 3], s.relief[i * 3 + 1], s.relief[i * 3 + 2]],
-        to: [s.flat[i * 3], s.flat[i * 3 + 1], s.flat[i * 3 + 2]],
-        channel: b,
-        part: parts[b],
+    // Kit yields between clouds. Keep each emission small as well as preparing
+    // the depth/color images in a worker, so a dense photo does not monopolize JS.
+    for (let first = 0; first < s.n; first += 4096) {
+      const n = Math.min(4096, s.n - first);
+      k.cloud({ share: n / k.count, pattern: false }, (_r, local) => {
+        const i = first + local;
+        if (i >= s.n) return null;
+        const b = s.band[i];
+        return {
+          p: [s.relief[i * 3], s.relief[i * 3 + 1], s.relief[i * 3 + 2]],
+          to: [s.flat[i * 3], s.flat[i * 3 + 1], s.flat[i * 3 + 2]],
+          channel: b,
+          part: parts[b],
+          n: [0, 0, 1],
+          size: (o.detail === "splats" ? s.sigma[i] : s.coverage[i]) * unit,
+          flat: SPLAT_FLAT,
+          jitter: s.stats.flatness <= FLAT_KEEP ? 0.5 : 0,
+          color: [s.rgb[i * 3], s.rgb[i * 3 + 1], s.rgb[i * 3 + 2]],
+          opacity: SPLAT_OPACITY,
+          pattern: false,
+          photo: true,
+        };
+      });
+    }
+    P3D.shown = { photo: src.photo, aspect: s.aspect, uid: src.uid, bitmap: s.bitmap };
+    setFilledBackground(
+      globalThis.window?.__splashery?.player?.stage,
+      s.background,
+      typeof document === "undefined" ? null : photoCanvas(P3D.shown),
+    );
+    if (o.detail !== "splats" && s.stats.flatness > FLAT_KEEP) {
+      const edge = borderSplats(src.photo, s);
+      k.cloud({ share: edge.n / k.count, pattern: false }, (_r, i) => ({
+        p: Array.from(edge.pos.subarray(i * 3, i * 3 + 3)),
+        to: [edge.pos[i * 3], edge.pos[i * 3 + 1], 0],
+        channel: edge.band[i],
+        part: parts[edge.band[i]],
         n: [0, 0, 1],
-        size: s.sigma[i] * unit,
+        size: edge.size[i] * unit,
         flat: SPLAT_FLAT,
-        color: [s.rgb[i * 3], s.rgb[i * 3 + 1], s.rgb[i * 3 + 2]],
+        jitter: 0,
+        color: Array.from(edge.rgb.subarray(i * 3, i * 3 + 3)),
         opacity: SPLAT_OPACITY,
         pattern: false,
+        photo: true,
+      }));
+    }
+    // Smd r2: a backing layer (see backingOf): where a near part pulls away from what is behind it
+    // as the view turns, the gap shows that part of the picture, stretched, instead of empty space.
+    const back = backingOf(
+      s,
+      Math.max(24, Math.min(72, Math.round(Math.sqrt((0.035 * k.count) / s.aspect)))),
+    );
+    k.cloud({ share: Math.min(1, back.n / k.count), pattern: false }, (_r, i) => {
+      if (i >= back.n) return null;
+      return {
+        p: [back.pos[i * 3], back.pos[i * 3 + 1], back.pos[i * 3 + 2]],
+        to: [back.pos[i * 3], back.pos[i * 3 + 1], -0.01],
+        channel: back.channel[i], // (lane Photo depth: see backingOf)
+        part: parts[0],
+        n: [0, 0, 1],
+        size: back.size * unit,
+        flat: SPLAT_FLAT,
+        jitter: 0,
+        color: [back.rgb[i * 3], back.rgb[i * 3 + 1], back.rgb[i * 3 + 2]],
+        opacity: SPLAT_OPACITY,
+        pattern: false,
+        photo: false,
+      };
+    });
+    // A continuous far plane covers the gaps between coarse backing patches
+    // when their depths differ. The shared texture supplies sharp filled color.
+    const floorRows = Math.max(8, Math.round(Math.sqrt(400 / s.aspect)));
+    const floorCols = Math.max(8, Math.round(floorRows * s.aspect));
+    const floorCount = floorRows * floorCols;
+    const floorZ = Math.min(
+      -0.02,
+      s.stats.relief * (s.background.depth.reduce((a, b) => Math.min(a, b), 1) - 0.5) - 0.02,
+    );
+    k.cloud({ share: floorCount / k.count, pattern: false }, (_r, i) => {
+      const x = ((i % floorCols) + 0.5) / floorCols,
+        y = (Math.floor(i / floorCols) + 0.5) / floorRows;
+      const c =
+        (Math.min(s.background.h - 1, Math.floor(y * s.background.h)) * s.background.w +
+          Math.min(s.background.w - 1, Math.floor(x * s.background.w))) *
+        4;
+      return {
+        p: [(x - 0.5) * s.aspect, 0.5 - y, floorZ],
+        to: [(x - 0.5) * s.aspect, 0.5 - y, -0.02],
+        channel: 0,
+        part: parts[0],
+        n: [0, 0, 1],
+        size: 0.9 * Math.max(s.aspect / floorCols, 1 / floorRows) * unit,
+        flat: SPLAT_FLAT,
+        jitter: 0,
+        color: [
+          s.background.rgba[c] / 255,
+          s.background.rgba[c + 1] / 255,
+          s.background.rgba[c + 2] / 255,
+        ],
+        opacity: SPLAT_OPACITY,
+        pattern: false,
+        photo: false,
       };
     });
     P3D.info = {
       name: src.name,
       uid: src.uid,
       splats: s.n,
+      backing: back.n,
       grid: [s.gx, s.gy],
       pieces: s.stats.bigPieces,
       cutEdges: s.stats.cutEdges,
@@ -342,6 +949,17 @@ const PHOTO_3D = {
       custom: src === P3D.custom,
     };
     k.data = { photo: P3D.info };
+    sharpPhoto({
+      photo: src.photo,
+      depth: s.depth,
+      band: s.cellBand, // lane Photo depth
+      gx: s.gx,
+      gy: s.gy,
+      aspect: s.aspect,
+      relief: s.stats.relief,
+      background: s.background,
+      uid: src.uid,
+    }); // lane Photo sharp view
   },
 };
 

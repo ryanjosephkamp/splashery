@@ -3,17 +3,32 @@
 // spectrogram of a song you open, as a 3D field of splats) and the Chladni
 // plate (sand on a bowed metal plate finding the plate's still lines).
 
-import { mix, shade, clamp, smoothstep, ramp } from "../kit.js";
-import { spectrogram, landscapePlan, toMono, DB_FLOOR, F_MIN, F_MAX } from "./studio-audio.js";
+import { mix, shade, clamp, ramp } from "../kit.js";
+import {
+  spectrogram,
+  landscapePlan,
+  toMono,
+  bands,
+  DB_FLOOR,
+  F_MIN,
+  F_MAX,
+} from "./studio-audio.js";
 // Lane Live input: the microphone (src/live/), only once someone taps for it.
-import { live as liveIn } from "../live/live.js";
-import { bandLevels } from "../live/analysis.js";
+import { live as liveIn, stop as liveStop } from "../live/live.js";
+import { bandLevels, noteOf } from "../live/analysis.js";
 import { reliefGrid } from "../live/relief.js";
 // Lane Live input r2: a long song plays at once and is measured in a worker;
 // the measured looks (Ribbons, Tube, Lines, Mesh).
 import { Track, SongAnalysis } from "./song-stream.js";
-import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps } from "./song-looks.js"; // prettier-ignore
-import { HOP as FRAME } from "./song-analysis.js";
+import { LOOKS, buildLook, drawLook, lookMotion, lookVersion, buildLandscapeLong, drawLandscapeLong, landscapeCaps, liveOffset } from "./song-looks.js"; // prettier-ignore
+import { HOP as FRAME, F as FIELD, FIELDS } from "./song-analysis.js";
+import { MicRecorder, wavBlob, saveBlob, songTransport } from "./song-record.js";
+// Lane Live r7: the Chladni plate's sand moves live, every frame.
+import { Sand } from "./chladni-sand.js";
+// Lane Live r8: Sound in a box, the 3D version (labs).
+import { CHLADNI_CELL } from "./chladni-3d.js";
+// Lane Live r10: the sand's colors (the default stays as it was).
+import { colorOptions, colorsOnly, paint, flagColors } from "./chladni-colors.js";
 
 // ---- The Chladni plate ----------------------------------------------------------------
 // The classic model of a square plate of side L = 1 (x, y from 0 to 1) in one
@@ -51,6 +66,95 @@ function sheet(k, { x0, x1, z0, z1, y, cells, color, part = 0, opacity = 1, extr
     { share: list.length / k.count, pattern: false, jitter: 0 },
     (rand, i) => list[i] || null,
   );
+}
+
+// Live r7 polish: a square plate's rim, crisp at phone size: a band of
+// small flat discs round the top's edge (`half` from the middle, at height
+// y), and each side a fine sheet of discs facing out, `thick` deep.
+function plateRim(k, { half, thick, y, part, top, side = "#4a535e", step = 0.009 }) {
+  // Live r8: smaller discs set inside the edges (a disc reads about 2.5
+  // sizes across, so the old ones, centered 3 mm from the edge, spilled a
+  // soft fringe 16 mm past it, and a spike at each corner).
+  const size = (step * 1.25) / 0.01;
+  const reach = 0.0125 * size * 0.6; // how far a disc's visible part reaches
+  const along = Math.round((2 * half) / step);
+  const down = Math.max(2, Math.round(thick / step));
+  const list = [];
+  const sideColor = (j) => shade(side, 0.92 + 0.12 * (1 - j / Math.max(1, down - 1)));
+  const sideH = (j) => y - reach - (j / Math.max(1, down - 1)) * (thick - 2 * reach);
+  for (const [ax, sg] of [
+    [0, 1],
+    [0, -1],
+    [2, 1],
+    [2, -1],
+  ]) {
+    const n = ax === 0 ? [sg, 0, 0] : [0, 0, sg];
+    for (let i = 0; i < along; i++) {
+      // Each strip stops short of the corner; the corners get their own
+      // column below.
+      const t = (-half + ((i + 0.5) / along) * 2 * half) * (1 - reach / half);
+      const at = (r, h) => (ax === 0 ? [sg * r, h, t] : [t, h, sg * r]);
+      // The top's last few millimeters, with a hair of light on the edge.
+      for (const r of [half - reach - 2 * step, half - reach - step, half - reach]) {
+        const [x, , z] = at(r, 0);
+        const lit = r > half - reach - 0.5 * step ? 1.12 : 1;
+        list.push({ p: at(r, y), n: [0, 1, 0], flat: 0.02, size, opacity: 1, color: shade(top(x, z), lit), part, pattern: false }); // prettier-ignore
+      }
+      for (let j = 0; j < down; j++)
+        list.push({ p: at(half, sideH(j)), n, flat: 0.02, size, opacity: 1, color: sideColor(j), part, pattern: false }); // prettier-ignore
+    }
+  }
+  // Each corner: a column of discs facing out across it, and the top's
+  // corner disc.
+  for (const sx of [-1, 1])
+    for (const sz of [-1, 1]) {
+      const n = [sx * Math.SQRT1_2, 0, sz * Math.SQRT1_2];
+      const c = half - reach * Math.SQRT1_2;
+      for (let j = 0; j < down; j++)
+        list.push({ p: [sx * c, sideH(j), sz * c], n, flat: 0.02, size: size * 0.7, opacity: 1, color: sideColor(j), part, pattern: false }); // prettier-ignore
+      const e = half - reach * 1.2;
+      list.push({ p: [sx * e, y, sz * e], n: [0, 1, 0], flat: 0.02, size: size * 0.8, opacity: 1, color: shade(top(sx * half, sz * half), 1.12), part, pattern: false }); // prettier-ignore
+    }
+  k.cloud({ share: list.length / k.count, pattern: false, jitter: 0 }, (rand, i) => list[i] || null); // prettier-ignore
+  return list.length;
+}
+
+// Live r8 (the owner's "the plate ... still looks kind of grainy", October 6,
+// 2026): the stand drawn the same way as the rim, in fine discs in rows (it
+// was sampled at random over a cylinder, so its edges were a fuzz of specks
+// from the side). A round column of radius r from y0 to y1: its side as rings
+// of small discs facing out, and, with `cap`, its top as rings facing up, a
+// hair of light on the edge. `step` is the gap between discs.
+function column(k, { r, y0, y1, step, color, cap = false, light = [0.6, 0, 0.8] }) {
+  const size = (step * 1.7) / 0.01;
+  const around = Math.max(12, Math.round((2 * Math.PI * r) / step));
+  const rows = Math.max(2, Math.round((y1 - y0) / step));
+  const list = [];
+  const lit = (n) => 0.78 + 0.3 * Math.max(0, n[0] * light[0] + n[2] * light[2]);
+  for (let j = 0; j < rows; j++) {
+    const y = y0 + ((j + 0.5) / rows) * (y1 - y0);
+    // Every other ring turned half a step, so the discs interlock.
+    for (let i = 0; i < around; i++) {
+      const th = ((i + (j % 2) * 0.5) / around) * Math.PI * 2;
+      const n = [Math.cos(th), 0, Math.sin(th)];
+      list.push({ p: [r * n[0], y, r * n[2]], n, flat: 0.02, size, opacity: 1, color: shade(color, lit(n)), pattern: false }); // prettier-ignore
+    }
+  }
+  if (cap) {
+    const rings = Math.max(2, Math.round(r / step));
+    list.push({ p: [0, y1, 0], n: [0, 1, 0], flat: 0.02, size, opacity: 1, color: shade(color, 1.02), pattern: false }); // prettier-ignore
+    for (let j = 1; j <= rings; j++) {
+      const rr = Math.min(r - step * 0.35, (j / rings) * r);
+      const m = Math.max(6, Math.round((2 * Math.PI * rr) / step));
+      const edge = j === rings ? 1.14 : 1.02 - 0.04 * (j / rings);
+      for (let i = 0; i < m; i++) {
+        const th = ((i + (j % 2) * 0.5) / m) * Math.PI * 2;
+        list.push({ p: [rr * Math.cos(th), y1, rr * Math.sin(th)], n: [0, 1, 0], flat: 0.02, size, opacity: 1, color: shade(color, edge), pattern: false }); // prettier-ignore
+      }
+    }
+  }
+  k.cloud({ share: list.length / k.count, pattern: false, jitter: 0 }, (rand, i) => list[i] || null); // prettier-ignore
+  return list.length;
 }
 
 export const F0 = 60; // Hz per unit of n² + m²
@@ -160,9 +264,79 @@ const PLATE_T = 0.06; // its thickness
 const GRAIN_LIFT = 0.012;
 const HOP = 0.09; // the highest hop, in recipe units
 const BOW_SECS = 3.6;
+const STIR_SECS = 1.2; // Live r7: a tap on a formed figure stirs the sand this long
+const SAND_LIFT = PLATE + 0.06; // the grains' offsets reach this far (recipe units)
 
 // Sound and drive state for the tap (one toy at a time).
-const CH = { was: 0 };
+const CH = { last: null, taps: 0, bowUntil: 0, stirUntil: 0, frames: 0, amp: new Map(), sorted: -1, unsorted: false }; // prettier-ignore
+
+// Live r7: the live sand and its canvas (the toy's screen: each grain's
+// color on the left, its offset from where it rests on the right).
+const SAND = { sand: null, cols: 1, rows: 1, home: null, colors: null, img: null, version: 0, opts: null, paint: null, flags: null, flagAsk: 0 }; // prettier-ignore
+
+// The modes' strengths follow the sound within about 80 ms, so the sand
+// answers a new note at once and stops when the sound does. want: the
+// strengths the sound asks for now ([{ mode, a }]); modes that ring at one
+// frequency are one entry. Returns them as the sand takes them.
+function followDrive(want, dt) {
+  const k = 1 - Math.exp(-dt / 0.08);
+  const seen = new Set();
+  for (const w of want) {
+    const key = w.mode.id;
+    seen.add(key);
+    const was = CH.amp.get(key) ?? { mode: w.mode, a: 0 };
+    was.mode = w.mode;
+    was.a += (w.a - was.a) * k;
+    CH.amp.set(key, was);
+  }
+  for (const [key, v] of CH.amp) {
+    if (seen.has(key)) continue;
+    v.a -= v.a * k;
+    if (v.a < 1e-3) CH.amp.delete(key);
+  }
+  return [...CH.amp.values()].map((v) => ({ n: v.mode.n, m: v.mode.m, s: v.mode.s, a: v.a, mode: v.mode })); // prettier-ignore
+}
+
+// The sand's canvas: colors once, offsets on every change.
+const sandScreen = {
+  get width() {
+    return SAND.cols * 2;
+  },
+  get height() {
+    return SAND.rows;
+  },
+  version: (time) =>
+    SAND.sand?.moving ? `${SAND.version}|${Math.floor(time * 60)}` : SAND.version,
+  draw(g, time) {
+    const { sand, cols, rows, home } = SAND;
+    if (!sand) return;
+    if (!SAND.img || SAND.img.width !== cols * 2 || SAND.img.height !== rows) {
+      SAND.img = g.createImageData(cols * 2, rows);
+      const px = SAND.img.data;
+      for (let i = 0; i < sand.n; i++) {
+        // Live r10: each grain's color as chosen (as made: pale sand).
+        const c = [0, 1, 2].map((a) => Math.round(SAND.paint[i * 3 + a] * 255));
+        const o = (Math.floor(i / cols) * cols * 2 + (i % cols)) * 4;
+        px[o] = c[0];
+        px[o + 1] = c[1];
+        px[o + 2] = c[2];
+        px[o + 3] = 255;
+      }
+    }
+    const px = SAND.img.data;
+    const q = 255 / (2 * SAND_LIFT);
+    const { X, Y, hop, phase } = sand;
+    for (let i = 0; i < sand.n; i++) {
+      const o = (Math.floor(i / cols) * cols * 2 + cols + (i % cols)) * 4;
+      const up = hop[i] > 0 ? HOP * hop[i] * Math.abs(Math.sin(phase[i] + time * 23)) : 0;
+      px[o] = 127.5 + ((X[i] * 2 - 1) * PLATE - home[i * 2]) * q;
+      px[o + 1] = 127.5 + up * q;
+      px[o + 2] = 127.5 + ((Y[i] * 2 - 1) * PLATE - home[i * 2 + 1]) * q;
+      px[o + 3] = 255;
+    }
+    g.putImageData(SAND.img, 0, 0);
+  },
+};
 
 function chladniCue(mode, on) {
   const f = modeFreq(mode);
@@ -177,9 +351,17 @@ function chladniCue(mode, on) {
 }
 
 const CHLADNI = {
-  alive: (c) => (c.bow > 0.001 && c.bow < 0.999) || liveIn.on("mic"), // lane Live input: sung to
+  // Lane Live input r3: tilt to see the plate from the side (above the stage only).
+  tiltLock: false,
+  pitchRange: [0.05, 1.35],
+  // Live r7: while the sand moves, a tap bows or stirs it, or sound drives it.
+  alive: () => !!SAND.sand?.moving || CH.bowUntil > (CH.last ?? 0) || CH.stirUntil > (CH.last ?? 0) || liveIn.on("mic") || !!CHF.song?.track?.playing || CH.amp.size > 0, // prettier-ignore
+  screen: sandScreen,
   // Sand grains take most of the budget (in twelve copies of which one shows).
   density: 2,
+  // Live r7 polish (the owner's "the toys could still be sharper"): the labs'
+  // sharp kernel, so each grain is a crisp speck and the plate's rim clean.
+  kernel: "sharp",
   options: [
     {
       key: "mode",
@@ -188,120 +370,236 @@ const CHLADNI = {
       default: "2-3+",
       choices: MODES.map((m) => ({ id: m.id, label: modeLabel(m) })),
     },
+    // Live r10: the sand's colors.
+    ...colorOptions("plate", { id: "sand", label: "Sand (as made)" }, () => SAND.opts?.colors),
   ],
   controls: [{ key: "bow", label: "Bow the plate", type: "toggle", default: 0, ease: BOW_SECS }],
-  action: { key: "bow", label: "Bow the plate", quiet: ["bow"] },
-  // Lane Live input: sing to the plate.
+  action: {
+    key: "bow",
+    label: "Bow the plate",
+    quiet: ["bow"],
+    // Lane Live input r4: with your audio open, a tap plays or pauses it
+    // (inside the tap itself, as a phone wants).
+    onAct() {
+      const t = CHF.song?.track;
+      if (!t || liveIn.on("mic")) return;
+      if (t.playing) t.pause();
+      else t.play(CHF.sound);
+    },
+  },
+  // Lane Live input: sing to the plate; r4, or play your own audio to it.
   input: {
-    title: "Sing to the plate",
-    fileButton: false,
-    live: [{ kind: "mic", rebuild: false, status: singStatus }],
-    note: "Tap “Use my microphone” and sing a steady note. The plate listens as a thinner plate would, with its modes at 75, 150, 195, 255 and 375 Hz: the mode nearest your note rings, and the sand settles into its figure while you hold it. Change the note and another mode takes over.",
+    title: "Sing or play to the plate",
+    accept: "audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac,.opus",
+    binary: true,
+    maxBytes: 400e6, // as the Song landscape: it plays from the file
+    fileButton: "Open your own audio…",
+    async read(_text, fileName, file) {
+      return openChladniAudio(file, fileName);
+    },
+    shown: () => chladniShown(),
+    live: [
+      { render: () => songTransport(chladniTransport) },
+      { kind: "mic", rebuild: false, status: singStatus },
+    ],
+    note: "Tap “Use my microphone” and sing a steady note, or open a song or any sound file. The plate listens as a thinner plate would, with its modes at 75, 150, 195, 255 and 375 Hz: the mode nearest the note rings, and the sand sets off for its figure at once. Change the note and it moves on to the next figure; when the sound stops it stays put. A song's strongest pitch, moved by octaves into the plate's range, drives it as it plays; the file stays on your device.",
   },
   drive(t, c, out, info) {
     const g = info?.data?.chladni;
     if (!g) return;
-    // Lane Live input: while the microphone is on, your voice bows the plate.
+    if (info?.sound) CHF.sound = info.sound; // r4: for a tap's onAct
+    const time = info.time ?? t;
+    const dt = CH.last === null ? 0 : Math.min(0.1, Math.max(0, time - CH.last));
+    CH.last = time;
+    // Lane Live input: while the microphone is on, your voice drives the
+    // plate; r4: otherwise your audio, while it is open.
     const sung = liveIn.on("mic");
-    const p = sung ? singDrive(info.time ?? t, g.mode) : clamp01(c.bow ?? 0);
-    // The sound: the hum when the bowing starts, a hiss when it is stirred.
-    if (sung) CH.was = p; // your voice is the sound
-    else if (CH.was <= 0.001 && p > 0.001) for (const s of chladniCue(g.mode, true)) out.cues.push(s);
-    else if (CH.was >= 0.999 && p < 0.999) for (const s of chladniCue(g.mode, false)) out.cues.push(s); // prettier-ignore
-    CH.was = p;
-    // Which of the twelve copies of the sand shows, and how far it has
-    // moved on toward the next.
-    const pos = p * KEYS;
-    const j = Math.min(KEYS - 1, Math.floor(pos));
-    for (let i = 0; i < KEYS; i++) out.parts[`sand${i}`] = { visible: i === j ? 1 : 0 };
-    out.morph = [pos - j, 0, 0, 0];
-    // The bow is drawn along the front edge while the sand moves.
-    const bowing = !sung && p > 0.001 && p < 0.999;
-    const ramp = sung ? SING.r : Math.min(smoothstep(0, 0.06, p), 1 - smoothstep(0.94, 1, p));
+    if (sung && CHF.song?.track?.playing) CHF.song.track.pause();
+    const played = !sung && !!CHF.song;
+    // Live r7: a tap bows the plate (or, once its figure has formed, stirs
+    // the sand up again), but only with no audio and no microphone: then the
+    // tap plays or pauses the audio, and the bow never shows (the owner's
+    // report of October 5, 2026).
+    const n = info.tap?.n ?? 0;
+    if (n < CH.taps) CH.taps = 0;
+    if (n > CH.taps) {
+      CH.taps = n;
+      if (!sung && !played) {
+        const settled = SAND.sand ? SAND.sand.settled(g.mode) : 0;
+        if (settled > 0.6) {
+          CH.stirUntil = time + STIR_SECS;
+          CH.bowUntil = 0;
+          for (const q of chladniCue(g.mode, false)) out.cues.push(q);
+        } else {
+          CH.bowUntil = time + BOW_SECS;
+          CH.stirUntil = 0;
+          for (const q of chladniCue(g.mode, true)) out.cues.push(q);
+        }
+      }
+    }
+    if (sung || played) CH.bowUntil = CH.stirUntil = 0;
+    // Paused audio stops the plate at once: the sand stays where it is.
+    if (played && !CHF.song.track.playing) CH.amp.clear();
+    const bowing = time < CH.bowUntil;
+    const stirring = time < CH.stirUntil;
+    // The modes as the sound drives them (or the bow, its own mode).
+    const want = sung ? singDrive(time, g.mode) : played ? fileDrive(time, g.mode) : null;
+    const drive = followDrive(want ?? (bowing ? [{ mode: g.mode, a: 1 }] : []), dt);
+    const stir = stirring ? Math.min(1, (CH.stirUntil - time) / 0.4) : 0;
+    if (SAND.sand && SAND.sand.step(dt, drive, stir)) {
+      SAND.version++;
+      // The grains sort where they are now, not where they rest (the engine
+      // reads their offsets from the screen), a few times a second while
+      // they move and once when they stop.
+      if (time - CH.sorted > 0.15) {
+        CH.sorted = time;
+        out.resortPose = true;
+      }
+      CH.unsorted = true;
+    } else if (CH.unsorted) {
+      CH.unsorted = false;
+      out.resortPose = true;
+    }
+    // How settled the sand is on the leading mode (for the status line and
+    // the tests), now and then.
+    if (SAND.sand && (CH.frames++ % 8 === 0 || !SAND.sand.moving)) {
+      const lead = drive.reduce((b, d) => (!b || d.a > b.a ? d : b), null);
+      if (lead && lead.a > 0.05) SING.lead = lead.mode;
+      SING.p = SAND.sand.settled(SING.lead || g.mode);
+    }
+    // The bow is drawn along the front edge only while a tap bows or stirs.
+    // Its splats fade in by morph channel 1, which is 0 until the drive says
+    // so, so a plate just built never shows it either.
+    const show = bowing || stirring;
+    out.morph = [0, show ? 1 : 0, 0, 0];
     out.parts.bow = {
-      visible: bowing ? 1 : 0,
-      offset: [0, 0.38 * Math.sin(t * 7) * ramp, 0],
+      visible: show ? 1 : 0,
+      offset: [0, 0.38 * Math.sin(t * 7) * (show ? 1 : 0), 0],
     };
-    // The plate itself shivers a hair.
-    out.parts.plate = { offset: [0, 0.006 * Math.sin(t * 90) * ramp, 0] };
+    // The plate itself shivers a hair while it rings.
+    const ring = drive.reduce((s2, d) => Math.max(s2, d.a), 0);
+    out.parts.plate = { offset: [0, 0.006 * Math.sin(t * 90) * ring, 0] };
   },
   build(k, o) {
     const mode = modeById(o.mode);
     // Lane Live input: a new plate's sand starts scattered.
-    Object.assign(SING, { p: 0, want: null, asked: false, last: null });
+    Object.assign(SING, { p: 0, want: null, asked: false, last: null, lead: null });
+    SING.builds++;
+    Object.assign(CH, { last: null, bowUntil: 0, stirUntil: 0, frames: 0, amp: new Map(), sorted: -1, unsorted: true }); // prettier-ignore
     // The stand: a base, a post, and the plate clamped on top.
     const plate = k.part("plate", { pivot: [0, 0, 0], axis: [0, 1, 0] });
-    k.add(k.cylinder(0.5, 0.1, { caps: true }), {
-      pos: [0, -1.05, 0],
-      color: "#2b3037",
-      share: 0.05,
-      even: true,
-    });
-    k.add(k.cylinder(0.09, 1.0, { caps: "bottom" }), {
-      pos: [0, -0.55, 0],
-      color: (c) => shade("#454c55", 0.8 + 0.3 * Math.abs(c.n[0])),
-      share: 0.04,
-      even: true,
-    });
+    // Live r8: in fine discs in rows, crisp from the side (was a random fuzz).
+    column(k, { r: 0.5, y0: -1.1, y1: -1.0, step: 0.011, color: "#2b3037", cap: true });
+    column(k, { r: 0.09, y0: -1.0, y1: -0.06, step: 0.008, color: "#454c55" });
     // The plate: its top a smooth sheet of overlapping flat discs (brushed
-    // steel, a soft light across it), its edge a thin box.
-    k.add(k.box(2 * PLATE, PLATE_T, 2 * PLATE), {
-      pos: [0, -PLATE_T / 2 - 0.002, 0],
-      color: (c) => shade("#56606c", 0.75 + 0.25 * Math.abs(c.n[1])),
-      part: plate,
-      share: 0.04,
-      even: true,
-    });
+    // steel, a soft light across it). Live r7 polish: the sheet stops short
+    // of the rim, and the rim and the four sides are fine strips of small
+    // discs (was a box, whose edge showed as a row of beads). Bigger discs
+    // on the top were tried and cost a phone's frames (and the sand settles
+    // only as fast as frames come).
+    const topColor = (x, z) => mix("#5d6874", "#7a8593", clamp(0.5 + (0.28 * (x - z)) / PLATE, 0, 1)); // prettier-ignore
+    const inset = 0.012;
+    // (The rim's splats come out of the top's share, so the plate costs
+    // what it did: on a slow phone the sand settles only as fast as frames
+    // come.)
+    const rim = plateRim(k, { half: PLATE, thick: PLATE_T, y: 0.001, part: plate, top: topColor, step: k.count >= 200000 ? 0.006 : 0.008 }); // prettier-ignore
     sheet(k, {
-      x0: -PLATE,
-      x1: PLATE,
-      z0: -PLATE,
-      z1: PLATE,
+      x0: -PLATE + inset,
+      x1: PLATE - inset,
+      z0: -PLATE + inset,
+      z1: PLATE - inset,
       y: 0.001,
-      cells: k.count * 0.16,
+      cells: Math.max(6000, k.count * 0.2 - rim),
       part: plate,
-      color: (x, z) => mix("#5d6874", "#7a8593", clamp(0.5 + (0.28 * (x - z)) / PLATE, 0, 1)),
+      color: topColor,
     });
     // The bow: a slim stick with a pale ribbon of hair against the front edge.
     const bow = k.part("bow");
-    k.add(k.box(0.05, 1.5, 0.05), {
-      pos: [0.15, 0.0, PLATE + 0.16],
-      rot: [0, 0, 0],
-      color: "#6a4a30",
-      part: bow,
-      share: 0.02,
-    });
-    k.add(k.box(0.012, 1.45, 0.11), {
-      pos: [0.15, 0.0, PLATE + 0.06],
-      color: "#efe6d0",
-      part: bow,
-      share: 0.015,
-    });
-    // The sand: one splat per grain in each of the twelve copies.
-    const copies = KEYS;
-    const n = Math.max(200, Math.floor((k.count * 0.6) / copies));
-    const snaps = settle(mode, n, () => k.rand());
-    const at = (s, i) => [
-      (s[i * 3] * 2 - 1) * PLATE,
-      GRAIN_LIFT + s[i * 3 + 2] * HOP,
-      (s[i * 3 + 1] * 2 - 1) * PLATE,
-    ];
-    const tone = Array.from({ length: n }, () => k.rand());
-    for (let j = 0; j < copies; j++) {
-      const part = k.part(`sand${j}`);
-      k.cloud({ share: n / k.count, size: 0.5, pattern: false }, (rand, i) => ({
-        p: at(snaps[j], i),
-        to: at(snaps[j + 1], i),
-        channel: 0,
-        color: mix("#e9d8ac", "#f8efd2", tone[i]),
-        size: 0.5 + 0.4 * tone[i],
-        opacity: 0.98,
-        part,
-        pattern: false,
-      }));
+    // Live r7: it fades in by morph channel 1, which stays 0 unless a tap
+    // bows the plate, so it never shows by default (not on a rebuild's first
+    // frames either).
+    const hidden = { kind: "fade", params: [0.5, -0.02], channel: 1 };
+    // Live r7 polish: drawn from fine splats, like a real bow: a round wooden
+    // stick bowed a little toward the hair, a flat ribbon of pale hair
+    // against the plate's edge, a dark frog below and a pale tip above (was
+    // two boxes, which read as one blurry bar).
+    const bowItems = [];
+    const X = 0.15;
+    const HAIR_Z = PLATE + 0.045;
+    const STICK_Z = PLATE + 0.12;
+    const TOP = 0.72;
+    const BOT = -0.72;
+    for (let y = BOT; y <= TOP; y += 0.007) {
+      const t = (y - BOT) / (TOP - BOT);
+      // The stick: nearer the hair in the middle (its camber).
+      const z = STICK_Z - 0.035 * Math.sin(Math.PI * t);
+      for (let a = 0; a < 6; a++) {
+        const th = (a / 6) * Math.PI * 2;
+        const n = [Math.cos(th), 0, Math.sin(th)];
+        bowItems.push({ p: [X + 0.011 * n[0], y, z + 0.011 * n[2]], n, flat: 0.15, size: 1.0, color: shade("#6b4026", 0.78 + 0.32 * Math.max(0, n[0] * 0.6 + n[2] * 0.8)), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
+      }
+      // The hair: a ribbon a centimeter wide, facing the plate and away.
+      if (y > BOT + 0.06 && y < TOP - 0.03)
+        for (let w = -1; w <= 1; w++)
+          for (const side of [-1, 1])
+            bowItems.push({ p: [X + w * 0.0038, y, HAIR_Z + side * 0.002], n: [0, 0, side], flat: 0.05, size: 0.62, color: shade("#efe7d4", 0.94 + 0.03 * w), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
     }
+    // The frog (where the hand holds it) and the tip, each joining stick and hair.
+    const block = (y0, y1, color) => {
+      for (let y = y0; y <= y1; y += 0.006)
+        for (let z = HAIR_Z; z <= STICK_Z; z += 0.006)
+          for (const side of [-1, 1])
+            bowItems.push({ p: [X + side * 0.012, y, z], n: [side, 0, 0], flat: 0.05, size: 0.85, color, opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
+    };
+    block(BOT, BOT + 0.08, "#1d1a19");
+    block(TOP - 0.035, TOP, "#ece5d6");
+    k.cloud({ share: bowItems.length / k.count, pattern: false, jitter: 0 }, (rand, i) => bowItems[i] || null); // prettier-ignore
+    // Live r7: the sand, one relief splat per grain (chladni-sand.js moves
+    // them). Each rests a hair from the plate's middle (a different hair for
+    // each, so the canvas's steps of 1/255 don't line grains up) and the
+    // screen canvas moves it to its place: a signed offset of up to SAND_LIFT.
+    // Live r8: each grain a little smaller and fully opaque, a crisper speck.
+    const n = Math.max(2500, Math.min(10000, Math.floor(k.count * 0.06)));
+    const sand = new Sand(n, () => k.rand());
+    // Live r10: a change of colors only keeps the sand where it lies.
+    const was = SAND.sand;
+    if (colorsOnly(SAND.opts, o) && was?.n === n && SAND.opts?.mode === o.mode) {
+      sand.X.set(was.X);
+      sand.Y.set(was.Y);
+      sand.steps = was.steps;
+    }
+    const cols = Math.min(256, Math.ceil(Math.sqrt(n * 2)));
+    const rows = Math.ceil(n / cols);
+    const home = new Float32Array(n * 2);
+    const items = [];
+    for (let i = 0; i < n; i++) {
+      home[i * 2] = (k.rand() - 0.5) * 0.06;
+      home[i * 2 + 1] = (k.rand() - 0.5) * 0.06;
+      const tone = k.rand();
+      items.push({ p: [home[i * 2], GRAIN_LIFT, home[i * 2 + 1]], color: mix("#e9d8ac", "#f8efd2", tone), tone, size: 0.44 + 0.34 * tone, opacity: 1, kind: "relief", params: [((i % cols) + 0.5) / cols, (Math.floor(i / cols) + 0.5) / rows, 3, SAND_LIFT], part: plate, pattern: false }); // prettier-ignore
+    }
+    // Live r10: each grain's color as chosen (a flag's once its image is read).
+    const tones = items.map((it) => it.tone);
+    const asMade = (i) => mix("#e9d8ac", "#f8efd2", tones[i]);
+    const opts = { ...o };
+    const flag = opts.colors === "flag" ? SAND.flags?.get(opts.flag) : null;
+    const colors = paint(n, opts, { asMade, tone: tones, flag });
+    for (let i = 0; i < n; i++) items[i].color = [colors[i * 3], colors[i * 3 + 1], colors[i * 3 + 2]]; // prettier-ignore
+    if (opts.colors === "flag" && !flag) {
+      const id = ++SAND.flagAsk;
+      flagColors(opts.flag).then((f) => {
+        if (!f || id !== SAND.flagAsk) return;
+        (SAND.flags ??= new Map()).set(opts.flag, f);
+        SAND.paint = paint(n, opts, { asMade, tone: tones, flag: f });
+        SAND.img = null;
+        SAND.version++;
+        liveIn.wake?.();
+      });
+    }
+    k.cloud({ share: n / k.count, size: 0.5, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
+    Object.assign(SAND, { sand, cols, rows, home, colors: tones, img: null, version: SAND.version + 1, opts, paint: colors }); // prettier-ignore
     k.reach([0, HOP + 0.3, 0]);
-    k.data = { chladni: { mode, copies } };
+    k.data = { chladni: { mode } };
   },
 };
 
@@ -320,6 +618,12 @@ const CHLADNI = {
 // the back. What has played fades away as it crosses the line (the fade kind, driven by
 // morph channel 0 = how far through the song). Loud bands rise at the line: 48 small
 // caps (tokens) ride the loudness the song has at that moment.
+//
+// Live r7: in the browser, Live now grows the land as the song plays instead
+// (song-looks.js buildLandscapeLong): it opens on an empty plain, each moment
+// rises at the line at the front as it is heard, and what has played
+// recedes behind it. The scrolling build below remains for a build without a
+// worker (the Node tools); Whole song is unchanged.
 
 export const DB_RANGE = 45;
 const W = 2; // width (pitch axis)
@@ -430,6 +734,7 @@ const R2 = { look: null, land: null, an: null, anFor: null, actN: 0, lastShown: 
 export const songAnalysisStarted = () => R2.an?.started;
 // For the sync test: what the look last drew at its "now" mark.
 export const songShown = () => R2.look?.shown ?? null;
+export const r2Land = () => R2.land;
 export const songTest = () => ({
   track: SONG.current?.track ?? null,
   features: R2.an?.features ?? null,
@@ -549,6 +854,7 @@ function buildR2(k, o, song) {
 
 // A short song's player, stopped (a new build starts stopped).
 function stopShort() {
+  const keep = R3.keep; // r3: the same song keeps its place
   try {
     PLAY.src?.stop();
   } catch {
@@ -563,11 +869,13 @@ function stopShort() {
     ctx: null,
     taps: 0,
   });
+  if (keep) Object.assign(PLAY, keep);
 }
 
 function driveR2(g, out, info) {
   const song = g.song;
   const t = song.track;
+  playAfter(song, info.sound); // r3
   // Each tap plays or pauses. A long song's tap already did it inside the
   // gesture (action.onAct); a tap that came some other way does it here.
   const n = info.tap?.n ?? 0;
@@ -589,7 +897,22 @@ function driveR2(g, out, info) {
   } else if (R2.land) {
     const f = clamp01(now / duration);
     if (g.live) {
-      out.parts.look = { offset: [0, 0, f * g.D] };
+      // Live r7: the land slides back over the plain, which stays put; splats
+      // sort where they were built, so they sort again as it slides (the
+      // plain drew over the land otherwise).
+      //
+      // Before anything is heard no land shows, and it rests where it was
+      // built (no slide), so it sorts there too. The sort's centers are the
+      // toy's shape for Hands-on, which otherwise took the hidden land, slid
+      // ahead of the plain, as part of the toy (it came to rest tilted, part
+      // of it under the floor). The first moment heard rises at the front
+      // line, so the slide starting then doesn't show.
+      const off = now > 0 ? liveOffset(R2.land, now, duration) : 0;
+      out.parts.look = { offset: [0, 0, off] };
+      if (Math.abs(off - (R2.land.sortedAt ?? Infinity)) > 0.02) {
+        R2.land.sortedAt = off;
+        out.resortPose = true;
+      }
       const caps = landscapeCaps(R2.land, R2.an, now);
       if (caps) out.tokens = caps;
     } else out.parts.marker = { offset: [0, 0, -f * g.D] };
@@ -597,11 +920,146 @@ function driveR2(g, out, info) {
   setShown(progressLine());
 }
 
+// ---- Lane Live input r3: the recording and the transport ------------------------------
+// While the microphone is on, what it hears is kept in memory (song-record.js);
+// when it stops, the recording becomes the song on show, to play back, scrub
+// and save. The transport in the Toy tab starts over, plays or pauses, scrubs
+// and switches Live and Whole.
+const REC = { rec: null, last: null, song: null };
+const R3 = { view: "live", playAfter: false };
+
+export const recordState = () => ({
+  recording: REC.rec?.seconds ?? 0,
+  recorded: REC.last?.duration ?? 0,
+  onRecording: !!REC.song && SONG.current === REC.song,
+});
+
+// The recording as a song: a short one decoded at once, a long one played
+// from a WAV file in memory like an opened song.
+async function recordingSong() {
+  if (REC.song) return REC.song;
+  const r = REC.last;
+  const name = "Your recording";
+  if (r.duration > SHORT && typeof Audio !== "undefined") {
+    const file = new File([wavBlob(r.samples, r.rate)], "recording.wav", { type: "audio/wav" });
+    const url = URL.createObjectURL(file);
+    const track = new Track(url);
+    const duration = await track.ready;
+    REC.song = { long: true, file, url, track, name, duration };
+  } else REC.song = { samples: r.samples, rate: r.rate, duration: r.duration, name };
+  return REC.song;
+}
+
+function dropRecording() {
+  const s = REC.song;
+  if (s?.track) {
+    s.track.close();
+    URL.revokeObjectURL(s.url);
+  }
+  REC.song = null;
+  REC.last = null;
+}
+
+const wake = () => liveIn.wake?.();
+
+function songSeek(sec) {
+  const s = SONG.current;
+  if (!s) return;
+  const x = Math.max(0, Math.min(s.duration || 0, sec));
+  if (s.track) {
+    s.track.el.currentTime = x;
+    s.track.anchor = null;
+  } else {
+    PLAY.pos = x;
+    if (PLAY.on) {
+      // Restarted from there on the next frame (want stays on).
+      try {
+        PLAY.src?.stop();
+      } catch {
+        // Already ended.
+      }
+      Object.assign(PLAY, { on: false, src: null, ctx: null });
+    }
+  }
+  wake();
+}
+
+const songPlaying = () => {
+  const t = SONG.current?.track;
+  return t ? t.playing : PLAY.want;
+};
+
+function songPlay(on) {
+  const t = SONG.current?.track;
+  if (t) {
+    if (on && !t.playing) t.play(R2.sound);
+    if (!on && t.playing) t.pause();
+  } else PLAY.want = on;
+  wake();
+}
+
+export const transport = {
+  state() {
+    const mic = liveIn.on("mic");
+    const s = SONG.current;
+    return {
+      pos: mic || !s ? 0 : heardNow(),
+      length: mic ? 0 : s?.duration || 0,
+      playing: !mic && songPlaying(),
+      live: R3.view === "live",
+      mic,
+      ...recordState(),
+    };
+  },
+  toStart() {
+    songSeek(0);
+    songPlay(true);
+  },
+  toggle() {
+    songPlay(!songPlaying());
+  },
+  seek: songSeek,
+  setLive(on) {
+    liveIn.setOptions?.({ view: on ? "live" : "whole" });
+  },
+  playRecording() {
+    if (!REC.last) return;
+    if (SONG.current === REC.song && REC.song) {
+      songSeek(0);
+      return songPlay(true);
+    }
+    R3.playAfter = true;
+    liveIn.setOptions?.({ song: "recording", songName: "Your recording" });
+  },
+  saveRecording() {
+    if (!REC.last) return;
+    const d = new Date();
+    const p = (n) => String(n).padStart(2, "0");
+    const stamp = `${d.getFullYear()}${p(d.getMonth() + 1)}${p(d.getDate())}-${p(d.getHours())}${p(d.getMinutes())}${p(d.getSeconds())}`; // prettier-ignore
+    saveBlob(wavBlob(REC.last.samples, REC.last.rate), `splashery-recording-${stamp}.wav`);
+  },
+};
+
+// A song built with "play after" set starts at once (the recording's button).
+function playAfter(song, sound) {
+  if (!R3.playAfter || song !== REC.song) return;
+  R3.playAfter = false;
+  if (song.track) song.track.play(sound);
+  else PLAY.want = true;
+}
+
 const SONG_LANDSCAPE = {
+  // Lane Live input r3: tilt up and down, from a level look to one from above.
+  tiltLock: false,
+  pitchRange: [0.05, 1.35],
   // Lane Live input: the microphone; r2: a long song's track, and the
   // picture filling in while the song is measured.
   alive: () => PLAY.on || liveIn.on("mic") || !!SONG.current?.track?.playing || !!(R2.an && !R2.an.finished && (R2.look || R2.land)), // prettier-ignore
-  density: 1,
+  // Live r7 polish (the owner's "the toys could still be sharper"): half as
+  // many splats again (the land's three a cell, buildLandscapeLong), and the
+  // labs' sharp kernel.
+  density: 1.5,
+  kernel: "sharp",
   options: [
     {
       key: "look",
@@ -622,10 +1080,10 @@ const SONG_LANDSCAPE = {
       key: "view",
       label: "View",
       type: "select",
-      default: "whole",
+      default: "live",
       choices: [
-        { id: "whole", label: "Whole song" },
         { id: "live", label: "Live (scrolls with the music)" },
+        { id: "whole", label: "Whole song" },
       ],
     },
     {
@@ -664,7 +1122,7 @@ const SONG_LANDSCAPE = {
     accept: "audio/*,.mp3,.wav,.ogg,.m4a,.flac,.aac,.opus",
     binary: true,
     fileButton: "Open a song…",
-    note: "Open an MP3, WAV, OGG, M4A or FLAC file. A long song starts playing at once, exactly as the file sounds, while its picture is measured on this device (the line under it shows how far); nothing is uploaded. Tap to pause or play.",
+    note: "Open an MP3, WAV, OGG, M4A or FLAC file. A long song starts playing at once, exactly as the file sounds, while its picture is measured on this device (the line under it shows how far); nothing is uploaded. Tap the picture to pause or play; the buttons above start over, pause, scrub and switch between Live and the whole song.",
     maxBytes: MAX_BYTES, // lane Live input r2: a long song streams from the file
     async read(_text, fileName, file) {
       if (!file) throw new Error("Open a sound file.");
@@ -701,8 +1159,15 @@ const SONG_LANDSCAPE = {
     },
     shown: () =>
       liveIn.on("mic") ? "Live: what the microphone hears now is at the front." : SONG.current ? `${SONG.current.name} (${Math.round(SONG.current.duration)} s)` : "", // prettier-ignore
-    // Lane Live input: the microphone instead of a file.
-    live: [{ kind: "mic" }],
+    // Lane Live input: the microphone instead of a file; r3, the transport
+    // and the recording (kept in memory, saved only on a tap).
+    live: [
+      { render: () => songTransport(transport) },
+      {
+        kind: "mic",
+        note: "Stays on this device. While the microphone is on, what it hears is kept in this page's memory so you can play it back. Nothing is sent, and it's saved only if you tap Save the recording.",
+      },
+    ],
   },
   // Lane Live input: the live landscape's heights and colors; r2: the
   // measured looks' and a long song's landscape's places and colors.
@@ -718,7 +1183,8 @@ const SONG_LANDSCAPE = {
     version(time) {
       if (liveIn.on("mic")) return Math.floor(time * LIVE_SONG.rate);
       if (R2.look) return lookVersion(R2.look, R2.an, heardNow());
-      if (R2.land) return `${R2.an?.version ?? -1}|${R2.land.live ? Math.floor((heardNow() / Math.max(1, SONG.current?.duration || 1)) * R2.land.nt) : 0}`; // prettier-ignore
+      // Live r7: in Live the land grows with every frame heard.
+      if (R2.land) return `${R2.an?.version ?? -1}|${R2.land.live ? Math.floor(heardNow() / FRAME) : 0}`; // prettier-ignore
       return "off";
     },
     draw(g, time) {
@@ -743,6 +1209,7 @@ const SONG_LANDSCAPE = {
       SONG.sample = { samples, rate, duration: samples.length / rate, name: "Sample tune" };
     }
     SONG.want = o.song === "custom" && SONG.custom ? SONG.custom : SONG.sample;
+    if (o.song === "recording" && REC.last) SONG.want = await recordingSong(); // r3
     if (!SONG.want.duration) SONG.want.duration = SONG.want.samples.length / SONG.want.rate;
   },
   drive(t, c, out, info) {
@@ -750,7 +1217,7 @@ const SONG_LANDSCAPE = {
     const g = info?.data?.song;
     if (!g || g.liveMic) return; // lane Live input: the microphone's landscape moves by itself
     if (g.r2) return driveR2(g, out, info); // lane Live input r2
-    // Each tap plays or pauses (a song that has ended plays again from the start).
+    playAfter(g.song, info.sound); // r3    // Each tap plays or pauses (a song that has ended plays again from the start).
     const n = info.tap?.n ?? 0;
     if (n < PLAY.taps) PLAY.taps = 0;
     if (n > PLAY.taps) {
@@ -784,13 +1251,36 @@ const SONG_LANDSCAPE = {
     out.body = { offset: [0, 0, ((f - 0.5) * 0.5 * g.D * g.fit) / (info.R || 1)] };
   },
   build(k, o) {
+    R3.view = o.view;
+    // r3: the microphone's recording. A new one starts with the microphone;
+    // when it stops, the recording becomes the song on show.
+    if (liveIn.on("mic") && liveIn.mic && REC.rec?.mic !== liveIn.mic) {
+      REC.rec?.finish();
+      REC.rec = new MicRecorder(liveIn.mic);
+    } else if (!liveIn.on("mic") && REC.rec) {
+      const r = REC.rec.finish();
+      REC.rec = null;
+      if (r.duration >= 0.5) {
+        dropRecording();
+        REC.last = r;
+        setTimeout(() => liveIn.setOptions?.({ song: "recording", songName: "Your recording" }), 0); // prettier-ignore
+      }
+    }
     const song = SONG.want || SONG.sample;
+    // r3: the same song rebuilt (another view or look) keeps its place, and
+    // keeps playing if it was.
+    R3.keep = SONG.current === song ? { pos: PLAY.pos, want: PLAY.want } : null;
     if (SONG.current?.track && SONG.current !== song) SONG.current.track.pause(); // lane Live input r2
     SONG.current = song;
     R2.look = null;
     R2.land = null;
     if (liveIn.on("mic")) return liveSongBuild(k, o); // lane Live input
-    if (LOOKS.includes(o.look) || song.long) return buildR2(k, o, song); // lane Live input r2
+    // Live r7: Live grows the land as the song plays (the owner's push notes
+    // of October 4, 2026), for every song: a short one too is measured by
+    // the worker and drawn frame by frame as it is heard. (Without a worker,
+    // as in the Node tools, it builds whole as before.)
+    const grow = o.view === "live" && typeof Worker !== "undefined";
+    if (LOOKS.includes(o.look) || song.long || grow) return buildR2(k, o, song); // lane Live input r2
     // A new build (another song, a look) starts stopped.
     try {
       PLAY.src?.stop();
@@ -806,6 +1296,7 @@ const SONG_LANDSCAPE = {
       ctx: null,
       taps: 0,
     });
+    if (R3.keep) Object.assign(PLAY, R3.keep); // r3
     const budget = Math.floor(k.count * 0.3); // cells rise in up to three layers
     const d = landscapeData(song.samples, song.rate, budget);
     const D = landscapeLength(d.duration);
@@ -832,9 +1323,12 @@ const SONG_LANDSCAPE = {
         const nl = Math.hypot(sx, 1, sz);
         const nrm = [(-sx * 0.4) / nl, 1 / nl, (-sz * 0.4) / nl];
         const col = songColor(o.look, f, nf, h);
-        const layers = h > 0.06 ? 1 + Math.min(2, Math.floor((h * H) / 0.12)) : 1;
+        // (Live r7 polish: up to four, a layer every 0.09; with three the
+        // dark floor showed between tall, narrow peaks as specks.)
+        const layers = h > 0.06 ? 1 + Math.min(3, Math.floor((h * H) / 0.09)) : 1;
         for (let l = 0; l < layers; l++) {
-          const y = h * H * (1 - l / layers) + 0.01;
+          // (Live r7 polish: the lowest layer reaches nearly to the floor.)
+          const y = h * H * (layers > 1 ? 1 - l / (layers - 0.85) : 1) + 0.01;
           cells.push({
             p: [x(f), y, z(t)],
             n: l === 0 ? nrm : [0, 0, 1],
@@ -859,6 +1353,15 @@ const SONG_LANDSCAPE = {
       for (let i = t * stepN; i < Math.min(song.samples.length, (t + 1) * stepN); i++) peak = Math.max(peak, Math.abs(song.samples[i])); // prettier-ignore
       wave.push(peak);
     }
+    // Live r7 polish: its envelope, smoothed over about a hundredth of the
+    // song (the loudest within a few slices, then averaged), so its lines are
+    // clean curves; slice by slice they jumped and read as scattered beads.
+    const wr = Math.max(1, Math.round(wave.length / 160));
+    const wpeak = wave.map((_, t) => Math.max(...wave.slice(Math.max(0, t - wr), t + wr + 1)));
+    for (let t = 0; t < wave.length; t++) {
+      const win = wpeak.slice(Math.max(0, t - wr), t + wr + 1);
+      wave[t] = win.reduce((s2, v) => s2 + v, 0) / win.length;
+    }
     const wmax = Math.max(1e-6, ...wave);
     const wcells = [];
     for (let t = 0; t < wave.length; t++) {
@@ -874,8 +1377,10 @@ const SONG_LANDSCAPE = {
     const mk = [];
     for (let i = 0; i < 160; i++) {
       const xx = ((i + 0.5) / 160 - 0.5) * (W + 0.1);
-      mk.push({ p: [xx, 0.02, D / 2], color: "#fff3b0", size: 1.1, opacity: 1, part: marker, pattern: false }); // prettier-ignore
-      if (i % 4 === 0) mk.push({ p: [xx, 0.5 * H, D / 2], color: "#ffe680", size: 0.9, opacity: 0.55, part: marker, pattern: false }); // prettier-ignore
+      // (Live r7 polish: drawn out along the line, so the marker and its
+      // glow above are clean lines rather than rows of dots.)
+      mk.push({ p: [xx, 0.02, D / 2], dir: [1, 0, 0], stretch: 3, size: 0.9, color: "#fff3b0", opacity: 1, part: marker, pattern: false }); // prettier-ignore
+      if (i % 2 === 0) mk.push({ p: [xx, 0.5 * H, D / 2], dir: [1, 0, 0], stretch: 4, size: 0.7, color: "#ffe680", opacity: 0.55, part: marker, pattern: false }); // prettier-ignore
     }
     k.cloud({ share: mk.length / k.count, pattern: false }, (rand, i) => mk[i] || null);
     // Live: the loudness caps. The bands are pooled into up to 48 groups (one token each); a cap is a
@@ -1008,14 +1513,18 @@ function liveSongDraw(g, time) {
 // plate's frequencies go with its thickness) has its modes where voices
 // are: 75, 150, 195, 255 and 375 Hz. The mode nearest your note is the one
 // that rings; how strongly follows a resonance curve (half as strong about
-// 60 cents away), times how loud you sing. While it rings the sand hops
+// SING_WIDTH cents away), times how loud you sing. While it rings the sand hops
 // and drifts to its still lines, as when it is bowed; when you stop, the
-// sand stays where it is. A different mode, held for a moment, gets its
-// own plate of scattered sand.
+// sand stays where it is. Live r7: another note sets the sand off for its
+// mode's figure at once, from where it lies (no new plate).
 export const SING_F0 = F0 / 4;
+// Half strength this many cents off a mode: wide enough that any note from
+// about 60 to 450 Hz rings the nearest mode (an ordinary voice lands between
+// modes; at 60 cents most notes rang nothing, the owner's October 2 review).
+const SING_WIDTH = 150;
 export const singFreq = (mode) => SING_F0 * (mode.n * mode.n + mode.m * mode.m);
-const SING = { p: 0, want: null, since: 0, last: null, note: null, near: null, r: 0 };
-export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null }); // prettier-ignore
+const SING = { p: 0, want: null, since: 0, last: null, built: 0, note: null, near: null, r: 0, builds: 0 }; // prettier-ignore
+export const singState = () => ({ p: SING.p, note: SING.note, mode: SING.near?.mode.id ?? null, lead: SING.lead?.id ?? null, builds: SING.builds }); // prettier-ignore
 
 // The mode nearest a sung frequency (keeping the sign of the one on show
 // when the pair shares a frequency), and how strongly it rings (0..1).
@@ -1026,7 +1535,7 @@ export function singMode(hz, current) {
     const d = Math.abs(cents) - (current && m.n === current.n && m.m === current.m && m.s === current.s ? 1e-6 : 0); // prettier-ignore
     if (!best || d < best.d) best = { mode: m, d, cents };
   }
-  const x = best.cents / 60;
+  const x = best.cents / SING_WIDTH;
   return { ...best, response: 1 / (1 + x * x) };
 }
 
@@ -1040,38 +1549,228 @@ function singStatus() {
   return `You: ${n.name} (${Math.round(n.hz)} Hz). Nearest mode ${near.mode.n}, ${near.mode.m} rings at ${hz} Hz on this plate.${side}`; // prettier-ignore
 }
 
-// One frame of the sung plate: how far the sand has settled (0..1).
+// Live r7: what a pitch (Hz, moved by octaves into the plate's range) at a
+// loudness (0..1) asks of the plate: every mode rings by its own resonance
+// to it, so the nearest rings most and the sand heads for its figure at
+// once; a waver between two modes rings both a little. Modes that share a
+// frequency (the + and − of one n, m) ring as the one the Mode choice names,
+// else as +.
+function modesFor(hz, loud, chosen) {
+  const out = [];
+  const seen = new Set();
+  for (const m of MODES) {
+    const key = m.n * m.n + m.m * m.m;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    const pick = chosen.n === m.n && chosen.m === m.m ? chosen : MODES.find((q) => q.n === m.n && q.m === m.m && q.s > 0) || m; // prettier-ignore
+    const x = (1200 * Math.log2(hz / singFreq(pick))) / SING_WIDTH;
+    const a = loud / (1 + x * x);
+    if (a > 0.02) out.push({ mode: pick, a });
+  }
+  return out;
+}
+
+// One frame of the sung plate (Live r7: no more switching plates; the modes
+// follow the voice, see modesFor). Returns the modes it drives.
 function singDrive(time, mode) {
-  const dt = SING.last === null ? 0 : Math.min(0.1, Math.max(0, time - SING.last));
   SING.last = time;
   const pitch = liveIn.mic?.pitch;
   const loud = clamp01((liveIn.mic?.db ?? -120) / 30 + 1.8); // −54 dBFS nothing, −24 full
   if (pitch && loud > 0) {
     SING.note = pitch.note && { name: pitch.note.name, hz: pitch.hz };
-    SING.near = singMode(pitch.hz, mode);
+    SING.near = singMode(foldHz(pitch.hz), mode);
     SING.r = SING.near.response * loud;
-    const other = SING.near.mode.id !== mode.id;
-    if (other && SING.near.response > 0.5) {
-      if (SING.want !== SING.near.mode.id) {
-        SING.want = SING.near.mode.id;
-        SING.since = time;
-      } else if (time - SING.since > 0.4 && !SING.asked) {
-        SING.asked = true;
-        liveIn.setOptions?.({ mode: SING.want });
-      }
-    } else if (!other) {
-      SING.want = null;
-      SING.p = Math.min(1, SING.p + (dt / BOW_SECS) * SING.r * 1.4);
-    }
-  } else {
-    SING.r = 0;
-    SING.want = null;
+    return modesFor(foldHz(pitch.hz), loud, mode);
   }
-  return SING.p;
+  SING.r = 0;
+  return [];
 }
+// ---- Lane Live input r4: the Chladni plate plays your audio ---------------------------
+// A song or any sound file opened on the plate plays from the file itself
+// (song-stream.js Track, as the Song landscape plays it) and is measured in
+// the Song landscape's worker (song-analysis.js: pitch and loudness every
+// 40 ms). Each moment's strongest pitch (the voiced pitch where there is
+// one, else the loudest band) is moved by octaves into the plate's range
+// and rings the modes as a sung note does (Live r7: at once, every frame,
+// the sand moving on from where it lies; until r7 a running score picked a
+// mode and a new plate with fresh sand). Nothing is uploaded.
+const CHF = { song: null, an: null, sound: null, score: new Map(), now: null };
+const BAND_HZ = bands(12).centers; // the analysis' bands (song-analysis.js NF)
+
+// For the clip tool: the open audio's track (its clock is stepped with the clip's).
+export const chladniTest = () => ({ track: CHF.song?.track ?? null });
+
+export const chladniFileState = () => ({
+  name: CHF.song?.name ?? null,
+  playing: !!CHF.song?.track?.playing,
+  pos: CHF.song ? CHF.song.track.time() : 0,
+  measured: CHF.an?.progress ?? 0,
+  now: CHF.now,
+  p: SING.p,
+  builds: SING.builds,
+  lead: SING.lead?.id ?? null, // Live r7: the mode the sand is settling on
+});
+
+// Live r7: the sand, for the tests: how many grains, and whether they move.
+export const chladniSand = () => ({
+  n: SAND.sand?.n ?? 0,
+  moving: !!SAND.sand?.moving,
+  steps: SAND.sand?.steps ?? 0,
+  at: SAND.sand ? Array.from(SAND.sand.X.subarray(0, 50)).concat(Array.from(SAND.sand.Y.subarray(0, 50))) : [], // prettier-ignore
+  amps: Object.fromEntries([...CH.amp].map(([k, v]) => [k, v.a])), // each driven mode's strength
+  colors: SAND.opts?.colors ?? null, // Live r10: the sand's colors, and the first ten grains'
+  paint: SAND.paint ? Array.from(SAND.paint.subarray(0, 30)) : [],
+});
+
+// Into the plate's range, by octaves (60 to 400 Hz).
+export function foldHz(hz) {
+  let x = hz;
+  while (x >= 400) x /= 2;
+  while (x < 60) x *= 2;
+  return x;
+}
+
+// Frame i's strongest pitch (Hz) and loudness (dBFS), or null if not measured.
+function strongest(i) {
+  const f = CHF.an?.features;
+  if (!f || i < 0 || i >= f.n || !f.done[i]) return null;
+  const nfi = FIELDS.length;
+  const db = f.feat[i * nfi + FIELD.rms];
+  let hz = f.feat[i * nfi + FIELD.f0];
+  if (!(hz > 0)) {
+    let top = -Infinity;
+    for (let b = 0; b < f.nf; b++) {
+      const v = f.bands[i * f.nf + b];
+      if (v > top) {
+        top = v;
+        hz = BAND_HZ[b];
+      }
+    }
+  }
+  return hz > 0 ? { hz, db } : null;
+}
+
+// Live r7: the audio's strongest pitch now drives the modes as a voice
+// does (modesFor), frame by frame; no running score, no switching plates.
+function fileDrive(time, mode) {
+  SING.last = time;
+  const t = CHF.song.track;
+  if (!t.playing) {
+    SING.r = 0;
+    return [];
+  }
+  const i = Math.floor(t.time() / FRAME);
+  CHF.an?.focus(i);
+  const s = strongest(i);
+  if (!s) {
+    SING.r = 0;
+    return [];
+  }
+  const hz = foldHz(s.hz);
+  const loud = clamp01((s.db + 54) / 30);
+  SING.note = { name: noteOf(s.hz).name, hz: s.hz };
+  SING.near = singMode(hz, mode);
+  SING.r = SING.near.response * loud;
+  CHF.now = { hz: s.hz, folded: hz, loud, lead: SING.near.mode.id };
+  return modesFor(hz, loud, mode);
+}
+
+function closeChladniAudio() {
+  const s = CHF.song;
+  if (s) {
+    s.track.close();
+    URL.revokeObjectURL(s.url);
+  }
+  CHF.an?.close();
+  CHF.song = null;
+  CHF.an = null;
+  CHF.now = null;
+  CHF.score.clear();
+}
+
+async function openChladniAudio(file, fileName) {
+  if (!file) throw new Error("Open a sound file.");
+  if (liveIn.on("mic")) liveStop("mic");
+  closeChladniAudio();
+  const url = URL.createObjectURL(file);
+  const track = new Track(url);
+  let duration;
+  try {
+    duration = await track.ready;
+  } catch (err) {
+    track.close();
+    URL.revokeObjectURL(url);
+    throw err;
+  }
+  const an = new SongAnalysis();
+  an.start(file, 44100).catch((err) => (an.error = err?.message || String(err)));
+  CHF.song = { name: fileName.replace(/\.[^.]+$/, ""), url, track, duration };
+  CHF.an = an;
+  track.play(CHF.sound);
+  return {};
+}
+
+function chladniShown() {
+  const s = CHF.song;
+  if (!s) return "";
+  const an = CHF.an;
+  const left =
+    an && !an.finished ? ` Listening through it: ${Math.round(an.progress * 100)}%.` : "";
+  return `${s.name} (${Math.round(s.duration)} s).${left}`;
+}
+
+const chladniTransport = {
+  prefix: "chladni",
+  state() {
+    const s = CHF.song;
+    return {
+      hidden: !s,
+      pos: s ? s.track.time() : 0,
+      length: s?.duration || 0,
+      playing: !!s?.track?.playing,
+      mic: liveIn.on("mic"),
+      live: false,
+      recorded: 0,
+      recording: 0,
+    };
+  },
+  toStart() {
+    const t = CHF.song?.track;
+    if (!t) return;
+    t.el.currentTime = 0;
+    t.anchor = null;
+    if (!t.playing) t.play(CHF.sound);
+    liveIn.wake?.();
+  },
+  toggle() {
+    const t = CHF.song?.track;
+    if (!t) return;
+    if (t.playing) t.pause();
+    else t.play(CHF.sound);
+    liveIn.wake?.();
+  },
+  seek(sec) {
+    const t = CHF.song?.track;
+    if (!t) return;
+    t.el.currentTime = Math.max(0, Math.min(t.duration || 0, sec));
+    t.anchor = null;
+    liveIn.wake?.();
+  },
+  close() {
+    closeChladniAudio();
+    liveIn.wake?.();
+  },
+  // Another toy: the audio stops (a rebuild of the plate keeps it playing).
+  gone() {
+    setTimeout(() => {
+      if (globalThis.window?.__splashery?.player?.scene?.toy?.id !== "chladni-plate") CHF.song?.track?.pause(); // prettier-ignore
+    }, 300);
+  },
+};
 // ---- End of live input ----------------------------------------------------------------
 
 export const RECIPES = {
   "song-landscape": SONG_LANDSCAPE,
   "chladni-plate": CHLADNI,
+  "chladni-cell": CHLADNI_CELL, // Live r8
 };

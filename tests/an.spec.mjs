@@ -12,7 +12,7 @@ import { TOYS } from "../src/toys.js";
 const ID = "anatomy-atlas";
 const R = RECIPES[ID];
 const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
-const { LAYERS, PIECES, LABEL_LIST } = ATLAS;
+const { LAYERS, PIECES, LABEL_LIST, ORGAN_PIECES } = ATLAS;
 
 function build(layer = "skin", count = 24000) {
   const it = buildRecipe(R, { seed: 5, count, options: { layer } }, applyClay);
@@ -45,11 +45,14 @@ test.describe("the anatomy atlas", () => {
     const partOf = Object.fromEntries(kit.parts.map((p, i) => [p.name, i]));
     const perPart = {};
     const tokPart = new Map();
+    const organParts = new Set(ORGAN_PIECES.map((o) => partOf[o.part]));
     for (let i = 0; i < buf.count; i++) {
       const part = buf.anim[i * 4] % 16;
       const kind = buf.anim[i * 4 + 1];
       perPart[part] = (perPart[part] || 0) + 1;
-      if (part === partOf.organs) continue;
+      // (Lane Hands-on H5: each organ is a part of its own now, a solid
+      // piece in Hands-on.)
+      if (organParts.has(part)) continue;
       // Skin, muscle and bone splats are all pieces (tokens): they move only
       // as solid pieces, never by a morph.
       expect(kind).toBe(KINDS.token);
@@ -57,7 +60,10 @@ test.describe("the anatomy atlas", () => {
       if (!tokPart.has(tok)) tokPart.set(tok, part);
       expect(tokPart.get(tok)).toBe(part);
     }
-    for (const id of LAYERS) expect(perPart[partOf[id]], id).toBeGreaterThan(1000);
+    for (const id of LAYERS.filter((id) => id !== "organs"))
+      expect(perPart[partOf[id]], id).toBeGreaterThan(1000);
+    for (const o of ORGAN_PIECES) expect(perPart[partOf[o.part]], o.part).toBeGreaterThan(100);
+    expect([...organParts].reduce((n, p) => n + perPart[p], 0)).toBeGreaterThan(1000);
     // Every piece has splats, in its own layer's part.
     PIECES.forEach(([id, layer], i) => {
       expect(tokPart.get(i), id).toBe(partOf[LAYERS[layer]]);

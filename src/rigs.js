@@ -1,10 +1,10 @@
 // Rigs for captured toys and shelf shapes (see src/rig.js): parts made of
 // soft ellipsoid regions in world coordinates, plus controls, an action and
 // drive() as in a kit recipe. Place regions with ?rig=show, which tints each
-// part (and the colour keys), and with tools/rig-map.mjs.
+// part (and the color keys), and with tools/rig-map.mjs.
 //
 // Beyond parts, a rig can have:
-//   keys   up to two colour keys (seeds, jam, strings): { color, tol, at, r }
+//   keys   up to two color keys (seeds, jam, strings): { color, tol, at, r }
 //          or { long } for long thin splats; see tagRig in src/rig.js
 //   fx     up to four whole-body effects (src/rig-fx.js explains them)
 //   addon  { build(k), count }: a small kit-built splat cloud in world
@@ -16,6 +16,10 @@
 
 import { quatAxisAngle, quatMul, quatFromTo, quatRotate, mix, shade } from "./kit.js";
 import { inked } from "./font.js";
+import { evenBox, evenDisc, evenEllipsoid } from "./packs/even.js";
+import { rigPieces } from "./physics/joints.js"; // lane Hands engine B
+import { DOG_FILL } from "./packs/dog-plush-fill.js"; // lane Fix9
+import { PR3_RIGS, dogMat, dogMatHide } from "./packs/photoreal-r3-rigs.js"; // lane Photoreal r3
 
 const TAU = Math.PI * 2;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -45,9 +49,9 @@ const vary = (tap, salt = 0) => {
 };
 
 // The home camera looks from here (yaw 0.55): effects that show a face turn
-// towards it.
+// toward it.
 const VIEW = [Math.sin(0.55), 0, Math.cos(0.55)];
-// The carrot cake's slice lifts out towards the viewer and up.
+// The carrot cake's slice lifts out toward the viewer and up.
 const SLICE_DIR = unit([VIEW[0] * 0.55, 1, VIEW[2] * 0.55]);
 
 // A part that turns (ql about its own pivot pl) while riding on another part
@@ -86,6 +90,77 @@ const FLY = (() => {
   };
 })();
 
+// Lane Fix9: the dog plush's hop, as src/motion.js hops a capture without a rig (its hopAt): a
+// bounce with a peak of 1 that falls by e^2 each landing, with a squash as it lands.
+const DOG_HOP_SECS = 1.45;
+function dogHop(t, e = 0.55, period = 0.62) {
+  let start = 0;
+  let dur = period;
+  let amp = 1;
+  for (let k = 0; k < 8; k++) {
+    if (t < start + dur) {
+      const f = (t - start) / dur;
+      const edge = Math.min(f, 1 - f) * dur;
+      const squash = amp * (0.22 * Math.exp(-((edge / 0.05) ** 2)) - 0.06 * Math.sin(Math.PI * f));
+      return { h: amp * 4 * f * (1 - f), squash };
+    }
+    start += dur;
+    dur *= e;
+    amp *= e * e;
+    if (amp < 0.01) break;
+  }
+  return null;
+}
+
+// ---- Closed bases (lane Sharpness B) ----------------------------------------------------
+// Some captures are thin or open underneath, so from below the far side or
+// the inside shows through. These add-on pieces close them with hard edges
+// (never by smearing the scan): a solid core just inside a fruit, the same
+// color as its flesh, which only shows where the skin is thin; or a
+// kit-built underside (a plate's foot, a basket's woven floor, a can's
+// lid). All in world coordinates, measured with tools/rig-map.mjs.
+
+// The light from the upper left (as the kit toys fake it) on normal n.
+const BASE_LIGHT = [-0.45, 0.8, 0.55];
+const baseLit = (col, n, amb = 0.72, dif = 0.3) =>
+  shade(col, amb + dif * Math.max(0, n[0] * BASE_LIGHT[0] + n[1] * BASE_LIGHT[1] + n[2] * BASE_LIGHT[2])); // prettier-ignore
+
+// A solid core inside a fruit: an even ellipsoid of opaque splats.
+function fruitCore(k, at, r, color, part = 0) {
+  k.add(evenEllipsoid(k, r[0], r[1], r[2], 64), {
+    even: true,
+    opacity: 1,
+    jitter: 0.02,
+    pos: at,
+    part,
+    flat: 0.5,
+    size: 1.2,
+    pattern: false,
+    color: (c) => baseLit(color, c.n, 0.8, 0.2),
+  });
+}
+
+// A flat, closed underside: a disc facing down at height y, round (cx, cz).
+// Two layers a hair apart, the upper one turned so its splats fall in the
+// lower one's gaps: one layer of splats lets the toy above show through.
+function underDisc(k, [cx, y, cz], r, color, opts = {}) {
+  for (const [dy, turn] of [
+    [0, 0],
+    [0.012, 13],
+  ])
+    k.add(evenDisc(k, r, 0, opts.grid ?? 64), {
+      even: true,
+      opacity: 1,
+      jitter: 0.01,
+      pos: [cx, y + dy, cz],
+      rot: [180, turn, 0],
+      flat: 0.2,
+      size: opts.size ?? 1.3,
+      pattern: false,
+      color: opts.color || (() => color),
+    });
+}
+
 // The tomatoes on their plate: name, x, z, radius (from a top view).
 const PLATE_Y = -0.17;
 const TOMATOES = [
@@ -105,6 +180,42 @@ const TOMATO_WAVE = TOMATOES.map(([name, x, z, r]) => ({ name, x, z, r, a: Math.
   .sort((p, q) => p.a - q.a)
   .map((t, i, all) => ({ ...t, group: Math.floor((i * 4) / all.length) }));
 
+// Lane Hands engine B: a whole, kit-built tomato with its calyx (part kp),
+// to stand in for a scan tomato lifted off the plate (its hidden sides were
+// never captured). Built about the scan tomato's middle (its pivot).
+const TOMATO_RED = "#c8301b";
+function kitTomato(k, [x, y, z], r, kp) {
+  const L = unit([-0.45, 0.8, 0.55]);
+  const glossy = (c) => {
+    const d = Math.max(0, c.n[0] * L[0] + c.n[1] * L[1] + c.n[2] * L[2]);
+    const col = shade(mix(TOMATO_RED, "#e2552a", 0.35 + 0.15 * c.fbm(c.lp[0] * 2.2, c.lp[1] * 2.2, c.lp[2] * 2.2)), 0.8 + 0.22 * d); // prettier-ignore
+    return mix(col, "#ffe9dc", 0.55 * Math.pow(d, 24));
+  };
+  // Slightly squat, with soft lobes round its shoulders.
+  const radius = (d) => {
+    const lon = Math.atan2(d[2], d[0]);
+    return 1 + 0.035 * Math.cos(5 * lon) * (1 - Math.abs(d[1])) - 0.08 * Math.max(0, d[1]) ** 6;
+  };
+  k.add(k.radial(radius, { grid: 40 }), { pos: [x, y - r * 0.1, z], scale: [r * 1.05, r * 0.92, r * 1.05], part: kp, opacity: 1, flat: 0.25, color: glossy }); // prettier-ignore
+  const top = [x, y + r * 0.78, z];
+  for (let i = 0; i < 5; i++) {
+    k.add(k.ellipsoid(r * 0.3, r * 0.025, r * 0.07), { pos: [top[0] + Math.cos((i * TAU) / 5) * r * 0.22, top[1], top[2] - Math.sin((i * TAU) / 5) * r * 0.22], rot: [0, i * 72, -12], part: kp, opacity: 1, pattern: false, color: (c) => shade("#3d6b23", 0.75 + 0.3 * Math.max(0, c.n[1])) }); // prettier-ignore
+  }
+  k.add(k.cylinder(r * 0.05, r * 0.2), { pos: [top[0], top[1] + r * 0.08, top[2]], part: kp, opacity: 1, pattern: false, color: "#4f7a2c" }); // prettier-ignore
+}
+// While any tomato is off the plate by hand, the whole pile shows as kit
+// tomatoes (the scan's own, cut from each other, show torn edges where they
+// touched): Hands-on reads each lifted tomato's stand-in name from
+// hands.swap, which marks the moment here for drive() (it runs after
+// Hands-on in each frame).
+const TOMATO_HAND = { at: -1e9 };
+const tomatoSwap = (n) => ({
+  get kit() {
+    TOMATO_HAND.at = performance.now();
+    return "k" + n;
+  },
+});
+
 // The biggest shells in the basket: name, x, z, radius (from a top view).
 const SHELLS = [
   ["urchinA", -0.43, -0.51, 0.155],
@@ -122,7 +233,7 @@ const SHELLS = [
 // The wooden elephant's trunk, traced from the scan's splats: it rises from
 // the face, curls back over the head and its tip rests on the forehead, so
 // the scan's own trunk cannot move without tearing. A kit-built trunk (five
-// segments on ball joints, in the scan's colours) takes its place.
+// segments on ball joints, in the scan's colors) takes its place.
 const TRUNK = (() => {
   const path = [
     [-0.869, 0.53, 0.417], [-0.884, 0.562, 0.436], [-0.888, 0.601, 0.442], [-0.881, 0.64, 0.446],
@@ -171,7 +282,7 @@ const TRUNK_REGIONS = [
   { at: [-0.47, 0.862, 0.15], r: 0.05 },
   { at: [-0.445, 0.805, 0.15], r: 0.055 },
 ].map(({ at, r }) => ({ at, r: [r, r, r] }));
-// The carving's wood and its dark specks, from the scan's colours round the
+// The carving's wood and its dark specks, from the scan's colors round the
 // trunk and forehead.
 const WOOD = "#633f25";
 const WOOD_SPECK = "#2b1a0e";
@@ -230,7 +341,7 @@ const HORSE = {
 
 // ---- Add-on builders ------------------------------------------------------------
 
-// A small open flower: petals round a centre, facing n.
+// A small open flower: petals round a center, facing n.
 function flower(k, at, n, part, { petal = "#ff4f9a", heart = "#ffd23f", r = 0.05 } = {}) {
   const q = quatFromTo([0, 0, 1], unit(n));
   const petals = 8;
@@ -281,8 +392,8 @@ function flameAt(k, at, { h = 0.2, r = 0.05, share = 0.5, part = 0, glowPart = 0
   });
 }
 
-// A flat panel of splats: fn(u, v) -> colour or null, over a w x h
-// rectangle centred at `at`, facing n (up is roughly +y).
+// A flat panel of splats: fn(u, v) -> color or null, over a w x h
+// rectangle centered at `at`, facing n (up is roughly +y).
 function panel(k, at, n, w, h, share, part, fn, { size = 0.6 } = {}) {
   const nz = unit(n);
   const x = unit(cross([0, 1, 0], nz));
@@ -306,16 +417,63 @@ function panel(k, at, n, w, h, share, part, fn, { size = 0.6 } = {}) {
 
 // ---- Rigs -----------------------------------------------------------------------
 
-// Lane Fix5: where the scanned alarm clock's second hand lies at rest (read
-// from renders face on and from the side): from the center of the dial, which
-// sits at z = 0.21 behind the bezel, toward "I".
-const CLOCK_HAND = {
-  pivot: [0, -0.18, 0.21],
-  dir: [0.405, 0.914, 0],
-  len: 0.63,
-  tail: 0.1,
-  z: 0.03,
+// Lane Fix8: the scanned alarm clock's hands, measured from the splats. All
+// three turn about the center of the dial (the dial's face is at z = 0.193,
+// the scanned hands lie just in front of it, below z = 0.215, and the bezel
+// starts at a radius of 0.64). Each kit-built hand is given as a half-width
+// along its length (from the pivot, in toy units): the hour hand a thin
+// shaft with a spade near its tip, the minute hand a longer one with a
+// slimmer lozenge, the second hand Lane Fix5's red needle with a short tail.
+// They are built pointing at twelve and stacked hour, minute, second, a
+// little off the dial so the dial's big splats never sort in front of them.
+const CLOCK = {
+  pivot: [0, -0.186, 0.21],
+  hands: [
+    {
+      name: "hour",
+      z: 0.014,
+      len: 0.48,
+      tail: 0,
+      color: ["#262626", "#161616"],
+      half: (a) =>
+        a < 0.25 ? 0.009 : a < 0.31 ? 0.009 + 0.034 * ease(band(a, 0.25, 0.31)) : a < 0.38 ? 0.043 - 0.034 * ease(band(a, 0.31, 0.38)) : 0.009 - 0.0065 * band(a, 0.38, 0.48), // prettier-ignore
+    },
+    {
+      name: "minute",
+      z: 0.022,
+      len: 0.62,
+      tail: 0,
+      color: ["#262626", "#161616"],
+      half: (a) =>
+        a < 0.34 ? 0.009 : a < 0.4 ? 0.009 + 0.017 * ease(band(a, 0.34, 0.4)) : a < 0.46 ? 0.026 - 0.017 * ease(band(a, 0.4, 0.46)) : 0.009 - 0.0065 * band(a, 0.46, 0.62), // prettier-ignore
+    },
+    {
+      name: "second",
+      z: 0.03,
+      len: 0.63,
+      tail: 0.1,
+      color: ["#e2432c", "#c83322"],
+      half: (a) => (a < 0 ? 0.009 : 0.007 * (1 - 0.4 * (a / 0.63))),
+    },
+  ],
 };
+
+// The real alarm clock's hands at this device's time (lane Fix8), as angles
+// clockwise from twelve. The second hand steps once a second, snapping onto
+// each mark with a little overshoot, and the minute and hour hands move on
+// with it, as the gears carry them.
+export function clockHands(d) {
+  const s = d.getSeconds();
+  const f = d.getMilliseconds() / 1000;
+  const tick = s - Math.exp(-f * 30) * Math.cos(f * 40);
+  const m = d.getMinutes() + s / 60;
+  const h = (d.getHours() % 12) + m / 60;
+  return {
+    hour: { angle: (h / 12) * TAU },
+    minute: { angle: (m / 60) * TAU },
+    second: { angle: (tick / 60) * TAU },
+  };
+}
 
 export const RIGS = {
   // ---- Scans ----------------------------------------------------------------------
@@ -326,7 +484,7 @@ export const RIGS = {
     controls: [pulse("bloom", "Bloom", 3.4)],
     action: { key: "bloom", label: "Bloom" },
     addon: {
-      count: 9000,
+      count: 13000,
       build(k) {
         for (let i = 0; i < 9; i++) {
           const a = (i / 9) * TAU + 0.3;
@@ -336,6 +494,18 @@ export const RIGS = {
           const part = k.part(`f${i}`, { pivot: at });
           flower(k, at, [at[0], y - 0.68, at[2]], part, { r: 0.06 + 0.012 * (i % 3) });
         }
+        // The stand's underside, closed (lane Sharpness B): the capture's
+        // square stand is see-through from below.
+        k.add(evenBox(0.75, 0.012, 0.75), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          pos: [-0.02, -0.955, 0],
+          rot: [0, -29, 0],
+          flat: 0.2,
+          pattern: false,
+          color: (c) => (c.n[1] < -0.5 ? "#5f5c58" : "#8a8680"),
+        });
       },
     },
     drive(t, c, out) {
@@ -353,6 +523,9 @@ export const RIGS = {
 
   // Seeds pop out and sparkle, then settle; the berry blushes redder.
   strawberry: {
+    // A solid core just inside, so the thin underside reads as fruit (lane
+    // Sharpness B).
+    addon: { count: 9000, build: (k) => fruitCore(k, [-0.2, 0, 0], [0.46, 0.52, 0.6], "#8e1b22") }, // prettier-ignore
     parts: [],
     keys: [
       { color: "#c9b25a", tol: 0.2 },
@@ -499,7 +672,7 @@ export const RIGS = {
       const wipe = env(e, 1.0, 1.25, 2.1, 2.35);
       const scrub = Math.sin(e * TAU * 5);
       const reach = [0.45 * rub + (0.8 + 0.15 * scrub) * wipe, 0.45 * rub + (0.8 - 0.15 * scrub) * wipe]; // prettier-ignore
-      // While rubbing, the feet cross towards each other and back.
+      // While rubbing, the feet cross toward each other and back.
       const cross = 0.25 * rub * scrub;
       ["A", "B"].forEach((k, i) => {
         const L = FLY[k];
@@ -636,6 +809,9 @@ export const RIGS = {
   // Drupelets break off one after another, tumble down to the table and
   // hop back into place.
   raspberry: {
+    // A solid core just inside (lane Sharpness B), hidden while the
+    // drupelets fall away.
+    addon: { count: 9000, build: (k) => fruitCore(k, [0.02, -0.01, -0.02], [0.54, 0.54, 0.72], "#7a1420", k.part("core")) }, // prettier-ignore
     parts: [],
     fx: [
       {
@@ -654,12 +830,15 @@ export const RIGS = {
       // Each piece falls over about 0.5 s of its own; they come back together.
       const phase = e < 2.2 ? band(e, 0.02, 1.5) : 1 - ease(band(e, 2.2, 3.1));
       out.fx.drop = { move: 1.6, phase };
+      out.addon = { parts: { core: { visible: phase > 0.01 ? 0 : 1 } } };
     },
   },
 
   // The glossy drupelets burst off all round, bounce on the table, glint,
   // and spring back.
   blackberry: {
+    // A solid core just inside (lane Sharpness B), hidden while it bursts.
+    addon: { count: 9000, build: (k) => fruitCore(k, [-0.01, -0.03, 0], [0.46, 0.52, 0.72], "#17141c", k.part("core")) }, // prettier-ignore
     parts: [],
     fx: [
       {
@@ -682,15 +861,18 @@ export const RIGS = {
       const e = since(c, "burst", 2.8);
       if (e < 0) return;
       const phase = e < 1.7 ? band(e, 0.02, 0.9) : 1 - ease(band(e, 1.7, 2.6));
+      out.addon = { parts: { core: { visible: phase > 0.01 ? 0 : 1 } } };
       // A small bounce as the pieces land.
       out.fx.burst = { move: 1.2 * (1 - 0.12 * Math.sin(Math.PI * band(e, 0.9, 1.3))), phase };
       out.fx.glint = { color: 2.5 * env(e, 0.8, 1.0, 1.4, 1.8) };
     },
   },
 
-  // Like the grape: the dark skin peels back towards you in five strips to
+  // Like the grape: the dark skin peels back toward you in five strips to
   // show the pale green flesh, then closes.
   blueberry: {
+    // A solid core just inside (lane Sharpness B), hidden while it peels.
+    addon: { count: 9000, build: (k) => fruitCore(k, [-0.05, -0.1, 0], [0.78, 0.64, 0.76], "#1f2a3d", k.part("core")) }, // prettier-ignore
     parts: [],
     fx: [
       {
@@ -717,6 +899,7 @@ export const RIGS = {
       const open = env(e, 0.05, 0.9, 2.2, 3.0);
       out.fx.flesh = { color: 0.8 * open };
       out.fx.peel = { move: 1.35 * open, color: 0.9 * open };
+      out.addon = { parts: { core: { visible: open > 0.01 ? 0 : 1 } } };
     },
   },
 
@@ -776,20 +959,99 @@ export const RIGS = {
   },
 
   // Each tomato is its own solid piece (hard regions split by the nearest
-  // centre, the white plate left out). The plate gives a little shake and a
+  // center, the white plate left out). The plate gives a little shake and a
   // wave of small hops runs round it: four groups of tomatoes pop up in turn
   // and land on the four thuds of the sound, each rocking outward and
   // settling with a wobble. Hops stay low and rolls small, so no tomato
-  // shows the unscanned side where it touched its neighbours.
+  // shows the unscanned side where it touched its neighbors.
   tomatoes: {
-    parts: TOMATOES.map(([name, x, z, r]) => ({
-      name,
-      pivot: [x, PLATE_Y + r, z],
-      regions: [{ at: [x, PLATE_Y + r, z], r: [r * 1.15, r * 1.35, r * 1.15], notColor: "#eeeeea", tol: 0.2 }], // prettier-ignore
-    })),
+    // The plate's underside: a white glazed foot and floor, so the plate
+    // reads solid from below (lane Sharpness B).
+    addon: {
+      count: 60000,
+      build(k) {
+        // Lane Hands engine B: kit-built stand-ins, one per tomato (hidden
+        // until one is lifted off by hand).
+        for (const [name, x, z, r] of TOMATOES) kitTomato(k, [x, PLATE_Y + r, z], r, k.part("k" + name, { pivot: [x, PLATE_Y + r, z] })); // prettier-ignore
+        // A clean glaze over the plate's floor, shown with the kit-built pile:
+        // it covers the scan's reflections and contact fuzz round the pile's
+        // foot (the scan's own tomatoes are hidden then).
+        const dish = (rad) => PLATE_Y + 0.014 + 0.07 * Math.min(1, Math.max(0, (rad - 0.55) / 0.33)) ** 2; // prettier-ignore
+        k.add(
+          k.param((u, v) => { const a = u * TAU; const rad = 0.88 * Math.sqrt(v); return [-0.03 + Math.sin(a) * rad, dish(rad), 0.02 + Math.cos(a) * rad]; }, { grid: 96, normal: () => [0, 1, 0] }), // prettier-ignore
+          { even: true, opacity: 1, jitter: 0.006, flat: 0.2, size: 1.3, pattern: false, part: k.part("glazeTop", { pivot: [-0.03, PLATE_Y, 0.02] }), color: () => "#e2e0da" }, // prettier-ignore
+        );
+        k.add(
+          k.param(
+            (u, v) => {
+              const a = u * TAU;
+              const r = 0.93 - 0.08 * v;
+              return [-0.03 + Math.sin(a) * r, -0.1 - 0.125 * v, 0.02 + Math.cos(a) * r];
+            },
+            { grid: 64, normal: () => [0, -1, 0] },
+          ),
+          { even: true, opacity: 1, jitter: 0.01, flat: 0.2, size: 1.3, pattern: false, color: () => "#d9d7d1" }, // prettier-ignore
+        );
+        underDisc(k, [-0.03, -0.225, 0.02], 0.86, "#cfccc4", { grid: 80 });
+      },
+    },
+    parts: [
+      ...TOMATOES.map(([name, x, z, r]) => ({
+        name,
+        pivot: [x, PLATE_Y + r, z],
+        regions: [{ at: [x, PLATE_Y + r, z], r: [r * 1.15, r * 1.35, r * 1.15], notColor: "#eeeeea", tol: 0.2 }], // prettier-ignore
+      })),
+      // The capture's smear under the plate (the table and reflections), hidden
+      // (lane Sharpness B) so the plate's kit-built underside shows.
+      {
+        name: "fringe",
+        pivot: [0, -0.4, 0],
+        regions: [
+          { at: [0, -0.43, 0], r: [2.5, 0.23, 2.5] },
+          // The tomatoes' reflections baked into the glaze under the plate's
+          // top (red stains seen from below) and the dark and red needles
+          // hanging just under it: anything but the plate's white, in a thin
+          // band inside the dark rim (one region, so the rig stays within 12).
+          { at: [0, -0.2, 0], r: [0.86, 0.045, 0.86], notColor: "#eeeeea", tol: 0.25 },
+        ],
+      },
+    ],
     controls: [pulse("roll", "Roll", 2.6)],
     action: { key: "roll", label: "Roll" },
+    // Hands-on (lane Hands engine B): pick up each tomato on its own (its
+    // rig part, moved whole) and set it down on the plate or on another;
+    // one set down hard knocks its neighbors loose. Held level, so the
+    // side the capture never saw stays underneath.
+    hard: true, // each splat wholly in one tomato (lane Hands engine B)
+    hands: {
+      floor: PLATE_Y,
+      area: 0.82,
+      center: 0.4,
+      // (The pieces carry names of their own, ht0 to ht9, so Hands-on never
+      // poses the scan's tomatoes: drive() hides them while the pile is kit.)
+      pieces: () =>
+        rigPieces(
+          RIGS.tomatoes,
+          TOMATOES.map((t) => t[0]),
+          {
+            solid: (reg) => ({ type: "ellipsoid", r: [reg.r[0] / 1.15, reg.r[0] / 1.15, reg.r[0] / 1.15] }), // prettier-ignore
+            mass: 1,
+            friction: 0.9,
+            restitution: 0.2,
+          },
+        ).map((p) => ({ ...p, part: "h" + p.part })),
+      sound: (hit, vol) => ({ voice: "thud", f: hit.other ? 150 : 110, bright: 0.2, vol: vol * 0.8 }), // prettier-ignore
+      // A lifted tomato is a whole kit-built one (and so is the pile, below).
+      swap: Object.fromEntries(TOMATOES.map(([n]) => ["h" + n, tomatoSwap(n)])),
+    },
     drive(t, c, out, info) {
+      out.parts.fringe = { visible: 0 };
+      // While a tomato is off the plate by hand, every tomato is its
+      // kit-built stand-in (the lifted ones ride with Hands-on), so each comes
+      // away whole and nothing torn is left behind; otherwise the scan's own.
+      const pile = performance.now() - TOMATO_HAND.at < 150;
+      out.addon = { parts: Object.fromEntries([...TOMATOES.map((t) => "k" + t[0]), "glazeTop"].map((n) => [n, { visible: pile ? 1 : 0 }])) }; // prettier-ignore
+      if (pile) for (const [name] of TOMATOES) out.parts[name] = { visible: 0 };
       const e = since(c, "roll", 2.6);
       if (e < 0) return;
       const way = vary(info.tap) > 0.5 ? 1 : -1;
@@ -844,6 +1106,27 @@ export const RIGS = {
   // back into place. The blurry fringe the capture left under the basket
   // is hidden.
   basket: {
+    // A woven floor (lane Sharpness B): the capture is open underneath.
+    addon: {
+      count: 30000,
+      build(k) {
+        underDisc(k, [0, -0.205, 0], 0.89, "#8a6338", {
+          color: (c) => {
+            const x = c.p[0];
+            const z = c.p[2];
+            const r = Math.hypot(x, z);
+            const a = Math.atan2(z, x);
+            // Coiled rows of cane like the basket's wall (no spokes: they
+            // read as a target), each row a little uneven.
+            const row = r * 26 + 0.3 * Math.sin(a * 3 + r * 9);
+            const coil = Math.pow(Math.abs(Math.sin(row * Math.PI)), 0.6);
+            const tone = 0.5 + 0.5 * Math.sin(a * 40 + Math.floor(row) * 2.1);
+            const col = mix("#6e5232", "#a8875a", 0.35 + 0.45 * coil + 0.15 * tone);
+            return shade(col, 0.82);
+          },
+        });
+      },
+    },
     parts: [
       {
         name: "fringe",
@@ -931,7 +1214,7 @@ export const RIGS = {
     addon: {
       count: 26000,
       build(k) {
-        // The carved wood: the scan's mean colour with a soft grain, lighter
+        // The carved wood: the scan's mean color with a soft grain, lighter
         // on top, and the sparse dark specks of the carving.
         const wood = (c) => {
           if (c.rand() < 0.035) return { c: WOOD_SPECK, keep: true, size: 0.55 };
@@ -961,7 +1244,7 @@ export const RIGS = {
           pos: TRUNK.tip,
         });
         // The forehead where the tip rested (the scan never saw it).
-        // Its splats shrink towards the rim, so it blends into the scan.
+        // Its splats shrink toward the rim, so it blends into the scan.
         k.add(k.ellipsoid(0.1, 0.022, 0.085), {
           pos: [-0.53, 0.745, 0.165],
           rot: [0, 35, 4],
@@ -1159,15 +1442,25 @@ export const RIGS = {
     },
   },
 
-  // The second hand ticks all the time; a tap makes it ring and rattle.
+  // The hands show the real time; a tap makes it ring and rattle.
   "alarm-clock": {
     alive: true,
     parts: [
       {
+        // Lane Fix8: all three scanned hands, hidden. They lie in a thin
+        // layer in front of the dial (z 0.1937 to 0.215, nothing else there
+        // inside the bezel), so a flat region keyed to their near-black cuts
+        // the hour and minute hands out with hard edges, a small one takes
+        // the silver pin at the center, and Lane Fix5's region keyed to red
+        // takes the second hand. The dial is whole under them.
         name: "second",
         pivot: [0, -0.18, 0.4],
         axis: [0, 0, -1],
-        regions: [{ at: [0, -0.18, 0.21], r: [0.75, 0.75, 0.15], soft: 0.05, color: "#d84a34", tol: 0.55 }], // prettier-ignore
+        regions: [
+          { at: [0, -0.18, 0.21], r: [0.75, 0.75, 0.15], soft: 0.05, color: "#d84a34", tol: 0.55 }, // prettier-ignore
+          { at: [0, -0.18, 0.2046], r: [1.12, 1.12, 0.0109], soft: 0.001, color: "#212121", tol: 0.5 }, // prettier-ignore
+          { at: [0, -0.18, 0.2046], r: [0.12, 0.12, 0.0109], soft: 0.001 },
+        ],
       },
       {
         name: "bells",
@@ -1179,58 +1472,68 @@ export const RIGS = {
         ],
       },
     ],
-    // Lane Fix5: the scanned second hand is too thin to cut out cleanly (its
-    // pale edge splats only half belonged to it, so they lagged behind as it
-    // turned). It is hidden (the dial is whole under it), and a kit-built hand
-    // turns in its place as one solid piece, lifted a little off the dial so
-    // the dial's big splats never sort in front of it.
+    // Kit-built hands turn in place of the scanned ones, each as one solid
+    // piece (Lane Fix5 did the second hand first: the scanned one was too
+    // thin to cut out cleanly). They share the toy's body, so they rattle
+    // with the clock on a tap.
     addon: {
-      count: 2000,
+      count: 8000,
       build(k) {
-        const { pivot, dir, len, tail, z } = CLOCK_HAND;
-        const side = [dir[1], -dir[0], 0];
-        const at = (a, w, dz) => [
-          pivot[0] + dir[0] * a + side[0] * w,
-          pivot[1] + dir[1] * a + side[1] * w,
-          pivot[2] + dz,
-        ];
-        // The hand: a thin red needle with a short tail and a round boss.
-        const hand = k.part("hand", { pivot, axis: [0, 0, -1] });
-        k.cloud({ share: 0.85, part: hand, pattern: false }, (rand) => {
-          const a = -tail + rand() * (len + tail);
-          const half = a < 0 ? 0.009 : 0.007 * (1 - 0.4 * (a / len));
-          return {
-            p: at(a, (rand() - 0.5) * 2 * half, z),
-            n: [0, 0, 1],
-            color: mix("#e2432c", "#c83322", rand() * 0.5),
-            size: 0.5,
-            flat: 0.15,
-            opacity: 1,
-          };
+        const { pivot } = CLOCK;
+        const area = CLOCK.hands.map((h) => {
+          let s = 0;
+          for (let a = -h.tail; a < h.len; a += 0.005) s += 2 * h.half(a) * 0.005;
+          return s;
         });
-        k.cloud({ share: 0.15, part: hand, pattern: false }, (rand) => {
-          const r = 0.024 * Math.sqrt(rand());
-          const t = rand() * TAU;
-          return {
-            p: [pivot[0] + r * Math.cos(t), pivot[1] + r * Math.sin(t), pivot[2] + z + 0.002],
-            n: [0, 0, 1],
-            color: "#d23b27",
-            size: 0.5,
-            flat: 0.15,
-            opacity: 1,
-          };
+        const hub = Math.PI * 0.05 * 0.05;
+        const total = area.reduce((s, x) => s + x, 0) + hub;
+        CLOCK.hands.forEach((h, i) => {
+          const part = k.part(h.name, { pivot, axis: [0, 0, -1] });
+          const most = Math.max(...Array.from({ length: 50 }, (_, j) => h.half(-h.tail + ((h.len + h.tail) * j) / 49))); // prettier-ignore
+          k.cloud({ share: area[i] / total, part, pattern: false }, (rand) => {
+            // Even over the hand's outline (a point under its half-width).
+            let a, w;
+            do {
+              a = -h.tail + rand() * (h.len + h.tail);
+              w = (rand() * 2 - 1) * most;
+            } while (Math.abs(w) > h.half(a));
+            return {
+              p: [pivot[0] + w, pivot[1] + a, pivot[2] + h.z],
+              n: [0, 0, 1],
+              color: mix(h.color[0], h.color[1], rand() * 0.5),
+              size: 0.5,
+              flat: 0.15,
+              opacity: 1,
+            };
+          });
         });
+        // The round hub the hour and minute hands share, and the second
+        // hand's red boss with a silver pin, round so they turn unseen.
+        const hour = k.part("hour");
+        const second = k.part("second");
+        const disc = (part, r, dz, color, share) =>
+          k.cloud({ share, part, pattern: false }, (rand) => {
+            const rr = r * Math.sqrt(rand());
+            const t = rand() * TAU;
+            return {
+              p: [pivot[0] + rr * Math.cos(t), pivot[1] + rr * Math.sin(t), pivot[2] + dz],
+              n: [0, 0, 1],
+              color: typeof color === "function" ? color(rand) : color,
+              size: 0.5,
+              flat: 0.15,
+              opacity: 1,
+            };
+          });
+        disc(hour, 0.05, 0.0145, (rand) => mix("#262626", "#161616", rand() * 0.5), hub / total);
+        disc(second, 0.024, 0.032, "#d23b27", 0.015);
+        disc(second, 0.012, 0.034, (rand) => mix("#c9c9c9", "#9a9a9a", rand()), 0.005);
       },
     },
     controls: [pulse("ring", "Ring", 2.4)],
     action: { key: "ring", label: "Ring" },
     drive(t, c, out, info) {
-      // One tick a second with a little overshoot.
-      const s = Math.floor(t);
-      const f = t - s;
-      const tick = s + 1 - Math.exp(-f * 30) * Math.cos(f * 40);
       out.parts.second = { angle: 0, visible: 0 };
-      out.addon = { parts: { hand: { angle: (tick / 60) * TAU } } };
+      out.addon = { parts: clockHands(new Date()) };
       const e = since(c, "ring", 2.4);
       if (e < 0) return;
       const ring = env(e, 0, 0.05, 1.8, 2.3);
@@ -1701,6 +2004,29 @@ export const RIGS = {
   // faster and faster as it leans less (like a coin settling), and drops back
   // flat with a clank.
   "tin-can-real": {
+    // The can's bottom lid (lane Sharpness B): the capture shows through it.
+    // It rides on the body, so it rocks and rolls with the can. Laid on a
+    // sunflower spiral (an even grid of rings showed a ripple).
+    addon: {
+      count: 10000,
+      build(k) {
+        const c0 = [0, -0.905, -0.012];
+        const R = 0.6;
+        k.cloud({ share: 1, pattern: false }, (rand, i, n) => {
+          const r = R * Math.sqrt((i + 0.5) / n);
+          const a = i * 2.399963229728653;
+          const ridge = r > 0.56 ? 0.82 : r > 0.5 ? 1 : r > 0.32 && r < 0.36 ? 0.9 : 0.95;
+          return {
+            p: [c0[0] + r * Math.cos(a), c0[1], c0[2] + r * Math.sin(a)],
+            n: [0, -1, 0],
+            flat: 0.2,
+            jitter: 0,
+            opacity: 1,
+            color: shade("#cbc49c", 0.8 * ridge),
+          };
+        });
+      },
+    },
     parts: [],
     controls: [pulse("knock", "Knock", 2.6)],
     action: { key: "knock", label: "Knock" },
@@ -1713,13 +2039,68 @@ export const RIGS = {
       const start = TAU * vary(info?.tap, 7);
       const round = start + e * 7 + e * e * 2.2;
       const d = [Math.cos(round), 0, Math.sin(round)];
-      // Rim contact point (radius 0.59, bottom -0.9 in the can's normalised size).
+      // Rim contact point (radius 0.59, bottom -0.9 in the can's normalized size).
       const rim = [0.59 * d[0], -0.9, 0.59 * d[2]];
       const q = quatAxisAngle(cross([0, 1, 0], d), lean);
       const moved = quatRotate(q, rim);
       const drop =
         0.012 * Math.abs(spring(e - 2.3, 6, 40)) * band(e, 2.25, 2.35) * (1 - band(e, 2.45, 2.6));
       out.body = { quat: q, offset: [rim[0] - moved[0], rim[1] - moved[1] + drop, rim[2] - moved[2]] }; // prettier-ignore
+    },
+  },
+
+  // Lane Fix9: the dog plush's hidden core. The capture never saw the plush's underside or the
+  // mat under it, so there were holes right through it where it meets the mat (dark gaps under
+  // its head and paws). A solid core fills the plush from the mat up to its lowest fur, cell by
+  // cell (tools/fx9-dog-fill.mjs), each the color of the fur above it, turning a warm shadow brown
+  // toward the mat, as in a crease. The fur covers it everywhere else, so it shows only through those gaps.
+  "dog-plush": {
+    addon: {
+      count: 54000,
+      build(k) {
+        const { grid: G, x0, mat } = DOG_FILL;
+        const cells = DOG_FILL.cells.split(";").map((c) => {
+          const [a, b, h, hex] = c.split(",");
+          return { x: x0 + Number(a) * G, z: x0 + Number(b) * G, h: Number(h) / 100, col: "#" + hex }; // prettier-ignore
+        });
+        // Each cell gets splats by its height (its column's volume).
+        const acc = [];
+        let total = 0;
+        for (const c of cells) acc.push((total += c.h + 0.02));
+        k.cloud({ share: 24000 / 54000, pattern: false }, (rand) => {
+          const r = rand() * total;
+          let lo = 0;
+          let hi = acc.length - 1;
+          while (lo < hi) {
+            const m = (lo + hi) >> 1;
+            if (acc[m] < r) lo = m + 1;
+            else hi = m;
+          }
+          const c = cells[lo];
+          const y = mat - 0.02 + (c.h + 0.02) * rand();
+          const up = Math.max(0, (y - mat) / Math.max(c.h, 0.01));
+          return {
+            p: [c.x + G * rand(), y, c.z + G * rand()],
+            n: [0, 1, 0],
+            flat: 0,
+            jitter: 0,
+            opacity: 1,
+            color: shade(mix(c.col, "#5a3d26", 0.55 * (1 - up)), 0.72 + 0.28 * up),
+          };
+        });
+        dogMat(k, 30000); // lane Photoreal r3: the mat closed underneath
+      },
+    },
+    parts: [{ name: "under", pivot: [0, -1, 0], regions: dogMatHide() }],
+    // Its tap is the hop every capture without a rig has (src/motion.js, hopAt): the plush
+    // bounces and settles with a little squash at each landing.
+    controls: [pulse("hop", "Hop", DOG_HOP_SECS)],
+    action: { key: "hop", label: "Hop" },
+    drive(t, c, out) {
+      out.parts.under = { visible: 0 };
+      const e = since(c, "hop", DOG_HOP_SECS);
+      const hop = e < 0 ? null : dogHop(e);
+      if (hop) out.body = { offset: [0, hop.h * 0.5, 0], squash: hop.squash };
     },
   },
 
@@ -1738,6 +2119,9 @@ export const RIGS = {
     ],
     controls: [pulse("split", "Split", 2.8)],
     action: { key: "split", label: "Split" },
+    // Hands-on (lane Hands engine C): pull it and it stretches toward the
+    // finger; let go and it wobbles back, a soft, quick jelly.
+    hands: { stretch: { radius: 0.7, max: 0.8, hz: 3.2, damping: 0.16 } },
     drive(t, c, out) {
       const e = since(c, "split", 2.8);
       if (e < 0) return;
@@ -1851,4 +2235,7 @@ export const RIGS = {
       out.fx.night = { color: 0.8, phase: -1.4 + 2.8 * band(e, 0.1, 2.5) };
     },
   },
+
+  // Lane Photoreal r3: the Photoreal r2 captures (src/packs/photoreal-r3-rigs.js).
+  ...PR3_RIGS,
 };

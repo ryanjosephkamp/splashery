@@ -1,0 +1,72 @@
+[
+  {
+    "id": "strawberry",
+    "tier": "low",
+    "path": "assets/toys/strawberry/strawberry-lite.sog",
+    "bytes": 1594433,
+    "sha256": "9220486a07514908290ea8aa86f06fa5c87f24c2bb10ce7cf1284d99aa531e62"
+  },
+  {
+    "id": "strawberry",
+    "tier": "high",
+    "path": "assets/toys/strawberry/strawberry.sog",
+    "bytes": 5878587,
+    "sha256": "632697e6bb6287c00a462acc7a74afaf2aef87ff30f0af11f8e802e675f8b063"
+  },
+  {
+    "id": "bee",
+    "tier": "low",
+    "path": "assets/toys/bee/bee-lite.sog",
+    "bytes": 1612064,
+    "sha256": "183e03cf8370c559ac4d69e32acf86d7c3172594def2f827cfe9f7ed0b5886c1"
+  },
+  {
+    "id": "bee",
+    "tier": "high",
+    "path": "assets/toys/bee/bee.sog",
+    "bytes": 5867600,
+    "sha256": "d281cc8c4440397f220e07690475f914d38c1b770764f033c7dc7dc8c9c28d65"
+  },
+  {
+    "id": "bmx-bike",
+    "tier": "low",
+    "path": "assets/toys/bmx-bike/bmx-bike-lite.sog",
+    "bytes": 3716192,
+    "sha256": "ccd84072bc813c6636076413405729fa90a56f574fc26172608ae6e9094dfcae"
+  },
+  {
+    "id": "bmx-bike",
+    "tier": "high",
+    "path": "assets/toys/bmx-bike/bmx-bike.sog",
+    "bytes": 7297568,
+    "sha256": "f4a0e385fa6ac09b3246db307be7f745e87b82446c846fcb4f29283d1c73b505"
+  },
+  {
+    "id": "cave-lioness",
+    "tier": "low",
+    "path": "assets/toys/cave-lioness/cave-lioness-lite.sog",
+    "bytes": 3823377,
+    "sha256": "2438a79029a37eccfb35a74faecc4779aa0ec22e5243c8c8c704913d42535445"
+  },
+  {
+    "id": "cave-lioness",
+    "tier": "high",
+    "path": "assets/toys/cave-lioness/cave-lioness.sog",
+    "bytes": 14972523,
+    "sha256": "0b417e6248f2b207e85ae3f979899dd828980c5b186a3885af30cf1102784754"
+  },
+  {
+    "id": "toy-trex",
+    "tier": "low",
+    "path": "assets/toys/toy-trex/toy-trex-lite.sog",
+    "bytes": 3859949,
+    "sha256": "e023646648a6a9cc16c16ce9cc76ffd7b96aa046345ec87ceec4c01753c5a1a2"
+  },
+  {
+    "id": "toy-trex",
+    "tier": "high",
+    "path": "assets/toys/toy-trex/toy-trex.sog",
+    "bytes": 10053312,
+    "sha256": "d8b7461b9a7af453fc17515937c8e14a0751036f527b2068e3a4e642f298cbe9"
+  }
+]

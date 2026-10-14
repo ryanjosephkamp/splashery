@@ -1,0 +1,30 @@
+{
+  "path": "vendor/playcanvas/playcanvas.min.mjs",
+  "sha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c",
+  "evidence": [
+    {
+      "needle": "_destroyProjectorComputes(){",
+      "offset": 1798666,
+      "line": 14351,
+      "source": "_destroyProjectorComputes(){for(let t of this._projectorComputes.values())t.shader?.destroy();this._projectorComputes.clear(),this._projectorBindGroupFormat?.destroy(),this._projectorBindGroupFormat=null}_projectorKey(t,e,s,i,r){return`${t?\"r\":\"l\"}${e?\"p\":\"\"}${s?\"f\":\"\"}${i?\"a\":\"\"}${r?\"s\":\"\"}`}_createProjectorCompute(t,e,s,i,r,a){let o=this.device,l=t.format,c=[new Se(\"compactedSplatIds\",oe,!0),new Se(\"sortElementCount\",oe,!0),new Se(\"projCache\",oe),new Se(\"sortKeys\",oe),new Se(\"renderCounter\",oe),new Se(\"binWeights\",oe,!0),new Dt(\"uniforms\",oe)];this._projectorBindGroupFormat||(this._projectorBindGroupFormat=new at(o,[...c,...l.getComputeBindFormats()]));let f=new Map;f.set(\"gsplatCommonCS\","
+    },
+    {
+      "needle": "_updateMaterial(t,e=0){",
+      "offset": 1800908,
+      "line": 14351,
+      "source": "_updateMaterial(t,e=0){let s=t?.shaderChunks?.key??\"\",i=t?.definesKey??\"\",r=`${s}|${i}|${e}`;if(r!==this._materialKey){this._materialKey=r,this._userDefines=t?.defines??null,this._userCacheWords=e;let a=t?.getShaderChunks?.(se);this._userModifySource=a?.get(\"gsplatModifyVS\")??null,this._userVaryingsSource=a?.get(\"gsplatUserVaryingsCS\")??null,this._userCacheWriteSource=a?.get(\"gsplatUserCacheWriteCS\")??null,this._destroyProjectorComputes()}}_ensureCapacity(t){let e=8+this._userCacheWords;(t>this._allocatedCacheCount||e!==this._allocatedCacheStride)&&(this.projCache?.destroy(),this.sortKeys?.destroy(),this._allocatedCacheCount=t,this._allocatedCacheStride=e,this.projCache=new Ue(this.device,t*"
+    },
+    {
+      "needle": "_projectorUniformBufferFormat=new",
+      "offset": 1797511,
+      "line": 14351,
+      "source": "_projectorUniformBufferFormat=new $e(t,e),this._projectorUniformBufferFormatFisheye=new $e(t,[...e.map(s=>new Z(s.name,s.type)),new Z(\"fisheye_k\",We),new Z(\"fisheye_inv_k\",We),new Z(\"fisheye_projMat00\",We),new Z(\"fisheye_projMat11\",We)]),this._projectorUniformBufferFormatStereo=new $e(t,[...e.map(s=>new Z(s.name,s.type)),new Z(\"viewProj1\",fs)]),this._writeArgsUniformBufferFormat=new $e(t,[new Z(\"drawSlot\",Ee),new Z(\"indexCount\",Ee),new Z(\"sortSlotBase\",Ee),new Z(\"pad0\",Ee),new Z(\"sortIndirectInfo\",Bi)])}_createWriteIndirectArgsCompute(){let t=this.device;this._writeArgsBindGroupFormat=new at(t,[new Se(\"renderCounter\",oe,!0),new Se(\"indirectDrawArgs\",oe,!1),new Se(\"numSplatsBuf\",oe,!1),new Se"
+    },
+    {
+      "needle": "Wv=class",
+      "offset": 195577,
+      "line": 426,
+      "source": "Wv=class{constructor(t){n(this,\"uniformBuffers\",[]);n(this,\"bindGroups\",[]);this.compute=t;let{device:e,shader:s}=t,{computeBindGroupFormat:i,computeUniformBufferFormats:r,computeReflectedBindGroupFormat:a,computeReflectedUniformBufferFormat:o,computeReflectedGroupIndex:l}=s.impl,c=[];if(i){let f=new Qi(e,i);if(r){for(let d in r)if(r.hasOwnProperty(d)){let u=new er(e,r[d],!0);this.uniformBuffers.push(u),f.setUniformBuffer(d,u)}}c[0]=i,this.bindGroups[0]=f}if(a){let f=new Qi(e,a);if(o){let d=new er(e,o,!0);this.uniformBuffers.push(d),f.setUniformBuffer(\"ub_compute\",d)}c[l]=a,this.bindGroups[l]=f}this.pipeline=e.computePipeline.get(s,c)}destroy(){this.uniformBuffers.forEach(t=>t.destroy()),thi"
+    }
+  ]
+}

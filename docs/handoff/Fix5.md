@@ -12,18 +12,17 @@ Klein bottle's and the torus knot's recipes (`src/packs/maths.js`), the kit cloc
 From the Operator, September 30, 2026, 6:47 p.m. UTC, word for word:
 
 More work for this session, after the rim engine PR (#136) and the marble. The owner's notes of
-September 28 (filed today in docs/reviews/2026-09-28-sounds/review.md on branch
-claude/operator-sound-review) have a few non-sound fixes. Do them as a second lane, Fix5: branch
-claude/lane-fix5 from main, PR "Phase Fix5: the balloon dog's flag colors, the real alarm clock, and
-small fixes", handoff docs/handoff/Fix5.md, prefix `fx5`.
+September 28 (private; the Operator's summary is in this brief) have a few non-sound fixes. Do them
+as a second lane, Fix5: branch claude/lane-fix5 from main, PR "Phase Fix5: the balloon dog's flag
+colors, the real alarm clock, and small fixes", handoff docs/handoff/Fix5.md, prefix `fx5`.
 
 1. **Balloon dog:** with a flag theme on, the balloon takes the flag's colors, but the popped pieces
    keep the "Balloon color" setting. His example: Albania's flag on a green balloon pops into green
    pieces. The pieces should match what you see.
-2. **The scanned alarm clock (`alarm-clock`):** "There's something weird about that red or orange
-   hand that's moving. It's like some of it is stuck and some of it isn't." (He had a screenshot; we
-   don't.) Reproduce it and fix it within the effect quality rules: the whole hand moves as one
-   solid piece, cut with hard edges or rebuilt as a kit part.
+2. **The scanned alarm clock (`alarm-clock`):** the moving red or orange hand looks odd, as if part
+   of it is stuck and part of it isn't. (He had a screenshot; we don't.) Reproduce it and fix it
+   within the effect quality rules: the whole hand moves as one solid piece, cut with hard edges or
+   rebuilt as a kit part.
 3. **Two toys named "Alarm clock":** he wants the same kind of object on different shelves to have
    different names. Rename the scanned one's label to "Real alarm clock", like "Real tin can" and
    "Real pencil". Keep its id so links still work, and update its help and plan text if they use the

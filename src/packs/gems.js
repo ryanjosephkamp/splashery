@@ -16,6 +16,14 @@ import {
 } from "../kit.js";
 import { evenEllipsoid } from "./even.js";
 
+// Lane Hands-on H5: a quartz point's collision points: its base's and its
+// shoulders' corners, and the tip.
+function quartzPoints([w, h]) {
+  const pts = [[0, h, 0]];
+  for (const y of [-h, 0.35 * h]) for (const [a, b] of [[w, w], [w, -w], [-w, w], [-w, -w]]) pts.push([a, y, b]); // prettier-ignore
+  return pts;
+}
+
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
 
@@ -77,7 +85,7 @@ function hash(i) {
   return (x >>> 0) / 4294967296;
 }
 
-// A rainbow colour for hue h (0..1).
+// A rainbow color for hue h (0..1).
 function hue(h, s = 1, v = 1) {
   const f = (n) => {
     const k = (n + h * 6) % 6;
@@ -176,6 +184,38 @@ function polytope(planes, { thick } = {}) {
         r1 = 1 - r1;
         r2 = 1 - r2;
       }
+      const p = add(tri.a, add(mul(sub(tri.b, tri.a), r1), mul(sub(tri.c, tri.a), r2)));
+      let edge = Infinity;
+      for (const e of f.edges) {
+        const d = dot(sub(p, e.a), e.m);
+        if (d < edge) edge = d;
+      }
+      return { p, n: f.n, u: r1, v: r2, face: f.id, tag: f.tag, edge };
+    },
+    // An even layout for even: true (lane Sharpness A): a walks the facets
+    // laid end to end by area, b runs across each one.
+    sampleEven(a, b) {
+      const x = Math.min(a, 1 - 1e-9) * total;
+      let lo = 0;
+      let hi = cum.length - 1;
+      while (lo < hi) {
+        const m = (lo + hi) >> 1;
+        if (cum[m] < x) lo = m + 1;
+        else hi = m;
+      }
+      const f = faces[lo];
+      let y = (x - (cum[lo] - f.area)) * 1;
+      let tri = f.tris[f.tris.length - 1];
+      for (const t of f.tris) {
+        if (y < t.A) {
+          tri = t;
+          break;
+        }
+        y -= t.A;
+      }
+      const q = Math.sqrt(Math.min(1, Math.max(0, y / tri.A)));
+      const r1 = 1 - q;
+      const r2 = q * b;
       const p = add(tri.a, add(mul(sub(tri.b, tri.a), r1), mul(sub(tri.c, tri.a), r2)));
       let edge = Infinity;
       for (const e of f.edges) {
@@ -292,7 +332,7 @@ function stepCut(A = 1.3, B = 0.92, corner = 0.3) {
   return planes;
 }
 
-// A pretend studio: what a facet facing n reflects towards the default
+// A pretend studio: what a facet facing n reflects toward the default
 // camera. Bright softboxes above and to the side, a dark floor.
 function studio(n) {
   const r = sub(mul(n, 2 * dot(n, VIEW)), VIEW);
@@ -302,7 +342,7 @@ function studio(n) {
   return v;
 }
 
-// Colours a cut stone: each facet a brightness from the studio mixed with a
+// Colors a cut stone: each facet a brightness from the studio mixed with a
 // facet-dependent "internal reflection", bright edges, and flashes of fire.
 function gemColor(
   c,
@@ -334,8 +374,9 @@ function addGem(k, planes, base, opts = {}) {
     pos: opts.pos,
     flat: 0.12,
     weight: opts.weight ?? 1,
-    interior: 0.06,
-    core: mix(base, "#ffffff", 0.25),
+    interior: opts.interior ?? 0.06,
+    core: opts.core ?? mix(base, "#ffffff", 0.25),
+    even: opts.even,
     // (opts.size, glint, opacity and jitter: lane Fidelity B's calmer stones.)
     size: opts.size,
     opacity: opts.opacity,
@@ -360,7 +401,7 @@ const placed = (shape, s, lift = 0) => {
   );
   return { p: add(p, mul(n, lift)), n };
 };
-// A layer of splats over a stone's facets (picked by keep(s)), coloured as
+// A layer of splats over a stone's facets (picked by keep(s)), colored as
 // the stone is there unless col is given: used for light that plays over
 // it (a running glow, or a part that lights up).
 function overlay(k, shape, { share, keep = () => true, col, lift = 0.004, size = 1, ...extra }) {
@@ -457,8 +498,10 @@ function crystalCloud(k, crystals, share, color, extra = {}) {
       faces.push({ a, b, tip, n, cum: total, cr });
     }
   }
-  k.cloud({ share, size: 0.9, flat: 0.15, ...extra }, (rand) => {
-    const x = rand() * total;
+  // extra.even (lane Sharpness A): the splats spread evenly over the faces.
+  const { even, ...more } = extra;
+  k.cloud({ share, size: 0.9, flat: 0.15, ...more }, (rand, i, nn) => {
+    const x = even ? ((i + 0.5) / nn) * total : rand() * total;
     let lo = 0;
     let hi = faces.length - 1;
     while (lo < hi) {
@@ -467,13 +510,23 @@ function crystalCloud(k, crystals, share, color, extra = {}) {
       else hi = m;
     }
     const f = faces[lo];
-    let r1 = rand();
-    let r2 = rand();
-    if (r1 + r2 > 1) {
-      r1 = 1 - r1;
-      r2 = 1 - r2;
+    let r1;
+    let r2;
+    if (even) {
+      // Where x falls within this face (0..1), then across it.
+      const fa = (x - (lo ? faces[lo - 1].cum : 0)) / (f.cum - (lo ? faces[lo - 1].cum : 0));
+      const q = Math.sqrt(Math.min(1, Math.max(0, fa)));
+      r1 = q * ((i * 0.6180339887498949 + 0.5) % 1);
+      r2 = 1 - q;
+    } else {
+      r1 = rand();
+      r2 = rand();
+      if (r1 + r2 > 1) {
+        r1 = 1 - r1;
+        r2 = 1 - r2;
+      }
     }
-    // r2 runs towards the tip.
+    // r2 runs toward the tip.
     const p = add(f.a, add(mul(sub(f.b, f.a), r1), mul(sub(f.tip, f.a), r2)));
     const out = color(f.n, r2, rand, f.cr);
     return {
@@ -491,6 +544,11 @@ function crystalCloud(k, crystals, share, color, extra = {}) {
 
 // ---- Rocks -------------------------------------------------------------------------------
 
+// A calm rock (lane Sharpness A): broad mottling only, no flecks.
+const calmRock = (c, a = "#8a8178", b = "#4f4943") => {
+  const n = c.fbm(c.p[0] * 3, c.p[1] * 3, c.p[2] * 3);
+  return lit(mix(a, b, 0.5 + 0.4 * n), c.n, 0.6, 0.45);
+};
 const rockColor = (c, a = "#8a8178", b = "#4f4943") => {
   const n = c.fbm(c.p[0] * 5, c.p[1] * 5, c.p[2] * 5);
   const speck = c.noise(c.p[0] * 40, c.p[1] * 40, c.p[2] * 40) > 0.62;
@@ -507,7 +565,7 @@ export const RECIPES = {
     controls: [{ key: "fire", label: "Fire", type: "pulse", ease: 3.8 }],
     action: { key: "fire", label: "Turn it in the light" },
     // A tap turns it one way and the other in the light, as you would a
-    // ring: facet after facet flashes with fire (rainbow colours, the light
+    // ring: facet after facet flashes with fire (rainbow colors, the light
     // split by the stone) and the star glints flare.
     drive(t, c, out) {
       const p = progress(c.fire);
@@ -531,8 +589,8 @@ export const RECIPES = {
         part: stone,
       });
       starGlints(k, shape, q, 7, { part: k.part("glints") });
-      // Fire: points over the crown coloured as the stone is there, which
-      // flash as a running glow of changing colour passes them (drive).
+      // Fire: points over the crown colored as the stone is there, which
+      // flash as a running glow of changing color passes them (drive).
       overlay(k, shape, {
         share: 0.06,
         part: stone,
@@ -549,7 +607,7 @@ export const RECIPES = {
   // ---- Ruby -----------------------------------------------------------------------------
   ruby: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d0103a" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d0103a" }],
     controls: [{ key: "glow", label: "Glow", type: "pulse", ease: 4 }],
     action: { key: "glow", label: "Make it glow" },
     // Rubies glow red in ultraviolet light (chromium in them fluoresces).
@@ -612,7 +670,7 @@ export const RECIPES = {
   // ---- Emerald --------------------------------------------------------------------------
   emerald: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#119a5b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#119a5b" }],
     controls: [{ key: "shine", label: "Shine", type: "pulse", ease: 4 }],
     action: { key: "shine", label: "Run light round the steps" },
     // A step cut is a hall of mirrors. A tap sends green light racing
@@ -652,13 +710,13 @@ export const RECIPES = {
   // ---- Sapphire -------------------------------------------------------------------------
   sapphire: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#1f4fd1" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#1f4fd1" }],
     controls: [{ key: "star", label: "Star", type: "pulse", ease: 3.6 }],
     action: { key: "star", label: "Catch the star" },
     // Some sapphires show a six-rayed star (asterism: light off fine
     // needles inside) that glides over the stone as the light moves. A tap
     // catches the star on one side: its rays spread out over the stone from
-    // a bright centre, it glides across the top (its rays keep their
+    // a bright center, it glides across the top (its rays keep their
     // directions, set by the crystal), and the rays draw back in at the
     // other side. The rays lie on the stone and end at its edge, so the star
     // is built afresh at points along its path (one part each) and the
@@ -688,19 +746,20 @@ export const RECIPES = {
       const table = 0.55;
       const crown = 35 * DEG;
       addGem(k, brilliant(cushion, { table, crown: 35, pavilion: 42 }), o.color, {
-        size: 1.3,
-        glint: 0.25,
+        size: 1.4,
+        glint: 0.06,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.01,
+        interior: 0,
         quat: SAPPHIRE_Q,
         fire: 0.08,
         dark: 0.22,
         light: "#dfe8ff",
       });
-      // The star (hidden until a tap): a soft bright centre and six rays of
+      // The star (hidden until a tap): a soft bright center and six rays of
       // light lying on the top of the stone, dipping down its crown past the
       // table's edge and ending at the girdle. Each ray grows out from the
-      // centre (grow) as the star is caught.
+      // center (grow) as the star is caught.
       const top = 0.02 + (1 - table) * Math.tan(crown);
       const onTop = (x, z) => {
         const r = Math.hypot(x, z);
@@ -727,7 +786,7 @@ export const RECIPES = {
           let t;
           let dir;
           if (rand() < 0.14) {
-            // The bright centre.
+            // The bright center.
             const r = 0.07 * Math.sqrt(rand());
             const a = rand() * TAU;
             t = r / 0.6;
@@ -766,6 +825,9 @@ export const RECIPES = {
     options: [{ key: "color", label: "Crystals", type: "color", default: "#8e44c9" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.4 }],
     action: { key: "open", label: "Open or close" },
+    // Hands-on (lane Hands-on H5): swing the front half open or shut by hand
+    // on its hinge; it stays where you leave it, and shut, the halves fit.
+    hands: { joints: () => [lidHinge(GEODE_HINGE, [0, -1, 0], GEODE_SWING, [0.1, 0, 0.55], [0.9, 1.05, 0.6])] }, // prettier-ignore
     // Splats are depth-sorted in the pose they are built in, so the front half
     // is built twice, shut and lying open, and whichever copy is nearer its
     // current pose is shown as it swings.
@@ -794,7 +856,7 @@ export const RECIPES = {
         (1 + 0.07 * k.noise.fbm(d[0] * 2 + 7, d[1] * 2, d[2] * 2, 3)) *
         (d[1] < -0.6 ? 0.96 : 1);
       const cav = (phi) => 0.62 + 0.06 * k.noise(Math.cos(phi) * 2, Math.sin(phi) * 2, 3);
-      const hinge = [-R * 1.02, 0, 0];
+      const hinge = GEODE_HINGE;
       const lidShut = k.part("lidShut", { pivot: hinge, axis: [0, 1, 0] });
       const lidOpen = k.part("lidOpen", { pivot: hinge, axis: [0, 1, 0] });
       // The violet light that fills the two halves as it opens.
@@ -827,12 +889,15 @@ export const RECIPES = {
           { grid: 64, thick: 0.35, flip: side > 0 },
         );
         k.add(shell, {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           part,
           flat: 0.2,
           // (Only the back half is solid: the front one closes over it.)
           interior: side > 0 ? 0 : 0.1,
           core: "#cfd3dc",
-          color: (c) => rockColor(c),
+          color: (c) => calmRock(c),
         });
         // The cut face: bands of agate round the cavity.
         const ring = k.param(
@@ -847,6 +912,9 @@ export const RECIPES = {
           { grid: 64, thick: 0.02, flip: side < 0 },
         );
         k.add(ring, {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           part: inPart,
           flat: 0.15,
           color: (c) => {
@@ -855,12 +923,12 @@ export const RECIPES = {
             const x = v + wob;
             let col;
             if (x > 0.9) col = "#6b6259";
-            else if (x > 0.72) col = mix("#f4f1ec", "#d8d2ca", c.rand() * 0.4);
+            else if (x > 0.72) col = mix("#f4f1ec", "#d8d2ca", 0.2 + 0.2 * Math.sin(x * 90));
             else if (x > 0.55) col = "#9fb3c8";
             else if (x > 0.42) col = "#ece8f2";
             else if (x > 0.2) col = mix("#b9a8cf", "#d9cfe6", 0.5 + 0.5 * Math.sin(x * 60));
             else col = shade(purple, 0.8);
-            return keep(shade(col, 0.95 + 0.1 * c.rand()));
+            return keep(col);
           },
         });
         // The cavity wall, deep purple, and crystal points growing inwards.
@@ -878,6 +946,9 @@ export const RECIPES = {
           { grid: 48, thick: 0.02, flip: side < 0 },
         );
         k.add(wall, {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           part: inPart,
           flat: 0.2,
           color: (c) => lit(shade(purple, 0.45), c.n, 0.7, 0.3),
@@ -905,15 +976,21 @@ export const RECIPES = {
             part: inPart,
           });
         }
-        crystalCloud(k, crystals, 0.22, (n, t, rand) => {
-          const col = mix(shade(purple, 0.55), mix(purple, "#f3e3ff", 0.6), Math.pow(t, 1.3));
-          const b = 0.55 + 0.5 * studio(n);
-          return {
-            color: shade(col, clamp(b, 0.4, 1.3)),
-            kind: "glint",
-            params: [rand() < 0.3 ? 1 : 0.2, 0],
-          };
-        });
+        crystalCloud(
+          k,
+          crystals,
+          0.22,
+          (n, t, rand) => {
+            const col = mix(shade(purple, 0.55), mix(purple, "#f3e3ff", 0.6), Math.pow(t, 1.3));
+            const b = 0.55 + 0.5 * studio(n);
+            return {
+              color: shade(col, clamp(b, 0.4, 1.3)),
+              kind: "glint",
+              params: [rand() < 0.3 ? 0.35 : 0.05, 0],
+            };
+          },
+          { even: true },
+        );
         // The glow (hidden until it opens): a violet haze in the cavity and
         // bright points on the crystal tips.
         const gp = glowParts[half.open ? 1 : 0];
@@ -950,10 +1027,44 @@ export const RECIPES = {
     options: [{ key: "color", label: "Tint", type: "color", default: "#cfd8ee" }],
     controls: [{ key: "light", label: "Light up", type: "pulse", ease: 4.4 }],
     action: { key: "light", label: "Light the points" },
+    // Hands-on (lane Hands-on H5): snap one of the five big crystal points
+    // off the rock (it comes free with a crack), set it down, and bring it
+    // back to its place: it glides in and holds fast again. ↺ mends the rest.
+    hands: {
+      floor: -0.95,
+      pieces: (d) => [
+        ...(d?.xtals || []).map((x) => ({
+          part: x.part,
+          pos: x.mid,
+          quat: x.quat,
+          solid: { type: "box", half: x.half },
+          // (Its prism's corners and one point at the tip: it can't stand
+          // on its point, it topples.)
+          points: quartzPoints(x.half),
+          radius: 0.01,
+          pick: x.half.map((v) => v + 0.06),
+          mass: 0.5,
+          friction: 0.6,
+          restitution: 0.25,
+        })),
+        // The rock they grow from (lane H1's fixed piece).
+        { fixed: true, pos: [0, -0.62, 0], solid: { type: "ellipsoid", r: [1.05, 0.36, 0.9] } },
+      ],
+      joints: (d) =>
+        (d?.xtals || []).map((x) => ({
+          type: "break",
+          part: x.part,
+          at: x.base,
+          pull: 0.12,
+          give: 0.03,
+          reseat: { snap: 0.2 },
+          sound: (ev) => (ev.kind === "snap" ? { voice: "crack", f: 3200, bright: 0.9, decay: 0.5 } : undefined), // prettier-ignore
+        })),
+    },
     // A tap lights the crystals one by one from left to right, each glowing
     // from within with a star of light at its point, as a chime rings for
     // each; they fade in turn.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const p = progress(c.light);
       const on = c.light > 0 ? 1 : 0;
       for (let i = 0; i < 10; i++) {
@@ -962,6 +1073,13 @@ export const RECIPES = {
           visible: on * 1.3 * bump(p, t0, t0 + 0.035, t0 + 0.12, t0 + 0.34),
         };
       }
+      // Hands-on: a point snapped off doesn't glow where it grew.
+      const xs = info?.data?.xtals || [];
+      xs.forEach((x, j) => {
+        const pc = info?.hands?.piece?.(j);
+        if (pc && Math.hypot(...pc.pos.map((v, k) => v - pc.home[k])) > 0.02)
+          out.parts[x.glow] = { visible: 0 };
+      });
     },
     build(k, o) {
       const tint = o.color;
@@ -969,12 +1087,15 @@ export const RECIPES = {
       k.add(
         k.radial((d) => 1 + 0.12 * k.noise.fbm(d[0] * 2, d[1] * 2 + 3, d[2] * 2, 3), { grid: 48 }),
         {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           scale: [1, 0.36, 0.85],
           pos: [0, -0.62, 0],
           flat: 0.2,
           interior: 0.1,
           core: "#6d655c",
-          color: (c) => rockColor(c, "#8d8274", "#5d544b"),
+          color: (c) => calmRock(c, "#8d8274", "#5d544b"),
         },
       );
       // Crystals: long six-sided prisms with points, leaning out from the rock.
@@ -993,6 +1114,9 @@ export const RECIPES = {
       // The crystals light up from left to right (drive's point0 is the
       // leftmost).
       const order = list.map((c, i) => i).sort((a, b) => list[a][0] - list[b][0]);
+      // Lane Hands-on H5: the five biggest points each on a part of their
+      // own, to snap off by hand (a toy has at most 15 parts).
+      const xtals = [];
       list.forEach(([x, L, w, rz, rx], i) => {
         const planes = crystalPoint(w, L, w * 1.6, k.rand() * 0.5);
         const shape = polytope(planes);
@@ -1001,7 +1125,7 @@ export const RECIPES = {
         shape.opts = { pos, quat: quatEuler(...rot) };
         const part = k.part(`point${order.indexOf(i)}`);
         // Its glow (hidden until its turn): the faces lit from within,
-        // brightest towards the point, and a star at the tip.
+        // brightest toward the point, and a star at the tip.
         // (Bigger, fainter splats than the crystal's own, so the light
         // reads as a glow, not as dots.)
         overlay(k, shape, {
@@ -1041,14 +1165,23 @@ export const RECIPES = {
             opacity: 0.95,
           };
         });
+        const xpart = i < 5 ? k.part(`xtal${i}`, { pivot: pos }) : undefined;
+        if (xpart !== undefined) {
+          const q = quatEuler(...rot);
+          xtals.push({ part: `xtal${i}`, glow: `point${order.indexOf(i)}`, base: pos, quat: q, mid: add(pos, quatRotate(q, [0, L / 2, 0])), half: [w, L / 2, w] }); // prettier-ignore
+        }
         k.add(shape, {
+          part: xpart,
           pos,
           rot,
           flat: 0.12,
           weight: 1.3,
-          opacity: 0.9,
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          size: 1.1,
           kind: "glint",
-          params: (c) => [c.rand() < 0.15 ? 0.9 : 0.05, 0],
+          params: (c) => [c.rand() < 0.15 ? 0.25 : 0.03, 0],
           pattern: false,
           color: (c) => {
             const t = clamp((c.lp[1] + 0) / L, 0, 1);
@@ -1056,12 +1189,13 @@ export const RECIPES = {
             let col = gemColor(c, base, { fire: 0.06, dark: 0.45, edgeW: 0.01 });
             if (c.s.tag === "side") {
               // Fine growth lines across the prism faces.
-              if (Math.abs(Math.sin(c.lp[1] * 90)) > 0.93) col = shade(col, 0.9);
+              if (Math.abs(Math.sin(c.lp[1] * 40)) > 0.9) col = shade(col, 0.94);
             }
             return col;
           },
         });
       });
+      k.data = { xtals };
     },
   },
 
@@ -1081,11 +1215,11 @@ export const RECIPES = {
         ],
       },
     ],
-    controls: [{ key: "play", label: "Play of colour", type: "pulse", ease: 4.2 }],
+    controls: [{ key: "play", label: "Play of color", type: "pulse", ease: 4.2 }],
     action: { key: "play", label: "Tilt it in the light" },
-    // A tap rocks the stone in the light, and flashes of colour roll across
+    // A tap rocks the stone in the light, and flashes of color roll across
     // it, patch by patch, changing hue as they go (an opal's play of
-    // colour: light split by the tiny spheres it is made of).
+    // color: light split by the tiny spheres it is made of).
     drive(t, c, out) {
       const p = progress(c.play);
       const on = c.play > 0 ? 1 : 0;
@@ -1108,7 +1242,7 @@ export const RECIPES = {
       }
       prof.unshift([0.96, -0.1], [0.6, -0.12], [0, -0.12]);
       prof.sort((a, b) => a[1] - b[1] || a[0] - b[0]);
-      // Patches of colour: cells round random points.
+      // Patches of color: cells round random points.
       const cells = [];
       for (let i = 0; i < 120; i++) {
         cells.push({
@@ -1135,7 +1269,7 @@ export const RECIPES = {
         const lp = [c.lp[0] * 1.35, c.lp[1], c.lp[2]];
         const { cell, b1, b2 } = cellOf(lp);
         const edge = smoothstep(0, 0.02, Math.sqrt(b2) - Math.sqrt(b1));
-        // Play of colour: the hue shifts with the facing, as if with the light.
+        // Play of color: the hue shifts with the facing, as if with the light.
         const h = (cell.h + 0.08 * c.n[0] + 0.05 * c.n[2] + 1) % 1;
         const flash = hue(h, 0.85, 1);
         const glow = 0.35 + 0.65 * smoothstep(-0.3, 0.6, c.noise(lp[0] * 7, lp[1] * 7, lp[2] * 7));
@@ -1158,8 +1292,8 @@ export const RECIPES = {
         params: (c) => [c.rand() < 0.5 ? 1 : 0.3, 0],
         color: (c) => opalColor(c),
       });
-      // Play of colour: points over the dome coloured as the stone is
-      // there, which flash as a running glow of changing colour rolls
+      // Play of color: points over the dome colored as the stone is
+      // there, which flash as a running glow of changing color rolls
       // across the stone, patch by patch (drive).
       lathe.opts = { scale: [1.35, 1, 1], quat: opalQ };
       overlay(k, lathe, {
@@ -1191,6 +1325,34 @@ export const RECIPES = {
     ],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.2 }],
     action: { key: "open", label: "Open or close" },
+    // Hands-on (lane Hands-on H5): pry the lid open (or shut) on its hinge;
+    // lift the pearl out, roll it about, and bring it back near its place in
+    // the shell, where it settles in.
+    hands: {
+      floor: -0.35,
+      area: 1.5,
+      pieces: (d) => [
+        {
+          part: "pearl",
+          pos: d?.pearlAt || [0, -0.02, 0.1],
+          pivot: d?.pearlAt || [0, -0.02, 0.1],
+          solid: { type: "sphere", r: d?.pearlR ?? 0.31 },
+          pick: [1, 1, 1].map((v) => v * (d?.pearlR ?? 0.31) * 1.2),
+          mass: 0.4,
+          friction: 0.5,
+          restitution: 0.35,
+          material: { mass: 0.01, r: 0.004, bounce: 0.45, roll: 0.02, friction: 0.5 },
+          // Held where the finger took it, not set down level over the ray.
+          place: false,
+        },
+        // The shell under it (lane H1's fixed piece): the pearl rests in it.
+        ...(d?.shell ? [{ fixed: true, pos: [0, 0, 0], points: PEARL_CUP, radius: 0.03 }] : []),
+      ],
+      joints: (d) => [
+        { type: "socket", part: "pearl", snap: 0.3, armAway: 0.4 },
+        ...(d?.shell ? [lidHinge(PEARL_HINGE, [-1, 0, 0], PEARL_SWING, [0, 0.2, -0.1], [1, 0.4, 0.85])] : []), // prettier-ignore
+      ],
+    },
     // Like the geode, the lid is built twice (shut and open, since splats sort
     // in their built pose) and the copy nearer its current pose is shown.
     drive(t, c, out) {
@@ -1203,10 +1365,12 @@ export const RECIPES = {
       const pearlCol = o.color;
       const pearlAt = o.shell ? [0, -0.02, 0.1] : [0, 0, 0];
       const pr = o.shell ? 0.31 : 1;
+      k.data = { pearlAt, pearlR: pr, shell: !!o.shell };
       k.add(k.sphere(pr), {
         even: true,
         opacity: 1,
         jitter: 0.015,
+        part: k.part("pearl", { pivot: pearlAt }),
         pos: pearlAt,
         flat: 0.15,
         weight: o.shell ? 2 : 1,
@@ -1216,7 +1380,7 @@ export const RECIPES = {
         kind: "glint",
         params: (c) => [c.rand() < 0.25 ? 0.8 : 0.1, 0],
         color: (c) => {
-          // Lustre: soft shading, a pink and green orient, a crisp highlight.
+          // Luster: soft shading, a pink and green orient, a crisp highlight.
           const f = dot(c.n, VIEW);
           let col = mix(shade(pearlCol, 0.78), pearlCol, smoothstep(-0.2, 0.9, dot(c.n, LIGHT)));
           col = mix(
@@ -1231,7 +1395,7 @@ export const RECIPES = {
       });
       if (!o.shell) return;
       // An oyster: a rough cupped lower shell and a hinged lid, pearly inside.
-      const hinge = [0, 0.02, -0.72];
+      const hinge = PEARL_HINGE;
       const lidShut = k.part("lidShut", { pivot: hinge, axis: [1, 0, 0] });
       const lidOpen = k.part("lidOpen", { pivot: hinge, axis: [1, 0, 0] });
       const openQ = quatAxisAngle([1, 0, 0], -PEARL_SWING);
@@ -1299,6 +1463,33 @@ export const RECIPES = {
       { key: "gaze", label: "Gaze", type: "pulse", ease: 3.6 },
     ],
     action: { key: "gaze", label: "Gaze into the ball" },
+    // Hands-on (lane Hands-on H5): lift the ball off its stand and set it
+    // down or roll it on the table (heavy glass: it rolls, barely bounces);
+    // bring it back over the stand and it settles into its cup.
+    hands: {
+      floor: -1,
+      area: 2.4,
+      touch: true,
+      pieces: () => [
+        {
+          part: "ball",
+          pos: [0, 0.35, 0],
+          pivot: [0, 0.35, 0],
+          solid: { type: "sphere", r: 1 },
+          pick: [1.05, 1.05, 1.05],
+          mass: 2,
+          friction: 0.6,
+          restitution: 0.1,
+          material: { mass: 1.5, r: 0.05, bounce: 0.15, roll: 0.04, friction: 0.6 },
+          // Held where the finger took it, not set down level over the ray.
+          place: false,
+        },
+        // The stand's base (lane Hands-on H1's fixed piece), up to just under
+        // the ball: set down beside it, the ball rests against it.
+        { fixed: true, pos: [0, -0.9, 0], solid: { type: "ellipsoid", r: [0.8, 0.24, 0.8] } },
+      ],
+      joints: () => [{ type: "socket", part: "ball", snap: 0.35, armAway: 0.6 }],
+    },
     // A tap whips the mist round, and a glowing sign (a star, a moon or a
     // heart, in turn) rises out of it, turns once and fades.
     drive(t, c, out, info) {
@@ -1320,15 +1511,29 @@ export const RECIPES = {
       });
       out.amount = 0.4 + 1.2 * c.swirl + 1.5 * c.gaze;
       out.glow = [0.9, 0.6, 1, 1.4 * c.gaze];
+      // Hands-on: the mist and the signs go wherever the ball is (the
+      // glass, its motes and the cap under it are the ball's own part);
+      // the cap shows once it is off its stand.
+      const b = info.hands?.piece(0);
+      const off = b ? b.pos.map((v, i) => v - b.home[i]) : [0, 0, 0];
+      const moved = Math.hypot(...off) > 1e-3;
+      if (moved) {
+        out.parts.mist.offset = off;
+        for (const name of BALL_SIGNS) out.parts[name].offset = out.parts[name].offset.map((v, i) => v + off[i]); // prettier-ignore
+      }
+      out.parts.cap = moved ? { quat: b.quat, offset: off, visible: 1 } : { visible: 0 };
     },
     build(k, o) {
       const R = 1;
       const cy = 0.35;
       const mist = o.color;
-      // The glass: nearly clear, bright at the rim, with a window highlight.
+      // The glass: nearly clear, bright at the rim, with a window highlight
+      // (with its motes, one solid piece in Hands-on).
+      const ball = k.part("ball", { pivot: [0, cy, 0] });
       k.add(k.sphere(R), {
         even: true,
         jitter: 0.015,
+        part: ball,
         pos: [0, cy, 0],
         flat: 0.1,
         opacity: 0.22,
@@ -1344,9 +1549,24 @@ export const RECIPES = {
           return keep(mix(col, "#ffffff", hl));
         },
       });
+      // Hands-on: the bottom of the glass, hidden in the cup, shows once
+      // the ball is lifted off its stand.
+      const cap = k.part("cap", { pivot: [0, cy, 0] });
+      k.add(k.sphere(R), {
+        even: true,
+        jitter: 0.015,
+        part: cap,
+        pos: [0, cy, 0],
+        flat: 0.1,
+        opacity: 0.22,
+        share: 0.01,
+        pattern: false,
+        color: (c) => (c.ln[1] < -0.82 ? keep(mix(shade("#b8c8e8", 0.9), "#ffffff", 0.3)) : null),
+      });
       k.add(k.sphere(R * 1.002), {
         even: true,
         jitter: 0.015,
+        part: ball,
         pos: [0, cy, 0],
         share: 0.02,
         opacity: 0.9,
@@ -1438,6 +1658,7 @@ export const RECIPES = {
         const p = mul(randDir(rand), 0.85 * Math.cbrt(rand()));
         return {
           p: add(p, [0, cy, 0]),
+          part: ball,
           color: mix(mist, "#ffffff", 0.6),
           opacity: 0.9,
           kind: "pulse",
@@ -1446,6 +1667,7 @@ export const RECIPES = {
       });
       k.cloud({ share: 0.004, size: 0.9, pattern: false }, (rand) => ({
         p: add(mul(randDir(rand), 0.85 * Math.cbrt(rand())), [0, cy, 0]),
+        part: ball,
         color: "#fff6d6",
         opacity: 1,
         kind: "twinkle",
@@ -1537,3 +1759,48 @@ const GEODE_WIDE = 0.2;
 const GEODE_APART = 0.45;
 const geode = { prev: null, rising: false, openedAt: -1e9 };
 const PEARL_SWING = 1.15;
+
+// Lane Hands-on H5: the lower shell's inside, as points the pearl rests on
+// (a cup: set down in it, the pearl rolls to the middle).
+const PEARL_CUP = (() => {
+  const pts = [];
+  for (let iv = 1; iv <= 6; iv++)
+    for (let ia = 0; ia < 24; ia++) {
+      const v = iv / 6;
+      const a = (ia / 24) * 2 * Math.PI;
+      const r = v * (1 + 0.08 * Math.sin(a * 5 + 1) + 0.05 * Math.sin(a * 11));
+      pts.push([r * Math.cos(a) * 1.05, -0.3 * (1 - v * v), r * Math.sin(a) * 0.82]);
+    }
+  pts.push([0, -0.3, 0]);
+  return pts;
+})();
+const PEARL_HINGE = [0, 0.02, -0.72];
+const GEODE_HINGE = [-1.02, 0, 0];
+
+// Lane Hands-on H5: a lid built twice (shut, and lying open: splats sort in
+// their built pose) on a hinge the hand swings. The joint turns the shut
+// copy about `axis` from 0 to `swing` (open); the open copy follows, and
+// whichever is nearer its built pose shows, as the toy's own drive does.
+// It stays where it is left (no weight, no spring).
+function lidHinge(pivot, axis, swing, pos, pick) {
+  const back = axis.map((v) => -v);
+  return {
+    type: "hinge",
+    part: "lidShut",
+    pivot,
+    axis,
+    min: 0,
+    max: swing,
+    gravity: false,
+    damping: 6,
+    bounce: 0.1,
+    pos,
+    pick,
+    start: (c) => swing * (c.open * c.open * (3 - 2 * c.open)),
+    also: (v, parts) => {
+      const open = v >= swing / 2 ? 1 : 0;
+      parts.lidShut = { ...parts.lidShut, visible: 1 - open };
+      parts.lidOpen = { quat: quatAxisAngle(back, swing - v), visible: open };
+    },
+  };
+}

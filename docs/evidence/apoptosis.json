@@ -1,0 +1,78 @@
+{
+  "toy": "apoptosis",
+  "checked": "2026-10-05",
+  "summary": "The toy shows the stages of apoptosis as a pathology review describes them: shrinkage, condensed chromatin, blebbing, a broken-up nucleus and membrane-bound apoptotic bodies. The clearing of the bodies and the neighbor that moves in are simplified.",
+  "claims": [
+    {
+      "claim": "Early in apoptosis the cell shrinks and its chromatin condenses (pyknosis).",
+      "how": "The whole cell scales down to 82 percent; the nucleus shrinks and darkens as a condensed copy fades in.",
+      "where": "src/packs/tiny-r2.js (apoptosis drive)",
+      "sources": [
+        {
+          "title": "Apoptosis: a review of programmed cell death (Toxicologic Pathology 35:495-516, 2007)",
+          "publisher": "S. Elmore, via PubMed Central",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2117903/",
+          "says": "During the early process of apoptosis, cell shrinkage and pyknosis are visible by light microscopy … Pyknosis is the result of chromatin condensation."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "The plasma membrane blebs, then the nucleus breaks up (karyorrhexis) and the cell separates into apoptotic bodies.",
+      "how": "Two sets of blebs bulge in turn; the nucleus is replaced by four dark pieces; the membrane pinches into seven spheres that become solid pieces.",
+      "where": "src/packs/tiny-r2.js (apoptosis build)",
+      "sources": [
+        {
+          "title": "Apoptosis: a review of programmed cell death (Toxicologic Pathology 35:495-516, 2007)",
+          "publisher": "S. Elmore, via PubMed Central",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2117903/",
+          "says": "Extensive plasma membrane blebbing occurs followed by karyorrhexis and separation of cell fragments into apoptotic bodies."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "Apoptotic bodies are wrapped in intact membrane and hold tightly packed organelles, some with a piece of the nucleus.",
+      "how": "Each body is a membrane shell with the mitochondria and vesicles that were in its part of the cell; the middle one holds the nuclear pieces.",
+      "where": "src/packs/tiny-r2.js (BODIES)",
+      "sources": [
+        {
+          "title": "Apoptosis: a review of programmed cell death (Toxicologic Pathology 35:495-516, 2007)",
+          "publisher": "S. Elmore, via PubMed Central",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2117903/",
+          "says": "Apoptotic bodies consist of cytoplasm with tightly packed organelles with or without a nuclear fragment."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "The bodies are cleared by phagocytes, with essentially no inflammation.",
+      "how": "The bodies drift away out of view; the About text says white blood cells eat them.",
+      "where": "src/toy-help.js",
+      "sources": [
+        {
+          "title": "Apoptosis: a review of programmed cell death (Toxicologic Pathology 35:495-516, 2007)",
+          "publisher": "S. Elmore, via PubMed Central",
+          "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2117903/",
+          "says": "These bodies are subsequently phagocytosed by macrophages, parenchymal cells, or neoplastic cells … There is essentially no inflammatory reaction associated with the process of apoptosis."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "",
+      "note": "The phagocytes are not drawn; the bodies drift away instead."
+    }
+  ],
+  "simplified": [
+    "The cell is a diagram: a few mitochondria and vesicles stand for its organelles.",
+    "The blebs come and go in two alternating sets, as a regular pattern.",
+    "The bodies drift away rather than being eaten, and a neighbor of the same kind moves in, so the toy can play again.",
+    "Apoptosis takes minutes to hours; the toy takes about 14 seconds."
+  ],
+  "fixes": []
+}

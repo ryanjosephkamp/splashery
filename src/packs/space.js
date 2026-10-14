@@ -1,7 +1,7 @@
 // Space pack: the Sun and planets, moons and comets, stars, nebulae and
 // galaxies. Loaded on demand. There is no lighting, so surfaces bake in a
 // soft light and glows are clouds of faint splats; glows, rings and stars
-// keep their colours under flags and patterns.
+// keep their colors under flags and patterns.
 
 import {
   mix,
@@ -94,7 +94,7 @@ const dirOf = (lat, lon) => [
 ];
 const angle = (a, b) => Math.acos(clamp(dot(a, b), -1, 1));
 
-// Direction towards a camera at yaw/pitch (the default is 0.55, 0.28), its
+// Direction toward a camera at yaw/pitch (the default is 0.55, 0.28), its
 // right and up vectors, and points on the limb it sees.
 function camDir(yaw = 0.55, pitch = 0.28) {
   return [Math.sin(yaw) * Math.cos(pitch), Math.sin(pitch), Math.cos(yaw) * Math.cos(pitch)];
@@ -109,14 +109,14 @@ function limbDir(a, cam = camDir(), lift = 0) {
   const e2 = cross(e1, cam);
   return unit(add(add(mul(e1, Math.cos(a)), mul(e2, Math.sin(a))), mul(cam, lift)));
 }
-// A rotation that opens a disc's face `open` radians further towards the
+// A rotation that opens a disc's face `open` radians further toward the
 // camera and turns it `slant` radians about the view direction.
 function faceCamera(open, slant, yaw = 0.55, pitch = 0.28) {
   const f = camFrame(yaw, pitch);
   return quatMul(quatAxisAngle(f.c, slant), quatAxisAngle(f.right, open));
 }
 
-// Soft light baked into a surface: brighter towards the light, never black.
+// Soft light baked into a surface: brighter toward the light, never black.
 const LIGHT = unit([-0.35, 0.55, 0.75]);
 function lit(col, n, amount = 0.35, light = LIGHT) {
   const l = dot(n, light);
@@ -139,7 +139,7 @@ const coverSize = (k, area, share) =>
 // Splats are depth-sorted in the pose they are built in, so a solid body
 // turned more than a quarter turn draws its far side over its near side.
 // A body that turns all the way round is built twice: copy B half a turn
-// round, coloured just as copy A would be there (its baked light turns
+// round, colored just as copy A would be there (its baked light turns
 // with it). spinParts() shows whichever copy is within a quarter turn of
 // the pose it was built in. (A layer of splats above a turning body, such
 // as clouds, still draws wrongly, so clouds are painted on instead.)
@@ -175,7 +175,7 @@ const CULLED_SIZE = 1.2;
 // it is shown: side +1 shows copies turned 0..90° past their build (built
 // behind: for a layer on the side the ground turns away from), side -1
 // copies turned -90..0° (built ahead: for a layer on the side it turns
-// towards).
+// toward).
 const QUARTER = { weight: 0.55, size: 1.35 };
 const QUARTER_NAMES = ["", "B", "C", "D"];
 function spinQuarters(out, name, angle, side, more = {}) {
@@ -203,7 +203,7 @@ function coreBall(k, { r = 0.97, oblate = 1, quat, share = 0.06, col }) {
 // ---- Glows ----------------------------------------------------------------------
 
 // A halo of faint round splats around a sphere of radius r0, thinning out
-// to r1. col(t) gives the colour at t = 0 (inner) .. 1 (outer).
+// to r1. col(t) gives the color at t = 0 (inner) .. 1 (outer).
 function halo(
   k,
   {
@@ -474,13 +474,13 @@ function globe(
   return item;
 }
 
-// A core in layers for Slice: stops from the centre out.
+// A core in layers for Slice: stops from the center out.
 const layers =
   (stops, R = 1) =>
   (c) =>
     ramp(stops, clamp01(len(c.lp) / R));
 
-// Colour bands by latitude: stops are [sinLat, colour] from south to north.
+// Color bands by latitude: stops are [sinLat, color] from south to north.
 function bandAt(stops, y) {
   if (y <= stops[0][0]) return stops[0][1];
   for (let i = 1; i < stops.length; i++) {
@@ -493,7 +493,7 @@ function bandAt(stops, y) {
 }
 
 // Distance inside an oval spot at (lat, lon) with half sizes a (east-west)
-// and b (north-south) in radians: 0 at the centre, 1 at the edge.
+// and b (north-south) in radians: 0 at the center, 1 at the edge.
 function ovalDist(d, lat0, lon0, a, b) {
   const lat = latOf(d);
   let lon = lonOf(d) - lon0;
@@ -502,7 +502,7 @@ function ovalDist(d, lat0, lon0, a, b) {
 }
 
 // Flat rings in the XZ plane (turned by quat): each ring is [r0, r1,
-// opacity, colour(r, c) -> colour or null for a gap, share]. Toys with no
+// opacity, colour(r, c) -> color or null for a gap, share]. Toys with no
 // weighted surfaces get splats sized to cover each ring.
 function rings(k, list, { quat, part, pos, flat = 0.12, size = 1, glint = 0, even = false }) {
   for (const [r0, r1, opacity, col, share, own] of list) {
@@ -869,7 +869,7 @@ const ORRERY = [
 ];
 
 // The Sun's prominences (angle round the limb, half span, height, tilt
-// towards the viewer) and its flare, on the upper right limb.
+// toward the viewer) and its flare, on the upper right limb.
 const SUN_LOOPS = [
   { a: 0.55, span: 0.2, h: 0.3 },
   { a: 2.35, span: 0.14, h: 0.24 },
@@ -886,9 +886,9 @@ const SUN_FLARE = (() => {
 
 // ---- The Moon landing ----------------------------------------------------------------
 
-// The landing site: near the top of the face we see, tipped towards us, so
+// The landing site: near the top of the face we see, tipped toward us, so
 // the lander, the astronaut and the flag stand up against the sky. R runs
-// to the viewer's right, U up from the ground and F towards the viewer.
+// to the viewer's right, U up from the ground and F toward the viewer.
 // Everything in the scene is built lower down inside the Moon (by `sink`,
 // straight down the screen, so every splat keeps its depth and draws in
 // the right order) and shown moved up into place: built in place, the
@@ -903,7 +903,7 @@ const LANDING = (() => {
 // Moon's radius is 1), and how big they are.
 const LANDER_AT = [-0.08, 0];
 const LANDER_G = 1.25; // the lander's scale: it stands 0.31 tall
-const PAD_OUT = 0.22; // the footpads, out from the lander's centre
+const PAD_OUT = 0.22; // the footpads, out from the lander's center
 const PAD_TOP = 0.014 * LANDER_G; // the top of a footpad
 const TAKE_AT = [0.1, 0.13]; // where the astronaut takes the flag off the leg
 const PLANT_AT = [0.245, 0.07]; // where the astronaut stands to plant it
@@ -939,7 +939,7 @@ function moonSpot(ground, [x, z]) {
   const q = quatFromTo(U, n);
   return { base: mul(n, ground(n)), n, r: quatRotate(q, R), f: quatRotate(q, F), q };
 }
-// A point in a spot's frame: x to the right, y up, z towards the viewer.
+// A point in a spot's frame: x to the right, y up, z toward the viewer.
 const spotAt = (s, [x, y, z]) => add(s.base, add(add(mul(s.r, x), mul(s.n, y)), mul(s.f, z)));
 // The rotation that turns a shape's own axes (x, y, z) to a spot's (r, n, f).
 function spotQuat(s) {
@@ -1231,7 +1231,7 @@ function buildLanding(k, ground, code) {
     part: lander,
     color: metal("#56585d"),
   });
-  // The ascent stage: grey panels, two slanted windows and the hatch.
+  // The ascent stage: gray panels, two slanted windows and the hatch.
   box(0.105, 0.08, 0.095, [0, 0.1775, 0], (c) => {
     const x = c.lp[0] / (0.0525 * G);
     const y = c.lp[1] / (0.04 * G);
@@ -1343,8 +1343,8 @@ function buildLanding(k, ground, code) {
   astronaut(k, { ...onPad, base: foot }, -1, climber, climber, B);
 
   // The flag: a pole, a crossbar along its top and the cloth hanging from
-  // it (with the wrinkles it keeps from being folded), coloured from the
-  // chosen flag's picture (behaviour "screen").
+  // it (with the wrinkles it keeps from being folded), colored from the
+  // chosen flag's picture (behavior "screen").
   MOON_FLAG.code = code;
   const W = CLOTH_H * flagShape(code);
   const F0 = moonSpot(ground, FLAG_AT);
@@ -1373,7 +1373,7 @@ function buildLanding(k, ground, code) {
     k.add(strip, { ...sheet, part, params: (c) => [u0 + c.u / CLOTH_STRIPS, c.v] });
   }
   // The rolled-up cloth: a fat sleeve at the hoist, showing the fly end's
-  // colours.
+  // colors.
   k.add(k.cylinder(0.0065, CLOTH_H, { caps: true }), {
     ...fine,
     pos: B(spotAt(F0, [0.006, POLE_H - 0.008 - CLOTH_H / 2, 0])),
@@ -1436,7 +1436,7 @@ const EARTH_LIGHTS = (() => {
 })();
 
 // Jupiter's bands (between sines of latitude) and how many turns each makes
-// when the winds race: neighbours go opposite ways, the equator fastest.
+// when the winds race: neighbors go opposite ways, the equator fastest.
 // The Great Red Spot's band and the poles stay put.
 const JUPITER_JETS = [
   { y0: -1, y1: -0.72, turns: 0 },
@@ -1477,7 +1477,7 @@ const SATURN_RING_SPEEDS = [0.24, 0.16, 0.11, 0.095];
 const RING_PERIOD = TAU / 8;
 const ringAngle = (a) => ((a % RING_PERIOD) + RING_PERIOD) % RING_PERIOD;
 
-// Cells for rocks that break into pieces (asteroid, meteor): centres inside
+// Cells for rocks that break into pieces (asteroid, meteor): centers inside
 // an ellipsoid with half axes `ax`, the direction and distance each piece
 // flies and how it tumbles. From a fixed seed, so every build agrees.
 function rockCells(n, ax, seed) {
@@ -1529,7 +1529,7 @@ const PULSAR = (() => {
 
 // The path of the star that falls into the black hole: from high on the
 // right, above the disk, it spirals down and in, round the front, to plunge
-// in just left of centre. phi is the angle from the viewer's right towards
+// in just left of center. phi is the angle from the viewer's right toward
 // the viewer.
 const BH_PATH = (() => {
   const f = camFrame(0.55, 0.16);
@@ -1579,6 +1579,90 @@ const CHUNKS = fibonacciSphere(13);
 const ANDROMEDA_TILT = faceCamera(-31 * DEG, -34 * DEG, 0.55, 0.9);
 
 // ---- Recipes ------------------------------------------------------------------------
+
+// ---- Hands-on (lane Hands-on H4) -------------------------------------------------------
+
+const EARTH_AXIS = quatRotate(EARTH_TILT, [0, 1, 0]);
+
+// The Earth turned by hand: one quarter shell shows at a time (as the tap's
+// day turns it), and the core ball inside hides while it turns (it would
+// draw over the turned surface).
+function earthSpin(a, parts) {
+  spinQuarters({ parts }, "globe", a, -1);
+  parts.core = { visible: 0 };
+}
+
+// The black hole's pull on the star (no floor in space): gravity toward the
+// middle, falling with distance squared, and a little drag (the gas of the
+// disk), so an orbit winds down into a spiral. Inside the horizon it is
+// swallowed and held there.
+function blackHolePull(b, h, ctx) {
+  if (b.held || b.pinned) return;
+  if (b.swallowed) {
+    b.vel = [0, 0, 0];
+    return;
+  }
+  const r = len(b.pos);
+  if (r < 1.03) {
+    b.swallowed = true;
+    b.vel = [0, 0, 0];
+    b.omega = [0, 0, 0];
+    return;
+  }
+  const a = 5 / (r * r + 0.05);
+  for (let k = 0; k < 3; k++) b.vel[k] += (-a * (b.pos[k] / r) - 0.35 * b.vel[k]) * h;
+}
+
+// The star where Hands-on has it: shown waiting at the start of its fall,
+// stretched along its path as it nears the hole, gone (with a flare of
+// the disk and ring) once swallowed.
+function blackHoleHands(out, info) {
+  const hp = info.hands.piece("star");
+  const at = hp?.pos ?? BH_PATH.at(0);
+  const r = len(at);
+  const gone = r < 1.06;
+  const d = info.data || {};
+  if (gone && d.h4?.goneAt === undefined) d.h4 = { goneAt: info.time };
+  if (!gone && d.h4) d.h4 = undefined;
+  info.data && (info.data.h4 = d.h4);
+  const close = clamp01((2.0 - r) / 0.9);
+  out.parts.star = { offset: sub(at, BH_PATH.end), visible: gone ? 0 : 1 - close };
+  // The tides stretch it into a streak, along its way round the hole.
+  const turn = Math.atan2(at[0], at[2]) - Math.atan2(BH_PATH.end[0], BH_PATH.end[2]);
+  out.parts.streak = { offset: sub(at, BH_PATH.end), quat: quatAxisAngle([0, 1, 0], turn), visible: gone ? 0 : close }; // prettier-ignore
+  out.parts.stream = { visible: 0 };
+  const since = gone ? info.time - (d.h4?.goneAt ?? info.time) : 9;
+  const flare = since < 3 ? bump(since / 3, 0, 0.08, 0.2, 1) : 0;
+  out.glow = [1, 0.8, 0.55, 0.7 + 2.6 * flare];
+  out.parts.ring = { visible: 1 + 0.8 * flare };
+  out.parts.flare = { visible: 1.4 * flare, scale: 0.9 + 0.3 * flare };
+  out.amount = 1 + 1.5 * flare;
+}
+
+// The Sun's pull, made gentle for a toy: each planet is drawn back to its
+// own orbit's radius and plane and to its own speed round it, so one
+// dragged off swings back into its orbit (and the rest keep orbiting).
+function orbitPull(b, h, ctx) {
+  if (b.held) return;
+  const P = ORRERY.find((o) => o.id === ctx.piece?.def?.name);
+  if (!P) return;
+  if (b.pinned) ctx.free();
+  const [x, y, z] = b.pos;
+  const r = Math.hypot(x, z) || 1e-6;
+  const rad = [x / r, 0, z / r];
+  const tan = [z / r, 0, -x / r]; // the way its angle (atan2(x, z)) grows
+  if (!b.orbiting) {
+    b.orbiting = true;
+    b.vel = mul(tan, P.w * P.r);
+  }
+  const vr = b.vel[0] * rad[0] + b.vel[2] * rad[2];
+  const vt = b.vel[0] * tan[0] + b.vel[2] * tan[2];
+  const ar = 6 * (P.r - r) - 3 * vr;
+  const at = 3 * (P.w * P.r - vt);
+  b.vel[0] += (ar * rad[0] + at * tan[0]) * h;
+  b.vel[2] += (ar * rad[2] + at * tan[2]) * h;
+  b.vel[1] += (-6 * y - 3 * b.vel[1]) * h;
+}
 
 export const RECIPES = {
   sun: {
@@ -1900,6 +1984,13 @@ export const RECIPES = {
   earth: {
     controls: [{ key: "day", label: "A day", type: "pulse", ease: 6.4 }],
     action: { key: "day", label: "Turn through a day" },
+    // Hands-on (lane Hands-on H4): flick it round to spin it on its tilted
+    // axis; it slows back to (all but) still, its daily turn.
+    hands: {
+      joints: [
+        { type: "dial", part: "globe", pivot: [0, 0, 0], axis: EARTH_AXIS, drag: 0.6, pos: [0, 0, 0], pick: [1.05, 1.05, 1.05], also: (a, parts) => earthSpin(a, parts) }, // prettier-ignore
+      ],
+    },
     // A tap turns it through one day with the Sun off to the left: night
     // falls over the right half, the Earth turns once, city lights come on
     // as the land turns into the dark and go out at dawn, then the night
@@ -1910,7 +2001,7 @@ export const RECIPES = {
       const dusk = on * ease(band(p, 0, 0.13)) * (1 - ease(band(p, 0.87, 1)));
       out.grow = 1.1 * dusk;
       const turn = TAU * ease(band(p, 0.08, 0.9));
-      // The night lies over the side the ground turns towards.
+      // The night lies over the side the ground turns toward.
       spinQuarters(out, "globe", turn, -1);
       out.parts.core = { visible: on ? 0 : 1 };
       // Each wedge of lights is built turned to where the ground enters the
@@ -2150,10 +2241,10 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "race", label: "Winds", type: "pulse", ease: 4.2 }],
     action: { key: "race", label: "Race the bands" },
-    // A tap sets the cloud bands racing, neighbours in opposite directions
+    // A tap sets the cloud bands racing, neighbors in opposite directions
     // as Jupiter's jets do (each band turns a whole number of times, so the
     // picture comes back together), and the Great Red Spot spins up
-    // anticlockwise inside its oval.
+    // counterclockwise inside its oval.
     drive(t, c, out) {
       const u = ease(band(progress(c.race), 0, 1));
       // While the bands turn, each hides its far side (cull), or one band's
@@ -2431,6 +2522,21 @@ export const RECIPES = {
   asteroid: {
     controls: [{ key: "shatter", label: "Break up", type: "pulse", ease: 5.4 }],
     action: { key: "shatter", label: "Break it apart" },
+    // Hands-on (lane Hands-on H4): pull its chunks off one by one; let go and
+    // each drifts back to its place in the rubble pile, as their weak
+    // gravity pulls them together (no floor out in space).
+    hands: {
+      gravity: 0,
+      floor: -4,
+      area: 1.8,
+      place: false,
+      pieces: () => ASTEROID_CELLS.map((cell, i) => ({ token: i, pos: cell.c, solid: { type: "sphere", r: 0.08 }, mass: 1, friction: 0.5, restitution: 0.2, pick: [0.3, 0.26, 0.3] })), // prettier-ignore
+      force: (b, h, ctx) => {
+        if (b.held || b.pinned || !ctx.piece) return;
+        const home = ctx.piece.home.pos;
+        for (let k = 0; k < 3; k++) b.vel[k] += (5 * (home[k] - b.pos[k]) - 2.6 * b.vel[k]) * h;
+      },
+    },
     // A tap cracks it (glowing cracks flash over it), it falls apart into
     // its pieces, which drift off tumbling, each on its own path, with a
     // puff of dust; then gravity pulls the rubble back together and it
@@ -2469,7 +2575,7 @@ export const RECIPES = {
       });
       const shapeR = (d) => lumps(d) / Math.hypot(d[0] / 1.45, d[1] / 0.82, d[2] / 0.95);
       const cells = ASTEROID_CELLS;
-      // The nearest two cell centres to p: [index, bisector distance].
+      // The nearest two cell centers to p: [index, bisector distance].
       const nearest = (p) => {
         let i1 = 0;
         let i2 = 0;
@@ -2628,11 +2734,13 @@ export const RECIPES = {
       // The arms, their dust and knots turn together as one pattern.
       const armCloud = (share, fn) => k.cloud({ share, pattern: false, part: armPart }, fn);
 
-      // Unresolved starlight: a soft glow over the disc and bulge.
-      cloud(andro ? 0.1 : 0.07, 1, (rand) => {
-        const r = Math.min(1.05, -(andro ? 0.3 : 0.26) * Math.log(1 - rand() * 0.97));
+      // Unresolved starlight: a soft glow over the disc and bulge, laid out
+      // evenly (a sunflower spiral in the same falloff) so it reads as one
+      // smooth light, not as blotches (lane Sharpness A).
+      cloud(andro ? 0.1 : 0.07, 1, (rand, i, n) => {
+        const r = Math.min(1.05, -(andro ? 0.3 : 0.26) * Math.log(1 - ((i + 0.5) / n) * 0.97));
         return {
-          p: at(r, rand() * TAU, gauss(rand) * 0.02),
+          p: at(r, i * 2.399963229728653, gauss(rand) * 0.02),
           n: [0, 1, 0],
           flat: 0.4,
           color: mix("#ffe2b0", andro ? "#d8d4f0" : "#b8c8ff", smoothstep(0.1, 0.6, r)),
@@ -2646,8 +2754,9 @@ export const RECIPES = {
         return {
           p: at(r, rand() * TAU, gauss(rand) * 0.02),
           color: mix("#ffe9c4", "#d6dcff", smoothstep(0.1, 0.7, r) * rand()),
-          opacity: 0.55,
-          size: (0.6 + 0.6 * rand()) * s2,
+          opacity: 0.6,
+          size: (0.35 + 0.25 * rand()) * s2,
+          jitter: 0.2,
         };
       });
       // The bulge: warm old stars, brightest in the middle.
@@ -2681,14 +2790,26 @@ export const RECIPES = {
           };
         });
       }
-      // Blue-white stars along the arms.
-      armCloud(andro ? 0.26 : 0.36, (rand) => {
+      // The arms' own glow: big, faint splats that join into smooth
+      // bands of light under the stars (lane Sharpness A).
+      armCloud(andro ? 0.08 : 0.11, (rand) => ({
+        p: onArm(rand, andro ? 0.03 : 0.034),
+        n: [0, 1, 0],
+        flat: 0.4,
+        color: mix("#9db8ff", "#dfe8ff", rand() * 0.5),
+        opacity: 0.1,
+        size: 2.6 * S,
+        jitter: 0.2,
+      }));
+      // Blue-white stars along the arms: crisp points.
+      armCloud(andro ? 0.18 : 0.25, (rand) => {
         const x = rand();
         return {
-          p: onArm(rand, andro ? 0.035 : 0.04),
+          p: onArm(rand, andro ? 0.03 : 0.034),
           color: x < 0.55 ? mix("#7fa4ff", "#b0c8ff", rand()) : x < 0.85 ? "#e8eeff" : "#ffe0b0",
-          opacity: 0.8,
-          size: (0.7 + 0.8 * rand()) * s2,
+          opacity: 0.95,
+          size: (0.38 + 0.3 * rand()) * s2,
+          jitter: 0.2,
         };
       });
       // Dark dust lanes along the inner edges of the arms.
@@ -2697,8 +2818,9 @@ export const RECIPES = {
         n: [0, 1, 0],
         flat: 0.25,
         color: mix("#3a2214", "#5a3a24", rand()),
-        opacity: andro ? 0.4 : 0.32,
-        size: (1 + 0.8 * rand()) * S,
+        opacity: andro ? 0.45 : 0.4,
+        size: (0.75 + 0.4 * rand()) * S,
+        jitter: 0.2,
       }));
       // Pink star-forming knots and young blue clusters on the arms.
       const knots = [];
@@ -2765,7 +2887,7 @@ export const RECIPES = {
     options: [
       {
         key: "palette",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "emission",
         choices: [
@@ -2967,6 +3089,21 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "align", label: "Line up", type: "pulse", ease: 7 }],
     action: { key: "align", label: "Line up the planets" },
+    // Hands-on (lane Hands-on H4): drag a planet off its orbit and let go;
+    // the Sun's pull swings it back round into its orbit, and the others
+    // orbit on.
+    hands: {
+      gravity: 0,
+      floor: -3,
+      area: 1.4,
+      place: false,
+      pieces: (d) =>
+        ORRERY.map((P, i) => {
+          const th = d?.h4?.th?.[i] ?? P.build;
+          return { name: P.id, free: true, pos: [P.r * Math.sin(th), 0, P.r * Math.cos(th)], solid: { type: "sphere", r: Math.max(0.03, P.size) }, mass: 1, restitution: 0.3, pick: Array(3).fill(Math.max(0.09, 1.6 * P.size)) }; // prettier-ignore
+        }),
+      force: orbitPull,
+    },
     // A tap swings every planet forward round its orbit into one straight
     // row beside the Sun. The system tips until we look along its plane;
     // Mercury, the fastest, swings on in front of the Sun as a dark dot
@@ -2977,7 +3114,7 @@ export const RECIPES = {
     // The orbits are spaced so that even in the row no two planets touch
     // (the inner three swell a little there, and Mercury more as it
     // crosses the Sun, once it has left the row).
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const m = mem(c);
       if (!m.off) m.off = ORRERY.map(() => 0);
       const p = progress(c.align);
@@ -3008,10 +3145,19 @@ export const RECIPES = {
       });
       const big = on ? ease(band(p, 0.04, 0.26)) * (1 - ease(band(p, 0.7, 0.86))) : 0;
       const crossing = on ? ease(band(p, 0.4, 0.5)) * (1 - ease(band(p, 0.62, 0.72))) : 0;
+      if (info.data) info.data.h4 = { th: m.th.slice() };
+      // In Hands-on, once a planet has been moved, each one is where the
+      // Sun's pull has it (src/physics).
+      const held = !on && info.hands?.moved ? ORRERY.map((P) => info.hands.piece(P.id)) : null;
       ORRERY.forEach((P, i) => {
-        const th = m.th[i];
+        let th = m.th[i];
         const b = P.build;
-        const offset = [P.r * (Math.sin(th) - Math.sin(b)), 0, P.r * (Math.cos(th) - Math.cos(b))];
+        let offset = [P.r * (Math.sin(th) - Math.sin(b)), 0, P.r * (Math.cos(th) - Math.cos(b))];
+        const hp = held?.[i];
+        if (hp) {
+          th = Math.atan2(hp.pos[0], hp.pos[2]);
+          offset = sub(hp.pos, [P.r * Math.sin(b), 0, P.r * Math.cos(b)]);
+        }
         // While lined up the small inner planets swell a little so they
         // read, and Mercury more while it crosses the Sun.
         const scale = 1 + (i === 0 ? 1.5 * crossing : P.swell * big);
@@ -3025,6 +3171,7 @@ export const RECIPES = {
       out.parts.sunGlow = { visible: 1 + 0.5 * eclipse };
     },
     build(k) {
+      k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
       // Every shape here has a fixed share with its own splat size: the
       // planets are tiny next to their orbits, and density-based sizes
       // would make their splats too small to see.
@@ -3154,6 +3301,10 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "flare", label: "Flare", type: "pulse", ease: 4.8 }],
     action: { key: "flare", label: "Swing past the Sun" },
+    // Hands-on (lane Hands-on H4; the L1 sweep's finding): a lump of rock and
+    // ice that lands, rocks and comes to rest (its long tail used to keep it
+    // twitching on the floor for ever).
+    hands: { material: { mass: 5, r: 0.12, bounce: 0.15, friction: 0.9, roll: 0.4, spinDecay: 3 } },
     // A tap swings it past the Sun: jets of gas burst from the nucleus on
     // its sunward side, the coma swells, and both tails flare longer and
     // brighter as they swing round (a tail always points away from the
@@ -3234,7 +3385,7 @@ export const RECIPES = {
         col: (t) => mix("#ffffff", "#c8fff2", t),
       });
       // The coma: a soft green-blue hood, pressed flat on the sunward side
-      // and drawn out towards the tails. Faint enough to see the nucleus.
+      // and drawn out toward the tails. Faint enough to see the nucleus.
       k.cloud({ share: 0.05, pattern: false, kind: "twinkle", part: coma }, (rand) => {
         const t = Math.pow(rand(), 1.2);
         const d = randDir(rand);
@@ -3405,7 +3556,7 @@ export const RECIPES = {
             Math.abs(c.noise(d[0] * T.freq, d[1] * T.freq, d[2] * T.freq)),
           );
           const big = c.fbm(d[0] * 2.5 + 9, d[1] * 2.5, d[2] * 2.5, 3);
-          // Hotter towards the middle of the face the viewer sees.
+          // Hotter toward the middle of the face the viewer sees.
           const face = smoothstep(0.2, 1, dot(d, f.c));
           let col = ramp(T.surface, clamp01(0.25 + 0.35 * g + big * 1.2 + 0.35 * face));
           for (const s of spots) {
@@ -3563,6 +3714,13 @@ export const RECIPES = {
       { key: "spinup", label: "Spin up", type: "pulse", ease: 5.4 },
     ],
     action: { key: "spinup", label: "Spin up" },
+    // Hands-on (lane Hands-on H4): flick the star round to spin it faster:
+    // the beams sweep faster and the flashes come quicker, then it slows.
+    hands: {
+      joints: (d) => [
+        { type: "dial", part: "star", pivot: [0, 0, 0], axis: PULSAR.axis, drag: 0.25, pos: [0, 0, 0], pick: [0.6, 0.6, 0.6], start: () => d?.h4?.a ?? 0, also: (a) => d && (d.h4 = { ...d.h4, dial: a }) }, // prettier-ignore
+      ],
+    },
     // Each time a beam sweeps past the viewer the star flashes, like a
     // lighthouse (that is why pulsars pulse). A tap spins it up to a blur,
     // so the flashes come faster and faster into a strobe, each with a
@@ -3572,7 +3730,13 @@ export const RECIPES = {
       const p = progress(c.spinup);
       const on = c.spinup > 0 ? 1 : 0;
       const boost = on * 24 * ease(band(p, 0, 0.42)) * (1 - ease(band(p, 0.58, 1)));
-      const a = spinAngle(c, t, 0.8 + 5 * c.spin + boost);
+      let a = spinAngle(c, t, 0.8 + 5 * c.spin + boost);
+      // (In Hands-on, once flicked, the star turns as the finger left it.)
+      const d = info.data;
+      if (d) {
+        if (info.hands?.moved && d.h4?.dial !== undefined) a = d.h4.dial;
+        d.h4 = { ...d.h4, a };
+      }
       out.parts.star = { angle: a };
       // Count half turns past the angle where a beam faces the viewer.
       const n = Math.floor((a - PULSAR.face) / Math.PI);
@@ -3589,6 +3753,7 @@ export const RECIPES = {
       out.amount = 1 + 1.5 * band(boost, 0, 24);
     },
     build(k) {
+      k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
       const S = budgetScale(k);
       const axis = PULSAR.axis;
       const star = k.part("star", { axis });
@@ -3714,14 +3879,30 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "feed", label: "Feed", type: "pulse", ease: 6.6 }],
     action: { key: "feed", label: "Feed it a star" },
+    // Hands-on (lane Hands-on H4): a small star waits high on the right. Drag
+    // it near the hole and let go: it falls round the hole, spirals in and
+    // is swallowed, and the disk and photon ring flare.
+    hands: {
+      gravity: 0,
+      floor: -6,
+      area: 2,
+      place: false,
+      watch: true,
+      pieces: () => [{ name: "star", pos: BH_PATH.at(0), solid: { type: "sphere", r: 0.12 }, mass: 1, pick: [0.3, 0.3, 0.3] }], // prettier-ignore
+      force: blackHolePull,
+    },
     // A tap sends a small star falling in. It spirals closer, faster and
     // faster, is stretched into a streak by the tides, and leaves a stream
     // of its gas along its path; it plunges in, the disk and the photon
     // ring flare, and the stream swirls down after it.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const p = progress(c.feed);
       const on = c.feed > 0 ? 1 : 0;
       const s = Math.pow(band(p, 0.02, 0.5), 1.5);
+      if (!on && info.hands?.on) {
+        blackHoleHands(out, info);
+        return;
+      }
       const at = BH_PATH.at(s);
       const turn = -(BH_PATH.phi(s) - BH_PATH.phi(1));
       const plunge = band(p, 0.47, 0.52);
@@ -4050,7 +4231,7 @@ export const RECIPES = {
       };
       // A ragged shell of glowing gas: brightest at its rim, where the eye
       // looks through the most of it, and laced with filaments. Hydrogen
-      // glows red, oxygen teal, sulphur gold.
+      // glows red, oxygen teal, sulfur gold.
       const shell = (d) => 0.72 + 0.2 * (0.5 + 1.4 * noise(d[0] * 1.1 + 4, d[1] * 1.1, d[2] * 1.1));
       const hue = (d) => noise.fbm(d[0] * 1.5 + 50, d[1] * 1.5, d[2] * 1.5, 3);
       const tint = (h, rand) =>
@@ -4282,7 +4463,7 @@ export const RECIPES = {
     // The curtains move all the time: bright folds race round the oval
     // (a glow running along it, three at a time), the rays flicker and the
     // oval sways. A tap sets off a substorm: the oval flares, a second,
-    // wider curtain with violet tops bursts out towards the equator, and
+    // wider curtain with violet tops bursts out toward the equator, and
     // the folds race brighter, then it all calms.
     drive(t, c, out) {
       const p = progress(c.surge);
@@ -4302,7 +4483,7 @@ export const RECIPES = {
     },
     build(k) {
       const noise = k.noise;
-      // The night side of an Earth-like world, its pole tipped towards the
+      // The night side of an Earth-like world, its pole tipped toward the
       // viewer so the auroral oval shows.
       const q = faceCamera(30 * DEG, -10 * DEG);
       const SEA = 0.07;
@@ -4559,7 +4740,7 @@ export const RECIPES = {
           size: 0.45 * S,
         };
       });
-      // The smoke left by the burst: a grey puff that spreads and fades.
+      // The smoke left by the burst: a gray puff that spreads and fades.
       k.cloud({ share: 0.02, pattern: false, part: k.part("smoke") }, (rand) => ({
         p: mul(randDir(rand), R * 1.2 * Math.cbrt(rand())),
         color: mix("#5a524c", "#8a7e76", rand()),

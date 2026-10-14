@@ -71,7 +71,7 @@ test.describe("Real objects", () => {
     for (const id of IDS) {
       const recipe = RECIPES[id];
       const ctx = await build(id, PROFILES.mid.defaultCount);
-      // The model's splats: no behaviour that bends or moves them one by one.
+      // The model's splats: no behavior that bends or moves them one by one.
       const item = ctx.kit.data.scanItem;
       expect(item.end - item.start).toBeGreaterThan(40000);
       const partsUsed = new Set();

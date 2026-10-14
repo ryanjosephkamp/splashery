@@ -4,23 +4,100 @@ Prefix `man`. Branch `claude/lane-splat-manual`, PR "Phase Manual: the splat equ
 Tinkerer's Manual". How lanes work: [OPERATING.md](../OPERATING.md). Earlier lessons:
 [history.md](history.md).
 
+## State
+
+**READY (October 4, 2026), Manual r2.** Done: the "What is a 3D Gaussian?" box; three SVG figures
+(light and dark, checked at 390 px); the approximation labels; the worked two-splat example; a
+runnable recipe ("Run it yourself", run in a scratch copy: the windmill loads at
+`embed/index.html?toy=little-windmill` and its sails turn on a tap); the glossary (14 terms);
+"Further reading" (all six links loaded on October 4, 2026); the chapter "What else Splashery does
+now"; the PDF regenerated (44 pages, was 33); `tests/man2.spec.mjs`; screenshots `man2-manual-*`;
+cards on Effect review page 2 (lane `ManualR2`). Not done: Your book's thumbnail was not re-rendered
+(the cover changed only by its date line). Edited outside my files: one regex in `tests/ln.spec.mjs`
+(it allowed only project links; the reading list links to the five papers' pages).
+`tests/ln.spec.mjs` "has a row for every lane" fails on main too (a Codex audit row names GPT-6).
+Proposed credit line (not added): "Written with AI assistance (Claude Sonnet 5.5) and checked by the
+owner."
+
+## r2 (October 4, 2026): the manual for a newcomer, and a fresh PDF
+
+**Start here.** Model: **Sonnet 5.5** (docs are a Sonnet job under the owner's model split of
+September 29, 2026). The Operator (Opus 5.5) checks every technical claim before merge, and the
+owner reviews the pages on his phone. Branch `claude/lane-manual-r2`, one PR titled "Phase Manual
+r2: the Tinkerer's Manual for a newcomer", prefix `man2`, tests in `tests/man2.spec.mjs` if you need
+new ones.
+
+Why: the owner will show the Tinkerer's Manual to his CS master's thesis advisor, someone who knows
+computing but not Gaussian splats. Codex audited the manual for exactly that reader
+(docs/audits/manual-audit-2026-10.md, merged as #244) and fixed 20 factual points in
+`manual/index.html`; its teaching proposals were left for this round.
+
+Do, in this order:
+
+1. **Read the audit's "Proposed teaching additions for the newcomer" and "Capabilities now missing
+   from the manual" sections** and the current `manual/index.html`.
+2. **Add the newcomer material**, in the manual's own style (short sentences, plain words, American
+   English):
+   - the short "What is a 3D Gaussian?" box before Level 1's table, with the audit's distinction
+     between a recipe's placed splats, a trained capture and the one-photo teaching fit;
+   - a glossary (the audit's fourteen terms; each definition one or two sentences, checked against
+     the code it describes);
+   - "Further reading" with the audit's five sources: open each link live and keep only those that
+     load, with authors, title, venue and year exactly as the source page gives them;
+   - the approximation labels where the text describes the renderer ("affine around the center",
+     "sorting uses centers", and the rest the audit lists);
+   - one runnable recipe page: a complete module, its catalog entry, how to serve the folder and the
+     exact URL to open, and what a tap should do. Run it yourself and say so in the PR.
+3. **Three figures as inline SVG** (light and dark, readable at 390 px wide): representation →
+   projection → blend; the three ways splats are made; the twelve copies and the detail budget.
+   Every label must match the code (cite the file and line in an HTML comment beside each figure).
+4. **A short chapter, "What else Splashery does now"**: one paragraph per capability the audit
+   lists. Say plainly which parts are behind the labs switch. Describe only what is on main; never
+   promise future work.
+5. **Regenerate the PDF** with
+   `SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium node tools/manual-pdf.mjs` while
+   `python3 -m http.server 4173 --bind 127.0.0.1` serves the checkout. Check the page count, the
+   figures, the links and the page breaks. Your book's sample opens this PDF
+   (`src/packs/pictures.js`): check that it still opens, and re-render its thumbnail if the cover
+   changed.
+6. **Tests:** `tests/man.spec.mjs` and `tests/ln.spec.mjs` must pass; add `tests/man2.spec.mjs` for
+   the new runnable example and the glossary anchors if useful. Screenshots
+   `man2-manual-390x844.png` and `man2-manual-1440x900.png`.
+7. **Cards:** make a lane record `ManualR2` on Effect review page 2 (title "Manual r2 · The
+   Tinkerer's Manual for a newcomer (Sonnet 5.5)") and post three or four cards with phone-size
+   screenshots (images, not clips) of the new box, a figure, the glossary and the new chapter, and
+   one card with the PDF's first new page.
+
+Rules for this round:
+
+- Every new sentence about how Splashery works must be true of main today. Cite the file and line in
+  your PR for each new technical claim, so the Operator can check them quickly.
+- Don't claim quality or speed you haven't measured.
+- If the manual doesn't say how it was written, don't add a credit line yourself. Propose one in
+  your final message: the owner wants AI-assisted work labeled as such.
+- You own `manual/`, `tools/manual-pdf.mjs` (small changes only), `tests/man2.spec.mjs`, your
+  `man2-*` screenshots and this file. Leave every other file alone, apart from Your book's thumbnail
+  if step 5 needs it.
+- Usage on this account is tight this week: one careful pass, no helpers. Before every push, follow
+  CLAUDE.md's checklist.
+- End with READY:, WORKING: or BLOCKED:. Add a "## State" section at the top of this file and keep
+  it current.
+
 ## Brief
 
 (Written by the Operator on September 28, 2026, from the owner's notes and the Pages into Splats
 plan he accepted the same day; step 3 of ROADMAP.md, "Pictures and pages")
 
-The owner's words: "I'm wondering if we could maybe create, like, a tinkerer operator manual or
-something like that. You don't have to call it that, but it's something kind of like that where if
-somebody knows the math, they could actually, you know, program a Gaussian splat to do something
-using what we've provided." "I'd like to know if there's any way to kind of construct something so
-that people can submit their own, like, Gaussian splat equations and play around with that stuff
-here." "I'd like to know, you know, what the quote-unquote programming language is, and present it
-to people so that they can do this stuff themselves." The accepted plan: "the splat equation toy
-with a public Tinkerer's Manual that is also the book's default PDF."
+The owner's call (his notes are private; the Operator's summary): he wants a tinkerer's operator
+manual, whatever it is called, so that someone who knows the math can program a Gaussian splat to do
+something with what we provide. He wants a way for people to submit their own Gaussian splat
+equations and play with them on the site, and wants the "programming language" explained and
+presented to people so they can do this themselves. The accepted plan: the splat equation toy with a
+public Tinkerer's Manual that is also the book's default PDF.
 
 Build two things:
 
-1. **Splat equation** (`splat-equation`, on the Maths shelf, `labs: true`).
+1. **Splat equation** (`splat-equation`, on the Math shelf, `labs: true`).
    - You type where the splats go and what color they are, as equations in u, v and time t: x(u, v,
      t), y(u, v, t), z(u, v, t), the ranges of u and v, a color (a hue expression, or r, g and b), a
      splat size and a splat count.
@@ -108,13 +185,12 @@ Pictures set it up), except where this brief names another shelf. The owner turn
 `?labs=1` and tries the toys on his phone. The labs switch comes off in a later small Ops change,
 when he says so.
 
-The owner's words (docs/reviews/2026-09-28-pictures/review.md, word for word): "It should all still
-be Gaussian splats, like the rest of it is." "There needs to be enough resolution for it to still
-resemble the original article. It doesn't have to be perfectly legible." "It's okay if we allow the
-toys to be bigger than usual, possibly even larger in file size than usual, in order for the
-resolution and quality to be better." Samples only under CC0, CC BY or public domain, checked on the
-live source page and credited (CREDITS.md and the toy's in-app credit); no logos, brand names or
-insignia. The laptop stays exactly as it is.
+The owner's call (September 28, 2026; his notes are private, the Operator's summary follows): it
+should all still be Gaussian splats, like the rest of the site. There needs to be enough resolution
+for the result to still resemble the original article, though it need not be perfectly legible. Toys
+may be bigger than usual, possibly larger in file size, for better resolution and quality. Samples
+only under CC0, CC BY or public domain, checked on the live source page and credited (CREDITS.md and
+the toy's in-app credit); no logos, brand names or insignia. The laptop stays exactly as it is.
 
 HOW THIS LANE RUNS
 
@@ -212,7 +288,7 @@ Effect review page (lane `Manual`, cards `man-*`).
 - README line: the manual is at `manual/` (and its PDF), linked from the About tab.
 - No exceptions needed in `tests/taps.spec.mjs`.
 - Two other lanes' spec files count toys and fail with this lane's new toy (only the Operator or
-  their lanes edit them): `tests/hta.spec.mjs` expects 149 toys on its shelves (the Maths shelf now
+  their lanes edit them): `tests/hta.spec.mjs` expects 149 toys on its shelves (the Math shelf now
   has one more: 150), and `tests/pic.spec.mjs` ("the Picture lab is a labs toy on its own shelf, and
   only it") expects Picture lab to be the only labs toy (now also `splat-equation`; lanes Books and
   Screens will add more). Suggested: count only the toys that aren't `labs`, and check that every

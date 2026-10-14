@@ -27,16 +27,20 @@ const kinds = (ctx) => {
 };
 
 test.describe("the Live view (no browser)", () => {
-  test("View is an option, and Whole song stays the default", () => {
+  // Lane Live input r3: Live is the default since the owner's review of October 2, 2026 (he
+  // prefers the live view, because the full spectrum barely moves while the song plays);
+  // Whole song is one tap away.
+  test("View is an option, Live is the default and Whole song one choice away", () => {
     const opt = R.options.find((x) => x.key === "view");
-    expect(opt.default).toBe("whole");
-    expect(opt.choices.map((c) => c.id)).toEqual(["whole", "live"]);
-    // an old link or saved scene has no view: it resolves to the whole song
-    expect(resolveOptions(R, {}).view).toBe("whole");
+    expect(opt.default).toBe("live");
+    expect(opt.choices.map((c) => c.id)).toEqual(["live", "whole"]);
+    // a link or saved scene with no view opens in Live; one that saved Whole keeps it
+    expect(resolveOptions(R, {}).view).toBe("live");
+    expect(resolveOptions(R, { view: "whole" }).view).toBe("whole");
   });
 
   test("Whole song builds as before: no fading splats, no caps", async () => {
-    const ctx = await build({});
+    const ctx = await build({ view: "whole" });
     const n = kinds(ctx);
     expect(n[KINDS.fade] || 0).toBe(0);
     expect(n[KINDS.token] || 0).toBe(0);
@@ -86,22 +90,29 @@ test.describe("in the browser", () => {
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("song-landscape"));
     await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song, null, { timeout: 90_000 }); // prettier-ignore
-    // the default is the whole song
-    expect(await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.song.live)).toBe(false); // prettier-ignore
-    await page.evaluate(() => window.__splashery.app.setToyOptions({ view: "live" }));
-    await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song?.live === true, null, { timeout: 90_000 }); // prettier-ignore
+    // the default is Live (lane Live input r3)
+    expect(await page.evaluate(() => window.__splashery.player.proc.ctx.kit.data.song.live)).toBe(true); // prettier-ignore
+    // Live r7: the land grows as the song plays and what has played slides
+    // back from the line at the front (the look part's offset falls).
     const z = () =>
-      page.evaluate(() => window.__splashery.player.motion.out?.body?.offset?.[2] ?? 0);
-    const still = await z();
+      page.evaluate(() => window.__splashery.player.motion.out?.parts?.look?.offset?.[2] ?? 0);
+    await page.waitForFunction(() => window.__splashery.player.motion.out?.parts?.look, null, { timeout: 90_000 }); // prettier-ignore
+    // (Before anything is heard the land rests where it was built: no slide.)
+    expect(await z()).toBe(0);
     await page.evaluate(() => window.__splashery.app.act()); // play
-    await page.waitForFunction(() => window.__splashery.player.motion.out?.body?.offset?.[2] > 0.02, null, { timeout: 90_000 }); // prettier-ignore
+    await page.waitForFunction(() => (window.__splashery.player.motion.out?.parts?.look?.offset?.[2] ?? 0) > 0, null, { timeout: 90_000 }); // prettier-ignore
+    const still = await z();
+    await page.waitForFunction((s) => (window.__splashery.player.motion.out?.parts?.look?.offset?.[2] ?? s) < s - 0.02, still, { timeout: 90_000 }); // prettier-ignore
     const moved = await z();
-    expect(moved).toBeGreaterThan(still);
+    expect(moved).toBeLessThan(still);
     await page.evaluate(() => window.__splashery.app.act()); // pause
     await page.waitForTimeout(1500);
     const a = await z();
     await page.waitForTimeout(1500);
     expect(await z()).toBeCloseTo(a, 5); // paused: a still landscape
+    // Whole song is one choice away, and builds without the Live view's fading cells
+    await page.evaluate(() => window.__splashery.app.setToyOptions({ view: "whole" }));
+    await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song?.live === false, null, { timeout: 90_000 }); // prettier-ignore
     expect(errors).toEqual([]);
   });
 
@@ -117,7 +128,8 @@ test.describe("in the browser", () => {
       await page.evaluate(() => window.__splashery.app.setToyOptions({ view: "live" }));
       await page.waitForFunction(() => window.__splashery.player.proc?.ctx?.kit?.data?.song?.live === true, null, { timeout: 90_000 }); // prettier-ignore
       await page.evaluate(() => window.__splashery.app.act());
-      await page.waitForFunction(() => window.__splashery.player.motion.out?.body?.offset?.[2] > 0.1, null, { timeout: 120_000 }); // prettier-ignore
+      // (Live r7: the land grows as it plays; the look part slides back.)
+      await page.waitForFunction(() => window.__splashery.player.motion.out?.parts?.look?.offset?.[2] < 2.6, null, { timeout: 120_000 }); // prettier-ignore
       await page.evaluate(() => window.__splashery.app.act());
       await page.waitForTimeout(1200);
       await page.screenshot({ path: `tests/screenshots/sng-live-${w}x${h}.png` });

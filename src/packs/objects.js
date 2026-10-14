@@ -11,8 +11,15 @@ import {
   quatFromTo,
   quatRotate,
 } from "../kit.js";
-import { evenBox, evenCylinder, evenEllipsoid, evenTube } from "./even.js";
+import {
+  evenBox,
+  evenCylinder,
+  evenEllipsoid,
+  evenTorus as evenTorusOut,
+  evenTube,
+} from "./even.js";
 import { inked } from "../font.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H3
 
 const easeInOut = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
 
@@ -30,6 +37,79 @@ const len = (a) => Math.hypot(a[0], a[1], a[2]);
 const unit = (a) => mul(a, 1 / (len(a) || 1));
 const keep = (c, size) => ({ c, keep: true, size });
 const ease3 = (x) => (x < 0.5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2);
+// The music box's tune by hand (lane Hands engine B): one note for each
+// click of the crank (12 a turn), as the tap plays it ("-" a rest).
+const MUSIC_TUNE = "E6 D6 C6 D6 E6 E6 E6 - D6 D6 D6 - E6 G6 G6 -".split(" ");
+const MUSIC_CLICKS = 12;
+// The dancer's turn by hand, and where her splats were last sorted: splats
+// sort in the pose they were built in, so a turned dancer would draw her
+// back (and her turntable's underside) over her front and seem to tip back.
+const MUSIC_HAND = { a: null, lid: 0, slot: null, again: false };
+// Lane Hands-on H3: the alarm clock set by hand. `a0` and `h0` are the
+// minute and hour hands' angles when the minute hand was taken (its dial's
+// start), so the hour hand follows through the clock's gears.
+const CLOCK_HAND = { a0: 0, h0: 0 };
+// Lane Hands-on H3: the gift box's lid by hand. `off` is how far the lid
+// is from its place (recipe units, from Hands-on); `pop` the star's spring
+// (its height 0..1 and speed), stepped by drive() on the toy's clock.
+const GIFT_HAND = { off: 0, pop: 0, v: 0, t: null };
+const GIFT_LID = { type: "box", half: [0.535, 0.08, 0.535] };
+const GIFT_BOX = { type: "box", half: [0.5, 0.39, 0.5] };
+// Lane Hands-on H3: the umbrella's runner, the sleeve on the shaft that
+// opens it. Each rib is held up by a stretcher of fixed length from the
+// runner to a point on the rib (as on a real umbrella), so the runner's
+// height and the canopy's fold go together: `umbrellaRunner(th)` is the
+// runner's move (recipe units, from open) with the panels turned down by
+// th, and `umbrellaFold(off)` the turn for a runner moved by off.
+const UMB = (() => {
+  const R = 1.05;
+  const top = 0.72;
+  const droop = 0.42;
+  const tt = 0.45;
+  const r0 = tt * R * 0.93;
+  const dy0 = -droop * Math.pow(tt, 1.7) + 0.06 * tt * (1 - tt) - 0.012;
+  const ry = -0.05; // (low on the stick, in sight below the canopy's rim)
+  const L = Math.hypot(r0, top + dy0 - ry);
+  return { R, top, droop, r0, dy0, ry, L, shut: 1.18 };
+})();
+function umbrellaRunner(th) {
+  const { r0, dy0, top, L, ry } = UMB;
+  const r = r0 * Math.cos(th) + dy0 * Math.sin(th);
+  const y = top - r0 * Math.sin(th) + dy0 * Math.cos(th);
+  return y - Math.sqrt(Math.max(0, L * L - r * r)) - ry;
+}
+function umbrellaFold(off) {
+  let lo = 0;
+  let hi = UMB.shut;
+  for (let i = 0; i < 24; i++) {
+    const m = (lo + hi) / 2;
+    if (umbrellaRunner(m) > off) lo = m;
+    else hi = m;
+  }
+  return (lo + hi) / 2;
+}
+// Lane Hands-on H3: the desk fan's head tilted by hand; drive() keeps its
+// swing and the blades' spin here, so the tilt rides on them.
+const FAN_HAND = { yaw: 0, spin: 0 };
+// Lane Hands-on H3: the desk lamp's arms bent by hand. Its joints (the
+// base's, the elbow's and the head's) as built, the light's direction and
+// the pool of light it throws on the desk; `light` is the Light control.
+const LAMP = (() => {
+  const base = [0, 0.06, -0.1];
+  const elbow = [-0.05, 0.9, -0.35];
+  const joint = [0.42, 1.22, -0.05];
+  const dir = unit([0.35, -1, 0.35]);
+  const head = add(joint, mul(dir, 0.14));
+  const bulbAt = add(head, mul(dir, 0.07));
+  const pool = add(bulbAt, mul(dir, (0 - bulbAt[1]) / dir[1]));
+  return { base, elbow, joint, dir, head, bulbAt, pool };
+})();
+const LAMP_HAND = { light: 1 };
+// Lane Hands-on H3: the potion bottle's cork by hand. `off` is how far the
+// cork is from its place; `t0` when it popped (drive() starts the puff).
+const POTION_HAND = { off: 0, out: false, t0: -1e9 };
+const POTION_CORK = { type: "ellipsoid", r: [0.12, 0.1, 0.12] };
+const POTION_FLASK = { type: "sphere", r: 0.5 };
 const easeOutBack = (x) => {
   const k = 1.70158;
   return 1 + (k + 1) * Math.pow(x - 1, 3) + k * Math.pow(x - 1, 2);
@@ -62,7 +142,7 @@ function evenPoint(i, dims) {
   return out;
 }
 
-// Baked light from above, front and right, with a sheen towards the viewer.
+// Baked light from above, front and right, with a sheen toward the viewer.
 const LIGHT = unit([0.4, 0.85, 0.55]);
 const VIEW = unit([0.5, 0.35, 0.8]);
 const HALF = unit(add(LIGHT, VIEW));
@@ -335,7 +415,7 @@ function segDist(x, y, s) {
   const t = clamp(((x - s[0]) * dx + (y - s[1]) * dy) / (dx * dx + dy * dy || 1), 0, 1);
   return Math.hypot(x - s[0] - dx * t, y - s[1] - dy * t);
 }
-// Distance from (x, y) to a number drawn centred at the origin, 2 units tall.
+// Distance from (x, y) to a number drawn centered at the origin, 2 units tall.
 function textDist(str, x, y) {
   const adv = 1.5;
   const w = (str.length - 1) * adv + 1;
@@ -367,7 +447,7 @@ const BOOK = { W: 1, H: 1.36, ct: 0.045, leaves: 10, lt: 0.013 };
 const STORY =
   "ONCE UPON A TIME, IN A TOY BOX AT THE END OF A LONG HALL, THERE LIVED A SMALL " +
   "SPLAT CALLED PIP. PIP WAS NOT A BALL AND NOT A BLOCK. PIP WAS A SOFT LITTLE " +
-  "CLOUD OF COLOUR THAT COULD BE ANYTHING AT ALL. ON MONDAY PIP WAS A RED APPLE. " +
+  "CLOUD OF COLOR THAT COULD BE ANYTHING AT ALL. ON MONDAY PIP WAS A RED APPLE. " +
   "ON TUESDAY PIP WAS A BLUE WHALE. ON WEDNESDAY PIP TRIED TO BE THE MOON, AND " +
   "EVERY TOY IN THE BOX CAME TO LOOK. WHAT WILL YOU BE TOMORROW? ASKED THE OLD " +
   "TEDDY BEAR. PIP THOUGHT FOR A WHILE. I THINK, SAID PIP, I WILL BE A STORY. " +
@@ -392,7 +472,7 @@ BOOK.T = BOOK.pb + 2 * BOOK.ct;
 
 const LAPTOP = { W: 1.5, D: 1.0, hb: 0.06, hl: 0.035, open: 1.85 };
 
-// The laptop's keys: id (what it types), label, centre and size on the deck.
+// The laptop's keys: id (what it types), label, center and size on the deck.
 const LAPTOP_KEYS = (() => {
   const rows = [
     ["1234567890", [["DEL", 0.16]]],
@@ -588,6 +668,28 @@ export const RECIPES = {
     options: [{ key: "wood", label: "Wood", type: "color", default: "#8a5a2b" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 0, ease: 1.1 }],
     action: { key: "open", label: "Open or close" },
+    // Hands-on (lane Hands engine B): lift the lid on its hinge. Let go
+    // past upright and it stays open; lower, it drops shut with a thud.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "lid",
+          pivot: [0, 0.1, -0.37],
+          axis: [-1, 0, 0],
+          min: 0,
+          max: 1.95,
+          bounce: 0.15,
+          start: (c) => 1.95 * easeInOut(c.open),
+          pos: [0, 0.24, 0],
+          pick: [0.66, 0.24, 0.44],
+          sound: (ev, vol) =>
+            ev.v < 1
+              ? [{ voice: "thud", f: 90, vol }, { voice: "wood", f: 220, decay: 0.5, vol: vol * 0.6 }] // prettier-ignore
+              : { voice: "wood", f: 300, decay: 0.4, vol: vol * 0.5 },
+        },
+      ],
+    },
     drive(t, c, out) {
       const o = easeInOut(c.open);
       out.parts.lid = { angle: -1.95 * o };
@@ -602,25 +704,31 @@ export const RECIPES = {
       const gold = "#d4a63c";
       const planks = (c) => {
         const band = Math.abs((((c.p[1] + 1) * 7.5) % 1) - 0.5) > 0.46;
-        const grain = c.fbm(c.p[0] * 3, c.p[1] * 30, c.p[2] * 3);
-        return shade(mix(wood, shade(wood, 0.6), 0.5 + 0.5 * grain), band ? 0.55 : 1);
+        const grain = c.fbm(c.p[0] * 2, c.p[1] * 12, c.p[2] * 2);
+        return shade(mix(wood, shade(wood, 0.72), 0.5 + 0.35 * grain), band ? 0.55 : 1);
       };
       // The body: an open-topped box (the top face is left out).
-      k.add(k.box(W, H, D), {
+      k.add(evenBox(W, H, D), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, -0.2, 0],
         flat: 0.2,
         color: (c) => (c.s.face === 2 ? null : planks(c)),
       });
       // Metal bands and corners.
       for (const x of [-0.36, 0.36]) {
-        k.add(k.box(0.08, H + 0.02, D + 0.02), {
+        k.add(evenBox(0.08, H + 0.02, D + 0.02), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, -0.2, 0],
           flat: 0.2,
           weight: 1.5,
           color: (c) =>
             c.s.face === 2
               ? null
-              : mix(gold, "#8a6a1f", 0.3 + 0.3 * c.fbm(c.p[0] * 20, c.p[1] * 20, 0)),
+              : lit(mix(gold, "#8a6a1f", 0.25 + 0.12 * c.fbm(c.p[0] * 6, c.p[1] * 6, 0)), c.n),
         });
       }
       // The lid: a half cylinder along X, hinged at the back edge.
@@ -633,7 +741,7 @@ export const RECIPES = {
         },
         { grid: 48, flip: true },
       );
-      k.add(arc, { part: lid, flat: 0.2, color: planks });
+      k.add(arc, { even: true, opacity: 1, jitter: 0.012, part: lid, flat: 0.2, color: planks });
       for (const x of [-0.36, 0.36]) {
         const strap = k.param(
           (u, v) => {
@@ -643,7 +751,15 @@ export const RECIPES = {
           },
           { grid: 24, flip: true },
         );
-        k.add(strap, { part: lid, flat: 0.2, weight: 1.5, color: gold });
+        k.add(strap, {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
+          part: lid,
+          flat: 0.2,
+          weight: 1.5,
+          color: gold,
+        });
       }
       for (const side of [-1, 1]) {
         const end = k.param(
@@ -653,24 +769,33 @@ export const RECIPES = {
           },
           { grid: 24 },
         );
-        k.add(end, { part: lid, flat: 0.2, color: planks });
+        k.add(end, { even: true, opacity: 1, jitter: 0.012, part: lid, flat: 0.2, color: planks });
       }
       // The lid's flat underside, so the open lid is not hollow.
-      k.add(k.box(W, 0.01, D), {
+      k.add(evenBox(W, 0.01, D), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, top + 0.005, 0],
         part: lid,
         flat: 0.2,
         color: shade(wood, 0.7),
       });
       // The lock plate on the front of the lid.
-      k.add(k.box(0.16, 0.2, 0.03), {
+      k.add(evenBox(0.16, 0.2, 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, top - 0.02, D / 2 + 0.01],
         part: lid,
         flat: 0.2,
         weight: 2,
         color: gold,
       });
-      k.add(k.box(0.12, 0.08, 0.03), {
+      k.add(evenBox(0.12, 0.08, 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, top - 0.16, D / 2 + 0.01],
         flat: 0.2,
         weight: 2,
@@ -716,8 +841,21 @@ export const RECIPES = {
     options: [{ key: "color", label: "Cover", type: "color", default: "#7a2432" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 2 }],
     action: { key: "open", label: "Open or close" },
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const o = c.open;
+      // Splats sort in the pose they were built in (the book closed), so a
+      // turned leaf would draw its paper over its words, and the turned
+      // cover and leaves over the pages they lie on. They are sorted where
+      // they stand on the first frame and every hundredth of a turn, and
+      // again on the frame after (the sort uses the pose the frame starts
+      // with) (lane Sharpness A).
+      const d = info?.data;
+      const slot = Math.round(o * 100);
+      if (d && (slot !== d.sortSlot || d.sortAgain)) {
+        d.sortAgain = slot !== d.sortSlot;
+        d.sortSlot = slot;
+        out.resortPose = true;
+      }
       const lift = [0, 0, 0, 0, 0, 0, 0, 0.012, 0.03, 0.06];
       const cover = Math.PI * ease3(window01(o, 0, 0.42));
       out.parts.cover = { angle: cover };
@@ -744,6 +882,7 @@ export const RECIPES = {
     },
     build(k, o) {
       const { W, H, ct, leaves, lt, T } = BOOK;
+      k.data = {}; // drive() keeps its sort state here
       const cover = o.color;
       const gold = "#d9b45a";
       const paper = "#f6efdf";
@@ -762,7 +901,7 @@ export const RECIPES = {
       // Words on a page. x is measured from the spine, z across the page
       // (the top of the page is at -z). A page that faces down while the
       // book is closed reads the right way once its leaf has turned over, so
-      // its lines run from the outer edge towards the spine.
+      // its lines run from the outer edge toward the spine.
       const PX = 0.0082; // one font pixel
       const margin = 0.1;
       const perLine = Math.floor((W - 2 * margin) / (6 * PX));
@@ -784,7 +923,7 @@ export const RECIPES = {
         return inked(page.lines, s, t);
       };
       const ink = "#2f2a26";
-      const pageCol = (c, x, z, seed, picture = false, flipped = false) => {
+      const pageCol = (c, x, z, seed, picture = false, flipped = false, dots = false) => {
         if (
           picture &&
           Math.abs(x) > 0.18 &&
@@ -802,7 +941,9 @@ export const RECIPES = {
           const edge = Math.min(u, 1 - u, v, 1 - v);
           return keep(edge < 0.02 ? "#5b4a3a" : col);
         }
-        if (text(x, z, seed, flipped, picture)) return keep(ink, 0.8);
+        // Pages seen only mid-turn have few, large splats: their words are a
+        // soft gray, so they read as lines of print rather than black blots.
+        if (!dots && text(x, z, seed, flipped, picture)) return keep(mix(ink, paper, 0.45), 0.8);
         // A turned page is lit as it lies once turned over.
         const n = flipped ? [-c.n[0], -c.n[1], c.n[2]] : c.n;
         return lit(shade(paper, 0.985 + 0.015 * c.noise(x * 12, z * 12, seed)), n, {
@@ -815,7 +956,7 @@ export const RECIPES = {
       k.add(roundBox(W, ct, H, 0.012), {
         pos: [W / 2, ct / 2, 0],
         flat: 0.15,
-        weight: 1.6,
+        weight: 2.4,
         even: true,
         jitter: 0.01,
         size: 0.8,
@@ -849,7 +990,7 @@ export const RECIPES = {
         pos: [W / 2, T - ct / 2, 0],
         part: coverPart,
         flat: 0.15,
-        weight: 1.6,
+        weight: 4,
         even: true,
         jitter: 0.01,
         size: 0.8,
@@ -900,10 +1041,10 @@ export const RECIPES = {
       k.add(evenBox(PW, block, PH), {
         pos: [PW / 2 + 0.005, ct + block / 2, 0],
         flat: 0.15,
-        weight: 1.8,
+        weight: 2.4,
         even: true,
         jitter: 0,
-        size: 1.1,
+        size: 1,
         color: (c) => {
           if (c.s.face === 2 || c.s.face === 3) return null;
           if (c.s.face === 1) return shade(paper, 0.8);
@@ -917,8 +1058,43 @@ export const RECIPES = {
         even: true,
         jitter: 0.01,
         size: 1.25,
-        color: (c) => pageCol(c, c.p[0], c.p[2], 3, true),
+        color: (c) => pageCol(c, c.p[0], c.p[2], 3, true, false, true),
       });
+      // The words on the two pages seen while the book lies open (lane
+      // Sharpness A): every font pixel is a 2 x 2 grid of small ink dots
+      // laid exactly on it, just off the paper, like the laptop's keys
+      // (random splats on the page blurred the letters).
+      const inkDots = (seed, picture, flipped, y, part) => {
+        const page = pageText(seed, picture);
+        const dots = [];
+        page.lines.forEach((line, r) => {
+          for (let s0 = 0; s0 < 6 * line.length; s0++)
+            for (let gy = 0; gy < 7; gy++) {
+              const t0 = r * 10 + gy;
+              if (!inked(page.lines, s0 + 0.5, t0 + 0.5)) continue;
+              for (let a2 = 0; a2 < 2; a2++)
+                for (let b2 = 0; b2 < 2; b2++) {
+                  const sp = (s0 + (a2 + 0.5) / 2) * PX;
+                  const ax = flipped ? W - margin - sp : margin + sp;
+                  const z = (t0 + page.skip * 10 + (b2 + 0.5) / 2) * PX - H / 2 + 0.12;
+                  dots.push([ax, y, z]);
+                }
+            }
+        });
+        const r = PX * 0.6;
+        k.cloud({ count: dots.length, pattern: false, part }, (rand, j, n) => {
+          const d = dots[Math.floor((j * dots.length) / n)];
+          const m = Math.sqrt(Math.max(1, dots.length / n));
+          return {
+            p: d,
+            scales: [r * m, r * 0.15, r * m],
+            quat: [0, 0, 0, 1],
+            color: ink,
+            opacity: 1,
+          };
+        });
+      };
+      inkDots(3, true, false, ct + block + 0.0012, undefined);
       // Leaves that flip one after another.
       for (let i = 0; i < leaves; i++) {
         const part = k.part("leaf" + i, { pivot, axis: [0, 0, 1] });
@@ -948,8 +1124,10 @@ export const RECIPES = {
             even: true,
             jitter: 0.01,
             size: 1.25,
-            color: (c) => pageCol(c, c.p[0], c.p[2], i * 2 + (up < 0 ? 1 : 0), false, up < 0),
+            color: (c) =>
+              pageCol(c, c.p[0], c.p[2], i * 2 + (up < 0 ? 1 : 0), false, up < 0, shown),
           });
+          if (shown) inkDots(i * 2 + 1, false, true, y + up * lt * 0.4 - 0.0012, part);
         }
       }
       // The left pile's edges, shown once the leaves under the top one hide.
@@ -1047,7 +1225,7 @@ export const RECIPES = {
     drive(t, c, out, info) {
       const st = LAPTOP_STATE;
       st.open = c.open > 0.9;
-      // Modelled open; closing turns the lid back down onto the keys.
+      // modeled open; closing turns the lid back down onto the keys.
       const a = LAPTOP.open * (1 - ease3(c.open));
       out.parts.lid = { angle: a };
       out.parts.bezel = { angle: a, visible: smoothstep(0.02, 0.3, c.open) };
@@ -1078,14 +1256,14 @@ export const RECIPES = {
     build(k, o) {
       const alu = o.color;
       const { W, D, hb, hl } = LAPTOP;
-      // Bead-blasted aluminium: smooth, lit, a faint soft grain (no speckle).
+      // Bead-blasted aluminum: smooth, lit, a faint soft grain (no speckle).
       const metal = (c) => {
         const grain = 0.985 + 0.02 * c.noise(c.p[0] * 20, c.p[1] * 20, c.p[2] * 20);
         return lit(shade(alu, grain), c.n, { amb: 0.66, dif: 0.4, spec: 0.35, pow: 20 });
       };
       const shell = { flat: 0.15, even: true, size: 1.1, jitter: 0.006 };
       // Base; the deck with the keys is its own part so it can hide under
-      // the closed lid (splats are ordered by their modelled positions).
+      // the closed lid (splats are ordered by their modeled positions).
       // Thin sides get small, dense splats so the edges stay crisp.
       k.add(roundBox(W, hb, D, 0.02, { bottom: false, top: false }), {
         ...shell,
@@ -1118,7 +1296,7 @@ export const RECIPES = {
         },
       });
       // Key caps: dark and raised. Each one goes down when pressed
-      // (behaviour "key").
+      // (behavior "key").
       const legendDots = [];
       LAPTOP_KEYS.forEach((key, i) => {
         const legend = key.label;
@@ -1179,7 +1357,7 @@ export const RECIPES = {
           params: [dot.key, 0],
         };
       });
-      // The lid, hinged along the back edge and modelled standing open.
+      // The lid, hinged along the back edge and modeled standing open.
       const pivot = [0, hb + hl / 2, -D / 2 + 0.01];
       const q = quatAxisAngle([1, 0, 0], -LAPTOP.open);
       const place = (p) => add(pivot, quatRotate(q, sub(p, pivot)));
@@ -1227,7 +1405,7 @@ export const RECIPES = {
           return keep(col, 0.35 + 0.65 * clamp(edge / 0.03, 0, 1));
         },
       });
-      // The screen: every splat shows the live picture (behaviour "screen").
+      // The screen: every splat shows the live picture (behavior "screen").
       k.add(quad(SW, SD, -1), {
         pos: place([0, lidY - hl / 2 - 0.002, 0.005]),
         quat: q,
@@ -1250,8 +1428,67 @@ export const RECIPES = {
     options: [{ key: "wood", label: "Wood", type: "color", default: "#8a4526" }],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.4 }],
     action: { key: "open", label: "Open or close" },
+    // Hands-on (lane Hands engine B): lift the lid on its hinge, and turn
+    // the crank by dragging round it: each click of the crank plays the
+    // tune's next note, and the dancer turns with it.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "lid",
+          pivot: [0, 0.5, -0.38],
+          axis: [-1, 0, 0],
+          min: 0,
+          max: 1.95,
+          bounce: 0.15,
+          start: (c) => 1.95 * ease3(c.open),
+          pos: [0, 0.55, 0],
+          pick: [0.6, 0.12, 0.42],
+          sound: (ev, vol) => (ev.v < 1 ? { voice: "wood", f: 450, decay: 1.1, vol: vol * 0.9 } : { voice: "wood", f: 600, decay: 0.4, vol: vol * 0.4 }), // prettier-ignore
+          // The lid's top hides once it stands open (the mirror shows), and
+          // the dancer rises out of the box as it opens.
+          also: (a, parts) => {
+            if (parts.lid) parts.lidTop = { ...parts.lid, visible: 1 - smoothstep(1.15, 1.6, a) };
+            parts.dancer = { ...parts.dancer, offset: [0, -0.34 * (1 - smoothstep(0.7, 1.95, a)), 0] }; // prettier-ignore
+            // The floating notes only while it stands open.
+            if (a < 1.3) NOTE_PATHS.forEach((n, i) => (parts["note" + i] = { visible: 0 }));
+            MUSIC_HAND.lid = a;
+          },
+        },
+        {
+          type: "dial",
+          part: "crank",
+          pivot: [0.58, 0.25, 0],
+          axis: [1, 0, 0],
+          detents: MUSIC_CLICKS,
+          drag: 2.5,
+          // (Small on a phone: a press on the box's side near it finds it.)
+          pos: [0.6, 0.3, 0],
+          pick: [0.12, 0.22, 0.24],
+          sound: (ev) => {
+            if (ev.kind !== "detent") return null;
+            const n = MUSIC_TUNE[((ev.n % MUSIC_TUNE.length) + MUSIC_TUNE.length) % MUSIC_TUNE.length]; // prettier-ignore
+            return n === "-" ? null : { voice: "tine", f: n, vol: 0.7 };
+          },
+          also: (a, parts) => {
+            parts.dancer = { ...parts.dancer, angle: 0.5 * a };
+            MUSIC_HAND.a = 0.5 * a;
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
       const m = mem(c);
+      // Turned by hand (Hands-on): sorted again every quarter radian she (or
+      // the lid) turns, and once more on the frame after (lane Hands engine B).
+      if (MUSIC_HAND.a !== null) {
+        const slot = Math.round(MUSIC_HAND.a / 0.25) * 64 + Math.round(MUSIC_HAND.lid / 0.25);
+        if (slot !== MUSIC_HAND.slot || MUSIC_HAND.again) {
+          MUSIC_HAND.again = slot !== MUSIC_HAND.slot;
+          MUSIC_HAND.slot = slot;
+          out.resortPose = true;
+        }
+      }
       const o = ease3(c.open);
       out.parts.lid = { angle: -1.95 * o };
       out.parts.lidTop = { angle: -1.95 * o, visible: 1 - smoothstep(0.55, 0.8, c.open) };
@@ -1277,18 +1514,25 @@ export const RECIPES = {
       const H = 0.5;
       const D = 0.76;
       const top = H;
+      // Polished wood like the Enigma machine's case (lane Sharpness A):
+      // broad, soft grain bands and a sheen, no fine noise.
       const grain = (c) => {
-        const g = c.fbm(c.p[0] * 3, c.p[1] * 26, c.p[2] * 3);
-        return lit(mix(wood, shade(wood, 0.62), 0.5 + 0.45 * g), c.n, {
-          amb: 0.66,
-          dif: 0.42,
-          spec: 0.35,
-        });
+        const g =
+          0.5 +
+          0.5 * Math.sin(c.p[1] * 22 + c.p[2] * 9 + c.p[0] * 4 + Math.sin(c.p[0] * 3.1) * 1.4);
+        return keep(
+          lit(mix(wood, shade(wood, 0.84), g), c.n, {
+            amb: 0.66,
+            dif: 0.42,
+            spec: 0.3,
+          }),
+        );
       };
       k.add(roundBox(W, H, D, 0.03, { top: false, bottom: false, even2d: true }), {
         even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
+        weight: 1.8,
         pos: [0, H / 2, 0],
         flat: 0.15,
         color: (c) => {
@@ -1304,7 +1548,7 @@ export const RECIPES = {
         jitter: 0.015,
         pos: [0, H / 2 + 0.03, 0],
         flat: 0.3,
-        color: (c) => (c.s.face === 2 ? null : shade(velvet, 0.7 + 0.25 * c.rand())),
+        color: (c) => (c.s.face === 2 ? null : shade(velvet, 0.78 + 0.08 * c.rand())),
       });
       // The lid with a mirror inside, hinged at the back. Its top is a part
       // of its own that hides while the lid stands open, so the mirror shows
@@ -1314,7 +1558,8 @@ export const RECIPES = {
       k.add(roundBox(W, 0.1, D, 0.03, { top: false, even2d: true }), {
         even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
+        weight: 1.8,
         pos: [0, top + 0.05, 0],
         part: lid,
         flat: 0.15,
@@ -1329,8 +1574,10 @@ export const RECIPES = {
         },
       });
       k.add(quad(W - 0.06, D - 0.06), {
+        even: true,
         opacity: 1,
-        jitter: 0.015,
+        jitter: 0.008,
+        weight: 1.8,
         pos: [0, top + 0.1, 0],
         part: lidTop,
         flat: 0.15,
@@ -1481,6 +1728,38 @@ export const RECIPES = {
     ],
     controls: [{ key: "ring", label: "Ring", type: "pulse", ease: 2.2 }],
     action: { key: "ring", label: "Ring the bell" },
+    // Hands-on (lane Hands-on H3): drag round the face to set the time. The
+    // minute hand turns under the finger, clicking at each minute, and the
+    // hour hand follows a twelfth as fast; the second hand keeps ticking.
+    // (Twelve turns either way at most; ↺ winds back to the real time.)
+    hands: {
+      joints: (d) => [
+        {
+          type: "dial",
+          part: "minute",
+          pivot: [0, 0, 0],
+          axis: [0, 0, 1],
+          min: -13 * TAU,
+          max: 13 * TAU,
+          detents: 60,
+          drag: 9,
+          start: () => {
+            const [hh, mm, ss] = clockTime(new Date(), d?.zone);
+            const m = mm + ss / 60;
+            CLOCK_HAND.a0 = (-m / 60) * TAU;
+            CLOCK_HAND.h0 = (-((hh % 12) + m / 60) / 12) * TAU;
+            return CLOCK_HAND.a0;
+          },
+          pos: [0, 0, 0.2],
+          pick: [0.74, 0.74, 0.3],
+          sound: (ev, vol) =>
+            ev.kind === "detent" ? { voice: "click", f: 2400, decay: 0.03, vol: 0.12 + 0.2 * Math.min(1, vol) } : null, // prettier-ignore
+          also: (a, parts) => {
+            parts.hour = { angle: CLOCK_HAND.h0 + (a - CLOCK_HAND.a0) / 12 };
+          },
+        },
+      ],
+    },
     drive(t, c, out, info) {
       // The hands show the real time, in this device's zone or the one
       // picked in the Toy tab.
@@ -1589,7 +1868,7 @@ export const RECIPES = {
           return keep(shade(dial, 0.97 + 0.03 * (1 - r)));
         },
       });
-      // Hands (parts turning about the centre). Each is a thin, flat blade
+      // Hands (parts turning about the center). Each is a thin, flat blade
       // with a round boss, stacked on a visible arbor a few millimetres apart
       // like a real clock's: high enough above the dial that the dial's big,
       // flat splats never sort in front of a hand (lane Fix4).
@@ -1607,7 +1886,7 @@ export const RECIPES = {
           pattern: false,
           color: (c) => keep(lit(col, [0, 0, 1], { spec: 0.4 })),
         };
-        // The blade: full width at the centre, tapering to a point.
+        // The blade: full width at the center, tapering to a point.
         const blade = k.param(
           (u, v) => {
             const y = -back + v * (len + back);
@@ -1725,6 +2004,10 @@ export const RECIPES = {
   },
 
   "gift-box": {
+    // Lane Any pose: turned over in Hands-on, its rising splats keep to the
+    // toy's own frame (the confetti bursts out of the open lid), not the
+    // world's up.
+    gravity: false,
     alive: true,
     options: [
       { key: "paper", label: "Paper", type: "color", default: "#e8435a" },
@@ -1732,15 +2015,50 @@ export const RECIPES = {
     ],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 0, ease: 1 }],
     action: { key: "open", label: "Open the present" },
+    // Hands-on (lane Hands-on H3): lift the lid off and the star springs up
+    // out of the box, with the confetti; set the lid back on (near its
+    // place, or point at its place) and it clicks home, pushing the star
+    // back down. The box itself stays put, so the lid can rest on it.
+    hands: {
+      floor: 0,
+      pieces: () => [
+        { part: "lid", pos: [0, 0.81, 0], pivot: [0, 0.81, -0.5], solid: GIFT_LID, points: surfacePoints(GIFT_LID, 1), pick: [0.6, 0.24, 0.6], mass: 0.3, friction: 0.7, restitution: 0.2 }, // prettier-ignore
+        // The box: ground for the lid, never picked up.
+        { pos: [0, 0.39, 0], solid: GIFT_BOX, pick: [1e-3, 1e-3, 1e-3] },
+      ],
+      joints: [
+        {
+          type: "socket",
+          part: "lid",
+          snap: 0.3,
+          sound: () => ({ voice: "hollow", f: 180, decay: 0.2, vol: 0.5 }),
+          also: (v, parts) => {
+            const o = parts.lid?.offset;
+            GIFT_HAND.off = o ? len(o) : 0;
+          },
+        },
+      ],
+      sound: (hit, vol) => ({ voice: "hollow", f: 140, decay: 0.15, vol: vol * 0.7 }),
+    },
     drive(t, c, out) {
       const o = c.open;
+      // By hand: the star springs up once the lid is off, and back down as
+      // it goes on (a spring stepped on the toy's clock; lane Hands-on H3).
+      const g = GIFT_HAND;
+      const dt = g.t === null ? 0 : clamp(t - g.t, 0, 0.05);
+      g.t = t;
+      const want = smoothstep(0.35, 0.6, g.off);
+      g.v += (90 * (want - g.pop) - 9 * g.v) * dt;
+      g.pop += g.v * dt;
+      if (want === 0 && g.pop < 0.002 && Math.abs(g.v) < 0.01) g.pop = g.v = 0;
       const up = easeOutBack(clamp(o / 0.7, 0, 1));
       out.parts.lid = { offset: [0, 0.55 * up, -0.45 * ease3(o)], angle: -0.9 * ease3(o) };
+      const star = Math.max(easeOutBack(window01(o, 0.25, 1)), g.pop);
       out.parts.star = {
-        offset: [0, 0.82 * easeOutBack(window01(o, 0.25, 1)), 0],
-        angle: 0.5 * Math.sin(t * 1.2) * o,
+        offset: [0, 0.82 * star, 0],
+        angle: 0.5 * Math.sin(t * 1.2) * Math.max(o, clamp(g.pop, 0, 1)),
       };
-      out.parts.confetti = { visible: smoothstep(0.25, 0.6, o) };
+      out.parts.confetti = { visible: Math.max(smoothstep(0.25, 0.6, o), smoothstep(0.3, 0.8, g.pop)) }; // prettier-ignore
       out.amount = 0.6 + 0.6 * o;
     },
     build(k, o) {
@@ -1769,12 +2087,18 @@ export const RECIPES = {
           spec: 0.18,
         });
       };
-      k.add(roundBox(S, H, S, 0.025, { top: false, bottom: false }), {
+      k.add(roundBox(S, H, S, 0.025, { top: false, bottom: false, even2d: true }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, H / 2, 0],
         flat: 0.15,
         color: (c) => wrap(c, false),
       });
-      k.add(k.box(S - 0.03, H - 0.02, S - 0.03), {
+      k.add(evenBox(S - 0.03, H - 0.02, S - 0.03), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, H / 2 + 0.01, 0],
         flat: 0.2,
         color: (c) => (c.s.face === 2 ? null : shade(paper, 0.45)),
@@ -1782,7 +2106,10 @@ export const RECIPES = {
       // The lid, with the bow on top.
       const lidY = H + 0.03;
       const lid = k.part("lid", { pivot: [0, lidY, -S / 2], axis: [1, 0, 0] });
-      k.add(roundBox(S + 0.07, 0.16, S + 0.07, 0.03), {
+      k.add(roundBox(S + 0.07, 0.16, S + 0.07, 0.03, { even2d: true }), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, lidY, 0],
         part: lid,
         flat: 0.15,
@@ -1790,7 +2117,10 @@ export const RECIPES = {
       });
       const bowY = lidY + 0.08;
       for (const s of [-1, 1]) {
-        k.add(k.torus(0.13, 0.04), {
+        k.add(evenTorusOut(k, 0.13, 0.04), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [s * 0.13, bowY + 0.1, 0],
           rot: [90, 0, s * -30],
           scale: [1.15, 1, 0.7],
@@ -1799,7 +2129,10 @@ export const RECIPES = {
           weight: 1.4,
           color: (c) => lit(ribbon, c.n, { amb: 0.66, dif: 0.42, spec: 0.5, pow: 20 }),
         });
-        k.add(k.box(0.09, 0.012, 0.3), {
+        k.add(evenBox(0.09, 0.012, 0.3), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [s * 0.06, bowY + 0.005, 0.2],
           rot: [0, s * 25, 0],
           part: lid,
@@ -1809,6 +2142,9 @@ export const RECIPES = {
         });
       }
       k.add(k.sphere(0.06), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, bowY + 0.04, 0],
         part: lid,
         weight: 2,
@@ -1885,13 +2221,45 @@ export const RECIPES = {
           { id: "plain", label: "Plain" },
         ],
       },
-      { key: "color", label: "Colour", type: "color", default: "#d7263d" },
+      { key: "color", label: "Color", type: "color", default: "#d7263d" },
     ],
     controls: [{ key: "open", label: "Open", type: "toggle", default: 1, ease: 1.1 }],
     action: { key: "open", label: "Open or close" },
+    // Hands-on (lane Hands-on H3): slide the runner down the shaft to close
+    // it and up to open it; the ribs fold and spread with it. Open, the
+    // runner is caught by the top latch: a firm pull frees it with a click.
+    hands: {
+      joints: [
+        {
+          type: "slider",
+          part: "runner",
+          pivot: [0, UMB.ry, 0],
+          axis: [0, 1, 0],
+          min: umbrellaRunner(UMB.shut),
+          max: 0,
+          stick: 0.05,
+          gravity: false,
+          friction: 3,
+          damping: 8,
+          bounce: 0.05,
+          start: (c) => umbrellaRunner(UMB.shut * (1 - ease3(c.open))),
+          pos: [0, UMB.ry, 0],
+          pick: [0.2, 0.3, 0.2],
+          sound: (ev, vol) =>
+            ev.kind === "free" || ev.v > -0.01
+              ? { voice: "click", f: 1800, decay: 0.05, vol: 0.5 }
+              : { voice: "rustle", vol: vol * 0.6 },
+          also: (v, parts) => {
+            const th = umbrellaFold(v);
+            for (let i = 0; i < 8; i++) parts["panel" + i] = { angle: th };
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
       const close = 1 - ease3(c.open);
-      for (let i = 0; i < 8; i++) out.parts["panel" + i] = { angle: 1.18 * close };
+      for (let i = 0; i < 8; i++) out.parts["panel" + i] = { angle: UMB.shut * close };
+      out.parts.runner = { offset: [0, umbrellaRunner(UMB.shut * close), 0] };
       out.body = { quat: quatAxisAngle([0, 1, 0], 0.15 * Math.sin(t * 0.5)) };
     },
     build(k, o) {
@@ -1967,6 +2335,28 @@ export const RECIPES = {
           },
         );
       }
+      // The runner (lane Hands-on H3): the sleeve that slides up the shaft
+      // to open the canopy, and its collar.
+      const runner = k.part("runner", { pivot: [0, UMB.ry, 0] });
+      k.add(evenCylinder(0.04, 0.04, 0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, UMB.ry, 0],
+        part: runner,
+        flat: 0.2,
+        weight: 1.5,
+        color: (c) => lit("#2e2e33", c.n, { spec: 0.35 }),
+      });
+      k.add(evenCylinder(0.05, 0.05, 0.018), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
+        pos: [0, UMB.ry + 0.05, 0],
+        part: runner,
+        weight: 1.5,
+        color: (c) => chrome(c.n),
+      });
       // Shaft, tip and a crook handle.
       k.add(evenCylinder(0.022, 0.022, top + 0.95), {
         even: true,
@@ -2009,16 +2399,47 @@ export const RECIPES = {
 
   "desk-fan": {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#6cc2b3" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#6cc2b3" }],
     controls: [
       { key: "power", label: "On", type: "toggle", default: 1, ease: 1.8 },
       { key: "swing", label: "Swing", type: "toggle", default: 1, ease: 1 },
     ],
     action: { key: "power", label: "Switch on or off" },
+    // Hands-on (lane Hands-on H3): push the head up or down to tilt it on
+    // its stiff hinge; it stays where it is left (and keeps swinging and
+    // spinning), stopping with a knock at its tilt's ends.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "head",
+          pivot: FAN.yawAt,
+          axis: [1, 0, 0],
+          min: -0.5,
+          max: 0.32,
+          gravity: false,
+          damping: 14,
+          bounce: 0.05,
+          pos: [0, FAN.hub[1], 0.04],
+          pick: [0.42, 0.42, 0.34],
+          sound: (ev, vol) => ({ voice: "clack", f: 420, decay: 0.08, vol: vol * 0.6 }),
+          also: (a, parts) => {
+            const S = FAN.yawAt;
+            const Hc = FAN.hub;
+            const q = quatMul(quatAxisAngle([0, 1, 0], FAN_HAND.yaw), quatAxisAngle([1, 0, 0], a));
+            parts.head = { quat: q, offset: [0, 0, 0] };
+            const moved = add(S, quatRotate(q, sub(Hc, S)));
+            parts.blades = { quat: quatMul(q, quatAxisAngle([0, 0, 1], -FAN_HAND.spin)), offset: sub(moved, Hc) }; // prettier-ignore
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
       const m = mem(c);
       const spin = integrate(m, "spin", t, 24 * c.power * c.power);
       const yaw = 0.55 * Math.sin(integrate(m, "osc", t, 0.55 * c.swing * c.power));
+      FAN_HAND.yaw = yaw;
+      FAN_HAND.spin = spin;
       const qy = quatAxisAngle([0, 1, 0], yaw);
       const qs = quatAxisAngle([0, 0, 1], -spin);
       out.parts.head = { quat: qy };
@@ -2204,18 +2625,61 @@ export const RECIPES = {
   lamp: {
     alive: true,
     density: 1,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#3c7fc4" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#3c7fc4" }],
     controls: [{ key: "light", label: "Light", type: "toggle", default: 1, ease: 0.35 }],
     action: { key: "light", label: "Switch the light" },
+    // Hands-on (lane Hands-on H3): bend the arm at its joints to point the
+    // light: the lower arm on the base, the upper arm at the elbow and the
+    // shade at the top. The springs hold each where it is left, and the pool
+    // of light moves over the desk where the shade points.
+    hands: {
+      joints: [
+        { type: "hinge", part: "lower", name: "lower", pivot: LAMP.base, axis: [0, 0, 1], min: -0.45, max: 0.4, gravity: false, damping: 12, bounce: 0.05, pos: mul(add(LAMP.base, LAMP.elbow), 0.5), pick: [0.16, 0.42, 0.16] }, // prettier-ignore
+        { type: "hinge", part: "upper", name: "upper", parent: "lower", pivot: LAMP.elbow, axis: [0, 0, 1], min: -0.7, max: 0.6, gravity: false, damping: 12, bounce: 0.05, pos: mul(add(LAMP.elbow, LAMP.joint), 0.5), pick: [0.3, 0.2, 0.2] }, // prettier-ignore
+        {
+          type: "hinge",
+          part: "head",
+          name: "head",
+          parent: "upper",
+          pivot: LAMP.joint,
+          axis: [0, 0, 1],
+          min: -0.8,
+          max: 0.9,
+          gravity: false,
+          damping: 12,
+          bounce: 0.05,
+          pos: add(LAMP.head, mul(LAMP.dir, 0.08)),
+          pick: [0.3, 0.26, 0.3],
+          also: (a, parts) => {
+            const h = parts.head;
+            if (!h) return;
+            const on = LAMP_HAND.light;
+            parts.glow = { ...h, visible: on };
+            parts.beam = { ...h, visible: on };
+            // The pool: where the light now meets the desk.
+            const at = (p) => add(add(LAMP.joint, quatRotate(h.quat, sub(p, LAMP.joint))), h.offset); // prettier-ignore
+            const bulb = at(LAMP.bulbAt);
+            const d = quatRotate(h.quat, LAMP.dir);
+            const down = smoothstep(0.3, 0.6, -d[1]);
+            const pool = down > 0 ? add(bulb, mul(d, -bulb[1] / d[1])) : LAMP.pool;
+            parts.pool = { offset: sub(pool, LAMP.pool), visible: on * down };
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
+      LAMP_HAND.light = c.light;
       out.parts.glow = { visible: c.light };
       out.parts.beam = { visible: c.light };
+      out.parts.pool = { visible: c.light };
     },
     build(k, o) {
       const paint = (c) => lit(o.color, c.n, { amb: 0.64, dif: 0.45, spec: 0.5, pow: 26 });
-      const base = [0, 0.06, -0.1];
-      const elbow = [-0.05, 0.9, -0.35];
-      const joint = [0.42, 1.22, -0.05];
+      const { base, elbow, joint } = LAMP;
+      // The arms and the shade turn at the joints by hand (lane Hands-on H3).
+      const lower = k.part("lower", { pivot: base, axis: [0, 0, 1] });
+      const upper = k.part("upper", { pivot: elbow, axis: [0, 0, 1] });
+      const headPart = k.part("head", { pivot: joint, axis: [0, 0, 1] });
       k.add(
         k.lathe(
           [
@@ -2241,7 +2705,7 @@ export const RECIPES = {
         weight: 2,
         color: (c) => chrome(c.n),
       });
-      const rod = (a, b, r) =>
+      const rod = (a, b, r, part) =>
         k.add(
           k.tube((tt) => add(a, mul(sub(b, a), tt)), r, { samples: 16, grid: 24 }),
           {
@@ -2249,22 +2713,28 @@ export const RECIPES = {
             weight: 1.3,
             opacity: 1,
             jitter: 0.012,
+            part,
             color: paint,
           },
         );
       for (const dz of [-0.035, 0.035]) {
-        rod(add(base, [0, 0, dz]), add(elbow, [0, 0, dz]), 0.018);
-        rod(add(elbow, [0, 0, dz]), add(joint, [0, 0, dz]), 0.018);
+        rod(add(base, [0, 0, dz]), add(elbow, [0, 0, dz]), 0.018, lower);
+        rod(add(elbow, [0, 0, dz]), add(joint, [0, 0, dz]), 0.018, upper);
       }
-      for (const p of [base, elbow, joint])
+      for (const [p, part] of [
+        [base, undefined],
+        [elbow, upper],
+        [joint, headPart],
+      ])
         k.add(k.cylinder(0.045, 0.11), {
           pos: p,
           rot: [90, 0, 0],
           weight: 2,
+          part,
           color: (c) => chrome(c.n),
         });
       // Springs beside the arms.
-      const spring = (a, b) =>
+      const spring = (a, b, part) =>
         k.add(
           k.tube(
             (tt) => {
@@ -2279,13 +2749,12 @@ export const RECIPES = {
             0.004,
             { samples: 400, grid: 16 },
           ),
-          { weight: 1.5, flat: 0.4, color: (c) => chrome(c.n) },
+          { weight: 1.5, flat: 0.4, part, color: (c) => chrome(c.n) },
         );
-      spring(base, elbow);
-      spring(elbow, joint);
+      spring(base, elbow, lower);
+      spring(elbow, joint, upper);
       // The shade points down at the desk in front.
-      const dir = unit([0.35, -1, 0.35]);
-      const head = add(joint, mul(dir, 0.14));
+      const { dir, head } = LAMP;
       const q = quatFromTo([0, -1, 0], dir);
       k.add(
         k.lathe(
@@ -2305,13 +2774,15 @@ export const RECIPES = {
           even: true,
           opacity: 1,
           jitter: 0.012,
+          part: headPart,
           color: (c) =>
             dot(c.n, dir) > 0.2 ? lit("#f4efe2", mul(c.n, -1), { amb: 0.9, dif: 0.2 }) : paint(c),
         },
       );
       const bulbAt = add(head, mul(dir, 0.07));
-      k.add(k.sphere(0.085), { pos: bulbAt, weight: 2, even: true, color: "#e9e4d8" });
-      const glow = k.part("glow", { pivot: bulbAt });
+      k.add(k.sphere(0.085), { pos: bulbAt, weight: 2, even: true, part: headPart, color: "#e9e4d8" }); // prettier-ignore
+      // (The glow and the beam turn with the head, about its joint.)
+      const glow = k.part("glow", { pivot: joint });
       k.add(k.sphere(0.095), {
         pos: bulbAt,
         part: glow,
@@ -2322,7 +2793,8 @@ export const RECIPES = {
         color: (c) => keep(mix("#fff7d6", "#ffffff", 0.6)),
       });
       // A faint cone of light and a warm pool on the desk.
-      const beam = k.part("beam", { pivot: bulbAt });
+      const beam = k.part("beam", { pivot: joint });
+      const poolPart = k.part("pool", { pivot: LAMP.pool });
       const floorT = (0 - bulbAt[1]) / dir[1];
       const pool = add(bulbAt, mul(dir, floorT));
       // Both are spread evenly (not at random), so the light reads as a
@@ -2345,7 +2817,7 @@ export const RECIPES = {
         );
         return { p, dir, stretch: 6, color: "#ffe9a8", opacity: 0.025 + 0.035 * (1 - s) };
       });
-      k.cloud({ share: 0.06, size: 3, part: beam, pattern: false }, (rand, i, n) => {
+      k.cloud({ share: 0.06, size: 3, part: poolPart, pattern: false }, (rand, i, n) => {
         // A sunflower spiral: the evenest way to fill a disc.
         const a = i * 2.39996323;
         const r = Math.sqrt((i + 0.5) / n) * 0.62;
@@ -2360,17 +2832,59 @@ export const RECIPES = {
   },
 
   "potion-bottle": {
+    // Lane Any pose: turned over in Hands-on, its rising splats keep to the
+    // toy's own frame (the puff leaves the neck), not the world's up.
+    gravity: false,
     alive: true,
     options: [{ key: "color", label: "Potion", type: "color", default: "#b44cff" }],
     controls: [{ key: "pop", label: "Pop the cork", type: "pulse", ease: 1.8 }],
     action: { key: "pop", label: "Pop the cork" },
+    // Hands-on (lane Hands-on H3): pull the cork and it holds, wiggles, then
+    // pops out with a puff of sparkles; set it back on the neck (or point at
+    // the neck) and it squeaks back in, held fast again.
+    hands: {
+      floor: -0.5,
+      pieces: () => [
+        { part: "cork", pos: [0, 0.88, 0], pivot: [0, 0.86, 0], solid: POTION_CORK, points: surfacePoints(POTION_CORK, 1), pick: [0.16, 0.16, 0.16], mass: 0.1, friction: 0.8, restitution: 0.35 }, // prettier-ignore
+        // The flask: ground for the cork, never picked up.
+        { pos: [0, 0, 0], solid: POTION_FLASK, pick: [1e-3, 1e-3, 1e-3] },
+      ],
+      joints: [
+        {
+          type: "break",
+          part: "cork",
+          at: [0, 0.8, 0],
+          pull: 0.16,
+          give: 0.04,
+          reseat: { snap: 0.25 },
+          sound: (ev) =>
+            ev.kind === "snap"
+              ? { voice: "pop", f: 520, vol: 0.8 }
+              : ev.kind === "socket"
+                ? { voice: "twist", f: 300, decay: 0.15, vol: 0.5 }
+                : undefined,
+          also: (v, parts) => {
+            const o = parts.cork?.offset;
+            POTION_HAND.off = o ? len(o) : 0;
+          },
+        },
+      ],
+      sound: (hit, vol) => ({ voice: "wood", f: 700, decay: 0.08, vol: vol * 0.5 }),
+    },
     drive(t, c, out) {
+      // By hand: the puff when the cork leaves the neck (lane Hands-on H3).
+      const H = POTION_HAND;
+      const away = H.off > 0.06;
+      if (away && !H.out) H.t0 = t;
+      H.out = away;
+      const hp = clamp((t - H.t0) / 1.2, 0, 1);
       const p = 1 - c.pop;
       const on = c.pop > 0;
       const fly = on ? bump(clamp(p / 0.75, 0, 1)) : 0;
       out.parts.cork = { offset: [0.12 * fly, 0.55 * fly, 0], angle: on ? 2.4 * fly : 0 };
-      out.parts.puff = { visible: on ? 1 - smoothstep(0.3, 0.8, p) : 0 };
-      out.amount = 1 + 1.5 * c.pop;
+      const puff = Math.max(on ? 1 - smoothstep(0.3, 0.8, p) : 0, hp < 1 ? 1 - smoothstep(0.25, 0.7, hp) : 0); // prettier-ignore
+      out.parts.puff = { visible: puff };
+      out.amount = 1 + 1.5 * Math.max(c.pop, hp < 1 ? 1 - hp : 0);
     },
     build(k, o) {
       const potion = o.color;
@@ -2479,6 +2993,47 @@ export const RECIPES = {
     density: 0.6,
     controls: [{ key: "open", label: "Extend", type: "toggle", default: 1, ease: 1.2 }],
     action: { key: "open", label: "Extend or collapse" },
+    // Hands-on (lane Hands-on H3): pull the draw tubes out and push them back
+    // in by hand. The middle tube slides in the main tube and carries the
+    // eyepiece tube, which slides in it; both hold where they are left and
+    // knock at each end.
+    hands: {
+      joints: [
+        {
+          type: "slider",
+          part: "tube2",
+          pivot: TELE.mount,
+          axis: TELE.dir,
+          min: 0,
+          max: 0.3,
+          gravity: false,
+          friction: 2,
+          damping: 7,
+          bounce: 0.1,
+          start: (c) => 0.3 * (1 - ease3(c.open)),
+          pos: add(TELE.mount, mul(TELE.dir, -0.49)),
+          pick: [0.15, 0.15, 0.15],
+          sound: (ev, vol) => ({ voice: "metal", f: ev.v > 0.15 ? 520 : 760, decay: 0.12, vol: vol * 0.5 }), // prettier-ignore
+        },
+        {
+          type: "slider",
+          part: "tube3",
+          parent: "tube2",
+          pivot: TELE.mount,
+          axis: TELE.dir,
+          min: 0,
+          max: 0.3,
+          gravity: false,
+          friction: 2,
+          damping: 7,
+          bounce: 0.1,
+          start: (c) => 0.3 * (1 - ease3(c.open)),
+          pos: add(TELE.mount, mul(TELE.dir, -0.82)),
+          pick: [0.14, 0.14, 0.14],
+          sound: (ev, vol) => ({ voice: "metal", f: ev.v > 0.15 ? 640 : 900, decay: 0.1, vol: vol * 0.45 }), // prettier-ignore
+        },
+      ],
+    },
     drive(t, c, out) {
       const e = ease3(c.open);
       const d = TELE.dir;
@@ -2512,7 +3067,7 @@ export const RECIPES = {
         pattern: false,
         color: (c) => keep(mix("#15305c", "#9ad1ff", 0.35 + 0.5 * Math.max(0, dot(c.n, HALF)))),
       });
-      // Draw tubes that slide out towards the eye.
+      // Draw tubes that slide out toward the eye.
       const t2 = k.part("tube2", { pivot: mount });
       const t3 = k.part("tube3", { pivot: mount });
       seg(-0.68, -0.3, 0.095, t2);

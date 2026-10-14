@@ -213,7 +213,10 @@ void modifySplatColor(vec3 center, inout vec4 color) {
     alpha = 1.0;
     if (m1.y > 0.0) {
       // Lava: its own light by its heat, a dark crust where it cooled.
-      vec3 hot = mix(vec3(1.0, 0.32, 0.04), vec3(1.0, 0.78, 0.25), smoothstep(0.75, 1.0, flTone));
+      // (r6: one incandescent ramp by heat, as the GPU surface's lavaRamp)
+      vec3 hot = mix(vec3(0.3, 0.04, 0.01), vec3(0.75, 0.13, 0.02), smoothstep(0.18, 0.38, flTone));
+      hot = mix(hot, vec3(1.0, 0.36, 0.05), smoothstep(0.38, 0.65, flTone));
+      hot = mix(hot, vec3(1.0, 0.6, 0.18), smoothstep(0.65, 0.95, flTone)) / 1.25;
       // (r5: a darker basalt crust, and glowing cracks where it parted)
       vec3 crust = vec3(0.09, 0.06, 0.05) * lit + vec3(spec * 0.25);
       float vein = 1.0 - smoothstep(0.0, 0.07, abs(flNoise(center * 11.0) - 0.5));
@@ -447,7 +450,9 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
     rgb = rgb + vec3f(0.5 * spec);
     alpha = 1.0;
     if (m1.y > 0.0) {
-      let hot = mix(vec3f(1.0, 0.32, 0.04), vec3f(1.0, 0.78, 0.25), smoothstep(0.75, 1.0, flTone));
+      var hot = mix(vec3f(0.3, 0.04, 0.01), vec3f(0.75, 0.13, 0.02), smoothstep(0.18, 0.38, flTone));
+      hot = mix(hot, vec3f(1.0, 0.36, 0.05), smoothstep(0.38, 0.65, flTone));
+      hot = mix(hot, vec3f(1.0, 0.6, 0.18), smoothstep(0.65, 0.95, flTone)) / 1.25;
       let crust = vec3f(0.09, 0.06, 0.05) * lit + vec3f(spec * 0.25);
       let vein = 1.0 - smoothstep(0.0, 0.07, abs(flNoise(center * 11.0) - 0.5));
       let g = max(smoothstep(0.5, 0.85, flTone), vein * smoothstep(0.05, 0.4, flTone) * 0.85);

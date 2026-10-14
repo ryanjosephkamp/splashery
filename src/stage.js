@@ -3,7 +3,14 @@
 // the engine directly lives here or in paint.js / loaders.js.
 
 import * as pc from "./pc.js";
-import { MODIFIER, MODIFIER_KIT, MODIFIER_RIG } from "./effects.js";
+import {
+  MODIFIER,
+  MODIFIER_KIT,
+  MODIFIER_KIT_PHOTO,
+  MODIFIER_KIT_GLOSS,
+  MODIFIER_RIG,
+} from "./effects.js";
+import { photoRender, withPhotoPS } from "./photo-splats.js"; // lane Photo fidelity
 import { kernelChunks, normalizeKernel } from "./kernels.js";
 
 export class NoGPUError extends Error {}
@@ -58,6 +65,17 @@ export class Stage {
   constructor(canvas, device, { weak = false, pixelRatio = 2, adaptive = true } = {}) {
     this.canvas = canvas;
     this.device = device;
+    // Fix11: on WebGPU the engine sends its command encoder before it uploads a texture's data,
+    // and a texture first needed inside a render pass (its own fallback for an unset sampler, made
+    // on first use) was uploaded there: the open pass was cut off and the frame's command buffer
+    // was invalid (phf-engine:260). Inside a pass the send now waits for the frame's own; the
+    // upload goes through the queue as before.
+    if (device.isWebGPU) {
+      const submit = device.submit.bind(device);
+      device.submit = () => {
+        if (!device.insideRenderPass) submit();
+      };
+    }
     this.weak = weak;
     this.pixelCap = pixelRatio;
     this.adaptive = adaptive;
@@ -107,8 +125,10 @@ export class Stage {
       if (performance.now() < this.aliveUntil) app.renderNextFrame = true;
     });
     this.graveyard = [];
+    this.projectorTries = 0; // Fluids r7 (hookProjector)
     app.on("frameend", () => {
       this.frames++;
+      if (this.projectorTries < 600) this.hookProjector(); // Fluids r7
       if (this.graveyard.length) {
         this.buryToys();
         this.requestRender();
@@ -122,7 +142,7 @@ export class Stage {
       if (this.captureWaiters.length) {
         const waiters = this.captureWaiters;
         this.captureWaiters = [];
-        for (const w of waiters) w(this.copyCanvas(w.width, w.height));
+        for (const w of waiters) w(w.bare ? null : this.copyCanvas(w.width, w.height));
       }
     });
 
@@ -144,9 +164,43 @@ export class Stage {
 
   // The ratio frames render at now.
   pixelRatio() {
-    const cap = this.sharp?.dpr ?? this.pixelCap; // Sharpness (dpr is labs only)
+    const cap = Math.min(this.sharp?.dpr ?? this.pixelCap, this.fluidCap ?? Infinity); // Sharpness (dpr is labs only); Fluids r7 (fluidCap)
     const full = Math.min(window.devicePixelRatio || 1, cap);
     return this.reduced ? Math.max(1, full / 1.5) : full;
+  }
+
+  // Fluids r7: the gsplat compute projector (WebGPU) clears its cached
+  // Compute objects when the work-buffer material changes (a toy, a scene, a
+  // kernel), but it destroys only their shaders, so each one's uniform
+  // buffers stay allocated (docs/audits/fluid-phone-2026-10.md, proposal 4).
+  // vendor/ stays untouched: once the renderer exists, its clearing method is
+  // wrapped on that one instance so each Compute is destroyed first. If the
+  // engine's private layout is not as expected, nothing is wrapped.
+  hookProjector() {
+    this.projectorTries++;
+    try {
+      if (!this.device.isWebGPU) return void (this.projectorTries = Infinity);
+      for (const cb of this.device._callbacks?.get?.("devicerestored") || []) {
+        const p = cb?.scope?.renderer?.projector;
+        if (!p?._projectorComputes || typeof p._destroyProjectorComputes !== "function") continue;
+        const clear = p._destroyProjectorComputes;
+        p._destroyProjectorComputes = function () {
+          for (const c of this._projectorComputes.values()) c.destroy?.();
+          return clear.call(this);
+        };
+        this.projectorTries = Infinity;
+        return;
+      }
+    } catch {
+      this.projectorTries = Infinity;
+    }
+  }
+
+  // Fluids r7: a fluid toy that runs slowly on a phone asks for a lower cap
+  // (null lifts it, when its fluids stop).
+  setFluidPixelCap(cap) {
+    this.fluidCap = cap;
+    this.applyPixelRatio();
   }
 
   setPixelRatio(cap) {
@@ -261,6 +315,15 @@ export class Stage {
     // The field of view applies to the narrower side, so tall canvases fit too.
     const portrait = this.canvas.width < this.canvas.height;
     if (e.camera.horizontalFov !== portrait) e.camera.horizontalFov = portrait;
+    // Lane Night sky: a toy seen from inside brings its own field of view;
+    // the usual 38 degrees come back after it (other lenses are left alone).
+    if (Number.isFinite(pose.fov)) {
+      if (e.camera.fov !== pose.fov) e.camera.fov = pose.fov;
+      this.insideFov = true;
+    } else if (this.insideFov) {
+      e.camera.fov = 38;
+      this.insideFov = false;
+    }
     e.setPosition(pose.position[0], pose.position[1], pose.position[2]);
     // Science r2: for a toy with a closeUp, the near clip follows the camera
     // in (0.02, as always, from a distance of 1 on).
@@ -274,14 +337,17 @@ export class Stage {
   // ---- Toy ----------------------------------------------------------------
 
   // Shows a gsplat resource as the toy. transform: { position, rotation
-  // (euler degrees), scale } normalises it around the origin. `kit` marks a
+  // (euler degrees), scale } normalizes it around the origin. `kit` marks a
   // generated toy whose format carries the per-splat splatAnim stream; `rig`
   // a captured toy with moving parts (a splatPart stream, see src/rig.js).
   // Lab: `modifier` ({ glsl, wgsl }) replaces a kit toy's work-buffer program
   // (a splat field computed on the GPU every frame, src/packs/lab.js).
+  // Lane Kit lab: `gloss` ({ strength, sharpness }, labs only) gives a kit
+  // toy a highlight that moves with the view (MODIFIER_KIT_GLOSS).
   // prettier-ignore
-  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null }) {
+  setToy({ resource, asset = null, owned = false, transform = null, kit = false, rig = false, modifier = null, photo = false, gloss = null }) {
     this.clearToy();
+    if (!photo) this.setPhoto(false); // lane Photo fidelity: only a photo toy keeps it on
     const entity = new pc.Entity("toy");
     if (transform) {
       entity.setLocalPosition(...transform.position);
@@ -314,14 +380,17 @@ export class Stage {
         parts.unlock();
       }
     }
-    entity.gsplat.setWorkBufferModifier(modifier || (kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
+    const photoOn = photo && kit && !modifier && !!this.photo; // lane Photo fidelity
+    const glossOn = !!gloss && kit && !modifier && !photoOn; // lane Kit lab
+    entity.gsplat.setWorkBufferModifier(modifier || (photoOn ? MODIFIER_KIT_PHOTO : glossOn ? MODIFIER_KIT_GLOSS : kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
+    if (glossOn) entity.gsplat.setParameter("uSpGloss", [gloss.strength, gloss.sharpness, 0, 0]);
     entity.gsplat.workBufferUpdate = pc.WORKBUFFER_UPDATE_ALWAYS;
     // The pattern sampler always needs a texture, even with no pattern on
     // (and kit toys' screen sampler too).
     entity.gsplat.setParameter("uSpPattern", this.blankTexture());
     if (kit) entity.gsplat.setParameter("uSpScreen", this.blankTexture());
     this.app.root.addChild(entity);
-    this.toy = { entity, resource, asset, owned, kit, rig };
+    this.toy = { entity, resource, asset, owned, kit, rig, photo: photoOn, gloss: glossOn };
     this.requestRender();
     return this.toy;
   }
@@ -332,6 +401,7 @@ export class Stage {
   // them back where they were built.
   setToyPose(pose) {
     const t = this.toy;
+    this.toyPose = t ? pose : null; // lane Any pose: the effects follow it (src/effects-pose.js)
     if (!t) return;
     const ents = [t.entity, t.addon?.entity, ...(t.sheets || []).map((s) => s.entity), ...(t.layers || []).map((l) => l.entity)]; // prettier-ignore
     for (const e of ents) {
@@ -631,12 +701,99 @@ export class Stage {
   setKernel(name) {
     const want = normalizeKernel(name);
     if (want === (this.kernel || "gaussian")) return;
+    this.kernel = want;
+    this.applyFragmentChunk();
+  }
+
+  // The fragment chunk: the kernel's, with the photo's code while a photo toy shows.
+  applyFragmentChunk() {
     const mat = this.app.scene.gsplat.material;
-    const code = kernelChunks(want);
+    const base = kernelChunks(this.kernel || "gaussian");
+    const code = this.photo ? withPhotoPS(base) : base;
     mat.shaderChunks.glsl.set("gsplatModifyPS", code.glsl);
     mat.shaderChunks.wgsl.set("gsplatModifyPS", code.wgsl);
     mat.update();
-    this.kernel = want;
+    this.requestRender();
+  }
+
+  // Lane Photo fidelity: photo-textured splats (src/photo-splats.js). On, the next kit toy's splats
+  // marked `photo` take their colors from the photo (setPhotoSource); off puts every chunk, the
+  // work buffer's format and the renderer back as they were. Call it before setToy.
+  setPhoto(on) {
+    if (!!on === !!this.photo) return;
+    if (!on) {
+      // the photo toys' entities (shown or buried) stop writing the stream before it goes
+      for (const t of [this.toy, ...this.graveyard]) if (t?.photo) t.entity.gsplat.setWorkBufferModifier(MODIFIER_KIT); // prettier-ignore
+    }
+    this.photo = photoRender(pc, this.app, !!on, this.photo || null);
+    // The renderer copies the material's parameters when the material is updated, which also
+    // rebuilds its shaders: so the photo is one texture object, set here, and later only resized
+    // and uploaded (an update mid-way broke a WebGPU frame).
+    if (on) this.app.scene.gsplat.material.setParameter("uSpPhoto", this.photoTexture());
+    this.applyFragmentChunk();
+  }
+
+  // The photo (a canvas, an image or a video frame), uploaded with its mipmaps (so a small view of a
+  // large photo doesn't shimmer). On WebGPU the engine makes a texture's mipmaps with render passes
+  // on the device's command encoder, so there the upload waits for a microtask (after the frame's
+  // encoding) and its passes are sent at once.
+  setPhotoSource(source) {
+    if (!this.device.isWebGPU) return this.uploadPhoto(source);
+    this.photoPending = source;
+    if (this.photoQueued) return;
+    this.photoQueued = true;
+    queueMicrotask(() => {
+      this.photoQueued = false;
+      if (!this.photo) return;
+      this.uploadPhoto(this.photoPending);
+      // The mipmaps' passes are on the device's open command encoder; sent now, so the next frame
+      // starts its own (left there, the frame's work-buffer pass was cut off when it was sent).
+      this.device.submit();
+    });
+  }
+
+  photoTexture() {
+    if (this.photoTex) return this.photoTex;
+    this.photoTex = new pc.Texture(this.device, {
+      name: "splashery-photo",
+      width: 4,
+      height: 4,
+      format: pc.PIXELFORMAT_RGBA8,
+      mipmaps: true,
+      minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
+      magFilter: pc.FILTER_LINEAR,
+      addressU: pc.ADDRESS_CLAMP_TO_EDGE,
+      addressV: pc.ADDRESS_CLAMP_TO_EDGE,
+    });
+    // Fix11: made on the GPU now, outside any frame. Left for its first use, a frame that drew the
+    // photo toy before the photo's own upload (setPhotoSource waits for a microtask) made it inside
+    // the work-buffer pass, and on WebGPU its mipmaps' passes broke that frame's command buffer.
+    this.photoTex.upload();
+    if (this.device.isWebGPU) this.device.submit();
+    return this.photoTex;
+  }
+
+  uploadPhoto(source) {
+    const w = source.videoWidth || source.width;
+    const h = source.videoHeight || source.height;
+    if (!w || !h) return;
+    const tex = this.photoTexture();
+    if (tex.width !== w || tex.height !== h) tex.resize(w, h);
+    tex.setSource(source);
+    tex.upload();
+    this.requestRender();
+  }
+
+  // The frame's mapping (photoUniforms in src/photo-splats.js): the work-buffer pass's map on the
+  // toy; the picture's axes and brightness straight into the device's uniforms (a parameter on the
+  // splat material would reach the renderer's copy of it only through a material update).
+  setPhotoUniforms({ map, tu, tv, k }) {
+    const g = this.toy?.entity.gsplat;
+    if (g) g.setParameter("uSpPhotoMap", map);
+    const scope = this.device.scope;
+    scope.resolve("uSpPhotoTu").setValue(tu);
+    scope.resolve("uSpPhotoTv").setValue(tv);
+    scope.resolve("uSpPhotoK").setValue(k);
     this.requestRender();
   }
 
@@ -787,6 +944,94 @@ export class Stage {
     });
   }
 
+  // Engine (QR r4): a still of the current frame over the canvas while an
+  // export renders at a fixed size, so the stretched square never shows.
+  // Calls nest (a later call waits for the first still); the last uncover
+  // removes the still after the canvas has drawn a few frames at its own size
+  // again. label (the owner's note of October 9, 2026): a short message on
+  // the still, such as "Please wait. Scanning code…", so the pause reads as
+  // work, not a freeze.
+  cover({ label = "" } = {}) {
+    this.coverDepth = (this.coverDepth || 0) + 1;
+    if (label) this.coverLabel = label;
+    if (this.coverDepth > 1) {
+      this.labelCover();
+      return this.coverReady || Promise.resolve();
+    }
+    if (this.fixedSize) return Promise.resolve();
+    this.coverReady = this.captureFrame().then((shot) => {
+      if (!this.coverDepth || this.coverEl) return;
+      const r = this.canvas.getBoundingClientRect();
+      shot.className = "stage-cover";
+      shot.setAttribute("aria-hidden", "true");
+      Object.assign(shot.style, {
+        position: "fixed",
+        left: `${r.left}px`,
+        top: `${r.top}px`,
+        width: `${r.width}px`,
+        height: `${r.height}px`,
+        pointerEvents: "none",
+        zIndex: getComputedStyle(this.canvas).zIndex,
+      });
+      this.canvas.after(shot);
+      this.coverEl = shot;
+      this.labelCover();
+    });
+    return this.coverReady;
+  }
+
+  // Draws the cover's label: white text on a dark, rounded band in the middle
+  // of the still (drawn on a fresh copy of the still each time it changes).
+  labelCover() {
+    const el = this.coverEl;
+    const text = this.coverLabel;
+    if (!el || !text || el.dataset.label === text) return;
+    if (!this.coverBase) {
+      this.coverBase = document.createElement("canvas");
+      this.coverBase.width = el.width;
+      this.coverBase.height = el.height;
+      this.coverBase.getContext("2d").drawImage(el, 0, 0);
+    }
+    const g = el.getContext("2d");
+    g.clearRect(0, 0, el.width, el.height);
+    g.drawImage(this.coverBase, 0, 0);
+    // The size the text shows at on screen, whatever the drawing buffer's.
+    const k = el.width / Math.max(1, el.getBoundingClientRect().width || el.width);
+    const px = Math.round(16 * k);
+    g.font = `600 ${px}px system-ui, -apple-system, "Segoe UI", sans-serif`;
+    const w = g.measureText(text).width + px * 1.6;
+    const h = px * 2.2;
+    const x = (el.width - w) / 2;
+    const y = (el.height - h) / 2;
+    g.fillStyle = "rgba(17, 20, 26, 0.82)";
+    g.beginPath();
+    g.roundRect(x, y, w, h, h / 2);
+    g.fill();
+    g.fillStyle = "#ffffff";
+    g.textAlign = "center";
+    g.textBaseline = "middle";
+    g.fillText(text, el.width / 2, el.height / 2);
+    el.dataset.label = text;
+  }
+
+  async uncover(frames = 3) {
+    if (!this.coverDepth) return;
+    if (--this.coverDepth > 0) return;
+    for (let i = 0; i < frames && !this.coverDepth; i++) {
+      await new Promise((resolve) => {
+        resolve.bare = true;
+        this.captureWaiters.push(resolve);
+        this.requestRender();
+      });
+    }
+    if (this.coverDepth) return;
+    this.coverEl?.remove();
+    this.coverEl = null;
+    this.coverBase = null;
+    this.coverLabel = "";
+    this.coverReady = null;
+  }
+
   copyCanvas(width, height) {
     const src = this.canvas;
     const out = document.createElement("canvas");
@@ -799,6 +1044,7 @@ export class Stage {
 
   destroy() {
     clearTimeout(this.restoreTimer);
+    this.coverEl?.remove();
     this.resizeObserver.disconnect();
     this.clearToy();
     this.buryToys(true);

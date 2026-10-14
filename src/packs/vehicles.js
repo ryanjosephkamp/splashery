@@ -1,7 +1,7 @@
 // Vehicles: chunky, toy-like things that go. Generic designs only: no makes,
 // models, liveries, logos or insignia. Wheels, rotors and propellers are
 // parts that turn while the toy is alive; most vehicles have a tap action.
-// There is no scene lighting, so colours carry a little baked sunlight.
+// There is no scene lighting, so colors carry a little baked sunlight.
 
 import {
   mix,
@@ -14,6 +14,7 @@ import {
   quatRotate,
 } from "../kit.js";
 import { evenBox, evenCylinder, evenEllipsoid, evenRoundBox, evenTorus, evenTube } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H4
 
 const TAU = Math.PI * 2;
 const add = (a, b) => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
@@ -35,7 +36,7 @@ const lerp3 = (a, b, t) => [
 const easeInOut = (x) => (x < 0.5 ? 2 * x * x : 1 - Math.pow(-2 * x + 2, 2) / 2);
 const keep = (c, size) => ({ c, keep: true, size });
 
-// Baked sunlight: the sun is high, towards the viewer and a little right.
+// Baked sunlight: the sun is high, toward the viewer and a little right.
 const SUN = unit([0.3, 0.8, 0.55]);
 const sunOf = (n) => n[0] * SUN[0] + n[1] * SUN[1] + n[2] * SUN[2];
 const lit = (col, c, amb = 0.72) => shade(col, amb + (1 - amb) * sunOf(c.n));
@@ -51,7 +52,10 @@ function glass(c, tint = "#2c4a6e", amb = 0.2) {
 // A round rod (or cone when r1 is given) from a to b.
 function rod(k, a, b, r, opts = {}, r1 = r) {
   const d = sub(b, a);
-  const shape = k.cone(r, r1, len(d), { caps: opts.caps ?? false });
+  // Under even: true an even cone (lane Sharpness A); the kit's lattices.
+  const shape = opts.even
+    ? evenCylinder(r, r1, len(d), opts.caps ?? false)
+    : k.cone(r, r1, len(d), { caps: opts.caps ?? false });
   return k.add(shape, { ...opts, pos: mul(add(a, b), 0.5), quat: quatFromTo([0, 1, 0], d) });
 }
 
@@ -86,7 +90,7 @@ function slab(k, pts, thick, opts) {
 
 // A box with rounded edges and corners, sampled evenly: flat faces, quarter
 // cylinders along the edges and sphere corners. (The kit's roundedBox
-// crowds its samples towards the edges when it is very boxy.)
+// crowds its samples toward the edges when it is very boxy.)
 function roundBox(sx, sy, sz, r) {
   r = Math.max(1e-4, Math.min(r, sx / 2, sy / 2, sz / 2));
   const h = [sx / 2 - r, sy / 2 - r, sz / 2 - r];
@@ -141,7 +145,7 @@ function roundBox(sx, sy, sz, r) {
   };
 }
 
-// A wheel turning about Z: a round tyre, a rim with spokes and a hub.
+// A wheel turning about Z: a round tire, a rim with spokes and a hub.
 function wheel(k, pos, r, w, opts = {}) {
   const {
     part,
@@ -154,7 +158,7 @@ function wheel(k, pos, r, w, opts = {}) {
     even = false,
   } = opts;
   const tr = r * (1 - rimR) * 0.62;
-  // even: an even, solid tyre and rim (lane Fidelity B's toys).
+  // even: an even, solid tire and rim (lane Fidelity B's toys).
   const E = even ? { even: true, opacity: 1, jitter: 0.015 } : {};
   k.add(even ? evenTorus(k, r - tr, tr) : k.torus(r - tr, tr), {
     ...E,
@@ -240,8 +244,8 @@ function plume(k, from, dir, o = {}) {
 }
 
 // Rock (or tilt) a part together with the whole vehicle: a spin `q` about
-// the part's own pivot `pv`, then the vehicle's tilt `tq` about the centre
-// `centre`, then a lift. Returns the part pose for drive().
+// the part's own pivot `pv`, then the vehicle's tilt `tq` about the center
+// `center`, then a lift. Returns the part pose for drive().
 function carried(pv, tq, centre, lift = [0, 0, 0], q = [0, 0, 0, 1]) {
   const qq = quatMulLocal(tq, q);
   const off = add(sub(add(centre, quatRotate(tq, sub(pv, centre))), pv), lift);
@@ -315,7 +319,7 @@ function rocketBuild(k, o) {
       const r = c.s.radial;
       if (Math.abs(r - 0.82) < 0.025) return keep(lit("#f2c318", c));
       const scorch = smoothstep(0.42, 0.12, r);
-      const conc = shade("#b3aea5", 0.92 + 0.12 * c.noise(c.p[0] * 9, 0, c.p[2] * 9));
+      const conc = shade("#b3aea5", 0.95 + 0.06 * c.noise(c.p[0] * 5, 0, c.p[2] * 5));
       return lit(mix(conc, "#2e2b28", scorch * 0.85), c);
     },
   });
@@ -344,11 +348,13 @@ function rocketBuild(k, o) {
   k.add(body, {
     even: true,
     opacity: 1,
-    jitter: 0.015,
+    jitter: 0.012,
+    size: 1.1,
+    weight: 1.5,
     part: rocket,
     flat: 0.2,
     interior: 0.06,
-    core: "#9a9a9a",
+    core: "#dcdcd8",
     color: (c) => {
       const y = c.p[1];
       const r = Math.hypot(c.p[0], c.p[2]);
@@ -424,7 +430,7 @@ function rocketBuild(k, o) {
       params: [0.45 + 0.35 * rand(), rand()],
     };
   });
-  // A wisp of cold vapour while the rocket waits.
+  // A wisp of cold vapor while the rocket waits.
   const vapour = k.part("vapour", { pivot: [0, 0, 0] });
   k.cloud({ share: 0.0025, size: 2.2, pattern: false, part: vapour }, (rand) => {
     const a = ROCKET_A0 + 0.9 + (rand() - 0.5) * 1.4;
@@ -543,6 +549,7 @@ function rocketBuild(k, o) {
 const HELI = { rotor: [0.05, 1.86, 0], tail: [-2.3, 1.42, 0.075], centre: [0, 1, 0] };
 
 function helicopterBuild(k, o) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const col = o.color;
   // A helipad.
   k.add(evenCylinder(1.55, 1.55, 0.06), {
@@ -560,12 +567,12 @@ function helicopterBuild(k, o) {
         (Math.abs(Math.abs(z) - 0.32) < 0.07 && Math.abs(x) < 0.5) ||
         (Math.abs(x) < 0.07 && Math.abs(z) < 0.32);
       if (H && c.s.cap === "top") return keep(lit("#f4f4f0", c));
-      return lit(shade("#4a4d52", 0.93 + 0.1 * c.noise(x * 12, 0, z * 12)), c);
+      return lit(shade("#4a4d52", 0.96 + 0.05 * c.noise(x * 6, 0, z * 6)), c);
     },
   });
   shadow(k, 0.065, 1.1, 0.6, { x: -0.3 });
   const heli = k.part("heli", { pivot: HELI.centre });
-  const P = { part: heli, flat: 0.2 };
+  const P = { part: heli, flat: 0.2, even: true, opacity: 1, jitter: 0.012 };
   // The cabin: a rounded body with a big glass bubble at the front.
   k.add(evenEllipsoid(k, 0.86, 0.62, 0.6), {
     even: true,
@@ -757,6 +764,9 @@ function balloonBuild(k, o) {
     return { base, seam, f: 0.8 + 0.22 * sunOf(c.n) };
   };
   k.add(envelope(0), {
+    even: true,
+    opacity: 1,
+    jitter: 0.01,
     part: balloon,
     flat: 0.2,
     size: 1.2,
@@ -766,6 +776,8 @@ function balloonBuild(k, o) {
     },
   });
   k.add(envelope(0.09), {
+    even: true,
+    jitter: 0.01,
     part: swell,
     flat: 0.2,
     size: 1.9,
@@ -785,12 +797,23 @@ function balloonBuild(k, o) {
     rod(k, top, bot, 0.012, { part: balloon, weight: 2.5, color: "#5b4632" });
   }
   // The burner.
-  k.add(k.cylinder(0.09, 0.14), {
+  k.add(evenCylinder(0.09, 0.09, 0.14), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     part: balloon,
     pos: [0, 0.66, 0],
     color: (c) => lit("#9ea3a8", c),
   });
-  k.add(k.torus(0.16, 0.018), { part: balloon, pos: [0, 0.6, 0], weight: 2, color: "#7e8388" });
+  k.add(evenTorus(k, 0.16, 0.018), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    part: balloon,
+    pos: [0, 0.6, 0],
+    weight: 2,
+    color: "#7e8388",
+  });
   k.cloud({ share: 0.03, size: 1.2, pattern: false, part: balloon }, (rand) => {
     const a = rand() * TAU;
     const r = 0.07 * Math.sqrt(rand());
@@ -825,7 +848,10 @@ function balloonBuild(k, o) {
     const base = c.p[1] > 0.47 ? "#6b4424" : mix("#b98a4e", "#8d6433", 0.5 + 0.5 * weave);
     return lit(base, c, 0.66);
   };
-  k.add(k.box(2 * bw, 0.36, 2 * bw), {
+  k.add(evenBox(2 * bw, 0.36, 2 * bw), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     part: balloon,
     pos: [0, 0.32, 0],
     flat: 0.2,
@@ -833,7 +859,10 @@ function balloonBuild(k, o) {
     core: "#6b4424",
     color: (c) => (c.s.face === 2 ? null : wicker(c)),
   });
-  k.add(k.box(2 * bw - 0.04, 0.02, 2 * bw - 0.04), {
+  k.add(evenBox(2 * bw - 0.04, 0.02, 2 * bw - 0.04), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     part: balloon,
     pos: [0, 0.46, 0],
     color: "#4a2f18",
@@ -843,6 +872,9 @@ function balloonBuild(k, o) {
     for (let i = 0; i < 5; i++) {
       const r = s * (0.55 + 0.45 * Math.sin(i * 1.7 + 1) ** 2);
       k.add(k.sphere(r), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [cx + (i - 2) * s * 0.55, cy + (i % 2) * s * 0.18 + (i === 2 ? s * 0.25 : 0), cz],
         flat: 0.35,
         pattern: false,
@@ -870,27 +902,37 @@ const TRAIN = {
 };
 
 function trainBuild(k, o) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const col = o.color;
   const black = "#1d1e21";
   const brass = "#d6ad4c";
   const red = "#b3261e";
-  const P = { flat: 0.2 };
+  const P = { flat: 0.2, even: true, opacity: 1, jitter: 0.012 };
   // Track: rails on sleepers on ballast.
-  k.add(k.box(6.4, 0.08, 1.35), {
+  k.add(evenBox(6.4, 0.08, 1.35), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [-0.4, -0.04, 0],
     ...P,
     pattern: false,
-    color: (c) => lit(shade("#8a847a", 0.85 + 0.25 * c.noise(c.p[0] * 30, 0, c.p[2] * 30)), c),
+    color: (c) => lit(shade("#8a847a", 0.93 + 0.12 * c.noise(c.p[0] * 12, 0, c.p[2] * 12)), c),
   });
   for (let x = -3.5; x <= 2.8; x += 0.28)
-    k.add(k.box(0.14, 0.05, 1.12), {
+    k.add(evenBox(0.14, 0.05, 1.12), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [x, 0.025, 0],
       ...P,
       pattern: false,
       color: (c) => lit("#5d4128", c),
     });
   for (const z of [-TRAIN.side + 0.08, TRAIN.side - 0.08])
-    k.add(k.box(6.4, 0.06, 0.05), {
+    k.add(evenBox(6.4, 0.06, 0.05), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [-0.4, 0.08, z],
       ...P,
       weight: 1.5,
@@ -911,6 +953,7 @@ function trainBuild(k, o) {
         spokes,
         tread: false,
         rimR: 0.86,
+        even: true,
       });
     return part;
   };
@@ -922,7 +965,10 @@ function trainBuild(k, o) {
   const ry = railTop + TRAIN.driverR;
   for (const z of [-1, 1]) {
     const zz = z * (TRAIN.side + 0.02);
-    k.add(k.box(TRAIN.drivers[2] - TRAIN.drivers[0] + 0.12, 0.05, 0.03), {
+    k.add(evenBox(TRAIN.drivers[2] - TRAIN.drivers[0] + 0.12, 0.05, 0.03), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       part: rods,
       pos: [(TRAIN.drivers[0] + TRAIN.drivers[2]) / 2 + TRAIN.crank, ry, zz],
       ...P,
@@ -930,7 +976,10 @@ function trainBuild(k, o) {
       color: (c) => lit("#b9bcc2", c, 0.6),
     });
     for (const x of TRAIN.drivers)
-      k.add(k.cylinder(0.035, 0.05), {
+      k.add(evenCylinder(0.035, 0.035, 0.05), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         part: rods,
         pos: [x + TRAIN.crank, ry, zz + z * 0.02],
         rot: [90, 0, 0],
@@ -938,17 +987,41 @@ function trainBuild(k, o) {
         color: "#8d9096",
       });
   }
+  // Lane Hands-on H4: the engine and tender are one part (they run along
+  // the rails in Hands-on; as built, it stands where it always has).
+  const loco = k.part("loco", { pivot: [0, 0, 0] });
+  const addL = (g, opts) => k.add(g, { part: loco, ...opts });
   // Running board and buffer beam.
   const deck = 0.8;
-  k.add(k.box(3.45, 0.08, 1.02), {
+  addL(evenBox(3.45, 0.08, 1.02), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [0.5, deck, 0],
     ...P,
     color: (c) => (c.s.face === 4 || c.s.face === 5 ? lit(red, c) : lit(black, c)),
   });
-  k.add(k.box(0.12, 0.26, 1.08), { pos: [2.28, 0.62, 0], ...P, color: (c) => lit(red, c) });
+  addL(evenBox(0.12, 0.26, 1.08), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    pos: [2.28, 0.62, 0],
+    ...P,
+    color: (c) => lit(red, c),
+  });
   for (const z of [-0.34, 0.34]) {
-    k.add(k.cylinder(0.05, 0.14), { pos: [2.4, 0.62, z], rot: [0, 0, 90], color: "#2b2b2b" });
-    k.add(k.cylinder(0.09, 0.03), {
+    addL(evenCylinder(0.05, 0.05, 0.14), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      pos: [2.4, 0.62, z],
+      rot: [0, 0, 90],
+      color: "#2b2b2b",
+    });
+    addL(evenCylinder(0.09, 0.09, 0.03), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [2.48, 0.62, z],
       rot: [0, 0, 90],
       color: (c) => lit("#b9bcc2", c),
@@ -956,7 +1029,10 @@ function trainBuild(k, o) {
   }
   // Cylinders beside the pony truck.
   for (const z of [-1, 1])
-    k.add(k.cylinder(0.16, 0.5), {
+    addL(evenCylinder(0.16, 0.16, 0.5), {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
       pos: [1.72, 0.62, z * 0.5],
       rot: [0, 0, 90],
       ...P,
@@ -964,7 +1040,10 @@ function trainBuild(k, o) {
     });
   // The boiler.
   const by = 1.22;
-  k.add(k.cylinder(0.42, 2.0), {
+  addL(evenCylinder(0.42, 0.42, 2.0), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [0.95, by, 0],
     rot: [0, 0, 90],
     ...P,
@@ -976,7 +1055,10 @@ function trainBuild(k, o) {
       return lit(band ? brass : col, c);
     },
   });
-  k.add(k.cylinder(0.44, 0.38), {
+  addL(evenCylinder(0.44, 0.44, 0.38), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [2.12, by, 0],
     rot: [0, 0, 90],
     ...P,
@@ -989,10 +1071,25 @@ function trainBuild(k, o) {
       return lit(black, c);
     },
   });
-  k.add(k.sphere(0.07), { pos: [2.33, by + 0.52, 0], pattern: false, weight: 3, color: "#fff4c8" });
-  k.add(k.cylinder(0.08, 0.1), { pos: [2.33, by + 0.52, 0], rot: [0, 0, 90], color: "#2b2b2b" });
+  addL(k.sphere(0.07), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    pos: [2.33, by + 0.52, 0],
+    pattern: false,
+    weight: 3,
+    color: "#fff4c8",
+  });
+  addL(evenCylinder(0.08, 0.08, 0.1), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    pos: [2.33, by + 0.52, 0],
+    rot: [0, 0, 90],
+    color: "#2b2b2b",
+  });
   // Chimney, dome and whistle.
-  k.add(
+  addL(
     k.lathe(
       [
         [0.14, 0],
@@ -1003,18 +1100,37 @@ function trainBuild(k, o) {
       ],
       { grid: 48 },
     ),
-    { pos: [2.1, by + 0.3, 0], ...P, color: (c) => lit(c.p[1] > by + 0.8 ? "#b87333" : black, c) },
+    {
+      even: true,
+      opacity: 1,
+      jitter: 0.012,
+      pos: [2.1, by + 0.3, 0],
+      ...P,
+      color: (c) => lit(c.p[1] > by + 0.8 ? "#b87333" : black, c),
+    },
   );
-  k.add(k.sphere(0.2), {
+  addL(k.sphere(0.2), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [1.05, by + 0.4, 0],
     scale: [1, 0.8, 1],
     color: (c) => lit(brass, c),
   });
-  k.add(k.cylinder(0.035, 0.2), { pos: [0.35, by + 0.5, 0], color: (c) => lit(brass, c) });
+  addL(evenCylinder(0.035, 0.035, 0.2), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
+    pos: [0.35, by + 0.5, 0],
+    color: (c) => lit(brass, c),
+  });
   // The cab.
   const cx0 = -1.15;
   const cx1 = -0.1;
-  k.add(k.box(cx1 - cx0, 1.05, 1.0), {
+  addL(evenBox(cx1 - cx0, 1.05, 1.0), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [(cx0 + cx1) / 2, deck + 0.55, 0],
     ...P,
     interior: 0.05,
@@ -1031,7 +1147,7 @@ function trainBuild(k, o) {
       return lit(col, c);
     },
   });
-  k.add(
+  addL(
     k.param(
       (u, v) => {
         const x = cx0 - 0.1 + (cx1 - cx0 + 0.18) * u;
@@ -1040,12 +1156,15 @@ function trainBuild(k, o) {
       },
       { grid: 24, flip: true },
     ),
-    { ...P, color: (c) => lit("#2a2b2e", c) },
+    { even: true, opacity: 1, jitter: 0.012, ...P, color: (c) => lit("#2a2b2e", c) },
   );
   // The tender with its coal.
   const tx0 = -2.95;
   const tx1 = -1.25;
-  k.add(k.box(tx1 - tx0, 0.7, 1.0), {
+  addL(evenBox(tx1 - tx0, 0.7, 1.0), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [(tx0 + tx1) / 2, deck + 0.28, 0],
     ...P,
     interior: 0.05,
@@ -1058,21 +1177,28 @@ function trainBuild(k, o) {
       return lit(col, c);
     },
   });
-  k.add(k.box(tx1 - tx0 + 0.04, 0.08, 1.04), {
+  addL(evenBox(tx1 - tx0 + 0.04, 0.08, 1.04), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [(tx0 + tx1) / 2, deck - 0.1, 0],
     ...P,
     color: (c) => lit(black, c),
   });
-  k.add(k.ellipsoid((tx1 - tx0) / 2 - 0.05, 0.2, 0.46), {
+  addL(evenEllipsoid(k, (tx1 - tx0) / 2 - 0.05, 0.2, 0.46), {
+    even: true,
+    opacity: 1,
+    jitter: 0.012,
     pos: [(tx0 + tx1) / 2, deck + 0.6, 0],
     flat: 0.4,
     color: (c) =>
       c.n[1] < 0
         ? null
-        : shade("#1c1c1f", 0.7 + 0.8 * Math.abs(c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30))),
+        : shade("#1c1c1f", 0.8 + 0.5 * Math.abs(c.noise(c.p[0] * 18, c.p[1] * 18, c.p[2] * 18))),
   });
   // Smoke puffs from the chimney trail back as the train runs.
   plume(k, [2.1, by + 0.95, 0], [-1.7, 1.1, 0], {
+    part: loco,
     share: 0.04,
     spread: 0.1,
     grow: 3.2,
@@ -1093,7 +1219,50 @@ function trainBuild(k, o) {
     height: 0.35,
     part: steam,
   });
+  trainRunway(k, railTop);
   k.reach([0.6, 3.1, 0]);
+}
+
+// Lane Hands-on H4: more track at both ends, with buffer stops, shown only
+// while Hands-on is on (the engine runs along it). Left out of the fit, so
+// the toy is framed as before.
+const RUNWAY = { min: -1.3, max: 1.3, ends: [-5.0, 4.2] };
+function trainRunway(k, railTop) {
+  const ext = k.part("runway", { pivot: [0, 0, 0] });
+  const R = { part: ext, fit: false, even: true, opacity: 1, jitter: 0.012, flat: 0.2, pattern: false }; // prettier-ignore
+  for (const [x0, x1] of [
+    [RUNWAY.ends[0], -3.6],
+    [2.8, RUNWAY.ends[1]],
+  ]) {
+    const L = x1 - x0;
+    const xm = (x0 + x1) / 2;
+    k.add(evenBox(L, 0.08, 1.35), {
+      ...R,
+      pos: [xm, -0.04, 0],
+      color: (c) => lit(shade("#8a847a", 0.93 + 0.12 * c.noise(c.p[0] * 12, 0, c.p[2] * 12)), c),
+    });
+    for (const z of [-TRAIN.side + 0.08, TRAIN.side - 0.08])
+      k.add(evenBox(L, 0.06, 0.05), {
+        ...R,
+        pos: [xm, 0.08, z],
+        weight: 1.5,
+        color: (c) => lit(c.n[1] > 0.5 ? "#c9ccd1" : "#6b6258", c),
+      });
+    // Buffer stop at the far end.
+    const xe = x0 < 0 ? x0 + 0.12 : x1 - 0.12;
+    k.add(evenBox(0.14, 0.34, 1.0), { ...R, pos: [xe, railTop + 0.2, 0], color: (c) => lit("#5d4128", c) }); // prettier-ignore
+    for (const z of [-0.34, 0.34])
+      k.add(evenCylinder(0.07, 0.07, 0.12), {
+        ...R,
+        pos: [xe + (x0 < 0 ? 0.12 : -0.12), railTop + 0.34, z],
+        rot: [0, 0, 90],
+        color: (c) => lit("#b3261e", c),
+      });
+  }
+  for (let x = -3.5 - 0.28; x >= RUNWAY.ends[0] + 0.1; x -= 0.28)
+    k.add(evenBox(0.14, 0.05, 1.12), { ...R, pos: [x, 0.025, 0], color: (c) => lit("#5d4128", c) }); // prettier-ignore
+  for (let x = -3.5 + 0.28 * 23; x <= RUNWAY.ends[1] - 0.1; x += 0.28)
+    k.add(evenBox(0.14, 0.05, 1.12), { ...R, pos: [x, 0.025, 0], color: (c) => lit("#5d4128", c) }); // prettier-ignore
 }
 
 // ---- Ocean liner ----------------------------------------------------------------------
@@ -1143,11 +1312,12 @@ function hull(k, { L, B, D, bow, stern, boxy = 0.28, sheer = 0.06, rise = 0.35 }
 }
 
 function linerBuild(k, o) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const { L, B, D } = LINER;
   const ship = k.part("ship", { pivot: LINER.centre });
   const S = { part: ship, flat: 0.2 };
   // Even, solid surfaces (rods stay as they are: cones lattice when even).
-  const E = { ...S, even: true, opacity: 1, jitter: 0.015 };
+  const E = { ...S, even: true, opacity: 1, jitter: 0.01 };
   const wl = LINER.water;
   const { top } = hull(
     k,
@@ -1155,6 +1325,7 @@ function linerBuild(k, o) {
     {
       side: {
         ...E,
+        size: 1.2,
         interior: 0.04,
         core: "#222",
         color: (c) => {
@@ -1164,8 +1335,8 @@ function linerBuild(k, o) {
           if (Math.abs(y + 0.11) < 0.012) return keep(lit("#d6ad4c", c));
           for (const yy of [-0.22, -0.33])
             if (
-              Math.abs(y - yy) < 0.017 &&
-              Math.abs(((x * 12.5) % 1) - 0.5) < 0.2 &&
+              Math.abs(y - yy) < 0.02 &&
+              Math.abs(((x * 9) % 1) - 0.5) < 0.22 &&
               Math.abs(c.n[2]) > 0.5
             )
               return keep("#fff1b8");
@@ -1202,12 +1373,24 @@ function linerBuild(k, o) {
     { x0: -1.95, x1: 1.72, w: 0.7, y0: 0.28, h: 0.24 },
     { x0: -1.6, x1: 1.45, w: 0.62, y0: 0.52, h: 0.2 },
   ];
-  for (const t of tiers)
-    k.add(evenBox(t.x1 - t.x0, t.h, t.w), {
-      ...E,
-      pos: [(t.x0 + t.x1) / 2, t.y0 + t.h / 2 + top(0.5), 0],
-      color: windows(t.x0, t.x1, { y0: t.y0 + top(0.5), h: t.h }, [0.5]),
-    });
+  // Lane Sharpness A: each deck is laid as short blocks end to end (a long,
+  // thin face spaces even splats in a hatch, which broke the windows into
+  // blobs), with smaller splats, so each window is a clean pane.
+  for (const t of tiers) {
+    const n = Math.round((t.x1 - t.x0) / 0.5);
+    const len = (t.x1 - t.x0) / n;
+    const win = windows(t.x0, t.x1, { y0: t.y0 + top(0.5), h: t.h }, [0.5]);
+    for (let i = 0; i < n; i++)
+      k.add(evenBox(len, t.h, t.w), {
+        ...E,
+        weight: 2,
+        pos: [t.x0 + (i + 0.5) * len, t.y0 + t.h / 2 + top(0.5), 0],
+        color: (c) => {
+          if ((c.s.face === 0 && i < n - 1) || (c.s.face === 1 && i > 0)) return null;
+          return win(c);
+        },
+      });
+  }
   // The bridge.
   k.add(evenBox(0.3, 0.16, 0.78), {
     ...E,
@@ -1236,6 +1419,7 @@ function linerBuild(k, o) {
   funnelX.forEach((fx) => {
     k.add(evenCylinder(0.17, 0.17, fh), {
       ...E,
+      weight: 1.6,
       pos: [fx - Math.sin(rk) * fh * 0.5, deckTop + fh / 2 - 0.05, 0],
       rot: [0, 0, rake],
       scale: [1, 1, 0.8],
@@ -1394,7 +1578,7 @@ function carBuild(k, o) {
       return lit(col, c);
     },
   });
-  // The cabin: a low glass canopy with a roof in body colour.
+  // The cabin: a low glass canopy with a roof in body color.
   const cx0 = -0.86;
   const cx1 = 0.45;
   const cabin = k.param(
@@ -1775,7 +1959,9 @@ function busBuild(k, o) {
     ["rear", W.rear],
   ]) {
     const part = k.part(name, { pivot: w, axis: [0, 0, 1] });
-    for (const z of [-0.47, 0.47])
+    // (Outside the body's sides, not through them: the owner's note of
+    // October 9, 2026.)
+    for (const z of [-0.6, 0.6])
       wheel(k, [w[0], w[1], z], 0.3, 0.22, {
         part,
         rim: "#3b3c40",
@@ -1792,6 +1978,7 @@ function busBuild(k, o) {
 const PLANE = { prop: [1.2, 0, 0] };
 
 function planeBuild(k, o) {
+  k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what the drive shows, for Hands-on
   const col = o.color;
   const wing = o.wings;
   const wood = "#6b4a2b";
@@ -2015,7 +2202,7 @@ function jetBuild(k, o) {
   });
   const grey = (c) => lit("#dfe3e8", c, 0.66);
   for (const s of [-1, 1]) {
-    // Wings with a little dihedral, winglets in the tail colour.
+    // Wings with a little dihedral, winglets in the tail color.
     slab(
       k,
       [
@@ -2098,7 +2285,7 @@ function jetBuild(k, o) {
       { flat: 0.2, color: grey },
     );
   }
-  // The fin in the tail colour with a light band.
+  // The fin in the tail color with a light band.
   slab(
     k,
     [
@@ -2174,7 +2361,7 @@ function sailboatBuild(k, o) {
   rod(k, [mx, 0.62, 0], [-1.08, 0.66, 0], 0.024, { ...S, weight: 1.6, color: "#c09160" });
   rod(k, [1.28, top(1), 0], [mx, 2.85, 0], 0.006, { ...S, weight: 4, color: "#555" });
   rod(k, [-1.25, top(0), 0], [mx, mTop - 0.05, 0], 0.006, { ...S, weight: 4, color: "#555" });
-  // Sails, filled with wind towards the viewer.
+  // Sails, filled with wind toward the viewer.
   const sailColor = (c) => {
     const y = c.p[1];
     const seam = Math.abs(((y - 0.6) / 0.34) % 1) < 0.03;
@@ -2670,12 +2857,79 @@ function tractorBuild(k, o) {
       },
     });
   };
+  // The big rear tires (the owner's notes of October 9, 2026: real ones):
+  // a squared-off tire whose chevron lugs stand out of its tread as solid
+  // bars, so they turn with the wheel instead of shimmering as paint, round
+  // a deep dished rim.
+  const rearTyre = (w, part) => {
+    const R = TRACTOR.rr;
+    const W = 0.19; // half its width
+    const lugH = 0.055;
+    const H = 0.125; // half its depth, rim to tread
+    const Rc = R - lugH - H;
+    // How much lug is at (u round, z across, t round the section).
+    const lug = (u, z, t) => {
+      const out = smoothstep(0.35, 0.7, Math.cos(t));
+      const f = (u * 24 + 0.55 * Math.abs(z / W) + (z < 0 ? 0.5 : 0)) % 1;
+      return out * smoothstep(0, 0.05, f) * smoothstep(0.5, 0.45, f) * smoothstep(0.08, 0.2, Math.abs(z / W)); // prettier-ignore
+    };
+    const sp = (x, p) => Math.sign(x) * Math.pow(Math.abs(x), p);
+    const tyre = k.param(
+      (u, v) => {
+        const a = TAU * u;
+        const t = TAU * v;
+        const z = W * sp(Math.sin(t), 0.35);
+        const rr = Rc + H * sp(Math.cos(t), 0.35) + lugH * lug(u, z, t);
+        return [rr * Math.cos(a), rr * Math.sin(a), z];
+      },
+      { grid: 192, thick: 0.03 },
+    );
+    k.add(tyre, {
+      even: true,
+      opacity: 1,
+      jitter: 0.008,
+      part,
+      pos: w,
+      flat: 0.3,
+      weight: 2.2,
+      pattern: false,
+      color: (c) => {
+        const t = TAU * c.v;
+        const z = W * sp(Math.sin(t), 0.35);
+        const l = lug(c.u, z, t);
+        return lit(mix("#1c1c1e", "#2f2f32", l), c);
+      },
+    });
+    // The rim: a dished cream disc on each side, its hub and its bolts.
+    k.add(evenCylinder(Rc - H * 0.55, Rc - H * 0.55, 2 * W * 0.92), {
+      even: true,
+      opacity: 1,
+      jitter: 0.01,
+      part,
+      pos: w,
+      rot: [90, 0, 0],
+      flat: 0.2,
+      pattern: false,
+      color: (c) => {
+        // The same cream as the front rims (unlit, as theirs).
+        if (c.s.side) return "#9a927f";
+        const rr = c.s.radial;
+        if (rr < 0.26) return shade("#e9dfc4", 0.8);
+        const bolt = Math.abs(rr - 0.42) < 0.05 && (c.u * 8) % 1 < 0.22;
+        const ring = Math.abs(rr - 0.78) < 0.04;
+        return shade("#e9dfc4", bolt ? 0.6 : ring ? 0.8 : 0.95 - 0.1 * rr);
+      },
+    });
+  };
   for (const [name, w, r, wid, zz] of [
     ["rear", TRACTOR.rear, TRACTOR.rr, 0.38, 0.58],
     ["front", TRACTOR.front, TRACTOR.fr, 0.2, 0.44],
   ]) {
     const part = k.part(name, { pivot: w, axis: [0, 0, 1] });
-    for (const z of [-zz, zz]) chevronTyre([w[0], w[1], z], r, wid, part);
+    for (const z of [-zz, zz]) {
+      if (name === "rear") rearTyre([w[0], w[1], z], part);
+      else chevronTyre([w[0], w[1], z], r, wid, part);
+    }
   }
   // Chassis, bonnet and grille.
   k.add(evenBox(1.9, 0.26, 0.44), {
@@ -2819,27 +3073,39 @@ function tractorBuild(k, o) {
     color: "#1e1e20",
   });
   rod(k, [-0.3, 1.45, 0], [-0.08, 1.1, 0], 0.02, { weight: 3, color: "#1e1e20" });
-  // Mudguards over the big wheels.
+  // Fenders over the big wheels: a curved top close over the tread (clear
+  // of the lugs), a lip turned down on the outside and a wall on the inside,
+  // so they read as one pressed steel piece and the tire's top never shows
+  // in the cab (the owner's notes of October 9, 2026).
+  const FR = TRACTOR.rr + 0.06;
+  const arc = (u) => Math.PI * (0.1 + 0.8 * u);
+  const at = (a, R, z) => [TRACTOR.rear[0] + Math.cos(a) * R, TRACTOR.rear[1] + Math.sin(a) * R, z];
+  const steel = { even: true, opacity: 1, jitter: 0.01, ...P, pattern: false };
   for (const s of [-1, 1]) {
-    const guard = k.param(
-      (u, v) => {
-        const a = Math.PI * (0.05 + 0.9 * u);
-        const R = TRACTOR.rr + 0.08;
-        return [
-          TRACTOR.rear[0] + Math.cos(a) * R,
-          TRACTOR.rear[1] + Math.sin(a) * R,
-          s * (0.36 + 0.44 * v),
-        ];
+    k.add(
+      k.param((u, v) => at(arc(u), FR, s * (0.35 + 0.47 * v)), { grid: 48, flip: s < 0 }),
+      {
+        ...steel,
+        weight: 2,
+        color: (c) => lit(col, c),
       },
-      { grid: 32, flip: s < 0 },
     );
-    k.add(guard, {
-      opacity: 1,
-      jitter: 0.015,
-      ...P,
-      weight: 1.2,
-      color: (c) => lit(col, c),
-    });
+    k.add(
+      k.param((u, v) => at(arc(u), FR - 0.09 * v, s * 0.82), { grid: 48, flip: s < 0 }),
+      {
+        ...steel,
+        weight: 1.4,
+        color: (c) => lit(shade(col, 0.92), c),
+      },
+    );
+    k.add(
+      k.param((u, v) => at(arc(u), 0.3 + (FR - 0.3) * v, s * 0.35), { grid: 40, flip: s > 0 }),
+      {
+        ...steel,
+        weight: 1.2,
+        color: (c) => lit(shade(col, 0.85), c),
+      },
+    );
   }
   shadow(k, 0.004, 1.45, 0.95);
 }
@@ -2941,7 +3207,7 @@ function ufoBuild(k) {
     params: [0.25, 0],
     color: "#8ff7ff",
   });
-  // Coloured lights that run round the rim.
+  // Colored lights that run round the rim.
   const lights = k.part("lights", { pivot: UFO.centre, axis: [0, 1, 0] });
   const bulbs = ["#ff4d6d", "#ffd23f", "#3ee6ff", "#7cff6b", "#c77dff"];
   for (let i = 0; i < 16; i++) {
@@ -3041,12 +3307,80 @@ function ufoBuild(k) {
   rod(k, [-0.25, -1.4, 0], [-0.34, -1.58, 0], 0.012, { ...C, color: "#1d1d1d" });
 }
 
+// ---- Hands-on (lane Hands-on H4) -------------------------------------------------------
+
+// A rotor turned by hand rides the helicopter as the drive last showed it
+// (on its pad, or hovering).
+function heliRide(d, parts, name, a) {
+  const h = d?.h4;
+  if (!h) return;
+  const pv = name === "rotor" ? HELI.rotor : HELI.tail;
+  const ax = name === "rotor" ? [0, 1, 0] : [0, 0, 1];
+  parts[name] = carried(pv, h.tq, HELI.centre, h.lift, quatAxisAngle(ax, a));
+}
+
+// The engine rolled `v` along its rails: every axle with it, each turned by
+// the distance over its own radius, and the coupling rods on the cranks.
+function trainRide(d, parts, v) {
+  const a = -v / TRAIN.driverR;
+  TRAIN.drivers.forEach((x, i) => (parts[`driver${i}`] = { angle: a, offset: [v, 0, 0] }));
+  parts.pony = { angle: -v / TRAIN.ponyR, offset: [v, 0, 0] };
+  TRAIN.tender.forEach((x, i) => (parts[`tender${i}`] = { angle: -v / TRAIN.tenderR, offset: [v, 0, 0] })); // prettier-ignore
+  const r = TRAIN.crank;
+  parts.rods = { offset: [v + r * Math.cos(a) - r, r * Math.sin(a), 0] };
+  parts.steam = { offset: [v, 0, 0], visible: d?.h4?.steam ?? 0 };
+  parts.runway = { visible: 1 };
+}
+
+// The liner pushed down `v`: it pitches a little with the push (bow down),
+// and the horn's steam rides it.
+function linerRide(d, parts, v) {
+  const q = quatAxisAngle([0, 0, 1], 0.12 * v);
+  const ship = carried(LINER.centre, q, LINER.centre, [0, v, 0]);
+  parts.ship = ship;
+  parts.horn = { ...carried(LINER.horn, q, LINER.centre, [0, v, 0]), visible: d?.h4?.horn ?? 0 };
+}
+
+// The flying saucer's beam: a loose cow inside the cone of light (while the
+// beam is on) is held up against its weight and drawn up to where it hangs
+// as built, toward the beam's middle, turning slowly. Outside it falls.
+const UFO_GROUND = -2.35;
+function ufoBeam(b, h, ctx) {
+  if (!ctx.piece || b.held || b.pinned) return;
+  const [x, y, z] = b.pos;
+  const r = Math.hypot(x, z);
+  // The patch of grass is round: past its edge the cow is turned back in
+  // (the play area's walls are square).
+  if (r > 1.2) {
+    const k = (24 * (r - 1.2)) / r;
+    b.vel[0] -= k * x * h;
+    b.vel[2] -= k * z * h;
+  }
+  const on = ctx.c.beam ?? 0;
+  if (on < 0.05) return;
+  const t = clamp((y + 0.32) / (UFO_GROUND + 0.32), 0, 1);
+  const rad = 0.36 + 0.7 * t;
+  const k = on * smoothstep(rad, 0.75 * rad, r);
+  if (k <= 0) return;
+  const lift = ctx.G + 9 * (-1.45 - y) - 2.6 * b.vel[1];
+  b.vel[1] += k * lift * h;
+  b.vel[0] += k * (-2.5 * x - 1.8 * b.vel[0]) * h;
+  b.vel[2] += k * (-2.5 * z - 1.8 * b.vel[2]) * h;
+  b.omega[0] *= 1 - k * 3 * h;
+  b.omega[2] *= 1 - k * 3 * h;
+  b.omega[1] += k * (0.5 - b.omega[1]) * 2 * h;
+}
+
 // ---- Recipes ----------------------------------------------------------------------------
 
 export const RECIPES = {
   rocket: {
+    // Lane Any pose: turned over in Hands-on, its rising splats keep to the
+    // toy's own frame (the exhaust leaves the nozzle and the launch smoke
+    // billows along the pad), not the world's up.
+    gravity: false,
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d62d2d" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d62d2d" }],
     controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 7 }],
     action: { key: "launch", label: "Launch" },
     drive(t, c, out, info) {
@@ -3075,10 +3409,19 @@ export const RECIPES = {
 
   helicopter: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#e8452c" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#e8452c" }],
     controls: [{ key: "fly", label: "Fly", type: "toggle", default: 0, ease: 2.4 }],
     action: { key: "fly", label: "Take off or land" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): flick the main rotor or the tail rotor to
+    // spin it; it coasts to a stop. (It plays in pieces mode: the rotors
+    // turn, the helicopter stays on its pad.)
+    hands: {
+      joints: (d) => [
+        { type: "dial", part: "rotor", pivot: HELI.rotor, axis: [0, 1, 0], drag: 0.3, pos: HELI.rotor, pick: [1.7, 0.16, 1.7], start: () => d?.h4?.rotor ?? 0, also: (a, parts) => heliRide(d, parts, "rotor", a) }, // prettier-ignore
+        { type: "dial", part: "tailRotor", pivot: HELI.tail, axis: [0, 0, 1], drag: 0.6, pos: HELI.tail, pick: [0.1, 0.36, 0.36], start: () => d?.h4?.tail ?? 0, also: (a, parts) => heliRide(d, parts, "tailRotor", a) }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       const f = easeInOut(c.fly);
       const bob = 0.04 * Math.sin(t * 1.9) * f;
       const lift = [0, 1.1 * f + bob, 0];
@@ -3098,6 +3441,7 @@ export const RECIPES = {
         lift,
         quatAxisAngle([0, 0, 1], -t * 17),
       );
+      if (info.data) info.data.h4 = { rotor: (-t * 11) % TAU, tail: (-t * 17) % TAU, tq, lift };
     },
     build: helicopterBuild,
   },
@@ -3115,11 +3459,14 @@ export const RECIPES = {
           { id: "rainbow", label: "Rainbow" },
         ],
       },
-      { key: "c1", label: "Colour 1", type: "color", default: "#e8412f" },
-      { key: "c2", label: "Colour 2", type: "color", default: "#f6c945" },
+      { key: "c1", label: "Color 1", type: "color", default: "#e8412f" },
+      { key: "c2", label: "Color 2", type: "color", default: "#f6c945" },
     ],
     controls: [{ key: "burn", label: "Burner", type: "pulse", ease: 4 }],
     action: { key: "burn", label: "Fire the burner" },
+    // Hands-on (lane Hands-on H4): pull it down by the basket and let go; the
+    // hot air floats it back up to where it hovers, basket under it.
+    hands: { air: { hover: 0, spring: 0.35, drag: 2.6, floor: 1.2, upright: 5 } },
     drive(t, c, out) {
       // The burner roars at once, the envelope swells with hot air, and the
       // balloon climbs, then drifts back down as it cools.
@@ -3140,10 +3487,18 @@ export const RECIPES = {
 
   "steam-train": {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#1f6b43" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#1f6b43" }],
     controls: [{ key: "toot", label: "Whistle", type: "pulse", ease: 2 }],
     action: { key: "toot", label: "Blow the whistle" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): push the engine along its rails; it rolls
+    // on, its wheels and coupling rods turning as it goes, until it slows or
+    // meets a buffer stop. More track shows at both ends while ✋ is on.
+    hands: {
+      joints: (d) => [
+        { type: "slider", part: "loco", pivot: [0, 0, 0], axis: [1, 0, 0], min: RUNWAY.min, max: RUNWAY.max, damping: 0.35, gravity: false, bounce: 0.25, pos: [-0.25, 1.0, 0], pick: [2.8, 1.0, 0.62], also: (v, parts) => trainRide(d, parts, v) }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       const w = t * 2.2;
       const a = -(w + burst(c.toot, 2));
       TRAIN.drivers.forEach((x, i) => (out.parts[`driver${i}`] = { angle: a }));
@@ -3153,6 +3508,8 @@ export const RECIPES = {
       const r = TRAIN.crank;
       out.parts.rods = { offset: [r * Math.cos(a) - r, r * Math.sin(a), 0] };
       out.parts.steam = { visible: c.toot > 0.02 ? smoothstep(0, 0.25, c.toot) : 0 };
+      out.parts.runway = { visible: info.hands?.on ? 1 : 0 };
+      if (info.data) info.data.h4 = { steam: out.parts.steam.visible, toot: c.toot };
       out.amount = 1 + 1.2 * c.toot;
     },
     build: trainBuild,
@@ -3163,11 +3520,19 @@ export const RECIPES = {
     options: [{ key: "funnel", label: "Funnels", type: "color", default: "#c0392b" }],
     controls: [{ key: "horn", label: "Horn", type: "pulse", ease: 2.5 }],
     action: { key: "horn", label: "Sound the horn" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): push the ship down into the sea and let
+    // go: it bobs back up, pitching a little as it goes, and settles.
+    hands: {
+      joints: (d) => [
+        { type: "slider", part: "ship", pivot: LINER.centre, axis: [0, 1, 0], min: -0.42, max: 0.2, spring: 26, damping: 2.2, gravity: false, bounce: 0.2, pos: [0, 0.4, 0], pick: [3.0, 0.9, 0.6], also: (v, parts) => linerRide(d, parts, v) }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       const tq = tilt(0.025 * Math.sin(t * 0.9), 0.012 * Math.sin(t * 0.63 + 1));
       out.parts.ship = carried(LINER.centre, tq, LINER.centre, [0, 0.015 * Math.sin(t * 1.1), 0]);
       const h = carried(LINER.horn, tq, LINER.centre);
       out.parts.horn = { ...h, visible: c.horn > 0.02 ? smoothstep(0, 0.2, c.horn) : 0 };
+      if (info.data) info.data.h4 = { horn: out.parts.horn.visible };
       out.amount = 1 + 0.8 * c.horn;
     },
     build: linerBuild,
@@ -3175,11 +3540,14 @@ export const RECIPES = {
   "sports-car": {
     alive: true,
     options: [
-      { key: "color", label: "Colour", type: "color", default: "#e3242b" },
+      { key: "color", label: "Color", type: "color", default: "#e3242b" },
       { key: "stripes", label: "Stripes", type: "switch", default: true },
     ],
     controls: [{ key: "vroom", label: "Rev", type: "pulse", ease: 1.8 }],
     action: { key: "vroom", label: "Rev the engine" },
+    // Hands-on (lane Hands engine A): push it and it rolls on its wheels,
+    // which turn by the distance rolled.
+    hands: { wheels: { axle: [0, 0, 1], r: CAR.r, parts: ["front", "rear"] } },
     drive(t, c, out) {
       const a = -(t * 2.5 + burst(c.vroom, 3));
       out.parts.front = { angle: a };
@@ -3208,6 +3576,9 @@ export const RECIPES = {
     ],
     controls: [{ key: "beep", label: "Stop", type: "pulse", ease: 4.5 }],
     action: { key: "beep", label: "Stop for passengers" },
+    // Hands-on (lane Hands-on H4): push it and it rolls on its turning wheels.
+    // (`lift`: a drag straight up picks it up, as at Level 1.)
+    hands: { wheels: { axle: [0, 0, 1], r: 0.3, parts: ["front", "rear"], lift: true } },
     drive(t, c, out) {
       // A bus stop: the lights flash, the stop arm swings out and the doors
       // open; then everything folds away again.
@@ -3236,8 +3607,16 @@ export const RECIPES = {
     ],
     controls: [{ key: "loop", label: "Loop", type: "pulse", ease: 3 }],
     action: { key: "loop", label: "Loop the loop" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): flick the propeller to spin it; it coasts
+    // to a stop. (Pieces mode: the propeller turns, the plane stays put.)
+    hands: {
+      joints: (d) => [
+        { type: "dial", part: "prop", pivot: PLANE.prop, axis: [1, 0, 0], drag: 0.5, pos: PLANE.prop, pick: [0.14, 0.5, 0.5], start: () => d?.h4?.prop ?? 0 }, // prettier-ignore
+      ],
+    },
+    drive(t, c, out, info) {
       out.parts.prop = { angle: t * 20 + burst(c.loop, 4) };
+      if (info.data) info.data.h4 = { prop: out.parts.prop.angle % TAU };
       const th = c.loop > 0.001 ? TAU * smoothstep(0, 1, 1 - c.loop) : 0;
       const R = 0.45;
       out.body = {
@@ -3280,6 +3659,13 @@ export const RECIPES = {
     ],
     controls: [{ key: "gust", label: "Gust", type: "pulse", ease: 3.5 }],
     action: { key: "gust", label: "A gust of wind" },
+    // Hands-on (lane Hands-on H4): push the mast over; she heels on her keel
+    // and rocks back upright when let go, the spray riding with her.
+    hands: {
+      joints: [
+        { type: "hinge", part: "boat", pivot: [0, -0.3, 0], axis: [1, 0, 0], min: -1.0, max: 1.0, spring: 16, damping: 1.2, gravity: false, bounce: 0.2, pos: [0, 1.2, 0], pick: [1.5, 2.0, 0.7], also: (a, parts) => (parts.spray = { visible: 0 }) }, // prettier-ignore
+      ],
+    },
     drive(t, c, out) {
       // The gust heels her right over at once, throws up spray, and she
       // rocks back upright as it passes.
@@ -3296,9 +3682,13 @@ export const RECIPES = {
 
   submarine: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#f5c21b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#f5c21b" }],
     controls: [{ key: "dive", label: "Dive", type: "pulse", ease: 5 }],
     action: { key: "dive", label: "Dive and surface" },
+    // Hands-on (lane Hands-on H4): she floats on a water line; push her under
+    // and let go, and she bobs back up to the surface, kept upright by her
+    // keel (a round hull alone would roll over).
+    hands: { water: { density: 0.62, drag: 5, depth: 2.2, color: "#2f7fa8" }, upright: { k: 200, damping: 14 } }, // prettier-ignore
     drive(t, c, out) {
       // Periscope down, nose down and a rush of bubbles; she dives, then
       // noses back up to the surface and raises the periscope again.
@@ -3325,6 +3715,12 @@ export const RECIPES = {
     options: [{ key: "color", label: "Frame", type: "color", default: "#1e88e5" }],
     controls: [{ key: "ring", label: "Bell", type: "pulse", ease: 2.5 }],
     action: { key: "ring", label: "Ring the bell" },
+    // Hands-on (lane Hands-on H4): push it and it rolls on its wheels, held
+    // upright as a rider would.
+    hands: {
+      wheels: { axle: [0, 0, 1], r: 0.66, parts: ["front", "rear"] },
+      upright: { k: 300, damping: 20 },
+    },
     drive(t, c, out, info) {
       // Ring-ring: the bell shakes and rings out, and the rider pedals hard
       // (whole turns, so the wheels end where they would have been).
@@ -3344,12 +3740,17 @@ export const RECIPES = {
 
   tractor: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#c8322b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#c8322b" }],
     controls: [{ key: "chug", label: "Chug", type: "pulse", ease: 2 }],
     action: { key: "chug", label: "Chug chug" },
+    // Hands-on (lane Hands-on H4): push it and it rolls on its big wheels;
+    // the small front wheels turn faster, as on the real thing.
+    hands: { wheels: { axle: [0, 0, 1], r: TRACTOR.rr, parts: [] } },
     drive(t, c, out, info) {
-      out.parts.rear = { angle: -(t * 1.2 + burst(c.chug, 1)) };
-      out.parts.front = { angle: -((t * 1.2 * TRACTOR.rr) / TRACTOR.fr + burst(c.chug, 2)) };
+      // (In Hands-on the wheels turn by the distance rolled.)
+      const roll = info.hands?.on ? info.hands.rolled : t * 1.2;
+      out.parts.rear = { angle: -(roll + burst(c.chug, 1)) };
+      out.parts.front = { angle: -((roll * TRACTOR.rr) / TRACTOR.fr + burst(c.chug, 2)) };
       out.body = { squash: 0.03 * Math.sin(info.time * 18) * c.chug };
       out.amount = 1 + 1.6 * c.chug;
     },
@@ -3360,6 +3761,16 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "beam", label: "Beam", type: "toggle", default: 1, ease: 1.6 }],
     action: { key: "beam", label: "Beam on or off" },
+    // Hands-on (lane Hands-on H4): pick the cow up and set it on the grass;
+    // drag it under the beam and it floats up to the saucer; switch the beam
+    // off and it drops.
+    hands: {
+      floor: -2.35,
+      area: 0.9,
+      place: false,
+      pieces: () => [{ part: "cow", pos: [0, -1.45, 0], pivot: [0, -1.45, 0], solid: { type: "box", half: [0.42, 0.27, 0.17] }, points: surfacePoints({ type: "box", half: [0.42, 0.27, 0.17] }, 2), mass: 1, friction: 0.8, pick: [0.45, 0.32, 0.2] }], // prettier-ignore
+      force: ufoBeam,
+    },
     drive(t, c, out) {
       const b = easeInOut(c.beam);
       const bob = [0, 0.05 * Math.sin(t * 1.3), 0];

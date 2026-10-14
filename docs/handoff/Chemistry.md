@@ -12,16 +12,10 @@ docs/handoff/Chemistry.md.
 
 ### Brief (written by the Operator on September 29, 2026, from the owner's review notes on the space, atoms and gems toys, and his go-ahead that morning)
 
-The owner's notes, word for word:
-
-- On the atom: "This looks fantastic. I don't think that I want to change this specific atom toy per
-  se, but it would be nice if we could (at some point, not necessarily now) expand the chemistry
-  "set" (so to speak) to include more atoms, and have the protons, neutrons, and electrons (with
-  orbits, etc.) be realistic? It would be super cool if someone could pick an element from the
-  periodic table here."
-- On the molecule: "… expand the chemistry "set" (so to speak) to include more molecules?"
-- On the crystal lattice: "… to include more lattices?"
-- On the electron orbital: "… to include more atoms?"
+The owner's notes, in the Operator's words: the atom toy is fantastic and need not change. At some
+point (not necessarily now) he wants the chemistry set expanded: more atoms with realistic protons,
+neutrons, and electrons (with orbits), more molecules, more lattices, and more atoms in the electron
+orbital toy. He would love to pick an element from the periodic table here.
 
 Today the atom toy (`atom` in src/packs/atoms.js) offers 44 elements from a list, the molecule toy
 already reads about sixty names, formulas, SMILES and files (src/chem/), the crystal lattice has

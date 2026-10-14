@@ -3,3 +3,9 @@ test-results/
 playwright-report/
 .cache/
 .DS_Store
+
+# grooph: session events stay in the sandbox (only the hook pushes them, to grooph-events/* branches)
+.grooph/events/
+.grooph/proposals/
+# Claude Code: a local session's own permission settings (local lanes, OPERATING.md)
+.claude/settings.local.json

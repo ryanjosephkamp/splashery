@@ -176,6 +176,11 @@ textarea {
   line-height: 1.2;
 }
 
+.brand h1 a {
+  color: inherit;
+  pointer-events: auto;
+}
+
 .brand p {
   margin: 0;
   font-size: 13px;
@@ -243,6 +248,19 @@ textarea {
 
 .toy-legend li.dim {
   color: var(--muted);
+}
+
+/* Lane Powers of ten: a scale bar with end ticks. */
+.toy-legend li.ruler {
+  padding-left: 0;
+}
+
+.toy-legend-ruler {
+  display: block;
+  height: 7px;
+  margin: 3px 0 2px;
+  border: 2px solid currentColor;
+  border-top: 0;
 }
 
 .toy-legend li.on {
@@ -1282,7 +1300,8 @@ input[type="range"] {
 
 select,
 textarea,
-input[type="number"] {
+input[type="number"],
+input.option-text {
   width: 100%;
   min-width: 0;
   padding: 4px 8px;
@@ -1634,6 +1653,49 @@ button.danger.armed {
   transform: translate(-50%, 0);
 }
 
+/* Lane Books r5: a link in a page asks before it opens. */
+.link-confirm {
+  position: fixed;
+  left: calc((100% - var(--panel-w) - 24px) / 2);
+  top: 76px;
+  z-index: 27;
+  width: min(360px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  padding: 12px 14px 8px;
+  background: var(--page);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.22);
+}
+
+.link-confirm[hidden] {
+  display: none;
+}
+
+.link-confirm-text {
+  margin: 0 0 4px;
+  font-weight: 600;
+}
+
+.link-confirm-url {
+  margin: 0;
+  font-size: 12px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+
+.link-confirm a.button {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: 13px;
+  text-decoration: none;
+}
+
 /* Phones: bottom sheet ---------------------------------------------------- */
 /* The dock (handle, chips, shelf, tools) always shows; the tabs open above
    it. --dock-h is the panel's height, measured in ui.js, so the stage always
@@ -1890,7 +1952,8 @@ button.danger.armed {
   }
 
   .progress,
-  .toast {
+  .toast,
+  .link-confirm {
     left: 50%;
   }
 
@@ -1964,6 +2027,23 @@ body.embed #stage {
   min-height: 0;
   padding: 0;
   font-size: 16px;
+  line-height: 1;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.embed-sound {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 5;
+  width: 28px;
+  height: 28px;
+  min-height: 0;
+  padding: 0;
+  font-size: 14px;
   line-height: 1;
   color: var(--ink);
   background: var(--paper);
@@ -2092,10 +2172,12 @@ body.embed #stage {
 /* /View settings */
 
 /* Live input (lane Live input): the pill that shows while the microphone,
-   the camera or a screen is on, with its Stop button. */
+   the camera or a screen is on, with its Stop button. It sits just under the
+   header's row of buttons, over the stage, so it never covers a control
+   (lane Live input r3; on a phone it used to cover five of them). */
 .live-indicator {
   position: fixed;
-  top: calc(env(safe-area-inset-top, 0px) + 8px);
+  top: calc(env(safe-area-inset-top, 0px) + 80px);
   left: 50%;
   transform: translateX(-50%);
   z-index: 60;
@@ -2113,6 +2195,14 @@ body.embed #stage {
 
 .live-indicator[hidden] {
   display: none;
+}
+
+/* On a computer, UI r5's Record pill sits at the top of the stage too: while
+   it shows, the Live pill drops below it (it widens with Save and Share). */
+@media (min-width: 761px) {
+  body:has(#rec-pill:not([hidden])) .live-indicator {
+    top: calc(env(safe-area-inset-top, 0px) + 116px);
+  }
 }
 
 .live-dot {
@@ -2834,5 +2924,281 @@ body:has(#game-bar:not([hidden])) .hands-bar {
   body.sheet-open .hands-bar,
   body.shelf-grid .hands-bar {
     display: none;
+  }
+}
+
+/* Lane Pages r6 ------------------------------------------------------------- */
+/* Pop out, in the row of round buttons beside the flag on a computer; on a
+   phone, where the row is full, it takes the turntable's place (a page toy
+   holds still). Shown only while a page toy is open. */
+
+#pop-toggle {
+  right: calc(var(--panel-w) + 36px + 264px);
+}
+
+body.ui2 #pop-toggle {
+  right: calc(var(--panel-w) + 36px + 308px);
+}
+
+#pop-toggle[hidden] {
+  display: none;
+}
+
+/* (ui.js puts it where the turntable button sits on a phone.) */
+@media (max-width: 760px) {
+  body.pop-toy #turntable-toggle {
+    display: none;
+  }
+}
+
+body.focus #pop-toggle {
+  display: none !important;
+}
+
+/* The slider over the stage (a risen figure's depth), set by the toy. */
+.toy-slider {
+  position: fixed;
+  left: calc((100% - var(--panel-w) - 24px) / 2);
+  bottom: 70px;
+  z-index: 5;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  width: min(320px, calc(100vw - 32px));
+  transform: translateX(-50%);
+  padding: 6px 14px;
+  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.toy-slider[hidden] {
+  display: none;
+}
+
+.toy-slider-label {
+  flex: none;
+  font-weight: 600;
+}
+
+.toy-slider input {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 760px) {
+  .toy-slider {
+    left: 50%;
+    bottom: calc(var(--dock-h, 200px) + 54px);
+  }
+
+  body.sheet-open .toy-slider,
+  body.shelf-grid .toy-slider {
+    display: none;
+  }
+}
+
+/* /Lane Pages r6 */
+
+/* Live r8: a toy's depth slider over the stage's right edge (page controls,
+   not splats), with a × to hide it and a small button to bring it back. */
+.stage-dial,
+.stage-dial-show {
+  position: fixed;
+  right: calc(var(--panel-w) + 60px);
+  top: 50%;
+  z-index: 5;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
+  border: 1px solid var(--line);
+}
+
+.stage-dial {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 44px;
+  padding: 4px 0 8px;
+  border-radius: 22px;
+  transform: translateY(-50%);
+}
+
+.stage-dial[hidden],
+.stage-dial-show[hidden] {
+  display: none;
+}
+
+.stage-dial-hide {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  font: inherit;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--ink);
+  background: none;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/* The range input turned upright: up is more. */
+.stage-dial-track {
+  position: relative;
+  width: 44px;
+  height: 160px;
+}
+
+.stage-dial-track input {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 150px;
+  margin: 0;
+  transform: translate(-50%, -50%) rotate(-90deg);
+}
+
+.stage-dial-show {
+  padding: 6px 10px;
+  border-radius: 999px;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+/* Lane Photo depth: dragged by its frame or its name; once moved, src/ui.js places it (left, top)
+   and the media queries below leave it there. */
+.stage-dial {
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stage-dial-show {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.stage-dial.dragging,
+.stage-dial-show.dragging {
+  cursor: grabbing;
+}
+
+.stage-dial-label {
+  padding: 2px 4px;
+  border-radius: 6px;
+}
+
+.stage-dial-label:focus-visible {
+  outline: 2px solid var(--accent, currentColor);
+}
+
+/* Focus mode on a computer hides the panel, so nothing keeps room for it: the stage's buttons, the
+   slider over the stage and the toy's own slider move with the full-screen stage. */
+@media (min-width: 761px) {
+  body.focus {
+    --panel-w: 0px;
+  }
+}
+
+@media (max-width: 760px) {
+  /* On a phone: the right edge, below the toy's name and well above the
+     stage's own buttons, clear of a face in the middle. */
+  .stage-dial:not(.placed),
+  .stage-dial-show:not(.placed) {
+    right: 8px;
+    top: 132px;
+    transform: none;
+  }
+
+  body.sheet-open .stage-dial,
+  body.sheet-open .stage-dial-show,
+  body.shelf-grid .stage-dial,
+  body.shelf-grid .stage-dial-show {
+    display: none;
+  }
+}
+
+/* /Live r8 */
+
+/* Short wide screens: the gallery must leave room for scrollable settings.
+   Keep the full-height stage beside the panel, including after rotation. */
+@media (min-width: 761px) and (max-height: 500px) {
+  body.app:not(.panel-folded):not(.focus):not(.gallery-page) #stage {
+    width: calc(
+      100% - var(--panel-w) - 12px -
+        max(12px, var(--playground-safe-right, env(safe-area-inset-right, 0px)))
+    );
+  }
+
+  body .panel {
+    top: max(12px, var(--playground-safe-top, env(safe-area-inset-top, 0px)));
+    right: max(12px, var(--playground-safe-right, env(safe-area-inset-right, 0px)));
+    bottom: max(12px, var(--playground-safe-bottom, env(safe-area-inset-bottom, 0px)));
+  }
+
+  body.gallery-page .panel {
+    left: max(12px, var(--playground-safe-left, env(safe-area-inset-left, 0px)));
+  }
+
+  .focus-exit {
+    top: calc(10px + var(--playground-safe-top, env(safe-area-inset-top, 0px)));
+    right: calc(10px + var(--playground-safe-right, env(safe-area-inset-right, 0px)));
+  }
+
+  body:not(.gallery-page) .dock {
+    flex: 0 1 auto;
+    min-height: 0;
+    max-height: 55%;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+
+  body:not(.gallery-page) .shelf {
+    max-height: min(var(--shelf-h), 72px);
+  }
+
+  body:not(.gallery-page) .panel-body {
+    flex: 1 0 45%;
+  }
+
+  body:not(.gallery-page) .grip-shelf {
+    display: none;
+  }
+
+  .brand,
+  .toy-status {
+    left: calc(18px + var(--playground-safe-left, env(safe-area-inset-left, 0px)));
+  }
+
+  .brand,
+  .view-button,
+  .sound-toggle,
+  .help-toggle {
+    top: calc(14px + var(--playground-safe-top, env(safe-area-inset-top, 0px)));
+  }
+
+  .toy-status {
+    bottom: calc(14px + var(--playground-safe-bottom, env(safe-area-inset-bottom, 0px)));
+  }
+
+  .view-button:not(#gallery-open),
+  .sound-toggle,
+  .help-toggle {
+    transform: translateX(
+      calc(12px - max(12px, var(--playground-safe-right, env(safe-area-inset-right, 0px))))
+    );
+  }
+
+  .panel-fold {
+    right: calc(
+      var(--panel-w) + 1px +
+        max(12px, var(--playground-safe-right, env(safe-area-inset-right, 0px)))
+    );
   }
 }

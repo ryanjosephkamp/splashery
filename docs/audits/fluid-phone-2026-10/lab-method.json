@@ -1,0 +1,752 @@
+{
+  "startedAt": "2026-10-03T22:39:57.170Z",
+  "baseline": "aba77089cd935f20358302a8ba8c7b39215b7f2d",
+  "browser": "154.0.8037.95",
+  "executable": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+  "args": [
+    "--use-angle=metal",
+    "--enable-webgl",
+    "--ignore-gpu-blocklist",
+    "--enable-unsafe-webgpu",
+    "--disable-background-timer-throttling",
+    "--disable-renderer-backgrounding",
+    "--disable-backgrounding-occluded-windows",
+    "--enable-precise-memory-info"
+  ],
+  "host": {
+    "platform": "darwin",
+    "release": "25.3.0",
+    "cpu": "Apple M3 Pro",
+    "totalMemory": 19327352832
+  },
+  "cells": [
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "water",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "soda",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "honey",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "honey",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "honey",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "honey",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "honey",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "honey",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "honey",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "honey",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "lava",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "lava",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "lava",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "lava",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "lava",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "lava",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "lava",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "glass",
+      "liquid": "lava",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "water",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "water",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "water",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "water",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "water",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "water",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "water",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "water",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "soda",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "soda",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "soda",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "soda",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "soda",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "soda",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "soda",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "soda",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "honey",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "honey",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "honey",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "honey",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "honey",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "honey",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "honey",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "honey",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "lava",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "lava",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "lava",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "lava",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "lava",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "lava",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "lava",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "splash",
+      "liquid": "lava",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "candle",
+      "liquid": "water",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "mid4",
+      "profile": "mid",
+      "rate": 4,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "mid6",
+      "profile": "mid",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "low6",
+      "profile": "low",
+      "rate": 6,
+      "renderer": "webgpu"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgl2"
+    },
+    {
+      "id": "fluid-lab",
+      "scene": "cup",
+      "liquid": "water",
+      "setting": "desktop",
+      "profile": "high",
+      "rate": 1,
+      "renderer": "webgpu"
+    }
+  ],
+  "windowMs": {
+    "idle": 5000,
+    "action": 6000
+  },
+  "seed": 424242,
+  "workerMode": "explicit fluids=worker",
+  "modifications": "worker exposes a read-only snapshot getter; lower settings alter module responses, never checkout source",
+  "gpuMemory": "engine texture accounting plus named storage-buffer byte sizes; excludes driver, framebuffer and process memory"
+}

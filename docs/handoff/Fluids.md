@@ -1,11 +1,13 @@
 # Lane Fluids: liquids, smoke and flames made of splats
 
-## State on main (October 2, 2026)
+## State on main (October 3, 2026)
 
 Everything is merged: v1 (#121), r4 (#152, the GPU solver, the liquid surface, the gas grid, the
-traced props) and r5 (#180, the faucet's tap, the clear stream, the lava crust and the phone tier),
-on main since October 2, 2026, after a full run on main with four PRs that passed. The Fluid lab is
-behind the labs switch. No branch of this lane is open.
+traced props), r5 (#180, the faucet's tap, the clear stream, the lava crust and the phone tier) and
+r6 (#204, merged October 3, 2026: a flat liquid top that meets the glass, a tap-thin stream, lava as
+one material, a flattened splash drop). The Fluid lab is behind the labs switch. No branch of this
+lane is open. Latest cards on Effect review page 2: fl-r6-pour-r2, fl-r6-soda-r2, fl-r6-lava-r2 and
+fl-r6-splash (marked good).
 
 Waiting on the owner (the Operator passed the questions on October 2):
 
@@ -17,6 +19,65 @@ Waiting on the owner (the Operator passed the questions on October 2):
 
 Later, as the owner said: a liquid vortex, a tornado and dripping syrup.
 
+## r7 (October 4, 2026): the Fluid lab on a phone
+
+**State (October 4, 2026, Sonnet 5.5):** PR #252 (draft). Items 1 to 6 are built and measured
+(docs/FLUIDS.md, "r7"); item 7 (clips, lane record `FluidsR7`) is below. The recovery and the
+envelope are in `src/fluids/phone.js` and `FluidRuntime`; hooks in `src/stage.js`
+(`setFluidPixelCap`, `hookProjector`) and `src/player.js` (two arguments to `FluidRuntime`).
+
+**Start here.** Model: **Sonnet 5.5**, by the owner's word of October 4, 2026 ("Fluids Sonnet"), as
+a test of how far Sonnet goes on engine work. The Operator (Opus 5.5) reviews the code and the
+measurements before merge, and the owner judges the clips. Branch `claude/lane-fluids-r7`, one PR
+titled "Phase Fluids r7: the Fluid lab on a phone", prefix `fl7`, tests in `tests/fl7.spec.mjs`.
+
+Why: the Fluid lab locks up on phones. Codex measured why (docs/audits/fluid-phone-2026-10.md,
+merged as #247; its data and scripts are in docs/audits/fluid-phone-2026-10/). Read its summary,
+"Proposed phone envelope" and "Proposals, ranked by gain for effort" first.
+
+Build, in this order:
+
+1. **The hint** (the audit's proposal 1): "This lab runs best on a computer. On a phone, choose Auto
+   detail." beside Scene and Liquid on a phone, and after the first slow-down; the same sentence in
+   the toy's About text.
+2. **A phone envelope for this lab only** (proposal 2): on a phone, the lab's own canvas cap (1.5),
+   fewer prop splats (35,000), a smaller liquid budget (WebGPU cap 6,000, cell 0.05; CPU Glass cap
+   270 with spacing × ∛2; CPU Splash keeps its liquid and halves the vessel's budget) and smaller
+   gas grids (flame 20×58×20, smoke 20×65×20, hot cup 20×33×20).
+   - Use the recipe's scoped render settings, not a global change to every toy.
+   - Never overwrite the person's saved Detail choice; a deliberate High or Max still works, with
+     the hint.
+   - Keep Splash's starting pool: the audit shows that removing it was a false gain.
+3. **Recovery that works** (proposal 3): a phone check that doesn't depend on the tier; when the
+   frame time's average stays over 33 ms for 1.5 s (ignoring hidden or loading time, and counting
+   visible stalls), first lower the drawing cost, then rebuild the current scene's fluids into the
+   phone envelope with a clear restart; if it's still slow two seconds later, offer a pause and the
+   hint.
+4. **Less garbage per readback** (proposal 5): reuse the liquid readback arrays in
+   `src/fluids/gpu/mpm.js` and drop the per-particle `subarray()` views.
+5. **The WebGPU buffers** (proposal 4): never edit `vendor/`. If a small, marked hook at the app
+   boundary (`src/stage.js`) can destroy the cached projector Compute objects when their cache is
+   cleared, do it and prove it with the audit's four-scene cycle (buffers no longer grow). If it
+   can't be done safely from outside the vendored file, write down what you found and leave it.
+6. **Measure before and after** with the audit's own scripts
+   (docs/audits/fluid-phone-2026-10/\*.mjs) on this sandbox: the p95 frame times for the ten scenes
+   at phone size (mid, mid at 6×), the tracked GPU allocations and the four-scene buffer count. Put
+   a short before-and-after table in docs/FLUIDS.md and the PR. These are sandbox numbers, not a
+   real phone; say so.
+7. **Clips:** phone-size clips (390×844) of Glass water, Splash water and the Candle before and
+   after, on Effect review page 2 under a new lane record `FluidsR7` (title "Fluids r7 · The Fluid
+   lab on a phone (Sonnet 5.5)"). Each card says what the owner should try on his own phone.
+
+Rules for this round:
+
+- You own what this lane always owned (below). `src/player.js` and `src/stage.js` take only small,
+  marked, additive hooks.
+- Run `tests/fl.spec.mjs` and every Fluids spec, `tests/smoke.spec.mjs` (keep "embed transfer ≤ 30
+  MB" green) and your new `tests/fl7.spec.mjs`. Then follow CLAUDE.md's checklist before every push.
+- The Fluid lab stays behind the labs switch.
+- Usage on this account is tight this week: one careful pass, at most one helper at a time.
+- End with READY:, WORKING: or BLOCKED:, and keep "State on main" above current.
+
 ## Brief
 
 You are a Splashery worker session, started by the Operator (the coordinating session). Repo:
@@ -26,14 +87,13 @@ splats". Handoff file: docs/handoff/Fluids.md.
 
 ### Brief (written by the Operator on September 29, 2026, from the owner's note of that day)
 
-On the Real objects lane's water bottle card the owner wrote, word for word: "The water also pours
-out in circles, not like actual liquid would. Perhaps we should create a realistic fluid splat
-simulator (liquid fluids, gases, flames, etc.; different viscosities, etc.) and use that here?" On
-the soda can: "the soda bubbles don't look realistic; they look like marshmallows or popcorn here,
-and the soda should come out as a liquid splash or splat (no pun intended)." Later that evening, on
-the second round of both cards: "We can defer completing this until after the liquid/fluid engine is
-built and perfected." Today, liquids in Splashery are hand-animated clouds and sheets (the ocean
-wave, the waterfall, the coffee, the lava lamp), and the Lab lane's GPU splat fields (`gpuField`,
+On the Real objects lane's water bottle card the owner noted that the water pours out in circles,
+not like a real liquid, and suggested building a realistic fluid splat simulator (liquids, gases,
+flames, different viscosities) and using it there. On the soda can: the bubbles look like
+marshmallows or popcorn, and the soda should come out as a liquid splash. Later that evening, on the
+second round of both cards, he said completing this can wait until the liquid/fluid engine is built
+and perfected. Today, liquids in Splashery are hand-animated clouds and sheets (the ocean wave, the
+waterfall, the coffee, the lava lamp), and the Lab lane's GPU splat fields (`gpuField`,
 docs/lab/FIELDS.md) move splats by formula, with no state from frame to frame.
 
 Build a fluid engine for splats, labs first:
@@ -164,12 +224,12 @@ Model: Opus 5.5 (claude-opus-5-5), default effort.
 
 ## r4 (September 30, 2026): a GPU solver, a liquid surface and a gas grid
 
-The Operator's brief of 15:05 UTC, from the owner's note ("I marked the fluids as looking right, but
-that might have been premature... They still don't seem realistic enough for me"; "r4 yes"): far
-more particles on the GPU (WebGPU compute, PBF or MLS-MPM after a short measurement), a real liquid
-surface (screen-space fluid rendering, splats kept for spray, foam and bubbles), real smoke and
-flames (a grid gas solver with vorticity confinement and buoyancy, ray-marched, WebGL2 too), and
-evidence Ryan can see (each scene beside real footage or a published measurement). Branch
+The Operator's brief of 15:05 UTC, from the owner's note (he had marked the fluids as looking right,
+but that may have been premature; they still do not seem realistic enough to him; and his go-ahead,
+"r4 yes"): far more particles on the GPU (WebGPU compute, PBF or MLS-MPM after a short measurement),
+a real liquid surface (screen-space fluid rendering, splats kept for spray, foam and bubbles), real
+smoke and flames (a grid gas solver with vorticity confinement and buoyancy, ray-marched, WebGL2
+too), and evidence Ryan can see (each scene beside real footage or a published measurement). Branch
 `claude/lane-fluids-r4` from b328e58 (v1, PR #121); PR "Engine: Fluids r4, a GPU solver and a liquid
 surface". Cards: fl-r4-pour, fl-r4-splash, fl-r4-soda, fl-r4-smoke, fl-r4-flame, fl-r4-phone.
 
@@ -211,6 +271,14 @@ State (see docs/FLUIDS.md, "r4"):
   volume); foam must spawn only where a stream plunges into the slow pool, or it coats the stream; a
   plume in perfectly still air stands straight, and a room's faint drafts make it meander. WebGPU in
   this container is SwiftShader (software), so GPU frame times here are not a phone's.
+
+## r6 (October 2, 2026): the owner's marks on r4 and r5
+
+Brief (the Operator, from the owner's marks): a thin meniscus instead of a white ring (the pours and
+the soda), a tap-thin stream at the spout, lava as one material from spout to pool (the same colors,
+cooling on one curve), splash drops less round. Branch `claude/lane-fluids-r6` from main 4e55c9f; PR
+"Phase Fluids r6: …". Cards fl-r6-\* on Effect review page 2, with `replacedBy` on the r4 and r5
+ones. See docs/FLUIDS.md, "r6".
 
 ## r5 (October 2, 2026): the owner's phone review
 

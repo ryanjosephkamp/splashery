@@ -303,7 +303,7 @@ export function insideSolid(solid, p, pad = 0) {
     const k = v3.len(q);
     if (k >= 1) return null;
     if (k < 1e-9) return { depth: Math.min(...r), n: [0, 1, 0], s: [0, solid.r[1], 0] };
-    // The surface point along the ray from the centre (close enough for
+    // The surface point along the ray from the center (close enough for
     // pebbles), and the true normal there.
     const s = v3.scale(p, 1 / k);
     const n = v3.norm([s[0] / (r[0] * r[0]), s[1] / (r[1] * r[1]), s[2] / (r[2] * r[2])]);
@@ -419,6 +419,9 @@ export class World {
     this.maxPush = o.maxPush ?? Infinity;
     this.maxSpeed = o.maxSpeed ?? Infinity;
     this.particleDamping = o.particleDamping ?? 0; // per second
+    // Lane Hands engine A: fields and materials (src/physics/fields.js),
+    // called once per substep before anything moves: (h) => void.
+    this.force = o.force ?? null;
   }
 
   add(body) {
@@ -514,6 +517,7 @@ export class World {
 
   substep(h) {
     this.tick = (this.tick || 0) + 1;
+    if (this.force) this.force(h); // lane Hands engine A
     const g = this.gravity;
     // Integrate.
     for (const b of this.bodies) {
@@ -530,6 +534,11 @@ export class World {
         const ax = sn > 1e-9 ? [dq[0] / sn, dq[1] / sn, dq[2] / sn] : [0, 0, 0];
         for (let i = 0; i < 3; i++) b.omega[i] += (b.restK * ang * ax[i] - (b.restD ?? 2) * b.omega[i]) * h; // prettier-ignore
       }
+      // Lane Hands-on H5: a body on a spring to its rest place (an atom
+      // pulled off its molecule): restPosK per second squared, restPosD per
+      // second.
+      if (b.restPos && !b.held)
+        for (let i = 0; i < 3; i++) b.vel[i] += (b.restPosK * (b.restPos[i] - b.pos[i]) - (b.restPosD ?? 2) * b.vel[i]) * h; // prettier-ignore
       const ld = Math.exp(-b.damping * h);
       const ad = Math.exp(-b.angDamping * h);
       for (let i = 0; i < 3; i++) {
@@ -598,7 +607,7 @@ export class World {
     const slow = this.sleepSpeed * 10;
     const calm = Math.exp(-12 * h);
     for (const b of this.bodies) {
-      if (b.fixed || b.held || b.touchTick !== this.tick) continue;
+      if (b.fixed || b.held || b.coasts || b.touchTick !== this.tick) continue; // (coasts: lane Hands engine A's wheels)
       if (v3.len(b.vel) < slow && v3.len(b.omega) * (b.bound || 1) < slow) {
         b.vel = v3.scale(b.vel, calm);
         b.omega = v3.scale(b.omega, calm);

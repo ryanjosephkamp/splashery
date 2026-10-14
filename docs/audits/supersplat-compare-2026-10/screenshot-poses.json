@@ -1,0 +1,104 @@
+[
+  {
+    "id": "cave-lioness",
+    "pose": {
+      "distance": 3.3404650628566745,
+      "pitch": 0.1,
+      "roll": 0,
+      "yaw": -1.2
+    },
+    "profile": "low",
+    "radius": 0.9028283953666688,
+    "splats": 300000,
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=cave-lioness&turntable=off&controls=0&profile=weak",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  {
+    "id": "cave-lioness",
+    "pose": {
+      "distance": 3.324433332681656,
+      "pitch": 0.1,
+      "roll": 0,
+      "yaw": -1.2
+    },
+    "profile": "high",
+    "radius": 0.8984954953193665,
+    "splats": 1000000,
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=cave-lioness&turntable=off&controls=0&profile=high",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "id": "toy-trex",
+    "pose": {
+      "distance": 5.031176805496216,
+      "pitch": 0.15,
+      "roll": 0,
+      "yaw": 2
+    },
+    "profile": "low",
+    "radius": 0.8674442768096924,
+    "splats": 300000,
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=toy-trex&turntable=off&controls=0&profile=weak",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  {
+    "id": "toy-trex",
+    "pose": {
+      "distance": 5.0244545340538025,
+      "pitch": 0.15,
+      "roll": 0,
+      "yaw": 2
+    },
+    "profile": "high",
+    "radius": 0.8662852644920349,
+    "splats": 684274,
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=toy-trex&turntable=off&controls=0&profile=high",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  },
+  {
+    "id": "bee",
+    "pose": {
+      "distance": 4.377297759056091,
+      "pitch": 0.8,
+      "roll": 0,
+      "yaw": -1.2
+    },
+    "profile": "low",
+    "radius": 0.8754595518112183,
+    "splats": 120000,
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=bee&turntable=off&controls=0&profile=weak",
+    "viewport": {
+      "width": 390,
+      "height": 844
+    }
+  },
+  {
+    "id": "bee",
+    "pose": {
+      "distance": 4.385114014148712,
+      "pitch": 0.8,
+      "roll": 0,
+      "yaw": -1.2
+    },
+    "profile": "high",
+    "radius": 0.8770228028297424,
+    "splats": 450000,
+    "url": "https://ryanjosephkamp.github.io/splashery/embed/?toy=bee&turntable=off&controls=0&profile=high",
+    "viewport": {
+      "width": 1440,
+      "height": 900
+    }
+  }
+]

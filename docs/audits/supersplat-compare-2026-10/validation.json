@@ -1,0 +1,15 @@
+{
+  "canonical_rows": 20,
+  "collection_attempts": 21,
+  "screenshots": 20,
+  "matrix_complete": true,
+  "all_captures_exact_dimensions": true,
+  "all_measurement_canvases_exact_dimensions": true,
+  "all_webgpu": true,
+  "all_dpr_1": true,
+  "no_recorded_page_errors": true,
+  "network_buffers_truncated": 18,
+  "startup_hooks_after_loaded": 12,
+  "frame_interval_min_samples": 272,
+  "frame_interval_max_samples": 600
+}

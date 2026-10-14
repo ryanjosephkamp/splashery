@@ -273,8 +273,11 @@ export function canShareFile(blob, filename) {
 
 export const LINK_LIMIT = 12 * 1024;
 
+// The app's root, from where this file is (src/), not from the page that runs it: the page may sit
+// in a folder of its own (the Playground at playground/), and a share link, an embed or the
+// element's script must still name the project's root (the home page sends "#s=" links on).
 export function appBaseURL() {
-  return new URL("./", document.baseURI).href;
+  return new URL("../", import.meta.url).href;
 }
 
 // Builds a share payload, dropping detail until it fits in a link.

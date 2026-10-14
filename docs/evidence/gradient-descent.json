@@ -1,0 +1,77 @@
+{
+  "toy": "gradient-descent",
+  "checked": "2026-10-04",
+  "summary": "The paths are computed from a real loss function, finite-difference gradients, and momentum. They closely match independently derived analytic paths. They are then replayed, with hard boundaries and different momentum as well as learning rate.",
+  "claims": [
+    {
+      "claim": "The ball follows negative loss gradients with momentum.",
+      "how": "All 22 points in each of the three paths agree with analytic-gradient trajectories to absolute error below 0.000006 in position and plotted height.",
+      "where": "src/packs/computing.js:844",
+      "sources": [
+        {
+          "title": "Gradient descent",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_optimization/gd.html",
+          "says": "Gradient descent moves against the gradient with a chosen step size; its convergence depends on the objective and step size."
+        },
+        {
+          "title": "Momentum",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_optimization/momentum.html",
+          "says": "Momentum retains part of previous updates while incorporating the current gradient."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/evidence-computing.spec.mjs:636",
+      "note": "Central differences with spacing 0.0001 explain the small numerical error; 22 points make 21 displayed steps."
+    },
+    {
+      "claim": "Momentum carries part of the previous update.",
+      "how": "The presets use learning rate and momentum pairs 0.035/0.3, 0.17/0.5, and 0.95/0.",
+      "where": "src/packs/computing.js:853",
+      "sources": [
+        {
+          "title": "Momentum",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_optimization/momentum.html",
+          "says": "Momentum retains part of previous updates while incorporating the current gradient."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:636",
+      "note": ""
+    },
+    {
+      "claim": "The three paths are a limited example of learning-rate effects.",
+      "how": "The large step is clipped at the walls, and each choice can also change momentum; the graphic is not a guarantee of convergence on arbitrary losses.",
+      "where": "src/packs/computing.js:853",
+      "sources": [
+        {
+          "title": "Gradient descent",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_optimization/gd.html",
+          "says": "Gradient descent moves against the gradient with a chosen step size; its convergence depends on the objective and step size."
+        },
+        {
+          "title": "Momentum",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_optimization/momentum.html",
+          "says": "Momentum retains part of previous updates while incorporating the current gradient."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:636",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The path is computed once and replayed, not optimized during each tap. Positions are clipped to a fixed square. The learning-rate choices also change momentum, so they are not a controlled comparison of step size alone."
+  ],
+  "fixes": [
+    {
+      "what": "Label both learning rate and momentum, or hold momentum fixed in a future comparison.",
+      "where": "src/packs/computing.js:853",
+      "status": "proposed"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 // Weather and elements pack: fire, storms, ice. Loaded on demand.
 //
-// Weather toys lean on behaviours: rain and snow fall, sparks and steam
+// Weather toys lean on behaviors: rain and snow fall, sparks and steam
 // rise, dust orbits; lightning, blobs of wax and swirling snow are parts
 // that drive() shows, hides and moves on a clock.
 
@@ -16,7 +16,8 @@ import {
   quatRotate,
   vec,
 } from "../kit.js";
-import { evenEllipsoid, evenTorus } from "./even.js";
+import { evenBox, evenDisc, evenEllipsoid, evenTorus } from "./even.js";
+import { surfacePoints } from "../physics/world.js"; // lane Hands-on H4
 
 const TAU = Math.PI * 2;
 const { add, sub, mul, dot, cross, len, unit } = vec;
@@ -159,14 +160,17 @@ const LAVA = [
 ];
 const lavaY = (b, t) => b.lo + (b.hi - b.lo) * (0.5 - 0.5 * Math.cos(t * b.speed + b.phase));
 const LAVA_SECS = 4.6;
+// Where the storm cloud's tapped thunderbolt hangs at rest (x); a tap moves it
+// under the tap (lane Fix7).
+const STORM_BOLT_X = 0.1;
 // The lamp's glass: it swells in the middle and tapers into the cap.
 const lavaGlassR = (y) =>
   0.2 +
   0.075 * Math.sin(Math.PI * clamp((y + 0.05) / 1.35, 0, 1) * 0.8) -
   0.115 * smoothstep(0.62, 1.3, y);
-// Colour sets: wax, liquid, and the glow the wax runs through when heated
+// Color sets: wax, liquid, and the glow the wax runs through when heated
 // (from its resting glow round to it again). "own" takes the Wax and
-// Liquid colours from the pickers and the classic orange-magenta-gold.
+// Liquid colors from the pickers and the classic orange-magenta-gold.
 const LAVA_SETS = {
   own: { label: "Pick below" },
   ocean: {
@@ -285,7 +289,7 @@ const ICE_SECS = 7.6;
 // where it joins the rest (its pivot) over its window of the melt level
 // [start, end]; a piece that breaks off first thins a little, cracks off
 // at `detach`, falls (over `fall` of the melt level) to lie in the water
-// at `land` (its centre, `centre`, turned by `turn`), and melts away there
+// at `land` (its center, `center`, turned by `turn`), and melts away there
 // over `gone`. `min` is what is left of it (the body's lump).
 const ICE_MELT = 4.4;
 const ICE_TOP = 0.93;
@@ -448,8 +452,8 @@ function icePose(L, regrow) {
     const f = band(L, pc.detach, pc.detach + pc.fall);
     const sc = then.scale * (1 - ease(band(L, pc.gone[0], pc.gone[1])));
     const q = slerpQ(ICE_Q0, qLand, ease(f));
-    // The centre falls (faster and faster) and drifts to where it lands,
-    // then the piece melts away about its centre, lying in the water.
+    // The center falls (faster and faster) and drifts to where it lands,
+    // then the piece melts away about its center, lying in the water.
     const landY = pc.land[1] * Math.max(0.3, sc);
     const at = [
       c0[0] + (pc.land[0] - c0[0]) * easeOut(f),
@@ -522,7 +526,7 @@ function twDebrisAt(d, s, lift) {
   return [[Math.sin(a) * rr, d.h + y, Math.cos(a) * rr], u];
 }
 // Rainbow: seven bands, red outside. A tap wipes it away (violet first,
-// right to left) and draws it again, red first, each colour from left to
+// right to left) and draws it again, red first, each color from left to
 // right (a fade on channel 0: the undrawing run backwards). at() is where
 // a splat of band i at angle a (0 at the right foot, PI at the left) sits
 // along the channel.
@@ -554,7 +558,7 @@ const IB_FLOAT = 0.02;
 const IB_G = 6;
 
 // The chunk's geometry for a berg of radius function shapeR: the cut
-// (dot(p, IB_N) > h), the chunk's centre, a point on its broken face, the
+// (dot(p, IB_N) > h), the chunk's center, a point on its broken face, the
 // hinge it tips over, and its fall worked out ahead (the time it hits the
 // water and how it is moving then).
 function icebergChunk(shapeR) {
@@ -573,7 +577,7 @@ function icebergChunk(shapeR) {
   const cap = pts.filter((p) => dot(p, IB_N) > h);
   const mean = (list) => mul(list.reduce(add, [0, 0, 0]), 1 / Math.max(1, list.length));
   // The broken face's middle (the chunk's outside, pressed onto the cut),
-  // and the chunk's centre (between that and its outer surface).
+  // and the chunk's center (between that and its outer surface).
   const F = mean(cap.map((p) => sub(p, mul(IB_N, dot(p, IB_N) - h))));
   const C0 = add(mul(mean(cap), 0.65), mul(F, 0.35));
   // It tips over its outer bottom edge, on the right.
@@ -593,7 +597,7 @@ function icebergChunk(shapeR) {
   return { h, F, C0, hinge, T1, th1, w1, C1, V1, Ti: T1 + tau };
 }
 
-// Where the chunk is at s seconds: { C, th, k } (its centre, how far it has
+// Where the chunk is at s seconds: { C, th, k } (its center, how far it has
 // turned about IB_AXIS, and its size), or { regrow } while it grows back.
 function icebergPose(ch, s) {
   const { T1, th1, w1, C1, V1, Ti, hinge, C0 } = ch;
@@ -618,7 +622,7 @@ function icebergPose(ch, s) {
   return { C, th, k: 1 - ease(melt) };
 }
 
-// Debris is built this far towards the default camera and moved back to
+// Debris is built this far toward the default camera and moved back to
 // where it lies, so it sorts in front of the funnel's dust (it is hidden
 // while it passes behind the funnel instead).
 const TW_AHEAD = mul(TW_CAM, 0.42);
@@ -1099,6 +1103,40 @@ function owPose(s) {
   return { pts: owSpline(a, b, c, d, f), w: K[k].w + (K[k + 1].w - K[k].w) * f };
 }
 const owZ = (v) => OW_Z0 + (OW_Z1 - OW_Z0) * v;
+// Lane Fix7: the lip stays joined to the face. The lip's root rests on the
+// main sheet at one place along it (OW_ROOT, found at rest); in every pose
+// its first control points are drawn back to that place (fading along the
+// lip), so the two sheets never part at the curl as a dark strip.
+const OW_ROOT = (() => {
+  const m = OW_CTL[0];
+  const p = m[OW_NM];
+  let best = { d: Infinity, j: 0 };
+  for (let i = 0; i < OW_NM - 1; i++)
+    for (let k = 0; k <= 20; k++) {
+      const f = k / 20;
+      const q = [m[i][0] + (m[i + 1][0] - m[i][0]) * f, m[i][1] + (m[i + 1][1] - m[i][1]) * f];
+      const d = Math.hypot(q[0] - p[0], q[1] - p[1]);
+      if (d < best.d) best = { d, j: i + f, off: [p[0] - q[0], p[1] - q[1]] };
+    }
+  return best;
+})();
+function owJoin(pts) {
+  const i = Math.floor(OW_ROOT.j);
+  const f = OW_ROOT.j - i;
+  const a = pts[i];
+  const b = pts[Math.min(OW_NM - 1, i + 1)];
+  const root = [
+    a[0] + (b[0] - a[0]) * f + OW_ROOT.off[0],
+    a[1] + (b[1] - a[1]) * f + OW_ROOT.off[1],
+  ];
+  const lip0 = pts[OW_NM];
+  const d = [root[0] - lip0[0], root[1] - lip0[1]];
+  for (let k = 0; k < 4; k++) {
+    const w = 1 - k / 4;
+    const p = pts[OW_NM + k];
+    pts[OW_NM + k] = [p[0] + d[0] * w, p[1] + d[1] * w, ...p.slice(2)];
+  }
+}
 // Spray: clumps of drops (tokens) thrown up from along the line where the
 // lip lands, each on its own path, falling back into the foam.
 const OW_G = 5.5;
@@ -1123,6 +1161,65 @@ const OW_SPRAY = (() => {
   return out;
 })();
 
+// ---- Hands-on (lane Hands-on H4) -------------------------------------------------------
+
+// Where the campfire's spare log lies, outside the ring of stones.
+const CAMP_LOG = [0.62, -0.55 + 0.075, 0.95];
+
+// The lava lamp tipped (info.up, the world's up in the lamp's frame, while
+// Hands-on has it turned): each blob is drawn toward the glass's upper side
+// on a soft spring, so it lags, overshoots a little and wobbles.
+function lavaTip(m, info) {
+  const up = info?.up;
+  const dt = Math.min(0.1, Math.max(0, (info?.time ?? 0) - (m.tipT ?? info?.time ?? 0)));
+  m.tipT = info?.time ?? 0;
+  const st = (m.tip ||= []);
+  const h = Math.hypot(up?.[0] ?? 0, up?.[2] ?? 0);
+  const k = Math.min(1, 2.5 * h);
+  const dir = h > 1e-4 ? [up[0] / h, up[2] / h] : [0, 0];
+  return {
+    slide(i, b, y) {
+      const s = (st[i] ||= { x: 0, z: 0, vx: 0, vz: 0 });
+      const room = Math.max(0, lavaGlassR(y) - b.r - 0.015);
+      const tx = dir[0] * room * k - (k ? b.x : 0);
+      const tz = dir[1] * room * k - (k ? b.z : 0);
+      for (const [p, v, to] of [
+        ["x", "vx", tx],
+        ["z", "vz", tz],
+      ]) {
+        s[v] += (30 * (to - s[p]) - 4.5 * s[v]) * dt;
+        s[p] += s[v] * dt;
+      }
+      if (!up && Math.abs(s.x) + Math.abs(s.z) < 1e-4) return { x: 0, z: 0 };
+      // It leans the way it is sliding (a soft blob drags behind).
+      const q = quatAxisAngle(unit([s.vz, 0, -s.vx]), Math.min(0.35, 1.2 * Math.hypot(s.vx, s.vz)));
+      return { x: s.x, z: s.z, q: Math.hypot(s.vx, s.vz) > 1e-4 ? q : null };
+    },
+  };
+}
+
+// The iceberg: the berg bobs on a spring when pushed down; the chunk holds
+// to its shoulder until pulled off.
+function icebergJoints(ch) {
+  return [
+    { type: "slider", part: "berg", pivot: [0, 0, 0], axis: [0, 1, 0], min: -0.35, max: 0.2, spring: 14, damping: 1.8, gravity: false, bounce: 0.2, pos: [0, 0.2, 0], pick: [0.85, 0.9, 0.85] }, // prettier-ignore
+    { type: "break", part: "chunk", to: "berg", at: ch.F, pos: ch.C0, pivot: ch.hinge, pull: 0.3, give: 0.06, solid: { type: "ellipsoid", r: [0.2, 0.14, 0.2] }, mass: 0.5, pick: [0.24, 0.2, 0.24], sound: (ev) => (ev.kind === "snap" ? { voice: "shellcrack", f: 1800, n: 3, kind: "ice", decay: 1.0 } : undefined) }, // prettier-ignore
+  ];
+}
+
+// A loose chunk of ice floats: lifted by the water it pushes aside (ice is
+// nine tenths as dense, so it rides mostly under), slowed and steadied in
+// the water.
+function icebergFloat(b, h, ctx) {
+  if (b.held || b.pinned || ctx.piece?.part !== "chunk") return;
+  const depth = IB_FLOAT + 0.06 - b.pos[1];
+  if (depth <= -0.15) return;
+  const sub = clamp((depth + 0.15) / 0.3, 0, 1);
+  b.vel[1] += (ctx.G * (sub / 0.9) - 2.5 * sub * b.vel[1]) * h;
+  for (const k of [0, 2]) b.vel[k] *= 1 - Math.min(1, 1.5 * sub * h);
+  for (const k of [0, 1, 2]) b.omega[k] *= 1 - Math.min(1, 1.2 * sub * h);
+}
+
 export const RECIPES = {
   campfire: {
     alive: true,
@@ -1131,8 +1228,27 @@ export const RECIPES = {
       { key: "stoke", label: "Stoke", type: "pulse", ease: 1.6 },
     ],
     action: { key: "stoke", label: "Stoke the fire" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H4): a spare log lies by the ring of stones.
+    // Pick it up and lay it on the fire: the flames grow, with a crackle.
+    hands: {
+      floor: -0.55,
+      area: 1.2,
+      watch: true,
+      pieces: () => [{ part: "spare", pos: CAMP_LOG, pivot: CAMP_LOG, solid: { type: "box", half: [0.36, 0.07, 0.07] }, points: surfacePoints({ type: "box", half: [0.36, 0.07, 0.07] }, 3), mass: 1, friction: 0.9, restitution: 0.05, pick: [0.42, 0.11, 0.12] }], // prettier-ignore
+      sound: (hit) => (hit.speed > 0.4 ? { voice: hit.body && Math.hypot(hit.body.pos[0], hit.body.pos[2]) < 0.5 ? "flame" : "wood", f: 90, rate: 5, n: 3, bright: 0.45, decay: 0.9, vol: Math.min(0.7, 0.2 + hit.speed / 6) } : null), // prettier-ignore
+    },
+    drive(t, c, out, info) {
       out.amount = 0.45 + 0.9 * c.size + 0.7 * c.stoke;
+      // In Hands-on the spare log shows by the stones; laid on the fire, the
+      // flames grow.
+      out.parts.spare = { visible: info.hands?.on ? 1 : 0 };
+      const log = info.hands?.on ? info.hands.piece("spare") : null;
+      const m = mem(c);
+      let on = 0;
+      if (log && !log.held) on = Math.hypot(log.pos[0], log.pos[2]) < 0.48 && log.pos[1] < -0.2 ? 1 : 0; // prettier-ignore
+      m.logFire = (m.logFire ?? 0) + (on - (m.logFire ?? 0)) * Math.min(1, (info.time - (m.logT ?? info.time)) * 2.5); // prettier-ignore
+      m.logT = info.time;
+      out.amount += 0.9 * m.logFire;
     },
     build(k) {
       const ground = -0.55;
@@ -1160,7 +1276,7 @@ export const RECIPES = {
         const lean = 38 + k.rand() * 8;
         const len = 0.95;
         const base = [Math.sin(a) * 0.46, ground + 0.08, Math.cos(a) * 0.46];
-        // A cylinder along Y, tipped towards the centre.
+        // A cylinder along Y, tipped toward the center.
         k.add(k.cylinder(0.075, len), {
           pos: [
             base[0] * 0.55,
@@ -1180,6 +1296,16 @@ export const RECIPES = {
           },
         });
       }
+      // Lane Hands-on H4: a spare log by the stones (shown only in Hands-on;
+      // left out of the fit).
+      k.add(k.cylinder(0.075, 0.72), {
+        part: k.part("spare", { pivot: CAMP_LOG }),
+        fit: false,
+        pos: CAMP_LOG,
+        rot: [0, 0, 90],
+        flat: 0.25,
+        color: (c) => mix("#6b4526", "#3a2413", 0.5 + 0.5 * c.fbm(c.p[0] * 14, c.p[1] * 14, c.p[2] * 14)), // prettier-ignore
+      });
       // A bed of embers that glows and flickers.
       k.add(k.disc(0.42), {
         pos: [0, ground + 0.03, 0],
@@ -1236,18 +1362,27 @@ export const RECIPES = {
       { key: "thunder", label: "Thunder", type: "pulse", ease: 1.3 },
     ],
     action: { key: "thunder", label: "Thunder" },
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       // Lightning on a random-looking schedule: each slot of time may
-      // strike one of three bolts, with a quick double flash.
+      // strike one of three bolts, with a quick double flash. A tap's
+      // thunderbolt (bolt3) strikes straight down from the cloud under
+      // the tap (lane Fix7).
       const slot = Math.floor(t / 1.7);
       const f = t / 1.7 - slot;
       const which = slot === 0 ? 0 : Math.floor(hash1(slot) * 5);
       const on = which < 3 && (f < 0.07 || (f > 0.11 && f < 0.16));
       const big = c.thunder > 0.3 && Math.sin(c.thunder * 36) > -0.4;
       for (let b = 0; b < 3; b++) out.parts[`bolt${b}`] = { visible: on && which === b ? 1 : 0 };
-      out.parts.bolt3 = { visible: big ? 1 : 0 };
+      const tp = info?.tap?.key === "thunder" ? info.tap.point : null;
+      // The tapped point is the front-most splat under the finger, so a bolt
+      // at its x and z stands under the finger from any side.
+      const off = tp ? [clamp(tp[0], -0.85, 0.85) - STORM_BOLT_X, 0, clamp(tp[2], -0.6, 0.75) - 0.6] : [0, 0, 0]; // prettier-ignore
+      out.parts.bolt3 = { visible: big ? 1 : 0, offset: off };
       out.parts.flash = { visible: on || big ? 1 : 0 };
-      out.parts.rain = { visible: 0.15 + 0.85 * c.rain };
+      // Lane Any pose: rain falls only from a cloud the right way up; turned
+      // over in Hands-on (about.up), it thins away instead of hanging still.
+      const upright = info.up ? smoothstep(0.5, 0.9, info.up[1]) : 1;
+      out.parts.rain = { visible: (0.15 + 0.85 * c.rain) * upright };
       out.amount = 1;
     },
     build(k) {
@@ -1270,13 +1405,16 @@ export const RECIPES = {
       const ymin = -0.2;
       const ymax = 1.0;
       for (const pf of puffs) {
+        // (Lane Sharpness A: even, a little smaller and more solid, for
+        // crisper puffs.)
         k.add(k.sphere(pf.s), {
+          even: true,
           pos: pf.c,
           scale: [1, 0.82, 1],
-          size: 2.2,
+          size: 1.9,
           flat: 0.9,
-          opacity: 0.82,
-          jitter: 0.03,
+          opacity: 0.9,
+          jitter: 0.01,
           color: (c) => {
             const h = clamp((c.p[1] - ymin) / (ymax - ymin), 0, 1);
             const l = dot(c.n, LIGHT);
@@ -1303,7 +1441,7 @@ export const RECIPES = {
       });
       // Rain: streaks through the whole column, each falling a short way.
       const rain = k.part("rain", { pivot: [0, -0.6, 0] });
-      k.cloud({ share: 0.08, size: 0.55, pattern: false }, (r) => {
+      k.cloud({ share: 0.08, size: 0.45, pattern: false }, (r) => {
         const a = r() * TAU;
         const rr = Math.sqrt(r());
         return {
@@ -1311,7 +1449,7 @@ export const RECIPES = {
           dir: [0.08, -1, 0],
           stretch: 4.5,
           color: mix("#7a92b0", "#b4c4d8", r()),
-          opacity: 0.45,
+          opacity: 0.55,
           kind: "fall",
           params: [0.35, r()],
           part: rain,
@@ -1322,14 +1460,14 @@ export const RECIPES = {
         { x: -0.3, z: 0.56, len: 1.45 },
         { x: 0.45, z: 0.5, len: 1.25 },
         { x: 0.05, z: 0.52, len: 1.35 },
-        { x: 0.1, z: 0.6, len: 1.5 },
+        { x: STORM_BOLT_X, z: 0.6, len: 1.5, drift: 0.12 },
       ];
       bolts.forEach((b, i) => {
         const part = k.part(`bolt${i}`, { pivot: [b.x, -0.1, b.z] });
         const main = jagged(
           rand,
           [b.x, -0.05, b.z],
-          [b.x + (rand() - 0.5) * 0.5, -0.05 - b.len, b.z + (rand() - 0.5) * 0.2],
+          [b.x + (rand() - 0.5) * (b.drift ?? 0.5), -0.05 - b.len, b.z + (rand() - 0.5) * 0.2],
           5,
         );
         const paths = [main];
@@ -1371,7 +1509,7 @@ export const RECIPES = {
     options: [
       {
         key: "set",
-        label: "Colour set",
+        label: "Color set",
         type: "select",
         default: "own",
         choices: Object.entries(LAVA_SETS).map(([id, v]) => ({ id, label: v.label })),
@@ -1408,7 +1546,7 @@ export const RECIPES = {
     ],
     action: { key: "heat", label: "Heat it up" },
     // A tap heats the lamp: the blobs run about three and a half times as
-    // fast for a few seconds, the wax glows and shifts through its colour
+    // fast for a few seconds, the wax glows and shifts through its color
     // set's glow (orange, magenta, gold for the classic lamp), and the
     // liquid brightens; then it all eases back. The extra speed is an extra
     // clock (the boost's integral), kept when the effect ends so the blobs
@@ -1431,10 +1569,15 @@ export const RECIPES = {
         m.run = 0;
       }
       const tt = m.flowT + (m.base ?? 0) + extra;
+      // Lane Hands-on H4: tipped in Hands-on, the wax (lighter than the
+      // liquid) slides over to the glass's upper side, lagging and wobbling.
+      const tip = lavaTip(m, info);
       blobs.forEach((b, i) => {
         const y = lavaY(b, tt);
+        const sl = tip.slide(i, b, y);
         out.parts[`blob${i}`] = {
-          offset: [Math.sin(tt * b.speed * 0.8 + b.phase) * 0.02, y - lavaY(b, 0), 0],
+          offset: [Math.sin(tt * b.speed * 0.8 + b.phase) * 0.02 + sl.x, y - lavaY(b, 0), sl.z],
+          ...(sl.q ? { quat: sl.q } : {}),
         };
       });
       const hot = s === null ? 0 : ease(band(s, 0, 0.3)) * (1 - ease(band(s, 3.1, 4.5)));
@@ -1599,13 +1742,26 @@ export const RECIPES = {
     options: [{ key: "base", label: "Base", type: "color", default: "#8a2a1e" }],
     controls: [{ key: "shake", label: "Shake", type: "pulse", ease: 3.5 }],
     action: { key: "shake", label: "Shake the globe" },
-    drive(t, c, out) {
-      const s = c.shake;
+    // Hands-on (lane Hands engine A): pick it up and shake it; the harder the
+    // shake, the more snow swirls, and the snow sloshes behind the globe as
+    // it moves (always inside the glass: the swirl is drawn in a little and
+    // sloshes only across, at most 0.05).
+    hands: { shake: true, slosh: 0.05 },
+    drive(t, c, out, info) {
+      const s = Math.max(c.shake, info.hands?.shake ?? 0);
+      const sl = info.hands?.slosh || [0, 0, 0];
       out.parts.swirl = {
         quat: quatAxisAngle([0, 1, 0], t * 2.4),
-        offset: [0, 0.03 * Math.sin(t * 3), 0],
+        offset: [sl[0], 0.03 * Math.sin(t * 3), sl[2]],
+        scale: 0.92,
         visible: smoothstep(0, 0.25, s),
       };
+      // Lane Any pose: turned over in Hands-on (about.up), the falling snow
+      // would fall out through the glass, so it thins away and the swirling
+      // snow (always inside the globe) shows instead.
+      const upright = info.up ? smoothstep(0.5, 0.9, info.up[1]) : 1;
+      if (info.up) out.parts.swirl.visible = Math.max(out.parts.swirl.visible, 1 - upright);
+      out.parts.snowfall = { visible: upright };
       const wob = s * s * Math.sin(t * 22);
       out.body = { quat: quatAxisAngle([0, 0, 1], 0.1 * wob) };
     },
@@ -1631,16 +1787,24 @@ export const RECIPES = {
         {
           even: true,
           opacity: 1,
-          jitter: 0.015,
+          // (No color noise and no inside fill: the fill showed through the
+          // wall as dark, grainy specks. Lane Hands engine A, the owner's
+          // note of October 4, 2026.)
+          jitter: 0,
+          // (Slightly larger splats: the base's underside let the snow
+          // inside show through faintly. Lane Sharpness B.)
+          size: 1.12,
           flat: 0.2,
-          interior: 0.06,
-          core: shade(o.base, 0.6),
+          interior: 0,
           color: (c) => {
             const y = c.p[1];
+            // A splat whose normal points inward is lit as the outside is:
+            // lit from behind, those were dark, grainy specks.
+            const n = c.n[0] * c.p[0] + c.n[2] * c.p[2] < 0 ? [-c.n[0], -c.n[1], -c.n[2]] : c.n;
             if (y > -0.3 && y < -0.24)
-              return lit(mix("#c8a040", "#f0d070", Math.max(0, c.n[2])), c.n, 0.4);
-            const hi = Math.pow(Math.max(0, dot(c.n, unit([-0.3, 0.6, 0.75]))), 12);
-            return mix(lit(o.base, c.n, 0.45), "#ffffff", 0.3 * hi);
+              return lit(mix("#c8a040", "#f0d070", Math.max(0, n[2])), n, 0.4);
+            const hi = Math.pow(Math.max(0, dot(n, unit([-0.3, 0.6, 0.75]))), 12);
+            return mix(lit(o.base, n, 0.45), "#ffffff", 0.3 * hi);
           },
         },
       );
@@ -1770,7 +1934,9 @@ export const RECIPES = {
           color: "#16161a",
         });
       }
-      // Falling snow: each flake falls only as far as the ground under it.
+      // Falling snow: each flake falls only as far as the ground under it
+      // (its own part, so it can thin away when the globe is turned over).
+      const snowfall = k.part("snowfall", { pivot: G });
       const inside = (r) => {
         for (;;) {
           const p = [(r() - 0.5) * 2 * RG, floor + r() * (RG + G[1] - floor), (r() - 0.5) * 2 * RG];
@@ -1786,12 +1952,15 @@ export const RECIPES = {
           opacity: 0.95,
           kind: "fall",
           params: [Math.min(0.35, (p[1] - floor - 0.08) * 0.8), r()],
+          part: snowfall,
         };
       });
       // Snow swirling about after a shake.
       const swirl = k.part("swirl", { pivot: G });
+      const flakes = [];
+      k.data = { flakes, G, RG, floor }; // (for the Hands-on test)
       k.cloud({ share: 0.035, size: 0.55, pattern: false }, (r) => ({
-        p: inside(r),
+        p: flakes[flakes.push(inside(r)) - 1],
         color: "#ffffff",
         opacity: 0.95,
         kind: "twinkle",
@@ -1819,6 +1988,9 @@ export const RECIPES = {
   },
 
   volcano: {
+    // Lane Any pose: turned over in Hands-on, the eruption leaves its own crater
+    // (the toy's frame), not toward the world's up.
+    gravity: false,
     alive: true,
     controls: [{ key: "erupt", label: "Erupt", type: "pulse", ease: 4 }],
     action: { key: "erupt", label: "Erupt" },
@@ -1990,7 +2162,7 @@ export const RECIPES = {
         return { base: d.p, offset: [from[0] - d.p[0], from[1] - drop - d.p[1], from[2] - d.p[2]] };
       });
       out.parts.frost = { visible: 1 - smoothstep(0, 0.3, e) };
-      // The frost front: the coat shows (coloured as the ice) just before
+      // The frost front: the coat shows (colored as the ice) just before
       // it and the band of light runs up it on channel 0.
       const F = ICE_MELT + 1.5;
       const front = s === null ? 0 : bump(s, F, F + 0.15, F + 1.4, F + 1.6);
@@ -2028,7 +2200,7 @@ export const RECIPES = {
         ICE_PIECES.map((pc) => [pc.name, k.part(pc.name, { pivot: pc.pivot })]),
       );
       // The frost coat: fewer, bigger splats over the same surfaces,
-      // coloured as the ice there, that glow as the frost front (channel
+      // colored as the ice there, that glow as the frost front (channel
       // 0, by height) passes. Hidden except while it runs, when the swan is
       // whole again.
       const coat = k.part("coat", { pivot: [0, 0.5, 0] });
@@ -2343,6 +2515,9 @@ export const RECIPES = {
   },
 
   tornado: {
+    // Lane Any pose: turned over in Hands-on, its dust keeps climbing its own
+    // funnel (the toy's frame), not the world's up.
+    gravity: false,
     alive: true,
     controls: [
       { key: "power", label: "Power", type: "slider", default: 0.6 },
@@ -2392,18 +2567,20 @@ export const RECIPES = {
         const y = i === 0 ? 0 : i === TW_BANDS - 1 ? H : ((i + 0.5) / TW_BANDS) * H;
         return k.part(`band${i}`, { pivot: [0, y, 0] });
       });
-      k.cloud({ share: 0.55, size: 2.3, pattern: false }, (r) => {
-        const y = H * Math.pow(r(), 0.8);
-        const a = r() * TAU;
-        const rr = rad(y) * (0.82 + 0.22 * Math.sqrt(r()));
+      // (Lane Sharpness A: spread evenly over the funnel, in a thinner wall,
+      // so it reads as a smooth, defined column of dust.)
+      k.cloud({ share: 0.55, size: 1.9, pattern: false }, (r, i) => {
+        const y = H * Math.pow((i * 0.7548776662466927 + 0.5) % 1, 0.8);
+        const a = ((i * 0.5698402909980532 + 0.5) % 1) * TAU;
+        const rr = rad(y) * (0.88 + 0.14 * Math.sqrt(r()));
         const streak = 0.5 + 0.5 * Math.sin(a * 3 + y * 9);
-        const v = clamp(0.25 + 0.5 * (y / H) + 0.25 * streak + 0.1 * (r() - 0.5), 0, 1);
+        const v = clamp(0.25 + 0.5 * (y / H) + 0.25 * streak + 0.04 * (r() - 0.5), 0, 1);
         return {
           p: [Math.sin(a) * rr, y, Math.cos(a) * rr],
           dir: [Math.cos(a), 0.15, -Math.sin(a)],
           stretch: 1.8,
           color: ramp(["#4a3e34", "#66584a", "#847a70", "#a09a94", "#c0bcb8"], v),
-          opacity: 0.55 + 0.3 * (1 - y / H),
+          opacity: 0.7 + 0.25 * (1 - y / H),
           kind: "orbit",
           params: [2.2, 0.6],
           part: bands[twBand(y)],
@@ -2461,7 +2638,7 @@ export const RECIPES = {
             pos,
             scale: [1.2, 0.8, 1],
             count: 60,
-            color: (c) => lit(mix("#4a3624", "#6a5238", c.rand()), c.n, 0.4),
+            color: (c) => lit("#5a4430", c.n, 0.4),
           });
         else
           k.add(k.ellipsoid(0.036, 0.005, 0.021), {
@@ -2489,11 +2666,13 @@ export const RECIPES = {
       }
       for (const pf of puffs) {
         k.add(k.sphere(pf.s), {
+          even: true,
+          jitter: 0.01,
           pos: pf.c,
           scale: [1, 0.7, 1],
-          size: 2.4,
+          size: 2,
           flat: 1,
-          opacity: 0.75,
+          opacity: 0.85,
           pattern: false,
           kind: "orbit",
           params: [0.25, 0],
@@ -2507,7 +2686,7 @@ export const RECIPES = {
               0.3 +
                 0.35 * c.n[1] +
                 0.25 * dot(c.n, LIGHT) +
-                0.12 * c.fbm(c.p[0] * 3, c.p[1] * 3, c.p[2] * 3),
+                0.08 * c.fbm(c.p[0] * 2.5, c.p[1] * 2.5, c.p[2] * 2.5),
               0,
               1,
             );
@@ -2516,16 +2695,17 @@ export const RECIPES = {
         });
       }
       // Flat fields below.
-      k.add(k.disc(1.05), {
-        pos: [0, 0, 0],
-        color: (c) => {
-          if (c.n[1] < 0) return "#3a2e20";
-          const r = Math.hypot(c.p[0], c.p[2]);
-          const g = c.fbm(c.p[0] * 5, 0, c.p[2] * 5);
-          let col = mix("#5a7a2a", "#8a9a3a", 0.5 + 0.5 * g);
-          if (Math.abs(Math.sin(c.p[0] * 14)) < 0.15) col = mix(col, "#6a5a3a", 0.4);
-          return mix(col, "#6a5a44", smoothstep(0.45, 0.1, r));
-        },
+      // (Lane Sharpness A: laid out on a sunflower spiral of solid splats,
+      // so the field is even and clean at phone size.)
+      k.cloud({ share: 0.1, size: 1.25, pattern: false, jitter: 0.15 }, (r, i, n) => {
+        const rr = 1.05 * Math.sqrt((i + 0.5) / n);
+        const a = i * 2.399963229728653;
+        const p = [Math.sin(a) * rr, 0, Math.cos(a) * rr];
+        const g = k.noise.fbm(p[0] * 3, 0, p[2] * 3);
+        let col = mix("#5a7a2a", "#8a9a3a", 0.5 + 0.35 * g);
+        if (Math.abs(Math.sin(p[0] * 14)) < 0.15) col = mix(col, "#6a5a3a", 0.4);
+        col = mix(col, "#6a5a44", smoothstep(0.45, 0.1, rr));
+        return { p, n: [0, 1, 0], flat: 0.2, color: col, opacity: 1 };
       });
     },
   },
@@ -2535,8 +2715,8 @@ export const RECIPES = {
     controls: [{ key: "draw", label: "Draw", type: "pulse", ease: RB_SECS }],
     action: { key: "draw", label: "Draw the rainbow" },
     // A tap wipes the arc away in a blink (violet first), then draws it
-    // again colour by colour, red first, each band from the left cloud to
-    // the right one behind a bright little pen of its own colour. When the
+    // again color by color, red first, each band from the left cloud to
+    // the right one behind a bright little pen of its own color. When the
     // last band is in, sparkles burst from both clouds, which puff up, and
     // drift down as they fade.
     drive(t, c, out) {
@@ -2688,6 +2868,14 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "calve", label: "Calve", type: "pulse", ease: IB_SECS }],
     action: { key: "calve", label: "Break off a chunk" },
+    // Hands-on (lane Hands-on H4): push the berg down and it bobs back up;
+    // pull the chunk off its shoulder and it floats, mostly under the sea.
+    hands: {
+      floor: -1.3,
+      area: 1.5,
+      joints: (d) => (d?.chunk ? icebergJoints(d.chunk) : []),
+      force: icebergFloat,
+    },
     // A tap cracks a chunk off the berg's shoulder (a part cut by a plane,
     // with fresh pale ice on both broken faces). It tips over to the right,
     // falls into the sea with a crown of spray and a ring of ripples, bobs
@@ -2824,7 +3012,7 @@ export const RECIPES = {
         });
       }
       // The sea: see-through and rippling, with foam at the waterline,
-      // fading out towards its edge.
+      // fading out toward its edge.
       k.cloud({ share: 0.14, size: 1.7, flat: 0.3, pattern: false }, (r) => {
         const a = r() * TAU;
         const rr = Math.sqrt(0.2 + r() * (1.9 - 0.2));
@@ -2846,7 +3034,7 @@ export const RECIPES = {
       const Ci = add(add(ch.C1, mul(ch.V1, fall)), [0, -0.5 * IB_G * fall * fall, 0]);
       const W = [Ci[0], 0.012, Ci[2]];
       // The splash: drops built packed at the landing point (a little
-      // towards the camera, to draw over the chunk) and thrown up by their
+      // toward the camera, to draw over the chunk) and thrown up by their
       // part's scale; the drive adds the fall (see splash in drive).
       const W1 = add(W, mul(IB_CAM, 0.3));
       const splash = k.part("splash", { pivot: W1 });
@@ -2946,19 +3134,42 @@ export const RECIPES = {
         const strata = Math.abs(Math.sin(c.p[1] * 22 + g * 3));
         let col = mix("#6a6258", "#3e3832", 0.4 + 0.5 * g);
         col = shade(col, 0.85 + 0.2 * strata);
-        if (c.n[1] > 0.6) col = mix(col, mix("#3f6a24", "#6a8a34", c.rand()), 0.85);
+        if (c.n[1] > 0.6) col = mix(col, mix("#3f6a24", "#6a8a34", 0.5 + 0.5 * c.noise(c.p[0] * 9, c.p[1] * 9, c.p[2] * 9)), 0.85); // prettier-ignore
         return lit(col, c.n, 0.5);
       };
-      k.add(k.box(1.6, TOP, 0.6), {
+      // (Evenly laid and closed underneath, lane Sharpness B: from below
+      // the water showed through an open, speckled box.)
+      k.add(evenBox(1.6, TOP, 0.6), {
+        even: true,
+        opacity: 1,
+        jitter: 0.015,
         pos: [0, TOP / 2, -0.05],
-        color: (c) => (c.s.face === 3 ? null : rock(c)),
+        // (The underside's splats a little larger, so nothing above shows
+        // through between them.)
+        color: (c) => (c.s.face === 3 ? { c: shade("#3e3832", 0.75), size: 1.35 } : rock(c)),
+      });
+      // A thin slab of dark stone under it: one layer of splats still let
+      // the moss above show through.
+      k.add(evenBox(1.6, 0.02, 0.6), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
+        pos: [0, -0.011, -0.05],
+        size: 1.3,
+        flat: 0.3,
+        color: (c) => shade(mix("#3e3832", "#2e2a26", 0.5 + 0.5 * c.noise(c.p[0] * 5, 0, c.p[2] * 5)), 0.75), // prettier-ignore
       });
       for (let i = 0; i < 12; i++) {
         const x = (rand() - 0.5) * 1.7;
         if (Math.abs(x) < 0.35) continue;
         const s = 0.12 + 0.12 * rand();
-        k.add(k.ellipsoid(s * 1.2, s, s * 0.8), {
-          pos: [x, rand() * TOP, 0.25 + rand() * 0.05],
+        k.add(evenEllipsoid(k, s * 1.2, s, s * 0.8, 40), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          // (Kept above the ground, lane Sharpness B: a low one poked out
+          // underneath.)
+          pos: [x, Math.max(s, rand() * TOP), 0.25 + rand() * 0.05],
           color: rock,
         });
       }
@@ -3007,7 +3218,7 @@ export const RECIPES = {
           channel: 1,
           n: unit([0, 0.2, 1]),
           flat: 0.35,
-          // Softer towards its foot, so its leading edge is ragged water.
+          // Softer toward its foot, so its leading edge is ragged water.
           size: 1 + 0.6 * smoothstep(0.75, 1, v),
           color: mix("#a8dcf2", "#ffffff", 0.5 + 0.5 * s),
           opacity: 0.55 * (1 - 0.65 * smoothstep(0.8, 1, v + 0.1 * (r() - 0.5))),
@@ -3044,6 +3255,24 @@ export const RECIPES = {
           part: streaks,
         };
       });
+      // The pool's stony bed under it, closed from below: two layers a hair
+      // apart, the upper one turned to fill the lower one's gaps.
+      for (const [dy, turn] of [
+        [0, 0],
+        [0.012, 13],
+      ])
+        k.add(evenDisc(k, 0.75, 0, 48), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          pos: [0, 0.018 + dy, 0.55],
+          scale: [1.1, 1, 0.75],
+          rot: [180, turn, 0],
+          flat: 0.2,
+          size: 1.3,
+          pattern: false,
+          color: (c) => shade(mix("#4a443c", "#2e2a26", 0.5 + 0.5 * c.noise(c.p[0] * 5, 0, c.p[2] * 5)), 0.85), // prettier-ignore
+        });
       // The pool, with foam where the water lands and drifting mist.
       k.add(k.disc(0.75), {
         pos: [0, 0.04, 0.55],
@@ -3110,16 +3339,31 @@ export const RECIPES = {
       for (let i = 0; i < 9; i++) {
         const a = -0.4 + (i / 8) * (Math.PI + 0.8);
         const s = 0.08 + 0.08 * rand();
-        k.add(k.ellipsoid(s * 1.3, s * 0.8, s), {
-          pos: [Math.cos(a) * 0.85, 0.05, 0.55 + Math.sin(a) * 0.55],
+        // (Evenly laid and solid, resting on the ground, lane Sharpness B:
+        // from below the moss on top showed through them.)
+        k.add(evenEllipsoid(k, s * 1.3, s * 0.8, s, 32), {
+          even: true,
+          opacity: 1,
+          jitter: 0.015,
+          pos: [Math.cos(a) * 0.85, Math.max(0.05, s * 0.8 - 0.035), 0.55 + Math.sin(a) * 0.55],
           rot: [0, rand() * 180, 0],
           color: rock,
         });
       }
-      k.add(k.box(2.0, 0.08, 1.7), {
+      // The ground, evenly laid and solid (lane Sharpness B: from below the
+      // boulders showed through it). Its grass stops at the pool's edge, so
+      // the water lies on the pool's stony bed.
+      k.add(evenBox(2.0, 0.08, 1.7), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, 0, 0.2],
-        color: (c) =>
-          c.s.face === 2 ? lit(mix("#4a6a2a", "#6a8a34", c.rand()), c.n, 0.3) : "#4a3a2a",
+        size: 1.15,
+        color: (c) => {
+          if (c.s.face !== 2) return shade("#4a3a2a", c.s.face === 3 ? 0.8 : 1);
+          if ((c.p[0] / 0.8) ** 2 + ((c.p[2] - 0.55) / 0.54) ** 2 < 1) return null;
+          return lit(mix("#4a6a2a", "#6a8a34", c.rand()), c.n, 0.3);
+        },
       });
     },
   },
@@ -3140,6 +3384,7 @@ export const RECIPES = {
     drive(t, c, out) {
       const s = since(c.crash, OW_SECS);
       const pose = owPose(s === null ? 0 : Math.min(s, OW_KEYS[OW_KEYS.length - 1].at));
+      owJoin(pose.pts);
       const rest = OW_CTL[0];
       const ctl = pose.pts.map((p, i) => ({
         base: [rest[i][0], rest[i][1], 0],
@@ -3185,7 +3430,7 @@ export const RECIPES = {
         offset: [0.07 * ease(band(s, OW_HIT, 2.2)) * (1 - band(s, 2.4, 2.6)), 0, 0],
       };
       // The spray off the lip goes as it is thrown and comes back once the
-      // lip has curled over again, rising off it (the behaviours' amount
+      // lip has curled over again, rising off it (the behaviors' amount
       // grows back from 0, so it starts on the lip).
       out.parts.spray = { visible: s < 0.3 ? 1 - ease(band(s, 0, 0.3)) : ease(band(s, 5.2, 5.7)) };
       out.parts.churn = { visible: 1 - band(s, 0.3, 0.8) + ease(band(s, 4.9, 5.6)) };
@@ -3204,7 +3449,7 @@ export const RECIPES = {
         if (foamN > 0.5) col = mix(col, "#dff4ff", 0.55);
         return lit(col, c.n, 0.25);
       };
-      // The sea and the wave thin out towards their ends, so they fade into
+      // The sea and the wave thin out toward their ends, so they fade into
       // the water round them instead of stopping at a straight edge.
       const frayed = (c) => {
         const z = Math.abs(c.p[2]);
@@ -3247,7 +3492,7 @@ export const RECIPES = {
         skin: skin(OW_NM, OW_NL),
         color: (c) => {
           if (frayed(c)) return null;
-          // White only towards its tip, where it breaks.
+          // White only toward its tip, where it breaks.
           const foamN = c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 5);
           if (foamN > 0.95 - 1.7 * c.u * c.u) return keep(mix("#e4f6ff", "#ffffff", c.rand()));
           return water(c, 0.5, false);
@@ -3269,7 +3514,7 @@ export const RECIPES = {
         const rr = (0.2 + 0.08 * lump) * (1 - 0.35 * r() * r());
         const p = [1.0 + 0.1 * Math.cos(a) + Math.cos(a) * rr, Math.sin(a) * rr * 0.95, z];
         if (p[1] < 0.01) return null;
-        // Thinner towards the wave's ends.
+        // Thinner toward the wave's ends.
         const l = 0.5 + 0.5 * k.noise(p[0] * 14, p[1] * 14, z * 6);
         if (r() < band(Math.abs(z), 0.4, OW_Z1) * (1.2 - 0.4 * l)) return null;
         const d = Math.hypot(p[0] - OW_PLUNGE[0], p[1] - OW_PLUNGE[1]) / 0.5;
@@ -3359,6 +3604,9 @@ export const RECIPES = {
   },
 
   geyser: {
+    // Lane Any pose: turned over in Hands-on, its water shoots out of its own vent
+    // (the toy's frame), not toward the world's up.
+    gravity: false,
     alive: true,
     controls: [{ key: "erupt", label: "Erupt", type: "pulse", ease: 5 }],
     action: { key: "erupt", label: "Erupt" },
@@ -3368,7 +3616,7 @@ export const RECIPES = {
       out.amount = 0.6 + 0.5 * cycle + 1.2 * c.erupt;
     },
     build(k) {
-      // Terraced sinter mound with coloured mats around a blue pool.
+      // Terraced sinter mound with colored mats around a blue pool.
       const mound = k.lathe(
         [
           [1.0, 0],

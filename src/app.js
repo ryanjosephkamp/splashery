@@ -53,7 +53,7 @@ function showFallback(reason) {
   document.body.dataset.ready = "true";
 }
 
-// How a toy likes flag colours laid on (recipe.patternProjection,
+// How a toy likes flag colors laid on (recipe.patternProjection,
 // patternDetail and patternAmount), or null for the usual way; `usual`
 // gives the usual way itself.
 function flagLook(recipe, usual = false) {
@@ -72,7 +72,7 @@ const sameLook = (p, look) =>
 
 // ---- View settings (lane Viewer) -------------------------------------------------
 // The turntable is one setting for every toy, remembered on this device; the
-// tilt lock and flag colours belong to each toy, remembered for the visit.
+// tilt lock and flag colors belong to each toy, remembered for the visit.
 
 const TURNTABLE_KEY = "splashery.turntable";
 
@@ -89,6 +89,32 @@ function turntablePref() {
 function rememberTurntable(on) {
   try {
     localStorage.setItem(TURNTABLE_KEY, on ? "on" : "off");
+  } catch {
+    // Private windows may refuse; the choice holds for this visit.
+  }
+}
+
+// Lane Pages r6: the top bar's Pop out (on or off, off when never chosen),
+// and whether its first-time line has been shown on this device.
+const POPOUT_KEY = "splashery.popout";
+function popOutPref() {
+  try {
+    return localStorage.getItem(POPOUT_KEY) === "on";
+  } catch {
+    return false;
+  }
+}
+function popOutHinted() {
+  try {
+    return localStorage.getItem(POPOUT_KEY) !== null;
+  } catch {
+    return true;
+  }
+}
+function rememberPopOut(on, hintOnly = false) {
+  try {
+    if (hintOnly) localStorage.setItem(POPOUT_KEY, popOutPref() ? "on" : "off");
+    else localStorage.setItem(POPOUT_KEY, on ? "on" : "off");
   } catch {
     // Private windows may refuse; the choice holds for this visit.
   }
@@ -117,8 +143,9 @@ class App {
     this.tiltLocks = new Map(); // toy key -> locked (lane Viewer)
     this.handsChoice = new Map(); // toy key -> Hands-on on (lane Physics)
     this.spins = new Map(); // UI r3: toy key -> turntable, chosen for a toy that holds still
-    this.toyFlags = new Map(); // toy key -> its flag colours, or null (lane Viewer)
+    this.toyFlags = new Map(); // toy key -> its flag colors, or null (lane Viewer)
     this.globalFlag = null; // UI r3: the top bar's flag, for every toy (a flag code)
+    this.popOut = popOutPref(); // lane Pages r6: the top bar's Pop out, for the page toys
   }
 
   async start() {
@@ -141,15 +168,23 @@ class App {
       ui.setLook(player.scene.look, theme);
     });
     player.on("message", (m) => ui.toast(m));
+    player.on("say", (m) => ui.toast(m, 6000)); // a tap's own message (lane Molecule viewer)
+    player.on("link", (l) => ui.confirmLink(l.url)); // lane Books r5: a link in a page
     player.on("effects", (fx) => ui.setEffects(fx));
     player.on("paint", (n) => ui.setPaintCount(n));
     player.on("toy", (info) => this.onToy(info));
     player.on("action", (r) => this.onAction(r));
+    // A toy's slider dragged on the toy itself: the panel's slider follows.
+    player.on("controls", (targets) => ui.setMotion(player.scene.motion, targets));
+    player.on("tilt", (locked) => ui.setTiltLock(locked)); // lane Pages r6: a tilt the toy freed
     // A tap that switches the toy's options rebuilds it the way the Toy tab does.
     // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
     // loading overlay: the toy stays on screen and its tap sound plays at once (lane Fix6).
     player.rebuild = (options) => this.setToyOptions(options, { quiet: Infinity });
     // Lane Physics: a toy or piece tossed in Hands-on lands with a sound.
+    // Lane Hands-on H3: a toy that stops (or starts) being able to play
+    // Hands-on, a converter with a file open, shows or hides ✋ at once.
+    player.on("hands-available", () => this.showHands());
     player.on("frame", () => {
       const hits = player.handsOn.takeSounds();
       if (hits.length) this.handsSounds(hits);
@@ -158,7 +193,10 @@ class App {
       if (!player.motion.pausedKey) this.sound.resumeToy(); // Sound C: cues mean it runs
       for (const spec of cues) this.sound.play(spec, { key: "cue" });
     });
-    player.on("profile", () => this.updateRenderInfo());
+    player.on("profile", () => {
+      this.updateRenderInfo();
+      ui.setDetail(player.detail, player.splats); // lane Kit lab
+    });
     ui.setSound(this.sound.enabled);
     // Pictures: video sound follows the speaker button; the Toy tab's
     // picture panel and the status line follow the pages.
@@ -168,6 +206,7 @@ class App {
       ui.setPictures?.(p);
       this.updateStatus();
     });
+    player.on("chunks", () => this.updateStatus()); // lane Powers of ten
     player.on("media", (m) => ui.setPictures?.(player.pictures?.info() || null, m));
     const wm = webmSupport();
     ui.setWebmUnavailable(wm.ok ? null : wm.reason);
@@ -211,7 +250,7 @@ class App {
     player.applyLook();
     ui.setEffects(scene.effects);
     ui.setAutoplay(scene.autoplay, player.reducedMotion);
-    ui.setDetail(player.detail);
+    ui.setDetail(player.detail, player.splats);
     ui.setPaintCount(scene.paint.stamps.length);
     ui.setPattern(scene.pattern);
     if (scene.toy.kind === "file" && !file) {
@@ -325,14 +364,18 @@ class App {
     const toyEntry = scene.toy.kind === "builtin" ? findToy(scene.toy.id) : null;
     // UI r5: an entry's tilt: "free" starts unlocked even on a shelf that holds still.
     const still = !!toyEntry && holdsStill(toyEntry) && toyEntry.tilt !== "free";
-    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : !!info.recipe?.tiltLock || still; // prettier-ignore
+    // Lane Live input r3: a recipe's own tiltLock (true or false) wins over that.
+    const lock = this.tiltLocks.has(key) ? this.tiltLocks.get(key) : (info.recipe?.tiltLock ?? still); // prettier-ignore
     player.camera.setTiltLock(lock);
+    // Lane Live input r3: a toy's own tilt range (recipe.pitchRange), or none.
+    player.camera.setPitchRange(info.recipe?.pitchRange ?? null);
     ui.setTiltLock(lock);
+    this.showPopOut(info); // lane Pages r6
     // Lane Physics: Hands-on starts on for a toy that is hands-on already,
     // or as it was left on this toy earlier in the visit.
     if (this.handsChoice.has(key)) player.handsOn.setOn(this.handsChoice.get(key));
     this.showHands();
-    // A toy that lays flag colours on its own way (the chess board: from
+    // A toy that lays flag colors on its own way (the chess board: from
     // above, gently) gets that way when it comes out with a flag on, and
     // the next toy gets the usual way back, unless the look was changed.
     const pat = scene.pattern;
@@ -363,7 +406,25 @@ class App {
   async setDetail(detail) {
     const player = this.player;
     const changed = player.setDetail(detail);
-    this.ui.setDetail(player.detail);
+    this.ui.setDetail(player.detail, player.splats);
+    this.updateRenderInfo();
+    const scene = player.scene;
+    if (!changed || this.busy || scene.toy.kind === "file") return;
+    const cam = player.camera.getState();
+    try {
+      await this.loadToy(scene.toy);
+      player.camera.setState(cam, { snap: true });
+      player.stage.requestRender();
+    } catch (err) {
+      this.ui.toast(err.message, 5000);
+    }
+  }
+
+  // Lane Kit lab: the Detail slider (labs only; see setSplats in player.js).
+  async setSplats(n) {
+    const player = this.player;
+    const changed = player.setSplats(n);
+    this.ui.setDetail(player.detail, player.splats);
     this.updateRenderInfo();
     const scene = player.scene;
     if (!changed || this.busy || scene.toy.kind === "file") return;
@@ -471,21 +532,24 @@ class App {
     this.ui.setCredits(nodes);
   }
 
-  // The status line under the toy: name, splats, credit and colours.
+  // The status line under the toy: name, splats, credit and colors.
   async updateStatus() {
     const player = this.player;
     const info = player.toyInfo;
     if (!info) return;
-    // Pictures: a picture toy's sheets count too.
-    const splats = info.splats + (player.pictures?.splats() || 0);
-    const parts = [info.label, `${formatCount(splats)} splats`];
+    // Pictures: a picture toy's sheets count too (and lane Powers of ten: a
+    // toy's chunks on show).
+    const splats = info.splats + (player.pictures?.splats() || 0) + (player.chunks?.splats() || 0); // prettier-ignore
+    // Lane Photo sharp view: a toy drawn another way names what is on screen instead of its splats.
+    const shown = player.statusLabel?.(info);
+    const parts = [info.label, shown || `${formatCount(splats)} splats`];
     if (info.credit) parts.push(`by ${info.credit.author} (${info.credit.license})`);
     const pat = player.scene.pattern;
     this.flagCredit = null;
     if (pat.id === "flag" && pat.flag) {
       const f = await flagInfo(pat.flag);
       if (f) {
-        parts.push(`in the colours of ${f.the ? "the " : ""}${f.name}`);
+        parts.push(`in the colors of ${f.the ? "the " : ""}${f.name}`);
         this.flagCredit = f;
       }
     }
@@ -500,7 +564,7 @@ class App {
     this.sound.stopHeld("toy"); // UI r3: the last toy's tune stops with it
     const player = this.player;
     const scene = player.scene;
-    // Flag colours belong to the toy they were chosen on (lane Viewer): keep
+    // Flag colors belong to the toy they were chosen on (lane Viewer): keep
     // this toy's, and bring back the next toy's own (none if it had none).
     const pat = scene.pattern;
     this.toyFlags.set(toyKey(scene.toy), pat.id === "flag" ? { ...pat } : null);
@@ -592,7 +656,7 @@ class App {
   }
 
   // Everything back to how the toy starts: the scene is rebuilt for the same
-  // toy with no flag colours or pattern, paint, clay, effects, toy options,
+  // toy with no flag colors or pattern, paint, clay, effects, toy options,
   // motion or look changes; Detail goes back to Auto and the view resets.
   async resetAll() {
     const player = this.player;
@@ -607,7 +671,7 @@ class App {
     const file = toy.kind === "file" ? this.file : null;
     if (toy.kind === "file" && !file) return;
     await this.applyScene(fresh, { file });
-    if (player.detail !== "auto") await this.setDetail("auto");
+    if (player.detail !== "auto" || player.splats) await this.setDetail("auto");
     this.resetCamera();
     this.ui.toast("Everything is back to how it started.");
   }
@@ -626,6 +690,30 @@ class App {
   toggleTurntable() {
     const on = !this.player.scene.autoplay.turntable;
     this.setAutoplay({ turntable: on });
+  }
+
+  // Lane Pages r6: the top bar's Pop out, one setting for every toy that
+  // has a control marked `global: "pop"` (Your book, the Photo album, the
+  // Picture lab), shown only while one is open. It is remembered on this
+  // device; a scene or link that had Pop out on turns it on for the visit.
+  // The first time such a toy opens on a device, a line says it is there.
+  showPopOut(info) {
+    const def = info.recipe?.controls?.find((c) => c.global === "pop");
+    if (def && (this.player.scene.motion.controls[def.key] ?? 0) > 0.5) this.popOut = true;
+    if (def) this.player.setGlobalControl(def.key, this.popOut);
+    this.ui.setPopOut(!!def, this.popOut);
+    if (!def || popOutHinted()) return;
+    rememberPopOut(null, true);
+    if (!this.popOut) this.ui.toast("Pop out is off. Turn it on at the top, then tap a figure to raise it.", 5200); // prettier-ignore
+  }
+
+  togglePopOut() {
+    this.popOut = !this.popOut;
+    rememberPopOut(this.popOut);
+    const def = this.player.toyInfo?.recipe?.controls?.find((c) => c.global === "pop");
+    if (def) this.player.setGlobalControl(def.key, this.popOut);
+    this.ui.setPopOut(!!def, this.popOut);
+    this.ui.toast(this.popOut ? "Pop out on: tap a figure to raise it." : "Pop out off.", 2500);
   }
 
   // The tilt lock for the toy on show; remembered for it during the visit.
@@ -756,7 +844,8 @@ class App {
     const player = this.player;
     const [x, y] = player.canvasPoint(e);
     player.pickDirty = true;
-    const hit = await player.pickAt(x, y);
+    // Lane Fix9 (engine): a toy with a tap box takes a tap anywhere in it.
+    const hit = (await player.pickAt(x, y)) || player.tapBoxAt(x, y);
     if (hit) player.act(hit);
   }
 
@@ -797,7 +886,16 @@ class App {
   preloadSounds() {
     const toy = this.player?.scene.toy;
     if (!this.sound.enabled || toy?.kind !== "builtin") return;
-    this.sound.preload([toySound(toy.id), ...this.recipeSounds()]);
+    this.sound.preload([this.ownSound(toy), ...this.recipeSounds()]);
+  }
+
+  // Lane Photo depth: a built-in toy's tap sound. Its recipe may pick it from its options
+  // (`toySound(options)`, as Photo to 3D's Sound choice does; [] is silence); anything else, and
+  // every recipe without the hook, has its sound from src/toy-sounds.js as before.
+  ownSound(toy) {
+    if (toy?.kind !== "builtin") return null;
+    const pick = this.player?.toyInfo?.recipe?.toySound?.(toy.options || {});
+    return pick !== undefined && pick !== null ? pick : toySound(toy.id);
   }
 
   // Sound C: the specs a kit recipe's `sounds` lists (the recorded samples
@@ -811,6 +909,7 @@ class App {
 
   onAction(r) {
     const player = this.player;
+    this.ui.refreshInputShown?.(); // lane Molecule viewer: the panel's line follows the taps
     const recipe = player.toyInfo?.recipe;
     // The toy's own sound (src/toy-sounds.js), else the recipe's, else a
     // plain hop or pop. A toggle plays its on or off half.
@@ -821,7 +920,7 @@ class App {
       this.ui.setMotion(player.scene.motion, player.motion.targets);
       return;
     }
-    const own = toy.kind === "builtin" ? toySound(toy.id) : null;
+    const own = this.ownSound(toy);
     // UI r3: a tap on a long effect that is running pauses its sound too, and
     // the next one resumes it from the same place.
     if (r.paused || r.resumed) {
@@ -888,7 +987,7 @@ class App {
     this.player.setControl(key, value);
   }
 
-  // Rebuilds a kit toy with a changed option (colour, style), or loads a
+  // Rebuilds a kit toy with a changed option (color, style), or loads a
   // scan's other look.
   async setToyOption(key, value) {
     return this.setToyOptions({ [key]: value });
@@ -1099,9 +1198,12 @@ class App {
     }
     st.busy = true;
     player.pickDirty = true;
-    const hit = await player.pickAt(x, y);
+    let hit = await player.pickAt(x, y);
     st.busy = false;
     if (this.toolState !== st) return;
+    // Lane Hands-on H3: with Hands-on on, a press just off a thin toy's
+    // splats still takes it (null when Hands-on is off).
+    if (!hit && st.tool === "grab") hit = player.handsOn.nearPress(x, y);
     if (!hit) {
       this.toOrbit();
       return;
@@ -1204,7 +1306,7 @@ class App {
       // A real stretch plays the toy's sound as it springs back.
       const stretched = this.player.grabEnd();
       const toy = this.player.scene.toy;
-      const spec = toy.kind === "builtin" ? toySound(toy.id) : null;
+      const spec = this.ownSound(toy);
       if (stretched > 0.15 && spec) this.sound.play(specFor(spec, true), { key: "toy" });
       // Lane Physics: a stretchy toy may wobble as it springs back (the jelly).
       const wobble = this.player.toyInfo?.recipe?.grab?.wobble;
@@ -1298,6 +1400,9 @@ class App {
       depth = 0;
       this.ui.showDrop(false);
       const f = e.dataTransfer?.files?.[0];
+      // Lane Molecule viewer (engine): a toy whose panel takes dropped files
+      // (input.drop) reads a file of a kind it opens; anything else loads as before.
+      if (f && this.ui.dropOnToy?.(f)) return;
       if (f) this.openFile(f);
     });
   }
@@ -1570,8 +1675,11 @@ class App {
   }
 
   // Runs fn with a fixed-size, frozen player and restores it afterwards.
-  async withCapture(size, fn) {
+  // label: a short message shown over the stage meanwhile (Stage.cover).
+  async withCapture(size, fn, { label = "" } = {}) {
     const player = this.player;
+    // Engine (QR r4): the fixed size and the export camera stay off screen.
+    await player.stage.cover({ label });
     const base = { cam: player.camera.getState(), time: player.time, idle: player.idle.weight };
     const look = player.scene.look;
     const fx = player.scene.effects;
@@ -1591,6 +1699,7 @@ class App {
       player.idle.weight = base.idle;
       player.applyLook();
       player.resume();
+      player.stage.uncover();
     }
   }
 
@@ -1649,6 +1758,32 @@ class App {
         return blob;
       }),
     );
+  }
+
+  // Lane PDF lab: Save as PDF (labs). Its dialog and pdf-lib load only when
+  // someone opens it (src/pdf-export/).
+  // Lane QR r4 part 2 (labs): the scene's link as a QR code, in a dialog
+  // (src/qr/share.js, loaded when someone opens it).
+  async openShareQR() {
+    if (this.busy) return;
+    try {
+      const { openShareQR } = await import("./qr/share.js");
+      return await openShareQR(this);
+    } catch (err) {
+      console.info(err);
+      this.ui.toast("The QR code couldn't load. Try again in a moment.", 5000);
+    }
+  }
+
+  async openPdfExport() {
+    if (this.busy) return;
+    try {
+      const { openPdfDialog } = await import("./pdf-export/index.js");
+      return openPdfDialog(this);
+    } catch (err) {
+      console.info(err);
+      this.ui.toast("Save as PDF couldn't load. Try again in a moment.", 5000);
+    }
   }
 
   // ---- UI r5: Record ---------------------------------------------------------------

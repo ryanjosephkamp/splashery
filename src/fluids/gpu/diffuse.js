@@ -79,7 +79,7 @@ export class GpuDiffuse {
     const elapsed = this.sinceRead;
     this.sinceRead = 0;
     this.liq.sim
-      .readPositions()
+      .readPositions(true) // (r7: reuses its arrays)
       .then((d) => {
         this.pending = false;
         if (!this.destroyed) this.absorb(d, elapsed);

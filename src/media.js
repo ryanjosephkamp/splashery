@@ -15,6 +15,13 @@
 // m.onFrame(fn) (called on each new video frame); for a PDF, await m.text(i)
 // -> page i's words from its text layer, a line per line of the page ("" for
 // a page with none, like a scan); m.close().
+//
+// Lane Books r5: for a PDF, await m.links(i) -> page i's links, [{ box, url }
+// or { box, page }] (box [x0, y0, x1, y1] in fractions of the page from its
+// top-left corner; url only http:, https: or mailto:, page 0-based), and
+// await m.figures(i) -> the boxes its pictures are painted in, [{ box }].
+// m.draw(i, w, h, region) draws only `region` ([x0, y0, x1, y1], the same
+// fractions) of a PDF page or a picture into w x h.
 
 import { LIMITS } from "./loaders.js";
 import { normalizeMediaURL } from "./state.js";
@@ -54,6 +61,21 @@ export function checkMediaURL(url) {
   return ok;
 }
 
+// Lane Books r5: the web address a link in a page may open, or null. Only
+// http:, https: and mailto: addresses; never javascript:, file: or data:.
+export function safeLinkURL(url) {
+  if (typeof url !== "string" || !url.trim()) return null;
+  let u;
+  try {
+    u = new URL(url.trim());
+  } catch {
+    return null;
+  }
+  if (!["http:", "https:", "mailto:"].includes(u.protocol)) return null;
+  if (u.protocol !== "mailto:" && !u.hostname) return null;
+  return u.href;
+}
+
 // The kind of a file from its type, name or first bytes.
 export function mediaKind(name = "", type = "", head = null) {
   const n = name.toLowerCase().split(/[?#]/)[0];
@@ -78,7 +100,17 @@ function canvas(w, h) {
 }
 
 // Draws an image source into a new canvas of w x h with smooth scaling.
-function drawScaled(src, sw, sh, w, h) {
+// `region` ([x0, y0, x1, y1] in fractions, lane Books r5) draws only that
+// part of the source.
+function drawScaled(src, sw, sh, w, h, region = null) {
+  if (region) {
+    const [x0, y0, x1, y1] = clampRegion(region);
+    const rw = Math.max(1, Math.round((x1 - x0) * sw));
+    const rh = Math.max(1, Math.round((y1 - y0) * sh));
+    const part = canvas(rw, rh);
+    part.getContext("2d").drawImage(src, x0 * sw, y0 * sh, (x1 - x0) * sw, (y1 - y0) * sh, 0, 0, rw, rh); // prettier-ignore
+    return drawScaled(part, rw, rh, w, h);
+  }
   const c = canvas(w, h);
   const g = c.getContext("2d", { willReadFrequently: true });
   g.imageSmoothingEnabled = true;
@@ -98,6 +130,16 @@ function drawScaled(src, sw, sh, w, h) {
   }
   g.drawImage(s, 0, 0, c.width, c.height);
   return c;
+}
+
+// A region kept inside the picture, at least a hair wide (lane Books r5).
+export function clampRegion(r) {
+  const c = (v) => Math.max(0, Math.min(1, Number(v) || 0));
+  const x0 = c(Math.min(r[0], r[2]));
+  const x1 = Math.max(x0 + 1e-3, c(Math.max(r[0], r[2])));
+  const y0 = c(Math.min(r[1], r[3]));
+  const y1 = Math.max(y0 + 1e-3, c(Math.max(r[1], r[3])));
+  return [x0, y0, Math.min(1, x1), Math.min(1, y1)];
 }
 
 // Reads the source: a File or Blob (with a name), or a web address.
@@ -183,8 +225,8 @@ async function openImage(src, limits) {
     count: 1,
     aspect: () => bmp.width / bmp.height,
     size: () => ({ width: bmp.width, height: bmp.height }),
-    async draw(i, w, h) {
-      return drawScaled(bmp, bmp.width, bmp.height, w, h);
+    async draw(i, w, h, region = null) {
+      return drawScaled(bmp, bmp.width, bmp.height, w, h, region);
     },
     close() {
       bmp.close();
@@ -249,10 +291,10 @@ async function openImageSet(sources, limits) {
     count: items.length,
     aspect: (i = 0) => at(i).width / at(i).height,
     size: (i = 0) => ({ width: at(i).width, height: at(i).height }),
-    async draw(i, w, h) {
+    async draw(i, w, h, region = null) {
       const k = Math.max(0, Math.min(items.length - 1, i | 0));
       const b = await bitmap(k);
-      return drawScaled(b, b.width, b.height, w, h);
+      return drawScaled(b, b.width, b.height, w, h, region);
     },
     reorder(order) {
       const n = items.length;
@@ -348,11 +390,25 @@ async function openPDF(src, limits) {
     }
     return texts.get(i);
   };
+  // Lane Books r5: each page's links and picture boxes, read once when
+  // first asked for (a page that fails to read is asked again next time).
+  const once = (map, read) => (i) => {
+    if (!map.has(i)) {
+      const job = doc.getPage(i + 1).then((page) => read(page, i));
+      job.catch(() => map.delete(i));
+      map.set(i, job);
+    }
+    return map.get(i);
+  };
+  const links = once(new Map(), (page, i) => pdfLinks(doc, page, i));
+  const figures = once(new Map(), (page) => pdfFigures(lib.OPS, page));
   return {
     kind: "pdf",
     name: src.name,
     url: src.url,
     count: doc.numPages,
+    links,
+    figures,
     // Pages not yet reached take the first page's shape.
     aspect: (i) => {
       const s = sizes.get(i) || first;
@@ -362,7 +418,8 @@ async function openPDF(src, limits) {
     text,
     // Renders page i (0-based) to w x h on white paper. Renders one at a
     // time: PDF.js keeps one canvas busy per page.
-    draw(i, w, h) {
+    // A `region` (lane Books r5) draws only that part of the page.
+    draw(i, w, h, region = null) {
       const job = rendering.then(async () => {
         const page = await doc.getPage(i + 1);
         const v1 = page.getViewport({ scale: 1 });
@@ -371,7 +428,11 @@ async function openPDF(src, limits) {
         const g = c.getContext("2d", { willReadFrequently: true });
         g.fillStyle = "#ffffff";
         g.fillRect(0, 0, c.width, c.height);
-        const viewport = page.getViewport({ scale: c.width / v1.width });
+        const r = region ? clampRegion(region) : null;
+        const scale = r ? c.width / (v1.width * (r[2] - r[0])) : c.width / v1.width;
+        const viewport = r
+          ? page.getViewport({ scale, offsetX: -r[0] * v1.width * scale, offsetY: -r[1] * v1.height * scale }) // prettier-ignore
+          : page.getViewport({ scale });
         await page.render({ canvasContext: g, canvas: c, viewport, background: "#ffffff" }).promise;
         page.cleanup();
         return c;
@@ -383,6 +444,152 @@ async function openPDF(src, limits) {
       task.destroy();
     },
   };
+}
+
+// ---- PDF links and figures (lane Books r5) ---------------------------------------
+
+// A rectangle in PDF space as a box in fractions of the page (from its
+// top-left corner, as the page is drawn), or null when it is off the page.
+function pageBox(viewport, pts) {
+  const xs = [];
+  const ys = [];
+  for (const [x, y] of pts) {
+    const [vx, vy] = viewport.convertToViewportPoint(x, y);
+    xs.push(vx / viewport.width);
+    ys.push(vy / viewport.height);
+  }
+  const c = (v) => Math.max(0, Math.min(1, v));
+  const box = [c(Math.min(...xs)), c(Math.min(...ys)), c(Math.max(...xs)), c(Math.max(...ys))];
+  if (!(box[2] - box[0] > 1e-4 && box[3] - box[1] > 1e-4)) return null;
+  return box;
+}
+
+// Page i's links: web links (only safe addresses, see safeLinkURL) and links
+// to another page of the same document (an explicit destination, a named
+// one, or the first, last, next or previous page).
+export async function pdfLinks(doc, page, i) {
+  const viewport = page.getViewport({ scale: 1 });
+  const out = [];
+  let annots = [];
+  try {
+    annots = await page.getAnnotations({ intent: "display" });
+  } catch {
+    return out;
+  }
+  for (const a of annots) {
+    if (a?.subtype !== "Link" || !Array.isArray(a.rect)) continue;
+    const [x0, y0, x1, y1] = a.rect;
+    const box = pageBox(viewport, [
+      [x0, y0],
+      [x1, y0],
+      [x0, y1],
+      [x1, y1],
+    ]);
+    if (!box) continue;
+    const raw = a.url ?? a.unsafeUrl;
+    if (raw !== undefined && raw !== null) {
+      const url = safeLinkURL(String(raw));
+      if (url) out.push({ box, url });
+      continue;
+    }
+    let target = null;
+    try {
+      let dest = a.dest;
+      if (typeof dest === "string") dest = await doc.getDestination(dest);
+      if (Array.isArray(dest) && dest.length) {
+        const ref = dest[0];
+        if (Number.isInteger(ref)) target = ref;
+        else if (ref && typeof ref === "object") target = await doc.getPageIndex(ref);
+      } else if (typeof a.action === "string") {
+        const n = doc.numPages;
+        target = { FirstPage: 0, LastPage: n - 1, NextPage: i + 1, PrevPage: i - 1 }[a.action] ?? null; // prettier-ignore
+      }
+    } catch {
+      target = null;
+    }
+    if (Number.isInteger(target) && target >= 0 && target < doc.numPages)
+      out.push({ box, page: target });
+  }
+  return out;
+}
+
+// The boxes page i's pictures are painted in, from its operator list: each
+// image paint fills the unit square of the transform in force. Boxes that
+// touch are joined (a picture painted in strips), tiny ones (an icon, a
+// bullet) are dropped, and so is one that covers the whole page (a scan).
+export async function pdfFigures(OPS, page) {
+  const viewport = page.getViewport({ scale: 1 });
+  const list = await page.getOperatorList();
+  const mulM = (m, n) => [
+    m[0] * n[0] + m[2] * n[1],
+    m[1] * n[0] + m[3] * n[1],
+    m[0] * n[2] + m[2] * n[3],
+    m[1] * n[2] + m[3] * n[3],
+    m[0] * n[4] + m[2] * n[5] + m[4],
+    m[1] * n[4] + m[3] * n[5] + m[5],
+  ];
+  const at = (m, x, y) => [m[0] * x + m[2] * y + m[4], m[1] * x + m[3] * y + m[5]];
+  const unitBox = (m) => pageBox(viewport, [at(m, 0, 0), at(m, 1, 0), at(m, 0, 1), at(m, 1, 1)]);
+  let ctm = [1, 0, 0, 1, 0, 0];
+  const stack = [];
+  const boxes = [];
+  const { fnArray, argsArray } = list;
+  for (let k = 0; k < fnArray.length; k++) {
+    const fn = fnArray[k];
+    const args = argsArray[k];
+    if (fn === OPS.save) stack.push(ctm);
+    else if (fn === OPS.restore) ctm = stack.pop() || ctm;
+    else if (fn === OPS.transform && args?.length >= 6) ctm = mulM(ctm, args);
+    else if (fn === OPS.paintFormXObjectBegin) {
+      stack.push(ctm);
+      const m = args?.[0];
+      if (Array.isArray(m) || ArrayBuffer.isView(m)) ctm = mulM(ctm, Array.from(m));
+    } else if (fn === OPS.paintFormXObjectEnd) ctm = stack.pop() || ctm;
+    else if (fn === OPS.paintImageXObject || fn === OPS.paintInlineImageXObject) {
+      const b = unitBox(ctm);
+      if (b) boxes.push(b);
+    } else if (fn === OPS.paintImageXObjectRepeat && args) {
+      // [objId, scaleX, scaleY, positions]: copies of one picture.
+      const [, sx, sy, pos] = args;
+      for (let p = 0; p + 1 < (pos?.length || 0); p += 2) {
+        const b = unitBox(mulM(ctm, [sx, 0, 0, sy, pos[p], pos[p + 1]]));
+        if (b) boxes.push(b);
+      }
+    } else if (fn === OPS.paintInlineImageXObjectGroup && Array.isArray(args?.[1])) {
+      for (const it of args[1]) {
+        if (!it?.transform) continue;
+        const b = unitBox(mulM(ctm, it.transform));
+        if (b) boxes.push(b);
+      }
+    }
+  }
+  return joinBoxes(boxes)
+    .filter((b) => {
+      const w = b[2] - b[0];
+      const h = b[3] - b[1];
+      return w * h >= 0.004 && w >= 0.04 && h >= 0.03 && w * h <= 0.9;
+    })
+    .map((box) => ({ box }));
+}
+
+// Joins boxes that overlap or touch (within a hair), until none do.
+export function joinBoxes(boxes, gap = 0.004) {
+  const out = boxes.map((b) => b.slice());
+  let joined = true;
+  while (joined) {
+    joined = false;
+    for (let a = 0; a < out.length && !joined; a++)
+      for (let b = a + 1; b < out.length; b++) {
+        const A = out[a];
+        const B = out[b];
+        if (A[0] - gap > B[2] || B[0] - gap > A[2] || A[1] - gap > B[3] || B[1] - gap > A[3]) continue; // prettier-ignore
+        out[a] = [Math.min(A[0], B[0]), Math.min(A[1], B[1]), Math.max(A[2], B[2]), Math.max(A[3], B[3])]; // prettier-ignore
+        out.splice(b, 1);
+        joined = true;
+        break;
+      }
+  }
+  return out;
 }
 
 // ---- GIF --------------------------------------------------------------------------

@@ -1,0 +1,4878 @@
+[
+  {
+    "id": "cactus",
+    "label": "Cactus",
+    "category": "scans",
+    "tags": "plant succulent pot captured photo real",
+    "kind": "captured",
+    "url": "assets/toys/cactus/cactus.sog",
+    "urlWeak": "assets/toys/cactus/cactus-lite.sog",
+    "credit": {
+      "title": "Cactus (3DGS sample data)",
+      "author": "steam studio / 3D SCAN STUDIO iris",
+      "source": "https://note.com/steam_studio/n/ne9736d94f162",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Converted to SOG, spherical harmonics removed, recentred, scaled and cropped."
+    },
+    "labs": false
+  },
+  {
+    "id": "strawberry",
+    "label": "Strawberry",
+    "category": "scans",
+    "tags": "fruit food berry captured photo real",
+    "kind": "captured",
+    "url": "assets/toys/strawberry/strawberry.sog",
+    "urlWeak": "assets/toys/strawberry/strawberry-lite.sog",
+    "camera": {
+      "yaw": 0.25,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 5.6
+    },
+    "credit": {
+      "title": "Strawberry",
+      "author": "Dany Bittel",
+      "source": "https://superspl.at/scene/84df8849",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "cookie",
+    "label": "Heart cookie",
+    "category": "scans",
+    "tags": "food biscuit heart sweet captured photo real",
+    "kind": "captured",
+    "url": "assets/toys/cookie/cookie.sog",
+    "urlWeak": "assets/toys/cookie/cookie-lite.sog",
+    "credit": {
+      "title": "Heart Cookie",
+      "author": "Dany Bittel",
+      "source": "https://superspl.at/scene/bd964899",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "bee",
+    "label": "Honeybee",
+    "category": "scans",
+    "tags": "insect animal bug honeybee captured photo real",
+    "kind": "captured",
+    "url": "assets/toys/bee/bee.sog",
+    "urlWeak": "assets/toys/bee/bee-lite.sog",
+    "credit": {
+      "title": "Japanese Bee",
+      "author": "YUMA Co., Ltd.",
+      "source": "https://superspl.at/scene/ae58ed2c",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, turned upright, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "torus",
+    "label": "Torus",
+    "category": "shapes",
+    "kind": "kit",
+    "pack": "shapes-torus",
+    "tags": "ring donut doughnut bagel swim ring float geometry math shape",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.62,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "blob",
+    "label": "Jelly blob",
+    "category": "shapes",
+    "tags": "jelly noise candy generated",
+    "kind": "procedural",
+    "generator": {
+      "shape": "blob",
+      "palette": "candy",
+      "seed": 7,
+      "sizeJitter": 0.35,
+      "roughness": 0.25,
+      "colorNoise": 0.2
+    },
+    "labs": false
+  },
+  {
+    "id": "knot",
+    "label": "Neon knot",
+    "category": "shapes",
+    "tags": "trefoil neon maths generated",
+    "kind": "procedural",
+    "generator": {
+      "shape": "knot",
+      "palette": "neon",
+      "seed": 11,
+      "sizeJitter": 0.3,
+      "roughness": 0.15,
+      "colorNoise": 0.15
+    },
+    "labs": false
+  },
+  {
+    "id": "cluster-fly",
+    "label": "Cluster fly",
+    "category": "scans",
+    "tags": "photoreal scan captured insect bug animal macro",
+    "kind": "captured",
+    "url": "assets/toys/cluster-fly/cluster-fly.sog",
+    "urlWeak": "assets/toys/cluster-fly/cluster-fly-lite.sog",
+    "credit": {
+      "title": "Cluster Fly",
+      "author": "Dany Bittel",
+      "source": "https://superspl.at/scene/285082b2",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "may-beetle",
+    "label": "May beetle",
+    "category": "scans",
+    "tags": "photoreal scan captured insect bug animal cockchafer",
+    "kind": "captured",
+    "url": "assets/toys/may-beetle/may-beetle.sog",
+    "urlWeak": "assets/toys/may-beetle/may-beetle-lite.sog",
+    "credit": {
+      "title": "MAY-BEETLE-HIRES",
+      "author": "trilithon",
+      "source": "https://superspl.at/scene/9d4c4442",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "millipede",
+    "label": "Millipede",
+    "category": "scans",
+    "tags": "photoreal scan captured insect bug animal legs",
+    "kind": "captured",
+    "url": "assets/toys/millipede/millipede.sog",
+    "urlWeak": "assets/toys/millipede/millipede-lite.sog",
+    "credit": {
+      "title": "millipede spec.",
+      "author": "scant3d",
+      "source": "https://superspl.at/scene/3d5482d4",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "bumblebee",
+    "label": "Carder bumblebee",
+    "category": "scans",
+    "tags": "photoreal scan captured insect bee animal macro",
+    "kind": "captured",
+    "url": "assets/toys/bumblebee/bumblebee.sog",
+    "urlWeak": "assets/toys/bumblebee/bumblebee-lite.sog",
+    "credit": {
+      "title": "Macroscan - Brown-banded carder bumblebee (Bombus humilis)",
+      "author": "macroscans",
+      "source": "https://superspl.at/scene/65ff2330",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "raspberry",
+    "label": "Raspberry",
+    "category": "scans",
+    "tags": "photoreal scan captured fruit food berry",
+    "kind": "captured",
+    "url": "assets/toys/raspberry/raspberry.sog",
+    "urlWeak": "assets/toys/raspberry/raspberry-lite.sog",
+    "credit": {
+      "title": "Raspberry",
+      "author": "Dany Bittel",
+      "source": "https://superspl.at/scene/04bdd392",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "blackberry",
+    "label": "Blackberry",
+    "category": "scans",
+    "tags": "photoreal scan captured fruit food berry",
+    "kind": "captured",
+    "url": "assets/toys/blackberry/blackberry.sog",
+    "urlWeak": "assets/toys/blackberry/blackberry-lite.sog",
+    "credit": {
+      "title": "Blackberry",
+      "author": "Dany Bittel",
+      "source": "https://superspl.at/scene/827133e7",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "blueberry",
+    "label": "Blueberry",
+    "category": "scans",
+    "tags": "photoreal scan captured fruit food berry",
+    "kind": "captured",
+    "url": "assets/toys/blueberry/blueberry.sog",
+    "urlWeak": "assets/toys/blueberry/blueberry-lite.sog",
+    "credit": {
+      "title": "Blueberry",
+      "author": "Dany Bittel",
+      "source": "https://superspl.at/scene/fd8b85a7",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "grape",
+    "label": "Grape",
+    "category": "scans",
+    "tags": "photoreal scan captured fruit food",
+    "kind": "captured",
+    "url": "assets/toys/grape/grape.sog",
+    "urlWeak": "assets/toys/grape/grape-lite.sog",
+    "credit": {
+      "title": "Grape",
+      "author": "Dany Bittel",
+      "source": "https://superspl.at/scene/4ae563ac",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "star-cookie",
+    "label": "Cinnamon star cookie",
+    "category": "scans",
+    "tags": "photoreal scan captured food biscuit christmas sweet",
+    "kind": "captured",
+    "url": "assets/toys/star-cookie/star-cookie.sog",
+    "urlWeak": "assets/toys/star-cookie/star-cookie-lite.sog",
+    "credit": {
+      "title": "Cinnamon Star Cookie",
+      "author": "Dany Bittel",
+      "source": "https://superspl.at/scene/6584b96e",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, turned to show the glazed top, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "tomatoes",
+    "label": "Tomatoes",
+    "category": "scans",
+    "tags": "photoreal scan captured vegetable food",
+    "kind": "captured",
+    "url": "assets/toys/tomatoes/tomatoes.sog",
+    "urlWeak": "assets/toys/tomatoes/tomatoes-lite.sog",
+    "credit": {
+      "title": "Tomatoes - No Postshot!",
+      "author": "simonbethke",
+      "source": "https://superspl.at/scene/0101ad57",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "mandeltorus",
+    "label": "Mandeltorus",
+    "category": "scans",
+    "tags": "photoreal scan captured maths fractal art",
+    "kind": "captured",
+    "url": "assets/toys/mandeltorus/mandeltorus.sog",
+    "urlWeak": "assets/toys/mandeltorus/mandeltorus-lite.sog",
+    "credit": {
+      "title": "MandelTorus 4,12,8,1.5 (Spirula Studio)",
+      "author": "harry7557558",
+      "source": "https://superspl.at/scene/e7088609",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "basket",
+    "label": "Basket",
+    "category": "scans",
+    "tags": "photoreal scan captured wicker woven",
+    "kind": "captured",
+    "url": "assets/toys/basket/basket.sog",
+    "urlWeak": "assets/toys/basket/basket-lite.sog",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.78,
+      "roll": 0,
+      "distance": 4.6
+    },
+    "credit": {
+      "title": "Basket",
+      "author": "hollmar",
+      "source": "https://superspl.at/scene/efa1fa80",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "rubber-duck-real",
+    "label": "Real rubber duck",
+    "category": "scans",
+    "tags": "photoreal model bath toy yellow model",
+    "kind": "captured",
+    "url": "assets/toys/rubber-duck-real/rubber-duck-real.sog",
+    "urlWeak": "assets/toys/rubber-duck-real/rubber-duck-real-lite.sog",
+    "credit": {
+      "title": "Rubber Duck Toy",
+      "author": "Plat251",
+      "source": "https://polyhaven.com/a/rubber_duck_toy",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "garden-gnome",
+    "label": "Garden gnome",
+    "category": "scans",
+    "tags": "photoreal model garden hat beard statue",
+    "kind": "captured",
+    "url": "assets/toys/garden-gnome/garden-gnome.sog",
+    "urlWeak": "assets/toys/garden-gnome/garden-gnome-lite.sog",
+    "credit": {
+      "title": "Garden Gnome",
+      "author": "Bhargav Kubal",
+      "source": "https://polyhaven.com/a/garden_gnome",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "wooden-elephant",
+    "label": "Wooden elephant",
+    "category": "scans",
+    "tags": "photoreal model carving animal wood",
+    "kind": "captured",
+    "url": "assets/toys/wooden-elephant/wooden-elephant.sog",
+    "urlWeak": "assets/toys/wooden-elephant/wooden-elephant-lite.sog",
+    "credit": {
+      "title": "Carved Wooden Elephant",
+      "author": "Greg Zaal",
+      "source": "https://polyhaven.com/a/carved_wooden_elephant",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs) with soft studio light baked in, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "marble-bust",
+    "label": "Marble bust",
+    "category": "scans",
+    "tags": "photoreal model sculpture statue head art",
+    "kind": "captured",
+    "url": "assets/toys/marble-bust/marble-bust.sog",
+    "urlWeak": "assets/toys/marble-bust/marble-bust-lite.sog",
+    "credit": {
+      "title": "Marble Bust 01",
+      "author": "Rico Cilliers",
+      "source": "https://polyhaven.com/a/marble_bust_01",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "ukulele",
+    "label": "Ukulele",
+    "category": "scans",
+    "tags": "photoreal model music instrument guitar strings",
+    "kind": "captured",
+    "url": "assets/toys/ukulele/ukulele.sog",
+    "urlWeak": "assets/toys/ukulele/ukulele-lite.sog",
+    "credit": {
+      "title": "Ukulele 01",
+      "author": "Joseph Burgan",
+      "source": "https://polyhaven.com/a/Ukulele_01",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "alarm-clock",
+    "label": "Real alarm clock",
+    "category": "scans",
+    "tags": "photoreal model time bell",
+    "kind": "captured",
+    "url": "assets/toys/alarm-clock/alarm-clock.sog",
+    "urlWeak": "assets/toys/alarm-clock/alarm-clock-lite.sog",
+    "credit": {
+      "title": "Alarm Clock 01",
+      "author": "Yann Kervran, James Ray Cock",
+      "source": "https://polyhaven.com/a/alarm_clock_01",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "vintage-camera",
+    "label": "Vintage camera",
+    "category": "scans",
+    "tags": "photoreal model photo retro film",
+    "kind": "captured",
+    "url": "assets/toys/vintage-camera/vintage-camera.sog",
+    "urlWeak": "assets/toys/vintage-camera/vintage-camera-lite.sog",
+    "credit": {
+      "title": "Camera 01",
+      "author": "Rajil Jose Macatangay",
+      "source": "https://polyhaven.com/a/Camera_01",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs) with soft studio light baked in, recentred and scaled. The maker's and lens names printed on it were painted out."
+    },
+    "labs": false
+  },
+  {
+    "id": "boombox",
+    "label": "Boombox",
+    "category": "scans",
+    "tags": "photoreal model radio music stereo retro",
+    "kind": "captured",
+    "url": "assets/toys/boombox/boombox.sog",
+    "urlWeak": "assets/toys/boombox/boombox-lite.sog",
+    "credit": {
+      "title": "Boombox",
+      "author": "Thomas Paul Mouilleron",
+      "source": "https://polyhaven.com/a/boombox",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs) with soft studio light baked in, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "croissant-real",
+    "label": "Real croissant",
+    "category": "scans",
+    "tags": "photoreal model food pastry bakery",
+    "kind": "captured",
+    "url": "assets/toys/croissant-real/croissant-real.sog",
+    "urlWeak": "assets/toys/croissant-real/croissant-real-lite.sog",
+    "credit": {
+      "title": "Croissant",
+      "author": "Greg Zaal, Dario Barresi",
+      "source": "https://polyhaven.com/a/croissant",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "carrot-cake",
+    "label": "Carrot cake",
+    "category": "scans",
+    "tags": "photoreal model food dessert cake slice",
+    "kind": "captured",
+    "url": "assets/toys/carrot-cake/carrot-cake.sog",
+    "urlWeak": "assets/toys/carrot-cake/carrot-cake-lite.sog",
+    "credit": {
+      "title": "Carrot Cake",
+      "author": "Greg Zaal, James Ray Cock",
+      "source": "https://polyhaven.com/a/carrot_cake",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "pomegranate",
+    "label": "Pomegranate",
+    "category": "scans",
+    "tags": "photoreal model food fruit",
+    "kind": "captured",
+    "url": "assets/toys/pomegranate/pomegranate.sog",
+    "urlWeak": "assets/toys/pomegranate/pomegranate-lite.sog",
+    "credit": {
+      "title": "Food Pomegranate 01",
+      "author": "Oliver Harries",
+      "source": "https://polyhaven.com/a/food_pomegranate_01",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "lantern",
+    "label": "Lantern",
+    "category": "scans",
+    "tags": "photoreal model light lamp camping",
+    "kind": "captured",
+    "url": "assets/toys/lantern/lantern.sog",
+    "urlWeak": "assets/toys/lantern/lantern-lite.sog",
+    "credit": {
+      "title": "Lantern 01",
+      "author": "Rajil Jose Macatangay",
+      "source": "https://polyhaven.com/a/Lantern_01",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "cat-statue",
+    "label": "Cat statue",
+    "category": "scans",
+    "tags": "photoreal model animal cat concrete statue",
+    "kind": "captured",
+    "url": "assets/toys/cat-statue/cat-statue.sog",
+    "urlWeak": "assets/toys/cat-statue/cat-statue-lite.sog",
+    "credit": {
+      "title": "Concrete Cat Statue",
+      "author": "Rico Cilliers, Riley Queen",
+      "source": "https://polyhaven.com/a/concrete_cat_statue",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs), recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "horse-statue",
+    "label": "Horse statue",
+    "category": "scans",
+    "tags": "photoreal model animal horse sculpture",
+    "kind": "captured",
+    "url": "assets/toys/horse-statue/horse-statue.sog",
+    "urlWeak": "assets/toys/horse-statue/horse-statue-lite.sog",
+    "credit": {
+      "title": "Horse Statue 01",
+      "author": "Rico Cilliers",
+      "source": "https://polyhaven.com/a/horse_statue_01",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Turned into splats from the textured 3D model (tools/mesh-to-splats.mjs) with soft studio light baked in, recentred and scaled."
+    },
+    "labs": false
+  },
+  {
+    "id": "pencil-real",
+    "label": "Real pencil",
+    "category": "scans",
+    "tags": "photoreal ai photo pencil yellow hb wood eraser school stationery",
+    "kind": "captured",
+    "url": "assets/toys/pencil-real/pencil-real.sog",
+    "urlWeak": "assets/toys/pencil-real/pencil-real-lite.sog",
+    "looks": [
+      {
+        "id": "yellow",
+        "label": "Yellow"
+      },
+      {
+        "id": "red",
+        "label": "Red",
+        "url": "assets/toys/pencil-real/pencil-real-red.sog",
+        "urlWeak": "assets/toys/pencil-real/pencil-real-red-lite.sog"
+      },
+      {
+        "id": "blue",
+        "label": "Blue",
+        "url": "assets/toys/pencil-real/pencil-real-blue.sog",
+        "urlWeak": "assets/toys/pencil-real/pencil-real-blue-lite.sog"
+      },
+      {
+        "id": "green",
+        "label": "Green",
+        "url": "assets/toys/pencil-real/pencil-real-green.sog",
+        "urlWeak": "assets/toys/pencil-real/pencil-real-green-lite.sog"
+      },
+      {
+        "id": "black",
+        "label": "Black",
+        "url": "assets/toys/pencil-real/pencil-real-black.sog",
+        "urlWeak": "assets/toys/pencil-real/pencil-real-black-lite.sog"
+      },
+      {
+        "id": "wood",
+        "label": "Plain wood",
+        "url": "assets/toys/pencil-real/pencil-real-wood.sog",
+        "urlWeak": "assets/toys/pencil-real/pencil-real-wood-lite.sog"
+      },
+      {
+        "id": "original",
+        "label": "Original (the bare scan)",
+        "url": "assets/toys/pencil-real/pencil-real-original.sog",
+        "urlWeak": "assets/toys/pencil-real/pencil-real-original-lite.sog"
+      }
+    ],
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.55,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "credit": {
+      "title": "Kleiner Bleistift",
+      "author": "Tim Reckmann",
+      "source": "https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0/",
+      "changes": "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled. Painted as a classic yellow pencil (yellow body, silver ferrule, pink eraser, a plain HB mark) over the scan's own shading; other colors, plain wood and the bare scan are in Look."
+    },
+    "labs": false
+  },
+  {
+    "id": "tin-can-real",
+    "label": "Real tin can",
+    "category": "scans",
+    "tags": "photoreal ai photo tin can peaches label fruit food metal kitchen",
+    "kind": "captured",
+    "url": "assets/toys/tin-can-real/tin-can-real.sog",
+    "urlWeak": "assets/toys/tin-can-real/tin-can-real-lite.sog",
+    "looks": [
+      {
+        "id": "peaches",
+        "label": "Peaches label"
+      },
+      {
+        "id": "tomatoes",
+        "label": "Tomatoes label",
+        "url": "assets/toys/tin-can-real/tin-can-real-tomatoes.sog",
+        "urlWeak": "assets/toys/tin-can-real/tin-can-real-tomatoes-lite.sog"
+      },
+      {
+        "id": "metal",
+        "label": "Plain metal",
+        "url": "assets/toys/tin-can-real/tin-can-real-metal.sog",
+        "urlWeak": "assets/toys/tin-can-real/tin-can-real-metal-lite.sog"
+      },
+      {
+        "id": "original",
+        "label": "Original (the bare scan)",
+        "url": "assets/toys/tin-can-real/tin-can-real-original.sog",
+        "urlWeak": "assets/toys/tin-can-real/tin-can-real-original-lite.sog"
+      }
+    ],
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.45,
+      "roll": 0,
+      "distance": 4.6
+    },
+    "credit": {
+      "title": "Can opened with side opener",
+      "author": "Ll1324",
+      "source": "https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg",
+      "license": "CC0 1.0",
+      "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+      "changes": "Made into 3D Gaussian splats from this one photo with the TRELLIS image-to-3D model (MIT), recentred and scaled. The peaches and tomatoes labels are original designs made for Splashery (CC0), wrapped around the can's side over the scan's own shading; plain metal and the bare scan are in Look."
+    },
+    "labs": false
+  },
+  {
+    "id": "basketball",
+    "label": "Basketball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball hoops court orange",
+    "labs": false
+  },
+  {
+    "id": "soccer-ball",
+    "label": "Soccer ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball football association pentagon hexagon",
+    "labs": false
+  },
+  {
+    "id": "american-football",
+    "label": "American football",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball gridiron laces pigskin",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.62,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "tennis-ball",
+    "label": "Tennis ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball felt fuzzy yellow racket",
+    "labs": false
+  },
+  {
+    "id": "baseball",
+    "label": "Baseball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball stitches bat diamond",
+    "labs": false
+  },
+  {
+    "id": "softball",
+    "label": "Softball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball stitches yellow",
+    "labs": false
+  },
+  {
+    "id": "beach-ball",
+    "label": "Beach ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball inflatable summer stripes",
+    "labs": false
+  },
+  {
+    "id": "golf-ball",
+    "label": "Golf ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball dimples tee",
+    "labs": false
+  },
+  {
+    "id": "rugby-ball",
+    "label": "Rugby ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball oval try",
+    "labs": false
+  },
+  {
+    "id": "volleyball",
+    "label": "Volleyball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball net beach panels",
+    "labs": false
+  },
+  {
+    "id": "water-polo-ball",
+    "label": "Water polo ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball pool swim grip",
+    "labs": false
+  },
+  {
+    "id": "ping-pong-ball",
+    "label": "Ping-pong ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball table tennis small",
+    "labs": false
+  },
+  {
+    "id": "cricket-ball",
+    "label": "Cricket ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball leather seam red",
+    "labs": false
+  },
+  {
+    "id": "bowling-ball",
+    "label": "Bowling ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball pins lane holes",
+    "labs": false
+  },
+  {
+    "id": "pool-ball",
+    "label": "Pool ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball billiards snooker cue eight number",
+    "labs": false
+  },
+  {
+    "id": "pickleball",
+    "label": "Pickleball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball paddle holes wiffle",
+    "labs": false
+  },
+  {
+    "id": "dodgeball",
+    "label": "Dodgeball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball playground rubber",
+    "labs": false
+  },
+  {
+    "id": "medicine-ball",
+    "label": "Medicine ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball gym workout heavy",
+    "labs": false
+  },
+  {
+    "id": "lacrosse-ball",
+    "label": "Lacrosse ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball rubber stick",
+    "labs": false
+  },
+  {
+    "id": "squash-ball",
+    "label": "Squash ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball racquet dots",
+    "labs": false
+  },
+  {
+    "id": "bouncy-ball",
+    "label": "Bouncy ball",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball super rubber swirl",
+    "labs": false
+  },
+  {
+    "id": "marble",
+    "label": "Marble",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball glass cats eye",
+    "labs": false
+  },
+  {
+    "id": "hockey-puck",
+    "label": "Hockey puck",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball ice rink",
+    "labs": false
+  },
+  {
+    "id": "shuttlecock",
+    "label": "Shuttlecock",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball badminton birdie feathers",
+    "labs": false
+  },
+  {
+    "id": "flying-disc",
+    "label": "Flying disc",
+    "category": "balls",
+    "kind": "kit",
+    "pack": "balls",
+    "tags": "sport ball throw frisbee catch",
+    "labs": false
+  },
+  {
+    "id": "heart",
+    "label": "Beating heart",
+    "category": "anatomy",
+    "kind": "kit",
+    "pack": "anatomy",
+    "tags": "organ body cardio pulse love valentine",
+    "labs": false
+  },
+  {
+    "id": "campfire",
+    "label": "Campfire",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "fire flame camping logs embers sparks",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.38,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "chest",
+    "label": "Treasure chest",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "pirate gold coins gems box lid open close",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.42,
+      "roll": 0,
+      "distance": 5.4
+    },
+    "labs": false
+  },
+  {
+    "id": "sun",
+    "label": "Sun",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "star solar corona prominence sunspot hot yellow",
+    "labs": false
+  },
+  {
+    "id": "solar-system",
+    "label": "Solar system",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "orrery planets orbits sun model",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.72,
+      "roll": 0,
+      "distance": 3.7
+    },
+    "labs": false
+  },
+  {
+    "id": "mercury",
+    "label": "Mercury",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planet craters grey rocky small solar system",
+    "labs": false
+  },
+  {
+    "id": "venus",
+    "label": "Venus",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planet clouds yellow hot solar system",
+    "labs": false
+  },
+  {
+    "id": "earth",
+    "label": "Earth",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planet world globe ocean continents clouds home blue",
+    "labs": false
+  },
+  {
+    "id": "moon",
+    "label": "Moon",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "lunar craters maria grey satellite",
+    "labs": false
+  },
+  {
+    "id": "mars",
+    "label": "Mars",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planet red rust polar cap solar system",
+    "labs": false
+  },
+  {
+    "id": "jupiter",
+    "label": "Jupiter",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planet gas giant bands great red spot storm",
+    "labs": false
+  },
+  {
+    "id": "saturn",
+    "label": "Saturn",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planet rings gas giant bands",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "uranus",
+    "label": "Uranus",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planet ice giant cyan rings tilted",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "neptune",
+    "label": "Neptune",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planet ice giant blue dark spot wind",
+    "labs": false
+  },
+  {
+    "id": "planet",
+    "label": "Tiny planet",
+    "category": "space",
+    "tags": "earth world globe space generated v1 mars moon jupiter neptune",
+    "kind": "procedural",
+    "note": "A tribute to Splashery v1",
+    "lookLabel": "Planet",
+    "looks": [
+      {
+        "id": "earth",
+        "label": "Earth"
+      },
+      {
+        "id": "mars",
+        "label": "Mars",
+        "generator": {
+          "palette": "mars"
+        }
+      },
+      {
+        "id": "moon",
+        "label": "The Moon",
+        "generator": {
+          "palette": "moon"
+        }
+      },
+      {
+        "id": "jupiter",
+        "label": "Jupiter",
+        "generator": {
+          "palette": "jupiter"
+        }
+      },
+      {
+        "id": "neptune",
+        "label": "Neptune",
+        "generator": {
+          "palette": "neptune"
+        }
+      }
+    ],
+    "generator": {
+      "shape": "sphere",
+      "palette": "planet",
+      "seed": 3,
+      "sizeJitter": 0.3,
+      "roughness": 0.2,
+      "colorNoise": 0.25
+    },
+    "labs": false
+  },
+  {
+    "id": "aurora-planet",
+    "label": "Aurora world",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planet night aurora northern lights city lights earth",
+    "labs": false
+  },
+  {
+    "id": "asteroid",
+    "label": "Asteroid",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "rock space potato craters tumble",
+    "labs": false
+  },
+  {
+    "id": "comet",
+    "label": "Comet",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "ice tail dust coma nucleus",
+    "labs": false
+  },
+  {
+    "id": "meteor",
+    "label": "Meteor",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "shooting star fireball rock fire trail falling",
+    "labs": false
+  },
+  {
+    "id": "star",
+    "label": "Star",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "sun red dwarf blue giant white dwarf twinkle",
+    "labs": false
+  },
+  {
+    "id": "pulsar",
+    "label": "Pulsar",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "neutron star beams lighthouse spin magnetic",
+    "labs": false
+  },
+  {
+    "id": "black-hole",
+    "label": "Black hole",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "accretion disk event horizon gravity lensing",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.16,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "star-cluster",
+    "label": "Star cluster",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "globular cluster stars twinkle",
+    "labs": false
+  },
+  {
+    "id": "planetary-nebula",
+    "label": "Ring nebula",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "planetary nebula shell gas dying star ring",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.6
+    },
+    "labs": false
+  },
+  {
+    "id": "nebula",
+    "label": "Nebula",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "gas cloud pillars stars emission colourful",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.06,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "supernova",
+    "label": "Supernova",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "explosion star remnant debris blast",
+    "labs": false
+  },
+  {
+    "id": "spiral-galaxy",
+    "label": "Spiral galaxy",
+    "category": "space",
+    "kind": "kit",
+    "pack": "space",
+    "tags": "milky way andromeda stars arms barred",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.9,
+      "roll": 0,
+      "distance": 3.5
+    },
+    "labs": false
+  },
+  {
+    "id": "virus",
+    "label": "Virus",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "microbe germ capsid spikes icosahedron microscope biology",
+    "labs": false
+  },
+  {
+    "id": "bacteriophage",
+    "label": "Bacteriophage",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "phage virus microbe tail fibres lander inject dna microscope biology",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "bacterium",
+    "label": "Bacterium",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "microbe germ bacteria rod flagella pili swim microscope biology",
+    "labs": false
+  },
+  {
+    "id": "red-blood-cell",
+    "label": "Red blood cell",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "cell blood erythrocyte disc body microscope biology",
+    "labs": false
+  },
+  {
+    "id": "neuron",
+    "label": "Neuron",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "nerve cell brain axon dendrite myelin synapse signal microscope biology",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "astrocyte",
+    "label": "Astrocyte",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "glia glial star cell brain nerve end feet microscope biology",
+    "labs": false
+  },
+  {
+    "id": "animal-cell",
+    "label": "Animal cell",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "cell nucleus mitochondria golgi organelles membrane microscope biology",
+    "labs": false
+  },
+  {
+    "id": "dna",
+    "label": "DNA",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "double helix gene genome base pairs unzip molecule biology",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "white-blood-cell",
+    "label": "White blood cell",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "cell blood immune leukocyte neutrophil granules body microscope biology",
+    "labs": false
+  },
+  {
+    "id": "microglia",
+    "label": "Microglia",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "glia glial cell brain immune branches microscope biology",
+    "labs": false
+  },
+  {
+    "id": "diatom",
+    "label": "Diatom",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "algae plankton glass silica shell pores ocean microscope biology",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.45,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "tardigrade",
+    "label": "Tardigrade",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "water bear moss piglet animal legs claws cute microscope biology",
+    "labs": false
+  },
+  {
+    "id": "pollen",
+    "label": "Pollen grain",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "plant flower spiky allergy sunflower pine lily microscope biology",
+    "labs": false
+  },
+  {
+    "id": "snowflake",
+    "label": "Snowflake",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "snow ice crystal winter frost six hexagon weather",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.15,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "chromosome",
+    "label": "Chromosome",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "dna gene chromatid centromere genetics cell biology",
+    "labs": false
+  },
+  {
+    "id": "mitochondrion",
+    "label": "Mitochondrion",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "mitochondria cell powerhouse energy cristae organelle biology",
+    "labs": false
+  },
+  {
+    "id": "paramecium",
+    "label": "Paramecium",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "protist ciliate cilia pond water swim microscope biology",
+    "labs": false
+  },
+  {
+    "id": "amoeba",
+    "label": "Amoeba",
+    "category": "tiny",
+    "kind": "kit",
+    "pack": "tiny",
+    "tags": "protist blob pseudopod pond water microscope biology",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.5,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "orbital",
+    "label": "Electron orbital",
+    "category": "atoms",
+    "kind": "kit",
+    "pack": "atoms",
+    "tags": "atom electron cloud quantum wave function hydrogen chemistry physics",
+    "labs": false
+  },
+  {
+    "id": "atom",
+    "label": "Atom",
+    "category": "atoms",
+    "kind": "kit",
+    "pack": "atoms",
+    "tags": "bohr element nucleus proton neutron electron shell periodic table chemistry physics",
+    "labs": false
+  },
+  {
+    "id": "molecule",
+    "label": "Molecule",
+    "category": "atoms",
+    "kind": "kit",
+    "pack": "atoms",
+    "tags": "ball stick water caffeine benzene methane ethanol buckyball chemistry smiles formula mol sdf",
+    "labs": false
+  },
+  {
+    "id": "protein",
+    "label": "Protein",
+    "category": "atoms",
+    "kind": "kit",
+    "pack": "atoms",
+    "tags": "protein pdb ribbon helix strand ubiquitin insulin gfp hemoglobin biology chemistry",
+    "labs": false
+  },
+  {
+    "id": "crystal-lattice",
+    "label": "Crystal lattice",
+    "category": "atoms",
+    "kind": "kit",
+    "pack": "atoms",
+    "tags": "salt diamond graphite ice crystal structure atoms chemistry",
+    "labs": false
+  },
+  {
+    "id": "periodic-table",
+    "label": "Periodic table",
+    "category": "atoms",
+    "kind": "kit",
+    "pack": "chemistry",
+    "tags": "elements periodic table atom nucleus proton neutron electron shell spectrum emission line photon chemistry physics",
+    "camera": {
+      "yaw": 0.1,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "labs": false
+  },
+  {
+    "id": "diamond",
+    "label": "Diamond",
+    "category": "gems",
+    "kind": "kit",
+    "pack": "gems",
+    "tags": "gem jewel brilliant cut sparkle stone mineral",
+    "labs": false
+  },
+  {
+    "id": "ruby",
+    "label": "Ruby",
+    "category": "gems",
+    "kind": "kit",
+    "pack": "gems",
+    "tags": "gem jewel red oval cut stone mineral",
+    "labs": false
+  },
+  {
+    "id": "emerald",
+    "label": "Emerald",
+    "category": "gems",
+    "kind": "kit",
+    "pack": "gems",
+    "tags": "gem jewel green step cut stone mineral",
+    "labs": false
+  },
+  {
+    "id": "amethyst-geode",
+    "label": "Amethyst geode",
+    "category": "gems",
+    "kind": "kit",
+    "pack": "gems",
+    "tags": "gem crystal purple rock cave open quartz mineral",
+    "labs": false
+  },
+  {
+    "id": "sapphire",
+    "label": "Sapphire",
+    "category": "gems",
+    "kind": "kit",
+    "pack": "gems",
+    "tags": "gem jewel blue cushion cut stone mineral",
+    "labs": false
+  },
+  {
+    "id": "quartz-cluster",
+    "label": "Quartz cluster",
+    "category": "gems",
+    "kind": "kit",
+    "pack": "gems",
+    "tags": "crystal points rock clear mineral",
+    "labs": false
+  },
+  {
+    "id": "opal",
+    "label": "Opal",
+    "category": "gems",
+    "kind": "kit",
+    "pack": "gems",
+    "tags": "gem jewel rainbow play of colour cabochon stone mineral",
+    "labs": false
+  },
+  {
+    "id": "pearl",
+    "label": "Pearl",
+    "category": "gems",
+    "kind": "kit",
+    "pack": "gems",
+    "tags": "gem jewel oyster shell lustre sea open",
+    "labs": false
+  },
+  {
+    "id": "brain",
+    "label": "Brain",
+    "category": "anatomy",
+    "kind": "kit",
+    "pack": "anatomy",
+    "tags": "organ body mind think lobes cerebrum cerebellum neuron nerve",
+    "labs": false
+  },
+  {
+    "id": "eye",
+    "label": "Eye",
+    "category": "anatomy",
+    "kind": "kit",
+    "pack": "anatomy",
+    "tags": "organ body eyeball iris pupil see vision look",
+    "labs": false
+  },
+  {
+    "id": "lungs",
+    "label": "Lungs",
+    "category": "anatomy",
+    "kind": "kit",
+    "pack": "anatomy",
+    "tags": "organ body breathe air trachea bronchi respiration",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "tooth",
+    "label": "Tooth",
+    "category": "anatomy",
+    "kind": "kit",
+    "pack": "anatomy",
+    "tags": "molar teeth dentist enamel root body mouth",
+    "labs": false
+  },
+  {
+    "id": "kidney",
+    "label": "Kidney",
+    "category": "anatomy",
+    "kind": "kit",
+    "pack": "anatomy",
+    "tags": "organ body bean urine filter renal",
+    "labs": false
+  },
+  {
+    "id": "anatomy-atlas",
+    "label": "Anatomy atlas",
+    "category": "anatomy",
+    "kind": "kit",
+    "pack": "anatomy-atlas",
+    "labs": true,
+    "tags": "body human anatomy atlas layers peel skin muscles skeleton bones organs labels",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3
+    }
+  },
+  {
+    "id": "oak",
+    "label": "Oak tree",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "tree plant leaves branches forest acorn season autumn winter",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "pine",
+    "label": "Pine tree",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "tree plant conifer evergreen fir spruce forest needles snow christmas",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "palm",
+    "label": "Palm tree",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "tree plant tropical beach island coconut fronds",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "cherry-blossom",
+    "label": "Cherry blossom",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "tree plant sakura pink flowers spring petals japan",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "maple",
+    "label": "Maple tree",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "tree plant autumn fall leaves red orange",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "bonsai",
+    "label": "Bonsai",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "tree plant miniature pot japan zen",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "willow",
+    "label": "Weeping willow",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "tree plant weeping drooping river",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "sunflower",
+    "label": "Sunflower",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "flower plant summer yellow seeds petals",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "rose",
+    "label": "Rose",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "flower plant red love petals thorns valentine",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "dandelion",
+    "label": "Dandelion",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "flower plant seeds blow wish clock weed",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "tulip",
+    "label": "Tulips",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "flower plant spring bulb petals holland",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "daisy",
+    "label": "Daisies",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "flower plant white petals meadow spring",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "lotus",
+    "label": "Lotus",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "flower plant water lily pad pond pink",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.62,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "mushroom",
+    "label": "Toadstool",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "fungus fly agaric red spots forest fairy",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "fern",
+    "label": "Fern",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "plant frond forest fiddlehead green",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.32,
+      "roll": 0,
+      "distance": 3.8
+    },
+    "labs": false
+  },
+  {
+    "id": "saguaro",
+    "label": "Saguaro cactus",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "plant cactus desert spines arms succulent",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "coral",
+    "label": "Coral reef",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "sea ocean reef anemone fish underwater",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 3.7
+    },
+    "labs": false
+  },
+  {
+    "id": "pinecone",
+    "label": "Pinecone",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "pine cone seed scales forest tree",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "acorn",
+    "label": "Acorns",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "oak nut seed leaf autumn squirrel",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.45,
+      "roll": 0,
+      "distance": 3.6
+    },
+    "labs": false
+  },
+  {
+    "id": "succulent",
+    "label": "Succulent",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "plant rosette echeveria pot cactus",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.55,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "bamboo",
+    "label": "Bamboo",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "plant grass stalks panda asia green",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "rocks",
+    "label": "Pebbles",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "rock stone pile cairn pebble beach",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.35,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "kelp",
+    "label": "Kelp",
+    "category": "nature",
+    "kind": "kit",
+    "pack": "nature",
+    "tags": "seaweed sea ocean underwater forest algae",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "storm-cloud",
+    "label": "Storm cloud",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "weather rain lightning thunder cloud storm",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "lava-lamp",
+    "label": "Lava lamp",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "lamp wax blobs retro groovy glow light",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "snow-globe",
+    "label": "Snow globe",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "snow winter glass shake snowman christmas",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "volcano",
+    "label": "Volcano",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "lava eruption magma island mountain smoke fire",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "ice-statue",
+    "label": "Ice swan",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "ice sculpture swan melt frozen cold statue",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.18,
+      "roll": 0,
+      "distance": 3.8
+    },
+    "labs": false
+  },
+  {
+    "id": "candle",
+    "label": "Candle",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "flame wax light fire birthday glow",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "tornado",
+    "label": "Tornado",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "twister wind storm funnel weather cyclone",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.15,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "rainbow",
+    "label": "Rainbow",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "weather colours arc clouds sky",
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.15,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "iceberg",
+    "label": "Iceberg",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "ice sea ocean arctic cold floe glacier",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "waterfall",
+    "label": "Waterfall",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "water river cliff falls mist pool",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "ocean-wave",
+    "label": "Ocean wave",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "sea surf wave curl barrel water beach",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "geyser",
+    "label": "Geyser",
+    "category": "weather",
+    "kind": "kit",
+    "pack": "elements",
+    "tags": "steam water hot spring eruption",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "ice-cream",
+    "label": "Ice cream",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "cone scoop gelato waffle melt sprinkles cherry sweet dessert",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "watermelon",
+    "label": "Watermelon",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fruit melon wedge slice seeds summer picnic",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.34,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "birthday-cake",
+    "label": "Birthday cake",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "party candles flames blow out frosting sprinkles layers sweet dessert",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.36,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "popcorn",
+    "label": "Popcorn",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "cinema movie snack bucket pop kernels butter",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.34,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "jelly",
+    "label": "Jelly",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "jello gelatin wobble wobbly dessert fruit pudding",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.4,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "pancakes",
+    "label": "Pancakes",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "breakfast stack syrup butter flip hotcakes",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.42,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "cupcake",
+    "label": "Cupcake",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fairy cake muffin frosting swirl sprinkles cherry sweet",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "lollipop",
+    "label": "Lollipop",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "candy swirl sweet rainbow stick sucker",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "candy-cane",
+    "label": "Candy cane",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "christmas peppermint stripes candy sweet bow",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "macarons",
+    "label": "Macarons",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "french biscuits pastel almond sweet stack",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "donut",
+    "label": "Donut",
+    "category": "food",
+    "tags": "doughnut torus food sprinkles frosting generated",
+    "kind": "procedural",
+    "generator": {
+      "shape": "torus",
+      "palette": "frosting",
+      "seed": 5,
+      "sizeJitter": 0.3,
+      "roughness": 0.2,
+      "colorNoise": 0.3
+    },
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.62,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "gummy-bear",
+    "label": "Gummy bear",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "candy jelly sweet bear chewy squish",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "pretzel",
+    "label": "Pretzel",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "bread knot salt baked snack bakery",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "croissant",
+    "label": "Croissant",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "pastry bakery breakfast french flaky butter",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.95,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "pizza",
+    "label": "Pizza",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "pepperoni margherita cheese slice italian basil dinner",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.72,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "burger",
+    "label": "Burger",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "hamburger cheeseburger bun sesame lettuce tomato cheese patty",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "sushi",
+    "label": "Sushi",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "japanese nigiri maki roll salmon tuna rice chopsticks wasabi",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.62,
+      "roll": 0,
+      "distance": 3.7
+    },
+    "labs": false
+  },
+  {
+    "id": "taco",
+    "label": "Taco",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "mexican shell lettuce cheese tomato beef",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "egg",
+    "label": "Boiled egg",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "breakfast egg cup yolk toast soldiers crack",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "coffee",
+    "label": "Coffee",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "latte cappuccino cup saucer drink steam cafe art",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.58,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "apple",
+    "label": "Apple",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fruit red green golden leaf orchard",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "banana",
+    "label": "Bananas",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fruit bunch yellow tropical",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.35,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "orange",
+    "label": "Orange",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fruit citrus segments half juicy leaf",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.36,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "kiwi",
+    "label": "Kiwi",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fruit kiwifruit green seeds half fuzzy",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.36,
+      "roll": 0,
+      "distance": 3.6
+    },
+    "labs": false
+  },
+  {
+    "id": "pineapple",
+    "label": "Pineapple",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fruit tropical crown leaves spiky",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "cherries",
+    "label": "Cherries",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fruit cherry pair stems red glossy",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "grapes",
+    "label": "Grapes",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fruit bunch vine purple green leaf",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "avocado",
+    "label": "Avocado",
+    "category": "food",
+    "kind": "kit",
+    "pack": "food",
+    "tags": "fruit halves stone pit green guacamole",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.45,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "bricks",
+    "label": "Building bricks",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "blocks studs stack build construction plastic",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.5,
+      "roll": 0,
+      "distance": 3.3
+    },
+    "labs": false
+  },
+  {
+    "id": "rubber-duck",
+    "label": "Rubber duck",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "bath duckie yellow squeak",
+    "camera": {
+      "yaw": 0.95,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "spinning-top",
+    "label": "Spinning top",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "spin whirl gyroscope precession",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "dice",
+    "label": "Dice",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "die d6 d20 roll pips game chance",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.5,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "newtons-cradle",
+    "label": "Newton's cradle",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "pendulum balls swing desk physics momentum",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "teddy-bear",
+    "label": "Teddy bear",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "bear plush soft cuddly stuffed",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.18,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "yo-yo",
+    "label": "Yo-yo",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "yoyo string spin throw",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "puzzle-cube",
+    "label": "Puzzle cube",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "twist cube colours puzzle 3x3",
+    "camera": {
+      "yaw": 0.62,
+      "pitch": 0.5,
+      "roll": 0,
+      "distance": 7.4
+    },
+    "labs": false
+  },
+  {
+    "id": "spring-toy",
+    "label": "Spring toy",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "coil slinky rainbow stairs walk",
+    "camera": {
+      "yaw": 0.25,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "kite",
+    "label": "Kite",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "wind fly diamond tail string sky",
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "paper-plane",
+    "label": "Paper plane",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "paper aeroplane airplane dart fold fly",
+    "camera": {
+      "yaw": 0.7,
+      "pitch": 0.42,
+      "roll": 0,
+      "distance": 3.6
+    },
+    "labs": false
+  },
+  {
+    "id": "origami-crane",
+    "label": "Origami crane",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "paper fold bird japan crane",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 3.7
+    },
+    "labs": false
+  },
+  {
+    "id": "balloon-dog",
+    "label": "Balloon dog",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "balloon animal twist party pop",
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "soap-bubbles",
+    "label": "Soap bubbles",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "bubble wand iridescent float blow",
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.15,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "robot",
+    "label": "Wind-up robot",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "playthings",
+    "tags": "robot tin clockwork key antenna retro",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "chess-set",
+    "label": "Chess set",
+    "category": "toys",
+    "kind": "kit",
+    "pack": "games",
+    "tags": "chess game board pieces king queen knight opera morphy",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.6,
+      "roll": 0,
+      "distance": 3.7
+    },
+    "labs": false
+  },
+  {
+    "id": "lorenz",
+    "label": "Lorenz attractor",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "chaos butterfly strange attractor curve differential equations",
+    "camera": {
+      "yaw": 0.15,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "mobius",
+    "label": "Möbius strip",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "mobius moebius band one side twist topology surface",
+    "camera": {
+      "yaw": 0.9,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "klein-bottle",
+    "label": "Klein bottle",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "topology surface glass bottle non-orientable",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "menger-sponge",
+    "label": "Menger sponge",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "fractal cube holes sponge recursive",
+    "camera": {
+      "yaw": 0.62,
+      "pitch": 0.5,
+      "roll": 0,
+      "distance": 7.2
+    },
+    "labs": false
+  },
+  {
+    "id": "hypercube",
+    "label": "Hypercube",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "tesseract 4d four dimensions cube projection",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.35,
+      "roll": 0,
+      "distance": 6.4
+    },
+    "labs": false
+  },
+  {
+    "id": "torus-knot",
+    "label": "Torus knot",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "knot trefoil topology tube curve",
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "gyroid",
+    "label": "Gyroid",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "minimal surface triply periodic labyrinth",
+    "camera": {
+      "yaw": 0.62,
+      "pitch": 0.45,
+      "roll": 0,
+      "distance": 6.8
+    },
+    "labs": false
+  },
+  {
+    "id": "mandelbulb",
+    "label": "Mandelbulb",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "fractal 3d mandelbrot bulb",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.35,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "sierpinski",
+    "label": "Sierpinski tetrahedron",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "fractal triangle pyramid tetrix recursive",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "platonic",
+    "label": "Platonic solids",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "polyhedron tetrahedron cube octahedron dodecahedron icosahedron geometry",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.35,
+      "roll": 0,
+      "distance": 5.2
+    },
+    "labs": false
+  },
+  {
+    "id": "seashell-spiral",
+    "label": "Seashell spiral",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "spiral shell logarithmic conch snail growth",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.85,
+      "roll": 0,
+      "distance": 3.8
+    },
+    "labs": false
+  },
+  {
+    "id": "graph-plotter",
+    "label": "Graph plotter",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "graph plot curve function equation type sine polar parametric cardioid rose butterfly heart lissajous spiral",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.08,
+      "roll": 0,
+      "distance": 3.5
+    },
+    "labs": false
+  },
+  {
+    "id": "surface-plotter",
+    "label": "Surface plotter",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "surface plot 3d function equation type saddle sombrero egg crate gaussian rosenbrock banana",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.55,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "unit-circle",
+    "label": "Circle and waves",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "unit circle sine cosine wave trigonometry euler formula angle radian",
+    "camera": {
+      "yaw": 0.12,
+      "pitch": 0.08,
+      "roll": 0,
+      "distance": 3.6
+    },
+    "labs": false
+  },
+  {
+    "id": "fourier-circles",
+    "label": "Fourier circles",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "fourier series epicycles circles spinning draw heart star square wave frequency",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.6
+    },
+    "labs": false
+  },
+  {
+    "id": "pythagoras-proof",
+    "label": "Pythagoras proof",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "maths",
+    "tags": "pythagoras theorem proof right triangle square hypotenuse geometry",
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 3.7
+    },
+    "labs": false
+  },
+  {
+    "id": "splat-equation",
+    "label": "Splat equation",
+    "category": "maths",
+    "kind": "kit",
+    "pack": "splat-equation",
+    "labs": true,
+    "tags": "splat equation program parametric code u v time sphere torus mobius seashell trefoil knot wave galaxy klein bottle",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.6,
+      "roll": 0,
+      "distance": 3.5
+    }
+  },
+  {
+    "id": "book",
+    "label": "Storybook",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "book pages read story hardcover open close flip",
+    "camera": {
+      "yaw": 0.25,
+      "pitch": 0.78,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "laptop",
+    "label": "Laptop",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "computer notebook screen keyboard open close",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.32,
+      "roll": 0,
+      "distance": 4.6
+    },
+    "labs": false
+  },
+  {
+    "id": "music-box",
+    "label": "Music box",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "ballerina dancer jewellery box lid tune",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.35,
+      "roll": 0,
+      "distance": 4.6
+    },
+    "labs": false
+  },
+  {
+    "id": "clock",
+    "label": "Alarm clock",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "clock time bells alarm ring hands",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "gift-box",
+    "label": "Gift box",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "present birthday ribbon bow surprise confetti",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.38,
+      "roll": 0,
+      "distance": 4.8
+    },
+    "labs": false
+  },
+  {
+    "id": "umbrella",
+    "label": "Umbrella",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "rain parasol canopy open close",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "desk-fan",
+    "label": "Desk fan",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "fan blades spin breeze oscillating retro",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "lamp",
+    "label": "Desk lamp",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "lamp light bulb switch anglepoise",
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "potion-bottle",
+    "label": "Potion bottle",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "magic flask glow cork bubbles wizard",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "telescope",
+    "label": "Telescope",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "objects",
+    "tags": "brass spyglass tripod stars astronomy extend",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "fountain-pen",
+    "label": "Fountain pen",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "real-objects",
+    "tags": "real scan model pen nib ink cap write swirl notepad paper",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.5,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "water-bottle",
+    "label": "Water bottle",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "real-objects",
+    "labs": true,
+    "tags": "real scan model steel bottle cap screw pour water glass drink drops",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 3.6
+    }
+  },
+  {
+    "id": "soda-can",
+    "label": "Soda can",
+    "category": "objects",
+    "kind": "kit",
+    "pack": "real-objects",
+    "labs": true,
+    "tags": "real scan model drink can soda pop fizz foam ring pull tab shake open coaster",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 3.8
+    }
+  },
+  {
+    "id": "running-shoe",
+    "label": "Running shoe",
+    "category": "clothing",
+    "kind": "kit",
+    "pack": "real-objects",
+    "tags": "real scan photogrammetry sneaker trainer laces bow tie untie eyelets toe tap",
+    "camera": {
+      "yaw": 0.25,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "hoodie",
+    "label": "Hoodie",
+    "category": "clothing",
+    "kind": "kit",
+    "pack": "real-objects",
+    "tags": "real scan model sweatshirt hood drawstrings sleeves fleece pullover",
+    "camera": {
+      "yaw": 0.22,
+      "pitch": 0.18,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "sunglasses",
+    "label": "Sunglasses",
+    "category": "clothing",
+    "kind": "kit",
+    "pack": "real-objects",
+    "tags": "real scan model glasses spectacles round frame hinge fold lenses dark light changing",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "baseball-cap",
+    "label": "Baseball cap",
+    "category": "clothing",
+    "kind": "kit",
+    "pack": "real-objects",
+    "tags": "real scan model hat cap brim stand flip spin flying disc",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 3.8
+    },
+    "labs": false
+  },
+  {
+    "id": "sword-in-stone",
+    "label": "Sword in the stone",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "medieval",
+    "tags": "legend king blade rock moss pull magic knight",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "shield",
+    "label": "Heraldic shield",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "medieval",
+    "tags": "knight heater coat of arms heraldry crest armour",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "bow-and-target",
+    "label": "Bow and target",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "medieval",
+    "tags": "archery arrow bullseye longbow shoot straw",
+    "camera": {
+      "yaw": 0.8,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "trebuchet",
+    "label": "Trebuchet",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "medieval",
+    "tags": "siege engine catapult castle launch stone counterweight",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "crossbow",
+    "label": "Crossbow",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "medieval",
+    "tags": "bolt string archery shoot",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.45,
+      "roll": 0,
+      "distance": 3.6
+    },
+    "labs": false
+  },
+  {
+    "id": "knights-helmet",
+    "label": "Knight's helmet",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "medieval",
+    "tags": "armour helm visor plume feathers steel",
+    "labs": false
+  },
+  {
+    "id": "crown",
+    "label": "Crown",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "medieval",
+    "tags": "king queen royal gold gems jewels pearls ermine",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.42,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "dragon-egg",
+    "label": "Dragon egg",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "medieval",
+    "tags": "fantasy baby dragon hatch nest scales",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.6
+    },
+    "labs": false
+  },
+  {
+    "id": "wizards-orb",
+    "label": "Wizard's orb",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "medieval",
+    "tags": "magic crystal ball fantasy spell swirl sparkles",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "crystal-ball",
+    "label": "Crystal ball",
+    "category": "medieval",
+    "kind": "kit",
+    "pack": "gems",
+    "tags": "glass orb magic mist fortune stand swirl",
+    "labs": false
+  },
+  {
+    "id": "jellyfish",
+    "label": "Jellyfish",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "sea ocean jelly tentacles glow pulse moon nettle",
+    "labs": false
+  },
+  {
+    "id": "fish-school",
+    "label": "School of fish",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "sea ocean shoal sardines swim bubbles tropical",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "butterfly",
+    "label": "Butterfly",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "insect wings flutter monarch morpho swallowtail bug",
+    "camera": {
+      "yaw": 0.25,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "pufferfish",
+    "label": "Pufferfish",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "sea ocean blowfish puff spines inflate fish",
+    "labs": false
+  },
+  {
+    "id": "nautilus",
+    "label": "Nautilus",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "sea ocean shell spiral chambers tentacles golden ratio",
+    "camera": {
+      "yaw": 0.25,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "ladybug",
+    "label": "Ladybug",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "ladybird insect beetle bug spots wings fly",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.5,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "snail",
+    "label": "Snail",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "garden shell spiral slow slime hide",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "octopus",
+    "label": "Octopus",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "sea ocean tentacles arms ink suckers",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.4,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "starfish",
+    "label": "Starfish",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "sea star ocean beach arms",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.8,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "sea-urchin",
+    "label": "Sea urchin",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "sea ocean spines spiky uni",
+    "labs": false
+  },
+  {
+    "id": "frog",
+    "label": "Frog",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "pond amphibian toad hop green",
+    "labs": false
+  },
+  {
+    "id": "penguin",
+    "label": "Penguin",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "bird ice antarctic flippers waddle",
+    "labs": false
+  },
+  {
+    "id": "owl",
+    "label": "Owl",
+    "category": "animals",
+    "kind": "kit",
+    "pack": "animals",
+    "tags": "bird night hoot feathers branch wise",
+    "labs": false
+  },
+  {
+    "id": "jack-o-lantern",
+    "label": "Jack-o'-lantern",
+    "category": "holidays",
+    "kind": "kit",
+    "pack": "holidays",
+    "tags": "halloween pumpkin carved candle glow autumn",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "snowman",
+    "label": "Snowman",
+    "category": "holidays",
+    "kind": "kit",
+    "pack": "holidays",
+    "tags": "winter snow melt carrot scarf hat christmas",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "fireworks",
+    "label": "Fireworks",
+    "category": "holidays",
+    "kind": "kit",
+    "pack": "holidays",
+    "tags": "new year celebration rocket sparks burst diwali festival",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "decorated-tree",
+    "label": "Decorated tree",
+    "category": "holidays",
+    "kind": "kit",
+    "pack": "holidays",
+    "tags": "christmas evergreen fir baubles lights star presents winter",
+    "labs": false
+  },
+  {
+    "id": "patterned-egg",
+    "label": "Patterned egg",
+    "category": "holidays",
+    "kind": "kit",
+    "pack": "holidays",
+    "tags": "easter nowruz spring pysanka painted decorated",
+    "labs": false
+  },
+  {
+    "id": "paper-lantern",
+    "label": "Paper lantern",
+    "category": "holidays",
+    "kind": "kit",
+    "pack": "holidays",
+    "tags": "lunar new year mid-autumn festival glow hanging tassel",
+    "labs": false
+  },
+  {
+    "id": "diya",
+    "label": "Diya",
+    "category": "holidays",
+    "kind": "kit",
+    "pack": "holidays",
+    "tags": "diwali oil lamp flame light rangoli clay festival",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.4,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "menorah",
+    "label": "Menorah",
+    "category": "holidays",
+    "kind": "kit",
+    "pack": "holidays",
+    "tags": "hanukkah hanukkiah candles festival of lights brass",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.18,
+      "roll": 0,
+      "distance": 4.6
+    },
+    "labs": false
+  },
+  {
+    "id": "guitar",
+    "label": "Acoustic guitar",
+    "category": "music",
+    "kind": "kit",
+    "pack": "music",
+    "tags": "instrument strings strum acoustic sunburst",
+    "camera": {
+      "yaw": 0.15,
+      "pitch": 0.2,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "drum",
+    "label": "Snare drum",
+    "category": "music",
+    "kind": "kit",
+    "pack": "music",
+    "tags": "instrument percussion sticks beat hit",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.42,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "xylophone",
+    "label": "Xylophone",
+    "category": "music",
+    "kind": "kit",
+    "pack": "music",
+    "tags": "instrument rainbow bars mallet toy glockenspiel",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.5,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "toy-piano",
+    "label": "Toy piano",
+    "category": "music",
+    "kind": "kit",
+    "pack": "music",
+    "tags": "instrument keys keyboard hammers rods twinkle little star lullaby",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.42,
+      "roll": 0,
+      "distance": 4.7
+    },
+    "labs": false
+  },
+  {
+    "id": "grand-piano",
+    "label": "Grand piano",
+    "category": "music",
+    "kind": "kit",
+    "pack": "pianos",
+    "tags": "instrument piano keys hammers strings concert song midi beethoven debussy satie",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.38,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "upright-piano",
+    "label": "Upright piano",
+    "category": "music",
+    "kind": "kit",
+    "pack": "pianos",
+    "tags": "instrument piano keys hammers strings ragtime saloon honky-tonk song midi joplin",
+    "camera": {
+      "yaw": 0.42,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "harpsichord",
+    "label": "Harpsichord",
+    "category": "music",
+    "kind": "kit",
+    "pack": "pianos",
+    "tags": "instrument keyboard baroque quill jacks plucked strings bach minuet song midi",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.42,
+      "roll": 0,
+      "distance": 3.5
+    },
+    "labs": false
+  },
+  {
+    "id": "electronic-keyboard",
+    "label": "Electronic keyboard",
+    "category": "music",
+    "kind": "kit",
+    "pack": "pianos",
+    "tags": "instrument keyboard synth organ vibes drum pads lights learn song midi",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.7,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "rocket",
+    "label": "Rocket",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "space launch pad blast off lift off fins spaceship",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "helicopter",
+    "label": "Helicopter",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "chopper rotor fly helipad aircraft",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "hot-air-balloon",
+    "label": "Hot-air balloon",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "balloon basket burner float sky flight",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "steam-train",
+    "label": "Steam train",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "locomotive engine railway track smoke choo choo tender",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "ocean-liner",
+    "label": "Ocean liner",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "ship boat steamship funnels sea cruise",
+    "camera": {
+      "yaw": 0.62,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 3.5
+    },
+    "labs": false
+  },
+  {
+    "id": "sports-car",
+    "label": "Sports car",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "car racing coupe fast wheels spoiler",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 2.85
+    },
+    "labs": false
+  },
+  {
+    "id": "bus",
+    "label": "Bus",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "school bus double decker coach wheels",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "propeller-plane",
+    "label": "Propeller plane",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "biplane aeroplane airplane aircraft pilot prop fly loop",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "jet",
+    "label": "Jet airliner",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "aeroplane airplane aircraft plane passenger fly wings engines",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.35,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "sailboat",
+    "label": "Sailboat",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "yacht boat sail sea mast wind",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "submarine",
+    "label": "Submarine",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "sub underwater periscope bubbles sea",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "bicycle",
+    "label": "Bicycle",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "bike cycle wheels pedals bell",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "tractor",
+    "label": "Tractor",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "farm field wheels exhaust",
+    "camera": {
+      "yaw": 0.6,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.4
+    },
+    "labs": false
+  },
+  {
+    "id": "ufo",
+    "label": "Flying saucer",
+    "category": "vehicles",
+    "kind": "kit",
+    "pack": "vehicles",
+    "tags": "ufo alien spaceship beam cow space",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4.5
+    },
+    "labs": false
+  },
+  {
+    "id": "eiffel-tower",
+    "label": "Eiffel Tower",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "paris france tower iron lattice",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "washington-monument",
+    "label": "Washington Monument",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "obelisk usa washington dc flags",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "pyramids",
+    "label": "Pyramids of Giza",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "egypt giza sphinx desert ancient pharaoh",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.32,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "supertall",
+    "label": "Twisting supertall",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "skyscraper tower city glass modern building",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.1
+    },
+    "labs": false
+  },
+  {
+    "id": "lighthouse",
+    "label": "Lighthouse",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "beacon coast sea rocks beam light",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "statue-of-liberty",
+    "label": "Statue of Liberty",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "new york usa torch crown statue harbour",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "white-house",
+    "label": "White House",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "washington usa president house columns portico",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.38,
+      "roll": 0,
+      "distance": 3.9
+    },
+    "labs": false
+  },
+  {
+    "id": "leaning-tower",
+    "label": "Leaning Tower of Pisa",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "pisa italy lean tower bell",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "colosseum",
+    "label": "Colosseum",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "rome italy amphitheatre arena ancient",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.62,
+      "roll": 0,
+      "distance": 3.6
+    },
+    "labs": false
+  },
+  {
+    "id": "parthenon",
+    "label": "Parthenon",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "athens greece temple acropolis columns ancient",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.35,
+      "roll": 0,
+      "distance": 3.8
+    },
+    "labs": false
+  },
+  {
+    "id": "stonehenge",
+    "label": "Stonehenge",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "stones circle england ancient trilithon",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.55,
+      "roll": 0,
+      "distance": 3.6
+    },
+    "labs": false
+  },
+  {
+    "id": "big-ben",
+    "label": "Big Ben",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "clock tower london england elizabeth tower bell",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.22,
+      "roll": 0,
+      "distance": 4.2
+    },
+    "labs": false
+  },
+  {
+    "id": "taj-mahal",
+    "label": "Taj Mahal",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "india agra dome minarets marble",
+    "camera": {
+      "yaw": 0.4,
+      "pitch": 0.32,
+      "roll": 0,
+      "distance": 3.8
+    },
+    "labs": false
+  },
+  {
+    "id": "castle",
+    "label": "Castle",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "medieval towers drawbridge moat battlements",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.42,
+      "roll": 0,
+      "distance": 4
+    },
+    "labs": false
+  },
+  {
+    "id": "pagoda",
+    "label": "Pagoda",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "japan temple tiers roofs bells",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "windmill",
+    "label": "Windmill",
+    "category": "landmarks",
+    "kind": "kit",
+    "pack": "landmarks",
+    "tags": "netherlands dutch mill sails tulips",
+    "camera": {
+      "yaw": 0.55,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.3
+    },
+    "labs": false
+  },
+  {
+    "id": "perceptron",
+    "label": "Perceptron",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "neuron neural network learning weights threshold ai machine learning",
+    "camera": {
+      "yaw": 0.18,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "multilayer-perceptron",
+    "label": "Multilayer perceptron",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "mlp xor hidden layer perceptron logic neural network ai machine learning",
+    "camera": {
+      "yaw": 0.18,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "neural-network",
+    "label": "Neural network",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "mlp multilayer perceptron neurons layers backpropagation deep learning ai machine learning",
+    "camera": {
+      "yaw": 0.18,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "cnn",
+    "label": "Convolutional network",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "cnn convolution filter kernel pooling image digit recognition vision ai machine learning",
+    "camera": {
+      "yaw": 0.16,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "rnn",
+    "label": "Recurrent network",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "rnn lstm recurrent memory hidden state sequence words language ai machine learning",
+    "camera": {
+      "yaw": 0.16,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "transformer",
+    "label": "Transformer",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "attention heads tokens layers language model next word ai machine learning",
+    "camera": {
+      "yaw": 0.16,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "looped-transformer",
+    "label": "Looped transformer",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "loop recurrent depth block reasoning tokens resolve ai machine learning",
+    "camera": {
+      "yaw": 0.16,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "diffusion-model",
+    "label": "Diffusion model",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "denoise noise steps generative image model duck ai machine learning",
+    "camera": {
+      "yaw": 0.16,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "gradient-descent",
+    "label": "Gradient descent",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "loss landscape optimization learning rate momentum valley ball ai machine learning",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.5,
+      "roll": 0,
+      "distance": 5
+    },
+    "labs": false
+  },
+  {
+    "id": "gaussian-splatting",
+    "label": "Gaussian splatting",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "splatting",
+    "labs": true,
+    "tags": "gaussian splat splats 3dgs training fit gradient descent sorting point cloud rendering ai",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.08,
+      "roll": 0,
+      "distance": 3.2
+    }
+  },
+  {
+    "id": "word-vectors",
+    "label": "Word vectors",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "embedding word2vec king queen analogy vector space language ai machine learning",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 3.8
+    },
+    "labs": false
+  },
+  {
+    "id": "sorting-machine",
+    "label": "Sorting machine",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "sort algorithm bubble sort quicksort merge sort bars swaps computer science",
+    "camera": {
+      "yaw": 0.25,
+      "pitch": 0.25,
+      "roll": 0,
+      "distance": 3.6
+    },
+    "labs": false
+  },
+  {
+    "id": "half-adder",
+    "label": "Half adder",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing",
+    "tags": "logic gates xor and binary addition circuit bits carry computer",
+    "camera": {
+      "yaw": 0.18,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "labs": false
+  },
+  {
+    "id": "turing-machine",
+    "label": "Turing machine",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing-history",
+    "tags": "alan turing tape head state binary add one busy beaver program rules computer science",
+    "camera": {
+      "yaw": 0.1,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 2.95
+    },
+    "labs": false
+  },
+  {
+    "id": "difference-engine",
+    "label": "Difference engine",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing-history",
+    "tags": "charles babbage method of differences polynomial wheels crank carry brass calculator mechanical",
+    "camera": {
+      "yaw": 0.15,
+      "pitch": 0.1,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "labs": false
+  },
+  {
+    "id": "enigma-machine",
+    "label": "Enigma machine",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing-history",
+    "tags": "cipher code secret message rotors plugboard lamps keyboard cryptography bletchley park turing history",
+    "camera": {
+      "yaw": 0.25,
+      "pitch": 0.55,
+      "roll": 0,
+      "distance": 3
+    },
+    "labs": false
+  },
+  {
+    "id": "bombe",
+    "label": "Bombe",
+    "category": "computing",
+    "kind": "kit",
+    "pack": "computing-history",
+    "tags": "bombe bletchley park alan turing gordon welchman codebreaking enigma drums crib menu history",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 3.5
+    },
+    "labs": false
+  },
+  {
+    "id": "picture-lab",
+    "label": "Picture lab",
+    "category": "pictures",
+    "kind": "kit",
+    "pack": "pictures",
+    "labs": true,
+    "tags": "pdf page document article photo picture image gif video open file",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.2
+    }
+  },
+  {
+    "id": "your-book",
+    "label": "Your book",
+    "category": "pictures",
+    "kind": "kit",
+    "pack": "pictures",
+    "labs": true,
+    "tags": "book pdf pages flip turn read hardcover paperback magazine notebook spiral stapled",
+    "camera": {
+      "yaw": 0.12,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 2.6
+    }
+  },
+  {
+    "id": "photo-album",
+    "label": "Photo album",
+    "category": "pictures",
+    "kind": "kit",
+    "pack": "pictures",
+    "labs": true,
+    "tags": "photo album scrapbook pictures family photos leather linen pages turn",
+    "camera": {
+      "yaw": 0.12,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 2.6
+    }
+  },
+  {
+    "id": "picture-frame",
+    "label": "Picture frame",
+    "category": "pictures",
+    "kind": "kit",
+    "pack": "pictures",
+    "labs": true,
+    "tags": "picture frame photo wall nail swing wood gold modern digital",
+    "camera": {
+      "yaw": 0.1,
+      "pitch": 0.06,
+      "roll": 0,
+      "distance": 2.9
+    }
+  },
+  {
+    "id": "song-landscape",
+    "label": "Song landscape",
+    "category": "studio",
+    "kind": "kit",
+    "pack": "studio",
+    "labs": true,
+    "tags": "song music audio sound spectrogram spectrum frequency pitch loudness fourier waveform mp3 wav landscape",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.8,
+      "roll": 0,
+      "distance": 3.9
+    }
+  },
+  {
+    "id": "chladni-plate",
+    "label": "Chladni plate",
+    "category": "studio",
+    "kind": "kit",
+    "pack": "studio",
+    "labs": true,
+    "tags": "chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics",
+    "camera": {
+      "yaw": 0.2,
+      "pitch": 0.95,
+      "roll": 0,
+      "distance": 4.1
+    }
+  },
+  {
+    "id": "room-echo",
+    "label": "Room echo meter",
+    "category": "studio",
+    "kind": "kit",
+    "pack": "live",
+    "labs": true,
+    "tags": "room echo reverb reverberation rt60 clap acoustics sound decay microphone live measure",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.6,
+      "roll": 0,
+      "distance": 3.3
+    }
+  },
+  {
+    "id": "splat-mirror",
+    "label": "Splat mirror",
+    "category": "studio",
+    "kind": "kit",
+    "pack": "live",
+    "labs": true,
+    "tags": "mirror camera webcam selfie live depth hologram 3d relief video you",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.2
+    }
+  },
+  {
+    "id": "model-splats",
+    "label": "Model to splats",
+    "category": "studio",
+    "kind": "kit",
+    "pack": "studio-models",
+    "labs": true,
+    "tags": "3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print",
+    "camera": {
+      "yaw": 0.5,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 4.5
+    }
+  },
+  {
+    "id": "photo-3d",
+    "label": "Photo to 3D",
+    "category": "studio",
+    "kind": "kit",
+    "pack": "photo-3d",
+    "labs": true,
+    "tags": "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 2.6
+    }
+  },
+  {
+    "id": "moving-photo-3d",
+    "label": "Moving photo to 3D",
+    "category": "studio",
+    "kind": "kit",
+    "pack": "live",
+    "labs": true,
+    "tags": "gif video animation movie clip moving photo depth 3d relief frames muybridge horse convert converter",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 2.6
+    }
+  },
+  {
+    "id": "video-3d",
+    "label": "Video to 3D",
+    "category": "studio",
+    "kind": "kit",
+    "pack": "video3d",
+    "labs": true,
+    "tags": "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 2.6
+    }
+  },
+  {
+    "id": "splat-field",
+    "label": "Splat field",
+    "category": "lab",
+    "kind": "kit",
+    "pack": "lab",
+    "labs": true,
+    "tags": "gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 0.85,
+      "roll": 0,
+      "distance": 3
+    }
+  },
+  {
+    "id": "thermal-ellipsoids",
+    "label": "Thermal ellipsoids",
+    "category": "science",
+    "kind": "kit",
+    "pack": "science",
+    "labs": true,
+    "tags": "crystal crystallography cif mmcif pdb anisotropic displacement ellipsoid ortep atoms vibration uncertainty gaussian science",
+    "camera": {
+      "yaw": 0.35,
+      "pitch": 0.3,
+      "roll": 0,
+      "distance": 2.9
+    }
+  },
+  {
+    "id": "smlm-microscope",
+    "label": "Super-resolution microscope",
+    "category": "science",
+    "kind": "kit",
+    "pack": "science",
+    "labs": true,
+    "tags": "microscope super resolution smlm storm palm paint localization thunderstorm cell microtubules clathrin fluorescence nanometer science",
+    "camera": {
+      "yaw": 0,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 2.9
+    }
+  },
+  {
+    "id": "galaxy-box",
+    "label": "Galaxy in a box",
+    "category": "science",
+    "kind": "kit",
+    "pack": "science",
+    "labs": true,
+    "tags": "galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science",
+    "camera": {
+      "yaw": 0.3,
+      "pitch": 1,
+      "roll": 0,
+      "distance": 3
+    }
+  },
+  {
+    "id": "fluid-lab",
+    "label": "Fluid lab",
+    "category": "lab",
+    "kind": "kit",
+    "pack": "fluid-lab",
+    "labs": true,
+    "tags": "fluid liquid water soda honey lava pour glass splash drops viscosity smoke steam candle flame fire physics simulation lab",
+    "camera": {
+      "yaw": 0.45,
+      "pitch": 0.28,
+      "roll": 0,
+      "distance": 2.9
+    }
+  },
+  {
+    "id": "screen",
+    "label": "Screen",
+    "category": "pictures",
+    "kind": "kit",
+    "pack": "screens",
+    "labs": true,
+    "tags": "tv television video gif movie cinema theater hologram screen curtains play watch",
+    "camera": {
+      "yaw": 0.25,
+      "pitch": 0.12,
+      "roll": 0,
+      "distance": 3.2
+    }
+  }
+]

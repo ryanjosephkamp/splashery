@@ -2,7 +2,7 @@
 // assets/toys/<id>/ (prepared with tools/prepare-assets.mjs, credits in
 // CREDITS.md); procedural toys are generator presets built in the browser.
 //
-// This catalogue is metadata only (ids, labels, categories, search words) so
+// This catalog is metadata only (ids, labels, categories, search words) so
 // it stays small as the shelf grows; toy code that needs more than a
 // generator preset lives in per-pack modules that load when a toy is picked.
 //
@@ -11,6 +11,9 @@
 // "Look" choice, and only the chosen look's id is saved (scene option `look`).
 
 // Shelf categories, in shelf order. A category only shows once it has toys.
+import { PHOTOREAL_R2_TOYS } from "./packs/photoreal-r2.js";
+import { PHOTOREAL_R3_TOYS } from "./packs/photoreal-r3.js"; // lane Photoreal r3
+
 export const CATEGORIES = [
   { id: "scans", label: "Photoreal" },
   { id: "shapes", label: "Shapes" },
@@ -28,12 +31,15 @@ export const CATEGORIES = [
   { id: "clothing", label: "Clothing" },
   { id: "medieval", label: "Medieval" },
   { id: "animals", label: "Animals" },
-  { id: "maths", label: "Maths" },
+  { id: "maths", label: "Math" },
   { id: "computing", label: "AI and computing" },
   { id: "pictures", label: "Pictures and pages" },
   { id: "studio", label: "Studio" },
   { id: "lab", label: "Lab" },
+  { id: "arcade", label: "Arcade" },
   { id: "science", label: "Science" },
+  { id: "imaging", label: "Imaging" },
+  { id: "geo", label: "Earth and maps" },
   { id: "holidays", label: "Holidays" },
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
@@ -139,7 +145,7 @@ export const TOYS = [
     id: "knot",
     label: "Neon knot",
     category: "shapes",
-    tags: "trefoil neon maths generated",
+    tags: "trefoil neon math generated",
     kind: "procedural",
     generator: {
       shape: "knot",
@@ -326,7 +332,7 @@ export const TOYS = [
     id: "mandeltorus",
     label: "Mandeltorus",
     category: "scans",
-    tags: "photoreal scan captured maths fractal art",
+    tags: "photoreal scan captured math fractal art",
     kind: "captured",
     url: "assets/toys/mandeltorus/mandeltorus.sog",
     urlWeak: "assets/toys/mandeltorus/mandeltorus-lite.sog",
@@ -358,6 +364,10 @@ export const TOYS = [
       changes: "Converted, decimated, spherical harmonics removed, recentred and scaled.",
     },
   },
+  // ---- Photoreal r2: more captures from SuperSplat (labs) ----
+  ...PHOTOREAL_R2_TOYS,
+  ...PHOTOREAL_R3_TOYS,
+
   // ---- Photoreal models (CC0 3D models turned into splats) ----
   {
     id: "rubber-duck-real",
@@ -962,7 +972,7 @@ export const TOYS = [
     category: "space",
     kind: "kit",
     pack: "space",
-    tags: "planet craters grey rocky small solar system",
+    tags: "planet craters gray rocky small solar system",
   },
   {
     id: "venus",
@@ -986,7 +996,7 @@ export const TOYS = [
     category: "space",
     kind: "kit",
     pack: "space",
-    tags: "lunar craters maria grey satellite",
+    tags: "lunar craters maria gray satellite",
   },
   {
     id: "mars",
@@ -1136,7 +1146,7 @@ export const TOYS = [
     category: "space",
     kind: "kit",
     pack: "space",
-    tags: "gas cloud pillars stars emission colourful",
+    tags: "gas cloud pillars stars emission colorful",
     camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 4.4 },
   },
   {
@@ -1157,6 +1167,163 @@ export const TOYS = [
     camera: { yaw: 0.55, pitch: 0.9, roll: 0, distance: 3.5 },
   },
 
+  // ---- Pack: space-r2 (lane Space r2) ----
+  {
+    id: "real-moon",
+    label: "The real Moon",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "moon lunar lro lola nasa real map elevation relief craters tycho copernicus apollo",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-mars",
+    label: "The real Mars",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "mars red planet viking mola nasa usgs real map elevation relief olympus mons valles marineris gale curiosity",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-earth",
+    label: "The real Earth",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "earth world globe blue marble etopo nasa noaa real map elevation relief night lights everest himalaya grand canyon hawaii",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-mercury",
+    label: "The real Mercury",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "mercury planet messenger nasa usgs real map elevation relief caloris rachmaninoff hokusai craters",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-venus",
+    label: "The real Venus",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "venus planet magellan radar nasa usgs real map elevation relief maxwell montes maat mons artemis corona",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-moons",
+    label: "Real moons",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "moons io europa ganymede callisto titan jupiter saturn galileo voyager cassini nasa usgs real map volcano ice",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "real-small-worlds",
+    label: "Pluto, Ceres and Vesta",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "dwarf planet pluto ceres vesta asteroid new horizons dawn nasa usgs real map elevation relief sputnik heart occator",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3 },
+  },
+  {
+    id: "nearby-stars",
+    label: "Stars near the Sun",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "stars neighborhood gaia hipparcos nearby proxima centauri sirius barnard vega arcturus light-years map galaxy real data",
+    camera: { yaw: 0.6, pitch: 0.45, roll: 0, distance: 2.6 },
+  },
+  {
+    id: "star-systems",
+    label: "Real star systems",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "exoplanets planets star system trappist-1 toi-178 55 cancri orbits nasa exoplanet archive transit real data",
+    camera: { yaw: 0.5, pitch: 0.55, roll: 0, distance: 2.6 },
+  },
+  {
+    id: "real-galaxies",
+    label: "Real galaxies",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "galaxy galaxies hubble eso telescope whirlpool m51 pinwheel m101 phantom m74 m83 spiral real picture",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+  },
+  // ---- Pack: powers-of-ten (lane Powers of ten) ----
+  {
+    id: "powers-of-ten",
+    label: "Powers of ten",
+    category: "space",
+    kind: "kit",
+    pack: "powers-of-ten",
+    labs: true,
+    tags: "powers of ten zoom scale sizes universe galaxy stars sun planets earth city garden leaf cell microscope molecule real",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.9 },
+  },
+  {
+    id: "saturn-v",
+    label: "Saturn V",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "rocket saturn v apollo moon launch stages staging nasa model s-ic s-ii s-ivb escape tower",
+    camera: { yaw: 0.5, pitch: 0.12, roll: 0, distance: 2.4 },
+  },
+  {
+    id: "sls",
+    label: "Space Launch System",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "rocket sls space launch system artemis orion moon launch stages staging nasa model boosters core stage",
+    camera: { yaw: 0.5, pitch: 0.12, roll: 0, distance: 3.1 },
+  },
+  {
+    id: "space-shuttle",
+    label: "Space Shuttle",
+    category: "space",
+    kind: "kit",
+    pack: "space-r2",
+    labs: true,
+    tags: "rocket space shuttle orbiter external tank boosters launch stages staging nasa model",
+    camera: { yaw: 0.5, pitch: 0.12, roll: 0, distance: 3.1 },
+  },
+  // ---- End of pack: space-r2 ----
+
+  // ---- Pack: space-r4 (lane Space r4) ----
+  {
+    id: "solar-orbits",
+    label: "The solar system on real orbits",
+    category: "space",
+    kind: "kit",
+    pack: "space-r4",
+    labs: true,
+    tags: "solar system orbits orrery planets kepler jpl real date asteroid belt asteroids comets halley moons jupiter saturn true scale",
+    camera: { yaw: 0.35, pitch: 0.95, roll: 0, distance: 2.45 },
+  },
+  // ---- End of pack: space-r4 ----
+
   // ---- Pack: tiny ----
   // (entries for src/packs/tiny.js go here)
   {
@@ -1173,7 +1340,7 @@ export const TOYS = [
     category: "tiny",
     kind: "kit",
     pack: "tiny",
-    tags: "phage virus microbe tail fibres lander inject dna microscope biology",
+    tags: "phage virus microbe tail fibers lander inject dna microscope biology",
     camera: { yaw: 0.55, pitch: 0.2, roll: 0, distance: 4.4 },
   },
   {
@@ -1310,6 +1477,49 @@ export const TOYS = [
     camera: { yaw: 0.55, pitch: 0.5, roll: 0, distance: 5 },
   },
 
+  // ---- Pack: tiny-r2 ----
+  // (lane Tiny world r2: entries for src/packs/tiny-r2.js go here; labs)
+  {
+    id: "dna-to-protein",
+    label: "DNA to protein",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "gene dna rna mrna transcription translation ribosome trna codon genetic code protein folding mutation sickle cell insulin hemoglobin gfp biology",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "mitosis",
+    label: "Cell division",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "mitosis cell division cycle chromosome chromatid spindle centrosome prophase metaphase anaphase telophase cytokinesis biology",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "apoptosis",
+    label: "Apoptosis",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "apoptosis cell death programmed blebbing apoptotic bodies pyknosis nucleus biology",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "phagocytosis",
+    label: "Phagocytosis",
+    category: "tiny",
+    kind: "kit",
+    pack: "tiny-r2",
+    labs: true,
+    tags: "phagocytosis neutrophil white blood cell immune bacterium phagosome lysosome digestion biology",
+    camera: { yaw: 0, pitch: 0.1, roll: 0, distance: 3.0 },
+  },
+
   // ---- Pack: atoms ----
   // (entries for src/packs/atoms.js go here)
   {
@@ -1352,6 +1562,39 @@ export const TOYS = [
     pack: "atoms",
     tags: "salt diamond graphite ice crystal structure atoms chemistry",
   },
+  // ---- Pack: lattices (lane Lattices and orbitals; labs) ----
+  {
+    id: "unit-cells",
+    label: "Unit cells",
+    category: "atoms",
+    kind: "kit",
+    pack: "lattices",
+    labs: true,
+    tags: "crystal lattice unit cell diamond graphite ice copper iron magnesium fcc bcc hcp face-centered body-centered hexagonal close-packed metal bonds thermal motion debye waller chemistry",
+    camera: { yaw: 0.55, pitch: 0.42, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "orbital-atlas",
+    label: "Orbital atlas",
+    category: "atoms",
+    kind: "kit",
+    pack: "lattices",
+    labs: true,
+    tags: "orbital atlas electron hydrogen wave function quantum s p d f g 4d 5f 5g 6d 7p node phase cut chemistry",
+
+    camera: { yaw: 0, pitch: 0.12, roll: 0, distance: 3.2 },
+  },
+  // ---- Pack: molecule-viewer (lane Molecule viewer) ----
+  {
+    id: "molecule-viewer",
+    label: "Molecule viewer",
+    category: "atoms",
+    kind: "kit",
+    pack: "molecule-viewer",
+    labs: true,
+    tags: "molecule viewer pdb mmcif cif sdf mol xyz protein dna rna ligand cartoon ribbon surface ball stick spacefill cpk bond length angle measure rcsb protein data bank chemistry biology",
+    camera: { yaw: 0.25, pitch: 0.18, roll: 0, distance: 3.4 },
+  },
 
   // ---- Pack: chemistry (lane Chemistry) ----
   {
@@ -1362,6 +1605,18 @@ export const TOYS = [
     pack: "chemistry",
     tags: "elements periodic table atom nucleus proton neutron electron shell spectrum emission line photon chemistry physics",
     camera: { yaw: 0.1, pitch: 0.12, roll: 0, distance: 3.1 },
+  },
+
+  // ---- Pack: real-elements (lane Elements) ----
+  {
+    id: "real-elements",
+    label: "Real elements",
+    category: "atoms",
+    kind: "kit",
+    pack: "real-elements",
+    labs: true,
+    tags: "elements periodic table real samples photos metals gases crystals chemistry",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.1 },
   },
 
   // ---- Pack: gems ----
@@ -1420,7 +1675,7 @@ export const TOYS = [
     category: "gems",
     kind: "kit",
     pack: "gems",
-    tags: "gem jewel rainbow play of colour cabochon stone mineral",
+    tags: "gem jewel rainbow play of color cabochon stone mineral",
   },
   {
     id: "pearl",
@@ -1428,7 +1683,7 @@ export const TOYS = [
     category: "gems",
     kind: "kit",
     pack: "gems",
-    tags: "gem jewel oyster shell lustre sea open",
+    tags: "gem jewel oyster shell luster sea open",
   },
 
   // ---- Pack: anatomy ----
@@ -1767,7 +2022,7 @@ export const TOYS = [
     category: "weather",
     kind: "kit",
     pack: "elements",
-    tags: "weather colours arc clouds sky",
+    tags: "weather colors arc clouds sky",
     camera: { yaw: 0.2, pitch: 0.15, roll: 0, distance: 4.0 },
   },
   {
@@ -2138,7 +2393,7 @@ export const TOYS = [
     category: "toys",
     kind: "kit",
     pack: "playthings",
-    tags: "twist cube colours puzzle 3x3",
+    tags: "twist cube colors puzzle 3x3",
     camera: { yaw: 0.62, pitch: 0.5, roll: 0, distance: 7.4 },
   },
   {
@@ -2165,7 +2420,7 @@ export const TOYS = [
     category: "toys",
     kind: "kit",
     pack: "playthings",
-    tags: "paper aeroplane airplane dart fold fly",
+    tags: "paper airplane airplane dart fold fly",
     camera: { yaw: 0.7, pitch: 0.42, roll: 0, distance: 3.6 },
   },
   {
@@ -2214,7 +2469,7 @@ export const TOYS = [
     camera: { yaw: 0.55, pitch: 0.6, roll: 0, distance: 3.7 },
   },
 
-  // ---- Pack: maths ----
+  // ---- Pack: math ----
   {
     id: "lorenz",
     label: "Lorenz attractor",
@@ -2359,7 +2614,80 @@ export const TOYS = [
     tags: "pythagoras theorem proof right triangle square hypotenuse geometry",
     camera: { yaw: 0.2, pitch: 0.3, roll: 0, distance: 3.7 },
   },
-  // Lane Manual: the splat equation toy (its own pack, on the Maths shelf).
+  // Lane Math r2: three more strange attractors (labs).
+  {
+    id: "rossler-attractor",
+    label: "Rössler attractor",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "rossler roessler chaos strange attractor spiral differential equations tracer",
+    camera: { yaw: 0.35, pitch: 0.35, roll: 0, distance: 4.2 },
+  },
+  {
+    id: "thomas-attractor",
+    label: "Thomas attractor",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "thomas cyclically symmetric chaos strange attractor differential equations tracer",
+    camera: { yaw: 0.5, pitch: 0.4, roll: 0, distance: 4.4 },
+  },
+  {
+    id: "aizawa-attractor",
+    label: "Aizawa attractor",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "aizawa langford chaos strange attractor sphere tube differential equations tracer",
+    camera: { yaw: 0.3, pitch: 0.3, roll: 0, distance: 4.2 },
+  },
+  // Lane Math r2: shapes in four dimensions (labs).
+  {
+    id: "five-cell",
+    label: "5-cell",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "5-cell pentachoron 4-simplex 4d four dimensions polytope projection",
+    // Fix10: closer than the other 4D shapes, as its rest pose is smaller.
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 3.1 },
+  },
+  {
+    id: "sixteen-cell",
+    label: "16-cell",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "16-cell hexadecachoron cross polytope orthoplex 4d four dimensions projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "twenty-four-cell",
+    label: "24-cell",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "24-cell icositetrachoron octaplex 4d four dimensions polytope projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "duoprism",
+    label: "Duoprism",
+    category: "maths",
+    kind: "kit",
+    pack: "maths",
+    labs: true,
+    tags: "duoprism 4d four dimensions polygon prism polytope projection",
+    camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
+  },
+  // Lane Manual: the splat equation toy (its own pack, on the math shelf).
   {
     id: "splat-equation",
     label: "Splat equation",
@@ -2377,9 +2705,10 @@ export const TOYS = [
     label: "Storybook",
     category: "objects",
     kind: "kit",
-    pack: "objects",
+    pack: "pictures", // lane Hands-on H3: a real storybook, read as Your book reads a PDF
     tags: "book pages read story hardcover open close flip",
-    camera: { yaw: 0.25, pitch: 0.78, roll: 0, distance: 3.9 },
+    camera: { yaw: 0.12, pitch: 0.12, roll: 0, distance: 2.6 }, // (as Your book's)
+    tilt: "free", // UI r5: no tilt lock (the owner's review of October 2, 2026)
   },
   {
     id: "laptop",
@@ -2396,7 +2725,7 @@ export const TOYS = [
     category: "objects",
     kind: "kit",
     pack: "objects",
-    tags: "ballerina dancer jewellery box lid tune",
+    tags: "ballerina dancer jewelry box lid tune",
     camera: { yaw: 0.4, pitch: 0.35, roll: 0, distance: 4.6 },
   },
   {
@@ -2425,6 +2754,7 @@ export const TOYS = [
     pack: "objects",
     tags: "rain parasol canopy open close",
     camera: { yaw: 0.4, pitch: 0.3, roll: 0, distance: 4.3 },
+    tilt: "free", // UI r5: turns any way (the owner's review of October 2, 2026)
   },
   {
     id: "desk-fan",
@@ -2545,7 +2875,7 @@ export const TOYS = [
     category: "medieval",
     kind: "kit",
     pack: "medieval",
-    tags: "knight heater coat of arms heraldry crest armour",
+    tags: "knight heater coat of arms heraldry crest armor",
     camera: { yaw: 0.3, pitch: 0.2, roll: 0, distance: 5 },
   },
   {
@@ -2581,7 +2911,7 @@ export const TOYS = [
     category: "medieval",
     kind: "kit",
     pack: "medieval",
-    tags: "armour helm visor plume feathers steel",
+    tags: "armor helm visor plume feathers steel",
   },
   {
     id: "crown",
@@ -2829,7 +3159,9 @@ export const TOYS = [
     kind: "kit",
     pack: "music",
     tags: "instrument rainbow bars mallet toy glockenspiel",
-    camera: { yaw: 0.45, pitch: 0.5, roll: 0, distance: 4.1 },
+    // UI r5: a little more from above, and the tilt free (the owner's review of October 2, 2026).
+    camera: { yaw: 0.45, pitch: 0.62, roll: 0, distance: 4.1 },
+    tilt: "free",
   },
   {
     id: "toy-piano",
@@ -2859,6 +3191,7 @@ export const TOYS = [
     pack: "pianos",
     tags: "instrument piano keys hammers strings ragtime saloon honky-tonk song midi joplin",
     camera: { yaw: 0.42, pitch: 0.22, roll: 0, distance: 4.3 },
+    tilt: "free", // UI r5: look at it from above too (the owner's review of October 2, 2026)
   },
   {
     id: "harpsichord",
@@ -2950,7 +3283,7 @@ export const TOYS = [
     category: "vehicles",
     kind: "kit",
     pack: "vehicles",
-    tags: "biplane aeroplane airplane aircraft pilot prop fly loop",
+    tags: "biplane airplane airplane aircraft pilot prop fly loop",
     camera: { yaw: 0.6, pitch: 0.3, roll: 0, distance: 4.3 },
   },
   {
@@ -2959,7 +3292,7 @@ export const TOYS = [
     category: "vehicles",
     kind: "kit",
     pack: "vehicles",
-    tags: "aeroplane airplane aircraft plane passenger fly wings engines",
+    tags: "airplane airplane aircraft plane passenger fly wings engines",
     camera: { yaw: 0.6, pitch: 0.35, roll: 0, distance: 4.2 },
   },
   {
@@ -3060,7 +3393,7 @@ export const TOYS = [
     category: "landmarks",
     kind: "kit",
     pack: "landmarks",
-    tags: "new york usa torch crown statue harbour",
+    tags: "new york usa torch crown statue harbor",
     camera: { yaw: 0.55, pitch: 0.25, roll: 0, distance: 4.0 },
   },
   {
@@ -3374,6 +3707,17 @@ export const TOYS = [
     tags: "chladni plate sand sound vibration frequency resonance mode nodal lines pattern bow physics",
     camera: { yaw: 0.2, pitch: 0.95, roll: 0, distance: 4.1 },
   },
+  // Lane Live r8: the Chladni plate in three dimensions (labs).
+  {
+    id: "chladni-cell",
+    label: "Sound in a box",
+    category: "studio",
+    kind: "kit",
+    pack: "studio",
+    labs: true,
+    tags: "chladni 3d sound ultrasound standing wave acoustic radiation force beads nodal surface cube flask acoustophoresis physics",
+    camera: { yaw: 0.55, pitch: 0.42, roll: 0, distance: 4.6 },
+  },
   // ---- Pack: live (lane Live input) ----
   {
     id: "room-echo",
@@ -3406,6 +3750,83 @@ export const TOYS = [
     tags: "3d model glb gltf obj stl mesh triangles convert converter wireframe texture cad print",
     camera: { yaw: 0.5, pitch: 0.28, roll: 0, distance: 4.5 },
   },
+  // ---- Pack: qr (lane QR) ----
+  {
+    id: "qr-code",
+    label: "QR code",
+    category: "studio",
+    kind: "kit",
+    pack: "qr",
+    labs: true,
+    tags: "qr code generator barcode link url scan camera phone print gif share",
+    // Opens in scan view: flat and square, the quiet zone clear of the
+    // stage's buttons on any screen (the field of view spans the narrower side).
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.1 },
+  },
+  // ---- Pack: qr-lab (lane QR lab r2) ----
+  {
+    id: "qr-anatomy",
+    label: "How a QR code works",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-lab",
+    labs: true,
+    tags: "qr code how it works anatomy finder timing alignment format version mask reed solomon error correction encode bits zigzag",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "qr-damage",
+    label: "QR damage lab",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-lab",
+    labs: true,
+    tags: "qr code damage scratch sticker tear burn smudge blur error correction reed solomon heal scan meter levels",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "qr-three",
+    label: "Three QR codes in one",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-lab",
+    labs: true,
+    tags: "qr code color rgb red green blue three codes multiplex channels",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  // ---- Pack: qr-craft (lane QR craft) ----
+  {
+    id: "qr-picture",
+    label: "Picture QR",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "qr code picture photo halftone image art custom scan png",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "qr-build",
+    label: "QR from real things",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "qr code dominoes marbles tiles flip build physics chain reaction scan",
+    camera: { yaw: 0, pitch: 0.45, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "barcodes",
+    label: "Other barcodes",
+    category: "studio",
+    kind: "kit",
+    pack: "qr-craft",
+    labs: true,
+    tags: "barcode code 128 ean-13 upc-a data matrix aztec check digit scanner laser",
+    // A little from above and the side, so the bars lifting as the scan line
+    // passes read as motion (the check reads it front on).
+    camera: { yaw: 0.25, pitch: 0.35, roll: 0, distance: 3.2 },
+  },
   // ---- Pack: photo-3d (lane Photo to 3D) ----
   {
     id: "photo-3d",
@@ -3415,7 +3836,18 @@ export const TOYS = [
     pack: "photo-3d",
     labs: true,
     tags: "photo picture image depth 3d parallax relief layers convert converter depth map jpeg png webp",
-    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  // Lane Live input r3: a GIF or a video played back in 3D.
+  {
+    id: "moving-photo-3d",
+    label: "Moving photo to 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "live",
+    labs: true,
+    tags: "gif video animation movie clip moving photo depth 3d relief frames muybridge horse convert converter",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
   },
   // ---- Pack: video3d (lane Video 3D) ----
   {
@@ -3426,7 +3858,61 @@ export const TOYS = [
     pack: "video3d",
     labs: true,
     tags: "video film clip drone flight walk street 3d scene camera path structure from motion gaussian splats train webgpu convert converter mp4 webm",
-    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.6 },
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
+  // ---- Pack: sound-lab (lane Sound and light lab) ----
+  {
+    id: "sound-lab",
+    label: "Sound lab",
+    category: "studio",
+    kind: "kit",
+    pack: "sound-lab",
+    labs: true,
+    tags: "sound audio spectrogram spectrum oscilloscope tone generator sine square saw noise beats frequency hertz decibel level meter metronome tempo microphone physics",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "sound-recorder",
+    label: "Sound recorder",
+    category: "studio",
+    kind: "kit",
+    pack: "sound-lab",
+    labs: true,
+    tags: "record recorder recording microphone voice sound effect wav webm m4a trim waveform spectrogram save audio",
+    camera: { yaw: 0, pitch: 0.06, roll: 0, distance: 3.0 },
+  },
+  // ---- End of pack: sound-lab ----
+  // ---- Pack: viewers (lane Viewers) ----
+  {
+    id: "splat-toolkit",
+    label: "Splat toolkit",
+    category: "studio",
+    kind: "kit",
+    pack: "viewers",
+    labs: true,
+    tags: "gaussian splats ply splat spz sog compressed convert converter crop floaters outlier filter clean decimate shrink compare stats file tool",
+    camera: { yaw: 0.45, pitch: 0.2, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "point-clouds",
+    label: "Point clouds",
+    category: "studio",
+    kind: "kit",
+    pack: "viewers",
+    labs: true,
+    tags: "lidar las laz ply xyz pts point cloud survey usgs 3dep terrain classification intensity measure distance crop thin gis",
+    camera: { yaw: 0.6, pitch: 0.55, roll: 0, distance: 2.8 },
+  },
+  // ---- Pack: volume-viewer (lane Volume viewer) ----
+  {
+    id: "volume-viewer",
+    label: "Volume viewer",
+    category: "studio",
+    kind: "kit",
+    pack: "volume-viewer",
+    labs: true,
+    tags: "volume viewer ct mri micro-ct microscope scan dicom nifti nii tiff stack raw voxel slice window level bone soft tissue maximum intensity projection mip cut plane walnut gar fish medical imaging",
+    camera: { yaw: 0.35, pitch: 0.2, roll: 0, distance: 3.8 },
   },
   // ---- Pack: lab (lane Lab) ----
   {
@@ -3439,6 +3925,30 @@ export const TOYS = [
     tags: "gpu field galaxy spiral ocean waves sea knot flow particles shader lab experiment",
     camera: { yaw: 0.3, pitch: 0.85, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: light-lab (lane Sound and light lab) ----
+  {
+    id: "light-lab",
+    label: "Light lab",
+    category: "lab",
+    kind: "kit",
+    pack: "light-lab",
+    labs: true,
+    tags: "light spectrum spectra emission lines element hydrogen helium neon sodium mercury prism grating rainbow diffraction cd dvd spectrometer camera wavelength nanometer nist physics",
+    camera: { yaw: 0, pitch: 0.5, roll: 0, distance: 3.4 },
+  },
+  // ---- End of pack: light-lab ----
+  // ---- Pack: baked-demo (lane Baked engine) ----
+  {
+    id: "baked-chest",
+    label: "Baked chest",
+    category: "lab",
+    kind: "kit",
+    pack: "baked-demo",
+    labs: true,
+    tags: "baked splats asset tiers parts lid hinge chest treasure gold 3dgs ply converter",
+    camera: { yaw: 0.5, pitch: 0.35, roll: 0, distance: 3.9 },
+  },
+  // ---- End of pack: baked-demo ----
   // ---- Pack: science (lane Science) ----
   {
     id: "thermal-ellipsoids",
@@ -3470,6 +3980,58 @@ export const TOYS = [
     tags: "galaxy simulation fire gizmo sph gas particles temperature dwarf cosmology astrophysics hot cold disk science",
     camera: { yaw: 0.3, pitch: 1.0, roll: 0, distance: 3.0 },
   },
+  // ---- Pack: science (lane Science r3) ----
+  {
+    id: "cryoem-map",
+    label: "Cryo-EM map",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "cryo-em electron microscopy density map emdb isosurface contour ribosome apoferritin ferritin virus capsid aav protein structure science",
+    camera: { yaw: 0.4, pitch: 0.35, roll: 0, distance: 3.4 },
+  },
+  {
+    id: "contour-lab",
+    label: "Contour lab",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "contour lines map topographic elevation height layers terrain mountain usgs geography lab science",
+    camera: { yaw: 0.5, pitch: 0.55, roll: 0, distance: 3.0 },
+  },
+  {
+    id: "terrain-box",
+    label: "Terrain in a box",
+    category: "science",
+    kind: "kit",
+    pack: "science",
+    labs: true,
+    tags: "terrain elevation land mountain volcano canyon valley water flood usgs 3dep geography box science",
+    camera: { yaw: 0.5, pitch: 0.5, roll: 0, distance: 3.0 },
+  },
+  // ---- Pack: optics (lane Optics) ----
+  {
+    id: "ripple-tank",
+    label: "Ripple tank",
+    category: "science",
+    kind: "kit",
+    pack: "optics",
+    labs: true,
+    tags: "wave waves ripple tank water interference diffraction slit double single young fringes wavelength frequency physics optics",
+    camera: { yaw: 0, pitch: 1.05, roll: 0, distance: 3.1 },
+  },
+  {
+    id: "light-bench",
+    label: "Light bench",
+    category: "science",
+    kind: "kit",
+    pack: "optics",
+    labs: true,
+    tags: "light ray optics lens mirror prism spectrum rainbow refraction reflection snell glass fiber total internal reflection focal length physics",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.4 },
+  },
   // ---- Pack: fluid-lab (lane Fluids) ----
   {
     id: "fluid-lab",
@@ -3481,6 +4043,158 @@ export const TOYS = [
     tags: "fluid liquid water soda honey lava pour glass splash drops viscosity smoke steam candle flame fire physics simulation lab",
     camera: { yaw: 0.45, pitch: 0.28, roll: 0, distance: 2.9 },
   },
+  // ---- Pack: geo (lane Earth and maps) ----
+  {
+    id: "grand-canyon",
+    label: "Grand Canyon",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "grand canyon arizona colorado river terrain elevation usgs 3dep landscape relief flood map earth geography",
+    camera: { yaw: 0.35, pitch: 0.62, roll: 0, distance: 4.1 },
+  },
+  {
+    id: "st-helens",
+    label: "Mount St. Helens",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "mount st helens volcano eruption 1980 washington landslide ash terrain elevation usgs before after earth geography",
+    camera: { yaw: 2.85, pitch: 0.45, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "sea-floor",
+    label: "The sea floor",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "sea floor ocean mariana trench challenger deep bathymetry noaa etopo pacific guam drain depth earth geography",
+    camera: { yaw: 0.4, pitch: 0.55, roll: 0, distance: 3.6 },
+  },
+  {
+    id: "tide-harbor",
+    label: "Tides at Bar Harbor",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "tide tides waves harbor bar harbor maine bar island sandbar noaa ocean sea level boats coast earth geography",
+    camera: { yaw: 0.1, pitch: 0.8, roll: 0, distance: 3.6 },
+  },
+  {
+    id: "hurricane",
+    label: "Hurricane",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "hurricane polo storm cyclone typhoon weather goes satellite infrared clouds eye rain wind track noaa pacific mexico earth geography",
+    camera: { yaw: 0.15, pitch: 0.95, roll: 0, distance: 3.2 },
+  },
+  {
+    id: "relief-map",
+    label: "Relief map",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "relief map contour lines topographic topo yosemite valley half dome el capitan merced river streams land cover usgs map earth geography",
+    camera: { yaw: 0.25, pitch: 0.7, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "living-city",
+    label: "Living city",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "city helsinki finland senate square cathedral market harbor reality mesh photogrammetry 3d model buildings streets night lights windows street lamps urban map earth geography",
+    camera: { yaw: 0.55, pitch: 0.55, roll: 0, distance: 3.2 },
+  },
+  {
+    id: "stork-migration",
+    label: "Stork migration",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "stork storks bird birds migration flyway gps tracking movebank africa europe bosporus animal movement map earth geography",
+    camera: { yaw: 0.1, pitch: 0.85, roll: 0, distance: 3.2 },
+  },
+  {
+    id: "earthquakes",
+    label: "Earthquakes",
+    category: "geo",
+    kind: "kit",
+    pack: "geo",
+    labs: true,
+    tags: "earthquakes quakes usgs live feed globe ring of fire seismology magnitude depth plates timeline earth geography",
+    camera: { yaw: 0, pitch: 0.05, roll: 0, distance: 3.8 },
+  },
+  // ---- Pack: imaging (lane Imaging) ----
+  {
+    id: "airport-xray",
+    label: "Airport X-ray scanner",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "x-ray xray airport security scanner baggage luggage bag suitcase conveyor belt dual energy organic metal imaging",
+    camera: { yaw: 0.3, pitch: 0.22, roll: 0, distance: 2.8 },
+  },
+  {
+    id: "how-ct",
+    label: "How CT works",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "ct cat scan computed tomography x-ray gantry slice nautilus shell chambers volume cutting plane imaging",
+    camera: { yaw: 0.45, pitch: 0.25, roll: 0, distance: 3.2 },
+  },
+  {
+    id: "walnut-ct",
+    label: "Walnut CT scan",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "ct scan x-ray tomography walnut nut shell kernel volume real data slice cutting plane density cwi imaging",
+    camera: { yaw: 0.35, pitch: 0.2, roll: 0, distance: 2.8 },
+  },
+  {
+    id: "fruit-mri",
+    label: "MRI of a fruit",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "mri magnetic resonance imaging scan slices kiwi orange fruit seeds segments t2 imaging",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3.0 }, // Fix10: face-on to the slices
+  },
+  {
+    id: "electron-microscope",
+    label: "Electron microscope",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "sem scanning electron microscope micrograph pollen diatom snowflake rime zoom magnification imaging",
+    camera: { yaw: 0.0, pitch: 0.45, roll: 0, distance: 2.6 },
+  },
+  {
+    id: "thermal-camera",
+    label: "Thermal camera",
+    category: "imaging",
+    kind: "kit",
+    pack: "imaging",
+    labs: true,
+    tags: "thermal camera infrared heat false color temperature tea mug cooling hand warmer ice water imaging",
+    camera: { yaw: 0.3, pitch: 0.42, roll: 0, distance: 2.8 },
+  },
   // ---- Pack: screens ----
   {
     id: "screen",
@@ -3491,6 +4205,148 @@ export const TOYS = [
     labs: true,
     tags: "tv television video gif movie cinema theater hologram screen curtains play watch",
     camera: { yaw: 0.25, pitch: 0.12, roll: 0, distance: 3.2 },
+  },
+  // ---- Pack: arcade (lane Arcade) ----
+  {
+    id: "shardball",
+    label: "Shardball",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade brick breaker paddle ball bricks shatter dome 3d play",
+  },
+  {
+    id: "longtail",
+    label: "Longtail",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade grow trail beads berries grid cube net fold planet mars moon earth torus ring tunnels 3d play",
+  },
+  {
+    id: "grain-garden",
+    label: "Grain Garden",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade falling sand powder water oil fire seeds plants grow burn flow pile glass box 3d sandbox",
+  },
+  {
+    id: "page-breaker",
+    label: "Page Breaker",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade brick breaker paddle ball your own pdf page photo words pictures shatter",
+  },
+  {
+    id: "strata",
+    label: "Strata",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade falling stones blocks well layers stack puzzle crumble 3d",
+  },
+  {
+    id: "volley-table",
+    label: "Volley Table",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade paddle rally table ball two paddles spin computer 3d",
+  },
+  {
+    id: "stone-belt",
+    label: "Stone Belt",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade space rocks asteroids real nasa bennu itokawa eros ship blast split dust 3d",
+  },
+  {
+    id: "soft-landing",
+    label: "Soft Landing",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade lander land moon mars real terrain elevation nasa lola mola tycho copernicus apollo gale jezero olympus valles 3d",
+  },
+  {
+    id: "night-owl-pinball",
+    label: "Night Owl Pinball",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade pinball flippers bumpers plunger steel ball table physics 3d",
+  },
+  {
+    id: "cast-a-shadow",
+    label: "Cast a Shadow",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade puzzle shadow light lamp wall silhouette turn rotate carved block 3d",
+  },
+  {
+    id: "photo-dash",
+    label: "Photo Dash",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade runner run jump marble your own photo skyline relief 3d",
+  },
+  {
+    id: "note-rider",
+    label: "Note Rider",
+    category: "arcade",
+    kind: "kit",
+    pack: "arcade",
+    labs: true,
+    tags: "game arcade music song notes rhythm catch lanes melody midi your own song ode to joy 3d",
+  },
+  // ---- Pack: night-sky (lane Night sky) ----
+  {
+    id: "night-sky",
+    label: "Night sky",
+    category: "space",
+    kind: "kit",
+    pack: "night-sky",
+    labs: true,
+    tags: "stars planets moon sun constellations planetarium astronomy sky night location date time phase",
+    // Seen from inside: looking south, a little above the horizon.
+    camera: { yaw: 0, pitch: 0.3, roll: 0, distance: 5 },
+  },
+  // ---- Pack: data-climate (lane Data and climate) ----
+  {
+    id: "data-in-3d",
+    label: "Data in 3D",
+    category: "studio",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "data csv tsv spreadsheet table chart graph plot scatter bars surface 3d columns statistics excel",
+    camera: { yaw: 0.55, pitch: 0.3, roll: 0, distance: 3.3 },
+  },
+  {
+    id: "climate-records",
+    label: "Climate records",
+    category: "science",
+    kind: "kit",
+    pack: "data-climate",
+    labs: true,
+    tags: "climate co2 carbon dioxide mauna loa keeling temperature warming gistemp nasa noaa record chart",
+    camera: { yaw: 0.45, pitch: 0.22, roll: 0, distance: 3.3 },
   },
 ];
 
@@ -3609,6 +4465,7 @@ const STILL_TOYS = new Set([
   "puzzle-cube",
   // Added: they read like a chart, a diagram or a page.
   "periodic-table",
+  "real-elements", // lane Elements
   "splat-equation",
   "chladni-plate",
   "anatomy-atlas",

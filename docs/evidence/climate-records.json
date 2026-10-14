@@ -1,0 +1,90 @@
+{
+  "toy": "climate-records",
+  "checked": "2026-10-05",
+  "summary": "Climate records draws two published records exactly as their files hold them: NOAA's monthly mean CO2 at Mauna Loa from May 1974 to August 2026, and NASA's GISTEMP v4 global temperature anomalies from January 1880 to August 2026. Both are dated snapshots taken October 5, 2026. The only things left out are the CO2 record's first sixteen years, which come from Scripps and can't be reused here.",
+  "claims": [
+    {
+      "claim": "The CO2 spiral starts at 333.19 ppm in May 1974 and ends at 427.55 ppm in August 2026; January 2000 was 369.45 ppm and the highest month, May 2026, 432.34 ppm.",
+      "how": "The toy reads the shipped snapshot of NOAA's file line by line and puts each month on the coil, its distance from the middle set by that month's mean CO2. The tests check the first, last and known months against the values on NOAA's live file, and that the coil's ends sit at those radii.",
+      "where": "src/datavis/climate.js:16",
+      "sources": [
+        {
+          "title": "Trends in Atmospheric Carbon Dioxide: Mauna Loa CO2 monthly mean data (co2_mm_mlo.csv, file of September 5, 2026)",
+          "publisher": "NOAA Global Monitoring Laboratory",
+          "url": "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv",
+          "says": "1974,5,1974.3750,333.19 ... 2000,1,2000.0417,369.45 ... 2026,5,2026.3750,432.34 ... 2026,8,2026.6250,427.55 (year, month, decimal date, monthly mean in ppm)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/dcl.spec.mjs:189",
+      "note": ""
+    },
+    {
+      "claim": "The record shown starts in May 1974, not March 1958, because the earlier months are Scripps data whose reuse isn't cleared.",
+      "how": "The snapshot tool keeps only rows from May 1974 on, and a test checks that no earlier month is shipped. The Toy tab and the About text say why.",
+      "where": "tools/dcl-snapshots.mjs:87",
+      "sources": [
+        {
+          "title": "co2_mm_mlo.csv header",
+          "publisher": "NOAA Global Monitoring Laboratory",
+          "url": "https://gml.noaa.gov/webdata/ccgg/trends/co2/co2_mm_mlo.csv",
+          "says": "Data from March 1958 through April 1974 have been obtained by C. David Keeling of the Scripps Institution of Oceanography (SIO) and were obtained from the Scripps website (scrippsco2.ucsd.edu)."
+        },
+        {
+          "title": "Terms of use",
+          "publisher": "UC San Diego",
+          "url": "https://ucsd.edu/about/terms-of-use.html",
+          "says": "No material from any official UC San Diego website may be copied, reproduced, republished ... without explicit permission."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/dcl.spec.mjs:189",
+      "note": "The Scripps CO2 site links its Terms of Use to UC San Diego's site terms and names no data license."
+    },
+    {
+      "claim": "Each turn of the coil is pushed out toward May and pulled in toward October: the yearly cycle of CO2 at Mauna Loa, highest in late spring and lowest in early autumn.",
+      "how": "January sits in front and each month has its own direction around the coil, so the seasonal rise and fall in the monthly means makes every turn lean the same way. Nothing is added to the data to show it.",
+      "where": "src/datavis/climate.js:73",
+      "sources": [
+        {
+          "title": "Trends in Atmospheric Carbon Dioxide: Mauna Loa, seasonal cycle",
+          "publisher": "NOAA Global Monitoring Laboratory",
+          "url": "https://gml.noaa.gov/ccgg/trends/",
+          "says": "The data file's monthly means and its deseasonalized column differ by the average seasonal cycle, with the monthly mean above the trend in spring (for example May 2026: 432.34 against 429.06) and below it in autumn."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": "On a phone the lean is small (about 3 ppm either side of a rise of 94 ppm), which is the true size of the cycle."
+    },
+    {
+      "claim": "The temperature charts show GISTEMP v4's global anomalies against the 1951-1980 mean: 1880 averaged -0.18 °C, 2016 +1.01 °C, 2024 +1.29 °C and 2025 +1.19 °C; August 2026 was +1.40 °C.",
+      "how": "The toy reads the shipped snapshot of the GISTEMP table: twelve monthly values per year for the bars and the J-D (January to December) mean for the wall. Months not yet published ('***') are left out, so 2026 has eight bars and no yearly stripe. The tests check these values and that every published month becomes one bar.",
+      "where": "src/datavis/climate.js:43",
+      "sources": [
+        {
+          "title": "GISS Surface Temperature Analysis (GISTEMP v4): Land-Ocean Temperature Index, global means (GLB.Ts+dSST.csv)",
+          "publisher": "NASA Goddard Institute for Space Studies",
+          "url": "https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv",
+          "says": "1880 ... J-D -.18; 2016 ... 1.01; 2024 ... 1.29; 2025 ... 1.19; 2026: Aug 1.40, Sep to Dec ***."
+        },
+        {
+          "title": "GISS Surface Temperature Analysis (GISTEMP v4)",
+          "publisher": "NASA Goddard Institute for Space Studies",
+          "url": "https://data.giss.nasa.gov/gistemp/",
+          "says": "Plain-text tables of Land-Ocean Temperature Index (LOTI) deviations from the 1951-1980 means."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/dcl.spec.mjs:207",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The coil is drawn smoothly between the monthly points (a Catmull-Rom curve), so its shape between two months is drawn, not measured.",
+    "The CO2 coil's height is time, not CO2: CO2 is the distance from the middle, read on the rings on the floor.",
+    "Colors are a guide: the temperature colors saturate at ±1.2 °C, and the bars' heights carry the values.",
+    "December 2022 to early July 2023 were measured at Maunakea, about 21 miles north, while the Mauna Loa observatory was shut by the eruption; NOAA's file says so and the toy shows those months like the rest."
+  ],
+  "fixes": []
+}

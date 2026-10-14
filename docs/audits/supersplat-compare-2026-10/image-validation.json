@@ -1,0 +1,122 @@
+[
+  {
+    "path": "screenshots/splashery-strawberry-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "c0f397a70a42e0b60bd229e8a18ef73f4bbf7f8726ef9d5c1762818742434318"
+  },
+  {
+    "path": "screenshots/splashery-strawberry-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "4f4eef691f80b67641878d7b01eaf52a6d5048d2f7793e637a9db9399aa67408"
+  },
+  {
+    "path": "screenshots/supersplat-strawberry-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "c4394a11abb15d1dabacd17cec1ad4411b1e4c413ffb6bf495f006da58714c3d"
+  },
+  {
+    "path": "screenshots/supersplat-strawberry-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "578f78f49cdcb441ad37f9620fc637b7e7914308858f2ff1a4611694b746df66"
+  },
+  {
+    "path": "screenshots/splashery-bee-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "ec50c6f77a8be221bd89c0b74ac95b2a44f44f2a533b9cf7b2eab22746e490a2"
+  },
+  {
+    "path": "screenshots/splashery-bee-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "83c2bc5b7fd8d16b1460ce4bb5785f81ce0fec351b1fbeef380702245bae43d4"
+  },
+  {
+    "path": "screenshots/supersplat-bee-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "719a3405178c9bc0b1ac39be43f988624fea2cc62fa1581d41aaafe12f036f85"
+  },
+  {
+    "path": "screenshots/supersplat-bee-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "be102059289399d8271d31529839b5e21f305987afaea1aac9010db8231074c6"
+  },
+  {
+    "path": "screenshots/splashery-bmx-bike-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "72a502ca4326bf3d4127e140ff91c5782054bc6a192b40341bf72a4147894a1b"
+  },
+  {
+    "path": "screenshots/splashery-bmx-bike-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "d262a596700c9929da2d02ad447e63018fb0ee99e01c84cb7b0ed5fb7019a72c"
+  },
+  {
+    "path": "screenshots/supersplat-bmx-bike-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "fd4b11e6ff52e76a2e14aa85558a0a8e0fda6d696630f75c098b5d04a6a873f7"
+  },
+  {
+    "path": "screenshots/supersplat-bmx-bike-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "b5563351f68fdda5cf2be151905203e2cbe99481dd54e90cf4489efc6d9e5fff"
+  },
+  {
+    "path": "screenshots/splashery-cave-lioness-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "8cdec994bea762dbe41e15885aa5f48fe383f1be3809c8824ca08f419bec21b6"
+  },
+  {
+    "path": "screenshots/splashery-cave-lioness-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "07dfdc1d861189e357b25ef510bfbac76aea9ab73730c03503b95939ef499966"
+  },
+  {
+    "path": "screenshots/supersplat-cave-lioness-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "796a81f5b1093d222b453e9bfc70bb2dd56e4fe61412cc4a0a4e3cb0f5c7aa9e"
+  },
+  {
+    "path": "screenshots/supersplat-cave-lioness-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "b284b776137bd4beceeb9eccdb3520f39b2f82d72aeadef7f08f9c45d4b505a5"
+  },
+  {
+    "path": "screenshots/splashery-toy-trex-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "ed37d8a1da3978f283eebc29f84affb0fefe8a68e148c3b77c4e018b199b1d80"
+  },
+  {
+    "path": "screenshots/splashery-toy-trex-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "a8e1623303db6195611fe741440f819b9bc07a3588dd50b42920fa5fc8c039f9"
+  },
+  {
+    "path": "screenshots/supersplat-toy-trex-390x844.jpg",
+    "width": 390,
+    "height": 844,
+    "sha256": "7e3ccc87375565b401f66db4c136727da7c3a1cd0f62c7b8dce9d080fafa4a30"
+  },
+  {
+    "path": "screenshots/supersplat-toy-trex-1440x900.jpg",
+    "width": 1440,
+    "height": 900,
+    "sha256": "7bed2a894e17fe1aa98016e3b40f0f7d88f0b6a9a3a8007d2b69f4b6f0f45903"
+  }
+]

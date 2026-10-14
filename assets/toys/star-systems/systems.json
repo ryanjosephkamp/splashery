@@ -1,0 +1,181 @@
+{
+ "about": "Made by tools/sp2-systems.mjs from the NASA Exoplanet Archive (pscomppars) and NASA's planetary fact sheets.",
+ "systems": [
+  {
+   "id": "trappist-1",
+   "name": "TRAPPIST-1",
+   "distanceLy": 40.5,
+   "star": {
+    "teff": 2566,
+    "radiusSun": 0.1192
+   },
+   "planets": [
+    {
+     "name": "TRAPPIST-1 b",
+     "periodDays": 1.510826,
+     "aAU": 0.01154,
+     "radiusEarth": 1.116
+    },
+    {
+     "name": "TRAPPIST-1 c",
+     "periodDays": 2.421937,
+     "aAU": 0.0158,
+     "radiusEarth": 1.097
+    },
+    {
+     "name": "TRAPPIST-1 d",
+     "periodDays": 4.049219,
+     "aAU": 0.02227,
+     "radiusEarth": 0.788
+    },
+    {
+     "name": "TRAPPIST-1 e",
+     "periodDays": 6.101013,
+     "aAU": 0.02925,
+     "radiusEarth": 0.92
+    },
+    {
+     "name": "TRAPPIST-1 f",
+     "periodDays": 9.20754,
+     "aAU": 0.03849,
+     "radiusEarth": 1.045
+    },
+    {
+     "name": "TRAPPIST-1 g",
+     "periodDays": 12.352446,
+     "aAU": 0.04683,
+     "radiusEarth": 1.129
+    },
+    {
+     "name": "TRAPPIST-1 h",
+     "periodDays": 18.772866,
+     "aAU": 0.06189,
+     "radiusEarth": 0.755
+    }
+   ]
+  },
+  {
+   "id": "toi-178",
+   "name": "TOI-178",
+   "distanceLy": 204.5,
+   "star": {
+    "teff": 4316,
+    "radiusSun": 0.662
+   },
+   "planets": [
+    {
+     "name": "TOI-178 b",
+     "periodDays": 1.9145601,
+     "aAU": 0.02607,
+     "radiusEarth": 1.2
+    },
+    {
+     "name": "TOI-178 c",
+     "periodDays": 3.238486,
+     "aAU": 0.037,
+     "radiusEarth": 1.754
+    },
+    {
+     "name": "TOI-178 d",
+     "periodDays": 6.557569,
+     "aAU": 0.0592,
+     "radiusEarth": 2.695
+    },
+    {
+     "name": "TOI-178 e",
+     "periodDays": 9.96318,
+     "aAU": 0.0783,
+     "radiusEarth": 2.301
+    },
+    {
+     "name": "TOI-178 f",
+     "periodDays": 15.23335,
+     "aAU": 0.1039,
+     "radiusEarth": 2.417
+    },
+    {
+     "name": "TOI-178 g",
+     "periodDays": 20.71663,
+     "aAU": 0.1275,
+     "radiusEarth": 2.939
+    }
+   ]
+  },
+  {
+   "id": "55-cnc",
+   "name": "55 Cancri",
+   "distanceLy": 41,
+   "star": {
+    "teff": 5172,
+    "radiusSun": 0.943
+   },
+   "planets": [
+    {
+     "name": "55 Cnc e",
+     "periodDays": 0.7365474,
+     "aAU": 0.01544,
+     "radiusEarth": 1.875
+    },
+    {
+     "name": "55 Cnc b",
+     "periodDays": 14.651552,
+     "aAU": 0.118,
+     "radiusEarth": 13.9
+    },
+    {
+     "name": "55 Cnc c",
+     "periodDays": 44.3936,
+     "aAU": 0.247,
+     "radiusEarth": 8.51
+    },
+    {
+     "name": "55 Cnc f",
+     "periodDays": 260.58,
+     "aAU": 0.802,
+     "radiusEarth": 7.59
+    },
+    {
+     "name": "55 Cnc d",
+     "periodDays": 4799,
+     "aAU": 5.6,
+     "radiusEarth": 13
+    }
+   ]
+  },
+  {
+   "id": "inner-solar-system",
+   "name": "The inner Solar System",
+   "distanceLy": 0,
+   "star": {
+    "teff": 5772,
+    "radiusSun": 1
+   },
+   "planets": [
+    {
+     "name": "Mercury",
+     "periodDays": 87.969,
+     "aAU": 0.3870974210885172,
+     "radiusEarth": 0.3829383142363836
+    },
+    {
+     "name": "Venus",
+     "periodDays": 224.701,
+     "aAU": 0.723338547306782,
+     "radiusEarth": 0.9498979752001256
+    },
+    {
+     "name": "Earth",
+     "periodDays": 365.256,
+     "aAU": 1,
+     "radiusEarth": 1
+    },
+    {
+     "name": "Mars",
+     "periodDays": 686.98,
+     "aAU": 1.5237904250056817,
+     "radiusEarth": 0.5320200910375137
+    }
+   ]
+  }
+ ]
+}

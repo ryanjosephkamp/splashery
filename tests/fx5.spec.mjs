@@ -98,17 +98,11 @@ test("the real alarm clock's hand turns as one kit-built piece, and its name is 
   const rig = RIGS["alarm-clock"];
   const out = { parts: {}, glow: [0, 0, 0, 0], cues: [], fx: {}, addon: null };
   rig.drive(12.5, { ring: 0 }, out, { time: 12.5, data: null });
-  // The scanned hand is hidden and stays put; the add-on's hand ticks.
+  // The scanned hands are hidden and stay put; the add-on's hands turn
+  // (lane Fix8: hour, minute and second, from the device's clock; the
+  // angles are checked in tests/fx8.spec.mjs).
   expect(out.parts.second).toEqual({ angle: 0, visible: 0 });
-  expect(out.addon.parts.hand.angle).toBeCloseTo((13 / 60) * 2 * Math.PI, 2);
-  // The add-on is one hand: every splat of it is on the part "hand".
-  const { Kit } = await import("../src/kit.js");
-  const k = new Kit(1, { count: rig.addon.count, fit: false });
-  rig.addon.build(k);
-  const it = k.emit();
-  while (!it.next().done);
-  expect(k.parts.map((p) => p.name)).toEqual(["body", "hand"]);
-  for (let i = 0; i < k.buf.count; i++) expect(Math.round(k.buf.anim[i * 4]) & 15).toBe(1);
+  expect(Object.keys(out.addon.parts)).toEqual(["hour", "minute", "second"]);
 });
 
 test("a tap on the Klein bottle's glass sets off its effect", async ({ page }) => {

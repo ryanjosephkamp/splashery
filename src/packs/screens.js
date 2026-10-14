@@ -31,7 +31,7 @@ const hash = (i) => {
   return x - Math.floor(x);
 };
 
-// Baked light from above, front and right, with a sheen towards the viewer.
+// Baked light from above, front and right, with a sheen toward the viewer.
 const LIGHT = unit([0.4, 0.85, 0.55]);
 const VIEW = unit([0.3, 0.3, 0.9]);
 const HALF = unit(add(LIGHT, VIEW));
@@ -421,6 +421,9 @@ export const RECIPES = {
   screen: {
     // A screen keeps still and faces you (walk the view round it by hand).
     turntable: false,
+    // Hands-on Level 1 (lane Hands-on H3): picked up, tossed and set down whole, except
+    // while it shows your screen live.
+    handsLevel1: () => !live.on("screen"),
     tiltLock: true, // a drag only spins it left and right (lane Viewer)
     alive: true,
     // Its own splats are the set (sharp at every tier: lane Screens r2);
@@ -1196,7 +1199,7 @@ function buildCinema(k) {
       );
     }
   }
-  // Rows of seats in front, stepping up towards the back (house lights dim
+  // Rows of seats in front, stepping up toward the back (house lights dim
   // on channel 0 as the film starts: a dark band over the seat backs).
   const rows = [
     { z: 0.45, y: -0.72, n: 7 },

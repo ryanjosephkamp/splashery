@@ -6,7 +6,7 @@
 // setting. Every tile, wheel, key, rotor and drum is its own solid piece
 // (a token or a part). Loaded on demand.
 
-import { mix, shade, clamp } from "../kit.js";
+import { mix, shade, clamp, quatAxisAngle, quatMul } from "../kit.js";
 import { evenBox, evenCylinder, evenDisc, evenTube } from "./even.js";
 import { FONT } from "../font.js";
 import { compile } from "../equation.js";
@@ -33,7 +33,7 @@ const quatZ = (a) => [0, 0, Math.sin(a / 2), Math.cos(a / 2)];
 // ---- Materials -----------------------------------------------------------------------
 
 // A soft key light from above and the front, with a sheen for gloss, baked
-// into the colour (splats are unlit).
+// into the color (splats are unlit).
 const LIGHT = unit([0.35, 0.8, 0.55]);
 const HALF = unit(add(LIGHT, [0, 0, 1]));
 function lit(col, n, { amb = 0.62, dif = 0.45, spec = 0.25, pow = 28 } = {}) {
@@ -203,7 +203,7 @@ const BITS = Object.fromEntries(
 );
 const textWidth = (str) => [...str].length * 6 - 1;
 
-// A line of text facing +Z, centred on its origin, `px` the size of one
+// A line of text facing +Z, centered on its origin, `px` the size of one
 // font pixel. Its splats go only where the letters' ink is (one square per
 // font pixel, sampled evenly), so letters read solid at phone size.
 function inkShape(str, px) {
@@ -235,7 +235,7 @@ function inkShape(str, px) {
     },
   };
 }
-// Text centred on `at` (or left- or right-aligned), facing +Z unless `rot`.
+// Text centered on `at` (or left- or right-aligned), facing +Z unless `rot`.
 function text(k, str, at, px, color, { weight = 8, align = "center", ...rest } = {}) {
   if (!str.trim()) return;
   const W = textWidth(str) * px;
@@ -638,12 +638,69 @@ function buildTuring(k, o) {
   sevenSeg(k, [cx + cw / 2 - 0.13, ctop - 0.11, -0.18], 0.12, 41, "#b0301c");
 }
 
+// Lane Hands-on H5: the Turing machine's tape by hand. TM_HANDS.on is
+// whether ✋ is on (for a tap's flip); `slide` is how far the hand has the
+// tape along (in cells, the head's place as a run's pose has it).
+const TM_HANDS = { on: false };
+function tmHands(data, info, t, running) {
+  const m = data.m;
+  TM_HANDS.on = !!info?.hands?.on;
+  // A tap on a tile flips its bit.
+  const tap = info?.tap;
+  if (tap?.key === "flip" && tap.n !== m.flipN && TM_HANDS.on && !running) {
+    m.flipN = tap.n;
+    if (!data.prog.blank) {
+      data.tape = { ...data.tape, [tap.pick]: data.tape[tap.pick] ? 0 : 1 };
+      m.flipCue = true;
+    }
+  }
+  const dt = clamp(t - (m.ht ?? t), 0, 0.1);
+  m.ht = t;
+  if (running) {
+    m.slide = null;
+    return null;
+  }
+  const f = info?.hands?.finger;
+  if (f) {
+    // Where the finger's line meets the tape's plane (z = 0).
+    const k = Math.abs(f.dir[2]) > 1e-4 ? -f.origin[2] / f.dir[2] : 0;
+    const x = f.origin[0] + f.dir[0] * k;
+    if (m.x0 === undefined || m.x0 === null) {
+      m.x0 = x;
+      m.from = m.slide ?? 0;
+    }
+    m.slide = m.from - (x - m.x0) / TM.pitch;
+    m.snap = null;
+    return m.slide;
+  }
+  m.x0 = null;
+  if (m.slide === null || m.slide === undefined) return null;
+  // Let go: it settles on the nearest whole tile, then the tape is shifted
+  // so the head reads that cell.
+  const n = Math.round(m.slide);
+  m.slide += (n - m.slide) * (1 - Math.exp(-14 * dt));
+  if (Math.abs(m.slide - n) < 0.01) {
+    const tape = {};
+    for (const [cell, bit] of Object.entries(data.tape)) tape[Number(cell) - n] = bit;
+    data.tape = tape;
+    m.slide = null;
+    m.slideCue = true;
+    return 0;
+  }
+  return m.slide;
+}
+
 function driveTuring(t, c, out, info) {
   const data = info?.data;
   if (!data) return;
   const E = TM.E;
   const s = since(c.go, E);
   const m = data.m;
+  const slid = tmHands(data, info, t, s >= 0 || !!data.run);
+  if (m.flipCue || m.slideCue) {
+    out.cues.push({ voice: m.flipCue ? "clack" : "click", f: m.flipCue ? 520 : 2400, decay: 0.3, vol: 0.5 }); // prettier-ignore
+    m.flipCue = m.slideCue = false;
+  }
   // A new tap starts a run from the tape as it rests; a tap during a run
   // finishes the old one first.
   if (s >= 0 && (m.lastS === undefined || m.lastS < 0 || s < m.lastS)) {
@@ -655,6 +712,7 @@ function driveTuring(t, c, out, info) {
   if (s < 0 && data.run) tmCommit(data);
   m.lastS = s;
   const pose = tmPose(data, data.run ? s : -1);
+  if (slid !== null && slid !== undefined) pose.P = slid;
   // The tiles: each slot shows the cell that is in its stretch of the tape.
   out.tokens = [];
   for (let j = 0; j < TM.slots; j++) {
@@ -1041,11 +1099,82 @@ function deShowEq(eq) {
     .slice(0, 28);
 }
 
+// Lane Hands-on H5: where the crank turns (as built: x 0.98 + 0.1, one
+// pitch up), and the share of a turn of the engine a crank angle makes (the
+// inverse of the turn's own crank, TAU * ease((s − 0.05) / 3.65)).
+const DE_CRANK = [1.08, 0.02 + 0.13, 0];
+// (The crank's arm turns at this x, the middle of what a finger circles.)
+const DE_HUB = [1.16, 0.02 + 0.13, 0];
+function deTimeOf(q) {
+  let lo = 0;
+  let hi = 1;
+  for (let i = 0; i < 24; i++) {
+    const mid = (lo + hi) / 2;
+    if (ease(mid) < q) lo = mid;
+    else hi = mid;
+  }
+  return 0.05 + 3.65 * lo;
+}
+
+// The crank's turn by hand (radians, forward; null before any): the
+// finger's angle round the crank's hub as seen along the view, unwound, in
+// the crank's forward sense (it turns about −x).
+function deCrankHand(m, info) {
+  const f = info?.hands?.finger;
+  if (!f) {
+    m.lastA = null;
+    return m.crankAng ?? null;
+  }
+  const d = f.dir;
+  const t = d[0] * (DE_HUB[0] - f.origin[0]) + d[1] * (DE_HUB[1] - f.origin[1]) + d[2] * (DE_HUB[2] - f.origin[2]); // prettier-ignore
+  const r = [0, 1, 2].map((i) => f.origin[i] + d[i] * t - DE_HUB[i]);
+  const u = [-d[2], 0, d[0]]; // right on screen (d × up)
+  const v = [u[1] * d[2] - u[2] * d[1], u[2] * d[0] - u[0] * d[2], u[0] * d[1] - u[1] * d[0]]; // up
+  const ru = r[0] * u[0] + r[2] * u[2];
+  const rv = r[0] * v[0] + r[1] * v[1] + r[2] * v[2];
+  if (Math.hypot(ru, rv) < 0.03) return m.crankAng ?? null; // (too near the hub to say)
+  const a = Math.atan2(rv, ru);
+  m.crankAng ??= 0;
+  if (m.lastA !== null && m.lastA !== undefined) {
+    let da = a - m.lastA;
+    da -= TAU * Math.round(da / TAU);
+    // Counterclockwise as seen is the crank's turn about the view; about −x
+    // that is forward when the view looks along +x, else backward.
+    m.crankAng += da * Math.sign(-d[0] || 1) * -1;
+  }
+  m.lastA = a;
+  return m.crankAng;
+}
+
 function driveDifference(t, c, out, info) {
   const data = info?.data;
   if (!data) return;
   const m = data.m;
   const go = c.go ?? 0;
+  // Hands-on: the crank turned by hand drives a turn of its own (a ratchet:
+  // never back), unless a tap's turn is running.
+  const hv = deCrankHand(m, info);
+  if (hv !== null && hv !== undefined && !(data.turn && !data.turn.hand)) {
+    m.handBase ??= 0;
+    if (hv < m.handBase) m.handBase = hv;
+    const q = (hv - m.handBase) / TAU;
+    if (q > 1e-3 && !data.turn) {
+      data.turn = deTurn(data.st);
+      data.turn.hand = true;
+      m.cue = -1;
+    }
+    // (Sent home by ↺ or a tap before a turn was through: none.)
+    if (data.turn?.hand && q <= 1e-3) data.turn = null;
+    if (data.turn?.hand) {
+      if (q >= 1) {
+        data.st = data.turn.next;
+        data.turn = null;
+        m.handBase += TAU;
+      } else data.clock = deTimeOf(q);
+      // (Shown below as a tap's turn is, at that time.)
+      m.handS = data.turn ? data.clock : -1;
+    }
+  }
   // Each tap queues a turn; the engine turns them one after another. A tap
   // is a new tap number, or the pulse jumping back up.
   const n = info.tap?.n;
@@ -1061,7 +1190,8 @@ function driveDifference(t, c, out, info) {
     m.cue = -1;
   }
   let s = -1;
-  if (data.turn) {
+  if (data.turn?.hand) s = m.handS;
+  else if (data.turn) {
     data.clock += dt;
     s = data.clock;
     // The last frames of the tap: finish every queued turn.
@@ -1123,16 +1253,26 @@ function driveDifference(t, c, out, info) {
 
 // ---- The Enigma machine --------------------------------------------------------------
 
-// The Enigma I with rotors I, II and III (left to right), reflector B and a
-// plugboard: the historical wirings and stepping, including the middle
-// rotor's double step. Letters are 0..25.
+// The Enigma I: three of its five rotors in any order, reflector B or C,
+// ring settings, start positions and up to ten plugboard pairs (lane
+// Computing r2; it was rotors I, II and III, reflector B and AR GK OX, still
+// the default). The historical wirings and stepping, including the middle
+// rotor's double step. Letters are 0..25. Reflector A (the Enigma I's until
+// 1937) is here for the proof only (the 1930 manual's message, in
+// tests/cmp2-enigma.spec.mjs).
 const AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 const EN_ROTORS = {
   I: { wiring: "EKMFLGDQVZNTOWYHXUSPAIBRCJ", notch: "Q" },
   II: { wiring: "AJDKSIRUXBLHWTMCQGZNPYFVOE", notch: "E" },
   III: { wiring: "BDFHJLCPRTXVZNYEIWGAKMUSQO", notch: "V" },
+  IV: { wiring: "ESOVPZJAYQUIRHXLNFTGKDCMWB", notch: "J" },
+  V: { wiring: "VZBRGITYUPSDNHLXAWMJQOFECK", notch: "Z" },
 };
-const EN_REFLECTOR_B = "YRUHQSLDPXNGOKMIEBFZCWVJAT";
+const EN_REFLECTORS = {
+  A: "EJMZALYXVBWFCRQUONTSPIKHGD",
+  B: "YRUHQSLDPXNGOKMIEBFZCWVJAT",
+  C: "FVPJIAOYEDRZXWGCTKUQSBNMHL",
+};
 const EN_PLUGS = "AR GK OX";
 const EN_DEFAULT = "HELLO";
 const EN_MAX = 20;
@@ -1140,7 +1280,13 @@ const idx = (ch) => AZ.indexOf(ch);
 const mod26 = (n) => ((n % 26) + 26) % 26;
 
 // A machine: rotor names left to right, ring settings, plugboard pairs.
-function enigmaMachine({ rotors = ["I", "II", "III"], rings = [0, 0, 0], plugs = EN_PLUGS } = {}) {
+function enigmaMachine({
+  rotors = ["I", "II", "III"],
+  rings = [0, 0, 0],
+  plugs = EN_PLUGS,
+  reflector = "B",
+} = {}) {
+  // prettier-ignore
   const fwd = rotors.map((r) => [...EN_ROTORS[r].wiring].map(idx));
   const back = fwd.map((w) => {
     const b = [];
@@ -1148,7 +1294,7 @@ function enigmaMachine({ rotors = ["I", "II", "III"], rings = [0, 0, 0], plugs =
     return b;
   });
   const notch = rotors.map((r) => idx(EN_ROTORS[r].notch));
-  const refl = [...EN_REFLECTOR_B].map(idx);
+  const refl = [...EN_REFLECTORS[reflector]].map(idx);
   const plug = [...AZ].map((_, i) => i);
   for (const pair of String(plugs).toUpperCase().split(/\s+/).filter(Boolean)) {
     const a = idx(pair[0]);
@@ -1191,9 +1337,106 @@ function enigmaMachine({ rotors = ["I", "II", "III"], rings = [0, 0, 0], plugs =
 const enClean = (text) => String(text ?? "").toUpperCase().replace(/[^A-Z]/g, "").slice(0, EN_MAX); // prettier-ignore
 const EN_SHOWN = { label: "HELLO" };
 
+// Lane Computing r2: the setting, from the Toy tab. The rotors (three of I
+// to V; a rotor picked twice gives way to the first one not in use, as a
+// machine has one of each), the reflector, the ring settings and the start
+// positions (letters), and the plugboard: letters taken in pairs, each
+// letter in one pair at most, up to ten pairs (as the Enigma I had ten
+// cables). A preset sets them all to a published key.
+const EN_ROMAN = ["I", "II", "III", "IV", "V"];
+const EN_SIDES = [
+  ["L", "Left"],
+  ["M", "Middle"],
+  ["R", "Right"],
+];
+// The published keys (tests/cmp2-enigma.spec.mjs decodes the whole of both
+// parts): Operation Barbarossa, July 7, 1941, a German Army message in two
+// parts, as published from the original intercepts by Geoff Sullivan and
+// Frode Weierud (cryptocellar.org) and on Franklin Heath's Enigma sample
+// messages. Each part is at its message key; the pad takes its first 20
+// letters.
+const EN_PRESETS = {
+  barbarossa1: { rotors: ["II", "IV", "V"], reflector: "B", rings: "BUL", start: "BLA", plugs: "AV BS CG DL FU HZ IN KM OW RX", message: "EDPUDNRGYSZRCXNUYTPO", title: "Operation Barbarossa, 1941, part 1" }, // prettier-ignore
+  barbarossa2: { rotors: ["II", "IV", "V"], reflector: "B", rings: "BUL", start: "LSD", plugs: "AV BS CG DL FU HZ IN KM OW RX", message: "SFBWDNJUSEGQOBHKRTAR", title: "Operation Barbarossa, 1941, part 2" }, // prettier-ignore
+};
+const EN_STATE = { preset: "own" };
+function enPlugPairs(text) {
+  const letters = String(text ?? "")
+    .toUpperCase()
+    .replace(/[^A-Z]/g, "");
+  const used = new Set();
+  const pairs = [];
+  for (let i = 0; i + 1 < letters.length && pairs.length < 10; i += 2) {
+    const [a, b] = [letters[i], letters[i + 1]];
+    if (a === b || used.has(a) || used.has(b)) continue;
+    used.add(a);
+    used.add(b);
+    pairs.push(a + b);
+  }
+  return pairs;
+}
+function enSetting(o = {}) {
+  const pre = EN_PRESETS[o.preset];
+  if (pre) {
+    const n = (str) => [...str].map(idx);
+    return { rotors: pre.rotors.slice(), reflector: pre.reflector, rings: n(pre.rings), start: n(pre.start), plugs: pre.plugs.split(" "), preset: o.preset }; // prettier-ignore
+  }
+  const rotors = [];
+  for (const [side] of EN_SIDES) {
+    const r = o[`rotor${side}`] ?? ["I", "II", "III"][rotors.length];
+    rotors.push(EN_ROTORS[r] && !rotors.includes(r) ? r : null);
+  }
+  for (let i = 0; i < 3; i++) rotors[i] ||= EN_ROMAN.find((x) => !rotors.includes(x));
+  const letter = (v) => Math.max(0, idx(String(v ?? "A").toUpperCase()));
+  return {
+    rotors,
+    reflector: o.reflector === "C" ? "C" : "B",
+    rings: EN_SIDES.map(([side]) => letter(o[`ring${side}`])),
+    start: EN_SIDES.map(([side]) => letter(o[`start${side}`])),
+    plugs: enPlugPairs(o.plugs ?? EN_PLUGS),
+    preset: "own",
+  };
+}
+// The setting as a key sheet line: II IV V  UKW B  RINGS 02 21 12 …
+function enSettingLine(st) {
+  const two = (v) => String(v + 1).padStart(2, "0");
+  const pos = st.start.map((v) => AZ[v]).join("");
+  return `${st.rotors.join(" ")}   UKW ${st.reflector}   RINGS ${st.rings.map(two).join(" ")}   START ${pos}   PLUGS ${st.plugs.join(" ") || "NONE"}`; // prettier-ignore
+}
+// The Toy tab's setting: a preset, or every part of the key.
+const EN_LETTERS = [...AZ].map((ch, i) => ({ id: ch, label: `${ch} (${String(i + 1).padStart(2, "0")})` })); // prettier-ignore
+function enOptions() {
+  const own = !EN_PRESETS[EN_STATE.preset];
+  const hide = own ? {} : { hidden: true };
+  return [
+    { key: "message", label: "Your message", type: "text", default: EN_DEFAULT, hidden: true },
+    {
+      key: "preset",
+      label: "Setting",
+      type: "select",
+      default: "own",
+      choices: [
+        { id: "own", label: "Set it yourself" },
+        { id: "barbarossa1", label: "Barbarossa, 1941, part 1" },
+        { id: "barbarossa2", label: "Barbarossa, 1941, part 2" },
+      ],
+    },
+    ...EN_SIDES.map(([side, name], i) => ({ key: `rotor${side}`, label: `${name} rotor`, type: "select", default: ["I", "II", "III"][i], choices: EN_ROMAN.map((r) => ({ id: r, label: `Rotor ${r}` })), ...hide })), // prettier-ignore
+    { key: "reflector", label: "Reflector", type: "select", default: "B", choices: [{ id: "B", label: "B" }, { id: "C", label: "C" }], ...hide }, // prettier-ignore
+    ...EN_SIDES.map(([side, name]) => ({ key: `ring${side}`, label: `${name} ring`, type: "select", default: "A", choices: EN_LETTERS, ...hide })), // prettier-ignore
+    ...EN_SIDES.map(([side, name]) => ({ key: `start${side}`, label: `${name} start`, type: "select", default: "A", choices: [...AZ].map((ch) => ({ id: ch, label: ch })), ...hide })), // prettier-ignore
+    { key: "plugs", label: "Plugboard", type: "text", default: EN_PLUGS, placeholder: "AR GK OX", maxLength: 40, ...hide }, // prettier-ignore
+  ];
+}
+
 // Keyboard and lampboard rows (the Enigma's own layout).
 const EN_ROWS = ["QWERTZUIO", "ASDFGHJK", "PYXCVBNML"];
-const EN = { key: 0.155, E: 9, rotorR: 0.2, step: TAU / 26, index: (35 * Math.PI) / 180 };
+// Lane Computing r2 (the owner's "I still can't make out what's actually
+// written on the wheels"): the rotors are 1.5 times as big as they were
+// (radius 0.3, was 0.2), with bold upright letters, so each ring letter is
+// big enough to read at phone size; the axle sits further back to clear
+// the lampboard.
+const EN = { key: 0.155, E: 9, rotorR: 0.3, step: TAU / 26, index: (35 * Math.PI) / 180 };
 function enKeyAt(ch, y, z0, dz) {
   for (let r = 0; r < 3; r++) {
     const i = EN_ROWS[r].indexOf(ch);
@@ -1204,32 +1447,43 @@ function enKeyAt(ch, y, z0, dz) {
 }
 const enKeyPos = (ch) => enKeyAt(ch, 0.035, 0.18, 0.15);
 const enLampPos = (ch) => enKeyAt(ch, 0.02, -0.4, 0.14);
-const EN_ROTOR_X = [-0.22, 0, 0.22];
-const EN_ROTOR_C = [0, 0.02, -0.72];
+const EN_ROTOR_X = [-0.3, 0, 0.3];
+// Each ring letter stands upright as it is read through the window (its
+// top toward the next letter round the ring): a quarter turn in its plane.
+const EN_UPRIGHT = quatAxisAngle([0, 0, 1], -Math.PI / 2);
+const EN_ROTOR_C = [0, 0.02, -0.8];
 
 // The timeline of a tap: each letter's key goes down (the rotors step as
 // it goes), the lamp lights, the key comes up; then the operator turns the
 // rotors back to the start.
-function enTimes(n, from = [0, 0, 0]) {
+function enTimes(n, from = [0, 0, 0], start = [0, 0, 0]) {
   const dt = Math.min(0.5, 6.4 / Math.max(1, n));
   // The rotors are turned back to the start first, if they are not there.
-  const t0 = from.some((p) => p) ? 0.6 : 0.2;
+  const t0 = from.some((p, j) => p !== start[j]) ? 0.6 : 0.2;
   const end = t0 + n * dt;
   return { dt, t0, end, back: end + 0.25, done: end + 1.05 };
 }
 
 function buildEnigma(k, o) {
-  const msg = enClean(o.message) || EN_DEFAULT;
+  const st = enSetting(o);
+  EN_STATE.preset = st.preset;
+  const pre = EN_PRESETS[st.preset];
+  // A preset puts its own coded message on the pad, unless one was typed.
+  const typed = enClean(o.message);
+  const msg = (pre && (!typed || typed === EN_DEFAULT) ? pre.message : typed) || EN_DEFAULT;
   EN_SHOWN.label = msg;
-  const mach = enigmaMachine();
-  const start = [0, 0, 0];
+  const mach = enigmaMachine({ rotors: st.rotors, rings: st.rings, plugs: st.plugs.join(" "), reflector: st.reflector }); // prettier-ignore
+  const start = st.start.slice();
   const enc = mach.type(msg, start);
   const coded = enc.map((e) => AZ[e.lamp]).join("");
   const dec = mach.type(coded, start);
   EN_KEYS.length = 0;
   k.data = { msg, coded, runs: [enc, dec], mach, m: {}, run: null, key: null, home: null };
   k.data.pad = { plain: msg, coded: "", dec: "", typed: false };
-  k.data.rest = [0, 0, 0];
+  k.data.rest = start.slice();
+  k.data.start = start;
+  k.data.setting = st;
+  k.data.line = enSettingLine(st);
   k.data.view = [msg, "", ""];
   // The box: a wooden case with a dark crackle-finish top plate.
   const W = 1.62;
@@ -1282,10 +1536,10 @@ function buildEnigma(k, o) {
   // wheel, the reflector to their left and the entry wheel to their right.
   const [rcx, rcy, rcz] = EN_ROTOR_C;
   const R = EN.rotorR;
-  block(k, [0.95, 0.03, 0.5], [0, -0.1, rcz], darkSteel);
-  k.add(evenCylinder(0.02, 0.02, 0.9, true), { pos: [rcx, rcy, rcz], rot: [0, 0, 90], even: true, weight: 1.5, pattern: false, color: steel }); // prettier-ignore
-  for (const [x, w] of [[-0.4, 0.07], [0.37, 0.05]]) // prettier-ignore
-    k.add(evenCylinder(R * 0.9, R * 0.9, w, true), { pos: [x, rcy, rcz], rot: [0, 0, 90], even: true, weight: 1.2, pattern: false, color: darkSteel }); // prettier-ignore
+  block(k, [1.28, 0.03, 0.66], [0, -0.1, rcz], darkSteel);
+  k.add(evenCylinder(0.02, 0.02, 1.2, true), { pos: [rcx, rcy, rcz], rot: [0, 0, 90], even: true, weight: 1.5, pattern: false, color: steel }); // prettier-ignore
+  for (const [x, w] of [[-0.56, 0.095], [0.5, 0.068]]) // prettier-ignore
+    k.add(evenCylinder(R * 0.9, R * 0.9, w, true), { pos: [x, rcy, rcz], rot: [0, 0, 90], even: true, weight: 3, jitter: 0, pattern: false, color: darkSteel }); // prettier-ignore
   EN_ROTOR_X.forEach((x, i) => {
     const part = k.part(["rotorL", "rotorM", "rotorR"][i], {
       pivot: [x, rcy, rcz],
@@ -1293,17 +1547,20 @@ function buildEnigma(k, o) {
     });
     const ride = { part, pattern: false, even: true };
     // The letter ring: an ivory band with the 26 letters round it.
-    k.add(evenCylinder(R, R, 0.1, false), { pos: [x, rcy, rcz], rot: [0, 0, 90], weight: 1.3, flat: 0.25, ...ride, color: (c) => keep(lit("#e8e0c8", c.n, { amb: 0.7, dif: 0.35, spec: 0.3 })) }); // prettier-ignore
+    // Lane Computing r2 (the owner's "make wheels sharper"): the rings,
+    // their letters and the thumb wheels carry more, smaller splats.
+    k.add(evenCylinder(R, R, 0.15, false), { pos: [x, rcy, rcz], rot: [0, 0, 90], weight: 4, flat: 0.25, jitter: 0, ...ride, color: (c) => keep(lit("#e8e0c8", c.n, { amb: 0.7, dif: 0.35, spec: 0.3 })) }); // prettier-ignore
     for (let l = 0; l < 26; l++) {
       const phi = EN.index - l * EN.step;
       const rr = R + 0.004;
-      text(k, AZ[l], [x, rcy + rr * Math.cos(phi), rcz + rr * Math.sin(phi)], 0.0085, "#1c1a17", { weight: 16, size: 0.7, rot: [(phi * 180) / Math.PI - 90, 0, 0], ...ride }); // prettier-ignore
+      text(k, AZ[l], [x, rcy + rr * Math.cos(phi), rcz + rr * Math.sin(phi)], 0.0138, "#1c1a17", { weight: 30, size: 1, quat: quatMul(quatAxisAngle([1, 0, 0], phi - Math.PI / 2), EN_UPRIGHT), ...ride }); // prettier-ignore
     }
     // The ridged thumb wheel on its left side, and the drum's dark faces.
-    k.add(evenCylinder(R + 0.035, R + 0.035, 0.035, true), {
-      pos: [x - 0.07, rcy, rcz],
+    k.add(evenCylinder(R + 0.03, R + 0.03, 0.047, true), {
+      pos: [x - 0.105, rcy, rcz],
       rot: [0, 0, 90],
-      weight: 1.2,
+      weight: 4,
+      jitter: 0,
       flat: 0.25,
       ...ride,
       color: (c) => {
@@ -1312,12 +1569,16 @@ function buildEnigma(k, o) {
         return keep(lit(ridge ? "#3c3f44" : "#2a2c30", c.n, { amb: 0.7, dif: 0.35, spec: 0.35 }));
       },
     });
-    k.add(evenDisc(k, R, 0.02, 64), { pos: [x + 0.05, rcy, rcz], rot: [0, 0, -90], even: true, weight: 0.8, ...ride, color: (c) => keep(lit("#3a3d42", [1, 0, 0], { amb: 0.8 })) }); // prettier-ignore
+    k.add(evenDisc(k, R, 0.03, 64), { pos: [x + 0.075, rcy, rcz], rot: [0, 0, -90], even: true, weight: 2, ...ride, color: (c) => keep(lit("#3a3d42", [1, 0, 0], { amb: 0.8 })) }); // prettier-ignore
   });
+  // Lane Computing r2: each rotor's number on the plate in front of it, and
+  // the reflector's letter in front of it (left), as the setting has them.
+  EN_ROTOR_X.forEach((x, i) => text(k, st.rotors[i], [x, 0.004, rcz + R + 0.025], 0.0055, "#efe7cf", { weight: 16, size: 0.85, rot: [-90, 0, 0] })); // prettier-ignore
+  text(k, `UKW ${st.reflector}`, [-0.56, 0.004, rcz + R + 0.025], 0.0045, "#efe7cf", { weight: 16, size: 0.85, rot: [-90, 0, 0] }); // prettier-ignore
   // The index marks: a small brass pointer at each rotor's reading place.
   EN_ROTOR_X.forEach((x) => {
     const phi = EN.index;
-    const rr = R + 0.04;
+    const rr = R + 0.05;
     k.add(evenCylinder(0.012, 0.0005, 0.03, true), { pos: [x, rcy + rr * Math.cos(phi), rcz + rr * Math.sin(phi)], rot: [(phi * 180) / Math.PI + 180, 0, 0], even: true, weight: 3, pattern: false, color: brass }); // prettier-ignore
   });
   // The plugboard on the front: two sockets per letter, and a cable for
@@ -1334,11 +1595,11 @@ function buildEnigma(k, o) {
       k.add(evenDisc(k, 0.011, 0, 16), { pos: [p[0], p[1] + dy, pz + 0.002], rot: [90, 0, 0], even: true, weight: 3, pattern: false, color: () => keep("#0d0d0e") }); // prettier-ignore
     text(k, ch, [p[0] - 0.035, p[1], pz + 0.003], 0.006, "#e8e2d0", { weight: 16, size: 0.7 });
   }
-  const pairs = EN_PLUGS.split(" ");
-  pairs.forEach((pair, i) => {
+  // The setting's pairs (lane Computing r2): a cable for each.
+  st.plugs.forEach((pair, i) => {
     const a = plugAt(pair[0]);
     const b = plugAt(pair[1]);
-    const sag = 0.1 + 0.03 * i;
+    const sag = i < 3 ? 0.1 + 0.03 * i : 0.06 + 0.025 * (i - 3);
     const curve = (t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t - sag * Math.sin(Math.PI * t), pz + 0.03 + 0.04 * Math.sin(Math.PI * t)]; // prettier-ignore
     k.add(evenTube(k, curve, 0.011, { grid: 48 }), { even: true, weight: 2, flat: 0.35, pattern: false, color: (c) => keep(lit("#2b2b2e", c.n, { amb: 0.7, dif: 0.35, spec: 0.4 })) }); // prettier-ignore
     for (const p of [a, b])
@@ -1399,24 +1660,34 @@ function enSheet(w, h) {
 
 // The pad's picture: three ruled lines (the message, the coded letters and
 // the decoded ones) in five-letter groups, as operators wrote them.
-function enDrawPad(g, view) {
+// Lane Computing r2: the setting on a line above them, as on a key sheet.
+function enDrawPad(g, view, line = "") {
   const [W, H] = [EN_PAD.w, EN_PAD.h];
   const [plain, coded, dec] = view;
   g.fillStyle = "#f3ecd8";
   g.fillRect(0, 0, W, H);
   g.textBaseline = "top";
+  let ls = 19;
+  g.font = `bold ${ls}px "Courier New", Courier, monospace`;
+  const lw = g.measureText(line).width;
+  if (lw > W - 52) {
+    ls = Math.floor((ls * (W - 52)) / lw);
+    g.font = `bold ${ls}px "Courier New", Courier, monospace`;
+  }
+  g.fillStyle = "#5b3a1e";
+  g.fillText(line, 26, 10);
   const rows = [
     ["MESSAGE", plain, "#1f1c18"],
     ["CODED", coded, "#8a1d1d"],
     ["DECODED", dec, "#1d4f8a"],
   ];
   rows.forEach(([label, str, col], i) => {
-    const y = 12 + i * 104;
+    const y = 36 + i * 94;
     g.fillStyle = "#8a6d4c";
     g.font = "bold 22px sans-serif";
     g.fillText(label, 26, y);
     g.fillStyle = "#cdbb9c";
-    g.fillRect(22, y + 88, W - 44, 3);
+    g.fillRect(22, y + 82, W - 44, 3);
     const groups = (str.match(/.{1,5}/g) || []).join(" ");
     let size = 46;
     g.font = `bold ${size}px "Courier New", Courier, monospace`;
@@ -1426,11 +1697,12 @@ function enDrawPad(g, view) {
       g.font = `bold ${size}px "Courier New", Courier, monospace`;
     }
     g.fillStyle = col;
-    g.fillText(groups, 26, y + 34);
+    g.fillText(groups, 26, y + 30);
   });
   g.fillStyle = "#9c825f";
   g.font = "italic 21px sans-serif";
-  g.fillText("Tap the keys to type. Tap this pad for a clean sheet.", 26, H - 34);
+  g.fillText("Tap the keys to type. Tap this pad for a clean sheet.", 26, H - 40);
+  g.fillText("Tap the rotors to take the last letter back.", 26, H - 14);
 }
 
 // Keys tapped on the machine or typed on a keyboard, waiting their turn.
@@ -1459,6 +1731,10 @@ function driveEnigma(t, c, out, info) {
   const cl = since(c.clear, 0.3);
   if (cl >= 0 && (m.clS === undefined || m.clS < 0 || cl < m.clS)) enClear(data, t, out);
   m.clS = cl;
+  // Step back (lane Fix7): the last letter off the pad, the rotors back one.
+  const bk = since(c.back, 0.3);
+  if (bk >= 0 && (m.bkS === undefined || m.bkS < 0 || bk < m.bkS)) enStepBack(data, t, out);
+  m.bkS = bk;
   // A tap anywhere else: type the stored message, or decode what is on the
   // pad (the stored message's code, or the letters you typed).
   const s = since(c.go, EN.E);
@@ -1477,7 +1753,7 @@ function driveEnigma(t, c, out, info) {
   if (!data.key && EN_KEYS.length) enKeyStart(data, EN_KEYS.shift(), t, out);
   let pose = null;
   if (data.run) {
-    const T = enTimes(data.run.list.length, data.run.from);
+    const T = enTimes(data.run.list.length, data.run.from, data.start);
     if (s < 0 || s >= T.done) enCommit(data);
     else pose = enPose(data.run, T, s);
   }
@@ -1496,7 +1772,7 @@ function driveEnigma(t, c, out, info) {
   if (!pose && data.home) {
     const f = ease(band(t - data.home.t0, 0, 0.6));
     if (f >= 1) data.home = null;
-    else pose = { key: -1, down: 0, lamp: -1, rotors: enTurn(data.home.from, [0, 0, 0], f) };
+    else pose = { key: -1, down: 0, lamp: -1, rotors: enTurn(data.home.from, data.home.to || data.start, f) }; // prettier-ignore
   }
   // The pad's lines: a running message shows its letters as they light.
   const pad = data.pad;
@@ -1517,10 +1793,31 @@ function driveEnigma(t, c, out, info) {
   const g0 = enLampPos("A");
   const lampAt = pose && pose.lamp >= 0 ? enLampPos(AZ[pose.lamp]) : g0;
   out.tokens[26] = { offset: [lampAt[0] - g0[0], 0, lampAt[2] - g0[2]], visible: pose && pose.lamp >= 0 ? 1 : 0 }; // prettier-ignore
-  const pos = pose ? pose.rotors : data.rest;
+  let pos = pose ? pose.rotors : data.rest;
+  // Hands-on: rotors turned by hand show the turn; settled on a letter,
+  // it becomes where the rotors stand and where the next message starts.
+  const hv = [0, 1, 2].map((i) => info?.hands?.joint?.(`rotor${i}`));
+  if (hv.some((v) => v !== null && v !== undefined)) {
+    m.vc ||= [0, 0, 0];
+    const turn = [0, 0, 0];
+    hv.forEach((v, i) => {
+      if (v === null || v === undefined) return;
+      const d = v - m.vc[i];
+      const steps = Math.round(d / EN.step);
+      if (steps && Math.abs(d - steps * EN.step) < 0.01 && !data.run && !data.key) {
+        const w = (p) => (((p + steps) % 26) + 26) % 26;
+        data.start = data.start.map((p, j) => (j === i ? w(p) : p));
+        data.rest = data.rest.map((p, j) => (j === i ? w(p) : p));
+        m.vc[i] += steps * EN.step;
+        out.cues.push({ voice: "click", f: 3000, decay: 0.2, vol: 0.3 });
+      } else turn[i] = d / EN.step;
+    });
+    pos = (pose ? pose.rotors : data.rest).map((p, i) => p + turn[i]);
+  }
   ["rotorL", "rotorM", "rotorR"].forEach((nm, i) => (out.parts[nm] = { angle: pos[i] * EN.step }));
   // The lamp's glow and the turned rotors are sorted again where they are.
-  const key = pose ? `${pose.lamp}:${pos.map((v) => Math.round(v * 4)).join(",")}` : `rest:${data.rest}`; // prettier-ignore
+  // (At rest too, while a hand turns them: lane Hands-on H5.)
+  const key = `${pose ? pose.lamp : "rest"}:${pos.map((v) => Math.round(v * 4)).join(",")}`;
   out.resort = key !== m.sortKey;
   out.resortPose = out.resort;
   m.sortKey = key;
@@ -1528,7 +1825,7 @@ function driveEnigma(t, c, out, info) {
   // and a faint click as each lamp lights.
   if (data.run && s >= 0) {
     if (m.cuesFor !== data.run) {
-      const T = enTimes(data.run.list.length, data.run.from);
+      const T = enTimes(data.run.list.length, data.run.from, data.start);
       const list = [];
       if (T.t0 > 0.3) list.push([0.05, { voice: "ratchet", f: 1200, n: 4, rate: 10, vol: 0.4 }]);
       data.run.list.forEach((e, i) => {
@@ -1550,26 +1847,26 @@ function enNextRun(data) {
   const pad = data.pad;
   const from = data.rest.slice();
   if (pad.typed && pad.coded && !pad.dec) {
-    const list = data.mach.type(pad.coded, [0, 0, 0]);
-    return { mode: 1, list, plain: pad.plain, coded: pad.coded, typed: true, from };
+    const list = data.mach.type(pad.coded, data.start);
+    return { mode: 1, list, plain: pad.plain, coded: pad.coded, typed: true, from, start: data.start }; // prettier-ignore
   }
   if (!pad.typed && pad.coded === data.coded && !pad.dec)
-    return { mode: 1, list: data.runs[1], plain: data.msg, coded: data.coded, typed: false, from }; // prettier-ignore
-  return { mode: 0, list: data.runs[0], plain: data.msg, coded: data.coded, typed: false, from };
+    return { mode: 1, list: data.runs[1], plain: data.msg, coded: data.coded, typed: false, from, start: data.start }; // prettier-ignore
+  return { mode: 0, list: data.runs[0], plain: data.msg, coded: data.coded, typed: false, from, start: data.start }; // prettier-ignore
 }
 // Where the keys, lamp, rotors and pad are at time s of a tap.
 function enPose(run, T, s) {
   const n = run.list.length;
   if (s < T.t0) {
     // The rotors are first turned back to the start, if they are not there.
-    const rotors = enTurn(run.from, [0, 0, 0], ease(band(s, 0, T.t0 - 0.05)));
+    const rotors = enTurn(run.from, run.start, ease(band(s, 0, T.t0 - 0.05)));
     return { key: -1, down: 0, lamp: -1, rotors, count: 0 };
   }
   if (s < T.end) {
     const i = Math.max(0, Math.min(n - 1, Math.floor((s - T.t0) / T.dt)));
     const f = clamp01((s - T.t0) / T.dt - i);
     const e = run.list[i];
-    const prev = i > 0 ? run.list[i - 1].pos : [0, 0, 0];
+    const prev = i > 0 ? run.list[i - 1].pos : run.start;
     const stepF = ease(band(f, 0.0, 0.25));
     const rotors = [0, 1, 2].map((j) => prev[j] + mod26(e.pos[j] - prev[j]) * stepF);
     const lampOn = f > 0.22 && f < 0.85;
@@ -1577,14 +1874,14 @@ function enPose(run, T, s) {
   }
   // Turned back to the start: each rotor turns the short way home.
   const b = ease(band(s, T.back, T.done - 0.1));
-  return { key: -1, down: 0, lamp: -1, rotors: enTurn(run.list[n - 1].pos, [0, 0, 0], b), count: n }; // prettier-ignore
+  return { key: -1, down: 0, lamp: -1, rotors: enTurn(run.list[n - 1].pos, run.start, b), count: n }; // prettier-ignore
 }
 function enCommit(data) {
   const r = data.run;
   if (!r) return;
   const lit = r.list.map((e) => AZ[e.lamp]).join("");
   data.pad = r.mode === 0 ? { plain: r.plain, coded: lit, dec: "", typed: r.typed } : { plain: r.plain, coded: r.coded, dec: lit, typed: r.typed }; // prettier-ignore
-  data.rest = [0, 0, 0];
+  data.rest = data.start.slice();
   data.run = null;
 }
 // One key: the rotors step, then the lamp lights and the letter is written.
@@ -1594,9 +1891,12 @@ function enKeyStart(data, k, t, out) {
   let start = data.rest;
   if (!data.pad.typed || data.pad.dec || data.pad.plain.length >= EN_MAX) {
     data.pad = enBlank();
-    start = [0, 0, 0];
+    start = data.start;
   }
   const to = data.mach.step(start);
+  // Where the rotors stood before each letter, so a step back can return them.
+  data.hist = data.pad.plain ? data.hist || [] : [];
+  data.hist.push(start.slice());
   data.pad.plain += AZ[k];
   const dt = EN_KEYS.length ? 0.22 : EN_KEY_T;
   data.key = { k, lamp: data.mach.letter(k, to), from: data.rest.slice(), to, t0: t, dt, lit: false }; // prettier-ignore
@@ -1620,16 +1920,34 @@ function enFlushKeys(data) {
     enKeyDone(data);
   }
 }
+// Step back (lane Fix7): the real machine had no delete key. An operator who
+// pressed a wrong key turned the rotors back by hand, with the thumb wheels,
+// to where they stood before it, and crossed the letter out. Here the last
+// letter you typed leaves the pad (and its coded letter), and the rotors turn
+// back to where they were before it. A stored message or a decoded one has
+// nothing typed to take back.
+function enStepBack(data, t, out) {
+  enFlushKeys(data);
+  const pad = data.pad;
+  const hist = data.hist || [];
+  if (data.run || !pad.typed || pad.dec || !pad.plain || !hist.length) return;
+  const prev = hist.pop();
+  pad.plain = pad.plain.slice(0, -1);
+  pad.coded = pad.coded.slice(0, -1);
+  data.home = { from: data.rest.slice(), to: prev.slice(), t0: t };
+  data.rest = prev.slice();
+  out.cues.push({ voice: "ratchet", f: 1300, n: 1, vol: 0.4 });
+}
 function enClear(data, t, out) {
   EN_KEYS.length = 0;
   enKeyDone(data);
   data.run = null;
   data.pad = enBlank();
-  if (data.rest.some((p) => p)) {
+  if (data.rest.some((p, j) => p !== data.start[j])) {
     data.home = { from: data.rest.slice(), t0: t };
     out.cues.push({ voice: "ratchet", f: 1200, n: 4, rate: 10, vol: 0.4 });
   }
-  data.rest = [0, 0, 0];
+  data.rest = data.start.slice();
 }
 
 // ---- The Turing-Welchman Bombe --------------------------------------------------------
@@ -1731,7 +2049,7 @@ function buildBombe(k, o) {
     block(k, [0.03, 0.03, 0.3], [sx * (W / 2 + 0.035), 1.05, 0.12], steel, { weight: 2 }); // handle bar
     for (let v = 0; v < 8; v++) block(k, [0.006, 0.018, 0.4], [sx * (W / 2 + 0.003), 0.35 + v * 0.05, -0.1], () => keep("#15181b"), { weight: 1.5 }); // prettier-ignore
   }
-  // The drums (tokens 0..35): a coloured drum with a cream letter ring, a
+  // The drums (tokens 0..35): a colored drum with a cream letter ring, a
   // steel hub and a white index notch, turning about its own axle.
   for (let set = 0; set < BO.sets; set++) {
     const x = boX(set);
@@ -1863,8 +2181,26 @@ export const RECIPES = {
       },
       shown: () => TM_SHOWN.label,
     },
-    controls: [{ key: "go", label: "Run", type: "pulse", ease: TM.E }],
-    action: { key: "go", label: "Run the program" },
+    // (flip: lane Hands-on H5, a tile flipped by hand.)
+    controls: [
+      { key: "go", label: "Run", type: "pulse", ease: TM.E },
+      { key: "flip", label: "Flip", type: "pulse", ease: 0.3 },
+    ],
+    action: {
+      key: "go",
+      label: "Run the program",
+      quiet: ["flip"],
+      // Hands-on (lane Hands-on H5): a tap on a tile flips it, 0 to 1 and
+      // back (a tap elsewhere runs the program).
+      at: (p) => (TM_HANDS.on && p && Math.abs(p[1]) < TM.h / 2 + 0.03 && Math.abs(p[2]) < 0.08 && Math.abs(p[0]) < 1.45 ? { key: "flip", pick: Math.round(p[0] / TM.pitch) } : "go"), // prettier-ignore
+    },
+    // Hands-on (lane Hands-on H5): drag the tape along by hand; let go and it
+    // settles on a whole tile, so the head reads a new cell. Pressed
+    // anywhere else, the machine is picked up as before.
+    hands: {
+      touch: true,
+      follow: { center: [0, 0, 0], at: (p) => Math.abs(p[1]) < TM.h / 2 + 0.03 && Math.abs(p[2]) < 0.08 && Math.abs(p[0]) < 1.45 }, // prettier-ignore
+    },
     drive: driveTuring,
     build: buildTuring,
   },
@@ -1884,21 +2220,34 @@ export const RECIPES = {
     },
     controls: [{ key: "go", label: "Turn the crank", type: "pulse", ease: DE.E }],
     action: { key: "go", label: "Turn the crank" },
+    // Hands-on (lane Hands-on H5): turn the crank by circling round it with
+    // a finger (as you see it, from any side): each full turn of your hand
+    // is one turn of the engine, at your pace (the wheels click round,
+    // carries snap, the bell rings); its ratchet never lets it turn back.
+    // Pressed anywhere else, the engine is picked up as before.
+    hands: {
+      touch: true,
+      follow: { center: DE_CRANK, at: (p) => Math.hypot(p[0] - DE_CRANK[0] - 0.1, p[1] - DE_CRANK[1], p[2] - DE_CRANK[2]) < 0.34 }, // prettier-ignore
+    },
     drive: driveDifference,
     build: buildDifference,
   },
   "enigma-machine": {
     density: 2,
-    options: [
-      // Your message, as typed (set from the panel, not shown).
-      { key: "message", label: "Your message", type: "text", default: EN_DEFAULT, hidden: true },
-    ],
+    // The owner's "make wheels sharper" (lane Computing r2): the crisper
+    // splat kernel, so the rotors' letters, ridges and edges stay sharp.
+    kernel: "sharp",
+    // Your message, as typed (set from the panel, not shown), and the
+    // machine's setting (lane Computing r2).
+    get options() {
+      return enOptions();
+    },
     input: {
       title: "Type your own message",
       placeholder: "HELLO",
       button: "Put it on the pad",
       fileButton: false,
-      note: "Or tap the machine's keys (or type on a keyboard) to code a message letter by letter, then tap the machine off the keys to decode it. A message you put on the pad here, up to 20 letters (spaces and anything that isn't a letter are left out, as Enigma operators did), is typed with a tap off the keys; the next tap decodes it.",
+      note: "Or tap the machine's keys (or type on a keyboard) to code a message letter by letter, then tap the machine off the keys to decode it. A message you put on the pad here, up to 20 letters (spaces and anything that isn't a letter are left out, as Enigma operators did), is typed with a tap off the keys; the next tap decodes it. Set the machine above, as an operator did from the day's key sheet: three of its five rotors in any order, reflector B or C, the rings, the start letters and up to ten plugboard pairs. Or pick Barbarossa, 1941, and tap to decode a real message of the German Army.",
       read(text) {
         const msg = enClean(text);
         if (!msg) throw new Error("Type a message with some letters in it, like HELLO.");
@@ -1912,12 +2261,15 @@ export const RECIPES = {
       { key: "go", label: "Type it", type: "pulse", ease: EN.E, pausable: false },
       { key: "type", label: "Key", type: "pulse", ease: 0.2 },
       { key: "clear", label: "Clean sheet", type: "pulse", ease: 0.3 },
+      // Lane Fix7: step back one letter (a tap on the rotors' thumb wheels,
+      // the Backspace key, or this button).
+      { key: "back", label: "Step back", type: "pulse", ease: 0.3 },
     ],
     action: {
       key: "go",
       label: "Type the message",
       // A key makes its own clack (cues), and so does a clean sheet.
-      quiet: ["type", "clear"],
+      quiet: ["type", "clear", "back"],
       at(p) {
         // A key of the keyboard (its cap or letter, above the top plate).
         if (p[1] > 0.015 && p[2] > 0.08 && p[2] < 0.58) {
@@ -1933,6 +2285,10 @@ export const RECIPES = {
             return { key: "type", pick: best };
           }
         }
+        // The rotors' thumb wheels: step back a letter, as an operator
+        // turned the rotors back by hand to correct a mistake.
+        const [, rcy, rcz] = EN_ROTOR_C;
+        if (Math.abs(p[0]) < 0.46 && Math.abs(p[2] - rcz) < EN.rotorR + 0.04 && p[1] > rcy - 0.02) return { key: "back" }; // prettier-ignore
         // The operator's pad on the lid: a clean sheet.
         if (
           Math.abs(p[0]) < 0.66 &&
@@ -1948,6 +2304,7 @@ export const RECIPES = {
     // A keyboard's letters type on the machine too. Plain p and r stay the
     // site's shortcuts (poke, reset the view): hold Shift for those two.
     typeKey(ch) {
+      if (ch === "Backspace") return { key: "back" };
       if (!/^[a-z]$/i.test(ch) || ch === "p" || ch === "r") return null;
       const k = idx(ch.toUpperCase());
       EN_KEYS.push(k);
@@ -1956,8 +2313,28 @@ export const RECIPES = {
     screen: {
       width: EN_PAD.w,
       height: EN_PAD.h,
-      version: () => (EN_PAD.live?.view || []).join("|"),
-      draw: (g) => enDrawPad(g, EN_PAD.live?.view || ["", "", ""]),
+      version: () => `${EN_PAD.live?.line || ""}|${(EN_PAD.live?.view || []).join("|")}`,
+      draw: (g) => enDrawPad(g, EN_PAD.live?.view || ["", "", ""], EN_PAD.live?.line || ""),
+    },
+    // Hands-on (lane Hands-on H5): set the rotors by hand, as an operator
+    // did from the day's key sheet: drag up or down on a rotor's ring and it
+    // turns, clicking letter by letter; where you leave it is where the
+    // next message starts. (Each rotor has an unseen handle on a dial, a
+    // token no splat uses; the drive turns the rotor with it.)
+    hands: {
+      touch: true,
+      joints: () =>
+        EN_ROTOR_X.map((x, i) => ({
+          type: "dial",
+          token: 30 + i,
+          name: `rotor${i}`,
+          pivot: [x, EN_ROTOR_C[1], EN_ROTOR_C[2]],
+          axis: [1, 0, 0],
+          detents: 26,
+          drag: 2.5,
+          pos: [x, EN_ROTOR_C[1], EN_ROTOR_C[2] + EN.rotorR],
+          pick: [0.085, EN.rotorR, 0.12],
+        })),
     },
     drive: driveEnigma,
     build: buildEnigma,

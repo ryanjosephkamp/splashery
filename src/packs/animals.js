@@ -16,6 +16,7 @@ import {
   vec,
 } from "../kit.js";
 import { evenEllipsoid, evenTube } from "./even.js";
+import { ropeSkin } from "../physics/soft.js"; // lane Hands engine C
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -23,6 +24,22 @@ const LIGHT = vec.unit([0.3, 0.8, 0.55]);
 const VIEW = vec.unit([0.52, 0.27, 0.81]);
 const HALF = vec.unit(vec.add(LIGHT, VIEW));
 const keep = (c, size) => ({ c, keep: true, size });
+
+// The octopus's arms (lane Hands engine C): each a rope of six nodes along
+// its curl, the root riding the body. The arm's splats follow the nodes
+// (skin), so the drive sways them by moving the nodes, and in Hands-on they
+// trail behind the body and curl back to their shape.
+const OCTO_GROUND = -0.45;
+const OCTO_PIVOT = [0, 0.2, 0];
+const OCTO_ARMS = Array.from({ length: 8 }, (_, i) => {
+  const a = (i / 8) * TAU + TAU / 16;
+  const d = [Math.sin(a), 0, Math.cos(a)];
+  const P = (r, y) => [d[0] * r, y, d[2] * r];
+  const g = OCTO_GROUND;
+  const curl = spline([P(0.1, 0.0), P(0.34, g + 0.12), P(0.62, g + 0.04), P(0.86, g + 0.08), P(1.0, g + 0.26), P(0.94, g + 0.4), P(0.84, g + 0.34)]); // prettier-ignore
+  const nodes = [0, 0.2, 0.4, 0.6, 0.8, 1].map((t) => curl(t));
+  return { d, curl, nodes, tokens: nodes.map((_, j) => i * 6 + j), pivot: P(0.1, 0), axis: [d[2], 0, -d[0]] }; // prettier-ignore
+});
 const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const fract = (x) => x - Math.floor(x);
@@ -34,7 +51,51 @@ const easeInOut = (x) => {
   return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
 };
 
-// Fake light: brighter towards the light, with an optional wet gloss.
+// Lane Hands-on H5: a touch's own clock for a drive. While the finger is on
+// the toy (info.hands.pressed) it runs from 0 up to `hold` and waits there;
+// let go, it runs on to `end` and stops (null: untouched). A new touch
+// while it runs starts again at `again(s)` (where the effect stands now).
+const TOUCH = new WeakMap();
+function touchClock(c, t, pressed, hold, end, again = () => 0) {
+  const m = TOUCH.get(c) || { s: null, t: t, down: false };
+  TOUCH.set(c, m);
+  const dt = clamp(t - m.t, 0, 0.1);
+  m.t = t;
+  m.was = m.s;
+  m.started = pressed && !m.down;
+  if (pressed && !m.down) {
+    m.s = m.s === null ? 0 : again(m.s);
+    m.was = m.s - 1e-6; // (a new touch passes where it starts)
+  }
+  m.down = !!pressed;
+  if (m.s === null) return null;
+  m.s = pressed ? Math.min(hold, m.s + dt) : m.s + dt;
+  if (m.s >= end) m.s = null;
+  return m.s;
+}
+// Whether that clock passed `a` this frame, or (a: "start") a new touch
+// began (to start a sound there).
+function touchPassed(c, a) {
+  const m = TOUCH.get(c);
+  if (!m) return false;
+  if (a === "start") return !!m.started;
+  return m.s !== null && m.was !== null && m.was < a && m.s >= a;
+}
+
+// Lane Hands-on H5: an angle eased toward a goal, per toy and key (the
+// owl's head turning to the finger).
+const EASED = new WeakMap();
+function easeTo(c, key, t, goal, rate) {
+  const m = EASED.get(c) || {};
+  EASED.set(c, m);
+  const e = m[key] || (m[key] = { v: goal, t });
+  const dt = clamp(t - e.t, 0, 0.1);
+  e.t = t;
+  e.v += (goal - e.v) * (1 - Math.exp(-rate * dt));
+  return e.v;
+}
+
+// Fake light: brighter toward the light, with an optional wet gloss.
 function lit(c, col, k = 0.3, gloss = 0) {
   const d = dot(c.n, LIGHT);
   let out = shade(col, 1 + k * (0.9 * d - 0.15));
@@ -89,7 +150,7 @@ const rod = (k, a, b, r, opts) =>
 
 // ---- Pufferfish geometry (shared by build and drive) -------------------------------
 // The rest pose is the fish puffed up: a ball made of twelve overlapping
-// patches. Deflating pulls each patch in towards a slim fish shape.
+// patches. Deflating pulls each patch in toward a slim fish shape.
 const PUFF = (() => {
   const P = (1 + Math.sqrt(5)) / 2;
   const raw = [];
@@ -136,7 +197,7 @@ const NAUT = (() => {
   const b = Math.log(3) / TAU;
   const tMax = (5 * Math.PI) / 4 + 2 * TAU;
   const r = (t) => Math.exp(b * (t - tMax));
-  // Cross-section at angle t: centre radius, radial and lateral half-widths.
+  // Cross-section at angle t: center radius, radial and lateral half-widths.
   const sec = (t) => {
     const ro = r(t);
     const ri = 0.3 * ro;
@@ -179,8 +240,130 @@ const FROG = (() => {
   };
 })();
 
+// ---- Butterfly ---------------------------------------------------------------------------
+// The wing beat's phase, run on at a rate that may change (lane Hands-on H5:
+// faster in the hand) without jumping. At the toy's own steady rate it is
+// the same beat as before.
+const BEAT = new WeakMap();
+function butterflyPhase(c, t, rate) {
+  const m = BEAT.get(c);
+  if (!m || Math.abs(t - m.t) > 0.5) {
+    BEAT.set(c, { t, ph: t * rate });
+    return t * rate;
+  }
+  m.ph += (t - m.t) * rate;
+  m.t = t;
+  return m.ph;
+}
+
+// ---- Owl ---------------------------------------------------------------------------------
+// Where the owl's eyes look from (its head turns about [0, 0.3, 0]).
+const OWL_HEAD = [0, 0.52, 0.2];
+
+// Lane Hands-on H5: the frog's fly on the finger. While a finger is down,
+// the fly hovers at it (kept in front of the frog, within reach) and the
+// frog turns to face it with the side its tongue shoots to; let go, the
+// catch runs from there (s: its clock, as the tap's), then the frog turns
+// back.
+const FROG_HANDS = new WeakMap();
+const FROG_AIM = Math.atan2(FROG.catch[0], FROG.catch[2]);
+function frogHands(c, t, info) {
+  const m = FROG_HANDS.get(c) || { t, yaw: 0, goal: 0, fly: null, from: null, s: null };
+  FROG_HANDS.set(c, m);
+  const dt = clamp(t - m.t, 0, 0.1);
+  m.t = t;
+  const f = info?.hands?.finger;
+  let caught = false;
+  if (f && info.hands.point) {
+    // Under the finger and in front of the frog: from where the finger
+    // points, out along its line toward the viewer until clear of the frog
+    // (never round the back of it, where the frog would hide it).
+    let p = vec.sub(info.hands.point, vec.mul(f.dir, 0.25));
+    for (let i = 0; i < 40 && Math.hypot(p[0], p[2]) < 0.75 && p[1] < 0.75; i++) p = vec.sub(p, vec.mul(f.dir, 0.05)); // prettier-ignore
+    const r = Math.hypot(p[0], p[2]);
+    const want = clamp(r, 0.55, 1.05);
+    const dir = r > 1e-6 ? [p[0] / r, 0, p[2] / r] : [0, 0, 1];
+    m.fly = [dir[0] * want, clamp(p[1], 0.05, 0.75), dir[2] * want];
+    // (Turned at most about 35 degrees: the splats are sorted for the frog
+    // as it sits, and a bigger turn would show it speckled.)
+    m.goal = clamp(Math.atan2(dir[0], dir[2]) - FROG_AIM, -0.6, 0.6);
+    m.s = null;
+  } else if (m.fly) {
+    // Let go: it is caught from where it hovers (in the frog's frame).
+    m.from = quatRotate(quatAxisAngle([0, 1, 0], -m.goal), m.fly);
+    m.fly = null;
+    m.s = 0;
+    caught = true;
+  }
+  if (m.s !== null) {
+    m.s += dt;
+    if (m.s >= FROG.secs) {
+      m.s = null;
+      m.from = null;
+      m.goal = 0;
+    }
+  } else if (!m.fly) m.goal = 0;
+  m.yaw += (m.goal - m.yaw) * (1 - Math.exp(-(m.fly ? 7 : m.s !== null ? 10 : 2.5) * dt));
+  return { yaw: Math.abs(m.yaw) > 1e-4 ? m.yaw : 0, fly: m.fly, from: m.from, s: m.s, caught };
+}
+
+// Lane Hands-on H5: the fly's splats sorted again where it now is, each
+// time it has moved a little (an eighth of a toy radius).
+function frogResort(c, at, out) {
+  const m = FROG_HANDS.get(c);
+  if (!m) return;
+  const key = at.map((v) => Math.round(v * 8)).join(",");
+  if (key !== m.sortKey) out.resortPose = true;
+  m.sortKey = key;
+}
+
+// The sounds of a Hands-on catch, poke or hide (as the toys' own taps',
+// src/toy-sounds.js, less the fly's buzz in).
+const FROG_CATCH_SOUND = [
+  { voice: "whoosh", at: 0.98, f: 1400, to: 2, decay: 0.25, vol: 0.6 },
+  { voice: "pop", at: 1.56, f: 500, vol: 0.6 },
+  { voice: "gloop", at: 1.82, f: 140, vol: 0.7 },
+  { voice: "sample", file: "frog-croak.mp3", at: 2.55, vol: 1.4, fallback: { voice: "croak", f: 280, n: 2, rate: 30 } }, // prettier-ignore
+];
+const PUFF_SOUND = [
+  { voice: "whoosh", f: 200, to: 2.5, decay: 0.6 },
+  { voice: "engine", at: 0.5, f: 30, to: 1.3, bright: 0.2, decay: 0.5, vol: 0.6 },
+];
+const SNAIL_SOUND = {
+  in: [
+    { voice: "squish", pitch: 0.9, bright: 0.3, decay: 1.5 },
+    { voice: "stretch", at: 0.1, f: 900, rate: 35, to: 0.8, decay: 1.4, vol: 0.5 },
+  ],
+  out: [
+    { voice: "squish", pitch: 1.1, bright: 0.3, decay: 2.5 },
+    { voice: "stretch", at: 0.2, f: 800, rate: 30, to: 0.8, decay: 1.8, vol: 0.45 },
+  ],
+};
+
 // ---- School of fish ------------------------------------------------------------------
 const FISH_SECS = 5.0;
+
+// ---- Jellyfish (lane Hands-on H5) -------------------------------------------------------
+// The tentacles hang in six groups of three from the rim, and the four oral
+// arms from the middle. Each group (and each pair of arms) moves by a rope
+// of nodes, its splats following them (skin): the drive sways them by
+// moving the nodes, and in Hands-on they trail behind the dragged bell
+// like chains and sway back.
+const JELLY_RIM = { y: 0.3, r: 0.7 };
+const JELLY_TENTACLES = Array.from({ length: 6 }, (_, g) => {
+  const a0 = (g / 6) * TAU;
+  const { y, r } = JELLY_RIM;
+  const nodes = [0, 0.2, 0.4, 0.6, 0.8, 1].map((f) => {
+    const rr = r * 0.93 - 0.08 * f;
+    return [Math.sin(a0) * rr, y + 0.02 - f * 1.32, Math.cos(a0) * rr];
+  });
+  return { a0, nodes, tokens: nodes.map((_, j) => g * 6 + j), pivot: [Math.sin(a0) * r * 0.95, y, Math.cos(a0) * r * 0.95], axis: [Math.cos(a0), 0, -Math.sin(a0)] }; // prettier-ignore
+});
+const JELLY_ARMS = [0, 1].map((g) => {
+  const y = JELLY_RIM.y + 0.08;
+  const nodes = [0, 0.25, 0.5, 0.75, 1].map((f) => [0, y - f * 1.05, 0]);
+  return { nodes, tokens: nodes.map((_, j) => 36 + g * 5 + j), pivot: [0, JELLY_RIM.y + 0.05, 0], axis: g ? [1, 0, 0] : [0, 0, 1] }; // prettier-ignore
+});
 
 // ---- Jellyfish palettes --------------------------------------------------------------
 const JELLY = {
@@ -222,7 +405,7 @@ export const RECIPES = {
     options: [
       {
         key: "kind",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "moon",
         choices: [
@@ -234,6 +417,43 @@ export const RECIPES = {
     ],
     controls: [{ key: "pulse", label: "Swim", type: "pulse", ease: 3.2 }],
     action: { key: "pulse", label: "Swim" },
+    // Hands-on (lane Hands-on H5): drag the bell through the water and the
+    // tentacles and oral arms trail behind it like chains, then sway back;
+    // let go and it hovers where it is. Pull a tentacle and it follows.
+    hands: {
+      floor: -1.2,
+      area: 1.5,
+      air: { hover: 0, spring: 0.25, drag: 2.2, floor: 0, upright: 4 },
+      pieces: () => [
+        {
+          part: "bell",
+          pos: [0, 0, 0],
+          pivot: [0, 0, 0],
+          solid: { type: "ellipsoid", r: [0.7, 0.5, 0.7] },
+          // Its outside: the rim and the top of the bell.
+          points: [
+            ...Array.from({ length: 8 }, (_, i) => {
+              const a = (i / 8) * TAU;
+              return [Math.sin(a) * 0.7, 0.28, Math.cos(a) * 0.7];
+            }),
+            [0, 0.96, 0],
+            [0.5, 0.7, 0],
+            [-0.5, 0.7, 0],
+            [0, 0.7, 0.5],
+            [0, 0.7, -0.5],
+          ],
+          radius: 0.04,
+          pick: [0.78, 1, 0.78],
+          mass: 0.4,
+          friction: 0.6,
+          restitution: 0.1,
+        },
+      ],
+      ropes: () => [
+        ...JELLY_TENTACLES.map((g) => ({ points: g.nodes, attach: { piece: 0, nodes: [0] }, keep: 2.2, bend: 0.12, drag: 2.4, weight: 0.25, radius: 0.03, tokens: g.tokens })), // prettier-ignore
+        ...JELLY_ARMS.map((g) => ({ points: g.nodes, attach: { piece: 0, nodes: [0] }, keep: 3, bend: 0.3, drag: 2.6, weight: 0.2, radius: 0.04, tokens: g.tokens })), // prettier-ignore
+      ],
+    },
     drive(t, c, out) {
       // One strong stroke: the bell squeezes tall and narrow and jets the
       // jelly upwards, the tentacles stream behind it, glowing, and it
@@ -247,18 +467,26 @@ export const RECIPES = {
       const trail = on ? easeInOut(band(e, 0.05, 0.4)) * (1 - easeInOut(band(e, 0.9, 2.6))) : 0;
       out.body = { offset: [0, 0.3 * rise, 0], squash: -0.2 * squeeze + 0.07 * relax };
       out.amount = 1 + 1.6 * env;
-      for (let i = 0; i < 6; i++)
-        out.parts[`t${i}`] = {
-          angle: 0.1 * (1 - trail) * Math.sin(t * 1.3 + i * 1.7) + 0.32 * trail,
-          visible: 1 + 0.9 * env,
-        };
-      out.parts.armsA = { angle: 0.07 * Math.sin(t * 1.1) };
-      out.parts.armsB = { angle: 0.07 * Math.sin(t * 1.1 + 2) };
+      // Each group of tentacles turns about its place on the rim, and the
+      // arms about the middle, by their ropes' nodes (JELLY_TENTACLES).
+      const tokens = [];
+      const swing = (g, angle, visible) => {
+        const q = quatAxisAngle(g.axis, angle);
+        g.nodes.forEach((n, j) => {
+          const at = vec.add(g.pivot, quatRotate(q, vec.sub(n, g.pivot)));
+          tokens[g.tokens[j]] = { base: n, offset: vec.sub(at, n), visible };
+        });
+      };
+      JELLY_TENTACLES.forEach((g, i) => swing(g, 0.1 * (1 - trail) * Math.sin(t * 1.3 + i * 1.7) + 0.32 * trail, 1 + 0.9 * env)); // prettier-ignore
+      JELLY_ARMS.forEach((g, i) => swing(g, 0.07 * Math.sin(t * 1.1 + 2 * (1 - i)), 1));
+      out.tokens = tokens;
     },
     build(k, o) {
       const pal = JELLY[o.kind];
-      const rimY = 0.3;
-      const rimR = 0.7;
+      const rimY = JELLY_RIM.y;
+      const rimR = JELLY_RIM.r;
+      // The bell and its rim, one solid piece in Hands-on.
+      const bell = k.part("bell", { pivot: [0, 0, 0] });
       const bellProf = [
         [rimR - 0.04, rimY - 0.02],
         [rimR + 0.02, rimY + 0.08],
@@ -281,6 +509,7 @@ export const RECIPES = {
       };
       k.add(k.lathe(bellProf, { grid: 72 }), {
         ...pulse,
+        part: bell,
         flat: 0.2,
         opacity: 0.6,
         color: (c) => {
@@ -295,7 +524,7 @@ export const RECIPES = {
           return lit(c, col, 0.25, 0.5);
         },
       });
-      // The underside of the bell, a little deeper in colour.
+      // The underside of the bell, a little deeper in color.
       k.add(
         k.lathe(
           bellProf.map(([r, y]) => [r * 0.9, y - 0.05]),
@@ -303,6 +532,7 @@ export const RECIPES = {
         ),
         {
           ...pulse,
+          part: bell,
           flat: 0.25,
           opacity: 0.5,
           color: (c) => mix(pal.rim, pal.bell, 0.4 * band(c.p[1], rimY, 0.9)),
@@ -311,6 +541,7 @@ export const RECIPES = {
       // A glowing rim with little sense organs.
       k.add(k.torus(rimR, 0.026), {
         ...pulse,
+        part: bell,
         pos: [0, rimY + 0.01, 0],
         weight: 2.5,
         pattern: false,
@@ -327,13 +558,14 @@ export const RECIPES = {
           p: [Math.sin(a) * r, rimY + (rand() - 0.5) * 0.04, Math.cos(a) * r],
           color: pal.glow,
           opacity: 1,
+          part: bell,
           kind: "twinkle",
           params: [0.35, rand() * TAU],
         };
       });
-      // Oral arms: four frilly ribbons from the middle.
-      const armsA = k.part("armsA", { pivot: [0, rimY + 0.05, 0], axis: [1, 0, 0] });
-      const armsB = k.part("armsB", { pivot: [0, rimY + 0.05, 0], axis: [0, 0, 1] });
+      // Oral arms: four frilly ribbons from the middle, in two pairs that
+      // follow their ropes (JELLY_ARMS).
+      const armSkin = JELLY_ARMS.map((g) => ropeSkin(g.nodes, g.tokens));
       for (let i = 0; i < 4; i++) {
         const a = (i / 4) * TAU + TAU / 8;
         const out = [Math.sin(a), 0, Math.cos(a)];
@@ -350,10 +582,9 @@ export const RECIPES = {
           },
           { grid: 48 },
         );
+        const sk = armSkin[i % 2];
         k.add(arm, {
-          part: i % 2 ? armsA : armsB,
-          kind: "breathe",
-          params: [0.03, 0],
+          skin: (c) => sk(c.p),
           flat: 0.25,
           opacity: 0.8,
           color: (c) => {
@@ -362,11 +593,11 @@ export const RECIPES = {
           },
         });
       }
-      // Trailing tentacles in six groups that sway from the rim.
+      // Trailing tentacles in six groups that sway from the rim, each
+      // group following its rope (JELLY_TENTACLES).
       for (let g = 0; g < 6; g++) {
         const a0 = (g / 6) * TAU;
-        const piv = [Math.sin(a0) * rimR * 0.95, rimY, Math.cos(a0) * rimR * 0.95];
-        const part = k.part(`t${g}`, { pivot: piv, axis: [Math.cos(a0), 0, -Math.sin(a0)] });
+        const sk = ropeSkin(JELLY_TENTACLES[g].nodes, JELLY_TENTACLES[g].tokens);
         for (let j = 0; j < 3; j++) {
           const a = a0 + (j - 1) * 0.3 + 0.05 * k.rand();
           const r0 = rimR * 0.93;
@@ -382,9 +613,7 @@ export const RECIPES = {
           k.add(
             k.tube(spline(pts), (t) => 0.016 * (1 - 0.6 * t), { grid: 24, samples: 64 }),
             {
-              part,
-              kind: "twinkle",
-              params: [0.12, ph],
+              skin: (c) => sk(c.p),
               flat: 0.3,
               weight: 2.2,
               opacity: 0.85,
@@ -414,6 +643,9 @@ export const RECIPES = {
     ],
     controls: [{ key: "swirl", label: "Swirl", type: "pulse", ease: FISH_SECS }],
     action: { key: "swirl", label: "Bait ball" },
+    // Hands-on (lane Hands engine A): a drag through the school sends the fish
+    // near the finger darting away; each swims back to its place.
+    hands: { flee: { radius: 0.32, push: 1.2, back: 2, max: 0.45 } },
     drive(t, c, out, info) {
       // Each fish is its own piece, orbiting with its shell. A tap: the
       // school tightens into a spinning bait ball, then bursts outwards in
@@ -431,8 +663,21 @@ export const RECIPES = {
         const rho = 1 - 0.45 * ball + (0.18 + 0.24 * f.far) * burst;
         const face = -(Math.PI / 2) * (on ? band(s, 2.2 + d, 2.4 + d) * (1 - band(s, 2.9 + d, 3.7 + d)) : 0); // prettier-ignore
         const th = f.rate * t + spin;
-        const q = quatAxisAngle([0, 1, 0], th + face);
-        const P = quatRotate(quatAxisAngle([0, 1, 0], th), vec.mul(f.pos, rho));
+        let q = quatAxisAngle([0, 1, 0], th + face);
+        let P = quatRotate(quatAxisAngle([0, 1, 0], th), vec.mul(f.pos, rho));
+        // Hands-on: darting away from the finger, head first, then back.
+        const away = info.hands?.flee(i, P);
+        if (away) {
+          const v = away.vel;
+          const sp = Math.hypot(v[0], v[2]);
+          if (sp > 0.05) {
+            const head = quatRotate(q, f.fwd);
+            const want = Math.atan2(-v[2], v[0]) - Math.atan2(-head[2], head[0]);
+            const turn = Math.atan2(Math.sin(want), Math.cos(want)) * Math.min(1, sp / 0.6);
+            q = quatMul(quatAxisAngle([0, 1, 0], turn), q);
+          }
+          P = vec.add(P, away.offset);
+        }
         return { base: [0, 0, 0], quat: q, offset: vec.sub(P, quatRotate(q, f.pos)) };
       });
     },
@@ -472,7 +717,9 @@ export const RECIPES = {
           });
         }
       }
-      k.data = { fish: fish.map((f) => ({ pos: f.pos, rate: f.rate, jit: f.jit, far: f.far })) };
+      k.data = {
+        fish: fish.map((f) => ({ pos: f.pos, fwd: f.fwd, rate: f.rate, jit: f.jit, far: f.far })),
+      };
       const L = 0.25;
       const D = 0.085;
       const W = 0.044;
@@ -585,9 +832,17 @@ export const RECIPES = {
     ],
     controls: [{ key: "flap", label: "Flutter", type: "pulse", ease: 2 }],
     action: { key: "flap", label: "Flutter" },
-    drive(t, c, out) {
-      const amp = 0.35 + 0.55 * c.flap;
-      const a = 0.12 + amp * (0.5 - 0.5 * Math.cos(t * (5 + 5 * c.flap)));
+    // Hands-on (lane Hands-on H5): pick it up and it flutters hard on your
+    // finger; let go and it flutters off, rights itself and settles back to
+    // hovering at its height, near where you left it.
+    hands: { air: { hover: 0, spring: 0.5, drag: 2.6, floor: 1.5, upright: 0 }, upright: { k: 30, damping: 6 }, touch: true }, // prettier-ignore
+    drive(t, c, out, info) {
+      // Held or flying, it beats its wings harder and faster (on its own
+      // phase, so the beat never jumps).
+      const busy = easeTo(c, "busy", t, info?.hands?.held ? 1 : clamp((info?.hands?.speed ?? 0) * 0.8, 0, 1), 5); // prettier-ignore
+      const f = Math.max(c.flap, busy);
+      const amp = 0.35 + 0.55 * f;
+      const a = 0.12 + amp * (0.5 - 0.5 * Math.cos(butterflyPhase(c, t, 5 + 5 * f)));
       out.parts.right = { angle: a };
       out.parts.left = { angle: -a };
       out.amount = 0.6;
@@ -754,10 +1009,23 @@ export const RECIPES = {
       { key: "poke", label: "Poke", type: "pulse", ease: 4.5 },
     ],
     action: { key: "poke", label: "Poke" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H5): poke it (press on it, push it or pick it
+    // up) and it puffs up into a spiky ball; it stays puffed while you hold
+    // it, and once let go it waits, then slowly lets the water out.
+    hands: { touch: true },
+    drive(t, c, out, info) {
       // Poked, it gulps water and swells into a round, spiky ball with a
       // wobble, holds it, then lets it out with a sputter and slims down.
-      const p = c.poke;
+      // (A touch runs the same way on its own clock, held puffed up while
+      // the finger stays.)
+      const again = (s) => {
+        // Puffed this much now: start again where puffing up reaches it.
+        const e = s < 0.45 ? 1 - (1 - s / 0.45) ** 3 : 1 - easeInOut(band(s, 2.8, 4.3));
+        return 0.45 * (1 - Math.cbrt(1 - e));
+      };
+      const ts = touchClock(c, t, info?.hands?.pressed, 1, 4.5, again);
+      if (touchPassed(c, "start")) out.cues.push(PUFF_SOUND);
+      const p = ts === null ? c.poke : 1 - ts / 4.5;
       const s = (1 - p) * 4.5;
       const up = band(s, 0, 0.45);
       const down = easeInOut(band(s, 2.8, 4.3));
@@ -899,7 +1167,7 @@ export const RECIPES = {
     action: { key: "hide", label: "Hide in the shell" },
     drive(t, c, out) {
       // Startled, the nautilus jets back a little and pulls its tentacles
-      // in behind its hood (each shortens towards its base). It waits, peeks
+      // in behind its hood (each shortens toward its base). It waits, peeks
       // out halfway, then slowly reaches out again.
       const on = c.hide > 0;
       const s = progress(c.hide) * 4.4;
@@ -1059,7 +1327,7 @@ export const RECIPES = {
             ),
           );
         }
-        // Each tentacle shortens towards its base on channel 0 (its rings
+        // Each tentacle shortens toward its base on channel 0 (its rings
         // bunch up), keeping its thickness.
         const curve = spline(pts);
         const rad = (t) => 0.02 * (1 - 0.55 * t);
@@ -1088,14 +1356,38 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "fly", label: "Wings", type: "toggle", default: 0, ease: 0.8 }],
     action: { key: "fly", label: "Open the wings" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H5): lift each wing case open on its hinge
+    // at the middle of the back (its wing stays folded away), and let go
+    // the case swings shut by its own weight.
+    hands: {
+      touch: true,
+      floor: -0.46,
+      joints: () =>
+        [1, -1].map((sg) => ({
+          type: "hinge",
+          part: sg > 0 ? "shellR" : "shellL",
+          pivot: [0, 0.4, -0.08],
+          axis: [0, 0, sg],
+          min: 0,
+          max: 1.15,
+          gravity: 0.6,
+          damping: 4,
+          bounce: 0.15,
+          pos: [sg * 0.26, 0.3, -0.08],
+          com: [sg * 0.3, 0.22, -0.08],
+          pick: [0.26, 0.24, 0.5],
+          start: (c) => 1.15 * easeInOut(c.fly),
+        })),
+    },
+    drive(t, c, out, info) {
       const o = easeInOut(c.fly);
       out.parts.shellR = { angle: 1.15 * o };
       out.parts.shellL = { angle: -1.15 * o };
       const buzz = band(c.fly, 0.5, 1) * 0.3 * Math.sin(t * 24);
-      const vis = band(c.fly, 0.35, 0.8);
-      out.parts.wingR = { angle: buzz, visible: vis };
-      out.parts.wingL = { angle: -buzz, visible: vis };
+      out.parts.wingR = { angle: buzz, visible: band(o, 0.35, 0.8) };
+      out.parts.wingL = { angle: -buzz, visible: band(o, 0.35, 0.8) };
+      // (Lifted by hand, a case shows no wing: the hind wings stay folded
+      // away under it, and spread only to fly.)
     },
     build(k) {
       const A = 0.5;
@@ -1277,10 +1569,23 @@ export const RECIPES = {
     // with its eye) is a solid token; each vanishes once it is inside the
     // shell, and the tokens are sorted again as they move, so the shell
     // hides them.
+    // Hands-on (lane Hands-on H5): poke it and it pulls in quickly, as a
+    // real snail does; pick it up by the shell (it stays in while held), and
+    // a couple of seconds after it is let go it rolls back onto its foot and
+    // slowly comes back out (never while it lies on its side).
+    hands: { touch: true, upright: { k: 150, damping: 8, rest: 0.08 } },
     drive(t, c, out, info) {
       const S = info?.data?.snail;
       if (!S) return;
-      const h = clamp(c.hide, 0, 1);
+      // A touch's own clock: in over a second, out three seconds after
+      // the finger lets go, over three seconds.
+      // (Tipped over, it stays in until it is back on its foot.)
+      const tipped = (info?.up?.[1] ?? 1) < 0.9;
+      const ts = touchClock(c, t, info?.hands?.pressed || tipped, 1, 6.5, (s) => (s < 1 ? s : s < 3.5 ? 1 : 1 - (s - 3.5) / 3)); // prettier-ignore
+      const poked = ts === null ? 0 : ts < 1 ? easeOut(ts) : ts < 3.5 ? 1 : 1 - easeInOut((ts - 3.5) / 3); // prettier-ignore
+      if (touchPassed(c, "start") && c.hide < 0.5) out.cues.push(SNAIL_SOUND.in);
+      if (touchPassed(c, 3.5) && c.hide < 0.5) out.cues.push(SNAIL_SOUND.out);
+      const h = Math.max(clamp(c.hide, 0, 1), poked);
       const R = S.stalkLen * easeInOut(band(h, 0, 0.3));
       const Dh = S.headRun * easeInOut(band(h, 0.14, 0.78));
       const Df = S.frontRun * easeInOut(band(h, 0.3, 0.9));
@@ -1532,7 +1837,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "coral",
         choices: [
@@ -1545,6 +1850,46 @@ export const RECIPES = {
     ],
     controls: [{ key: "ink", label: "Ink", type: "pulse", ease: 4.5 }],
     action: { key: "ink", label: "Squirt ink" },
+    // Hands-on (lane Hands engine C): drag the body and the arms trail
+    // behind it and curl back; pull an arm and it stretches out and curls
+    // back when let go.
+    hands: {
+      floor: OCTO_GROUND,
+      area: 1.4,
+      pieces: () => [
+        {
+          part: "octo",
+          pos: OCTO_PIVOT,
+          pivot: OCTO_PIVOT,
+          solid: { type: "ellipsoid", r: [0.44, 0.55, 0.44] },
+          // It stands on its arms: where they touch the ground, and its outside.
+          points: [
+            ...OCTO_ARMS.map((arm) => vec.sub(arm.curl(0.4), OCTO_PIVOT)),
+            [0, 0.68, -0.1],
+            [0.44, 0.2, -0.1],
+            [-0.44, 0.2, -0.1],
+            [0, 0.2, 0.42],
+            [0, 0.2, -0.6],
+          ],
+          radius: 0.04,
+          pick: [0.45, 0.55, 0.45],
+          mass: 1,
+          friction: 0.8,
+          restitution: 0.1,
+        },
+      ],
+      ropes: () =>
+        OCTO_ARMS.map((arm) => ({
+          points: arm.nodes,
+          attach: { piece: 0, nodes: [0] },
+          keep: 7,
+          bend: 0.35,
+          drag: 2.5,
+          weight: 0,
+          radius: 0.04,
+          tokens: arm.tokens,
+        })),
+    },
     drive(t, c, out) {
       // A big cloud of ink billows out behind while the octopus jets up and
       // away with its arms streaming, then it drifts back as the ink thins.
@@ -1556,8 +1901,21 @@ export const RECIPES = {
       const trail = on ? easeInOut(band(e, 0.05, 0.35)) * (1 - easeInOut(band(e, 0.9, 2.6))) : 0;
       const off = [0.12 * jet, 0.3 * jet, 0.06 * jet];
       out.parts.octo = { offset: off };
-      for (let i = 0; i < 8; i++)
-        out.parts[`a${i}`] = { offset: off, angle: 0.55 * trail * (1 + 0.15 * Math.sin(i * 2.1)) };
+      // The arms stream back with the jet and sway gently, tips the most.
+      const tokens = [];
+      OCTO_ARMS.forEach((arm, i) => {
+        const turn = quatAxisAngle(arm.axis, 0.55 * trail * (1 + 0.15 * Math.sin(i * 2.1)));
+        const side = [arm.d[2], 0, -arm.d[0]];
+        arm.nodes.forEach((home, j) => {
+          const f = (j / 5) ** 2;
+          const sw = 0.05 * f * Math.sin(t * 1.3 + i * 0.9);
+          const up = 0.025 * f * Math.sin(t * 1.1 + i * 1.7);
+          const p = vec.add(arm.pivot, quatRotate(turn, vec.sub(home, arm.pivot)));
+          const at = vec.add(vec.add(p, off), [side[0] * sw, up, side[2] * sw]);
+          tokens[arm.tokens[j]] = { base: home, offset: vec.sub(at, home) };
+        });
+      });
+      out.tokens = tokens;
       out.grow = on ? 1 - (1 - band(e, 0.05, 1.3)) ** 2 : 0;
       out.parts.ink = {
         offset: [0, 0.18 * easeInOut(band(e, 0.4, 4.5)), 0],
@@ -1570,7 +1928,6 @@ export const RECIPES = {
         o.color
       ];
       const pale = mix(skin, "#fff4e8", 0.55);
-      const ground = -0.45;
       const skinCol = (c) => {
         const n = c.noise(c.p[0] * 16, c.p[1] * 16, c.p[2] * 16);
         let col = shade(skin, 0.92 + 0.12 * n);
@@ -1619,31 +1976,18 @@ export const RECIPES = {
           iris: "#141418",
         });
       }
-      // Eight arms that curl up at the tips and sway.
-      for (let i = 0; i < 8; i++) {
-        const a = (i / 8) * TAU + TAU / 16;
-        const d = [Math.sin(a), 0, Math.cos(a)];
-        const P = (r, y) => [d[0] * r, y, d[2] * r];
-        const curl = spline([
-          P(0.1, 0.0),
-          P(0.34, ground + 0.12),
-          P(0.62, ground + 0.04),
-          P(0.86, ground + 0.08),
-          P(1.0, ground + 0.26),
-          P(0.94, ground + 0.4),
-          P(0.84, ground + 0.34),
-        ]);
-        const arm = k.part(`a${i}`, { pivot: P(0.1, 0), axis: [d[2], 0, -d[0]] });
+      // Eight arms that curl up at the tips; they sway and stream by their
+      // nodes (OCTO_ARMS).
+      for (const { d, curl, nodes, tokens } of OCTO_ARMS) {
+        const sk = ropeSkin(nodes, tokens);
         k.add(
           evenTube(k, curl, (t) => 0.1 * (1 - t) + 0.018, { grid: 32, samples: 96, caps: true }),
           {
             even: true,
             opacity: 1,
             jitter: 0.015,
-            part: arm,
             flat: 0.2,
-            kind: "sway",
-            params: [0.25, ground + 0.1],
+            skin: (c) => sk(c.p),
             color: (c) => {
               const under = dot(c.n, [0, -1, 0]) + 0.3 * dot(c.n, [-d[0], 0, -d[2]]);
               if (under > 0.35 && fract(c.t * 20) < 0.55) return keep(lit(c, "#fde7df", 0.25));
@@ -1690,7 +2034,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "orange",
         choices: [
@@ -1703,6 +2047,32 @@ export const RECIPES = {
     ],
     controls: [{ key: "wave", label: "Wave", type: "pulse", ease: 2.5 }],
     action: { key: "wave", label: "Wave the arms" },
+    // Hands-on (lane Hands-on H5): lift an arm and it bends up from its
+    // root; let go and it curls back down slowly, as a starfish's arm does.
+    hands: {
+      floor: -0.07,
+      joints: () =>
+        Array.from({ length: 5 }, (_, i) => {
+          const a = (i / 5) * TAU;
+          const d = [Math.sin(a), 0, Math.cos(a)];
+          return {
+            type: "hinge",
+            part: `arm${i}`,
+            pivot: [d[0] * 0.3, 0, d[2] * 0.3],
+            axis: [-Math.cos(a), 0, Math.sin(a)],
+            min: -0.08,
+            max: 1.25,
+            gravity: false,
+            spring: 7,
+            rest: 0.05,
+            damping: 5.5,
+            bounce: 0.05,
+            pos: [d[0] * 0.62, 0.05, d[2] * 0.62],
+            pick: [0.26, 0.16, 0.26],
+            start: () => 0.05,
+          };
+        }),
+    },
     drive(t, c, out) {
       const u = 1 - c.wave;
       for (let i = 0; i < 5; i++) {
@@ -1787,7 +2157,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "purple",
         choices: [
@@ -1902,7 +2272,7 @@ export const RECIPES = {
     options: [
       {
         key: "color",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "green",
         choices: [
@@ -1915,13 +2285,37 @@ export const RECIPES = {
     ],
     controls: [{ key: "snap", label: "Catch", type: "pulse", ease: FROG.secs }],
     action: { key: "snap", label: "Catch a fly" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H5): press on the frog and a fly buzzes at
+    // your fingertip; drag it around and the frog turns to keep it in front
+    // of its mouth. Let go and the fly buzzes in, and the frog catches it.
+    hands: { follow: { center: [0, 0.2, 0.3] } },
+    drive(t, c, out, info) {
       // A fly buzzes in and hovers. The frog's jaw drops, its tongue shoots
       // out (channel 0), catches the fly and snaps back into the mouth; the
       // jaw shuts, the eyes sink to push the fly down (frogs swallow with
       // their eyes), and it croaks twice with its throat sac.
-      const on = c.snap > 0;
-      const s = progress(c.snap) * FROG.secs;
+      const H = frogHands(c, t, info);
+      if (H.caught) out.cues.push(FROG_CATCH_SOUND);
+      const on = c.snap > 0 || H.s !== null;
+      const s = H.s ?? progress(c.snap) * FROG.secs;
+      // (Hands-on turns the frog toward its fly.)
+      if (H.yaw) out.body = { quat: quatAxisAngle([0, 1, 0], H.yaw) };
+      if (H.fly) {
+        // The fly on the fingertip, in the turned frog's own frame.
+        const at = quatRotate(quatAxisAngle([0, 1, 0], -H.yaw), H.fly);
+        const buzz = [0.03 * Math.sin(t * 17), 0.025 * Math.sin(t * 23 + 1), 0.02 * Math.sin(t * 13)]; // prettier-ignore
+        out.parts.jaw = { angle: 0 };
+        out.morph = [0];
+        out.parts.fly = { offset: vec.sub(vec.add(at, buzz), FROG.flyBuilt), quat: quatAxisAngle([0, 1, 0], 0.4 * Math.sin(t * 9)), visible: 1 }; // prettier-ignore
+        out.parts.eyes = { offset: [0, 0, 0] };
+        out.parts.sac = { scale: 0.2, visible: 0 };
+        // The fly is built inside the head (where it is swallowed), so its
+        // splats sort behind the frog's face: sorted again where it hovers,
+        // so it draws in front of the frog.
+        frogResort(c, at, out);
+        return;
+      }
+      const from = H.from ? vec.sub(H.from, FROG.catch) : FROG.from;
       const jaw = on ? FROG.open * easeOut(band(s, 0.92, 1.02)) * (1 - easeInOut(band(s, 1.62, 1.78))) : 0; // prettier-ignore
       const tongue = on ? easeOut(band(s, 1.0, 1.1)) * (1 - easeInOut(band(s, 1.34, 1.6))) : 0;
       out.parts.jaw = { angle: jaw };
@@ -1932,7 +2326,7 @@ export const RECIPES = {
       if (s < 1.1) {
         const u = easeOut(band(s, 0, 0.95));
         const w = 1 - u;
-        fp = vec.add(vec.add(FROG.catch, vec.mul(FROG.from, w)), [
+        fp = vec.add(vec.add(FROG.catch, vec.mul(from, w)), [
           0.06 * Math.sin(s * 17) * (0.3 + w),
           0.05 * Math.sin(s * 23 + 1) * (0.3 + w),
           0.03 * Math.sin(s * 13),
@@ -1946,6 +2340,9 @@ export const RECIPES = {
         quat: quatAxisAngle([0, 1, 0], 0.4 * Math.sin(s * 9)),
         visible: on && s < 1.58 ? 1 : 0,
       };
+      // (Caught after a hand let it go: sorted as it flies in, then once
+      // more, in the mouth.)
+      if (H.s !== null && s < 1.7) frogResort(c, s < 1.58 ? fp : [0, 0, 0], out);
       out.parts.eyes = { offset: [0, -0.065 * (on ? band(s, 1.8, 2.0) * (1 - band(s, 2.2, 2.45)) : 0), 0] }; // prettier-ignore
       const croak = (a) => Math.sin(Math.PI * band(s, a, a + 0.36));
       const sac = on ? Math.max(croak(2.55), croak(3.05)) : 0;
@@ -2120,9 +2517,16 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "flap", label: "Flap", type: "pulse", ease: 2 }],
     action: { key: "flap", label: "Flap" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H5): push it and it wobbles on its round
+    // belly and rocks back upright, flippers out for balance; picked up and
+    // dropped, it lands and rights itself the same way.
+    hands: { upright: { k: 350, damping: 9, rest: 0.06 }, touch: true },
+    drive(t, c, out, info) {
       const u = 1 - c.flap;
-      const f = c.flap > 0 ? Math.abs(Math.sin(u * Math.PI * 6)) * (1 - u) : 0;
+      let f = c.flap > 0 ? Math.abs(Math.sin(u * Math.PI * 6)) * (1 - u) : 0;
+      // Rocking or carried, the flippers go out for balance.
+      const bal = easeTo(c, "balance", t, clamp((info?.hands?.speed ?? 0) * 0.6, 0, 1), 6);
+      f = Math.max(f, 0.55 * bal * (0.75 + 0.25 * Math.sin(t * 9)));
       const idle = 0.04 * Math.sin(t * 1.4);
       out.parts.flipR = { angle: 0.12 + idle + 0.9 * f };
       out.parts.flipL = { angle: -0.12 - idle - 0.9 * f };
@@ -2226,12 +2630,33 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "turn", label: "Turn head", type: "pulse", ease: 3 }],
     action: { key: "turn", label: "Turn the head" },
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H5): a finger pressed on the owl's head and
+    // moved around it is followed by its eyes: the head turns (and tips)
+    // toward it, as far as an owl's neck goes, and back once the finger
+    // lets go. Picked up by the body (or the branch) it is tossed as before,
+    // and lands and settles back upright on its branch.
+    hands: {
+      follow: { center: OWL_HEAD, at: (p) => p[1] > 0.25 },
+      upright: { k: 200, damping: 10, rest: 0.1 },
+    },
+    drive(t, c, out, info) {
       const u = 1 - c.turn;
       const turn =
         c.turn > 0 ? 1.7 * easeInOut(band(u, 0, 0.22)) * (1 - easeInOut(band(u, 0.62, 0.95))) : 0;
+      // Where the finger is: a point on its line in front of the owl's face
+      // (the finger is on the glass, between the owl and the eye).
+      let yaw = 0;
+      let tip = 0;
+      const f = info?.hands?.finger;
+      if (f && info.hands.point) {
+        const at = vec.sub(vec.sub(info.hands.point, vec.mul(f.dir, 0.8)), OWL_HEAD);
+        yaw = clamp(Math.atan2(at[0], at[2]), -2.1, 2.1);
+        tip = clamp(Math.atan2(at[1], Math.hypot(at[0], at[2])), -0.45, 0.5);
+      }
+      yaw = easeTo(c, "yaw", t, yaw, f ? 9 : 4);
+      tip = easeTo(c, "tip", t, tip, f ? 9 : 4);
       const q = quatMul(
-        quatAxisAngle([0, 1, 0], turn),
+        quatMul(quatAxisAngle([0, 1, 0], turn + yaw), quatAxisAngle([-1, 0, 0], tip)),
         quatAxisAngle([0, 0, 1], 0.06 * Math.sin(t * 0.7)),
       );
       out.parts.head = { quat: q };

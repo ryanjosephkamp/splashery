@@ -6,15 +6,17 @@
 // (EffectDriver) only turns the scene settings and the clock into a handful
 // of vec4 uniforms; there are no per-splat CPU loops.
 //
-// Everything is computed in world space around the toy's centre. The toy's
-// "home" position is the splat centre before any effect. Per-splat
+// Everything is computed in world space around the toy's center. The toy's
+// "home" position is the splat center before any effect. Per-splat
 // randomness comes from a hash of the splat index and the scene seed, so the
 // result is deterministic for a given seed and time; only pointer input
 // (pokes, magnet, paint) adds anything else.
 
+import { PHOTO_WRITE } from "./photo-splats.js"; // lane Photo fidelity
+
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
-// ---- Effect catalogue -------------------------------------------------------
+// ---- Effect catalog -------------------------------------------------------
 
 // Each effect has one or two sliders (0..1 unless stated). Tools act where the
 // pointer touches the toy; ambient effects run on their own once switched on.
@@ -127,7 +129,7 @@ export function defaultEffects() {
 
 const GLSL = /* glsl */ `
 uniform vec4 uSpClock;   // x time (s), y splat scale, z exposure, w seed
-uniform vec4 uSpToy;     // xyz toy centre (world), w radius
+uniform vec4 uSpToy;     // xyz toy center (world), w radius
 uniform vec4 uSpPoke0;   // xyz point, w start time
 uniform vec4 uSpPoke1;
 uniform vec4 uSpPoke2;
@@ -146,16 +148,21 @@ uniform vec4 uSpGrabD;   // xyz how far it is pulled, w on
 uniform vec4 uSpTwist;   // xyz axis (unit), w angle across the toy (radians)
 uniform vec4 uSpSlice;   // xyz plane normal, w offset (world)
 uniform vec4 uSpSliceP;  // x on, y glow width (world)
-uniform vec4 uSpAccent;  // rgb accent colour
+uniform vec4 uSpAccent;  // rgb accent color
 uniform vec4 uSpBodyQ;   // whole-toy rotation (quaternion x, y, z, w)
 uniform vec4 uSpBodyT;   // xyz whole-toy offset, w squash (+ flattens, - stretches)
-uniform vec4 uSpBodyF;   // x floor distance below the toy centre
+uniform vec4 uSpBodyF;   // x floor distance below the toy center
 uniform vec4 uSpBodyS;   // Hands-on squish (lane Physics): xyz axis, w amount (+ flattens)
 uniform vec4 uSpBodyP;   // xyz the squish's pivot, where it touched
+uniform vec4 uSpPoseQ;   // Any pose: the toy's turn in Hands-on (quaternion; src/effects-pose.js)
+uniform vec4 uSpPoseT;   // xyz where its pivot is now, w on (0: upright at home)
+uniform vec4 uSpPoseC;   // xyz its pivot at home
+uniform vec4 uSpPoseUp;  // xyz the world's up in the toy's home frame, w the floor's distance below its center along it
 uniform vec4 uSpPat;     // x on, y projection (0 wrap, 1 front, 2 globe), z repeats, w amount
 uniform vec4 uSpPatB;    // x keep detail, y half height, z mean luminance, w half width
 uniform sampler2D uSpPattern;
 __KIT_UNIFORMS__
+__KIT_PHOTO_UNIFORMS__
 vec3 spHome = vec3(0.0);
 vec3 spRest = vec3(0.0);
 float spKitScale = 1.0;
@@ -164,10 +171,12 @@ float spBright = 1.0;
 vec3 spTint = vec3(0.0);
 float spFlame = -1.0;
 float spNoPat = 0.0;
+float spPhotoBit = 0.0; // Photo fidelity: a photo-textured splat (src/photo-splats.js)
 vec4 spBodyQ = vec4(0.0, 0.0, 0.0, 1.0);
 vec4 spPartQ = vec4(0.0, 0.0, 0.0, 1.0);
 float spCut = 0.0;
 float spShrink = 0.0;
+float spStretch = 0.0; // lane Hands engine C: how much the grab spreads splats here
 float spLanded = 0.0;
 float spShade = 0.0;
 float spGlow = 0.0;
@@ -200,8 +209,18 @@ vec3 spQuatRotate(vec4 q, vec3 v) {
   return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v);
 }
 
+// Lane Any pose: a world point in the toy's home frame (where every effect
+// is worked out), and back into its Hands-on pose (src/effects-pose.js).
+vec3 spPoseIn(vec3 p) {
+  return uSpPoseC.xyz + spQuatRotate(vec4(-uSpPoseQ.xyz, uSpPoseQ.w), p - uSpPoseT.xyz);
+}
+
+vec3 spPoseOut(vec3 p) {
+  return uSpPoseT.xyz + spQuatRotate(uSpPoseQ, p - uSpPoseC.xyz);
+}
+
 // Whole-toy motion (bounce, spin, wobble, float): squash about the floor,
-// rotate about the centre, then move.
+// rotate about the center, then move.
 vec3 spBody(vec3 p) {
   vec4 q = uSpBodyQ;
   if (q.w == 0.0 && dot(q.xyz, q.xyz) == 0.0) q = vec4(0.0, 0.0, 0.0, 1.0);
@@ -285,6 +304,7 @@ vec3 spWind(vec3 home) {
 }
 
 void modifySplatCenter(inout vec3 center) {
+  if (uSpPoseT.w > 0.5) center = spPoseIn(center); // lane Any pose
   spRest = center;
   __KIT_CENTER__
   center = spBody(center);
@@ -325,7 +345,11 @@ void modifySplatCenter(inout vec3 center) {
   if (uSpGrabD.w > 0.5) {
     vec3 d = home - uSpGrab.xyz;
     float rad = max(uSpGrab.w, 1e-3);
-    p += uSpGrabD.xyz * exp(-dot(d, d) / (rad * rad) * 1.5);
+    float gf = exp(-dot(d, d) / (rad * rad) * 1.5);
+    p += uSpGrabD.xyz * gf;
+    // Lane Hands engine C: splats grow where the pull spreads them apart, so
+    // a stretched toy stays solid (no gaps, no speckle).
+    spStretch = min(1.5, length(uSpGrabD.xyz) * gf * 3.0 * length(d) / (rad * rad)) * 0.6;
   }
 
   if (uSpDiss.w > 0.5) {
@@ -388,17 +412,25 @@ void modifySplatCenter(inout vec3 center) {
     spCut = side > 0.0 ? 1.0 : 0.0;
   }
 
-  center = p;
+  center = uSpPoseT.w > 0.5 ? spPoseOut(p) : p; // lane Any pose
 }
 
 void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout vec4 rotation, inout vec3 scale) {
-  rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, rotation)));
-  scale *= uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded);
+  if (uSpPoseT.w > 0.5) {
+    // Lane Any pose: the effects' turns are in the toy's home frame.
+    vec4 fx = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spPartQ));
+    fx = spQuatMul(uSpPoseQ, spQuatMul(fx, vec4(-uSpPoseQ.xyz, uSpPoseQ.w)));
+    rotation = spQuatMul(fx, rotation);
+  } else {
+    rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, rotation)));
+  }
+  scale *= uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded) * (1.0 + spStretch);
   if (spCut > 0.5) scale = vec3(0.0);
 }
 
 void modifySplatColor(vec3 center, inout vec4 color) {
   __KIT_COLOR__
+  __KIT_PHOTO__
   if (uSpPat.x > 0.5 && spNoPat < 0.5) color.rgb = spPattern(color.rgb);
   if (spFlame >= 0.0) {
     color.rgb = mix(color.rgb, vec3(1.0, 0.36, 0.06), smoothstep(0.08, 0.6, spFlame));
@@ -412,7 +444,7 @@ void modifySplatColor(vec3 center, inout vec4 color) {
   }
   color.rgb = color.rgb * (1.0 - paint.a) + paint.rgb;
   if (uSpSliceP.x > 0.5) {
-    float side = dot(center - uSpToy.xyz, uSpSlice.xyz) - uSpSlice.w;
+    float side = dot((uSpPoseT.w > 0.5 ? spPoseIn(center) : center) - uSpToy.xyz, uSpSlice.xyz) - uSpSlice.w;
     float glow = side > 0.0 ? 0.0 : 1.0 - smoothstep(0.0, uSpSliceP.y, -side);
     color.rgb = mix(color.rgb, uSpAccent.rgb, glow * 0.85);
     if (side > 0.0) color.a = 0.0;
@@ -451,11 +483,16 @@ uniform uSpBodyT: vec4f;
 uniform uSpBodyF: vec4f;
 uniform uSpBodyS: vec4f;
 uniform uSpBodyP: vec4f;
+uniform uSpPoseQ: vec4f;
+uniform uSpPoseT: vec4f;
+uniform uSpPoseC: vec4f;
+uniform uSpPoseUp: vec4f;
 uniform uSpPat: vec4f;
 uniform uSpPatB: vec4f;
 var uSpPattern: texture_2d<f32>;
 var uSpPatternSampler: sampler;
 __KIT_UNIFORMS__
+__KIT_PHOTO_UNIFORMS__
 var<private> spRest: vec3f = vec3f(0.0);
 var<private> spKitScale: f32 = 1.0;
 var<private> spFade: f32 = 1.0;
@@ -463,10 +500,12 @@ var<private> spBright: f32 = 1.0;
 var<private> spTint: vec3f = vec3f(0.0);
 var<private> spFlame: f32 = -1.0;
 var<private> spNoPat: f32 = 0.0;
+var<private> spPhotoBit: f32 = 0.0; // Photo fidelity (src/photo-splats.js)
 var<private> spBodyQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> spPartQ: vec4f = vec4f(0.0, 0.0, 0.0, 1.0);
 var<private> spCut: f32 = 0.0;
 var<private> spShrink: f32 = 0.0;
+var<private> spStretch: f32 = 0.0; // lane Hands engine C
 var<private> spLanded: f32 = 0.0;
 var<private> spShade: f32 = 0.0;
 var<private> spGlow: f32 = 0.0;
@@ -497,6 +536,15 @@ fn spQuatMul(a: vec4f, b: vec4f) -> vec4f {
 
 fn spQuatRotate(q: vec4f, v: vec3f) -> vec3f {
   return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v);
+}
+
+// Lane Any pose: a world point in the toy's home frame, and back.
+fn spPoseIn(p: vec3f) -> vec3f {
+  return uniform.uSpPoseC.xyz + spQuatRotate(vec4f(-uniform.uSpPoseQ.xyz, uniform.uSpPoseQ.w), p - uniform.uSpPoseT.xyz);
+}
+
+fn spPoseOut(p: vec3f) -> vec3f {
+  return uniform.uSpPoseT.xyz + spQuatRotate(uniform.uSpPoseQ, p - uniform.uSpPoseC.xyz);
 }
 
 fn spBody(p: vec3f) -> vec3f {
@@ -579,6 +627,7 @@ fn spWind(home: vec3f) -> vec3f {
 }
 
 fn modifySplatCenter(center: ptr<function, vec3f>) {
+  if (uniform.uSpPoseT.w > 0.5) { *center = spPoseIn(*center); } // lane Any pose
   spRest = *center;
   __KIT_CENTER__
   *center = spBody(*center);
@@ -616,7 +665,9 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   if (uniform.uSpGrabD.w > 0.5) {
     let d = home - uniform.uSpGrab.xyz;
     let rad = max(uniform.uSpGrab.w, 1e-3);
-    p = p + uniform.uSpGrabD.xyz * exp(-dot(d, d) / (rad * rad) * 1.5);
+    let gf = exp(-dot(d, d) / (rad * rad) * 1.5);
+    p = p + uniform.uSpGrabD.xyz * gf;
+    spStretch = min(1.5, length(uniform.uSpGrabD.xyz) * gf * 3.0 * length(d) / (rad * rad)) * 0.6;
   }
 
   if (uniform.uSpDiss.w > 0.5) {
@@ -680,17 +731,26 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   }
 
   *center = p;
+  if (uniform.uSpPoseT.w > 0.5) { *center = spPoseOut(p); } // lane Any pose
 }
 
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
-  *rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, *rotation)));
-  *scale = *scale * (uniform.uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded));
+  if (uniform.uSpPoseT.w > 0.5) {
+    // Lane Any pose: the effects' turns are in the toy's home frame.
+    var fx = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spPartQ));
+    fx = spQuatMul(uniform.uSpPoseQ, spQuatMul(fx, vec4f(-uniform.uSpPoseQ.xyz, uniform.uSpPoseQ.w)));
+    *rotation = spQuatMul(fx, *rotation);
+  } else {
+    *rotation = spQuatMul(spTwistQ, spQuatMul(spBodyQ, spQuatMul(spPartQ, *rotation)));
+  }
+  *scale = *scale * (uniform.uSpClock.y * spKitScale * (1.0 - 0.45 * spShrink) * (1.0 + 0.3 * spLanded) * (1.0 + spStretch));
   if (spCut > 0.5) { *scale = vec3f(0.0); }
 }
 
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var base = (*color).rgb;
   __KIT_COLOR__
+  __KIT_PHOTO__
   if (uniform.uSpPat.x > 0.5 && spNoPat < 0.5) { base = spPattern(base); }
   if (spFlame >= 0.0) {
     base = mix(base, vec3f(1.0, 0.36, 0.06), smoothstep(0.08, 0.6, spFlame));
@@ -705,7 +765,7 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   var rgb = base * (1.0 - paint.a) + paint.rgb;
   var a = (*color).a;
   if (uniform.uSpSliceP.x > 0.5) {
-    let side = dot(center - uniform.uSpToy.xyz, uniform.uSpSlice.xyz) - uniform.uSpSlice.w;
+    let side = dot(select(center, spPoseIn(center), uniform.uSpPoseT.w > 0.5) - uniform.uSpToy.xyz, uniform.uSpSlice.xyz) - uniform.uSpSlice.w;
     let glow = select(1.0 - smoothstep(0.0, uniform.uSpSliceP.y, -side), 0.0, side > 0.0);
     rgb = mix(rgb, uniform.uSpAccent.rgb, glow * 0.85);
     if (side > 0.0) { a = 0.0; }
@@ -719,7 +779,7 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 
 // Generated toys carry a per-splat "splatAnim" stream (RGBA32F): x = part
 // index (0..15) + 16 when the pattern layer should skip the splat, y =
-// behaviour kind (see KINDS), z and w = the behaviour's two parameters.
+// behavior kind (see KINDS), z and w = the behavior's two parameters.
 // Parts are rigid groups moved by uSpParts (3 vec4 per part: rotation,
 // pivot, offset + visibility). Captured toys have no such stream, so they
 // use the variant without these pieces.
@@ -730,7 +790,7 @@ export const MORPH_RANGE = 2;
 export const KINDS = {
   none: 0,
   orbit: 1, // turn about the toy's up axis: z = turns per unit time at the rim, w = falloff (0 rigid, 1.5 Keplerian)
-  beat: 2, // heartbeat swell from the centre: z = amount, w = phase
+  beat: 2, // heartbeat swell from the center: z = amount, w = phase
   breathe: 3, // slow sine swell: z = amount, w = phase
   flame: 4, // rise, shrink and redden in a loop: z = height (toy radii), w = phase
   rise: 5, // drift up and fade in a loop (embers, bubbles, smoke): z = height, w = phase
@@ -738,18 +798,18 @@ export const KINDS = {
   twinkle: 7, // brightness flicker: z = amount, w = phase
   sway: 8, // bend with height above a base (plants, tentacles): z = amount, w = base height
   grow: 9, // appear as the grow control passes z (0..1)
-  melt: 10, // slump and spread towards the floor as energy rises: z = how easily
+  melt: 10, // slump and spread toward the floor as energy rises: z = how easily
   pulse: 11, // a glow runs along a path: z = position along the path (0..1)
   wave: 12, // ripple up and down: z = amount, w = phase
   glint: 13, // sparkle as the camera moves: z = amount
   token: 14, // a game piece moved and turned by uSpTokens: z = token index (0..47)
-  screen: 15, // a screen pixel coloured from the uSpScreen texture: z, w = u, v
+  screen: 15, // a screen pixel colored from the uSpScreen texture: z, w = u, v
   key: 16, // a key that goes down when pressed: z = key index (uSpKitB.w = index + depth)
   // Channel kinds follow out.morph (uSpMorph, four channels), with motion on or off:
-  morph: 17, // move towards a target by the channel: z = x * 4096 + y, w = z + 4096 * channel (12-bit offsets, see Kit.encodeMorphs)
+  morph: 17, // move toward a target by the channel: z = x * 4096 + y, w = z + 4096 * channel (12-bit offsets, see Kit.encodeMorphs)
   band: 18, // glow (uSpGlowC) where the channel passes z: w = channel + band width
   fade: 19, // fade out as the channel passes z: w = channel + width (negative: fade in)
-  skin: 20, // follow two tokens' offsets: z = a + 64 * b, w = blend towards b
+  skin: 20, // follow two tokens' offsets: z = a + 64 * b, w = blend toward b
   // Pictures (lane Pictures): a page that turns about a book's spine and curls
   // like paper (uSpLeaf): z = distance from the spine along the page, w = leaf slot (0..9)
   leaf: 21,
@@ -765,14 +825,24 @@ export const KINDS = {
   // z = opacity face on (0..1), w = sharpness (about 2 to 8).
   rim: 23,
   // Relief (lane Live input; 24 since lane Fix4 took 23): a splat lifted from its place by a live
-  // height and coloured from a live picture, both drawn by the recipe into
-  // its screen canvas (recipe.screen): the colour at (u / 2, v), the height
+  // height and colored from a live picture, both drawn by the recipe into
+  // its screen canvas (recipe.screen): the color at (u / 2, v), the height
   // (red, 0..1) at (1 / 2 + u / 2, v). z = u + 2 * axis (0 x, 1 y, 2 z; 3:
   // a 3D offset, red, green and blue each signed about a half, along x, y
   // and z, with alpha under a half hiding the splat),
   // w = v + 2 * lift at full height (thousandths of a toy unit; see
   // Kit.encodeReliefs). A live spectrogram, a camera picture with depth.
   relief: 24,
+  // Lane Hands engine C: a splat on a sheet of cloth follows four tokens
+  // (the corners of its cell), blended across and down: z = a + 64 b +
+  // 4096 c + 262144 d (tokens 0..47), w = 1024 s + t (each 0..1023 for
+  // 0..1), moving by mix(mix(a, b, s), mix(c, d, s), t).
+  skin4: 25,
+  // Lane Imaging (engine): a splat in a measured volume (a CT or MRI scan).
+  // z = its density (0..1). It shows only while its density is inside the
+  // window and its rest place is on the near side of the cutting plane
+  // (uSpVol, set from out.volume); splats on the cut face glow (uSpVolC).
+  volume: 26,
 };
 
 // Levers: 96 amounts (three 8-bit channels each) and 6 groups.
@@ -780,8 +850,8 @@ export const MAX_LEVERS = 96;
 export const MAX_LEVER_GROUPS = 6;
 
 const GLSL_KIT_UNIFORMS = `uniform vec4 uSpKit;     // x time, y alive (0/1), z speed, w energy (melt 0..1)
-uniform vec4 uSpKitB;    // x grow progress 0..1, y floor distance below the centre, z amount
-uniform vec4 uSpGlowC;   // rgb pulse glow colour, a strength
+uniform vec4 uSpKitB;    // x grow progress 0..1, y floor distance below the center, z amount
+uniform vec4 uSpGlowC;   // rgb pulse glow color, a strength
 uniform vec4 uSpCam;     // xyz camera position
 uniform vec4 uSpParts[48];
 uniform vec4 uSpTokens[96]; // per token: xyz offset + w visibility, then a rotation
@@ -789,8 +859,11 @@ uniform vec4 uSpMorph;   // the four channels of the morph, band and fade kinds
 uniform sampler2D uSpScreen; // a live screen picture (the laptop's)
 vec3 spScreenUV = vec3(0.0); // xy uv, z > 0 for a screen splat
 uniform vec4 uSpLeaf[8]; // Pictures: spine point, spine axis, page direction, then (angle, curl) per leaf
-uniform vec4 uSpLever[18]; // Pianos: per lever group, pivot + amount, direction + mode, glow colour + channel
-uniform vec4 uSpLevers[24]; // Pianos: 96 levers' amounts, three 8-bit channels packed in each float`;
+uniform vec4 uSpLever[18]; // Pianos: per lever group, pivot + amount, direction + mode, glow color + channel
+uniform vec4 uSpLevers[24]; // Pianos: 96 levers' amounts, three 8-bit channels packed in each float
+uniform vec4 uSpVol;     // Imaging: cutting plane normal (xyz) and offset (w), toy coordinates
+uniform vec4 uSpVolP;    // Imaging: x cut on, y slab half width (0: half space), z, w density window
+uniform vec4 uSpVolC;    // Imaging: rgb cut-face glow, a glow width`;
 
 const GLSL_KIT_FUNCTIONS = `
 float spBeat(float x) {
@@ -808,10 +881,14 @@ vec3 spKitCenter(vec3 p) {
   int pk = int(an.x + 0.5);
   int part = pk & 15;
   spNoPat = float((pk >> 4) & 1);
+  spPhotoBit = float((pk >> 5) & 1);
   int kind = int(an.y + 0.5);
   vec3 toy = uSpToy.xyz;
   float R = uSpToy.w;
   vec3 up = vec3(0.0, 1.0, 0.0);
+  // Lane Any pose: the world's real up, for what rises or falls (a flame,
+  // embers, snow) in a toy lying on its side.
+  vec3 gup = uSpPoseT.w > 0.5 ? uSpPoseUp.xyz : up;
   float t = uSpKit.x * uSpKit.z;
   float amt = uSpKitB.z;
   if (uSpKit.y > 0.5 && kind > 0) {
@@ -830,13 +907,13 @@ vec3 spKitCenter(vec3 p) {
       float c = fract(t * (0.6 + 0.5 * h) * (flame ? 1.4 : 0.35) + an.w + h);
       float travel = amt * an.z * R;
       vec3 side = vec3(sin(t * 3.0 + h * 17.0), 0.0, cos(t * 2.3 + h * 11.0));
-      p += up * c * travel + side * (flame ? 0.07 : 0.22) * c * travel;
+      p += gup * c * travel + (side - gup * dot(side, gup)) * (flame ? 0.07 : 0.22) * c * travel;
       spFade = smoothstep(0.0, 0.1, c) * (1.0 - smoothstep(0.55, 1.0, c));
       spKitScale = flame ? mix(1.0, 0.3, c) : mix(0.7, 1.25, c);
       if (flame) spFlame = c;
     } else if (kind == 6) {
       float c = fract(t * (0.72 + 0.25 * h) + an.w);
-      p -= up * c * an.z * R;
+      p -= gup * c * an.z * R;
       spFade = smoothstep(0.0, 0.08, c) * (1.0 - smoothstep(0.85, 1.0, c));
     } else if (kind == 7) {
       spBright = 1.0 + amt * an.z * sin(t * (2.0 + 3.0 * h) + 6.2832 * h + an.w);
@@ -894,6 +971,25 @@ vec3 spKitCenter(vec3 p) {
     }
   }
   if (kind == 15) spScreenUV = vec3(an.z, an.w, 1.0);
+  if (kind == 25) {
+    float z4 = an.z;
+    float d4 = floor(z4 / 262144.0);
+    z4 -= d4 * 262144.0;
+    float c4 = floor(z4 / 4096.0);
+    z4 -= c4 * 4096.0;
+    float b4 = floor(z4 / 64.0);
+    float a4 = z4 - b4 * 64.0;
+    float s4 = floor(an.w / 1024.0);
+    float t4 = (an.w - s4 * 1024.0) / 1023.0;
+    s4 /= 1023.0;
+    vec4 k0 = uSpTokens[clamp(int(a4 + 0.5), 0, 47) * 2];
+    vec4 k1 = uSpTokens[clamp(int(b4 + 0.5), 0, 47) * 2];
+    vec4 k2 = uSpTokens[clamp(int(c4 + 0.5), 0, 47) * 2];
+    vec4 k3 = uSpTokens[clamp(int(d4 + 0.5), 0, 47) * 2];
+    vec4 m4 = mix(mix(k0, k1, s4), mix(k2, k3, s4), t4);
+    p += m4.xyz;
+    spKitScale *= m4.w;
+  }
   if (kind == 24) {
     float rax = floor(an.z * 0.5);
     float rlq = floor(an.w * 0.5);
@@ -982,10 +1078,16 @@ vec3 spKitCenter(vec3 p) {
     p = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     spPartQ = q;
     // w <= -1: a culled part (visibility -w - 1). Its splats on the far side
-    // of the part's centre are hidden, so a turning shell's back never draws
+    // of the part's center are hidden, so a turning shell's back never draws
     // over its front (splats sort in their built pose).
     float vis = ofs.w;
-    if (vis < -0.5) {
+    if (vis < -9.5) {
+      // w <= -10 (lane Night sky): a part culled below the level plane
+      // through its center (visibility -w - 10): a sky's stars set.
+      vis = -vis - 10.0;
+      vec3 fc = pv.xyz + ofs.xyz;
+      vis *= smoothstep(-0.004, 0.004, normalize(p - fc + vec3(1e-6)).y);
+    } else if (vis < -0.5) {
       vis = -vis - 1.0;
       vec3 fc = pv.xyz + ofs.xyz;
       float fd = dot(normalize(p - fc + vec3(1e-6)), normalize(uSpCam.xyz - p));
@@ -998,6 +1100,18 @@ vec3 spKitCenter(vec3 p) {
     vec3 rc = part > 0 ? uSpParts[part * 3 + 1].xyz + uSpParts[part * 3 + 2].xyz : toy;
     float fr = abs(dot(normalize(p - rc + vec3(1e-6)), normalize(uSpCam.xyz - p)));
     spFade *= mix(clamp(an.z, 0.0, 1.0), 1.0, pow(clamp(1.0 - fr, 0.0, 1.0), max(an.w, 0.05)));
+  }
+  if (kind == 26) {
+    // Volume (lane Imaging): hidden outside the density window and beyond
+    // the cutting plane (measured at the splat's rest place, so the cut
+    // stays with the specimen as its part turns); the cut face glows.
+    if (an.z < uSpVolP.z || an.z > uSpVolP.w) spKitScale = 0.0;
+    if (uSpVolP.x > 0.5) {
+      float vd = dot(spRest - toy, uSpVol.xyz) - uSpVol.w;
+      float vg = uSpVolP.y > 0.0 ? uSpVolP.y - abs(vd) : -vd;
+      if (vg < 0.0) spKitScale = 0.0;
+      else if (uSpVolC.a > 0.0) spTint += uSpVolC.rgb * (1.0 - smoothstep(0.0, uSpVolC.a, vg));
+    }
   }
   return p;
 }
@@ -1015,7 +1129,10 @@ var uSpScreenSampler: sampler;
 var<private> spScreenUV: vec3f = vec3f(0.0);
 uniform uSpLeaf: array<vec4f, 8>;
 uniform uSpLever: array<vec4f, 18>;
-uniform uSpLevers: array<vec4f, 24>;`;
+uniform uSpLevers: array<vec4f, 24>;
+uniform uSpVol: vec4f;
+uniform uSpVolP: vec4f;
+uniform uSpVolC: vec4f;`;
 
 const WGSL_KIT_FUNCTIONS = `
 fn spBeat(x: f32) -> f32 {
@@ -1033,10 +1150,13 @@ fn spKitCenter(p0: vec3f) -> vec3f {
   let pk = i32(an.x + 0.5);
   let part = pk & 15;
   spNoPat = f32((pk >> 4u) & 1);
+  spPhotoBit = f32((pk >> 5u) & 1);
   let kind = i32(an.y + 0.5);
   let toy = uniform.uSpToy.xyz;
   let R = uniform.uSpToy.w;
   let up = vec3f(0.0, 1.0, 0.0);
+  // Lane Any pose: the world's real up, for what rises or falls.
+  let gup = select(up, uniform.uSpPoseUp.xyz, uniform.uSpPoseT.w > 0.5);
   let t = uniform.uSpKit.x * uniform.uSpKit.z;
   let amt = uniform.uSpKitB.z;
   if (uniform.uSpKit.y > 0.5 && kind > 0) {
@@ -1055,13 +1175,13 @@ fn spKitCenter(p0: vec3f) -> vec3f {
       let c = fract(t * (0.6 + 0.5 * h) * select(0.35, 1.4, flame) + an.w + h);
       let travel = amt * an.z * R;
       let side = vec3f(sin(t * 3.0 + h * 17.0), 0.0, cos(t * 2.3 + h * 11.0));
-      p = p + up * c * travel + side * select(0.22, 0.07, flame) * c * travel;
+      p = p + gup * c * travel + (side - gup * dot(side, gup)) * select(0.22, 0.07, flame) * c * travel;
       spFade = smoothstep(0.0, 0.1, c) * (1.0 - smoothstep(0.55, 1.0, c));
       spKitScale = select(mix(0.7, 1.25, c), mix(1.0, 0.3, c), flame);
       if (flame) { spFlame = c; }
     } else if (kind == 6) {
       let c = fract(t * (0.72 + 0.25 * h) + an.w);
-      p = p - up * c * an.z * R;
+      p = p - gup * c * an.z * R;
       spFade = smoothstep(0.0, 0.08, c) * (1.0 - smoothstep(0.85, 1.0, c));
     } else if (kind == 7) {
       spBright = 1.0 + amt * an.z * sin(t * (2.0 + 3.0 * h) + 6.2832 * h + an.w);
@@ -1116,6 +1236,25 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     }
   }
   if (kind == 15) { spScreenUV = vec3f(an.z, an.w, 1.0); }
+  if (kind == 25) {
+    var z4 = an.z;
+    let d4 = floor(z4 / 262144.0);
+    z4 = z4 - d4 * 262144.0;
+    let c4 = floor(z4 / 4096.0);
+    z4 = z4 - c4 * 4096.0;
+    let b4 = floor(z4 / 64.0);
+    let a4 = z4 - b4 * 64.0;
+    let s4w = floor(an.w / 1024.0);
+    let t4 = (an.w - s4w * 1024.0) / 1023.0;
+    let s4 = s4w / 1023.0;
+    let k0 = uniform.uSpTokens[clamp(i32(a4 + 0.5), 0, 47) * 2];
+    let k1 = uniform.uSpTokens[clamp(i32(b4 + 0.5), 0, 47) * 2];
+    let k2 = uniform.uSpTokens[clamp(i32(c4 + 0.5), 0, 47) * 2];
+    let k3 = uniform.uSpTokens[clamp(i32(d4 + 0.5), 0, 47) * 2];
+    let m4 = mix(mix(k0, k1, vec4f(s4)), mix(k2, k3, vec4f(s4)), vec4f(t4));
+    p = p + m4.xyz;
+    spKitScale = spKitScale * m4.w;
+  }
   if (kind == 24) {
     let rax = floor(an.z * 0.5);
     let rlq = floor(an.w * 0.5);
@@ -1197,7 +1336,12 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     p = pv.xyz + spQuatRotate(q, (p - pv.xyz) * (1.0 + pv.w)) + ofs.xyz;
     spPartQ = q;
     var vis = ofs.w;
-    if (vis < -0.5) {
+    if (vis < -9.5) {
+      // Lane Night sky: culled below the level plane through its center.
+      vis = -vis - 10.0;
+      let fc = pv.xyz + ofs.xyz;
+      vis = vis * smoothstep(-0.004, 0.004, normalize(p - fc + vec3f(1e-6)).y);
+    } else if (vis < -0.5) {
       vis = -vis - 1.0;
       let fc = pv.xyz + ofs.xyz;
       let fd = dot(normalize(p - fc + vec3f(1e-6)), normalize(uniform.uSpCam.xyz - p));
@@ -1212,6 +1356,20 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     let fr = abs(dot(normalize(p - rc + vec3f(1e-6)), normalize(uniform.uSpCam.xyz - p)));
     spFade = spFade * mix(clamp(an.z, 0.0, 1.0), 1.0, pow(clamp(1.0 - fr, 0.0, 1.0), max(an.w, 0.05)));
   }
+  if (kind == 26) {
+    // Volume (lane Imaging): see the GLSL.
+    if (an.z < uniform.uSpVolP.z || an.z > uniform.uSpVolP.w) { spKitScale = 0.0; }
+    if (uniform.uSpVolP.x > 0.5) {
+      let vd = dot(spRest - toy, uniform.uSpVol.xyz) - uniform.uSpVol.w;
+      var vg = -vd;
+      if (uniform.uSpVolP.y > 0.0) { vg = uniform.uSpVolP.y - abs(vd); }
+      if (vg < 0.0) {
+        spKitScale = 0.0;
+      } else if (uniform.uSpVolC.a > 0.0) {
+        spTint = spTint + uniform.uSpVolC.rgb * (1.0 - smoothstep(0.0, uniform.uSpVolC.a, vg));
+      }
+    }
+  }
   return p;
 }
 `;
@@ -1223,7 +1381,7 @@ fn spKitCenter(p0: vec3f) -> vec3f {
 const GLSL_RIG_UNIFORMS = `uniform vec4 uSpParts[48];
 uniform vec4 uSpRigTint[16]; // per part: rgb glow added, a brightness gain
 uniform vec4 uSpFx[40];      // whole-body effects: 4 slots of 10 vec4 (see fxTable in src/rig-fx.js)
-uniform vec4 uSpRigDbg;  // x > 0 tints each part (?rig=show), and the colour keys`;
+uniform vec4 uSpRigDbg;  // x > 0 tints each part (?rig=show), and the color keys`;
 
 const GLSL_RIG_FUNCTIONS = `
 float spCellHash(vec3 c) {
@@ -1364,11 +1522,20 @@ vec3 spRigFx(vec3 p, vec3 rest, vec4 pk, int part, int o) {
     if (hc <= f9.x) {
       float u = clamp(env, 0.0, 1.0);
       vec3 outd = normalize(pc - org + vec3(1e-4));
-      vec3 disp = (outd * f3.w * u * (1.0 - 0.5 * u) + f3.xyz * u * u) * f1.x * sel;
+      vec3 g3 = f3.xyz;
+      // Lane Any pose: pieces fall toward the world's real down in a toy turned over.
+      if (uSpPoseT.w > 0.5) g3 = uSpPoseUp.xyz * f3.y + vec3(f3.x, 0.0, f3.z);
+      vec3 disp = (outd * f3.w * u * (1.0 - 0.5 * u) + g3 * u * u) * f1.x * sel;
       // Pieces land on the floor instead of falling through it.
-      float floorY = uSpToy.y - uSpBodyF.x + 0.015 * uSpToy.w;
-      float yc = pc.y + disp.y;
-      if (yc < floorY) disp.y += floorY - yc;
+      if (uSpPoseT.w > 0.5) {
+        float fl = 0.015 * uSpToy.w - uSpPoseUp.w;
+        float hgt = dot(pc + disp - uSpToy.xyz, uSpPoseUp.xyz);
+        if (hgt < fl) disp += uSpPoseUp.xyz * (fl - hgt);
+      } else {
+        float floorY = uSpToy.y - uSpBodyF.x + 0.015 * uSpToy.w;
+        float yc = pc.y + disp.y;
+        if (yc < floorY) disp.y += floorY - yc;
+      }
       float ang = u * f9.y * (hc * 2.0 - 1.0) * 3.0;
       vec3 ax = normalize(spCellHash3(cid + 3.1) + vec3(1e-3));
       p = pc + disp + spRotate(p - pc, ax, ang);
@@ -1590,10 +1757,19 @@ fn spRigFx(p0: vec3f, rest: vec3f, pk: vec4f, part: i32, o: i32) -> vec3f {
     if (hc <= f9.x) {
       let u = clamp(env, 0.0, 1.0);
       let outd = normalize(pc - org + vec3f(1e-4));
-      var disp = (outd * f3.w * u * (1.0 - 0.5 * u) + f3.xyz * u * u) * f1.x * sel;
-      let floorY = uniform.uSpToy.y - uniform.uSpBodyF.x + 0.015 * uniform.uSpToy.w;
-      let yc = pc.y + disp.y;
-      if (yc < floorY) { disp.y = disp.y + floorY - yc; }
+      var g3 = f3.xyz;
+      // Lane Any pose: pieces fall toward the world's real down in a toy turned over.
+      if (uniform.uSpPoseT.w > 0.5) { g3 = uniform.uSpPoseUp.xyz * f3.y + vec3f(f3.x, 0.0, f3.z); }
+      var disp = (outd * f3.w * u * (1.0 - 0.5 * u) + g3 * u * u) * f1.x * sel;
+      if (uniform.uSpPoseT.w > 0.5) {
+        let fl = 0.015 * uniform.uSpToy.w - uniform.uSpPoseUp.w;
+        let hgt = dot(pc + disp - uniform.uSpToy.xyz, uniform.uSpPoseUp.xyz);
+        if (hgt < fl) { disp = disp + uniform.uSpPoseUp.xyz * (fl - hgt); }
+      } else {
+        let floorY = uniform.uSpToy.y - uniform.uSpBodyF.x + 0.015 * uniform.uSpToy.w;
+        let yc = pc.y + disp.y;
+        if (yc < floorY) { disp.y = disp.y + floorY - yc; }
+      }
       let ang = u * f9.y * (hc * 2.0 - 1.0) * 3.0;
       let ax = normalize(spCellHash3(cid + vec3f(3.1)) + vec3f(1e-3));
       p = pc + disp + spRotate(p - pc, ax, ang);
@@ -1668,6 +1844,9 @@ fn spRigCenter(p0: vec3f) -> vec3f {
 // (captured toys with a rig).
 function variant(code, mode, lang) {
   const glsl = lang === "glsl";
+  // Lane Photo fidelity: "kitphoto" is the kit's, writing each splat's photo coordinates too.
+  const photo = mode === "kitphoto";
+  if (photo) mode = "kit";
   const pick = (kit, rig) => (mode === "kit" ? kit : mode === "rig" ? rig : "");
   return code
     .replace(
@@ -1687,6 +1866,11 @@ function variant(code, mode, lang) {
         : "",
     )
     .replace(
+      "__KIT_PHOTO_UNIFORMS__",
+      photo ? (glsl ? PHOTO_WRITE.glslUniforms : PHOTO_WRITE.wgslUniforms) : "",
+    ) // prettier-ignore
+    .replace("__KIT_PHOTO__", photo ? (glsl ? PHOTO_WRITE.glsl : PHOTO_WRITE.wgsl) : "")
+    .replace(
       "__KIT_CENTER__",
       pick(
         glsl ? "center = spKitCenter(center);" : "*center = spKitCenter(*center);",
@@ -1702,6 +1886,88 @@ export const MODIFIER_KIT = {
   glsl: variant(GLSL, "kit", "glsl"),
   wgsl: variant(WGSL, "kit", "wgsl"),
 };
+// Lane Photo fidelity: generated toys whose splats take their colors from a photo
+// (src/photo-splats.js); used only while such a toy shows, with the spPhoto stream.
+export const MODIFIER_KIT_PHOTO = {
+  glsl: variant(GLSL, "kitphoto", "glsl"),
+  wgsl: variant(WGSL, "kitphoto", "wgsl"),
+};
+// Lane Kit lab: generated toys with a gloss that moves with the view (labs
+// only; a recipe's `gloss`, or ?gloss= for any kit toy). Kit splats store
+// one color; this adds a highlight from each flat splat's normal (its
+// thinnest axis), the camera and a fixed light, set by uSpGloss (x strength,
+// y sharpness). Used only while such a toy shows, so every other toy keeps
+// the kit's program exactly. docs/lab/GLOSS.md has the comparison.
+const GLOSS = {
+  glslUniforms: `uniform vec4 uSpGloss; // lane Kit lab: x strength, y sharpness
+vec3 spGlossN = vec3(0.0);
+float spGlossK = 0.0;
+`,
+  wgslUniforms: `uniform uSpGloss: vec4f;
+var<private> spGlossN: vec3f = vec3f(0.0);
+var<private> spGlossK: f32 = 0.0;
+`,
+  // The normal: the thinnest axis of the splat, turned with it. K is 1 for a
+  // flat splat and 0 for a round one (a round splat has no facing).
+  glslRS: `  vec3 gs = abs(scale);
+  vec3 gax = gs.x <= gs.y && gs.x <= gs.z ? vec3(1.0, 0.0, 0.0) : (gs.y <= gs.z ? vec3(0.0, 1.0, 0.0) : vec3(0.0, 0.0, 1.0));
+  spGlossN = spQuatRotate(normalize(rotation), gax);
+  float gmid = max(min(gs.x, gs.y), min(max(gs.x, gs.y), gs.z));
+  spGlossK = 1.0 - smoothstep(0.25, 0.6, min(gs.x, min(gs.y, gs.z)) / max(gmid, 1e-6));
+`,
+  wgslRS: `  let gs = abs(*scale);
+  var gax = vec3f(0.0, 0.0, 1.0);
+  if (gs.x <= gs.y && gs.x <= gs.z) { gax = vec3f(1.0, 0.0, 0.0); } else if (gs.y <= gs.z) { gax = vec3f(0.0, 1.0, 0.0); }
+  spGlossN = spQuatRotate(normalize(*rotation), gax);
+  let gmid = max(min(gs.x, gs.y), min(max(gs.x, gs.y), gs.z));
+  spGlossK = 1.0 - smoothstep(0.25, 0.6, min(gs.x, min(gs.y, gs.z)) / max(gmid, 1e-6));
+`,
+  // Blinn-Phong: the highlight where the normal is halfway between the light
+  // (the kit's own, from above and to the front) and the camera.
+  glslColor: `  if (spGlossK > 0.0 && uSpGloss.x > 0.0) {
+    vec3 gv = normalize(uSpCam.xyz - center);
+    vec3 gn = dot(spGlossN, gv) < 0.0 ? -spGlossN : spGlossN;
+    vec3 gh = normalize(normalize(vec3(0.42, 0.8, 0.43)) + gv);
+    float gs = pow(max(dot(gn, gh), 0.0), uSpGloss.y) * uSpGloss.x * spGlossK;
+    // A reflection shows on clear glass too: it adds light and cover.
+    float ga = color.a + min(gs, 1.0) * (1.0 - color.a);
+    color.rgb = (color.rgb * color.a + vec3(gs)) / max(ga, 1e-4);
+    color.a = ga;
+  }
+`,
+  wgslColor: `  if (spGlossK > 0.0 && uniform.uSpGloss.x > 0.0) {
+    let gv = normalize(uniform.uSpCam.xyz - center);
+    let gn = select(spGlossN, -spGlossN, dot(spGlossN, gv) < 0.0);
+    let gh = normalize(normalize(vec3f(0.42, 0.8, 0.43)) + gv);
+    let gs = pow(max(dot(gn, gh), 0.0), uniform.uSpGloss.y) * uniform.uSpGloss.x * spGlossK;
+    // A reflection shows on clear glass too: it adds light and cover.
+    let ga = a + min(gs, 1.0) * (1.0 - a);
+    rgb = (rgb * a + vec3f(gs)) / max(ga, 1e-4);
+    a = ga;
+  }
+`,
+};
+
+function withGloss(src, glsl) {
+  const at = (text, find, add, before = true) => {
+    if (!text.includes(find)) throw new Error(`gloss: missing ${find}`);
+    return text.replace(find, before ? add + find : find + add);
+  };
+  if (glsl) {
+    src = at(src, "uniform vec4 uSpCam;", GLOSS.glslUniforms);
+    src = at(src, "  if (spCut > 0.5) scale = vec3(0.0);\n}", GLOSS.glslRS);
+    return at(src, "  color.rgb *= uSpClock.z * (1.0 + clamp(spShade, -0.6, 0.6));\n}", GLOSS.glslColor); // prettier-ignore
+  }
+  src = at(src, "uniform uSpCam: vec4f;", GLOSS.wgslUniforms);
+  src = at(src, "  if (spCut > 0.5) { *scale = vec3f(0.0); }\n}", GLOSS.wgslRS);
+  return at(src, "  *color = vec4f(rgb * uniform.uSpClock.z", GLOSS.wgslColor);
+}
+
+export const MODIFIER_KIT_GLOSS = {
+  glsl: withGloss(variant(GLSL, "kit", "glsl"), true),
+  wgsl: withGloss(variant(WGSL, "kit", "wgsl"), false),
+};
+
 // Captured toys with a rig (they carry the splatPart stream).
 export const MODIFIER_RIG = {
   glsl: variant(GLSL, "rig", "glsl"),
@@ -1807,7 +2073,7 @@ export class EffectDriver {
     u.uSpPoke3 = this.pokes[3];
     u.uSpPokeP = [0.4 + 2.2 * fx.poke.strength, fx.poke.wobble, 0, 0];
 
-    // Wind: the direction slider is screen-relative (0 = towards the right
+    // Wind: the direction slider is screen-relative (0 = toward the right
     // edge, 90 = away from the viewer), flattened onto the ground plane.
     const up = [0, 1, 0];
     if (fx.wind.on && fx.wind.strength > 0) {
@@ -1906,7 +2172,7 @@ export class EffectDriver {
       u.uSpTwist = [0, 1, 0, 0];
     }
 
-    // Slice: offset in world units from the toy centre along the axis.
+    // Slice: offset in world units from the toy center along the axis.
     if (fx.slice.on) {
       const n = AXIS_VEC[fx.slice.axis] || AXIS_VEC.x;
       const extent = toy.extentAlong(n);

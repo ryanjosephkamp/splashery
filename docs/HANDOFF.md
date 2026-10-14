@@ -4,7 +4,100 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## State of main (2026-10-02)
+## Now (October 12, 2026, about 10:00 UTC)
+
+The Operator is `session_011WeiHJ3ygHhoTrrJiThHzX` (Opus 5.5), since October 12, 2026, 08:47 UTC. It
+took over from `session_01BbS2vUAWpeFF2i6KoJAqCt` (01:38 to 08:47 UTC), which stands by for a day.
+Its own handover is due by October 14, 2026, about 08:45 UTC, or sooner at about 400k tokens of
+context. This section is current. The sections below it are history. The runbook is
+[OPERATOR.md](OPERATOR.md).
+
+**Effort (the owner's call of October 8, 2026):** every worker, lanes and Integrators alike, runs at
+high effort, and so do his Codex tasks. A session's effort is set in the Claude app; a message can't
+change it.
+
+**How main moves now:** the Operator merges in batches. `tools/op-merge.mjs` builds
+`claude/operator-merge-<topic>` from main and the lanes' READY heads, the full suite runs on it
+(`tools/suite.mjs --gl=llvmpipe --jobs=2 --recheck`), the lanes fix what the batch broke, and the
+batch merges as one PR.
+
+**Main** is at #563 or later. Merged October 9 to 12:
+
+- #457: Hands-on H1 and H5 (the Enigma, clothing, the handoffs) and Photo sharp view r3
+- #466: the October 9 walkthrough and manual reviews, triaged into lanes
+- #470: Hands-on H2 (Nature, Food) and H4 (Vehicles, Landmarks, Space, Weather and fire, Tiny
+  world), with their engine PRs
+- #482: Ops: the owner's answers of October 10 (the manual plan, the Kit lab row)
+- #485: Photoreal r3, Fix10 and Photo depth, with their engine PRs
+- #490: Hands-on H3 (Storybook, Music, Level 1, Pictures, Medieval, Holidays, Open me) and its
+  engine PRs
+- #496: QR r4 (no size flash, the halftone Picture QR, crisp barcodes) and part 2 (a scene as a QR
+  code, labs), Arcade r3, both parts of Manual r3 (with Codex task 33's program gallery), the crane
+  test's fix and six handoffs
+- #500: Kit lab (#484 engine, #486) and Live r9 (#488), all labs, plus three lanes' handoffs
+- #504: the owner's evening walkthrough of October 10, triaged (docs/reviews/2026-10-10-evening/)
+- #506: the bake-off kit (`.claude/skills/bakeoff/`, `tools/bakeoff.mjs`), the operator-handover
+  skill, and notes on keeping the Operator cheap
+- #524: batch 7: Fix11 (#501, engine #502), QR r5 (#507), Live r9 part 2 (#505), Kit lab's handoff
+  (#503), Codex task 34's Tinkerer's Manual audit (#509, a report), the lanes' rotation rule, and
+  the Google Search Console tag on the home page
+- #527, #530, #531, #534: Manual r4, Manual r5, Live r10 (labs) and Site r3, each after its tests
+  and the owner's marks; #533: Codex task 35's second manual audit (a report); #532, #535: upkeep
+- #540: Manual r6 (#536: the second audit's fixes, the PDF rebuilt) and Site r4 (#538 and engine
+  #537: the front door built behind one switch into a staging folder, a live root 404 page, a staged
+  root service worker), after the owner's marks
+- #541: the owner's raw notes, 13 attachments and his words in the sound review taken out of the
+  public repo; his privacy rule in CLAUDE.md; the October 11 walkthrough's triage
+- #546: Rules v1 for outside builders (`builders/RULES.md`), from the owner's answers of October 12
+- #547: Codex task 36 (the whole manual's third audit), to run once #542 and #545 are in
+- #550: Privacy r1 (#544): his quotes in the lane files rewritten in the Operator's words
+- #552: Site r5 (#543), What's new's cards open their toy, and the new Operator's id
+- #553: Builders r1 (#548), the pack for outside builders (`builders/`, `tools/builders-pack.mjs`);
+  the ZIP went to the owner for his Google Drive
+- #554 and the upkeep after it: Codex tasks 37 to 46 (the Studio push, then the Fluid Lab on a
+  phone, arcade games, the photoreal planets, the elements and Blender worlds)
+- #555: the owner's calls of October 12 (faster depth approved; his notes' git history stays)
+- #556: Manual r7a (#545) and Manual r7b (#542) in one batch, the PDF rebuilt by the Operator
+- #557: Codex tasks 42 to 46 and upkeep; #563: the Baked engine (#549), after a full suite
+- This batch: Manual r7c (#561: the `ln` tests green again, the PDF down to 7.1 MB) and Builders r1b
+  (#565: the baked format in `builders/`)
+
+**Lanes running:** none. US English (#570, the American spelling sweep the owner asked for on
+October 12, 2026) merged in this batch with his OK; identifiers and stored keys stay British (listed
+in docs/handoff/UsEnglish.md for a later decision). The same batch fixes `cdx-gallery:10`, red on
+main since #572 (Manual r8 changed six gallery captions; the program gallery audit now repeats the
+current ones).
+
+**Codex** (the owner runs these; tasks in `docs/codex/`, the Studio push 37 to 41 and the second
+wave 42 to 46). The Operator reviews each PR with a Sonnet helper and posts one comment listing the
+fixes; the owner tells the Codex session "Read the Operator's comment on your PR and do it":
+
+- #558 (task 37, depth engine): merged in this batch.
+- #559 (task 41, Splat mirror): merged in this batch, after its specs and the owner's look at the
+  GIFs.
+- #560 (task 38, Moving photo; replaces #479, close #479 when it merges): waits on Codex.
+- #562 (task 40, Video to 3D): second fix comment; the sharp bakes need the owner's Mac run.
+- #566 (task 39, Photo to 3D): the owner approved the clips; `phf-engine:200` fails on it (text
+  legibility 0.775, under 0.8), sent back to Codex.
+- All are labs: merge after the fixes, the tests (`cdx-*` plus the toys' specs) and the owner's
+  look.
+- Ready for the owner to start: tasks 42 to 46 and 49 to 52 (`docs/codex/`). Task 48 (Moving photo,
+  a long Goal run on #560's branch) is running. #562 (Video to 3D) passed its specs but the owner
+  wants it better before it merges. (46 may start now that the Baked engine is in).
+
+Finished and safe to archive with the owner's OK: the Baked engine, Site r5, Manual r7a, Manual r7b,
+Privacy r1, Manual r6, Site r4, and the earlier list below.
+
+**Open with the owner:** the front-door call. Answered October 12, 2026: the 16 MB of review GIFs in
+#559 were his approval; keep the Tears of Steel bridge sample for now; the 61 MB of longer films in
+#560 is fine. Decided October 12, 2026: his notes' git history stays as it is; a faster depth
+runtime and a better depth model may ship over 2 MB under Apache-2.0, MIT or BSD (CLAUDE.md).
+
+**Next for the Operator:** review and merge the Codex PRs as their fixes land (labs; tests and his
+look at the clips); brief Manual r8 (Sonnet) on task 36's report; the Privacy r1 leftovers; after
+the reset, the Sonnet polish lane for Codex prototypes #518, #515 and #517.
+
+## State of main (2026-10-02, history)
 
 - Phases A to E4 are merged: A (splashery PR #13, homepage PR #33 in
   `ryanjosephkamp/ryanjosephkamp.github.io`), B (#17), C1 (#18), C2 (#19), D (#20), E1 (#21), E1b
@@ -74,16 +167,15 @@ work is in [OPERATING.md](OPERATING.md).
 - Later that evening: the engine PRs #99 (a tap can switch a kit toy's options, for lane Chemistry)
   and #109 (a GIF held on its frame, for lane Screens r2) merged, then Books r2 (#112: the book's
   and album's covers, spines and edges made sharp; every card good) and Character (#110: a
-  kit-built, detailed person for Worlds). The owner stopped the Character lane there: "Better, but
-  still looks too low-poly. We can stop trying to perfect this for now. The hybrid simulation will
-  hopefully enable better characters." He answered the Operator's two research pages ("Splats,
-  Worlds and Pages" and "Real Places and Real Science") the same night: "sharp yes" (the Operator's
-  #118 makes the sharper rendering the default), "Hybrid yes" (Worlds gets ordinary lit models for
-  the ground, water and sky, with splats for the props, effects and the character, behind a switch),
-  "Science yes", "real island yes" and "diorama yes" (that is the Photo to 3D toy, #98). AI-made
-  worlds wait until he has more information. He also asked to see the text layer the first page
-  suggested: the Operator's #120 puts a PDF page's real words in the Toy tab, to read, copy and
-  find.
+  kit-built, detailed person for Worlds). The owner stopped the Character lane there: better, but
+  still too low-poly, and the hybrid simulation should enable better characters. He answered the
+  Operator's two research pages ("Splats, Worlds and Pages" and "Real Places and Real Science") the
+  same night: "sharp yes" (the Operator's #118 makes the sharper rendering the default), "Hybrid
+  yes" (Worlds gets ordinary lit models for the ground, water and sky, with splats for the props,
+  effects and the character, behind a switch), "Science yes", "real island yes" and "diorama yes"
+  (that is the Photo to 3D toy, #98). AI-made worlds wait until he has more information. He also
+  asked to see the text layer the first page suggested: the Operator's #120 puts a PDF page's real
+  words in the Toy tab, to read, copy and find.
 - The shelf has 318 public toys (September 30, 2026), plus sixteen labs toys hidden unless `?labs=1`
   (the Picture lab, the splat equation, the Screen, Gaussian splatting, the song landscape, the
   Chladni plate, the splat field, Model to splats, your book, the photo album, the picture frame,
@@ -96,14 +188,13 @@ work is in [OPERATING.md](OPERATING.md).
   5.5 only, new public text is in American English (`tools/us-english.mjs`), and the sound review
   runs on the Sound Board. Splashery's own code is MIT licensed (#51, `LICENSE`); assets keep their
   own licenses and credits.
-- On September 29, 2026 the owner accepted the Splashery Universe plan
-  ([review](reviews/2026-09-29-universe/review.md), ROADMAP.md): five parts (Toys, Studio, Worlds,
-  Lab, Learn), new parts behind the labs switch, up to 12 workers at once until the weekly reset (8
-  until the owner raised it that morning) (September 30, 4 p.m. ET), Opus 5.5 for the engine and
-  toys and Sonnet 5.5 for Worlds content, Studio converters, docs and the Integrator, and the
-  Operator merging by tiers (CLAUDE.md, "Pull requests"). Weapons: historical, fantasy and sci-fi
-  only, never aimed at people or animals. Splashery doesn't police what people open; the terms of
-  use say they're responsible.
+- On September 29, 2026 the owner accepted the Splashery Universe plan (ROADMAP.md): five parts
+  (Toys, Studio, Worlds, Lab, Learn), new parts behind the labs switch, up to 12 workers at once
+  until the weekly reset (8 until the owner raised it that morning) (September 30, 4 p.m. ET), Opus
+  5.5 for the engine and toys and Sonnet 5.5 for Worlds content, Studio converters, docs and the
+  Integrator, and the Operator merging by tiers (CLAUDE.md, "Pull requests"). Weapons: historical,
+  fantasy and sci-fi only, never aimed at people or animals. Splashery doesn't police what people
+  open; the terms of use say they're responsible.
 - Early on September 30, 2026 (UTC) six PRs merged after two combined runs: the sharper rendering
   default (#107 and the Operator's #118, from the owner's "sharp yes"; `?sharp=0` for the old look),
   the text layer for PDF toys (#120), Chemistry (#100), Machines A (#102) and Song live (#119). The
@@ -140,11 +231,11 @@ work is in [OPERATING.md](OPERATING.md).
   engine PR #136 for the view-dependent `rim` opacity) and Fix5 (#145) merged, then three engine PRs
   after a 591-test run: shelf looks and tiny-planet palettes (#147), a `sample` voice for recorded
   sounds and the sound lint (#141), and video-to-3D support (#137, labs). The owner's review of
-  October 1 ([review](reviews/2026-10-01-review/review.md)) went to Fix6 (Photo to 3D opens your own
-  photos: the depth model's download had sized its buffer from a gzip `content-length`; typing on
-  the Enigma's keys; the periodic table without its loading flash and with a tour of the elements; a
-  smoother guitar), UI r4 (a glissando on every keyboard) and Live input r2 (the Song landscape
-  starts at once and gets new looks drawn from measured features, synced to the audio clock).
+  October 1 (private) went to Fix6 (Photo to 3D opens your own photos: the depth model's download
+  had sized its buffer from a gzip `content-length`; typing on the Enigma's keys; the periodic table
+  without its loading flash and with a tour of the elements; a smoother guitar), UI r4 (a glissando
+  on every keyboard) and Live input r2 (the Song landscape starts at once and gets new looks drawn
+  from measured features, synced to the audio clock).
 - Later on October 1, 2026 (UTC): UI r2 merged (#131) and is on for everyone (#160: focus mode, the
   sheet's stops, the desktop panel's fold and gallery page, the finer drawing pad and pan; all eight
   cards good); Photo to 3D opens your own photos again (#154); the video-to-3D spike merged (#133,
@@ -152,41 +243,44 @@ work is in [OPERATING.md](OPERATING.md).
   input engine merged (#144: the microphone, camera and screen, asked for only on a tap); and a
   glissando plays on every keyboard (#156, #157: all six cards good). The first Effect review page
   is out of room for clips, so every lane posts to page 2.
-- October 2, 2026: the owner went through every toy on the preview build (the mega review,
-  [reviews/2026-10-02-mega-review](reviews/2026-10-02-mega-review/review.md), with his plan answers
-  in answers.md there) and accepted every recommendation: up to ten workers until about October 5,
-  CC BY-SA assets per asset (#173), and every toy interactive with hands-on play and a little
-  physics before the team turns to Matterhorn. Merged that day: the review and its sound round
-  (#170), Shelves (#148), Science (#132) and Science r2 (#182, #181: pinch-and-scroll zoom and
-  thermal ellipsoids on phones), Live input r2 (#162, #163: the Song landscape plays at once, with
-  four measured looks), Fluids r4 and r5 (#152, #180: a GPU solver and a liquid surface, a tappable
-  faucet, real lava and a smooth phone tier), the Photoreal research (#175, with a private
-  comparison page) and four handoff updates. Lane Physics drafted the hands-on plan for every toy
-  (docs/HANDS-ON-PLAN.md on its branch); the owner marks it on the Hands-on Plan page (OPERATING.md,
-  "Pages"), and category lanes build what he approves.
-- Locked (owner approved, do not change its look or behaviour): the laptop. Its smoke test guards
-  it.
+- October 2, 2026: the owner went through every toy on the preview build (the mega review; the
+  Operator's summary of his plan answers is
+  [reviews/2026-10-02-mega-review/answers.md](reviews/2026-10-02-mega-review/answers.md)) and
+  accepted every recommendation: up to ten workers until about October 5, CC BY-SA assets per asset
+  (#173), and every toy interactive with hands-on play and a little physics before the team turns to
+  other work. Merged that day: the review and its sound round (#170), Shelves (#148), Science (#132)
+  and Science r2 (#182, #181: pinch-and-scroll zoom and thermal ellipsoids on phones), Live input r2
+  (#162, #163: the Song landscape plays at once, with four measured looks), Fluids r4 and r5 (#152,
+  #180: a GPU solver and a liquid surface, a tappable faucet, real lava and a smooth phone tier),
+  the Photoreal research (#175, with a private comparison page), four handoff updates, Sound C
+  (#183, #192: new sounds for the 44 toys he named, sounds that pause with their effects and a first
+  tap on time), the physics engine (#176), UI r5's engine (#177: the gallery button and rotation
+  defaults), Video 3D part 2 and r7 (#169, #186: sharper streets, what to film, phone-safe training
+  and steering the flight; labs), and Live input r3 (#187, #191: the Song landscape opens in its
+  Live view, tilts, replays and scrubs; Moving photo to 3D; labs). Codex tasks 02 to 06
+  (docs/codex/) audit credits, test health, phone and accessibility, old links and load times; the
+  owner starts them. Lane Physics drafted the hands-on plan for every toy (docs/HANDS-ON-PLAN.md on
+  its branch); the owner marks it on the Hands-on Plan page (OPERATING.md, "Pages"), and category
+  lanes build what he approves.
+- Locked (owner approved, do not change its look or behavior): the laptop. Its smoke test guards it.
 
 ## Active lanes
 
 The full table, with owned files, sessions, branches and PRs, is [WORKSTREAMS.md](WORKSTREAMS.md).
 
-| Lane                                                                        | Status                                                                                     | Handoff                                  |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------ | ---------------------------------------- |
-| Operator                                                                    | Running; runs the lanes                                                                    | —                                        |
-| Sound C: the sound notes of October 2                                       | Running, Opus 5.5 (engine #183 fixing one test; the toys next)                             | `handoff/SoundC.md` (on its branch)      |
-| Fix7: taps where you tap, and the bugs from October 2                       | Running, Opus 5.5 (part 1 #174 waits for marks; part 2 #179)                               | `handoff/Fix7.md` (on its branch)        |
-| Physics: hands-on play and a physics engine                                 | Running, Opus 5.5 (engine #176 in a test run; showcase toys #184; the hands-on plan)       | `handoff/Physics.md` (on its branch)     |
-| Sharpness A: landmarks, vehicles, Medieval, Open me, gems, space, weather   | Running, Opus 5.5 (#172 waits for marks)                                                   | `handoff/SharpA.md` (on its branch)      |
-| Sharpness B: food, toys, math, AI, the album covers, closed bases           | Running, Opus 5.5 (started October 2, 2026)                                                | `handoff/SharpB.md` (on its branch)      |
-| UI r5: gallery button, rotation defaults, the piano bar, big models, Record | Running, Opus 5.5 (engine #177 in a test run; #178 waits for marks)                        | `handoff/UIr5.md` (on its branch)        |
-| Live input r3: the October 2 notes and Moving photo to 3D                   | Running, Opus 5.5 (r2 merged)                                                              | `handoff/LiveInput.md`                   |
-| Video 3D: a one-week spike                                                  | Running, Opus 5.5 (part 2 #169, r7)                                                        | [handoff/Video3D.md](handoff/Video3D.md) |
-| Fluids r4 and r5                                                            | Merged; waits for the owner's phone test before the next round                             | [handoff/Fluids.md](handoff/Fluids.md)   |
-| Science                                                                     | Idle after r2 (merged)                                                                     | [handoff/Science.md](handoff/Science.md) |
-| Worlds r4: the character lab                                                | Paused at the owner's request (October 2, 2026; #168 draft)                                | [handoff/Worlds.md](handoff/Worlds.md)   |
-| Integrator and Integrator 2                                                 | Running, Sonnet 5.5; they can split one run's spec files in half                           | —                                        |
-| Next (WORKSTREAMS.md, Next)                                                 | Category hands-on lanes once the owner approves the hands-on plan; Quality, Knots, Food r2 | —                                        |
+| Lane                                                  | Status                                                                                                                                                                                                                                                                                                                                                                                          | Handoff                                 |
+| ----------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------- |
+| Operator                                              | Running; runs the lanes                                                                                                                                                                                                                                                                                                                                                                         | —                                       |
+| The push, wave 1 (started October 5, 2026, 00:32 UTC) | Merged: QR lab r2 (#267), Imaging (#274, #275, round 2 #304, polish #320), Fix8 (#273), Site (#266), QR r3 (#265, polish #325), Any pose (#276, #277), Science r3 (#272, #270, round 2 #324), Live r7 (#284, #263, #336), Pages r6 (#282, #269, polish #344), Studio media (#271, round 2 #343), Earth and maps (#268, round 2 #329). In review: Live r7's polish (#333) and long videos (#338) | `handoff/<lane>.md`                     |
+| Arcade, the games lane (started 02:23 UTC)            | Merged, Opus 5.5: the game kit (#283), the games (#285) and round 2 (#327, #328)                                                                                                                                                                                                                                                                                                                | `handoff/Arcade.md` (on its branch)     |
+| The push, wave 2 (started 04:20 UTC)                  | Merged: Sound and light lab (#286, round 2 #314), Tiny world r2 (#291), Viewers (#287), Space r2 (#288, polish #337), Computing r2 (#289, #290). In review: Space r2's rockets (#341). Opus 5.5                                                                                                                                                                                                 | `handoff/<lane>.md` (on their branches) |
+| The push, wave 3 (started 07:14 UTC)                  | Merged: Molecule viewer (#300, #295, polish #326 and #317), Night sky (#297, #293, polish #316), Real elements (#298), PDF lab (#299, #301, polish #312), Data and climate (#294, polish #313), Waves and optics (#296, polish #323). In review: Real elements' polish (#318). Opus 5.5                                                                                                         | `handoff/<lane>.md` (on their branches) |
+| Toy pages and Site pages (started 11:35 UTC)          | Merged: Toy pages, Opus 5.5 (#305, #307). Site pages, Sonnet 5.5 (#306 the hubs, About, credits, privacy, What's new and the embed guide): adapting its hubs to the toy pages, then a test run                                                                                                                                                                                                  | `handoff/<lane>.md` (on their branches) |
+| The push, wave 4 (started October 6, 2026, 14:22 UTC) | Running, Opus 5.5: QR craft (picture QR codes, codes built from real things, other barcodes), Showcase (a live reel of the best effects), Powers of ten (one zoom through real scales)                                                                                                                                                                                                          | `handoff/<lane>.md` (on their branches) |
+| Integrators 1, 3, 4, 5 and 6                          | Running, Sonnet 5.5; each runs one combination's full suite (about four and a half hours)                                                                                                                                                                                                                                                                                                       | —                                       |
+| Local lanes on the owner's Mac                        | Photoreal r3, Circuits and the hands-on lanes H1 to H5: briefs written                                                                                                                                                                                                                                                                                                                          | `handoff/<lane>.md`                     |
+| Worlds r4: the character lab                          | Paused at the owner's request (October 2, 2026; #168 draft)                                                                                                                                                                                                                                                                                                                                     | [handoff/Worlds.md](handoff/Worlds.md)  |
+| Next (WORKSTREAMS.md, Next)                           | Photoreal r3 (on the owner's Mac), Graph splats; later S4, the X-ray car and real landmarks                                                                                                                                                                                                                                                                                                     | —                                       |
 
 E4-finish, E5, E6a, E6b, F, G, Math, Fix3, AI, Help, HelpTextA, HelpTextB, Pictures, Manual and
 Screens are done, and so are Viewer, Studio Sound, Learn, Lab, Studio Models, Books, Fidelity A,
@@ -200,25 +294,24 @@ default effort, a trial), new public text is in American English, and the work g
 ROADMAP.md, "Now". Lanes AI and Math started that day, and the Sound Board has its review features,
 ready for the owner's sound notes.
 
-On September 29, 2026 the owner reviewed the new labs toys
-([reviews/2026-09-29-new-toys](reviews/2026-09-29-new-toys/review.md)): "very impressed", the
-picture frame "nearly perfect" and the Screen "very close to perfect". Books takes his notes on the
-Picture lab, Your book, the photo album and the frame (taps that go back or forward by where they
-land, pages you pull with real physics, sharper covers and a gilded frame, GIFs and videos in
-frames, the slideshow's order); Screens r2 takes the Screen (nothing of the picture shows while it's
-off, a real off switch, sharper sets); Lab r2 takes the galaxy tap and the Splat equation's grain;
-the Song landscape gets a Live view that moves with the music (the Photo to 3D session, after its
-own toy); and an Operator engine PR makes the web-address box name only what each toy opens.
+On September 29, 2026 the owner reviewed the new labs toys (his notes are private): "very
+impressed", the picture frame "nearly perfect" and the Screen "very close to perfect". Books takes
+his notes on the Picture lab, Your book, the photo album and the frame (taps that go back or forward
+by where they land, pages you pull with real physics, sharper covers and a gilded frame, GIFs and
+videos in frames, the slideshow's order); Screens r2 takes the Screen (nothing of the picture shows
+while it's off, a real off switch, sharper sets); Lab r2 takes the galaxy tap and the Splat
+equation's grain; the Song landscape gets a Live view that moves with the music (the Photo to 3D
+session, after its own toy); and an Operator engine PR makes the web-address box name only what each
+toy opens.
 
-The owner reviewed the AI and Math clips the same day
-([reviews/2026-09-27-ai-math](reviews/2026-09-27-ai-math/review.md)): seven good, and extras for the
-rest (3D versions beside the 2D "poster" ones, a second transformer diagram, MLPs, a CNN you draw
-on, word vectors for any words, more sorting algorithms, your own settings and Fourier text). His
-notes on the bananas' stem and the ocean wave's collapse went to lane Fix3. He also asked for toy
-help (a how-to line when a toy opens and an About tab), step 2 of the plan. Math and Fix3 merged
-after his later rounds; AI after its fourth, when its labels became readable and sharper and the
-classic transformer's key moved off the toy into the Toy tab. The two help text lanes then wrote a
-how-to line and an About text for every toy; the owner read them on the Help Board (a new page,
+The owner reviewed the AI and Math clips the same day (his review is private): seven good, and
+extras for the rest (3D versions beside the 2D "poster" ones, a second transformer diagram, MLPs, a
+CNN you draw on, word vectors for any words, more sorting algorithms, your own settings and Fourier
+text). His notes on the bananas' stem and the ocean wave's collapse went to lane Fix3. He also asked
+for toy help (a how-to line when a toy opens and an About tab), step 2 of the plan. Math and Fix3
+merged after his later rounds; AI after its fourth, when its labels became readable and sharper and
+the classic transformer's key moved off the toy into the Toy tab. The two help text lanes then wrote
+a how-to line and an About text for every toy; the owner read them on the Help Board (a new page,
 OPERATING.md, "Pages") and approved every one on September 28, 2026.
 
 ## Where things are
@@ -231,7 +324,8 @@ OPERATING.md, "Pages") and approved every one on September 28, 2026.
   (7b).
 - [TOY-PLAN.md](TOY-PLAN.md): every toy's planned tap effect and sound, generated from
   `tools/toy-plan.json` by `node tools/toy-plan.mjs`.
-- [reviews/](reviews/): the owner's reviews, word for word, with screenshots.
+- [reviews/](reviews/): the Operator's triage of each of the owner's reviews, in its own words (his
+  notes are private).
 - [BACKLOG.md](BACKLOG.md), [ROADMAP.md](ROADMAP.md), [SCENE-SCHEMA.md](SCENE-SCHEMA.md),
   `CREDITS.md`, `LICENSES.md`, `README.md` (features and code layout).
 - The private pages (Effect review, Sound Board, Help Board, Toy Plan, Toy Ideas, Parallel Plan,
@@ -247,7 +341,7 @@ Each has its full notes in handoff/history.md (the phase is in brackets) and, fo
 - Draw order (E2): splats sort in their built pose; build pieces where they are seen at their
   fullest; turning about the view keeps the order; spinning bodies are built twice.
 - Hidden pieces count in the fit (E2); `fit: false` (E3 review) leaves a shape out of the fit.
-- Channels and morphs (E3): one behaviour per splat; rounder or larger splats where a morph turns or
+- Channels and morphs (E3): one behavior per splat; rounder or larger splats where a morph turns or
   stretches a surface.
 - Loose pieces as tokens, and pieces built where they end (E4).
 - Skinned sheets, twists of space, negative glow, spinning gloss, `cull` for one spinning body, and
@@ -292,6 +386,215 @@ Settled on 2026-09-24, when the owner approved every recommendation:
 Settled on 2026-09-26: the remaining work runs as parallel lanes with an Operator session
 (OPERATING.md).
 
+Settled on 2026-10-06:
+
+- NASA 3D Resources models are allowed under NASA's media guidelines, without any NASA insignia and
+  with their source pages credited (CLAUDE.md, "Ground rules"); Space r2 builds the SLS and the
+  Space Shuttle from them.
+- Moving photo to 3D takes long videos (Live r7, #338, labs), not only the first 8 seconds.
+- Usage: 53% of the weekly allowance at 14:20 UTC, so wave 4 started: QR craft, Showcase and Powers
+  of ten, Opus 5.5 at the default effort. Live r7's higher effort was set by mistake; it goes back
+  to the default.
+- Merged today: Pages r6 (#282, #269, #344), Studio media (#271, #343), Earth and maps (#268, #329),
+  Imaging, QR r3, Science r3, Sound and light lab, Data and climate, Night sky, Molecule viewer and
+  PDF lab polish, Waves and optics (#296, #323), Arcade (#283, #285, #327, #328), Live r7's song
+  landscape fix (#336), Space r2's polish (#337), Computing r2 (#289, #290) and Toy pages (#305,
+  #307), through Ops #339, #340, #345 to #348 and #354.
+
+Settled on 2026-10-05, afternoon:
+
+- AI-made sources: he marked AI1 to AI5 yes. CLAUDE.md has the rule (AI-made samples may ship as
+  Studio samples, labeled as AI-made, with no people, logos or text; never for science, math or
+  engineering toys, the photoreal shelves or landmarks shown as real). Claude can't make AI video or
+  pictures, so he makes them with his own AI plan and uploads them on a private upload page; Studio
+  media turns them into 3D.
+- Effect review page 2: "everything looks pretty good, some things look amazing"; he asked for one
+  more sharpness, polish and enhancement round on every push toy ("the toys could still be
+  sharper"). Lanes whose PRs are in a test run do it on `-polish` or `-r2` branches and open the
+  follow-up PR after the first one merges; public PRs (Pages r6, Computing r2) merge with their
+  asked fixes first.
+- He OK'd merging About-text fixes without a clip review: Codex's evidence for AI and computing
+  (#278) merged. Tiny world r2 (#291) merged after its start-codon fix.
+- Integrators now run the suite in foreground batches of spec files and keep the turn alive: an idle
+  session's container is reclaimed, which had been killing background runs.
+- Usage: about a third of his weekly allowance was used by mid-afternoon, so waiting lanes stopped
+  their hourly self check-ins (the Operator wakes them) and the second group's polish waits for its
+  merges.
+
+Settled on 2026-10-05, morning:
+
+- He used his banked reset at about 02:40 UTC. The push pace holds (about ten to twelve busy
+  workers) until the weekly reset of Wednesday, October 7, 2026, 4 p.m. ET.
+- Games: his idea of real games made as splat toys (simple and geometric first, 2D and 3D, full
+  screen and in embeds, remixes of classic games only where the law allows) is a main lane, Arcade,
+  started at 02:23 UTC on a new labs shelf. His marks on the Push Plan: the 2D/3D change is a switch
+  that slides smoothly, not a slider (a slider only where it is part of play); each game has its own
+  stats; brick breaker's 3D version puts the paddle at the bottom of an invisible sphere under a
+  dome of bricks, and a version that differs from his idea is kept beside it; snake uses the Space
+  shelf's planets, with tunnels and other shapes; the lander goes to other worlds besides the Moon;
+  mini golf is deferred; pinball is practice for the physics. The block world (G14, G15) is a later
+  lane.
+- The Chladni plate: his test at 02:24 UTC, with his own long song and with the microphone, still
+  showed the bow and a new plate every 5 to 6 seconds, with the sand moving only at each restart. He
+  wants no bow with an audio file or the microphone, and the sand answering at once and
+  continuously. Live r7 rebuilt it as live sand (#263, with the engine PR #284); in a test run.
+- AI-made sources: his idea of making videos and pictures with his own AI video and image plan and
+  turning them into splats with Video to 3D, Photo to 3D and Moving photo to 3D. The Push Plan has
+  the answers (consistency from frame to frame, slow orbits of still subjects, no watermarks, the
+  output is his to use but can't be copyrighted) and test prompts; cards AI1 to AI5, including a
+  rule for AI-made sources, wait for his marks. The science toys stay on real data.
+- Later that morning: QR lab r2 (#267), Imaging (#274, #275) and Fix8 (#273, the real alarm clock
+  tells the time) merged after full test runs. The hands-on sample test now asks for every public
+  shelf, so labs-only shelves such as Imaging and Arcade don't fail it (#302). A full run takes
+  about four and a half hours, so six Integrators run (Integrator 2 retired), and wave 3 started at
+  07:14 UTC.
+- Merged the same morning: Codex task 21's report (#280, docs/audits/pdf-motion-2026-10.md: a PDF
+  can move and respond in some viewers, a WebGL toy can't run inside one; the sample PDFs wait for
+  his tests on his devices) and the Dot's two source reports (#279, open science data; #281,
+  photoreal captures and Studio media sources). A fourth Integrator started at 05:27 UTC.
+
+Settled on 2026-10-05, early (the owner's go):
+
+- Wave 1 of the push started at 00:32 UTC: Pages r6, Studio media (Sonnet 5.5), Live r7, QR r3, QR
+  lab r2, Science r3, Imaging, Earth and maps, Site, Any pose and Fix8 (sessions in WORKSTREAMS.md).
+  He will use his banked reset when this account nears 100%.
+- His picks on the new ideas: P1 (layered pop-up scenes) yes, for Pages r6; P2 to P4 maybe; X1 to X4
+  (two codes in one sculpture, three codes in one square, the code that heals, a shadow code) yes:
+  X2 and X3 to QR lab r2, X1 and X4 to QR craft; N1 to N8 (in a box, a periodic table of real
+  samples, the X-ray car, real landmarks, graph splats, a shape lab, checkers with real games,
+  canvas clothing) yes: N1's first box to Science r3, the rest to later lanes.
+- "PDB fetch yes": the molecule viewer may fetch a structure by its code (CLAUDE.md, "Live data").
+- He sent both Dot research prompts and started Codex tasks 21 and 16.
+
+Settled on 2026-10-04, late evening (the owner's push alignment notes, which are private, and his
+picks on the Push Plan page):
+
+- **The push.** About ten to twelve busy workers on this account until the weekly reset of
+  Wednesday, October 7, 2026, 4 p.m. ET, on his banked reset. Its main areas: Pictures and Pages
+  (Splashery's difference), the Studio, Science and the labs, QR codes, and a real site. Wave 1
+  (WORKSTREAMS.md, "Next") starts on his go; the four local lanes Imaging, Earth and maps, Any pose
+  and QR r3 move to the cloud.
+- **The shelves are closing** (CLAUDE.md, "Working style"): balls, food, nature, gems, medieval,
+  holidays, music, Open me, animals and the cartoon vehicles get only their hands-on finishing;
+  landmarks, the body, weather and fire grow only with photoreal or high-fidelity work; Space, Tiny
+  world, Atoms, Math, and AI and computing stay open; Shapes only as a shape lab that teaches
+  something; clothing later as "canvas" items people print their own pictures on. Photoreal: fix the
+  sounds and bases (Photoreal r3), then add only at the newest bar. The Fluid lab continues only as
+  other work needs it (hard to run on his devices); the Splat field may continue.
+- **Rules he set** (CLAUDE.md, "Ground rules"): the Operator may approve open-source libraries (in
+  LICENSES.md; anything serious goes to him), and he approved a LAZ reader and a DICOM reader; a
+  recorder may save what the person records to a file they choose; the earthquakes toy may read the
+  USGS feed live, and other open geographic feeds on the same terms; the Night sky may ask for a
+  location on tap.
+- **Evidence for every science, math and engineering toy**: sources, tests, and plain words about
+  what is simplified; shown on each toy's page later, never inside the toy, and never naming the
+  tool that checked it (docs/evidence/README.md). Codex tasks 16 to 20 write the first files; Codex
+  task 21 finds out how a toy can move inside a PDF.
+- **His picks**: QR Q5, Q6, Q7, Q12 and Q13 yes (Q1 to Q4, Q9 and Q10 later or after more detail; Q8
+  waits; Q11 deferred); the site W1 to W8 and W10 to W12 yes (W9, for teachers, after the
+  correctness audit); science S2 to S7, S9, S12 to S17 yes (S1 after his word on fetching by code;
+  S8, S10 and S11 not now); tools only T5 and T6 as options; lanes Imaging, Earth and maps, Any pose
+  and a third Integrator yes, Circuits not yet, the English sweep and the write-up near the end.
+- **Fixes he asked for**: the photoreal alarm clock shows the real time (Fix8); the pages' sound on
+  drag turns and the pop-up switch (Pages r6); the Splat mirror's grain and the live Song landscape
+  (Live r7). The Chladni bow fix is already on main (Live input r4).
+
+Settled on 2026-10-04, evening:
+
+- Merged: Manual r2 (#253; "credit no": no credit line until the owner words one), Fluids r7 (#252)
+  and the live3 still-mirror test fix (#259), each after a full test run.
+- Codex's About audit (#193) is reworked in #260 (47 kept, 26 fixed, 17 kept as before, 18 kept
+  main's newer text). It changes public toys' help text, so it waits for the owner's OK.
+- The owner agreed to a push on this account through the scheduled reset of Wednesday, October 7, 4
+  p.m. ET, using his banked reset; the plan's ideas wait for his picks.
+
+Settled on 2026-10-04, afternoon:
+
+- The hands-on demo toys are merged: Engine #255 (a ball twisting on the spot stops) and #232, then
+  #229 and #230 through Ops combo #256. The owner marked every changed effect good. Combo L found
+  three Level 1 gaps (tests/hl1.spec.mjs) and a rig over 12 regions, fixed in the lanes before the
+  merge: the chest's lid and the jelly blob's stretch now take a press, so hl1 samples the soda can
+  and the toadstool instead.
+- tests/live3.spec.mjs:372 (the still splat mirror) fails on main since Live input r6 (#250); the
+  Live input lane fixes it on `claude/lane-live-input-r6-fix`.
+- Fluids r7 (#252, Sonnet 5.5) passed the Operator's technical review; it merges after a full test
+  run (labs). Manual r2 (#253, Sonnet 5.5) waits on the owner's answer on its credit line.
+
+Settled on 2026-10-04 (the owner's answers of 03:30 UTC):
+
+- "Manual r2 go": lane Manual r2 (Sonnet 5.5, docs) builds Codex 13's newcomer proposals and a fresh
+  PDF (docs/handoff/Manual.md, "r2").
+- "Fluids Sonnet": lane Fluids r7 runs on Sonnet 5.5, with the owner's permission, as a test of
+  Sonnet on engine work; the Operator reviews the code and the numbers (docs/handoff/Fluids.md,
+  "r7").
+- The Dot's photoreal sound sources report is merged (#248). Live input r6 (#250) is in combo K.
+
+Settled on 2026-10-04, early (the owner's messages of October 3, evening):
+
+- Codex tasks 13 (#244, the Tinkerer's Manual audited for a newcomer), 14 (#247, the Fluid Lab on a
+  phone) and 15 (#245, the lab notebook) are merged. The manual's PDF still has the September 29
+  text; a lane regenerates it. #247's proposals (smaller phone allocations, a step-down that
+  rebuilds the fluids, the WebGPU buffers kept per scene change) wait for a Fluids round.
+- The hands-on engines are merged together as #246 (combo J); the five hands-on category lanes (H1
+  to H5) may start, locally on the second account.
+- The save point: OPERATING.md, "Concurrency and usage".
+
+Settled on 2026-10-03, evening (the owner's review, which is private):
+
+- The QR code toy: sharper modules, more motions, living colors expanded, country-flag colors on the
+  splats, more palettes: lane QR r3, local.
+- The photoreal toys' sounds and bases, toy by toy, the dog plush's gaps and the real alarm clock's
+  time: added to Photoreal r3's brief (local).
+- The Splat mirror (blobs over the camera view when zoomed out; too flashy and grainy) joins Live
+  input r6, after Moving photo to 3D, which isn't on the labs site until r6 merges.
+- The Fluid Lab on a phone: Codex task 14 measures it first; lane Fluids builds the fix.
+- Codex task 13 audits the Tinkerer's Manual for a newcomer to Gaussian splats; task 15 brings the
+  lab notebook up to date.
+- grooph 0.2.5's hooks are on main (#241).
+- This account's weekly usage resets Wednesday, October 7, 2026, 4 p.m. ET. Until then it carries
+  the Operator, the Integrators and the cloud lanes already open; new building runs on the second
+  account.
+
+Settled on 2026-10-03, afternoon (the owner's notes at 16:25 UTC):
+
+- New work runs as local lanes in Claude Code on the owner's Mac, signed in to his second Claude
+  account, so it uses that account's weekly usage rather than this account's or cloud credits
+  (OPERATING.md, "Local lanes"; `SPLASHERY_PORT` gives each one its own test server). The first
+  five: Photoreal r3, Any pose, Imaging, Earth and maps, Circuits (WORKSTREAMS.md).
+- Moving photo to 3D keeps its sound on pause and resume, and plays at its source's speed and
+  sharpness: Live input r6, in the cloud.
+- The Dot jobs report merged (#231). The owner's Dot researches sources for the new shelves
+  (`docs/audits/new-sources-2026-10.md` when it lands).
+
+Settled on 2026-10-03, the owner's answers of that morning:
+
+- The QR code toy keeps its two vendored libraries: Project Nayuki's QR Code generator (MIT) and
+  jsQR (Apache-2.0), loaded only when the toy opens (CLAUDE.md).
+- #184 (the Physics showcase toys, the spring toy included) merges as it is after a full test run;
+  #178 (UI r5) merges once the lane's answer on model sizes is in.
+- His October 2 review file says "[the other project]" in place of its code name.
+- The lanes' grooph events go on this public repository (#227: grooph 0.2.4 hooks).
+- PDF.js's four Liberation Sans fonts: he asked for a comparison with the OFL builds first, and for
+  one page listing every license decision, to review if the site is ever commercialized.
+
+Settled on 2026-10-03, morning: the owner accepts every line of docs/HANDS-ON-PLAN.md (336 toys:
+Level 1 for all, and 183 toys with more). Three engine lanes build the plan's engine pieces at once
+(Hands-on engine A: bodies and fields; B: joints; C: soft parts), each with a few demo toys; five
+category lanes build the other toys as each engine PR merges. Codex adds the real physical
+properties (task 11) and a Level 1 sweep of every toy (task 12).
+
+Settled on 2026-10-03, the owner's "go" on the Splat Fidelity Plan (the Operator's private page of
+that night: why our placed splats look like cartoons beside SuperSplat's trained ones, and how to
+train our own):
+
+- Stage 1: the boombox trained from Blender renders on the owner's Mac (Codex task 08); Stage 2: a
+  brass orrery trained part by part on a kit rig (the Fidelity lane, then Codex task 10).
+- Photoreal round 2 (the Photoreal r2 lane), PDF links and pop-out figures in the books (Books r5,
+  labs first), and a Codex comparison with SuperSplat (task 09).
+- CC BY-NC and CC BY-NC-SA assets are allowed per asset on four conditions (CLAUDE.md). Adding them
+  never forces any other toy off the site: licenses apply per asset.
+- No new Sharpness rounds until Stage 1 reports.
+
 Settled on September 27, 2026 (the How Splashery Is Made page, Part 1):
 
 - The Operator runs the lanes; the owner talks only to the Operator, reviews clips and merges.
@@ -310,8 +613,7 @@ Settled on September 27, 2026 (the How Splashery Is Made page, Part 1):
 - The pencil defaults to yellow, the tin can to an original "Peaches" label, and both have a Look
   choice.
 
-Settled on September 28, 2026 (the Pages into Splats report,
-[review](reviews/2026-09-28-pictures/review.md)):
+Settled on September 28, 2026 (the Pages into Splats report):
 
 - Pictures and pages is step 3, before pianos and the physics work. The sound lanes start whenever
   the owner sends his sound notes, in parallel; the new toys' sounds join the later new-toys round.
@@ -338,4 +640,4 @@ Settled on September 30, 2026 (the owner's answers to the Operator's plan after 
 
 Still open (ask when it comes up, in Phase H):
 
-- The favourite maths toy for the homepage: Menger sponge or hypercube? One embed or several?
+- The favorite math toy for the homepage: Menger sponge or hypercube? One embed or several?

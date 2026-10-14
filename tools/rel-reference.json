@@ -1,0 +1,2851 @@
+{
+  "source": "https://pubchem.ncbi.nlm.nih.gov/rest/pug/periodictable/JSON",
+  "rows": [
+    {
+      "AtomicNumber": "1",
+      "Symbol": "H",
+      "Name": "Hydrogen",
+      "AtomicMass": "1.0080",
+      "StandardState": "Gas",
+      "MeltingPoint": "13.81",
+      "BoilingPoint": "20.28",
+      "Density": "0.00008988",
+      "GroupBlock": "Nonmetal",
+      "YearDiscovered": "1766"
+    },
+    {
+      "AtomicNumber": "2",
+      "Symbol": "He",
+      "Name": "Helium",
+      "AtomicMass": "4.00260",
+      "StandardState": "Gas",
+      "MeltingPoint": "0.95",
+      "BoilingPoint": "4.22",
+      "Density": "0.0001785",
+      "GroupBlock": "Noble gas",
+      "YearDiscovered": "1868"
+    },
+    {
+      "AtomicNumber": "3",
+      "Symbol": "Li",
+      "Name": "Lithium",
+      "AtomicMass": "7.0",
+      "StandardState": "Solid",
+      "MeltingPoint": "453.65",
+      "BoilingPoint": "1615",
+      "Density": "0.534",
+      "GroupBlock": "Alkali metal",
+      "YearDiscovered": "1817"
+    },
+    {
+      "AtomicNumber": "4",
+      "Symbol": "Be",
+      "Name": "Beryllium",
+      "AtomicMass": "9.012183",
+      "StandardState": "Solid",
+      "MeltingPoint": "1560",
+      "BoilingPoint": "2744",
+      "Density": "1.85",
+      "GroupBlock": "Alkaline earth metal",
+      "YearDiscovered": "1798"
+    },
+    {
+      "AtomicNumber": "5",
+      "Symbol": "B",
+      "Name": "Boron",
+      "AtomicMass": "10.81",
+      "StandardState": "Solid",
+      "MeltingPoint": "2348",
+      "BoilingPoint": "4273",
+      "Density": "2.37",
+      "GroupBlock": "Metalloid",
+      "YearDiscovered": "1808"
+    },
+    {
+      "AtomicNumber": "6",
+      "Symbol": "C",
+      "Name": "Carbon",
+      "AtomicMass": "12.011",
+      "StandardState": "Solid",
+      "MeltingPoint": "3823",
+      "BoilingPoint": "4098",
+      "Density": "2.2670",
+      "GroupBlock": "Nonmetal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "7",
+      "Symbol": "N",
+      "Name": "Nitrogen",
+      "AtomicMass": "14.007",
+      "StandardState": "Gas",
+      "MeltingPoint": "63.15",
+      "BoilingPoint": "77.36",
+      "Density": "0.0012506",
+      "GroupBlock": "Nonmetal",
+      "YearDiscovered": "1772"
+    },
+    {
+      "AtomicNumber": "8",
+      "Symbol": "O",
+      "Name": "Oxygen",
+      "AtomicMass": "15.999",
+      "StandardState": "Gas",
+      "MeltingPoint": "54.36",
+      "BoilingPoint": "90.2",
+      "Density": "0.001429",
+      "GroupBlock": "Nonmetal",
+      "YearDiscovered": "1774"
+    },
+    {
+      "AtomicNumber": "9",
+      "Symbol": "F",
+      "Name": "Fluorine",
+      "AtomicMass": "18.99840316",
+      "StandardState": "Gas",
+      "MeltingPoint": "53.53",
+      "BoilingPoint": "85.03",
+      "Density": "0.001696",
+      "GroupBlock": "Halogen",
+      "YearDiscovered": "1670"
+    },
+    {
+      "AtomicNumber": "10",
+      "Symbol": "Ne",
+      "Name": "Neon",
+      "AtomicMass": "20.180",
+      "StandardState": "Gas",
+      "MeltingPoint": "24.56",
+      "BoilingPoint": "27.07",
+      "Density": "0.0008999",
+      "GroupBlock": "Noble gas",
+      "YearDiscovered": "1898"
+    },
+    {
+      "AtomicNumber": "11",
+      "Symbol": "Na",
+      "Name": "Sodium",
+      "AtomicMass": "22.9897693",
+      "StandardState": "Solid",
+      "MeltingPoint": "370.95",
+      "BoilingPoint": "1156",
+      "Density": "0.97",
+      "GroupBlock": "Alkali metal",
+      "YearDiscovered": "1807"
+    },
+    {
+      "AtomicNumber": "12",
+      "Symbol": "Mg",
+      "Name": "Magnesium",
+      "AtomicMass": "24.305",
+      "StandardState": "Solid",
+      "MeltingPoint": "923",
+      "BoilingPoint": "1363",
+      "Density": "1.74",
+      "GroupBlock": "Alkaline earth metal",
+      "YearDiscovered": "1808"
+    },
+    {
+      "AtomicNumber": "13",
+      "Symbol": "Al",
+      "Name": "Aluminum",
+      "AtomicMass": "26.981538",
+      "StandardState": "Solid",
+      "MeltingPoint": "933.437",
+      "BoilingPoint": "2792",
+      "Density": "2.70",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "14",
+      "Symbol": "Si",
+      "Name": "Silicon",
+      "AtomicMass": "28.085",
+      "StandardState": "Solid",
+      "MeltingPoint": "1687",
+      "BoilingPoint": "3538",
+      "Density": "2.3296",
+      "GroupBlock": "Metalloid",
+      "YearDiscovered": "1854"
+    },
+    {
+      "AtomicNumber": "15",
+      "Symbol": "P",
+      "Name": "Phosphorus",
+      "AtomicMass": "30.97376200",
+      "StandardState": "Solid",
+      "MeltingPoint": "317.3",
+      "BoilingPoint": "553.65",
+      "Density": "1.82",
+      "GroupBlock": "Nonmetal",
+      "YearDiscovered": "1669"
+    },
+    {
+      "AtomicNumber": "16",
+      "Symbol": "S",
+      "Name": "Sulfur",
+      "AtomicMass": "32.07",
+      "StandardState": "Solid",
+      "MeltingPoint": "388.36",
+      "BoilingPoint": "717.75",
+      "Density": "2.067",
+      "GroupBlock": "Nonmetal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "17",
+      "Symbol": "Cl",
+      "Name": "Chlorine",
+      "AtomicMass": "35.45",
+      "StandardState": "Gas",
+      "MeltingPoint": "171.65",
+      "BoilingPoint": "239.11",
+      "Density": "0.003214",
+      "GroupBlock": "Halogen",
+      "YearDiscovered": "1774"
+    },
+    {
+      "AtomicNumber": "18",
+      "Symbol": "Ar",
+      "Name": "Argon",
+      "AtomicMass": "39.9",
+      "StandardState": "Gas",
+      "MeltingPoint": "83.8",
+      "BoilingPoint": "87.3",
+      "Density": "0.0017837",
+      "GroupBlock": "Noble gas",
+      "YearDiscovered": "1894"
+    },
+    {
+      "AtomicNumber": "19",
+      "Symbol": "K",
+      "Name": "Potassium",
+      "AtomicMass": "39.0983",
+      "StandardState": "Solid",
+      "MeltingPoint": "336.53",
+      "BoilingPoint": "1032",
+      "Density": "0.89",
+      "GroupBlock": "Alkali metal",
+      "YearDiscovered": "1807"
+    },
+    {
+      "AtomicNumber": "20",
+      "Symbol": "Ca",
+      "Name": "Calcium",
+      "AtomicMass": "40.08",
+      "StandardState": "Solid",
+      "MeltingPoint": "1115",
+      "BoilingPoint": "1757",
+      "Density": "1.54",
+      "GroupBlock": "Alkaline earth metal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "21",
+      "Symbol": "Sc",
+      "Name": "Scandium",
+      "AtomicMass": "44.95591",
+      "StandardState": "Solid",
+      "MeltingPoint": "1814",
+      "BoilingPoint": "3109",
+      "Density": "2.99",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1879"
+    },
+    {
+      "AtomicNumber": "22",
+      "Symbol": "Ti",
+      "Name": "Titanium",
+      "AtomicMass": "47.867",
+      "StandardState": "Solid",
+      "MeltingPoint": "1941",
+      "BoilingPoint": "3560",
+      "Density": "4.5",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1791"
+    },
+    {
+      "AtomicNumber": "23",
+      "Symbol": "V",
+      "Name": "Vanadium",
+      "AtomicMass": "50.9415",
+      "StandardState": "Solid",
+      "MeltingPoint": "2183",
+      "BoilingPoint": "3680",
+      "Density": "6.0",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1801"
+    },
+    {
+      "AtomicNumber": "24",
+      "Symbol": "Cr",
+      "Name": "Chromium",
+      "AtomicMass": "51.996",
+      "StandardState": "Solid",
+      "MeltingPoint": "2180",
+      "BoilingPoint": "2944",
+      "Density": "7.15",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1797"
+    },
+    {
+      "AtomicNumber": "25",
+      "Symbol": "Mn",
+      "Name": "Manganese",
+      "AtomicMass": "54.93804",
+      "StandardState": "Solid",
+      "MeltingPoint": "1519",
+      "BoilingPoint": "2334",
+      "Density": "7.3",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1774"
+    },
+    {
+      "AtomicNumber": "26",
+      "Symbol": "Fe",
+      "Name": "Iron",
+      "AtomicMass": "55.84",
+      "StandardState": "Solid",
+      "MeltingPoint": "1811",
+      "BoilingPoint": "3134",
+      "Density": "7.874",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "27",
+      "Symbol": "Co",
+      "Name": "Cobalt",
+      "AtomicMass": "58.93319",
+      "StandardState": "Solid",
+      "MeltingPoint": "1768",
+      "BoilingPoint": "3200",
+      "Density": "8.86",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1735"
+    },
+    {
+      "AtomicNumber": "28",
+      "Symbol": "Ni",
+      "Name": "Nickel",
+      "AtomicMass": "58.693",
+      "StandardState": "Solid",
+      "MeltingPoint": "1728",
+      "BoilingPoint": "3186",
+      "Density": "8.912",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1751"
+    },
+    {
+      "AtomicNumber": "29",
+      "Symbol": "Cu",
+      "Name": "Copper",
+      "AtomicMass": "63.55",
+      "StandardState": "Solid",
+      "MeltingPoint": "1357.77",
+      "BoilingPoint": "2835",
+      "Density": "8.933",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "30",
+      "Symbol": "Zn",
+      "Name": "Zinc",
+      "AtomicMass": "65.4",
+      "StandardState": "Solid",
+      "MeltingPoint": "692.68",
+      "BoilingPoint": "1180",
+      "Density": "7.134",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1746"
+    },
+    {
+      "AtomicNumber": "31",
+      "Symbol": "Ga",
+      "Name": "Gallium",
+      "AtomicMass": "69.723",
+      "StandardState": "Solid",
+      "MeltingPoint": "302.91",
+      "BoilingPoint": "2477",
+      "Density": "5.91",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "1875"
+    },
+    {
+      "AtomicNumber": "32",
+      "Symbol": "Ge",
+      "Name": "Germanium",
+      "AtomicMass": "72.63",
+      "StandardState": "Solid",
+      "MeltingPoint": "1211.4",
+      "BoilingPoint": "3106",
+      "Density": "5.323",
+      "GroupBlock": "Metalloid",
+      "YearDiscovered": "1886"
+    },
+    {
+      "AtomicNumber": "33",
+      "Symbol": "As",
+      "Name": "Arsenic",
+      "AtomicMass": "74.92159",
+      "StandardState": "Solid",
+      "MeltingPoint": "1090",
+      "BoilingPoint": "887",
+      "Density": "5.776",
+      "GroupBlock": "Metalloid",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "34",
+      "Symbol": "Se",
+      "Name": "Selenium",
+      "AtomicMass": "78.97",
+      "StandardState": "Solid",
+      "MeltingPoint": "493.65",
+      "BoilingPoint": "958",
+      "Density": "4.809",
+      "GroupBlock": "Nonmetal",
+      "YearDiscovered": "1817"
+    },
+    {
+      "AtomicNumber": "35",
+      "Symbol": "Br",
+      "Name": "Bromine",
+      "AtomicMass": "79.90",
+      "StandardState": "Liquid",
+      "MeltingPoint": "265.95",
+      "BoilingPoint": "331.95",
+      "Density": "3.11",
+      "GroupBlock": "Halogen",
+      "YearDiscovered": "1826"
+    },
+    {
+      "AtomicNumber": "36",
+      "Symbol": "Kr",
+      "Name": "Krypton",
+      "AtomicMass": "83.80",
+      "StandardState": "Gas",
+      "MeltingPoint": "115.79",
+      "BoilingPoint": "119.93",
+      "Density": "0.003733",
+      "GroupBlock": "Noble gas",
+      "YearDiscovered": "1898"
+    },
+    {
+      "AtomicNumber": "37",
+      "Symbol": "Rb",
+      "Name": "Rubidium",
+      "AtomicMass": "85.468",
+      "StandardState": "Solid",
+      "MeltingPoint": "312.46",
+      "BoilingPoint": "961",
+      "Density": "1.53",
+      "GroupBlock": "Alkali metal",
+      "YearDiscovered": "1861"
+    },
+    {
+      "AtomicNumber": "38",
+      "Symbol": "Sr",
+      "Name": "Strontium",
+      "AtomicMass": "87.62",
+      "StandardState": "Solid",
+      "MeltingPoint": "1050",
+      "BoilingPoint": "1655",
+      "Density": "2.64",
+      "GroupBlock": "Alkaline earth metal",
+      "YearDiscovered": "1790"
+    },
+    {
+      "AtomicNumber": "39",
+      "Symbol": "Y",
+      "Name": "Yttrium",
+      "AtomicMass": "88.90584",
+      "StandardState": "Solid",
+      "MeltingPoint": "1795",
+      "BoilingPoint": "3618",
+      "Density": "4.47",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1794"
+    },
+    {
+      "AtomicNumber": "40",
+      "Symbol": "Zr",
+      "Name": "Zirconium",
+      "AtomicMass": "91.22",
+      "StandardState": "Solid",
+      "MeltingPoint": "2128",
+      "BoilingPoint": "4682",
+      "Density": "6.52",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1789"
+    },
+    {
+      "AtomicNumber": "41",
+      "Symbol": "Nb",
+      "Name": "Niobium",
+      "AtomicMass": "92.90637",
+      "StandardState": "Solid",
+      "MeltingPoint": "2750",
+      "BoilingPoint": "5017",
+      "Density": "8.57",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1801"
+    },
+    {
+      "AtomicNumber": "42",
+      "Symbol": "Mo",
+      "Name": "Molybdenum",
+      "AtomicMass": "95.95",
+      "StandardState": "Solid",
+      "MeltingPoint": "2896",
+      "BoilingPoint": "4912",
+      "Density": "10.2",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1778"
+    },
+    {
+      "AtomicNumber": "43",
+      "Symbol": "Tc",
+      "Name": "Technetium",
+      "AtomicMass": "96.90636",
+      "StandardState": "Solid",
+      "MeltingPoint": "2430",
+      "BoilingPoint": "4538",
+      "Density": "11",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1937"
+    },
+    {
+      "AtomicNumber": "44",
+      "Symbol": "Ru",
+      "Name": "Ruthenium",
+      "AtomicMass": "101.1",
+      "StandardState": "Solid",
+      "MeltingPoint": "2607",
+      "BoilingPoint": "4423",
+      "Density": "12.1",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1827"
+    },
+    {
+      "AtomicNumber": "45",
+      "Symbol": "Rh",
+      "Name": "Rhodium",
+      "AtomicMass": "102.9055",
+      "StandardState": "Solid",
+      "MeltingPoint": "2237",
+      "BoilingPoint": "3968",
+      "Density": "12.4",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1803"
+    },
+    {
+      "AtomicNumber": "46",
+      "Symbol": "Pd",
+      "Name": "Palladium",
+      "AtomicMass": "106.42",
+      "StandardState": "Solid",
+      "MeltingPoint": "1828.05",
+      "BoilingPoint": "3236",
+      "Density": "12.0",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1803"
+    },
+    {
+      "AtomicNumber": "47",
+      "Symbol": "Ag",
+      "Name": "Silver",
+      "AtomicMass": "107.868",
+      "StandardState": "Solid",
+      "MeltingPoint": "1234.93",
+      "BoilingPoint": "2435",
+      "Density": "10.501",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "48",
+      "Symbol": "Cd",
+      "Name": "Cadmium",
+      "AtomicMass": "112.41",
+      "StandardState": "Solid",
+      "MeltingPoint": "594.22",
+      "BoilingPoint": "1040",
+      "Density": "8.69",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1817"
+    },
+    {
+      "AtomicNumber": "49",
+      "Symbol": "In",
+      "Name": "Indium",
+      "AtomicMass": "114.818",
+      "StandardState": "Solid",
+      "MeltingPoint": "429.75",
+      "BoilingPoint": "2345",
+      "Density": "7.31",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "1863"
+    },
+    {
+      "AtomicNumber": "50",
+      "Symbol": "Sn",
+      "Name": "Tin",
+      "AtomicMass": "118.71",
+      "StandardState": "Solid",
+      "MeltingPoint": "505.08",
+      "BoilingPoint": "2875",
+      "Density": "7.287",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "51",
+      "Symbol": "Sb",
+      "Name": "Antimony",
+      "AtomicMass": "121.760",
+      "StandardState": "Solid",
+      "MeltingPoint": "903.78",
+      "BoilingPoint": "1860",
+      "Density": "6.685",
+      "GroupBlock": "Metalloid",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "52",
+      "Symbol": "Te",
+      "Name": "Tellurium",
+      "AtomicMass": "127.6",
+      "StandardState": "Solid",
+      "MeltingPoint": "722.66",
+      "BoilingPoint": "1261",
+      "Density": "6.232",
+      "GroupBlock": "Metalloid",
+      "YearDiscovered": "1782"
+    },
+    {
+      "AtomicNumber": "53",
+      "Symbol": "I",
+      "Name": "Iodine",
+      "AtomicMass": "126.9045",
+      "StandardState": "Solid",
+      "MeltingPoint": "386.85",
+      "BoilingPoint": "457.55",
+      "Density": "4.93",
+      "GroupBlock": "Halogen",
+      "YearDiscovered": "1811"
+    },
+    {
+      "AtomicNumber": "54",
+      "Symbol": "Xe",
+      "Name": "Xenon",
+      "AtomicMass": "131.29",
+      "StandardState": "Gas",
+      "MeltingPoint": "161.36",
+      "BoilingPoint": "165.03",
+      "Density": "0.005887",
+      "GroupBlock": "Noble gas",
+      "YearDiscovered": "1898"
+    },
+    {
+      "AtomicNumber": "55",
+      "Symbol": "Cs",
+      "Name": "Cesium",
+      "AtomicMass": "132.9054520",
+      "StandardState": "Solid",
+      "MeltingPoint": "301.59",
+      "BoilingPoint": "944",
+      "Density": "1.93",
+      "GroupBlock": "Alkali metal",
+      "YearDiscovered": "1860"
+    },
+    {
+      "AtomicNumber": "56",
+      "Symbol": "Ba",
+      "Name": "Barium",
+      "AtomicMass": "137.33",
+      "StandardState": "Solid",
+      "MeltingPoint": "1000",
+      "BoilingPoint": "2170",
+      "Density": "3.62",
+      "GroupBlock": "Alkaline earth metal",
+      "YearDiscovered": "1808"
+    },
+    {
+      "AtomicNumber": "57",
+      "Symbol": "La",
+      "Name": "Lanthanum",
+      "AtomicMass": "138.9055",
+      "StandardState": "Solid",
+      "MeltingPoint": "1191",
+      "BoilingPoint": "3737",
+      "Density": "6.15",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1839"
+    },
+    {
+      "AtomicNumber": "58",
+      "Symbol": "Ce",
+      "Name": "Cerium",
+      "AtomicMass": "140.116",
+      "StandardState": "Solid",
+      "MeltingPoint": "1071",
+      "BoilingPoint": "3697",
+      "Density": "6.770",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1803"
+    },
+    {
+      "AtomicNumber": "59",
+      "Symbol": "Pr",
+      "Name": "Praseodymium",
+      "AtomicMass": "140.90766",
+      "StandardState": "Solid",
+      "MeltingPoint": "1204",
+      "BoilingPoint": "3793",
+      "Density": "6.77",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1885"
+    },
+    {
+      "AtomicNumber": "60",
+      "Symbol": "Nd",
+      "Name": "Neodymium",
+      "AtomicMass": "144.24",
+      "StandardState": "Solid",
+      "MeltingPoint": "1294",
+      "BoilingPoint": "3347",
+      "Density": "7.01",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1885"
+    },
+    {
+      "AtomicNumber": "61",
+      "Symbol": "Pm",
+      "Name": "Promethium",
+      "AtomicMass": "144.91276",
+      "StandardState": "Solid",
+      "MeltingPoint": "1315",
+      "BoilingPoint": "3273",
+      "Density": "7.26",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1945"
+    },
+    {
+      "AtomicNumber": "62",
+      "Symbol": "Sm",
+      "Name": "Samarium",
+      "AtomicMass": "150.4",
+      "StandardState": "Solid",
+      "MeltingPoint": "1347",
+      "BoilingPoint": "2067",
+      "Density": "7.52",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1879"
+    },
+    {
+      "AtomicNumber": "63",
+      "Symbol": "Eu",
+      "Name": "Europium",
+      "AtomicMass": "151.964",
+      "StandardState": "Solid",
+      "MeltingPoint": "1095",
+      "BoilingPoint": "1802",
+      "Density": "5.24",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1901"
+    },
+    {
+      "AtomicNumber": "64",
+      "Symbol": "Gd",
+      "Name": "Gadolinium",
+      "AtomicMass": "157.25",
+      "StandardState": "Solid",
+      "MeltingPoint": "1586",
+      "BoilingPoint": "3546",
+      "Density": "7.90",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1880"
+    },
+    {
+      "AtomicNumber": "65",
+      "Symbol": "Tb",
+      "Name": "Terbium",
+      "AtomicMass": "158.92535",
+      "StandardState": "Solid",
+      "MeltingPoint": "1629",
+      "BoilingPoint": "3503",
+      "Density": "8.23",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1843"
+    },
+    {
+      "AtomicNumber": "66",
+      "Symbol": "Dy",
+      "Name": "Dysprosium",
+      "AtomicMass": "162.500",
+      "StandardState": "Solid",
+      "MeltingPoint": "1685",
+      "BoilingPoint": "2840",
+      "Density": "8.55",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1886"
+    },
+    {
+      "AtomicNumber": "67",
+      "Symbol": "Ho",
+      "Name": "Holmium",
+      "AtomicMass": "164.93033",
+      "StandardState": "Solid",
+      "MeltingPoint": "1747",
+      "BoilingPoint": "2973",
+      "Density": "8.80",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1878"
+    },
+    {
+      "AtomicNumber": "68",
+      "Symbol": "Er",
+      "Name": "Erbium",
+      "AtomicMass": "167.26",
+      "StandardState": "Solid",
+      "MeltingPoint": "1802",
+      "BoilingPoint": "3141",
+      "Density": "9.07",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1843"
+    },
+    {
+      "AtomicNumber": "69",
+      "Symbol": "Tm",
+      "Name": "Thulium",
+      "AtomicMass": "168.93422",
+      "StandardState": "Solid",
+      "MeltingPoint": "1818",
+      "BoilingPoint": "2223",
+      "Density": "9.32",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1879"
+    },
+    {
+      "AtomicNumber": "70",
+      "Symbol": "Yb",
+      "Name": "Ytterbium",
+      "AtomicMass": "173.05",
+      "StandardState": "Solid",
+      "MeltingPoint": "1092",
+      "BoilingPoint": "1469",
+      "Density": "6.90",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1878"
+    },
+    {
+      "AtomicNumber": "71",
+      "Symbol": "Lu",
+      "Name": "Lutetium",
+      "AtomicMass": "174.9667",
+      "StandardState": "Solid",
+      "MeltingPoint": "1936",
+      "BoilingPoint": "3675",
+      "Density": "9.84",
+      "GroupBlock": "Lanthanide",
+      "YearDiscovered": "1907"
+    },
+    {
+      "AtomicNumber": "72",
+      "Symbol": "Hf",
+      "Name": "Hafnium",
+      "AtomicMass": "178.49",
+      "StandardState": "Solid",
+      "MeltingPoint": "2506",
+      "BoilingPoint": "4876",
+      "Density": "13.3",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1923"
+    },
+    {
+      "AtomicNumber": "73",
+      "Symbol": "Ta",
+      "Name": "Tantalum",
+      "AtomicMass": "180.9479",
+      "StandardState": "Solid",
+      "MeltingPoint": "3290",
+      "BoilingPoint": "5731",
+      "Density": "16.4",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1802"
+    },
+    {
+      "AtomicNumber": "74",
+      "Symbol": "W",
+      "Name": "Tungsten",
+      "AtomicMass": "183.84",
+      "StandardState": "Solid",
+      "MeltingPoint": "3695",
+      "BoilingPoint": "5828",
+      "Density": "19.3",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1783"
+    },
+    {
+      "AtomicNumber": "75",
+      "Symbol": "Re",
+      "Name": "Rhenium",
+      "AtomicMass": "186.207",
+      "StandardState": "Solid",
+      "MeltingPoint": "3459",
+      "BoilingPoint": "5869",
+      "Density": "20.8",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1925"
+    },
+    {
+      "AtomicNumber": "76",
+      "Symbol": "Os",
+      "Name": "Osmium",
+      "AtomicMass": "190.2",
+      "StandardState": "Solid",
+      "MeltingPoint": "3306",
+      "BoilingPoint": "5285",
+      "Density": "22.57",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1803"
+    },
+    {
+      "AtomicNumber": "77",
+      "Symbol": "Ir",
+      "Name": "Iridium",
+      "AtomicMass": "192.22",
+      "StandardState": "Solid",
+      "MeltingPoint": "2719",
+      "BoilingPoint": "4701",
+      "Density": "22.42",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1803"
+    },
+    {
+      "AtomicNumber": "78",
+      "Symbol": "Pt",
+      "Name": "Platinum",
+      "AtomicMass": "195.08",
+      "StandardState": "Solid",
+      "MeltingPoint": "2041.55",
+      "BoilingPoint": "4098",
+      "Density": "21.46",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1735"
+    },
+    {
+      "AtomicNumber": "79",
+      "Symbol": "Au",
+      "Name": "Gold",
+      "AtomicMass": "196.96657",
+      "StandardState": "Solid",
+      "MeltingPoint": "1337.33",
+      "BoilingPoint": "3129",
+      "Density": "19.282",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "80",
+      "Symbol": "Hg",
+      "Name": "Mercury",
+      "AtomicMass": "200.59",
+      "StandardState": "Liquid",
+      "MeltingPoint": "234.32",
+      "BoilingPoint": "629.88",
+      "Density": "13.5336",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "81",
+      "Symbol": "Tl",
+      "Name": "Thallium",
+      "AtomicMass": "204.383",
+      "StandardState": "Solid",
+      "MeltingPoint": "577",
+      "BoilingPoint": "1746",
+      "Density": "11.8",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "1861"
+    },
+    {
+      "AtomicNumber": "82",
+      "Symbol": "Pb",
+      "Name": "Lead",
+      "AtomicMass": "207",
+      "StandardState": "Solid",
+      "MeltingPoint": "600.61",
+      "BoilingPoint": "2022",
+      "Density": "11.342",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "Ancient"
+    },
+    {
+      "AtomicNumber": "83",
+      "Symbol": "Bi",
+      "Name": "Bismuth",
+      "AtomicMass": "208.98040",
+      "StandardState": "Solid",
+      "MeltingPoint": "544.55",
+      "BoilingPoint": "1837",
+      "Density": "9.807",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "1753"
+    },
+    {
+      "AtomicNumber": "84",
+      "Symbol": "Po",
+      "Name": "Polonium",
+      "AtomicMass": "208.98243",
+      "StandardState": "Solid",
+      "MeltingPoint": "527",
+      "BoilingPoint": "1235",
+      "Density": "9.32",
+      "GroupBlock": "Metalloid",
+      "YearDiscovered": "1898"
+    },
+    {
+      "AtomicNumber": "85",
+      "Symbol": "At",
+      "Name": "Astatine",
+      "AtomicMass": "209.98715",
+      "StandardState": "Solid",
+      "MeltingPoint": "575",
+      "BoilingPoint": "",
+      "Density": "7",
+      "GroupBlock": "Halogen",
+      "YearDiscovered": "1940"
+    },
+    {
+      "AtomicNumber": "86",
+      "Symbol": "Rn",
+      "Name": "Radon",
+      "AtomicMass": "222.01758",
+      "StandardState": "Gas",
+      "MeltingPoint": "202",
+      "BoilingPoint": "211.45",
+      "Density": "0.00973",
+      "GroupBlock": "Noble gas",
+      "YearDiscovered": "1900"
+    },
+    {
+      "AtomicNumber": "87",
+      "Symbol": "Fr",
+      "Name": "Francium",
+      "AtomicMass": "223.01973",
+      "StandardState": "Solid",
+      "MeltingPoint": "300",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Alkali metal",
+      "YearDiscovered": "1939"
+    },
+    {
+      "AtomicNumber": "88",
+      "Symbol": "Ra",
+      "Name": "Radium",
+      "AtomicMass": "226.02541",
+      "StandardState": "Solid",
+      "MeltingPoint": "973",
+      "BoilingPoint": "1413",
+      "Density": "5",
+      "GroupBlock": "Alkaline earth metal",
+      "YearDiscovered": "1898"
+    },
+    {
+      "AtomicNumber": "89",
+      "Symbol": "Ac",
+      "Name": "Actinium",
+      "AtomicMass": "227.02775",
+      "StandardState": "Solid",
+      "MeltingPoint": "1324",
+      "BoilingPoint": "3471",
+      "Density": "10.07",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1899"
+    },
+    {
+      "AtomicNumber": "90",
+      "Symbol": "Th",
+      "Name": "Thorium",
+      "AtomicMass": "232.038",
+      "StandardState": "Solid",
+      "MeltingPoint": "2023",
+      "BoilingPoint": "5061",
+      "Density": "11.72",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1828"
+    },
+    {
+      "AtomicNumber": "91",
+      "Symbol": "Pa",
+      "Name": "Protactinium",
+      "AtomicMass": "231.03588",
+      "StandardState": "Solid",
+      "MeltingPoint": "1845",
+      "BoilingPoint": "",
+      "Density": "15.37",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1913"
+    },
+    {
+      "AtomicNumber": "92",
+      "Symbol": "U",
+      "Name": "Uranium",
+      "AtomicMass": "238.0289",
+      "StandardState": "Solid",
+      "MeltingPoint": "1408",
+      "BoilingPoint": "4404",
+      "Density": "18.95",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1789"
+    },
+    {
+      "AtomicNumber": "93",
+      "Symbol": "Np",
+      "Name": "Neptunium",
+      "AtomicMass": "237.048172",
+      "StandardState": "Solid",
+      "MeltingPoint": "917",
+      "BoilingPoint": "4175",
+      "Density": "20.25",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1940"
+    },
+    {
+      "AtomicNumber": "94",
+      "Symbol": "Pu",
+      "Name": "Plutonium",
+      "AtomicMass": "244.06420",
+      "StandardState": "Solid",
+      "MeltingPoint": "913",
+      "BoilingPoint": "3501",
+      "Density": "19.84",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1940"
+    },
+    {
+      "AtomicNumber": "95",
+      "Symbol": "Am",
+      "Name": "Americium",
+      "AtomicMass": "243.061380",
+      "StandardState": "Solid",
+      "MeltingPoint": "1449",
+      "BoilingPoint": "2284",
+      "Density": "13.69",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1944"
+    },
+    {
+      "AtomicNumber": "96",
+      "Symbol": "Cm",
+      "Name": "Curium",
+      "AtomicMass": "247.07035",
+      "StandardState": "Solid",
+      "MeltingPoint": "1618",
+      "BoilingPoint": "3400",
+      "Density": "13.51",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1944"
+    },
+    {
+      "AtomicNumber": "97",
+      "Symbol": "Bk",
+      "Name": "Berkelium",
+      "AtomicMass": "247.07031",
+      "StandardState": "Solid",
+      "MeltingPoint": "1323",
+      "BoilingPoint": "",
+      "Density": "14",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1949"
+    },
+    {
+      "AtomicNumber": "98",
+      "Symbol": "Cf",
+      "Name": "Californium",
+      "AtomicMass": "251.07959",
+      "StandardState": "Solid",
+      "MeltingPoint": "1173",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1950"
+    },
+    {
+      "AtomicNumber": "99",
+      "Symbol": "Es",
+      "Name": "Einsteinium",
+      "AtomicMass": "252.0830",
+      "StandardState": "Solid",
+      "MeltingPoint": "1133",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1952"
+    },
+    {
+      "AtomicNumber": "100",
+      "Symbol": "Fm",
+      "Name": "Fermium",
+      "AtomicMass": "257.09511",
+      "StandardState": "Solid",
+      "MeltingPoint": "1800",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1952"
+    },
+    {
+      "AtomicNumber": "101",
+      "Symbol": "Md",
+      "Name": "Mendelevium",
+      "AtomicMass": "258.09843",
+      "StandardState": "Solid",
+      "MeltingPoint": "1100",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1955"
+    },
+    {
+      "AtomicNumber": "102",
+      "Symbol": "No",
+      "Name": "Nobelium",
+      "AtomicMass": "259.10100",
+      "StandardState": "Solid",
+      "MeltingPoint": "1100",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1957"
+    },
+    {
+      "AtomicNumber": "103",
+      "Symbol": "Lr",
+      "Name": "Lawrencium",
+      "AtomicMass": "266.120",
+      "StandardState": "Solid",
+      "MeltingPoint": "1900",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Actinide",
+      "YearDiscovered": "1961"
+    },
+    {
+      "AtomicNumber": "104",
+      "Symbol": "Rf",
+      "Name": "Rutherfordium",
+      "AtomicMass": "267.122",
+      "StandardState": "Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1964"
+    },
+    {
+      "AtomicNumber": "105",
+      "Symbol": "Db",
+      "Name": "Dubnium",
+      "AtomicMass": "268.126",
+      "StandardState": "Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1967"
+    },
+    {
+      "AtomicNumber": "106",
+      "Symbol": "Sg",
+      "Name": "Seaborgium",
+      "AtomicMass": "269.128",
+      "StandardState": "Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1974"
+    },
+    {
+      "AtomicNumber": "107",
+      "Symbol": "Bh",
+      "Name": "Bohrium",
+      "AtomicMass": "270.133",
+      "StandardState": "Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1976"
+    },
+    {
+      "AtomicNumber": "108",
+      "Symbol": "Hs",
+      "Name": "Hassium",
+      "AtomicMass": "269.1336",
+      "StandardState": "Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1984"
+    },
+    {
+      "AtomicNumber": "109",
+      "Symbol": "Mt",
+      "Name": "Meitnerium",
+      "AtomicMass": "277.154",
+      "StandardState": "Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1982"
+    },
+    {
+      "AtomicNumber": "110",
+      "Symbol": "Ds",
+      "Name": "Darmstadtium",
+      "AtomicMass": "282.166",
+      "StandardState": "Expected to be a Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1994"
+    },
+    {
+      "AtomicNumber": "111",
+      "Symbol": "Rg",
+      "Name": "Roentgenium",
+      "AtomicMass": "282.169",
+      "StandardState": "Expected to be a Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1994"
+    },
+    {
+      "AtomicNumber": "112",
+      "Symbol": "Cn",
+      "Name": "Copernicium",
+      "AtomicMass": "286.179",
+      "StandardState": "Expected to be a Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Transition metal",
+      "YearDiscovered": "1996"
+    },
+    {
+      "AtomicNumber": "113",
+      "Symbol": "Nh",
+      "Name": "Nihonium",
+      "AtomicMass": "286.182",
+      "StandardState": "Expected to be a Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "2004"
+    },
+    {
+      "AtomicNumber": "114",
+      "Symbol": "Fl",
+      "Name": "Flerovium",
+      "AtomicMass": "290.192",
+      "StandardState": "Expected to be a Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "1998"
+    },
+    {
+      "AtomicNumber": "115",
+      "Symbol": "Mc",
+      "Name": "Moscovium",
+      "AtomicMass": "290.196",
+      "StandardState": "Expected to be a Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "2003"
+    },
+    {
+      "AtomicNumber": "116",
+      "Symbol": "Lv",
+      "Name": "Livermorium",
+      "AtomicMass": "293.205",
+      "StandardState": "Expected to be a Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Post-transition metal",
+      "YearDiscovered": "2000"
+    },
+    {
+      "AtomicNumber": "117",
+      "Symbol": "Ts",
+      "Name": "Tennessine",
+      "AtomicMass": "294.211",
+      "StandardState": "Expected to be a Solid",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Halogen",
+      "YearDiscovered": "2010"
+    },
+    {
+      "AtomicNumber": "118",
+      "Symbol": "Og",
+      "Name": "Oganesson",
+      "AtomicMass": "295.216",
+      "StandardState": "Expected to be a Gas",
+      "MeltingPoint": "",
+      "BoilingPoint": "",
+      "Density": "",
+      "GroupBlock": "Noble gas",
+      "YearDiscovered": "2006"
+    }
+  ],
+  "uses": [
+    {
+      "z": 1,
+      "src": "jlab",
+      "text": "Large amounts of hydrogen are combined with nitrogen to make ammonia.",
+      "quote": "Large amounts of hydrogen are combined with nitrogen from the air to produce ammonia",
+      "sentence": "Large amounts of hydrogen are combined with nitrogen from the air to produce ammonia (NH3) through a process called the Haber process."
+    },
+    {
+      "z": 1,
+      "src": "jlab",
+      "text": "Liquid hydrogen burned with liquid oxygen is a rocket fuel.",
+      "quote": "when combined with liquid oxygen, makes an excellent rocket fuel",
+      "sentence": "Liquid hydrogen is used in the study of superconductors and, when combined with liquid oxygen, makes an excellent rocket fuel."
+    },
+    {
+      "z": 2,
+      "src": "jlab",
+      "text": "Helium fills party balloons, science balloons and blimps.",
+      "quote": "Helium gas is used to inflate blimps, scientific balloons and party balloons.",
+      "sentence": "Helium gas is used to inflate blimps, scientific balloons and party balloons. It is used as an inert shield for arc welding, to pressurize the fuel tanks of liquid fueled rockets and in supersonic windtunnels."
+    },
+    {
+      "z": 2,
+      "src": "lanl",
+      "text": "Liquid helium is used in MRI scanners in hospitals.",
+      "quote": "Liquid helium's use in magnetic resonance imaging (MRI) continues to increase",
+      "sentence": "Liquid helium's use in magnetic resonance imaging (MRI) continues to increase as the medical profession accepts and develops new uses for the equipment."
+    },
+    {
+      "z": 3,
+      "src": "lanl",
+      "text": "Lithium compounds are used in batteries.",
+      "quote": "Other lithium compounds are used in dry cells and storage batteries.",
+      "sentence": "Other lithium compounds are used in dry cells and storage batteries. Lithium carbonate is used for the treatment of bipolar disease and other mental illness conditions."
+    },
+    {
+      "z": 3,
+      "src": "lanl",
+      "text": "Lithium carbonate is a medicine for bipolar disorder.",
+      "quote": "Lithium carbonate is used for the treatment of bipolar disease",
+      "sentence": "Lithium carbonate is used for the treatment of bipolar disease and other mental illness conditions."
+    },
+    {
+      "z": 4,
+      "src": "jlab",
+      "text": "Beryllium lets X-rays through, so it makes windows for X-ray tubes.",
+      "quote": "Beryllium is relatively transparent to X-rays and is used to make windows for X-ray tubes.",
+      "sentence": "Beryllium is relatively transparent to X-rays and is used to make windows for X-ray tubes. When exposed to alpha particles, such as those emitted by radium or polonium, beryllium emits neutrons and is used as a neutron source."
+    },
+    {
+      "z": 4,
+      "src": "lanl",
+      "text": "Beryllium copper makes springs, electrical contacts and tools that don't spark.",
+      "quote": "beryllium copper, which is extensively used for springs, electrical contacts, spot-welding electrodes, and non-sparking tools",
+      "sentence": "eryllium is used as an alloying agent in producing beryllium copper, which is extensively used for springs, electrical contacts, spot-welding electrodes, and non-sparking tools."
+    },
+    {
+      "z": 5,
+      "src": "jlab",
+      "text": "Boron compounds go into fiberglass insulation and bleach.",
+      "quote": "Large amounts of this compound are used in the manufacture of fiberglass insulation and sodium perborate bleach.",
+      "sentence": "Large amounts of this compound are used in the manufacture of fiberglass insulation and sodium perborate bleach. The second most important compound is boric acid (H3BO3), which is used to manufacture textile fiberglass and is used in cellulose insulation as a flame retardant."
+    },
+    {
+      "z": 5,
+      "src": "jlab",
+      "text": "Boron gives fireworks and flares a green color.",
+      "quote": "Boron is used in pyrotechnics and flares to produce a green color.",
+      "sentence": "Boron is used in pyrotechnics and flares to produce a green color. Boron has also been used in some rockets as an ignition source."
+    },
+    {
+      "z": 6,
+      "src": "jlab",
+      "text": "Pencil \"lead\" is really graphite, a form of carbon.",
+      "quote": "Although commonly called lead, the black material used in pencils is actually graphite.",
+      "sentence": "Although commonly called lead, the black material used in pencils is actually graphite. Diamond, the third naturally occurring form of carbon, is one of the hardest substances known."
+    },
+    {
+      "z": 6,
+      "src": "jlab",
+      "text": "Carbon-14 is used to find the age of things that were once alive.",
+      "quote": "is used to find the age of formerly living things through a process known as radiocarbon dating",
+      "sentence": "Carbon-14, a radioactive isotope of carbon with a half-life of 5,730 years, is used to find the age of formerly living things through a process known as radiocarbon dating."
+    },
+    {
+      "z": 7,
+      "src": "jlab",
+      "text": "Nitrogen is made into ammonia, which is used to make fertilizers.",
+      "quote": "Large amounts of ammonia are then used to create fertilizers",
+      "sentence": "Large amounts of ammonia are then used to create fertilizers, explosives and, through a process known as the Ostwald process, nitric acid (HNO3)."
+    },
+    {
+      "z": 7,
+      "src": "jlab",
+      "text": "Liquid nitrogen keeps things very cold, such as stored biological samples.",
+      "quote": "Liquid nitrogen is an inexpensive cryogenic liquid used for refrigeration, preservation of biological samples",
+      "sentence": "Liquid nitrogen is an inexpensive cryogenic liquid used for refrigeration, preservation of biological samples and for low temperature scientific experimentation."
+    },
+    {
+      "z": 8,
+      "src": "lanl",
+      "text": "Hospitals give oxygen to patients who have trouble breathing.",
+      "quote": "Hospitals frequently prescribe oxygen for patients with respiratory ailments.",
+      "sentence": "Hospitals frequently prescribe oxygen for patients with respiratory ailments."
+    },
+    {
+      "z": 8,
+      "src": "jlab",
+      "text": "Steelmakers blow oxygen through molten iron to burn away impurities.",
+      "quote": "Impurities in molten pig iron are burned away with streams of high pressure oxygen to produce steel.",
+      "sentence": "Impurities in molten pig iron are burned away with streams of high pressure oxygen to produce steel. Oxygen can also be combined with acetylene (C2H2) to produce an extremely hot flame used for welding."
+    },
+    {
+      "z": 9,
+      "src": "jlab",
+      "text": "Fluoride compounds in toothpaste help prevent tooth decay.",
+      "quote": "compounds added to toothpaste, also to help prevent tooth decay",
+      "sentence": "Sodium fluoride (NaF), stannous(II) fluoride (SnF2) and sodium monofluorophosphate (Na2PO3F) are all fluorine compounds added to toothpaste, also to help prevent tooth decay."
+    },
+    {
+      "z": 9,
+      "src": "jlab",
+      "text": "Hydrofluoric acid, a fluorine compound, is used to etch glass.",
+      "quote": "Hydrofluoric acid (HF) is used to etch glass, including most of the glass used in light bulbs.",
+      "sentence": "Hydrofluoric acid (HF) is used to etch glass, including most of the glass used in light bulbs. Uranium hexafluoride (UF6) is used to separate isotopes of uranium."
+    },
+    {
+      "z": 10,
+      "src": "jlab",
+      "text": "Neon's biggest use is in glowing advertising signs.",
+      "quote": "The largest use for neon gas is in advertising signs.",
+      "sentence": "The largest use for neon gas is in advertising signs. Neon is also used to make high voltage indicators and is combined with helium to make helium-neon lasers."
+    },
+    {
+      "z": 10,
+      "src": "jlab",
+      "text": "Neon and helium together make helium-neon lasers.",
+      "quote": "is combined with helium to make helium-neon lasers",
+      "sentence": "Neon is also used to make high voltage indicators and is combined with helium to make helium-neon lasers."
+    },
+    {
+      "z": 11,
+      "src": "jlab",
+      "text": "Sodium vapor lamps light streets with a bright yellow glow.",
+      "quote": "Sodium vapor is used in streetlights and produces a brilliant yellow light.",
+      "sentence": "Sodium vapor is used in streetlights and produces a brilliant yellow light. Sodium also forms many useful compounds."
+    },
+    {
+      "z": 11,
+      "src": "jlab",
+      "text": "Sodium compounds include table salt and baking soda.",
+      "quote": "Some of the most common are: table salt (NaCl), soda ash (Na2CO3), baking soda (NaHCO3)",
+      "sentence": "Some of the most common are: table salt (NaCl), soda ash (Na2CO3), baking soda (NaHCO3), caustic soda (NaOH), Chile saltpeter (NaNO3) and borax (Na2B4O7·10H2O)."
+    },
+    {
+      "z": 12,
+      "src": "jlab",
+      "text": "Light magnesium-aluminum alloys are used in airplanes and rockets.",
+      "quote": "Magnesium-aluminum alloys are used where strong, lightweight materials are required, such as in airplanes, missiles and rockets.",
+      "sentence": "Magnesium-aluminum alloys are used where strong, lightweight materials are required, such as in airplanes, missiles and rockets. Cameras, horseshoes, baseball catchers' masks and snowshoes are other items that are made from magnesium alloys."
+    },
+    {
+      "z": 12,
+      "src": "jlab",
+      "text": "Magnesium burns with a brilliant white light in flares and fireworks.",
+      "quote": "Magnesium burns with a brilliant white light and is used in pyrotechnics, flares and photographic flashbulbs.",
+      "sentence": "Magnesium burns with a brilliant white light and is used in pyrotechnics, flares and photographic flashbulbs. Magnesium is the lightest metal that can be used to build things, although its use as a structural material is limited since it burns at relatively low temperatures."
+    },
+    {
+      "z": 13,
+      "src": "jlab",
+      "text": "Aluminum makes drink cans, foil and kitchen utensils.",
+      "quote": "aluminum and aluminum alloys are used in a wide variety of products: cans, foils and kitchen utensils",
+      "sentence": "Today, aluminum and aluminum alloys are used in a wide variety of products: cans, foils and kitchen utensils, as well as parts of airplanes, rockets and other items that require a strong, light material."
+    },
+    {
+      "z": 13,
+      "src": "lanl",
+      "text": "Being light, aluminum is used in electrical power lines.",
+      "quote": "it is used in electrical transmission lines because of its light weight",
+      "sentence": "Although its electrical conductivity is only about 60% that of copper, it is used in electrical transmission lines because of its light weight."
+    },
+    {
+      "z": 14,
+      "src": "jlab",
+      "text": "Silicon crystals are the base of microchips, transistors and solar cells.",
+      "quote": "are used in the manufacture of solid-state electronic devices, such as transistors, solar cells, rectifiers and microchips",
+      "sentence": "These crystals, when doped with elements such as boron, gallium, germanium, phosphorus or arsenic, are used in the manufacture of solid-state electronic devices, such as transistors, solar cells, rectifiers and microchips."
+    },
+    {
+      "z": 14,
+      "src": "lanl",
+      "text": "Silica, found in sand, is the main ingredient of glass.",
+      "quote": "Silica, as sand, is a principal ingredient of glass",
+      "sentence": "Silica, as sand, is a principal ingredient of glass, one of the most inexpensive of materials with excellent mechanical, optical, thermal, and electrical properties."
+    },
+    {
+      "z": 15,
+      "src": "lanl",
+      "text": "Phosphates are a major part of farm fertilizers.",
+      "quote": "World-wide demand for fertilizers has caused record phosphate production.",
+      "sentence": "World-wide demand for fertilizers has caused record phosphate production. Phosphates are used in the production of special glasses, such as those used for sodium lamps."
+    },
+    {
+      "z": 15,
+      "src": "jlab",
+      "text": "Red phosphorus is used in safety matches and fireworks.",
+      "quote": "Red phosphorus is used in safety matches, fireworks, smoke bombs and pesticides.",
+      "sentence": "Red phosphorus is used in safety matches, fireworks, smoke bombs and pesticides. Black phosphorus is also formed by heating white phosphorus, but a mercury catalyst and a seed crystal of black phosphorus are required."
+    },
+    {
+      "z": 16,
+      "src": "jlab",
+      "text": "Most sulfur is made into sulfuric acid, a key industrial chemical.",
+      "quote": "Most of the sulfur that is produced is used in the manufacture of sulfuric acid",
+      "sentence": "Most of the sulfur that is produced is used in the manufacture of sulfuric acid (H2SO4)."
+    },
+    {
+      "z": 16,
+      "src": "jlab",
+      "text": "Sulfur is used to vulcanize natural rubber.",
+      "quote": "Smaller amounts of sulfur are used to vulcanize natural rubbers",
+      "sentence": "Smaller amounts of sulfur are used to vulcanize natural rubbers, as an insecticide (the Greek poet Homer mentioned \"pest-averting sulphur\" nearly 2,800 years ago!), in the manufacture of gunpowder and as a dying agent."
+    },
+    {
+      "z": 17,
+      "src": "jlab",
+      "text": "Chlorine makes drinking water safe and keeps swimming pools clean.",
+      "quote": "is used to make drinking water safe and to treat swimming pools",
+      "sentence": "hlorine is commonly used as an antiseptic and is used to make drinking water safe and to treat swimming pools."
+    },
+    {
+      "z": 17,
+      "src": "jlab",
+      "text": "Chlorine is used to make plastics, paper products, dyes and medicines.",
+      "quote": "such as in the production of paper products, plastics, dyes, textiles, medicines",
+      "sentence": "Large amounts of chlorine are used in many industrial processes, such as in the production of paper products, plastics, dyes, textiles, medicines, antiseptics, insecticides, solvents and paints."
+    },
+    {
+      "z": 18,
+      "src": "jlab",
+      "text": "Argon fills light bulbs so the hot filament doesn't corrode.",
+      "quote": "It is used to fill incandescent and fluorescent light bulbs to prevent oxygen from corroding the hot filament.",
+      "sentence": "It is used to fill incandescent and fluorescent light bulbs to prevent oxygen from corroding the hot filament. Argon is also used to form inert atmospheres for arc welding, growing semiconductor crystals and processes that require shielding from other atmospheric gases."
+    },
+    {
+      "z": 18,
+      "src": "lanl",
+      "text": "Argon shields metal from the air during welding.",
+      "quote": "Argon is also used as an inert gas shield for arc welding and cutting",
+      "sentence": "Argon is also used as an inert gas shield for arc welding and cutting, as blanket for the production of titanium and other reactive elements, and as a protective atmosphere for growing silicon and germanium crystals."
+    },
+    {
+      "z": 19,
+      "src": "lanl",
+      "text": "Most potassium goes into fertilizers as potash.",
+      "quote": "The greatest demand for potash has been in its use for fertilizers.",
+      "sentence": "The greatest demand for potash has been in its use for fertilizers. Potassium is an essential constituent for plant growth and is found in most soils."
+    },
+    {
+      "z": 19,
+      "src": "jlab",
+      "text": "Potassium hydroxide is used to make soaps and detergents.",
+      "quote": "Potassium hydroxide (KOH) is used to make soaps, detergents and drain cleaners.",
+      "sentence": "Potassium hydroxide (KOH) is used to make soaps, detergents and drain cleaners. Potassium carbonate (KHCO3), also known as pearl ash, is used to make some types of glass and soaps and is obtained commercially as a byproduct of the production of ammonia."
+    },
+    {
+      "z": 20,
+      "src": "jlab",
+      "text": "Gypsum, a calcium compound, is used to make drywall and plaster.",
+      "quote": "calcium sulfate (CaSO4), also known as gypsum, which is used to make dry wall and plaster of Paris",
+      "sentence": "Other common compounds of calcium include: calcium sulfate (CaSO4), also known as gypsum, which is used to make dry wall and plaster of Paris, calcium nitrate (Ca(NO3)2), a naturally occurring fertilizer and calcium phosphate (Ca3(PO4)2), the main material found in bones and teeth."
+    },
+    {
+      "z": 20,
+      "src": "jlab",
+      "text": "Calcium carbonate goes into toothpaste, antacids and white paint.",
+      "quote": "Calcium carbonate is used to make white paint, cleaning powder, toothpaste and stomach antacids",
+      "sentence": "Calcium carbonate is used to make white paint, cleaning powder, toothpaste and stomach antacids, among other things."
+    },
+    {
+      "z": 21,
+      "src": "jlab",
+      "text": "Scandium-aluminum alloys are used in bicycle frames and baseball bats.",
+      "quote": "such as aluminum baseball bats, bicycle frames and lacrosse sticks",
+      "sentence": "lloys of scandium and aluminum are used in some kinds of athletic equipment, such as aluminum baseball bats, bicycle frames and lacrosse sticks."
+    },
+    {
+      "z": 21,
+      "src": "jlab",
+      "text": "Scandium iodide makes lamps give off light much like sunlight.",
+      "quote": "is added to mercury vapor lamps so that they will emit light that closely resembles sunlight",
+      "sentence": "Scandium iodide (ScI3) is added to mercury vapor lamps so that they will emit light that closely resembles sunlight."
+    },
+    {
+      "z": 22,
+      "src": "jlab",
+      "text": "Most titanium is used as titanium dioxide, the white pigment in paint.",
+      "quote": "is used as a pigment to create white paint and accounts for the largest use of the element",
+      "sentence": "Titanium oxide (TiO2) is used as a pigment to create white paint and accounts for the largest use of the element."
+    },
+    {
+      "z": 22,
+      "src": "jlab",
+      "text": "Titanium is used for artificial hips and other implants in the body.",
+      "quote": "it is used to create artificial hips, pins for setting bones and for other biological implants",
+      "sentence": "Since titanium does not react within the human body, it is used to create artificial hips, pins for setting bones and for other biological implants."
+    },
+    {
+      "z": 23,
+      "src": "jlab",
+      "text": "Nearly 80% of all vanadium is used as an additive to steel.",
+      "quote": "Nearly 80% of the vanadium produced is used to make ferrovanadium or as an additive to steel.",
+      "sentence": "Nearly 80% of the vanadium produced is used to make ferrovanadium or as an additive to steel. Ferrovanadium is a strong, shock resistant and corrosion resistant alloy of iron containing between 1% and 6% vanadium."
+    },
+    {
+      "z": 23,
+      "src": "jlab",
+      "text": "Vanadium steels are used for car axles, crankshafts and gears.",
+      "quote": "Ferrovanadium and vanadium-steel alloys are used to make such things as axles, crankshafts and gears for cars",
+      "sentence": "Ferrovanadium and vanadium-steel alloys are used to make such things as axles, crankshafts and gears for cars, parts of jet engines, springs and cutting tools."
+    },
+    {
+      "z": 24,
+      "src": "lanl",
+      "text": "Chrome plating gives metal a hard, shiny surface that resists corrosion.",
+      "quote": "It is mostly used in plating to produce a hard, beautiful surface and to prevent corrosion.",
+      "sentence": "It is mostly used in plating to produce a hard, beautiful surface and to prevent corrosion. Chromium gives glass an emerald green color and is widely used as a catalyst."
+    },
+    {
+      "z": 24,
+      "src": "jlab",
+      "text": "Chromium is added to steel to harden it and to make stainless steel.",
+      "quote": "Chromium is added to steel to harden it and to form stainless steel",
+      "sentence": "Chromium is added to steel to harden it and to form stainless steel, a steel alloy that contains at least 10% chromium."
+    },
+    {
+      "z": 25,
+      "src": "jlab",
+      "text": "Nearly 90% of all manganese is used in making steel.",
+      "quote": "Nearly 90% of all of the manganese produced each year is used in the production of steel.",
+      "sentence": "Nearly 90% of all of the manganese produced each year is used in the production of steel. Manganese is added to molten steel to remove oxygen and sulfur and is alloyed with steel to make it easier to form and work with and to increase steel's strength and resistance to impact."
+    },
+    {
+      "z": 25,
+      "src": "jlab",
+      "text": "Manganese dioxide is used in dry cell batteries.",
+      "quote": "It is used in dry cell batteries to prevent the formation of hydrogen",
+      "sentence": "It is used in dry cell batteries to prevent the formation of hydrogen, to remove the green color in glass that is caused by the presence of iron contaminants, and as a drying agent in black paints."
+    },
+    {
+      "z": 26,
+      "src": "jlab",
+      "text": "Most iron goes into steel, an alloy of iron and a little carbon.",
+      "quote": "Huge amounts of iron are used to make steel, an alloy of iron and carbon.",
+      "sentence": "Huge amounts of iron are used to make steel, an alloy of iron and carbon. Steel typically contains between 0.3% and 1.5% carbon, depending on the desired characteristics."
+    },
+    {
+      "z": 26,
+      "src": "jlab",
+      "text": "Iron sulfate is used to treat anemia, a blood disease.",
+      "quote": "Iron sulfate (FeSO4) is used to treat the blood disease anemia.",
+      "sentence": "Iron sulfate (FeSO4) is used to treat the blood disease anemia."
+    },
+    {
+      "z": 27,
+      "src": "jlab",
+      "text": "Cobalt alloys are used in jet engines and gas turbines.",
+      "quote": "Cobalt is also used to make alloys for jet engines and gas turbines",
+      "sentence": "Cobalt is also used to make alloys for jet engines and gas turbines, magnetic steels and some types of stainless steels."
+    },
+    {
+      "z": 27,
+      "src": "lanl",
+      "text": "Cobalt compounds give glass, pottery and tile a blue color.",
+      "quote": "Cobalt salts have been used for centuries to produce brilliant and permanent blue colors in porcelain, glass, pottery",
+      "sentence": "Cobalt salts have been used for centuries to produce brilliant and permanent blue colors in porcelain, glass, pottery, tiles, and enamels."
+    },
+    {
+      "z": 28,
+      "src": "lanl",
+      "text": "Nickel is used to make stainless steel and other alloys that resist corrosion.",
+      "quote": "It is extensively used for making stainless steel and other corrosion-resistant alloys",
+      "sentence": "It is extensively used for making stainless steel and other corrosion-resistant alloys such as Invar(R), Monel(R), Inconel(R), and the Hastelloys(R)."
+    },
+    {
+      "z": 28,
+      "src": "jlab",
+      "text": "Nickel is used in some coins and batteries.",
+      "quote": "Nickel is also used to manufacture some types of coins and batteries.",
+      "sentence": "Nickel is also used to manufacture some types of coins and batteries. Nickel is alloyed with other metals to improve their strength and resistance to corrosion."
+    },
+    {
+      "z": 29,
+      "src": "jlab",
+      "text": "Large amounts of copper are made into electrical wire.",
+      "quote": "Used in large amounts by the electrical industry in the form of wire",
+      "sentence": "Used in large amounts by the electrical industry in the form of wire, copper is second only to silver in electrical conductance."
+    },
+    {
+      "z": 29,
+      "src": "jlab",
+      "text": "Copper is used for water pipes and jewelry.",
+      "quote": "Copper is also used to make water pipes and jewelry",
+      "sentence": "Copper is also used to make water pipes and jewelry, as well as other items."
+    },
+    {
+      "z": 30,
+      "src": "jlab",
+      "text": "Roughly a third of zinc is used to galvanize, or coat, iron against corrosion.",
+      "quote": "Roughly one third of all metallic zinc produced today is used in a process known as galvanization.",
+      "sentence": "Roughly one third of all metallic zinc produced today is used in a process known as galvanization. During galvanization, an object that is subject to corrosion, such as an iron nail, is given a protective coating of zinc."
+    },
+    {
+      "z": 30,
+      "src": "jlab",
+      "text": "Zinc and copper make brass, used in musical instruments and screws.",
+      "quote": "Brass is still used today, particularly in musical instruments, screws and other hardware",
+      "sentence": "Brass is still used today, particularly in musical instruments, screws and other hardware that must resist corrosion."
+    },
+    {
+      "z": 31,
+      "src": "jlab",
+      "text": "Gallium is used to make transistors and light-emitting diodes (LEDs).",
+      "quote": "has been used to produce solid-state items like transistors and light emitting diodes",
+      "sentence": "Gallium is used as a doping material for semiconductors and has been used to produce solid-state items like transistors and light emitting diodes."
+    },
+    {
+      "z": 31,
+      "src": "jlab",
+      "text": "Gallium arsenide turns electricity directly into laser light.",
+      "quote": "Gallium arsenide (GaAs) can produce laser light directly from electricity.",
+      "sentence": "Gallium arsenide (GaAs) can produce laser light directly from electricity. Large amounts of gallium trichloride (GaCl3) have been gathered to build the Gallium Neutrino Observatory, an observatory located in Italy built to study particles called neutrinos which are produced inside the sun during the process of nuclear fusion."
+    },
+    {
+      "z": 32,
+      "src": "jlab",
+      "text": "Germanium's largest use is in semiconductors such as transistors.",
+      "quote": "The largest use of germanium is in the semiconductor industry.",
+      "sentence": "The largest use of germanium is in the semiconductor industry. When doped with small amounts of arsenic, gallium, indium, antimony or phosphorus, germanium is used to make transistors for use in electronic devices."
+    },
+    {
+      "z": 32,
+      "src": "jlab",
+      "text": "Germanium lets infrared light through and is used in infrared optics.",
+      "quote": "are transparent to infrared radiation and are used in infrared optical instruments and infrared detectors",
+      "sentence": "Both germanium and germanium oxide (GeO) are transparent to infrared radiation and are used in infrared optical instruments and infrared detectors."
+    },
+    {
+      "z": 33,
+      "src": "lanl",
+      "text": "Small amounts of arsenic are added to semiconductors to make transistors.",
+      "quote": "Arsenic is finding increasing uses as a doping agent in solid-state devices such as transistors.",
+      "sentence": "Arsenic is finding increasing uses as a doping agent in solid-state devices such as transistors. Gallium arsenide is used as a laser material to convert electricity directly into coherent light."
+    },
+    {
+      "z": 33,
+      "src": "jlab",
+      "text": "Arsenic compounds have been used as rat poison and insecticides.",
+      "quote": "They have been used to make rat poison and some insecticides.",
+      "sentence": "They have been used to make rat poison and some insecticides. Small amounts of arsenic are added to germanium to make transistors."
+    },
+    {
+      "z": 34,
+      "src": "lanl",
+      "text": "Selenium is used in xerography to copy documents.",
+      "quote": "Selenium is used in Xerography for reproducing and copying documents, letters, etc.",
+      "sentence": "Selenium is used in Xerography for reproducing and copying documents, letters, etc. It is used by the glass industry to decolorize glass and to make ruby-colored glasses and enamels."
+    },
+    {
+      "z": 34,
+      "src": "jlab",
+      "text": "Selenium gives glass and enamel a ruby-red color.",
+      "quote": "is also used to make a ruby-red color in glasses and enamels",
+      "sentence": "In addition to its use in electrical devices, selenium is also used to make a ruby-red color in glasses and enamels, as a photographic toner and as an additive to stainless steel."
+    },
+    {
+      "z": 35,
+      "src": "jlab",
+      "text": "Silver bromide, used in photography, is bromine's largest use.",
+      "quote": "Silver bromide (AgBr), a chemical used in photography, now accounts for the largest use of bromine.",
+      "sentence": "Silver bromide (AgBr), a chemical used in photography, now accounts for the largest use of bromine. Other bromine compounds are used in fumigants, in flameproofing agents and in some compounds used to purify water."
+    },
+    {
+      "z": 35,
+      "src": "jlab",
+      "text": "Bromine compounds are used in flameproofing and water purification.",
+      "quote": "Other bromine compounds are used in fumigants, in flameproofing agents and in some compounds used to purify water.",
+      "sentence": "Other bromine compounds are used in fumigants, in flameproofing agents and in some compounds used to purify water. Tyrian purple, an expensive purple dye known to ancient civilizations, was produced from an organic bromine compound secreted from a sea mussel known as the murex."
+    },
+    {
+      "z": 36,
+      "src": "jlab",
+      "text": "Krypton is used in flash lamps for high-speed photography.",
+      "quote": "Krypton is used in some types of photographic flashes used in high speed photography.",
+      "sentence": "Krypton is used in some types of photographic flashes used in high speed photography. Some fluorescent light bulbs are filled with a mixture of krypton and argon gases."
+    },
+    {
+      "z": 36,
+      "src": "jlab",
+      "text": "Some fluorescent bulbs are filled with krypton and argon.",
+      "quote": "Some fluorescent light bulbs are filled with a mixture of krypton and argon gases.",
+      "sentence": "Some fluorescent light bulbs are filled with a mixture of krypton and argon gases. Krypton gas is also combined with other gases to make luminous signs that glow with a greenish-yellow light."
+    },
+    {
+      "z": 37,
+      "src": "jlab",
+      "text": "Rubidium soaks up stray gases inside vacuum tubes.",
+      "quote": "Rubidium is used in vacuum tubes as a getter, a material that combines with and removes trace gases",
+      "sentence": "Rubidium is used in vacuum tubes as a getter, a material that combines with and removes trace gases from vacuum tubes."
+    },
+    {
+      "z": 37,
+      "src": "jlab",
+      "text": "Rubidium is used in photocells and special glasses.",
+      "quote": "It is also used in the manufacture of photocells and in special glasses.",
+      "sentence": "It is also used in the manufacture of photocells and in special glasses. Since it is easily ionized, it might be used as a propellant in ion engines on spacecraft."
+    },
+    {
+      "z": 38,
+      "src": "jlab",
+      "text": "Strontium compounds give fireworks and flares a bright red flame.",
+      "quote": "burn with a bright, red flame and are used in fireworks and signal flares",
+      "sentence": "Two strontium compounds, strontium carbonate (SrCO3) and strontium nitrate (Sr(NO3)2), burn with a bright, red flame and are used in fireworks and signal flares."
+    },
+    {
+      "z": 38,
+      "src": "lanl",
+      "text": "Strontium is used to make ferrite magnets and to refine zinc.",
+      "quote": "strontium has found use in producing ferrite magnets and in refining zinc",
+      "sentence": "n addition to the medical imaging application described in the image caption above, strontium has found use in producing ferrite magnets and in refining zinc."
+    },
+    {
+      "z": 39,
+      "src": "jlab",
+      "text": "Yttrium compounds help make the red color in color TV screens.",
+      "quote": "are both combined with europium to produce the red phosphor used in color televisions",
+      "sentence": "Yttrium oxide (Y2O3) and yttrium orthovanadate (YVO4) are both combined with europium to produce the red phosphor used in color televisions."
+    },
+    {
+      "z": 39,
+      "src": "lanl",
+      "text": "Yttrium-iron garnets act as filters in microwave equipment.",
+      "quote": "Yttrium oxide also is used to produce yttrium-iron-garnets, which are very effective microwave filters.",
+      "sentence": "Yttrium oxide also is used to produce yttrium-iron-garnets, which are very effective microwave filters. Yttrium iron, aluminum, and gadolinium garnets, with formulas such as Y3Fe5O12 and Y3Al5O12, have interesting magnetic properties."
+    },
+    {
+      "z": 40,
+      "src": "jlab",
+      "text": "Nearly 90% of zirconium is used in nuclear reactors.",
+      "quote": "The nuclear power industry uses nearly 90% of the zirconium produced each year",
+      "sentence": "The nuclear power industry uses nearly 90% of the zirconium produced each year, which must be nearly free of hafnium."
+    },
+    {
+      "z": 40,
+      "src": "jlab",
+      "text": "Zircon, a zirconium mineral, is cut into gems that look like diamond.",
+      "quote": "the most popular of which is a clear, transparent gemstone that can be cut to look like diamond",
+      "sentence": "Zircon (ZrSiO4) is a zirconium compound that can take many different forms, the most popular of which is a clear, transparent gemstone that can be cut to look like diamond and is frequently used in jewelry."
+    },
+    {
+      "z": 41,
+      "src": "jlab",
+      "text": "Niobium-titanium wire is used to make superconducting magnets.",
+      "quote": "an alloy of niobium and titanium which can then be used to make superconductive magnets",
+      "sentence": "Superconductive wire can be made from an alloy of niobium and titanium which can then be used to make superconductive magnets."
+    },
+    {
+      "z": 41,
+      "src": "lanl",
+      "text": "Niobium is used in welding rods for stainless steel.",
+      "quote": "Niobium is used in arc-welding rods for stabilized grades of stainless steel.",
+      "sentence": "Niobium is used in arc-welding rods for stabilized grades of stainless steel. Thousands of pounds of niobium have been used in advanced air frame systems such as were used in the Gemini space program."
+    },
+    {
+      "z": 42,
+      "src": "jlab",
+      "text": "Molybdenum is mostly used to make strong steel alloys.",
+      "quote": "Molybdenum is primarily used as an alloying agent in steel. When added to steel",
+      "sentence": "Molybdenum is primarily used as an alloying agent in steel. When added to steel in concentrations between 0.25% and 8%, molybdenum forms ultra-high strength steels that can withstand pressures up to 300,000 pounds per square inch."
+    },
+    {
+      "z": 42,
+      "src": "lanl",
+      "text": "Molybdenum sulfide is a lubricant that works where oils would break down.",
+      "quote": "Molybdenum sulfide is useful as a lubricant, especially at high temperatures where oils would decompose",
+      "sentence": "Molybdenum sulfide is useful as a lubricant, especially at high temperatures where oils would decompose."
+    },
+    {
+      "z": 43,
+      "src": "jlab",
+      "text": "Technetium is used as a medical tracer.",
+      "quote": "Technetium can also be used as a medical tracer and to calibrate particle detectors.",
+      "sentence": "Technetium can also be used as a medical tracer and to calibrate particle detectors."
+    },
+    {
+      "z": 43,
+      "src": "jlab",
+      "text": "Small amounts of technetium can slow the corrosion of steel.",
+      "quote": "Small amounts of technetium can retard the corrosion of steel",
+      "sentence": "Small amounts of technetium can retard the corrosion of steel, although this protection can only be applied to closed systems due to technetium's radioactivity."
+    },
+    {
+      "z": 44,
+      "src": "jlab",
+      "text": "A little ruthenium makes titanium far more resistant to corrosion.",
+      "quote": "Adding 0.1% ruthenium to titanium makes titanium 100 times more resistant to corrosion.",
+      "sentence": "Adding 0.1% ruthenium to titanium makes titanium 100 times more resistant to corrosion. Small amounts of ruthenium are added to platinum and palladium to strengthen them."
+    },
+    {
+      "z": 44,
+      "src": "jlab",
+      "text": "Ruthenium strengthens platinum and palladium alloys used in jewelry.",
+      "quote": "Small amounts of ruthenium are added to platinum and palladium to strengthen them. These alloys are used in jewelry",
+      "sentence": "Small amounts of ruthenium are added to platinum and palladium to strengthen them. These alloys are used in jewelry and in electrical contacts that must resist wear."
+    },
+    {
+      "z": 45,
+      "src": "jlab",
+      "text": "Rhodium is used in catalytic converters, jewelry and electrical contacts.",
+      "quote": "Rhodium is used to make electrical contacts, as jewelry and in catalytic converters",
+      "sentence": "Rhodium is used to make electrical contacts, as jewelry and in catalytic converters, but is most frequently used as an alloying agent in other materials, such as platinum and palladium."
+    },
+    {
+      "z": 45,
+      "src": "lanl",
+      "text": "Rhodium's main use is to harden platinum and palladium alloys.",
+      "quote": "Rhodium's primary use is as an alloying agent to harden platinum and palladium.",
+      "sentence": "Rhodium's primary use is as an alloying agent to harden platinum and palladium. Such alloys are used for furnace windings, thermocoupling elements, bushings for glass fiber production, electrodes for aircraft spark plugs, and laboratory crucibles."
+    },
+    {
+      "z": 46,
+      "src": "jlab",
+      "text": "Palladium mixed with gold makes white gold for jewelry.",
+      "quote": "Palladium alloys are used to make jewelry and, when alloyed with gold, forms a material known as white gold.",
+      "sentence": "Palladium alloys are used to make jewelry and, when alloyed with gold, forms a material known as white gold. Palladium dichloride (PdCl2), a palladium compound, can absorb large amounts of carbon monoxide (CO) gas and is used in carbon monoxide detectors."
+    },
+    {
+      "z": 46,
+      "src": "jlab",
+      "text": "Palladium is used in dental crowns, surgical tools and electrical contacts.",
+      "quote": "Palladium is used to make springs for watches, surgical instruments, electrical contacts and dental fillings and crowns.",
+      "sentence": "Palladium is used to make springs for watches, surgical instruments, electrical contacts and dental fillings and crowns. Finely divided palladium acts as a catalyst and is used in hydrogenation and dehydrogenation processes."
+    },
+    {
+      "z": 47,
+      "src": "jlab",
+      "text": "Sterling silver is used for jewelry and silverware.",
+      "quote": "Sterling silver, an alloy containing 92.5% silver, is used to make silverware, jewelry and other decorative items.",
+      "sentence": "Sterling silver, an alloy containing 92.5% silver, is used to make silverware, jewelry and other decorative items. High capacity batteries can be made with silver and zinc and silver and cadmium."
+    },
+    {
+      "z": 47,
+      "src": "jlab",
+      "text": "Silver, the best electrical conductor, is used in contacts and circuit boards.",
+      "quote": "it is sometimes used in making solder, electrical contacts and printed circuit boards",
+      "sentence": "Pure silver is the best conductor of heat and electricity of all known metals, so it is sometimes used in making solder, electrical contacts and printed circuit boards."
+    },
+    {
+      "z": 48,
+      "src": "jlab",
+      "text": "Cadmium is used in rechargeable nickel-cadmium batteries.",
+      "quote": "Cadmium is also used in rechargeable nickel-cadmium batteries.",
+      "sentence": "Cadmium is also used in rechargeable nickel-cadmium batteries. Cadmium is alloyed with silver to form solder, a metal with a relatively low melting point used to join electrical components, pipes and other metallic items."
+    },
+    {
+      "z": 48,
+      "src": "jlab",
+      "text": "Cadmium absorbs neutrons and is used in nuclear reactor control rods.",
+      "quote": "Cadmium easily absorbs neutrons and is used to make control rods for nuclear reactors.",
+      "sentence": "Cadmium easily absorbs neutrons and is used to make control rods for nuclear reactors. Cadmium is also used in rechargeable nickel-cadmium batteries."
+    },
+    {
+      "z": 49,
+      "src": "jlab",
+      "text": "Indium makes mirrors as bright as silver ones that tarnish more slowly.",
+      "quote": "Indium can be used to make mirrors that are as reflective as silver mirrors but do not tarnish as quickly.",
+      "sentence": "Indium can be used to make mirrors that are as reflective as silver mirrors but do not tarnish as quickly. Indium is also used to make low melting alloys."
+    },
+    {
+      "z": 49,
+      "src": "jlab",
+      "text": "Indium is added to germanium to make transistors.",
+      "quote": "Indium is used to dope germanium to make transistors. It is also used",
+      "sentence": "Indium is used to dope germanium to make transistors. It is also used to make other electrical components such as rectifiers, thermistors and photoconductors."
+    },
+    {
+      "z": 50,
+      "src": "jlab",
+      "text": "Tin cans are steel cans with a thin coat of tin to stop rust.",
+      "quote": "A thin layer of tin is applied to the inside and outside of the can",
+      "sentence": "A thin layer of tin is applied to the inside and outside of the can to keep the steel from rusting."
+    },
+    {
+      "z": 50,
+      "src": "jlab",
+      "text": "Most window glass is made by floating molten glass on molten tin.",
+      "quote": "molten glass is poured onto a pool of molten tin. The glass floats on the surface of the tin",
+      "sentence": "In the Pilkington process, molten glass is poured onto a pool of molten tin. The glass floats on the surface of the tin and cools, forming solid glass with flat, parallel surfaces."
+    },
+    {
+      "z": 51,
+      "src": "lanl",
+      "text": "Antimony is alloyed with lead to make it harder and stronger.",
+      "quote": "It greatly increases the hardness and mechanical strength of lead.",
+      "sentence": "It greatly increases the hardness and mechanical strength of lead. Batteries, antifriction alloys, type metal, small arms and tracer bullets, cable sheathing, and minor products use about half the metal produced."
+    },
+    {
+      "z": 51,
+      "src": "jlab",
+      "text": "Antimony compounds are used in flame-proofing materials and glass.",
+      "quote": "Antimony compounds are used to make flame-proofing materials, paints, ceramic enamels, glass and pottery.",
+      "sentence": "Antimony compounds are used to make flame-proofing materials, paints, ceramic enamels, glass and pottery. The ancient Egyptians used antimony, in the form of stibnite, for black eye make-up."
+    },
+    {
+      "z": 52,
+      "src": "lanl",
+      "text": "Tellurium makes copper and stainless steel easier to machine.",
+      "quote": "Tellurium improves the machinability of copper and stainless steel, and its addition to lead",
+      "sentence": "Tellurium improves the machinability of copper and stainless steel, and its addition to lead decreases the corrosive action of sulfuric acid on lead and improves its strength and hardness."
+    },
+    {
+      "z": 52,
+      "src": "lanl",
+      "text": "Bismuth telluride, a tellurium compound, is used in thermoelectric devices.",
+      "quote": "Tellurium is used in ceramics. Bismuth telluride has been used in thermoelectric devices.",
+      "sentence": "Tellurium is used in ceramics. Bismuth telluride has been used in thermoelectric devices."
+    },
+    {
+      "z": 53,
+      "src": "jlab",
+      "text": "Radioactive iodine-131 is used to treat some thyroid diseases.",
+      "quote": "A radioactive isotope of iodine, iodine-131, is used to treat some diseases of the thyroid gland.",
+      "sentence": "A radioactive isotope of iodine, iodine-131, is used to treat some diseases of the thyroid gland. Care should be taken in handling and using iodine."
+    },
+    {
+      "z": 53,
+      "src": "jlab",
+      "text": "Iodine in alcohol is used as an antiseptic on wounds.",
+      "quote": "when mixed with iodine in alcohol, as an antiseptic for external wounds",
+      "sentence": "Potassium iodide (KI) is used to make photographic film and, when mixed with iodine in alcohol, as an antiseptic for external wounds."
+    },
+    {
+      "z": 54,
+      "src": "jlab",
+      "text": "Xenon makes the bright white flash in strobe lights.",
+      "quote": "Xenon produces a brilliant white flash of light when it is excited electrically and is widely used in strobe lights.",
+      "sentence": "Xenon produces a brilliant white flash of light when it is excited electrically and is widely used in strobe lights. The light emitted from xenon lamps is also used to kill bacteria and to power ruby lasers."
+    },
+    {
+      "z": 54,
+      "src": "jlab",
+      "text": "Xenon fueled the ion engine of the Deep Space 1 space probe.",
+      "quote": "xenon ions were used as a fuel in an experimental ion engine aboard the space probe Deep Space 1",
+      "sentence": "Due to its high atomic weight, xenon ions were used as a fuel in an experimental ion engine aboard the space probe Deep Space 1."
+    },
+    {
+      "z": 55,
+      "src": "lanl",
+      "text": "Cesium keeps time in atomic clocks.",
+      "quote": "Cesium is used in atomic clocks, which are accurate to 5 s in 300 years.",
+      "sentence": "Cesium is used in atomic clocks, which are accurate to 5 s in 300 years. Its chief compounds are the chloride and the nitrate."
+    },
+    {
+      "z": 55,
+      "src": "lanl",
+      "text": "Cesium is used in photoelectric cells.",
+      "quote": "It is also used in photoelectric cells, as well as a catalyst",
+      "sentence": "It is also used in photoelectric cells, as well as a catalyst in the hydrogenation of certain organic compounds."
+    },
+    {
+      "z": 56,
+      "src": "jlab",
+      "text": "Swallowed barium sulfate shows the intestines on X-ray images.",
+      "quote": "when swallowed, can be used to produce X-ray images of the intestinal tract",
+      "sentence": "It is also a good absorber of X-rays and, when swallowed, can be used to produce X-ray images of the intestinal tract."
+    },
+    {
+      "z": 56,
+      "src": "jlab",
+      "text": "Barium nitrate gives fireworks and flares a bright green color.",
+      "quote": "burns with a bright green color and is used in signal flares and fireworks",
+      "sentence": "Barium nitrate (Ba(NO3)2) burns with a bright green color and is used in signal flares and fireworks."
+    },
+    {
+      "z": 57,
+      "src": "jlab",
+      "text": "Lanthanum oxide is used to make glass for camera lenses.",
+      "quote": "is used to make the glass used in camera lenses and in other special glasses",
+      "sentence": "Lanthana (La2O3) is used to make the glass used in camera lenses and in other special glasses."
+    },
+    {
+      "z": 57,
+      "src": "jlab",
+      "text": "Lanthanum is about a quarter of misch metal, used for lighter flints.",
+      "quote": "Lanthanum also makes up about 25% of Misch metal, a material that is used to make flints for lighters.",
+      "sentence": "Lanthanum also makes up about 25% of Misch metal, a material that is used to make flints for lighters. Lanthana (La2O3) is used to make the glass used in camera lenses and in other special glasses."
+    },
+    {
+      "z": 58,
+      "src": "lanl",
+      "text": "Cerium oxide is used to polish glass.",
+      "quote": "The oxide is finding increased use as a glass polishing agent instead of rouge",
+      "sentence": "The oxide is finding increased use as a glass polishing agent instead of rouge, for it polishes much faster than rouge."
+    },
+    {
+      "z": 58,
+      "src": "jlab",
+      "text": "Cerium oxide is built into the walls of self-cleaning ovens.",
+      "quote": "is a component of the walls of self cleaning ovens and of incandescent lantern mantles",
+      "sentence": "Cerium oxide (Ce2O3 and CeO2) is a component of the walls of self cleaning ovens and of incandescent lantern mantles."
+    },
+    {
+      "z": 59,
+      "src": "jlab",
+      "text": "Praseodymium is alloyed with magnesium for strong aircraft engine metals.",
+      "quote": "Praseodymium's primary use is as an alloying agent with magnesium to create high-strength metals that are used in aircraft engines.",
+      "sentence": "Praseodymium's primary use is as an alloying agent with magnesium to create high-strength metals that are used in aircraft engines. Praseodymium also makes up about 5% of Misch metal, a material that is used to make flints for lighters."
+    },
+    {
+      "z": 59,
+      "src": "lanl",
+      "text": "Praseodymium gives glass a clean, intense yellow color.",
+      "quote": "praseodymium produces an intense and unusually clean yellow color in glass",
+      "sentence": "Salts of praseodymium are used to color glasses and enamels; when mixed with certain other materials, praseodymium produces an intense and unusually clean yellow color in glass."
+    },
+    {
+      "z": 60,
+      "src": "lanl",
+      "text": "Neodymium colors glass in shades from violet to wine-red and gray.",
+      "quote": "By itself, neodymium colors glass delicate shades ranging from pure violet through wine-red and warm gray.",
+      "sentence": "By itself, neodymium colors glass delicate shades ranging from pure violet through wine-red and warm gray. Light transmitted through such glass shows unusually sharp absorption bands."
+    },
+    {
+      "z": 60,
+      "src": "lanl",
+      "text": "Glass containing neodymium is used to make lasers.",
+      "quote": "Glass containing neodymium can be used as a laser material to produce coherent light.",
+      "sentence": "Glass containing neodymium can be used as a laser material to produce coherent light. Neodymium salts are also used as a colorant for enamels."
+    },
+    {
+      "z": 61,
+      "src": "lanl",
+      "text": "Promethium's radiation is used in gauges that measure thickness.",
+      "quote": "The element has applications as a beta source for thickness gages",
+      "sentence": "The element has applications as a beta source for thickness gages, and it can be absorbed by a phosphor to produce light."
+    },
+    {
+      "z": 61,
+      "src": "lanl",
+      "text": "Promethium can make a phosphor glow, lighting signs and signals.",
+      "quote": "Light produced in this manner can be used for signs or signals that require dependable operation",
+      "sentence": "Light produced in this manner can be used for signs or signals that require dependable operation; it can be used as a nuclear-powered battery by capturing light in photocells which convert it into electric current."
+    },
+    {
+      "z": 62,
+      "src": "jlab",
+      "text": "Samarium and cobalt make powerful permanent magnets.",
+      "quote": "Samarium forms a compound with cobalt (SmCo5) which is a powerful permanent magnet",
+      "sentence": "Samarium forms a compound with cobalt (SmCo5) which is a powerful permanent magnet with the highest resistance to demagnetization of any material known."
+    },
+    {
+      "z": 62,
+      "src": "lanl",
+      "text": "Samarium is used in glass that absorbs infrared light.",
+      "quote": "It is used in infrared absorbing glass and as a neutron absorber in nuclear reactors.",
+      "sentence": "It is used in infrared absorbing glass and as a neutron absorber in nuclear reactors."
+    },
+    {
+      "z": 63,
+      "src": "jlab",
+      "text": "Europium oxide makes the red glow in television screens.",
+      "quote": "is widely used as a red phosphor in television sets and as an activator for yttrium-based phosphors",
+      "sentence": "Europium oxide (Eu2O3), one of europium's compounds, is widely used as a red phosphor in television sets and as an activator for yttrium-based phosphors."
+    },
+    {
+      "z": 63,
+      "src": "lanl",
+      "text": "Plastic doped with europium has been used to make lasers.",
+      "quote": "Europium-doped plastic has been used as a laser material.",
+      "sentence": "Europium-doped plastic has been used as a laser material. With the development of ion-exchange techniques and special processes, the cost of the metal has been greatly reduced in recent years."
+    },
+    {
+      "z": 64,
+      "src": "jlab",
+      "text": "Gadolinium captures neutrons better than any element, for reactor control rods.",
+      "quote": "the greatest ability to capture thermal neutrons of all known elements and can be used as control rods",
+      "sentence": "adolinium has the greatest ability to capture thermal neutrons of all known elements and can be used as control rods for nuclear reactors."
+    },
+    {
+      "z": 64,
+      "src": "lanl",
+      "text": "A little gadolinium helps iron and chromium alloys resist heat and oxidation.",
+      "quote": "gadolinium improves the workability and resistance of iron, chromium, and related alloys to high temperatures and oxidation",
+      "sentence": "As little as 1 percent gadolinium improves the workability and resistance of iron, chromium, and related alloys to high temperatures and oxidation."
+    },
+    {
+      "z": 65,
+      "src": "jlab",
+      "text": "Terbium helps stabilize crystals in high-temperature fuel cells.",
+      "quote": "as a crystal stabilizer in fuel cells that operate at high temperatures",
+      "sentence": "erbium is used to dope some types of solid-state devices and, along with zirconium dioxide (ZrO2), as a crystal stabilizer in fuel cells that operate at high temperatures."
+    },
+    {
+      "z": 65,
+      "src": "jlab",
+      "text": "Sodium terbium borate is used to make laser light.",
+      "quote": "Sodium terbium borate, another terbium compound, is used to make laser light.",
+      "sentence": "Sodium terbium borate, another terbium compound, is used to make laser light."
+    },
+    {
+      "z": 66,
+      "src": "lanl",
+      "text": "A dysprosium oxide-nickel cement is used to cool nuclear reactor rods.",
+      "quote": "A dysprosium oxide-nickel cement has found use in cooling nuclear reactor rods.",
+      "sentence": "A dysprosium oxide-nickel cement has found use in cooling nuclear reactor rods. This cement absorbs neutrons readily without swelling or contracting under prolonged neutron bombardment."
+    },
+    {
+      "z": 66,
+      "src": "jlab",
+      "text": "With vanadium and other rare earths, dysprosium is used in lasers.",
+      "quote": "When combined with vanadium and other rare earth elements, dysprosium is used as a laser material.",
+      "sentence": "When combined with vanadium and other rare earth elements, dysprosium is used as a laser material. Dysprosium oxide (Dy2O3), also known as dysprosia, is combined with nickel and added to a special cement used to cool nuclear reactor rods."
+    },
+    {
+      "z": 68,
+      "src": "jlab",
+      "text": "Erbium is added to fiber optic cables to amplify signals.",
+      "quote": "Erbium is added to fiber optic cables as a doping agent where it is used as a signal amplifier.",
+      "sentence": "Erbium is added to fiber optic cables as a doping agent where it is used as a signal amplifier. Erbium also has some uses in the nuclear power industry."
+    },
+    {
+      "z": 68,
+      "src": "lanl",
+      "text": "Erbium oxide gives glass and glazes a pink color.",
+      "quote": "Erbium oxide gives a pink color and has been used as a colorant in glasses and porcelain enamel glazes.",
+      "sentence": "Erbium oxide gives a pink color and has been used as a colorant in glasses and porcelain enamel glazes."
+    },
+    {
+      "z": 69,
+      "src": "jlab",
+      "text": "Thulium-169 could be the radiation source in portable X-ray machines.",
+      "quote": "thulium-169, could be used as a radiation source for portable X-ray machines",
+      "sentence": "It currently has no commercial applications, although one of its isotopes, thulium-169, could be used as a radiation source for portable X-ray machines."
+    },
+    {
+      "z": 69,
+      "src": "lanl",
+      "text": "Thulium can be added to fiber lasers.",
+      "quote": "used in microwave equipment, and can be used for doping fiber lasers",
+      "sentence": "Natural thulium also has possible use in ferrites (ceramic magnetic materials) used in microwave equipment, and can be used for doping fiber lasers."
+    },
+    {
+      "z": 70,
+      "src": "jlab",
+      "text": "Ytterbium can amplify signals in fiber optic cable.",
+      "quote": "used as a doping agent in fiber optic cable where it can be used as an amplifier",
+      "sentence": "It can be alloyed with stainless steel to improve some of its mechanical properties and used as a doping agent in fiber optic cable where it can be used as an amplifier."
+    },
+    {
+      "z": 70,
+      "src": "jlab",
+      "text": "Ytterbium can improve some mechanical properties of stainless steel.",
+      "quote": "It can be alloyed with stainless steel to improve some of its mechanical properties",
+      "sentence": "It can be alloyed with stainless steel to improve some of its mechanical properties and used as a doping agent in fiber optic cable where it can be used as an amplifier."
+    },
+    {
+      "z": 71,
+      "src": "jlab",
+      "text": "Lutetium has few uses, but it can be a catalyst in cracking petroleum.",
+      "quote": "can be used as a catalyst in the cracking of petroleum products",
+      "sentence": "utetium is one of the most difficult elements to prepare and has no large scale practical uses, although some of its radioactive isotopes can be used as a catalyst in the cracking of petroleum products and a catalyst in some hydrogenation and polymerization processes."
+    },
+    {
+      "z": 72,
+      "src": "jlab",
+      "text": "Hafnium absorbs neutrons and is used in nuclear reactor control rods.",
+      "quote": "Hafnium is a good absorber of neutrons and is used in the control rods of nuclear reactors.",
+      "sentence": "Hafnium is a good absorber of neutrons and is used in the control rods of nuclear reactors. Hafnium is also used in vacuum tubes as a getter, a material that combines with and removes trace gases from vacuum tubes."
+    },
+    {
+      "z": 72,
+      "src": "lanl",
+      "text": "Hafnium is used in gas-filled and incandescent lamps.",
+      "quote": "Hafnium is used in gas-filled and incandescent lamps, and is an efficient getter",
+      "sentence": "Hafnium is used in gas-filled and incandescent lamps, and is an efficient getter for scavenging oxygen and nitrogen."
+    },
+    {
+      "z": 73,
+      "src": "lanl",
+      "text": "Most tantalum is used in electronic capacitors and furnace parts.",
+      "quote": "Tantalum is used to make electrolytic capacitors and vacuum furnace parts, which account for about 60% of its use.",
+      "sentence": "Tantalum is used to make electrolytic capacitors and vacuum furnace parts, which account for about 60% of its use. The metal is also widely used to fabricate chemical process equipment, nuclear reactors, aircraft, and missile parts."
+    },
+    {
+      "z": 73,
+      "src": "jlab",
+      "text": "Tantalum doesn't irritate the body, so it is used for implants and sutures.",
+      "quote": "Tantalum also does not irritate the body and is used to make surgical sutures as well as implants",
+      "sentence": "Tantalum also does not irritate the body and is used to make surgical sutures as well as implants, such as artificial joints and cranial plates."
+    },
+    {
+      "z": 74,
+      "src": "jlab",
+      "text": "Tungsten has the highest melting point of any metal and is used in bulb filaments.",
+      "quote": "Tungsten has the highest melting point of all metallic elements and is used to make filaments for incandescent light bulbs",
+      "sentence": "Tungsten has the highest melting point of all metallic elements and is used to make filaments for incandescent light bulbs, fluorescent light bulbs and television tubes."
+    },
+    {
+      "z": 74,
+      "src": "jlab",
+      "text": "Very hard tungsten carbide tips drill bits and cutting tools.",
+      "quote": "It is used in the tips of drill bits, high speed cutting tools and in mining machinery.",
+      "sentence": "It is used in the tips of drill bits, high speed cutting tools and in mining machinery. Tungsten disulfide (WS2) is a dry lubricant that can be used to temperatures as high as 500°C."
+    },
+    {
+      "z": 75,
+      "src": "jlab",
+      "text": "Rhenium is mostly used in alloys with tungsten and molybdenum.",
+      "quote": "but is most frequently used as an alloying agent in tungsten and molybdenum",
+      "sentence": "henium is used in flash lamps for photography and for filaments in mass spectrographs and ion gages, but is most frequently used as an alloying agent in tungsten and molybdenum and as a catalyst for performing certain reactions to a type of hydrocarbon known as an olefin."
+    },
+    {
+      "z": 75,
+      "src": "lanl",
+      "text": "Rhenium makes filaments for lab instruments such as mass spectrographs.",
+      "quote": "It is widely used as filaments for mass spectrographs and ion gauges.",
+      "sentence": "It is widely used as filaments for mass spectrographs and ion gauges. Rhenium-molybdenum alloys are superconductive at 10 K."
+    },
+    {
+      "z": 76,
+      "src": "jlab",
+      "text": "Hard osmium alloys are used in pen tips and electrical contacts.",
+      "quote": "Osmium alloys can be found in ball point pen tips, fountain pen tips, record player needles, electrical contacts",
+      "sentence": "Osmium alloys can be found in ball point pen tips, fountain pen tips, record player needles, electrical contacts and other devices where frictional wear must be minimized."
+    },
+    {
+      "z": 76,
+      "src": "lanl",
+      "text": "Osmium tetroxide has been used to reveal fingerprints and stain tissue.",
+      "quote": "The tetroxide has been used to detect fingerprints and to stain fatty tissue for microscope slides.",
+      "sentence": "The tetroxide has been used to detect fingerprints and to stain fatty tissue for microscope slides. The metal is almost entirely used to produce very hard alloys with other metals of the platinum group for fountain pen tips, instrument pivots, phonograph needles, and electrical contacts."
+    },
+    {
+      "z": 77,
+      "src": "jlab",
+      "text": "Iridium is mainly used to harden platinum.",
+      "quote": "It is primarily used as a hardening agent for platinum. Platinum-iridium alloys",
+      "sentence": "It is primarily used as a hardening agent for platinum. Platinum-iridium alloys are used to make crucibles and other high temperature equipment."
+    },
+    {
+      "z": 77,
+      "src": "jlab",
+      "text": "An iridium-osmium alloy is used for fountain pen tips and compass bearings.",
+      "quote": "Iridium is also alloyed with osmium to make the tips of fountain pens and compass bearings.",
+      "sentence": "Iridium is also alloyed with osmium to make the tips of fountain pens and compass bearings. Iridium is the most corrosive resistant metal known."
+    },
+    {
+      "z": 78,
+      "src": "jlab",
+      "text": "Platinum in car catalytic converters cleans up exhaust gases.",
+      "quote": "a catalytic converter, a device found in the exhaust systems of most cars",
+      "sentence": "Platinum is also used in a device called a catalytic converter, a device found in the exhaust systems of most cars."
+    },
+    {
+      "z": 78,
+      "src": "jlab",
+      "text": "Platinum is used for jewelry, electrical contacts and lab ware.",
+      "quote": "It is used to make jewelry, wire, electrical contacts and laboratory vessels.",
+      "sentence": "It is used to make jewelry, wire, electrical contacts and laboratory vessels. Platinum expands at nearly the same rate as soda-lime-silica glass, so it is used to make sealed electrodes in glass systems."
+    },
+    {
+      "z": 79,
+      "src": "jlab",
+      "text": "Gold alloys are made into jewelry, coins and dental fillings.",
+      "quote": "Gold alloys are used to make jewelry, decorative items, dental fillings and coins.",
+      "sentence": "Gold alloys are used to make jewelry, decorative items, dental fillings and coins. The amount of gold in an alloy is measured with a unit called a karat."
+    },
+    {
+      "z": 79,
+      "src": "jlab",
+      "text": "Gold doesn't tarnish, so it is used in electrical connectors and circuit boards.",
+      "quote": "so it can be used to make electrical connectors and printed circuit boards",
+      "sentence": "Gold is a good conductor of heat and electricity and does not tarnish when it is exposed to the air, so it can be used to make electrical connectors and printed circuit boards."
+    },
+    {
+      "z": 80,
+      "src": "jlab",
+      "text": "Mercury vapor glows in fluorescent lamps and some streetlights.",
+      "quote": "Mercury vapor is used in streetlights, fluorescent lamps and advertising signs.",
+      "sentence": "Mercury vapor is used in streetlights, fluorescent lamps and advertising signs. Mercury easily forms alloys with other metals, such as gold, silver, zinc and cadmium."
+    },
+    {
+      "z": 80,
+      "src": "jlab",
+      "text": "Mercury has been used in thermometers and barometers.",
+      "quote": "Mercury can be used to make thermometers, barometers and other scientific instruments.",
+      "sentence": "Mercury can be used to make thermometers, barometers and other scientific instruments. Mercury conducts electricity and is used to make silent, position dependent switches."
+    },
+    {
+      "z": 81,
+      "src": "jlab",
+      "text": "Thallium compounds are used in devices that detect infrared light.",
+      "quote": "are all compounds used in devices to detect infrared radiation",
+      "sentence": "Thallium sulfide (Tl2S), thallium iodide (TlI) and thallium bromide (TlBr) are all compounds used in devices to detect infrared radiation."
+    },
+    {
+      "z": 81,
+      "src": "lanl",
+      "text": "Thallium is used to make glasses that melt at low temperatures.",
+      "quote": "Thallium has been used, with sulfur or selenium and arsenic, to produce low melting glasses",
+      "sentence": "Thallium has been used, with sulfur or selenium and arsenic, to produce low melting glasses with become fluid between 125 and 150C."
+    },
+    {
+      "z": 82,
+      "src": "jlab",
+      "text": "Most lead today goes into lead-acid storage batteries.",
+      "quote": "Most of the lead used today is used in the production on lead-acid storage batteries",
+      "sentence": "Most of the lead used today is used in the production on lead-acid storage batteries, such as the batteries found in automobiles."
+    },
+    {
+      "z": 82,
+      "src": "jlab",
+      "text": "Dense lead is used as a shield against X-rays and gamma rays.",
+      "quote": "Lead's high density makes it useful as a shield against X-ray and gamma-ray radiation",
+      "sentence": "Lead's high density makes it useful as a shield against X-ray and gamma-ray radiation and is used in X-ray machines and nuclear reactors."
+    },
+    {
+      "z": 83,
+      "src": "jlab",
+      "text": "Low-melting bismuth alloys are used in fire sprinklers and fuses.",
+      "quote": "These alloys are used in such things as automatic fire sprinkler systems, fire detection systems and electrical fuses.",
+      "sentence": "These alloys are used in such things as automatic fire sprinkler systems, fire detection systems and electrical fuses. Bismuth oxide (Bi2O3), a bismuth compound, is used as a yellow pigment in paints and cosmetics."
+    },
+    {
+      "z": 83,
+      "src": "lanl",
+      "text": "Bismuth compounds are used in cosmetics and in medicine.",
+      "quote": "Bismuth oxychloride is used extensively in cosmetics. Bismuth subnitrate and subcarbonate are used in medicine.",
+      "sentence": "Bismuth oxychloride is used extensively in cosmetics. Bismuth subnitrate and subcarbonate are used in medicine."
+    },
+    {
+      "z": 84,
+      "src": "jlab",
+      "text": "Polonium can be used to remove static electricity from machinery.",
+      "quote": "Polonium can be used to eliminate static electricity in machinery",
+      "sentence": "Polonium can be used to eliminate static electricity in machinery that is caused by processes such as the rolling of paper, wire or sheet metal, although other materials which emit beta particles are more commonly used for this purpose."
+    },
+    {
+      "z": 84,
+      "src": "jlab",
+      "text": "Polonium is used in brushes that remove dust from photographic film.",
+      "quote": "Polonium is also used in brushes for removing dust from photographic films",
+      "sentence": "Polonium is also used in brushes for removing dust from photographic films, although the polonium must be carefully sealed to protect the user from contamination."
+    },
+    {
+      "z": 85,
+      "src": "jlab",
+      "text": "Too rare and short-lived for any use outside research.",
+      "quote": "there are currently no uses for astatine outside of basic scientific research",
+      "sentence": "ue to the small amounts produced and its short half-life, there are currently no uses for astatine outside of basic scientific research."
+    },
+    {
+      "z": 86,
+      "src": "jlab",
+      "text": "Small amounts of radon are sometimes used to treat some cancers.",
+      "quote": "Small amounts of radon are sometimes used by hospitals to treat some forms of cancer.",
+      "sentence": "Small amounts of radon are sometimes used by hospitals to treat some forms of cancer. Radon fluoride (RnF) is the only confirmed compound of radon."
+    },
+    {
+      "z": 87,
+      "src": "jlab",
+      "text": "Too rare and short-lived for any use outside research.",
+      "quote": "there are currently no uses for francium outside of basic scientific research",
+      "sentence": "ue to the small amounts produced and its short half-life, there are currently no uses for francium outside of basic scientific research."
+    },
+    {
+      "z": 88,
+      "src": "jlab",
+      "text": "Radium was once used in glowing paint for watch and instrument dials.",
+      "quote": "Radium had been used to make self-luminous paints for watches, aircraft instrument dials and other instrumentation",
+      "sentence": "Radium had been used to make self-luminous paints for watches, aircraft instrument dials and other instrumentation, but has largely been replaced by cobalt-60, a less dangerous radioactive source."
+    },
+    {
+      "z": 88,
+      "src": "jlab",
+      "text": "Mixed with beryllium, radium is used as a neutron source.",
+      "quote": "A mixture of radium and beryllium will emit neutrons and is used as a neutron source.",
+      "sentence": "A mixture of radium and beryllium will emit neutrons and is used as a neutron source. Radium is used to produce radon, a radioactive gas used to treat some types of cancer."
+    },
+    {
+      "z": 89,
+      "src": "jlab",
+      "text": "Actinium has no commercial uses but is used to produce neutrons.",
+      "quote": "Actinium has no significant commercial applications, although it is used in the production of neutrons.",
+      "sentence": "Actinium has no significant commercial applications, although it is used in the production of neutrons."
+    },
+    {
+      "z": 90,
+      "src": "jlab",
+      "text": "Thorium strengthens magnesium alloys at high temperatures.",
+      "quote": "Thorium is used as an alloying agent to improve magnesium's strength at high temperatures.",
+      "sentence": "Thorium is used as an alloying agent to improve magnesium's strength at high temperatures. Thorium is also used to coat tungsten filaments used in electronic devices, such at television sets."
+    },
+    {
+      "z": 90,
+      "src": "lanl",
+      "text": "Thorium oxide was long used in gas lantern mantles that glow brightly.",
+      "quote": "The principal historic use of thorium has been in the preparation of the Welsbach mantle",
+      "sentence": "The principal historic use of thorium has been in the preparation of the Welsbach mantle, used for portable gaslights."
+    },
+    {
+      "z": 91,
+      "src": "jlab",
+      "text": "Too rare and radioactive for any use outside research.",
+      "quote": "there are currently no uses for protactinium outside of basic scientific research",
+      "sentence": "ue to its scarcity, high radioactivity and toxicity, there are currently no uses for protactinium outside of basic scientific research."
+    },
+    {
+      "z": 92,
+      "src": "jlab",
+      "text": "Uranium fuels nuclear power plants that generate electricity.",
+      "quote": "is most commonly used in the nuclear power industry to generate electricity",
+      "sentence": "ince it is naturally radioactive, uranium, usually in the form of uranium dioxide (UO2), is most commonly used in the nuclear power industry to generate electricity."
+    },
+    {
+      "z": 92,
+      "src": "jlab",
+      "text": "Uranium compounds have been used for centuries to color glass.",
+      "quote": "Uranium compounds have been used for centuries to color glass.",
+      "sentence": "Uranium compounds have been used for centuries to color glass. A 2,000 year old sample of yellow glass found near Naples, Italy contains uranium oxide."
+    },
+    {
+      "z": 93,
+      "src": "jlab",
+      "text": "Neptunium-237, a by-product of nuclear reactors, is used in neutron detectors.",
+      "quote": "a by-product of the production of plutonium in nuclear reactors, is used in neutron detectors",
+      "sentence": "Neptunium-237, which is produced in gram quantities as a by-product of the production of plutonium in nuclear reactors, is used in neutron detectors."
+    },
+    {
+      "z": 94,
+      "src": "jlab",
+      "text": "Plutonium-238 powers space probes that travel too far for solar power.",
+      "quote": "Plutonium-238 is used in radioisotope thermoelectric generators to provide electricity for space probes",
+      "sentence": "Plutonium-238 is used in radioisotope thermoelectric generators to provide electricity for space probes that venture too far from the sun to use solar power, such as the Cassini and Galileo probes."
+    },
+    {
+      "z": 94,
+      "src": "jlab",
+      "text": "Plutonium-239 fuels some nuclear reactors and is used in nuclear weapons.",
+      "quote": "so it is used at the heart of modern day nuclear weapons and in some nuclear reactors",
+      "sentence": "Plutonium-239 will undergo a fission chain reaction if enough of it is concentrated in one place, so it is used at the heart of modern day nuclear weapons and in some nuclear reactors."
+    },
+    {
+      "z": 95,
+      "src": "jlab",
+      "text": "Americium-241 is used in smoke detectors.",
+      "quote": "It is used in smoke detectors and can be used as a portable source of gamma rays.",
+      "sentence": "It is used in smoke detectors and can be used as a portable source of gamma rays. Americium-241, with a half-life of 432.2 years, is used in these products because it is easier to produce relatively pure samples of this isotope."
+    },
+    {
+      "z": 95,
+      "src": "lanl",
+      "text": "Americium is used to gauge glass thickness when making flat glass.",
+      "quote": "americium has been employed to gauge glass thickness to help create flat glass",
+      "sentence": "For example, americium has been employed to gauge glass thickness to help create flat glass."
+    },
+    {
+      "z": 96,
+      "src": "jlab",
+      "text": "Only milligrams have ever been made, so it is used only in research.",
+      "quote": "Since only milligram amounts of curium have ever been produced, there are currently no commercial applications for it",
+      "sentence": "Since only milligram amounts of curium have ever been produced, there are currently no commercial applications for it, although it might be used in radioisotope thermoelectric generators in the future."
+    },
+    {
+      "z": 98,
+      "src": "jlab",
+      "text": "Californium-252 neutrons help identify gold and silver ores.",
+      "quote": "It is being used as a neutron source to identify gold and silver ores",
+      "sentence": "It is being used as a neutron source to identify gold and silver ores through a technique known as neutron activation."
+    },
+    {
+      "z": 98,
+      "src": "jlab",
+      "text": "Californium gauges find water- and oil-bearing layers in oil wells.",
+      "quote": "used to find water and oil bearing layers in oil wells",
+      "sentence": "It is also being used in devices known as neutron moisture gauges that are used to find water and oil bearing layers in oil wells."
+    },
+    {
+      "z": 99,
+      "src": "jlab",
+      "text": "Made only in tiny amounts; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only small amounts of einsteinium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 100,
+      "src": "jlab",
+      "text": "Made in tiny amounts and quickly decays; used only in research.",
+      "quote": "there are currently no uses for fermium outside of basic scientific research",
+      "sentence": "ue to the small amounts produced and its short half-life, there are currently no uses for fermium outside of basic scientific research."
+    },
+    {
+      "z": 101,
+      "src": "jlab",
+      "text": "Made only in tiny amounts; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only small amounts of mendelevium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 102,
+      "src": "jlab",
+      "text": "Made only in tiny amounts; used only in research.",
+      "quote": "there are currently no uses for it outside of basic scientific research",
+      "sentence": "ince only tiny amounts of nobelium have ever been produced, there are currently no uses for it outside of basic scientific research."
+    },
+    {
+      "z": 103,
+      "src": "jlab",
+      "text": "Made only in tiny amounts; used only in research.",
+      "quote": "there are currently no uses for it outside of basic scientific research",
+      "sentence": "ince only tiny amounts of lawrencium have ever been produced, there are currently no uses for it outside of basic scientific research."
+    },
+    {
+      "z": 104,
+      "src": "jlab",
+      "text": "Made in tiny amounts and quickly decays; used only in research.",
+      "quote": "there are currently no uses for rutherfordium outside of basic scientific research",
+      "sentence": "ue to the small amounts produced and its short half-life, there are currently no uses for rutherfordium outside of basic scientific research."
+    },
+    {
+      "z": 105,
+      "src": "jlab",
+      "text": "Made in tiny amounts and quickly decays; used only in research.",
+      "quote": "there are currently no uses for dubnium outside of basic scientific research",
+      "sentence": "ue to the small amounts produced and its short half-life, there are currently no uses for dubnium outside of basic scientific research."
+    },
+    {
+      "z": 106,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "there are currently no uses for seaborgium outside of basic scientific research",
+      "sentence": "ince only a few atoms of seaborgium have ever been made, there are currently no uses for seaborgium outside of basic scientific research."
+    },
+    {
+      "z": 107,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "there are currently no uses for bohrium outside of basic scientific research",
+      "sentence": "ince only a few atoms of bohrium have ever been made, there are currently no uses for bohrium outside of basic scientific research."
+    },
+    {
+      "z": 108,
+      "src": "jlab",
+      "text": "Made only in tiny amounts; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only small amounts of hassium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 109,
+      "src": "jlab",
+      "text": "Made only in tiny amounts; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only small amounts of meitnerium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 110,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only a few atoms of darmstadtium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 111,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only a few atoms of roentgenium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 112,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only a few atoms of copernicium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 113,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only a few atoms of nihonium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 114,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only a few atoms of flerovium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 115,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only a few atoms of moscovium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 116,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only a few atoms of livermorium have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 117,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only a few atoms of tennessine have ever been produced, it currently has no uses outside of basic scientific research."
+    },
+    {
+      "z": 118,
+      "src": "jlab",
+      "text": "Made only a few atoms at a time; used only in research.",
+      "quote": "it currently has no uses outside of basic scientific research",
+      "sentence": "ince only a few atoms of oganesson have ever been produced, it currently has no uses outside of basic scientific research."
+    }
+  ]
+}

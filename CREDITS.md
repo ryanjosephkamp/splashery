@@ -1,7 +1,7 @@
 # Credits
 
 Every captured toy on Splashery's shelf (the Photoreal shelf) is either public domain (CC0) or
-licensed under Creative Commons Attribution 4.0 (CC BY 4.0). Nothing with a stricter licence is
+licensed under Creative Commons Attribution 4.0 (CC BY 4.0). Nothing with a stricter license is
 used. The same attributions appear in the app under **About & credits**.
 
 ## Captured toys
@@ -14,7 +14,7 @@ The first four were changed the same way with `tools/prepare-assets.mjs` (the co
 common size, cropped to the object, decimated to at most 450,000 splats, and a lighter 120,000-splat
 copy made for phones.
 
-| Toy          | Work                                                                          | Author                                                                                | Licence                                                       | Changes                                                                                                             |
+| Toy          | Work                                                                          | Author                                                                                | License                                                       | Changes                                                                                                             |
 | ------------ | ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
 | Cactus       | [3DGS PLY sample data: cactus](https://note.com/steam_studio/n/ne9736d94f162) | steam studio / 3D SCAN STUDIO iris (Lespace Vision Inc.), https://www.steam-studio.jp | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) | Converted to SOG, SH removed, recentred, scaled, cropped to the pot.                                                |
 | Strawberry   | [Strawberry](https://superspl.at/scene/84df8849)                              | Dany Bittel ([patreon.com/DanyBittel](https://www.patreon.com/DanyBittel))            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)     | Decimated from 1.5M to 450k splats, SH removed, recentred, scaled.                                                  |
@@ -29,19 +29,19 @@ Where the files came from:
   free to use them for commercial and non-commercial purposes without any copyright restrictions."
   The authors ask for a credit link to https://www.steam-studio.jp.
 - **Strawberry, Heart cookie, Honeybee**: SuperSplat scenes with downloads enabled and the CC BY 4.0
-  licence chosen by their authors (checked on each scene page on 22 September 2026). The source
+  license chosen by their authors (checked on each scene page on September 22, 2026). The source
   files are the SOG data the public SuperSplat viewer streams for each scene.
 
 ### More scans from SuperSplat
 
-Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 licence chosen by its
-author (checked on 23 September 2026 through the scene data SuperSplat publishes for each page). The
-source files are the SOG data the public viewer streams. Each was changed the same way by
+Twelve more SuperSplat scenes, each with downloads enabled and the CC BY 4.0 license chosen by its
+author (checked on September 23, 2026 through the scene data SuperSplat publishes for each page).
+The source files are the SOG data the public viewer streams. Each was changed the same way by
 `tools/prepare-assets.mjs`: spherical harmonics removed, rotated upright, recentred, scaled to the
 common size, decimated to at most 300,000 splats, and a lighter 100,000-splat copy made for phones.
 The Mandeltorus is a rendered fractal rather than a scan.
 
-| Toy                  | Work                                                                                             | Author                                  | Licence                                                   |
+| Toy                  | Work                                                                                             | Author                                  | License                                                   |
 | -------------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------- | --------------------------------------------------------- |
 | Cluster fly          | [Cluster Fly](https://superspl.at/scene/285082b2)                                                | Dany Bittel                             | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | May beetle           | [MAY-BEETLE-HIRES](https://superspl.at/scene/9d4c4442)                                           | trilithon                               | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
@@ -56,20 +56,97 @@ The Mandeltorus is a rendered fractal rather than a scan.
 | Mandeltorus          | [MandelTorus 4,12,8,1.5 (Spirula Studio)](https://superspl.at/scene/e7088609)                    | harry7557558                            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 | Basket               | [Basket](https://superspl.at/scene/efa1fa80)                                                     | hollmar                                 | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) |
 
+### More scans from SuperSplat, round 2 (lane Photoreal r2)
+
+Thirty more SuperSplat scenes of single objects, added October 3, 2026 behind the labs switch. Each
+scene's license was read from its live page (the `rel="license"` link, checked October 3, 2026), and
+downloads are enabled on every one. Twenty-seven are CC BY 4.0. Three are NonCommercial, allowed per
+asset since the owner's call of October 3, 2026 (Dog plush, Desk globe, Cherry blossom (photo));
+each carries `"nc": true` in `tools/assets.json`, and `node tools/nc-assets.mjs` lists them so they
+can all come out if the site ever earns money. The cherry blossom is also ShareAlike (CC BY-NC-SA),
+so what is made from it keeps that license, and it is never merged with another asset. Scenes with
+no license shown on their page, and ones that show a brand name or a character from a game, were
+left out. Each file was changed by `tools/pr2-prepare.mjs`: rotated upright, recentred, scaled to a
+radius of about 0.9, cleaned of strays and decimated (at most 1,000,000 splats, 300,000 for the lite
+files). One band of spherical harmonics is kept on the full files (the lite files have none; the
+sources of the alum crystal and the monkey doll have none). Lane Fix9 (October 7, 2026) cropped the
+photo orange's faint floaters with a sphere, and removed the dog plush's stray fringe under it
+(where the plush lay on the mat, unseen by the camera) and closed the gaps there with a hidden,
+kit-built core (`tools/fx9-dog-fill.mjs`); the dog plush stays CC BY-NC 4.0.
+
+| Toy                    | Scene                                                                                     | Author            | License                                                               |
+| ---------------------- | ----------------------------------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------- |
+| Heart donut            | [Heart Shaped Donut](https://superspl.at/scene/d2a622ec)                                  | John Splat        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Sushi boat             | [SUSHI](https://superspl.at/scene/43ddc643)                                               | leo esteves       | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Seeded bread loaf      | [Seeded Bread Loaf](https://superspl.at/scene/e1beac1a)                                   | John Splat        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Cowboy steak           | [Cowboy Steak](https://superspl.at/scene/6e60e106)                                        | Eric Cornwell     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Stollen                | [Stollen Confectionery](https://superspl.at/scene/070d50b8)                               | Dany Bittel       | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Orange (photo)         | [Fresh Orange](https://superspl.at/scene/633ea98d)                                        | Storm Geerling    | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Physalis               | [Physalis](https://superspl.at/scene/908ed1a1)                                            | Alfred Duemlein   | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Crystal                | [Homemade Crystal Gem](https://superspl.at/scene/6cca7765)                                | Eric Cornwell     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Alum crystal           | [alum-stone](https://superspl.at/scene/9b0c8534)                                          | Arshad            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Puffin                 | [Puffin](https://superspl.at/scene/d44e63ab)                                              | Dan Zeitman       | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Toy T. rex             | [Tyrannosaurus Rex](https://superspl.at/scene/d281a49d)                                   | Alfred Duemlein   | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Monkey doll            | [Monkey Doll](https://superspl.at/scene/726c5f45)                                         | Ethan             | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Souvenir elephant      | [Thai souvenir elephant toy](https://superspl.at/scene/b01bfc43)                          | Aung Sann Thit    | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Souvenir turtle        | [Turtle Souvenir](https://superspl.at/scene/c2051d75)                                     | Tony Rose         | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Cave lioness           | [Lioness (Panthera Spelaea)](https://superspl.at/scene/7e4e9bcb)                          | Spenser DIckerson | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Dog plush              | [Dog Plush - Revopoint POP4 with additional Pictures](https://superspl.at/scene/55d00502) | PrintedForFun     | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)       |
+| BMX bicycle            | [BMX Bicycle - Enhanced](https://superspl.at/scene/e95011f3)                              | Eric Cornwell     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Murex shell            | [Murex Shell](https://superspl.at/scene/d55ecb52)                                         | Rigsters          | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Sunflower (photo)      | [Sunflower ](https://superspl.at/scene/d8c22218)                                          | Natural Ai        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| White roses            | [White Rose 2](https://superspl.at/scene/e34ad55d)                                        | Natural Ai        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Bonsai tree (photo)    | [Bonsai Tree](https://superspl.at/scene/4c461e7c)                                         | Garrett Nelli     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Mushroom (photo)       | [Rugiboletus extremiorientalis mushroom](https://superspl.at/scene/737cf53c)              | Alexander Omelko  | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Cactus (photo 2)       | [Cactus 1](https://superspl.at/scene/4e095e21)                                            | Natural Ai        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Crochet Earth          | [Earth Crochet from Project Hail Mary](https://superspl.at/scene/8d1a69d2)                | Wan Xi            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Desk globe             | [Cheap globe](https://superspl.at/scene/9e8174d2)                                         | ilk               | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)       |
+| Cherry blossom (photo) | [CHERRY BLOSSOM - HIGH PARK](https://superspl.at/scene/4eec644f)                          | Todd Smith        | [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/) |
+| Golden maple           | [Golden Fullmoon Maple](https://superspl.at/scene/f233b115)                               | Joshua Trapani    | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Peonies in a vase      | [Pink Peonies](https://superspl.at/scene/50c8ccf7)                                        | Sergiu Zboras     | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Money tree             | [Money Tree (Pachira)](https://superspl.at/scene/45d3761b)                                | Natural Ai        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+| Knight on a horse      | [A knight with a sword and shield on a black horse](https://superspl.at/scene/2d074d8a)   | Alfred Duemlein   | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)             |
+
+### Scientific captures, round 3 (lane Photoreal r3)
+
+Ten scientific toys, added October 8, 2026 behind the labs switch. Each license was read on the
+item's live page that day. The two SuperSplat scenes were changed by `tools/pr3-prepare.mjs`
+(rotated upright, recentered, scaled and cropped: the skull's mounting rod and the putty under the
+shell). The eight museum scans (from Sketchfab, through Allen AI's Objaverse mirror on Hugging Face,
+and from the Natural History Museum Vienna's data repository) were baked into splats by
+`tools/pr3-bake.mjs`, each splat tagged with the piece it moves with (the globe's ball, the
+armillary sphere's inner rings, each Stannern stone); the armillary sphere's glass over its compass
+is left out, and the five Stannern stones are set side by side. The Stannern stones are
+NonCommercial (CC BY-NC 4.0), allowed per asset since the owner's call of October 3, 2026: they
+carry `"nc": true` in `tools/models.json`, and `node tools/nc-assets.mjs` lists them.
+
+| Toy                | Source                                                                                                                                                              | Author                                                               | License                                                         |
+| ------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Triceratops skull  | [Triceratops (Burke Museum)](https://superspl.at/scene/811dd9ed)                                                                                                    | Luke Shea                                                            | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)       |
+| Cone shell         | [Leopard (textile) cone shell](https://superspl.at/scene/410c2b24)                                                                                                  | Alfred Duemlein                                                      | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)       |
+| Celestial globe    | [Celestial globe](https://sketchfab.com/3d-models/celestial-globe-341fa8a777e94883841409438756f747)                                                                 | Virtual Museums of Małopolska                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Armillary sphere   | [Armillary sphere (1771)](https://sketchfab.com/3d-models/armillary-sphere-1771-41e23659c75241459eec6477d9e77c93)                                                   | Virtual Museums of Małopolska                                        | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)       |
+| Stannern meteorite | [Stannern meteorite (NHMW-MIN-A21, A135, A136, A139, A140)](https://datarepository.nhm-wien.ac.at/10.57756/cuqmeh)                                                  | Viola Winkler, Natural History Museum Vienna                         | [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/) |
+| Fluorite           | [Mineral: Fluorite](https://sketchfab.com/3d-models/mineral-fluorite-5ed87d4487be495aac0a86632eb3880c)                                                              | Digital Atlas of Ancient Life (Paleontological Research Institution) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Ammonite           | [Ammonite mineralised with quartz and chalcedony](https://sketchfab.com/3d-models/ammonite-mineralised-with-quartz-and-chalcedony-4a8582d264a9466f87dc68cea5c28838) | Virtual Museums of Małopolska                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Morasko meteorite  | [“Morasko” iron meteorite](https://sketchfab.com/3d-models/morasko-iron-meteorite-37fd0d100a3246f2892ece5f8d178c06)                                                 | Virtual Museums of Małopolska                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Pyrite             | [Pyrite](https://sketchfab.com/3d-models/pyrite-0b7c6e8e32144b72806ed31cb49b4145)                                                                                   | Digital Atlas of Ancient Life (Paleontological Research Institution) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+| Megalodon tooth    | [Vertebrate: Carcharocles megalodon (PRI 55188)](https://sketchfab.com/3d-models/vertebrate-carcharocles-megalodon-pri-55188-06e0bef4795840b4b21d17e5f51f3140)      | Digital Atlas of Ancient Life (Paleontological Research Institution) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)   |
+
 ### Models from Poly Haven, turned into splats
 
 Fifteen textured 3D models from [Poly Haven](https://polyhaven.com), all CC0: Poly Haven publishes
 every asset under CC0 ([polyhaven.com/license](https://polyhaven.com/license)), and each model's
-name and authors were checked in the Poly Haven API on 23 September 2026. `tools/mesh-to-splats.mjs`
-downloads each glTF, scatters splats over its surfaces by area, colours them from the model's
-textures (glass materials are skipped so the insides show), and writes a 3DGS PLY file;
-`tools/prepare-assets.mjs` then packs it like the scans (at most 200,000 splats, 80,000 for phones).
-Poly Haven does not require credit, but it is given here anyway. Since Phase C1 the vintage camera,
-boombox, wooden elephant and horse statue also have soft studio light baked into their colours (with
-the models' own normal and occlusion maps), and the printed maker's names on the camera, its lens
-and the boombox are painted out (see `tools/models.json`).
+name and authors were checked in the Poly Haven API on September 23, 2026.
+`tools/mesh-to-splats.mjs` downloads each glTF, scatters splats over its surfaces by area, colors
+them from the model's textures (glass materials are skipped so the insides show), and writes a 3DGS
+PLY file; `tools/prepare-assets.mjs` then packs it like the scans (at most 200,000 splats, 80,000
+for phones). Poly Haven does not require credit, but it is given here anyway. Since Phase C1 the
+vintage camera, boombox, wooden elephant and horse statue also have soft studio light baked into
+their colors (with the models' own normal and occlusion maps), and the printed maker's names on the
+camera, its lens and the boombox are painted out (see `tools/models.json`).
 
-| Toy              | Model                                                                    | Author                       | Licence                                                       |
+| Toy              | Model                                                                    | Author                       | License                                                       |
 | ---------------- | ------------------------------------------------------------------------ | ---------------------------- | ------------------------------------------------------------- |
 | Real rubber duck | [Rubber Duck Toy](https://polyhaven.com/a/rubber_duck_toy)               | Plat251                      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Garden gnome     | [Garden Gnome](https://polyhaven.com/a/garden_gnome)                     | Bhargav Kubal                | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -89,17 +166,17 @@ and the boombox are painted out (see `tools/models.json`).
 
 ### Made from one photo with an image-to-3D model (lane G)
 
-Each of these started as a single photo (CC0 or CC BY, the licence checked on its Wikimedia Commons
-page on 27 September 2026, with no brands or logos). `tools/image-to-3d.mjs` sent the photo, shrunk
+Each of these started as a single photo (CC0 or CC BY, the license checked on its Wikimedia Commons
+page on September 27, 2026, with no brands or logos). `tools/image-to-3d.mjs` sent the photo, shrunk
 to 1024 px, to the public [TRELLIS Space](https://huggingface.co/spaces/trellis-community/TRELLIS)
 on Hugging Face, which cut out the background (rembg with the u2net model, Apache-2.0) and generated
 3D Gaussians with [TRELLIS](https://github.com/microsoft/TRELLIS) (model
 [microsoft/TRELLIS-image-large](https://huggingface.co/microsoft/TRELLIS-image-large), MIT). The MIT
-licence puts no terms on what the model makes, so each toy keeps its photo's licence and credit.
+license puts no terms on what the model makes, so each toy keeps its photo's license and credit.
 `tools/prepare-assets.mjs` then packs it like the scans. The sides the photo does not show are the
 model's guess.
 
-| Toy          | Photo                                                                                                  | Photographer | Licence                                                       |
+| Toy          | Photo                                                                                                  | Photographer | License                                                       |
 | ------------ | ------------------------------------------------------------------------------------------------------ | ------------ | ------------------------------------------------------------- |
 | Real pencil  | [Kleiner Bleistift](<https://commons.wikimedia.org/wiki/File:Kleiner_Bleistift_(40045317711).jpg>)     | Tim Reckmann | [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/)     |
 | Real tin can | [Can opened with side opener](https://commons.wikimedia.org/wiki/File:Can_opened_with_side_opener.jpg) | Ll1324       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -140,6 +217,12 @@ browser from a seed by `src/generators.js`. The toys from packs (`src/packs/*.js
 beating heart, the campfire and the treasure chest) are built in the browser by the toy kit
 (`src/kit.js`) from recipes written for Splashery. None of them use external assets.
 
+### Baked assets (lane Baked engine)
+
+The Baked chest (labs) is original: built with Splashery's kit by `tools/bkd-bake-chest.mjs`, baked
+to a 3D Gaussian splat PLY with its lid as a moving part, and converted by `tools/port-convert.mjs`
+into the baked format. Made by Ryan with Claude Code (Opus 5.5), CC0 1.0.
+
 ## Protein structures
 
 The protein toy shows real structures from the [RCSB Protein Data Bank](https://www.rcsb.org/). PDB
@@ -153,6 +236,24 @@ data files are in the public domain under
 | [4INS](https://www.rcsb.org/structure/4INS) | 2Zn pig insulin crystals at 1.5 Å (1990)                  | G. G. Dodson, E. J. Dodson, D. C. Hodgkin, N. W. Isaacs, M. Vijayan |
 | [1EMA](https://www.rcsb.org/structure/1EMA) | Green fluorescent protein from _Aequorea victoria_ (1996) | M. Ormö, S. J. Remington                                            |
 | [4HHB](https://www.rcsb.org/structure/4HHB) | Human deoxyhaemoglobin at 1.74 Å (1984)                   | G. Fermi, M. F. Perutz                                              |
+
+### DNA to protein (lane Tiny world r2)
+
+The DNA to protein toy carries four real genes and the alpha carbons of their proteins' structures
+in `src/tiny/genes.js`, written by `tools/tw2-genes.mjs`. NCBI sequence records are in the public
+domain ([NCBI policies](https://www.ncbi.nlm.nih.gov/home/about/policies/)); PDB entries are
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/).
+
+| Source                                                          | What                                                 | Authors                                     |
+| --------------------------------------------------------------- | ---------------------------------------------------- | ------------------------------------------- |
+| [NM_000518.5](https://www.ncbi.nlm.nih.gov/nuccore/NM_000518.5) | Human hemoglobin subunit beta (HBB) mRNA             | NCBI RefSeq                                 |
+| [NM_000207.3](https://www.ncbi.nlm.nih.gov/nuccore/NM_000207.3) | Human insulin (INS) mRNA, transcript variant 1       | NCBI RefSeq                                 |
+| [NM_000239.3](https://www.ncbi.nlm.nih.gov/nuccore/NM_000239.3) | Human lysozyme (LYZ) mRNA                            | NCBI RefSeq                                 |
+| [M62653.1](https://www.ncbi.nlm.nih.gov/nuccore/M62653.1)       | _Aequorea victoria_ green fluorescent protein mRNA   | D. C. Prasher and others (1992)             |
+| [4HHB](https://www.rcsb.org/structure/4HHB)                     | Human deoxyhemoglobin at 1.74 Å (1984), a beta chain | G. Fermi, M. F. Perutz                      |
+| [1MSO](https://www.rcsb.org/structure/1MSO)                     | T6 human insulin at 1.0 Å (2003)                     | G. D. Smith, W. A. Pangborn, R. H. Blessing |
+| [1LZ1](https://www.rcsb.org/structure/1LZ1)                     | Human lysozyme at 1.5 Å (1981)                       | P. J. Artymiuk, C. C. F. Blake              |
+| [1GFL](https://www.rcsb.org/structure/1GFL)                     | Green fluorescent protein (1996)                     | F. Yang, L. G. Moss, G. N. Phillips Jr.     |
 
 ## Chemistry data (lane Chemistry)
 
@@ -187,6 +288,231 @@ toy's About tab. `tools/chs-data.mjs` and `tools/chs-molecules.mjs` fetch them a
   usual bond lengths.
 - Crystals: lattice constants at room temperature; alpha quartz's positions after Le Page and Donnay
   (1976).
+
+<!-- Real elements: written by tools/rel-credits.mjs -->
+
+## Real elements (lane Elements)
+
+The Real elements toy (a labs toy) shows 92 elements as photos of real samples, each cut out of its
+background and given depth by Depth Anything V2 Small (Apache 2.0) at build time
+(`tools/rel-samples.mjs`), in `assets/toys/real-elements/`. Each license was checked on the live
+page on October 5, 2026.
+
+- 80 photos from [Images of Elements](https://images-of-elements.com/) (Jumk.de Webprojects),
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/) ("The images are licensed under a
+  Creative Commons Attribution 3.0 Unported License, unless otherwise noted."; none of these is
+  otherwise noted), each credited by a link to its element's page:
+  [Hydrogen](https://images-of-elements.com/hydrogen.php),
+  [Helium](https://images-of-elements.com/helium.php),
+  [Lithium](https://images-of-elements.com/lithium.php),
+  [Beryllium](https://images-of-elements.com/beryllium.php),
+  [Boron](https://images-of-elements.com/boron.php),
+  [Carbon](https://images-of-elements.com/carbon.php),
+  [Nitrogen](https://images-of-elements.com/nitrogen.php),
+  [Oxygen](https://images-of-elements.com/oxygen.php),
+  [Neon](https://images-of-elements.com/neon.php),
+  [Sodium](https://images-of-elements.com/sodium.php),
+  [Magnesium](https://images-of-elements.com/magnesium.php),
+  [Aluminum](https://images-of-elements.com/aluminium.php),
+  [Silicon](https://images-of-elements.com/silicon.php),
+  [Phosphorus](https://images-of-elements.com/phosphorus.php),
+  [Sulfur](https://images-of-elements.com/sulfur.php),
+  [Chlorine](https://images-of-elements.com/chlorine.php),
+  [Argon](https://images-of-elements.com/argon.php),
+  [Potassium](https://images-of-elements.com/potassium.php),
+  [Calcium](https://images-of-elements.com/calcium.php),
+  [Scandium](https://images-of-elements.com/scandium.php),
+  [Titanium](https://images-of-elements.com/titanium.php),
+  [Vanadium](https://images-of-elements.com/vanadium.php),
+  [Chromium](https://images-of-elements.com/chromium.php),
+  [Manganese](https://images-of-elements.com/manganese.php),
+  [Iron](https://images-of-elements.com/iron.php),
+  [Cobalt](https://images-of-elements.com/cobalt.php),
+  [Nickel](https://images-of-elements.com/nickel.php),
+  [Copper](https://images-of-elements.com/copper.php),
+  [Zinc](https://images-of-elements.com/zinc.php),
+  [Gallium](https://images-of-elements.com/gallium.php),
+  [Germanium](https://images-of-elements.com/germanium.php),
+  [Arsenic](https://images-of-elements.com/arsenic.php),
+  [Selenium](https://images-of-elements.com/selenium.php),
+  [Bromine](https://images-of-elements.com/bromine.php),
+  [Krypton](https://images-of-elements.com/krypton.php),
+  [Rubidium](https://images-of-elements.com/rubidium.php),
+  [Strontium](https://images-of-elements.com/strontium.php),
+  [Yttrium](https://images-of-elements.com/yttrium.php),
+  [Zirconium](https://images-of-elements.com/zirconium.php),
+  [Niobium](https://images-of-elements.com/niobium.php),
+  [Molybdenum](https://images-of-elements.com/molybdenum.php),
+  [Ruthenium](https://images-of-elements.com/ruthenium.php),
+  [Rhodium](https://images-of-elements.com/rhodium.php),
+  [Palladium](https://images-of-elements.com/palladium.php),
+  [Silver](https://images-of-elements.com/silver.php),
+  [Cadmium](https://images-of-elements.com/cadmium.php),
+  [Indium](https://images-of-elements.com/indium.php),
+  [Tin](https://images-of-elements.com/tin.php),
+  [Antimony](https://images-of-elements.com/antimony.php),
+  [Tellurium](https://images-of-elements.com/tellurium.php),
+  [Iodine](https://images-of-elements.com/iodine.php),
+  [Xenon](https://images-of-elements.com/xenon.php),
+  [Cesium](https://images-of-elements.com/caesium.php),
+  [Barium](https://images-of-elements.com/barium.php),
+  [Lanthanum](https://images-of-elements.com/lanthanum.php),
+  [Cerium](https://images-of-elements.com/cerium.php),
+  [Praseodymium](https://images-of-elements.com/praseodymium.php),
+  [Neodymium](https://images-of-elements.com/neodymium.php),
+  [Samarium](https://images-of-elements.com/samarium.php),
+  [Europium](https://images-of-elements.com/europium.php),
+  [Gadolinium](https://images-of-elements.com/gadolinium.php),
+  [Terbium](https://images-of-elements.com/terbium.php),
+  [Dysprosium](https://images-of-elements.com/dysprosium.php),
+  [Holmium](https://images-of-elements.com/holmium.php),
+  [Erbium](https://images-of-elements.com/erbium.php),
+  [Thulium](https://images-of-elements.com/thulium.php),
+  [Ytterbium](https://images-of-elements.com/ytterbium.php),
+  [Lutetium](https://images-of-elements.com/lutetium.php),
+  [Hafnium](https://images-of-elements.com/hafnium.php),
+  [Tantalum](https://images-of-elements.com/tantalum.php),
+  [Tungsten](https://images-of-elements.com/tungsten.php),
+  [Rhenium](https://images-of-elements.com/rhenium.php),
+  [Osmium](https://images-of-elements.com/osmium.php),
+  [Iridium](https://images-of-elements.com/iridium.php),
+  [Platinum](https://images-of-elements.com/platinum.php),
+  [Gold](https://images-of-elements.com/gold.php),
+  [Mercury](https://images-of-elements.com/mercury.php),
+  [Thallium](https://images-of-elements.com/thallium.php),
+  [Lead](https://images-of-elements.com/lead.php),
+  [Bismuth](https://images-of-elements.com/bismuth.php).
+- Fluorine: "Liquid fluorine.jpg" by Prof B. G. Mueller,
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Liquid_fluorine.jpg). The cut-out sample made
+  from it is shared under the same license, shown beside the sample in the toy.
+- Technetium: "Technetium-sample.jpg" by Marco Cardin,
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Technetium-sample.jpg). The cut-out sample made
+  from it is shared under the same license, shown beside the sample in the toy.
+- Promethium: "Promethium Metal Buttons.png" by E. J. Wheelwright, U.S. Atomic Energy Commission,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Promethium_Metal_Buttons.png).
+- Radium: "Radium226.jpg" by grenadier, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/),
+  on [Commons](https://commons.wikimedia.org/wiki/File:Radium226.jpg).
+- Protactinium: "Protactinium-233.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Protactinium-233.jpg).
+- Uranium: "Depleted Uranium.jpg" by 范皓程,
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Depleted_Uranium.jpg).
+- Neptunium: "Neptunium2.jpg" by Los Alamos National Laboratory,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Neptunium2.jpg).
+- Plutonium: "Plutonium3.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Plutonium3.jpg).
+- Americium: "Americium microscope.jpg" by Bionerd,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Americium_microscope.jpg).
+- Berkelium: "Berkelium metal.jpg" by Oak Ridge National Laboratory, U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Berkelium_metal.jpg).
+- Californium: "Californium.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Californium.jpg).
+- Einsteinium: "EinsteiniumGlow.JPG" by R. G. Haire, U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:EinsteiniumGlow.JPG).
+
+For the 26 elements with no photo of a real sample, the toy shows a stand-in picture, said plainly
+to be one: the person, place or flag the element is named for, or a mineral that holds traces of it.
+Each from Wikimedia Commons, its license checked on the file page on October 5, 2026:
+
+- Polonium: "Flag of Poland.svg" by Wikimedia Commons contributors,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Poland.svg).
+- Astatine: "Autunite-20885.jpg" by Robert M. Lavinsky (iRocks.com),
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Autunite-20885.jpg). The picture made from it is
+  shared under the same license, shown beside it in the toy.
+- Radon: "Granite 5 (48674315157).jpg" by James St. John,
+  [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Granite_5_%2848674315157%29.jpg).
+- Francium: "Thorite-288916.jpg" by Robert M. Lavinsky (iRocks.com),
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Thorite-288916.jpg). The picture made from it is
+  shared under the same license, shown beside it in the toy.
+- Actinium: "Uraninite-225146.jpg" by Robert M. Lavinsky (iRocks.com),
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Uraninite-225146.jpg). The picture made from it
+  is shared under the same license, shown beside it in the toy.
+- Thorium: "Thorianite-729924.jpg" by Kelly Nash,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Thorianite-729924.jpg).
+- Curium: "Marie Curie c1920.jpg" by Henri Manuel,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Marie_Curie_c1920.jpg).
+- Fermium: "Enrico Fermi 1943-49.jpg" by U.S. Department of Energy,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Enrico_Fermi_1943-49.jpg).
+- Mendelevium: "DIMendeleevCab.jpg" by Unknown photographer,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:DIMendeleevCab.jpg).
+- Nobelium: "AlfredNobel2.jpg" by Unknown photographer,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:AlfredNobel2.jpg).
+- Lawrencium: "Ernest Lawrence.jpg" by Nobel Foundation,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Ernest_Lawrence.jpg).
+- Rutherfordium: "Ernest Rutherford LOC.jpg" by George Grantham Bain Collection (Library of
+  Congress), [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Ernest_Rutherford_LOC.jpg).
+- Dubnium: "Coat of arms of Dubna.svg" by City of Dubna,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Dubna.svg).
+- Seaborgium: "Glenn Seaborg - 1964.jpg" by U.S. Atomic Energy Commission,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Glenn_Seaborg_-_1964.jpg).
+- Bohrium: "Niels Bohr.jpg" by AB Lagrelius & Westphal,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Niels_Bohr.jpg).
+- Hassium: "Coat of arms of Hesse.svg" by State of Hesse,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_Hesse.svg).
+- Meitnerium: "Lise Meitner NatGeo.jpg" by Harris & Ewing,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Lise_Meitner_NatGeo.jpg).
+- Darmstadtium: "Wappen Darmstadt.svg" by City of Darmstadt (Hessisches Staatsarchiv),
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Wappen_Darmstadt.svg).
+- Roentgenium: "Roentgen2.jpg" by Unknown photographer,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Roentgen2.jpg).
+- Copernicium: "Nikolaus Kopernikus.jpg" by Unknown painter (Toruń Town Hall portrait, c. 1580),
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Nikolaus_Kopernikus.jpg).
+- Nihonium: "Flag of Japan.svg" by Government of Japan,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Japan.svg).
+- Flerovium: "RUSMARKA-1660 (cropped).jpg" by Russian Post (Marka); designer A. Povarikhin,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:RUSMARKA-1660_%28cropped%29.jpg).
+- Moscovium: "Flag of Moscow, Russia.svg" by City of Moscow,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Moscow%2C_Russia.svg).
+- Livermorium: "Downtown Livermore California.jpg" by LPS.1,
+  [CC0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Downtown_Livermore_California.jpg).
+- Tennessine: "Flag of Tennessee.svg" by State of Tennessee; drawn by -xfi-,
+  [Public domain](https://creativecommons.org/publicdomain/mark/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Flag_of_Tennessee.svg).
+- Oganesson: "Yuri Oganessian (cropped).jpg" by VPRO,
+  [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Yuri_Oganessian_%28cropped%29.jpg). The picture
+  made from it is shared under the same license, shown beside it in the toy.
+
+The facts come from PubChem's periodic table and element pages (NCBI; public domain U.S. government
+data); the uses are our own short sentences, each backed by words PubChem quotes from Jefferson Lab
+and Los Alamos National Laboratory (U.S. Department of Energy). See `tools/rel-facts.mjs` and
+`docs/evidence/real-elements.json`.
+
+<!-- End of Real elements -->
 
 ## Word vectors
 
@@ -226,6 +552,10 @@ The Picture lab (a labs toy) opens with two samples:
 
 Files and web addresses people open in the Picture lab are read in their browser and never uploaded.
 
+The Storybook is "The Little Lamp Who Wanted to See the Sea" (`assets/toys/storybook/storybook.pdf`,
+lane Hands-on H3): our own story and drawings, written for Splashery and printed with Chromium by
+`tools/hh3-storybook.mjs`.
+
 Your book opens with the Tinkerer's Manual (`manual/tinkerers-manual.pdf`, lane Manual). The photo
 album and the picture frame (labs toys, lane Books) open with these photos, each
 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) on Flickr (checked on the live pages
@@ -261,6 +591,27 @@ The Screen (a labs toy, lane Screens) opens with two samples:
   ([Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Muybridge_race_horse_animated.gif),
   checked on September 28, 2026). Unchanged.
 
+Moving photo to 3D (a labs toy, lane Live input r3) opens with the same Big Buck Bunny scene (©
+Blender Foundation, [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), checked on
+peach.blender.org on October 2, 2026): 96 frames of it (16 a second) at 640 by 360, tiled into
+`assets/toys/moving-photo-3d/bunny-sheet-1.jpg` to `-7.jpg`, with each frame's depth worked out by
+the vendored depth model (`bunny.depth`, made by `tools/live3-depth.mjs`). GIFs and videos people
+open in it are read in their browser and never uploaded. Four more samples (Studio media lane, each
+license checked on its live source page on October 5, 2026), each a few seconds tiled into JPEG
+sheets with each frame's depth (`assets/toys/moving-photo-3d/<name>-sheet-N.jpg` and `<name>.depth`,
+made by `tools/live3-depth.mjs`) and, for the videos, their sound as a mono MP3:
+
+- The race horse GIF above (Muybridge, 1887, public domain), unchanged.
+- "Sintel" (trailer, 29.5 to 35.5 s), © Blender Foundation,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), from the trailer on
+  download.blender.org ([durian.blender.org](https://durian.blender.org/)).
+- "Tears of Steel" (8:30.5 to 8:36.5), © Blender Foundation,
+  [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), from the 720p download on
+  download.blender.org ([mango.blender.org](https://mango.blender.org/)).
+- "Elephants Dream" (5:29.7 to 5:35.7), © Blender Foundation,
+  [CC BY 2.5](https://creativecommons.org/licenses/by/2.5/), from the download on
+  download.blender.org ([orange.blender.org](https://orange.blender.org/)).
+
 The Gaussian splatting toy (a labs toy, lane Screens) learns the photo "Strawberry on white
 background" by Joselodos
 ([Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Strawberry_on_white_background.jpg)),
@@ -285,14 +636,30 @@ GLB in `assets/toys/model-splats/` that the toy converts to splats in the browse
   [Poly Haven](https://polyhaven.com/a/antique_ceramic_vase_01),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on
   September 29, 2026). Its 1k glTF with only the color texture kept.
+- "Camera 01" by Rajil Jose Macatangay on [Poly Haven](https://polyhaven.com/a/Camera_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Boombox" by Thomas Paul Mouilleron on [Poly Haven](https://polyhaven.com/a/boombox),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Lantern 01" by Rajil Jose Macatangay on [Poly Haven](https://polyhaven.com/a/Lantern_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Bronze Whale Statue" by Tina on [Poly Haven](https://polyhaven.com/a/bronze_whale_statue),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
+- "Rockingchair 01" by Jorge Camacho on [Poly Haven](https://polyhaven.com/a/Rockingchair_01),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (checked on the live page on October
+  5, 2026). Its 1k glTF with only the color texture kept.
 
 `tools/stm-samples.mjs` fetches and packs them. The test models in `tests/fixtures/stm/` are made
 from numbers by `tools/stm-fixtures.mjs` and released under CC0 1.0. Models people open are
 converted in their browser and never uploaded.
 
-The Photo to 3D toy (a labs toy, lane Photo to 3D) ships three CC0 sample photos in
+The Photo to 3D toy (a labs toy, lane Photo to 3D) ships six CC0 sample photos in
 `assets/toys/photo-3d/`, each with a depth map made by `tools/p3d-depth.mjs`. Each license was
-checked on its live Wikimedia Commons page on September 29, 2026:
+checked on its live Wikimedia Commons page on September 29, 2026 (the last three on October 5,
+2026):
 
 - "Forest Away Path" by Seaq68 (from Pixabay, 2017),
   [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
@@ -303,6 +670,15 @@ checked on its live Wikimedia Commons page on September 29, 2026:
 - "Still Life with Cheese" by Antoine Vollon, from the Metropolitan Museum of Art's Open Access
   program, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg).
+- "Spiral Staircase, Keck Center (U.S. National Academies)" by Jorge Mendoza,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](<https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg>).
+- "Escalier monumental, Neue Burg, Vienna" by Jebulon,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg).
+- "Wildflowers in foreground" by PookieFugglestein,
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), on
+  [Commons](https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG).
 
 The depth is worked out on the device by
 [Depth Anything V2 Small](https://huggingface.co/depth-anything/Depth-Anything-V2-Small) (Lihe Yang
@@ -330,18 +706,14 @@ peak-normalized and saved as a small MP3; it loads only when its toy is tapped. 
 | `balloon-dog-pop.mp3`        | [Balloon-Burst-07.wav](https://freesound.org/s/82121/)                                           | Gniffelbaf                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `book-page.mp3`              | [Book Turn Page 2.wav](https://freesound.org/s/119127/)                                          | esperri                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `apple-bite.mp3`             | [Bite (Apple)](https://freesound.org/s/275015/)                                                  | wadaltmon                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `popcorn-popping.mp3`        | [popcorn.wav](https://freesound.org/s/488722/)                                                   | Mike888                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `taco-crack.mp3`             | [chips crunch sound](https://freesound.org/s/705360/)                                            | TomatoHater                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `fireworks-burst.mp3`        | [Firework Explosion 3](https://freesound.org/s/212683/)                                          | a deleted Freesound account (deleted_user_3544904) | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `colosseum-crowd.mp3`        | [cheering and clapping crowd 1](https://freesound.org/s/221568/)                                 | AlaskaRobotics                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `colosseum-hooves.mp3`       | [Horse and Carriage.mp3](https://freesound.org/s/388391/)                                        | maadmacs                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `steam-train-chug.mp3`       | [Steam Train In Motion 1.wav](https://freesound.org/s/179349/)                                   | lolamadeus                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `sports-car-rev.mp3`         | [Car Engine Revving.WAV](https://freesound.org/s/558844/)                                        | DigPro120                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `tractor-engine.mp3`         | [Tractor whirring](https://freesound.org/s/339167/)                                              | vonis22                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `helicopter-rotor.mp3`       | [Helicopter.wav](https://freesound.org/s/488089/)                                                | Mike_Leister                                       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `propeller-plane-engine.mp3` | [Aeroplane Passing Close.wav](https://freesound.org/s/507446/)                                   | paulprit                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `bow-and-target-release.mp3` | [Bow Release (Bow and Arrow) 3](https://freesound.org/s/384918/)                                 | Ali_6868                                           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `owl-hoot.mp3`               | [Owl Hoot](https://freesound.org/s/465697/)                                                      | Breviceps                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `frog-croak.mp3`             | [Frog croaking sound effect](https://freesound.org/s/354132/)                                    | betterchinese                                      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `frog-fly.mp3`               | [Fly_Buzzing_Edited.wav](https://freesound.org/s/443059/)                                        | AmberdeMeillon                                     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `bonsai-snip.mp3`            | [scissors cut.wav](https://freesound.org/s/175522/)                                              | mywhats                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
@@ -350,15 +722,17 @@ peak-normalized and saved as a small MP3; it loads only when its toy is tapped. 
 | `iceberg-crack.mp3`          | [Ice Crack 1](https://freesound.org/s/262635/)                                                   | j_p_higgins                                        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `klein-bottle-slosh.mp3`     | [Bottle Slosh 2](https://freesound.org/s/667273/)                                                | alegemaate                                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `spinning-top-spin.mp3`      | [Metallic Spinning Top (Dry Sound).wav](https://freesound.org/s/334970/)                         | Uzbazur                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
-| `spring-toy-boing.mp3`       | [battery compartment spring 01.wav](https://freesound.org/s/472478/)                             | denalwa                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `chess-set-move.mp3`         | [Piece Placement.mp3](https://freesound.org/s/546119/)                                           | el_boss                                            | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `robot-wind.mp3`             | [Wind-up sound](https://freesound.org/s/445966/)                                                 | Breviceps                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `dice-throw.mp3`             | [Casino Audio 1.1: dice-throw-1.ogg and dice-throw-3.ogg](https://kenney.nl/assets/casino-audio) | Kenney (kenney.nl)                                 | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
 The Video to 3D toy (a labs toy, lane Video 3D) ships two sample scenes in `assets/toys/video-3d/`,
 each trained by `tools/v3d-sample.mjs` from a stretch of a video on Wikimedia Commons (the splats
-and the solved camera path only; the videos are not shipped). Each license was checked on its live
-Commons page on September 30, 2026:
+and the solved camera path). Since October 5, 2026 (lane Studio media) each also ships that same
+stretch of its video at 480p, without sound (`liberty-source.mp4` and `.webm`,
+`edinburgh-source.mp4` and `.webm`, cut by `tools/smd-source.mjs` from Commons' own 480p transcode),
+for the toy's "Show the original" option, under the same CC BY 3.0 license and credit. Each license
+was checked on its live Commons page on September 30, 2026 (and again on October 5, 2026):
 
 - "Statue Of Liberty 4k Drone" by the Dronalist (14 seconds from 3:24),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
@@ -370,6 +744,67 @@ Commons page on September 30, 2026:
 The camera path and the splats are worked out on the device by
 [Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
 read in their browser and never uploaded.
+
+The Splat toolkit (a labs toy, lane Viewers) uses three of the captured toys above as its samples
+(the cactus, the strawberry and the Japanese bee, with their credits and licenses as listed there);
+its "cactus with stray splats" sample adds 0.6% made-up stray splats to the cactus, made on the
+device. Its .sog reading and saving use the WebP codec from
+[splat-transform](https://github.com/playcanvas/splat-transform) (PlayCanvas, MIT), which is
+[libwebp](https://chromium.googlesource.com/webm/libwebp) (Google, BSD-3-Clause) compiled to
+WebAssembly.
+
+The Point clouds toy (a labs toy, lane Viewers) ships three lidar samples in
+`assets/toys/point-clouds/`, each made by `tools/vwr-samples.mjs` from the U.S. Geological Survey's
+3D Elevation Program (3DEP) point clouds, read from the
+[USGS 3DEP Entwine Point Tiles on AWS](https://registry.opendata.aws/usgs-lidar/). They are U.S.
+Government works in the
+[public domain](https://www.usgs.gov/faqs/what-are-terms-uselicensing-map-services-and-data-national-map)
+(checked on the AWS registry page on October 5, 2026). Courtesy of the U.S. Geological Survey.
+
+- Palace of Fine Arts, San Francisco: project CA_SanFrancisco_1_B23, a 300 m box, 450,000 of its 8
+  million points.
+- Golden Gate Bridge's south end and Fort Point: project CA_SanFrancisco_1_B23, a 340 m box, 450,000
+  points.
+- Meteor Crater (Barringer meteorite crater), Arizona: project AZ_NorthEast_3_D23, a 1.6 km box,
+  450,000 of its 8.5 million points.
+
+Each keeps the points' classification and intensity, without the noise classes, moved to UTM meters.
+LAZ files are read with [laz-perf](https://github.com/hobuinc/laz-perf) (Hobu, Inc., Apache-2.0).
+
+## Sound effects (lane Sound C)
+
+Recorded sound effects for the owner's sound notes of October 2, 2026, in `assets/sounds/`. Every
+one is CC0 1.0 (public domain), checked on its live Freesound page on October 2, 2026. Each was cut,
+faded, made mono, peak-normalized and saved as a small MP3; a toy's recordings load when it opens
+with the speaker on. `mitochondrion-fire.mp3` is a Sound Board candidate only; `lungs-breath-b.mp3`
+became the lungs' sound on October 7, 2026. The details are in
+[tools/assets.json](tools/assets.json) (`soundSamples`).
+
+| File                        | Work                                                                                                        | Author          | License                                                       |
+| --------------------------- | ----------------------------------------------------------------------------------------------------------- | --------------- | ------------------------------------------------------------- |
+| `tin-can-real-roll.mp3`     | [Rolling Can Sound 2](https://freesound.org/people/cower/sounds/185370/)                                    | cower           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `mitochondrion-furnace.mp3` | [Gas furnace - Ignition happy](https://freesound.org/people/ldezem/sounds/386166/)                          | ldezem          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `mitochondrion-fire.mp3`    | [Gas burner 01.wav](https://freesound.org/people/PegasusCZ/sounds/569332/)                                  | PegasusCZ       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `paramecium-swim.mp3`       | [Water, Gentle Movement.wav](https://freesound.org/people/Daen23/sounds/431627/)                            | Daen23          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `banana-peel.mp3`           | [Banana Peel](https://freesound.org/people/spanrucker/sounds/272219/)                                       | spanrucker      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `spring-toy-slinky.mp3`     | [slinky Copy.wav](https://freesound.org/people/foxraid/sounds/449261/)                                      | foxraid         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `soap-bubbles-blow.mp3`     | [Blow air short](https://freesound.org/people/yehdawgo/sounds/720066/)                                      | yehdawgo        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `owl-hoot-short.mp3`        | [owl_hooting_000102_0145S3 002-070 000-002 068-074.wav](https://freesound.org/people/Gerent/sounds/558396/) | Gerent          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `decorated-tree-bell.mp3`   | [Glockenspiel - C5 (glock_medium_C5.wav)](https://freesound.org/people/sgossner/sounds/373364/)             | sgossner        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `decorated-tree-sleigh.mp3` | [Sleigh bells hit](https://freesound.org/people/Selector/sounds/369506/)                                    | Selector        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `helicopter-chop.mp3`       | [Helicopter Flyby / Pass](https://freesound.org/people/mil0001/sounds/241190/)                              | mil0001         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `steam-train-chuff.mp3`     | [d_s478_underbridge.wav](https://freesound.org/people/relwin/sounds/686061/)                                | relwin          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `popcorn-pops.mp3`          | [Popcorn](https://freesound.org/people/elricadavis/sounds/764604/)                                          | elricadavis     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `water-bottle-pour.mp3`     | [Pouring water into a glass](https://freesound.org/people/ahamirikia/sounds/710550/)                        | ahamirikia      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `lungs-breath-b.mp3`        | [- Deep Breath](https://freesound.org/people/rrehl/sounds/717167/)                                          | rrehl           | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `bicycle-bell.mp3`          | [Bicycle Bell.wav](https://freesound.org/people/PanosA/sounds/546371/)                                      | PanosA          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `your-book-magazine.mp3`    | [Turn Page](https://freesound.org/people/KikeVilaplana/sounds/511402/)                                      | KikeVilaplana   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `your-book-paperback.mp3`   | [Turning pages in a book](https://freesound.org/people/Mateusz_Chenc/sounds/519102/)                        | Mateusz_Chenc   | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `your-book-hardcover.mp3`   | [Hardback 1](https://freesound.org/people/magnuswaker/sounds/697733/)                                       | magnuswaker     | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `donut-tear.mp3`            | [bread slice serrated knife cut and rip](https://freesound.org/people/spanrucker/sounds/272223/)            | spanrucker      | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `teddy-bear-plush.mp3`      | [08. Relleno de oso.wav](https://freesound.org/people/lemigoga/sounds/427719/)                              | lemigoga        | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `splat-field-ocean.mp3`     | [Gentle Ocean Waves Loop](https://freesound.org/people/kkenny101/sounds/852826/)                            | kkenny101       | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
+| `soap-bubbles-pops.mp3`     | [mutliple bubbles bursting](https://freesound.org/people/florianreichelt/sounds/683100/)                    | florianreichelt | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
 ## Science (lane Science)
 
@@ -412,7 +847,600 @@ checked on the live source page on September 30, 2026.
   A subset: 300,000 of the 2.37 million gas particles in a 40 × 12 × 40 kpc box round the galaxy,
   cut by `tools/sci-galaxy.mjs`.
 
+### Science r3 (lane Science r3)
+
+More structures for the Thermal ellipsoids toy (labs), each checked on its live page on October
+5, 2026. The Crystallography Open Database dedicates all its data to the public domain under
+[CC0](https://creativecommons.org/publicdomain/zero/1.0/) ("All data in the COD and the database
+itself are dedicated to the public domain and licensed under the CC0 License"); the PDB's data are
+CC0 under the [wwPDB data policy](https://www.rcsb.org/pages/usage-policy). The CIFs are kept with
+their embedded refinement files (reflections, SHELX .res and .hkl) left out; the PDB files keep
+their HEADER, TITLE, CRYST1, atom and ANISOU records without waters, and the B-DNA file's second
+strand is added from its biological assembly (`tools/sci3-structures.mjs`).
+
+- Thermal ellipsoids: Table sugar (sucrose),
+  [COD 2300557](https://www.crystallography.net/cod/2300557.html), by A. O. Dmitrienko and I. S.
+  Bushmarinov (Journal of Applied Crystallography 48, 2015),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Urea, [COD 1566505](https://www.crystallography.net/cod/1566505.html), by P.
+  N. Ruth, R. Herbst-Irmer and D. Stalke (IUCrJ 9 286, 2022),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Vitamin C (ascorbic acid),
+  [COD 2300646](https://www.crystallography.net/cod/2300646.html), by C. J. McMonagle and M. R.
+  Probert (Journal of Applied Crystallography 52 445, 2019),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Glycine (neutron),
+  [COD 2103308](https://www.crystallography.net/cod/2103308.html), by P. Langan, S. A. Mason, D.
+  Myles and B. P. Schoenborn (Acta Crystallographica Section B 58 728, 2002),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Acetaminophen (paracetamol),
+  [COD 7232757](https://www.crystallography.net/cod/7232757.html), by M. R. Ward and I. D. H. Oswald
+  (CrystEngComm 21 4437, 2019), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the
+  Crystallography Open Database).
+- Thermal ellipsoids: Ibuprofen (neutron),
+  [COD 2006278](https://www.crystallography.net/cod/2006278.html), by N. Shankland, C. C. Wilson, A.
+  J. Florence and P. J. Cox (Acta Crystallographica Section C 53 951, 1997),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Vitamin B3 (nicotinamide, neutron),
+  [COD 2003053](https://www.crystallography.net/cod/2003053.html), by Y. Miwa, T. Mizuno, K.
+  Tsuchida et al. (Acta Crystallographica, Section B 55 78, 1999),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Quartz, [COD 9000775](https://www.crystallography.net/cod/9000775.html), by L.
+  Levien, C. T. Prewitt and D. J. Weidner (American Mineralogist 65 920, 1980),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Calcite, [COD 9000965](https://www.crystallography.net/cod/9000965.html), by
+  S. A. Markgraf and R. J. Reeder (American Mineralogist 70 590, 1985),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Corundum (ruby and sapphire),
+  [COD 1000032](https://www.crystallography.net/cod/1000032.html), by L. Lutterotti and P. Scardi
+  (Journal of Applied Crystallography 23 246, 1990),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Beryl (emerald),
+  [COD 9000992](https://www.crystallography.net/cod/9000992.html), by G. E. Brown and B. A. Mills
+  (American Mineralogist 71 547, 1986),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Zircon, [COD 9000684](https://www.crystallography.net/cod/9000684.html), by R.
+  M. Hazen and L. W. Finger (American Mineralogist 64 196, 1979),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Garnet (pyrope),
+  [COD 2108142](https://www.crystallography.net/cod/2108142.html), by R. Destro, R. Ruffo, P.
+  Roversi et al. (Acta Crystallographica Section B 73 722, 2017),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Pyrite (fool's gold),
+  [COD 1564890](https://www.crystallography.net/cod/1564890.html), by K. Ma, R. Lefèvre, Q. Li et
+  al. (Chemical Science, 2021), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the
+  Crystallography Open Database).
+- Thermal ellipsoids: Ice from Antarctica (neutron),
+  [COD 9015208](https://www.crystallography.net/cod/9015208.html), by A. D. Fortes, I. G. Wood, D.
+  Grigoriev et al. (Journal of Chemical Physics 120 11376, 2004),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Rock salt, [COD 7132177](https://www.crystallography.net/cod/7132177.html), by
+  M. Mettler, A. Dewandre, N. Tumanov et al. (Chemical communications, 2023),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Gypsum (neutron),
+  [COD 2300258](https://www.crystallography.net/cod/2300258.html), by P. F. Henry, M. T. Weller and
+  C. C. Wilson (Journal of Applied Crystallography 42 1176, 2009),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Blue vitriol (chalcanthite, neutron),
+  [COD 9008253](https://www.crystallography.net/cod/9008253.html), by G. E. Bacon and D. H.
+  Titterton (Zeitschrift fur Kristallographie 141 330, 1975),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Lysozyme, 0.65 Å, [PDB 2VB1](https://www.rcsb.org/structure/2VB1), by J. Wang,
+  M. Dauter, R. Alkire et al. (Acta Crystallogr.,Sect.D 63 1254, 2007),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: An iron-sulfur protein (HiPIP), 0.48 Å,
+  [PDB 5D8V](https://www.rcsb.org/structure/5D8V), by Y. Hirano, K. Takeda and K. Miki (Nature 534
+  281, 2016), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: Rubredoxin, 0.68 Å, [PDB 2DSX](https://www.rcsb.org/structure/2DSX), by C.
+  Chen, Y. Lin, Y. Huang and M. Liu (Biochem.Biophys.Res.Commun. 349 79, 2006),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: Z-DNA, 0.55 Å, [PDB 3P4J](https://www.rcsb.org/structure/3P4J), by K.
+  Brzezinski, A. Brzuszkiewicz, M. Dauter et al. (Nucleic Acids Res. 39 6238, 2011),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: B-DNA, 0.74 Å, [PDB 1D8G](https://www.rcsb.org/structure/1D8G), by C.
+  Kielkopf, S. Ding, P. Kuhn and D. Rees (J.Mol.Biol. 296 787, 2000),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+
 Files people open in these toys are read in their browser and never uploaded.
+
+## Earth and maps (lane Geo)
+
+The Earth and maps toys (labs, lane Geo) are built from public data snapshots that `tools/geo-*.mjs`
+fetch at build time. Each license was checked on the live source page on October 5, 2026. U.S.
+government works are in the public domain.
+
+- Elevation: the U.S. Geological Survey's
+  [3D Elevation Program](https://www.usgs.gov/3d-elevation-program) ("All 3DEP products are public
+  domain"), for the Grand Canyon, Mount St. Helens today and Yosemite Valley.
+- Mount St. Helens before 1980: J. A. Bard and R. Phillips-Netherton (2024),
+  [Digital elevation model of Mount St. Helens, Washington and vicinity prior to the 1980 eruption](https://doi.org/10.5066/P91W7C1L),
+  U.S. Geological Survey data release, public domain.
+- Aerial imagery: The National Map's
+  [orthoimagery basemap](https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer)
+  (USDA Farm Service Agency NAIP, with NASA Landsat at small scales), public domain.
+- Relief of the sea floor and the maps: NOAA NCEI's
+  [ETOPO1 Global Relief Model](https://www.ncei.noaa.gov/products/etopo-global-relief-model) and
+  [coastal elevation models](https://www.ncei.noaa.gov/products/coastal-elevation-models) (Bar
+  Harbor), public domain.
+- Tides: NOAA CO-OPS
+  [tide predictions for Bar Harbor, Maine (8413320)](https://tidesandcurrents.noaa.gov/stationhome.html?id=8413320),
+  public domain ([disclaimers](https://tidesandcurrents.noaa.gov/disclaimers.html)).
+- Hurricane Polo: GOES-East ABI band 13 imagery (NOAA NESDIS), served by NASA's
+  [Global Imagery Browse Services](https://www.earthdata.nasa.gov/engage/open-data-services-software/data-use-policy);
+  the [NHC best track](https://ftp.nhc.noaa.gov/atcf/btk/) (NOAA); the map from NASA's
+  [Blue Marble Next Generation](https://visibleearth.nasa.gov/collection/1484/blue-marble) (true
+  color). All public domain.
+- The earthquakes' globe and the storks' map (round 2): NASA's
+  [Blue Marble Next Generation](https://visibleearth.nasa.gov/collection/1484/blue-marble) (true
+  color, through NASA GIBS), public domain.
+- Yosemite Valley's streams and land cover: the USGS
+  [National Hydrography Dataset](https://www.usgs.gov/national-hydrography/national-hydrography-dataset)
+  and the [National Land Cover Database 2021](https://www.mrlc.gov/data/nlcd-2021-land-cover-conus)
+  (USGS and the MRLC consortium), public domain.
+- The living city (round 3): the City of Helsinki's
+  [Helsinki 3D reality mesh](https://hri.fi/data/en_GB/dataset/helsingin-3d-kaupunkimalli) (2017
+  aerial photogrammetry), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 550 m block
+  round Senate Square and the Market Square, cropped and turned into splats by `tools/geo-city.mjs`;
+  the night lights are added by the toy.
+- Earthquakes: the USGS
+  [earthquake feeds](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) ("USGS-authored
+  or produced data and information are considered to be in the U.S. Public Domain"). The toy reads
+  the live feed when it opens or its plaque is tapped, and shows its source and time beside it;
+  nothing is stored or sent. The shipped snapshot keeps only records of networks us, hv, at and pt
+  (USGS and NOAA authored).
+- White storks: S. Rotics, M. Kaatz, Y. S. Resheff, S. F. Turjeman, D. Zurell, N. Sapir, U. Eggers,
+  A. Flack, W. Fiedler, F. Jeltsch, M. Wikelski and R. Nathan (2016),
+  [Data from: The challenges of the first migration](https://doi.org/10.5441/001/1.hn1bd23k),
+  Movebank Data Repository, [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). The
+  paper: Journal of Animal Ecology, doi:10.1111/1365-2656.12525.
+
+Thirteen more structures (the owner's "could you add even more molecules?", October 5, 2026), each
+checked on its live page that day:
+
+- Thermal ellipsoids: Vanillin (the taste of vanilla),
+  [COD 7242089](https://www.crystallography.net/cod/7242089.html), by S. Sundareswaran and S.
+  Karuppannan (CrystEngComm 23 1634, 2021),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Capsaicin (the heat of chili peppers),
+  [COD 2312782](https://www.crystallography.net/cod/2312782.html), by M. Lozin&#x161;ek (Acta
+  crystallographica. Section C, Structural chemistry 81 188, 2025),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Salicylic acid (from willow bark),
+  [COD 2100548](https://www.crystallography.net/cod/2100548.html), by P. Munshi and T. N. Guru Row
+  (Acta Crystallographica Section B 62 612, 2006),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Morphine, [COD 2237167](https://www.crystallography.net/cod/2237167.html), by
+  T. Gelbrich, D. E. Braun and U. J. Griesser (Acta Crystallographica Section E 69 o2, 2013),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Cytosine, a letter of DNA,
+  [COD 2019803](https://www.crystallography.net/cod/2019803.html), by B. Sridhar, J. B. Nanubolu and
+  K. Ravikumar (Acta Crystallographica Section C 71, 2015),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Guanine, a letter of DNA,
+  [COD 2015488](https://www.crystallography.net/cod/2015488.html), by K. Guille and W. Clegg (Acta
+  Crystallographica Section C 62 o515, 2006),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Serotonin, a messenger in the brain,
+  [COD 2244048](https://www.crystallography.net/cod/2244048.html), by M. Naeem, A. R. Chadeayne, J.
+  A. Golen and D. R. Manke (Acta Crystallographica Section E 78, 2022),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: NAD+, a helper molecule in every cell,
+  [COD 1507221](https://www.crystallography.net/cod/1507221.html), by B. Guillot, N. Muzet, E.
+  Artacho et al. (The Journal of Physical Chemistry B 107 9109, 2003),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Alanine, the simplest amino acid with a side chain,
+  [COD 8000310](https://www.crystallography.net/cod/8000310.html), by L. A. Malaspina, E. K.
+  Wieduwilt, J. Bergmann et al. (The Journal of Physical Chemistry Letters 6973, 2019),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Histidine, an amino acid (neutron, 5 K),
+  [COD 2108879](https://www.crystallography.net/cod/2108879.html), by G. Novelli, C. J. McMonagle,
+  F. Kleemiss et al. (Acta Crystallographica Section B 77, 2021),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: Thymidine, a building block of DNA,
+  [COD 2104143](https://www.crystallography.net/cod/2104143.html), by C. B. Hübschle, B. Dittrich,
+  S. Grabowsky et al. (Acta Crystallographica Section B 64 363, 2008),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the Crystallography Open Database).
+- Thermal ellipsoids: A-DNA, 0.83 Å, [PDB 1DPL](https://www.rcsb.org/structure/1DPL), by M. Egli, V.
+  Tereshko, M. Teplova et al. (Biopolymers 48 234, 1998),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: A four-stranded RNA, 0.61 Å, [PDB 1J8G](https://www.rcsb.org/structure/1J8G),
+  by J. Deng, Y. Xiong and M. Sundaralingam (Proc.Natl.Acad.Sci.USA 98 13665, 2001),
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: A loop of ribosomal RNA, 0.85 Å,
+  [PDB 5NQI](https://www.rcsb.org/structure/5NQI), by C. Riml, A. Lusser, E. Ennifar and R. Micura
+  (J. Org. Chem. 82 7939, 2017), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under
+  the [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: DNA with a drug in its groove, 0.95 Å,
+  [PDB 3OMJ](https://www.rcsb.org/structure/3OMJ), by D. Chenoweth and P. Dervan (J.Am.Chem.Soc. 132
+  14521, 2010), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+- Thermal ellipsoids: DNA with a light-switch metal complex, 0.92 Å,
+  [PDB 4E1U](https://www.rcsb.org/structure/4E1U), by H. Song, J. Kaiser and J. Barton (Nat Chem 4
+  615, 2012), [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+  [wwPDB data policy](https://www.rcsb.org/pages/usage-policy).
+
+Four more super-resolution microscopy sets from ShareLoc.XYZ on Zenodo (each record's CC BY 4.0 read
+on its live page on October 5, 2026). Three records give no localization precision; theirs is
+estimated from the data by NeNA (Endesfelder et al., Histochemistry and Cell Biology 141, 629–638,
+2014).
+
+- Super-resolution microscope: "Xenopus laevis nuclear pore complex stained with WGA-ATTO520" by
+  Anna Löschberger, on ShareLoc.XYZ,
+  [10.5281/zenodo.7182237](https://doi.org/10.5281/zenodo.7182237),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). An 8 µm square cut from the record (a
+  subset), cut by `tools/sci3-samples.mjs`. The record gives no precision; NeNA estimates 11.5 nm
+  for the whole set.
+- Super-resolution microscope: "Actin with PhalloidinAF647 in COS7" by Sarah Aufmkolk, on
+  ShareLoc.XYZ, [10.5281/zenodo.5510661](https://doi.org/10.5281/zenodo.5510661),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 10 µm square of one cell, 174,903 of
+  its localizations (a subset), cut by `tools/sci3-samples.mjs`. The record gives no precision; NeNA
+  estimates 9.9 nm for the whole set.
+- Super-resolution microscope: "Mitochondrial protein TOM22 in COS7 cells" by Wei Ouyang, on
+  ShareLoc.XYZ, [10.5281/zenodo.5512636](https://doi.org/10.5281/zenodo.5512636),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 15 µm square of one field, 219,846 of
+  its localizations (a subset), cut by `tools/sci3-samples.mjs`. The record gives no precision; NeNA
+  estimates 12.4 nm for the whole set.
+- Super-resolution microscope: "ZOLA-3D microtubules" by Andrey Aristov, Benoit Lelandais and
+  Christophe Zimmer (Institut Pasteur), on ShareLoc.XYZ,
+  [10.5281/zenodo.6861446](https://doi.org/10.5281/zenodo.6861446),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A 12 µm square, 159,785 of its
+  localizations (a subset), cut by `tools/sci3-samples.mjs`.
+
+More of the FIRE-2 public data release for Galaxy in a box
+([FlatHUB](https://flathub.flatironinstitute.org/fire),
+[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), read on the release's README on October
+5, 2026), with the citation it asks for: "We use the publicly-available FIRE-2 cosmological zoom-in
+simulations (Wetzel et al. 2023, 2025), from the Feedback In Realistic Environments (FIRE) project,
+generated using the Gizmo code (Hopkins 2015) and the FIRE-2 physics model (Hopkins et al. 2018)."
+Subsets cut by `tools/sci3-galaxy.mjs`:
+
+- FIRE-2 m12i (res7100), snapshot 600 (z = 0), stars (m12i: Wetzel et al. (2016)): 250,000 of the
+  11.4 million star particles in the 40 × 12 × 40 kpc box, with their ages.
+- FIRE-2 m12i (res7100), snapshot 172 (z = 2), gas (m12i: Wetzel et al. (2016)): 300,000 of the 1.36
+  million gas particles in a 24 kpc box.
+- FIRE-2 m12i (res7100), snapshot 172 (z = 2), stars (m12i: Wetzel et al. (2016)): 250,000 of the
+  640,318 star particles in a 24 kpc box.
+- FIRE-2 m11h (res7100), snapshot 600 (z = 0), gas (m11h: El-Badry et al. (2018)): 300,000 of the
+  351,956 gas particles in a 16 kpc box.
+- FIRE-2 m11h (res7100), snapshot 600 (z = 0), stars (m11h: El-Badry et al. (2018)): 250,000 of the
+  640,445 star particles in a 16 kpc box.
+
+The land for Terrain in a box and the Contour lab: the U.S. Geological Survey's 3D Elevation
+Program, 1/3 arc-second (about 10 m) seamless elevation tiles from The National Map, public domain
+(each tile's metadata, read on October 5, 2026: "All 3DEP products are public domain."), cut by
+`tools/sci3-terrain.mjs`:
+
+- Mount St. Helens, Washington: a 9 km square of
+  [USGS_13_n47w123.tif](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n47w123/USGS_13_n47w123.tif)
+  ([metadata](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n47w123/USGS_13_n47w123.xml)),
+  averaged to 256 × 256 samples.
+- The Grand Canyon near Grand Canyon Village, Arizona: a 12 km square of
+  [USGS_13_n37w113.tif](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n37w113/USGS_13_n37w113.tif)
+  ([metadata](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n37w113/USGS_13_n37w113.xml)),
+  averaged to 256 × 256 samples.
+- Yosemite Valley and Half Dome, California: a 10 km square of
+  [USGS_13_n38w120.tif](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w120/USGS_13_n38w120.tif)
+  ([metadata](https://prd-tnm.s3.amazonaws.com/StagedProducts/Elevation/13/TIFF/current/n38w120/USGS_13_n38w120.xml)),
+  averaged to 256 × 256 samples.
+
+Three cryo-EM maps from the Electron Microscopy Data Bank, each with the atomic model fitted into it
+from the PDB (checked on the live pages on October 5, 2026).
+
+- Cryo-EM map: Mouse heavy-chain apoferritin by cryo-EM at 100 keV, 2.6 Å,
+  [EMD-17961](https://www.ebi.ac.uk/emdb/EMD-17961) and its fitted model
+  [PDB 8PVC](https://www.rcsb.org/structure/8PVC), by G. McMullan, K. Naydenova, D. Mihaylov et al.
+  (PNAS 120, e2312905120, 2023). The map: EMDB's data are "free of all copyright restrictions and
+  made fully and freely available for both non-commercial and commercial use" (the
+  [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and resampled by
+  `tools/sci3-cryoem.mjs`. The model: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+  (the wwPDB data policy); its backbone only.
+- Cryo-EM map: Arbekacin-bound E. coli 70S ribosome, 3.2 Å,
+  [EMD-48329](https://www.ebi.ac.uk/emdb/EMD-48329) and its fitted model
+  [PDB 9MKK](https://www.rcsb.org/structure/9MKK), by S. Majumdar, N. P. Parajuli, X. Ge, A.
+  Emmerich and S. Sanyal (Scientific Reports 15, 18271, 2025). The map: EMDB's data are "free of all
+  copyright restrictions and made fully and freely available for both non-commercial and commercial
+  use" (the [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and
+  resampled by `tools/sci3-cryoem.mjs`. The model:
+  [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (the wwPDB data policy); its
+  backbone only.
+- Cryo-EM map: AAV2 virus-like particle, 3.02 Å, [EMD-20610](https://www.ebi.ac.uk/emdb/EMD-20610)
+  and its fitted model [PDB 6U0V](https://www.rcsb.org/structure/6U0V), by M. Agbandje-McKenna and
+  A. Bennett (deposited 2019). The map: EMDB's data are "free of all copyright restrictions and made
+  fully and freely available for both non-commercial and commercial use" (the
+  [EMDB FAQ](https://www.ebi.ac.uk/emdb/faq)); cropped, blurred against aliasing and resampled by
+  `tools/sci3-cryoem.mjs`. The model: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
+  (the wwPDB data policy); its backbone only.
+
+## Night sky (lane Night sky)
+
+The catalog snapshot `assets/toys/night-sky/sky.json` (made by `tools/sky-catalog.mjs`) joins two CC
+BY-SA sources, so it is [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) too, and the
+toy's About tab says so.
+
+- Stars: the [HYG database](https://github.com/astronexus/HYG-Database) v4.1 by David Nash
+  (astronexus.com), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (its live
+  LICENSE file, checked October 5, 2026). Every star to magnitude 6.0 and the fainter stars a
+  constellation line needs (5,071), with position, magnitude, B−V color, distance, spectral type and
+  names.
+- Constellation lines: the Stellarium team's
+  [Western sky culture](https://github.com/Stellarium/stellarium-skycultures/tree/master/western)
+  (commit 014fbb5e59, May 26, 2026). Its description's license section reads "Text and data: CC
+  BY-SA" (no version given; credited here as 4.0) and "Illustrations: Free Art License"; only the
+  line data (pairs of Hipparcos numbers, 674 segments in the 88 constellations) is used, never the
+  illustrations.
+- Planet, Sun and Moon positions are computed in the browser from published formulas: E. M.
+  Standish's
+  [Keplerian Elements for Approximate Positions of the Major Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html)
+  (JPL Solar System Dynamics, Table 1), the Astronomical Almanac's low-precision lunar series, and
+  Jean Meeus, _Astronomical Algorithms_ (2nd ed., 1998) for sidereal time, precession and planet
+  magnitudes. The tests compare them with values recorded from
+  [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/) (`tools/sky-horizons.mjs`, build time only).
+
+The place the toy shows is never saved or sent: a city's coordinates are built in, and "Use my
+location" keeps the browser's answer in memory only.
+
+## Real worlds (lane Space r2)
+
+The real Moon, Mars, Earth, Mercury and Venus are built from public-domain maps made by NASA, the
+USGS and NOAA, cut by `tools/sp2-maps.mjs` into a global map and a sharper patch round each named
+feature (`assets/toys/real-worlds/`). Feature positions are from the
+[USGS Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/).
+
+- The Moon: the [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720) by NASA's Scientific Visualization
+  Studio (Ernie Wright), from the Lunar Reconnaissance Orbiter's LROC color mosaic (2025 version)
+  and LOLA elevation. Public domain.
+- Mars:
+  [Mars Viking Colorized Global Mosaic 925m](https://astrogeology.usgs.gov/search/map/mars_viking_global_color_mosaic_925m)
+  (NASA, JPL, Viking orbiters; USGS Astrogeology Science Center) and
+  [Mars MGS MOLA DEM 463m](https://astrogeology.usgs.gov/search/map/mars_mgs_mola_dem_463m) (MOLA
+  Science Team, NASA Goddard Space Flight Center; USGS). Public domain.
+- Mercury: the MESSENGER MDIS basemap in three colors (1000, 750 and 430 nm; PDS data set
+  MESS-H-MDIS-5-RDR-MD3-V1.0) and the
+  [Mercury MESSENGER Global DEM 665m](https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m)
+  (Kris Becker, NASA, Arizona State University, Johns Hopkins APL, Carnegie Institution for Science;
+  USGS). Public domain.
+- Venus: the
+  [Venus Magellan Global C3-MDIR Synthetic Color Mosaic 4641m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_synthetic_color_mosaic_4641m)
+  (PDS Geosciences Node) and the
+  [Venus Magellan Global Topography 4641m](https://astrogeology.usgs.gov/search/map/venus_magellan_global_topography_4641m)
+  (Peter Ford, Gordon Pettengill, Fang Liu and Joan Quigley; NASA, JPL; USGS). Public domain.
+- Earth:
+  [Blue Marble: Next Generation, July 2004](https://visibleearth.nasa.gov/images/74092/july-blue-marble-next-generation)
+  (NASA Earth Observatory, Reto Stöckli), the
+  [ETOPO 2022 Global Relief Model](https://www.ncei.noaa.gov/products/etopo-global-relief-model) at
+  60 and 15 arc-seconds (NOAA National Centers for Environmental Information) and
+  [Black Marble 2016](https://earthobservatory.nasa.gov/features/NightLights) (NASA Earth
+  Observatory, Joshua Stevens and Miguel Román). Public domain.
+
+- The big moons, from the USGS Astrogeology Science Center's global mosaics (NASA, JPL; public
+  domain): Io (Galileo SSI and Voyager color merge, 1 km), Europa (Voyager and Galileo SSI, 500 m),
+  Ganymede (Voyager and Galileo SSI color, 1.4 km), Callisto (Voyager and Galileo SSI, 1 km) and
+  Titan (Cassini ISS, 4 km; Space Science Institute).
+- Pluto, Ceres and Vesta, from the USGS Astrogeology Science Center's maps (public domain): Pluto's
+  New Horizons LORRI and MVIC mosaic and DEM (NASA, Johns Hopkins APL, Southwest Research
+  Institute), and Ceres's and Vesta's Dawn Framing Camera mosaics and DTMs (NASA, JPL, MPS, DLR,
+  IDA).
+- Stars near the Sun: the
+  [Gaia Catalogue of Nearby Stars](https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A+A/649/A6)
+  (Gaia Collaboration, Smart et al. 2021, A&A 649, A6; ESA/Gaia/DPAC),
+  [CC BY-SA 3.0 IGO](https://creativecommons.org/licenses/by-sa/3.0/igo/), read through CDS VizieR,
+  and, for the brightest stars Gaia cannot measure and for star names, the
+  [HYG database v4.4](https://codeberg.org/astronexus/hyg) (David Nash, astronexus),
+  [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/). The toy's star file
+  (`assets/toys/nearby-stars/stars.json`) is made from both and shares them alike under CC BY-SA
+  4.0. Temperatures from colors by E. Mamajek's
+  [table of mean dwarf colors](https://www.pas.rochester.edu/~emamajek/EEM_dwarf_UBVIJHK_colors_Teff.txt)
+  (Pecaut & Mamajek 2013).
+- Real star systems: the [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/)'s
+  Planetary Systems Composite Parameters (NASA Exoplanet Science Institute, Caltech/IPAC; NASA
+  mission data, [CC0](https://science.data.nasa.gov/about/license)): "This research has made use of
+  the NASA Exoplanet Archive, which is operated by the California Institute of Technology, under
+  contract with the National Aeronautics and Space Administration under the Exoplanet Exploration
+  Program." The inner Solar System from NASA's planetary fact sheets (NSSDC).
+- Real galaxies, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), cropped round each
+  galaxy: the Whirlpool Galaxy, M51 ([heic0506a](https://esahubble.org/images/heic0506a/); NASA,
+  ESA, S. Beckwith (STScI), and The Hubble Heritage Team (STScI/AURA)); the Pinwheel Galaxy, M101
+  ([heic0602a](https://esahubble.org/images/heic0602a/); European Space Agency & NASA); the Phantom
+  Galaxy, M74 ([heic0719a](https://esahubble.org/images/heic0719a/); NASA, ESA, and The Hubble
+  Heritage (STScI/AURA)-ESA/Hubble Collaboration); and the Southern Pinwheel Galaxy, M83
+  ([eso0825a](https://www.eso.org/public/images/eso0825a/); ESO).
+- Saturn V: NASA's [Saturn V 3D model](https://science.nasa.gov/3d-resources/saturn-v/)
+  (NASA/Michael D. Carbajal), NASA 3D Resources, used under NASA's
+  [media guidelines](https://www.nasa.gov/nasa-brand-center/images-and-media/).
+- Space Launch System: NASA's printable
+  [Space Launch System (SLS) model](https://science.nasa.gov/3d-resources/space-launch-system-sls/),
+  NASA 3D Resources, used under NASA's media guidelines. Cut into its pieces, colored as it flew on
+  Artemis I and simplified by `tools/sp2-rockets.mjs`; Orion's crew module, hidden in the model, is
+  drawn as a cone.
+- Space Shuttle: NASA's
+  [Space Shuttle (A) model](https://science.nasa.gov/3d-resources/space-shuttle-a/) (NASA/Michael D.
+  Carbajal), NASA 3D Resources, used under NASA's media guidelines. Decoded from Draco, cut into its
+  pieces and colored by `tools/sp2-rockets.mjs` (its cockpit windows' frames, finer than a splat,
+  are left out).
+- None of the three models has a texture, so none carries a logo or insignia (the Saturn V's
+  lettering reads "UNITED STATES" and "USA", with small U.S. flags).
+
+### Zooming in and naming the place (lane Space r3)
+
+A tap on a real world zooms in on that spot with close-up tiles cut by `tools/sp3-tiles.mjs` from
+the same public-domain maps (the Moon's heights from the CGI Moon Kit's `ldem_16`, Earth's from
+ETOPO 2022 at 60 arc-seconds), and names what is there:
+
+- Earth: [Natural Earth](https://www.naturalearthdata.com/) 1:10m states and provinces, countries,
+  populated places, marine areas, lakes, geographic regions and elevation points (Tom Patterson,
+  Nathaniel Vaughn Kelso and contributors). Public domain
+  ([terms of use](https://www.naturalearthdata.com/about/terms-of-use/)). Trimmed by
+  `tools/sp3-places.mjs` into `assets/toys/real-earth/places.bin` and `places.json`.
+- The Moon, Mars, Mercury, Venus, the big moons, Pluto, Ceres and Vesta: the
+  [Gazetteer of Planetary Nomenclature](https://planetarynames.wr.usgs.gov/GIS_Downloads) (IAU
+  Working Group for Planetary System Nomenclature; USGS Astrogeology Science Center), center points
+  of every adopted feature but the lettered satellite craters. Public domain.
+
+## The solar system on real orbits (lane Space r4)
+
+All from JPL's Solar System Dynamics group (NASA/JPL; public domain scientific data), checked on the
+live pages on October 7, 2026, shipped as a dated snapshot (`tools/sp4-orbits.mjs`); nothing is
+fetched at run time.
+
+- The planets: E. M. Standish's
+  [Keplerian Elements for Approximate Positions of the Major Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html)
+  (Table 1, 1800 to 2050), through the night sky's code.
+- The moons: JPL's [Planetary Satellite Mean Elements](https://ssd.jpl.nasa.gov/sats/elem/), and
+  Titan's osculating elements from [JPL Horizons](https://ssd.jpl.nasa.gov/horizons/).
+- The asteroids and comets: the
+  [JPL Small-Body Database](https://ssd.jpl.nasa.gov/tools/sbdb_query.html) through its
+  [APIs](https://ssd-api.jpl.nasa.gov/): a seeded random sample of 4,000 numbered asteroids (plus
+  Ceres, Pallas, Vesta and Hygiea), and 1P/Halley, 2P/Encke, 9P/Tempel 1 and
+  67P/Churyumov-Gerasimenko.
+- The planets' and moons' colors: small copies of the real worlds' NASA and USGS maps (above).
+- The tests compare positions with values recorded from JPL Horizons.
+
+## Powers of ten (lane Powers of ten)
+
+The Powers of ten zoom (labs) shows each scale with real pictures and real data. Its own files are
+in `assets/toys/powers-of-ten/`, made by `tools/pot-maps.mjs` and `tools/pot-stars.mjs`; it also
+reads the files of the Space r2, Science r3 and photoreal toys named below.
+
+- Aerial pictures, 1,000 km to 10 km across: EOxCloudless 2016
+  ([Sentinel-2 cloudless](https://cloudless.eox.at)) by EOX IT Services GmbH, contains modified
+  Copernicus Sentinel data 2016, [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (the 2016
+  layer's license in EOX's WMTS capabilities, checked October 6, 2026; the later years are NC and
+  are not used).
+- 3 km:
+  [USGS Imagery Only](https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer)
+  (USDA NAIP, USGS The National Map). Public domain. The half of the Earth for the globe is the same
+  service's Blue Marble: Next Generation (NASA Earth Observatory, Reto Stöckli). Public domain.
+- 1 km to 30 m: District of Columbia, Office of the Chief Technology Officer,
+  [Aerial Photography (Orthophoto) 2023](https://opendata.dc.gov/), 3 inch (8 cm),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (its live license, checked October 6,
+  2026).
+- Stars within 500 pc: the [HYG database](https://codeberg.org/astronexus/hyg) v4.4 by David Nash
+  (astronexus), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/) (its live README,
+  checked October 6, 2026). The stars file `stars-500pc.bin` is CC BY-SA 4.0 too.
+- Read from other toys: the nearby stars (Gaia and HYG, CC BY-SA; Space r2), M83 by
+  [ESO](https://www.eso.org/public/images/eso0825a/) (CC BY 4.0; Space r2), the Earth and Moon maps
+  (NASA, public domain; Space r2), the ribosome's cryo-EM map EMD-48329 and model PDB 9MKK (public
+  domain; Science r3) and the "Golden Fullmoon Maple" capture by Joshua Trapani
+  ([CC BY 4.0](https://superspl.at/scene/f233b115)).
+- The golden full-moon maple's leaves: "Acer shirasawanum 'Aureum'" by Megan Hansen
+  ([Flickr](https://www.flickr.com/photos/24495410@N03/4714538293)),
+  [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/) (its cut, `micro-crown-*.jpg`,
+  stays CC BY-SA 2.0), and one leaf: "Golden Full Moon Maple" by susteph
+  ([Flickr](https://www.flickr.com/photos/28012136@N08/2649442904)),
+  [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/) (their live pages, checked October 6,
+  2026). Cut by `tools/pot-micro.mjs`.
+- Plant cells: "Arabidopsis thaliana plant cells containing chloroplasts, LM" by Fernán Federici,
+  and a chloroplast: "Chloroplast in a bean leaf, TEM" by Kevin Mackenzie, University of Aberdeen,
+  both from the [Wellcome Collection](https://wellcomecollection.org/works/gwmfux6b)
+  ([and](https://wellcomecollection.org/works/bx3dctp2)),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (their live pages, checked October 6,
+  2026). Cut by `tools/pot-micro.mjs`.
+- The planets' places: JPL's
+  [Approximate Positions of the Planets](https://ssd.jpl.nasa.gov/planets/approx_pos.html) (E. M.
+  Standish). Public domain.
+
+## Data and climate (lane Data and climate)
+
+The Data in 3D toy (Studio) and the Climate records toy (Science) ship dated snapshots and never
+fetch anything live. Each license was checked on the live source page on October 5, 2026.
+
+- Climate records and a Data in 3D sample: monthly mean CO2 at Mauna Loa from the
+  [NOAA Global Monitoring Laboratory](https://gml.noaa.gov/ccgg/trends/data.html) (Xin Lan, Pieter
+  Tans and Kirk W. Thoning), NOAA's file of September 5, 2026, in the public domain under
+  [NOAA's terms](https://gml.noaa.gov/about/disclaimer.html) ("in the public domain, unless
+  specifically annotated otherwise"). NOAA does not endorse Splashery. Only NOAA's own measurements,
+  from May 1974, are kept: the file's months from March 1958 to April 1974 come from the Scripps
+  Institution of Oceanography, whose site carries no data license and whose site terms forbid
+  republishing without permission, so they are left out.
+- Climate records: the GISS Surface Temperature Analysis
+  ([GISTEMP v4](https://data.giss.nasa.gov/gistemp/)), Land-Ocean Temperature Index, by the GISTEMP
+  Team, NASA Goddard Institute for Space Studies (2026), accessed October 5, 2026; and Lenssen, N.,
+  G. A. Schmidt, M. Hendrickson, P. Jacobs, M. Menne and R. Ruedy (2024), "A GISTEMPv4 observational
+  uncertainty ensemble", Journal of Geophysical Research: Atmospheres 129, e2023JD040179. A U.S.
+  government work, in the public domain.
+- Data in 3D sample: earthquakes of magnitude 4.5 and up in the 30 days to October 5, 2026, from the
+  [U.S. Geological Survey](https://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php), a U.S.
+  government work in the public domain. Seven of the feed's columns are kept.
+- Data in 3D sample: the Iris data of R. A. Fisher (1936), Bezdek's corrected copy from the
+  [UCI Machine Learning Repository](https://archive.ics.uci.edu/dataset/53/iris),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A header row was added and "Iris-"
+  written as "Iris ".
+
+Tables people open in Data in 3D are read in their browser and never uploaded.
+
+## Sound and light lab
+
+The Sound lab, the Sound recorder and the Light lab (labs) use no recorded assets: their sounds and
+the spectrometer's sample picture are made by the page. Their data:
+
+- Emission lines: the visible lines (380 to 750 nm, in air) of sixteen neutral atoms, from the NIST
+  [Handbook of Basic Atomic Spectroscopic Data](https://www.nist.gov/pml/handbook-basic-atomic-spectroscopic-data)
+  (Sansonetti and Martin, J. Phys. Chem. Ref. Data 34, 1559 (2005); NIST SRD 108, drawn from the
+  Atomic Spectra Database), its "Strong Lines" tables for H, He, Li, Na, K, Ca, Sr, Ba, Cu, Zn, Cd,
+  Hg, Ne, Ar, Kr and Xe (for example
+  [hydrogentable2.htm](https://physics.nist.gov/PhysRefData/Handbook/Tables/hydrogentable2.htm)).
+  Measured values, credited to NIST; `tools/sll-nist.mjs` fetches them again.
+- Glass: SCHOTT's Sellmeier coefficients for N-SF11 and N-BK7, as listed on
+  [RefractiveIndex.INFO](https://refractiveindex.info/?shelf=specs&book=SCHOTT-optical&page=N-SF11)
+  (from the SCHOTT catalog).
+- Wavelength colors: Dan Bruton's approximation of the visible spectrum.
+
+## Imaging (lane Imaging)
+
+- Walnut CT scan: Walnut 1 of the "Cone-Beam X-Ray CT Data Collection Designed for Machine Learning:
+  Samples 1-8" by Henri Der Sarkissian, Felix Lucka, Maureen van Eijnatten, Giulia Colacicco, Sophia
+  Bethany Coban and K. Joost Batenburg (CWI, Amsterdam; Scientific Data 6, 215, 2019),
+  [10.5281/zenodo.2686726](https://doi.org/10.5281/zenodo.2686726),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Its high-quality reconstruction (100 µm
+  voxels), every second slice, averaged to 0.3 mm, cropped and stored as 8-bit densities by
+  `tools/img-walnut.mjs`.
+- The airport X-ray scanner, How CT works and their bags, shell and scanners are built by the toys'
+  recipes.
+
+## Volume viewer (lane Volume viewer)
+
+- Gar micro-CT: "MicroCT images of 3 early gar (Lepisosteus osseus) stages between 12.7mm and
+  21.7mm" by Brian Metscher (University of Vienna; the scans used by Konstantinidis et al. 2015),
+  [10.5281/zenodo.19021581](https://doi.org/10.5281/zenodo.19021581),
+  [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (checked on the live record on October
+  8, 2026). The 12.8 mm larva (VIMS22685), 502 TIFF slices of 4.42 µm voxels, averaged 4 × 4 × 4 to
+  17.7 µm, cropped, its faint empty background set to 0, and stored as 8-bit NIfTI by
+  `tools/vol-gar.mjs`.
+- The walnut is the Imaging lane's file (above), shown again as a sample.
+- The test volumes in `tests/fixtures/vol/` are a phantom made by `tools/vol-fixtures.mjs`.
+
+## Molecule viewer (lane Molecule viewer)
+
+The Molecule viewer (labs) ships a snapshot of five entries from the Protein Data Bank, fetched from
+files.rcsb.org on October 5, 2026, unchanged. PDB data are
+[CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) under the
+[wwPDB usage policy](https://www.wwpdb.org/about/usage-policies) (checked on the live page October
+5, 2026: "Data files contained in the PDB archive are available under the CC0 1.0 Universal (CC0
+1.0) Public Domain Dedication"); as it encourages, each entry and its authors are cited:
+
+- Crambin, [PDB 1CRN](https://www.rcsb.org/structure/1CRN), deposited by W. A. Hendrickson and M. M.
+  Teeter; M. M. Teeter, "Water structure of a hydrophobic protein at atomic resolution", PNAS 81,
+  6014 (1984).
+- Green fluorescent protein, [PDB 1EMA](https://www.rcsb.org/structure/1EMA), deposited by M. Ormö
+  and S. J. Remington; M. Ormö, A. B. Cubitt, K. Kallio, L. A. Gross, R. Y. Tsien and S. J.
+  Remington, Science 273, 1392 (1996).
+- Hen egg-white lysozyme, [PDB 1LYZ](https://www.rcsb.org/structure/1LYZ), deposited by R. Diamond,
+  D. C. Phillips, C. C. F. Blake and A. C. T. North; R. Diamond, J. Mol. Biol. 82, 371 (1974).
+- B-DNA dodecamer, [PDB 1BNA](https://www.rcsb.org/structure/1BNA): H. R. Drew, R. M. Wing, T.
+  Takano, C. Broka, S. Tanaka, K. Itakura and R. E. Dickerson, PNAS 78, 2179 (1981).
+- Caffeine, [Chemical Component CFF](https://www.rcsb.org/ligand/CFF): the ideal coordinates of the
+  wwPDB Chemical Component Dictionary (part of the PDB archive, CC0).
+
+An entry fetched by its code is read from RCSB when the person asks and is never stored; its title,
+authors and the time of the fetch show beside it, with the CC0 notice. Files people open are read in
+their browser and never uploaded.
 
 ## Worlds
 
@@ -473,15 +1501,39 @@ September 30, 2026), decimated into three levels of detail each:
 | Driftwood          | [Dead Tree Trunk 02](https://polyhaven.com/a/dead_tree_trunk_02)         | Jenelle van Heerden, Rico Cilliers | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | Stumps             | [Tree Stump 01](https://polyhaven.com/a/tree_stump_01)                   | Rob Tuytel                         | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
+## Arcade (lane Arcade)
+
+- Stone Belt: the shapes of the asteroids 101955 Bennu, 25143 Itokawa, 433 Eros, 216 Kleopatra, 1620
+  Geographos, 4179 Toutatis and 6489 Golevka, from
+  [NASA 3D Resources](https://github.com/nasa/NASA-3D-Resources) ("3D Printing"), by NASA, in the
+  public domain (the collection's README: "free and without copyright"; checked October 5, 2026).
+  Each model was sampled to 1,600 surface points with their normals by `tools/arc-rocks.mjs`
+  (`assets/toys/stone-belt/rocks.json`).
+- Soft Landing: the Moon's ground from the [CGI Moon Kit](https://svs.gsfc.nasa.gov/4720) (NASA's
+  Scientific Visualization Studio, Ernie Wright; LRO's LOLA elevation, `ldem_16_uint.tif`, and LROC
+  color, `lroc_color_2k.jpg`), and Mars's from Mars Global Surveyor's MOLA
+  ([MEGDR](https://pds-geosciences.wustl.edu/missions/mgs/megdr.html), `megt90n000eb.img`, NASA's
+  Planetary Data System), both NASA works in the public domain (checked October 5, 2026). Patches
+  around seven sites were cut out by `tools/arc-terrain.mjs`
+  (`assets/toys/soft-landing/terrain.json`).
+- Page Breaker: the photo sample is the Picture lab's tulip field (see "Pictures and pages"), and
+  the article sample is the Picture lab's.
+- Photo Dash (lane Arcade r3, October 9, 2026): a new sample photo at random after each level, from
+  photos the site already ships: the Picture lab's tulip field (CC0 1.0, see "Pictures and pages")
+  and ten of the owner's AI-made Studio samples (see "AI-made Studio samples"): Alpine lake, Castle
+  on a lake, Canyon at sunset, Rice terraces, Paper valley, Felt farm, Fishing cove, Desert oasis,
+  Train on a viaduct and Floating islands. Each one's credit shows on the stage while it shows, the
+  AI-made ones labeled as AI-made. They are scenery for a game, never shown as real places.
+
 ## National flags
 
 The pattern layer can wrap a national flag around any toy. The flags are SVG files from
 [Wikimedia Commons](https://commons.wikimedia.org/wiki/Category:SVG_flags_of_countries), fetched by
-`tools/fetch-flags.mjs`, which reads each file's licence from the Commons API and keeps only public
-domain and CC0 files. The files are unchanged. Each flag's source page, author line and licence are
-listed in [assets/flags/flags.json](assets/flags/flags.json) (196 flags, checked on 23 September
+`tools/fetch-flags.mjs`, which reads each file's license from the Commons API and keeps only public
+domain and CC0 files. The files are unchanged. Each flag's source page, author line and license are
+listed in [assets/flags/flags.json](assets/flags/flags.json) (196 flags, checked on September 23,
 2026). The flag of Oman is not included: its Commons file is under Oman's Open Government Licence
-rather than a public-domain or Creative Commons licence (see [docs/BACKLOG.md](docs/BACKLOG.md)).
+rather than a public-domain or Creative Commons license (see [docs/BACKLOG.md](docs/BACKLOG.md)).
 
 ## Sounds
 
@@ -512,7 +1564,6 @@ uses.
 | `horse-statue-whinny.mp3`                | horse-statue                                          | [Renill de cavall / Horse Neigh](https://freesound.org/people/Salsero_classic/sounds/826753/)              | Salsero_classic  |
 | `lantern-blow.mp3`                       | lantern                                               | [blowing out candle.wav](https://freesound.org/people/Reitanna/sounds/242867/)                             | Reitanna         |
 | `lantern-match.mp3`                      | garden-gnome, lantern                                 | [Match Lighting Candle](https://freesound.org/people/devilqube/sounds/370362/)                             | devilqube        |
-| `lungs-breath.mp3`                       | lungs                                                 | [Male breathing](https://freesound.org/people/zogmachine/sounds/202606/)                                   | zogmachine       |
 | `marble-roll.mp3`                        | marble                                                | [Marble (single) rolling on wooden floor.wav](https://freesound.org/people/LiezelDippenaar/sounds/707545/) | LiezelDippenaar  |
 | `meteor-boom.mp3`                        | asteroid, meteor, star, planetary-nebula, brain       | [Muffled Distant Explosion](https://freesound.org/people/NenadSimic/sounds/149966/)                        | NenadSimic       |
 | `meteor-fire.mp3`                        | meteor, nebula                                        | [Waving Torch.wav](https://freesound.org/people/spookymodem/sounds/249809/)                                | spookymodem      |
@@ -527,9 +1578,28 @@ uses.
 | `supernova-boom.mp3`                     | star, pulsar, black-hole, planetary-nebula, supernova | [Deep Boom](https://freesound.org/people/Za-Games/sounds/539968/)                                          | Za-Games         |
 | `tennis-ball-bounce.mp3`                 | tennis-ball                                           | [bola de tenis caindo.wav](https://freesound.org/people/Negraovictor/sounds/394355/)                       | Negraovictor     |
 | `tennis-ball-slam.mp3`                   | tennis-ball, softball                                 | [ball_hit_ground.wav](https://freesound.org/people/Kyanite_/sounds/432912/)                                | Kyanite\_        |
-| `tin-can-spin.mp3`                       | tin-can-real                                          | [Spinning Coin](https://freesound.org/people/CassieTee/sounds/209462/)                                     | CassieTee        |
 | `vintage-camera-flash.mp3`               | vintage-camera                                        | [Vintage Camera Flash Powder and Shutter](https://freesound.org/people/Werra/sounds/232130/)               | Werra            |
 | `wooden-elephant-trumpet.mp3`            | wooden-elephant                                       | [Elephant Trumpets Growls.flac](https://freesound.org/people/D.jones/sounds/527845/)                       | D.jones          |
+
+## Lattices and orbitals (lane Lattices and orbitals)
+
+The Unit cells toy (labs) is computed from published numbers; no files are shipped. The cells and
+atom positions come from the [Crystallography Open Database](https://www.crystallography.net/cod/),
+whose data are in the public domain ("All data on this site have been placed in the public domain by
+the contributors"), checked October 7, 2026:
+[COD 9008564](https://www.crystallography.net/cod/9008564.html) (diamond),
+[COD 9008468](https://www.crystallography.net/cod/9008468.html) (copper),
+[COD 9008536](https://www.crystallography.net/cod/9008536.html) (α-iron) and
+[COD 9008506](https://www.crystallography.net/cod/9008506.html) (magnesium), all from R. W. G.
+Wyckoff, Crystal Structures (1963); [COD 9011577](https://www.crystallography.net/cod/9011577.html)
+(graphite, P. Trucano and R. Chen, Nature 258, 136–137, 1975);
+[COD 1538173](https://www.crystallography.net/cod/1538173.html) (ice Ih, A. Goto, T. Hondoh and S.
+Mae, J. Chem. Phys. 93, 1412, 1990) and
+[COD 1572227](https://www.crystallography.net/cod/1572227.html) (ice Ih's displacements at 81 K,
+IUCrJ 11, 2024). The Debye–Waller factors of diamond, copper, iron and magnesium at 293 K are from
+L.-M. Peng, G. Ren, S. L. Dudarev and M. J. Whelan, Acta Crystallographica A 52, 456–470 (1996), and
+the covalent radii of O and H from B. Cordero et al., Dalton Transactions, 2832–2838 (2008); numbers
+are facts, quoted with their source. The Orbital atlas computes the hydrogen wave functions itself.
 
 ## Software
 
@@ -541,4 +1611,165 @@ Photo to 3D uses [ONNX Runtime Web](https://github.com/microsoft/onnxruntime) (M
 Anything V2 Small (Apache 2.0), loaded only when someone opens a photo in that toy (or, in lane Live
 input's Splat mirror and Photo to 3D's live view, only after someone taps "Use my camera"). The
 Science shelf's galaxy sample was cut with [jsfive](https://github.com/usnistgov/jsfive) (public
-domain), a build tool only.
+domain), a build tool only. The QR code toy (lane QR) uses Project Nayuki's
+[QR Code generator library](https://www.nayuki.io/page/qr-code-generator-library) (MIT) to encode
+its codes and [jsQR](https://github.com/cozmo/jsQR) (Apache 2.0) to check that they scan, both
+loaded only when that toy opens (jsQR only when a check runs in a browser without its own QR
+reader). "QR Code" is a registered trademark of DENSO WAVE INCORPORATED.
+
+## AI-made Studio samples (Dot samples)
+
+The owner made 40 pictures with his own AI image tool (the "Dot" prompt pack, D01 to D40). Thirty of
+them ship as Photo to 3D samples in `assets/toys/photo-3d/ai/` (a JPEG, 1,280 px wide, and a depth
+map made by `tools/dsm-depth.mjs`), under the AI-made sample rules of October 5, 2026: no people,
+logos or text; labeled AI-made beside them (in the picker, the label and the credit); never real
+captures or real places, and never used for science, math or engineering toys. The pictures belong
+to the owner, who made them; no third-party work is in them. Checked October 7, 2026:
+
+- Train on a viaduct (D01): `assets/toys/photo-3d/ai/train.jpg`.
+- Desert oasis (D03): `assets/toys/photo-3d/ai/oasis.jpg`.
+- Castle on a lake (D04): `assets/toys/photo-3d/ai/castle.jpg`.
+- Fishing cove (D05): `assets/toys/photo-3d/ai/cove.jpg`.
+- Toy harbor (D34): `assets/toys/photo-3d/ai/harbor.jpg`.
+- Paper valley (D36): `assets/toys/photo-3d/ai/paper-valley.jpg`.
+- Felt farm (D37): `assets/toys/photo-3d/ai/farm.jpg`.
+- Treehouse village (D02): `assets/toys/photo-3d/ai/treehouses.jpg`.
+- Long library (D06): `assets/toys/photo-3d/ai/library.jpg`.
+- Woodworking shop (D07): `assets/toys/photo-3d/ai/workshop.jpg`.
+- Stone cloister (D08): `assets/toys/photo-3d/ai/cloister.jpg`.
+- Greenhouse (D10): `assets/toys/photo-3d/ai/greenhouse.jpg`.
+- Attic (D14): `assets/toys/photo-3d/ai/attic.jpg`.
+- Bamboo path (D16): `assets/toys/photo-3d/ai/bamboo.jpg`.
+- Rice terraces (D11): `assets/toys/photo-3d/ai/terraces.jpg`.
+- Canyon at sunset (D13): `assets/toys/photo-3d/ai/canyon.jpg`.
+- Stone arch (D17): `assets/toys/photo-3d/ai/arch.jpg`.
+- Forest and fallen log (D19): `assets/toys/photo-3d/ai/fallen-log.jpg`.
+- Alpine lake (D20): `assets/toys/photo-3d/ai/alpine-lake.jpg`.
+- Frozen waterfall (D30): `assets/toys/photo-3d/ai/ice-falls.jpg`.
+- Floating islands (D32): `assets/toys/photo-3d/ai/floating-isles.jpg`.
+- Glass wave (D38): `assets/toys/photo-3d/ai/wave.jpg`.
+- Explorer's desk (D21): `assets/toys/photo-3d/ai/explorer-desk.jpg`.
+- Watchmaker's bench (D22): `assets/toys/photo-3d/ai/watchmaker.jpg`.
+- Dragonfly (D26): `assets/toys/photo-3d/ai/dragonfly.jpg`.
+- Mushrooms (D27): `assets/toys/photo-3d/ai/mushrooms.jpg`.
+- Fruit market (D28): `assets/toys/photo-3d/ai/market.jpg`.
+- Giant gears (D31): `assets/toys/photo-3d/ai/gears.jpg`.
+- Chess board (D40): `assets/toys/photo-3d/ai/chess.jpg`.
+- City of books (D29): `assets/toys/photo-3d/ai/book-city.jpg`.
+
+Picture QR (lane QR r4, October 10, 2026) also offers four of them as its sample pictures, labeled
+AI-made in its picker and its credit: Felt farm (D37), Glass wave (D38), Mushrooms (D27), and Stone
+arch (D17).
+
+## AI-made Studio samples: hard cases (Codex task 57)
+
+Made by Ryan with Codex (GPT-6) and the OpenAI native image tool, October 13, 2026. These 20
+fictional pictures were selected from 40 original candidates measured in Photo to 3D. They use the
+existing **AI-made by the owner** credit, with that label beside each picture in the Hard cases
+picker group. The generator did not return its model identity. No people, text, logos, or real
+landmarks were seen. They are Studio samples, never real captures or real places, and never used for
+science, math, engineering, or photoreal shelves. Each JPEG is 1,280 px wide (quality 82); its depth
+map was made by the unchanged `tools/dsm-depth.mjs`. File hashes, prompts, scores, and selection
+decisions are in [the scored report](docs/audits/hard-case-samples-2026-10.md).
+
+- Glass jug (C57-P01): `assets/toys/photo-3d/hard-cases/cdx-hard-glass-jug.jpg` (glass-water).
+- Stones under water (C57-P05): `assets/toys/photo-3d/hard-cases/cdx-hard-submerged-stones.jpg`
+  (glass-water).
+- Backlit dog (C57-P11): `assets/toys/photo-3d/hard-cases/cdx-hard-backlit-dog.jpg` (hair-fur).
+- Wool fleece (C57-P12): `assets/toys/photo-3d/hard-cases/cdx-hard-wool-fleece.jpg` (hair-fur).
+- Bicycle spokes (C57-P13): `assets/toys/photo-3d/hard-cases/cdx-hard-bicycle-spokes.jpg`
+  (thin-structures).
+- Bare branches (C57-P16): `assets/toys/photo-3d/hard-cases/cdx-hard-bare-branches.jpg`
+  (thin-structures).
+- Puddle reflection (C57-P19): `assets/toys/photo-3d/hard-cases/cdx-hard-puddle-reflection.jpg`
+  (reflections).
+- Polished floor (C57-P20): `assets/toys/photo-3d/hard-cases/cdx-hard-polished-floor.jpg`
+  (reflections).
+- Reflecting pool (C57-P24): `assets/toys/photo-3d/hard-cases/cdx-hard-reflecting-pool.jpg`
+  (reflections).
+- Lanterns at night (C57-P25): `assets/toys/photo-3d/hard-cases/cdx-hard-lanterns.jpg` (low-light).
+- Campfire (C57-P26): `assets/toys/photo-3d/hard-cases/cdx-hard-campfire.jpg` (low-light).
+- Candle still life (C57-P27): `assets/toys/photo-3d/hard-cases/cdx-hard-candle-still-life.jpg`
+  (low-light).
+- Moonlit greenhouse (C57-P28): `assets/toys/photo-3d/hard-cases/cdx-hard-moonlit-greenhouse.jpg`
+  (low-light).
+- Lamps in a potting shed (C57-P29): `assets/toys/photo-3d/hard-cases/cdx-hard-shed-lamps.jpg`
+  (low-light).
+- Fire bowl at dusk (C57-P30): `assets/toys/photo-3d/hard-cases/cdx-hard-fire-bowl.jpg` (low-light).
+- Snail and wet moss (C57-P34): `assets/toys/photo-3d/hard-cases/cdx-hard-snail-shell.jpg` (macro).
+- Feather on lichen (C57-P35): `assets/toys/photo-3d/hard-cases/cdx-hard-feather-lichen.jpg`
+  (macro).
+- Workshop bench (C57-P36): `assets/toys/photo-3d/hard-cases/cdx-hard-workshop-bench.jpg`
+  (dense-clutter).
+- Potting bench (C57-P38): `assets/toys/photo-3d/hard-cases/cdx-hard-potting-bench.jpg`
+  (dense-clutter).
+- Ceramic studio shelf (C57-P40): `assets/toys/photo-3d/hard-cases/cdx-hard-ceramic-shelf.jpg`
+  (dense-clutter).
+
+## Task 54: more sample pictures
+
+Codex (GPT-6) built the sample selection and verification tools for Ryan under Splashery’s MIT
+license.
+
+Twenty more Studio samples are AI-made by the owner with an AI image tool, on his instruction. They
+are labeled AI-made in the picker and beside the result. They are fictional scenes with no people,
+readable text, logos, or real landmarks. Each JPEG is 1,280 px wide, with its depth map made by
+`tools/dsm-depth.mjs`. Checked October 13, 2026:
+
+- Stoneware (C54-P04): `assets/toys/photo-3d/ai/cdx-stoneware.jpg`.
+- Autumn squash (C54-P05): `assets/toys/photo-3d/ai/cdx-autumn-squash.jpg`.
+- Wooden toys (C54-P07): `assets/toys/photo-3d/ai/cdx-wooden-toys.jpg`.
+- Clay tools (C54-P09): `assets/toys/photo-3d/ai/cdx-clay-tools.jpg`.
+- Tea tray (C54-P10): `assets/toys/photo-3d/ai/cdx-tea-tray.jpg`.
+- Arched room (C54-P12): `assets/toys/photo-3d/ai/cdx-arched-room.jpg`.
+- Plant studio (C54-P14): `assets/toys/photo-3d/ai/cdx-plant-studio.jpg`.
+- Mossy stream (C54-P16): `assets/toys/photo-3d/ai/cdx-moss-stream.jpg`.
+- Dune grass (C54-P17): `assets/toys/photo-3d/ai/cdx-dune-grass.jpg`.
+- Woodland path (C54-P20): `assets/toys/photo-3d/ai/cdx-redwood-path.jpg`.
+- Pinecone (C54-P22): `assets/toys/photo-3d/ai/cdx-pinecone.jpg`.
+- Acorns (C54-P23): `assets/toys/photo-3d/ai/cdx-acorns.jpg`.
+- Fern curl (C54-P25): `assets/toys/photo-3d/ai/cdx-fern-curl.jpg`.
+- Cliff terrace (C54-P27): `assets/toys/photo-3d/ai/cdx-cliff-terrace.jpg`.
+- Mushroom house (C54-P28): `assets/toys/photo-3d/ai/cdx-mushroom-house.jpg`.
+- Crystal court (C54-P29): `assets/toys/photo-3d/ai/cdx-crystal-court.jpg`.
+- Tortoise (C54-P32): `assets/toys/photo-3d/ai/cdx-tortoise.jpg`.
+- Deer in a grove (C54-P34): `assets/toys/photo-3d/ai/cdx-deer-grove.jpg`.
+- Paper canyon (C54-P37): `assets/toys/photo-3d/ai/cdx-paper-canyon.jpg`.
+- Wood valley (C54-P40): `assets/toys/photo-3d/ai/cdx-wood-valley.jpg`.
+
+The following 24 Picture QR backgrounds show clear subjects and have no URL-specific carriers. All
+24 are **AI-made by the owner with an AI image tool**, on his instruction, labeled **AI-made** in
+the picker and in-app credit. Checked October 13, 2026:
+
+- Split leaf (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-monstera.jpg`.
+- Fern frond (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-fern.jpg`.
+- Green watering can (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-green-watering-can.jpg`.
+- Potted cactus (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-cactus.jpg`.
+- Clay pitcher (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pitcher.jpg`.
+- Wooden stacking rings (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-stacking-rings.jpg`.
+- Pear (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pear.jpg`.
+- Balloon (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-hot-air-balloon.jpg`.
+- Mushroom (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-mushroom.jpg`.
+- Wooden spinning top (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-spinning-top.jpg`.
+- Tulip (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-tulip.jpg`.
+- Pinecone (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pinecone.jpg`.
+- Stacked stones (AI-made by the owner):
+  `assets/toys/qr-picture/codex/cdx-qr-ai-stacked-stones.jpg`.
+- Wooden rook (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-rook.jpg`.
+- Paper rainbow (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-rainbow.jpg`.
+- Wooden blocks (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-wood-blocks.jpg`.
+- Clay teapot (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-teapot.jpg`.
+- Lotus bloom (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-lotus.jpg`.
+- Scallop shell (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-scallop.jpg`.
+- Pumpkin (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pumpkin.jpg`.
+- Blue vase (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-blue-vase.jpg`.
+- Ginkgo leaf (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-ginkgo.jpg`.
+- Autumn squash (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-squash.jpg`.
+- Smooth pebbles (AI-made by the owner): `assets/toys/qr-picture/codex/cdx-qr-ai-pebbles.jpg`.
+
+The full prompts, hashes, scores, five-link scan rates, and phone-size contact sheet are in
+[the sample-pictures audit](docs/audits/sample-pictures-2026-10.md). No new asset loads before it is
+picked.

@@ -38,7 +38,7 @@ const unit = (a) => mul(a, 1 / (len(a) || 1));
 const lerp = (a, b, t) => add(a, mul(sub(b, a), t));
 
 // Fake lighting (splats are unlit): a key light from the upper left front and
-// a highlight towards the default camera.
+// a highlight toward the default camera.
 const LIGHT = unit([-0.45, 0.8, 0.45]);
 const VIEW = unit([0.5, 0.3, 0.82]);
 const HALF = unit(add(LIGHT, VIEW));
@@ -307,7 +307,7 @@ const ELEMENTS = [
   ["Ne", "Neon", 20, [2, 8]],
   ["Na", "Sodium", 23, [2, 8, 1]],
   ["Mg", "Magnesium", 24, [2, 8, 2]],
-  ["Al", "Aluminium", 27, [2, 8, 3]],
+  ["Al", "Aluminum", 27, [2, 8, 3]],
   ["Si", "Silicon", 28, [2, 8, 4]],
   ["P", "Phosphorus", 31, [2, 8, 5]],
   ["S", "Sulfur", 32, [2, 8, 6]],
@@ -365,8 +365,8 @@ const shellNormal = (i) => {
 };
 const shellSpeed = (i) => (i % 2 ? -1 : 1) * (1.5 / Math.pow(i + 1, 0.75));
 
-// Balls packed in a round cluster: face-centred cubic points nearest the
-// centre, for a nucleus of n nucleons of radius rb.
+// Balls packed in a round cluster: face-centered cubic points nearest the
+// center, for a nucleus of n nucleons of radius rb.
 function packBall(n, rb, rand) {
   const a = rb * 2 * 0.98 * Math.SQRT2;
   const pts = [];
@@ -397,7 +397,7 @@ const CPK = {
 };
 
 // Adds atoms and bonds. atoms: [{ el, p, color?, r? }], bonds: [[i, j, order]].
-// Bonds are split in two, each half in its atom's colour. Each atom and its
+// Bonds are split in two, each half in its atom's color. Each atom and its
 // bond halves can be a token (token(i), moved by drive) or a part
 // (part(i)); `overlap` lengthens each half past the middle so a stretched
 // bond does not open a gap.
@@ -414,6 +414,11 @@ function ballStick(
     part,
     overlap = 0,
     crisp = false,
+    // Lane Fix7: bonds that stretch between their two atoms' tokens (the
+    // kit's "skin"), so an atom never leaves its bond. `bondTokens(i)` is
+    // atom i's token for its bonds (the molecule's atoms are tokens
+    // themselves; the crystal's slabs are mirrored on tokens).
+    bondTokens = null,
   } = {},
 ) {
   const phase = atoms.map(() => k.rand() * TAU);
@@ -446,7 +451,7 @@ function ballStick(
     const d = sub(B.p, A.p);
     const L = len(d);
     const u = mul(d, 1 / L);
-    // A sideways offset for double bonds, in the plane of a neighbour.
+    // A sideways offset for double bonds, in the plane of a neighbor.
     let side = cross(u, [0, 0, 1]);
     if (len(side) < 0.2) side = cross(u, [0, 1, 0]);
     side = unit(side);
@@ -462,12 +467,16 @@ function ballStick(
       ]) {
         const el = CPK[atom.el] || {};
         const col = grey || atom.bondColor || atom.color || el.color;
+        // Skinned: each splat follows both atoms, by how far along the bond it is.
+        const tA = bondTokens?.(i);
+        const tB = bondTokens?.(j);
+        const skin = bondTokens && tA !== tB ? (c) => [tA, tB, clamp(dot(sub(c.p, A.p), u) / L, 0, 1)] : null; // prettier-ignore
         k.add(k.cylinder(r, L / 2 + overlap, { caps: false }), {
           pos: add(lerp(from, to, 0.5), shift),
           quat: q,
           flat: 0.3,
           ...finish,
-          ...motion(idx, { kind: "breathe", params: [vibrate, phase[idx]] }),
+          ...(skin ? { skin } : motion(idx, { kind: "breathe", params: [vibrate, phase[idx]] })), // prettier-ignore
           color: (c) => lit(atom.el === "H" && !grey ? "#dcdcdc" : col, c.n, 0.65, 0.4),
         });
       }
@@ -475,7 +484,7 @@ function ballStick(
   }
 }
 
-// Hydrogens on an sp3 atom at p with neighbours at the given positions:
+// Hydrogens on an sp3 atom at p with neighbors at the given positions:
 // fills the missing corners of a tetrahedron.
 function tetraH(p, neighbours, count, bond = 1.09, twist = 0) {
   const dirs = neighbours.map((q) => unit(sub(q, p)));
@@ -776,7 +785,7 @@ const MOLECULES = {
         bonds.push([m, atoms.length - 1]);
       }
     }
-    // Centre it.
+    // Center it.
     const c = mul(
       atoms.reduce((s, a) => add(s, a.p), [0, 0, 0]),
       1 / atoms.length,
@@ -955,7 +964,7 @@ function graphiteLattice() {
 
 // ---- Lane Chemistry: more crystals -------------------------------------------------
 // Each from its unit cell (lattice constants in ångströms, room temperature),
-// repeated and cut to a block; bonds join nearest neighbours.
+// repeated and cut to a block; bonds join nearest neighbors.
 
 // Atoms of a cubic cell basis repeated n times along each axis, keeping
 // those inside the block (boundary included). basis: [[el, fx, fy, fz]].
@@ -994,13 +1003,13 @@ function bondsAt(atoms, pairs) {
   return bonds;
 }
 
-// Iron: body-centred cubic, a = 2.87 Å; each atom touches eight.
+// Iron: body-centered cubic, a = 2.87 Å; each atom touches eight.
 function ironLattice() {
   const a = 2.8665;
   const atoms = cubicBlock(a, [["Fe", 0, 0, 0], ["Fe", 0.5, 0.5, 0.5]], 3, { Fe: { color: "#a9b0b8", r: 0.55 } }); // prettier-ignore
   return { atoms, bonds: bondsAt(atoms, [["Fe", "Fe", (a * Math.sqrt(3)) / 2]]), bondR: 0.07, grey: "#7d848c", crisp: true }; // prettier-ignore
 }
-// Copper: face-centred cubic, a = 3.615 Å; each atom touches twelve.
+// Copper: face-centered cubic, a = 3.615 Å; each atom touches twelve.
 function copperLattice() {
   const a = 3.615;
   const atoms = cubicBlock(a, [["Cu", 0, 0, 0], ["Cu", 0, 0.5, 0.5], ["Cu", 0.5, 0, 0.5], ["Cu", 0.5, 0.5, 0]], 2, { Cu: { color: "#d9854a", r: 0.6 } }); // prettier-ignore
@@ -1024,7 +1033,7 @@ function cesiumChlorideLattice() {
   );
   return { atoms, bonds: bondsAt(atoms, [["Cs", "Cl", (a * Math.sqrt(3)) / 2]]), bondR: 0.06, grey: "#c9c9c9", crisp: true }; // prettier-ignore
 }
-// Fluorite (CaF2): calcium ions face-centred, a fluoride ion in each of the
+// Fluorite (CaF2): calcium ions face-centered, a fluoride ion in each of the
 // eight small cubes between them (a = 5.46 Å).
 function fluoriteLattice() {
   const a = 5.4626;
@@ -1124,7 +1133,7 @@ function grapheneLattice() {
         if (Math.hypot(x, z - 0.5 * b) > 7.4) continue;
         atoms.push({ el: "C", p: [x, 0, z - 0.5 * b], color: "#4b4f57", r: 0.36 });
       }
-  // Keep only carbons with two or three neighbours (no loose ends at the rim).
+  // Keep only carbons with two or three neighbors (no loose ends at the rim).
   let bonds = bondsAt(atoms, [["C", "C", b, 0.03]]);
   const deg = atoms.map(() => 0);
   for (const [i, j] of bonds) (deg[i]++, deg[j]++);
@@ -1196,7 +1205,7 @@ function iceLattice(rand) {
 
 // An orbital as the toy draws it: its boundary surface (the level that
 // holds 90% of the electron) and a cloud sampled from |psi|² inside it,
-// scaled to fit (1 = the resting size). glow mixes the colours towards
+// scaled to fit (1 = the resting size). glow mixes the colors toward
 // white; the surface's weight sets its share of the rest of the budget.
 function orbitalLook(
   k,
@@ -1351,9 +1360,9 @@ const PROTEIN_INPUT = {
   shown: () => PROTEIN_SHOWN.label,
 };
 
-// Where each residue of a chain gets its colour: `rainbow` runs blue to
+// Where each residue of a chain gets its color: `rainbow` runs blue to
 // red from each chain's start to its end; `chain` gives each chain its own
-// colour; `structure` colours helices, strands and loops.
+// color; `structure` colors helices, strands and loops.
 const CHAIN_COLOURS = ["#4f7cff", "#ff8a3d", "#39b86a", "#e04f8c", "#9c6bff", "#f2c230", "#2fb7c9", "#d9544a"]; // prettier-ignore
 const SS_COLOURS = { H: "#e0445c", E: "#f2c230", C: "#d8d8d2" };
 function residueColour(scheme, chainIndex, t, ss) {
@@ -1385,7 +1394,7 @@ function buildProtein(k, s, scheme) {
     });
   });
   // At most 48 tokens, the ligands included: merge the shortest runs into
-  // their neighbours in the same chain until the rest fit.
+  // their neighbors in the same chain until the rest fit.
   const budget = 48 - Math.min(16, s.ligands.length);
   while (runs.length > budget) {
     let best = -1;
@@ -1404,7 +1413,10 @@ function buildProtein(k, s, scheme) {
       r.pts.reduce((acc, pt) => add(acc, pt.p), [0, 0, 0]),
       1 / r.pts.length,
     );
-    tokens.push({ base, kind: r.kind });
+    // (r: how far it reaches from its middle, where a finger finds it in
+    // Hands-on; chain: which chain, for the neighbors it tugs.)
+    const reach = Math.max(...r.pts.map((pt) => len(sub(pt.p, base))));
+    tokens.push({ base, kind: r.kind, chain: r.chain, r: Math.max(2, 0.75 * reach) });
     for (const piece of r.parts || [r]) ribbonRun(k, piece, id, scheme);
   });
   // The bound small molecules.
@@ -1415,7 +1427,7 @@ function buildProtein(k, s, scheme) {
       lig.atoms.reduce((acc, a) => add(acc, a.p), [0, 0, 0]),
       1 / lig.atoms.length,
     );
-    tokens.push({ base, kind: "L", name: lig.name });
+    tokens.push({ base, kind: "L", name: lig.name, chain: -1, r: 2.5 });
     ligandTokens.push({ lig, id });
     const atoms = lig.atoms.map((a) => ({
       el: a.el,
@@ -1491,6 +1503,42 @@ function ribbonRun(k, run, token, scheme) {
   });
 }
 
+// The protein's pull (lane Fix7): how far apart its pieces are (0..1). Each
+// tap runs on its own clock: out over 1.5 s, a hold, and back by 4.75 s. A
+// tap while it is apart (or coming apart) brings it back at once, from
+// where it is, over PROTEIN_BACK seconds; the next tap pulls it apart again.
+const PROTEIN_SECS = 5;
+const PROTEIN_BACK = 1.4;
+function proteinApart(c, info) {
+  const m = mem(c);
+  const now = info?.time ?? 0;
+  const n = info?.tap?.key === "apart" ? info.tap.n : null;
+  const at = (p) => ease(band(p, 0, 0.3)) * (1 - ease(band(p, 0.58, 0.95)));
+  const pull = () => {
+    if (m.back) return m.back.from * (1 - ease(clamp((now - m.back.at) / PROTEIN_BACK, 0, 1)));
+    if (m.start === undefined) return 0;
+    const p = (now - m.start) / PROTEIN_SECS;
+    return p >= 1 ? 0 : at(p);
+  };
+  if (n !== null && n !== m.n && c.apart > 0) {
+    m.n = n;
+    const e = pull();
+    if (e > 0.02 && !m.back) m.back = { at: now, from: e };
+    else {
+      m.back = null;
+      m.start = now;
+    }
+  }
+  if (m.back && now - m.back.at >= PROTEIN_BACK) {
+    m.back = null;
+    m.start = undefined;
+  }
+  // Without a tap or a clock (a test driving the pulse by hand), the pulse
+  // itself is the clock.
+  if (!info?.tap || info.time === undefined) return c.apart > 0 ? at(progress(c.apart)) : 0;
+  return pull();
+}
+
 export const RECIPES = {
   // ---- Electron orbital ---------------------------------------------------------------
   orbital: {
@@ -1556,7 +1604,7 @@ export const RECIPES = {
       const crisp = !ORIGINAL_ORBITALS.has(o.orbital);
       const look = { plus: o.plus, minus: o.minus, lobes, crisp };
       orbitalLook(k, orb, { ...look, part: ground, cloudShare: lobes ? 0.2 : 0.46 });
-      // The nucleus: a tiny bright dot at the centre, with a soft glow.
+      // The nucleus: a tiny bright dot at the center, with a soft glow.
       k.add(k.sphere(0.03), { share: 0.01, color: (c) => gloss("#fff3c4", c.n, 0.6, 8) });
       k.cloud({ share: 0.01, size: 1.4, pattern: false }, (rand) => ({
         p: mul(randDir(rand), 0.06 * Math.abs(gauss(rand))),
@@ -1633,7 +1681,7 @@ export const RECIPES = {
     ],
     controls: [
       { key: "speed", label: "Electrons", type: "slider", default: 0.5 },
-      { key: "energy", label: "Energise", type: "pulse", ease: 4.6 },
+      { key: "energy", label: "Energize", type: "pulse", ease: 4.6 },
     ],
     action: { key: "energy", label: "Speed up the electrons" },
     // Lane Chemistry: the numbers behind the 118 elements.
@@ -1648,7 +1696,7 @@ export const RECIPES = {
           "https://www.nist.gov/open/copyright-fair-use-and-licensing-statements-srd-data-software-and-technical-series-publications",
       },
     ],
-    // A tap energises the atom: the electrons whirl faster and faster until
+    // A tap energizes the atom: the electrons whirl faster and faster until
     // each shell blurs into a glowing ring (as a fast electron is better
     // pictured, a cloud round its orbit), then slow down again.
     drive(t, c, out) {
@@ -1837,6 +1885,25 @@ export const RECIPES = {
     ],
     controls: [{ key: "heat", label: "Heat", type: "pulse", ease: 4.4 }],
     action: { key: "heat", label: "Heat it up" },
+    // Hands-on (lane Hands-on H5): grab an atom and pull it: its bonds
+    // stretch after it like springs and its neighbors are tugged along a
+    // little; let go and it springs back and the molecule wobbles to rest.
+    hands: {
+      gravity: 0,
+      place: false,
+      // (Under the molecule: a held atom is kept within five toy radii of it.)
+      floor: (d) => -1.3 * Math.max(1, ...(d?.tokens || []).map((tk) => len(tk.base))),
+      area: 3,
+      touch: true,
+      pieces: (d) =>
+        (d?.tokens || []).map((tk, i) => ({
+          token: i,
+          pos: tk.base,
+          pick: [tk.r, tk.r, tk.r],
+          mass: Math.max(0.2, tk.mass / 12),
+          home: { k: 70, damping: 3.2 },
+        })),
+    },
     // The atoms always jiggle a little on their bonds. A tap heats the
     // molecule: every bond stretches and squeezes hard at its own pace
     // (light hydrogens swing furthest), then it cools and calms. Each atom
@@ -1859,6 +1926,23 @@ export const RECIPES = {
       if (D.breathe) {
         const r = amp * 0.07 * Math.sin(TAU * 1.6 * t);
         D.tokens.forEach((tk, i) => (disp[i] = add(disp[i], mul(tk.dir, r * len(tk.base)))));
+      }
+      // Hands-on: an atom pulled off its place tugs its bonded neighbors
+      // after it (each about a third of the way; the pulled one goes where
+      // the hand puts it).
+      const pc = info.hands?.piece;
+      if (pc) {
+        const off = D.tokens.map((_, i) => {
+          const q = pc(i);
+          return q ? sub(q.pos, q.home) : null;
+        });
+        for (const b of D.bonds) {
+          const [oa, ob] = [off[b.a], off[b.b]];
+          const ma = D.tokens[b.a].mass;
+          const mb = D.tokens[b.b].mass;
+          if (oa && len(oa) > 1e-4) disp[b.b] = add(disp[b.b], mul(oa, (0.35 * ma) / (ma + mb)));
+          if (ob && len(ob) > 1e-4) disp[b.a] = add(disp[b.a], mul(ob, (0.35 * mb) / (ma + mb)));
+        }
       }
       out.tokens = D.tokens.map((tk, i) => ({ base: tk.base, offset: disp[i] }));
     },
@@ -1887,7 +1971,7 @@ export const RECIPES = {
       } = mol
         ? { atoms: mol.atoms.map((a) => ({ ...a, p: a.p.slice() })), bonds: mol.bonds }
         : shelf || (MOLECULES[o.molecule] || MOLECULES.caffeine)();
-      // Any element: its colour and a size from its covalent radius.
+      // Any element: its color and a size from its covalent radius.
       for (const a of atoms) {
         if (CPK[a.el]) continue;
         a.color = element(a.el)?.color || "#ff66cc";
@@ -1906,12 +1990,22 @@ export const RECIPES = {
           : atoms.map((a, i) => i);
       const n = Math.max(...tokenOf) + 1;
       const MASS = new Proxy({ H: 1, C: 12, N: 14, O: 16 }, { get: (m, el) => m[el] ?? 2 * (element(el)?.z ?? 6) }); // prettier-ignore
-      const tokens = Array.from({ length: n }, () => ({ base: [0, 0, 0], mass: 0, count: 0 }));
+      const tokens = Array.from({ length: n }, () => ({
+        base: [0, 0, 0],
+        mass: 0,
+        count: 0,
+        r: 0,
+      }));
       atoms.forEach((a, i) => {
         const tk = tokens[tokenOf[i]];
         tk.base = add(tk.base, a.p);
         tk.mass += MASS[a.el] ?? 12;
         tk.count++;
+      });
+      // (How far from its middle a finger finds it: lane Hands-on H5.)
+      atoms.forEach((a, i) => {
+        const tk = tokens[tokenOf[i]];
+        tk.r = Math.max(tk.r, 1.15 * (a.r ?? CPK[a.el]?.r ?? 0.35), (tk.count > 1 ? 0.6 : 0) * len(sub(a.p, mul(tk.base, 1 / tk.count)))); // prettier-ignore
       });
       for (const tk of tokens) {
         tk.base = mul(tk.base, 1 / tk.count);
@@ -1937,6 +2031,7 @@ export const RECIPES = {
       ballStick(k, atoms, bonds, {
         bondR: c60 ? 0.08 : 0.1,
         token: (i) => tokenOf[i],
+        bondTokens: (i) => tokenOf[i],
         overlap: 0.09,
         crisp: !!shelf,
       });
@@ -1987,6 +2082,33 @@ export const RECIPES = {
     ],
     controls: [{ key: "wave", label: "Wave", type: "pulse", ease: 3.8 }],
     action: { key: "wave", label: "Send a wave through" },
+    // Hands-on (lane Hands-on H5): push a slice of the crystal up or down:
+    // it slides along its plane with its neighbors following less and less
+    // (the lattice shears, bonds stretching between slices), and let go it
+    // springs back, ringing a little. Each slice has an unseen handle on a
+    // spring (a slider on a token no splat uses); the drive spreads its
+    // push across the slices.
+    hands: {
+      touch: true,
+      floor: -3,
+      joints: (d) =>
+        (d?.slabCenters || []).map((at, i) => ({
+          type: "slider",
+          token: 20 + i,
+          name: `shear${i}`,
+          pos: at,
+          pivot: at,
+          axis: d.up,
+          min: -0.32,
+          max: 0.32,
+          gravity: false,
+          spring: 160,
+          damping: 3.5,
+          bounce: 0.1,
+          pick: [1.6, 1.6, 1.6],
+          sound: () => null,
+        })),
+    },
     // A tap sends a wave of vibration (a phonon) through the crystal: a
     // ripple runs across it from left to right, each slice of atoms rising
     // and falling in turn with its bonds, and leaves it still again.
@@ -1996,11 +2118,18 @@ export const RECIPES = {
       const p = progress(c.wave);
       const on = c.wave > 0 ? 1 : 0;
       const front = -1.6 + 3.3 * band(p, 0, 0.92);
+      // Hands-on: each slice's handle pushes it and, less and less, the
+      // slices beside it.
+      const pushed = D.slabs.map((_, i) => info.hands?.joint(`shear${i}`) ?? 0);
+      const shear = (j) => pushed.reduce((acc, v, i) => acc + v * Math.exp(-(((j - i) / 2.6) ** 2)), 0); // prettier-ignore
       D.slabs.forEach((sk, i) => {
         const x = sk - front;
         const y = on * 0.13 * Math.exp(-(x * x) / (2 * 0.3 * 0.3)) * Math.sin(x * 7);
-        out.parts[`slab${i}`] = { offset: mul(D.up, y) };
+        out.parts[`slab${i}`] = { offset: mul(D.up, y + shear(i)) };
       });
+      // The bonds between slabs stretch between them (their two ends ride on
+      // these tokens, lane Fix7).
+      out.tokens = D.slabs.map((_, i) => ({ offset: out.parts[`slab${i}`].offset }));
     },
     build(k, o) {
       const make = {
@@ -2023,7 +2152,7 @@ export const RECIPES = {
         for (const a of lat.atoms) a.p = quatRotate(q, a.p);
       }
       if (o.crystal === "ice") {
-        // Tip ice towards the viewer so its six-sided channels show.
+        // Tip ice toward the viewer so its six-sided channels show.
         const q = quatFromTo([0, 1, 0], unit(lerp([0, 1, 0], VIEW, 0.72)));
         for (const a of lat.atoms) a.p = quatRotate(q, a.p);
         lat.hbonds = lat.hbonds.map(([a, b]) => [quatRotate(q, a), quatRotate(q, b)]);
@@ -2055,6 +2184,8 @@ export const RECIPES = {
       k.data = {
         up,
         slabs: slabs.map((_, i) => ((lo + ((i + 0.5) / SLABS) * (hi - lo)) / (hi - lo)) * 2),
+        // Each slice's middle (lane Hands-on H5: where its handle is).
+        slabCenters: slabs.map((_, i) => mul(right, lo + ((i + 0.5) / SLABS) * (hi - lo))),
       };
       ballStick(k, lat.atoms, lat.bonds, {
         bondR: lat.bondR,
@@ -2062,11 +2193,12 @@ export const RECIPES = {
         glint: lat.glint || 0,
         grey: lat.grey || null,
         part: (i) => slabs[slabAt(lat.atoms[i].p)],
+        bondTokens: (i) => slabAt(lat.atoms[i].p),
         overlap: 0.02,
         crisp: !!lat.crisp,
       });
       if (lat.hbonds) {
-        // Hydrogen bonds: dotted lines from each hydrogen to its neighbour's oxygen.
+        // Hydrogen bonds: dotted lines from each hydrogen to its neighbor's oxygen.
         k.cloud({ share: 0.03, size: 0.9, pattern: false }, (rand, i, n) => {
           const [a, b] = lat.hbonds[i % lat.hbonds.length];
           const t = 0.18 + (0.64 * Math.floor(rand() * 6)) / 5;
@@ -2108,7 +2240,7 @@ export const RECIPES = {
       },
       {
         key: "colour",
-        label: "Colour",
+        label: "Color",
         type: "select",
         default: "rainbow",
         choices: [
@@ -2139,8 +2271,28 @@ export const RECIPES = {
       const text = await readAsset(`../../assets/proteins/${def.file}.pdb`);
       PROTEIN_CACHE.set(def.file, centreStructure(parseStructure(text, `${def.file}.pdb`)));
     },
-    controls: [{ key: "apart", label: "Pull apart", type: "pulse", ease: 5 }],
+    // Lane Fix7: a tap while it is apart brings it back at once (not a pause).
+    controls: [{ key: "apart", label: "Pull apart", type: "pulse", ease: PROTEIN_SECS, pausable: false }], // prettier-ignore
     action: { key: "apart", label: "Pull it apart" },
+    // Hands-on (lane Hands-on H5): pull a helix, a strand or a loop out of
+    // the fold; the pieces next to it along the chain are tugged after it a
+    // little, and let go it glides back into its place.
+    hands: {
+      gravity: 0,
+      place: false,
+      // (Under the protein: a held piece is kept within five toy radii of it.)
+      floor: (d) => -1.2 * (d?.spread ?? 20),
+      area: 3,
+      touch: true,
+      pieces: (d) =>
+        (d?.tokens || []).map((tk, i) => ({
+          token: i,
+          pos: tk.base,
+          pick: [tk.r, tk.r, tk.r],
+          mass: 1,
+          home: { k: 22, damping: 7.5 },
+        })),
+    },
     // A tap pulls the protein apart into its pieces: every helix, strand
     // and loop (and each bound molecule) moves straight out from the middle,
     // turning a little, so you can see what it is made of, then they all
@@ -2149,9 +2301,7 @@ export const RECIPES = {
     drive(t, c, out, info) {
       const D = info.data;
       if (!D?.tokens) return;
-      const p = progress(c.apart);
-      const on = c.apart > 0 ? 1 : 0;
-      const e = on * ease(band(p, 0, 0.3)) * (1 - ease(band(p, 0.58, 0.95)));
+      const e = proteinApart(c, info);
       out.tokens = D.tokens.map((tk, i) => {
         const r = len(tk.base);
         const away = Math.min(1, r / (0.25 * D.spread));
@@ -2163,6 +2313,21 @@ export const RECIPES = {
         };
       });
       if (D.glow) out.parts.glow = { visible: 1.3 * e };
+      // Hands-on: a piece pulled out of the fold tugs its neighbors along
+      // the chain (a third of the way) after it.
+      const pc = info.hands?.piece;
+      if (pc) {
+        const off = D.tokens.map((_, i) => {
+          const q = pc(i);
+          return q && len(sub(q.pos, q.home)) > 1e-3 ? sub(q.pos, q.home) : null;
+        });
+        D.tokens.forEach((tk, i) => {
+          for (const j of [i - 1, i + 1]) {
+            if (!off[j] || D.tokens[j].chain !== tk.chain || tk.chain < 0) continue;
+            out.tokens[i].offset = add(out.tokens[i].offset, mul(off[j], 0.3));
+          }
+        });
+      }
     },
     build(k, o) {
       let s = null;
@@ -2206,7 +2371,7 @@ export const RECIPES = {
 };
 
 // The directions the orbital's photons travel: in from the upper left, out
-// towards the lower right (both in the picture plane).
+// toward the lower right (both in the picture plane).
 const PHOTON_IN = unit([-0.75, 0.62, 0.2]);
 const PHOTON_OUT = unit([0.8, -0.35, -0.1]);
 

@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>Splashery · splats you can play with</title>
+    <meta name="google-site-verification" content="w8pbv9kWt5By4VXOGAL0XQ9GbhnJVScvrUW2_Z5m17g" />
     <meta
       name="description"
       content="Splashery is a pure-browser toy made of 3D Gaussian splats: pick a toy or make one, poke it, blow on it, paint it, drop it, dissolve it, then share it as a link, an embed, a GIF or a video."
@@ -44,13 +45,41 @@
     ></canvas>
 
     <header class="brand">
-      <h1>Splashery</h1>
+      <h1><a href="./site/" aria-label="Splashery home" title="Splashery home">Splashery</a></h1>
       <p>splats you can play with</p>
     </header>
 
     <p id="toy-status" class="toy-status" aria-live="polite"></p>
 
     <div id="toy-legend" class="toy-legend" aria-label="Labels" hidden></div>
+
+    <!-- Lane Pages r6: a slider over the stage, set by the toy (a risen figure's depth). -->
+    <div id="toy-slider" class="toy-slider" hidden>
+      <span id="toy-slider-label" class="toy-slider-label"></span>
+      <input type="range" id="toy-slider-input" min="0" max="1000" step="1" value="0" />
+    </div>
+
+    <!-- Live r8: a toy's depth slider over the stage, hideable (remembered on this device). -->
+    <div id="stage-dial" class="stage-dial" hidden>
+      <button
+        type="button"
+        id="stage-dial-hide"
+        class="stage-dial-hide"
+        aria-label="Hide the slider"
+      >
+        ×
+      </button>
+      <div class="stage-dial-track">
+        <input type="range" id="stage-dial-input" min="0" max="1" step="0.05" value="0.5" />
+      </div>
+      <span
+        id="stage-dial-label"
+        class="stage-dial-label"
+        tabindex="0"
+        title="Drag to move. Arrow keys move it, Home puts it back."
+      ></span>
+    </div>
+    <button type="button" id="stage-dial-show" class="stage-dial-show" hidden></button>
 
     <div id="game-bar" class="game-bar" hidden>
       <p id="game-bar-title" class="game-bar-title"></p>
@@ -317,6 +346,25 @@
     </div>
     <!-- /UI r3 -->
 
+    <!-- Lane Pages r6: Pop out for the page toys (Your book, the Photo album, the Picture lab),
+         one setting for all of them, shown only while one is open. -->
+    <button
+      id="pop-toggle"
+      type="button"
+      class="view-button"
+      aria-pressed="false"
+      title="Pop out: off (turn it on, then tap a figure)"
+      aria-label="Pop out"
+      hidden
+    >
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+        <path d="M2.5 19l4-4h15l-4 4z" fill="none" stroke="currentColor" stroke-width="1.6" />
+        <rect x="8" y="4" width="9" height="8" rx="1" fill="currentColor" />
+        <path d="M12.5 12.5v3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" />
+      </svg>
+    </button>
+    <!-- /Lane Pages r6 -->
+
     <!-- UI r5: Record. While it records: the time and Stop; then Save (and Share on a phone). -->
     <div id="rec-pill" class="rec-pill" role="status" aria-live="polite" hidden>
       <span class="rec-dot" aria-hidden="true"></span>
@@ -343,8 +391,8 @@
       type="button"
       class="view-button ui2-only"
       aria-expanded="false"
-      title="Gallery: every toy on one page (G)"
-      aria-label="Gallery"
+      title="Playground: every toy on one page (G)"
+      aria-label="Playground"
     >
       <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
         <rect x="4" y="4" width="6.5" height="6.5" rx="1.4" fill="currentColor" />
@@ -485,7 +533,7 @@
         class="poster"
         viewBox="0 0 320 240"
         role="img"
-        aria-label="A toy made of coloured splats"
+        aria-label="A toy made of colored splats"
       >
         <g opacity="0.9">
           <ellipse cx="118" cy="104" rx="62" ry="48" fill="#ff5fa2" />
@@ -538,10 +586,10 @@
           type="button"
           id="gallery-close"
           class="gallery-close"
-          title="Close the gallery (Escape)"
+          title="Close the Playground (Escape)"
           hidden
         >
-          Close the gallery
+          Close the Playground
         </button>
         <div
           id="sheet-handle"
@@ -774,6 +822,23 @@
                   <button type="button" data-detail="max" aria-pressed="false">Max</button>
                 </div>
               </div>
+              <label class="row" id="look-splats-row" hidden>
+                <span>Splats</span>
+                <input
+                  id="look-splats"
+                  type="range"
+                  min="60000"
+                  max="400000"
+                  step="10000"
+                  value="140000"
+                  aria-describedby="look-splats-note"
+                />
+                <output id="look-splats-value" for="look-splats">140k</output>
+              </label>
+              <p class="note" id="look-splats-note" hidden>
+                Labs: the slider sets a toy's splats directly, from 60,000 to 400,000. The nearest
+                tier sets the rest. Auto, High, or Max puts the tiers back.
+              </p>
               <p class="note">
                 Detail stays on this device and is never part of a link. High and Max draw more
                 splats at sharper resolution, which can be slow on phones.
@@ -781,7 +846,7 @@
               <div class="button-row reset-row">
                 <button id="reset-all" type="button" class="danger">Reset everything</button>
                 <span id="reset-note" class="note">
-                  Flag colours, paint, clay, effects, options and looks
+                  Flag colors, paint, clay, effects, options and looks
                 </span>
               </div>
             </section>
@@ -794,9 +859,9 @@
               <div id="tool-params"></div>
               <div id="paint-extras" class="paint-extras" hidden>
                 <div class="swatch-row">
-                  <div class="swatches" role="group" aria-label="Paint colours" id="swatches"></div>
-                  <label class="color-well" title="Paint colour">
-                    <span class="visually-hidden">Paint colour</span>
+                  <div class="swatches" role="group" aria-label="Paint colors" id="swatches"></div>
+                  <label class="color-well" title="Paint color">
+                    <span class="visually-hidden">Paint color</span>
                     <input id="paint-color" type="color" value="#e63b2e" />
                   </label>
                 </div>
@@ -876,7 +941,7 @@
                 <output id="gen-rough-value" for="gen-rough"></output>
               </label>
               <label class="row">
-                <span>Colour noise</span>
+                <span>Color noise</span>
                 <input id="gen-noise" type="range" min="0" max="100" />
                 <output id="gen-noise-value" for="gen-noise"></output>
               </label>
@@ -919,14 +984,14 @@
                   <a id="help-superspl" href="https://superspl.at/" target="_blank" rel="noopener"
                     >SuperSplat</a
                   >
-                  shows many scenes, and some can be downloaded. Check each one's licence: the toys
+                  shows many scenes, and some can be downloaded. Check each one's license: the toys
                   on this shelf only use CC0, CC BY or public domain work (see
                   <a
                     id="help-cc"
                     href="https://creativecommons.org/cc-licenses/"
                     target="_blank"
                     rel="noopener"
-                    >Creative Commons licences</a
+                    >Creative Commons licenses</a
                   >). You can open any file you own or may use; it stays on your device.
                 </p>
                 <h3>Make your own</h3>
@@ -968,7 +1033,7 @@
                 </p>
                 <h3>What works</h3>
                 <p>
-                  Poke, Paint and Magnet, every effect, motion, and flag and pattern colours. The
+                  Poke, Paint and Magnet, every effect, motion, and flag and pattern colors. The
                   Detail setting and the automatic resolution apply too.
                 </p>
                 <h3>What doesn't</h3>
@@ -993,18 +1058,18 @@
                 <select id="pat-flag" aria-label="Flag"></select>
               </label>
               <div class="row" id="pat-colors-row" hidden>
-                <span>Colours</span>
+                <span>Colors</span>
                 <div class="swatch-row">
-                  <label class="color-well small" title="First colour">
-                    <span class="visually-hidden">First colour</span>
+                  <label class="color-well small" title="First color">
+                    <span class="visually-hidden">First color</span>
                     <input id="pat-c1" type="color" value="#ffffff" />
                   </label>
-                  <label class="color-well small" title="Second colour">
-                    <span class="visually-hidden">Second colour</span>
+                  <label class="color-well small" title="Second color">
+                    <span class="visually-hidden">Second color</span>
                     <input id="pat-c2" type="color" value="#e63b2e" />
                   </label>
-                  <label class="color-well small" title="Third colour">
-                    <span class="visually-hidden">Third colour</span>
+                  <label class="color-well small" title="Third color">
+                    <span class="visually-hidden">Third color</span>
                     <input id="pat-c3" type="color" value="#0b4f9c" />
                   </label>
                 </div>
@@ -1044,16 +1109,16 @@
             </section>
 
             <section class="group" id="look-group" aria-labelledby="h-look">
-              <h2 id="h-look">Colours and splats</h2>
+              <h2 id="h-look">Colors and splats</h2>
               <div class="row">
                 <span>Background</span>
                 <select id="look-bg" aria-label="Background">
                   <option value="page">Page</option>
                   <option value="transparent">Transparent</option>
-                  <option value="custom">Colour</option>
+                  <option value="custom">Color</option>
                 </select>
-                <label class="color-well small" title="Background colour">
-                  <span class="visually-hidden">Background colour</span>
+                <label class="color-well small" title="Background color">
+                  <span class="visually-hidden">Background color</span>
                   <input id="look-bg-color" type="color" value="#f4efe6" />
                 </label>
               </div>
@@ -1069,10 +1134,10 @@
                 <span>Accent</span>
                 <select id="look-accent" aria-label="Accent">
                   <option value="auto">Page accent</option>
-                  <option value="custom">Colour</option>
+                  <option value="custom">Color</option>
                 </select>
-                <label class="color-well small" title="Accent colour">
-                  <span class="visually-hidden">Accent colour</span>
+                <label class="color-well small" title="Accent color">
+                  <span class="visually-hidden">Accent color</span>
                   <input id="look-accent-color" type="color" value="#e63b2e" />
                 </label>
               </div>
@@ -1102,6 +1167,7 @@
               <h2 id="h-share">Link and scene file</h2>
               <div class="button-row">
                 <button id="share-link" type="button">Copy link</button>
+                <button id="share-qr" type="button" hidden>QR code</button>
                 <button id="export-json" type="button">Save JSON</button>
                 <label class="file-button">
                   <span>Load JSON</span>
@@ -1152,6 +1218,12 @@
               </div>
               <p id="record-unavailable" class="note" hidden></p>
               <!-- /UI r5 -->
+              <!-- Lane PDF lab (labs): a still with a live link, or a recording of one tap. -->
+              <div class="row compact" id="pdf-row" hidden>
+                <span>PDF</span>
+                <button id="export-pdf" type="button">Save PDF</button>
+                <span class="note">A still and a live link, or a recording</span>
+              </div>
             </section>
             <section class="group" id="embed-group" aria-labelledby="h-embed">
               <h2 id="h-embed">Put it on a web page</h2>
@@ -1196,6 +1268,9 @@
               <h2 id="h-toy-about">About this toy</h2>
               <p id="toy-about-name" class="toy-about-name"></p>
               <div id="toy-about-text" class="toy-about-text"></div>
+              <p id="toy-site-row" hidden>
+                <a id="toy-site-link">More about this toy</a>
+              </p>
               <h3 class="toy-about-h">How to play</h3>
               <p id="toy-about-howto"></p>
               <dl id="toy-about-can" class="toy-about-can"></dl>
@@ -1234,16 +1309,17 @@
                 </li>
                 <li class="ui2-only">
                   <b>F</b> or the focus button shows only the toy (<b>Esc</b> brings the rest back);
-                  <b>[</b> folds the panel away; <b>G</b> or the gallery button shows every toy on
-                  one page
+                  <b>[</b> folds the panel away; <b>G</b> or the Playground button shows every toy
+                  on one page
                 </li>
                 <li class="ui2-only">
                   On a phone, swipe the toy row down to hide it, and the square button fills the
-                  screen with the gallery or the settings
+                  screen with the Playground or the settings
                 </li>
                 <!-- /UI r2 -->
               </ul>
               <p class="note" id="render-info"></p>
+              <p class="note"><a href="./site/">The Splashery site</a>: toys, guides, and news</p>
               <!-- Tinkerer's Manual (lane Manual) -->
               <p class="note">
                 <a href="manual/">The Tinkerer's Manual</a>: how to program splats, from the math of

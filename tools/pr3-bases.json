@@ -1,0 +1,44 @@
+{
+  "bmx-bike": {
+    "id": "bmx-bike",
+    "band": "-0.62,-0.42"
+  },
+  "monkey-doll": {
+    "id": "monkey-doll",
+    "band": "-0.95,-0.87"
+  },
+  "mushroom-photo": {
+    "id": "mushroom-photo",
+    "band": "-0.4,-0.12"
+  },
+  "cactus-real": {
+    "id": "cactus-real",
+    "band": "-1,-0.7"
+  },
+  "maple-tree": {
+    "id": "maple-tree",
+    "band": "-0.87,-0.6"
+  },
+  "bonsai-photo": {
+    "id": "bonsai-photo",
+    "band": "-1.05,-0.83",
+    "box": "-0.8,1.4,-1.4,1.4"
+  },
+  "dog-plush": {
+    "id": "dog-plush",
+    "band": "-0.35,-0.24"
+  },
+  "steak": {
+    "id": "steak",
+    "band": "0.02,0.2",
+    "top": 0.025
+  },
+  "knight-horse": {
+    "id": "knight-horse",
+    "band": "-1.01,-0.9"
+  },
+  "stollen": {
+    "id": "stollen",
+    "band": "-0.53,-0.38"
+  }
+}

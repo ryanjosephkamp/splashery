@@ -18,11 +18,12 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   worker session with it, checks and steers it, reconciles the PRs and brings the owner finished
   work. The owner talks only to the Operator and reviews the clips. A worker puts its questions in
   its final message ("READY:", "WORKING:" or "BLOCKED:"), not to the owner.
-- Each worker runs the model its lane is assigned, at the default effort (the owner's split of
-  September 29, 2026): Opus 5.5 for the engine, the toys, sounds, fidelity and the Operator; Sonnet
-  5.5 for the Worlds content (games, templates), the Studio converters, the docs and the Integrator.
-  Any other model needs the owner's permission first. Every lane, PR and clip names its model. The
-  Operator checks each worker's model at every check-in and stops one that has run on another.
+- Each worker runs the model its lane is assigned, at high effort (the owner's call of October 8,
+  2026; the model split is his of September 29, 2026): Opus 5.5 for the engine, the toys, sounds,
+  fidelity and the Operator; Sonnet 5.5 for the Worlds content (games, templates), the Studio
+  converters, the docs and the Integrator. Any other model needs the owner's permission first. Every
+  lane, PR and clip names its model. The Operator checks each worker's model at every check-in and
+  stops one that has run on another.
 - A lane edits only the files it owns (its row in WORKSTREAMS.md) and its own toys' entries in the
   shared lists (`src/toy-sounds.js`, `src/toy-help.js`, `tools/toy-plan.json`, `src/toys.js`,
   credits).
@@ -36,34 +37,75 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
 
 ## Ground rules
 
+Outside builders (the owner's Codex and ChatGPT agents) follow
+[builders/RULES.md](builders/RULES.md) (Rules v1, October 12, 2026): the non-negotiables in short,
+with a hand-back rule. These ground rules are the full set for Claude sessions; the two agree.
+
 - Static files and ES modules only. No bundler, CDN, server, or API keys in the page. PlayCanvas
   2.22.3 is vendored in `vendor/` and imported only through `src/pc.js`. PDF.js and omggif (approved
   September 28, 2026) are vendored there too, loaded only when someone opens a PDF or a GIF. ONNX
   Runtime Web and the Depth Anything V2 Small model (approved September 29, 2026) are vendored there
   too, loaded only when someone turns a photo into 3D. Splat.js (MIT; approved September 30, 2026,
   for the video-to-3D spike) may join them, behind the labs switch, loaded only when someone opens a
-  video for it.
+  video for it. Project Nayuki's QR Code generator (MIT) and jsQR (Apache-2.0) (approved October
+  3, 2026) are vendored there too, loaded only when someone opens the QR code toy. Faster depth (the
+  owner's yes of October 12, 2026, for Codex task 37): a WebGPU or WebNN build of ONNX Runtime Web
+  and a better depth model may join them, over 2 MB, when their license is Apache-2.0, MIT or BSD,
+  loaded only when someone turns a photo, a clip or the camera into 3D.
+- Libraries (the owner's rule of October 4, 2026): the Operator may approve an open-source library a
+  toy or tool needs without asking the owner each time: vendored in `vendor/`, loaded only when its
+  toy opens, listed in `LICENSES.md` and named in the PR. A copyleft license (GPL, AGPL), a library
+  that calls a server, or one over 2 MB goes to the owner first. He approved a LAZ reader for point
+  clouds and a DICOM reader for medical volumes the same day.
 - Live input (approved September 30, 2026): a toy asks for the microphone, the camera or screen
   capture only when the person taps to start it. Nothing is requested or loaded before that, and
-  nothing is recorded, stored or sent anywhere.
-- Build tools in `tools/` may use pinned devDependencies. List each one in `LICENSES.md`.
-- Assets must be CC0, CC BY, CC BY-SA or public domain. Never NC, and never unlicensed, "personal
-  use" or paid files. CC BY-SA (allowed since the owner's call of October 2, 2026) is per asset: its
-  license notice shows beside it, and anything made from it (a splat converted from a BY-SA mesh)
-  stays BY-SA. Check the license on the live source page. Record it in `CREDITS.md`, in
-  `tools/assets.json` or `tools/models.json`, and in the toy's in-app credit. One exception (the
-  owner's call of September 30, 2026): the Wikipedia book fetches an article live from Wikipedia's
-  REST API when the reader asks for it (CC BY-SA text). It is never stored in the repo, shipped with
-  the site or saved in a scene, and the article's credit and license show beside it.
-- Photoreal captures under licenses the site can't use may be viewed privately, on a private page,
-  for comparison (the owner's call of October 2, 2026). They never go into the repo or the site.
+  nothing is recorded, stored or sent anywhere. One exception (the owner's request of October 4,
+  2026): a recorder, such as the Sound lab's, may record when the person taps Record, keeps the
+  recording on the device and saves it only to a file the person chooses.
+- Live data (the owner's calls of October 4, 2026): the earthquakes toy may read the USGS earthquake
+  feed when the person opens it or taps to refresh, and other open geographic feeds (animal
+  tracking, migration) may be read the same way when their terms allow reuse. Only keyless public
+  endpoints; the source and the time of the data show beside it; nothing is stored or sent; a dated
+  snapshot ships with the site for when the feed can't be reached. The Night sky may ask for the
+  person's location only when they tap for it, and never stores or sends it. The molecule viewer may
+  fetch a structure from the Protein Data Bank (CC0) by its code when the person asks (the owner's
+  "PDB fetch yes", October 5, 2026); the same terms apply.
+- Build tools in `tools/` may use pinned devDependencies. List each one in `LICENSES.md`. Programs
+  outside npm that train splats on the owner's Mac (Blender, Brush or msplat; the Splat Fidelity
+  Plan, approved October 3, 2026) are build tools too: listed in `LICENSES.md`, never shipped.
+- Assets must be CC0, CC BY, CC BY-SA, CC BY-NC, CC BY-NC-SA or public domain. Never a NoDerivatives
+  ("ND") license, and never unlicensed, "personal use" or paid files. CC BY-SA (allowed since the
+  owner's call of October 2, 2026) is per asset: its license notice shows beside it, and anything
+  made from it (a splat converted from a BY-SA mesh) stays BY-SA. CC BY-NC and CC BY-NC-SA (the
+  owner's call of October 3, 2026) are per asset on four conditions: its license notice shows beside
+  it; never ND; it carries `"nc": true` in `tools/assets.json` or `tools/models.json`, so one
+  command (`node tools/nc-assets.mjs`) lists every NC asset to take out if the site ever earns
+  money; and anything made from it keeps its license. Never merge an NC asset and a BY-SA asset into
+  one asset (side by side in a scene is fine). Check the license on the live source page. Record it
+  in `CREDITS.md`, in `tools/assets.json` or `tools/models.json`, and in the toy's in-app credit.
+  NASA 3D Resources models are allowed too, under NASA's media guidelines (the owner's call of
+  October 6, 2026): take any NASA insignia off the model and credit its source page. One exception
+  (the owner's call of September 30, 2026): the Wikipedia book fetches an article live from
+  Wikipedia's REST API when the reader asks for it (CC BY-SA text). It is never stored in the repo,
+  shipped with the site or saved in a scene, and the article's credit and license show beside it.
+- AI-made samples (the owner's calls of October 5, 2026, Push Plan AI1 to AI5): pictures and video
+  the owner makes with his own AI image or video plan may ship as Studio samples (Photo to 3D, Video
+  to 3D, Moving photo to 3D), labeled as AI-made beside them, with no people, logos or text, and
+  never presented as real captures or real places. Since October 13, 2026 (the owner's yes, for
+  Codex task 54), AI-made pictures may also ship as Picture QR backgrounds, on the same terms.
+  Record each in `CREDITS.md` and `tools/assets.json` as AI-made by the owner. AI-made pictures and
+  video are never used for science, math or engineering toys, the photoreal shelves, or landmarks
+  shown as real; those keep real data and real captures.
+- Photoreal captures under licenses the site can't use (ND, no license) may be viewed privately, on
+  a private page, for comparison (the owner's call of October 2, 2026). They never go into the repo
+  or the site.
 - Old `#s=` links and saved scene JSON (schema v2 and v3) must keep loading.
 - No modern real-world firearms, no logos or brand names, no gore. Flags stay respectful. Since
   September 29, 2026, historical, fantasy and sci-fi weapons are fine where a world calls for them
   (a cutlass, a flintlock, ship cannons, a space blaster, a bow), and so are an inspector for those
   designs and a butterfly-knife toy. Targets are objects, never people or animals.
 - Anatomy is shown as a clinical atlas (the skin layer smooth like an anatomical mannequin, organs
-  as in a textbook). Ask the owner before using any CC BY-SA source.
+  as in a textbook). Ask the owner before using any CC BY-SA or NC source.
 - Splashery doesn't inspect, filter or censor what people open. Files stay on their device, and the
   terms of use in the About tab say they are responsible for what they open and share.
 - American English for every new public-facing text: the docs, the words on the site (toy names,
@@ -71,6 +113,13 @@ coordinates. [docs/OPERATING.md](docs/OPERATING.md) has the rules. In short:
   toward, catalog, -ize endings, and dates like "September 27, 2026". Code identifiers, file names
   and anything stored in links or saved scenes stay as they are. Don't rewrite older British text on
   the side: one sweep does that before the blog post.
+- The serial (Oxford) comma in every new public-facing text: "a, b, and c" and "d, e, or f" (the
+  owner's call of October 9, 2026). Older text gets it in the same sweep as American English.
+- The owner's notes are private (his rule of October 11, 2026). Every note, walkthrough, review,
+  answer, idea or file he gives a session is private and internal. A version of it goes into the
+  repo, a PR, a card or the site only after it is cleaned up and he approves that version. Until
+  then only the Operator's own summary (a triage, a brief) is committed, in the Operator's words.
+  Never commit his raw notes or his attachments.
 - Secrets: `HF_TOKEN` (a Hugging Face read token) is for build-time tools only. Never print it,
   commit it, or put it in logs, PRs or files. To check it, test that it is set
   (`[ -n "$HF_TOKEN" ]`), or call the whoami API and print only the account name and token role.
@@ -130,14 +179,24 @@ new or changed effect against them before calling it done.
 
 ## Working style
 
-- Pace (the owner's choice of October 2, 2026): up to ten Splashery workers at once for the
-  close-out of the toys, until about October 5, 2026; then back to about six (seven at most). Before
-  that (from the weekly reset of September 30, 4 p.m. ET) it was about six workers at once (seven at
-  most) plus an Integrator, paced by the 5-hour limit; the owner reports the weekly usage morning
-  and evening. (Until then it was up to 12, and 8 before the morning of September 29.) Once 6 or
-  more lanes run, an Integrator worker runs the combined test runs. A lane uses at most one helper
-  at a time. (Seven parallel builders once used up a week's usage in one go, so the Operator watches
-  the limits.)
+- The push (the owner's call of October 4, 2026): about ten to twelve busy workers on this account,
+  on his banked reset, until the weekly reset of Wednesday, October 7, 2026, 4 p.m. ET; then back to
+  about six (seven at most). The Integrators run the full suite for the lanes.
+- Shelves (the owner's call of October 4, 2026): the toy shelves are closing. Balls, food, nature,
+  gems, medieval, holidays, music (no new instruments), Open me, animals and the cartoon vehicles
+  get only their hands-on finishing; a new toy there only when the owner asks (a new animal only as
+  a photoreal capture). Landmarks, the body, weather and fire grow only with photoreal or
+  high-fidelity work (real 3D captures, volumetric data). New work goes to science, tools, the
+  Studio, Pictures and Pages, QR codes, the labs, Space, Tiny world, Atoms, Math, and AI and
+  computing. A stepping-stone lab is fine when it teaches something a planned toy needs (a wind lab
+  before a tornado).
+- Pace before the push (the owner's choice of October 2, 2026): up to ten Splashery workers at once
+  for the close-out of the toys; then back to about six (seven at most). Before that (from the
+  weekly reset of September 30, 4 p.m. ET) it was about six workers at once (seven at most) plus an
+  Integrator, paced by the 5-hour limit; the owner reports the weekly usage morning and evening.
+  (Until then it was up to 12, and 8 before the morning of September 29.) Once 6 or more lanes run,
+  an Integrator worker runs the combined test runs. A lane uses at most one helper at a time. (Seven
+  parallel builders once used up a week's usage in one go, so the Operator watches the limits.)
 - New parts of the site (Studio, Worlds, Lab and Learn) open behind the labs switch; the owner
   decides when each goes public.
 - The owner works from the phone app. Keep replies short and plain, and give step-by-step
@@ -155,9 +214,10 @@ new or changed effect against them before calling it done.
 - `tools/upkeep.mjs`: the Operator's upkeep after a merge (TOY-PLAN.md, the Sound Board page file,
   the standard screenshots). `tools/sound-board.mjs` builds the Sound Board page and
   `tools/help-board.mjs` the Help Board (every toy's how-to line and About text).
-- `docs/reviews/`: the owner's reviews, verbatim, with screenshots (sound notes too).
+- `docs/reviews/`: the Operator's triage of each of the owner's reviews, in its own words (his notes
+  stay private).
 - `tools/sound-review.json`: the sound review, per toy (notes, plans and new sounds to hear), shown
   on the Sound Board (OPERATING.md, "The sound review").
 - `docs/PACKS.md`: how to write toy recipes.
 - `docs/SCENE-SCHEMA.md`: the scene format.
-- `CREDITS.md` and `LICENSES.md`: attributions and licences.
+- `CREDITS.md` and `LICENSES.md`: attributions and licenses.

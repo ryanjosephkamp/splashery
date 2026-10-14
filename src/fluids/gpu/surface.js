@@ -704,6 +704,7 @@ uniform uGlassB: vec4f;
 uniform uMisc: vec4f;
 uniform uFoam: vec4f;
 uniform uDrop: vec2f;
+uniform uLevel: vec4f;
 var uProps: texture_2d<uff>;
 uniform uPropInfo: vec4f;
 uniform uHeat: vec4f;
@@ -790,6 +791,15 @@ fn sampleHeat(uv: vec2f) -> f32 {
   let size = vec2f(textureDimensions(uDepth, 0));
   let q = clamp(vec2i(flipUv(uv) * size), vec2i(0), vec2i(size) - vec2i(1));
   return textureLoad(uDepth, q, 0).g;
+}
+// Glowing lava by its heat (1 fresh .. 0 cold), an incandescent ramp:
+// orange-yellow, orange, red, dull red, then black.
+fn lavaRamp(t: f32) -> vec3f {
+  var c = mix(vec3f(0.0), vec3f(0.3, 0.04, 0.01), smoothstep(0.05, 0.18, t));
+  c = mix(c, vec3f(0.75, 0.13, 0.02), smoothstep(0.18, 0.38, t));
+  c = mix(c, vec3f(1.0, 0.36, 0.05), smoothstep(0.38, 0.65, t));
+  c = mix(c, vec3f(1.0, 0.6, 0.18), smoothstep(0.65, 0.95, t));
+  return c;
 }
 fn hash3(p: vec3f) -> f32 {
   return fract(sin(dot(p, vec3f(127.1, 311.7, 74.7))) * 43758.5453);
@@ -1069,11 +1079,7 @@ fn sceneAt(uv: vec2f) -> vec3f {
     if (uniform.uGlassB.w > 0.5 && n.y > 0.6) {
       let Pt2 = (uniform.uViewToToy * vec4f(P, 1.0)).xyz;
       let rl2 = length(Pt2.xz - uniform.uGlassA.xz);
-      let w = 1.8 * uniform.uMisc.w * length(Pt2 - eye);
-      let r0 = uniform.uGlassA.w - 0.5 * uniform.uMisc.z;
-      let ring = smoothstep(r0 - 2.0 * w, r0 - w, rl2) * (1.0 - smoothstep(r0 + w, r0 + 3.0 * w, rl2));
       liq = mix(liq, refl, 0.1 * smoothstep(0.6, 0.95, n.y));
-      liq = mix(liq, vec3f(0.93, 0.94, 0.95), ring * 0.65);
     }
     let thin = uniform.uDrop.x * (1.0 - smoothstep(uniform.uDrop.y, 4.0 * uniform.uDrop.y, thick));
     liq = mix(liq, sky(normalize(vec3f(n.x, 1.0, n.z))) * 0.75 + spec, thin);
@@ -1081,24 +1087,62 @@ fn sceneAt(uv: vec2f) -> vec3f {
     let bub = clamp(thickAll(uv0).b * 1.2, 0.0, 1.0) * uniform.uFoam.w;
     liq = mix(liq, mix(uniform.uColor.rgb, vec3f(1.0), 0.6) * (0.65 + 0.35 * max(dot(n, L), 0.0)) + vec3f(0.08), bub * 0.75);
     if (uniform.uHeat.y > 0.5) {
-      // Lava: fresh from the nozzle it glows orange-yellow; within a second
-      // or two its skin cools to a dark crust, which the flow beneath tears
-      // into plates and folds, glowing in the cracks between them.
+      // Lava (r6): one material from the spout to the pool. Its color comes
+      // only from its heat, which falls on the same curve wherever it is
+      // (the time since it left the spout): bright orange fresh, orange,
+      // red, dull red, then a dark crust. The crust forms on the coolest
+      // skin first and breaks into plates whose cracks show the hotter lava
+      // just beneath, on the same ramp.
       let Pt3 = (uniform.uViewToToy * vec4f(P, 1.0)).xyz;
       let heat = sampleHeat(uv0);
       let nz = vnoise(Pt3 * 28.0) * 0.6 + vnoise(Pt3 * 70.0) * 0.4;
-      // (the crust's cracks: thin veins where it parted, glowing as long as
-      // the lava under it is still hot, longer than its skin)
-      let vein = 1.0 - smoothstep(0.0, 0.07, abs(vnoise(Pt3 * 11.0) - 0.5));
-      let g = max(smoothstep(0.45, 0.8, heat + 0.2 * (nz - 0.5)), vein * smoothstep(0.03, 0.3, heat) * 0.85);
-      let crust = vec3f(0.085, 0.06, 0.05) * (0.55 + 0.45 * max(dot(n, L), 0.0)) * (0.8 + 0.4 * nz) + vec3f(spec * 0.35);
-      let glow = mix(vec3f(0.85, 0.16, 0.02), vec3f(1.0, 0.68, 0.18), smoothstep(0.55, 0.95, heat + 0.1 * nz)) * 1.35;
-      liq = mix(crust, glow, g);
+      let crustAmt = 1.0 - smoothstep(0.2, 0.42, heat + 0.18 * (nz - 0.5));
+      let vein = 1.0 - smoothstep(0.0, 0.05, abs(vnoise(Pt3 * 11.0) - 0.5));
+      // (cooled pahoehoe: a glassy dark gray that shows the room's light)
+      let crust = vec3f(0.13, 0.12, 0.12) * (0.45 + 0.55 * max(dot(n, L), 0.0)) * (0.75 + 0.5 * nz) + vec3f(spec * 0.6) + refl * (0.08 + F * 0.6);
+      // (molten lava is lit from within; its skin is a touch cooler where
+      // it curves away, and a little uneven)
+      let glow = lavaRamp(heat - 0.12 * (1.0 - abs(nV.z)) + 0.08 * (nz - 0.5)) * (0.85 + 0.15 * nz) + vec3f(spec * 0.3);
+      let under = lavaRamp(min(1.0, heat * 1.6 + 0.12)) * vein * smoothstep(0.02, 0.2, heat);
+      liq = mix(glow, crust + under, crustAmt);
     }
     let a = clamp(thick * 200.0, 0.0, 1.0);
     liqZ = -P.z;
     liqT = mix(1.0, dot(T, vec3f(0.333)), a);
     col = mix(col, liq, a);
+  }
+  // A thin liquid's top in a glass (r6): a flat surface at the pool's level
+  // that reaches the glass's inner wall, so it reads as one surface from any
+  // angle, with a hairline meniscus where it meets the wall (uLevel: the
+  // level, on).
+  if (uniform.uLevel.y > 0.5 && uniform.uGlassB.w > 0.5 && abs(rd.y) > 1e-4) {
+    let tP = (uniform.uLevel.x - eye.y) / rd.y;
+    let hit = eye + rd * tP;
+    let rIn = uniform.uGlassA.w;
+    let rr = length(hit.xz - uniform.uGlassA.xz);
+    let pz = -(uniform.uToyToView * vec4f(hit, 1.0)).z;
+    if (tP > 0.0 && rr < rIn && pz < liqZ + 0.02 && pz < tFront + 1e9) {
+      let nT = vec3f(0.0, 1.0, 0.0);
+      let V2 = -rd;
+      let F2 = fresnel(abs(rd.y), 0.02);
+      let refl2 = sky(reflect(rd, nT));
+      // through the liquid to the glass's bottom
+      let depthL = max(0.0, uniform.uLevel.x - uniform.uGlassA.y - uniform.uGlassB.z) / max(abs(rd.y), 0.15);
+      let tView = depthL * (uniform.uToyToView * vec4f(0.0, 1.0, 0.0, 0.0)).y;
+      let T2 = exp(-uniform.uAbsorb.rgb * abs(tView) * 1.0);
+      let behind2 = sceneAt(clamp(uv0 + vec2f(0.0, 0.004), vec2f(0.001), vec2f(0.999)));
+      let body2 = mix(behind2 * T2 + uniform.uColor.rgb * (1.0 - T2) * 0.25, uniform.uColor.rgb * 0.6, uniform.uColor.a);
+      let H2 = normalize(normalize(uniform.uLight.xyz) + V2);
+      var top = mix(body2, refl2, F2) + vec3f(pow(max(dot(nT, H2), 0.0), 180.0) * 1.6);
+      // the meniscus: the surface curves up the wall in its last millimeter,
+      // a hairline that catches the room's light
+      let px = uniform.uMisc.w * tP;
+      let men = smoothstep(rIn - 2.5 * px, rIn - 0.5 * px, rr);
+      top = mix(top, refl2 * 1.1 + vec3f(0.05), men * 0.35);
+      col = top;
+      liqZ = pz;
+      liqT = dot(T2, vec3f(0.333));
+    }
   }
   // Foam and spray over the liquid.
   if (uniform.uFoam.w > 0.5) {
@@ -1448,6 +1492,9 @@ export class FluidSurface {
     scope.resolve("uFoam").setValue([...p.foam, liquid && src.diffuse?.n ? 1 : 0]);
     scope.resolve("uDrop").setValue([src.drops ?? 0, (src.radius ?? 0) * toyScale * 2]);
     if (!liquid) scope.resolve("uHeat").setValue([0, 0, 0, 0]);
+    scope
+      .resolve("uLevel")
+      .setValue(liquid && src.level != null ? [src.level, 1, 0, 0] : [0, 0, 0, 0]);
     // The props (index.js), traced on WebGPU only.
     const props = d.isWebGPU ? p.props : null;
     scope.resolve("uProps").setValue(this.propTexture(props));

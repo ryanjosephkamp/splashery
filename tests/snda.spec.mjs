@@ -20,7 +20,11 @@ const review = JSON.parse(fs.readFileSync("tools/sound-review.json", "utf8")).to
 // A toy a later review reopened (its entry carries that review's "round") still counts as the lane's.
 const CHANGED = TOYS.filter((t) => SHELVES.includes(t.category) && (review[t.id]?.status === "site" || review[t.id]?.round)).map((t) => t.id); // prettier-ignore
 const assets = JSON.parse(fs.readFileSync("tools/assets.json", "utf8")).soundSamples;
-const cueFiles = [...fs.readFileSync("src/packs/balls.js", "utf8").matchAll(/file: "([a-z0-9-]+\.mp3)"/g)].map((m) => m[1]); // prettier-ignore
+// Files a pack's recipe plays (its cues, and since Sound C its `sounds`), from
+// every pack, and the Sound Board's candidates in the review (OPERATING.md,
+// "The sound review", step 3) count as used too.
+const cueFiles = fs.readdirSync("src/packs").flatMap((f) => [...fs.readFileSync(`src/packs/${f}`, "utf8").matchAll(/"([a-z0-9-]+\.mp3)"/g)].map((m) => m[1])); // prettier-ignore
+const candidateFiles = samplesIn(Object.values(review).flatMap((t) => (t.candidates || []).map((c) => c.sound)), [], true); // prettier-ignore
 const FILES = fs.readdirSync("assets/sounds");
 
 test("the lane's toys are marked in the sound review, and their specs are sound", () => {
@@ -33,7 +37,7 @@ test("the lane's toys are marked in the sound review, and their specs are sound"
 });
 
 test("every sample is used, credited (assets.json, CREDITS.md, the About tab), CC0 and small", () => {
-  const used = new Set([...samplesIn(Object.values(TOY_SOUNDS), [], true), ...cueFiles]);
+  const used = new Set([...samplesIn(Object.values(TOY_SOUNDS), [], true), ...cueFiles, ...candidateFiles]); // prettier-ignore
   const credits = fs.readFileSync("CREDITS.md", "utf8");
   for (const f of FILES) {
     expect(f, "an MP3 or M4A named <toy>-<what>").toMatch(/^[a-z0-9][a-z0-9-]*\.(mp3|m4a)$/);
@@ -51,8 +55,10 @@ test("every sample is used, credited (assets.json, CREDITS.md, the About tab), C
     expect(credits, `${f} in CREDITS.md`).toContain(piano ? "`grand-piano-*.mp3`" : `\`${f}\``);
   }
   for (const f of used) expect(FILES, `${f} exists`).toContain(f);
+  // The whole folder (each file loads only with its own toy): 1 MB until Sound
+  // C (October 2, 2026) took it past that, with main alone at 987 KB.
   const total = FILES.reduce((s, f) => s + fs.statSync(`assets/sounds/${f}`).size, 0);
-  expect(total).toBeLessThan(1024 * 1024);
+  expect(total).toBeLessThan(1.5 * 1024 * 1024);
 });
 
 test("every changed toy's sound plays in the app without errors or warnings", async ({ page }) => {

@@ -14,17 +14,21 @@
 // motion, not a validated scientific solver.
 
 import { mix, shade } from "../kit.js";
+import { PHONE_ENV, HINT, envelopeOn, isPhone } from "../fluids/phone.js";
+import { TOYS } from "../toys.js"; // Fix9: the way back
 
 const UNIT = 0.33;
 const TAP_SECS = 5;
 
 export const LIQUID_LOOKS = {
-  water: { preset: "water", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
-  soda: { preset: "soda", nozzle: { speed: 1.6, radius: 0.08 }, pour: 2.4 },
+  // (gpuRadius, r6: a real tap's stream, about a centimeter across at the
+  // spout; the CPU's coarser particles keep the wider one)
+  water: { preset: "water", nozzle: { speed: 1.6, radius: 0.08, gpuRadius: 0.04 }, pour: 2.4 },
+  soda: { preset: "soda", nozzle: { speed: 1.6, radius: 0.08, gpuRadius: 0.04 }, pour: 2.4 },
   // (gpuRadius: the GPU liquid's particles are small enough for a real
   // honey pour's thin thread)
-  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.05 }, pour: 3.2 },
-  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.05 }, pour: 3.2 },
+  honey: { preset: "honey", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.04 }, pour: 3.2 },
+  lava: { preset: "lava", nozzle: { speed: 0.75, radius: 0.1, gpuRadius: 0.055 }, pour: 3.2 },
 };
 
 // The glass (recipe units, standing on y = 0).
@@ -33,6 +37,99 @@ const NOZZLE = [-0.06, 1.72, 0];
 
 // Which scene the last build made, for the tap's sound.
 const LAB = { scene: "glass", tapN: 0 };
+
+// Fix9 (the owner's walkthrough, October 6, 2026): on a phone that can't keep up, a short,
+// plain warning before it stalls. The lab times its frames for its first second (after a
+// quarter second to settle); if the typical frame takes longer than SLOW_MS, the warning
+// offers a lighter mode (the lowest tier) or a way back to the first toy. Once per build.
+const SLOW_MS = 50; // under 20 frames a second
+const WATCH = { t0: 0, last: 0, gaps: [], done: false, quiet: false }; // quiet: "Keep going"
+function watchFrames(now) {
+  if (WATCH.done || WATCH.quiet) return;
+  if (!WATCH.t0) WATCH.t0 = now;
+  const age = now - WATCH.t0;
+  if (WATCH.last && age > 250) WATCH.gaps.push(now - WATCH.last);
+  WATCH.last = now;
+  if (age < 1250) return;
+  WATCH.done = true;
+  const g = WATCH.gaps.slice().sort((a, b) => a - b);
+  const typical = g.length ? g[Math.floor(g.length / 2)] : Infinity;
+  if (typical > SLOW_MS) slowWarning();
+}
+function param(name) {
+  try {
+    return new URLSearchParams(location.search).get(name);
+  } catch {
+    return null;
+  }
+}
+// The warning (styled as the link box; ?slow=1 shows it on any device, for tests).
+export function slowWarning() {
+  if (typeof document === "undefined") return null;
+  const app = window.__splashery?.app;
+  let bar = document.getElementById("fluid-slow");
+  if (!bar) {
+    bar = document.createElement("div");
+    bar.id = "fluid-slow";
+    bar.className = "link-confirm";
+    bar.setAttribute("role", "alertdialog");
+    bar.setAttribute("aria-label", "This lab is slow here");
+    const text = document.createElement("p");
+    text.className = "link-confirm-text";
+    text.textContent = "This lab is running slowly on this phone.";
+    const more = document.createElement("p");
+    more.className = "link-confirm-url";
+    const row = document.createElement("div");
+    row.className = "button-row";
+    const lighter = document.createElement("button");
+    lighter.type = "button";
+    lighter.className = "primary";
+    lighter.id = "fluid-slow-lighter";
+    lighter.textContent = "Lighter";
+    const back = document.createElement("button");
+    back.type = "button";
+    back.id = "fluid-slow-back";
+    back.textContent = "Leave the lab";
+    const keep = document.createElement("button");
+    keep.type = "button";
+    keep.id = "fluid-slow-keep";
+    keep.textContent = "Keep going";
+    const close = () => (bar.hidden = true);
+    lighter.addEventListener("click", async () => {
+      close();
+      // The lowest tier for this visit (fewer splats, a smaller picture); the toy is built again
+      // in the same view. Detail's own choices are untouched.
+      const a = window.__splashery?.app;
+      const p = a?.player;
+      if (!p?.setProfile("low")) return;
+      const cam = p.camera.getState();
+      await a.loadToy(p.scene.toy);
+      p.camera.setState(cam, { snap: true });
+      a.updateRenderInfo?.();
+    });
+    back.addEventListener("click", () => {
+      close();
+      window.__splashery?.app?.chooseToy(TOYS[0].id);
+    });
+    keep.addEventListener("click", () => {
+      close();
+      WATCH.quiet = true;
+    });
+    bar.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") close();
+    });
+    row.append(lighter, back, keep);
+    bar.append(text, more, row);
+    document.body.appendChild(bar);
+  }
+  const low = app?.player?.profile === "low";
+  bar.querySelector(".link-confirm-url").textContent = low
+    ? "It is already at its lightest. Try it on a computer, or leave the lab."
+    : "Lighter draws it with fewer splats, in a smaller picture.";
+  bar.querySelector("#fluid-slow-lighter").hidden = low;
+  bar.hidden = false;
+  return bar;
+}
 
 // ---- Shared pieces ------------------------------------------------------------------------
 
@@ -44,8 +141,8 @@ function wood(c) {
 
 // A glass, drawn by the fluid engine (kind "vessel"): clear where you look
 // straight through it and bright toward its edges, as real glass is.
-function glass(k, g, budget = 9000) {
-  k.fluid({ name: "glass", kind: "vessel", shape: g, budget, color: "#dcedf5" });
+function glass(k, g, budget = 9000, phone = undefined) {
+  k.fluid({ name: "glass", kind: "vessel", shape: g, budget, color: "#dcedf5", phone });
   k.reach([g.at[0] + g.radius + g.wall, g.at[1] + g.height, g.at[2] + g.radius + g.wall]);
   k.reach([g.at[0] - g.radius - g.wall, g.at[1], g.at[2] - g.radius - g.wall]);
 }
@@ -115,8 +212,15 @@ function glassScene(k, o) {
     unit: UNIT,
     spacing: 0.052,
     budget: 1200,
+    phone: { scale: PHONE_ENV.cpuScale }, // r7: CPU cap 270; the spacing grows by the cube root of 2
     colliders: [GLASS, { type: "floor", y: 0 }],
     fill: { cylinder: { at: [0, 0.05, 0], radius: 0.3, height: 0.3 } },
+    // (r6, the GPU's lava: a thin cooled floor, so what pours piles up on top
+    // of it, glowing, and crusts over, rather than sinking into a deep pool)
+    gpu:
+      look.preset === "lava"
+        ? { fill: { cylinder: { at: [0, 0.05, 0], radius: 0.3, height: 0.08 } } }
+        : undefined,
     emitter: { at: NOZZLE, dir: [0, -1, 0], ...look.nozzle },
   });
   k.reach([0.9, 2.1, 0.5]);
@@ -135,7 +239,7 @@ function splashScene(k, o) {
   // splats alone leave gaps)
   k.add(k.cylinder(0.82, 0.02), { pos: [0, -0.012, 0], color: wood, even: true, part: stand });
   const traced = props(k, [{ type: "cyl", a: [0, -0.06, 0], b: [0, 0, 0], r: 1.05, look: "wood" }]);
-  glass(k, BASIN, 12000);
+  glass(k, BASIN, 12000, { scale: PHONE_ENV.cpuScale }); // (r7: a phone halves the CPU vessel; the liquid keeps its pool)
   k.fluid({
     name: "liquid",
     kind: "liquid",
@@ -151,13 +255,22 @@ function splashScene(k, o) {
     gpu: {
       fill: { cylinder: { at: [0, 0.04, 0], radius: 0.76, height: 0.065 } },
       fillShare: 0.9,
-      drop: { at: [0.03, 0.95, 0.02], radius: 0.1, vel: [0, -2, 0] },
+      // (r6: a big falling drop is no sphere: flattened, flat underneath and
+      // rounder on top, as a large raindrop falls)
+      drop: {
+        at: [0.03, 0.95, 0.02],
+        radius: 0.1,
+        vel: [0, -2, 0],
+        shape: [1.4, 0.8, 1.28, 0.42],
+      },
       friction: 0.025,
       tension: 0,
+      // (its crown is no flat pool: drawn from its particles)
+      flatTop: false,
       // (no stream to hold together: drawn barely stretched, so the ball and
       // the crown's drops stay round; larger sprites join the crown's thin
       // sheet)
-      stretch: 0.15,
+      stretch: 0.35,
       sprite: 1.1,
       // (and they catch the light as real drops do)
       drops: 0.8,
@@ -303,9 +416,23 @@ export const RECIPES = {
   "fluid-lab": {
     alive: true,
     turntable: false,
+    // Hands-on Level 1 (lane Hands-on H3): picked up, tossed and set down whole.
+    handsLevel1: true,
     // The props need fewer splats than a toy's whole budget; the rest is left
     // for drawing the fluid.
-    density: 0.75,
+    // (r7: a third of that on a phone)
+    get density() {
+      return envelopeOn() ? PHONE_ENV.density : 0.75;
+    },
+    // r7: the lab's own canvas cap on a phone; a deliberate High or Max
+    // Detail keeps the tier's.
+    get render() {
+      return envelopeOn() ? { dpr: PHONE_ENV.dpr } : undefined;
+    },
+    // r7: on a phone, the hint shows beside Scene and Liquid.
+    get note() {
+      return isPhone() ? HINT : "";
+    },
     // Lab: the sharper splat edge (labs only, like this toy) keeps a liquid's
     // surface crisp instead of cloudy; smoke, steam and flames keep the soft
     // Gaussian. Read after build, so it follows the scene just built.
@@ -341,6 +468,10 @@ export const RECIPES = {
     controls: [{ key: "go", label: "Pour, drop or blow", type: "pulse", ease: TAP_SECS }],
     action: { key: "go", label: "Pour, drop or blow", quiet: ["go"] },
     drive(t, c, out, info) {
+      // Fix9: a phone that can't keep up hears about it in the first second.
+      // (?slow=1 plays a phone at 8 frames a second, for tests.)
+      const slow = param("slow") === "1";
+      if (isPhone() || slow) watchFrames(slow ? (WATCH.last || 1) + 125 : performance.now());
       const d = info.data || {};
       const n = info.tap?.n ?? 0;
       // Seconds since the last tap (99: none yet, or long ago).
@@ -386,6 +517,7 @@ export const RECIPES = {
     build(k, o) {
       const scene = ["glass", "splash", "candle", "cup"].includes(o.scene) ? o.scene : "glass";
       LAB.scene = scene;
+      Object.assign(WATCH, { t0: 0, last: 0, gaps: [], done: false });
       if (scene === "glass") glassScene(k, o);
       else if (scene === "splash") splashScene(k, o);
       else if (scene === "candle") candleScene(k, o);

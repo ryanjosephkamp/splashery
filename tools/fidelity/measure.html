@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Fidelity measure</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #000;
+      }
+      canvas {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="c"></canvas>
+    <script type="module">
+      // Lane Fidelity: renders a splat file at exact cameras with the vendored PlayCanvas (no
+      // Splashery effects), for tools/fidelity/measure.mjs. window.fid.load(url, size, bg), then
+      // window.fid.shoot(m, fov) with m the camera-to-world matrix (16 numbers, row major, our
+      // y-up world, the camera looking down its -z) returns a PNG data URL.
+      import * as pc from "../../src/pc.js";
+
+      const canvas = document.getElementById("c");
+      let app, cam, entity;
+      const frames = (n) =>
+        new Promise((done) => {
+          const step = () => {
+            app.render();
+            if (--n <= 0) done();
+            else requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+
+      window.fid = {
+        async load(url, size, bg) {
+          canvas.width = canvas.height = size;
+          canvas.style.width = canvas.style.height = `${size}px`;
+          const device = await pc.createGraphicsDevice(canvas, {
+            deviceTypes: ["webgl2"],
+            antialias: false,
+            alpha: false,
+            preserveDrawingBuffer: true,
+          });
+          app = new pc.AppBase(canvas);
+          const opts = new pc.AppOptions();
+          opts.graphicsDevice = device;
+          opts.componentSystems = [pc.CameraComponentSystem, pc.GSplatComponentSystem];
+          opts.resourceHandlers = [pc.TextureHandler, pc.GSplatHandler];
+          app.init(opts);
+          app.setCanvasFillMode(pc.FILLMODE_NONE);
+          app.setCanvasResolution(pc.RESOLUTION_FIXED, size, size);
+          app.autoRender = false;
+          app.start();
+          cam = new pc.Entity("camera");
+          cam.addComponent("camera", {
+            clearColor: new pc.Color(bg[0], bg[1], bg[2], 1),
+            nearClip: 0.002,
+            farClip: 100,
+          });
+          app.root.addChild(cam);
+          const asset = new pc.Asset("file", "gsplat", { url });
+          app.assets.add(asset);
+          await new Promise((ok, fail) => {
+            asset.once("load", ok);
+            asset.once("error", fail);
+            app.assets.load(asset);
+          });
+          entity = new pc.Entity("splat");
+          entity.addComponent("gsplat", { asset });
+          app.root.addChild(entity);
+          return asset.resource.numSplats ?? asset.resource.gsplatData?.numSplats;
+        },
+        async shoot(m, fov) {
+          const mat = new pc.Mat4();
+          // PlayCanvas matrices are column major.
+          const d = mat.data;
+          for (let r = 0; r < 4; r++) for (let c = 0; c < 4; c++) d[c * 4 + r] = m[r * 4 + c];
+          const pos = new pc.Vec3();
+          const rot = new pc.Quat();
+          mat.getTranslation(pos);
+          rot.setFromMat4(mat);
+          cam.setPosition(pos);
+          cam.setRotation(rot);
+          cam.camera.horizontalFov = true; // camera_angle_x
+          cam.camera.fov = fov;
+          await frames(12);
+          return canvas.toDataURL("image/png");
+        },
+      };
+    </script>
+  </body>
+</html>

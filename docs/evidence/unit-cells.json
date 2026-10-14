@@ -1,0 +1,124 @@
+{
+  "toy": "unit-cells",
+  "checked": "2026-10-07",
+  "summary": "The toy builds six crystals from their published cells and atom positions (Crystallography Open Database, public domain): diamond, graphite, ice Ih, copper (fcc), iron (bcc) and magnesium (hcp). Atoms are spheres with true relative radii, bonds join nearest neighbors at their real distances, ice's hydrogens obey the ice rules, and the optional thermal motion draws each atom as one Gaussian whose spread is its published mean-square displacement. Tests check the cells, the distances, the coordination numbers, the ice rules and the U values.",
+  "claims": [
+    {
+      "claim": "Each crystal's cell and atom positions are the published ones.",
+      "how": "src/lattice/cells.js holds each cell (a, c, γ) and its basis in fractional coordinates as the COD entry gives them; blocks repeat the cell along its three axes.",
+      "where": "src/lattice/cells.js:CRYSTALS",
+      "sources": [
+        {
+          "title": "COD 9008564: diamond, a = 3.56679 Å (Wyckoff, Crystal Structures, 1963)",
+          "publisher": "Crystallography Open Database",
+          "url": "https://www.crystallography.net/cod/9008564.html",
+          "says": "Fd-3m, a = 3.56679 Å, C at (0, 0, 0)."
+        },
+        {
+          "title": "COD 9011577: graphite (Trucano and Chen, Nature 258, 136, 1975)",
+          "publisher": "Crystallography Open Database",
+          "url": "https://www.crystallography.net/cod/9011577.html",
+          "says": "P6₃/mmc, a = 2.464 Å, c = 6.711 Å; C1 (0, 0, ¼), C2 (⅓, ⅔, ¼); U11 = 0.0031, U33 = 0.016 and 0.017 Å²."
+        },
+        {
+          "title": "COD 1538173: ice Ih (Goto, Hondoh and Mae, J. Chem. Phys. 93, 1412, 1990)",
+          "publisher": "Crystallography Open Database",
+          "url": "https://www.crystallography.net/cod/1538173.html",
+          "says": "P6₃/mmc, a = 4.506 Å, c = 7.346 Å; O1 (⅓, ⅔, 0.0618); H1 (⅓, ⅔, 0.198) and H2 (0.437, 0.874, 0.028) at half occupancy."
+        },
+        {
+          "title": "COD 9008468: copper, a = 3.61496 Å (Wyckoff 1963)",
+          "publisher": "Crystallography Open Database",
+          "url": "https://www.crystallography.net/cod/9008468.html",
+          "says": "Fm-3m, a = 3.61496 Å, Cu at (0, 0, 0)."
+        },
+        {
+          "title": "COD 9008536: α-iron at 298 K, a = 2.8665 Å (Wyckoff 1963)",
+          "publisher": "Crystallography Open Database",
+          "url": "https://www.crystallography.net/cod/9008536.html",
+          "says": "Im-3m, a = 2.8665 Å, Fe at (0, 0, 0)."
+        },
+        {
+          "title": "COD 9008506: magnesium, a = 3.20927 Å, c = 5.21033 Å (Wyckoff 1963)",
+          "publisher": "Crystallography Open Database",
+          "url": "https://www.crystallography.net/cod/9008506.html",
+          "says": "P6₃/mmc, Mg at (⅓, ⅔, ¼)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/lat.spec.mjs: the cells are the published ones",
+      "note": ""
+    },
+    {
+      "claim": "Bonds join nearest neighbors at their real lengths: diamond 1.544 Å (4 each), graphite 1.423 Å in the layers (3 each), copper 2.556 Å (12), iron 2.482 Å (8), magnesium 3.21 and 3.20 Å (12).",
+      "how": "findBonds joins atoms of the listed kinds whose distance is within a few hundredths of an ångström of the bond length computed from the cell.",
+      "where": "src/lattice/cells.js:findBonds",
+      "sources": [],
+      "verdict": "correct",
+      "test": "tests/lat.spec.mjs: bond lengths and coordination",
+      "note": "For the metals, the sticks are contacts between neighbors (metallic bonding is not directional)."
+    },
+    {
+      "claim": "Atoms have true relative radii: in the metals, diamond and graphite, neighbors touch (half the neighbor distance); in ice, the covalent radii of O (0.66 Å) and H (0.31 Å).",
+      "how": "Each crystal's radius table; the bonds view shrinks every atom by the same factor (2.5) about its own center.",
+      "where": "src/lattice/cells.js:CRYSTALS",
+      "sources": [
+        {
+          "title": "Covalent radii revisited (B. Cordero et al., Dalton Trans., 2832–2838, 2008)",
+          "publisher": "Royal Society of Chemistry",
+          "url": "https://doi.org/10.1039/B801115J",
+          "says": "Covalent radii: H 0.31 Å, C(sp3) 0.76 Å, O 0.66 Å."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/lat.spec.mjs: true relative radii",
+      "note": "Graphite's spheres use half the in-plane bond, so the layers show the real 3.36 Å gap between them."
+    },
+    {
+      "claim": "Ice's hydrogens follow the ice rules: two on each oxygen, one on each O–O line, 1.00 Å from their oxygen.",
+      "how": "An Euler circuit on the periodic 6 × 6 × 6 network of oxygens (every oxygen has four neighbors) gives each O–O line's hydrogen to the oxygen the walk leaves from: each oxygen is left twice. Random turns give one of the many disordered arrangements of real ice. 1.00 Å is the distance from O1 to the file's H1 site.",
+      "where": "src/lattice/cells.js:iceHydrogens",
+      "sources": [
+        {
+          "title": "COD 1538173",
+          "publisher": "Crystallography Open Database",
+          "url": "https://www.crystallography.net/cod/1538173.html",
+          "says": "O1 z = 0.0618 and H1 z = 0.198 on the same c-axis line: (0.198 − 0.0618) × 7.346 Å = 1.00 Å."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/lat.spec.mjs: ice",
+      "note": "The cell's file shows each hydrogen site half full (the average); the toy shows one real arrangement."
+    },
+    {
+      "claim": "Thermal motion: each atom's Gaussian has the published mean-square displacement, U = B / 8π², at 293 K for diamond and the metals, Trucano and Chen's anisotropic U for graphite, and the 81 K values for ice.",
+      "how": "One splat per atom whose sizes along x, y and z are √U (or 5√U when magnified): the Debye–Waller distribution of the atom's center, which is a Gaussian.",
+      "where": "src/packs/lattices.js:buildUnitCells",
+      "sources": [
+        {
+          "title": "Debye–Waller factors and absorptive scattering factors of elemental crystals (L.-M. Peng, G. Ren, S. L. Dudarev and M. J. Whelan, Acta Cryst. A52, 456–470, 1996)",
+          "publisher": "International Union of Crystallography",
+          "url": "https://rengroup.lbl.gov/page5/assets/1996-ACTA-A2.pdf",
+          "says": "Tables 6, 8, 19 and 22, at 293.0 K: B = 0.1435 Å² for C (diamond), 1.8122 for Mg, 0.3250 for Fe (b.c.c.), 0.5505 for Cu."
+        },
+        {
+          "title": "COD 1572227: ice Ih at 81.15 K (IUCrJ 11, 2024)",
+          "publisher": "Crystallography Open Database",
+          "url": "https://www.crystallography.net/cod/1572227.html",
+          "says": "O1 Uani (U11 0.010, U22 0.0065, U33 0.0058; Ueq 0.008 Å²); H Uiso 0.026 and 0.025 Å²."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/lat.spec.mjs: thermal motion",
+      "note": "Graphite's U is from room temperature; ice's from 81 K (the only anisotropic set found in COD); said in the About text."
+    }
+  ],
+  "simplified": [
+    "The atoms are hard spheres; real electron clouds have no edge.",
+    "The bonds view shrinks every atom by the same factor so the sticks show; the sticks between metal atoms mark neighbors in contact, not covalent bonds.",
+    "Ice's hydrogens are one random arrangement allowed by the ice rules, repeating every six cells.",
+    "In the thermal view, each Gaussian stands for where the atom's center is likely to be at an instant; the toy does not animate the vibration.",
+    "The colors are chosen for each material, not measured."
+  ],
+  "fixes": []
+}

@@ -7,6 +7,7 @@ import * as pc from "../../pc.js";
 import { GpuMpm, packColliders } from "./mpm.js";
 import { LIQUIDS, unit3 } from "../sim.js";
 import { GpuDiffuse } from "./diffuse.js";
+import { PHONE_ENV } from "../phone.js";
 
 // Cell size (recipe units, for a recipe unit of 0.33 m) and the most
 // substeps a frame may take, per tier. The particle spacing is half a cell
@@ -91,12 +92,16 @@ function domainOf(spec) {
 }
 
 export class GpuLiquid {
-  constructor(recipeSpec, { device, profile = "high", gravity, seed = 1, unit = 0.1 }) {
+  constructor(
+    recipeSpec,
+    { device, profile = "high", gravity, seed = 1, unit = 0.1, phone = false },
+  ) {
     // A recipe's `gpu` settings override the rest on this solver (a pool,
     // ball or wall friction sized for its finer grid); the CPU keeps the rest.
     const spec = recipeSpec.gpu ? { ...recipeSpec, ...recipeSpec.gpu } : recipeSpec;
     const preset = LIQUIDS[spec.preset] || LIQUIDS.water;
-    const tier = GPU_TIERS[profile] || GPU_TIERS.high;
+    // (r7: the phone envelope swaps in a smaller cell count and particle cap)
+    const tier = { ...(GPU_TIERS[profile] || GPU_TIERS.high), ...(phone ? PHONE_ENV.gpu : null) };
     this.spec = spec;
     this.preset = preset;
     this.kind = "liquid";
@@ -160,7 +165,9 @@ export class GpuLiquid {
     this.diffuse = new GpuDiffuse(this, { foam, fizz, breakup, cap });
     // (fillShare: how much of the budget the starting pool may take, leaving
     // room for what a tap adds, such as the splash's dropped ball)
-    if (spec.fill) this.fill(spec.fill, { count: Math.floor(this.cap * (spec.fillShare ?? 1)) });
+    // (a lava's starting pool has long since crusted over: r6)
+    const fillAge = spec.fillAge ?? (spec.preset === "lava" ? 8 : 0);
+    if (spec.fill) this.fill(spec.fill, { count: Math.floor(this.cap * (spec.fillShare ?? 1)), age: fillAge }); // prettier-ignore
   }
 
   get n() {
@@ -187,7 +194,8 @@ export class GpuLiquid {
     );
   }
 
-  add(pts, vel) {
+  // (age: seconds since it left the spout, for a lava's cooling)
+  add(pts, vel, age = 0) {
     if (!pts.length) return 0;
     const g = new Float32Array(pts.length);
     for (let i = 0; i < pts.length; i += 3) {
@@ -198,12 +206,12 @@ export class GpuLiquid {
     }
     const v = vel ? new Float32Array(vel.length) : null;
     if (vel) for (let i = 0; i < vel.length; i++) v[i] = vel[i] / this.h;
-    return this.sim.add(g, v);
+    return this.sim.add(g, v, 0, age);
   }
 
   // As Liquid.fill: { box }, { cylinder }, { sphere }; clipped by below/above;
   // places inside a collider are skipped.
-  fill(region, { count = Infinity, vel = [0, 0, 0] } = {}) {
+  fill(region, { count = Infinity, vel = [0, 0, 0], age = 0 } = {}) {
     const d = this.d;
     let lo;
     let hi;
@@ -218,9 +226,16 @@ export class GpuLiquid {
       inside = (x, y, z) => Math.hypot(x - c.at[0], z - c.at[2]) <= c.radius;
     } else if (region.sphere) {
       const c = region.sphere;
-      lo = c.at.map((v) => v - c.radius);
-      hi = c.at.map((v) => v + c.radius);
-      inside = (x, y, z) => Math.hypot(x - c.at[0], y - c.at[1], z - c.at[2]) <= c.radius;
+      // (shape: [x, top, z, bottom] radii as fractions, a drop's shape: r6)
+      const sh = c.shape || [1, 1, 1, 1];
+      const ext = Math.max(...sh);
+      lo = c.at.map((v) => v - c.radius * ext);
+      hi = c.at.map((v) => v + c.radius * ext);
+      inside = (x, y, z) => {
+        const dy = y - c.at[1];
+        const sy = dy > 0 ? sh[1] : sh[3];
+        return Math.hypot((x - c.at[0]) / sh[0], dy / sy, (z - c.at[2]) / sh[2]) <= c.radius;
+      };
     } else return 0;
     const pts = [];
     const vs = [];
@@ -237,7 +252,7 @@ export class GpuLiquid {
           pts.push(jx, y, jz);
           vs.push(vel[0], vel[1], vel[2]);
         }
-    return this.add(pts, vs);
+    return this.add(pts, vs, age);
   }
 
   // A rough solid test for fills (glass walls and bottoms, bowls).
@@ -264,7 +279,7 @@ export class GpuLiquid {
     if (o) [at, radius, vel] = [o.at ?? at, o.radius ?? radius, o.vel ?? vel];
     const want = Math.floor(((4 / 3) * Math.PI * radius ** 3) / this.d ** 3);
     if (this.cap - this.n < want) this.trimTop(want - (this.cap - this.n));
-    return this.fill({ sphere: { at, radius } }, { vel });
+    return this.fill({ sphere: { at, radius, shape: o?.shape } }, { vel });
   }
 
   // Makes room at the end (the GPU keeps no order; the last ones go).

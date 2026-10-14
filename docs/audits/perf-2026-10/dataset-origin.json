@@ -1,0 +1,31 @@
+{
+  "at": "2026-10-03T02:16:48.400434+00:00",
+  "excludedDuplicateDumps": [
+    {
+      "file": "phone.json",
+      "bytes": 36244037,
+      "sha256": "940625d93f491263ddc85b1360a2f6756d7486be32ebcb4309ebda0fa5e3ac47",
+      "purpose": "retained matrix collector dump"
+    },
+    {
+      "file": "desktop.json",
+      "bytes": 74501726,
+      "sha256": "9c75e4cc9607f957e008b06002eb103c38483cf88fe231231c50efc56d20241f",
+      "purpose": "retained matrix collector dump"
+    },
+    {
+      "file": "pilot-phone.json",
+      "bytes": 281447,
+      "sha256": "b03708a1a8fef3e4dc7587f6d43be5a4c2fd61ef9f9c225057e977e6de459a59",
+      "purpose": "excluded preflight/pilot"
+    },
+    {
+      "file": "preflight-interrupted.json",
+      "bytes": 121436,
+      "sha256": "5be99559d37465f8aaf1a3c6419d016845aab7f96e4469d7cfd0a8350ef0b364",
+      "purpose": "excluded preflight/pilot"
+    }
+  ],
+  "canonicalFiles": ["measurements.json", "network.csv", "frame-samples.csv", "frame-series.json"],
+  "note": "Required metric snapshots, frame interval vectors and network observations were extracted into canonical files. Duplicate collector dumps and preflight attempts were excluded from the commit; the exact interval-vector comparison and its CSV hash are recorded in validation.json."
+}

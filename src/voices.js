@@ -1,4 +1,4 @@
-// The voice library: small synthesised instruments and noises that a toy's
+// The voice library: small synthesized instruments and noises that a toy's
 // sound spec plays (no audio files). Pure WebAudio, so it runs in a live
 // AudioContext and in an OfflineAudioContext (tools/sound-check.mjs). Nothing
 // here touches the page; src/sound.js owns the context and the on/off switch.
@@ -274,7 +274,7 @@ function grains(ctx, out, t, { n = 8, dur = 0.4, accel = 0, grain }) {
   let at = 0;
   for (let i = 0; i < n; i++) {
     const r = Math.random();
-    // accel > 0 packs the events towards the start (a burst that thins out).
+    // accel > 0 packs the events toward the start (a burst that thins out).
     const u = (i + 0.5 * Math.random()) / n;
     at = dur * (accel >= 0 ? u ** (1 + accel) : 1 - (1 - u) ** (1 - accel));
     grain(t + at, i, r);
@@ -1758,7 +1758,7 @@ export function playSpec(ctx, out, t, spec, { pitch = 1, raw = false, pick = nul
 }
 
 // ---- Sound B (lane Sound B, September 30, 2026) -----------------------------------
-// Real-world sound effects, synthesised, for the owner's sound review of
+// Real-world sound effects, synthesized, for the owner's sound review of
 // September 28 (docs/PACKS.md 7e): fire like the volcano's, leaves, pages,
 // bites, dice, engines, rotors, creaking wood, scissors, fireworks, hooves, a
 // crowd, water in a bottle, a fly, a frog, an owl, keys and more. Each aims at
@@ -2613,3 +2613,43 @@ Object.assign(LEVEL, {
   whoom: 2.43, jingle: 5.71, chessmove: 2.82, clockwork: 6.53, alarmbell: 4.19,
 }); // prettier-ignore
 VOICE_NAMES.push(...Object.keys(SOUND_B));
+
+// ---- Sound C (lane Sound C, October 2, 2026) --------------------------------------
+// For the owner's review of October 2 (tools/sound-review.json).
+const SOUND_C = {
+  glide: {
+    // A soft, continuous tone that falls the way a curve settles (from f to
+    // f * to, most of the fall early, as a loss curve drops), swelling in
+    // and fading out over 3 s * decay. Two sines a hair apart, lowpassed, so
+    // it sounds warm rather than electronic.
+    f: 660,
+    to: 0.5,
+    play: (c, o, t, p) => {
+      const d = 3 * p.decay;
+      const lp = c.createBiquadFilter();
+      lp.type = "lowpass";
+      lp.frequency.value = p.f * 2.5;
+      lp.Q.value = 0.5;
+      const g = c.createGain();
+      g.gain.setValueAtTime(0, t);
+      g.gain.linearRampToValueAtTime(0.3 * p.vol, t + Math.min(0.5, d * 0.15));
+      g.gain.setValueAtTime(0.3 * p.vol, t + d * 0.7);
+      g.gain.linearRampToValueAtTime(0, t + d);
+      lp.connect(g).connect(o);
+      for (const cents of [-4, 4]) {
+        const s = c.createOscillator();
+        s.frequency.setValueAtTime(p.f, t);
+        s.frequency.setTargetAtTime(Math.max(20, p.f * p.to), t, d * 0.22);
+        s.detune.value = cents;
+        s.connect(lp);
+        s.start(t);
+        s.stop(t + d + 0.05);
+      }
+      return d;
+    },
+  },
+};
+Object.assign(VOICES, SOUND_C);
+// Levels (node tools/sound-check.mjs --voices).
+Object.assign(LEVEL, { glide: 0.9 });
+VOICE_NAMES.push(...Object.keys(SOUND_C));

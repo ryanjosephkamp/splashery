@@ -57,7 +57,7 @@ function fired(m, key, v) {
 }
 
 // Fake lighting (splats are unlit): a soft key light from the upper left
-// front and a highlight towards the default camera.
+// front and a highlight toward the default camera.
 const LIGHT = unit([-0.45, 0.8, 0.45]);
 const VIEW = unit([0.5, 0.3, 0.82]);
 const HALF = unit(add(LIGHT, VIEW));
@@ -265,6 +265,131 @@ function tangle(rand, n, r, center = [0, 0, 0]) {
     pts.push(add(center, p));
   }
   return spline(pts);
+}
+
+// ---- Hands-on (lane Hands-on H4) -------------------------------------------------------
+
+// A grip with no part of its own (a slider the finger pulls), whose value
+// the toy's drive and parts follow.
+const grip = (o) => ({ type: "slider", pivot: [0, 0, 0], gravity: false, min: 0, sound: () => null, ...o }); // prettier-ignore
+
+// The bacterium pulled apart along its rod: both halves slide out and the
+// middle pinches; past the pinch it stays two cells (until ↺).
+function bacteriumJoints(d) {
+  if (!d) return [];
+  const j = grip({ name: "pull", axis: BAC.axis, max: 0.3, spring: 22, damping: 2.4, bounce: 0.2, pos: [0, 0, 0], pick: [1.1, 0.6, 0.6] }); // prettier-ignore
+  j.also = (v, parts) => {
+    if (!d.h4?.moved) j.rest = 0;
+    else if (v > 0.2) j.rest = 0.26; // divided: the daughters stay apart
+    d.h4 = { ...d.h4, pull: v };
+    const a = Math.min(1, v / BAC.apart);
+    parts.top = { offset: mul(BAC.axis, v), angle: -0.14 * a };
+    parts.bottom = { offset: mul(BAC.axis, -v), angle: -0.14 * a };
+  };
+  return [j];
+}
+
+// The DNA's strands pulled apart near the top: how far the finger pulls
+// sideways sets how far it is unzipped. As it opens, the helix turns (at
+// most a quarter turn) so the fork opens across the view, left and right,
+// and its strands peel wider than the tap's (the owner's notes of October 9,
+// 2026: he couldn't see it unzip).
+function dnaJoints(d) {
+  if (!d) return [];
+  const top = quatRotate(DNA.tilt, [0, DNA.height * 0.38, 0]);
+  return [
+    grip({ name: "unzip", axis: [1, 0, 0], max: DNA.pull, spring: 6, damping: 2.2, pos: top, pick: [0.75, 0.55, 0.75], also: (v, parts) => {
+      const u = v / DNA.pull;
+      const h = (d.h4 = { ...d.h4, u });
+      Object.assign(parts, dnaParts(dnaTurn(h, u), u, DNA.open * DNA.peel));
+    } }), // prettier-ignore
+  ];
+}
+
+// The DNA's turn while the hand has it (lane Hands-on H4): as a pull opens
+// it, the helix turns (at most a quarter turn) so the fork opens across the
+// view, and while it is open it stops spinning. That turn is kept when it
+// zips back (the strands stay on their sides: the owner's note of October
+// 9, 2026), and the helix spins on from there. `h` is the build's shared
+// state (`twist`, the drive's own turn); returns the turn to draw.
+function dnaTurn(h, u) {
+  const live = h.twist ?? 0;
+  let last = h.last ?? live;
+  h.last = live;
+  h.off ??= 0;
+  if (!h.pulling && u > 0.05) {
+    const at = live + h.off;
+    h.pulling = true;
+    h.goal = Math.round(at / Math.PI) * Math.PI - at;
+    h.prog = 0;
+    last = live;
+  }
+  if (h.pulling) {
+    h.prog = Math.max(h.prog, smoothstep(0, 0.35, u));
+    h.off -= (live - last) * smoothstep(0, 0.25, u); // open, it doesn't spin
+    if (u < 0.005) {
+      h.off += h.goal * h.prog;
+      h.pulling = false;
+      h.goal = 0;
+      h.prog = 0;
+    }
+  }
+  return dnaHandsTwist(h);
+}
+
+// The drive's turn plus what the hand has turned it (above).
+function dnaHandsTwist(h) {
+  return (h.twist ?? 0) + (h.off ?? 0) + (h.goal ?? 0) * (h.prog ?? 0);
+}
+
+// The chromosome's sister chromatids pulled apart at the waist (the tap's
+// own pull, channel 0, set by the finger).
+function chromosomeJoints(d) {
+  if (!d) return [];
+  return [
+    grip({ name: "split", axis: [1, 0, 0], max: 0.62, spring: 16, damping: 2.2, pos: [0, 0.25, 0], pick: [0.45, 0.4, 0.35], also: (v) => (d.h4 = { ...d.h4, pull: v / 0.62 }) }), // prettier-ignore
+  ];
+}
+
+// The white blood cell's catch: where the bacterium waits, and the cell's
+// pull on it once it is let go near: drawn to the cup's mouth, then in.
+const wbcBug = () => add(mul(WBC.E, 1.3), mul(WBC.side, 0.12));
+function wbcChase(b, h, ctx) {
+  if (b.held || b.pinned) return;
+  const { E, F } = WBC;
+  const mouth = mul(E, 1.1);
+  const r = len(b.pos);
+  if (r > 2.1 && !b.caught) {
+    for (let k = 0; k < 3; k++) b.vel[k] *= 1 - Math.min(1, 1.5 * h);
+    return;
+  }
+  // Drawn to the mouth, then (once there) in to F.
+  if (len(sub(b.pos, mouth)) < 0.18) b.caught = true;
+  const to = b.caught ? F : mouth;
+  for (let k = 0; k < 3; k++) b.vel[k] += (3.5 * (to[k] - b.pos[k]) - 3 * b.vel[k]) * h;
+}
+
+// The cell in Hands-on: it leans after the bacterium as it nears, the cup
+// reaches round it at the mouth, and once it is inside it is digested.
+function wbcHands(t, c, out, info) {
+  const { E, F } = WBC;
+  const m = mem(c);
+  const hp = info.hands.piece("bug");
+  const at = hp?.pos ?? wbcBug();
+  const near = 1 - band(len(sub(at, mul(E, 1.1))), 0.25, 0.9);
+  const inside = len(sub(at, F)) < 0.12;
+  if (inside && m.eatAt === undefined) m.eatAt = info.time;
+  if (!hp || (!hp.off && !inside)) m.eatAt = undefined;
+  const s = m.eatAt === undefined ? -1 : info.time - m.eatAt;
+  const cup = s < 0 ? ease(near) : 1 - ease(band(s, 0.3, 1.3));
+  const gather = s < 0 ? 0 : ease(band(s, 0.5, 1.4)) * (1 - ease(band(s, 2.2, 3.1)));
+  const digest = s < 0 ? 0 : ease(band(s, 1.2, 2.3));
+  out.morph = [cup, gather, s < 0 ? 0 : band(s, 0.8, 2.0)];
+  out.parts.bug = { offset: sub(at, F), angle: s < 0 ? Math.sin(info.time * 11) * 0.25 : 0, scale: 1 - 0.8 * digest, visible: digest < 0.98 ? 1 : 0 }; // prettier-ignore
+  out.glow = [1, 0.5, 0.8, 2.2];
+  // It leans after its catch.
+  const toward = unit(at);
+  out.body = { quat: quatAxisAngle([0.2, 1, 0.1], 0.3 * Math.sin(t * 0.3)), offset: mul(toward, 0.06 * near), squash: 0.02 * Math.sin(t * 1.3) }; // prettier-ignore
 }
 
 export const RECIPES = {
@@ -571,12 +696,12 @@ export const RECIPES = {
           color: "#c98f2a",
         });
       }
-      // Six bent tail fibres, like the legs of a lander.
+      // Six bent tail fibers, like the legs of a lander.
       for (let i = 0; i < 6; i++) {
         const a = (i / 6) * TAU + TAU / 12;
         const dir = [Math.cos(a), 0, Math.sin(a)];
         const at = (r, y) => [dir[0] * r, y, dir[2] * r];
-        // Each fibre swings up and out about its root when the phage fires.
+        // Each fiber swings up and out about its root when the phage fires.
         const leg = k.part(`leg${i}`, {
           pivot: at(hexR - 0.02, py),
           axis: [-Math.sin(a), 0, Math.cos(a)],
@@ -634,19 +759,26 @@ export const RECIPES = {
   // ---- Bacterium ----------------------------------------------------------------------
   bacterium: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#62b845" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#62b845" }],
     controls: [
       { key: "swim", label: "Swim", type: "slider", default: 0.5 },
       { key: "divide", label: "Divide", type: "pulse", ease: 5 },
     ],
     action: { key: "divide", label: "Divide in two" },
+    // Hands-on (lane Hands-on H4): pull its two ends apart: it stretches and
+    // pinches in at the middle; past the pinch it parts into two daughter
+    // cells, and let go early it snaps back whole.
+    hands: { watch: true, joints: (d) => bacteriumJoints(d) },
     // A tap plays binary fission: the cell pinches in at the middle as a
     // new wall closes across it, its DNA splits between the halves, and
     // the two daughter cells come apart with a little hinge. Then they
     // slide back together and merge.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const p = progress(c.divide);
-      const pinch = ease(band(p, 0.02, 0.3)) * (1 - ease(band(p, 0.74, 0.95)));
+      let pinch = ease(band(p, 0.02, 0.3)) * (1 - ease(band(p, 0.74, 0.95)));
+      const d = info.data;
+      if (d) d.h4 = { ...d.h4, moved: !!info.hands?.moved };
+      if (d?.h4?.pull !== undefined && info.hands?.moved) pinch = Math.max(pinch, Math.min(1, d.h4.pull / BAC.apart)); // prettier-ignore
       const apart = ease(band(p, 0.28, 0.44)) * (1 - ease(band(p, 0.6, 0.78)));
       out.morph = [pinch];
       const axis = BAC.axis;
@@ -663,6 +795,7 @@ export const RECIPES = {
       out.body = { offset: [0.03 * Math.sin(t * 0.7), 0.02 * Math.sin(t * 1.1), 0] };
     },
     build(k, o) {
+      k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what Hands-on and the drive share
       const { half, R, tilt } = BAC;
       const toWorld = (p) => quatRotate(tilt, p);
       const toLocal = (p) => quatRotate(BAC.untilt, p);
@@ -779,9 +912,12 @@ export const RECIPES = {
   // ---- Red blood cell ----------------------------------------------------------------
   "red-blood-cell": {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#d8323f" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#d8323f" }],
     controls: [{ key: "sickle", label: "Sickle", type: "pulse", ease: 4 }],
     action: { key: "sickle", label: "Sickle and relax" },
+    // Hands-on (lane Hands-on H4): pinch and bend the soft disc; let go and
+    // it springs back to its round shape with a wobble.
+    hands: { floor: -1.2, stretch: { radius: 0.55, max: 0.6, hz: 3.2, damping: 0.22 } },
     // A tap plays sickling at low oxygen: the soft disc stretches, curls
     // into a stiff crescent with pointed ends, holds, then relaxes back.
     drive(t, c, out) {
@@ -1445,16 +1581,23 @@ export const RECIPES = {
     ],
     controls: [{ key: "unzip", label: "Unzip", type: "pulse", ease: 5.5 }],
     action: { key: "unzip", label: "Unzip and zip" },
+    // Hands-on (lane Hands-on H4): pull the two strands apart near the top:
+    // they unzip pair by pair as far as you pull; let go and they zip back.
+    hands: { watch: true, joints: (d) => dnaJoints(d) },
     // A tap unzips the helix almost to its foot, the bases light up in pairs
     // as the fork passes them, and then it zips back up.
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const p = c.unzip > 0 ? 1 - c.unzip : 1;
       const open = 1 - Math.pow(1 - clamp(p / 0.3, 0, 1), 3);
-      const u = open * (1 - smoothstep(0.6, 0.95, p));
-      Object.assign(out.parts, dnaParts(t * 0.35, u));
+      let u = open * (1 - smoothstep(0.6, 0.95, p));
+      const d = info.data;
+      if (d) d.h4 = { ...d.h4, twist: t * 0.35 };
+      if (info.hands?.moved && d?.h4?.u !== undefined) u = Math.max(u, d.h4.u);
+      Object.assign(out.parts, dnaParts(d ? dnaHandsTwist(d.h4) : t * 0.35, u));
       out.grow = u * 1.05;
     },
     build(k, o) {
+      k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what Hands-on and the drive share
       const H = DNA.height;
       const lower = k.part("lower", { pivot: [0, 0, 0], axis: DNA.axis });
       const segPart = {};
@@ -1545,17 +1688,33 @@ export const RECIPES = {
   // ---- White blood cell --------------------------------------------------------------
   "white-blood-cell": {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#cdb4f0" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#cdb4f0" }],
     controls: [{ key: "eat", label: "Engulf", type: "pulse", ease: 5.6 }],
     action: { key: "eat", label: "Catch a bacterium" },
+    // Hands-on (lane Hands-on H4): a bacterium waits beside the cell. Drag it
+    // near and let go: the cell leans after it, reaches a cup round it,
+    // pulls it in and digests it.
+    hands: {
+      gravity: 0,
+      floor: -4,
+      area: 1.8,
+      place: false,
+      watch: true,
+      pieces: () => [{ name: "bug", pos: wbcBug(), solid: { type: "sphere", r: 0.12 }, mass: 0.3, pick: [0.3, 0.3, 0.3] }], // prettier-ignore
+      force: wbcChase,
+    },
     // A tap plays phagocytosis: a bacterium swims in from the side, the
     // cell reaches out a cup of membrane round it (channel 0), pulls it in
     // and closes over it; granules gather on it (channel 1) and it is
     // digested (glows, channel 2, and shrinks away).
-    drive(t, c, out) {
+    drive(t, c, out, info) {
       const p = progress(c.eat);
       const s = p * 5.6; // seconds since the tap
       const on = c.eat > 0;
+      if (!on && info.hands?.on) {
+        wbcHands(t, c, out, info);
+        return;
+      }
       const { E, F, side } = WBC;
       // The bacterium's path: in from beyond the edge, wriggling, into the
       // cup, then drawn inside.
@@ -1576,7 +1735,7 @@ export const RECIPES = {
         visible: on && digest < 0.98 ? 1 : 0,
       };
       out.glow = [1, 0.5, 0.8, 2.2];
-      // The cell leans towards its catch, and breathes gently at rest.
+      // The cell leans toward its catch, and breathes gently at rest.
       out.body = {
         quat: quatAxisAngle([0.2, 1, 0.1], 0.3 * Math.sin(t * 0.3) * (1 - 0.8 * c.eat)),
         offset: mul(E, 0.05 * cup),
@@ -1785,6 +1944,16 @@ export const RECIPES = {
     options: [{ key: "color", label: "Glass", type: "color", default: "#7fd6d0" }],
     controls: [{ key: "open", label: "Open", type: "pulse", ease: 4.4 }],
     action: { key: "open", label: "Glint and open" },
+    // Hands-on (lane Hands-on H4): lift the glass lid off its base, like a
+    // pillbox's; bring it back near and it clicks into place on it.
+    hands: {
+      gravity: 0,
+      floor: -3,
+      area: 1.6,
+      place: false,
+      pieces: () => [{ part: "lid", pos: mul(DIATOM_AXIS, 0.06), pivot: mul(DIATOM_AXIS, 0.06), quat: quatFromTo([0, 1, 0], DIATOM_AXIS), solid: { type: "ellipsoid", r: [1, 0.09, 1] }, mass: 1, damping: 2, angDamping: 3, pick: [1.05, 0.18, 1.05] }], // prettier-ignore
+      joints: [{ type: "socket", part: "lid", snap: 0.3 }],
+    },
     // A tap sends a glint of light across the glass (channel 0), then the
     // shell parts into its two halves, opening like a clam from its far
     // edge to show the golden cell inside; then it closes again.
@@ -1814,7 +1983,7 @@ export const RECIPES = {
       const across = unit(add(tip, mul(cross(VIEW, tip), -0.5)));
       const ribs = 24;
       // The glass pattern on a valve face: radial ribs, rings of pores and a
-      // clear centre. Returns null for a pore (a hole in the glass).
+      // clear center. Returns null for a pore (a hole in the glass).
       const valve = (r, a, top) => {
         const f = ((a / TAU) * ribs + 10) % 1;
         const ringW = 0.085;
@@ -1896,7 +2065,7 @@ export const RECIPES = {
   // ---- Tardigrade ---------------------------------------------------------------------
   tardigrade: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#e7c39b" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#e7c39b" }],
     controls: [{ key: "wiggle", label: "Wiggle", type: "pulse", ease: 2.5 }],
     action: { key: "wiggle", label: "Wiggle" },
     drive(t, c, out) {
@@ -2030,7 +2199,7 @@ export const RECIPES = {
           { id: "lily", label: "Lily" },
         ],
       },
-      { key: "color", label: "Colour", type: "color", default: "#f5c131" },
+      { key: "color", label: "Color", type: "color", default: "#f5c131" },
     ],
     controls: [{ key: "burst", label: "Burst", type: "pulse", ease: 3.8 }],
     action: { key: "burst", label: "Burst" },
@@ -2190,7 +2359,7 @@ export const RECIPES = {
     controls: [{ key: "regrow", label: "Regrow", type: "pulse", ease: 3.6 }],
     action: { key: "regrow", label: "Grow a new flake" },
     // A tap melts the arms back from their tips to the middle, then a new
-    // flake grows out from the centre, branch by branch: three patterns
+    // flake grows out from the center, branch by branch: three patterns
     // (parts), one after another, each tap.
     drive(t, c, out) {
       const p = progress(c.regrow);
@@ -2217,23 +2386,30 @@ export const RECIPES = {
   // ---- Chromosome ---------------------------------------------------------------------
   chromosome: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#8f6fe0" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#8f6fe0" }],
     controls: [{ key: "split", label: "Split", type: "pulse", ease: 4.6 }],
     action: { key: "split", label: "Pull apart" },
-    // A tap plays anaphase: spindle fibres reach in from two poles to the
+    // Hands-on (lane Hands-on H4): pull the two sister chromatids apart at
+    // the waist (their centromere leads, the arms trail); let go and they
+    // spring back together.
+    hands: { watch: true, joints: (d) => chromosomeJoints(d) },
+    // A tap plays anaphase: spindle fibers reach in from two poles to the
     // kinetochores and pull the sister chromatids apart (channel 0), each
     // led by its centromere with its arms trailing; then they come back
-    // together and the fibres let go.
-    drive(t, c, out) {
+    // together and the fibers let go.
+    drive(t, c, out, info) {
       const p = progress(c.split);
       const s = p * 4.6;
       const on = c.split > 0;
       out.morph = [ease(band(s, 0.45, 1.9)) * (1 - ease(band(s, 2.7, 4))) + 0.02 * Math.sin(t)];
+      const pull = info.hands?.moved ? info.data?.h4?.pull : undefined;
+      if (pull !== undefined) out.morph[0] = Math.max(out.morph[0], pull);
       out.parts.spindle = {
         visible: on ? ease(band(s, 0, 0.45)) * (1 - ease(band(s, 3.8, 4.5))) : 0,
       };
     },
     build(k, o) {
+      k.data = { ...k.data, h4: {} }; // lane Hands-on H4: what Hands-on and the drive share
       const col = o.color;
       // Each chromatid moves out to its side, most at its centromere (so its
       // arms trail behind in a V).
@@ -2302,7 +2478,7 @@ export const RECIPES = {
         to: (c) => pull(c.p, c.p[0] >= 0 ? 1 : -1, 0.38),
         color: (c) => litGloss("#ff6b8b", c.n, 0.4),
       });
-      // The spindle: a bright centrosome at each pole and fibres from it to
+      // The spindle: a bright centrosome at each pole and fibers from it to
       // the kinetochores, which shorten as they pull (hidden at rest).
       const spindle = k.part("spindle");
       for (const side of [-1, 1]) {
@@ -2335,7 +2511,7 @@ export const RECIPES = {
   mitochondrion: {
     alive: true,
     options: [
-      { key: "color", label: "Colour", type: "color", default: "#f08a4b" },
+      { key: "color", label: "Color", type: "color", default: "#f08a4b" },
       { key: "cutaway", label: "Cutaway", type: "switch", default: true },
     ],
     controls: [{ key: "power", label: "Power up", type: "pulse", ease: 4 }],
@@ -2366,7 +2542,7 @@ export const RECIPES = {
       k.fitMorphs = false; // the sparks fly out past the frame
       const half = 0.75;
       const R = 0.45;
-      // Lying across the view with the open side turned up towards the viewer.
+      // Lying across the view with the open side turned up toward the viewer.
       const q = frameQuat([0.92, 0.12, -0.38], [0.2, 0.85, 0.5]);
       const qi = [-q[0], -q[1], -q[2], q[3]];
       // Local frame: X along the length, Y up. The cut takes off the top.
@@ -2455,7 +2631,7 @@ export const RECIPES = {
         const a = k.rand() * TAU;
         const r = (R - 0.15) * Math.sqrt(k.rand());
         const lp = [Math.min(r * Math.cos(a), cutY - 0.02), x, r * Math.sin(a)];
-        // Out mostly through the cut (local +x, towards the viewer).
+        // Out mostly through the cut (local +x, toward the viewer).
         const d = unit([0.9 + 0.6 * k.rand(), (k.rand() * 2 - 1) * 0.9, (k.rand() * 2 - 1) * 1.1]);
         const go = add(lp, mul(d, 0.5 + 0.7 * k.rand()));
         sparks.push({ p: W(lp), to: W(go), channel: 1 + (i % 3), hot: k.rand() < 0.6 });
@@ -2478,7 +2654,7 @@ export const RECIPES = {
   // ---- Paramecium ---------------------------------------------------------------------
   paramecium: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#7fcb98" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#7fcb98" }],
     controls: [
       { key: "swim", label: "Swim", type: "slider", default: 0.5 },
       { key: "loop", label: "Loop", type: "pulse", ease: 4.2 },
@@ -2535,7 +2711,7 @@ export const RECIPES = {
           const stripe = Math.abs(Math.sin(Math.atan2(d[2], d[1]) * 16 + d[0] * 5)) > 0.8;
           let col2 = stripe ? shade(col, 0.85) : col;
           col2 = mix(col2, shade(col, 0.55), groove);
-          // Darker towards the outline, like a cell under the microscope.
+          // Darker toward the outline, like a cell under the microscope.
           const face = Math.abs(dot(c.ln, viewL));
           return litGloss(shade(col2, 0.62 + 0.45 * face), c.n, 0.3);
         },
@@ -2634,9 +2810,12 @@ export const RECIPES = {
   // ---- Amoeba -------------------------------------------------------------------------
   amoeba: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#9fb6ea" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#9fb6ea" }],
     controls: [{ key: "crawl", label: "Crawl", type: "pulse", ease: 5.2 }],
     action: { key: "crawl", label: "Crawl" },
+    // Hands-on (lane Physics): pull a pseudopod out; let go and it oozes back.
+    grab: { radius: 0.6, max: 0.85 },
+    pickAlpha: 0.1, // a press finds the see-through cell
     // A tap makes it crawl: a pseudopod pushes out to the right (channel 0)
     // and the cell oozes over into it, then one pushes out to the left
     // (channel 1) and it oozes back. At rest its pods stretch a little.
@@ -2789,6 +2968,10 @@ const DNA = (() => {
     y0: -height / 2 + 0.12,
     axis: quatRotate(tilt, [0, 1, 0]),
     open: 0.13,
+    // Hands-on: how far the finger pulls to open it fully, and how much
+    // wider its strands peel than the tap's.
+    pull: 0.45,
+    peel: 1.2,
   };
 })();
 
@@ -2809,7 +2992,7 @@ function dnaSide(s) {
 
 // Rigid transforms of the segments of one strand, unzipped by u, in the helix
 // frame: [{ pivot, quat, offset }].
-function dnaChain(s, u) {
+function dnaChain(s, u, open = DNA.open) {
   const axis = cross([0, 1, 0], dnaSide(s));
   const out = [];
   let prevQ = [0, 0, 0, 1];
@@ -2819,7 +3002,7 @@ function dnaChain(s, u) {
     const pivot = dnaStrand(s, dnaBound(j));
     // Where this joint has been carried by the segments below it.
     const moved = j === 0 ? pivot : add(prevMoved, quatRotate(prevQ, sub(pivot, prevPivot)));
-    const q = quatAxisAngle(axis, u * DNA.open * (j + 1));
+    const q = quatAxisAngle(axis, u * open * (j + 1));
     out.push({ pivot, quat: q, offset: sub(moved, pivot) });
     prevQ = q;
     prevPivot = pivot;
@@ -2841,13 +3024,13 @@ function dnaTip(s) {
 }
 
 // Part transforms for a twist angle and an unzip amount, in recipe coordinates.
-function dnaParts(twist, u) {
+function dnaParts(twist, u, open = DNA.open) {
   const T = DNA.tilt;
   const Ti = [-T[0], -T[1], -T[2], T[3]];
   const R = quatMul(T, quatMul(quatAxisAngle([0, 1, 0], twist), Ti));
   const parts = { lower: { quat: R } };
   for (const s of ["a", "b"]) {
-    dnaChain(s, u).forEach((seg, j) => {
+    dnaChain(s, u, open).forEach((seg, j) => {
       const pw = quatRotate(T, seg.pivot);
       const qw = quatMul(T, quatMul(seg.quat, Ti));
       const ow = quatRotate(T, seg.offset);
@@ -2905,7 +3088,7 @@ const BAC = (() => {
     tilt,
     untilt: [-tilt[0], -tilt[1], -tilt[2], tilt[3]],
     axis: quatRotate(tilt, [1, 0, 0]),
-    D: hd + Rd + 0.025, // a daughter's centre from the middle
+    D: hd + Rd + 0.025, // a daughter's center from the middle
     apart: 0.13, // how far each daughter slides out
   };
 })();
@@ -2954,9 +3137,9 @@ function inside(P) {
 // ---- Animal cell division -----------------------------------------------------------
 
 // The cell (radius about 1) divides along AXIS, across the view. Each half
-// becomes a daughter cell of radius Rd centred D from the middle; the
-// nucleus (centre nc, radius NR) splits into two of radius NRd at the
-// daughters' centres.
+// becomes a daughter cell of radius Rd centered D from the middle; the
+// nucleus (center nc, radius NR) splits into two of radius NRd at the
+// daughters' centers.
 const CELL = (() => {
   const Rd = 0.62;
   return {
@@ -2971,7 +3154,7 @@ const CELL = (() => {
 
 // A point of a sphere about `center` whose halves (across the division
 // axis) each become a whole sphere of `r0` times the point's distance,
-// centred `to` from the middle: the angle from the axis doubles, so the
+// centered `to` from the middle: the angle from the axis doubles, so the
 // rim between the halves closes into each new sphere's inner end.
 function halveSphere(P, center, scale, to) {
   const A = CELL.axis;
@@ -3017,7 +3200,7 @@ function cellInside(P) {
   return add(mul(A, sgn * CELL.D), off);
 }
 
-// The nucleus splits into two smaller ones at the daughters' centres.
+// The nucleus splits into two smaller ones at the daughters' centers.
 function nucleusSplit(P) {
   return halveSphere(P, CELL.nc, CELL.NRd / CELL.NR, CELL.D);
 }
@@ -3060,7 +3243,7 @@ function wbcCup(P) {
   const g = Math.acos(clamp(dot(d, E), -1, 1));
   const rim = Math.exp(-(((g - 0.6) / 0.3) ** 2));
   const dip = Math.exp(-((g / 0.32) ** 2));
-  const toAxis = sub(mul(E, dot(d, E)), d); // towards the cup's middle
+  const toAxis = sub(mul(E, dot(d, E)), d); // toward the cup's middle
   return add(P, add(mul(E, 0.44 * rim - 0.14 * dip), mul(toAxis, 0.38 * rim)));
 }
 
@@ -3081,11 +3264,11 @@ const VIRUS = (() => {
   };
 })();
 
-// The diatom's shell faces up and a little towards the view.
+// The diatom's shell faces up and a little toward the view.
 const DIATOM_AXIS = unit([0.15, 0.85, 0.5]);
 
 // The paramecium's loop: F is its front as seen on screen, N the side it
-// turns towards (turning about VIEW by a positive angle).
+// turns toward (turning about VIEW by a positive angle).
 const PARAMECIUM = (() => {
   const front = quatRotate(quatEuler(0, 31, 24), [1, 0, 0]);
   const F = unit(sub(front, mul(VIEW, dot(front, VIEW))));
@@ -3095,7 +3278,7 @@ const PARAMECIUM = (() => {
 // ---- Snowflake ----------------------------------------------------------------------
 
 // One six-armed flake of a style and variant, as a part. Each splat grows
-// in (kind "grow") by its distance from the centre, so the arms grow out
+// in (kind "grow") by its distance from the center, so the arms grow out
 // from the middle and melt back from their tips.
 function snowflake(k, style, variant, part) {
   const grow = {

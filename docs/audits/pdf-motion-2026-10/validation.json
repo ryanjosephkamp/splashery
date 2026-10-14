@@ -1,0 +1,24 @@
+{
+  "scope": "Structural payload checks and Poppler static rendering; native playback is separate.",
+  "strictParsedPdfs": 8,
+  "allUnder15MB": true,
+  "textPresentOnEveryPage": true,
+  "formFields": 66,
+  "distinctFieldFrames": 34,
+  "prcPayloadMatchesSource": true,
+  "prcBytes": 2413463,
+  "videoPayloadAndAttachmentMatchSource": true,
+  "video": {
+    "codec_name": "h264",
+    "width": 420,
+    "height": 420,
+    "r_frame_rate": "8/1",
+    "duration": "5.000000",
+    "nb_frames": "40",
+    "side_data_list": [{}]
+  },
+  "htmlAttachmentMatchesSource": true,
+  "linkTarget": "https://ryanjosephkamp.github.io/splashery/embed/?toy=grapes",
+  "pageFlipPages": 10,
+  "qrRasterDecode": "Run verify-qr.mjs separately."
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "strawberry",
+    "scene": "84df8849",
+    "labs": false,
+    "source": {
+      "title": "Strawberry",
+      "author": "Dany Bittel",
+      "source": "https://superspl.at/scene/84df8849",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+    }
+  },
+  {
+    "id": "bee",
+    "scene": "ae58ed2c",
+    "labs": false,
+    "source": {
+      "title": "Japanese Bee",
+      "author": "YUMA Co., Ltd.",
+      "source": "https://superspl.at/scene/ae58ed2c",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, spherical harmonics removed, turned upright, recentred and scaled."
+    }
+  },
+  {
+    "id": "bmx-bike",
+    "scene": "e95011f3",
+    "labs": true,
+    "source": {
+      "title": "BMX Bicycle - Enhanced",
+      "author": "Eric Cornwell",
+      "source": "https://superspl.at/scene/e95011f3",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file."
+    }
+  },
+  {
+    "id": "cave-lioness",
+    "scene": "7e4e9bcb",
+    "labs": true,
+    "source": {
+      "title": "Lioness (Panthera Spelaea)",
+      "author": "Spenser DIckerson",
+      "source": "https://superspl.at/scene/7e4e9bcb",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file."
+    }
+  },
+  {
+    "id": "toy-trex",
+    "scene": "d281a49d",
+    "labs": true,
+    "source": {
+      "title": "Tyrannosaurus Rex",
+      "author": "Alfred Duemlein",
+      "source": "https://superspl.at/scene/d281a49d",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "changes": "Converted, decimated, recentred and scaled. One band of spherical harmonics kept on the full file."
+    }
+  }
+]

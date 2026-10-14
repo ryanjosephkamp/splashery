@@ -12,6 +12,10 @@ import { TOYS, findToy } from "../src/toys.js";
 const APP = "/?renderer=webgl2&adapt=off&profile=mid";
 const FIX = "/tests/fixtures/pic/";
 
+// The test server's origin: SPLASHERY_PORT gives each local lane its own (docs/OPERATING.md, "Local
+// lanes"); everyone else keeps 4173, as playwright.config.mjs does.
+const ORIGIN = `http://127.0.0.1:${Number(process.env.SPLASHERY_PORT) || 4173}`;
+
 async function openLab(page, url = `${APP}&labs=1`) {
   await page.goto(url);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
@@ -43,7 +47,7 @@ async function open(page, name) {
         return { error: err.message };
       }
     },
-    name.startsWith("http") ? name : `http://127.0.0.1:4173${FIX}${name}`,
+    name.startsWith("http") ? name : `${ORIGIN}${FIX}${name}`,
   );
 }
 
@@ -242,7 +246,10 @@ test.describe("the Picture lab", () => {
     await openLab(page);
     expect(await open(page, "photo.jpg")).toMatchObject({ kind: "image" });
     // Another origin without CORS (localhost is not 127.0.0.1 to the browser).
-    const refused = await open(page, "http://localhost:4173/tests/fixtures/pic/photo.jpg");
+    const refused = await open(
+      page,
+      `${ORIGIN.replace("127.0.0.1", "localhost")}/tests/fixtures/pic/photo.jpg`,
+    );
     expect(refused.error).toMatch(/would not share the file/);
     expect((await open(page, "locked.pdf")).error).toMatch(/protected by a password/);
     expect((await open(page, "http://example.com/a.pdf")).error).toMatch(/Only https/);
@@ -250,7 +257,10 @@ test.describe("the Picture lab", () => {
     expect(await page.evaluate(() => window.__splashery.player.pictures.info().kind)).toBe("image");
     // The panel shows a message for a refused address.
     await page.click("#tab-play");
-    await page.fill("#toy-media-url", "http://localhost:4173/tests/fixtures/pic/photo.jpg");
+    await page.fill(
+      "#toy-media-url",
+      `${ORIGIN.replace("127.0.0.1", "localhost")}/tests/fixtures/pic/photo.jpg`,
+    );
     await page.click("#toy-media-go");
     await expect(page.locator("#toy-input .warning")).toContainText("would not share");
   });
@@ -263,7 +273,7 @@ test.describe("the Picture lab", () => {
     await waitSheet(page);
     await page.evaluate(() => window.__splashery.player.pictures.go(1));
     const scene = await page.evaluate(() => window.__splashery.exportScene());
-    expect(scene.toy.media).toEqual({ url: `http://127.0.0.1:4173${FIX}article.pdf`, page: 1 });
+    expect(scene.toy.media).toEqual({ url: `${ORIGIN}${FIX}article.pdf`, page: 1 });
     // The embed rebuilds it from the address, on the same page.
     const hash = await page.evaluate(async (s) => (await import("/src/codec.js")).encodeSceneHash(s), scene); // prettier-ignore
     await page.goto(`/embed/?renderer=webgl2#s=${hash}`);

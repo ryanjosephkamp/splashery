@@ -1,0 +1,1090 @@
+{
+  "shelves": [
+    {
+      "id": "food",
+      "label": "Food"
+    },
+    {
+      "id": "balls",
+      "label": "Balls"
+    },
+    {
+      "id": "shapes",
+      "label": "Shapes"
+    },
+    {
+      "id": "gems",
+      "label": "Gems"
+    },
+    {
+      "id": "toys",
+      "label": "Toys"
+    },
+    {
+      "id": "music",
+      "label": "Instruments"
+    }
+  ],
+  "toys": [
+    {
+      "id": "ice-cream",
+      "label": "Ice cream",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.133,
+        "span": 0.75,
+        "edge": 0.044,
+        "motion": 0.005
+      }
+    },
+    {
+      "id": "watermelon",
+      "label": "Watermelon",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.211,
+        "span": 0.646,
+        "edge": 0.042,
+        "motion": 0.041
+      }
+    },
+    {
+      "id": "birthday-cake",
+      "label": "Birthday cake",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.299,
+        "span": 0.708,
+        "edge": 0.038,
+        "motion": 0.003
+      }
+    },
+    {
+      "id": "popcorn",
+      "label": "Popcorn",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.316,
+        "span": 0.729,
+        "edge": 0.055,
+        "motion": 0.009
+      }
+    },
+    {
+      "id": "jelly",
+      "label": "Jelly",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.262,
+        "span": 0.708,
+        "edge": 0.046,
+        "motion": 0.022
+      }
+    },
+    {
+      "id": "pancakes",
+      "label": "Pancakes",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.261,
+        "span": 0.708,
+        "edge": 0.035,
+        "motion": 0.024
+      }
+    },
+    {
+      "id": "cupcake",
+      "label": "Cupcake",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.132,
+        "span": 0.583,
+        "edge": 0.038,
+        "motion": 0.002
+      }
+    },
+    {
+      "id": "lollipop",
+      "label": "Lollipop",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.205,
+        "span": 0.708,
+        "edge": 0.064,
+        "motion": 0.071
+      }
+    },
+    {
+      "id": "candy-cane",
+      "label": "Candy cane",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.172,
+        "span": 0.75,
+        "edge": 0.074,
+        "motion": 0.024
+      }
+    },
+    {
+      "id": "macarons",
+      "label": "Macarons",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.232,
+        "span": 0.615,
+        "edge": 0.042,
+        "motion": 0.038
+      }
+    },
+    {
+      "id": "donut",
+      "label": "Donut",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.212,
+        "span": 0.604,
+        "edge": 0.04,
+        "motion": 0.032
+      }
+    },
+    {
+      "id": "gummy-bear",
+      "label": "Gummy bear",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.253,
+        "span": 0.771,
+        "edge": 0.025,
+        "motion": 0.019
+      }
+    },
+    {
+      "id": "pretzel",
+      "label": "Pretzel",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.182,
+        "span": 0.677,
+        "edge": 0.051,
+        "motion": 0.015
+      }
+    },
+    {
+      "id": "croissant",
+      "label": "Croissant",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.292,
+        "span": 0.823,
+        "edge": 0.032,
+        "motion": 0.012
+      }
+    },
+    {
+      "id": "pizza",
+      "label": "Pizza",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.251,
+        "span": 0.667,
+        "edge": 0.048,
+        "motion": 0.002
+      }
+    },
+    {
+      "id": "burger",
+      "label": "Burger",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.341,
+        "span": 0.75,
+        "edge": 0.035,
+        "motion": 0.041
+      }
+    },
+    {
+      "id": "sushi",
+      "label": "Sushi",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.206,
+        "span": 0.813,
+        "edge": 0.047,
+        "motion": 0.019
+      }
+    },
+    {
+      "id": "taco",
+      "label": "Taco",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.23,
+        "span": 0.771,
+        "edge": 0.04,
+        "motion": 0.01
+      }
+    },
+    {
+      "id": "egg",
+      "label": "Boiled egg",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.339,
+        "span": 0.771,
+        "edge": 0.037,
+        "motion": 0.007
+      }
+    },
+    {
+      "id": "coffee",
+      "label": "Coffee",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.347,
+        "span": 0.771,
+        "edge": 0.031,
+        "motion": 0.025
+      }
+    },
+    {
+      "id": "apple",
+      "label": "Apple",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.354,
+        "span": 0.719,
+        "edge": 0.024,
+        "motion": 0.002
+      }
+    },
+    {
+      "id": "banana",
+      "label": "Bananas",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.167,
+        "span": 0.781,
+        "edge": 0.045,
+        "motion": 0.039
+      }
+    },
+    {
+      "id": "kiwi",
+      "label": "Kiwi",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.195,
+        "span": 0.573,
+        "edge": 0.047,
+        "motion": 0.008
+      }
+    },
+    {
+      "id": "pineapple",
+      "label": "Pineapple",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.151,
+        "span": 0.625,
+        "edge": 0.059,
+        "motion": 0.021
+      }
+    },
+    {
+      "id": "cherries",
+      "label": "Cherries",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.141,
+        "span": 0.688,
+        "edge": 0.039,
+        "motion": 0.024
+      }
+    },
+    {
+      "id": "avocado",
+      "label": "Avocado",
+      "shelf": "food",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.238,
+        "span": 0.604,
+        "edge": 0.035,
+        "motion": 0.015
+      }
+    },
+    {
+      "id": "basketball",
+      "label": "Basketball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.289,
+        "span": 0.625,
+        "edge": 0.032,
+        "motion": 0.112
+      }
+    },
+    {
+      "id": "soccer-ball",
+      "label": "Soccer ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.258,
+        "span": 0.625,
+        "edge": 0.04,
+        "motion": 0.139
+      }
+    },
+    {
+      "id": "american-football",
+      "label": "American football",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.153,
+        "span": 0.552,
+        "edge": 0.025,
+        "motion": 0.029
+      }
+    },
+    {
+      "id": "tennis-ball",
+      "label": "Tennis ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.292,
+        "span": 0.625,
+        "edge": 0.021,
+        "motion": 0.033
+      }
+    },
+    {
+      "id": "baseball",
+      "label": "Baseball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.293,
+        "span": 0.625,
+        "edge": 0.028,
+        "motion": 0.027
+      }
+    },
+    {
+      "id": "softball",
+      "label": "Softball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.293,
+        "span": 0.625,
+        "edge": 0.025,
+        "motion": 0.036
+      }
+    },
+    {
+      "id": "beach-ball",
+      "label": "Beach ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.294,
+        "span": 0.625,
+        "edge": 0.02,
+        "motion": 0.052
+      }
+    },
+    {
+      "id": "golf-ball",
+      "label": "Golf ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "edge contrast 0.019 is below 0.02"
+      }
+    },
+    {
+      "id": "rugby-ball",
+      "label": "Rugby ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.159,
+        "span": 0.531,
+        "edge": 0.035,
+        "motion": 0.054
+      }
+    },
+    {
+      "id": "volleyball",
+      "label": "Volleyball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.295,
+        "span": 0.625,
+        "edge": 0.03,
+        "motion": 0.079
+      }
+    },
+    {
+      "id": "water-polo-ball",
+      "label": "Water polo ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.293,
+        "span": 0.625,
+        "edge": 0.052,
+        "motion": 0.098
+      }
+    },
+    {
+      "id": "ping-pong-ball",
+      "label": "Ping-pong ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "edge contrast 0.019 is below 0.02"
+      }
+    },
+    {
+      "id": "cricket-ball",
+      "label": "Cricket ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "edge contrast 0.018 is below 0.02"
+      }
+    },
+    {
+      "id": "bowling-ball",
+      "label": "Bowling ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.293,
+        "span": 0.625,
+        "edge": 0.063,
+        "motion": 0.074
+      }
+    },
+    {
+      "id": "pool-ball",
+      "label": "Pool ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.18,
+        "span": 0.583,
+        "edge": 0.028,
+        "motion": 0.023
+      }
+    },
+    {
+      "id": "pickleball",
+      "label": "Pickleball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.295,
+        "span": 0.625,
+        "edge": 0.033,
+        "motion": 0.047
+      }
+    },
+    {
+      "id": "dodgeball",
+      "label": "Dodgeball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "edge contrast 0.016 is below 0.02"
+      }
+    },
+    {
+      "id": "medicine-ball",
+      "label": "Medicine ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.293,
+        "span": 0.625,
+        "edge": 0.033,
+        "motion": 0.03
+      }
+    },
+    {
+      "id": "lacrosse-ball",
+      "label": "Lacrosse ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "edge contrast 0.019 is below 0.02"
+      }
+    },
+    {
+      "id": "squash-ball",
+      "label": "Squash ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "edge contrast 0.017 is below 0.02"
+      }
+    },
+    {
+      "id": "bouncy-ball",
+      "label": "Bouncy ball",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.294,
+        "span": 0.625,
+        "edge": 0.059,
+        "motion": 0.148
+      }
+    },
+    {
+      "id": "marble",
+      "label": "Marble",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.293,
+        "span": 0.625,
+        "edge": 0.039,
+        "motion": 0.079
+      }
+    },
+    {
+      "id": "hockey-puck",
+      "label": "Hockey puck",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "subject fills only 9% of the frame; edge contrast 0.01 is below 0.02; motion 0 is below 0.0015"
+      }
+    },
+    {
+      "id": "shuttlecock",
+      "label": "Shuttlecock",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.191,
+        "span": 0.625,
+        "edge": 0.033,
+        "motion": 0.054
+      }
+    },
+    {
+      "id": "flying-disc",
+      "label": "Flying disc",
+      "shelf": "balls",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.112,
+        "span": 0.604,
+        "edge": 0.034,
+        "motion": 0.041
+      }
+    },
+    {
+      "id": "torus",
+      "label": "Torus",
+      "shelf": "shapes",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.204,
+        "span": 0.604,
+        "edge": 0.029,
+        "motion": 0.032
+      }
+    },
+    {
+      "id": "blob",
+      "label": "Jelly blob",
+      "shelf": "shapes",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.269,
+        "span": 0.604,
+        "edge": 0.03,
+        "motion": 0.026
+      }
+    },
+    {
+      "id": "knot",
+      "label": "Neon knot",
+      "shelf": "shapes",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.197,
+        "span": 0.594,
+        "edge": 0.044,
+        "motion": 0.053
+      }
+    },
+    {
+      "id": "diamond",
+      "label": "Diamond",
+      "shelf": "gems",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.154,
+        "span": 0.604,
+        "edge": 0.035,
+        "motion": 0.005
+      }
+    },
+    {
+      "id": "ruby",
+      "label": "Ruby",
+      "shelf": "gems",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "subject fills only 7% of the frame; subject spans only 43% of the grid"
+      }
+    },
+    {
+      "id": "emerald",
+      "label": "Emerald",
+      "shelf": "gems",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "motion 0.001 is below 0.0015"
+      }
+    },
+    {
+      "id": "amethyst-geode",
+      "label": "Amethyst geode",
+      "shelf": "gems",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.153,
+        "span": 0.615,
+        "edge": 0.041,
+        "motion": 0.009
+      }
+    },
+    {
+      "id": "sapphire",
+      "label": "Sapphire",
+      "shelf": "gems",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.156,
+        "span": 0.563,
+        "edge": 0.032,
+        "motion": 0.004
+      }
+    },
+    {
+      "id": "quartz-cluster",
+      "label": "Quartz cluster",
+      "shelf": "gems",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.156,
+        "span": 0.521,
+        "edge": 0.038,
+        "motion": 0.002
+      }
+    },
+    {
+      "id": "opal",
+      "label": "Opal",
+      "shelf": "gems",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.166,
+        "span": 0.615,
+        "edge": 0.031,
+        "motion": 0.002
+      }
+    },
+    {
+      "id": "pearl",
+      "label": "Pearl",
+      "shelf": "gems",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.198,
+        "span": 0.604,
+        "edge": 0.045,
+        "motion": 0.008
+      }
+    },
+    {
+      "id": "bricks",
+      "label": "Building bricks",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.193,
+        "span": 0.792,
+        "edge": 0.049,
+        "motion": 0.007
+      }
+    },
+    {
+      "id": "rubber-duck",
+      "label": "Rubber duck",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.209,
+        "span": 0.583,
+        "edge": 0.031,
+        "motion": 0.011
+      }
+    },
+    {
+      "id": "spinning-top",
+      "label": "Spinning top",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.183,
+        "span": 0.667,
+        "edge": 0.048,
+        "motion": 0.072
+      }
+    },
+    {
+      "id": "dice",
+      "label": "Dice",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.213,
+        "span": 0.708,
+        "edge": 0.04,
+        "motion": 0.033
+      }
+    },
+    {
+      "id": "newtons-cradle",
+      "label": "Newton's cradle",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.237,
+        "span": 0.698,
+        "edge": 0.044,
+        "motion": 0.011
+      }
+    },
+    {
+      "id": "teddy-bear",
+      "label": "Teddy bear",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.216,
+        "span": 0.688,
+        "edge": 0.036,
+        "motion": 0.009
+      }
+    },
+    {
+      "id": "yo-yo",
+      "label": "Yo-yo",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.198,
+        "span": 0.75,
+        "edge": 0.047,
+        "motion": 0.045
+      }
+    },
+    {
+      "id": "puzzle-cube",
+      "label": "Puzzle cube",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.246,
+        "span": 0.604,
+        "edge": 0.051,
+        "motion": 0.013
+      }
+    },
+    {
+      "id": "spring-toy",
+      "label": "Spring toy",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.174,
+        "span": 0.667,
+        "edge": 0.034,
+        "motion": 0.037
+      }
+    },
+    {
+      "id": "kite",
+      "label": "Kite",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.114,
+        "span": 0.646,
+        "edge": 0.045,
+        "motion": 0.031
+      }
+    },
+    {
+      "id": "paper-plane",
+      "label": "Paper plane",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.102,
+        "span": 0.865,
+        "edge": 0.037,
+        "motion": 0.035
+      }
+    },
+    {
+      "id": "origami-crane",
+      "label": "Origami crane",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "subject fills only 7% of the frame"
+      }
+    },
+    {
+      "id": "balloon-dog",
+      "label": "Balloon dog",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.142,
+        "span": 0.688,
+        "edge": 0.051,
+        "motion": 0.013
+      }
+    },
+    {
+      "id": "robot",
+      "label": "Wind-up robot",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.174,
+        "span": 0.708,
+        "edge": 0.045,
+        "motion": 0.013
+      }
+    },
+    {
+      "id": "chess-set",
+      "label": "Chess set",
+      "shelf": "toys",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "motion 0.001 is below 0.0015"
+      }
+    },
+    {
+      "id": "guitar",
+      "label": "Acoustic guitar",
+      "shelf": "music",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.125,
+        "span": 0.729,
+        "edge": 0.062,
+        "motion": 0.022
+      }
+    },
+    {
+      "id": "drum",
+      "label": "Snare drum",
+      "shelf": "music",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.15,
+        "span": 0.573,
+        "edge": 0.044,
+        "motion": 0.005
+      }
+    },
+    {
+      "id": "xylophone",
+      "label": "Xylophone",
+      "shelf": "music",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.13,
+        "span": 0.688,
+        "edge": 0.067,
+        "motion": 0.005
+      }
+    },
+    {
+      "id": "toy-piano",
+      "label": "Toy piano",
+      "shelf": "music",
+      "columns": 96,
+      "check": {
+        "pass": true,
+        "fill": 0.365,
+        "span": 0.792,
+        "edge": 0.042,
+        "motion": 0.002
+      }
+    },
+    {
+      "id": "grand-piano",
+      "label": "Grand piano",
+      "shelf": "music",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "motion 0.001 is below 0.0015"
+      }
+    },
+    {
+      "id": "upright-piano",
+      "label": "Upright piano",
+      "shelf": "music",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "motion 0 is below 0.0015"
+      }
+    },
+    {
+      "id": "harpsichord",
+      "label": "Harpsichord",
+      "shelf": "music",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "motion 0 is below 0.0015"
+      }
+    },
+    {
+      "id": "electronic-keyboard",
+      "label": "Electronic keyboard",
+      "shelf": "music",
+      "columns": 96,
+      "check": {
+        "pass": false,
+        "why": "motion 0.001 is below 0.0015"
+      }
+    }
+  ]
+}

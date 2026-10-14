@@ -1,0 +1,53 @@
+{
+  "toy": "sound-recorder",
+  "checked": "2026-10-05",
+  "summary": "The Sound recorder keeps the microphone's samples while it records, shows them as a waveform and a spectrogram, trims them and saves them. The WAV file it writes reads back sample for sample, and the browser decodes it to the same samples.",
+  "claims": [
+    {
+      "claim": "Save as WAV keeps every recorded sample (16-bit PCM, mono, at the microphone's rate).",
+      "how": "A standard RIFF WAVE header and 16-bit little-endian samples.",
+      "where": "src/labs/sound-dsp.js:152",
+      "sources": [
+        {
+          "title": "WAV",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/WAV",
+          "says": "WAV is a container for, among others, LPCM: uncompressed linear pulse-code modulation."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:269",
+      "note": "The in-page test records a 1 kHz tone from a fake microphone, trims it to 0.5 s, writes the file, reads it back and decodes it with the browser: within half a step of 16 bits."
+    },
+    {
+      "claim": "The spectrogram shows which pitches the recording holds over time, 40 Hz to 16 kHz.",
+      "how": "The song landscape's short-time Fourier transform (studio-audio.js), 200 slices, 12 bands an octave.",
+      "where": "src/packs/sound-lab.js:813",
+      "sources": [
+        {
+          "title": "Spectrogram",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Spectrogram",
+          "says": "A spectrogram shows a signal's spectrum as it varies with time, computed from the short-time Fourier transform of windowed slices."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:22",
+      "note": ""
+    },
+    {
+      "claim": "Trim the silence keeps the span louder than 40 dB below the loudest 20 ms.",
+      "how": "Levels of 20 ms slices; the first and last above the threshold, with one slice of margin.",
+      "where": "src/labs/sound-dsp.js:235",
+      "sources": [],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:74",
+      "note": "A rule of the toy, not a standard."
+    }
+  ],
+  "simplified": [
+    "Each trim's ends fade over 5 ms so the cut doesn't click.",
+    "The smaller file is the browser's own Opus or AAC encoding of the trimmed sound, made in real time; it is lossy."
+  ],
+  "fixes": []
+}

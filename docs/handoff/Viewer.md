@@ -8,13 +8,12 @@ Earlier lessons: [history.md](history.md) and [Pictures.md](Pictures.md).
 
 (Written by the Operator on September 28, 2026, from the owner's message that evening)
 
-The owner tried the Picture lab on his phone and sent five notes. His words are quoted; the
-Operator's reading follows each.
+The owner tried the Picture lab on his phone and sent five notes. The Operator's reading of each
+follows (his own words are private).
 
-1. **Black boxes over figures in PDFs.** "It looks like certain things are almost like redacted,
-   like blacked out on research articles that I put in here … the black spots kind of change and
-   other things that the black spots would normally cover render basically perfectly." His
-   screenshots: an open-access Taylor & Francis article (Cogent Arts & Humanities, 2024, CC BY, doi
+1. **Black boxes over figures in PDFs.** Parts of research articles he opens look redacted, with
+   black spots that change while the things they would cover render fine. His screenshots: an
+   open-access Taylor & Francis article (Cogent Arts & Humanities, 2024, CC BY, doi
    10.1080/23311983.2024.2432131). A figure on page 2 is a solid black rectangle; on page 1 the
    journal's cover picture is partly drawn and partly covered by black blocks. The text, vector
    icons and colored headings are all fine. Nothing in our code hides anything on purpose, so this
@@ -32,16 +31,14 @@ Operator's reading follows each.
      make ourselves or that are CC0/public domain).
    - If some image truly can't be decoded, draw it as it is, or leave that area as plain paper.
      Never draw a black box.
-2. **Pinch should zoom, not turn.** "If I use two fingers to zoom in and zoom out, like I naturally
-   would for anything else, because our thing can rotate … it ends up kind of, like, spinning
-   something." Today src/camera.js reads a two-finger gesture as pinch and twist together, so
-   zooming also rolls the toy. Make a two-finger pinch zoom only, for every toy (a clear two-finger
-   twist may still roll a toy whose tilt isn't locked, but only past a dead zone, so a normal pinch
-   never rolls).
-3. **A tilt lock for flat things.** "Maybe by default we can have rotation locked … allow people to
-   kind of spin the thing to the left or to the right, but not rotate it … backwards or forwards,
-   or, like, rotate the face of it … They can hit a button somewhere to enable that and to remove
-   the rotation locks." So:
+2. **Pinch should zoom, not turn.** When he zooms with two fingers, as he would for anything else,
+   the toy also spins. Today src/camera.js reads a two-finger gesture as pinch and twist together,
+   so zooming also rolls the toy. Make a two-finger pinch zoom only, for every toy (a clear
+   two-finger twist may still roll a toy whose tilt isn't locked, but only past a dead zone, so a
+   normal pinch never rolls).
+3. **A tilt lock for flat things.** He suggested rotation locked by default, so people can spin a
+   thing left or right but not tilt it forward or back or turn its face, with a button somewhere to
+   remove the locks. So:
    - A toy can declare that it starts with its tilt locked (a recipe flag). With the tilt locked,
      dragging only spins the toy around its vertical axis (yaw). Pitch and roll stay at the toy's
      home pose, and zoom and pan still work.
@@ -53,20 +50,18 @@ Operator's reading follows each.
      lock.
    - Also add a **Reset view** control that eases the camera back to the toy's starting pose (if one
      exists already, make it easy to find).
-4. **Top-bar settings next to ? and the speaker button.** "Add a couple of other buttons right where
-   the question mark circle and the sound or volume circle is … for things that are global
-   controls." Add two round buttons that match the existing ones: **Turntable** (the idle auto-spin;
-   global, on or off for every toy, remembered on this device; reduced motion still wins) and **Tilt
-   lock** (as above). Give each a clear icon, an accessible label, a pressed state, and a short
-   tooltip. Keep the header tidy at 390×844.
-5. **Country flags per toy, under Look.** "If I set it to a certain country for one toy, and then I
-   change to just a different toy, the country flag theme carries over … My preference would
-   actually be to make the national or country flag be something that is specific for a given toy …
-   I'd almost rather just move it to the look area." Move the country flag choice into the Toy tab's
-   Look section. A flag applies only to the toy it was chosen on. Switching toys shows the new toy's
-   own default, and coming back to the first toy during the visit shows its flag again (remembered
-   in memory or sessionStorage, whichever is lighter). Links and saved scenes that carry a flag must
-   keep loading.
+4. **Top-bar settings next to ? and the speaker button.** He asked for a couple of other buttons
+   beside the question mark and the sound circle, for global controls. Add two round buttons that
+   match the existing ones: **Turntable** (the idle auto-spin; global, on or off for every toy,
+   remembered on this device; reduced motion still wins) and **Tilt lock** (as above). Give each a
+   clear icon, an accessible label, a pressed state, and a short tooltip. Keep the header tidy at
+   390×844.
+5. **Country flags per toy, under Look.** Today a country chosen for one toy carries over to the
+   next toy. He would rather have the flag be specific to each toy and move it to the Look area.
+   Move the country flag choice into the Toy tab's Look section. A flag applies only to the toy it
+   was chosen on. Switching toys shows the new toy's own default, and coming back to the first toy
+   during the visit shows its flag again (remembered in memory or sessionStorage, whichever is
+   lighter). Links and saved scenes that carry a flag must keep loading.
 
 Also add **short terms of use** in the About tab (a marked block in index.html) and in README.md, in
 plain American English, with this meaning (you may tighten the wording, but keep every point):

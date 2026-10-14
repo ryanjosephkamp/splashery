@@ -9,12 +9,11 @@ Food, the tiny planet in Space". Handoff file: docs/handoff/Shelves.md. A small 
 (Written by the Operator on September 30, 2026, from the owner's notes and his "shelves yes" that
 day.)
 
-In his notes of September 28 (docs/reviews/2026-09-28-sounds/review.md), the owner questioned the
-Shapes shelf. He asked why the donut is in Shapes and not in Food, why the tiny planet is in Shapes
-and not in Space, and whether the jelly blob is a shape. He suggested that Shapes keep a plain torus
-people can dress as a donut, a bagel or a swim ring, and that the crystal ball leave Gems ("I don't
-believe that it belongs under gems"). The Operator proposed a plan, and he answered "shelves yes"
-(September 30, 2026, 3:25 p.m. ET):
+In his notes of September 28, the owner questioned the Shapes shelf. He asked why the donut is in
+Shapes and not in Food, why the tiny planet is in Shapes and not in Space, and whether the jelly
+blob is a shape. He suggested that Shapes keep a plain torus people can dress as a donut, a bagel or
+a swim ring, and that the crystal ball leave Gems ("I don't believe that it belongs under gems").
+The Operator proposed a plan, and he answered "shelves yes" (September 30, 2026, 3:25 p.m. ET):
 
 1. **The crystal ball moves to Medieval,** next to the wizard's orb (its `category` only).
 2. **The donut moves to Food.** Its id, look, tap and links stay exactly as they are.

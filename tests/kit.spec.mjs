@@ -1,6 +1,6 @@
 // Unit checks for the v3 engine pieces that need no browser: the toy kit and
 // every pack recipe, the scene schema v3 (and its v2 migration), patterns,
-// the flag catalogue and the motion driver.
+// the flag catalog and the motion driver.
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
@@ -39,13 +39,13 @@ test("scene version 3 adds pattern and motion; version 2 scenes and links still 
   expect(s.effects.wind).toMatchObject({ on: true, strength: 0.4 });
   expect(s.pattern.id).toBe("none");
   expect(s.motion).toEqual({ alive: true, move: "still", speed: 0.5, controls: {} });
-  // An old share link (a v2 scene) decodes and normalises the same way.
+  // An old share link (a v2 scene) decodes and normalizes the same way.
   const hash = await encodeSceneHash(v2);
   expect(normalizeScene(await decodeSceneHash(hash))).toEqual({
     ...s,
     createdAt: expect.any(String),
   });
-  // A default v3 scene normalises to itself.
+  // A default v3 scene normalizes to itself.
   const d = normalizeScene(createScene({ seed: 9 }));
   expect(normalizeScene(JSON.parse(JSON.stringify(d)))).toEqual(d);
 });
@@ -85,6 +85,8 @@ test("v3 fields are validated: options, clay on shelf toys, pattern and motion",
 });
 
 test("every kit toy has a recipe that builds deterministically and fits the unit ball", async () => {
+  // It builds every kit toy twice in every option, so it grows with the shelves (Ops, October 6, 2026).
+  test.setTimeout(600_000);
   expect(KIT.length).toBeGreaterThan(0);
   const kinds = new Set(Object.values(KINDS));
   for (const def of KIT) {
@@ -158,7 +160,7 @@ test("the kit shares the budget by area and moves part pivots with the fit", () 
   while (!it.next().done);
   expect(big.n / small.n).toBeGreaterThan(3.5);
   expect(big.n / small.n).toBeLessThan(4.5);
-  // Everything fits radius 0.95 around the centre; the pivot moved with it.
+  // Everything fits radius 0.95 around the center; the pivot moved with it.
   const pv = k.parts[lid].pivot;
   const t = k.transform;
   expect(pv[0]).toBeCloseTo((2 - t.center[0]) * t.scale, 6);

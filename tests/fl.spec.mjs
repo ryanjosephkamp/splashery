@@ -405,35 +405,24 @@ test("a tap on the faucet's handle pours", async ({ page }) => {
   await expect.poll(pouring, { timeout: 20_000 }).toBe(true);
 });
 
-// Lane Fluids r5: a phone whose frames keep running long steps the fluid down
-// (fewer substeps, a coarser surface); a computer never does.
-test("a struggling phone steps the fluid down; a computer does not", async ({ page }) => {
+// Lane Fluids r5, r7: a phone whose frames keep running long steps the fluid
+// down. The timing lives in FluidRuntime.watch() (tests/fl7.spec.mjs: it is
+// tier-independent and never trips on a desktop); this checks what it asks
+// GpuFluids to lower: a coarser surface, and with `more`, fewer substeps.
+test("lowering the drawing cost makes the surface coarser", async ({ page }) => {
   await open(page, "/?renderer=webgpu&adapt=off&profile=mid&labs=1");
   const dev = await page.evaluate(() => window.__splashery.player.stage?.deviceType);
   test.skip(dev !== "webgpu", "No WebGPU adapter in this browser.");
   const r = await page.evaluate(async () => {
     const { GpuFluids } = await import("/src/fluids/gpu/index.js");
     const stage = window.__splashery.player.stage;
-    const run = (profile) => {
-      const fx = new GpuFluids(stage, null, { profile, specs: [] });
-      stage.app.off("postrender", fx.onPost);
-      const s0 = fx.surface.scale;
-      let t = 0;
-      const real = performance.now;
-      performance.now = () => t;
-      for (let i = 0; i < 200; i++) {
-        t += 40; // 25 frames a second
-        fx.watch();
-      }
-      performance.now = real;
-      const out = { before: s0, after: fx.surface.scale, steps: fx.watchState.steps };
-      fx.destroy();
-      return out;
-    };
-    return { mid: run("mid"), high: run("high") };
+    const fx = new GpuFluids(stage, null, { profile: "mid", specs: [] });
+    stage.app.off("postrender", fx.onPost);
+    const before = fx.surface.scale;
+    fx.lower();
+    const out = { before, after: fx.surface.scale };
+    fx.destroy();
+    return out;
   });
-  expect(r.mid.steps).toBeGreaterThan(0);
-  expect(r.mid.after).toBeLessThan(r.mid.before);
-  expect(r.high.steps).toBe(0);
-  expect(r.high.after).toBe(r.high.before);
+  expect(r.after).toBeLessThan(r.before);
 });

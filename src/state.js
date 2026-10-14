@@ -103,7 +103,7 @@ export function normalizeEffects(fx) {
     if (def.axis) o.axis = AXES.includes(e.axis) ? e.axis : def.axis;
     if (def.id === "paint") o.color = normalizeHex(e.color, "#e63b2e");
   }
-  // Drop and dissolve both move splats towards a target: never both.
+  // Drop and dissolve both move splats toward a target: never both.
   if (out.drop.on && out.dissolve.on) out.dissolve.on = false;
   return out;
 }
@@ -170,7 +170,7 @@ const WORD_RE = /^[a-z0-9-]{1,24}$/;
 export const TEXT_MAX = 24000;
 
 // Recipe options for a kit toy: a few short values (numbers, switches,
-// colours, words). The recipe itself checks their meaning when it builds.
+// colors, words). The recipe itself checks their meaning when it builds.
 export function normalizeOptions(o) {
   if (!o || typeof o !== "object" || Array.isArray(o)) return {};
   const out = {};
@@ -244,6 +244,26 @@ export function normalizeMedia(m) {
 }
 // ---- End of picture media -----------------------------------------------------------
 
+// ---- Figure depths (lane Pages r6) -------------------------------------------------
+// A page toy's figures raised deeper than its default (schema v3, additive):
+// [{ page, box: [x0, y0, x1, y1], depth }], the box in fractions of the page
+// from its top-left corner and depth a multiple of the toy's own (1 to 6).
+// At most 64; anything else is dropped.
+export function normalizeFigures(list) {
+  if (!Array.isArray(list)) return [];
+  const out = [];
+  for (const f of list) {
+    if (!f || typeof f !== "object" || !Array.isArray(f.box) || f.box.length !== 4) continue;
+    const box = f.box.map((v) => round(num(v, 0, 0, 1), 4));
+    if (!(box[2] > box[0] && box[3] > box[1])) continue;
+    const depth = round(num(f.depth, 1, 1, 6), 2);
+    out.push({ page: Math.round(num(f.page, 0, 0, 100000)), box, depth });
+    if (out.length >= 64) break;
+  }
+  return out;
+}
+// ---- End of figure depths -----------------------------------------------------------
+
 export function normalizeToy(t, profile) {
   const src = t && typeof t === "object" ? t : {};
   if (src.kind === "procedural") {
@@ -273,6 +293,8 @@ export function normalizeToy(t, profile) {
   if (clay.length) out.clay = clay;
   const media = normalizeMedia(src.media); // Pictures
   if (media) out.media = media;
+  const figures = normalizeFigures(src.figures); // Pages r6
+  if (figures.length) out.figures = figures;
   return out;
 }
 

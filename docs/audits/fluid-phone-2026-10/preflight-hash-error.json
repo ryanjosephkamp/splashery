@@ -1,0 +1,18 @@
+[
+  {
+    "id": "fluid-lab",
+    "scene": "glass",
+    "liquid": "water",
+    "setting": "mid6",
+    "profile": "mid",
+    "rate": 6,
+    "renderer": "webgl2",
+    "startedAt": "2026-10-03T22:36:51.011Z",
+    "url": "http://127.0.0.1:4173/?labs=1&profile=mid&renderer=webgl2&adapt=off&fluids=worker#s=eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJjcmVhdGVkQXQiOiIyMDI2LTEwLTAzVDIyOjM2OjUxLjAxMVoiLCJzZWVkIjo0MjQyNDIsInRveSI6eyJraW5kIjoiYnVpbHRpbiIsImlkIjoiZmx1aWQtbGFiIiwib3B0aW9ucyI6eyJzY2VuZSI6ImdsYXNzIiwibGlxdWlkIjoid2F0ZXIifX0sImxvb2siOnsiYmFja2dyb3VuZCI6InBhZ2UiLCJ0aGVtZSI6ImF1dG8iLCJhY2NlbnQiOiJhdXRvIiwic3BsYXRTY2FsZSI6MSwiZXhwb3N1cmUiOjF9LCJlZmZlY3RzIjp7InBva2UiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC42LCJ3b2JibGUiOjAuNX0sIndpbmQiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC41NSwiZGlyZWN0aW9uIjowfSwiZGlzc29sdmUiOnsib24iOmZhbHNlLCJzcHJlYWQiOjAuNTUsInNwZWVkIjowLjV9LCJkcm9wIjp7Im9uIjpmYWxzZSwiYm91bmNlIjowLjQ1LCJzY2F0dGVyIjowLjV9LCJtYWduZXQiOnsib24iOmZhbHNlLCJzdHJlbmd0aCI6MC43LCJyYWRpdXMiOjAuNDV9LCJ0d2lzdCI6eyJvbiI6ZmFsc2UsImFtb3VudCI6MC41LCJ3b2JibGUiOjAuMywiYXhpcyI6InkifSwic2xpY2UiOnsib24iOmZhbHNlLCJwb3NpdGlvbiI6MCwic3dlZXAiOjAuMzUsImF4aXMiOiJ4In0sInBhaW50Ijp7Im9uIjpmYWxzZSwic2l6ZSI6MC41LCJzcGxhc2giOjAuNSwiY29sb3IiOiIjZTYzYjJlIn19LCJwYWludCI6eyJzdGFtcHMiOltdfSwiY2FtZXJhIjp7InlhdyI6MC40NSwicGl0Y2giOjAuMjgsInJvbGwiOjAsImRpc3RhbmNlIjoyLjl9LCJhdXRvcGxheSI6eyJ0dXJudGFibGUiOmZhbHNlLCJlZmZlY3QiOiJub25lIn0sInBhdHRlcm4iOnsiaWQiOiJub25lIiwiZmxhZyI6IiIsInByb2plY3Rpb24iOiJ3cmFwIiwicmVwZWF0cyI6MSwiY29sb3JzIjpbIiNmZmZmZmYiLCIjZTYzYjJlIiwiIzBiNGY5YyJdLCJzY2FsZSI6MC41LCJhbW91bnQiOjEsImRldGFpbCI6MC42fSwibW90aW9uIjp7ImFsaXZlIjp0cnVlLCJtb3ZlIjoic3RpbGwiLCJzcGVlZCI6MC41LCJjb250cm9scyI6e319fQ",
+    "status": "failed",
+    "errors": [],
+    "warnings": [],
+    "failure": "page.waitForFunction: Target page, context or browser has been closed",
+    "key": "{\"id\":\"fluid-lab\",\"scene\":\"glass\",\"liquid\":\"water\",\"setting\":\"mid6\",\"profile\":\"mid\",\"rate\":6,\"renderer\":\"webgl2\"}"
+  }
+]

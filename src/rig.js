@@ -17,11 +17,11 @@ const PROCESS_GLSL = /* glsl */ `
 uniform vec4 uRigM0;   // model -> world, row 0
 uniform vec4 uRigM1;
 uniform vec4 uRigM2;
-uniform vec4 uRigN;    // x region count
-uniform vec4 uRigA[${MAX_REGIONS}]; // xyz centre (world), w part index (+ 64: wins over other regions)
+uniform vec4 uRigN;    // x region count, y > 0: hard (lane Hands engine B)
+uniform vec4 uRigA[${MAX_REGIONS}]; // xyz center (world), w part index (+ 64: wins over other regions)
 uniform vec4 uRigB[${MAX_REGIONS}]; // xyz radii, w soft edge (0..1 of the radius)
-uniform vec4 uRigC[${MAX_REGIONS}]; // rgb colour the region needs, w tolerance (0 = any colour, < 0 = any but this)
-uniform vec4 uRigK[4];  // two keys: [centre xyz, radius (0 = anywhere)], [rgb, tolerance (< 0: long splats)]
+uniform vec4 uRigC[${MAX_REGIONS}]; // rgb color the region needs, w tolerance (0 = any color, < 0 = any but this)
+uniform vec4 uRigK[4];  // two keys: [center xyz, radius (0 = anywhere)], [rgb, tolerance (< 0: long splats)]
 float rigKey(vec3 p, vec3 col, vec3 s, vec4 at, vec4 key) {
   if (key.w == 0.0) return 0.0;
   float m;
@@ -51,7 +51,7 @@ void process() {
     if (c.w > 0.0) wi *= 1.0 - smoothstep(c.w * 0.6, c.w, distance(col, c.rgb));
     if (c.w < 0.0) wi *= smoothstep(-c.w * 0.6, -c.w, distance(col, c.rgb));
     // An "over" region beats the others; overlapping hard regions split by
-    // the nearest centre (in radii).
+    // the nearest center (in radii).
     float over = uRigA[i].w >= 64.0 ? 1.0 : 0.0;
     float sc = wi > 0.0 ? wi + over : 0.0;
     if (sc > 0.0 && (sc > w || (sc == w && r < best))) {
@@ -61,6 +61,10 @@ void process() {
       part = uRigA[i].w - 64.0 * over;
     }
   }
+  // A hard rig (rig.hard, lane Hands engine B): each splat wholly in its
+  // part or not at all, so a part lifted right off (Hands-on) leaves no
+  // trail of half-moved splats.
+  if (uRigN.y > 0.5) wOut = step(0.5, wOut);
   vec3 s = getScale();
   writeSplatPart(vec4(part / 255.0, wOut, rigKey(p, col, s, uRigK[0], uRigK[1]), rigKey(p, col, s, uRigK[2], uRigK[3])));
 }
@@ -115,6 +119,7 @@ fn process() {
       part = a.w - 64.0 * over;
     }
   }
+  if (uniform.uRigN.y > 0.5) { wOut = step(0.5, wOut); } // a hard rig (lane Hands engine B)
   let s = getScale();
   let k0 = rigKey(p, col, s, uniform.uRigK[0], uniform.uRigK[1]);
   let k1 = rigKey(p, col, s, uniform.uRigK[2], uniform.uRigK[3]);
@@ -131,7 +136,7 @@ export function rigLayout(rig) {
     parts.push({ name: p.name, pivot: p.pivot.slice(), axis: unitAxis(p.axis || [0, 1, 0]) });
     for (const r of p.regions) {
       const rad = typeof r.r === "number" ? [r.r, r.r, r.r] : r.r;
-      // color: only splats near this colour; notColor: any but this colour.
+      // color: only splats near this color; notColor: any but this color.
       const col = r.color ? hexColor(r.color) : r.notColor ? hexColor(r.notColor) : null;
       const tol = r.color ? (r.tol ?? 0.25) : r.notColor ? -(r.tol ?? 0.25) : 0;
       regions.push({ part: parts.length - 1, at: r.at, r: rad, soft: r.soft ?? 0.03, color: col, tol, over: !!r.over }); // prettier-ignore
@@ -163,7 +168,7 @@ export function tagRig(stage, rig) {
   proc.setParameter("uRigM0", [m[0], m[4], m[8], m[12]]);
   proc.setParameter("uRigM1", [m[1], m[5], m[9], m[13]]);
   proc.setParameter("uRigM2", [m[2], m[6], m[10], m[14]]);
-  proc.setParameter("uRigN", [regions.length, 0, 0, 0]);
+  proc.setParameter("uRigN", [regions.length, rig.hard ? 1 : 0, 0, 0]); // (hard: lane Hands engine B)
   const a = new Float32Array(MAX_REGIONS * 4);
   const b = new Float32Array(MAX_REGIONS * 4).fill(1);
   regions.forEach((r, i) => {
@@ -177,7 +182,7 @@ export function tagRig(stage, rig) {
   const k = new Float32Array(16);
   (rig.keys || []).slice(0, 2).forEach((key, i) => {
     k.set([...(key.at || [0, 0, 0]), key.r ?? 0], i * 8);
-    // A key picks splats by colour, or long thin splats (`long`: the middle
+    // A key picks splats by color, or long thin splats (`long`: the middle
     // size over the largest is below it), optionally only within r of at.
     if (key.long) k.set([0, 0, 0, -key.long], i * 8 + 4);
     else k.set([...hexColor(key.color), key.tol ?? 0.2], i * 8 + 4);

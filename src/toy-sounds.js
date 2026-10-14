@@ -12,6 +12,125 @@
 const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 
 export const TOY_SOUNDS = {
+  // ---- Photoreal r2 (lane Photoreal r2) ----
+  "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
+  // Photoreal r3 (the owner's review of October 3, 2026): the first sound only, as the boat rocks.
+  "sushi-boat": { voice: "wood", f: 420, decay: 0.4, vol: 0.8 },
+  // Photoreal r3: no zipper-like crunch, only a very soft thud as the loaf lands.
+  "seeded-loaf": { voice: "thud", at: 0.58, f: 110, bright: 0.15, decay: 0.4, vol: 0.45 },
+  // Photoreal r3: a quiet, soft slap as the steak lands on each side (it flips over and back).
+  steak: [
+    { voice: "squish", at: 0.86, pitch: 0.7, bright: 0.15, decay: 0.4, vol: 0.45 },
+    { voice: "squish", at: 2.76, pitch: 0.75, bright: 0.15, decay: 0.4, vol: 0.4 },
+  ],
+  // Sound D (the walkthrough of October 6, 2026): no zipper-like rustle, and a quieter note.
+  stollen: { voice: "pluck", at: 0.15, notes: "G5 C6", step: 0.08, decay: 0.3, vol: 0.35 },
+  // Sound D (the walkthrough of October 6, 2026): one soft bubble, not two.
+  "orange-photo": { voice: "pop", f: 900, decay: 0.4, vol: 0.5 },
+  // Sound D (the walkthrough of October 6, 2026): no zipper or twinkles: the berry's soft
+  // papery pop in its husk and a light landing.
+  physalis: [
+    { voice: "pop", f: 600, decay: 0.5, vol: 0.4 },
+    { voice: "thud", at: 0.2, f: 150, bright: 0.2, decay: 0.3, vol: 0.3 },
+  ],
+  // Sound D (the walkthrough of October 6, 2026): much subtler: one quiet ring, no sparkle.
+  "crystal-gem": { voice: "glass", f: 1700, decay: 0.6, vol: 0.4 },
+  // Photoreal r3: no ding: a soft stony knock as the crystal is set back on its block.
+  "alum-crystal": { voice: "stone", at: 1.95, f: 300, bright: 0.2, decay: 0.8, vol: 0.45 },
+  // Photoreal r3: a soft patter of landings as the puffin hops (its real call is to come).
+  puffin: [
+    { voice: "thud", at: 0.43, f: 150, bright: 0.2, decay: 0.25, vol: 0.35 },
+    { voice: "thud", at: 1.83, f: 150, bright: 0.2, decay: 0.25, vol: 0.3 },
+  ],
+  // Photoreal r3: no wind: a subtle plastic tap as the toy rocks on its feet.
+  "toy-trex": { voice: "pock", f: 520, vol: 0.35 },
+  // Sound D (the walkthrough of October 6, 2026): the rubber-band boing only (no clicking after).
+  "monkey-doll": { voice: "boing", f: 500, decay: 0.5 },
+  // Photoreal r3: no wind: two soft, heavy steps as it turns.
+  "elephant-souvenir": [
+    { voice: "thud", at: 0.43, f: 85, bright: 0.15, decay: 0.35, vol: 0.4 },
+    { voice: "thud", at: 1.83, f: 80, bright: 0.15, decay: 0.35, vol: 0.35 },
+  ],
+  "turtle-souvenir": [
+    { voice: "scrape", f: 1100, decay: 0.5, vol: 0.6 },
+    { voice: "thud", at: 0.25, f: 100, decay: 0.5 },
+  ],
+  // Photoreal r3: no wind and much quieter: a soft, low breath out as she looks round.
+  "cave-lioness": { voice: "thud", at: 0.1, f: 70, bright: 0.1, decay: 0.6, vol: 0.3 },
+  // Photoreal r3: no rubber band: the soft thump of a plush landing, twice.
+  "dog-plush": [
+    { voice: "thud", at: 0.6, f: 120, bright: 0.1, decay: 0.35, vol: 0.45 },
+    { voice: "thud", at: 0.95, f: 125, bright: 0.1, decay: 0.3, vol: 0.25 },
+  ],
+  // Photoreal r3: no bell: a soft, dull knock of the frame as it leans on its kickstand, and a
+  // lighter one as it rocks back.
+  "bmx-bike": [
+    { voice: "metal", at: 0.05, f: 320, bright: 0.2, decay: 0.3, vol: 0.3 },
+    { voice: "thud", at: 0.55, f: 140, bright: 0.15, decay: 0.25, vol: 0.2 },
+  ],
+  // Photoreal r3: no clicking; the ding, more subtle.
+  "murex-shell": { voice: "glass", f: 2100, decay: 0.4, vol: 0.4 },
+  // Sound D (the walkthrough of October 6, 2026): something subtle, no clicking, stretch or
+  // wind: a soft warm chord as the flower lifts, and a light landing.
+  "sunflower-photo": [
+    { voice: "glow", notes: "F3+C4+F4", decay: 0.8, bright: 0.2, vol: 0.3 },
+    { voice: "thud", at: 0.25, f: 130, bright: 0.2, decay: 0.3, vol: 0.3 },
+  ],
+  // Sound D (the walkthrough of October 6, 2026): the vase's glass ding, no clicking.
+  "white-roses": { voice: "glass", f: 1500, decay: 0.6, vol: 0.6 },
+  // Sound D (the walkthrough of October 6, 2026): the pot's wooden knock, no clicking.
+  "bonsai-photo": { voice: "wood", at: 0.25, f: 520, decay: 0.4, vol: 0.5 },
+  // Sound D (the walkthrough of October 6, 2026): the soft pop, no clicking.
+  "mushroom-photo": { voice: "pop", f: 420, decay: 0.6 },
+  // Photoreal r3: no clicking; one soft plucked note, like the first cactus's (a single note, not a
+  // tune: the sound lint keeps tunes to the music shelf).
+  "cactus-real": { voice: "pluck", at: 0.55, notes: "E5", decay: 0.35, bright: 0.3, vol: 0.55 },
+  // Sound D (the walkthrough of October 6, 2026): the soft boing, no twinkle.
+  "crochet-earth": { voice: "boing", f: 300, decay: 0.7, vol: 0.6 },
+  // Photoreal r3: no wind or suction: one soft, hollow knock as the globe is flicked round.
+  "desk-globe": { voice: "hollow", f: 260, decay: 0.5, vol: 0.4 },
+  // Photoreal r3: the bounce, with no twinkle.
+  "cherry-blossom-photo": { voice: "flutter", f: 800, decay: 0.7, vol: 0.6 },
+  // Sound D (the walkthrough of October 6, 2026): no clicking, and a subtler gust of wind.
+  "maple-tree": { voice: "whoosh", at: 0.1, f: 900, decay: 0.5, vol: 0.22 },
+  // Sound D (the walkthrough of October 6, 2026): the vase's glass note, no clicking.
+  peony: { voice: "glass", at: 0.15, f: 1100, decay: 0.5, vol: 0.5 },
+  // Sound D (the walkthrough of October 6, 2026): the pot's soft knock, no clicking.
+  "money-tree": { voice: "pock", at: 0.2, f: 700, vol: 0.5 },
+  "knight-horse": [
+    { voice: "clack", f: 1800, n: 4, decay: 0.5 },
+    { voice: "bell", at: 0.25, f: 1500, decay: 0.7, vol: 0.5 },
+  ],
+
+  // ---- Photoreal r3 (lane Photoreal r3): the new scientific captures ----
+  // A low, soft knock of bone on its stand as the skull turns to look.
+  "triceratops-skull": { voice: "thud", at: 0.05, f: 75, bright: 0.15, decay: 0.5, vol: 0.4 },
+  // A soft porcelain tick as the shell turns on its point.
+  "cone-shell": { voice: "glass", f: 1900, decay: 0.3, vol: 0.35 },
+  // A gentle wooden creak as the globe is set turning in its rings.
+  "celestial-globe": { voice: "hollow", f: 200, decay: 0.7, vol: 0.4 },
+  // A quiet brass ring as the inner rings turn.
+  "armillary-sphere": { voice: "tine", f: 880, decay: 0.8, vol: 0.3 },
+  // Five soft stony thuds as the stones land one after another.
+  "stannern-meteorites": { voice: "stone", at: 0.68, notes: "C3 C3 C3 C3 C3", step: 0.38, f: 220, bright: 0.2, decay: 0.7, vol: 0.45 }, // prettier-ignore
+  // A low, soft hum while the lamp is on.
+  "fluorite-crystal": {
+    voice: "glow",
+    at: 0.15,
+    notes: "A3+E4",
+    decay: 1.6,
+    bright: 0.15,
+    vol: 0.25,
+  },
+  // A stone-on-wood knock as the fossil is laid down on its other face.
+  "ammonite-agate": { voice: "wood", at: 1.05, f: 260, decay: 0.5, vol: 0.45 },
+  // A deep, quiet ring of iron.
+  "morasko-meteorite": { voice: "metal", f: 110, bright: 0.2, decay: 0.8, vol: 0.3 },
+  // A small, bright clink.
+  "pyrite-cubes": { voice: "glass", f: 2400, decay: 0.3, vol: 0.3 },
+  // A dull stone tap as the tooth is laid down on its other side.
+  "megalodon-tooth": { voice: "stone", at: 1.05, f: 320, bright: 0.2, decay: 0.7, vol: 0.4 },
+
   // ---- Scans ------------------------------------------------------------------------
   cactus: [
     { voice: "pluck", notes: "E5 G5 B5 D6", step: 0.09, at: 0.15, decay: 0.35, bright: 0.3 },
@@ -368,18 +487,15 @@ export const TOY_SOUNDS = {
     { voice: "wood", f: 1500, decay: 0.5, vol: 0.8 },
     { voice: "scrape", at: 0.05, f: 900, rate: 7, decay: 4.2, vol: 0.45 },
   ],
-  "tin-can-real": [
-    { voice: "metal", f: 520, decay: 0.5, bright: 0.7 },
-    {
-      voice: "sample",
-      file: "tin-can-spin.mp3",
-      at: 0.08,
-      len: 2.2,
-      vol: 0.7,
-      fallback: { voice: "scrape", f: 2000, rate: 20, decay: 2, vol: 0.3 },
-    },
-    { voice: "metal", at: 2.3, f: 470, decay: 0.7, bright: 0.6, vol: 0.9 },
-  ],
+  // Sound C (his note of October 2: no drum, no coin): one real recording of an empty can rolling
+  // on a hard floor, slowing and settling (CC0, cower on Freesound).
+  "tin-can-real": {
+    voice: "sample",
+    file: "tin-can-real-roll.mp3",
+    from: 0.04,
+    vol: 0.9,
+    fallback: { voice: "scrape", f: 2000, rate: 20, decay: 2, vol: 0.3 },
+  },
   // ---- Shapes -----------------------------------------------------------------------
   // A soft pop onto its edge, a roll that circles faster as it leans lower, and a settle.
   torus: [
@@ -394,36 +510,25 @@ export const TOY_SOUNDS = {
     { voice: "gloop", f: 140, decay: 1.2 },
     { voice: "gloop", at: 1.8, f: 110, decay: 0.9, vol: 0.7 },
   ],
+  // Sound C (his note of October 2: too wet): a soft, dry tear as it pulls apart (a real bread
+  // tear, CC0, spanrucker on Freesound), and a soft pat as the halves meet again (1.62 s).
   donut: [
     {
       voice: "sample",
-      file: "raspberry-squish.mp3",
-      len: 0.5,
-      pitch: 0.62,
-      vol: 1,
-      fallback: { voice: "squish", pitch: 0.7 },
+      file: "donut-tear.mp3",
+      pitch: 0.85,
+      vol: 0.9,
+      fallback: { voice: "rustle", f: 900, n: 6, decay: 0.4, vol: 0.4 },
     },
-    { voice: "tear", at: 0.02, f: 420, to: 0.8, decay: 0.7, bright: 0.15, vol: 0.45 },
-    {
-      voice: "sample",
-      file: "raspberry-squish.mp3",
-      at: 1.62,
-      len: 0.4,
-      pitch: 0.7,
-      vol: 0.5,
-      fallback: { voice: "squish", pitch: 0.8, vol: 0.4 },
-    },
+    { voice: "thud", at: 1.62, f: 170, bright: 0.15, decay: 0.4, vol: 0.3 },
   ],
+  // Sound D (the walkthrough of October 6, 2026: the jelly sounded dirty; the other knots' sound
+  // is fine): the torus knot's sound, timed to this knot. It strains as the loops swell and tie
+  // tighter, then lets go with a soft thump and swish as it relaxes into its trefoil.
   knot: [
-    {
-      voice: "sample",
-      file: "neuron-arc.mp3",
-      len: 0.22,
-      pitch: 0.8,
-      vol: 0.35,
-      fallback: { voice: "crackle", n: 3, vol: 0.3 },
-    },
-    { voice: "hum", at: 0.05, f: 120, bright: 0.6, decay: 2.6, vol: 0.75 },
+    { voice: "creak", at: 0.3, f: 400, rate: 30, to: 1.4, decay: 1.5, vol: 0.4 },
+    { voice: "bowstring", at: 2.1, f: 120, vol: 0.8 },
+    { voice: "whoom", at: 2.15, f: 380, decay: 0.9, vol: 0.35 },
   ],
   planet: [
     { voice: "wind", f: 300, rate: 0.4, decay: 1.6, vol: 0.45 },
@@ -559,13 +664,13 @@ export const TOY_SOUNDS = {
     { voice: "pock", at: 0.2, f: 380, bright: 0.1, decay: 1.2 },
   ],
   "bouncy-ball": { voice: "boing", f: 260, to: 2.6, rate: 16 },
-  // A glassy clink, and a soft whirr as it rolls.
+  // Sound A: the real glass marble rolling (Sound C: about 6 dB quieter, his note of October 2).
   marble: {
     voice: "sample",
     file: "marble-roll.mp3",
     len: 2.4,
-    vol: 0.8,
-    fallback: { voice: "rumble", f: 380, rate: 28, decay: 1.2, vol: 0.18 },
+    vol: 0.4,
+    fallback: { voice: "rumble", f: 380, rate: 28, decay: 1.2, vol: 0.09 },
   },
 
   "hockey-puck": [
@@ -632,9 +737,10 @@ export const TOY_SOUNDS = {
     { voice: "rumble", at: 2.05, f: 55, rate: 4, decay: 1.2, vol: 0.45 },
   ],
   neptune: { voice: "wind", f: 330, rate: 0.9, decay: 2.4 },
+  // Sound C: the aurora's air, much lower and gentler (his note: less dramatic wind).
   "aurora-planet": [
-    { voice: "whoosh", f: 300, to: 1.1, decay: 2.4, vol: 0.4 },
-    { voice: "breath", at: 0.1, f: 600, to: 0.8, decay: 2, vol: 0.3 },
+    { voice: "whoosh", f: 300, to: 1.05, decay: 2.4, vol: 0.16 },
+    { voice: "breath", at: 0.1, f: 600, to: 0.85, decay: 2, vol: 0.12 },
   ],
   // The crack, a boom as it falls apart, and a knock as the pieces meet again.
   asteroid: [
@@ -677,7 +783,8 @@ export const TOY_SOUNDS = {
     },
     { voice: "roar", at: 0.3, f: 150, bright: 0.3, decay: 2.8, vol: 0.35 },
   ],
-  // It sizzles in and bursts (0.36 s); the next one sizzles in (3.4 s).
+  // Sound A: the streak's fire; Sound C: it bursts with the star's own burst (his note of October
+  // 2), in time with the fireball at 0.38 s, over a short crack; then the next one streaks in.
   meteor: [
     {
       voice: "sample",
@@ -689,12 +796,30 @@ export const TOY_SOUNDS = {
     {
       voice: "sample",
       file: "meteor-boom.mp3",
-      at: 0.36,
-      vol: 1.1,
+      at: 0.37,
+      len: 0.5,
+      vol: 0.55,
+      fallback: { voice: "thud", f: 70, decay: 0.6 },
+    },
+    {
+      voice: "sample",
+      file: "supernova-boom.mp3",
+      at: 0.37,
+      from: 0.2,
+      len: 2.2,
+      pitch: 1.1,
+      vol: 0.95,
       fallback: { voice: "rumble", f: 50, rate: 4, decay: 1.5, vol: 0.6 },
     },
-    { voice: "sample", file: "comet-fire.mp3", at: 0.5, from: 0.4, len: 1.4, vol: 0.35 },
-    { voice: "sample", file: "meteor-fire.mp3", at: 3.4, len: 0.6, pitch: 0.9, vol: 0.55 },
+    {
+      voice: "sample",
+      file: "meteor-fire.mp3",
+      at: 3.4,
+      len: 0.6,
+      pitch: 0.9,
+      vol: 0.5,
+      fallback: { voice: "roar", f: 280, decay: 0.4, vol: 0.6 },
+    },
   ],
   // Swelling to a giant and the whoosh as it puffs off its shell; the
   // recipe rings a bell when the new star lights (6.6 s).
@@ -756,10 +881,11 @@ export const TOY_SOUNDS = {
     },
     { voice: "whoosh", at: 3.5, f: 400, to: 0.4, decay: 1.8, vol: 0.3 },
   ],
+  // Sound C: a faint, soft air as the stars swarm (his note: less wind, less overwhelming), no
+  // hiss.
   "star-cluster": [
-    { voice: "breath", f: 800, to: 1.2, decay: 1.2, vol: 0.4 },
-    { voice: "breath", at: 1.4, f: 900, to: 0.7, decay: 1.4, vol: 0.35 },
-    { voice: "hiss", at: 0.2, f: 5000, decay: 1.8, vol: 0.12 },
+    { voice: "breath", f: 700, to: 1.1, decay: 1.2, vol: 0.13 },
+    { voice: "breath", at: 1.4, f: 800, to: 0.8, decay: 1.4, vol: 0.11 },
   ],
   // A pad, and a shimmer as the shock reaches the ring (1.7 s).
   "planetary-nebula": [
@@ -872,7 +998,7 @@ export const TOY_SOUNDS = {
   ],
   bacteriophage: [
     { voice: "boing", f: 120, to: 0.5, rate: 30, decay: 0.5 },
-    { voice: "clack", f: 1300, decay: 1.5 },
+    { voice: "hollow", f: 640, decay: 1.5 },
     { voice: "squish", at: 0.5, pitch: 1.5, bright: 0.8 },
   ],
   // Pinches in, the daughters part (1.45 s), then slide back and merge (3.4 s).
@@ -907,16 +1033,30 @@ export const TOY_SOUNDS = {
     { voice: "pop", at: 2.1, f: 450 },
     { voice: "gloop", at: 3.2, f: 140, decay: 1.2, vol: 0.7 },
   ],
+  // Sound A: a real zipper. Sound C (his note of October 2: in sync): the zip as the strands fly
+  // open (fast at first, most of it in the first second), then a slower zip as it closes back up
+  // (3.3 s to 5.2 s).
   dna: [
     {
       voice: "sample",
       file: "dna-zipper.mp3",
-      from: 0.3,
-      pitch: 0.9,
+      at: 0.02,
+      from: 0.45,
+      len: 0.95,
+      pitch: 1.05,
       vol: 0.8,
-      fallback: { voice: "tear", f: 900, decay: 1.2 },
+      fallback: { voice: "tear", f: 900, decay: 0.9 },
     },
-    { voice: "sample", file: "dna-zipper.mp3", at: 3.3, from: 0.3, pitch: 0.8, vol: 0.6 },
+    {
+      voice: "sample",
+      file: "dna-zipper.mp3",
+      at: 3.45,
+      from: 0.35,
+      len: 1.15,
+      pitch: 0.72,
+      vol: 0.55,
+      fallback: { voice: "tear", f: 700, decay: 1.2, vol: 0.6 },
+    },
   ],
   // A bacterium wriggles in, is gulped (2.1 s) and digested (3.6 s).
   "white-blood-cell": [
@@ -937,17 +1077,17 @@ export const TOY_SOUNDS = {
     { voice: "glass", at: 4, f: 2400, decay: 0.5, vol: 0.7 },
   ],
   tardigrade: { voice: "squeak", notes: "C7 - D7", step: 0.18, decay: 0.5, vol: 0.6 },
-  // It swells and bursts (0.2 s), a puff of granules drifts away.
+  // Sound C: the puff and its tiny chirp, quieter (his note of October 2).
   pollen: [
-    { voice: "breath", at: 0.18, f: 1300, to: 0.5, decay: 0.6 },
-    { voice: "chirp", at: 0.4, f: 3200, n: 1 },
+    { voice: "breath", at: 0.18, f: 1300, to: 0.5, decay: 0.6, vol: 0.6 },
+    { voice: "chirp", at: 0.4, f: 3200, n: 1, vol: 0.55 },
   ],
   // The arms melt back, then a new flake grows out (1.2 s).
   snowflake: [
     { voice: "sparkle", f: 3000, n: 5, decay: 0.8, bright: 0.5, vol: 0.5 },
     { voice: "glass", at: 1.2, notes: "E6 G6 B6 D7 E7", step: 0.45, decay: 0.5, vol: 0.45 },
   ],
-  // The fibres pull the chromatids apart (0.5 s); they rejoin (3.9 s).
+  // The fibers pull the chromatids apart (0.5 s); they rejoin (3.9 s).
   chromosome: [
     {
       voice: "sample",
@@ -960,22 +1100,39 @@ export const TOY_SOUNDS = {
     { voice: "squish", at: 0.5, pitch: 0.8, bright: 0.2, decay: 0.8, vol: 0.5 },
     { voice: "squish", at: 3.9, pitch: 0.9, bright: 0.2, decay: 0.6, vol: 0.45 },
   ],
-  // Powers up along the cristae; ATP pops out in three waves (0.95 s on).
+  // Sound C (his note of October 2: the powerhouse of the cell, no motor or buzz): a real gas
+  // furnace lighting with a soft whoomp and burning with a warm roar as it powers up (CC0, ldezem
+  // on Freesound), and the ATP sparks' soft pops. The Sound Board has the candidates.
   mitochondrion: [
-    { voice: "hum", f: 90, bright: 0.4, decay: 1.4, vol: 0.7 },
-    { voice: "pop", at: 0.95, f: 900, vol: 0.5 },
-    { voice: "pop", at: 1.3, f: 1000, vol: 0.45 },
-    { voice: "pop", at: 1.65, f: 1100, vol: 0.4 },
+    {
+      voice: "sample",
+      file: "mitochondrion-furnace.mp3",
+      vol: 1,
+      fallback: { voice: "roar", f: 160, bright: 0.2, decay: 1.6, vol: 0.4 },
+    },
+    { voice: "pop", at: 0.95, f: 900, vol: 0.3 },
+    { voice: "pop", at: 1.3, f: 1000, vol: 0.27 },
+    { voice: "pop", at: 1.65, f: 1100, vol: 0.24 },
   ],
-  // The cilia beat hard while it swims its loop.
-  paramecium: [
-    { voice: "flutter", f: 500, rate: 14, decay: 4, vol: 0.55 },
-    { voice: "whoosh", at: 0.3, f: 250, to: 1.3, decay: 2.5, vol: 0.25 },
-  ],
-  // A pod pushes out and it oozes over; then back the other way (2.5 s).
+  // Sound C (his note of October 2: swimming, not a shuffle or wind): a hand moving gently through
+  // water (CC0, Daen23 on Freesound), soft strokes through its loop.
+  paramecium: {
+    voice: "sample",
+    file: "paramecium-swim.mp3",
+    vol: 1,
+    fallback: [
+      { voice: "swim", at: 0.1, f: 520, n: 3, rate: 2.6, vol: 0.55 },
+      { voice: "swim", at: 1.25, f: 480, n: 5, rate: 2.4, vol: 0.7 },
+    ],
+  },
+  // Sound C (his note of October 2: louder, a rubbery jelly bounce like the gummy bear's, with no
+  // whistle or ding): a soft squelch and a low rubbery wobble as each pseudopod pushes out (0.05 s,
+  // 2.5 s).
   amoeba: [
-    { voice: "gloop", f: 95, decay: 1.8 },
-    { voice: "gloop", at: 2.5, f: 85, decay: 1.8, vol: 0.8 },
+    { voice: "squish", pitch: 0.55, bright: 0.15, decay: 1.4, vol: 0.9 },
+    { voice: "boing", at: 0.08, f: 140, to: 1.15, rate: 8, decay: 1.4, vol: 1.2 },
+    { voice: "squish", at: 2.5, pitch: 0.5, bright: 0.15, decay: 1.4, vol: 0.8 },
+    { voice: "boing", at: 2.58, f: 128, to: 1.12, rate: 7, decay: 1.4, vol: 1.1 },
   ],
 
   // ---- Atoms ------------------------------------------------------------------------
@@ -993,14 +1150,24 @@ export const TOY_SOUNDS = {
     { voice: "sample", file: "neuron-arc.mp3", at: 3, from: 0.4, len: 0.35, pitch: 1.2, vol: 0.8 },
     { voice: "whoosh", at: 3, f: 1200, to: 0.6, decay: 0.7, vol: 0.3 },
   ],
+  // Sound C: the periodic table's atom sound, which he likes (October 2): the electrons' soft
+  // electric blip as they speed up, and the ping as they blur into rings. No motor.
   atom: [
-    { voice: "hum", f: 150, bright: 0.3, decay: 2.6, vol: 0.6 },
-    { voice: "whoosh", at: 0.2, f: 900, to: 1, decay: 2.4, vol: 0.3 },
+    { voice: "blip", at: 0.05, f: 660, to: 2, decay: 0.5, vol: 0.5 },
+    { voice: "ding", at: 1.45, f: 1700, decay: 0.45, vol: 0.55 },
   ],
+  // Sound C (his note of October 2: no wind, not building blocks): soft little ticks of the atoms
+  // jostling on their bonds as it heats, thinning out as it cools and settles.
   molecule: [
-    { voice: "roar", f: 200, bright: 0.25, decay: 2.4, vol: 0.35 },
-    { voice: "clatter", at: 0.2, f: 700, n: 8, kind: "wood", decay: 1.6, vol: 0.3 },
-  ],
+    0, 0.12, 0.2, 0.31, 0.39, 0.52, 0.63, 0.78, 0.94, 1.15, 1.38, 1.7, 2.05, 2.5, 3.05,
+  ].map((at, i) => ({
+    voice: "clack",
+    at,
+    f: Math.round(1900 + 700 * ((i * 0.618) % 1)),
+    decay: 0.7,
+    bright: 0.2,
+    vol: Math.round((0.32 - 0.015 * i) * 1000) / 1000,
+  })),
   // An airy rush as the pieces fly apart, and soft clicks as they lock back.
   protein: [
     {
@@ -1013,29 +1180,39 @@ export const TOY_SOUNDS = {
     { voice: "sample", file: "protein-velcro.mp3", at: 3.3, pitch: 1.3, vol: 0.4 },
     { voice: "thud", at: 3.45, f: 170, bright: 0.3, decay: 0.6, vol: 0.5 },
   ],
-  // A ping as the wave passes each part of the lattice.
+  // Sound A: the light metallic chime of the lattice's links; Sound C (his note of October 2: fine,
+  // could be better): one cleaner, softer chime with a faint glassy ring, no rattle after.
   "crystal-lattice": [
     {
       voice: "sample",
       file: "crystal-lattice-chain.mp3",
       at: 0.3,
-      pitch: 0.9,
-      vol: 0.7,
+      pitch: 0.95,
+      vol: 0.55,
       fallback: { voice: "clatter", f: 1400, n: 8 },
     },
-    { voice: "sample", file: "crystal-lattice-chain.mp3", at: 1.4, from: 0.1, pitch: 1, vol: 0.45 },
+    { voice: "glass", at: 0.32, f: 2637, decay: 0.8, vol: 0.18 },
   ],
-  // Lane Chemistry. On: the tile's soft click and a rising shimmer as the
-  // atom builds (each shell's note and the photon's ping are cues from the
-  // recipe). Off: a soft falling hush as it sinks back into its tile.
+  // Sound C: the atom's whoosh much quieter (his note of October 2); a faint tick for each proton
+  // and neutron as it packs into the nucleus comes from the recipe (src/packs/chemistry.js), in
+  // sync.
   "periodic-table": {
     on: [
-      { voice: "whoosh", f: 300, to: 1.6, decay: 1.4, vol: 0.45 },
-      { voice: "thud", at: 0.05, f: 160, bright: 0.3, decay: 0.5, vol: 0.35 },
+      { voice: "whoosh", f: 300, to: 1.6, decay: 1.4, vol: 0.13 },
+      { voice: "thud", at: 0.05, f: 160, bright: 0.3, decay: 0.5, vol: 0.3 },
     ],
     off: [
-      { voice: "whoosh", f: 700, to: 0.4, decay: 0.9, vol: 0.45 },
-      { voice: "thud", at: 0.85, f: 160, bright: 0.3, decay: 0.6, vol: 0.45 },
+      { voice: "whoosh", f: 700, to: 0.4, decay: 0.9, vol: 0.13 },
+      { voice: "thud", at: 0.85, f: 160, bright: 0.3, decay: 0.6, vol: 0.4 },
+    ],
+  },
+  // Lane Elements: the sample lifting off its tile, and setting down with a small click; the lift's
+  // tine and the turn's blip come from the recipe (src/packs/real-elements.js).
+  "real-elements": {
+    on: [{ voice: "whoosh", f: 380, to: 1.4, decay: 1.1, vol: 0.1 }],
+    off: [
+      { voice: "whoosh", f: 600, to: 0.5, decay: 0.8, vol: 0.1 },
+      { voice: "clack", at: 0.8, f: 1100, decay: 0.25, vol: 0.3 },
     ],
   },
   // ---- Gems -------------------------------------------------------------------------
@@ -1082,16 +1259,14 @@ export const TOY_SOUNDS = {
     },
     { voice: "drone", at: 0.1, f: 98, bright: 0.3, decay: 1.6, vol: 0.35 },
   ],
-  emerald: [
-    {
-      voice: "sample",
-      file: "diamond-tap.mp3",
-      pitch: 0.9,
-      vol: 0.9,
-      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
-    },
-    { voice: "whoosh", at: 0.15, f: 1800, to: 0.5, decay: 1.8, vol: 0.25 },
-  ],
+  // Sound A: a crisp tap on a cut gem (Sound C: no whoosh, his note of October 2).
+  emerald: {
+    voice: "sample",
+    file: "diamond-tap.mp3",
+    pitch: 0.9,
+    vol: 0.9,
+    fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+  },
   "amethyst-geode": {
     on: [
       { voice: "crack", f: 1100, bright: 0.3 },
@@ -1099,16 +1274,15 @@ export const TOY_SOUNDS = {
     ],
     off: [{ voice: "stone", f: 300, decay: 1.4 }],
   },
-  sapphire: [
-    {
-      voice: "sample",
-      file: "diamond-tap.mp3",
-      pitch: 1.05,
-      vol: 0.9,
-      fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
-    },
-    { voice: "whoosh", at: 0.2, f: 3000, to: 0.6, decay: 1.6, vol: 0.2 },
-  ],
+  // Sound A: a crisp tap on a cut gem, a little higher than the emerald's (Sound C: no wind or
+  // sandy shuffle).
+  sapphire: {
+    voice: "sample",
+    file: "diamond-tap.mp3",
+    pitch: 1.05,
+    vol: 0.9,
+    fallback: { voice: "glass", f: 3000, decay: 0.3, vol: 0.5 },
+  },
   // A chime for each point as it lights, left to right.
   "quartz-cluster": {
     voice: "glass",
@@ -1144,100 +1318,60 @@ export const TOY_SOUNDS = {
     },
   ],
   // ---- Anatomy ----------------------------------------------------------------------
-  // Lub-dub on each squeeze: racing to 155 bpm by 0.5 s, calming by 4.6 s.
+  // Sound A: a real heartbeat for each beat (the beats come faster in the middle, as the heart
+  // works harder). Sound C: louder, the same beats and tempo (his note of October 2).
   heart: [
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 0.16,
-      vol: 0.64,
-      pitch: 1.25,
-      fallback: { voice: "heartbeat", f: 72, vol: 0.8 },
-    },
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 0.61,
-      vol: 0.72,
-      pitch: 1.35,
-      fallback: { voice: "heartbeat", f: 72, vol: 0.9 },
-    },
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 0.99,
-      vol: 0.8,
-      pitch: 1.4,
-      fallback: { voice: "heartbeat", f: 72, vol: 1 },
-    },
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 1.38,
-      vol: 0.8,
-      pitch: 1.4,
-      fallback: { voice: "heartbeat", f: 72, vol: 1 },
-    },
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 1.76,
-      vol: 0.8,
-      pitch: 1.4,
-      fallback: { voice: "heartbeat", f: 72, vol: 1 },
-    },
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 2.15,
-      vol: 0.8,
-      pitch: 1.4,
-      fallback: { voice: "heartbeat", f: 72, vol: 1 },
-    },
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 2.54,
-      vol: 0.8,
-      pitch: 1.4,
-      fallback: { voice: "heartbeat", f: 72, vol: 1 },
-    },
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 2.93,
-      vol: 0.76,
-      pitch: 1.35,
-      fallback: { voice: "heartbeat", f: 72, vol: 0.95 },
-    },
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 3.36,
-      vol: 0.68,
-      pitch: 1.25,
-      fallback: { voice: "heartbeat", f: 72, vol: 0.85 },
-    },
-    {
-      voice: "sample",
-      file: "heart-beat.mp3",
-      at: 3.91,
-      vol: 0.6,
-      pitch: 1.15,
-      fallback: { voice: "heartbeat", f: 72, vol: 0.75 },
-    },
-  ],
-  // Sparks crackle over the lobes; every lobe flashes at once (1.75 s).
+    [0.16, 0.64, 1.25],
+    [0.61, 0.72, 1.35],
+    [0.99, 0.8, 1.4],
+    [1.38, 0.8, 1.4],
+    [1.76, 0.8, 1.4],
+    [2.15, 0.8, 1.4],
+    [2.54, 0.8, 1.4],
+    [2.93, 0.76, 1.35],
+    [3.36, 0.68, 1.25],
+    [3.91, 0.6, 1.15],
+  ].map(([at, v, pitch]) => ({
+    voice: "sample",
+    file: "heart-beat.mp3",
+    at,
+    vol: Math.round(v * 1.6 * 100) / 100,
+    pitch,
+    fallback: { voice: "heartbeat", f: 72, vol: Math.round(v * 1.25 * 1.6 * 100) / 100 },
+  })),
+  // Sound C (his note of October 2): a subtle electric current as the thought's sparks race round
+  // the folds (a softer, lower crackle than the neuron's spike, from the same recording), and a
+  // small snap as the whole side lights up. No wind.
   brain: [
-    { voice: "whoosh", f: 700, to: 1.6, decay: 1.4, vol: 0.4 },
     {
       voice: "sample",
-      file: "meteor-boom.mp3",
-      at: 1.75,
-      len: 0.5,
-      pitch: 1.6,
-      vol: 0.3,
-      fallback: { voice: "thud", f: 120, vol: 0.4 },
+      file: "neuron-arc.mp3",
+      at: 0.05,
+      from: 0.25,
+      len: 0.7,
+      pitch: 0.7,
+      vol: 0.32,
+      fallback: { voice: "crackle", n: 4, vol: 0.25 },
+    },
+    {
+      voice: "sample",
+      file: "neuron-arc.mp3",
+      at: 0.95,
+      from: 0.3,
+      len: 0.6,
+      pitch: 0.78,
+      vol: 0.28,
+      fallback: { voice: "crackle", n: 3, vol: 0.2 },
+    },
+    {
+      voice: "sample",
+      file: "neuron-arc.mp3",
+      at: 2.05,
+      from: 0.2,
+      len: 0.4,
+      pitch: 0.9,
+      vol: 0.42,
+      fallback: { voice: "crackle", n: 3, vol: 0.3 },
     },
   ],
   eye: [
@@ -1247,7 +1381,7 @@ export const TOY_SOUNDS = {
   // A deep breath in (1.7 s), held, then out (2.2 s).
   lungs: {
     voice: "sample",
-    file: "lungs-breath.mp3",
+    file: "lungs-breath-b.mp3",
     vol: 0.8,
     fallback: { voice: "breath", f: 700, to: 1.4, decay: 2.4 },
   },
@@ -1415,7 +1549,7 @@ export const TOY_SOUNDS = {
     { voice: "whoosh", at: 0.3, f: 180, to: 5, decay: 2.2, vol: 0.8 },
     { voice: "clatter", at: 3.9, f: 900, n: 10, kind: "wood", decay: 1.4, vol: 0.8 },
   ],
-  // Wiped with a swish, drawn again a note per colour, then sparkles.
+  // Wiped with a swish, drawn again a note per color, then sparkles.
   rainbow: [
     { voice: "whoosh", f: 1200, to: 0.3, decay: 0.7, vol: 0.5 },
     { voice: "harp", at: 0.8, notes: "C5 D5 E5 G5 A5 C6 D6", step: 0.4, decay: 0.8 },
@@ -1453,35 +1587,36 @@ export const TOY_SOUNDS = {
   // the knife swings, only a soft settle of the melon.
   watermelon: { voice: "thud", f: 120, bright: 0.2, decay: 0.4, vol: 0.3 },
   // Sound B: blown out with a breath, then the last line of "Happy Birthday
-  // to You" (public domain) on the piano, with its chords.
+  // to You" (public domain) on the piano, with its chords. Sound C (the owner's
+  // call of October 2): on the concert grand's recorded notes, same tempo.
   "birthday-cake": {
     on: [
       { voice: "breath", f: 1300, to: 0.5, decay: 0.5, vol: 0.7 },
-      { voice: "grand", at: 0.5, notes: "F5 - - F5 E5 - - - C5 - - - D5", step: 0.15, hold: 0.35, vol: 0.6 }, // prettier-ignore
-      { voice: "grand", at: 2.9, f: "C5", hold: 1.2, vol: 0.6 },
-      { voice: "grand", at: 0.5, notes: "- - - - F3+A3+C4 - - - - - - - G3+B3+F4 - - - C3+E3+G3", step: 0.15, hold: 1.2, vol: 0.35 }, // prettier-ignore
+      { voice: "concert", at: 0.5, notes: "F5 - - F5 E5 - - - C5 - - - D5", step: 0.15, hold: 0.35, vol: 0.6 }, // prettier-ignore
+      { voice: "concert", at: 2.9, f: "C5", hold: 1.2, vol: 0.6 },
+      { voice: "concert", at: 0.5, notes: "- - - - F3+A3+C4 - - - - - - - G3+B3+F4 - - - C3+E3+G3", step: 0.15, hold: 1.2, vol: 0.35 }, // prettier-ignore
     ],
     off: [
       { voice: "scrape", f: 2800, rate: 50, decay: 0.2, vol: 0.7 },
       { voice: "whoosh", at: 0.1, f: 400, to: 2, decay: 0.4, vol: 0.6 },
     ],
   },
-  // Sound B: kernels popping dry, one papery bang each, at the same moments
-  // as before.
-  popcorn: {
+  // Sound D (the walkthrough of October 6, 2026: it sounded like a sizzle, not real popcorn): a
+  // dry pop for each kernel as it jumps (14, from 0.07 s to 0.68 s, at the recipe's own times),
+  // each one clean, single pop (ten different ones, 0.2 s apart in the file, the pot's rumble and
+  // the oil's hiss cut out) from a real pot of popcorn popping (CC0, elricadavis on Freesound).
+  popcorn: [
+    0.071, 0.073, 0.116, 0.168, 0.263, 0.259, 0.318, 0.351, 0.427, 0.489, 0.549, 0.59, 0.633, 0.679,
+  ].map((at, i) => ({
     voice: "sample",
-    file: "popcorn-popping.mp3",
-    len: 1.2,
-    vol: 0.9,
-    fallback: [
-      { voice: "kernel", f: 1300 },
-      { voice: "kernel", at: 0.18, f: 1500, vol: 0.8 },
-      { voice: "kernel", at: 0.27, f: 1150 },
-      { voice: "kernel", at: 0.54, f: 1600, vol: 0.9 },
-      { voice: "kernel", at: 0.63, f: 1250 },
-      { voice: "kernel", at: 0.81, f: 1450, vol: 0.8 },
-    ],
-  },
+    file: "popcorn-pops.mp3",
+    at,
+    from: ((i * 3) % 10) * 0.2,
+    len: 0.09,
+    pitch: Math.round((0.92 + 0.16 * ((i * 0.618) % 1)) * 100) / 100,
+    vol: Math.round((0.5 + 0.4 * ((i * 0.382) % 1)) * 100) / 100,
+    fallback: { voice: "kernel", f: 1200 + 40 * i, vol: 0.6 },
+  })),
   // Sound B: a wet, heavy wobble instead of a cartoon boing.
   jelly: [
     { voice: "squish", pitch: 0.6, bright: 0.2, decay: 1.4 },
@@ -1517,11 +1652,12 @@ export const TOY_SOUNDS = {
     { voice: "rustle", f: 3600, n: 24, decay: 0.45, vol: 0.8 },
     { voice: "bite", at: 0.02, f: 2200, vol: 0.35 },
   ],
-  // Sound B: a slice pulled away with its cheese stretching.
+  // Sound B: a bite into the crust and the cheese stretching; Sound C: the stretch softer and
+  // shorter (his note of October 2: not so windy).
   pizza: {
     on: [
       { voice: "bite", f: 1800, vol: 0.3 },
-      { voice: "stretch", at: 0.1, f: 600, rate: 45, to: 0.65, decay: 2.2, vol: 0.9 },
+      { voice: "stretch", at: 0.1, f: 600, rate: 45, to: 0.65, decay: 1.5, vol: 0.45 },
     ],
     off: { voice: "thud", f: 120, bright: 0.4, decay: 0.8 },
   },
@@ -1554,9 +1690,10 @@ export const TOY_SOUNDS = {
     on: { voice: "sample", file: "apple-bite.mp3", vol: 1.3, fallback: { voice: "bite", f: 3000 } }, // prettier-ignore
     off: { voice: "pop", f: 520, decay: 1.2, vol: 0.6 },
   },
-  // Sound B: the peel pulled back in soft fibrous strips (each banana's peel
-  // is a cue too).
-  banana: { voice: "peel", f: 1300, n: 24, decay: 1.2 },
+  // Sound C (his note of October 2: the peel too loud and zipper-like): a soft rustle as the bunch
+  // comes apart; each banana's peel is a real, quiet banana peel from the recipe's cues
+  // (src/packs/food.js).
+  banana: { voice: "rustle", f: 1500, n: 3, decay: 0.2, vol: 0.3 },
   orange: [
     { voice: "squish", pitch: 1.3, bright: 0.9, decay: 0.7 },
     { voice: "hiss", f: 3000, decay: 0.3, vol: 0.7 },
@@ -1578,42 +1715,65 @@ export const TOY_SOUNDS = {
   // Sound B: a lower plastic clack.
   bricks: { voice: "clack", notes: "G5 - G5", step: 0.08, decay: 0.7, bright: 0.25 },
   "rubber-duck": { voice: "quack", f: 250, n: 2 },
-  // Sound B: a spun top's soft steady whirr that wobbles and slowly sinks
-  // (no rising hum, no wind).
-  "spinning-top": { voice: "sample", file: "spinning-top-spin.mp3", vol: 0.9, fallback: { voice: "spintop", f: 170, rate: 4, to: 0.85, decay: 1.25 } }, // prettier-ignore
+  // Sound C (his note of October 2): a soft flick as it is set spinning; its spin is heard from the
+  // recipe (src/packs/playthings.js), softly, louder and a little higher the faster it turns,
+  // fading as it slows, also when a drag spins it.
+  "spinning-top": {
+    voice: "sample",
+    file: "spinning-top-spin.mp3",
+    from: 0.1,
+    len: 0.3,
+    vol: 0.35,
+    fallback: { voice: "rustle", f: 2000, n: 2, decay: 0.1, vol: 0.3 },
+  },
   // Sound B: two dice thrown on a wooden table, bouncing and settling.
   dice: { voice: "sample", file: "dice-throw.mp3", vol: 1.7, fallback: { voice: "dice", f: 2300, n: 2 } }, // prettier-ignore
   // The lift is a soft tick; each strike clacks as it lands (cues from the recipe).
   "newtons-cradle": { voice: "clack", f: 5200, decay: 0.3, vol: 0.25 },
-  // Sound B: no whistle; only the soft plush of its arm as it waves.
-  "teddy-bear": { voice: "rustle", f: 1200, n: 8, decay: 0.5, vol: 0.45 },
+  // Sound C (his note of October 2: not grainy or creaky): the soft rustle of a plush bear's fabric
+  // and stuffing (CC0, lemigoga on Freesound).
+  "teddy-bear": {
+    voice: "sample",
+    file: "teddy-bear-plush.mp3",
+    vol: 0.7,
+    fallback: { voice: "breath", f: 900, to: 0.8, decay: 0.5, vol: 0.2 },
+  },
   // Sound B: the string unwinding, the whirr at the bottom, the smack back
   // into the hand (1.8 s).
   "yo-yo": { voice: "yoyo", f: 140, decay: 1.5 },
   // Sound B: a layer sliding round and seating (each turn is a cue too).
   "puzzle-cube": { voice: "sample", file: "puzzle-cube-turn.mp3", vol: 1.4, fallback: { voice: "twist", f: 1800 } }, // prettier-ignore
-  // Sound B: a metal coil spring's ringing sproing, not a rubber band.
-  "spring-toy": { voice: "sample", file: "spring-toy-boing.mp3", vol: 1.4, fallback: { voice: "sproing", f: 260, n: 5, decay: 1.4 } }, // prettier-ignore
+  // Sound C (his note of October 2: like a real Slinky): a real metal Slinky's shimmering coils as
+  // it walks (CC0, foxraid on Freesound).
+  "spring-toy": {
+    voice: "sample",
+    file: "spring-toy-slinky.mp3",
+    vol: 0.9,
+    fallback: { voice: "rustle", f: 4200, n: 24, decay: 1.4, bright: 0.8, vol: 0.4 },
+  },
   // Sound B: the same, with the wind dialed back.
   kite: [
     { voice: "wind", f: 600, rate: 1.5, decay: 0.8, vol: 0.3 },
     { voice: "flutter", at: 0.2, f: 900, rate: 16, decay: 0.8, vol: 0.7 },
   ],
-  // Sound B: a papery launch and a gentler glide.
+  // Sound C: the fold's paper rustle and the glide's air, a little lower (his note: almost perfect,
+  // a bit loud).
   "paper-plane": [
-    { voice: "rustle", f: 3000, n: 6, decay: 0.25, vol: 0.4 },
-    { voice: "whoosh", at: 0.05, f: 700, to: 2, decay: 1.4, vol: 0.4 },
+    { voice: "rustle", f: 3000, n: 6, decay: 0.25, vol: 0.35 },
+    { voice: "whoosh", at: 0.05, f: 700, to: 2, decay: 1.4, vol: 0.18 },
   ],
   "origami-crane": { voice: "flutter", f: 1500, rate: 9, decay: 1.4 },
   // Sound B: a real balloon bursting (no whistle first).
   "balloon-dog": { voice: "sample", file: "balloon-dog-pop.mp3", at: 0.3, vol: 0.45, fallback: { voice: "balloonpop", f: 90, vol: 0.8 } }, // prettier-ignore
-  // Sound B: a soft breath blowing them, and tiny wet pops.
-  "soap-bubbles": [
-    { voice: "breath", f: 1500, to: 0.7, decay: 0.6, vol: 0.35 },
-    { voice: "kernel", at: 0.25, f: 3800, vol: 0.2 },
-    { voice: "kernel", at: 0.5, f: 4200, vol: 0.15 },
-    { voice: "kernel", at: 0.85, f: 3500, vol: 0.18 },
-  ],
+  // Sound C (his note of October 2: softer blowing, louder bubbles): a soft breath through the wand
+  // (CC0, yehdawgo on Freesound); each bubble pops softly as it bursts, from the recipe's cues
+  // (src/packs/playthings.js).
+  "soap-bubbles": {
+    voice: "sample",
+    file: "soap-bubbles-blow.mp3",
+    vol: 0.5,
+    fallback: { voice: "breath", f: 1500, to: 0.7, decay: 0.6, vol: 0.2 },
+  },
   // Sound B: the key's few winding clicks, then clockwork whirring as it
   // unwinds and its tin feet clanking along.
   robot: [
@@ -1621,7 +1781,7 @@ export const TOY_SOUNDS = {
     { voice: "clockwork", at: 0.3, f: 2600, rate: 2.7, decay: 1.1 },
   ],
 
-  // ---- Maths ------------------------------------------------------------------------
+  // ---- math ------------------------------------------------------------------------
   // Sound B: something epic for the strange attractor: a deep hit, a dark
   // slow rush and a wide low chord (no whistling howl).
   lorenz: [
@@ -1701,6 +1861,43 @@ export const TOY_SOUNDS = {
   // Each circle's hum joins in, building into a chord.
   "fourier-circles": { voice: "pad", notes: "C3 G3 C4 E4 G4 C5", step: 0.35, at: 0.3, decay: 1.6 },
   // A wooden slide; drive() adds a slide and a click for each piece.
+  // Lane Math r2: a tracer drops into the flow, a soft drip over a low,
+  // wide chord; each attractor in its own key.
+  "rossler-attractor": [
+    { voice: "drip", f: 620, vol: 0.4 },
+    { voice: "glow", at: 0.05, notes: "C2+G2+C3", decay: 1.4, bright: 0.4, vol: 0.5 },
+  ],
+  "thomas-attractor": [
+    { voice: "drip", f: 780, vol: 0.4 },
+    { voice: "glow", at: 0.05, notes: "E2+B2+E3", decay: 1.4, bright: 0.45, vol: 0.5 },
+  ],
+  "aizawa-attractor": [
+    { voice: "drip", f: 520, vol: 0.4 },
+    { voice: "glow", at: 0.05, notes: "F2+C3+F3", decay: 1.4, bright: 0.35, vol: 0.5 },
+  ],
+  // Lane Math r2: like the hypercube, a slow rush as each 4D shape rolls
+  // through the fourth dimension and again as it rolls home, over a low
+  // chord in its own key.
+  "five-cell": [
+    { voice: "whoom", f: 280, decay: 1.4, vol: 0.6 },
+    { voice: "glow", at: 0.2, notes: "D3+A3", decay: 1.2, bright: 0.5, vol: 0.45 },
+    { voice: "whoom", at: 2.6, f: 240, decay: 1.2, vol: 0.5 },
+  ],
+  "sixteen-cell": [
+    { voice: "whoom", f: 320, decay: 1.4, vol: 0.6 },
+    { voice: "glow", at: 0.2, notes: "G2+D3+G3", decay: 1.2, bright: 0.5, vol: 0.45 },
+    { voice: "whoom", at: 2.6, f: 260, decay: 1.2, vol: 0.5 },
+  ],
+  "twenty-four-cell": [
+    { voice: "whoom", f: 260, decay: 1.5, vol: 0.6 },
+    { voice: "glow", at: 0.2, notes: "C3+G3+E4", decay: 1.2, bright: 0.5, vol: 0.45 },
+    { voice: "whoom", at: 2.6, f: 230, decay: 1.2, vol: 0.5 },
+  ],
+  duoprism: [
+    { voice: "whoom", f: 300, decay: 1.4, vol: 0.6 },
+    { voice: "glow", at: 0.2, notes: "F2+C3+A3", decay: 1.2, bright: 0.5, vol: 0.45 },
+    { voice: "whoom", at: 2.6, f: 250, decay: 1.2, vol: 0.5 },
+  ],
   "pythagoras-proof": { voice: "scrape", at: 0.3, f: 700, rate: 9, decay: 0.35, vol: 0.35 },
   // Lane Manual, Sound B (his note: too robotic and loud, change entirely):
   // the quiet scratch of chalk as t plays (4 s).
@@ -1793,14 +1990,19 @@ export const TOY_SOUNDS = {
     { voice: "scrape", at: 1.62, f: 2400, rate: 26, decay: 2.3, vol: 0.18 },
     { voice: "click", at: 3.97, f: 2600, vol: 0.9 },
   ],
-  // Sound B (his note: the clicks are weird, the water too bubbly): the cap
-  // twisted off, a real pour (a splashing stream and the water sloshing in
-  // the glass) and the cap twisted back on.
+  // Sound D (the walkthrough of October 6, 2026: the water sounded like a waterfall): the cap
+  // twisted off, a real recording of water poured into a glass (CC0, ahamirikia on Freesound) while
+  // the stream runs (1.6 s to 2.9 s), and the cap twisted back on.
   "water-bottle": [
     { voice: "twist", f: 1400, vol: 0.4 },
     { voice: "twist", at: 0.35, f: 1300, vol: 0.35 },
-    { voice: "roar", at: 1.66, f: 400, bright: 0.6, decay: 1.2, vol: 0.35 },
-    { voice: "slosh", at: 1.8, f: 700, rate: 3, n: 0, decay: 1, vol: 0.4 },
+    {
+      voice: "sample",
+      file: "water-bottle-pour.mp3",
+      at: 1.62,
+      vol: 0.8,
+      fallback: { voice: "slosh", f: 700, rate: 3, n: 2, decay: 1, vol: 0.4 },
+    },
     { voice: "twist", at: 4.05, f: 1400, vol: 0.4 },
   ],
   // Sound B (his Sound Board note: no bubbles; the pssht and fizz need
@@ -1820,13 +2022,13 @@ export const TOY_SOUNDS = {
     { voice: "thud", at: 3.34, f: 140, vol: 0.7 },
     { voice: "thud", at: 3.84, f: 150, vol: 0.7 },
   ],
-  // Soft fabric swishes as the hood flips and the sleeves swing, and a zip-like flick.
+  // Sound C: the fabric's soft brushes and the zip, with much less wind (his note of October 2).
   hoodie: [
-    { voice: "breath", f: 700, to: 0.6, decay: 0.8, vol: 0.5 },
-    { voice: "breath", at: 0.62, f: 900, to: 1.4, decay: 0.8, vol: 0.45 },
+    { voice: "breath", f: 700, to: 0.6, decay: 0.8, vol: 0.22 },
+    { voice: "breath", at: 0.62, f: 900, to: 1.4, decay: 0.8, vol: 0.2 },
     { voice: "tear", at: 1.2, f: 1600, to: 2.4, decay: 0.35, vol: 0.3 },
-    { voice: "whoosh", at: 1.25, f: 250, to: 4, decay: 1.1, vol: 0.35 },
-    { voice: "whoosh", at: 2.95, f: 300, to: 3, decay: 1.1, vol: 0.3 },
+    { voice: "whoosh", at: 1.25, f: 250, to: 2, decay: 1.1, vol: 0.1 },
+    { voice: "whoosh", at: 2.95, f: 300, to: 1.8, decay: 1.1, vol: 0.09 },
   ],
   // Sound B (his note: too robotic and tacky): each fold is a plastic hinge
   // sliding shut and seating; the lenses darken silently.
@@ -1915,8 +2117,8 @@ export const TOY_SOUNDS = {
   ],
 
   // ---- Animals ----------------------------------------------------------------------
-  // Sound B: two soft pushes of water as the bell pulses.
-  jellyfish: { voice: "swim", f: 380, n: 2, rate: 1.1 },
+  // Sound C: two soft swimming pulses, a little louder (his note of October 2).
+  jellyfish: { voice: "swim", f: 380, n: 2, rate: 1.1, vol: 1.35 },
   // Water swishes as the school swirls into a ball, then bursts apart.
   "fish-school": [
     { voice: "whoosh", f: 500, to: 1.8, decay: 2.6, vol: 0.6 },
@@ -1937,12 +2139,12 @@ export const TOY_SOUNDS = {
     { voice: "hollow", at: 2.05, f: 200, decay: 1.6, bright: 0.2, vol: 0.6 },
     { voice: "bubbles", at: 3.1, f: 380, n: 5, decay: 1, vol: 0.4 },
   ],
-  // Sound B: a beetle's real wingbeat, wandering, not a steady buzz.
+  // Sound C: the wings' soft whirr on take-off and landing, quieter (his note of October 2).
   ladybug: {
-    on: { voice: "flybuzz", f: 95, bright: 0.8, decay: 0.8, vol: 0.5 },
+    on: { voice: "flybuzz", f: 95, bright: 0.6, decay: 0.8, vol: 0.27 },
     off: [
-      { voice: "flybuzz", f: 90, bright: 0.8, decay: 0.4, vol: 0.4 },
-      { voice: "patter", at: 0.4, f: 2000, n: 2, decay: 0.2, vol: 0.3 },
+      { voice: "flybuzz", f: 90, bright: 0.6, decay: 0.4, vol: 0.22 },
+      { voice: "patter", at: 0.4, f: 2000, n: 2, decay: 0.2, vol: 0.2 },
     ],
   },
   // Sound B: wetter and slimier.
@@ -1988,8 +2190,15 @@ export const TOY_SOUNDS = {
     { voice: "sample", file: "frog-croak.mp3", at: 2.55, vol: 1.4, fallback: { voice: "croak", f: 280, n: 2, rate: 30 } }, // prettier-ignore
   ],
   penguin: { voice: "squawk", f: 420 },
-  // Sound B: a great horned owl's real call, "hoo, h-hoo, hooo, hoo".
-  owl: { voice: "sample", file: "owl-hoot.mp3", vol: 1.1, fallback: { voice: "owlhoot", f: 330 } }, // prettier-ignore
+  // Sound C (his note of October 2: too long, like a dog): a short, natural owl hoot, h'HOO-oo and
+  // a soft hoo (CC0, Gerent on Freesound).
+  owl: {
+    voice: "sample",
+    file: "owl-hoot-short.mp3",
+    len: 1.15,
+    vol: 0.8,
+    fallback: { voice: "owlhoot", f: 330 },
+  },
 
   // ---- Holidays ---------------------------------------------------------------------
   "jack-o-lantern": {
@@ -2012,13 +2221,45 @@ export const TOY_SOUNDS = {
     { voice: "launch", f: 90, decay: 0.9 },
     { voice: "sample", file: "fireworks-burst.mp3", at: 0.82, vol: 1.8, fallback: { voice: "bang", f: 55, n: 14, decay: 1.4 } }, // prettier-ignore
   ],
-  // Sound B: the lights come on to the start of "Jingle Bells" (public
-  // domain) on the piano; off, the branches' soft rustle.
+  // Sound C (his note of October 2: a nicer instrument): lighting up, Jingle Bells on a real
+  // glockenspiel (CC0, sgossner on Freesound; its C6 note pitched to each), with a shake of real
+  // sleigh bells (CC0, Selector on Freesound); off, a soft rustle.
   "decorated-tree": {
     on: [
-      { voice: "grand", notes: "E5 E5 E5 - E5 E5 E5 - E5 G5 C5 D5", step: 0.2, hold: 0.3, vol: 0.5 }, // prettier-ignore
-      { voice: "grand", at: 2.4, f: "E5", hold: 1, vol: 0.5 },
-      { voice: "grand", notes: "C3+G3 - - - C3+G3 - - - C3+G3 - - - C3+E3+G3", step: 0.2, hold: 0.7, vol: 0.3 }, // prettier-ignore
+      ...[
+        [0, 1.2513],
+        [0.2, 1.2513],
+        [0.4, 1.2513],
+        [0.8, 1.2513],
+        [1.0, 1.2513],
+        [1.2, 1.2513],
+        [1.6, 1.2513],
+        [1.8, 1.4881],
+        [2.0, 0.9932],
+        [2.3, 1.1148],
+        [2.4, 1.2513],
+      ].map(([at, pitch]) => ({
+        voice: "sample",
+        file: "decorated-tree-bell.mp3",
+        at,
+        pitch,
+        vol: 0.55,
+        fallback: { voice: "bell", f: Math.round(1054 * pitch), decay: 0.6, vol: 0.4 },
+      })),
+      {
+        voice: "sample",
+        file: "decorated-tree-sleigh.mp3",
+        vol: 0.35,
+        fallback: { voice: "jingle", vol: 0.3 },
+      },
+      {
+        voice: "sample",
+        file: "decorated-tree-sleigh.mp3",
+        at: 1.6,
+        pitch: 1.05,
+        vol: 0.3,
+        fallback: { voice: "jingle", vol: 0.25 },
+      },
     ],
     off: { voice: "rustle", f: 2800, n: 10, decay: 0.6, vol: 0.4 },
   },
@@ -2134,27 +2375,44 @@ export const TOY_SOUNDS = {
     { voice: "roar", f: 110, bright: 0.4, decay: 2.2, vol: 0.6 },
     { voice: "rumble", f: 55, rate: 8, decay: 1.4 },
   ],
-  // Sound B: the heavy whump of real rotor blades.
+  // Sound C (his note of October 2: real rotor chop): a real helicopter's blades chopping (CC0,
+  // mil0001 on Freesound); landing, the chop slowing as it fades.
   helicopter: {
-    on: { voice: "sample", file: "helicopter-rotor.mp3", vol: 0.95, fallback: { voice: "rotor", f: 340, rate: 9, decay: 1.8 } }, // prettier-ignore
-    off: { voice: "sample", file: "helicopter-rotor.mp3", pitch: 0.8, len: 2, vol: 0.75, fallback: { voice: "rotor", f: 280, rate: 6, decay: 1.3, vol: 0.8 } }, // prettier-ignore
+    on: {
+      voice: "sample",
+      file: "helicopter-chop.mp3",
+      vol: 0.95,
+      fallback: { voice: "rotor", f: 340, rate: 9, decay: 1.8 },
+    },
+    off: {
+      voice: "sample",
+      file: "helicopter-chop.mp3",
+      pitch: 0.85,
+      len: 2.4,
+      vol: 0.75,
+      fallback: { voice: "rotor", f: 280, rate: 6, decay: 1.3, vol: 0.8 },
+    },
   },
   "hot-air-balloon": { voice: "roar", f: 250, bright: 0.35, decay: 1.2 },
-  // Sound B: a short steam whistle, then it chugs along: chuffs of steam,
-  // strong and soft, over the rumble of the wheels.
-  "steam-train": [
-    { voice: "whistle", f: 740, kind: "steam", decay: 0.8, vol: 0.6 },
-    { voice: "sample", file: "steam-train-chug.mp3", at: 0.5, vol: 0.8, fallback: { voice: "chug", f: 600, n: 14, rate: 3.6 } }, // prettier-ignore
-  ],
+  // Sound C (his note of October 2: no bell or horn; a real chug): a real steam locomotive chuffing
+  // (CC0, relwin on Freesound), fading with its steam (2 s).
+  "steam-train": {
+    voice: "sample",
+    file: "steam-train-chuff.mp3",
+    len: 2.1,
+    vol: 0.85,
+    fallback: { voice: "chug", f: 600, n: 8, rate: 3.6 },
+  },
   "ocean-liner": { voice: "horn", f: 73, kind: "ship", decay: 1.3 },
-  // Sound B: a real engine's growl, revved twice.
+  // Sound B: a real sports car revving. Sound C (his note of October 2): the engine fades out with
+  // the exhaust (gone at 1.8 s).
   "sports-car": {
     voice: "sample",
     file: "sports-car-rev.mp3",
     vol: 0.9,
     fallback: [
-      { voice: "motor", f: 40, to: 2.2, kind: "car", bright: 0.6, decay: 0.9 },
-      { voice: "motor", at: 1.35, f: 42, to: 2.6, kind: "car", bright: 0.65, decay: 1.2 },
+      { voice: "motor", f: 40, to: 1.6, kind: "car", bright: 0.6, decay: 0.9 },
+      { voice: "motor", at: 0.9, f: 42, to: 1.8, kind: "car", bright: 0.65, decay: 0.8 },
     ],
   },
   bus: [
@@ -2173,7 +2431,14 @@ export const TOY_SOUNDS = {
     { voice: "splash", at: 0.4, f: 2000, bright: 0.3, decay: 0.8, vol: 0.6 },
   ],
   submarine: { voice: "sonar", f: 1180 },
-  bicycle: { voice: "bell", notes: "A6 - A6", step: 0.14, decay: 0.35, bright: 0.9 },
+  // Sound C (his note of October 2: a real bell): a real bicycle bell's ding-ding (CC0, PanosA on
+  // Freesound).
+  bicycle: {
+    voice: "sample",
+    file: "bicycle-bell.mp3",
+    vol: 0.8,
+    fallback: { voice: "bell", notes: "A6 - A6", step: 0.14, decay: 0.35, bright: 0.9 },
+  },
   // Sound B: a slow diesel's putt-putt and clatter.
   tractor: { voice: "sample", file: "tractor-engine.mp3", vol: 1.5, fallback: { voice: "motor", f: 13, to: 1.3, kind: "tractor", bright: 0.25, decay: 1.8 } }, // prettier-ignore
   // Sound B: less childish: a deep pulsing hum and a heavy rush as it lifts
@@ -2219,7 +2484,7 @@ export const TOY_SOUNDS = {
     on: { voice: "horn", f: 62, kind: "fog", decay: 1.4 },
     off: { voice: "switch", f: 1800, decay: 1.5 },
   },
-  // The flame whooshes up, sparks crackle and a harbour bell rings.
+  // The flame whooshes up, sparks crackle and a harbor bell rings.
   "statue-of-liberty": [
     // Sound B: no crackling clicks.
     { voice: "whoosh", f: 300, to: 3, decay: 0.8 },
@@ -2368,9 +2633,11 @@ export const TOY_SOUNDS = {
     { voice: "thud", at: 0.465, notes: "F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3 F3", step: 0.165, bright: 0.5, decay: 0.35, vol: 0.45 }, // prettier-ignore
     { voice: "thud", at: 4.45, f: 150, bright: 0.4, decay: 0.4, vol: 0.4 },
   ],
-  // Sound B (his note: no rising xylophone, not robotic): a soft patter of
-  // splats settling into place as the picture forms.
-  "gaussian-splatting": { voice: "patter", at: 0.3, f: 2400, n: 26, decay: 3.8, vol: 0.3 },
+  // Sound C (his notes of October 2): each view plays its own sound from the recipe
+  // (src/packs/splatting.js): training, a soft tone falling as the loss curve draws; one splat, a
+  // soft airy swell; many splats, a faint twinkle; sorting, a pebble's click as each splat is
+  // placed. This is the training view's.
+  "gaussian-splatting": { voice: "glide", at: 0.35, f: 740, to: 0.45, decay: 1.5, vol: 0.45 },
   // Three chimes as the arrows run (0.15, 0.85, 1.55 s), a bright ding as
   // QUEEN lights.
   "word-vectors": [
@@ -2380,7 +2647,11 @@ export const TOY_SOUNDS = {
     { voice: "ding", at: 2.25, f: "C7", decay: 1.2 },
   ],
   // Each swap plays the height of the bar moving right (bubble sort, a swap
-  // every 0.225 s), then the sorted bars play their rising scale.
+  // every 0.225 s), then the sorted bars play their rising scale. Lane
+  // Computing r2: on the toy, the sort plays its own notes (cues from
+  // src/packs/computing.js, sortCues), every comparison and swap in each
+  // algorithm's own voice, so the tap is quiet; this is bubble sort's swaps
+  // for the Sound Board.
   "sorting-machine": [
     { voice: "marimba", at: 0.44, notes: "A4 C5 C5 C5 C5 C5 A4 B4 B4 B4 E4 A4 A4 A4 F4 E4", step: 0.225, decay: 0.6 }, // prettier-ignore
     { voice: "marimba", at: 3.95, notes: "C4 D4 E4 F4 G4 A4 B4 C5", step: 0.06, decay: 0.8 },
@@ -2414,11 +2685,16 @@ export const TOY_SOUNDS = {
   "picture-lab": { voice: "sample", file: "book-page.mp3", vol: 1.3, fallback: { voice: "pageflip", f: 1700, decay: 0.9, vol: 0.8 } }, // prettier-ignore
 
   // ---- Pictures and pages (lane Books) ----------------------------------------------
-  // A page turning over (a paper swish and a flutter) and a soft thud as it
-  // lands (the cover's thud when it opens).
-  // Sound B: the swish is a real paper page turning.
+  // Sound C (his note of October 2: a page sound per book type): each style plays its own real page
+  // from the recipe (src/packs/pictures.js): glossy for the magazine, light for the paperback,
+  // fuller for the hardcover (this one).
   "your-book": [
-    { voice: "sample", file: "book-page.mp3", vol: 1.2, fallback: { voice: "pageflip", f: 1900, decay: 1.4, vol: 0.7 } }, // prettier-ignore
+    {
+      voice: "sample",
+      file: "your-book-hardcover.mp3",
+      vol: 1.1,
+      fallback: { voice: "pageflip", f: 1900, decay: 1.4, vol: 0.7 },
+    },
     { voice: "thud", at: 0.82, f: 150, decay: 0.35, vol: 0.3 },
   ],
   // A thick card page: a lower swish and a firmer thud.
@@ -2443,6 +2719,12 @@ export const TOY_SOUNDS = {
     ],
     off: { voice: "hiss", f: 3000, decay: 0.7, vol: 0.3 },
   },
+  // Lane Live r8: Sound in a box rings its mode eight octaves down (a cue from
+  // drive()); this is the default mode's (cube 0, 1, 2 mixed: 167 kHz, 654 Hz).
+  "chladni-cell": [
+    { voice: "tone", f: 654, decay: 7, kind: "sine", vol: 0.7 },
+    { voice: "tone", f: 1308, decay: 4.2, kind: "sine", vol: 0.08 },
+  ],
   // The song landscape plays the song itself; this is its tap's start chime.
   "song-landscape": [
     { voice: "pluck", notes: "C5 E5 G5", step: 0.09, decay: 0.5, bright: 0.4, vol: 0.6 },
@@ -2466,6 +2748,22 @@ export const TOY_SOUNDS = {
     on: { voice: "whoosh", f: 240, to: 5, decay: 1.6, vol: 0.5 },
     off: { voice: "whoosh", f: 1800, to: 0.2, decay: 1.2, vol: 0.45 },
   },
+  // Lane Live input r3: Moving photo to 3D pauses and plays with a soft click.
+  // Lane Sound and light lab: the Sound lab's switch (the tone itself plays
+  // from the toy), the recorder's soft button, the Light lab's slide changer.
+  "sound-lab": {
+    on: { voice: "switch", f: 2400, vol: 0.4 },
+    off: { voice: "switch", f: 1900, vol: 0.35 },
+  },
+  "sound-recorder": [{ voice: "click", f: 1500, decay: 0.04, vol: 0.3 }],
+  "light-lab": [
+    { voice: "click", f: 700, decay: 0.08, vol: 0.4 },
+    { voice: "click", at: 0.09, f: 950, decay: 0.05, vol: 0.3 },
+  ],
+  "moving-photo-3d": {
+    on: { voice: "click", f: 1200, decay: 0.05, vol: 0.35 },
+    off: { voice: "click", f: 900, decay: 0.05, vol: 0.3 },
+  },
   // Lane Photo to 3D, Sound B (his note: no wind, no whoosh): the photo's
   // paper lifting as the depth comes up and settling back as it lies flat.
   "photo-3d": {
@@ -2484,6 +2782,24 @@ export const TOY_SOUNDS = {
     on: { voice: "whoosh", f: 700, to: 1, decay: 1.2, vol: 0.22 },
     off: { voice: "whoosh", f: 600, to: 1, decay: 1.0, vol: 0.18 },
   },
+  // ---- Viewers (lane Viewers) ---------------------------------------------------------
+  // The Splat toolkit's spin: a soft swish of air as the splats turn round together.
+  "splat-toolkit": { voice: "whoosh", f: 520, to: 1.3, decay: 2.2, vol: 0.2 },
+  // Point clouds: a lidar sweep, a rising airy tone with faint ticks as the scan line crosses
+  // (Sound D, the walkthrough of October 6, 2026: the wind and the twinkle both subtler).
+  "point-clouds": [
+    { voice: "whoosh", f: 380, to: 2.2, decay: 2.4, vol: 0.09 },
+    { voice: "sparkle", at: 0.1, f: 4200, n: 6, decay: 2, vol: 0.07 },
+  ],
+  // Volume viewer (lane Volume viewer): stepping to the next window preset, a soft click like a
+  // scanner console's dial, and a short low tone as the new window settles.
+  // Fix10 (the walkthrough of October 9, 2026: no click and no rising "vroom"): a tap slides a
+  // film onto a lightbox, a papery slip and its soft settle. Play is quiet here; its two dark,
+  // soft rushes come from the recipe's cues, one for each pass of the cut. The drag is silent.
+  "volume-viewer": [
+    { voice: "pageflip", f: 1100, decay: 0.8, vol: 0.55 },
+    { voice: "thud", at: 0.36, f: 160, decay: 0.6, bright: 0.15, vol: 0.12 },
+  ],
   // Lane Screens: the old TV's click and hum (each style plays its own
   // cues as it switches on: the flat TV's soft tone, the cinema's curtains,
   // the hologram's shimmer).
@@ -2501,9 +2817,58 @@ export const TOY_SOUNDS = {
       { voice: "hum", at: 0.02, f: 62, to: 0.6, decay: 0.7, bright: 0.12, vol: 0.35 },
     ],
   },
-  // Sound B (his note: too robotic): a soft ripple through the field, like
-  // grass stirring, as the pulse runs out.
-  "splat-field": { voice: "rustle", f: 3000, n: 30, decay: 2.4, bright: 0.3, vol: 0.35 },
+  // Sound C (his note of October 2: no robotic pulse): each field plays its own sound from the
+  // recipe (src/packs/lab.js): a soft hush for the galaxy's ring, a stone's plop and a gentle wash
+  // for the ocean, a warm swelling tone for the knot. This is the galaxy's.
+  // Lane QR: the tap bursts the code (a soft pop, a whoosh, pieces landing);
+  // Assemble and Flip play their own through the recipe's cues.
+  // Lane QR r3: the tap knocks modules loose (a knock, a puff, the click of
+  // pieces snapping back); each Toy-tab motion sends its own sound as cues.
+  "qr-code": [
+    { voice: "wood", f: 420, decay: 0.12, vol: 0.3 },
+    { voice: "breath", f: 800, to: 0.6, decay: 0.5, vol: 0.14 },
+    { voice: "wood", at: 1.05, f: 900, decay: 0.08, vol: 0.12 },
+    { voice: "wood", at: 1.2, f: 1100, decay: 0.06, vol: 0.08 },
+  ],
+  // Lane QR lab r2: soft, not electronic. A light knock as a part lifts; a
+  // scrape and a soft thud as damage lands; a slide out and a knock back.
+  // Lane QR r5 (the owner's walkthrough of October 10, 2026): the wind under
+  // How a QR code works and the whoosh of the three codes coming apart, both
+  // quieter. The knock carries How a QR code works now (a little louder, so
+  // the tap stays audible with the wind at a third of its old level).
+  "qr-anatomy": [
+    { voice: "wood", f: 820, decay: 0.18, vol: 0.26 },
+    { voice: "breath", f: 1100, to: 0.8, decay: 0.5, vol: 0.025 },
+  ],
+  "qr-damage": [
+    { voice: "breath", f: 520, to: 0.6, decay: 0.45, vol: 0.16 },
+    { voice: "thud", at: 0.3, f: 130, decay: 0.25, vol: 0.3 },
+  ],
+  "qr-three": [
+    { voice: "breath", f: 900, to: 1.1, decay: 1.1, vol: 0.04 },
+    { voice: "wood", at: 2.6, f: 660, decay: 0.15, vol: 0.12 },
+  ],
+  // Lane QR craft: soft and wooden, not electronic. Tiles turning over: a
+  // run of light wooden clicks under a soft breath.
+  "qr-picture": [
+    { voice: "breath", f: 760, to: 0.9, decay: 0.9, vol: 0.03 },
+    { voice: "wood", at: 0.5, f: 940, decay: 0.08, vol: 0.2 },
+    { voice: "wood", at: 1.4, f: 880, decay: 0.08, vol: 0.18 },
+    { voice: "wood", at: 2.3, f: 980, decay: 0.08, vol: 0.16 },
+  ],
+  // A run of wooden clacks for the toppling dominoes, settling to a rest.
+  "qr-build": [
+    { voice: "wood", f: 1250, decay: 0.05, vol: 0.12 },
+    { voice: "wood", at: 0.35, f: 1180, decay: 0.05, vol: 0.11 },
+    { voice: "wood", at: 0.7, f: 1300, decay: 0.05, vol: 0.1 },
+    { voice: "wood", at: 1.05, f: 1220, decay: 0.05, vol: 0.09 },
+    { voice: "thud", at: 1.4, f: 150, decay: 0.2, vol: 0.12 },
+  ],
+  // A soft breath as the scanner's line sweeps (lane QR r5: the note of a
+  // read at the end is gone, the owner's call of October 10, 2026; the sweep
+  // a little fuller, so the tap is still heard without it).
+  barcodes: [{ voice: "breath", f: 900, to: 1.05, decay: 1.2, vol: 0.06 }],
+  "splat-field": { voice: "breath", f: 520, to: 0.75, decay: 3.4, vol: 0.2 },
   // ---- Science (lane Science) ----------------------------------------------------------
   // Quiet and subtle (PACKS.md 7e): atoms make no sound, so the jiggle is a faint
   // jostle of tiny taps under a soft breath, and it settles with a softer one.
@@ -2526,12 +2891,305 @@ export const TOY_SOUNDS = {
     on: { voice: "breath", f: 500, to: 0.8, decay: 2.8, vol: 0.35 },
     off: { voice: "breath", f: 400, to: 1.2, decay: 2.4, vol: 0.3 },
   },
+  // Unit cells (lane Lattices and orbitals): a small, clear glass clink as
+  // the view steps, and a soft wooden tick as the atoms settle.
+  "unit-cells": [
+    { voice: "glass", f: 880, decay: 0.7, vol: 0.45 },
+    { voice: "wood", at: 0.55, f: 640, decay: 0.4, vol: 0.3 },
+  ],
+  // Orbital atlas: a soft, low whoosh as the orbital is cut and opens, and a
+  // quiet low ding as its cut face shows.
+  "orbital-atlas": [
+    { voice: "whoosh", f: 340, decay: 0.9, vol: 0.14 },
+    { voice: "ding", at: 0.5, f: 523, decay: 1.4, vol: 0.3 },
+  ],
+  // A cryo-EM map cut open: a soft, low whoosh as the clipping plane sweeps
+  // in, and a softer one as it closes (Science r3).
+  "cryoem-map": {
+    on: { voice: "whoosh", f: 380, decay: 1.1, vol: 0.3 },
+    off: { voice: "whoosh", f: 300, decay: 1, vol: 0.25 },
+  },
+  // The contour layers lifting apart: a soft wooden slide; settling back, a
+  // lower one (Science r3).
+  "contour-lab": {
+    on: { voice: "wood", f: 520, decay: 0.5, vol: 0.3 },
+    off: { voice: "wood", f: 420, decay: 0.5, vol: 0.28 },
+  },
+  // Water filling the land: a gentle rush rising; draining, a lower one.
+  "terrain-box": {
+    on: { voice: "whoosh", f: 300, decay: 2.4, vol: 0.3 },
+    off: { voice: "whoosh", f: 240, decay: 2.2, vol: 0.25 },
+  },
+  // ---- Ripple tank (lane Optics) ------------------------------------------------------
+  // The pebble's plop as it lands (it falls for 0.3 s), and the soft lap of
+  // its rings.
+  // Fix10: on the bigger pebble's landing, 0.45 s after the tap.
+  "ripple-tank": [
+    { voice: "drip", f: 560, n: 1, at: 0.43, vol: 0.8 },
+    { voice: "wave", f: 420, decay: 1.2, at: 0.49, vol: 0.16 },
+  ],
+  // ---- Light bench (lane Optics) ------------------------------------------------------
+  // A tap changes the light: the lamp's switch clicks.
+  "light-bench": { voice: "switch", f: 2900, vol: 0.7 },
+  // ---- Imaging (lane Imaging) ---------------------------------------------------------
+  // The belt's low rumble as the bag rides through, the curtains' slap, and
+  // the scanner's soft beep when its picture is done.
+  "airport-xray": [
+    { voice: "rumble", f: 55, decay: 3.2, vol: 0.25 },
+    { voice: "slap", f: 300, at: 1.9, vol: 0.3 },
+    { voice: "blip", f: 880, at: 3.6, vol: 0.28 },
+  ],
+  // The gantry's knock as it starts and its motor's low run as it sweeps;
+  // lower as it sweeps back.
+  "how-ct": {
+    on: [
+      { voice: "hollow", f: 180, vol: 0.5 },
+      { voice: "rumble", f: 85, decay: 4.5, vol: 0.25, at: 0.05 },
+    ],
+    off: [
+      { voice: "hollow", f: 150, vol: 0.45 },
+      { voice: "rumble", f: 70, decay: 4, vol: 0.22, at: 0.05 },
+    ],
+  },
+  // A nutshell's hollow knock as the kernel falls away, and a softer one
+  // as it comes back.
+  "walnut-ct": {
+    on: [
+      { voice: "hollow", f: 420, vol: 0.55 },
+      { voice: "wood", f: 900, at: 0.09, vol: 0.3 },
+    ],
+    off: [
+      { voice: "hollow", f: 360, vol: 0.45 },
+      { voice: "wood", f: 760, at: 0.09, vol: 0.25 },
+    ],
+  },
+  // An MRI scanner's knocking as it steps through the slices.
+  "fruit-mri": [
+    { voice: "hollow", f: 640, vol: 0.32 },
+    { voice: "hollow", f: 640, at: 0.12, vol: 0.32 },
+    { voice: "hollow", f: 640, at: 0.24, vol: 0.32 },
+    { voice: "hollow", f: 640, at: 0.36, vol: 0.32 },
+    { voice: "thud", f: 90, at: 0.55, vol: 0.4 },
+    { voice: "hollow", f: 540, at: 0.7, vol: 0.28 },
+    { voice: "hollow", f: 540, at: 0.82, vol: 0.28 },
+    { voice: "hollow", f: 540, at: 0.94, vol: 0.28 },
+    { voice: "hollow", f: 540, at: 1.06, vol: 0.28 },
+  ],
+  // The microscope's stage motor stepping in, with a soft vacuum hum.
+  "electron-microscope": [
+    { voice: "wood", f: 520, vol: 0.35 },
+    { voice: "wood", f: 560, at: 0.1, vol: 0.3 },
+    { voice: "rumble", f: 110, decay: 1.2, vol: 0.18, at: 0.05 },
+  ],
+  // The thermal camera's shutter clicking as it calibrates, then a soft
+  // tick; a lower click as it turns off.
+  "thermal-camera": {
+    on: [
+      { voice: "wood", f: 1500, vol: 0.3 },
+      { voice: "wood", f: 1500, at: 0.18, vol: 0.25 },
+      { voice: "ding", f: 1046, at: 0.4, vol: 0.12, decay: 0.4 },
+    ],
+    off: [{ voice: "wood", f: 1100, vol: 0.28 }],
+  },
+  // ---- Molecule viewer (lane Molecule viewer) ---------------------------------------
+  // Quiet (PACKS.md 7e): one soft, low click as an atom is picked.
+  "molecule-viewer": { voice: "clack", f: 1500, decay: 0.18, bright: 0.1, vol: 0.4 },
+  // ---- Baked chest (lane Baked engine): a wooden creak as the lid swings up, a soft knock as it shuts.
+  "baked-chest": {
+    on: { voice: "scrape", f: 300, rate: 5, decay: 1.1, vol: 0.7 },
+    off: [
+      { voice: "scrape", f: 260, rate: 8, decay: 0.6, vol: 0.5 },
+      { voice: "wood", at: 0.45, f: 180, decay: 1.2 },
+    ],
+  },
   // ---- Fluid lab (lane Fluids) ------------------------------------------------------
   // A pour's splash and glug (each scene plays its own through cues: a pour,
   // a thick gloop for honey and lava, a splash, a breath on the candle).
   "fluid-lab": [
     { voice: "splash", f: 520, decay: 1.2, vol: 0.55 },
     { voice: "bubbles", at: 0.25, n: 7, rate: 9, decay: 1.4, vol: 0.45 },
+  ],
+  // ---- Earth and maps (lane Geo) ------------------------------------------------------
+  // Water rushing in and draining out, the eruption's blast and roar, the
+  // storm's rumble and wind, the city's hum, a stork's bill clatter, and the
+  // ground's rumble: quiet and low.
+  "grand-canyon": [
+    { voice: "roar", f: 140, bright: 0.25, decay: 2.2, vol: 0.4 },
+    { voice: "wave", at: 0.4, f: 380, decay: 1.6, vol: 0.35 },
+    { voice: "wave", at: 2.2, f: 300, decay: 1.0, vol: 0.28 },
+  ],
+  "st-helens": {
+    on: [
+      { voice: "rumble", f: 60, rate: 6, decay: 1.6, vol: 0.7 },
+      { voice: "roar", at: 0.7, f: 120, bright: 0.3, decay: 3, vol: 0.55 },
+      { voice: "thud", at: 0.55, f: 55, decay: 1.4, vol: 0.6 },
+    ],
+    off: { voice: "rumble", f: 75, rate: 3, decay: 1.2, vol: 0.35 },
+  },
+  "sea-floor": [
+    { voice: "roar", f: 110, bright: 0.2, decay: 2.4, vol: 0.38 },
+    { voice: "wave", at: 2.1, f: 260, decay: 1.0, vol: 0.32 },
+  ],
+  "tide-harbor": [
+    { voice: "wave", f: 420, decay: 1.4, vol: 0.32 },
+    { voice: "wave", at: 1.3, f: 360, decay: 1.2, vol: 0.26 },
+    { voice: "wave", at: 2.4, f: 420, decay: 0.9, vol: 0.3 },
+  ],
+  hurricane: {
+    on: [
+      { voice: "rumble", f: 80, rate: 4, decay: 2.2, vol: 0.6 },
+      { voice: "wind", at: 0.3, f: 380, rate: 0.9, decay: 2.6, vol: 0.14 },
+    ],
+    off: [
+      { voice: "rumble", f: 95, rate: 3, decay: 1.4, vol: 0.4 },
+      { voice: "wind", at: 0.2, f: 300, rate: 0.5, decay: 1.8, vol: 0.1 },
+    ],
+  },
+  "relief-map": [
+    { voice: "scrape", f: 300, rate: 6, decay: 0.8, vol: 0.18 },
+    { voice: "drip", at: 1.2, f: 900, n: 6, rate: 4, vol: 0.3 },
+  ],
+  "living-city": {
+    on: { voice: "roar", f: 90, bright: 0.15, decay: 2.4, vol: 0.3 },
+    off: { voice: "roar", f: 130, bright: 0.3, decay: 2.4, vol: 0.34 },
+  },
+  "stork-migration": [
+    { voice: "flutter", n: 6, rate: 7, decay: 1.2, vol: 0.4 },
+    { voice: "clack", at: 0.6, f: 1400, notes: "C5 C5 C5 C5 C5 C5", step: 0.07, vol: 0.25 },
+  ],
+  earthquakes: [
+    { voice: "rumble", f: 70, rate: 7, decay: 1.8, vol: 0.6 },
+    { voice: "rumble", at: 2.5, f: 90, rate: 10, decay: 1.2, vol: 0.4 },
+  ],
+  // ---- Arcade (lane Arcade) --------------------------------------------------------------
+  // Play: the ball's first knock off the paddle (the game plays its own
+  // sounds as it goes: knocks, a marimba note and a crumble for each brick).
+  shardball: [
+    { voice: "pock", f: 520, vol: 0.6 },
+    { voice: "marimba", at: 0.12, f: 783.99, decay: 0.7, vol: 0.5 },
+    { voice: "crunch", at: 0.126, f: 1500, n: 9, bright: 0.4, decay: 0.6, vol: 0.3 },
+  ],
+  // A berry's pop and a bead's soft knock.
+  longtail: [
+    { voice: "pop", f: 760, vol: 0.55 },
+    { voice: "wood", at: 0.1, f: 900, decay: 0.4, vol: 0.3 },
+  ],
+  // A pour of sand.
+  "grain-garden": { voice: "patter", decay: 0.8, vol: 0.5 },
+  // A stone landing in the well.
+  strata: [
+    { voice: "stone", f: 220, vol: 0.6, decay: 0.6 },
+    { voice: "patter", at: 0.08, vol: 0.25, decay: 0.4 },
+  ],
+  // A serve off the paddle and a tap off the rail.
+  "volley-table": [
+    { voice: "pock", f: 640, vol: 0.55 },
+    { voice: "wood", at: 0.2, f: 520, decay: 0.4, vol: 0.3 },
+  ],
+  // A rock cracking apart.
+  "stone-belt": [
+    { voice: "crack", vol: 0.7 },
+    { voice: "rumble", at: 0.03, vol: 0.35, decay: 0.6 },
+  ],
+  // A touchdown: a soft thud on the ground.
+  "soft-landing": [
+    { voice: "thud", f: 140, vol: 0.55 },
+    { voice: "hollow", at: 0.12, f: 330, decay: 0.5, vol: 0.3 },
+  ],
+  // A pop bumper's ding and a flipper's clack.
+  "night-owl-pinball": [
+    { voice: "clack", f: 900, vol: 0.45 },
+    { voice: "ding", at: 0.12, f: 1150, vol: 0.4 },
+  ],
+  // A shadow puzzle solved: a soft knock and a chime.
+  "cast-a-shadow": [
+    { voice: "wood", f: 420, decay: 0.5, vol: 0.4 },
+    { voice: "tine", at: 0.15, f: 1320, decay: 0.8, vol: 0.3 },
+  ],
+  // A marble's jump and landing.
+  "photo-dash": [
+    { voice: "boing", f: 420, vol: 0.35, decay: 0.4 },
+    { voice: "glass", at: 0.2, f: 1500, vol: 0.2, decay: 0.3 },
+  ],
+  // A caught note: a piano note and its fifth.
+  "note-rider": [
+    { voice: "grand", f: 523.25, vol: 0.5, decay: 0.8 },
+    { voice: "grand", at: 0.18, f: 783.99, vol: 0.4, decay: 0.9 },
+  ],
+  // A word's block breaking: a knock and a real paper flap over a light crumple.
+  "page-breaker": [
+    { voice: "pock", f: 480, vol: 0.55 },
+    { voice: "sample", at: 0.1, file: "your-book-magazine.mp3", len: 0.32, vol: 0.75, fallback: { voice: "tear", decay: 0.3, vol: 0.4 } }, // prettier-ignore
+    { voice: "crunch", at: 0.115, f: 2600, n: 6, bright: 0.7, decay: 0.45, vol: 0.18 },
+  ],
+  // ---- Night sky (lane Night sky) ---------------------------------------------------
+  // The sky is silent: one soft, low tine and a faint breath as the ring marks a star.
+  "night-sky": [
+    { voice: "tine", f: 660, decay: 1.2, vol: 0.7 },
+    { voice: "breath", at: 0.03, f: 700, to: 1.1, decay: 1.2, vol: 0.12 },
+  ],
+  // ---- Space r2 (lane Space r2): real worlds --------------------------------------------
+  // Space is silent: a soft breath as the view flies in to a feature.
+  "real-moon": { voice: "breath", f: 340, to: 0.7, decay: 2.2, vol: 0.32 },
+  "real-mars": { voice: "breath", f: 300, to: 0.75, decay: 2.4, vol: 0.34 },
+  "real-earth": { voice: "breath", f: 380, to: 0.65, decay: 2.1, vol: 0.3 },
+  "real-mercury": { voice: "breath", f: 360, to: 0.8, decay: 1.9, vol: 0.3 },
+  "real-venus": { voice: "breath", f: 260, to: 0.7, decay: 2.6, vol: 0.34 },
+  "nearby-stars": { voice: "breath", f: 420, to: 0.6, decay: 2.0, vol: 0.28 },
+  "real-galaxies": { voice: "breath", f: 320, to: 0.85, decay: 2.8, vol: 0.3 },
+  "powers-of-ten": { voice: "breath", f: 260, to: 0.7, decay: 3.2, vol: 0.26 },
+  "saturn-v": { voice: "rumble", f: 52, rate: 4, decay: 2.4, vol: 0.85 },
+  sls: { voice: "rumble", f: 46, rate: 5, decay: 2.6, vol: 0.85 },
+  "space-shuttle": { voice: "rumble", f: 58, rate: 3.5, decay: 2.2, vol: 0.85 },
+  "real-moons": { voice: "breath", f: 360, to: 0.72, decay: 2.3, vol: 0.31 },
+  "real-small-worlds": { voice: "breath", f: 400, to: 0.78, decay: 1.8, vol: 0.29 },
+  "star-systems": { voice: "breath", f: 450, to: 0.7, decay: 2.5, vol: 0.27 },
+  // Lane Space r4: a soft breath as the view flies to the next planet.
+  "solar-orbits": { voice: "breath", f: 480, to: 0.64, decay: 2.9, vol: 0.26 },
+  // Lane Data and climate: the marks drop (a soft patter) and rise (a breath).
+  "data-in-3d": [
+    { voice: "thud", f: 95, decay: 0.35, vol: 0.7 },
+    { voice: "wood", at: 0.42, f: 700, decay: 0.12, vol: 0.2 },
+    { voice: "breath", at: 0.85, f: 520, to: 1.15, decay: 1.1, vol: 0.08 },
+  ],
+  // The record playing back: a long, low breath under a soft pen.
+  "climate-records": [
+    { voice: "thud", f: 70, decay: 0.5, vol: 0.7 },
+    { voice: "wood", at: 0.08, f: 820, decay: 0.1, vol: 0.18 },
+    { voice: "breath", at: 0.1, f: 360, to: 1.1, decay: 2.4, vol: 0.07 },
+  ],
+  // ---- Tiny world r2 (lane Tiny world r2) ----
+  // The story's own cues (tRNAs docking, the stop codon, the fold) come from
+  // drive() in src/packs/tiny-r2.js; the tap starts it with a soft swell.
+  "dna-to-protein": [
+    { voice: "glass", f: 784, decay: 1.6, vol: 0.7, bright: 0.25 },
+    { voice: "glass", f: 1175, at: 0.18, decay: 1.4, vol: 0.45, bright: 0.25 },
+  ],
+  // Cell division: a soft swell as the chromatin condenses, a light tick
+  // as the sisters part (7.6 s) and a low wooden pop as the cells pinch
+  // apart (13 s).
+  mitosis: [
+    { voice: "breath", f: 900, to: 0.7, decay: 2.2, vol: 0.7 },
+    { voice: "tine", f: 1319, at: 7.7, decay: 1.2, vol: 0.6 },
+    { voice: "hollow", f: 260, at: 13.1, decay: 0.8, vol: 0.9 },
+  ],
+  // Apoptosis: a low sigh as the cell shrinks, soft bubbling as it blebs and
+  // a few quiet pops as the bodies part (6.6 s).
+  apoptosis: [
+    { voice: "breath", f: 500, to: 0.5, decay: 1.8, vol: 0.25 },
+    { voice: "boing", f: 300, at: 2.6, decay: 0.4, vol: 0.6 },
+    { voice: "boing", f: 360, at: 3.4, decay: 0.4, vol: 0.3 },
+    { voice: "boing", f: 330, at: 4.2, decay: 0.4, vol: 0.3 },
+    { voice: "pock", f: 520, at: 6.7, decay: 0.3, vol: 0.5 },
+    { voice: "pock", f: 600, at: 7.1, decay: 0.3, vol: 0.45 },
+  ],
+  // Phagocytosis: a soft stretch as the pseudopods reach out, a gulp as the
+  // phagosome closes (4.5 s) and a low fizz as it is digested.
+  phagocytosis: [
+    { voice: "breath", f: 1100, to: 0.6, at: 2.0, decay: 2.0, vol: 0.3 },
+    { voice: "thud", f: 140, at: 4.5, decay: 0.5, vol: 0.7 },
+    { voice: "hollow", f: 420, at: 4.55, decay: 0.5, vol: 0.5 },
+    { voice: "breath", f: 2400, to: 0.4, at: 8.9, decay: 2.0, vol: 0.2 },
   ],
 };
 

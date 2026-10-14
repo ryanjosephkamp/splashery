@@ -6,6 +6,7 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import {
   buildPhotoSplats,
+  LEVELS,
   resampleArea,
   normalizeDepth,
   PHOTO_BUDGETS,
@@ -84,7 +85,7 @@ test.describe("the conversion", () => {
     const { photo, depth } = twoLevels();
     const s = buildPhotoSplats(photo, depth, { count: 2400, depth: 0.5 });
     expect(s.n).toBeLessThanOrEqual(2400);
-    // the splat nearest a point of the picture (the splats are on a fine grid, or merged in blocks of four)
+    // the splat nearest a point of the picture (the splats are on a fine grid, or merged in blocks)
     const at = (fx, fy) => {
       const x = (fx - 0.5) * s.aspect;
       const y = 0.5 - fy;
@@ -100,11 +101,14 @@ test.describe("the conversion", () => {
     expect(s.stats.bigPieces).toBeGreaterThanOrEqual(2); // cut apart at the jump
     expect(s.stats.cutEdges).toBeGreaterThan(20);
     // the flat pose is one plane, and a deeper Depth setting makes a deeper relief
-    for (let i = 0; i < s.n; i++) expect(s.flat[i * 3 + 2]).toBe(0);
+    // (lane Photo fidelity r2: a bigger splat sits up to 3 BLOCK_BACK behind, so it never draws over detail)
+    for (let i = 0; i < s.n; i++) expect(Math.abs(s.flat[i * 3 + 2])).toBeLessThanOrEqual(0.0061);
     const deep = buildPhotoSplats(photo, depth, { count: 2400, depth: 1 });
     expect(deep.stats.relief).toBeGreaterThan(s.stats.relief);
-    // no splat is stretched across the jump: every size stays within 1.7 grid cells (times FILL)
-    for (let i = 0; i < s.n; i++) expect(s.sigma[i]).toBeLessThan(4.2 / s.gy); // a merged block is 2 fine cells across
+    // no splat is stretched: every size stays within 1.7 grid cells (times FILL) per cell of its block
+    // (lane Photo fidelity r2: a block is up to 2^LEVELS fine cells across; tests/phf2.spec.mjs checks
+    // that the splats along the jump are single cells)
+    for (let i = 0; i < s.n; i++) expect(s.sigma[i]).toBeLessThan((2.1 * (1 << LEVELS)) / s.gy);
     // colors follow the photo: the splat at the middle of the red square is red
     let mid = 0;
     let md = Infinity;

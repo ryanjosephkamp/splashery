@@ -1,0 +1,178 @@
+{
+  "browser": "141.0.7390.37",
+  "note": "Chromium JS heap after forced GC; Documents, Frames and JSEventListeners from CDP Performance.getMetrics. GPU memory is not measured.",
+  "baseline": {
+    "documents": 1,
+    "frames": 1,
+    "listeners": 18,
+    "nodes": 292,
+    "heapMB": 1.8,
+    "iframes": 0,
+    "timers": 0,
+    "urls": 0
+  },
+  "jobs": [
+    {
+      "ms": 34911,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.7,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    },
+    {
+      "ms": 35488,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.7,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    },
+    {
+      "ms": 33812,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.7,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    },
+    {
+      "ms": 34596,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.7,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    },
+    {
+      "ms": 34151,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.7,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    },
+    {
+      "ms": 33317,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.7,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    },
+    {
+      "ms": 33393,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.7,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    },
+    {
+      "ms": 33213,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.7,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    },
+    {
+      "ms": 34246,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.8,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    },
+    {
+      "ms": 33717,
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 296,
+      "heapMB": 2.8,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 1
+    }
+  ],
+  "cancels": [
+    {
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 294,
+      "heapMB": 2.8,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 0
+    },
+    {
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 294,
+      "heapMB": 2.8,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 0
+    },
+    {
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 294,
+      "heapMB": 2.8,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 0
+    },
+    {
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 294,
+      "heapMB": 2.8,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 0
+    },
+    {
+      "documents": 1,
+      "frames": 1,
+      "listeners": 31,
+      "nodes": 294,
+      "heapMB": 2.8,
+      "iframes": 0,
+      "timers": 0,
+      "urls": 0
+    }
+  ]
+}

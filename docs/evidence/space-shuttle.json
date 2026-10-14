@@ -1,0 +1,68 @@
+{
+  "toy": "space-shuttle",
+  "checked": "2026-10-06",
+  "summary": "NASA's 3D model of the Space Shuttle at launch, cut into the orbiter, the external tank and the two boosters, colored, staging in a flight's order, much faster than real.",
+  "claims": [
+    {
+      "claim": "The two boosters go first, about two minutes after launch; the external tank goes after the main engines stop, about eight and a half minutes in; the orbiter flies on with its two maneuvering engines.",
+      "how": "The drive moves each piece at its time on a 12-second clock; the test checks the order and that the boosters fall away to both sides.",
+      "where": "src/packs/space-r2.js:1425",
+      "sources": [
+        {
+          "title": "Space Shuttle",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Space_Shuttle",
+          "says": "After expending their fuel, the SRBs were jettisoned approximately two minutes after launch... main engine cutoff (MECO), which occurred at T+8 minutes 30 seconds... the ET was jettisoned after main engine cutoff and just before orbit insertion, which used the orbiter's two Orbital Maneuvering System (OMS) engines."
+        },
+        {
+          "title": "Space Shuttle external tank",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Space_Shuttle_external_tank",
+          "says": "The ET was jettisoned just over 10 seconds after main engine cut-off (MECO)."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:352",
+      "note": ""
+    },
+    {
+      "claim": "The Shuttles flew 135 missions from 1981 to 2011, and the external tank was the only major part not reused.",
+      "how": "About text.",
+      "where": "src/toy-help.js",
+      "sources": [
+        {
+          "title": "Space Shuttle",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Space_Shuttle",
+          "says": "Five complete Space Shuttle orbiter vehicles were built and flown on a total of 135 missions from 1981 to 2011... The ET was the only major component of the Space Shuttle system that was not reused."
+        }
+      ],
+      "verdict": "correct",
+      "test": "",
+      "note": ""
+    },
+    {
+      "claim": "The model is NASA's (NASA/Michael D. Carbajal), used under NASA's media guidelines, and carries no logo.",
+      "how": "The model has no texture; the test checks the GLB has no image or texture. Its cockpit windows' frames (132 tiny meshes) are left out.",
+      "where": "tools/sp2-rockets.mjs:1",
+      "sources": [
+        {
+          "title": "Images and media usage guidelines",
+          "publisher": "NASA",
+          "url": "https://www.nasa.gov/nasa-brand-center/images-and-media/",
+          "says": "NASA content (images, audio, video, and computer files used in the rendition of 3-dimensional models...) generally are not subject to copyright in the United States."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sp2.spec.mjs:393",
+      "note": "The owner's call of October 6, 2026."
+    }
+  ],
+  "simplified": [
+    "Staging that took minutes is shown in 12 seconds.",
+    "The flames are glowing cones.",
+    "The orbiter's black and white tiles are drawn simply: black below the wings, white above.",
+    "The boosters are not shown parachuting into the sea."
+  ],
+  "fixes": []
+}

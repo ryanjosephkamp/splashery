@@ -1,0 +1,60 @@
+{
+  "toy": "thomas-attractor",
+  "checked": "2026-10-07",
+  "summary": "Thomas' cyclically symmetric attractor at b = 0.208186, where it is chaotic, integrated with RK4 and scaled to fit.",
+  "claims": [
+    {
+      "claim": "dx/dt = sin y − bx, dy/dt = sin z − by, dz/dt = sin x − bz, with b = 0.208186.",
+      "how": "The recipe's flow function is the system's three equations with the published constants; a test compares it term by term.",
+      "where": "src/packs/maths.js (ATTRACTORS)",
+      "sources": [
+        {
+          "title": "Thomas' cyclically symmetric attractor",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Thomas%27_cyclically_symmetric_attractor",
+          "says": "dx/dt = sin(y) − bx, dy/dt = sin(z) − by, dz/dt = sin(x) − bz; the system becomes chaotic at about b ≈ 0.208186."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/mt2.spec.mjs: each attractor's equations are the published ones",
+      "note": ""
+    },
+    {
+      "claim": "The path and the tracers are integrated with the classic fourth-order Runge–Kutta method, at fixed steps, so a tracer moves the same at any frame rate.",
+      "how": "rk4() takes the four classic slopes; the tracers step a fixed h in the system's time, carrying the remainder between frames.",
+      "where": "src/packs/maths.js (rk4, stepTracers)",
+      "sources": [
+        {
+          "title": "Runge–Kutta methods",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Runge%E2%80%93Kutta_methods",
+          "says": "The classic fourth-order method (RK4) takes four slope evaluations per step; its total error falls as the fourth power of the step."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/mt2.spec.mjs: RK4 is fourth order; the tracers move the same at any frame rate",
+      "note": ""
+    },
+    {
+      "claim": "A tracer dropped off the attractor is pulled onto it.",
+      "how": "The tracer starts at the tapped point and simply follows the flow; nothing steers it.",
+      "where": "src/packs/maths.js (dropPoint)",
+      "sources": [
+        {
+          "title": "Thomas' cyclically symmetric attractor",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Thomas%27_cyclically_symmetric_attractor",
+          "says": "dx/dt = sin(y) − bx, dy/dt = sin(z) − by, dz/dt = sin(x) − bz; the system becomes chaotic at about b ≈ 0.208186."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/mt2.spec.mjs: a tap drops a tracer where it lands",
+      "note": "Points very far out are kept within a little more than the attractor's box first, so they can be seen."
+    }
+  ],
+  "simplified": [
+    "The tracers' speed is chosen so the heads move at an easy pace.",
+    "The long path is one solution of 2,500 time units after a settling run."
+  ],
+  "fixes": []
+}

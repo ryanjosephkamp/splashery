@@ -14,20 +14,20 @@ Handoff file: docs/handoff/Fix4.md. A small lane: two public toys, one fix each.
 
 ## Brief (written by the Operator on September 30, 2026, from the owner's marks of September 29)
 
-The owner marked two of lane Sharpness's cards "fix", word for word:
+The owner marked two of lane Sharpness's cards "fix" (the Operator's summary):
 
-1. `shp-clock`: "The minute and hour hands on the clock aren't fully visible here for some
-   reason..." Lane Sharpness found why (docs/handoff/Sharpness.md, item 8): the hands sit only 1 to
-   3 cm above the dial (`hand()` in src/packs/objects.js: `zf + 0.01`, `0.02`, `0.03`), so from the
-   home view the dial's big, flat splats sort in front of a hand pointing up and to the right.
-   Lifting them to about `0.04`, `0.055` and `0.07` showed the hand in its test. Fix it so both
-   hands (and the second hand, if there is one) are fully visible at every time of day and from
-   every normal viewing angle: check 12 hand positions around the dial, from the home view and from
-   30° to either side, at 390×844 and 1440×900. Keep the hands looking attached to the center (a
-   real clock's hands sit a few millimeters apart on the arbor, so if lifting makes them float, use
-   a visible arbor and a small hub), and keep the tap effect as it is.
-2. `shp-marble`: "Overall, this looks really good, but I can barely see the marble's glass spherical
-   shape, only the glass thing inside of it." The glass shell is a faint, nearly white cloud on a
+1. `shp-clock`: the minute and hour hands on the clock are not fully visible. Lane Sharpness found
+   why (docs/handoff/Sharpness.md, item 8): the hands sit only 1 to 3 cm above the dial (`hand()` in
+   src/packs/objects.js: `zf + 0.01`, `0.02`, `0.03`), so from the home view the dial's big, flat
+   splats sort in front of a hand pointing up and to the right. Lifting them to about `0.04`,
+   `0.055` and `0.07` showed the hand in its test. Fix it so both hands (and the second hand, if
+   there is one) are fully visible at every time of day and from every normal viewing angle: check
+   12 hand positions around the dial, from the home view and from 30° to either side, at 390×844 and
+   1440×900. Keep the hands looking attached to the center (a real clock's hands sit a few
+   millimeters apart on the arbor, so if lifting makes them float, use a visible arbor and a small
+   hub), and keep the tap effect as it is.
+2. `shp-marble`: overall it looks really good, but he can barely see the marble's glass spherical
+   shape, only the glass thing inside of it. The glass shell is a faint, nearly white cloud on a
    white background. Make the glass sphere read clearly as clear glass: a visible rim where the
    shell turns away (brighter and more opaque at grazing angles, the way real glass shows a bright
    edge and a thin dark line), a highlight and its small reflection, and a faint tint, while the

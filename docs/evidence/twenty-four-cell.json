@@ -1,0 +1,44 @@
+{
+  "toy": "twenty-four-cell",
+  "checked": "2026-10-07",
+  "summary": "The 24-cell: 24 corners at every arrangement of (±1, ±1, 0, 0), 96 equal edges; its three inscribed 16-cells in three colors.",
+  "claims": [
+    {
+      "claim": "24 corners at the arrangements of (±1, ±1, 0, 0), 96 edges and 24 octahedral cells; the corners split into three 16-cells.",
+      "how": "polytope() builds the corners from their coordinates and joins every pair at the shortest distance; a test checks the counts, the degrees and that every edge has the same length.",
+      "where": "src/packs/maths.js (polytope)",
+      "sources": [
+        {
+          "title": "24-cell",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/24-cell",
+          "says": "Its vertices are the 24 coordinate permutations of (±1, ±1, 0, 0); 24 vertices, 96 edges, 24 octahedral cells; it contains three 8-point 16-cells."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/mt2.spec.mjs: the 4D shapes have the right corners, edges and degrees, all edges equal",
+      "note": ""
+    },
+    {
+      "claim": "It turns in four dimensions and is shown in perspective from a point out along the fourth axis.",
+      "how": "Each frame the corners are turned in the planes of x and w and of y and w, then projected by xyz × 2.4 / (2.4 − w); the edges are straight lines between the projected corners.",
+      "where": "src/packs/maths.js (turn4, show4)",
+      "sources": [
+        {
+          "title": "Tesseract (projections)",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Tesseract",
+          "says": "A 4D shape can be shown in 3D by perspective projection from a point outside it in the fourth dimension."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/mt2.spec.mjs: the 4D shapes roll a whole turn and end where they rest",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "Only the corners and edges are drawn; the faces and cells are left out so the inside can be seen.",
+    "The view is a 3D shadow of the 4D shape, so edges can look different lengths and can cross."
+  ],
+  "fixes": []
+}

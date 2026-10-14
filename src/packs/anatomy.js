@@ -46,6 +46,13 @@ function mem(c) {
   return m;
 }
 
+// Lane Hands-on H5: the lungs squeezed (a long breath out) and let go (a
+// breath in).
+const LUNG_SQUEEZE = 1.15; // how far a squeeze empties them (channel 0)
+const LUNG_GASP = 0.9; // seconds of the breath in after a squeeze
+const LUNG_OUT_SOUND = [{ voice: "breath", f: 700, to: 0.6, decay: 1.2, vol: 0.6 }];
+const LUNG_IN_SOUND = [{ voice: "breath", f: 600, to: 1.4, decay: 1.4, vol: 0.6 }];
+
 // Fake lighting for the organs below (splats are unlit).
 const LIGHT = unit([-0.45, 0.8, 0.45]);
 const VIEW = unit([0.5, 0.3, 0.82]);
@@ -92,10 +99,12 @@ function lungEmpty(p) {
   return [-side * 0.3 * outer * (0.55 + 0.45 * low), 0.3 * low * Math.sqrt(low), -0.34 * p[2]];
 }
 // The deep breath: in over 1.7 s, hold, out past rest by 3.7 s, hold, and back.
+// Lane Fix7: the breath in goes further (the owner: "inflate even bigger").
+const LUNG_IN = -1.7;
 const LUNG_KEYS = [
   [0, 0],
-  [1.7, -1],
-  [2.2, -1],
+  [1.7, LUNG_IN],
+  [2.2, LUNG_IN],
   [3.7, 0.32],
   [4.1, 0.32],
   [LUNG_BREATH, 0],
@@ -171,7 +180,7 @@ const KIDNEY_RUNS = [
 const HEART_RACE = 5; // seconds a tap's race lasts
 const HEART_REST = 1.1; // resting beats per second of the toy's clock
 const HEART_EXTRA = 5; // whole beats a race adds
-// The ventricles squeeze towards their base and wring about their long axis.
+// The ventricles squeeze toward their base and wring about their long axis.
 const HEART_PIVOT = [-0.14, 0.32, 0];
 const HEART_AXIS = unit([0.41, -0.91, 0]);
 // Extra beats a race has added s seconds after the tap: the tempo climbs for
@@ -204,7 +213,7 @@ export const RECIPES = {
           { id: "love", label: "Love heart" },
         ],
       },
-      { key: "color", label: "Colour", type: "color", default: RED },
+      { key: "color", label: "Color", type: "color", default: RED },
     ],
     controls: [
       { key: "strength", label: "Beat", type: "slider", default: 0.6 },
@@ -253,7 +262,7 @@ export const RECIPES = {
       if (o.style === "love") {
         const vent = k.part("vent", { pivot: [0, 0.1, 0] });
         // The classic heart surface, (x² + 9/4 z² + y² - 1)³ - x² y³ - 9/80 z² y³ = 0,
-        // with y up and z towards the viewer.
+        // with y up and z toward the viewer.
         const f = ([x, y, z]) => {
           const a = x * x + 2.25 * z * z + y * y - 1;
           return a * a * a - x * x * y * y * y - 0.1125 * z * z * y * y * y;
@@ -275,7 +284,7 @@ export const RECIPES = {
         });
         return;
       }
-      // The ventricles squeeze towards their base, the atria towards their
+      // The ventricles squeeze toward their base, the atria toward their
       // middles, and the aorta swells a little as blood is pushed into it.
       const vent = k.part("vent", { pivot: HEART_PIVOT });
       const atriumR = k.part("atriumR", { pivot: [-0.38, 0.4, 0.02] });
@@ -393,7 +402,7 @@ export const RECIPES = {
     options: [
       {
         key: "colors",
-        label: "Colours",
+        label: "Colors",
         type: "select",
         default: "lobes",
         choices: [
@@ -536,13 +545,13 @@ export const RECIPES = {
           interior: 0.1,
           kind: "band",
           channel: (c) => (c.inside ? 0 : BRAIN_CHANNEL[off + LOBES.indexOf(region(c.p))]),
-          // The colour function has just worked out this splat's groove.
+          // The color function has just worked out this splat's groove.
           params: (c) => {
             if (c.inside || !lastG || (lastG.fold < 0.25 && lastG.deep < 0.4)) return noSpark;
             return sparkAt(off + LOBES.indexOf(region(c.p)), c.p);
           },
           core: (c) => {
-            // Grey matter near the surface, white matter within.
+            // gray matter near the surface, white matter within.
             const q = sub(c.p, [0, 0, cz]);
             const d = unit(q);
             return len(q) > shape(d) * 0.86 ? "#c98e96" : "#f4e4d4";
@@ -652,9 +661,32 @@ export const RECIPES = {
     // By itself the eye glances from place to place, with quick jumps and
     // still moments between them. A tap makes it blink, stare at you and
     // snap its pupil small before it goes back to looking round.
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H5): drag on the eyeball and it rolls in its
+    // socket to look where you pull; let go and it glances about again.
+    hands: { follow: { center: [0, 0, 0] } },
+    drive(t, c, out, info) {
       const p = c.light > 0 ? 1 - c.light : 1;
-      const look = eyeGlance(t);
+      let look = eyeGlance(t);
+      // The finger: the eye turns to a point in front of it, toward the
+      // finger (which is on the glass, between the eye and the viewer), as
+      // far as an eye turns in its socket (about 45 degrees).
+      const m = mem(c);
+      const f = info?.hands?.finger;
+      const goal = f && info.hands.point ? 1 : 0;
+      const dt = Math.min(0.1, Math.max(0, t - (m.t ?? t)));
+      m.t = t;
+      m.pull = (m.pull ?? 0) + (goal - (m.pull ?? 0)) * (1 - Math.exp(-(goal ? 10 : 3) * dt));
+      if (goal) {
+        const at = sub(info.hands.point, mul(f.dir, 0.8));
+        const yaw = Math.max(-0.8, Math.min(0.8, Math.atan2(at[0], at[2])));
+        const pitch = Math.max(-0.6, Math.min(0.6, Math.atan2(at[1], Math.hypot(at[0], at[2]))));
+        // (Eased toward the finger, so the eye rolls rather than jumps.)
+        m.yaw = m.yaw === undefined ? yaw : m.yaw + (yaw - m.yaw) * (1 - Math.exp(-14 * dt));
+        m.pitch = m.pitch === undefined ? pitch : m.pitch + (pitch - m.pitch) * (1 - Math.exp(-14 * dt)); // prettier-ignore
+      }
+      if (m.pull > 1e-3 && m.yaw !== undefined)
+        look = [look[0] + (m.yaw - look[0]) * m.pull, look[1] + (m.pitch - look[1]) * m.pull];
+      if (!goal && m.pull < 1e-3) m.yaw = m.pitch = undefined;
       const stare = smoothstep(0.04, 0.12, p) * (1 - smoothstep(0.72, 0.95, p));
       const yaw = look[0] + (EYE_VIEWER[0] - look[0]) * stare;
       const pitch = look[1] + (EYE_VIEWER[1] - look[1]) * stare;
@@ -672,7 +704,7 @@ export const RECIPES = {
     build(k, o) {
       const ball = k.part("ball", { pivot: [0, 0, 0] });
       const iris = o.iris;
-      // The white of the eye, with fine vessels towards the back.
+      // The white of the eye, with fine vessels toward the back.
       k.add(k.sphere(1), {
         even: true,
         opacity: 1,
@@ -690,7 +722,7 @@ export const RECIPES = {
           return lit(col, c.n, 0.66, 0.4);
         },
       });
-      // Iris: a shallow cone of radial fibres, a dark rim and a pale ring.
+      // Iris: a shallow cone of radial fibers, a dark rim and a pale ring.
       const irisR = 0.5;
       const iz = Math.sqrt(1 - irisR * irisR) + 0.01;
       k.add(
@@ -850,7 +882,7 @@ export const RECIPES = {
         pattern: false,
         color: (c) => keep("#ffffff"),
       });
-      // The eyelids (only there while it blinks): skin-coloured shells over
+      // The eyelids (only there while it blinks): skin-colored shells over
       // the front that close from above and below, with a lash line.
       for (const up of [1, -1]) {
         const lid = k.part(up > 0 ? "lid" : "lidLow", { pivot: [0, 0, 0], axis: [1, 0, 0] });
@@ -888,7 +920,7 @@ export const RECIPES = {
   // ---- Lungs ----------------------------------------------------------------------------
   lungs: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#f095a3" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#f095a3" }],
     controls: [
       { key: "breath", label: "Breath", type: "slider", default: 0.5 },
       { key: "deep", label: "Deep breath", type: "pulse", ease: LUNG_BREATH },
@@ -897,12 +929,43 @@ export const RECIPES = {
     // The lungs breathe gently by themselves. A tap takes a deep breath: they
     // fill out sideways and down (the airways stay put), hold, then empty
     // further than usual and settle back to the gentle rhythm.
-    drive(t, c, out) {
+    // Hands-on (lane Hands-on H5): squeeze them (press and hold, or pick
+    // them up) and they breathe out; let go and they fill again, a little
+    // past rest, then settle back to breathing gently.
+    hands: { touch: true },
+    drive(t, c, out, info) {
       const s = progress(c.deep) * LUNG_BREATH;
       // Channel 0 empties the lungs at 1; below 0 it fills them past rest.
       const idle = -(0.035 + 0.12 * c.breath) * Math.sin(t * 1.3);
       const calm = 1 - bump(s, 0, 0.5, LUNG_BREATH - 0.9, LUNG_BREATH);
-      out.morph = [idle * calm + lungDeep(s), 0, 0, 0];
+      let m0 = idle * calm + lungDeep(s);
+      // The squeeze, all the way out over about a second; let go, a deep
+      // gasp in (well past rest, as a tap's deep breath fills them), then
+      // back to rest.
+      const m = mem(c);
+      const dt = Math.min(0.1, Math.max(0, t - (m.t ?? t)));
+      m.t = t;
+      m.sq ??= 0;
+      if (info?.hands?.pressed) {
+        m.sq += (LUNG_SQUEEZE - m.sq) * (1 - Math.exp(-2.4 * dt));
+        m.rel = null;
+      } else if (m.down) {
+        m.rel = t;
+        m.from = m.sq;
+      }
+      if (m.rel !== null && m.rel !== undefined) {
+        const u = t - m.rel;
+        m.sq = u < LUNG_GASP ? m.from + (LUNG_IN * 0.85 - m.from) * ease(u / LUNG_GASP) : LUNG_IN * 0.85 * (1 - ease(Math.min(1, (u - LUNG_GASP) / 1.8))); // prettier-ignore
+        if (u > LUNG_GASP + 1.8) m.rel = null;
+      }
+      if (info?.hands?.pressed && !m.down) out.cues.push(LUNG_OUT_SOUND);
+      if (!info?.hands?.pressed && m.down) out.cues.push(LUNG_IN_SOUND);
+      m.down = !!info?.hands?.pressed;
+      // (Squeezed, the breath is held out; as it fills, the gentle rhythm
+      // comes back in.)
+      const held = Math.min(1, Math.abs(m.sq) * 4);
+      m0 = m0 * (1 - held) + m.sq;
+      out.morph = [m0, 0, 0, 0];
     },
     build(k, o) {
       const pink = o.color;
@@ -1222,7 +1285,7 @@ export const RECIPES = {
   // ---- Kidney ---------------------------------------------------------------------------
   kidney: {
     alive: true,
-    options: [{ key: "color", label: "Colour", type: "color", default: "#c2504a" }],
+    options: [{ key: "color", label: "Color", type: "color", default: "#c2504a" }],
     controls: [{ key: "flow", label: "Flow", type: "pulse", ease: KIDNEY_FLOW }],
     action: { key: "flow", label: "Pump blood through" },
     // A tap sends three pulses through: each runs in along the artery,
@@ -1257,7 +1320,7 @@ export const RECIPES = {
         const base = shade(col, 1 + 0.06 * n);
         return gloss(lit(base, c.n, 0.6, 0.45), c.n, 0.45, 18);
       };
-      // A faint layer just over the surface, coloured as it is, carries a
+      // A faint layer just over the surface, colored as it is, carries a
       // soft flush that spreads out from the hilum with each pulse (channel 1).
       const beanAt = (u, v) => {
         const a = u * TAU;

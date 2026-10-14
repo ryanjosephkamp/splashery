@@ -11,8 +11,9 @@ scientific solver, and the Fluid lab's About text says so.
 
 A kit toy declares fluids with `k.fluid({ ... })` in its `build`. When the toy opens, the player
 loads `src/fluids/` (never before: the shelf and embeds don't fetch it), simulates the fluids on the
-toy's own clock and draws them as one extra splat layer, one splat per particle, sorted with the
-toy. The recipe's `drive()` steers them through `out.fluid`.
+toy's own clock and draws them as one extra splat layer (four small splats for each liquid particle,
+one for each other particle; with WebGPU a liquid can also be drawn as a surface and a gas as a
+grid), sorted with the toy. The recipe's `drive()` steers them through `out.fluid`.
 
 | File                     | What it does                                                                                                                                                                                                                            |
 | ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -85,9 +86,9 @@ They don't move (yet).
 
 ## Drawing
 
-One splat per particle, in a layer with its own work-buffer program, reading four small float
-textures a frame (place; velocity and kind; turn; radii and material) and the toy's uniforms (the
-camera, the whole-toy move and turn, the splat scale and exposure).
+One splat per particle (four for a liquid, below), in a layer with its own work-buffer program,
+reading four small float textures a frame (place; velocity and kind; turn; radii and material) and
+the toy's uniforms (the camera, the whole-toy move and turn, the splat scale and exposure).
 
 - **Liquid.** Each particle draws four smaller splats (`LIQUID_SUB`), which gives a crisper edge
   than one big one. Its place is smoothed toward its neighbors' (75%), and its normal is its
@@ -347,7 +348,7 @@ it.
 
 ## r5 (October 2, 2026): the owner's phone review
 
-From the owner's review on his phone (docs/reviews/2026-10-02-mega-review/review.md):
+From the owner's review on his phone (his notes are private; the Operator's summary):
 
 - **A tap on the faucet's handle pours.** On WebGPU the props are traced, and r4 hid their splats,
   so a tap found nothing to hit (the app finds the toy by its splats). They now shrink to 0.55 of
@@ -371,6 +372,90 @@ From the owner's review on his phone (docs/reviews/2026-10-02-mega-review/review
   phone whose frames keep running long (over 24 ms for a second and a half) steps the fluid down by
   itself, up to three times: fewer substeps (a little slow motion instead of lag), a coarser surface
   and a shorter ray march.
+
+## r6 (October 2, 2026): the owner's marks on r4 and r5
+
+- **A liquid's top that meets the glass.** r4 and r5 drew a bright ring on the blurred particle
+  surface, which shrinks away from the glass near its edge, so the ring sat inside the glass as a
+  separate, smaller circle from every angle. Water and soda in a glass are now topped by a flat
+  surface at the pool's level (from the read-back, smoothed) that reaches the glass's inner wall,
+  shaded as the liquid seen from above (refraction to the glass's bottom, absorption, Fresnel), with
+  a hairline meniscus where it meets the wall. Thick liquids and the splash keep their particle
+  surface (`flatTop: false`).
+- **A tap's stream.** The GPU nozzle pours a stream about a centimeter across (`gpuRadius` 0.04 for
+  water and soda, 0.04 for honey and 0.045 for lava); the CPU's coarser particles keep the wider
+  one.
+- **Lava, one material.** Its color comes only from its heat, on one incandescent ramp (`lavaRamp`:
+  orange-yellow, orange, red, dull red, black), and its heat falls on one curve wherever it is: the
+  time since it left the spout. So the stream and the pool where it lands are the same orange, and
+  the pool darkens and crusts as it cools; the crust's cracks show the hotter lava just under it, on
+  the same ramp. The glass's starting pool is already old (`fillAge`, 8 s), a dark, glossy gray
+  crust like cooled pahoehoe. The CPU lava uses the same ramp. Its skin crusts over in about three
+  seconds (`heat` 2.4 s), so a clip of ten seconds shows the whole cooling.
+- **A drop that isn't a sphere.** The splash's falling drop starts flattened, flat underneath and
+  rounder on top (`drop.shape`), as a large raindrop falls, and fast liquid is drawn a little more
+  stretched along its motion.
+
+## r7 (October 4, 2026): the Fluid lab on a phone
+
+Built by Sonnet 5.5 as a test of engine work, from the Fluid Lab phone audit
+([docs/audits/fluid-phone-2026-10.md](audits/fluid-phone-2026-10.md)). Code: `src/fluids/phone.js`
+(the envelope), `FluidRuntime.watch()` and `restart()` (the recovery), `mpm.js` (readback), and
+small, marked hooks in `src/stage.js` and `src/player.js`.
+
+- **The hint.** On a phone the Toy tab shows "This lab runs best on a computer. On a phone, choose
+  Auto detail." under Scene and Liquid (the recipe's `note`), a toast shows it after the first
+  slow-down, and the toy's About text ends with it.
+- **A phone envelope for this lab only.** A phone is a touch device with a small screen, whatever
+  tier it detected (`?phone=1` and `?phone=0` force it). It applies unless the person chose High or
+  Max Detail (or `?profile=high|max`), and it never changes the saved Detail choice. It sets the
+  lab's own canvas cap of 1.5 (the recipe's `render.dpr`), 35,000 prop splats (density 0.25 instead
+  of 0.75), the WebGPU liquid at cap 6,000 and cell 0.05, and gas grids 20 cells across (flame
+  20×58×20, smoke 20×65×20, hot cup 20×33×20). On the CPU, a spec may say `phone: { scale }`: the
+  Glass liquid asks for 0.5 (cap 270, spacing times the cube root of 2) and the Splash's vessel for
+  0.5; the Splash keeps its liquid and its starting pool.
+- **Recovery.** The runtime times every frame on a phone, whatever the tier. When the average (an
+  EMA) stays over 33 ms for 1.5 s it first lowers the drawing cost (a pixel cap of 1, a coarser
+  surface, fewer gas steps) and shows the hint; 1.5 s later, if still slow, it rebuilds this scene's
+  fluids into the phone envelope with a clear restart (already in it: fewer substeps); 2 s after
+  that, it offers a pause. Hidden pages, the first 1.5 s after the toy opens and gaps over 2 s count
+  for nothing, and a lone stall adds at most 250 ms of slow time. The old watcher (low and mid tiers
+  only, ignoring frames over 250 ms) is gone.
+- **Less garbage per readback.** The diffuse pass reads the liquid back 10 to 30 times a second;
+  `readPositions(true)` keeps its byte and float arrays and fills six values per particle directly
+  (no `subarray()` views). Tests and tools keep the fresh-array call.
+- **The WebGPU projector buffers.** The engine's gsplat projector destroys its cached Compute
+  objects' shaders but not the Computes, so each scene or toy change left two uniform buffers.
+  `vendor/` is untouched: `Stage.hookProjector()` finds the projector through the device's
+  `devicerestored` callbacks (private engine layout; nothing is wrapped if it isn't there) and wraps
+  that one instance's clearing method to destroy each Compute first.
+
+### Measured, r7 (a sandbox, not a phone)
+
+The audit's own scripts (`collect.mjs`, a batch of the ten scenes at phone size, `mid` at 4× and 6×
+page CPU throttling, WebGL2 and WebGPU; `growth.mjs`), run on `main` (e63d286f) and on this branch,
+in this container: Chromium on a CPU, with SwiftShader as WebGL2 and WebGPU. Frames here take
+hundreds of milliseconds to seconds, so **the absolute times mean nothing for a phone**. Read the
+ratios and the counts. Every "after" cell ran the recovery, which dropped most of them to a pixel
+ratio of 1 within seconds (canvas 390×645 instead of 585×967), so these are the whole change
+(envelope plus recovery), not the envelope alone. Single runs, 6 s action windows.
+
+| `mid` at 6×, action window   | Frames in 6 s, before → after | Render p95 (ms), before → after | Tracked GPU MiB, before → after |
+| ---------------------------- | ----------------------------- | ------------------------------- | ------------------------------- |
+| WebGL2 Glass (four liquids)  | 10–11 → 43–44                 | 642–686 → 157–160               | 38.5–38.7 → 34.1–34.2           |
+| WebGL2 Splash (four liquids) | 7–8 → 33–35                   | 906–1,102 → 192–215             | 38.7–38.9 → 34.1–34.3           |
+| WebGL2 Candle / Hot cup      | 3 / 4 → 14 / 21               | 2,295 / 2,390 → 490 / 314       | 61.0 / 54.6 → 37.9 / 35.8       |
+| WebGPU Glass (four liquids)  | 2–3 → 6–11                    | 3,401–4,091 → 964–1,296         | 63.8–64.0 → 39.2–39.4           |
+| WebGPU Splash (four liquids) | 2–3 → 5–6                     | 3,376–7,305 → 1,188–2,384       | 65.4–65.6 → 40.3–42.9           |
+| WebGPU Candle / Hot cup      | 3 / 1 → 7 / 5                 | 4,390 / 4,465 → 1,137 / 1,110   | 70.0 / 63.5 → 41.1 / 41.7       |
+
+The `mid` at 4× cells (in the same run) agree. Four-scene cycle on WebGPU (Candle, Cup, Splash,
+Glass; six cycles, `growth.mjs`): buffers 64, 66, 68, 70, 72, 74 before, **61 in every cycle**
+after; uniform bytes 1,129,472 to 1,438,912 before, flat at 1,436,000 from the second cycle after.
+The page heap still rises about 1.4 MB a cycle in both, so no heap fix is claimed. Not measured: a
+real phone, volume and look of the smaller liquids (the audit asked for a review on a phone), and
+the CPU solver's p95 (the audit's `solver.mjs`). Prop splats fell from 105,000 to 35,000, which can
+show holes where props are splats (WebGL2) and should be looked at on a phone.
 
 ## Limits and next steps
 

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- HEAD:START (written by manual/build-pages.mjs; do not edit by hand) -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What Splashery can do that other splat tools can't · The Tinkerer's Manual</title>
+    <meta
+      name="description"
+      content="What Splashery can do that other splat tools can't. The Tinkerer's Manual: how to program Gaussian splats in Splashery."
+    />
+    <link rel="stylesheet" href="manual.css" />
+    <link rel="stylesheet" href="../site/assets/outline.css" />
+
+    <script type="module" src="fold.js"></script>
+    <script type="module" src="nav.js"></script>
+    <!-- HEAD:END -->
+  </head>
+  <body>
+    <main>
+      <!-- NAV:TOP:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <div class="outline no-print manual-nav">
+        <button
+          type="button"
+          class="outline-toggle"
+          aria-expanded="false"
+          aria-controls="manual-contents"
+        >
+          <span class="outline-label">Contents</span
+          ><span class="outline-now">What Splashery can do that other splat tools can't</span
+          ><svg
+            class="outline-chevron"
+            viewBox="0 0 16 16"
+            width="16"
+            height="16"
+            aria-hidden="true"
+          >
+            <path
+              d="m3.5 6 4.5 4.5L12.5 6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </button>
+        <nav class="outline-panel" id="manual-contents" aria-label="The manual's chapters" hidden>
+          <ol>
+            <li><a href="index.html">Contents</a></li>
+            <li><a href="splat.html">Chapter 1: What a splat is</a></li>
+            <li><a href="toy.html">Chapter 2: How a toy is built</a></li>
+            <li><a href="language.html">Chapter 3: The splat equation language</a></li>
+            <li><a href="gallery.html">Chapter 4: A gallery of programs</a></li>
+            <li><a href="pictures.html">Chapter 5: Pictures, screens, and your own input</a></li>
+            <li><a href="moving.html">Chapter 6: Moving things</a></li>
+            <li><a href="data.html">Chapter 7: Real data as splats</a></li>
+            <li><a href="photo3d.html">Chapter 8: Photos and video into 3D</a></li>
+            <li><a href="codes.html">Chapter 9: Codes and pages</a></li>
+            <li><a href="make.html">Chapter 10: Make your own</a></li>
+            <li><a href="more.html">What else Splashery does now</a></li>
+            <li>
+              <a href="unique.html" aria-current="page"
+                >What Splashery can do that other splat tools can't</a
+              >
+            </li>
+            <li><a href="built.html">How Splashery is built</a></li>
+            <li><a href="share.html">Share links and QR codes</a></li>
+            <li><a href="experiments.html">Open questions: other choices, not tried yet</a></li>
+            <li><a href="later.html">What comes later: Code a toy</a></li>
+            <li><a href="glossary.html">Glossary</a></li>
+            <li><a href="reading.html">Further reading</a></li>
+            <li><a href="references.html">References</a></li>
+            <li><a href="card.html">Quick reference</a></li>
+          </ol>
+        </nav>
+      </div>
+      <nav class="pager no-print" aria-label="Previous and next chapter, top">
+        <a class="pager-prev" rel="prev" href="more.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">What else Splashery does now</span></a
+        ><a class="pager-next" rel="next" href="built.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">How Splashery is built</span></a
+        >
+      </nav>
+
+      <!-- NAV:TOP:END -->
+      <!-- ---- What only Splashery does ---- -->
+      <h2 id="unique">What Splashery can do that other splat tools can't</h2>
+      <p>
+        PlayCanvas is the engine that draws the splats, and its editor, SuperSplat, works on
+        captured splat files: you crop, clean, and arrange a capture. Splashery starts from the
+        other end, because most of its toys are never captured at all. These are things we have not
+        seen in other public splat tools. (We have not tried every tool, so read this as "to our
+        knowledge".) The site has this list as a page too:
+        <a href="../site/learn/can-do/" target="_blank" rel="noopener">What Splashery can do</a>.
+      </p>
+      <!-- Each item can end with a <figure> (a picture from manual/make-pictures.mjs, or a live one from
+           manual/demos4.js with data-live): copy one of the figures below into the new <li>. -->
+      <ul>
+        <li>
+          <b>Toys made from rules, in the browser.</b> A recipe of a few kilobytes is built into
+          splats on your device. Its base budget is 60,000 to 400,000 splats, depending on the
+          device and, in labs, the Detail slider; a recipe that asks for more density gets more, up
+          to the tier's most, so those are the budget a toy is asked for, not a count every toy
+          draws. The shape itself is never a multi-megabyte file to download. (The page, the engine,
+          and any optional models or captures a toy uses still download, and only when that toy
+          opens.)
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-rules.webp"
+              width="960"
+              height="320"
+              alt="Three toys that exist only as rules: a potted cactus, a strawberry, and a knotted ring."
+            />
+            <figcaption>
+              A cactus, a strawberry, and a knot: three toys built from rules, not downloaded as
+              shapes.
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <b>Equations as a language.</b> Type <var>x</var>, <var>y</var>, and <var>z</var> in
+          <var>u</var>, <var>v</var>, and <var>t</var>, and get an animated splat shape, with plain
+          messages instead of crashes (Chapter 3).
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-equations.webp"
+              width="960"
+              height="320"
+              alt="Three shapes made by the equation toy from typed formulas: a Klein bottle, a trefoil knot, and a spiral galaxy."
+            />
+            <figcaption>
+              Three programs of the equation toy: a Klein bottle, a trefoil knot, and a galaxy.
+            </figcaption>
+          </figure>
+        </li>
+        <li>
+          <b>Moving parts inside one splat cloud.</b> Hinges, pivots, sliders, morphs, and per-splat
+          effects run on the graphics chip, so a chest opens and a windmill turns without rebuilding
+          anything (Chapter 2).
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-moving.webp"
+              width="960"
+              height="320"
+              alt="A treasure chest in three moments: closed, opening, and open with its lid hinged back."
+            />
+            <figcaption>A chest opening on a hinge: one splat cloud, three moments.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <b>Hands-on physics on splats.</b> Toss, stack, pull apart, and pour.
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-physics.webp"
+              width="960"
+              height="320"
+              alt="A rubber duck in three moments of one toss: resting, tossed, and tumbling in the air."
+            />
+            <figcaption>A rubber duck at rest, tossed, and tumbling.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <b>Anything as splats.</b> Photos and videos with depth, PDFs, QR codes, real science
+          data, the night sky, and medical volumes.
+          <figure class="item-pic">
+            <img
+              src="img/pic-uq-anything.webp"
+              width="960"
+              height="320"
+              alt="Three things that are not splat captures, all shown as splats: a photo of a forest path, the night sky with constellation lines, and a CT-style volume of a walnut."
+            />
+            <figcaption>A photo, the night sky, and a scanned volume, all as splats.</figcaption>
+          </figure>
+        </li>
+        <li>
+          <b>A whole scene in a link.</b> The <code>#s=</code> links carry the toys, their options,
+          and the camera. How they work:
+          <ul>
+            <li>
+              The scene is written as JSON, compressed with raw deflate, and written in base64url,
+              with a
+              <code>d.</code> in front (<code>src/codec.js</code>). Where a browser cannot compress,
+              the link carries <code>j.</code> and the same JSON, uncompressed but still in
+              base64url, so it is not readable as plain text.
+              <a href="share.html">Share links and QR codes</a>
+              explains the whole path.
+            </li>
+            <li>
+              A link carries settings, not your files. A photo or a splat file from your device has
+              to be opened again by whoever opens the link.
+            </li>
+            <li>No server is involved. The link is the whole scene.</li>
+          </ul>
+          <figure class="item-pic" data-live="link-steps">
+            <ol
+              class="link-steps"
+              aria-label="The four stages of a link, with the real size of each for a tiny scene"
+            ></ol>
+            <figcaption>
+              A tiny scene (a cactus and a camera), taken through the real link code, stage by
+              stage.
+            </figcaption>
+          </figure>
+        </li>
+      </ul>
+
+      <!-- NAV:BOTTOM:START (written by manual/build-pages.mjs; do not edit by hand) -->
+      <nav class="pager no-print" aria-label="Previous and next chapter, bottom">
+        <a class="pager-prev" rel="prev" href="more.html"
+          ><span class="pager-word">← Previous</span
+          ><span class="pager-title">What else Splashery does now</span></a
+        ><a class="pager-next" rel="next" href="built.html"
+          ><span class="pager-word">Next →</span
+          ><span class="pager-title">How Splashery is built</span></a
+        >
+      </nav>
+      <footer>
+        <p>
+          The Tinkerer's Manual, first published September 28, 2026 and updated October 11, 2026.
+          Part of
+          <a href="https://ryanjosephkamp.github.io/splashery/site/" target="_blank" rel="noopener"
+            >Splashery</a
+          >, a toy box of 3D Gaussian splats that runs in your browser. Every picture here was made
+          with Splashery itself.
+        </p>
+      </footer>
+      <!-- NAV:BOTTOM:END -->
+      <script type="module" src="demos4.js"></script>
+    </main>
+  </body>
+</html>

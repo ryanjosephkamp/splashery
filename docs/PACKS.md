@@ -7,8 +7,8 @@ seed, so it rebuilds exactly the same everywhere.
 
 ## 1. The two places a toy lives
 
-**The catalogue** (`src/toys.js`, the `TOYS` array) holds metadata only. Add entries under your
-pack's `// ---- Pack: <name> ----` marker:
+**The catalog** (`src/toys.js`, the `TOYS` array) holds metadata only. Add entries under your pack's
+`// ---- Pack: <name> ----` marker:
 
 ```js
 {
@@ -29,8 +29,8 @@ import { mix, shade, smoothstep, spline } from "../kit.js";
 
 export const RECIPES = {
   comet: {
-    alive: true,                 // has behaviours that move by themselves
-    options: [...],              // rebuild the toy (style, colour); optional
+    alive: true,                 // has behaviors that move by themselves
+    options: [...],              // rebuild the toy (style, color); optional
     controls: [...],             // change it live (sliders, switches, pulses); optional
     action: { key, label, sound }, // what a tap on the toy does; optional
     drive(t, c, out, info) {},   // per frame: parts, amounts; optional
@@ -43,7 +43,7 @@ export const RECIPES = {
 
 - **+Y is up.** The default camera looks from the front-right, slightly above: +Z faces the viewer,
   +X is to the right.
-- Model in any units around the origin. After `build`, the kit centres the toy and scales it to fit
+- Model in any units around the origin. After `build`, the kit centers the toy and scales it to fit
   a sphere of radius 0.95, and moves part pivots with it. Keep proportions, not absolute sizes.
 - Things that travel outside the toy's resting shape (rising flames, an opened lid, an orbit) should
   be declared with `k.reach([x, y, z])` so the camera frames them.
@@ -58,7 +58,7 @@ Each call returns a shape; nothing is drawn until you `k.add` it.
 | `k.ellipsoid(a, b, c)`                                        | Ellipsoid with half-axes along X, Y, Z.                                                                                                        |
 | `k.box(sx, sy, sz)`                                           | Box with full sizes. Samples carry `face` (0..5 for +X, −X, +Y, −Y, +Z, −Z) and face `u`, `v`.                                                 |
 | `k.roundedBox(sx, sy, sz, power = 8)`                         | Rounded box (a superellipsoid: 2 is an ellipsoid, higher is boxier).                                                                           |
-| `k.cylinder(r, h, { caps })`                                  | Cylinder along Y, centred. `caps`: `true`, `false`, `"top"` or `"bottom"`. Samples carry `side` or `cap` and `radial`.                         |
+| `k.cylinder(r, h, { caps })`                                  | Cylinder along Y, centered. `caps`: `true`, `false`, `"top"` or `"bottom"`. Samples carry `side` or `cap` and `radial`.                        |
 | `k.cone(r0, r1, h, { caps })`                                 | Cone frustum from radius r0 at the bottom to r1 at the top.                                                                                    |
 | `k.torus(R, r)`                                               | Torus in the XZ plane.                                                                                                                         |
 | `k.disc(r1, r0 = 0)`                                          | Flat disc (or ring) in the XZ plane, both sides.                                                                                               |
@@ -88,20 +88,20 @@ Shape notes from the lanes (2026-09-26):
 k.add(shape, {
   pos: [x, y, z], rot: [degX, degY, degZ], // or quat: [x, y, z, w]
   scale: 1 | [sx, sy, sz],
-  color: "#hex" | [r, g, b] | (c) => colour,
+  color: "#hex" | [r, g, b] | (c) => color,
   weight: 1,        // density relative to the rest (2 = twice as many splats per area)
   share: 0.1,       // or: exactly this fraction of the whole budget
   size: 1,          // splat size multiplier
   flat: 0.25,       // splat thickness (0 flat discs .. 1 round blobs)
   stretch: 3,       // for tubes: splats elongated along the tube
   opacity: 0.95,
-  jitter: 0.04,     // colour noise (keep it low, 0.01..0.02, on smooth materials)
+  jitter: 0.04,     // color noise (keep it low, 0.01..0.02, on smooth materials)
   even: true,       // place surface splats evenly (spheres, boxes, cylinders, cones, lathes, param)
   interior: 0.12,   // share of this shape's splats that fill its inside (for Slice)
-  core: "#hex" | (c) => colour,   // colour of the inside
+  core: "#hex" | (c) => color,   // color of the inside
   part: index,      // from k.part(...), or (c) => index to split a shape between parts
-  kind: "flame", params: [a, b] | (c) => [a, b],  // a behaviour (section 6)
-  pattern: false,   // keep this shape's own colours under flags and patterns
+  kind: "flame", params: [a, b] | (c) => [a, b],  // a behavior (section 6)
+  pattern: false,   // keep this shape's own colors under flags and patterns
   fit: false,       // leave it out of the fit (see "Hidden pieces count in the fit")
 });
 ```
@@ -110,14 +110,14 @@ The splat budget is shared between shapes by surface area times `weight`, so the
 density. Use `share` for small details that need a fixed number of splats, and `weight` > 1 for
 small shapes that would otherwise look sparse (eyes, stitches, gems).
 
-Splats are unlit, so a material reads from colour alone. Random placement leaves thin spots where
-the far side of the toy shows through as dark speckle; `even: true` closes them (it made the sports
+Splats are unlit, so a material reads from color alone. Random placement leaves thin spots where the
+far side of the toy shows through as dark speckle; `even: true` closes them (it made the sports
 balls read as leather and rubber instead of grain). For smooth materials also bake a little light
-into the colour (a key light from above, and a sheen for gloss) instead of adding noise: see `lit()`
+into the color (a key light from above, and a sheen for gloss) instead of adding noise: see `lit()`
 and `grip()` in `src/packs/balls.js`. Parts that are hidden most of the time can have a low `weight`
 so the faces people see get the splats (see the storybook's pages).
 
-**The colour function** gets `c` with:
+**The color function** gets `c` with:
 
 | Field                                         | Meaning                                                                      |
 | --------------------------------------------- | ---------------------------------------------------------------------------- |
@@ -129,7 +129,7 @@ so the faces people see get the splats (see the storybook's pages).
 | `c.noise(x, y, z)`, `c.fbm(x, y, z, octaves)` | Seeded smooth noise, roughly −1..1.                                          |
 | `c.inside`                                    | True for interior splats.                                                    |
 
-It returns a colour, or `null` to leave a hole (openings, cut-outs, a missing box face), or
+It returns a color, or `null` to leave a hole (openings, cut-outs, a missing box face), or
 `{ c: colour, keep: true, size: 0.8 }` to keep one splat out of the pattern layer (seams, stitches,
 eyes, labels) or resize it.
 
@@ -174,7 +174,7 @@ drive(t, c, out, info) {
   out.amount = 0.5 + c.size;   // scales beat, breathe, flame, rise, twinkle, sway and wave
   out.energy = c.melt;         // drives "melt" (0..1)
   out.grow = c.bloom;          // drives "grow" (0..1)
-  out.glow = [r, g, b, strength]; // colour of the "pulse" glow
+  out.glow = [r, g, b, strength]; // color of the "pulse" glow
   out.body = { offset: [0, 0.1, 0], quat, squash };  // move the whole toy (in toy radii)
 }
 ```
@@ -278,11 +278,11 @@ owner's exceptions (7e), the music shelf and toys marked `keep` in `tools/sound-
 warn. The thresholds (`LINT` at the top) were set on September 30, 2026, so that the toys the owner
 complained about fail and the ones he likes pass; they are a guide, and his ears are the real test.
 
-**Flag colours**: `patternProjection: "top"` makes a toy lay flag colours on from above (a flat toy:
+**Flag colors**: `patternProjection: "top"` makes a toy lay flag colors on from above (a flat toy:
 the chess board) when a flag is picked; `patternAmount: 0.3` lays them on gently and
 `patternDetail: 1` keeps each splat's own light and dark under them (the chess board's light and
 dark squares stay easy to tell apart). The app switches to the toy's way when it comes out with a
-flag on, and back to the usual way for the next toy unless the look was changed. Splats a colour
+flag on, and back to the usual way for the next toy unless the look was changed. Splats a color
 function returns with `keep: true`, or with `pattern: false` on their shape, never take a pattern
 (the chess pieces keep their own ivory and ebony under any flag).
 
@@ -333,7 +333,7 @@ a recipe, plus `parts`, each made of soft ellipsoid regions in world coordinates
 
 A GPU pass tags each splat with the region it falls in when the toy loads; `soft` (a fraction of the
 radius) blends the edge so the part bends into the rest of the toy. Up to 15 parts and 12 regions.
-Open the app with `?rig=show` to tint each part (and the colour keys) while placing regions, or
+Open the app with `?rig=show` to tint each part (and the color keys) while placing regions, or
 render `tools/rig-map.mjs <dir> --rig <id>` for front, side and top views on a world grid.
 `out.body` (squash, offset, rotation) moves the whole scan, for squeezes and hops. Shelf shapes
 (blob, donut, knot, planet) use rigs too.
@@ -341,15 +341,15 @@ render `tools/rig-map.mjs <dir> --rig <id>` for front, side and top views on a w
 More that a rig can do (Phase E1; the full reference is at the top of `src/rigs.js` and
 `src/rig-fx.js`):
 
-- A region can take only splats of one colour: `{ at, r, color: "#d84a34", tol: 0.4 }` (the alarm
+- A region can take only splats of one color: `{ at, r, color: "#d84a34", tol: 0.4 }` (the alarm
   clock's red second hand).
-- `keys: [{ color: "#c9b25a", tol: 0.2 }]` marks up to two sets of splats by colour (optionally only
+- `keys: [{ color: "#c9b25a", tol: 0.2 }]` marks up to two sets of splats by color (optionally only
   within `r` of `at`), or `{ long: 0.42 }` for long thin splats (the donut's sprinkles).
 - A driven part takes `{ tint: "#ffb040", glow: 0.5, bright: 0.3 }` to light up and `{ scale: 1.1 }`
   to grow about its pivot.
 - `fx` lists up to four whole-body effects for things too many or too small for parts: each picks
   splats (`select`: all, a key or a part; `mask`: half-space, strips, sphere or wedge), moves them
-  (push, along, scatter, hop, shiver, turn, counter-rotating bands, bend, peel, split) and colours
+  (push, along, scatter, hop, shiver, turn, counter-rotating bands, bend, peel, split) and colors
   them (glow, recolour, brighten, sparkle, fade, darken), shaped by a pattern (a growing shell, a
   band, a stagger per piece, a swirl wipe, a wave). `drive()` sets
   `out.fx.<name> = { move, color, phase }` each frame.
@@ -400,7 +400,9 @@ limit is for all of them together.
 
 **Loading first**: `async prepare(options)` runs before each build (in the browser and in the Node
 tools), for toys that fetch a file (the protein toy reads `assets/proteins/*.pdb`). Cache what it
-loads; `build` itself stays synchronous.
+loads; `build` itself stays synchronous. In the app a third argument, `{ profile }`, gives the
+device's tier (`"low"` on a phone), so a toy can fetch lighter files there; the Node tools leave it
+out.
 
 **Credits**: `credits: [{ label, title, source, author, license, licenseUrl }]` adds the toy's own
 sources to the About tab (the protein toy's PDB entries).
@@ -498,6 +500,31 @@ like any other splat (parts, the body, leaves).
 - `tools/pic-clip.mjs` records clips of picture toys (pages are built in real time).
 - `tools/pic-samples.mjs` makes the samples and the test fixtures from our own text.
 
+### Chunks, the zoom gesture and the scale bar (lane Powers of ten)
+
+From lane Powers of ten (October 6, 2026; `src/chunks.js`). A toy that shows many scenes, a few at a
+time (the Powers of ten zoom), can load each one only when it comes near:
+
+- `chunks: { async build(k, id, help) }` builds one chunk with a Kit that keeps the recipe's
+  coordinates (no fit); it may fetch its data first (`help.profile` is the device tier).
+- In `drive`, `info.chunks.want(id)` builds it (one at a time, in the order asked),
+  `info.chunks.state(id)` is `"none"`, `"loading"`, `"ready"` or `"failed"`, and
+  `info.chunks.drop(id)` frees it.
+- `out.chunks = { [id]: { scale, offset: [x, y, z], fade } }` places the chunks shown this frame, in
+  recipe coordinates (a splat at `p` shows at `p * scale + offset`). A chunk left out, or with a
+  `fade` of 0, is switched off (not drawn or sorted). `fade` is the chunk's own first morph channel,
+  so splats built with `kind: "fade"` and `params: [0, -0.99]` take it as their opacity. Each chunk
+  is its own splat entity, so chunks sort where they show, at any scale.
+- `zoom: true` hands the pinch, the wheel, the + and − keys and a one-finger drag (up zooms in; a
+  sideways drag does nothing) to the toy instead of the camera: `info.zoom = { log, n, resets }`
+  (the sum of the gestures' natural logs, above 0 zooming out; how many; how many times Reset view
+  was pressed).
+- `frameReaches: true` frames the camera on the recipe's `k.reach` points alone, not on its own
+  splats: for a toy whose own splats are only a backdrop far behind its scenes (built with
+  `fit: false`).
+- A legend item (`out.legend`, lane Anatomy) may carry `ruler: { size }`: a scale bar that long in
+  recipe units at the toy's center as the camera sees it (at most 140 px), its text under it.
+
 ## 5c. The tilt lock
 
 From lane Viewer (September 29, 2026). A flat toy (a page, a photo, a screen, a frame) reads best
@@ -520,6 +547,33 @@ pitch and roll stay at the toy's starting pose. Zoom, pan, pinch and Reset view 
   and roll.
 - A normal two-finger pinch never turns a toy: two fingers zoom, roll only after a clear twist
   (about 17 degrees) and turn only when they move together first (`PINCH_*` in `src/camera.js`).
+
+- Since October 5, 2026 (lane Pages r6), a drive can free the tilt for a while:
+  `out.tiltFree = true` on each frame it wants it (a book with figures standing up, to see them from
+  the side). A toy whose tilt is locked then turns any way under a drag; when the drive stops
+  asking, the view eases back level and square to the toy and the lock comes back. A toy the visitor
+  had unlocked stays unlocked.
+
+### Top-bar switches, the stage slider and figure depths (lane Pages r6)
+
+- A control marked `global: "pop"` (a toggle) is set from the top bar's Pop out button, not from the
+  Toy tab: one setting for every toy that has such a control, remembered on the device
+  (`splashery.popout`), shown only while one is open. The app sets the control to 1 or 0 when the
+  toy opens and when the button is pressed; a scene whose controls have it on turns the button on
+  for the visit. The first time such a toy opens on a device, a line says the button is there.
+- `out.slider = { id, label, value }` (value 0 to 1) shows a small slider over the stage while it is
+  set. The slider takes the value when `id` changes; moving it hands
+  `info.slider = { id, value, n }` to the next drive (`n` counts the changes, so a drive can tell a
+  new move from an old one).
+- A sheet's relief (`out.sheets[id].relief`, 5b) may carry `nearest: true`: its map is then sampled
+  without blending, so a map of a few flat values raises the picture in flat steps with clean edges
+  (cutout layers, as in a paper pop-up book), and `keep: [lo, hi]`: only the part of the picture
+  where the map lies in that range is built, a cutout with clean edges (its `depth` may be 0).
+  Several cutouts of one picture on parts of their own make the layers of a paper pop-up book (lane
+  Pages r6's P1).
+- `info.figures` is the scene's `toy.figures` (docs/SCENE-SCHEMA.md): `[{ page, box, depth }]`. A
+  drive that hands back `out.figures` (a list) replaces it in the scene, so links, saved files and
+  embeds carry it; an empty list clears it.
 
 ## 5d. Songs and levers
 
@@ -642,15 +696,573 @@ is a part); they follow the whole toy's move and turn, not a part's. A recipe wi
 `alive: true`. For crisp liquid, a labs toy can use `kernel: "sharp"`; smoke and flames look better
 with the Gaussian (the Fluid lab picks per scene with a getter).
 
-## 6. Behaviours
+## 5f. Hands-on: bodies and fields
 
-A behaviour moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or
-a cloud splat:
+From lane Hands engine A (October 3, 2026; the code is `src/physics/materials.js` and
+`src/physics/fields.js`, the tests `tests/hea-engine.spec.mjs`). With the ✋ Hands-on switch on, a
+recipe's `hands` block can ask for these pieces; a toy that asks for none plays exactly as before
+(Level 1: pick it up and toss it). Nothing here loads or runs until the switch is on. Every piece
+goes home on ↺ Reset. Recipe units are the recipe's own (the toy fits in about one unit); "toy
+radii" are the toy's size on screen. A recipe's `drive()` reads what the finger does as `info.hands`
+(below); it is `undefined` for a toy without these pieces, so always write `info.hands?.…`.
+
+**A material** (`hands.material`): a thrown toy moves like the real thing. Name a preset (every
+ball, `shuttlecock`, `flying-disc`, `paper-plane`, `baseball-cap`; the list and the real numbers are
+at the top of `materials.js`), or give your own keys, or a preset with some keys changed.
+
+```js
+hands: { material: "basketball" },
+hands: { material: { preset: "baseball", magnus: 0.08 } },
+hands: { material: { mass: 0.3, r: 0.1, bounce: 0.6, cd: 0.47, roll: 0.05 } },
+```
+
+The keys: `mass` (kg) and `r` (m) with `cd` set the air's drag (the real thing, scaled); `bounce`
+(restitution on a hard floor), `friction`, `roll` (rolling resistance, times gravity), `spin` (how
+much a throw spins it, from where the finger holds it: a low grab gives backspin), `spinDecay`,
+`magnus` (the curve a spin gives), `lift` with `up`, `gyro` and `fade` (a disc's glide, tilt-hold
+and bank), `nose` with `vane` (flies nose first: a shuttlecock's cork), `spiral` and `tumble` (a
+football's spiral, a rugby ball's end over end), `hook` (a bowling ball), `drift` (a light ball
+wanders sideways as it falls; the beach ball), `fingertip: true` (an upward flick while holding it
+spins it on the fingertip; the basketball) and `warm: [first, top]` (a squash ball livelier each
+throw). Lift and the curve are set to show at Hands-on's slow throws, in the real direction and
+order. Pieces take a material too: `material` in a piece's def.
+
+**Room to roll** (`hands.area`, a whole toy with a material; lane Hands-on H1, October 8, 2026): the
+walls of the play area move out to `area` toy radii from home, as for wheels, so a ball rolls, a
+puck slides and a marble runs on (the view drifts after it). Without it the walls stay where Level 1
+puts them, just past the toy. `hands.view` (0 to 1, 0.8 by default) is how far the view drifts after
+a tossed whole toy: less (a ball's 0.4) lets a roll read as a roll. `hands.friction` sets the
+floor's friction under a whole toy with a material (a hockey puck's ice: 0.04). `hands.soft` (0
+to 1) sets how much a whole toy squishes when it lands, over the list in `hands-on.js` (a
+superball's firm 0.15). A shelf shape (a procedural toy in `src/toys.js`) may take the gummy bear's
+stretch from its shelf entry: `grab: { radius, max }` (the jelly blob). In pieces mode `hands.floor`
+may be a function `(data, info) => height`, for a floor that depends on the build (a d20 sits lower
+than two d6s). `hands.press: { amount, after }` (a whole toy): a press held still for `after`
+seconds (0.15) squeezes it down by `amount` (0.25) and sends `hands.sound` a hit with `press: true`;
+let go, it springs back with a wobble (the rubber duck). A drag still picks it up. A piece with
+`fixed: true` (no part of its own) never moves, is never picked up and is never knocked loose: a
+stand or a wall for the others to land on (the baseball cap's walnut stand). A material's `nose`
+turns it only while it flies, near critically damped, so a shuttlecock flips cork first once and
+lies still where it lands.
+
+**A water line** (`hands.water`): the toy floats on a round pool, bobs and settles; a boat (any
+non-round toy) rocks and rights itself, since each point under water lifts where it is. By default
+the line sits where the toy, at home, floats as it stands (from its density), so nothing moves until
+touched.
+
+```js
+hands: { material: "water-polo-ball", water: true },
+hands: { water: { density: 0.89, depth: 3, color: "#5aa9cf" } }, // an iceberg: mostly under
+hands: { water: { density: 0.35, level: -0.2, drag: 8, size: 3.5 } },
+```
+
+`density` (relative to water; from the material, else 0.5), `level` (toy radii from the home middle;
+else worked out), `depth` (to the pool's floor, toy radii, 2.2), `drag` (6), `size` (the pool's
+radius, toy radii, 3.2), `color`. With pieces, `level` is in recipe units and every piece floats.
+
+**Buoyancy in air** (`hands.air`): a hot-air balloon that settles where it hovers, floats back up
+when pulled down and sinks back when pushed up, its basket under it:
+`hands: { air: { hover: 0, spring: 0.3, drag: 3.2, floor: 1.5, upright: 6 } }` (or `air: true`).
+`hover` is toy radii from home; `floor` lowers the floor so it can be pulled down. A whole toy that
+floats (on `water` or in `air`) can be pushed below where it stands; any other toy can't be pressed
+into its floor (lane Hands-on H4).
+
+**A gravity well** (`hands.well`): a pull toward a point instead of the floor. The floor goes
+(`floor: true` keeps it) and the air with it, so a piece thrown sideways orbits.
+
+```js
+hands: { pieces: planets, well: { at: [0, 0, 0], pull: 1, soft: 0.3 } },
+hands: { pieces: star, well: { at: [0, 0, 0], pull: 2, capture: 0.12 } }, // a black hole
+```
+
+`at` (recipe units; the toy's home by default), `pull` (gravity's strength one toy radius away,
+falling with distance squared), `soft` (toy radii; no pull spike near the middle), `capture` (toy
+radii: inside it a piece is swallowed and held there until ↺ Reset).
+
+**Wheels that roll** (`hands.wheels`, the whole toy): a drag on the toy pushes it (it is never
+lifted); it rolls on, gripping sideways and slowing only by rolling resistance, and its wheel parts
+turn by the distance it rolled (they stop their own idle spin while Hands-on is on).
+
+```js
+hands: { wheels: { axle: [0, 0, 1], r: 0.17, parts: ["front", "rear"] } },
+```
+
+`axle` (recipe axis), `r` (the wheels' radius, recipe units), `parts` (the wheel parts, turned about
+their own axis), `sign` (-1 turns them the other way), `grip` (14), `roll` (0.015), `yaw` (6) and
+`area` (how far it may roll, toy radii, 2.4). `info.hands.rolled` is the angle rolled, for parts
+that turn with the wheels (a steam train's rods). `lift: true` (lane Hands-on H4): a drag that
+starts straight up the screen picks the toy up instead, as any toy is (a bus you roll or lift).
+
+**Shake detection** (`hands.shake`): a quick back-and-forth drag on the toy (holding it, or on a
+tree's trunk) fires the toy's tap action (or `key`), at most every `gap` seconds; `info.hands.shake`
+(0 to 1) is how hard it is being shaken, to make the effect grow. `hands.slosh: 0.05` makes contents
+lag behind the moving toy: `info.hands.slosh` is a sideways offset (recipe units, at most that much)
+for a part (the snow globe's snow; keep the part inside its glass by that margin).
+
+With `fire: false` the shake fires nothing and only `info.hands.shake` reads it (a decorated tree's
+baubles swing harder the harder it is shaken, while its tap still switches the lights; lane Hands-on
+H3).
+
+```js
+hands: { shake: true },
+hands: { shake: { key: "snow", gap: 0.6 } },
+hands: { shake: { fire: false } },
+drive(t, c, out, info) {
+  const s = Math.max(c.shake, info.hands?.shake ?? 0); // the harder the shake, the more snow
+```
+
+**Follow or flee the finger** (`hands.flee`, `hands.follow`): a drag on the toy doesn't pick it up;
+the finger is a line through the scene instead. `info.hands.finger` is that line (`{ origin, dir }`,
+recipe units, or null when no finger is down) and `info.hands.point` its point nearest the toy's
+middle (an owl's head turns to it). With `flee`, `info.hands.flee(key, pos)` gives each thing its
+own dart away from the line and its spring back (`{ offset, vel }`, recipe units): add the offset to
+the thing's place and turn it to face `vel`.
+
+```js
+hands: { flee: { radius: 0.45, push: 1, back: 2.2, max: 0.6 } },
+drive(t, c, out, info) {
+  const f = info.hands?.flee(i, P) ?? NONE; // P: where fish i swims now
+  const at = vec.add(P, f.offset);
+```
+
+`at: (p) => bool` (lane Hands-on H5) limits where a press is followed or fled (`p` the press, in
+recipe units): a press elsewhere picks the toy up as usual (an owl follows a press on its head and
+is tossed by its body).
+
+**The finger, for a drive** (`hands.touch`; lane Hands-on H5, October 8, 2026): `touch: true` tells
+the recipe's `drive()` what the finger does, as `info.hands.pressed` (a finger is down on the toy: a
+press, a push or a hold), `info.hands.held` (the toy, or a piece, is up in the hand) and
+`info.hands.speed` (how fast the whole toy, or the held piece, moves, in toy radii per second), so a
+toy can answer the hand (a pufferfish puffs while you hold it, lungs breathe out while squeezed).
+`info.hands.joint(name)` is a joint's value (an angle or a slide, null without one), and
+`info.hands.piece(i)` where piece i is (recipe units; its fields under "Where a piece is" below), so
+a drive can follow a part the hand moved (the waves of a point turned round a circle).
+`touch: { key }` also fires that action when a press is held `after` seconds (0.15) or becomes a
+push or a pick-up (a poke), at most every `gap` seconds (0.5); a quick tap is still the toy's own
+tap. A press still picks the toy up as before.
+
+```js
+hands: { touch: { key: "poke" } },
+drive(t, c, out, info) {
+  const squeezed = info.hands?.pressed ? 1 : 0;
+```
+
+**Projectiles and targets** (pieces): a piece with `projectile: { nose: [0, 0, 1], vane: 20 }` flies
+nose first, and one that hits a piece with `target: true` sticks in it where it hit, until it is
+picked up again or ↺ Reset (objects only, never people or animals). `stick: false` lets it bounce.
+
+A piece's `home: { k, damping }` (lane Hands-on H5; per second squared, per second) puts it on a
+spring to where it was built, place and turn: let go, it springs back with a wobble instead of
+falling (an atom of a molecule, pulled off and let go).
+
+A piece's `when: (data) => bool` (lane Hands-on H5; `data` the build's `k.data`) says whether it can
+be picked up now: an anatomy atlas's organs only while its organs layer shows (its drive keeps the
+shown layer in `data`).
+
+Lane Hands-on H2 (October 8, 2026) added these keys to a piece's def:
+
+- `place: false`: this piece hangs and swings in the hand (as every piece does with
+  `hands.place: false`) while the others are picked and placed level (an ice cream cone you tip).
+- `shown: { pos, quat }`: where the recipe's drive shows the piece at rest, when that isn't where
+  its splats were built (a kiwi's half, built face up and shown closed): the body starts and goes
+  home there, and the piece's splats move from where they were built.
+- `ride: [index | { token, visible }]`: other tokens that move with the piece (a banana's skin
+  strips; `visible: 0` keeps one hidden, its pale inside). A part piece can carry other parts too:
+  `{ part, pivot, upside }` moves that part with it (about `pivot`, the piece's own by default), and
+  merges `upside` into it while the piece lies upside down (a flipped pancake's syrup and butter,
+  now under it: `{ visible: 0 }`). The drive moves it with the piece the rest of the time.
+- `offHome: { … }`: entries merged into the piece's part while it is off its place (a candle pulled
+  out of the cake goes out: `{ visible: 0 }`).
+- `flip: true` (below).
+
+And `hands.foot` (0.6): how far out from its middle, as a share of its pick radius, a held piece
+looks for what is under it; 0.95 lets a wide piece (a burger's bun) set down beside a stack sit on
+its edge instead of being lowered into it. And `hands.walls` (`[x0, x1, z0, z1]`, toy radii) in
+place of the square `area`, for a play area that isn't square: the croissant's lid stays on its
+baking tray. `hands.resort` (seconds, 0.25) is how often moving pieces are sorted again; less for a
+piece that turns fast in front of the toy's own splats (the sunflower's nodding head).
+
+`info.hands.moved` is whether anything is off home (or on its way back), so a drive can show what
+Hands-on uncovered (the cut face of the kiwi half left behind). `info.hands.piece(name)` (a part's
+name, a string; a number is a piece's index, as above) also gives the piece's `vel` and `pinned`, so
+a drive can answer where it is and how it moves (a lotus dropped in its pond splashes where it
+lands). And a break joint takes `spill` (radians): a piece riding another comes loose when that one
+tips past it (scoops off a tipped cone), with the cue `"spill"`; and `place: true`: snapped off, it
+is held as a picked piece is (by its middle, level, hovering over whatever is under the finger), not
+hanging from where it was grabbed.
+
+**A flip** (lane Hands-on H2, October 8, 2026): a piece with `flip: true` in its def, let go from a
+quick flick up the screen (faster up than across), is tossed up with half a turn about the level
+line across the view, timed to come down upside down where it hovered before the flick, on whatever
+is under that spot, drawn toward that piece's middle by the recipe's `center` (a pancake flipped
+back onto its stack). Let go any other way, it is set down as before.
+
+**A recipe's own push** (`hands.force`, lane Hands-on H4, October 8, 2026): a function
+`(body, h, ctx)` called once per substep (`h` seconds) for every body (the whole toy, or each
+piece), before the world moves it, to change its `vel` and `omega` (recipe units, or the world's for
+a whole toy): a flying saucer's beam that lifts a cow only while the cow is inside it. `ctx` is
+`{ piece, c, data, G, R, touching, free }`: the piece (its `def`, `part` and `token`; null for a
+whole toy), the toy's eased controls, the build's `k.data`, gravity and a toy radius, whether it
+touched anything in the last step, and `free()`, which lets a piece resting at home go. A pinned
+piece (at home, untouched) has no mass to move: skip it (`body.pinned`), or `free()` it first
+(planets that keep orbiting).
+
+```js
+hands: { pieces: () => [cowPiece], force: (b, h, ctx) => { if (!b.pinned && ctx.c.beam > 0.05 && inBeam(b.pos)) b.vel[1] += ctx.G * h; } }, // prettier-ignore
+```
+
+**Where a piece is** (`info.hands.piece(key)`, lanes Hands-on H2, H4 and H5): in a pieces-mode toy's
+`drive`, the piece by its number in `hands.pieces` (H5), or by its part name, token or `name` (H4; a
+piece with no part or token of its own, drawn by the drive: a body a part follows), as
+`{ pos, vel, quat, turn, home, held, pinned, off }` (recipe units; `quat` its turn in the world,
+`turn` its turn from home; `pinned` while it rests at home, `off` once it has been picked up or
+knocked loose), or null before the first touch. A toy that reads it without any other field asks for
+`hands.watch: true` (so `info.hands` exists): a campfire's flames grow when a log is laid on them.
+`info.hands.moved` (as lane Hands-on H2 adds it) is whether anything is off home or on its way back.
+
+**Carried together** (`hands.carry`, lane Hands-on H4): `{ key: [keys] }` (part names or tokens):
+while the piece `key` is held, the listed pieces come loose and go with it as they were built beside
+it; let go, they fly on with its speed, then each falls, bounces and settles on its own (Galileo's
+two balls, dropped from one hand, land together).
+
+```js
+hands: { place: false, pieces: () => [bigBall, smallBall], carry: { ball0: ["ball1"], ball1: ["ball0"] } }, // prettier-ignore
+```
+
+**Level 1 for picture and still toys** (`handsLevel1`, lane Hands-on H3): a picture toy, or a still
+one (`turntable: false`), stays out of Hands-on unless it asks: `handsLevel1: true` lets it be
+picked up, tossed and set down whole. A function of the toy's info says when: false while the toy is
+a live tool someone is working in (the Screen showing your screen, a converter showing your own
+file), and the switch then goes off by itself and ✋ hides until it's no longer live. A toy with its
+own drags (`recipe.drag`) that asks keeps them: the switch starts off, a press where `drag.at` takes
+it still goes to its drag, and only a press off it picks the toy up.
+
+```js
+handsLevel1: true,
+handsLevel1: () => !live.on("screen"),
+```
+
+**A forgiving press** (lane Hands-on H3; every toy, nothing to ask for): with the ✋ switch on, a
+press where the pick buffer finds no splat (between a desk lamp's arm and its beam, beside a thin
+pen) still takes the toy when the finger's ray crosses it: a piece's `pick` ellipsoid in pieces
+mode, else the toy's box (trimmed to 0.85 of its half sizes, as it stands now). With the switch off,
+such a press turns the view as before.
+
+**Strike pieces** (lane Hands-on H3): a piece in the hand passes through the others, unless it has
+`strike: true` (a drum's stick): then it hits them, so a held stick knocks the drum's head. Each hit
+that reaches `hands.sound(hit, vol)` names both pieces (`hit.name`, `hit.against`: each piece's
+`name`, else its part or token; null for the floor) and where they met (`hit.point`), so the stick
+on the head can sound the drum and the stick on the rim a click. (The drum under its sticks is a
+`fixed: true` piece, lane Hands-on H1's, so it stays ground for them.)
+
+```js
+pieces: () => [{ name: "stick", strike: true, pos, solid, pick }, { name: "drum", fixed: true, ... }],
+sound: (hit, vol) => (hit.name === "stick" && hit.against === "head" ? { voice: "snare", vol } : undefined), // prettier-ignore
+```
+
+**Strings** (`hands.strings`, lane Hands-on H3): a press within `reach` (recipe units, 0.05) of a
+string doesn't pick the toy up; dragging across the strings plucks each one the finger crosses
+(within its length), in turn. Each pluck reaches `hands.sound(hit, vol)` with `hit.pluck` the
+string's index (and `hit.name`), so each string sounds its own note, and `info.hands.plucked[i]` is
+the seconds since string `i` was last plucked (Infinity before), for the string to vibrate. Each
+string is its two ends (`a`, `b`, recipe units); they lie in one plane (give `normal` for a single
+string). A press elsewhere on the toy picks it up as before.
+
+```js
+hands: {
+  strings: { list: STRINGS.map((s, i) => ({ a: s.bridge, b: s.nut, name: `s${i}` })), reach: 0.04 },
+  sound: (hit, vol) => (hit.pluck !== undefined ? { voice: "pluck", notes: OPEN[hit.pluck], vol } : undefined), // prettier-ignore
+},
+```
+
+`info.hands.on` is whether Hands-on is on. Check the toy's frame time with the pieces running (the
+whole world's step is well under a millisecond for one body, a few for 40 pieces).
+
+## 5g. Hands-on: joints
+
+From lane Hands engine B (October 3, 2026; code in `src/physics/joints.js`, proof in
+`tests/heb-engine.spec.mjs`). With the ✋ switch on, a recipe's `hands.joints` makes its parts move
+the way the real thing's do: a lid swings on its hinge, a sword slides out of its stone, a crank
+turns, a wedge clicks back into its place, a petal snaps off. Everything is in recipe coordinates (a
+kit toy's build space; a scan rig's world) and moves as a solid piece. ↺ sends every part home along
+its own way (a lid swings shut) and mends whatever broke. A recipe with `hands.joints` plays in
+pieces mode (the toy itself stays put); `hands.pieces` may add loose pieces beside the joints.
+
+`hands.joints` is a list, or a function `(data, info) => list` (`data` is the build's `k.data`).
+Each joint moves one part (`part`, a `k.part` name, or a scan rig's part) or one token (`token`, an
+index). A joint makes its own piece unless `hands.pieces` already has one with that part or token.
+Keys every joint takes:
+
+- `type`: `"hinge"`, `"slider"`, `"dial"`, `"socket"` or `"break"`.
+- `part` or `token`; `name` (defaults to the part's name, used by `parent` and in sounds).
+- `pos`: the part's middle (where the finger finds it); `pick`: the radii `[x, y, z]` of the
+  ellipsoid about `pos` a press finds it in (the part's rough size).
+- `pivot`: the part's pivot exactly as given to `k.part` (Hands-on turns the part about it).
+- `start(c, info)`: for a hinge, slider or dial, its value as the recipe's `drive` shows it now (`c`
+  the eased controls), when that differs from the part as built: a music box built shut but shown
+  open says `start: (c) => 1.95 * ease3(c.open)`. ↺ brings it back there.
+- `sound(ev, vol)`: the cue for an event (null for silence); `ev.kind` is `"stop"` (a hinge or
+  slider hit a stop), `"detent"` (a dial passed a click), `"free"` (a stuck slider came loose),
+  `"socket"` (clicked into place) or `"snap"` (broke off); `ev.v` is the joint's value then (which
+  stop), `ev.n` the detent's number and `ev.speed` how hard (toy radii per second). Without it a
+  quiet default plays (thud, click, scrape, click, crack).
+
+**Hinge**: swings about `axis` through `pivot`, from `min` to `max` radians (from the part as built;
+the sign follows the right-hand rule about `axis`). It falls by its own weight (`gravity`: `false`,
+or a multiplier), `spring` (per second squared) pulls it toward `rest` (radians, 0), and `damping`
+(per second, 3) slows it. At a stop it bounces back by `bounce` (0.2). `com` is the point its weight
+hangs from (defaults to `pos`).
+
+```js
+hands: {
+  joints: [{ type: "hinge", part: "lid", pivot: [0, 0.1, -0.37], axis: [-1, 0, 0], min: 0, max: 1.95,
+    pos: [0, 0.25, 0], pick: [0.62, 0.25, 0.4] }],
+},
+```
+
+**Slider**: moves along `axis` from `min` to `max` (recipe units, from as built). `stick` (in toy
+radii) keeps it stuck fast until the finger has pulled that far (with `wiggle`, an axis it shakes
+about while stuck); `friction` (toy radii per second squared) holds it where it is let go when it
+beats its weight; `spring`, `rest`, `damping`, `bounce` and `gravity` as for a hinge.
+
+```js
+{ type: "slider", part: "sword", pivot: [0, 0.9, 0], axis: [0, 1, 0], min: 0, max: 0.75,
+  stick: 0.1, wiggle: [0, 0, 1], friction: 40, pos: [0, 0.75, 0], pick: [0.12, 0.6, 0.12] }
+```
+
+**Dial**: turns about `axis` through `pivot`, around and around (or between `min` and `max`); the
+finger turns it as it goes round the axis, and a flick sets it coasting, slowed by `drag` (per
+second, 0.8). `detents` (clicks per turn) click as it passes each one and settle it on one. A dial
+has no weight unless `gravity` is set. `turn(angle, delta, info)` is called on every move and may
+return cues (a music box's notes); `also(angle, parts, info, joint)` adds entries to the parts
+Hands-on sends (a dancer that the crank turns; it works for every joint type, with its value;
+`joint.w` is its speed and `joint.held` whether the finger has it, so a spinning top tilts as it
+slows).
+
+```js
+{ type: "dial", part: "crank", pivot: [0.58, 0.25, 0], axis: [1, 0, 0], detents: 12,
+  pos: [0.62, 0.25, 0.1], pick: [0.1, 0.18, 0.18],
+  turn: (a, da) => (da > 0 && step(a) ? { voice: "tine", f: nextNote() } : null),
+  also: (a, parts) => (parts.dancer = { angle: 0.8 * a }) }
+```
+
+**Socket**: a loose piece (in `hands.pieces`, or made here with `solid`) that clicks back into the
+place it was built in: once it has been taken out, bringing it within `snap` toy radii (0.3) of its
+place, or pointing the finger at its place, glides it home and locks it there. `out` (a vector, in
+recipe units) is its doorway, the way it comes out and goes in when other things fit round it (a
+melon's slice, straight up out of its slot): taken from its place it slides along `out`, held as
+built, and is free past its end; let go before that, it slides back in; and brought back, it glides
+to the doorway's mouth and then straight in.
+
+```js
+pieces: (d) => d.wedges.map((w) => ({ token: w.token, pos: w.mid, quat: w.q, solid: WEDGE, points: surfacePoints(WEDGE, 1), pick: [0.3, 0.4, 0.3] })),
+joints: (d) => d.wedges.map((w) => ({ type: "socket", token: w.token, snap: 0.35 })),
+```
+
+`armAway` (toy radii; lane Hands-on H5): it clicks back only once both the piece and the finger's
+line have been that far from its place (small pieces packed close, an atlas's organs, would
+otherwise click straight back as they are lifted out).
+
+`hands.knock: false` (lane Hands-on H5): a pinned piece leaves its place only when picked, never
+knocked loose by another (a Platonic solid's faces: one set down on the rest doesn't topple them).
+
+A hinge's, slider's or dial's `limits: (at) => [min, max]` (lane Hands-on H5) narrows its stops as
+the toy stands now (`at.joint(name)` reads another joint's value), never past where the part already
+is: a part another blocks, as a Pythagoras triangle that can't slide through its neighbor until that
+one has moved.
+
+**Break**: a piece held fast at `at` to the ground, or to another piece (`to`, a part, a token or a
+joint's name), until the finger pulls it `pull` toy radii (0.35): it bends as a whole about `at`, up
+to `give` radians (0.12), then snaps off into the hand. On a loose piece it rides along with that
+piece (their pair lands as one), and a landing faster than `knock` (toy radii per second) breaks it
+off. ↺ mends it.
+
+```js
+joints: [{ type: "break", part: "top", to: "low", at: [0.1, 0.4, 0], pull: 0.3, give: 0.15, knock: 4 }],
+```
+
+**Reseat** (lane Hands-on H3): `reseat: true` on a break lets the piece go back. Once it has been
+taken away, bringing it within `snap` toy radii (0.3) of its place, or pointing the finger at its
+place, glides it in, and it holds fast there again (another pull snaps it off again, with its `snap`
+cue). `reseat: { snap, seats: [{ pos, quat }] }` adds other places it clicks into (its middle and
+turn there, recipe units; `quat` defaults to its own): a pen's cap posted on its end. The click is
+the `"socket"` cue. ↺ brings it home from wherever it sits. `steady: true` holds a piece that has
+just snapped off at its turn, carried where the finger holds it, instead of hanging and swinging
+from the finger (a pen's cap, carried over the pen to its back end, stays clear of the paper;
+`place` instead hovers it over whatever is under the finger).
+
+```js
+{ type: "break", part: "cork", at: [0, 0.8, 0], pull: 0.18, give: 0.03, reseat: true },
+{ type: "break", part: "cap", at: CAP_MOUTH, pull: 0.2, give: 0.02, reseat: { seats: [{ pos: POSTED, quat: HALF_TURN }] } }, // prettier-ignore
+```
+
+A picture toy (a recipe with `pictures`, or `turntable: false`) stays out of Hands-on unless its
+`hands` block has `joints` (lane Hands-on H3): then those play, and nothing else (a picture frame
+swings on its nail; its picture is never picked up whole).
+
+**Latches and triggers** (lane Hands-on H3): `latch: "max" | "min" | value` makes a hinge, slider or
+dial catch there as it reaches or passes it (a crossbow's string drawn back into its nut): it holds
+fast, the finger can't move it, and its weight doesn't pull it off. With `trigger: true`, a tap on
+the toy (or the Play button) with ✋ on lets it go instead of the toy's own tap: it springs back by
+its `spring`, or falls by its weight. The catch is the `"latch"` cue and the release `"free"`;
+`player.act()` returns `{ key: "trigger" }` for a tap that pulled it. `catch` (default 0.001, in the
+joint's own units) is how near the finger must bring it for it to catch. ↺ brings it home (caught
+only if home is its latch).
+
+```js
+{ type: "slider", part: "string", axis: [0, 0, -1], min: 0, max: 0.4, spring: 60, latch: "max", catch: 0.03, trigger: true },
+```
+
+**Parents**: `parent` (a joint's name) puts a hinge, slider or dial on another driven part: a desk
+lamp's head on its arm, a clock's hands on a turning dial. Children pose after their parents.
+
+**Upright** (Level 1, a whole toy): `hands: { upright: { k: 40, damping: 3 } }` turns a tipped toy
+back upright (its tilt only; its turn about the vertical stays), so it rocks and rights itself as a
+sailboat or a roly-poly penguin does. With `rest` (radians; lane Hands-on H5) it settles once it is
+back within that of upright, on the floor and nearly still, and holds there until the finger touches
+it again: a toy on a round base (an owl gripping its round branch) would otherwise creep on and
+never come to rest: `hands: { upright: { k: 90, damping: 6, rest: 0.15 } }`.
+
+**Scan rigs**: `rigPieces(rig, names, opts)` (from `src/physics/joints.js`) turns a scan rig's
+hard-edged parts (src/rigs.js) into loose pieces, one body each, shaped as the part's first region
+(an ellipsoid, or `opts.solid(region)`), turning about that region's center; `opts` is copied onto
+each piece (`mass`, `friction`, ...). A rig with `hands.pieces` can be picked up piece by piece.
+Give such a rig `hard: true`: each splat then belongs wholly to one part (no soft edges), so a part
+lifted right off leaves no trail of half-moved splats:
+
+```js
+tomatoes: { hard: true, hands: { floor: -0.17, area: 0.9, pieces: () => rigPieces(RIGS.tomatoes, TOMATO_NAMES, { friction: 0.9 }) }, ... }
+```
+
+When a scan's piece can't move cleanly (a tomato whose sides the capture never saw), swap it for a
+kit-built stand-in while it is off its place: build the stand-in (and, optionally, a fill for the
+gap it leaves) as parts of the rig's `addon`, hidden by `drive`
+(`out.addon.parts.kt0 = { visible: 0 }`), and name them in `hands.swap`:
+`{ t0: { kit: "kt0", fill: "kf0" } }`. While the piece is off its place, the scan's part hides,
+`kit` rides where the piece is (built about the same pivot), and `fill` shows; ↺ brings the scan's
+own part back.
+
+Check a joint with `player.handsOn.joints.state()` (each joint's value, speed, `broken`, `stuck`)
+and `player.handsOn.joints.events` (stops, clicks, snaps). Every joint follows the effect quality
+rules: parts move whole about real axes, a part stops at real stops, and nothing flies off.
+
+## 5h. Hands-on: soft parts
+
+Lane Hands engine C, October 3, 2026. With the ✋ Hands-on switch on, a recipe's `hands` block can
+name ropes and chains, cloth, and soft stretch (`src/physics/soft.js`). They are built on the first
+touch, so opening a toy costs nothing, and toys without them play exactly as before. A rope or a
+cloth can live beside `hands.pieces` (the octopus: the body is a piece, the arms ride it).
+Everything is in recipe coordinates; speeds and forces are per toy radius. ↺ Reset glides every node
+home and mends what snapped; once a strand is still at home, the recipe's own `drive` takes over
+again (so its idle sway comes back).
+
+What moves on screen, so solid things stay solid:
+
+- **Skin** (thin, bendy things: a string, a tentacle, a tail, a sheet). Give each node a token
+  (`tokens: [i, …]`, up to 48 tokens per toy, shared with pieces) and build the splats with
+  `skin: ropeSkin(points, tokens)` (each splat follows the two nodes it lies between) or
+  `skin: clothSkin({ rows, cols, points, tokens })` (each splat follows the four corners of its
+  cell, kind `skin4`). The splats move with the nodes; nothing is warped by soft falloffs.
+- **Rigid riders** (a bead, a chime, an ornament, the yo-yo):
+  `pieces: [{ token | part, from, to, at, turnBy, spin, axis }]`. The piece goes where node `from`
+  goes and turns as the link `from` → `to` turns (`to` defaults to the next node; `node: i` with no
+  `to` turns with the link before it; `turn: false` keeps it upright; `turnBy: 0.4` turns it only
+  that share of the way, as a kite keeps facing the wind). `spin: (strand) => angle` adds a turn
+  about `axis` (the yo-yo's spin). `at` is the built point that sits on the node when that isn't the
+  node's own place (the kite's bridle). A part's pivot is read from the kit.
+
+### Ropes and chains: `hands.ropes`
+
+`ropes: (data, info) => [rope, …]`. A rope is a list of nodes held by links: slack (it folds, it
+never pushes), with a little bending stiffness, under gravity and air drag.
+
+| Key       | Meaning                                                                                                                                                                                                                                                                                             |
+| --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `points`  | The nodes' places as built, first to last (required).                                                                                                                                                                                                                                               |
+| `start`   | Where the nodes start and go back to, when that isn't where they were built (cheese strings built stretched out start bunched at the cut).                                                                                                                                                          |
+| `pin`     | Nodes held where they are built (default `[0]`; `[]` with `attach`).                                                                                                                                                                                                                                |
+| `attach`  | `{ piece, nodes }`: these nodes (default `[0]`) ride `hands.pieces[piece]` (tied at their start, or at the points `at`); `{ rope, node, nodes }`: they ride node `node` of an earlier strand (by its place in the list, ropes then cloth) and turn with it (a kite's tail; `turnBy` as for riders). |
+| `mass`    | Per node (a number, or a list: a heavy end such as the yo-yo).                                                                                                                                                                                                                                      |
+| `stiff`   | 0..1 stretch stiffness (1, the default: it doesn't stretch; 0.6: a rubbery string).                                                                                                                                                                                                                 |
+| `bend`    | 0..1 bending stiffness (default 0.2; 0: a limp thread).                                                                                                                                                                                                                                             |
+| `keep`    | Per second: the pull back to the built shape, carried by the piece it rides (arms curl).                                                                                                                                                                                                            |
+| `drag`    | Air drag per second (default 1.2).                                                                                                                                                                                                                                                                  |
+| `weight`  | How much gravity pulls it (default 1; 0: it keeps its shape by `keep` alone, as muscles hold an arm).                                                                                                                                                                                               |
+| `breakAt` | A link snaps when stretched past this many times its length (cheese strings).                                                                                                                                                                                                                       |
+| `wind`    | `{ vel: [x, y, z], gust, flap, k }`: moving air (toy radii per second) it streams in.                                                                                                                                                                                                               |
+| `lift`    | `[[node, [ax, ay, az]], …]`: a steady push on a node (a kite's lift).                                                                                                                                                                                                                               |
+| `avoid`   | `[{ at, r, piece }]`: spheres the nodes stay out of (on a piece, if `piece` is given).                                                                                                                                                                                                              |
+| `radius`  | The nodes' size against the floor and spheres (default 0.02 toy radii).                                                                                                                                                                                                                             |
+| `grab`    | `false` (not taken by the finger), or the list of nodes the finger can take.                                                                                                                                                                                                                        |
+| `pick`    | How near a press must be to take a node (default about 0.12 toy radii).                                                                                                                                                                                                                             |
+| `reach`   | How far past its length a held rope may be pulled (default 1.04).                                                                                                                                                                                                                                   |
+| `maxPull` | The furthest (recipe units) the finger can pull a node from where it rests (a hood keeps its shape).                                                                                                                                                                                                |
+| `update`  | `(strand, dt, soft) => {}` each step: set `strand.scale` to reel the rope in or out.                                                                                                                                                                                                                |
+| `reset`   | `(strand, soft) => {}` when ↺ Reset mends it.                                                                                                                                                                                                                                                       |
+| `tokens`  | One token per node (or `null`) for skin splats.                                                                                                                                                                                                                                                     |
+| `frame`   | A part name: the tokens are given in that part's moving frame, for skin splats that are also on the part (the kite's tail; the part must be one of the riders).                                                                                                                                     |
+| `visible` | `(strand, soft) => 0..1`: how visible its tokens are (cheese strings show only once pulled out).                                                                                                                                                                                                    |
+| `pieces`  | Rigid riders (above).                                                                                                                                                                                                                                                                               |
+
+A hanging string of beads, each bead a part that turns with the string:
+
+```js
+hands: {
+  floor: 0,
+  ropes: () => [{
+    points: [[0, 1.2, 0], [0, 1.0, 0], [0, 0.8, 0], [0, 0.6, 0]],
+    pieces: [{ part: "bead1", node: 1 }, { part: "bead2", node: 2 }, { part: "bead3", node: 3 }],
+  }],
+},
+```
+
+An arm that rides the body and curls back (the body is `hands.pieces[0]`):
+
+```js
+ropes: () => ARMS.map((pts, a) => ({ points: pts, attach: { piece: 0 }, keep: 5, bend: 0.4, drag: 2, tokens: ARM_TOKENS[a] })), // prettier-ignore
+```
+
+### Cloth: `hands.cloth`
+
+`cloth: (data, info) => [sheet, …]`. A sheet is `rows` × `cols` nodes, `points` row by row, held by
+links along the rows and columns, across the cells (`shear`, 0..1, default 0.6) and two apart
+(`bend`). It takes the rope keys above (`pin`, `attach`, `mass`, `stiff`, `bend`, `drag`, `wind`,
+`avoid`, `radius`, `tokens`, `breakAt`) except that nothing is pinned unless you say so. Build the
+sheet's splats with `skin: clothSkin({ rows, cols, points, tokens })`. A flag on its pole:
+
+```js
+cloth: () => [{ rows: 5, cols: 7, points: FLAG_GRID, pin: [0, 7, 14, 21, 28], wind: { vel: [2.5, 0, 0], gust: 0.5 }, tokens: FLAG_TOKENS }], // prettier-ignore
+```
+
+### Soft stretch: `hands.stretch`
+
+`stretch: { radius, max, hz, damping, at }` (or a function of `(data, info)` returning it). A press
+on the toy that misses its pieces and nodes takes the toy's grab, as the gummy bear's: the splats
+near the finger follow it, fading over `radius` toy radii (default 0.5), up to `max` toy radii
+(default 0.8, a soft cap). Let go and the pull swings back through rest on a spring of `hz` wobbles
+a second (default 3) with `damping` (0..1, default 0.2: a few wobbles; 0.5: one soft bounce).
+`at: (p) => bool` limits where a press stretches. Keep `radius` at 0.45 or more and `max` under
+about 0.9 so a stretched toy stays solid (no gaps, no see-through). A jelly:
+
+```js
+hands: { floor: 0, stretch: { radius: 0.5, max: 0.7, hz: 3.5, damping: 0.18 } },
+```
+
+### Sounds and tests
+
+A link that snaps sends a hit with `snap: true` (and `strand`, the rope's `name`) to
+`hands.sound(hit, vol)`. In tests, `player.handsOn.state().soft` gives each strand's nodes, their
+homes and how many links are broken. `tests/hec-engine.spec.mjs` measures each piece.
+
+## 6. Behaviors
+
+A behavior moves each splat on the GPU, every frame. Set `kind` and `params: [a, b]` on a shape or a
+cloud splat:
 
 | kind      | What it does                                              | a                                     | b                                |
 | --------- | --------------------------------------------------------- | ------------------------------------- | -------------------------------- |
 | `orbit`   | Turns around the toy's up axis.                           | turns per second at the rim (radians) | falloff: 0 rigid, 1.5 Keplerian  |
-| `beat`    | Heartbeat swell from the centre.                          | amount (0.05)                         | phase                            |
+| `beat`    | Heartbeat swell from the center.                          | amount (0.05)                         | phase                            |
 | `breathe` | Slow swell.                                               | amount                                | phase                            |
 | `flame`   | Rises, shrinks and reddens in a loop.                     | height in toy radii                   | phase (random)                   |
 | `rise`    | Drifts up and fades (embers, bubbles, smoke).             | height                                | phase                            |
@@ -665,7 +1277,7 @@ a cloud splat:
 | `band`    | Glows (`out.glow`) as its channel passes a.               | where along the channel (0..1)        | band width (0.08)                |
 | `fade`    | Fades out (alpha) as its channel passes a.                | where along the channel               | width; negative: fades in        |
 
-`amount` from `drive` multiplies beat, breathe, flame, rise, twinkle, sway and wave. Behaviours run
+`amount` from `drive` multiplies beat, breathe, flame, rise, twinkle, sway and wave. Behaviors run
 in the toy's rest pose, before parts move it.
 
 **Rim (glass; lane Fix4, September 30, 2026).** `kind: "rim", params: [face, sharpness]` sets a
@@ -690,10 +1302,10 @@ with `channel: 0..3` (or `(c) => n`):
   red cell curling into a sickle, a cell pinching in two, a knot contorting. Return `null` to keep a
   splat still. Targets count in the fit. Splats keep the orientation they were built with, so where
   the surface turns a lot use rounder splats (`flat` 0.4 or more). Morph combines with a part (the
-  part moves the morphed splat), not with another behaviour.
-- **Band**: `kind: "band", params: [at, width]` adds the glow colour where the channel passes `at`:
-  a wave of light that starts at the tap (a calcium wave, a sheen wiping across). Give each splat
-  its `at` from its place (distance along an arm, height).
+  part moves the morphed splat), not with another behavior.
+- **Band**: `kind: "band", params: [at, width]` adds the glow color where the channel passes `at`: a
+  wave of light that starts at the tap (a calcium wave, a sheen wiping across). Give each splat its
+  `at` from its place (distance along an arm, height).
 - **Fade**: `kind: "fade", params: [at, width]` clears a splat by its alpha as the channel passes
   `at` (a negative width makes it appear instead). Unlike `visible` and `grow`, it does not shrink
   splats, so a fading layer never turns to speckle.
@@ -708,18 +1320,18 @@ Channel tricks from the lanes (2026-09-26):
   the tokens move through the keyframes (E4-finish's ocean wave, 38 control tokens). Keep the
   bending in the plane the camera looks along, and use rounder splats.
 - **Bending one piece that touches itself** (a pretzel): use one smooth twist of space for every
-  splat, so crossings stay joined. Moving each splat along a new centre line lifts the rope off
+  splat, so crossings stay joined. Moving each splat along a new center line lifts the rope off
   itself where it crosses (E5's pretzel r2; r3 fixed it).
 - **Growing out of a hidden spot** (a tongue, sparks, sand): build the morph bunched up at the spot
   (`p` at rest) and morph it out to its full shape (`to` at full reach).
-- **A travelling wave with morphs**: split the moving pieces between three channels driven a third
-  of a cycle apart (E6b's sea urchin spines).
-- **Negative glow darkens**: `out.glow` with negative colours on a `band` layer makes night fall
-  (the Taj Mahal) or casts a moving shadow (the Washington Monument's sundial shadow, a band on the
+- **A traveling wave with morphs**: split the moving pieces between three channels driven a third of
+  a cycle apart (E6b's sea urchin spines).
+- **Negative glow darkens**: `out.glow` with negative colors on a `band` layer makes night fall (the
+  Taj Mahal) or casts a moving shadow (the Washington Monument's sundial shadow, a band on the
   ground at each splat's bearing).
 - **A sustained light from a band**: give it `params: [1, 0.5]` and hold its channel partway (0.5 to
   0.7); the glow follows the channel (the Eiffel Tower's gold lights, Stonehenge's stones).
-- **A frayed edge**: a colour function that returns `null` for more splats towards an edge makes a
+- **A frayed edge**: a color function that returns `null` for more splats toward an edge makes a
   surface fade into its surroundings instead of stopping at a straight line (the ocean wave).
 
 From lanes Math and Fix3 (September 27–28, 2026):
@@ -739,7 +1351,7 @@ From lanes Math and Fix3 (September 27–28, 2026):
 ## 7. House rules
 
 - **Deterministic**: only `k.rand()`, `c.rand()` and the kit's noise. No `Math.random`, no dates.
-- **Generic designs**: no logos, brands, league marks or named products. Landmarks may be modelled;
+- **Generic designs**: no logos, brands, league marks or named products. Landmarks may be modeled;
   modern named buildings become generic ("supertall"). Weapons are medieval or fantasy only. Anatomy
   is stylised and friendly, never gory.
 - **Keep details**: seams, stitches, eyes, flames, coins and labels use `pattern: false` or `keep`.
@@ -747,18 +1359,18 @@ From lanes Math and Fix3 (September 27–28, 2026):
   inside (a cake has sponge, a planet has a core).
 - **Fast**: `node tools/check-packs.mjs <pack>` must report every toy under 1.5 s at 160,000 splats.
   Avoid per-splat loops over hundreds of items; bucket or precompute.
-- **Stable**: at most 15 parts; behaviour names from the table; positions finite.
+- **Stable**: at most 15 parts; behavior names from the table; positions finite.
 
 ## 7b. Effect quality
 
-The owner's review of Phase E1 (`docs/reviews/2026-09-24-e1/review.md`) set these rules. The short
-form is in CLAUDE.md.
+The owner's review of Phase E1 (his notes are private) set these rules. The short form is in
+CLAUDE.md.
 
 - **Real motion, not a warped picture.** A part moves as a solid piece. A scan rig's soft regions
   (`soft` above about 0.1) bend the picture where a part meets the rest, and at any visible size
   that reads as a stretched photo (the E1 cat, horse, elephant trunk and tomatoes). Use soft edges
   only to hide a seam of a few percent of the toy. When a scan cannot move a part cleanly:
-  1. cut the part out with hard edges (`soft: 0.02`, colour-keyed regions) and keep the move small
+  1. cut the part out with hard edges (`soft: 0.02`, color-keyed regions) and keep the move small
      enough that no gap shows;
   2. hide the scan's part (`visible: 0`) and show a kit-built stand-in from an `addon` that moves;
   3. rebuild the toy as a kit toy (a recipe) where every piece is its own part; or
@@ -785,7 +1397,7 @@ form is in CLAUDE.md.
   showing it; the owner reviews the clips on the private "Effect review" page before merging.
 - **Draw order (E2).** Splats are depth-sorted in the pose they were built in, so:
   1. A solid body turned more than a quarter turn draws its far side over its near side (it looks
-     hollow). For a full turn, build it twice, the second copy half a turn round and coloured as the
+     hollow). For a full turn, build it twice, the second copy half a turn round and colored as the
      first would be there, and show whichever copy is within a quarter turn of its built pose
      (`spinParts` in `src/packs/space.js`: Venus, Jupiter, Neptune).
   2. A layer of splats above a turning body (clouds) draws wrongly even then: paint it onto the
@@ -798,7 +1410,7 @@ form is in CLAUDE.md.
   4. A fixed layer over part of a turning body (Earth's night, Mercury's heat) is covered wherever
      the body's shown copy was built nearer the camera. Build four copies a quarter turn apart and
      show one that was built on the far side of where it is shown (`spinQuarters`: side -1 when the
-     layer is on the side the ground turns towards, +1 when it turns away). Things that ride over
+     layer is on the side the ground turns toward, +1 when it turns away). Things that ride over
      that layer (Earth's city lights) are built where they first come into it, so they are always
      shown at or past their built pose.
   5. Splats inside a turning body (`interior`) draw over its turned surface: keep a turning body
@@ -815,7 +1427,7 @@ form is in CLAUDE.md.
      American football) loses its ends. Build a long one twice instead (rule 1; lane Math).
   10. Don't bore holes into a body that turns: dark tubes inside it (a bowling ball's finger holes)
       draw through the shell once it turns. Paint them on the surface.
-  11. Figures that walk towards the camera are built at the point of their path nearest the camera
+  11. Figures that walk toward the camera are built at the point of their path nearest the camera
       (the Parthenon's procession vanished under the rock when built where it started).
   12. Tokens that move far (a cube's cubies, a model's bricks) set `out.resort` on the frame they
       land, and the player sorts them again where they stand. Do it once per landing, not every
@@ -824,7 +1436,7 @@ form is in CLAUDE.md.
       between sorts. Set `out.resort` a few times during the glide, not only when it lands (lane
       AI).
 - **Glossy things that spin.** Baked light turns with a spinning body, so a rolling pool ball looks
-  like glass. Spin an unlit copy built tiny at the centre (it sorts behind everything, from any
+  like glass. Spin an unlit copy built tiny at the center (it sorts behind everything, from any
   camera) under a fixed see-through layer of light (`glossSpin()` in `src/packs/balls.js`).
 - **Thin ribbons need bigger splats.** A thin ribbon with a high weight gets splats too small to see
   below about 300 px, and the curve vanishes. Use fewer, bigger splats (weight 2 to 2.5, size 1.5;
@@ -865,9 +1477,9 @@ form is in CLAUDE.md.
   its rest pose (the kiwi). A piece that must look right both still and moving fast can be two
   copies that swap while it is fast (the avocado stone). A toggle can tell a two-part story, with
   each tap remembering which way it goes (the apple: a bite, then a worm and it heals).
-- **Light that plays over a surface.** A layer of splats coloured exactly as the surface is there
+- **Light that plays over a surface.** A layer of splats colored exactly as the surface is there
   (invisible at rest) with `kind: "pulse"` flashes as `out.glow` runs over it; change the glow's
-  colour each frame for rainbow fire (diamond, opal) or keep it one colour for a running light
+  color each frame for rainbow fire (diamond, opal) or keep it one color for a running light
   (emerald, the aurora's folds). The glow runs at a fixed speed (a pass every 2.9 s at normal
   speed), so it suits loops and repeats, not a front that must start at the tap: for that, use
   `kind: "grow"` and `out.grow` (the Moon's terminator, the Mars dust front, the ruby's glow).
@@ -924,10 +1536,10 @@ inside it (`src/packs/anatomy-atlas.js`):
 
 ## 7e. Sound preferences
 
-Drawn from the owner's sound review of September 28, 2026 (`docs/reviews/2026-09-28-sounds/`, filed
-September 30) and his summary that day. They are general guidance, not strict rules, but every new
-or changed sound follows them unless the owner asks otherwise. `tools/sound-review.json` has his
-notes per toy.
+Drawn from the owner's sound review of September 28, 2026 (private; filed September 30) and his
+summary that day. They are general guidance, not strict rules, but every new or changed sound
+follows them unless the owner asks otherwise. `tools/sound-review.json` has the Operator's notes and
+plans per toy.
 
 - **Real things sound real.** A real-world object makes the sound the real thing makes, like a good
   sound effect or "almost ASMR": a bite of an apple, a hard taco shell cracking, dice on a table,
@@ -959,10 +1571,11 @@ notes per toy.
   machine, the looped transformer, Newton's cradle, the ocean liner, the Pyramids and the whole
   music shelf.
 - **Recorded samples.** Only CC0 or public domain first; CC BY only if nothing CC0 fits, credited
-  like any asset; CC BY-SA (since October 2, 2026) only if nothing else fits, with its notice. Never
-  NC or "royalty-free" custom licenses (Pixabay, Mixkit, Zapsplat, Sonniss). Check the license on
-  the live page of each sound, and record it in CREDITS.md and `tools/assets.json`. Keep samples
-  short, mono and small, loaded only when the toy is tapped.
+  like any asset; CC BY-SA (since October 2, 2026) only if nothing else fits, with its notice. CC
+  BY-NC or BY-NC-SA (since October 3, 2026) last of all, on CLAUDE.md's four conditions. Never ND or
+  "royalty-free" custom licenses (Pixabay, Mixkit, Zapsplat, Sonniss). Check the license on the live
+  page of each sound, and record it in CREDITS.md and `tools/assets.json`. Keep samples short, mono
+  and small, loaded only when the toy is tapped.
 
 Since September 30, 2026, a new sound may go live before the owner has heard it. He says which ones
 to fix, and the sound patrol checks new toys against this section.
@@ -980,7 +1593,7 @@ SPLASHERY_CHROMIUM=/opt/pw-browsers/chromium npx playwright test tests/kit.spec.
 ```
 
 Look at the contact sheet: every toy should be recognisable at 200 px, fill its square, and face the
-viewer. `make-thumbs` renders with motion off, so behaviours show their resting pose. Check a tap
+viewer. `make-thumbs` renders with motion off, so behaviors show their resting pose. Check a tap
 effect with `effect-strip`: it should last at least 1.5 s, move at least about a tenth of the toy
 (or change its light clearly), and be obvious within the first half second.
 

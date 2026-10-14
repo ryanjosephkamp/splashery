@@ -1,0 +1,110 @@
+{
+  "toy": "sound-lab",
+  "checked": "2026-10-05",
+  "summary": "The Sound lab measures sound: a spectrogram, the spectrum with its loudest frequency, an oscilloscope and a level in dBFS, from the microphone's samples or from the tone generator's own signal, computed exactly as the speaker plays it. The measurements are real and tested on known tones; the sound pressure level in dB SPL is an uncalibrated estimate.",
+  "claims": [
+    {
+      "claim": "The spectrum's peak is the frequency of the tone being played or heard.",
+      "how": "A 4096-sample Hann-windowed FFT (the song landscape's), scaled so a full-scale sine reads 0 dB, with the peak refined by a parabola through the loudest bin and its neighbors.",
+      "where": "src/labs/sound-dsp.js:76",
+      "sources": [
+        {
+          "title": "Spectrogram",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Spectrogram",
+          "says": "Windowing the signal and taking the squared magnitude of its short-time Fourier transform gives the spectrum at each moment."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:22",
+      "note": "Within 0.5% from 100 Hz to 12 kHz; the in-page test checks 440 Hz, 3 kHz and a 1 kHz microphone signal."
+    },
+    {
+      "claim": "A square wave has only odd harmonics, at 1/3, 1/5 … of the fundamental's amplitude.",
+      "how": "The generator's square wave is analyzed like any other sound; its spectrum shows lines at 3f and 5f about 9.5 and 14 dB down and none at 2f.",
+      "where": "src/labs/sound-dsp.js:36",
+      "sources": [
+        {
+          "title": "Square wave",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Square_wave",
+          "says": "An ideal square wave contains only odd-integer harmonic frequencies, the nth with amplitude 1/n of the fundamental."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:31",
+      "note": ""
+    },
+    {
+      "claim": "Two tones close in frequency beat at the difference of their frequencies.",
+      "how": "The second tone adds to the first; the level and the spectrogram swell and fade |f1 − f2| times a second.",
+      "where": "src/labs/sound-dsp.js:128",
+      "sources": [
+        {
+          "title": "Beat (acoustics)",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Beat_(acoustics)",
+          "says": "An interference pattern between two sounds of slightly different frequencies, perceived as a periodic variation in volume, the rate of which is the difference of the two frequencies."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:40",
+      "note": "Two tones 3 Hz apart are closer than one bin of the spectrum (11.7 Hz), so they show as one peak that pulses, as they would on any analyzer of that resolution."
+    },
+    {
+      "claim": "The level is the RMS of the last 50 ms in decibels below full scale (dBFS): a full-scale sine reads −3 dB.",
+      "how": "20 log10 of the RMS of the samples.",
+      "where": "src/labs/sound-dsp.js:111",
+      "sources": [
+        {
+          "title": "DBFS",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/DBFS",
+          "says": "In the convention where the RMS value of a full-scale square wave is 0 dB, a sine wave cannot exist at a larger RMS value than −3 dB without clipping."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/sll.spec.mjs:51",
+      "note": ""
+    },
+    {
+      "claim": "The dB SPL figure is about dBFS + 120.",
+      "how": "A typical digital MEMS microphone has a sensitivity of −26 dBFS at 94 dB SPL, so full scale is about 120 dB SPL. The Toy tab can change the 120.",
+      "where": "src/labs/sound-dsp.js:123",
+      "sources": [
+        {
+          "title": "Understanding Microphone Sensitivity (Analog Dialogue 46-05)",
+          "publisher": "Analog Devices",
+          "url": "https://www-cce.cldnet.analog.com/media/en/analog-dialogue/volume-46/number-2/articles/understanding_microphone_sensitivity.pdf",
+          "says": "If a digital microphone's maximum SPL is 120 dB, its sensitivity is −26 dBFS (94 dB − 120 dB); typical MEMS sensitivity is −26 dBFS."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "",
+      "note": "Browsers and phones apply their own gain (the page turns off automatic gain control where the browser allows), so the figure is an estimate, labeled uncalibrated on screen."
+    },
+    {
+      "claim": "The metronome clicks once a beat at the tempo set.",
+      "how": "Clicks are scheduled on the audio clock at (k + ½) × 60 / bpm seconds; the pendulum's angle is A sin(π t bpm / 60), one swing a beat.",
+      "where": "src/labs/sound-dsp.js:135",
+      "sources": [
+        {
+          "title": "Metronome",
+          "publisher": "Wikipedia",
+          "url": "https://en.wikipedia.org/wiki/Metronome",
+          "says": "A device that produces a sound at a regular interval, set in beats per minute."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/sll.spec.mjs:56",
+      "note": ""
+    }
+  ],
+  "simplified": [
+    "The click falls at each end of the pendulum's swing. A mechanical metronome's escapement ticks at a set angle of its swing, which differs from model to model.",
+    "The dB SPL figure is uncalibrated and unweighted (no A weighting).",
+    "The speaker's cone moves with the signal at the frame's moment, scaled up so it shows; at audio frequencies a real cone's motion is far too fast and small to see.",
+    "Screens show the generator's signal as computed here; the speaker plays the browser's oscillators, whose square and saw waves are band-limited (they differ only above the highest harmonic the sample rate can carry)."
+  ],
+  "fixes": []
+}

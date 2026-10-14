@@ -16,7 +16,17 @@ import {
   quatMul,
   vec,
 } from "../kit.js";
-import { evenBox, evenCylinder, evenEllipsoid, evenTorus, evenTube } from "./even.js";
+import {
+  evenBox,
+  evenCylinder,
+  evenDisc,
+  evenEllipsoid,
+  evenRoundBox,
+  evenTorus,
+  evenTube,
+} from "./even.js";
+import { World, Body } from "../physics/world.js"; // lane Physics
+import { surfacePoints as hebPoints } from "../physics/world.js"; // lane Hands-on H3
 
 const TAU = Math.PI * 2;
 const DEG = Math.PI / 180;
@@ -32,7 +42,7 @@ const band = (x, a, b) => clamp((x - a) / (b - a), 0, 1);
 const dot = (a, b) => a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
 const fract = (x) => x - Math.floor(x);
 
-// Fake light: brighter towards the light, a little gloss.
+// Fake light: brighter toward the light, a little gloss.
 function lit(c, col, k = 0.3, gloss = 0) {
   const d = dot(c.n, LIGHT);
   let out = shade(col, 1 + k * (0.9 * d - 0.15));
@@ -66,6 +76,17 @@ function wood(c, base, p, axis = 1, dark = 0.72) {
   return mix(base, shade(base, dark), 0.35 * ring + 0.35 * (0.5 + 0.5 * g));
 }
 
+// Wood with a calm grain (lane Sharpness A): long, soft streaks along the
+// axis instead of fine flecks, for toys seen small on a phone.
+function calmWood(c, base, p, axis = 1, dark = 0.72) {
+  const a = p[(axis + 1) % 3];
+  const b = p[(axis + 2) % 3];
+  const l = p[axis];
+  const g = c.fbm(a * 5, l * 0.8, b * 5, 2);
+  const ring = 0.5 + 0.5 * Math.sin((a * 0.7 + b * 0.5) * 22 + g * 4);
+  return mix(base, shade(base, dark), 0.2 * ring + 0.2 * (0.5 + 0.5 * g));
+}
+
 // A group of shapes moved and turned together.
 function group(k, pos = [0, 0, 0], rot = [0, 0, 0]) {
   const q = rot.length === 4 ? rot : quatEuler(...rot);
@@ -87,19 +108,22 @@ function group(k, pos = [0, 0, 0], rot = [0, 0, 0]) {
 }
 
 // A square beam of wood from a to b.
+// even: true (lane Sharpness A) makes it an even, solid box of calm wood.
 function beam(g, a, b, w, color, opts = {}) {
   const d = vec.sub(b, a);
   const len = vec.len(d);
-  g.add(g.kit.box(w, len, opts.depth ?? w), {
+  const { even, ...rest } = opts;
+  g.add(even ? evenBox(w, len, opts.depth ?? w) : g.kit.box(w, len, opts.depth ?? w), {
     pos: vec.mul(vec.add(a, b), 0.5),
     quat: quatFromTo([0, 1, 0], d),
     flat: 0.2,
-    color: (c) => lit(c, wood(c, color, c.lp, 1), 0.3),
-    ...opts,
+    ...(even ? { even: true, opacity: 1, jitter: 0.01 } : {}),
+    color: (c) => lit(c, (even ? calmWood : wood)(c, color, c.lp, 1), 0.3),
+    ...rest,
   });
 }
 
-// Inside a five-pointed star of radius R (point up) centred at the origin.
+// Inside a five-pointed star of radius R (point up) centered at the origin.
 function inStar(x, y, R) {
   const seg = TAU / 5;
   const a = Math.atan2(x, y);
@@ -119,6 +143,114 @@ const BOW = {
   arc: 0.12,
   target: [-0.85, 0.12, 0],
 };
+
+// Lane Physics: the arrow drawn by hand and shot. `draw` is how far the
+// nock is pulled back, `aim` the bow's tilt; once loosed the arrow is a body
+// in a small world with gravity, until it sticks in the target or the grass.
+const ARROW = {
+  draw: 0,
+  aim: 0,
+  held: false,
+  flying: null,
+  stuck: null,
+  last: null,
+  t0: 0,
+  cues: [],
+};
+const ARROW_MAX = 0.3;
+function arrowDraw(p, first) {
+  if (ARROW.flying) return;
+  if (first) {
+    ARROW.held = true;
+    ARROW.stuck = null;
+    ARROW.grabX = p[0] - ARROW.draw;
+    ARROW.grabY = p[1];
+  }
+  ARROW.draw = clamp(p[0] - ARROW.grabX, 0, ARROW_MAX);
+  ARROW.aim = clamp((p[1] - ARROW.grabY) * 0.9, -0.3, 0.3);
+}
+function arrowLoose() {
+  ARROW.held = false;
+  if (ARROW.draw < 0.04) {
+    ARROW.draw = 0;
+    return;
+  }
+  // Out of the bow along its aim, faster the further it was drawn.
+  const dir = [-Math.cos(ARROW.aim), -Math.sin(ARROW.aim), 0];
+  const speed = 1.6 + 3 * (ARROW.draw / ARROW_MAX);
+  const w = new World({ gravity: [0, -3.5, 0], substeps: 4 });
+  const tip = arrowTip(ARROW.draw, ARROW.aim);
+  const b = w.add(
+    new Body({ pos: tip, mass: 1, solid: { type: "sphere", r: 0.01 }, damping: 0.05 }),
+  );
+  b.vel = dir.map((v) => v * speed);
+  ARROW.flying = { w, b, power: ARROW.draw / ARROW_MAX };
+  ARROW.draw = 0;
+  ARROW.cues.push({ voice: "twang", f: 180 + 120 * ARROW.flying.power, vol: 0.7 });
+}
+// Where the nocked arrow's tip is, drawn back by d and tilted by a about
+// the nock.
+function arrowTip(d, a) {
+  const nock = [BOW.sx + d, BOW.nockY, 0];
+  const len = BOW.sx - BOW.tip[0];
+  return [nock[0] - len * Math.cos(a), nock[1] - len * Math.sin(a), 0];
+}
+// Puts the hand-drawn or flying arrow (and the string) on the parts; true
+// while it does.
+function arrowStep(time, out) {
+  const G = BOW;
+  const dt = ARROW.last === null ? 0 : clamp(time - ARROW.last, 0, 0.1);
+  ARROW.last = time;
+  out.cues.push(...ARROW.cues.splice(0));
+  const f = ARROW.flying;
+  if (!ARROW.held && !f && !ARROW.stuck && ARROW.draw === 0) return false;
+  let tip = arrowTip(ARROW.draw, ARROW.aim);
+  let dir = [-Math.cos(ARROW.aim), -Math.sin(ARROW.aim), 0];
+  let vis = 1;
+  let wob = 0;
+  if (f) {
+    for (let left = dt; left > 1e-6; left -= 1 / 60) f.w.step(Math.min(left, 1 / 60));
+    tip = f.b.pos.slice();
+    const sp = Math.hypot(...f.b.vel);
+    if (sp > 1e-6) dir = f.b.vel.map((v) => v / sp);
+    // The target's face (a disc facing +x), or the grass.
+    const face = G.target[0] + 0.08;
+    const r = Math.hypot(tip[1] - G.target[1], tip[2] - G.target[2]);
+    if (tip[0] <= face && r < 0.5) {
+      tip = [face - 0.06, tip[1], tip[2]];
+      ARROW.stuck = { tip, dir, t0: time, hit: true };
+      ARROW.flying = null;
+      ARROW.cues.push({ voice: "thud", vol: 0.5 + 0.4 * f.power });
+    } else if (tip[1] < -0.72 || tip[0] < -1.6) {
+      tip = [Math.max(tip[0], -1.6), Math.max(tip[1], -0.76), tip[2]];
+      ARROW.stuck = { tip, dir, t0: time, hit: false };
+      ARROW.flying = null;
+      ARROW.cues.push({ voice: "thud", vol: 0.3 });
+    }
+  }
+  if (ARROW.stuck) {
+    const st = ARROW.stuck;
+    tip = st.tip;
+    dir = st.dir;
+    const age = time - st.t0;
+    wob = 0.1 * Math.sin(age * 60) * Math.exp(-age * 9);
+    // A while later it fades and a fresh arrow comes onto the string.
+    vis = 1 - clamp((age - 1.4) / 0.4, 0, 1);
+    if (age > 1.8) {
+      ARROW.stuck = null;
+      ARROW.aim = 0;
+      return false;
+    }
+  }
+  const q = quatMul(quatAxisAngle([0, 0, 1], wob), quatFromTo([-1, 0, 0], dir));
+  out.parts.arrow = { offset: vec.sub(tip, G.tip), quat: q, visible: vis };
+  // The string follows the nock while drawn (and twangs once loosed).
+  const pull = ARROW.held || ARROW.draw ? ARROW.draw : 0;
+  const nockY = G.nockY + (ARROW.held ? Math.sin(ARROW.aim) * 0.3 : 0);
+  out.parts.stringUp = { angle: Math.atan2(pull, G.half - nockY) };
+  out.parts.stringDown = { angle: -Math.atan2(pull, G.half + nockY) };
+  return true;
+}
 
 // Seconds since a pulse fired, as 0..1 (1 at rest).
 const progress = (v) => (v > 0 ? 1 - v : 1);
@@ -154,6 +286,29 @@ const TREB = (() => {
   return { axle, dl, tip, hinge, stone, rel, tRel, angle };
 })();
 
+// Lane Hands-on H3: the trebuchet worked by hand. drive() keeps the arm's
+// turn rate `w` and its clock `t`; the stone rides the sling until the arm
+// swings past the release angle, then flies (`fly`: where, how fast, when).
+const TREB_HAND = { a: null, a0: null, w: 0, t: 0, fly: null };
+const TREB_G = 6; // recipe units per second squared, as the tap's arc
+
+// The dragon egg's shell pieces by hand: each piece's middle and its crack
+// (where it breaks off), as built; the lower egg is ground for them.
+const DRAGON_EGG = (() => {
+  const yc = 0.05;
+  const H = 0.68;
+  const r = (y) => {
+    const t = clamp((y - yc) / H, -1, 1);
+    return 0.5 * Math.sqrt(Math.max(0, 1 - t * t)) * (1 - 0.14 * t);
+  };
+  const at = (u, y) => [Math.sin(u * TAU) * r(y), y, Math.cos(u * TAU) * r(y)];
+  const shells = [0, 1, 2].map((i) => {
+    const u = (i + 0.5) / 3;
+    return { mid: vec.mul(at(u, 0.42), 0.8), crack: at(u, 0.18), quat: quatAxisAngle([0, 1, 0], u * TAU) }; // prettier-ignore
+  });
+  return { shells, floor: yc - H, shell: { type: "ellipsoid", r: [0.24, 0.24, 0.1] } };
+})();
+
 // The crossbow is built along +Z, then turned to point left of the viewer.
 const XBOW = (() => {
   const q = quatEuler(-4, -22, 0);
@@ -182,6 +337,14 @@ const XBOW = (() => {
   };
 })();
 
+// Lane Hands-on H3: the crossbow worked by hand. The left half of the string
+// is a hinge (0: drawn back to the latch, as built; X.left.angle: let go,
+// straight across), the right half follows. `prev` is the last value, `t`
+// the toy's clock (from drive), `fly` when the bolt flew, `back` when the
+// string was last cocked (a new bolt appears), `trig` when the trigger
+// was pulled.
+const XBOW_HAND = { prev: null, t: 0, fly: null, back: -1e9, trig: null };
+
 // Remembers which way a toggle is moving (per player: `c` is the player's
 // own control state), so a reset can look different from the action.
 const motionMemo = new WeakMap();
@@ -202,7 +365,7 @@ function direction(c, key) {
 
 const GEMS = { ruby: "#d0183c", sapphire: "#1f55d6", emerald: "#11a35a", amethyst: "#8a3fd1" };
 
-// A faceted gem colour: facets catch the light in steps.
+// A faceted gem color: facets catch the light in steps.
 function gem(c, base) {
   const n = c.n;
   const f = Math.floor((Math.atan2(n[0], n[2]) / TAU + 0.5) * 8) / 8;
@@ -213,12 +376,45 @@ function gem(c, base) {
   return col;
 }
 
+// The shield's middle (y), the point a blow rocks it about (lane Fix7).
+const SHIELD_MID = -0.08;
+// The way the sparks spray at rest (up and to the right), as an angle.
+const SHIELD_SPRAY = 0.9;
+
 export const RECIPES = {
   // ---- Sword in the stone ---------------------------------------------------
   "sword-in-stone": {
     alive: true,
     controls: [{ key: "pull", label: "Pull the sword", type: "toggle", default: 0, ease: 1.6 }],
     action: { key: "pull", label: "Pull" },
+    // Hands-on (lane Hands engine B): pull the sword up out of the stone.
+    // It sticks and wiggles at first, then slides free; it stays where it is
+    // let go, and pushes back in with a clank.
+    hands: {
+      joints: [
+        {
+          type: "slider",
+          part: "sword",
+          pivot: [0, 0.9, 0],
+          axis: [0, 1, 0],
+          min: 0,
+          max: 0.55,
+          stick: 0.07,
+          wiggle: [0, 0, 1],
+          friction: 40,
+          start: (c) => 0.5 * easeInOut(band(c.pull, 0.25, 1)),
+          pos: [0, 0.62, 0],
+          pick: [0.16, 0.75, 0.16],
+          sound: (ev, vol) => {
+            if (ev.kind === "free") return { voice: "scrape", f: 2000, rate: 60, decay: 0.5, vol: 0.5 }; // prettier-ignore
+            if (ev.v > 0.3) return { voice: "metal", f: 700, decay: 2.5, bright: 0.8, vol: 0.6 };
+            return [{ voice: "metal", f: 420, decay: 0.7, vol }, { voice: "stone", f: 160, vol: vol * 0.7 }]; // prettier-ignore
+          },
+          // The sparkles rise with it and gather once it is out.
+          also: (s, parts) => (parts.aura = { offset: [0, s, 0], visible: smoothstep(0.35, 0.55, s) }), // prettier-ignore
+        },
+      ],
+    },
     drive(t, c, out) {
       const p = easeInOut(c.pull);
       // It sticks at first, wiggles, then slides free.
@@ -252,14 +448,14 @@ export const RECIPES = {
         color: (c) => {
           const p = c.p;
           const n = c.fbm(p[0] * 2.6, p[1] * 2.6, p[2] * 2.6, 4);
-          let col = mix("#9a958c", "#5e5a55", clamp(0.5 + 0.8 * n, 0, 1));
+          let col = mix("#9a958c", "#5e5a55", clamp(0.5 + 0.55 * n, 0, 1));
           const cr = Math.abs(c.fbm(p[0] * 2 + 5, p[1] * 4, p[2] * 2, 3));
-          if (cr < 0.03) col = shade(col, 0.55);
-          const lichen = c.noise(p[0] * 9, p[1] * 9 + 3, p[2] * 9);
-          if (lichen > 0.55) col = mix(col, "#c9c48f", 0.5);
+          if (cr < 0.03) col = shade(col, 0.7 + 10 * cr);
+          const lichen = c.noise(p[0] * 6, p[1] * 6 + 3, p[2] * 6);
+          col = mix(col, "#c9c48f", 0.45 * smoothstep(0.45, 0.65, lichen));
           const up = c.n[1] + 0.45 * c.fbm(p[0] * 3 + 9, p[1] * 3, p[2] * 3, 3);
           const moss = smoothstep(0.62, 0.9, up);
-          const tuft = 0.5 + 0.5 * c.noise(p[0] * 22, p[1] * 22, p[2] * 22);
+          const tuft = 0.5 + 0.35 * c.noise(p[0] * 10, p[1] * 10, p[2] * 10);
           col = mix(col, mix("#4f7a2a", "#9cbf4a", tuft), moss);
           // A dark slit where the blade goes in.
           if (Math.abs(p[0]) < 0.09 && Math.abs(p[2]) < 0.035 && p[1] > top - 0.1) col = "#2a2724";
@@ -338,6 +534,9 @@ export const RECIPES = {
       );
       for (const x of [-0.3, 0.3])
         k.add(k.sphere(0.042), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, base + 0.08, 0],
           part: sword,
           weight: 2,
@@ -352,7 +551,10 @@ export const RECIPES = {
         color: (c) => gold(c),
       });
       for (const z of [0.036, -0.036])
-        k.add(k.ellipsoid(0.028, 0.034, 0.012), {
+        k.add(evenEllipsoid(k, 0.028, 0.034, 0.012), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [0, base + 0.02, z],
           part: sword,
           weight: 4,
@@ -361,7 +563,10 @@ export const RECIPES = {
           params: [1, 0],
           color: (c) => gem(c, GEMS.ruby),
         });
-      k.add(k.cylinder(0.034, 0.3, { caps: false }), {
+      k.add(evenCylinder(0.034, 0.034, 0.3, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, base + 0.22, 0],
         part: sword,
         weight: 1.5,
@@ -373,6 +578,9 @@ export const RECIPES = {
         },
       });
       k.add(k.sphere(0.058), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: [0, base + 0.42, 0],
         part: sword,
         weight: 2,
@@ -420,21 +628,39 @@ export const RECIPES = {
     ],
     controls: [{ key: "block", label: "Block", type: "pulse", ease: 2.8 }],
     action: { key: "block", label: "Block a blow" },
-    drive(t, c, out) {
-      // The shield takes an unseen blow near its top corner: it jolts back
-      // and rocks, sparks spray off the iron rim (channel 0) and burn out,
-      // a flash marks the spot, and a gleam of light sweeps across the
-      // emblem (channel 1).
+    drive(t, c, out, info) {
+      // The shield takes an unseen blow where it was tapped (near its top
+      // corner from the Play button): it jolts back and rocks away from
+      // that spot, sparks spray off it (channel 0) and burn out, a flash
+      // marks the spot, and a gleam of light sweeps across the emblem
+      // (channel 1). Lane Fix7 moved the blow under the tap.
       const on = c.block > 0;
       const s = progress(c.block) * 2.8;
       const jolt = on ? Math.exp(-3.2 * s) * Math.sin(Math.min(s, 2.6) * 11 + 0.9) * (1 - band(s, 2.2, 2.6)) : 0; // prettier-ignore
+      const hit = info?.data?.hit || [0, 0, 0];
+      const tp = info?.tap?.key === "block" ? info.tap.point : null;
+      // A blow at (x, y) on the face pushes it back there: it turns about
+      // the axis (-y, x, 0) through the middle, more the further out it lands.
+      const at = tp || hit;
+      const r = Math.hypot(at[0], at[1] - SHIELD_MID);
+      const axis = r > 0.05 ? [-(at[1] - SHIELD_MID) / r, at[0] / r, 0] : [1, 0, 0];
       out.body = {
-        quat: quatAxisAngle(vec.unit([1, 0, -0.35]), -0.2 * jolt),
+        quat: quatAxisAngle(axis, 0.2 * Math.min(1, r / 0.85) * jolt),
         offset: [0, 0, -0.05 * Math.max(0, jolt)],
       };
       const fly = on ? easeOut(band(s, 0, 0.85)) : 0;
-      out.parts.sparks = { visible: on && s < 1.0 ? 1 - band(s, 0.35, 0.95) : 0 };
-      out.parts.flash = { scale: 0.3 + 1.2 * easeOut(band(s, 0, 0.2)), visible: on ? 1 - band(s, 0.05, 0.3) : 0 }; // prettier-ignore
+      const move = tp ? vec.sub(tp, hit) : [0, 0, 0];
+      // The sparks spray outward, away from the middle (up from near it),
+      // turned at most a radian so they still fall.
+      const away = r > 0.15 ? Math.atan2(at[1] - SHIELD_MID, at[0]) : Math.PI / 2;
+      const turn = Math.atan2(Math.sin(away - SHIELD_SPRAY), Math.cos(away - SHIELD_SPRAY));
+      const spin = tp ? clamp(turn, -1, 1) : 0;
+      out.parts.sparks = {
+        offset: move,
+        quat: quatAxisAngle([0, 0, 1], spin),
+        visible: on && s < 1.0 ? 1 - band(s, 0.35, 0.95) : 0,
+      };
+      out.parts.flash = { offset: move, scale: 0.3 + 1.2 * easeOut(band(s, 0, 0.2)), visible: on ? 1 - band(s, 0.05, 0.3) : 0 }; // prettier-ignore
       out.morph = [on && s < 1.0 ? fly : 0, on ? 1.2 * band(s, 0.35, 1.5) : 0];
       out.glow = [1.0, 0.95, 0.78, on ? 0.9 * band(s, 0.3, 0.45) * (1 - band(s, 1.35, 1.55)) : 0];
     },
@@ -555,6 +781,7 @@ export const RECIPES = {
       // Where the blow lands (hidden at rest): a flash, and sparks that fly
       // off the rim on channel 0, streaking along their paths.
       const hit = g.pt([W * 0.62, yt - 0.18, bow(W * 0.62, yt - 0.18) + 0.04]);
+      k.data = { ...(k.data || {}), hit };
       const fwd = g.dir([0, 0, 1]);
       const flash = k.part("flash", { pivot: hit });
       k.cloud({ share: 0.003, size: 1.8, pattern: false, part: flash }, (rand) => {
@@ -607,7 +834,17 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "shot", label: "Shoot", type: "toggle", default: 0, ease: 1.3 }],
     action: { key: "shot", label: "Shoot" },
-    drive(t, c, out) {
+    // Hands-on (lane Physics): pull the arrow back on the string (up or
+    // down a little to aim) and let go: it flies and sticks where it hits.
+    drag: {
+      plane: [0, 0, 1],
+      at: (p) => !ARROW.flying && p[0] > 0.55 && p[0] < 1.3 && Math.abs(p[1] - BOW.nockY) < 0.45,
+      start: (p) => arrowDraw(p, true),
+      move: (p) => arrowDraw(p),
+      end: () => arrowLoose(),
+    },
+    drive(t, c, out, info) {
+      if (arrowStep(info.time, out)) return;
       const G = BOW;
       const dir = direction(c, "shot");
       const v = c.shot;
@@ -710,7 +947,7 @@ export const RECIPES = {
       leg([TC[0] - 0.45, ground, 0], [TC[0] - 0.1, TC[1] + 0.4, 0]);
       leg([TC[0] + 0.06, TC[1] - 0.46, -0.32], [TC[0] + 0.06, TC[1] - 0.46, 0.32]);
 
-      // The bow: a stave in the XY plane, its back towards the target.
+      // The bow: a stave in the XY plane, its back toward the target.
       const stave = spline([
         [G.sx, -G.half - 0.02, 0],
         [G.sx - 0.07, -0.5, 0],
@@ -815,7 +1052,64 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "launch", label: "Launch", type: "pulse", ease: 4.2 }],
     action: { key: "launch", label: "Launch" },
+    // Hands-on (lane Hands-on H3): pull the arm's long end down a little to
+    // free its catch, then let go: the counterweight drops, the arm whips up
+    // and the sling lets the stone fly at its release angle, as fast as the
+    // arm threw it; the arm swings to and fro and settles hanging.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "arm",
+          pivot: TREB.axle,
+          axis: [0, 0, 1],
+          min: -3.3,
+          max: 0.15,
+          stick: 0.05,
+          stickWay: 1,
+          damping: 0.7,
+          bounce: 0.2,
+          com: TREB.hinge,
+          pos: vec.add(TREB.axle, vec.mul(TREB.dl, 0.75)),
+          pick: [0.32, 0.32, 0.25],
+          sound: (ev, vol) =>
+            ev.kind === "free"
+              ? { voice: "click", f: 900, decay: 0.08, vol: 0.6 }
+              : { voice: "wood", f: 160, decay: 0.3, vol: vol * 0.7 },
+          also: (a, parts) => {
+            const T = TREB;
+            const H = TREB_HAND;
+            H.a = a;
+            const q = quatAxisAngle([0, 0, 1], a);
+            const swing = (p) => vec.sub(vec.add(T.axle, quatRotate(q, vec.sub(p, T.axle))), p);
+            parts.weight = { offset: swing(T.hinge), quat: quatAxisAngle([0, 0, 1], clamp(-0.05 * H.w, -0.4, 0.4)) }; // prettier-ignore
+            // The sling lets go once the arm passes the release angle.
+            if (!H.fly && a < T.rel && H.w < 0) {
+              const r = vec.sub(vec.add(T.axle, quatRotate(q, vec.sub(T.stone, T.axle))), T.axle);
+              H.fly = { from: vec.add(T.axle, r), v: vec.add(vec.mul([-r[1], r[0], 0], H.w), [0, 0, -0.4 * Math.abs(H.w) * 0.2]), t0: H.t }; // prettier-ignore
+            }
+            if (H.fly && a > -0.05 && Math.abs(H.w) < 0.05) H.fly = null; // home again (↺)
+            if (!H.fly) parts.stone = { offset: swing(T.stone), visible: 1 };
+            else {
+              const tau = H.t - H.fly.t0;
+              const p = vec.add(H.fly.from, vec.mul(H.fly.v, tau));
+              p[1] = Math.max(0.08, p[1] - 0.5 * TREB_G * tau * tau);
+              parts.stone = { offset: vec.sub(p, T.stone), visible: 1 - smoothstep(0.6, 1.1, tau) };
+            }
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
+      // By hand: the arm's turn rate, on the toy's clock (lane Hands-on H3).
+      const H = TREB_HAND;
+      const dt = clamp(t - H.t, 0, 0.1);
+      H.t = t;
+      if (H.a !== null && dt > 0) {
+        const w = H.a0 === null ? 0 : (H.a - H.a0) / dt;
+        H.w += (w - H.w) * Math.min(1, dt * 20);
+        H.a0 = H.a;
+      }
       const T = TREB;
       const u = 1 - c.launch;
       const th = T.angle(u);
@@ -844,7 +1138,7 @@ export const RECIPES = {
       const iron = "#5d6167";
       const g = group(k);
       const plank = (a, b, w, col = oak, extra = {}) =>
-        beam(g, a, b, w, col, { weight: 1.2, ...extra });
+        beam(g, a, b, w, col, { weight: 1.2, even: true, ...extra });
       // Base frame and wheels.
       for (const z of [-0.3, 0.3]) {
         plank([-0.85, 0.1, z], [0.85, 0.1, z], 0.085);
@@ -852,13 +1146,19 @@ export const RECIPES = {
         plank([0.52, 0.14, z], [0.05, 0.98, z], 0.07);
         plank([0.05, 0.14, z], [0.05, 0.98, z], 0.06, dark);
         plank([-0.2, 0.55, z], [0.3, 0.55, z], 0.05, dark);
-        k.add(k.cylinder(0.14, 0.05), {
+        k.add(evenCylinder(0.14, 0.14, 0.05), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [-0.62, 0.14, z * 1.3],
           rot: [90, 0, 0],
           flat: 0.2,
           color: (c) => spokes(c),
         });
-        k.add(k.cylinder(0.14, 0.05), {
+        k.add(evenCylinder(0.14, 0.14, 0.05), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [0.62, 0.14, z * 1.3],
           rot: [90, 0, 0],
           flat: 0.2,
@@ -877,7 +1177,10 @@ export const RECIPES = {
         return lit(c, "#3f3a36", 0.3);
       }
       for (const x of [-0.8, 0, 0.8]) plank([x, 0.1, -0.36], [x, 0.1, 0.36], 0.08, dark);
-      k.add(k.cylinder(0.035, 0.74), {
+      k.add(evenCylinder(0.035, 0.035, 0.74), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: T.axle,
         rot: [90, 0, 0],
         flat: 0.2,
@@ -891,13 +1194,16 @@ export const RECIPES = {
         [0.76, 0.36, 0.065],
       ])
         k.add(k.sphere(s), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: [x, s * 0.9, z],
           flat: 0.3,
           weight: 1.6,
           color: (c) =>
             lit(
               c,
-              mix("#8e8a84", "#62605c", 0.5 + c.noise(c.p[0] * 30, c.p[1] * 30, c.p[2] * 30)),
+              mix("#8e8a84", "#62605c", 0.5 + 0.5 * c.noise(c.p[0] * 12, c.p[1] * 12, c.p[2] * 12)),
               0.35,
             ),
         });
@@ -905,10 +1211,13 @@ export const RECIPES = {
       // The throwing arm, on the axle.
       const arm = k.part("arm", { pivot: T.axle, axis: [0, 0, 1] });
       const ag = { kit: k, add: (s, o) => k.add(s, { ...o, part: arm }) };
-      beam(ag, T.hinge, T.tip, 0.075, oak, { weight: 1.3, depth: 0.09 });
+      beam(ag, T.hinge, T.tip, 0.075, oak, { weight: 1.3, depth: 0.09, even: true });
       for (const f of [0.15, 0.55, 0.9]) {
         const p = vec.add(T.hinge, vec.mul(vec.sub(T.tip, T.hinge), f));
-        k.add(k.box(0.09, 0.03, 0.105), {
+        k.add(evenBox(0.09, 0.03, 0.105), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: p,
           quat: quatFromTo([0, 1, 0], T.dl),
           part: arm,
@@ -919,6 +1228,9 @@ export const RECIPES = {
       }
       // The sling's pouch at the long end.
       k.add(k.sphere(0.1), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: T.stone,
         scale: [1, 0.6, 1],
         part: arm,
@@ -929,13 +1241,19 @@ export const RECIPES = {
       const weight = k.part("weight", { pivot: T.hinge, axis: [0, 0, 1] });
       const box = vec.add(T.hinge, [0, -0.3, 0]);
       for (const z of [-0.07, 0.07])
-        k.add(k.box(0.03, 0.2, 0.03), {
+        k.add(evenBox(0.03, 0.2, 0.03), {
+          even: true,
+          opacity: 1,
+          jitter: 0.012,
           pos: vec.add(T.hinge, [0, -0.09, z]),
           part: weight,
           weight: 2,
           color: (c) => lit(c, iron, 0.3),
         });
-      k.add(k.box(0.3, 0.26, 0.26), {
+      k.add(evenBox(0.3, 0.26, 0.26), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: box,
         part: weight,
         flat: 0.2,
@@ -943,20 +1261,23 @@ export const RECIPES = {
         core: "#77736d",
         color: (c) => {
           const b = Math.abs(c.lp[1]) > 0.1 || Math.abs(c.lp[0]) > 0.13;
-          return lit(c, b ? iron : wood(c, dark, c.lp, 0), 0.3);
+          return lit(c, b ? iron : calmWood(c, dark, c.lp, 0), 0.3);
         },
       });
       // The stone.
       const stone = k.part("stone", { pivot: T.stone });
       k.add(k.sphere(0.075), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: T.stone,
         part: stone,
         flat: 0.3,
         weight: 1.6,
         pattern: false,
         color: (c) => {
-          const n = c.fbm(c.p[0] * 25, c.p[1] * 25, c.p[2] * 25, 2);
-          return lit(c, mix("#a19c95", "#66625d", 0.5 + 0.7 * n), 0.4);
+          const n = c.fbm(c.p[0] * 12, c.p[1] * 12, c.p[2] * 12, 2);
+          return lit(c, mix("#a19c95", "#66625d", 0.5 + 0.45 * n), 0.4);
         },
       });
       k.reach([T.axle[0], T.axle[1] + 0.75, 0]);
@@ -968,7 +1289,73 @@ export const RECIPES = {
     alive: true,
     controls: [{ key: "shoot", label: "Shoot", type: "pulse", ease: 2.6 }],
     action: { key: "shoot", label: "Shoot" },
+    // Hands-on (lane Hands-on H3): it starts cocked, the string caught on
+    // its latch. A tap pulls the trigger: the string snaps forward with a
+    // twang and the bolt flies off along its groove. Pull the string back
+    // to the latch and it clicks, cocked again, and a new bolt lies in the
+    // groove.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "stringL",
+          pivot: quatRotate(XBOW.q, XBOW.tipL),
+          axis: XBOW.left.axis,
+          min: 0,
+          max: XBOW.left.angle,
+          gravity: false,
+          spring: 260,
+          rest: XBOW.left.angle,
+          damping: 6,
+          bounce: 0.25,
+          latch: "min",
+          catch: 0.08,
+          trigger: true,
+          pos: quatRotate(XBOW.q, vec.mul(vec.add(XBOW.tipL, XBOW.latch), 0.5)),
+          pick: [0.26, 0.12, 0.26],
+          sound: (ev, vol) => {
+            if (ev.kind === "latch") return { voice: "click", f: 1400, decay: 0.06, vol: 0.7 };
+            if (ev.kind === "free") return { voice: "sample", file: "bow-and-target-release.mp3", at: 0, pitch: 0.85, vol: 0.9, fallback: { voice: "bowstring", f: 130 } }; // prettier-ignore
+            return ev.kind === "stop" ? { voice: "bowstring", f: 150, vol: Math.min(0.6, vol * 0.4) } : undefined; // prettier-ignore
+          },
+          also: (v, parts) => {
+            const X = XBOW;
+            const H = XBOW_HAND;
+            const r = v / X.left.angle;
+            parts.stringR = { quat: quatAxisAngle(X.right.axis, X.right.angle * r) };
+            // Let go from the latch: the bolt flies, the trigger kicks.
+            if (!H.fly && H.prev !== null && H.prev < 0.02 && v > 0.04) {
+              H.fly = H.t;
+              H.trig = H.t;
+            }
+            // Drawn back onto the latch: cocked, with a new bolt.
+            if (H.fly !== null && v < 1e-3) {
+              H.fly = null;
+              H.back = H.t;
+            }
+            H.prev = v;
+            if (H.fly === null) {
+              const f = smoothstep(0, 0.35, H.t - H.back);
+              parts.bolt = { offset: vec.mul(X.fwd, -0.04 * (1 - f)), visible: f };
+            } else {
+              const tau = Math.max(0, H.t - H.fly);
+              parts.bolt = {
+                offset: vec.mul(X.fwd, 6 * tau),
+                visible: 1 - smoothstep(0.3, 0.5, tau),
+              };
+            }
+            const k = H.trig === null ? 1 : (H.t - H.trig) / 0.25;
+            parts.trigger = { angle: k < 1 ? 0.35 * Math.sin(k * Math.PI) : 0 };
+          },
+        },
+      ],
+    },
     drive(t, c, out) {
+      // By hand: the toy's clock, for the bolt's flight (lane Hands-on H3).
+      // (A new clock, the toy opened again: a fresh start.)
+      if (t < XBOW_HAND.t)
+        Object.assign(XBOW_HAND, { prev: null, fly: null, back: -1e9, trig: null });
+      XBOW_HAND.t = t;
       const X = XBOW;
       const u = 1 - c.shoot;
       let rel = 0;
@@ -994,26 +1381,35 @@ export const RECIPES = {
       const walnut = "#7b4b26";
       const steel = "#8d949c";
       // Stock: a shoulder butt and the long tiller with the bolt groove.
-      g.add(k.roundedBox(0.16, 0.27, 0.42, 5), {
+      g.add(evenRoundBox(0.16, 0.27, 0.42, 0.05), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, -0.1, -0.68],
         rot: [12, 0, 0],
         flat: 0.2,
         interior: 0.1,
         core: "#5a3517",
-        color: (c) => lit(c, wood(c, walnut, c.lp, 2), 0.35, 0.2),
+        color: (c) => lit(c, calmWood(c, walnut, c.lp, 2), 0.35, 0.2),
       });
-      g.add(k.roundedBox(0.13, 0.12, 1.1, 6), {
+      g.add(evenRoundBox(0.13, 0.12, 1.1, 0.04), {
+        even: true,
+        opacity: 1,
+        jitter: 0.01,
         pos: [0, 0, 0.02],
         flat: 0.2,
         interior: 0.1,
         core: "#5a3517",
         color: (c) => {
           if (c.lp[1] > 0.045 && Math.abs(c.lp[0]) < 0.018) return keep(lit(c, "#3b220f", 0.2));
-          return lit(c, wood(c, walnut, c.lp, 2), 0.35, 0.2);
+          return lit(c, calmWood(c, walnut, c.lp, 2), 0.35, 0.2);
         },
       });
       for (const z of [0.3, -0.3])
-        g.add(k.roundedBox(0.125, 0.125, 0.05, 6), {
+        g.add(evenRoundBox(0.125, 0.125, 0.05, 0.015), {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           pos: [0, 0, z],
           flat: 0.2,
           weight: 2,
@@ -1029,13 +1425,16 @@ export const RECIPES = {
         [X.tipR[0], X.tipR[1], X.tipR[2]],
       ]);
       g.add(
-        k.tube(prod, (t) => 0.022 + 0.026 * (1 - Math.abs(2 * t - 1)), { caps: true }),
+        evenTube(k, prod, (t) => 0.022 + 0.026 * (1 - Math.abs(2 * t - 1)), { caps: true }),
         {
           flat: 0.2,
           weight: 1.5,
           pattern: false,
           kind: "glint",
-          params: [0.12, 0],
+          params: [0.03, 0],
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
           color: (c) => metal(c, "#6f767e"),
         },
       );
@@ -1050,10 +1449,21 @@ export const RECIPES = {
           ]),
           0.014,
         ),
-        { flat: 0.2, weight: 2, pattern: false, color: (c) => metal(c, steel) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          flat: 0.2,
+          weight: 2,
+          pattern: false,
+          color: (c) => metal(c, steel),
+        },
       );
       // The latch that holds the string, and the trigger below.
-      g.add(k.cylinder(0.035, 0.06), {
+      g.add(evenCylinder(0.035, 0.035, 0.06), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         pos: X.latch,
         rot: [0, 0, 90],
         weight: 2,
@@ -1062,7 +1472,8 @@ export const RECIPES = {
       });
       const trigger = k.part("trigger", { pivot: g.pt([0, -0.05, -0.2]), axis: X.side });
       g.add(
-        k.tube(
+        evenTube(
+          k,
           spline([
             [0, -0.04, -0.2],
             [0, -0.14, -0.26],
@@ -1072,7 +1483,16 @@ export const RECIPES = {
           (t) => 0.016 - 0.006 * t,
           { caps: true },
         ),
-        { part: trigger, flat: 0.2, weight: 2, pattern: false, color: (c) => metal(c, steel) },
+        {
+          even: true,
+          opacity: 1,
+          jitter: 0.01,
+          part: trigger,
+          flat: 0.2,
+          weight: 2,
+          pattern: false,
+          color: (c) => metal(c, steel),
+        },
       );
       // The string, cocked back to the latch, in two halves hinged at the tips.
       for (const [name, tip] of [
@@ -1089,16 +1509,22 @@ export const RECIPES = {
       }
       // The bolt: a short heavy arrow in the groove.
       const bolt = k.part("bolt", { pivot: g.pt([0, 0.085, 0.2]) });
-      g.add(k.cylinder(0.018, 0.66, { caps: false }), {
+      g.add(evenCylinder(0.018, 0.018, 0.66, false), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         part: bolt,
         pos: [0, 0.085, 0.22],
         rot: [90, 0, 0],
         flat: 0.25,
         weight: 2,
         pattern: false,
-        color: (c) => lit(c, wood(c, "#c49a62", c.lp, 1), 0.3),
+        color: (c) => lit(c, calmWood(c, "#c49a62", c.lp, 1), 0.3),
       });
-      g.add(k.cone(0.036, 0, 0.12), {
+      g.add(evenCylinder(0.036, 0, 0.12), {
+        even: true,
+        opacity: 1,
+        jitter: 0.012,
         part: bolt,
         pos: [0, 0.085, 0.61],
         rot: [90, 0, 0],
@@ -1131,6 +1557,31 @@ export const RECIPES = {
     options: [{ key: "plume", label: "Plume", type: "color", default: "#c8262e" }],
     controls: [{ key: "visor", label: "Visor", type: "toggle", default: 0, ease: 0.9 }],
     action: { key: "visor", label: "Open the visor" },
+    // Hands-on (lane Hands-on H3): lift the visor on its side hinges. Raised
+    // all the way it stays up, held by its stiff hinges; let go lower and its
+    // weight brings it down shut with a clank.
+    hands: {
+      joints: [
+        {
+          type: "hinge",
+          part: "visor",
+          pivot: [0, 0.1, 0],
+          axis: [-1, 0, 0],
+          min: 0,
+          max: 1.5,
+          friction: 30,
+          bounce: 0.12,
+          start: (c) => 1.5 * easeInOut(c.visor),
+          com: [0, -0.1, 0.6],
+          pos: [0, -0.1, 0.58],
+          pick: [0.5, 0.42, 0.3],
+          sound: (ev, vol) =>
+            ev.v < 0.5
+              ? { voice: "metal", f: 380, decay: 0.35, vol: vol * 0.8 }
+              : { voice: "metal", f: 560, decay: 0.2, vol: vol * 0.5 },
+        },
+      ],
+    },
     drive(t, c, out) {
       out.parts.visor = { angle: -1.5 * easeInOut(c.visor) };
       out.amount = 0.8;
@@ -1177,10 +1628,11 @@ export const RECIPES = {
         opacity: 1,
         jitter: 0.015,
         flat: 0.18,
+        size: 1.12,
         interior: 0,
         core: "#2a2a2e",
         kind: "glint",
-        params: [0.03, 0],
+        params: [0.01, 0],
         color: (c) => {
           if (front(c)) return null;
           let col = metal(c, steel);
@@ -1258,8 +1710,9 @@ export const RECIPES = {
         part: visor,
         flat: 0.18,
         weight: 1.2,
+        size: 1.1,
         kind: "glint",
-        params: [0.08, 0],
+        params: [0.02, 0],
         color: (c) => {
           const a = c.u * 2 - 1;
           const y = -0.44 + c.v * 0.8;
@@ -1374,8 +1827,9 @@ export const RECIPES = {
         opacity: 1,
         jitter: 0.015,
         flat: 0.15,
+        size: 1.12,
         kind: "glint",
-        params: [0.1, 0],
+        params: [0.03, 0],
         interior: 0,
         color: (c) => {
           const y = c.lp[1];
@@ -1452,7 +1906,7 @@ export const RECIPES = {
           color: (c) => lit(c, "#f6efe2", 0.35, 0.6),
         });
       }
-      // Each jewel's light: a glow of its own colour over it that appears
+      // Each jewel's light: a glow of its own color over it that appears
       // as channel 0 passes its turn (hidden at rest).
       k.cloud({ share: 0.012, size: 2, pattern: false }, (rand, j) => {
         const i = j % 8;
@@ -1528,8 +1982,8 @@ export const RECIPES = {
           const odd = Math.floor(a) % 2 === 1;
           const row = odd ? Math.sin(c.v * TAU) : Math.cos(c.v * TAU);
           if (Math.abs(fract(a) - 0.5) < 0.07 && Math.abs(row - 0.75) < 0.2) return "#16161a";
-          const fur = c.noise(c.p[0] * 60, c.p[1] * 60, c.p[2] * 60);
-          return lit(c, shade("#f7f5ef", 0.92 + 0.08 * fur), 0.3);
+          const fur = c.noise(c.p[0] * 24, c.p[1] * 24, c.p[2] * 24);
+          return lit(c, shade("#f7f5ef", 0.95 + 0.05 * fur), 0.3);
         },
       });
     },
@@ -1554,6 +2008,38 @@ export const RECIPES = {
     ],
     controls: [{ key: "hatch", label: "Hatch", type: "toggle", default: 0, ease: 1.8 }],
     action: { key: "hatch", label: "Hatch" },
+    // Hands-on (lane Hands-on H3): pull the shell pieces off one by one. Each
+    // bends out on its crack, then snaps off and falls; the baby dragon rises
+    // a little more with each piece gone, until it peeks out. ↺ mends the egg.
+    hands: {
+      floor: DRAGON_EGG.floor,
+      pieces: () => [
+        ...DRAGON_EGG.shells.map((sh, i) => ({ part: `shell${i}`, pos: sh.mid, quat: sh.quat, pivot: sh.crack, solid: DRAGON_EGG.shell, points: hebPoints(DRAGON_EGG.shell, 1), pick: [0.28, 0.3, 0.28], mass: 0.15, friction: 0.7, restitution: 0.25 })), // prettier-ignore
+        // The lower egg: ground for the pieces, never picked up.
+        { pos: [0, 0.05, 0], solid: { type: "ellipsoid", r: [0.47, 0.66, 0.47] }, pick: [1e-3, 1e-3, 1e-3] }, // prettier-ignore
+      ],
+      joints: DRAGON_EGG.shells.map((sh, i) => ({
+        type: "break",
+        part: `shell${i}`,
+        at: sh.crack,
+        pull: 0.3,
+        give: 0.3,
+        sound: (ev) => (ev.kind === "snap" ? { voice: "crack", f: 2400, bright: 0.7, decay: 0.3 } : undefined), // prettier-ignore
+        also:
+          i === 0
+            ? (v, parts) => {
+                let gone = 0;
+                for (let k = 0; k < 3; k++) {
+                  const o = parts[`shell${k}`]?.offset;
+                  gone += o ? smoothstep(0.08, 0.4, Math.hypot(...o)) : 0;
+                }
+                const up = easeInOut(clamp(gone / 2.2, 0, 1));
+                parts.dragon = { offset: [0, 0.2 * up, 0], visible: smoothstep(0.05, 0.4, gone) };
+              }
+            : undefined,
+      })),
+      sound: (hit, vol) => ({ voice: "clack", f: 1300, decay: 0.08, vol: vol * 0.5 }),
+    },
     drive(t, c, out) {
       const o = easeInOut(c.hatch);
       for (let i = 0; i < 3; i++) out.parts[`shell${i}`] = { angle: 1.75 * o };

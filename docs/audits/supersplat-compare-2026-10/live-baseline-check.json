@@ -1,0 +1,30 @@
+[
+  {
+    "path": "src/embed.js",
+    "url": "https://ryanjosephkamp.github.io/splashery/src/embed.js",
+    "liveSha256": "5d4427e7defb46c45f5916089d2290b26ef60fcea0dbf9fe946b9a738de71dfa",
+    "baselineSha256": "5d4427e7defb46c45f5916089d2290b26ef60fcea0dbf9fe946b9a738de71dfa",
+    "matches": true
+  },
+  {
+    "path": "src/player.js",
+    "url": "https://ryanjosephkamp.github.io/splashery/src/player.js",
+    "liveSha256": "0e42cea4b34fcd35426b75e9c179fc33922ebf89b02ba4f37a787e1dd7185ba1",
+    "baselineSha256": "0e42cea4b34fcd35426b75e9c179fc33922ebf89b02ba4f37a787e1dd7185ba1",
+    "matches": true
+  },
+  {
+    "path": "src/toys.js",
+    "url": "https://ryanjosephkamp.github.io/splashery/src/toys.js",
+    "liveSha256": "cc67350e51840a02b4ad3f9e2bdf9fd4ebd607a2f27f1015c5b9fd2877970cfd",
+    "baselineSha256": "cc67350e51840a02b4ad3f9e2bdf9fd4ebd607a2f27f1015c5b9fd2877970cfd",
+    "matches": true
+  },
+  {
+    "path": "src/packs/photoreal-r2.js",
+    "url": "https://ryanjosephkamp.github.io/splashery/src/packs/photoreal-r2.js",
+    "liveSha256": "41da90480273a5497c23c6e09834d846c07f850f7895470768563079785bb495",
+    "baselineSha256": "41da90480273a5497c23c6e09834d846c07f850f7895470768563079785bb495",
+    "matches": true
+  }
+]

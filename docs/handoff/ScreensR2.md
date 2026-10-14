@@ -15,25 +15,19 @@ Handoff file: docs/handoff/ScreensR2.md.
 
 The Screen (`screen`, src/packs/screens.js, labs only) plays your own video or GIF on an old TV, a
 flat TV, a cinema screen or a hologram. Lane Screens built it (#72; read docs/handoff/Screens.md).
-The owner reviewed it on September 29, 2026 (docs/reviews/2026-09-29-new-toys/review.md). He said it
-is "very close to perfect". His notes, word for word:
+The owner reviewed it on September 29, 2026 (his notes are private; the Operator's summary is
+below). He said it is "very close to perfect". The Operator's summary of his notes:
 
-> - This is very close to perfect. Good job!
-> - The old TV, flat TV, and cinema should all be less grainy; the actual videos and GIFs are
->   perfect resolution, but the splat toys that we've constructed around them need better
->   resolution. You could also try to make the hologram base less grainy or something, but it's
->   already pretty sharp.
-> - I noticed something that might be an inherent limitation of Gaussian splats, but even if so, I'd
->   like to see if we can improve it enough to no longer be noticeable. I've attached some
->   screenshots of this, and the effect is happening for both videos and GIFs on all three of the
->   first styles for this toy (old TV, flat TV, and cinema). If you look closely at these
->   screenshots, you'll notice that you can actually see the GIF horse and the video frames when the
->   screens are off and when the cinema curtains are closed. For the video, only the current still
->   frame is present, but the GIF continues to move/play, so if you zoom in enough, you can actually
->   see the moving horse.
-> - Oh, can we see if there's a way to allow the user to turn the screens off? Like if they click a
->   certain button or somewhere then the TV turns off, or if they click the curtains in the cinema
->   then the curtains close?
+- Old TV, flat TV, and cinema should all be less grainy: the videos and GIFs themselves are at
+  perfect resolution, but the splat toys built around them need better resolution. The hologram base
+  could be less grainy too, though it is already pretty sharp.
+- A possible limit of Gaussian splats that he wants improved until it is no longer noticeable: on
+  all three of the first styles (old TV, flat TV, and cinema), with both videos and GIFs, the
+  picture can be seen faintly when the screens are off and when the cinema curtains are closed. For
+  a video only the current frame shows through, but the GIF keeps playing, so zooming in shows the
+  moving horse. He attached screenshots.
+- A way for the user to turn the screens off: a button or a tap that switches the TV off, or closes
+  the cinema curtains.
 
 His screenshots (1440×900, at the desktop): the flat TV switched off with the GIF, and again with
 the video at 0:00; the old TV switched off with the video, and again with the GIF; the cinema with

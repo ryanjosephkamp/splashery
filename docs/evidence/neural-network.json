@@ -1,0 +1,65 @@
+{
+  "toy": "neural-network",
+  "checked": "2026-10-04",
+  "summary": "The activations come from a real sigmoid forward pass for every supported size. The backward pulses and changing wire widths illustrate training, but they do not calculate a loss gradient.",
+  "claims": [
+    {
+      "claim": "Each neuron applies an activation to a weighted sum.",
+      "how": "Every layer is checked independently as sigmoid of the incoming weighted sum plus its bias, including the default 3-4-2 network.",
+      "where": "src/packs/computing.js:451",
+      "sources": [
+        {
+          "title": "Multilayer perceptrons",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html",
+          "says": "Hidden layers with nonlinear activations extend the functions a linear classifier can represent."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:476",
+      "note": ""
+    },
+    {
+      "claim": "The size controls choose a small multilayer network.",
+      "how": "The 108 control combinations stay within the 14-neuron cap and use the same forward calculation.",
+      "where": "src/packs/computing.js:442",
+      "sources": [
+        {
+          "title": "Multilayer perceptrons",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_multilayer-perceptrons/mlp.html",
+          "says": "Hidden layers with nonlinear activations extend the functions a linear classifier can represent."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:476",
+      "note": ""
+    },
+    {
+      "claim": "Backward pulses and wire changes are a prepared training illustration.",
+      "how": "Wire changes use a repeating index-based pattern; no target, loss, chain rule, or updated forward pass is used.",
+      "where": "src/packs/computing.js:432",
+      "sources": [
+        {
+          "title": "Backpropagation",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_multilayer-perceptrons/backprop.html",
+          "says": "Backpropagation applies the chain rule to compute loss gradients for network parameters."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:476",
+      "note": "The About text already identifies the prepared example. A real training view would need a loss and gradients."
+    }
+  ],
+  "simplified": [
+    "Inputs and weights are deterministic examples. The apparent backward update uses fixed wire changes rather than backpropagation; the total size is capped at 14 neurons."
+  ],
+  "fixes": [
+    {
+      "what": "A future training view could compute a loss, backpropagate its derivatives, and show the changed forward prediction.",
+      "where": "src/packs/computing.js:432",
+      "status": "proposed"
+    }
+  ]
+}

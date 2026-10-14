@@ -1,0 +1,103 @@
+{
+  "toy": "cnn",
+  "checked": "2026-10-04",
+  "summary": "The drawing pad runs a real small convolutional network with stored trained weights. Its test-set result reproduces the displayed 97.0%. The separate 7 diagram uses real filtering and pooling but prepared final digit scores.",
+  "claims": [
+    {
+      "claim": "The drawing pad runs convolution, ReLU, pooling, dense scoring, and softmax.",
+      "how": "An independent tensor implementation matches every layer on ten samples and 64 random drawings to absolute error below 1e-10.",
+      "where": "src/packs/computing.js:2187",
+      "sources": [
+        {
+          "title": "Convolutions for images",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html",
+          "says": "The usual neural-network convolution operation slides a learned kernel using cross-correlation."
+        },
+        {
+          "title": "Pooling",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_convolutional-neural-networks/pooling.html",
+          "says": "Max pooling keeps the maximum value within each local window."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:546",
+      "note": ""
+    },
+    {
+      "claim": "The network reads 8-by-8 images from a named digit dataset.",
+      "how": "The asset identifies UCI Optical Recognition of Handwritten Digits; pixel values are scaled from 0–16. All ten stored samples classify correctly.",
+      "where": "src/packs/computing-cnn.js:6",
+      "sources": [
+        {
+          "title": "Optical Recognition of Handwritten Digits",
+          "publisher": "UCI Machine Learning Repository; Alpaydin and Kaynak",
+          "url": "https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits",
+          "says": "The data contains 8-by-8 digit images with pixel values from 0 to 16 and a separate test file."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:546",
+      "note": ""
+    },
+    {
+      "claim": "The displayed test accuracy is 97.0%.",
+      "how": "The exported network correctly classifies 1,743 of 1,797 original UCI test rows: 96.99499%, which rounds to 97.0%.",
+      "where": "src/packs/computing-cnn.js:77",
+      "sources": [
+        {
+          "title": "Optical Recognition of Handwritten Digits",
+          "publisher": "UCI Machine Learning Repository; Alpaydin and Kaynak",
+          "url": "https://archive.ics.uci.edu/dataset/80/optical+recognition+of+handwritten+digits",
+          "says": "The data contains 8-by-8 digit images with pixel values from 0 to 16 and a separate test file."
+        }
+      ],
+      "verdict": "close",
+      "test": "tests/evidence-computing.spec.mjs:597",
+      "note": "The tolerance is display rounding to one decimal percent. It is dataset accuracy, not a promise for arbitrary handwriting."
+    },
+    {
+      "claim": "The introductory filter and pooling calculate feature values.",
+      "how": "The 3-by-3 cross-correlation and ReLU produce a 5-by-5 map. Max pooling includes smaller windows at the edges.",
+      "where": "src/packs/computing.js:553",
+      "sources": [
+        {
+          "title": "Convolutions for images",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html",
+          "says": "The usual neural-network convolution operation slides a learned kernel using cross-correlation."
+        },
+        {
+          "title": "Pooling",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_convolutional-neural-networks/pooling.html",
+          "says": "Max pooling keeps the maximum value within each local window."
+        }
+      ],
+      "verdict": "correct",
+      "test": "tests/evidence-computing.spec.mjs:546",
+      "note": ""
+    },
+    {
+      "claim": "The introductory digit scores are an illustration.",
+      "how": "The score array is stored separately from the filter and pooled values; its winning 7 is not inferred from that map.",
+      "where": "src/packs/computing.js:580",
+      "sources": [
+        {
+          "title": "Convolutions for images",
+          "publisher": "Dive into Deep Learning authors",
+          "url": "https://d2l.ai/chapter_convolutional-neural-networks/conv-layer.html",
+          "says": "The usual neural-network convolution operation slides a learned kernel using cross-correlation."
+        }
+      ],
+      "verdict": "simplified",
+      "test": "tests/evidence-computing.spec.mjs:546",
+      "note": "Keep the prepared-score disclosure beside the diagram; the drawing view is actual inference."
+    }
+  ],
+  "simplified": [
+    "The introductory diagram uses one fixed filter on a 7-by-7 sample, a normalized feature map, partial edge pooling windows, and stored digit scores. The drawing network reads 8-by-8 grayscale pixels and does not retrain while drawing."
+  ],
+  "fixes": []
+}

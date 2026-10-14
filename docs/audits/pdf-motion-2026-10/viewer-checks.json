@@ -1,0 +1,66 @@
+{
+  "date": "October 4, 2026",
+  "host": "macOS 26.3.1 (a), build 25D771280a, Apple Silicon",
+  "method": "Native application UI, local HTTP PDF files, visual observations and accessibility state. Playback screenshots appeared in the chat; no native screenshots are archived here. These are manual observations, not an automated viewer test suite.",
+  "checks": [
+    {
+      "viewer": "Chrome 154.0.8037.95 built-in PDFium, Incognito",
+      "sample": "01-animate-widget.pdf",
+      "result": "still only",
+      "action": "Clicked the forward play triangle; poster and play icon remained unchanged."
+    },
+    {
+      "viewer": "Chrome 154.0.8037.95 built-in PDFium, Incognito",
+      "sample": "02-pdfium-fields.pdf",
+      "result": "moves",
+      "responds": true,
+      "action": "Typed n: Frame 1 / paused. Typed p: Frame 12 / playing and detached grape shapes appeared."
+    },
+    {
+      "viewer": "Chrome 154.0.8037.95 built-in PDFium, Incognito",
+      "sample": "05-still-link-qr.pdf",
+      "result": "responds",
+      "action": "Clicked the PDF link. The address became the live embed URL and the actual grapes toy rendered in the browser."
+    },
+    {
+      "viewer": "Firefox 156.0.1 built-in PDF.js",
+      "sample": "01-animate-widget.pdf",
+      "result": "moves",
+      "responds": true,
+      "action": "Clicked forward play: control changed to pause and a grape fell below the bunch."
+    },
+    {
+      "viewer": "Firefox 156.0.1 built-in PDF.js",
+      "sample": "01-animate-ocg.pdf",
+      "result": "still only",
+      "action": "Clicked forward play: poster and play icon remained unchanged."
+    },
+    {
+      "viewer": "Firefox 156.0.1 built-in PDF.js",
+      "sample": "02-pdfium-fields.pdf",
+      "result": "moves",
+      "responds": true,
+      "action": "Typed n: Frame 1 / paused. Typed p: Frame 4 / playing with changed row fields. Typed p again: paused."
+    },
+    {
+      "viewer": "Microsoft Edge 154.0.4258.53 built-in viewer; engine variant not independently identified",
+      "sample": "02-pdfium-fields.pdf",
+      "result": "moves",
+      "responds": true,
+      "action": "Clicked the control field and typed np: Frame 3 / playing. Typed p again to pause."
+    },
+    {
+      "viewer": "Apple Preview 11.0",
+      "sample": "01-animate-widget.pdf",
+      "result": "still only",
+      "action": "Opened the local file and clicked the forward play triangle; image and controls remained unchanged."
+    }
+  ],
+  "limitations": [
+    "Chrome's normal profile initially showed a blank about:srcdoc surface; Incognito exposed the built-in PDF viewer. Cause was not established; no extension or security settings were changed.",
+    "Viewer frame rate was not measured. Eight frames per second is the requested timer cadence, not a performance result.",
+    "The form control accumulates typed command letters in Chrome and Edge; commands still work.",
+    "Final packaging adjusted PDF headers and OCG instructions and the untested 3D camera. The captured frames and tested playback algorithms were unchanged.",
+    "All other sample-viewer pairs are untested, including native 3D activation and embedded-video playback."
+  ]
+}
