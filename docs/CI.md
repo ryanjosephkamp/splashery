@@ -51,8 +51,8 @@ PR merged into `main`, as GitHub does for every PR). Then:
   passed alone is likely a flake on a busy runner, one that failed alone too is real;
 - the time per shard and the slowest files (folded).
 
-A new push to the PR cancels the run in progress and starts again; the comment updates when the new
-run ends.
+A new push to the PR cancels the run in progress (a canceled run posts nothing) and starts again;
+the comment updates when the new run ends.
 
 ## Rerunning
 

@@ -122,6 +122,8 @@ if (cmd === "recheck") {
 
 if (cmd === "summary") {
   const base = path.resolve(dirArg);
+  // A run whose shards all died before uploading leaves no folder: every file then counts as missing.
+  fs.mkdirSync(base, { recursive: true });
   const shardDirs = fs.existsSync(base)
     ? fs.readdirSync(base).map((d) => path.join(base, d)).filter((d) => fs.statSync(d).isDirectory()) // prettier-ignore
     : [];

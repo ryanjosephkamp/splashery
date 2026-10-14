@@ -121,7 +121,8 @@ jobs:
   summary:
     name: Summary
     needs: [suite]
-    if: always()
+    # Not on a canceled run (a newer push replaced it): its report would be empty or partial.
+    if: ${{ !cancelled() }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:
