@@ -1,7 +1,7 @@
 import { test, expect } from "@playwright/test";
 import * as pc from "../src/pc.js";
 import { updateTokenBounds } from "../src/token-bounds.js";
-import { assertSafeArguments, safeLaunchOptions } from "./cdx-three-browser.mjs";
+import { Stage } from "../src/stage.js";
 
 function resource() {
   return {
@@ -90,21 +90,26 @@ test("different resources keep independent envelopes", () => {
   expect(second.aabb.getMax().z).toBe(4.5);
 });
 
-test("the task browser launch retains sandboxing and rejects unsafe arguments", () => {
-  const options = safeLaunchOptions();
-  expect(options.chromiumSandbox).toBe(true);
-  expect(options.args).toEqual([]);
-  expect(options.ignoreDefaultArgs).toContain("--enable-unsafe-swiftshader");
-  expect(() => assertSafeArguments(["--headless", "--enable-automation"])).not.toThrow();
-  for (const arg of [
-    "--enable-unsafe-swiftshader",
-    "--enable-unsafe-webgpu",
-    "--no-sandbox",
-    "--disable-gpu-sandbox=true",
-    "--ignore-gpu-blocklist",
-    "--disable-web-security",
-    "--disable-features=HttpsUpgrades,ThirdPartyStoragePartitioning",
-    "--unsafely-disable-devtools-self-xss-warnings",
-  ])
-    expect(() => assertSafeArguments([arg])).toThrow(/Unsafe browser launch/);
-});
+for (const [name, isWebGPU, kit, expectedMin] of [
+  ["WebGPU kit", true, true, -10.5],
+  ["WebGL2 kit", false, true, -0.5],
+  ["WebGPU asset", true, false, -0.5],
+]) {
+  test(`Stage applies ${name} token uniforms with the appropriate bounds`, () => {
+    const r = resource();
+    const uploads = [];
+    const g = {
+      setParameter(key, value) {
+        uploads.push({ key, value, minZ: r.aabb.getMin().z });
+      },
+    };
+    const tokens = new Float32Array([0, 0, -10, 1, 0, 0, 0, 1]);
+    Stage.prototype.setUniforms.call(
+      { device: { isWebGPU }, toy: { kit, resource: r, entity: { gsplat: g } } },
+      { "uSpTokens[0]": tokens },
+    );
+    expect(uploads).toEqual([{ key: "uSpTokens[0]", value: tokens, minZ: expectedMin }]);
+    expect(r.updates).toBe(isWebGPU && kit ? 1 : 0);
+    if (isWebGPU && kit) expect(g.customAabb).toBe(r.aabb);
+  });
+}

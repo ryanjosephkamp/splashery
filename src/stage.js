@@ -3,6 +3,7 @@
 // the engine directly lives here or in paint.js / loaders.js.
 
 import * as pc from "./pc.js";
+import { updateTokenBounds } from "./token-bounds.js";
 import {
   MODIFIER,
   MODIFIER_KIT,
@@ -510,6 +511,9 @@ export class Stage {
   setUniforms(u) {
     const g = this.toy?.entity.gsplat;
     if (!g) return;
+    if (this.device.isWebGPU && this.toy.kit) {
+      updateTokenBounds(this.toy.resource, u["uSpTokens[0]"], g);
+    }
     for (const k in u) g.setParameter(k, u[k]);
     // Pictures: a kit toy's picture sheets move with it.
     for (const sh of this.toy.sheets || []) {
