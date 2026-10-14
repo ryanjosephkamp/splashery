@@ -24,6 +24,8 @@ def validate(folder, full):
     manifest = json.loads((folder/'manifest.json').read_text())
     assert len(manifest['scenes']) >= 12, 'Incomplete scene set'
     count = 0
+    depth_frames = 0
+    depth_range = [float('inf'),float('-inf')]
     for scene in manifest['scenes']:
         assert not scene['smoke_only'], 'Smoke build cannot be archived as complete'
         kinds = ['still','handheld','walk'] if full else ['still']
@@ -55,6 +57,11 @@ def validate(folder, full):
                     assert set(np.unique(mask)) <= {0,1,3}
                     assert np.all(np.isnan(z[mask==0]))
                     assert np.all(np.isfinite(z[mask!=0])) and np.all(z[mask!=0] > 0)
+                    values=z[mask!=0]
+                    assert np.all(values>=.05-1e-6) and np.all(values<=200+1e-3)
+                    if len(values):
+                        depth_range=[min(depth_range[0],float(values.min())),max(depth_range[1],float(values.max()))]
+                    depth_frames+=1
                 count += 1
             if kind!='still':
                 import subprocess
@@ -88,6 +95,7 @@ def validate(folder, full):
             assert file.stat().st_size==record['bytes'], record['path']
             assert digest(file)==record['sha256'], record['path']
     print(f'Validated {len(manifest["scenes"])} scenes, {count} frames, full={full}',flush=True)
+    print(json.dumps({'depth_frames':depth_frames,'valid_depth_range_meters':depth_range}),flush=True)
     return manifest
 
 

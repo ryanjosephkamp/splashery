@@ -4,6 +4,11 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
+import hashlib
+import json
+import subprocess
+import sys
+from unittest.mock import patch
 
 import bpy
 import numpy as np
@@ -15,10 +20,12 @@ spec.loader.exec_module(generator)
 
 
 class KnownGeometry(unittest.TestCase):
-    def run_plane(self,metal=0,small=False):
+    def run_plane(self,metal=0,small=False,plane=2,near_occluder=False):
         bpy.ops.wm.read_factory_settings(use_empty=True)
         mat=generator.material('test',(.5,.5,.5),metal=metal)
-        generator.box((0,0,3),(.1,.1,2) if small else (4,4,2),mat)
+        size=(.1,.1,2) if small else ((500,500,2) if plane>100 else (4,4,2))
+        generator.box((0,0,plane+1),size,mat)
+        if near_occluder:generator.box((0,0,.015),(4,4,.02),mat)
         tree,flags=generator.geometry()
         pose={'width':32,'height':24,'K':[[24,0,16],[0,24,12],[0,0,1]],'camera_to_world':np.eye(4).tolist()}
         with tempfile.TemporaryDirectory() as folder:
@@ -49,6 +56,36 @@ class KnownGeometry(unittest.TestCase):
         self.assertTrue(np.any(mask==0))
         self.assertTrue(np.all(np.isnan(depth[mask==0])))
         self.assertTrue(np.any(mask==1))
+
+    def test_far_clip_is_axial_not_euclidean_ray_length(self):
+        depth,mask=self.run_plane(plane=195)
+        np.testing.assert_allclose(depth,195,atol=1e-3)
+        self.assertTrue(np.all(mask==1))
+
+    def test_geometry_before_near_clip_does_not_hide_visible_geometry(self):
+        depth,mask=self.run_plane(near_occluder=True)
+        np.testing.assert_allclose(depth,2,atol=1e-6)
+        self.assertTrue(np.all(mask==1))
+
+    def test_geometry_after_far_clip_is_invalid(self):
+        depth,mask=self.run_plane(plane=205)
+        self.assertTrue(np.all(np.isnan(depth)))
+        self.assertTrue(np.all(mask==0))
+
+    def test_resume_rejects_changed_camera_helper_before_mutating_outputs(self):
+        settings={'source_sha256':hashlib.sha256(path.read_bytes()).hexdigest(),
+            'camera_helper_sha256':'0'*64,'blender':bpy.app.version_string,'samples':8,
+            'clip_samples':2,'clip_side':640,'limit':0,
+            'ffmpeg':subprocess.check_output(['ffmpeg','-version'],text=True).splitlines()[0],
+            'python':sys.version.split()[0],'numpy':np.__version__}
+        with tempfile.TemporaryDirectory() as folder:
+            file=Path(folder)/'build-settings.json'
+            original=json.dumps(settings).encode()
+            file.write_bytes(original)
+            with patch.object(sys,'argv',['test','--','--out',folder,'--mode','still']):
+                with self.assertRaisesRegex(ValueError,'different source or settings'):
+                    generator.main()
+            self.assertEqual(file.read_bytes(),original)
 
 
 if __name__=='__main__':

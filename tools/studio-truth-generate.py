@@ -288,10 +288,13 @@ def depth(tree, flags, p, folder, stem):
     z = np.full(w*h,np.nan,dtype=np.float32)
     mask = np.zeros(w*h,dtype=np.uint8)
     for i,d in enumerate(directions):
-        location,normal,face,distance = tree.ray_cast(origin,Vector(d),200)
+        cosine = np.dot(d,forward)
+        # Blender clips in camera Z, not in Euclidean distance along the ray.
+        start = origin+Vector(d)*(.05/cosine)
+        location,normal,face,distance = tree.ray_cast(start,Vector(d),(200-.05)/cosine)
         if location is not None:
-            axial = distance*np.dot(d,forward)
-            if axial >= .05:
+            axial = .05+distance*cosine
+            if .05 <= axial <= 200:
                 z[i] = axial
                 mask[i] = flags[face]
     write_depth(folder/f'{stem}.depth.f32.gz',z.reshape(h,w))
@@ -349,8 +352,11 @@ def main():
     out=Path(opt.out).resolve()
     out.mkdir(parents=True,exist_ok=True)
     settings = {'source_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+                'camera_helper_sha256':hashlib.sha256((Path(__file__).parent/'studio_truth_camera.py').read_bytes()).hexdigest(),
                 'blender':bpy.app.version_string,'samples':opt.samples,
-                'clip_samples':opt.clip_samples,'clip_side':opt.clip_side,'limit':opt.limit}
+                'clip_samples':opt.clip_samples,'clip_side':opt.clip_side,'limit':opt.limit,
+                'ffmpeg':subprocess.check_output(['ffmpeg','-version'],text=True).splitlines()[0],
+                'python':sys.version.split()[0],'numpy':np.__version__}
     settings_path = out/'build-settings.json'
     if settings_path.exists():
         if json.loads(settings_path.read_text()) != settings:
@@ -362,7 +368,9 @@ def main():
     if not set(selection)<=set(s[0] for s in SCENES): ap.error('Unknown scene')
     manifest={'schema':1,'credit':'made by Ryan with Codex (GPT-6)','license':'CC0-1.0',
               'generator':{'blender':bpy.app.version_string,'seed_base':5600,'still_samples':opt.samples,
-                           'clip_samples':opt.clip_samples,'cpu_threads':4,'source_sha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest()},
+                           'clip_samples':opt.clip_samples,'cpu_threads':4,'source_sha256':settings['source_sha256'],
+                           'camera_helper_sha256':settings['camera_helper_sha256'],'ffmpeg':settings['ffmpeg'],
+                           'python':settings['python'],'numpy':settings['numpy']},
               'depth':{'convention':'optical-axis Z, meters','encoding':'gzip float32 LE, row-major top-to-bottom','invalid':'NaN',
                        'mask_bits':{'1':'valid first-hit geometry','2':'appearance ambiguous: metal, transmission, or emission'}},
               'camera':{'world':'right-handed Blender Z-up, meters','local':'+X right, +Y down, +Z forward',
