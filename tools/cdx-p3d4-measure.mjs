@@ -17,9 +17,12 @@ import {
 import { poseR3, texturesR3, referenceDepthR3, projectAnchorsR3 } from "./cdx-p3d2-r3-common.mjs";
 import { holesR3, edgesR3 } from "./cdx-p3d2-r3-measure.mjs";
 import { minimumField } from "../src/photo3d/background.js";
+import { renderInputsR4, projectionR4 } from "./cdx-p3d4-render-inputs.mjs";
 import { streakR4, thinAnchorsR4, fringeR4 } from "./cdx-p3d4-metrics.mjs";
 import { inputFingerprintsR3 } from "./cdx-p3d2-r3-fingerprint.mjs";
 const opt = (n, d) => process.argv.find((a) => a.startsWith(`--${n}=`))?.slice(n.length + 3) ?? d;
+const sharedDiagnostics = opt("share-identical", "false") === "true";
+const idleStop = opt("idle-stop", "false") === "true";
 const requestedCaptures = Number(opt("captures", 2));
 if (![1, 2].includes(requestedCaptures))
   throw new RangeError("Capture one or two completed Sharp frames.");
@@ -28,6 +31,7 @@ const out = opt("out", ".cache/photo-3d-r4/scout"),
   builds = await Promise.all(urls.map((url) => fingerprintR4(url))),
   methodFiles = [
     "cdx-p3d4-measure.mjs",
+    "cdx-p3d4-render-inputs.mjs",
     "cdx-p3d4-common.mjs",
     "cdx-p3d4-metrics.mjs",
     "cdx-p3d2-r3-common.mjs",
@@ -45,6 +49,8 @@ const saved = fs.existsSync(file) ? JSON.parse(fs.readFileSync(file)) : null;
 if (
   saved &&
   (saved.method !== method ||
+    (saved.sharedDiagnostics ?? false) !== sharedDiagnostics ||
+    (saved.idleStop ?? false) !== idleStop ||
     (saved.requestedCaptures ?? 2) !== requestedCaptures ||
     JSON.stringify(saved.builds) !== JSON.stringify(builds) ||
     JSON.stringify(saved.inputHashes) !== JSON.stringify(inputHashes))
@@ -64,7 +70,9 @@ for (const dir of opt("baseline", "").split(",").filter(Boolean)) {
     JSON.stringify(study.inputHashes) !== JSON.stringify(inputHashes)
   )
     throw new Error("A reused checkpoint must have identical sources and input hashes.");
-  for (const name of methodFiles.filter((name) => name !== "cdx-p3d4-measure.mjs"))
+  for (const name of methodFiles.filter(
+    (name) => !["cdx-p3d4-measure.mjs", "cdx-p3d4-render-inputs.mjs"].includes(name),
+  ))
     if (
       !fs
         .readFileSync(path.join(dir, "method-source", name))
@@ -84,6 +92,67 @@ if (saved && JSON.stringify(saved.baselineSources || []) !== JSON.stringify(base
   throw new Error("The reused checkpoint evidence changed; use a fresh directory.");
 const rows = saved?.rows || [],
   errors = saved?.errors || [];
+// Reuse complete paired observations only when both immutable builds, all
+// inputs, and every numeric/camera helper match. Preserve their original
+// capture policy and publish the parent study digest beside each observation.
+const pairedSources = [];
+for (const dir of opt("paired", "").split(",").filter(Boolean)) {
+  const bytes = fs.readFileSync(path.join(dir, "results.json")),
+    study = JSON.parse(bytes);
+  if (
+    JSON.stringify(study.builds) !== JSON.stringify(builds) ||
+    JSON.stringify(study.inputHashes) !== JSON.stringify(inputHashes) ||
+    study.errors?.length
+  )
+    throw new Error("Reused paired observations require identical builds/inputs and no errors.");
+  for (const name of methodFiles.filter(
+    (name) => !["cdx-p3d4-measure.mjs", "cdx-p3d4-render-inputs.mjs"].includes(name),
+  ))
+    if (
+      !fs
+        .readFileSync(path.join(dir, "method-source", name))
+        .equals(fs.readFileSync(`tools/${name}`))
+    )
+      throw new Error(`Reused paired metric or camera method changed: ${name}`);
+  const source = {
+    dir,
+    sha256: crypto.createHash("sha256").update(bytes).digest("hex"),
+    rows: study.rows.length,
+  };
+  pairedSources.push(source);
+  if (saved) continue;
+  for (const row of study.rows) {
+    if (
+      study.rows.filter((r) => r.id === row.id && r.screen === row.screen && r.view === row.view)
+        .length !== 9
+    )
+      continue;
+    if (rows.some((r) => rowKey(r) === rowKey(row))) continue;
+    const prefix = `${row.screen}-${row.id}-${row.view}-${row.yaw}-${row.pitch}`;
+    const files = {};
+    for (const build of ["checkpoint", "after"])
+      for (const kind of ["color", "mask", "uv"]) {
+        const name = `${prefix}-${build}-${kind}.png`,
+          pixels = fs.readFileSync(path.join(dir, name));
+        files[name] = crypto.createHash("sha256").update(pixels).digest("hex");
+        fs.writeFileSync(path.join(out, name), pixels);
+      }
+    for (const suffix of [
+      "anchors.json",
+      "source.png",
+      "checkpoint-background.png",
+      "after-background.png",
+      "render-inputs.json",
+    ]) {
+      const name = `${row.screen}-${row.id}-${suffix}`;
+      if (fs.existsSync(path.join(dir, name)))
+        fs.copyFileSync(path.join(dir, name), path.join(out, name));
+    }
+    rows.push({ ...row, reusedObservation: { study: source.sha256, files } });
+  }
+}
+if (saved && JSON.stringify(saved.pairedSources || []) !== JSON.stringify(pairedSources))
+  throw new Error("The reused paired evidence changed; use a fresh directory.");
 const save = (extra = {}) =>
   fs.writeFileSync(
     file,
@@ -91,10 +160,13 @@ const save = (extra = {}) =>
       {
         method,
         requestedCaptures,
+        sharedDiagnostics,
+        idleStop,
         builds,
         inputHashes,
         urls,
         baselineSources,
+        pairedSources,
         rows,
         errors,
         ...extra,
@@ -104,6 +176,11 @@ const save = (extra = {}) =>
     ),
   );
 const decode = (uri) => PNG.sync.read(Buffer.from(uri.split(",")[1], "base64"));
+if (opt("prepare-only", "false") === "true") {
+  save({ prepared: true });
+  console.log(JSON.stringify({ preparedRows: rows.length, pairedSources }));
+  process.exit(0);
+}
 const browser = await chromium.launch(config.use.launchOptions);
 
 function cohorts(mask, uv, field, minimum, ratio) {
@@ -168,6 +245,22 @@ try {
           errors.push({ screenName, url, error: m.text() });
       });
       await openR4(page, url, screen);
+      if (idleStop)
+        await page.evaluate(() => {
+          const pl = window.__splashery.player;
+          // A still audit pose must stay fresh while idle. Refresh it on
+          // updates so the three-tick fallback does not wake the splats.
+          pl.stage.onUpdate(() => {
+            if (pl.paused && pl.scene.toy.id === "photo-3d")
+              pl.toyInfo.recipe.drive(0, { flat: 0, layers: 0 }, { parts: {} });
+          });
+          pl.stage.app.on("postrender", () => {
+            if (pl.paused && pl.scene.toy.id === "photo-3d" && window.__psv.state().on) {
+              pl.stage.aliveUntil = 0;
+              pl.stage.app.renderNextFrame = false;
+            }
+          });
+        });
       pages.push(page);
     }
     const ids = opt(
@@ -205,6 +298,31 @@ try {
             );
           textures.push({ surface: decode(t.surface), background: decode(t.background) });
           fields.push(await referenceDepthR3(page));
+        }
+        let identicalInputs = false,
+          inputProofFile;
+        if (sharedDiagnostics) {
+          const proofs = [];
+          for (let i = 0; i < pages.length; i++) {
+            await pages[i].bringToFront();
+            await poseR3(pages[i], 0, 0, "color", [0, 1, 0], 1);
+            proofs.push(await renderInputsR4(pages[i], textures[i]));
+          }
+          identicalInputs =
+            proofs.every((p) => p.supported) && proofs[0].sha256 === proofs[1].sha256;
+          inputProofFile = `${screenName}-${entry.id}-render-inputs.json`;
+          fs.writeFileSync(
+            path.join(out, inputProofFile),
+            JSON.stringify({ identicalInputs, proofs }, null, 2),
+          );
+          if (!identicalInputs)
+            console.log(
+              JSON.stringify({
+                diagnosticSharingDeclined: entry.id,
+                screen: screenName,
+                reasons: proofs.map((p) => p.reason || p.sha256),
+              }),
+            );
         }
         const anchors = thinAnchorsR4(textures[0].surface, fields[0]),
           minimum = minimumField(
@@ -314,9 +432,55 @@ try {
               return shot;
             };
             const color = await take("color", [0, 1, 0]),
-              mask = await take("mask", [0, 0, 0]),
+              actual = decode(color.image);
+            if (!actual.data.some((v, i) => i % 4 !== 3 && v > 8 && !(i % 4 === 1 && v > 250)))
+              throw new Error("Empty rendered capture.");
+            if (build === 1 && identicalInputs) {
+              const checkpointPrefix = `${screenName}-${entry.id}-${view}-${yaw}-${pitch}-checkpoint`,
+                candidatePrefix = `${screenName}-${entry.id}-${view}-${yaw}-${pitch}-after`,
+                baseline = PNG.sync.read(
+                  fs.readFileSync(path.join(out, `${checkpointPrefix}-color.png`)),
+                ),
+                projection = await projectionR4(page);
+              if (
+                actual.width === baseline.width &&
+                actual.height === baseline.height &&
+                Buffer.from(actual.data).equals(Buffer.from(baseline.data)) &&
+                JSON.stringify(projection) === JSON.stringify(comparison[0].projection)
+              ) {
+                fs.writeFileSync(
+                  path.join(out, `${candidatePrefix}-color.png`),
+                  Buffer.from(color.image.split(",")[1], "base64"),
+                );
+                for (const kind of ["mask", "uv"])
+                  fs.copyFileSync(
+                    path.join(out, `${checkpointPrefix}-${kind}.png`),
+                    path.join(out, `${candidatePrefix}-${kind}.png`),
+                  );
+                const { reused, ...metrics } = comparison[0];
+                comparison.push({
+                  ...metrics,
+                  build: "after",
+                  projection,
+                  captureCalibration,
+                  backgroundFill: await page.evaluate(
+                    () => window.__splashery.player.proc.ctx.kit.data.photo.backgroundFill || null,
+                  ),
+                  sharedDiagnostics: {
+                    source: "checkpoint",
+                    inputProof: inputProofFile,
+                    checkpointReuse: reused || null,
+                    colorSha256: crypto.createHash("sha256").update(actual.data).digest("hex"),
+                    reason:
+                      "Uploaded geometry, shader sources, uniforms, texture bytes, source pixels, background pixels, actual projection, and completed color pixels match. Geometric masks, UV diagnostics, and deterministic metrics are identical; only the candidate color frame was independently captured.",
+                  },
+                });
+                calibrated[build] = true;
+                continue;
+              }
+            }
+            const mask = await take("mask", [0, 0, 0]),
               uv = await take("uv", [0, 0, 0]),
-              actual = decode(color.image),
               m = decode(mask.image),
               u = decode(uv.image),
               ratio = actual.width / screen.width,

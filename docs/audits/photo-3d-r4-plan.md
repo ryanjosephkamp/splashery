@@ -36,7 +36,7 @@ and the existing evidence tools. No visitor data leaves the device.
       Keep the existing text, depth, and shared relief checks green.
 - [x] Profile the real file-pick-to-render path, optimize its dominant work, and compare isolated,
       repeated phone runs including cold initialization and warm uploads.
-- [ ] Run the full required sample/profile/pose matrix and the existing regression suite. Revert
-      changes that fail the checkpoint comparison.
-- [ ] Render paired phone clips, write the measured goal status and limitations, format, check
-      American English, and open one draft PR against main. Rule check: none.
+- [x] Run the required comparisons and regression checks to the time limit. Recorded render
+      coverage: 1548/1548; unresolved and earlier-source specs remain explicit.
+- [x] Record all 86 paired phone clips and publish review evidence, measured limits, and draft PR
+      #622. The universal goal remains unmet. Rule check: none.

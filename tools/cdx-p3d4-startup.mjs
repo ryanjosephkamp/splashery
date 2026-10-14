@@ -95,6 +95,12 @@ try {
     wrap(pl.stage, "setToy", "Stage.setToy");
     wrap(pl, "makeContainer", "Player.makeContainer");
   });
+  const inputFile = opt("file", "assets/toys/photo-3d/forest.jpg");
+  const inputSha256 = crypto.createHash("sha256").update(fs.readFileSync(inputFile)).digest("hex");
+  fs.writeFileSync(
+    opt("out", ".cache/photo-3d-r4/startup-checkpoint.json") + ".method.mjs",
+    fs.readFileSync(new URL(import.meta.url)),
+  );
   const results = [];
   for (let run = 0; run < Number(opt("runs", 3)); run++) {
     await page.evaluate(() => {
@@ -191,6 +197,8 @@ try {
           url,
           build,
           methodHash,
+          inputFile,
+          inputSha256,
           modelOverride,
           modelHash,
           viewport: [390, 844],
