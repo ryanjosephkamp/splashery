@@ -117,3 +117,37 @@ test("the photo preview releases its covered frame on handoff and when another t
   await page.waitForFunction(() => window.__previewUpdates >= 6);
   expect(await page.evaluate(() => window.__previewHandoff.length)).toBeGreaterThan(0);
 });
+
+test("covered updates retain retired GPU resources until actual draws reconcile the work buffer", async ({
+  page,
+}) => {
+  const errors = [];
+  page.on("console", (m) => {
+    if (/GL_INVALID|sampler type/.test(m.text())) errors.push(m.text());
+  });
+  await page.goto("/?renderer=webgl2&profile=low&adapt=off&labs=1");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+  const result = await page.evaluate(async () => {
+    const s = window.__splashery.player.stage;
+    window.__splashery.player.setPaused(true);
+    s.setFixedSize([128, 128]);
+    await s.captureFrame();
+    const old = s.toy,
+      release = s.holdRendering();
+    let freed = 0;
+    const destroy = old.entity.destroy;
+    old.entity.destroy = function (...args) {
+      freed++;
+      return destroy.apply(this, args);
+    };
+    s.clearToy();
+    for (let i = 0; i < 8; i++) await new Promise(requestAnimationFrame);
+    const held = freed;
+    for (let i = 0; i < 3; i++) await s.captureFrame();
+    const reconciled = freed;
+    release();
+    return { held, reconciled };
+  });
+  expect(result).toEqual({ held: 0, reconciled: 1 });
+  expect(errors).toEqual([]);
+});

@@ -128,13 +128,20 @@ export class Stage {
     });
     this.graveyard = [];
     this.projectorTries = 0; // Fluids r7 (hookProjector)
+    let rendered = false;
+    app.on("postrender", () => {
+      rendered = true;
+    });
     app.on("frameend", () => {
       this.frames++;
       if (this.projectorTries < 600) this.hookProjector(); // Fluids r7
       if (this.graveyard.length) {
-        this.buryToys();
+        // frameend also fires for an update whose covered draw was skipped.
+        // The work-buffer manager can release old textures only after real draws.
+        if (rendered) this.buryToys();
         this.requestRender();
       }
+      rendered = false;
       const now = performance.now();
       const ms = now - this.lastRender;
       this.lastFrameMs.push(ms);
