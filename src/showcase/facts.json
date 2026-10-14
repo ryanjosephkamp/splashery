@@ -185,7 +185,7 @@
     "qr-code": {
       "kind": "kit",
       "recipeFile": "src/packs/qr.js",
-      "recipeKB": 48.6,
+      "recipeKB": 48.8,
       "recipeGzipKB": 15.7,
       "sharedBy": 1
     },
