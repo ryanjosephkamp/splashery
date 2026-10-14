@@ -60,3 +60,25 @@ Words accept up to 32 characters. An opened picture is an alpha-masked raster ap
 font. There are no additional outside assets to license. Code is MIT; the procedural splats and
 thumbnail are CC0, credited in the About text, CREDITS.md, and tools/assets.json. Parts B, C, and D
 are untouched.
+
+## Operator follow-up, October 14, 2026
+
+The Operator's [review comment](https://github.com/ryanjosephkamp/splashery/pull/616#issuecomment-6163591761)
+was addressed on `codex/portfolio-a`:
+
+- Merged `origin/main` at `6c3764ff`, resolving the generated `site/sw.js` conflict with main's
+  version before running `node tools/site-build.mjs`.
+- Restored `tools/toy-plan.mjs` byte for byte from main, then regenerated `docs/TOY-PLAN.md`
+  with `node tools/toy-plan.mjs` and Prettier. No generated output was hand-merged.
+- Removed this report from the implementation branch. It remains on `codex/portfolio-a-clips`.
+
+Fresh checks on the merged branch passed: all eight Part A tests, all 83 tests in `taps` and
+`unit`, and three focused `kit`/`smoke` checks for v2/v3 scene compatibility, an old share link,
+and the embed transfer limit. The full `smoke` and all-toy `kit` files were not repeated for this
+scope cleanup; their earlier results and the Picture QR baseline failure are recorded above.
+`node tools/check-packs.mjs one-splat` and `npx prettier --check .` passed. The two Part A
+screenshots were refreshed by its browser tests.
+
+`node tools/us-english.mjs --diff` reports one inherited generated heading, `Maths`, whose count
+changes when Part A is added. The requested restoration retains main's heading; the Operator
+reserved the heading decision for a separate change. No new prose introduces that spelling.

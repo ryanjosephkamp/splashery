@@ -13,4 +13,5 @@ SPLASHERY_CHROMIUM=/usr/bin/chromium node tools/effect-clip.mjs clips \
   --opt=level=0 --at=0,0,0 --strip=8 --secs=2.4 --fps=12 one-splat
 ```
 
-The implementation and verification report are on `codex/portfolio-a`.
+The implementation is on `codex/portfolio-a`. The
+[verification report](../78-portfolio-a.md) stays on this review branch.
