@@ -208,12 +208,29 @@ export function upsampleDepth(dLo, dw, dh, guideLo, gx, gy, guideHi, sigmaColor 
   const out = new Float32Array(gx * gy);
   const inv = 1 / (2 * sigmaColor * sigmaColor);
   const sp = 1 / (2 * 0.8 * 0.8);
+  // Coordinates and the separable spatial Gaussian do not depend on color.
+  // Compute them once per axis instead of repeating them for all 16 taps.
+  const axis = (length, size) => {
+    const index = new Int32Array(size * 4),
+      spatial = new Float64Array(size * 4),
+      linear = new Float64Array(size * 4);
+    for (let i = 0; i < size; i++) {
+      const u = ((i + 0.5) * length) / size - 0.5,
+        start = Math.floor(u) - 1;
+      for (let k = 0; k < 4; k++) {
+        const distance = u - start - k,
+          p = i * 4 + k;
+        index[p] = clamp(start + k, 0, length - 1);
+        spatial[p] = Math.exp(-distance * distance * sp);
+        linear[p] = Math.max(0, 1 - Math.abs(distance));
+      }
+    }
+    return { index, spatial, linear };
+  };
+  const ax = axis(dw, gx),
+    ay = axis(dh, gy);
   for (let j = 0; j < gy; j++) {
-    const v = ((j + 0.5) * dh) / gy - 0.5;
-    const j0 = Math.floor(v);
     for (let i = 0; i < gx; i++) {
-      const u = ((i + 0.5) * dw) / gx - 0.5;
-      const i0 = Math.floor(u);
       const q = (j * gx + i) * 3;
       const r = guideHi[q];
       const g = guideHi[q + 1];
@@ -221,22 +238,23 @@ export function upsampleDepth(dLo, dw, dh, guideLo, gx, gy, guideHi, sigmaColor 
       let sum = 0;
       let wsum = 0;
       let bil = 0;
-      for (let jj = j0 - 1; jj <= j0 + 2; jj++) {
-        const y = clamp(jj, 0, dh - 1);
-        for (let ii = i0 - 1; ii <= i0 + 2; ii++) {
-          const x = clamp(ii, 0, dw - 1);
-          const p = (y * dw + x) * 3;
+      for (let jj = 0; jj < 4; jj++) {
+        const y = ay.index[j * 4 + jj] * dw,
+          wy = ay.spatial[j * 4 + jj],
+          by = ay.linear[j * 4 + jj];
+        for (let ii = 0; ii < 4; ii++) {
+          const c = y + ax.index[i * 4 + ii],
+            p = c * 3;
           const dr = guideLo[p] - r;
           const dg = guideLo[p + 1] - g;
           const db = guideLo[p + 2] - b;
-          const ds = (u - ii) * (u - ii) + (v - jj) * (v - jj);
-          const ws = Math.exp(-ds * sp);
+          const ws = wy * ax.spatial[i * 4 + ii];
           const w = ws * Math.exp(-(dr * dr + dg * dg + db * db) * inv);
-          sum += w * dLo[y * dw + x];
+          sum += w * dLo[c];
           wsum += w;
           // the plain bilinear value, a fallback where the colors match nothing
-          const bw = Math.max(0, 1 - Math.abs(u - ii)) * Math.max(0, 1 - Math.abs(v - jj));
-          bil += bw * dLo[y * dw + x];
+          const bw = ax.linear[i * 4 + ii] * by;
+          bil += bw * dLo[c];
         }
       }
       out[j * gx + i] = wsum > 1e-4 ? sum / wsum : bil;
@@ -470,7 +488,7 @@ export function buildPhotoSplats(
       let sum = 0;
       let k = 0;
       const add = (dz, step) => {
-        sum += Math.hypot(step, dz);
+        sum += Math.sqrt(step * step + dz * dz);
         k++;
       };
       if (i > 0 && linkedRight(m, c - 1)) add(sizeZ[c] - sizeZ[c - 1], cw);
