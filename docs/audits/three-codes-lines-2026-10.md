@@ -40,9 +40,9 @@ tested Mac path, not proof of the Android cause.
 ## Matched before and after
 
 Before: `dbac377826434d5704b6c47aafa1434de7662273`, current main reconciled without the hook. After
-code: `f27862f4b17483f969590684e3ef9bb7defd7636`. The final main/doc reconciliation preserves
-identical task source/test blobs, recorded in
-[the manifest](three-codes-lines-2026-10/manifest.json).
+code: `f27862f4b17483f969590684e3ef9bb7defd7636`. The final reconciliation preserves the runtime
+hook and helper. A later test-only change strengthens the no-adapter simulation; both revisions'
+source and test hashes are recorded in [the manifest](three-codes-lines-2026-10/manifest.json).
 
 Both captures use installed Chromium 143.0.7499.4 on an Apple M3 Pro, native WebGPU, the same 391 ×
 843 viewport, requested DPR 2.625, default QR texts and recipe, front camera, manual clock,
@@ -107,6 +107,10 @@ cases `Picture QR: the ripple keeps every module's picture colors` and
 `the Damage lab: tapped damage lands where the tap says`. Their assertions were not edited. The
 complete suite and an actual Linux root/SwiftShader run remain for the Operator; default-config
 inheritance and the safe native fallback were checked locally.
+
+Final focused checks passed all ten task cases on the committed head, followed by the forced
+no-adapter rendering case. The default repository configuration also passed all nine CPU-only
+bounds/Stage cases without launching a browser.
 
 ## Commands and resource limits
 
