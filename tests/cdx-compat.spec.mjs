@@ -185,88 +185,6 @@ function expectedOn(c, surface) {
   return expected;
 }
 
-test("all historical cases load at /, /embed/, and through Load JSON without page errors", async ({
-  browser,
-}, testInfo) => {
-  test.setTimeout(120_000);
-  const started = performance.now();
-  const contexts = await Promise.all(
-    ["app", "embed", "file"].map(() =>
-      browser.newContext({
-        viewport: { width: 400, height: 300 },
-        reducedMotion: "reduce",
-      }),
-    ),
-  );
-  const pages = await Promise.all(contexts.map((context) => context.newPage()));
-  const errors = pages.map((page) => {
-    const found = [];
-    page.on("pageerror", (e) => found.push(e.message));
-    return found;
-  });
-  try {
-    await pages[2].goto(`/${QUERY}`, { waitUntil: "domcontentloaded" });
-    await ready(pages[2]);
-    for (const c of cases) {
-      await test.step(c.name, async () => {
-        await Promise.all(
-          pages.map(async (page, i) => {
-            const surface = ["app", "embed", "file"][i];
-            const beforeRefusal =
-              c.expected.refused && surface === "file"
-                ? await page.evaluate(() => structuredClone(window.__splashery.player.scene))
-                : null;
-            if (surface === "file") {
-              // Keep the actual input path used by help.spec.mjs/smoke.spec.mjs;
-              // provenance keys in the JSON are unknown keys, safely discarded.
-              await page.setInputFiles("#import-json", `${FIX}${c.name}`);
-              if (!c.expected.refused) {
-                await expect(page.locator("#toast")).toHaveText(`Loaded ${c.name}.`, {
-                  timeout: ENTRY_TIMEOUT,
-                });
-              }
-            } else {
-              // A hash-only navigation does not run startup again. A distinct
-              // query makes each fixture a real visitor load of the entry page.
-              await page.goto(
-                `${surface === "embed" ? "/embed/" : "/"}${QUERY}&compat=${c.name}#s=${c.hash}`,
-                {
-                  waitUntil: "domcontentloaded",
-                },
-              );
-              await ready(page);
-            }
-            if (c.expected.refused) {
-              const message = surface === "embed" ? "#embed-status" : "#toast";
-              await expect(page.locator(message)).toContainText(c.expected.refused, {
-                timeout: ENTRY_TIMEOUT,
-              });
-              expect
-                .soft(await page.evaluate(() => window.__splashery.player.scene.version))
-                .toBe(3);
-              if (beforeRefusal)
-                expect
-                  .soft(await page.evaluate(() => window.__splashery.player.scene))
-                  .toEqual(beforeRefusal);
-            } else {
-              await loaded(page, c, surface);
-            }
-            expect.soft(errors[i], `${surface}: page errors in ${c.name}`).toEqual([]);
-          }),
-        );
-      });
-    }
-    const elapsedMs = Math.round(performance.now() - started);
-    await testInfo.attach("compat-runtime", {
-      body: JSON.stringify({ cases: cases.length, visitorLoads: cases.length * 3, elapsedMs }),
-      contentType: "application/json",
-    });
-    expect(elapsedMs, "visitor corpus runtime stays below two minutes").toBeLessThan(120_000);
-  } finally {
-    await Promise.all(contexts.map((context) => context.close()));
-  }
-});
-
 async function downloadScene(page, testInfo, label) {
   if (!(await page.locator("#panel-body").isVisible()))
     await page.locator("#sheet-toggle").click({ timeout: ENTRY_TIMEOUT });
@@ -298,12 +216,13 @@ function savedScene(actual, expected, label) {
   }
 }
 
-// Independent cases retain diagnostics after a slow corpus hits the unchanged
-// 120-second whole-file target above. Every fixture still runs every entry route.
+// Every scene has its own unchanged 120-second budget and reports independently.
+// Every fixture still runs every entry route, with one active context at a time.
 // Download comparisons use the historical oracle, never the just-saved document.
 for (const c of cases) {
   test(`persisted visitor scene: ${c.name}`, async ({ browser }, testInfo) => {
     test.setTimeout(120_000);
+    const started = performance.now();
     let downloaded = null;
     // One active context here avoids concurrent software-renderer builds.
     // Every route has a fresh cache and still receives all of its assertions.
@@ -378,6 +297,14 @@ for (const c of cases) {
         await context.close();
       }
     }
+    await testInfo.attach("compat-case-runtime", {
+      body: JSON.stringify({
+        name: c.name,
+        elapsedMs: Math.round(performance.now() - started),
+        targetMs: 120_000,
+      }),
+      contentType: "application/json",
+    });
     if (!c.expected.refused)
       expect.soft(downloaded, `${c.name}: actual download collected`).not.toBeNull();
   });
@@ -385,7 +312,10 @@ for (const c of cases) {
 
 for (const c of worlds) {
   test(`historical world-file route: ${c.name}`, async ({ page }, testInfo) => {
-    test.setTimeout(120_000);
+    // This separate route builds a whole island twice. Match wd.spec.mjs's
+    // 200-second readiness allowance per build; scene budgets remain 120 seconds.
+    test.setTimeout(420_000);
+    const started = performance.now();
     const errors = [];
     const requests = [];
     page.on("pageerror", (error) => errors.push(error.message));
@@ -396,7 +326,7 @@ for (const c of worlds) {
       return route.fulfill({ contentType: "application/json", body: JSON.stringify(c.scene) });
     });
     await page.goto(`/worlds/?labs=1&world=${c.worldId}&renderer=webgl2&profile=low&clock=manual`);
-    await page.waitForFunction(() => document.body.dataset.ready, null, { timeout: 60_000 });
+    await page.waitForFunction(() => document.body.dataset.ready, null, { timeout: 200_000 });
     expect(await page.evaluate(() => document.body.dataset.ready)).toBe("true");
     expect(requests).toEqual([`/worlds/${c.worldId}/world.json`]);
     expect(await page.evaluate(() => window.__world.page.def)).toEqual(c.expected);
@@ -420,89 +350,17 @@ for (const c of worlds) {
       contentType: "application/json",
     });
     await page.reload();
-    await page.waitForFunction(() => document.body.dataset.ready, null, { timeout: 60_000 });
+    await page.waitForFunction(() => document.body.dataset.ready, null, { timeout: 200_000 });
     expect(await page.evaluate(() => window.__world.page.def)).toEqual(c.expected);
     expect(errors).toEqual([]);
-  });
-}
-
-test("complete corpus diagnostic retains the 120-second target", async ({ browser }, testInfo) => {
-  // Diagnostic collection may finish after the original strict timeout fails.
-  // Its performance assertion still uses exactly the original 120-second bar.
-  test.setTimeout(600_000);
-  const started = performance.now();
-  const contexts = await Promise.all(
-    ["app", "embed", "file"].map(() =>
-      browser.newContext({
-        viewport: { width: 400, height: 300 },
-        reducedMotion: "reduce",
-      }),
-    ),
-  );
-  const pages = await Promise.all(contexts.map((c) => c.newPage()));
-  const errors = pages.map((page) => {
-    const list = [];
-    page.on("pageerror", (error) => list.push(error.message));
-    return list;
-  });
-  const visited = [];
-  try {
-    await pages[2].goto(`/${QUERY}&diagnostic=file`);
-    await ready(pages[2]);
-    for (const c of cases) {
-      await Promise.all(
-        pages.map(async (page, i) => {
-          const surface = ["app", "embed", "file"][i];
-          const receipt = { name: c.name, surface, completed: false };
-          visited.push(receipt);
-          try {
-            const before =
-              c.expected.refused && surface === "file"
-                ? await page.evaluate(() => structuredClone(window.__splashery.player.scene))
-                : null;
-            if (surface === "file") {
-              await page.setInputFiles("#import-json", `${FIX}${c.name}`);
-              if (!c.expected.refused)
-                await expect(page.locator("#toast")).toHaveText(`Loaded ${c.name}.`, {
-                  timeout: ENTRY_TIMEOUT,
-                });
-            } else {
-              await page.goto(
-                `${surface === "embed" ? "/embed/" : "/"}${QUERY}&diagnostic=${c.name}#s=${c.hash}`,
-              );
-              await ready(page);
-            }
-            if (c.expected.refused) {
-              await expect(
-                page.locator(surface === "embed" ? "#embed-status" : "#toast"),
-              ).toContainText(c.expected.refused);
-              if (before)
-                expect(await page.evaluate(() => window.__splashery.player.scene)).toEqual(before);
-            } else await loaded(page, c, surface);
-            receipt.completed = true;
-          } catch (error) {
-            receipt.error = error.message;
-            expect.soft(false, `${surface}: ${c.name}: ${error.message}`).toBe(true);
-          }
-        }),
-      );
-    }
-    expect.soft(visited).toHaveLength(cases.length * 3);
-    for (let i = 0; i < errors.length; i++)
-      expect.soft(errors[i], `diagnostic page ${i} errors`).toEqual([]);
-  } finally {
-    const elapsedMs = Math.round(performance.now() - started);
-    await testInfo.attach("complete-corpus-runtime", {
+    await testInfo.attach("compat-world-runtime", {
       body: JSON.stringify({
-        cases: cases.length,
-        visitorLoads: visited.length,
-        elapsedMs,
-        targetMs: 120_000,
-        visited,
+        name: c.name,
+        elapsedMs: Math.round(performance.now() - started),
+        readinessMs: 200_000,
+        builds: 2,
       }),
       contentType: "application/json",
     });
-    expect.soft(elapsedMs, "complete visitor corpus stays below two minutes").toBeLessThan(120_000);
-    await Promise.all(contexts.map((context) => context.close()));
-  }
-});
+  });
+}

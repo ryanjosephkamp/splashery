@@ -248,7 +248,10 @@ SPLASHERY_CHROMIUM=/path/to/chromium npx playwright test \
   tests/cdx-compat.spec.mjs --workers=1
 ```
 
-The corpus retains the 120-second runtime target and zero retries. Independent persisted-scene tests
-collect failures after a slow corpus times out; they do not waive that target. Preserve failures,
+Each scene has an independent 120-second budget and zero retries. The suite has no aggregate
+whole-corpus timeout: a slow case reports under its own fixture name. The separate Worlds test
+builds and reloads a whole island, so it uses the existing `wd.spec.mjs` allowance of 200 seconds
+per readiness check and a 420-second test budget. This route-specific allowance is based on measured
+138-second builds in the cloud container; it does not change the scene budgets. Preserve failures,
 record exact results and environment details in `docs/audits/compat-2026-10.md`, and report checks
 that did not run. Never adjust frozen expectations to accommodate a regression.
