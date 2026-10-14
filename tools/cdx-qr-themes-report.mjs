@@ -72,14 +72,19 @@ Birch branch, were added in two treatments each and tested with the same unchang
 The original SVG source is [cdx-qr-themes-art.mjs](../../tools/cdx-qr-themes-art.mjs).
 The generator takes a theme, motif, and variant; it never receives a URL, QR mask, or module grid.
 The subjects have broad shapes, quiet corners, and restrained detail, following
-[task 54's findings](sample-pictures-2026-10.md). Pattern backgrounds are made by code.
+[task 54's findings](sample-pictures-2026-10.md). The slight off-center composition is intentional:
+many motifs sit around (54, 52) in the 100-unit square, slightly right and below its center.
+The offsets and asymmetric shapes leave quiet space near the corners for the code's fixed
+finder patterns, helping the subject remain recognizable where those patterns cover the image.
+These positions are fixed in the original artwork and reused for every link; the QR grid keeps
+its normal position. Pattern backgrounds are made by code.
 Space-art is fictional illustration, labeled “imaginary art” in each choice; it is never a sky
 capture or scientific data. Celebrations have no text, logos, people, or real-country flags.
 All six source contact sheets and all six final phone sheets were visually inspected.
 
 All new assets are offered under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/)
 (deed opened October 14, 2026), credited “Made by Ryan with Codex (GPT-6).”
-No AI-made image was used. Each selected option says “code-made, CC0”; the About credit names
+All 48 shipping pictures are code-made; none is AI-made. Each selected option says “code-made, CC0”; the About credit names
 the maker, source, and license. Full records, hashes, generation notes, and tested links are in
 [tools/assets.json](../../tools/assets.json), under \`pictureQrSamples\`, and
 [CREDITS.md](../../CREDITS.md).
@@ -186,26 +191,44 @@ Each theme also compares the screening helper's RGBA exactly with the production
 
 ${verification.length ? `| Check | Method | Result |\n| --- | --- | --- |\n${verification.map((r) => `| ${r.check} | ${r.method} | ${r.result} |`).join("\n")}` : "Verification results are pending the final runs."}
 
-The existing-suite failures were checked against an isolated archive of main's sources
+The initial existing-suite failures were checked against an isolated archive of main's sources
 at \`c044dc9d\` (documentation merge \`d40261ee\` has identical runtime sources):
 
-- The broad kit test hits the existing circular Picture QR guard at its 8,000-splat budget,
+- \`tests/kit.spec.mjs:87\`, “every kit toy has a recipe that builds deterministically and fits the unit ball,”
+  hits the existing circular Picture QR guard at its 8,000-splat budget,
   using the unchanged Felt farm default. [Narrow CPU reproduction](qr-theme-packs-2026-10/baseline-circle.json).
-- The standard QR shared-builder hash is \`d98ad9f6…\`, rather than its recorded \`b3918a78…\`,
+- \`tests/qr4-craft.spec.mjs:142\`, “the QR code toy builds the very same splats from the shared builder,”
+  produces \`d98ad9f6…\`, rather than its recorded \`b3918a78…\`,
   on both baseline and feature under Node 24.19.0. [Hash reproduction](qr-theme-packs-2026-10/baseline-shared-builder.json).
-- The legacy Wildflowers test reads \`null\` at both stage scales after its flip, on baseline,
+- \`tests/qrc-picture.spec.mjs:119\`, “Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads,”
+  uses legacy Wildflowers and reads \`null\` at both stage scales after its flip, on baseline,
   full feature run, and isolated feature rerun. Its initial stage and PNG checks pass.
-- Reset everything leaves the France pattern on Jelly blob in the baseline and full feature
+- \`tests/smoke.spec.mjs:978\`, “the Toy tab has the essentials, and Reset everything takes a toy back to how it started,”
+  leaves the France pattern on Jelly blob in the baseline and full feature
   run; its isolated feature rerun passes. This result is inconsistent between runs.
   [Both browser reproductions](qr-theme-packs-2026-10/baseline-browser.json).
 
-These failures remain visible; no existing assertion was changed or skipped. All 59 new theme
+Wildflowers and Reset are not established flakes, and these earlier failures were not waived.
+No existing assertion was changed or skipped. All 59 new theme
 tests pass. Physical phone-camera and print measurements remain unmeasured.
 
 Main updates through \`11d83626\` were merged after the full runs, as required by the handback
 rules. Those upstream runtime edits only version the notebook's manual PDF reference and update
 its showcase byte estimate. QR encoding, rendering, controls, and scan inputs are unchanged.
 The task's diff against main contains no manual or existing-test edits.
+
+For the Operator's follow-up, current main \`6c3764ff\` was also merged into this branch.
+It includes the upstream engine change that lets recipes disable render-resolution adaptation
+within device profile caps. The exact unchanged Wildflowers and Reset cases both pass on an
+isolated archive of this current main (38.7 and 26.8 seconds). The circular QR guard still
+reproduces in a narrow Node build at 8,000 splats, and the exact shared-builder case still
+fails with the same two hashes. These current measurements supersede the older baseline for
+the two browser cases; they do not establish either case as a known flake.
+The same unchanged cases also pass on the updated PR branch (44.5 and 24.7 seconds).
+The focused feature run has **7 passed and 2 failed** in 5.8 minutes: both browser cases and
+five theme metadata/viewport checks pass; the broad kit guard and shared-builder hash still fail.
+The earlier browser failures' cause remains undetermined; no additional runtime fix was made.
+See [the Operator follow-up measurements](qr-theme-packs-2026-10/operator-recheck.json).
 
 ## Scope, deviations, and cuts
 

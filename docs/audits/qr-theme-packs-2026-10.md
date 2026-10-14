@@ -19,15 +19,20 @@ branch, were added in two treatments each and tested with the same unchanged cri
 SVG source is [cdx-qr-themes-art.mjs](../../tools/cdx-qr-themes-art.mjs). The generator takes a
 theme, motif, and variant; it never receives a URL, QR mask, or module grid. The subjects have broad
 shapes, quiet corners, and restrained detail, following
-[task 54's findings](sample-pictures-2026-10.md). Pattern backgrounds are made by code. Space-art is
-fictional illustration, labeled “imaginary art” in each choice; it is never a sky capture or
-scientific data. Celebrations have no text, logos, people, or real-country flags. All six source
-contact sheets and all six final phone sheets were visually inspected.
+[task 54's findings](sample-pictures-2026-10.md). The slight off-center composition is intentional:
+many motifs sit around (54, 52) in the 100-unit square, slightly right and below its center. The
+offsets and asymmetric shapes leave quiet space near the corners for the code's fixed finder
+patterns, helping the subject remain recognizable where those patterns cover the image. These
+positions are fixed in the original artwork and reused for every link; the QR grid keeps its normal
+position. Pattern backgrounds are made by code. Space-art is fictional illustration, labeled
+“imaginary art” in each choice; it is never a sky capture or scientific data. Celebrations have no
+text, logos, people, or real-country flags. All six source contact sheets and all six final phone
+sheets were visually inspected.
 
 All new assets are offered under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) (deed
-opened October 14, 2026), credited “Made by Ryan with Codex (GPT-6).” No AI-made image was used.
-Each selected option says “code-made, CC0”; the About credit names the maker, source, and license.
-Full records, hashes, generation notes, and tested links are in
+opened October 14, 2026), credited “Made by Ryan with Codex (GPT-6).” All 48 shipping pictures are
+code-made; none is AI-made. Each selected option says “code-made, CC0”; the About credit names the
+maker, source, and license. Full records, hashes, generation notes, and tested links are in
 [tools/assets.json](../../tools/assets.json), under `pictureQrSamples`, and
 [CREDITS.md](../../CREDITS.md).
 
@@ -381,42 +386,60 @@ output. Browser regressions exercise all 48 selected backgrounds with HTTP, the 
 and the longest query-string link, the actual picker, production scan check, and production PNG
 export. Each theme also compares the screening helper's RGBA exactly with the production PNG export.
 
-| Check                                 | Method                                                                          | Result                                                                                                                                                   |
-| ------------------------------------- | ------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Candidate layout screening            | Production CPU weave and jsQR; no mocks                                         | 138 candidates × 10 links × 2 checks: 2,760 passed.                                                                                                      |
-| Retained phone and print-focus matrix | Real Chromium/WebGL2 renders, decoded by jsQR                                   | 48 backgrounds × 10 links × 4 checks: 1,920 passed. Raw 900px diagnostic: 356/480.                                                                       |
-| Capture protocol                      | Real Chromium; compare decoded RGBA                                             | Three payloads byte-identical to the original task-54 helper; all six theme regressions also match the production PNG export.                            |
-| New theme regressions                 | Playwright: tests/cdx-qr-themes.spec.mjs; production CPU and real browser       | 59 passed, 0 failed (44.5 minutes). Includes all 48 backgrounds with three browser payloads, lazy requests, credits, and two viewport screenshots.       |
-| Existing regressions                  | Playwright: qr\*, smoke, help, unit, taps, kit, and hta; one worker             | 225 passed, 4 failed (1.4 hours). All four failing assertions also reproduce on the isolated main baseline; see details below.                           |
-| Isolated browser rechecks             | Exact unchanged qrc-picture and smoke cases, separately on baseline and feature | Baseline: 2 failed. Feature: Reset passed; Wildflowers post-flip scan failed. The reset outcome was inconsistent between runs.                           |
-| Picture QR build                      | node tools/check-packs.mjs qr-picture, after browser runs stopped               | Passed: 122,602 finite splats in 1,038 ms. Earlier concurrent runs exceeded the 1,500 ms timing threshold.                                               |
-| Asset licenses                        | node tools/nc-assets.mjs --check                                                | Passed: four existing NC assets remain tagged; no ND license. New backgrounds are original CC0.                                                          |
-| Formatting                            | npx prettier --check .                                                          | Clean.                                                                                                                                                   |
-| American English                      | node tools/us-english.mjs --diff, with all task files staged                    | No British spellings found.                                                                                                                              |
-| Artifact and code review              | Read-only independent code review, plus direct image inspection                 | Cache-matrix validation and skipped-variant reasons fixed. All 48 hashes/records, 480 CSV rows, six phone sheets, and both viewport screenshots checked. |
+| Check                                             | Method                                                                                                                                                  | Result                                                                                                                                                                                                                                                          |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Candidate layout screening                        | Production CPU weave and jsQR; no mocks                                                                                                                 | 138 candidates × 10 links × 2 checks: 2,760 passed.                                                                                                                                                                                                             |
+| Retained phone and print-focus matrix             | Real Chromium/WebGL2 renders, decoded by jsQR                                                                                                           | 48 backgrounds × 10 links × 4 checks: 1,920 passed. Raw 900px diagnostic: 356/480.                                                                                                                                                                              |
+| Capture protocol                                  | Real Chromium; compare decoded RGBA                                                                                                                     | Three payloads byte-identical to the original task-54 helper; all six theme regressions also match the production PNG export.                                                                                                                                   |
+| New theme regressions                             | Playwright: tests/cdx-qr-themes.spec.mjs; production CPU and real browser                                                                               | 59 passed, 0 failed (44.5 minutes). Includes all 48 backgrounds with three browser payloads, lazy requests, credits, and two viewport screenshots.                                                                                                              |
+| Existing regressions                              | Playwright: qr\*, smoke, help, unit, taps, kit, and hta; one worker                                                                                     | Initial run: 225 passed, 4 failed (1.4 hours). All four failing assertions also reproduce on the older isolated main baseline; see the current Operator follow-up results below.                                                                                |
+| Isolated browser rechecks                         | Exact unchanged qrc-picture and smoke cases, separately on baseline and feature                                                                         | Initial baseline: 2 failed. Initial feature rerun: Reset passed; Wildflowers post-flip scan failed. Current-main results are recorded separately in the Operator follow-up.                                                                                     |
+| Picture QR build                                  | node tools/check-packs.mjs qr-picture, after browser runs stopped                                                                                       | Passed: 122,602 finite splats in 1,038 ms. Earlier concurrent runs exceeded the 1,500 ms timing threshold.                                                                                                                                                      |
+| Asset licenses                                    | node tools/nc-assets.mjs --check                                                                                                                        | Passed: four existing NC assets remain tagged; no ND license. New backgrounds are original CC0.                                                                                                                                                                 |
+| Formatting                                        | npx prettier --check .                                                                                                                                  | Clean.                                                                                                                                                                                                                                                          |
+| American English                                  | node tools/us-english.mjs --diff, with all task files staged                                                                                            | No British spellings found.                                                                                                                                                                                                                                     |
+| Artifact and code review                          | Read-only independent code review, plus direct image inspection                                                                                         | Cache-matrix validation and skipped-variant reasons fixed. All 48 hashes/records, 480 CSV rows, six phone sheets, and both viewport screenshots checked.                                                                                                        |
+| Operator follow-up on current main and updated PR | Exact unchanged browser cases on isolated main 6c3764ff; exact four failing cases and five theme metadata/viewport checks on the updated feature branch | Current main: both browser cases pass; the narrow 8,000-splat circle guard and exact shared-builder hash mismatch persist. Updated feature: 7 passed, 2 failed (kit guard and shared-builder hash). Wildflowers and Reset both pass. See operator-recheck.json. |
 
-The existing-suite failures were checked against an isolated archive of main's sources at `c044dc9d`
-(documentation merge `d40261ee` has identical runtime sources):
+The initial existing-suite failures were checked against an isolated archive of main's sources at
+`c044dc9d` (documentation merge `d40261ee` has identical runtime sources):
 
-- The broad kit test hits the existing circular Picture QR guard at its 8,000-splat budget, using
-  the unchanged Felt farm default.
+- `tests/kit.spec.mjs:87`, “every kit toy has a recipe that builds deterministically and fits the
+  unit ball,” hits the existing circular Picture QR guard at its 8,000-splat budget, using the
+  unchanged Felt farm default.
   [Narrow CPU reproduction](qr-theme-packs-2026-10/baseline-circle.json).
-- The standard QR shared-builder hash is `d98ad9f6…`, rather than its recorded `b3918a78…`, on both
-  baseline and feature under Node 24.19.0.
-  [Hash reproduction](qr-theme-packs-2026-10/baseline-shared-builder.json).
-- The legacy Wildflowers test reads `null` at both stage scales after its flip, on baseline, full
-  feature run, and isolated feature rerun. Its initial stage and PNG checks pass.
-- Reset everything leaves the France pattern on Jelly blob in the baseline and full feature run; its
-  isolated feature rerun passes. This result is inconsistent between runs.
+- `tests/qr4-craft.spec.mjs:142`, “the QR code toy builds the very same splats from the shared
+  builder,” produces `d98ad9f6…`, rather than its recorded `b3918a78…`, on both baseline and feature
+  under Node 24.19.0. [Hash reproduction](qr-theme-packs-2026-10/baseline-shared-builder.json).
+- `tests/qrc-picture.spec.mjs:119`, “Picture QR in the browser: the splats read back, the PNG reads
+  back, and a tap ends on a code that reads,” uses legacy Wildflowers and reads `null` at both stage
+  scales after its flip, on baseline, full feature run, and isolated feature rerun. Its initial
+  stage and PNG checks pass.
+- `tests/smoke.spec.mjs:978`, “the Toy tab has the essentials, and Reset everything takes a toy back
+  to how it started,” leaves the France pattern on Jelly blob in the baseline and full feature run;
+  its isolated feature rerun passes. This result is inconsistent between runs.
   [Both browser reproductions](qr-theme-packs-2026-10/baseline-browser.json).
 
-These failures remain visible; no existing assertion was changed or skipped. All 59 new theme tests
-pass. Physical phone-camera and print measurements remain unmeasured.
+Wildflowers and Reset are not established flakes, and these earlier failures were not waived. No
+existing assertion was changed or skipped. All 59 new theme tests pass. Physical phone-camera and
+print measurements remain unmeasured.
 
 Main updates through `11d83626` were merged after the full runs, as required by the handback rules.
 Those upstream runtime edits only version the notebook's manual PDF reference and update its
 showcase byte estimate. QR encoding, rendering, controls, and scan inputs are unchanged. The task's
 diff against main contains no manual or existing-test edits.
+
+For the Operator's follow-up, current main `6c3764ff` was also merged into this branch. It includes
+the upstream engine change that lets recipes disable render-resolution adaptation within device
+profile caps. The exact unchanged Wildflowers and Reset cases both pass on an isolated archive of
+this current main (38.7 and 26.8 seconds). The circular QR guard still reproduces in a narrow Node
+build at 8,000 splats, and the exact shared-builder case still fails with the same two hashes. These
+current measurements supersede the older baseline for the two browser cases; they do not establish
+either case as a known flake. The same unchanged cases also pass on the updated PR branch (44.5 and
+24.7 seconds). The focused feature run has **7 passed and 2 failed** in 5.8 minutes: both browser
+cases and five theme metadata/viewport checks pass; the broad kit guard and shared-builder hash
+still fail. The earlier browser failures' cause remains undetermined; no additional runtime fix was
+made. See [the Operator follow-up measurements](qr-theme-packs-2026-10/operator-recheck.json).
 
 ## Scope, deviations, and cuts
 
