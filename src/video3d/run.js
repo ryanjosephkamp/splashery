@@ -110,7 +110,7 @@ export async function videoTo3D(file, opts = {}) {
   if (!gpu.ok) throw new Error(`${gpu.reason} Video to 3D trains on the graphics card through WebGPU: try a current Chrome, Edge, Safari or Firefox.`); // prettier-ignore
 
   // 1. Frames.
-  const opened = await openVideo(file);
+  const opened = await openVideo(file, { signal: opts.signal });
   let picks;
   let plan;
   try {
@@ -124,6 +124,7 @@ export async function videoTo3D(file, opts = {}) {
     progress({ stage: "frames", done: 0, total: plan.windows.length });
     picks = await grabFrames(opened, plan, {
       side: set.frameSide,
+      tries: 3,
       signal: opts.signal,
       onFrame: (d, n) => progress({ stage: "frames", done: d, total: n }),
     });
@@ -197,6 +198,7 @@ export async function videoTo3D(file, opts = {}) {
     mark("path");
     await s.seed();
     mark("seed");
+    if (opts.signal?.aborted) throw new DOMException("Stopped", "AbortError");
     if (opts.preview) {
       try {
         s.view.attach(opts.preview);
@@ -208,8 +210,10 @@ export async function videoTo3D(file, opts = {}) {
 
     // 5. Training.
     let last = { iter: 0, splats: s.trainer.n };
+    let lastPsnr = null;
     s.on("metrics", (m) => {
       last = m;
+      if (Number.isFinite(m.psnrTrain)) lastPsnr = { value: m.psnrTrain, iter: m.iter };
       progress({ stage: "train", done: m.iter, total: set.iters, note: `${m.splats} splats` });
     });
     progress({ stage: "train", done: 0, total: set.iters });
@@ -222,6 +226,7 @@ export async function videoTo3D(file, opts = {}) {
         over = true;
         clearInterval(duty);
         clearTimeout(limit);
+        opts.signal?.removeEventListener("abort", abortTraining);
         globalThis.document?.removeEventListener?.("visibilitychange", onVisible);
         resolve();
       };
@@ -229,10 +234,11 @@ export async function videoTo3D(file, opts = {}) {
         if (e.kind === "train-complete" || e.kind === "device-lost") end();
       });
       // Stop keeps what has been trained so far: training finishes early and the splats export.
-      opts.signal?.addEventListener("abort", () => {
+      const abortTraining = () => {
         halt = true;
         s.finish().then(end, end);
-      });
+      };
+      opts.signal?.addEventListener("abort", abortTraining, { once: true });
       // A phone trains in bursts with rests (about 3 s on, 2 s off) so it stays cool and
       // responsive, pauses while the tab is hidden (a phone takes the graphics card back from a
       // background tab), and finishes with what it has after a time limit.
@@ -288,9 +294,19 @@ export async function videoTo3D(file, opts = {}) {
       })
       .sort((a, b) => a.time - b.time);
     timings.total = Math.round((performance.now() - t0) / 100) / 10;
+    const exportCameras = s.trainer.camMeta.map((c) => ({
+      f: c.f,
+      fy: c.fy ?? c.f,
+      w: c.w,
+      h: c.h,
+      R: Array.from(c.R),
+      t: Array.from(c.t),
+    }));
     return {
       ply,
       cams,
+      exportCam0: exportCameras[0],
+      exportCameras,
       timings,
       stats: {
         tier,
@@ -300,7 +316,9 @@ export async function videoTo3D(file, opts = {}) {
         points: recon.points.length,
         splats: last.splats ?? s.trainer.n,
         iters: s.trainer.iter,
-        psnr: last.psnrTrain ? Math.round(last.psnrTrain * 10) / 10 : null,
+        psnr: lastPsnr ? Math.round(lastPsnr.value * 10) / 10 : null,
+        psnrAtIter: lastPsnr?.iter ?? null,
+        trainSide: Math.max(...exportCameras.map((c) => Math.max(c.w, c.h))),
         plyBytes: ply.length,
         retried,
         timedOut,
