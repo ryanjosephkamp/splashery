@@ -869,3 +869,102 @@ live-action source is introduced. New before/after films belong only on the fres
 Ground-truth reconstruction, physical phone frame rate, and perceptual audio quality are not claimed
 measured. Cold upload timing remains part of the Goal and will be stated explicitly even when it
 exceeds two seconds.
+
+<!-- mp3-mobile-follow-up -->
+
+### October 14 mobile sample-switch follow-up
+
+The
+[Operator's October 13 Android report](https://github.com/ryanjosephkamp/splashery/pull/560#issuecomment-6157456045)
+was reproduced against current main `e404cf36`, separately from this PR. Real Chromium 151 ran at
+390×844 and device scale factor 3, with an Android Chrome user agent, touch/mobile emulation, and
+CDP page CPU slowdown 4. Browser plugin not available; the existing Playwright setup was used. The
+main reproduction also ran with the same headed ANGLE/Mesa llvmpipe setup as the branch.
+
+**Cause:** main's `fillClip` creates a video element for any `clip.audio.url`, including the MP3
+soundtracks for Sintel, Bridge, and Machine. Those elements have no video picture. The fallback is
+guarded by `!video`, so their decoded frame-sheet pictures never reach `ReliefMesh.setColor`. A new
+grid gets no picture texture; a reused grid retains the previous picture. A direct Bunny → Machine
+switch reproduced the reported bunny picture: the selected clip was Machine, but the bound color
+source was `assets/toys/screen/bunny.mp4`. Sheet decoding and texture limits were not the cause: the
+picture frames existed, the textures were below the measured 8192 limit in the headless
+reproduction, and the failure happened before any own-frame upload.
+
+**Fix already on this branch:** the task 38/Round 3 clip path only makes a video copy for video
+URLs, uses the selected clip's own pixels whenever a video is not usable, clears a prior video on a
+clip change, and paints the selected frame at the first Sharp update. The native paused-video
+snapshot and paused Sharp keepalive remain in use. No runtime source edit is required by this
+follow-up; its production hash remains `94a18adf`. This PR is still unmerged, so the live site has
+the failing main path.
+
+[Public comparison screenshots and texture records](https://github.com/ryanjosephkamp/splashery/tree/codex/moving-photo-r3-clips/docs/reviews/moving-photo-r3/mobile-follow-up)
+show Machine selected with Bunny pictured on main, and Machine correctly pictured on this branch.
+They use the existing public footage and app UI.
+
+**New regression:** `tests/cdx-mp2-mobile.spec.mjs` follows every available Clip option, covering
+all nine branch samples, then repeated Bunny/Machine/Bridge changes and a delayed Sintel-sheet load
+that finishes after Machine has committed. The sheet request is held before real decoding; its
+eventual preview and completion must leave Machine pictured. It runs both the mobile and
+desktop-site emulated profiles at 390×844, DSF3, and page CPU-rate 4. It observes the real
+`setColor` and Canvas2D `drawImage` calls without replacing their behavior. The actual surface
+material must bind the selected texture. Stored-frame textures must exactly match the selected
+frame's bytes; native video snapshots must come from the selected video and exactly match an
+independent Canvas2D draw of that decoder's current picture, through one whole CPU or GPU conversion
+path. Direct video sources additionally need a decoded picture and a clock within 0.25 seconds of
+the clip. Each test context disposes its prototype observers and CDP throttle. The low-tier app
+render cap remains DPR1.5 despite the browser DSF3; page CPU slowdown does not throttle the worker.
+
+The same regression on main passed Bunny and Horse, then failed at Sintel with no color texture, no
+own-frame bytes, and no bound color sampler. The initial branch mobile run passed all nine samples
+and four repeated changes in 1.8 minutes. Both emulated modes passed those sequential checks in a
+separate 2/2 run lasting 4.85 minutes before the delayed-load check was added. The final
+delayed-load version passed both modes in the restarted task suite: 2/2 cases, 14 selected-picture
+checks per mode, and zero page errors.
+
+**Playback limit:** 12-second probes on Bunny and Machine observed matching frame/depth bytes on
+every drawn frame (main:37/37 and35/35; branch:14/14 and19/19). These were contended,
+software-rendered, page-CPU-rate-4 probes, with approximately 1.3–3.6 observed draws per second.
+They establish texture/depth correspondence, not smooth Android playback. The owner's physical phone
+and Brave were not available. The prior strict stability, startup, and incomplete-matrix issues
+remain; this follow-up does not claim the complete Goal or physical-phone shakiness is fixed.
+
+**Suite interruption:** `npm test -- --reporter=line,json` started all 2,256 repository cases, with
+one worker and zero configured retries. The managed workspace restart killed the process while case
+112 was running; there was no final JSON report. This is an incomplete invocation, not a
+complete-suite pass. The required task files were restarted unchanged, alongside the new mobile
+regression. All **199/199 task cases pass** in one serial run (47.30 minutes), with zero failures,
+skips, or configured retries. All 167 original cases in 16 spec files remain byte-identical to prior
+PR head `93077cf6`; the 32 added cases include the two new mobile modes. Generated tracked
+screenshot baselines were restored.
+
+| Spec file                 | Passed |
+| ------------------------- | -----: |
+| `cdx-mp2-decode.spec.mjs` |      7 |
+| `cdx-mp2-mobile.spec.mjs` |      2 |
+| `cdx-mp2-pixels.spec.mjs` |      7 |
+| `cdx-mp2-r3.spec.mjs`     |     16 |
+| `cdx-mp2.spec.mjs`        |     14 |
+| `cdx-stability.spec.mjs`  |     10 |
+| `live3-engine.spec.mjs`   |      4 |
+| `live3.spec.mjs`          |     11 |
+| `live5.spec.mjs`          |      5 |
+| `live6.spec.mjs`          |      3 |
+| `lv7-long.spec.mjs`       |      2 |
+| `phf-engine.spec.mjs`     |      5 |
+| `phf.spec.mjs`            |      7 |
+| `phf2.spec.mjs`           |      7 |
+| `psv.spec.mjs`            |      8 |
+| `psv2.spec.mjs`           |      6 |
+| `psv3.spec.mjs`           |     16 |
+| `smd-compare.spec.mjs`    |      3 |
+| `smd-moving.spec.mjs`     |     16 |
+| `smoke.spec.mjs`          |     50 |
+
+[Per-file test ledger](https://github.com/ryanjosephkamp/splashery/blob/codex/moving-photo-r3-clips/docs/reviews/moving-photo-r3/mobile-follow-up/task-suite.json)
+retains the start time, duration, counts, and retry setting. The earlier 197-case run remains a
+historical record above; these 199 cases include the two follow-up additions.
+
+Rule check: the same existing public sample footage is used. Identifiable people in Tears of Steel
+remain covered by the
+[Operator's explicit confirmation](https://github.com/ryanjosephkamp/splashery/pull/560#issuecomment-6130226869).
+No new visitor files are used, and the review-media branches remain unmerged.
