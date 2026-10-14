@@ -2,6 +2,7 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { deflateRawSync, gunzipSync } from "node:zlib";
 import { createScene } from "../src/state.js";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 
 test("opening gzip copies preserve every original byte", () => {
   const copies = JSON.parse(
@@ -223,7 +224,7 @@ test("the manual transfer overlaps PDF.js loading and keeps the original PDF pag
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
   let release;
   const held = new Promise((resolve) => (release = resolve));
-  await page.route("**/manual/tinkerers-manual.pdf.gz", async (route) => {
+  await page.route(`**/manual/${MANUAL_PDF}.gz`, async (route) => {
     await held;
     await route.continue();
   });
