@@ -56,8 +56,12 @@ Codex task 77 (docs/codex/77-ci-suite.md), which never opened a PR.
 - On Actions, run 2's report gave hh5-gems's tests lines 5 to 21 below where they are (133 for the
   crystal ball at 119); run 3 and local runs give the right lines. The cause is not found. The rerun
   finds a test by file and title, so it no longer depends on the line.
-- man5:201 still failed in run 3 on Inter alone; the fix after run 3 writes the cloud container's
-  fontconfig rule. Unconfirmed until run 4.
+- man5:201 is red on main for a real reason, which Actions now shows. With the sandbox and Inter in
+  place (run 4), the two prints match each other byte for byte, but not the shipped
+  `manual/tinkerers-manual-85d32b96193ea275.pdf`: "run tools/manual-pdf.mjs again: the shipped PDF
+  is out of date". A print in the cloud container (a scratch copy of the tool with the sandbox off)
+  differs from it too (7,984,645 bytes against 7,792,711). The fix is a fresh print on main by the
+  manual's owner, not this lane.
 
 ## For the Operator
 
@@ -70,19 +74,19 @@ failing test by itself in the same shard; ✓ passed alone, ✗ failed alone, bl
 | 2 (cffe051) |     13 | ~40 min | Every file timed; cdx-pics alone in shard 1 (36 min).          |
 | 3 (343bfe0) |     17 | ~44 min | Sandbox fixed; man5 then stopped on the missing Inter (fixed). |
 
-| Test                    | Run 1 | Run 2 | Run 3 | Reading                                                                                                                                                                                                 |
-| ----------------------- | ----- | ----- | ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| kit:87                  | ✗     | ✗     | ✗     | Known red on main ("too much detail for a circular picture on this device").                                                                                                                            |
-| man5:201                | ✗     | ✗     | ✗     | Known red. On Actions: AppArmor blocked Chromium's sandbox (fixed in run 3), then the runner lacked the container's Inter rule (fixed after run 3).                                                     |
-| bld:57                  | ✗     |       |       | This lane's own `ci-out/` folder; fixed in run 2.                                                                                                                                                       |
-| spg:138                 |       | ✗     | ✗     | Actions only: closing the context after the embed guide's live toy runs past 240 s. Passes in the cloud container (12 s alone, and the whole file on llvmpipe in 138 s). For its lane.                  |
-| ui3:50, ui3:129         | ✓     | ✓     | ✗     | Pause and resume with sound; failed alone in run 3. With sndc-engine:27, the audio-clock tests are unsteady on a busy runner. For its lane.                                                             |
-| sndc-engine:27          | ✗     | ✗     | ✓     | The same audio-clock family; passes in the cloud container. For its lane.                                                                                                                               |
-| scr2-engine:10          |       | ✗     |       | A held GIF frame; failed alone in run 2 only. Passes in the cloud container.                                                                                                                            |
-| cdx-mir:329             | ✗     | ✓     |       | A draw-time bound (25.6 ms against 24.05); load.                                                                                                                                                        |
-| smoke:734               |       |       |       | Passed in all three.                                                                                                                                                                                    |
-| tpg:205, ui4:42, phy:64 |       | ✓     | ✓     | Known flakes; passed alone.                                                                                                                                                                             |
-| others                  | ✓     | ✓     | ✓     | Passed alone: hh3-engine2:122, img-engine:85, ops-text:41, qrc-picture:119, cdx-mir:294, fx4-engine:79, ui2:361, hh5-gems:133/147, live5:63, hh4-tiny:206, phy-engine:90, hh4-space:147, chs-engine:11. |
+| Test                    | Run 1 | Run 2 | Run 3 | Reading                                                                                                                                                                                                                           |
+| ----------------------- | ----- | ----- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| kit:87                  | ✗     | ✗     | ✗     | Known red on main ("too much detail for a circular picture on this device").                                                                                                                                                      |
+| man5:201                | ✗     | ✗     | ✗     | Known red. On Actions, AppArmor blocked Chromium's sandbox (fixed in run 3), then the runner lacked the container's Inter rule (fixed in run 4). Now it fails for its real reason: the shipped PDF is out of date (Known issues). |
+| bld:57                  | ✗     |       |       | This lane's own `ci-out/` folder; fixed in run 2.                                                                                                                                                                                 |
+| spg:138                 |       | ✗     | ✗     | Actions only: closing the context after the embed guide's live toy runs past 240 s. Passes in the cloud container (12 s alone, and the whole file on llvmpipe in 138 s). For its lane.                                            |
+| ui3:50, ui3:129         | ✓     | ✓     | ✗     | Pause and resume with sound; failed alone in run 3. With sndc-engine:27, the audio-clock tests are unsteady on a busy runner. For its lane.                                                                                       |
+| sndc-engine:27          | ✗     | ✗     | ✓     | The same audio-clock family; passes in the cloud container. For its lane.                                                                                                                                                         |
+| scr2-engine:10          |       | ✗     |       | A held GIF frame; failed alone in run 2 only. Passes in the cloud container.                                                                                                                                                      |
+| cdx-mir:329             | ✗     | ✓     |       | A draw-time bound (25.6 ms against 24.05); load.                                                                                                                                                                                  |
+| smoke:734               |       |       |       | Passed in all three.                                                                                                                                                                                                              |
+| tpg:205, ui4:42, phy:64 |       | ✓     | ✓     | Known flakes; passed alone.                                                                                                                                                                                                       |
+| others                  | ✓     | ✓     | ✓     | Passed alone: hh3-engine2:122, img-engine:85, ops-text:41, qrc-picture:119, cdx-mir:294, fx4-engine:79, ui2:361, hh5-gems:133/147, live5:63, hh4-tiny:206, phy-engine:90, hh4-space:147, chs-engine:11.                           |
 
 Until the fragile tests above are steadied, expect a few ✗ on every run. Read the comment's "Alone"
 column: a ✗ that is not on this list is new and real.
