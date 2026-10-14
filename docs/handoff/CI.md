@@ -37,9 +37,11 @@ Codex task 77 (docs/codex/77-ci-suite.md), which never opened a PR.
   "Skia/PDF m141".
 - The checkout is the full history (`fetch-depth: 0`): `us-english --diff=origin/main` needs the
   merge base, and a live test runs `git show` on an older commit.
-- ffmpeg (cdx-v3d), Xvfb and Mesa's llvmpipe come from apt in each shard.
-- Artifacts live in `ci-out/` (ignored by git and prettier), not `.cache/`: upload-artifact leaves
-  out hidden folders.
+- ffmpeg (cdx-v3d), Xvfb, Mesa's llvmpipe and the cloud container's fonts (DejaVu, Inter,
+  Liberation, Noto Color Emoji; `tools/manual-pdf.mjs` stops on any other set, man5:201) come from
+  apt in each shard.
+- Reports go to `$RUNNER_TEMP/ci-out/`: outside the checkout, since bld:57 checks every top-level
+  folder against builders/REPO-MAP.md, and not under a dot folder, which upload-artifact leaves out.
 
 ## Known issues
 

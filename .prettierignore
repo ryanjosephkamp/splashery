@@ -5,7 +5,6 @@ tests/screenshots/
 test-results/
 playwright-report/
 .cache/
-ci-out/
 package-lock.json
 SPEC.md
 docs/SPEC-v1-planet-painter.md
