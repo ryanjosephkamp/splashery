@@ -76,8 +76,10 @@ function rerun(t, dir) {
     const out = path.join(dir, `${t.file}-${t.line}.json`);
     const env = { ...process.env, PLAYWRIGHT_JSON_OUTPUT_NAME: out };
     if (ON_SWIFTSHADER.has(t.file)) env.SPLASHERY_GL = "swiftshader";
-    // The line alone would run every test a loop declares on it; the title picks the one.
-    const args = ["playwright", "test", `tests/${t.file}.spec.mjs:${t.line}`, "-g", esc(t.name), "--workers=1", "--reporter=json", `--output=${path.join(dir, "results", `${t.file}-${t.line}`)}`]; // prettier-ignore
+    // By file and exact title, not by line: a line can name every test a loop declares on it, and
+    // the report's lines for hh5-gems came out shifted on Actions (133 for the test at 119). A
+    // file's titles are unique, and the grep runs over the whole title path, so " <title>$" picks one.
+    const args = ["playwright", "test", `tests/${t.file}.spec.mjs`, "-g", ` ${esc(t.name)}$`, "--workers=1", "--reporter=json", `--output=${path.join(dir, "results", `${t.file}-${t.line}`)}`]; // prettier-ignore
     const child = spawn("npx", args, { cwd: root, env, stdio: ["ignore", "ignore", "pipe"] });
     child.stderr.resume();
     child.on("close", () => {

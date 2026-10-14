@@ -17,8 +17,8 @@ GitHub's runners cost nothing, and no Claude session has to run the suite for a 
   display (`SPLASHERY_GL=llvmpipe`, as the Integrators run it), and WebGPU on SwiftShader. The files
   on the `swiftshader` list in `tools/suite.json` run on SwiftShader, and the `solo` files run alone
   at the end, as in a local run. Then `node tools/ci-report.mjs recheck` runs each failing test once
-  more, alone (its file, line and title). The tests and the config are the same as locally: no
-  retries, no extra skips.
+  more, alone (by its file and title). The tests and the config are the same as locally: no retries,
+  no extra skips.
 - **Summary**: merges the 16 shard reports with `node tools/ci-report.mjs summary`, writes them as
   the run's job summary, and posts them as **one PR comment** that it updates in place on each run.
   The job fails when any test failed or a spec file sent no report.

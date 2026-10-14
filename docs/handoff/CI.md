@@ -49,6 +49,10 @@ Codex task 77 (docs/codex/77-ci-suite.md), which never opened a PR.
 
 ## Known issues
 
+- On Actions, the report gave hh5-gems's tests lines 5 to 21 below where they are (133 for the
+  crystal ball at 119); locally the same file reports 119. The cause is not found yet. The rerun
+  finds a test by file and title, so it no longer depends on the line.
+
 - cdx-pics alone takes about 31 to 35 minutes, so a run can't finish faster than that however many
   shards there are. Splitting that file (or running its describe blocks apart) is what would bring a
   run near 20 minutes.
