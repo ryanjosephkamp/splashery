@@ -90,6 +90,10 @@ jobs:
         # Outside the checkout (bld.spec.mjs checks every top-level folder against REPO-MAP.md) and
         # not under a dot folder (upload-artifact leaves hidden files out).
         run: echo "OUT=$RUNNER_TEMP/ci-out/shard-${{ matrix.shard }}" >> "$GITHUB_ENV"
+      - name: Let Chromium's sandbox start
+        # Ubuntu 24.04's AppArmor blocks the user namespaces Chromium's sandbox needs; man5's PDF
+        # print (tools/manual-pdf.mjs) launches with the sandbox on.
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Start the virtual display
         run: |
           Xvfb :99 -screen 0 1920x1080x24 -nolisten tcp &
