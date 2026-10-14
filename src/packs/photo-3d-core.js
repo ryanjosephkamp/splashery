@@ -204,31 +204,51 @@ export function percentiles(d, a = 0.02, b = 0.98) {
 // takes the low-resolution depths around it, weighted by how near they lie and how alike
 // the photo's color is there and here (a joint bilateral filter), so a near object's outline
 // in the depth map lands on its outline in the photo instead of on a soft halo.
-export function upsampleDepth(dLo, dw, dh, guideLo, gx, gy, guideHi, sigmaColor = 0.09) {
+function depthAxis(length, size) {
+  const sp = 1 / (2 * 0.8 * 0.8);
+  const index = new Int32Array(size * 4),
+    spatial = new Float64Array(size * 4),
+    linear = new Float64Array(size * 4);
+  for (let i = 0; i < size; i++) {
+    const u = ((i + 0.5) * length) / size - 0.5,
+      start = Math.floor(u) - 1;
+    for (let k = 0; k < 4; k++) {
+      const distance = u - start - k,
+        p = i * 4 + k;
+      index[p] = clamp(start + k, 0, length - 1);
+      spatial[p] = Math.exp(-distance * distance * sp);
+      linear[p] = Math.max(0, 1 - Math.abs(distance));
+    }
+  }
+  return { index, spatial, linear };
+}
+
+export function upsampleDepth(
+  dLo,
+  dw,
+  dh,
+  guideLo,
+  gx,
+  gy,
+  guideHi,
+  sigmaColor = 0.09,
+  prepared = null,
+) {
   const out = new Float32Array(gx * gy);
   const inv = 1 / (2 * sigmaColor * sigmaColor);
-  const sp = 1 / (2 * 0.8 * 0.8);
   // Coordinates and the separable spatial Gaussian do not depend on color.
   // Compute them once per axis instead of repeating them for all 16 taps.
-  const axis = (length, size) => {
-    const index = new Int32Array(size * 4),
-      spatial = new Float64Array(size * 4),
-      linear = new Float64Array(size * 4);
-    for (let i = 0; i < size; i++) {
-      const u = ((i + 0.5) * length) / size - 0.5,
-        start = Math.floor(u) - 1;
-      for (let k = 0; k < 4; k++) {
-        const distance = u - start - k,
-          p = i * 4 + k;
-        index[p] = clamp(start + k, 0, length - 1);
-        spatial[p] = Math.exp(-distance * distance * sp);
-        linear[p] = Math.max(0, 1 - Math.abs(distance));
-      }
-    }
-    return { index, spatial, linear };
-  };
-  const ax = axis(dw, gx),
-    ay = axis(dh, gy);
+  const valid =
+    prepared?.dw === dw &&
+    prepared?.dh === dh &&
+    prepared?.gx === gx &&
+    prepared?.gy === gy &&
+    prepared?.guideLo === guideLo &&
+    prepared?.guideHi === guideHi &&
+    prepared?.sigmaColor === sigmaColor;
+  const ax = valid ? prepared.ax : depthAxis(dw, gx),
+    ay = valid ? prepared.ay : depthAxis(dh, gy);
+  let tap = 0;
   for (let j = 0; j < gy; j++) {
     for (let i = 0; i < gx; i++) {
       const q = (j * gx + i) * 3;
@@ -249,7 +269,9 @@ export function upsampleDepth(dLo, dw, dh, guideLo, gx, gy, guideHi, sigmaColor 
           const dg = guideLo[p + 1] - g;
           const db = guideLo[p + 2] - b;
           const ws = wy * ax.spatial[i * 4 + ii];
-          const w = ws * Math.exp(-(dr * dr + dg * dg + db * db) * inv);
+          const w = valid
+            ? prepared.weights[tap++]
+            : ws * Math.exp(-(dr * dr + dg * dg + db * db) * inv);
           sum += w * dLo[c];
           wsum += w;
           // the plain bilinear value, a fallback where the colors match nothing
@@ -392,11 +414,7 @@ export function sharpen(rgb, gx, gy, amount = SHARPEN) {
 //   depth   how deep the relief is, 0..1 (0.5 is the default)
 // Returns { n, gx, gy (the fine grid), aspect, relief (3n), flat (3n), sigma (n), rgb (3n), band (n), depth
 // and cellBand (gx by gy: each cell's depth and layer), gap, stats }.
-export function buildPhotoSplats(
-  photo,
-  depthMap,
-  { count = 100000, depth = 0.5, cut = CUT, keepFlat = false, sharpCells = count * 0.7 } = {},
-) {
+function photoLayout(photo, count) {
   // prettier-ignore
   const aspect = photo.w / photo.h;
   // The fine grid: a block of 2 x 2 fine cells is drawn as one splat, or as four where there is detail
@@ -420,16 +438,43 @@ export function buildPhotoSplats(
   }
   const gx = B * bx;
   const gy = B * by;
-  const sampled = resampleArea(photo, gx, gy);
+  return { aspect, levels, bx, by, gx, gy };
+}
+
+export function buildPhotoSplats(
+  photo,
+  depthMap,
+  {
+    count = 100000,
+    depth = 0.5,
+    cut = CUT,
+    keepFlat = false,
+    sharpCells = count * 0.7,
+    prepared = null,
+  } = {},
+) {
+  const colors = prepared?.photo === photo && prepared?.count === count ? prepared : null;
+  const { aspect, levels, bx, by, gx, gy } = colors || photoLayout(photo, count);
+  const sampled = colors?.sampled || resampleArea(photo, gx, gy);
   const { w: dw, h: dh } = depthMap;
-  const guideLo = resampleArea(photo, dw, dh);
+  const guideLo =
+    colors?.depthWidth === dw && colors?.depthHeight === dh
+      ? colors.guideLo
+      : resampleArea(photo, dw, dh);
   const dn = normalizeDepth(depthMap.d);
   const flatness = keepFlat ? reliefScale(...percentiles(depthMap.d)) : 1;
-  const rgb = keepFlat && flatness <= FLAT_KEEP ? sampled : sharpen(sampled, gx, gy);
+  const rgb =
+    keepFlat && flatness <= FLAT_KEEP ? sampled : colors?.sharpened || sharpen(sampled, gx, gy);
   if (flatness < 1) for (let i = 0; i < dn.length; i++) dn[i] = 0.5 + (dn[i] - 0.5) * flatness;
-  let d = upsampleDepth(dn, dw, dh, guideLo, gx, gy, rgb);
+  let d = upsampleDepth(dn, dw, dh, guideLo, gx, gy, rgb, 0.09, colors?.depthWeights);
   if (!(keepFlat && flatness <= FLAT_KEEP))
-    d = refineDepthEdges(d, photoEdgeGuide(photo, gx, gy), gx, gy, 3 * Math.max(gx / dw, gy / dh));
+    d = refineDepthEdges(
+      d,
+      colors?.edges || photoEdgeGuide(photo, gx, gy),
+      gx,
+      gy,
+      3 * Math.max(gx / dw, gy / dh),
+    );
   const minCells = Math.max(6, Math.round(MIN_PIECE * gx * gy));
   let m = links(d, gx, gy, cut);
   d = smoothOnSurface(d, m, gx, gy, 1);
@@ -790,4 +835,60 @@ export function adaptiveGrid({ gx, gy, levels, count, rgb, d, m }) {
   };
   for (let j = 0; j < ny[levels]; j++) for (let i = 0; i < nx[levels]; i++) walk(levels, i, j);
   return { n: o, x, y, size, split, levels: per };
+}
+
+// A worker can prepare these exact color operations while the independent depth
+// model runs. The bounded cache belongs to one immutable decoded photo.
+export function preparePhotoColors(
+  photo,
+  { count = 100000, depthWidth, depthHeight, maxWeightBytes = 64 * 1024 * 1024 } = {},
+) {
+  const layout = photoLayout(photo, count),
+    { gx, gy } = layout;
+  const model = modelSize(photo.w, photo.h);
+  const dw = depthWidth ?? model.dw,
+    dh = depthHeight ?? model.dh;
+  const sampled = resampleArea(photo, gx, gy),
+    guideLo = resampleArea(photo, dw, dh),
+    rgb = sharpen(sampled, gx, gy);
+  const result = {
+    ...layout,
+    photo,
+    count,
+    sampled,
+    guideLo,
+    sharpened: rgb,
+    edges: photoEdgeGuide(photo, gx, gy),
+    depthWidth: dw,
+    depthHeight: dh,
+    depthWeights: null,
+  };
+  if (gx * gy * 16 * 8 > maxWeightBytes) return result;
+  const ax = depthAxis(dw, gx),
+    ay = depthAxis(dh, gy),
+    weights = new Float64Array(gx * gy * 16),
+    sigmaColor = 0.09,
+    inv = 1 / (2 * sigmaColor * sigmaColor);
+  let tap = 0;
+  for (let j = 0; j < gy; j++)
+    for (let i = 0; i < gx; i++) {
+      const q = (j * gx + i) * 3,
+        r = rgb[q],
+        g = rgb[q + 1],
+        b = rgb[q + 2];
+      for (let jj = 0; jj < 4; jj++) {
+        const y = ay.index[j * 4 + jj] * dw,
+          wy = ay.spatial[j * 4 + jj];
+        for (let ii = 0; ii < 4; ii++) {
+          const p = (y + ax.index[i * 4 + ii]) * 3,
+            dr = guideLo[p] - r,
+            dg = guideLo[p + 1] - g,
+            db = guideLo[p + 2] - b;
+          const ws = wy * ax.spatial[i * 4 + ii];
+          weights[tap++] = ws * Math.exp(-(dr * dr + dg * dg + db * db) * inv);
+        }
+      }
+    }
+  result.depthWeights = { dw, dh, gx, gy, guideLo, guideHi: rgb, sigmaColor, ax, ay, weights };
+  return result;
 }
