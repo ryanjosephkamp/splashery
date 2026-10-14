@@ -148,3 +148,6 @@
 {"v":1,"t":"2026-10-14T21:52:36.858Z","harness":"claude-code","event":"tool","session":"92173e6c-6923-51fe-be99-921c2a63e7da","tool":"mcp__github__update_pull_request","cwd":"splashery"}
 {"v":1,"t":"2026-10-14T21:52:50.329Z","harness":"claude-code","event":"turn-end","session":"92173e6c-6923-51fe-be99-921c2a63e7da","cwd":"splashery"}
 {"v":1,"t":"2026-10-14T21:52:52.322Z","harness":"claude-code","event":"subagent-stop","session":"92173e6c-6923-51fe-be99-921c2a63e7da","agent":"ad4baf362695d9671"}
+{"v":1,"t":"2026-10-14T21:57:44.809Z","harness":"claude-code","event":"session-end","session":"92173e6c-6923-51fe-be99-921c2a63e7da","cwd":"splashery"}
+{"v":1,"t":"2026-10-14T23:02:07.186Z","harness":"claude-code","event":"session-start","session":"92173e6c-6923-51fe-be99-921c2a63e7da","cwd":"splashery"}
+{"v":1,"t":"2026-10-14T23:02:07.475Z","harness":"claude-code","event":"turn-start","session":"92173e6c-6923-51fe-be99-921c2a63e7da","cwd":"splashery"}
