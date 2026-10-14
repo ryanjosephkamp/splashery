@@ -1,0 +1,66 @@
+{
+  "format": "splashery-baked-manifest",
+  "version": 1,
+  "id": "toolse",
+  "title": "Coastal ruins, drone pass",
+  "source": {
+    "file": "toolse.ply",
+    "sha256": "87cb7ab74f1bb587492096666ead8fddb38e9de5def3863ceaf1719c6d03a4d9",
+    "splats": 59992,
+    "up": "y",
+    "trainedPlySha256": "57d7c8f838d42c3cbc02b0eedc87a8953d6636f810a565379d6b6514b3dbbe0a"
+  },
+  "bounds": {
+    "min": [-26.458820343017578, -36.35234451293945, 1.2132794857025146],
+    "max": [71.09930419921875, 1.3465032577514648, 118.5227279663086]
+  },
+  "parts": [{ "id": 0, "name": "body" }],
+  "defaultTier": 59992,
+  "tiers": [
+    {
+      "splats": 59992,
+      "bytes": 954976,
+      "files": [
+        {
+          "path": "assets/toolse-phone-59992-0.bkd.gz",
+          "splats": 59992,
+          "bytes": 954976,
+          "sha256": "d569673270d4a44c33ee604d905f84f142360d309a83bf45cc6bd2ebbcfbba70"
+        }
+      ],
+      "role": "phone",
+      "trainingSide": 640,
+      "sourcePlySha256": "57d7c8f838d42c3cbc02b0eedc87a8953d6636f810a565379d6b6514b3dbbe0a"
+    },
+    {
+      "splats": 89989,
+      "bytes": 1430342,
+      "files": [
+        {
+          "path": "assets/toolse-desktop-89989-0.bkd.gz",
+          "splats": 65536,
+          "bytes": 1040769,
+          "sha256": "29dd64cb1c9ef8f6a257351e980a86ed72a498072e3bfbb0b996ea16082c0978"
+        },
+        {
+          "path": "assets/toolse-desktop-89989-1.bkd.gz",
+          "splats": 24453,
+          "bytes": 389573,
+          "sha256": "df48ff307aa7018171a5627583f604a87fead9e8961678f379c7036af33a0001"
+        }
+      ],
+      "role": "desktop",
+      "trainingSide": 960,
+      "sourcePlySha256": "3a12d45e45e4a4a1ec4b50d2af88329dddb638f8fcebea8d455e5cc214d0e31a"
+    }
+  ],
+  "credit": {
+    "title": "Toolse castle in Estonia (Fall 2021) (20 seconds from 14 seconds)",
+    "author": "Sillerkiil",
+    "source": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "checked": "October 13, 2026",
+    "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6)."
+  }
+}

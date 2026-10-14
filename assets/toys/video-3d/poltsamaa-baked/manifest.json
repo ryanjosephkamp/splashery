@@ -1,0 +1,66 @@
+{
+  "format": "splashery-baked-manifest",
+  "version": 1,
+  "id": "poltsamaa",
+  "title": "Castle courtyard, orbited",
+  "source": {
+    "file": "poltsamaa.ply",
+    "sha256": "b3c9fa31bd629d0f75f28c9fca07bc2609ffea7198b632bc12e2ad442d21c583",
+    "splats": 59999,
+    "up": "y",
+    "trainedPlySha256": "ee717653f1ca726dd30ec07a797a4a045929927ed49afde9f4190e3ff5411b44"
+  },
+  "bounds": {
+    "min": [-5.741684436798096, -3.859959125518799, 0.7234641909599304],
+    "max": [7.967273235321045, 1.6642111539840698, 12.72248363494873]
+  },
+  "parts": [{ "id": 0, "name": "body" }],
+  "defaultTier": 59999,
+  "tiers": [
+    {
+      "splats": 59999,
+      "bytes": 984661,
+      "files": [
+        {
+          "path": "assets/poltsamaa-phone-59999-0.bkd.gz",
+          "splats": 59999,
+          "bytes": 984661,
+          "sha256": "95d8d54627256e9bc6c2ed4d17a4d2b6befe5bbe033238c51b71c34b37245620"
+        }
+      ],
+      "role": "phone",
+      "trainingSide": 640,
+      "sourcePlySha256": "ee717653f1ca726dd30ec07a797a4a045929927ed49afde9f4190e3ff5411b44"
+    },
+    {
+      "splats": 89994,
+      "bytes": 1476047,
+      "files": [
+        {
+          "path": "assets/poltsamaa-desktop-89994-0.bkd.gz",
+          "splats": 65536,
+          "bytes": 1074079,
+          "sha256": "294cf1098cd3cd16b809e2fad2bfbf5ab9f7a280449ce5de286f4f3e1ff10821"
+        },
+        {
+          "path": "assets/poltsamaa-desktop-89994-1.bkd.gz",
+          "splats": 24458,
+          "bytes": 401968,
+          "sha256": "6e453587c15d636203ae9d08a624576e11a7677336ce5eec94b69ff761e39cd4"
+        }
+      ],
+      "role": "desktop",
+      "trainingSide": 960,
+      "sourcePlySha256": "e35c3697b568af69a68fee4f5155d3fb14e06bbe882d8221d7a62736f7fa2a72"
+    }
+  ],
+  "credit": {
+    "title": "Drone video of Põltsamaa river and castle in Estonia (20 seconds from 24 seconds)",
+    "author": "Sillerkiil",
+    "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "checked": "October 13, 2026",
+    "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6)."
+  }
+}
