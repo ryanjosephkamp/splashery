@@ -87,6 +87,10 @@ merges.
 | 76-photo-3d-r4.md                 | Photo to 3D round 4: better fill behind objects, clean thin parts, faster (a Goal run)              | Photo to 3D, tests, clips                            | yes           |
 | 77-ci-suite.md                    | The test suite on GitHub Actions, sharded, for every PR                                             | a workflow, a short doc                              | no            |
 | 78-portfolio-toys.md              | Four splat toys from the owner's portfolio concepts, in four parallel parts (a to d)                | four labs toys, tests, clips                         | no            |
+| 79-picture-qr-fidelity.md         | Picture QR at its sharpest: a measured Goal run, every code still scanning                          | the QR toys, tools, report                           | yes           |
+| 80-picture-qr-fit.md              | Picture QR: crop your picture, a thinner circle border, round corner eyes                           | the QR toys, tests                                   | no            |
+| 81-powers-of-ten-labels.md        | Powers of ten: two distance labels checked and reworded                                             | labels, evidence, site page                          | yes           |
+| 82-toy-checkpoints.md             | Checkpoints and how-it-works docs for 18 favorite toys, in five parts (a to e)                      | docs only                                            | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.

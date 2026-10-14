@@ -24,6 +24,9 @@ Every later change to it must beat the checkpoint branch or be reverted.
 
 - `kit.spec.mjs:87` since #603: a circular QR recipe stops with "too much detail for a circular
   picture on this device" in the cloud browser. A fix task is offered to the owner.
+- `smoke.spec.mjs:734` (rigs) and `tpg.spec.mjs:205` (25 toy pages) fail alone on plain main in the
+  Operator's container every time since October 14, 2026 (found during #562's merge tests); they
+  were on the known-flake list before. To be investigated.
 - `man5.spec.mjs:201` only where Chromium's sandbox can't start (Claude cloud containers run as
   root): since #615 the PDF tool keeps the sandbox on. Keep it on; the owner chose to merge as is.
   Task 77's GitHub Actions run should cover it.
@@ -36,6 +39,11 @@ Splash Shop: 42 to 46, 49, 59 to 64, 67, and 68.
 
 **The Splash Shop** (`ryanjosephkamp/splashdot`) is read-only for Splashery sessions. Work comes
 back only through a promotion note the owner brings, then an Operator-written port.
+
+**Merged October 14 (this Operator):** #620 (Codex 75a to 75d, the depth lab pictures), #621 (#562,
+Video to 3D, sharper samples, labs, the owner's tentative good so he can try it), #624 (#611, Photo
+to 3D explained, and #602, the calibrated Studio scenes). Codex task files 79 to 82 (Picture QR
+fidelity and fit, Powers of ten labels, toy checkpoints) in this PR.
 
 **Next for the Operator:** review each Codex PR as it reports done (a Sonnet helper, one comment);
 merge labs work after its tests; send public changes to the owner first; write docs/STATUS.md after
