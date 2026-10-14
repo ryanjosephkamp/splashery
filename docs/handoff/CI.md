@@ -65,28 +65,35 @@ Codex task 77 (docs/codex/77-ci-suite.md), which never opened a PR.
 
 ## For the Operator
 
-Three runs on this PR, each 284 of 284 spec files and 2,435 tests. "Alone" is the rerun of the
-failing test by itself in the same shard; ✓ passed alone, ✗ failed alone, blank passed outright.
+Four runs on this PR, each 284 of 284 spec files and 2,435 tests. In the table, ✗ means failed and
+failed again alone, ✓ means failed but passed alone, and a blank means passed.
 
 | Run (head)  | Failed | Wall    | Notes                                                          |
 | ----------- | -----: | ------- | -------------------------------------------------------------- |
 | 1 (59e560d) |     10 | ~43 min | cdx-pics untimed; shared shard 12 (40 min).                    |
 | 2 (cffe051) |     13 | ~40 min | Every file timed; cdx-pics alone in shard 1 (36 min).          |
 | 3 (343bfe0) |     17 | ~44 min | Sandbox fixed; man5 then stopped on the missing Inter (fixed). |
+| 4 (dbfe081) |     10 | ~42 min | man5 prints; it fails only on the stale shipped PDF.           |
 
-| Test                    | Run 1 | Run 2 | Run 3 | Reading                                                                                                                                                                                                                           |
-| ----------------------- | ----- | ----- | ----- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| kit:87                  | ✗     | ✗     | ✗     | Known red on main ("too much detail for a circular picture on this device").                                                                                                                                                      |
-| man5:201                | ✗     | ✗     | ✗     | Known red. On Actions, AppArmor blocked Chromium's sandbox (fixed in run 3), then the runner lacked the container's Inter rule (fixed in run 4). Now it fails for its real reason: the shipped PDF is out of date (Known issues). |
-| bld:57                  | ✗     |       |       | This lane's own `ci-out/` folder; fixed in run 2.                                                                                                                                                                                 |
-| spg:138                 |       | ✗     | ✗     | Actions only: closing the context after the embed guide's live toy runs past 240 s. Passes in the cloud container (12 s alone, and the whole file on llvmpipe in 138 s). For its lane.                                            |
-| ui3:50, ui3:129         | ✓     | ✓     | ✗     | Pause and resume with sound; failed alone in run 3. With sndc-engine:27, the audio-clock tests are unsteady on a busy runner. For its lane.                                                                                       |
-| sndc-engine:27          | ✗     | ✗     | ✓     | The same audio-clock family; passes in the cloud container. For its lane.                                                                                                                                                         |
-| scr2-engine:10          |       | ✗     |       | A held GIF frame; failed alone in run 2 only. Passes in the cloud container.                                                                                                                                                      |
-| cdx-mir:329             | ✗     | ✓     |       | A draw-time bound (25.6 ms against 24.05); load.                                                                                                                                                                                  |
-| smoke:734               |       |       |       | Passed in all three.                                                                                                                                                                                                              |
-| tpg:205, ui4:42, phy:64 |       | ✓     | ✓     | Known flakes; passed alone.                                                                                                                                                                                                       |
-| others                  | ✓     | ✓     | ✓     | Passed alone: hh3-engine2:122, img-engine:85, ops-text:41, qrc-picture:119, cdx-mir:294, fx4-engine:79, ui2:361, hh5-gems:133/147, live5:63, hh4-tiny:206, phy-engine:90, hh4-space:147, chs-engine:11.                           |
+| Test            | 1   | 2   | 3   | 4   | Reading                                                                                                                                                                                                |
+| --------------- | --- | --- | --- | --- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| kit:87          | ✗   | ✗   | ✗   | ✗   | Known red on main ("too much detail for a circular picture on this device").                                                                                                                           |
+| man5:201        | ✗   | ✗   | ✗   | ✗   | Known red. On Actions, AppArmor blocked Chromium's sandbox (fixed in run 3), then Inter was missing (fixed in run 4). Now it fails for its real reason: the shipped PDF is out of date (Known issues). |
+| bld:57          | ✗   |     |     |     | This lane's own `ci-out/` folder; fixed in run 2.                                                                                                                                                      |
+| spg:138         |     | ✗   | ✗   | ✗   | Actions only: closing the context after the embed guide's live toy runs past 240 s. Passes in the cloud container (12 s alone; the whole file on llvmpipe in 138 s). For its lane.                     |
+| scr2-engine:10  |     | ✗   |     | ✗   | A held GIF frame. Actions only; passes in the cloud container. For its lane.                                                                                                                           |
+| ui2:361         |     | ✓   |     | ✗   | The computer's pad inks by distance. Actions only (22 s in the cloud container). For its lane.                                                                                                         |
+| ui3:50, ui3:129 | ✓   | ✓   | ✗   |     | Pause and resume with sound. With sndc-engine:27, the audio-clock tests are unsteady on a busy runner. For its lane.                                                                                   |
+| sndc-engine:27  | ✗   | ✗   | ✓   |     | The same audio-clock family; passes in the cloud container. For its lane.                                                                                                                              |
+| cdx-mir:329     | ✗   | ✓   |     | ✓   | A draw-time bound (25.6 ms against 24.05); load.                                                                                                                                                       |
+| tpg:205         |     | ✓   | ✓   | ✓   | Known flake; times out beside another file, passes alone.                                                                                                                                              |
+| smoke:734       |     |     |     |     | Passed in all four.                                                                                                                                                                                    |
 
-Until the fragile tests above are steadied, expect a few ✗ on every run. Read the comment's "Alone"
-column: a ✗ that is not on this list is new and real.
+Every other failure passed alone (load): chs-engine:11, hh3-engine2:122, img-engine:85,
+fx4-engine:79, ops-text:41, qrc-picture:119, cdx-mir:294, hh5-gems:133 and :147, live5:63,
+hh4-tiny:206, hh4-space:147, phy-engine:90, phy:64, ui4:42.
+
+The seven tests that failed alone on Actions with main's code (kit:87, man5:201, spg:138,
+scr2-engine:10, ui2:361, ui3:50 and :129, sndc-engine:27) are on the `known` list, so the comment
+marks them "(known on main)". Until their lanes steady them, expect a few ✗ on every run: a ✗ that
+is not marked is new and real.
