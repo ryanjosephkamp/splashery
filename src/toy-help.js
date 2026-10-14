@@ -24,7 +24,7 @@ export const TOY_HELP = {
   "specimen-neuron": {
     howTo: "Tap to fire a spike. In Toy, change the stain or turn Focus to merge the splats.",
     about:
-      "From a concept by Ryan Kamp. A procedural, textbook-style nerve cell, with branching dendrites, a cell body, five myelin sheaths, and terminal branches. The full desktop view shows 32,768 Gaussian splats; the phone profile uses 8,192.\n\nTap to send a visible wave through the cell and down the axon. Its waveform comes from the Hodgkin-Huxley squid axon model, slowed for viewing. This is an illustrative model, not a measured human neuron. Nissl, Golgi, and H&E recolor the same geometry. Lower Focus to merge nearby pairs, all the way to one splat: each level keeps the same mass, center, and covariance. The stain colors and glowing wave are visual aids. Procedural specimen made by Ryan with Codex (GPT-6), CC0; code MIT.",
+      "From a concept by Ryan Kamp. A textbook-style nerve cell with dendrites, a cell body, myelin sheaths, and terminal branches. At full Focus, the desktop high profile draws 32,768 splats; the phone low profile draws 8,192. The status counts all stored focus levels: 65,535 on desktop or 16,383 on phone. Only one level is drawn at a time.\n\nTap to send a visible wave down the axon. Its waveform uses the Hodgkin-Huxley squid axon model, slowed for viewing. This schematic is not a measured human neuron. Nissl, Golgi, and H&E recolor the cell. Lower Focus to merge pairs down to one splat, keeping mass, center, and covariance. Stains and the wave are visual aids. Made by Ryan with Codex (GPT-6), CC0; code MIT.",
   },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
