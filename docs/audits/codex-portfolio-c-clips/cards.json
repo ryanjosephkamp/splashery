@@ -1,0 +1,41 @@
+[
+  {
+    "id": "cdx-pfc-shape-morph-forms",
+    "lane": "Codex 78c",
+    "group": "portfolio",
+    "order": 1,
+    "name": "Shape morph: six forms",
+    "said": "Port the Overprint concept as a Splashery labs toy.",
+    "now": "One cloud re-forms between a word, the Lorenz attractor, a Klein bottle, a gyroid, a loop, and a QR code. The QR generator loads only for that form. Optional two-ink colors.",
+    "file": "shape-morph-forms.mp4",
+    "video": true,
+    "at": "2026-10-14",
+    "maker": "Made by Ryan with Codex (GPT-6)"
+  },
+  {
+    "id": "cdx-pfc-shape-morph-scatter",
+    "lane": "Codex 78c",
+    "group": "portfolio",
+    "order": 2,
+    "name": "Shape morph: scatter and re-form",
+    "said": "A splat cloud with visible motion at phone size.",
+    "now": "Every splat has its own flight direction, scatters on a tap, and returns to its position.",
+    "file": "shape-morph.mp4",
+    "video": true,
+    "at": "2026-10-14",
+    "maker": "Made by Ryan with Codex (GPT-6)"
+  },
+  {
+    "id": "cdx-pfc-shape-morph-push",
+    "lane": "Codex 78c",
+    "group": "portfolio",
+    "order": 3,
+    "name": "Shape morph: push and settle",
+    "said": "Dragging pushes the splats, and they settle back.",
+    "now": "A drag in the view plane pushes nearby splats. They spring back after release, with an adjustable push strength.",
+    "file": "shape-morph-push.mp4",
+    "video": true,
+    "at": "2026-10-14",
+    "maker": "Made by Ryan with Codex (GPT-6)"
+  }
+]
