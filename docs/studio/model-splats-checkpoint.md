@@ -140,8 +140,10 @@ steps.
 Tests: `tests/stm.spec.mjs` checks formats, missing files, surface coverage, texture/material
 colors, budgets, creases, up axis, wireframe, CLI export, tap targets, and browser file opening.
 `tests/stm-engine.spec.mjs` checks multiple-file input. `tests/smd-models.spec.mjs` covers the finer
-model display. Fixtures live under `tests/fixtures/stm/`. Shared Space recipes also use this
-converter and decoder through `src/packs/space-r2.js`.
+model display. `tests/ui5.spec.mjs` checks large-model limits, phone caps, simplification, and
+progress; `tests/ui5-engine.spec.mjs` checks the recipe's own file cap. Fixtures live under
+`tests/fixtures/stm/`. Shared Space recipes also use this converter and decoder through
+`src/packs/space-r2.js`.
 
 ## How to restore it
 
@@ -155,23 +157,24 @@ git switch -c restore-model-splats origin/main
 git checkout origin/claude/checkpoint-toys-2026-10-14 -- \
   src/packs/studio-models.js src/packs/studio-models-core.js assets/toys/model-splats \
   tools/model-to-splats.mjs tools/stm-samples.mjs tools/stm-fixtures.mjs \
-  tests/stm.spec.mjs tests/stm-engine.spec.mjs tests/smd-models.spec.mjs tests/fixtures/stm
+  tests/stm.spec.mjs tests/ui5.spec.mjs tests/ui5-engine.spec.mjs \
+  tests/stm-engine.spec.mjs tests/smd-models.spec.mjs tests/fixtures/stm
 git diff --cached --stat
 ```
 
 The restore is a future procedure; this documentation task does not change tests or tools. Check
 **Space toys using `src/packs/space-r2.js`** after converter or decoder changes: **Saturn V
 (`saturn-v`), SLS (`sls`), and Space shuttle (`space-shuttle`)** share these helpers. Find the exact
-current callers with `rg 'studio-models' src`, and run `tests/sp4.spec.mjs` plus their applicable
+current callers with `rg 'studio-models' src`, and run `tests/sp2.spec.mjs` plus their applicable
 Space specs too. Shared input/renderer changes require checking other file-opening and Kit toys; do
 not reset those engine files automatically. Copy only this toy's entries from shared catalogs and
 credit records. For a complete exact reproduction, use
 `git worktree add --detach /tmp/splashery-model-checkpoint 41b21e74e04ccca178b95ac02b4e5dc0e51b4b45`.
 
-Run the three named model test files with `SPLASHERY_CHROMIUM=<existing Chromium>`. Compare all
-seven samples, all three formats, loose multi-file models, both Show modes, both up axes, lighting
-on/off, file rejection, and the full lift/return at phone and desktop sizes before opening a draft
-PR.
+Run the five named model and UI test files with `SPLASHERY_CHROMIUM=<existing Chromium>`. Compare
+all seven samples, all three formats, loose multi-file models, both Show modes, both up axes,
+lighting on/off, file rejection, and the full lift/return at phone and desktop sizes before opening
+a draft PR.
 
 ## What it does best, measured limits, and later rounds
 
