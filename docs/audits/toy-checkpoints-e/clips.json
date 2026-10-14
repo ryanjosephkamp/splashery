@@ -1,0 +1,37 @@
+[
+  {
+    "id": "powers-of-ten",
+    "actionSeconds": 31.473,
+    "originalDuration": 39.4,
+    "trimStart": 7.427,
+    "duration": 31.96
+  },
+  {
+    "id": "smlm-microscope",
+    "actionSeconds": 5.491,
+    "originalDuration": 10.68,
+    "trimStart": 4.689,
+    "duration": 6
+  },
+  {
+    "id": "galaxy-box",
+    "actionSeconds": 10.929,
+    "originalDuration": 14.24,
+    "trimStart": 2.811,
+    "duration": 11.44
+  },
+  {
+    "id": "point-clouds",
+    "actionSeconds": 4.662,
+    "originalDuration": 9.16,
+    "trimStart": 3.998,
+    "duration": 5.16
+  },
+  {
+    "id": "volume-viewer",
+    "actionSeconds": 8.93,
+    "originalDuration": 12.76,
+    "trimStart": 3.33,
+    "duration": 9.44
+  }
+]

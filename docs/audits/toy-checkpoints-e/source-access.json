@@ -1,0 +1,138 @@
+[
+  {
+    "i": 0,
+    "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+    "status": 200,
+    "final": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+    "title": "Approximate Positions of the Planets"
+  },
+  {
+    "i": 1,
+    "url": "https://www.eso.org/public/images/eso0825a/",
+    "status": 200,
+    "final": "https://www.eso.org/public/images/eso0825a/",
+    "title": "Spiral galaxy Messier 83* | ESO"
+  },
+  {
+    "i": 2,
+    "url": "https://www.ebi.ac.uk/emdb/EMD-48329",
+    "status": 200,
+    "final": "https://www.ebi.ac.uk/emdb/EMD-48329",
+    "title": " EMDB < EMD-48329 "
+  },
+  {
+    "i": 3,
+    "url": "https://doi.org/10.5281/zenodo.5507427",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "i": 4,
+    "url": "https://doi.org/10.5281/zenodo.7233696",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "i": 5,
+    "url": "https://doi.org/10.5281/zenodo.7182237",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "i": 6,
+    "url": "https://doi.org/10.5281/zenodo.5510661",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "i": 7,
+    "url": "https://doi.org/10.5281/zenodo.5512636",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "i": 8,
+    "url": "https://doi.org/10.5281/zenodo.6861446",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "i": 9,
+    "url": "https://doi.org/10.1007/s00418-014-1192-3",
+    "status": 200,
+    "final": "https://link.springer.com/article/10.1007/s00418-014-1192-3",
+    "title": "A simple method to estimate the average localization precision of a single-molecule localization microscopy experiment | Histochemistry and Cell Biology | Springer Nature Link"
+  },
+  {
+    "i": 10,
+    "url": "https://zitmen.github.io/thunderstorm/",
+    "status": 200,
+    "final": "https://zitmen.github.io/thunderstorm/",
+    "title": "ThunderSTORM"
+  },
+  {
+    "i": 11,
+    "url": "https://flathub.flatironinstitute.org/fire",
+    "status": 200,
+    "final": "https://flathub.flatironinstitute.org/fire",
+    "title": "FlatHUB"
+  },
+  {
+    "i": 12,
+    "url": "https://arxiv.org/abs/1702.06148",
+    "status": 200,
+    "final": "https://arxiv.org/abs/1702.06148",
+    "title": "[1702.06148] FIRE-2 Simulations: Physics versus Numerics in Galaxy Formation"
+  },
+  {
+    "i": 13,
+    "url": "https://arxiv.org/abs/astro-ph/0309134",
+    "status": 200,
+    "final": "https://arxiv.org/abs/astro-ph/0309134",
+    "title": "[astro-ph/0309134] Stellar population synthesis at the resolution of 2003"
+  },
+  {
+    "i": 14,
+    "url": "https://registry.opendata.aws/usgs-lidar/",
+    "status": 200,
+    "final": "https://registry.opendata.aws/usgs-lidar/",
+    "title": "USGS 3DEP LiDAR Point Clouds - Registry of Open Data on AWS"
+  },
+  {
+    "i": 15,
+    "url": "https://www.usgs.gov/3d-elevation-program",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "i": 16,
+    "url": "https://nifti.nimh.nih.gov/nifti-1/documentation/nifti1fields",
+    "status": 200,
+    "final": "https://nifti.nimh.nih.gov/nifti-1/documentation/nifti1fields/",
+    "title": " NIfTI-1 Fields &mdash; Neuroimaging Informatics Technology Initiative "
+  },
+  {
+    "i": 17,
+    "url": "https://doi.org/10.5281/zenodo.2686726",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "i": 18,
+    "url": "https://doi.org/10.5281/zenodo.19021581",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "i": 19,
+    "url": "https://www.dicomstandard.org/current",
+    "status": 200,
+    "final": "https://www.dicomstandard.org/current",
+    "title": " Current Edition "
+  },
+  {
+    "url": "https://dicom.nema.org/medical/dicom/current/output/chtml/part03/sect_C.11.2.html",
+    "status": 200,
+    "title": "C.11.2\u00a0VOI LUT Module",
+    "bytes": 59222
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Otsu%27s_method",
+    "error": "HTTP Error 403: Forbidden"
+  },
+  {
+    "url": "https://www.asprs.org/wp-content/uploads/2019/07/LAS_1_4_r15.pdf",
+    "error": "HTTP Error 403: Forbidden"
+  }
+]

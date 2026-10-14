@@ -1,0 +1,74 @@
+[
+  {
+    "id": 5507427,
+    "status": 200,
+    "url": "https://zenodo.org/api/records/5507427",
+    "title": "Microtubules and clathrin in a Cos cell",
+    "license": {
+      "id": "cc-by-4.0"
+    }
+  },
+  {
+    "id": 7233696,
+    "status": 200,
+    "url": "https://zenodo.org/api/records/7233696",
+    "title": "Zola-3D NUP full nucleus",
+    "license": {
+      "id": "cc-by-4.0"
+    }
+  },
+  {
+    "id": 7182237,
+    "status": 200,
+    "url": "https://zenodo.org/api/records/7182237",
+    "title": "Xenopus laevis nuclear pore complex stained with WGA-ATTO520",
+    "license": {
+      "id": "cc-by-4.0"
+    }
+  },
+  {
+    "id": 5510661,
+    "status": 200,
+    "url": "https://zenodo.org/api/records/5510661",
+    "title": "Actin with PhalloidinAF647 in COS7",
+    "license": {
+      "id": "cc-by-4.0"
+    }
+  },
+  {
+    "id": 5512636,
+    "status": 200,
+    "url": "https://zenodo.org/api/records/5512636",
+    "title": "Mitochondrial protein TOM22 in COS7 cells",
+    "license": {
+      "id": "cc-by-4.0"
+    }
+  },
+  {
+    "id": 6861446,
+    "status": 200,
+    "url": "https://zenodo.org/api/records/6861446",
+    "title": "ZOLA-3D microtubules",
+    "license": {
+      "id": "cc-by-4.0"
+    }
+  },
+  {
+    "id": 2686726,
+    "status": 200,
+    "url": "https://zenodo.org/api/records/2686726",
+    "title": "Cone-Beam X-Ray CT Data Collection Designed for Machine Learning: Samples 1-8",
+    "license": {
+      "id": "cc-by-4.0"
+    }
+  },
+  {
+    "id": 19021581,
+    "status": 200,
+    "url": "https://zenodo.org/api/records/19021581",
+    "title": "MicroCT images of 3 early gar (Lepisosteus osseus) stages between 12.7mm and 21.7mm",
+    "license": {
+      "id": "cc-by-4.0"
+    }
+  }
+]

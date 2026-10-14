@@ -1,0 +1,134 @@
+Running 96 tests using 1 worker
+  ✓   1 [chromium] › tests/pot.spec.mjs:32:3 › the stops and their evidence (no browser) › every stop has its evidence, with the same label and size (66ms)
+  ✓   2 [chromium] › tests/pot.spec.mjs:44:3 › the stops and their evidence (no browser) › the size each label names is the stop's size, within its rounding (43ms)
+  ✓   3 [chromium] › tests/pot.spec.mjs:56:3 › the stops and their evidence (no browser) › the stops run from the largest to the smallest and cover the zoom (19ms)
+  ✓   4 [chromium] › tests/pot.spec.mjs:65:3 › the stops and their evidence (no browser) › the sky at the zoom's moment: the Sun, the Moon and the planets where they belong (12ms)
+  ✓   5 [chromium] › tests/pot.spec.mjs:109:3 › Powers of ten in the app › opens light: only the files of the scenes near home (under 8 MB) (14.9s)
+  ✓   6 [chromium] › tests/pot.spec.mjs:134:3 › Powers of ten in the app › opens at the garden with only the scenes near it, and labels them (9.2s)
+  ✓   7 [chromium] › tests/pot.spec.mjs:157:3 › Powers of ten in the app › the wheel zooms through the stops; the camera never moves (48.2s)
+  ✓   8 [chromium] › tests/pot.spec.mjs:181:3 › Powers of ten in the app › the slider goes to the galaxy and to the ribosome (11.8s)
+  ✓   9 [chromium] › tests/pot.spec.mjs:197:3 › Powers of ten in the app › a tap plays the journey: out from the garden first (36.3s)
+  ✓  10 [chromium] › tests/sci.spec.mjs:40:3 › the shelf › three labs toys on a Science shelf, each with a sound, a how-to and an About (12ms)
+  ✓  11 [chromium] › tests/sci.spec.mjs:55:3 › r2: zoom with the camera › the microscope and the galaxy zoom with a pinch or the wheel; their taps slice and peel (9ms)
+  ✓  12 [chromium] › tests/sci.spec.mjs:74:3 › r2: zoom with the camera › the free shader has no magnifier; it fades what is much nearer than the view's point (5ms)
+  ✓  13 [chromium] › tests/sci.spec.mjs:90:3 › crystal files › a CIF's cell and its U in Cartesian axes (aspirin's C1, worked by hand) (11ms)
+  ✓  14 [chromium] › tests/sci.spec.mjs:117:3 › crystal files › the conversion keeps an isotropic U isotropic in any cell (2ms)
+  ✓  15 [chromium] › tests/sci.spec.mjs:144:3 › crystal files › an mmCIF file and the PDB file of the same entry agree (crambin, 1EJG) (18ms)
+  ✓  16 [chromium] › tests/sci.spec.mjs:167:3 › crystal files › a CIF without anisotropic U gives spheres, with a note (8ms)
+  ✓  17 [chromium] › tests/sci.spec.mjs:174:3 › crystal files › a second CIF (paracetamol at 100 K) and the tags read by their full names (8ms)
+  ✓  18 [chromium] › tests/sci.spec.mjs:185:3 › crystal files › an ellipsoid's axes are the square roots of U's eigenvalues times the probability scale (13ms)
+  ✓  19 [chromium] › tests/sci.spec.mjs:224:3 › crystal files › the jiggle's noise has unit variance, so an atom wanders by its own U (4ms)
+  ✓  20 [chromium] › tests/sci.spec.mjs:236:3 › crystal files › the magnifier's tap point maps back where it came from (1ms)
+  ✓  21 [chromium] › tests/sci.spec.mjs:245:3 › crystal files › the thermal ellipsoids build in each look, finite and within the budget (325ms)
+  ✓  22 [chromium] › tests/sci.spec.mjs:267:3 › crystal files › every splat keeps the type it was packed with (atoms, bonds, one-Gaussian atoms) (97ms)
+  ✓  23 [chromium] › tests/sci.spec.mjs:286:3 › localizations › the .smlm sample reads (a zip with a manifest and two float32 tables) (53ms)
+  ✓  24 [chromium] › tests/sci.spec.mjs:304:3 › localizations › a ThunderSTORM CSV reads, and says what's missing (6ms)
+  ✓  25 [chromium] › tests/sci.spec.mjs:324:3 › localizations › each localization is a Gaussian as wide as its precision (σz along z) (268ms)
+  ✓  26 [chromium] › tests/sci.spec.mjs:343:3 › localizations › the samples: a second (a nucleus in 3D, precision from its Cramér–Rao bounds) and a precision filter (369ms)
+  ✓  27 [chromium] › tests/sci.spec.mjs:363:3 › localizations › budgets per tier: the microscope and the galaxy keep within each tier's count (944ms)
+  ✓  28 [chromium] › tests/sci.spec.mjs:378:3 › the galaxy › the galaxy file reads, and each particle has its kernel's spread (0.274 of its smoothing length) (620ms)
+  ✓  29 [chromium] › tests/sci.spec.mjs:407:3 › in the browser › nothing of the Science toys loads before one opens; each then builds (14.8s)
+  ✓  30 [chromium] › tests/sci3-engine.spec.mjs:23:1 › a select without groups is unchanged (13.8s)
+  ✓  31 [chromium] › tests/sci3-engine.spec.mjs:40:1 › choices with a group are listed under its heading, and picking one works (10.9s)
+  ✓  32 [chromium] › tests/sci3.spec.mjs:56:3 › structures (node) › 41 structures in seven groups, each with real anisotropic U and a CC0 credit (289ms)
+  ✓  33 [chromium] › tests/sci3.spec.mjs:75:3 › structures (node) › a PDB file's ellipsoids give back its ANISOU values (10⁻⁴ Å²) (53ms)
+  ✓  34 [chromium] › tests/sci3.spec.mjs:94:3 › structures (node) › a CIF's ellipsoids give back its U values (urea: a cell with right angles) (19ms)
+  ✓  35 [chromium] › tests/sci3.spec.mjs:109:3 › structures (node) › symmetry operations: parsing, and a copy's U is the same tensor turned (2ms)
+  ✓  36 [chromium] › tests/sci3.spec.mjs:124:3 › structures (node) › the unit cell: rock salt's 27 atoms, quartz's 3 SiO2, eigenvalues kept (21ms)
+  ✓  37 [chromium] › tests/sci3.spec.mjs:148:3 › structures (node) › a molecule on a symmetry element is completed (urea, CH4N2O); a whole one is unchanged (24ms)
+  ✓  38 [chromium] › tests/sci3.spec.mjs:157:3 › structures (node) › the B-DNA file is the duplex: both strands, each atom with its ANISOU (4ms)
+  ✓  39 [chromium] › tests/sci3.spec.mjs:169:3 › structures (node) › every structure builds as splats, minerals and salts as their unit cell (2.0s)
+  ✓  40 [chromium] › tests/sci3.spec.mjs:193:1 › the picker lists the structures under their seven groups (9.1s)
+  ✓  41 [chromium] › tests/sci3.spec.mjs:215:3 › microscopy (node) › NeNA recovers a known localization precision from consecutive frames (54ms)
+  ✓  42 [chromium] › tests/sci3.spec.mjs:241:3 › microscopy (node) › a column named frame_ (ShareLoc's ThunderSTORM export) is the frame (1ms)
+  ✓  43 [chromium] › tests/sci3.spec.mjs:246:3 › microscopy (node) › the four new microscopy sets load, each credited, CC BY 4.0, with its precision (652ms)
+  ✓  44 [chromium] › tests/sci3.spec.mjs:282:3 › cryo-EM maps (node) › each map's isosurface is at EMDB's recommended contour level (7.8s)
+  ✓  45 [chromium] › tests/sci3.spec.mjs:312:3 › cryo-EM maps (node) › the toy draws the map at EMDB's level by default, and the fitted model sits in it (3.0s)
+  ✓  46 [chromium] › tests/sci3.spec.mjs:353:3 › galaxies and the telescope (node) › each galaxy's gas and stars load, credited with FIRE's citation (688ms)
+  ✓  47 [chromium] › tests/sci3.spec.mjs:377:3 › galaxies and the telescope (node) › young stars are bluer and brighter than old ones (the filters' light) (1ms)
+  ✓  48 [chromium] › tests/sci3.spec.mjs:387:3 › galaxies and the telescope (node) › the telescope view: stars blurred by the seeing, dust, and an exposure that builds up (745ms)
+  ✓  49 [chromium] › tests/sci3.spec.mjs:421:3 › terrain (node) › each place's measured heights load, with the summits and valleys where they are (15ms)
+  ✓  50 [chromium] › tests/sci3.spec.mjs:436:3 › terrain (node) › a tidy contour interval (1ms)
+  ✓  51 [chromium] › tests/sci3.spec.mjs:441:3 › terrain (node) › terrain in a box: land, walls and a water sheet that rises to 45% of the relief (559ms)
+  ✓  52 [chromium] › tests/sci3.spec.mjs:472:3 › terrain (node) › the contour lab: at most 14 layers, each its own part, lifted apart by the tap (343ms)
+  ✓  53 [chromium] › tests/vol.spec.mjs:56:56 › reading volumes › DICOM series (shuffled names): the phantom with its size, spacing and values (8ms)
+  ✓  54 [chromium] › tests/vol.spec.mjs:56:56 › reading volumes › DICOM series in a zip: the phantom with its size, spacing and values (8ms)
+  ✓  55 [chromium] › tests/vol.spec.mjs:56:56 › reading volumes › DICOM multi-frame: the phantom with its size, spacing and values (2ms)
+  ✓  56 [chromium] › tests/vol.spec.mjs:56:56 › reading volumes › DICOM RLE Lossless: the phantom with its size, spacing and values (3ms)
+  ✓  57 [chromium] › tests/vol.spec.mjs:56:56 › reading volumes › NIfTI-1: the phantom with its size, spacing and values (3ms)
+  ✓  58 [chromium] › tests/vol.spec.mjs:56:56 › reading volumes › NIfTI-1, gzipped: the phantom with its size, spacing and values (3ms)
+  ✓  59 [chromium] › tests/vol.spec.mjs:56:56 › reading volumes › NIfTI-2, big endian: the phantom with its size, spacing and values (2ms)
+  ✓  60 [chromium] › tests/vol.spec.mjs:56:56 › reading volumes › TIFF multi-page: the phantom with its size, spacing and values (3ms)
+  ✓  61 [chromium] › tests/vol.spec.mjs:72:3 › reading volumes › the DICOM series is sorted by the slices' places and turned head up (9ms)
+  ✓  62 [chromium] › tests/vol.spec.mjs:95:3 › reading volumes › a NIfTI's sform gives the same turn as the DICOM files (1ms)
+  ✓  63 [chromium] › tests/vol.spec.mjs:100:3 › reading volumes › one DICOM slice in implicit VR reads as a single slice (1ms)
+  ✓  64 [chromium] › tests/vol.spec.mjs:105:3 › reading volumes › a stack of single TIFFs (PackBits and Deflate) in name order (11ms)
+  ✓  65 [chromium] › tests/vol.spec.mjs:112:3 › reading volumes › a raw volume read with the form (12ms)
+  ✓  66 [chromium] › tests/vol.spec.mjs:127:3 › reading volumes › big volumes are averaged down to fit, keeping their true size (2ms)
+  ✓  67 [chromium] › tests/vol.spec.mjs:148:3 › reading volumes › truncated or wrong files say plainly what went wrong (10ms)
+  ✓  68 [chromium] › tests/vol.spec.mjs:186:3 › reading volumes › compressed DICOM it can't read is named (1ms)
+  ✓  69 [chromium] › tests/vol.spec.mjs:190:3 › reading volumes › the zip reader lists the series (6ms)
+  ✓  70 [chromium] › tests/vol.spec.mjs:196:3 › the view › CT presets in Hounsfield units; others from the scan's histogram (65ms)
+  ✓  71 [chromium] › tests/vol.spec.mjs:218:3 › the view › spacing is honored: the anisotropic phantom keeps its true shape (28ms)
+  ✓  72 [chromium] › tests/vol.spec.mjs:240:3 › the view › the bone preset keeps only the bone, and the MIP is a flat picture (39ms)
+  ✓  73 [chromium] › tests/vol.spec.mjs:271:3 › the toy › a labs Studio toy, next to Point clouds, with help, a sound and a plan entry (5ms)
+  ✓  74 [chromium] › tests/vol.spec.mjs:284:3 › the toy › each sample fits the phone's budget, all volume splats (3.8s)
+  ✓  75 [chromium] › tests/vol.spec.mjs:305:3 › the toy › the tap steps through the presets; the drag and the sweep move the cut (382ms)
+  ✘  76 [chromium] › tests/vol.spec.mjs:346:3 › the toy › in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why (1.1m)
+  ✓  77 [chromium] › tests/vwr.spec.mjs:51:3 › splat files › a PLY opens with its splats (17ms)
+  ✓  78 [chromium] › tests/vwr.spec.mjs:58:3 › splat files › a .splat opens, matching the PLY (23ms)
+  ✓  79 [chromium] › tests/vwr.spec.mjs:63:3 › splat files › an SPZ (version 2) opens, turned from its right-up-back axes (25ms)
+  ✓  80 [chromium] › tests/vwr.spec.mjs:73:3 › splat files › a compressed PLY (from splat-transform) opens (17ms)
+  ✓  81 [chromium] › tests/vwr.spec.mjs:81:3 › splat files › a SOG (from splat-transform) opens (186ms)
+  ✓  82 [chromium] › tests/vwr.spec.mjs:90:3 › splat files › SPZ version 4 is refused with a clear message (10ms)
+  ✓  83 [chromium] › tests/vwr.spec.mjs:96:3 › splat files › every save format round-trips (54ms)
+  ✓  84 [chromium] › tests/vwr.spec.mjs:111:3 › splat files › splat-transform reads what the toolkit saves (314ms)
+  ✓  85 [chromium] › tests/vwr.spec.mjs:135:3 › splat edits › crop keeps exactly the splats inside the box (or outside it) (222ms)
+  ✓  86 [chromium] › tests/vwr.spec.mjs:150:3 › splat edits › the floater filter removes stray splats and keeps the surface (25ms)
+  ✓  87 [chromium] › tests/vwr.spec.mjs:171:3 › splat edits › shrink keeps the asked count, the most visible splats first (4ms)
+  ✓  88 [chromium] › tests/vwr.spec.mjs:185:3 › splat edits › the pipeline crops, filters and shrinks in that order (8ms)
+  ✓  89 [chromium] › tests/vwr.spec.mjs:217:3 › point cloud files › LAS 1.2 (point format 3) and LAS 1.4 (format 7) open (95ms)
+  ✓  90 [chromium] › tests/vwr.spec.mjs:227:3 › point cloud files › XYZ, PTS and a text PLY open (50ms)
+  ✓  91 [chromium] › tests/vwr.spec.mjs:243:3 › point cloud files › LAS, PLY and XYZ saves round-trip (109ms)
+  ✓  92 [chromium] › tests/vwr.spec.mjs:257:3 › point cloud files › crop and thin do what they say (394ms)
+  ✓  93 [chromium] › tests/vwr.spec.mjs:282:3 › point cloud files › colors by class, intensity and height, and a measured distance (3ms)
+  ✓  94 [chromium] › tests/vwr.spec.mjs:298:3 › the toys › both are labs toys on the Studio shelf, with help, sound and a tap (4ms)
+  ✓  95 [chromium] › tests/vwr.spec.mjs:309:3 › the toys › the toolkit opens a SOG, removes floaters, and saves a file that reads back (8.3s)
+  ✓  96 [chromium] › tests/vwr.spec.mjs:342:3 › the toys › Point clouds opens a LAZ in its worker, colors it, and measures two taps (11.0s)
+
+  1) [chromium] › tests/vol.spec.mjs:346:3 › the toy › in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why
+
+    TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.
+
+      297 |     expect(first.dicom).toBe("undefined");
+      298 |     const shown = async (re) => {
+    > 299 |       await page.waitForFunction((re) => new RegExp(re).test(document.querySelector("#vol-stats")?.textContent || ""), re.source, { timeout: 60000 }); // prettier-ignore
+          |                  ^
+      300 |       return page.evaluate(() => document.querySelector("#vol-stats").textContent);
+      301 |     };
+      302 |     await page.setInputFiles("#toy-input-file", fs.readdirSync(path.join(FIX, "dicom-series")).map((f) => path.join(FIX, "dicom-series", f))); // prettier-ignore
+        at shown (/workspace/splashery/tests/vol.spec.mjs:299:18)
+        at /workspace/splashery/tests/vol.spec.mjs:303:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/vol-the-toy-in-the-page-a--83c36-Toy-tab-a-bad-file-says-why-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/vol-the-toy-in-the-page-a--83c36-Toy-tab-a-bad-file-says-why-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/vol-the-toy-in-the-page-a--83c36-Toy-tab-a-bad-file-says-why-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/vol-the-toy-in-the-page-a--83c36-Toy-tab-a-bad-file-says-why-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/vol.spec.mjs:346:3 › the toy › in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why
+  95 passed (4.8m)
+npm notice
+npm notice New major version of npm available! 11.9.0 -> 12.2.0
+npm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0
+npm notice To update run: npm install -g npm@12.2.0
+npm notice

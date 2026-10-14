@@ -1,0 +1,53 @@
+
+Running 11 tests using 1 worker
+
+(node:7408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7408) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/img-engine.spec.mjs:121:3 › toys without the volume kind draw as before (webgl2) (3.8m)
+  ✓   2 [chromium] › tests/img-engine.spec.mjs:170:3 › a volume is cut by its plane and shown by its density window (webgl2) (43.4s)
+  ✓   3 [chromium] › tests/img-engine.spec.mjs:121:3 › toys without the volume kind draw as before (webgpu) (1.9m)
+  ✓   4 [chromium] › tests/img-engine.spec.mjs:170:3 › a volume is cut by its plane and shown by its density window (webgpu) (51.2s)
+  ✓   5 [chromium] › tests/pot-engine.spec.mjs:59:1 › chunks build when asked, show where out.chunks puts them and go when dropped (24.6s)
+  ✓   6 [chromium] › tests/pot-engine.spec.mjs:141:1 › a toy with zoom: true takes the pinch, the wheel and a drag; others move the camera (21.4s)
+  ✓   7 [chromium] › tests/pot-engine.spec.mjs:185:1 › frameReaches frames the camera on the reaches, not on a backdrop far behind (12.4s)
+  ✓   8 [chromium] › tests/pot-engine.spec.mjs:222:1 › a legend item's ruler draws a scale bar as long as its size on screen (10.8s)
+  ✓   9 [chromium] › tests/sci-engine.spec.mjs:48:1 › a toy without a closeUp keeps the camera's limits and its near clip (9.3s)
+  ✓  10 [chromium] › tests/sci-engine.spec.mjs:60:1 › a recipe's closeUp lets the camera come that close; the near clip follows; a drag pans (14.0s)
+  ✘  11 [chromium] › tests/vol.spec.mjs:346:3 › the toy › in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why (1.1m)
+
+
+  1) [chromium] › tests/vol.spec.mjs:346:3 › the toy › in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why
+
+    TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.
+
+      297 |     expect(first.dicom).toBe("undefined");
+      298 |     const shown = async (re) => {
+    > 299 |       await page.waitForFunction((re) => new RegExp(re).test(document.querySelector("#vol-stats")?.textContent || ""), re.source, { timeout: 60000 }); // prettier-ignore
+          |                  ^
+      300 |       return page.evaluate(() => document.querySelector("#vol-stats").textContent);
+      301 |     };
+      302 |     await page.setInputFiles("#toy-input-file", fs.readdirSync(path.join(FIX, "dicom-series")).map((f) => path.join(FIX, "dicom-series", f))); // prettier-ignore
+        at shown (/workspace/splashery/tests/vol.spec.mjs:299:18)
+        at /workspace/splashery/tests/vol.spec.mjs:303:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/vol-the-toy-in-the-page-a--83c36-Toy-tab-a-bad-file-says-why-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/vol-the-toy-in-the-page-a--83c36-Toy-tab-a-bad-file-says-why-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/vol-the-toy-in-the-page-a--83c36-Toy-tab-a-bad-file-says-why-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/vol-the-toy-in-the-page-a--83c36-Toy-tab-a-bad-file-says-why-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  Slow test file: [chromium] › tests/img-engine.spec.mjs (7.3m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  1 failed
+    [chromium] › tests/vol.spec.mjs:346:3 › the toy › in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why
+  10 passed (9.9m)

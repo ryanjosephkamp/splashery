@@ -1,0 +1,248 @@
+{
+  "checkpoint": "41b21e74e04ccca178b95ac02b4e5dc0e51b4b45",
+  "browser": "151.0.7922.173",
+  "profile": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 1,
+    "isMobile": true,
+    "hasTouch": true
+  },
+  "url": "http://127.0.0.1:4173/?labs=1&renderer=webgl2&profile=low&adapt=off",
+  "method": "Fresh browser context per toy; time from chooseToy until loading ends, streamed chunks settle, and captureFrame completes. Asset bytes from local HTTP response bodies excluding thumbnails, after app boot. Rendered frameend events over 5 s while requesting renders and turning the camera (Powers of ten stays tilt-locked). Software WebGL2; no video during measurements. One run, no physical phone or WAN timing.",
+  "toys": [
+    {
+      "id": "powers-of-ten",
+      "loadMs": 3728.097321,
+      "assetBytes": 4248305,
+      "assets": {
+        "/assets/toys/powers-of-ten/aerial-2_0.jpg": 157989,
+        "/assets/toys/powers-of-ten/aerial-1_5.jpg": 85247,
+        "/assets/toys/maple-tree/maple-tree-lite.sog": 3883165,
+        "/assets/toys/powers-of-ten/micro-crown-m0_65.jpg": 57078,
+        "/assets/toys/powers-of-ten/micro-leaf-m1_15.jpg": 57907,
+        "/assets/toys/powers-of-ten/micro-leaf-m1_6.jpg": 6919
+      },
+      "state": {
+        "detail": {
+          "legend": "10⁰ m\n\nA garden bed with a young full-moon maple, about 2 m long.\n3D capture “Golden Fullmoon Maple” by Joshua Trapani, CC BY 4.0 (made elsewhere).\n20 cm",
+          "chunks": [
+            {
+              "id": "aerial-2.0",
+              "state": "ready"
+            },
+            {
+              "id": "aerial-1.5",
+              "state": "ready"
+            },
+            {
+              "id": "bed",
+              "state": "ready"
+            },
+            {
+              "id": "crown-0.65",
+              "state": "ready"
+            },
+            {
+              "id": "leaf-1.15",
+              "state": "ready"
+            },
+            {
+              "id": "leaf-1.6",
+              "state": "ready"
+            }
+          ]
+        },
+        "splats": 5404,
+        "canvas": {
+          "width": 390,
+          "height": 645
+        },
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      },
+      "render": {
+        "elapsedMs": 5002.599999999977,
+        "renderedFrames": 23,
+        "fps": 4.597609243193561,
+        "medianFrameMs": 207.5,
+        "p95FrameMs": 420.6000000000349
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": "smlm-microscope",
+      "loadMs": 1043.9514090000011,
+      "assetBytes": 2363699,
+      "assets": {
+        "/assets/toys/smlm-microscope/cos7-mt-clathrin.smlm": 2363699
+      },
+      "state": {
+        "detail": {
+          "name": "Microtubules and clathrin in a COS cell (a 12 µm square)",
+          "custom": false,
+          "n": 170401,
+          "kept": 170401,
+          "drawn": 82740,
+          "has3D": true,
+          "channels": ["clathrin", "microtubules"],
+          "notes": [],
+          "size": [11.7288994140625, 11.667599609375]
+        },
+        "splats": 84000,
+        "canvas": {
+          "width": 390,
+          "height": 645
+        },
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      },
+      "render": {
+        "elapsedMs": 5000.199999999953,
+        "renderedFrames": 49,
+        "fps": 9.799608015679464,
+        "medianFrameMs": 96.79999999998836,
+        "p95FrameMs": 139.29999999998836
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": "galaxy-box",
+      "loadMs": 946.6817589999991,
+      "assetBytes": 3053981,
+      "assets": {
+        "/assets/flags/flags.json": 53129,
+        "/assets/toys/galaxy-box/m12i-gas.bin": 3000852
+      },
+      "state": {
+        "detail": {
+          "n": 300000,
+          "drawn": 58200,
+          "half": 20,
+          "widen": 1.7274258860468497,
+          "widenRest": 4.747016468058268,
+          "nDense": 195000,
+          "simulation": "FIRE-2 m12i (res7100), snapshot 600 (z = 0)",
+          "emitted": 56707,
+          "first": 0
+        },
+        "splats": 58507,
+        "canvas": {
+          "width": 390,
+          "height": 645
+        },
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      },
+      "render": {
+        "elapsedMs": 5001.5,
+        "renderedFrames": 66,
+        "fps": 13.196041187643706,
+        "medianFrameMs": 78.30000000004657,
+        "p95FrameMs": 141.20000000001164
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": "point-clouds",
+      "loadMs": 1837.8409810000012,
+      "assetBytes": 3575167,
+      "assets": {
+        "/assets/toys/point-clouds/palace.laz": 3522038,
+        "/assets/flags/flags.json": 53129
+      },
+      "state": {
+        "detail": {
+          "error": "",
+          "stats": {
+            "count": 450000,
+            "bounds": {
+              "min": [-150.98500061035156, -150.3300018310547, -25.075000762939453],
+              "max": [150.98500061035156, 150.3300018310547, 25.075000762939453],
+              "size": [301.9700012207031, 300.6600036621094, 50.150001525878906]
+            },
+            "origin": [548558.755, 4184056.73, 26.615],
+            "fileBytes": 3522038,
+            "memory": 6750000,
+            "has": {
+              "intensity": true,
+              "cls": true,
+              "color": false
+            },
+            "classes": {
+              "1": 341200,
+              "2": 94869,
+              "9": 13519,
+              "20": 412
+            },
+            "density": 4.956476536683875,
+            "format": "laz",
+            "info": {
+              "version": "1.4",
+              "pointFormat": 6,
+              "scale": [0.01, 0.01, 0.01],
+              "system": "USGS 3DEP (public domain)",
+              "software": "Splashery tools/vwr-samples.mjs",
+              "crs": "WGS 84 / UTM zone 10N",
+              "compressed": true
+            },
+            "name": "Palace of Fine Arts, San Francisco (LAZ)"
+          },
+          "counts": {
+            "total": 450000,
+            "kept": 450000,
+            "cropped": 0,
+            "thinned": 0,
+            "drawn": 111663
+          },
+          "colorMode": "height",
+          "pins": [],
+          "distance": null
+        },
+        "splats": 111663,
+        "canvas": {
+          "width": 390,
+          "height": 645
+        },
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      },
+      "render": {
+        "elapsedMs": 5000.199999999953,
+        "renderedFrames": 30,
+        "fps": 5.9997600095996715,
+        "medianFrameMs": 162.39999999996508,
+        "p95FrameMs": 211.60000000003492
+      },
+      "errors": [],
+      "failures": []
+    },
+    {
+      "id": "volume-viewer",
+      "loadMs": 1257.218055999998,
+      "assetBytes": 501633,
+      "assets": {
+        "/assets/toys/walnut-ct/walnut.vol.gz": 501633
+      },
+      "state": {
+        "detail": "Walnut 1 (CWI): 113 × 115 × 142 voxels of 300 µm × 300 µm × 300 µm (X-ray CT, 8-bit).\nValues 0.0 to 255; window 77.1 to 255 (W 178, L 166).\n119,635 splats, one every 377 µm.",
+        "splats": 119635,
+        "canvas": {
+          "width": 390,
+          "height": 645
+        },
+        "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+      },
+      "render": {
+        "elapsedMs": 5000.199999999953,
+        "renderedFrames": 16,
+        "fps": 3.199872005119825,
+        "medianFrameMs": 333,
+        "p95FrameMs": 606.2000000000698
+      },
+      "errors": [],
+      "failures": []
+    }
+  ]
+}

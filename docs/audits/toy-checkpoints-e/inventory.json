@@ -1,0 +1,396 @@
+{
+  "microscope": [
+    {
+      "id": "sample",
+      "file": "assets/toys/smlm-microscope/cos7-mt-clathrin.smlm",
+      "bytes": 2363699,
+      "n": 170401,
+      "has3D": true,
+      "notes": []
+    },
+    {
+      "id": "nucleus",
+      "file": "assets/toys/smlm-microscope/nucleus-nup.smlm",
+      "bytes": 3552791,
+      "n": 149633,
+      "has3D": true,
+      "notes": []
+    },
+    {
+      "id": "pores",
+      "file": "assets/toys/smlm-microscope/pores-wga.smlm",
+      "bytes": 1045769,
+      "n": 126566,
+      "has3D": false,
+      "notes": ["The file has no z, so the localizations lie in one plane."]
+    },
+    {
+      "id": "actin",
+      "file": "assets/toys/smlm-microscope/actin-cos7.smlm",
+      "bytes": 1542829,
+      "n": 174903,
+      "has3D": false,
+      "notes": ["The file has no z, so the localizations lie in one plane."]
+    },
+    {
+      "id": "mitochondria",
+      "file": "assets/toys/smlm-microscope/mitochondria-tom22.smlm",
+      "bytes": 1866314,
+      "n": 219846,
+      "has3D": false,
+      "notes": ["The file has no z, so the localizations lie in one plane."]
+    },
+    {
+      "id": "microtubules3d",
+      "file": "assets/toys/smlm-microscope/microtubules-zola-3d.smlm",
+      "bytes": 3298040,
+      "n": 159785,
+      "has3D": true,
+      "notes": []
+    }
+  ],
+  "galaxy": [
+    {
+      "id": "m12i",
+      "gasBytes": 3000852,
+      "starsBytes": 2500712,
+      "gas": {
+        "format": "splashery-sph-gas-1",
+        "simulation": "FIRE-2 m12i (res7100), snapshot 600 (z = 0)",
+        "source": "https://users.flatironinstitute.org/~mgrudic/fire2_public_release/core/m12i_res7100/output/snapdir_600/",
+        "license": "CC BY 4.0",
+        "cite": "We use the publicly-available FIRE-2 cosmological zoom-in simulations (Wetzel et al. 2023, 2025), from the Feedback In Realistic Environments (FIRE) project, generated using the Gizmo code (Hopkins 2015) and the FIRE-2 physics model (Hopkins et al. 2018). m12i: Wetzel et al. (2016).",
+        "half": 20,
+        "halfY": 6,
+        "n": 300000,
+        "inBox": 2373980,
+        "nDense": 195000,
+        "hCut": 0.04470169522993246,
+        "widenRest": 2.7480290219116954,
+        "of": 57060074,
+        "center": [41792.13962202888, 44131.23323380143, 46267.68460522443],
+        "spin": [-0.49319986859210013, -0.21707854308271243, -0.8423958664154414],
+        "temperature": [10.000079966656132, 17119521.01561883]
+      },
+      "stars": {
+        "format": "splashery-stars-1",
+        "simulation": "FIRE-2 m12i (res7100), snapshot 600 (z = 0)",
+        "source": "https://users.flatironinstitute.org/~mgrudic/fire2_public_release/core",
+        "license": "CC BY 4.0",
+        "cite": "We use the publicly-available FIRE-2 cosmological zoom-in simulations (Wetzel et al. 2023, 2025), from the Feedback In Realistic Environments (FIRE) project, generated using the Gizmo code (Hopkins 2015) and the FIRE-2 physics model (Hopkins et al. 2018). m12i: Wetzel et al. (2016).",
+        "half": 20,
+        "halfY": 6,
+        "n": 250000,
+        "inBox": 11359119,
+        "center": [41792.13962202888, 44131.23323380143, 46267.68460522443],
+        "spin": [-0.49319986859210013, -0.21707854308271243, -0.8423958664154414],
+        "redshift": 0,
+        "age": 13.798847136129393
+      }
+    },
+    {
+      "id": "m12i-z2",
+      "gasBytes": 3000792,
+      "starsBytes": 2500752,
+      "gas": {
+        "format": "splashery-sph-gas-1",
+        "simulation": "FIRE-2 m12i (res7100), snapshot 172 (z = 2, 10.4 billion years ago)",
+        "source": "https://users.flatironinstitute.org/~mgrudic/fire2_public_release/core",
+        "license": "CC BY 4.0",
+        "cite": "We use the publicly-available FIRE-2 cosmological zoom-in simulations (Wetzel et al. 2023, 2025), from the Feedback In Realistic Environments (FIRE) project, generated using the Gizmo code (Hopkins 2015) and the FIRE-2 physics model (Hopkins et al. 2018). m12i: Wetzel et al. (2016).",
+        "half": 12,
+        "halfY": 12,
+        "n": 300000,
+        "inBox": 1357196,
+        "nDense": 195000,
+        "widenRest": 2.2285892216522885,
+        "of": 69203734,
+        "center": [14287.109289739792, 14150.686716453081, 14950.159899213171],
+        "spin": [-0.5495086577277464, -0.7869475423888876, -0.2806310756319414],
+        "redshift": 2.000000303146462
+      },
+      "stars": {
+        "format": "splashery-stars-1",
+        "simulation": "FIRE-2 m12i (res7100), snapshot 172 (z = 2, 10.4 billion years ago)",
+        "source": "https://users.flatironinstitute.org/~mgrudic/fire2_public_release/core",
+        "license": "CC BY 4.0",
+        "cite": "We use the publicly-available FIRE-2 cosmological zoom-in simulations (Wetzel et al. 2023, 2025), from the Feedback In Realistic Environments (FIRE) project, generated using the Gizmo code (Hopkins 2015) and the FIRE-2 physics model (Hopkins et al. 2018). m12i: Wetzel et al. (2016).",
+        "half": 12,
+        "halfY": 12,
+        "n": 250000,
+        "inBox": 640318,
+        "center": [14287.109289739792, 14150.686716453081, 14950.159899213171],
+        "spin": [-0.5495086577277464, -0.7869475423888876, -0.2806310756319414],
+        "redshift": 2.000000303146462,
+        "age": 3.372307820321327
+      }
+    },
+    {
+      "id": "m11h",
+      "gasBytes": 3000768,
+      "starsBytes": 2500728,
+      "gas": {
+        "format": "splashery-sph-gas-1",
+        "simulation": "FIRE-2 m11h (res7100), snapshot 600 (z = 0)",
+        "source": "https://users.flatironinstitute.org/~mgrudic/fire2_public_release/core",
+        "license": "CC BY 4.0",
+        "cite": "We use the publicly-available FIRE-2 cosmological zoom-in simulations (Wetzel et al. 2023, 2025), from the Feedback In Realistic Environments (FIRE) project, generated using the Gizmo code (Hopkins 2015) and the FIRE-2 physics model (Hopkins et al. 2018). m11h: El-Badry et al. (2018).",
+        "half": 8,
+        "halfY": 8,
+        "n": 300000,
+        "inBox": 351956,
+        "nDense": 195000,
+        "widenRest": 1.1433947867145746,
+        "of": 15054933,
+        "center": [39874.40302506907, 42037.4838381883, 46219.04546586024],
+        "spin": [0.16293880646431408, -0.0785980044245685, -0.9835005333239327],
+        "redshift": 2.846580748894212e-10
+      },
+      "stars": {
+        "format": "splashery-stars-1",
+        "simulation": "FIRE-2 m11h (res7100), snapshot 600 (z = 0)",
+        "source": "https://users.flatironinstitute.org/~mgrudic/fire2_public_release/core",
+        "license": "CC BY 4.0",
+        "cite": "We use the publicly-available FIRE-2 cosmological zoom-in simulations (Wetzel et al. 2023, 2025), from the Feedback In Realistic Environments (FIRE) project, generated using the Gizmo code (Hopkins 2015) and the FIRE-2 physics model (Hopkins et al. 2018). m11h: El-Badry et al. (2018).",
+        "half": 8,
+        "halfY": 8,
+        "n": 250000,
+        "inBox": 640445,
+        "center": [39874.40302506907, 42037.4838381883, 46219.04546586024],
+        "spin": [0.16293880646431408, -0.0785980044245685, -0.9835005333239327],
+        "redshift": 2.846580748894212e-10,
+        "age": 13.736315816539546
+      }
+    }
+  ],
+  "sizes": {
+    "assets/toys/powers-of-ten": [
+      {
+        "name": "aerial-1_5.jpg",
+        "bytes": 85247
+      },
+      {
+        "name": "aerial-2_0.jpg",
+        "bytes": 157989
+      },
+      {
+        "name": "aerial-2_5.jpg",
+        "bytes": 165564
+      },
+      {
+        "name": "aerial-3_0.jpg",
+        "bytes": 219780
+      },
+      {
+        "name": "aerial-3_5.jpg",
+        "bytes": 512758
+      },
+      {
+        "name": "aerial-4_0.jpg",
+        "bytes": 276126
+      },
+      {
+        "name": "aerial-4_5.jpg",
+        "bytes": 348814
+      },
+      {
+        "name": "aerial-5_0.jpg",
+        "bytes": 367548
+      },
+      {
+        "name": "aerial-5_5.jpg",
+        "bytes": 309768
+      },
+      {
+        "name": "aerial-6_0.jpg",
+        "bytes": 190438
+      },
+      {
+        "name": "earth-hemisphere.jpg",
+        "bytes": 720380
+      },
+      {
+        "name": "micro-cells-m3_8.jpg",
+        "bytes": 383546
+      },
+      {
+        "name": "micro-cells-m4_3.jpg",
+        "bytes": 154446
+      },
+      {
+        "name": "micro-cells-m4_8.jpg",
+        "bytes": 17117
+      },
+      {
+        "name": "micro-chloroplast-m5_5.jpg",
+        "bytes": 337579
+      },
+      {
+        "name": "micro-chloroplast-m6.jpg",
+        "bytes": 102775
+      },
+      {
+        "name": "micro-crown-m0_65.jpg",
+        "bytes": 57078
+      },
+      {
+        "name": "micro-leaf-m1_15.jpg",
+        "bytes": 57907
+      },
+      {
+        "name": "micro-leaf-m1_6.jpg",
+        "bytes": 6919
+      },
+      {
+        "name": "stars-500pc.bin",
+        "bytes": 978230
+      },
+      {
+        "name": "thumb.webp",
+        "bytes": 5498
+      }
+    ],
+    "assets/toys/point-clouds": [
+      {
+        "name": "golden-gate.laz",
+        "bytes": 3568831
+      },
+      {
+        "name": "meteor-crater.laz",
+        "bytes": 3635717
+      },
+      {
+        "name": "palace.laz",
+        "bytes": 3522038
+      },
+      {
+        "name": "thumb.webp",
+        "bytes": 25318
+      }
+    ],
+    "assets/toys/volume-viewer": [
+      {
+        "name": "gar.nii.gz",
+        "bytes": 1361785
+      },
+      {
+        "name": "thumb.webp",
+        "bytes": 7206
+      }
+    ],
+    "assets/toys/walnut-ct": [
+      {
+        "name": "thumb.webp",
+        "bytes": 7530
+      },
+      {
+        "name": "walnut.vol.gz",
+        "bytes": 501633
+      }
+    ],
+    "assets/toys/cryoem-map": [
+      {
+        "name": "aav-model.bin",
+        "bytes": 144901
+      },
+      {
+        "name": "aav.vol.gz",
+        "bytes": 2687550
+      },
+      {
+        "name": "apoferritin-model.bin",
+        "bytes": 15699
+      },
+      {
+        "name": "apoferritin.vol.gz",
+        "bytes": 902945
+      },
+      {
+        "name": "ribosome-model.bin",
+        "bytes": 47561
+      },
+      {
+        "name": "ribosome.vol.gz",
+        "bytes": 1318916
+      },
+      {
+        "name": "thumb.webp",
+        "bytes": 18612
+      }
+    ],
+    "assets/toys/nearby-stars": [
+      {
+        "name": "stars.json",
+        "bytes": 78755
+      },
+      {
+        "name": "thumb.webp",
+        "bytes": 60750
+      }
+    ],
+    "assets/toys/real-galaxies": [
+      {
+        "name": "m101.jpg",
+        "bytes": 135299
+      },
+      {
+        "name": "m51.jpg",
+        "bytes": 127158
+      },
+      {
+        "name": "m74.jpg",
+        "bytes": 163168
+      },
+      {
+        "name": "m83.jpg",
+        "bytes": 113595
+      },
+      {
+        "name": "thumb.webp",
+        "bytes": 36394
+      }
+    ],
+    "assets/toys/maple-tree": [
+      {
+        "name": "maple-tree-lite.sog",
+        "bytes": 3883165
+      },
+      {
+        "name": "maple-tree.sog",
+        "bytes": 14899748
+      },
+      {
+        "name": "thumb.webp",
+        "bytes": 23282
+      }
+    ],
+    "vendor/laz-perf": [
+      {
+        "name": "LICENSE",
+        "bytes": 11347
+      },
+      {
+        "name": "README.md",
+        "bytes": 524
+      },
+      {
+        "name": "laz-perf.js",
+        "bytes": 87452
+      },
+      {
+        "name": "laz-perf.wasm",
+        "bytes": 214351
+      }
+    ],
+    "vendor/dicom-parser": [
+      {
+        "name": "LICENSE",
+        "bytes": 1096
+      },
+      {
+        "name": "dicomParser.min.js",
+        "bytes": 32147
+      }
+    ]
+  }
+}
