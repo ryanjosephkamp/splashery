@@ -304,12 +304,15 @@ textarea {
    and hides while the sheet is open, like the name. */
 
 .help-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   position: fixed;
   top: 62px;
   left: 18px;
   z-index: 4;
   max-width: min(440px, calc(100% - var(--panel-w) - 60px));
-  padding: 7px 12px 8px;
+  padding: 0 12px;
   background: var(--paper);
   border: 1px solid var(--line);
   border-radius: var(--radius);
@@ -317,7 +320,7 @@ textarea {
   font-size: 14px;
   line-height: 1.35;
   opacity: 0;
-  transform: translateY(-4px);
+  transform: none;
   transition:
     opacity 450ms var(--ease),
     transform 450ms var(--ease);
@@ -329,7 +332,8 @@ textarea {
 }
 
 .help-line-about {
-  margin-left: 8px;
+  flex: none;
+  margin-left: 0;
   padding: 0;
   background: none;
   border: 0;
@@ -402,7 +406,7 @@ textarea {
     top: 74px;
     left: 14px;
     max-width: calc(100% - 28px);
-    padding: 6px 10px 7px;
+    padding: 0 10px;
     font-size: 13.5px;
   }
 
@@ -850,6 +854,10 @@ textarea {
   margin: 0 0 10px;
 }
 
+.shelf-empty:empty {
+  margin: 0;
+}
+
 .toy-card {
   display: flex;
   flex-direction: column;
@@ -890,9 +898,9 @@ textarea {
 .toy-card span {
   display: block;
   max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  text-align: center;
 }
 
 /* Grips: the panel's left edge sets its width, the bar under the shelf its
@@ -1851,12 +1859,9 @@ button.danger.armed {
 
   /* Names wrap onto two lines instead of ending in "…" after a few letters. */
   .toy-card span {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
+    display: block;
     min-height: 2.3em;
-    font-size: 10.5px;
+    font-size: 12px;
     line-height: 1.15;
     white-space: normal;
     overflow-wrap: anywhere;
@@ -3125,6 +3130,263 @@ body.focus #pop-toggle {
 }
 
 /* /Live r8 */
+
+/* Task 52: keep the existing palette and shapes, with usable control targets. */
+body.app button,
+body.embed button,
+body.app .button,
+body.app .file-button,
+body.embed .open-link {
+  min-width: 44px;
+  min-height: 44px;
+}
+
+body.app input:not([type="checkbox"]):not([type="file"]),
+body.app select,
+body.app textarea,
+body.app .check-row,
+body.app .effect-head label,
+body.app .check-inline,
+body.app .color-well {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+body.app .check-row,
+body.app .color-well,
+body.embed .open-link {
+  display: flex;
+  align-items: center;
+}
+
+body.app .tools button {
+  overflow: visible;
+  text-overflow: clip;
+  white-space: normal;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+body.app .tabs {
+  overflow-x: auto;
+}
+
+body.app .tabs [role="tab"] {
+  min-width: 44px;
+}
+
+.skip-link {
+  min-height: 44px;
+}
+
+body.app .view-button,
+body.app .sound-toggle,
+body.app .help-toggle,
+body.app .hands-button {
+  width: 44px;
+  height: 44px;
+}
+
+.stage-zoom {
+  position: fixed;
+  bottom: 116px;
+  right: calc(var(--panel-w) + 36px);
+  z-index: 4;
+  display: flex;
+  gap: 6px;
+}
+
+.stage-zoom button {
+  padding: 0;
+  background: var(--paper);
+  border-radius: 999px;
+  font-size: 20px;
+}
+
+body.focus .stage-zoom {
+  display: none;
+}
+
+.toy-keyboard summary {
+  min-height: 44px;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toy-keyboard h3 {
+  font-size: 14px;
+}
+
+.part-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(56px, 1fr));
+  gap: 4px;
+}
+
+.part-buttons button {
+  padding: 4px;
+  font-size: 13px;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.part-buttons [aria-pressed="true"] {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.part-buttons [aria-disabled="true"] {
+  opacity: 0.55;
+}
+
+@media (min-width: 761px) {
+  /* Keep the shelf's label container contract; its text can wrap inside it. */
+  .toy-card .toy-card-label {
+    white-space: nowrap;
+  }
+
+  .toy-card .toy-card-name {
+    white-space: normal;
+  }
+
+  body.app .dock {
+    flex: 0 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  body.app .panel-body {
+    flex: 1 0 150px;
+  }
+}
+
+@media (max-width: 760px) {
+  body.app .brand {
+    display: block;
+  }
+
+  body.app .view-button,
+  body.app .sound-toggle,
+  body.app .help-toggle {
+    top: 42px;
+  }
+
+  body.app .sound-toggle {
+    right: 8px;
+  }
+  body.app .help-toggle {
+    right: 55px;
+  }
+  body.app #turntable-toggle {
+    right: 102px;
+  }
+  body.app #tilt-toggle {
+    right: 149px;
+  }
+  body.app #view-reset {
+    right: 196px;
+  }
+  body.app #focus-toggle {
+    right: 243px;
+  }
+  body.app #flag-toggle {
+    right: 290px;
+  }
+  body.app #gallery-open {
+    right: 337px;
+  }
+
+  body.app .toy-status {
+    top: 94px;
+  }
+  body.app .toy-legend {
+    top: 150px;
+  }
+  body.app .live-indicator {
+    top: 142px;
+  }
+  body.app .flag-pop {
+    top: 92px;
+  }
+
+  body.app.sheet-open .brand,
+  body.app.shelf-grid .brand {
+    display: none;
+  }
+
+  .stage-zoom {
+    bottom: calc(var(--dock-h, 200px) + 12px);
+    left: 14px;
+    right: auto;
+  }
+
+  body.sheet-open .stage-zoom,
+  body.shelf-grid .stage-zoom {
+    display: none;
+  }
+
+  body.app .dock {
+    min-height: 0;
+  }
+
+  body.sheet-open .dock {
+    flex: 0 1 auto;
+    overflow-y: auto;
+  }
+
+  body.sheet-open .panel-body {
+    flex: 1 0 150px;
+  }
+
+  body.app .group h2 {
+    font-size: 13px;
+  }
+  body.app input:not([type="range"]),
+  body.app select,
+  body.app textarea {
+    font-size: 16px;
+  }
+  body.app .switch.labelled::before {
+    font-size: 11px;
+  }
+  body.app .help-line {
+    font-size: 14px;
+    max-width: calc(100% - 84px);
+  }
+  body.app .toy-card {
+    flex-basis: 80px;
+  }
+}
+
+@media (max-width: 388px) {
+  body.app #view-reset {
+    right: 8px;
+    top: 89px;
+  }
+  body.app #focus-toggle {
+    right: 55px;
+    top: 89px;
+  }
+  body.app #flag-toggle {
+    right: 102px;
+    top: 89px;
+  }
+  body.app #gallery-open {
+    right: 149px;
+    top: 89px;
+  }
+  body.app .toy-status {
+    top: 140px;
+  }
+  body.app .toy-legend {
+    top: 198px;
+  }
+  body.app .live-indicator {
+    top: 188px;
+  }
+}
 
 /* Short wide screens: the gallery must leave room for scrollable settings.
    Keep the full-height stage beside the panel, including after rotation. */
