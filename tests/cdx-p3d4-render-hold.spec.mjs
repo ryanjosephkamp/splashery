@@ -50,3 +50,70 @@ test("an opaque preview can hold covered draws while updates and explicit captur
   expect(result.nestedRenders).toBe(result.captureRenders);
   expect(result.resumedRenders).toBeGreaterThan(result.nestedRenders);
 });
+
+test("the photo preview releases its covered frame on handoff and when another toy opens", async ({
+  page,
+}) => {
+  await page.goto("/?renderer=webgl2&profile=low&adapt=off&labs=1");
+  await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+  await page.evaluate(async () => {
+    const { app, player: pl } = window.__splashery;
+    await app.chooseToy("photo-3d");
+    for (let i = 0; i < 3; i++) await pl.stage.captureFrame();
+    pl.setPaused(true);
+    const { photoPreview } = await import("/src/photo3d/preview.js");
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 16;
+    const g = canvas.getContext("2d");
+    g.fillStyle = "#d4b88c";
+    g.fillRect(0, 0, 16, 16);
+    const preview = await new Promise((resolve) => canvas.toBlob(resolve));
+    const photo = { w: 16, h: 16, data: g.getImageData(0, 0, 16, 16).data, preview };
+    window.__previewUpdates = 0;
+    window.__previewHandoff = [];
+    window.__previewAllowed = false;
+    window.__previewCanceled = 0;
+    pl.stage.onUpdate(() => {
+      window.__previewUpdates++;
+      pl.stage.requestRender(0);
+    });
+    pl.stage.app.on("postrender", () =>
+      window.__previewHandoff.push(!!document.querySelector("[aria-label='Photo preview']")),
+    );
+    window.__startPreview = () =>
+      photoPreview(
+        photo,
+        () => window.__previewCanceled++,
+        () => window.__previewAllowed,
+      );
+    window.__closePreview = window.__startPreview();
+  });
+  await expect(page.locator("[aria-label='Photo preview']")).toBeVisible();
+  await page.evaluate(() => {
+    window.__previewHandoff.length = 0;
+    window.__previewUpdates = 0;
+  });
+  await page.waitForFunction(() => window.__previewUpdates >= 6);
+  expect(await page.evaluate(() => window.__previewHandoff.length)).toBe(0);
+  await page.evaluate(() => window.__closePreview());
+  await expect(page.locator("[aria-label='Photo preview']")).toBeVisible();
+  await page.evaluate(() => {
+    window.__previewAllowed = true;
+  });
+  await expect(page.locator("[aria-label='Photo preview']")).toHaveCount(0);
+  expect(await page.evaluate(() => window.__previewHandoff.includes(true))).toBe(true);
+  await page.evaluate(() => {
+    window.__previewAllowed = false;
+    window.__closePreview = window.__startPreview();
+  });
+  await expect(page.locator("[aria-label='Photo preview']")).toBeVisible();
+  await page.evaluate(() => window.__splashery.app.chooseToy("donut"));
+  await expect(page.locator("[aria-label='Photo preview']")).toHaveCount(0);
+  expect(await page.evaluate(() => window.__previewCanceled)).toBe(1);
+  await page.evaluate(() => {
+    window.__previewHandoff.length = 0;
+    window.__previewUpdates = 0;
+  });
+  await page.waitForFunction(() => window.__previewUpdates >= 6);
+  expect(await page.evaluate(() => window.__previewHandoff.length)).toBeGreaterThan(0);
+});
