@@ -1,0 +1,1300 @@
+{
+  "pages": 153,
+  "internalLinks": 144,
+  "bookmarks": [
+    {
+      "title": "Cover and contents",
+      "page": 1
+    },
+    {
+      "title": "Chapter 1: What a splat is",
+      "page": 5
+    },
+    {
+      "title": "The numbers in one splat",
+      "page": 7
+    },
+    {
+      "title": "The Gaussian: a bell in three dimensions",
+      "page": 11
+    },
+    {
+      "title": "The covariance, built from sizes and a rotation",
+      "page": 12
+    },
+    {
+      "title": "From 3D to the screen",
+      "page": 14
+    },
+    {
+      "title": "Sorting and blending, back to front",
+      "page": 15
+    },
+    {
+      "title": "Chapter 2: How a toy is built",
+      "page": 20
+    },
+    {
+      "title": "Two places a toy lives",
+      "page": 20
+    },
+    {
+      "title": "Shapes from the kit",
+      "page": 21
+    },
+    {
+      "title": "How many splats? What a bigger budget does",
+      "page": 21
+    },
+    {
+      "title": "What the columns mean",
+      "page": 22
+    },
+    {
+      "title": "What it shows",
+      "page": 24
+    },
+    {
+      "title": "Colors from functions",
+      "page": 25
+    },
+    {
+      "title": "Parts that hinge, spin or slide",
+      "page": 25
+    },
+    {
+      "title": "Behaviors",
+      "page": 27
+    },
+    {
+      "title": "A small, complete recipe",
+      "page": 27
+    },
+    {
+      "title": "Run it yourself",
+      "page": 30
+    },
+    {
+      "title": "Chapter 3: The splat equation language",
+      "page": 31
+    },
+    {
+      "title": "The idea: every splat gets its own u and v",
+      "page": 31
+    },
+    {
+      "title": "The fields",
+      "page": 32
+    },
+    {
+      "title": "Flexibility",
+      "page": 34
+    },
+    {
+      "title": "Expressions",
+      "page": 34
+    },
+    {
+      "title": "The grammar",
+      "page": 36
+    },
+    {
+      "title": "Time",
+      "page": 37
+    },
+    {
+      "title": "What the toy does for you",
+      "page": 41
+    },
+    {
+      "title": "Why it is safe",
+      "page": 42
+    },
+    {
+      "title": "Chapter 4: A gallery of programs",
+      "page": 43
+    },
+    {
+      "title": "Sphere",
+      "page": 43
+    },
+    {
+      "title": "Torus",
+      "page": 43
+    },
+    {
+      "title": "Möbius strip",
+      "page": 44
+    },
+    {
+      "title": "Seashell",
+      "page": 44
+    },
+    {
+      "title": "Trefoil knot",
+      "page": 45
+    },
+    {
+      "title": "Wave",
+      "page": 45
+    },
+    {
+      "title": "Spiral galaxy",
+      "page": 46
+    },
+    {
+      "title": "Klein bottle (figure eight)",
+      "page": 46
+    },
+    {
+      "title": "Hello, circle",
+      "page": 47
+    },
+    {
+      "title": "Bouncing spring",
+      "page": 47
+    },
+    {
+      "title": "Beating heart",
+      "page": 48
+    },
+    {
+      "title": "Rainbow ribbon",
+      "page": 48
+    },
+    {
+      "title": "Firework",
+      "page": 49
+    },
+    {
+      "title": "Opening flower",
+      "page": 49
+    },
+    {
+      "title": "Vase (no t)",
+      "page": 50
+    },
+    {
+      "title": "Sixty more programs",
+      "page": 50
+    },
+    {
+      "title": "Spun sphere",
+      "page": 51
+    },
+    {
+      "title": "Rainbow torus",
+      "page": 51
+    },
+    {
+      "title": "Möbius ribbon",
+      "page": 51
+    },
+    {
+      "title": "Figure-eight Klein bottle",
+      "page": 51
+    },
+    {
+      "title": "Pseudosphere",
+      "page": 52
+    },
+    {
+      "title": "Enneper surface",
+      "page": 52
+    },
+    {
+      "title": "Catenoid",
+      "page": 52
+    },
+    {
+      "title": "Helicoid",
+      "page": 52
+    },
+    {
+      "title": "Dini surface",
+      "page": 53
+    },
+    {
+      "title": "Shell growth",
+      "page": 53
+    },
+    {
+      "title": "Lissajous curve",
+      "page": 53
+    },
+    {
+      "title": "Trefoil tube",
+      "page": 53
+    },
+    {
+      "title": "Cinquefoil knot",
+      "page": 54
+    },
+    {
+      "title": "Rose curve beads",
+      "page": 54
+    },
+    {
+      "title": "Trefoil knot beads",
+      "page": 54
+    },
+    {
+      "title": "Double helix",
+      "page": 54
+    },
+    {
+      "title": "Slinky coil",
+      "page": 55
+    },
+    {
+      "title": "Lorenz-like look-alike",
+      "page": 55
+    },
+    {
+      "title": "Rössler-like look-alike",
+      "page": 55
+    },
+    {
+      "title": "Five-petal flower",
+      "page": 55
+    },
+    {
+      "title": "Sunflower-style spiral",
+      "page": 56
+    },
+    {
+      "title": "Nautilus coil",
+      "page": 56
+    },
+    {
+      "title": "Jellyfish bell",
+      "page": 56
+    },
+    {
+      "title": "Coral fan",
+      "page": 56
+    },
+    {
+      "title": "Pinecone spiral",
+      "page": 57
+    },
+    {
+      "title": "Sea anemone",
+      "page": 57
+    },
+    {
+      "title": "Fern frond",
+      "page": 57
+    },
+    {
+      "title": "Dahlia bloom",
+      "page": 57
+    },
+    {
+      "title": "Sea fan branches",
+      "page": 58
+    },
+    {
+      "title": "Lily pad",
+      "page": 58
+    },
+    {
+      "title": "Traveling wave",
+      "page": 58
+    },
+    {
+      "title": "Breathing torus",
+      "page": 58
+    },
+    {
+      "title": "Rotating saddle",
+      "page": 59
+    },
+    {
+      "title": "Orbit with a fast wave",
+      "page": 59
+    },
+    {
+      "title": "Opening flower",
+      "page": 59
+    },
+    {
+      "title": "Breathing bumpy sphere",
+      "page": 59
+    },
+    {
+      "title": "Twisting ribbon",
+      "page": 60
+    },
+    {
+      "title": "Pulsing star",
+      "page": 60
+    },
+    {
+      "title": "Wobbling helix",
+      "page": 60
+    },
+    {
+      "title": "Standing wave",
+      "page": 60
+    },
+    {
+      "title": "Height hue bands",
+      "page": 61
+    },
+    {
+      "title": "Angle around the torus",
+      "page": 61
+    },
+    {
+      "title": "Curvature-like bands",
+      "page": 61
+    },
+    {
+      "title": "RGB sunset gradient",
+      "page": 61
+    },
+    {
+      "title": "Rainbow shell",
+      "page": 62
+    },
+    {
+      "title": "Blue-green sphere",
+      "page": 62
+    },
+    {
+      "title": "Klein bottle color flow",
+      "page": 62
+    },
+    {
+      "title": "Plasma RGB sheet",
+      "page": 62
+    },
+    {
+      "title": "Longitude stripes",
+      "page": 63
+    },
+    {
+      "title": "Rainbow wave",
+      "page": 63
+    },
+    {
+      "title": "Thermal spiral",
+      "page": 63
+    },
+    {
+      "title": "Hopf link",
+      "page": 63
+    },
+    {
+      "title": "Fourier epicycle curve",
+      "page": 64
+    },
+    {
+      "title": "Superquadric",
+      "page": 64
+    },
+    {
+      "title": "Riemann branch look",
+      "page": 64
+    },
+    {
+      "title": "Monkey saddle",
+      "page": 64
+    },
+    {
+      "title": "Spherical harmonic lobes",
+      "page": 65
+    },
+    {
+      "title": "Lemniscate tube",
+      "page": 65
+    },
+    {
+      "title": "Gyroid slice",
+      "page": 65
+    },
+    {
+      "title": "Torus knot family",
+      "page": 65
+    },
+    {
+      "title": "Chapter 5: Pictures, screens, and your own input",
+      "page": 66
+    },
+    {
+      "title": "Picture sheets: a page, a photo, a GIF, a video",
+      "page": 66
+    },
+    {
+      "title": "Turning a page",
+      "page": 68
+    },
+    {
+      "title": "Your own input: typing, drawing, opening a file",
+      "page": 70
+    },
+    {
+      "title": "The Screen and the Gaussian splatting toy",
+      "page": 72
+    },
+    {
+      "title": "Steering the view: the top bar and the tilt lock",
+      "page": 74
+    },
+    {
+      "title": "Chapter 6: Moving things",
+      "page": 75
+    },
+    {
+      "title": "Hands-on play: pick up, toss, settle",
+      "page": 75
+    },
+    {
+      "title": "Pieces and joints: parts that move the way the real thing's do",
+      "page": 77
+    },
+    {
+      "title": "Ropes, cloth, and soft stretch",
+      "page": 80
+    },
+    {
+      "title": "Materials: a thrown thing moves like the real thing",
+      "page": 81
+    },
+    {
+      "title": "Rigid parts and the motion driver",
+      "page": 81
+    },
+    {
+      "title": "Where to try it",
+      "page": 82
+    },
+    {
+      "title": "Chapter 7: Real data as splats",
+      "page": 83
+    },
+    {
+      "title": "Molecules",
+      "page": 83
+    },
+    {
+      "title": "Earthquakes",
+      "page": 84
+    },
+    {
+      "title": "The night sky",
+      "page": 85
+    },
+    {
+      "title": "Volumes and point clouds",
+      "page": 86
+    },
+    {
+      "title": "Weather, maps, and the other data toys",
+      "page": 88
+    },
+    {
+      "title": "The rules for live data",
+      "page": 90
+    },
+    {
+      "title": "Where to try it",
+      "page": 90
+    },
+    {
+      "title": "Chapter 8: Photos and video into 3D",
+      "page": 91
+    },
+    {
+      "title": "Photo to 3D",
+      "page": 91
+    },
+    {
+      "title": "The Sharp view",
+      "page": 92
+    },
+    {
+      "title": "Moving photo to 3D",
+      "page": 93
+    },
+    {
+      "title": "Video to 3D",
+      "page": 94
+    },
+    {
+      "title": "The photoreal captures",
+      "page": 95
+    },
+    {
+      "title": "Where to try it",
+      "page": 96
+    },
+    {
+      "title": "Chapter 9: Codes and pages",
+      "page": 97
+    },
+    {
+      "title": "QR codes",
+      "page": 97
+    },
+    {
+      "title": "More QR toys, and other barcodes",
+      "page": 99
+    },
+    {
+      "title": "Pages, PDFs, and GIFs",
+      "page": 100
+    },
+    {
+      "title": "Share links",
+      "page": 101
+    },
+    {
+      "title": "Where to try it",
+      "page": 102
+    },
+    {
+      "title": "Chapter 10: Make your own",
+      "page": 103
+    },
+    {
+      "title": "Five ways to make your own",
+      "page": 103
+    },
+    {
+      "title": "Roll one and open one",
+      "page": 103
+    },
+    {
+      "title": "The Studio",
+      "page": 104
+    },
+    {
+      "title": "Models, and your splat files",
+      "page": 105
+    },
+    {
+      "title": "Writing a recipe",
+      "page": 107
+    },
+    {
+      "title": "Sharing what you made",
+      "page": 108
+    },
+    {
+      "title": "Where to try it",
+      "page": 108
+    },
+    {
+      "title": "What else Splashery does now",
+      "page": 109
+    },
+    {
+      "title": "Hands-on physics",
+      "page": 109
+    },
+    {
+      "title": "The QR code toy",
+      "page": 109
+    },
+    {
+      "title": "Captures and file formats",
+      "page": 111
+    },
+    {
+      "title": "Camera, microphone, and screen",
+      "page": 112
+    },
+    {
+      "title": "Books, albums, and frames",
+      "page": 112
+    },
+    {
+      "title": "Studio: sound and photos",
+      "page": 113
+    },
+    {
+      "title": "Models to splats",
+      "page": 113
+    },
+    {
+      "title": "Worlds",
+      "page": 114
+    },
+    {
+      "title": "Fluids, songs, and smooth bodies",
+      "page": 115
+    },
+    {
+      "title": "Solid, Fine, and Dots, and the detail you see",
+      "page": 117
+    },
+    {
+      "title": "The viewer's controls",
+      "page": 117
+    },
+    {
+      "title": "What Splashery can do that other splat tools can't",
+      "page": 119
+    },
+    {
+      "title": "How Splashery is built",
+      "page": 122
+    },
+    {
+      "title": "Plain files, and nothing else",
+      "page": 125
+    },
+    {
+      "title": "Where the files are",
+      "page": 126
+    },
+    {
+      "title": "What PlayCanvas does, and what is our own",
+      "page": 127
+    },
+    {
+      "title": "Every library that ships, and when it loads",
+      "page": 128
+    },
+    {
+      "title": "How a toy gets on the shelf",
+      "page": 131
+    },
+    {
+      "title": "Share links and QR codes",
+      "page": 132
+    },
+    {
+      "title": "What is in a link",
+      "page": 132
+    },
+    {
+      "title": "Why one changed character usually breaks it",
+      "page": 133
+    },
+    {
+      "title": "Old links keep loading",
+      "page": 134
+    },
+    {
+      "title": "How long a link can be",
+      "page": 134
+    },
+    {
+      "title": "A scene as a QR code",
+      "page": 134
+    },
+    {
+      "title": "Open questions: other choices, not tried yet",
+      "page": 136
+    },
+    {
+      "title": "What comes later: Code a toy",
+      "page": 137
+    },
+    {
+      "title": "Glossary",
+      "page": 138
+    },
+    {
+      "title": "Further reading",
+      "page": 145
+    },
+    {
+      "title": "Where splats come from",
+      "page": 145
+    },
+    {
+      "title": "Robotics and other uses",
+      "page": 145
+    },
+    {
+      "title": "Moving, talking, and generated splats",
+      "page": 146
+    },
+    {
+      "title": "Open projects and tools",
+      "page": 147
+    },
+    {
+      "title": "References",
+      "page": 148
+    },
+    {
+      "title": "Quick reference",
+      "page": 150
+    },
+    {
+      "title": "One splat",
+      "page": 150
+    },
+    {
+      "title": "A splat program",
+      "page": 150
+    },
+    {
+      "title": "A picture toy",
+      "page": 150
+    },
+    {
+      "title": "A recipe (a toy)",
+      "page": 150
+    },
+    {
+      "title": "The controls",
+      "page": 151
+    },
+    {
+      "title": "Key numbers",
+      "page": 151
+    },
+    {
+      "title": "What goes where",
+      "page": 152
+    }
+  ],
+  "contents": [
+    {
+      "id": "splat",
+      "title": "Chapter 1: What a splat is",
+      "page": 5
+    },
+    {
+      "id": "the-numbers-in-one-splat",
+      "title": "The numbers in one splat",
+      "page": 7
+    },
+    {
+      "id": "the-gaussian-a-bell-in-three-dimensions",
+      "title": "The Gaussian: a bell in three dimensions",
+      "page": 11
+    },
+    {
+      "id": "the-covariance-built-from-sizes-and-a-rotation",
+      "title": "The covariance, built from sizes and a rotation",
+      "page": 12
+    },
+    {
+      "id": "from-3d-to-the-screen",
+      "title": "From 3D to the screen",
+      "page": 14
+    },
+    {
+      "id": "sorting-and-blending-back-to-front",
+      "title": "Sorting and blending, back to front",
+      "page": 15
+    },
+    {
+      "id": "toy",
+      "title": "Chapter 2: How a toy is built",
+      "page": 20
+    },
+    {
+      "id": "two-places-a-toy-lives",
+      "title": "Two places a toy lives",
+      "page": 20
+    },
+    {
+      "id": "shapes-from-the-kit",
+      "title": "Shapes from the kit",
+      "page": 21
+    },
+    {
+      "id": "splat-count",
+      "title": "How many splats? What a bigger budget does",
+      "page": 21
+    },
+    {
+      "id": "colors-from-functions",
+      "title": "Colors from functions",
+      "page": 25
+    },
+    {
+      "id": "parts-that-hinge-spin-or-slide",
+      "title": "Parts that hinge, spin or slide",
+      "page": 25
+    },
+    {
+      "id": "behaviors",
+      "title": "Behaviors",
+      "page": 27
+    },
+    {
+      "id": "a-small-complete-recipe",
+      "title": "A small, complete recipe",
+      "page": 27
+    },
+    {
+      "id": "run-it",
+      "title": "Run it yourself",
+      "page": 30
+    },
+    {
+      "id": "language",
+      "title": "Chapter 3: The splat equation language",
+      "page": 31
+    },
+    {
+      "id": "the-idea-every-splat-gets-its-own-u-and-v",
+      "title": "The idea: every splat gets its own u and v",
+      "page": 31
+    },
+    {
+      "id": "the-fields",
+      "title": "The fields",
+      "page": 32
+    },
+    {
+      "id": "expressions",
+      "title": "Expressions",
+      "page": 34
+    },
+    {
+      "id": "time",
+      "title": "Time",
+      "page": 37
+    },
+    {
+      "id": "what-the-toy-does-for-you",
+      "title": "What the toy does for you",
+      "page": 41
+    },
+    {
+      "id": "why-it-is-safe",
+      "title": "Why it is safe",
+      "page": 42
+    },
+    {
+      "id": "gallery",
+      "title": "Chapter 4: A gallery of programs",
+      "page": 43
+    },
+    {
+      "id": "gallery-60",
+      "title": "Sixty more programs",
+      "page": 50
+    },
+    {
+      "id": "pictures",
+      "title": "Chapter 5: Pictures, screens, and your own input",
+      "page": 66
+    },
+    {
+      "id": "picture-sheets-a-page-a-photo-a-gif-a-video",
+      "title": "Picture sheets: a page, a photo, a GIF, a video",
+      "page": 66
+    },
+    {
+      "id": "turning-a-page",
+      "title": "Turning a page",
+      "page": 68
+    },
+    {
+      "id": "your-own-input-typing-drawing-opening-a-file",
+      "title": "Your own input: typing, drawing, opening a file",
+      "page": 70
+    },
+    {
+      "id": "the-screen-and-the-gaussian-splatting-toy",
+      "title": "The Screen and the Gaussian splatting toy",
+      "page": 72
+    },
+    {
+      "id": "steering-the-view-the-top-bar-and-the-tilt-lock",
+      "title": "Steering the view: the top bar and the tilt lock",
+      "page": 74
+    },
+    {
+      "id": "moving",
+      "title": "Chapter 6: Moving things",
+      "page": 75
+    },
+    {
+      "id": "hands-on-play-pick-up-toss-settle",
+      "title": "Hands-on play: pick up, toss, settle",
+      "page": 75
+    },
+    {
+      "id": "pieces-and-joints",
+      "title": "Pieces and joints: parts that move the way the real thing's do",
+      "page": 77
+    },
+    {
+      "id": "ropes-cloth-and-soft-stretch",
+      "title": "Ropes, cloth, and soft stretch",
+      "page": 80
+    },
+    {
+      "id": "materials-a-thrown-thing-moves-like-the-real-thing",
+      "title": "Materials: a thrown thing moves like the real thing",
+      "page": 81
+    },
+    {
+      "id": "rigid-parts-and-the-motion-driver",
+      "title": "Rigid parts and the motion driver",
+      "page": 81
+    },
+    {
+      "id": "try-it-6",
+      "title": "Where to try it",
+      "page": 82
+    },
+    {
+      "id": "data",
+      "title": "Chapter 7: Real data as splats",
+      "page": 83
+    },
+    {
+      "id": "molecules",
+      "title": "Molecules",
+      "page": 83
+    },
+    {
+      "id": "earthquakes",
+      "title": "Earthquakes",
+      "page": 84
+    },
+    {
+      "id": "the-night-sky",
+      "title": "The night sky",
+      "page": 85
+    },
+    {
+      "id": "volumes-and-point-clouds",
+      "title": "Volumes and point clouds",
+      "page": 86
+    },
+    {
+      "id": "weather-maps-and-the-other-data-toys",
+      "title": "Weather, maps, and the other data toys",
+      "page": 88
+    },
+    {
+      "id": "the-rules-for-live-data",
+      "title": "The rules for live data",
+      "page": 90
+    },
+    {
+      "id": "try-it-7",
+      "title": "Where to try it",
+      "page": 90
+    },
+    {
+      "id": "photo3d",
+      "title": "Chapter 8: Photos and video into 3D",
+      "page": 91
+    },
+    {
+      "id": "photo-to-3d",
+      "title": "Photo to 3D",
+      "page": 91
+    },
+    {
+      "id": "the-sharp-view",
+      "title": "The Sharp view",
+      "page": 92
+    },
+    {
+      "id": "moving-photo-to-3d",
+      "title": "Moving photo to 3D",
+      "page": 93
+    },
+    {
+      "id": "video-to-3d",
+      "title": "Video to 3D",
+      "page": 94
+    },
+    {
+      "id": "photoreal-captures",
+      "title": "The photoreal captures",
+      "page": 95
+    },
+    {
+      "id": "try-it-8",
+      "title": "Where to try it",
+      "page": 96
+    },
+    {
+      "id": "codes",
+      "title": "Chapter 9: Codes and pages",
+      "page": 97
+    },
+    {
+      "id": "qr-codes",
+      "title": "QR codes",
+      "page": 97
+    },
+    {
+      "id": "more-qr-toys",
+      "title": "More QR toys, and other barcodes",
+      "page": 99
+    },
+    {
+      "id": "pages-pdfs-and-gifs",
+      "title": "Pages, PDFs, and GIFs",
+      "page": 100
+    },
+    {
+      "id": "share-links",
+      "title": "Share links",
+      "page": 101
+    },
+    {
+      "id": "try-it-9",
+      "title": "Where to try it",
+      "page": 102
+    },
+    {
+      "id": "make",
+      "title": "Chapter 10: Make your own",
+      "page": 103
+    },
+    {
+      "id": "five-ways",
+      "title": "Five ways to make your own",
+      "page": 103
+    },
+    {
+      "id": "roll-one-and-open-one",
+      "title": "Roll one and open one",
+      "page": 103
+    },
+    {
+      "id": "the-studio",
+      "title": "The Studio",
+      "page": 104
+    },
+    {
+      "id": "models-and-splat-files",
+      "title": "Models, and your splat files",
+      "page": 105
+    },
+    {
+      "id": "writing-a-recipe",
+      "title": "Writing a recipe",
+      "page": 107
+    },
+    {
+      "id": "sharing-what-you-made",
+      "title": "Sharing what you made",
+      "page": 108
+    },
+    {
+      "id": "try-it-10",
+      "title": "Where to try it",
+      "page": 108
+    },
+    {
+      "id": "more",
+      "title": "What else Splashery does now",
+      "page": 109
+    },
+    {
+      "id": "hands-on-physics",
+      "title": "Hands-on physics",
+      "page": 109
+    },
+    {
+      "id": "the-qr-code-toy",
+      "title": "The QR code toy",
+      "page": 109
+    },
+    {
+      "id": "captures-and-file-formats",
+      "title": "Captures and file formats",
+      "page": 111
+    },
+    {
+      "id": "camera-microphone-and-screen",
+      "title": "Camera, microphone, and screen",
+      "page": 112
+    },
+    {
+      "id": "books-albums-and-frames",
+      "title": "Books, albums, and frames",
+      "page": 112
+    },
+    {
+      "id": "studio-sound-and-photos",
+      "title": "Studio: sound and photos",
+      "page": 113
+    },
+    {
+      "id": "models-to-splats",
+      "title": "Models to splats",
+      "page": 113
+    },
+    {
+      "id": "worlds",
+      "title": "Worlds",
+      "page": 114
+    },
+    {
+      "id": "fluids-songs-and-smooth-bodies",
+      "title": "Fluids, songs, and smooth bodies",
+      "page": 115
+    },
+    {
+      "id": "solid-fine-and-dots-and-the-detail-you-see",
+      "title": "Solid, Fine, and Dots, and the detail you see",
+      "page": 117
+    },
+    {
+      "id": "the-viewer-s-controls",
+      "title": "The viewer's controls",
+      "page": 117
+    },
+    {
+      "id": "unique",
+      "title": "What Splashery can do that other splat tools can't",
+      "page": 119
+    },
+    {
+      "id": "built",
+      "title": "How Splashery is built",
+      "page": 122
+    },
+    {
+      "id": "static-files-and-modules",
+      "title": "Plain files, and nothing else",
+      "page": 125
+    },
+    {
+      "id": "where-the-files-are",
+      "title": "Where the files are",
+      "page": 126
+    },
+    {
+      "id": "what-playcanvas-does",
+      "title": "What PlayCanvas does, and what is our own",
+      "page": 127
+    },
+    {
+      "id": "outside-libraries",
+      "title": "Every library that ships, and when it loads",
+      "page": 128
+    },
+    {
+      "id": "how-a-toy-gets-on-the-shelf",
+      "title": "How a toy gets on the shelf",
+      "page": 131
+    },
+    {
+      "id": "share",
+      "title": "Share links and QR codes",
+      "page": 132
+    },
+    {
+      "id": "what-is-in-a-link",
+      "title": "What is in a link",
+      "page": 132
+    },
+    {
+      "id": "a-changed-character",
+      "title": "Why one changed character usually breaks it",
+      "page": 133
+    },
+    {
+      "id": "old-links-keep-loading",
+      "title": "Old links keep loading",
+      "page": 134
+    },
+    {
+      "id": "how-long-a-link-can-be",
+      "title": "How long a link can be",
+      "page": 134
+    },
+    {
+      "id": "a-scene-as-a-qr-code",
+      "title": "A scene as a QR code",
+      "page": 134
+    },
+    {
+      "id": "experiments",
+      "title": "Open questions: other choices, not tried yet",
+      "page": 136
+    },
+    {
+      "id": "later",
+      "title": "What comes later: Code a toy",
+      "page": 137
+    },
+    {
+      "id": "glossary",
+      "title": "Glossary",
+      "page": 138
+    },
+    {
+      "id": "reading",
+      "title": "Further reading",
+      "page": 145
+    },
+    {
+      "id": "reading-start",
+      "title": "Where splats come from",
+      "page": 145
+    },
+    {
+      "id": "reading-robots",
+      "title": "Robotics and other uses",
+      "page": 145
+    },
+    {
+      "id": "reading-dynamic",
+      "title": "Moving, talking, and generated splats",
+      "page": 146
+    },
+    {
+      "id": "reading-tools",
+      "title": "Open projects and tools",
+      "page": 147
+    },
+    {
+      "id": "references",
+      "title": "References",
+      "page": 148
+    },
+    {
+      "id": "card",
+      "title": "Quick reference",
+      "page": 150
+    },
+    {
+      "id": "one-splat",
+      "title": "One splat",
+      "page": 150
+    },
+    {
+      "id": "a-splat-program",
+      "title": "A splat program",
+      "page": 150
+    },
+    {
+      "id": "a-picture-toy",
+      "title": "A picture toy",
+      "page": 150
+    },
+    {
+      "id": "a-recipe",
+      "title": "A recipe (a toy)",
+      "page": 150
+    },
+    {
+      "id": "the-controls",
+      "title": "The controls",
+      "page": 151
+    },
+    {
+      "id": "key-numbers",
+      "title": "Key numbers",
+      "page": 151
+    },
+    {
+      "id": "where-the-files-go",
+      "title": "What goes where",
+      "page": 152
+    }
+  ]
+}
