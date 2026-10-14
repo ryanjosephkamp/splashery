@@ -80,4 +80,11 @@ variants had distinct hashes; mean luminance increased across its exposure sweep
 decreased across its blur sweep. The separate `--out` rebuild matched all 160 JPEGs, the manifest,
 and the contact sheet byte for byte. The browser smoke test
 `tests/smoke.spec.mjs --grep 'an embedded captured toy stays under 30 MB of transfer'` passed (one
-test, 9.2 MB transfer). Full application and depth tests were not run. Rule check: none.
+test, 9.2 MB transfer).
+
+For the record-association fix, `node tools/site-build.mjs --check` passes. A full site build
+changes only the credits page and its service-worker version; all `site/toys/` pages match main, and
+Photo to 3D's sample credits contain no depth-lab input. All 160 image hashes and byte counts are
+unchanged. The complete `tests/smoke.spec.mjs` run is recorded in
+[PR #609's Verification](https://github.com/ryanjosephkamp/splashery/pull/609). The full repository
+test suite and depth experiments were not run. Rule check: none.
