@@ -154,9 +154,9 @@
             <div class="pit-stage pit-hero-stage" data-pit-demo="grape">
               <img
                 class="pit-still"
-                src="../../../assets/toys/grape/thumb.webp"
+                src="../../assets/pitch/grape.webp"
                 alt=""
-                width="480"
+                width="640"
                 height="480"
                 fetchpriority="high"
                 decoding="async"
@@ -277,9 +277,9 @@
             <div class="pit-stage" data-pit-demo="toy-piano">
               <img
                 class="pit-still"
-                src="../../../assets/toys/toy-piano/thumb.webp"
+                src="../../assets/pitch/toy-piano.webp"
                 alt=""
-                width="480"
+                width="640"
                 height="480"
                 loading="lazy"
                 decoding="async"
@@ -308,9 +308,20 @@
             <p>
               A depth model runs in the page and lifts a single photo into a relief you can turn. It
               downloads only when you ask for it, and the photo is never sent anywhere. A short
-              video becomes a scene you can fly through, the same way.
+              video becomes a scene you can fly through, solved and trained on the device too.
             </p>
-            <p>In the Playground, open your own photo in the toy's tab.</p>
+            <p class="pit-own" hidden>
+              <button type="button" class="button" data-pit-own>Use your own photo</button
+              ><input
+                type="file"
+                accept="image/jpeg,image/png,image/webp"
+                data-pit-own-file
+                hidden
+              /><span
+                >Or drop one on the picture. It stays on this device; the depth model (about 27 MB)
+                downloads the first time.</span
+              >
+            </p>
             <p class="pit-links">
               <a
                 href="../../../#s=j.eyJhcHAiOiJzcGxhc2hlcnkiLCJ2ZXJzaW9uIjozLCJ0b3kiOnsia2luZCI6ImJ1aWx0aW4iLCJpZCI6InBob3RvLTNkIn0sImNhbWVyYSI6eyJ5YXciOjAsInBpdGNoIjowLCJyb2xsIjowLCJkaXN0YW5jZSI6My40fX0"
@@ -338,9 +349,9 @@
             <div class="pit-stage" data-pit-demo="photo-3d">
               <img
                 class="pit-still"
-                src="../../../assets/toys/photo-3d/thumb.webp"
+                src="../../assets/pitch/photo-3d.webp"
                 alt=""
-                width="480"
+                width="640"
                 height="480"
                 loading="lazy"
                 decoding="async"
@@ -404,15 +415,15 @@
             <div class="pit-stage" data-pit-demo="walnut-ct">
               <img
                 class="pit-still"
-                src="../../../assets/toys/walnut-ct/thumb.webp"
+                src="../../assets/pitch/walnut-ct.webp"
                 alt=""
-                width="480"
+                width="640"
                 height="480"
                 loading="lazy"
                 decoding="async"
               />
               <iframe
-                data-src="../../play/?toy=walnut-ct&zoom=0.7&controls=0"
+                data-src="../../play/?toy=walnut-ct&zoom=0.55&controls=0"
                 title="A real CT scan of a walnut: drag up or down to cut into it"
                 allow="fullscreen"
                 tabindex="0"
@@ -461,9 +472,9 @@
             <div class="pit-stage" data-pit-demo="qr-code">
               <img
                 class="pit-still"
-                src="../../../assets/toys/qr-code/thumb.webp"
+                src="../../assets/pitch/qr-code.webp"
                 alt=""
-                width="480"
+                width="640"
                 height="480"
                 loading="lazy"
                 decoding="async"
@@ -491,44 +502,46 @@
               files; Splashery mostly starts from rules.
             </p>
           </div>
-          <ul class="pit-claim-list">
-            <li>
-              <b>Objects from code</b
-              ><span
-                >A recipe of a few kilobytes becomes a budget of 60,000 to 400,000 splats on your
-                device, with parts that move as solid pieces.</span
-              >
-            </li>
-            <li>
-              <b>Nothing to install</b
-              ><span>WebGPU or WebGL2 in any current browser, on a phone or a desktop.</span>
-            </li>
-            <li>
-              <b>Files stay on the device</b
-              ><span
-                >Photos, videos, PDFs, splat files, and models are opened in the page. There is no
-                upload and no account.</span
-              >
-            </li>
-            <li>
-              <b>A whole scene in a link</b
-              ><span
-                >The grape above, with its camera, fits in a link of 97 characters. No server holds
-                it.</span
-              >
-            </li>
-            <li>
-              <b>Photos and video to 3D</b
-              ><span>Depth and structure are worked out in the browser, on a phone too.</span>
-            </li>
-            <li>
-              <b>A manual from one splat up</b
-              ><span
-                >The Tinkerer's Manual teaches splats from a single bell curve to writing your own
-                toys, with live demos in its pages.</span
-              >
-            </li>
-          </ul>
+          <div class="pit-claim-wrap">
+            <ul class="pit-claim-list">
+              <li>
+                <b>Objects from code</b
+                ><span
+                  >A recipe of a few kilobytes becomes a budget of 60,000 to 400,000 splats on your
+                  device, with parts that move as solid pieces.</span
+                >
+              </li>
+              <li>
+                <b>Nothing to install</b
+                ><span>WebGPU or WebGL2 in any current browser, on a phone or a desktop.</span>
+              </li>
+              <li>
+                <b>Files stay on the device</b
+                ><span
+                  >Photos, videos, PDFs, splat files, and models are opened in the page. There is no
+                  upload and no account.</span
+                >
+              </li>
+              <li>
+                <b>A whole scene in a link</b
+                ><span
+                  >The grape above, with its camera, fits in a link of 97 characters. No server
+                  holds it.</span
+                >
+              </li>
+              <li>
+                <b>Photos and video to 3D</b
+                ><span>Depth and structure are worked out in the browser, on a phone too.</span>
+              </li>
+              <li>
+                <b>A manual from one splat up</b
+                ><span
+                  >The Tinkerer's Manual teaches splats from a single bell curve to writing your own
+                  toys, with live demos in its pages.</span
+                >
+              </li>
+            </ul>
+          </div>
           <p class="pit-links pit-end">
             <a class="button primary" href="../../../" target="_blank" rel="noopener"
               >Open the Playground<svg

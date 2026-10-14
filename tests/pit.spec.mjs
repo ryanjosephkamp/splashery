@@ -6,6 +6,8 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { PNG } from "pngjs";
+import jsQR from "jsqr";
 import { PITCH_DEMOS } from "../tools/site-pitch.mjs";
 
 const ORIGIN = `http://127.0.0.1:${Number(process.env.SPLASHERY_PORT) || 4173}`;
@@ -25,7 +27,11 @@ test("the page is built, with its own preview card, and stays off the home page"
   expect(html).toMatch(/twitter:card" content="summary_large_image/);
   expect(fs.existsSync("site/assets/pitch-og.png")).toBe(true);
   expect(fs.readFileSync("site/index.html", "utf8")).not.toContain("about/splashery/");
-  for (const d of PITCH_DEMOS) expect(html).toContain(`data-pit-demo="${d.id}"`);
+  for (const d of PITCH_DEMOS) {
+    expect(html).toContain(`data-pit-demo="${d.id}"`);
+    // Each toy's still, rendered by tools/pit-stills.mjs, is there.
+    expect(fs.existsSync(`site/assets/pitch/${d.id}.webp`), d.id).toBe(true);
+  }
   // No hype: no exclamation marks in the words, and American English is checked by the tool.
   const words = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
   expect(words).not.toMatch(/!/);
@@ -98,4 +104,40 @@ test("the one-splat sliders redraw the splat", async ({ page }) => {
   await page.locator('[data-k="sx"]').fill("0.42");
   await page.waitForTimeout(100);
   expect(await sample()).not.toBe(before);
+});
+
+// The live QR code really scans: a still of the page's own player, read by a QR decoder.
+test("the live QR code on the page scans to Splashery", async ({ page }) => {
+  test.setTimeout(300_000);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${URL_}?renderer=webgl2`);
+  const stage = page.locator('[data-pit-demo="qr-code"]');
+  await stage.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  await expect(stage).toHaveAttribute("data-state", "ready", { timeout: 120_000 });
+  await page.waitForTimeout(3000);
+  const png = PNG.sync.read(await stage.screenshot({ timeout: 120_000 }));
+  const code = jsQR(new Uint8ClampedArray(png.data), png.width, png.height);
+  expect(code?.data).toBe("https://ryanjosephkamp.github.io/splashery/");
+});
+
+// Someone's own photo goes to the Photo to 3D toy on the page, on the device.
+test("your own photo becomes 3D on the page", async ({ page }) => {
+  test.setTimeout(400_000);
+  const problems = watchConsole(page);
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.goto(`${URL_}?renderer=webgl2`);
+  const stage = page.locator('[data-pit-demo="photo-3d"]');
+  await stage.evaluate((el) => el.scrollIntoView({ block: "center" }));
+  await expect(page.locator(".pit-own")).toBeVisible();
+  await page.locator("[data-pit-own-file]").setInputFiles("assets/toys/photo-3d/still-life.jpg");
+  await expect(stage.locator(".pit-note")).toContainText("Your photo", { timeout: 300_000 });
+  const name = await stage.locator("iframe").evaluate((f) => f.contentWindow.__splashery.player.scene.toy.options.source); // prettier-ignore
+  expect(name).toBe("custom");
+  await page.waitForTimeout(2000);
+  await page.screenshot({ path: path.join(SHOTS, "pit-own-photo-390x844.png") });
+  // Kept while scrolled away, so the photo is still there on the way back.
+  await page.evaluate(() => scrollTo(0, document.body.scrollHeight));
+  await page.waitForTimeout(1000);
+  await expect(stage).toHaveAttribute("data-state", "ready");
+  expect(problems).toEqual([]);
 });

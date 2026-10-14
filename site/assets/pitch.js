@@ -49,7 +49,10 @@ function load(stage) {
     const s = frameState(frame);
     if (s === "ready") {
       stage.dataset.state = "ready";
-      stage.querySelector(".pit-note").textContent = "";
+      if (!stage.dataset.keep) stage.querySelector(".pit-note").textContent = "";
+      // The player's own "Open in Splashery" opens a new tab, as every link to the app does here.
+      const open = frame.contentDocument?.getElementById("open-link");
+      if (open) open.target = "_blank";
     } else if (s === "failed" || performance.now() - started > 90_000) {
       fail(stage, "This toy could not start here, so this is a still of it.");
     } else setTimeout(check, 200);
@@ -58,7 +61,8 @@ function load(stage) {
 }
 
 function unload(stage) {
-  if (!stage.dataset.state || stage.dataset.state === "failed") return;
+  // A toy showing someone's own photo stays, so the photo isn't lost on the way back.
+  if (!stage.dataset.state || stage.dataset.state === "failed" || stage.dataset.keep) return;
   const frame = stage.querySelector("iframe");
   delete stage.dataset.state;
   frame.removeAttribute("src");
@@ -104,6 +108,86 @@ if (!can3D) {
     });
   }
 }
+
+// ---- Your own photo ------------------------------------------------------------------------
+// The photo goes to the Photo to 3D toy inside its own player (the same origin), through the toy's
+// own reader: the photo is decoded and its depth worked out in that page, as the Playground's Toy
+// tab does it. Nothing leaves the device.
+
+const ready = (stage) =>
+  new Promise((resolve, reject) => {
+    load(stage);
+    const tick = () => {
+      if (stage.dataset.state === "ready") resolve();
+      else if (stage.dataset.state === "failed") reject(new Error("The toy could not start here."));
+      else setTimeout(tick, 200);
+    };
+    tick();
+  });
+
+async function ownPhoto(stage, file) {
+  const note = stage.querySelector(".pit-note");
+  if (!file || !/^image\//.test(file.type || "image/")) {
+    note.textContent = "That file isn't a photo. Open a JPEG, PNG, or WebP.";
+    return;
+  }
+  stage.dataset.keep = "1";
+  note.textContent = "Working out the depth on this device…";
+  try {
+    await ready(stage);
+    const w = stage.querySelector("iframe").contentWindow;
+    // import() in the player's own page, so it is the same module the toy runs on.
+    const mod = await w.Function('return import("../../src/packs/photo-3d.js")')();
+    const options = await mod.RECIPES["photo-3d"].input.read("", file.name, file);
+    const player = w.__splashery.player;
+    const toy = player.scene.toy;
+    toy.options = { ...(toy.options || {}), ...options };
+    const cam = player.camera.getState();
+    await player.loadToy(toy);
+    player.camera.setState(cam, { snap: true });
+    note.textContent = "Your photo, on this device. Tap it to lift the depth.";
+  } catch (err) {
+    note.textContent = err?.message || "That photo could not be opened.";
+  }
+}
+
+for (const box of document.querySelectorAll(".pit-own")) {
+  const stage = document.querySelector('[data-pit-demo="photo-3d"]');
+  if (!stage || stage.dataset.state === "failed") continue;
+  const input = box.querySelector("[data-pit-own-file]");
+  box.querySelector("[data-pit-own]").addEventListener("click", () => input.click());
+  input.addEventListener("change", () => {
+    if (input.files?.[0]) ownPhoto(stage, input.files[0]);
+    input.value = "";
+  });
+  // Dropped on the picture: the stage takes the file (the iframe would otherwise get it).
+  const over = (on) => stage.classList.toggle("pit-drop", on);
+  stage.addEventListener("dragenter", (e) => {
+    if ([...(e.dataTransfer?.types || [])].includes("Files")) over(true);
+  });
+  stage.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    over(true);
+  });
+  stage.addEventListener("dragleave", () => over(false));
+  stage.addEventListener("drop", (e) => {
+    e.preventDefault();
+    over(false);
+    ownPhoto(stage, e.dataTransfer?.files?.[0]);
+  });
+  box.hidden = false;
+}
+// While a file is dragged over the page, the players let it through to their stage.
+let drags = 0;
+addEventListener("dragenter", () => document.body.classList.toggle("pit-dragging", ++drags > 0));
+addEventListener("dragleave", () => document.body.classList.toggle("pit-dragging", --drags > 0));
+// A file dropped beside the picture is ignored, rather than opened in place of the page.
+addEventListener("dragover", (e) => e.preventDefault());
+addEventListener("drop", (e) => {
+  e.preventDefault();
+  drags = 0;
+  document.body.classList.remove("pit-dragging");
+});
 
 // ---- One splat ------------------------------------------------------------------------------
 // A 2D Gaussian: color times opacity times exp(-½ dᵀΣ⁻¹d), over the page's own background.

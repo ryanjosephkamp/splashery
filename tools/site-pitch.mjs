@@ -3,6 +3,8 @@
 // tools/site-pages.mjs into HTML through pitchPage(); site/assets/pitch.js starts each live toy
 // only near the viewport and unloads it again off it, and site/assets/pitch.css lays it out.
 //
+// Each toy's still is site/assets/pitch/<id>.webp, rendered by tools/pit-stills.mjs.
+//
 // Every live toy is the site's own player (site/play/?toy=…), the embed path, in an iframe. Every
 // claim on the page is one the manual's "What Splashery can do that other splat tools can't"
 // makes too, and each shows a demo or a number.
@@ -13,12 +15,12 @@ export const PITCH_DEMOS = [
   { id: "grape", q: "", label: "A grape, captured from photos: drag to turn it, tap to peel it" }, // prettier-ignore
   { id: "toy-piano", q: "&sound=on", label: "A toy piano built from a recipe: tap or drag along the keys to play it" }, // prettier-ignore
   { id: "photo-3d", q: "&turntable=off", label: "A photo turned into 3D: tap to lift its depth, drag to turn it" }, // prettier-ignore
-  { id: "walnut-ct", q: "&zoom=0.7", label: "A real CT scan of a walnut: drag up or down to cut into it" }, // prettier-ignore
+  { id: "walnut-ct", q: "&zoom=0.55", label: "A real CT scan of a walnut: drag up or down to cut into it" }, // prettier-ignore
   { id: "qr-code", q: "&turntable=off&zoom=0.72", label: "A QR code made of splats that a phone camera reads" }, // prettier-ignore
 ];
 
 export function pitchPage(page, ctx) {
-  const { up, esc, thumbHref, toyPath, arrow, countToys, TOYS, galleryHref, galleryHash } = ctx;
+  const { up, esc, toyPath, arrow, countToys, TOYS, galleryHref, galleryHash } = ctx;
   const toy = (id) => {
     const t = TOYS.find((x) => x.id === id);
     if (!t) throw new Error(`The pitch page names an unknown toy: ${id}`);
@@ -30,7 +32,7 @@ export function pitchPage(page, ctx) {
     const d = PITCH_DEMOS.find((x) => x.id === id);
     const t = toy(id);
     return `<div class="pit-stage${hero ? " pit-hero-stage" : ""}" data-pit-demo="${esc(id)}">
-<img class="pit-still" src="${up}${thumbHref(t)}" alt="" width="480" height="480" ${hero ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
+<img class="pit-still" src="${up}assets/pitch/${esc(id)}.webp" alt="" width="640" height="480" ${hero ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async" />
 <iframe data-src="${up}play/?toy=${esc(id)}${d.q}&controls=0" title="${esc(d.label)}" allow="fullscreen" tabindex="0" hidden></iframe>
 <button type="button" class="pit-start" hidden>Start the live toy</button>
 <p class="pit-note" role="status" aria-live="polite"></p>
@@ -96,8 +98,8 @@ ${live("toy-piano")}
 <div class="pit-text">
 <p class="pit-num">03</p>
 <h2 id="h-pit-photo">A photo becomes 3D, on the device</h2>
-<p>A depth model runs in the page and lifts a single photo into a relief you can turn. It downloads only when you ask for it, and the photo is never sent anywhere. A short video becomes a scene you can fly through, the same way.</p>
-<p>In the Playground, open your own photo in the toy's tab.</p>
+<p>A depth model runs in the page and lifts a single photo into a relief you can turn. It downloads only when you ask for it, and the photo is never sent anywhere. A short video becomes a scene you can fly through, solved and trained on the device too.</p>
+<p class="pit-own" hidden><button type="button" class="button" data-pit-own>Use your own photo</button><input type="file" accept="image/jpeg,image/png,image/webp" data-pit-own-file hidden /><span>Or drop one on the picture. It stays on this device; the depth model (about 27 MB) downloads the first time.</span></p>
 ${links("photo-3d", `<a href="${up}studio/">The Studio</a>`)}
 </div>
 <figure class="pit-figure">
@@ -139,14 +141,14 @@ ${live("qr-code")}
 <h2 id="h-pit-claims">What other splat tools don't do</h2>
 <p>To our knowledge, after looking at the public ones. Splat editors work on captured files; Splashery mostly starts from rules.</p>
 </div>
-<ul class="pit-claim-list">
+<div class="pit-claim-wrap"><ul class="pit-claim-list">
 <li><b>Objects from code</b><span>A recipe of a few kilobytes becomes a budget of 60,000 to 400,000 splats on your device, with parts that move as solid pieces.</span></li>
 <li><b>Nothing to install</b><span>WebGPU or WebGL2 in any current browser, on a phone or a desktop.</span></li>
 <li><b>Files stay on the device</b><span>Photos, videos, PDFs, splat files, and models are opened in the page. There is no upload and no account.</span></li>
 <li><b>A whole scene in a link</b><span>The grape above, with its camera, fits in a link of ${linkChars} characters. No server holds it.</span></li>
 <li><b>Photos and video to 3D</b><span>Depth and structure are worked out in the browser, on a phone too.</span></li>
 <li><b>A manual from one splat up</b><span>The Tinkerer's Manual teaches splats from a single bell curve to writing your own toys, with live demos in its pages.</span></li>
-</ul>
+</ul></div>
 <p class="pit-links pit-end"><a class="button primary" href="${up}../">Open the Playground${arrow}</a><a class="button" href="${up}../manual/">Read the manual</a><a class="button" href="${ctx.SITE.github}">Source on GitHub</a></p>
 </section>
 </article>`;

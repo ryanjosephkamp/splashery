@@ -33,28 +33,43 @@ playful. No hype words, no exclamation marks, no emoji.
 
 ## State
 
-First READY (October 14, 2026). The page is at `site/about/splashery/`: a hero (the grape, live),
-then six numbered sections: one splat (a 2D Gaussian drawn in the page, with sliders), recipes (the
-toy piano with sound), photo to 3D (photo-3d's sample), real data (the walnut CT scan), a QR code
-that scans, and the claims list with the end buttons. Each live toy is `site/play/` in an iframe,
-started by an IntersectionObserver near the viewport and unloaded a screen away, so one or two run
-at once. Where WebGL2 and WebGPU are both missing, each toy keeps its still with a note.
+PR #633 is open (draft). First READY on October 14, 2026; the Operator then extended the time box by
+two hours for polish, and this is the polished state.
+
+The page is at `site/about/splashery/`: a hero (the grape, live), then six numbered sections: one
+splat (a 2D Gaussian drawn in the page, with sliders), recipes (the toy piano with sound), photo to
+3D (with "Use your own photo" and drop), real data (the walnut CT scan), a QR code that scans (a
+test decodes it), and the claims list with the end buttons. Each live toy is `site/play/` in an
+iframe, started by an IntersectionObserver near the viewport and unloaded a screen away, so one or
+two run at once. Each shows its own still (rendered to match its live framing) until it is drawn,
+and keeps it with a note where WebGL2 and WebGPU are both missing.
 
 ## Notes
 
 - Built through a new page type, `pitch`, in tools/site-build.mjs (calls tools/site-pitch.mjs). The
   only other change to the build: `ogImage()` takes an optional `imageWidth`, `imageHeight` and
   `imageCard`, so a page can carry a wide preview card. Additive; no other page changes.
-- The preview card is rendered by `node tools/pit-og.mjs` from the toys' thumbnails.
+- Tools: `node tools/pit-og.mjs` (the preview card), `node tools/pit-stills.mjs [toy …]` (the stills
+  in site/assets/pitch/, see-through so one serves both themes; rerun after changing a toy's framing
+  in PITCH_DEMOS) and `node tools/pit-clip.mjs [--desktop]` (a clip, for a computer with a real
+  graphics chip). Each needs the local server.
+- Your own photo: pitch.js imports `src/packs/photo-3d.js` inside the player's own page (same
+  origin, so the same module instance) and calls the toy's own `input.read`, then reloads the toy
+  with the new options, as the Playground's Toy tab does. No engine or embed change. A toy showing
+  someone's photo isn't unloaded when scrolled away.
+- The player's "Open in Splashery" link is set to open a new tab, as the site's links to the app do.
+- The page's `?renderer=` passes on to the players (the tests force WebGL2, as the other specs do).
 - The "Photo to 3D", "Walnut CT scan" and "QR code" toys are behind the labs switch; the page links
   to them anyway (it is not linked from anywhere public yet). Their toy pages exist.
 - The link length in the claims list (the grape's whole scene) is computed at build time.
+- First screen on a phone (local, uncompressed): the still paints at about 0.2 s and the grape is
+  live at about 2.6 s; 3.6 MB, 2.5 MB of it the PlayCanvas engine (gzipped on GitHub Pages).
 
 ## Known issues
 
-- Photo to 3D: the page shows the toy's sample photo; to drop your own the visitor goes to the
-  Playground (the embed player has no file input).
-- The stills are the toys' 480 px thumbnails; the walnut's thumbnail is cropped at the top.
+- The clip has to be recorded on a computer with a real graphics chip (`tools/pit-clip.mjs`); the
+  cloud's software renderer is too slow for a fair one.
+- WebGPU isn't checked here (the tests use WebGL2); a check on a real device is needed.
 
 ## For the Operator
 
