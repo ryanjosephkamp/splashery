@@ -68,7 +68,9 @@ Full validation checks 5,052 RGB frames/poses and 1,896 depth/mask pairs, includ
 walk views; valid recorded depth spans 2.1313–27.9809 meters. Checksums cover 8,934 files plus the
 checksum inventory. The local fetch/extraction command verified SHA-256, extracted safely, and
 passed full validation. The full upload also returned HTTP 401; the existing draft release still has
-no assets.
+no assets. The archive exists only in the selected cloud workspace at
+`/workspace/splashery/.cache/studio-truth/studio-truth-2026-10.tar.gz`. The download script exists,
+but the full set is not hosted, so task 56's point 4 remains unmet until hosting succeeds.
 
 The archive retains its exact original driver, camera helper, and supplemental builder in `source/`.
 The driver SHA-256 is `57f8a7645c467c2a75448fa2317f8c2ab78a100d3c76c0f78f70af07243f6cf6`; helper
@@ -265,6 +267,14 @@ Playwright also reported one runner-stop error outside a test when the failure l
 - The WebGPU compilation/drawing check skipped because the adapter was unavailable. Video tests and
   the remaining smoke checks were not reached.
 
+The
+[Operator's follow-up](https://github.com/ryanjosephkamp/splashery/pull/602#issuecomment-6164711556)
+reports that `tests/phf-engine.spec.mjs` passes 5/5 on main with the repository's own Playwright
+config. The 0.3821 legibility failure is therefore a limitation of this cloud Playwright setup, not
+a regression caused by this PR. The Operator's separate run is reported evidence, not a rerun in
+this environment. The preserved failure and unchanged assertion remain in the record; no product fix
+is required for this finding.
+
 These results are against unchanged product source at the recorded baseline, under Chromium's
 default graphics policy and an enabled sandbox. No warning filters, assertion changes, unsafe
 graphics flags, or blocklist bypasses were added. Screenshots and traces remain in
@@ -275,5 +285,6 @@ suite is unrun: its launcher and several nested launchers use flags forbidden fo
 The required embed transfer check is run separately with the same safe policy; its exact result is
 recorded at handback. No physical phone testing was performed. The Git addition is about 24.13 MB
 using a conservative count of the entire added/modified task files, below 40 MB. Formatting and
-American English checks are clean. Current `main` has advanced in QR/docs work; the Studio benchmark
-source files are unchanged, and draft PR #602 remains mergeable. The worker did not merge or deploy.
+American English checks are clean. Measurements remain tied to the recorded baseline commit. At the
+documentation follow-up, current `main` also contains changes to `src/stage.js` and has not been
+rebenchmarked here. The worker did not merge or deploy.

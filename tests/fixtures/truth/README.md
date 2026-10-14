@@ -58,6 +58,14 @@ videos, per-frame truth, raw frames, and archives live in the ignored `.cache/st
 Keep the aggregate Git addition below 40 MB. Full-archive location and measured coverage are
 recorded in `docs/audits/studio-truth-2026-10.md`. No fixture is referenced by `src/`.
 
+The complete 1,399,053,452-byte archive currently exists only in the selected Linux cloud workspace
+at `/workspace/splashery/.cache/studio-truth/studio-truth-2026-10.tar.gz`. Its SHA-256 is
+`521594f3af3aa43c50fdb980fe32c63e3b8579dacb3d149c9a8d71237cef0070`. Release uploads failed with HTTP
+401, and the draft release `studio-truth-2026-10` has no assets. The full set is not hosted; task
+56's point 4 is not met until hosting succeeds. The download script exists, but its default remote
+download cannot currently retrieve the full set. Local generation and local archive verification
+remain available.
+
 Run numeric checks sequentially:
 
 ```sh
