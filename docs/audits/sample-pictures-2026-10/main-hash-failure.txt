@@ -1,0 +1,98 @@
+{"head": "574a68d3125c6ef8f0f5951b53a7da7b6124a341", "gitStatus": "", "case": "tests/qr4-craft.spec.mjs:153"}
+[WebServer] 127.0.0.1 - - [13/Oct/2026 15:21:53] "GET / HTTP/1.1" 200 -
+
+Running 3 tests using 1 worker
+
+(node:14916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:14916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder (8.4s)
+(node:15150) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15150) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder (8.3s)
+(node:15219) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:15219) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder (8.5s)
+
+
+  1) [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144"
+    Received: "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6"
+
+      151 |           h.update(JSON.stringify(r));
+      152 |         }
+    > 153 |     expect(h.digest("hex")).toBe(BUILD_HASH);
+          |                             ^
+      154 |   });
+      155 | });
+      156 |
+        at /workspace/splashery/.cache/cdx-pics/round2-main/tests/qr4-craft.spec.mjs:153:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../round2/main-hash-results/qr4-craft-Other-barcodes-t-129fd-ats-from-the-shared-builder-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../round2/main-hash-results/qr4-craft-Other-barcodes-t-129fd-ats-from-the-shared-builder-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144"
+    Received: "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6"
+
+      151 |           h.update(JSON.stringify(r));
+      152 |         }
+    > 153 |     expect(h.digest("hex")).toBe(BUILD_HASH);
+          |                             ^
+      154 |   });
+      155 | });
+      156 |
+        at /workspace/splashery/.cache/cdx-pics/round2-main/tests/qr4-craft.spec.mjs:153:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../round2/main-hash-results/qr4-craft-Other-barcodes-t-129fd-ats-from-the-shared-builder-chromium-repeat1/trace.zip
+    Usage:
+
+        npx playwright show-trace ../round2/main-hash-results/qr4-craft-Other-barcodes-t-129fd-ats-from-the-shared-builder-chromium-repeat1/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144"
+    Received: "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6"
+
+      151 |           h.update(JSON.stringify(r));
+      152 |         }
+    > 153 |     expect(h.digest("hex")).toBe(BUILD_HASH);
+          |                             ^
+      154 |   });
+      155 | });
+      156 |
+        at /workspace/splashery/.cache/cdx-pics/round2-main/tests/qr4-craft.spec.mjs:153:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../round2/main-hash-results/qr4-craft-Other-barcodes-t-129fd-ats-from-the-shared-builder-chromium-repeat2/trace.zip
+    Usage:
+
+        npx playwright show-trace ../round2/main-hash-results/qr4-craft-Other-barcodes-t-129fd-ats-from-the-shared-builder-chromium-repeat2/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder
+    [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder
+    [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder

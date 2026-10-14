@@ -1,0 +1,623 @@
+{
+  "date": "October 13, 2026",
+  "links": [
+    "https://example.org/a/1",
+    "https://example.org/gallery/2?q=circle&page=1",
+    "https://example.org/notes/3?q=circlecircle&page=2",
+    "https://example.org/workshop/4?q=circlecirclecircle&page=3",
+    "https://example.org/a/5?q=circlecirclecirclecircle&page=4",
+    "https://example.org/gallery/6?q=circlecirclecirclecirclecircle&page=5",
+    "https://example.org/notes/7?q=circlecirclecirclecirclecirclecircle&page=6",
+    "https://example.org/workshop/8?q=circlecirclecirclecirclecirclecirclecircle&page=7",
+    "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+    "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+    "https://example.org/notes/11?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=10",
+    "https://example.org/workshop/12?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=11",
+    "https://example.org/a/13?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=12",
+    "https://example.org/gallery/14?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=13",
+    "https://example.org/notes/15?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=14",
+    "https://example.org/workshop/16?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=15",
+    "https://example.org/a/17?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=16",
+    "https://example.org/gallery/18?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=17",
+    "https://example.org/notes/19?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=18",
+    "https://example.org/workshop/20?q=circlecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecirclecircle&page=19"
+  ],
+  "decoders": {
+    "jsqr": "vendored jsQR 1.4.0",
+    "zxing": "@zxing/library 0.21.3"
+  },
+  "sizes": {
+    "phone": 390,
+    "print": "600 px, 2 inches at 300 dpi"
+  },
+  "blur": "Gaussian sigma = 0.12 module",
+  "perspective": {
+    "yaw": 8,
+    "pitch": 12,
+    "roll": 5
+  },
+  "rows": [
+    {
+      "quiet": 1,
+      "trials": 640,
+      "jsqr": 634,
+      "zxing": 621,
+      "both": 621,
+      "directJsqr": 630,
+      "directZxing": 503,
+      "bySize": {
+        "phone": {
+          "trials": 320,
+          "jsqr": 314,
+          "zxing": 310
+        },
+        "print": {
+          "trials": 320,
+          "jsqr": 320,
+          "zxing": 311
+        }
+      }
+    },
+    {
+      "quiet": 2,
+      "trials": 640,
+      "jsqr": 640,
+      "zxing": 634,
+      "both": 634,
+      "directJsqr": 637,
+      "directZxing": 533,
+      "bySize": {
+        "phone": {
+          "trials": 320,
+          "jsqr": 320,
+          "zxing": 320
+        },
+        "print": {
+          "trials": 320,
+          "jsqr": 320,
+          "zxing": 314
+        }
+      }
+    },
+    {
+      "quiet": 3,
+      "trials": 640,
+      "jsqr": 622,
+      "zxing": 616,
+      "both": 616,
+      "directJsqr": 617,
+      "directZxing": 536,
+      "bySize": {
+        "phone": {
+          "trials": 320,
+          "jsqr": 302,
+          "zxing": 302
+        },
+        "print": {
+          "trials": 320,
+          "jsqr": 320,
+          "zxing": 314
+        }
+      }
+    },
+    {
+      "quiet": 4,
+      "trials": 640,
+      "jsqr": 640,
+      "zxing": 634,
+      "both": 634,
+      "directJsqr": 634,
+      "directZxing": 567,
+      "bySize": {
+        "phone": {
+          "trials": 320,
+          "jsqr": 320,
+          "zxing": 320
+        },
+        "print": {
+          "trials": 320,
+          "jsqr": 320,
+          "zxing": 314
+        }
+      }
+    }
+  ],
+  "selected": null,
+  "failures": [
+    {
+      "quiet": 1,
+      "ecc": "Q",
+      "index": 13,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "Q",
+      "index": 13,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "Q",
+      "index": 14,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "Q",
+      "index": 14,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "Q",
+      "index": 16,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "Q",
+      "index": 16,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 9,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 9,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 9,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 9,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 12,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 12,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 12,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 12,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 13,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 13,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 13,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 13,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 1,
+      "ecc": "H",
+      "index": 17,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 2,
+      "ecc": "H",
+      "index": 9,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 2,
+      "ecc": "H",
+      "index": 9,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 2,
+      "ecc": "H",
+      "index": 12,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 2,
+      "ecc": "H",
+      "index": 12,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 2,
+      "ecc": "H",
+      "index": 13,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 2,
+      "ecc": "H",
+      "index": 13,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "Q",
+      "index": 15,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "Q",
+      "index": 15,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "Q",
+      "index": 16,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "Q",
+      "index": 16,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "Q",
+      "index": 17,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "Q",
+      "index": 17,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "Q",
+      "index": 18,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "Q",
+      "index": 18,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 9,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 9,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 10,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 10,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 11,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 11,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 12,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 12,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 12,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 12,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 13,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 13,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 13,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 13,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 19,
+      "size": "phone",
+      "condition": "perspective",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 3,
+      "ecc": "H",
+      "index": 19,
+      "size": "phone",
+      "condition": "both",
+      "jsqr": false,
+      "zxing": false
+    },
+    {
+      "quiet": 4,
+      "ecc": "H",
+      "index": 9,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 4,
+      "ecc": "H",
+      "index": 9,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 4,
+      "ecc": "H",
+      "index": 12,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 4,
+      "ecc": "H",
+      "index": 12,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 4,
+      "ecc": "H",
+      "index": 13,
+      "size": "print",
+      "condition": "perspective",
+      "jsqr": true,
+      "zxing": false
+    },
+    {
+      "quiet": 4,
+      "ecc": "H",
+      "index": 13,
+      "size": "print",
+      "condition": "both",
+      "jsqr": true,
+      "zxing": false
+    }
+  ]
+}

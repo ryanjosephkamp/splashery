@@ -4,7 +4,43 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
-## Now (October 12, 2026, about 10:00 UTC)
+## Now (October 14, 2026, about 06:50 UTC)
+
+The Operator is handing over on schedule from `session_011WeiHJ3ygHhoTrrJiThHzX` (Opus 5.5, since
+October 12, 08:47 UTC) to a fresh Opus 5.5 session, which updates this line with its id in its first
+Ops PR. Its own handover is due two days after it takes over, or sooner at about 400k tokens. This
+section is current. The sections below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
+
+**Main** is `236f29bb4` (Ops #617). Merged October 13 and 14: tasks 57 (#586), 39 and 53 (#590), 70
+(#593), 54 (#598), 69, the circular QR codes (#603), 73, the manual PDF per edition (#615), and
+#589, the engine's full resolution within the device's pixel cap (#617); Codex task files 55 to 78
+(#584, #587, #592, #596, #604, #605); the Photo to 3D checkpoint (#604).
+
+**Photo to 3D checkpoint:** [docs/studio/photo-3d-checkpoint.md](studio/photo-3d-checkpoint.md).
+Every later change to it must beat the checkpoint branch or be reverted.
+
+**Known red on main:**
+
+- `kit.spec.mjs:87` since #603: a circular QR recipe stops with "too much detail for a circular
+  picture on this device" in the cloud browser. A fix task is offered to the owner.
+- `man5.spec.mjs:201` only where Chromium's sandbox can't start (Claude cloud containers run as
+  root): since #615 the PDF tool keeps the sandbox on. Keep it on; the owner chose to merge as is.
+  Task 77's GitHub Actions run should cover it.
+
+**Codex** (the owner runs these from the private Codex Board; tasks in `docs/codex/`): open PRs #560
+(48), #562 (55), #581 (50), #588 (51), #594 (52, public: the owner's good after its chess fix), #599
+(66), #600 (72), #601 (71), #602 (56), #197 (65), #611 (74), #606 to #610 (75a to 75e), #612 to #614
+and #616 (78a to 78d, the portfolio toys, labs). Running without a PR yet: 58, 76, 77. Moved to the
+Splash Shop: 42 to 46, 49, 59 to 64, 67, and 68.
+
+**The Splash Shop** (`ryanjosephkamp/splashdot`) is read-only for Splashery sessions. Work comes
+back only through a promotion note the owner brings, then an Operator-written port.
+
+**Next for the Operator:** review each Codex PR as it reports done (a Sonnet helper, one comment);
+merge labs work after its tests; send public changes to the owner first; write docs/STATUS.md after
+the Dot's activation report.
+
+## October 12 to 13, 2026 (history)
 
 The Operator is `session_011WeiHJ3ygHhoTrrJiThHzX` (Opus 5.5), since October 12, 2026, 08:47 UTC. It
 took over from `session_01BbS2vUAWpeFF2i6KoJAqCt` (01:38 to 08:47 UTC), which stands by for a day.
