@@ -157,21 +157,25 @@ export function beginRendererDiagnostics(canvas, preference, nav = navigator) {
 }
 
 // Called only by the existing pc.js device-creation entry point.
-export async function observeGraphicsDevice(create, canvas, options) {
+export function observeGraphicsDevice(create, canvas, options) {
   const diagnostics = startups.get(canvas);
+  // Worlds and direct Stage users do not register diagnostics. Preserve the
+  // factory's exact return value, promise, and synchronous throw for them.
   if (!diagnostics) return create(canvas, options);
   diagnostics.report.requestedBackends = [...(options?.deviceTypes || [])];
   diagnostics.creating = true;
-  try {
-    const device = await create(canvas, options);
-    diagnostics.report.backend = device?.deviceType || null;
-    return device;
-  } catch (error) {
-    diagnostics.originalError = error;
-    throw error;
-  } finally {
-    diagnostics.creating = false;
-  }
+  return (async () => {
+    try {
+      const device = await create(canvas, options);
+      diagnostics.report.backend = device?.deviceType || null;
+      return device;
+    } catch (error) {
+      diagnostics.originalError = error;
+      throw error;
+    } finally {
+      diagnostics.creating = false;
+    }
+  })();
 }
 
 export function setStartupState(canvas, name, value) {

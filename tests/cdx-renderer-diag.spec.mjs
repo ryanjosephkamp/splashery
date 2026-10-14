@@ -83,6 +83,113 @@ async function denyWebGL(page, { adapter = "absent", context = "null" } = {}) {
   );
 }
 
+test("an unobserved device call preserves promises, absent devices, and synchronous errors (unit)", async () => {
+  const canvas = fakeCanvas();
+  const original = canvas.getContext;
+  const options = { deviceTypes: ["webgl2"], alpha: false };
+  const device = { deviceType: "webgl2" };
+  const pending = Promise.resolve(device);
+  const create = (actualCanvas, actualOptions) => {
+    expect(actualCanvas).toBe(canvas);
+    expect(actualOptions).toBe(options);
+    return pending;
+  };
+  expect(observeGraphicsDevice(create, canvas, options)).toBe(pending);
+  expect(await pending).toBe(device);
+  expect(observeGraphicsDevice(() => null, canvas, options)).toBeNull();
+  const error = new Error("Synchronous factory error");
+  expect(() =>
+    observeGraphicsDevice(
+      () => {
+        throw error;
+      },
+      canvas,
+      options,
+    ),
+  ).toThrow(error);
+  expect(canvas.getContext).toBe(original);
+  expect(canvas.dataset).toEqual({});
+});
+
+test("normal Worlds and toy Stage starts pass through pc.js without diagnostics", async ({
+  page,
+}) => {
+  // Observe the actual vendored factory's inputs and result at its import
+  // boundary. The query URL loads the unchanged engine, not a fake device.
+  await page.route(/\/vendor\/playcanvas\/playcanvas\.min\.mjs$/, (route) =>
+    route.fulfill({
+      contentType: "text/javascript",
+      body: `
+        export * from "/vendor/playcanvas/playcanvas.min.mjs?original";
+        import { createGraphicsDevice as original } from "/vendor/playcanvas/playcanvas.min.mjs?original";
+        export const boundaryCalls = [];
+        export function createGraphicsDevice(canvas, options) {
+          const result = original(canvas, options);
+          boundaryCalls.push({ canvas, options, result });
+          return result;
+        }
+      `,
+    }),
+  );
+  await page.goto("/tests/");
+  const result = await page.evaluate(async () => {
+    const pc = await import("/src/pc.js");
+    const { WorldView } = await import("/src/worlds/render.js");
+    const { Stage } = await import("/src/stage.js");
+    const gpuRequest = navigator.gpu?.requestAdapter;
+    const contexts = [];
+    const devices = [];
+    try {
+      for (const Start of [WorldView, Stage]) {
+        const canvas = document.createElement("canvas");
+        document.body.append(canvas);
+        const getContext = canvas.getContext;
+        const before = Object.getOwnPropertyDescriptor(canvas, "getContext");
+        const view = await Start.create(canvas, { prefer: "webgl2" });
+        contexts.push(view);
+        const call = pc.boundaryCalls.at(-1);
+        devices.push({
+          sameCanvas: call.canvas === canvas,
+          sameDevice: (await call.result) === view.device,
+          backend: view.device.deviceType,
+          options: call.options,
+          sameContext: canvas.getContext === getContext,
+          sameDescriptor: Object.getOwnPropertyDescriptor(canvas, "getContext") === before,
+          dataset: { ...canvas.dataset },
+        });
+      }
+      return {
+        devices,
+        sameGPURequest: navigator.gpu?.requestAdapter === gpuRequest,
+        reports: document.querySelectorAll("#renderer-details, #renderer-report").length,
+      };
+    } finally {
+      for (const view of contexts) view.destroy();
+    }
+  });
+  expect(result.sameGPURequest).toBe(true);
+  expect(result.reports).toBe(0);
+  expect(result.devices).toHaveLength(2);
+  for (const [index, device] of result.devices.entries()) {
+    expect(device).toMatchObject({
+      sameCanvas: true,
+      sameDevice: true,
+      backend: "webgl2",
+      sameContext: true,
+      sameDescriptor: true,
+      dataset: {},
+      options: {
+        antialias: false,
+        alpha: index === 1,
+        depth: true,
+        powerPreference: "high-performance",
+      },
+    });
+    // The engine appends its own fallback types in place; that behavior stays.
+    expect(device.options.deviceTypes[0]).toBe("webgl2");
+  }
+});
+
 test("the device boundary preserves options, error identity, and nested causes (unit)", async () => {
   const context = {};
   const canvas = fakeCanvas(() => context);
