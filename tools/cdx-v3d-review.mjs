@@ -5,7 +5,7 @@
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
-import { chromium } from "@playwright/test";
+import { chromium, devices } from "@playwright/test";
 import { SAMPLES } from "../src/video3d/samples.js";
 import { createScene } from "../src/state.js";
 import { encodeSceneHash } from "../src/codec.js";
@@ -28,7 +28,9 @@ try {
       [1440, 900],
     ]) {
       const context = await browser.newContext({
+        ...(width === 390 ? devices["Pixel 7"] : {}),
         viewport: { width, height },
+        deviceScaleFactor: 1,
         hasTouch: width === 390,
       });
       const page = await context.newPage();
@@ -49,7 +51,7 @@ try {
           },
         }),
       );
-      await page.goto(`${base}/?renderer=webgl2&labs=1&profile=low&adapt=off#s=${hash}`);
+      await page.goto(`${base}/?renderer=webgl2&labs=1#s=${hash}`);
       await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
       await page.waitForFunction(
         (id) => window.__splashery.player.proc?.ctx?.kit?.data?.video?.uid === id,

@@ -3361,31 +3361,37 @@
       "page": "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "14 seconds from 3:24 (the 480p transcode on Commons, one shot), trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped, with the same span of the source at 480p (liberty-source.mp4 and .webm, made by tools/smd-source.mjs from the Commons transcode, no sound) for Show the original. The source is 3 minutes 48 seconds long.",
+      "note": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
       "baked": {
         "file": "assets/toys/video-3d/liberty-baked/manifest.json",
         "files": {
+          "assets/toys/video-3d/liberty-baked/assets/liberty-phone-59857-0.bkd.gz": {
+            "bytes": 968499,
+            "sha256": "435707ce74273b6d06e71baa738bb94e7a3e004455aff23d2f363325a19b5d1a"
+          },
+          "assets/toys/video-3d/liberty-baked/assets/liberty-desktop-177901-0.bkd.gz": {
+            "bytes": 1056591,
+            "sha256": "5700e6897beca71dc86a65041bb49ece6fad15a28970d8a08ae6d439f3687bfb"
+          },
+          "assets/toys/video-3d/liberty-baked/assets/liberty-desktop-177901-1.bkd.gz": {
+            "bytes": 1056381,
+            "sha256": "86d7b7da99ea9e61b9b0a6fde4f170a6c5c00f051a60ceee2a5b723dd6bc467f"
+          },
+          "assets/toys/video-3d/liberty-baked/assets/liberty-desktop-177901-2.bkd.gz": {
+            "bytes": 756157,
+            "sha256": "5b6b939cdd50ec4c690c2fbea97c8ff1f46099ded8750a2d2b5aafb658b46963"
+          },
           "assets/toys/video-3d/liberty-baked/manifest.json": {
-            "bytes": 1906,
-            "sha256": "c9b73fc2029545773b0a217001b69cb5afeb336c59f2cc6357960215a0bdd5be"
-          },
-          "assets/toys/video-3d/liberty-baked/assets/liberty-60000-0.bkd.gz": {
-            "bytes": 972429,
-            "sha256": "53c446ca23c005a076543398df4ef5d042c959d83356dfa0287f0b2a1c3365b9"
-          },
-          "assets/toys/video-3d/liberty-baked/assets/liberty-116279-0.bkd.gz": {
-            "bytes": 1058981,
-            "sha256": "112e37cf7907a8fd6d6311363314240b7771097a1396a44fb65b69caaa357312"
-          },
-          "assets/toys/video-3d/liberty-baked/assets/liberty-116279-1.bkd.gz": {
-            "bytes": 820587,
-            "sha256": "a8a8b3c9abc5ed810fdda56ec44a524ce02a82365c8ab51229bed271622d857e"
+            "bytes": 2581,
+            "sha256": "affef579005c319f4ae0f10a81c87589217a62a0b26536b6ef30684f1af61ea1"
           }
         },
-        "defaultBytes": 1889156,
-        "sourcePlySha256": "51f36c567afcdb3302beb9f61b6391e3aa829ceea70824ac79369cedbc1d1fc6",
-        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
-      }
+        "defaultBytes": 1236188,
+        "sourcePlySha256": "48c6b065a40b341dd3444f0f287d0e7932235bd740f019edb2736d3ed4900e7b",
+        "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
+        "trainedPlySha256": "ddafed34e90891f79562e1e9a851a67834653869364deb27e0605a75a8b5cdbd"
+      },
+      "sha256": "48c6b065a40b341dd3444f0f287d0e7932235bd740f019edb2736d3ed4900e7b"
     },
     {
       "id": "edinburgh",
@@ -3397,31 +3403,37 @@
       "page": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
       "license": "CC BY 3.0",
       "checked": "September 30, 2026",
-      "note": "10 seconds from 7:32 (the 480p transcode on Commons), 28 frames, trained by tools/v3d-sample.mjs at 640 px for 3,000 steps, with the splats grown to 120,000. Only the trained splats and the camera path are shipped, with the same span of the source at 480p (edinburgh-source.mp4 and .webm, made by tools/smd-source.mjs from the Commons transcode, no sound) for Show the original. The source is 67 minutes long.",
+      "note": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
       "baked": {
         "file": "assets/toys/video-3d/edinburgh-baked/manifest.json",
         "files": {
+          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-phone-59756-0.bkd.gz": {
+            "bytes": 952353,
+            "sha256": "a243027651493f6ff511819dea91b76ff60fe22a66aa2bdbcf6a82a047fa3c40"
+          },
+          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-desktop-179469-0.bkd.gz": {
+            "bytes": 1040533,
+            "sha256": "097be38440c4e1ba6398eb134c0091257aec3ae5f603cd07e27ecbd4686d925d"
+          },
+          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-desktop-179469-1.bkd.gz": {
+            "bytes": 1040370,
+            "sha256": "4f80b78505094450ebf1c0a222e9adac8cf533eb8561eedb41fbc8797028ab47"
+          },
+          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-desktop-179469-2.bkd.gz": {
+            "bytes": 770119,
+            "sha256": "d8abe781cb09dcf56c6e487817c9924f8bf8b393c21adbfca93c33e244f613c0"
+          },
           "assets/toys/video-3d/edinburgh-baked/manifest.json": {
-            "bytes": 1974,
-            "sha256": "841b9c9e2b3aa9134ed36d911cc235706c2666e07bb223a1fa44d80f86c25d48"
-          },
-          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-60000-0.bkd.gz": {
-            "bytes": 953990,
-            "sha256": "765a7a8d96ca3f92aec12e8ad625d80f51c978af6e9b8709923ffed2bd5a6d46"
-          },
-          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-116377-0.bkd.gz": {
-            "bytes": 1039961,
-            "sha256": "f918dd0f4c624215beda2c4260ca9aab6ec6dbd530214931a8ec6b5a601bd441"
-          },
-          "assets/toys/video-3d/edinburgh-baked/assets/edinburgh-116377-1.bkd.gz": {
-            "bytes": 807896,
-            "sha256": "a2c7c1cbdf6e1a804d643ceb40fe9e884028b3efcceb48b5a01ba188ee9e3d7f"
+            "bytes": 2638,
+            "sha256": "097b8b56c8633389ddad1d05d79ea9ecee10932f7211c1f17076e05b190b906f"
           }
         },
-        "defaultBytes": 1858076,
-        "sourcePlySha256": "61e63401d6ef5556274ff7977841e9f70bbc793ad503677e3a814799871c7ac9",
-        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
-      }
+        "defaultBytes": 1243988,
+        "sourcePlySha256": "6c0a5dd2f3a49567ad61fa5c9f8f736c76c8c709214fff55a6b2e4ec3ede8c2a",
+        "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
+        "trainedPlySha256": "026153fabd82998a8ff535d3f98dbb1f3333631c347d37164abc44d794c36d8d"
+      },
+      "sha256": "6c0a5dd2f3a49567ad61fa5c9f8f736c76c8c709214fff55a6b2e4ec3ede8c2a"
     },
     {
       "id": "adjara",
@@ -3434,16 +3446,16 @@
       "page": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
       "license": "CC BY 4.0",
       "checked": "October 12, 2026",
-      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/e/e8/Adjara2025walking-summer-forest.webm/Adjara2025walking-summer-forest.webm.480p.vp9.webm",
-      "captureSha256": "1b9c0dd6c01d06e686e12490d30c8a08844e5033254c4507d49cd16d1de9fb88",
+      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/e/e8/Adjara2025walking-summer-forest.webm",
+      "captureSha256": "0c0573ee90a7275470ef199537e70ea90c268e687d117f7a3b9cad10e3b23fa6",
       "files": {
         "assets/toys/video-3d/adjara.ply": {
-          "bytes": 2018587,
-          "sha256": "ccd48b18bb5689cd231bc6bc05b3b02c61e76bc9f9eb88e9d7d17c9332ea6f4b"
+          "bytes": 3360361,
+          "sha256": "e1e265a27914ebcc25012f47218856f7c77b871d30581e654e0f6a4978ac4c54"
         },
         "assets/toys/video-3d/adjara.json": {
-          "bytes": 39090,
-          "sha256": "626b92dea87b83b4f4ec57ce796a628344a521d8dea097543b69f72219dd5137"
+          "bytes": 320340,
+          "sha256": "4167c91a7688334af0a214584b228b1d7c64dc5f2980be5f4e1d6953ed3b0144"
         },
         "assets/toys/video-3d/adjara-source.mp4": {
           "bytes": 1591138,
@@ -3454,32 +3466,50 @@
           "sha256": "422a4a07218f68843a18e30ad4f1f8048e961cb26990e6df5a5480ab06dc0f9d"
         },
         "assets/toys/video-3d/adjara-baked/manifest.json": {
-          "bytes": 1434,
-          "sha256": "11c72259ef2f175f3c8b984b95bb9fdff887bfa7506f0ed6e4ed5d26bd01c7e6"
+          "bytes": 2380,
+          "sha256": "03c49fa897ebea7764b8a7e396e4f683475c5081e93fbac734cfceb856103816"
         },
-        "assets/toys/video-3d/adjara-baked/assets/adjara-29679-0.bkd.gz": {
-          "bytes": 486371,
-          "sha256": "5031e7542839311ef0d1a09eda6fe026d9875b59d953a33711635443d33a290a"
+        "assets/toys/video-3d/adjara-baked/assets/adjara-phone-60000-0.bkd.gz": {
+          "bytes": 986573,
+          "sha256": "b06532f758b7a2c61d900aa0ee8147cae8f3f4a630761978776d7d3c7f291237"
+        },
+        "assets/toys/video-3d/adjara-baked/assets/adjara-desktop-119995-0.bkd.gz": {
+          "bytes": 1077063,
+          "sha256": "2628a75dbff528c03a6ec598c0c5346b450b76c47f64b7ac5ef0a26f0c839d76"
+        },
+        "assets/toys/video-3d/adjara-baked/assets/adjara-desktop-119995-1.bkd.gz": {
+          "bytes": 895594,
+          "sha256": "32881c516876b28f9424cc3818919c0eeea4eeb613e26ce81ecc5845e4278b08"
         }
       },
-      "defaultBytes": 526895,
-      "note": "20 seconds from 0 seconds; 24/24 cameras placed; 1042 completed total iterations; 29679 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.",
+      "defaultBytes": 1309293,
+      "note": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. Cameras were solved again at the frozen source timestamps with COLMAP. Made by Ryan with Codex (GPT-6).",
       "baked": {
         "file": "assets/toys/video-3d/adjara-baked/manifest.json",
         "files": {
-          "assets/toys/video-3d/adjara-baked/manifest.json": {
-            "bytes": 1434,
-            "sha256": "11c72259ef2f175f3c8b984b95bb9fdff887bfa7506f0ed6e4ed5d26bd01c7e6"
+          "assets/toys/video-3d/adjara-baked/assets/adjara-phone-60000-0.bkd.gz": {
+            "bytes": 986573,
+            "sha256": "b06532f758b7a2c61d900aa0ee8147cae8f3f4a630761978776d7d3c7f291237"
           },
-          "assets/toys/video-3d/adjara-baked/assets/adjara-29679-0.bkd.gz": {
-            "bytes": 486371,
-            "sha256": "5031e7542839311ef0d1a09eda6fe026d9875b59d953a33711635443d33a290a"
+          "assets/toys/video-3d/adjara-baked/assets/adjara-desktop-119995-0.bkd.gz": {
+            "bytes": 1077063,
+            "sha256": "2628a75dbff528c03a6ec598c0c5346b450b76c47f64b7ac5ef0a26f0c839d76"
+          },
+          "assets/toys/video-3d/adjara-baked/assets/adjara-desktop-119995-1.bkd.gz": {
+            "bytes": 895594,
+            "sha256": "32881c516876b28f9424cc3818919c0eeea4eeb613e26ce81ecc5845e4278b08"
+          },
+          "assets/toys/video-3d/adjara-baked/manifest.json": {
+            "bytes": 2380,
+            "sha256": "03c49fa897ebea7764b8a7e396e4f683475c5081e93fbac734cfceb856103816"
           }
         },
-        "defaultBytes": 526895,
-        "sourcePlySha256": "ccd48b18bb5689cd231bc6bc05b3b02c61e76bc9f9eb88e9d7d17c9332ea6f4b",
-        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
-      }
+        "defaultBytes": 1309293,
+        "sourcePlySha256": "e1e265a27914ebcc25012f47218856f7c77b871d30581e654e0f6a4978ac4c54",
+        "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. Cameras were solved again at the frozen source timestamps with COLMAP. Made by Ryan with Codex (GPT-6).",
+        "trainedPlySha256": "05eec4eddad2f79e6eb3e8fe60711c3e2eed047abba7e6a6cdea2b3b4d1d246a"
+      },
+      "sha256": "e1e265a27914ebcc25012f47218856f7c77b871d30581e654e0f6a4978ac4c54"
     },
     {
       "id": "lihula",
@@ -3492,16 +3522,16 @@
       "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
       "license": "CC0 1.0",
       "checked": "October 12, 2026",
-      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/c/c9/Drone_video_of_ruins_of_Lihula_stronghold%2C_the_manor_and_town_%28august_2021%29.webm/Drone_video_of_ruins_of_Lihula_stronghold%2C_the_manor_and_town_%28august_2021%29.webm.720p.vp9.webm",
-      "captureSha256": "26493a12ae7a0d8f5597cda4cdc3d82b2cd42a031d1a76fbec70634373a41430",
+      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Drone_video_of_ruins_of_Lihula_stronghold%2C_the_manor_and_town_%28august_2021%29.webm",
+      "captureSha256": "83c274486dbe6a3dc069006959c55bd6c257af04db178f26ba7cf0afaabe5dba",
       "files": {
         "assets/toys/video-3d/lihula.ply": {
-          "bytes": 1918831,
-          "sha256": "7f3f69fa5f02bbaadf9f46c10ff0aa77a7c8e7be79a23af61d1e437ebc2b4572"
+          "bytes": 3360361,
+          "sha256": "7681562565846cedf4bf1b4db02620d80c84675aaaa5f183d3d63bab337dd07e"
         },
         "assets/toys/video-3d/lihula.json": {
-          "bytes": 40208,
-          "sha256": "a11041d77c18751772da0e9587de6599e05577f3a538f6f79378cf09d4fdbd5e"
+          "bytes": 330679,
+          "sha256": "1822fbd3402cdaf973b3dd55ffcc326af5c0a43ee0b74e2771fc731c71eb31a0"
         },
         "assets/toys/video-3d/lihula-source.mp4": {
           "bytes": 1898717,
@@ -3512,32 +3542,50 @@
           "sha256": "339cc6e4c732fa1077711d358d50b38180db0df96d14b9c07fd173d0b3eed500"
         },
         "assets/toys/video-3d/lihula-baked/manifest.json": {
-          "bytes": 1529,
-          "sha256": "7ff3ce1d97e2df8e647a4498308206dab540431124aa7ee88978342e0588b0ce"
+          "bytes": 2468,
+          "sha256": "e3f13b07da507a57b67f9adbf13b2c76b57149c9445d6f44ae494d90e4b95933"
         },
-        "assets/toys/video-3d/lihula-baked/assets/lihula-28212-0.bkd.gz": {
-          "bytes": 458087,
-          "sha256": "4ef3ab1c429d0f18256f8c702e4994c50702ecd4de4d2a9d796bffd060ae59bd"
+        "assets/toys/video-3d/lihula-baked/assets/lihula-phone-60000-0.bkd.gz": {
+          "bytes": 978791,
+          "sha256": "664c2d10d1565a4e9c9dbcedc36500eeb872882bc8263d3807a50f9c1153dd75"
+        },
+        "assets/toys/video-3d/lihula-baked/assets/lihula-desktop-89999-0.bkd.gz": {
+          "bytes": 1068274,
+          "sha256": "db63331d13973b83baf9556e1e54dbb3187e62bb25f4b54193c4b1e5b20e52cb"
+        },
+        "assets/toys/video-3d/lihula-baked/assets/lihula-desktop-89999-1.bkd.gz": {
+          "bytes": 399847,
+          "sha256": "69771ecf7d79717a60d7dbc9ff7f344b4450bf8054cc356da050700551cc6e10"
         }
       },
-      "defaultBytes": 499824,
-      "note": "20 seconds from 18 seconds; 24/24 cameras placed; 1092 completed total iterations; 28212 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.",
+      "defaultBytes": 1311938,
+      "note": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
       "baked": {
         "file": "assets/toys/video-3d/lihula-baked/manifest.json",
         "files": {
-          "assets/toys/video-3d/lihula-baked/manifest.json": {
-            "bytes": 1529,
-            "sha256": "7ff3ce1d97e2df8e647a4498308206dab540431124aa7ee88978342e0588b0ce"
+          "assets/toys/video-3d/lihula-baked/assets/lihula-phone-60000-0.bkd.gz": {
+            "bytes": 978791,
+            "sha256": "664c2d10d1565a4e9c9dbcedc36500eeb872882bc8263d3807a50f9c1153dd75"
           },
-          "assets/toys/video-3d/lihula-baked/assets/lihula-28212-0.bkd.gz": {
-            "bytes": 458087,
-            "sha256": "4ef3ab1c429d0f18256f8c702e4994c50702ecd4de4d2a9d796bffd060ae59bd"
+          "assets/toys/video-3d/lihula-baked/assets/lihula-desktop-89999-0.bkd.gz": {
+            "bytes": 1068274,
+            "sha256": "db63331d13973b83baf9556e1e54dbb3187e62bb25f4b54193c4b1e5b20e52cb"
+          },
+          "assets/toys/video-3d/lihula-baked/assets/lihula-desktop-89999-1.bkd.gz": {
+            "bytes": 399847,
+            "sha256": "69771ecf7d79717a60d7dbc9ff7f344b4450bf8054cc356da050700551cc6e10"
+          },
+          "assets/toys/video-3d/lihula-baked/manifest.json": {
+            "bytes": 2468,
+            "sha256": "e3f13b07da507a57b67f9adbf13b2c76b57149c9445d6f44ae494d90e4b95933"
           }
         },
-        "defaultBytes": 499824,
-        "sourcePlySha256": "7f3f69fa5f02bbaadf9f46c10ff0aa77a7c8e7be79a23af61d1e437ebc2b4572",
-        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
-      }
+        "defaultBytes": 1311938,
+        "sourcePlySha256": "7681562565846cedf4bf1b4db02620d80c84675aaaa5f183d3d63bab337dd07e",
+        "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
+        "trainedPlySha256": "bbef04693f9d4076494911a1d36feefa7be44dc6b0507784ac393d0325ca0d2c"
+      },
+      "sha256": "7681562565846cedf4bf1b4db02620d80c84675aaaa5f183d3d63bab337dd07e"
     },
     {
       "id": "toolse",
@@ -3550,16 +3598,16 @@
       "page": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
       "license": "CC BY-SA 4.0",
       "checked": "October 12, 2026",
-      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/f/f5/Toolse_castle_in_Estonia_%28Fall_2021%29.webm/Toolse_castle_in_Estonia_%28Fall_2021%29.webm.720p.vp9.webm",
-      "captureSha256": "7af5c3242045fc56d7d2c6b954b7ea0721f2ee4c31ef4dabcf1f3217d9c884f3",
+      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f5/Toolse_castle_in_Estonia_%28Fall_2021%29.webm",
+      "captureSha256": "8be87039761226498d39a66d4b2977e80329fc3eabd9819286de7cd5a9957a69",
       "files": {
         "assets/toys/video-3d/toolse.ply": {
-          "bytes": 1978943,
-          "sha256": "565aeafb33dc0e0d82312ace949e401510d31551268bce088aab8978c7626125"
+          "bytes": 3359913,
+          "sha256": "87cb7ab74f1bb587492096666ead8fddb38e9de5def3863ceaf1719c6d03a4d9"
         },
         "assets/toys/video-3d/toolse.json": {
-          "bytes": 42547,
-          "sha256": "fedf0e7b184f1c48b26969ed703d70a51225bc3962205aa4f1765d59cab091b2"
+          "bytes": 315621,
+          "sha256": "8b4b9342592851566de459b3beb0cb0cadf37d81cce0509bb5025569d4f7cf03"
         },
         "assets/toys/video-3d/toolse-source.mp4": {
           "bytes": 1554857,
@@ -3570,32 +3618,50 @@
           "sha256": "99e0942825029222456b2c5fa79d94387b25725a2e327a79ed27326ab5720fc6"
         },
         "assets/toys/video-3d/toolse-baked/manifest.json": {
-          "bytes": 1449,
-          "sha256": "17d47d65c7f8ecd24faeb4964a8c959dfea6fba0501881defe93a746554cc438"
+          "bytes": 2389,
+          "sha256": "4354a0050ed94b526e0cb3ebf9d043eff2630ae1b7ed8a5585b81f86f2a24d09"
         },
-        "assets/toys/video-3d/toolse-baked/assets/toolse-29096-0.bkd.gz": {
-          "bytes": 464805,
-          "sha256": "9648f7fc421292a17db3de6154ad116772a3e6a4e2d7da9349ed038e99aab450"
+        "assets/toys/video-3d/toolse-baked/assets/toolse-phone-59992-0.bkd.gz": {
+          "bytes": 954976,
+          "sha256": "d569673270d4a44c33ee604d905f84f142360d309a83bf45cc6bd2ebbcfbba70"
+        },
+        "assets/toys/video-3d/toolse-baked/assets/toolse-desktop-89989-0.bkd.gz": {
+          "bytes": 1040769,
+          "sha256": "29dd64cb1c9ef8f6a257351e980a86ed72a498072e3bfbb0b996ea16082c0978"
+        },
+        "assets/toys/video-3d/toolse-baked/assets/toolse-desktop-89989-1.bkd.gz": {
+          "bytes": 389573,
+          "sha256": "df48ff307aa7018171a5627583f604a87fead9e8961678f379c7036af33a0001"
         }
       },
-      "defaultBytes": 508801,
-      "note": "20 seconds from 14 seconds; 24/24 cameras placed; 922 completed total iterations; 29096 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.",
+      "defaultBytes": 1272986,
+      "note": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
       "baked": {
         "file": "assets/toys/video-3d/toolse-baked/manifest.json",
         "files": {
-          "assets/toys/video-3d/toolse-baked/manifest.json": {
-            "bytes": 1449,
-            "sha256": "17d47d65c7f8ecd24faeb4964a8c959dfea6fba0501881defe93a746554cc438"
+          "assets/toys/video-3d/toolse-baked/assets/toolse-phone-59992-0.bkd.gz": {
+            "bytes": 954976,
+            "sha256": "d569673270d4a44c33ee604d905f84f142360d309a83bf45cc6bd2ebbcfbba70"
           },
-          "assets/toys/video-3d/toolse-baked/assets/toolse-29096-0.bkd.gz": {
-            "bytes": 464805,
-            "sha256": "9648f7fc421292a17db3de6154ad116772a3e6a4e2d7da9349ed038e99aab450"
+          "assets/toys/video-3d/toolse-baked/assets/toolse-desktop-89989-0.bkd.gz": {
+            "bytes": 1040769,
+            "sha256": "29dd64cb1c9ef8f6a257351e980a86ed72a498072e3bfbb0b996ea16082c0978"
+          },
+          "assets/toys/video-3d/toolse-baked/assets/toolse-desktop-89989-1.bkd.gz": {
+            "bytes": 389573,
+            "sha256": "df48ff307aa7018171a5627583f604a87fead9e8961678f379c7036af33a0001"
+          },
+          "assets/toys/video-3d/toolse-baked/manifest.json": {
+            "bytes": 2389,
+            "sha256": "4354a0050ed94b526e0cb3ebf9d043eff2630ae1b7ed8a5585b81f86f2a24d09"
           }
         },
-        "defaultBytes": 508801,
-        "sourcePlySha256": "565aeafb33dc0e0d82312ace949e401510d31551268bce088aab8978c7626125",
-        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
-      }
+        "defaultBytes": 1272986,
+        "sourcePlySha256": "87cb7ab74f1bb587492096666ead8fddb38e9de5def3863ceaf1719c6d03a4d9",
+        "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
+        "trainedPlySha256": "57d7c8f838d42c3cbc02b0eedc87a8953d6636f810a565379d6b6514b3dbbe0a"
+      },
+      "sha256": "87cb7ab74f1bb587492096666ead8fddb38e9de5def3863ceaf1719c6d03a4d9"
     },
     {
       "id": "poltsamaa",
@@ -3608,16 +3674,16 @@
       "page": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
       "license": "CC BY-SA 4.0",
       "checked": "October 12, 2026",
-      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/62/Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm/Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm.1080p.vp9.webm",
-      "captureSha256": "5b2e98a8b875175840f15b335a9c324ffc9a5f2e44b226cb10cf48850bc1d06b",
+      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/6/62/Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
+      "captureSha256": "50cd00045ef7a58341c3b77d5f844d7b20391dfc89ce3f283673b15d6430ccd6",
       "files": {
         "assets/toys/video-3d/poltsamaa.ply": {
-          "bytes": 2024571,
-          "sha256": "9e1c24609d5fe2e7db854c90151b47b13f2e89b75d0e6cf9afdf005e3ed34d49"
+          "bytes": 3360305,
+          "sha256": "b3c9fa31bd629d0f75f28c9fca07bc2609ffea7198b632bc12e2ad442d21c583"
         },
         "assets/toys/video-3d/poltsamaa.json": {
-          "bytes": 104951,
-          "sha256": "15f53e616955a6541924a08b865e4f7fa63464925ec400d369b75db04d0e5188"
+          "bytes": 354637,
+          "sha256": "bcc729ab8c24efe5d5c1d3702ad1ba786f31c5fdce86ad0236b61dc124811872"
         },
         "assets/toys/video-3d/poltsamaa-source.mp4": {
           "bytes": 2139108,
@@ -3628,32 +3694,50 @@
           "sha256": "f08f0b2690b19518aa2c5778aa0835cf2210e961a8afdaf29b89ff89c1c6bcea"
         },
         "assets/toys/video-3d/poltsamaa-baked/manifest.json": {
-          "bytes": 1494,
-          "sha256": "0943dd8a5ef3c8f4e9812c55fc4ec50a1b3bc8bc72ae7bd1f9d2d0d98d31cd05"
+          "bytes": 2441,
+          "sha256": "944615f83d5fd5d22d610d59e9b25cddabfce5593e746d9cdadafc7de4ec96fa"
         },
-        "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-29767-0.bkd.gz": {
-          "bytes": 488080,
-          "sha256": "9b23e77a5eed715b507fd64471b7a2b411c8b977a168c58e1bc75007aeacf5dd"
+        "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-phone-59999-0.bkd.gz": {
+          "bytes": 984661,
+          "sha256": "95d8d54627256e9bc6c2ed4d17a4d2b6befe5bbe033238c51b71c34b37245620"
+        },
+        "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-desktop-89994-0.bkd.gz": {
+          "bytes": 1074079,
+          "sha256": "294cf1098cd3cd16b809e2fad2bfbf5ab9f7a280449ce5de286f4f3e1ff10821"
+        },
+        "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-desktop-89994-1.bkd.gz": {
+          "bytes": 401968,
+          "sha256": "6e453587c15d636203ae9d08a624576e11a7677336ce5eec94b69ff761e39cd4"
         }
       },
-      "defaultBytes": 594525,
-      "note": "20 seconds from 24 seconds; 24/24 cameras placed; 1102 completed total iterations; 29767 exported splats. Selected one continuous shot, removed sound, made 480p source cuts, solved cameras, and trained real Gaussian splats through Splat.js. Compact model budget, initially 256 px training. The last continuation completed 102 additional steps at up to 640 px, reusing the recorded cameras and learned model. Silent MP4 and WebM cuts ship for Show the original. Scene, path, and source cuts retain the source license. No identifiable people, logos, or brands were seen in the inspected shot.",
+      "defaultBytes": 1341739,
+      "note": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
       "baked": {
         "file": "assets/toys/video-3d/poltsamaa-baked/manifest.json",
         "files": {
-          "assets/toys/video-3d/poltsamaa-baked/manifest.json": {
-            "bytes": 1494,
-            "sha256": "0943dd8a5ef3c8f4e9812c55fc4ec50a1b3bc8bc72ae7bd1f9d2d0d98d31cd05"
+          "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-phone-59999-0.bkd.gz": {
+            "bytes": 984661,
+            "sha256": "95d8d54627256e9bc6c2ed4d17a4d2b6befe5bbe033238c51b71c34b37245620"
           },
-          "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-29767-0.bkd.gz": {
-            "bytes": 488080,
-            "sha256": "9b23e77a5eed715b507fd64471b7a2b411c8b977a168c58e1bc75007aeacf5dd"
+          "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-desktop-89994-0.bkd.gz": {
+            "bytes": 1074079,
+            "sha256": "294cf1098cd3cd16b809e2fad2bfbf5ab9f7a280449ce5de286f4f3e1ff10821"
+          },
+          "assets/toys/video-3d/poltsamaa-baked/assets/poltsamaa-desktop-89994-1.bkd.gz": {
+            "bytes": 401968,
+            "sha256": "6e453587c15d636203ae9d08a624576e11a7677336ce5eec94b69ff761e39cd4"
+          },
+          "assets/toys/video-3d/poltsamaa-baked/manifest.json": {
+            "bytes": 2441,
+            "sha256": "944615f83d5fd5d22d610d59e9b25cddabfce5593e746d9cdadafc7de4ec96fa"
           }
         },
-        "defaultBytes": 594525,
-        "sourcePlySha256": "9e1c24609d5fe2e7db854c90151b47b13f2e89b75d0e6cf9afdf005e3ed34d49",
-        "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
-      }
+        "defaultBytes": 1341739,
+        "sourcePlySha256": "b3c9fa31bd629d0f75f28c9fca07bc2609ffea7198b632bc12e2ad442d21c583",
+        "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6).",
+        "trainedPlySha256": "ee717653f1ca726dd30ec07a797a4a045929927ed49afde9f4190e3ff5411b44"
+      },
+      "sha256": "b3c9fa31bd629d0f75f28c9fca07bc2609ffea7198b632bc12e2ad442d21c583"
     }
   ],
   "movingSamples": [

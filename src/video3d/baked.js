@@ -2,10 +2,13 @@
 // camera intrinsics stay in the original training frame; quantization changes no camera poses.
 import { loadBaked, splatAt } from "../baked.js";
 
-export async function readBakedScene(url, budget = 400000) {
+// An omitted budget loads the manifest's declared default. Device Auto passes its budget
+// explicitly, so desktops can choose the larger independently fitted tier.
+export async function readBakedScene(url, budget = 0) {
   const asset = await loadBaked(url, { budget });
   const out = {
     count: asset.n,
+    tierRole: asset.tier.role || null,
     pos: new Float32Array(asset.n * 3),
     scales: new Float32Array(asset.n * 3),
     quat: new Float32Array(asset.n * 4),

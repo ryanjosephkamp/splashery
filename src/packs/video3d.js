@@ -19,6 +19,7 @@ import { cleanScene } from "../video3d/cleanup.js";
 import { mountWalk } from "../video3d/walk.js";
 import { buildWalkRegion } from "../video3d/region.js";
 import { mountSceneCredit } from "../video3d/credit.js";
+import { sampleBudget, phoneSample } from "../video3d/tiers.js";
 
 const V3D = {
   file: null, // the video somebody opened (a File; it stays on the device)
@@ -45,9 +46,9 @@ export function sceneFromPly(bytes, cams, keep = 400000, { affine = false } = {}
   return sceneFromSplats(raw, cams, { affine });
 }
 
-export function sceneFromSplats(raw, cams, { affine = false } = {}) {
+export function sceneFromSplats(raw, cams, { affine = false, preservePhotometric = false } = {}) {
   const frame = sceneFrame(raw, cams);
-  const framed = splatsInFrame(frame, raw, { contract: !affine });
+  const framed = splatsInFrame(frame, raw, { contract: !affine && !preservePhotometric });
   // globalThis.__v3dNoPrune (tools/v3d-clip.mjs --prune=0) shows the scene as trained, for a
   // before-and-after.
   const path = cams.map((c) => ({ time: c.time, f: c.f, w: c.w, h: c.h, ...toyCamera(frame, c) }));
@@ -55,12 +56,17 @@ export function sceneFromSplats(raw, cams, { affine = false } = {}) {
     ? null
     : pruneSplats(
         framed,
-        undefined,
+        // A measured opaque bake needs its fitted broad surface Gaussians. Absolute world-size
+        // cuts can remove the surface base and expose floaters and the background. Keep the
+        // faint/near-camera and subsequent geometric support/ray guards for these models.
+        preservePhotometric
+          ? { faint: 0.008, smearSize: Infinity, smearOpacity: 0.4, giant: Infinity }
+          : undefined,
         path.map((c) => c.pos),
       );
   const cleaned = globalThis.__v3dNoPrune
     ? null
-    : cleanScene(pruned ? pruned.scene : framed, path, { affine });
+    : cleanScene(pruned ? pruned.scene : framed, path, { affine, preservePhotometric });
   const scene = cleaned?.scene || framed;
   const domeCenter =
     affine && path.length
@@ -82,6 +88,7 @@ export function sceneFromSplats(raw, cams, { affine = false } = {}) {
     dome: { center: domeCenter, radius: domeRadius },
     clamped: cleaned?.clamped || 0,
     affine,
+    preservePhotometric,
     region: affine ? buildWalkRegion(scene, path) : null,
   };
 }
@@ -108,8 +115,12 @@ async function loadSample(id, navigation, budget = 400000) {
         : readBytes(`../../assets/toys/video-3d/${s.id}.ply`).then((bytes) => readSplatPly(bytes)),
       readBytes(`../../assets/toys/video-3d/${s.id}.json`),
     ]);
-    const meta = JSON.parse(new TextDecoder().decode(json));
-    const framed = sceneFromSplats(raw, meta.cams, { affine: navigation === "walk" });
+    const baseMeta = JSON.parse(new TextDecoder().decode(json));
+    const meta = raw.tierRole === "desktop" && baseMeta.desktop ? baseMeta.desktop : baseMeta;
+    const framed = sceneFromSplats(raw, meta.cams, {
+      affine: navigation === "walk",
+      preservePhotometric: !!meta.bake?.clarity?.opaque || meta.bake?.backend === "msplat/Metal",
+    });
     V3D.samples.set(key, { ...framed, name: s.label, stats: meta.stats, sample: s, uid: s.id });
   }
   return V3D.samples.get(key);
@@ -381,9 +392,10 @@ const VIDEO_3D = {
   density: 1.6,
   frameReaches: true,
   turntable: false,
-  // The Lab lane's sharper falloff (labs only, docs/lab/KERNELS.md): trained splats read crisper
-  // with it, edge sharpness +20% to +63% on the samples' flights (docs/lab/VIDEO3D.md).
-  kernel: "sharp",
+  // These models fit Gaussian compositing. A steeper display kernel changes fitted overlaps,
+  // lowering held-out SSIM and adding visible grain. Detail comes from the measured bakes.
+  kernel: "gaussian",
+  render: { cull: "off", dpr: "native", adapt: "off" },
   options: [
     {
       key: "navigation",
@@ -511,7 +523,10 @@ const VIDEO_3D = {
         want = await loadSample(
           o.source === "custom" ? SAMPLES[0].id : o.source,
           o.navigation,
-          ctx?.count,
+          sampleBudget(ctx?.count, {
+            profile: ctx?.profile,
+            phone: phoneSample(ctx?.profile),
+          }),
         );
       } catch {
         want = null;
@@ -556,7 +571,7 @@ const VIDEO_3D = {
     }
     const s = src.scene;
     k.fitOn = false; // the scene and its camera path share the frame scene.js made
-    if (src.affine) {
+    if (src.affine || src.preservePhotometric) {
       // Frame camera limits on the captured area rather than extreme background splats.
       for (const c of src.path) k.reach(c.pos);
       k.reach([-1, -1, -1]);
@@ -580,8 +595,15 @@ const VIDEO_3D = {
       pattern: false,
     });
     const per = 160000 / k.count; // a cloud's count is given per 160,000 of the budget
-    k.cloud({ count: picked.near.length * per, pattern: false }, (_r, j) =>
-      j < picked.near.length ? splat(picked.near[j]) : null,
+    // Calibrated geometry already shares the camera frame and can extend beyond the unit ball.
+    // Declare it outside kit fitting rather than contracting the fitted world to that ball.
+    k.cloud(
+      {
+        count: picked.near.length * per,
+        pattern: false,
+        fit: !(src.affine || src.preservePhotometric),
+      },
+      (_r, j) => (j < picked.near.length ? splat(picked.near[j]) : null),
     );
     // The far shell (water, skyline, sky, pulled in between radius 1 and 2) sits outside the fit.
     if (picked.far.length)

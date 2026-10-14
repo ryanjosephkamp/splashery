@@ -12,6 +12,7 @@
 // (r7): the flight, a drag that turns the view while it flies (2 to 4 s), a tap that pauses it
 // (at 5.5 s, the view held) and a tap that goes on (at 8 s).
 // --strip=6 also writes <out>-strip.png, six frames side by side.
+// --profile=low --phone=1 captures the compact phone tier; the legacy default is high.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
@@ -35,7 +36,11 @@ const settings = {
   swing: Number(opt("swing", 0.9)),
   bg: opt("bg", "#111111"),
   prune: opt("prune", "1") !== "0",
+  profile: opt("profile", "high"),
+  phone: opt("phone", "0") === "1",
 };
+if (!["auto", "low", "mid", "high", "max"].includes(settings.profile))
+  throw new Error("Choose an existing render profile.");
 const kernel = opt("kernel", "");
 
 const browser = await chromium.launch({
@@ -45,7 +50,7 @@ const browser = await chromium.launch({
 const page = await browser.newPage({ viewport: { width: w, height: h } });
 page.on("pageerror", (e) => console.error("page error:", e.message));
 await page.goto(
-  `${base}?labs=1&renderer=webgl2&profile=high&adapt=off${kernel ? `&kernel=${kernel}` : ""}`,
+  `${base}?labs=1&renderer=webgl2&profile=${settings.profile}&adapt=off${kernel ? `&kernel=${kernel}` : ""}`,
 );
 await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
 const res = await page.evaluate(
@@ -53,6 +58,7 @@ const res = await page.evaluate(
     const { app, player } = window.__splashery;
     const { GIFEncoder, quantize, applyPalette } = await import("gifenc");
     globalThis.__v3dNoPrune = !s.prune;
+    if (s.phone) globalThis.__v3dPhone = true;
     await app.chooseToy("video-3d");
     if (s.scene) await app.setToyOptions({ source: s.scene });
     if (s.mode === "walk") await app.setToyOptions({ navigation: "walk" });

@@ -2,31 +2,56 @@
   "format": "splashery-baked-manifest",
   "version": 1,
   "id": "adjara",
-  "title": "Forest path, walked (compact)",
+  "title": "Forest path, walked",
   "source": {
     "file": "adjara.ply",
-    "sha256": "ccd48b18bb5689cd231bc6bc05b3b02c61e76bc9f9eb88e9d7d17c9332ea6f4b",
-    "splats": 29679,
-    "up": "y"
+    "sha256": "e1e265a27914ebcc25012f47218856f7c77b871d30581e654e0f6a4978ac4c54",
+    "splats": 60000,
+    "up": "y",
+    "trainedPlySha256": "05eec4eddad2f79e6eb3e8fe60711c3e2eed047abba7e6a6cdea2b3b4d1d246a"
   },
   "bounds": {
-    "min": [-20.923425674438477, -49.11762619018555, -3.1470203399658203],
-    "max": [14.925187110900879, 3.8310132026672363, 107.7322998046875]
+    "min": [-6.147233486175537, -8.057010650634766, -3.2996342182159424],
+    "max": [6.388259410858154, 14.282012939453125, 26.09967041015625]
   },
   "parts": [{ "id": 0, "name": "body" }],
-  "defaultTier": 29679,
+  "defaultTier": 60000,
   "tiers": [
     {
-      "splats": 29679,
-      "bytes": 486371,
+      "splats": 60000,
+      "bytes": 986573,
       "files": [
         {
-          "path": "assets/adjara-29679-0.bkd.gz",
-          "splats": 29679,
-          "bytes": 486371,
-          "sha256": "5031e7542839311ef0d1a09eda6fe026d9875b59d953a33711635443d33a290a"
+          "path": "assets/adjara-phone-60000-0.bkd.gz",
+          "splats": 60000,
+          "bytes": 986573,
+          "sha256": "b06532f758b7a2c61d900aa0ee8147cae8f3f4a630761978776d7d3c7f291237"
         }
-      ]
+      ],
+      "role": "phone",
+      "trainingSide": 640,
+      "sourcePlySha256": "05eec4eddad2f79e6eb3e8fe60711c3e2eed047abba7e6a6cdea2b3b4d1d246a"
+    },
+    {
+      "splats": 119995,
+      "bytes": 1972657,
+      "files": [
+        {
+          "path": "assets/adjara-desktop-119995-0.bkd.gz",
+          "splats": 65536,
+          "bytes": 1077063,
+          "sha256": "2628a75dbff528c03a6ec598c0c5346b450b76c47f64b7ac5ef0a26f0c839d76"
+        },
+        {
+          "path": "assets/adjara-desktop-119995-1.bkd.gz",
+          "splats": 54459,
+          "bytes": 895594,
+          "sha256": "32881c516876b28f9424cc3818919c0eeea4eeb613e26ce81ecc5845e4278b08"
+        }
+      ],
+      "role": "desktop",
+      "trainingSide": 960,
+      "sourcePlySha256": "da8ab77323fb2a0928de567030b735643a20da956091ac059873274688e92a4a"
     }
   ],
   "credit": {
@@ -35,7 +60,7 @@
     "source": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
     "license": "CC BY 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
-    "checked": "October 12, 2026",
-    "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+    "checked": "October 13, 2026",
+    "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. Cameras were solved again at the frozen source timestamps with COLMAP. Made by Ryan with Codex (GPT-6)."
   }
 }

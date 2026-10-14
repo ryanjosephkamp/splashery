@@ -5,46 +5,59 @@
   "title": "Street, walked",
   "source": {
     "file": "edinburgh.ply",
-    "sha256": "61e63401d6ef5556274ff7977841e9f70bbc793ad503677e3a814799871c7ac9",
-    "splats": 116377,
-    "up": "y"
+    "sha256": "6c0a5dd2f3a49567ad61fa5c9f8f736c76c8c709214fff55a6b2e4ec3ede8c2a",
+    "splats": 59756,
+    "up": "y",
+    "trainedPlySha256": "026153fabd82998a8ff535d3f98dbb1f3333631c347d37164abc44d794c36d8d"
   },
   "bounds": {
-    "min": [-12.59228801727295, -4.691856384277344, -0.2816396951675415],
-    "max": [6.3360137939453125, 2.7728664875030518, 38.596309661865234]
+    "min": [-15.190072059631348, -4.764132976531982, -0.19093294441699982],
+    "max": [6.2924394607543945, 4.589005947113037, 38.61014175415039]
   },
   "parts": [{ "id": 0, "name": "body" }],
-  "defaultTier": 116377,
+  "defaultTier": 59756,
   "tiers": [
     {
-      "splats": 60000,
-      "bytes": 953990,
+      "splats": 59756,
+      "bytes": 952353,
       "files": [
         {
-          "path": "assets/edinburgh-60000-0.bkd.gz",
-          "splats": 60000,
-          "bytes": 953990,
-          "sha256": "765a7a8d96ca3f92aec12e8ad625d80f51c978af6e9b8709923ffed2bd5a6d46"
+          "path": "assets/edinburgh-phone-59756-0.bkd.gz",
+          "splats": 59756,
+          "bytes": 952353,
+          "sha256": "a243027651493f6ff511819dea91b76ff60fe22a66aa2bdbcf6a82a047fa3c40"
         }
-      ]
+      ],
+      "role": "phone",
+      "trainingSide": 640,
+      "sourcePlySha256": "026153fabd82998a8ff535d3f98dbb1f3333631c347d37164abc44d794c36d8d"
     },
     {
-      "splats": 116377,
-      "bytes": 1847857,
+      "splats": 179469,
+      "bytes": 2851022,
       "files": [
         {
-          "path": "assets/edinburgh-116377-0.bkd.gz",
+          "path": "assets/edinburgh-desktop-179469-0.bkd.gz",
           "splats": 65536,
-          "bytes": 1039961,
-          "sha256": "f918dd0f4c624215beda2c4260ca9aab6ec6dbd530214931a8ec6b5a601bd441"
+          "bytes": 1040533,
+          "sha256": "097be38440c4e1ba6398eb134c0091257aec3ae5f603cd07e27ecbd4686d925d"
         },
         {
-          "path": "assets/edinburgh-116377-1.bkd.gz",
-          "splats": 50841,
-          "bytes": 807896,
-          "sha256": "a2c7c1cbdf6e1a804d643ceb40fe9e884028b3efcceb48b5a01ba188ee9e3d7f"
+          "path": "assets/edinburgh-desktop-179469-1.bkd.gz",
+          "splats": 65536,
+          "bytes": 1040370,
+          "sha256": "4f80b78505094450ebf1c0a222e9adac8cf533eb8561eedb41fbc8797028ab47"
+        },
+        {
+          "path": "assets/edinburgh-desktop-179469-2.bkd.gz",
+          "splats": 48397,
+          "bytes": 770119,
+          "sha256": "d8abe781cb09dcf56c6e487817c9924f8bf8b393c21adbfca93c33e244f613c0"
         }
-      ]
+      ],
+      "role": "desktop",
+      "trainingSide": 960,
+      "sourcePlySha256": "bbba22f4275ec5242ac8d10afd3a42f0c40f5dca7ab7f552fab3d381e257b2de"
     }
   ],
   "credit": {
@@ -53,7 +66,7 @@
     "source": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
     "license": "CC BY 3.0",
     "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
-    "checked": "October 12, 2026",
-    "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+    "checked": "October 13, 2026",
+    "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6)."
   }
 }

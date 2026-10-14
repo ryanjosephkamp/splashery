@@ -23,7 +23,7 @@ export function cameraView(c) {
   };
 }
 
-export function cleanScene(s, path, { affine = false } = {}) {
+export function cleanScene(s, path, { affine = false, preservePhotometric = false } = {}) {
   const views = path.map(cameraView);
   const segments = path.map((a, i) => {
     const b = path[i + 1] || a;
@@ -83,9 +83,15 @@ export function cleanScene(s, path, { affine = false } = {}) {
     // A ray has one long axis and two short ones. A broad, thin wall can have a tiny normal
     // axis without being a ray, so compare the longest axis with the middle one.
     const upperBackground = p[1] > high && Math.hypot(...p) > 0.8;
-    const rayRatio = upperBackground ? 6 : 24;
-    const raySize = upperBackground ? 0.025 : 0.035;
-    if (big / Math.max(1e-8, middle) > rayRatio && big > raySize) {
+    // Fitted opaque bars and branches can be long and thin. Keep those with camera support;
+    // uncertain thin rays still use the shape guard. Legacy exports retain the stricter sky cut.
+    const rayRatio = upperBackground && !preservePhotometric ? 6 : 24;
+    const raySize = upperBackground && !preservePhotometric ? 0.025 : 0.035;
+    if (
+      big / Math.max(1e-8, middle) > rayRatio &&
+      big > raySize &&
+      (!preservePhotometric || s.opacity[i] < 0.5)
+    ) {
       removed.ray++;
       continue;
     }

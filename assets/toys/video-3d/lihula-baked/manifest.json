@@ -2,31 +2,56 @@
   "format": "splashery-baked-manifest",
   "version": 1,
   "id": "lihula",
-  "title": "Ruined courtyard, flown over (compact)",
+  "title": "Ruined courtyard, flown over",
   "source": {
     "file": "lihula.ply",
-    "sha256": "7f3f69fa5f02bbaadf9f46c10ff0aa77a7c8e7be79a23af61d1e437ebc2b4572",
-    "splats": 28212,
-    "up": "y"
+    "sha256": "7681562565846cedf4bf1b4db02620d80c84675aaaa5f183d3d63bab337dd07e",
+    "splats": 60000,
+    "up": "y",
+    "trainedPlySha256": "bbef04693f9d4076494911a1d36feefa7be44dc6b0507784ac393d0325ca0d2c"
   },
   "bounds": {
-    "min": [-2.1393327713012695, -2.099775552749634, -0.742924153804779],
-    "max": [2.1592319011688232, 1.5486589670181274, 4.661925792694092]
+    "min": [-2.4364657402038574, -2.261157989501953, -0.8119271397590637],
+    "max": [2.213336229324341, 1.6091876029968262, 4.65843391418457]
   },
   "parts": [{ "id": 0, "name": "body" }],
-  "defaultTier": 28212,
+  "defaultTier": 60000,
   "tiers": [
     {
-      "splats": 28212,
-      "bytes": 458087,
+      "splats": 60000,
+      "bytes": 978791,
       "files": [
         {
-          "path": "assets/lihula-28212-0.bkd.gz",
-          "splats": 28212,
-          "bytes": 458087,
-          "sha256": "4ef3ab1c429d0f18256f8c702e4994c50702ecd4de4d2a9d796bffd060ae59bd"
+          "path": "assets/lihula-phone-60000-0.bkd.gz",
+          "splats": 60000,
+          "bytes": 978791,
+          "sha256": "664c2d10d1565a4e9c9dbcedc36500eeb872882bc8263d3807a50f9c1153dd75"
         }
-      ]
+      ],
+      "role": "phone",
+      "trainingSide": 640,
+      "sourcePlySha256": "bbef04693f9d4076494911a1d36feefa7be44dc6b0507784ac393d0325ca0d2c"
+    },
+    {
+      "splats": 89999,
+      "bytes": 1468121,
+      "files": [
+        {
+          "path": "assets/lihula-desktop-89999-0.bkd.gz",
+          "splats": 65536,
+          "bytes": 1068274,
+          "sha256": "db63331d13973b83baf9556e1e54dbb3187e62bb25f4b54193c4b1e5b20e52cb"
+        },
+        {
+          "path": "assets/lihula-desktop-89999-1.bkd.gz",
+          "splats": 24463,
+          "bytes": 399847,
+          "sha256": "69771ecf7d79717a60d7dbc9ff7f344b4450bf8054cc356da050700551cc6e10"
+        }
+      ],
+      "role": "desktop",
+      "trainingSide": 960,
+      "sourcePlySha256": "0f7fef63f710cda4b8c3ccc33be64760c690202bb283bd4c99662c3ab9f2bcd2"
     }
   ],
   "credit": {
@@ -35,7 +60,7 @@
     "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
     "license": "CC0 1.0",
     "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
-    "checked": "October 12, 2026",
-    "changes": "Quantized the reviewed trained PLY into BKD1 phone tiers, preserving Gaussian rotations, scales, opacity, and degree-0 color. Smaller tiers thin deterministically. Cameras and source footage are unchanged. Made by Ryan with Codex (GPT-6)."
+    "checked": "October 13, 2026",
+    "changes": "Independently fitted 640px phone and 960px desktop Gaussian models from the existing capture span, then quantized into BKD1. Capture spans, licenses, and source IDs are retained. The recorded camera path and interpolated midpoints are retained. Made by Ryan with Codex (GPT-6)."
   }
 }

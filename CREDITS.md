@@ -750,35 +750,36 @@ New Video to 3D captures, checked on their live Commons pages on October 12, 202
 
 - [Forest path, walked](https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm),
   by Vitaly Zdanevich: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), 20 seconds from 0
-  seconds. 24/24 cameras, 1,042 completed total training steps, and 29,679 exported splats. Last
-  export trained at up to 640 pixels.
+  seconds.
 - [Ruined courtyard, flown over](<https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm>),
   by Sillerkiil: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), 20 seconds from 18
-  seconds. 24/24 cameras, 1,092 completed total training steps, and 28,212 exported splats. Last
-  export trained at up to 640 pixels.
+  seconds.
 - [Coastal ruins, drone pass](<https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm>),
   by Sillerkiil: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), 20 seconds from 14
-  seconds. 24/24 cameras, 922 completed total training steps, and 29,096 exported splats. Last
-  export trained at up to 640 pixels.
+  seconds.
 - [Castle courtyard, orbited](https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm),
   by Sillerkiil: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), 20 seconds from 24
-  seconds. 24/24 cameras, 1,102 completed total training steps, and 29,767 exported splats. Last
-  export trained at up to 640 pixels.
+  seconds.
 
-The transformations were made by Ryan with Codex (GPT-6). These are real captures, independently
-solved and trained with Splat.js. Their silent 480p source cuts, camera paths, and splats retain
-each source license, including CC BY-SA. The models use compact budgets; every completed iteration,
-initial bake, and continuation is recorded in the sample JSON. The native-resolution hardware
-workflow is `tools/cdx-v3d-mac-bake.mjs`; no such bake was completed in this container. All six
-default models are loaded through source-credited BKD1 manifests and gzip chunks. The small PLYs
-remain offline build sources. Sources, changes, byte counts, and SHA-256 hashes of every shipped
-sample file are recorded in `tools/assets.json`. The selected shots were inspected for identifiable
-people, logos, and brands.
+The transformations were made by Ryan with Codex (GPT-6). These are real captures, initially solved
+and trained with Splat.js. Their silent 480p source cuts, camera paths, and splats retain each
+source license, including CC BY-SA. The models use bounded phone budgets and larger desktop tiers;
+every completed iteration, initial bake, and continuation is recorded in the sample JSON. Task 55
+adds longer offline CPU fitting on native-source images, separately fitted phone and desktop tiers,
+and held-out clarity measurements. The Forest path has a new COLMAP camera solve. The sample JSON
+records actual resolutions, model hashes, and training steps;
+[the audit](docs/audits/video-3d-r2-2026-10.md) gives the comparison protocol and results. The
+native-resolution hardware workflow is `tools/cdx-v3d-mac-bake.mjs`; Metal training was not run in
+this container. All six default models are loaded through source-credited BKD1 manifests and gzip
+chunks. The small PLYs remain offline build sources. Sources, changes, byte counts, and SHA-256
+hashes of every shipped sample file are recorded in `tools/assets.json`. The selected shots were
+inspected for identifiable people, logos, and brands.
 
 <!-- End Codex task 40 new Video to 3D captures -->
 
-Video to 3D review images and clips live only on the separate `codex/video-3d-r2-clips` branch.
-Their source licenses and hashes are recorded beside them; the audit links to that evidence.
+Video to 3D clarity review images and clips live only on the separate `codex/video-3d-r3-clips`
+branch; earlier task 40 media remains on `codex/video-3d-r2-clips`. Their source licenses and hashes
+are recorded beside them; the audit links to that evidence.
 
 The camera path and the splats are worked out on the device by
 [Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
