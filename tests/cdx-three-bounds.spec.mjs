@@ -1,6 +1,7 @@
 import { test, expect } from "@playwright/test";
 import * as pc from "../src/pc.js";
 import { updateTokenBounds } from "../src/token-bounds.js";
+import { assertSafeArguments, safeLaunchOptions } from "./cdx-three-browser.mjs";
 
 function resource() {
   return {
@@ -59,4 +60,50 @@ test("a geometry upload starts a new envelope, and zero quaternions are identity
   updateTokenBounds(r, new Float32Array([0, 0, -4, 1, 0, 0, 0, 0]));
   expect(r.aabb.getMin().z).toBe(-5);
   expect(r.aabb.getMax().z).toBe(1);
+});
+
+test("one envelope contains multiple tokens and preserves earlier poses", () => {
+  const r = resource();
+  const tokens = new Float32Array([
+    -10, 3, -20, 1, 0, 0, 0, 1, 12, -4, 8, 1, 0, 0, 1, 0, 1000, 1000, 1000, 0, 0, 0, 0, 1,
+  ]);
+  expect(updateTokenBounds(r, tokens)).toBe(true);
+  // The second token rotates 180 degrees around Z. Compute expected extrema
+  // directly from the original corners, independently of the helper's Mat4.
+  expect(r.aabb.getMin().toArray()).toEqual([-11, -5, -20.5]);
+  expect(r.aabb.getMax().toArray()).toEqual([13, 4, 8.5]);
+  const expanded = r.aabb;
+  expect(updateTokenBounds(r, new Float32Array([0, 0, -2, 1, 0, 0, 0, 1]))).toBe(false);
+  expect(updateTokenBounds(r, new Float32Array([1000, 0, 0, 0, 0, 0, 0, 1]))).toBe(false);
+  expect(r.aabb).toBe(expanded);
+  expect(r.updates).toBe(1);
+});
+
+test("different resources keep independent envelopes", () => {
+  const first = resource();
+  const second = resource();
+  updateTokenBounds(first, new Float32Array([0, 0, -30, 1, 0, 0, 0, 1]));
+  updateTokenBounds(second, new Float32Array([0, 0, 4, 1, 0, 0, 0, 1]));
+  expect(first.aabb.getMin().z).toBe(-30.5);
+  expect(first.aabb.getMax().z).toBe(0.5);
+  expect(second.aabb.getMin().z).toBe(-0.5);
+  expect(second.aabb.getMax().z).toBe(4.5);
+});
+
+test("the task browser launch retains sandboxing and rejects unsafe arguments", () => {
+  const options = safeLaunchOptions();
+  expect(options.chromiumSandbox).toBe(true);
+  expect(options.args).toEqual([]);
+  expect(options.ignoreDefaultArgs).toContain("--enable-unsafe-swiftshader");
+  expect(() => assertSafeArguments(["--headless", "--enable-automation"])).not.toThrow();
+  for (const arg of [
+    "--enable-unsafe-swiftshader",
+    "--enable-unsafe-webgpu",
+    "--no-sandbox",
+    "--disable-gpu-sandbox=true",
+    "--ignore-gpu-blocklist",
+    "--disable-web-security",
+    "--unsafely-disable-devtools-self-xss-warnings",
+  ])
+    expect(() => assertSafeArguments([arg])).toThrow(/Unsafe browser launch/);
 });

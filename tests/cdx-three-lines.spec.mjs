@@ -1,22 +1,14 @@
 // Task 72: render the real RGB toy with the GPU path that produced white bands.
-// QR72_BACKEND optionally selects a supported ANGLE backend. No security flags.
+// The Stage integration remains pending; this spec measures the current runtime.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { assertSafeArguments, safeLaunchOptions } from "./cdx-three-browser.mjs";
 
-test.use({
-  launchOptions: {
-    executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
-    chromiumSandbox: true,
-    ignoreDefaultArgs: [
-      "--enable-unsafe-swiftshader",
-      "--unsafely-disable-devtools-self-xss-warnings",
-    ],
-    args: process.env.QR72_BACKEND
-      ? ["--use-gl=angle", `--use-angle=${process.env.QR72_BACKEND}`]
-      : [],
-  },
-});
+if (process.env.QR72_INTEGRATION)
+  throw new Error("Stage ownership is unresolved; QR72_INTEGRATION is disabled.");
+
+test.use({ launchOptions: safeLaunchOptions() });
 
 const renderer = process.env.QR72_RENDERER || "webgpu";
 const precision = process.env.QR72_PRECISION || "highp";
@@ -39,6 +31,14 @@ for (const [width, height, dpr] of sizes) {
       deviceScaleFactor: dpr,
     });
     const page = await context.newPage();
+    const session = await browser.newBrowserCDPSession();
+    const { arguments: launchArguments } = await session.send("Browser.getBrowserCommandLine");
+    assertSafeArguments(launchArguments);
+    await testInfo.attach("browser-launch-arguments", {
+      body: JSON.stringify(launchArguments, null, 2),
+      contentType: "application/json",
+    });
+    await session.detach();
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => {
@@ -57,26 +57,11 @@ for (const [width, height, dpr] of sizes) {
         return original.call(this, shader, source);
       };
     }, precision);
-    // A pending integration can be tested without editing another PR's file.
-    if (process.env.QR72_INTEGRATION) {
-      await page.route("**/src/stage.js", async (route) => {
-        const response = await route.fetch();
-        let body = await response.text();
-        body = `import { updateTokenBounds } from './token-bounds.js';\n` + body;
-        const needle =
-          "setUniforms(u) {\n    const g = this.toy?.entity.gsplat;\n    if (!g) return;";
-        if (!body.includes(needle)) throw new Error("Stage integration target changed");
-        body = body.replace(
-          needle,
-          needle +
-            "\n    if (this.device.isWebGPU && this.toy.kit) updateTokenBounds(this.toy.resource, u['uSpTokens[0]'], g);",
-        );
-        await route.fulfill({ response, body });
-      });
-    }
     try {
       await page.goto(`/?renderer=${renderer}&adapt=off&profile=mid&labs=1`);
-      await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+      await expect(page).toHaveTitle(/Splashery/);
+      await page.waitForSelector("body[data-ready='true']", { timeout: 30_000 });
+      await expect(page.locator("canvas").first()).toBeVisible();
       await page.evaluate(() => window.__splashery.app.chooseToy("qr-three"));
       await page.waitForFunction(
         () => window.__splashery.player.toyInfo?.id === "qr-three" && !window.__splashery.app.busy,
@@ -215,7 +200,14 @@ for (const [width, height, dpr] of sizes) {
         delete measured.image;
         results.push(measured);
       }
-      const report = { device, viewport: [width, height], dpr, results, errors };
+      const report = {
+        device,
+        viewport: [width, height],
+        dpr,
+        results,
+        errors,
+        stageIntegration: "unapplied",
+      };
       await testInfo.attach("row-coverage", {
         body: JSON.stringify(report, null, 2),
         contentType: "application/json",
