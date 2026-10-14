@@ -223,6 +223,42 @@ function depthAxis(length, size) {
   return { index, spatial, linear };
 }
 
+// Once source weights are ready, depth needs only a weighted gather. Keeping
+// this loop separate also avoids color arithmetic and mixed cache branches in
+// the model-dependent part of an upload.
+function upsamplePreparedDepth(dLo, dw, gx, gy, prepared) {
+  const out = new Float32Array(gx * gy),
+    { ax, ay, weights } = prepared;
+  let tap = 0;
+  for (let j = 0; j < gy; j++)
+    for (let i = 0; i < gx; i++) {
+      let sum = 0,
+        wsum = 0;
+      for (let jj = 0; jj < 4; jj++) {
+        const y = ay.index[j * 4 + jj] * dw;
+        for (let ii = 0; ii < 4; ii++) {
+          const w = weights[tap++];
+          sum += w * dLo[y + ax.index[i * 4 + ii]];
+          wsum += w;
+        }
+      }
+      if (wsum > 1e-4) out[j * gx + i] = sum / wsum;
+      else {
+        let bil = 0;
+        for (let jj = 0; jj < 4; jj++) {
+          const y = ay.index[j * 4 + jj] * dw,
+            by = ay.linear[j * 4 + jj];
+          for (let ii = 0; ii < 4; ii++) {
+            const bw = ax.linear[i * 4 + ii] * by;
+            bil += bw * dLo[y + ax.index[i * 4 + ii]];
+          }
+        }
+        out[j * gx + i] = bil;
+      }
+    }
+  return out;
+}
+
 export function upsampleDepth(
   dLo,
   dw,
@@ -246,8 +282,9 @@ export function upsampleDepth(
     prepared?.guideLo === guideLo &&
     prepared?.guideHi === guideHi &&
     prepared?.sigmaColor === sigmaColor;
-  const ax = valid ? prepared.ax : depthAxis(dw, gx),
-    ay = valid ? prepared.ay : depthAxis(dh, gy);
+  if (valid) return upsamplePreparedDepth(dLo, dw, gx, gy, prepared);
+  const ax = depthAxis(dw, gx),
+    ay = depthAxis(dh, gy);
   let tap = 0;
   for (let j = 0; j < gy; j++) {
     for (let i = 0; i < gx; i++) {
