@@ -75,9 +75,12 @@ Fallback screenshots with the report open:
 - [390×844](../../tests/screenshots/cdx-renderer-diag-390x844.png)
 - [1440×900](../../tests/screenshots/cdx-renderer-diag-1440x900.png)
 
-Regression checks (`smoke`, `taps`, `help`, `unit`, `kit`, and `hta`) and repository formatting
-checks passed; the regression run will resume with the corrected configuration. Embed coverage and
-the transfer budget live in `smoke.spec.mjs`; there is no separate `embed.spec.mjs`.
+Repository formatting and American English checks passed. Regression checks (`smoke`, `taps`,
+`help`, `unit`, `kit`, and `hta`) will run again with the corrected configuration. Embed coverage
+and the transfer budget live in `smoke.spec.mjs`; there is no separate `embed.spec.mjs`. Two added
+diagnostic cases cover WebGPU device rejection followed by real WebGL2 success and a non-GPU
+initialization failure after device creation. They are pending execution until the single regression
+runner finishes; the 14-pass result above does not include them.
 
 ## Remaining limits
 

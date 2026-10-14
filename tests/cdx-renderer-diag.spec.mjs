@@ -45,13 +45,25 @@ async function denyWebGL(page, { adapter = "absent", context = "null" } = {}) {
                       }),
                     );
                   }
+                  if (adapter === "device-reject") {
+                    return Promise.resolve({
+                      features: new Set(),
+                      limits: {},
+                      requestDevice: () =>
+                        Promise.reject(
+                          new Error("Device policy denied", {
+                            cause: new Error("Device root cause"),
+                          }),
+                        ),
+                    });
+                  }
                   return Promise.resolve(null);
                 },
               },
       });
       const original = HTMLCanvasElement.prototype.getContext;
       HTMLCanvasElement.prototype.getContext = function (type, ...args) {
-        if (type === "webgl2") {
+        if (type === "webgl2" && context !== "allow") {
           if (context === "throw") {
             throw new Error("Context policy denied <script>", {
               cause: new Error("Context root cause"),
@@ -252,6 +264,45 @@ test("a thrown context error keeps both exception layers and renders as text", a
   expect(
     await page.evaluate(() => Object.hasOwn(document.getElementById("stage"), "getContext")),
   ).toBe(false);
+});
+
+test("a rejected WebGPU device retains its cause when real WebGL2 succeeds", async ({ page }) => {
+  await denyWebGL(page, { adapter: "device-reject", context: "allow" });
+  await settled(page, "/?renderer=webgpu&profile=weak");
+  await expect(page.locator("body")).toHaveAttribute("data-first-toy-frame", "true");
+  const data = await page.evaluate(() => window.__splashery.player.rendererDiagnostics.report);
+  expect(data.attemptedBackends).toEqual(["webgpu", "webgl2"]);
+  expect(data.adapter.outcome).toBe("available");
+  expect(data.webgpuDevice).toMatchObject({
+    outcome: "error",
+    errors: [{ message: "Device policy denied", cause: { message: "Device root cause" } }],
+  });
+  expect(data.backend).toBe("webgl2");
+  expect(data.finalError).toBeNull();
+  expect(
+    await page.evaluate(
+      () => window.__splashery.player.rendererDiagnostics.observedErrors[0].cause.message,
+    ),
+  ).toBe("Device root cause");
+});
+
+test("a non-GPU initialization error stays distinct from device capability", async ({ page }) => {
+  await page.route("**/src/paint.js", (route) =>
+    route.fulfill({
+      contentType: "text/javascript",
+      body: 'export class Painter { constructor() { throw new Error("Painter initialization failed", { cause: new Error("Painter root cause") }); } }',
+    }),
+  );
+  await settled(page, "/?renderer=webgl2&profile=weak");
+  const data = await report(page);
+  expect(data.backend).toBe("webgl2");
+  expect(data.webgl2.outcome).toBe("created");
+  expect(data.finalError).toMatchObject({
+    message: "Painter initialization failed",
+    cause: { message: "Painter root cause" },
+  });
+  await expect(page.locator("body")).toHaveAttribute("data-renderer-ready", "false");
+  await expect(page.locator("body")).toHaveAttribute("data-first-toy-frame", "false");
 });
 
 test("the embed fallback has separate states and its own report", async ({ page }) => {
