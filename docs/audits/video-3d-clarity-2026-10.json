@@ -1,5 +1,5 @@
 {
-  "recorded": "2026-10-14T10:13:56.921652+00:00",
+  "recorded": "2026-10-14T13:14:50.363981+00:00",
   "deadline": "2026-10-14T15:30:00+00:00",
   "ledger": {
     "main": "a21899586de4ca506f4d9bc4033261db3ee6bcad",
@@ -5040,27 +5040,27 @@
     }
   ],
   "suite": {
-    "recorded": "2026-10-14T10:12:29.486Z",
+    "recorded": "2026-10-14T13:14:50.194Z",
     "command": "node tools/suite.mjs --gl=llvmpipe --jobs=2 --out=/tmp/v3d-full-suite --recheck; resumed with the manual’s required fonts and verified private calibration fixtures",
     "initialMergedMain": "c66a49e9",
     "finalMergedMain": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e",
     "full": {
-      "files": 284,
-      "expectedFiles": 284,
-      "passed": 2434,
-      "failed": 1,
+      "files": 285,
+      "expectedFiles": 285,
+      "passed": 2437,
+      "failed": 0,
       "skipped": 0,
       "other": 0,
-      "allReportsSuccessful": false
+      "allReportsSuccessful": true
     },
     "operatorRequested": {
       "files": 18,
       "expectedFiles": 18,
-      "passed": 230,
-      "failed": 1,
+      "passed": 231,
+      "failed": 0,
       "skipped": 0,
       "other": 0,
-      "allReportsSuccessful": false
+      "allReportsSuccessful": true
     },
     "originalTestIntegrity": {
       "baseline": "b37f2876",
@@ -7032,6 +7032,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "cdx-circle-qr.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/cdx-circle-qr.json",
+            "command": "Complete original QR and kit regressions plus budget-and-decoder regression after the no-picture repair",
+            "started": "2026-10-14T11:24:40.444Z",
+            "counts": {
+              "passed": 14,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -7041,7 +7054,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/cdx-circle-qr.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/cdx-circle-qr.json",
         "sourceSha256": "637cb080c355267ea8417f6ef40054355977c9c7a1333ea3912326f3e47abd59",
         "unchangedFromStartingMerge": null
       },
@@ -7863,6 +7876,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "cdx-pics.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-pics.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T11:55:01.644Z",
+            "counts": {
+              "passed": 51,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -7872,7 +7898,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/cdx-pics.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-pics.json",
         "sourceSha256": "062261471bbcaf0edf4f7cea8b4a4f07e9adcdd4bb15f9b45e99e1e1ef5cf400",
         "unchangedFromStartingMerge": null
       },
@@ -7928,6 +7954,48 @@
         "unchangedFromStartingMerge": null
       },
       {
+        "file": "cdx-qr-circle-budget.spec.mjs",
+        "first": null,
+        "attempts": [
+          {
+            "file": "cdx-qr-circle-budget.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/cdx-qr-circle-budget.json",
+            "command": "Complete original QR and kit regressions plus budget-and-decoder regression after the no-picture repair",
+            "started": "2026-10-14T11:26:33.815Z",
+            "counts": {
+              "passed": 1,
+              "failed": 1,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 1
+          },
+          {
+            "file": "cdx-qr-circle-budget.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/qr-new-test-recheck/cdx-qr-circle-budget.json",
+            "command": "Corrected new bit-preservation regression using the selected QR version and mask; no existing test edits",
+            "started": "2026-10-14T11:28:59.241Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
+          }
+        ],
+        "latest": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 0,
+        "latestProof": "/workspace/video3d-clarity-run/renewed/qr-new-test-recheck/cdx-qr-circle-budget.json",
+        "sourceSha256": "b4e72f9d2b68b4700f2334e81694fe53103890e9d5023bfc15879866ea71cd08",
+        "unchangedFromStartingMerge": null
+      },
+      {
         "file": "cdx-v3d-calibration.spec.mjs",
         "first": {
           "path": "/tmp/v3d-full-suite/cdx-v3d-calibration.json",
@@ -7966,6 +8034,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "cdx-v3d-calibration.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-calibration.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:45:27.903Z",
+            "counts": {
+              "passed": 12,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -7975,7 +8056,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-suite/cdx-v3d-calibration.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-calibration.json",
         "sourceSha256": "1a29762f394554dcaff1dfde105103b7f11b0b094980d33f0f8b1c0fd062d917",
         "unchangedFromStartingMerge": true
       },
@@ -8044,6 +8125,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "cdx-v3d-clarity-register.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-clarity-register.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:46:06.763Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -8053,7 +8147,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/registration-provenance-suite/cdx-v3d-clarity-register.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-clarity-register.json",
         "sourceSha256": "e0e4ffcacd4d3e1048c9ffb85d4b7f008aaabbc21557437568634086e31dd89e",
         "unchangedFromStartingMerge": null
       },
@@ -8096,6 +8190,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "cdx-v3d-clarity.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-clarity.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:45:53.506Z",
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -8105,7 +8212,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-suite/cdx-v3d-clarity.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-clarity.json",
         "sourceSha256": "50d6e55b659b9b44fd45529988bc5f642db98a6cb1c2ebcb0906945bf2217552",
         "unchangedFromStartingMerge": null
       },
@@ -8148,6 +8255,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "cdx-v3d-cpu.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-cpu.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:46:30.569Z",
+            "counts": {
+              "passed": 1,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -8157,7 +8277,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-suite/cdx-v3d-cpu.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-cpu.json",
         "sourceSha256": "f34b1e565a2e7bd4570198ca4f3f5aa24c9ed76fc128ffd5677737c53b4b6d23",
         "unchangedFromStartingMerge": null
       },
@@ -8225,6 +8345,19 @@
             },
             "exitCode": 0,
             "command": "Full suite isolated recheck"
+          },
+          {
+            "file": "cdx-v3d-handoff.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-handoff.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:46:36.060Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -8234,7 +8367,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/recheck/cdx-v3d-handoff.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-handoff.json",
         "sourceSha256": "4b1a805098ddd2fb22dc5b0248cf5045bd86261c6b66f15aded33f1a6dcd62ed",
         "unchangedFromStartingMerge": true
       },
@@ -8277,6 +8410,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "cdx-v3d-render-engine.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-render-engine.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:46:39.375Z",
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -8286,7 +8432,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-suite/cdx-v3d-render-engine.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-render-engine.json",
         "sourceSha256": "90d90a8014c0e18cbd01f9eb49c54b37b37310fa7669a6f4a3f4243dfe3a9bbc",
         "unchangedFromStartingMerge": null
       },
@@ -8354,6 +8500,19 @@
             },
             "exitCode": 0,
             "command": "Full suite isolated recheck"
+          },
+          {
+            "file": "cdx-v3d-review.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-review.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:47:42.400Z",
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -8363,7 +8522,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/recheck/cdx-v3d-review.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-review.json",
         "sourceSha256": "9235372361223e4f6da04e4b28280dc0374b681da1a9159ae50750d2243cda4b",
         "unchangedFromStartingMerge": true
       },
@@ -8419,6 +8578,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "cdx-v3d-samples.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-samples.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:48:06.470Z",
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -8428,7 +8600,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-recheck/cdx-v3d-samples.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-samples.json",
         "sourceSha256": "2a1ec8081503d34c4f2cc4bd26e45e6ac1a2a1da6c55ae756f094256b5c0c8ec",
         "unchangedFromStartingMerge": true
       },
@@ -8484,6 +8656,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "cdx-v3d.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:44:31.806Z",
+            "counts": {
+              "passed": 19,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -8493,7 +8678,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-recheck/cdx-v3d.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d.json",
         "sourceSha256": "adf5e133021c310e844e77131cd942bdc2bc88f8f52ec2438a1ad30f17d24233",
         "unchangedFromStartingMerge": true
       },
@@ -10615,6 +10800,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "hh3-level1-engine.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/hh3-level1-engine.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:49:28.043Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -10624,7 +10822,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/renewed/operator-rereview-suite/hh3-level1-engine.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/hh3-level1-engine.json",
         "sourceSha256": "ca8218e1356aa7c077609fc0ec84a73f5efd2594ec30ad330b19c649f4437423",
         "unchangedFromStartingMerge": true
       },
@@ -10667,6 +10865,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "hh3-level1.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/hh3-level1.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:48:45.547Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -10676,7 +10887,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/renewed/operator-rereview-suite/hh3-level1.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/hh3-level1.json",
         "sourceSha256": "8acefbcd7bc9ef69a78bd63e984a28f7cfa91fce937b171d839aa13ff2f79c3f",
         "unchangedFromStartingMerge": true
       },
@@ -11714,16 +11925,29 @@
             },
             "exitCode": 1,
             "command": "Full suite isolated recheck"
+          },
+          {
+            "file": "kit.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/kit.json",
+            "command": "Complete original QR and kit regressions plus budget-and-decoder regression after the no-picture repair",
+            "started": "2026-10-14T11:16:09.735Z",
+            "counts": {
+              "passed": 10,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
-          "passed": 9,
-          "failed": 1,
+          "passed": 10,
+          "failed": 0,
           "skipped": 0,
           "other": 0
         },
-        "latestExitCode": 1,
-        "latestProof": "/tmp/v3d-full-suite/recheck/kit.json",
+        "latestExitCode": 0,
+        "latestProof": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/kit.json",
         "sourceSha256": "cc7a423b5e6e894a16dc7ba1eb26c4107a5cc77cd614fe4582f46601795b7666",
         "unchangedFromStartingMerge": true
       },
@@ -13012,6 +13236,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "man6.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/man6.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:49:38.897Z",
+            "counts": {
+              "passed": 18,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -13021,7 +13258,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/man6.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/man6.json",
         "sourceSha256": "f60993648a4dd08bd17755b2235b50975f8bc3b815265feb38e1882ac8c1df35",
         "unchangedFromStartingMerge": false
       },
@@ -14584,6 +14821,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "qr4-craft.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/qr4-craft.json",
+            "command": "Complete original QR and kit regressions plus budget-and-decoder regression after the no-picture repair",
+            "started": "2026-10-14T11:26:49.562Z",
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -14593,7 +14843,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/qr4-craft.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/qr4-craft.json",
         "sourceSha256": "3cec52c6f69ae4d797289e5fd4ab9993ba6f72ee861fd100ba96e24566434019",
         "unchangedFromStartingMerge": true
       },
@@ -14623,6 +14873,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "qr4-flash.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/qr4-flash.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:50:42.174Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -14632,7 +14895,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/qr4-flash.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/qr4-flash.json",
         "sourceSha256": "0bedfd19215d39f7c815f1ac2007b61472e1a992bb460f8c0b806b6dd2d5c0de",
         "unchangedFromStartingMerge": true
       },
@@ -14662,6 +14925,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "qr4-scan.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/qr4-scan.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:51:43.012Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -14671,7 +14947,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/qr4-scan.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/qr4-scan.json",
         "sourceSha256": "7f8e09f0d12a1e6d6045bd4b7f6a693474d8dfd06233dade284a74a1b39ad2e9",
         "unchangedFromStartingMerge": true
       },
@@ -14701,6 +14977,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "qr5.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/qr5.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:52:15.263Z",
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -14710,7 +14999,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/qr5.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/qr5.json",
         "sourceSha256": "05a2ace37e6952ccfb0fcf6719e6c2152ba5f63af86841f4ea789916cf24bcc4",
         "unchangedFromStartingMerge": true
       },
@@ -14740,6 +15029,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "qrc-barcodes.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/qrc-barcodes.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T13:04:06.931Z",
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -14749,7 +15051,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/qrc-barcodes.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/qrc-barcodes.json",
         "sourceSha256": "d507ed94f856e318eab1df416b5e7756450099b0bca503f06f9e4b79756a731a",
         "unchangedFromStartingMerge": true
       },
@@ -14779,6 +15081,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "qrc-build.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/qrc-build.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T13:01:44.481Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -14788,7 +15103,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/qrc-build.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/qrc-build.json",
         "sourceSha256": "270a5321782156facf544c4a489fc554ce7b569d01a23287b10a00e1ccb6eed1",
         "unchangedFromStartingMerge": true
       },
@@ -14818,6 +15133,19 @@
             },
             "exitCode": 0,
             "command": "Full suite, file by file"
+          },
+          {
+            "file": "qrc-picture.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/qrc-picture.json",
+            "command": "Complete original QR and kit regressions plus budget-and-decoder regression after the no-picture repair",
+            "started": "2026-10-14T11:28:00.578Z",
+            "counts": {
+              "passed": 5,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -14827,7 +15155,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/tmp/v3d-full-suite/qrc-picture.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/qrc-picture.json",
         "sourceSha256": "451ea0d6c336bccea4abb1e557f5ba8fe3a6a288240887faecb07356c52da1e0",
         "unchangedFromStartingMerge": true
       },
@@ -15675,6 +16003,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "shp.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/shp.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T11:43:46.095Z",
+            "counts": {
+              "passed": 8,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -15684,7 +16025,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-recheck/shp.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/shp.json",
         "sourceSha256": "5a28b67938e5c307deac861a311f367f9a37fb1e39f999f4ce7302f380439031",
         "unchangedFromStartingMerge": true
       },
@@ -15974,6 +16315,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "smd-compare.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/smd-compare.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:57:36.206Z",
+            "counts": {
+              "passed": 3,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -15983,7 +16337,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/renewed/operator-rereview-suite/smd-compare.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/smd-compare.json",
         "sourceSha256": "de20bbf94c90bfa2a016535933940a364fc2d43f8e73cccc2334c580f586c195",
         "unchangedFromStartingMerge": true
       },
@@ -16143,6 +16497,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "smoke.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/smoke.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T11:29:14.447Z",
+            "counts": {
+              "passed": 50,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -16152,7 +16519,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-suite/smoke.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/smoke.json",
         "sourceSha256": "69bf1ea0f8829ccc24e6afff27437a0095cd910f57f5bf37ee92e97c42ffa049",
         "unchangedFromStartingMerge": true
       },
@@ -17012,6 +17379,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "taps.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/taps.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T13:03:14.885Z",
+            "counts": {
+              "passed": 62,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -17021,7 +17401,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-suite/taps.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/taps.json",
         "sourceSha256": "a86c4f81377ed1b95add11813703ee20397c8b8763d369401c2112bd02438cdf",
         "unchangedFromStartingMerge": true
       },
@@ -17556,6 +17936,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "unit.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/unit.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T13:04:40.486Z",
+            "counts": {
+              "passed": 20,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -17565,7 +17958,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-suite/unit.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/unit.json",
         "sourceSha256": "67a389f8ef98f5a81ac60f3fa562ed6ee15d91ac9aedd5c387921d4a7ff7fdcb",
         "unchangedFromStartingMerge": true
       },
@@ -17608,6 +18001,19 @@
               "other": 0
             },
             "exitCode": 0
+          },
+          {
+            "file": "v3d.spec.mjs",
+            "path": "/workspace/video3d-clarity-run/renewed/final-source-suite/v3d.json",
+            "command": "Task-named scope and remaining directly affected QR specs after compatibility repair",
+            "started": "2026-10-14T12:59:22.906Z",
+            "counts": {
+              "passed": 14,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0
           }
         ],
         "latest": {
@@ -17617,7 +18023,7 @@
           "other": 0
         },
         "latestExitCode": 0,
-        "latestProof": "/workspace/video3d-clarity-run/operator-final-suite/v3d.json",
+        "latestProof": "/workspace/video3d-clarity-run/renewed/final-source-suite/v3d.json",
         "sourceSha256": "a0d4572f38c62398c2a63ad06799c5b571293b69c9cea5631bfb1105674a09bf",
         "unchangedFromStartingMerge": true
       },
@@ -17868,11 +18274,11 @@
         "unchangedFromStartingMerge": true
       }
     ],
-    "state": "incomplete",
+    "state": "passed",
     "deadline": "2026-10-14T15:30:00+00:00",
-    "expectedCases": 2435,
+    "expectedCases": 2437,
     "allCaseCoverageMatches": true,
-    "unresolvedFiles": ["kit.spec.mjs"],
+    "unresolvedFiles": [],
     "missingFiles": [],
     "runtimeCompatibility": {
       "recorded": "2026-10-14T03:48:19.454525+00:00",
@@ -17948,7 +18354,7 @@
         "tests/man9.spec.mjs",
         "tests/st4.spec.mjs"
       ],
-      "recorded": "2026-10-14T07:45:43.864845+00:00"
+      "recorded": "2026-10-14T13:08:18.539512+00:00"
     },
     "latestReportReceipts": [
       {
@@ -18332,8 +18738,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "637cb080c355267ea8417f6ef40054355977c9c7a1333ea3912326f3e47abd59",
-        "reportSha256": "1188645ac43024d159492dcf93ec5f64b8a3899f1489d34b9750bf158bb2b2b5",
-        "report": "/tmp/v3d-full-suite/cdx-circle-qr.json"
+        "reportSha256": "0e5f4772082379c767ee36bee72ac70e31d431fa88586112440e92a96645f29a",
+        "report": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/cdx-circle-qr.json"
       },
       {
         "file": "cdx-depth-ui.spec.mjs",
@@ -18668,8 +19074,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "062261471bbcaf0edf4f7cea8b4a4f07e9adcdd4bb15f9b45e99e1e1ef5cf400",
-        "reportSha256": "e9b69c8b0616c9471e0c47ef33093075a926dd763288f73e4973aea963d51e22",
-        "report": "/tmp/v3d-full-suite/cdx-pics.json"
+        "reportSha256": "087f887c6a1cdd10bf89ae3d5b967fd801f94c47e3f1e69b22a2eac625b3e79c",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-pics.json"
       },
       {
         "file": "cdx-playground-links.spec.mjs",
@@ -18688,6 +19094,22 @@
         "report": "/tmp/v3d-full-suite/recheck/cdx-playground-links.json"
       },
       {
+        "file": "cdx-qr-circle-budget.spec.mjs",
+        "expectedCases": 2,
+        "reportedCases": 2,
+        "allCasesCovered": true,
+        "latestCounts": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "other": 0
+        },
+        "exitCode": 0,
+        "sourceSha256": "b4e72f9d2b68b4700f2334e81694fe53103890e9d5023bfc15879866ea71cd08",
+        "reportSha256": "68983465a49644ae3086ac7b68ca49dfc15713f9b0f8fee60b56febad3e17f66",
+        "report": "/workspace/video3d-clarity-run/renewed/qr-new-test-recheck/cdx-qr-circle-budget.json"
+      },
+      {
         "file": "cdx-v3d-calibration.spec.mjs",
         "expectedCases": 12,
         "reportedCases": 12,
@@ -18700,8 +19122,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "1a29762f394554dcaff1dfde105103b7f11b0b094980d33f0f8b1c0fd062d917",
-        "reportSha256": "a1493522b2c75eb032a809250487deb8a7895b70491d12245cb2388d9e969e5a",
-        "report": "/workspace/video3d-clarity-run/operator-final-suite/cdx-v3d-calibration.json"
+        "reportSha256": "c553f5e6d9891a49c62590ab02ce389ed1668bf3514bb00969a6ebb030cdc99e",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-calibration.json"
       },
       {
         "file": "cdx-v3d-clarity-register.spec.mjs",
@@ -18716,8 +19138,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "e0e4ffcacd4d3e1048c9ffb85d4b7f008aaabbc21557437568634086e31dd89e",
-        "reportSha256": "dcef10fcaaa01819f97e370e425932929483fb4dc95df09313c102073d44ca18",
-        "report": "/workspace/video3d-clarity-run/registration-provenance-suite/cdx-v3d-clarity-register.json"
+        "reportSha256": "98b95a24f9e69d7b5abdf2a05c65decc0b8ddcf4f0f1d9efa557d58d62757b7f",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-clarity-register.json"
       },
       {
         "file": "cdx-v3d-clarity.spec.mjs",
@@ -18732,8 +19154,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "50d6e55b659b9b44fd45529988bc5f642db98a6cb1c2ebcb0906945bf2217552",
-        "reportSha256": "aaec9d95b30fa34a443063f2737576534b862cd194d1f9f531ca3cb7831e99c3",
-        "report": "/workspace/video3d-clarity-run/operator-final-suite/cdx-v3d-clarity.json"
+        "reportSha256": "38ebfb6897a66cd960697071e97836b5627690a6fc3d91a3d58b1cb40dc7f3c5",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-clarity.json"
       },
       {
         "file": "cdx-v3d-cpu.spec.mjs",
@@ -18748,8 +19170,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "f34b1e565a2e7bd4570198ca4f3f5aa24c9ed76fc128ffd5677737c53b4b6d23",
-        "reportSha256": "8fecf043b8ecb804b9bb0f72fb947730eabf61c0fad4253f22fd4e94f825a33e",
-        "report": "/workspace/video3d-clarity-run/operator-final-suite/cdx-v3d-cpu.json"
+        "reportSha256": "48fe596b3dfb52ad35b421b4ffef465829477568323453bd547a88c243e1b9e4",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-cpu.json"
       },
       {
         "file": "cdx-v3d-handoff.spec.mjs",
@@ -18764,8 +19186,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "4b1a805098ddd2fb22dc5b0248cf5045bd86261c6b66f15aded33f1a6dcd62ed",
-        "reportSha256": "c5dd7a1a8e46d1b307da1c8025943c6ce65df78de40cb88b2de35fd3ea5f9a17",
-        "report": "/tmp/v3d-full-suite/recheck/cdx-v3d-handoff.json"
+        "reportSha256": "6d874bfaa11db5f1d0a2108401c9092f59c41ca0be6dae47d37d434e4d8b47fb",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-handoff.json"
       },
       {
         "file": "cdx-v3d-render-engine.spec.mjs",
@@ -18780,8 +19202,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "90d90a8014c0e18cbd01f9eb49c54b37b37310fa7669a6f4a3f4243dfe3a9bbc",
-        "reportSha256": "f164fbcd21d745fbcab245786dbdc9c608908a1baf20a13270545e1d3a4a0785",
-        "report": "/workspace/video3d-clarity-run/operator-final-suite/cdx-v3d-render-engine.json"
+        "reportSha256": "eacbf9ad29c80fb76f9b14cfeaeed4846bd650726951b57f9e4b827f22b9dbc0",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-render-engine.json"
       },
       {
         "file": "cdx-v3d-review.spec.mjs",
@@ -18796,8 +19218,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "9235372361223e4f6da04e4b28280dc0374b681da1a9159ae50750d2243cda4b",
-        "reportSha256": "7806cefc5c05a0e2c340a94542e8fc30744b7ee13c31b3b00b1455e0e9ac8eae",
-        "report": "/tmp/v3d-full-suite/recheck/cdx-v3d-review.json"
+        "reportSha256": "46a4ccfa1197adcdedb1949b24a10d4af4d1927f08f7a26aebc7fd38f60ab867",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-review.json"
       },
       {
         "file": "cdx-v3d-samples.spec.mjs",
@@ -18812,8 +19234,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "2a1ec8081503d34c4f2cc4bd26e45e6ac1a2a1da6c55ae756f094256b5c0c8ec",
-        "reportSha256": "34c342ad5aab6d6b155a98088a172603a80ac03433d1eff9ff98df07935bd305",
-        "report": "/workspace/video3d-clarity-run/operator-final-recheck/cdx-v3d-samples.json"
+        "reportSha256": "ac01530e0f088822898dda893f361be3dbbecdfd7517c907e34ae4ea5ba0add1",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d-samples.json"
       },
       {
         "file": "cdx-v3d.spec.mjs",
@@ -18828,8 +19250,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "adf5e133021c310e844e77131cd942bdc2bc88f8f52ec2438a1ad30f17d24233",
-        "reportSha256": "aced24629c79d531ab3051ced86b97a5718587337efaf272e5211100393c0e47",
-        "report": "/workspace/video3d-clarity-run/operator-final-recheck/cdx-v3d.json"
+        "reportSha256": "50784666e3cd876b962cba8dcfa8745f9c7bb3ee3bee44f092a46126543cd662",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/cdx-v3d.json"
       },
       {
         "file": "chem.spec.mjs",
@@ -19692,8 +20114,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "ca8218e1356aa7c077609fc0ec84a73f5efd2594ec30ad330b19c649f4437423",
-        "reportSha256": "6dc43914b6b6d3f92bfab6d7f7bcd1e06992bc020058ac87e08aabc7364c6089",
-        "report": "/workspace/video3d-clarity-run/renewed/operator-rereview-suite/hh3-level1-engine.json"
+        "reportSha256": "5aba7cbb4b71f33b3487ecdaebff500cfd044081343a7677c4fa01f3e0983f13",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/hh3-level1-engine.json"
       },
       {
         "file": "hh3-level1.spec.mjs",
@@ -19708,8 +20130,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "8acefbcd7bc9ef69a78bd63e984a28f7cfa91fce937b171d839aa13ff2f79c3f",
-        "reportSha256": "9878cd8fc53e5ea1ca006618ada58e986a00991c98125c5cb41dcefb8c0a94d9",
-        "report": "/workspace/video3d-clarity-run/renewed/operator-rereview-suite/hh3-level1.json"
+        "reportSha256": "cce3e80b48036a05364b03f63733776de965be2f8139b543a44ca7f1a442e0a8",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/hh3-level1.json"
       },
       {
         "file": "hh3-medieval.spec.mjs",
@@ -20085,15 +20507,15 @@
         "reportedCases": 10,
         "allCasesCovered": true,
         "latestCounts": {
-          "passed": 9,
-          "failed": 1,
+          "passed": 10,
+          "failed": 0,
           "skipped": 0,
           "other": 0
         },
-        "exitCode": 1,
+        "exitCode": 0,
         "sourceSha256": "cc7a423b5e6e894a16dc7ba1eb26c4107a5cc77cd614fe4582f46601795b7666",
-        "reportSha256": "418bebda316f5c7d22577791820241df3ac3f557429a143dd5148c9946d5017c",
-        "report": "/tmp/v3d-full-suite/recheck/kit.json"
+        "reportSha256": "a1b6ad007c2e5d4f080a93676fe773a7ad7cdb56f1f705b1dc1cd0045ef72a6b",
+        "report": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/kit.json"
       },
       {
         "file": "klab-engine.spec.mjs",
@@ -20588,8 +21010,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "f60993648a4dd08bd17755b2235b50975f8bc3b815265feb38e1882ac8c1df35",
-        "reportSha256": "2e7037dc58f9218b37dbf45dacde82752e4412f2dda12ed0b9a8d25c12618ce5",
-        "report": "/tmp/v3d-full-suite/man6.json"
+        "reportSha256": "03bbaccc378c6d08042b8707afbebf86cd23b0e6a274b8e2262f750f7446b817",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/man6.json"
       },
       {
         "file": "man7a.spec.mjs",
@@ -21228,8 +21650,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "3cec52c6f69ae4d797289e5fd4ab9993ba6f72ee861fd100ba96e24566434019",
-        "reportSha256": "55730f38bce70c5ebd5d9c82661df8f066c41ffce017bac26ccf3c0f4352fc26",
-        "report": "/tmp/v3d-full-suite/qr4-craft.json"
+        "reportSha256": "22426ea1836add55681f5e1a88ddceabe22623e26fa20a401c54615a81fbe071",
+        "report": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/qr4-craft.json"
       },
       {
         "file": "qr4-flash.spec.mjs",
@@ -21244,8 +21666,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "0bedfd19215d39f7c815f1ac2007b61472e1a992bb460f8c0b806b6dd2d5c0de",
-        "reportSha256": "dd694faf467199683af495f194cde0912f52e3c525a93f673966f1b6e721dd6e",
-        "report": "/tmp/v3d-full-suite/qr4-flash.json"
+        "reportSha256": "87d9c9a4f007d09ab38b36d92bc605de20a9b5e850c97ca9e0ee0b00c228a9c1",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/qr4-flash.json"
       },
       {
         "file": "qr4-scan.spec.mjs",
@@ -21260,8 +21682,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "7f8e09f0d12a1e6d6045bd4b7f6a693474d8dfd06233dade284a74a1b39ad2e9",
-        "reportSha256": "56ef0e1fe8f5485bfea0e4804679c475b986e07aad75d3cf4c545640ceb3ecb3",
-        "report": "/tmp/v3d-full-suite/qr4-scan.json"
+        "reportSha256": "af33aaa46a470b336185079e80d8622f86593541afcfa829f1c0b212204620d5",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/qr4-scan.json"
       },
       {
         "file": "qr5.spec.mjs",
@@ -21276,8 +21698,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "05a2ace37e6952ccfb0fcf6719e6c2152ba5f63af86841f4ea789916cf24bcc4",
-        "reportSha256": "1eb6c42176ac16a1ee6c7f602dd00df9288fe35b44f436897d3e840dd346a884",
-        "report": "/tmp/v3d-full-suite/qr5.json"
+        "reportSha256": "c7b341dba51505b1b790df9dfac11730cbd9b99ccb85587037b817b286ecf796",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/qr5.json"
       },
       {
         "file": "qrc-barcodes.spec.mjs",
@@ -21292,8 +21714,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "d507ed94f856e318eab1df416b5e7756450099b0bca503f06f9e4b79756a731a",
-        "reportSha256": "c3bc3c77f512366af60392a442f38ae4ba2a9090d994cf0b99f3c1fd0be14a30",
-        "report": "/tmp/v3d-full-suite/qrc-barcodes.json"
+        "reportSha256": "3c01454cab81ea72c753e331760948cf1048eb41be03c0ee56a499ffc2dfd695",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/qrc-barcodes.json"
       },
       {
         "file": "qrc-build.spec.mjs",
@@ -21308,8 +21730,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "270a5321782156facf544c4a489fc554ce7b569d01a23287b10a00e1ccb6eed1",
-        "reportSha256": "7b5397c0e5272064e06a69c95b93ac7b2671672b312caa49cb12b963a99bc29d",
-        "report": "/tmp/v3d-full-suite/qrc-build.json"
+        "reportSha256": "f2c5ef791c22fa175e0c2d41ad4c473ae83cb4ebeab9ebe549b78d61682ad5f3",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/qrc-build.json"
       },
       {
         "file": "qrc-picture.spec.mjs",
@@ -21324,8 +21746,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "451ea0d6c336bccea4abb1e557f5ba8fe3a6a288240887faecb07356c52da1e0",
-        "reportSha256": "6fdfa538ad8ff573a2283408df64c52b61d4bd4ada942dd7bf15ceeda5f42fc2",
-        "report": "/tmp/v3d-full-suite/qrc-picture.json"
+        "reportSha256": "9ec4633ef52257529a16a0ad36633731e987b41ee16432df1d608315121a6414",
+        "report": "/workspace/video3d-clarity-run/renewed/qr-compat-suite/qrc-picture.json"
       },
       {
         "file": "qrl.spec.mjs",
@@ -21660,8 +22082,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "5a28b67938e5c307deac861a311f367f9a37fb1e39f999f4ce7302f380439031",
-        "reportSha256": "c72e0203f8a5c5868520969eaf53bb4dc4ebc51862f19fa8ecb649fee1801a65",
-        "report": "/workspace/video3d-clarity-run/operator-final-recheck/shp.json"
+        "reportSha256": "19da36b6d1c2ec42bb4e88618889c28027e1d3428b12a7533dd88a39c0e902b4",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/shp.json"
       },
       {
         "file": "shv.spec.mjs",
@@ -21772,8 +22194,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "de20bbf94c90bfa2a016535933940a364fc2d43f8e73cccc2334c580f586c195",
-        "reportSha256": "6657a9543f193800e81c05e56aa3674e4637a2ad0693ee90a4fbb41a289e591f",
-        "report": "/workspace/video3d-clarity-run/renewed/operator-rereview-suite/smd-compare.json"
+        "reportSha256": "fb9dde4b0ef92749d81e1d5f0d8266684db3f1007ae6641ce72c6477de510494",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/smd-compare.json"
       },
       {
         "file": "smd-models.spec.mjs",
@@ -21836,8 +22258,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "69bf1ea0f8829ccc24e6afff27437a0095cd910f57f5bf37ee92e97c42ffa049",
-        "reportSha256": "4a2bf575785197c2c50a93155f1cd497eab63f4f614c06b2646dcda0c58aaa7b",
-        "report": "/workspace/video3d-clarity-run/operator-final-suite/smoke.json"
+        "reportSha256": "8bf91fd6b6bb329c1457c6ccb021ba93ad69bdad4eb04cb8085a18888bafa24f",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/smoke.json"
       },
       {
         "file": "snda-engine.spec.mjs",
@@ -22172,8 +22594,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "a86c4f81377ed1b95add11813703ee20397c8b8763d369401c2112bd02438cdf",
-        "reportSha256": "10240b9abd915d783158a65d5217064235ce3081121162592d39f69f8b3bfa56",
-        "report": "/workspace/video3d-clarity-run/operator-final-suite/taps.json"
+        "reportSha256": "4b90cc38e6a974e1543585a7d36e49bafaabfa2c5ed422d9734e0536f7666237",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/taps.json"
       },
       {
         "file": "tp2-engine.spec.mjs",
@@ -22380,8 +22802,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "67a389f8ef98f5a81ac60f3fa562ed6ee15d91ac9aedd5c387921d4a7ff7fdcb",
-        "reportSha256": "7455770017bc7b9724e0f10e028b9de654f1435f7111fdddff2304bf009e6260",
-        "report": "/workspace/video3d-clarity-run/operator-final-suite/unit.json"
+        "reportSha256": "928b4d19222def84a84dc6e5a59189c89232d3651d541eaabbf739d9288428ea",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/unit.json"
       },
       {
         "file": "v3d.spec.mjs",
@@ -22396,8 +22818,8 @@
         },
         "exitCode": 0,
         "sourceSha256": "a0d4572f38c62398c2a63ad06799c5b571293b69c9cea5631bfb1105674a09bf",
-        "reportSha256": "03d19f1beb5b61faa251f6669d1c1e6a68f7f3915f8e9a353451cef16a0e1a9c",
-        "report": "/workspace/video3d-clarity-run/operator-final-suite/v3d.json"
+        "reportSha256": "f703b32cbf18924ddee37c79a9209bd204438c24fa51c400b47b1234682faa7f",
+        "report": "/workspace/video3d-clarity-run/renewed/final-source-suite/v3d.json"
       },
       {
         "file": "vol.spec.mjs",
@@ -22497,7 +22919,7 @@
       }
     ],
     "freshClarityVerification": {
-      "recorded": "2026-10-14T09:15:19.775935+00:00",
+      "recorded": "2026-10-14T13:08:19.975940+00:00",
       "chromium": "141.0.7390.37",
       "models": 12,
       "frames": 74,
@@ -23385,7 +23807,7 @@
       "allFreshClarityTargetsHold": true
     },
     "mainFailureComparison": {
-      "recorded": "2026-10-14T10:12:29.540357+00:00",
+      "recorded": "2026-10-14T13:08:20.017586+00:00",
       "main": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e",
       "previousFailures": 20,
       "previousFailingSpecs": 16,
@@ -23764,8 +24186,8 @@
           "file": "kit.spec.mjs",
           "previousFailures": 0,
           "currentBranch": {
-            "passed": 9,
-            "failed": 1,
+            "passed": 10,
+            "failed": 0,
             "skipped": 0,
             "other": 0
           },
@@ -23796,7 +24218,7 @@
       "pages": 153,
       "sourceOrTestEdits": false
     },
-    "inheritedKitBudgetFailure": {
+    "mainBaselineKitBudgetFailure": {
       "recorded": "2026-10-14T07:27:01.975Z",
       "main": "11d83626ccbc97f80465191dc65491ba6a8b9054",
       "budget": 8000,
@@ -23833,10 +24255,177 @@
           "sha256": "cc7a423b5e6e894a16dc7ba1eb26c4107a5cc77cd614fe4582f46601795b7666"
         }
       ]
+    },
+    "qrBudgetCompatibility": {
+      "recorded": "2026-10-14T11:30:07.644371+00:00",
+      "source": "src/packs/qr-craft.js",
+      "sourceSha256": "87193c597e0346c6e37434c49681ea3ab6100c2c5772e8070b892e3e8c45596a",
+      "mainBaselineFailure": {
+        "recorded": "2026-10-14T07:27:01.975Z",
+        "main": "11d83626ccbc97f80465191dc65491ba6a8b9054",
+        "budget": 8000,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "circle",
+          "picture": "ai-farm",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "error": "This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text.",
+        "provenance": [
+          {
+            "file": "src/packs/qr-craft.js",
+            "unchangedFromMain": true,
+            "sha256": "bb3d1b49be8d665ad13d1d1c63eac73fb762f10afcabe0d3ef6303c573840a31"
+          },
+          {
+            "file": "src/qr/circle.js",
+            "unchangedFromMain": true,
+            "sha256": "3a4df9200d697cfdfa100b04012977e9adb3865fccd1b844217d3acecc92f057"
+          },
+          {
+            "file": "src/qr-craft/picture.js",
+            "unchangedFromMain": true,
+            "sha256": "e4c13c478a8a0e0f30959a12f3f633dba5cc7d4355ebb61c97a49274e2fde6b9"
+          },
+          {
+            "file": "tests/kit.spec.mjs",
+            "unchangedFromMain": true,
+            "sha256": "cc7a423b5e6e894a16dc7ba1eb26c4107a5cc77cd614fe4582f46601795b7666"
+          }
+        ]
+      },
+      "existingTestsChanged": false,
+      "freshWholeFileReports": [
+        {
+          "spec": "kit",
+          "stats": {
+            "startTime": "2026-10-14T11:16:09.735Z",
+            "duration": 509171.049,
+            "expected": 10,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "reportSha256": "a1b6ad007c2e5d4f080a93676fe773a7ad7cdb56f1f705b1dc1cd0045ef72a6b"
+        },
+        {
+          "spec": "cdx-circle-qr",
+          "stats": {
+            "startTime": "2026-10-14T11:24:40.444Z",
+            "duration": 112056.49,
+            "expected": 14,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "reportSha256": "0e5f4772082379c767ee36bee72ac70e31d431fa88586112440e92a96645f29a"
+        },
+        {
+          "spec": "qr4-craft",
+          "stats": {
+            "startTime": "2026-10-14T11:26:49.562Z",
+            "duration": 69423.882,
+            "expected": 8,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "reportSha256": "22426ea1836add55681f5e1a88ddceabe22623e26fa20a401c54615a81fbe071"
+        },
+        {
+          "spec": "qrc-picture",
+          "stats": {
+            "startTime": "2026-10-14T11:28:00.578Z",
+            "duration": 48701.657999999996,
+            "expected": 5,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "reportSha256": "9ec4633ef52257529a16a0ad36633731e987b41ee16432df1d608315121a6414"
+        },
+        {
+          "spec": "cdx-qr-circle-budget",
+          "stats": {
+            "startTime": "2026-10-14T11:28:59.241Z",
+            "duration": 13959.582999999999,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "reportSha256": "68983465a49644ae3086ac7b68ca49dfc15713f9b0f8fee60b56febad3e17f66"
+        }
+      ],
+      "newRegressionCases": 2,
+      "budget": 8000,
+      "completeModulesAndBitsPreserved": true,
+      "impossibleBudgetStillThrows": true,
+      "realViewerBothDecodersPassAtFullAndPhoneSize": true,
+      "direct4And8PixelsPerModuleWarningAtForcedBudget": "Not solved; original strict stage checks remain intact.",
+      "firstNewTestAttempt": "The additional independent bit check first encoded the smallest QR version; corrected the new test to use the recipe-selected version, fixed no-picture mask, and requested ECC. Original failed report is retained.",
+      "visualReview": {
+        "inspected": "2026-10-14T13:08:17.647952+00:00",
+        "actualSplats": 7624,
+        "reviewed": ["contact sheet", "six-frame phone-size motion strip", "390x844 layout"],
+        "observed": "The code remains complete and the tile ripple settles back to its initial layout. At the forced small budget, the simplified background has a soft outer halo and coarse decoration; native 4/8-pixel-per-module scan warnings remain disclosed.",
+        "captureSha256": "9e9be6a486db78926cf7ac4dacfeeef44b8285e6fd6704fc7ec7962243f3c38e",
+        "packBuildMs": {
+          "qr-picture": 866,
+          "qr-build": 297,
+          "barcodes": 140
+        },
+        "toolChecks": [
+          {
+            "command": ["node", "tools/check-packs.mjs", "qr-craft"],
+            "code": 0
+          },
+          {
+            "command": ["node", "tools/make-thumbs.mjs", "qr-picture"],
+            "code": 0
+          },
+          {
+            "command": [
+              "node",
+              "tools/contact-sheet.mjs",
+              "/workspace/video3d-clarity-run/renewed/qr-review/contact.png",
+              "qr-craft"
+            ],
+            "code": 0
+          },
+          {
+            "command": [
+              "node",
+              "/workspace/video3d-clarity-run/renewed/qr-budget-effect-clip.mjs",
+              "/workspace/video3d-clarity-run/renewed/qr-review",
+              "--size=390",
+              "--secs=3.5",
+              "--fps=12",
+              "--strip=6",
+              "qr-picture"
+            ],
+            "code": 0
+          },
+          {
+            "command": [
+              "node",
+              "tools/cdx-v3d-clarity-transfer.mjs",
+              "/workspace/video3d-clarity-run/renewed/final-source-embed-transfers.json"
+            ],
+            "code": 0
+          }
+        ]
+      },
+      "sourceCommit": "c014e5cf688a9f98ac2975ce7c5a0fe8003bd225",
+      "reviewUrl": "https://github.com/ryanjosephkamp/splashery/tree/409b0e9b889f8b19056f66e22c340c6105cce682/clips/qr-budget-review"
     }
   },
   "embedTransfers": {
-    "measured": "2026-10-14T09:09:23.002Z",
+    "measured": "2026-10-14T13:07:06.016Z",
     "renderer": "Chromium WebGL2 / SwiftShader; cold cache; CDP encoded bytes including headers",
     "results": [
       {
@@ -26738,7 +27327,7 @@
   },
   "finalMainIntegration": {
     "main": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e",
-    "verified": "2026-10-14T10:13:56.921652+00:00",
+    "verified": "2026-10-14T13:14:50.363981+00:00",
     "viewerModelAndCoreFilesUnchangedByMainMerge": true,
     "engineSourceSha256": {
       "src/stage.js": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
@@ -26970,8 +27559,8 @@
   "continuationGoal": {
     "started": "2026-10-14T03:35:31.062621+00:00",
     "deadline": "2026-10-14T15:30:00+00:00",
-    "verified": "2026-10-14T10:13:56.921652+00:00",
-    "complete": false,
+    "verified": "2026-10-14T13:14:50.363981+00:00",
+    "complete": true,
     "preservedClarity": {
       "allPreservedClarityTargetsHold": true,
       "unchangedInstalledManifestsAndChunks": true,
