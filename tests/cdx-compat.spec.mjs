@@ -9,6 +9,7 @@ import { inflateRawSync } from "node:zlib";
 import { execFileSync } from "node:child_process";
 import { normalizeScene } from "../src/state.js";
 import { TOYS, CATEGORIES } from "../src/toys.js";
+import { normalizeWorld } from "../src/worlds/world-file.js";
 
 const FIX = fileURLToPath(new URL("./fixtures/cdx-compat/", import.meta.url));
 const corpus = fs
@@ -103,6 +104,7 @@ test("frozen scene expectations still match schema v2/v3 normalization (unit onl
       expect(actual, c.name).toEqual(c.expected);
     }
   }
+  for (const c of worlds) expect(normalizeWorld(c.scene), c.name).toEqual(c.expected);
 });
 
 async function ready(page) {
@@ -302,83 +304,82 @@ function savedScene(actual, expected, label) {
 for (const c of cases) {
   test(`persisted visitor scene: ${c.name}`, async ({ browser }, testInfo) => {
     test.setTimeout(120_000);
-    const contexts = await Promise.all(
-      ["app", "embed", "file"].map(() =>
-        browser.newContext({ viewport: { width: 400, height: 300 }, reducedMotion: "reduce" }),
-      ),
-    );
-    const pages = await Promise.all(contexts.map((context) => context.newPage()));
-    const errors = pages.map((page) => {
-      const messages = [];
-      page.on("pageerror", (error) => messages.push(error.message));
-      return messages;
-    });
-    try {
-      await Promise.all(
-        pages.map(async (page, i) => {
-          const surface = ["app", "embed", "file"][i];
-          await page.goto(
-            `${surface === "embed" ? "/embed/" : "/"}${QUERY}&persist=${c.name}${surface === "file" ? "" : `#s=${c.hash}`}`,
-            { waitUntil: "domcontentloaded" },
+    let downloaded = null;
+    // One active context here avoids concurrent software-renderer builds.
+    // Every route has a fresh cache and still receives all of its assertions.
+    for (const surface of ["app", "embed", "file", "reloaded download"]) {
+      if (surface === "reloaded download" && (c.expected.refused || !downloaded)) continue;
+      const context = await browser.newContext({
+        viewport: { width: 400, height: 300 },
+        reducedMotion: "reduce",
+      });
+      const page = await context.newPage();
+      const errors = [];
+      page.on("pageerror", (error) => errors.push(error.message));
+      try {
+        const isFile = surface === "file" || surface === "reloaded download";
+        await page.goto(
+          `${surface === "embed" ? "/embed/" : "/"}${QUERY}&persist=${c.name}&surface=${encodeURIComponent(surface)}${isFile ? "" : `#s=${c.hash}`}`,
+          { waitUntil: "domcontentloaded" },
+        );
+        await ready(page);
+        const before =
+          c.expected.refused && isFile
+            ? await page.evaluate(() => structuredClone(window.__splashery.player.scene))
+            : null;
+        if (isFile) {
+          const name = surface === "file" ? c.name : `saved-${c.name}`;
+          await page.setInputFiles(
+            "#import-json",
+            surface === "file"
+              ? `${FIX}${c.name}`
+              : {
+                  name,
+                  mimeType: "application/json",
+                  buffer: downloaded.bytes,
+                },
           );
-          await ready(page);
-          const before =
-            c.expected.refused && surface === "file"
-              ? await page.evaluate(() => structuredClone(window.__splashery.player.scene))
-              : null;
-          if (surface === "file") {
-            await page.setInputFiles("#import-json", `${FIX}${c.name}`);
-            if (!c.expected.refused)
-              await expect(page.locator("#toast")).toHaveText(`Loaded ${c.name}.`, {
-                timeout: ENTRY_TIMEOUT,
-              });
+          if (!c.expected.refused)
+            await expect(page.locator("#toast")).toHaveText(`Loaded ${name}.`, {
+              timeout: ENTRY_TIMEOUT,
+            });
+        }
+        if (c.expected.refused) {
+          await expect(
+            page.locator(surface === "embed" ? "#embed-status" : "#toast"),
+          ).toContainText(c.expected.refused);
+          if (before)
+            expect(await page.evaluate(() => window.__splashery.player.scene)).toEqual(before);
+        } else {
+          await loaded(page, c, surface);
+          if (surface === "app" || surface === "reloaded download") {
+            // Run a real driver frame before saving; normalized in-memory
+            // state can hide a camera override in the Video to 3D driver.
+            await page.waitForFunction(() => window.__splashery.player.time > 0, null, {
+              timeout: ENTRY_TIMEOUT,
+            });
+            const saved = await downloadScene(
+              page,
+              testInfo,
+              surface === "app" ? "downloaded-scene" : "reloaded-scene-download",
+            );
+            savedScene(saved.scene, c.expected, `${surface}: ${c.name}`);
+            if (surface === "app") downloaded = saved;
           }
-          if (c.expected.refused) {
-            await expect(
-              page.locator(surface === "embed" ? "#embed-status" : "#toast"),
-            ).toContainText(c.expected.refused);
-            if (before)
-              expect(await page.evaluate(() => window.__splashery.player.scene)).toEqual(before);
-          } else await loaded(page, c, surface);
-        }),
-      );
-      if (!c.expected.refused) {
-        // Let at least one real driver frame run before saving. In-memory camera
-        // normalization missed the Video to 3D driver's subsequent override.
-        await pages[0].waitForFunction(() => window.__splashery.player.time > 0, null, {
-          timeout: ENTRY_TIMEOUT,
+        }
+      } catch (error) {
+        await testInfo.attach(`${surface}-failure`, {
+          body: error.stack || error.message,
+          contentType: "text/plain",
         });
-        const first = await downloadScene(pages[0], testInfo, "downloaded-scene");
-        savedScene(first.scene, c.expected, c.name);
-        // Reload the actual downloaded bytes in a fresh context. This prevents
-        // Studio's own-file caches from masquerading as persisted scene data.
-        await contexts[2].close();
-        contexts[2] = await browser.newContext({
-          viewport: { width: 400, height: 300 },
-          reducedMotion: "reduce",
-        });
-        pages[2] = await contexts[2].newPage();
-        pages[2].on("pageerror", (error) => errors[2].push(error.message));
-        await pages[2].goto(`/${QUERY}&reload=${c.name}`);
-        await ready(pages[2]);
-        const name = `saved-${c.name}`;
-        await pages[2].setInputFiles("#import-json", {
-          name,
-          mimeType: "application/json",
-          buffer: first.bytes,
-        });
-        await expect(pages[2].locator("#toast")).toHaveText(`Loaded ${name}.`, {
-          timeout: ENTRY_TIMEOUT,
-        });
-        await loaded(pages[2], c, "reloaded download");
-        const second = await downloadScene(pages[2], testInfo, "reloaded-scene-download");
-        savedScene(second.scene, c.expected, `reloaded ${c.name}`);
+        expect.soft(false, `${surface}: ${c.name}: ${error.message}`).toBe(true);
+      } finally {
+        expect.soft(errors, `${surface}: page errors ${c.name}`).toEqual([]);
+        await context.close();
       }
-      for (let i = 0; i < errors.length; i++)
-        expect.soft(errors[i], `${c.name}: page ${i} errors`).toEqual([]);
-    } finally {
-      await Promise.all(contexts.map((context) => context.close()));
     }
+    if (!c.expected.refused)
+      expect.soft(downloaded, `${c.name}: actual download collected`).not.toBeNull();
   });
 }
 
@@ -424,3 +425,84 @@ for (const c of worlds) {
     expect(errors).toEqual([]);
   });
 }
+
+test("complete corpus diagnostic retains the 120-second target", async ({ browser }, testInfo) => {
+  // Diagnostic collection may finish after the original strict timeout fails.
+  // Its performance assertion still uses exactly the original 120-second bar.
+  test.setTimeout(600_000);
+  const started = performance.now();
+  const contexts = await Promise.all(
+    ["app", "embed", "file"].map(() =>
+      browser.newContext({
+        viewport: { width: 400, height: 300 },
+        reducedMotion: "reduce",
+      }),
+    ),
+  );
+  const pages = await Promise.all(contexts.map((c) => c.newPage()));
+  const errors = pages.map((page) => {
+    const list = [];
+    page.on("pageerror", (error) => list.push(error.message));
+    return list;
+  });
+  const visited = [];
+  try {
+    await pages[2].goto(`/${QUERY}&diagnostic=file`);
+    await ready(pages[2]);
+    for (const c of cases) {
+      await Promise.all(
+        pages.map(async (page, i) => {
+          const surface = ["app", "embed", "file"][i];
+          const receipt = { name: c.name, surface, completed: false };
+          visited.push(receipt);
+          try {
+            const before =
+              c.expected.refused && surface === "file"
+                ? await page.evaluate(() => structuredClone(window.__splashery.player.scene))
+                : null;
+            if (surface === "file") {
+              await page.setInputFiles("#import-json", `${FIX}${c.name}`);
+              if (!c.expected.refused)
+                await expect(page.locator("#toast")).toHaveText(`Loaded ${c.name}.`, {
+                  timeout: ENTRY_TIMEOUT,
+                });
+            } else {
+              await page.goto(
+                `${surface === "embed" ? "/embed/" : "/"}${QUERY}&diagnostic=${c.name}#s=${c.hash}`,
+              );
+              await ready(page);
+            }
+            if (c.expected.refused) {
+              await expect(
+                page.locator(surface === "embed" ? "#embed-status" : "#toast"),
+              ).toContainText(c.expected.refused);
+              if (before)
+                expect(await page.evaluate(() => window.__splashery.player.scene)).toEqual(before);
+            } else await loaded(page, c, surface);
+            receipt.completed = true;
+          } catch (error) {
+            receipt.error = error.message;
+            expect.soft(false, `${surface}: ${c.name}: ${error.message}`).toBe(true);
+          }
+        }),
+      );
+    }
+    expect.soft(visited).toHaveLength(cases.length * 3);
+    for (let i = 0; i < errors.length; i++)
+      expect.soft(errors[i], `diagnostic page ${i} errors`).toEqual([]);
+  } finally {
+    const elapsedMs = Math.round(performance.now() - started);
+    await testInfo.attach("complete-corpus-runtime", {
+      body: JSON.stringify({
+        cases: cases.length,
+        visitorLoads: visited.length,
+        elapsedMs,
+        targetMs: 120_000,
+        visited,
+      }),
+      contentType: "application/json",
+    });
+    expect.soft(elapsedMs, "complete visitor corpus stays below two minutes").toBeLessThan(120_000);
+    await Promise.all(contexts.map((context) => context.close()));
+  }
+});
