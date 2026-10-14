@@ -3,6 +3,7 @@
 // and the owner's wording.
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 import {
   PDFDocument,
   PDFName,
@@ -285,7 +286,7 @@ test.describe("the owner's wording", () => {
 });
 
 test.describe("the PDF", () => {
-  const load = async () => PDFDocument.load(fs.readFileSync("manual/tinkerers-manual.pdf"), { updateMetadata: false }); // prettier-ignore
+  const load = async () => PDFDocument.load(fs.readFileSync(`manual/${MANUAL_PDF}`), { updateMetadata: false }); // prettier-ignore
 
   test("every link to a place carries its own destination, and the contents link to their chapters", async () => {
     const doc = await load();
@@ -339,7 +340,7 @@ test.describe("the PDF", () => {
   test("the PDF is well formed: it loads, and every page can be read", async () => {
     const doc = await load();
     expect(doc.getPageCount()).toBeGreaterThan(140);
-    const bytes = fs.readFileSync("manual/tinkerers-manual.pdf");
+    const bytes = fs.readFileSync(`manual/${MANUAL_PDF}`);
     expect(bytes.subarray(0, 5).toString()).toBe("%PDF-");
     expect(bytes.subarray(-1024).toString("latin1")).toContain("%%EOF");
     expect(bytes.length).toBeLessThan(8e6);
