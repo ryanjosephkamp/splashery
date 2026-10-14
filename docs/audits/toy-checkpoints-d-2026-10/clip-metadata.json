@@ -1,0 +1,56 @@
+[
+  {
+    "file": "bk-album-pull.gif",
+    "bytes": 4253092,
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 390,
+          "height": 844,
+          "nb_frames": "87"
+        }
+      ],
+      "format": {
+        "duration": "9.520000"
+      }
+    }
+  },
+  {
+    "file": "bk-lab-taps.gif",
+    "bytes": 1088277,
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 390,
+          "height": 844,
+          "nb_frames": "37"
+        }
+      ],
+      "format": {
+        "duration": "6.660000"
+      }
+    }
+  },
+  {
+    "file": "bk-one-page.gif",
+    "bytes": 1924136,
+    "probe": {
+      "programs": [],
+      "stream_groups": [],
+      "streams": [
+        {
+          "width": 390,
+          "height": 844,
+          "nb_frames": "64"
+        }
+      ],
+      "format": {
+        "duration": "8.200000"
+      }
+    }
+  }
+]

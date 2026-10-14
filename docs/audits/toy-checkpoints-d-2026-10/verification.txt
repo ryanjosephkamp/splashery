@@ -1,0 +1,52 @@
+Task: Codex 82, part d only.
+Source checkpoint: 41b21e74e04ccca178b95ac02b4e5dc0e51b4b45.
+Runtime code, assets, vendor files, and tests are unchanged.
+Browser: system Chromium 151.0.7922.173, SwiftShader WebGL2.
+Node: v24.19.0. No browser or dependency was installed.
+
+SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/pg6.spec.mjs tests/pg6-engine.spec.mjs --grep 'no browser'
+Result: 15 passed. These use mock picture APIs and pure state/geometry logic.
+
+SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/pic.spec.mjs tests/bk.spec.mjs tests/bk5.spec.mjs tests/bk5-engine.spec.mjs --workers=1
+Result: voluntarily stopped after the relevant book/album behavior checks.
+32 passed, 1 failed, 1 interrupted, and 30 did not run.
+Failure: 'a frame plays a GIF on a loop and a video by itself, muted':
+expected more than 4 distinct GIF frames, observed 4 while capture jobs were running.
+Interrupted: screenshots of the three toys at 390x844.
+Completed test titles are in broad-run-results.txt.
+The complete four-file run did not pass and is not claimed as completed.
+
+SPLASHERY_CHROMIUM=/usr/bin/chromium SPLASHERY_PORT=4175 npx playwright test tests/bk.spec.mjs --grep 'a frame plays a GIF' --workers=1
+Result: 1 passed (20.5 seconds), after capture jobs ended, with no runtime or test changes.
+
+Captures:
+- tools/bk-clip.mjs: lab-taps, width 390, viewport 390x844, device scale 2, mid tier.
+- capture.mjs evidence-only adapter: one-page and album-pull, width 390,
+  viewport 390x844, device scale 1, mid tier, reduced duplicate draws.
+- Clock advanced manually at 12 fps; real sheet builds waited for.
+- Six-frame strips inspected; GIF headers verified with ffprobe.
+- The abandoned longer book/album recording produced no published book/album files.
+- These clips do not measure wall-clock frame rate or depth inference.
+
+Measurements:
+SPLASHERY_CHROMIUM=/usr/bin/chromium SPLASHERY_URL=http://127.0.0.1:4174/ node measure.mjs measurements.json
+Result: all three default samples opened, with no page errors.
+Fresh contexts, 390x844 CSS viewport, device scale 2, low tier, adaptation off,
+local unthrottled HTTP, no competing browser jobs, and no depth inference.
+Sample-ready milliseconds, approximately five-second active frame counts, splat counts,
+and actual sample identity are in measurements.json. Not a physical-phone benchmark.
+
+Documentation and scope:
+- Every local document link resolved.
+- All 24 paths in restore commands existed at the saved commit.
+- All 269 manifest files were byte-compared with the saved commit.
+- American English check: node tools/us-english.mjs --diff passed.
+- Repository-wide npx prettier --check . passed; the guides and evidence were
+  also formatted explicitly after edits, and the guides rechecked after evidence pinning.
+- git diff --cached --check passed.
+- Generated book/album screenshots were restored, along with standard screenshots,
+  before committing the three Markdown guides.
+- Full repository suite, physical phones, remote media URLs, camera/microphone input,
+  and the exhaustive style/pop-out clip matrix were not tested.
+
+Rule check: none.

@@ -1,0 +1,195 @@
+{
+  "sourceCommit": "41b21e74e04ccca178b95ac02b4e5dc0e51b4b45",
+  "browser": "151.0.7922.173",
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "deviceScaleFactor": 2,
+  "query": "?renderer=webgl2&adapt=off&profile=low&labs=1",
+  "method": "One fresh browser context per toy. Local unthrottled HTTP. Timings are single runs, without CPU throttling. Forced stage rendering counts frameend events over approximately five seconds; taps at zero and 2.5 seconds. No inference is requested.",
+  "rows": [
+    {
+      "id": "picture-lab",
+      "shellReadyMs": 3278.982158,
+      "sampleReadyMs": 1933.3836780000001,
+      "settled": {
+        "profile": "low",
+        "media": {
+          "kind": "pdf",
+          "name": "article.pdf",
+          "count": 2,
+          "page": 0,
+          "playing": false
+        },
+        "canvas": {
+          "width": 585,
+          "height": 967
+        },
+        "kitSplats": 17945,
+        "visibleSheetSplats": 31997,
+        "cacheSplats": 55568,
+        "sheetDefinitions": 4,
+        "visibleSheets": 1,
+        "builds": 3,
+        "lastSheetBuildMs": 220.1999999997206
+      },
+      "active": {
+        "elapsedMs": 5001.799999999814,
+        "frames": 53,
+        "framesPerSecond": 10.59618537326602,
+        "firstPage": 0,
+        "lastPage": 0,
+        "kitSplats": 17945,
+        "visibleSheetSplats": 31997
+      },
+      "resources": [
+        {
+          "path": "/manual/pdf-edition.js",
+          "decodedBodySize": 146
+        },
+        {
+          "path": "/assets/toys/picture-lab/article.pdf",
+          "decodedBodySize": 65800
+        },
+        {
+          "path": "/assets/toys/picture-lab/thumb.webp",
+          "decodedBodySize": 20436
+        },
+        {
+          "path": "/assets/toys/photo-album/thumb.webp",
+          "decodedBodySize": 4896
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "your-book",
+      "shellReadyMs": 1818.2695640000002,
+      "sampleReadyMs": 14293.042767,
+      "settled": {
+        "profile": "low",
+        "media": {
+          "kind": "pdf",
+          "name": "tinkerers-manual-85d32b96193ea275.pdf",
+          "count": 153,
+          "page": 0,
+          "playing": false
+        },
+        "canvas": {
+          "width": 585,
+          "height": 967
+        },
+        "kitSplats": 55572,
+        "visibleSheetSplats": 119355,
+        "cacheSplats": 411541,
+        "sheetDefinitions": 12,
+        "visibleSheets": 2,
+        "builds": 6,
+        "lastSheetBuildMs": 2979.100000000093
+      },
+      "active": {
+        "elapsedMs": 5256.399999999907,
+        "frames": 9,
+        "framesPerSecond": 1.7121984628262992,
+        "firstPage": 0,
+        "lastPage": 1,
+        "kitSplats": 55572,
+        "visibleSheetSplats": 119355
+      },
+      "resources": [
+        {
+          "path": "/manual/pdf-edition.js",
+          "decodedBodySize": 146
+        },
+        {
+          "path": "/manual/tinkerers-manual-85d32b96193ea275.pdf",
+          "decodedBodySize": 7792711
+        },
+        {
+          "path": "/assets/toys/picture-lab/thumb.webp",
+          "decodedBodySize": 20436
+        },
+        {
+          "path": "/assets/toys/photo-album/thumb.webp",
+          "decodedBodySize": 4896
+        }
+      ],
+      "errors": []
+    },
+    {
+      "id": "photo-album",
+      "shellReadyMs": 2061.353498999997,
+      "sampleReadyMs": 25018.749715000005,
+      "settled": {
+        "profile": "low",
+        "media": {
+          "kind": "image",
+          "name": "6 pictures",
+          "count": 6,
+          "page": 0,
+          "playing": false
+        },
+        "canvas": {
+          "width": 585,
+          "height": 967
+        },
+        "kitSplats": 55308,
+        "visibleSheetSplats": 265999,
+        "cacheSplats": 594542,
+        "sheetDefinitions": 43,
+        "visibleSheets": 2,
+        "builds": 10,
+        "lastSheetBuildMs": 4162.699999999721
+      },
+      "active": {
+        "elapsedMs": 5047,
+        "frames": 5,
+        "framesPerSecond": 0.9906875371507826,
+        "firstPage": 0,
+        "lastPage": 0,
+        "kitSplats": 55308,
+        "visibleSheetSplats": 265999
+      },
+      "resources": [
+        {
+          "path": "/manual/pdf-edition.js",
+          "decodedBodySize": 146
+        },
+        {
+          "path": "/assets/toys/photo-album/sailboat.jpg",
+          "decodedBodySize": 68411
+        },
+        {
+          "path": "/assets/toys/photo-album/tulips.jpg",
+          "decodedBodySize": 96317
+        },
+        {
+          "path": "/assets/toys/photo-album/lighthouse.jpg",
+          "decodedBodySize": 28898
+        },
+        {
+          "path": "/assets/toys/photo-album/red-barn.jpg",
+          "decodedBodySize": 107357
+        },
+        {
+          "path": "/assets/toys/photo-album/seashell.jpg",
+          "decodedBodySize": 109240
+        },
+        {
+          "path": "/assets/toys/photo-album/daffodils.jpg",
+          "decodedBodySize": 157632
+        },
+        {
+          "path": "/assets/toys/picture-lab/thumb.webp",
+          "decodedBodySize": 20436
+        },
+        {
+          "path": "/assets/toys/photo-album/thumb.webp",
+          "decodedBodySize": 4896
+        }
+      ],
+      "errors": []
+    }
+  ]
+}
