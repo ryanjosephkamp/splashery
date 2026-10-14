@@ -1,0 +1,2491 @@
+{
+  "date": "2026-10-14T03:53:24.476Z",
+  "commit": "e404cf36b60e7509f2cabc21dcd0f9f076fa8ef4",
+  "browser": "151.0.7922.173",
+  "renderer": "ANGLE SwiftShader (software)",
+  "cpu": "x86_64",
+  "physicalPhone": false,
+  "cpuThrottled": false,
+  "rows": [
+    {
+      "id": "forest",
+      "label": "Forest path",
+      "ai": false,
+      "source": "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg",
+      "author": "Seaq68 (from Pixabay, marked CC0 on Wikimedia Commons)",
+      "license": "CC0 1.0",
+      "imageFile": "assets/toys/photo-3d/forest.jpg",
+      "depthFile": "assets/toys/photo-3d/forest.depth",
+      "imageHash": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+      "depthHash": "adc3d64fbe0d83aefcd5a9efe620f9d55d8b15739ff9aa6366c11c2e2a4b86f2",
+      "depthShape": [518, 350],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "street",
+      "label": "Cobbled street",
+      "ai": false,
+      "source": "https://commons.wikimedia.org/wiki/File:Carleton_Street_off_Leeman_Road_York_Jul25.jpg",
+      "author": "Malcolmxl5",
+      "license": "CC0 1.0",
+      "imageFile": "assets/toys/photo-3d/street.jpg",
+      "depthFile": "assets/toys/photo-3d/street.depth",
+      "imageHash": "b1475109359fdd1ff17e238a3b00f715c5778e05ec21e9b3a8e0b0c76ac0192e",
+      "depthHash": "9ac184e3755a2986a07c63630396507ac204aeb0535ddf169425c87414a2249a",
+      "depthShape": [518, 392],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 360
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 360
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 360
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 360
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 360
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "still-life",
+      "label": "Still life",
+      "ai": false,
+      "source": "https://commons.wikimedia.org/wiki/File:Still_Life_with_Cheese_MET_DT1989.jpg",
+      "author": "Antoine Vollon (Metropolitan Museum of Art Open Access)",
+      "license": "CC0 1.0",
+      "imageFile": "assets/toys/photo-3d/still-life.jpg",
+      "depthFile": "assets/toys/photo-3d/still-life.depth",
+      "imageHash": "45ea7fcd9ba7da38e7545c8e010cb41bf8cf1ace878863a6d1e26de1d361d8d4",
+      "depthHash": "7c5de852e9c55fb15ccfd9e5a0fb43ab7db7cc0c40d6647c6db80d4bb47805c3",
+      "depthShape": [518, 490],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 451
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 451
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 451
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 451
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 451
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "spiral-stairs",
+      "label": "Spiral staircase",
+      "ai": false,
+      "source": "https://commons.wikimedia.org/wiki/File:Spiral_Staircase,_Keck_Center_(U.S._National_Academies).jpg",
+      "author": "Jorge Mendoza",
+      "license": "CC0 1.0",
+      "imageFile": "assets/toys/photo-3d/spiral-stairs.jpg",
+      "depthFile": "assets/toys/photo-3d/spiral-stairs.depth",
+      "imageHash": "f5ebb76d7ae6cfa0ba54666d7e198eb7d34b8af22057c50f033157bb523d52ac",
+      "depthHash": "c95a69047c6bfdb2f66f183e8a8fe092bcd726b387f87f64a9f6c25b358cdc86",
+      "depthShape": [518, 350],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "palace-stairs",
+      "label": "Palace staircase",
+      "ai": false,
+      "source": "https://commons.wikimedia.org/wiki/File:Escalier_monumental_Neue_Burg_Vienne.jpg",
+      "author": "Jebulon",
+      "license": "CC0 1.0",
+      "imageFile": "assets/toys/photo-3d/palace-stairs.jpg",
+      "depthFile": "assets/toys/photo-3d/palace-stairs.depth",
+      "imageHash": "b7af6c4e1ef71af39d47e0569d423f3f63f999e21a1bfdd725e7c014e8d54056",
+      "depthHash": "d0dfb7bc795cd2a7808367cab9fa3bba551f90f47d36f0931a23b62cf8056bb0",
+      "depthShape": [518, 350],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "wildflowers",
+      "label": "Wildflowers up close",
+      "ai": false,
+      "source": "https://commons.wikimedia.org/wiki/File:Wildflowers_in_foreground.JPG",
+      "author": "PookieFugglestein",
+      "license": "CC0 1.0",
+      "imageFile": "assets/toys/photo-3d/wildflowers.jpg",
+      "depthFile": "assets/toys/photo-3d/wildflowers.depth",
+      "imageHash": "298ad2d0f7c566ea06f682c6319ecda0461530865fc7bea25a00f3320ab7c26e",
+      "depthHash": "518eef20aaddfff040e2f26cd64302aea99a6c581c80346811a369699767f3d7",
+      "depthShape": [518, 350],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "label": "Glass jug (AI-made)",
+      "ai": true,
+      "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+      "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+      "license": "AI-made by the owner",
+      "imageFile": "assets/toys/photo-3d/hard-cases/cdx-hard-glass-jug.jpg",
+      "depthFile": "assets/toys/photo-3d/hard-cases/cdx-hard-glass-jug.depth",
+      "imageHash": "94d271cb99f65a62cac14f1f8298141673eadb50cc721e7284ded692722af669",
+      "depthHash": "6d2f0b709538fb1f2ef504a7a2284ec84a27ebaab789bb03ea0492bb2dae2bde",
+      "depthShape": [518, 350],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "label": "Bicycle spokes (AI-made)",
+      "ai": true,
+      "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+      "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+      "license": "AI-made by the owner",
+      "imageFile": "assets/toys/photo-3d/hard-cases/cdx-hard-bicycle-spokes.jpg",
+      "depthFile": "assets/toys/photo-3d/hard-cases/cdx-hard-bicycle-spokes.depth",
+      "imageHash": "ec371af0d3f84216ab3192f8c7f3fb30cba2119a6af8e7fe1db48d08ef72da98",
+      "depthHash": "be24cd837a18800cbff37a20bd9a8939b57c956078287ba11a8dc6565be09dd5",
+      "depthShape": [518, 350],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "label": "Puddle reflection (AI-made)",
+      "ai": true,
+      "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+      "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+      "license": "AI-made by the owner",
+      "imageFile": "assets/toys/photo-3d/hard-cases/cdx-hard-puddle-reflection.jpg",
+      "depthFile": "assets/toys/photo-3d/hard-cases/cdx-hard-puddle-reflection.depth",
+      "imageHash": "f23952df933bbcd708534ef2b404bbbddddb502710a8723e45ceffbf3478cbf3",
+      "depthHash": "10c22a947bea4c0c50d7ea0a397dde0f06fd9adb82a49e85c4b74cc42f966c04",
+      "depthShape": [518, 350],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "label": "Workshop bench (AI-made)",
+      "ai": true,
+      "source": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+      "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+      "license": "AI-made by the owner",
+      "imageFile": "assets/toys/photo-3d/hard-cases/cdx-hard-workshop-bench.jpg",
+      "depthFile": "assets/toys/photo-3d/hard-cases/cdx-hard-workshop-bench.depth",
+      "imageHash": "1df172c95fd9dd9c480617bfea3cceabfe1e7359f06059c72287bb34b7df4924",
+      "depthHash": "ace64d4210c832de6ae12b29713c04b7a74087b54658dd62532841da4cc5fa3c",
+      "depthShape": [518, 350],
+      "shots": [
+        {
+          "angle": -30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": -20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 0,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 0,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 20,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 4.902288721001251,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        },
+        {
+          "angle": 30,
+          "splashery": {
+            "view": "sharp",
+            "verifiedActive": true,
+            "buffer": [480, 480]
+          },
+          "depthy": {
+            "size": {
+              "width": 480,
+              "height": 320
+            },
+            "options": {
+              "size": {
+                "width": 480,
+                "height": 480
+              },
+              "sizeDivisible": 1,
+              "fit": "contain",
+              "retina": false,
+              "upscale": 1,
+              "enlarge": 1,
+              "animate": false,
+              "animateDuration": 2,
+              "animatePosition": null,
+              "animateScale": {
+                "x": 1,
+                "y": 0.5
+              },
+              "depthScale": 7.166666666666665,
+              "depthBlurSize": 0,
+              "depthFocus": 0.5,
+              "depthPreview": 0,
+              "easeFactor": 0,
+              "orient": false,
+              "hover": false,
+              "hoverElement": false,
+              "quality": 5,
+              "qualityMin": 1,
+              "qualityMax": 5,
+              "qualityStart": 4,
+              "alwaysRender": false,
+              "pauseRender": true
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "inference": {
+    "profile": "low",
+    "runs": [
+      {
+        "cold": true,
+        "wallMs": 2877.8000000000466,
+        "inferenceMs": 2249.6999999999534,
+        "provider": "wasm",
+        "threads": 1,
+        "input": [518, 350]
+      },
+      {
+        "cold": false,
+        "wallMs": 2451.6999999999534,
+        "inferenceMs": 2404.5999999998603,
+        "provider": "wasm",
+        "threads": 1,
+        "input": [518, 350]
+      },
+      {
+        "cold": false,
+        "wallMs": 2565.0999999998603,
+        "inferenceMs": 2548.5,
+        "provider": "wasm",
+        "threads": 1,
+        "input": [518, 350]
+      }
+    ]
+  },
+  "depthyCommit": "6ff99c1eb975e820e7feee988cd0df3978ce0df2"
+}
