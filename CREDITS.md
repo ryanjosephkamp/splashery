@@ -740,7 +740,7 @@ Each license was checked on its live Commons page on September 30, 2026 (and aga
   [Commons](https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm).
 - "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" by POPtravel (10 seconds from 7:32),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
-  [Commons](<https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm>).
+  [Commons](https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_%28UK%29_-_4K_60fps_%28UHD%29.webm).
 
 <!-- Codex task 40 new Video to 3D captures -->
 
@@ -751,10 +751,10 @@ New Video to 3D captures, checked on their live Commons pages on October 12, 202
 - [Forest path, walked](https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm),
   by Vitaly Zdanevich: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), 20 seconds from 0
   seconds.
-- [Ruined courtyard, flown over](<https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm>),
+- [Ruined courtyard, flown over](https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_%28august_2021%29.webm),
   by Sillerkiil: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), 20 seconds from 18
   seconds.
-- [Coastal ruins, drone pass](<https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm>),
+- [Coastal ruins, drone pass](https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_%28Fall_2021%29.webm),
   by Sillerkiil: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), 20 seconds from 14
   seconds.
 - [Castle courtyard, orbited](https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm),
