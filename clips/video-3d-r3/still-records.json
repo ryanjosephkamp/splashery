@@ -1,0 +1,80 @@
+[
+  {
+    "id": "liberty",
+    "index": 27,
+    "time": 7.556,
+    "referenceSha256": "6a2425024ab068d0c62f76badd4f111d0527c88ffed7f2722debbbbd3afcb714",
+    "baselineRef": "a21899586de4ca506f4d9bc4033261db3ee6bcad",
+    "source": "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
+    "license": "CC BY 3.0",
+    "changes": "Unmodified source and render pixels arranged beside one another with labels, at the same frozen source timestamp. Forest cameras have independently solved world coordinates; no image alignment.",
+    "file": "liberty-heldout-comparison.png",
+    "bytes": 2426571,
+    "sha256": "5ea9754c99974813d2b4a6def7747aefa6bce959ee1c695f54dde203a5443e48"
+  },
+  {
+    "id": "edinburgh",
+    "index": 27,
+    "time": 5.1195,
+    "referenceSha256": "fc3bdb2579c6bab1f037b922cbeb473b609fa67871321650f4377ff493d20209",
+    "baselineRef": "a21899586de4ca506f4d9bc4033261db3ee6bcad",
+    "source": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
+    "license": "CC BY 3.0",
+    "changes": "Unmodified source and render pixels arranged beside one another with labels, at the same frozen source timestamp. Forest cameras have independently solved world coordinates; no image alignment.",
+    "file": "edinburgh-heldout-comparison.png",
+    "bytes": 2985314,
+    "sha256": "1c92fe80e622462a5750b767de3a4ea33d00e1141d3869a38fb06fb1b995a756"
+  },
+  {
+    "id": "adjara",
+    "index": 27,
+    "time": 11.8055,
+    "referenceSha256": "5abbbfdc20adce0016751d5b2e115040f3240a8422c613bfae344e188ed9f1de",
+    "baselineRef": "cde9cfa50187637ef1e92d8b36b042354f609dd0",
+    "source": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
+    "license": "CC BY 4.0",
+    "changes": "Unmodified source and render pixels arranged beside one another with labels, at the same frozen source timestamp. Forest cameras have independently solved world coordinates; no image alignment.",
+    "file": "adjara-heldout-comparison.png",
+    "bytes": 3908972,
+    "sha256": "493e660a6b8e6d17a0c7e795cf326305ceaa4da84679192a6e48ab2a06868179"
+  },
+  {
+    "id": "lihula",
+    "index": 27,
+    "time": 11.667,
+    "referenceSha256": "5cf5860eabf30980d961fd911e311ca11d1636e739fa849f8344d2e782e28e1e",
+    "baselineRef": "cde9cfa50187637ef1e92d8b36b042354f609dd0",
+    "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
+    "license": "CC0 1.0",
+    "changes": "Unmodified source and render pixels arranged beside one another with labels, at the same frozen source timestamp. Forest cameras have independently solved world coordinates; no image alignment.",
+    "file": "lihula-heldout-comparison.png",
+    "bytes": 3565229,
+    "sha256": "7dd262659c35cdd663ac4a3f303a3c38ed1994edfd998ff2b343750c738de62f"
+  },
+  {
+    "id": "toolse",
+    "index": 27,
+    "time": 11.667,
+    "referenceSha256": "0be80ada24c390d291639f6adcecde9c57b6f43a5241bce3f421a4ed1560c1cc",
+    "baselineRef": "cde9cfa50187637ef1e92d8b36b042354f609dd0",
+    "source": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
+    "license": "CC BY-SA 4.0",
+    "changes": "Unmodified source and render pixels arranged beside one another with labels, at the same frozen source timestamp. Forest cameras have independently solved world coordinates; no image alignment.",
+    "file": "toolse-heldout-comparison.png",
+    "bytes": 2562299,
+    "sha256": "d12bfcd18a6174eff87521eb42c91a8f83643c6c475e5d3ce0b73e493151990c"
+  },
+  {
+    "id": "poltsamaa",
+    "index": 27,
+    "time": 11.6665,
+    "referenceSha256": "0361c0176f03b1b3f0053c660d8d0742fb256dcfbe8b01766009f0eb91b1683d",
+    "baselineRef": "cde9cfa50187637ef1e92d8b36b042354f609dd0",
+    "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
+    "license": "CC BY-SA 4.0",
+    "changes": "Unmodified source and render pixels arranged beside one another with labels, at the same frozen source timestamp. Forest cameras have independently solved world coordinates; no image alignment.",
+    "file": "poltsamaa-heldout-comparison.png",
+    "bytes": 3616243,
+    "sha256": "a3f6d3940d4ff00075443714b5d4f151c440c05a4829f162bacf9eb9e279a4ce"
+  }
+]

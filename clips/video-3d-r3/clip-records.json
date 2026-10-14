@@ -1,0 +1,416 @@
+[
+  {
+    "id": "edinburgh",
+    "source": "https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm",
+    "author": "POPtravel",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "span": {
+      "start": 452,
+      "length": 10
+    },
+    "credit": "Made by Ryan with Codex (GPT-6).",
+    "renderKernel": "gaussian",
+    "changes": "Actual production phone-tier Walk, 390x844, eight seconds, offline time-stepped at 12 fps. The MP4 derives from the rendered GIF; no real-phone frame-rate claim.",
+    "validation": {
+      "id": "edinburgh",
+      "tiers": [
+        {
+          "tier": "phone",
+          "native": {
+            "psnr": 19.65134080986854,
+            "ssim": 0.6589846776905744,
+            "laplacian": 0.002952940804174721,
+            "sourceLaplacian": 0.03203858990877944,
+            "sharpnessRatio": 0.09104087508379632
+          },
+          "prod": {
+            "psnr": 19.406605372862888,
+            "ssim": 0.6528107899240523,
+            "laplacian": 0.0038338518533749615
+          },
+          "ssimGain": 0.05875580567591887,
+          "sharpnessGain": 2.016282756080916,
+          "noBlur": true
+        },
+        {
+          "tier": "desktop",
+          "native": {
+            "psnr": 19.566700219326528,
+            "ssim": 0.6607916574282402,
+            "laplacian": 0.003817021395366043,
+            "sourceLaplacian": 0.03203858990877944,
+            "sharpnessRatio": 0.11844600679142643
+          },
+          "prod": {
+            "psnr": 19.339239603219767,
+            "ssim": 0.6540719197365793,
+            "laplacian": 0.004967952743303469
+          },
+          "ssimGain": 0.06001693548844589,
+          "sharpnessGain": 2.6127241824771663,
+          "noBlur": true
+        }
+      ]
+    },
+    "files": {
+      "edinburgh-walk.mp4": {
+        "bytes": 5325010,
+        "sha256": "3fa6027020e631f76b5a3922327f36eef0976e25d67a3dc1a7215002dbd2df40"
+      },
+      "edinburgh-walk.gif": {
+        "bytes": 13709370,
+        "sha256": "43b31fda140adc2486303ff9fcb44075930fe8f72ada02048854b820e40a2943"
+      },
+      "edinburgh-walk-strip.png": {
+        "bytes": 1119318,
+        "sha256": "ebd0cff229d74b66aa99e72fd25f30cac054611f4b5b86888a2f1b34dee9bb18"
+      }
+    }
+  },
+  {
+    "id": "lihula",
+    "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm",
+    "author": "Sillerkiil",
+    "license": "CC0 1.0",
+    "licenseUrl": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "span": {
+      "start": 18,
+      "length": 20
+    },
+    "credit": "Made by Ryan with Codex (GPT-6).",
+    "renderKernel": "gaussian",
+    "changes": "Actual production phone-tier Walk, 390x844, eight seconds, offline time-stepped at 12 fps. The MP4 derives from the rendered GIF; no real-phone frame-rate claim.",
+    "validation": {
+      "id": "lihula",
+      "tiers": [
+        {
+          "tier": "phone",
+          "native": {
+            "psnr": 25.998107413019614,
+            "ssim": 0.6595175649988269,
+            "laplacian": 0.0024890208652415266,
+            "sourceLaplacian": 0.02008474673012821,
+            "sharpnessRatio": 0.12165243626154798
+          },
+          "prod": {
+            "psnr": 25.78717115656087,
+            "ssim": 0.6614873898671245,
+            "laplacian": 0.003301851128761525
+          },
+          "ssimGain": 0.12972607428601635,
+          "sharpnessGain": 11.373456249399823,
+          "noBlur": true
+        },
+        {
+          "tier": "desktop",
+          "native": {
+            "psnr": 26.208995246787897,
+            "ssim": 0.6784626171380976,
+            "laplacian": 0.00345838818249935,
+            "sourceLaplacian": 0.02008474673012821,
+            "sharpnessRatio": 0.1687725876988383
+          },
+          "prod": {
+            "psnr": 25.963768772262558,
+            "ssim": 0.6805357518630784,
+            "laplacian": 0.004648352245760814
+          },
+          "ssimGain": 0.14877443628197018,
+          "sharpnessGain": 16.01157315617375,
+          "noBlur": true
+        }
+      ]
+    },
+    "files": {
+      "lihula-walk.mp4": {
+        "bytes": 3263314,
+        "sha256": "835806850dc58cc2cda16e7d626be6133299b9be09f2369da11c8ffeaa4bfb0a"
+      },
+      "lihula-walk.gif": {
+        "bytes": 12431202,
+        "sha256": "78ccf7c7a815301274f23f088096ffa9985adede4b1f2b104539e7de450a3e5d"
+      },
+      "lihula-walk-strip.png": {
+        "bytes": 922345,
+        "sha256": "445895abd01826541784378d906928c1d8a5ebdef7cb2a0613625670827694d7"
+      }
+    }
+  },
+  {
+    "id": "adjara",
+    "source": "https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm",
+    "author": "Vitaly Zdanevich",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "span": {
+      "start": 0,
+      "length": 20
+    },
+    "credit": "Made by Ryan with Codex (GPT-6).",
+    "renderKernel": "gaussian",
+    "changes": "Actual production phone-tier Walk, 390x844, eight seconds, offline time-stepped at 12 fps. The MP4 derives from the rendered GIF; no real-phone frame-rate claim.",
+    "validation": {
+      "id": "adjara",
+      "tiers": [
+        {
+          "tier": "phone",
+          "native": {
+            "psnr": 18.471592076670287,
+            "ssim": 0.41630077408809657,
+            "laplacian": 0.004459157917640255,
+            "sourceLaplacian": 0.08640764747267234,
+            "sharpnessRatio": 0.05174486406767791
+          },
+          "prod": {
+            "psnr": 18.291069853557115,
+            "ssim": 0.4171178652931807,
+            "laplacian": 0.005511556802562487
+          },
+          "ssimGain": 0.22514008523527898,
+          "sharpnessGain": 6.667611266365737,
+          "noBlur": true
+        },
+        {
+          "tier": "desktop",
+          "native": {
+            "psnr": 18.695119342622018,
+            "ssim": 0.4516215634432051,
+            "laplacian": 0.006215880094094704,
+            "sourceLaplacian": 0.08640764747267234,
+            "sharpnessRatio": 0.07202104616720065
+          },
+          "prod": {
+            "psnr": 18.48011844930714,
+            "ssim": 0.4534902682754285,
+            "laplacian": 0.007905543724315447
+          },
+          "ssimGain": 0.2615124882175268,
+          "sharpnessGain": 9.563739301114644,
+          "noBlur": true
+        }
+      ]
+    },
+    "files": {
+      "adjara-walk.mp4": {
+        "bytes": 5508739,
+        "sha256": "cb2c920c8fd8be5958ffdb6ec280d43d55d760bc53784c32b22616ff4e68576c"
+      },
+      "adjara-walk.gif": {
+        "bytes": 15952271,
+        "sha256": "7d6bacef7ba1a878d6e69b258103b8fe73048cbc730d963817622edc9087474f"
+      },
+      "adjara-walk-strip.png": {
+        "bytes": 1238975,
+        "sha256": "4bc20251848a88b986c80321b513017d162283e448bdde1a5a90db9007425d56"
+      }
+    }
+  },
+  {
+    "id": "toolse",
+    "source": "https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm",
+    "author": "Sillerkiil",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "span": {
+      "start": 14,
+      "length": 20
+    },
+    "credit": "Made by Ryan with Codex (GPT-6).",
+    "renderKernel": "gaussian",
+    "changes": "Actual production phone-tier Walk, 390x844, eight seconds, offline time-stepped at 12 fps. The MP4 derives from the rendered GIF; no real-phone frame-rate claim.",
+    "validation": {
+      "id": "toolse",
+      "tiers": [
+        {
+          "tier": "phone",
+          "native": {
+            "psnr": 29.478658627974724,
+            "ssim": 0.8040049807017521,
+            "laplacian": 0.002102742438574636,
+            "sourceLaplacian": 0.009635937660558699,
+            "sharpnessRatio": 0.22172722432972805
+          },
+          "prod": {
+            "psnr": 28.82162868393785,
+            "ssim": 0.7986065925749829,
+            "laplacian": 0.0028191906042810207
+          },
+          "ssimGain": 0.10489215664927487,
+          "sharpnessGain": 12.084938084895738,
+          "noBlur": true
+        },
+        {
+          "tier": "desktop",
+          "native": {
+            "psnr": 29.79322185472381,
+            "ssim": 0.8128295722497266,
+            "laplacian": 0.0032178867148133622,
+            "sourceLaplacian": 0.009635937660558699,
+            "sharpnessRatio": 0.3406950395681174
+          },
+          "prod": {
+            "psnr": 29.226251782171357,
+            "ssim": 0.8077257896752997,
+            "laplacian": 0.0042488742824291015
+          },
+          "ssimGain": 0.1140113537495917,
+          "sharpnessGain": 18.21351935399084,
+          "noBlur": true
+        }
+      ]
+    },
+    "files": {
+      "toolse-walk.mp4": {
+        "bytes": 2507876,
+        "sha256": "bd40772aee9bb77c30e7578c71608881aed154ed0a8b9923afe4de0669564453"
+      },
+      "toolse-walk.gif": {
+        "bytes": 9628082,
+        "sha256": "08a096d9651101437e3b20dc463dffc9ffd613357da87f8b2ffc4c2ec4525da5"
+      },
+      "toolse-walk-strip.png": {
+        "bytes": 776056,
+        "sha256": "36e482bde35200c7f06a4e5f72a268ee1a201b70a36ec3ad0a1703a8ed1593f8"
+      }
+    }
+  },
+  {
+    "id": "poltsamaa",
+    "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm",
+    "author": "Sillerkiil",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "span": {
+      "start": 24,
+      "length": 20
+    },
+    "credit": "Made by Ryan with Codex (GPT-6).",
+    "renderKernel": "gaussian",
+    "changes": "Actual production phone-tier Walk, 390x844, eight seconds, offline time-stepped at 12 fps. The MP4 derives from the rendered GIF; no real-phone frame-rate claim.",
+    "validation": {
+      "id": "poltsamaa",
+      "tiers": [
+        {
+          "tier": "phone",
+          "native": {
+            "psnr": 25.36567130432316,
+            "ssim": 0.6540071644850859,
+            "laplacian": 0.003284095987986669,
+            "sourceLaplacian": 0.021897044065856245,
+            "sharpnessRatio": 0.15383609663812545
+          },
+          "prod": {
+            "psnr": 25.115097669535945,
+            "ssim": 0.6520611293319928,
+            "laplacian": 0.0043062709655931845
+          },
+          "ssimGain": 0.0735452457425686,
+          "sharpnessGain": 5.1065996071849575,
+          "noBlur": true
+        },
+        {
+          "tier": "desktop",
+          "native": {
+            "psnr": 25.54480649178178,
+            "ssim": 0.6624940886656191,
+            "laplacian": 0.004770608118148098,
+            "sourceLaplacian": 0.021897044065856245,
+            "sharpnessRatio": 0.22448487417135563
+          },
+          "prod": {
+            "psnr": 25.234086461447465,
+            "ssim": 0.6603386191364303,
+            "laplacian": 0.006519496129506457
+          },
+          "ssimGain": 0.08182273554700614,
+          "sharpnessGain": 7.7311568733101135,
+          "noBlur": true
+        }
+      ]
+    },
+    "files": {
+      "poltsamaa-walk.mp4": {
+        "bytes": 2007633,
+        "sha256": "bb8813729f5566dc3c141a1b45a47b273d932abf0131d1d0d11111c258cf36f7"
+      },
+      "poltsamaa-walk.gif": {
+        "bytes": 14048088,
+        "sha256": "59f08d2c0be3dfe07c4a2c02ed0556e1c1a43fdcb40a0a2ec79bc9cfaa3fe9e8"
+      },
+      "poltsamaa-walk-strip.png": {
+        "bytes": 560416,
+        "sha256": "6459dcaa1c265385d1f76910f7c93bd8ce7cdf5d687b2b1175246b32dc0611e0"
+      }
+    }
+  },
+  {
+    "id": "liberty",
+    "source": "https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm",
+    "author": "the Dronalist",
+    "license": "CC BY 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/3.0/",
+    "span": {
+      "start": 204,
+      "length": 14
+    },
+    "credit": "Made by Ryan with Codex (GPT-6).",
+    "renderKernel": "gaussian",
+    "changes": "Actual production phone-tier Walk, 390x844, eight seconds, offline time-stepped at 12 fps. The MP4 derives from the rendered GIF; no real-phone frame-rate claim.",
+    "validation": {
+      "id": "liberty",
+      "tiers": [
+        {
+          "tier": "phone",
+          "native": {
+            "psnr": 27.190911715991206,
+            "ssim": 0.6489629316452126,
+            "laplacian": 0.0013259708235881845,
+            "sourceLaplacian": 0.012333843435528583,
+            "sharpnessRatio": 0.10707605796579335
+          },
+          "prod": {
+            "psnr": 26.801371857551782,
+            "ssim": 0.6462817000889717,
+            "laplacian": 0.0016910982602548546
+          },
+          "ssimGain": 0.13192406316816419,
+          "sharpnessGain": 2.9592515154077463,
+          "noBlur": true
+        },
+        {
+          "tier": "desktop",
+          "native": {
+            "psnr": 27.059387648986938,
+            "ssim": 0.6520775480144495,
+            "laplacian": 0.0018262935257198972,
+            "sourceLaplacian": 0.012333843435528583,
+            "sharpnessRatio": 0.1474522466244551
+          },
+          "prod": {
+            "psnr": 26.736679718352388,
+            "ssim": 0.6492824030207031,
+            "laplacian": 0.0024477634726199817
+          },
+          "ssimGain": 0.13492476609989557,
+          "sharpnessGain": 4.283339375335162,
+          "noBlur": true
+        }
+      ]
+    },
+    "files": {
+      "liberty-walk.mp4": {
+        "bytes": 3924896,
+        "sha256": "d6ad36279b4fe1e366fe86d241a9277d937f095a68076dd2aae9d4593433a63f"
+      },
+      "liberty-walk.gif": {
+        "bytes": 11734251,
+        "sha256": "99ebb0cf8af1d8c0be32a37032421be0749692717d0d4d7437ed3975f95a224a"
+      },
+      "liberty-walk-strip.png": {
+        "bytes": 1049274,
+        "sha256": "bb19513125f70c106c930381fe3b5c016bf0665ad7f504326009de43d390c8a9"
+      }
+    }
+  }
+]
