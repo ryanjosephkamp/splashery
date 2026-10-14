@@ -4,6 +4,7 @@
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 import path from "node:path";
 import { Kit, buildRecipe } from "../src/kit.js";
 import { KINDS } from "../src/effects.js";
@@ -332,7 +333,7 @@ test.describe("the manual page", () => {
   });
 
   test("the PDF is printed from this page, and has its pages", () => {
-    const pdf = fs.readFileSync("manual/tinkerers-manual.pdf");
+    const pdf = fs.readFileSync(`manual/${MANUAL_PDF}`);
     const pages = (pdf.toString("latin1").match(/\/Type\s*\/Page[^s]/g) || []).length;
     expect(pages).toBeGreaterThanOrEqual(25);
     expect(pdf.length).toBeLessThan(8e6); // 7 MB with the print stills of the live demos (Manual r4)

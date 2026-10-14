@@ -18,6 +18,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { pathToFileURL } from "node:url";
 
 const args = process.argv.slice(2);
 const opt = (name, def) => {
@@ -38,6 +39,7 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(stamp)) {
 }
 
 // What goes in, relative to the repo root. A folder is copied whole.
+const { MANUAL_PDF } = await import(pathToFileURL(path.join(root, "manual/pdf-edition.js")));
 const PACK = [
   "builders",
   "CLAUDE.md",
@@ -47,6 +49,9 @@ const PACK = [
   "CREDITS.md",
   "docs/PACKS.md",
   "docs/SCENE-SCHEMA.md",
+  "manual/pdf-edition.js",
+  `manual/${MANUAL_PDF}`,
+  // Packed guides can contain old links, so include the compatibility copy too.
   "manual/tinkerers-manual.pdf",
 ];
 

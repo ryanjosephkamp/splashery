@@ -1,0 +1,137 @@
+Merged branch at main 4b0127da, final sample follow-up.
+Broad run was started before replacement selection; standalone follow-ups use the fixed shipping list.
+
+  1) [chromium] › tests/qr3.spec.mjs:235:1 › a tap knocks the modules loose where it lands; a link keeps the pattern and theme
+
+    Error: expect(received).toBeGreaterThan(expected)
+
+    Expected: > 0
+    Received:   0
+
+      226 |     return { knock: app.player.motion.state.knock ?? 0, hash: encodeSceneHash(window.__splashery.exportScene()) }; // prettier-ignore
+      227 |   });
+    > 228 |   expect(fired.knock).toBeGreaterThan(0);
+          |                       ^
+      229 |   await page.goto(`${APP}#s=${fired.hash}`);
+      230 |   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
+      231 |   await page.waitForFunction(() => window.__splashery.qr?.info().size, null, { timeout: 60_000 });
+        at /workspace/splashery/tests/qr3.spec.mjs:228:23
+
+
+  2) [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144"
+    Received: "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6"
+
+      151 |           h.update(JSON.stringify(r));
+      152 |         }
+    > 153 |     expect(h.digest("hex")).toBe(BUILD_HASH);
+          |                             ^
+      154 |   });
+      155 | });
+      156 |
+        at /workspace/splashery/tests/qr4-craft.spec.mjs:153:29
+
+
+  3) [chromium] › tests/qrc-picture.spec.mjs:43:3 › Picture QR: the layout › every module's center keeps its bit, and the patterns stay plain
+
+    Error: ENOENT: no such file or directory, open 'assets/toys/qr-picture/codex/cdx-qr-print-3-6.jpg'
+
+      36 |
+      37 | function loadPicture(file) {
+    > 38 |   const j = jpeg.decode(fs.readFileSync(file), { useTArray: true, maxMemoryUsageInMB: 1024 });
+         |                            ^
+      39 |   const data = new Float32Array(j.width * j.height * 3);
+      40 |   for (let i = 0; i < j.width * j.height; i++)
+      41 |     for (let c = 0; c < 3; c++) data[i * 3 + c] = j.data[i * 4 + c] / 255;
+        at loadPicture (/workspace/splashery/tests/qrc-picture.spec.mjs:38:28)
+        at map (/workspace/splashery/tests/qrc-picture.spec.mjs:44:59)
+        at /workspace/splashery/tests/qrc-picture.spec.mjs:44:41
+
+  Slow test file: [chromium] › tests/smoke.spec.mjs (16.6m)
+  Slow test file: [chromium] › tests/qr.spec.mjs (10.8m)
+  Slow test file: [chromium] › tests/qrs-toys.spec.mjs (7.2m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  3 failed
+    [chromium] › tests/qr3.spec.mjs:235:1 › a tap knocks the modules loose where it lands; a link keeps the pattern and theme
+    [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder
+    [chromium] › tests/qrc-picture.spec.mjs:43:3 › Picture QR: the layout › every module's center keeps its bit, and the patterns stay plain
+  4 did not run
+  140 passed (57.0m)
+
+
+Final standalone run:
+
+Running 19 tests using 1 worker
+
+(node:111375) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:111375) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/dsm-samples.spec.mjs:13:3 › the AI-made samples' records › there are samples, with unique ids, none of them in the CC0 six's place (46ms)
+  ✓   2 [chromium] › tests/dsm-samples.spec.mjs:20:3 › the AI-made samples' records › each is labeled AI-made in the picker, its label and its credit (245ms)
+  ✓   3 [chromium] › tests/dsm-samples.spec.mjs:35:3 › the AI-made samples' records › each has a picture and a depth map, a CREDITS.md line and a tools/assets.json entry (209ms)
+  ✓   4 [chromium] › tests/dsm-samples.spec.mjs:52:3 › the AI-made samples' records › each decodes the way Node's kit test reads it, to its own size (2.8s)
+  ✓   5 [chromium] › tests/dsm-samples.spec.mjs:59:3 › the AI-made samples' records › only whole files that are samples are in ai/ (a rejected picture is never committed) (27ms)
+  ✓   6 [chromium] › tests/dsm-samples.spec.mjs:65:3 › in the browser › every AI-made sample loads and builds with its picture (53.8s)
+  ✓   7 [chromium] › tests/qr4-craft.spec.mjs:80:3 › Other barcodes › every linear symbol's text sits on its label (252ms)
+  ✓   8 [chromium] › tests/qr4-craft.spec.mjs:110:3 › Other barcodes › Data Matrix and Aztec modules are crisp and seamless, and every module reads right (515ms)
+  ✘   9 [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder (5.1s)
+(node:112117) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:112117) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  10 [chromium] › tests/qr4-craft.spec.mjs:176:3 › Picture QR: the halftone › every module's center and the plain patterns keep their bits (centers in the photo's hue in color), and the free cells are a halftone (99ms)
+  ✓  11 [chromium] › tests/qr4-craft.spec.mjs:214:3 › Picture QR: the halftone › the picture blurred over each module's 3 × 3 cells stays close to the photo's gray (1.3s)
+  ✓  12 [chromium] › tests/qr4-craft.spec.mjs:256:3 › Picture QR: the halftone › the mask is the one that fits the picture best (46ms)
+  ✓  13 [chromium] › tests/qr4-craft.spec.mjs:275:3 › Picture QR: the halftone › every sample reads in both styles with the nudge stepped up, and a bigger code reads too (16.4s)
+  ✓  14 [chromium] › tests/qr4-craft.spec.mjs:296:1 › Picture QR in the browser: the splats read back from the stage in both styles (19.8s)
+  ✓  15 [chromium] › tests/qrc-picture.spec.mjs:43:3 › Picture QR: the layout › every module's center keeps its bit, and the patterns stay plain (195ms)
+  ✓  16 [chromium] › tests/qrc-picture.spec.mjs:87:3 › Picture QR: the layout › each sample scans at the toy's defaults, at phone size and smaller (2.3s)
+  ✓  17 [chromium] › tests/qrc-picture.spec.mjs:100:3 › Picture QR: the layout › more contrast never lowers the measured contrast (144ms)
+  ✓  18 [chromium] › tests/qrc-picture.spec.mjs:115:3 › Picture QR: the layout › Make it scan finds the closest version that reads (653ms)
+  ✓  19 [chromium] › tests/qrc-picture.spec.mjs:132:1 › Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads (33.1s)
+
+
+  1) [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144"
+    Received: "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6"
+
+      151 |           h.update(JSON.stringify(r));
+      152 |         }
+    > 153 |     expect(h.digest("hex")).toBe(BUILD_HASH);
+          |                             ^
+      154 |   });
+      155 | });
+      156 |
+        at /workspace/splashery/tests/qr4-craft.spec.mjs:153:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/cdx-pics/round3/final-sample-results/qr4-craft-Other-barcodes-t-129fd-ats-from-the-shared-builder-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/cdx-pics/round3/final-sample-results/qr4-craft-Other-barcodes-t-129fd-ats-from-the-shared-builder-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/qr4-craft.spec.mjs:151:3 › Other barcodes › the QR code toy builds the very same splats from the shared builder
+  18 passed (2.5m)
+
+
+Isolated tap retry:
+
+Running 1 test using 1 worker
+
+(node:112824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:112824) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/qr3.spec.mjs:235:1 › a tap knocks the modules loose where it lands; a link keeps the pattern and theme (13.6s)
+
+  1 passed (14.8s)
