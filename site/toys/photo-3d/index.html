@@ -6,7 +6,7 @@
     <title>Photo to 3D · Splashery</title>
     <meta
       name="description"
-      content="A depth model guesses relative depth from a single photo; it does not measure distances in meters."
+      content="A depth model guesses relative depth from one photo, not distances in meters."
     />
     <meta name="robots" content="noindex" />
     <link rel="canonical" href="https://ryanjosephkamp.github.io/splashery/site/toys/photo-3d/" />
@@ -15,7 +15,7 @@
     <meta property="og:title" content="Photo to 3D · Splashery" />
     <meta
       property="og:description"
-      content="A depth model guesses relative depth from a single photo; it does not measure distances in meters."
+      content="A depth model guesses relative depth from one photo, not distances in meters."
     />
     <meta
       property="og:url"
@@ -220,19 +220,22 @@
         <section class="toy-section" aria-labelledby="h-about">
           <h2 id="h-about">About this toy</h2>
           <p>
-            A depth model guesses relative depth from a single photo; it does not measure distances
-            in meters. This toy runs the model on your device and lifts the picture to its guessed
-            depth, like a shallow sculpted relief when you turn the view. Sharp picture shows the
-            photo itself on that relief, so even small text reads; Splats rebuilds it from splats.
+            A depth model guesses relative depth from one photo, not distances in meters. Sharp
+            picture shows the photo on a shallow relief. Fine Splats is hybrid: splats over a filled
+            background sheet. Hidden colors are guessed from nearby background and can repeat.
           </p>
           <p>
-            Where depth jumps, such as a leaf in front of a tree, the surface splits into layers to
-            reduce smearing. Tap to raise them as it sways, and again to flatten them. Layers pulls
-            them apart, and Depth sets the relief's strength. Show the original puts the flat photo
-            in a corner. Sound picks the tap's sound: paper, a soft chime, pop-up layers, a water
-            drop, none, or your own sound file, kept on your device. Open a JPEG, PNG or WebP photo
-            (HEIC where the browser supports it) in the Toy tab, or pick a sample. The model, about
-            27 MB, loads the first time and is slower on a phone. Your photo is processed locally.
+            Tap to raise or flatten the depth. Layers separates the pieces, Depth sets the relief,
+            and Show the original puts the flat photo in a corner. Pick a sample, or open JPEG, PNG,
+            WebP, or supported HEIC photos. The model, about 27 MB, loads the first time and is
+            slower on a phone. Your photo stays on this device.
+          </p>
+          <p>
+            Gaussian splat exports contain foreground and background splats with per-splat colors,
+            without the continuous sheet or original photo texture. Scene JSON saves settings,
+            including the sample, depth, detail, and view choice; the toy rebuilds its surfaces when
+            loaded. It does not embed your own photo: reopen that photo after loading its saved
+            scene. Picture and video exports capture the displayed view.
           </p>
         </section>
 

@@ -1,0 +1,26 @@
+{
+  "build": "9d8458b9c84273c517f0c1a92ab4554b975a69e3",
+  "main": "0a358f985998e60637a069a8940854463e86baee",
+  "files": {
+    "src/packs/photo-3d.js": "61281f5744bea82cb1fe8e6f9f98db7dca51c972c2d65d196f1c1475b1a294e1",
+    "src/packs/photo-3d-core.js": "d0d35d56e009fffcd28e5987e858c553744d1ed881422529fb7c951dc10035fd",
+    "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+    "src/photo-splats.js": "e3f239412367c4b1a0bf6a5940838dcfed9cd6d86276d22868c74a6699132c64",
+    "src/live/relief-mesh.js": "5e918d3ce3fd558736f2ec60d66bf0306f11fea3d9a125a0b0195ffd9a63542e",
+    "src/live/relief-height.js": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+    "src/photo3d/preview.js": "287df71ea977f77a98e1fa756ebc3a939116c6fc7e9cfe8c2b4d8f784e163fce",
+    "src/photo3d/prepare.js": "0259963e210e325403da3f32b24156b60ea9083c1d34525878f40503325c9ee8",
+    "src/photo3d/build-worker.js": "e5c247be52200b05e35cc1a5c03ed1ce4740894bce159e1f602037433bb28ed9",
+    "src/photo3d/decode.js": "73e1e4ce8b87ec57aac3031c816e0ff600b5fb7d2076fef0f9eaf7aeb0073510",
+    "src/photo3d/background.js": "50714fabcfbe8bce89b5759d38ce511df44d7dbfd1bbca88fa3ddfd212437cbf",
+    "src/photo3d/surface.js": "6c3195814c048d26b451e1c5cd55e633d6e8577ca2cf44cc044bba920490b688",
+    "src/photo3d/border.js": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b",
+    "src/photo3d/decode-worker.js": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103",
+    "src/photo3d/bitmaps.js": "30c8326556edc55678309cb8d9789c30b3595f0b424f9b5ee04de0902a3abea8"
+  },
+  "baseline": "ec4aaa37",
+  "comment": "https://github.com/ryanjosephkamp/splashery/pull/566#issuecomment-6121053986",
+  "clipBytes": 3408214,
+  "latestMergedMain": "097ca43645881ac9408c780d9e0f7007b19ac916",
+  "laterMainChanges": "Documentation only; application, asset, and test trees match the tested build."
+}

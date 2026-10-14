@@ -1,3 +1,5 @@
+import * as pc from "./pc.js";
+
 // Engine (lane Photo fidelity): photo-textured splats.
 //
 // A splat is one color. A photo of a page of text needs about one splat per
@@ -46,10 +48,24 @@ export const PHOTO_VARYINGS = ["spPhotoA", "spPhotoM"];
 // writes it (an output no program writes is dropped by the compiler, and
 // WebGL then refuses the draw).
 export const PHOTO_WRITE = {
-  glslUniforms: "uniform vec4 uSpPhotoMap; // Photo fidelity: rest place to photo (u, v)",
-  wgslUniforms: "uniform uSpPhotoMap: vec4f; // Photo fidelity: rest place to photo (u, v)",
-  glsl: "if (spPhotoBit > 0.5) { uvec2 q = uvec2(clamp(vec2(uSpPhotoMap.x * spRest.x + uSpPhotoMap.y, uSpPhotoMap.z * spRest.y + uSpPhotoMap.w), 0.0, 1.0) * 65533.0 + 1.5); spPhotoOut = q.x | (q.y << 16u); }",
-  wgsl: "if (spPhotoBit > 0.5) { let q = vec2u(clamp(vec2f(uniform.uSpPhotoMap.x * spRest.x + uniform.uSpPhotoMap.y, uniform.uSpPhotoMap.z * spRest.y + uniform.uSpPhotoMap.w), vec2f(0.0), vec2f(1.0)) * 65533.0 + 1.5); spPhotoOut = q.x | (q.y << 16u); }",
+  glslUniforms:
+    "uniform vec4 uSpPhotoMap; uniform float uSpPhotoFill; // Photo fidelity: rest place to photo (u, v)",
+  wgslUniforms:
+    "uniform uSpPhotoMap: vec4f; uniform uSpPhotoFill: f32; // Photo fidelity: rest place to photo (u, v)",
+  // This recipe explicitly excludes its backing from patterns (flag 16).
+  // Ordinary added clay has neither flag and must retain its own color/extent.
+  glsl: `if (spPhotoBit > 0.5 || (uSpPhotoFill > 0.5 && spNoPat > 0.5)) {
+    vec2 uv = clamp(vec2(uSpPhotoMap.x * spRest.x + uSpPhotoMap.y, uSpPhotoMap.z * spRest.y + uSpPhotoMap.w), 0.0, 1.0);
+    uvec2 q = uvec2(uv * vec2(uSpPhotoFill > 0.5 ? 32765.0 : 65533.0, 65533.0) + 1.5);
+    if (uSpPhotoFill > 0.5 && spPhotoBit < 0.5) q.x |= 32768u;
+    spPhotoOut = q.x | (q.y << 16u);
+  }`,
+  wgsl: `if (spPhotoBit > 0.5 || (uniform.uSpPhotoFill > 0.5 && spNoPat > 0.5)) {
+    let uv = clamp(vec2f(uniform.uSpPhotoMap.x * spRest.x + uniform.uSpPhotoMap.y, uniform.uSpPhotoMap.z * spRest.y + uniform.uSpPhotoMap.w), vec2f(0.0), vec2f(1.0));
+    var q = vec2u(uv * vec2f(select(65533.0, 32765.0, uniform.uSpPhotoFill > 0.5), 65533.0) + 1.5);
+    if (uniform.uSpPhotoFill > 0.5 && spPhotoBit < 0.5) { q.x |= 32768u; }
+    spPhotoOut = q.x | (q.y << 16u);
+  }`,
 };
 
 // The work buffer's writeSplat (the format's write code), wrapped.
@@ -75,8 +91,10 @@ void writeSplat(vec3 center, vec4 rotation, vec3 scale, vec4 color) {
 
 // The (u, v) of a packed value; z 1 for a photo splat.
 const GLSL_UNPACK = `
+uniform float uSpPhotoFill;
 vec4 spPhotoUnpack(uint q) {
   if (q == 0u) return vec4(0.0);
+  if (uSpPhotoFill > 0.5) return vec4((float(q & 32767u) - 1.0) / 32765.0, (float(q >> 16u) - 1.0) / 65533.0, (q & 32768u) != 0u ? 2.0 : 1.0, 0.0);
   return vec4((vec2(float(q & 0xFFFFu), float(q >> 16u)) - 1.0) / 65533.0, 1.0, 0.0);
 }
 `;
@@ -103,13 +121,17 @@ const GLSL_VS_PROJECT =
 uniform vec4 uSpPhotoTu;
 uniform vec4 uSpPhotoTv;
 uniform vec4 uSpPhotoK;
+uniform vec4 uSpPhotoBackK;
+uniform vec2 uSpPhotoPlane; // x the flat photo's z, y shared-plane projection on
 void spPhotoProject(vec3 c) {
   vec4 ph = spPhotoUnpack(loadSpPhoto().x);
   setSpPhotoA(vec4(0.0));
   setSpPhotoM(vec4(0.0));
   if (ph.z < 0.5) return;
   mat4 vp = matrix_projection * matrix_view * matrix_model;
-  vec4 cc = vp * vec4(c, 1.0);
+  vec4 actual = vp * vec4(c, 1.0);
+  bool samePlane = uSpPhotoPlane.y > 0.5 && ph.z < 1.5;
+  vec4 cc = samePlane ? vp * vec4(c.xy, uSpPhotoPlane.x, 1.0) : actual;
   vec4 cu = vp * vec4(uSpPhotoTu.xyz, 0.0);
   vec4 cv = vp * vec4(uSpPhotoTv.xyz, 0.0);
   if (cc.w <= 1e-6) return;
@@ -121,8 +143,16 @@ void spPhotoProject(vec3 c) {
   // the inverse of the 2 by 2 (pixels per u and v): u and v per pixel
   vec4 m = vec4(dv.y, -du.y, -dv.x, du.x) / det;
   // the photo's mip level for the splat: its texels per screen pixel (a splat is one scale)
-  float lod = log2(max(max(length(m.xy * uSpPhotoK.yz), length(m.zw * uSpPhotoK.yz)), 1e-4));
-  setSpPhotoA(vec4(ph.xy, 1.0, lod));
+  vec2 size = ph.z > 1.5 ? uSpPhotoBackK.xy : uSpPhotoK.yz;
+  float lod = log2(max(max(length(m.xy * size), length(m.zw * size)), 1e-4));
+  // Morph offsets and block ordering leave tiny per-splat z differences even
+  // when flat. Anchor every foreground patch to the same photo plane, so
+  // overlapping splats agree on the source pixel instead of mixing shifts.
+  if (samePlane) {
+    vec2 delta = (actual.xy / actual.w - cc.xy / cc.w) * hv;
+    ph.xy += m.xy * delta.x + m.zw * delta.y;
+  }
+  setSpPhotoA(vec4(ph.xy, ph.z, lod));
   setSpPhotoM(m);
 }
 `;
@@ -134,6 +164,9 @@ const WGSL_VS_MODIFY = `
 uniform uSpPhotoTu: vec4f;
 uniform uSpPhotoTv: vec4f;
 uniform uSpPhotoK: vec4f;
+uniform uSpPhotoBackK: vec4f;
+uniform uSpPhotoFill: f32;
+uniform uSpPhotoPlane: vec2f;
 fn modifySplatCenter(center: ptr<function, vec3f>) {
 }
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
@@ -143,9 +176,16 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   setSpPhotoA(vec4f(0.0));
   setSpPhotoM(vec4f(0.0));
   if (q == 0u) { return; }
-  let ph = (vec2f(f32(q & 0xFFFFu), f32(q >> 16u)) - 1.0) / 65533.0;
+  var ph = (vec2f(f32(q & 0xFFFFu), f32(q >> 16u)) - 1.0) / 65533.0;
+  var kind = 1.0;
+  if (uniform.uSpPhotoFill > 0.5) {
+    ph = vec2f((f32(q & 32767u) - 1.0) / 32765.0, (f32(q >> 16u) - 1.0) / 65533.0);
+    if ((q & 32768u) != 0u) { kind = 2.0; }
+  }
   let vp = uniform.matrix_projection * uniform.matrix_view * uniform.matrix_model;
-  let cc = vp * vec4f(center, 1.0);
+  let actual = vp * vec4f(center, 1.0);
+  let samePlane = uniform.uSpPhotoPlane.y > 0.5 && kind < 1.5;
+  let cc = select(actual, vp * vec4f(center.xy, uniform.uSpPhotoPlane.x, 1.0), samePlane);
   let cu = vp * vec4f(uniform.uSpPhotoTu.xyz, 0.0);
   let cv = vp * vec4f(uniform.uSpPhotoTv.xyz, 0.0);
   if (cc.w <= 1e-6) { return; }
@@ -155,8 +195,13 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   let det = du.x * dv.y - du.y * dv.x;
   if (abs(det) < 1e-9) { return; }
   let m = vec4f(dv.y, -du.y, -dv.x, du.x) / det;
-  let lod = log2(max(max(length(m.xy * uniform.uSpPhotoK.yz), length(m.zw * uniform.uSpPhotoK.yz)), 1e-4));
-  setSpPhotoA(vec4f(ph.xy, 1.0, lod));
+  let size = select(uniform.uSpPhotoK.yz, uniform.uSpPhotoBackK.xy, kind > 1.5);
+  let lod = log2(max(max(length(m.xy * size), length(m.zw * size)), 1e-4));
+  if (samePlane) {
+    let delta = (actual.xy / actual.w - cc.xy / cc.w) * hv;
+    ph += m.xy * delta.x + m.zw * delta.y;
+  }
+  setSpPhotoA(vec4f(ph.xy, kind, lod));
   setSpPhotoM(m);
 }
 `;
@@ -170,7 +215,30 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
 export const PHOTO_PS = {
   glsl: `
 uniform sampler2D uSpPhoto;
+uniform sampler2D uSpPhotoBack;
+uniform float uSpPhotoFill;
 uniform vec4 uSpPhotoK;
+uniform vec2 uSpPhotoPlane;
+// A flat photo uses a cubic footprint, with nine bilinear taps at one mip.
+// This reconstructs small strokes without the per-patch phase aliasing.
+vec3 spPhotoCubic(vec2 t, float lod) {
+  float level = floor(max(lod, 0.0));
+  vec2 size = max(vec2(1.0), floor(uSpPhotoK.yz * exp2(-level)));
+  vec2 p = t * size - 0.5, f = fract(p), base = floor(p) + 0.5;
+  vec2 f2 = f * f, f3 = f2 * f;
+  vec2 w0 = -0.5 * f + f2 - 0.5 * f3;
+  vec2 w1 = vec2(1.0) - 2.5 * f2 + 1.5 * f3;
+  vec2 w2 = 0.5 * f + 2.0 * f2 - 1.5 * f3;
+  vec2 w3 = -0.5 * f2 + 0.5 * f3;
+  vec2 w12 = w1 + w2;
+  vec3 xs = vec3(base.x - 1.0, base.x + w2.x / w12.x, base.x + 2.0) / size.x;
+  vec3 ys = vec3(base.y - 1.0, base.y + w2.y / w12.y, base.y + 2.0) / size.y;
+  vec3 wx = vec3(w0.x, w12.x, w3.x), wy = vec3(w0.y, w12.y, w3.y);
+  vec3 result = vec3(0.0);
+  for (int y = 0; y < 3; y++) for (int x = 0; x < 3; x++)
+    result += textureLod(uSpPhoto, vec2(xs[x], ys[y]), level).rgb * wx[x] * wy[y];
+  return clamp(result, vec3(0.0), vec3(1.0));
+}
 void spPhotoColor(vec2 uv, inout vec4 color) {
   vec2 gx = dFdx(uv);
   vec2 gy = dFdy(uv);
@@ -181,13 +249,43 @@ void spPhotoColor(vec2 uv, inout vec4 color) {
   vec2 p = vec2(gy.y * uv.x - gy.x * uv.y, gx.x * uv.y - gx.y * uv.x) / det;
   vec4 m = getSpPhotoM();
   vec2 t = a.xy + m.xy * p.x + m.zw * p.y;
-  color.rgb = textureLod(uSpPhoto, t, a.w).rgb * uSpPhotoK.x;
+  if (uSpPhotoFill > 0.5 && (any(lessThan(t, vec2(0.0))) || any(greaterThan(t, vec2(1.0))))) { color.a = 0.0; return; }
+  vec3 c = a.z > 1.5 ? textureLod(uSpPhotoBack, t, a.w).rgb :
+    (uSpPhotoPlane.y > 0.5 ? spPhotoCubic(t, a.w) : textureLod(uSpPhoto, t, a.w - (uSpPhotoFill > 0.5 ? 0.75 : 0.0)).rgb);
+  color.rgb = c * uSpPhotoK.x;
 }
 `,
   wgsl: `
 var uSpPhoto: texture_2d<f32>;
 var uSpPhotoSampler: sampler;
+var uSpPhotoBack: texture_2d<f32>;
+var uSpPhotoBackSampler: sampler;
+uniform uSpPhotoFill: f32;
 uniform uSpPhotoK: vec4f;
+uniform uSpPhotoPlane: vec2f;
+fn spPhotoCubic(t: vec2f, lod: f32) -> vec3f {
+  let level = floor(max(lod, 0.0));
+  let size = max(vec2f(1.0), floor(uniform.uSpPhotoK.yz * exp2(-level)));
+  let p = t * size - 0.5;
+  let f = fract(p);
+  let base = floor(p) + 0.5;
+  let f2 = f * f;
+  let f3 = f2 * f;
+  let w0 = -0.5 * f + f2 - 0.5 * f3;
+  let w1 = vec2f(1.0) - 2.5 * f2 + 1.5 * f3;
+  let w2 = 0.5 * f + 2.0 * f2 - 1.5 * f3;
+  let w3 = -0.5 * f2 + 0.5 * f3;
+  let w12 = w1 + w2;
+  let xs = vec3f(base.x - 1.0, base.x + w2.x / w12.x, base.x + 2.0) / size.x;
+  let ys = vec3f(base.y - 1.0, base.y + w2.y / w12.y, base.y + 2.0) / size.y;
+  let wx = vec3f(w0.x, w12.x, w3.x);
+  let wy = vec3f(w0.y, w12.y, w3.y);
+  var result = vec3f(0.0);
+  for (var y = 0; y < 3; y++) { for (var x = 0; x < 3; x++) {
+    result += textureSampleLevel(uSpPhoto, uSpPhotoSampler, vec2f(xs[x], ys[y]), level).rgb * wx[x] * wy[y];
+  } }
+  return clamp(result, vec3f(0.0), vec3f(1.0));
+}
 fn spPhotoColor(uv: vec2f, color: ptr<function, vec4f>) {
   let gx = dpdx(uv);
   let gy = dpdy(uv);
@@ -198,7 +296,10 @@ fn spPhotoColor(uv: vec2f, color: ptr<function, vec4f>) {
   let p = vec2f(gy.y * uv.x - gy.x * uv.y, gx.x * uv.y - gx.y * uv.x) / det;
   let m = getSpPhotoM();
   let t = a.xy + m.xy * p.x + m.zw * p.y;
-  let c = textureSampleLevel(uSpPhoto, uSpPhotoSampler, t, a.w).rgb;
+  if (uniform.uSpPhotoFill > 0.5 && (any(t < vec2f(0.0)) || any(t > vec2f(1.0)))) { *color = vec4f((*color).rgb, 0.0); return; }
+  var c = textureSampleLevel(uSpPhoto, uSpPhotoSampler, t, a.w - select(0.0, 0.75, uniform.uSpPhotoFill > 0.5)).rgb;
+  if (a.z > 1.5) { c = textureSampleLevel(uSpPhotoBack, uSpPhotoBackSampler, t, a.w).rgb; }
+  else if (uniform.uSpPhotoPlane.y > 0.5) { c = spPhotoCubic(t, a.w); }
   *color = vec4f(c * uniform.uSpPhotoK.x, (*color).a);
 }
 `,
@@ -217,6 +318,76 @@ export function withPhotoPS(code) {
       PHOTO_PS.wgsl +
       "\nfn modifySplatColor(uv: vec2f, color: ptr<function, vec4f>) {\n  spPhotoColor(uv, color);\n  spKernelColor(uv, color);\n}\n",
   };
+}
+
+const backgrounds = new WeakMap();
+const watching = new WeakSet();
+function bindBackground(app) {
+  const b = backgrounds.get(app) || { data: null, source: null };
+  backgrounds.set(app, b);
+  if (!b.texture) {
+    b.texture = new pc.Texture(app.graphicsDevice, {
+      name: "p3d-splat-background",
+      width: 1,
+      height: 1,
+      format: pc.PIXELFORMAT_RGBA8,
+      mipmaps: true,
+      minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
+      magFilter: pc.FILTER_LINEAR,
+      addressU: pc.ADDRESS_CLAMP_TO_EDGE,
+      addressV: pc.ADDRESS_CLAMP_TO_EDGE,
+    });
+  }
+  b.on = true;
+  const data = b.data || { w: 1, h: 1, rgba: new Uint8Array([255, 255, 255, 255]) };
+  if (b.texture.width !== data.w || b.texture.height !== data.h) b.texture.resize(data.w, data.h);
+  b.texture.lock().set(data.rgba);
+  b.texture.unlock();
+  b.texture.upload();
+  if (app.graphicsDevice.isWebGPU) app.graphicsDevice.submit();
+  app.scene.gsplat.material.setParameter("uSpPhotoBack", b.texture);
+  app.graphicsDevice.scope.resolve("uSpPhotoBackK").setValue([data.w, data.h, 0, 0]);
+  app.graphicsDevice.scope.resolve("uSpPhotoFill").setValue(0);
+  app.graphicsDevice.scope.resolve("uSpPhotoPlane").setValue([0, 0]);
+}
+
+// Only the still photo that supplied this canvas uses the second texture.
+// Switching to Moving photo or live input clears the flag automatically, even
+// when the player keeps its photo material and work-buffer stream alive.
+export function setFilledBackground(stage, data, source) {
+  if (!stage) return;
+  const b = backgrounds.get(stage.app) || { texture: null, on: false };
+  b.data = data;
+  b.source = source;
+  backgrounds.set(stage.app, b);
+  if (b.on) bindBackground(stage.app);
+  if (!watching.has(stage)) {
+    watching.add(stage);
+    stage.onUpdate(() => {
+      const current = backgrounds.get(stage.app);
+      const enabled =
+        current?.on &&
+        current.data &&
+        stage.photo &&
+        stage.photoTex?.getSource() === current.source;
+      stage.device.scope.resolve("uSpPhotoFill").setValue(enabled ? 1 : 0);
+      const app = globalThis.window?.__splashery?.app;
+      const pl = app?.player || globalThis.window?.__splashery?.player;
+      const controls = pl?.motion?.state;
+      const flat =
+        enabled &&
+        pl?.scene?.toy?.id === "photo-3d" &&
+        controls?.flat >= 0.9999 &&
+        Math.abs(controls.layers || 0) < 0.0001 &&
+        (!app?.tool || app.tool === "orbit") &&
+        !pl.handsOn?.mode &&
+        pl.scene.motion.move === "still" &&
+        !Object.values(pl.scene.effects || {}).some((e) => e?.on);
+      stage.device.scope
+        .resolve("uSpPhotoPlane")
+        .setValue(flat ? [pl.fromRecipe([0, 0, 0])[2], 1] : [0, 0]);
+    });
+  }
 }
 
 // Turns the render side on or off on a PlayCanvas app (the stream, the
@@ -242,6 +413,7 @@ export function photoRender(pc, app, on, state = null) {
     mat.shaderChunks.glsl.set("gsplatOutputVS", outBase + GLSL_VS_PROJECT);
     mat.shaderChunks.wgsl.set("gsplatModifyVS", WGSL_VS_MODIFY);
     if (gpu) g.renderer = pc.GSPLAT_RENDERER_RASTER_CPU_SORT;
+    bindBackground(app);
     mat.update();
     return state;
   }
@@ -255,6 +427,15 @@ export function photoRender(pc, app, on, state = null) {
     g.format.setWriteCode(gpu ? null : state.write, gpu ? state.write : null);
     g.format.removeExtraStreams([PHOTO_STREAM]);
     if (g.renderer !== state.renderer) g.renderer = state.renderer;
+    mat.deleteParameter("uSpPhotoBack");
+    const background = backgrounds.get(app);
+    background?.texture?.destroy();
+    if (background) {
+      background.texture = null;
+      background.on = false;
+    }
+    app.graphicsDevice.scope.resolve("uSpPhotoFill").setValue(0);
+    app.graphicsDevice.scope.resolve("uSpPhotoPlane").setValue([0, 0]);
     mat.update();
     return null;
   }

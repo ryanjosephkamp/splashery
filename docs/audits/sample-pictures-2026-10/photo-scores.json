@@ -1,0 +1,3522 @@
+[
+  {
+    "prompt": "C54-P01",
+    "file": "cdx-terracotta-pears",
+    "name": "Terracotta and pears",
+    "group": "More Still life",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 3,
+        "area": 61939,
+        "holeFraction": 4.8434750318862106e-5,
+        "edgeSamples": 4986,
+        "haloExcursion": 0.1286480576988123
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 21,
+        "area": 65122,
+        "holeFraction": 0.0003224716685605479,
+        "edgeSamples": 4971,
+        "haloExcursion": 0.12617731864421497
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 205,
+        "area": 65506,
+        "holeFraction": 0.0031294843220468355,
+        "edgeSamples": 4914,
+        "haloExcursion": 0.10548014077425885
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 217,
+        "area": 62421,
+        "holeFraction": 0.003476394162221047,
+        "edgeSamples": 4917,
+        "haloExcursion": 0.07966757986497472
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 10,
+        "area": 47513,
+        "holeFraction": 0.0002104687138256898,
+        "edgeSamples": 4695,
+        "haloExcursion": 0.11534673933471158
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 13,
+        "area": 52936,
+        "holeFraction": 0.0002455795677799607,
+        "edgeSamples": 4803,
+        "haloExcursion": 0.11266487856854177
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 169,
+        "area": 69388,
+        "holeFraction": 0.0024355796391306852,
+        "edgeSamples": 4962,
+        "haloExcursion": 0.12171088507954594
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 198,
+        "area": 69081,
+        "holeFraction": 0.0028662005471837408,
+        "edgeSamples": 4941,
+        "haloExcursion": 0.12094955772229998
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.13716783651331,
+    "splats": 199498,
+    "pieces": 4,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "12f317e4a89d88e09ff0710f836e1261ffaad79b309f87010a5205853516ff79",
+    "depthSha256": "c7b4b8e80e206c2317bdb78cd32ada041c8dfb7652716e81eb79832cc46402d3"
+  },
+  {
+    "prompt": "C54-P02",
+    "file": "cdx-citrus-bowl",
+    "name": "Citrus bowl",
+    "group": "More Still life",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 200,
+        "area": 61627,
+        "holeFraction": 0.003245330780339786,
+        "edgeSamples": 4539,
+        "haloExcursion": 0.12482407371408588
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 155,
+        "area": 65803,
+        "holeFraction": 0.0023555157059708524,
+        "edgeSamples": 4545,
+        "haloExcursion": 0.12086714553808313
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 296,
+        "area": 67779,
+        "holeFraction": 0.004367134363150829,
+        "edgeSamples": 4827,
+        "haloExcursion": 0.10576536394545429
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 324,
+        "area": 65424,
+        "holeFraction": 0.004952311078503301,
+        "edgeSamples": 4866,
+        "haloExcursion": 0.10862970753447335
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 402,
+        "area": 51769,
+        "holeFraction": 0.007765264926886747,
+        "edgeSamples": 3576,
+        "haloExcursion": 0.11289204719919314
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 326,
+        "area": 57045,
+        "holeFraction": 0.005714786572004558,
+        "edgeSamples": 3828,
+        "haloExcursion": 0.11626713381277325
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 279,
+        "area": 70385,
+        "holeFraction": 0.0039639127655040135,
+        "edgeSamples": 4821,
+        "haloExcursion": 0.10054947513126815
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 462,
+        "area": 70107,
+        "holeFraction": 0.00658992682613719,
+        "edgeSamples": 4716,
+        "haloExcursion": 0.0942781353423476
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.02810463395363,
+    "splats": 199498,
+    "pieces": 6,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "61680af8f175959cfd6ccff36d8a835fa7f8938be9cab1548c27b64b521e1fb1",
+    "depthSha256": "dcd0ba2049fc171863d9928836e4a20fe25e8259f1c04bb5ab046364787f8985"
+  },
+  {
+    "prompt": "C54-P03",
+    "file": "cdx-bread-board",
+    "name": "Bread board",
+    "group": "More Still life",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 45,
+        "area": 62381,
+        "holeFraction": 0.0007213734951347366,
+        "edgeSamples": 4728,
+        "haloExcursion": 0.10344381407385336
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 35,
+        "area": 65712,
+        "holeFraction": 0.000532627221816411,
+        "edgeSamples": 4707,
+        "haloExcursion": 0.09680950774191187
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 280,
+        "area": 66607,
+        "holeFraction": 0.004203762367318751,
+        "edgeSamples": 4599,
+        "haloExcursion": 0.09836665259711214
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 340,
+        "area": 63505,
+        "holeFraction": 0.005353909141012519,
+        "edgeSamples": 4593,
+        "haloExcursion": 0.12494204736107425
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 10,
+        "area": 48148,
+        "holeFraction": 0.00020769294674752845,
+        "edgeSamples": 4713,
+        "haloExcursion": 0.11450181600329547
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 16,
+        "area": 54049,
+        "holeFraction": 0.00029602767858794796,
+        "edgeSamples": 4599,
+        "haloExcursion": 0.10167598241732034
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 286,
+        "area": 70108,
+        "holeFraction": 0.004079420322930336,
+        "edgeSamples": 4599,
+        "haloExcursion": 0.11292309922446916
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 346,
+        "area": 69458,
+        "holeFraction": 0.004981427625327536,
+        "edgeSamples": 4593,
+        "haloExcursion": 0.11418484223648105
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.8769649392969,
+    "splats": 199498,
+    "pieces": 3,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "0eadc4df80d2a01257b9ff1a816c146ee133f25561675514326fed29ed684c0c",
+    "depthSha256": "9ebf0d37c2efd49bc669d36a681c7d3609a9e75798002798a6e740ca0dbc87aa"
+  },
+  {
+    "prompt": "C54-P04",
+    "file": "cdx-stoneware",
+    "name": "Stoneware",
+    "group": "More Still life",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 21,
+        "area": 62606,
+        "holeFraction": 0.0003354311088394084,
+        "edgeSamples": 4455,
+        "haloExcursion": 0.03359081006139851
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 14,
+        "area": 64682,
+        "holeFraction": 0.00021644352370056585,
+        "edgeSamples": 4428,
+        "haloExcursion": 0.030262854916131118
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 44,
+        "area": 63091,
+        "holeFraction": 0.0006974053351508139,
+        "edgeSamples": 4425,
+        "haloExcursion": 0.05973546028580962
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 34,
+        "area": 59917,
+        "holeFraction": 0.0005674516414373216,
+        "edgeSamples": 4416,
+        "haloExcursion": 0.07193094629156051
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 74,
+        "area": 50943,
+        "holeFraction": 0.001452603890622853,
+        "edgeSamples": 3861,
+        "haloExcursion": 0.08604801153820775
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 41,
+        "area": 54284,
+        "holeFraction": 0.0007552870090634441,
+        "edgeSamples": 4116,
+        "haloExcursion": 0.06295089464357193
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 96,
+        "area": 67619,
+        "holeFraction": 0.0014197193096614857,
+        "edgeSamples": 4503,
+        "haloExcursion": 0.03759585113192546
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 144,
+        "area": 66860,
+        "holeFraction": 0.002153754113072091,
+        "edgeSamples": 3801,
+        "haloExcursion": 0.028842770994217417
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.31687738151017,
+    "splats": 199500,
+    "pieces": 4,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "89d091fe8ccafb70be7f7ba0ad45a3f8a458043d7081d4220e88fb3f64abab04",
+    "depthSha256": "49ca439fee4de052ffa3754468228434530f0e07fbdd103130c87d9987f1d5c6"
+  },
+  {
+    "prompt": "C54-P05",
+    "file": "cdx-autumn-squash",
+    "name": "Autumn squash",
+    "group": "More Still life",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 111,
+        "area": 60998,
+        "holeFraction": 0.0018197317944850652,
+        "edgeSamples": 4692,
+        "haloExcursion": 0.06739715494040793
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 104,
+        "area": 64231,
+        "holeFraction": 0.001619155859320266,
+        "edgeSamples": 4704,
+        "haloExcursion": 0.06905595571561975
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 162,
+        "area": 65592,
+        "holeFraction": 0.002469813391877058,
+        "edgeSamples": 5004,
+        "haloExcursion": 0.05696148963182433
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 154,
+        "area": 62841,
+        "holeFraction": 0.0024506293661781323,
+        "edgeSamples": 4998,
+        "haloExcursion": 0.0636058344906594
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 112,
+        "area": 48451,
+        "holeFraction": 0.0023116137953809,
+        "edgeSamples": 4326,
+        "haloExcursion": 0.08324948102218271
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 55,
+        "area": 53948,
+        "holeFraction": 0.001019500259509157,
+        "edgeSamples": 4362,
+        "haloExcursion": 0.07315766288175087
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 218,
+        "area": 69002,
+        "holeFraction": 0.003159328715109707,
+        "edgeSamples": 5007,
+        "haloExcursion": 0.06417916877156338
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 258,
+        "area": 68598,
+        "holeFraction": 0.0037610425959940523,
+        "edgeSamples": 5010,
+        "haloExcursion": 0.06138233337247115
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.34070260365786,
+    "splats": 199498,
+    "pieces": 3,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "f8e5c53ff90bde38a1c5d6822656e0d08e0d0f7a6fb0969a6938aebaae0fcfbe",
+    "depthSha256": "1fecbbdacf75f9221e34fe714447d3e57154b7ba6f2fd0947cf81a207d264656"
+  },
+  {
+    "prompt": "C54-P06",
+    "file": "cdx-shell-tray",
+    "name": "Shell tray",
+    "group": "More Objects on tables",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 133,
+        "area": 61705,
+        "holeFraction": 0.0021554169030062395,
+        "edgeSamples": 4842,
+        "haloExcursion": 0.11100015388228827
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 85,
+        "area": 65600,
+        "holeFraction": 0.0012957317073170732,
+        "edgeSamples": 4815,
+        "haloExcursion": 0.1085846924439563
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 367,
+        "area": 67123,
+        "holeFraction": 0.0054675744528701045,
+        "edgeSamples": 4770,
+        "haloExcursion": 0.09700744029267915
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 414,
+        "area": 64138,
+        "holeFraction": 0.006454831768998098,
+        "edgeSamples": 4773,
+        "haloExcursion": 0.10731771443125793
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 65,
+        "area": 49978,
+        "holeFraction": 0.001300572251790788,
+        "edgeSamples": 4809,
+        "haloExcursion": 0.12051749375150407
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 49,
+        "area": 55368,
+        "holeFraction": 0.0008849877185377836,
+        "edgeSamples": 4722,
+        "haloExcursion": 0.12961689546636138
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 117,
+        "area": 70179,
+        "holeFraction": 0.0016671653913563887,
+        "edgeSamples": 4707,
+        "haloExcursion": 0.08757753366908758
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 164,
+        "area": 69916,
+        "holeFraction": 0.0023456719491961784,
+        "edgeSamples": 4611,
+        "haloExcursion": 0.08034325419606185
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.04954399571152,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "9be38c3211ec1ce5e9e83ad14818f89e001dbfef29c9f71bdd3ba5a3217da828",
+    "depthSha256": "83c7169fa58ad2658a7d655927f00e715f3f25f9aecec616dcf713ae71dbba1a"
+  },
+  {
+    "prompt": "C54-P07",
+    "file": "cdx-wooden-toys",
+    "name": "Wooden toys",
+    "group": "More Objects on tables",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 22,
+        "area": 52621,
+        "holeFraction": 0.0004180840348910131,
+        "edgeSamples": 4794,
+        "haloExcursion": 0.059786334224971115
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 16,
+        "area": 54851,
+        "holeFraction": 0.0002916993309146597,
+        "edgeSamples": 4836,
+        "haloExcursion": 0.06629364731831594
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 21,
+        "area": 54520,
+        "holeFraction": 0.0003851797505502568,
+        "edgeSamples": 4605,
+        "haloExcursion": 0.05108087969172503
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 18,
+        "area": 51760,
+        "holeFraction": 0.00034775888717156103,
+        "edgeSamples": 4590,
+        "haloExcursion": 0.05148618052885681
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 15,
+        "area": 39915,
+        "holeFraction": 0.0003757985719654265,
+        "edgeSamples": 3144,
+        "haloExcursion": 0.057888040712468634
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 8,
+        "area": 44626,
+        "holeFraction": 0.00017926769148030297,
+        "edgeSamples": 3624,
+        "haloExcursion": 0.06071938709258571
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 49,
+        "area": 57908,
+        "holeFraction": 0.0008461697865579886,
+        "edgeSamples": 4821,
+        "haloExcursion": 0.06033733136482179
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 63,
+        "area": 57313,
+        "holeFraction": 0.0010992270514542947,
+        "edgeSamples": 4815,
+        "haloExcursion": 0.0633950277930491
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.99077162728649,
+    "splats": 199498,
+    "pieces": 3,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "d5fc1ea1439dbb62211f096b34d4d1bad8fdfd56a89424089bd436f502388a7d",
+    "depthSha256": "fe99572d99a4d6834147712fadae5abeac0ac32264ddfc91689fa127aaf4ac83"
+  },
+  {
+    "prompt": "C54-P08",
+    "file": "cdx-sewing-basket",
+    "name": "Sewing basket",
+    "group": "More Objects on tables",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 1,
+        "area": 58667,
+        "holeFraction": 1.7045357696831268e-5,
+        "edgeSamples": 4332,
+        "haloExcursion": 0.12207738127568693
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 0,
+        "area": 61937,
+        "holeFraction": 0,
+        "edgeSamples": 4329,
+        "haloExcursion": 0.12190380425674581
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1218,
+        "area": 64951,
+        "holeFraction": 0.018752598112423212,
+        "edgeSamples": 4194,
+        "haloExcursion": 0.11879435608292034
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1455,
+        "area": 63068,
+        "holeFraction": 0.023070336779349273,
+        "edgeSamples": 4257,
+        "haloExcursion": 0.11605245339855522
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 469,
+        "area": 50253,
+        "holeFraction": 0.009332776152667503,
+        "edgeSamples": 3792,
+        "haloExcursion": 0.09060354099445748
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 508,
+        "area": 55500,
+        "holeFraction": 0.009153153153153152,
+        "edgeSamples": 4017,
+        "haloExcursion": 0.09482054210780701
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 704,
+        "area": 67206,
+        "holeFraction": 0.010475255185548909,
+        "edgeSamples": 4179,
+        "haloExcursion": 0.13111589694504314
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 817,
+        "area": 66322,
+        "holeFraction": 0.012318687614969391,
+        "edgeSamples": 4152,
+        "haloExcursion": 0.13155767123805254
+      }
+    ],
+    "edgeCount": 240,
+    "score": 94.90350282348889,
+    "splats": 199498,
+    "pieces": 4,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "769c03717d46dd6e15c1b4d016121712b2b311b97836950a084b78b5fcc0e02a",
+    "depthSha256": "070f959e794192a9f27cd8486494f20882eb839f7cfc08e0ba73b39e7c66296b"
+  },
+  {
+    "prompt": "C54-P09",
+    "file": "cdx-clay-tools",
+    "name": "Clay tools",
+    "group": "More Objects on tables",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 161,
+        "area": 62644,
+        "holeFraction": 0.002570078539046038,
+        "edgeSamples": 5007,
+        "haloExcursion": 0.09160195334375057
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 83,
+        "area": 65907,
+        "holeFraction": 0.0012593502966301,
+        "edgeSamples": 5037,
+        "haloExcursion": 0.08949693834253995
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 53,
+        "area": 66384,
+        "holeFraction": 0.0007983851530489275,
+        "edgeSamples": 5010,
+        "haloExcursion": 0.07283002622206602
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 71,
+        "area": 63329,
+        "holeFraction": 0.0011211293404285556,
+        "edgeSamples": 4944,
+        "haloExcursion": 0.06854416523891134
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 28,
+        "area": 48046,
+        "holeFraction": 0.0005827748407775882,
+        "edgeSamples": 4959,
+        "haloExcursion": 0.08147515509531149
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 6,
+        "area": 53574,
+        "holeFraction": 0.00011199462425803562,
+        "edgeSamples": 4944,
+        "haloExcursion": 0.06494622120692979
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 271,
+        "area": 69957,
+        "holeFraction": 0.003873808196463542,
+        "edgeSamples": 4911,
+        "haloExcursion": 0.07468627850244189
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 367,
+        "area": 69960,
+        "holeFraction": 0.005245854774156661,
+        "edgeSamples": 4851,
+        "haloExcursion": 0.07411449428256188
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.07203590195427,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "9129e23766b05ade161ddbf1a9c3465b9a9b0811f4c89151a8b01413471066cf",
+    "depthSha256": "d33f3dd6bffddeb2a3dd975b49655bf20fa5f7933ff875e25da56a4833736fb3"
+  },
+  {
+    "prompt": "C54-P10",
+    "file": "cdx-tea-tray",
+    "name": "Tea tray",
+    "group": "More Objects on tables",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 768,
+        "area": 63373,
+        "holeFraction": 0.012118725640256891,
+        "edgeSamples": 4728,
+        "haloExcursion": 0.07877973524435207
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 677,
+        "area": 66378,
+        "holeFraction": 0.010199162373075417,
+        "edgeSamples": 4794,
+        "haloExcursion": 0.08459757703665563
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 114,
+        "area": 65369,
+        "holeFraction": 0.0017439459070813382,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.09832710862122675
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 118,
+        "area": 62035,
+        "holeFraction": 0.001902152010961554,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.07904839713663285
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 288,
+        "area": 48218,
+        "holeFraction": 0.005972873200879339,
+        "edgeSamples": 4944,
+        "haloExcursion": 0.08109175709118664
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 278,
+        "area": 53633,
+        "holeFraction": 0.005183375906624653,
+        "edgeSamples": 5025,
+        "haloExcursion": 0.10359496634474769
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 457,
+        "area": 70084,
+        "holeFraction": 0.00652074653273215,
+        "edgeSamples": 4752,
+        "haloExcursion": 0.07430844391628764
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 504,
+        "area": 70104,
+        "holeFraction": 0.00718931872646354,
+        "edgeSamples": 4668,
+        "haloExcursion": 0.07074701345834018
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.52931469619385,
+    "splats": 199498,
+    "pieces": 4,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "137e2957cd7a056e208c958040f0553bcfc78519a7d0d13703012d4eafba54ac",
+    "depthSha256": "2764c3eb3377d2c819f06b610a57cb6b732ad83199e80a8f0c45662cc9206603"
+  },
+  {
+    "prompt": "C54-P11",
+    "file": "cdx-sunroom",
+    "name": "Quiet sunroom",
+    "group": "More Interiors",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 239,
+        "area": 57555,
+        "holeFraction": 0.004152549735036052,
+        "edgeSamples": 4611,
+        "haloExcursion": 0.10033806626098736
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 231,
+        "area": 61626,
+        "holeFraction": 0.003748417875571999,
+        "edgeSamples": 4587,
+        "haloExcursion": 0.10433150805558773
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1114,
+        "area": 65560,
+        "holeFraction": 0.016992068334350213,
+        "edgeSamples": 4338,
+        "haloExcursion": 0.0980988799392513
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1129,
+        "area": 63125,
+        "holeFraction": 0.017885148514851484,
+        "edgeSamples": 4317,
+        "haloExcursion": 0.09808554415511896
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 96,
+        "area": 50720,
+        "holeFraction": 0.0018927444794952682,
+        "edgeSamples": 4554,
+        "haloExcursion": 0.10293816252895563
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 58,
+        "area": 55654,
+        "holeFraction": 0.0010421533043447012,
+        "edgeSamples": 4551,
+        "haloExcursion": 0.09835114885330133
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 420,
+        "area": 66142,
+        "holeFraction": 0.006349974297723081,
+        "edgeSamples": 4437,
+        "haloExcursion": 0.09329303053202397
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 639,
+        "area": 64878,
+        "holeFraction": 0.009849255525756034,
+        "edgeSamples": 4290,
+        "haloExcursion": 0.09267151149504149
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.80547327930682,
+    "splats": 199498,
+    "pieces": 13,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "7ecdc69d6d1b90c1cffddd6fc510fe2c305fa5598c988e746b0d581b71c70b67",
+    "depthSha256": "712f1b0ae279826fa530e1144d900bb83a4a73020c531ce9d19a08b09046b2f4"
+  },
+  {
+    "prompt": "C54-P12",
+    "file": "cdx-arched-room",
+    "name": "Arched room",
+    "group": "More Interiors",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 61,
+        "area": 63082,
+        "holeFraction": 0.0009669953393995118,
+        "edgeSamples": 4869,
+        "haloExcursion": 0.06200250484256195
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 0,
+        "area": 67186,
+        "holeFraction": 0,
+        "edgeSamples": 4845,
+        "haloExcursion": 0.057189340132338125
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 345,
+        "area": 68572,
+        "holeFraction": 0.005031208073266056,
+        "edgeSamples": 4746,
+        "haloExcursion": 0.06570156086033294
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 410,
+        "area": 65424,
+        "holeFraction": 0.0062668134018097335,
+        "edgeSamples": 4731,
+        "haloExcursion": 0.06602260434928615
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 89,
+        "area": 51783,
+        "holeFraction": 0.0017187107738060755,
+        "edgeSamples": 4251,
+        "haloExcursion": 0.06825891024487941
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 92,
+        "area": 56951,
+        "holeFraction": 0.001615423785359344,
+        "edgeSamples": 4515,
+        "haloExcursion": 0.0591162356415439
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 141,
+        "area": 70028,
+        "holeFraction": 0.0020134803221568518,
+        "edgeSamples": 4839,
+        "haloExcursion": 0.05839158147243241
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 163,
+        "area": 68850,
+        "holeFraction": 0.0023674655047204065,
+        "edgeSamples": 4818,
+        "haloExcursion": 0.05871446129302736
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.58064493139473,
+    "splats": 199500,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "deb5176bc7c425fdf01ce7ae42f1df922fb86de48d8109921a6d1cfbf58c4b5d",
+    "depthSha256": "d69f085613874e6b35b926093f72b062bd663522419d367474ef17497fd20de9"
+  },
+  {
+    "prompt": "C54-P13",
+    "file": "cdx-reading-nook",
+    "name": "Reading nook",
+    "group": "More Interiors",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 798,
+        "area": 64925,
+        "holeFraction": 0.0122911051212938,
+        "edgeSamples": 4782,
+        "haloExcursion": 0.06831746500356756
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 429,
+        "area": 69366,
+        "holeFraction": 0.006184586108468126,
+        "edgeSamples": 4872,
+        "haloExcursion": 0.07233893557422988
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 415,
+        "area": 69724,
+        "holeFraction": 0.0059520394699099305,
+        "edgeSamples": 5007,
+        "haloExcursion": 0.08224877328602731
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 468,
+        "area": 66428,
+        "holeFraction": 0.007045221894381887,
+        "edgeSamples": 5031,
+        "haloExcursion": 0.0804525666358775
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 1357,
+        "area": 55921,
+        "holeFraction": 0.024266375780118383,
+        "edgeSamples": 4851,
+        "haloExcursion": 0.09059947211207765
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 994,
+        "area": 60577,
+        "holeFraction": 0.016408868052231046,
+        "edgeSamples": 4842,
+        "haloExcursion": 0.08425217257493683
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 44,
+        "area": 71429,
+        "holeFraction": 0.0006159963040221759,
+        "edgeSamples": 4911,
+        "haloExcursion": 0.0809068078463315
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 120,
+        "area": 70662,
+        "holeFraction": 0.0016982253545045427,
+        "edgeSamples": 4794,
+        "haloExcursion": 0.07840274198957865
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.58336953202938,
+    "splats": 199498,
+    "pieces": 7,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "9483f25e12266b4f804d34d9e54ced2d89875a8746d6f8b247b279596669c8eb",
+    "depthSha256": "5384629b97dcabf436a408be5cbe3858c92b2e83650d4bc15da2930873d121e9"
+  },
+  {
+    "prompt": "C54-P14",
+    "file": "cdx-plant-studio",
+    "name": "Plant studio",
+    "group": "More Interiors",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 746,
+        "area": 64547,
+        "holeFraction": 0.011557469750724279,
+        "edgeSamples": 4878,
+        "haloExcursion": 0.06867568675686801
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 505,
+        "area": 66850,
+        "holeFraction": 0.007554225878833209,
+        "edgeSamples": 4866,
+        "haloExcursion": 0.07610228637283126
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 927,
+        "area": 67816,
+        "holeFraction": 0.013669340568597381,
+        "edgeSamples": 4158,
+        "haloExcursion": 0.0990851559479013
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1060,
+        "area": 65465,
+        "holeFraction": 0.016191858244863667,
+        "edgeSamples": 3759,
+        "haloExcursion": 0.09965520658915387
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 960,
+        "area": 53569,
+        "holeFraction": 0.017920812410162593,
+        "edgeSamples": 2802,
+        "haloExcursion": 0.058922898209962465
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 929,
+        "area": 58378,
+        "holeFraction": 0.01591352906916989,
+        "edgeSamples": 4233,
+        "haloExcursion": 0.0689595753255238
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 785,
+        "area": 70149,
+        "holeFraction": 0.01119046600806854,
+        "edgeSamples": 4464,
+        "haloExcursion": 0.07976930915735499
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1012,
+        "area": 69517,
+        "holeFraction": 0.01455759022972798,
+        "edgeSamples": 3456,
+        "haloExcursion": 0.08489696804647841
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.87691372518492,
+    "splats": 199498,
+    "pieces": 17,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "e79d97ac8f5787bdda09f8b7944b0d503d800d87709e74cb1a3cbc9fbb135a3d",
+    "depthSha256": "6964a6d7a48ae2102548671a1c0d61e41629ac429177cb2560f3c1972b50a90e"
+  },
+  {
+    "prompt": "C54-P15",
+    "file": "cdx-copper-kitchen",
+    "name": "Copper kitchen",
+    "group": "More Interiors",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 81,
+        "area": 58740,
+        "holeFraction": 0.0013789581205311543,
+        "edgeSamples": 3381,
+        "haloExcursion": 0.1376782597096819
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 128,
+        "area": 62035,
+        "holeFraction": 0.0020633513339243974,
+        "edgeSamples": 3414,
+        "haloExcursion": 0.1294680496686085
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 103,
+        "area": 62600,
+        "holeFraction": 0.0016453674121405752,
+        "edgeSamples": 3516,
+        "haloExcursion": 0.11316335407883313
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 273,
+        "area": 61252,
+        "holeFraction": 0.004456997322536407,
+        "edgeSamples": 3543,
+        "haloExcursion": 0.09707182901385249
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 3,
+        "area": 51878,
+        "holeFraction": 5.782798103242222e-5,
+        "edgeSamples": 3168,
+        "haloExcursion": 0.12343657159833692
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 17,
+        "area": 56481,
+        "holeFraction": 0.00030098617234114124,
+        "edgeSamples": 3429,
+        "haloExcursion": 0.13311947117721454
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 227,
+        "area": 64407,
+        "holeFraction": 0.003524461626841803,
+        "edgeSamples": 3372,
+        "haloExcursion": 0.11357430279347853
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 243,
+        "area": 62454,
+        "holeFraction": 0.00389086367566529,
+        "edgeSamples": 3246,
+        "haloExcursion": 0.10496901163422895
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.77312514027236,
+    "splats": 199498,
+    "pieces": 3,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "01015a00b61f8d55e4c38a99e3907713a6a21fa3a521a724fe272372a6434a08",
+    "depthSha256": "31231c78aa03994704339546f2bf061fa71d18da1e5b187c24da2671deacc923"
+  },
+  {
+    "prompt": "C54-P16",
+    "file": "cdx-moss-stream",
+    "name": "Mossy stream",
+    "group": "More Landscapes",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 426,
+        "area": 60275,
+        "holeFraction": 0.007067606802156782,
+        "edgeSamples": 4161,
+        "haloExcursion": 0.08044540575182314
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 420,
+        "area": 64350,
+        "holeFraction": 0.006526806526806527,
+        "edgeSamples": 4134,
+        "haloExcursion": 0.0853543546107365
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1035,
+        "area": 66997,
+        "holeFraction": 0.0154484529158022,
+        "edgeSamples": 4122,
+        "haloExcursion": 0.0788138253845939
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1210,
+        "area": 64077,
+        "holeFraction": 0.018883530752063924,
+        "edgeSamples": 4050,
+        "haloExcursion": 0.07379423868312812
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 299,
+        "area": 49963,
+        "holeFraction": 0.005984428477073034,
+        "edgeSamples": 4023,
+        "haloExcursion": 0.09676029497058658
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 289,
+        "area": 55243,
+        "holeFraction": 0.005231432036638126,
+        "edgeSamples": 4029,
+        "haloExcursion": 0.0863426432871487
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 953,
+        "area": 70348,
+        "holeFraction": 0.013546938079263092,
+        "edgeSamples": 4134,
+        "haloExcursion": 0.07646299932648465
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1193,
+        "area": 70208,
+        "holeFraction": 0.01699236554238833,
+        "edgeSamples": 3918,
+        "haloExcursion": 0.08023701568427298
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.40342394150463,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "de72e45e69979a64f2e8f089345e55a8c8f705785dc7dd513f797be893694b5b",
+    "depthSha256": "cd81fe84cb384b9890a91d8d7ab334e3e50655d531fd7c81cf504a2640f9a07b"
+  },
+  {
+    "prompt": "C54-P17",
+    "file": "cdx-dune-grass",
+    "name": "Dune grass",
+    "group": "More Landscapes",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 62,
+        "area": 60108,
+        "holeFraction": 0.0010314766753177613,
+        "edgeSamples": 4506,
+        "haloExcursion": 0.09765280279888304
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 47,
+        "area": 63894,
+        "holeFraction": 0.0007355933264469277,
+        "edgeSamples": 4494,
+        "haloExcursion": 0.0942293428274738
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 211,
+        "area": 66688,
+        "holeFraction": 0.0031639875239923227,
+        "edgeSamples": 4488,
+        "haloExcursion": 0.09172695816294456
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 276,
+        "area": 63866,
+        "holeFraction": 0.004321548241630915,
+        "edgeSamples": 4488,
+        "haloExcursion": 0.08852888749082592
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 13,
+        "area": 48262,
+        "holeFraction": 0.00026936305996436117,
+        "edgeSamples": 3705,
+        "haloExcursion": 0.11165409753645111
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 38,
+        "area": 53687,
+        "holeFraction": 0.0007078063590813419,
+        "edgeSamples": 4128,
+        "haloExcursion": 0.12053598571211448
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 149,
+        "area": 70039,
+        "holeFraction": 0.0021273861705621154,
+        "edgeSamples": 4554,
+        "haloExcursion": 0.09969516133199076
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 178,
+        "area": 69801,
+        "holeFraction": 0.002550106731995244,
+        "edgeSamples": 4557,
+        "haloExcursion": 0.10210019491667649
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.33437398350087,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "ef810a040a0a4f321364254317631e79014ff79fde5b8531ee352dcedf60022a",
+    "depthSha256": "28a85cc609cbef85489b32950aab16e01ad9e2d249f4495cbbc2e2664b6209a1"
+  },
+  {
+    "prompt": "C54-P18",
+    "file": "cdx-snow-pines",
+    "name": "Snow and pines",
+    "group": "More Landscapes",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 728,
+        "area": 61569,
+        "holeFraction": 0.01182413227435885,
+        "edgeSamples": 3183,
+        "haloExcursion": 0.09382688670818692
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 578,
+        "area": 65523,
+        "holeFraction": 0.008821329914686446,
+        "edgeSamples": 3183,
+        "haloExcursion": 0.0945094343109539
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 274,
+        "area": 66927,
+        "holeFraction": 0.004094012879704753,
+        "edgeSamples": 3195,
+        "haloExcursion": 0.07469759734879917
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 321,
+        "area": 63930,
+        "holeFraction": 0.005021116846550915,
+        "edgeSamples": 3258,
+        "haloExcursion": 0.06750562717413586
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 469,
+        "area": 50539,
+        "holeFraction": 0.00927996200953719,
+        "edgeSamples": 2268,
+        "haloExcursion": 0.06123733443994918
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 341,
+        "area": 55816,
+        "holeFraction": 0.006109359323491472,
+        "edgeSamples": 2394,
+        "haloExcursion": 0.0797877045555069
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1237,
+        "area": 69952,
+        "holeFraction": 0.017683554437328455,
+        "edgeSamples": 3102,
+        "haloExcursion": 0.08161211615529569
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1632,
+        "area": 69888,
+        "holeFraction": 0.023351648351648352,
+        "edgeSamples": 3015,
+        "haloExcursion": 0.08082463499496045
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.9406455655358,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "89b9e9c96b35a7c551e8ab5b16ff12b2055138322f00ad77b63cf6c20cd26b3c",
+    "depthSha256": "8a5f5384738455b9eba885342cfaae1395a15c9506285768586e9748a148a1ee"
+  },
+  {
+    "prompt": "C54-P19",
+    "file": "cdx-river-bend",
+    "name": "River bend",
+    "group": "More Landscapes",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 236,
+        "area": 60236,
+        "holeFraction": 0.0039179228368417555,
+        "edgeSamples": 3366,
+        "haloExcursion": 0.1138489858213047
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 211,
+        "area": 63450,
+        "holeFraction": 0.003325453112687155,
+        "edgeSamples": 3336,
+        "haloExcursion": 0.11775638312879153
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 358,
+        "area": 64153,
+        "holeFraction": 0.005580409333936059,
+        "edgeSamples": 3042,
+        "haloExcursion": 0.1103518067318981
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 363,
+        "area": 61547,
+        "holeFraction": 0.0058979316619819,
+        "edgeSamples": 2997,
+        "haloExcursion": 0.11406308269053446
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 25,
+        "area": 47453,
+        "holeFraction": 0.0005268370809011022,
+        "edgeSamples": 2229,
+        "haloExcursion": 0.10957168870239935
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 29,
+        "area": 52985,
+        "holeFraction": 0.0005473247145418514,
+        "edgeSamples": 2457,
+        "haloExcursion": 0.12412554765495991
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 714,
+        "area": 68210,
+        "holeFraction": 0.010467673361677173,
+        "edgeSamples": 3075,
+        "haloExcursion": 0.11622891758329419
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 851,
+        "area": 67529,
+        "holeFraction": 0.01260199321772868,
+        "edgeSamples": 2973,
+        "haloExcursion": 0.12033134814638981
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.5079200303673,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "fa9ab63a10f1e9230e08ade6633c380e94e81ae7f1c7914041f64ed263b5bb4d",
+    "depthSha256": "bb79a884ecc195b4cc20cc25e6f5142fe6f83f18881259ccc5454be1d00dd628"
+  },
+  {
+    "prompt": "C54-P20",
+    "file": "cdx-redwood-path",
+    "name": "Woodland path",
+    "group": "More Landscapes",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 120,
+        "area": 58613,
+        "holeFraction": 0.0020473273847098766,
+        "edgeSamples": 3408,
+        "haloExcursion": 0.06317891006167796
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 125,
+        "area": 62756,
+        "holeFraction": 0.0019918414175537002,
+        "edgeSamples": 3348,
+        "haloExcursion": 0.06387659006254881
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 606,
+        "area": 66046,
+        "holeFraction": 0.00917542318989795,
+        "edgeSamples": 3267,
+        "haloExcursion": 0.05399208964271399
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 849,
+        "area": 63767,
+        "holeFraction": 0.013314096633054716,
+        "edgeSamples": 3288,
+        "haloExcursion": 0.06217856972472719
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 93,
+        "area": 51559,
+        "holeFraction": 0.001803758800597374,
+        "edgeSamples": 3060,
+        "haloExcursion": 0.062201717288222914
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 78,
+        "area": 56471,
+        "holeFraction": 0.001381239928458855,
+        "edgeSamples": 3141,
+        "haloExcursion": 0.05784594640148371
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1097,
+        "area": 67998,
+        "holeFraction": 0.01613282743610106,
+        "edgeSamples": 3222,
+        "haloExcursion": 0.06325872372536899
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1744,
+        "area": 66977,
+        "holeFraction": 0.02603878943517924,
+        "edgeSamples": 3177,
+        "haloExcursion": 0.06121325458102721
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.34088710210663,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "f0f335785a4fc2f8f90a6f364b245d36c19b01dd87492ae768c332ea9c18127a",
+    "depthSha256": "11e5cfb1aa042ad954a66048e3da20e9faefa40fd68cf9e92d970f14d164d167"
+  },
+  {
+    "prompt": "C54-P21",
+    "file": "cdx-succulent",
+    "name": "Succulent",
+    "group": "More Macro",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 80,
+        "area": 58343,
+        "holeFraction": 0.001371201343777317,
+        "edgeSamples": 4680,
+        "haloExcursion": 0.07446455505279101
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 86,
+        "area": 61259,
+        "holeFraction": 0.0014038753489283207,
+        "edgeSamples": 4626,
+        "haloExcursion": 0.07727592550206484
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1461,
+        "area": 63120,
+        "holeFraction": 0.02314638783269962,
+        "edgeSamples": 4347,
+        "haloExcursion": 0.07482735445224836
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1786,
+        "area": 61785,
+        "holeFraction": 0.028906692562919802,
+        "edgeSamples": 4203,
+        "haloExcursion": 0.07233395380517237
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 210,
+        "area": 50938,
+        "holeFraction": 0.004122658918685461,
+        "edgeSamples": 3921,
+        "haloExcursion": 0.06948407519090317
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 352,
+        "area": 55915,
+        "holeFraction": 0.006295269605651435,
+        "edgeSamples": 4191,
+        "haloExcursion": 0.0753322946931103
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1358,
+        "area": 65530,
+        "holeFraction": 0.020723332824660462,
+        "edgeSamples": 4239,
+        "haloExcursion": 0.07906507731660757
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1788,
+        "area": 64323,
+        "holeFraction": 0.027797210950981765,
+        "edgeSamples": 4020,
+        "haloExcursion": 0.07583747927031567
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.7790708553218,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "a0036badc4e0add5f8b2dcc6cadf59e4d4f5d2449360811eb40bbefd078d4b86",
+    "depthSha256": "1effbedf5fd67975f054f74d3a7214d27da1bda429d246951c82e3bbeb15966a"
+  },
+  {
+    "prompt": "C54-P22",
+    "file": "cdx-pinecone",
+    "name": "Pinecone",
+    "group": "More Macro",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 119,
+        "area": 58542,
+        "holeFraction": 0.0020327286392675344,
+        "edgeSamples": 4548,
+        "haloExcursion": 0.08401452049597367
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 158,
+        "area": 62920,
+        "holeFraction": 0.0025111252383979658,
+        "edgeSamples": 4530,
+        "haloExcursion": 0.07453577457473122
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 416,
+        "area": 66001,
+        "holeFraction": 0.006302934804018121,
+        "edgeSamples": 4539,
+        "haloExcursion": 0.09034640954861835
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 555,
+        "area": 64236,
+        "holeFraction": 0.008640014944890716,
+        "edgeSamples": 4524,
+        "haloExcursion": 0.08057072519547205
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 84,
+        "area": 51852,
+        "holeFraction": 0.0016199953714417959,
+        "edgeSamples": 4419,
+        "haloExcursion": 0.08505340131073967
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 96,
+        "area": 56052,
+        "holeFraction": 0.0017126953543138515,
+        "edgeSamples": 4452,
+        "haloExcursion": 0.07944259464792264
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 777,
+        "area": 68366,
+        "holeFraction": 0.011365298540210046,
+        "edgeSamples": 4461,
+        "haloExcursion": 0.08008140265745442
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 987,
+        "area": 67972,
+        "holeFraction": 0.01452068498793621,
+        "edgeSamples": 4419,
+        "haloExcursion": 0.07971903855454877
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.591980894208,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "d0f8f4e2454c88f4149c9aa4fb74766aa4cb131e53b64481c8cc25d66f526533",
+    "depthSha256": "5364305f0080d85fd3167014e99a04ad5f4f8b6536f1f451c73bd0186265cb7f"
+  },
+  {
+    "prompt": "C54-P23",
+    "file": "cdx-acorns",
+    "name": "Acorns",
+    "group": "More Macro",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 40,
+        "area": 60694,
+        "holeFraction": 0.000659043727551323,
+        "edgeSamples": 5037,
+        "haloExcursion": 0.11241985775847024
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 17,
+        "area": 64916,
+        "holeFraction": 0.0002618768870540391,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.10393868658574587
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 184,
+        "area": 67197,
+        "holeFraction": 0.0027382174799470216,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.09403361344537851
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 183,
+        "area": 64527,
+        "holeFraction": 0.0028360221302710493,
+        "edgeSamples": 5028,
+        "haloExcursion": 0.09960300747188303
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 82,
+        "area": 49718,
+        "holeFraction": 0.0016493020636389236,
+        "edgeSamples": 5019,
+        "haloExcursion": 0.11923943915083486
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 76,
+        "area": 55143,
+        "holeFraction": 0.0013782347714125093,
+        "edgeSamples": 5040,
+        "haloExcursion": 0.11104419545596017
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 193,
+        "area": 70459,
+        "holeFraction": 0.0027391816517407285,
+        "edgeSamples": 5037,
+        "haloExcursion": 0.0925083791706085
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 294,
+        "area": 70382,
+        "holeFraction": 0.0041772043988519796,
+        "edgeSamples": 4935,
+        "haloExcursion": 0.08984802431611003
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.30736568102023,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "1551c808a634f8eca5a3450dd7714827e43ce66ac21f13473d22445796287601",
+    "depthSha256": "8e49189b7e3e5f9fdedf5058a283037d15374f1e316d2637abb1688282705d5c"
+  },
+  {
+    "prompt": "C54-P24",
+    "file": "cdx-water-lily",
+    "name": "Water lily",
+    "group": "More Macro",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 226,
+        "area": 51485,
+        "holeFraction": 0.004389628047003982,
+        "edgeSamples": 2712,
+        "haloExcursion": 0.10114668286193593
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 178,
+        "area": 54320,
+        "holeFraction": 0.003276877761413844,
+        "edgeSamples": 2700,
+        "haloExcursion": 0.096363108206246
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 300,
+        "area": 54746,
+        "holeFraction": 0.0054798524093084425,
+        "edgeSamples": 2535,
+        "haloExcursion": 0.09186989983370109
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 322,
+        "area": 52260,
+        "holeFraction": 0.006161500191350938,
+        "edgeSamples": 2637,
+        "haloExcursion": 0.08145025169719039
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 3,
+        "area": 38869,
+        "holeFraction": 7.718233039182896e-5,
+        "edgeSamples": 2028,
+        "haloExcursion": 0.07795181188846381
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 15,
+        "area": 43887,
+        "holeFraction": 0.00034178686171303574,
+        "edgeSamples": 2367,
+        "haloExcursion": 0.05733243867889411
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 686,
+        "area": 58216,
+        "holeFraction": 0.011783702075030919,
+        "edgeSamples": 2628,
+        "haloExcursion": 0.10021040379622215
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1152,
+        "area": 57575,
+        "holeFraction": 0.020008684324793746,
+        "edgeSamples": 2532,
+        "haloExcursion": 0.09593439271443216
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.72136031583148,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "8de6b2deeb7b62121a317997f169d75ed65d6a03cd3f35692e69235bdba12790",
+    "depthSha256": "0a30129a7852ec4c329052957d213b505245e2cac1d8ddc4e08a83f49cede233"
+  },
+  {
+    "prompt": "C54-P25",
+    "file": "cdx-fern-curl",
+    "name": "Fern curl",
+    "group": "More Macro",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 1,
+        "area": 57418,
+        "holeFraction": 1.741614127973806e-5,
+        "edgeSamples": 4473,
+        "haloExcursion": 0.09177066757845623
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 1,
+        "area": 61429,
+        "holeFraction": 1.6278956193328884e-5,
+        "edgeSamples": 4464,
+        "haloExcursion": 0.09737859301426713
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 262,
+        "area": 65510,
+        "holeFraction": 0.003999389406197527,
+        "edgeSamples": 4464,
+        "haloExcursion": 0.08385603345280843
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 304,
+        "area": 63571,
+        "holeFraction": 0.004782054710481194,
+        "edgeSamples": 4491,
+        "haloExcursion": 0.08712151972790932
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 72,
+        "area": 52750,
+        "holeFraction": 0.0013649289099526066,
+        "edgeSamples": 3378,
+        "haloExcursion": 0.08717537932875995
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 31,
+        "area": 56694,
+        "holeFraction": 0.000546795075316612,
+        "edgeSamples": 4242,
+        "haloExcursion": 0.08570319216795709
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 271,
+        "area": 67089,
+        "holeFraction": 0.004039410335524452,
+        "edgeSamples": 4524,
+        "haloExcursion": 0.08230786567500639
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 359,
+        "area": 66485,
+        "holeFraction": 0.005399714221252914,
+        "edgeSamples": 4518,
+        "haloExcursion": 0.07605569009365643
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.05161057842903,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "48debdaa15ff18b97374c585714afba511043276a078898a09ee40067dfd4638",
+    "depthSha256": "c7f9f3e28483395083a2bd1ccdac392ebba4808a29c8111b93ec17c27567d932"
+  },
+  {
+    "prompt": "C54-P26",
+    "file": "cdx-moon-garden",
+    "name": "Moon garden",
+    "group": "More Fantasy architecture",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 523,
+        "area": 52995,
+        "holeFraction": 0.009868855552410604,
+        "edgeSamples": 3894,
+        "haloExcursion": 0.13646434434071542
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 464,
+        "area": 55209,
+        "holeFraction": 0.008404426814468655,
+        "edgeSamples": 3891,
+        "haloExcursion": 0.138924919749447
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 369,
+        "area": 55450,
+        "holeFraction": 0.006654643823264202,
+        "edgeSamples": 3462,
+        "haloExcursion": 0.12719837790691121
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 472,
+        "area": 52345,
+        "holeFraction": 0.009017098099149872,
+        "edgeSamples": 3153,
+        "haloExcursion": 0.1310000435315267
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 64,
+        "area": 43970,
+        "holeFraction": 0.001455537866727314,
+        "edgeSamples": 2691,
+        "haloExcursion": 0.09194191240227081
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 105,
+        "area": 47986,
+        "holeFraction": 0.002188138206977035,
+        "edgeSamples": 3339,
+        "haloExcursion": 0.1148940918086314
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1051,
+        "area": 59440,
+        "holeFraction": 0.017681695827725438,
+        "edgeSamples": 3834,
+        "haloExcursion": 0.13482872543905464
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1748,
+        "area": 58595,
+        "holeFraction": 0.029831896919532384,
+        "edgeSamples": 3096,
+        "haloExcursion": 0.12312028170441328
+      }
+    ],
+    "edgeCount": 240,
+    "score": 94.21815876450033,
+    "splats": 199498,
+    "pieces": 7,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "0b90e6fe1b81dc0b2a4369df9a92f64d43519894a2d841448f52a29e0f74f9db",
+    "depthSha256": "c24db12898dbeba0d6f0561137b7e9719cb6d9a840966d4574848786d0233cc5"
+  },
+  {
+    "prompt": "C54-P27",
+    "file": "cdx-cliff-terrace",
+    "name": "Cliff terrace",
+    "group": "More Fantasy architecture",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 334,
+        "area": 66010,
+        "holeFraction": 0.0050598394182699595,
+        "edgeSamples": 4158,
+        "haloExcursion": 0.08927463241188767
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 396,
+        "area": 68288,
+        "holeFraction": 0.005798969072164949,
+        "edgeSamples": 4140,
+        "haloExcursion": 0.08737235957184865
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 255,
+        "area": 63790,
+        "holeFraction": 0.0039974917698698854,
+        "edgeSamples": 4071,
+        "haloExcursion": 0.07941874858516305
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 312,
+        "area": 59744,
+        "holeFraction": 0.005222281735404392,
+        "edgeSamples": 4056,
+        "haloExcursion": 0.09085934176431973
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 213,
+        "area": 53145,
+        "holeFraction": 0.004007902907140841,
+        "edgeSamples": 3636,
+        "haloExcursion": 0.09197782523350431
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 200,
+        "area": 57689,
+        "holeFraction": 0.0034668654336181943,
+        "edgeSamples": 3687,
+        "haloExcursion": 0.09365178129836188
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 616,
+        "area": 70091,
+        "holeFraction": 0.008788574852691501,
+        "edgeSamples": 4212,
+        "haloExcursion": 0.07535705640280839
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 704,
+        "area": 70045,
+        "holeFraction": 0.01005068170461846,
+        "edgeSamples": 3993,
+        "haloExcursion": 0.07327038002779422
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.9086600255921,
+    "splats": 199498,
+    "pieces": 4,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "5c7378593ae566a4ac867b60ad8ab492b16d86f541e1631de7b5df90100c1f75",
+    "depthSha256": "5fd153eedcf473e2eca1a1f6250320bb5922508c527e807339178ceac33083c9"
+  },
+  {
+    "prompt": "C54-P28",
+    "file": "cdx-mushroom-house",
+    "name": "Mushroom house",
+    "group": "More Fantasy architecture",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 252,
+        "area": 60495,
+        "holeFraction": 0.004165633523431689,
+        "edgeSamples": 4944,
+        "haloExcursion": 0.06528491655561942
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 248,
+        "area": 63862,
+        "holeFraction": 0.003883373524161473,
+        "edgeSamples": 4911,
+        "haloExcursion": 0.07386619074426773
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 979,
+        "area": 66508,
+        "holeFraction": 0.014720033680158779,
+        "edgeSamples": 4764,
+        "haloExcursion": 0.07625409525691089
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1372,
+        "area": 63658,
+        "holeFraction": 0.021552672091488895,
+        "edgeSamples": 4674,
+        "haloExcursion": 0.07616938088885566
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 364,
+        "area": 50700,
+        "holeFraction": 0.0071794871794871795,
+        "edgeSamples": 4308,
+        "haloExcursion": 0.07490305314326329
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 200,
+        "area": 55921,
+        "holeFraction": 0.0035764739543284276,
+        "edgeSamples": 4395,
+        "haloExcursion": 0.07883379062660353
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 711,
+        "area": 69615,
+        "holeFraction": 0.010213316095669037,
+        "edgeSamples": 4848,
+        "haloExcursion": 0.07225862292111622
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 839,
+        "area": 68978,
+        "holeFraction": 0.01216329844298182,
+        "edgeSamples": 4782,
+        "haloExcursion": 0.07039469907578305
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.20623152693011,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "52f8348869561ffae0ef468f9f95fb905a7efc86c5eaf0473da8a23a8e37e98b",
+    "depthSha256": "c56e303a7e1cdd9f4694d34d1c40ce7e38b195bf05c58244a269e073b5bdda4d"
+  },
+  {
+    "prompt": "C54-P29",
+    "file": "cdx-crystal-court",
+    "name": "Crystal court",
+    "group": "More Fantasy architecture",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 252,
+        "area": 60784,
+        "holeFraction": 0.004145827849434062,
+        "edgeSamples": 3633,
+        "haloExcursion": 0.05104623737741772
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 297,
+        "area": 63774,
+        "holeFraction": 0.0046570702794242165,
+        "edgeSamples": 3624,
+        "haloExcursion": 0.046071938709258894
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 86,
+        "area": 63783,
+        "holeFraction": 0.0013483216531050594,
+        "edgeSamples": 3561,
+        "haloExcursion": 0.053291926149848345
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 44,
+        "area": 60935,
+        "holeFraction": 0.0007220809058833183,
+        "edgeSamples": 3582,
+        "haloExcursion": 0.05685398670914548
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 4,
+        "area": 48795,
+        "holeFraction": 8.197561225535403e-5,
+        "edgeSamples": 3297,
+        "haloExcursion": 0.0639630799241146
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 4,
+        "area": 53408,
+        "holeFraction": 7.489514679448772e-5,
+        "edgeSamples": 3372,
+        "haloExcursion": 0.05638243434977833
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 553,
+        "area": 68459,
+        "holeFraction": 0.008077827604843775,
+        "edgeSamples": 3660,
+        "haloExcursion": 0.047624558019929715
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 792,
+        "area": 67972,
+        "holeFraction": 0.011651856646854588,
+        "edgeSamples": 3690,
+        "haloExcursion": 0.04497688506296862
+      }
+    ],
+    "edgeCount": 240,
+    "score": 97.83506348283112,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "85892836c21f9a4e69cb732bf667f3d25fa2bfe7cd9a3dd2a8eb809cfdc66cdf",
+    "depthSha256": "761f67b9854272c54b98dfd0af342087d2211e9c5b64fab524550e9629c33adc"
+  },
+  {
+    "prompt": "C54-P30",
+    "file": "cdx-garden-bridge",
+    "name": "Garden bridge",
+    "group": "More Fantasy architecture",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 270,
+        "area": 58214,
+        "holeFraction": 0.004638059573298519,
+        "edgeSamples": 3486,
+        "haloExcursion": 0.1110312398051595
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 291,
+        "area": 62066,
+        "holeFraction": 0.004688557342184127,
+        "edgeSamples": 3450,
+        "haloExcursion": 0.10768400113668647
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 414,
+        "area": 64539,
+        "holeFraction": 0.0064147259796402175,
+        "edgeSamples": 3309,
+        "haloExcursion": 0.10716465492210853
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 577,
+        "area": 62648,
+        "holeFraction": 0.009210190269441962,
+        "edgeSamples": 3270,
+        "haloExcursion": 0.09757750194879211
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 24,
+        "area": 51203,
+        "holeFraction": 0.00046872253578891863,
+        "edgeSamples": 3006,
+        "haloExcursion": 0.09727603616296876
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 0,
+        "area": 55619,
+        "holeFraction": 0,
+        "edgeSamples": 3027,
+        "haloExcursion": 0.12671706277489536
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 899,
+        "area": 66971,
+        "holeFraction": 0.013423720714936315,
+        "edgeSamples": 3456,
+        "haloExcursion": 0.10403050108932518
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1017,
+        "area": 66021,
+        "holeFraction": 0.015404189576043986,
+        "edgeSamples": 3441,
+        "haloExcursion": 0.09937375705876701
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.9394245172747,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "21664f861291d2caa9c57781ec546d45d5bae26baec0658213369415dab3de3e",
+    "depthSha256": "a0de9a88b4ebafb593f8b13ff486d95d0fc48fb5787da999f41ae96bd0b88849"
+  },
+  {
+    "prompt": "C54-P31",
+    "file": "cdx-fox-clearing",
+    "name": "Fox in a clearing",
+    "group": "More Animals in nature",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 201,
+        "area": 58001,
+        "holeFraction": 0.003465457492112205,
+        "edgeSamples": 3702,
+        "haloExcursion": 0.06519846188070094
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 218,
+        "area": 61403,
+        "holeFraction": 0.0035503151311825154,
+        "edgeSamples": 3651,
+        "haloExcursion": 0.06396206250235004
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 645,
+        "area": 62454,
+        "holeFraction": 0.010327601114420213,
+        "edgeSamples": 3696,
+        "haloExcursion": 0.06128618113912275
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 831,
+        "area": 61163,
+        "holeFraction": 0.01358664552098491,
+        "edgeSamples": 3717,
+        "haloExcursion": 0.06527929439195694
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 152,
+        "area": 50450,
+        "holeFraction": 0.003012884043607532,
+        "edgeSamples": 3297,
+        "haloExcursion": 0.07911291905297191
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 139,
+        "area": 54690,
+        "holeFraction": 0.002541598098372646,
+        "edgeSamples": 3576,
+        "haloExcursion": 0.06200486906171909
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1963,
+        "area": 65154,
+        "holeFraction": 0.030128618350369892,
+        "edgeSamples": 3636,
+        "haloExcursion": 0.06533359218274828
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 2873,
+        "area": 64214,
+        "holeFraction": 0.04474102220699536,
+        "edgeSamples": 3606,
+        "haloExcursion": 0.06370645873435388
+      }
+    ],
+    "edgeCount": 240,
+    "score": 94.95693468347972,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "0a1eb819458a566e7673e2353fd360e58f72e075891750339fe5aa44ecdd9c76",
+    "depthSha256": "5fde77012a0cab1cc7cfed16da28ee0ade6079364927a0380a37a63da4d91d24"
+  },
+  {
+    "prompt": "C54-P32",
+    "file": "cdx-tortoise",
+    "name": "Tortoise",
+    "group": "More Animals in nature",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 121,
+        "area": 57917,
+        "holeFraction": 0.00208919660894038,
+        "edgeSamples": 2286,
+        "haloExcursion": 0.06197313571097764
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 180,
+        "area": 61064,
+        "holeFraction": 0.0029477269749770734,
+        "edgeSamples": 2268,
+        "haloExcursion": 0.06447937199571223
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1525,
+        "area": 63697,
+        "holeFraction": 0.023941472910812125,
+        "edgeSamples": 2241,
+        "haloExcursion": 0.07413357132232702
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1683,
+        "area": 61762,
+        "holeFraction": 0.02724976522780998,
+        "edgeSamples": 2256,
+        "haloExcursion": 0.06555937978028128
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 295,
+        "area": 49570,
+        "holeFraction": 0.005951180149283841,
+        "edgeSamples": 1947,
+        "haloExcursion": 0.06167759348218006
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 332,
+        "area": 54491,
+        "holeFraction": 0.00609274926134591,
+        "edgeSamples": 2037,
+        "haloExcursion": 0.06693426511498098
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1018,
+        "area": 65323,
+        "holeFraction": 0.01558409748480627,
+        "edgeSamples": 2340,
+        "haloExcursion": 0.06721970839617952
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1427,
+        "area": 64119,
+        "holeFraction": 0.02225549369141752,
+        "edgeSamples": 2346,
+        "haloExcursion": 0.06533607475385755
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.10008975657334,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "f8de93a94f884f06b02a8ad4af91f7a9c6dcb3397bea7378063467716b40efbc",
+    "depthSha256": "678b1448ff1e16054cbe57682240e7f2662c67e12f028f08952fb9cea65c63f2"
+  },
+  {
+    "prompt": "C54-P33",
+    "file": "cdx-kingfisher",
+    "name": "Kingfisher",
+    "group": "More Animals in nature",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 667,
+        "area": 49436,
+        "holeFraction": 0.013492191924913018,
+        "edgeSamples": 2229,
+        "haloExcursion": 0.09132205596460251
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 740,
+        "area": 52861,
+        "holeFraction": 0.013998978452923706,
+        "edgeSamples": 2301,
+        "haloExcursion": 0.10583122427589105
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 1281,
+        "area": 54439,
+        "holeFraction": 0.02353092452102353,
+        "edgeSamples": 2409,
+        "haloExcursion": 0.12634157855753386
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1402,
+        "area": 52315,
+        "holeFraction": 0.026799197170983467,
+        "edgeSamples": 2433,
+        "haloExcursion": 0.12500020147804342
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 155,
+        "area": 43556,
+        "holeFraction": 0.0035586371567637065,
+        "edgeSamples": 2208,
+        "haloExcursion": 0.08952294685990375
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 125,
+        "area": 47311,
+        "holeFraction": 0.0026420916911500496,
+        "edgeSamples": 2250,
+        "haloExcursion": 0.09281917211329029
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 3192,
+        "area": 56313,
+        "holeFraction": 0.056683181503382876,
+        "edgeSamples": 2445,
+        "haloExcursion": 0.1297229239344005
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 3860,
+        "area": 55038,
+        "holeFraction": 0.07013336240415713,
+        "edgeSamples": 2340,
+        "haloExcursion": 0.1270856376738732
+      }
+    ],
+    "edgeCount": 240,
+    "score": 91.2780955014928,
+    "splats": 199498,
+    "pieces": 4,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "8d5313ccf16a0895ceb44a397d6b3908ba1eb2c090b51371b08141eace0e148e",
+    "depthSha256": "2daa393132d8ec06962e72258911c5e22fd7b18874e3cc338abf2a7384cee702"
+  },
+  {
+    "prompt": "C54-P34",
+    "file": "cdx-deer-grove",
+    "name": "Deer in a grove",
+    "group": "More Animals in nature",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 333,
+        "area": 58545,
+        "holeFraction": 0.00568793235972329,
+        "edgeSamples": 3825,
+        "haloExcursion": 0.07519466871716043
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 376,
+        "area": 62758,
+        "holeFraction": 0.0059912680455081425,
+        "edgeSamples": 3813,
+        "haloExcursion": 0.0823436849169255
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 581,
+        "area": 66024,
+        "holeFraction": 0.008799830364715861,
+        "edgeSamples": 3750,
+        "haloExcursion": 0.08253071895424896
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 750,
+        "area": 64451,
+        "holeFraction": 0.011636747296395711,
+        "edgeSamples": 3750,
+        "haloExcursion": 0.08064418300653647
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 463,
+        "area": 52992,
+        "holeFraction": 0.008737167874396136,
+        "edgeSamples": 3552,
+        "haloExcursion": 0.07233041865394867
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 363,
+        "area": 56943,
+        "holeFraction": 0.006374795848480059,
+        "edgeSamples": 3591,
+        "haloExcursion": 0.07429248502519979
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1140,
+        "area": 68052,
+        "holeFraction": 0.016751895609239995,
+        "edgeSamples": 3822,
+        "haloExcursion": 0.07559434030022313
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1823,
+        "area": 67486,
+        "holeFraction": 0.02701301010579972,
+        "edgeSamples": 3750,
+        "haloExcursion": 0.07458091503268048
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.8716618416136,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "a0ff07392b40e8eacc08c1a95a2a3c3ae205f76a12d441b9e3e364863cae96f6",
+    "depthSha256": "ed3e7fd093467e650585415a27482c9311797e248e48e22e5d60bfffe4ffde91"
+  },
+  {
+    "prompt": "C54-P35",
+    "file": "cdx-otter-bank",
+    "name": "Otter on a bank",
+    "group": "More Animals in nature",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 78,
+        "area": 49707,
+        "holeFraction": 0.0015691954855452954,
+        "edgeSamples": 2217,
+        "haloExcursion": 0.059684965551399224
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 89,
+        "area": 52694,
+        "holeFraction": 0.001688996849736213,
+        "edgeSamples": 2178,
+        "haloExcursion": 0.07117881128576356
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 409,
+        "area": 53488,
+        "holeFraction": 0.007646574932695184,
+        "edgeSamples": 1944,
+        "haloExcursion": 0.07223634309690996
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 469,
+        "area": 51859,
+        "holeFraction": 0.009043753254015697,
+        "edgeSamples": 1968,
+        "haloExcursion": 0.07420891120675935
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 46,
+        "area": 39764,
+        "holeFraction": 0.001156825269087617,
+        "edgeSamples": 1728,
+        "haloExcursion": 0.07489106753812678
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 109,
+        "area": 44449,
+        "holeFraction": 0.002452248644513937,
+        "edgeSamples": 1815,
+        "haloExcursion": 0.0693199373413282
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1502,
+        "area": 56534,
+        "holeFraction": 0.02656808292355043,
+        "edgeSamples": 2010,
+        "haloExcursion": 0.06998146522290556
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1952,
+        "area": 55353,
+        "holeFraction": 0.03526457463913428,
+        "edgeSamples": 1929,
+        "haloExcursion": 0.0676770448977936
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.50116842832679,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "bcec767bce4161f607577fea73ad388534e4ec1c9fba297f839b4240dafe5310",
+    "depthSha256": "68e3046ad8c05e74087f6f2625b78058940c515196bbe27a230d9347519d767e"
+  },
+  {
+    "prompt": "C54-P36",
+    "file": "cdx-felt-orchard",
+    "name": "Felt orchard",
+    "group": "More Miniatures",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 258,
+        "area": 59547,
+        "holeFraction": 0.004332711975414379,
+        "edgeSamples": 4347,
+        "haloExcursion": 0.09962155554653435
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 239,
+        "area": 62494,
+        "holeFraction": 0.0038243671392453674,
+        "edgeSamples": 4347,
+        "haloExcursion": 0.10134913868929257
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 841,
+        "area": 63799,
+        "holeFraction": 0.013182024796626906,
+        "edgeSamples": 4257,
+        "haloExcursion": 0.08861897589667807
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 965,
+        "area": 61540,
+        "holeFraction": 0.015680857978550535,
+        "edgeSamples": 4185,
+        "haloExcursion": 0.08561576123878477
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 123,
+        "area": 51944,
+        "holeFraction": 0.0023679346989065146,
+        "edgeSamples": 4092,
+        "haloExcursion": 0.11517259885381381
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 126,
+        "area": 55677,
+        "holeFraction": 0.0022630529662158523,
+        "edgeSamples": 4290,
+        "haloExcursion": 0.10513826043237837
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1722,
+        "area": 66694,
+        "holeFraction": 0.025819414040243502,
+        "edgeSamples": 4197,
+        "haloExcursion": 0.09297957925128636
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 2472,
+        "area": 65757,
+        "holeFraction": 0.03759295588302386,
+        "edgeSamples": 3999,
+        "haloExcursion": 0.09327527960421501
+      }
+    ],
+    "edgeCount": 240,
+    "score": 94.57023470006187,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "eb40c3923ddbb744c75e46c1b9399c3d1d9a55a03500a34691ec55dc11744d19",
+    "depthSha256": "0d79234319b177e1f4f9e875344a25705a73139528843e31bb2d41971d96ee92"
+  },
+  {
+    "prompt": "C54-P37",
+    "file": "cdx-paper-canyon",
+    "name": "Paper canyon",
+    "group": "More Miniatures",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 9,
+        "area": 59113,
+        "holeFraction": 0.0001522507739414342,
+        "edgeSamples": 3201,
+        "haloExcursion": 0.07606814047080933
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 14,
+        "area": 63036,
+        "holeFraction": 0.00022209531061615585,
+        "edgeSamples": 3096,
+        "haloExcursion": 0.07818690783807135
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 408,
+        "area": 64852,
+        "holeFraction": 0.0062912477641398875,
+        "edgeSamples": 2940,
+        "haloExcursion": 0.07319594504468543
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 542,
+        "area": 62108,
+        "holeFraction": 0.008726734076125458,
+        "edgeSamples": 2931,
+        "haloExcursion": 0.07223660532107806
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 2,
+        "area": 50026,
+        "holeFraction": 3.9979210810378605e-5,
+        "edgeSamples": 2868,
+        "haloExcursion": 0.1040323242267619
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 16,
+        "area": 55336,
+        "holeFraction": 0.00028914269191846175,
+        "edgeSamples": 2880,
+        "haloExcursion": 0.09735021786492401
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 649,
+        "area": 68067,
+        "holeFraction": 0.00953472314043516,
+        "edgeSamples": 3003,
+        "haloExcursion": 0.07327313209666213
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1117,
+        "area": 67016,
+        "holeFraction": 0.016667661453981138,
+        "edgeSamples": 2982,
+        "haloExcursion": 0.0720150971186602
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.67281078466151,
+    "splats": 199498,
+    "pieces": 2,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "e83b974c603b1da62f62067a30d340b32bfe10ffc4b11e415b12ef0d9854ca80",
+    "depthSha256": "73a8066256e83b0636de6d8617bf034a5d4a8659f43f6c83a7bccab7cffd08d1"
+  },
+  {
+    "prompt": "C54-P38",
+    "file": "cdx-clay-island",
+    "name": "Clay island",
+    "group": "More Miniatures",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 622,
+        "area": 62200,
+        "holeFraction": 0.01,
+        "edgeSamples": 4566,
+        "haloExcursion": 0.07925845765375836
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 568,
+        "area": 65092,
+        "holeFraction": 0.008726110735574263,
+        "edgeSamples": 4581,
+        "haloExcursion": 0.07477175546053429
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 553,
+        "area": 65020,
+        "holeFraction": 0.008505075361427254,
+        "edgeSamples": 4563,
+        "haloExcursion": 0.07762351050435572
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 545,
+        "area": 62036,
+        "holeFraction": 0.008785221484299438,
+        "edgeSamples": 4548,
+        "haloExcursion": 0.07884180937106633
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 13,
+        "area": 46389,
+        "holeFraction": 0.000280238849727306,
+        "edgeSamples": 4104,
+        "haloExcursion": 0.08997821350762567
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 31,
+        "area": 52156,
+        "holeFraction": 0.0005943707339519902,
+        "edgeSamples": 4233,
+        "haloExcursion": 0.07435138477786618
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1252,
+        "area": 68846,
+        "holeFraction": 0.018185515498358656,
+        "edgeSamples": 4659,
+        "haloExcursion": 0.07608045149804955
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1584,
+        "area": 68511,
+        "holeFraction": 0.02312037483031922,
+        "edgeSamples": 4584,
+        "haloExcursion": 0.07797967354481125
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.04218355553331,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "11fa7883512402392864fcac5f15cc09db203d0179477732abd46ba33e0d4d9a",
+    "depthSha256": "bdf972656505740319f665e6b2758b857f75904256067e4ccdd1fed2d4069f3d"
+  },
+  {
+    "prompt": "C54-P39",
+    "file": "cdx-wool-garden",
+    "name": "Wool garden",
+    "group": "More Miniatures",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 215,
+        "area": 59283,
+        "holeFraction": 0.003626672064504158,
+        "edgeSamples": 4719,
+        "haloExcursion": 0.0757214265235662
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 258,
+        "area": 63580,
+        "holeFraction": 0.004057879836426549,
+        "edgeSamples": 4698,
+        "haloExcursion": 0.07843888513259749
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 973,
+        "area": 66525,
+        "holeFraction": 0.0146260804208944,
+        "edgeSamples": 4389,
+        "haloExcursion": 0.08410866739040151
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 1042,
+        "area": 63966,
+        "holeFraction": 0.016289904011506113,
+        "edgeSamples": 4347,
+        "haloExcursion": 0.08442874734434858
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 325,
+        "area": 51286,
+        "holeFraction": 0.006337012050072145,
+        "edgeSamples": 4464,
+        "haloExcursion": 0.09926646285754484
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 240,
+        "area": 54967,
+        "holeFraction": 0.004366256117306747,
+        "edgeSamples": 4449,
+        "haloExcursion": 0.07735953001115084
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 997,
+        "area": 69429,
+        "holeFraction": 0.01435999366259056,
+        "edgeSamples": 4377,
+        "haloExcursion": 0.08086476994270432
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1604,
+        "area": 68849,
+        "holeFraction": 0.023297360891225725,
+        "edgeSamples": 4122,
+        "haloExcursion": 0.084171019208266
+      }
+    ],
+    "edgeCount": 240,
+    "score": 95.84405416136622,
+    "splats": 199498,
+    "pieces": 5,
+    "kept": false,
+    "reason": "Lower score after the two-per-category floor and overall ranking.",
+    "sha256": "d0f9b7821ef5f314f7343d66b130eea1fb45bc8bb207108008fdd46b85335a2d",
+    "depthSha256": "9a2767bdc4ea1960f6c0adf04ec5bac60b3dd366729e1469c4ac5589cf6b5acc"
+  },
+  {
+    "prompt": "C54-P40",
+    "file": "cdx-wood-valley",
+    "name": "Wood valley",
+    "group": "More Miniatures",
+    "poses": [
+      {
+        "axis": "yaw",
+        "degrees": -30,
+        "holePixels": 454,
+        "area": 59953,
+        "holeFraction": 0.0075725985355194906,
+        "edgeSamples": 2940,
+        "haloExcursion": 0.06223689475790376
+      },
+      {
+        "axis": "yaw",
+        "degrees": -20,
+        "holePixels": 432,
+        "area": 63221,
+        "holeFraction": 0.006833172521788646,
+        "edgeSamples": 2880,
+        "haloExcursion": 0.061279956427015746
+      },
+      {
+        "axis": "yaw",
+        "degrees": 20,
+        "holePixels": 657,
+        "area": 63602,
+        "holeFraction": 0.010329863840759724,
+        "edgeSamples": 2739,
+        "haloExcursion": 0.04979919678714901
+      },
+      {
+        "axis": "yaw",
+        "degrees": 30,
+        "holePixels": 799,
+        "area": 61289,
+        "holeFraction": 0.013036597105516487,
+        "edgeSamples": 2745,
+        "haloExcursion": 0.04933176184863787
+      },
+      {
+        "axis": "pitch",
+        "degrees": -30,
+        "holePixels": 52,
+        "area": 48860,
+        "holeFraction": 0.0010642652476463364,
+        "edgeSamples": 2439,
+        "haloExcursion": 0.06960904903166737
+      },
+      {
+        "axis": "pitch",
+        "degrees": -20,
+        "holePixels": 110,
+        "area": 54369,
+        "holeFraction": 0.0020232117566995897,
+        "edgeSamples": 2541,
+        "haloExcursion": 0.05517667121945247
+      },
+      {
+        "axis": "pitch",
+        "degrees": 20,
+        "holePixels": 1130,
+        "area": 67619,
+        "holeFraction": 0.016711279374140405,
+        "edgeSamples": 2664,
+        "haloExcursion": 0.04870017075899463
+      },
+      {
+        "axis": "pitch",
+        "degrees": 30,
+        "holePixels": 1674,
+        "area": 66803,
+        "holeFraction": 0.025058754846339237,
+        "edgeSamples": 2463,
+        "haloExcursion": 0.05274613296394518
+      }
+    ],
+    "edgeCount": 240,
+    "score": 96.6635031718379,
+    "splats": 199498,
+    "pieces": 1,
+    "kept": true,
+    "reason": "Best within its group or among the remaining candidates; retains category variety.",
+    "sha256": "6f0bf9cb0830d94b962f921c3bfef12eb89161f3382f7b11c5b1f9a1152d80a7",
+    "depthSha256": "fd52a8dc719b7928419575e08ef58e62fe7447ef9ad08777e4b6b212ba25fe36"
+  }
+]
