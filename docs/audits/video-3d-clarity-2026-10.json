@@ -5040,15 +5040,15 @@
     }
   ],
   "suite": {
-    "recorded": "2026-10-14T02:34:10.366Z",
+    "recorded": "2026-10-14T03:08:55.893Z",
     "command": "node tools/suite.mjs --gl=llvmpipe --jobs=2 --out=/tmp/v3d-full-suite --recheck; resumed with the manual’s required fonts and verified private calibration fixtures",
     "initialMergedMain": "c66a49e9",
     "finalMergedMain": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
     "full": {
-      "files": 173,
+      "files": 182,
       "expectedFiles": 281,
-      "passed": 1352,
-      "failed": 16,
+      "passed": 1449,
+      "failed": 20,
       "skipped": 0,
       "other": 0,
       "allReportsSuccessful": false
@@ -7241,6 +7241,84 @@
         "unchangedFromStartingMerge": null
       },
       {
+        "file": "cdx-p3d2-render.spec.mjs",
+        "first": {
+          "path": "/tmp/v3d-full-suite/cdx-p3d2-render.json",
+          "started": "2026-10-14T02:32:00.937Z",
+          "counts": {
+            "passed": 16,
+            "failed": 0,
+            "skipped": 0,
+            "other": 0
+          },
+          "exitCode": 0,
+          "command": "Full suite, file by file"
+        },
+        "attempts": [
+          {
+            "path": "/tmp/v3d-full-suite/cdx-p3d2-render.json",
+            "started": "2026-10-14T02:32:00.937Z",
+            "counts": {
+              "passed": 16,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0,
+            "command": "Full suite, file by file"
+          }
+        ],
+        "latest": {
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 0,
+        "latestProof": "/tmp/v3d-full-suite/cdx-p3d2-render.json",
+        "sourceSha256": "78aa7fada3125faced3d483df300313b8d686f4903ef14f80dbfcc97a5ead158",
+        "unchangedFromStartingMerge": null
+      },
+      {
+        "file": "cdx-p3d2-text.spec.mjs",
+        "first": {
+          "path": "/tmp/v3d-full-suite/cdx-p3d2-text.json",
+          "started": "2026-10-14T02:33:16.398Z",
+          "counts": {
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "other": 0
+          },
+          "exitCode": 0,
+          "command": "Full suite, file by file"
+        },
+        "attempts": [
+          {
+            "path": "/tmp/v3d-full-suite/cdx-p3d2-text.json",
+            "started": "2026-10-14T02:33:16.398Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0,
+            "command": "Full suite, file by file"
+          }
+        ],
+        "latest": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 0,
+        "latestProof": "/tmp/v3d-full-suite/cdx-p3d2-text.json",
+        "sourceSha256": "ea40622cf04e3584f1fdeb03f74bb2d0f87e4890666660096a1a9fe96dcaa652",
+        "unchangedFromStartingMerge": null
+      },
+      {
         "file": "cdx-pics-hard-cases.spec.mjs",
         "first": {
           "path": "/tmp/v3d-full-suite/cdx-pics-hard-cases.json",
@@ -7277,6 +7355,45 @@
         "latestExitCode": 0,
         "latestProof": "/tmp/v3d-full-suite/cdx-pics-hard-cases.json",
         "sourceSha256": "fdae3b4d7c112201294903e38e2286248685c8463454529cd98bd2794688ac41",
+        "unchangedFromStartingMerge": null
+      },
+      {
+        "file": "cdx-playground-links.spec.mjs",
+        "first": {
+          "path": "/tmp/v3d-full-suite/cdx-playground-links.json",
+          "started": "2026-10-14T02:41:58.559Z",
+          "counts": {
+            "passed": 14,
+            "failed": 1,
+            "skipped": 0,
+            "other": 0
+          },
+          "exitCode": 1,
+          "command": "Full suite, file by file"
+        },
+        "attempts": [
+          {
+            "path": "/tmp/v3d-full-suite/cdx-playground-links.json",
+            "started": "2026-10-14T02:41:58.559Z",
+            "counts": {
+              "passed": 14,
+              "failed": 1,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 1,
+            "command": "Full suite, file by file"
+          }
+        ],
+        "latest": {
+          "passed": 14,
+          "failed": 1,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 1,
+        "latestProof": "/tmp/v3d-full-suite/cdx-playground-links.json",
+        "sourceSha256": "9d1cce8946361fd0470c7af6a2a3d13ae829655c8cea97abde67850ed59701ce",
         "unchangedFromStartingMerge": null
       },
       {
@@ -11323,6 +11440,45 @@
         "unchangedFromStartingMerge": true
       },
       {
+        "file": "pot.spec.mjs",
+        "first": {
+          "path": "/tmp/v3d-full-suite/pot.json",
+          "started": "2026-10-14T02:59:55.887Z",
+          "counts": {
+            "passed": 9,
+            "failed": 0,
+            "skipped": 0,
+            "other": 0
+          },
+          "exitCode": 0,
+          "command": "Full suite, file by file"
+        },
+        "attempts": [
+          {
+            "path": "/tmp/v3d-full-suite/pot.json",
+            "started": "2026-10-14T02:59:55.887Z",
+            "counts": {
+              "passed": 9,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0,
+            "command": "Full suite, file by file"
+          }
+        ],
+        "latest": {
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 0,
+        "latestProof": "/tmp/v3d-full-suite/pot.json",
+        "sourceSha256": "1bb2b8d0d7f8b5127edabd5cc98df0ed90d2020c9941e4a74be8f0c313a53f68",
+        "unchangedFromStartingMerge": true
+      },
+      {
         "file": "pr2.spec.mjs",
         "first": {
           "path": "/tmp/v3d-full-suite/pr2.json",
@@ -12025,6 +12181,45 @@
         "unchangedFromStartingMerge": true
       },
       {
+        "file": "scr.spec.mjs",
+        "first": {
+          "path": "/tmp/v3d-full-suite/scr.json",
+          "started": "2026-10-14T03:03:01.333Z",
+          "counts": {
+            "passed": 6,
+            "failed": 0,
+            "skipped": 0,
+            "other": 0
+          },
+          "exitCode": 0,
+          "command": "Full suite, file by file"
+        },
+        "attempts": [
+          {
+            "path": "/tmp/v3d-full-suite/scr.json",
+            "started": "2026-10-14T03:03:01.333Z",
+            "counts": {
+              "passed": 6,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0,
+            "command": "Full suite, file by file"
+          }
+        ],
+        "latest": {
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 0,
+        "latestProof": "/tmp/v3d-full-suite/scr.json",
+        "sourceSha256": "a33cefb15c2ac933f0623b829448624a9c4b70194411c166732ede7dc47d452b",
+        "unchangedFromStartingMerge": true
+      },
+      {
         "file": "scr2.spec.mjs",
         "first": {
           "path": "/tmp/v3d-full-suite/scr2.json",
@@ -12545,6 +12740,123 @@
         "unchangedFromStartingMerge": true
       },
       {
+        "file": "st4-engine.spec.mjs",
+        "first": {
+          "path": "/tmp/v3d-full-suite/st4-engine.json",
+          "started": "2026-10-14T02:58:07.711Z",
+          "counts": {
+            "passed": 2,
+            "failed": 0,
+            "skipped": 0,
+            "other": 0
+          },
+          "exitCode": 0,
+          "command": "Full suite, file by file"
+        },
+        "attempts": [
+          {
+            "path": "/tmp/v3d-full-suite/st4-engine.json",
+            "started": "2026-10-14T02:58:07.711Z",
+            "counts": {
+              "passed": 2,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0,
+            "command": "Full suite, file by file"
+          }
+        ],
+        "latest": {
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 0,
+        "latestProof": "/tmp/v3d-full-suite/st4-engine.json",
+        "sourceSha256": "ca879f36ad8d2a71bbd6ae725beca92d2206ca5f8cf4eaa51deea6b4f4830a7c",
+        "unchangedFromStartingMerge": true
+      },
+      {
+        "file": "st4.spec.mjs",
+        "first": {
+          "path": "/tmp/v3d-full-suite/st4.json",
+          "started": "2026-10-14T02:51:55.254Z",
+          "counts": {
+            "passed": 22,
+            "failed": 0,
+            "skipped": 0,
+            "other": 0
+          },
+          "exitCode": 0,
+          "command": "Full suite, file by file"
+        },
+        "attempts": [
+          {
+            "path": "/tmp/v3d-full-suite/st4.json",
+            "started": "2026-10-14T02:51:55.254Z",
+            "counts": {
+              "passed": 22,
+              "failed": 0,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 0,
+            "command": "Full suite, file by file"
+          }
+        ],
+        "latest": {
+          "passed": 22,
+          "failed": 0,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 0,
+        "latestProof": "/tmp/v3d-full-suite/st4.json",
+        "sourceSha256": "14c6a5b43aa24523118bee69876534aa0afa42c33c4da50a1a4fb30c895bb5f8",
+        "unchangedFromStartingMerge": true
+      },
+      {
+        "file": "st5.spec.mjs",
+        "first": {
+          "path": "/tmp/v3d-full-suite/st5.json",
+          "started": "2026-10-14T02:58:19.244Z",
+          "counts": {
+            "passed": 3,
+            "failed": 2,
+            "skipped": 0,
+            "other": 0
+          },
+          "exitCode": 1,
+          "command": "Full suite, file by file"
+        },
+        "attempts": [
+          {
+            "path": "/tmp/v3d-full-suite/st5.json",
+            "started": "2026-10-14T02:58:19.244Z",
+            "counts": {
+              "passed": 3,
+              "failed": 2,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 1,
+            "command": "Full suite, file by file"
+          }
+        ],
+        "latest": {
+          "passed": 3,
+          "failed": 2,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 1,
+        "latestProof": "/tmp/v3d-full-suite/st5.json",
+        "sourceSha256": "99ab29902b23c4723c4ae9eb033a9e71e214a65a153c69752c7a6fc31e48a13d",
+        "unchangedFromStartingMerge": true
+      },
+      {
         "file": "stm-engine.spec.mjs",
         "first": {
           "path": "/tmp/v3d-full-suite/stm-engine.json",
@@ -13013,6 +13325,45 @@
         "unchangedFromStartingMerge": true
       },
       {
+        "file": "vol.spec.mjs",
+        "first": {
+          "path": "/tmp/v3d-full-suite/vol.json",
+          "started": "2026-10-14T02:58:35.267Z",
+          "counts": {
+            "passed": 23,
+            "failed": 1,
+            "skipped": 0,
+            "other": 0
+          },
+          "exitCode": 1,
+          "command": "Full suite, file by file"
+        },
+        "attempts": [
+          {
+            "path": "/tmp/v3d-full-suite/vol.json",
+            "started": "2026-10-14T02:58:35.267Z",
+            "counts": {
+              "passed": 23,
+              "failed": 1,
+              "skipped": 0,
+              "other": 0
+            },
+            "exitCode": 1,
+            "command": "Full suite, file by file"
+          }
+        ],
+        "latest": {
+          "passed": 23,
+          "failed": 1,
+          "skipped": 0,
+          "other": 0
+        },
+        "latestExitCode": 1,
+        "latestProof": "/tmp/v3d-full-suite/vol.json",
+        "sourceSha256": "7833a11a9fef9f98e4c5687eed59be15fb0073222395072a4e1ce963778e6262",
+        "unchangedFromStartingMerge": true
+      },
+      {
         "file": "vw.spec.mjs",
         "first": {
           "path": "/tmp/v3d-full-suite/vw.json",
@@ -13169,8 +13520,127 @@
         "unchangedFromStartingMerge": true
       }
     ],
-    "state": "running",
-    "deadline": "2026-10-14T03:22:00Z"
+    "state": "incomplete",
+    "deadline": "2026-10-14T03:22:00Z",
+    "unresolvedFiles": [
+      "cdx-mir.spec.mjs",
+      "cdx-playground-links.spec.mjs",
+      "hec-engine.spec.mjs",
+      "hh4-tiny.spec.mjs",
+      "hh4-weather.spec.mjs",
+      "hh5-animals.spec.mjs",
+      "hh5-gems.spec.mjs",
+      "img-engine.spec.mjs",
+      "live2.spec.mjs",
+      "ln.spec.mjs",
+      "man7a.spec.mjs",
+      "qr4-craft.spec.mjs",
+      "st5.spec.mjs",
+      "tp2.spec.mjs",
+      "tpg.spec.mjs",
+      "vol.spec.mjs"
+    ],
+    "missingFiles": [
+      "abb.spec.mjs",
+      "ai.spec.mjs",
+      "an-engine.spec.mjs",
+      "arc-engine.spec.mjs",
+      "arc.spec.mjs",
+      "arc2.spec.mjs",
+      "asc2.spec.mjs",
+      "bk.spec.mjs",
+      "bk5-engine.spec.mjs",
+      "chs.spec.mjs",
+      "dcl.spec.mjs",
+      "dsm-samples.spec.mjs",
+      "e5.spec.mjs",
+      "e6a.spec.mjs",
+      "evidence-computing.spec.mjs",
+      "f.spec.mjs",
+      "fb.spec.mjs",
+      "fix3.spec.mjs",
+      "fl7.spec.mjs",
+      "fx4.spec.mjs",
+      "fx5.spec.mjs",
+      "fx6-engine.spec.mjs",
+      "fx6.spec.mjs",
+      "fx7.spec.mjs",
+      "fx8.spec.mjs",
+      "fx9.spec.mjs",
+      "g.spec.mjs",
+      "hea-engine.spec.mjs",
+      "hea.spec.mjs",
+      "heb.spec.mjs",
+      "hec.spec.mjs",
+      "hta.spec.mjs",
+      "lab-engine.spec.mjs",
+      "lat.spec.mjs",
+      "live2-engine.spec.mjs",
+      "live3-engine.spec.mjs",
+      "live4.spec.mjs",
+      "live5.spec.mjs",
+      "live6.spec.mjs",
+      "lv7-long.spec.mjs",
+      "lv8-dial.spec.mjs",
+      "lv8.spec.mjs",
+      "man.spec.mjs",
+      "math.spec.mjs",
+      "mca.spec.mjs",
+      "mol-engine.spec.mjs",
+      "mol.spec.mjs",
+      "mt2.spec.mjs",
+      "ops-media.spec.mjs",
+      "ops-text.spec.mjs",
+      "opt.spec.mjs",
+      "p3d.spec.mjs",
+      "pdf-engine.spec.mjs",
+      "pg6-engine.spec.mjs",
+      "phf-engine.spec.mjs",
+      "phf.spec.mjs",
+      "phy-engine.spec.mjs",
+      "phy.spec.mjs",
+      "pno-engine.spec.mjs",
+      "pot-engine.spec.mjs",
+      "psv.spec.mjs",
+      "qrc-barcodes.spec.mjs",
+      "qrc-build.spec.mjs",
+      "qrc-picture.spec.mjs",
+      "qrl.spec.mjs",
+      "ro.spec.mjs",
+      "sci-engine.spec.mjs",
+      "sci.spec.mjs",
+      "sci3-engine.spec.mjs",
+      "sci3.spec.mjs",
+      "scr2-engine.spec.mjs",
+      "sha-book.spec.mjs",
+      "sha.spec.mjs",
+      "shb.spec.mjs",
+      "shv.spec.mjs",
+      "sky-engine.spec.mjs",
+      "sky.spec.mjs",
+      "sll.spec.mjs",
+      "smd-models.spec.mjs",
+      "smd-moving.spec.mjs",
+      "smd-photo.spec.mjs",
+      "snda-engine.spec.mjs",
+      "snda.spec.mjs",
+      "sndb.spec.mjs",
+      "sndc-engine.spec.mjs",
+      "sng.spec.mjs",
+      "sp2.spec.mjs",
+      "spg.spec.mjs",
+      "st2.spec.mjs",
+      "sts-engine.spec.mjs",
+      "sts.spec.mjs",
+      "tp2-engine.spec.mjs",
+      "ui3.spec.mjs",
+      "ui4-engine.spec.mjs",
+      "ui4.spec.mjs",
+      "ui5-engine.spec.mjs",
+      "ui5.spec.mjs",
+      "vwr.spec.mjs",
+      "cdx-pics.spec.mjs"
+    ]
   },
   "embedTransfers": {
     "measured": "2026-10-14T02:17:36.018Z",
@@ -16121,5 +16591,10 @@
     "walkClips": 6,
     "heldCameraComparisons": 6,
     "autoLayouts": 12
+  },
+  "checkoutRepair": {
+    "repaired": "2026-10-14T02:49:21Z",
+    "originalTestFilesUnchanged": 260,
+    "note": "A local checkout discrepancy was restored to the published tree; the broader coverage remains incomplete."
   }
 }
