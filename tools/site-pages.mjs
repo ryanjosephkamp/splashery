@@ -538,7 +538,7 @@ PAGES.push({
   imageWidth: 1200,
   imageHeight: 630,
   imageCard: "summary_large_image",
-  imageAlt: "A grape, a toy piano, and a QR code, each made of soft 3D splats, beside the words: a 3D Gaussian splat engine and studio, in a browser tab", // prettier-ignore
+  imageAlt: "A grape, a toy piano, and a QR code, each made of soft 3D splats, beside the words: a 3D Gaussian splat engine and studio, in a browser tab. Nothing to install. Nothing uploaded.", // prettier-ignore
 });
 
 // A page for every toy, at toys/<id>/ (lane Toy pages: tools/site-toy-pages.mjs).

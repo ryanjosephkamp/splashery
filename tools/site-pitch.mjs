@@ -5,9 +5,9 @@
 //
 // Each toy's still is site/assets/pitch/<id>.webp, rendered by tools/pit-stills.mjs.
 //
-// Every live toy is the site's own player (site/play/?toy=…), the embed path, in an iframe. Every
-// claim on the page is one the manual's "What Splashery can do that other splat tools can't"
-// makes too, and each shows a demo or a number.
+// Every live toy is the site's own player (site/play/?toy=…), the embed path, in an iframe. The
+// claims list is the manual's own six, from "What Splashery can do that other splat tools can't"
+// (manual/unique.html).
 
 // The live toys, in page order. `q` is the player's query (after ?toy=<id>); `still` leaves the
 // turntable off for a toy that is read face on.
@@ -50,12 +50,12 @@ export function pitchPage(page, ctx) {
 <div class="pit-hero-text">
 <p class="pit-eyebrow">Splashery</p>
 <h1 id="h-pit">A 3D Gaussian splat engine and studio, in a browser tab.</h1>
-<p class="pit-lead">Everything here is drawn from soft, colored splats, sorted and blended on your own graphics chip. There is nothing to install, and nothing you open leaves your device.</p>
-<p class="pit-stats"><span><b>${countToys("all")}</b> toys</span><span><b>0</b> installs</span><span><b>0</b> uploads</span></p>
+<p class="pit-lead">Everything here is drawn from soft, colored splats, sorted by depth and blended on your own device. There is nothing to install, and nothing you open leaves your device.</p>
+<p class="pit-stats"><span><b>${countToys("all")}</b> scenes and tools</span><span><b>0</b> installs</span><span><b>0</b> uploads</span></p>
 </div>
 <figure class="pit-figure">
 ${live("grape", { hero: true })}
-<figcaption>A grape, captured from photos. Drag to turn it; tap it to peel the skin.</figcaption>
+<figcaption>A grape, captured from photos. Drag to turn it; tap it to peel the skin.<span class="pit-credit">Grape: Dany Bittel, <a href="https://superspl.at/scene/4ae563ac">SuperSplat</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, converted for Splashery.</span></figcaption>
 </figure>
 </section>
 
@@ -63,7 +63,7 @@ ${live("grape", { hero: true })}
 <div class="pit-text">
 <p class="pit-num">01</p>
 <h2 id="h-pit-one">One splat</h2>
-<p>A splat is a soft blob with a position, a shape, a color, and an opacity. Change them here. Every scene on the site is this, repeated a few hundred thousand times and sorted back to front.</p>
+<p>A splat is a soft blob with a position, a shape, a color, and an opacity. Change its shape and opacity here. Every scene on the site is this, repeated a few hundred thousand times and sorted back to front.</p>
 <p class="pit-links"><a href="${up}../manual/splat.html">The manual, from one splat up${arrow}</a><a href="${up}learn/splats/">How splats work</a></p>
 </div>
 <figure class="pit-figure">
@@ -98,7 +98,7 @@ ${live("toy-piano")}
 <div class="pit-text">
 <p class="pit-num">03</p>
 <h2 id="h-pit-photo">A photo becomes 3D, on the device</h2>
-<p>A depth model runs in the page and lifts a single photo into a relief you can turn. It downloads only when you ask for it, and the photo is never sent anywhere. A short video becomes a scene you can fly through, solved and trained on the device too.</p>
+<p>A depth model runs in the page and lifts a single photo into a relief you can turn. It downloads only when you ask for it, and the photo is never sent anywhere. A short video becomes a scene you can fly through: the camera path is solved and the splats are trained on your device, in a browser with WebGPU.</p>
 <p class="pit-own" hidden><button type="button" class="button" data-pit-own>Use your own photo</button><input type="file" accept="image/jpeg,image/png,image/webp" aria-label="Your own photo" data-pit-own-file hidden /><span>Or drop one on the picture. It stays on this device; the depth model (about 27 MB) downloads the first time.</span></p>
 ${links("photo-3d", `<a href="${up}studio/">The Studio</a>`)}
 </div>
@@ -112,9 +112,9 @@ ${live("photo-3d")}
 <div class="pit-text">
 <p class="pit-num">04</p>
 <h2 id="h-pit-data">Real data</h2>
-<p>The science toys show measured things. This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures, worked back into a volume. Each splat is one small block of it, 0.3 mm across.</p>
+<p>Some of the science toys use measured data. This is a real walnut, scanned with X-ray CT at CWI in Amsterdam: more than a thousand X-ray pictures, worked back into a volume. Each splat is one small block of it, 0.3 mm across.</p>
 ${links("walnut-ct", `<a href="${up}science/">Science</a>`)}
-<p class="pit-credit">Data: Der Sarkissian et al., CWI, <a href="https://doi.org/10.5281/zenodo.2686726">Zenodo</a>, CC BY 4.0.</p>
+<p class="pit-credit">Data: Der Sarkissian et al., CWI, <a href="https://doi.org/10.5281/zenodo.2686726">Zenodo</a>, <a href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a>, resampled to 0.3 mm.</p>
 </div>
 <figure class="pit-figure">
 ${live("walnut-ct")}
@@ -138,16 +138,16 @@ ${live("qr-code")}
 <section class="pit-sec pit-claims" aria-labelledby="h-pit-claims">
 <div class="pit-text">
 <p class="pit-num">06</p>
-<h2 id="h-pit-claims">What other splat tools don't do</h2>
-<p>To our knowledge, after looking at the public ones. Splat editors work on captured files; Splashery mostly starts from rules.</p>
+<h2 id="h-pit-claims">What we haven't seen elsewhere</h2>
+<p>As far as we know. We have not tried every splat tool.</p>
 </div>
 <div class="pit-claim-wrap"><ul class="pit-claim-list">
-<li><b>Objects from code</b><span>A recipe of a few kilobytes becomes a budget of 60,000 to 400,000 splats on your device, with parts that move as solid pieces.</span></li>
-<li><b>Nothing to install</b><span>WebGPU or WebGL2 in any current browser, on a phone or a desktop.</span></li>
-<li><b>Files stay on the device</b><span>Photos, videos, PDFs, splat files, and models are opened in the page. There is no upload and no account.</span></li>
-<li><b>A whole scene in a link</b><span>The grape above, with its camera, fits in a link of ${linkChars} characters. No server holds it.</span></li>
-<li><b>Photos and video to 3D</b><span>Depth and structure are worked out in the browser, on a phone too.</span></li>
-<li><b>A manual from one splat up</b><span>The Tinkerer's Manual teaches splats from a single bell curve to writing your own toys, with live demos in its pages.</span></li>
+<li><b>Toys made from rules</b><span>A recipe of a few kilobytes is built into splats on your device, with a budget of 60,000 to 400,000. The shape is never a large file to download.</span></li>
+<li><b>Equations as a language</b><span>Type x, y, and z in u, v, and t, and get an animated splat shape, with plain messages instead of crashes.</span></li>
+<li><b>Moving parts in one splat cloud</b><span>Hinges, pivots, sliders, morphs, and per-splat effects run on the graphics chip, so a chest opens without rebuilding anything.</span></li>
+<li><b>Hands-on physics</b><span>Toss, stack, pull apart, and pour, on splats.</span></li>
+<li><b>Anything as splats</b><span>Photos and videos with depth, PDFs, QR codes, real science data, the night sky, and medical volumes.</span></li>
+<li><b>A whole scene in a link</b><span>The link to the grape above is ${linkChars} characters. It holds the toy and its settings, not your files, and no server stores it.</span></li>
 </ul></div>
 <p class="pit-links pit-end"><a class="button primary" href="${up}../">Open the Playground${arrow}</a><a class="button" href="${up}../manual/">Read the manual</a><a class="button" href="${ctx.SITE.github}">Source on GitHub</a></p>
 </section>

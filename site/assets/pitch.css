@@ -89,6 +89,10 @@
   vertical-align: -2px;
   margin-left: 4px;
 }
+.pit-figure figcaption .pit-credit {
+  display: block;
+  margin-top: 4px;
+}
 .pit-credit {
   font-size: 0.82rem;
   color: var(--muted);

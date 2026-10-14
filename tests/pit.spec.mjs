@@ -73,6 +73,9 @@ for (const [w, h] of [
     }
     // Scrolled to the end, the hero's toy is unloaded.
     await expect(page.locator('[data-pit-demo="grape"]')).not.toHaveAttribute("data-state", /./); // prettier-ignore
+    // …and its player page is gone: the frame is on about:blank, which lets its WebGL context go.
+    const left = await page.locator('[data-pit-demo="grape"] iframe').evaluate((f) => [f.getAttribute("src"), f.contentWindow.location.href, !!f.contentWindow.__splashery]); // prettier-ignore
+    expect(left).toEqual(["about:blank", "about:blank", false]);
     await page.waitForTimeout(2500);
     await page.screenshot({ path: path.join(SHOTS, `pit-end-${w}x${h}.png`) });
     expect(problems).toEqual([]);

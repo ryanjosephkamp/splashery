@@ -65,14 +65,15 @@ function unload(stage) {
   if (!stage.dataset.state || stage.dataset.state === "failed" || stage.dataset.keep) return;
   const frame = stage.querySelector("iframe");
   delete stage.dataset.state;
-  frame.removeAttribute("src");
+  // about:blank, so the player's page (and its WebGL context) is let go in every browser.
+  frame.src = "about:blank";
   frame.hidden = true;
 }
 
 function fail(stage, text) {
   stage.dataset.state = "failed";
   const frame = stage.querySelector("iframe");
-  frame.removeAttribute("src");
+  frame.src = "about:blank";
   frame.hidden = true;
   stage.querySelector(".pit-note").textContent = text;
 }

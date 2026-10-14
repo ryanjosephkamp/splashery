@@ -34,15 +34,17 @@ playful. No hype words, no exclamation marks, no emoji.
 ## State
 
 PR #633 is open (draft). First READY on October 14, 2026; the Operator then extended the time box by
-two hours for polish, and this is the polished state.
+two hours for polish. The Operator's review of October 14 (eight fixes) is applied: the claims list
+is now the manual's own six, the hero carries the grape's credit, and an unloaded toy's frame goes
+to about:blank.
 
 The page is at `site/about/splashery/`: a hero (the grape, live), then six numbered sections: one
 splat (a 2D Gaussian drawn in the page, with sliders), recipes (the toy piano with sound), photo to
 3D (with "Use your own photo" and drop), real data (the walnut CT scan), a QR code that scans (a
-test decodes it), and the claims list with the end buttons. Each live toy is `site/play/` in an
-iframe, started by an IntersectionObserver near the viewport and unloaded a screen away, so one or
-two run at once. Each shows its own still (rendered to match its live framing) until it is drawn,
-and keeps it with a note where WebGL2 and WebGPU are both missing.
+test decodes it), and the claims list (the manual's six) with the end buttons. Each live toy is
+`site/play/` in an iframe, started by an IntersectionObserver near the viewport and unloaded a
+screen away, so one or two run at once. Each shows its own still (rendered to match its live
+framing) until it is drawn, and keeps it with a note where WebGL2 and WebGPU are both missing.
 
 ## Notes
 

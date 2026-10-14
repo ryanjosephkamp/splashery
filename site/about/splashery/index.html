@@ -29,7 +29,7 @@
     <meta property="og:image:height" content="630" />
     <meta
       property="og:image:alt"
-      content="A grape, a toy piano, and a QR code, each made of soft 3D splats, beside the words: a 3D Gaussian splat engine and studio, in a browser tab"
+      content="A grape, a toy piano, and a QR code, each made of soft 3D splats, beside the words: a 3D Gaussian splat engine and studio, in a browser tab. Nothing to install. Nothing uploaded."
     />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="color-scheme" content="light dark" />
@@ -142,11 +142,11 @@
             <p class="pit-eyebrow">Splashery</p>
             <h1 id="h-pit">A 3D Gaussian splat engine and studio, in a browser tab.</h1>
             <p class="pit-lead">
-              Everything here is drawn from soft, colored splats, sorted and blended on your own
-              graphics chip. There is nothing to install, and nothing you open leaves your device.
+              Everything here is drawn from soft, colored splats, sorted by depth and blended on
+              your own device. There is nothing to install, and nothing you open leaves your device.
             </p>
             <p class="pit-stats">
-              <span><b>319</b> toys</span><span><b>0</b> installs</span
+              <span><b>319</b> scenes and tools</span><span><b>0</b> installs</span
               ><span><b>0</b> uploads</span>
             </p>
           </div>
@@ -172,7 +172,19 @@
               <p class="pit-note" role="status" aria-live="polite"></p>
             </div>
             <figcaption>
-              A grape, captured from photos. Drag to turn it; tap it to peel the skin.
+              A grape, captured from photos. Drag to turn it; tap it to peel the skin.<span
+                class="pit-credit"
+                >Grape: Dany Bittel,
+                <a href="https://superspl.at/scene/4ae563ac" target="_blank" rel="noopener"
+                  >SuperSplat</a
+                >,
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noopener"
+                  >CC BY 4.0</a
+                >, converted for Splashery.</span
+              >
             </figcaption>
           </figure>
         </section>
@@ -182,9 +194,9 @@
             <p class="pit-num">01</p>
             <h2 id="h-pit-one">One splat</h2>
             <p>
-              A splat is a soft blob with a position, a shape, a color, and an opacity. Change them
-              here. Every scene on the site is this, repeated a few hundred thousand times and
-              sorted back to front.
+              A splat is a soft blob with a position, a shape, a color, and an opacity. Change its
+              shape and opacity here. Every scene on the site is this, repeated a few hundred
+              thousand times and sorted back to front.
             </p>
             <p class="pit-links">
               <a href="../../../manual/splat.html"
@@ -308,7 +320,8 @@
             <p>
               A depth model runs in the page and lifts a single photo into a relief you can turn. It
               downloads only when you ask for it, and the photo is never sent anywhere. A short
-              video becomes a scene you can fly through, solved and trained on the device too.
+              video becomes a scene you can fly through: the camera path is solved and the splats
+              are trained on your device, in a browser with WebGPU.
             </p>
             <p class="pit-own" hidden>
               <button type="button" class="button" data-pit-own>Use your own photo</button
@@ -379,9 +392,9 @@
             <p class="pit-num">04</p>
             <h2 id="h-pit-data">Real data</h2>
             <p>
-              The science toys show measured things. This is a real walnut, scanned with X-ray CT at
-              CWI in Amsterdam: more than a thousand X-ray pictures, worked back into a volume. Each
-              splat is one small block of it, 0.3 mm across.
+              Some of the science toys use measured data. This is a real walnut, scanned with X-ray
+              CT at CWI in Amsterdam: more than a thousand X-ray pictures, worked back into a
+              volume. Each splat is one small block of it, 0.3 mm across.
             </p>
             <p class="pit-links">
               <a
@@ -409,7 +422,10 @@
               Data: Der Sarkissian et al., CWI,
               <a href="https://doi.org/10.5281/zenodo.2686726" target="_blank" rel="noopener"
                 >Zenodo</a
-              >, CC BY 4.0.
+              >,
+              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener"
+                >CC BY 4.0</a
+              >, resampled to 0.3 mm.
             </p>
           </div>
           <figure class="pit-figure">
@@ -497,48 +513,47 @@
         <section class="pit-sec pit-claims" aria-labelledby="h-pit-claims">
           <div class="pit-text">
             <p class="pit-num">06</p>
-            <h2 id="h-pit-claims">What other splat tools don't do</h2>
-            <p>
-              To our knowledge, after looking at the public ones. Splat editors work on captured
-              files; Splashery mostly starts from rules.
-            </p>
+            <h2 id="h-pit-claims">What we haven't seen elsewhere</h2>
+            <p>As far as we know. We have not tried every splat tool.</p>
           </div>
           <div class="pit-claim-wrap">
             <ul class="pit-claim-list">
               <li>
-                <b>Objects from code</b
+                <b>Toys made from rules</b
                 ><span
-                  >A recipe of a few kilobytes becomes a budget of 60,000 to 400,000 splats on your
-                  device, with parts that move as solid pieces.</span
+                  >A recipe of a few kilobytes is built into splats on your device, with a budget of
+                  60,000 to 400,000. The shape is never a large file to download.</span
                 >
               </li>
               <li>
-                <b>Nothing to install</b
-                ><span>WebGPU or WebGL2 in any current browser, on a phone or a desktop.</span>
+                <b>Equations as a language</b
+                ><span
+                  >Type x, y, and z in u, v, and t, and get an animated splat shape, with plain
+                  messages instead of crashes.</span
+                >
               </li>
               <li>
-                <b>Files stay on the device</b
+                <b>Moving parts in one splat cloud</b
                 ><span
-                  >Photos, videos, PDFs, splat files, and models are opened in the page. There is no
-                  upload and no account.</span
+                  >Hinges, pivots, sliders, morphs, and per-splat effects run on the graphics chip,
+                  so a chest opens without rebuilding anything.</span
+                >
+              </li>
+              <li>
+                <b>Hands-on physics</b><span>Toss, stack, pull apart, and pour, on splats.</span>
+              </li>
+              <li>
+                <b>Anything as splats</b
+                ><span
+                  >Photos and videos with depth, PDFs, QR codes, real science data, the night sky,
+                  and medical volumes.</span
                 >
               </li>
               <li>
                 <b>A whole scene in a link</b
                 ><span
-                  >The grape above, with its camera, fits in a link of 97 characters. No server
-                  holds it.</span
-                >
-              </li>
-              <li>
-                <b>Photos and video to 3D</b
-                ><span>Depth and structure are worked out in the browser, on a phone too.</span>
-              </li>
-              <li>
-                <b>A manual from one splat up</b
-                ><span
-                  >The Tinkerer's Manual teaches splats from a single bell curve to writing your own
-                  toys, with live demos in its pages.</span
+                  >The link to the grape above is 97 characters. It holds the toy and its settings,
+                  not your files, and no server stores it.</span
                 >
               </li>
             </ul>
