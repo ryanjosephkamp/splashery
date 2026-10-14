@@ -69,11 +69,33 @@ The browser scorer launches sandboxed Chromium with one page at a time and no un
 See `node tools/studio-truth.mjs --help`.
 
 `--depth-only` calls the actual product inference entry points in a minimal browser harness and
-explicitly omits render evidence. The real-app mode supplies flat front-view diagnostics, which do
-not establish novel-view quality or phone performance. Held-out scores remain null until
-training-frame exclusion and camera alignment are implemented.
+explicitly omits render evidence. Real-app mode supplies Photo flat front-view diagnostics. Moving
+depth is scored only when its decoded frame timestamp is observed through
+`requestVideoFrameCallback`; unregistered frames have null metrics. Moving color metrics are
+withheld because its separate renderer video copy seeks asynchronously and does not expose the
+uploaded decoded frame timestamp.
+
+After full generation finishes, prepare held-out truth and a separate training-only video:
+
+```sh
+blender -b --factory-startup --threads 4 --python-exit-code 1 \
+  --python tools/studio-truth-novel-truth.py -- --input .cache/studio-truth/full
+python3 tools/studio-truth-assets.py --input .cache/studio-truth/full --full --archive
+```
+
+Every eighth walk frame, excluding frame zero, supplies 37 evaluation-only views with exact depth
+and masks. `train.mp4` is encoded only from the other 262 raw JPEG frames; `train-frames.json` maps
+its new clock to the original walk clock. No held-out RGB frame enters that encoder. Photo uses only
+its still, and Moving uses its separate handheld clip. `--novel` renders Photo from these held-out
+cameras, using the source median-depth plane to calibrate the toy's stylized relief scale. This is a
+declared camera calibration assumption, not metric reconstruction or pixel fitting to the held-out
+images. Moving held-out scores remain null until both color and depth source poses can be
+registered. Video training/rendering remains null without WebGPU; its solved-camera adapter is not
+complete. None of these measurements establishes phone performance.
 
 Retrieve the full archive with `node tools/studio-truth-fetch.mjs`. An unpublished draft archive
 requires repository collaborator access. The tool verifies SHA-256, rejects links and unsafe archive
 paths, extracts into a new folder, and validates every sequence. It never publishes an archive. The
-report records when the archive is actually available.
+report records when the archive is actually available. The current draft release has no assets: the
+upload endpoint rejected the cloud credential. Local generation and local archive verification
+remain available; the default remote download cannot succeed until assets are uploaded.

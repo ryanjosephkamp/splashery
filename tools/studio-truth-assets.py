@@ -32,6 +32,8 @@ def validate(folder, full):
             seq = json.loads((root/'poses.json').read_text())
             expected = {'still':1,'handheld':120,'walk':300}[kind]
             assert len(seq['frames']) == expected, f'{scene["id"]}/{kind}: frame count'
+            assert seq['fps']==30
+            assert seq['duration_seconds']==(0 if kind=='still' else expected/30)
             for i,p in enumerate(seq['frames']):
                 assert p['frame'] == i and p['time'] == i/30
                 k,c2w,w2c = map(np.asarray, [p['K'],p['camera_to_world'],p['world_to_camera']])
@@ -40,7 +42,10 @@ def validate(folder, full):
                 assert np.linalg.det(c2w[:3,:3]) > .99999
                 assert k[0,0] == k[1,1] and k[0,2] == p['width']/2 and k[1,2] == p['height']/2
                 assert Image.open(root/p['rgb']).size == (p['width'],p['height'])
-                if kind!='walk':
+                assert ('depth' in p) == ('mask' in p), 'Depth and mask must occur together'
+                if kind in ['still','handheld']:
+                    assert 'depth' in p, f'{scene["id"]}/{kind}: missing required truth'
+                if 'depth' in p:
                     raw = gzip.decompress((root/p['depth']).read_bytes())
                     assert len(raw) == p['width']*p['height']*4
                     z = np.frombuffer(raw,dtype='<f4')
@@ -56,6 +61,30 @@ def validate(folder, full):
                 assert int(info['nb_frames']) == expected
                 assert info['r_frame_rate'] == '30/1'
                 assert abs(float(info['duration'])-expected/30)<.001
+                assert [info['width'],info['height']]==[p['width'],p['height']]
+        training_file=folder/scene['id']/'train-frames.json'
+        if full and training_file.exists():
+            training=json.loads(training_file.read_text())
+            indices={p['source_frame'] for p in training['frames']}
+            held_out=set(training['held_out'])
+            assert len(indices)==262 and len(held_out)==37
+            assert not indices & held_out and 0 not in indices
+            assert indices | held_out | {0} == set(range(300))
+            assert held_out=={p['frame'] for p in seq['frames'] if p.get('held_out')}
+            assert all('depth' in seq['frames'][i] for i in held_out)
+            info=json.loads(subprocess.check_output(['ffprobe','-v','error','-select_streams','v:0',
+                '-show_entries','stream=nb_frames,r_frame_rate,duration','-of','json',str(folder/scene['id']/'train.mp4')]))['streams'][0]
+            assert int(info['nb_frames'])==262 and info['r_frame_rate']=='30/1'
+            assert abs(float(info['duration'])-262/30)<.001
+    if full:
+        checksums=json.loads((folder/'checksums.json').read_text())
+        recorded={r['path'] for r in checksums}
+        actual={str(f.relative_to(folder)) for f in folder.rglob('*') if f.is_file() and f.name!='checksums.json'}
+        assert len(recorded)==len(checksums) and recorded==actual, 'Incomplete checksum inventory'
+        for record in checksums:
+            file=folder/record['path']
+            assert file.stat().st_size==record['bytes'], record['path']
+            assert digest(file)==record['sha256'], record['path']
     print(f'Validated {len(manifest["scenes"])} scenes, {count} frames, full={full}',flush=True)
     return manifest
 

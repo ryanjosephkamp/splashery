@@ -39,7 +39,8 @@ video dataset.
 Fresh checkpoint verification:
 
 - `python3 tests/studio-truth-camera.py`: 3 passed.
-- `node --test tests/studio-truth*.test.mjs`: 10 passed.
+- `node --test --test-concurrency=1 tests/studio-truth*.test.mjs`: 15 passed, including camera-gauge
+  alignment and median-plane projection checks.
 - `blender -b --factory-startup --threads 4 --python-exit-code 1 --python tests/studio-truth-blender.py`:
   3 passed against real BVH geometry.
 - Sandboxed Chromium 151.0.7922.173 launches with no graphics overrides; its initial probe offers
@@ -54,6 +55,31 @@ sequences. No full archive is hosted at this checkpoint.
 
 Rule check: none. Procedural assets are CC0, made by Ryan with Codex (GPT-6). There is no phone
 hardware evidence. Desktop browser viewports are not phone testing.
+
+## Fresh Photo baseline
+
+The [complete measurements and capture references](studio-truth-2026-10/main-photo.json) contain
+twelve real Photo inference runs and twelve actual flat front-view captures. All depth-hole and
+front-view alpha-hole counts are zero on valid diffuse truth pixels. Flat SSIM and sharpness measure
+source preservation, not novel-view quality. Sharpness greater than one can indicate oversharpening
+or resampling. The edge-band error is RGB MAE in a depth-edge band (0–255), a halo proxy rather than
+a pure halo detector. Video capability probes are blocked for all twelve inputs: no graphics
+adapter. Moving baseline scoring is in progress.
+
+| Scene      | Depth AbsRel | Depth RMSE (m) | Flat edge-band MAE | Flat SSIM | Flat sharpness ratio |
+| ---------- | -----------: | -------------: | -----------------: | --------: | -------------------: |
+| still-life |       0.0192 |         0.3366 |              3.009 |    0.9879 |                1.186 |
+| room       |       0.0236 |         0.2497 |              3.414 |    0.9831 |                1.034 |
+| forest     |       0.0451 |         0.9778 |              2.200 |    0.9843 |                1.146 |
+| stairs     |       0.0684 |         1.0228 |              3.266 |    0.9809 |                1.231 |
+| coast      |       0.0321 |         0.6223 |              3.026 |    0.9766 |                1.752 |
+| desk       |       0.0236 |         0.2730 |              3.204 |    0.9800 |                1.150 |
+| fur        |       0.0640 |         1.1291 |              5.301 |    0.9857 |                0.930 |
+| night      |       0.0702 |         1.3709 |              2.345 |    0.9656 |                0.792 |
+| lattice    |       0.1318 |         1.4699 |              6.899 |    0.9108 |                1.352 |
+| arches     |       0.1178 |         1.3540 |              2.450 |    0.9848 |                1.028 |
+| leaves     |       0.0509 |         1.1358 |              3.903 |    0.9647 |                1.500 |
+| steps      |       0.0261 |         0.6230 |              3.904 |    0.9805 |                1.242 |
 
 ## Measurement contract and limits
 
@@ -76,6 +102,26 @@ are measured in this view. These do not establish turned-view holes, disocclusio
 sharpness. Held-out results stay null. Video to 3D's capability probe reports no WebGPU graphics
 adapter. Training and held-out rendering are unavailable; a solved-camera alignment and a
 training-frame exclusion adapter are also still needed.
+
+The latest Moving probe registered 28 of 60 extracted frames and measured 27 adjacent depth-error
+changes. The other 32 frames have null metrics and break temporal adjacency. Its earlier color
+captures are excluded from baseline evidence: review found that the separate Sharp renderer video
+seeks asynchronously, so a fixed capture delay cannot establish its decoded color timestamp. Moving
+color and held-out scores are withheld until this registration is available. The scorer does not
+guess a decoded timestamp from a seek target.
+
+The supplemental builder reserves 37 walk frames for evaluation, adds their exact depth and masks,
+and encodes a separate training video from the other 262 raw frames. Photo held-out camera
+diagnostics use a declared source median-depth plane calibration; they have not run at this
+checkpoint. The code's similarity calibration is tested against a known transform, but the Video
+solved-camera/render adapter is still incomplete and has no GPU evidence.
+
+The first three complete scene sets were archived locally (329,879,486 bytes; SHA-256
+`08f23a76ffd7dbad21025e95bf34153b195cb29d399c57e4673519cb454b98e1`). This subset is not the full
+dataset. The existing draft release `studio-truth-2026-10` has no uploaded assets: GitHub's upload
+endpoint returned HTTP 401 while repository API and Git operations continued to work. No
+authentication or account privacy settings were changed. The default download command is therefore
+blocked until hosting succeeds.
 
 ## Preserved failures
 

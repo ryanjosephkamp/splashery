@@ -1,0 +1,892 @@
+{
+  "schema": 1,
+  "baselineSha": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
+  "date": "2026-10-14T02:06:44.463Z",
+  "platform": "linux",
+  "fixtureManifestSha256": "f5e3e120ffa91cd16d9d6640e4b56fc8cd53c6928e3babfa898725973e69b0ea",
+  "browser": "151.0.7922.173",
+  "launch": {
+    "chromiumSandbox": true,
+    "customGraphicsFlags": []
+  },
+  "profile": "desktop, mid tier; viewport 1440x900, DPR 1",
+  "coverage": {
+    "sceneIds": [
+      "still-life",
+      "room",
+      "forest",
+      "stairs",
+      "coast",
+      "desk",
+      "fur",
+      "night",
+      "lattice",
+      "arches",
+      "leaves",
+      "steps"
+    ],
+    "toys": ["photo", "video"],
+    "renderView": "flat front view only; photo flat=1, moving depth=0",
+    "movingRenderSampling": "first, last, and every eighth extracted frame; depth/jitter on all extracted frames",
+    "limitations": [
+      "No phone hardware measurements",
+      "No novel-view disocclusion coverage",
+      "Inverse-depth calibration uses 1-in-8 pixels, not metric-depth inference",
+      "Video held-out scoring requires a solved-camera alignment and training-frame exclusion adapter"
+    ]
+  },
+  "rows": [
+    {
+      "scene": "still-life",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 91050,
+        "scoredPixels": 91050,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.019206885726314064,
+        "rmseMeters": 0.3365831195305428,
+        "p95Meters": 0.5609477891399504,
+        "calibration": {
+          "scale": 0.017862327568203704,
+          "shift": 0.0387217980972172,
+          "calibrationPixels": 13007,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 10031.5,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 39395,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 0.8244616491094471,
+          "psnr": 40.30829791457491,
+          "exactMatch": false,
+          "ssim": 0.9879497348751809,
+          "ssimWindows": 724,
+          "sharpnessRatio": 1.1855471347000075,
+          "edgeHaloMae": 3.008866995073893,
+          "edgePixels": 3045,
+          "registration": {
+            "sx": 188.156185988388,
+            "sy": 135.78770029471386,
+            "sw": 583.687628023224,
+            "sh": 328.32428537236603,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/still-life-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "8dd6ef596e67f852d0d2e8cd47909842c8bc42577748d0b7ce7ad1cb70d47e51",
+        "depth": "2b3e68d6dbd9a29a0f161a0dbfea7dd3677b3343fcff2f9e64a91776c7631db0",
+        "mask": "6a36ecbc11e1bc60999c460666688bd52c4feae1d2d647c3a96d31c3f785d126"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "still-life",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "room",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 133255,
+        "scoredPixels": 133255,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.023605518148868774,
+        "rmseMeters": 0.24973787983848247,
+        "p95Meters": 0.46560600170981914,
+        "calibration": {
+          "scale": 0.020383695507642446,
+          "shift": 0.08790478570789181,
+          "calibrationPixels": 19037,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 3781.100000000093,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 57600,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 0.9715451388888889,
+          "psnr": 38.111336724207376,
+          "exactMatch": false,
+          "ssim": 0.9830563558081239,
+          "ssimWindows": 1125,
+          "sharpnessRatio": 1.0338670233328522,
+          "edgeHaloMae": 3.413842920935111,
+          "edgePixels": 5076,
+          "registration": {
+            "sx": 188.21851457053484,
+            "sy": 135.87291714069897,
+            "sw": 583.5629708589303,
+            "sh": 328.25416571860205,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/room-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "a913fb52e8a515455090a325b5151f419a4dd6b4c3a2c9efe1d7d5e4d8e8ae71",
+        "depth": "d66053700cd695fbfa059c854e0ac66761121902656138d2d064a7bc98ffff56",
+        "mask": "abc635d6a8a8f2b8addac77e1ce32aeead9fee077a0fcb042fe70b2816c14591"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "room",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "forest",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 106806,
+        "scoredPixels": 106806,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.04507592538980331,
+        "rmseMeters": 0.9777934584511261,
+        "p95Meters": 1.9344077421694355,
+        "calibration": {
+          "scale": 0.030121004707998902,
+          "shift": 0.04235068475825472,
+          "calibrationPixels": 15259,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 6926.800000000047,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 46255,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 1.1683133354952617,
+          "psnr": 39.32462419649517,
+          "exactMatch": false,
+          "ssim": 0.9843053182230012,
+          "ssimWindows": 823,
+          "sharpnessRatio": 1.1462989278514488,
+          "edgeHaloMae": 2.2002969274464315,
+          "edgePixels": 10328,
+          "registration": {
+            "sx": 188.21848763204062,
+            "sy": 135.87290198779618,
+            "sw": 583.5630247359187,
+            "sh": 328.25419602440763,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/forest-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "6e302d145a62abbcf2dd716f7419153091a6f6939e2f5521b09a01e5c0b1cab4",
+        "depth": "3ead333e91572cbf76ea668334e26133e7a9ba5505a6d201586b1ba4c3a0cadf",
+        "mask": "183ba5fbf6390956e281afc847bb56db420425ac6fa606366ec6b76e9bd412cd"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "forest",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "stairs",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 81035,
+        "scoredPixels": 81035,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.06840794333682626,
+        "rmseMeters": 1.0228442516780207,
+        "p95Meters": 1.9850951850089622,
+        "calibration": {
+          "scale": 0.03792972203989845,
+          "shift": 0.04009243443369211,
+          "calibrationPixels": 11589,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 6751.899999999907,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 35009,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 1.3276109952678834,
+          "psnr": 34.45419669350434,
+          "exactMatch": false,
+          "ssim": 0.9808590472191862,
+          "ssimWindows": 532,
+          "sharpnessRatio": 1.2311997164489326,
+          "edgeHaloMae": 3.266427539480902,
+          "edgePixels": 6691,
+          "registration": {
+            "sx": 188.15638625564722,
+            "sy": 135.86280558208438,
+            "sw": 583.598923067928,
+            "sh": 328.27438883583125,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/stairs-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "f85a149718bcceb0a815d1deb96698add211d772c0f52f895aa28fe03561d51c",
+        "depth": "f29cfc33ebae4a38af6c04c83fe2a58271eddf7b6ca3964bb77bfa432d89dc38",
+        "mask": "92a692c13cfb6e4121792a5bdf4bb94f5831f4f097d741aff4b61875775b4764"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "stairs",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "coast",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 46737,
+        "scoredPixels": 46737,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.03208708706183156,
+        "rmseMeters": 0.6222773095966146,
+        "p95Meters": 0.9150033700214433,
+        "calibration": {
+          "scale": 0.026194610828717175,
+          "shift": 0.03117938726395243,
+          "calibrationPixels": 6690,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 10257.5,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 20220,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 1.0095779756017145,
+          "psnr": 35.60776037081584,
+          "exactMatch": false,
+          "ssim": 0.9765921269428239,
+          "ssimWindows": 361,
+          "sharpnessRatio": 1.7515452588245046,
+          "edgeHaloMae": 3.0259453491581674,
+          "edgePixels": 3623,
+          "registration": {
+            "sx": 188.25672571270175,
+            "sy": 135.81605409732245,
+            "sw": 583.5868452936737,
+            "sh": 328.26759508792475,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/coast-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "e5d6cf55f7b47b9347bda772a033ee6c365335429f66357845343b38083b270b",
+        "depth": "f1b3db4ba46a3466d05554c1b4852a85bd68193dd7f73ac67e818a5cdf0b294c",
+        "mask": "c5daed7ca28be3b333fb6a63a3fd09fff6b8af3db3d508040c910761115729b5"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "coast",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "desk",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 130918,
+        "scoredPixels": 130918,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.023611421057336865,
+        "rmseMeters": 0.27300175435812984,
+        "p95Meters": 0.4708435238070816,
+        "calibration": {
+          "scale": 0.02803203820085574,
+          "shift": 0.05033486187539189,
+          "calibrationPixels": 18703,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 5181.9000000003725,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 56604,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 1.091495300685464,
+          "psnr": 36.420980626764376,
+          "exactMatch": false,
+          "ssim": 0.9799703927615485,
+          "ssimWindows": 1090,
+          "sharpnessRatio": 1.149990727982193,
+          "edgeHaloMae": 3.2040204769634206,
+          "edgePixels": 8009,
+          "registration": {
+            "sx": 188.24329786847113,
+            "sy": 135.84485424314016,
+            "sw": 583.5134042630577,
+            "sh": 328.2262845088815,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/desk-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "df87a33f04352ea196ac0a6e880db83c36950ee9133a020cf1264a52a93a390e",
+        "depth": "918b7964698ec9bdd00f10281d6443c5e0b711376b5015d323e48296551bbabe",
+        "mask": "b1698945ee788d30f0da0fd20fe0f1281cfc348e0e762fc04ef4f25b2dc73c07"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "desk",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "fur",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 94073,
+        "scoredPixels": 94073,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.06397036016998235,
+        "rmseMeters": 1.1290823461410937,
+        "p95Meters": 2.4580272200004476,
+        "calibration": {
+          "scale": 0.035219728484419836,
+          "shift": 0.061187759964882,
+          "calibrationPixels": 13423,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 4856.199999999721,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 40707,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 1.381777089935392,
+          "psnr": 34.36503075081263,
+          "exactMatch": false,
+          "ssim": 0.9856779094821957,
+          "ssimWindows": 757,
+          "sharpnessRatio": 0.9297046534096208,
+          "edgeHaloMae": 5.301124038651152,
+          "edgePixels": 5071,
+          "registration": {
+            "sx": 188.25672571270175,
+            "sy": 135.81605409732245,
+            "sw": 583.5868452936737,
+            "sh": 328.26759508792475,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/fur-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "287e7886fd7cc08c3e4813b54a10839636e86415146bed62df7f28071f84396b",
+        "depth": "fbeb8414e89ca9473cf32160aa13f28adad4df2908dce4fb9f6b7643dc46d0b0",
+        "mask": "4c912c4c8fca6c796a4979a541eb394cb0aed9aa1ca4309465447ad422cf1200"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "fur",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "night",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 72581,
+        "scoredPixels": 72581,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.07021886048702225,
+        "rmseMeters": 1.370853605783655,
+        "p95Meters": 1.6863311920197752,
+        "calibration": {
+          "scale": 0.03591685270849339,
+          "shift": 0.028146858163877058,
+          "calibrationPixels": 10365,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 4413.5999999996275,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 31457,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 2.000233122463469,
+          "psnr": 35.911117919391266,
+          "exactMatch": false,
+          "ssim": 0.9655874513184609,
+          "ssimWindows": 521,
+          "sharpnessRatio": 0.7917817158522891,
+          "edgeHaloMae": 2.344855665485928,
+          "edgePixels": 8187,
+          "registration": {
+            "sx": 188.15618098721592,
+            "sy": 135.83785450065776,
+            "sw": 583.6876380255682,
+            "sh": 328.3242909986845,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/night-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "bf69a1e4c758002068d9de4efb792f4a0a643d2b68d676a988593639dcde5f0a",
+        "depth": "844d01ec79ad6d2c29e4575e4ee3e0d3a1ff4832bca1f7188a2e0bd67858c832",
+        "mask": "08a7a68886d7e6414ceb1d5ab95743e57c9d3c19dd87d570d79e2d6a6965926c"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "night",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "lattice",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 96755,
+        "scoredPixels": 96755,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.13181825072144607,
+        "rmseMeters": 1.4699389037536086,
+        "p95Meters": 2.6186997531156138,
+        "calibration": {
+          "scale": 0.042582787909661704,
+          "shift": 0.06798809127142763,
+          "calibrationPixels": 13829,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 9476.799999999814,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 41791,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 6.021176808403723,
+          "psnr": 24.281333497709035,
+          "exactMatch": false,
+          "ssim": 0.9107720418684667,
+          "ssimWindows": 701,
+          "sharpnessRatio": 1.3515522483640794,
+          "edgeHaloMae": 6.899483875690938,
+          "edgePixels": 27319,
+          "registration": {
+            "sx": 188.1561751141905,
+            "sy": 135.83785119708097,
+            "sw": 583.6876497716189,
+            "sh": 328.32429760583807,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/lattice-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "9baf2c9e2eca5121227c97c958f461f33bdb995d2c0d21e45dc1039b59b57df9",
+        "depth": "8ff1c75946a0f44f09deeddcb12b6c790a14339c6740cbdf2dcda7ef4c5e2c74",
+        "mask": "4c4464b49190ac29e57bff7681e423a7d3a5e2f1b1377ecd867235436fb1cb95"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "lattice",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "arches",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 106462,
+        "scoredPixels": 106462,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.11776588982061371,
+        "rmseMeters": 1.3539839292626568,
+        "p95Meters": 3.0622151397493376,
+        "calibration": {
+          "scale": 0.046740833277858045,
+          "shift": 0.045727078639509255,
+          "calibrationPixels": 15225,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 7987.899999999907,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 46006,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 1.5982987726238607,
+          "psnr": 33.99542561387422,
+          "exactMatch": false,
+          "ssim": 0.9847794466528937,
+          "ssimWindows": 745,
+          "sharpnessRatio": 1.0278044612552781,
+          "edgeHaloMae": 2.450050921210994,
+          "edgePixels": 10801,
+          "registration": {
+            "sx": 188.1561651394921,
+            "sy": 135.83784558631325,
+            "sw": 583.6876697210159,
+            "sh": 328.3243088273735,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/arches-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "19e0f74710242f032e1be31de49a6b5432f73497092a91179385f2ea3cac5c79",
+        "depth": "8697ef62925f2d26613c75ace56a37ccaf3ac76e6e009b07cfdc56a06d31d0c6",
+        "mask": "4d016ec51493b6ba599ca7531ad8e2ffe71d5eeff2190b90c85f595b798a11b2"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "arches",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "leaves",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 88668,
+        "scoredPixels": 88668,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.0508893147576506,
+        "rmseMeters": 1.1357766745313862,
+        "p95Meters": 1.98081426369788,
+        "calibration": {
+          "scale": 0.03397469216957972,
+          "shift": 0.05162168878170639,
+          "calibrationPixels": 12659,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 5230.9000000003725,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 38368,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 2.087103836530442,
+          "psnr": 31.86890156974751,
+          "exactMatch": false,
+          "ssim": 0.9647217667686301,
+          "ssimWindows": 702,
+          "sharpnessRatio": 1.4999678222873754,
+          "edgeHaloMae": 3.9028154462094555,
+          "edgePixels": 15486,
+          "registration": {
+            "sx": 188.22971779848234,
+            "sy": 135.84331769198045,
+            "sw": 583.5405644030353,
+            "sh": 328.2415620873681,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/leaves-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "4ebd5dc4a850e7f247ffe28b5b5bfc70a84beda8811ed3ad1b1e328cee6da8e7",
+        "depth": "b47019e80eb85cddd85b99aca6c938bff58245f84ed6ca37c2f110fe7f05edd9",
+        "mask": "99869149ef2db2071847c51b01d7d1d468b5493c5d5cc097153e8838637257a1"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "leaves",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    },
+    {
+      "scene": "steps",
+      "toy": "photo",
+      "status": "measured",
+      "depth": {
+        "pixels": 85813,
+        "scoredPixels": 85813,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.0261349074853332,
+        "rmseMeters": 0.6230013409746812,
+        "p95Meters": 0.4446818954353944,
+        "calibration": {
+          "scale": 0.027258499478260527,
+          "shift": 0.04734913492239142,
+          "calibrationPixels": 12264,
+          "split": "index % 8 == 0"
+        },
+        "inferenceMs": 5844,
+        "grid": [518, 294]
+      },
+      "frontView": [
+        {
+          "frame": 0,
+          "pixels": 37163,
+          "holePixels": 0,
+          "holeFraction": 0,
+          "mae": 1.2764129196602356,
+          "psnr": 33.62234064445054,
+          "exactMatch": false,
+          "ssim": 0.9805108894019572,
+          "ssimWindows": 683,
+          "sharpnessRatio": 1.2419693183106508,
+          "edgeHaloMae": 3.903847752015288,
+          "edgePixels": 4011,
+          "registration": {
+            "sx": 188.25695697382392,
+            "sy": 135.89454099219407,
+            "sw": 583.4860860523522,
+            "sh": 328.210918015612,
+            "capture": [960, 600]
+          },
+          "convention": "flat front view, actual toy projection; no held-out or disocclusion claim",
+          "image": "photo-front/steps-photo-000.png"
+        }
+      ],
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "photo capture",
+      "inputHashes": {
+        "rgb": "1c73980d5513ffb4f4380baf52b9013ec06a450831b0756217fc67ba7da643f9",
+        "depth": "e77669eaabc30352bcf3ae0a3f50b83ac367eabbf5c717573db7b92c04dc58bf",
+        "mask": "64c6c10b887af9a0cda27f10cb80e41489be53c9f422c91f08ebf72cab490086"
+      },
+      "progress": ""
+    },
+    {
+      "scene": "steps",
+      "toy": "video",
+      "status": "blocked",
+      "depth": null,
+      "frontView": null,
+      "jitter": null,
+      "heldOutSharpness": null,
+      "errors": [],
+      "phase": "app startup",
+      "reason": "WebGPU is here but found no graphics adapter.",
+      "holes": null,
+      "edgeHalo": null
+    }
+  ]
+}

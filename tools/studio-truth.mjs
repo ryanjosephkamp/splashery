@@ -17,6 +17,8 @@ import {
   movingDepth,
   captureFront,
   trainVideo,
+  prepareNovel,
+  captureNovel,
 } from "./studio-truth/browser.mjs";
 import {
   fitInverseDepth,
@@ -36,7 +38,7 @@ for (let i = 2; i < process.argv.length; i++) {
 }
 if (args.help) {
   console.log(
-    "node tools/studio-truth.mjs --fixtures .cache/studio-truth/full-v1 --out .cache/studio-truth/main.json [--scenes still-life,room] [--toys photo,moving,video] [--timeout 600]\nRuns unmodified product modules; one sandboxed page, no GPU policy overrides. Flat front-view diagnostics are labeled separately from unavailable held-out metrics.",
+    "node tools/studio-truth.mjs --fixtures .cache/studio-truth/full-v1 --out .cache/studio-truth/main.json [--scenes still-life,room] [--toys photo,moving,video] [--timeout 600] [--novel | --depth-only]\nRuns unmodified product modules; one sandboxed page, no GPU policy overrides. --novel adds held-out Photo camera diagnostics with source median-plane calibration. Unregistered Moving color and unavailable GPU measurements remain null.",
   );
   process.exit(0);
 }
@@ -65,6 +67,8 @@ const toys = String(args.toys || "photo,moving,video").split(",");
 if (toys.some((t) => !["photo", "moving", "video"].includes(t))) throw new Error("Unknown toy");
 const timeoutMs = 1000 * Number(args.timeout || 600);
 const depthOnly = !!args["depth-only"];
+const novel = !!args.novel;
+if (novel && depthOnly) throw new Error("Novel-view scoring requires the real app");
 if (!Number.isFinite(timeoutMs) || timeoutMs < 1000 || timeoutMs > 1800000)
   throw new Error("Timeout must be 1–1800 seconds");
 const report = {
@@ -83,14 +87,19 @@ const report = {
     toys,
     renderView: depthOnly
       ? "inference only; no render evidence"
-      : "flat front view only; photo flat=1, moving depth=0",
+      : novel
+        ? "Photo flat front view and held-out walk cameras; Moving color unregistered"
+        : "Photo flat front view; Moving color unregistered",
     movingRenderSampling:
-      "first, last, and every eighth extracted frame; depth/jitter on all extracted frames",
+      "depth/jitter only for decoded frames registered by requestVideoFrameCallback; color metrics withheld",
     limitations: [
       "No phone hardware measurements",
-      "No novel-view disocclusion coverage",
+      novel
+        ? "Held-out Photo views use source median-plane calibration, not a metric reconstruction"
+        : "No novel-view disocclusion coverage",
       "Inverse-depth calibration uses 1-in-8 pixels, not metric-depth inference",
-      "Video held-out scoring requires a solved-camera alignment and training-frame exclusion adapter",
+      "Novel-view relief calibration assumes the source median plane; the toys remain stylized, nonmetric geometry",
+      "Video held-out training/rendering requires WebGPU",
     ],
   },
   rows: [],
@@ -148,6 +157,40 @@ async function front(page, toy, scene, t, frame = 0) {
     convention: capture.convention,
     image: path.relative(root, file),
   };
+}
+
+async function heldOut(page, toy, scene, base) {
+  const sequence = JSON.parse(
+    await fs.readFile(path.join(fixtureRoot, scene, "walk", "poses.json"), "utf8"),
+  );
+  const selected = sequence.frames.filter((frame) => frame.held_out);
+  if (selected.length !== 37) throw new Error("Generate the 37 held-out walk truth frames first");
+  const values = Array.from(base.z)
+    .filter((z, i) => base.mask[i] === 1 && Number.isFinite(z) && z > 0)
+    .sort((a, b) => a - b);
+  const median = values[Math.floor(values.length / 2)];
+  await prepareNovel(page, toy);
+  const rows = [];
+  for (const pose of selected) {
+    const t = await truth(scene, "walk", pose.frame);
+    const capture = await captureNovel(page, toy, base.pose, t.pose, median);
+    const ref = sampleTruth(t, capture.w, capture.h);
+    const file = path.join(
+      evidence,
+      `${scene}-${toy}-held-out-${String(pose.frame).padStart(3, "0")}.png`,
+    );
+    await fs.writeFile(file, Buffer.from(capture.png, "base64"));
+    rows.push({
+      frame: pose.frame,
+      time: pose.time,
+      ...imageMetrics(ref.rgba, Uint8Array.from(capture.data), 640, 360, ref.mask, ref.edges),
+      camera: capture.camera,
+      sourceMedianMeters: median,
+      inputHashes: t.hashes,
+      image: path.relative(root, file),
+    });
+  }
+  return rows;
 }
 
 const bounded = async (fn, ms) => {
@@ -240,31 +283,53 @@ try {
               await save();
               row.frontView = [await front(page, toy, scene.id, t)];
             }
+            if (novel) {
+              row.phase = "held-out photo cameras";
+              await save();
+              row.heldOutSharpness = await heldOut(page, toy, scene.id, t);
+            }
             row.status = "measured";
           } else if (toy === "moving") {
             await fs.access(path.join(fixtureRoot, scene.id, "handheld.mp4"));
             row.phase = "moving clip inference";
             await save();
             const clip = await openMoving(page, `/__truth/${scene.id}/handheld.mp4`, !depthOnly);
+            row.frameTimestampSources = [...new Set(clip.captures.map((frame) => frame.source))];
+            row.captureFrames = clip.captures;
+            row.unregisteredFrames = clip.captures.flatMap((frame, i) =>
+              frame.source === "requestVideoFrameCallback" ? [] : [i],
+            );
             row.sourceClipSha256 = createHash("sha256")
               .update(await fs.readFile(path.join(fixtureRoot, scene.id, "handheld.mp4")))
               .digest("hex");
             row.depth = [];
             row.jitter = [];
-            row.frontView = [];
+            row.frontView = null;
+            row.colorStatus = "unregistered";
+            row.colorReason =
+              "The Sharp renderer asynchronously seeks a separate video copy; its uploaded decoded color timestamp is not exposed. Color, hole, and edge-band render metrics remain null.";
             let fit, previous;
             for (let i = 0; i < clip.times.length; i++) {
-              const frame = Math.max(0, Math.min(119, Math.round(clip.times[i] * 30)));
+              if (clip.captures[i].source !== "requestVideoFrameCallback") {
+                row.depth.push({ frame: i, status: "unregistered", metrics: null });
+                previous = null;
+                continue;
+              }
+              const frame = Math.max(0, Math.min(119, Math.round(clip.captures[i].time * 30)));
               const t = await truth(scene.id, "handheld", frame),
                 sampled = sampleTruth(t, clip.w, clip.h);
               const prediction = Float32Array.from(await movingDepth(page, i));
-              fit ||= fitInverseDepth(prediction, sampled.z, sampled.mask);
+              if (!fit) {
+                fit = fitInverseDepth(prediction, sampled.z, sampled.mask);
+                row.calibrationFrame = i;
+              }
               const metric = depthError(prediction, sampled.z, sampled.mask, fit),
                 calibrated = calibratedDepth(prediction, fit);
               row.depth.push({
                 frame: i,
                 truthFrame: frame,
                 time: clip.times[i],
+                decodedTime: clip.captures[i].time,
                 ...metric,
                 inputHashes: t.hashes,
               });
@@ -284,13 +349,19 @@ try {
                     clip.h,
                   ),
                 });
-              if (!depthOnly && (i % 8 === 0 || i === clip.times.length - 1))
-                row.frontView.push(await front(page, toy, scene.id, t, i));
               previous = { calibrated, sampled };
             }
             row.calibration = fit;
             row.extractedFrames = clip.times.length;
-            row.status = "measured";
+            if (novel) {
+              row.heldOutStatus = "unregistered";
+              row.heldOutReason =
+                "The displayed color source pose and inferred depth source pose cannot both be registered; no held-out Moving score is claimed.";
+            }
+            row.status = row.unregisteredFrames.length ? "partial" : "measured";
+            if (row.unregisteredFrames.length)
+              row.reason =
+                "Unregistered decoded frames have null metrics; no all-frame pass is claimed.";
           } else {
             // Probe before accessing a full dataset; an absent GPU is an actual limitation.
             Object.assign(row, await trainVideo(page, `/__truth/${scene.id}/walk.mp4`, timeoutMs));

@@ -21,8 +21,14 @@ export async function openPhoto(page, url) {
 export async function showPhoto(page) {
   return page.evaluate(async () => {
     const { app, player } = window.__splashery;
-    await app.chooseToy("photo-3d");
-    await app.setToyOptions({ source: "custom", view: "sharp", detail: "photo" });
+    const scene = structuredClone(player.scene);
+    scene.toy = {
+      kind: "builtin",
+      id: "photo-3d",
+      options: { source: "custom", view: "sharp", detail: "photo" },
+    };
+    scene.motion.controls = {};
+    await app.applyScene(scene);
     player.camera.setTurntable(false);
     player.idle.weight = 0;
   });
@@ -36,11 +42,63 @@ export async function openMoving(page, url, render = true) {
       if (!response.ok) throw new Error("Missing handheld clip");
       const file = new File([await response.blob()], "truth.mp4", { type: "video/mp4" });
       // The toy's own input.read both invokes openClip and installs its custom clip.
-      const options = await m.MOVING_PHOTO.input.read(null, "truth.mp4", file);
+      const captures = [];
+      const clocks = new WeakMap();
+      const inCallback = new WeakSet();
+      const videoPrototype = HTMLVideoElement.prototype;
+      const canvasPrototype = CanvasRenderingContext2D.prototype;
+      const originalCallback = videoPrototype.requestVideoFrameCallback;
+      const originalDraw = canvasPrototype.drawImage;
+      if (originalCallback)
+        videoPrototype.requestVideoFrameCallback = function (callback) {
+          return originalCallback.call(this, (now, metadata) => {
+            clocks.set(this, metadata.mediaTime);
+            inCallback.add(this);
+            try {
+              callback(now, metadata);
+            } finally {
+              inCallback.delete(this);
+            }
+          });
+        };
+      canvasPrototype.drawImage = function (image, ...args) {
+        if (image instanceof HTMLVideoElement) {
+          const exact = inCallback.has(image) && clocks.has(image);
+          captures.push({
+            time: exact ? clocks.get(image) : image.currentTime,
+            source: exact ? "requestVideoFrameCallback" : "seek target; decoded pose unverified",
+            ...(exact
+              ? {}
+              : {
+                  lastCallbackTime: clocks.get(image),
+                  ended: image.ended,
+                  paused: image.paused,
+                  seeking: image.seeking,
+                }),
+          });
+        }
+        return originalDraw.call(this, image, ...args);
+      };
+      let options;
+      const progress = setInterval(() => globalThis.__truthStatus?.(m.MOVING.status), 2000);
+      try {
+        options = await m.MOVING_PHOTO.input.read(null, "truth.mp4", file);
+      } finally {
+        clearInterval(progress);
+        if (originalCallback) videoPrototype.requestVideoFrameCallback = originalCallback;
+        canvasPrototype.drawImage = originalDraw;
+      }
       if (render) {
+        await globalThis.__truthStatus?.("Preparing the custom Moving photo renderer");
         const { app, player } = window.__splashery;
-        await app.chooseToy("moving-photo-3d");
-        await app.setToyOptions({ ...options, depth: 0, view: "sharp", detail: "photo" });
+        const scene = structuredClone(player.scene);
+        scene.toy = {
+          kind: "builtin",
+          id: "moving-photo-3d",
+          options: { ...options, depth: 0, view: "sharp", detail: "photo" },
+        };
+        scene.motion.controls = {};
+        await app.applyScene(scene);
         player.camera.setTurntable(false);
         player.idle.weight = 0;
         player.motion.setControl("play", 0, { snap: true });
@@ -52,7 +110,9 @@ export async function openMoving(page, url, render = true) {
         t += delay / 1000;
         return at;
       });
-      return { w: clip.w, h: clip.h, times };
+      if (captures.length !== times.length)
+        throw new Error("Decoded frame timestamp observation is incomplete");
+      return { w: clip.w, h: clip.h, times, captures };
     },
     { url, render },
   );
@@ -66,6 +126,83 @@ export async function movingDepth(page, index) {
         (v) => v / 255,
       ),
     index,
+  );
+}
+
+export async function prepareNovel(page, toy) {
+  await page.evaluate(async (toy) => {
+    const { app, player } = window.__splashery;
+    if (toy === "photo") player.motion.setControl("flat", 0, { snap: true });
+    else {
+      await app.setToyOptions({ depth: 0.6 });
+      player.motion.setControl("play", 0, { snap: true });
+      await (await import("/src/packs/moving-photo.js")).movingTransport.seek(0);
+    }
+    player.idle.weight = 0;
+    player.camera.setTurntable(false);
+  }, toy);
+}
+
+export async function captureNovel(page, toy, base, target, median) {
+  return page.evaluate(
+    async ({ toy, base, target, median }) => {
+      const { calibratedCamera } = await import("/tools/studio-truth/novel.mjs");
+      const pc = await import("/src/pc.js");
+      const { player } = window.__splashery;
+      const recipe =
+        toy === "photo"
+          ? (await import("/src/packs/photo-3d.js")).RECIPES["photo-3d"]
+          : (await import("/src/packs/moving-photo.js")).MOVING_PHOTO;
+      const rect = recipe.photo.rect();
+      const pose = calibratedCamera(base, target, median, rect[3] - rect[1]);
+      const position = player.fromRecipe(pose.position);
+      const origin = player.fromRecipe([0, 0, 0]);
+      const basis = [0, 1, 2].map((axis) => {
+        const unit = [0, 0, 0];
+        unit[axis] = 1;
+        const p = player.fromRecipe(unit).map((v, i) => v - origin[i]);
+        const length = Math.hypot(...p);
+        return p.map((v) => v / length);
+      });
+      const axis = (column) =>
+        [0, 1, 2].map((r) =>
+          [0, 1, 2].reduce((sum, c) => sum + basis[c][r] * pose.rotation[c][column], 0),
+        );
+      const up = axis(1),
+        back = axis(2);
+      const matrix = new pc.Mat4().setLookAt(
+        new pc.Vec3(...position),
+        new pc.Vec3(...position.map((v, i) => v - back[i])),
+        new pc.Vec3(...up),
+      );
+      const q = new pc.Quat().setFromMat4(matrix);
+      const oldPose = player.camera.pose;
+      player.camera.pose = () => ({
+        position,
+        rotation: [q.x, q.y, q.z, q.w],
+        fov: pose.fov,
+        distance: Math.hypot(...position),
+      });
+      const st = player.stage;
+      st.setFixedSize([640, 360]);
+      st.setClearColor([0, 0, 0], 0);
+      try {
+        for (let i = 0; i < 3; i++) await st.captureFrame();
+        const canvas = await st.captureFrame();
+        const data = Array.from(canvas.getContext("2d").getImageData(0, 0, 640, 360).data);
+        return {
+          w: 640,
+          h: 360,
+          data,
+          png: canvas.toDataURL("image/png").split(",")[1],
+          camera: pose,
+        };
+      } finally {
+        player.camera.pose = oldPose;
+        st.setFixedSize(null);
+      }
+    },
+    { toy, base, target, median },
   );
 }
 
