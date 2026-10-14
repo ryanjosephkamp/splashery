@@ -3914,6 +3914,18 @@ export const TOYS = [
     tags: "volume viewer ct mri micro-ct microscope scan dicom nifti nii tiff stack raw voxel slice window level bone soft tissue maximum intensity projection mip cut plane walnut gar fish medical imaging",
     camera: { yaw: 0.35, pitch: 0.2, roll: 0, distance: 3.8 },
   },
+  // ---- Pack: shape-morph (Codex task 78c) ----
+  {
+    id: "shape-morph",
+    label: "Shape morph",
+    category: "lab",
+    kind: "kit",
+    pack: "shape-morph",
+    labs: true,
+    tags: "overprint word lorenz attractor klein bottle gyroid loop qr code splat cloud morph ink drag",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.5 },
+  },
+
   // ---- Pack: lab (lane Lab) ----
   {
     id: "splat-field",
@@ -4467,6 +4479,7 @@ const STILL_TOYS = new Set([
   "periodic-table",
   "real-elements", // lane Elements
   "splat-equation",
+  "shape-morph",
   "chladni-plate",
   "anatomy-atlas",
   "song-landscape",

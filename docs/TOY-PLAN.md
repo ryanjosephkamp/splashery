@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 462 toys. 462 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 439.
+- 463 toys. 463 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 440.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 23.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -77,13 +77,13 @@ Proposals below are suggestions; the owner may change them.
   Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni
   plate, Sound in a box, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
   Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
-  viewer, Splat field, Light lab, Baked chest, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab,
-  Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living
-  city, Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a
-  fruit, Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page
-  Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo
-  Dash, Note Rider, Night sky, Data in 3D.
+  viewer, Shape morph, Splat field, Light lab, Baked chest, Thermal ellipsoids, Super-resolution
+  microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench,
+  Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief
+  map, Living city, Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT
+  scan, MRI of a fruit, Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain
+  Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a
+  Shadow, Photo Dash, Note Rider, Night sky, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -3979,8 +3979,18 @@ Proposals below are suggestions; the owner may change them.
     on its axes plays the drop and rise, not only a tap on a point.
   - Sound: A soft thud as the marks land, a light knock, and a breath as they rise.
 
-## Lab (4)
+## Lab (5)
 
+- **Shape morph** (`shape-morph`). Now: tap: Scatter and re-form. Plan: keep.
+  - Owner: Codex task 78c: port Ryan Kamp's Overprint concept as a labs toy.
+  - Effect: Every splat flies to its place in one of six forms. Drags push nearby splats, which
+    settle back; a tap scatters and re-forms the cloud.
+  - Improved: Codex task 78c: Word, Lorenz attractor, Klein bottle, gyroid, loop, and QR forms in
+    one cloud, with a smaller Auto budget on phones. The Form picker morphs from the last rendered
+    positions, including an unfinished flight. The QR generator loads only for the QR form. Optional
+    teal and orange inks, editable word and QR text, and spring-back drag interaction. Made by Ryan
+    with Codex (GPT-6).
+  - Sound: A quiet, short rustle as the cloud scatters and re-forms.
 - **Splat field** (`splat-field`). Now: tap: Send a pulse. Plan: keep.
   - Owner: The owner's note "big new Splashery ideas" and his answer of September 29, 2026 (lane
     Lab; labs only): splat fields on the GPU.

@@ -1602,6 +1602,11 @@ export const TOY_HELP = {
     about:
       "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type words (up to 40 letters) and each letter gets its own chain of circles, five letters at a time.",
   },
+  "shape-morph": {
+    howTo: "Pick a form in the Toy tab. Drag to push the splats; tap to scatter and re-form.",
+    about:
+      "One cloud of Gaussian splats can take six forms: a word, the Lorenz attractor, a Klein bottle, a gyroid, a loop, and a QR code. Pick a form in the Toy tab and each splat flies from its current position to its new place. Drag through the cloud to push nearby splats, then let go and watch them settle back. A tap scatters the splats and brings them home.\n\nChange the word or QR text in the Toy tab, or turn on Two-ink print for teal and orange splats. The QR form keeps dark ink and a light quiet margin so it can be read once it has settled, facing the camera. It holds up to 42 bytes of text. Nothing leaves your device.\n\nFrom a concept by Ryan Kamp. The form math comes from his Overprint concept; the Klein bottle reuses Splashery's Splat equation preset. Made by Ryan with Codex (GPT-6). Code is MIT; the original procedural forms and sound are CC0.",
+  },
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
     about:

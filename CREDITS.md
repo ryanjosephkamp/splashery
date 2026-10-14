@@ -217,6 +217,16 @@ browser from a seed by `src/generators.js`. The toys from packs (`src/packs/*.js
 beating heart, the campfire and the treasure chest) are built in the browser by the toy kit
 (`src/kit.js`) from recipes written for Splashery. None of them use external assets.
 
+### Shape morph (Codex task 78c)
+
+From a concept by Ryan Kamp. The six forms are ported from his Overprint concept, with the Klein
+bottle using Splashery's existing Splat equation preset and the word using the built-in bitmap font.
+No reference renderer, font files, or QR encoder were copied. The QR form uses the existing vendored
+QR generator listed in LICENSES.md, loaded only when that form is selected.
+
+Made by Ryan with Codex (GPT-6), October 14, 2026. The new pack code is MIT; the original procedural
+forms, thumbnail, and synthesized rustle are CC0 1.0. They use no outside assets.
+
 ### Baked assets (lane Baked engine)
 
 The Baked chest (labs) is original: built with Splashery's kit by `tools/bkd-bake-chest.mjs`, baked

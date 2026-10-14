@@ -343,6 +343,7 @@ export const SITE_TOY_IDS = [
   "seashell-spiral",
   "seeded-loaf",
   "shardball",
+  "shape-morph",
   "shield",
   "shuttlecock",
   "sierpinski",
