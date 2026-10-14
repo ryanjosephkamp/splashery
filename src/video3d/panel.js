@@ -96,20 +96,38 @@ export function progressCard() {
   stats.hidden = true;
   const plan = el("p", { class: "v3d-plan" });
   plan.hidden = true;
+  const assessment = el("div", { class: "v3d-assessment", role: "status" });
+  assessment.hidden = true;
   const guide = el("div", { class: "v3d-guide" });
   guide.hidden = true;
   const buttons = el("div", { class: "v3d-row" });
-  root.append(title, plan, list, bar, preview, note, err, guide, stats, buttons);
+  root.append(title, assessment, plan, list, bar, preview, note, err, guide, stats, buttons);
   document.body.append(root);
   const started = {};
   const secs = {};
   let current = null;
   let pace = null; // training's first measured step: { t, done }
+  let cancelConfirm = null;
+  // Completed cards also belong to this toy, rather than covering the next toy somebody opens.
+  const lifetime = setInterval(() => {
+    if (!root.isConnected) {
+      clearInterval(lifetime);
+      cancelConfirm?.();
+      return;
+    }
+    const toy = globalThis.window?.__splashery?.player?.scene?.toy;
+    if (toy && toy.id !== "video-3d") {
+      root.hidden = true;
+      cancelConfirm?.();
+    }
+  }, 250);
 
   const api = {
     root,
     preview,
     reset(text = "") {
+      cancelConfirm?.();
+      cancelConfirm = null;
       for (const li of Object.values(rows)) {
         li.className = "";
         li.lastChild.textContent = "";
@@ -123,6 +141,7 @@ export function progressCard() {
       fill.style.width = "0";
       preview.hidden = true;
       plan.hidden = true;
+      assessment.hidden = true;
       guide.hidden = true;
       err.hidden = true;
       stats.hidden = true;
@@ -130,6 +149,22 @@ export function progressCard() {
       buttons.replaceChildren();
       note.textContent = text;
       root.hidden = false;
+    },
+    assessment(result) {
+      if (!result) return;
+      assessment.replaceChildren(el("p", {}, result.message));
+      const ul = el("ul");
+      for (const reason of result.reasons || []) ul.append(el("li", {}, reason));
+      assessment.append(
+        ul,
+        el(
+          "p",
+          {},
+          "A quick estimate, not a guarantee. Moving people, cars, and reflections can still blur or vanish.",
+        ),
+      );
+      assessment.dataset.verdict = result.verdict;
+      assessment.hidden = false;
     },
     // e: { stage, done, total, note }
     progress(e) {
@@ -235,15 +270,24 @@ export function progressCard() {
     },
     // Before training (r7): the setting, a rough time and, on a phone, a warning, with Start and
     // Cancel. Resolves true to start.
-    confirm(text) {
+    confirm(text, { signal } = {}) {
       plan.textContent = text;
       plan.hidden = false;
       return new Promise((resolve) => {
+        const finish = (value) => {
+          signal?.removeEventListener("abort", cancel);
+          if (cancelConfirm === cancel) cancelConfirm = null;
+          resolve(value);
+        };
+        const cancel = () => finish(false);
+        cancelConfirm = cancel;
         const go = el("button", { type: "button", class: "primary", id: "v3d-start" }, "Start");
         const no = el("button", { type: "button", id: "v3d-cancel" }, "Cancel");
-        go.addEventListener("click", () => resolve(true));
-        no.addEventListener("click", () => resolve(false));
+        go.addEventListener("click", () => finish(true));
+        no.addEventListener("click", cancel);
+        signal?.addEventListener("abort", cancel, { once: true });
         buttons.replaceChildren(go, no);
+        if (signal?.aborted) cancel();
       });
     },
     // The plan line, kept while it works.

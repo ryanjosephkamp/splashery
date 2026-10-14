@@ -100,6 +100,7 @@ export function undistortFrames(frames, recon) {
  * @property {GPUDevice} [device]        host-owned WebGPU device to share
  * @property {number} [maxIters=60000]   auto-stop; trainer schedules scale to it
  * @property {number} [itersPerFrame=15] training batch per animation frame
+ * @property {number} [refineStart=1500] first refinement threshold (short browser runs may lower it)
  * @property {number} [initTarget=60000] initial Gaussian count (grows during training)
  * @property {number|'auto'|null} [holdout='auto']  frame excluded from training
  *   and scored as the novel-view metric; 'auto' picks a sharp mid-sequence frame
@@ -855,7 +856,7 @@ export class Session {
       const tEnc = performance.now() - t0;
 
       // periodic refinement: relocate dead splats + grow capacity (MCMC-lite)
-      if (trainer.iter > 1500 &&
+      if (trainer.iter > (this.opts.refineStart ?? 1500) &&
           trainer.iter - (trainer.lastRefine || 0) >= (this.opts.refineEvery ?? 2500)) {
         trainer.lastRefine = trainer.iter;
         const r0 = performance.now();
