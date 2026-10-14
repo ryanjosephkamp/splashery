@@ -6,6 +6,9 @@ not real captures, real places, or measured depth references. Original assets ar
 B4; the asset registry keeps the project's `AI-made by the owner` label. Nothing here is wired into
 a science, math, or engineering toy, or into a public sample picker.
 
+The `depthLabSamples` records intentionally omit `toy`: these are test inputs, so the site builder
+must not list them as Photo to 3D samples or add their internal record links to a public toy page.
+
 There are **160 committed 1,280 × 1,280 JPEGs** in `assets/depth-lab/j/`: ten source pictures and
 150 controlled variants, totaling **26,251,380 bytes (26.25 MB)** against the 30 MB limit. The
 [manifest](../../../tools/depth-lab/j.json) uses `file` paths relative to `assets/depth-lab/`.
