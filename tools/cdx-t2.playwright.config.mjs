@@ -1,6 +1,7 @@
 // Task-local configuration: use the installed browser with its sandbox.
 // No unsafe graphics flags or GPU blocklist overrides from the shared config.
 import { defineConfig } from "@playwright/test";
+import { fileURLToPath } from "node:url";
 
 const port = Number(process.env.SPLASHERY_PORT) || 4173;
 export default defineConfig({
@@ -22,6 +23,7 @@ export default defineConfig({
     },
   },
   webServer: {
+    cwd: fileURLToPath(new URL("../", import.meta.url)),
     command: `python3 -m http.server ${port} --bind 127.0.0.1`,
     url: `http://127.0.0.1:${port}/`,
     reuseExistingServer: true,

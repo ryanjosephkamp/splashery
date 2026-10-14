@@ -69,5 +69,12 @@ without changing assertions or browser settings. It was verified with one existi
 passed in 9.4 seconds including startup. These are execution checkpoints, not a claim that either
 full comparison is complete.
 
+The first branch browser attempt was invalid: the task-local server started in `tools/` after the
+manually started server was gone, so it returned a directory listing instead of the app. Its 74 Node
+task checks passed, but browser readiness timeouts are not application-regression evidence. The run
+and its interrupted case are preserved separately. The configuration now explicitly serves the
+repository root; one existing readiness/help check passed with that automatic server, and the full
+283-title branch run will be repeated.
+
 [Original tier audit](kit-tiers-2026-10.md). Rule check: none. Draft PR only; no merge or
 deployment.
