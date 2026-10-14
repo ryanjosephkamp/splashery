@@ -2687,6 +2687,17 @@ export const TOYS = [
     tags: "duoprism 4d four dimensions polygon prism polytope projection",
     camera: { yaw: 0.55, pitch: 0.35, roll: 0, distance: 4.1 },
   },
+  // ---- Pack: one-splat (Codex task 78a) ----
+  {
+    id: "one-splat",
+    label: "One splat, many splats",
+    category: CATEGORIES.find((c) => c.label === "Math").id,
+    kind: "kit",
+    pack: "one-splat",
+    labs: true,
+    tags: "gaussian pixels word picture tree mean covariance eigenvector split portfolio",
+    camera: { yaw: 0, pitch: 0, roll: 0, distance: 3 },
+  },
   // Lane Manual: the splat equation toy (its own pack, on the math shelf).
   {
     id: "splat-equation",
@@ -4467,6 +4478,7 @@ const STILL_TOYS = new Set([
   "periodic-table",
   "real-elements", // lane Elements
   "splat-equation",
+  "one-splat",
   "chladni-plate",
   "anatomy-atlas",
   "song-landscape",

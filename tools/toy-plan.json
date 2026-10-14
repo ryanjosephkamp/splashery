@@ -1586,6 +1586,13 @@
       "sound": "Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
       "improved": "Math r2: new toy (labs), the duoprism (3,4 by default; each polygon 3 to 6 sides). The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes."
     },
+    "one-splat": {
+      "v": "keep",
+      "owner": "Codex task 78a: port Ryan Kamp's One Splat concept to the math shelf behind labs.",
+      "effect": "Tap a Gaussian to replace it with its two pixel-tree children, moving from the parent's center to their own centers over 1.8 seconds. Hold to inspect its moments.",
+      "sound": "A quiet glide while the children separate.",
+      "improved": "Exact principal-axis median pixel tree, levels from 1 to 16,384 splats, custom words, local pictures with mean color, individual refinements, and a hold readout. Existing Kit clouds, morphs, options, and drag hooks; no engine changes."
+    },
     "splat-equation": {
       "v": "keep",
       "owner": "The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that explains the language.",

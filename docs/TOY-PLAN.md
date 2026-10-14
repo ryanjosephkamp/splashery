@@ -10,8 +10,8 @@ Proposals below are suggestions; the owner may change them.
 
 ## Totals
 
-- 462 toys. 462 have a tap action today; the other 0 only hop.
-- **keep** (the effect is right: the owner liked it, or C2 finished it): 439.
+- 463 toys. 463 have a tap action today; the other 0 only hop.
+- **keep** (the effect is right: the owner liked it, or C2 finished it): 440.
 - **more** (has an effect; make it clearer or more dramatic): 0.
 - **new** (needs its own effect): 23.
 - Visual fixes: 0 open, 31 done. Touch or drag interaction asked for: 4.
@@ -60,30 +60,30 @@ Proposals below are suggestions; the owner may change them.
   attractor, Möbius strip, Klein bottle, Menger sponge, Hypercube, Torus knot, Gyroid, Mandelbulb,
   Sierpinski tetrahedron, Platonic solids, Seashell spiral, Graph plotter, Surface plotter, Circle
   and waves, Fourier circles, Pythagoras proof, Rössler attractor, Thomas attractor, Aizawa
-  attractor, 5-cell, 16-cell, 24-cell, Duoprism, Splat equation, Storybook, Music box, Alarm clock,
-  Gift box, Umbrella, Desk fan, Desk lamp, Potion bottle, Telescope, Fountain pen, Water bottle,
-  Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the stone, Heraldic shield, Bow
-  and target, Trebuchet, Crossbow, Knight's helmet, Crown, Dragon egg, Wizard's orb, Crystal ball,
-  Jellyfish, School of fish, Butterfly, Pufferfish, Nautilus, Ladybug, Snail, Octopus, Starfish, Sea
-  urchin, Frog, Penguin, Owl, Jack-o'-lantern, Snowman, Fireworks, Decorated tree, Patterned egg,
-  Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy piano, Grand piano, Upright
-  piano, Harpsichord, Electronic keyboard, Helicopter, Hot-air balloon, Steam train, Ocean liner,
-  Sports car, Bus, Propeller plane, Jet airliner, Sailboat, Submarine, Bicycle, Tractor, Flying
-  saucer, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting supertall, Statue of
-  Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal,
-  Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron, Neural network, Convolutional
-  network, Recurrent network, Transformer, Looped transformer, Diffusion model, Gradient descent,
-  Gaussian splatting, Word vectors, Sorting machine, Half adder, Turing machine, Difference engine,
-  Enigma machine, Bombe, Picture lab, Your book, Photo album, Picture frame, Song landscape, Chladni
-  plate, Sound in a box, Room echo meter, Splat mirror, Model to splats, QR code, Photo to 3D,
-  Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat toolkit, Point clouds, Volume
-  viewer, Splat field, Light lab, Baked chest, Thermal ellipsoids, Super-resolution microscope,
-  Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple tank, Light bench, Fluid lab,
-  Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor, Hurricane, Relief map, Living
-  city, Stork migration, Earthquakes, Airport X-ray scanner, How CT works, Walnut CT scan, MRI of a
-  fruit, Electron microscope, Thermal camera, Screen, Shardball, Longtail, Grain Garden, Page
-  Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl Pinball, Cast a Shadow, Photo
-  Dash, Note Rider, Night sky, Data in 3D.
+  attractor, 5-cell, 16-cell, 24-cell, Duoprism, One splat, many splats, Splat equation, Storybook,
+  Music box, Alarm clock, Gift box, Umbrella, Desk fan, Desk lamp, Potion bottle, Telescope,
+  Fountain pen, Water bottle, Soda can, Running shoe, Hoodie, Sunglasses, Baseball cap, Sword in the
+  stone, Heraldic shield, Bow and target, Trebuchet, Crossbow, Knight's helmet, Crown, Dragon egg,
+  Wizard's orb, Crystal ball, Jellyfish, School of fish, Butterfly, Pufferfish, Nautilus, Ladybug,
+  Snail, Octopus, Starfish, Sea urchin, Frog, Penguin, Owl, Jack-o'-lantern, Snowman, Fireworks,
+  Decorated tree, Patterned egg, Paper lantern, Diya, Acoustic guitar, Snare drum, Xylophone, Toy
+  piano, Grand piano, Upright piano, Harpsichord, Electronic keyboard, Helicopter, Hot-air balloon,
+  Steam train, Ocean liner, Sports car, Bus, Propeller plane, Jet airliner, Sailboat, Submarine,
+  Bicycle, Tractor, Flying saucer, Eiffel Tower, Washington Monument, Pyramids of Giza, Twisting
+  supertall, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon,
+  Stonehenge, Big Ben, Taj Mahal, Castle, Pagoda, Windmill, Perceptron, Multilayer perceptron,
+  Neural network, Convolutional network, Recurrent network, Transformer, Looped transformer,
+  Diffusion model, Gradient descent, Gaussian splatting, Word vectors, Sorting machine, Half adder,
+  Turing machine, Difference engine, Enigma machine, Bombe, Picture lab, Your book, Photo album,
+  Picture frame, Song landscape, Chladni plate, Sound in a box, Room echo meter, Splat mirror, Model
+  to splats, QR code, Photo to 3D, Moving photo to 3D, Video to 3D, Sound lab, Sound recorder, Splat
+  toolkit, Point clouds, Volume viewer, Splat field, Light lab, Baked chest, Thermal ellipsoids,
+  Super-resolution microscope, Galaxy in a box, Cryo-EM map, Contour lab, Terrain in a box, Ripple
+  tank, Light bench, Fluid lab, Grand Canyon, Mount St. Helens, The sea floor, Tides at Bar Harbor,
+  Hurricane, Relief map, Living city, Stork migration, Earthquakes, Airport X-ray scanner, How CT
+  works, Walnut CT scan, MRI of a fruit, Electron microscope, Thermal camera, Screen, Shardball,
+  Longtail, Grain Garden, Page Breaker, Strata, Volley Table, Stone Belt, Soft Landing, Night Owl
+  Pinball, Cast a Shadow, Photo Dash, Note Rider, Night sky, Data in 3D.
 - **D, effects and sound engine.** A unique sound for every toy (the Sound column below), starting
   with the toys whose effect is kept.
 - **E1, new effects: scans and shapes.** None.
@@ -2478,7 +2478,7 @@ Proposals below are suggestions; the owner may change them.
     like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the
     synthesized sound as a fallback.
 
-## Maths (24)
+## Math (25)
 
 - **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.
@@ -2707,6 +2707,14 @@ Proposals below are suggestions; the owner may change them.
     through the fourth dimension (about 5 s) and home. Seven color themes.
   - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
     chord in its own key.
+- **One splat, many splats** (`one-splat`). Now: tap: Replay the last split. Plan: keep.
+  - Owner: Codex task 78a: port Ryan Kamp's One Splat concept to the math shelf behind labs.
+  - Effect: Tap a Gaussian to replace it with its two pixel-tree children, moving from the parent's
+    center to their own centers over 1.8 seconds. Hold to inspect its moments.
+  - Improved: Exact principal-axis median pixel tree, levels from 1 to 16,384 splats, custom words,
+    local pictures with mean color, individual refinements, and a hold readout. Existing Kit clouds,
+    morphs, options, and drag hooks; no engine changes.
+  - Sound: A quiet glide while the children separate.
 - **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.
   - Owner: The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people
     type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that

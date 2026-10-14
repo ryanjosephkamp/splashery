@@ -6982,5 +6982,18 @@
       "prompt": "C54-Q8",
       "note": "AI-made by the owner with an AI image tool, on his instruction. Fictional subject; no people, faces, logos, readable text, or real landmarks. Native square image resized to 960×960, JPEG quality 88. Full prompt: tools/cdx-pics-qr-ai-prompts.json. No payload-specific image conditioning."
     }
+  ],
+  "portfolioSamples": [
+    {
+      "id": "one-splat",
+      "label": "One splat, many splats",
+      "file": "assets/toys/one-splat/thumb.webp",
+      "author": "Made by Ryan with Codex (GPT-6)",
+      "license": "CC0-1.0",
+      "source": "Procedural pixel-tree splats from src/packs/one-splat.js; from a concept by Ryan Kamp.",
+      "checked": "2026-10-14",
+      "sha256": "524818f36ea76563e1f30e8b545b763373dbc52b2f7f4534d859514bcb8406a2",
+      "changes": "Generated the default word with the shared Kit and rendered the thumbnail with tools/make-thumbs.mjs."
+    }
   ]
 }
