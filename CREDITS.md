@@ -1813,3 +1813,12 @@ the picker and in-app credit. Checked October 13, 2026:
 The full prompts, hashes, scores, five-link scan rates, and phone-size contact sheet are in
 [the sample-pictures audit](docs/audits/sample-pictures-2026-10.md). No new asset loads before it is
 picked.
+
+# Studio truth fixtures (Codex task 56)
+
+The original procedural fixtures in `tests/fixtures/truth/`, including their rendered pictures,
+camera paths, depth maps, masks, and contact sheet, are **made by Ryan with Codex (GPT-6)** and
+dedicated to CC0-1.0. These are rendered scenes, not real captures. No outside assets are used.
+Their source is `tools/studio-truth-generate.py`, and each committed file's size and SHA-256 are
+recorded in `tests/fixtures/truth/assets.json`. Full sequences are kept separately from the shipped
+site. The build-time code is offered under this repository's MIT license.
