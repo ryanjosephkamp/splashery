@@ -93,10 +93,64 @@ test("Skip to controls reaches settings directly", async ({ page }) => {
   await expect(page.locator("#tab-play")).toBeFocused({ timeout: 3000 });
 });
 
+for (const size of [
+  { width: 390, height: 844 },
+  { width: 1440, height: 900 },
+]) {
+  test(`keyboard play stays collapsed after settings at ${size.width}×${size.height}`, async ({
+    page,
+  }) => {
+    await open(page, size);
+    for (const [id, count] of [
+      ["chess-set", 64],
+      ["grand-piano", 88],
+      ["puzzle-cube", 18],
+    ]) {
+      await pick(page, id);
+      if (size.width <= 760 && !(await page.locator("#panel-body").isVisible()))
+        await page.locator("#sheet-toggle").click();
+      const disclosure = page.locator("#toy-keyboard");
+      const summary = disclosure.locator("summary");
+      await expect(summary).toHaveText("Play with the keyboard", { timeout: 3000 });
+      await expect(summary).toHaveAccessibleName("Play with the keyboard");
+      const target = await summary.boundingBox();
+      expect(target.width).toBeGreaterThanOrEqual(44);
+      expect(target.height).toBeGreaterThanOrEqual(44);
+      await expect(disclosure).toHaveJSProperty("open", false);
+      expect(await disclosure.evaluate((e) => e === e.parentElement.lastElementChild)).toBe(true);
+      const buttons = disclosure.locator("button");
+      await expect(buttons).toHaveCount(count);
+      await expect(buttons.first()).toBeHidden();
+      const settings = () =>
+        page
+          .locator("#pane-play > section")
+          .evaluateAll((groups) => groups.map((e) => [e.id, e.offsetTop, e.offsetHeight]));
+      const before = await settings();
+      await page.locator("#reset-all").focus();
+      await page.keyboard.press("Tab");
+      await expect(summary).toBeFocused();
+      await expect(summary).toHaveCSS("outline-style", "solid");
+      await expect(summary).toHaveCSS("outline-width", "2px");
+      await page.keyboard.press("Enter");
+      await expect(disclosure).toHaveJSProperty("open", true);
+      expect(await settings()).toEqual(before);
+      await page.keyboard.press("Tab");
+      await expect(buttons.first()).toBeFocused();
+      await summary.focus();
+      await page.keyboard.press("Space");
+      await expect(disclosure).toHaveJSProperty("open", false);
+      await expect(buttons.first()).toBeHidden();
+      expect(await settings()).toEqual(before);
+      await page.keyboard.press("Enter"); // Switching toys must collapse an open disclosure.
+    }
+  });
+}
+
 test("chess squares expose state and make a legal move by keyboard", async ({ page }) => {
   await open(page);
   await pick(page, "chess-set");
   await page.locator("#sheet-toggle").click();
+  await page.locator("#toy-keyboard summary").click();
   const squares = page.locator("#toy-keyboard button");
   await expect(squares).toHaveCount(64, { timeout: 3000 });
   const pawn = squares.filter({ hasText: "e2" });
@@ -115,6 +169,7 @@ test("all piano notes and cube layers have keyboard controls", async ({ page }) 
   await open(page);
   await pick(page, "grand-piano");
   await page.locator("#sheet-toggle").click();
+  await page.locator("#toy-keyboard summary").click();
   await expect(page.locator("#toy-keyboard button")).toHaveCount(88, { timeout: 3000 });
   await page.evaluate(() => {
     window.__actions = [];
@@ -129,6 +184,7 @@ test("all piano notes and cube layers have keyboard controls", async ({ page }) 
   await page.keyboard.press("Escape");
   await pick(page, "puzzle-cube");
   await page.locator("#sheet-toggle").click();
+  await page.locator("#toy-keyboard summary").click();
   await expect(page.locator("#toy-keyboard button")).toHaveCount(18);
   await page.getByRole("button", { name: "Turn X middle layer positive", exact: true }).focus();
   await page.keyboard.press("Enter");

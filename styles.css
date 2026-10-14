@@ -3207,6 +3207,14 @@ body.focus .stage-zoom {
   display: none;
 }
 
+.toy-keyboard summary {
+  min-height: 44px;
+  padding: 10px 0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
 .toy-keyboard h3 {
   font-size: 14px;
 }

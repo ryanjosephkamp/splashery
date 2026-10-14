@@ -14,7 +14,7 @@ async function violations(page) {
   return page.evaluate(() => {
     const errors = [];
     const controls = document.querySelectorAll(
-      "button, input:not([type=file]):not([type=hidden]), select, textarea, a.button, a.open-link",
+      "button, input:not([type=file]):not([type=hidden]), select, textarea, .toy-keyboard > summary, a.button, a.open-link",
     );
     const named = (e) =>
       e.getAttribute("aria-label") ||

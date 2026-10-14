@@ -537,11 +537,12 @@ export function createUI(app) {
   let partKeyboard = null;
   let partButtons = [];
   const partPanel = $("toy-keyboard");
+  const partContent = $("toy-keyboard-controls");
   const partStatus = document.createElement("p");
   partStatus.className = "note";
   partStatus.setAttribute("role", "status");
   function refreshPartKeyboard() {
-    if (!partKeyboard || !partPanel.checkVisibility()) return;
+    if (!partKeyboard || !partContent.checkVisibility()) return;
     for (const [i, item] of partKeyboard.items().entries()) {
       const b = partButtons[i];
       if (b.getAttribute("aria-label") !== item.label) b.setAttribute("aria-label", item.label);
@@ -554,12 +555,14 @@ export function createUI(app) {
     if (partStatus.textContent !== status) partStatus.textContent = status;
   }
   app.player.on("frame", refreshPartKeyboard);
+  partPanel.addEventListener("toggle", refreshPartKeyboard);
 
   function renderToyPanel(info) {
     const recipe = info?.recipe || null;
     partKeyboard = recipe?.keyboard || null;
     partButtons = [];
-    partPanel.replaceChildren();
+    partContent.replaceChildren();
+    partPanel.open = false;
     partPanel.hidden = !partKeyboard;
     if (partKeyboard) {
       const title = document.createElement("h3");
@@ -577,7 +580,7 @@ export function createUI(app) {
         group.append(b);
         return b;
       });
-      partPanel.append(title, partStatus, group);
+      partContent.append(title, partStatus, group);
       refreshPartKeyboard();
     }
     if (app.tool === "orbit")
