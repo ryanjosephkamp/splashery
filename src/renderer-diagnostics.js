@@ -109,7 +109,7 @@ export function beginRendererDiagnostics(canvas, preference, nav = navigator) {
   if (nav.gpu) {
     observe(nav.gpu, "requestAdapter", {
       start() {
-        if (diagnostics.creating) attempt("webgpu");
+        if (diagnostics.creating && report.requestedBackends.includes("webgpu")) attempt("webgpu");
         report.adapter.outcome = "pending";
       },
       end(args, adapter, error) {
@@ -213,7 +213,7 @@ export function rendererReportText(report) {
   return [
     "Splashery renderer startup report",
     "Local to this page. Nothing is sent or stored.",
-    "Adapter calls observed during startup may be shared by players starting together.",
+    "WebGPU calls observed during startup may be shared by players starting together.",
     "Not requested/not attempted means no result was observed, not that an API works.",
     "",
     JSON.stringify(report, null, 2),

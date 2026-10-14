@@ -1,0 +1,232 @@
+{
+  "task": 71,
+  "branch": "codex/renderer-diagnostics",
+  "date": "2026-10-14",
+  "implementation": "reconstructed from the repository brief",
+  "environment": {
+    "platform": "Linux x86_64",
+    "execution": "selected cloud environment",
+    "browser": "Chromium 151.0.7922.173",
+    "browser_workers": 1,
+    "chromium_sandbox": true,
+    "graphics_override_arguments": [],
+    "phone_hardware_tested": false,
+    "native_webgpu_rendering_tested": false
+  },
+  "verified_source_sha256": {
+    "src/pc.js": "328df9b7cb43d3cccb4c37cfd046a526f3b030c91518218f388cf29e0f93e14d",
+    "src/player.js": "9ec9aa0da965da33278a174fc6813efd3678803852ff55b0e92b03bf6337e5c7",
+    "src/renderer-diagnostics.js": "d12f65c7194e2bdd91b97e098f89ac0dc2ae327ac3e457d1a917f908a14c4901",
+    "src/app.js": "c386093e5901bab0cff6bbcfa884cd92b828aaa07e149d85802447ef2f3c693b",
+    "src/embed.js": "1f15602548704a6884cf003e1c16f3c713cdde9635eda897e8afff2b2cbd5742",
+    "tests/cdx-renderer-diag.config.mjs": "e76194ad087cc36e3acc2292296f4943ecf6e2161728b5e8794811b2e4153172",
+    "tests/cdx-renderer-diag.spec.mjs": "c1b5d208e145ab2e150588852e208b915ca4e4fb4b1b1eff38f729b954c82854"
+  },
+  "runs": [
+    {
+      "name": "initial diagnostics",
+      "passed": 13,
+      "failed": 1,
+      "duration": "15.3s",
+      "failure": "new test accessed embed console hook before it was published"
+    },
+    {
+      "name": "corrected diagnostics before security-default cleanup",
+      "passed": 14,
+      "failed": 0,
+      "duration": "19.5s"
+    },
+    {
+      "name": "interrupted regression before security-default cleanup",
+      "passed": 3,
+      "failed": 2,
+      "interrupted": 1,
+      "did_not_run": 153,
+      "duration": "1.6m"
+    },
+    {
+      "name": "diagnostics after security-default cleanup",
+      "passed": 14,
+      "failed": 0,
+      "duration": "16.0s"
+    },
+    {
+      "name": "bounded regression",
+      "source_checkpoint": "33e6164678c588442a13a9e3d57046fad0606e62",
+      "passed": 22,
+      "failed": 10,
+      "interrupted": 1,
+      "did_not_run": 126,
+      "duration": "13.8m",
+      "stopped_reason": "ten failures; preserve failures and continue independent checks",
+      "failure_categories": {
+        "console warnings": 9,
+        "null bounding box in desktop help capture": 1
+      }
+    },
+    {
+      "name": "expanded diagnostics",
+      "passed": 16,
+      "failed": 0,
+      "duration": "24.8s"
+    },
+    {
+      "name": "unit, taps, and transfer",
+      "passed": 83,
+      "failed": 0,
+      "duration": "1.3m",
+      "by_spec": {
+        "unit": 20,
+        "taps": 62,
+        "smoke_transfer": 1
+      },
+      "embed_transfer_mib_rounded": 9.2
+    },
+    {
+      "name": "final diagnostics with direct canvas bitmap assertions",
+      "passed": 16,
+      "failed": 0,
+      "duration": "25.2s"
+    }
+  ],
+  "coverage": {
+    "diagnostics": {
+      "passed": 16
+    },
+    "unit": {
+      "passed": 20
+    },
+    "taps": {
+      "passed": 62
+    },
+    "kit": {
+      "passed": 10
+    },
+    "hta": {
+      "passed": 3
+    },
+    "help": {
+      "passed": 9,
+      "failed": 5
+    },
+    "smoke": {
+      "passed": 1,
+      "failed": 5,
+      "interrupted": 1,
+      "did_not_run": 43
+    }
+  },
+  "total_distinct_cases": {
+    "passed": 121,
+    "failed": 10,
+    "interrupted": 1,
+    "did_not_run": 43
+  },
+  "limitations": [
+    "43 smoke cases and the full repository suite are unrun.",
+    "One smoke case was interrupted.",
+    "Native WebGPU rendering and phone hardware are unverified.",
+    "The five-pixel help-line/status overlap was not reproduced at 390x844 in this cloud viewport; its origin remains unresolved.",
+    "Performance, memory, and frame rate were not measured."
+  ],
+  "artifact_storage": "Failure logs, traces, and screenshots are preserved in the ignored .cache/renderer-diagnostics directory.",
+  "rule_check": "none",
+  "failures": [
+    {
+      "spec": "help.spec.mjs",
+      "title": "toy help: the line \u203a shows on a pick, fades, and '?' brings it back",
+      "category": "console warnings from software WebGL/readback"
+    },
+    {
+      "spec": "help.spec.mjs",
+      "title": "toy help: the line \u203a shows after a refresh and from a link, old links included",
+      "category": "console warnings from software WebGL/readback"
+    },
+    {
+      "spec": "help.spec.mjs",
+      "title": "toy help: the line \u203a a saved scene (JSON) still loads and shows its toy's line",
+      "category": "console warnings from software WebGL/readback"
+    },
+    {
+      "spec": "help.spec.mjs",
+      "title": "the line stays clear of the toy at 390x844",
+      "category": "console warnings from software WebGL/readback"
+    },
+    {
+      "spec": "help.spec.mjs",
+      "title": "the line stays clear of the toy at 1440x900",
+      "category": "null bounding box in desktop help capture"
+    },
+    {
+      "spec": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a loads with no console errors and shows the shelf",
+      "category": "console warnings from software WebGL/readback"
+    },
+    {
+      "spec": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the shelf filters by category and search, and Surprise me picks a toy",
+      "category": "console warnings from software WebGL/readback"
+    },
+    {
+      "spec": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a generating a procedural toy changes canvas pixels",
+      "category": "console warnings from software WebGL/readback"
+    },
+    {
+      "spec": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a toggling an effect changes canvas pixels",
+      "category": "console warnings from software WebGL/readback"
+    },
+    {
+      "spec": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a paint and poke tools change the toy where it is touched",
+      "category": "console warnings from software WebGL/readback"
+    }
+  ],
+  "unrun_smoke_titles": [
+    "Settings panel (WebGL2) \u203a flag colours lie gently over the chess board, and stay with the toy they were chosen on",
+    "Settings panel (WebGL2) \u203a the Toy tab has the essentials, and Reset everything takes a toy back to how it started",
+    "Settings panel (WebGL2) \u203a the chess game bar plays, pauses, steps and jumps, and a tap after the end starts again",
+    "Settings panel (WebGL2) \u203a the panel and the shelf can be made bigger on a wide screen",
+    "Sharpness and embeds (WebGL2) \u203a Detail: High raises the tier, stays in this browser and stays out of links",
+    "Sharpness and embeds (WebGL2) \u203a a shelf thumbnail that fails is fetched once more, then shows a plain tile",
+    "Sharpness and embeds (WebGL2) \u203a a transparent embed stays transparent on a dark-mode page",
+    "Sharpness and embeds (WebGL2) \u203a embeds frame the toy closer, take ?zoom= and zoom with buttons and the wheel",
+    "Sharpness and embeds (WebGL2) \u203a the canvas renders at 1.5x on a 3x screen at the low tier",
+    "Sharpness and embeds (WebGL2) \u203a the canvas renders at 2x on a 2x screen at the high tier",
+    "Sharpness and embeds (WebGL2) \u203a the canvas renders at 2x on a 3x screen at the mid tier with ?sharp=0",
+    "Sharpness and embeds (WebGL2) \u203a the canvas renders at 3x on a 3x screen at the max tier",
+    "Sharpness and embeds (WebGL2) \u203a the canvas renders at 3x on a 3x screen at the mid tier",
+    "Sharpness and embeds (WebGL2) \u203a the embed snippet is responsive and has a size picker",
+    "Splashery app (WebGL2) \u203a JSON export then import round-trips the scene",
+    "Splashery app (WebGL2) \u203a PNG, GIF and WebM exports produce files",
+    "Splashery app (WebGL2) \u203a bring-your-own PLY, SPLAT, SPZ and SOG files load in the browser",
+    "Splashery app (WebGL2) \u203a desktop screenshot at 1440x900",
+    "Splashery app (WebGL2) \u203a shows a friendly poster when no GPU renderer is available",
+    "Splashery app (WebGL2) \u203a the <splashery-toy> element renders without an iframe",
+    "Splashery app (WebGL2) \u203a the embed page loads a scene from the hash",
+    "Splashery on WebGPU \u203a auto picks WebGPU when an adapter exists and effects render",
+    "Splashery on a phone \u203a a panel opened while a toy from the grid is still loading stays open",
+    "Splashery on a phone \u203a dragging the shelf up opens a grid, and picking a toy folds it back",
+    "Splashery on a phone \u203a has no horizontal overflow at 360px",
+    "Splashery on a phone \u203a has no horizontal overflow at 390px and the sheet opens",
+    "Splashery on a phone \u203a the Make pane explains where to find your own splat",
+    "Splashery v3 engine (WebGL2) \u203a a kit toy can change shape: the red blood cell curls into a sickle (morph)",
+    "Splashery v3 engine (WebGL2) \u203a a kit toy loads from its pack, and its action and a tap open and close it",
+    "Splashery v3 engine (WebGL2) \u203a a scan rig moves a part of a captured toy: the cat statue turns its head",
+    "Splashery v3 engine (WebGL2) \u203a a stretchy toy stretches when dragged and springs back; a drag off it orbits",
+    "Splashery v3 engine (WebGL2) \u203a a tap plays the toy's own sound, and a toggle plays its on and off halves",
+    "Splashery v3 engine (WebGL2) \u203a an embedded kit toy opens when tapped",
+    "Splashery v3 engine (WebGL2) \u203a an old version 2 share link still opens",
+    "Splashery v3 engine (WebGL2) \u203a every toy's sound renders: audible, not clipping, under five seconds",
+    "Splashery v3 engine (WebGL2) \u203a patterns and flags recolour any toy and travel in the link",
+    "Splashery v3 engine (WebGL2) \u203a rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+    "Splashery v3 engine (WebGL2) \u203a the chess set plays the Opera Game, and the laptop types what you type",
+    "Splashery v3 engine (WebGL2) \u203a the sound switch remembers its choice",
+    "Splashery v3 engine (WebGL2) \u203a toys move by themselves once motion is on, and any toy can bounce",
+    "Splashery v3 engine (WebGL2) \u203a v3 screenshots at 1440x900 and 390x844",
+    "Sports balls (WebGL2) \u203a a ball in a country's colours keeps its seams",
+    "Sports balls (WebGL2) \u203a ball screenshots at 1440x900 and 390x844"
+  ],
+  "interrupted_smoke_title": "Splashery app (WebGL2) \u203a clay adds and erases blobs on a generated toy and survives a JSON round trip"
+}

@@ -110,13 +110,31 @@ test("observation adds no probes and overlapping players restore shared methods 
   const gpu = { requestAdapter: () => Promise.resolve(adapter) };
   const original = gpu.requestAdapter;
   const originalDevice = adapter.requestDevice;
-  const a = beginRendererDiagnostics(fakeCanvas(), "auto", { gpu });
+  const canvas = fakeCanvas();
+  const a = beginRendererDiagnostics(canvas, "webgl2", { gpu });
   const b = beginRendererDiagnostics(fakeCanvas(), "auto", { gpu });
   expect(a.report.adapter.calls).toEqual([]);
   expect(b.report.adapter.calls).toEqual([]);
+  let release;
+  const pending = new Promise((resolve) => {
+    release = resolve;
+  });
+  const creating = observeGraphicsDevice(
+    () => {
+      canvas.getContext("webgl2");
+      return pending;
+    },
+    canvas,
+    { deviceTypes: ["webgl2"] },
+  );
   const result = await gpu.requestAdapter();
   expect(result).toBe(adapter);
   await adapter.requestDevice();
+  // Shared WebGPU observations must not invent a WebGPU attempt for a
+  // player whose requested backend is exclusively WebGL2.
+  expect(a.report.attemptedBackends).toEqual(["webgl2"]);
+  release({ deviceType: "webgl2" });
+  await creating;
   a.finish();
   expect(gpu.requestAdapter).not.toBe(original);
   b.finish();
@@ -388,10 +406,17 @@ for (const [name, url] of [
       "webgl2",
     );
     await expect(page.locator("#fallback")).toBeHidden();
-    const png = PNG.sync.read(await page.locator("#stage").screenshot());
+    // Read the rendered canvas itself: a locator screenshot can include
+    // HTML controls laid over an empty canvas and count them as toy pixels.
+    const bitmap = await page.evaluate(async () => {
+      const canvas = await window.__splashery.player.stage.captureFrame();
+      return canvas.toDataURL("image/png").split(",")[1];
+    });
+    const png = PNG.sync.read(Buffer.from(bitmap, "base64"));
     let ink = 0;
     for (let i = 0; i < png.data.length; i += 4) {
-      if (Math.min(png.data[i], png.data[i + 1], png.data[i + 2]) < 235) ink++;
+      if (png.data[i + 3] > 200 && Math.min(png.data[i], png.data[i + 1], png.data[i + 2]) < 235)
+        ink++;
     }
     expect(ink).toBeGreaterThan(2000);
   });
