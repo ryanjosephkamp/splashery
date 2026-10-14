@@ -2,8 +2,14 @@
 
 October 14, 2026. Made by Ryan with Codex (GPT-6).
 
-This branch holds review media only and must never be merged. The implementation is on
-`codex/portfolio-b`.
+This branch holds review media and verification notes only and must never be merged. The
+implementation is on `codex/portfolio-b`.
+
+The [port and verification report](portfolio-b.md) is kept on this review branch, outside the
+implementation PR.
+
+The updated About panel explains the stored and drawn counts on [phone](counts-390x844.png) and
+[desktop](counts-1440x900.png).
 
 ![Neuron specimen spike](specimen-neuron.gif)
 
@@ -24,6 +30,7 @@ SPLASHERY_CHROMIUM=/usr/bin/chromium \
 
 The query prefix enables labs in the existing clip tool. No reference page, font, or renderer was
 copied into the site. Geometry is schematic; the spike waveform is computed from the concept's
-Hodgkin-Huxley membrane equations. Clip and strip: original procedural renders, CC0.
+Hodgkin-Huxley membrane equations. Clip, strip, and count screenshots: original procedural renders,
+CC0.
 
 Rule check: none.
