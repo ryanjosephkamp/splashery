@@ -1,0 +1,58 @@
+{
+  "recorded": "2026-10-14T13:08:17.574319+00:00",
+  "madeBy": "Ryan with Codex (GPT-6)",
+  "license": "CC0-1.0 for the original procedural QR scene; visible interface assets retain their recorded licenses",
+  "sourceSha256": "87193c597e0346c6e37434c49681ea3ab6100c2c5772e8070b892e3e8c45596a",
+  "sourceOptions": {
+    "shape": "circle",
+    "picture": "own (absent)",
+    "size": "more",
+    "text": "https://ryanjosephkamp.github.io/splashery/"
+  },
+  "capture": {
+    "viewport": [390, 844],
+    "canvas": [390, 390],
+    "fps": 12,
+    "beforeSeconds": 0.4,
+    "effectSeconds": 3.5,
+    "budgetOverride": 8000,
+    "actualRenderer": "Chromium 141, WebGL2, SwiftShader",
+    "clock": "Original effect-clip.mjs clock stepping; current production recipe with only Kit.count limited to 8000 for the missing-picture circle."
+  },
+  "limitations": [
+    "Visual review, not physical-phone performance.",
+    "Direct 4/8-pixel-per-module stage checks can still report a scan warning at this forced small budget; these checks were not weakened."
+  ],
+  "files": [
+    {
+      "file": "qr-picture.gif",
+      "bytes": 3298716,
+      "sha256": "e5c7066cab05391ad88825717bac1995775038247f6de257dec0dd86e46bdb30",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "qr-picture-strip.png",
+      "bytes": 611679,
+      "sha256": "8eac295ec584124eee1c648cd041401cf81ae60c2d03af63f8b4660da3c8f9ea",
+      "license": "CC0-1.0"
+    },
+    {
+      "file": "cdx-qr-budget-390x844.png",
+      "bytes": 231102,
+      "sha256": "fe769c5949dc99e34068cc180f104b07825675f6633af88b0c6813e6ca8e5f87",
+      "license": "Interface capture; visible asset licenses remain as recorded in CREDITS.md"
+    },
+    {
+      "file": "cdx-qr-budget-1440x900.png",
+      "bytes": 859560,
+      "sha256": "99365a378315cd58a0556ba9d088292c147a55c9848853ad76087f4a3d42b26a",
+      "license": "Interface capture; visible asset licenses remain as recorded in CREDITS.md"
+    },
+    {
+      "file": "capture.mjs",
+      "bytes": 8338,
+      "sha256": "9e9be6a486db78926cf7ac4dacfeeef44b8285e6fd6704fc7ec7962243f3c38e",
+      "license": "MIT"
+    }
+  ]
+}

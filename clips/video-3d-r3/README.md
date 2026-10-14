@@ -100,3 +100,9 @@ source license listed beside that sample above; Toolse and Põltsamaa remain Sha
 - Castle courtyard, orbited: [390×844](poltsamaa-390x844.png), [1440×900](poltsamaa-1440x900.png).
 
 Hashes and source records are in [UI records](ui-records.json).
+
+## Goal compatibility follow-up
+
+The isolated QR repair needed by task 55’s all-existing-tests Goal has a
+[phone-size motion review](../qr-budget-review/README.md). The original six Video to 3D clips and
+all held-out comparisons above are unchanged.
