@@ -26,6 +26,7 @@
 import { LIMITS } from "./loaders.js";
 import { normalizeMediaURL } from "./state.js";
 import { gzipBytes } from "./gzip.js";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 
 const ROOT = new URL("../", import.meta.url);
 const PDFJS = new URL("vendor/pdfjs/", ROOT).href;
@@ -151,7 +152,9 @@ async function readSource(source, limits) {
     // The site's manual is an exact gzip copy, with its original PDF retained.
     // Its PDF decoder can load while the document transfers.
     if (
-      url === new URL("manual/tinkerers-manual.pdf", ROOT).href &&
+      ["tinkerers-manual.pdf", MANUAL_PDF].some(
+        (file) => url === new URL(`manual/${file}`, ROOT).href,
+      ) &&
       typeof DecompressionStream === "function"
     ) {
       try {

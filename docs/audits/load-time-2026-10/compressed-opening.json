@@ -22,11 +22,21 @@
   {
     "source": "manual/tinkerers-manual.pdf",
     "file": "manual/tinkerers-manual.pdf.gz",
-    "sourceBytes": 7968242,
-    "bytes": 6004462,
-    "sourceSha256": "e564f7b385574f0b86dde63ac765a4d7a0bc3534511ad0f651c69a2dd8ecd7e1",
-    "sha256": "32161c35a6344875f1cbab6db9887f3853ccc04f7a82889dfcf1cc5f22053aa4",
+    "sourceBytes": 7792711,
+    "bytes": 5858411,
+    "sourceSha256": "85d32b96193ea27502854ded8910470b1f50f571aae61adf1847972b5bfc54f7",
+    "sha256": "3be3d04edc5faec870fff3d3ab191613f65199168105f899be7410f48ebac8c1",
     "license": "Original manual and enclosed asset notices, unchanged",
+    "transformation": "Exact gzip copy made by Ryan with Codex (GPT-6); no source or decoded-byte changes"
+  },
+  {
+    "source": "manual/tinkerers-manual-85d32b96193ea275.pdf",
+    "file": "manual/tinkerers-manual-85d32b96193ea275.pdf.gz",
+    "sourceBytes": 7792711,
+    "bytes": 5858411,
+    "sourceSha256": "85d32b96193ea27502854ded8910470b1f50f571aae61adf1847972b5bfc54f7",
+    "sha256": "3be3d04edc5faec870fff3d3ab191613f65199168105f899be7410f48ebac8c1",
+    "license": "Original content-addressed manual and enclosed asset notices, unchanged",
     "transformation": "Exact gzip copy made by Ryan with Codex (GPT-6); no source or decoded-byte changes"
   }
 ]

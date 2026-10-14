@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 import { gzipSync, gunzipSync } from "node:zlib";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 
 const copies = [
   [
@@ -15,6 +16,11 @@ const copies = [
     "manual/tinkerers-manual.pdf",
     "manual/tinkerers-manual.pdf.gz",
     "Original manual and enclosed asset notices, unchanged",
+  ],
+  [
+    `manual/${MANUAL_PDF}`,
+    `manual/${MANUAL_PDF}.gz`,
+    "Original content-addressed manual and enclosed asset notices, unchanged",
   ],
 ];
 const sha = (bytes) => crypto.createHash("sha256").update(bytes).digest("hex");
