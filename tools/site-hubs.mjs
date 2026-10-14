@@ -7,6 +7,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { mdToHtml, mdSlug } from "./site-md.mjs";
+import { MANUAL_PDF } from "../manual/pdf-edition.js";
 
 const read = (root, file) => fs.readFileSync(path.join(root, file), "utf8");
 
@@ -411,7 +412,7 @@ drive(t, c, out) {
     const parts = page.files.map((f, n) => {
       const text = read(root, f.file);
       const baseDir = path.posix.dirname(f.file) === "." ? "" : path.posix.dirname(f.file);
-      const { html, headings } = mdToHtml(text, {
+      const rendered = mdToHtml(text, {
         github: SITE.github,
         baseDir,
         demote: f.demote ? 1 : 0,
@@ -419,6 +420,12 @@ drive(t, c, out) {
         docPages: h.DOC_PAGES,
         up,
       });
+      // Historical records keep their wording; PDF mentions link to the current edition.
+      const html = rendered.html.replace(
+        /<code>manual\/tinkerers-manual(?:-[a-f0-9]{16})?\.pdf<\/code>/g,
+        `<a href="${up}../manual/${MANUAL_PDF}"><code>manual/${MANUAL_PDF}</code></a>`,
+      );
+      const { headings } = rendered;
       const wrapId = `file-${mdSlug(f.title)}`;
       return { f, html, headings, wrapId, n };
     });

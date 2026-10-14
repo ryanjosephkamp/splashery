@@ -2478,7 +2478,7 @@ Proposals below are suggestions; the owner may change them.
     like a good online-chess theme; real CC0 recordings now (chess-set-move.mp3), with the
     synthesized sound as a fallback.
 
-## Math (25)
+## Maths (25)
 
 - **Lorenz attractor** (`lorenz`). Now: tap: Race along the path. Plan: keep.
   - Owner: Spin a little more or be more dynamic; looks good when still.

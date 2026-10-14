@@ -127,8 +127,7 @@ out.push(
 const categories = [...new Set(rows.map((r) => r.category))];
 for (const c of categories) {
   const inCat = rows.filter((r) => r.category === c);
-  const label = c === "maths" ? "Math" : `${c[0].toUpperCase()}${c.slice(1)}`;
-  out.push(`## ${label} (${inCat.length})`, "");
+  out.push(`## ${c[0].toUpperCase()}${c.slice(1)} (${inCat.length})`, "");
   for (const r of inCat) {
     const tag = r.v === "new" ? `new effect (${r.wave})` : r.v;
     out.push(`- **${r.label}** (\`${r.id}\`). Now: ${r.now}. Plan: ${tag}.`);
