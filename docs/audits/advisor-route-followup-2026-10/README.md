@@ -104,20 +104,37 @@ phone scan. The dialog's on-screen code retains the encoder's original choice be
 Hardware export latency, on-screen camera detection, and real-device performance remain unmeasured.
 The loopback links cannot be reached by another phone.
 
+## Alternate-port verification and showcase facts
+
+The
+[Operator's CI follow-up](https://github.com/ryanjosephkamp/splashery/pull/664#issuecomment-6197282315)
+identified two test expectations tied to the saved local URL and stale showcase facts. Both QR tests
+failed before the fix on port 4664. They now expect the URL returned by the current Share dialog,
+including its actual origin and compressed scene. Both readers still independently find and decode
+the saved PNG exactly, and the reader-error test still checks JSON, no premature download, and a
+successful retry. Direct raster diagnostics retain the original counterexample bytes.
+
+[Alternate-port regression log](port-regression.txt): **24 tests passed** using two workers with
+`SPLASHERY_PORT=4664`. This includes all three advisor specs and the existing showcase-facts check.
+`node tools/shw-facts.mjs` regenerated the facts; `--check` passes. The only numeric changes are
+Photo to 3D's recipe size, 38.4 to 38.7 KB, and gzip size, 12.5 to 12.6 KB. Notice behavior and QR
+production code are unchanged by this revision.
+
 ## Verification and limits
 
-- [Current regression log](qr-mask-regression.txt): **16 targeted tests passed** with two workers,
-  followed by **10 notice tests passed** with one worker. The targeted run covers the original
-  unassisted export assertions, saved finder counterexample, reader-load failure and retry, separate
-  geometry diagnostics, existing camera-view Share test, and oversized-scene fallback.
+- [Earlier QR-mask regression log](qr-mask-regression.txt): **16 targeted tests passed** with two
+  workers, followed by **10 notice tests passed** with one worker. The targeted run covers the
+  original unassisted export assertions, saved finder counterexample, reader-load failure and retry,
+  separate geometry diagnostics, existing camera-view Share test, and oversized-scene fallback.
 - The earlier [21-test log](regression.txt) remains historical evidence from the first
   implementation; its geometry-assisted Share assertion is superseded.
 - All study PNGs and dialog screenshots stay on the evidence-only clips branch. Its manifest records
   artifact sizes and SHA-256 hashes.
 - Independent code review found no actionable issues. The original notice files and four
   owner-review images are unchanged in this revision. The owner still needs to review those images.
-- **Full-suite Actions proof is pending the Operator's full-suite label.** No label or workflow
-  dispatch was added here.
+- **Full-suite Actions verification remains pending on the corrected head.** The Operator has added
+  the full-suite label, so a push automatically starts the next run. No manual workflow dispatch was
+  added here.
 - Second-phone scans stay blocked, needs the owner. Hardware smoothness, real-device load times, GPU
   presentation, and hardware WebGPU remain unmeasured.
 
