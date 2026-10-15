@@ -1831,7 +1831,7 @@ site. The build-time code is offered under this repository's MIT license.
 # Photo to 3D failure atlas (Codex task 87)
 
 The local failure finder, metric calibrations, and static gallery are made by Ryan with Codex
-(GPT-6), October 15, 2026. Tool and gallery code are MIT. Original audit renders are CC0 1.0,
-subject to their source image licenses. Photos and their individual source, author, license,
-byte-hash, and live-license records are kept on `codex/photo-3d-failures-clips`, never merged. See
-[the failure-gallery report](docs/audits/photo-3d-failures-2026-10.md).
+(GPT-6), October 15, 2026. Tool and gallery code are MIT. Original audit capture contributions are
+CC0 1.0; source images retain their recorded terms. Photos and their individual source, author,
+license, byte-hash, and live-license records are kept on `codex/photo-3d-failures-clips`, never
+merged. See [the failure-gallery report](docs/audits/photo-3d-failures-2026-10.md).

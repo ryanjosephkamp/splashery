@@ -81,6 +81,13 @@ test("directional streak excess penalizes extrusion against textured nearby cont
   expect(
     streakR4({ width: w, height: h, data }, new Uint8Array(w * h)).directionalExcess,
   ).toBeNull();
+  const blankReveal = data.slice();
+  for (let y = 0; y < h; y++)
+    for (let x = 0; x < 64; x++) blankReveal.set([128, 128, 128, 255], (y * w + x) * 4);
+  const blank = streakR4({ width: w, height: h, data: blankReveal }, classes);
+  expect(blank.directionalExcess).toBeNull();
+  expect(blank.textureEnergyRatio).toBe(0);
+  expect(severity({ streak: blank })).toBeGreaterThanOrEqual(2);
 });
 
 test("reveal coverage counts actual unfilled mask pixels, with foreground excluded", () => {
