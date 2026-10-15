@@ -39,9 +39,9 @@ Square eyes use the original 7×7 finder. Rounded eyes use outer, hole, and cent
 latter preserve the axial dark/light center runs but must qualify with all three readers. Every
 other functional pattern and every encoded data module is unchanged.
 
-Small budgets use one forced-center tint per module, continuous finder patches, a coarser backing,
-and complete decoration, instead of truncating or rejecting an otherwise representable code. The
-interface identifies the reduced picture detail. Impossible fine grids are skipped before
+Small Circle budgets use one forced-center tint per module, continuous finder patches, a coarser
+backing, and complete decoration, instead of truncating or rejecting an otherwise representable
+code. The interface identifies the reduced picture detail. Impossible fine grids are skipped before
 allocation. This also addresses the pre-existing circular Picture QR failure in the 8,000-splat kit
 check.
 
@@ -164,13 +164,15 @@ unlightened controls that fail the expanded grid are not described as newly qual
 
 ## Browser verification
 
-The browser is installed Chromium 151.0.7922.173 on Debian, using the repository's SwiftShader
-configuration. Browser work uses the repository's Playwright workflow. The flow is Picture QR → open
-a picture → drag or zoom the crop → apply → scan → save and reopen its settings. Phone and desktop
-review sizes are 390×844 and 1440×900. Picture QR review frames use H and Fit size, and QR code
-review frames use its default Auto correction. Separate finished-render tests request and verify H
-explicitly. The complete picture grid uses the existing H/More defaults. Desktop editor views use
-the public Shelf height control to make room for the preview and actions.
+The browser is installed Chromium 151.0.7922.173 on Debian. Original review captures and the
+main-versus-branch buffer comparison use the repository's SwiftShader configuration; the AI
+background regression selection uses Mesa llvmpipe under Xvfb. Browser work uses the repository's
+Playwright workflow. The flow is Picture QR → open a picture → drag or zoom the crop → apply → scan
+→ save and reopen its settings. Phone and desktop review sizes are 390×844 and 1440×900. Picture QR
+review frames use H and Fit size, and QR code review frames use its default Auto correction.
+Separate finished-render tests request and verify H explicitly. The complete picture grid uses the
+existing H/More defaults. Desktop editor views use the public Shelf height control to make room for
+the preview and actions.
 
 The new regression file covers crop bounds, shared disc coordinates, legacy integer sampling,
 encoded data preservation, scene/share metadata, mouse/touch/keyboard editing, reopening a missing
@@ -208,6 +210,7 @@ before merge; the PR remains a draft. Review images go only on the clips branch.
   weave, capture simulator, and readers.
 - Environment: managed Debian container, installed Chromium 151, software WebGL2. The study and
   original verification used Node 24.19.0; review regression checks use Node 22.23.3 to match CI.
+  The AI background selection uses Mesa llvmpipe under Xvfb with two Playwright workers.
   Physical-device performance, memory, and frame rate are unmeasured.
 - Node pack checks: QR code 158,428 splats and Picture QR 122,602 splats. The compact Circle render
   is also checked at an 8,000-splat budget with all three readers.
@@ -232,14 +235,44 @@ The Picture QR tap fixture now waits until the ripple actually settles before re
 frame. This keeps both exact-payload assertions while avoiding a fixed 4.5-second wall-clock
 assumption under software rendering.
 
+## AI background compatibility follow-up
+
+The existing `cdx-pics` five-link browser test reproduced a long-link regression on the Split leaf
+background with legacy Square settings. At the normal Mid budget of 240,000 splats, the longest link
+makes a 77-module code whose final halftone lattice contains 243,086 splats. Main lets the Kit clip
+the last 3,086 samples from that lattice. Task 80 instead replaced it with the compact tier, which
+changed the picture and failed the 330-px phone, blurred 900-px print, and 8-pixel-per-module
+checks. Its 4-pixel-per-module check passed. The crop, border, and eye defaults were unchanged.
+
+Square now retains its final halftone lattice and the Kit's existing budget clipping. Finer grids
+whose encoded points alone exceed the budget are still skipped before allocation. The compact tier
+is restricted to Circle, where it keeps the encoded square and complete ring within the budget.
+
+For the short and longest links, the fixed Split leaf render has byte-identical position, color,
+animation, and scale buffers to main `c00e1cb8`. Both captures pass all four existing rendered
+trials. This comparison used Node 22.23.3, Chromium 151, and SwiftShader. The full five-link browser
+selection passed all 24 backgrounds with its original assertions: five links each, four jsQR render
+conditions, the production scan, credits, lazy loading, and the actual longest-link PNG export.
+
+`node tools/shw-facts.mjs` regenerated the showcase facts for this checkout, and the existing
+measured-facts test passed. No scan threshold, test assertion, splat budget, or source picture
+changed.
+
 ## Completed checks
 
-All 185 required cases across 23 spec files passed in one fresh Node 22.23.3 run after the
-Operator's review fixes, with no skips or failures. Both full-output fingerprints match main. The
-new raw Circle regression first failed on the extra-dot output and passed after the boolean fix. The
-complete kit loop covered all 394 toys and their choices twice in 6.8 minutes under its original
-600-second timeout. The qualification study completed October 15, 2026 at 00:30 UTC; its geometry,
-data, and reader thresholds are unchanged by this follow-up.
+The follow-up selected 210 cases across 25 spec files: the 185 required cases, all 24 five-link
+background cases, and the measured-facts test. Under Node 22.23.3 and Mesa with two workers, 208
+passed, two failed, and none were skipped. The procedural-generator smoke case saved seed 1 instead
+of 4242; it passed unchanged in a fresh SwiftShader process. The Damage lab's fixed-set meter test
+timed out at its existing 600-second limit under Mesa and again under SwiftShader while the smoke
+run was active. Its final quiet, one-worker SwiftShader recheck passed unchanged in 9.5 minutes. All
+210 selected cases therefore passed across the main run and unchanged rechecks, with no skips.
+
+Both full-output fingerprints match main. The new raw Circle regression first failed on the
+extra-dot output and passed after the boolean fix. The complete kit loop covered all 394 toys and
+their choices twice in 8.7 minutes under its original 600-second timeout. The qualification study
+completed October 14, 2026, at 8:30 p.m. EDT; its generator, data, and reader thresholds are
+unchanged by this follow-up.
 
 The 44-image
 [review set](https://github.com/ryanjosephkamp/splashery/blob/codex/picture-qr-fit-clips/tests/screenshots/cdx-qr-fit-review.md)
@@ -247,16 +280,24 @@ contains 36 finished-code frames, four crop-editor views, and four option-panel 
 finished-code frame passed its built-in check and all three readers at 390 px. The editor views also
 verify the crop preview, zoom, and action buttons fit the scrollable panel.
 
-The required spec selection, run with Node 22 to match CI, is:
+The required specs plus all five-link background cases and the measured-facts check, run with Node
+22 to match CI, are:
 
 ```sh
-SPLASHERY_PORT=4175 SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/qr*.spec.mjs tests/cdx-circle-qr.spec.mjs tests/cdx-qr-*.spec.mjs tests/kit.spec.mjs tests/smoke.spec.mjs tests/help.spec.mjs tests/hta.spec.mjs
+DISPLAY=:98 SPLASHERY_GL=llvmpipe SPLASHERY_PORT=4175 SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/qr*.spec.mjs tests/cdx-circle-qr.spec.mjs tests/cdx-qr-*.spec.mjs tests/kit.spec.mjs tests/smoke.spec.mjs tests/help.spec.mjs tests/hta.spec.mjs tests/cdx-pics.spec.mjs:119 tests/shw.spec.mjs:34 --workers=2
 ```
 
-`node tools/check-packs.mjs qr qr-craft`, `npx prettier --check .`, and
-`node tools/us-english.mjs --diff` passed. Thumbnails were regenerated, and their contact sheet was
-reviewed. The cover tests retain failed-code protection through retries, stale checks, and a switch
-to another toy while preserving any unrelated cover.
+The final standalone meter recheck uses SwiftShader with no other browser job:
+
+```sh
+SPLASHERY_GL= SPLASHERY_PORT=4175 SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/qrs-toys.spec.mjs:85 --workers=1
+```
+
+`node tools/check-packs.mjs qr qr-craft` passed without concurrent browser load; the default QR
+build took 605 ms against its 1.5-second limit. `node tools/shw-facts.mjs --check`,
+`npx prettier --check .`, and `node tools/us-english.mjs --diff` passed. Thumbnails were
+regenerated, and their contact sheet was reviewed. The cover tests retain failed-code protection
+through retries, stale checks, and a switch to another toy while preserving any unrelated cover.
 
 Main advanced to `c00e1cb8` with CI tooling and documentation during verification. Those updates
 were merged into this branch; the application and required test files are unchanged by that

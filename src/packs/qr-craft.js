@@ -375,11 +375,12 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
   let splats = null;
   for (const fine of [3, 2, 1]) {
     const M = G * fine;
-    if (M * M + (M - 1) * (M - 1) > budget) continue;
+    // Square keeps its legacy lattice at fine = 1 for the Kit's budget clipping.
+    if ((shape === "circle" || fine > 1) && M * M + (M - 1) * (M - 1) > budget) continue;
     splats = make(fine);
     if (splats.length <= budget) break;
   }
-  if (!splats || splats.length > budget) {
+  if (shape === "circle" && (!splats || splats.length > budget)) {
     const reduced = compactPicture(w, budget, H, shape, pic, options);
     if (reduced) return { splats: reduced, half: H, reduced: true };
     throw new Error(
@@ -389,7 +390,7 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
   return { splats, half: H };
 }
 
-// The small-budget tier keeps every encoded module. A module carries its
+// The small-budget Circle tier keeps every encoded module. A module carries its
 // forced center's tint instead of a full halftone; decoration stays complete.
 function compactPicture(w, budget, H, shape, pic, options) {
   const N = w.code.size;
