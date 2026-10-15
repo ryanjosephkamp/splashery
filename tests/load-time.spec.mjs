@@ -17,14 +17,14 @@ test("a late phone read cannot replace a larger scan needed by another player", 
   // Schedule real file reads in the order a slow phone request and a faster
   // high-detail request can complete in two players sharing the module.
   io.readFile = async (file, ...args) => {
-    if (String(file).endsWith("fountain-pen-opening.splats"))
+    if (String(file).endsWith("water-bottle-opening.splats"))
       await new Promise((resolve) => setTimeout(resolve, 200));
     return read(file, ...args);
   };
   syncBuiltinESMExports();
   try {
     const { RECIPES } = await import("../src/packs/real-objects.js?concurrent-scan-test");
-    const recipe = RECIPES["fountain-pen"];
+    const recipe = RECIPES["water-bottle"];
     const options = resolveOptions(recipe, {});
     await Promise.all([
       recipe.prepare(options, null, { profile: "low", count: 90000 }),
@@ -42,7 +42,7 @@ test("a late phone read cannot replace a larger scan needed by another player", 
   }
 });
 
-test("phone scan prefixes build exactly the same buffers as full scans", async () => {
+test("phone prefixes and original-file fallbacks preserve the full-scan buffers", async () => {
   const full = await import("../src/packs/real-objects.js?full-scan-test");
   async function build(mod, id, profile, count = 90000) {
     const recipe = mod.RECIPES[id];
@@ -83,20 +83,20 @@ test("phone opening requests use prefixes and larger budgets retain full scans",
   page.on("request", (r) => requests.push(new URL(r.url()).pathname));
   await page.goto("/?renderer=webgl2&profile=weak&adapt=off&labs=1");
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
-  await page.evaluate(() => window.__splashery.app.chooseToy("fountain-pen"));
-  await page.waitForFunction(() => window.__splashery.player.toyInfo?.id === "fountain-pen");
-  expect(requests).toContain("/assets/toys/fountain-pen/fountain-pen-opening.splats");
-  expect(requests).not.toContain("/assets/toys/fountain-pen/fountain-pen.splats");
+  await page.evaluate(() => window.__splashery.app.chooseToy("water-bottle"));
+  await page.waitForFunction(() => window.__splashery.player.toyInfo?.id === "water-bottle");
+  expect(requests).toContain("/assets/toys/water-bottle/water-bottle-opening.splats");
+  expect(requests).not.toContain("/assets/toys/water-bottle/water-bottle.splats");
   await page.evaluate(async () => {
     window.__splashery.player.setProfile("mid");
-    await window.__splashery.app.chooseToy("fountain-pen");
+    await window.__splashery.app.chooseToy("water-bottle");
   });
-  expect(requests).toContain("/assets/toys/fountain-pen/fountain-pen-opening-mid.splats");
+  expect(requests).toContain("/assets/toys/water-bottle/water-bottle-opening-mid.splats");
   await page.evaluate(async () => {
     window.__splashery.player.setProfile("high");
-    await window.__splashery.app.chooseToy("fountain-pen");
+    await window.__splashery.app.chooseToy("water-bottle");
   });
   await expect
-    .poll(() => requests.includes("/assets/toys/fountain-pen/fountain-pen.splats"))
+    .poll(() => requests.includes("/assets/toys/water-bottle/water-bottle.splats"))
     .toBe(true);
 });

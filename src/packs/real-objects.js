@@ -74,10 +74,7 @@ const SCANS = new Map();
 // across the full scan nor use its tail to build extra geometry.
 const OPENING_SHARES = {
   "water-bottle": 0.8,
-  sunglasses: 0.78,
   "baseball-cap": 0.78,
-  "fountain-pen": 0.75,
-  "soda-can": 0.7,
 };
 
 async function readBytes(rel) {
