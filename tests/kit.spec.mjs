@@ -86,7 +86,9 @@ test("v3 fields are validated: options, clay on shelf toys, pattern and motion",
 
 test("every kit toy has a recipe that builds deterministically and fits the unit ball", async () => {
   // It builds every kit toy twice in every option, so it grows with the shelves (Ops, October 6, 2026).
-  test.setTimeout(600_000);
+  // Fix12 (October 14, 2026): 8.8 min alone in a cloud container once Picture QR's circle stopped
+  // throwing halfway through, so 15 min.
+  test.setTimeout(900_000);
   expect(KIT.length).toBeGreaterThan(0);
   const kinds = new Set(Object.values(KINDS));
   for (const def of KIT) {
