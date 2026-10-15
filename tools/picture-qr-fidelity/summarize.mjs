@@ -14,10 +14,10 @@ const names = {
   main: arg("main", "browser-main-all-low"),
   detail: arg("detail", "browser-detail-v4-low"),
 };
-const corpus = [
-  ...SAMPLES,
-  ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json")),
-];
+const corpusFile = arg("corpus", "");
+const corpus = corpusFile
+  ? JSON.parse(fs.readFileSync(corpusFile))
+  : [...SAMPLES, ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json"))];
 const shapes = ["square", "circle"],
   scales = ["phone", "print"],
   readers = ["jsqr", "zxingcpp"];

@@ -18,10 +18,12 @@ const root = ".cache/picture-qr-fidelity",
       ? Array.from({ length: 10 }, (_, i) => i)
       : arg("links", "0,6,9").split(",").map(Number),
   shapes = arg("shapes", "square,circle").split(",");
-const corpus = [
-  ...SAMPLES,
-  ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json")),
-].filter((p) => ids.includes("all") || ids.includes(p.id));
+const corpusFile = arg("corpus", "");
+const corpus = (
+  corpusFile
+    ? JSON.parse(fs.readFileSync(corpusFile))
+    : [...SAMPLES, ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json"))]
+).filter((p) => ids.includes("all") || ids.includes(p.id));
 const first = arg("first", "").split(",").filter(Boolean);
 if (first.length)
   corpus.sort(
@@ -74,6 +76,7 @@ const hashes = Object.fromEntries(
     "vendor/jsqr/jsQR.js",
     "package-lock.json",
     ...(casesFile ? [casesFile] : []),
+    ...(corpusFile ? [corpusFile] : []),
     ...corpus.flatMap((picture) => [
       picture.file,
       ...(qualify ? [`${root}/review/sources/${picture.id}.png`] : []),
@@ -422,8 +425,13 @@ for (let repeat = 0; repeat < Number(arg("repeats", "3")); repeat++)
               kitCount: a.player.proc.ctx.kit.count,
             };
           });
+          let qualifiedReads = null;
           if (qualify) {
             const assessment = await qualifyCapture(source, result, LINKS[link], shape);
+            qualifiedReads = assessment.scans.reduce(
+              (sum, scan) => sum + Number(scan.jsqr) + Number(scan.zxingcpp),
+              0,
+            );
             const directory = `${root}/review/${name}-${mode}`;
             fs.mkdirSync(directory, { recursive: true });
             if (
@@ -481,6 +489,7 @@ for (let repeat = 0; repeat < Number(arg("repeats", "3")); repeat++)
             Math.round(ms),
             result.check.ok,
             result.method,
+            qualifiedReads === null ? "" : `${qualifiedReads}/48`,
           );
         }
       }

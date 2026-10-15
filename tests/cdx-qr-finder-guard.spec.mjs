@@ -144,3 +144,35 @@ test("An actual rejection reduces the correction budget before another finder-on
     makeWoven(pic, { ...options, rejected: [renderingKey(rejected)] }).rendering.fraction,
   ).toBe(0.4);
 });
+
+test("A failed perspective forecast tries spatial repair before reducing an already bounded correction fit", async () => {
+  await loadBlurKernel(fs.readFileSync("src/qr-craft/blur.wasm"));
+  await loadSecondReader(fs.readFileSync("src/qr-craft/vendor/zxing/reader/zxing_reader.wasm"));
+  const pic = { w: 48, h: 48, data: new Float32Array(48 * 48 * 3).fill(0.5) },
+    rotations = [];
+  const w = await makeWovenAsync(
+    pic,
+    {
+      text: "https://example.org/early-rotation",
+      shape: "square",
+      fidelity: "detail",
+      level: "H",
+      size: "more",
+      center: "small",
+      style: "color",
+      contrast: 0.5,
+      preferContinuous: true,
+      preferCorrection: true,
+      errorFraction: 0.6,
+      texture: "tiles",
+      channel: "weighted",
+    },
+    async (candidate, picture, shape) => {
+      rotations.push(candidate.code.rotation || 0);
+      if (rotations.length === 1) return { ok: false, preflight: true, ppm: 4, blur: 0.3, view: 2 };
+      expect(rotations).toEqual([0, 2]);
+      return validateDetail(candidate, picture, shape, read);
+    },
+  );
+  expect(w.detailCheck).toMatchObject({ ok: true, readers: ["jsqr", "zxingcpp"] });
+});

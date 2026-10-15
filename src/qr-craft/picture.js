@@ -798,43 +798,45 @@ export function* detailCandidates(pic, o) {
         o.preferContinuous &&
         o.texture === "tiles"
       ) {
-        if (w.rendering.method === "correction" && w.rendering.fraction > 0.4) {
-          const backup = decorate(
+        const initialOptions = {
+          ...t,
+          margin: initial,
+          finderEdge: 0.24,
+          finderCore: 0.08,
+          channel: o.channel,
+          finderGuard: o.finderGuard,
+        };
+        const opposite = () =>
+          decorate(
+            weaveDetail(
+              rotateCode(fitPadding(baseCode, inversePicture(pic, baseCode.size, 2)), 2),
+              pic,
+              initialOptions,
+            ),
+            false,
+          );
+        const backup = () => {
+          const candidate = decorate(
             weaveDetail(fitPictureErrors(code, pic, 0.4), pic, {
-              ...t,
-              margin: initial,
-              finderEdge: 0.24,
-              finderCore: 0.08,
-              channel: o.channel,
-              finderGuard: o.finderGuard,
+              ...initialOptions,
               method: "correction",
             }),
             false,
           );
-          backup.rendering.fraction = 0.4;
-          const backupKey = renderingKey(backup);
-          if (!seen.has(backupKey)) {
-            seen.add(backupKey);
-            tested++;
-            const backupCheck = yield backup;
-            backup.detailCheck = { ...backupCheck, tried: 1, candidates: tested };
-            if (backupCheck?.ok) return backup;
-          }
-        }
-        const opposite = rotateCode(fitPadding(baseCode, inversePicture(pic, baseCode.size, 2)), 2);
-        const alternative = decorate(
-          weaveDetail(opposite, pic, {
-            ...t,
-            margin: initial,
-            finderEdge: 0.24,
-            finderCore: 0.08,
-            channel: o.channel,
-            finderGuard: o.finderGuard,
-          }),
-          false,
-        );
-        const alternativeKey = renderingKey(alternative);
-        if (!seen.has(alternativeKey)) {
+          candidate.rendering.fraction = 0.4;
+          return candidate;
+        };
+        const higherBudget = w.rendering.method === "correction" && w.rendering.fraction > 0.4;
+        const perspective = check?.preflight && [1, 2, 5].includes(check.view);
+        const alternatives = higherBudget
+          ? perspective
+            ? [opposite, backup]
+            : [backup, opposite]
+          : [opposite];
+        for (const build of alternatives) {
+          const alternative = build(),
+            alternativeKey = renderingKey(alternative);
+          if (seen.has(alternativeKey)) continue;
           seen.add(alternativeKey);
           tested++;
           const alternativeCheck = yield alternative;

@@ -536,7 +536,7 @@ function detailSettings(rejected = null) {
     preferCorrection: study.preferCorrection !== false,
     errorFraction: Number.isFinite(study.detailErrorFraction)
       ? Math.max(0, Math.min(0.6, study.detailErrorFraction))
-      : 0.4,
+      : 0.6,
     // A failed stage view gets the full forecast before another expensive rebuild.
     captureValidation: study.captureValidation !== false && !rejected?.length,
     channel: study.detailChannel || "weighted",
@@ -789,13 +789,30 @@ async function makeItScan() {
   return PIC.fix;
 }
 
+function canSavePicture() {
+  const w = PIC.woven;
+  if (!w) return false;
+  if (w.fidelity !== "detail") return true;
+  const check = PIC.check;
+  return (
+    !PIC.checking &&
+    PIC.buildGeneration === app()?.player?.loadToken &&
+    check?.ok === true &&
+    check.stress?.ok === true &&
+    check.text === w.code.text
+  );
+}
+
 async function savePNG(size = 1600) {
   const a = app();
   const w = PIC.woven;
-  if (!a || !w) return null;
+  if (!a || !w || !canSavePicture()) return null;
+  const generation = a.player.loadToken;
   return a.withBusy("Making the picture…", async () => {
     const { canvasToBlob, downloadBlob, timestampName } = await exportsJS();
     const canvas = await renderFront(PIC.kit, shapeHalf(w.code, PIC.options?.shape), size, 0);
+    if (w.fidelity === "detail" && (PIC.woven !== w || a.player.loadToken !== generation))
+      return null;
     const blob = await canvasToBlob(canvas);
     downloadBlob(blob, timestampName("png", "splashery-picture-qr"));
     a.ui?.toast?.("Picture saved, with its quiet zone.");
@@ -844,6 +861,7 @@ function picturePanel() {
       const f = PIC.fix;
       if (f) out.append(el("p", { className: "note", id: "qrc-fix", textContent: f.none ? "No version close to this one scans. Try a plainer picture or a shorter text." : f.changed.length ? `Changed so it scans: ${f.changed.join(", ")}.` : "It already scans as it is." })); // prettier-ignore
       scan.disabled = !ck || (ck.ok && (!ck.stage || ck.stage.every((s) => s.ok)));
+      png.disabled = !canSavePicture();
     },
   };
   PIC.panel.refresh();

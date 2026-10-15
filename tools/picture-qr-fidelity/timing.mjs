@@ -81,10 +81,12 @@ for (const pair of pairs) {
   pictureGroups.get(key).push(pair);
 }
 const pictures = [...pictureGroups].map(([key, selected]) => ({ key, ...stats(selected) }));
-const expected = [
-  ...SAMPLES,
-  ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json")),
-].flatMap((picture) =>
+const corpusFile = arg("corpus", "");
+const expected = (
+  corpusFile
+    ? JSON.parse(fs.readFileSync(corpusFile))
+    : [...SAMPLES, ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json"))]
+).flatMap((picture) =>
   Array.from({ length: 10 }, (_, link) =>
     ["square", "circle"].map((shape) => `${picture.id}/${link}/${shape}/0`),
   ).flat(),
