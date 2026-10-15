@@ -821,6 +821,7 @@ const PICTURE = {
     out.morph = [c.turn > 0 ? 1 - c.turn : 0, 0, PIC.tap[0], PIC.tap[1]];
   },
   photo: {
+    skipIdenticalUniforms: true,
     on: (o) => tidy(o).fidelity === "detail" && detailSettings().texture === "tiles",
     rect: () => {
       const half = PIC.woven.code.size / 2;

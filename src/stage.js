@@ -836,14 +836,20 @@ export class Stage {
   // The frame's mapping (photoUniforms in src/photo-splats.js): the work-buffer pass's map on the
   // toy; the picture's axes and brightness straight into the device's uniforms (a parameter on the
   // splat material would reach the renderer's copy of it only through a material update).
-  setPhotoUniforms({ map, tu, tv, k }) {
+  setPhotoUniforms({ map, tu, tv, k }, skipIdentical = false) {
     const g = this.toy?.entity.gsplat;
     if (g) g.setParameter("uSpPhotoMap", map);
     const scope = this.device.scope;
     scope.resolve("uSpPhotoTu").setValue(tu);
     scope.resolve("uSpPhotoTv").setValue(tv);
     scope.resolve("uSpPhotoK").setValue(k);
-    // A still photo does not need another frame for an identical mapping.
+    // Ordinary photo toys keep their original redraw contract. Only the
+    // Most detail QR recipe opts into suppressing an identical still mapping.
+    if (!skipIdentical) {
+      this.lastPhotoUniforms = null;
+      this.requestRender();
+      return;
+    }
     // Keep copies: callers may reuse and mutate their uniform arrays.
     const values = [...map, ...tu, ...tv, ...k];
     if (!this.lastPhotoUniforms || values.some((v, i) => v !== this.lastPhotoUniforms[i])) {

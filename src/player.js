@@ -1550,7 +1550,7 @@ export class Player {
     // ordinary photos still follow the common body rotation.
     const q = tiles[0] > 0.5 ? [0, 0, 0, 1] : u.uSpBodyQ && (u.uSpBodyQ[3] || u.uSpBodyQ[0] || u.uSpBodyQ[1] || u.uSpBodyQ[2]) ? u.uSpBodyQ : [0, 0, 0, 1]; // prettier-ignore
     const tex = this.stage.photoTex;
-    this.stage.setPhotoUniforms(photoUniforms({ x0: a[0], x1: b[0], y0: b[1], y1: a[1] }, q, u.uSpClock?.[2] ?? 1, tex ? [tex.width, tex.height] : [1, 1])); // prettier-ignore
+    this.stage.setPhotoUniforms(photoUniforms({ x0: a[0], x1: b[0], y0: b[1], y1: a[1] }, q, u.uSpClock?.[2] ?? 1, tex ? [tex.width, tex.height] : [1, 1]), spec.skipIdenticalUniforms === true); // prettier-ignore
   }
 
   // A world point in the current toy's recipe coordinates: a kit toy's
