@@ -2,7 +2,6 @@
 // files and sharing, on top of the shared Player runtime.
 
 import { Player, NoGPUError, Gestures, ui2On } from "./player.js";
-import { openingReady } from "./opening-pack.js";
 import { createUI } from "./ui.js";
 import { canPlay } from "./physics/hands-on.js"; // lane Physics
 import {
@@ -154,9 +153,8 @@ class App {
     document.documentElement.dataset.theme = matchMedia("(prefers-color-scheme: dark)").matches
       ? "dark"
       : "light";
-    this.player = new Player(canvas, { preloadOpeningScan: true });
+    this.player = new Player(canvas);
     try {
-      await openingReady;
       await this.player.init();
     } catch (err) {
       console.info("Splashery could not start a renderer:", err?.message || err);

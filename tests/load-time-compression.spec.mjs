@@ -16,7 +16,9 @@ test("opening gzip copies preserve every original byte", () => {
     expect(gunzipSync(fs.readFileSync(file)).equals(fs.readFileSync(source)), source).toBe(true);
 });
 
-test("the opening scan starts transferring before GPU initialization", async ({ page }) => {
+test("the opening scan retains main's transfer order after GPU initialization", async ({
+  page,
+}) => {
   await page.addInitScript(() => {
     let scanStarted = false;
     const fetch = window.fetch;
@@ -38,7 +40,7 @@ test("the opening scan starts transferring before GPU initialization", async ({ 
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
   const order = await page.evaluate(() => window.__scanBeforeGpu);
   expect(order.length).toBeGreaterThan(0);
-  expect(order.every(Boolean)).toBe(true);
+  expect(order.some(Boolean)).toBe(false);
   expect(await page.evaluate(() => window.__splashery.player.toyInfo.id)).toBe("soda-can");
 });
 
@@ -163,7 +165,7 @@ test("engine transfer starts while the stylesheet still blocks DOM readiness", a
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
 });
 
-test("native startup preserves the complete live PlayCanvas namespace and compressed help", async ({
+test("native startup preserves the complete live PlayCanvas namespace and native help", async ({
   page,
 }) => {
   const requests = [];
@@ -189,7 +191,8 @@ test("native startup preserves the complete live PlayCanvas namespace and compre
   expect(result.help).toBe(result.originalHelp);
   expect(requests).toContain("/vendor/playcanvas/playcanvas.min.mjs");
   expect(requests).not.toContain("/vendor/playcanvas/playcanvas.min.mjs.gz");
-  expect(requests).toContain("/assets/opening/toy-help.mjs.gz");
+  expect(requests).toContain("/src/toy-help.js");
+  expect(requests).not.toContain("/assets/opening/toy-help.mjs.gz");
 });
 
 test("unsupported native decompression retains the original engine and help", async ({ page }) => {

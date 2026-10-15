@@ -38,8 +38,7 @@ export function ui2On() {
 import { pickKernel } from "./kernels.js"; // Lab
 import { photoUniforms } from "./photo-splats.js"; // lane Photo fidelity
 import { pickSharpness, sharpOff } from "./sharpness.js"; // Sharpness
-import { createScene, normalizeScene, THEMES, normalizeFigures } from "./state.js";
-import { decodeSceneHash, parseHash } from "./codec.js";
+import { createScene, THEMES, normalizeFigures } from "./state.js";
 import { mulberry32, mixSeed, hash32 } from "./noise.js";
 import { Pictures } from "./pictures.js"; // Pictures
 import { ChunkHost } from "./chunks.js"; // lane Powers of ten
@@ -216,33 +215,12 @@ export class Player {
   async init() {
     const params = new URLSearchParams(location.search);
     const prefer = this.opts.prefer || params.get("renderer") || "auto";
-    let preparing = Promise.resolve();
-    // These scan recipes prepare only CPU data. Start their exact, tier-selected
-    // transfer before GPU setup, then reuse the recipe's normal scan cache.
-    if (this.opts.preloadOpeningScan && prefer !== "none") {
-      try {
-        const { s } = parseHash(location.hash);
-        const toy = s ? normalizeScene(await decodeSceneHash(s), this.profile).toy : null;
-        const def = toy?.kind === "builtin" ? findToy(toy.id) : null;
-        if (def?.kind === "kit" && ["real-objects", "photoreal-r3"].includes(def.pack)) {
-          const { RECIPES } = await import(`./packs/${def.pack}.js`);
-          const recipe = RECIPES[def.id];
-          const count = this.splatBudget(recipe.density ?? 1);
-          preparing = recipe
-            .prepare(resolveOptions(recipe, toy.options), null, { profile: this.profile, count })
-            .catch(() => {});
-        }
-      } catch {
-        // The app retains its usual invalid-link and asset-error handling.
-      }
-    }
     this.stage = await Stage.create(this.canvas, {
       prefer,
       weak: this.profile === "low",
       pixelRatio: pixelCap(this.profile),
       adaptive: this.adaptive,
     });
-    await preparing;
     this.stage.onSlow = () => this.stepDown();
     this.camera = new OrbitCamera({ reducedMotion: this.reducedMotion });
     this.driver = new EffectDriver();

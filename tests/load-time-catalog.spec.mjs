@@ -1,14 +1,17 @@
-// Task 51: scan code stays deferred until its toy opens.
+// Task 51: main's eager scan helpers retain deferred scan payloads.
 import { test, expect } from "@playwright/test";
 
-test("unrelated toys defer the scan helpers; a scan still loads and responds", async ({ page }) => {
+test("unrelated toys retain eager helpers without scan payloads; a scan loads and responds", async ({
+  page,
+}) => {
   const requests = [];
   page.on("request", (r) => requests.push(new URL(r.url()).pathname));
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/?renderer=webgl2&profile=weak&adapt=off&labs=1");
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
-  expect(requests).not.toContain("/src/packs/real-objects.js");
+  expect(requests).toContain("/src/packs/real-objects.js");
+  expect(requests.some((url) => /\.splats(?:\.gz)?$/.test(url))).toBe(false);
   await page.evaluate(() => window.__splashery.app.chooseToy("pyrite-cubes"));
   await page.waitForFunction(() => window.__splashery.player.toyInfo?.id === "pyrite-cubes");
   expect(requests).toContain("/src/packs/real-objects.js");
@@ -28,26 +31,14 @@ test("unrelated toys defer the scan helpers; a scan still loads and responds", a
   expect(errors).toEqual([]);
 });
 
-test("a museum scan starts fetching while its deferred helpers are still loading", async ({
-  page,
-}) => {
+test("an eager museum helper keeps the scan payload deferred until selection", async ({ page }) => {
   await page.goto("/?renderer=webgl2&profile=weak&adapt=off&labs=1");
   await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
-  let release;
-  const held = new Promise((resolve) => (release = resolve));
-  await page.route("**/src/packs/real-objects.js", async (route) => {
-    await held;
-    await route.continue();
-  });
   const scan = page.waitForRequest("**/assets/toys/pyrite-cubes/pyrite-cubes-opening.splats.gz", {
     timeout: 10000,
   });
   const chosen = page.evaluate(() => window.__splashery.app.chooseToy("pyrite-cubes"));
-  try {
-    await scan;
-  } finally {
-    release();
-    await chosen;
-  }
+  await scan;
+  await chosen;
   expect(await page.evaluate(() => window.__splashery.player.toyInfo.id)).toBe("pyrite-cubes");
 });

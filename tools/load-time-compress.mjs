@@ -6,7 +6,6 @@ import { gzipSync, gunzipSync } from "node:zlib";
 import { MANUAL_PDF } from "../manual/pdf-edition.js";
 
 const copies = [
-  ["src/toy-help.js", "assets/opening/toy-help.mjs.gz", "MIT; existing Splashery code"],
   [
     "manual/tinkerers-manual.pdf",
     "manual/tinkerers-manual.pdf.gz",

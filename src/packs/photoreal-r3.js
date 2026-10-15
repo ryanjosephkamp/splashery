@@ -9,11 +9,8 @@
 // One is NonCommercial (the Stannern stones, CC BY-NC 4.0, NHM Vienna): it carries `"nc": true`
 // in tools/models.json, and `node tools/nc-assets.mjs` lists it.
 
+import { addScan, decodeSplats } from "./real-objects.js";
 import { quatAxisAngle, quatMul, quatRotate, mix } from "../kit.js";
-
-// The catalog imports this module for its shelf entries. Scan helpers are
-// needed only when one of the museum scans opens.
-let addScan, decodeSplats;
 
 const TAU = Math.PI * 2;
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
@@ -53,15 +50,11 @@ async function loadScan(id, ctx) {
     typeof DecompressionStream === "function";
   const cached = SCANS.get(id);
   if (cached && cached.capacity >= (opening ? Math.floor(90000 * 0.86) : cached.n)) return cached;
-  // The scan transfer and its deferred helpers are independent. Start both
-  // together instead of putting the whole transfer behind module loading.
-  const helpers = import("./real-objects.js");
   const url = new URL(
     `../../assets/toys/${id}/${id}${opening ? "-opening.splats.gz" : ".splats"}`,
     import.meta.url,
   );
-  const [module, bytes] = await Promise.all([helpers, readScanBytes(url, opening)]);
-  ({ addScan, decodeSplats } = module);
+  const bytes = await readScanBytes(url, opening);
   const loaded = decodeSplats(bytes),
     latest = SCANS.get(id);
   if (!latest || loaded.capacity > latest.capacity) SCANS.set(id, loaded);

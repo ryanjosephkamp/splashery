@@ -11,7 +11,6 @@ import { MOVES } from "./motion.js";
 import { PATTERNS, PROJECTIONS, loadFlags } from "./patterns.js";
 import { initLive, renderLive } from "./live/panel.js"; // lane Live input
 import { ui2On } from "./player.js"; // UI r2
-import { importGzipModule } from "./gzip.js";
 import { SITE_TOY_IDS } from "./site-toy-pages.js";
 
 const $ = (id) => document.getElementById(id);
@@ -3315,10 +3314,7 @@ export function createUI(app) {
     helpKey = key;
     let mod;
     try {
-      mod = await (helpModule ??= importGzipModule(
-        new URL("../assets/opening/toy-help.mjs.gz", import.meta.url),
-        new URL("./toy-help.js", import.meta.url),
-      ));
+      mod = await (helpModule ??= import("./toy-help.js"));
     } catch {
       helpModule = null;
       return;
