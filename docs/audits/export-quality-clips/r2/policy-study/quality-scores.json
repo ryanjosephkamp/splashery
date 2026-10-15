@@ -1,0 +1,138 @@
+[
+  {
+    "key": "after-desktop-record-standard",
+    "referenceSharpness": 1054.585300923079,
+    "ssim": 0.9730963502599543,
+    "decodedSharpness": 799.3362461999444,
+    "horizontalAlignmentSSIM": 0.9731072211878949,
+    "frames": [
+      {
+        "file": "after-desktop-record-standard-decoded-01.png",
+        "ssim": 0.9732532914297689,
+        "sharpness": 809.1265629200012,
+        "horizontalAlignmentSSIM": 0.9732861637315171,
+        "horizontalShiftPixels": 0
+      },
+      {
+        "file": "after-desktop-record-standard-decoded-02.png",
+        "ssim": 0.9730958938618167,
+        "sharpness": 797.9691621450941,
+        "horizontalAlignmentSSIM": 0.9731050256578407,
+        "horizontalShiftPixels": 0
+      },
+      {
+        "file": "after-desktop-record-standard-decoded-03.png",
+        "ssim": 0.9729398654882775,
+        "sharpness": 790.9130135347376,
+        "horizontalAlignmentSSIM": 0.9729304741743272,
+        "horizontalShiftPixels": 0
+      }
+    ]
+  },
+  {
+    "key": "after-desktop-record-high",
+    "referenceSharpness": 1017.2350052689599,
+    "ssim": 0.9307981447308721,
+    "decodedSharpness": 788.1597719714129,
+    "horizontalAlignmentSSIM": 0.9312442981577523,
+    "frames": [
+      {
+        "file": "after-desktop-record-high-decoded-01.png",
+        "ssim": 0.9308706607164985,
+        "sharpness": 804.0145255318043,
+        "horizontalAlignmentSSIM": 0.9314545876595214,
+        "horizontalShiftPixels": 0
+      },
+      {
+        "file": "after-desktop-record-high-decoded-02.png",
+        "ssim": 0.9308249840367965,
+        "sharpness": 790.7778019279144,
+        "horizontalAlignmentSSIM": 0.9313200959607632,
+        "horizontalShiftPixels": 0
+      },
+      {
+        "file": "after-desktop-record-high-decoded-03.png",
+        "ssim": 0.9306987894393214,
+        "sharpness": 769.6869884545198,
+        "horizontalAlignmentSSIM": 0.9309582108529726,
+        "horizontalShiftPixels": 0
+      }
+    ]
+  },
+  {
+    "key": "after-desktop-record-max",
+    "referenceSharpness": 300.70423415146,
+    "ssim": 0.9314339936810178,
+    "decodedSharpness": 282.0064461481374,
+    "horizontalAlignmentSSIM": 0.9321383568361217,
+    "frames": [
+      {
+        "file": "after-desktop-record-max-decoded-01.png",
+        "ssim": 0.9285345152283988,
+        "sharpness": 284.3039553216776,
+        "horizontalAlignmentSSIM": 0.9294021898834872,
+        "horizontalShiftPixels": 0
+      },
+      {
+        "file": "after-desktop-record-max-decoded-02.png",
+        "ssim": 0.9286744559383169,
+        "sharpness": 278.4474357897497,
+        "horizontalAlignmentSSIM": 0.9294069183861003,
+        "horizontalShiftPixels": 0
+      },
+      {
+        "file": "after-desktop-record-max-decoded-03.png",
+        "ssim": 0.9370930098763377,
+        "sharpness": 283.26794733298493,
+        "horizontalAlignmentSSIM": 0.9376059622387777,
+        "horizontalShiftPixels": 0
+      }
+    ]
+  },
+  {
+    "key": "after-phone-record-standard",
+    "referenceSharpness": 1020.1806169803077,
+    "ssim": 0.9349920034705463,
+    "decodedSharpness": 436.3793838902746,
+    "horizontalAlignmentSSIM": 0.9584184989135359,
+    "frames": [
+      {
+        "file": "after-phone-record-standard-decoded-01.png",
+        "ssim": 0.9349091576374501,
+        "sharpness": 443.82526310299266,
+        "horizontalAlignmentSSIM": 0.9585859014580419,
+        "horizontalShiftPixels": 1
+      },
+      {
+        "file": "after-phone-record-standard-decoded-02.png",
+        "ssim": 0.934987461836084,
+        "sharpness": 436.5549932889783,
+        "horizontalAlignmentSSIM": 0.9584291578950339,
+        "horizontalShiftPixels": 1
+      },
+      {
+        "file": "after-phone-record-standard-decoded-03.png",
+        "ssim": 0.935079390938105,
+        "sharpness": 428.75789527885297,
+        "horizontalAlignmentSSIM": 0.9582404373875317,
+        "horizontalShiftPixels": 1
+      }
+    ]
+  },
+  {
+    "key": "after-phone-record-high",
+    "referenceSharpness": 3080.3324079144154,
+    "ssim": 0.8283370546004198,
+    "decodedSharpness": 924.772580914589,
+    "horizontalAlignmentSSIM": 0.8577876098784033,
+    "frames": [
+      {
+        "file": "after-phone-record-high-decoded-01.png",
+        "ssim": 0.8283370546004198,
+        "sharpness": 924.772580914589,
+        "horizontalAlignmentSSIM": 0.8577876098784033,
+        "horizontalShiftPixels": 1
+      }
+    ]
+  }
+]

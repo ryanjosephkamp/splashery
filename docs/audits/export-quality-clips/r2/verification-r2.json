@@ -1,0 +1,57 @@
+{
+  "model": "Codex (GPT-6)",
+  "main": "cb8a8315",
+  "operatorComment": "https://github.com/ryanjosephkamp/splashery/pull/654#issuecomment-6187329510",
+  "runtime": "v24.19.0",
+  "coverage": {
+    "expected": 136,
+    "counts": {
+      "passed": 135,
+      "failed": 1
+    },
+    "byFile": {
+      "cdx-a11y-layout.spec.mjs": {
+        "passed": 11
+      },
+      "cdx-export.spec.mjs": {
+        "passed": 21
+      },
+      "cdx-playground-links.spec.mjs": {
+        "passed": 15
+      },
+      "pdf-engine.spec.mjs": {
+        "passed": 2
+      },
+      "pdf.spec.mjs": {
+        "passed": 9
+      },
+      "qr4-craft.spec.mjs": {
+        "passed": 7,
+        "failed": 1
+      },
+      "shr.spec.mjs": {
+        "passed": 13
+      },
+      "smoke.spec.mjs": {
+        "passed": 50
+      },
+      "ui5-engine.spec.mjs": {
+        "passed": 7
+      }
+    },
+    "missing": []
+  },
+  "knownMainFailures": 1,
+  "unknownFailures": 0,
+  "coverageMethod": "Current 136-case collection matched by file and complete title against broad run and final targeted corrections. Broad run: 133 passes, two failures. Corrected Share fallback plus new companion: two passes. Final rates: 21 export, two Record, and two recording-focus cases pass. Protected QR snapshot remains a separately reproduced main failure. No single green suite run is claimed.",
+  "sourceSha256": {
+    "src/app.js": "90d18269f077d0a17542d87eb13e27fa944840142272a01d229b869e0bb2fbe2",
+    "src/ui.js": "7eb4f58cf53b94279f9a4e1bb962430d1b7313c9cb24c635ab2a8dd770f3d7b4",
+    "src/exports.js": "c75c92741a31b768a8cd8fb3c1a5c731ea5c11f6a28b69511a2e1cbf5c85dcb9",
+    "src/export/presets.js": "cbc9794cfef3069e5675caac84f97544f0bd76a8528870bae0e6cef5e639e891",
+    "src/export/controls.js": "151d094cd37ab3af67c044ecedc12786971fdd20de5e141ceea5ed41b70eb75b",
+    "src/export/video.js": "a3be5aec1ca07273991a42456d29357c5caf64bf595022fa04b6d0836c561996",
+    "src/export/capture.js": "6a6370c37aa14d78151a5df4bb1996c31a2feeee787a4d65466540348219f360",
+    "src/export/record.js": "729ab1b0ba47e2cfd48a19e4a0973024115e7aecfb63daaf86c12535a8bd4bf4"
+  }
+}
