@@ -655,7 +655,7 @@ function bookView(st, out) {
 }
 const BK_FOCUS_FLEX = 1.4; // lane Polish: a page's bend as it turns, seen a page at a time
 const BK_COVER_WAIT = 0.4; // lane Polish: seconds a cover waits for the view to pull back
-const BK_TURN_VIEW = 1.5; // lane Polish: the view's width while a page turns, in pages
+const BK_TURN_VIEW = 1.9; // lane Polish: the view's width while a page turns, in pages
 const BK_PAGE_VIEW = 1.14; // lane Polish: and while a page is read
 // A tap forward on a left page in view (or back on a right one) glides to
 // the other page of the spread instead of turning.
