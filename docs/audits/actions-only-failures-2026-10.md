@@ -152,6 +152,26 @@ of real-time speed.
   expansion both fail the same comparisons. Diagnostic full-draw medians improve from 13.267 to
   11.092 ms for still input and from 15.208 to 13.808 ms for low light. These diagnostic timings do
   not substitute for the original cost check or final Actions evidence.
+- The complete merged-source local batch passes all 255 tests in 20 files, with zero skips. Its
+  [Actions run](https://github.com/ryanjosephkamp/splashery/actions/runs/38688166950) still rejects
+  low-light draw cost: 34.075 ms against 30.296 ms. It also reproduces the separate native-input
+  still-depth variation, 0.000608282 against `<0.00055`; the CI handoff records that native case
+  failing on main too. Keep both original failures. Install the suite's Chromium 141 locally and run
+  headed Mesa/llvmpipe through an extracted Xvfb package. The matching setup reproduces the cost
+  rejection, 21.850 ms against 21.661 ms.
+- The paired timer gave the reference a fresh imported class, but reused the current class after
+  native video, live rendering, and canvas replay had already exercised it. An identical-source
+  control exposes this different execution history: the same source, input, state initialization,
+  and draw count measure 18.167/13.525 ms for still input and 18.200/14.283 ms for low light. Those
+  34% and 27% penalties exceed the unchanged 10% limit without a code difference. Use fresh
+  timing-only imports for both versions, retaining the exact source bytes, all preconditioning, 24
+  warmup draws, eight alternating batches of 12 draws, and the 1.1 bound. Real renderer,
+  image/depth, and worker assertions still use the application's module. The corrected matching
+  diagnostic measures 13.442/18.467 ms for still input and 15.342/17.900 ms for low light. Bump the
+  benchmark's resume-cache version so earlier measurements cannot be reused. An intentional extra 20
+  ms per current draw still fails the same bound: 34.967/18.283 ms, or 1.912. The
+  [camera-control report](actions-only-failures-camera-controls.json) preserves the source hashes,
+  inputs, individual batches, and these results.
 - The psv3 loop viewport was Playwright's default 1280×720 and is now 390×844. The explicit
   `profile=mid&adapt=off` keeps clip decoding, depth resolution, frame count, splat budget, and the
   relief mesh budget fixed by profile, independent of viewport. The smaller viewport reduces raster

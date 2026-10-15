@@ -577,7 +577,13 @@ async function poseMeasure(page, pose, file, label) {
     stage.device.gl?.finish();
     const cameras = [];
     try {
-      const modules = compare ? [await import("/src/live/relief-pair-before.js"), S.mod] : [S.mod];
+      // Give both classes the same canvas-only execution history. S.mod has
+      // already processed native video, so timing it against a fresh reference
+      // compared different JIT feedback even when their source was identical.
+      const timingModule = await import("/src/live/relief-pair-current.js");
+      const modules = compare
+        ? [await import("/src/live/relief-pair-before.js"), timingModule]
+        : [timingModule];
       // Independent filters, with exactly the same recorded sensor frames and
       // model replies. The before/after CPU work runs in this one renderer process.
       for (const mod of modules) {
@@ -709,7 +715,7 @@ export async function paired(
       const prior = results[`${profile}-${label}`];
       if (
         resume &&
-        prior?.benchmarkVersion === 5 &&
+        prior?.benchmarkVersion === 6 &&
         prior?.sourceHash === hash(source) &&
         prior.modelHash === modelHash &&
         (!liveTiming || prior.live) &&
@@ -739,6 +745,9 @@ export async function paired(
         await page.route("**/src/live/relief-pair-before.js", (route) =>
           route.fulfill({ contentType: "text/javascript", body: sources.before }),
         );
+        await page.route("**/src/live/relief-pair-current.js", (route) =>
+          route.fulfill({ contentType: "text/javascript", body: source }),
+        );
         await page.route("**/src/live/relief.js", (route) =>
           route.fulfill({ contentType: "text/javascript", body: source }),
         );
@@ -755,7 +764,7 @@ export async function paired(
           console.log(`${profile} ${label} ${pose.clip} phase ${pose.phase}: ${JSON.stringify(m)}`);
         }
         results[`${profile}-${label}`] = {
-          benchmarkVersion: 5,
+          benchmarkVersion: 6,
           sourceHash: hash(source),
           modelHash,
           ...meta,
