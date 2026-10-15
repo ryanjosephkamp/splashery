@@ -109,19 +109,32 @@ Model: Opus 5.5 (claude-opus-5-5), high effort. Branch `claude/lane-fix13` from 
 - Runs (cloud container, SwiftShader, one worker): fx13, pg6, bk5 and pg6-engine together, 36 of 36
   passed (21.9 min). `math:368` `--repeat-each=4`: 4 of 4. `hh5-gems:119` at a 6× CPU throttle,
   `--repeat-each=6`: 6 of 6 (the old test also passed 6 of 6 there; the interleaving is rare, and it
-  showed in 1 of 4 instrumented runs).
+  showed in 1 of 4 instrumented runs). Then `qr4-2:123`, `math` and `hh5-gems` in full: 28 of 28.
+- Clips (Effect review page 2, lane Fix13, Opus 5.5): `fx13-picture-lab`, `fx13-photo-album` and
+  `fx13-your-book`, at 288×512. Each turns on Pop-up layers, then Pop out, taps a figure, turns the
+  view a little to show the layers, and taps again to lay it back. Your book's clip uses the Picture
+  lab's sample article as the PDF of your own (its own sample, the manual, has no figure a tap
+  raises on its first spreads). Rendered with a scratch script based on `tools/effect-clip.mjs` that
+  holds the clock while the sheets and the depth are built.
 
 ## Known issues
 
 - Typing into a toy's input box while that toy rebuilds still loses the text: the whole Toy panel is
   drawn again when the build ends (`src/ui.js`, `renderToyPanel`). The test no longer depends on it;
   the app's behavior is unchanged (see "For the Operator").
+- The album under load: a photo in layers is three sheets, and a newly shown sheet draws nothing
+  until the engine has sorted it. In one clip rendered while another test run loaded the CPU, the
+  photo's place emptied (the hole) and the layers showed only a few seconds into the rise. With the
+  machine idle they show at once (the posted clip), and in the app here at most one sample (0.4 s)
+  was blank. With layers off it is one sheet, so it shows sooner. This is the engine's sort time,
+  not the pack's logic; speeding it up would be engine work.
 
 ## For the Operator
 
-- The album: its photos rose with Pop-up layers on in every repro here, before and after the fix. If
-  Ryan saw it fail there, his exact steps would help (a PDF opened in the album? a second photo
-  tapped while one stood up?).
+- The album: its photos rose with Pop-up layers on in every repro here, before and after the fix; on
+  a slow phone the three layer sheets may take a moment to appear (see "Known issues"). If Ryan saw
+  something else there, his exact steps would help (a PDF opened in the album? a second photo tapped
+  while one stood up?).
 - The manual still says "Save JSON" (`manual/share.html` 276 and 284, `manual/all.html` 9842 and
   9850, `manual/demos3.js` 115). Left alone: changing it makes the shipped manual PDF stale
   (man5:201). It can ride with the next manual edition.
