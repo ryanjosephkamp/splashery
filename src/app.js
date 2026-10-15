@@ -1602,7 +1602,7 @@ class App {
     const res = await buildShareHash(this.exportScene());
     if (!res.ok) {
       this.ui.setLinkNote(res.notes.join(" "));
-      this.ui.toast("The scene is too big for a link. Save JSON instead.", 5000);
+      this.ui.toast("The scene is too big for a link. Save the scene as a file instead.", 5000);
       return;
     }
     const url = shareURL(res.hash);
