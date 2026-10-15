@@ -2,6 +2,21 @@ import { test, expect } from "@playwright/test";
 import { deflateRawSync } from "node:zlib";
 import { createScene } from "../src/state.js";
 
+test("an unused PDF decompressor cannot block an ordinary opening", async ({ page }) => {
+  let release;
+  const held = new Promise((resolve) => (release = resolve));
+  await page.route("**/src/gzip.js", async (route) => {
+    await held;
+    await route.continue();
+  });
+  await page.goto("/?renderer=none", { waitUntil: "commit" });
+  try {
+    await expect(page.locator("body")).toHaveAttribute("data-ready", "true", { timeout: 10000 });
+  } finally {
+    release();
+  }
+});
+
 // A slow shared-scene decode must not postpone renderer initialization.
 // This catches the extra pre-renderer decode introduced by scan prewarming.
 test("renderer creation retains main's order before shared-scene decoding", async ({ page }) => {
