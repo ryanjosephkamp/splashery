@@ -1,0 +1,8 @@
+{
+  "functions": {
+    "modelSize": true,
+    "resampleArea": true
+  },
+  "scope": "The depth worker import now points to the extracted helper module. Both imported function bodies are exactly equal to main; the clamp expression is unchanged.",
+  "clampExpressionMatchesMain": true
+}

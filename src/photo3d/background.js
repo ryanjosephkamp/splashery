@@ -65,19 +65,30 @@ export function softenDepth(d, w, h, aspect = w / h) {
   const mid = new Float32Array(d.length),
     out = new Float32Array(d.length);
   const pass = (src, dst, length, lines, stride, lineStride, step) => {
-    for (let l = 0; l < lines; l++)
+    const first = new Int32Array(length * 5),
+      next = new Int32Array(length * 5),
+      fraction = new Float64Array(length * 5);
+    for (let i = 0; i < length; i++)
+      for (let j = -2; j <= 2; j++) {
+        const p = Math.max(0, Math.min(length - 1, i + j * step)),
+          a = Math.floor(p),
+          k = i * 5 + j + 2;
+        first[k] = a * stride;
+        next[k] = Math.min(length - 1, a + 1) * stride;
+        fraction[k] = p - a;
+      }
+    for (let l = 0; l < lines; l++) {
+      const base = l * lineStride;
       for (let i = 0; i < length; i++) {
         let sum = 0;
-        for (let j = -2; j <= 2; j++) {
-          const p = Math.max(0, Math.min(length - 1, i + j * step)),
-            a = Math.floor(p),
-            f = p - a;
-          sum +=
-            src[l * lineStride + a * stride] * (1 - f) +
-            src[l * lineStride + Math.min(length - 1, a + 1) * stride] * f;
+        for (let j = 0; j < 5; j++) {
+          const k = i * 5 + j,
+            f = fraction[k];
+          sum += src[base + first[k]] * (1 - f) + src[base + next[k]] * f;
         }
-        dst[l * lineStride + i * stride] = sum / 5;
+        dst[base + i * stride] = sum / 5;
       }
+    }
   };
   pass(d, mid, w, h, 1, w, (0.02 * w) / aspect);
   pass(mid, out, h, w, w, 1, 0.02 * h);
@@ -154,7 +165,10 @@ export function backgroundImage(photo, d, gx, gy, relief, pieces) {
   const nearest = new Int32Array(n);
   const queue = new Int32Array(n);
   const bins = 32;
+  const used = new Uint8Array(bins);
+  for (let i = 0; i < n; i++) used[Math.min(bins - 1, Math.floor(depth[i] * bins))] = 1;
   for (let b = 0; b < bins; b++) {
+    if (!used[b]) continue;
     nearest.fill(-1);
     let tail = 0;
     const limit = (b + 1) / bins;
