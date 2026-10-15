@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "credit": "made by Ryan with Codex (GPT-6)",
+  "license": "CC0-1.0",
+  "generator": {
+    "blender": "4.3.2",
+    "seed_base": 5600,
+    "still_samples": 8,
+    "clip_samples": 2,
+    "cpu_threads": 4,
+    "source_sha256": "57f8a7645c467c2a75448fa2317f8c2ab78a100d3c76c0f78f70af07243f6cf6"
+  },
+  "depth": {
+    "convention": "optical-axis Z, meters",
+    "encoding": "gzip float32 LE, row-major top-to-bottom",
+    "invalid": "NaN",
+    "mask_bits": {
+      "1": "valid first-hit geometry",
+      "2": "appearance ambiguous: metal, transmission, or emission"
+    }
+  },
+  "camera": {
+    "world": "right-handed Blender Z-up, meters",
+    "local": "+X right, +Y down, +Z forward",
+    "pixel_centers": "(x+0.5,y+0.5)",
+    "distortion": "none",
+    "clip_meters": [0.05, 200]
+  },
+  "scenes": [
+    {
+      "id": "still-life",
+      "label": "Glass and metal still life",
+      "stress": "Transmission, reflections, and round depth edges",
+      "seed": 5600,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "room",
+      "label": "Room interior",
+      "stress": "Large planes, corners, and foreground occlusion",
+      "seed": 5601,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "forest",
+      "label": "Forest path",
+      "stress": "Repeated trunks, foliage, and distant geometry",
+      "seed": 5602,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "stairs",
+      "label": "Stairs and railings",
+      "stress": "Thin rails and repeated depth steps",
+      "seed": 5603,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "coast",
+      "label": "Cliff and sea",
+      "stress": "Rough rock, reflective water, and invalid sky",
+      "seed": 5604,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "desk",
+      "label": "Cluttered desk",
+      "stress": "Overlapping small objects and narrow gaps",
+      "seed": 5605,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "fur",
+      "label": "Fur on a sphere",
+      "stress": "Hundreds of short geometric fibers",
+      "seed": 5606,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "night",
+      "label": "Night street and lamps",
+      "stress": "Emissive lights and low contrast",
+      "seed": 5607,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "lattice",
+      "label": "Lattice and colored blocks",
+      "stress": "Subpixel bars and disocclusion",
+      "seed": 5608,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "arches",
+      "label": "Arch corridor",
+      "stress": "Nested occlusion and a long depth range",
+      "seed": 5609,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "leaves",
+      "label": "Leaves and pots",
+      "stress": "Thin leaves, texture, and foreground cuts",
+      "seed": 5610,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    },
+    {
+      "id": "steps",
+      "label": "Depth edge blocks",
+      "stress": "Known planar steps and high-contrast edges",
+      "seed": 5611,
+      "smoke_only": false,
+      "still": "still/poses.json",
+      "handheld": "handheld/poses.json",
+      "walk": "walk/poses.json"
+    }
+  ],
+  "coverage": "stills only; full sequences are in the separate archive"
+}

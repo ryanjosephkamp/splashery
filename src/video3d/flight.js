@@ -85,22 +85,30 @@ function takeInput(cam, placed, off) {
 // The stage camera's lens matched to the video's (from the solved focal length), so the video's
 // picture covers the screen: its height fits a tall phone screen (the sides are cut), its width a
 // wide one. Returns the lens to put back.
-function setLens(c0) {
+export function setLens(c0, previous = null) {
   const stage = globalThis.window?.__splashery?.player?.stage;
   const lens = stage?.cameraEntity?.camera;
   if (!lens || !c0?.f || !c0?.w || !c0?.h) return null;
-  const was = { fov: lens.fov, horizontalFov: lens.horizontalFov };
+  const was = previous || { lens, fov: lens.fov, horizontalFov: lens.horizontalFov };
   const canvas = stage.app?.graphicsDevice?.canvas;
   const aspect = canvas ? canvas.width / Math.max(1, canvas.height) : 1;
   const wide = aspect > c0.w / c0.h; // the video covers the screen (its sides cut on a phone)
   lens.horizontalFov = wide;
   lens.fov = (2 * Math.atan((wide ? c0.w : c0.h) / 2 / c0.f) * 180) / Math.PI;
+  was.appliedFov = lens.fov;
+  was.appliedHorizontalFov = lens.horizontalFov;
   return was;
 }
 
-function putLens(was) {
-  const lens = globalThis.window?.__splashery?.player?.stage?.cameraEntity?.camera;
+export function putLens(was) {
+  const lens = was?.lens || globalThis.window?.__splashery?.player?.stage?.cameraEntity?.camera;
   if (!lens || !was) return;
+  // A newer scene may already own this shared lens. Do not overwrite its chosen field of view.
+  if (
+    was.appliedFov != null &&
+    (Math.abs(lens.fov - was.appliedFov) > 1e-6 || lens.horizontalFov !== was.appliedHorizontalFov)
+  )
+    return;
   lens.fov = was.fov;
   lens.horizontalFov = was.horizontalFov;
 }
@@ -113,7 +121,7 @@ const samePose = (cam, p) =>
 
 // The flight for one built scene. media: { file, start } for a video somebody opened (its sound
 // plays), or null (a sample: no sound). Returns drive's hook: fly(v, info), v the Replay toggle.
-export function makeFlight(cams, media) {
+export function makeFlight(cams, media, { isCurrent = () => true } = {}) {
   const path = flightPath(cams);
   const st = { active: false, clock: 0, home: null, endTarget: null, audio: null, done: false };
   // The visitor's turn and zoom during the flight, and the pose the flight last set.
@@ -121,7 +129,24 @@ export function makeFlight(cams, media) {
   st.placed = null;
   // Paused mid-flight: the path's time it stopped at (null when not paused).
   st.pausedAt = null;
-  const cameraOf = () => globalThis.window?.__splashery?.player?.camera || null;
+  let disposed = false;
+  let owner = globalThis.window?.__splashery?.player || null;
+  let token = owner?.loadToken;
+  const current = () => {
+    const player = globalThis.window?.__splashery?.player;
+    // Standalone embeds publish their player after the first toy has built.
+    if (!owner && player) {
+      owner = player;
+      token = player.loadToken;
+    }
+    return (
+      isCurrent() &&
+      (!owner ||
+        (player === owner &&
+          token === owner.loadToken &&
+          (!owner.scene?.toy || owner.scene.toy.id === "video-3d")))
+    );
+  };
 
   const stopAudio = () => {
     if (st.audio) {
@@ -130,24 +155,35 @@ export function makeFlight(cams, media) {
   };
   const startAudio = (info) => {
     if (!media?.file || !info?.sound?.enabled) return;
+    let createdUrl = null;
     try {
       if (!st.audio) {
-        const url = URL.createObjectURL(media.file);
+        const url = (createdUrl = URL.createObjectURL(media.file));
         const el = new Audio(url);
+        st.audio = { el, url };
         const ctx = info.sound.audio();
         const src = ctx.createMediaElementSource(el);
+        st.audio.src = src;
         src.connect(info.sound.master);
-        st.audio = { el, url };
       }
       st.audio.el.currentTime = path.start;
       st.audio.el.play().catch(() => {});
     } catch {
+      stopAudio();
+      st.audio?.src?.disconnect?.();
+      const url = st.audio?.url || createdUrl;
+      if (url) URL.revokeObjectURL(url);
       st.audio = null;
     }
   };
 
   const fly = (v, info) => {
-    const cam = cameraOf();
+    if (disposed) return;
+    if (!current()) {
+      fly.dispose();
+      return;
+    }
+    const cam = owner?.camera;
     if (!cam || !cams.length) return;
     // The toy opens where the video starts: the first camera's place and view. The app sets up
     // its own camera when a toy loads (and puts the old one back when options change), so this
@@ -232,11 +268,24 @@ export function makeFlight(cams, media) {
     }
   };
   fly.dispose = () => {
+    if (disposed) return;
+    disposed = true;
+    clearInterval(timer);
     stopAudio();
     putLens(st.lens);
-    if (st.audio) URL.revokeObjectURL(st.audio.url);
+    st.lens = null;
+    if (st.audio) {
+      st.audio.src?.disconnect?.();
+      URL.revokeObjectURL(st.audio.url);
+    }
     st.audio = null;
+    st.active = st.leaving = false;
+    st.pausedAt = null;
   };
+  const timer = setInterval(() => {
+    if (!current()) fly.dispose();
+  }, 250);
+  timer.unref?.(); // Pure camera tests run in Node; a flight must not keep that process alive.
   fly.path = path;
   fly.state = st;
   return fly;
