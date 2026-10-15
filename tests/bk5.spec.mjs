@@ -180,8 +180,11 @@ test.describe("links and pop-out (no browser)", () => {
       for (const v of [...p.quat, ...p.offset, p.scale]) expect(Number.isFinite(v)).toBe(true);
       expect(Math.hypot(...p.quat)).toBeCloseTo(1, 5);
       // The page under it is drawn with the figure's place empty.
-      const hole = Object.values(out.sheets).find((s) => s.variant);
-      expect(hole?.variant).toBe(`hole:${FIG.map((v) => v.toFixed(4)).join(",")}`);
+      // (Lane Polish: with Pop out on a while, the pages are drawn "|bare", without their links.)
+      const hole = Object.values(out.sheets).find((s) => s.variant?.startsWith("hole:"));
+      expect(hole?.variant.replace(/\|bare$/, "")).toBe(
+        `hole:${FIG.map((v) => v.toFixed(4)).join(",")}`,
+      );
       expect(out.sheets.pop0).toMatchObject({ page: 1, crop: FIG, visible: 1 });
       seen.push(p.offset[2]);
     }
@@ -196,7 +199,7 @@ test.describe("links and pop-out (no browser)", () => {
     b.run(1.2);
     expect(BOOKS_R5.POP.phase).toBe("idle");
     expect(b.out.parts.bk5pop0.visible).toBe(0);
-    expect(Object.values(b.out.sheets).some((s) => s.variant)).toBe(false);
+    expect(Object.values(b.out.sheets).some((s) => s.variant?.startsWith("hole"))).toBe(false);
     expect(pics.page).toBe(1); // (the tap did not turn the page)
   });
 
