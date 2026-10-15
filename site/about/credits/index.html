@@ -264,6 +264,11 @@
                   >WebP codec from splat-transform 3.6.1 (lane Viewers)</a
                 >
               </li>
+              <li>
+                <a href="#instrument-serif-and-jetbrains-mono-lane-pitch2"
+                  >Instrument Serif and JetBrains Mono (lane Pitch2)</a
+                >
+              </li>
               <li><a href="#development-tools-not-shipped">Development tools (not shipped)</a></li>
               <li>
                 <a href="#build-tools-outside-npm-not-shipped"
@@ -7907,6 +7912,23 @@
             separately from the shipped site. The build-time code is offered under this repository's
             MIT license.
           </p>
+          <p>
+            <code>site/about/splashery/</code> sets its headlines in
+            <strong>Instrument Serif</strong> (The Instrument Serif Project Authors,
+            <a href="https://github.com/Instrument/instrument-serif" target="_blank" rel="noopener"
+              >https://github.com/Instrument/instrument-serif</a
+            >) and its labels in <strong>JetBrains Mono</strong> (The JetBrains Mono Project
+            Authors,
+            <a href="https://github.com/JetBrains/JetBrainsMono" target="_blank" rel="noopener"
+              >https://github.com/JetBrains/JetBrainsMono</a
+            >), both under the
+            <a href="https://openfontlicense.org/" target="_blank" rel="noopener"
+              >SIL Open Font License 1.1</a
+            >, taken from Google Fonts' repository on October 14, 2026 and subset for the page. No
+            other page loads them. The page also shows &quot;Forest Away Path&quot; by Seaq68 (CC0
+            1.0, under Studio above), the grape (Dany Bittel, CC BY 4.0), and the walnut CT scan (CC
+            BY 4.0), each with its credit beside it.
+          </p>
         </div>
       </section>
       <section class="md-file" aria-label="Third-party licenses">
@@ -8466,6 +8488,46 @@ subject to the following conditions:
             <li>
               Licenses: MIT (splat-transform) and BSD-3-Clause with Google's patent grant (libwebp),
               checked on October 5, 2026; both texts are in <code>vendor/webp/LICENSE</code>.
+            </li>
+          </ul>
+          <h3 id="instrument-serif-and-jetbrains-mono-lane-pitch2">
+            Instrument Serif and JetBrains Mono (lane Pitch2)
+          </h3>
+          <ul>
+            <li>
+              Files: <code>site/assets/pitch/instrument-serif.woff2</code>,
+              <code>instrument-serif-italic.woff2</code>, and
+              <code>jetbrains-mono-500.woff2</code> (35 KB in all), subset with fontTools to the
+              characters the page uses; JetBrains Mono is pinned to weight 500. Their license texts
+              are beside them (<code>OFL-instrument-serif.txt</code> and
+              <code>OFL-jetbrains-mono.txt</code>).
+            </li>
+            <li>
+              Sources:
+              <a
+                href="https://github.com/Instrument/instrument-serif"
+                target="_blank"
+                rel="noopener"
+                >https://github.com/Instrument/instrument-serif</a
+              >
+              (The Instrument Serif Project Authors) and
+              <a href="https://github.com/JetBrains/JetBrainsMono" target="_blank" rel="noopener"
+                >https://github.com/JetBrains/JetBrainsMono</a
+              >
+              (The JetBrains Mono Project Authors), both taken from
+              <a href="https://github.com/google/fonts" target="_blank" rel="noopener"
+                >https://github.com/google/fonts</a
+              >
+              on October 14, 2026.
+            </li>
+            <li>
+              Loaded only by the one-link page (<code>site/about/splashery/</code>, through
+              <code>site/assets/pitch.css</code>), with system fonts as the fallback.
+            </li>
+            <li>
+              License: SIL Open Font License 1.1, checked on October 14, 2026. Neither font declares
+              a Reserved Font Name; the page names the subsets &quot;Pit Serif&quot; and &quot;Pit
+              Mono&quot;.
             </li>
           </ul>
           <h3 id="development-tools-not-shipped">Development tools (not shipped)</h3>

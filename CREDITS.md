@@ -1822,3 +1822,13 @@ dedicated to CC0-1.0. These are rendered scenes, not real captures. No outside a
 Their source is `tools/studio-truth-generate.py`, and each committed file's size and SHA-256 are
 recorded in `tests/fixtures/truth/assets.json`. Full sequences are kept separately from the shipped
 site. The build-time code is offered under this repository's MIT license.
+
+# Fonts on the one-link page (lane Pitch2)
+
+`site/about/splashery/` sets its headlines in **Instrument Serif** (The Instrument Serif Project
+Authors, https://github.com/Instrument/instrument-serif) and its labels in **JetBrains Mono** (The
+JetBrains Mono Project Authors, https://github.com/JetBrains/JetBrainsMono), both under the
+[SIL Open Font License 1.1](https://openfontlicense.org/), taken from Google Fonts' repository on
+October 14, 2026 and subset for the page. No other page loads them. The page also shows "Forest Away
+Path" by Seaq68 (CC0 1.0, under Studio above), the grape (Dany Bittel, CC BY 4.0), and the walnut CT
+scan (CC BY 4.0), each with its credit beside it.

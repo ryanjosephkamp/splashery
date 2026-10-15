@@ -303,6 +303,20 @@ subject to the following conditions:
 - Licenses: MIT (splat-transform) and BSD-3-Clause with Google's patent grant (libwebp), checked on
   October 5, 2026; both texts are in `vendor/webp/LICENSE`.
 
+## Instrument Serif and JetBrains Mono (lane Pitch2)
+
+- Files: `site/assets/pitch/instrument-serif.woff2`, `instrument-serif-italic.woff2`, and
+  `jetbrains-mono-500.woff2` (35 KB in all), subset with fontTools to the characters the page uses;
+  JetBrains Mono is pinned to weight 500. Their license texts are beside them
+  (`OFL-instrument-serif.txt` and `OFL-jetbrains-mono.txt`).
+- Sources: https://github.com/Instrument/instrument-serif (The Instrument Serif Project Authors) and
+  https://github.com/JetBrains/JetBrainsMono (The JetBrains Mono Project Authors), both taken from
+  https://github.com/google/fonts on October 14, 2026.
+- Loaded only by the one-link page (`site/about/splashery/`, through `site/assets/pitch.css`), with
+  system fonts as the fallback.
+- License: SIL Open Font License 1.1, checked on October 14, 2026. Neither font declares a Reserved
+  Font Name; the page names the subsets "Pit Serif" and "Pit Mono".
+
 ## Development tools (not shipped)
 
 These are `devDependencies` used to prepare assets and run tests; nothing from them is served.

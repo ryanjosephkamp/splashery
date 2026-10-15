@@ -75,6 +75,11 @@ for (const [w, h] of [
       await expect(stage).toHaveAttribute("data-state", /ready|failed/, { timeout: 120_000 });
       const running = await page.locator("[data-pit-demo][data-state]").count();
       expect(running).toBeLessThanOrEqual(3);
+      // Each live section, once its figure has settled in.
+      if (d.id !== "grape") {
+        await page.waitForTimeout(1200);
+        await page.screenshot({ path: path.join(SHOTS, `pit-${d.id}-${w}x${h}.png`) });
+      }
     }
     // Scrolled to the end, the hero's toy is unloaded.
     await expect(page.locator('[data-pit-demo="grape"]')).not.toHaveAttribute("data-state", /./); // prettier-ignore

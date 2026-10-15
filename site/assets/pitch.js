@@ -190,35 +190,44 @@ addEventListener("drop", (e) => {
   document.body.classList.remove("pit-dragging");
 });
 
-// ---- One splat ------------------------------------------------------------------------------
-// A 2D Gaussian: color times opacity times exp(-½ dᵀΣ⁻¹d), over the page's own background.
+// ---- One splat ----------------------------------------------------------------------------
+// A 2D Gaussian: color times opacity times exp(-½ dᵀΣ⁻¹d), over the plate's own background, with
+// its 1σ, 2σ, and 3σ rings. The readout is Σ = R diag(σx², σy²) Rᵀ, with y up and the turn
+// counterclockwise, in units of a sixth of the plate's height (so the 3σ ring at full width spans
+// most of it).
+const rgb = (css) => (css.match(/[\d.]+/g) || [0, 0, 0]).slice(0, 3).map(Number);
+const fmt = (x) => (x < -0.0005 ? "−" : "") + Math.abs(x).toFixed(3);
+
 for (const box of document.querySelectorAll("[data-pit-one]")) {
   const canvas = box.querySelector("canvas");
   const ctx = canvas.getContext("2d");
   const inputs = [...box.querySelectorAll("input")];
+  const out = Object.fromEntries([...box.querySelectorAll("[data-r]")].map((e) => [e.dataset.r, e]));
   const W = canvas.width;
   const H = canvas.height;
   const img = ctx.createImageData(W, H);
   const draw = () => {
     const v = Object.fromEntries(inputs.map((i) => [i.dataset.k, Number(i.value)]));
-    const dark = theme() === "dark";
-    const bg = dark ? [24, 24, 24] : [246, 246, 244];
+    const style = getComputedStyle(box);
+    const bg = rgb(style.backgroundColor);
+    const ink = rgb(style.color);
     const col = [255, 95, 162];
     const a = (v.rot * Math.PI) / 180;
     const c = Math.cos(a);
     const s = Math.sin(a);
-    const sx = v.sx * W;
-    const sy = v.sy * H;
+    // The 1σ semi-axes, in pixels.
+    const sx = (v.sx * H) / 3;
+    const sy = (v.sy * H) / 3;
     const ix = 1 / (sx * sx);
     const iy = 1 / (sy * sy);
     const d = img.data;
     for (let y = 0; y < H; y++) {
       for (let x = 0; x < W; x++) {
         const dx = x - W / 2;
-        const dy = y - H / 2;
+        const dy = H / 2 - y;
         const u = c * dx + s * dy;
         const w = -s * dx + c * dy;
-        const g = v.a * Math.exp(-0.5 * (u * u * ix + w * w * iy) * 9);
+        const g = v.a * Math.exp(-0.5 * (u * u * ix + w * w * iy));
         const o = (y * W + x) * 4;
         d[o] = bg[0] + (col[0] - bg[0]) * g;
         d[o + 1] = bg[1] + (col[1] - bg[1]) * g;
@@ -227,6 +236,51 @@ for (const box of document.querySelectorAll("[data-pit-one]")) {
       }
     }
     ctx.putImageData(img, 0, 0);
+    // The rings and the mean.
+    const line = (alpha) => `rgba(${ink.join(",")},${alpha})`;
+    ctx.save();
+    ctx.translate(W / 2, H / 2);
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = line(0.14);
+    ctx.beginPath();
+    ctx.moveTo(-W / 2, 0);
+    ctx.lineTo(W / 2, 0);
+    ctx.moveTo(0, -H / 2);
+    ctx.lineTo(0, H / 2);
+    ctx.stroke();
+    ctx.font = `20px "Pit Mono", ui-monospace, monospace`;
+    ctx.textBaseline = "middle";
+    for (const k of [1, 2, 3]) {
+      ctx.strokeStyle = line(k === 1 ? 0.75 : k === 2 ? 0.45 : 0.28);
+      ctx.setLineDash(k === 3 ? [4, 6] : []);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, k * sx, k * sy, -a, 0, Math.PI * 2);
+      ctx.stroke();
+      // Each ring's label, just past it along the long axis.
+      const along = sx >= sy ? [c, -s, sx] : [-s, -c, sy];
+      const r = k * along[2] + 8;
+      ctx.fillStyle = line(0.7);
+      ctx.fillText(`${k}σ`, along[0] * r, along[1] * r);
+    }
+    ctx.setLineDash([]);
+    ctx.fillStyle = line(0.9);
+    ctx.beginPath();
+    ctx.arc(0, 0, 3, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.restore();
+    // Σ in units of H/6: σ = 2 × the slider's value.
+    const vx = (2 * v.sx) ** 2;
+    const vy = (2 * v.sy) ** 2;
+    const sa = c * c * vx + s * s * vy;
+    const sb = c * s * (vx - vy);
+    const sc = s * s * vx + c * c * vy;
+    if (out.a) {
+      out.a.textContent = fmt(sa);
+      out.b.textContent = fmt(sb);
+      out.b2.textContent = fmt(sb);
+      out.c.textContent = fmt(sc);
+      out.alpha.textContent = v.a.toFixed(2);
+    }
   };
   let queued = false;
   const redraw = () => {
@@ -243,5 +297,28 @@ for (const box of document.querySelectorAll("[data-pit-one]")) {
     attributeFilter: ["data-theme"],
   });
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redraw);
+  document.fonts?.ready.then(redraw);
   draw();
+}
+
+// ---- Arrival --------------------------------------------------------------------------------
+// Each section's figure settles in the first time it scrolls into view (pitch.css; not with
+// reduced motion). Without IntersectionObserver everything is simply there.
+{
+  const article = document.querySelector(".pit");
+  const secs = [...document.querySelectorAll(".pit-sec, .pit-claims")];
+  if (article && "IntersectionObserver" in window) {
+    article.classList.add("pit-js");
+    const seen = new IntersectionObserver(
+      (entries) => {
+        for (const e of entries) {
+          if (!e.isIntersecting) continue;
+          e.target.classList.add("pit-in");
+          seen.unobserve(e.target);
+        }
+      },
+      { rootMargin: "0px 0px -12% 0px" },
+    );
+    for (const s of secs) seen.observe(s);
+  }
 }

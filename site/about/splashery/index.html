@@ -138,19 +138,36 @@
     <main id="main" tabindex="-1">
       <article class="pit">
         <section class="pit-hero" aria-labelledby="h-pit">
-          <div class="pit-hero-text">
-            <p class="pit-eyebrow">Splashery</p>
-            <h1 id="h-pit">A 3D Gaussian splat engine and studio, in a browser tab.</h1>
+          <div class="pit-hero-head">
+            <p class="pit-eyebrow">
+              <span>Splashery</span><span>Real-time 3D Gaussian splatting</span>
+            </p>
+            <h1 id="h-pit">A 3D Gaussian splat engine and studio, <em>in a browser tab.</em></h1>
+          </div>
+          <div class="pit-hero-body">
             <p class="pit-lead">
               Everything here is drawn from soft, colored splats, sorted by depth and blended on
               your own device. There is nothing to install, and nothing you open leaves your device.
             </p>
-            <p class="pit-stats">
-              <span><b>319</b> scenes and tools</span><span><b>0</b> installs</span
-              ><span><b>0</b> uploads</span>
-            </p>
+            <dl class="pit-stats">
+              <div>
+                <dt>Scenes and tools</dt>
+                <dd>319</dd>
+              </div>
+              <div>
+                <dt>Installs</dt>
+                <dd>0</dd>
+              </div>
+              <div>
+                <dt>Uploads</dt>
+                <dd>0</dd>
+              </div>
+            </dl>
           </div>
-          <figure class="pit-figure">
+          <figure class="pit-figure pit-hero-figure">
+            <p class="pit-plate" aria-hidden="true">
+              <span>Fig. 0</span><span>Grape, captured from photos</span>
+            </p>
             <div class="pit-stage pit-hero-stage" data-pit-demo="grape">
               <img
                 class="pit-still"
@@ -168,12 +185,12 @@
                 tabindex="0"
                 hidden
               ></iframe>
+              <span class="pit-tag" aria-hidden="true"></span>
               <button type="button" class="pit-start" hidden>Start the live toy</button>
               <p class="pit-note" role="status" aria-live="polite"></p>
             </div>
             <figcaption>
-              A grape, captured from photos. Drag to turn it; tap it to peel the skin.<span
-                class="pit-credit"
+              Drag to turn it; tap it to peel the skin.<span class="pit-credit"
                 >Grape: Dany Bittel,
                 <a href="https://superspl.at/scene/4ae563ac" target="_blank" rel="noopener"
                   >SuperSplat</a
@@ -189,15 +206,31 @@
           </figure>
         </section>
 
-        <section class="pit-sec" aria-labelledby="h-pit-one">
+        <section class="pit-sec pit-sec-one" aria-labelledby="h-pit-one">
           <div class="pit-text">
-            <p class="pit-num">01</p>
+            <p class="pit-num"><span>01</span></p>
             <h2 id="h-pit-one">One splat</h2>
             <p>
-              A splat is a soft blob with a position, a shape, a color, and an opacity. Change its
-              shape and opacity here. Every scene on the site is this, repeated a few hundred
-              thousand times and sorted back to front.
+              A splat is a 3D Gaussian: a position, a covariance that gives it a shape and a turn, a
+              color, and an opacity. Change its shape and opacity here. Every scene on the site is
+              this, repeated tens of thousands to hundreds of thousands of times.
             </p>
+            <ol class="pit-frame" aria-label="One frame">
+              <li>
+                <b>Sort</b
+                ><span>A worker orders the splats by depth whenever the camera moves.</span>
+              </li>
+              <li>
+                <b>Project</b
+                ><span
+                  >The graphics chip turns each 3D Gaussian into a 2D ellipse on the screen.</span
+                >
+              </li>
+              <li>
+                <b>Blend</b
+                ><span>Back to front, each ellipse adds its color, weighted by its opacity.</span>
+              </li>
+            </ol>
             <p class="pit-links">
               <a href="../../../manual/splat.html"
                 >The manual, from one splat up<svg
@@ -219,41 +252,62 @@
             </p>
           </div>
           <figure class="pit-figure">
+            <p class="pit-plate" aria-hidden="true">
+              <span>Fig. 1</span><span>One Gaussian, drawn in the page</span>
+            </p>
             <div class="pit-one" data-pit-one>
-              <canvas
-                width="480"
-                height="480"
-                role="img"
-                aria-label="One splat: a soft colored ellipse that fades out from its center"
-              ></canvas>
+              <div class="pit-one-canvas">
+                <canvas
+                  width="640"
+                  height="480"
+                  role="img"
+                  aria-label="One splat: a soft colored ellipse that fades out from its center, with its one, two, and three standard deviation outlines"
+                ></canvas>
+                <dl class="pit-readout" data-pit-readout aria-hidden="true">
+                  <div>
+                    <dt>&Sigma;</dt>
+                    <dd>
+                      <span class="pit-mat"
+                        ><span data-r="a"></span><span data-r="b"></span><span data-r="b2"></span
+                        ><span data-r="c"></span
+                      ></span>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>&alpha;</dt>
+                    <dd data-r="alpha"></dd>
+                  </div>
+                </dl>
+              </div>
               <div class="pit-sliders">
                 <label
-                  >Width
-                  <input type="range" min="0.06" max="0.42" step="0.01" value="0.26" data-k="sx"
+                  ><span>Width</span
+                  ><input type="range" min="0.06" max="0.42" step="0.01" value="0.32" data-k="sx"
                 /></label>
                 <label
-                  >Height
-                  <input type="range" min="0.06" max="0.42" step="0.01" value="0.14" data-k="sy"
+                  ><span>Height</span
+                  ><input type="range" min="0.06" max="0.42" step="0.01" value="0.17" data-k="sy"
                 /></label>
                 <label
-                  >Turn <input type="range" min="0" max="180" step="1" value="30" data-k="rot"
+                  ><span>Turn</span
+                  ><input type="range" min="0" max="180" step="1" value="30" data-k="rot"
                 /></label>
                 <label
-                  >Opacity
-                  <input type="range" min="0.05" max="1" step="0.01" value="0.9" data-k="a"
+                  ><span>Opacity</span
+                  ><input type="range" min="0.05" max="1" step="0.01" value="0.9" data-k="a"
                 /></label>
               </div>
             </div>
             <figcaption>
-              One splat, drawn the way the engine blends it: brightest at the center, fading as a
-              bell curve.
+              Brightest at the center and falling off as a bell curve. The rings mark one, two, and
+              three standard deviations.
             </figcaption>
           </figure>
         </section>
 
         <section class="pit-sec" aria-labelledby="h-pit-recipe">
           <div class="pit-text">
-            <p class="pit-num">02</p>
+            <p class="pit-num"><span>02</span></p>
             <h2 id="h-pit-recipe">Built from recipes, not downloaded</h2>
             <p>
               Most objects here were never captured. A recipe of a few kilobytes says what an object
@@ -286,6 +340,9 @@
             </p>
           </div>
           <figure class="pit-figure">
+            <p class="pit-plate" aria-hidden="true">
+              <span>Fig. 2</span><span>Toy piano, built from a recipe</span>
+            </p>
             <div class="pit-stage" data-pit-demo="toy-piano">
               <img
                 class="pit-still"
@@ -303,19 +360,17 @@
                 tabindex="0"
                 hidden
               ></iframe>
+              <span class="pit-tag" aria-hidden="true"></span>
               <button type="button" class="pit-start" hidden>Start the live toy</button>
               <p class="pit-note" role="status" aria-live="polite"></p>
             </div>
-            <figcaption>
-              A toy piano, built from a recipe on your device. Tap or drag along the keys. Sound
-              plays only after you tap.
-            </figcaption>
+            <figcaption>Tap or drag along the keys. Sound plays only after you tap.</figcaption>
           </figure>
         </section>
 
         <section class="pit-sec" aria-labelledby="h-pit-photo">
           <div class="pit-text">
-            <p class="pit-num">03</p>
+            <p class="pit-num"><span>03</span></p>
             <h2 id="h-pit-photo">A photo becomes 3D, on the device</h2>
             <p>
               A depth model runs in the page and lifts a single photo into a relief you can turn. It
@@ -360,6 +415,9 @@
             </p>
           </div>
           <figure class="pit-figure">
+            <p class="pit-plate" aria-hidden="true">
+              <span>Fig. 3</span><span>One photo, lifted by its depth</span>
+            </p>
             <div class="pit-stage" data-pit-demo="photo-3d">
               <img
                 class="pit-still"
@@ -377,19 +435,33 @@
                 tabindex="0"
                 hidden
               ></iframe>
+              <span class="pit-tag" aria-hidden="true"></span>
               <button type="button" class="pit-start" hidden>Start the live toy</button>
               <p class="pit-note" role="status" aria-live="polite"></p>
             </div>
             <figcaption>
-              A sample photo with its depth. Tap to lift it out of the picture; tap again to lay it
-              flat.
+              Tap to lift it out of the picture; tap again to lay it flat.<span class="pit-credit"
+                >Photo: “Forest Away Path” by Seaq68, on
+                <a
+                  href="https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg"
+                  target="_blank"
+                  rel="noopener"
+                  >Wikimedia Commons</a
+                >,
+                <a
+                  href="https://creativecommons.org/publicdomain/zero/1.0/"
+                  target="_blank"
+                  rel="noopener"
+                  >CC0 1.0</a
+                >.</span
+              >
             </figcaption>
           </figure>
         </section>
 
         <section class="pit-sec" aria-labelledby="h-pit-data">
           <div class="pit-text">
-            <p class="pit-num">04</p>
+            <p class="pit-num"><span>04</span></p>
             <h2 id="h-pit-data">Real data</h2>
             <p>
               Some of the science toys use measured data. This is a real walnut, scanned with X-ray
@@ -418,17 +490,11 @@
                   /></svg></a
               ><a href="../../science/">Science</a>
             </p>
-            <p class="pit-credit">
-              Data: Der Sarkissian et al., CWI,
-              <a href="https://doi.org/10.5281/zenodo.2686726" target="_blank" rel="noopener"
-                >Zenodo</a
-              >,
-              <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener"
-                >CC BY 4.0</a
-              >, resampled to 0.3 mm.
-            </p>
           </div>
           <figure class="pit-figure">
+            <p class="pit-plate" aria-hidden="true">
+              <span>Fig. 4</span><span>Walnut, X-ray CT volume</span>
+            </p>
             <div class="pit-stage" data-pit-demo="walnut-ct">
               <img
                 class="pit-still"
@@ -446,20 +512,34 @@
                 tabindex="0"
                 hidden
               ></iframe>
+              <span class="pit-tag" aria-hidden="true"></span>
               <button type="button" class="pit-start" hidden>Start the live toy</button>
               <p class="pit-note" role="status" aria-live="polite"></p>
             </div>
-            <figcaption>Drag up or down on the walnut to cut into it, slice by slice.</figcaption>
+            <figcaption>
+              Drag up or down on the walnut to cut into it, slice by slice.<span class="pit-credit"
+                >Data: Der Sarkissian et al., CWI,
+                <a href="https://doi.org/10.5281/zenodo.2686726" target="_blank" rel="noopener"
+                  >Zenodo</a
+                >,
+                <a
+                  href="https://creativecommons.org/licenses/by/4.0/"
+                  target="_blank"
+                  rel="noopener"
+                  >CC BY 4.0</a
+                >, resampled to 0.3 mm.</span
+              >
+            </figcaption>
           </figure>
         </section>
 
         <section class="pit-sec" aria-labelledby="h-pit-qr">
           <div class="pit-text">
-            <p class="pit-num">05</p>
+            <p class="pit-num"><span>05</span></p>
             <h2 id="h-pit-qr">A code that scans</h2>
             <p>
               Text, pictures, PDFs, and codes can all become splats. This QR code is made of them,
-              and it still reads: point a phone's camera at it. The QR tools also show how a code
+              and it still reads: point a phone’s camera at it. The QR tools also show how a code
               works, how much damage it survives, and how to hide three in one picture.
             </p>
             <p class="pit-links">
@@ -486,6 +566,9 @@
             </p>
           </div>
           <figure class="pit-figure">
+            <p class="pit-plate" aria-hidden="true">
+              <span>Fig. 5</span><span>QR code, in splats</span>
+            </p>
             <div class="pit-stage" data-pit-demo="qr-code">
               <img
                 class="pit-still"
@@ -503,62 +586,65 @@
                 tabindex="0"
                 hidden
               ></iframe>
+              <span class="pit-tag" aria-hidden="true"></span>
               <button type="button" class="pit-start" hidden>Start the live toy</button>
               <p class="pit-note" role="status" aria-live="polite"></p>
             </div>
-            <figcaption>A QR code in splats. It opens Splashery.</figcaption>
+            <figcaption>It opens Splashery.</figcaption>
           </figure>
         </section>
 
-        <section class="pit-sec pit-claims" aria-labelledby="h-pit-claims">
+        <section class="pit-claims" aria-labelledby="h-pit-claims">
           <div class="pit-text">
-            <p class="pit-num">06</p>
-            <h2 id="h-pit-claims">What we haven't seen elsewhere</h2>
+            <p class="pit-num"><span>06</span></p>
+            <h2 id="h-pit-claims">What we haven’t seen elsewhere</h2>
             <p>As far as we know. We have not tried every splat tool.</p>
           </div>
-          <div class="pit-claim-wrap">
-            <ul class="pit-claim-list">
-              <li>
-                <b>Toys made from rules</b
-                ><span
-                  >A recipe of a few kilobytes is built into splats on your device, with a budget of
-                  60,000 to 400,000. The shape is never a large file to download.</span
-                >
-              </li>
-              <li>
-                <b>Equations as a language</b
-                ><span
-                  >Type x, y, and z in u, v, and t, and get an animated splat shape, with plain
-                  messages instead of crashes.</span
-                >
-              </li>
-              <li>
-                <b>Moving parts in one splat cloud</b
-                ><span
-                  >Hinges, pivots, sliders, morphs, and per-splat effects run on the graphics chip,
-                  so a chest opens without rebuilding anything.</span
-                >
-              </li>
-              <li>
-                <b>Hands-on physics</b><span>Toss, stack, pull apart, and pour, on splats.</span>
-              </li>
-              <li>
-                <b>Anything as splats</b
-                ><span
-                  >Photos and videos with depth, PDFs, QR codes, real science data, the night sky,
-                  and medical volumes.</span
-                >
-              </li>
-              <li>
-                <b>A whole scene in a link</b
-                ><span
-                  >The link to the grape above is 97 characters. It holds the toy and its settings,
-                  not your files, and no server stores it.</span
-                >
-              </li>
-            </ul>
-          </div>
-          <p class="pit-links pit-end">
+          <ol class="pit-claim-list">
+            <li>
+              <b>Toys made from rules</b
+              ><span
+                >A recipe of a few kilobytes is built into splats on your device, with a budget of
+                60,000 to 400,000. The shape is never a large file to download.</span
+              >
+            </li>
+            <li>
+              <b>Equations as a language</b
+              ><span
+                >Type x, y, and z in u, v, and t, and get an animated splat shape, with plain
+                messages instead of crashes.</span
+              >
+            </li>
+            <li>
+              <b>Moving parts in one splat cloud</b
+              ><span
+                >Hinges, pivots, sliders, morphs, and per-splat effects run on the graphics chip, so
+                a chest opens without rebuilding anything.</span
+              >
+            </li>
+            <li>
+              <b>Hands-on physics</b><span>Toss, stack, pull apart, and pour, on splats.</span>
+            </li>
+            <li>
+              <b>Anything as splats</b
+              ><span
+                >Photos and videos with depth, PDFs, QR codes, real science data, the night sky, and
+                medical volumes.</span
+              >
+            </li>
+            <li>
+              <b>A whole scene in a link</b
+              ><span
+                >The link to the grape above is <span class="pit-mono">97</span> characters. It
+                holds the toy and its settings, not your files, and no server stores it.</span
+              >
+            </li>
+          </ol>
+        </section>
+
+        <section class="pit-end" aria-labelledby="h-pit-end">
+          <h2 id="h-pit-end">Everything above ran in this tab.</h2>
+          <p class="pit-links">
             <a class="button primary" href="../../../" target="_blank" rel="noopener"
               >Open the Playground<svg
                 class="arrow"
