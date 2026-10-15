@@ -1,0 +1,14 @@
+{
+  "createdAt": "2026-10-15T16:15:33.671Z",
+  "source": "/workspace/v3d-r4-media/final-r12-report-preparation-r1/snapshot-1615/report.json.gz",
+  "sourceStoredSha256": "7ec0a1bb0e1d77d2eb77761734889faf941cc184a2da7e36a16607b0a4e6ccba",
+  "sourceOriginalSha256": "a0b19d898cd6f85818979cff30f28943d77c7bf1020deb423d91728c6baf8aeb",
+  "sourceCaptureFinishedAt": "2026-10-15T16:15:23.849Z",
+  "sourceCommit": "64ec9ad5b7a90b590b289f6a02f0bbd50138db08",
+  "rawLinkBase": ".",
+  "rows": 84,
+  "sourceBytesUnchanged": true,
+  "statusesUnchanged": true,
+  "notice": "Additive shortened original excerpts only; no raw/status/score mutations or acceptance claims.",
+  "outputSha256": "72fd89f3c303de3ae5d777716732e1db42c5cd5a3e2d6531169dfb7928a84402"
+}

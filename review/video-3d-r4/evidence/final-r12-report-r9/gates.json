@@ -1,0 +1,59 @@
+{
+  "capturedAt": "2026-10-15T16:15:23.849Z",
+  "notice": "Unchanged comparator values; incomplete evidence is UNPROVEN. RSS is recorded only.",
+  "complete": false,
+  "neverFails": false,
+  "provenanceCompatible": true,
+  "profiles": {
+    "phone": {
+      "complete": false,
+      "coverage": false,
+      "baselineMeasurable": 12,
+      "pairedMeasurable": 11,
+      "qualityEvidenceComplete": true,
+      "quality": false,
+      "noSlower": false,
+      "ssimGain": 0.1033638690718226,
+      "sharpnessGain": 4.757726143168869,
+      "timing": {
+        "firstViewMs": {
+          "mainMedian": null,
+          "candidateMedian": null,
+          "mainWorst": null,
+          "candidateWorst": null
+        },
+        "bakeMs": {
+          "mainMedian": null,
+          "candidateMedian": null,
+          "mainWorst": null,
+          "candidateWorst": null
+        }
+      }
+    },
+    "desktop": {
+      "complete": false,
+      "coverage": false,
+      "baselineMeasurable": 0,
+      "pairedMeasurable": 0,
+      "qualityEvidenceComplete": false,
+      "quality": false,
+      "noSlower": false,
+      "ssimGain": null,
+      "sharpnessGain": null,
+      "timing": {
+        "firstViewMs": {
+          "mainMedian": null,
+          "candidateMedian": null,
+          "mainWorst": null,
+          "candidateWorst": null
+        },
+        "bakeMs": {
+          "mainMedian": null,
+          "candidateMedian": null,
+          "mainWorst": null,
+          "candidateWorst": null
+        }
+      }
+    }
+  }
+}

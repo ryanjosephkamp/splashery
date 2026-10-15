@@ -1,0 +1,37 @@
+{
+  "capturedAt": "2026-10-15T16:15:23.849Z",
+  "label": "1615-cutoff-observation",
+  "source": {
+    "productCommit": "64ec9ad5b7a90b590b289f6a02f0bbd50138db08",
+    "servedSourceSha256": "6d362ff52101541719cc6b639d48b394630113fa61b3467ddbecb78dbe8742b8",
+    "protocolSha256": "bf94e388a2d71f1d3f7c75dd5d1855a4d69ddd8ba946dc81905faa85746e57ad",
+    "baselineProvenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "pairedProvenanceSha256": "b9cf187314d545233fda59b861bb8dfb7eeacdb722a7064a38e4442281984524",
+    "unpairedProvenanceSha256": "67c313c67a131763572e3bcb4a07beec85a683063e3f9766ef1fec8d7de12319"
+  },
+  "expectedCases": 40,
+  "mainRows": 40,
+  "pairedMasterRows": 18,
+  "rawAttempts": 40,
+  "rawRecordedRows": 40,
+  "unpairedRows": 22,
+  "rawPending": [],
+  "sampleCohorts": [
+    {
+      "name": "R12-frozen64ec",
+      "status": "completed-and-independently-pixel-verified",
+      "cases": 12,
+      "views": 74,
+      "commit": "64ec9ad5b7a90b590b289f6a02f0bbd50138db08",
+      "source": "6d362ff52101541719cc6b639d48b394630113fa61b3467ddbecb78dbe8742b8"
+    },
+    {
+      "name": "postmerge-2773",
+      "status": "completed-and-independently-pixel-verified",
+      "cases": 12,
+      "views": 74,
+      "commit": "2773a1c4458e9f1894f3d3cac11b5631c5325384",
+      "source": "5a27ac17adddd2f86b69c3295e8c4e3f747109b94f46c78a733ec5e7f7d450c8"
+    }
+  ]
+}

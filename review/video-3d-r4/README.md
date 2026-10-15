@@ -2,15 +2,39 @@
 
 This branch is review evidence only and must never be merged. The accepted corpus was frozen before
 candidate quality measurements. The product branch is `codex/video-3d-r4`. The audit records results
-and limitations; the goal is still being measured.
+and limitations; the acceptance goal is not established by this evidence.
 
-## Revision 12 in progress
+## Closing measurement and review records
+
+[The closing revision-12 capture](evidence/final-r12-report-r9/CLOSING-INDEX.md) keeps all forty
+declared cases visible, strict paired results separate from raw attempts, and missing or interrupted
+work explicit. Its captured JSON, tables, and dashboard determine the observed counts and unchanged
+gate results. It does not infer quality from a saved model or upgrade an unpaired result.
+
+[The closing review record](reviews/candidate-r12-unranked-r9/README.md) links only movies and
+receipts actually produced by the single guarded capture. The available phone pairs are selected in
+manifest order and remain unranked. Missing pairs, failed exact replay, and interrupted captures
+cannot satisfy the ten-clip or best/worst requests.
+
+[The replacement queue and stage boundary](evidence/r12-closing-controls-r9/README.md) retain the
+original watcher's failure, the observed-ended replacement, actual process bindings, and any final
+signals. The review guard never owns timed work. A separate, declared 16:15 UTC baseline stage
+boundary retains affected work as incomplete without changing benchmark rows or scores.
+
+[The post-merge sample replay](evidence/postmerge-samples-r9/README.md) has a separate
+shared-runtime source fingerprint. Its actual completion and exact-pixel receipts determine
+preservation; it never replaces the frozen native corpus cohort.
+[The latest full CI](evidence/ci-db81-r9/README.md) retains original shard outcomes and every
+failure. An isolated recheck cannot waive an original failure.
+
+## Revision 12 measurement history
 
 The current frozen candidate is `64ec9ad5b7a90b590b289f6a02f0bbd50138db08`, with served-source
-SHA-256 `6d362ff52101541719cc6b639d48b394630113fa61b3467ddbecb78dbe8742b8` across 378 paths. Fresh
-native corpus checks are running. All 74 revision-12 sample views across both profiles preserve main
-pixels exactly, without recorded browser errors. The deadline remains October 15, 2026, at 16:32:25
-UTC. Older revisions retain their source identity and every negative result.
+SHA-256 `6d362ff52101541719cc6b639d48b394630113fa61b3467ddbecb78dbe8742b8` across 378 paths. The
+closing native capture records the actual completed and incomplete outcomes. All 74 revision-12
+sample views across both profiles preserve main pixels exactly, without recorded browser errors. The
+deadline remains October 15, 2026, at 16:32:25 UTC. Older revisions retain their source identity and
+every negative result.
 
 The
 [revision-11 and preparation packet](evidence/revision-11-and-12-preparation-r8/PUBLICATION-README.md)
@@ -43,11 +67,11 @@ files, 2,878 passes, ten failures, and one existing skip. No Video to 3D spec ap
 list. This predates the latest normal main merge.
 
 The [review preparation](evidence/review-r12-queue-preparation-r8/LATEST-STATUS.txt) retains an
-idle-watcher process-observation failure. No movie was launched or timed job signaled. Its
-replacement will bind the separate post-merge sample job and preserve all observed history before
-one unranked batch after 16:15 UTC, when all timed work has ceased. It keeps exact held-out replay
-guards and requests up to ten available verified phone pairs in manifest order. Missing pairs and
-incomplete captures cannot become review movies or acceptance evidence.
+idle-watcher process-observation failure. No movie was launched or timed job signaled. The
+authorized R3 replacement binds the separate postmerge sample job and preserves all observed history
+before one unranked batch after 16:15 UTC, when all timed work has ceased. It keeps exact held-out
+replay guards and requests up to ten available verified phone pairs in manifest order. Missing pairs
+and incomplete captures cannot become review movies or acceptance evidence.
 
 Large raw machine logs, telemetry, and images are losslessly archived with exact original paths,
 SHA-256 mappings, and restoration tools. Their original uncompressed bytes remain outside the
@@ -257,7 +281,8 @@ path; neither establishes native bake or physical-phone speed.
 existing skip. Failures that passed alone still count. The
 [revision-9 freeze and controller handoff](evidence/r9-freeze-and-handoff/) records the complete
 product source fingerprint and unchanged five-file benchmark protocol. Current native bakes were
-allowed to finish when scheduling moved to revision 9. Its fresh native results are still pending.
+allowed to finish when scheduling moved to revision 9. The later closing record supersedes this
+historical pending checkpoint.
 
 ### Revision 9 measurements and preserved failures
 

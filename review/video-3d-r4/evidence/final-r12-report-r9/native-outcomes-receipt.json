@@ -1,0 +1,42 @@
+{
+  "createdAt": "2026-10-15T16:15:33.528Z",
+  "source": "/workspace/v3d-r4-media/final-r12-report-preparation-r1/snapshot-1615/report.json.gz",
+  "sourceStoredSha256": "7ec0a1bb0e1d77d2eb77761734889faf941cc184a2da7e36a16607b0a4e6ccba",
+  "sourceOriginalSha256": "a0b19d898cd6f85818979cff30f28943d77c7bf1020deb423d91728c6baf8aeb",
+  "sourceCaptureFinishedAt": "2026-10-15T16:15:23.849Z",
+  "rows": 40,
+  "perProfile": [
+    {
+      "profile": "phone",
+      "rows": 20,
+      "modes": {
+        "strict paired": 17,
+        "unpaired raw": 3
+      }
+    },
+    {
+      "profile": "desktop",
+      "rows": 20,
+      "modes": {
+        "unpaired raw": 19,
+        "strict paired": 1
+      }
+    }
+  ],
+  "originalStrictComparisonStoredSha256": "b56f9d2ae9ca10c853b1d5012d5c271963ced5f3c9b7e1ba27186213765948ac",
+  "gatesUnchanged": true,
+  "rawRowsPromotedToStrict": 0,
+  "sourceBytesUnchanged": true,
+  "rawLinkBase": ".",
+  "files": [
+    {
+      "file": "native-outcomes.md",
+      "sha256": "483e082c14164f941a592b2f18e493efdf839b5a4fc18b8f21a815291f1ebec5"
+    },
+    {
+      "file": "table-data.json.gz",
+      "sha256": "bdc10d4a259d13a21cbb172597d58ee4436bfdeadf73b4f0ffe66820e4c24ae4",
+      "restoredSha256": "5c2f68e374dd000ebd14141275379d3ebc52590ae4711d5753c3191732937acf"
+    }
+  ]
+}
