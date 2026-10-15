@@ -1,0 +1,165 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:09:53] "GET / HTTP/1.1" 200 -
+
+Running 18 tests using 1 worker
+
+(node:241030) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:241030) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-v3d-background.spec.mjs:23:1 › a validated model environment takes precedence while older bakes retain their background (56ms)
+  ✓   2 [chromium] › tests/cdx-v3d-background.spec.mjs:36:1 › a fitted view restores its prior composite once after leaving (67ms)
+  ✓   3 [chromium] › tests/cdx-v3d-background.spec.mjs:48:1 › host color choices and a newer setter remain authoritative (16ms)
+  ✓   4 [chromium] › tests/cdx-v3d-background.spec.mjs:61:1 › overlapping views do not restore each other's colors (10ms)
+  ✓   5 [chromium] › tests/cdx-v3d-background.spec.mjs:73:1 › direct camera changes, invalid metadata, and absent stages are preserved (67ms)
+  ✓   6 [chromium] › tests/cdx-v3d-background.spec.mjs:88:1 › flight disposal restores only its own background, including a late embed owner (3ms)
+  ✓   7 [chromium] › tests/cdx-v3d-background.spec.mjs:106:1 › routine exposure, accent, and settings refreshes keep the fitted composite (5ms)
+  ✓   8 [chromium] › tests/cdx-v3d-background.spec.mjs:126:1 › an explicit background option wins even when its RGBA matches the old host clear (7ms)
+  ✓   9 [chromium] › tests/cdx-v3d-background.spec.mjs:140:1 › a changed theme color or direct different RGBA remains authoritative (7ms)
+  ✓  10 [chromium] › tests/cdx-v3d-background.spec.mjs:154:1 › overlapping metadata holds preserve the newer fitted color during routine refreshes (7ms)
+  ✓  11 [chromium] › tests/cdx-v3d-background.spec.mjs:167:1 › flight refresh ownership expires immediately for a new generation, source, scene, or player (19ms)
+  ✓  12 [chromium] › tests/cdx-v3d-deadline.spec.mjs:16:1 › blocking work cannot publish success after its deadline (9ms)
+  ✓  13 [chromium] › tests/cdx-v3d-deadline.spec.mjs:33:1 › blocking failure after the deadline retains the actionable timeout (14ms)
+  ✓  14 [chromium] › tests/cdx-v3d-deadline.spec.mjs:47:1 › timely completion clears the timer without aborting completed work (43ms)
+  ✓  15 [chromium] › tests/cdx-v3d-deadline.spec.mjs:62:1 › canceling active work aborts its child and discards a later result (7ms)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:09:59] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:09:59] code 404, message File not found
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:09:59] "GET /favicon.ico HTTP/1.1" 404 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:09:59] "GET /src/video3d/panel.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:09:59] "GET /src/video3d/guide.js HTTP/1.1" 200 -
+  ✓  16 [chromium] › tests/cdx-v3d-progress.spec.mjs:3:1 › slow training shows its remaining time limit and explains finishing (1.6s)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:00] "GET /src/packs/video3d.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:00] "GET /src/video3d/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:00] "GET /src/video3d/baked.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:00] "GET /src/video3d/scene.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:00] "GET /src/video3d/flight.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:00] "GET /src/video3d/samples.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:00] "GET /src/video3d/guide.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:00] "GET /src/video3d/tiers.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/video3d/cleanup.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/video3d/region.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/video3d/pause-view.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/video3d/credit.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/video3d/walk.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/video3d/background.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/baked.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/loaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/pc.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /src/noise.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /vendor/playcanvas/playcanvas.min.mjs HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:01] "GET /assets/toys/video-3d/liberty-source.webm HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:02] "GET /src/video3d/panel.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:02] "GET /src/video3d/suitability.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:02] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:02] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/player.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/exports.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/generators.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/paint.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/effects.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/camera.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/stage.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/kit.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/motion.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/rig.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/pose.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/effects-pose.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/rigs.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/rig-fx.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/patterns.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/toys.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/photo-splats.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/sharpness.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/state.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/pictures.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/kernels.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/chunks.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/physics/hands-on.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /vendor/gifenc/gifenc.esm.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/codec.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/token-bounds.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/packs/even.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/physics/world.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/font.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/physics/joints.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/packs/photoreal-r3-rigs.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/packs/dog-plush-fill.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/packs/photoreal-r3.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/picture-splats.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/packs/photoreal-r2.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/media.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/physics/fields.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/physics/soft.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/packs/photoreal-r3-bases.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/packs/real-objects.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:06] "GET /src/physics/materials.js HTTP/1.1" 200 -
+  ✓  17 [chromium] › tests/cdx-v3d-training-hold.spec.mjs:3:1 › Finish now retains its GPU hold, and leaving releases it before cleanup settles (7.9s)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/packs/video3d.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/baked.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/scene.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/samples.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/flight.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/guide.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/cleanup.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/walk.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/region.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/credit.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/tiers.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/pause-view.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/video3d/background.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/baked.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/loaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/pc.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /src/noise.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:08] "GET /vendor/playcanvas/playcanvas.min.mjs HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/video3d/panel.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/exports.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/player.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /vendor/gifenc/gifenc.esm.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/state.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/codec.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/stage.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/generators.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/effects.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/paint.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/camera.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/motion.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/kit.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/rig.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/pose.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/effects-pose.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/rig-fx.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/rigs.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/patterns.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/toys.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/kernels.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/photo-splats.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/sharpness.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/chunks.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/pictures.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/physics/hands-on.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/token-bounds.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/physics/world.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/font.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/physics/joints.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/packs/even.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/packs/dog-plush-fill.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/packs/photoreal-r3-rigs.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/packs/photoreal-r2.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/physics/fields.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/physics/soft.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/media.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/picture-splats.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/packs/photoreal-r3.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/packs/photoreal-r3-bases.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/physics/materials.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/packs/real-objects.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:09] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:10] "GET /assets/toys/video-3d/liberty-baked/manifest.json HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:10] "GET /assets/toys/video-3d/liberty.json HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:10] "GET /assets/toys/video-3d/liberty-baked/assets/liberty-desktop-177901-0.bkd.gz HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:10] "GET /assets/toys/video-3d/liberty-baked/assets/liberty-desktop-177901-1.bkd.gz HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:10] "GET /assets/toys/video-3d/liberty-baked/assets/liberty-desktop-177901-2.bkd.gz HTTP/1.1" 200 -
+  ✓  18 [chromium] › tests/cdx-v3d-training-hold.spec.mjs:81:1 › retrying the same file clears the previous failure while new training is pending (6.2s)
+
+  18 passed (21.5s)

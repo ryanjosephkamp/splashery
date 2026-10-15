@@ -1,0 +1,67 @@
+{
+  "created": "2026-10-15T11:03:03.242Z",
+  "source": "/workspace/v3d-r4-media/r10-orchestration-preparation-r1",
+  "sourceInventory": [
+    {
+      "file": "finalize-r10-declaration.py",
+      "bytes": 4639,
+      "sha256": "159243678a3fc346b9722f480fd6ee28bc5c1711bb86e3ac4045afe8c30ad288"
+    },
+    {
+      "file": "follow-r10-v1-control/README.md",
+      "bytes": 6363,
+      "sha256": "eccb0e57ea82f101d39ac98b2ef28802983dcf5247016aa003d0f003f19e664c"
+    },
+    {
+      "file": "follow-r10-v1-control/cpu-tests-final.log",
+      "bytes": 3755,
+      "sha256": "b297bf52862652036e50434f3b41c7676f25043e5a1f7771cfc326e8ec667d72"
+    },
+    {
+      "file": "follow-r10-v1-control/cpu-tests.log",
+      "bytes": 3546,
+      "sha256": "66b709d355ff01f457965f37a0b88f9ec894a89a1140c4fcf4be4f956adb92b4"
+    },
+    {
+      "file": "follow-r10-v1-control/declaration.json",
+      "bytes": 4301,
+      "sha256": "39430f1dd0f7202dcf0bead3217a3b4c9d3df1ff1a5d91248fd5d4ed9756c215"
+    },
+    {
+      "file": "follow-r10-v1-control/state.json",
+      "bytes": 96,
+      "sha256": "0ceaff0caaaa71427702a5733461a754e5a55266fa79093554d352d8e2376c9c"
+    },
+    {
+      "file": "follow-r10-v1.py",
+      "bytes": 30338,
+      "sha256": "a815912e18de80e616760ff80ffca76d070b8f060231e0705849aca1c200e39d"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 2728,
+      "sha256": "47417ce1633cf14242be581490b02082e4491a8ec04e19483436fb2ad0700e0b"
+    },
+    {
+      "file": "prepare-r10-provenance.mjs",
+      "bytes": 6777,
+      "sha256": "c509b5afeb3305beac7e1641735f1114a59926edab13a7d8f7db015091d1c78f"
+    },
+    {
+      "file": "r10-follower-integrity.mjs",
+      "bytes": 5084,
+      "sha256": "52071946ddbfb8faa7c72b859bfc75e08819bb48377c3ef5c65f4f2c3e9b15a0"
+    },
+    {
+      "file": "r10-prior-native-handoff-SCHEMA.json",
+      "bytes": 1510,
+      "sha256": "d9c9277f86be53779cb4b6bd5ba7796b3347cfe0ce9d98350f9957d162db55b1"
+    },
+    {
+      "file": "test-follow-r10-v1.py",
+      "bytes": 15143,
+      "sha256": "ed4f695e7692e9fb177de887aa8556bb95a37134352d0e94ab424b236b4dc097"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

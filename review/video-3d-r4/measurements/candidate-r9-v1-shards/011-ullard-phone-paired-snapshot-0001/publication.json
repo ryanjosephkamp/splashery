@@ -1,0 +1,81 @@
+{
+  "created": "2026-10-15T11:03:00.226Z",
+  "source": "/workspace/v3d-r4-media/candidate-r9-v1-shards/011-ullard-phone-paired",
+  "runSha256": "b7d9b1386de7c61315cb5cc5c0c5cced43a728a7ad735362e198a09b6eed1a50",
+  "provenanceSha256": "fca50d7bc2b5d22bddecd7ee77d5c5bb0942444fe6ddf12f008d544bcb2d8ca0",
+  "cases": [
+    {
+      "id": "ullard",
+      "profile": "phone",
+      "rowFingerprint": "4973efb84f130dc41bba921f72d2e86047ddc37ef47092b5afbefeeae5f46da1",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11218,
+          "sha256": "a457e301e6769d00789788d3bb342c31946de4780c05756cca31628e0c39a326"
+        },
+        {
+          "file": "model.json",
+          "bytes": 27426,
+          "sha256": "5e5df6ab4809d593505ed4009e273863afbff3399ba2444e6aa667060c36a032"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 997431,
+          "sha256": "a8f3502a8ef801b1ca7063c674b0705f730d37f5f81cbb2fd14d3b93c1993926"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 182246,
+          "sha256": "ffe3d9fd4a4cffb305e4d0cb41b0d3a26b62dd7e3f9d6f32b5a5d18612075346"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 570684,
+          "sha256": "76cd454d3883cd9e080745b11c364f5438b2a65fd27c8e1ec7c6b792fa5f876f"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 466308,
+          "sha256": "c391dda83176625ca6fd3a7eb41da78652c82cab73a34912d9b4afeb638fbe9a"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 348108,
+          "sha256": "f7b0f9d88c2bbff51c5f397b62f5081a830b613dbc6937ef6129bdd05327f63f"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 369723,
+          "sha256": "edbb117051a43db55409892be2530d7bc03632e353e3addb63fb38b9c7bc50e6"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 370215,
+          "sha256": "4ce727ce0b54cc684d27f273e863cdaca477006161625651cb547a7534d71485"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 384030,
+          "sha256": "ba6df174c5a3f04429dfc5c64f3d1369e42782e015363b868a657212350a2551"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 370019,
+          "sha256": "cc32aa1168f53e110ccc442980b67ae371cb09827dd46ed6f37b9a9c61d8d07b"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 377759,
+          "sha256": "00f6fa7cd17612754781945a12e688aabaf18cd5c647b9c06c2781b89947e12f"
+        },
+        {
+          "file": "result.json",
+          "bytes": 4665,
+          "sha256": "23da1b0ff47c7ac4a6bcb41fd6078ffae351fc626676cee8aa4307302f954002"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

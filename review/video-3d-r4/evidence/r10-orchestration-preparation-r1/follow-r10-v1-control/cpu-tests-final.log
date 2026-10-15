@@ -1,0 +1,31 @@
+test_active_old_coordinator_blocks_even_otherwise_final_configuration (__main__.FinalizationTests.test_active_old_coordinator_blocks_even_otherwise_final_configuration) ... ok
+test_explicit_final_fields_are_required (__main__.FinalizationTests.test_explicit_final_fields_are_required) ... ok
+test_finalizer_requires_explicit_new_identities_and_copies_every_blocker (__main__.FinalizationTests.test_finalizer_requires_explicit_new_identities_and_copies_every_blocker) ... ok
+test_old_r9_provenance_and_missing_profile_are_rejected (__main__.FinalizationTests.test_old_r9_provenance_and_missing_profile_are_rejected) ... ok
+test_prepared_draft_cannot_configure_or_spawn_native_work (__main__.FinalizationTests.test_prepared_draft_cannot_configure_or_spawn_native_work) ... ok
+test_protocol_and_final_receipt_digests_are_required (__main__.FinalizationTests.test_protocol_and_final_receipt_digests_are_required) ... ok
+test_retirement_and_complete_precise_blockers_are_mandatory (__main__.FinalizationTests.test_retirement_and_complete_precise_blockers_are_mandatory) ... ok
+test_a_real_copied_case_passes_without_changing_bytes (__main__.IntegrityTests.test_a_real_copied_case_passes_without_changing_bytes) ... ok
+test_b_corrupted_model_is_rejected (__main__.IntegrityTests.test_b_corrupted_model_is_rejected) ... ok
+test_c_corrupted_png_is_rejected (__main__.IntegrityTests.test_c_corrupted_png_is_rejected) ... ok
+test_d_provenance_mismatch_is_rejected (__main__.IntegrityTests.test_d_provenance_mismatch_is_rejected) ... ok
+test_accountable_then_incomplete_then_manifest_order (__main__.PolicyTests.test_accountable_then_incomplete_then_manifest_order) ... ok
+test_attempted_paired_failure_never_retried (__main__.PolicyTests.test_attempted_paired_failure_never_retried) ... ok
+test_bound_process_title_change_does_not_release_ownership (__main__.PolicyTests.test_bound_process_title_change_does_not_release_ownership) ... ok
+test_case_folder_without_row_and_reserved_shard_are_consumed (__main__.PolicyTests.test_case_folder_without_row_and_reserved_shard_are_consumed) ... ok
+test_completed_old_follower_only_needs_reconciliation (__main__.PolicyTests.test_completed_old_follower_only_needs_reconciliation) ... ok
+test_no_r8_source_discovery_for_fresh_r10_state (__main__.PolicyTests.test_no_r8_source_discovery_for_fresh_r10_state) ... ok
+test_old_r9_sources_cannot_enter_r10_attempts (__main__.PolicyTests.test_old_r9_sources_cannot_enter_r10_attempts) ... ok
+test_own_profile_descendant_blocks_after_native_has_exited (__main__.PolicyTests.test_own_profile_descendant_blocks_after_native_has_exited) ... ok
+test_phone_continues_while_desktop_old_follower_is_active (__main__.PolicyTests.test_phone_continues_while_desktop_old_follower_is_active) ... ok
+test_process_identity_reuse_and_zombies_do_not_block (__main__.PolicyTests.test_process_identity_reuse_and_zombies_do_not_block) ... ok
+test_profile_waits_for_its_own_surviving_descendant (__main__.PolicyTests.test_profile_waits_for_its_own_surviving_descendant) ... ok
+test_profile_with_no_prior_native_needs_no_profile_barrier_after_parent_retirement (__main__.PolicyTests.test_profile_with_no_prior_native_needs_no_profile_barrier_after_parent_retirement) ... ok
+test_r8_source_cannot_be_registered_as_an_r10_attempt (__main__.PolicyTests.test_r8_source_cannot_be_registered_as_an_r10_attempt) ... ok
+test_unknown_shard_is_not_silently_imported_or_retried (__main__.PolicyTests.test_unknown_shard_is_not_silently_imported_or_retried) ... ok
+test_unpaired_repeat_is_quality_independent_once_accountable (__main__.PolicyTests.test_unpaired_repeat_is_quality_independent_once_accountable) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 9.829s
+
+OK

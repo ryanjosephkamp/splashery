@@ -1,0 +1,69 @@
+{
+  "created": "2026-10-15T10:19:35.418986+00:00",
+  "productCommit": "1cbccf108294437a2b6ae8b07dead9c56d3f3609",
+  "source": [
+    {
+      "file": "vendor/splatjs/src/gs/background-fit.js",
+      "bytes": 4475,
+      "sha256": "9b40decb9665ce73a5ef9b829d7e89887263c4cc7dbb75296ddb64fdcc5e6110"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 124142,
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 67471,
+      "sha256": "e50c9b04231c4e62ce804f6c48ab367155426d007674cece64c8f8773c287d8f"
+    },
+    {
+      "file": "src/video3d/run.js",
+      "bytes": 20411,
+      "sha256": "88937b5783d32ca66b93914d99b76d6f2ca1891f1e91469f2284933c5e28a9a4"
+    },
+    {
+      "file": "src/video3d/background.js",
+      "bytes": 3108,
+      "sha256": "12e029303391b2001613bdbaeddfee708ff979ee1107205f7bb6144c03a5b314"
+    },
+    {
+      "file": "src/packs/video3d.js",
+      "bytes": 27079,
+      "sha256": "5e2b71d8a1eb6f2ae815e3f99ca650f6b29cd5ef0a6261fa30e4f2a1219637a3"
+    },
+    {
+      "file": "tests/cdx-v3d-background-fit.spec.mjs",
+      "bytes": 7932,
+      "sha256": "ba9039d000cb3b7dd3f3e5105de26c21d68e2109cee34f8f33ac67db5ac68da4"
+    },
+    {
+      "file": "tests/cdx-v3d-background-fit-session.spec.mjs",
+      "bytes": 5180,
+      "sha256": "4bb6e1db3abd406acce7db8194b69ff2fda0ecf7c3ce20e3567669a109a0e7c8"
+    },
+    {
+      "file": "tests/cdx-v3d-background-fit-gpu.spec.mjs",
+      "bytes": 5431,
+      "sha256": "194f97fb625d56026481fb0b1968889a06fd85117a034a5bbc38898fb27fb8c8"
+    },
+    {
+      "file": "tests/cdx-v3d-background.spec.mjs",
+      "bytes": 7115,
+      "sha256": "544658b0f0e3393cdc770d7aed0b93e3ad3037e05b63230d6c882c387ab3c1d6"
+    },
+    {
+      "file": "vendor/splatjs/LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    }
+  ],
+  "counts": {
+    "initialMathAndGpu": 12,
+    "expandedEngineAndResources": 35,
+    "viewOwnership": 4,
+    "productWiring": 18
+  },
+  "sourceChronology": "The35-test run includes accepted/rejected realGPU, packed lowMem targets, exactmodelparambytes and cancellation/ownership. The later directpreview guard is covered by4CPUchecks. The18-test product run precedes only wrapping finishing errors with clearer useradvice. A frozenR10 GPU recheck is separately running; do not claim its result yet.",
+  "policy": "Everyeligible packed trainingpixel, no crop/mask/colorpreset; excludesholdout/excluded/eval; minimum1percent pooled trainingMSEgain and noMSEincrease on EACH internalvalidationcam. Blackfallback, distinctrenderBackground metadata. No externalcorpusheldout input, no geometry oroptimizerparamchanges. No SSIM/performance/goalclaim."
+}

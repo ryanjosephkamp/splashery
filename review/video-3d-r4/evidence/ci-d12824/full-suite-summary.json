@@ -1,0 +1,246 @@
+{
+  "createdAt": "2026-10-15T11:01:04.726348+00:00",
+  "runId": 38717498903,
+  "commit": "d12824036892077e891d031a33bb71c712d8babd",
+  "note": "Derived from all16 unchanged original shard logs. Alone rechecks are supplementary and never waive original failures. CI Summary job may still be queued.",
+  "totals": {
+    "files": 327,
+    "expectedFiles": 327,
+    "tests": 2812,
+    "passed": 2799,
+    "failed": 12,
+    "skipped": 1
+  },
+  "shards": [
+    {
+      "file": "raw-job-116363654703.log",
+      "sha256": "80a6de0c77c8bc29f2613d467b487f4412ebb9a3a6e67d0a81b81a0d3e307a0c",
+      "files": 9,
+      "expectedFiles": 9,
+      "tests": 92,
+      "passed": 92,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116363654841.log",
+      "sha256": "d601bcbee3d31864b56e2d20ea58739dd4dfc50a2108863de32fbc1978b4e449",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 169,
+      "passed": 169,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116363654924.log",
+      "sha256": "5b85b3920de2fccce041441a9fb8b659aadf9a1ada597d7c8e8ba8baddd71da7",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 228,
+      "passed": 228,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116363654944.log",
+      "sha256": "50065bf22d59596b506dcd26aa47cbd360425cca10e6677996d7bf5a0b9189d4",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 156,
+      "passed": 156,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116363654954.log",
+      "sha256": "0679ed20893826731f0bbdaeb4544b138a5df6935c76467203dc50608b25d838",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 169,
+      "passed": 169,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116363654968.log",
+      "sha256": "cae57e826c17e1acdcb2cf5af3d5d18d0c19c0d2aad2a91def8a72ed2e9761d1",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 206,
+      "passed": 204,
+      "failed": 2,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T10:25:31.6302335Z - `smoke:878` Splashery v3 engine (WebGL2) \u203a a stretchy toy stretches when dragged and springs back; a drag off it orbits: failed. Error: expect(received).toBe(expected) // Object.is equality",
+        "2026-10-15T10:25:31.6303871Z - `smoke:1050` Settings panel (WebGL2) \u203a the panel and the shelf can be made bigger on a wide screen: failed. Error: expect(received).toBeGreaterThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T10:25:50.9558635Z smoke:878 a stretchy toy stretches when dragged and springs back; a drag off it orbits: passed alone",
+        "2026-10-15T10:26:03.4275315Z smoke:1050 the panel and the shelf can be made bigger on a wide screen: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116363654998.log",
+      "sha256": "0a5a0bcf058b05216fdf880e87edce87b42bc2986b73c50575990fb4fcc2e1fb",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 131,
+      "passed": 129,
+      "failed": 2,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T10:27:52.4317432Z - `hh3-engine2:122` strings: a drag across the guitar's strings plucks each one, in turn: failed. Error: expect(received).toEqual(expected) // deep equality",
+        "2026-10-15T10:27:52.4318948Z - `spg:138` site pages \u203a the embed guide builds the snippets and shows a live toy: timedOut. Tearing down \"context\" exceeded the test timeout of 240000ms."
+      ],
+      "recheckLines": [
+        "2026-10-15T10:28:39.3199263Z hh3-engine2:122 strings: a drag across the guitar's strings plucks each one, in turn: passed alone",
+        "2026-10-15T10:33:06.9124680Z spg:138 the embed guide builds the snippets and shows a live toy: failed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116363655006.log",
+      "sha256": "4a000f43db80cbcdac19725351f5f3a544b62755b8d1ad8d2f37a431751aa354",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 219,
+      "passed": 217,
+      "failed": 2,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T10:23:40.9078376Z - `ops-text:41` a PDF's words in the Toy tab \u203a your book: the words of the page on show, following the pages, copied and found: failed. Error: expect(locator).toHaveAttribute(expected) failed",
+        "2026-10-15T10:23:40.9080900Z - `qrc-picture:119` Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads: failed. Error: expect(received).toEqual(expected) // deep equality"
+      ],
+      "recheckLines": [
+        "2026-10-15T10:25:01.9498705Z ops-text:41 your book: the words of the page on show, following the pages, copied and found: failed alone",
+        "2026-10-15T10:25:42.9145002Z qrc-picture:119 Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116363655014.log",
+      "sha256": "6f180e33c1c5fdc379a5a95915abd6a4ff49c8b1e2392f4b5aa21a01a4738d8f",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 160,
+      "passed": 159,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T10:23:55.4315666Z - `man5:201` the PDF \u203a the same input and the same Chromium print the same bytes: failed. Error: run tools/manual-pdf.mjs again: the shipped PDF is out of date"
+      ],
+      "recheckLines": [
+        "2026-10-15T10:24:14.5502045Z man5:201 the same input and the same Chromium print the same bytes: failed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116363655077.log",
+      "sha256": "2158230ec4b21a3d1febac9ccff6a95467b633ed8321df1069f5a334a8c24882",
+      "files": 19,
+      "expectedFiles": 19,
+      "tests": 181,
+      "passed": 181,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116363655103.log",
+      "sha256": "7b076130781b78d9395041c2be52f025835a6d09a13530a7d7c62a2216d15f04",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 148,
+      "passed": 148,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116363655104.log",
+      "sha256": "758a1e9a9df7eaf000f33c5b48f75096f9fe1f1033d57260dbfbdc6668d51b8f",
+      "files": 20,
+      "expectedFiles": 20,
+      "tests": 132,
+      "passed": 131,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T10:27:12.1266295Z - `ui3:50` pause and resume \u203a the second tap freezes a long effect and its sound, the third resumes it, and a tap after the end starts it again: failed. Error: expect(received).toBeGreaterThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T10:27:49.1253896Z ui3:50 the second tap freezes a long effect and its sound, the third resumes it, and a tap after the end starts it again: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116363655122.log",
+      "sha256": "0c4b2de49a83531e3ff0f827db523603d8cb778ae91b5db61f561e599173e944",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 161,
+      "passed": 161,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116363655129.log",
+      "sha256": "134d33021d644329d42645d11369d3f1bcfc8759a39daadd57bb5f9844b47909",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 216,
+      "passed": 215,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T10:55:54.7749324Z - `hh4-landmarks:116` leaning tower: the two balls, lifted together and let go, land together: failed. Error: expect(received).not.toBe(expected) // Object.is equality"
+      ],
+      "recheckLines": [
+        "2026-10-15T10:56:04.6408072Z hh4-landmarks:116 leaning tower: the two balls, lifted together and let go, land together: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116363655140.log",
+      "sha256": "16b8bdc99f4aee9448d1df091cce5062e02da2732b983ce288f2f1c572c7fccf",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 192,
+      "passed": 188,
+      "failed": 3,
+      "skipped": 1,
+      "failureLines": [
+        "2026-10-15T10:30:40.9239685Z - `cdx-mir:329` matched camera frames keep real feature contrast and improve held-pose stability: failed. Error: expect(received).toBeLessThan(expected)",
+        "2026-10-15T10:30:40.9241125Z - `math:368` the surface plotter plots a typed surface: failed. Error: expect(locator).toHaveText(expected) failed",
+        "2026-10-15T10:30:40.9242756Z - `phy:64` Pebbles: stones pick up and stack into a new cairn; a careless one topples: failed. Error: expect(received).toBeGreaterThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T10:33:55.8517727Z cdx-mir:329 matched camera frames keep real feature contrast and improve held-pose stability: passed alone",
+        "2026-10-15T10:34:05.7963976Z math:368 the surface plotter plots a typed surface: passed alone",
+        "2026-10-15T10:34:39.5586011Z phy:64 Pebbles: stones pick up and stack into a new cairn; a careless one topples: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116363655161.log",
+      "sha256": "b6ce7bbd4dc1e791b1d40245a78108e3aa6de94a4faa29992307eebfdaf3dbb6",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 252,
+      "passed": 252,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    }
+  ]
+}

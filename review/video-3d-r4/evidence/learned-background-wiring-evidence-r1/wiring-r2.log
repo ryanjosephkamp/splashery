@@ -1,0 +1,96 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:13] "GET / HTTP/1.1" 200 -
+
+Running 35 tests using 1 worker
+
+(node:239914) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:239914) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] code 404, message File not found
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /favicon.ico HTTP/1.1" 404 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/sfm/sfm.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/sfm/worker-pool.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/sfm/features.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/sfm/sift.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/sfm/gpumatch.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/sfm/matching.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/sfm/ba.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/sfm/global.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:16] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✓   1 [chromium] › tests/cdx-v3d-background-fit-gpu.spec.mjs:4:1 › constant environment fitting uses GPU targets after low-memory cleanup and preserves every model parameter (4.2s)
+  ✓   2 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:14:1 › background fitting joins the active frame and suppresses preview and training until it releases (59ms)
+  ✓   3 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:48:1 › a late background read cannot return a result or change scheduling for a replacement trainer (5ms)
+  ✓   4 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:75:3 › background fitting releases its temporary GPU readback on cancel-map (7ms)
+  ✓   5 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:75:3 › background fitting releases its temporary GPU readback on encode (49ms)
+  ✓   6 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:24:1 › a transparent black renderer recovers exact packed target color in RGB byte order (14ms)
+  ✓   7 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:42:1 › pooled varying-transmittance cameras recover one shared color, including exposure (32ms)
+  ✓   8 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:64:1 › the constrained optimum clips independent channels and beats a direct color grid (499ms)
+  ✓   9 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:83:1 › a hardcoded exposure example fits the raw renderer rather than an exposed screenshot (14ms)
+  ✓  10 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:95:1 › empty or fully opaque input has no identifiable background energy (6ms)
+  ✓  11 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:108:1 › invalid target pixels skip arbitrary raw storage and are counted separately (47ms)
+  ✓  12 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:120:1 › soft-alpha and bad raw packets reject atomically without keeping a partial chunk (75ms)
+  ✓  13 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:140:1 › dimensions, moment state, color, and exposure conventions fail closed (53ms)
+  ✓  14 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:171:1 › streamed moments match direct fixed-model SSE and cannot increase pooled training MSE (519ms)
+  ✓  15 [chromium] › tests/cdx-v3d-resources.spec.mjs:88:1 › a readLoss completing after disposal cannot emit metrics or submit more GPU work (6ms)
+  ✓  16 [chromium] › tests/cdx-v3d-resources.spec.mjs:117:1 › a readLoss completing after recovery cannot contaminate the replacement trainer's fence ring (16ms)
+  ✓  17 [chromium] › tests/cdx-v3d-resources.spec.mjs:181:1 › phone pause and resume never overlap a pending GPU frame, and Finish joins it (11ms)
+  ✓  18 [chromium] › tests/cdx-v3d-resources.spec.mjs:234:1 › a resume request starts one next frame after its pending GPU fence settles (20ms)
+  ✓  19 [chromium] › tests/cdx-v3d-resources.spec.mjs:278:1 › Finish joins automatic completion without a second final readback or completion event (6ms)
+  ✓  20 [chromium] › tests/cdx-v3d-resources.spec.mjs:320:1 › SfM pool abort stops queued jobs and terminates all active workers (8ms)
+  ✓  21 [chromium] › tests/cdx-v3d-resources.spec.mjs:338:1 › SfM pool errors, handler errors, and constructor failures release every worker (7ms)
+  ✓  22 [chromium] › tests/cdx-v3d-resources.spec.mjs:375:1 › SfM pool preserves result/job association and closes workers after success (2ms)
+  ✓  23 [chromium] › tests/cdx-v3d-resources.spec.mjs:392:1 › a disposed session destroys a device that arrives after GPU creation (28ms)
+  ✓  24 [chromium] › tests/cdx-v3d-resources.spec.mjs:435:1 › late trainer completion cannot revive a disposed seed or continuation (13ms)
+  ✓  25 [chromium] › tests/cdx-v3d-resources.spec.mjs:479:1 › canceling load closes a late bitmap and prevents frame publication (7ms)
+  ✓  26 [chromium] › tests/cdx-v3d-resources.spec.mjs:512:1 › trainer disposal frees its buffers without destroying a host-owned device (5ms)
+  ✓  27 [chromium] › tests/cdx-v3d-resources.spec.mjs:600:1 › seedLimit reserves appended rows before the real trainer cap and covers the sparse cloud (38ms)
+  ✓  28 [chromium] › tests/cdx-v3d-resources.spec.mjs:635:1 › omitting seedLimit preserves the existing Gaussian parameter bytes (9ms)
+  ✓  29 [chromium] › tests/cdx-v3d-resources.spec.mjs:644:1 › disposing a session aborts its actual SfM worker pool (6ms)
+  ✓  30 [chromium] › tests/cdx-v3d-resources.spec.mjs:675:1 › seedLimit remains a ceiling on weak solves and empty solves fail clearly (17ms)
+  ✓  31 [chromium] › tests/cdx-v3d-resources.spec.mjs:702:1 › a captured device-loss callback stays quiet after session disposal (24ms)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/sfm/sfm.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/sfm/worker-pool.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/sfm/features.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/sfm/sift.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/sfm/gpumatch.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/sfm/matching.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/sfm/ba.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/sfm/global.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /src/video3d/surface-seed.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /src/video3d/scene.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /src/video3d/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:22] "GET /src/loaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:23] "GET /src/noise.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:23] "GET /src/pc.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:08:23] "GET /vendor/playcanvas/playcanvas.min.mjs HTTP/1.1" 200 -
+  ✓  32 [chromium] › tests/cdx-v3d-resources.spec.mjs:723:1 › surface rows survive the seed ceiling and train on actual WebGPU (8.6s)
+  ✓  33 [chromium] › tests/cdx-v3d-training-error.spec.mjs:29:1 › an encoding failure stops training immediately and cannot complete as a successful bake (21ms)
+  ✓  34 [chromium] › tests/cdx-v3d-training-error.spec.mjs:54:1 › a failed asynchronous refinement reports the originating error once (4ms)
+  ✓  35 [chromium] › tests/cdx-v3d-training-error.spec.mjs:73:1 › a rejected fence from a replaced trainer cannot fail its replacement (8ms)
+
+  35 passed (19.0s)

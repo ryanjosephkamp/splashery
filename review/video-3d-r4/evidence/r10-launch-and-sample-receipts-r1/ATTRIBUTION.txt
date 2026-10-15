@@ -1,0 +1,2 @@
+Source-byte, launch, handoff, and sample receipts only. Captured live controller state/events are point-in-time observations, not final cohort results. Native work continues.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

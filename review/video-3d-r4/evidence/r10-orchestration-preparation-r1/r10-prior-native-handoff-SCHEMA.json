@@ -1,0 +1,36 @@
+{
+  "SCHEMA_ONLY": "Do not finalize/launch this placeholder. Root supplies all real observed identities after retiring only its coordinator.",
+  "created": "ISO UTC",
+  "coordinator": {
+    "pid": 196899,
+    "startTicks": "1642582",
+    "retiredByRoot": true,
+    "retiredAt": "ISO UTC",
+    "command": [
+      "python3",
+      "/workspace/v3d-r4-media/follow-r9-v1.py"
+    ]
+  },
+  "profiles": {
+    "phone": {
+      "native": null,
+      "descendants": {},
+      "ownershipSource": "Root observed exact running R9 Node (if any) and ALL owned descendants at coordinator retirement; native=null only if no owned native remains; orphan descendants must still be listed."
+    },
+    "desktop": {
+      "native": null,
+      "descendants": {},
+      "ownershipSource": "Root observed exact running R9 Node (if any) and ALL owned descendants at coordinator retirement; native=null only if no owned native remains; orphan descendants must still be listed."
+    }
+  },
+  "identityShape": {
+    "pid": "positive integer",
+    "startTicks": "exact decimal string from /proc/PID/stat field22",
+    "command": [
+      "original observed argv, nonempty strings"
+    ],
+    "parent": "observed PPid optional",
+    "state": "observed /proc state optional"
+  },
+  "requirement": "profiles.native and profiles.descendants are copied exactly into final declaration; each root/native/descendant identity is PID+startTicks bound and blocks only its lane until natural non-zombie exit. Root may include extra receipt fields."
+}

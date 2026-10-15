@@ -1,0 +1,7 @@
+{
+  "createdAt": "2026-10-15T10:38:22.010232+00:00",
+  "corrects": "assessment.json gateNotice only",
+  "correction": "This SSIM-loss experiment did not fit a constant background and has no background validation gate. The original gateNotice was copied from the distinct learned-background-probe-r1 assessment and is inapplicable here. It does not change the original SSIM-loss measurements or acceptance status: native corpus gains remain unproven, training was slower, and production SSIM loss remains off.",
+  "originalAssessmentSha256": "77ba6916ae5274d67942e715cc8b021fd2a38662a1c36ba0c32fd89b9d1ac210",
+  "rawFilesChanged": false
+}

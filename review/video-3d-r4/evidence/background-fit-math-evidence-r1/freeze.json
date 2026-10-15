@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-15T10:05:53.520325+00:00",
+  "scope": [
+    "vendor/splatjs/src/gs/background-fit.js",
+    "tests/cdx-v3d-background-fit.spec.mjs"
+  ],
+  "tests": "9CPU-only tests passed9.0s;pinnedNode22;unique4197;no browser/GPU",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 3926,
+      "sha256": "62bfc08002ad28be90c5add5d47e2443a9d63ecf6a6c927b26133c4d0edec09b"
+    },
+    {
+      "path": "final.log",
+      "bytes": 1878,
+      "sha256": "b8504bcf4de1fea0cc1e0e99f06a730218517f65857fda4b7d613aa9f0b6e800"
+    },
+    {
+      "path": "tests/cdx-v3d-background-fit.spec.mjs",
+      "bytes": 7932,
+      "sha256": "ba9039d000cb3b7dd3f3e5105de26c21d68e2109cee34f8f33ac67db5ac68da4"
+    },
+    {
+      "path": "tests.log",
+      "bytes": 1717,
+      "sha256": "83299a0cdda5a3b54d0d8450bfc35d6dd7148ff224cb789e1150fb975c8b8078"
+    },
+    {
+      "path": "vendor/splatjs/LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "path": "vendor/splatjs/src/gs/background-fit.js",
+      "bytes": 4475,
+      "sha256": "9b40decb9665ce73a5ef9b829d7e89887263c4cc7dbb75296ddb64fdcc5e6110"
+    }
+  ],
+  "sourceOwner": "root",
+  "ruleCheck": "none"
+}

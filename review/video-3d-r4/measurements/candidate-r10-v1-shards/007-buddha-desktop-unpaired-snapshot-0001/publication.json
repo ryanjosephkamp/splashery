@@ -1,0 +1,21 @@
+{
+  "created": "2026-10-15T11:03:00.449Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/007-buddha-desktop-unpaired",
+  "runSha256": "d98dea93e10afc73467bf2ac4dc80a73eea3c8b3cecff159fb1c33f82389d90b",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "cases": [
+    {
+      "id": "buddha",
+      "profile": "desktop",
+      "rowFingerprint": "f520c133ce21dff3aeeea33688f8c09f324130ade67ee477ffe3bdeac0aa5cdb",
+      "files": [
+        {
+          "file": "result.json",
+          "bytes": 1726,
+          "sha256": "b0aba292373f1e93ee62d55a99ee29640669d146495c79b9c1d511e8fbd85f94"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

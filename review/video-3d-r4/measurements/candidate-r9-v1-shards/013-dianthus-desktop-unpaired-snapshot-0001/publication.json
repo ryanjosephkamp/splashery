@@ -1,0 +1,21 @@
+{
+  "created": "2026-10-15T11:03:00.241Z",
+  "source": "/workspace/v3d-r4-media/candidate-r9-v1-shards/013-dianthus-desktop-unpaired",
+  "runSha256": "2a7c834a7a06a12c191484580180e44bfcd15e0c73258ed74075108e65d07bba",
+  "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+  "cases": [
+    {
+      "id": "dianthus",
+      "profile": "desktop",
+      "rowFingerprint": "14a4db2b2e13b1a5b7087aa78db0c7e3d5b057fa69e843fa02eacf199ea41302",
+      "files": [
+        {
+          "file": "result.json",
+          "bytes": 1809,
+          "sha256": "be5c46affa584f8e7581357d22f9ca33b1884b692491b4c4cb70ef5f9231efed"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

@@ -1,0 +1,5 @@
+{
+  "capturedAt": "2026-10-15T11:02:56.239946+00:00",
+  "note": "Frozen declarations/launch receipts copied byte-for-byte. State and append-only events are explicitly point-in-time captures; native children continue. R9 final reconciliation is separate. All74 R10 existing sample views preserve main pixels; no sample retraining.",
+  "sampleJsonSha256": "5f1996999ad102921908916e4aad174dba8dbb0f803dd606389dea3402955bd0"
+}

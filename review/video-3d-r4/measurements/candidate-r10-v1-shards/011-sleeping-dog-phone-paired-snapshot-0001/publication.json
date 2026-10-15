@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T11:03:00.648Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/011-sleeping-dog-phone-paired",
+  "runSha256": "0b9f9171056320616604465bc1919a91a92aef16228dacc20e022fdff1620e23",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "cases": [
+    {
+      "id": "sleeping-dog",
+      "profile": "phone",
+      "rowFingerprint": "6cba31238bb5ccff6c1bda9c921db5ee5dc772974cb6a233b6bb14f8da1eb854",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207284,
+          "sha256": "d307fe4a114ea59a5084975ef3477a2ff363d0c95092fefc5a39e9e0a52bb42c"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2206,
+          "sha256": "228e6f8189f6b53e2d21c7dbfa9dbc26270f3240935986762f90165174307899"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

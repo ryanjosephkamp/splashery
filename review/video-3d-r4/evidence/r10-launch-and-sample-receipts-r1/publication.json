@@ -1,0 +1,72 @@
+{
+  "created": "2026-10-15T11:03:03.219Z",
+  "source": "/workspace/v3d-r4-media/r10-launch-and-sample-receipts-r1",
+  "sourceInventory": [
+    {
+      "file": "capture.json",
+      "bytes": 423,
+      "sha256": "df4d9140c1f0f52e204db27d21be543ab0ac785ec47b0ce314dcac3ef7c13805"
+    },
+    {
+      "file": "captured/follow-r10-v1-control/events.jsonl",
+      "bytes": 9102,
+      "sha256": "bd7116a18f6b42ef6583b3878530761c0d55dcb53e549e68159849123e4c1bac"
+    },
+    {
+      "file": "captured/follow-r10-v1-control/state.json",
+      "bytes": 59116,
+      "sha256": "6ad8e65b8c83d9f20914068a5f8d11f0c2009c0758f0292c99b6ed7481cfff79"
+    },
+    {
+      "file": "captured/follow-r9-final-reconcile-r1-control/comparison-0001.json",
+      "bytes": 9246,
+      "sha256": "496b171c0c3f101a53318e492e2b0d8a0266eb0d2a8452e25e2690ed2da94634"
+    },
+    {
+      "file": "captured/follow-r9-final-reconcile-r1-control/result.json",
+      "bytes": 7737,
+      "sha256": "e1460bc4cd37e3a4e67a378b7786597a3f86b843446f538841fbe9fea37ebf2c"
+    },
+    {
+      "file": "follow-r10-v1-control/declaration.json",
+      "bytes": 33710,
+      "sha256": "ab9411e64212456e403a0a9e738b54b51fcfa1fb4c690b669fd94d741f4d65f0"
+    },
+    {
+      "file": "follow-r10-v1-control/prior-native-handoff.json",
+      "bytes": 52360,
+      "sha256": "6ab1db32c33f44e414402f6d5fad87be47f4bf80b86847a77d4b82bc2d4fd0dc"
+    },
+    {
+      "file": "follow-r10-v1-control/runtime-freeze.json",
+      "bytes": 64281,
+      "sha256": "76f177b901e70a9026c77453b220e57a91909d3e681dd642de67c1a7fdb3009a"
+    },
+    {
+      "file": "follow-r10-v1-control/templates/paired.json",
+      "bytes": 75973,
+      "sha256": "be759fa620b770cfbef03835fc01fb0b4d885f2cb837cfa18a1bb8d55efb7274"
+    },
+    {
+      "file": "follow-r10-v1-control/templates/unpaired.json",
+      "bytes": 75675,
+      "sha256": "7f9754a26a430d98afb634db877bbc5034534a2d45f8c0cc2028f9d29b25e6d4"
+    },
+    {
+      "file": "r10-launch.json",
+      "bytes": 463,
+      "sha256": "0829dd74c2a2d622922adeb66212a89db6c1b3331f7700fa8af6f25ec6a96166"
+    },
+    {
+      "file": "runtime-r10-freeze.json",
+      "bytes": 64281,
+      "sha256": "76f177b901e70a9026c77453b220e57a91909d3e681dd642de67c1a7fdb3009a"
+    },
+    {
+      "file": "samples-r10-launch.json",
+      "bytes": 615,
+      "sha256": "a11ce5fd5ba545303a598107f8b920d3c53b911986b480c74e9d4c8d355d0304"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

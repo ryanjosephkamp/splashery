@@ -1,0 +1,14 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:10:57] "GET / HTTP/1.1" 200 -
+
+Running 4 tests using 1 worker
+
+(node:242535) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:242535) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:14:1 › background fitting joins the active frame and suppresses preview and training until it releases (123ms)
+  ✓  2 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:58:1 › a late background read cannot return a result or change scheduling for a replacement trainer (24ms)
+  ✓  3 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:85:3 › background fitting releases its temporary GPU readback on cancel-map (26ms)
+  ✓  4 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:85:3 › background fitting releases its temporary GPU readback on encode (133ms)
+
+  4 passed (7.9s)

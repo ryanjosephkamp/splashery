@@ -1,0 +1,755 @@
+{
+  "created": "2026-10-15T09:50:17.728Z",
+  "scriptSha256": "b8e898e9681c91f4322145bb36a6c4a7ca41c6be0544589f97d3fcb9142448c0",
+  "inputSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "sourceBefore": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119499,
+      "sha256": "6f11213d55191fea9d45443cb2353e231a4b215ab781762cd98a982f9a57c8dd"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "config": {
+    "weights": [
+      0,
+      0.2,
+      0.8
+    ],
+    "seed": 777,
+    "steps": 80,
+    "evalAt": [
+      0,
+      40,
+      80
+    ],
+    "withheldLossCameras": [
+      3,
+      11
+    ],
+    "seedSplats": 15000,
+    "trainSide": 320,
+    "allocationCeiling": 30000
+  },
+  "protocol": "Optimizer-only diagnostic with identical real cached SfM, seed, targets, and camera RNG. Cameras3/11 excluded from loss and surface-color inputs. Sparse geometry and sparse colors were previously constructed using all cached images; this is NOT an independent novel-view or task88 acceptance benchmark. No refinement, no preview, no duty cycling, and no native bake timing. Compare fixed-step image quality and complete raw parameter hashes. R3 uses native-phone allocation ceiling and direct gradients; compare only WITHIN R3, not raw R2 timing or quality. Fixed80 steps for all three strengths; weights declared before rendering results.",
+  "browser": "151.0.7922.173",
+  "args": [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-unsafe-webgpu",
+    "--enable-features=Vulkan,WebGPU",
+    "--use-webgpu-adapter=swiftshader",
+    "--use-vulkan=swiftshader"
+  ],
+  "results": [
+    {
+      "ssimWeight": 0,
+      "n": 15000,
+      "surface": 3534,
+      "initialParams": {
+        "file": "weight-0-initialParams.f32",
+        "bytes": 960000,
+        "sha256": "a779f81401bed045a98decf6e7ec0ff94bd698819b5b5a115484f8af5c33be73"
+      },
+      "evaluations": [
+        {
+          "iter": 0,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 12.422513986052905,
+          "render": {
+            "file": "weight-0-0-3-render.png",
+            "bytes": 35651,
+            "sha256": "0c14f598d57a1f9948208a16f5bd4c624131437410ad9cc25eb0f2fd60170595"
+          },
+          "reference": {
+            "file": "weight-0-0-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 12.398239755877714,
+            "exact": false,
+            "ssim": 0.5167086975808612,
+            "laplacian": 0.000012633314422420167,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0014203969009802724
+          }
+        },
+        {
+          "iter": 0,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 13.70426272367126,
+          "render": {
+            "file": "weight-0-0-11-render.png",
+            "bytes": 5389,
+            "sha256": "920710763ec4e412bc277ea54c9f2c026f6a1095326a0b80164527fe047ff740"
+          },
+          "reference": {
+            "file": "weight-0-0-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 13.684048530985919,
+            "exact": false,
+            "ssim": 0.6520785875187467,
+            "laplacian": 0.00002506523423074063,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.004910684616770542
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.726139733611543,
+          "render": {
+            "file": "weight-0-40-3-render.png",
+            "bytes": 35954,
+            "sha256": "02a3a19c223ce1b0fa9534ccaf6363c41b72d567ca18552f94b971e5369b67c0"
+          },
+          "reference": {
+            "file": "weight-0-40-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 15.673335729010374,
+            "exact": false,
+            "ssim": 0.5704414195722172,
+            "laplacian": 0.000013000153146337203,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0014616415474118219
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.907602928410537,
+          "render": {
+            "file": "weight-0-40-11-render.png",
+            "bytes": 6166,
+            "sha256": "da388ec648dbf8d42db6474de5ae07191b9f9cb5111a4f0a0adf27289600698c"
+          },
+          "reference": {
+            "file": "weight-0-40-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 15.842279128250706,
+            "exact": false,
+            "ssim": 0.6705878318132847,
+            "laplacian": 0.000007536389286877935,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.001476500502503872
+          }
+        },
+        {
+          "iter": 80,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.70201181850703,
+          "render": {
+            "file": "weight-0-80-3-render.png",
+            "bytes": 37366,
+            "sha256": "811829918cf9948061660a21e91e228ea3392e95e02d1413d2b9f23f7aae105f"
+          },
+          "reference": {
+            "file": "weight-0-80-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 16.629734148013604,
+            "exact": false,
+            "ssim": 0.5893933435477163,
+            "laplacian": 0.00001368437689627441,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.001538570630429272
+          }
+        },
+        {
+          "iter": 80,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.400953805740507,
+          "render": {
+            "file": "weight-0-80-11-render.png",
+            "bytes": 6666,
+            "sha256": "c3d7238d9a5441849d7d9a96819058033a3a1867d7885ffdb73b05242907c3ff"
+          },
+          "reference": {
+            "file": "weight-0-80-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 16.32715361826652,
+            "exact": false,
+            "ssim": 0.6739874485671703,
+            "laplacian": 0.00000540044553232668,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.0010580345890715507
+          }
+        }
+      ],
+      "batches": [
+        4288,
+        5930.300000000745,
+        3873.099999997765,
+        4413,
+        2620.199999999255,
+        3152.400000002235,
+        3898.800000000745,
+        2722.39999999851,
+        4726.300000000745,
+        2771.300000000745,
+        6271.5,
+        6305.300000000745,
+        2784.60000000149,
+        2974.900000002235,
+        4538,
+        6320.5,
+        2632.099999997765,
+        6348.39999999851,
+        4095.300000000745,
+        4111.79999999702,
+        3829.300000000745,
+        3301,
+        2511.89999999851,
+        2862.5,
+        4676.300000000745,
+        3402.5,
+        4212.900000002235,
+        2597.5,
+        5441.199999999255,
+        3480.099999997765,
+        3167,
+        4558.70000000298,
+        4589.5,
+        3121.89999999851,
+        3793.199999999255,
+        2793.5,
+        3352.5,
+        3321.300000000745,
+        2078.7999999970198,
+        2527.199999999255
+      ],
+      "finalParams": {
+        "file": "weight-0-finalParams.f32",
+        "bytes": 960000,
+        "sha256": "5c43902eb29fc971d80d64bd4f7b422215070859d08565992055fc38b4b70323"
+      },
+      "errors": []
+    },
+    {
+      "ssimWeight": 0.2,
+      "n": 15000,
+      "surface": 3534,
+      "initialParams": {
+        "file": "weight-0.2-initialParams.f32",
+        "bytes": 960000,
+        "sha256": "a779f81401bed045a98decf6e7ec0ff94bd698819b5b5a115484f8af5c33be73"
+      },
+      "evaluations": [
+        {
+          "iter": 0,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 12.422513986052905,
+          "render": {
+            "file": "weight-0.2-0-3-render.png",
+            "bytes": 35651,
+            "sha256": "0c14f598d57a1f9948208a16f5bd4c624131437410ad9cc25eb0f2fd60170595"
+          },
+          "reference": {
+            "file": "weight-0.2-0-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 12.398239755877714,
+            "exact": false,
+            "ssim": 0.5167086975808612,
+            "laplacian": 0.000012633314422420167,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0014203969009802724
+          }
+        },
+        {
+          "iter": 0,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 13.70426272367126,
+          "render": {
+            "file": "weight-0.2-0-11-render.png",
+            "bytes": 5389,
+            "sha256": "920710763ec4e412bc277ea54c9f2c026f6a1095326a0b80164527fe047ff740"
+          },
+          "reference": {
+            "file": "weight-0.2-0-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 13.684048530985919,
+            "exact": false,
+            "ssim": 0.6520785875187467,
+            "laplacian": 0.00002506523423074063,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.004910684616770542
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.734720308336037,
+          "render": {
+            "file": "weight-0.2-40-3-render.png",
+            "bytes": 35651,
+            "sha256": "41a3e66ab7485da1885297749e46295046325a8facb8d711e03462b6c70ea744"
+          },
+          "reference": {
+            "file": "weight-0.2-40-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 15.681620500571258,
+            "exact": false,
+            "ssim": 0.5739072040269579,
+            "laplacian": 0.00001456398925247986,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.001637467770407114
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.955493809138906,
+          "render": {
+            "file": "weight-0.2-40-11-render.png",
+            "bytes": 6625,
+            "sha256": "21690ca104efbaf9a16db1fc31bcd2d869a42488becebeca0980b4026553046e"
+          },
+          "reference": {
+            "file": "weight-0.2-40-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 15.888481385834234,
+            "exact": false,
+            "ssim": 0.6703780744281234,
+            "laplacian": 0.000007800150881082701,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.0015281756630562394
+          }
+        },
+        {
+          "iter": 80,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.80533070595973,
+          "render": {
+            "file": "weight-0.2-80-3-render.png",
+            "bytes": 37756,
+            "sha256": "cf01fc9735606899f94ba106501bd92db588768178fa8ad1c0338265ec6290a8"
+          },
+          "reference": {
+            "file": "weight-0.2-80-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 16.732580527693656,
+            "exact": false,
+            "ssim": 0.5950890863588872,
+            "laplacian": 0.000017103915956369493,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.001923038436844366
+          }
+        },
+        {
+          "iter": 80,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.39273164346063,
+          "render": {
+            "file": "weight-0.2-80-11-render.png",
+            "bytes": 6784,
+            "sha256": "b58d17d8a217fffdec2564c89a0248ea1fa8e9977f4bce3a9005dbc339a96e30"
+          },
+          "reference": {
+            "file": "weight-0.2-80-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 16.326368000485246,
+            "exact": false,
+            "ssim": 0.6743353387396328,
+            "laplacian": 0.0000046928724096843075,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.000919409574973786
+          }
+        }
+      ],
+      "batches": [
+        4390,
+        4918.300000000745,
+        2510.39999999851,
+        3192.400000002235,
+        3085.7999999970198,
+        2670.60000000149,
+        4044,
+        2702.199999999255,
+        3381.60000000149,
+        1906,
+        3214.900000002235,
+        5434.599999997765,
+        3050.300000000745,
+        3813.199999999255,
+        5097.5,
+        7384.70000000298,
+        3856.7999999970198,
+        6922.70000000298,
+        3529.10000000149,
+        4155.800000000745,
+        5320.10000000149,
+        4837.599999997765,
+        4146.800000000745,
+        3791.5,
+        5408.5,
+        5588.10000000149,
+        4551.89999999851,
+        3456.199999999255,
+        6808.400000002235,
+        5256.300000000745,
+        3986.599999997765,
+        6790.10000000149,
+        7961.39999999851,
+        5494.900000002235,
+        5351.79999999702,
+        5290.800000000745,
+        5195.400000002235,
+        5100.199999999255,
+        4582.39999999851,
+        5002.900000002235
+      ],
+      "finalParams": {
+        "file": "weight-0.2-finalParams.f32",
+        "bytes": 960000,
+        "sha256": "ad720bb2094e47e4b1a7b8f422d8167ad7c14a3331c2f8954ef53ead6e53e634"
+      },
+      "errors": []
+    },
+    {
+      "ssimWeight": 0.8,
+      "n": 15000,
+      "surface": 3534,
+      "initialParams": {
+        "file": "weight-0.8-initialParams.f32",
+        "bytes": 960000,
+        "sha256": "a779f81401bed045a98decf6e7ec0ff94bd698819b5b5a115484f8af5c33be73"
+      },
+      "evaluations": [
+        {
+          "iter": 0,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 12.422513986052905,
+          "render": {
+            "file": "weight-0.8-0-3-render.png",
+            "bytes": 35651,
+            "sha256": "0c14f598d57a1f9948208a16f5bd4c624131437410ad9cc25eb0f2fd60170595"
+          },
+          "reference": {
+            "file": "weight-0.8-0-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 12.398239755877714,
+            "exact": false,
+            "ssim": 0.5167086975808612,
+            "laplacian": 0.000012633314422420167,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0014203969009802724
+          }
+        },
+        {
+          "iter": 0,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 13.70426272367126,
+          "render": {
+            "file": "weight-0.8-0-11-render.png",
+            "bytes": 5389,
+            "sha256": "920710763ec4e412bc277ea54c9f2c026f6a1095326a0b80164527fe047ff740"
+          },
+          "reference": {
+            "file": "weight-0.8-0-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 13.684048530985919,
+            "exact": false,
+            "ssim": 0.6520785875187467,
+            "laplacian": 0.00002506523423074063,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.004910684616770542
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.568740191355166,
+          "render": {
+            "file": "weight-0.8-40-3-render.png",
+            "bytes": 34275,
+            "sha256": "8f9ceac1f7f57e6f52e39cdc0e8c1ec97f28bde4374b155169e230b8396b198f"
+          },
+          "reference": {
+            "file": "weight-0.8-40-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 15.517106654123413,
+            "exact": false,
+            "ssim": 0.5786451894016565,
+            "laplacian": 0.000014181895685313843,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0015945079816660102
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.123856846996496,
+          "render": {
+            "file": "weight-0.8-40-11-render.png",
+            "bytes": 6496,
+            "sha256": "a0de2cce9e82cf74fbe34d66787e258c664b90ab2f03121c9e201b7fa45ada22"
+          },
+          "reference": {
+            "file": "weight-0.8-40-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 16.060301835120224,
+            "exact": false,
+            "ssim": 0.6709454518537007,
+            "laplacian": 0.000014366113583956438,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.002814553908815743
+          }
+        },
+        {
+          "iter": 80,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.851949736684045,
+          "render": {
+            "file": "weight-0.8-80-3-render.png",
+            "bytes": 35271,
+            "sha256": "332dd80069375f1475e6452f4898e1cf327e15e45bbf702819cf59637015ff31"
+          },
+          "reference": {
+            "file": "weight-0.8-80-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 16.788704675036243,
+            "exact": false,
+            "ssim": 0.6003195538473798,
+            "laplacian": 0.000016047752960541865,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0018042912422410818
+          }
+        },
+        {
+          "iter": 80,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.342843089725854,
+          "render": {
+            "file": "weight-0.8-80-11-render.png",
+            "bytes": 5903,
+            "sha256": "530fbc3638602643e93615ecf071ca7b7cc76a937732bf5931513448ae127822"
+          },
+          "reference": {
+            "file": "weight-0.8-80-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 16.27690626277438,
+            "exact": false,
+            "ssim": 0.6746633666917761,
+            "laplacian": 0.000004864076086607029,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.0009529511431418534
+          }
+        }
+      ],
+      "batches": [
+        4517.099999997765,
+        6644.699999999255,
+        4041.39999999851,
+        5558.5,
+        3991.60000000149,
+        3136.39999999851,
+        5532.10000000149,
+        4092.199999999255,
+        6205.10000000149,
+        4056.89999999851,
+        5973,
+        6243.800000000745,
+        3813,
+        4572,
+        6303.89999999851,
+        7104.199999999255,
+        5105.300000000745,
+        8303.10000000149,
+        5424.89999999851,
+        5696.800000000745,
+        6903.199999999255,
+        6184.900000002235,
+        4447.39999999851,
+        5300.900000002235,
+        7974.89999999851,
+        7209.39999999851,
+        6315.5,
+        5378,
+        8194.10000000149,
+        6431.199999999255,
+        5357,
+        7841.900000002235,
+        9951.29999999702,
+        8622.400000002235,
+        6878.099999997765,
+        6400.70000000298,
+        6157.29999999702,
+        6464.800000000745,
+        6909.699999999255,
+        6666.699999999255
+      ],
+      "finalParams": {
+        "file": "weight-0.8-finalParams.f32",
+        "bytes": 960000,
+        "sha256": "363b9aff84c9df677abb4028d9b2794933e017a436a7bd9fad49e7e8e01ea81c"
+      },
+      "errors": []
+    }
+  ],
+  "identicalInitialParameters": true,
+  "sourceAfter": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119499,
+      "sha256": "6f11213d55191fea9d45443cb2353e231a4b215ab781762cd98a982f9a57c8dd"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "status": "diagnostic-complete"
+}

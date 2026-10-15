@@ -1,0 +1,92 @@
+{
+  "created": "2026-10-15T11:03:00.927Z",
+  "source": "/workspace/v3d-r4-media/ci-d12824",
+  "sourceInventory": [
+    {
+      "file": "full-suite-summary.json",
+      "bytes": 9770,
+      "sha256": "56a168f87c1d58cf9560f5d1a6068d2de5f986aec50ec2396b1ea97d1bb3b8af"
+    },
+    {
+      "file": "raw-job-116363654703.log",
+      "bytes": 223539,
+      "sha256": "80a6de0c77c8bc29f2613d467b487f4412ebb9a3a6e67d0a81b81a0d3e307a0c"
+    },
+    {
+      "file": "raw-job-116363654841.log",
+      "bytes": 226611,
+      "sha256": "d601bcbee3d31864b56e2d20ea58739dd4dfc50a2108863de32fbc1978b4e449"
+    },
+    {
+      "file": "raw-job-116363654924.log",
+      "bytes": 226032,
+      "sha256": "5b85b3920de2fccce041441a9fb8b659aadf9a1ada597d7c8e8ba8baddd71da7"
+    },
+    {
+      "file": "raw-job-116363654944.log",
+      "bytes": 229342,
+      "sha256": "50065bf22d59596b506dcd26aa47cbd360425cca10e6677996d7bf5a0b9189d4"
+    },
+    {
+      "file": "raw-job-116363654954.log",
+      "bytes": 228875,
+      "sha256": "0679ed20893826731f0bbdaeb4544b138a5df6935c76467203dc50608b25d838"
+    },
+    {
+      "file": "raw-job-116363654968.log",
+      "bytes": 230135,
+      "sha256": "cae57e826c17e1acdcb2cf5af3d5d18d0c19c0d2aad2a91def8a72ed2e9761d1"
+    },
+    {
+      "file": "raw-job-116363654998.log",
+      "bytes": 230081,
+      "sha256": "0a5a0bcf058b05216fdf880e87edce87b42bc2986b73c50575990fb4fcc2e1fb"
+    },
+    {
+      "file": "raw-job-116363655006.log",
+      "bytes": 230397,
+      "sha256": "4a000f43db80cbcdac19725351f5f3a544b62755b8d1ad8d2f37a431751aa354"
+    },
+    {
+      "file": "raw-job-116363655014.log",
+      "bytes": 229203,
+      "sha256": "6f180e33c1c5fdc379a5a95915abd6a4ff49c8b1e2392f4b5aa21a01a4738d8f"
+    },
+    {
+      "file": "raw-job-116363655077.log",
+      "bytes": 229012,
+      "sha256": "2158230ec4b21a3d1febac9ccff6a95467b633ed8321df1069f5a334a8c24882"
+    },
+    {
+      "file": "raw-job-116363655103.log",
+      "bytes": 228969,
+      "sha256": "7b076130781b78d9395041c2be52f025835a6d09a13530a7d7c62a2216d15f04"
+    },
+    {
+      "file": "raw-job-116363655104.log",
+      "bytes": 227025,
+      "sha256": "758a1e9a9df7eaf000f33c5b48f75096f9fe1f1033d57260dbfbdc6668d51b8f"
+    },
+    {
+      "file": "raw-job-116363655122.log",
+      "bytes": 226296,
+      "sha256": "0c4b2de49a83531e3ff0f827db523603d8cb778ae91b5db61f561e599173e944"
+    },
+    {
+      "file": "raw-job-116363655129.log",
+      "bytes": 229910,
+      "sha256": "134d33021d644329d42645d11369d3f1bcfc8759a39daadd57bb5f9844b47909"
+    },
+    {
+      "file": "raw-job-116363655140.log",
+      "bytes": 230172,
+      "sha256": "16b8bdc99f4aee9448d1df091cce5062e02da2732b983ce288f2f1c572c7fccf"
+    },
+    {
+      "file": "raw-job-116363655161.log",
+      "bytes": 228761,
+      "sha256": "b6ce7bbd4dc1e791b1d40245a78108e3aa6de94a4faa29992307eebfdaf3dbb6"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

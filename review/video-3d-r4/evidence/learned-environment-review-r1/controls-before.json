@@ -1,0 +1,30 @@
+{
+  "declaredAt": "2026-10-15T09:59:08.789745+00:00",
+  "purpose": "Pure CPU formula/ownership/control prototype, no actualrender/targets consumed",
+  "fit": "One clampedglobalRGB, full nativepackedtarget objective; freezegeometry/color/opacity/cameras/exposure first; all loss-eligible cameras, excludeinternalholdout,testCams,trainer.excluded. No spatial/lowtexture masks.",
+  "supportedScope": "Unmaskedtargets alpha255; invalidalpha0skipped; anysoftalpha1..254reject; no randomBg,SSAA,robustLoss,SSIM or cam/exposure drift. Gain/bias generalunmaskedformulaimplemented mathematically butcurrentVideo3Dg1b0.",
+  "completion": "Exacteligiblecamerainventory/pixelcounts streamedonce; partial/missing/duplicatechunksreject",
+  "minimumCameras": 3,
+  "minMeanCoefficientEnergy": 1e-06,
+  "possibleValidationGate": "FittrainingRGBonce, freezeB, evaluateexistinginternalholdoutoncefromits ownfixednativeblackRGBA/packedtargets. RequireidentifiableholdoutTenergy>=1e-6, trainingMSEimprovement>=1e-6, holdoutMSEnonincrease(tolerance1e-10). Ifholdoutabsent/unidentifiableorscopemismatch, keepoldB. Thisgateisproposed/unmeasured, not productionpolicy.",
+  "tests": [
+    "knownB recovery",
+    "clippingat0/1",
+    "allopaqueunidentifiable",
+    "globalMSEnonincreaseproperty",
+    "gainbiasadjustment",
+    "uncompositenonblackrender",
+    "skipinvalid/rejectsoftalpha/nonfinite",
+    "holdoutinventoryrejection",
+    "missingduplicatechunkrejection",
+    "streamedpartitionequivalence"
+  ],
+  "risks": [
+    "MSEonly;Charbonnier/SSIMcanworsen",
+    "Cannotadddetail/depthorrepairmotion/poses",
+    "RawtrainerresultisprePLYcompensation/productionrasterization;mustverifyexports",
+    "Extraforwardrender+readbackpereligiblecamcostmustcountinbakebudget",
+    "lowMemhasnoCPUtargets;GPUtargetslackCOPY_SRCnow"
+  ],
+  "acceptance": "No GPU/nativequalityclaim; rejectedprior remains rejected"
+}

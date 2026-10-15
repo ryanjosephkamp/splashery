@@ -1,0 +1,5 @@
+{
+  "notice": "CPU test fixture only; never published as corpus observations.",
+  "ids": ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t"],
+  "rows": [{"id":"a","profile":"phone","status":"explained"},{"id":"b","profile":"desktop","status":"harness-error"}]
+}

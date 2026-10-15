@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T11:03:00.297Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/001-cat-track-phone-paired",
+  "runSha256": "d053d17a4bd6240fde19f1e757bb3b36c3793c4069289e6b4cad1532ebe1da29",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "cases": [
+    {
+      "id": "cat-track",
+      "profile": "phone",
+      "rowFingerprint": "a889d9fdeb54252e70cbf8fd5104bb18ada00e26c08e02bbe7f8a1017127e7b3",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207379,
+          "sha256": "fc8bded4ac1585744b054115bed2c8bdf379a3fc01c3d12a96e034b2aaef2f3f"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2204,
+          "sha256": "90d2033275d83272e536aaa049e514ac6eecb32bfb382474a9c49b8caddd49e0"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

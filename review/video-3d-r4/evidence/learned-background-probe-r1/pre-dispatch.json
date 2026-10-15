@@ -1,0 +1,71 @@
+{
+  "created": "2026-10-15T09:57:47.057Z",
+  "scriptSha256": "4e5f68b077c2a985d2402075af4697fc0e734dc8127b28c9fcc3bbcfb9309021",
+  "inputSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "sourceBefore": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119499,
+      "sha256": "6f11213d55191fea9d45443cb2353e231a4b215ab781762cd98a982f9a57c8dd"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "config": {
+    "weights": [
+      0
+    ],
+    "seed": 777,
+    "steps": 80,
+    "evalAt": [
+      0,
+      40,
+      80
+    ],
+    "withheldLossCameras": [
+      3,
+      11
+    ],
+    "seedSplats": 15000,
+    "trainSide": 320,
+    "allocationCeiling": 30000,
+    "modelSelection": {
+      "minTrainingMseRelativeImprovement": 0.01,
+      "eachDiagnosticHoldoutMustNotLosePsnr": true
+    }
+  },
+  "protocol": "Optimizer-only diagnostic with identical real cached SfM, seed, targets, and camera RNG. Cameras3/11 excluded from loss and surface-color inputs. Sparse geometry and sparse colors were previously constructed using all cached images; this is NOT an independent novel-view or task88 acceptance benchmark. No refinement, no preview, no duty cycling, and no native bake timing. Compare fixed-step image quality and complete raw parameter hashes. R3 uses native-phone allocation ceiling and direct gradients; compare only WITHIN R3, not raw R2 timing or quality. Fixed80 steps for all three strengths; weights declared before rendering results. Global background experiment fits three scalar model parameters from all eligible training pixels after fixed80 steps, excluding both diagnostic loss-held-out cameras. This is independent from the rejected lowtexture heuristic; no cachecolor is supplied. External corpusheldouts are not opened or used. Clamped analytic leastsquares; log full before/after training residual and lossheldout views."
+}

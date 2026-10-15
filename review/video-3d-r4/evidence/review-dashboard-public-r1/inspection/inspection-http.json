@@ -1,0 +1,68 @@
+{
+  "capturedAt": "2026-10-15T11:11:18.394Z",
+  "browser": "151.0.7922.173",
+  "gpuDisabled": true,
+  "errors": [],
+  "observations": [
+    {
+      "candidate": "R9",
+      "profile": "all",
+      "rows": 40,
+      "count": "Showing 40/40 declared cases. Profile selection changes only the view; no status filter hides failures.",
+      "summary": "UNPROVEN · strict cohort incompleteMain 26/40 rows; R9 10/40 strict paired rows. Unpaired attempts are listed below and never substituted into strict comparison.phone: 4 matched successful pairs / 10 currently measurable baseline cases; partial paired subset only. Sharpness ratio 3.83×; SSIM change -0.0588.desktop: 0 matched successful pairs / 0 currently measurable baseline cases; partial paired subset only. Sharpness ratio —×; SSIM change —.",
+      "notice": "UNPROVEN: incomplete corpus evidence. No acceptance or recovered timing claim.",
+      "bodyWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "candidate": "R9",
+      "profile": "phone",
+      "rows": 20,
+      "count": "Showing 20/40 declared cases. Profile selection changes only the view; no status filter hides failures.",
+      "summary": "UNPROVEN · strict cohort incompleteMain 26/40 rows; R9 10/40 strict paired rows. Unpaired attempts are listed below and never substituted into strict comparison.phone: 4 matched successful pairs / 10 currently measurable baseline cases; partial paired subset only. Sharpness ratio 3.83×; SSIM change -0.0588.",
+      "notice": "UNPROVEN: incomplete corpus evidence. No acceptance or recovered timing claim.",
+      "bodyWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "candidate": "R9",
+      "profile": "desktop",
+      "rows": 20,
+      "count": "Showing 20/40 declared cases. Profile selection changes only the view; no status filter hides failures.",
+      "summary": "UNPROVEN · strict cohort incompleteMain 26/40 rows; R9 10/40 strict paired rows. Unpaired attempts are listed below and never substituted into strict comparison.desktop: 0 matched successful pairs / 0 currently measurable baseline cases; partial paired subset only. Sharpness ratio —×; SSIM change —.",
+      "notice": "UNPROVEN: incomplete corpus evidence. No acceptance or recovered timing claim.",
+      "bodyWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "candidate": "R10",
+      "profile": "all",
+      "rows": 40,
+      "count": "Showing 40/40 declared cases. Profile selection changes only the view; no status filter hides failures.",
+      "summary": "UNPROVEN · strict cohort incompleteMain 26/40 rows; R10 5/40 strict paired rows. Unpaired attempts are listed below and never substituted into strict comparison.phone: 1 matched successful pairs / 10 currently measurable baseline cases; partial paired subset only. Sharpness ratio 4.97×; SSIM change 0.0201.desktop: 0 matched successful pairs / 0 currently measurable baseline cases; partial paired subset only. Sharpness ratio —×; SSIM change —.",
+      "notice": "UNPROVEN: incomplete corpus evidence. No acceptance or recovered timing claim.",
+      "bodyWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "candidate": "R10",
+      "profile": "phone",
+      "rows": 20,
+      "count": "Showing 20/40 declared cases. Profile selection changes only the view; no status filter hides failures.",
+      "summary": "UNPROVEN · strict cohort incompleteMain 26/40 rows; R10 5/40 strict paired rows. Unpaired attempts are listed below and never substituted into strict comparison.phone: 1 matched successful pairs / 10 currently measurable baseline cases; partial paired subset only. Sharpness ratio 4.97×; SSIM change 0.0201.",
+      "notice": "UNPROVEN: incomplete corpus evidence. No acceptance or recovered timing claim.",
+      "bodyWidth": 1440,
+      "viewportWidth": 1440
+    },
+    {
+      "candidate": "R10",
+      "profile": "desktop",
+      "rows": 20,
+      "count": "Showing 20/40 declared cases. Profile selection changes only the view; no status filter hides failures.",
+      "summary": "UNPROVEN · strict cohort incompleteMain 26/40 rows; R10 5/40 strict paired rows. Unpaired attempts are listed below and never substituted into strict comparison.desktop: 0 matched successful pairs / 0 currently measurable baseline cases; partial paired subset only. Sharpness ratio —×; SSIM change —.",
+      "notice": "UNPROVEN: incomplete corpus evidence. No acceptance or recovered timing claim.",
+      "bodyWidth": 1440,
+      "viewportWidth": 1440
+    }
+  ]
+}

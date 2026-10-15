@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T11:03:00.656Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/012-oa-street-phone-paired",
+  "runSha256": "9dba2f4a5bac98fcc6450c26f4530e5c7c195e10f924365472ee60170314ce04",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "cases": [
+    {
+      "id": "oa-street",
+      "profile": "phone",
+      "rowFingerprint": "1f3fb399a42b1ef1cf9c7203a11ea79a79668a28cb1cbd5fbc7c11de9a1c432b",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207379,
+          "sha256": "fc8bded4ac1585744b054115bed2c8bdf379a3fc01c3d12a96e034b2aaef2f3f"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2204,
+          "sha256": "8c5584bf9e0825c5c9beddd58af1f65c61712c8f8d2362ec8904b91fc470aea8"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

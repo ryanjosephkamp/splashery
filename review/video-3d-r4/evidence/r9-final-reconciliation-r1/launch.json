@@ -1,0 +1,12 @@
+{
+  "launchedAt": "2026-10-15T10:20:46.423450+00:00",
+  "pid": 248593,
+  "startTicks": "2087218",
+  "codeSHA256": "2b5e026ba028824781665d8890008dc87ecd7f46942caa9e02b91fe908f42805",
+  "command": [
+    "python3",
+    "/workspace/v3d-r4-media/reconcile-r9-final-r1.py"
+  ],
+  "scope": "CPU-onlyR9native-drainwatcherandstrictjoin; no native/browser/GPU/signals/R10statechanges",
+  "deadline": "2026-10-15T16:15:00+00:00"
+}

@@ -1,0 +1,16 @@
+{
+  "created": "2026-10-15T10:16:08.893662+00:00",
+  "pid": 244722,
+  "command": [
+    "node",
+    "tools/v3d-bench.mjs",
+    "samples",
+    "/workspace/v3d-r4-media/samples-r10-r1",
+    "--url=http://127.0.0.1:4181/",
+    "--reference=/workspace/v3d-r4-media/samples-main-r1"
+  ],
+  "runtimeReceipt": "runtime-r10-freeze.json",
+  "runtimeReceiptSha256": "76f177b901e70a9026c77453b220e57a91909d3e681dd642de67c1a7fdb3009a",
+  "productCommit": "1cbccf108294437a2b6ae8b07dead9c56d3f3609",
+  "purpose": "All74views atbothprofiles, unchanged sample models/tiers; exact renderedpixelcomparison against task-startmain."
+}

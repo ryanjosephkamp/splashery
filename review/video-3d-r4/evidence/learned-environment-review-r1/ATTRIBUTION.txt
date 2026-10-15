@@ -1,0 +1,11 @@
+Chameleon among flowering branches
+Author: Ventrovert
+Source: https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm
+License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0)
+Checked: October 15, 2026
+File SHA-256: 01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e
+Changes: Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+Math/source/resource evidence only. Synthetic controls are original CC0. Existing library notices retain their licenses. No native acceptance claim.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

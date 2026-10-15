@@ -1,0 +1,9 @@
+{
+  "created": "2026-10-15T10:24:24.604575+00:00",
+  "status": "diagnostic-complete",
+  "nativeAcceptance": false,
+  "sourceCacheIdentityLimit": "Older cache lacks perframe independent JPEG/timestamp receipts; geometry and sparse colors used all cached images. These are optimizer/model diagnostics, not independent novelview acceptance.",
+  "gateNotice": "Predeclared cached backgroundfit gate remained rejected because one lossheldout displayPNG lost PSNR. Raw native implementation instead checks actual packedtarget prequantization MSE; no cachedcolor preset is passed to production.",
+  "sourceLicense": "Plant source CC BY4.0, Ventrovert; preserve source attribution with outputs.",
+  "codeLicense": "Made by Ryan with Codex (GPT-6), MIT."
+}

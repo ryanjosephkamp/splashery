@@ -1,0 +1,9 @@
+{
+  "created": "2026-10-15T10:15:52.337112+00:00",
+  "pid": 244287,
+  "startTicks": "2057808",
+  "declarationSha256": "ab9411e64212456e403a0a9e738b54b51fcfa1fb4c690b669fd94d741f4d65f0",
+  "sourceFreezeSha256": "76f177b901e70a9026c77453b220e57a91909d3e681dd642de67c1a7fdb3009a",
+  "noPriorNativeSignals": true,
+  "note": "Root launched authorized R10 coordinator. Each lane must wait for exact predecessor native and all observed descendants to exit naturally."
+}

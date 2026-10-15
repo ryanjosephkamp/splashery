@@ -1,0 +1,64 @@
+TAP version 13
+# Subtest: recovers a known three-scalar background without fitting any image detail
+ok 1 - recovers a known three-scalar background without fitting any image detail
+  ---
+  duration_ms: 5.704753
+  type: 'test'
+  ...
+# Subtest: gain/bias use A=gT and target-gCblack-b
+ok 2 - gain/bias use A=gT and target-gCblack-b
+  ---
+  duration_ms: 4.289082
+  type: 'test'
+  ...
+# Subtest: nonblack captures are uncomposited before fitting
+ok 3 - nonblack captures are uncomposited before fitting
+  ---
+  duration_ms: 0.553273
+  type: 'test'
+  ...
+# Subtest: box constraints clip each channel and preserve MSE nonincrease
+ok 4 - box constraints clip each channel and preserve MSE nonincrease
+  ---
+  duration_ms: 1.169041
+  type: 'test'
+  ...
+# Subtest: opaque or unsupported pixels cannot force an environment color
+ok 5 - opaque or unsupported pixels cannot force an environment color
+  ---
+  duration_ms: 0.319937
+  type: 'test'
+  ...
+# Subtest: invalid packed pixels are skipped but soft alpha and nonfinite raw values fail closed
+ok 6 - invalid packed pixels are skipped but soft alpha and nonfinite raw values fail closed
+  ---
+  duration_ms: 0.838184
+  type: 'test'
+  ...
+# Subtest: holdout IDs, missing cameras, and duplicate pixel chunks cannot enter a completed fit
+ok 7 - holdout IDs, missing cameras, and duplicate pixel chunks cannot enter a completed fit
+  ---
+  duration_ms: 0.306261
+  type: 'test'
+  ...
+# Subtest: streaming partitions preserve the complete objective
+ok 8 - streaming partitions preserve the complete objective
+  ---
+  duration_ms: 0.446112
+  type: 'test'
+  ...
+# Subtest: deterministic random models never increase their full fixed-model MSE
+ok 9 - deterministic random models never increase their full fixed-model MSE
+  ---
+  duration_ms: 35.183573
+  type: 'test'
+  ...
+1..9
+# tests 9
+# suites 0
+# pass 9
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 405.181607

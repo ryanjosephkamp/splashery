@@ -1,0 +1,153 @@
+{
+  "id": "ullard",
+  "profile": "phone",
+  "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+  "started": "2026-10-15T09:52:06.556Z",
+  "status": "finished",
+  "provenanceSha256": "fca50d7bc2b5d22bddecd7ee77d5c5bb0942444fe6ddf12f008d544bcb2d8ca0",
+  "referenceEvidence": {
+    "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "resultFingerprint": "9bcbaff59213d8bb49efddb00cec973f044ad37b7ebc165e9449ed578439d668",
+    "evaluationSha256": "1f73febcf5c597f32e7cd97d3e0c2ba26354767b84ac2fd5bc1a5dcd77baa7a7"
+  },
+  "firstViewMs": 130333.09999999776,
+  "bakeMs": 602095.58392,
+  "mean": {
+    "psnr": 14.303252101173811,
+    "ssim": 0.44988191146302325,
+    "laplacian": 0.0003059415664534268,
+    "sourceLaplacian": 0.018890581034057746
+  },
+  "peakRssBytes": 1182793728,
+  "hostLoadAtStart": [
+    21.95,
+    19.83,
+    19.41
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "Stopped",
+    "unplayable": false,
+    "duration": 10
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "a8f3502a8ef801b1ca7063c674b0705f730d37f5f81cbb2fd14d3b93c1993926",
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 16,
+    "points": 860,
+    "surfacePoints": 7486,
+    "generatedSurfacePoints": 7486,
+    "seedSplats": 15000,
+    "seedBounds": "coordinate-median",
+    "seedSceneRadius": 2.385940699803909,
+    "trainingBackground": [
+      0,
+      0,
+      0
+    ],
+    "splats": 15000,
+    "iters": 112,
+    "psnr": 11.9,
+    "psnrAtIter": 112,
+    "trainSide": 320,
+    "plyBytes": 997431,
+    "retried": false,
+    "timedOut": true,
+    "timeLimitMinutes": 8,
+    "softwareSort": true,
+    "softwareDirectGradient": true,
+    "trainingLoop": {
+      "batches": 56,
+      "submittedSteps": 112,
+      "encodeMs": 15,
+      "viewSubmitMs": 4,
+      "fenceWaitMs": 224397,
+      "metricsWaitMs": 207459,
+      "batchWallMs": 431923
+    },
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 10,
+    "rate": 1.6
+  },
+  "timings": {
+    "frames": 49.2,
+    "decode": 1.1,
+    "path": 53.8,
+    "seed": 2.5,
+    "train": 483.4,
+    "export": 0.3,
+    "total": 590.3
+  },
+  "actualTier": "phone",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": true,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "evaluationSha256": "a457e301e6769d00789788d3bb342c31946de4780c05756cca31628e0c39a326",
+  "frames": [
+    {
+      "time": 1.041667,
+      "renderSha256": "4ce727ce0b54cc684d27f273e863cdaca477006161625651cb547a7534d71485",
+      "referenceSha256": "76cd454d3883cd9e080745b11c364f5438b2a65fd27c8e1ec7c6b792fa5f876f",
+      "psnr": 12.676382634932235,
+      "exact": false,
+      "ssim": 0.23648706813789722,
+      "laplacian": 0.0002532760962110056,
+      "sourceLaplacian": 0.029245661314206618,
+      "sharpnessRatio": 0.008660296427900302
+    },
+    {
+      "time": 3.708333,
+      "renderSha256": "ba6df174c5a3f04429dfc5c64f3d1369e42782e015363b868a657212350a2551",
+      "referenceSha256": "c391dda83176625ca6fd3a7eb41da78652c82cab73a34912d9b4afeb638fbe9a",
+      "psnr": 13.94412219957751,
+      "exact": false,
+      "ssim": 0.41896072337296336,
+      "laplacian": 0.00032408824429638677,
+      "sourceLaplacian": 0.0227921599751656,
+      "sharpnessRatio": 0.01421928613389491
+    },
+    {
+      "time": 6.416667,
+      "renderSha256": "cc32aa1168f53e110ccc442980b67ae371cb09827dd46ed6f37b9a9c61d8d07b",
+      "referenceSha256": "f7b0f9d88c2bbff51c5f397b62f5081a830b613dbc6937ef6129bdd05327f63f",
+      "psnr": 15.058970303732293,
+      "exact": false,
+      "ssim": 0.601656609091752,
+      "laplacian": 0.0003304531495415648,
+      "sourceLaplacian": 0.01113566496003357,
+      "sharpnessRatio": 0.02967520581191845
+    },
+    {
+      "time": 8.916667,
+      "renderSha256": "00f6fa7cd17612754781945a12e688aabaf18cd5c647b9c06c2781b89947e12f",
+      "referenceSha256": "edbb117051a43db55409892be2530d7bc03632e353e3addb63fb38b9c7bc50e6",
+      "psnr": 15.533533266453201,
+      "exact": false,
+      "ssim": 0.5424232452494807,
+      "laplacian": 0.0003159487757647501,
+      "sourceLaplacian": 0.012388837886825202,
+      "sharpnessRatio": 0.02550269675420832
+    }
+  ]
+}

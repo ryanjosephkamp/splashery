@@ -1,0 +1,18 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:03:52] "GET / HTTP/1.1" 200 -
+
+Running 8 tests using 1 worker
+
+(node:234493) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:234493) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:24:1 › a transparent black renderer recovers exact packed target color in RGB byte order (80ms)
+  ✓  2 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:42:1 › pooled varying-transmittance cameras recover one shared color, including exposure (69ms)
+  ✓  3 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:64:1 › the constrained optimum clips independent channels and beats a direct color grid (911ms)
+  ✓  4 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:83:1 › empty or fully opaque input has no identifiable background energy (10ms)
+  ✓  5 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:96:1 › invalid target pixels skip arbitrary raw storage and are counted separately (13ms)
+  ✓  6 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:108:1 › soft-alpha and bad raw packets reject atomically without keeping a partial chunk (100ms)
+  ✓  7 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:128:1 › dimensions, moment state, color, and exposure conventions fail closed (117ms)
+  ✓  8 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:156:1 › streamed moments match direct fixed-model SSE and cannot increase pooled training MSE (1.6s)
+
+  8 passed (9.0s)

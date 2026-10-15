@@ -1,0 +1,2213 @@
+{
+  "created": "2026-10-15T10:45:09.996567+00:00",
+  "url": "http://127.0.0.1:4181/",
+  "manifestSha256": "bf0fcb849988aedc5ac20965d567e304adec88129b4f6e47fea21bcb0395dbca",
+  "cohort": {
+    "inputs": [
+      {
+        "id": "cat-track",
+        "sha256": "598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430"
+      },
+      {
+        "id": "cat-plays",
+        "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085"
+      },
+      {
+        "id": "buddha",
+        "sha256": "765070736b87205ff07211410a25b23b02e5e8e0092282a742e3c70f3e02f388"
+      },
+      {
+        "id": "chameleon-flowers",
+        "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e"
+      },
+      {
+        "id": "dianthus",
+        "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5"
+      },
+      {
+        "id": "pisac",
+        "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d"
+      },
+      {
+        "id": "sleeping-dog",
+        "sha256": "c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9"
+      },
+      {
+        "id": "palace-statue",
+        "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de"
+      },
+      {
+        "id": "oa-street",
+        "sha256": "f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341"
+      },
+      {
+        "id": "ullard",
+        "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b"
+      },
+      {
+        "id": "snaefell",
+        "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6"
+      },
+      {
+        "id": "fremantle-orbit",
+        "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747"
+      },
+      {
+        "id": "ihasalu-orbit",
+        "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d"
+      },
+      {
+        "id": "fresnel-lens",
+        "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8"
+      },
+      {
+        "id": "saint-denis",
+        "sha256": "231358f2f7f9a1ad04e78c782106ad13e56bf0fcd88f665d86497365117fd405"
+      },
+      {
+        "id": "horse-statue",
+        "sha256": "42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045"
+      },
+      {
+        "id": "royal-sovereign",
+        "sha256": "8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6"
+      },
+      {
+        "id": "viljandi-ruins",
+        "sha256": "d8c69186d35269f6d5f9c23cec21b46fa053659e97988098863d06ceaa7e508d"
+      },
+      {
+        "id": "kakerdi-bog",
+        "sha256": "5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8"
+      },
+      {
+        "id": "fjoloy",
+        "sha256": "2e01259d5d6dce77a46d98e43af9def48429d184b9422e0833957d82a1f9f210"
+      }
+    ],
+    "profiles": [
+      "phone",
+      "desktop"
+    ]
+  },
+  "provenance": {
+    "protocolSha256": "bf94e388a2d71f1d3f7c75dd5d1855a4d69ddd8ba946dc81905faa85746e57ad",
+    "reference": null,
+    "servedSource": {
+      "sha256": "3566b4e1ce4f21382ddab94dfea45443f97aa1c6ae558f3b4026d1d12e9485d7",
+      "files": [
+        {
+          "file": "index.html",
+          "status": 200,
+          "sha256": "0cfcb9569d6bbbf8aabe4359d3c38910e4e2857edbcb49221a42f3801c221777"
+        },
+        {
+          "file": "src/app.js",
+          "status": 200,
+          "sha256": "18ccc731831adde56936826c2f5a3450a5c418a098bdfb887e90e89ce43d30b5"
+        },
+        {
+          "file": "src/arcade/hud.js",
+          "status": 200,
+          "sha256": "ca9752fc6c33f625e958dbe1d55741a1615b150d65e648d0d2f597a37a1651ab"
+        },
+        {
+          "file": "src/arcade/input.js",
+          "status": 200,
+          "sha256": "6e0b000b7c83a34ea90e640e35ef76ec2599c6a1f986f43ba1f03e2d8ad04900"
+        },
+        {
+          "file": "src/arcade/layer.js",
+          "status": 200,
+          "sha256": "fa2e7a916775384a15dffdf27b187cf4f58ec3056c985f365316d6c43c14e345"
+        },
+        {
+          "file": "src/arcade/runtime.js",
+          "status": 200,
+          "sha256": "b145efa43a7c315ba443a1e073c1c044d7e87e8dd5113e33ef9e4e0033265e9d"
+        },
+        {
+          "file": "src/ascii-capture/credit.js",
+          "status": 200,
+          "sha256": "f3159fe6897f5c23bfd5e389edafe1d72c08f709119e4fcb789caf61af0caedd"
+        },
+        {
+          "file": "src/ascii-capture/gif.js",
+          "status": 200,
+          "sha256": "5b83463e25ff4c64f9de9d9e18d4bc4311b38e3e63ebaae072ba221fbd2ff18e"
+        },
+        {
+          "file": "src/ascii-capture/host.js",
+          "status": 200,
+          "sha256": "77a0c268ce6f534ff52ef6b95ddb7bbdd543d2ce2b239d23deff2afe98de7a40"
+        },
+        {
+          "file": "src/ascii-capture/job.js",
+          "status": 200,
+          "sha256": "f0661f176018d080aa7a95f231b4cf6411faa886152a0f51da1d740ff7c35093"
+        },
+        {
+          "file": "src/ascii-capture/lab.js",
+          "status": 200,
+          "sha256": "f2758672c276dd390bd3cb3d6039cf452a068028b19c6b9dce5abab901396f43"
+        },
+        {
+          "file": "src/ascii-capture/levels.js",
+          "status": 200,
+          "sha256": "a596ab5a17bc83769344130a9e3f8dcf155c5708a11e1980fe1d22a7ba1a288c"
+        },
+        {
+          "file": "src/ascii-capture/protocol.js",
+          "status": 200,
+          "sha256": "3c1fcc5b0079d93bf9805772b04d9ab788a953bc8098286f28f521276fc5952f"
+        },
+        {
+          "file": "src/baked.js",
+          "status": 200,
+          "sha256": "012277a32f5f92432519fe8bff8033bbd9c0944014348f849fdc31ccabbc9851"
+        },
+        {
+          "file": "src/camera.js",
+          "status": 200,
+          "sha256": "801e8f60ff75942db03263a39bfaa6dc7e5336cca248250020b23cb20a6afcb2"
+        },
+        {
+          "file": "src/chem/atom-model.js",
+          "status": 200,
+          "sha256": "4ef5fa58c441089a2de9ed5c45e0cd683c602f4c8a02ea2a52c4698808b4ca51"
+        },
+        {
+          "file": "src/chem/condensed.js",
+          "status": 200,
+          "sha256": "7ade9714839f671ba07c10d112dbdb8e8d886b0bd51a1ee59aabfe5bc679eca8"
+        },
+        {
+          "file": "src/chem/dna.js",
+          "status": 200,
+          "sha256": "915c0a8e663d05db3565e7b188ae2c048965e8f31733f30f0096c57b9a9e7906"
+        },
+        {
+          "file": "src/chem/elements.js",
+          "status": 200,
+          "sha256": "04bd97f43680339484602892ca4d03a4bf0c9be1d99848eaf55bcd7e95fe7af0"
+        },
+        {
+          "file": "src/chem/embed.js",
+          "status": 200,
+          "sha256": "88d19094efb62d495289a391621f2e0bafba5afe87dded49061570cce83a0467"
+        },
+        {
+          "file": "src/chem/gallery.js",
+          "status": 200,
+          "sha256": "edf7ec21a8a784f34e7254477637784bab07bb553d36fbe7862bc6e4b2a23762"
+        },
+        {
+          "file": "src/chem/molfile.js",
+          "status": 200,
+          "sha256": "ceed3f6d30e09597cb4e957fbbe0413834d06784b405604b705aae4e735af39e"
+        },
+        {
+          "file": "src/chem/periodic.js",
+          "status": 200,
+          "sha256": "a0c1198e7a11bdfdfce3c81aa5a9a6dd32d56fc991d7600da2bfc5e51870c396"
+        },
+        {
+          "file": "src/chem/protein.js",
+          "status": 200,
+          "sha256": "c738d6e0921502626b115b68576dee462b5cfd6ef4482c4276ec505b8575ca0f"
+        },
+        {
+          "file": "src/chem/smiles.js",
+          "status": 200,
+          "sha256": "2514d10e261c9910bf7a43c60cb9f9245e2a6ed7cfb0d71c4e0c4a87a4f8c929"
+        },
+        {
+          "file": "src/chess.js",
+          "status": 200,
+          "sha256": "9d239b98795c7e54c16d7a736bf21b555d7ad31ef0a3698f467d76b722ff4651"
+        },
+        {
+          "file": "src/chunks.js",
+          "status": 200,
+          "sha256": "f81aac14bf9b8d17c09e92a1126597ec198a6e27f5996e454fdb4d0216938202"
+        },
+        {
+          "file": "src/codec.js",
+          "status": 200,
+          "sha256": "966796550dc97713488a445f7a336449ca770eca1a9c0480210c5374d531e524"
+        },
+        {
+          "file": "src/compare.js",
+          "status": 200,
+          "sha256": "48b1b0339bdf6b78ba97add096fbfa7461be1aca96b1a8d4f961024538c1ba2e"
+        },
+        {
+          "file": "src/datavis/chart.js",
+          "status": 200,
+          "sha256": "7c4e60487215651518fe2d6c981b11eb73e24545f8309d07871b55d255ae2b51"
+        },
+        {
+          "file": "src/datavis/climate.js",
+          "status": 200,
+          "sha256": "a2c56b51d1b37ac102f5f1ee79ebbf6dea8cffab70e846a8c0bedbb07ce48d42"
+        },
+        {
+          "file": "src/datavis/colors.js",
+          "status": 200,
+          "sha256": "328d64bb5dd10e06ce9ad6c9a11469e6d36be8a681fcb18d5ef71f1412b5d7cc"
+        },
+        {
+          "file": "src/datavis/csv.js",
+          "status": 200,
+          "sha256": "f3b6ffaf566b76c04683cce5e9d1187fce861294eb63fb5b4ceeec45e2fcfbd5"
+        },
+        {
+          "file": "src/datavis/plot.js",
+          "status": 200,
+          "sha256": "6534b2ffe5d28910478b96aedb90a03499baba76c0df80188c87e9c949da2eaa"
+        },
+        {
+          "file": "src/datavis/random.js",
+          "status": 200,
+          "sha256": "3e3a99b2df9820062a6965b9fef649b77526ef134132c314809956462f288c9c"
+        },
+        {
+          "file": "src/datavis/text.js",
+          "status": 200,
+          "sha256": "53cdd5d02137c385495c3bd4535d0563349ac9194efae3f8f0b7423aee9e8b87"
+        },
+        {
+          "file": "src/depth/client.js",
+          "status": 200,
+          "sha256": "cd1951ee564cf8a1ba7d655497cea0fc6cfe80ac72b4d382782fb2b998845a9e"
+        },
+        {
+          "file": "src/depth/clip.js",
+          "status": 200,
+          "sha256": "9ab5111438dcee5c0f293ec4bf80d6c083baa3b15d6d6467120b58a72654a295"
+        },
+        {
+          "file": "src/depth/engine.js",
+          "status": 200,
+          "sha256": "2f59ffb7755ee1c96af95de2c93483c80dafc8c7f71007f2fc0bfb89cb332faf"
+        },
+        {
+          "file": "src/depth/io.js",
+          "status": 200,
+          "sha256": "a6b4c2bad43cbc9ca34367afdb5fd72106b888f26532b651788161d43c0c700d"
+        },
+        {
+          "file": "src/effects-pose.js",
+          "status": 200,
+          "sha256": "b2f8c9c1df6967167fb2c924a1de99e5dc91fac7ec38a0b4f272c27c3ce48478"
+        },
+        {
+          "file": "src/effects.js",
+          "status": 200,
+          "sha256": "0f262a9447475f89f31089d96f73ceaddd56a3a8a750d10f25a41283ef3c07ac"
+        },
+        {
+          "file": "src/element.js",
+          "status": 200,
+          "sha256": "33009f763a80a318504c9f66b332a7280c614aefa3d30278ac845a6b391ab356"
+        },
+        {
+          "file": "src/elements-real/facts.js",
+          "status": 200,
+          "sha256": "cd8cbf1023c07b38737d289fc62a8b1e5837e544d867bb0aba4c699aa11a34ea"
+        },
+        {
+          "file": "src/elements-real/layout.js",
+          "status": 200,
+          "sha256": "23c7e5bfc6e172280c5c80a5e8b735cfe34eab25fc36490cf2129e1e8c658564"
+        },
+        {
+          "file": "src/elements-real/lettering.js",
+          "status": 200,
+          "sha256": "103d2386c30b2eedc124949d42bcb66c3e69def83cea797b174c76a6a4775f0a"
+        },
+        {
+          "file": "src/elements-real/samples.js",
+          "status": 200,
+          "sha256": "cdd26696658079f7147d303ddf0c55bdbd9680f5700ce4e1c8c9e8a8caaf94d3"
+        },
+        {
+          "file": "src/elements-real/see-through.js",
+          "status": 200,
+          "sha256": "b940fe43bc014599c6f76834fa3f69ed089f0c0a7a47f278701d4ff47d1f3376"
+        },
+        {
+          "file": "src/elements-real/watertight.js",
+          "status": 200,
+          "sha256": "344f804284378194a0d854bd55b8740a25dbc65ea5e135bf2b3628a99c20a621"
+        },
+        {
+          "file": "src/embed.js",
+          "status": 200,
+          "sha256": "0b5451100ab5cf782d79cc5d65114e20bdbb33766153d84b7a11fb0b136600a4"
+        },
+        {
+          "file": "src/equation.js",
+          "status": 200,
+          "sha256": "4d2ee06f6a454a14c577ec983f182b3d01fe15849f7e4d98184a0e9d52015681"
+        },
+        {
+          "file": "src/export/ascii.js",
+          "status": 200,
+          "sha256": "04e436ddca7b011cc33f0233178b5048b6a369c7d2504faa74664f4487209950"
+        },
+        {
+          "file": "src/exports.js",
+          "status": 200,
+          "sha256": "8dc06b4fc1aa86142b11ecfb8d305da157eab0906979d1c402088728c4e1e08f"
+        },
+        {
+          "file": "src/fluids/acoustic.js",
+          "status": 200,
+          "sha256": "b142ccbbc38c0f37f0a8588b03aa0ff6d9c6e306efb0b682564be801e4575a75"
+        },
+        {
+          "file": "src/fluids/gpu/diffuse.js",
+          "status": 200,
+          "sha256": "1b72925e0ce0a2802b1cc94bf6e0fd10688dcdc28a3d4b2c8150bf886c47c3a7"
+        },
+        {
+          "file": "src/fluids/gpu/gas.js",
+          "status": 200,
+          "sha256": "c763d92fbc512365b9d04ce4359e46735371d4c36bb92e4783462493a7e7dfd4"
+        },
+        {
+          "file": "src/fluids/gpu/gasscene.js",
+          "status": 200,
+          "sha256": "befe3d6510dcef275d76bef127c769478a276b502525a507f02562ce3b0357d7"
+        },
+        {
+          "file": "src/fluids/gpu/index.js",
+          "status": 200,
+          "sha256": "79623834dc0dc1057b8f373ea77d8dc3b64905f0b0a2e58096bf5d945b62bfcf"
+        },
+        {
+          "file": "src/fluids/gpu/liquid.js",
+          "status": 200,
+          "sha256": "c8af17cad743a6366f1951fb18577e7b98de2847c6953e70bf2c2a005aa88d1d"
+        },
+        {
+          "file": "src/fluids/gpu/mpm.js",
+          "status": 200,
+          "sha256": "f5e76dcde0d0b808ce1b850e1d93907588325d0952a463c5f10447636abcada4"
+        },
+        {
+          "file": "src/fluids/gpu/surface.js",
+          "status": 200,
+          "sha256": "38a9f48ad28b3484e9a66104126b84c605504d4f7bdf884d8d851f76c34b99db"
+        },
+        {
+          "file": "src/fluids/phone.js",
+          "status": 200,
+          "sha256": "c4932fb6aca71dec59dc7a1e99e3cd4058c6cbf7cb24cfafb2b6617c3a816669"
+        },
+        {
+          "file": "src/fluids/render.js",
+          "status": 200,
+          "sha256": "e5a2c62457311c583277f6b84a391bb76cd6e540955c80ce5aca6f5a6e2d84cd"
+        },
+        {
+          "file": "src/fluids/runtime.js",
+          "status": 200,
+          "sha256": "c53dcf60e7d41a438fa9f3237bcd08800598042d97c62ce60d4fa2672119b8fb"
+        },
+        {
+          "file": "src/fluids/sim.js",
+          "status": 200,
+          "sha256": "0ab44f85edad0eff7adbfedb4ff320c2481c62252cbaaa229bddb5d56a66495b"
+        },
+        {
+          "file": "src/fluids/worker.js",
+          "status": 200,
+          "sha256": "5cdb8f1248e7542dfc52f4add7f23cb4736104c0431b2ffd7f7b8632dc86ace2"
+        },
+        {
+          "file": "src/fluids/world.js",
+          "status": 200,
+          "sha256": "3c0214307d2b67d9e033ca44c3f1d9ce54919d5923c050f009028f6e1be7fd32"
+        },
+        {
+          "file": "src/font.js",
+          "status": 200,
+          "sha256": "c4be5b31cc2eb142f49597314f4b18b1a67506a0c7cb7bc58e2deb420a4d3def"
+        },
+        {
+          "file": "src/generators.js",
+          "status": 200,
+          "sha256": "2caaa058fa3d86c09f1dad734c81cdc57454d43d34059f42aa954df738ee10ea"
+        },
+        {
+          "file": "src/geo/data.js",
+          "status": 200,
+          "sha256": "b029c39c3caf7f430f457ff56fa0d53aaf2ea77fa875d3a42f523d938fa9813f"
+        },
+        {
+          "file": "src/geo/terrain.js",
+          "status": 200,
+          "sha256": "7685c1cf54afee6376b6b009421227a856531176248f972356418d23c98b9b95"
+        },
+        {
+          "file": "src/kernels.js",
+          "status": 200,
+          "sha256": "44490c9020a575159741488f888eac1ee9b4cd0ae3409515b34c53bb2daa28d8"
+        },
+        {
+          "file": "src/kit.js",
+          "status": 200,
+          "sha256": "dd6f68bebf7435386855cc1cd4bf9fb12e4a196a7a7b5bb2b2343831baf42509"
+        },
+        {
+          "file": "src/labs/light-optics.js",
+          "status": 200,
+          "sha256": "90173ee24b1294359665757bcf02502ae882c9f0474b4696b3d9a7a999114027"
+        },
+        {
+          "file": "src/labs/nist-lines.js",
+          "status": 200,
+          "sha256": "b398dde0171abf0651693314c1523fc40e5ddfa283d089ea44d574bbdec4a5d9"
+        },
+        {
+          "file": "src/labs/sound-dsp.js",
+          "status": 200,
+          "sha256": "5b8768dcb22284f41442e57a987955ba07a33058d97ba0aae80cede634ea4fc2"
+        },
+        {
+          "file": "src/labs/splat-shapes.js",
+          "status": 200,
+          "sha256": "16f875631489d3d6f57e2c6bd09c4affe2fb6f94748576dcbe5ab8a2095e1a3b"
+        },
+        {
+          "file": "src/lattice/cells.js",
+          "status": 200,
+          "sha256": "68b2c5bb9efbaa93d8ff3a989a82b322e2a3c31d2d53526d5622dc4e8e13f7d7"
+        },
+        {
+          "file": "src/lattice/orbitals.js",
+          "status": 200,
+          "sha256": "00a08f6d14bd470bec18e8a392a44721172059e7e58c3d7801351b357b921d15"
+        },
+        {
+          "file": "src/live/analysis.js",
+          "status": 200,
+          "sha256": "140466bd9481cea35a82dc9476189bdcc887b8f3ba4c5a6d7e2860fcb624c1c6"
+        },
+        {
+          "file": "src/live/capture-worklet.js",
+          "status": 200,
+          "sha256": "c5dbd778391260c59912164c55500fb47c76cece655162a92fe10e0f78c5f4fc"
+        },
+        {
+          "file": "src/live/depth-worker.js",
+          "status": 200,
+          "sha256": "1b4a7f49d69fe87cc83cd724540c5537d767f97a7f1e8195573be97160aa6ac7"
+        },
+        {
+          "file": "src/live/live.js",
+          "status": 200,
+          "sha256": "d1514b4a29ceb1d69f354b2a84060d7c397643232c3d6be1fc047f9e23b539cf"
+        },
+        {
+          "file": "src/live/mic.js",
+          "status": 200,
+          "sha256": "d9a4f6bd05aad233baa5acab9f44a37adad8b29bf8d565899b829a2a2f0c039a"
+        },
+        {
+          "file": "src/live/panel.js",
+          "status": 200,
+          "sha256": "98981d39ab59a20fe2f86304a930acbe1a2a08b0b11b8e44977dfc929c02d6b4"
+        },
+        {
+          "file": "src/live/record.js",
+          "status": 200,
+          "sha256": "b7a463c2ecdfd056644708e4943dbff0236015f2146ed565572f700634072a6b"
+        },
+        {
+          "file": "src/live/relief-height.js",
+          "status": 200,
+          "sha256": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c"
+        },
+        {
+          "file": "src/live/relief-mesh.js",
+          "status": 200,
+          "sha256": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971"
+        },
+        {
+          "file": "src/live/relief.js",
+          "status": 200,
+          "sha256": "2115a20815fd31979db1f53453cb477521c7dd5fd690f8204bb217bb7bd870e1"
+        },
+        {
+          "file": "src/live/stream.js",
+          "status": 200,
+          "sha256": "81098ce37138210579fae1344dcfbb3c6e4a4e77fb4ad2eed5f815223f5872e0"
+        },
+        {
+          "file": "src/loaders.js",
+          "status": 200,
+          "sha256": "48a7561b949eb321c8c4aad283cbf0e0acbd488527aae2d90625d46951617c01"
+        },
+        {
+          "file": "src/media.js",
+          "status": 200,
+          "sha256": "88fe86904383b36c85e1a0121342f615cad26a2934ef32ce1223d7f1525e12bc"
+        },
+        {
+          "file": "src/molview/draw.js",
+          "status": 200,
+          "sha256": "223d008cc6c18fb9c85aa8de4f7e3c965fb79d5f758e59ad88bd8806962a90ba"
+        },
+        {
+          "file": "src/molview/geom.js",
+          "status": 200,
+          "sha256": "91d9fc88ae4ddbfc0ef5ce073f6e62a04e36743c7817db347f5c05dd70a484f5"
+        },
+        {
+          "file": "src/molview/load.js",
+          "status": 200,
+          "sha256": "0868d92e82b51a034727d9578b06431c7e4b0e25c63c92d6a1383b11afc31163"
+        },
+        {
+          "file": "src/molview/parse.js",
+          "status": 200,
+          "sha256": "f076fcfc2ead43d03eae9bdd10b9ba4f2b4df8724367f50249841c321c6177ed"
+        },
+        {
+          "file": "src/molview/radii.js",
+          "status": 200,
+          "sha256": "55cf9db1aa439220a7f8116178f538c3075c67abaa5e0ecbb067345e3fac7505"
+        },
+        {
+          "file": "src/molview/worker.js",
+          "status": 200,
+          "sha256": "8d3431f763faebe6b0a0b33ee2f22b3c56eec580bca88ac58ff9f2b24aee8cb0"
+        },
+        {
+          "file": "src/motion.js",
+          "status": 200,
+          "sha256": "4583648ec2c5df3f3826c9ace35c2fed3f8e3e00f32da32d12d7fec8ea796c5e"
+        },
+        {
+          "file": "src/noise.js",
+          "status": 200,
+          "sha256": "a37bfb72691aa31fb1523ec06d8aa07f834c8cb5010d6d79e274219930c185ac"
+        },
+        {
+          "file": "src/optics/bench.js",
+          "status": 200,
+          "sha256": "13e71abee81081314bd2ef90f8ac35177db86d6b9f4b4ad53397264c5fe4c924"
+        },
+        {
+          "file": "src/optics/rays.js",
+          "status": 200,
+          "sha256": "48431b588d8cadc19157ad85e9579e476b4f7f97af5d443ccbd9d6f7c1a17dd1"
+        },
+        {
+          "file": "src/optics/ripple.js",
+          "status": 200,
+          "sha256": "1d62f230807ca1ed60c454cb16415aaf538639439d11acd9ec12644d2623e89f"
+        },
+        {
+          "file": "src/packs/anatomy-atlas.js",
+          "status": 200,
+          "sha256": "566a91c19d4bb0beffc97e19c9408ab34c38ff94897c84eb63988fd804caf3a0"
+        },
+        {
+          "file": "src/packs/anatomy.js",
+          "status": 200,
+          "sha256": "cb81d500df85b8bc9baf517c9ebbfb4c41f98174f0a9b17e27aa67483a21f61e"
+        },
+        {
+          "file": "src/packs/animals.js",
+          "status": 200,
+          "sha256": "00b22bf0149adbbe144cc28a351eab70c2cfe4605ced3fb1915de45805493a4a"
+        },
+        {
+          "file": "src/packs/arcade-crisp.js",
+          "status": 200,
+          "sha256": "b661601ae9e9d4e49660127770794a4b7a895170de3edb1baf603c9cf7b3078b"
+        },
+        {
+          "file": "src/packs/arcade-dash.js",
+          "status": 200,
+          "sha256": "cf29b37a1ffbaf5bb3567fd77247bf7b0125dd977385c68250994d2b716f0fcd"
+        },
+        {
+          "file": "src/packs/arcade-grains.js",
+          "status": 200,
+          "sha256": "d715864a13c9ae69aff0af3e97ce1dac179e8e6a4cabf913ae49e7ec3474c67f"
+        },
+        {
+          "file": "src/packs/arcade-lander.js",
+          "status": 200,
+          "sha256": "31f6aa4eb2ae3a2e49cada3eab20b0ff00370074b6e5b588526fc37191a86cb9"
+        },
+        {
+          "file": "src/packs/arcade-listen.js",
+          "status": 200,
+          "sha256": "ae1c1db515f5ad1f67cf9f40a4fb3fe2ad21342d059381dd8addbd4bc07385fa"
+        },
+        {
+          "file": "src/packs/arcade-longtail.js",
+          "status": 200,
+          "sha256": "6432f41b8d776ff978def1b3f16147a742177f434b4273e3390fa14d54cf37ea"
+        },
+        {
+          "file": "src/packs/arcade-pages.js",
+          "status": 200,
+          "sha256": "5a50eb0eb7d4327f25ecf74e3477e31009d34697f8674a24d6375fc156b210fa"
+        },
+        {
+          "file": "src/packs/arcade-pinball.js",
+          "status": 200,
+          "sha256": "abaadddcc76043ae79289f61b3530537bbade35b603bd50027122e7c03d7bc6e"
+        },
+        {
+          "file": "src/packs/arcade-rally.js",
+          "status": 200,
+          "sha256": "1e9a4da065805606c253682485a74f53a8d7753989647563e18145da911feb84"
+        },
+        {
+          "file": "src/packs/arcade-rocks.js",
+          "status": 200,
+          "sha256": "ee7d02a6f32980e72d86661eab4ef056e4e3d6ee65504d020ab89fc2458aba7c"
+        },
+        {
+          "file": "src/packs/arcade-shadows.js",
+          "status": 200,
+          "sha256": "ca22251e4e22a0060273e782ec63c1dd14c90eddcc500df00093983ba1b7538a"
+        },
+        {
+          "file": "src/packs/arcade-shardball.js",
+          "status": 200,
+          "sha256": "1c0d29119cff66d70d47d1589a2526d7b006e9436429fbd3ca0a06e00d9ede59"
+        },
+        {
+          "file": "src/packs/arcade-song.js",
+          "status": 200,
+          "sha256": "fa1235d0306838d50edaa865036e37ac31f2f2fdbef98b1b8bcb2cd501ef4ea9"
+        },
+        {
+          "file": "src/packs/arcade-strata.js",
+          "status": 200,
+          "sha256": "3ebfaec2c6b3583263f72b5885b9081ddcf11eb6ce28ef1741f3a72413e1efcd"
+        },
+        {
+          "file": "src/packs/arcade.js",
+          "status": 200,
+          "sha256": "38f5480f892319583a317f8bb936e73a41cda8c842167d68f165ee6b66edec6b"
+        },
+        {
+          "file": "src/packs/atoms.js",
+          "status": 200,
+          "sha256": "654934e348a4a56be6f4aea48079027b26d0e0a34c3a7a6c86ac28e80df4f794"
+        },
+        {
+          "file": "src/packs/baked-demo.js",
+          "status": 200,
+          "sha256": "27725b6dbf1c3e911dc2fe49b90b10c0c3713e908bfa10aa702735f0a764211b"
+        },
+        {
+          "file": "src/packs/balls.js",
+          "status": 200,
+          "sha256": "13df6a33691920ad2961c0135791f6407d4f784b9de78f493a160543f2cdc8e1"
+        },
+        {
+          "file": "src/packs/chemistry.js",
+          "status": 200,
+          "sha256": "c2e02c0114bfea6474a159606352115d9e3d57c0200b6b7c061d941cc06cd04a"
+        },
+        {
+          "file": "src/packs/chladni-3d.js",
+          "status": 200,
+          "sha256": "c3308203d4ef1fa7950186b842d135f06c3c74f3d44890c4f6b96b0c2eefaf2a"
+        },
+        {
+          "file": "src/packs/chladni-colors.js",
+          "status": 200,
+          "sha256": "8fae90e42a71e87ff5496b81156ceabb17c10acac35320114771b1add588ab30"
+        },
+        {
+          "file": "src/packs/chladni-sand.js",
+          "status": 200,
+          "sha256": "bd9ff881d631c5aae93ef4c1d392d67fef7c1422e726c0ac07582d518ff5ab75"
+        },
+        {
+          "file": "src/packs/codex-picture-samples.js",
+          "status": 200,
+          "sha256": "987455930c6ef873aa0fa2cbbbce92882d5fd936c0667b935b6d5be5ff304493"
+        },
+        {
+          "file": "src/packs/computing-cnn.js",
+          "status": 200,
+          "sha256": "8557fa24fd7743afcb9a537ff80477510c5a9c12506e408c3a37758a00584072"
+        },
+        {
+          "file": "src/packs/computing-history.js",
+          "status": 200,
+          "sha256": "c9c49f3f0406c158d19732c5f6d4530e89a33a42f4b384977f90ada33a8d81fd"
+        },
+        {
+          "file": "src/packs/computing.js",
+          "status": 200,
+          "sha256": "cb9d8aa3835e341eb157e3bf2a19031d9fdd0dbaab7a59ee5f8e33e2260c6fc6"
+        },
+        {
+          "file": "src/packs/data-climate.js",
+          "status": 200,
+          "sha256": "45c89a9ce4ff29e27f99061c5784390c98979d21759dd71c3f1a47f0c6da53be"
+        },
+        {
+          "file": "src/packs/dog-plush-fill.js",
+          "status": 200,
+          "sha256": "b4a131aacfdc41bfd0dd1540352494ae5473758152c2acb42bebe3362003414d"
+        },
+        {
+          "file": "src/packs/dot-samples.js",
+          "status": 200,
+          "sha256": "2164b7092aee10e46cc840f2fc19a9f6fd66d468307d34ecc9a134791c7c8643"
+        },
+        {
+          "file": "src/packs/elements.js",
+          "status": 200,
+          "sha256": "986969439aee3e968fdbaf529cdd3dfb106eb05e4a9da37259018e70b76a9090"
+        },
+        {
+          "file": "src/packs/even.js",
+          "status": 200,
+          "sha256": "58a221c528f35869fc8740b8de1f128fa85072d4f18ada05bf479d4fc19e3f92"
+        },
+        {
+          "file": "src/packs/fidelity.js",
+          "status": 200,
+          "sha256": "6f4483b1c09fbb975f6afc9d00e4579309824bdb5dd12ec55878b266f252b953"
+        },
+        {
+          "file": "src/packs/fluid-lab.js",
+          "status": 200,
+          "sha256": "6725a71276b1f4b3ccaec4b2078f3f61b8fc075dc9c05f265c81424082b5448a"
+        },
+        {
+          "file": "src/packs/food.js",
+          "status": 200,
+          "sha256": "27cfb1a08150c674228ed9d6ebafc7b9f8779c22226f80707d5d351842a2f78d"
+        },
+        {
+          "file": "src/packs/games.js",
+          "status": 200,
+          "sha256": "69915b153c8d1638191fcbbcc5c41a71afb9a0804fc0bc44e07938cfa958d7ac"
+        },
+        {
+          "file": "src/packs/gems.js",
+          "status": 200,
+          "sha256": "dfb8136b425d9b73998c023e8a08d5c67e025756f14da34d5537ec4d69c418b7"
+        },
+        {
+          "file": "src/packs/geo.js",
+          "status": 200,
+          "sha256": "8f79e586d4ecf19775aa2985c48e354fa1d445cd149c1bb8e485fbb301aa577d"
+        },
+        {
+          "file": "src/packs/glissando.js",
+          "status": 200,
+          "sha256": "e2a17e769f1a86bbca7dc4efc822e064b69913a0197f720b642f33b4365f0c1b"
+        },
+        {
+          "file": "src/packs/hard-case-pictures.js",
+          "status": 200,
+          "sha256": "b43b8e3a26e8bd08f45dabcc0cd151b1025a03a025b14fd1e3267f2f86afd9e3"
+        },
+        {
+          "file": "src/packs/hard-case-samples.js",
+          "status": 200,
+          "sha256": "bb51d75006ff7c9a91f7330df2e0d3953b4e5143e7efa15c0268a31a16683a2d"
+        },
+        {
+          "file": "src/packs/holidays.js",
+          "status": 200,
+          "sha256": "a63b53dcff9578efba3ba5964d45210b40288f089a5f5f8556b335d8734bdee2"
+        },
+        {
+          "file": "src/packs/imaging.js",
+          "status": 200,
+          "sha256": "d7772e2cf5ec6b1787956047c1a134b6d2b2a5235d3a7b46d06f6f26510818d0"
+        },
+        {
+          "file": "src/packs/lab.js",
+          "status": 200,
+          "sha256": "63f2e87ddc78b5f746550b8a160418f87996a1b8e4456c6f5df23da6bfa47c48"
+        },
+        {
+          "file": "src/packs/landmarks.js",
+          "status": 200,
+          "sha256": "65c83df2841c7b2a6dbdb907f6353b817f5e62727087f21d20cf4f34bfe46ff5"
+        },
+        {
+          "file": "src/packs/lattices.js",
+          "status": 200,
+          "sha256": "c318d70b1fe92e1c53cf87fae4fee409a70b1ae34f756b29fdc89753c2269761"
+        },
+        {
+          "file": "src/packs/light-lab.js",
+          "status": 200,
+          "sha256": "dc9b655ee9de975695586473060266491db8c02410c235a041a2f38c942b3300"
+        },
+        {
+          "file": "src/packs/live.js",
+          "status": 200,
+          "sha256": "0b1f42da8afdab6ea709bc26234d79f796eb0598da2386146bed197e1363b434"
+        },
+        {
+          "file": "src/packs/maths.js",
+          "status": 200,
+          "sha256": "1c5f0eb33c1bfdc924868a5888c5f769fc1c0710043f81e2363649eeaf12cb64"
+        },
+        {
+          "file": "src/packs/medieval.js",
+          "status": 200,
+          "sha256": "9b9827225282e804177fa402ff7e82a62b44481f5e1ed76fdc600673fd5d31da"
+        },
+        {
+          "file": "src/packs/molecule-viewer.js",
+          "status": 200,
+          "sha256": "5d8f537c4a9f0573017fe942168f15f4147aa508ce94af785e9533e0581c7ab1"
+        },
+        {
+          "file": "src/packs/moving-photo.js",
+          "status": 200,
+          "sha256": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3"
+        },
+        {
+          "file": "src/packs/music.js",
+          "status": 200,
+          "sha256": "f5ded5b14a1aa477e3c880146dc7364839dfc6c4d4f3a147ee08356f103c172e"
+        },
+        {
+          "file": "src/packs/nature.js",
+          "status": 200,
+          "sha256": "c9bf515bb8b7bd00168b7d80a4c0ba2252e4e9996d5c787f9c5298c059e6d115"
+        },
+        {
+          "file": "src/packs/night-sky.js",
+          "status": 200,
+          "sha256": "d657b6ebfe716850a5e2ce69644a5f65b945fe566c35875ddacf796b0dcf406f"
+        },
+        {
+          "file": "src/packs/objects.js",
+          "status": 200,
+          "sha256": "3f2e73fe7761cf604bbf2290d8bf49491ba21f775006e51ef3771cd2088a7377"
+        },
+        {
+          "file": "src/packs/optics.js",
+          "status": 200,
+          "sha256": "15d573a301db5e5e341adc23a5aefbdd8a46af027fa2fdaee6a39fd945c026a9"
+        },
+        {
+          "file": "src/packs/photo-3d-core.js",
+          "status": 200,
+          "sha256": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57"
+        },
+        {
+          "file": "src/packs/photo-3d-depth.js",
+          "status": 200,
+          "sha256": "5afd7e5e88a4326add90604fc82c4b20e7f3dd31a1cec340ba7a61196cbe0a68"
+        },
+        {
+          "file": "src/packs/photo-3d.js",
+          "status": 200,
+          "sha256": "f895aa114f2cf3648e518f1c05b034609a54d68d9034d027645d2cacfa42d246"
+        },
+        {
+          "file": "src/packs/photo-sharp.js",
+          "status": 200,
+          "sha256": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a"
+        },
+        {
+          "file": "src/packs/photoreal-r2.js",
+          "status": 200,
+          "sha256": "a5081204fad4c3f3af0e9a528690424733acd11b9741456d134ec671bb3e0eee"
+        },
+        {
+          "file": "src/packs/photoreal-r3-bases.js",
+          "status": 200,
+          "sha256": "f7a5a8d4df7f6e606f3b731546db0a2cd7910c55757d5f5463d8d4701e4f3a8d"
+        },
+        {
+          "file": "src/packs/photoreal-r3-rigs.js",
+          "status": 200,
+          "sha256": "045737bcf17d5f8e2672632d41f30835ac0f5d66e6d7c24221bee8040fddc977"
+        },
+        {
+          "file": "src/packs/photoreal-r3.js",
+          "status": 200,
+          "sha256": "20c642ac013602a3f7fa2d43e58d028f1231505da79be0ff2814cfd36d48cfbe"
+        },
+        {
+          "file": "src/packs/pianos.js",
+          "status": 200,
+          "sha256": "aeb3ce340063813fed637c43abe2c8ec0343d65e2fa68752c745db691daeffe7"
+        },
+        {
+          "file": "src/packs/pictures.js",
+          "status": 200,
+          "sha256": "e4a95a67972cc29c9f616717408458f884c2563a0a4894dd3e953e4cd4b8a835"
+        },
+        {
+          "file": "src/packs/playthings.js",
+          "status": 200,
+          "sha256": "7966286bfc82f4536a8dda5821b090d4fff6f7f16f512e91a0bd963cf782b74b"
+        },
+        {
+          "file": "src/packs/powers-of-ten.js",
+          "status": 200,
+          "sha256": "cd9281e84f4ef3730804063d9dd01ccda0cbe44d4a98f161da4412446d272243"
+        },
+        {
+          "file": "src/packs/qr-craft.js",
+          "status": 200,
+          "sha256": "10483f9ce1edbdacccde4de8b1defbeeab6baab75a9ab1827b8495ae69e18686"
+        },
+        {
+          "file": "src/packs/qr-lab.js",
+          "status": 200,
+          "sha256": "e85854eafbad898e570caeea67665d49d9f1238c47386bef9cabc0b6907c3ff7"
+        },
+        {
+          "file": "src/packs/qr.js",
+          "status": 200,
+          "sha256": "6b879110a4fda686f5c93dc85b69801258b7f398b0afca36f3b9abfe74822c13"
+        },
+        {
+          "file": "src/packs/real-elements.js",
+          "status": 200,
+          "sha256": "b5fab39703cec0023f3f0e19a25983f9692b876c305222fec62d869108d57ee4"
+        },
+        {
+          "file": "src/packs/real-objects.js",
+          "status": 200,
+          "sha256": "13c9655e9f1f13e9d19df014ec8de1e2b27e5776b777c2004d86d4b7a15e4884"
+        },
+        {
+          "file": "src/packs/science.js",
+          "status": 200,
+          "sha256": "449124b4100c06f475368eaa912296d332e6882602132801c128b957da031665"
+        },
+        {
+          "file": "src/packs/screens.js",
+          "status": 200,
+          "sha256": "e981d05105ece8c3349b8acd298d89c37085f8f17334a14583578e465cc4ff61"
+        },
+        {
+          "file": "src/packs/shapes-torus.js",
+          "status": 200,
+          "sha256": "6ecf9c66e9230122af74a0bade05e1d45c98acedcacea3d6b1538671108d533c"
+        },
+        {
+          "file": "src/packs/song-analysis.js",
+          "status": 200,
+          "sha256": "5f8bf8c2b5e28c7002e7cb775b89ad3182ed22ce5894b3b663cdeee9f1ea78f6"
+        },
+        {
+          "file": "src/packs/song-looks.js",
+          "status": 200,
+          "sha256": "a2749a9f066a065a5953cce6b726d3335e9ade288676b941bc5aad26b6237e86"
+        },
+        {
+          "file": "src/packs/song-mp3.js",
+          "status": 200,
+          "sha256": "8198e0d7c4b7532c6e8a0d084c9776fb5cc5b4e3d3d3b0dc9aa02e36fa5c65ce"
+        },
+        {
+          "file": "src/packs/song-record.js",
+          "status": 200,
+          "sha256": "fa15a5dea2e93aaa772b348d9b7b82a9fc6ede3874f789433ffcbae27d161249"
+        },
+        {
+          "file": "src/packs/song-stream.js",
+          "status": 200,
+          "sha256": "aa3c8b68e1ce2e89e30e76f7dfd281bf437b8e8cd85a92fcc3c031d2841b59d9"
+        },
+        {
+          "file": "src/packs/song-worker.js",
+          "status": 200,
+          "sha256": "e08c348fc1f1dbd6b9811c184bc5464a1b862e2968676417369d93a85b0ab6ab"
+        },
+        {
+          "file": "src/packs/sound-lab.js",
+          "status": 200,
+          "sha256": "b9bdb5c3de49bee8085c235e6fd44a262e647cdd0f785d99112e07acd2d8d513"
+        },
+        {
+          "file": "src/packs/space-r2.js",
+          "status": 200,
+          "sha256": "baa6afadc810915f7393fe2f721fc5aac3207bb4a96d692d9bb6edf61fee0d52"
+        },
+        {
+          "file": "src/packs/space-r4.js",
+          "status": 200,
+          "sha256": "6b54ec6f029e6f16cb8aee83471b6f8a184f07ae425e6161352123a59d3dc07c"
+        },
+        {
+          "file": "src/packs/space.js",
+          "status": 200,
+          "sha256": "7f1810f065188ac197d701c4976c0bf33c71383ba5b69f27634595da798e7591"
+        },
+        {
+          "file": "src/packs/splat-equation.js",
+          "status": 200,
+          "sha256": "989ed6f57a5ce51cdc1515b8031ac11d931661d70b9cb38da5953154fd1b0e10"
+        },
+        {
+          "file": "src/packs/splat-fit-worker.js",
+          "status": 200,
+          "sha256": "b8f61a50a868397b1ae3e80c5e36dd614e8a9e6b5118e6a228fd3a5f9a843902"
+        },
+        {
+          "file": "src/packs/splat-fit.js",
+          "status": 200,
+          "sha256": "031a5b36593c30aadc4881d471b225c0e0255f73e8bb9869fb8f0c1923a04d63"
+        },
+        {
+          "file": "src/packs/splatting.js",
+          "status": 200,
+          "sha256": "2c4f454897f36dfe8a0e1367b022317d772334d357e7c1cc3e2b3ca654c8c64c"
+        },
+        {
+          "file": "src/packs/studio-audio.js",
+          "status": 200,
+          "sha256": "3414c9e187a6e4b83f9f9459fd6fdfab13811fe1c0b82d410e22a150a84cc250"
+        },
+        {
+          "file": "src/packs/studio-models-core.js",
+          "status": 200,
+          "sha256": "8619e51cb378d8d14df9a9c41c088cc9a880749a1c59302b9ba149d708bfc3da"
+        },
+        {
+          "file": "src/packs/studio-models.js",
+          "status": 200,
+          "sha256": "c4842dcb6f9e297b31e11c625e75d6be6d0ba4e96c31eee56f660b8121333806"
+        },
+        {
+          "file": "src/packs/studio.js",
+          "status": 200,
+          "sha256": "ecc848380e41063de0aea35dd403c5ff5949534727797e944a492c9d52b5e110"
+        },
+        {
+          "file": "src/packs/tiny-r2.js",
+          "status": 200,
+          "sha256": "8d55285dbf6966a8100a0774bbd9e4a72b221de019873a028881b197d9314937"
+        },
+        {
+          "file": "src/packs/tiny.js",
+          "status": 200,
+          "sha256": "6c97a00c12bf0d9fd54471b2bbcab65e629a335196ab65e7e68bc4b7db7540e4"
+        },
+        {
+          "file": "src/packs/vehicles.js",
+          "status": 200,
+          "sha256": "fe8ea86f99d5ee08f8e9aee44f140304afc17f9e9f8f3c5802997a641b2ab4e2"
+        },
+        {
+          "file": "src/packs/video3d.js",
+          "status": 200,
+          "sha256": "5e2b71d8a1eb6f2ae815e3f99ca650f6b29cd5ef0a6261fa30e4f2a1219637a3"
+        },
+        {
+          "file": "src/packs/viewers.js",
+          "status": 200,
+          "sha256": "6e97836e927a6483c1717e71e1793311438cd924aef4a4baa250326ab22683f2"
+        },
+        {
+          "file": "src/packs/volume-viewer.js",
+          "status": 200,
+          "sha256": "10d57d97afdc7ae3e835f8c345dd82800159af6642eef38ca3b6708f9f04d70e"
+        },
+        {
+          "file": "src/paint.js",
+          "status": 200,
+          "sha256": "ebb93e597194830358d7cd5674d4c55d9975a87ee57f372675f06c0b4a638865"
+        },
+        {
+          "file": "src/patterns.js",
+          "status": 200,
+          "sha256": "3c4e866d472f8c05f95007a59bd695128491343225feb46d3d8f3476d1f5290e"
+        },
+        {
+          "file": "src/pc.js",
+          "status": 200,
+          "sha256": "2a60781524604d99365ea1981d290cf8346b19ddee5cc7b5cbb9adf66c091799"
+        },
+        {
+          "file": "src/pdf-export/capture.js",
+          "status": 200,
+          "sha256": "47a1705510e6843f34744f43c5712a5898700eb5e000240489c1b69c72633c70"
+        },
+        {
+          "file": "src/pdf-export/entry.js",
+          "status": 200,
+          "sha256": "13c62c235db6b000a120c6d47a8580026240786733199c62f1d67c0dc6e88f64"
+        },
+        {
+          "file": "src/pdf-export/index.js",
+          "status": 200,
+          "sha256": "28e04e38ebe6e5f26e4617608bb25b0e670f30ba1123b2f1b7ed2f00ce9824c1"
+        },
+        {
+          "file": "src/pdf-export/pdf.js",
+          "status": 200,
+          "sha256": "c54b5acbddd2c08f697ef438353f70a91f29ab974a0236089c64bf300a367534"
+        },
+        {
+          "file": "src/photo-splats.js",
+          "status": 200,
+          "sha256": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3"
+        },
+        {
+          "file": "src/photo3d/background.js",
+          "status": 200,
+          "sha256": "92b5950c792f10feeaaba024ae0751273564172279917f0e6c0ca415a254a279"
+        },
+        {
+          "file": "src/photo3d/bitmaps.js",
+          "status": 200,
+          "sha256": "30c8326556edc55678309cb8d9789c30b3595f0b424f9b5ee04de0902a3abea8"
+        },
+        {
+          "file": "src/photo3d/border.js",
+          "status": 200,
+          "sha256": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b"
+        },
+        {
+          "file": "src/photo3d/build-worker.js",
+          "status": 200,
+          "sha256": "7ed4768c7b3a9440ad75461922aa1f33484342c1bb4ae9dd54458435869bb175"
+        },
+        {
+          "file": "src/photo3d/decode-worker.js",
+          "status": 200,
+          "sha256": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103"
+        },
+        {
+          "file": "src/photo3d/decode.js",
+          "status": 200,
+          "sha256": "73e1e4ce8b87ec57aac3031c816e0ff600b5fb7d2076fef0f9eaf7aeb0073510"
+        },
+        {
+          "file": "src/photo3d/depth-edges.js",
+          "status": 200,
+          "sha256": "5ddf367278f8988f0c75bb75968be5235586839f7690cd2feea27668e1d815e9"
+        },
+        {
+          "file": "src/photo3d/input-warning.js",
+          "status": 200,
+          "sha256": "84705f3b81c57f653579f54d394550fa72217383047a88c7f355d063a8f0ef2b"
+        },
+        {
+          "file": "src/photo3d/pixels.js",
+          "status": 200,
+          "sha256": "6acb0a998ef1581947cae0ea9d77497fb5f5fadb39327edb4ac1b01ae92a576f"
+        },
+        {
+          "file": "src/photo3d/prepare.js",
+          "status": 200,
+          "sha256": "325e06171a1bed49cd242d515946906435e9845212e632a58f44b1539734b014"
+        },
+        {
+          "file": "src/photo3d/preview.js",
+          "status": 200,
+          "sha256": "3675e2dfb13a2e25574328153d4429c196ec645a6e555e6d444a36d64f7d6586"
+        },
+        {
+          "file": "src/photo3d/surface.js",
+          "status": 200,
+          "sha256": "cfa72273ea86c58635c5f6b12b9da2648fdd1a6e008502a36bf0d25912f41c15"
+        },
+        {
+          "file": "src/physics/fields.js",
+          "status": 200,
+          "sha256": "0bee12dc017c5b7384c3f85921e2720ba65587e6005a32753ef2b4eaaf266573"
+        },
+        {
+          "file": "src/physics/hands-on.js",
+          "status": 200,
+          "sha256": "eb0ee74a5557819d7aa7a75eb2249f5273cd201ece3b1a5c1e4e7eaebb69755e"
+        },
+        {
+          "file": "src/physics/joints.js",
+          "status": 200,
+          "sha256": "1a4de58e984a763db1bc12dafd6a0b9c33f716cfd86d55e5b3e9208f94b52f48"
+        },
+        {
+          "file": "src/physics/materials.js",
+          "status": 200,
+          "sha256": "e3c7f1d6d5bb76ea3f55822ef58f0d637aed73f16d6ed8a9302fb4770b7a43ca"
+        },
+        {
+          "file": "src/physics/soft.js",
+          "status": 200,
+          "sha256": "f821ceef789d37db633b85276679227daa985a03df5c46be1b6d996dcc241c19"
+        },
+        {
+          "file": "src/physics/water-view.js",
+          "status": 200,
+          "sha256": "178b04143a279fe0eebff13d92aebc3e63f8c242931d11889cfde71604e2f607"
+        },
+        {
+          "file": "src/physics/world.js",
+          "status": 200,
+          "sha256": "c82fb4555fb0d612962c85fd6d71dfb1853928246a310ee302d4f899f9f444db"
+        },
+        {
+          "file": "src/picture-splats.js",
+          "status": 200,
+          "sha256": "a2fd895db8ef873704bbc48c7a24841ed20497cce5918d2ff6b22d5eb18c6831"
+        },
+        {
+          "file": "src/pictures-worker.js",
+          "status": 200,
+          "sha256": "ceb2f06f2566a7337f7e76f5e6f77d8c2ed53139ec8bc4361ae0b2f0360e2b54"
+        },
+        {
+          "file": "src/pictures.js",
+          "status": 200,
+          "sha256": "050529e071f75294ea94f8bc21a8748bf81c17ba2b737db563e09ac98fc55560"
+        },
+        {
+          "file": "src/player.js",
+          "status": 200,
+          "sha256": "f4c5402592a3771552bf094c5c8b74e4feb696e3945927347e66a02bbd48856e"
+        },
+        {
+          "file": "src/pose.js",
+          "status": 200,
+          "sha256": "cde17077bf6ec6ed8f86f5d1e4a0f162d83b036ae70d0d8db6588831b21ab09a"
+        },
+        {
+          "file": "src/powers/sky.js",
+          "status": 200,
+          "sha256": "49565d43bfc6acae4e36f3166c24017c61f453e84d7bd7db5f1f0aa5cc334c7e"
+        },
+        {
+          "file": "src/powers/stops.js",
+          "status": 200,
+          "sha256": "59104c5f638bd6ad47acdd91c55633f0f5812fafeffe2f7e79d7663bf0057368"
+        },
+        {
+          "file": "src/qr-craft/barcodes.js",
+          "status": 200,
+          "sha256": "82a6222173892e48dc1fb8a8443c784f92f5fc616af8739eedc4669846b97f38"
+        },
+        {
+          "file": "src/qr-craft/codex-pictures.js",
+          "status": 200,
+          "sha256": "587d087ee29a27570b2e4f8c1458554a1691e3c1d8afa046e3b8a54ac85b3971"
+        },
+        {
+          "file": "src/qr-craft/field.js",
+          "status": 200,
+          "sha256": "23551f8d32ea7e46c2fb69a55ee0f2a0db554aa98a1eca7c4d3babe206f5ec3a"
+        },
+        {
+          "file": "src/qr-craft/glyphs.js",
+          "status": 200,
+          "sha256": "9cd0a079147b7607e29507d142ff207ad2f93a0ad9f80bc63236e5eebde28689"
+        },
+        {
+          "file": "src/qr-craft/picture.js",
+          "status": 200,
+          "sha256": "e4c13c478a8a0e0f30959a12f3f633dba5cc7d4355ebb61c97a49274e2fde6b9"
+        },
+        {
+          "file": "src/qr-craft/pieces.js",
+          "status": 200,
+          "sha256": "4ed02478c0086416b4b2c157c9456b094ce0d7a67b6f4dc9d1309448b5da7213"
+        },
+        {
+          "file": "src/qr-craft/samples.js",
+          "status": 200,
+          "sha256": "372e794f51c0e9a262aaefe15ead8b9d08be0f2cdfd6183aa09a369c39579a53"
+        },
+        {
+          "file": "src/qr-craft/theme-pictures.js",
+          "status": 200,
+          "sha256": "656a83337bfcf72b9342c1f923990d489b7a1933ab640e1a02619f8da4a6abdb"
+        },
+        {
+          "file": "src/qr-lab/damage.js",
+          "status": 200,
+          "sha256": "aa0f9b2f5e106216fce57095e4aca79d6edcf10607dc714178c673e4f87362b0"
+        },
+        {
+          "file": "src/qr-lab/field.js",
+          "status": 200,
+          "sha256": "11b821ca95f77d9dcd4c164e8ee5c792749d58f3da51953a56b1f42ffee5e379"
+        },
+        {
+          "file": "src/qr-lab/read.js",
+          "status": 200,
+          "sha256": "560a5bd4ee1eb2676a846be8faaf0eb354d3c94f70e745121ee348648d9a21c6"
+        },
+        {
+          "file": "src/qr-lab/rgb.js",
+          "status": 200,
+          "sha256": "2804167420347acafb08c471aa2f157df7feaa48f6fe4b37956590c671b8b184"
+        },
+        {
+          "file": "src/qr-lab/rs.js",
+          "status": 200,
+          "sha256": "c2d653b9bb3f3e4570bb1bd1dcc5b3f83ebf5e8ca2977a61cbfd6b5a2383bb95"
+        },
+        {
+          "file": "src/qr-lab/splats.js",
+          "status": 200,
+          "sha256": "deb22403805bc1ca0075625efaac6dc6c75d41d799b0006f8b46d3700eecdb83"
+        },
+        {
+          "file": "src/qr-lab/steps.js",
+          "status": 200,
+          "sha256": "8e9cb8ef2857c0548daf96b14937c9a4914f453e4502899c1a6734517a32de57"
+        },
+        {
+          "file": "src/qr/build.js",
+          "status": 200,
+          "sha256": "9f4638032f0a88e9fd357df07a3cdd6b841bf1121650265e7732681925189fde"
+        },
+        {
+          "file": "src/qr/circle.js",
+          "status": 200,
+          "sha256": "3a4df9200d697cfdfa100b04012977e9adb3865fccd1b844217d3acecc92f057"
+        },
+        {
+          "file": "src/qr/content.js",
+          "status": 200,
+          "sha256": "1ba0c47ed1680c37aff6004fbf73f66a6138a11582060b54ba6296ea2c1c260c"
+        },
+        {
+          "file": "src/qr/crisp.js",
+          "status": 200,
+          "sha256": "ac82e83dce4eb5aeb7ded9d60af2bfc94d2d072f25e7b9ad1df84f3954160a75"
+        },
+        {
+          "file": "src/qr/encode.js",
+          "status": 200,
+          "sha256": "c71999bfeb3156d5cf9782905e679280a3392eb74b302210050e2608a336b900"
+        },
+        {
+          "file": "src/qr/field.js",
+          "status": 200,
+          "sha256": "c2b304d8b4b7abd61d5b39803fc7a551d88918e47607488e0f4077ce9e240f53"
+        },
+        {
+          "file": "src/qr/scan.js",
+          "status": 200,
+          "sha256": "77b2cb4318522fdc029a62260eb52e93e21c602c9547059a9ae9c713c6c645f6"
+        },
+        {
+          "file": "src/qr/share-code.js",
+          "status": 200,
+          "sha256": "e5c650ea44de79da8e8205b6511162506957aba878ad62629421817025a80df9"
+        },
+        {
+          "file": "src/qr/share.js",
+          "status": 200,
+          "sha256": "cffbc1a3f83036703650a752ebb4e1278f06fba9a12a11344013ad4c3fdd210d"
+        },
+        {
+          "file": "src/qr/themes.js",
+          "status": 200,
+          "sha256": "4af2df7ad3f1cb53ae1c3e9f5fc922ebc2724f5e96641fa2b08b3fdcf21a3dee"
+        },
+        {
+          "file": "src/rig-fx.js",
+          "status": 200,
+          "sha256": "b85c53bc05c38c903cb7ba1f1875677299f5a03f35be08c9bf20aacf7ce5e154"
+        },
+        {
+          "file": "src/rig.js",
+          "status": 200,
+          "sha256": "e36aa80ef907139b5b5178f29859756d7ed38be80185213d8bafc4fff616452c"
+        },
+        {
+          "file": "src/rigs.js",
+          "status": 200,
+          "sha256": "86473e7f550aea1a8f47eaf67d7ebf44a84c533e124907aa7c10bbf70af6f6c7"
+        },
+        {
+          "file": "src/science/crystal.js",
+          "status": 200,
+          "sha256": "12ec7a90aa842dbb26ef552fa351487f4983ac96a8c23aece3e402734a37b62d"
+        },
+        {
+          "file": "src/science/density.js",
+          "status": 200,
+          "sha256": "ba9410d2d0ca408d7987d7513508a25c0d027efae92187ac08165c86c7122a34"
+        },
+        {
+          "file": "src/science/field.js",
+          "status": 200,
+          "sha256": "7790c93ac0e5a6a5f53a68887b075effb09f7c8aad9282e76e60953ccf774293"
+        },
+        {
+          "file": "src/science/smlm.js",
+          "status": 200,
+          "sha256": "5a732c2ebce032326fadd9d2f46ca72ef68242b07fe58293e4afd966a0b3acec"
+        },
+        {
+          "file": "src/science/structures.js",
+          "status": 200,
+          "sha256": "11a4dd4299075c93aa587c9da7cea3e7aed276364262f0b4175b00a247a3ef64"
+        },
+        {
+          "file": "src/science/symmetry.js",
+          "status": 200,
+          "sha256": "4792a25be4567aacce4bbbd0dc62820c69663bc5868dad46487e07bb415773ca"
+        },
+        {
+          "file": "src/science/terrain.js",
+          "status": 200,
+          "sha256": "3e8bfc3fa369ca1e464c26b444844e443d388d5748030517e27d546319a15c2f"
+        },
+        {
+          "file": "src/sharpness.js",
+          "status": 200,
+          "sha256": "02d183ede63a21be5c022658a1d76f956b07c6eb721b14c4ee922499e3edb74a"
+        },
+        {
+          "file": "src/showcase/reel.js",
+          "status": 200,
+          "sha256": "a355ba626bf6e192f2f5731a1d5ed32475794ba392c011d3cb421cb8c20bb63e"
+        },
+        {
+          "file": "src/showcase/showcase.css",
+          "status": 200,
+          "sha256": "1d181cae8d94628988d862d81ec161c14345cf79a38803ee3a86b712ea627b82"
+        },
+        {
+          "file": "src/site-toy-pages.js",
+          "status": 200,
+          "sha256": "4031fe354279d222179790e05e0e147628a400555241606d2bc91194285f3a65"
+        },
+        {
+          "file": "src/sky/astro.js",
+          "status": 200,
+          "sha256": "c2f212da1306499b55c0e01e3618bd0eed2667b0a2af3cace3653624c92fd0b4"
+        },
+        {
+          "file": "src/sky/places.js",
+          "status": 200,
+          "sha256": "1fa2f7e009d414f9bbc07d38ea49a91006db92c9c3e39d096f3742136fd43be1"
+        },
+        {
+          "file": "src/songs.js",
+          "status": 200,
+          "sha256": "6621c8cc005ce53a5a433c52d6b485582d377524893ab57a31ddbb979ad5ba98"
+        },
+        {
+          "file": "src/sound-credits.js",
+          "status": 200,
+          "sha256": "ef703bac60f5ad6448f740d61b575b56111be07b7f951462bdbad91ec31e4159"
+        },
+        {
+          "file": "src/sound.js",
+          "status": 200,
+          "sha256": "071b9743166fe4ee5908266afc11a7e57877b5bc6bb79201914edc2358cf479c"
+        },
+        {
+          "file": "src/space/field.js",
+          "status": 200,
+          "sha256": "ddd9c6d3ab2807caa4eb2a101827e8dcded1280551e1ac75e24415b3e8a9b85e"
+        },
+        {
+          "file": "src/space/galaxies.js",
+          "status": 200,
+          "sha256": "57a6b85cf25f2cf2830695ebfc1cc96ed78554bfb3ed484fd0f641c6c5796fd5"
+        },
+        {
+          "file": "src/space/kepler.js",
+          "status": 200,
+          "sha256": "06ec32215c6b9c86159c98cc6bea7c5a8e2b6f5677e52a800e3f33e59d35d59e"
+        },
+        {
+          "file": "src/space/maps.js",
+          "status": 200,
+          "sha256": "fc98e3f7632dae9556902554203c93688220ee0641e7d110b49059949fef446e"
+        },
+        {
+          "file": "src/space/orbit-field.js",
+          "status": 200,
+          "sha256": "f0b7d060c764bcb2bd58c1c6a561e19279b467a5187d18791304c6472ed4349e"
+        },
+        {
+          "file": "src/space/places.js",
+          "status": 200,
+          "sha256": "0c9ec5769f76165ad15b8818b9562c4610f4cb4aa3163c745b281e8cdc154e64"
+        },
+        {
+          "file": "src/space/worlds.js",
+          "status": 200,
+          "sha256": "ab70946f27c2db1f368be706df9da45bf4b98c465c59119a301362afcfbc7cd8"
+        },
+        {
+          "file": "src/space/zoom.js",
+          "status": 200,
+          "sha256": "564a82ccd81175e571717b5b44b9e2605d8cf809cc4d97c9a3f5169bfac3da89"
+        },
+        {
+          "file": "src/stage.js",
+          "status": 200,
+          "sha256": "37af8f1915728208d6139e6000ec7b02f63104e3819b3927a47bd245c1e860c3"
+        },
+        {
+          "file": "src/state.js",
+          "status": 200,
+          "sha256": "2350aa35ec5879aea45e8a36acb8e0e836564316a1b48b114f22c2c0249b6e97"
+        },
+        {
+          "file": "src/tiny/draw.js",
+          "status": 200,
+          "sha256": "279a278df8d839dcf3c3a263380e98a9669bd5b19c19c6c001788aa008935eb7"
+        },
+        {
+          "file": "src/tiny/genes.js",
+          "status": 200,
+          "sha256": "9208229603e1797b9755516680b7e0506cfda3c1cd5d19d0a19cd06d666d0079"
+        },
+        {
+          "file": "src/tiny/genetic-code.js",
+          "status": 200,
+          "sha256": "a88f28f9f26c9bf3f63cae4b107c0aea55deef895dccea66939843555d7f4ffc"
+        },
+        {
+          "file": "src/tiny/protein-story.js",
+          "status": 200,
+          "sha256": "caa795a86e97b50ac8e0f8bde941ef9f7b5d887cef07eb9e1982b76489d0c316"
+        },
+        {
+          "file": "src/token-bounds.js",
+          "status": 200,
+          "sha256": "533ac421b6c2c0e555d1245cd5070bff6135b20a068e904bdbee3d9ff5e382b4"
+        },
+        {
+          "file": "src/toy-help.js",
+          "status": 200,
+          "sha256": "0e001f275863316e35e529db7c4d5f7ad02f86d4ca6ce4f7daa9739157169c45"
+        },
+        {
+          "file": "src/toy-sounds.js",
+          "status": 200,
+          "sha256": "3cc0bb2780ee317c0a49d03d7cf37bf36b158184bc7a1c204faf513b2cac800a"
+        },
+        {
+          "file": "src/toys.js",
+          "status": 200,
+          "sha256": "8feeb254147740faebe6c95400971202f373ce203e5e657d61fc40784d2d494f"
+        },
+        {
+          "file": "src/ui.js",
+          "status": 200,
+          "sha256": "c62d5d399d5fc722e09a3af061ad283d2065cc4a39bef121c6ecb4971bc1da49"
+        },
+        {
+          "file": "src/video3d/background.js",
+          "status": 200,
+          "sha256": "12e029303391b2001613bdbaeddfee708ff979ee1107205f7bb6144c03a5b314"
+        },
+        {
+          "file": "src/video3d/baked.js",
+          "status": 200,
+          "sha256": "172281c6ae5889dffa7e66260d1f4f23c62cfe15fa2238c858fef1f9b5f7d9e6"
+        },
+        {
+          "file": "src/video3d/cleanup.js",
+          "status": 200,
+          "sha256": "e6b04516018d85130f96c3a31adc15774a17535a0e16f92fe5ff97430748ddc6"
+        },
+        {
+          "file": "src/video3d/credit.js",
+          "status": 200,
+          "sha256": "3be797f2805045ea1970b703482c67da1c01060958680788d1bc16e2531beac0"
+        },
+        {
+          "file": "src/video3d/deadline.js",
+          "status": 200,
+          "sha256": "0fb75a0904483a3b17f65c2f723c7a33bc1032564f85a38cb703b0a515c5fb07"
+        },
+        {
+          "file": "src/video3d/extract.js",
+          "status": 200,
+          "sha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de"
+        },
+        {
+          "file": "src/video3d/flight.js",
+          "status": 200,
+          "sha256": "1ffd88692bdec36535cacc92afa6c02a055cde23c5d3661fe7ba9833a9f01fab"
+        },
+        {
+          "file": "src/video3d/frames.js",
+          "status": 200,
+          "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+        },
+        {
+          "file": "src/video3d/guide.js",
+          "status": 200,
+          "sha256": "5ce4eb0ae36603a18db0975fa4bca7409ba74b0e23ffae4200a78bec141512aa"
+        },
+        {
+          "file": "src/video3d/panel.js",
+          "status": 200,
+          "sha256": "14a660452fc239b460549bb816dee644d2192d4c5083759bbfdbb7302df9f6b0"
+        },
+        {
+          "file": "src/video3d/pause-view.js",
+          "status": 200,
+          "sha256": "5303a8cfd11ff98b16019c64d853bf4070d745fd318455f0c8be310c14a93096"
+        },
+        {
+          "file": "src/video3d/ply.js",
+          "status": 200,
+          "sha256": "bd08fb3df69cbce7c8b577cc5b8bdf551846b47bd778b7f39bc4fc1e7b7b6fad"
+        },
+        {
+          "file": "src/video3d/region.js",
+          "status": 200,
+          "sha256": "f9b2f0e42dfaaa6bb781dc0f958812999e32bfea6946e9c79c6b8e704a3e48cf"
+        },
+        {
+          "file": "src/video3d/run.js",
+          "status": 200,
+          "sha256": "88937b5783d32ca66b93914d99b76d6f2ca1891f1e91469f2284933c5e28a9a4"
+        },
+        {
+          "file": "src/video3d/samples.js",
+          "status": 200,
+          "sha256": "f2e7b59c601a9484e2b2a56cbeb472def99bd394a6d73154c3116b8265503b85"
+        },
+        {
+          "file": "src/video3d/scene.js",
+          "status": 200,
+          "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+        },
+        {
+          "file": "src/video3d/suitability.js",
+          "status": 200,
+          "sha256": "c8068742ded4bf4b0830d104bb8dfad4fd1bacf641cbdd912f87c2fa07e8f416"
+        },
+        {
+          "file": "src/video3d/surface-seed.js",
+          "status": 200,
+          "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+        },
+        {
+          "file": "src/video3d/tiers.js",
+          "status": 200,
+          "sha256": "37781fba7d9086d2ca688bed3cf534f7eacf49146e28639ac95a2b4bdd3c11ef"
+        },
+        {
+          "file": "src/video3d/walk.js",
+          "status": 200,
+          "sha256": "a6f1690d1a68c668b298e5b3f41e40a02970ca90fe7fa9f55bed45d6c9418c12"
+        },
+        {
+          "file": "src/viewer.js",
+          "status": 200,
+          "sha256": "895218783c8ca20f680871e114b584cf34945498adc4fb52f60c636772c89c3d"
+        },
+        {
+          "file": "src/viewers/client.js",
+          "status": 200,
+          "sha256": "ec644c9f964ac0320ec756e5bed466f424524ec21dd594fc0a30123a911dbbd3"
+        },
+        {
+          "file": "src/viewers/cloud-io.js",
+          "status": 200,
+          "sha256": "827c47ac8899e76954811e30979cbaaa62881e79787ef40c784f109dc3f5c572"
+        },
+        {
+          "file": "src/viewers/cloud-ops.js",
+          "status": 200,
+          "sha256": "48207a0805733ee72fec574e7059dd3396909aed81ed4a93a2e9ff9ff2dce62c"
+        },
+        {
+          "file": "src/viewers/engine.js",
+          "status": 200,
+          "sha256": "e89381d3df96ce804628cea2aa6a26e026e0cc1d90015fdd8af483af902c46c3"
+        },
+        {
+          "file": "src/viewers/splat-io.js",
+          "status": 200,
+          "sha256": "0de10ccb6ea508f2d12c795daa2a44cec8d8b84528c68d94e9161f81124ba74f"
+        },
+        {
+          "file": "src/viewers/splat-ops.js",
+          "status": 200,
+          "sha256": "9f76a1dad158435a8dd69229595ac3e01bad2bf64c862c45d914d726e4d6e3d4"
+        },
+        {
+          "file": "src/viewers/worker.js",
+          "status": 200,
+          "sha256": "417d02912e0a611acee83de8783d280b67144d3f26453cb4d045dc1dde12e57b"
+        },
+        {
+          "file": "src/voices.js",
+          "status": 200,
+          "sha256": "a70836016030a4cbfdb3f8ff550058e0b39baa63eb8a54a3405ddcd0ca5abce7"
+        },
+        {
+          "file": "src/volume/read.js",
+          "status": 200,
+          "sha256": "dcd31364f31b117012f7a0e5927274bdcd20e09309318987177bbe884a154acb"
+        },
+        {
+          "file": "src/volume/view.js",
+          "status": 200,
+          "sha256": "c04f6004abb10789ba81bcf8879789d7a68535448d081af8cdea72ef00c66acf"
+        },
+        {
+          "file": "src/worlds/camera.js",
+          "status": 200,
+          "sha256": "6618d7bfdcbd91611a291960877d118c9b0faf1abdb5148ff779ff1f3f0ae53d"
+        },
+        {
+          "file": "src/worlds/character-body.js",
+          "status": 200,
+          "sha256": "49a906fc05e0367e96198245fbc5c8bfd39678c5504104c9e8af4cbf792e66d6"
+        },
+        {
+          "file": "src/worlds/character-motion.js",
+          "status": 200,
+          "sha256": "01a30fbac680dec7d95fb124d3bcfb019f13d86319a40dab1d472f9ad9cdf6f6"
+        },
+        {
+          "file": "src/worlds/character-rig.js",
+          "status": 200,
+          "sha256": "80b7b3ba00551f8c1ad7114cefeb5f196e3bca00f677a2346f90a947be2628d2"
+        },
+        {
+          "file": "src/worlds/character.js",
+          "status": 200,
+          "sha256": "e4f4847ad4a4680dc1e5e010da67a7465c1450ab0a0b07441fb7e4f74cdfa99c"
+        },
+        {
+          "file": "src/worlds/controls.js",
+          "status": 200,
+          "sha256": "8061372cda264fc595412c6a1a6e4874b4fb71677b46cf54ccc6e470c1d43bdc"
+        },
+        {
+          "file": "src/worlds/hybrid.js",
+          "status": 200,
+          "sha256": "61e9d9d5c7aa15d6ba05b729e8c8996dddb88348f15a75d7fc8625912159fd6c"
+        },
+        {
+          "file": "src/worlds/lighting.js",
+          "status": 200,
+          "sha256": "51e68133953b2d6c3778ca9b737d8095ba8f76f4d002f0a2140b93b0ec699ec3"
+        },
+        {
+          "file": "src/worlds/lod.js",
+          "status": 200,
+          "sha256": "0a5a3e47f94010aaae9dcb9a0d8e588f974c5397dd953fbe508d2c206005d187"
+        },
+        {
+          "file": "src/worlds/main.js",
+          "status": 200,
+          "sha256": "523a56e1d74b2c1188e00e6e88ea2e7951548232f884f1e6e93ff6ed1cb293f1"
+        },
+        {
+          "file": "src/worlds/mesh-character.js",
+          "status": 200,
+          "sha256": "1abe96fa8c4a491160c6fe809d039c7c75954356dbaa4583ad4a86548ea88824"
+        },
+        {
+          "file": "src/worlds/mesh-props.js",
+          "status": 200,
+          "sha256": "89bc449b98a82c26928673ab245751566dd8c61b1d64449055dd5d08e13db516"
+        },
+        {
+          "file": "src/worlds/physics.js",
+          "status": 200,
+          "sha256": "243e3dbc9cab3054cf04311886d1ed7a8ae038096b75989bb9c4c37a9daed1ae"
+        },
+        {
+          "file": "src/worlds/props.js",
+          "status": 200,
+          "sha256": "325f195e00e0bb18700a57cf32a655fa65a3d568e427d48b109a011c69c798f5"
+        },
+        {
+          "file": "src/worlds/render.js",
+          "status": 200,
+          "sha256": "8b924a06ede82ca22894eb56f93300597f8ebc25bc38e47e61edf34d44af4810"
+        },
+        {
+          "file": "src/worlds/terrain.js",
+          "status": 200,
+          "sha256": "579a845ff32b048fc1f9b10d9a5c749c7db8b1e1391695f00951a55ecfa98709"
+        },
+        {
+          "file": "src/worlds/tiers.js",
+          "status": 200,
+          "sha256": "5ffe9d70dd2afa70fb2b28b3e36a261a8a88cc873e8b6edccebe1df7418bc194"
+        },
+        {
+          "file": "src/worlds/water.js",
+          "status": 200,
+          "sha256": "fa00ae075efc2e719b9519d267bcf0e11234cc31cfcef77300b8ddc04cb9180c"
+        },
+        {
+          "file": "src/worlds/world-file.js",
+          "status": 200,
+          "sha256": "5d47e660312581817e5012807b3337d1a90136ef40cff229f6bbaa71541ad17b"
+        },
+        {
+          "file": "src/worlds/world.js",
+          "status": 200,
+          "sha256": "9f8225e15388482d9c83406e2a9808e88344b61262c214d0262bdf2b7f956e7a"
+        },
+        {
+          "file": "styles.css",
+          "status": 200,
+          "sha256": "6293b4c8144aca60eabc3f9f1ab7fb53149fb16cc995a80b803b8146f895aa40"
+        },
+        {
+          "file": "vendor/playcanvas/playcanvas.min.mjs",
+          "status": 200,
+          "sha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c"
+        },
+        {
+          "file": "vendor/splatjs/src/gpu/context.js",
+          "status": 200,
+          "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+        },
+        {
+          "file": "vendor/splatjs/src/gs/background-fit.js",
+          "status": 200,
+          "sha256": "9b40decb9665ce73a5ef9b829d7e89887263c4cc7dbb75296ddb64fdcc5e6110"
+        },
+        {
+          "file": "vendor/splatjs/src/gs/hull.js",
+          "status": 200,
+          "sha256": "debc8a865d3fa888a5b38f2d18e0def03ddb8c81aad7cff60dae3a3519a3e593"
+        },
+        {
+          "file": "vendor/splatjs/src/gs/init.js",
+          "status": 200,
+          "sha256": "0d0807678ca0f01ef9eb75fe315b75449a11ff30336307601ad9a2787f263138"
+        },
+        {
+          "file": "vendor/splatjs/src/gs/shaders.js",
+          "status": 200,
+          "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+        },
+        {
+          "file": "vendor/splatjs/src/gs/trainer.js",
+          "status": 200,
+          "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+        },
+        {
+          "file": "vendor/splatjs/src/io/exif.js",
+          "status": 200,
+          "sha256": "1b6c2f0686405a8983e4e25ed14bc8ae25b274da5093cfb5a714af080ecdf719"
+        },
+        {
+          "file": "vendor/splatjs/src/io/frames.js",
+          "status": 200,
+          "sha256": "aacba5fec86cb0ce5ec2e8acbbce52e893980e3d7f3542d8bac9f5e5500c814e"
+        },
+        {
+          "file": "vendor/splatjs/src/io/pano.js",
+          "status": 200,
+          "sha256": "8a718f685aafbc0b6b996f941256fa9c87e22b8ee9ccd46872d7bc52cd1f97e2"
+        },
+        {
+          "file": "vendor/splatjs/src/io/ply.js",
+          "status": 200,
+          "sha256": "db748b836793bcb27a7f4649c6cb822b273b22107dd691f1238109e6d8dcfd2b"
+        },
+        {
+          "file": "vendor/splatjs/src/session.js",
+          "status": 200,
+          "sha256": "e50c9b04231c4e62ce804f6c48ab367155426d007674cece64c8f8773c287d8f"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/ba.js",
+          "status": 200,
+          "sha256": "760c181010415311e8ce84e52fc9e4429767108373d13b9121cdc724ef18ce63"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/features.js",
+          "status": 200,
+          "sha256": "36724e6226d5169b883015cca2775e913229ca57f5651aca2b149b3b2395140b"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/featworker.js",
+          "status": 200,
+          "sha256": "881c8b47d89505f2bc517ae0b0eca27bdecacfb4b90d0f6075e5c8d0cdfc3061"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/geometry.js",
+          "status": 200,
+          "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/global.js",
+          "status": 200,
+          "sha256": "9f58fe80ed84a85ba4e890df12e094ec6fa49297bd3b62f88a1d5a27d4bec75d"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/gpumatch.js",
+          "status": 200,
+          "sha256": "107319b57f6f4b6935f9799c127a90e01620b7fbbafd93c72f1ce7467341c662"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/matching.js",
+          "status": 200,
+          "sha256": "193f47de0488cab6eebd19d1125655e2c7702c706ffbacdba8dc60618102fb88"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/pairworker.js",
+          "status": 200,
+          "sha256": "03c0281f1ab833791d669c0ec8bfa35538eab2c5be2b08f951ad9b15d8c1b543"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/sfm.js",
+          "status": 200,
+          "sha256": "fd941c3b4af813b62f69e8e48171813afc69bfa1d9db8a12b093330e717ae06a"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/sift.js",
+          "status": 200,
+          "sha256": "4c75e5a2110a046ba957f415696d63eada1b460f449098f96fc1a6bfa65b2f59"
+        },
+        {
+          "file": "vendor/splatjs/src/sfm/worker-pool.js",
+          "status": 200,
+          "sha256": "cba333d31e0f86802a503bf1f4f530b386e47b14c540c2f976b47ca3dae1cca6"
+        }
+      ]
+    },
+    "url": "http://127.0.0.1:4181/",
+    "environment": {
+      "platform": "linux",
+      "architecture": "x64",
+      "cpuModel": "AMD EPYC 7763 64-Core Processor",
+      "cpuQuota": "400000 100000",
+      "browserVersion": "151.0.7922.173",
+      "executablePath": "/usr/bin/chromium",
+      "executableSha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+      "launchArgs": [
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader",
+        "--ignore-gpu-blocklist",
+        "--enable-webgl",
+        "--enable-unsafe-webgpu",
+        "--enable-features=Vulkan,WebGPU",
+        "--use-webgpu-adapter=swiftshader",
+        "--use-vulkan=swiftshader"
+      ],
+      "node": "v24.19.0",
+      "ffmpeg": "ffmpeg version 7.1.5-0+deb13u1 Copyright (c) 2000-2026 the FFmpeg developers",
+      "ffprobe": "ffprobe version 7.1.5-0+deb13u1 Copyright (c) 2007-2026 the FFmpeg developers"
+    },
+    "options": {
+      "gpuMode": "swiftshader",
+      "timeout": 1800000,
+      "rate": "3",
+      "setting": "auto",
+      "span": "Smallest native 5/10/20-second setting that covers the full clip",
+      "scoringSide": 640,
+      "profiles": {
+        "phone": {
+          "width": 390,
+          "height": 844,
+          "deviceScaleFactor": 1,
+          "profile": "low",
+          "mobile": true
+        },
+        "desktop": {
+          "width": 1440,
+          "height": 900,
+          "deviceScaleFactor": 1,
+          "profile": "high",
+          "mobile": false
+        }
+      }
+    },
+    "manifestSha256": "bf0fcb849988aedc5ac20965d567e304adec88129b4f6e47fea21bcb0395dbca",
+    "inputs": [
+      {
+        "id": "cat-track",
+        "sha256": "598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430",
+        "duration": 8,
+        "file": "cat-track.mp4"
+      },
+      {
+        "id": "cat-plays",
+        "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+        "duration": 8,
+        "file": "cat-plays.mp4"
+      },
+      {
+        "id": "buddha",
+        "sha256": "765070736b87205ff07211410a25b23b02e5e8e0092282a742e3c70f3e02f388",
+        "duration": 8,
+        "file": "buddha.mp4"
+      },
+      {
+        "id": "chameleon-flowers",
+        "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+        "duration": 10,
+        "file": "chameleon-flowers.mp4"
+      },
+      {
+        "id": "dianthus",
+        "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+        "duration": 5.916667,
+        "file": "dianthus.mp4"
+      },
+      {
+        "id": "pisac",
+        "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+        "duration": 10,
+        "file": "pisac.mp4"
+      },
+      {
+        "id": "sleeping-dog",
+        "sha256": "c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9",
+        "duration": 8,
+        "file": "sleeping-dog.mp4"
+      },
+      {
+        "id": "palace-statue",
+        "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+        "duration": 5,
+        "file": "palace-statue.mp4"
+      },
+      {
+        "id": "oa-street",
+        "sha256": "f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341",
+        "duration": 10,
+        "file": "oa-street.mp4"
+      },
+      {
+        "id": "ullard",
+        "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+        "duration": 10,
+        "file": "ullard.mp4"
+      },
+      {
+        "id": "snaefell",
+        "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+        "duration": 10,
+        "file": "snaefell.mp4"
+      },
+      {
+        "id": "fremantle-orbit",
+        "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+        "duration": 12,
+        "file": "fremantle-orbit.mp4"
+      },
+      {
+        "id": "ihasalu-orbit",
+        "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+        "duration": 12,
+        "file": "ihasalu-orbit.mp4"
+      },
+      {
+        "id": "fresnel-lens",
+        "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+        "duration": 10,
+        "file": "fresnel-lens.mp4"
+      },
+      {
+        "id": "saint-denis",
+        "sha256": "231358f2f7f9a1ad04e78c782106ad13e56bf0fcd88f665d86497365117fd405",
+        "duration": 10,
+        "file": "saint-denis.mp4"
+      },
+      {
+        "id": "horse-statue",
+        "sha256": "42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045",
+        "duration": 7.958333,
+        "file": "horse-statue.mp4"
+      },
+      {
+        "id": "royal-sovereign",
+        "sha256": "8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6",
+        "duration": 11.958333,
+        "file": "royal-sovereign.mp4"
+      },
+      {
+        "id": "viljandi-ruins",
+        "sha256": "d8c69186d35269f6d5f9c23cec21b46fa053659e97988098863d06ceaa7e508d",
+        "duration": 12,
+        "file": "viljandi-ruins.mp4"
+      },
+      {
+        "id": "kakerdi-bog",
+        "sha256": "5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8",
+        "duration": 12,
+        "file": "kakerdi-bog.mp4"
+      },
+      {
+        "id": "fjoloy",
+        "sha256": "2e01259d5d6dce77a46d98e43af9def48429d184b9422e0833957d82a1f9f210",
+        "duration": 12,
+        "file": "fjoloy.mp4"
+      }
+    ]
+  },
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "reference": null,
+  "selection": {
+    "ids": [
+      "dianthus"
+    ],
+    "profiles": [
+      "desktop"
+    ]
+  },
+  "renderer": "Production toy, PlayCanvas WebGL2, swiftshader WebGPU launch; emulated phone and desktop; native tier settings. Memory is aggregate sampled browser RSS, not GPU RAM. Timing is emulator timing, not physical-phone performance.",
+  "results": [
+    {
+      "id": "dianthus",
+      "profile": "desktop",
+      "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+      "started": "2026-10-15T10:45:17.062Z",
+      "status": "explained",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "firstViewMs": null,
+      "bakeMs": 432616.323025,
+      "mean": null,
+      "peakRssBytes": 1458958336,
+      "hostLoadAtStart": [
+        20.01,
+        20.22,
+        19.44
+      ],
+      "consoleErrors": [],
+      "phase": "bake",
+      "browser": "151.0.7922.173",
+      "assessment": {
+        "checked": false,
+        "verdict": "unknown",
+        "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+        "reasons": [],
+        "metrics": {
+          "frames": 0
+        },
+        "diagnostic": "This browser cannot play that video. Try an MP4 (H.264) or WebM file, or a shorter clip.",
+        "unplayable": false,
+        "duration": 0
+      },
+      "explanation": {
+        "diagnostic": "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting.",
+        "advice": "What worksWalk slowly around an object, or through a place, so the camera moves sideways and sees the same things from new angles.10 to 40 seconds, held steady, in even light.Plenty of texture: stone, bark, brick, leaves, signs.No zoom, and few people or cars moving.A drone circling a building or a statue is ideal.A file under 40 MB (trim a long video first).What failsTurning on the spot, or a panorama: the camera has to move, not just turn.A tripod time-lapse: the camera never moves.Blank walls, sky or water: nothing to match.Blur from fast moves or low light.",
+        "visible": true
+      },
+      "reason": "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting."
+    }
+  ]
+}

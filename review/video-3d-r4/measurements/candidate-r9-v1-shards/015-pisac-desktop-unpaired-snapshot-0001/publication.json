@@ -1,0 +1,31 @@
+{
+  "created": "2026-10-15T11:04:17.415Z",
+  "source": "/workspace/v3d-r4-media/candidate-r9-v1-shards/015-pisac-desktop-unpaired",
+  "runSha256": "235f7cef17ee221848e0b3d9a8aeb4963aeee14ce5f1513124deaa598b448364",
+  "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+  "cases": [
+    {
+      "id": "pisac",
+      "profile": "desktop",
+      "rowFingerprint": "0891fe753e328271355ad9f7322191bc2d2dc42ae59d80bfdd9e0ba7ff93edfb",
+      "files": [
+        {
+          "file": "model.json",
+          "bytes": 48083,
+          "sha256": "82540be879a7297e67154fd529e49dd0e29a3474d4cd99280a66229a62ab1740"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 3866011,
+          "sha256": "9c50342adeca5bfa811638fd0ae04f9b271d6454eaab9fc7aad10ea8f0c932ad"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2707,
+          "sha256": "9ad9a192133e0b64ca6ee6bbfec14920953901787c7f8ed4b3c0da9f22b24d9b"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

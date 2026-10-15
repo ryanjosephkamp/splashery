@@ -1,0 +1,251 @@
+{
+  "status": "strict-final-r9-paired-snapshot",
+  "at": "2026-10-15T10:30:16.224705+00:00",
+  "sourceRunCounts": {
+    "paired": 10,
+    "unpaired": 5
+  },
+  "recordedRows": {
+    "paired": 10,
+    "unpaired": 5
+  },
+  "snapshot": "/workspace/v3d-r4-media/candidate-r9-final-reconcile-snapshots-r1/0001",
+  "runSha256": "bb5f89947dfe44cdff21388a8dafec613b22f7b331241c61e37331b6a39529fd",
+  "pairedProvenanceSha256": "fca50d7bc2b5d22bddecd7ee77d5c5bb0942444fe6ddf12f008d544bcb2d8ca0",
+  "unpairedProvenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+  "comparison": "/workspace/v3d-r4-media/follow-r9-final-reconcile-r1-control/comparison-0001.json",
+  "coverage": {
+    "expectedRows": 40,
+    "recordedRows": 10,
+    "pending": [
+      "cat-track/desktop",
+      "buddha/desktop",
+      "chameleon-flowers/desktop",
+      "dianthus/desktop",
+      "pisac/phone",
+      "pisac/desktop",
+      "sleeping-dog/desktop",
+      "palace-statue/phone",
+      "palace-statue/desktop",
+      "oa-street/desktop",
+      "ullard/desktop",
+      "snaefell/desktop",
+      "fremantle-orbit/phone",
+      "fremantle-orbit/desktop",
+      "ihasalu-orbit/phone",
+      "ihasalu-orbit/desktop",
+      "fresnel-lens/phone",
+      "fresnel-lens/desktop",
+      "saint-denis/phone",
+      "saint-denis/desktop",
+      "horse-statue/phone",
+      "horse-statue/desktop",
+      "royal-sovereign/phone",
+      "royal-sovereign/desktop",
+      "viljandi-ruins/phone",
+      "viljandi-ruins/desktop",
+      "kakerdi-bog/phone",
+      "kakerdi-bog/desktop",
+      "fjoloy/phone",
+      "fjoloy/desktop"
+    ],
+    "unaccounted": [],
+    "allOutcomesAccounted": false
+  },
+  "master": "/workspace/v3d-r4-media/candidate-r9-paired-master-v1",
+  "rows": [
+    {
+      "id": "cat-track",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "cat-plays",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "buddha",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 12.510886590230504,
+        "ssim": 0.5043333402555777,
+        "laplacian": 0.00020244435293427198,
+        "sourceLaplacian": 0.004505375639808675
+      }
+    },
+    {
+      "id": "dianthus",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 17.85118673313988,
+        "ssim": 0.4727081808450807,
+        "laplacian": 0.0024293356647266547,
+        "sourceLaplacian": 0.028599819947261768
+      }
+    },
+    {
+      "id": "sleeping-dog",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "oa-street",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "ullard",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 14.303252101173811,
+        "ssim": 0.44988191146302325,
+        "laplacian": 0.0003059415664534268,
+        "sourceLaplacian": 0.018890581034057746
+      }
+    },
+    {
+      "id": "snaefell",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 17.513031461499416,
+        "ssim": 0.6180886275057733,
+        "laplacian": 0.000274385266613363,
+        "sourceLaplacian": 0.01122117442889559
+      }
+    }
+  ],
+  "unpairedRunsPreserved": [
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r9-v1-shards/006-cat-track-desktop-unpaired",
+      "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+      "runSha256": "d81c52812ec193572e4c71772f5d6d883c15905689a8385d295317e13855c95e",
+      "rows": [
+        {
+          "id": "cat-track",
+          "profile": "desktop",
+          "status": "harness-error",
+          "accounted": false,
+          "rowFingerprint": "5f3883e94b27930eece5c4281c5d3b3becf1060d390daa8e221fea6cf038c9fa",
+          "caseInventorySha256": "010306614774eac6f56c5f759422df364d8a4c93406d18de5bd64795e4fe8c3e"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "cat-track",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r9-v1-shards/009-buddha-desktop-unpaired",
+      "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+      "runSha256": "fe4ec23d2ef6759856a18f021221332fabaf8032aa55ff1b16869ff3856193ae",
+      "rows": [
+        {
+          "id": "buddha",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "ed7145aeeeada59b95d240257c0d53c3a29dde598794fab1d2bdd8b9dc087827",
+          "caseInventorySha256": "0ab8629334e96981f566161bdff59e2924565c648a8f57511101f17cad9551b5"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "buddha",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r9-v1-shards/012-chameleon-flowers-desktop-unpaired",
+      "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+      "runSha256": "cf532547955b91f4f2c5143a3129b8c29562e0fdde1be3f69740efeeba74974f",
+      "rows": [
+        {
+          "id": "chameleon-flowers",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "bcc22dffc4d3f0748879e93c7fefafd2ea4e3c55152e98b61380e0f93bee6e64",
+          "caseInventorySha256": "0a893cb6f5d74f8019ae18f7c9bef97ee348947c92eada0c88022b3637618488"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "chameleon-flowers",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r9-v1-shards/013-dianthus-desktop-unpaired",
+      "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+      "runSha256": "2a7c834a7a06a12c191484580180e44bfcd15e0c73258ed74075108e65d07bba",
+      "rows": [
+        {
+          "id": "dianthus",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "14a4db2b2e13b1a5b7087aa78db0c7e3d5b057fa69e843fa02eacf199ea41302",
+          "caseInventorySha256": "92cb66ee96549080ef7a8bb07d687d7588664b9494de62e412542b79c55b9ab5"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "dianthus",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r9-v1-shards/015-pisac-desktop-unpaired",
+      "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+      "runSha256": "235f7cef17ee221848e0b3d9a8aeb4963aeee14ce5f1513124deaa598b448364",
+      "rows": [
+        {
+          "id": "pisac",
+          "profile": "desktop",
+          "status": "harness-error",
+          "accounted": false,
+          "rowFingerprint": "0891fe753e328271355ad9f7322191bc2d2dc42ae59d80bfdd9e0ba7ff93edfb",
+          "caseInventorySha256": "59d8767ccc883cc2654aecb56f0b1f0e9cbd22b2c9c1bd15dc6668e960561651"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "pisac",
+          "profile": "desktop"
+        }
+      ]
+    }
+  ],
+  "originalControlUnchanged": true,
+  "rawRowsArtifactsUnchanged": true,
+  "noSignals": true,
+  "noNativeLaunch": true,
+  "noR10StateMutation": true,
+  "limitations": "Missing/unaccounted cases still block strict acceptance; emulator shared-load timing is not physical-phone or isolated performance."
+}

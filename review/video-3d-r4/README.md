@@ -4,6 +4,34 @@ This branch is review evidence only and must never be merged. The accepted corpu
 candidate quality measurements. The product branch is `codex/video-3d-r4`. The audit records results
 and limitations; the goal is still being measured.
 
+## Revision 10 capture
+
+The [static interactive review](evidence/review-dashboard-public-r1/snapshot-0001/index.html) keeps
+all 40 declared cases visible. It includes 26 captured main outcomes, ten strict revision-9 rows,
+five strict revision-10 rows, and 27 original raw attempts listed separately. Missing outcomes and
+failures cannot establish acceptance. Its links resolve to the immutable publication copies beside
+it. The four-core SwiftShader and overlapping-load limitations remain visible in the page.
+
+[Revision-10 samples](samples/candidate-r10-r1/samples.json) preserve all 74 held-out views across
+six samples and both profiles on frozen source `1cbccf108294437a2b6ae8b07dead9c56d3f3609`. This
+checks existing bakes and viewer behavior; it does not retrain the samples.
+
+The native plant phone bake reached SSIM 0.688856 versus main's 0.668773 and 4.971 times main's
+sharpness. Its bake was shorter, but its first 3D view was slower. The completed Dianthus shard also
+has a quality gain and slower first view; its learned environment failed internal validation and was
+correctly rejected. No partial subset establishes the corpus or phone timing goals.
+
+[All 16 full-suite logs](evidence/ci-d12824/full-suite-summary.json) on `d1282403` record 327 spec
+files and 2,812 tests: 2,799 passed, 12 failed, and one existing test was skipped. Rechecks do not
+waive failures. This precedes the learned-environment commits.
+
+[R10 launch and sample receipts](evidence/r10-launch-and-sample-receipts-r1/) bind the source,
+protocol, handoff, and successful sample recheck.
+[R9 final reconciliation](evidence/r9-final-reconciliation-r1/) retains ten paired and five unpaired
+outcomes, including its two harness errors. The raw rows and artifacts keep their original bytes and
+source licenses. The added reconciliation script is an MIT reproduction aid outside the original raw
+control inventory.
+
 ## Reuse and attribution
 
 Each source clip, derived model, screenshot, and comparison retains the corresponding source license

@@ -1,0 +1,72 @@
+{
+  "status": "prepared-root-freeze-and-handoff-pending",
+  "deadline": "2026-10-15T16:15:00+00:00",
+  "ids": [
+    "cat-track",
+    "cat-plays",
+    "buddha",
+    "chameleon-flowers",
+    "dianthus",
+    "pisac",
+    "sleeping-dog",
+    "palace-statue",
+    "oa-street",
+    "ullard",
+    "snaefell",
+    "fremantle-orbit",
+    "ihasalu-orbit",
+    "fresnel-lens",
+    "saint-denis",
+    "horse-statue",
+    "royal-sovereign",
+    "viljandi-ruins",
+    "kakerdi-bog",
+    "fjoloy"
+  ],
+  "runnerCwd": "/workspace/splashery-v3d-bench-tools-r10",
+  "runnerPath": "/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/override:/opt/codex/runtimes/codex-primary-runtime/dependencies/python/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin:/opt/codex/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/home/agent/.local/bin:/opt/codex/runtimes/codex-primary-runtime/dependencies/bin/fallback",
+  "nodeExecutable": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+  "url": "http://127.0.0.1:4181/",
+  "reference": "/workspace/v3d-r4-media/main-master-r1",
+  "baselineProvenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "nativeSettings": "Actual Auto tier, original fullclip5/10/20s selection,3fps sampling, unchanged default1800000ms host budget, SwiftShader launch explicitly retained. No tier/settings overrides.",
+  "policy": "Fresh R10 shards only; R9/R8 outcomes never imported. Each profile waits solely for its root-observed prior native Node identity and every observed descendant, then progresses independently. Existing case folders, results, or reserved/launched shards consume that R10 case/mode irrespective of outcome or quality. At most one initial unpaired attempt and one predeclared paired repeat once the immutable main row becomes accountable. Paired attempts are never retried. Order: accountable main, recorded incomplete main, missing main; manifest order within groups.",
+  "identityPolicy": "Ownership receipt includes original command; liveness matches PID+startTicks and non-zombie state, so descendant process-title/exec changes do not release an owned live process.",
+  "metadataNotice": "Empty per-case metadata inherits exact established provenance/source-file inventory and no results; the unchanged strict runner recomputes provenance before browser startup. Newly observed metadata/fullcase inventories are current hash bindings, not historical original benchmark hashes.",
+  "aggregation": "Strict immutable R10 tools join; paired provenance only; fresh atomic snapshots every5new paired rows and at completion. All raw attempts/failures remain untouched. Strict compare records missing/unaccounted cohort; no acceptance or timing recovery is inferred.",
+  "codeAttribution": "Made by Ryan with Codex (GPT-6), MIT. No product/runtime/protocol edits.",
+  "created": "2026-10-15T10:09:01.161041+00:00",
+  "authorization": null,
+  "productCommit": null,
+  "toolsCommit": null,
+  "servedSourceSha256": null,
+  "pairedProvenanceSha256": null,
+  "unpairedProvenanceSha256": null,
+  "protocolSha256": "bf94e388a2d71f1d3f7c75dd5d1855a4d69ddd8ba946dc81905faa85746e57ad",
+  "profiles": [
+    "phone",
+    "desktop"
+  ],
+  "priorCoordinator": {
+    "pid": 196899,
+    "startTicks": "1642582",
+    "retiredByRoot": false
+  },
+  "priorNativeBlockers": null,
+  "immutableFiles": {},
+  "requiredBeforeLaunch": [
+    "Explicit root launch authorization after final source freeze",
+    "Exact productCommit/toolsCommit/servedSourceSHA and newly derived paired/unpaired provenance",
+    "Runtime freeze receipt and independently prepared template receipts bound into immutableFiles",
+    "Concrete root-supplied retired-coordinator and ALL per-profile native/descendant PID/startTicks handoff",
+    "CPU tests/launch preflight receipts bound; all output paths fresh"
+  ],
+  "cpuVerification": {
+    "tests": 26,
+    "passed": 26,
+    "durationSeconds": 9.829,
+    "log": "/workspace/v3d-r4-media/follow-r10-v1-control/cpu-tests-final.log",
+    "noBrowserOrGpu": true,
+    "testFixtureNotice": "Copied R8case/frozen R9protocol modules used onlyforCPUcorruptionfixtures, never imported intoR10sources."
+  }
+}

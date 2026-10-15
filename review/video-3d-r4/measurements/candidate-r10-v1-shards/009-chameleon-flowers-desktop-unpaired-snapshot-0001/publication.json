@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T11:03:00.632Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/009-chameleon-flowers-desktop-unpaired",
+  "runSha256": "39a5ba17e92346e97fab56cf66c958613aef4f7c96c3c8eb6ca27c16149846ef",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "cases": [
+    {
+      "id": "chameleon-flowers",
+      "profile": "desktop",
+      "rowFingerprint": "c4d8e6b8b45bde29af5a0f3891861d6c0ffadbc6d89d2f4ed1c70ddfd810aacb",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1129090,
+          "sha256": "64b6cf802a80f0d5af2f984b38aa8ab73efb5dce3da07f19e8a5e79cc5dca8ce"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1739,
+          "sha256": "f3a392549edc33453d8a9ecfd04cf62005bb1b7206833335e2395eb8f2b0028a"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

@@ -1,0 +1,3 @@
+Dashboard code and reports made by Ryan with Codex (GPT-6), MIT.
+Synthetic test fixture: CC0, never an observation.
+All source media retain individual authors, licenses, source links, and hashes from the separately preserved corpus manifest and attribution files.

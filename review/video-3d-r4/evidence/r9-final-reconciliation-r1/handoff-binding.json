@@ -1,0 +1,13 @@
+{
+  "checkedAt": "2026-10-15T10:21:29.814354+00:00",
+  "handoffSHA256": "6ab1db32c33f44e414402f6d5fad87be47f4bf80b86847a77d4b82bc2d4fd0dc",
+  "matchesFinalR10Declaration": true,
+  "R10DeclarationSHA256": "ab9411e64212456e403a0a9e738b54b51fcfa1fb4c690b669fd94d741f4d65f0",
+  "priorCoordinator": {
+    "pid": 196899,
+    "startTicks": "1642582",
+    "alive": false,
+    "observedState": "Z"
+  },
+  "readOnlyR10": true
+}

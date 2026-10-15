@@ -1,0 +1,58 @@
+{
+  "checkedAt": "2026-10-15T10:01:22.900717+00:00",
+  "scope": "Outside-only CPU/source review and analytic accumulator prototype; no production integration, realpixels, GPU, or acceptance claim",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 8555,
+      "sha256": "866f462f337fa3d282da1d9107539b6999f507970dcf160233ab50ea931af5a0"
+    },
+    {
+      "path": "accumulator.mjs",
+      "bytes": 4591,
+      "sha256": "fca3b04cbb110f1b52cba92799c714b39d00120795eb58973d26fd2d99b4d6d7"
+    },
+    {
+      "path": "controls-before.json",
+      "bytes": 1885,
+      "sha256": "f3fb058b579211e39281775d399fcde89221a1549c6b8134db9dc328bfd9e3e4"
+    },
+    {
+      "path": "source-snapshots/src/video3d/run.js",
+      "bytes": 19383,
+      "sha256": "8fd7df54c0875350e2893060a5863865577f433e8fb6f236a9c1769bd2ed5d6c"
+    },
+    {
+      "path": "source-snapshots/src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "path": "source-snapshots/vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "path": "source-snapshots/vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119499,
+      "sha256": "6f11213d55191fea9d45443cb2353e231a4b215ab781762cd98a982f9a57c8dd"
+    },
+    {
+      "path": "source-snapshots/vendor/splatjs/src/session.js",
+      "bytes": 65637,
+      "sha256": "429fee8ea5659cb7e2d3f53313146d4eb3e965ca8c501295fd4b565b6d2c0c60"
+    },
+    {
+      "path": "test-accumulator.mjs",
+      "bytes": 4961,
+      "sha256": "9649dc0263dc6aa9cb5ee165edeb783b272875d55be1f168bc3cc38c16f81172"
+    },
+    {
+      "path": "tests.log",
+      "bytes": 1911,
+      "sha256": "bf8f4283814dd0a98955c831270dbe32a70752d713729d5d05bc890f7de8f102"
+    }
+  ],
+  "tests": "9pass,0fail,405.18ms Node22",
+  "ruleCheck": "none"
+}

@@ -1,0 +1,317 @@
+{
+  "complete": false,
+  "provenanceCompatible": true,
+  "cohort": {
+    "inputs": [
+      {
+        "id": "cat-track",
+        "sha256": "598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430"
+      },
+      {
+        "id": "cat-plays",
+        "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085"
+      },
+      {
+        "id": "buddha",
+        "sha256": "765070736b87205ff07211410a25b23b02e5e8e0092282a742e3c70f3e02f388"
+      },
+      {
+        "id": "chameleon-flowers",
+        "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e"
+      },
+      {
+        "id": "dianthus",
+        "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5"
+      },
+      {
+        "id": "pisac",
+        "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d"
+      },
+      {
+        "id": "sleeping-dog",
+        "sha256": "c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9"
+      },
+      {
+        "id": "palace-statue",
+        "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de"
+      },
+      {
+        "id": "oa-street",
+        "sha256": "f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341"
+      },
+      {
+        "id": "ullard",
+        "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b"
+      },
+      {
+        "id": "snaefell",
+        "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6"
+      },
+      {
+        "id": "fremantle-orbit",
+        "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747"
+      },
+      {
+        "id": "ihasalu-orbit",
+        "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d"
+      },
+      {
+        "id": "fresnel-lens",
+        "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8"
+      },
+      {
+        "id": "saint-denis",
+        "sha256": "231358f2f7f9a1ad04e78c782106ad13e56bf0fcd88f665d86497365117fd405"
+      },
+      {
+        "id": "horse-statue",
+        "sha256": "42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045"
+      },
+      {
+        "id": "royal-sovereign",
+        "sha256": "8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6"
+      },
+      {
+        "id": "viljandi-ruins",
+        "sha256": "d8c69186d35269f6d5f9c23cec21b46fa053659e97988098863d06ceaa7e508d"
+      },
+      {
+        "id": "kakerdi-bog",
+        "sha256": "5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8"
+      },
+      {
+        "id": "fjoloy",
+        "sha256": "2e01259d5d6dce77a46d98e43af9def48429d184b9422e0833957d82a1f9f210"
+      }
+    ],
+    "profiles": [
+      "phone",
+      "desktop"
+    ]
+  },
+  "missingMain": [
+    "oa-street/desktop",
+    "ullard/desktop",
+    "snaefell/desktop",
+    "fremantle-orbit/desktop",
+    "ihasalu-orbit/desktop",
+    "fresnel-lens/desktop",
+    "saint-denis/desktop",
+    "horse-statue/desktop",
+    "royal-sovereign/phone",
+    "royal-sovereign/desktop",
+    "viljandi-ruins/phone",
+    "viljandi-ruins/desktop",
+    "kakerdi-bog/phone",
+    "kakerdi-bog/desktop",
+    "fjoloy/phone",
+    "fjoloy/desktop"
+  ],
+  "missingCandidate": [
+    "cat-track/desktop",
+    "buddha/desktop",
+    "chameleon-flowers/desktop",
+    "dianthus/desktop",
+    "pisac/phone",
+    "pisac/desktop",
+    "sleeping-dog/desktop",
+    "palace-statue/phone",
+    "palace-statue/desktop",
+    "oa-street/desktop",
+    "ullard/desktop",
+    "snaefell/desktop",
+    "fremantle-orbit/phone",
+    "fremantle-orbit/desktop",
+    "ihasalu-orbit/phone",
+    "ihasalu-orbit/desktop",
+    "fresnel-lens/phone",
+    "fresnel-lens/desktop",
+    "saint-denis/phone",
+    "saint-denis/desktop",
+    "horse-statue/phone",
+    "horse-statue/desktop",
+    "royal-sovereign/phone",
+    "royal-sovereign/desktop",
+    "viljandi-ruins/phone",
+    "viljandi-ruins/desktop",
+    "kakerdi-bog/phone",
+    "kakerdi-bog/desktop",
+    "fjoloy/phone",
+    "fjoloy/desktop"
+  ],
+  "unaccounted": [
+    {
+      "run": "main",
+      "key": "cat-track/desktop",
+      "status": "timeout"
+    },
+    {
+      "run": "main",
+      "key": "buddha/desktop",
+      "status": "timeout"
+    },
+    {
+      "run": "main",
+      "key": "chameleon-flowers/desktop",
+      "status": "timeout"
+    },
+    {
+      "run": "main",
+      "key": "dianthus/desktop",
+      "status": "timeout"
+    },
+    {
+      "run": "main",
+      "key": "pisac/phone",
+      "status": "harness-error"
+    },
+    {
+      "run": "main",
+      "key": "pisac/desktop",
+      "status": "timeout"
+    },
+    {
+      "run": "main",
+      "key": "sleeping-dog/desktop",
+      "status": "timeout"
+    },
+    {
+      "run": "main",
+      "key": "palace-statue/phone",
+      "status": "timeout"
+    },
+    {
+      "run": "main",
+      "key": "palace-statue/desktop",
+      "status": "timeout"
+    }
+  ],
+  "neverFails": false,
+  "profiles": {
+    "phone": {
+      "clips": 16,
+      "expectedClips": 20,
+      "baselineMeasurable": 9,
+      "pairedMeasurable": 4,
+      "scoreScope": "Paired successful clips only; explained rejections have no image score.",
+      "scoredIds": [
+        "chameleon-flowers",
+        "dianthus",
+        "ullard",
+        "snaefell"
+      ],
+      "complete": false,
+      "coverage": false,
+      "sharpnessMain": 0.00007570764815877497,
+      "sharpnessCandidate": 0.0002901634165333949,
+      "sharpnessGain": 3.8326830061457033,
+      "ssimMain": 0.5473564978747492,
+      "ssimCandidate": 0.4885207605503292,
+      "ssimGain": -0.058835737324419934,
+      "timing": {
+        "firstViewMs": {
+          "mainMedian": null,
+          "candidateMedian": null,
+          "mainWorst": null,
+          "candidateWorst": null
+        },
+        "bakeMs": {
+          "mainMedian": null,
+          "candidateMedian": null,
+          "mainWorst": null,
+          "candidateWorst": null
+        }
+      },
+      "noSlower": false,
+      "qualityEvidenceComplete": true,
+      "quality": false,
+      "outcomes": [
+        {
+          "id": "cat-track",
+          "status": "explained",
+          "reason": "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second."
+        },
+        {
+          "id": "cat-plays",
+          "status": "explained",
+          "reason": "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second."
+        },
+        {
+          "id": "buddha",
+          "status": "explained",
+          "reason": "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second."
+        },
+        {
+          "id": "chameleon-flowers",
+          "status": "finished",
+          "reason": null
+        },
+        {
+          "id": "dianthus",
+          "status": "finished",
+          "reason": null
+        },
+        {
+          "id": "sleeping-dog",
+          "status": "explained",
+          "reason": "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second."
+        },
+        {
+          "id": "oa-street",
+          "status": "explained",
+          "reason": "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting."
+        },
+        {
+          "id": "ullard",
+          "status": "finished",
+          "reason": null
+        },
+        {
+          "id": "snaefell",
+          "status": "finished",
+          "reason": null
+        }
+      ]
+    },
+    "desktop": {
+      "clips": 8,
+      "expectedClips": 20,
+      "baselineMeasurable": 0,
+      "pairedMeasurable": 0,
+      "scoreScope": "Paired successful clips only; explained rejections have no image score.",
+      "scoredIds": [],
+      "complete": false,
+      "coverage": false,
+      "sharpnessMain": null,
+      "sharpnessCandidate": null,
+      "sharpnessGain": null,
+      "ssimMain": null,
+      "ssimCandidate": null,
+      "ssimGain": null,
+      "timing": {
+        "firstViewMs": {
+          "mainMedian": null,
+          "candidateMedian": null,
+          "mainWorst": null,
+          "candidateWorst": null
+        },
+        "bakeMs": {
+          "mainMedian": null,
+          "candidateMedian": null,
+          "mainWorst": null,
+          "candidateWorst": null
+        }
+      },
+      "noSlower": false,
+      "qualityEvidenceComplete": false,
+      "quality": false,
+      "outcomes": [
+        {
+          "id": "cat-plays",
+          "status": "explained",
+          "reason": "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting."
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,45 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:12] "GET / HTTP/1.1" 200 -
+
+Running 12 tests using 1 worker
+
+(node:237124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:237124) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] code 404, message File not found
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /favicon.ico HTTP/1.1" 404 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/sfm/sfm.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/sfm/features.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/sfm/sift.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:18] "GET /vendor/splatjs/src/sfm/worker-pool.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:19] "GET /vendor/splatjs/src/sfm/global.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:19] "GET /vendor/splatjs/src/sfm/ba.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:19] "GET /vendor/splatjs/src/sfm/gpumatch.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:19] "GET /vendor/splatjs/src/sfm/matching.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:19] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:06:19] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✓   1 [chromium] › tests/cdx-v3d-background-fit-gpu.spec.mjs:4:1 › constant environment fitting uses GPU targets after low-memory cleanup and preserves every model parameter (7.2s)
+  ✓   2 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:13:1 › background fitting joins the active frame and suppresses preview and training until it releases (221ms)
+  ✓   3 [chromium] › tests/cdx-v3d-background-fit-session.spec.mjs:47:1 › a late background read cannot return a result or change scheduling for a replacement trainer (52ms)
+  ✓   4 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:24:1 › a transparent black renderer recovers exact packed target color in RGB byte order (15ms)
+  ✓   5 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:42:1 › pooled varying-transmittance cameras recover one shared color, including exposure (81ms)
+  ✓   6 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:64:1 › the constrained optimum clips independent channels and beats a direct color grid (1.1s)
+  ✓   7 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:83:1 › a hardcoded exposure example fits the raw renderer rather than an exposed screenshot (18ms)
+  ✓   8 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:95:1 › empty or fully opaque input has no identifiable background energy (56ms)
+  ✓   9 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:108:1 › invalid target pixels skip arbitrary raw storage and are counted separately (3ms)
+  ✓  10 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:120:1 › soft-alpha and bad raw packets reject atomically without keeping a partial chunk (55ms)
+  ✓  11 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:140:1 › dimensions, moment state, color, and exposure conventions fail closed (69ms)
+  ✓  12 [chromium] › tests/cdx-v3d-background-fit.spec.mjs:171:1 › streamed moments match direct fixed-model SSE and cannot increase pooled training MSE (1.6s)
+
+  12 passed (18.0s)

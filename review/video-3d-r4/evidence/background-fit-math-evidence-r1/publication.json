@@ -1,0 +1,42 @@
+{
+  "created": "2026-10-15T11:03:00.658Z",
+  "source": "/workspace/v3d-r4-media/background-fit-math-evidence-r1",
+  "sourceInventory": [
+    {
+      "file": "README.md",
+      "bytes": 3926,
+      "sha256": "62bfc08002ad28be90c5add5d47e2443a9d63ecf6a6c927b26133c4d0edec09b"
+    },
+    {
+      "file": "final.log",
+      "bytes": 1878,
+      "sha256": "b8504bcf4de1fea0cc1e0e99f06a730218517f65857fda4b7d613aa9f0b6e800"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 1243,
+      "sha256": "9da3998fb400afdc790316c7f2bfd46fa2fc5496b90d00e248b79c7806ee763a"
+    },
+    {
+      "file": "tests/cdx-v3d-background-fit.spec.mjs",
+      "bytes": 7932,
+      "sha256": "ba9039d000cb3b7dd3f3e5105de26c21d68e2109cee34f8f33ac67db5ac68da4"
+    },
+    {
+      "file": "tests.log",
+      "bytes": 1717,
+      "sha256": "83299a0cdda5a3b54d0d8450bfc35d6dd7148ff224cb789e1150fb975c8b8078"
+    },
+    {
+      "file": "vendor/splatjs/LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/background-fit.js",
+      "bytes": 4475,
+      "sha256": "9b40decb9665ce73a5ef9b829d7e89887263c4cc7dbb75296ddb64fdcc5e6110"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

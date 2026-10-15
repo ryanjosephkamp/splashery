@@ -1,0 +1,100 @@
+{
+  "created": "2026-10-15T10:24:24.610207+00:00",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 1621,
+      "sha256": "4da593f8768a9d19614fbf9c8a62790183f1ffc40ee94a8c224a5d6348818349"
+    },
+    {
+      "file": "frozen-r10-gpu.log",
+      "bytes": 3186,
+      "sha256": "f3253e97f5a4108effff09893d1d8c3c96f2f703d9d6606cc659271fefe29605"
+    },
+    {
+      "file": "product-wiring.log",
+      "bytes": 16925,
+      "sha256": "4cc93ace35de14fbc609fbb53b5b5c5c5762b4977f2722f4c3956c45766b7873"
+    },
+    {
+      "file": "receipt-pending.json",
+      "bytes": 2811,
+      "sha256": "0446ae80b6d2b66598493f514078074cc2e2e3f596946b25e955b85a30273cc1"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 3058,
+      "sha256": "c393c3ea31b8382f50b8489a5254c12a6851ed09589ce62b8b186141e54f650a"
+    },
+    {
+      "file": "source/src/packs/video3d.js",
+      "bytes": 27079,
+      "sha256": "5e2b71d8a1eb6f2ae815e3f99ca650f6b29cd5ef0a6261fa30e4f2a1219637a3"
+    },
+    {
+      "file": "source/src/video3d/background.js",
+      "bytes": 3108,
+      "sha256": "12e029303391b2001613bdbaeddfee708ff979ee1107205f7bb6144c03a5b314"
+    },
+    {
+      "file": "source/src/video3d/run.js",
+      "bytes": 20411,
+      "sha256": "88937b5783d32ca66b93914d99b76d6f2ca1891f1e91469f2284933c5e28a9a4"
+    },
+    {
+      "file": "source/tests/cdx-v3d-background-fit-gpu.spec.mjs",
+      "bytes": 5431,
+      "sha256": "194f97fb625d56026481fb0b1968889a06fd85117a034a5bbc38898fb27fb8c8"
+    },
+    {
+      "file": "source/tests/cdx-v3d-background-fit-session.spec.mjs",
+      "bytes": 5180,
+      "sha256": "4bb6e1db3abd406acce7db8194b69ff2fda0ecf7c3ce20e3567669a109a0e7c8"
+    },
+    {
+      "file": "source/tests/cdx-v3d-background-fit.spec.mjs",
+      "bytes": 7932,
+      "sha256": "ba9039d000cb3b7dd3f3e5105de26c21d68e2109cee34f8f33ac67db5ac68da4"
+    },
+    {
+      "file": "source/tests/cdx-v3d-background.spec.mjs",
+      "bytes": 7115,
+      "sha256": "544658b0f0e3393cdc770d7aed0b93e3ad3037e05b63230d6c882c387ab3c1d6"
+    },
+    {
+      "file": "source/vendor/splatjs/LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "file": "source/vendor/splatjs/src/gs/background-fit.js",
+      "bytes": 4475,
+      "sha256": "9b40decb9665ce73a5ef9b829d7e89887263c4cc7dbb75296ddb64fdcc5e6110"
+    },
+    {
+      "file": "source/vendor/splatjs/src/gs/trainer.js",
+      "bytes": 124142,
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "source/vendor/splatjs/src/session.js",
+      "bytes": 67471,
+      "sha256": "e50c9b04231c4e62ce804f6c48ab367155426d007674cece64c8f8773c287d8f"
+    },
+    {
+      "file": "view-ownership.log",
+      "bytes": 1132,
+      "sha256": "fbc93c483ca473e7bc709697672c0589be28719149bfc9c0b4144a162d219eda"
+    },
+    {
+      "file": "wiring-r1.log",
+      "bytes": 4977,
+      "sha256": "b3601ff61ae8768234815984b77a1b37c413225f76fd1a8c84d318d326150f92"
+    },
+    {
+      "file": "wiring-r2.log",
+      "bytes": 11468,
+      "sha256": "f3a3dd773eb5732275580568eea43e51c4d6b4adc6fadd7bc89108b97b11a7a6"
+    }
+  ]
+}

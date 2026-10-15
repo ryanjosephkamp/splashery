@@ -1,0 +1,42 @@
+{
+  "id": "oa-street",
+  "profile": "phone",
+  "sha256": "f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341",
+  "started": "2026-10-15T09:46:59.312Z",
+  "status": "explained",
+  "provenanceSha256": "fca50d7bc2b5d22bddecd7ee77d5c5bb0942444fe6ddf12f008d544bcb2d8ca0",
+  "referenceEvidence": {
+    "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "resultFingerprint": "06d3d78510c8c76ecbc966f444fc487c7f57ff7f6884ea4cb819bf8a44e5fb42"
+  },
+  "firstViewMs": null,
+  "bakeMs": 240281.431608,
+  "mean": null,
+  "peakRssBytes": 1138327552,
+  "hostLoadAtStart": [
+    14.51,
+    17.89,
+    18.95
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "Stopped",
+    "unplayable": false,
+    "duration": 10
+  },
+  "explanation": {
+    "diagnostic": "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting.",
+    "advice": "What worksWalk slowly around an object, or through a place, so the camera moves sideways and sees the same things from new angles.10 to 40 seconds, held steady, in even light.Plenty of texture: stone, bark, brick, leaves, signs.No zoom, and few people or cars moving.A drone circling a building or a statue is ideal.A file under 40 MB (trim a long video first).What failsTurning on the spot, or a panorama: the camera has to move, not just turn.A tripod time-lapse: the camera never moves.Blank walls, sky or water: nothing to match.Blur from fast moves or low light.",
+    "visible": true
+  },
+  "reason": "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting."
+}
