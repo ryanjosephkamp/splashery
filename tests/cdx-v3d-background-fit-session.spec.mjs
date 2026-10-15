@@ -16,10 +16,14 @@ test("background fitting joins the active frame and suppresses preview and train
     fit = deferred(),
     calls = [],
     session = new Session();
+  let renders = 0;
   const trainer = {
     fitBackground: async (options) => {
       calls.push(options);
       return fit.promise;
+    },
+    renderView() {
+      renders++;
     },
     dispose() {},
   };
@@ -27,12 +31,18 @@ test("background fitting joins the active frame and suppresses preview and train
   session.holdout = 2;
   session.testCams = [3];
   session._frameRunning = frame.promise;
+  session._sched = { raf() {} };
+  session.view.ctx = {};
+  session.view.camera = {};
   const work = session.fitBackground();
   await Promise.resolve();
   expect(calls).toHaveLength(0);
   expect(() => session.start()).toThrow(/background fitting/);
   session._scheduleFrame();
   expect(session._framePending).toBe(false);
+  session.view.renderNow();
+  expect(renders).toBe(0);
+  expect(session.view._dirty).toBe(true);
   frame.resolve();
   for (let i = 0; i < 5 && !calls.length; i++) await Promise.resolve();
   expect(calls).toHaveLength(1);

@@ -1370,6 +1370,10 @@ class SessionView {
 
   renderNow() {
     if (!this.ctx || !this.camera) return;
+    if (this.s._backgroundFitTrainer === this.s.trainer) {
+      this._dirty = true;
+      return;
+    }
     this.s.trainer.renderView(this.camera, this.ctx, 0, this._offset);
     this._dirty = false;
     // any render satisfies the auto-refresh — a host that renders on its own
