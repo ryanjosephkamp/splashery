@@ -364,7 +364,7 @@ test("matched camera frames keep real feature contrast and improve held-pose sta
   }
 });
 
-test("skipping empty motion dilation preserves camera pixels and depth through still and moving frames", async ({
+test("camera draw optimizations preserve pixels and depth through still and moving frames", async ({
   page,
 }) => {
   const before = execFileSync("git", ["show", "9de7551e:src/live/relief.js"], { encoding: "utf8" });

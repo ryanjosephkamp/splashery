@@ -89,13 +89,14 @@ of real-time speed.
   minimal source change. Default-canvas diagnostic timing improved from 15.658 to 15.217 ms for
   still frames, and from 16.925 to 16.500 ms for low-light frames; this is diagnostic evidence, not
   a substitute for the original paired bound.
-- The final batch exposed the paired tool's hardcoded port: it requested port 4173 even when the
-  suite used 4192. Honor the existing Playwright base URL, retaining the explicit `SPLASHERY_URL`
-  override. The next run reached the real camera pipeline and rejected an incorrect sort-idleness
-  wait: this toy rebuilds its work buffer every frame, so each rendered frame starts another sort.
-  Observe actual submitted jobs and native applied-order events instead. A front, turned, front
-  probe rejected each first frame's older order and accepted each current order after it was
-  applied, even though a replacement job was already running. The world version must also match.
+- An intermediate batch exposed the paired tool's hardcoded port: it requested port 4173 even when
+  the suite used 4192. Honor the existing Playwright base URL, retaining the explicit
+  `SPLASHERY_URL` override. The next run reached the real camera pipeline and rejected an incorrect
+  sort-idleness wait: this toy rebuilds its work buffer every frame, so each rendered frame starts
+  another sort. Observe actual submitted jobs and native applied-order events instead. A front,
+  turned, front probe rejected each first frame's older order and accepted each current order after
+  it was applied, even though a replacement job was already running. The world version must also
+  match.
 - The early core batch reproduced the existing `kit:87` failure, "every kit toy has a recipe that
   builds deterministically and fits the unit ball": the circular Picture QR recipe rejects its
   default code as too detailed. Main subsequently fixed that recipe; this branch includes the fix.
@@ -125,10 +126,10 @@ of real-time speed.
   42 notes are queued before Pause, and the strict post-resume predicate fails. The new helper
   pauses at note 3 of 42, holds through the delays, and resumes to note 12 on the same tune. The
   complete revised ui3 and sndc-engine files pass all 14 tests, with zero skips.
-- The final local source batch still rejects a 19.100 ms camera draw against an 18.471 ms limit.
-  That original failed result remains recorded. Profiling attributes about 40% of draw work to
-  sharpening. Process its three fixed RGB channels directly, retaining each arithmetic operation and
-  write order. Recorded still and low-light sequences produce zero differing color pixels,
+- An intermediate local source batch still rejects a 19.100 ms camera draw against an 18.471 ms
+  limit. That original failed result remains recorded. Profiling attributes about 40% of draw work
+  to sharpening. Process its three fixed RGB channels directly, retaining each arithmetic operation
+  and write order. Recorded still and low-light sequences produce zero differing color pixels,
   encoded-depth bytes, or filter-state values. Diagnostic draw medians improve from 26.792 to 23.900
   ms for still frames, and from 36.958 to 35.200 ms for low light under concurrent load. These
   diagnostic timings do not replace the unchanged 1.1 paired check; the final result is in the draft
@@ -139,13 +140,26 @@ of real-time speed.
   real pointer input and every original motion, sound, position, and landing assertion. The
   leaning-tower fall itself already runs atomically, but the shared setup and other landmark checks
   still benefit from one clock. Local probe and full-file results are in the draft PR.
+- The next [Actions run](https://github.com/ryanjosephkamp/splashery/actions/runs/38683915392)
+  passes all eight ui3 checks and the three weather checks, but still rejects the paired camera
+  cost: 23.033 ms against 21.395 ms. Keep that failure and the unchanged bound. Most smoothed RGB
+  cells stop changing between frames, yet sharpening recalculates their final output. Cache only
+  those outputs whose entire 3 by 3 input neighborhood is identical: compare the unsharpened RGB,
+  expand changed cells by one, and recompute every affected output. Retain all horizontal Float32
+  means and the current frame's alpha. Grid changes invalidate reuse. Across 12 recorded frames from
+  each clip, all 10 pixel/state fields match exactly; a native 96-frame sequence spanning no,
+  partial, and full motion also has zero differences. Always-stale output and missing neighborhood
+  expansion both fail the same comparisons. Diagnostic full-draw medians improve from 13.267 to
+  11.092 ms for still input and from 15.208 to 13.808 ms for low light. These diagnostic timings do
+  not substitute for the original cost check or final Actions evidence.
 - The psv3 loop viewport was Playwright's default 1280×720 and is now 390×844. The explicit
   `profile=mid&adapt=off` keeps clip decoding, depth resolution, frame count, splat budget, and the
   relief mesh budget fixed by profile, independent of viewport. The smaller viewport reduces raster
   work, allowing short loops to be observed without aliasing whole cycles. This is a playback and
-  frame-selection regression, not a rendering-throughput measurement. The other 10 psv3 tests retain
-  their original viewport. The unchanged two-wrap, first-frame, and one-second end-stall checks
-  observe 2.7 media periods after startup and still record stopped display frames.
+  frame-selection regression, not a rendering-throughput measurement. The six browser rebuild cases
+  retain their original viewport; the engine cases use controlled tracks. The unchanged two-wrap,
+  first-frame, and one-second end-stall checks observe 2.7 media periods after startup and still
+  record stopped display frames.
 - A fresh combined batch exposes a real remaining loop bug: the fast sound video's displayed tail
   lasts 1,179.7 ms, failing the unchanged `<1000` check. The trace repeats displayed times 2.22836
   and 2.41809 in a 2.508-second clip. After native audio ends, the silent fallback seeks back to
@@ -176,8 +190,8 @@ entries stay in place. Newly reported failures that were never known need no rem
 Status: implemented for review. No asset, license, book layout, turn behavior, or effect changes.
 The PDF search keeps the exact selected page and its text after the book updates. Reused: the
 existing application, renderer, clocks, fixtures, depth worker, and PDF printer. New: test
-observation/control, matched benchmark timing, an empty-mask shortcut, exact RGB arithmetic, exact
-search selection, the artifact workflow, and these instructions. No performance claim about a real
-phone is made. The paired cost measurement is software-browser CPU filtering, not a device
-frame-rate claim. Final check commands, counts, unresolved failures, and the Actions link are in the
-draft PR body. Rule check: none.
+observation/control, matched benchmark timing, an empty-mask shortcut, exact RGB arithmetic and
+unchanged-neighborhood reuse, exact search selection, the artifact workflow, and these instructions.
+No performance claim about a real phone is made. The paired cost measurement is software-browser CPU
+filtering, not a device frame-rate claim. Final check commands, counts, unresolved failures, and the
+Actions link are in the draft PR body. Rule check: none.
