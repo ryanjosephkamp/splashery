@@ -105,14 +105,16 @@ export const STOPS = [
     id: "city",
     e: 4.6,
     size: 16e3,
-    label: "Washington, D.C., on the Potomac River, about 16 km across.",
+    label:
+      "Washington, D.C., on the Potomac River: the original District was a square about 16 km on each side.",
     source: "Sentinel-2 cloudless 2016 by EOX (contains Copernicus Sentinel data), CC BY 4.0.",
   },
   {
     id: "mall",
     e: 3.3,
-    size: 3.2e3,
-    label: "The National Mall, about 3.2 km from the Capitol to the Lincoln Memorial.",
+    size: 3.6e3,
+    label:
+      "The National Mall, about 3.6 km in a straight line from the center of the Capitol to the center of the Lincoln Memorial.",
     source:
       "USGS The National Map (NAIP), public domain; D.C. 2023 aerial photo (OCTO), CC BY 4.0.",
   },
