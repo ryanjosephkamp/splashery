@@ -106,6 +106,49 @@ test("A stalled Most detail worker falls back to Standard and cannot restore the
   expect(state.notice).toMatch(/Most detail.*Standard/);
 });
 
+test("A replaced stalled detail request releases its workers without replacing the new toy", async ({
+  page,
+}) => {
+  await open(page);
+  await page.evaluate(() => {
+    const { app, qrCraft } = window.__splashery;
+    const OriginalWorker = window.Worker;
+    window.__blockedDetailJobs = 0;
+    window.__terminatedDetailWorkers = 0;
+    window.Worker = class extends OriginalWorker {
+      constructor(url, options) {
+        super(url, options);
+        this.detail = String(url).includes("/qr-craft/scan-worker.js");
+        if (this.detail) this.postMessage = () => window.__blockedDetailJobs++;
+      }
+      terminate() {
+        if (this.detail) window.__terminatedDetailWorkers++;
+        super.terminate();
+      }
+    };
+    qrCraft.detailBudgetMs = 1500;
+    app.setToyOptions({ text: "https://example.org/replaced", fidelity: "detail" }).finally(() => {
+      window.__oldDetailFinished = true;
+    });
+  });
+  await page.waitForFunction(() => window.__blockedDetailJobs > 0);
+  await page.evaluate(() => {
+    window.__splashery.app.chooseToy("qr-code").finally(() => {
+      window.__newToyFinished = true;
+    });
+  });
+  await page.waitForFunction(
+    () =>
+      window.__oldDetailFinished &&
+      window.__newToyFinished &&
+      window.__terminatedDetailWorkers > 0 &&
+      !window.__splashery.app.busy,
+    null,
+    { timeout: 8000 },
+  );
+  expect(await page.evaluate(() => window.__splashery.app.player.toyInfo.id)).toBe("qr-code");
+});
+
 for (const length of [170, 270])
   for (const shape of ["square", "circle"])
     test(`A ${length}-character ${shape} link selects the bounded Standard fallback`, async ({

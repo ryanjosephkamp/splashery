@@ -667,7 +667,14 @@ export function* detailCandidates(pic, o) {
     return candidate;
   };
   const create = function* () {
-    const options = { ...t, margin, finderEdge, finderCore, channel: o.channel };
+    const options = {
+      ...t,
+      margin,
+      finderEdge,
+      finderCore,
+      channel: o.channel,
+      finderGuard: o.finderGuard,
+    };
     if (o.preferContinuous) {
       const fraction =
         o.channel !== "green" &&
@@ -790,6 +797,7 @@ export function renderingKey(w) {
     w.rendering.core,
     w.rendering.fraction || 0,
     w.rendering.channel || "rgb",
+    w.rendering.finderGuard ?? null,
   ]);
 }
 

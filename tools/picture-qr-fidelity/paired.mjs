@@ -119,6 +119,8 @@ if (fs.existsSync(provenanceFile)) {
         baseline,
         head: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
         started: new Date().toISOString(),
+        node: process.version,
+        hardwareConcurrency: 4,
         args: process.argv.slice(2),
         hashes,
         frozenMain,
@@ -179,6 +181,9 @@ for (const mode of ["main", "detail"]) {
     viewport: { width: 390, height: 844 },
     reducedMotion: "reduce",
   }));
+  await page.addInitScript(() =>
+    Object.defineProperty(navigator, "hardwareConcurrency", { get: () => 4 }),
+  );
   if (mode === "main")
     await page.route("**/src/**", (route) => {
       const pathname = new URL(route.request().url()).pathname,
@@ -201,6 +206,7 @@ for (const mode of ["main", "detail"]) {
       q.preferCorrection = settings.errors;
       if (settings.direct !== null) q.captureValidation = settings.direct;
       q.detailChannel = settings.channel;
+      if (settings.finderGuard !== null) q.finderGuard = settings.finderGuard;
       await a.chooseToy("qr-picture");
       const stage = a.player.stage;
       // Stage.frames counts update ticks even when PlayCanvas skips drawing.
@@ -223,6 +229,8 @@ for (const mode of ["main", "detail"]) {
       errors: arg("errors", "0") === "1",
       direct: arg("direct", "default") === "default" ? null : arg("direct", "0") === "1",
       channel: arg("channel", ""),
+      finderGuard:
+        arg("finder-guard", "default") === "default" ? null : Number(arg("finder-guard", "3")),
     },
   );
 }

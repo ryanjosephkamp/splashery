@@ -481,7 +481,11 @@ function beginDetailAttempt(options, generation) {
 async function fallbackToStandard(attempt, notice) {
   if (attempt?.fallback) return attempt.fallback;
   const player = app()?.player;
-  if (!attempt || (player && player.loadToken !== attempt.generation)) return;
+  if (!attempt) return;
+  if (player && player.loadToken !== attempt.generation) {
+    cancelDetailAttempt(attempt);
+    return;
+  }
   cancelDetailAttempt(attempt);
   PIC.notice = notice;
   PIC.fallback = {
@@ -532,6 +536,9 @@ function detailSettings(rejected = null) {
     // A failed stage view gets the full forecast before another expensive rebuild.
     captureValidation: study.captureValidation !== false && !rejected?.length,
     channel: study.detailChannel || "weighted",
+    finderGuard: Number.isFinite(study.finderGuard)
+      ? Math.max(0, Math.min(3, Math.round(study.finderGuard)))
+      : 3,
     trace: study.trace === true,
   };
 }
