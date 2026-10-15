@@ -3,8 +3,9 @@
 // ?controls=0 (no zoom buttons) and ?sound=on (the toy's tap sound, with a
 // mute button) overrides. Embeds are silent unless ?sound=on is given.
 
-import { Viewer, NoGPUError } from "./viewer.js";
+import { Viewer } from "./viewer.js";
 import { parseHash } from "./codec.js";
+import { showRendererDetails } from "./renderer-fallback.js";
 
 const canvas = document.getElementById("stage");
 const status = document.getElementById("embed-status");
@@ -88,14 +89,13 @@ try {
   if (params.get("sound") === "on") addSoundButton(await viewer.enableSound());
 } catch (err) {
   console.info("Splashery embed could not start:", err?.message || err);
-  if (!(err instanceof NoGPUError)) {
-    document.getElementById("fallback-reason").textContent += ` (${err?.message || err})`;
-  }
+  showRendererDetails(document.getElementById("fallback"), err, viewer.player.rendererDiagnostics);
   document.getElementById("fallback").hidden = false;
   canvas.hidden = true;
   zoomButtons.hidden = true;
 }
 document.body.dataset.ready = "true";
+document.body.dataset.pageSettled = "true";
 
 window.__splashery = {
   viewer,
