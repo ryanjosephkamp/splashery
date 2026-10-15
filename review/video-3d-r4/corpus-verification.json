@@ -1,0 +1,172 @@
+{
+  "frozenAt": "2026-10-15T04:45:44.189187+00:00",
+  "manifestSha256": "3b76812b6bc098c6ab4e340e942f7493872c648e3da4b854e582ad5f8073c606",
+  "clipCount": 20,
+  "corpusBytes": 26807550,
+  "allSourcesDistinct": true,
+  "allAcceptedSha256Verified": true,
+  "allDurationsIn5to20Seconds": true,
+  "allSilentH264": true,
+  "checks": [
+    {
+      "id": "cat-track",
+      "file": "cat-track.mp4",
+      "duration": 8,
+      "bytes": 370191,
+      "sha256": "598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430",
+      "source": "https://commons.wikimedia.org/wiki/File:Cat_playing_with_a_round_track_toy.webm"
+    },
+    {
+      "id": "cat-plays",
+      "file": "cat-plays.mp4",
+      "duration": 8.0,
+      "bytes": 616920,
+      "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+      "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm"
+    },
+    {
+      "id": "buddha",
+      "file": "buddha.mp4",
+      "duration": 8.0,
+      "bytes": 2457576,
+      "sha256": "765070736b87205ff07211410a25b23b02e5e8e0092282a742e3c70f3e02f388",
+      "source": "https://commons.wikimedia.org/wiki/File:Statue_of_Buddha.webm"
+    },
+    {
+      "id": "chameleon-flowers",
+      "file": "chameleon-flowers.mp4",
+      "duration": 10.0,
+      "bytes": 736318,
+      "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+      "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm"
+    },
+    {
+      "id": "dianthus",
+      "file": "dianthus.mp4",
+      "duration": 5.916667,
+      "bytes": 1443894,
+      "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+      "source": "https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm"
+    },
+    {
+      "id": "pisac",
+      "file": "pisac.mp4",
+      "duration": 10.0,
+      "bytes": 403116,
+      "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+      "source": "https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm"
+    },
+    {
+      "id": "sleeping-dog",
+      "file": "sleeping-dog.mp4",
+      "duration": 8.0,
+      "bytes": 2460226,
+      "sha256": "c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9",
+      "source": "https://commons.wikimedia.org/wiki/File:REM_-_Rapid_eye_movement_sleep_of_a_dog.webm"
+    },
+    {
+      "id": "palace-statue",
+      "file": "palace-statue.mp4",
+      "duration": 5.0,
+      "bytes": 700939,
+      "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+      "source": "https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm"
+    },
+    {
+      "id": "oa-street",
+      "file": "oa-street.mp4",
+      "duration": 10.0,
+      "bytes": 1476179,
+      "sha256": "f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341",
+      "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Oa_street_in_Supilinn,_Tartu,_Estonia._July_2021.webm"
+    },
+    {
+      "id": "ullard",
+      "file": "ullard.mp4",
+      "duration": 10.0,
+      "bytes": 2074008,
+      "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+      "source": "https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm"
+    },
+    {
+      "id": "snaefell",
+      "file": "snaefell.mp4",
+      "duration": 10.0,
+      "bytes": 1224471,
+      "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+      "source": "https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm"
+    },
+    {
+      "id": "fremantle-orbit",
+      "file": "fremantle-orbit.mp4",
+      "duration": 12.0,
+      "bytes": 1146265,
+      "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+      "source": "https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm"
+    },
+    {
+      "id": "ihasalu-orbit",
+      "file": "ihasalu-orbit.mp4",
+      "duration": 12.0,
+      "bytes": 1464394,
+      "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+      "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm"
+    },
+    {
+      "id": "fresnel-lens",
+      "file": "fresnel-lens.mp4",
+      "duration": 10.0,
+      "bytes": 467080,
+      "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+      "source": "https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm"
+    },
+    {
+      "id": "saint-denis",
+      "file": "saint-denis.mp4",
+      "duration": 10.0,
+      "bytes": 2240728,
+      "sha256": "231358f2f7f9a1ad04e78c782106ad13e56bf0fcd88f665d86497365117fd405",
+      "source": "https://commons.wikimedia.org/wiki/File:Interior_of_Basilique_Saint-Denis_134306.webm"
+    },
+    {
+      "id": "horse-statue",
+      "file": "horse-statue.mp4",
+      "duration": 7.958333,
+      "bytes": 1546297,
+      "sha256": "42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045",
+      "source": "https://commons.wikimedia.org/wiki/File:Traveler_horse_statue.webm"
+    },
+    {
+      "id": "royal-sovereign",
+      "file": "royal-sovereign.mp4",
+      "duration": 11.958333,
+      "bytes": 811967,
+      "sha256": "8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6",
+      "source": "https://commons.wikimedia.org/wiki/File:Royal_Sovereign_Lighthouse_drone_visit.webm"
+    },
+    {
+      "id": "viljandi-ruins",
+      "file": "viljandi-ruins.mp4",
+      "duration": 12.0,
+      "bytes": 1691636,
+      "sha256": "d8c69186d35269f6d5f9c23cec21b46fa053659e97988098863d06ceaa7e508d",
+      "source": "https://commons.wikimedia.org/wiki/File:Viljandi_ordulinnus_2021,_droonivideo.webm"
+    },
+    {
+      "id": "kakerdi-bog",
+      "file": "kakerdi-bog.mp4",
+      "duration": 12.0,
+      "bytes": 1077596,
+      "sha256": "5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8",
+      "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_Kakerdi_lake_and_Kakerdaja_bog_in_Estonia,_september_2021.webm"
+    },
+    {
+      "id": "fjoloy",
+      "file": "fjoloy.mp4",
+      "duration": 12.0,
+      "bytes": 2397749,
+      "sha256": "2e01259d5d6dce77a46d98e43af9def48429d184b9422e0833957d82a1f9f210",
+      "source": "https://commons.wikimedia.org/wiki/File:Aerial_views_of_Fj%C3%B8l%C3%B8y_Lighthouse,_Rennes%C3%B8y,_Rogaland_county,_Norway.webm"
+    }
+  ]
+}

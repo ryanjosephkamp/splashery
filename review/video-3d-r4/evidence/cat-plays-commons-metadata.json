@@ -1,0 +1,92 @@
+{
+  "pageid": 37239427,
+  "ns": 6,
+  "title": "File:Cat Plays.webm",
+  "imagerepository": "local",
+  "imageinfo": [
+    {
+      "size": 2279724,
+      "width": 720,
+      "height": 1280,
+      "duration": 8.336,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Cat_Plays.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=37239427",
+      "extmetadata": {
+        "DateTime": {
+          "value": "2014-12-11 04:52:36",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Cat Plays",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Self-published work|Videos of cats|Cats of the Philippines|Tuxedo patterned black and white domestic short-haired cats|Videos of playing cats",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "This video shows a semi-feral tuxedo cat engaging in play. Footage was taken in the Philippines using a Samsung Galaxy Tab 3.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2014-12-11",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/w/index.php?title=User:Riverarvi&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Riverarvi (page does not exist)\">Riverarvi</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 4.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 4.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/4.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-4.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  ]
+}

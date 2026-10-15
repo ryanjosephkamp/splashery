@@ -1,0 +1,8 @@
+Potted flowering plants, handheld
+Author: Tanvir Rahat
+Source: https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: 10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5
+Changes: Trimmed 0–6 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.

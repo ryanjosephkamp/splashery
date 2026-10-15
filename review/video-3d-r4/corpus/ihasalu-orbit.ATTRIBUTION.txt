@@ -1,0 +1,8 @@
+Abandoned lighthouse and textured ground, aerial orbit
+Author: Sillerkiil
+Source: https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: 12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d
+Changes: Trimmed 10–22 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.

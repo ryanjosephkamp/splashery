@@ -1,0 +1,8 @@
+Rocky island houses and lighthouse, fast drone pass
+Author: Rik Knops
+Source: https://commons.wikimedia.org/wiki/File:Aerial_views_of_Fj%C3%B8l%C3%B8y_Lighthouse,_Rennes%C3%B8y,_Rogaland_county,_Norway.webm
+License: CC BY 3.0 (https://creativecommons.org/licenses/by/3.0)
+Checked: October 15, 2026
+File SHA-256: 2e01259d5d6dce77a46d98e43af9def48429d184b9422e0833957d82a1f9f210
+Changes: Trimmed 45–57 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.

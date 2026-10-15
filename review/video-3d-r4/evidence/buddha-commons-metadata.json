@@ -1,0 +1,97 @@
+{
+  "pageid": 24404271,
+  "ns": 6,
+  "title": "File:Statue of Buddha.webm",
+  "imagerepository": "local",
+  "imageinfo": [
+    {
+      "size": 18168787,
+      "width": 1920,
+      "height": 1080,
+      "duration": 18.416,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/29/Statue_of_Buddha.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Statue_of_Buddha.webm",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=24404271",
+      "extmetadata": {
+        "DateTime": {
+          "value": "2013-02-02 12:32:10",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Statue of Buddha",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "Media from YouTube|WebM videos|Files from external sources with reviewed licenses|Uploaded with youtube2mediawiki|Videos from San Francisco|Video display resolution 1920 x 1080|Videos of 2011 from the United States|Buddha in Japanese Tea Garden (San Francisco)|Buddhism-related videos",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Static shot of the large iconic Buddha statue in the Japanese Tea Gardens, Golden Gate Park, San Francisco, CA",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2011-05-28",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<bdi lang=\"en\" dir=\"ltr\"><a href=\"//commons.wikimedia.org/wiki/Commons:YouTube_files\" title=\"Commons:YouTube files\">YouTube</a>: <a rel=\"nofollow\" class=\"external text\" href=\"https://www.youtube.com/watch?v=yUnFQUDtmRk\"><bdi lang=\"\">https://www.youtube.com/watch?v=yUnFQUDtmRk</bdi></a> – View/save archived versions on <a rel=\"nofollow\" class=\"external text\" href=\"https://web.archive.org/web/*/https://www.youtube.com/watch?v=yUnFQUDtmRk\">archive.org</a></bdi>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.youtube.com/user/Editor\">https://www.youtube.com/user/Editor</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Attribution": {
+          "value": "<a rel=\"nofollow\" class=\"external free\" href=\"https://www.youtube.com/user/Editor\">https://www.youtube.com/user/Editor</a>",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-3.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  ]
+}

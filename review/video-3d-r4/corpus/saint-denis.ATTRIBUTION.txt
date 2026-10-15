@@ -1,0 +1,8 @@
+Basilica interior ceiling and stained glass, handheld tilt
+Author: Quahadi
+Source: https://commons.wikimedia.org/wiki/File:Interior_of_Basilique_Saint-Denis_134306.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: 231358f2f7f9a1ad04e78c782106ad13e56bf0fcd88f665d86497365117fd405
+Changes: Trimmed 72–82 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.

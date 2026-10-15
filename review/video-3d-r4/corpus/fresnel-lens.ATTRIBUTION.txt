@@ -1,0 +1,8 @@
+Rotating Fresnel lens inside a lighthouse
+Author: Myotus
+Source: https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: 5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8
+Changes: Trimmed 4–14 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.

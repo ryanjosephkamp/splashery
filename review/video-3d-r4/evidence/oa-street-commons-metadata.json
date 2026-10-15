@@ -1,0 +1,106 @@
+{
+  "pageid": 108113466,
+  "ns": 6,
+  "title": "File:Aerial view of Oa street in Supilinn, Tartu, Estonia. July 2021.webm",
+  "index": 12,
+  "imagerepository": "local",
+  "imageinfo": [
+    {
+      "size": 141534595,
+      "width": 2720,
+      "height": 1530,
+      "duration": 21.821,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/06/Aerial_view_of_Oa_street_in_Supilinn%2C_Tartu%2C_Estonia._July_2021.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Oa_street_in_Supilinn,_Tartu,_Estonia._July_2021.webm",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=108113466",
+      "extmetadata": {
+        "DateTime": {
+          "value": "2021-08-03 12:50:59",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Aerial view of Oa street in Supilinn, Tartu, Estonia. July 2021",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "CC-Zero|Uploaded with video2commons|Files with coordinates missing SDC location of creation|Drone videos from Estonia|Videos from Tartu",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "58.387879",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "26.715486",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Aerial view of Oa street in Supilinn, Tartu, Estonia",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2021-07",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "Sillerkiil",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Zero, Public Domain Dedication",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "false",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  ]
+}

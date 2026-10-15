@@ -1,0 +1,106 @@
+{
+  "pageid": 110583418,
+  "ns": 6,
+  "title": "File:Drone video of Kakerdi lake and Kakerdaja bog in Estonia, september 2021.webm",
+  "index": 9,
+  "imagerepository": "local",
+  "imageinfo": [
+    {
+      "size": 69784920,
+      "width": 1920,
+      "height": 1080,
+      "duration": 52.586,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b8/Drone_video_of_Kakerdi_lake_and_Kakerdaja_bog_in_Estonia%2C_september_2021.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Drone_video_of_Kakerdi_lake_and_Kakerdaja_bog_in_Estonia,_september_2021.webm",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=110583418",
+      "extmetadata": {
+        "DateTime": {
+          "value": "2021-09-30 09:42:47",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Drone video of Kakerdi lake and Kakerdaja bog in Estonia, september 2021",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "CC-Zero|Kakerdaja Bog|Hiking trails in Estonia|Featured media|Media of the day|Featured videos of Estonia|Uploaded with video2commons|Videos of nature of Estonia|Files with coordinates missing SDC location of creation|Drone videos from Estonia|Videos without audio|Drone videos of nature|Featured media of drone videos|Drone videos of bodies of water|Videos of bogs|Featured media by Sillerkiil|Featured media nominated by Sillerkiil|Featured media uploaded by Sillerkiil",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "59.190056",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "25.527700",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Drone video of Kakerdi lake and Kakerdaja bog in Estonia.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2021-09",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "Sillerkiil",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Zero, Public Domain Dedication",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "false",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  ]
+}

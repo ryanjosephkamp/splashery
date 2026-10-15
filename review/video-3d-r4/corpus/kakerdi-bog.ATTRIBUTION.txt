@@ -1,0 +1,8 @@
+Bog islands and shore, low aerial pass
+Author: Sillerkiil
+Source: https://commons.wikimedia.org/wiki/File:Drone_video_of_Kakerdi_lake_and_Kakerdaja_bog_in_Estonia,_september_2021.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: 5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8
+Changes: Trimmed 15–27 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.

@@ -1,0 +1,106 @@
+{
+  "pageid": 107225440,
+  "ns": 6,
+  "title": "File:Viljandi ordulinnus 2021, droonivideo.webm",
+  "index": 5,
+  "imagerepository": "local",
+  "imageinfo": [
+    {
+      "size": 349163817,
+      "width": 1920,
+      "height": 1080,
+      "duration": 111.111,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Viljandi_ordulinnus_2021%2C_droonivideo.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Viljandi_ordulinnus_2021,_droonivideo.webm",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=107225440",
+      "extmetadata": {
+        "DateTime": {
+          "value": "2021-07-04 08:23:33",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Viljandi ordulinnus 2021, droonivideo",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "CC-Zero|Viljandi Castle|Featured media|Media of the day|Featured videos of Estonia|Uploaded with video2commons|Files with coordinates missing SDC location of creation|Drone videos from Estonia|Featured media of drone videos|Featured media by Sillerkiil|Featured media nominated by Sillerkiil|Featured media uploaded by Sillerkiil",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "58.359167",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "25.595200",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Drone footage of Viljandi castle",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2021-07",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "Sillerkiil",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Zero, Public Domain Dedication",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "false",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+Cat playing with a circular toy indoors
+Author: Clément Bucco-Lechat
+Source: https://commons.wikimedia.org/wiki/File:Cat_playing_with_a_round_track_toy.webm
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)
+Checked: October 15, 2026
+File SHA-256: 598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430
+Changes: Trimmed seconds 3–11; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.

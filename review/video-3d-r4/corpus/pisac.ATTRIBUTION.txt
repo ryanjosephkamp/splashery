@@ -1,0 +1,8 @@
+Stone ruins, handheld panorama
+Author: MorePix
+Source: https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: 410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d
+Changes: Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.

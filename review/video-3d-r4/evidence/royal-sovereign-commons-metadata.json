@@ -1,0 +1,106 @@
+{
+  "pageid": 152256436,
+  "ns": 6,
+  "title": "File:Royal Sovereign Lighthouse drone visit.webm",
+  "index": 20,
+  "imagerepository": "local",
+  "imageinfo": [
+    {
+      "size": 263617450,
+      "width": 1920,
+      "height": 1080,
+      "duration": 240.032,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/bf/Royal_Sovereign_Lighthouse_drone_visit.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Royal_Sovereign_Lighthouse_drone_visit.webm",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=152256436",
+      "extmetadata": {
+        "DateTime": {
+          "value": "2024-09-05 19:21:59",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Royal Sovereign Lighthouse drone visit",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "CC-Zero|Royal Sovereign Lighthouse|Self-published work|Files with coordinates missing SDC location of creation (50° N, 0° E)|Drone videos from England|Videos from East Sussex|Videos of lighthouses",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "GPSLatitude": {
+          "value": "50.724200",
+          "source": "commons-desc-page"
+        },
+        "GPSLongitude": {
+          "value": "0.434800",
+          "source": "commons-desc-page"
+        },
+        "GPSMapDatum": {
+          "value": "WGS-84",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Raw footage of the lighthouse platform and tower from a drone.",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2021-10-23",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:Dr-Mx\" title=\"User:Dr-Mx\">Alexis Markwick</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Zero, Public Domain Dedication",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "false",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  ]
+}

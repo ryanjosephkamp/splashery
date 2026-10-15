@@ -1,0 +1,92 @@
+{
+  "pageid": 22864110,
+  "ns": 6,
+  "title": "File:Cat playing with a round track toy.webm",
+  "imagerepository": "local",
+  "imageinfo": [
+    {
+      "size": 15614130,
+      "width": 1920,
+      "height": 1080,
+      "duration": 93.051,
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/da/Cat_playing_with_a_round_track_toy.webm?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+      "descriptionurl": "https://commons.wikimedia.org/wiki/File:Cat_playing_with_a_round_track_toy.webm",
+      "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=22864110",
+      "extmetadata": {
+        "DateTime": {
+          "value": "2012-11-25 21:53:44",
+          "source": "mediawiki-metadata",
+          "hidden": ""
+        },
+        "ObjectName": {
+          "value": "Cat playing with a round track toy",
+          "source": "mediawiki-metadata"
+        },
+        "CommonsMetadataExtension": {
+          "value": 1.2,
+          "source": "extension",
+          "hidden": ""
+        },
+        "Categories": {
+          "value": "WebM videos|Cat toys|Self-published work|Files by Pleclown|Videos by Pleclown|Video display resolution 1920 x 1080|Videos of playing cats",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "Assessments": {
+          "value": "",
+          "source": "commons-categories",
+          "hidden": ""
+        },
+        "ImageDescription": {
+          "value": "Cat playing with a round track toy",
+          "source": "commons-desc-page"
+        },
+        "DateTimeOriginal": {
+          "value": "2012-11-25 22:49:00",
+          "source": "commons-desc-page"
+        },
+        "Credit": {
+          "value": "<span class=\"int-own-work\" lang=\"en\">Own work</span>",
+          "source": "commons-desc-page"
+        },
+        "Artist": {
+          "value": "<a href=\"//commons.wikimedia.org/wiki/User:Pleclown\" title=\"User:Pleclown\">Clément Bucco-Lechat</a>",
+          "source": "commons-desc-page"
+        },
+        "LicenseShortName": {
+          "value": "CC BY-SA 3.0",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "UsageTerms": {
+          "value": "Creative Commons Attribution-Share Alike 3.0",
+          "source": "commons-desc-page"
+        },
+        "AttributionRequired": {
+          "value": "true",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "LicenseUrl": {
+          "value": "https://creativecommons.org/licenses/by-sa/3.0",
+          "source": "commons-desc-page"
+        },
+        "Copyrighted": {
+          "value": "True",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "Restrictions": {
+          "value": "",
+          "source": "commons-desc-page",
+          "hidden": ""
+        },
+        "License": {
+          "value": "cc-by-sa-3.0",
+          "source": "commons-templates",
+          "hidden": ""
+        }
+      }
+    }
+  ]
+}

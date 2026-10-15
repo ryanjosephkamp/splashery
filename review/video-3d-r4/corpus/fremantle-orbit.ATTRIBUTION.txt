@@ -1,0 +1,8 @@
+Lighthouse at sunset, camera orbits the tower
+Author: JamesBromberger
+Source: https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747
+Changes: Trimmed 10–22 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.

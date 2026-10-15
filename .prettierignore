@@ -11,3 +11,10 @@ docs/SPEC-v1-planet-painter.md
 
 # grooph hook scripts, copied as installed
 .grooph/hooks/
+
+# Frozen task-88 evidence: original bytes are bound by SHA-256 receipts.
+review/video-3d-r4/evidence/
+review/video-3d-r4/corpus-manifest.json
+review/video-3d-r4/corpus-verification.json
+review/video-3d-r4/measurements/
+review/video-3d-r4/samples/
