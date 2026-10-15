@@ -363,9 +363,7 @@ async function takeOne(page, ms = 1500) {
 test.describe("the preview sheet, more", () => {
   test.use(DESK);
 
-  test("a canceled share sheet doesn't count as saved; a finished share does", async ({
-    page,
-  }) => {
+  test("a canceled share sheet doesn't count as saved; a finished share does", async ({ page }) => {
     const errors = watchErrors(page);
     // A device that can share files; its share sheet is canceled, then used.
     await page.addInitScript(() => {
