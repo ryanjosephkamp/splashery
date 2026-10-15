@@ -1,0 +1,14 @@
+{
+  "capturedAt": "2026-10-15T16:30:11.208369+00:00",
+  "files": 291,
+  "originalBytes": 15267827,
+  "restorationMapSha256": "2e65d0c1f4e708b21bf48d6b755eee4e22092ae70aa3f70963ad7d8e8a85fa7a",
+  "baselineStageInterrupted": false,
+  "baselineTermSent": [],
+  "baselineKillSent": [],
+  "verifiedReviewClips": 0,
+  "interruptedNativeDirectories": [],
+  "reviewRanked": false,
+  "allSourceAndStoredBytesVerified": true,
+  "notice": "Original R1 watcher failure and unsuccessful initial publisher drafts remain explicit. R2 was prepared but never launched; R3 used truthful observed-ended takeover, with no root-retirement claim. Only the separately declared main stage controller can own baseline cleanup. No benchmark row, score, per-case timeout, or test was rewritten by publication."
+}

@@ -1,7 +1,7 @@
-# Closing review and baseline controls
+# Actual closing R12 controls
 
-[Static source-bound authorization](prepared/README.md) is published here. Closing controller outcomes have not yet been published in this checkpoint. The original watcher failure, truthful observed-ended replacement, unchanged process guards, and separate baseline stage-boundary authorization remain explicit.
+[Closing control outcomes and exact restoration map](capture/README.md) · [Immutable authorization inputs](prepared/README.md).
 
-A later capture is valid only after the owned rendering work has ceased. No selected pair, waiting queue, or partial file establishes a completed movie or a passing benchmark.
+The ended R3 guard, original failed watcher, separate main-only stage boundary, complete R12 coordinator history, and interrupted native artifacts are retained. The baseline stage reports stageInterrupted=false. The actual review publication verifies 0 phone comparisons. This packet changes no original benchmark row, per-case host parameter, score, or test. Asset attribution accompanies interrupted images and models.
 
 Rule check: none.
