@@ -51,6 +51,7 @@ test("A stalled Most detail worker falls back to Standard and cannot restore the
   await page.evaluate((text) => {
     const { app, qrCraft } = window.__splashery;
     const OriginalWorker = window.Worker;
+    window.__detailOriginalWorker = OriginalWorker;
     window.__blockedDetailJobs = 0;
     window.Worker = class extends OriginalWorker {
       constructor(url, options) {
@@ -104,6 +105,29 @@ test("A stalled Most detail worker falls back to Standard and cannot restore the
   expect(state).toMatchObject({ fidelity: "standard", text });
   expect(state.blocked).toBeGreaterThan(0);
   expect(state.notice).toMatch(/Most detail.*Standard/);
+  await page.evaluate(async () => {
+    window.Worker = window.__detailOriginalWorker;
+    const { app, qrCraft } = window.__splashery;
+    delete qrCraft.detailBudgetMs;
+    await app.setToyOptions({ fidelity: "detail", text: "https://example.org/resumed-detail" });
+  });
+  await page.waitForFunction(() => {
+    const { app, qrCraft } = window.__splashery,
+      p = qrCraft.picture();
+    return (
+      !app.busy &&
+      !p.checking &&
+      p.woven?.fidelity === "detail" &&
+      p.check?.stress?.ok &&
+      !app.player.stage.coverDepth
+    );
+  });
+  expect(
+    await page.evaluate(() => {
+      const p = window.__splashery.qrCraft.picture();
+      return { notice: p.notice, fallback: p.fallback };
+    }),
+  ).toEqual({ notice: "", fallback: null });
 });
 
 test("A replaced stalled detail request releases its workers without replacing the new toy", async ({

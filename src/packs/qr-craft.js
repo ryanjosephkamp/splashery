@@ -448,6 +448,7 @@ function beginDetailAttempt(options, generation) {
   }
   cancelDetailAttempt(previous);
   PIC.notice = "";
+  PIC.fallback = null;
   let reject;
   const canceled = new Promise((_resolve, fail) => {
     reject = fail;
