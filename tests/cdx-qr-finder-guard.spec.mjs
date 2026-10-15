@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
-import { makeWoven } from "../src/qr-craft/picture.js";
+import { makeWoven, makeWovenAsync } from "../src/qr-craft/picture.js";
 import { validateDetail } from "../src/qr-craft/scan-pool.js";
 import { loadBlurKernel } from "../src/qr-craft/fast-blur.js";
 import { loadSecondReader } from "../src/qr-craft/second-reader.js";
@@ -34,4 +34,70 @@ test("A narrower optional finder guard restores picture cells and still passes t
     layoutChecked: true,
     readers: ["jsqr", "zxingcpp"],
   });
+});
+
+test("Weighted picture fitting can prefer a bounded correction candidate without changing the payload", async () => {
+  await loadBlurKernel(fs.readFileSync("src/qr-craft/blur.wasm"));
+  await loadSecondReader(fs.readFileSync("src/qr-craft/vendor/zxing/reader/zxing_reader.wasm"));
+  const pic = { w: 48, h: 48, data: new Float32Array(48 * 48 * 3).fill(0.5) };
+  const seen = [];
+  const w = await makeWovenAsync(
+    pic,
+    {
+      text: "https://example.org/correction-first",
+      shape: "square",
+      fidelity: "detail",
+      level: "H",
+      size: "more",
+      center: "small",
+      style: "color",
+      contrast: 0.5,
+      preferContinuous: true,
+      preferCorrection: true,
+      texture: "tiles",
+      channel: "weighted",
+    },
+    async (candidate, picture, shape) => {
+      seen.push(candidate.rendering);
+      return validateDetail(candidate, picture, shape, read);
+    },
+  );
+  expect(seen[0]).toMatchObject({ method: "correction", fraction: 0.4 });
+  expect(w.code.text).toBe("https://example.org/correction-first");
+  expect(w.detailCheck).toMatchObject({
+    ok: true,
+    layoutChecked: true,
+    readers: ["jsqr", "zxingcpp"],
+  });
+});
+
+test("A rejected first tile candidate tries the opposite orientation before cycling finder tones", async () => {
+  await loadBlurKernel(fs.readFileSync("src/qr-craft/blur.wasm"));
+  await loadSecondReader(fs.readFileSync("src/qr-craft/vendor/zxing/reader/zxing_reader.wasm"));
+  const pic = { w: 48, h: 48, data: new Float32Array(48 * 48 * 3).fill(0.5) },
+    rotations = [];
+  const w = await makeWovenAsync(
+    pic,
+    {
+      text: "https://example.org/early-rotation",
+      shape: "square",
+      fidelity: "detail",
+      level: "H",
+      size: "more",
+      center: "small",
+      style: "color",
+      contrast: 0.5,
+      preferContinuous: true,
+      texture: "tiles",
+      channel: "weighted",
+    },
+    async (candidate, picture, shape) => {
+      rotations.push(candidate.code.rotation || 0);
+      if (rotations.length === 1) return { ok: false, preflight: true };
+      expect(rotations).toEqual([0, 2]);
+      return validateDetail(candidate, picture, shape, read);
+    },
+  );
+  expect(w.detailCheck).toMatchObject({ ok: true, readers: ["jsqr", "zxingcpp"] });
+  expect(rotations).toEqual([0, 2]);
 });

@@ -676,14 +676,7 @@ export function* detailCandidates(pic, o) {
       finderGuard: o.finderGuard,
     };
     if (o.preferContinuous) {
-      const fraction =
-        o.channel !== "green" &&
-        o.channel !== "weighted" &&
-        o.preferCorrection &&
-        o.texture === "tiles" &&
-        code.ecc === "H"
-          ? 0.4
-          : 0;
+      const fraction = o.preferCorrection && o.texture === "tiles" && code.ecc === "H" ? 0.4 : 0;
       const method = fraction ? "correction" : "continuous";
       const base = weaveDetail(fraction ? fitPictureErrors(code, pic, fraction) : code, pic, {
         ...options,
@@ -770,6 +763,36 @@ export function* detailCandidates(pic, o) {
       const check = yield w;
       w.detailCheck = { ...check, tried: step + 1, candidates: tested };
       if (check?.ok) return w;
+      // A different spatial pattern can repair a failed first forecast without
+      // cycling every finder tone. Accepted candidates retain the same checks.
+      if (
+        tested === 1 &&
+        step === 0 &&
+        !o.rejected?.length &&
+        o.preferContinuous &&
+        o.texture === "tiles"
+      ) {
+        const opposite = rotateCode(fitPadding(baseCode, inversePicture(pic, baseCode.size, 2)), 2);
+        const alternative = decorate(
+          weaveDetail(opposite, pic, {
+            ...t,
+            margin: initial,
+            finderEdge: 0.24,
+            finderCore: 0.08,
+            channel: o.channel,
+            finderGuard: o.finderGuard,
+          }),
+          false,
+        );
+        const alternativeKey = renderingKey(alternative);
+        if (!seen.has(alternativeKey)) {
+          seen.add(alternativeKey);
+          tested++;
+          const alternativeCheck = yield alternative;
+          alternative.detailCheck = { ...alternativeCheck, tried: 1, candidates: tested };
+          if (alternativeCheck?.ok) return alternative;
+        }
+      }
     }
   }
   fallback.detailCheck = {
