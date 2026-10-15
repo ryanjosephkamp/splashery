@@ -1,0 +1,101 @@
+{
+  "before_commit": "dbac377826434d5704b6c47aafa1434de7662273",
+  "after_code_commit": "f27862f4b17483f969590684e3ef9bb7defd7636",
+  "reconciled_main": "4907a003a43be0be97ce25403d94f6f1e9208600",
+  "files": [
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/before/webgpu-highp-391x843-dpr2.625-apart.png",
+      "sha256": "eb4d8af29eb0a0e0c23f2cd565ec8ebb3132aa826b806cbb6185840578a4fd72",
+      "bytes": 243549,
+      "source_commit": "dbac377826434d5704b6c47aafa1434de7662273",
+      "kind": "stage capture"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/before/webgpu-highp-391x843-dpr2.625.json",
+      "sha256": "b5d3e1cefee720aa22e63b3b6855551118542e9060b58c82d4d50c52b5c54045",
+      "bytes": 3313,
+      "source_commit": "dbac377826434d5704b6c47aafa1434de7662273",
+      "kind": "row measurements"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/after/webgpu-highp-1440x900-dpr1.json",
+      "sha256": "e1aae682e7c2600ca6bc5da79b4b6c07e0c9358e54ba11f710169e8fb1f6b7b3",
+      "bytes": 4212,
+      "source_commit": "f27862f4b17483f969590684e3ef9bb7defd7636",
+      "kind": "row measurements"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/after/webgpu-highp-1440x900-dpr1-apart.png",
+      "sha256": "f30fb86eb5e13e08d44d62950293f2928453427ba3f4d2fa9f44fc2a6b4ed880",
+      "bytes": 186225,
+      "source_commit": "f27862f4b17483f969590684e3ef9bb7defd7636",
+      "kind": "stage capture"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/after/webgpu-highp-390x844-dpr1.json",
+      "sha256": "eef35d10ecd8e0b8123d2d84df229ddd1182279b26fd711ac4aa9650389f0c50",
+      "bytes": 4197,
+      "source_commit": "f27862f4b17483f969590684e3ef9bb7defd7636",
+      "kind": "row measurements"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/after/webgpu-highp-390x844-dpr1-apart.png",
+      "sha256": "ee822be497d3445bb2496ccd40976588f6723d7a0595d3983fe13951e701c694",
+      "bytes": 47726,
+      "source_commit": "f27862f4b17483f969590684e3ef9bb7defd7636",
+      "kind": "stage capture"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/after/webgpu-highp-391x843-dpr2.625.json",
+      "sha256": "123073a5af4122d25261eea2de8a13d06357213cd62d600b3901737f57a80a4d",
+      "bytes": 4215,
+      "source_commit": "f27862f4b17483f969590684e3ef9bb7defd7636",
+      "kind": "row measurements"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/after/webgpu-highp-391x843-dpr2.625-apart.png",
+      "sha256": "7c44a7bc0fb9f5f5564ab6767b0c548b5c7de223a2b948f7d07e17170c2eab5e",
+      "bytes": 242485,
+      "source_commit": "f27862f4b17483f969590684e3ef9bb7defd7636",
+      "kind": "stage capture"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/after/webgpu-highp-393x845-dpr3.5.json",
+      "sha256": "ef9464aac699fd5fd3b7886c7ac1356fbc43b03674e2207040db3255584b32f8",
+      "bytes": 4217,
+      "source_commit": "f27862f4b17483f969590684e3ef9bb7defd7636",
+      "kind": "row measurements"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/after/webgpu-highp-393x845-dpr3.5-apart.png",
+      "sha256": "b98b128b1f8d161013492bb17aa77828ff881e75fbe520c9e1a1660f4bcd2537",
+      "bytes": 298675,
+      "source_commit": "f27862f4b17483f969590684e3ef9bb7defd7636",
+      "kind": "stage capture"
+    },
+    {
+      "path": "docs/audits/three-codes-lines-2026-10/webgl2-fallback.json",
+      "sha256": "a891294c8bcb2818bbb1f876d9b345467eb0270c8079659f2438e25b70ae46f2",
+      "bytes": 4306,
+      "source_commit": "c8cf3aaeda7461e1df28ebce0648dfd1b29834e0",
+      "kind": "forced null WebGPU adapter; WebGL helper and render coverage"
+    }
+  ],
+  "native_proof_source_hashes": {
+    "src/stage.js": "6f3373c8c22a36d67bd345f2128b333dcc3c36b91ddc447c2d29b0309e679d20",
+    "src/token-bounds.js": "533ac421b6c2c0e555d1245cd5070bff6135b20a068e904bdbee3d9ff5e382b4",
+    "tests/cdx-three-bounds.spec.mjs": "f1ffb0052d9587c3848759af76416fd347a68190e08363a01447e8beb52ac4ba",
+    "tests/cdx-three-lines.spec.mjs": "7328605cf14ce1f0b7d37822ea64ccea6c757ef84679ac570c3d14f278ee2b1d",
+    "tests/cdx-three-browser.mjs": "ff6e8f3614e845e816387e0c4683b8050a50b9f50440a4b95683925e8639cf6e",
+    "tests/cdx-three.config.mjs": "9183519c6195c7b809297bd6f5c95ec9d42508992d8ee23a5a80f2860137a587"
+  },
+  "latest_code_commit": "c8cf3aaeda7461e1df28ebce0648dfd1b29834e0",
+  "latest_source_hashes": {
+    "src/stage.js": "6f3373c8c22a36d67bd345f2128b333dcc3c36b91ddc447c2d29b0309e679d20",
+    "src/token-bounds.js": "533ac421b6c2c0e555d1245cd5070bff6135b20a068e904bdbee3d9ff5e382b4",
+    "tests/cdx-three-bounds.spec.mjs": "f1ffb0052d9587c3848759af76416fd347a68190e08363a01447e8beb52ac4ba",
+    "tests/cdx-three-lines.spec.mjs": "16a08af28552340cc4d29b2ac248a6474aca02cf1136772edad4b62bed2aa296",
+    "tests/cdx-three-browser.mjs": "ff6e8f3614e845e816387e0c4683b8050a50b9f50440a4b95683925e8639cf6e",
+    "tests/cdx-three.config.mjs": "9183519c6195c7b809297bd6f5c95ec9d42508992d8ee23a5a80f2860137a587"
+  }
+}
