@@ -1,0 +1,18 @@
+
+Running 9 tests using 1 worker
+
+(node:17487) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:17487) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-adv.spec.mjs:11:3 › photo-3d opens without console or page errors (7.9s)
+  ✓  2 [chromium] › tests/cdx-adv.spec.mjs:11:3 › moving-photo-3d opens without console or page errors (11.5s)
+  ✓  3 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-code opens without console or page errors (10.2s)
+  ✓  4 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-picture opens without console or page errors (10.2s)
+  ✓  5 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-three opens without console or page errors (10.5s)
+  ✓  6 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-code exports a PNG that both readers decode exactly (16.1s)
+  ✓  7 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-picture exports a PNG that both readers decode exactly (25.1s)
+  ✓  8 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-three exports a PNG that both readers decode exactly (10.9s)
+  ✓  9 [chromium] › tests/cdx-adv.spec.mjs:24:3 › share-qr exports a PNG that both readers decode exactly (16.5s)
+
+  9 passed (2.0m)
