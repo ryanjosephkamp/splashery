@@ -51,7 +51,7 @@ function wordMap(code) {
   return result;
 }
 
-export function fitPictureErrors(code, pic, fraction = 0.4) {
+export function fitPictureErrors(code, pic, fraction = 0.4, maximumFraction = 0.6) {
   if (code.ecc !== "H" || !pic || fraction <= 0) return code;
   const { words, at, blockOf, blocks, maxErrors } = wordMap(code),
     n = code.size,
@@ -101,7 +101,7 @@ export function fitPictureErrors(code, pic, fraction = 0.4) {
     }
     if (flips.length) ranked[blockOf[word]].push({ word, benefit, flips });
   }
-  fraction = Math.min(0.6, fraction);
+  fraction = Math.min(Math.min(0.65, maximumFraction), fraction);
   const limit = Math.floor(maxErrors * fraction);
   if (reserved.some((set) => set.size > limit)) return code;
   const dark = code.dark.slice(),

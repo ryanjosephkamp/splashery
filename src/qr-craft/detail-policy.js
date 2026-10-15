@@ -25,10 +25,13 @@ export function detailFraction(picture, shape) {
     }
     lowContrast.set(
       picture,
-      sum.every(
-        (value, channel) => Math.max(0, squared[channel] / count - (value / count) ** 2) <= 0.01,
+      Math.max(
+        ...sum.map((value, channel) =>
+          Math.max(0, squared[channel] / count - (value / count) ** 2),
+        ),
       ),
     );
   }
-  return lowContrast.get(picture) ? 0.6 : 0.4;
+  const variance = lowContrast.get(picture);
+  return variance <= 0.0025 ? 0.65 : variance <= 0.01 ? 0.6 : 0.4;
 }
