@@ -167,6 +167,14 @@ test("strings: a drag across the guitar's strings plucks each one, in turn", asy
   const before = await page.evaluate(() => window.__splashery.player.handsOn.body?.pos.slice());
   await page.mouse.move(...px[0]);
   await page.mouse.down();
+  // Mouse-down starts an asynchronous GPU pick. Moves before it resolves
+  // are ignored; wait for this real press to acquire the string stroke.
+  await page.waitForFunction(() => {
+    const { app, player } = window.__splashery;
+    return (
+      app.toolState?.tool === "hands" && app.toolState.started && !!player.handsOn.extras?.strum
+    );
+  });
   for (let i = 1; i <= 24; i++) {
     const f = i / 24;
     await page.mouse.move(

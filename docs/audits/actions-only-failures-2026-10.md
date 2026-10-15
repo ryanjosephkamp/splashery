@@ -140,6 +140,14 @@ of real-time speed.
   real pointer input and every original motion, sound, position, and landing assertion. The
   leaning-tower fall itself already runs atomically, but the shared setup and other landmark checks
   still benefit from one clock. Local probe and full-file results are in the draft PR.
+- The [subsequent Actions run](https://github.com/ryanjosephkamp/splashery/actions/runs/38697467172)
+  still records zero guitar plucks. Its manual clock prevents aging but does not complete the GPU
+  pick: `App.toolStart` awaits `player.pickAt`, and `toolMove` discards moves until that press has
+  started. Mouse-down only dispatches the event; it does not await the asynchronous handler. Hold
+  the real native pick result for five seconds locally, and the unchanged drag reproduces the empty
+  pluck list. Waiting for the actual Hands-on string stroke before moving passes the same
+  delayed-pick probe with all six plucks. Keep all 24 real pointer moves, manual ticks, age limits,
+  and no-body-pickup assertions. No pick result or input is synthesized.
 - The next [Actions run](https://github.com/ryanjosephkamp/splashery/actions/runs/38683915392)
   passes all eight ui3 checks and the three weather checks, but still rejects the paired camera
   cost: 23.033 ms against 21.395 ms. Keep that failure and the unchanged bound. Most smoothed RGB
