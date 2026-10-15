@@ -19,6 +19,9 @@ async function open(page, id) {
   await page.waitForTimeout(500);
   await page.click("#hands-toggle");
   await tick(page, 5);
+  // These tests advance physics with tick()/drag(). A renderer frame between
+  // two protocol calls must not advance the joint again before its drive is read.
+  await page.evaluate(() => (window.__splashery.player.stage.updateHandlers = []));
 }
 
 // Steps the clock by hand (SwiftShader draws slowly).

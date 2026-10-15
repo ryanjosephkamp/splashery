@@ -806,7 +806,7 @@ export const KINDS = {
   screen: 15, // a screen pixel colored from the uSpScreen texture: z, w = u, v
   key: 16, // a key that goes down when pressed: z = key index (uSpKitB.w = index + depth)
   // Channel kinds follow out.morph (uSpMorph, four channels), with motion on or off:
-  morph: 17, // move toward a target by the channel: z = x * 4096 + y, w = z + 4096 * channel (12-bit offsets, see Kit.encodeMorphs)
+  morph: 17, // move toward a target by the channel: z = x * 4096 + y, w = z + 4096 * channel (12-bit offsets, see Kit.encodeMorphs; channel 4 to 7: 0 to 3, shrinking to 40% as it goes)
   band: 18, // glow (uSpGlowC) where the channel passes z: w = channel + band width
   fade: 19, // fade out as the channel passes z: w = channel + width (negative: fade in)
   skin: 20, // follow two tokens' offsets: z = a + 64 * b, w = blend toward b
@@ -950,6 +950,13 @@ vec3 spKitCenter(vec3 p) {
       float qy = an.z - qx * 4096.0;
       float ch = floor(an.w / 4096.0);
       float qz = an.w - ch * 4096.0;
+      // Lane Polish (engine): channels 4 to 7 are channels 0 to 3 for a
+      // splat that also shrinks as it goes (to 40% at the target), so a
+      // cloud of them reads as separate flat discs (Model to splats).
+      if (ch > 3.5) {
+        ch -= 4.0;
+        spKitScale *= 1.0 - 0.6 * spChan(ch);
+      }
       p += (vec3(qx, qy, qz) - 2048.0) * (${MORPH_RANGE.toFixed(1)} / 2048.0) * spChan(ch);
     } else if (kind == 18) {
       float ch = floor(an.w);
@@ -1213,8 +1220,12 @@ fn spKitCenter(p0: vec3f) -> vec3f {
     if (kind == 17) {
       let qx = floor(an.z / 4096.0);
       let qy = an.z - qx * 4096.0;
-      let ch = floor(an.w / 4096.0);
+      var ch = floor(an.w / 4096.0);
       let qz = an.w - ch * 4096.0;
+      if (ch > 3.5) {
+        ch = ch - 4.0;
+        spKitScale = spKitScale * (1.0 - 0.6 * spChan(ch));
+      }
       p = p + (vec3f(qx, qy, qz) - 2048.0) * (${MORPH_RANGE.toFixed(1)} / 2048.0) * spChan(ch);
     } else if (kind == 18) {
       let ch = floor(an.w);

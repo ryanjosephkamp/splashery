@@ -20,6 +20,9 @@ async function open(page, id) {
   await page.waitForTimeout(500);
   await page.click("#hands-toggle");
   await tick(page, 5);
+  // Own the simulation clock: the manual steps below must be the only steps,
+  // including while the driver is transporting snapshots of the spring and drive.
+  await page.evaluate(() => (window.__splashery.player.stage.updateHandlers = []));
 }
 
 // Steps the clock by hand (SwiftShader draws slowly).

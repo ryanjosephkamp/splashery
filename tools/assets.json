@@ -6710,7 +6710,7 @@
       "page": "https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer",
       "license": "Public domain",
       "checked": "October 6, 2026",
-      "note": "Exported by tools/pot-maps.mjs."
+      "note": "Exported by tools/pot-maps.mjs, then color-matched to the 10 km and 1 km pictures beside it by tools/pol-aerial-match.mjs (which pot-maps.mjs runs): gains 0.777, 0.768, and 0.718 for red, green, and blue, re-encoded at JPEG quality 90 (October 15, 2026)."
     },
     {
       "id": "pot-earth",
