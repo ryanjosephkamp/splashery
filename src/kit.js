@@ -800,7 +800,8 @@ export class Kit {
   //   to: (c) => [x, y, z] | null: a morph target in recipe coordinates
   //          (kind "morph"; the splat moves there as its channel goes to 1)
   //   channel: 0..3 or (c) => 0..3: which of out.morph drives a morph,
-  //          band or fade splat
+  //          band or fade splat (a morph's 4..7: its channel 0..3, the
+  //          splat shrinking to 40% as it goes; lane Polish)
   //   skin: (c) => [a, b, s]: follows tokens a and b, blended by s (kind
   //          "skin": an edge between two moving corners), or [a, b, c, d,
   //          s, t]: follows four (kind "skin4": a cell of cloth, corners
@@ -905,7 +906,9 @@ export class Kit {
   // splats pack their data (see KINDS in effects.js); a morph's target is
   // kept aside until the fit and packed by encodeMorphs().
   animParams(kind, p, pr, to, ch, skin) {
-    const c = Math.max(0, Math.min(3, Math.round(ch || 0)));
+    // (A morph's channel may be 4 to 7: the same as 0 to 3, the splat
+    // shrinking as it goes; lane Polish.)
+    const c = Math.max(0, Math.min(kind === KINDS.morph ? 7 : 3, Math.round(ch || 0)));
     const width = (w) => Math.max(0.005, Math.min(0.99, w));
     if (kind === KINDS.morph) {
       if (!this.morph) this.morph = new Float32Array(this.buf.capacity * 3);

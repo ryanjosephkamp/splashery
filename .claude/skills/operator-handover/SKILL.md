@@ -71,10 +71,13 @@ those show in transcripts the owner reads.
    transcript, a full export) to a Sonnet helper and keep only its summary.
 3. **Republish the handover page** with the updated sections and files, including `sealed/` when a
    blind review is open. Read it back once to check the files are there.
-4. **Start the new Operator** with `create_session`: model `claude-opus-5-5`, the Splashery repo as
-   the source, title "Splashery Operator (Opus)", tags `["splashery-lane:Operator"]`, and the first
-   prompt below. The owner sets its effort in the app (high, his call of October 8, 2026); say so in
-   your message to him.
+4. **Start the new Operator.** First check your own `lineage` in `get_session`: if your `depth` is
+   one short of its `limit` or more, a session you start couldn't start lanes, so ask the owner to
+   start it instead (a new session on the Splashery repo in the Claude app, Opus 5.5, with the first
+   prompt below), and skip to step 5 once it's running. Otherwise, start it with `create_session`:
+   model `claude-opus-5-5`, the Splashery repo as the source, title "Splashery Operator (Opus)",
+   tags `["splashery-lane:Operator"]`, and the first prompt below. The owner sets its effort in the
+   app (high, his call of October 8, 2026); say so in your message to him.
 5. **Check the readback.** Correct anything wrong with a message to the new session
    (`create_trigger` with `persistent_session_id` and `run_once_at` two minutes out). When it's
    right, send "take over".

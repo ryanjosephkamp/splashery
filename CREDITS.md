@@ -726,20 +726,60 @@ peak-normalized and saved as a small MP3; it loads only when its toy is tapped. 
 | `robot-wind.mp3`             | [Wind-up sound](https://freesound.org/s/445966/)                                                 | Breviceps                                          | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 | `dice-throw.mp3`             | [Casino Audio 1.1: dice-throw-1.ogg and dice-throw-3.ogg](https://kenney.nl/assets/casino-audio) | Kenney (kenney.nl)                                 | [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/) |
 
-The Video to 3D toy (a labs toy, lane Video 3D) ships two sample scenes in `assets/toys/video-3d/`,
-each trained by `tools/v3d-sample.mjs` from a stretch of a video on Wikimedia Commons (the splats
-and the solved camera path). Since October 5, 2026 (lane Studio media) each also ships that same
-stretch of its video at 480p, without sound (`liberty-source.mp4` and `.webm`,
-`edinburgh-source.mp4` and `.webm`, cut by `tools/smd-source.mjs` from Commons' own 480p transcode),
-for the toy's "Show the original" option, under the same CC BY 3.0 license and credit. Each license
-was checked on its live Commons page on September 30, 2026 (and again on October 5, 2026):
+The Video to 3D toy (a labs toy, lane Video 3D) began with two sample scenes in
+`assets/toys/video-3d/`, each trained by `tools/v3d-sample.mjs` from a stretch of a video on
+Wikimedia Commons (the splats and the solved camera path). Since October 5, 2026 (lane Studio media)
+each also ships that same stretch of its video at 480p, without sound (`liberty-source.mp4` and
+`.webm`, `edinburgh-source.mp4` and `.webm`, cut by `tools/smd-source.mjs` from Commons' own 480p
+transcode), for the toy's "Show the original" option, under the same CC BY 3.0 license and credit.
+Each license was checked on its live Commons page on September 30, 2026 (and again on October 5,
+2026):
 
 - "Statue Of Liberty 4k Drone" by the Dronalist (14 seconds from 3:24),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
   [Commons](https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm).
 - "Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD)" by POPtravel (10 seconds from 7:32),
   [CC BY 3.0](https://creativecommons.org/licenses/by/3.0/), on
-  [Commons](<https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm>).
+  [Commons](https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_%28UK%29_-_4K_60fps_%28UHD%29.webm).
+
+<!-- Codex task 40 new Video to 3D captures -->
+
+Codex task 40 code (MIT): made by Ryan with Codex (GPT-6).
+
+New Video to 3D captures, checked on their live Commons pages on October 12, 2026:
+
+- [Forest path, walked](https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm),
+  by Vitaly Zdanevich: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), 20 seconds from 0
+  seconds.
+- [Ruined courtyard, flown over](https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_%28august_2021%29.webm),
+  by Sillerkiil: [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/), 20 seconds from 18
+  seconds.
+- [Coastal ruins, drone pass](https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_%28Fall_2021%29.webm),
+  by Sillerkiil: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), 20 seconds from 14
+  seconds.
+- [Castle courtyard, orbited](https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm),
+  by Sillerkiil: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/), 20 seconds from 24
+  seconds.
+
+The transformations were made by Ryan with Codex (GPT-6). These are real captures, initially solved
+and trained with Splat.js. Their silent 480p source cuts, camera paths, and splats retain each
+source license, including CC BY-SA. The models use bounded phone budgets and larger desktop tiers;
+every completed iteration, initial bake, and continuation is recorded in the sample JSON. Task 55
+adds longer offline CPU fitting on native-source images, separately fitted phone and desktop tiers,
+and held-out clarity measurements. The Forest path has a new COLMAP camera solve. The sample JSON
+records actual resolutions, model hashes, and training steps;
+[the audit](docs/audits/video-3d-r2-2026-10.md) gives the comparison protocol and results. The
+native-resolution hardware workflow is `tools/cdx-v3d-mac-bake.mjs`; Metal training was not run in
+this container. All six default models are loaded through source-credited BKD1 manifests and gzip
+chunks. The small PLYs remain offline build sources. Sources, changes, byte counts, and SHA-256
+hashes of every shipped sample file are recorded in `tools/assets.json`. The selected shots were
+inspected for identifiable people, logos, and brands.
+
+<!-- End Codex task 40 new Video to 3D captures -->
+
+Video to 3D clarity review images and clips live only on the separate `codex/video-3d-r3-clips`
+branch; earlier task 40 media remains on `codex/video-3d-r2-clips`. Their source licenses and hashes
+are recorded beside them; the audit links to that evidence.
 
 The camera path and the splats are worked out on the device by
 [Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
@@ -1315,8 +1355,10 @@ reads the files of the Space r2, Science r3 and photoreal toys named below.
   are not used).
 - 3 km:
   [USGS Imagery Only](https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer)
-  (USDA NAIP, USGS The National Map). Public domain. The half of the Earth for the globe is the same
-  service's Blue Marble: Next Generation (NASA Earth Observatory, Reto Stöckli). Public domain.
+  (USDA NAIP, USGS The National Map). Public domain. Its color is matched to the 10 km and 1 km
+  pictures beside it (one gain per channel, by tools/pol-aerial-match.mjs; October 15, 2026). The
+  half of the Earth for the globe is the same service's Blue Marble: Next Generation (NASA Earth
+  Observatory, Reto Stöckli). Public domain.
 - 1 km to 30 m: District of Columbia, Office of the Chief Technology Officer,
   [Aerial Photography (Orthophoto) 2023](https://opendata.dc.gov/), 3 inch (8 cm),
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (its live license, checked October 6,
@@ -1661,6 +1703,30 @@ Picture QR (lane QR r4, October 10, 2026) also offers four of them as its sample
 AI-made in its picker and its credit: Felt farm (D37), Glass wave (D38), Mushrooms (D27), and Stone
 arch (D17).
 
+## AI-made Studio test inputs: depth lab J (Codex task 75e)
+
+Made by Ryan with Codex (GPT-6) and **ChatGPT Images** (the OpenAI native image tool), October
+14, 2026. These are **AI-made by the owner**, original fictional Studio test inputs, CC0 under Rules
+B4. They are never real captures, real places, or measured depth references. They are not used in
+science, math, or engineering toys, or on photoreal shelves. No people, faces, text, logos, or
+identifiable landmarks were seen in the ten inspected native images.
+
+The 160 JPEGs under `assets/depth-lab/j/` comprise ten source pictures and 150 fixed-source
+exposure/blur variants. Every picture is 1,280 × 1,280, JPEG quality 0.78. The native images were
+1,254 × 1,254 and were resampled once; this does not add captured detail. The image tool did not
+expose its model identity or generation seed. Prompts, native hashes, individual file hashes,
+dimensions, dates, transformations, and credits are recorded under `depthLabSamples` in
+`tools/assets.json`. The [J manifest](tools/depth-lab/j.json),
+[contact sheet](docs/audits/depth-lab/j.jpg), and
+[J README section](docs/audits/depth-lab/README.md#j-hard-real-world-cases-part-e) label them as
+AI-made. No public picker or runtime source was changed.
+
+The source files are `j-glass-source.jpg`, `j-mirror-source.jpg`, `j-hair-source.jpg`,
+`j-fur-source.jpg`, `j-thin-source.jpg`, `j-night-source.jpg`, `j-painting-source.jpg`,
+`j-line-art-source.jpg`, `j-graphic-source.jpg`, and `j-clutter-source.jpg`, all in that directory.
+Their variants keep the same scene prefix. Full prompts and deterministic variant processing are in
+`tools/depth-lab/gen-j.mjs` (code offered under Splashery's MIT license).
+
 ## AI-made Studio samples: hard cases (Codex task 57)
 
 Made by Ryan with Codex (GPT-6) and the OpenAI native image tool, October 13, 2026. These 20
@@ -1773,3 +1839,89 @@ the picker and in-app credit. Checked October 13, 2026:
 The full prompts, hashes, scores, five-link scan rates, and phone-size contact sheet are in
 [the sample-pictures audit](docs/audits/sample-pictures-2026-10.md). No new asset loads before it is
 picked.
+
+Photo to 3D round 4 startup work, comparison tools, and review recordings were made by Ryan with
+Codex (GPT-6), October 14, 2026. Code is MIT; the original recording contribution is CC0 1.0,
+subject to each source image's existing license. See the
+[round 4 audit](docs/audits/photo-3d-r4-2026-10.md).
+
+# Studio truth fixtures (Codex task 56)
+
+The original procedural fixtures in `tests/fixtures/truth/`, including their rendered pictures,
+camera paths, depth maps, masks, and contact sheet, are **made by Ryan with Codex (GPT-6)** and
+dedicated to CC0-1.0. These are rendered scenes, not real captures. No outside assets are used.
+Their source is `tools/studio-truth-generate.py`, and each committed file's size and SHA-256 are
+recorded in `tests/fixtures/truth/assets.json`. Full sequences are kept separately from the shipped
+site. The build-time code is offered under this repository's MIT license.
+
+## Picture QR theme packs (Codex task 58)
+
+48 original code-made illustrations, selected from 138 candidates, **Made by Ryan with Codex
+(GPT-6)**. All are offered under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/),
+checked October 14, 2026. Source:
+[the original illustration generator](tools/cdx-qr-themes-art.mjs). Fictional artwork; Space-art is
+imaginary art, never a real capture or scientific data. Chromium 151.0.7922.173 rasterizes the
+original SVG to 960×960 JPEGs at quality 88. No source picture uses a QR payload or grid. Each
+choice says code-made; pictures load only when selected. The complete records and SHA-256 hashes are
+under `pictureQrSamples` in `tools/assets.json`. See
+[the scan report](docs/audits/qr-theme-packs-2026-10.md) for ten-link results and detail scores.
+
+| Name                                    | Theme        | File                                                                  | Maker                           | License |
+| --------------------------------------- | ------------ | --------------------------------------------------------------------- | ------------------------------- | ------- |
+| Summer sun · soft                       | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-2-2.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Autumn maple                            | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-3-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Winter snowflake                        | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-4-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Winter mittens · soft                   | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-8-2.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Apple                                   | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-9-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Spring buds                             | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-10-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Winter fir · soft                       | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-11-2.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Autumn acorn                            | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-12-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Scallop shell · soft                    | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-1-2.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Rolling wave                            | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-3-1.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Starfish                                | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-4-1.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Reef fish · soft                        | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-5-2.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Coral fan · soft                        | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-6-2.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Pearl shell                             | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-8-1.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Sea turtle · soft                       | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-9-2.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Jellyfish · soft                        | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-10-2.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Fern frond                              | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-1-1.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Woodland mushroom · soft                | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-2-2.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Pinecone · soft                         | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-3-2.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Oak leaf · soft                         | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-5-2.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Acorn                                   | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-6-1.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Berry branch                            | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-9-1.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Pond leaves                             | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-10-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Birch branch                            | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-12-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Ringed planet · soft (imaginary art)    | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-1-2.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Crescent moon (imaginary art)           | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-2-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Spiral galaxy · soft (imaginary art)    | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-4-2.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Paper rocket (imaginary art)            | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-5-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Orbital rings (imaginary art)           | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-6-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Imaginary nebula · soft (imaginary art) | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-8-2.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Twin planets (imaginary art)            | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-9-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Meteor shower (imaginary art)           | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-10-1.jpg)    | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Woven bands                             | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-2-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Spiral tiles                            | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-4-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Ripple rings                            | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-6-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Mosaic diamonds · soft                  | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-7-2.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Arc quilt · soft                        | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-8-2.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Paper folds                             | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-9-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Wavy stripes                            | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-10-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Large chevrons · soft                   | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-11-2.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Balloons                                | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-1-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Party cake                              | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-3-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Paper bunting                           | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-4-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Confetti                                | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-5-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Festival lantern · soft                 | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-6-2.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Ribbon bow                              | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-7-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Flower bouquet                          | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-8-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Paper pinwheel                          | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-10-1.jpg) | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+
+Photo to 3D loading-cover color and Hybrid status follow-up code and regression checks are made by
+Ryan with Codex (GPT-6), October 15, 2026. Code is MIT. Original capture contributions are CC0 1.0;
+source assets retain their recorded terms. See the
+[loading-color and status audit](docs/audits/photo-3d-status-2026-10.md).
+
+The WebGPU frame-queue backpressure, live-embed regression checks, and manual PDF text checks are
+made by Ryan with Codex (GPT-6), October 15, 2026, under the MIT license. See the
+[live-embed teardown audit](docs/audits/embed-context-close-2026-10.md).

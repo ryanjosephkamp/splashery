@@ -1,0 +1,10 @@
+{
+  "mainCommit": "c044dc9d",
+  "checkedSourceCommit": "d40261ee",
+  "test": "qr4-craft: the QR code toy builds the very same splats from the shared builder",
+  "method": "Extract HEAD src, tests/qr4-craft.spec.mjs, and playwright.config.mjs into an isolated cache directory with git archive; reuse unchanged vendor and node_modules; run only the shared-builder hash test with Playwright. The case uses Node, not a browser.",
+  "node": "24.19.0",
+  "expectedSha256": "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144",
+  "actualSha256": "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6",
+  "result": "The identical hash mismatch occurs on the feature branch and isolated main baseline. The QR build, crisp, and encode sources are unchanged by this task and by the later main update to 11d83626."
+}

@@ -19,6 +19,9 @@ async function open(page, id) {
   await page.waitForTimeout(500);
   await page.click("#hands-toggle");
   await tick(page, 5);
+  // All motion is stepped below; no renderer update may move a measured piece
+  // between the explicit physics step and its subsequent snapshot.
+  await page.evaluate(() => (window.__splashery.player.stage.updateHandlers = []));
 }
 
 // Steps the clock by hand (SwiftShader draws slowly).

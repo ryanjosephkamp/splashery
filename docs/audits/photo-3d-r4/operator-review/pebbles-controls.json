@@ -1,0 +1,146 @@
+[
+  {
+    "index": 0,
+    "name": "branch",
+    "root": "/workspace/splashery",
+    "stageSource": "/workspace/splashery/src/stage.js",
+    "stageSha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+    "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+    "returncode": 0,
+    "stats": {
+      "startTime": "2026-10-14T16:41:16.924Z",
+      "duration": 17992.396,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "finishedUTC": "2026-10-14T16:41:34.941510+00:00"
+  },
+  {
+    "index": 1,
+    "name": "main",
+    "root": "/workspace/splashery-r4-public",
+    "stageSource": "/workspace/splashery-r4-public/src/stage.js",
+    "stageSha256": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
+    "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+    "returncode": 1,
+    "stats": {
+      "startTime": "2026-10-14T16:41:35.996Z",
+      "duration": 20962.402000000002,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "finishedUTC": "2026-10-14T16:41:56.987040+00:00"
+  },
+  {
+    "index": 2,
+    "name": "main-with-branch-stage",
+    "root": "/workspace/splashery-r4-public",
+    "stageSource": "/workspace/splashery/src/stage.js",
+    "stageSha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+    "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+    "returncode": 1,
+    "stats": {
+      "startTime": "2026-10-14T16:41:57.957Z",
+      "duration": 19615.374,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "finishedUTC": "2026-10-14T16:42:17.602194+00:00"
+  },
+  {
+    "index": 3,
+    "name": "branch-with-main-stage",
+    "root": "/workspace/splashery",
+    "stageSource": "/workspace/splashery-r4-public/src/stage.js",
+    "stageSha256": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
+    "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+    "returncode": 0,
+    "stats": {
+      "startTime": "2026-10-14T16:42:18.609Z",
+      "duration": 18078.293999999998,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "finishedUTC": "2026-10-14T16:42:36.715666+00:00"
+  },
+  {
+    "index": 4,
+    "name": "branch-with-main-stage",
+    "root": "/workspace/splashery",
+    "stageSource": "/workspace/splashery-r4-public/src/stage.js",
+    "stageSha256": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
+    "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+    "returncode": 1,
+    "stats": {
+      "startTime": "2026-10-14T16:42:37.641Z",
+      "duration": 19645.263,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "finishedUTC": "2026-10-14T16:42:57.314432+00:00"
+  },
+  {
+    "index": 5,
+    "name": "main-with-branch-stage",
+    "root": "/workspace/splashery-r4-public",
+    "stageSource": "/workspace/splashery/src/stage.js",
+    "stageSha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+    "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+    "returncode": 1,
+    "stats": {
+      "startTime": "2026-10-14T16:42:58.236Z",
+      "duration": 20523.013,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "finishedUTC": "2026-10-14T16:43:18.787551+00:00"
+  },
+  {
+    "index": 6,
+    "name": "main",
+    "root": "/workspace/splashery-r4-public",
+    "stageSource": "/workspace/splashery-r4-public/src/stage.js",
+    "stageSha256": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
+    "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+    "returncode": 1,
+    "stats": {
+      "startTime": "2026-10-14T16:43:19.722Z",
+      "duration": 21815.464,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "finishedUTC": "2026-10-14T16:43:41.573687+00:00"
+  },
+  {
+    "index": 7,
+    "name": "branch",
+    "root": "/workspace/splashery",
+    "stageSource": "/workspace/splashery/src/stage.js",
+    "stageSha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+    "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+    "returncode": 1,
+    "stats": {
+      "startTime": "2026-10-14T16:43:42.669Z",
+      "duration": 21849.326,
+      "expected": 0,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "finishedUTC": "2026-10-14T16:44:04.547260+00:00"
+  }
+]
