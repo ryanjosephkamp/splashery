@@ -378,6 +378,11 @@ test("the surface plotter plots a typed surface", async ({ page }) => {
   await expect
     .poll(() => page.evaluate(() => window.__splashery.player.scene.toy.options))
     .toMatchObject({ surface: "custom", eq: "z = sin(x)*cos(y)*a" });
+  // Options change before the rebuilt input panel is installed. Wait for
+  // the applied equation, as the curve test does, before typing again.
+  await expect(page.locator("#toy-input .input-shown")).toHaveText(
+    "Your surface: z = sin(x)*cos(y)*a",
+  );
   await page.locator("#toy-input-text").fill("z = t");
   await page.locator("#toy-input-go").click();
   await expect(page.locator("#toy-input .warning")).toHaveText(/^That can't be drawn: “t” can't be used here/); // prettier-ignore

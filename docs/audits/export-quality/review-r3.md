@@ -85,10 +85,28 @@ its automatic isolated rerun result. Passing alone did not erase a failure.
 | `man5:201`, reproducible shipped PDF | No; marked known on main in that run | Imported a fresh immutable edition from the pinned Chromium 141 workflow after adding the library rows. All 29 manual and PDF checks passed, including reproducible bytes. |
 | `man5:252`, complete vendor table    | No                                   | Reproduced. Added both MIT muxers, their pinned versions, jobs, and lazy loading point to the manual; rebuilt its combined page. Passed afterward.                         |
 | `man7a:67`, animated grid figure     | Yes                                  | Retained as a reported timing failure; no assertion changed.                                                                                                               |
-| `math:368`, typed surface            | Yes                                  | Retained as a reported timing failure; no assertion changed.                                                                                                               |
+| `math:368`, typed surface            | Yes                                  | The intermediate run exposed an input-panel rebuild race; the added readiness assertion is described below.                                                                |
 | `shr:135`, desktop Share layout      | No                                   | CI trace identified `gif-frames` clipping at “144 frames.” The Frames field now contains just the number; no layout or assertion changed.                                  |
 | `spg:46`, complete site credits      | No                                   | Reproduced. Rebuilt the generated credits page from CREDITS.md and LICENSES.md; passed afterward.                                                                          |
 | `ui3:76`, pause/resume               | Yes                                  | Retained as a reported timing failure; no assertion changed.                                                                                                               |
+
+## Superseded intermediate run
+
+The
+[intermediate run at cd8ffb7c](https://github.com/ryanjosephkamp/splashery/actions/runs/38812613741)
+was superseded when the checked PDF and full-length evidence landed. It was canceled, so its partial
+results are not a full-suite result. Completed reports exposed these five failures:
+
+| Failure                              | Automatic isolated rerun                                                    | Finding                                                                                                                                                                                                                                                                                                                                        |
+| ------------------------------------ | --------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `math:368`, typed surface            | Failed with the same wrong empty-input message                              | Scene options update before the rebuilt input panel is installed. The test typed the next equation into the old panel. Added an assertion that the applied equation appears before typing again, matching the curve test. All original options/error checks remain.                                                                            |
+| `fx4-engine:79`, non-rim WebGL2 toys | Failed with connection refused after the server stopped during cancellation | Initial difference was 348 bouncy-ball pixels versus a 220-pixel threshold. The canceled-run retry did not reproduce that comparison. A fresh SwiftShader rerun timed out at 240 seconds before finishing the three-context comparison. A longer CLI time budget is being checked; all pixel assertions and repository timeouts are unchanged. |
+| `man5:201`, shipped PDF              | Failed with the same stale-PDF message                                      | Corrected by the checked new immutable edition; all 29 manual/PDF checks passed in the pinned workflow.                                                                                                                                                                                                                                        |
+| `hh5-math:104`, Menger sponge pull   | Passed                                                                      | Reported as a failure in that run; no assertion changed.                                                                                                                                                                                                                                                                                       |
+| `smoke:1054`, resizing panel/shelf   | Passed                                                                      | Reported as a failure in that run; no assertion changed.                                                                                                                                                                                                                                                                                       |
+
+The surface test passed three consecutive reruns after the caption check was added. Its exact error
+and option assertions and its timeout are unchanged.
 
 ## Validation checkpoint
 
