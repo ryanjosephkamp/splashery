@@ -73,15 +73,15 @@
     "galaxy-box": {
       "kind": "kit",
       "recipeFile": "src/packs/science.js",
-      "recipeKB": 68.8,
-      "recipeGzipKB": 22.2,
+      "recipeKB": 70.6,
+      "recipeGzipKB": 22.9,
       "sharedBy": 6
     },
     "smlm-microscope": {
       "kind": "kit",
       "recipeFile": "src/packs/science.js",
-      "recipeKB": 68.8,
-      "recipeGzipKB": 22.2,
+      "recipeKB": 70.6,
+      "recipeGzipKB": 22.9,
       "sharedBy": 6
     },
     "st-helens": {
@@ -94,8 +94,8 @@
     "cryoem-map": {
       "kind": "kit",
       "recipeFile": "src/packs/science.js",
-      "recipeKB": 68.8,
-      "recipeGzipKB": 22.2,
+      "recipeKB": 70.6,
+      "recipeGzipKB": 22.9,
       "sharedBy": 6
     },
     "photo-3d": {
@@ -115,22 +115,22 @@
     "your-book": {
       "kind": "kit",
       "recipeFile": "src/packs/pictures.js",
-      "recipeKB": 129,
-      "recipeGzipKB": 41.6,
+      "recipeKB": 139.9,
+      "recipeGzipKB": 45.5,
       "sharedBy": 5
     },
     "model-splats": {
       "kind": "kit",
       "recipeFile": "src/packs/studio-models.js",
-      "recipeKB": 16.6,
-      "recipeGzipKB": 6.3,
+      "recipeKB": 17.1,
+      "recipeGzipKB": 6.5,
       "sharedBy": 1
     },
     "chladni-plate": {
       "kind": "kit",
       "recipeFile": "src/packs/studio.js",
-      "recipeKB": 74.8,
-      "recipeGzipKB": 24.8,
+      "recipeKB": 76.3,
+      "recipeGzipKB": 25.4,
       "sharedBy": 3
     },
     "light-lab": {
