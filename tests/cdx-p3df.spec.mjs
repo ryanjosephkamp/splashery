@@ -6,6 +6,7 @@ import path from "node:path";
 import http from "node:http";
 import { runAudit, parseArgs } from "../tools/p3d-failures.mjs";
 import { inventory, ROOT } from "../tools/p3df/inputs.mjs";
+import { galleryHtml } from "../tools/p3df/gallery.mjs";
 import {
   referenceError,
   cueDepth,
@@ -214,6 +215,87 @@ test("private output refuses checkout folders and symlink aliases outside .cache
     fs.rmSync(cache, { recursive: true, force: true });
     fs.rmSync(folder, { recursive: true, force: true });
   }
+});
+
+test("slim review gallery uses its WebP map and labels resized evidence honestly", async ({
+  page,
+}) => {
+  const data = {
+    complete: true,
+    source: { head: "fixture", sha256: "fixture" },
+    environment: "Fixture",
+    settings: {
+      profiles: ["phone"],
+      depth: 0.5,
+      poses: [
+        [0, 0],
+        [20, 0],
+      ],
+    },
+    thresholds: { fringes: 0.75 },
+    publication: { lossy: true },
+    inputs: [
+      {
+        id: "fixture",
+        label: "Fixture",
+        kind: "fixture",
+        author: "Fixture",
+        license: "Fixture",
+        photo: "inputs/source.jpg",
+        photoPreview: "previews/source.webp",
+        record: "records/fixture.json.gz",
+        profiles: {
+          phone: {
+            native: [585, 1266],
+            severity: 2,
+            values: { fringes: 1.5 },
+            front: "renders/front.webp",
+            worst: "renders/turn.webp",
+            frontPreview: "previews/front.webp",
+            worstPreview: "previews/worst.webp",
+            worstPose: [20, 0],
+            depthImage: "renders/depth.webp",
+            summary: { fringes: { worstPose: [20, 0], value: 1.5 } },
+            rows: [{ depth: {}, fringe: { evaluated: 1 } }],
+            reviewFiles: {
+              poses: { "20,0": "renders/turn.webp" },
+              depthDiagnostics: "renders/depth.json.gz",
+              anchors: "renders/anchors.json.gz",
+            },
+          },
+        },
+      },
+    ],
+  };
+  const html = galleryHtml(data);
+  await page.route("http://p3df.test/**", (route) =>
+    route.fulfill(
+      new URL(route.request().url()).pathname === "/"
+        ? { contentType: "text/html", body: html }
+        : {
+            contentType: "image/png",
+            body: fs.readFileSync(path.join(ROOT, "assets/app/icon-180.png")),
+          },
+    ),
+  );
+  await page.goto("http://p3df.test/");
+  await expect(page.locator(".images img").first()).toHaveAttribute("src", "previews/source.webp");
+  await expect(page.locator("#method")).toContainText("lossy WebP");
+  await expect(page.locator("figcaption").nth(1)).toContainText("phone-size WebP");
+  await page.locator("#failure").selectOption("fringes");
+  await expect(page.getByRole("link", { name: /this failure/ })).toHaveAttribute(
+    "href",
+    "renders/turn.webp",
+  );
+  await page.locator("summary").click();
+  await expect(page.getByRole("link", { name: "Depth-region diagnostics" })).toHaveAttribute(
+    "href",
+    "renders/depth.json.gz",
+  );
+  await expect(page.getByRole("link", { name: "Edge and thin source anchors" })).toHaveAttribute(
+    "href",
+    "renders/anchors.json.gz",
+  );
 });
 
 test("two real inputs render at the phone profile, score truth, and generate a safe offline gallery", async ({
