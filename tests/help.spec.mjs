@@ -275,6 +275,13 @@ for (const [w, h] of [
     for (const [id, label] of toys) {
       await pick(page, id, label);
       await page.waitForTimeout(1200);
+      // A slow first load can use up the hint's auto-hide timer. Refresh it
+      // through the public button before measuring the same layout and pixels.
+      await page.evaluate(() => {
+        const toggle = document.getElementById("help-toggle");
+        if (toggle.getAttribute("aria-expanded") === "true") toggle.click();
+        toggle.click();
+      });
       await expect(line(page)).toBeVisible();
       // Clear of the toy's name line too (a scan's credit wraps it on a phone).
       const status = await page.locator("#toy-status").boundingBox();

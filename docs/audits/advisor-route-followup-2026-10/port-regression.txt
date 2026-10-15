@@ -1,0 +1,50 @@
+Task 84 alternate-port regression verification.
+
+Before the fix, both UI QR tests failed on port 4664 because they expected the saved 4173 URL. After the fix, both compare against the URL returned by the current Share dialog. Unassisted finder and exact payload equality checks remain.
+
+Command:
+SPLASHERY_PORT=4664 SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/cdx-adv.spec.mjs tests/cdx-adv-qr.spec.mjs tests/cdx-adv-files.spec.mjs tests/shw.spec.mjs --grep 'cdx-adv|the measured facts are current' --workers=2 --output .cache/advisor-route-port/green-results
+
+Playwright output (HTTP access lines and ANSI color sequences omitted):
+Running 24 tests using 2 workers
+
+(node:98460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:98459) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:98460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:98459) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › tests/cdx-adv-files.spec.mjs:64:5 › photo-3d: recipient notice at 390 names the file and offers keyboard actions (10.6s)
+  ✓   1 [chromium] › tests/cdx-adv-qr.spec.mjs:14:1 › the saved finder counterexample exports a PNG both readers find without geometry hints (20.7s)
+  ✓   3 [chromium] › tests/cdx-adv-files.spec.mjs:64:5 › photo-3d: recipient notice at 1440 names the file and offers keyboard actions (12.8s)
+  ✓   5 [chromium] › tests/cdx-adv-files.spec.mjs:128:3 › photo-3d: a recipient opens the file through the notice and retains the scene settings (16.7s)
+  ✓   4 [chromium] › tests/cdx-adv-qr.spec.mjs:42:1 › a reader load failure offers JSON and permits an export retry (22.7s)
+  ✓   6 [chromium] › tests/cdx-adv-files.spec.mjs:177:3 › photo-3d: a picker error stays visible in the notice with the controls folded (7.4s)
+  ✓   7 [chromium] › tests/cdx-adv-qr.spec.mjs:95:1 › diagnostic: original share pixels decode with geometry while the phone finder fails (19.8s)
+  ✓   8 [chromium] › tests/cdx-adv-files.spec.mjs:212:3 › photo-3d: v2 and v3 scene files and old links retain their loading behavior (19.6s)
+  ✓  10 [chromium] › tests/cdx-adv-files.spec.mjs:64:5 › moving-photo-3d: recipient notice at 390 names the file and offers keyboard actions (13.9s)
+  ✓   9 [chromium] › tests/cdx-adv-qr.spec.mjs:120:1 › declared export geometry rejects wrong dimensions, blank pixels, and corrupted data (23.8s)
+  ✓  11 [chromium] › tests/cdx-adv-files.spec.mjs:64:5 › moving-photo-3d: recipient notice at 1440 names the file and offers keyboard actions (16.9s)
+  ✓  12 [chromium] › tests/cdx-adv.spec.mjs:11:3 › photo-3d opens without console or page errors (13.4s)
+  ✓  14 [chromium] › tests/cdx-adv.spec.mjs:11:3 › moving-photo-3d opens without console or page errors (21.6s)
+  ✓  15 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-code opens without console or page errors (16.4s)
+  ✓  16 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-picture opens without console or page errors (21.5s)
+  ✓  13 [chromium] › tests/cdx-adv-files.spec.mjs:128:3 › moving-photo-3d: a recipient opens the file through the notice and retains the scene settings (1.1m)
+  ✓  17 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-three opens without console or page errors (14.3s)
+  ✓  18 [chromium] › tests/cdx-adv-files.spec.mjs:177:3 › moving-photo-3d: a picker error stays visible in the notice with the controls folded (11.6s)
+  ✓  20 [chromium] › tests/cdx-adv-files.spec.mjs:212:3 › moving-photo-3d: v2 and v3 scene files and old links retain their loading behavior (16.4s)
+  ✓  21 [chromium] › tests/shw.spec.mjs:27:1 › the measured facts are current (429ms)
+  ✓  19 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-code exports a PNG that both readers decode exactly (24.8s)
+  ✓  22 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-picture exports a PNG that both readers decode exactly (25.7s)
+  ✓  23 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-three exports a PNG that both readers decode exactly (11.6s)
+  ✓  24 [chromium] › tests/cdx-adv.spec.mjs:24:3 › share-qr exports a PNG that both readers decode exactly (16.9s)
+
+  24 passed (4.3m)
+
+node tools/shw-facts.mjs
+wrote src/showcase/facts.json (27 toys)
+
+node tools/shw-facts.mjs --check
+facts.json is current

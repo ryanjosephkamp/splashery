@@ -407,6 +407,10 @@ const P3D = {
   info: null, // what the last build made, for shown() and the tests
 };
 
+// A different named file already open in this page must not stand in for the sender's photo.
+const hasOwnPhoto = (o) =>
+  o.source === "custom" && P3D.custom && (!o.photoName || P3D.custom.name === o.photoName);
+
 export const photoState = () => ({ ...P3D.info });
 
 const MAX_SIDE = 2048; // a bigger photo is reduced on the way in (memory)
@@ -674,6 +678,8 @@ const PHOTO_3D = {
   sounds: (o) => (o.sound === "custom" && OWN.key ? [ownSpec()] : []),
   input: {
     title: "Your own photo",
+    missingFile: (o) =>
+      o.source === "custom" && o.photoName && !hasOwnPhoto(o) ? o.photoName : null,
     accept:
       ".jpg,.jpeg,.png,.webp,.heic,.heif,image/jpeg,image/png,image/webp,image/heic,image/heif",
     binary: true,
@@ -730,10 +736,9 @@ const PHOTO_3D = {
     const pl = globalThis.window?.__splashery?.player;
     const token = pl?.loadToken;
     const current = () => generation === P3D.preparing && (!pl || token === pl.loadToken);
-    const src =
-      o.source === "custom" && P3D.custom
-        ? P3D.custom
-        : await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
+    const src = hasOwnPhoto(o)
+      ? P3D.custom
+      : await loadSample(o.source === "custom" ? SAMPLES[0].id : o.source);
     if (!current()) return;
     P3D.want = src;
     if (typeof window !== "undefined" && typeof Worker !== "undefined" && !liveOn()) {
