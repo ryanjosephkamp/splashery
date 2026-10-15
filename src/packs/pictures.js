@@ -655,6 +655,7 @@ function bookView(st, out) {
 }
 const BK_FOCUS_FLEX = 1.4; // lane Polish: a page's bend as it turns, seen a page at a time
 const BK_COVER_WAIT = 0.4; // lane Polish: seconds a cover waits for the view to pull back
+const BK_TURN_WAIT = 0.3; // lane Polish: and a page
 const BK_TURN_VIEW = 1.9; // lane Polish: the view's width while a page turns, in pages
 const BK_PAGE_VIEW = 1.14; // lane Polish: and while a page is read
 // A tap forward on a left page in view (or back on a right one) glides to
@@ -1942,10 +1943,10 @@ const BOOK_RECIPE = {
         if (s.fv) need(i, "f", s.f);
         if (s.bv) need(i, "b", s.b);
       });
-      // (Lane Polish: seen a page at a time, the cover waits a moment while
-      // the view pulls back to the whole book, so it turns in view.)
+      // (Lane Polish: seen a page at a time, the cover, or a page, waits a
+      // moment while the view pulls back, so it turns in view.)
       const cover = a.type === "open" || a.type === "shut" || a.type === "close";
-      const wait = cover && BOOK.focus && st.bound === "side" && time - a.asked < BK_COVER_WAIT;
+      const wait = BOOK.focus && st.bound === "side" && time - a.asked < (cover ? BK_COVER_WAIT : BK_TURN_WAIT); // prettier-ignore
       if (!wait && (!pics || time - a.asked > 0.2 || want.every((id) => pics.ready(id)))) a.t0 = time; // prettier-ignore
     }
     if (a && !a.pull && a.t0 !== null && time - a.t0 >= a.dur) {
