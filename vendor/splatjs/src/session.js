@@ -976,15 +976,21 @@ export class Session {
     this._sched.raf(this._sched.runFrame);
   }
 
+  _currentTrainer(trainer) {
+    return !this._disposed && !this._lost && this.trainer === trainer;
+  }
+
   async _frameLoop() {
     const trainer = this.trainer;
-    if (!trainer || !trainer.camMeta || this._lost) return;
+    const current = () => this._currentTrainer(trainer);
+    if (!trainer || !trainer.camMeta || !current()) return;
     this._frameCount++;
 
     if (this.training && trainer.iter >= this._maxIters()) {
       this.training = false;
       this._log(`training complete at ${trainer.iter} iterations`);
       await this._emitMetrics(true);
+      if (!current()) return;
       // emitted AFTER the final readback: listeners typically call metrics()
       // right away, which must not interleave with ours on the staging buffer
       this._completeTraining(trainer);
@@ -1021,7 +1027,7 @@ export class Session {
         // submitted meanwhile would be silently rewound by that write-back,
         // and the six snapshots would come from six different iterations
         const r = await trainer.refine();
-        if (this._disposed) return;
+        if (!current()) return;
         if (this.perf) {
           this.perf.marks.push({ t: Math.round(r0), kind: 'refine', iter: trainer.iter,
             ms: Math.round(performance.now() - r0), moved: r.moved, grown: r.grown });
@@ -1038,6 +1044,7 @@ export class Session {
       if (now - this._lastStats > (this._statsGap ?? 2000)) {
         const m0 = performance.now();
         await this._emitMetrics();
+        if (!current()) return;
         tMet = performance.now() - m0;
       }
 
@@ -1060,6 +1067,7 @@ export class Session {
       // (phones run 2: the compositor shares the GPU with training, and
       // 4 x 0.4s of queued dispatches is the "whole system stalls" feel)
       if (this._fences.length > (this.opts.fenceRing ?? 4)) await this._fences.shift();
+      if (!current()) return;
       const tStall = performance.now() - s0;
 
       // adapt the batch to the measured cadence (steady-state ~= GPU time of
@@ -1084,6 +1092,7 @@ export class Session {
     } else {
       this.view._tick(this._frameCount, this.training);
       await trainer.device.queue.onSubmittedWorkDone();
+      if (!current()) return;
       this._fences.length = 0;
     }
     if (!this._disposed && (this.training || this.view._dirty)) this._scheduleFrame();
@@ -1093,10 +1102,17 @@ export class Session {
    *  buffers, and two in flight = "outstanding map pending". On a lost
    *  device readbacks would hang forever — fail fast instead. */
   _locked(fn) {
-    const call = () => {
+    const trainer = this.trainer;
+    const active = () => {
       this._assertActive();
       if (this._lost) throw new Error('GPU device lost');
-      return fn();
+      if (this.trainer !== trainer) throw new DOMException('Training session changed', 'AbortError');
+    };
+    const call = async () => {
+      active();
+      const result = await fn();
+      active();
+      return result;
     };
     const run = (this._metricsLock || Promise.resolve()).then(call, call);
     this._metricsLock = run.catch(() => {});
@@ -1115,6 +1131,7 @@ export class Session {
     this._lastIps = m.itersPerSec;
     const tRead = performance.now();
     const mse = await trainer.readLoss();
+    if (!this._currentTrainer(trainer)) return null;
     if (mse != null && mse > 0) {
       m.psnrTrain = -10 * Math.log10(mse);
       this.lossHistory.push([trainer.iter, m.psnrTrain]);
@@ -1124,6 +1141,7 @@ export class Session {
         (final || trainer.iter - this._lastHoldEval >= holdEvery)) {
       this._lastHoldEval = trainer.iter;
       m.psnrHold = await trainer.evalCamPsnr(this.holdout);
+      if (!this._currentTrainer(trainer)) return null;
       this._lastHold = m.psnrHold;
     } else if (this._lastHold != null) {
       m.psnrHold = this._lastHold;

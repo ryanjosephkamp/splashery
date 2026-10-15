@@ -53,6 +53,131 @@ function pool(options = {}) {
   return { workers, work };
 }
 
+function pendingMetricSession() {
+  const readback = deferred(),
+    oldFence = deferred(),
+    effects = [],
+    s = session({ maxIters: 20, itersPerFrame: 1, fenceRing: 2 });
+  const oldTrainer = {
+    iter: 0,
+    n: 20,
+    camMeta: [{}],
+    stepOnce() {
+      this.iter++;
+    },
+    readLoss() {
+      effects.push("old readLoss started");
+      return readback.promise;
+    },
+    device: {
+      queue: {
+        onSubmittedWorkDone() {
+          effects.push("old device fence requested");
+          return oldFence.promise;
+        },
+      },
+    },
+    dispose() {},
+  };
+  s.trainer = oldTrainer;
+  s.view._tick = () => effects.push("view ticked");
+  s.on("metrics", () => effects.push("metrics emitted"));
+  return { s, readback, oldFence, effects };
+}
+
+test("a readLoss completing after disposal cannot emit metrics or submit more GPU work", async () => {
+  const originalRaf = globalThis.requestAnimationFrame,
+    callbacks = [],
+    { s, readback, oldFence, effects } = pendingMetricSession();
+  globalThis.requestAnimationFrame = (callback) => callbacks.push(callback);
+  try {
+    s.start();
+    s._lastStats = performance.now() - 10000;
+    callbacks.shift()();
+    await turn();
+    expect(effects).toEqual(["old readLoss started"]);
+    s.dispose();
+    effects.length = 0;
+    readback.resolve(0.1);
+    await turn();
+    expect({
+      lateEffects: effects,
+      disposedFenceRetained: s._fences.includes(oldFence.promise),
+    }).toEqual({ lateEffects: [], disposedFenceRetained: false });
+  } finally {
+    readback.resolve(0.1);
+    oldFence.resolve();
+    s.dispose();
+    await turn();
+    if (originalRaf === undefined) delete globalThis.requestAnimationFrame;
+    else globalThis.requestAnimationFrame = originalRaf;
+  }
+});
+
+test("a readLoss completing after recovery cannot contaminate the replacement trainer's fence ring", async () => {
+  const originalRaf = globalThis.requestAnimationFrame,
+    callbacks = [],
+    replacementFence = deferred(),
+    { s, readback, oldFence, effects } = pendingMetricSession();
+  globalThis.requestAnimationFrame = (callback) => callbacks.push(callback);
+  const replacement = {
+    iter: 0,
+    n: 30,
+    camMeta: [{}],
+    stepOnce() {
+      this.iter++;
+    },
+    device: { queue: { onSubmittedWorkDone: () => replacementFence.promise } },
+    dispose() {},
+  };
+  try {
+    s.start();
+    s._lastStats = performance.now() - 10000;
+    callbacks.shift()();
+    await turn();
+    expect(effects).toEqual(["old readLoss started"]);
+    s._deviceLost({ reason: "destroyed", message: "test device loss" });
+    // Substitute only GPU reinitialization; recovery and both frame loops stay real.
+    s.seed = async () => {
+      s.trainer = replacement;
+      return s.model;
+    };
+    await s.recover();
+    s.start();
+    for (let i = 0; i < 3; i++) {
+      expect(callbacks.length).toBeGreaterThan(0);
+      callbacks.shift()();
+      await turn();
+    }
+    expect(replacement.iter).toBe(3);
+    expect(s._frameRunning).not.toBeNull();
+    expect(s._fences).toHaveLength(2);
+    expect(s._fences.every((fence) => fence === replacementFence.promise)).toBe(true);
+    effects.length = 0;
+    readback.resolve(0.1);
+    await turn();
+    expect({
+      lateEffects: effects,
+      oldDeviceFenceInReplacementRing: s._fences.includes(oldFence.promise),
+      onlyReplacementFences: s._fences.every((fence) => fence === replacementFence.promise),
+      replacementIterations: replacement.iter,
+    }).toEqual({
+      lateEffects: [],
+      oldDeviceFenceInReplacementRing: false,
+      onlyReplacementFences: true,
+      replacementIterations: 3,
+    });
+  } finally {
+    readback.resolve(0.1);
+    oldFence.resolve();
+    replacementFence.resolve();
+    s.dispose();
+    await turn();
+    if (originalRaf === undefined) delete globalThis.requestAnimationFrame;
+    else globalThis.requestAnimationFrame = originalRaf;
+  }
+});
+
 test("phone pause and resume never overlap a pending GPU frame, and Finish joins it", async () => {
   const originalRaf = globalThis.requestAnimationFrame,
     callbacks = [],

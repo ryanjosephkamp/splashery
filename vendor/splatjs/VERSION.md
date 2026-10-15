@@ -34,6 +34,9 @@
 - Task 88 serializes scheduled training frames across pause and resume. Finishing joins an active
   frame before the final readback, and automatic and requested completion emit only once for the
   same trainer and iteration. A phone's duty-cycle resume cannot queue overlapping training loops.
+- Task 88 guards frame and metric continuations with their originating trainer. Readbacks returning
+  after disposal or recovery cannot emit stale metrics, render, or add dead-device fences to a new
+  trainer's queue. Queued public readbacks reject when their training session changes.
 - Task 88's local `src/sfm/worker-pool.js` owns workers through completion, error, or abort.
   `src/sfm/sfm.js` uses it for both feature-extraction passes and pair matching, and propagates
   cancellation through retry paths. The matching jobs, options, and per-pair seeds are retained.
