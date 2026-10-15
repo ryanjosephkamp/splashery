@@ -1,0 +1,29 @@
+{
+  "checkedUTC": "2026-10-14T18:26:33.541072+00:00",
+  "head": "7815d41902f94509ad623121679bd0f02d36a1fd",
+  "main": "915e6793d6c91a3b4dd6ebd086a9274efb82a1f5",
+  "allExistingMainTestFilesIdentical": true,
+  "mainFilesCompared": 1283,
+  "addedFilesOnly": [
+    "A\ttests/cdx-p3d4-background-bins.spec.mjs",
+    "A\ttests/cdx-p3d4-depth-gather.spec.mjs",
+    "A\ttests/cdx-p3d4-depth-loading.spec.mjs",
+    "A\ttests/cdx-p3d4-edge-cache.spec.mjs",
+    "A\ttests/cdx-p3d4-metrics.spec.mjs",
+    "A\ttests/cdx-p3d4-preparation.spec.mjs",
+    "A\ttests/cdx-p3d4-render-hold.spec.mjs",
+    "A\ttests/cdx-p3d4-render-inputs.spec.mjs",
+    "A\ttests/cdx-p3d4-resample.spec.mjs",
+    "A\ttests/cdx-p3d4-scene-swap.spec.mjs",
+    "A\ttests/cdx-p3d4-soften.spec.mjs",
+    "A\ttests/cdx-p3d4-surface-buffers.spec.mjs",
+    "A\ttests/cdx-p3d4-weight-release.spec.mjs",
+    "A\ttests/cdx-p3d4-worker-preparation.spec.mjs",
+    "A\ttests/fixtures/photo-background-hashes.json",
+    "A\ttests/fixtures/photo-edge-hashes.json",
+    "A\ttests/fixtures/photo-gather-hashes.json",
+    "A\ttests/fixtures/photo-soften-hashes.json",
+    "A\ttests/fixtures/photo-surface-hashes.json"
+  ],
+  "method": "git diff --name-status origin/main -- tests has additions only; git diff --quiet -- tests confirms no tracked working-tree changes. This covers fixtures and screenshots as well as assertions."
+}

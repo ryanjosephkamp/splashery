@@ -14,7 +14,9 @@
 // The tier budgets for the toy's splats (the kit's count: the tier's default count times the
 // recipe's density, capped at the tier's maximum). The same as the model toy's.
 import { backgroundImage, planarDepth, rimDepth, softenDepth } from "../photo3d/background.js";
-import { photoEdgeGuide, refineDepthEdges } from "../photo3d/depth-edges.js";
+import { photoEdgeGuide, prepareDepthEdges, refineDepthEdges } from "../photo3d/depth-edges.js";
+import { modelSize, resampleArea } from "../photo3d/pixels.js";
+export { modelSize, resampleArea } from "../photo3d/pixels.js";
 
 export const PHOTO_DENSITY = 1.5;
 export const TIER_COUNTS = {
@@ -66,87 +68,6 @@ export const SHARPEN = 0.5; // unsharp amount on the grid colors, to make up for
 const MIN_PIECE = 0.0006; // a piece of surface smaller than this share of the picture joins its neighbor
 
 export const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
-
-// Depth-model input size: the long side (a multiple of 14 for the ViT), the short side keeps the shape.
-export function modelSize(w, h, long = 518) {
-  const s = long / Math.max(w, h);
-  const m = (v) => Math.max(14, Math.round((v * s) / 14) * 14);
-  return { dw: m(w), dh: m(h) };
-}
-
-// Shrinks or enlarges a photo's colors to gw x gh by box averaging (exact coverage of each
-// target cell, so no aliasing), returning sRGB floats 0..1 (3 per cell).
-export function resampleArea(photo, gw, gh) {
-  const { w, h, data } = photo;
-  const axis = (n, g) => {
-    // for each target index: source start, weights
-    const out = [];
-    const r = n / g;
-    for (let i = 0; i < g; i++) {
-      const a = i * r;
-      const b = (i + 1) * r;
-      if (r <= 1) {
-        // enlarging: linear between the two nearest source pixels
-        const c = clamp((a + b) / 2 - 0.5, 0, n - 1);
-        const i0 = Math.floor(c);
-        const i1 = Math.min(n - 1, i0 + 1);
-        const t = c - i0;
-        out.push({ s: i0, w: i1 === i0 ? [1] : [1 - t, t] });
-      } else {
-        const s = Math.floor(a);
-        const e = Math.min(n, Math.ceil(b));
-        const ws = [];
-        for (let k = s; k < e; k++) ws.push(Math.min(b, k + 1) - Math.max(a, k));
-        const tot = ws.reduce((x, y) => x + y, 0);
-        out.push({ s, w: ws.map((x) => x / tot) });
-      }
-    }
-    return out;
-  };
-  const ax = axis(w, gw);
-  const ay = axis(h, gh);
-  // horizontal pass: gw x h, three channels (alpha is ignored: a photo is opaque)
-  const mid = new Float32Array(gw * h * 3);
-  for (let y = 0; y < h; y++) {
-    const row = y * w;
-    for (let i = 0; i < gw; i++) {
-      const { s, w: ws } = ax[i];
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      for (let k = 0; k < ws.length; k++) {
-        const p = (row + s + k) * 4;
-        r += data[p] * ws[k];
-        g += data[p + 1] * ws[k];
-        b += data[p + 2] * ws[k];
-      }
-      const q = (y * gw + i) * 3;
-      mid[q] = r;
-      mid[q + 1] = g;
-      mid[q + 2] = b;
-    }
-  }
-  const out = new Float32Array(gw * gh * 3);
-  for (let j = 0; j < gh; j++) {
-    const { s, w: ws } = ay[j];
-    for (let i = 0; i < gw; i++) {
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      for (let k = 0; k < ws.length; k++) {
-        const p = ((s + k) * gw + i) * 3;
-        r += mid[p] * ws[k];
-        g += mid[p + 1] * ws[k];
-        b += mid[p + 2] * ws[k];
-      }
-      const q = (j * gw + i) * 3;
-      out[q] = r / 255;
-      out[q + 1] = g / 255;
-      out[q + 2] = b / 255;
-    }
-  }
-  return out;
-}
 
 // The depth as 0 (far) to 1 (near): stretched between its 2nd and 98th percentile so a
 // picture with a very near or a very far speck still uses the whole range.
@@ -204,16 +125,84 @@ export function percentiles(d, a = 0.02, b = 0.98) {
 // takes the low-resolution depths around it, weighted by how near they lie and how alike
 // the photo's color is there and here (a joint bilateral filter), so a near object's outline
 // in the depth map lands on its outline in the photo instead of on a soft halo.
-export function upsampleDepth(dLo, dw, dh, guideLo, gx, gy, guideHi, sigmaColor = 0.09) {
+function depthAxis(length, size) {
+  const sp = 1 / (2 * 0.8 * 0.8);
+  const index = new Int32Array(size * 4),
+    spatial = new Float64Array(size * 4),
+    linear = new Float64Array(size * 4);
+  for (let i = 0; i < size; i++) {
+    const u = ((i + 0.5) * length) / size - 0.5,
+      start = Math.floor(u) - 1;
+    for (let k = 0; k < 4; k++) {
+      const distance = u - start - k,
+        p = i * 4 + k;
+      index[p] = clamp(start + k, 0, length - 1);
+      spatial[p] = Math.exp(-distance * distance * sp);
+      linear[p] = Math.max(0, 1 - Math.abs(distance));
+    }
+  }
+  return { index, spatial, linear };
+}
+
+// Once source weights are ready, depth needs only a weighted gather. Keeping
+// this loop separate also avoids color arithmetic and mixed cache branches in
+// the model-dependent part of an upload.
+function upsamplePreparedDepth(dLo, dw, gx, gy, prepared) {
+  const out = new Float32Array(gx * gy),
+    { ax, ay, weights, indices, totals } = prepared;
+  for (let j = 0; j < gy; j++)
+    for (let i = 0; i < gx; i++) {
+      const cell = j * gx + i,
+        end = (cell + 1) * 16;
+      let sum = 0;
+      for (let tap = cell * 16; tap < end; tap++) sum += weights[tap] * dLo[indices[tap]];
+      const wsum = totals[cell];
+      if (wsum > 1e-4) out[j * gx + i] = sum / wsum;
+      else {
+        let bil = 0;
+        for (let jj = 0; jj < 4; jj++) {
+          const y = ay.index[j * 4 + jj] * dw,
+            by = ay.linear[j * 4 + jj];
+          for (let ii = 0; ii < 4; ii++) {
+            const bw = ax.linear[i * 4 + ii] * by;
+            bil += bw * dLo[y + ax.index[i * 4 + ii]];
+          }
+        }
+        out[j * gx + i] = bil;
+      }
+    }
+  return out;
+}
+
+export function upsampleDepth(
+  dLo,
+  dw,
+  dh,
+  guideLo,
+  gx,
+  gy,
+  guideHi,
+  sigmaColor = 0.09,
+  prepared = null,
+) {
   const out = new Float32Array(gx * gy);
   const inv = 1 / (2 * sigmaColor * sigmaColor);
-  const sp = 1 / (2 * 0.8 * 0.8);
+  // Coordinates and the separable spatial Gaussian do not depend on color.
+  // Compute them once per axis instead of repeating them for all 16 taps.
+  const valid =
+    prepared?.dw === dw &&
+    prepared?.dh === dh &&
+    prepared?.gx === gx &&
+    prepared?.gy === gy &&
+    prepared?.guideLo === guideLo &&
+    prepared?.guideHi === guideHi &&
+    prepared?.sigmaColor === sigmaColor;
+  if (valid) return upsamplePreparedDepth(dLo, dw, gx, gy, prepared);
+  const ax = depthAxis(dw, gx),
+    ay = depthAxis(dh, gy);
+  let tap = 0;
   for (let j = 0; j < gy; j++) {
-    const v = ((j + 0.5) * dh) / gy - 0.5;
-    const j0 = Math.floor(v);
     for (let i = 0; i < gx; i++) {
-      const u = ((i + 0.5) * dw) / gx - 0.5;
-      const i0 = Math.floor(u);
       const q = (j * gx + i) * 3;
       const r = guideHi[q];
       const g = guideHi[q + 1];
@@ -221,22 +210,25 @@ export function upsampleDepth(dLo, dw, dh, guideLo, gx, gy, guideHi, sigmaColor 
       let sum = 0;
       let wsum = 0;
       let bil = 0;
-      for (let jj = j0 - 1; jj <= j0 + 2; jj++) {
-        const y = clamp(jj, 0, dh - 1);
-        for (let ii = i0 - 1; ii <= i0 + 2; ii++) {
-          const x = clamp(ii, 0, dw - 1);
-          const p = (y * dw + x) * 3;
+      for (let jj = 0; jj < 4; jj++) {
+        const y = ay.index[j * 4 + jj] * dw,
+          wy = ay.spatial[j * 4 + jj],
+          by = ay.linear[j * 4 + jj];
+        for (let ii = 0; ii < 4; ii++) {
+          const c = y + ax.index[i * 4 + ii],
+            p = c * 3;
           const dr = guideLo[p] - r;
           const dg = guideLo[p + 1] - g;
           const db = guideLo[p + 2] - b;
-          const ds = (u - ii) * (u - ii) + (v - jj) * (v - jj);
-          const ws = Math.exp(-ds * sp);
-          const w = ws * Math.exp(-(dr * dr + dg * dg + db * db) * inv);
-          sum += w * dLo[y * dw + x];
+          const ws = wy * ax.spatial[i * 4 + ii];
+          const w = valid
+            ? prepared.weights[tap++]
+            : ws * Math.exp(-(dr * dr + dg * dg + db * db) * inv);
+          sum += w * dLo[c];
           wsum += w;
           // the plain bilinear value, a fallback where the colors match nothing
-          const bw = Math.max(0, 1 - Math.abs(u - ii)) * Math.max(0, 1 - Math.abs(v - jj));
-          bil += bw * dLo[y * dw + x];
+          const bw = ax.linear[i * 4 + ii] * by;
+          bil += bw * dLo[c];
         }
       }
       out[j * gx + i] = wsum > 1e-4 ? sum / wsum : bil;
@@ -374,11 +366,7 @@ export function sharpen(rgb, gx, gy, amount = SHARPEN) {
 //   depth   how deep the relief is, 0..1 (0.5 is the default)
 // Returns { n, gx, gy (the fine grid), aspect, relief (3n), flat (3n), sigma (n), rgb (3n), band (n), depth
 // and cellBand (gx by gy: each cell's depth and layer), gap, stats }.
-export function buildPhotoSplats(
-  photo,
-  depthMap,
-  { count = 100000, depth = 0.5, cut = CUT, keepFlat = false, sharpCells = count * 0.7 } = {},
-) {
+function photoLayout(photo, count) {
   // prettier-ignore
   const aspect = photo.w / photo.h;
   // The fine grid: a block of 2 x 2 fine cells is drawn as one splat, or as four where there is detail
@@ -402,16 +390,44 @@ export function buildPhotoSplats(
   }
   const gx = B * bx;
   const gy = B * by;
-  const sampled = resampleArea(photo, gx, gy);
+  return { aspect, levels, bx, by, gx, gy };
+}
+
+export function buildPhotoSplats(
+  photo,
+  depthMap,
+  {
+    count = 100000,
+    depth = 0.5,
+    cut = CUT,
+    keepFlat = false,
+    sharpCells = count * 0.7,
+    prepared = null,
+  } = {},
+) {
+  const colors = prepared?.photo === photo && prepared?.count === count ? prepared : null;
+  const { aspect, levels, bx, by, gx, gy } = colors || photoLayout(photo, count);
+  const sampled = colors?.sampled || resampleArea(photo, gx, gy);
   const { w: dw, h: dh } = depthMap;
-  const guideLo = resampleArea(photo, dw, dh);
+  const guideLo =
+    colors?.depthWidth === dw && colors?.depthHeight === dh
+      ? colors.guideLo
+      : resampleArea(photo, dw, dh);
   const dn = normalizeDepth(depthMap.d);
   const flatness = keepFlat ? reliefScale(...percentiles(depthMap.d)) : 1;
-  const rgb = keepFlat && flatness <= FLAT_KEEP ? sampled : sharpen(sampled, gx, gy);
+  const rgb =
+    keepFlat && flatness <= FLAT_KEEP ? sampled : colors?.sharpened || sharpen(sampled, gx, gy);
   if (flatness < 1) for (let i = 0; i < dn.length; i++) dn[i] = 0.5 + (dn[i] - 0.5) * flatness;
-  let d = upsampleDepth(dn, dw, dh, guideLo, gx, gy, rgb);
+  let d = upsampleDepth(dn, dw, dh, guideLo, gx, gy, rgb, 0.09, colors?.depthWeights);
   if (!(keepFlat && flatness <= FLAT_KEEP))
-    d = refineDepthEdges(d, photoEdgeGuide(photo, gx, gy), gx, gy, 3 * Math.max(gx / dw, gy / dh));
+    d = refineDepthEdges(
+      d,
+      colors?.edges || photoEdgeGuide(photo, gx, gy),
+      gx,
+      gy,
+      3 * Math.max(gx / dw, gy / dh),
+      colors?.edgeWork,
+    );
   const minCells = Math.max(6, Math.round(MIN_PIECE * gx * gy));
   let m = links(d, gx, gy, cut);
   d = smoothOnSurface(d, m, gx, gy, 1);
@@ -470,7 +486,7 @@ export function buildPhotoSplats(
       let sum = 0;
       let k = 0;
       const add = (dz, step) => {
-        sum += Math.hypot(step, dz);
+        sum += Math.sqrt(step * step + dz * dz);
         k++;
       };
       if (i > 0 && linkedRight(m, c - 1)) add(sizeZ[c] - sizeZ[c - 1], cw);
@@ -772,4 +788,80 @@ export function adaptiveGrid({ gx, gy, levels, count, rgb, d, m }) {
   };
   for (let j = 0; j < ny[levels]; j++) for (let i = 0; i < nx[levels]; i++) walk(levels, i, j);
   return { n: o, x, y, size, split, levels: per };
+}
+
+// A worker can prepare these exact color operations while the independent depth
+// model runs. The bounded cache belongs to one immutable decoded photo.
+export function preparePhotoColors(
+  photo,
+  { count = 100000, depthWidth, depthHeight, maxWeightBytes = 64 * 1024 * 1024 } = {},
+) {
+  const layout = photoLayout(photo, count),
+    { gx, gy } = layout;
+  const model = modelSize(photo.w, photo.h);
+  const dw = depthWidth ?? model.dw,
+    dh = depthHeight ?? model.dh;
+  const sampled = resampleArea(photo, gx, gy),
+    guideLo = resampleArea(photo, dw, dh),
+    rgb = sharpen(sampled, gx, gy);
+  const edges = photoEdgeGuide(photo, gx, gy);
+  const result = {
+    ...layout,
+    photo,
+    count,
+    sampled,
+    guideLo,
+    sharpened: rgb,
+    edges,
+    edgeWork: prepareDepthEdges(edges, gx, gy, 3 * Math.max(gx / dw, gy / dh)),
+    depthWidth: dw,
+    depthHeight: dh,
+    depthWeights: null,
+  };
+  if (gx * gy * (16 * (8 + 4) + 8) > maxWeightBytes) return result;
+  const ax = depthAxis(dw, gx),
+    ay = depthAxis(dh, gy),
+    weights = new Float64Array(gx * gy * 16),
+    indices = new Uint32Array(gx * gy * 16),
+    totals = new Float64Array(gx * gy),
+    sigmaColor = 0.09,
+    inv = 1 / (2 * sigmaColor * sigmaColor);
+  let tap = 0;
+  for (let j = 0; j < gy; j++)
+    for (let i = 0; i < gx; i++) {
+      const q = (j * gx + i) * 3,
+        r = rgb[q],
+        g = rgb[q + 1],
+        b = rgb[q + 2];
+      for (let jj = 0; jj < 4; jj++) {
+        const y = ay.index[j * 4 + jj] * dw,
+          wy = ay.spatial[j * 4 + jj];
+        for (let ii = 0; ii < 4; ii++) {
+          const p = (y + ax.index[i * 4 + ii]) * 3,
+            dr = guideLo[p] - r,
+            dg = guideLo[p + 1] - g,
+            db = guideLo[p + 2] - b;
+          const ws = wy * ax.spatial[i * 4 + ii];
+          const weight = ws * Math.exp(-(dr * dr + dg * dg + db * db) * inv);
+          weights[tap] = weight;
+          indices[tap++] = p / 3;
+          totals[j * gx + i] += weight;
+        }
+      }
+    }
+  result.depthWeights = {
+    dw,
+    dh,
+    gx,
+    gy,
+    guideLo,
+    guideHi: rgb,
+    sigmaColor,
+    ax,
+    ay,
+    weights,
+    indices,
+    totals,
+  };
+  return result;
 }
