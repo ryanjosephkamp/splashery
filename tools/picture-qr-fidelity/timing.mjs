@@ -108,8 +108,8 @@ const summary = {
     : [],
   provenance: JSON.parse(fs.readFileSync(`${root}/paired-${name}-provenance.json`)),
   complete:
-    pairs.length === 1040 &&
-    rows.length === 2080 &&
+    pairs.length === expected.length &&
+    rows.length === expected.length * 2 &&
     expected.every((key) => grouped.get(key)?.main && grouped.get(key)?.detail),
   unfinished: [...grouped].filter(([, p]) => !p.main || !p.detail).map(([key]) => key),
   inactiveRenderViolations: rows.filter((r) => r.inactiveFrames !== 0).length,

@@ -10,6 +10,8 @@ import { sourcePicture, qualifyCapture } from "./qualify.mjs";
 const arg = (key, fallback) =>
   process.argv.find((s) => s.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
 const root = ".cache/picture-qr-fidelity",
+  baseline = arg("baseline", "41b21e74"),
+  baselineDirectory = arg("baseline-dir", `${root}/main`),
   ids = arg("photos", "ai-farm,cdx-qr-ai-fern,cdx-qr-ai-cactus").split(","),
   links =
     arg("links", "0,6,9") === "all"
@@ -82,7 +84,7 @@ const hashes = Object.fromEntries(
 );
 // Every served baseline module must still be the exact frozen Git blob.
 const baselineTree = new Map(
-  execFileSync("git", ["ls-tree", "-r", "41b21e74", "src"], { encoding: "utf8" })
+  execFileSync("git", ["ls-tree", "-r", baseline, "src"], { encoding: "utf8" })
     .trim()
     .split("\n")
     .map((line) => {
@@ -91,10 +93,10 @@ const baselineTree = new Map(
     }),
 );
 const frozenMain = Object.fromEntries(
-  files(`${root}/main/src`)
+  files(`${baselineDirectory}/src`)
     .sort()
     .map((file) => {
-      const relative = file.slice(`${root}/main/`.length),
+      const relative = file.slice(`${baselineDirectory}/`.length),
         bytes = fs.readFileSync(file);
       const blob = createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex");
       if (baselineTree.get(relative) !== blob)
@@ -114,7 +116,7 @@ if (fs.existsSync(provenanceFile)) {
     provenanceFile,
     JSON.stringify(
       {
-        baseline: "41b21e74",
+        baseline,
         head: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
         started: new Date().toISOString(),
         args: process.argv.slice(2),
@@ -138,7 +140,7 @@ const inherited = resumeFrom
   ? JSON.parse(fs.readFileSync(`${root}/paired-${resumeFrom}-provenance.json`))
   : null;
 if (inherited) {
-  if (inherited.baseline !== "41b21e74") throw Error("Frozen main baseline changed");
+  if (inherited.baseline !== baseline) throw Error("Frozen main baseline changed");
   for (const [file, hash] of Object.entries(hashes))
     if (
       (corpus.some((picture) => picture.file === file) ||
@@ -180,7 +182,7 @@ for (const mode of ["main", "detail"]) {
   if (mode === "main")
     await page.route("**/src/**", (route) => {
       const pathname = new URL(route.request().url()).pathname,
-        file = `${root}/main${pathname}`;
+        file = `${baselineDirectory}${pathname}`;
       if (!fs.existsSync(file)) throw Error(`Missing frozen main module ${pathname}`);
       return route.fulfill({ contentType: "text/javascript", body: fs.readFileSync(file) });
     });
@@ -398,6 +400,8 @@ for (let repeat = 0; repeat < Number(arg("repeats", "3")); repeat++)
                 2 *
                 ((await import("/src/qr/circle.js")).shapeHalf(p.woven.code, p.options.shape) + 1),
               error: p.error,
+              notice: p.notice || "",
+              fallback: p.fallback || null,
               version: p.woven.code.version,
               margin: p.woven.margin,
               method: p.woven.rendering?.method,
