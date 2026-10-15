@@ -495,6 +495,7 @@ export class Session {
     const desiredClones = Math.min(cloneCap, Math.max(2, Math.round(target / this.recon.points.length) - 1));
     const v2 = this.opts.trainer && this.opts.trainer.engine === 'v2';
     const convention = v2 ? { dc: 'sh', randRot: true } : {};
+    if (this.opts.robustSeedBounds === true) convention.robustBounds = true;
     const appended = extra.appendGaussians;
     let appendCount = appended?.n > 0 ? appended.n : 0;
     this._appendedSeed = null;
