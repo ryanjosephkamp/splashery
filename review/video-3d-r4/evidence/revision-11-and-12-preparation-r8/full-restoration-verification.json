@@ -1,0 +1,9 @@
+{
+  "verified": true,
+  "files": 2237,
+  "originalBytes": 411628277,
+  "storedPayloadBytes": 369063093,
+  "gzipFiles": 1804,
+  "restoredToFreshDirectory": true,
+  "allStoredAndRestoredHashesExact": true
+}

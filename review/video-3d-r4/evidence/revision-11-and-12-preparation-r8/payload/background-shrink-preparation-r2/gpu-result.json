@@ -1,0 +1,258 @@
+{
+  "at": "2026-10-15T12:43:29.524Z",
+  "sourcesBefore": [
+    {
+      "file": "vendor/splatjs/src/gs/background-fit.js",
+      "sha256": "dc870092c70ae8b768a10604946294781fb84ce5ad25c88603e88c4507909359"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "sha256": "4bf4663854e7f0a268183959f9f510674761f63d176287a3181cbe0d1209142a"
+    },
+    {
+      "file": "gpu-fixture.mjs",
+      "sha256": "1a83452255a885a65de42107e51479a80c6ade386afcee493ed4b147eb8ed189"
+    }
+  ],
+  "protocol": "Five predeclared actual-GPU synthetic fixtures; preserve legacy full-fit rejection, accept bounded color only with unchanged 1% train and every-camera nonregression, retain full fit, reject harmful direction, reject insufficient train gain. Exact Gaussian bytes and no optimizer steps throughout.",
+  "result": {
+    "cases": [
+      {
+        "id": "legacy-rejection",
+        "fit": {
+          "accepted": false,
+          "reason": "validation-regression",
+          "rgb": [
+            0.8000000000000002,
+            0.6,
+            0.4000000000000001
+          ],
+          "trainCams": [
+            0,
+            2
+          ],
+          "validationCams": [
+            1
+          ],
+          "pixels": 1536,
+          "invalidPixels": 0,
+          "improvement": 0.9999999999999999,
+          "baseMse": 0.3866666666666667,
+          "fittedMse": 3.700743415417188e-17,
+          "validation": [
+            {
+              "ci": 1,
+              "pixels": 768,
+              "baseMse": 0.06472382417019094,
+              "fittedMse": 0.13661924900679237
+            }
+          ]
+        },
+        "expectedAccepted": false,
+        "expectedReason": "validation-regression",
+        "cameraReads": [
+          0,
+          2,
+          1
+        ],
+        "modelExact": true,
+        "iters": 0
+      },
+      {
+        "id": "bounded-color",
+        "fit": {
+          "accepted": true,
+          "reason": "training-and-validation-improved",
+          "rgb": [
+            0.6447383367139958,
+            0.48355375253549676,
+            0.3223691683569979
+          ],
+          "trainCams": [
+            0,
+            2
+          ],
+          "validationCams": [
+            1
+          ],
+          "pixels": 1536,
+          "invalidPixels": 0,
+          "improvement": 0.9623340873650992,
+          "baseMse": 0.3866666666666667,
+          "fittedMse": 0.014564152885494995,
+          "validation": [
+            {
+              "ci": 1,
+              "pixels": 768,
+              "baseMse": 0.06472382417019094,
+              "fittedMse": 0.06218701058390446
+            }
+          ],
+          "proposedRgb": [
+            0.8000000000000002,
+            0.6,
+            0.4000000000000001
+          ],
+          "validationScale": 0.8059229208924946
+        },
+        "expectedAccepted": true,
+        "expectedReason": "training-and-validation-improved",
+        "cameraReads": [
+          0,
+          2,
+          1
+        ],
+        "modelExact": true,
+        "iters": 0
+      },
+      {
+        "id": "unchanged-full-fit",
+        "fit": {
+          "accepted": true,
+          "reason": "training-and-validation-improved",
+          "rgb": [
+            0.8000000000000002,
+            0.6,
+            0.4000000000000001
+          ],
+          "trainCams": [
+            0,
+            2
+          ],
+          "validationCams": [
+            1
+          ],
+          "pixels": 1536,
+          "invalidPixels": 0,
+          "improvement": 0.9999999999999999,
+          "baseMse": 0.3866666666666667,
+          "fittedMse": 3.700743415417188e-17,
+          "validation": [
+            {
+              "ci": 1,
+              "pixels": 768,
+              "baseMse": 0.3866666666666667,
+              "fittedMse": 3.700743415417188e-17
+            }
+          ]
+        },
+        "expectedAccepted": true,
+        "expectedReason": "training-and-validation-improved",
+        "cameraReads": [
+          0,
+          2,
+          1
+        ],
+        "modelExact": true,
+        "iters": 0
+      },
+      {
+        "id": "harmful-direction",
+        "fit": {
+          "accepted": false,
+          "reason": "validation-regression",
+          "rgb": [
+            0.8000000000000002,
+            0.6,
+            0.4000000000000001
+          ],
+          "trainCams": [
+            0,
+            2
+          ],
+          "validationCams": [
+            1
+          ],
+          "pixels": 1536,
+          "invalidPixels": 0,
+          "improvement": 0.9999999999999999,
+          "baseMse": 0.3866666666666667,
+          "fittedMse": 3.700743415417188e-17,
+          "validation": [
+            {
+              "ci": 1,
+              "pixels": 768,
+              "baseMse": 0,
+              "fittedMse": 0.3866666666666668
+            }
+          ]
+        },
+        "expectedAccepted": false,
+        "expectedReason": "validation-regression",
+        "cameraReads": [
+          0,
+          2,
+          1
+        ],
+        "modelExact": true,
+        "iters": 0
+      },
+      {
+        "id": "insufficient-training-gain",
+        "fit": {
+          "accepted": false,
+          "reason": "insufficient-training-gain",
+          "rgb": [
+            0.0006024340770791074,
+            0.00045182555780933046,
+            0.0003012170385395537
+          ],
+          "trainCams": [
+            0,
+            2
+          ],
+          "validationCams": [
+            1
+          ],
+          "pixels": 1536,
+          "invalidPixels": 0,
+          "improvement": 0.0015055181195458012,
+          "baseMse": 0.3866666666666667,
+          "fittedMse": 0.38608453299377565,
+          "validation": [
+            {
+              "ci": 1,
+              "pixels": 768,
+              "baseMse": 0.000015378700499807765,
+              "fittedMse": 0.00001481170372138036
+            }
+          ],
+          "proposedRgb": [
+            0.8000000000000002,
+            0.6,
+            0.4000000000000001
+          ],
+          "validationScale": 0.0007530425963488841
+        },
+        "expectedAccepted": false,
+        "expectedReason": "insufficient-training-gain",
+        "cameraReads": [
+          0,
+          2,
+          1
+        ],
+        "modelExact": true,
+        "iters": 0
+      }
+    ],
+    "errors": []
+  },
+  "pageErrors": [],
+  "sourcesAfter": [
+    {
+      "file": "vendor/splatjs/src/gs/background-fit.js",
+      "sha256": "dc870092c70ae8b768a10604946294781fb84ce5ad25c88603e88c4507909359"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "sha256": "4bf4663854e7f0a268183959f9f510674761f63d176287a3181cbe0d1209142a"
+    },
+    {
+      "file": "gpu-fixture.mjs",
+      "sha256": "1a83452255a885a65de42107e51479a80c6ade386afcee493ed4b147eb8ed189"
+    }
+  ],
+  "passed": true,
+  "status": "passed",
+  "finishedAt": "2026-10-15T12:43:45.716Z"
+}

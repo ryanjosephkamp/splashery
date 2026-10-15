@@ -1,0 +1,10 @@
+{
+  "capturedAt": "2026-10-15T13:41:25.949578+00:00",
+  "source": "/workspace/v3d-r4-media/review-r12-queue-publication-r8",
+  "files": 26,
+  "bytes": 260175,
+  "inventoryFile": "root-source-inventory.json.gz",
+  "inventorySha256": "452cf05160c7fdf92d53955e1dee58c79957041bc4a1e519156630a3e00c12d8",
+  "inventoryArchiveSha256": "7a13501a38fd2b0850ae4c36c46a3566e5d85c65271e3f55a0f2083b10466f30",
+  "notice": "Every source and destination byte verified before adding this root receipt and compressed inventory. Original completed evidence, failure classifications, and storage-restoration maps remain unchanged. No live native state is copied or inferred by this publication."
+}

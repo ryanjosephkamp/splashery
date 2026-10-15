@@ -1,0 +1,55 @@
+{
+  "kind": "completed-exact-byte-publication-packet-R8-not-native-candidate-R8",
+  "frozenAt": "2026-10-15T13:36:41.356436+00:00",
+  "inventory": "packet-inventory.json.gz",
+  "inventorySha256": "3993c7cebdf3d86dc9ecaae18b8e92e171064865fc162c1a77be4c67f22f0935",
+  "inventoryExcludes": [
+    "freeze.json",
+    "packet-inventory.json.gz"
+  ],
+  "mappingsSha256": "2a3dd0c21a991c8f054bbe27f9a8aa2b66ffb51ef1f36c298c7f9012ca32080b",
+  "sourceInventorySha256": "b21e27b90b6d52201afdf6b5c206c34006b1ed684664f695656fb9858d64d0e6",
+  "exclusionsSha256": "fbd088950193aa63362912c59ed07647a568672abec4a1319395aa10bfb3e06c",
+  "restoration": {
+    "verified": true,
+    "files": 2237,
+    "originalBytes": 411628277,
+    "storedPayloadBytes": 369063093,
+    "gzipFiles": 1804,
+    "restoredToFreshDirectory": true,
+    "allStoredAndRestoredHashesExact": true
+  },
+  "sourceFilesystemFilesRechecked": 2222,
+  "oversizedOriginalImagesArchivedWithoutReencoding": 140,
+  "inlineImagesOver1000000Bytes": 0,
+  "R11Native": {
+    "sourceCommit": "636a7605fd15f3aa1e41d43cc6b5ff35432750b6",
+    "rawAttempts": 13,
+    "strictPaired": 8,
+    "pairedFinishedPhone": 3,
+    "pairedExplainedPhone": 4,
+    "pairedExplainedDesktop": 1,
+    "unpaired": 5,
+    "completeAcceptance": false
+  },
+  "separateSampleProofs": {
+    "R11": {
+      "sourceCommit": "636a7605fd15f3aa1e41d43cc6b5ff35432750b6",
+      "cases": 12,
+      "views": 74
+    },
+    "R12": {
+      "sourceCommit": "64ec9ad5b7a90b590b289f6a02f0bbd50138db08",
+      "cases": 12,
+      "views": 74
+    }
+  },
+  "excludedR12NativeAndLiveControls": true,
+  "invalidPlaceholderExcluded": true,
+  "originalEvidenceUnchanged": true,
+  "noNewBenchmarksBrowserGpuSignalsOrPidInspection": true,
+  "noPublicationPush": true,
+  "fileCount": 2255,
+  "packetBytes": 369503718,
+  "uncompressedUtf8NoNulTextBytes": 2317153
+}

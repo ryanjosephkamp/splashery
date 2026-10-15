@@ -1,0 +1,16 @@
+{
+  "created": "2026-10-15T12:12:03.413362+00:00",
+  "pid": 337495,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "tools/v3d-bench.mjs",
+    "samples",
+    "/workspace/v3d-r4-media/samples-r11-r1",
+    "--url=http://127.0.0.1:4182/",
+    "--reference=/workspace/v3d-r4-media/samples-main-r1"
+  ],
+  "productCommit": "636a7605fd15f3aa1e41d43cc6b5ff35432750b6",
+  "runtimeReceipt": "runtime-r11-freeze.json",
+  "runtimeReceiptSha256": "14d1c7214a13c30fc8040d852bdc443bd876d8954fbbb03f8723ae6bcc25579d",
+  "purpose": "All 74 unchanged sample model views at both profiles against frozen task-start main. Fresh pixel proof only; sample training is not rerun."
+}

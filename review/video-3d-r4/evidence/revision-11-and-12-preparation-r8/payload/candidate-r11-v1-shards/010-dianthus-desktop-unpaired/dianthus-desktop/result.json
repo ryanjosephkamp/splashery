@@ -1,0 +1,38 @@
+{
+  "id": "dianthus",
+  "profile": "desktop",
+  "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+  "started": "2026-10-15T12:41:26.831Z",
+  "status": "explained",
+  "provenanceSha256": "adfcf59a89a7ce8e7fd1bb34e62696ca48f03dc4c8810402218dbfedbec0bc42",
+  "firstViewMs": null,
+  "bakeMs": 412916.398236,
+  "mean": null,
+  "peakRssBytes": 1410932736,
+  "hostLoadAtStart": [
+    11.11,
+    15.48,
+    16.5
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "This browser cannot play that video. Try an MP4 (H.264) or WebM file, or a shorter clip.",
+    "unplayable": false,
+    "duration": 0
+  },
+  "explanation": {
+    "diagnostic": "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting.",
+    "advice": "What worksWalk slowly around an object, or through a place, so the camera moves sideways and sees the same things from new angles.10 to 40 seconds, held steady, in even light.Plenty of texture: stone, bark, brick, leaves, signs.No zoom, and few people or cars moving.A drone circling a building or a statue is ideal.A file under 40 MB (trim a long video first).What failsTurning on the spot, or a panorama: the camera has to move, not just turn.A tripod time-lapse: the camera never moves.Blank walls, sky or water: nothing to match.Blur from fast moves or low light.",
+    "visible": true
+  },
+  "reason": "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting."
+}

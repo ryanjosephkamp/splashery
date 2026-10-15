@@ -1,0 +1,260 @@
+Listing tests:
+  [chromium] › cdx-v3d-background-fit-gpu.spec.mjs:4:1 › constant environment fitting uses GPU targets after low-memory cleanup and preserves every model parameter
+  [chromium] › cdx-v3d-background-fit-session.spec.mjs:14:1 › background fitting joins the active frame and suppresses preview and training until it releases
+  [chromium] › cdx-v3d-background-fit-session.spec.mjs:58:1 › a late background read cannot return a result or change scheduling for a replacement trainer
+  [chromium] › cdx-v3d-background-fit-session.spec.mjs:85:3 › background fitting releases its temporary GPU readback on cancel-map
+  [chromium] › cdx-v3d-background-fit-session.spec.mjs:85:3 › background fitting releases its temporary GPU readback on encode
+  [chromium] › cdx-v3d-background-fit.spec.mjs:24:1 › a transparent black renderer recovers exact packed target color in RGB byte order
+  [chromium] › cdx-v3d-background-fit.spec.mjs:42:1 › pooled varying-transmittance cameras recover one shared color, including exposure
+  [chromium] › cdx-v3d-background-fit.spec.mjs:64:1 › the constrained optimum clips independent channels and beats a direct color grid
+  [chromium] › cdx-v3d-background-fit.spec.mjs:83:1 › a hardcoded exposure example fits the raw renderer rather than an exposed screenshot
+  [chromium] › cdx-v3d-background-fit.spec.mjs:95:1 › empty or fully opaque input has no identifiable background energy
+  [chromium] › cdx-v3d-background-fit.spec.mjs:108:1 › invalid target pixels skip arbitrary raw storage and are counted separately
+  [chromium] › cdx-v3d-background-fit.spec.mjs:120:1 › soft-alpha and bad raw packets reject atomically without keeping a partial chunk
+  [chromium] › cdx-v3d-background-fit.spec.mjs:140:1 › dimensions, moment state, color, and exposure conventions fail closed
+  [chromium] › cdx-v3d-background-fit.spec.mjs:171:1 › streamed moments match direct fixed-model SSE and cannot increase pooled training MSE
+  [chromium] › cdx-v3d-background-recovery.spec.mjs:129:3 › optional background failed keeps the completed model after releasing its readback
+  [chromium] › cdx-v3d-background-recovery.spec.mjs:129:3 › optional background deadline keeps the completed model after releasing its readback
+  [chromium] › cdx-v3d-background-recovery.spec.mjs:150:3 › a timely accepted background keeps its original validation decision
+  [chromium] › cdx-v3d-background-recovery.spec.mjs:150:3 › a timely rejected background keeps its original validation decision
+  [chromium] › cdx-v3d-background-recovery.spec.mjs:162:1 › a late fit releases the export lock but cannot revive its discarded display color
+  [chromium] › cdx-v3d-background-recovery.spec.mjs:181:1 › optional fit recovery cannot turn a failed model export into success
+  [chromium] › cdx-v3d-background-recovery.spec.mjs:190:3 › background recovery cannot publish a model after lost
+  [chromium] › cdx-v3d-background-recovery.spec.mjs:190:3 › background recovery cannot publish a model after training-error
+  [chromium] › cdx-v3d-background.spec.mjs:23:1 › a validated model environment takes precedence while older bakes retain their background
+  [chromium] › cdx-v3d-background.spec.mjs:36:1 › a fitted view restores its prior composite once after leaving
+  [chromium] › cdx-v3d-background.spec.mjs:48:1 › host color choices and a newer setter remain authoritative
+  [chromium] › cdx-v3d-background.spec.mjs:61:1 › overlapping views do not restore each other's colors
+  [chromium] › cdx-v3d-background.spec.mjs:73:1 › direct camera changes, invalid metadata, and absent stages are preserved
+  [chromium] › cdx-v3d-background.spec.mjs:88:1 › flight disposal restores only its own background, including a late embed owner
+  [chromium] › cdx-v3d-background.spec.mjs:106:1 › routine exposure, accent, and settings refreshes keep the fitted composite
+  [chromium] › cdx-v3d-background.spec.mjs:126:1 › an explicit background option wins even when its RGBA matches the old host clear
+  [chromium] › cdx-v3d-background.spec.mjs:140:1 › a changed theme color or direct different RGBA remains authoritative
+  [chromium] › cdx-v3d-background.spec.mjs:154:1 › overlapping metadata holds preserve the newer fitted color during routine refreshes
+  [chromium] › cdx-v3d-background.spec.mjs:167:1 › flight refresh ownership expires immediately for a new generation, source, scene, or player
+  [chromium] › cdx-v3d-bench-join.spec.mjs:186:1 › candidate shards require an explicit baseline and preserve every reference byte
+  [chromium] › cdx-v3d-bench-join.spec.mjs:221:1 › a re-signed candidate cannot substitute reference evidence, browser, options, or protocol
+  [chromium] › cdx-v3d-bench-join.spec.mjs:250:1 › candidate joins reject a changed baseline artifact and any overlapping reference path
+  [chromium] › cdx-v3d-bench-join.spec.mjs:261:1 › joining preserves raw case bytes, source runs, failure rows, and existing reference bindings
+  [chromium] › cdx-v3d-bench-join.spec.mjs:309:1 › validly rehashed source, protocol, browser, and options mismatches cannot be joined
+  [chromium] › cdx-v3d-bench-join.spec.mjs:337:1 › changed cohort, input hash, invalid provenance digest, and duplicate rows are rejected
+  [chromium] › cdx-v3d-bench-join.spec.mjs:358:1 › identical duplicate cases are retained once, while conflicting rows or unscored raw bytes fail
+  [chromium] › cdx-v3d-bench-join.spec.mjs:384:1 › corrupted or missing model, PNG, evaluation, and result files are rejected
+  [chromium] › cdx-v3d-bench-join.spec.mjs:405:1 › destinations must be fresh, outside checkouts, and disjoint from every source
+  [chromium] › cdx-v3d-bench-join.spec.mjs:428:1 › appended rows and unrelated active-case writes do not change a captured immutable snapshot
+  [chromium] › cdx-v3d-bench-join.spec.mjs:461:1 › removed or altered captured rows and late changes to unscored case bytes reject the transaction
+  [chromium] › cdx-v3d-bench-join.spec.mjs:498:1 › a damaged destination copy is retained as failed evidence and never published as a run
+  [chromium] › cdx-v3d-bench-supplement.spec.mjs:193:1 › supplement snapshots every raw case byte and keeps timeout status/timing untouched
+  [chromium] › cdx-v3d-bench-supplement.spec.mjs:215:1 › corrupt PLY, evaluation, result row, and protocol fail before a prepared output exists
+  [chromium] › cdx-v3d-bench-supplement.spec.mjs:230:1 › resigned overlap and false decoded frame receipts still fail independently
+  [chromium] › cdx-v3d-bench-supplement.spec.mjs:244:1 › independent saved snapshot detects camera metadata changes lacking a historical hash
+  [chromium] › cdx-v3d-bench-supplement.spec.mjs:261:1 › prepared model/PNG corruption and removed original rows fail closed
+  [chromium] › cdx-v3d-bench-supplement.spec.mjs:282:1 › unrelated appended rows are allowed but edits to original evidence are rejected
+  [chromium] › cdx-v3d-bench-supplement.spec.mjs:292:1 › fresh destination, overlap, malformed PNG, and symlink policies preserve evidence
+  [chromium] › cdx-v3d-bench-supplement.spec.mjs:309:1 › existing derived output blocks any browser launch and cannot become strict evidence
+  [chromium] › cdx-v3d-bench-supplement.spec.mjs:317:1 › changed served viewer and browser bytes fail before any browser launch
+  [chromium] › cdx-v3d-bench.spec.mjs:3:1 › benchmark cannot earn a quality gain by dropping failed or changed inputs
+  [chromium] › cdx-v3d-bench.spec.mjs:29:1 › benchmark checks phone median and worst timing separately
+  [chromium] › cdx-v3d-bench.spec.mjs:82:1 › undeclared, partial, missing-profile, and empty comparisons cannot pass
+  [chromium] › cdx-v3d-bench.spec.mjs:101:1 › a failure on an unscored clip blocks all cohort passes
+  [chromium] › cdx-v3d-bench.spec.mjs:124:1 › duplicate baseline rows and changed baseline inputs are rejected
+  [chromium] › cdx-v3d-bench.spec.mjs:132:1 › full run comparison binds protocol, browser, options, and exact reference inventory
+  [chromium] › cdx-v3d-bench.spec.mjs:196:1 › resume refuses stale or missing provenance and preserves legacy evidence for explicit retry
+  [chromium] › cdx-v3d-bench.spec.mjs:234:1 › retry of harness errors is explicit and does not discard finished rows
+  [chromium] › cdx-v3d-bench.spec.mjs:255:1 › held-out timestamps cannot reuse a selected source frame
+  [chromium] › cdx-v3d-bench.spec.mjs:279:1 › sample preservation requires all six IDs, both profiles, and nonempty frozen views
+  [chromium] › cdx-v3d-bench.spec.mjs:303:1 › uniform blank sample images cannot certify preservation
+  [chromium] › cdx-v3d-bench.spec.mjs:312:1 › served-source fingerprint records absent main modules and detects changed server bytes
+  [chromium] › cdx-v3d-bench.spec.mjs:335:1 › host watchdog bounds stuck protocol work and teardown without censoring successful work
+  [chromium] › cdx-v3d-bench.spec.mjs:361:1 › reference binding accepts appended rows and rejects changed, removed, or damaged evidence
+  [chromium] › cdx-v3d-bench.spec.mjs:447:1 › frame observer hashes actual selected JPEGs and distinguishes requested from presented times
+  [chromium] › cdx-v3d-bench.spec.mjs:484:1 › held-out pixel receipts reject stale-frame overlap and missing decoder calibration
+  [chromium] › cdx-v3d-bench.spec.mjs:523:1 › the independent decoder matches selected JPEGs and detects an actually repeated frame
+  [chromium] › cdx-v3d-calibration.spec.mjs:27:3 › real liberty source cut receives calibrated feedback without a GPU
+  [chromium] › cdx-v3d-calibration.spec.mjs:27:3 › real edinburgh source cut receives calibrated feedback without a GPU
+  [chromium] › cdx-v3d-calibration.spec.mjs:27:3 › real adjara source cut receives calibrated feedback without a GPU
+  [chromium] › cdx-v3d-calibration.spec.mjs:27:3 › real lihula source cut receives calibrated feedback without a GPU
+  [chromium] › cdx-v3d-calibration.spec.mjs:27:3 › real toolse source cut receives calibrated feedback without a GPU
+  [chromium] › cdx-v3d-calibration.spec.mjs:27:3 › real poltsamaa source cut receives calibrated feedback without a GPU
+  [chromium] › cdx-v3d-calibration.spec.mjs:125:3 › measured real shaky pan remains a risk at the calibrated thresholds
+  [chromium] › cdx-v3d-calibration.spec.mjs:125:3 › measured real moving crowd remains a risk at the calibrated thresholds
+  [chromium] › cdx-v3d-calibration.spec.mjs:125:3 › measured real crash zoom remains a risk at the calibrated thresholds
+  [chromium] › cdx-v3d-calibration.spec.mjs:133:1 › bad local input stays unknown, and cancellation stays owned by the caller
+  [chromium] › cdx-v3d-calibration.spec.mjs:158:1 › Mac import keeps original COLMAP pose, unequal focal lengths, and principal point
+  [chromium] › cdx-v3d-calibration.spec.mjs:215:1 › retained real counterexample clips decode to caution or poor
+  [chromium] › cdx-v3d-clarity-register.spec.mjs:13:1 › the compact fallback preserves every Gaussian and stays within the Mac handoff buffer
+  [chromium] › cdx-v3d-clarity-register.spec.mjs:21:1 › registration requires measured compressed models and preserves independent phone and desktop tiers
+  [chromium] › cdx-v3d-clarity.spec.mjs:12:1 › calibrated sample clouds preserve their camera frame and declare geometry outside kit fitting
+  [chromium] › cdx-v3d-clarity.spec.mjs:41:1 › opaque fitted bars retain camera support while faint rays and unsupported floaters are removed
+  [chromium] › cdx-v3d-clarity.spec.mjs:66:1 › the independent scorer rejects camera changes after a render
+  [chromium] › cdx-v3d-clarity.spec.mjs:115:1 › Auto preserves a compact phone tier and allows the sharper desktop tier
+  [chromium] › cdx-v3d-clarity.spec.mjs:131:1 › measured photometric surfaces keep their fitted broad splats while near-camera floaters are removed
+  [chromium] › cdx-v3d-clarity.spec.mjs:182:1 › clarity measurements reject mismatched images and distinguish detail from blur
+  [chromium] › cdx-v3d-clarity.spec.mjs:205:1 › evaluation images are new midpoints with an orthonormal pose and a frozen one-in-eight split
+  [chromium] › cdx-v3d-clarity.spec.mjs:230:1 › D-SSIM training updates real Gaussian parameters without GPU validation errors
+  [chromium] › cdx-v3d-cpu.spec.mjs:7:1 › the CPU fitter's position, covariance, color, and opacity gradients match finite differences
+  [chromium] › cdx-v3d-deadline.spec.mjs:16:1 › blocking work cannot publish success after its deadline
+  [chromium] › cdx-v3d-deadline.spec.mjs:33:1 › blocking failure after the deadline retains the actionable timeout
+  [chromium] › cdx-v3d-deadline.spec.mjs:47:1 › timely completion clears the timer without aborting completed work
+  [chromium] › cdx-v3d-deadline.spec.mjs:62:1 › canceling active work aborts its child and discards a later result
+  [chromium] › cdx-v3d-eval-ownership.spec.mjs:11:1 › evaluation preserves its mean, frame metadata, and empty-set result
+  [chromium] › cdx-v3d-eval-ownership.spec.mjs:38:1 › an old awaited evaluation cannot touch a recovered trainer or replacement metadata
+  [chromium] › cdx-v3d-eval-ownership.spec.mjs:92:1 › disposing during an awaited evaluation does not inspect released trainer metadata
+  [chromium] › cdx-v3d-extraction-timestamp.spec.mjs:48:1 › an initial RVFC after seeking but before seeked cannot label the new photograph
+  [chromium] › cdx-v3d-extraction-timestamp.spec.mjs:65:1 › a queued old presentation delivered after seeked is rejected without a VFR proximity cutoff
+  [chromium] › cdx-v3d-extraction-timestamp.spec.mjs:86:1 › a picture presented before seeked uses bounded real-frame recovery instead of a stale timestamp
+  [chromium] › cdx-v3d-extraction-timestamp.spec.mjs:103:1 › cancellation after a discarded presentation cleans callbacks and cannot cache its time
+  [chromium] › cdx-v3d-extraction-timestamp.spec.mjs:121:1 › no fresh terminal presentation fails at the original bound rather than inventing a timestamp
+  [chromium] › cdx-v3d-handoff.spec.mjs:37:1 › the Mac return archive contains the reviewed pair and run records with retained ShareAlike
+  [chromium] › cdx-v3d-handoff.spec.mjs:67:1 › a changed PLY or unfinished bake cannot be packaged as a completed Mac return
+  [chromium] › cdx-v3d-matcher-gpu.spec.mjs:4:1 › small GPU match chunks preserve every integer result and CPU mutual match
+  [chromium] › cdx-v3d-matcher-lifecycle.spec.mjs:181:1 › exact pair chunks preserve default raw integer tables, match order, and unchanged shader
+  [chromium] › cdx-v3d-matcher-lifecycle.spec.mjs:230:1 › chunk bounds and pre-abort reject before GPU allocation; no pairs allocates nothing
+  [chromium] › cdx-v3d-matcher-lifecycle.spec.mjs:255:1 › every partial GPU allocation is released on allocation, submission, mapping, or readback errors
+  [chromium] › cdx-v3d-matcher-lifecycle.spec.mjs:281:1 › abort during pending map settles promptly, removes its listener, and never dispatches later chunks
+  [chromium] › cdx-v3d-matcher-lifecycle.spec.mjs:331:1 › temporary device is destroyed on success and on a late requestDevice after abort
+  [chromium] › cdx-v3d-matcher-lifecycle.spec.mjs:370:1 › deadline timers can abort between exact chunks even with immediately resolved maps
+  [chromium] › cdx-v3d-matcher-lifecycle.spec.mjs:396:1 › pending adapter cancellation and owned-device readback errors release their ownership
+  [chromium] › cdx-v3d-matcher-lifecycle.spec.mjs:434:1 › SfM forwards cancellation and exact chunk size without CPU fallback after abort
+  [chromium] › cdx-v3d-pause-view.spec.mjs:15:1 › training holds the previous view and restores its original pause state
+  [chromium] › cdx-v3d-pause-view.spec.mjs:30:1 › embed visibility requests during training retain their latest intent
+  [chromium] › cdx-v3d-pause-view.spec.mjs:42:1 › overlapping file operations release once, including immediate cancellation
+  [chromium] › cdx-v3d-pause-view.spec.mjs:60:1 › releasing training does not replace a newer host pause method
+  [chromium] › cdx-v3d-pause-view.spec.mjs:71:1 › training releases only its own stage hold after all overlapping operations settle
+  [chromium] › cdx-v3d-progress.spec.mjs:3:1 › slow training shows its remaining time limit and explains finishing
+  [chromium] › cdx-v3d-real-clips.spec.mjs:3:1 › short phone training refines while growth is still possible
+  [chromium] › cdx-v3d-real-clips.spec.mjs:21:1 › a dark textured clip gets an exposure explanation and a concrete retry
+  [chromium] › cdx-v3d-real-clips.spec.mjs:40:1 › a fitted custom PLY keeps broad surfaces and rejects splats at the camera
+  [chromium] › cdx-v3d-real-clips.spec.mjs:82:1 › unresponsive camera work ends with retry advice and cancels its work
+  [chromium] › cdx-v3d-real-clips.spec.mjs:97:1 › canceling camera work stays distinct from reaching its time limit
+  [chromium] › cdx-v3d-real-clips.spec.mjs:117:1 › training waits for the decoded picture and records its presented timestamp
+  [chromium] › cdx-v3d-real-clips.spec.mjs:173:1 › a paused same-frame seek recovers a real presentation and stops advancing on cancellation
+  [chromium] › cdx-v3d-real-clips.spec.mjs:234:1 › a late recovery play promise cannot pause the next seek's recovery
+  [chromium] › cdx-v3d-real-clips.spec.mjs:309:1 › an identical seek reuses presentation after the browser rounds its position
+  [chromium] › cdx-v3d-render-engine.spec.mjs:4:1 › a recipe can keep native resolution throughout camera movement
+  [chromium] › cdx-v3d-render-engine.spec.mjs:28:3 › full-resolution recipes respect the low profile's current pixel cap
+  [chromium] › cdx-v3d-render-engine.spec.mjs:28:3 › full-resolution recipes respect the weak profile's current pixel cap
+  [chromium] › cdx-v3d-render-engine.spec.mjs:58:3 › default adaptation keeps the drag drop and slow-frame tier step-down
+  [chromium] › cdx-v3d-render-engine.spec.mjs:58:3 › explicit drag adaptation keeps the drag drop and slow-frame tier step-down
+  [chromium] › cdx-v3d-render-engine.spec.mjs:106:1 › full-resolution mode restores a reduced canvas and resists slow-frame reduction
+  [chromium] › cdx-v3d-resources.spec.mjs:88:1 › a readLoss completing after disposal cannot emit metrics or submit more GPU work
+  [chromium] › cdx-v3d-resources.spec.mjs:117:1 › a readLoss completing after recovery cannot contaminate the replacement trainer's fence ring
+  [chromium] › cdx-v3d-resources.spec.mjs:181:1 › phone pause and resume never overlap a pending GPU frame, and Finish joins it
+  [chromium] › cdx-v3d-resources.spec.mjs:234:1 › a resume request starts one next frame after its pending GPU fence settles
+  [chromium] › cdx-v3d-resources.spec.mjs:278:1 › Finish joins automatic completion without a second final readback or completion event
+  [chromium] › cdx-v3d-resources.spec.mjs:320:1 › SfM pool abort stops queued jobs and terminates all active workers
+  [chromium] › cdx-v3d-resources.spec.mjs:338:1 › SfM pool errors, handler errors, and constructor failures release every worker
+  [chromium] › cdx-v3d-resources.spec.mjs:375:1 › SfM pool preserves result/job association and closes workers after success
+  [chromium] › cdx-v3d-resources.spec.mjs:392:1 › a disposed session destroys a device that arrives after GPU creation
+  [chromium] › cdx-v3d-resources.spec.mjs:435:1 › late trainer completion cannot revive a disposed seed or continuation
+  [chromium] › cdx-v3d-resources.spec.mjs:479:1 › canceling load closes a late bitmap and prevents frame publication
+  [chromium] › cdx-v3d-resources.spec.mjs:512:1 › trainer disposal frees its buffers without destroying a host-owned device
+  [chromium] › cdx-v3d-resources.spec.mjs:600:1 › seedLimit reserves appended rows before the real trainer cap and covers the sparse cloud
+  [chromium] › cdx-v3d-resources.spec.mjs:635:1 › omitting seedLimit preserves the existing Gaussian parameter bytes
+  [chromium] › cdx-v3d-resources.spec.mjs:644:1 › disposing a session aborts its actual SfM worker pool
+  [chromium] › cdx-v3d-resources.spec.mjs:675:1 › seedLimit remains a ceiling on weak solves and empty solves fail clearly
+  [chromium] › cdx-v3d-resources.spec.mjs:702:1 › a captured device-loss callback stays quiet after session disposal
+  [chromium] › cdx-v3d-resources.spec.mjs:723:1 › surface rows survive the seed ceiling and train on actual WebGPU
+  [chromium] › cdx-v3d-review-media.spec.mjs:90:1 › review ranks five worst and five best only after all phone outcomes are accounted
+  [chromium] › cdx-v3d-review-media.spec.mjs:123:1 › review exposes too few paired successes and never ranks missing held-out proof
+  [chromium] › cdx-v3d-review-media.spec.mjs:138:1 › review requires complete source credits and forbids path-like capture IDs
+  [chromium] › cdx-v3d-review-media.spec.mjs:158:1 › review samples one common recorded-time interval without extrapolation or speed fitting
+  [chromium] › cdx-v3d-review-media.spec.mjs:177:1 › replay verification requires exact saved pixels and saved-file hash
+  [chromium] › cdx-v3d-review-media.spec.mjs:190:1 › replay checks actual scene flags and never infers candidate cleanup from missing telemetry
+  [chromium] › cdx-v3d-review-media.spec.mjs:212:1 › an actual main scene's false or omitted cleanup flag both mean disabled
+  [chromium] › cdx-v3d-review-media.spec.mjs:220:1 › side-by-side composition preserves both panes' actual RGBA values
+  [chromium] › cdx-v3d-review-media.spec.mjs:232:1 › CPU encoder produces labeled H.264 media with source/license metadata
+  [chromium] › cdx-v3d-review-media.spec.mjs:307:1 › failure export copies actual saved outcomes without launching a browser
+  [chromium] › cdx-v3d-review.spec.mjs:42:1 › Walk can cross supported space away from the camera path and stops at unknown space
+  [chromium] › cdx-v3d-review.spec.mjs:62:1 › a large native build export is compacted and loads through the unchanged viewer
+  [chromium] › cdx-v3d-review.spec.mjs:175:1 › Walk supports a full turn and clamps pitch without snapping to the filmed heading
+  [chromium] › cdx-v3d-review.spec.mjs:186:1 › six BKD1 scenes preserve cameras and reduce default bytes
+  [chromium] › cdx-v3d-review.spec.mjs:210:1 › Walk and Turn and zoom both reject giants and smears and derive a sky dome
+  [chromium] › cdx-v3d-samples.spec.mjs:12:1 › new captures retain their provenance and match every shipped file hash
+  [chromium] › cdx-v3d-samples.spec.mjs:78:1 › every baked sample has usable splats, a solved path, a credit, and a light default load
+  [chromium] › cdx-v3d-samples.spec.mjs:113:1 › each selected sample loads in the browser without fetching the trainer
+  [chromium] › cdx-v3d-samples.spec.mjs:140:3 › a saved toolse walk-mode BY-SA sample keeps visible, clickable attribution
+  [chromium] › cdx-v3d-samples.spec.mjs:140:3 › a saved poltsamaa walk-mode BY-SA sample keeps visible, clickable attribution
+  [chromium] › cdx-v3d-seed-bounds.spec.mjs:23:1 › legacy initializer bytes remain unchanged unless robust bounds are explicitly enabled
+  [chromium] › cdx-v3d-seed-bounds.spec.mjs:43:1 › one distant point cannot inflate robust bounds or normal-point scales, and remains in the seed
+  [chromium] › cdx-v3d-seed-bounds.spec.mjs:68:1 › robust center and radius are invariant to point order, including even-sized clouds
+  [chromium] › cdx-v3d-seed-bounds.spec.mjs:91:5 › Session passes robust bounds through legacy-capacity seeding with sigmoid conventions
+  [chromium] › cdx-v3d-seed-bounds.spec.mjs:91:5 › Session passes robust bounds through legacy-capacity seeding with v2 conventions
+  [chromium] › cdx-v3d-seed-bounds.spec.mjs:91:5 › Session passes robust bounds through bounded seeding with sigmoid conventions
+  [chromium] › cdx-v3d-seed-bounds.spec.mjs:91:5 › Session passes robust bounds through bounded seeding with v2 conventions
+  [chromium] › cdx-v3d-software-sort.spec.mjs:13:1 › serial sorting requires explicit true and preserves the default pipeline
+  [chromium] › cdx-v3d-software-sort.spec.mjs:57:1 › both GPU sorters match unsigned JS ordering, padded tails, and disjoint canaries
+  [chromium] › cdx-v3d-software-sort.spec.mjs:175:1 › software sort and direct gradients preserve raster bytes and three real optimizer steps
+  [chromium] › cdx-v3d-ssim.spec.mjs:3:1 › structural loss trains and exports with the default eight storage bindings
+  [chromium] › cdx-v3d-surface-seed.spec.mjs:44:1 › surface seeding fills only supported 3D surfaces within the seed budget
+  [chromium] › cdx-v3d-surface-seed.spec.mjs:61:1 › inconsistent views and unsupported geometry never invent a dense surface
+  [chromium] › cdx-v3d-tile-size-gpu.spec.mjs:4:1 › bounded tile8 preserves complete GPU optimizer state, dense entries, SSAA, and fallback
+  [chromium] › cdx-v3d-tile-size.spec.mjs:38:5 › compiled pipeline bytes match independent original fixture {"shDeg":0,"compact":false}
+  [chromium] › cdx-v3d-tile-size.spec.mjs:38:5 › compiled pipeline bytes match independent original fixture {"shDeg":0,"compact":false,"tileGrad":false}
+  [chromium] › cdx-v3d-tile-size.spec.mjs:38:5 › compiled pipeline bytes match independent original fixture {"shDeg":0,"compact":false,"ssimWeight":0.2}
+  [chromium] › cdx-v3d-tile-size.spec.mjs:38:5 › compiled pipeline bytes match independent original fixture {"shDeg":0,"compact":false,"tileGrad":false,"ssimWeight":0.2}
+  [chromium] › cdx-v3d-tile-size.spec.mjs:38:5 › compiled pipeline bytes match independent original fixture {"shDeg":0,"compact":false,"tileGrad":false,"ssaa":2}
+  [chromium] › cdx-v3d-tile-size.spec.mjs:38:5 › compiled pipeline bytes match independent tile8 fixture {"shDeg":0,"compact":false,"tileGrad":false,"ssimWeight":0,"serialSort":true}
+  [chromium] › cdx-v3d-tile-size.spec.mjs:38:5 › compiled pipeline bytes match independent tile8 fixture {"shDeg":0,"compact":false,"tileGrad":false,"ssimWeight":0.2,"serialSort":true}
+  [chromium] › cdx-v3d-tile-size.spec.mjs:62:1 › tile8 compiles direct raster workgroups without changing image-wide SSIM workgroups
+  [chromium] › cdx-v3d-tile-size.spec.mjs:86:1 › tile size validation rejects unsupported sizes and shared-gradient combinations before GPU allocation
+  [chromium] › cdx-v3d-tile-size.spec.mjs:100:1 › uniform tile counts follow the explicit tile size for partial edge tiles
+  [chromium] › cdx-v3d-tile-size.spec.mjs:135:1 › source specialization preserves default bytes and rejects ambiguous raster anchors
+  [chromium] › cdx-v3d-tile-size.spec.mjs:151:1 › tile8 rejects view allocations beyond the actual scan capacity before touching GPU buffers
+  [chromium] › cdx-v3d-tile-size.spec.mjs:201:1 › full phone bound includes every padded segment and raises capacity only when all fit
+  [chromium] › cdx-v3d-tile-size.spec.mjs:213:1 › binding and buffer limits independently select unchanged tile16 without raising memory
+  [chromium] › cdx-v3d-tile-size.spec.mjs:237:1 › missing ceilings, scan overflow, and unsafe multiplication select tile16
+  [chromium] › cdx-v3d-tile-size.spec.mjs:255:1 › explicit malformed ceilings fail before allocating buffers
+  [chromium] › cdx-v3d-tile-size.spec.mjs:261:1 › SSAA scaling cannot undo the final complete entry bound or exceed device capacity
+  [chromium] › cdx-v3d-tile-size.spec.mjs:272:1 › adversarial whole-view opaque splats require more than the inherited 12M entries
+  [chromium] › cdx-v3d-tile-size.spec.mjs:290:1 › seed overflow fails before conversion, truncation, or GPU allocation
+  [chromium] › cdx-v3d-tile-size.spec.mjs:304:1 › later draws respect allocated tiles, allocated pixels, and grown splat count
+  [chromium] › cdx-v3d-tile-size.spec.mjs:327:3 › ssim image kernels keep 16-wide dispatch while raster uses tile8
+  [chromium] › cdx-v3d-tile-size.spec.mjs:327:3 › ssaa image kernels keep 16-wide dispatch while raster uses tile8
+  [chromium] › cdx-v3d-tile-size.spec.mjs:363:1 › caller options cannot enlarge a compiled tile8 capacity bound or growth allocation
+  [chromium] › cdx-v3d-training-error.spec.mjs:29:1 › an encoding failure stops training immediately and cannot complete as a successful bake
+  [chromium] › cdx-v3d-training-error.spec.mjs:54:1 › a failed asynchronous refinement reports the originating error once
+  [chromium] › cdx-v3d-training-error.spec.mjs:73:1 › a rejected fence from a replaced trainer cannot fail its replacement
+  [chromium] › cdx-v3d-training-hold.spec.mjs:3:1 › Finish now retains its GPU hold, and leaving releases it before cleanup settles
+  [chromium] › cdx-v3d-training-hold.spec.mjs:81:1 › retrying the same file clears the previous failure while new training is pending
+  [chromium] › cdx-v3d.spec.mjs:23:1 › clip feedback distinguishes translation with parallax, a pan, and a blank clip
+  [chromium] › cdx-v3d.spec.mjs:45:1 › affine walk geometry preserves perspective from translated captured cameras
+  [chromium] › cdx-v3d.spec.mjs:90:1 › walking eases motion and stays in the filmed corridor, including its ends
+  [chromium] › cdx-v3d.spec.mjs:109:1 › walking allows a full turn while keeping pitch below vertical
+  [chromium] › cdx-v3d.spec.mjs:117:1 › cleanup rejects single-view floaters and sky rays while retaining supported surfaces
+  [chromium] › cdx-v3d.spec.mjs:149:1 › a replacement training plan releases an earlier confirmation
+  [chromium] › cdx-v3d.spec.mjs:179:1 › an unplayable file is rejected without replacing the previously checked clip
+  [chromium] › cdx-v3d.spec.mjs:206:3 › changing the toy cancels a pending file check and hides its card
+  [chromium] › cdx-v3d.spec.mjs:206:3 › changing the source cancels a pending file check and hides its card
+  [chromium] › cdx-v3d.spec.mjs:236:1 › leaving during training confirmation releases the preparation without starting a trainer
+  [chromium] › cdx-v3d.spec.mjs:282:1 › changing navigation reuses a learned custom result and keeps its original-video identity
+  [chromium] › cdx-v3d.spec.mjs:347:3 › Session refinement keeps the upstream default
+  [chromium] › cdx-v3d.spec.mjs:347:3 › Session refinement accepts an explicit build-tool threshold
+  [chromium] › cdx-v3d.spec.mjs:383:1 › Replay releases its audio and lens when its scene ownership changes, including a late embed
+  [chromium] › cdx-v3d.spec.mjs:485:1 › Walk releases its controls while a replacement is loading and the old procedure is still present
+  [chromium] › cdx-v3d.spec.mjs:529:1 › a real video receives suitability feedback within five seconds without loading the trainer
+  [chromium] › cdx-v3d.spec.mjs:551:1 › a real decoded blank clip is rejected quickly without requiring WebGPU
+  [chromium] › cdx-v3d.spec.mjs:590:1 › desktop keys and a mouse drag move the real stage camera, and leaving removes walk controls
+  [chromium] › cdx-v3d.spec.mjs:642:1 › two phone thumbs move and look independently while staying in the observed region
+  [chromium] › hh3-level1-engine.spec.mjs:9:1 › canPlay: picture and still toys play Level 1 only when they ask, and not while live
+  [chromium] › hh3-level1-engine.spec.mjs:69:1 › a still toy that asks: off at first, its own drag on its pages, picked up off them; off while live
+  [chromium] › hh3-level1.spec.mjs:15:1 › each 'Level 1 only' picture, Studio and Lab toy is picked up whole with ✋ on
+  [chromium] › hh3-level1.spec.mjs:53:1 › the book, the photo album and the one-sided captures stay out
+  [chromium] › smd-compare.spec.mjs:21:3 › the original beside the 3D › Photo to 3D: the flat photo shows, at the photo's size, and goes away
+  [chromium] › smd-compare.spec.mjs:41:3 › the original beside the 3D › Moving photo to 3D: the flat clip shows the frame the 3D one shows
+  [chromium] › smd-compare.spec.mjs:66:3 › the original beside the 3D › Video to 3D: the sample's own span plays in step with Replay flight
+  [chromium] › v3d.spec.mjs:5:1 › a kit cloud keeps a trained splat's own sizes and rotation
+  [chromium] › v3d.spec.mjs:33:1 › the stretch and frame rate pick the right frames
+  [chromium] › v3d.spec.mjs:56:1 › a frame close to 2:1 is trimmed, so it is not taken for a 360-degree panorama
+  [chromium] › v3d.spec.mjs:71:1 › a sharp picture scores higher than the same picture blurred
+  [chromium] › v3d.spec.mjs:85:1 › the PLY reader turns a small known PLY into the right splats
+  [chromium] › v3d.spec.mjs:120:1 › the scene frame puts the cameras' up at +y and the video's view toward -z
+  [chromium] › v3d.spec.mjs:158:1 › Splat.js loads only when a video is opened in this toy
+  [chromium] › v3d.spec.mjs:194:1 › without WebGPU the toy says so plainly and keeps going
+  [chromium] › v3d.spec.mjs:215:1 › screenshots at phone and desktop size
+  [chromium] › v3d.spec.mjs:231:1 › a failed camera path is explained in plain words, with what to try
+  [chromium] › v3d.spec.mjs:244:1 › the phone-safe setting is the lightest, and its rough time the shortest
+  [chromium] › v3d.spec.mjs:285:1 › Replay flight: a drag turns the view while it flies, and switching it off pauses there
+  [chromium] › v3d.spec.mjs:325:1 › on a phone the card asks first, with the setting and a rough time
+  [chromium] › v3d.spec.mjs:345:1 › a failure shows what makes a video work, again
+Total: 258 tests in 39 files

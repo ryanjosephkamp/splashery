@@ -1,0 +1,14 @@
+{
+  "created": "2026-10-15T12:52:57.492915+00:00",
+  "pid": 377289,
+  "command": [
+    "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+    "tools/v3d-bench.mjs",
+    "samples",
+    "/workspace/v3d-r4-media/samples-r12-r1",
+    "--url=http://127.0.0.1:4183/",
+    "--reference=/workspace/v3d-r4-media/samples-main-r1"
+  ],
+  "productCommit": "64ec9ad5b7a90b590b289f6a02f0bbd50138db08",
+  "servedSourceSha256": "6d362ff52101541719cc6b639d48b394630113fa61b3467ddbecb78dbe8742b8"
+}

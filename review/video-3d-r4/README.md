@@ -4,12 +4,59 @@ This branch is review evidence only and must never be merged. The accepted corpu
 candidate quality measurements. The product branch is `codex/video-3d-r4`. The audit records results
 and limitations; the goal is still being measured.
 
-## Revision 11 in progress
+## Revision 12 in progress
 
-The new frozen source is `636a7605fd15f3aa1e41d43cc6b5ff35432750b6`, with served-source SHA-256
-`065978f64c7d586b46591356192df441e669243e8478e8e84a46b0eda4cc600b` across 378 paths. Fresh native
-corpus and six-sample checks are running. All older measurements retain their original source
-identity and failures. The deadline remains October 15, 2026, at 16:32:25 UTC.
+The current frozen candidate is `64ec9ad5b7a90b590b289f6a02f0bbd50138db08`, with served-source
+SHA-256 `6d362ff52101541719cc6b639d48b394630113fa61b3467ddbecb78dbe8742b8` across 378 paths. Fresh
+native corpus checks are running. All 74 revision-12 sample views across both profiles preserve main
+pixels exactly, without recorded browser errors. The deadline remains October 15, 2026, at 16:32:25
+UTC. Older revisions retain their source identity and every negative result.
+
+The
+[revision-11 and preparation packet](evidence/revision-11-and-12-preparation-r8/PUBLICATION-README.md)
+preserves all thirteen revision-11 attempts, eight strict paired rows, five unpaired rows, and all
+74 exact sample views. Three phone reconstructions and one unpaired desktop reconstruction finished.
+The plant phone reconstruction was sharper but lost SSIM and delayed its first view. Those outcomes
+do not establish the combined corpus goal.
+
+The [first scored revision-12 phone pair](evidence/r12-first-plant-diagnostic-r8/index.html) shows
+unchanged held-out renders beside the independent source image. Flowers and the chameleon are more
+distinct, while background gaps and large blurred splats remain visible. Sharpness is 14.050 times
+main's, SSIM falls by 0.033142, and first view takes 121.98% of main's time. This pair misses the
+combined target; it is an unranked static diagnostic, not a review movie.
+
+Revision 12 constrains a training-derived environment-color direction using per-camera validation
+error bounds. Validation chooses the magnitude, so it is not an independent validation set. The
+packet retains analytic controls, five actual GPU fixtures, 66 integrated checks, and seventeen
+product-wiring checks. Native held-out corpus scores remain separate.
+
+The
+[original-spec byte audit](evidence/revision-11-and-12-preparation-r8/payload/original-spec-byte-audit-r3/receipt.json.gz)
+records 285 original specs before the latest normal main merge: 281 exactly match task-start main,
+and four exactly match normally merged main. This task modified none of them. Interrupted and failed
+local checks remain explicit. The
+[partial CI record](evidence/ci-11c90-r8/partial-suite-summary-r2.json) retains all sixteen job
+logs: fifteen reported summaries contain 2,658 passes, eight failures, and one existing skip; Suite
+13 was canceled without a summary. This is not full-suite coverage. The
+[completed full CI](evidence/ci-c4752253-r8/full-suite-summary.json) on `c4752253` records 337 spec
+files, 2,878 passes, ten failures, and one existing skip. No Video to 3D spec appears in its failure
+list. This predates the latest normal main merge.
+
+The [review preparation](evidence/review-r12-queue-preparation-r8/LATEST-STATUS.txt) retains an
+idle-watcher process-observation failure. No movie was launched or timed job signaled. Its
+replacement will bind the separate post-merge sample job and preserve all observed history before
+one unranked batch after 16:15 UTC, when all timed work has ceased. It keeps exact held-out replay
+guards and requests up to ten available verified phone pairs in manifest order. Missing pairs and
+incomplete captures cannot become review movies or acceptance evidence.
+
+Large raw machine logs, telemetry, and images are losslessly archived with exact original paths,
+SHA-256 mappings, and restoration tools. Their original uncompressed bytes remain outside the
+repository. No image or assertion was altered to fit publication limits.
+
+## Earlier captured results
+
+The revision-11 source was `636a7605fd15f3aa1e41d43cc6b5ff35432750b6`, with served-source SHA-256
+`065978f64c7d586b46591356192df441e669243e8478e8e84a46b0eda4cc600b` across 378 paths.
 
 The [new main snapshot](measurements/main-master-r1-snapshot-0032/run.json) has 32 recorded
 outcomes. The
@@ -41,9 +88,9 @@ fatal. The reproduced failure and eight passing controlled browser cases are ret
 original specs were untouched by this task; four differences came only from normally merged main.
 This is a byte audit, not a passing-suite claim.
 
-[The latest full CI](evidence/ci-d2a90/full-suite-summary.json) tested GitHub merge `acdc31904`: 332
-spec files, 2,834 passes, 13 failures, and one existing skip. All sixteen original shard logs remain
-intact; alone rechecks never waive a failure. The
+[The earlier full CI](evidence/ci-d2a90/full-suite-summary.json) tested GitHub merge `acdc31904`:
+332 spec files, 2,834 passes, 13 failures, and one existing skip. All sixteen original shard logs
+remain intact; alone rechecks never waive a failure. The
 [broader local run](evidence/ca841-regressions-r1/) had 281 passes, two calibration decode-deadline
 failures, and one existing skip. The
 [separate calibration run](evidence/r11-calibration-isolated-r1/) had seven passes, four failures,

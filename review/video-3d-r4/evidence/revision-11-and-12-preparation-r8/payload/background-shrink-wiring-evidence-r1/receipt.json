@@ -1,0 +1,63 @@
+{
+  "kind": "newly-captured-source-binding-for-existing-completed-log",
+  "capturedAt": "2026-10-15T13:29:47.623175+00:00",
+  "sourceCommit": "64ec9ad5b7a90b590b289f6a02f0bbd50138db08",
+  "sourceBinding": "Actual Git object bytes read now; this newly captured receipt does not prove which bytes were historically served during the earlier test.",
+  "passed": 17,
+  "failed": 0,
+  "logSha256": "a01e2b44fcb0e2c5243cadc066f792ed2fd8d198374a966a65733095ee5157b9",
+  "logSource": "/tmp/v3d-r4-background-shrink-wiring-r1.log",
+  "sourceFiles": [
+    {
+      "file": "src/video3d/run.js",
+      "bytes": 21261,
+      "sha256": "38e114037231bc6be89297d416c05680129b35d1e95fa909355763e29fb6767f"
+    },
+    {
+      "file": "src/video3d/background.js",
+      "bytes": 3108,
+      "sha256": "12e029303391b2001613bdbaeddfee708ff979ee1107205f7bb6144c03a5b314"
+    },
+    {
+      "file": "src/video3d/deadline.js",
+      "bytes": 1617,
+      "sha256": "0fb75a0904483a3b17f65c2f723c7a33bc1032564f85a38cb703b0a515c5fb07"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 67471,
+      "sha256": "e50c9b04231c4e62ce804f6c48ab367155426d007674cece64c8f8773c287d8f"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 129154,
+      "sha256": "4bf4663854e7f0a268183959f9f510674761f63d176287a3181cbe0d1209142a"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/background-fit.js",
+      "bytes": 5928,
+      "sha256": "dc870092c70ae8b768a10604946294781fb84ce5ad25c88603e88c4507909359"
+    },
+    {
+      "file": "tests/cdx-v3d-background-recovery.spec.mjs",
+      "bytes": 7970,
+      "sha256": "64eba6a893eb97beadafefdea27705ecf045c07a174751e52103259862a27283"
+    },
+    {
+      "file": "tests/cdx-v3d-background-shrink.spec.mjs",
+      "bytes": 4202,
+      "sha256": "cc2b9ec1c374d49a755ad0ca8d7a1fa51aef30c427228b585cbfda8a003803b1"
+    },
+    {
+      "file": "tests/cdx-v3d-background-shrink-gpu.spec.mjs",
+      "bytes": 2076,
+      "sha256": "b86c025d8f90550f43f609da2950e81bad0a51b99ec2149c3820efde80e44ab6"
+    },
+    {
+      "file": "tests/helpers/v3d-background-shrink-fixture.mjs",
+      "bytes": 3481,
+      "sha256": "b6c63e39c44b0f408aef84c9873abc0970b4a1a5fef5f3cb8ee1f8f4ff82757f"
+    }
+  ],
+  "notice": "Wiring/engine controls only, not an R11 native corpus or full-suite acceptance result."
+}

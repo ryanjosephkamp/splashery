@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-15T12:29:32.853726+00:00",
+  "pid": 356348,
+  "command": [
+    "/home/agent/.npm/_npx/165bf73430067a31/node_modules/node/bin/node",
+    "node_modules/@playwright/test/cli.js",
+    "test",
+    "tests/v3d.spec.mjs"
+  ],
+  "sourceCommit": "636a7605fd15f3aa1e41d43cc6b5ff35432750b6"
+}

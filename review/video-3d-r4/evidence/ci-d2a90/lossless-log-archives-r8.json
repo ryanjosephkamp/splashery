@@ -1,0 +1,136 @@
+{
+  "capturedAt": "2026-10-15T13:36:25.114434+00:00",
+  "files": [
+    {
+      "originalPath": "raw-job-116390461013.log",
+      "archivePath": "raw-job-116390461013.log.gz",
+      "originalBytes": 226607,
+      "originalSha256": "9d426bb0c00efa21fbea115baa77b9a1ad4a9466b02361f247830833fd1e9f24",
+      "archiveSha256": "493a55f414605be90a18eb505e83da778b9cc148d17f3c7458117c72c9d52f36",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461013.log"
+    },
+    {
+      "originalPath": "raw-job-116390461236.log",
+      "archivePath": "raw-job-116390461236.log.gz",
+      "originalBytes": 230171,
+      "originalSha256": "89a54140fab6590df27f86ddb5858d323fcf76f5afc8cf15420488101e33874f",
+      "archiveSha256": "ff1bab6ee38f72015ba767e0402b2a6e4a604f56f0d61fa0267f9e115a741399",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461236.log"
+    },
+    {
+      "originalPath": "raw-job-116390461238.log",
+      "archivePath": "raw-job-116390461238.log.gz",
+      "originalBytes": 226561,
+      "originalSha256": "b3a7f9a87f2463425b8829307414cfbef23eaef7601fa847da6276aaac70c1c8",
+      "archiveSha256": "52a41bf100a246f20412cce7d9e1e7aeacce9c244f64169333127ddd10088aa6",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461238.log"
+    },
+    {
+      "originalPath": "raw-job-116390461243.log",
+      "archivePath": "raw-job-116390461243.log.gz",
+      "originalBytes": 227509,
+      "originalSha256": "3051592f1cd88160f542bc2c06d23ff97b97cd55900e531979c0515465867eae",
+      "archiveSha256": "7aabb5ed721aa106523ff9056b57ad865c91d39d6151babc577696f38af73029",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461243.log"
+    },
+    {
+      "originalPath": "raw-job-116390461273.log",
+      "archivePath": "raw-job-116390461273.log.gz",
+      "originalBytes": 226897,
+      "originalSha256": "be4302f69ec18215b5597802e1d5ed66990a854b28db976be7f39965b179c581",
+      "archiveSha256": "7e8aab7ddfe861e6c2d599c44e4a5bbc70be8696613dc74ec28b4e5d73918b36",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461273.log"
+    },
+    {
+      "originalPath": "raw-job-116390461284.log",
+      "archivePath": "raw-job-116390461284.log.gz",
+      "originalBytes": 230095,
+      "originalSha256": "f79e2a7bac6703426e652f378090f3d4a283f73b89ba58580c31b79ca0c15930",
+      "archiveSha256": "77213c327924ad409c2e656ea6d83a91f65aed1d8261c18c23821ed262e88824",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461284.log"
+    },
+    {
+      "originalPath": "raw-job-116390461292.log",
+      "archivePath": "raw-job-116390461292.log.gz",
+      "originalBytes": 228353,
+      "originalSha256": "cda1fd18afd2a3dc7992b403437d7f733c2e76bb53734b83ad46417e089563a8",
+      "archiveSha256": "1da82de8f2d5be24a8224cdb1659111b98442bd3e17b26f2bcd7340a8ebd1bc9",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461292.log"
+    },
+    {
+      "originalPath": "raw-job-116390461322.log",
+      "archivePath": "raw-job-116390461322.log.gz",
+      "originalBytes": 229313,
+      "originalSha256": "993e9b5e32e937ba317202db2904289a14d22a38db9cc65aebc3bd4a99f6d90f",
+      "archiveSha256": "34853d202b7f11d4a18f7f211476a43deb39633b207a5fb73409bda13f03c5c6",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461322.log"
+    },
+    {
+      "originalPath": "raw-job-116390461367.log",
+      "archivePath": "raw-job-116390461367.log.gz",
+      "originalBytes": 227481,
+      "originalSha256": "8f9900d1f38e6ee0999916e9d334bfd422e3dfdff2678926a86784cee0cd6eab",
+      "archiveSha256": "1ea99e5c8bd37684f0708c51c17a0b28c8231bd064f9b8b8553c703f5c6e3638",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461367.log"
+    },
+    {
+      "originalPath": "raw-job-116390461375.log",
+      "archivePath": "raw-job-116390461375.log.gz",
+      "originalBytes": 225967,
+      "originalSha256": "2a739b6481d42493793eeebeb0a2154efad16166d5e8997982fe5139d062d84b",
+      "archiveSha256": "e7e3524f3f1e1e4fb5a6a27cd02e7cfd96edb55473a161ae9b01ae9a797f6934",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461375.log"
+    },
+    {
+      "originalPath": "raw-job-116390461393.log",
+      "archivePath": "raw-job-116390461393.log.gz",
+      "originalBytes": 226368,
+      "originalSha256": "ac6d259c141f8110821cf05128456c5afc422d81c6efe021f622025f2f4f9205",
+      "archiveSha256": "459dd2ca8813853f540e6a73667392cb279fc067f2f614384cc4ee6678eae24e",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461393.log"
+    },
+    {
+      "originalPath": "raw-job-116390461405.log",
+      "archivePath": "raw-job-116390461405.log.gz",
+      "originalBytes": 229426,
+      "originalSha256": "1d01e819a1647cdf44f49fe8704565e99a293f29e5f78ae3635e921f20f5ada1",
+      "archiveSha256": "a33750960a8a1189911e14173a38df7d19bf07698d7bc8e68e3fed6c3938cd63",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461405.log"
+    },
+    {
+      "originalPath": "raw-job-116390461410.log",
+      "archivePath": "raw-job-116390461410.log.gz",
+      "originalBytes": 226547,
+      "originalSha256": "70337329cc91cc099f995069c405b528c4a6e038408be80d5f11b5ea1180f3c3",
+      "archiveSha256": "d33173b4cec2025871f9335504785839c88e20b72ce8d800dd5412d9a3d2d4e4",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461410.log"
+    },
+    {
+      "originalPath": "raw-job-116390461591.log",
+      "archivePath": "raw-job-116390461591.log.gz",
+      "originalBytes": 227107,
+      "originalSha256": "78039f838436bc5d480e8b275aad4baab50a10f5a5f21337c3759198e1545599",
+      "archiveSha256": "9a4174901fad19af55b783ed085ab5af0daaf2bcbb472daf6cc9f9f2cc0cfa6c",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461591.log"
+    },
+    {
+      "originalPath": "raw-job-116390461644.log",
+      "archivePath": "raw-job-116390461644.log.gz",
+      "originalBytes": 225846,
+      "originalSha256": "dcbaf6f59b4b33d365f12ca06763c05a794685cc7d06df94b79378831bfe90d3",
+      "archiveSha256": "1d3208145148fed324d0f28e800f02d1a50951970b8f60f71fd787fa4d7aedb6",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461644.log"
+    },
+    {
+      "originalPath": "raw-job-116390461860.log",
+      "archivePath": "raw-job-116390461860.log.gz",
+      "originalBytes": 227280,
+      "originalSha256": "34ba7f7dd3c5d0f79682a282fb8254bba05ccd890bc8a74eabbf0e7e1098bfb1",
+      "archiveSha256": "9f680e567d4f1ef95645bdb711a60d3227219713499c38debeb6f677376ede1c",
+      "uncompressedOutsideSource": "/workspace/v3d-r4-media/ci-d2a90/raw-job-116390461860.log"
+    }
+  ],
+  "allOriginalPublicationFilesVerifiedAfterRestoration": true,
+  "originalPublicationFileCount": 19,
+  "notice": "Storage-only change. Existing publication.json and original source inventories are unchanged. Decompress mapped files to their original paths before checking the original inventory. Original uncompressed logs remain outside. No log, assertion, status, count, or failure changed."
+}

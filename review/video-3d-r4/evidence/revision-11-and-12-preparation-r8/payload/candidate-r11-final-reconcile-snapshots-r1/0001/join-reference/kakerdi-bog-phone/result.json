@@ -1,0 +1,126 @@
+{
+  "id": "kakerdi-bog",
+  "profile": "phone",
+  "sha256": "5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8",
+  "started": "2026-10-15T11:03:13.719Z",
+  "status": "finished",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": 176250.3999999985,
+  "bakeMs": 1523138.1627559997,
+  "mean": {
+    "psnr": 5.079965833275401,
+    "ssim": 0.34732176752057164,
+    "laplacian": 0.00030550911643080145,
+    "sourceLaplacian": 0.008391548169961151
+  },
+  "peakRssBytes": 1398882304,
+  "hostLoadAtStart": [
+    16.18,
+    17.09,
+    17.99
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "The decoded video frame took too long.",
+    "unplayable": false,
+    "duration": 12
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "fd9cfa0ff7c80bdf49928c6dc46cc9bf0f5e65ebbe2a0d96d19d7008fb3f2010",
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 16,
+    "points": 579,
+    "splats": 15054,
+    "iters": 212,
+    "psnr": 22.9,
+    "psnrAtIter": 212,
+    "trainSide": 320,
+    "plyBytes": 986415,
+    "retried": false,
+    "timedOut": true,
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 12,
+    "rate": 1.333
+  },
+  "timings": {
+    "frames": 40,
+    "decode": 1.9,
+    "path": 58.1,
+    "seed": 0.2,
+    "train": 1410.8,
+    "export": 0.2,
+    "total": 1511.3
+  },
+  "actualTier": "phone",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": false,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "evaluationSha256": "63c0236908bcc2ad7e7f2705d762f204b30c9b831ea32af708c2845b59cb428b",
+  "frames": [
+    {
+      "time": 1.5,
+      "renderSha256": "0373731e0fdab7cb2ba889b5c5bb91f393e7d5daf752aa937c2ef9da024c4e7a",
+      "referenceSha256": "6adf2cc719a94e4684eb4902976c2b39259c56c0f5886d2251cb746e74c764f3",
+      "psnr": 5.3134402873027415,
+      "exact": false,
+      "ssim": 0.3429628654900986,
+      "laplacian": 0.00039808050278758385,
+      "sourceLaplacian": 0.00593347234353797,
+      "sharpnessRatio": 0.06709064772521028
+    },
+    {
+      "time": 4.5,
+      "renderSha256": "afed7b22e25219b1eba19c98ef2c94dd613051b469b3e943e6aa3410e9d5eb22",
+      "referenceSha256": "3bfbe441aa5d9d5544bf59997a9b783cf50bc1e6d445ea47a27e13c864f53360",
+      "psnr": 5.284738562377922,
+      "exact": false,
+      "ssim": 0.3354742585368895,
+      "laplacian": 0.00036490482145861753,
+      "sourceLaplacian": 0.009392579060373548,
+      "sharpnessRatio": 0.0388503327055418
+    },
+    {
+      "time": 7.5,
+      "renderSha256": "34e864e7138dd36015a30062e365b3ad2b5377fa847ed94389931cc674f9f223",
+      "referenceSha256": "abd4752117692a74d24b3d9b1fe4924c6cb57470bc51cb36c31dc891ad6c20bd",
+      "psnr": 5.086011777138266,
+      "exact": false,
+      "ssim": 0.3547695205617192,
+      "laplacian": 0.00031393303917005394,
+      "sourceLaplacian": 0.00918800863382126,
+      "sharpnessRatio": 0.03416769091993009
+    },
+    {
+      "time": 10.75,
+      "renderSha256": "7a3abd7c133f7fe738c63cb474e2a326342ba36623cfd8d8065a235e2a4dbc1e",
+      "referenceSha256": "ab0173a6003d3139eef47b86c16bd779880e483fab348fdcd954af0c3565a28f",
+      "psnr": 4.635672706282675,
+      "exact": false,
+      "ssim": 0.35608042549357943,
+      "laplacian": 0.00014511810230695058,
+      "sourceLaplacian": 0.009052132642111823,
+      "sharpnessRatio": 0.016031371616434375
+    }
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-15T12:17:48.927195+00:00",
+  "sourceCommit": "636a7605fd15f3aa1e41d43cc6b5ff35432750b6",
+  "passed": 7,
+  "failed": 4,
+  "existingSkipped": 1,
+  "note": "Separate file run while native bakes, sample rendering, and broader regression checks overlap. Calibration decode-deadline assertions are unchanged. Failures remain open; no causal claim or waiver.",
+  "files": {
+    "full-run.log": "394400750e5f6da1ddbbe22d5b02f1dad3de72a901f160f0e4625b3e2f19d52a",
+    "cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/trace.zip": "231b29148441e2e8fdc16dddb88274bc6dffd3dd4284c0db5d86b1c025b375f7",
+    "cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/error-context.md": "b6874f494a18a685222b4559d296b3c114ac25fc6973eff3b98cca000c371454",
+    "cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/test-failed-1.png": "930087e2e5ceaff7eb20dea2a652d1f9bdfaf3684ef12097ab79e2430a6dcaba",
+    "cdx-v3d-calibration-real-a-a1f4e-ated-feedback-without-a-GPU-chromium/trace.zip": "105238262675e5bddea1088dc03b4c01a49127e14142ef69fdd297bd4ac7427e",
+    "cdx-v3d-calibration-real-a-a1f4e-ated-feedback-without-a-GPU-chromium/error-context.md": "b6874f494a18a685222b4559d296b3c114ac25fc6973eff3b98cca000c371454",
+    "cdx-v3d-calibration-real-a-a1f4e-ated-feedback-without-a-GPU-chromium/test-failed-1.png": "930087e2e5ceaff7eb20dea2a652d1f9bdfaf3684ef12097ab79e2430a6dcaba",
+    "cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/trace.zip": "16a84a265ef002637dc1151fdebe74c9ab246ce98448e58c1bc930d49106bdb0",
+    "cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/error-context.md": "b6874f494a18a685222b4559d296b3c114ac25fc6973eff3b98cca000c371454",
+    "cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/test-failed-1.png": "930087e2e5ceaff7eb20dea2a652d1f9bdfaf3684ef12097ab79e2430a6dcaba",
+    "cdx-v3d-calibration-real-l-b299f-ated-feedback-without-a-GPU-chromium/trace.zip": "6ef76fe1a6097c1b505bf23eba835d20d5b38ce44cd2778f370d26eb60c4fcb8",
+    "cdx-v3d-calibration-real-l-b299f-ated-feedback-without-a-GPU-chromium/error-context.md": "b6874f494a18a685222b4559d296b3c114ac25fc6973eff3b98cca000c371454",
+    "cdx-v3d-calibration-real-l-b299f-ated-feedback-without-a-GPU-chromium/test-failed-1.png": "930087e2e5ceaff7eb20dea2a652d1f9bdfaf3684ef12097ab79e2430a6dcaba"
+  }
+}

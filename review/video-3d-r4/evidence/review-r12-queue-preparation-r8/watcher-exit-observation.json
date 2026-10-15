@@ -1,0 +1,21 @@
+{
+  "capturedAt": "2026-10-15T14:02:09.794830+00:00",
+  "actualKernelObservation": {
+    "pid": 393769,
+    "startTicks": "3173768",
+    "state": "Z",
+    "kernelRawExitCode": 256
+  },
+  "originalCommandFromLaunchReceipt": [
+    "python3",
+    "/workspace/v3d-r4-media/queue-r12-review-r1.py",
+    "--run"
+  ],
+  "errorLogSha256": "1676a5274c3ad5a57b31a8eef45cc0ccd00ec2eadb0d014611996927843a2152",
+  "lastQuietSha256": "6b6c969506c01d079d01b8b50248383f9b85565064084fb1b6920a81e36ec242",
+  "lastQuietAt": "2026-10-15T13:38:28.449375+00:00",
+  "observedBindings": 262,
+  "initialRootTakeoverAbortedBeforeSignals": true,
+  "signalsSent": [],
+  "notice": "The first root takeover assertion failed because R1 was already exited with an unhandled process-observation validation error. No root retirement or timed-work signal is claimed. R1/R2 frozen source is retained; a truthful observed-ended replacement guard is being prepared."
+}

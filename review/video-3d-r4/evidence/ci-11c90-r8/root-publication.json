@@ -1,0 +1,10 @@
+{
+  "capturedAt": "2026-10-15T13:41:25.931515+00:00",
+  "source": "/workspace/v3d-r4-media/ci-11c90-publication-r2",
+  "files": 21,
+  "bytes": 618936,
+  "inventoryFile": "root-source-inventory.json.gz",
+  "inventorySha256": "77a11407ac4a860c94ae7986fa5402166742459e2dfe74592c18630de8fa4f5a",
+  "inventoryArchiveSha256": "f046ea737c953e4554b72283e99817238481cd9d4bc7048ca9e23745de019432",
+  "notice": "Every source and destination byte verified before adding this root receipt and compressed inventory. Original completed evidence, failure classifications, and storage-restoration maps remain unchanged. No live native state is copied or inferred by this publication."
+}

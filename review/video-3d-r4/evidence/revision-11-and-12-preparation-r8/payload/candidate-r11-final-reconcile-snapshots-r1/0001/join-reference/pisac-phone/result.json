@@ -1,0 +1,77 @@
+{
+  "id": "pisac",
+  "profile": "phone",
+  "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+  "started": "2026-10-15T06:21:03.261Z",
+  "status": "harness-error",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": 124718.20000000019,
+  "bakeMs": 1737688.4317450002,
+  "mean": null,
+  "peakRssBytes": 1416667136,
+  "hostLoadAtStart": [
+    21.47,
+    20.36,
+    17.69
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "The decoded video frame took too long.",
+    "unplayable": false,
+    "duration": 10
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "efad3d4cf5c3138b4c25b5060d4f4366efed20d93cc300048d8066a64da93453",
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 16,
+    "points": 835,
+    "splats": 15030,
+    "iters": 210,
+    "psnr": 19.4,
+    "psnrAtIter": 210,
+    "trainSide": 320,
+    "plyBytes": 922699,
+    "retried": false,
+    "timedOut": true,
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 10,
+    "rate": 1.6
+  },
+  "timings": {
+    "frames": 17.3,
+    "decode": 1.1,
+    "path": 51.4,
+    "seed": 0.2,
+    "train": 1659.9,
+    "export": 0.2,
+    "total": 1730.1
+  },
+  "actualTier": "phone",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": false,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "evaluationSha256": "3f9aa9e146f8ca7ac0a98bb0f18756e5cb9b2787e6d25e3e5b31395d986ad11c",
+  "reason": "Error: pisac/phone (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

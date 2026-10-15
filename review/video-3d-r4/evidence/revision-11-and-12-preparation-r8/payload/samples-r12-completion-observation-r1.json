@@ -1,0 +1,17 @@
+{
+  "capturedAt": "2026-10-15T13:27:20.600070+00:00",
+  "productCommit": "64ec9ad5b7a90b590b289f6a02f0bbd50138db08",
+  "servedSourceSha256": "6d362ff52101541719cc6b639d48b394630113fa61b3467ddbecb78dbe8742b8",
+  "cases": 12,
+  "heldOutViews": 74,
+  "allPreserved": true,
+  "errors": [],
+  "samplesJsonSha256": "5f1996999ad102921908916e4aad174dba8dbb0f803dd606389dea3402955bd0",
+  "processObservation": {
+    "pid": 377289,
+    "startTicks": "3000325",
+    "state": "Z",
+    "kernelRawExitCode": 0
+  },
+  "note": "Actual completed sample replay, not retraining. The observed zombie identity has raw exit code0; every listed case preserved exact main pixels. No result was inferred from a missing process."
+}

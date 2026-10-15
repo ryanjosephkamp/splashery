@@ -1,0 +1,352 @@
+{
+  "createdAt": "2026-10-15T13:36:40.631713+00:00",
+  "runId": 38733898151,
+  "commit": "11c90d51f266145cb88a52f795be1a91e5da7692",
+  "allOriginalShardsComplete": false,
+  "note": "All 16 original job logs are retained. Suite 13 was canceled without an original summary. Totals cover only the 15 reported summaries and do not establish full-suite coverage. Alone rechecks never waive original failures. Raw UTF-8 bytes remain unchanged.",
+  "reportedSummaryCount": 15,
+  "partialReportedTotals": {
+    "files": 313,
+    "expectedFiles": 313,
+    "tests": 2667,
+    "passed": 2658,
+    "failed": 8,
+    "skipped": 1
+  },
+  "shards": [
+    {
+      "jobId": 116418191951,
+      "name": "Suite 3/16",
+      "status": "completed",
+      "conclusion": "failure",
+      "file": "raw-job-116418191951.log",
+      "sha256": "0f2d3fab1f2f1914ffbdbff058c96fa4fee19828a184e9962e63f76d0d61b129",
+      "bytes": 225703,
+      "originalSummary": {
+        "files": 21,
+        "expectedFiles": 21,
+        "tests": 200,
+        "passed": 198,
+        "failed": 1,
+        "skipped": 1
+      },
+      "failureLines": [
+        "2026-10-15T12:34:48.6529667Z - `hh4-space:147` pulsar: a flick spins it up and the beams sweep faster: failed. Error: expect(received).toBeCloseTo(expected, precision)"
+      ],
+      "recheckLines": [
+        "2026-10-15T12:34:55.6351074Z hh4-space:147 pulsar: a flick spins it up and the beams sweep faster: passed alone"
+      ]
+    },
+    {
+      "jobId": 116418192177,
+      "name": "Suite 11/16",
+      "status": "completed",
+      "conclusion": "failure",
+      "file": "raw-job-116418192177.log",
+      "sha256": "15b7219bf98b17c69c7712a876d93731bad330f47f2f6bff1ebc74685e1b9be7",
+      "bytes": 227066,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 172,
+        "passed": 171,
+        "failed": 1,
+        "skipped": 0
+      },
+      "failureLines": [
+        "2026-10-15T12:44:54.0823620Z - `spg:138` site pages \u203a the embed guide builds the snippets and shows a live toy: timedOut. Tearing down \"context\" exceeded the test timeout of 240000ms."
+      ],
+      "recheckLines": [
+        "2026-10-15T12:48:22.9035512Z spg:138 the embed guide builds the snippets and shows a live toy: passed alone"
+      ]
+    },
+    {
+      "jobId": 116418192239,
+      "name": "Suite 4/16",
+      "status": "completed",
+      "conclusion": "success",
+      "file": "raw-job-116418192239.log",
+      "sha256": "eea0f4b4c2ef49f763ec2441c9270761768ce67f717e7ba20285b2dbe96da781",
+      "bytes": 226771,
+      "originalSummary": {
+        "files": 21,
+        "expectedFiles": 21,
+        "tests": 249,
+        "passed": 249,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116418192240,
+      "name": "Suite 5/16",
+      "status": "completed",
+      "conclusion": "success",
+      "file": "raw-job-116418192240.log",
+      "sha256": "368af69d02218c1ce5330741228106d05a66e5637db146fe29b45d41f9734165",
+      "bytes": 229192,
+      "originalSummary": {
+        "files": 21,
+        "expectedFiles": 21,
+        "tests": 182,
+        "passed": 182,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116418192290,
+      "name": "Suite 13/16",
+      "status": "completed",
+      "conclusion": "cancelled",
+      "file": "raw-job-116418192290.log",
+      "sha256": "7eeeda38cb2039eb961b4504a9b26d5222986ab4e28c7f23f4b4c2c3f78f3848",
+      "bytes": 224789,
+      "originalSummary": null,
+      "failureLines": [],
+      "recheckLines": [
+        "2026-10-15T12:53:53.6782722Z ops-text:41 your book: the words of the page on show, following the pages, copied and found: passed alone"
+      ]
+    },
+    {
+      "jobId": 116418192311,
+      "name": "Suite 10/16",
+      "status": "completed",
+      "conclusion": "success",
+      "file": "raw-job-116418192311.log",
+      "sha256": "47716e3a7be703d3f3289557aefe994e75446081e036df8b519fba9a1ac38a39",
+      "bytes": 226592,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 132,
+        "passed": 132,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116418192320,
+      "name": "Suite 2/16",
+      "status": "completed",
+      "conclusion": "failure",
+      "file": "raw-job-116418192320.log",
+      "sha256": "039c77697b48d7fc0064772c124a9123c0c7f4703dd5fe34def3e5312e189ab6",
+      "bytes": 229637,
+      "originalSummary": {
+        "files": 20,
+        "expectedFiles": 20,
+        "tests": 192,
+        "passed": 191,
+        "failed": 1,
+        "skipped": 0
+      },
+      "failureLines": [
+        "2026-10-15T12:43:43.9006071Z - `phy:64` Pebbles: stones pick up and stack into a new cairn; a careless one topples: failed. Error: expect(received).toBeGreaterThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T12:44:18.4057998Z phy:64 Pebbles: stones pick up and stack into a new cairn; a careless one topples: passed alone"
+      ]
+    },
+    {
+      "jobId": 116418192378,
+      "name": "Suite 1/16",
+      "status": "completed",
+      "conclusion": "failure",
+      "file": "raw-job-116418192378.log",
+      "sha256": "6e2d366d0a460aaefcfbd57c2d3b1d62361b6d3edc4200781d319825522ceab6",
+      "bytes": 227206,
+      "originalSummary": {
+        "files": 10,
+        "expectedFiles": 10,
+        "tests": 118,
+        "passed": 117,
+        "failed": 1,
+        "skipped": 0
+      },
+      "failureLines": [
+        "2026-10-15T12:52:18.3545884Z - `man5:201` the PDF \u203a the same input and the same Chromium print the same bytes: failed. Error: run tools/manual-pdf.mjs again: the shipped PDF is out of date"
+      ],
+      "recheckLines": [
+        "2026-10-15T12:52:34.4864107Z man5:201 the same input and the same Chromium print the same bytes: failed alone"
+      ]
+    },
+    {
+      "jobId": 116418192409,
+      "name": "Suite 16/16",
+      "status": "completed",
+      "conclusion": "success",
+      "file": "raw-job-116418192409.log",
+      "sha256": "aeadedcb761afe95d35607796b02615ba1bc182a320b2eeb99ac27a31cb2633a",
+      "bytes": 225274,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 194,
+        "passed": 194,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116418192427,
+      "name": "Suite 6/16",
+      "status": "completed",
+      "conclusion": "failure",
+      "file": "raw-job-116418192427.log",
+      "sha256": "90fba99d3b4250ad0c9232ca8607dbfb3ade4d59de6354e772a82a73af553e60",
+      "bytes": 229771,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 226,
+        "passed": 225,
+        "failed": 1,
+        "skipped": 0
+      },
+      "failureLines": [
+        "2026-10-15T12:38:50.9069701Z - `phy-engine:156` toys that are hands-on already start on and keep their drags: failed. Error: expect(received).toBe(expected) // Object.is equality"
+      ],
+      "recheckLines": [
+        "2026-10-15T12:39:05.4280123Z phy-engine:156 toys that are hands-on already start on and keep their drags: passed alone"
+      ]
+    },
+    {
+      "jobId": 116418192479,
+      "name": "Suite 7/16",
+      "status": "completed",
+      "conclusion": "success",
+      "file": "raw-job-116418192479.log",
+      "sha256": "7d1ed1eed999fc042eebc64abc5c2c97d82796c1f4048248d8aa8674f8fb5d57",
+      "bytes": 226084,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 183,
+        "passed": 183,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116418192493,
+      "name": "Suite 15/16",
+      "status": "completed",
+      "conclusion": "failure",
+      "file": "raw-job-116418192493.log",
+      "sha256": "d1b4119ddcdcee3f9f4d319318a51d3def35e98a874af9c8655794e75b36d917",
+      "bytes": 229163,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 192,
+        "passed": 190,
+        "failed": 2,
+        "skipped": 0
+      },
+      "failureLines": [
+        "2026-10-15T12:39:26.6922326Z - `cdx-mir:329` matched camera frames keep real feature contrast and improve held-pose stability: failed. Error: expect(received).toBeLessThan(expected)",
+        "2026-10-15T12:39:26.6923707Z - `hh4-weather:167` iceberg: pushed down it bobs back; the chunk pulled off floats: failed. Error: expect(received).toBe(expected) // Object.is equality"
+      ],
+      "recheckLines": [
+        "2026-10-15T12:42:08.1293004Z cdx-mir:329 matched camera frames keep real feature contrast and improve held-pose stability: passed alone",
+        "2026-10-15T12:42:16.4946150Z hh4-weather:167 iceberg: pushed down it bobs back; the chunk pulled off floats: passed alone"
+      ]
+    },
+    {
+      "jobId": 116418192497,
+      "name": "Suite 14/16",
+      "status": "completed",
+      "conclusion": "success",
+      "file": "raw-job-116418192497.log",
+      "sha256": "781382c8bc50aa02161e88e15bc77191a05620e5e95692bbbd93d3f7e722d3e2",
+      "bytes": 226850,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 162,
+        "passed": 162,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116418192550,
+      "name": "Suite 8/16",
+      "status": "completed",
+      "conclusion": "success",
+      "file": "raw-job-116418192550.log",
+      "sha256": "0904d421f681b7ce7032c53524345011a08382c6b4cba166df1384ac9de0d07c",
+      "bytes": 226665,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 185,
+        "passed": 185,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116418192571,
+      "name": "Suite 9/16",
+      "status": "completed",
+      "conclusion": "failure",
+      "file": "raw-job-116418192571.log",
+      "sha256": "7ba210c89150497f39399a59e3762ff7a77926cc20eba43a95e04774acb92ce6",
+      "bytes": 225472,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 152,
+        "passed": 151,
+        "failed": 1,
+        "skipped": 0
+      },
+      "failureLines": [
+        "2026-10-15T12:42:02.0866754Z - `hh4-tiny:206` chromosome: the chromatids pulled apart at the waist spring back together: failed. Error: expect(received).toBeCloseTo(expected, precision)"
+      ],
+      "recheckLines": [
+        "2026-10-15T12:42:09.9639662Z hh4-tiny:206 chromosome: the chromatids pulled apart at the waist spring back together: failed alone"
+      ]
+    },
+    {
+      "jobId": 116418192669,
+      "name": "Suite 12/16",
+      "status": "completed",
+      "conclusion": "success",
+      "file": "raw-job-116418192669.log",
+      "sha256": "fe649033c383a8281418da8e003b7da1cd2f5aa461844e73d3363f1b74c2d3ad",
+      "bytes": 228494,
+      "originalSummary": {
+        "files": 22,
+        "expectedFiles": 22,
+        "tests": 128,
+        "passed": 128,
+        "failed": 0,
+        "skipped": 0
+      },
+      "failureLines": [],
+      "recheckLines": []
+    }
+  ],
+  "correction": {
+    "previousReport": "partial-suite-summary.json",
+    "previousSha256": "764ac39b9f4e54d64e30faf61b81b49b5a2d195b8cdad8f97ea1f0ba1544a9b0",
+    "reason": "Include the original camel-case timedOut assertion line in the failure list. Original summary totals, raw logs, and all original statuses are unchanged."
+  }
+}

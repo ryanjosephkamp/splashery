@@ -1,0 +1,115 @@
+{
+  "capturedAt": "2026-10-15T13:53:33.030Z",
+  "runId": 38739810912,
+  "commit": "c4752253a813fda4408e826fdb416f95ab24215c",
+  "jobs": [
+    {
+      "id": 116438509402,
+      "name": "Suite 16/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116438509540,
+      "name": "Suite 14/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116438509575,
+      "name": "Suite 13/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438509667,
+      "name": "Suite 1/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438509688,
+      "name": "Suite 15/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116438509728,
+      "name": "Suite 10/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438509812,
+      "name": "Suite 6/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116438509858,
+      "name": "Suite 11/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438509882,
+      "name": "Suite 8/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438509922,
+      "name": "Suite 2/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116438509964,
+      "name": "Checks",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438509982,
+      "name": "Suite 12/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116438510029,
+      "name": "Suite 5/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438510145,
+      "name": "Suite 4/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438510207,
+      "name": "Suite 7/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438510265,
+      "name": "Suite 3/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116438510314,
+      "name": "Suite 9/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116458533448,
+      "name": "Summary",
+      "status": "queued",
+      "conclusion": null
+    }
+  ]
+}

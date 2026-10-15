@@ -1,0 +1,7 @@
+{
+  "at": "2026-10-15T12:43:27.892638+00:00",
+  "parentFreezeSha256": "851f2be7cb389ad6dc045a2a69856401c9b5a54b1ebdb80ae8382f50303678ee",
+  "sourceCommit": "636a7605fd15f3aa1e41d43cc6b5ff35432750b6",
+  "scope": "Validation-constrained color fitting: training determines color direction, internal validation selects magnitude. This is not an independent validation proof. External benchmark-held-out targets are never inputs. The unchanged >=1%training gain and every-camera nonregression gates apply. Each eligible camera is rendered at most once; opt-in may read more validation cameras because legacy stopped at the first regression. No Gaussian/optimizer changes, native result, or timing claim.",
+  "sourceChangeFromParent": "Comment clarification only; behavior and all assertions unchanged."
+}

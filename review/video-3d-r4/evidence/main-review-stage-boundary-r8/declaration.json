@@ -1,0 +1,29 @@
+{
+  "status": "root-authorized-planned-controller-not-yet-launched",
+  "createdAt": "2026-10-15T14:11:53.339817+00:00",
+  "cutoffUtc": "2026-10-15T16:15:00+00:00",
+  "goalHardStopUtc": "2026-10-15T16:32:25+00:00",
+  "baselineRoot": {
+    "pid": 158994,
+    "startTicks": "1281910",
+    "command": [
+      "node",
+      "tools/v3d-bench.mjs",
+      "run",
+      "tools/v3d-corpus.json",
+      "/workspace/v3d-r4-media/corpus",
+      "/workspace/v3d-r4-media/main-desktop-r2",
+      "--url=http://127.0.0.1:4174/",
+      "--gpu=swiftshader",
+      "--profiles=desktop",
+      "--ids=dianthus,pisac,sleeping-dog,palace-statue,oa-street,ullard,snaefell,fremantle-orbit,ihasalu-orbit,fresnel-lens,saint-denis,horse-statue,royal-sovereign,viljandi-ruins,kakerdi-bog,fjoloy"
+    ]
+  },
+  "baselineProvenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "baselineRowsAtDeclaration": 36,
+  "desktopFinishedQualityRowsAtDeclaration": 0,
+  "caseHostDeadlineMsUnchanged": 1800000,
+  "scope": "At 16:15 UTC, stop only any still-owned baseline native root and its observed descendants; retain every partial file and classify the stage interruption separately. Do not change or fabricate benchmark rows, timing, source bindings, or scores. If all baseline work drains naturally first, send no signals.",
+  "reason": "Reserve the final 17 minutes for the required review capture. The frozen software-GPU desktop baseline has no completed quality measurement. This is a late orchestration boundary declared during the bounded goal, not a native toy conclusion or an acceptance waiver.",
+  "acceptance": "Every interrupted or unattempted case remains incomplete; it cannot satisfy corpus coverage or quality. All completed phone measurements remain unchanged. The review guard itself never signals timed bakes."
+}

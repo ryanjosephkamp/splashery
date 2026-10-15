@@ -1,0 +1,22 @@
+{
+  "id": "ihasalu-orbit",
+  "profile": "desktop",
+  "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+  "started": "2026-10-15T12:07:04.541Z",
+  "status": "timeout",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": null,
+  "bakeMs": 1761543.653732,
+  "mean": null,
+  "peakRssBytes": 2086420480,
+  "hostLoadAtStart": [
+    17.74,
+    15.82,
+    15.75
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "Error: ihasalu-orbit/desktop (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

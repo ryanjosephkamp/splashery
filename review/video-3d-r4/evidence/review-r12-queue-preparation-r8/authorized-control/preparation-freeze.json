@@ -1,0 +1,113 @@
+{
+  "kind": "outside-only-PREPARED-review-queue-not-launched-not-authorized-not-benchmark-result",
+  "created": "2026-10-15T13:19:17.235821+00:00",
+  "codeLicense": "MIT. Made by Ryan with Codex (GPT-6). Copied authentic CPU fixture media retain original source licenses and were removed after testing.",
+  "checks": {
+    "tests": 31,
+    "passed": 31,
+    "seconds": 15.9,
+    "nodeSyntax": 1,
+    "pythonAst": 2,
+    "noLiveProcessInspection": true,
+    "noSignals": true,
+    "noAgents": true,
+    "noBrowserGpuNativeLaunch": true,
+    "noRepositoryRuntimeProtocolEdits": true,
+    "R11R12ScaffoldsAndImmutableToolInputsUnchanged": true,
+    "nullActualBindingsAndAuthorization": true,
+    "actualOutputAbsent": true
+  },
+  "initialActualPlan": {
+    "status": "waiting-for-actual-master",
+    "selected": [],
+    "ranked": false,
+    "missing": [
+      "/workspace/v3d-r4-media/candidate-r12-paired-master-v1"
+    ],
+    "notice": "No benchmark rows or renderable successes inferred from an absent master.",
+    "plannedAt": "2026-10-15T13:13:23.123870+00:00"
+  },
+  "queueWindows": {
+    "earliestRender": "2026-10-15T16:15:00+00:00",
+    "ownRenderTerm": "2026-10-15T16:31:25+00:00",
+    "ownRenderKillMargin": "2026-10-15T16:31:29+00:00",
+    "absoluteStop": "2026-10-15T16:31:30+00:00"
+  },
+  "files": [
+    {
+      "file": "/workspace/v3d-r4-media/queue-r12-review-r1.py",
+      "bytes": 16769,
+      "sha256": "f896f364863f9429b35b602036ba607ad158b0a25810c71f494cdc4a4f3d3f33"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/plan-r12-review-r1.mjs",
+      "bytes": 5649,
+      "sha256": "565612a6e5fd07353f6fdb17a77cddd08d11e6a3e644f6128ec66a0d70c55720"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/test-queue-r12-review-r1.py",
+      "bytes": 16370,
+      "sha256": "66afb6ad9314348c9db94269282eb76d6858710f97b88124b5f1a73ce5869825"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/README.md",
+      "bytes": 8682,
+      "sha256": "2c3d91b9721e3610327948832f640d7ef33c3bf6be71a2c1bef4d5ef30bdd5c8"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/cpu-tests-before-deadline-margin.log",
+      "bytes": 4171,
+      "sha256": "df4a40c434f1e30a6da4919bc94ff9fa3b8a08871951a410204a5d1ea532c0e9"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/cpu-tests-before-pending-suite-guard.log",
+      "bytes": 4171,
+      "sha256": "577faaaf9c6a243afdd64d478af315a3dbd3f567feda288a62ccdb9dcb045d4b"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/cpu-tests-initial-fixture-error.log",
+      "bytes": 6027,
+      "sha256": "c572619a9e149c163d321e93afc1907990216686b66c7bb00482516062595b74"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/cpu-tests.log",
+      "bytes": 4171,
+      "sha256": "c8f4d290f8dbe80a73c6e1218617aa6df2967110bb8a5b1ac7d3cec3c37f819c"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/declaration.json",
+      "bytes": 1181,
+      "sha256": "d158863fa2c911335be90b15a7d20d196225d26ee7dedcf87f0e1a428f3e8408"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/initial-plan.log",
+      "bytes": 302,
+      "sha256": "cdf7bca7bb52109e2e137bf248b9556f86152ccedb392b703e2952f06c576256"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/plan-history.jsonl",
+      "bytes": 280,
+      "sha256": "0e55250a7fc864bef3fbf1410734c9ab64698bd509bda678a70c1f0ff6c5aec0"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/plan.json",
+      "bytes": 302,
+      "sha256": "cdf7bca7bb52109e2e137bf248b9556f86152ccedb392b703e2952f06c576256"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/root-receipt-template.json",
+      "bytes": 710,
+      "sha256": "154422c9ead1bf50545dff49a661689fbde644460213381719b206e70470032b"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/root-receipt.schema.json",
+      "bytes": 2377,
+      "sha256": "355a395b947d5ef25df11272f11b6a8b9372c72928c4291c6000282c2e93af9a"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/review-r12-r1-control/unchanged-inputs.json",
+      "bytes": 2193,
+      "sha256": "ea241711c3510f0d4fb2cba4fd4e688156e67d110b59c76ab31e95967a0adf56"
+    }
+  ]
+}

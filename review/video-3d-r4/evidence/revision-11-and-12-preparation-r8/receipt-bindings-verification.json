@@ -1,0 +1,40 @@
+{
+  "verified": true,
+  "checks": [
+    {
+      "evidence": "background-shrink-preparation-r1",
+      "frozenFilesVerified": 34
+    },
+    {
+      "evidence": "background-shrink-preparation-r2",
+      "frozenFilesVerified": 34
+    },
+    {
+      "evidence": "integrated66",
+      "receiptAndOriginalSourceProofVerified": true
+    },
+    {
+      "evidence": "cross-run-regression-coverage",
+      "inputLogsVerified": 3,
+      "singleSuitePass": false
+    },
+    {
+      "evidence": "r11-sample-launch",
+      "sourceReceiptVerified": true
+    },
+    {
+      "evidence": "r12-sample-launch",
+      "sourceReceiptVerified": true
+    },
+    {
+      "evidence": "completed-r12-samples",
+      "rootHistoricalObservationVerifiedWithoutPidInspection": true
+    },
+    {
+      "evidence": "original-spec-byte-audit-r3",
+      "countsConsistent": true,
+      "notPassStatus": true
+    }
+  ],
+  "noNewTestOrBenchmarkRun": true
+}

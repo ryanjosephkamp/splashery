@@ -1,0 +1,115 @@
+{
+  "capturedAt": "2026-10-15T13:16:18.827Z",
+  "runId": 38733898151,
+  "headCommit": "11c90d51f266145cb88a52f795be1a91e5da7692",
+  "jobs": [
+    {
+      "id": 116418191720,
+      "name": "Checks",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116418191951,
+      "name": "Suite 3/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116418192177,
+      "name": "Suite 11/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116418192239,
+      "name": "Suite 4/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116418192240,
+      "name": "Suite 5/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116418192290,
+      "name": "Suite 13/16",
+      "status": "completed",
+      "conclusion": "cancelled"
+    },
+    {
+      "id": 116418192311,
+      "name": "Suite 10/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116418192320,
+      "name": "Suite 2/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116418192378,
+      "name": "Suite 1/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116418192409,
+      "name": "Suite 16/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116418192427,
+      "name": "Suite 6/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116418192479,
+      "name": "Suite 7/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116418192493,
+      "name": "Suite 15/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116418192497,
+      "name": "Suite 14/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116418192550,
+      "name": "Suite 8/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116418192571,
+      "name": "Suite 9/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116418192669,
+      "name": "Suite 12/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116432831442,
+      "name": "Summary",
+      "status": "completed",
+      "conclusion": "cancelled"
+    }
+  ]
+}

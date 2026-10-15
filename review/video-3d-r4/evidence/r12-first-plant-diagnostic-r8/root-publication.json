@@ -1,0 +1,10 @@
+{
+  "capturedAt": "2026-10-15T13:41:26.036630+00:00",
+  "source": "/workspace/v3d-r4-media/r12-first-plant-diagnostic-r1",
+  "files": 32,
+  "bytes": 7754206,
+  "inventoryFile": "root-source-inventory.json.gz",
+  "inventorySha256": "0c23b6c5772c58cb6ee27a4f65729fdb94b8084aa4419c79a46196ca32a109f3",
+  "inventoryArchiveSha256": "fcfb049c0ed28734ea67eb9f9299e5a7cd84fb56ed30056a19ea2d989628aca2",
+  "notice": "Every source and destination byte verified before adding this root receipt and compressed inventory. Original completed evidence, failure classifications, and storage-restoration maps remain unchanged. No live native state is copied or inferred by this publication."
+}

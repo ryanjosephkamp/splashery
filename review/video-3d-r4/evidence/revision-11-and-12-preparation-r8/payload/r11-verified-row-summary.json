@@ -1,0 +1,111 @@
+{
+  "verified": true,
+  "rows": [
+    {
+      "directory": "001-cat-track-phone-paired",
+      "mode": "paired",
+      "id": "cat-track",
+      "profile": "phone",
+      "status": "explained",
+      "provenanceSha256": "1b3d8c578a0c06e1b20b79e90d61af9bcbd29aacc6fbe4d4dbd972096c23de5c"
+    },
+    {
+      "directory": "002-cat-plays-desktop-paired",
+      "mode": "paired",
+      "id": "cat-plays",
+      "profile": "desktop",
+      "status": "explained",
+      "provenanceSha256": "1b3d8c578a0c06e1b20b79e90d61af9bcbd29aacc6fbe4d4dbd972096c23de5c"
+    },
+    {
+      "directory": "003-cat-plays-phone-paired",
+      "mode": "paired",
+      "id": "cat-plays",
+      "profile": "phone",
+      "status": "explained",
+      "provenanceSha256": "1b3d8c578a0c06e1b20b79e90d61af9bcbd29aacc6fbe4d4dbd972096c23de5c"
+    },
+    {
+      "directory": "004-buddha-phone-paired",
+      "mode": "paired",
+      "id": "buddha",
+      "profile": "phone",
+      "status": "explained",
+      "provenanceSha256": "1b3d8c578a0c06e1b20b79e90d61af9bcbd29aacc6fbe4d4dbd972096c23de5c"
+    },
+    {
+      "directory": "005-chameleon-flowers-phone-paired",
+      "mode": "paired",
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "status": "finished",
+      "provenanceSha256": "1b3d8c578a0c06e1b20b79e90d61af9bcbd29aacc6fbe4d4dbd972096c23de5c"
+    },
+    {
+      "directory": "006-cat-track-desktop-unpaired",
+      "mode": "unpaired",
+      "id": "cat-track",
+      "profile": "desktop",
+      "status": "explained",
+      "provenanceSha256": "adfcf59a89a7ce8e7fd1bb34e62696ca48f03dc4c8810402218dbfedbec0bc42"
+    },
+    {
+      "directory": "007-buddha-desktop-unpaired",
+      "mode": "unpaired",
+      "id": "buddha",
+      "profile": "desktop",
+      "status": "explained",
+      "provenanceSha256": "adfcf59a89a7ce8e7fd1bb34e62696ca48f03dc4c8810402218dbfedbec0bc42"
+    },
+    {
+      "directory": "008-dianthus-phone-paired",
+      "mode": "paired",
+      "id": "dianthus",
+      "profile": "phone",
+      "status": "finished",
+      "provenanceSha256": "1b3d8c578a0c06e1b20b79e90d61af9bcbd29aacc6fbe4d4dbd972096c23de5c"
+    },
+    {
+      "directory": "009-chameleon-flowers-desktop-unpaired",
+      "mode": "unpaired",
+      "id": "chameleon-flowers",
+      "profile": "desktop",
+      "status": "explained",
+      "provenanceSha256": "adfcf59a89a7ce8e7fd1bb34e62696ca48f03dc4c8810402218dbfedbec0bc42"
+    },
+    {
+      "directory": "010-dianthus-desktop-unpaired",
+      "mode": "unpaired",
+      "id": "dianthus",
+      "profile": "desktop",
+      "status": "explained",
+      "provenanceSha256": "adfcf59a89a7ce8e7fd1bb34e62696ca48f03dc4c8810402218dbfedbec0bc42"
+    },
+    {
+      "directory": "011-sleeping-dog-phone-paired",
+      "mode": "paired",
+      "id": "sleeping-dog",
+      "profile": "phone",
+      "status": "explained",
+      "provenanceSha256": "1b3d8c578a0c06e1b20b79e90d61af9bcbd29aacc6fbe4d4dbd972096c23de5c"
+    },
+    {
+      "directory": "012-oa-street-phone-paired",
+      "mode": "paired",
+      "id": "oa-street",
+      "profile": "phone",
+      "status": "finished",
+      "provenanceSha256": "1b3d8c578a0c06e1b20b79e90d61af9bcbd29aacc6fbe4d4dbd972096c23de5c"
+    },
+    {
+      "directory": "013-pisac-desktop-unpaired",
+      "mode": "unpaired",
+      "id": "pisac",
+      "profile": "desktop",
+      "status": "finished",
+      "provenanceSha256": "adfcf59a89a7ce8e7fd1bb34e62696ca48f03dc4c8810402218dbfedbec0bc42"
+    }
+  ],
+  "strictPairedRows": 8,
+  "unpairedRows": 5
+}

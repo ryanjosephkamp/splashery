@@ -1,0 +1,10 @@
+{
+  "method": "git diff --no-index --no-color from a fresh empty directory; no repositories modified",
+  "packetAddedPatchBytesAtMeasurement": 3712819,
+  "patchSha256AtMeasurement": "1b949930ee4724963a9d1e4e19b244ee0931b93874a0168d088c445a935dc6fd",
+  "rootPreviouslyReportedDiffBytes": 61109263,
+  "englishCheckerMaxBufferBytes": 67108864,
+  "sumWithPreviouslyReportedDiffBytes": 64822082,
+  "sumBelowBuffer": true,
+  "notice": "Root current complete diff can include other additions; this measures this packet only, before final small receipt/freeze files."
+}

@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-15T12:52:57.605003+00:00",
+  "pid": 377290,
+  "codeSha256": "fe6c5a895cd5dcc285fd7973652555c4d54392444226a2564614b7eed02868c5",
+  "handoffSha256": "a5c76a2145ae3870a0f1ef9aa5d3b13b874bfeaf7f022f8275015cf28098c886",
+  "r11DeclarationSha256": "cfd7545e7e1fc76bdd0686a836d5768125f6a241e5abac2c420af4371421f765",
+  "r11OriginalStateSha256": "4fb3d58943d94297ac6eaeb5c571736a8ead7e044f1e526b52929ab4fd9a751d",
+  "deadline": "2026-10-15T16:15:00+00:00",
+  "noSignals": true,
+  "noNativeLaunch": true,
+  "noR12StateMutation": true
+}

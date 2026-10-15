@@ -1,0 +1,22 @@
+{
+  "id": "fresnel-lens",
+  "profile": "desktop",
+  "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+  "started": "2026-10-15T12:37:08.046Z",
+  "status": "timeout",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": null,
+  "bakeMs": 1755123.2737450022,
+  "mean": null,
+  "peakRssBytes": 1821405184,
+  "hostLoadAtStart": [
+    14.13,
+    16.32,
+    16.82
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "Error: fresnel-lens/desktop (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

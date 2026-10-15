@@ -1,0 +1,19 @@
+[
+  {
+    "source": "/workspace/v3d-r4-media/invalid-receipt-drafts-r1/background-shrink-placeholder.json",
+    "sha256": "0088f4884151438bb901e8c7f292416c505e7bf7851ac7e3cb499155fb8a2421",
+    "reason": "Invalid quarantined placeholder is not copied or used as provenance."
+  },
+  {
+    "source": "all R12 native/snapshot/live-control paths",
+    "reason": "Explicitly outside this packet; only the separately authorized completed R12 sample proof is included."
+  },
+  {
+    "source": "ci-11c90-publication-r1",
+    "reason": "Separately prepared/root-owned; not duplicated."
+  },
+  {
+    "source": "learned-background-wiring-evidence-r1",
+    "reason": "Earlier R10 evidence; current shrink wiring17 is a separate newly bound64ec receipt."
+  }
+]

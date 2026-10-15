@@ -1,0 +1,120 @@
+{
+  "capturedAt": "2026-10-15T13:30:38.654208+00:00",
+  "preparedFiles": [
+    {
+      "originalPath": "/workspace/v3d-r4-media/queue-r12-review-r1.py",
+      "publishedPath": "prepared-state/queue-r12-review-r1.py",
+      "bytes": 16769,
+      "sha256": "f896f364863f9429b35b602036ba607ad158b0a25810c71f494cdc4a4f3d3f33",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/plan-r12-review-r1.mjs",
+      "publishedPath": "prepared-state/plan-r12-review-r1.mjs",
+      "bytes": 5649,
+      "sha256": "565612a6e5fd07353f6fdb17a77cddd08d11e6a3e644f6128ec66a0d70c55720",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/test-queue-r12-review-r1.py",
+      "publishedPath": "prepared-state/test-queue-r12-review-r1.py",
+      "bytes": 16370,
+      "sha256": "66afb6ad9314348c9db94269282eb76d6858710f97b88124b5f1a73ce5869825",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/README.md",
+      "publishedPath": "prepared-state/review-r12-r1-control/README.md",
+      "bytes": 8682,
+      "sha256": "2c3d91b9721e3610327948832f640d7ef33c3bf6be71a2c1bef4d5ef30bdd5c8",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/cpu-tests-before-deadline-margin.log",
+      "publishedPath": "prepared-state/review-r12-r1-control/cpu-tests-before-deadline-margin.log",
+      "bytes": 4171,
+      "sha256": "df4a40c434f1e30a6da4919bc94ff9fa3b8a08871951a410204a5d1ea532c0e9",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/cpu-tests-before-pending-suite-guard.log",
+      "publishedPath": "prepared-state/review-r12-r1-control/cpu-tests-before-pending-suite-guard.log",
+      "bytes": 4171,
+      "sha256": "577faaaf9c6a243afdd64d478af315a3dbd3f567feda288a62ccdb9dcb045d4b",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/cpu-tests-initial-fixture-error.log",
+      "publishedPath": "prepared-state/review-r12-r1-control/cpu-tests-initial-fixture-error.log",
+      "bytes": 6027,
+      "sha256": "c572619a9e149c163d321e93afc1907990216686b66c7bb00482516062595b74",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/cpu-tests.log",
+      "publishedPath": "prepared-state/review-r12-r1-control/cpu-tests.log",
+      "bytes": 4171,
+      "sha256": "c8f4d290f8dbe80a73c6e1218617aa6df2967110bb8a5b1ac7d3cec3c37f819c",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/declaration.json",
+      "publishedPath": "prepared-state/review-r12-r1-control/declaration.json",
+      "bytes": 1181,
+      "sha256": "d158863fa2c911335be90b15a7d20d196225d26ee7dedcf87f0e1a428f3e8408",
+      "restoration": "exact pending declaration preserved by finalization"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/initial-plan.log",
+      "publishedPath": "prepared-state/review-r12-r1-control/initial-plan.log",
+      "bytes": 302,
+      "sha256": "cdf7bca7bb52109e2e137bf248b9556f86152ccedb392b703e2952f06c576256",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/plan-history.jsonl",
+      "publishedPath": "prepared-state/review-r12-r1-control/plan-history.jsonl",
+      "bytes": 280,
+      "sha256": "0e55250a7fc864bef3fbf1410734c9ab64698bd509bda678a70c1f0ff6c5aec0",
+      "restoration": "exact hash-bound original prefix of append-only plan history"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/plan.json",
+      "publishedPath": "prepared-state/review-r12-r1-control/plan.json",
+      "bytes": 302,
+      "sha256": "cdf7bca7bb52109e2e137bf248b9556f86152ccedb392b703e2952f06c576256",
+      "restoration": "exact initial plan retained in initial-plan.log"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/root-receipt-template.json",
+      "publishedPath": "prepared-state/review-r12-r1-control/root-receipt-template.json",
+      "bytes": 710,
+      "sha256": "154422c9ead1bf50545dff49a661689fbde644460213381719b206e70470032b",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/root-receipt.schema.json",
+      "publishedPath": "prepared-state/review-r12-r1-control/root-receipt.schema.json",
+      "bytes": 2377,
+      "sha256": "355a395b947d5ef25df11272f11b6a8b9372c72928c4291c6000282c2e93af9a",
+      "restoration": "unchanged source bytes"
+    },
+    {
+      "originalPath": "/workspace/v3d-r4-media/review-r12-r1-control/unchanged-inputs.json",
+      "publishedPath": "prepared-state/review-r12-r1-control/unchanged-inputs.json",
+      "bytes": 2193,
+      "sha256": "ea241711c3510f0d4fb2cba4fd4e688156e67d110b59c76ab31e95967a0adf56",
+      "restoration": "unchanged source bytes"
+    }
+  ],
+  "losslessArchives": [
+    {
+      "originalPath": "authorized-control/declaration.json",
+      "archivePath": "authorized-control/declaration.json.gz",
+      "originalBytes": 67365,
+      "originalSha256": "7eb3c7ef1508c80b2a32c8453df2d4322602d95ee859c56a03c7cd755bdf956c",
+      "archiveSha256": "86ce11da0794497a5336fdfee2c407d7466cfcecc2bd26bc57e8302e92780e00"
+    }
+  ],
+  "allPreparationBytesVerified": true
+}

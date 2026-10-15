@@ -1,0 +1,306 @@
+{
+  "createdAt": "2026-10-15T13:55:35.863363+00:00",
+  "runId": 38739810912,
+  "headCommit": "c4752253a813fda4408e826fdb416f95ab24215c",
+  "testedMergeCommit": "b16c549b7ace5b49634957e4e0a390a4989002be",
+  "allOriginalShardsComplete": true,
+  "note": "All16 original shard summaries and raw UTF-8 logs retained. Every failed or timedOut assertion remains listed; alone rechecks never waive failures. This source predates the normal merge of cb8a8315 and does not establish that later merge passes.",
+  "totals": {
+    "files": 337,
+    "expectedFiles": 337,
+    "tests": 2889,
+    "passed": 2878,
+    "failed": 10,
+    "skipped": 1
+  },
+  "shards": [
+    {
+      "jobId": 116438509402,
+      "name": "Suite 16/16",
+      "conclusion": "failure",
+      "file": "raw-job-116438509402.log",
+      "sha256": "0e80042a65f6b79e17b7b9e0c3be1daa91ef4f1bd4942100e9d1144d66861fda",
+      "bytes": 230025,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 135,
+      "passed": 134,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T13:27:36.9342073Z - `img-engine:85` toys without the volume kind draw as before (webgpu): timedOut. Test timeout of 240000ms exceeded."
+      ],
+      "recheckLines": [
+        "2026-10-15T13:30:26.8681159Z img-engine:85 toys without the volume kind draw as before (webgpu): passed alone"
+      ]
+    },
+    {
+      "jobId": 116438509540,
+      "name": "Suite 14/16",
+      "conclusion": "failure",
+      "file": "raw-job-116438509540.log",
+      "sha256": "1d8427cd74316144df3a223f86f12862b84edb1baf07c8ad7abdd5629392df82",
+      "bytes": 225907,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 198,
+      "passed": 197,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T13:22:10.1664768Z - `hh5-math:104` menger sponge: a cube holds, snaps out under a pull, and lands; the rest stay: failed. Error: expect(received).toBe(expected) // Object.is equality"
+      ],
+      "recheckLines": [
+        "2026-10-15T13:22:18.0856587Z hh5-math:104 menger sponge: a cube holds, snaps out under a pull, and lands; the rest stay: passed alone"
+      ]
+    },
+    {
+      "jobId": 116438509575,
+      "name": "Suite 13/16",
+      "conclusion": "success",
+      "file": "raw-job-116438509575.log",
+      "sha256": "2f2d7a82ef630d651f1537b2cfa4dabdace0e2d20ca2bf55955eb88f0c08f535",
+      "bytes": 229685,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 213,
+      "passed": 213,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116438509667,
+      "name": "Suite 1/16",
+      "conclusion": "success",
+      "file": "raw-job-116438509667.log",
+      "sha256": "c48b44b6eda61dcb5d606efe103c9562de926d4cc360ad3cbfb2f3ca44d23d59",
+      "bytes": 228142,
+      "files": 11,
+      "expectedFiles": 11,
+      "tests": 157,
+      "passed": 157,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116438509688,
+      "name": "Suite 15/16",
+      "conclusion": "failure",
+      "file": "raw-job-116438509688.log",
+      "sha256": "b10b1e1b9779417b855d3a677cf25768a6b373ac86b403f02e20cb9142a9e9ba",
+      "bytes": 229045,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 147,
+      "passed": 145,
+      "failed": 2,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T13:22:47.7387209Z - `cdx-mir:329` matched camera frames keep real feature contrast and improve held-pose stability: failed. Error: expect(received).toBeLessThan(expected)",
+        "2026-10-15T13:22:47.7388273Z - `ops-text:41` a PDF's words in the Toy tab \u203a your book: the words of the page on show, following the pages, copied and found: failed. Error: expect(locator).toHaveAttribute(expected) failed"
+      ],
+      "recheckLines": [
+        "2026-10-15T13:24:52.2615144Z cdx-mir:329 matched camera frames keep real feature contrast and improve held-pose stability: passed alone",
+        "2026-10-15T13:26:07.1043741Z ops-text:41 your book: the words of the page on show, following the pages, copied and found: failed alone"
+      ]
+    },
+    {
+      "jobId": 116438509728,
+      "name": "Suite 10/16",
+      "conclusion": "success",
+      "file": "raw-job-116438509728.log",
+      "sha256": "89b3ecb838b9bc4241aec191209e70c544c219e27126c6c8adc13de0ac3630fc",
+      "bytes": 225047,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 218,
+      "passed": 218,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116438509812,
+      "name": "Suite 6/16",
+      "conclusion": "failure",
+      "file": "raw-job-116438509812.log",
+      "sha256": "0498bcf1da74ed240def68059cfafc81d808efbdd767f65c431ec744814296c3",
+      "bytes": 226954,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 234,
+      "passed": 233,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T13:25:45.9403328Z - `sndc-engine:27` a paused effect's sound stops at once (ringing notes too) and resumes from the same moment: failed. Error: Timeout 100ms exceeded while waiting on the predicate"
+      ],
+      "recheckLines": [
+        "2026-10-15T13:26:10.9376265Z sndc-engine:27 a paused effect's sound stops at once (ringing notes too) and resumes from the same moment: failed alone"
+      ]
+    },
+    {
+      "jobId": 116438509858,
+      "name": "Suite 11/16",
+      "conclusion": "success",
+      "file": "raw-job-116438509858.log",
+      "sha256": "a2d698d838ba55ea78cd0dfdb15ade39252946683d9d59f2d3d442c7328eeb86",
+      "bytes": 225412,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 162,
+      "passed": 162,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116438509882,
+      "name": "Suite 8/16",
+      "conclusion": "success",
+      "file": "raw-job-116438509882.log",
+      "sha256": "0fcadb092495486f35b03057632d2b92f78c054b3d807e15177a835639fde451",
+      "bytes": 226801,
+      "files": 23,
+      "expectedFiles": 23,
+      "tests": 210,
+      "passed": 210,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116438509922,
+      "name": "Suite 2/16",
+      "conclusion": "failure",
+      "file": "raw-job-116438509922.log",
+      "sha256": "b930124bb2ececccee6402f4cdb16cefba00a624e9407673f7cacd7c541e6245",
+      "bytes": 227792,
+      "files": 20,
+      "expectedFiles": 20,
+      "tests": 156,
+      "passed": 153,
+      "failed": 3,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T13:27:12.5297403Z - `ui3:50` pause and resume \u203a the second tap freezes a long effect and its sound, the third resumes it, and a tap after the end starts it again: failed. Error: expect(received).toBeGreaterThan(expected)",
+        "2026-10-15T13:27:12.5300081Z - `man7a:67` Chapter 3: the grid-to-torus figure moves \u203a a live canvas walks a ring across the grid; reduced motion keeps it still: failed. Error: expect(received).not.toBe(expected) // Object.is equality",
+        "2026-10-15T13:27:12.5301284Z - `chs-engine:11` a tap that returns options rebuilds the toy with them, then fires its key: failed. Error: expect(received).toBeGreaterThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T13:27:19.5996400Z chs-engine:11 a tap that returns options rebuilds the toy with them, then fires its key: passed alone",
+        "2026-10-15T13:27:25.0690130Z man7a:67 a live canvas walks a ring across the grid; reduced motion keeps it still: passed alone",
+        "2026-10-15T13:28:07.3265451Z ui3:50 the second tap freezes a long effect and its sound, the third resumes it, and a tap after the end starts it again: failed alone"
+      ]
+    },
+    {
+      "jobId": 116438509982,
+      "name": "Suite 12/16",
+      "conclusion": "failure",
+      "file": "raw-job-116438509982.log",
+      "sha256": "af95b74200530fffc451bebe6d3494a4f192865cfd896942b0835178ff321d79",
+      "bytes": 229713,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 213,
+      "passed": 211,
+      "failed": 2,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T13:28:43.8537331Z - `fx4-engine:79` toys without the rim kind draw as before (webgpu): timedOut. Test timeout of 240000ms exceeded.",
+        "2026-10-15T13:28:43.8538725Z - `man5:201` the PDF \u203a the same input and the same Chromium print the same bytes: failed. Error: run tools/manual-pdf.mjs again: the shipped PDF is out of date"
+      ],
+      "recheckLines": [
+        "2026-10-15T13:31:26.8247720Z fx4-engine:79 toys without the rim kind draw as before (webgpu): passed alone",
+        "2026-10-15T13:31:45.3357910Z man5:201 the same input and the same Chromium print the same bytes: failed alone"
+      ]
+    },
+    {
+      "jobId": 116438510029,
+      "name": "Suite 5/16",
+      "conclusion": "success",
+      "file": "raw-job-116438510029.log",
+      "sha256": "acdf3b067db3c99896a8a70576b7aca274d526b918a5bbbc158ecf6d4684ae8c",
+      "bytes": 226633,
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 142,
+      "passed": 141,
+      "failed": 0,
+      "skipped": 1,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116438510145,
+      "name": "Suite 4/16",
+      "conclusion": "success",
+      "file": "raw-job-116438510145.log",
+      "sha256": "89680a3f39e3e4d873618725e4fda1092d4500ef60949342dd13e0dac2c1bb81",
+      "bytes": 226304,
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 167,
+      "passed": 167,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116438510207,
+      "name": "Suite 7/16",
+      "conclusion": "success",
+      "file": "raw-job-116438510207.log",
+      "sha256": "2065e3ff64b0f82c2827dde02b355cf9f886dc89d76fb24d7829b4ff0ee22bfe",
+      "bytes": 229168,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 188,
+      "passed": 188,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116438510265,
+      "name": "Suite 3/16",
+      "conclusion": "success",
+      "file": "raw-job-116438510265.log",
+      "sha256": "de2bd38d877fbb022c36fe2c62141a8b1d79b9518763dcd74f881e9740665f7e",
+      "bytes": 226546,
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 169,
+      "passed": 169,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116438510314,
+      "name": "Suite 9/16",
+      "conclusion": "success",
+      "file": "raw-job-116438510314.log",
+      "sha256": "33d176f1154033a4b5f53fc2581eb9626f16ced9c9473a4cc894b89cffe9f50b",
+      "bytes": 228095,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 180,
+      "passed": 180,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    }
+  ]
+}

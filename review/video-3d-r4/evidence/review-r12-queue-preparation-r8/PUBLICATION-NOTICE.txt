@@ -1,0 +1,9 @@
+MIT. Made by Ryan with Codex (GPT-6).
+
+This is a CPU-only publication snapshot of review preparation and actual root authorization. No review movie has been captured in this snapshot. The original preparation README describes its earlier pending state. Actual root identities, authorization, and detached watcher launch are separately retained under authorized-control/. The watcher cannot signal timed bakes and waits until at least 16:15 UTC and all bound work has ceased.
+
+The exact initial preparation declaration and plans are restored under prepared-state/. Their hashes match preparation-freeze.json, including the original append-only history prefix. Later authorized plans remain separately visible. No earlier declaration or failed control was rewritten. Thirty-one CPU controls passed; historical fixture-construction failure evidence remains retained.
+
+Any .gz is a lossless archive; restoration.json maps its exact original path and SHA-256. Decompress with Python gzip.decompress and verify the resulting bytes. Live quiet-state/events were excluded from this point-in-time copy because the watcher is still running. Only future actual review receipts can establish completed captures. No benchmark status or acceptance gate changes.
+
+Rule check: none.

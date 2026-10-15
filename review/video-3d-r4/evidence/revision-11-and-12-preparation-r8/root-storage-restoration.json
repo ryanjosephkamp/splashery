@@ -1,0 +1,14 @@
+{
+  "createdAt": "2026-10-15T13:50:57.136581+00:00",
+  "reason": "The exact source-credit snapshot contains pre-existing source titles and license names with British spelling. Preserve those raw attribution bytes in a lossless archive; do not rewrite them or change the English checker.",
+  "originalPacketFreezeSha256": "c93fc283eaac8498fcb18a4f1c2e154a2bbdf2925346c2be7e9d2e339e4ba360",
+  "files": [
+    {
+      "originalPath": "payload/source-r11/CREDITS.md",
+      "archivePath": "payload/source-r11/CREDITS.md.gz",
+      "originalBytes": 170305,
+      "originalSha256": "680e289b9014bf8336050eea12385be380c891bef6bed8eecc47d54dcad04fc3",
+      "archiveSha256": "cebdcbdec20bf19ba145a78014682534e52cbbae5e5c97a4b3fe95bb396e73e2"
+    }
+  ]
+}

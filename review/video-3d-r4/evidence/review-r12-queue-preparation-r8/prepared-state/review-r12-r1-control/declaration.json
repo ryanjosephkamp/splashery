@@ -1,0 +1,28 @@
+{
+  "status": "prepared-awaiting-root-bindings",
+  "created": "2026-10-15T13:13:15.655000+00:00",
+  "authorization": null,
+  "toolsRoot": "/workspace/splashery-v3d-bench-tools-r12",
+  "main": "/workspace/v3d-r4-media/main-master-r1",
+  "candidate": "/workspace/v3d-r4-media/candidate-r12-paired-master-v1",
+  "output": "/workspace/v3d-r4-media/review-r12-r1",
+  "quietNotBefore": "2026-10-15T16:15:00+00:00",
+  "cleanupStarts": "2026-10-15T16:31:25+00:00",
+  "absoluteStop": "2026-10-15T16:31:30+00:00",
+  "candidateProvenanceSha256": null,
+  "candidateServedSourceSha256": null,
+  "rootReceiptSha256": null,
+  "timedRoots": null,
+  "immutableFiles": {},
+  "policy": "One render invocation, first10 available fully verified phone pairs in manifest order, explicitly unranked; no retry/ranking/benchmark-status edits. No timed-work signals from this queue. Root supplies actual bindings and launch authorization.",
+  "parameters": {
+    "profile": "phone",
+    "size": "390x844",
+    "seconds": 5,
+    "fps": 12,
+    "perCaseTimeoutMs": 90000,
+    "mainUrl": "http://127.0.0.1:4174/",
+    "candidateUrl": "http://127.0.0.1:4183/"
+  },
+  "hardCleanup": "2026-10-15T16:31:29+00:00"
+}

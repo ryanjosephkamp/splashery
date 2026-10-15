@@ -1,0 +1,502 @@
+# Third-party notices
+
+Splashery vendors two libraries so it runs with no bundler and no CDN. Both are MIT licensed. The
+files under `vendor/` are unmodified copies of the published npm builds, except that the source-map
+comment was removed from `gifenc.esm.js` because the map is not shipped.
+
+The captured splat toys under `assets/toys/` (scans, and CC0 models turned into splats) have their
+own licenses (CC0 and CC BY 4.0); see [CREDITS.md](CREDITS.md).
+
+## PlayCanvas Engine 2.22.3
+
+- Package: `playcanvas@2.22.3` (file: `vendor/playcanvas/playcanvas.min.mjs`, the package's
+  single-file ESM build `build/playcanvas.min.mjs`; license copied to `vendor/playcanvas/LICENSE`)
+- Source: https://github.com/playcanvas/engine
+- License: MIT
+
+```
+Copyright (c) 2011-2026 PlayCanvas Ltd.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+```
+
+## gifenc 1.0.3
+
+- Package: `gifenc@1.0.3` (file: `vendor/gifenc/gifenc.esm.js`)
+- Source: https://github.com/mattdesl/gifenc
+- License: MIT
+
+```
+The MIT License (MIT)
+Copyright (c) 2017 Matt DesLauriers
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
+OR OTHER DEALINGS IN THE SOFTWARE.
+```
+
+## PDF.js 6.3.289 (lane Pictures)
+
+- Package: `pdfjs-dist@6.3.289`. Files in `vendor/pdfjs/`: the legacy build's `pdf.min.mjs` and
+  `pdf.worker.min.mjs` (`legacy/build/`; the modern build needs JavaScript features many phones
+  lack), and the package's `standard_fonts/`, `cmaps/`, `iccs/` and three decoders from `wasm/`
+  (`openjpeg.wasm`, `jbig2.wasm`, `qcms_bg.wasm`, with their license files), all unmodified. The
+  license is copied to `vendor/pdfjs/LICENSE`.
+- Loaded only when someone opens a PDF (a dynamic import in `src/media.js`).
+- Source: https://github.com/mozilla/pdf.js
+- License: Apache License 2.0 (the full text is in `vendor/pdfjs/LICENSE`). The wasm decoders are
+  under their own licenses, in `vendor/pdfjs/wasm/LICENSE_*` (OpenJPEG: BSD 2-clause; jbig2 from
+  PDFium: BSD 3-clause and Apache 2.0; qcms: MIT).
+
+## ONNX Runtime Web 1.30.0 (lane Photo to 3D)
+
+- Package: `onnxruntime-web@1.30.0`. Files in `vendor/onnxruntime-web/`: `ort.wasm.min.mjs`,
+  `ort-wasm-simd-threaded.mjs` and `ort-wasm-simd-threaded.wasm` (the WebAssembly build, without
+  WebGPU), all unmodified. The license is copied to `vendor/onnxruntime-web/LICENSE`.
+- Loaded only when someone opens a photo in the Photo to 3D toy (a dynamic import in
+  `src/packs/photo-3d-depth.js`), or a recording as their own song in Note Rider
+  (`src/packs/arcade-listen.js`); never on the shelf or in an embed.
+- Source: https://github.com/microsoft/onnxruntime
+- License: MIT (Copyright (c) Microsoft Corporation; the full text is in
+  `vendor/onnxruntime-web/LICENSE`).
+
+## Basic Pitch note transcription model, ONNX (lane Arcade r2)
+
+- File: `vendor/basic-pitch/nmp.onnx` (230,444 bytes; SHA-256
+  `2c3c1d144bfa61ad236e92e169c13535c880469a12a047d4e73451f2c059a0ec`), the ICASSP 2022 model from
+  the `basic-pitch` 0.4.0 Python package (`basic_pitch/saved_models/icassp_2022/nmp.onnx`),
+  unmodified. Its license and NOTICE are copied to `vendor/basic-pitch/LICENSE` and
+  `vendor/basic-pitch/NOTICE`.
+- Loaded only when someone opens a recording as their own song in Note Rider (a dynamic import in
+  `src/packs/arcade-listen.js`, which runs it on the ONNX Runtime Web above); never on the shelf or
+  in an embed. The recording stays on the device.
+- Source: https://github.com/spotify/basic-pitch (Spotify AB)
+- License: Apache License 2.0 (the full text is in `vendor/basic-pitch/LICENSE`). The note decoding
+  in `src/packs/arcade-listen.js` follows the package's `note_creation.py` (Apache 2.0).
+
+## Depth Anything V2 Small, quantized ONNX (lane Photo to 3D)
+
+- File: `vendor/depth-anything-v2-small/model_quantized.onnx` (27,258,801 bytes), the int8 build
+  from https://huggingface.co/onnx-community/depth-anything-v2-small, downloaded at build time,
+  unmodified. Its model card is copied to `vendor/depth-anything-v2-small/MODEL-CARD.md` and the
+  Apache License 2.0 text (from the project's repository) to
+  `vendor/depth-anything-v2-small/LICENSE`.
+- Loaded only when someone opens a photo in the Photo to 3D toy.
+- Source: https://github.com/DepthAnything/Depth-Anything-V2 (Lihe Yang, Bingyi Kang, Zilong Huang,
+  Zhen Zhao, Xiaogang Xu, Jiashi Feng, Hengshuang Zhao: "Depth Anything V2", 2024).
+- License: Apache License 2.0 for the Small model, checked on the live model cards on September
+  29, 2026. The Base, Large and Giant sizes are CC BY-NC and are not used.
+
+## Splat.js 0.1.0 (lane Video 3D)
+
+- Source: https://github.com/arrival-space/splat.js, commit
+  `88efe9aaf32279b0b9bcb781ea0deb4d60c49dff` (September 23, 2026; package version 0.1.0). Files in
+  `vendor/splatjs/src/`: the modules that `session.js` and its two workers reach (structure from
+  motion, the WebGPU trainer, frame decoding and the PLY writer), unchanged except for the local
+  changes below; the list and what was left out are in `vendor/splatjs/VERSION.md`. The library's
+  own video reader (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored: Splashery
+  picks the frames itself.
+- Loaded only when someone opens a video in the Video to 3D toy (a dynamic import in
+  `src/video3d/run.js`); never on the shelf, in another toy or in an embed. Labs only.
+- License: MIT (Copyright (c) 2026 Stratum1 GmbH; checked on the live repository page on September
+  30, 2026; the full text is in `vendor/splatjs/LICENSE`).
+- Local change by Codex for task 40 (October 12, 2026): `src/session.js` accepts `refineStart`, an
+  opt-in first-refinement threshold for short offline build-tool passes. It replaces the hardcoded
+  `trainer.iter > 1500` check with `trainer.iter > (this.opts.refineStart ?? 1500)` so a build tool
+  can refine a short run explicitly. Omitted or null values retain the original 1,500-step
+  threshold. Task 88's browser integration now passes a threshold that fits each tier's budget. The
+  original vendor edit is isolated in commit `ffcc71cc`. The MIT notice is retained.
+- Local change by Codex for task 55 (October 13, 2026): `src/gs/trainer.js` binds the existing
+  camera-gradient buffer at binding 8 in the optional D-SSIM backward pass. Its shader requires that
+  buffer even when camera optimization is off; the missing binding invalidated every command buffer
+  while the iteration counter continued advancing. The offline tool requests the nine storage
+  bindings this pass needs and rejects GPU validation errors. The browser toy still uses the
+  original MSE training default. The MIT notice is retained.
+- Local changes by Codex for task 88 (October 15, 2026): a session owns its outstanding worker,
+  frame-decoder, and GPU resources through disposal. An abort-safe worker queue terminates both
+  feature and pair workers on cancellation or error. The optional `seedLimit` reserves room for
+  appended surface samples without increasing the requested seed count or changing default Gaussian
+  parameters. Trainer buffers are released separately from a host-owned GPU device. The last
+  training batch is limited to the remaining iteration budget. `vendor/splatjs/VERSION.md` records
+  the patched files. The upstream MIT notice is retained; original task 88 code is offered under
+  this repository's MIT license.
+
+## Codex CPU Gaussian fitter (task 55, build only)
+
+- Source: `tools/cdx-v3d-cpu-train.cpp` and `tools/cdx-v3d-cpu-bake.mjs`, made by Ryan with Codex
+  (GPT-6), offered under this repository's MIT license. The C++ fitter is compiled with the system
+  C++ and OpenMP toolchain and runs only at build time; it is never imported by the page. It fits
+  existing capture-derived Gaussians with sorted alpha compositing, a photometric loss, perspective
+  covariance derivatives, Adam updates, splitting, and opacity pruning. Quaternion optimization is
+  optional; the final task 55 finishing passes enable it. Optional alternating black and white
+  training backgrounds fit opaque photographic surfaces and prevent a light viewer background from
+  washing out a model fitted against black alone. Its finite-difference check covers every optimized
+  parameter. Source images, trained models, and derived tiers retain each capture's recorded
+  license.
+- `tools/cdx-v3d-clarity*.mjs` freeze the evaluation frames and score renders with PSNR,
+  Gaussian-window luminance SSIM, and Laplacian variance. They use the already listed PNG.js and
+  Playwright build dependencies. No new browser dependency is shipped.
+- The cloud camera solve uses the Python bindings in pycolmap 4.2.1, under COLMAP's
+  [BSD-3-Clause license](https://github.com/colmap/colmap/blob/4.2.1/COPYING.txt), and NumPy 2.5.4,
+  under its [BSD-3-Clause license](https://github.com/numpy/numpy/blob/v2.5.4/LICENSE.txt) and the
+  component notices retained in the installed wheel. License texts were checked October 13, 2026.
+  These packages are temporary offline build tools, never browser dependencies. The Forest path's
+  native-resolution solve ran in this container; the separate Mac/Metal workflow remains available.
+
+## omggif 1.0.10 (lane Pictures)
+
+- Package: `omggif@1.0.10` (file: `vendor/omggif/omggif.js`, the package's `omggif.js` with two
+  comment lines added at the top and one `export { GifWriter, GifReader };` line at the end, so it
+  loads as an ES module; the license notice is copied to `vendor/omggif/LICENSE`).
+- Loaded only when someone opens a GIF in a browser without ImageDecoder (Safari).
+- Source: https://github.com/deanm/omggif
+- License: MIT
+
+```
+(c) Dean McNamee <dean@gmail.com>, 2013.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to
+deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+sell copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+IN THE SOFTWARE.
+```
+
+## QR Code generator library (lane QR)
+
+- Source: Project Nayuki, https://www.nayuki.io/page/qr-code-generator-library, from
+  https://github.com/nayuki/QR-Code-generator at commit `3c6d0b3cefb4e049dc337e82237c9644399716a8`
+  (`typescript-javascript/qrcodegen.ts`), compiled to JavaScript with TypeScript 5.6.3
+  (`tsc --target ES2020 --module none`). File: `vendor/qrcodegen/qrcodegen.js`, the compiled library
+  with a header comment and one `export default qrcodegen;` line added at the end, so it loads as an
+  ES module. Nothing else was changed.
+- Loaded only when the QR code toy opens (labs only).
+- License: MIT (checked on the live project page on October 3, 2026; the notice is in
+  `vendor/qrcodegen/LICENSE`):
+
+```
+Copyright (c) Project Nayuki. (MIT License)
+https://www.nayuki.io/page/qr-code-generator-library
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+this software and associated documentation files (the "Software"), to deal in
+the Software without restriction, including without limitation the rights to
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+the Software, and to permit persons to whom the Software is furnished to do so,
+subject to the following conditions:
+- The above copyright notice and this permission notice shall be included in
+  all copies or substantial portions of the Software.
+- The Software is provided "as is", without warranty of any kind, express or
+  implied, including but not limited to the warranties of merchantability,
+  fitness for a particular purpose and noninfringement. In no event shall the
+  authors or copyright holders be liable for any claim, damages or other
+  liability, whether in an action of contract, tort or otherwise, arising from,
+  out of or in connection with the Software or the use or other dealings in the
+  Software.
+```
+
+## jsQR 1.4.0 (lane QR)
+
+- Package: `jsqr@1.4.0` (file: `vendor/jsqr/jsQR.js`, the package's `dist/jsQR.js`, unchanged; the
+  license is copied to `vendor/jsqr/LICENSE`).
+- Source: https://github.com/cozmo/jsQR (Cosmo Wolfe).
+- Loaded only when the QR code toy checks that a code scans, in a browser whose own
+  `BarcodeDetector` doesn't read QR codes. The QR tests (`tests/qr.spec.mjs`) read the same copy.
+- License: Apache License 2.0 (checked on the npm package and the live repository page on October 3,
+  2026; the full text is in `vendor/jsqr/LICENSE`).
+
+## ZXing for JavaScript 0.21.3 (lane QR craft)
+
+- Package: `@zxing/library@0.21.3` (file: `vendor/zxing-js/zxing.min.js`, the package's
+  `umd/index.min.js`, unchanged, 332 KB; the license is copied to `vendor/zxing-js/LICENSE`).
+- Source: https://github.com/zxing-js/library (the ZXing for JS authors, a port of ZXing).
+- Loaded only when the "Other barcodes" toy opens (labs), for its Data Matrix and Aztec writers and
+  to read its codes back. The same version is already a pinned devDependency (the QR scan lab's
+  reader).
+- License: Apache License 2.0 (the package's LICENSE file and the live repository's, checked on
+  October 6, 2026; the full text is in `vendor/zxing-js/LICENSE`). The package's `package.json` says
+  "MIT"; both are permissive and allowed here, and we follow the LICENSE file.
+
+## pdf-lib 1.17.1 (lane PDF lab)
+
+- Package: `pdf-lib@1.17.1` (file: `vendor/pdf-lib/pdf-lib.esm.min.js`, the package's
+  `dist/pdf-lib.esm.min.js`, unchanged, 523 KB; the license is copied to
+  `vendor/pdf-lib/LICENSE.md`).
+- Source: https://github.com/Hopding/pdf-lib (Andrew Dillon).
+- Loaded only when someone makes a PDF with Save PDF in the Share tab (labs; a dynamic import in
+  `src/pdf-export/pdf.js`), and by the lane's tools and tests in Node. Never on first paint, on the
+  shelf or in an embed.
+- License: MIT (checked on the npm package and the live repository page on October 5, 2026; the full
+  text is in `vendor/pdf-lib/LICENSE.md`). The bundle includes its dependencies, all permissive:
+  `pako` (MIT and Zlib), `@pdf-lib/standard-fonts` and `@pdf-lib/upng` (MIT), and `tslib` (Apache
+  License 2.0, its notice kept at the top of the file). It uses only the 14 standard PDF fonts; no
+  font file is embedded.
+
+## laz-perf 0.0.7 (lane Viewers)
+
+- Package: `laz-perf@0.0.7` (files: `vendor/laz-perf/laz-perf.js` and
+  `vendor/laz-perf/laz-perf.wasm`, the package's `lib/worker/` build, with two comment lines added
+  at the top of the JavaScript and one `export default createLazPerf;` line at its end, so it loads
+  as an ES module; nothing else changed).
+- Source: https://github.com/hobuinc/laz-perf (Hobu, Inc.), a LAZ (compressed LAS) reader compiled
+  to WebAssembly. It is the permissive choice the brief asked for, so no LGPL library is used.
+- Loaded only when someone opens a .laz file in the Point clouds toy (inside its worker). Labs only.
+- License: Apache License 2.0 (checked on the npm package and the live repository's COPYING on
+  October 5, 2026; the full text is in `vendor/laz-perf/LICENSE`).
+
+## dicom-parser 1.8.21 (lane Volume viewer)
+
+- Package: `dicom-parser@1.8.21` (file: `vendor/dicom-parser/dicomParser.min.js`, the package's
+  `dist/dicomParser.min.js`, unchanged, 32 KB; the license is copied to
+  `vendor/dicom-parser/LICENSE`).
+- Source: https://github.com/cornerstonejs/dicomParser (Chris Hafey and the Cornerstone
+  contributors). It parses DICOM files' elements; the volume viewer reads the pixels itself
+  (uncompressed and RLE Lossless).
+- Loaded only when someone opens a DICOM file in the Volume viewer (labs). It makes no network
+  calls.
+- License: MIT (checked on the npm package and the live repository's LICENSE on October 8, 2026; the
+  full text is in `vendor/dicom-parser/LICENSE`).
+
+## WebP codec from splat-transform 3.6.1 (lane Viewers)
+
+- Files: `vendor/webp/webp.mjs` and `vendor/webp/webp.wasm`, copied unchanged from
+  `@playcanvas/splat-transform@3.6.1` (`lib/`), which compiles libwebp to WebAssembly.
+- Sources: https://github.com/playcanvas/splat-transform (PlayCanvas Ltd.) and
+  https://chromium.googlesource.com/webm/libwebp (Google Inc.).
+- Loaded only when someone opens or saves a .sog file in the Splat toolkit (inside its worker). SOG
+  keeps splats in lossless WebP pictures whose bytes must come back exactly; the browser's own
+  decoder, read through a canvas, premultiplies alpha and changes them. Labs only.
+- Licenses: MIT (splat-transform) and BSD-3-Clause with Google's patent grant (libwebp), checked on
+  October 5, 2026; both texts are in `vendor/webp/LICENSE`.
+
+## Development tools (not shipped)
+
+These are `devDependencies` used to prepare assets and run tests; nothing from them is served.
+
+- `@playcanvas/splat-transform` 3.6.1 (MIT), https://github.com/playcanvas/splat-transform: converts
+  the captured toys to SOG (`tools/prepare-assets.mjs`).
+- `@playwright/test` 1.56.1 (Apache-2.0): the smoke test and the thumbnail tool.
+- `prettier` 3.8.1 (MIT): formatting.
+- grooph 0.2.5 (MIT), https://github.com/ryanjosephkamp/grooph: its two hook scripts in
+  `.grooph/hooks/`, run by `.claude/settings.json` in the Claude Code sessions that work on this
+  repository. They record each session's start, turns, subagents and tool names (never prompts,
+  inputs or outputs) and push them to `grooph-events/*` branches. Nothing of it is served.
+- `@gltf-transform/core` 4.5.0 (MIT), https://github.com/donmccurdy/glTF-Transform: reads the glTF
+  models that `tools/mesh-to-splats.mjs` turns into splats.
+- `@gltf-transform/extensions` 4.5.0 (MIT), https://github.com/donmccurdy/glTF-Transform, and
+  `draco3dgltf` 1.5.7 (Apache-2.0), https://github.com/google/draco: decode NASA's Draco-compressed
+  Space Shuttle model in `tools/sp2-rockets.mjs` (lane Space r2), which writes it again
+  uncompressed. Nothing of them is served.
+- `jpeg-js` 0.4.4 (BSD-3-Clause), https://github.com/eugeneware/jpeg-js, and `pngjs` 7.0.0 (MIT),
+  https://github.com/pngjs/pngjs: decode those models' textures in `tools/mesh-to-splats.mjs`, and
+  put the before-and-after sharpness crops side by side in `tools/sharpness-pairs.mjs`.
+- `jsqr` 1.4.0 (Apache-2.0), https://github.com/cozmo/jsQR, and `@zxing/library` 0.21.3
+  (Apache-2.0), https://github.com/zxing-js/library: the two independent QR readers in the QR scan
+  lab (`tools/qr-scan-lab.mjs`, `tests/qrl.spec.mjs`). `qrcode-generator` 2.0.4 (MIT),
+  https://github.com/kazuhikoarase/qrcode-generator: draws its reference codes. Nothing of them is
+  served.
+- Python 3 with `laspy` 2.7.0 (BSD-2-Clause), https://github.com/laspy/laspy, `lazrs` 0.8.2 (MIT),
+  https://github.com/laz-rs/laz-rs-python, and `pyproj` 3.7.2 (MIT),
+  https://github.com/pyproj4/pyproj: make the Point clouds samples (`tools/vwr-samples.mjs`) and the
+  LAZ test files (`tools/vwr-fixtures.mjs`). Nothing of them is served.
+- `zxing-wasm` 3.1.4 (MIT), https://github.com/Sec-ant/zxing-wasm, zxing-cpp (Apache-2.0) compiled
+  to WebAssembly: the third QR reader and a Micro QR and rMQR writer in the study of splat QR codes
+  (`tools/qrs-study.mjs`, `tests/qrs-study.spec.mjs`, lane QR lab r2). Nothing of it is served.
+- `bwip-js` 4.11.4 (MIT), https://github.com/metafloor/bwip-js, with BWIPP (MIT): an independent
+  Micro QR and rMQR writer in the same study. Nothing of it is served.
+- `three` 0.186.1 (MIT), https://github.com/mrdoob/three.js: its FBX loader and glTF exporter turn
+  the Worlds mesh character (Kenney, CC0) into one GLB in `tools/world-character.mjs`, run in
+  Chromium at build time. Nothing of three.js is served.
+- `bpy` 5.0.1 (Blender as a Python module; GPL-3.0-or-later), https://pypi.org/project/bpy/, with
+  `pillow` 12.3.0 (MIT-CMU), https://pypi.org/project/pillow/, in a virtual environment under
+  `.cache/`: builds the Worlds realistic character (`tools/wd-character.py`) and model props
+  (`tools/wd-props.py`) at build time. Nothing of Blender is served.
+- MPFB 2.0.17 (GPL-3.0-or-later), https://extensions.blender.org/add-ons/mpfb/: the MakeHuman add-on
+  for Blender, downloaded by `tools/wd-character.py` into `.cache/` to put the character together.
+  Nothing of it is served; the character it makes is from CC0 assets (CREDITS.md).
+- The TRELLIS Space on Hugging Face (not a package; `tools/image-to-3d.mjs` calls it over HTTPS with
+  plain fetch): https://huggingface.co/spaces/trellis-community/TRELLIS (MIT), running the TRELLIS
+  model https://huggingface.co/microsoft/TRELLIS-image-large (MIT) and rembg's u2net background
+  cut-out (Apache-2.0). It made the Real pencil and Real tin can; their photos' licenses are in
+  CREDITS.md.
+- `jsfive` 0.4.2 (public domain; based on pyfive, BSD-3-Clause, © 2016 Jonathan J. Helmus),
+  https://github.com/usnistgov/jsfive, with its dependency `pako` 2.2.0 (MIT AND Zlib),
+  https://github.com/nodeca/pako: reads the FIRE-2 simulation's HDF5 snapshot in
+  `tools/sci-galaxy.mjs` (lane Science). The site never loads them. `pngjs` (above) also writes that
+  tool's picture of the source data (`--map`).
+- `geotiff` 3.0.5 (MIT), https://github.com/geotiffjs/geotiff.js, with its dependencies
+  `@petamoriken/float16` 3.9.3 (MIT), `lerc` 3.0.0 (Apache-2.0), `parse-headers` 2.0.6 (MIT),
+  `quick-lru` 6.1.2 (MIT), `web-worker` 1.5.0 (Apache-2.0), `xml-utils` 1.10.2 (CC0-1.0) and
+  `zstddec` 0.2.0 (MIT AND BSD-3-Clause): reads the USGS 3DEP elevation tiles (GeoTIFF) by range
+  requests in `tools/sci3-terrain.mjs` (lane Science r3). The site never loads them.
+- `pdfjs-dist` 6.3.289 (Apache-2.0), https://github.com/mozilla/pdf.js: the same version as
+  `vendor/pdfjs/`, with its viewer and scripting sandbox (QuickJS, MIT), which the site doesn't
+  ship. `tests/pdf.spec.mjs` and `tools/pdf-clip.mjs` (lane PDF lab) open a made PDF in it with its
+  scripting on, the engine inside Firefox's PDF viewer, to check that the flip book plays. Nothing
+  of it is served.
+
+## Build tools outside npm (not shipped)
+
+Programs that run on a build machine to make splats for the Splat Fidelity Plan (lane Fidelity,
+approved October 3, 2026). None of them is served; what they make (our renders and the splats
+trained from them) is ours, and the models and textures they use keep their own credits
+(CREDITS.md).
+
+- Blender 4.5 LTS (GPL-3.0-or-later), https://www.blender.org/: builds and renders the brass orrery
+  (`tools/fidelity/orrery.py`) and renders the boombox for Stage 1 (Codex task 08). Tested in the
+  cloud sandbox with 4.5.14 LTS for Linux from https://download.blender.org/release/Blender4.5/; the
+  owner's Mac runs the macOS build of the same series.
+- Brush (Apache-2.0), https://github.com/ArthurBrussee/brush: trains a splat from the renders
+  (`tools/fidelity/run-orrery.sh`). The version used is recorded in each run's report.
+- msplat (Apache-2.0), https://github.com/rayanht/msplat: the second choice of trainer on Apple
+  Silicon, if Brush can't run.
+- Video to 3D's native Mac bake workflow pins COLMAP 4.2.1 (BSD-3-Clause),
+  https://github.com/colmap/colmap/blob/4.2.1/COPYING.txt, and msplat 1.1.4 (Apache-2.0),
+  https://github.com/rayanht/msplat/blob/6b819711fa7c90f054567cb4fb4937743367afdd/LICENSE. Its
+  Python CLI uses tyro 0.9.35 (MIT), https://github.com/brentyi/tyro/blob/v0.9.35/LICENSE. License
+  pages checked October 12, 2026. Native frame preparation and CLI help were checked here; COLMAP
+  solving and Metal training were not run. These tools and their dependencies are never shipped to
+  the browser.
+- GROOPH 0.4.0 (MIT, by the owner), https://www.npmjs.com/package/grooph: the command line
+  (`npx grooph@0.4.0`, run by `tools/site-loop.mjs`) draws the project's lane loop as an SVG for the
+  draft page "The loop a lane follows" (lane Site r2). Nothing of it is served; only the SVG it
+  wrote is, and the draft page links to the GROOPH app on the owner's own site.
+
+## PDF motion audit build tools (Codex task 21; not shipped)
+
+`tools/pdf-motion/` uses these programs/libraries to build the sample PDFs under
+`docs/audits/pdf-motion-2026-10/`. They do not become site runtime dependencies. License sources
+were opened on October 4, 2026; installed package notices were also inspected where available.
+
+- ReportLab 4.4.9 (BSD-3-Clause), https://www.reportlab.com/docs/reportlab-userguide.pdf: lays out
+  the static sample pages. Existing bundled Python package; no ReportLab program is vendored.
+- pypdf 6.10.0 (BSD-3-Clause), https://raw.githubusercontent.com/py-pdf/pypdf/main/LICENSE: writes
+  annotations, document scripts and attachments, and checks the resulting objects.
+- Pillow 12.3.0 (MIT-CMU), https://pillow.readthedocs.io/en/stable/about.html: reduces captured
+  frames to grayscale and assembles verification images. Already listed above for Blender tools;
+  this audit uses the existing bundled Python copy.
+- TeX Live 2026 / pdfTeX 1.40.29 (TeX Live's component licenses; CTAN lists pdfTeX as GPL and the
+  installed executable also reports LGPL component notices), https://ctan.org/pkg/texlive and
+  https://ctan.org/pkg/pdftex, with `animate` dated October 14, 2024 (LPPL-1.3c),
+  https://ctan.org/pkg/animate: builds the color widget and OCG flip books. The generated PDF
+  animation scripts come from `animate`; both LaTeX sources are included. Existing installation.
+- Asymptote 3.15 (core LGPL-3.0-or-later, with separately licensed dependencies including GPL
+  GSL/Readline), https://raw.githubusercontent.com/vectorgraphics/asymptote/master/README: exports
+  the sampled centers as colored PRC markers. Installed through Homebrew after the existing MacTeX
+  3.09 binary crashed. The generated geometry and its `.asy` source are included; the exporter
+  itself is not copied into the repository.
+- FFmpeg / ffprobe 9.0.2 (this installed build reports GPL-3.0-or-later; FFmpeg's base license is
+  LGPL-2.1-or-later, with optional GPL parts), https://ffmpeg.org/legal.html: encodes and inspects
+  the H.264 clip using the existing build's libx264 encoder. No FFmpeg or x264 executable is
+  shipped.
+- Poppler `pdftoppm` 26.05.0 (GPL-2.0-or-later), https://poppler.freedesktop.org/ and
+  https://raw.githubusercontent.com/tsdgeos/poppler_mirror/master/COPYING: renders static first-page
+  posters for inspection, using the bundled runtime. It does not verify active playback.
+
+The existing Playwright, qrcode-generator, jsQR and pngjs tools listed above capture the toy and
+build/check its QR. No DoomPDF, PDF Tetris, Flash player or outside game asset is copied. All image,
+video and point payloads in these samples come from Splashery's procedural grapes toy.
+
+## Photo to 3D round 3 test tools (not shipped)
+
+License sources were opened on October 13, 2026. These executables run only in the test workspace;
+neither is copied into the site or the review media.
+
+- Chromium 151.0.7922.173 (BSD-3-Clause for the Chromium project, with separately licensed
+  third-party components),
+  https://chromium.googlesource.com/chromium/src/+/refs/heads/main/LICENSE?format=TEXT: the
+  workspace's existing browser captures and measures the actual photo renderer.
+- Xvfb 2:21.1.16-1.3+deb13u4 (X.Org's MIT/X11 notices and separately licensed bundled components),
+  https://metadata.ftp-master.debian.org/changelogs/main/x/xorg-server/xorg-server_21.1.16-1.3+deb13u4_copyright:
+  the Debian package supplies a temporary virtual display for Chromium's Mesa WebGL2 tests. Its
+  complete notices remain with the extracted test runtime in the ignored cache.
+- FFmpeg / ffprobe 7.1.5-0+deb13u1 (this Debian build reports GPL-2.0-or-later),
+  https://ffmpeg.org/legal.html: the workspace's installed encoder makes the paired H.264 review
+  clips using libx264. Its actual license was also read from the Debian package's copyright file and
+  `ffmpeg -L`. This test build is separate from the 9.0.2 build used for the earlier PDF audit.
+- Pillow 12.3.0 (MIT-CMU), https://pillow.readthedocs.io/en/stable/about.html: the existing
+  workspace library makes the public CC0 GIF fixtures. No Pillow runtime is copied into the review
+  media.
+
+These tool versions are retained with the public review evidence.
+
+# Studio truth build tools (Codex task 56; not shipped)
+
+- Native Linux Blender 4.3.2 (GPL-2.0-or-later, as recorded in the installed Debian copyright file),
+  https://www.blender.org/about/license/ and https://pypi.org/project/bpy/4.3.0/: the installed
+  native Blender runs `tools/studio-truth-generate.py`; no Blender program is served. Pip has no
+  compatible wheel for the environment's Python 3.12. The Blender website rejected this
+  environment's license-page request (HTTP 403); the installed build and PyPI metadata identify the
+  build-time tool.
+- NumPy 2.3.5 in the validator and 2.2.4 in native Blender (BSD-3-Clause),
+  https://pypi.org/project/numpy/2.3.5/ and https://pypi.org/project/numpy/2.2.4/: calibration,
+  numeric depth encoding, and fixture validation.
+- Pillow 12.3.0 (MIT-CMU), https://pypi.org/project/pillow/12.3.0/: the contact sheet and build-time
+  image validation.
+- FFmpeg / ffprobe 7.1.5-0+deb13u1 (the installed Debian build reports GPL-2.0-or-later),
+  https://ffmpeg.org/legal.html: H.264 video encoding with libx264 and checks of frame counts,
+  duration, and dimensions. No executable is served. These are build tools allowed by Rules v1; the
+  original rendered output is CC0.
+
+## Video to 3D real-clip benchmark tools (task 88, not shipped)
+
+The benchmark reuses the Playwright, PNG.js, Chromium, FFmpeg, and Xvfb test tools listed above. No
+executable, test font, or browser distribution is copied into the site or review media. The corpus
+manifest records each source's own license; trained models and review clips retain it.
+
+- Node.js 22.15.0 (MIT and the bundled third-party notices),
+  https://raw.githubusercontent.com/nodejs/node/v22.15.0/LICENSE: a temporary pinned runtime for the
+  existing regression suite. The benchmark itself records its actual Node.js version.
+- Chrome for Testing 141.0.7390.37, https://developer.chrome.com/blog/chrome-for-testing: a
+  temporary browser pin for existing regression tests. Its `ABOUT` notice identifies Google Chrome,
+  Copyright 2025 Google LLC, and the Chromium project and third-party credits. Its distribution's
+  terms are https://www.google.com/chrome/terms/; it is not redistributed here.
+- Inter 4.1 (SIL Open Font License 1.1),
+  https://raw.githubusercontent.com/rsms/inter/v4.1/LICENSE.txt: an environment-only font pin for
+  the existing PDF and code-scanning checks. The font and its notices stay in the test workspace.
+
+The linked notices were opened on October 15, 2026, and retained with the test evidence. The
+original surface initializer, benchmark, and resource tests are offered under this repository's MIT
+license. No new third-party browser library was added.

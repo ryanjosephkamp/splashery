@@ -1,0 +1,19 @@
+{
+  "/workspace/v3d-r4-media/follow-r11-v1.py": "810f6110ad29509bc542a183cc36e35bbd65111c2610994e01bb897fce221779",
+  "/workspace/v3d-r4-media/test-follow-r11-v1.py": "9a72ed98a01bd6199715bb5bb28bf8045bd59e1e238b42ac7a6aed68315cff88",
+  "/workspace/v3d-r4-media/r11-follower-integrity.mjs": "f7bb54558db0df96fb69ef71f2c5eb9d23bd283e1bb9c0d88a7b384c0dfe60f7",
+  "/workspace/v3d-r4-media/prepare-r11-provenance.mjs": "b33cdca75adeec3dfef65bc93fd190476c69a6cdf3b2621ff0e705a17229ae05",
+  "/workspace/v3d-r4-media/finalize-r11-declaration.py": "d47be291858bafea6fc2393d35831df56291b03d37acaf6e8f4cfff7a3966b70",
+  "/workspace/v3d-r4-media/follow-r12-v1.py": "e8bd063d3220aa7c776551736a1cc2f38e575d8efeceef67a84884612e907f8d",
+  "/workspace/v3d-r4-media/test-follow-r12-v1.py": "a7c8684231129ee17b877cae82282d1e94529a7d0d0d60887bc9203e2eae3708",
+  "/workspace/v3d-r4-media/r12-follower-integrity.mjs": "2dcbe84fe9a497d410b60300ddc16ad603fa55dc3253589fb4bbfd206d59e4fd",
+  "/workspace/v3d-r4-media/prepare-r12-provenance.mjs": "7d861da28b29364ad29b569e19dfc4e382b406a204bad12a4f1048e47598047e",
+  "/workspace/v3d-r4-media/finalize-r12-declaration.py": "9e12f784a16b9e10c090c5dbf6bf72b4c12c1a2285f2cee09394818ffecb4224",
+  "/workspace/splashery-v3d-bench-tools-r12/tools/v3d-review.mjs": "35ec88c4c384dd1e845760fd0e0e8c5c561aae2021cd28ecd2eb8868d4e2b7c7",
+  "/workspace/splashery-v3d-bench-tools-r12/tools/v3d-bench.mjs": "84cdac18c13afb599a598e0bd7606c4fc620ffc29ef6911322629766644ca0c3",
+  "/workspace/splashery-v3d-bench-tools-r12/tools/v3d-bench-metrics.mjs": "a4dac3c6d33ae13110d0455db9aa455785bf6f66cb1e7f9745652f74ee29ab69",
+  "/workspace/splashery-v3d-bench-tools-r12/tools/v3d-bench-samples.mjs": "6057b1482ca95c0a61888fcf083997619ad052bfbe57962504071ba798b26cfc",
+  "/workspace/splashery-v3d-bench-tools-r12/tools/v3d-bench-pixels.mjs": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f",
+  "/workspace/splashery-v3d-bench-tools-r12/tools/cdx-v3d-clarity-metrics.mjs": "7d20c250557e0e98dd5fc6286420d147e9196f995ee6c6932d52883eaadeee16",
+  "/workspace/splashery-v3d-bench-tools-r12/tools/v3d-corpus.json": "bf0fcb849988aedc5ac20965d567e304adec88129b4f6e47fea21bcb0395dbca"
+}

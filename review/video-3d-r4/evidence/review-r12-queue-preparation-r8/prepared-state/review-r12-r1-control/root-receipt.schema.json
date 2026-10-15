@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Actual root authorization for R12 quiet-window review",
+  "type": "object",
+  "required": [
+    "generation",
+    "capturedAt",
+    "authorization",
+    "candidateProvenanceSha256",
+    "candidateServedSourceSha256",
+    "timedRoots"
+  ],
+  "properties": {
+    "generation": {
+      "const": "R12-review"
+    },
+    "capturedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "authorization": {
+      "type": "string",
+      "minLength": 1
+    },
+    "candidateProvenanceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "candidateServedSourceSha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "timedRoots": {
+      "type": "object",
+      "required": [
+        "main-native",
+        "r12-coordinator",
+        "r12-samples",
+        "r11-remaining"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "main-native": {
+          "$ref": "#/$defs/rootGroup"
+        },
+        "r12-coordinator": {
+          "$ref": "#/$defs/rootGroup"
+        },
+        "r12-samples": {
+          "$ref": "#/$defs/rootGroup"
+        },
+        "r11-remaining": {
+          "$ref": "#/$defs/rootGroup"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "binding": {
+      "type": "object",
+      "required": [
+        "pid",
+        "startTicks",
+        "command"
+      ],
+      "properties": {
+        "pid": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "startTicks": {
+          "type": "string",
+          "pattern": "^[0-9]+$"
+        },
+        "command": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "rootGroup": {
+      "type": "object",
+      "required": [
+        "root",
+        "descendants",
+        "completeObservedDescendants"
+      ],
+      "properties": {
+        "root": {
+          "$ref": "#/$defs/binding"
+        },
+        "descendants": {
+          "type": "object",
+          "propertyNames": {
+            "pattern": "^[1-9][0-9]*$"
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/binding"
+          }
+        },
+        "completeObservedDescendants": {
+          "const": true
+        }
+      }
+    }
+  }
+}

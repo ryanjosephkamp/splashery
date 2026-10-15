@@ -1,0 +1,36 @@
+test_absolute_stop_terms_then_kills_only_owned_render (__main__.GuardTests.test_absolute_stop_terms_then_kills_only_owned_render) ... ok
+test_actual_authorization_and_all_four_roles_required (__main__.GuardTests.test_actual_authorization_and_all_four_roles_required) ... ok
+test_append_only_preserves_rows_and_every_previous_pair_binding (__main__.GuardTests.test_append_only_preserves_rows_and_every_previous_pair_binding) ... ok
+test_child_exit_waits_for_owned_browser_descendant_until_deadline (__main__.GuardTests.test_child_exit_waits_for_owned_browser_descendant_until_deadline) ... ok
+test_cleanup_only_owns_bound_live_identity_no_reused_pids (__main__.GuardTests.test_cleanup_only_owns_bound_live_identity_no_reused_pids) ... ok
+test_deadline_boundaries_block_new_render (__main__.GuardTests.test_deadline_boundaries_block_new_render) ... ok
+test_duplicate_and_miskeyed_process_bindings_reject (__main__.GuardTests.test_duplicate_and_miskeyed_process_bindings_reject) ... ok
+test_empty_duplicate_or_ranked_selection_rejects (__main__.GuardTests.test_empty_duplicate_or_ranked_selection_rejects) ... ok
+test_exact_ticks_and_original_command_required (__main__.GuardTests.test_exact_ticks_and_original_command_required) ... ok
+test_existing_partial_output_is_never_overwritten_or_retried (__main__.GuardTests.test_existing_partial_output_is_never_overwritten_or_retried) ... ok
+test_natural_renderer_completion_never_signals (__main__.GuardTests.test_natural_renderer_completion_never_signals) ... ok
+test_new_grandchild_observed_from_retained_child_after_root_exit (__main__.GuardTests.test_new_grandchild_observed_from_retained_child_after_root_exit) ... ok
+test_no_cleanup_before_owned_deadline_and_no_early_hard_kill (__main__.GuardTests.test_no_cleanup_before_owned_deadline_and_no_early_hard_kill) ... ok
+test_null_or_incomplete_descendants_never_authorize (__main__.GuardTests.test_null_or_incomplete_descendants_never_authorize) ... ok
+test_pending_declaration_cannot_launch_or_inspect_processes (__main__.GuardTests.test_pending_declaration_cannot_launch_or_inspect_processes) ... ok
+test_permission_error_is_not_mistaken_for_quiet (__main__.GuardTests.test_permission_error_is_not_mistaken_for_quiet) ... ok
+test_pid_reuse_and_zombie_do_not_block_but_title_change_does (__main__.GuardTests.test_pid_reuse_and_zombie_do_not_block_but_title_change_does) ... ok
+test_quiet_window_never_starts_early (__main__.GuardTests.test_quiet_window_never_starts_early) ... ok
+test_reserved_single_invocation_never_relaunches (__main__.GuardTests.test_reserved_single_invocation_never_relaunches) ... ok
+test_reused_descendant_does_not_release_another_live_descendant (__main__.GuardTests.test_reused_descendant_does_not_release_another_live_descendant) ... ok
+test_single_command_exact_parameters_no_retry (__main__.GuardTests.test_single_command_exact_parameters_no_retry) ... ok
+test_surviving_descendant_retained_after_root_exit (__main__.GuardTests.test_surviving_descendant_retained_after_root_exit) ... ok
+test_corrupted_model_is_rejected (__main__.PlannerTests.test_corrupted_model_is_rejected) ... ok
+test_corrupted_png_rejected_without_skip_to_later_pair (__main__.PlannerTests.test_corrupted_png_rejected_without_skip_to_later_pair) ... ok
+test_false_finished_status_or_incomplete_proof_not_selected (__main__.PlannerTests.test_false_finished_status_or_incomplete_proof_not_selected) ... ok
+test_missing_master_returns_no_inferred_rows (__main__.PlannerTests.test_missing_master_returns_no_inferred_rows) ... ok
+test_missing_saved_render_is_rejected (__main__.PlannerTests.test_missing_saved_render_is_rejected) ... ok
+test_real_copied_case_is_verified_and_unranked (__main__.PlannerTests.test_real_copied_case_is_verified_and_unranked) ... ok
+test_same_reference_required (__main__.PlannerTests.test_same_reference_required) ... ok
+test_score_independent_first_ten_not_ranked (__main__.PlannerTests.test_score_independent_first_ten_not_ranked) ... ok
+test_wrong_candidate_provenance_fails (__main__.PlannerTests.test_wrong_candidate_provenance_fails) ... ok
+
+----------------------------------------------------------------------
+Ran 31 tests in 12.623s
+
+OK

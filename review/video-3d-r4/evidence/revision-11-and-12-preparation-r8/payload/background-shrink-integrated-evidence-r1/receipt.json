@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-15T12:47:57.393741+00:00",
+  "engineCommit": "6820c36b7183b88b0856a287cd77c7ce6493a9e8",
+  "passed": 66,
+  "failed": 0,
+  "sourceProof": "background-shrink-preparation-r2/freeze.json",
+  "sourceProofSha256": "59840b8579f2a3dd59f1dc1d23a874ddba2146664562c662c1aea1a5450869d2",
+  "logSha256": "09b62ef04787ab66f94ec5796acb0d2f57996e352787a9766eec41cd5aad9a1c",
+  "note": "Commit read directly from Git. A prior unpublished draft contained an explicit placeholder, was quarantined, and was never used as provenance or an acceptance result."
+}

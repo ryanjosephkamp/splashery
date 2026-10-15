@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-15T12:43:29.524Z",
+  "sourcesBefore": [
+    {
+      "file": "vendor/splatjs/src/gs/background-fit.js",
+      "sha256": "dc870092c70ae8b768a10604946294781fb84ce5ad25c88603e88c4507909359"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "sha256": "4bf4663854e7f0a268183959f9f510674761f63d176287a3181cbe0d1209142a"
+    },
+    {
+      "file": "gpu-fixture.mjs",
+      "sha256": "1a83452255a885a65de42107e51479a80c6ade386afcee493ed4b147eb8ed189"
+    }
+  ],
+  "protocol": "Five predeclared actual-GPU synthetic fixtures; preserve legacy full-fit rejection, accept bounded color only with unchanged 1% train and every-camera nonregression, retain full fit, reject harmful direction, reject insufficient train gain. Exact Gaussian bytes and no optimizer steps throughout."
+}

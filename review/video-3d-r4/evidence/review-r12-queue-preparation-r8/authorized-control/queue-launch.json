@@ -1,0 +1,10 @@
+{
+  "created": "2026-10-15T13:21:51.918421+00:00",
+  "pid": 393769,
+  "command": [
+    "python3",
+    "/workspace/v3d-r4-media/queue-r12-review-r1.py",
+    "--run"
+  ],
+  "purpose": "Observe owned timed-work identities; render only in the declared quiet window."
+}

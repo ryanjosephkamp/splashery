@@ -1,0 +1,29 @@
+{
+  "capturedAt": "2026-10-15T14:03:55.495065+00:00",
+  "source": "/workspace/v3d-r4-media/ci-c4752253-publication-r1",
+  "allCopiedBytesVerified": true,
+  "files": {
+    "lossless-log-archives.json": "6bb5b6dd346bdef3760ed322a468ee326d9bdb6b5845b0c29264bb1140fd2b05",
+    "raw-job-116438509858.log.gz": "fc737c5ce7d4a17d97317add54e7636771b7ebefd60be4c63c02a6df5aa0431e",
+    "raw-job-116438509575.log.gz": "fcb2c9ec06dd697d78f7c3fe47cccfb080b0a4dda38c5ad10ce64b3ce77df2dd",
+    "raw-job-116438510207.log.gz": "78d1d13e6830a7de24321bbd9078aa55b101fd1285e2ded5dc70ffaa998a8642",
+    "raw-job-116438510029.log.gz": "4677d358f8507798fd3e25b48355835bd53fb1789bf82750109281286d57c681",
+    "jobs-observed-1320.json": "e1903ff732fc0f58ebce8abc15423a9cc1a916c4f69edc954d77562b69e0891e",
+    "raw-job-116438509667.log.gz": "eb81e610cfdbbd9d97732b508c4a169c0ccb371efc3d258f9edc4a08203f6b17",
+    "raw-job-116438509812.log.gz": "b63b79efba1d978c6cf03928909c475aacbfe110ef7c4ae4fa7501b4e217480f",
+    "raw-job-116438509540.log.gz": "282226d42d8090c62298b0a4a4a64b30025b91528a3d27b10cf6b2de03c7c183",
+    "raw-job-116438510314.log.gz": "e64bf86ace1f97eff7204daa4c46604bc2ed731f4312e078c53060191cc58167",
+    "raw-job-116438510145.log.gz": "d54bd9d29b000a427f2a70636e1553591f52719f86dad913402af7ea55eb7d50",
+    "raw-job-116438509922.log.gz": "00acc7f632547c39f3866de1c192cac6c946a2fca7041899b3f00dcc0eb77b78",
+    "raw-job-116438509402.log.gz": "fb0cf017d30a1ff6d521a3033ce03ec4253025f1e8c5a870f49fa2e156e175aa",
+    "README.md": "cec77977aece4d51a432a32da83adfceadb594e0bd246a922cec72187c27f309",
+    "raw-job-116438509688.log.gz": "01c3606c7b267a3f5a05d3e3a93aa709d6c859de08dafa84b0e8a3f820bd5772",
+    "raw-job-116438509882.log.gz": "dd9655e5f52e75d12248774b3e591499be9f9e6a161649562d5e495dd38214d9",
+    "raw-job-116438509982.log.gz": "6fcc1ff52515900ca6bcc08161764d5afb5180cbc68d6e7ed91dd2700f225fa5",
+    "jobs-observed-1334.json": "432279eb1eb29f7b6d5823b633f89029017cf3c841efff8ca7d60cbe0a124712",
+    "full-suite-summary.json": "df65b54088104f95106814b3cfe5ac6d174378a77cc8a4699992e90186704757",
+    "raw-job-116438510265.log.gz": "fb8d1e2bd3171aed4ba14aac191f0a6351057ae4f08cb30a7e88b122c65f3e9c",
+    "jobs-original-shards-final.json": "c1dbed0f2ae2c4c99d1a3105fd05bc5a0c72181677c5de1d6ad3a912c12353dc",
+    "raw-job-116438509728.log.gz": "b2f5a25697f0da365b598e1f640145db6d40bde26ea4c9e827e432aac5ee99d4"
+  }
+}

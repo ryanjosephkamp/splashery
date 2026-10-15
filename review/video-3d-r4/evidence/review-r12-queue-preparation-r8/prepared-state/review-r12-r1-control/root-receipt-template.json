@@ -1,0 +1,30 @@
+{
+  "status": "TEMPLATE-ONLY-NOT-ACTUAL-AUTHORIZATION",
+  "generation": "R12-review",
+  "capturedAt": null,
+  "authorization": null,
+  "candidateProvenanceSha256": null,
+  "candidateServedSourceSha256": null,
+  "timedRoots": {
+    "main-native": {
+      "root": null,
+      "descendants": null,
+      "completeObservedDescendants": false
+    },
+    "r12-coordinator": {
+      "root": null,
+      "descendants": null,
+      "completeObservedDescendants": false
+    },
+    "r12-samples": {
+      "root": null,
+      "descendants": null,
+      "completeObservedDescendants": false
+    },
+    "r11-remaining": {
+      "root": null,
+      "descendants": null,
+      "completeObservedDescendants": false
+    }
+  }
+}

@@ -1,0 +1,245 @@
+{
+  "id": "pisac",
+  "profile": "desktop",
+  "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+  "started": "2026-10-15T12:49:48.629Z",
+  "status": "finished",
+  "provenanceSha256": "adfcf59a89a7ce8e7fd1bb34e62696ca48f03dc4c8810402218dbfedbec0bc42",
+  "firstViewMs": 164770.5,
+  "bakeMs": 1114491.916985,
+  "mean": {
+    "psnr": 16.176352093587564,
+    "ssim": 0.5426773263263874,
+    "laplacian": 0.00003635120138990349,
+    "sourceLaplacian": 0.003818432394883132
+  },
+  "peakRssBytes": 1696542720,
+  "hostLoadAtStart": [
+    10.38,
+    13.95,
+    15.66
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "This browser cannot play that video. Try an MP4 (H.264) or WebM file, or a shorter clip.",
+    "unplayable": false,
+    "duration": 0
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "fb6c5b9976734b7d9b0c8ece34c176f4f32f9579c4de2ad60aaaec6227848e1e",
+  "stats": {
+    "tier": "high",
+    "adapter": "google swiftshader",
+    "frames": 30,
+    "registered": 30,
+    "points": 331,
+    "surfacePoints": 7602,
+    "generatedSurfacePoints": 7602,
+    "seedSplats": 59900,
+    "seedBounds": "coordinate-median",
+    "seedSceneRadius": 28.96902992677768,
+    "trainingBackground": [
+      0,
+      0,
+      0
+    ],
+    "renderBackground": [
+      0.5390154848795332,
+      0.584460166494298,
+      0.6535136260104101
+    ],
+    "backgroundFit": {
+      "method": "constant-training-environment",
+      "accepted": true,
+      "reason": "training-and-validation-improved",
+      "rgb": [
+        0.5390154848795332,
+        0.584460166494298,
+        0.6535136260104101
+      ],
+      "trainCams": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29
+      ],
+      "validationCams": [
+        15
+      ],
+      "pixels": 3580514,
+      "invalidPixels": 177886,
+      "improvement": 0.17339277025167388,
+      "baseMse": 0.01979721956808404,
+      "fittedMse": 0.0163645248238933,
+      "validation": [
+        {
+          "ci": 15,
+          "pixels": 123466,
+          "baseMse": 0.015657033041936677,
+          "fittedMse": 0.014592661953934561
+        }
+      ]
+    },
+    "splats": 59900,
+    "iters": 140,
+    "psnr": 18,
+    "psnrAtIter": 140,
+    "trainSide": 480,
+    "plyBytes": 3944959,
+    "retried": false,
+    "timedOut": true,
+    "timeLimitMinutes": 15,
+    "softwareSort": true,
+    "softwareDirectGradient": true,
+    "rasterTileSize": 16,
+    "trainingLoop": {
+      "batches": 70,
+      "submittedSteps": 140,
+      "encodeMs": 41,
+      "viewSubmitMs": 6,
+      "fenceWaitMs": 466421,
+      "metricsWaitMs": 436061,
+      "batchWallMs": 902577
+    },
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 10,
+    "rate": 3
+  },
+  "timings": {
+    "frames": 43.6,
+    "decode": 1.8,
+    "path": 87,
+    "seed": 1.5,
+    "train": 909.6,
+    "background": 56.7,
+    "export": 0.2,
+    "total": 1100.5
+  },
+  "actualTier": "high",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": true,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "evaluationSha256": "bd7d0615360d44c416e00937bbe5b14231b5726d2858052e1d4904289c8fd5a3",
+  "frames": [
+    {
+      "time": 0.666667,
+      "renderSha256": "317e6ea0b048716b3aff0c8c18d137306cf27de472c52c71afefa2151606b534",
+      "referenceSha256": "af132e6536f00c9418ee6ccef59d458cdab4dd967676363e4c9d3139254c8b2a",
+      "psnr": 17.44375056427627,
+      "exact": false,
+      "ssim": 0.4976783792476368,
+      "laplacian": 0.00008461575519202777,
+      "sourceLaplacian": 0.0053514278566590716,
+      "sharpnessRatio": 0.01581180900845665
+    },
+    {
+      "time": 2,
+      "renderSha256": "452273237b6e3db3334f858017ebbca6ae5a24045361d810db9d7b8a7db17f59",
+      "referenceSha256": "d9d6f6da1a7719d8475e1e64ba0882fe0ba3aea610ea04b0f4fc22a266c6c3bf",
+      "psnr": 17.704676384654157,
+      "exact": false,
+      "ssim": 0.5038335960100075,
+      "laplacian": 0.0000723839024296764,
+      "sourceLaplacian": 0.005314720681838001,
+      "sharpnessRatio": 0.013619512061477466
+    },
+    {
+      "time": 3.333333,
+      "renderSha256": "0fb6cbc44988ea2d5ef71a1e061ed21ba5a0d8b83582c8cc9d9c8cd92947630e",
+      "referenceSha256": "868c9cb96eed10b345246285ed24821903d265632c3da78efc2d8e07373e3661",
+      "psnr": 17.269366697614,
+      "exact": false,
+      "ssim": 0.512636986295831,
+      "laplacian": 0.00003513358703846244,
+      "sourceLaplacian": 0.004694263067894859,
+      "sharpnessRatio": 0.007484366881513117
+    },
+    {
+      "time": 4.791667,
+      "renderSha256": "ccd669f7f887b74864eb5b7d981c29a65b9af9e3ea3140c84fd555948a421df0",
+      "referenceSha256": "1ea81590fd7ef13efcb7feccc26ae42d35f547aeba01e6aa68bba37a2553ca32",
+      "psnr": 16.93124799604156,
+      "exact": false,
+      "ssim": 0.5339495920746984,
+      "laplacian": 0.000019754435299190608,
+      "sourceLaplacian": 0.00392910212063356,
+      "sharpnessRatio": 0.005027722541353861
+    },
+    {
+      "time": 6.125,
+      "renderSha256": "141116b4517e46ac6ac8bd43e18daf354ac8943ee233a45f424fc0021c914340",
+      "referenceSha256": "016cc36250725fe097a2067548a25f23cb98f0ce14d80084f48d4454eb06a25c",
+      "psnr": 15.949889261790549,
+      "exact": false,
+      "ssim": 0.5574291525413313,
+      "laplacian": 0.000018637574558217113,
+      "sourceLaplacian": 0.00294275220223669,
+      "sharpnessRatio": 0.006333382248104784
+    },
+    {
+      "time": 7.333333,
+      "renderSha256": "49bac573f8392b5382641866e8485a3669ba3d3478197c803ad1fdd506a44476",
+      "referenceSha256": "a80de1624c362b63e15f654729980d6899cb8a6a9322c1f65bd5f70fc04e77e8",
+      "psnr": 14.512665704993488,
+      "exact": false,
+      "ssim": 0.5969095002628421,
+      "laplacian": 0.000015291638309800598,
+      "sourceLaplacian": 0.0019308967461137492,
+      "sharpnessRatio": 0.007919449002427272
+    },
+    {
+      "time": 8.791667,
+      "renderSha256": "05d8eed97b46098251a1462390a2f0d4638a787296c4dc281a14726683cfb635",
+      "referenceSha256": "c301b42a2ffaf1c0729fb667c45a1b10bab9dcd69a42a511baf956e594d10728",
+      "psnr": 13.422868045742945,
+      "exact": false,
+      "ssim": 0.5963040778523657,
+      "laplacian": 0.000008641516901949463,
+      "sourceLaplacian": 0.002565864088805991,
+      "sharpnessRatio": 0.00336787787772919
+    }
+  ]
+}

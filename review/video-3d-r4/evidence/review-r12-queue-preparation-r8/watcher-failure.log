@@ -1,0 +1,15 @@
+Traceback (most recent call last):
+  File "/workspace/v3d-r4-media/queue-r12-review-r1.py", line 239, in <module>
+    if __name__=='__main__':main()
+                            ^^^^^^
+  File "/workspace/v3d-r4-media/queue-r12-review-r1.py", line 238, in main
+    run(d)
+  File "/workspace/v3d-r4-media/queue-r12-review-r1.py", line 204, in run
+    live=watch.refresh();at=now()
+         ^^^^^^^^^^^^^^^
+  File "/workspace/v3d-r4-media/queue-r12-review-r1.py", line 96, in refresh
+    validate_binding(binding);self.seen.setdefault(identity_key(binding),copy.deepcopy(binding))
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/workspace/v3d-r4-media/queue-r12-review-r1.py", line 48, in validate_binding
+    raise ValueError('Actual PID/startTicks/original-command binding required.')
+ValueError: Actual PID/startTicks/original-command binding required.

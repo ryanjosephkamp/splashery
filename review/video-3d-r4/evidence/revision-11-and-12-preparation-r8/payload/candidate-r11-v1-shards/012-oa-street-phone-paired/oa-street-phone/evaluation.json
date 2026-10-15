@@ -1,0 +1,336 @@
+{
+  "sha256": "f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341",
+  "times": [
+    1.5,
+    3.541667,
+    6.041667,
+    8.541667
+  ],
+  "side": 640,
+  "width": 640,
+  "height": 360,
+  "crop": {
+    "sx": 0,
+    "sw": 854
+  },
+  "trainingTimes": [
+    0.541667,
+    1.166667,
+    1.791667,
+    2.041667,
+    2.666667,
+    3.25,
+    3.875,
+    4.5,
+    5.333333,
+    5.75,
+    6.375,
+    7.208333,
+    8.041667,
+    8.25,
+    8.875,
+    9.708333
+  ],
+  "trainingFrames": [
+    {
+      "time": 0.541667,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 0.521,
+      "presentedTime": 0.541667,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "d4b778d6f41847ccaf6a8a33ce3d319962629818072c03b7b62642ffc17d9fc0"
+    },
+    {
+      "time": 1.166667,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 1.146,
+      "presentedTime": 1.166667,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "e6ca094900c45a2b94c25a8cd150b21a6ce405dd032a6359e3143c9ca29b8e9f"
+    },
+    {
+      "time": 1.791667,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 1.771,
+      "presentedTime": 1.791667,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "ee6922b21ae80582a415a489575878fb06a44bfeca08ef7863fab553a409dcb0"
+    },
+    {
+      "time": 2.041667,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 1.979,
+      "presentedTime": 2.041667,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "cf0998e4d9ebb07c508a3c578620e406d407ec43746da28d6a8ebef099d9e674"
+    },
+    {
+      "time": 2.666667,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 2.604,
+      "presentedTime": 2.666667,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "56a6480ad968e08d1b13ef55c76aa5774529e7243bea6b2ca72c746a94e235d3"
+    },
+    {
+      "time": 3.25,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 3.229,
+      "presentedTime": 3.25,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "159bba70f4c0240d2fbb036414ce568b17ac1b7d1e88c194a8888821568d9bf0"
+    },
+    {
+      "time": 3.875,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 3.854,
+      "presentedTime": 3.875,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "6a2d63b8152bc288cde10cef7ca39effa4ba76e704ce19e9ff9cfc7eed0ea44e"
+    },
+    {
+      "time": 4.5,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 4.479,
+      "presentedTime": 4.5,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "8c08521847301e02a14f03b66f476f2f53ce0fef5ac5bb3b87abae4cbef1687b"
+    },
+    {
+      "time": 5.333333,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 5.313,
+      "presentedTime": 5.333333,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "0fadff0e8147f9f0bc4852c2057dfd7960b7fac44e774319d91adade860a4413"
+    },
+    {
+      "time": 5.75,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 5.729,
+      "presentedTime": 5.75,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "2302580042d2a14b471e07ee138da6437c9c95115703ec5dfa93a96e35630f0a"
+    },
+    {
+      "time": 6.375,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 6.354,
+      "presentedTime": 6.375,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "65cf86b1b4deed171f94738bc8efac12c276ad504b133f38ac2cc8637540b2f4"
+    },
+    {
+      "time": 7.208333,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 7.188,
+      "presentedTime": 7.208333,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "57a90c6207fde1af63f8049cec2f8f5e9a61f3f9c385d1a163052873f79669de"
+    },
+    {
+      "time": 8.041667,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 8.021,
+      "presentedTime": 8.041667,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "4e3b89fc4a1ca1a995673c8a01c81883ddbd6c9392703e102f5859085b1c70a6"
+    },
+    {
+      "time": 8.25,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 8.229,
+      "presentedTime": 8.25,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "89531479151679c1590b6cec3ee0778c619d243df2fc0a9159498210de2babe7"
+    },
+    {
+      "time": 8.875,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 8.854,
+      "presentedTime": 8.875,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "8de80e96970fca83d4211f3d40c418989e33518fced365704ef7292ed5f5197e"
+    },
+    {
+      "time": 9.708333,
+      "width": 480,
+      "height": 270,
+      "requestedTime": 9.688,
+      "presentedTime": 9.708333,
+      "timestampEvidence": "presented-media-time",
+      "sha256": "e789e116cd5943da02aad437ae23f0f3347e6a0690e65c367b585f27976e9f34"
+    }
+  ],
+  "timestampEvidence": "presented-media-time",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": true,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "pixelReceipts": {
+    "method": "Independent presented source frames, identical extraction canvas and JPEG encoder; every training JPEG matched, held-out JPEGs disjoint.",
+    "matchedTraining": [
+      {
+        "sha256": "d4b778d6f41847ccaf6a8a33ce3d319962629818072c03b7b62642ffc17d9fc0",
+        "repeatedSha256": "d4b778d6f41847ccaf6a8a33ce3d319962629818072c03b7b62642ffc17d9fc0",
+        "sourceIndex": 13,
+        "sourceTime": 0.541667
+      },
+      {
+        "sha256": "e6ca094900c45a2b94c25a8cd150b21a6ce405dd032a6359e3143c9ca29b8e9f",
+        "repeatedSha256": "e6ca094900c45a2b94c25a8cd150b21a6ce405dd032a6359e3143c9ca29b8e9f",
+        "sourceIndex": 28,
+        "sourceTime": 1.166667
+      },
+      {
+        "sha256": "ee6922b21ae80582a415a489575878fb06a44bfeca08ef7863fab553a409dcb0",
+        "repeatedSha256": "ee6922b21ae80582a415a489575878fb06a44bfeca08ef7863fab553a409dcb0",
+        "sourceIndex": 43,
+        "sourceTime": 1.791667
+      },
+      {
+        "sha256": "cf0998e4d9ebb07c508a3c578620e406d407ec43746da28d6a8ebef099d9e674",
+        "repeatedSha256": "cf0998e4d9ebb07c508a3c578620e406d407ec43746da28d6a8ebef099d9e674",
+        "sourceIndex": 49,
+        "sourceTime": 2.041667
+      },
+      {
+        "sha256": "56a6480ad968e08d1b13ef55c76aa5774529e7243bea6b2ca72c746a94e235d3",
+        "repeatedSha256": "56a6480ad968e08d1b13ef55c76aa5774529e7243bea6b2ca72c746a94e235d3",
+        "sourceIndex": 64,
+        "sourceTime": 2.666667
+      },
+      {
+        "sha256": "159bba70f4c0240d2fbb036414ce568b17ac1b7d1e88c194a8888821568d9bf0",
+        "repeatedSha256": "159bba70f4c0240d2fbb036414ce568b17ac1b7d1e88c194a8888821568d9bf0",
+        "sourceIndex": 78,
+        "sourceTime": 3.25
+      },
+      {
+        "sha256": "6a2d63b8152bc288cde10cef7ca39effa4ba76e704ce19e9ff9cfc7eed0ea44e",
+        "repeatedSha256": "6a2d63b8152bc288cde10cef7ca39effa4ba76e704ce19e9ff9cfc7eed0ea44e",
+        "sourceIndex": 93,
+        "sourceTime": 3.875
+      },
+      {
+        "sha256": "8c08521847301e02a14f03b66f476f2f53ce0fef5ac5bb3b87abae4cbef1687b",
+        "repeatedSha256": "8c08521847301e02a14f03b66f476f2f53ce0fef5ac5bb3b87abae4cbef1687b",
+        "sourceIndex": 108,
+        "sourceTime": 4.5
+      },
+      {
+        "sha256": "0fadff0e8147f9f0bc4852c2057dfd7960b7fac44e774319d91adade860a4413",
+        "repeatedSha256": "0fadff0e8147f9f0bc4852c2057dfd7960b7fac44e774319d91adade860a4413",
+        "sourceIndex": 128,
+        "sourceTime": 5.333333
+      },
+      {
+        "sha256": "2302580042d2a14b471e07ee138da6437c9c95115703ec5dfa93a96e35630f0a",
+        "repeatedSha256": "2302580042d2a14b471e07ee138da6437c9c95115703ec5dfa93a96e35630f0a",
+        "sourceIndex": 138,
+        "sourceTime": 5.75
+      },
+      {
+        "sha256": "65cf86b1b4deed171f94738bc8efac12c276ad504b133f38ac2cc8637540b2f4",
+        "repeatedSha256": "65cf86b1b4deed171f94738bc8efac12c276ad504b133f38ac2cc8637540b2f4",
+        "sourceIndex": 153,
+        "sourceTime": 6.375
+      },
+      {
+        "sha256": "57a90c6207fde1af63f8049cec2f8f5e9a61f3f9c385d1a163052873f79669de",
+        "repeatedSha256": "57a90c6207fde1af63f8049cec2f8f5e9a61f3f9c385d1a163052873f79669de",
+        "sourceIndex": 173,
+        "sourceTime": 7.208333
+      },
+      {
+        "sha256": "4e3b89fc4a1ca1a995673c8a01c81883ddbd6c9392703e102f5859085b1c70a6",
+        "repeatedSha256": "4e3b89fc4a1ca1a995673c8a01c81883ddbd6c9392703e102f5859085b1c70a6",
+        "sourceIndex": 193,
+        "sourceTime": 8.041667
+      },
+      {
+        "sha256": "89531479151679c1590b6cec3ee0778c619d243df2fc0a9159498210de2babe7",
+        "repeatedSha256": "89531479151679c1590b6cec3ee0778c619d243df2fc0a9159498210de2babe7",
+        "sourceIndex": 198,
+        "sourceTime": 8.25
+      },
+      {
+        "sha256": "8de80e96970fca83d4211f3d40c418989e33518fced365704ef7292ed5f5197e",
+        "repeatedSha256": "8de80e96970fca83d4211f3d40c418989e33518fced365704ef7292ed5f5197e",
+        "sourceIndex": 213,
+        "sourceTime": 8.875
+      },
+      {
+        "sha256": "e789e116cd5943da02aad437ae23f0f3347e6a0690e65c367b585f27976e9f34",
+        "repeatedSha256": "e789e116cd5943da02aad437ae23f0f3347e6a0690e65c367b585f27976e9f34",
+        "sourceIndex": 233,
+        "sourceTime": 9.708333
+      }
+    ],
+    "views": [
+      {
+        "index": 36,
+        "time": 1.5,
+        "mediaTime": 1.5,
+        "width": 480,
+        "height": 270,
+        "sha256": "324c9e472fec2b236266d5f87987d75cfb986f8bcc970211c1117c10b48fcf7d",
+        "repeatedSha256": "324c9e472fec2b236266d5f87987d75cfb986f8bcc970211c1117c10b48fcf7d"
+      },
+      {
+        "index": 85,
+        "time": 3.541667,
+        "mediaTime": 3.541667,
+        "width": 480,
+        "height": 270,
+        "sha256": "64dd6b40e06f59253ccf28bb2e2279cc80ae7845529b45141b0d3904150e2511",
+        "repeatedSha256": "64dd6b40e06f59253ccf28bb2e2279cc80ae7845529b45141b0d3904150e2511"
+      },
+      {
+        "index": 145,
+        "time": 6.041667,
+        "mediaTime": 6.041667,
+        "width": 480,
+        "height": 270,
+        "sha256": "5e6fb3dea5ecc8431c884a3c213fcdfaa169748ac95c7cb3f47118dbd7e688ac",
+        "repeatedSha256": "5e6fb3dea5ecc8431c884a3c213fcdfaa169748ac95c7cb3f47118dbd7e688ac"
+      },
+      {
+        "index": 205,
+        "time": 8.541667,
+        "mediaTime": 8.541667,
+        "width": 480,
+        "height": 270,
+        "sha256": "fc0849bc424e8c49dc1b7bb85b87c7c84aedee903388291a1ad4c8cb60b41b95",
+        "repeatedSha256": "fc0849bc424e8c49dc1b7bb85b87c7c84aedee903388291a1ad4c8cb60b41b95"
+      }
+    ],
+    "decodedFrames": 20
+  },
+  "sourceFrameIndices": [
+    36,
+    85,
+    145,
+    205
+  ],
+  "fps": 24,
+  "protocol": "Exact source frames near frozen main midpoints, every fourth interval; all possible planned training seeks excluded. Every training JPEG is matched to an independent presented source frame using the identical extraction canvas and encoder; test JPEGs must be disjoint. FFmpeg selects those exact source indices. Interpolated production flight poses; no image alignment, sharpening, or mask."
+}

@@ -1,0 +1,14 @@
+{
+  "verified": true,
+  "checkedAt": "2026-10-15T13:35:25.942644+00:00",
+  "filesRecompressedByteExactly": 1804,
+  "originalBytesRecompressed": 317583619,
+  "parameters": {
+    "filename": "",
+    "mtime": 0,
+    "compresslevel": 9,
+    "zlibVersion": "1.3.2",
+    "zlibRuntimeVersion": "1.3.2"
+  },
+  "noOriginalOrPayloadBytesChanged": true
+}

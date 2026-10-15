@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-15T12:29:32.852633+00:00",
+  "runtimeSourceCommit": "636a7605fd15f3aa1e41d43cc6b5ff35432750b6",
+  "plannedTests": 258,
+  "completedPassingCases": 238,
+  "failedCasesBeforeInterruption": 0,
+  "reason": "The managed execution tools reconnected around 12:26 UTC; the live execution session and its Playwright process were no longer available. The last log activity was12:25:10, inside tests/v3d.spec.mjs. This partial run is not a completed pass.",
+  "partialLogSha256": "47b868f8388fad23c40a3c4b58ef73166fc126421c0c8001496c6670ffd73875",
+  "repeatScope": "Rerun the entire affected tests/v3d.spec.mjs with all original assertions. Earlier partial results stay recorded."
+}
