@@ -4,6 +4,7 @@
 // first tap sounds on time.
 
 import { test, expect } from "@playwright/test";
+import { pausePlayingTune } from "./helpers/playing-tune.mjs";
 
 const APP = "/?renderer=webgl2&profile=weak";
 
@@ -29,15 +30,25 @@ const audio = (page) =>
 // the context can already be silent while the runner waits for its reply.
 async function observeAudio(page) {
   await page.evaluate(() => {
-    const ctx = window.__splashery.app.sound.ctx;
     window.__sndcTransitions = [];
+    let observed = null;
+    const observe = (ctx) => {
+      if (ctx === observed) return;
+      observed = ctx;
+      ctx.addEventListener("statechange", () => {
+        window.__sndcTransitions.push({ state: ctx.state, t: ctx.currentTime, from: window.__sndcClick, wall: performance.now(), fromWall: window.__sndcClickWall }); // prettier-ignore
+      });
+    };
     document.querySelector("#toy-action").addEventListener("click", () => {
+      const ctx = window.__splashery.app.sound.ctx;
+      if (!ctx) return;
+      observe(ctx);
+      // A transition belongs to this click, including when observation is
+      // armed before Play creates the context and the browser pauses it.
+      window.__sndcTransitions = [];
       window.__sndcClick = ctx.currentTime;
       window.__sndcClickWall = performance.now();
     }, { capture: true }); // prettier-ignore
-    ctx.addEventListener("statechange", () => {
-      window.__sndcTransitions.push({ state: ctx.state, t: ctx.currentTime, from: window.__sndcClick, wall: performance.now(), fromWall: window.__sndcClickWall }); // prettier-ignore
-    });
   });
 }
 
@@ -62,20 +73,14 @@ test("a paused effect's sound stops at once (ringing notes too) and resumes from
   await open(page);
   await pick(page, "toy-piano");
   const start = await audio(page);
-  await page.click("#toy-action");
-  await page.waitForFunction((sched) => {
-    const { player, app } = window.__splashery;
-    const s = app.sound;
-    const h = s.held.toy;
-    // Scheduling looks ahead; let the first note actually ring before pausing.
-    return player.motion.effectState() === "running" && player.motion.unseen === null && s.ctx?.state === "running" && s.scheduled > sched && s.ctx.currentTime > h.start + h.events[0].t + 0.1; // prettier-ignore
-  }, start.sched);
-  const playing = await audio(page);
-  expect(playing.state).toBe("running");
   await observeAudio(page);
+  // Pause a real ringing note with future notes remaining, before a slow
+  // driver's second click can consume the whole tune.
+  const phase = await pausePlayingTune(page, { ringing: true });
+  expect(phase.audio.state).toBe("running");
+  expect(phase.audio.sched).toBeGreaterThan(start.sched);
   // Pause: the whole context stops within a frame or two, so notes already
   // sounding stop with it, and its clock (every sound's schedule) holds.
-  await page.click("#toy-action");
   const stopped = await audioTransition(page, "suspended");
   expect(stopped.t - stopped.from).toBeLessThan(0.1);
   const paused = await audio(page);
@@ -89,6 +94,7 @@ test("a paused effect's sound stops at once (ringing notes too) and resumes from
   const resumed = await audioTransition(page, "running");
   expectPromptResume(resumed);
   expect(resumed.from).toBe(still.t);
+  expect(await page.evaluate(() => window.__splashery.app.sound.held.toy === window.__tuneAtPause)).toBe(true); // prettier-ignore
   await page.waitForFunction(({ t, sched }) => {
     const s = window.__splashery.app.sound;
     return s.ctx.currentTime > t + 0.3 && s.scheduled > sched;

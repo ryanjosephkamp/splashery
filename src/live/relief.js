@@ -1393,18 +1393,21 @@ export function sharpen(px, w, h, amount, tmp, limit = 28, core = CORE) {
       const b = (y * w + x) * 3;
       const c = (y1 * w + x) * 3;
       const q = (y * w + x) * 4;
-      for (let ch = 0; ch < 3; ch++) {
-        const m = (tmp[a + ch] + tmp[b + ch] + tmp[c + ch]) / 3;
-        const o = q + ch;
-        // (Live r7 polish: the push is held to 28 levels, so a strong edge
-        // (an eye's rim) gets no halo while fine detail still sharpens; and a
-        // difference within the camera's leftover noise, a few levels, gets
-        // little of it (coring), so the picture is no less steady.)
-        const d = px[o] - m;
-        const ad = d < 0 ? -d : d;
-        const push = amount * (ad < core ? (d * ad) / core : d);
-        px[o] = px[o] + (push > limit ? limit : push < -limit ? -limit : push);
-      }
+      // These are always three channels. Keep the same operations and
+      // write order, without an inner channel loop on every camera cell.
+      // The push stays limited and cored, so edges keep their old pixels.
+      let d = px[q] - (tmp[a] + tmp[b] + tmp[c]) / 3;
+      let ad = d < 0 ? -d : d;
+      let push = amount * (ad < core ? (d * ad) / core : d);
+      px[q] = px[q] + (push > limit ? limit : push < -limit ? -limit : push);
+      d = px[q + 1] - (tmp[a + 1] + tmp[b + 1] + tmp[c + 1]) / 3;
+      ad = d < 0 ? -d : d;
+      push = amount * (ad < core ? (d * ad) / core : d);
+      px[q + 1] = px[q + 1] + (push > limit ? limit : push < -limit ? -limit : push);
+      d = px[q + 2] - (tmp[a + 2] + tmp[b + 2] + tmp[c + 2]) / 3;
+      ad = d < 0 ? -d : d;
+      push = amount * (ad < core ? (d * ad) / core : d);
+      px[q + 2] = px[q + 2] + (push > limit ? limit : push < -limit ? -limit : push);
     }
   }
 }

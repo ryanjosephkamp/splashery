@@ -1,9 +1,9 @@
 # Actions-only failures: task 86
 
 Made by Ryan with Codex (GPT-6), October 15, 2026. Branch: `codex/actions-only-failures`. Test and
-measurement changes, an exact-output optimization for an empty camera motion mask, and an exact
-PDF-search page selection. Book layouts, turns, rendering, and sandbox settings stay the same. The
-draft PR's Verification section records the final Actions run.
+measurement changes, exact-output camera draw shortcuts, and an exact PDF-search page selection.
+Book layouts, turns, rendering, and sandbox settings stay the same. The draft PR's Verification
+section records the final Actions run.
 
 ## Evidence and causes
 
@@ -24,18 +24,18 @@ navigation. Its missing highlight persists for the full assertion timeout. The f
 exact page-label failure, exposing that the earlier Copy-feedback change alone did not fix this
 case. Only original shard results count; the existing CI diagnostic runs do not erase them.
 
-| Original test                       | Cause and change                                                                                                                                                                                                                                                                                                                                                                                                                                     |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `hh4-space:147`, `hh4-tiny:206`     | These tests manually step physics, but automatic renderer updates also ran between protocol calls. The joint and its drive were sampled at different simulation times. Stop automatic player updates after setup; retain every manual step and numeric assertion.                                                                                                                                                                                    |
-| `scr2-engine:10`                    | The GIF can advance between releasing its hold and asking for its first resumed frame. Give this API test exclusive control of the real player's clock at 60 Hz. Keep the frame-count, hold, resume-position, and playing-state assertions.                                                                                                                                                                                                          |
-| `ui2:361`                           | After the first submission, the options already start with `pad:`. Waiting for that prefix does not wait for the next rebuild; later strokes can land on the pad that is about to be replaced. Wait for the old pad to disconnect and the build to finish before reading or drawing again.                                                                                                                                                           |
-| `ui3:50`, `ui3:129`                 | The actual Actions failure reads the unchanged scheduled count (42) after Resume; fixed sleeps do not establish another scheduling pass. Driver latency also permits the effect to decay before the test reads its initial or resumed value. Capture the actual action event, retaining the `>0.95` and `<0.02` limits. Wait for a drawn effect and scheduled audio before changing phases.                                                          |
-| `sndc-engine:27`, `sndc-engine:142` | A protocol polling deadline is not the audio's silence deadline; fixed sleeps also do not establish rendered or scheduled progress. Observe native context transitions and the audio clock at the click. Keep the 100 ms freeze bound, the 500 ms native resume bound, unchanged paused time, and resumed scheduling checks. Wait for an actually ringing note before pausing the piano.                                                             |
-| `ops-text:41`                       | The actual Actions trace selects page 45, then the book replaces that left-page selection with page 46 of the same spread. Mark an explicit search selection and retain its exact page; ordinary spread navigation is unchanged. Wait for the actual book drive before the original text, highlight, status, and API assertions. Also observe transient Copy feedback in the browser, retaining clipboard and reset checks.                          |
-| `spg:138`                           | The form navigates the live iframe three times. The old test neither awaited those players nor verified that a toy actually started before replacing its GPU context. Wait for each URL and the real strawberry player before the next navigation. This strengthens the live-example check; Actions must verify the teardown result.                                                                                                                 |
-| `cdx-mir:329`                       | The 10% draw-cost bound compared separate browser runs under different load. Replay the same recorded frames and real worker replies into independent before/after filters in one browser, alternate timing order, and finish pending GPU work explicitly. Keep the same 1.1 ratio and every image/depth assertion. Version the benchmark's resume cache.                                                                                            |
-| `live4:149`                         | Node polling can miss a drawn mode, and a transport delay after Start over can move the audio beyond its initial-position check. Capture the actual settled modes per player frame and pause at that observed phase. Read seek/start results in the same browser call. Keep both settledness thresholds and all transport/privacy checks.                                                                                                            |
-| `psv3:146`                          | The old loop window started before the first drive and counted media startup/seeking stalls as playback. Under load it observed only one video wrap, or aliased whole short GIF loops. Sample after each player update, measure 2.7 actual playback periods, and use a phone viewport. Keep recording stopped display frames after startup, retain the two-wrap, first-frame, and last-half-second limits, and also assert the native playback rate. |
+| Original test                       | Cause and change                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `hh4-space:147`, `hh4-tiny:206`     | These tests manually step physics, but automatic renderer updates also ran between protocol calls. The joint and its drive were sampled at different simulation times. Stop automatic player updates after setup; retain every manual step and numeric assertion.                                                                                                                                                                                                                                                                                                      |
+| `scr2-engine:10`                    | The GIF can advance between releasing its hold and asking for its first resumed frame. Give this API test exclusive control of the real player's clock at 60 Hz. Keep the frame-count, hold, resume-position, and playing-state assertions.                                                                                                                                                                                                                                                                                                                            |
+| `ui2:361`                           | After the first submission, the options already start with `pad:`. Waiting for that prefix does not wait for the next rebuild; later strokes can land on the pad that is about to be replaced. Wait for the old pad to disconnect and the build to finish before reading or drawing again.                                                                                                                                                                                                                                                                             |
+| `ui3:50`, `ui3:129`                 | The original Actions reports exhaust all 42 notes before Pause: the tune ends at 4.21 audio seconds, while the second driver click takes about five seconds. Pause through the real button in the browser's drawn playing phase, with future notes explicitly required, and retain the same held tune after Resume. Driver latency also permits the effect to decay before the test reads its initial or resumed value. Capture the actual action event, retaining the `>0.95` and `<0.02` limits. Wait for a drawn effect and scheduled audio before changing phases. |
+| `sndc-engine:27`, `sndc-engine:142` | A protocol polling deadline is not the audio's silence deadline; fixed sleeps also do not establish rendered or scheduled progress. Observe native context transitions and the audio clock at the click. Keep the 100 ms freeze bound, the 500 ms native resume bound, unchanged paused time, and resumed scheduling checks. Pause an actually ringing note with future notes remaining, in the same browser callback, before driver actionability can consume the tune.                                                                                               |
+| `ops-text:41`                       | The actual Actions trace selects page 45, then the book replaces that left-page selection with page 46 of the same spread. Mark an explicit search selection and retain its exact page; ordinary spread navigation is unchanged. Wait for the actual book drive before the original text, highlight, status, and API assertions. Also observe transient Copy feedback in the browser, retaining clipboard and reset checks.                                                                                                                                            |
+| `spg:138`                           | The form navigates the live iframe three times. The old test neither awaited those players nor verified that a toy actually started before replacing its GPU context. Wait for each URL and the real strawberry player before the next navigation. This strengthens the live-example check; Actions must verify the teardown result.                                                                                                                                                                                                                                   |
+| `cdx-mir:329`                       | The 10% draw-cost bound compared separate browser runs under different load. Replay the same recorded frames and real worker replies into independent before/after filters in one browser, alternate timing order, and finish pending GPU work explicitly. Keep the same 1.1 ratio and every image/depth assertion. Version the benchmark's resume cache.                                                                                                                                                                                                              |
+| `live4:149`                         | Node polling can miss a drawn mode, and a transport delay after Start over can move the audio beyond its initial-position check. Capture the actual settled modes per player frame and pause at that observed phase. Read seek/start results in the same browser call. Keep both settledness thresholds and all transport/privacy checks.                                                                                                                                                                                                                              |
+| `psv3:146`                          | The old loop window started before the first drive and counted media startup/seeking stalls as playback. Under load it observed only one video wrap, or aliased whole short GIF loops. Sample after each player update, measure 2.7 actual playback periods, and use a phone viewport. Keep recording stopped display frames after startup, retain the two-wrap, first-frame, and last-half-second limits, and also assert the native playback rate.                                                                                                                   |
 
 ## Executed local evidence
 
@@ -105,8 +105,32 @@ of real-time speed.
   21.600/20.233 ms (1.0675). The known circular-QR case remains. This batch preceded the
   deterministic search regression and its source fix; the subsequent book/search results are
   recorded in the draft PR. Complete ui3 and sndc-engine files passed all 14 tests; every requested
-  test file was exercised on the final production source. The original failed reports remain in the
+  test file was exercised on that production revision. The original failed reports remain in the
   ignored cache.
+
+- The complete book, book-link/pop-out, and PDF-text files pass all 49 local tests without skips.
+  Actions also passes all 36 book and four PDF-text checks. The changed book file's two measured
+  sizes are regenerated with `tools/shw-facts.mjs`; its strict freshness check passes.
+- The next [Actions run](https://github.com/ryanjosephkamp/splashery/actions/runs/38677203500)
+  passes all 11 camera checks, but exposes the remaining piano precondition in both ui3 and
+  sndc-engine. At ui3's first observation, 12 notes are scheduled; its Pause click takes 4.89
+  seconds and arrives with all 42 scheduled. The held melody's last event is at 4.21 audio seconds.
+  The visual effect is still running because frame deltas are clamped under load. No future event
+  exists to satisfy the unchanged post-resume scheduling check. Arm a browser observer before the
+  first trusted Play click, then use the actual Pause button once a frame is drawn and notes remain.
+  Keep Resume trusted, require the same held tune, and retain every original bound.
+- A deliberate six-second driver delay with the same slow-frame load reproduces the old failure: all
+  42 notes are queued before Pause, and the strict post-resume predicate fails. The new helper
+  pauses at note 3 of 42, holds through the delays, and resumes to note 12 on the same tune. The
+  complete revised ui3 and sndc-engine files pass all 14 tests, with zero skips.
+- The final local source batch still rejects a 19.100 ms camera draw against an 18.471 ms limit.
+  That original failed result remains recorded. Profiling attributes about 40% of draw work to
+  sharpening. Process its three fixed RGB channels directly, retaining each arithmetic operation and
+  write order. Recorded still and low-light sequences produce zero differing color pixels,
+  encoded-depth bytes, or filter-state values. Diagnostic draw medians improve from 26.792 to 23.900
+  ms for still frames, and from 36.958 to 35.200 ms for low light under concurrent load. These
+  diagnostic timings do not replace the unchanged 1.1 paired check; the final result is in the draft
+  PR.
 
 Temporary fault-injection probes and their logs stay in the ignored local cache. They are not
 shipped or added to the suite. No retry, skip, `fixme`, threshold increase, or edit to
@@ -128,8 +152,8 @@ entries stay in place. Newly reported failures that were never known need no rem
 Status: implemented for review. No asset, license, book layout, turn behavior, or effect changes.
 The PDF search keeps the exact selected page and its text after the book updates. Reused: the
 existing application, renderer, clocks, fixtures, depth worker, and PDF printer. New: test
-observation/control, matched benchmark timing, an empty-mask shortcut, exact search selection, the
-artifact workflow, and these instructions. No performance claim about a real phone is made. The
-paired cost measurement is software-browser CPU filtering, not a device frame-rate claim. Final
-check commands, counts, unresolved failures, and the Actions link are in the draft PR body. Rule
-check: none.
+observation/control, matched benchmark timing, an empty-mask shortcut, exact RGB arithmetic, exact
+search selection, the artifact workflow, and these instructions. No performance claim about a real
+phone is made. The paired cost measurement is software-browser CPU filtering, not a device
+frame-rate claim. Final check commands, counts, unresolved failures, and the Actions link are in the
+draft PR body. Rule check: none.

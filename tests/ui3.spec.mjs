@@ -5,6 +5,7 @@
 import { test, expect } from "@playwright/test";
 import { encodeSceneHash } from "../src/codec.js";
 import { TOYS, holdsStill } from "../src/toys.js";
+import { pausePlayingTune } from "./helpers/playing-tune.mjs";
 
 const DESK = { viewport: { width: 1440, height: 900 } };
 const PHONE = { viewport: { width: 390, height: 844 }, hasTouch: true, isMobile: true };
@@ -80,19 +81,13 @@ test.describe("pause and resume", () => {
     await pick(page, "toy-piano");
     const start = await look(page);
     expect(start.state).toBeNull();
-    // First tap: the tune plays (a click, so the page may make sound).
-    await clickAction(page);
-    // "running" is set before the first frame; an unseen effect restarts
-    // on the next tap. Wait until it has drawn and its audio has scheduled.
-    await page.waitForFunction((sched) => {
-      const { player, app } = window.__splashery;
-      return player.motion.effectState() === "running" && player.motion.unseen === null && app.sound.ctx?.state === "running" && app.sound.scheduled > sched; // prettier-ignore
-    }, start.sched);
-    const playing = await look(page);
+    // First tap is a real gesture. Pause in the drawn playing phase, while
+    // the tune has notes left to schedule; a slow second driver click can
+    // otherwise arrive after every note, making the resume check impossible.
+    const { playing, paused } = await pausePlayingTune(page);
     expect(playing.sched).toBeGreaterThan(start.sched);
     expect(playing.label).toBe("Pause");
     // Second tap: it pauses, and no new sound is scheduled while it waits.
-    const paused = await clickAction(page);
     expect(paused.state).toBe("paused");
     await page.waitForTimeout(1500);
     const still = await look(page);
@@ -105,6 +100,7 @@ test.describe("pause and resume", () => {
     expect(resumed.state).toBe("running");
     expect(resumed.n).toBe(playing.n);
     expect(Math.abs(resumed.v - paused.v)).toBeLessThan(0.02);
+    expect(await page.evaluate(() => window.__splashery.app.sound.held.toy === window.__tuneAtPause)).toBe(true); // prettier-ignore
     await page.waitForFunction(
       ({ v, sched }) => {
         const { player, app } = window.__splashery;
