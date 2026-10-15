@@ -279,7 +279,9 @@ export async function measureProfile(
                 first3dMs: performance.now() - began,
                 source: builtin
                   ? "sample selection -> completed new Sharp frame"
-                  : "file-input change -> completed new custom Sharp frame",
+                  : supplied
+                    ? "supplied-depth construction (decode excluded) -> completed new custom Sharp frame"
+                    : "file-input change -> completed new custom Sharp frame",
                 backgroundPending: !!photo.backgroundPending,
               };
               pl.setPaused(true);

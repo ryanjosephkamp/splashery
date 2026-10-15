@@ -64,7 +64,7 @@ export function processMemory(pid) {
       const rows = records.filter(([child]) => selected.has(child));
       return {
         pssBytes: null,
-        rssBytes: rows.reduce((a, r) => a + r[2] * 1024, 0),
+        rssBytes: rows.length ? rows.reduce((a, r) => a + r[2] * 1024, 0) : null,
         processes: rows.length,
         unavailable: [],
         method: "macOS Chromium process-tree RSS; shared pages counted repeatedly; PSS unavailable",
