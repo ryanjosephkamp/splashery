@@ -206,7 +206,10 @@ test.describe("toy pages (browser)", () => {
     browser,
   }) => {
     expect(SAMPLE.length).toBeGreaterThanOrEqual(15);
-    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true });
+    // Fix12: no service worker here. Once the site's worker controls a page (from the second page
+    // on), its requests bypass page.route, so every "quiet" player loaded the whole app and the
+    // sample ran past the test's time limit. site.spec.mjs tests the worker.
+    const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, hasTouch: true, serviceWorkers: "block" }); // prettier-ignore
     const page = await ctx.newPage();
     const problems = watchConsole(page);
     await quietPlayers(page);
