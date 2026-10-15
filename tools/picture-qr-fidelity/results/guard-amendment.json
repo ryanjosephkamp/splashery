@@ -1,0 +1,6 @@
+{
+  "file": "src/qr-craft/fast-blur.js",
+  "beforeSha256": "1aae0214e24d7fe66102bd66e0207e7efd837c9009630574c9a248c646c6cdbc",
+  "afterSha256": "dc14daa8bba3f4ed1ee63d04360d6b846bc6af5eb7d93e48c421af4a492a8b0f",
+  "reason": "Uint8Array assignments truncate while WASM rounds ties-even. Exclude non-clamped inputs. All corpus camera frames are Uint8ClampedArray from ImageData, rasterize, resizeFrame, and preparedFrames, so their arithmetic, selected codes, and rendered-pixel qualification are unchanged. The Gaussian fallback test compares all three buffer types to forced JavaScript."
+}

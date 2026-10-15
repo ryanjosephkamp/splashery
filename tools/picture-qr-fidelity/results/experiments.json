@@ -1,0 +1,16 @@
+[
+  {
+    "file": "initial-prototype.jsonl.gz",
+    "uncompressedSha256": "aa7888093723a6fbd166e49bf319b5b8215c84ded3c293a4e84bfdb587032eb1",
+    "rows": 384,
+    "historicalSourceRevision": null,
+    "notes": "Exploratory source-pixel ablation of the initial prototype, before the retained tile and weighted projection implementation. The exact historical working tree was not archived. These rows do not qualify final pixels or speed."
+  },
+  {
+    "file": "weighted-model-forecast.jsonl.gz",
+    "uncompressedSha256": "8d1fa7abaa57746e0e55a74a54ca2d2de79e5609e7591ac668d8042eff205c7c",
+    "rows": 1040,
+    "historicalSourceRevision": null,
+    "notes": "Source model forecast at the earlier 0.14 weighted margin. Not an actual stage capture and not the final 0.16 candidate."
+  }
+]

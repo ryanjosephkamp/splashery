@@ -335,7 +335,12 @@ These are `devDependencies` used to prepare assets and run tests; nothing from t
   LAZ test files (`tools/vwr-fixtures.mjs`). Nothing of them is served.
 - `zxing-wasm` 3.1.4 (MIT), https://github.com/Sec-ant/zxing-wasm, zxing-cpp (Apache-2.0) compiled
   to WebAssembly: the third QR reader and a Micro QR and rMQR writer in the study of splat QR codes
-  (`tools/qrs-study.mjs`, `tests/qrs-study.spec.mjs`, lane QR lab r2). Nothing of it is served.
+  (`tools/qrs-study.mjs`, `tests/qrs-study.spec.mjs`, lane QR lab r2). Picture QR's optional Most
+  detail setting also loads its read-only build locally for independent scan validation. The
+  unchanged ES modules, 953,527-byte reader binary, MIT license, and Apache-2.0 licenses are under
+  `src/qr-craft/vendor/zxing/`. The reader contains no writer or Zint build. Its pinned zxing-cpp
+  source is
+  [commit 0b2d9a8](https://github.com/zxing-cpp/zxing-cpp/tree/0b2d9a8fc81f420f369928c24331091ff0525976).
 - `bwip-js` 4.11.4 (MIT), https://github.com/metafloor/bwip-js, with BWIPP (MIT): an independent
   Micro QR and rMQR writer in the same study. Nothing of it is served.
 - `three` 0.186.1 (MIT), https://github.com/mrdoob/three.js: its FBX loader and glTF exporter turn
@@ -471,3 +476,13 @@ These tool versions are retained with the public review evidence.
   https://ffmpeg.org/legal.html: H.264 video encoding with libx264 and checks of frame counts,
   duration, and dimensions. No executable is served. These are build tools allowed by Rules v1; the
   original rendered output is CC0.
+
+## Wasmtime Python 38.0.0 (Picture QR build tool)
+
+- **Apache-2.0 WITH LLVM-exception**.
+  [Source and license](https://github.com/bytecodealliance/wasmtime-py/blob/main/LICENSE);
+  [the pinned release metadata](https://pypi.org/pypi/wasmtime/38.0.0/json).
+- Used only by `tools/picture-qr-fidelity/build-blur.py` to assemble the project's own MIT-licensed
+  Gaussian and raster kernels from `src/qr-craft/{blur,raster,raster-simd}.wat`. Wasmtime is not
+  loaded or shipped in the browser. The 758-, 669-, and 656-byte results have no imports or
+  third-party runtime code.

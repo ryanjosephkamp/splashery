@@ -1,0 +1,14 @@
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
+import {shapeHalf,circleSplats,appendSplats,CIRCLE_QUIET} from '../../src/qr/circle.js';
+import {makeWoven,FG,BG,QUIET,gray} from '../../src/qr-craft/picture.js';
+import {loadBrowserSource} from '../../tools/picture-qr-fidelity/sources.mjs';
+import {LINKS} from '../../tools/cdx-circle-study.mjs';
+function extract(file){const s=fs.readFileSync(file,'utf8'),patch=s.slice(s.indexOf('function patch('),s.indexOf('// ======================================================================================',s.indexOf('function patch('))),color=s.slice(s.indexOf('function circleColor('),s.indexOf('function pictureSplats(')),splats=s.slice(s.indexOf('function pictureSplats('),s.indexOf('const optionsKey ='));return new Function('shapeHalf','circleSplats','appendSplats','CIRCLE_QUIET','FG','BG','QUIET','gray','detailSettings','const LEAD=.004;'+patch+color+splats+';return pictureSplats;')(shapeHalf,circleSplats,appendSplats,CIRCLE_QUIET,FG,BG,QUIET,gray,()=>({texture:'tiles'}));}
+const before=extract('.cache/picture-qr-fidelity/pre-merge-pack.js'),after=extract('src/packs/qr-craft.js'),main=extract('.cache/picture-qr-fidelity/main/src/packs/qr-craft.js');
+const rows=[];
+for(const id of ['ai-farm','cdx-qr-ai-fern','met-244130'])for(const link of [0,6,9])for(const shape of ['square','circle'])for(const fidelity of ['standard','detail']){
+ const pic=loadBrowserSource(id),w=makeWoven(pic,{text:LINKS[link],level:'H',size:'more',center:'small',style:'color',contrast:.5,shape,fidelity,texture:'tiles',preferContinuous:true,channel:'weighted'});
+ const hash=fn=>{const t=performance.now(),out=fn(w,120000,shape,pic);return{sha:createHash('sha256').update(JSON.stringify(out)).digest('hex'),splats:out.splats.length,ms:performance.now()-t};};
+ const a=hash(before),b=hash(after),row={id,link,shape,fidelity,before:a,after:b,equal:a.sha===b.sha};rows.push(row);fs.writeFileSync('.cache/picture-qr-fidelity/geometry-merged-final.json',JSON.stringify(rows,null,2));console.log(id,link,shape,fidelity,row.equal,Math.round(a.ms),Math.round(b.ms));if(!row.equal)throw Error('Geometry changed');
+}

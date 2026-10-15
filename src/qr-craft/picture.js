@@ -14,6 +14,17 @@
 // qr-craft.js) and the tests (tests/qrc-picture.spec.mjs, in Node with jsQR)
 // use the very same layout.
 
+import { weaveDetail, finishDetail, projectHalftone } from "./detail.js";
+import { fitPadding } from "../qr/picture-padding.js";
+import { fitPictureErrors } from "../qr/picture-errors.js";
+import { rotateCode, inversePicture } from "./orientation.js";
+import { checkDetailViews } from "./views.js";
+import { fidelityScorer } from "./fidelity.js";
+import { cropCirclePicture } from "./frame.js";
+import { shapeHalf } from "../qr/circle.js";
+import { fastBlur } from "./fast-blur.js";
+import { fastRaster } from "./fast-raster.js";
+
 import { encodeQR, ROLE, QUIET } from "../qr/encode.js";
 
 export { QUIET };
@@ -36,6 +47,7 @@ export const STYLES = [
 // Gray as QR readers see it (Rec. 709 weights on the stored values, as jsQR
 // and ZXing do).
 export const gray = (c) => 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+const grayAt = (c, q) => 0.2126 * c[q] + 0.7152 * c[q + 1] + 0.0722 * c[q + 2];
 const clamp01 = (x) => Math.min(1, Math.max(0, x));
 // WCAG relative luminance and contrast ratio.
 export function luminance(c) {
@@ -178,17 +190,25 @@ export const marginAt = (a) => (a <= 0 ? -1 : a <= 0.6 ? 0.2 * a : 0.12 + 0.38 *
 // The mask whose modules agree best with the picture: the least, over the
 // data modules, of how far the picture's gray is from each module's color.
 export function fitMask(text, level, pic, { min = 1 } = {}) {
-  let best = null;
+  let best = null,
+    sampled = null,
+    stencil = null,
+    sampledSize = 0;
   for (let mask = 0; mask < 8; mask++) {
     const code = encodeQR(text, level, { boost: false, mask, min });
     if (!pic) return code;
     const N = code.size;
-    const src = squareSample(pic, N);
-    const plain = plainModules(code);
+    if (sampledSize !== N) {
+      sampled = squareSample(pic, N);
+      stencil = plainModules(code);
+      sampledSize = N;
+    }
+    const src = sampled,
+      plain = stencil;
     let cost = 0;
     for (let i = 0; i < N * N; i++) {
       if (plain[i]) continue;
-      const g = gray([src[i * 3], src[i * 3 + 1], src[i * 3 + 2]]);
+      const g = grayAt(src, i * 3);
       cost += Math.abs(g - (code.dark[i] ? 0 : 1));
     }
     if (!best || cost < best.cost) best = { code, cost };
@@ -241,11 +261,17 @@ export function weave(code, pic, o = {}) {
     const p = [src[j * 3], src[j * 3 + 1], src[j * 3 + 2]];
     return shiftTo(p, ink ? FORCED_DARK : FORCED_LIGHT);
   };
-  if (src) for (let i = 0; i < G * G; i++) target[i] = gray([src[i * 3], src[i * 3 + 1], src[i * 3 + 2]]); // prettier-ignore
+  if (src) for (let i = 0; i < G * G; i++) target[i] = grayAt(src,i*3); // prettier-ignore
   const dither = () => {
     const err = new Float32Array(G * G);
     for (let y = 0; y < G; y++) {
       const dir = y % 2 ? -1 : 1;
+      const next = [
+        [dir, 0, 7],
+        [-dir, 1, 3],
+        [0, 1, 5],
+        [dir, 1, 1],
+      ];
       for (let i = 0; i < G; i++) {
         const x = dir > 0 ? i : G - 1 - i;
         const j = y * G + x;
@@ -268,7 +294,6 @@ export function weave(code, pic, o = {}) {
         // The error goes on to the free cells not yet visited (Floyd–
         // Steinberg's weights, shared among those that are free).
         const e = want - gray(col);
-        const next = [[dir, 0, 7], [-dir, 1, 3], [0, 1, 5], [dir, 1, 1]]; // prettier-ignore
         let wsum = 0;
         for (const [dx, dy, w] of next) {
           const X = x + dx;
@@ -301,7 +326,7 @@ export function weave(code, pic, o = {}) {
     for (let y = 0; y < G; y++)
       for (let x = 0; x < G; x++) {
         const j = y * G + x;
-        mg[Math.floor(y / k) * N + Math.floor(x / k)] += gray([cells[j * 3], cells[j * 3 + 1], cells[j * 3 + 2]]) / (k * k); // prettier-ignore
+        mg[Math.floor(y / k) * N + Math.floor(x / k)] += grayAt(cells,j*3) / (k * k); // prettier-ignore
       }
     const t = new Float32Array(N * N);
     for (let r = 0; r < N; r++)
@@ -339,7 +364,7 @@ export function weave(code, pic, o = {}) {
         for (let v = 0; v < k; v++)
           for (let u = 0; u < k; u++) {
             const j = (r * k + v) * G + col * k + u;
-            const g = gray([cells[j * 3], cells[j * 3 + 1], cells[j * 3 + 2]]);
+            const g = grayAt(cells, j * 3);
             seen += W[v * k + u] * g;
             if (!forced[j]) list.push({ j, w: W[v * k + u], g, off: Math.abs(target[j] - (dark ? 0 : 1)) }); // prettier-ignore
           }
@@ -381,6 +406,10 @@ export function measure(w) {
     [0, 0, 0, 0],
     [0, 0, 0, 0],
   ];
+  const centerSum = [
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+  ];
   let worstDark = 0;
   let worstLight = 1;
   for (let y = 0; y < G; y++)
@@ -394,6 +423,13 @@ export function measure(w) {
       s[1] += col[1];
       s[2] += col[2];
       s[3]++;
+      if (w.fidelity === "detail" && w.center[y * G + x]) {
+        const cs = centerSum[d];
+        cs[0] += col[0];
+        cs[1] += col[1];
+        cs[2] += col[2];
+        cs[3]++;
+      }
       if (!w.plain[m] && !w.center[y * G + x]) {
         const g = gray(col);
         if (d) worstDark = Math.max(worstDark, g);
@@ -405,7 +441,7 @@ export function measure(w) {
   const ml = mean(sum[0]);
   return {
     module: ratio(md, ml), // whole modules, averaged
-    center: ratio(FG, BG), // the center dots
+    center: w.fidelity === "detail" ? ratio(mean(centerSum[1]), mean(centerSum[0])) : ratio(FG, BG), // the center dots
     darkGray: gray(md),
     lightGray: gray(ml),
     // The gray gap between the lightest dark cell and the darkest light one
@@ -418,66 +454,126 @@ export function measure(w) {
 // with its quiet zone, each pixel the average of 4 × 4 samples (as a camera
 // or a downscale averages it). Returns { data: Uint8ClampedArray, width,
 // height }.
-export function rasterize(w, ppm, { quiet = QUIET, samples = 4, blur = 0 } = {}) {
+export function rasterize(
+  w,
+  ppm,
+  { quiet = QUIET, samples = 4, blur = 0, accelerated = true } = {},
+) {
   const N = w.code.size;
   const total = N + 2 * quiet;
   const W = Math.max(1, Math.round(total * ppm));
   const data = new Uint8ClampedArray(W * W * 4);
   const s = samples;
-  for (let py = 0; py < W; py++)
-    for (let px = 0; px < W; px++) {
-      let r = 0;
-      let g = 0;
-      let b = 0;
-      for (let v = 0; v < s; v++)
-        for (let u = 0; u < s; u++) {
-          // In modules, from the code's top-left corner.
-          const mx = ((px + (u + 0.5) / s) / W) * total - quiet;
-          const my = ((py + (v + 0.5) / s) / W) * total - quiet;
-          if (mx < 0 || my < 0 || mx >= N || my >= N) {
-            r += BG[0];
-            g += BG[1];
-            b += BG[2];
-            continue;
-          }
-          const q = (Math.floor(my * w.k) * w.G + Math.floor(mx * w.k)) * 3;
-          r += w.cells[q];
-          g += w.cells[q + 1];
-          b += w.cells[q + 2];
-        }
-      const o = (py * W + px) * 4;
-      data[o] = (255 * r) / (s * s);
-      data[o + 1] = (255 * g) / (s * s);
-      data[o + 2] = (255 * b) / (s * s);
-      data[o + 3] = 255;
+  const whiteQuiet = BG.every((channel) => channel === 1);
+  if (whiteQuiet) data.fill(255);
+  // Pixel positions are shared by every row/column. Keep the original sample
+  // order and arithmetic so the legacy raster remains byte-identical.
+  const indices = new Int32Array(W * s);
+  const active = new Uint8Array(W);
+  for (let p = 0; p < W; p++)
+    for (let u = 0; u < s; u++) {
+      const m = ((p + (u + 0.5) / s) / W) * total - quiet;
+      indices[p * s + u] = m < 0 || m >= N ? -1 : Math.floor(m * w.k);
+      if (indices[p * s + u] >= 0) active[p] = 1;
     }
-  if (blur > 0) gaussBlur(data, W, W, blur * ppm);
+  if (!whiteQuiet || !accelerated || !fastRaster(w, indices, active, data, W, s))
+    for (let py = 0; py < W; py++) {
+      if (whiteQuiet && !active[py]) continue;
+      for (let px = 0; px < W; px++) {
+        if (whiteQuiet && !active[px]) continue;
+        let r = 0,
+          g = 0,
+          b = 0;
+        for (let v = 0; v < s; v++) {
+          const y = indices[py * s + v];
+          for (let u = 0; u < s; u++) {
+            const x = indices[px * s + u];
+            if (x < 0 || y < 0) {
+              r += BG[0];
+              g += BG[1];
+              b += BG[2];
+            } else {
+              const q = (y * w.G + x) * 3;
+              r += w.cells[q];
+              g += w.cells[q + 1];
+              b += w.cells[q + 2];
+            }
+          }
+        }
+        const o = (py * W + px) * 4;
+        data[o] = (255 * r) / (s * s);
+        data[o + 1] = (255 * g) / (s * s);
+        data[o + 2] = (255 * b) / (s * s);
+        data[o + 3] = 255;
+      }
+    }
+  if (blur > 0) gaussBlur(data, W, W, blur * ppm, null, accelerated);
   return { data, width: W, height: W };
 }
 
 // A Gaussian blur of `sigma` pixels, in place (a camera slightly out of focus).
-export function gaussBlur(data, W, H, sigma) {
+export function gaussBlur(data, W, H, sigma, scratch = null, accelerated = true) {
   if (sigma < 0.3) return;
   const r = Math.ceil(sigma * 3);
   const kern = [];
   let sum = 0;
   for (let i = -r; i <= r; i++) sum += kern[kern.push(Math.exp(-(i * i) / (2 * sigma * sigma))) - 1]; // prettier-ignore
   for (let i = 0; i < kern.length; i++) kern[i] /= sum;
-  const tmp = new Float32Array(W * H * 3);
+  try {
+    if (accelerated && fastBlur(data, W, H, kern)) return;
+  } catch {
+    // A memory limit leaves the original JavaScript check available.
+  }
+  const tmp = scratch?.length >= W * H * 3 ? scratch : new Float32Array(W * H * 3);
+  // Precompute clamped edge offsets, shared by RGB and every pixel on its
+  // row/column. Keep each channel's summation order and Float32 intermediate.
+  const diameter = kern.length;
+  const xs = new Int32Array(W * diameter),
+    ys = new Int32Array(H * diameter);
+  for (let x = 0; x < W; x++)
+    for (let i = -r; i <= r; i++)
+      xs[x * diameter + i + r] = Math.min(W - 1, Math.max(0, x + i)) * 4;
   for (let y = 0; y < H; y++)
-    for (let x = 0; x < W; x++)
-      for (let c = 0; c < 3; c++) {
-        let v = 0;
-        for (let i = -r; i <= r; i++) v += kern[i + r] * data[(y * W + Math.min(W - 1, Math.max(0, x + i))) * 4 + c]; // prettier-ignore
-        tmp[(y * W + x) * 3 + c] = v;
-      }
+    for (let i = -r; i <= r; i++)
+      ys[y * diameter + i + r] = Math.min(H - 1, Math.max(0, y + i)) * W * 3;
   for (let y = 0; y < H; y++)
-    for (let x = 0; x < W; x++)
-      for (let c = 0; c < 3; c++) {
-        let v = 0;
-        for (let i = -r; i <= r; i++) v += kern[i + r] * tmp[(Math.min(H - 1, Math.max(0, y + i)) * W + x) * 3 + c]; // prettier-ignore
-        data[(y * W + x) * 4 + c] = v;
+    for (let x = 0; x < W; x++) {
+      let red = 0,
+        green = 0,
+        blue = 0;
+      const row = y * W * 4,
+        start = x * diameter;
+      for (let i = 0; i < diameter; i++) {
+        const q = row + xs[start + i];
+        const weight = kern[i];
+        red += weight * data[q];
+        green += weight * data[q + 1];
+        blue += weight * data[q + 2];
       }
+      const q = (y * W + x) * 3;
+      tmp[q] = red;
+      tmp[q + 1] = green;
+      tmp[q + 2] = blue;
+    }
+  for (let y = 0; y < H; y++)
+    for (let x = 0; x < W; x++) {
+      let red = 0,
+        green = 0,
+        blue = 0;
+      const col = x * 3,
+        start = y * diameter;
+      for (let i = 0; i < diameter; i++) {
+        const q = col + ys[start + i];
+        const weight = kern[i];
+        red += weight * tmp[q];
+        green += weight * tmp[q + 1];
+        blue += weight * tmp[q + 2];
+      }
+      const q = (y * W + x) * 4;
+      data[q] = red;
+      data[q + 1] = green;
+      data[q + 2] = blue;
+    }
 }
 
 // The sizes the check reads at: "phone" about as a phone camera sees a code
@@ -492,7 +588,7 @@ export const SIZES = [
   { id: "small", label: "smaller", ppm: 4, blur: 0.2 },
 ];
 
-const STRICT = [...SIZES, { ppm: 8, blur: 0.3 }, { ppm: 4, blur: 0.3 }];
+export const STRICT = [...SIZES, { ppm: 8, blur: 0.3 }, { ppm: 4, blur: 0.3 }];
 
 // Reads a woven code at each size with `read(rgba, w, h) => text | null`
 // (jsQR). Returns { ok, sizes: [{ id, label, ppm, text, ok }] }.
@@ -518,6 +614,8 @@ export const SIZES_UP = [
 export function tidy(o = {}) {
   return {
     text: String(o.text ?? ""),
+    fidelity: o.fidelity === "detail" && o.style !== "bw" ? "detail" : "standard",
+    shape: o.shape === "circle" ? "circle" : "square",
     level: LEVELS.includes(o.level) ? o.level : "H",
     contrast: Number.isFinite(+o.contrast) ? clamp01(+o.contrast) : 0.5,
     center: centerById(o.center).id,
@@ -531,22 +629,235 @@ export function tidy(o = {}) {
 // from the contrast's until the woven code reads at both of the check's
 // sizes, and a little more out of focus (at most to the plain code). extra:
 // a step more to start from (the toy's, when its stage didn't read).
+export function* detailCandidates(pic, o) {
+  const t = tidy(o);
+  const smallest = encodeQR(t.text, t.level, { boost: false }).version;
+  const up = SIZES_UP.find((s) => s.id === t.size).up;
+  let min = Math.min(40, smallest + up + Math.max(0, Math.round(o.detailUp || 0)));
+  // The unchanged jsQR reader has an incorrect alignment-center entry for
+  // version 23 (74 rather than 78). Keep this optional encoding readable.
+  if (min === 23) min++;
+  if (t.shape === "circle") pic = cropCirclePicture(pic, 17 + 4 * min);
+  let code = fitMask(t.text, t.level, pic, { min });
+  const baseCode = code;
+  code = fitPadding(code, pic);
+  let margin =
+    o.margin ??
+    Math.max(o.channel === "green" || o.channel === "weighted" ? 0.16 : 0.1, marginAt(t.contrast)) +
+      (o.extra || 0);
+  let finderEdge = 0.24,
+    finderCore = 0.08;
+  let score = null;
+  const decorate = (candidate, rank = true) => {
+    if (rank) {
+      score ||= fidelityScorer(
+        pic,
+        code.size,
+        t.shape,
+        weave(baseCode, pic, { ...t, margin: marginAt(t.contrast) }),
+      );
+      candidate.fidelityScore = score(candidate);
+    }
+    if (o.texture === "tiles") {
+      candidate.rendering.texture = "tiles";
+      candidate.rendering.textureBlur = o.textureBlur || 0;
+      candidate.rendering.textureGuard = o.textureGuard || 0;
+      candidate.rendering.validation = o.captureValidation ? "capture" : "model";
+    }
+    return candidate;
+  };
+  const create = function* () {
+    const options = { ...t, margin, finderEdge, finderCore, channel: o.channel };
+    if (o.preferContinuous) {
+      const fraction =
+        o.channel !== "green" &&
+        o.channel !== "weighted" &&
+        o.preferCorrection &&
+        o.texture === "tiles" &&
+        code.ecc === "H"
+          ? 0.4
+          : 0;
+      const method = fraction ? "correction" : "continuous";
+      const base = weaveDetail(fraction ? fitPictureErrors(code, pic, fraction) : code, pic, {
+        ...options,
+        method,
+      });
+      const tones =
+        o.texture === "tiles" ? [finderEdge, 0.32, 0.16, 0.08, 0.2, 0.28] : [finderEdge];
+      const continuous = [];
+      for (const tone of new Set(tones)) {
+        const candidate = decorate(
+          finishDetail(
+            { ...base, cells: base.cells.slice() },
+            { ...options, method, finderEdge: tone },
+          ),
+          false,
+        );
+        if (fraction) candidate.rendering.fraction = fraction;
+        continuous.push(candidate);
+      }
+      // Two actual failures at this exact margin/mask/orientation make further
+      // finder-only changes a poor next choice. Try independently checked
+      // halftones and correction fits before rebuilding more of that family.
+      if (continuous.filter((w) => o.rejected?.includes(renderingKey(w))).length < 2)
+        yield* continuous.filter((w) => !o.rejected?.includes(renderingKey(w)));
+    }
+    const halftone = finishDetail(weave(code, pic, options), { ...options, method: "halftone" });
+    const candidates = [
+      ...(!o.preferContinuous || o.preferCorrection ? [weaveDetail(code, pic, options)] : []),
+      halftone,
+      projectHalftone(halftone, options),
+      ...(o.texture === "tiles" ? [0.6, 0.4, 0.25] : []).map((fraction) => {
+        const corrected = weaveDetail(fitPictureErrors(code, pic, fraction), pic, {
+          ...options,
+          method: "correction",
+        });
+        corrected.rendering.fraction = fraction;
+        return corrected;
+      }),
+    ];
+    yield* candidates
+      .map((candidate) => decorate(candidate))
+      .filter((w) => !o.rejected?.includes(renderingKey(w)))
+      .sort((a, b) => b.fidelityScore.score - a.fidelityScore.score);
+  };
+  const initial = margin;
+  const variants = [
+    [0, 0.24, 0.08, 0],
+    [0.02, 0.24, 0.08, 0],
+    [0, 0.32, 0.08, 0],
+    [0.02, 0.16, 0.16, 0],
+    [0, 0.24, 0.08, 2],
+    [0.02, 0.24, 0.08, 2],
+    [0, 0.32, 0.08, 2],
+    [0.02, 0.24, 0.08, 1],
+    [0, 0.24, 0.08, 3],
+    [0.04, 0.24, 0.08, 3],
+    [0.08, 0.24, 0.08, 0],
+    [0.12, 0.24, 0.08, 2],
+  ];
+  const physical = 720 / (2 * (shapeHalf(code, t.shape) + 1));
+  const edgeCorrection =
+    o.texture === "tiles" ? 0 : Math.min(0.08, Math.max(0, 8 - physical) * 0.04);
+  let fallback = null,
+    orientation = 0,
+    tested = 0;
+  const seen = new Set();
+  for (let step = 0; step < variants.length; step++) {
+    const [increase, edge, core, turns] = variants[step];
+    margin = Math.min(0.5, initial + increase);
+    finderEdge = edge === 0.24 ? edge + edgeCorrection : Math.min(0.36, edge + edgeCorrection / 2);
+    finderCore = core;
+    if (turns !== orientation) {
+      code = turns
+        ? rotateCode(fitPadding(baseCode, inversePicture(pic, baseCode.size, turns)), turns)
+        : fitPadding(baseCode, pic);
+      orientation = turns;
+    }
+    for (const w of create()) {
+      const key = renderingKey(w);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      tested++;
+      fallback ||= w;
+      const check = yield w;
+      w.detailCheck = { ...check, tried: step + 1, candidates: tested };
+      if (check?.ok) return w;
+    }
+  }
+  fallback.detailCheck = {
+    ...(fallback.detailCheck || {}),
+    ok: false,
+    exhausted: true,
+    tried: variants.length,
+    candidates: tested,
+  };
+  return fallback;
+}
+
+export function renderingKey(w) {
+  return JSON.stringify([
+    w.rendering.method,
+    w.code.version,
+    w.code.ecc,
+    w.code.mask,
+    w.k,
+    w.c,
+    w.margin,
+    w.rendering.seedMargin ?? w.margin,
+    w.code.rotation || 0,
+    w.rendering.edge,
+    w.rendering.core,
+    w.rendering.fraction || 0,
+    w.rendering.channel || "rgb",
+  ]);
+}
+
+export function checkStrict(w, read, only = null) {
+  return STRICT.filter(
+    (s) => !only || ((!only.ppm || s.ppm === only.ppm) && (!only.blur || s.blur === only.blur)),
+  ).every((s) => {
+    const img = rasterize(w, s.ppm, { blur: s.blur });
+    return read(img.data, img.width, img.height) === w.code.text;
+  });
+}
+
+export async function makeWovenAsync(pic, o, validate, { isCurrent = () => true } = {}) {
+  const started = performance.now();
+  const current = () => {
+    if (!isCurrent()) throw new DOMException("The picture changed.", "AbortError");
+  };
+  current();
+  const t = tidy(o);
+  if (t.fidelity !== "detail" || !pic) return makeWoven(pic, o);
+  const candidates = detailCandidates(pic, o);
+  let state = candidates.next();
+  while (!state.done) {
+    const candidateStarted = performance.now();
+    const check = await validate(state.value, pic, t.shape);
+    if (o.trace)
+      console.log(
+        "Picture QR candidate",
+        JSON.stringify({
+          rendering: state.value.rendering,
+          margin: state.value.margin,
+          ms: performance.now() - candidateStarted,
+          check,
+        }),
+      );
+    current();
+    if (!check?.ok) {
+      await new Promise((resolve) => setTimeout(resolve, 0));
+      current();
+    }
+    state = candidates.next(check);
+  }
+  state.value.detailCheck.preparationMs = performance.now() - started;
+  return state.value;
+}
+
 export function makeWoven(pic, o, read = null) {
   const t = tidy(o);
+  if (t.fidelity === "detail" && pic) {
+    const candidates = detailCandidates(pic, o);
+    let state = candidates.next();
+    if (!read) return state.value;
+    while (!state.done) {
+      const w = state.value;
+      const check = checkStrict(w, read)
+        ? checkDetailViews(w, read, t.shape, pic)
+        : { ok: false, layout: true };
+      state = candidates.next(check);
+    }
+    return state.value;
+  }
   const smallest = encodeQR(t.text, t.level, { boost: false }).version;
   const up = SIZES_UP.find((s) => s.id === t.size).up;
   const code = fitMask(t.text, t.level, pic, { min: Math.min(40, smallest + up) });
   let margin = o.margin ?? marginAt(t.contrast) + (o.extra || 0);
   let w = weave(code, pic, { ...t, margin });
   if (!read || !pic) return w;
-  // A little stricter than the check (a softer focus too), so the splats on
-  // the stage, which a camera sees a little differently, read as well.
-  const reads = (x) =>
-    STRICT.every((s) => {
-      const img = rasterize(x, s.ppm, { blur: s.blur });
-      return read(img.data, img.width, img.height) === x.code.text;
-    });
-  for (let step = 0; step < 16 && !reads(w) && margin < 0.5; step++) {
+  for (let step = 0; step < 16 && !checkStrict(w, read) && margin < 0.5; step++) {
     margin = margin < 0 ? 0.02 : Math.min(0.5, margin + 0.02);
     w = weave(code, pic, { ...t, margin });
   }
@@ -559,6 +870,18 @@ export function makeWoven(pic, o, read = null) {
 // tried, changed: [what changed, in words] } or null if none scans.
 export function closestScanning(pic, o, read, { maxTries = 40 } = {}) {
   const t = tidy(o);
+  let tried = 0;
+  for (const c of repairOptions(t).slice(0, maxTries)) {
+    tried++;
+    const woven = makeWoven(pic, c.o, t.fidelity === "detail" ? read : null);
+    const check = checkWoven(woven, read);
+    if (check.ok && woven.detailCheck?.ok !== false)
+      return { options: c.o, woven, check, tried, changed: describeChange(t, c.o) };
+  }
+  return null;
+}
+
+function repairOptions(t) {
   const ci = CENTERS.findIndex((x) => x.id === t.center);
   const li = LEVELS.indexOf(t.level);
   const cands = [];
@@ -570,12 +893,32 @@ export function closestScanning(pic, o, read, { maxTries = 40 } = {}) {
         cands.push({ cost: da + 2.5 * dc + 3 * dl, o: { ...t, contrast: Math.min(1, a), center: CENTERS[ci + dc].id, level: LEVELS[li + dl] } }); // prettier-ignore
   }
   cands.sort((x, y) => x.cost - y.cost);
+  return cands;
+}
+
+export async function closestScanningAsync(
+  pic,
+  o,
+  read,
+  validate,
+  { maxTries = 40, isCurrent = () => true } = {},
+) {
+  const t = tidy(o);
   let tried = 0;
-  for (const c of cands.slice(0, maxTries)) {
+  for (const c of repairOptions(t).slice(0, maxTries)) {
+    // Give input and navigation a turn between repair options, including when
+    // worker support is unavailable.
+    await new Promise((resolve) => setTimeout(resolve, 0));
+    const woven = await makeWovenAsync(
+      pic,
+      { ...o, ...c.o, extra: o.extra || 0, rejected: o.rejected || [] },
+      validate,
+      { isCurrent },
+    );
     tried++;
-    const woven = makeWoven(pic, c.o);
     const check = checkWoven(woven, read);
-    if (check.ok) return { options: c.o, woven, check, tried, changed: describeChange(t, c.o) };
+    if (check.ok && woven.detailCheck?.ok !== false)
+      return { options: c.o, woven, check, tried, changed: describeChange(t, c.o) };
   }
   return null;
 }

@@ -1,0 +1,560 @@
+[
+  {
+    "file": "historical-browser-qualified-main-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-qualified-main-low-0.jsonl",
+    "uncompressedSha256": "453930061ce3a3408399e25417c690b76f6f5d31f82394d27aa601b49a75ac23",
+    "role": "Stopped historical candidate; not final qualification"
+  },
+  {
+    "file": "historical-browser-qualified-detail-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-qualified-detail-low-0.jsonl",
+    "uncompressedSha256": "8d12e3730e74b8587c44df33e21a5b03c6c57b6fe18abd1e553391c0dc26c6fe",
+    "role": "Stopped historical candidate; not final qualification"
+  },
+  {
+    "file": "historical-paired-qualified.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-qualified.jsonl",
+    "uncompressedSha256": "152efdd73970e38502c4896531831e38344c5a5a82ea5e6bfed07d9412c37a9c",
+    "role": "All completed timings from a stopped historical candidate, including outliers"
+  },
+  {
+    "file": "historical-browser-qualified-tail-main-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-qualified-tail-main-low-0.jsonl",
+    "uncompressedSha256": "5822d032cc3e139249635ed3e2df1f77f0e3a410ea1250fad0167487df7f48bb",
+    "role": "Stopped historical candidate; not final qualification"
+  },
+  {
+    "file": "historical-browser-qualified-tail-detail-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-qualified-tail-detail-low-0.jsonl",
+    "uncompressedSha256": "4ca5aba241b7cf5829bc4c029980be9c1d169c3fffb7063607dd92002f45ccd4",
+    "role": "Stopped historical candidate; not final qualification"
+  },
+  {
+    "file": "historical-paired-qualified-tail.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-qualified-tail.jsonl",
+    "uncompressedSha256": "42571f70cae1918c717f148f2d615fd5b40da90ca25a7d18a6640dbbb0ca6bba",
+    "role": "All completed timings from a stopped historical candidate, including outliers"
+  },
+  {
+    "file": "historical-paired-cpu-preflight.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-cpu-preflight.jsonl",
+    "uncompressedSha256": "241bd39299679a68f7d326c2e40a3df90a7940ebba3e4f461adcab5d90d2ba9f",
+    "role": "Isolated diagnostic; all captured numerical rows retained"
+  },
+  {
+    "file": "historical-browser-cpu-preflight-detail-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-cpu-preflight-detail-low-0.jsonl",
+    "uncompressedSha256": "f210036900e5bc2c3aef50a3777819205ff62234405678018fdd02e32f5c1c08",
+    "role": "Isolated diagnostic; all captured numerical rows retained"
+  },
+  {
+    "file": "historical-paired-bounded-fern.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-bounded-fern.jsonl",
+    "uncompressedSha256": "0d1447ac8728e978592756894e3f369cfd757fbf10ee35ad315902c9ad665a14",
+    "role": "Isolated diagnostic; all captured numerical rows retained"
+  },
+  {
+    "file": "historical-browser-bounded-fern-detail-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-bounded-fern-detail-low-0.jsonl",
+    "uncompressedSha256": "eb503493efe2c1d73a54948a89464639891536c2695835da7cf8606a8b49435c",
+    "role": "Isolated diagnostic; all captured numerical rows retained"
+  },
+  {
+    "file": "historical-paired-fern8-fullmodel.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-fern8-fullmodel.jsonl",
+    "uncompressedSha256": "b547431a219ab02a5fe57b19c1a1affd07197a985e19b2c0ae570a41656d8cb6",
+    "role": "Isolated diagnostic; all captured numerical rows retained"
+  },
+  {
+    "file": "historical-browser-fern8-fullmodel-detail-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-fern8-fullmodel-detail-low-0.jsonl",
+    "uncompressedSha256": "76a5091c64e0e51fdb4794be3fbf6a1ab40972418815b9cbd7fd5eed99f2cb59",
+    "role": "Isolated diagnostic; all captured numerical rows retained"
+  },
+  {
+    "file": "historical-paired-met8-circle-fullmodel.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-met8-circle-fullmodel.jsonl",
+    "uncompressedSha256": "661e1bc9bd4490e7407d5313894a13292d8da06a446a5472e2edefe3c34e2020",
+    "role": "Isolated diagnostic; all captured numerical rows retained"
+  },
+  {
+    "file": "historical-browser-met8-circle-fullmodel-detail-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-met8-circle-fullmodel-detail-low-0.jsonl",
+    "uncompressedSha256": "80d73d9a986ab5f74c2ee725d795d8c95e3a3fba20cf7ad189aa88da4dd6f8b8",
+    "role": "Isolated diagnostic; all captured numerical rows retained"
+  },
+  {
+    "file": "historical-browser-adaptive-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-adaptive-low-0.jsonl",
+    "uncompressedSha256": "b47a7a26b0bd5f099faec048371ed7d069502d026bd5711c91561dd5bf4fb7f2",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-adaptive-low-1.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-adaptive-low-1.jsonl",
+    "uncompressedSha256": "0357e60d5c8b4e49326903ff0a62cf6bc290afb9d8fbf97041de23b55f81b8f3",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-block-trace-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-block-trace-low-0.jsonl",
+    "uncompressedSha256": "ed69b225f8d529c58f08621a8eb454fdb102218d38b890e372e5e27eebd2da48",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-data-linear-probe-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-data-linear-probe-low-0.jsonl",
+    "uncompressedSha256": "a17f6dcd7d2c9563e5e0c669fb3b6ebcbf44b66d780574d63b78e9b9a5f32c08",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-direct-probe-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-direct-probe-low-0.jsonl",
+    "uncompressedSha256": "1318eeab8c01c2090b0640c9fc461037cd663ebf9d029ce77f5c5fb5587ca680",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-gated-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-gated-low-0.jsonl",
+    "uncompressedSha256": "792cda988c30ad816f6eb13f9d47c7b1c90c820b5dfadbbd79781508baaec18f",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-gated-low-1.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-gated-low-1.jsonl",
+    "uncompressedSha256": "0b68306a2939a305a89d700061b709706d4d9a73b28b0082d7cda1c0349deab6",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-gauss-square-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-gauss-square-low-0.jsonl",
+    "uncompressedSha256": "c6104c01c6f084234fc1257d1df369d24789175773a295c90d67fa942a2c516c",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-green-probe-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-green-probe-low-0.jsonl",
+    "uncompressedSha256": "3c6da3c190bfa8be8b1d8af1222b8b126e35ca8d1bc96f71146d5b1091ba0be9",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-green-strong-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-green-strong-low-0.jsonl",
+    "uncompressedSha256": "3365d9c73e81090185e1eebfbed3618e6bb314a475b900201efc665ddfec688d",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-green-v2-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-green-v2-low-0.jsonl",
+    "uncompressedSha256": "4f3788b55119eecc696c1949f0ed50545c61ca0fa4925de52e193561aa6b8a50",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-linear-probe-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-linear-probe-low-0.jsonl",
+    "uncompressedSha256": "b8e8e0ac20717f441ee55888c9afd7c1f5f13f92e43c483715cafc03e33daaec",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-low.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-low.jsonl",
+    "uncompressedSha256": "933173aaadf9b9cf86af3143ccf009cb37fad57a3c38c5cf750f752b0b52a9ee",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-qual-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-qual-low-0.jsonl",
+    "uncompressedSha256": "2099d088ec1dc36af4fb92d289b3e4922757bc4c147e983aa78704d74153b8c6",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-qual-low-1.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-qual-low-1.jsonl",
+    "uncompressedSha256": "6acf8c372aab78e5ebcd274cdde75a8d1fbae5cfc38ae8f532016449ce7c041e",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-square20-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-square20-low-0.jsonl",
+    "uncompressedSha256": "cd6356d36cb753edbaaaf9bcba808447293aece7d6934a7443cd2270c6acc874",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-block12-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-block12-low-0.jsonl",
+    "uncompressedSha256": "d8b384ed3bfc60bbdf09b706b1204a810ebc78e62e744a6fd1fa3b85b1215e1b",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-calibrated-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-calibrated-low-0.jsonl",
+    "uncompressedSha256": "2e047cb3187b50e3700f74908b40f48e150021c01405e68e4f2511aafe303aae",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-correcteyes-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-correcteyes-low-0.jsonl",
+    "uncompressedSha256": "c559df8327f8bb82de2adebd23b4ed0dc28a64a6342aebef342952a3f31a7fc5",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-eyesweep-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-eyesweep-low-0.jsonl",
+    "uncompressedSha256": "98f49521885d6d4c408d6af4c3d29278e7c67b1c8c8a643f2ad7157e4c00b6c4",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-fastguard-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-fastguard-low-0.jsonl",
+    "uncompressedSha256": "25216350eb3637e1efd148ff4ff4bd3cf2d0feff8931cbd2e52bc0b5a84b2ef4",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-fixedeyes-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-fixedeyes-low-0.jsonl",
+    "uncompressedSha256": "853375fce17ca8992982a99b0bc6daeef492d82854c90bf2e32dbbe5fe098107",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-prediction-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-prediction-low-0.jsonl",
+    "uncompressedSha256": "3b9e3e4f9765cd180671bfbae393416d79aef93e8c62d3d9011227211a696ddb",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-probe-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-probe-low-0.jsonl",
+    "uncompressedSha256": "59d3b222a155b8e2dd427dfe2a74f0cc6cb254aa282d538ccfa451f7c117e3cc",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-soft-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-soft-low-0.jsonl",
+    "uncompressedSha256": "60c925ccde591cdc1594b94e0cd7a5797b621360bc2e256128c570d30bfba3c9",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-up2-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-up2-low-0.jsonl",
+    "uncompressedSha256": "b67b5c0c3c638f3e243fcddc24a905de853eab4b613cf8e7b165ef87699e0861",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-tiles-v2-probe-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-tiles-v2-probe-low-0.jsonl",
+    "uncompressedSha256": "d2323b489eb8449a2b7fefe9c76e13cd93613af23053de7fa2f88bf88ce2db28",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v2-final-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v2-final-low-0.jsonl",
+    "uncompressedSha256": "c6859361785bbc889c96ca6d0dc7f80c804b777fb2ab2b925e678b1ef8ec5b9b",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v2-final-low-1.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v2-final-low-1.jsonl",
+    "uncompressedSha256": "a896a7dbe478cd89a36e91d19c5b1d1f170258d1980f3eebbc66a8f6b3324aa9",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v2-low.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v2-low.jsonl",
+    "uncompressedSha256": "c837985021bd9387e14e2573703de6b523a01bf02563f75d60a2261f685a1a83",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v3-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v3-low-0.jsonl",
+    "uncompressedSha256": "ed602a943bf98b0fcb381031c218e906bfa920b0c7594e3c508a588f046db684",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v3-low-1.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v3-low-1.jsonl",
+    "uncompressedSha256": "d11e6dfc10348c26786db6727b840efdcb7b7ad5fd4159582d586a1edd9e7614",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v3-low.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v3-low.jsonl",
+    "uncompressedSha256": "94184971afc3ee873de3e89aaec05158b71fc786fc12e0383997ad1e4df9bc78",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v4-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v4-low-0.jsonl",
+    "uncompressedSha256": "a29705279416cebd6a808e4f20787f016a4f414054a6ec83c6fb4de93dc37c9e",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v4-low-1.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v4-low-1.jsonl",
+    "uncompressedSha256": "2a76a027158773e09c1e8aced3c68100c428670fe6e51bd2857301a1b0506a0e",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v4-low.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v4-low.jsonl",
+    "uncompressedSha256": "5dd1376f3b9eb87c9bc52c86e091ab7e7783e584d2e54af53b044e76dcdb90d6",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v5-probe-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v5-probe-low-0.jsonl",
+    "uncompressedSha256": "a5518bec21936d68e475a32108b2952bbc788853e096eb55b059b80805f770fa",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-v6-probe-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-v6-probe-low-0.jsonl",
+    "uncompressedSha256": "5ce405112942a7d41802eebaa7d228a49267db613a5a1247c3fa0f3dfc0bc34f",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-detail-weighted-probe-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-detail-weighted-probe-low-0.jsonl",
+    "uncompressedSha256": "ea15664132b385b3a0662884a783b9033567b5cf4e7d89d3e9a5cf077bf33c80",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-hybrid-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-hybrid-low-0.jsonl",
+    "uncompressedSha256": "45737c664935222ca5119f0807b610f91870249d5ee8057073be6a83c384d8ff",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-hybrid-low-1.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-hybrid-low-1.jsonl",
+    "uncompressedSha256": "435b6f51a14878c266e02f3c84ccd414559a1372945f1cb826c8f3d88e656d1d",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-main-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-main-low-0.jsonl",
+    "uncompressedSha256": "d67ec8070ff48a281687c3a404b6705454d384e1accfdd1d24e28abb921f0831",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-main-low.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-main-low.jsonl",
+    "uncompressedSha256": "6b64485392e5f6ab96907c4955ad521a281d3fc192273db071c1bf44fe9c0f47",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-qualified-yaw-detail-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-qualified-yaw-detail-low-0.jsonl",
+    "uncompressedSha256": "816c8bb75366cf71d66ef7ec9ea720980127e0d5f76480eaf4123f218d50db11",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-qualified-yaw-main-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-qualified-yaw-main-low-0.jsonl",
+    "uncompressedSha256": "4416e046c29a1783b475e7d5369e138e845c47f9d9c04c09a4be3dc67da90bbb",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-weighted-held-preflight-detail-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-weighted-held-preflight-detail-low-0.jsonl",
+    "uncompressedSha256": "94059ae36b71554ac38065a663231d5ffeb2ff209f0a30cc35add67ecc366739",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-weighted-held-preflight-main-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-weighted-held-preflight-main-low-0.jsonl",
+    "uncompressedSha256": "601339c5f4e7ba8a9febd4753ba1552c440616e956363a325c9c29bdfe724476",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-weighted-tight-preflight-detail-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-weighted-tight-preflight-detail-low-0.jsonl",
+    "uncompressedSha256": "69d9ac77fba4194ffaa5843ce75476b55c258fa2d49cf1e632f49527576534e4",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-browser-weighted-tight-preflight-main-low-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/browser-weighted-tight-preflight-main-low-0.jsonl",
+    "uncompressedSha256": "6d45c414ef2ffb4bedd4525e17e2c53193b0e0424a0ecb26b03c07e0ef488ab2",
+    "role": "Historical exploratory render/control. Exact historical working tree and capture hashes were not consistently archived; not final qualification or isolated phone speed evidence."
+  },
+  {
+    "file": "historical-paired-green-static.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-green-static.jsonl",
+    "uncompressedSha256": "146b13b6f4f22234f9cf923d2b01df17b07f8d19e94069d81458f3f663888e6f",
+    "role": "Historical timing/attempt series, including slower and failed attempts. Only the explicitly joined final series is primary speed evidence."
+  },
+  {
+    "file": "historical-paired-weighted-direct.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-weighted-direct.jsonl",
+    "uncompressedSha256": "2d7b1cd62f356fd36718d36ce0a8856b7e57b7c7b391ddf0dc514f88cf5b5418",
+    "role": "Historical timing/attempt series, including slower and failed attempts. Only the explicitly joined final series is primary speed evidence."
+  },
+  {
+    "file": "historical-paired-weighted-held-preflight.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-weighted-held-preflight.jsonl",
+    "uncompressedSha256": "4596efc061f46b1f79e9a0a7ab0eac92c806278efa42d2181d5ebdfa5b1d8311",
+    "role": "Historical timing/attempt series, including slower and failed attempts. Only the explicitly joined final series is primary speed evidence."
+  },
+  {
+    "file": "historical-paired-weighted-isolated.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-weighted-isolated.jsonl",
+    "uncompressedSha256": "1fda57c3751e4da184d3e0f93e3ace5a4fd488f19d9fd285d786be1e41b3805b",
+    "role": "Historical timing/attempt series, including slower and failed attempts. Only the explicitly joined final series is primary speed evidence."
+  },
+  {
+    "file": "historical-paired-weighted-limited.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-weighted-limited.jsonl",
+    "uncompressedSha256": "a0ae0f35ec54bdd9b2462caca82cf0c8d0f107fd21b9c09c984447718eae4a58",
+    "role": "Historical timing/attempt series, including slower and failed attempts. Only the explicitly joined final series is primary speed evidence."
+  },
+  {
+    "file": "historical-paired-weighted-tight-preflight.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-weighted-tight-preflight.jsonl",
+    "uncompressedSha256": "b8fc8b761970c383fee0ea76e2eb68968a391e37818f375a566454626deeaa43",
+    "role": "Historical timing/attempt series, including slower and failed attempts. Only the explicitly joined final series is primary speed evidence."
+  },
+  {
+    "file": "historical-paired-bounded-fern-provenance.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-bounded-fern-provenance.json",
+    "uncompressedSha256": "e2a6c9943a0de92d46a812565b17c6473acc2da857585bb89e0129cf204cf503",
+    "role": "Historical source/protocol hash sidecar. Head and hashes are retained without inventing an archived working tree where one was not saved."
+  },
+  {
+    "file": "historical-paired-cpu-preflight-provenance.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-cpu-preflight-provenance.json",
+    "uncompressedSha256": "b175fbc03dc572a3cbbece8ea5f01cb4297c01cd9cf92887ed13844f97caf3c4",
+    "role": "Historical source/protocol hash sidecar. Head and hashes are retained without inventing an archived working tree where one was not saved."
+  },
+  {
+    "file": "historical-paired-fern8-fullmodel-provenance.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-fern8-fullmodel-provenance.json",
+    "uncompressedSha256": "9274025b8166e2a967a1ed4d6295addff5b1e8b3ade828b41861c899807b61a0",
+    "role": "Historical source/protocol hash sidecar. Head and hashes are retained without inventing an archived working tree where one was not saved."
+  },
+  {
+    "file": "historical-paired-met8-circle-fullmodel-provenance.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-met8-circle-fullmodel-provenance.json",
+    "uncompressedSha256": "7b7e4db4979a0f064f7630eb404642b0836be5cefada5dda2e1fbb2af32f11ae",
+    "role": "Historical source/protocol hash sidecar. Head and hashes are retained without inventing an archived working tree where one was not saved."
+  },
+  {
+    "file": "historical-paired-qualified-provenance.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-qualified-provenance.json",
+    "uncompressedSha256": "cb2c4bf8b14682d31a29308464f9f5fb9941f7c793215baeeff9c1300a04c846",
+    "role": "Historical source/protocol hash sidecar. Head and hashes are retained without inventing an archived working tree where one was not saved."
+  },
+  {
+    "file": "historical-paired-qualified-tail-provenance.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-qualified-tail-provenance.json",
+    "uncompressedSha256": "f778a8703ed15ff95394a47ea457de345f02c85cea169d28b631af74e7cb63bc",
+    "role": "Historical source/protocol hash sidecar. Head and hashes are retained without inventing an archived working tree where one was not saved."
+  },
+  {
+    "file": "historical-paired-weighted-held-preflight-provenance.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-weighted-held-preflight-provenance.json",
+    "uncompressedSha256": "0bcb64fc982dfc72aa7478789026bfb87559fa5e0480dc0b0e59fb063ff1adf1",
+    "role": "Historical source/protocol hash sidecar. Head and hashes are retained without inventing an archived working tree where one was not saved."
+  },
+  {
+    "file": "historical-paired-weighted-tight-preflight-provenance.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/paired-weighted-tight-preflight-provenance.json",
+    "uncompressedSha256": "7b84dba6ff08419d56f12542a5627919e67dfd0f868cf862a28d1c07a0747bf1",
+    "role": "Historical source/protocol hash sidecar. Head and hashes are retained without inventing an archived working tree where one was not saved."
+  },
+  {
+    "file": "historical-main-area-0.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/main-area-0.jsonl",
+    "uncompressedSha256": "5f9f4b42c1f8f73bc49451a40dee3a21721ffd5919ec98e5f68114d7808094f7",
+    "role": "Historical source/geometry/kernel control; numerical rows retained. Not phone speed evidence. No new capture-time source sidecar is implied by this archive."
+  },
+  {
+    "file": "historical-main-area-1.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/main-area-1.jsonl",
+    "uncompressedSha256": "aba004e7a89288ae32643f50bab9d02cc35fe6fe31dc9e1e119dd31b612a37c9",
+    "role": "Historical source/geometry/kernel control; numerical rows retained. Not phone speed evidence. No new capture-time source sidecar is implied by this archive."
+  },
+  {
+    "file": "historical-main-area-2.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/main-area-2.jsonl",
+    "uncompressedSha256": "f9ec12a5680f0c0f0697a12bd4ae3f7469ecd9c4b5b51ca9239417b21aef02c6",
+    "role": "Historical source/geometry/kernel control; numerical rows retained. Not phone speed evidence. No new capture-time source sidecar is implied by this archive."
+  },
+  {
+    "file": "historical-main-area-3.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/main-area-3.jsonl",
+    "uncompressedSha256": "f4b0e20c93b97bdbfdc3e1aac75f825b6c5bfb92e508dc09de7cad424dd20f83",
+    "role": "Historical source/geometry/kernel control; numerical rows retained. Not phone speed evidence. No new capture-time source sidecar is implied by this archive."
+  },
+  {
+    "file": "historical-main-replayed.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/main-replayed.jsonl",
+    "uncompressedSha256": "6f59ef787796621c25458e97c2730da1c4c84a0c93ad652c993f58d510843c91",
+    "role": "Historical source/geometry/kernel control; numerical rows retained. Not phone speed evidence. No new capture-time source sidecar is implied by this archive."
+  },
+  {
+    "file": "historical-geometry-merged-final.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/geometry-merged-final.json",
+    "uncompressedSha256": "4433535bb368cb3724a0de26b998184f18dbc4b15abeca765d2d8c7208f39a1c",
+    "role": "Historical source/geometry/kernel control; numerical rows retained. Not phone speed evidence. No new capture-time source sidecar is implied by this archive."
+  },
+  {
+    "file": "historical-geometry-proof.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/geometry-proof.json",
+    "uncompressedSha256": "0ac4c2c2053ba870f17d991cd3b1b2f0ca198aaac55e8294660252c2e3ea23f2",
+    "role": "Historical source/geometry/kernel control; numerical rows retained. Not phone speed evidence. No new capture-time source sidecar is implied by this archive."
+  },
+  {
+    "file": "historical-geometry-standard-final.json.gz",
+    "originalFile": ".cache/picture-qr-fidelity/geometry-standard-final.json",
+    "uncompressedSha256": "556efc2b3280cf7021b238f354713268cf78fd576c6e9c7a85afb41a25db650e",
+    "role": "Historical source/geometry/kernel control; numerical rows retained. Not phone speed evidence. No new capture-time source sidecar is implied by this archive."
+  },
+  {
+    "file": "historical-benchmark-balanced-kernel.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/benchmark-balanced-kernel.jsonl",
+    "uncompressedSha256": "a34e39f1830d4fd5aea40f974131085f74cfdedbdd7e59c8dacd15b44bfa0e94",
+    "role": "Historical source/geometry/kernel control; numerical rows retained. Not phone speed evidence. No new capture-time source sidecar is implied by this archive."
+  },
+  {
+    "file": "historical-predict-weighted20.jsonl.gz",
+    "originalFile": ".cache/picture-qr-fidelity/predict-weighted20.jsonl",
+    "uncompressedSha256": "106cc6110df4e827323b131098919c973d2283a43e4c1f62045689a07ad12eea",
+    "role": "Historical source-only forecast with margin 0.20 for N>=61 and 0.16 otherwise; exact historical working tree not archived; not final rendering or speed evidence"
+  },
+  {
+    "file": "research/probe-cactus-yaw.mjs.txt",
+    "originalFile": ".cache/picture-qr-fidelity/probe-cactus-yaw.mjs",
+    "sha256": "25624fbd29bc16d7d9fd76117c924faf13885e36252b6d2e6da0967af0218da3",
+    "role": "Archived source probe text/output; exact historical working tree not archived. Original relative imports resolve from .cache/picture-qr-fidelity, not this archive directory. These probes do not qualify final pixels or phone speed."
+  },
+  {
+    "file": "research/probe-cactus-yaw.log.txt",
+    "originalFile": ".cache/picture-qr-fidelity/probe-cactus-yaw.log",
+    "sha256": "ed24db04375c57fcf5171f0c1023345edb1fa253b05615c35e7f4ee1cb88b7c9",
+    "role": "Archived source probe text/output; exact historical working tree not archived. Original relative imports resolve from .cache/picture-qr-fidelity, not this archive directory. These probes do not qualify final pixels or phone speed."
+  },
+  {
+    "file": "research/probe-ginkgo-readers.mjs.txt",
+    "originalFile": ".cache/picture-qr-fidelity/probe-ginkgo-readers.mjs",
+    "sha256": "cd535bbece7ad7242bf4390146ae861da8976e98696cbbde5d2d48aa9c6d5ff3",
+    "role": "Archived source probe text/output; exact historical working tree not archived. Original relative imports resolve from .cache/picture-qr-fidelity, not this archive directory. These probes do not qualify final pixels or phone speed."
+  },
+  {
+    "file": "research/probe-ginkgo-readers.log.txt",
+    "originalFile": ".cache/picture-qr-fidelity/probe-ginkgo-readers.log",
+    "sha256": "41569fe05f8c76e58c2d33ceb015d0896856d5366b0f34eef903df3e972dcaed",
+    "role": "Archived source probe text/output; exact historical working tree not archived. Original relative imports resolve from .cache/picture-qr-fidelity, not this archive directory. These probes do not qualify final pixels or phone speed."
+  },
+  {
+    "file": "research/probe-farm-correction.mjs.txt",
+    "originalFile": ".cache/picture-qr-fidelity/probe-farm-correction.mjs",
+    "sha256": "c160f5a6f452e7576a6557a814529898b43ab46a70668b8eb77f4da36da1020b",
+    "role": "Archived source probe text/output; exact historical working tree not archived. Original relative imports resolve from .cache/picture-qr-fidelity, not this archive directory. These probes do not qualify final pixels or phone speed."
+  },
+  {
+    "file": "research/probe-farm-correction.log.txt",
+    "originalFile": ".cache/picture-qr-fidelity/probe-farm-correction.log",
+    "sha256": "161134be8c222500bb1c7c2eb47cf559ed7c26304c67eb2da46878395a46ee7c",
+    "role": "Archived source probe text/output; exact historical working tree not archived. Original relative imports resolve from .cache/picture-qr-fidelity, not this archive directory. These probes do not qualify final pixels or phone speed."
+  }
+]

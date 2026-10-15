@@ -1,0 +1,5368 @@
+{
+  "baseline": "41b21e74",
+  "generated": "2026-10-15T07:03:34.894Z",
+  "inputs": {
+    "main": "browser-main-all-low",
+    "detail": "browser-final-joined-low"
+  },
+  "expectedCodes": 1040,
+  "expectedReadsPerMode": 49920,
+  "complete": true,
+  "main": {
+    "codes": 1040,
+    "errors": [],
+    "failedCodes": [
+      "ai-farm/0/square",
+      "ai-farm/0/circle",
+      "ai-farm/1/square",
+      "ai-farm/1/circle",
+      "ai-farm/2/square",
+      "ai-farm/2/circle",
+      "ai-farm/3/square",
+      "ai-farm/3/circle",
+      "ai-farm/4/square",
+      "ai-farm/4/circle",
+      "ai-farm/5/square",
+      "ai-farm/5/circle",
+      "ai-farm/6/square",
+      "ai-farm/6/circle",
+      "ai-farm/7/square",
+      "ai-farm/7/circle",
+      "ai-farm/8/square",
+      "ai-farm/8/circle",
+      "ai-farm/9/square",
+      "ai-farm/9/circle",
+      "ai-mushrooms/0/square",
+      "ai-mushrooms/0/circle",
+      "ai-mushrooms/1/square",
+      "ai-mushrooms/1/circle",
+      "ai-mushrooms/2/square",
+      "ai-mushrooms/2/circle",
+      "ai-mushrooms/3/square",
+      "ai-mushrooms/3/circle",
+      "ai-mushrooms/4/square",
+      "ai-mushrooms/4/circle",
+      "ai-mushrooms/5/square",
+      "ai-mushrooms/5/circle",
+      "ai-mushrooms/6/square",
+      "ai-mushrooms/6/circle",
+      "ai-mushrooms/7/square",
+      "ai-mushrooms/7/circle",
+      "ai-mushrooms/8/square",
+      "ai-mushrooms/8/circle",
+      "ai-mushrooms/9/square",
+      "ai-mushrooms/9/circle",
+      "wildflowers/0/square",
+      "wildflowers/0/circle",
+      "wildflowers/1/square",
+      "wildflowers/1/circle",
+      "wildflowers/2/square",
+      "wildflowers/2/circle",
+      "wildflowers/3/square",
+      "wildflowers/3/circle",
+      "wildflowers/4/square",
+      "wildflowers/4/circle",
+      "wildflowers/5/square",
+      "wildflowers/5/circle",
+      "wildflowers/6/square",
+      "wildflowers/6/circle",
+      "wildflowers/7/square",
+      "wildflowers/7/circle",
+      "wildflowers/8/square",
+      "wildflowers/8/circle",
+      "wildflowers/9/square",
+      "wildflowers/9/circle",
+      "spiral-stairs/0/square",
+      "spiral-stairs/0/circle",
+      "spiral-stairs/1/square",
+      "spiral-stairs/1/circle",
+      "spiral-stairs/2/square",
+      "spiral-stairs/2/circle",
+      "spiral-stairs/3/square",
+      "spiral-stairs/3/circle",
+      "spiral-stairs/4/square",
+      "spiral-stairs/4/circle",
+      "spiral-stairs/5/square",
+      "spiral-stairs/5/circle",
+      "spiral-stairs/6/square",
+      "spiral-stairs/6/circle",
+      "spiral-stairs/7/square",
+      "spiral-stairs/7/circle",
+      "spiral-stairs/8/square",
+      "spiral-stairs/8/circle",
+      "spiral-stairs/9/square",
+      "spiral-stairs/9/circle",
+      "cdx-qr-ai-monstera/0/square",
+      "cdx-qr-ai-monstera/0/circle",
+      "cdx-qr-ai-monstera/1/square",
+      "cdx-qr-ai-monstera/1/circle",
+      "cdx-qr-ai-monstera/2/square",
+      "cdx-qr-ai-monstera/2/circle",
+      "cdx-qr-ai-monstera/3/square",
+      "cdx-qr-ai-monstera/3/circle",
+      "cdx-qr-ai-monstera/4/square",
+      "cdx-qr-ai-monstera/4/circle",
+      "cdx-qr-ai-monstera/5/square",
+      "cdx-qr-ai-monstera/5/circle",
+      "cdx-qr-ai-monstera/6/square",
+      "cdx-qr-ai-monstera/6/circle",
+      "cdx-qr-ai-monstera/7/square",
+      "cdx-qr-ai-monstera/7/circle",
+      "cdx-qr-ai-monstera/8/square",
+      "cdx-qr-ai-monstera/8/circle",
+      "cdx-qr-ai-monstera/9/square",
+      "cdx-qr-ai-monstera/9/circle",
+      "cdx-qr-ai-green-watering-can/0/square",
+      "cdx-qr-ai-green-watering-can/0/circle",
+      "cdx-qr-ai-green-watering-can/1/square",
+      "cdx-qr-ai-green-watering-can/1/circle",
+      "cdx-qr-ai-green-watering-can/2/square",
+      "cdx-qr-ai-green-watering-can/2/circle",
+      "cdx-qr-ai-green-watering-can/3/square",
+      "cdx-qr-ai-green-watering-can/3/circle",
+      "cdx-qr-ai-green-watering-can/4/square",
+      "cdx-qr-ai-green-watering-can/4/circle",
+      "cdx-qr-ai-green-watering-can/5/square",
+      "cdx-qr-ai-green-watering-can/5/circle",
+      "cdx-qr-ai-green-watering-can/6/square",
+      "cdx-qr-ai-green-watering-can/6/circle",
+      "cdx-qr-ai-green-watering-can/7/square",
+      "cdx-qr-ai-green-watering-can/7/circle",
+      "cdx-qr-ai-green-watering-can/8/square",
+      "cdx-qr-ai-green-watering-can/8/circle",
+      "cdx-qr-ai-green-watering-can/9/square",
+      "cdx-qr-ai-green-watering-can/9/circle",
+      "cdx-qr-ai-pitcher/0/square",
+      "cdx-qr-ai-pitcher/0/circle",
+      "cdx-qr-ai-pitcher/1/square",
+      "cdx-qr-ai-pitcher/1/circle",
+      "cdx-qr-ai-pitcher/2/square",
+      "cdx-qr-ai-pitcher/2/circle",
+      "cdx-qr-ai-pitcher/3/square",
+      "cdx-qr-ai-pitcher/3/circle",
+      "cdx-qr-ai-pitcher/4/square",
+      "cdx-qr-ai-pitcher/4/circle",
+      "cdx-qr-ai-pitcher/5/square",
+      "cdx-qr-ai-pitcher/5/circle",
+      "cdx-qr-ai-pitcher/6/square",
+      "cdx-qr-ai-pitcher/6/circle",
+      "cdx-qr-ai-pitcher/7/square",
+      "cdx-qr-ai-pitcher/7/circle",
+      "cdx-qr-ai-pitcher/8/square",
+      "cdx-qr-ai-pitcher/8/circle",
+      "cdx-qr-ai-pitcher/9/square",
+      "cdx-qr-ai-pitcher/9/circle",
+      "cdx-qr-ai-pear/0/square",
+      "cdx-qr-ai-pear/0/circle",
+      "cdx-qr-ai-pear/1/square",
+      "cdx-qr-ai-pear/1/circle",
+      "cdx-qr-ai-pear/2/square",
+      "cdx-qr-ai-pear/2/circle",
+      "cdx-qr-ai-pear/3/square",
+      "cdx-qr-ai-pear/3/circle",
+      "cdx-qr-ai-pear/4/square",
+      "cdx-qr-ai-pear/4/circle",
+      "cdx-qr-ai-pear/5/square",
+      "cdx-qr-ai-pear/5/circle",
+      "cdx-qr-ai-pear/6/square",
+      "cdx-qr-ai-pear/6/circle",
+      "cdx-qr-ai-pear/7/square",
+      "cdx-qr-ai-pear/7/circle",
+      "cdx-qr-ai-pear/8/square",
+      "cdx-qr-ai-pear/8/circle",
+      "cdx-qr-ai-pear/9/square",
+      "cdx-qr-ai-pear/9/circle",
+      "cdx-qr-ai-mushroom/0/square",
+      "cdx-qr-ai-mushroom/0/circle",
+      "cdx-qr-ai-mushroom/1/square",
+      "cdx-qr-ai-mushroom/1/circle",
+      "cdx-qr-ai-mushroom/2/square",
+      "cdx-qr-ai-mushroom/2/circle",
+      "cdx-qr-ai-mushroom/3/square",
+      "cdx-qr-ai-mushroom/3/circle",
+      "cdx-qr-ai-mushroom/4/square",
+      "cdx-qr-ai-tulip/0/square",
+      "cdx-qr-ai-tulip/0/circle",
+      "cdx-qr-ai-tulip/1/square",
+      "cdx-qr-ai-tulip/1/circle",
+      "cdx-qr-ai-tulip/2/square",
+      "cdx-qr-ai-tulip/2/circle",
+      "cdx-qr-ai-tulip/3/square",
+      "cdx-qr-ai-tulip/3/circle",
+      "cdx-qr-ai-tulip/4/square",
+      "cdx-qr-ai-tulip/4/circle",
+      "cdx-qr-ai-tulip/5/square",
+      "cdx-qr-ai-tulip/5/circle",
+      "cdx-qr-ai-tulip/6/square",
+      "cdx-qr-ai-tulip/6/circle",
+      "cdx-qr-ai-tulip/7/square",
+      "cdx-qr-ai-tulip/7/circle",
+      "cdx-qr-ai-tulip/8/square",
+      "cdx-qr-ai-tulip/8/circle",
+      "cdx-qr-ai-tulip/9/square",
+      "cdx-qr-ai-tulip/9/circle",
+      "cdx-qr-ai-stacked-stones/0/square",
+      "cdx-qr-ai-stacked-stones/0/circle",
+      "cdx-qr-ai-stacked-stones/1/square",
+      "cdx-qr-ai-stacked-stones/1/circle",
+      "cdx-qr-ai-stacked-stones/2/square",
+      "cdx-qr-ai-stacked-stones/2/circle",
+      "cdx-qr-ai-stacked-stones/3/square",
+      "cdx-qr-ai-stacked-stones/3/circle",
+      "cdx-qr-ai-stacked-stones/4/square",
+      "cdx-qr-ai-stacked-stones/4/circle",
+      "cdx-qr-ai-stacked-stones/5/square",
+      "cdx-qr-ai-stacked-stones/5/circle",
+      "cdx-qr-ai-stacked-stones/6/square",
+      "cdx-qr-ai-stacked-stones/6/circle",
+      "cdx-qr-ai-stacked-stones/7/square",
+      "cdx-qr-ai-stacked-stones/7/circle",
+      "cdx-qr-ai-stacked-stones/8/square",
+      "cdx-qr-ai-stacked-stones/8/circle",
+      "cdx-qr-ai-stacked-stones/9/square",
+      "cdx-qr-ai-stacked-stones/9/circle",
+      "cdx-qr-ai-rainbow/0/square",
+      "cdx-qr-ai-rainbow/0/circle",
+      "cdx-qr-ai-rainbow/1/square",
+      "cdx-qr-ai-rainbow/1/circle",
+      "cdx-qr-ai-rainbow/2/square",
+      "cdx-qr-ai-rainbow/2/circle",
+      "cdx-qr-ai-rainbow/3/square",
+      "cdx-qr-ai-rainbow/3/circle",
+      "cdx-qr-ai-rainbow/4/square",
+      "cdx-qr-ai-rainbow/4/circle",
+      "cdx-qr-ai-rainbow/5/square",
+      "cdx-qr-ai-rainbow/5/circle",
+      "cdx-qr-ai-rainbow/6/square",
+      "cdx-qr-ai-rainbow/6/circle",
+      "cdx-qr-ai-rainbow/7/square",
+      "cdx-qr-ai-rainbow/7/circle",
+      "cdx-qr-ai-rainbow/8/square",
+      "cdx-qr-ai-rainbow/8/circle",
+      "cdx-qr-ai-rainbow/9/square",
+      "cdx-qr-ai-rainbow/9/circle",
+      "cdx-qr-ai-teapot/0/square",
+      "cdx-qr-ai-teapot/0/circle",
+      "cdx-qr-ai-teapot/1/square",
+      "cdx-qr-ai-teapot/1/circle",
+      "cdx-qr-ai-teapot/2/square",
+      "cdx-qr-ai-teapot/2/circle",
+      "cdx-qr-ai-teapot/3/square",
+      "cdx-qr-ai-teapot/3/circle",
+      "cdx-qr-ai-teapot/4/square",
+      "cdx-qr-ai-teapot/4/circle",
+      "cdx-qr-ai-teapot/5/square",
+      "cdx-qr-ai-teapot/5/circle",
+      "cdx-qr-ai-teapot/6/square",
+      "cdx-qr-ai-teapot/6/circle",
+      "cdx-qr-ai-teapot/7/square",
+      "cdx-qr-ai-teapot/7/circle",
+      "cdx-qr-ai-teapot/8/square",
+      "cdx-qr-ai-teapot/8/circle",
+      "cdx-qr-ai-teapot/9/square",
+      "cdx-qr-ai-teapot/9/circle",
+      "cdx-qr-ai-scallop/0/square",
+      "cdx-qr-ai-scallop/0/circle",
+      "cdx-qr-ai-scallop/1/square",
+      "cdx-qr-ai-scallop/1/circle",
+      "cdx-qr-ai-scallop/2/square",
+      "cdx-qr-ai-scallop/2/circle",
+      "cdx-qr-ai-scallop/3/circle",
+      "cdx-qr-ai-scallop/4/square",
+      "cdx-qr-ai-scallop/4/circle",
+      "cdx-qr-ai-scallop/5/square",
+      "cdx-qr-ai-scallop/5/circle",
+      "cdx-qr-ai-scallop/6/square",
+      "cdx-qr-ai-scallop/6/circle",
+      "cdx-qr-ai-scallop/7/square",
+      "cdx-qr-ai-scallop/7/circle",
+      "cdx-qr-ai-scallop/8/square",
+      "cdx-qr-ai-scallop/8/circle",
+      "cdx-qr-ai-scallop/9/square",
+      "cdx-qr-ai-scallop/9/circle",
+      "cdx-qr-ai-blue-vase/0/square",
+      "cdx-qr-ai-blue-vase/0/circle",
+      "cdx-qr-ai-blue-vase/1/square",
+      "cdx-qr-ai-blue-vase/1/circle",
+      "cdx-qr-ai-blue-vase/2/square",
+      "cdx-qr-ai-blue-vase/2/circle",
+      "cdx-qr-ai-blue-vase/3/circle",
+      "cdx-qr-ai-blue-vase/4/square",
+      "cdx-qr-ai-blue-vase/4/circle",
+      "cdx-qr-ai-blue-vase/5/square",
+      "cdx-qr-ai-blue-vase/5/circle",
+      "cdx-qr-ai-blue-vase/6/square",
+      "cdx-qr-ai-blue-vase/6/circle",
+      "cdx-qr-ai-blue-vase/7/square",
+      "cdx-qr-ai-blue-vase/7/circle",
+      "cdx-qr-ai-blue-vase/8/square",
+      "cdx-qr-ai-blue-vase/8/circle",
+      "cdx-qr-ai-blue-vase/9/square",
+      "cdx-qr-ai-blue-vase/9/circle",
+      "cdx-qr-ai-squash/0/square",
+      "cdx-qr-ai-squash/0/circle",
+      "cdx-qr-ai-squash/1/square",
+      "cdx-qr-ai-squash/1/circle",
+      "cdx-qr-ai-squash/2/square",
+      "cdx-qr-ai-squash/2/circle",
+      "cdx-qr-ai-squash/3/square",
+      "cdx-qr-ai-squash/3/circle",
+      "cdx-qr-ai-squash/4/square",
+      "cdx-qr-ai-squash/4/circle",
+      "cdx-qr-ai-squash/5/square",
+      "cdx-qr-ai-squash/5/circle",
+      "cdx-qr-ai-squash/6/square",
+      "cdx-qr-ai-squash/6/circle",
+      "cdx-qr-ai-squash/7/square",
+      "cdx-qr-ai-squash/7/circle",
+      "cdx-qr-ai-squash/8/square",
+      "cdx-qr-ai-squash/8/circle",
+      "cdx-qr-ai-squash/9/square",
+      "cdx-qr-ai-squash/9/circle",
+      "met-436305/0/square",
+      "met-436305/0/circle",
+      "met-436305/1/square",
+      "met-436305/1/circle",
+      "met-436305/2/square",
+      "met-436305/2/circle",
+      "met-436305/3/square",
+      "met-436305/3/circle",
+      "met-436305/4/square",
+      "met-436305/4/circle",
+      "met-436305/5/square",
+      "met-436305/5/circle",
+      "met-436305/6/square",
+      "met-436305/6/circle",
+      "met-436305/7/square",
+      "met-436305/7/circle",
+      "met-436305/8/square",
+      "met-436305/8/circle",
+      "met-436305/9/square",
+      "met-436305/9/circle",
+      "met-459968/0/square",
+      "met-459968/0/circle",
+      "met-459968/1/square",
+      "met-459968/1/circle",
+      "met-459968/2/square",
+      "met-459968/2/circle",
+      "met-459968/3/square",
+      "met-459968/3/circle",
+      "met-459968/4/square",
+      "met-459968/4/circle",
+      "met-459968/5/square",
+      "met-459968/5/circle",
+      "met-459968/6/square",
+      "met-459968/6/circle",
+      "met-459968/7/square",
+      "met-459968/7/circle",
+      "met-459968/8/square",
+      "met-459968/8/circle",
+      "cdx-qr-ai-mushroom/5/square",
+      "cdx-qr-ai-mushroom/5/circle",
+      "cdx-qr-ai-mushroom/6/square",
+      "cdx-qr-ai-mushroom/6/circle",
+      "cdx-qr-ai-mushroom/7/square",
+      "cdx-qr-ai-mushroom/7/circle",
+      "cdx-qr-ai-mushroom/8/square",
+      "cdx-qr-ai-mushroom/8/circle",
+      "cdx-qr-ai-mushroom/9/square",
+      "cdx-qr-ai-mushroom/9/circle",
+      "met-459968/9/square",
+      "met-459968/9/circle",
+      "met-9549/0/square",
+      "met-9549/0/circle",
+      "met-9549/1/square",
+      "met-9549/1/circle",
+      "met-9549/2/square",
+      "met-9549/2/circle",
+      "met-9549/3/square",
+      "met-9549/3/circle",
+      "met-9549/4/square",
+      "met-9549/4/circle",
+      "met-9549/5/square",
+      "met-9549/5/circle",
+      "met-9549/6/square",
+      "met-9549/6/circle",
+      "met-9549/7/square",
+      "met-9549/7/circle",
+      "met-9549/8/square",
+      "met-9549/8/circle",
+      "met-9549/9/square",
+      "met-9549/9/circle",
+      "met-249072/0/square",
+      "met-249072/0/circle",
+      "met-249072/1/circle",
+      "met-249072/2/square",
+      "met-249072/2/circle",
+      "met-249072/3/square",
+      "met-249072/3/circle",
+      "met-249072/4/square",
+      "met-249072/4/circle",
+      "met-249072/5/square",
+      "met-249072/5/circle",
+      "met-249072/6/square",
+      "met-249072/6/circle",
+      "met-249072/7/square",
+      "met-249072/7/circle",
+      "met-249072/8/square",
+      "met-249072/8/circle",
+      "met-249072/9/square",
+      "met-249072/9/circle",
+      "met-478467/0/square",
+      "met-478467/0/circle",
+      "met-478467/1/square",
+      "met-478467/1/circle",
+      "met-478467/2/square",
+      "met-478467/2/circle",
+      "met-478467/3/square",
+      "met-478467/3/circle",
+      "met-478467/4/square",
+      "met-478467/4/circle",
+      "met-478467/5/square",
+      "met-478467/5/circle",
+      "met-478467/6/square",
+      "met-478467/6/circle",
+      "met-478467/7/square",
+      "met-478467/7/circle",
+      "met-478467/8/square",
+      "met-478467/8/circle",
+      "met-478467/9/square",
+      "met-478467/9/circle",
+      "met-556849/0/square",
+      "met-556849/0/circle",
+      "met-556849/1/square",
+      "met-556849/1/circle",
+      "met-556849/2/square",
+      "met-556849/2/circle",
+      "met-556849/3/square",
+      "met-556849/3/circle",
+      "met-556849/4/square",
+      "met-556849/4/circle",
+      "met-556849/5/square",
+      "met-556849/5/circle",
+      "met-556849/6/square",
+      "met-556849/6/circle",
+      "met-556849/7/square",
+      "met-556849/7/circle",
+      "met-556849/8/square",
+      "met-556849/8/circle",
+      "met-556849/9/square",
+      "met-556849/9/circle",
+      "met-325462/0/square",
+      "met-325462/0/circle",
+      "met-325462/1/square",
+      "met-325462/1/circle",
+      "met-325462/2/square",
+      "met-325462/2/circle",
+      "met-325462/3/square",
+      "met-325462/3/circle",
+      "met-325462/4/square",
+      "met-325462/4/circle",
+      "met-325462/5/square",
+      "met-325462/5/circle",
+      "met-325462/6/square",
+      "met-325462/6/circle",
+      "met-325462/7/square",
+      "met-325462/7/circle",
+      "met-325462/8/square",
+      "met-325462/8/circle",
+      "met-325462/9/square",
+      "met-325462/9/circle",
+      "met-203455/0/square",
+      "met-203455/0/circle",
+      "met-203455/1/square",
+      "met-203455/1/circle",
+      "met-203455/2/square",
+      "met-203455/2/circle",
+      "met-203455/3/square",
+      "met-203455/3/circle",
+      "met-203455/4/square",
+      "met-203455/4/circle",
+      "met-203455/5/square",
+      "met-203455/5/circle",
+      "met-203455/6/square",
+      "met-203455/6/circle",
+      "met-203455/7/square",
+      "met-203455/7/circle",
+      "met-203455/8/square",
+      "met-203455/8/circle",
+      "met-203455/9/square",
+      "met-203455/9/circle",
+      "met-196651/0/circle",
+      "met-196651/1/square",
+      "met-196651/1/circle",
+      "met-196651/2/circle",
+      "met-196651/3/square",
+      "met-196651/3/circle",
+      "met-196651/4/square",
+      "met-196651/4/circle",
+      "met-196651/5/square",
+      "met-196651/5/circle",
+      "met-196651/6/square",
+      "met-196651/6/circle",
+      "met-196651/7/square",
+      "met-196651/7/circle",
+      "met-196651/8/square",
+      "met-196651/8/circle",
+      "met-196651/9/square",
+      "met-196651/9/circle",
+      "met-570235/0/square",
+      "met-570235/0/circle",
+      "met-570235/1/square",
+      "met-570235/1/circle",
+      "met-570235/2/square",
+      "met-570235/2/circle",
+      "met-570235/3/square",
+      "met-570235/3/circle",
+      "met-570235/4/square",
+      "met-570235/4/circle",
+      "met-570235/5/square",
+      "met-570235/5/circle",
+      "met-570235/6/square",
+      "met-570235/6/circle",
+      "met-570235/7/square",
+      "met-570235/7/circle",
+      "met-570235/8/square",
+      "met-570235/8/circle",
+      "met-570235/9/square",
+      "met-570235/9/circle",
+      "ai-wave/0/square",
+      "ai-wave/0/circle",
+      "ai-wave/1/square",
+      "ai-wave/1/circle",
+      "ai-wave/2/square",
+      "ai-wave/2/circle",
+      "ai-wave/3/square",
+      "ai-wave/3/circle",
+      "ai-wave/4/square",
+      "ai-wave/4/circle",
+      "ai-wave/5/square",
+      "ai-wave/5/circle",
+      "ai-wave/6/square",
+      "ai-wave/6/circle",
+      "ai-wave/7/square",
+      "ai-wave/7/circle",
+      "ai-wave/8/square",
+      "ai-wave/8/circle",
+      "ai-wave/9/square",
+      "ai-wave/9/circle",
+      "ai-arch/0/square",
+      "ai-arch/0/circle",
+      "ai-arch/1/square",
+      "ai-arch/1/circle",
+      "ai-arch/2/square",
+      "ai-arch/2/circle",
+      "ai-arch/3/square",
+      "ai-arch/3/circle",
+      "ai-arch/4/square",
+      "ai-arch/4/circle",
+      "ai-arch/5/square",
+      "ai-arch/5/circle",
+      "ai-arch/6/square",
+      "ai-arch/6/circle",
+      "ai-arch/7/square",
+      "ai-arch/7/circle",
+      "ai-arch/8/square",
+      "ai-arch/8/circle",
+      "ai-arch/9/square",
+      "ai-arch/9/circle",
+      "still-life/0/square",
+      "still-life/0/circle",
+      "still-life/1/square",
+      "still-life/1/circle",
+      "still-life/2/square",
+      "still-life/2/circle",
+      "still-life/3/square",
+      "still-life/3/circle",
+      "still-life/4/square",
+      "still-life/4/circle",
+      "still-life/5/square",
+      "still-life/5/circle",
+      "still-life/6/square",
+      "still-life/6/circle",
+      "still-life/7/square",
+      "still-life/7/circle",
+      "still-life/8/square",
+      "still-life/8/circle",
+      "still-life/9/square",
+      "still-life/9/circle",
+      "forest/0/square",
+      "forest/0/circle",
+      "forest/1/square",
+      "forest/1/circle",
+      "forest/2/square",
+      "forest/2/circle",
+      "forest/3/square",
+      "forest/3/circle",
+      "forest/4/square",
+      "forest/4/circle",
+      "forest/5/square",
+      "forest/5/circle",
+      "forest/6/square",
+      "forest/6/circle",
+      "forest/7/square",
+      "forest/7/circle",
+      "forest/8/square",
+      "forest/8/circle",
+      "forest/9/square",
+      "forest/9/circle",
+      "cdx-qr-ai-fern/0/square",
+      "cdx-qr-ai-fern/0/circle",
+      "cdx-qr-ai-fern/1/square",
+      "cdx-qr-ai-fern/1/circle",
+      "cdx-qr-ai-fern/2/square",
+      "cdx-qr-ai-fern/2/circle",
+      "cdx-qr-ai-fern/3/square",
+      "cdx-qr-ai-fern/3/circle",
+      "cdx-qr-ai-fern/4/square",
+      "cdx-qr-ai-fern/4/circle",
+      "cdx-qr-ai-fern/5/square",
+      "cdx-qr-ai-fern/5/circle",
+      "cdx-qr-ai-fern/6/square",
+      "cdx-qr-ai-fern/6/circle",
+      "cdx-qr-ai-fern/7/square",
+      "cdx-qr-ai-fern/7/circle",
+      "cdx-qr-ai-fern/8/square",
+      "cdx-qr-ai-fern/8/circle",
+      "cdx-qr-ai-fern/9/square",
+      "cdx-qr-ai-fern/9/circle",
+      "cdx-qr-ai-cactus/0/square",
+      "cdx-qr-ai-cactus/0/circle",
+      "cdx-qr-ai-cactus/1/square",
+      "cdx-qr-ai-cactus/1/circle",
+      "cdx-qr-ai-cactus/2/square",
+      "cdx-qr-ai-cactus/2/circle",
+      "cdx-qr-ai-cactus/3/square",
+      "cdx-qr-ai-cactus/3/circle",
+      "cdx-qr-ai-cactus/4/square",
+      "cdx-qr-ai-cactus/4/circle",
+      "cdx-qr-ai-cactus/5/square",
+      "cdx-qr-ai-cactus/5/circle",
+      "cdx-qr-ai-cactus/6/square",
+      "cdx-qr-ai-cactus/6/circle",
+      "cdx-qr-ai-cactus/7/square",
+      "cdx-qr-ai-cactus/7/circle",
+      "cdx-qr-ai-cactus/8/square",
+      "cdx-qr-ai-cactus/8/circle",
+      "cdx-qr-ai-cactus/9/square",
+      "cdx-qr-ai-cactus/9/circle",
+      "cdx-qr-ai-stacking-rings/0/square",
+      "cdx-qr-ai-stacking-rings/0/circle",
+      "cdx-qr-ai-stacking-rings/1/square",
+      "cdx-qr-ai-stacking-rings/1/circle",
+      "cdx-qr-ai-stacking-rings/2/square",
+      "cdx-qr-ai-stacking-rings/2/circle",
+      "cdx-qr-ai-stacking-rings/3/square",
+      "cdx-qr-ai-stacking-rings/3/circle",
+      "cdx-qr-ai-stacking-rings/4/square",
+      "cdx-qr-ai-stacking-rings/4/circle",
+      "cdx-qr-ai-stacking-rings/5/square",
+      "cdx-qr-ai-stacking-rings/5/circle",
+      "cdx-qr-ai-stacking-rings/6/square",
+      "cdx-qr-ai-stacking-rings/6/circle",
+      "cdx-qr-ai-stacking-rings/7/square",
+      "cdx-qr-ai-stacking-rings/7/circle",
+      "cdx-qr-ai-stacking-rings/8/square",
+      "cdx-qr-ai-stacking-rings/8/circle",
+      "cdx-qr-ai-stacking-rings/9/square",
+      "cdx-qr-ai-stacking-rings/9/circle",
+      "cdx-qr-ai-hot-air-balloon/0/square",
+      "cdx-qr-ai-hot-air-balloon/0/circle",
+      "cdx-qr-ai-hot-air-balloon/1/square",
+      "cdx-qr-ai-hot-air-balloon/1/circle",
+      "cdx-qr-ai-hot-air-balloon/2/square",
+      "cdx-qr-ai-hot-air-balloon/2/circle",
+      "cdx-qr-ai-hot-air-balloon/3/square",
+      "cdx-qr-ai-hot-air-balloon/3/circle",
+      "cdx-qr-ai-hot-air-balloon/4/square",
+      "cdx-qr-ai-hot-air-balloon/4/circle",
+      "cdx-qr-ai-hot-air-balloon/5/square",
+      "cdx-qr-ai-hot-air-balloon/5/circle",
+      "cdx-qr-ai-hot-air-balloon/6/square",
+      "cdx-qr-ai-hot-air-balloon/6/circle",
+      "cdx-qr-ai-hot-air-balloon/7/square",
+      "cdx-qr-ai-hot-air-balloon/7/circle",
+      "cdx-qr-ai-hot-air-balloon/8/square",
+      "cdx-qr-ai-hot-air-balloon/8/circle",
+      "cdx-qr-ai-hot-air-balloon/9/square",
+      "cdx-qr-ai-hot-air-balloon/9/circle",
+      "cdx-qr-ai-spinning-top/0/square",
+      "cdx-qr-ai-spinning-top/0/circle",
+      "cdx-qr-ai-spinning-top/1/square",
+      "cdx-qr-ai-spinning-top/1/circle",
+      "cdx-qr-ai-spinning-top/2/square",
+      "cdx-qr-ai-spinning-top/2/circle",
+      "cdx-qr-ai-spinning-top/3/square",
+      "cdx-qr-ai-spinning-top/3/circle",
+      "cdx-qr-ai-spinning-top/4/square",
+      "cdx-qr-ai-spinning-top/4/circle",
+      "cdx-qr-ai-pinecone/0/square",
+      "cdx-qr-ai-pinecone/0/circle",
+      "cdx-qr-ai-pinecone/1/square",
+      "cdx-qr-ai-pinecone/1/circle",
+      "cdx-qr-ai-pinecone/2/square",
+      "cdx-qr-ai-pinecone/2/circle",
+      "cdx-qr-ai-pinecone/3/square",
+      "cdx-qr-ai-pinecone/3/circle",
+      "cdx-qr-ai-pinecone/4/square",
+      "cdx-qr-ai-pinecone/4/circle",
+      "cdx-qr-ai-pinecone/5/square",
+      "cdx-qr-ai-pinecone/5/circle",
+      "cdx-qr-ai-pinecone/6/square",
+      "cdx-qr-ai-pinecone/6/circle",
+      "cdx-qr-ai-pinecone/7/square",
+      "cdx-qr-ai-pinecone/7/circle",
+      "cdx-qr-ai-pinecone/8/square",
+      "cdx-qr-ai-pinecone/8/circle",
+      "cdx-qr-ai-pinecone/9/square",
+      "cdx-qr-ai-pinecone/9/circle",
+      "cdx-qr-ai-rook/0/square",
+      "cdx-qr-ai-rook/0/circle",
+      "cdx-qr-ai-rook/1/square",
+      "cdx-qr-ai-rook/1/circle",
+      "cdx-qr-ai-rook/2/square",
+      "cdx-qr-ai-rook/2/circle",
+      "cdx-qr-ai-rook/3/square",
+      "cdx-qr-ai-rook/3/circle",
+      "cdx-qr-ai-rook/4/square",
+      "cdx-qr-ai-rook/4/circle",
+      "cdx-qr-ai-rook/5/square",
+      "cdx-qr-ai-rook/5/circle",
+      "cdx-qr-ai-rook/6/square",
+      "cdx-qr-ai-rook/6/circle",
+      "cdx-qr-ai-rook/7/square",
+      "cdx-qr-ai-rook/7/circle",
+      "cdx-qr-ai-rook/8/square",
+      "cdx-qr-ai-rook/8/circle",
+      "cdx-qr-ai-rook/9/square",
+      "cdx-qr-ai-rook/9/circle",
+      "cdx-qr-ai-wood-blocks/0/square",
+      "cdx-qr-ai-wood-blocks/0/circle",
+      "cdx-qr-ai-wood-blocks/1/square",
+      "cdx-qr-ai-wood-blocks/1/circle",
+      "cdx-qr-ai-wood-blocks/2/square",
+      "cdx-qr-ai-wood-blocks/2/circle",
+      "cdx-qr-ai-wood-blocks/3/circle",
+      "cdx-qr-ai-wood-blocks/4/square",
+      "cdx-qr-ai-wood-blocks/4/circle",
+      "cdx-qr-ai-wood-blocks/5/square",
+      "cdx-qr-ai-wood-blocks/5/circle",
+      "cdx-qr-ai-wood-blocks/6/square",
+      "cdx-qr-ai-wood-blocks/6/circle",
+      "cdx-qr-ai-wood-blocks/7/square",
+      "cdx-qr-ai-wood-blocks/7/circle",
+      "cdx-qr-ai-wood-blocks/8/square",
+      "cdx-qr-ai-wood-blocks/8/circle",
+      "cdx-qr-ai-wood-blocks/9/square",
+      "cdx-qr-ai-wood-blocks/9/circle",
+      "cdx-qr-ai-lotus/0/square",
+      "cdx-qr-ai-lotus/0/circle",
+      "cdx-qr-ai-lotus/1/square",
+      "cdx-qr-ai-lotus/1/circle",
+      "cdx-qr-ai-lotus/2/square",
+      "cdx-qr-ai-lotus/2/circle",
+      "cdx-qr-ai-lotus/3/square",
+      "cdx-qr-ai-lotus/3/circle",
+      "cdx-qr-ai-lotus/4/square",
+      "cdx-qr-ai-lotus/4/circle",
+      "cdx-qr-ai-lotus/5/square",
+      "cdx-qr-ai-lotus/5/circle",
+      "cdx-qr-ai-lotus/6/square",
+      "cdx-qr-ai-lotus/6/circle",
+      "cdx-qr-ai-lotus/7/square",
+      "cdx-qr-ai-lotus/7/circle",
+      "cdx-qr-ai-lotus/8/square",
+      "cdx-qr-ai-lotus/8/circle",
+      "cdx-qr-ai-lotus/9/square",
+      "cdx-qr-ai-lotus/9/circle",
+      "cdx-qr-ai-pumpkin/0/square",
+      "cdx-qr-ai-pumpkin/0/circle",
+      "cdx-qr-ai-pumpkin/1/square",
+      "cdx-qr-ai-pumpkin/1/circle",
+      "cdx-qr-ai-pumpkin/2/square",
+      "cdx-qr-ai-pumpkin/2/circle",
+      "cdx-qr-ai-pumpkin/3/square",
+      "cdx-qr-ai-pumpkin/3/circle",
+      "cdx-qr-ai-pumpkin/4/square",
+      "cdx-qr-ai-pumpkin/4/circle",
+      "cdx-qr-ai-pumpkin/5/square",
+      "cdx-qr-ai-pumpkin/5/circle",
+      "cdx-qr-ai-pumpkin/6/square",
+      "cdx-qr-ai-pumpkin/6/circle",
+      "cdx-qr-ai-pumpkin/7/square",
+      "cdx-qr-ai-pumpkin/7/circle",
+      "cdx-qr-ai-pumpkin/8/square",
+      "cdx-qr-ai-pumpkin/8/circle",
+      "cdx-qr-ai-pumpkin/9/square",
+      "cdx-qr-ai-pumpkin/9/circle",
+      "cdx-qr-ai-ginkgo/0/circle",
+      "cdx-qr-ai-ginkgo/1/square",
+      "cdx-qr-ai-ginkgo/1/circle",
+      "cdx-qr-ai-ginkgo/2/square",
+      "cdx-qr-ai-ginkgo/2/circle",
+      "cdx-qr-ai-ginkgo/3/square",
+      "cdx-qr-ai-ginkgo/3/circle",
+      "cdx-qr-ai-ginkgo/4/square",
+      "cdx-qr-ai-ginkgo/4/circle",
+      "cdx-qr-ai-ginkgo/5/square",
+      "cdx-qr-ai-ginkgo/5/circle",
+      "cdx-qr-ai-ginkgo/6/square",
+      "cdx-qr-ai-ginkgo/6/circle",
+      "cdx-qr-ai-ginkgo/7/square",
+      "cdx-qr-ai-ginkgo/7/circle",
+      "cdx-qr-ai-ginkgo/8/square",
+      "cdx-qr-ai-ginkgo/8/circle",
+      "cdx-qr-ai-ginkgo/9/square",
+      "cdx-qr-ai-ginkgo/9/circle",
+      "cdx-qr-ai-pebbles/0/square",
+      "cdx-qr-ai-pebbles/0/circle",
+      "cdx-qr-ai-pebbles/1/square",
+      "cdx-qr-ai-pebbles/1/circle",
+      "cdx-qr-ai-pebbles/2/square",
+      "cdx-qr-ai-pebbles/2/circle",
+      "cdx-qr-ai-pebbles/3/square",
+      "cdx-qr-ai-pebbles/3/circle",
+      "cdx-qr-ai-pebbles/4/square",
+      "cdx-qr-ai-pebbles/4/circle",
+      "cdx-qr-ai-pebbles/5/square",
+      "cdx-qr-ai-pebbles/5/circle",
+      "cdx-qr-ai-pebbles/6/square",
+      "cdx-qr-ai-pebbles/6/circle",
+      "cdx-qr-ai-pebbles/7/square",
+      "cdx-qr-ai-pebbles/7/circle",
+      "cdx-qr-ai-pebbles/8/square",
+      "cdx-qr-ai-pebbles/8/circle",
+      "cdx-qr-ai-pebbles/9/square",
+      "cdx-qr-ai-pebbles/9/circle",
+      "met-10181/0/square",
+      "met-10181/0/circle",
+      "met-10181/1/square",
+      "met-10181/1/circle",
+      "met-10181/2/square",
+      "met-10181/2/circle",
+      "met-10181/3/square",
+      "met-10181/3/circle",
+      "met-10181/4/square",
+      "met-10181/4/circle",
+      "met-10181/5/square",
+      "met-10181/5/circle",
+      "met-10181/6/square",
+      "met-10181/6/circle",
+      "met-10181/7/square",
+      "met-10181/7/circle",
+      "met-10181/8/square",
+      "met-10181/8/circle",
+      "met-10181/9/square",
+      "met-10181/9/circle",
+      "met-9284/0/circle",
+      "met-9284/1/square",
+      "met-9284/1/circle",
+      "met-9284/2/square",
+      "met-9284/2/circle",
+      "met-9284/3/square",
+      "met-9284/3/circle",
+      "met-9284/4/square",
+      "met-9284/4/circle",
+      "met-9284/5/square",
+      "met-9284/5/circle",
+      "met-9284/6/square",
+      "met-9284/6/circle",
+      "met-9284/7/square",
+      "met-9284/7/circle",
+      "met-9284/8/square",
+      "met-9284/8/circle",
+      "cdx-qr-ai-spinning-top/5/square",
+      "cdx-qr-ai-spinning-top/5/circle",
+      "cdx-qr-ai-spinning-top/6/square",
+      "cdx-qr-ai-spinning-top/6/circle",
+      "cdx-qr-ai-spinning-top/7/square",
+      "cdx-qr-ai-spinning-top/7/circle",
+      "cdx-qr-ai-spinning-top/8/square",
+      "cdx-qr-ai-spinning-top/8/circle",
+      "cdx-qr-ai-spinning-top/9/square",
+      "cdx-qr-ai-spinning-top/9/circle",
+      "met-9284/9/square",
+      "met-9284/9/circle",
+      "met-9283/0/circle",
+      "met-9283/1/square",
+      "met-9283/1/circle",
+      "met-9283/2/square",
+      "met-9283/2/circle",
+      "met-9283/3/circle",
+      "met-9283/4/square",
+      "met-9283/4/circle",
+      "met-9283/5/square",
+      "met-9283/5/circle",
+      "met-9283/6/square",
+      "met-9283/6/circle",
+      "met-9283/7/square",
+      "met-9283/7/circle",
+      "met-9283/8/square",
+      "met-9283/8/circle",
+      "met-9283/9/square",
+      "met-9283/9/circle",
+      "met-312624/0/square",
+      "met-312624/0/circle",
+      "met-312624/1/square",
+      "met-312624/1/circle",
+      "met-312624/2/square",
+      "met-312624/2/circle",
+      "met-312624/3/square",
+      "met-312624/3/circle",
+      "met-312624/4/square",
+      "met-312624/4/circle",
+      "met-312624/5/square",
+      "met-312624/5/circle",
+      "met-312624/6/square",
+      "met-312624/6/circle",
+      "met-312624/7/square",
+      "met-312624/7/circle",
+      "met-312624/8/square",
+      "met-312624/8/circle",
+      "met-312624/9/square",
+      "met-312624/9/circle",
+      "met-42138/0/square",
+      "met-42138/0/circle",
+      "met-42138/1/square",
+      "met-42138/1/circle",
+      "met-42138/2/square",
+      "met-42138/2/circle",
+      "met-42138/3/square",
+      "met-42138/3/circle",
+      "met-42138/4/square",
+      "met-42138/4/circle",
+      "met-42138/5/square",
+      "met-42138/5/circle",
+      "met-42138/6/square",
+      "met-42138/6/circle",
+      "met-42138/7/square",
+      "met-42138/7/circle",
+      "met-42138/8/square",
+      "met-42138/8/circle",
+      "met-42138/9/square",
+      "met-42138/9/circle",
+      "met-244130/0/square",
+      "met-244130/0/circle",
+      "met-244130/1/square",
+      "met-244130/1/circle",
+      "met-244130/2/square",
+      "met-244130/2/circle",
+      "met-244130/3/square",
+      "met-244130/3/circle",
+      "met-244130/4/square",
+      "met-244130/4/circle",
+      "met-244130/5/square",
+      "met-244130/5/circle",
+      "met-244130/6/square",
+      "met-244130/6/circle",
+      "met-244130/7/square",
+      "met-244130/7/circle",
+      "met-244130/8/square",
+      "met-244130/8/circle",
+      "met-244130/9/square",
+      "met-244130/9/circle",
+      "met-13181/0/square",
+      "met-13181/0/circle",
+      "met-13181/1/square",
+      "met-13181/1/circle",
+      "met-13181/2/square",
+      "met-13181/2/circle",
+      "met-13181/3/square",
+      "met-13181/3/circle",
+      "met-13181/4/square",
+      "met-13181/4/circle",
+      "met-13181/5/square",
+      "met-13181/5/circle",
+      "met-13181/6/square",
+      "met-13181/6/circle",
+      "met-13181/7/square",
+      "met-13181/7/circle",
+      "met-13181/8/square",
+      "met-13181/8/circle",
+      "met-13181/9/square",
+      "met-13181/9/circle",
+      "met-438031/0/square",
+      "met-438031/0/circle",
+      "met-438031/1/square",
+      "met-438031/1/circle",
+      "met-438031/2/square",
+      "met-438031/2/circle",
+      "met-438031/3/square",
+      "met-438031/3/circle",
+      "met-438031/4/square",
+      "met-438031/4/circle",
+      "met-438031/5/square",
+      "met-438031/5/circle",
+      "met-438031/6/square",
+      "met-438031/6/circle",
+      "met-438031/7/square",
+      "met-438031/7/circle",
+      "met-438031/8/square",
+      "met-438031/8/circle",
+      "met-438031/9/square",
+      "met-438031/9/circle",
+      "met-3845/0/square",
+      "met-3845/0/circle",
+      "met-3845/1/square",
+      "met-3845/1/circle",
+      "met-3845/2/square",
+      "met-3845/2/circle",
+      "met-3845/3/square",
+      "met-3845/3/circle",
+      "met-3845/4/square",
+      "met-3845/4/circle",
+      "met-3845/5/square",
+      "met-3845/5/circle",
+      "met-3845/6/square",
+      "met-3845/6/circle",
+      "met-3845/7/square",
+      "met-3845/7/circle",
+      "met-3845/8/square",
+      "met-3845/8/circle",
+      "met-3845/9/square",
+      "met-3845/9/circle",
+      "met-244131/0/square",
+      "met-244131/0/circle",
+      "met-244131/1/square",
+      "met-244131/1/circle",
+      "met-244131/2/square",
+      "met-244131/2/circle",
+      "met-244131/3/square",
+      "met-244131/3/circle",
+      "met-244131/4/square",
+      "met-244131/4/circle",
+      "met-244131/5/square",
+      "met-244131/5/circle",
+      "met-244131/6/square",
+      "met-244131/6/circle",
+      "met-244131/7/square",
+      "met-244131/7/circle",
+      "met-244131/8/square",
+      "met-244131/8/circle",
+      "met-244131/9/square",
+      "met-244131/9/circle"
+    ],
+    "failedGate": [
+      "ai-farm/5/square",
+      "ai-farm/6/square",
+      "ai-farm/7/square",
+      "ai-farm/8/square",
+      "ai-farm/9/square",
+      "ai-mushrooms/5/square",
+      "ai-mushrooms/6/square",
+      "ai-mushrooms/7/square",
+      "ai-mushrooms/8/square",
+      "ai-mushrooms/9/square",
+      "wildflowers/5/square",
+      "wildflowers/6/square",
+      "wildflowers/7/square",
+      "wildflowers/8/square",
+      "wildflowers/9/square",
+      "spiral-stairs/5/square",
+      "spiral-stairs/6/square",
+      "spiral-stairs/7/square",
+      "spiral-stairs/8/square",
+      "spiral-stairs/9/square",
+      "cdx-qr-ai-monstera/5/square",
+      "cdx-qr-ai-monstera/6/square",
+      "cdx-qr-ai-monstera/7/square",
+      "cdx-qr-ai-monstera/8/square",
+      "cdx-qr-ai-monstera/9/square",
+      "cdx-qr-ai-green-watering-can/5/square",
+      "cdx-qr-ai-green-watering-can/6/square",
+      "cdx-qr-ai-green-watering-can/7/square",
+      "cdx-qr-ai-green-watering-can/8/square",
+      "cdx-qr-ai-green-watering-can/9/square",
+      "cdx-qr-ai-pitcher/5/square",
+      "cdx-qr-ai-pitcher/6/square",
+      "cdx-qr-ai-pitcher/7/square",
+      "cdx-qr-ai-pitcher/8/square",
+      "cdx-qr-ai-pitcher/9/square",
+      "cdx-qr-ai-pear/5/square",
+      "cdx-qr-ai-pear/6/square",
+      "cdx-qr-ai-pear/7/square",
+      "cdx-qr-ai-pear/8/square",
+      "cdx-qr-ai-pear/9/square",
+      "cdx-qr-ai-tulip/5/square",
+      "cdx-qr-ai-tulip/6/square",
+      "cdx-qr-ai-tulip/7/square",
+      "cdx-qr-ai-tulip/8/square",
+      "cdx-qr-ai-tulip/9/square",
+      "cdx-qr-ai-stacked-stones/5/square",
+      "cdx-qr-ai-stacked-stones/6/square",
+      "cdx-qr-ai-stacked-stones/7/square",
+      "cdx-qr-ai-stacked-stones/8/square",
+      "cdx-qr-ai-stacked-stones/9/square",
+      "cdx-qr-ai-rainbow/5/square",
+      "cdx-qr-ai-rainbow/6/square",
+      "cdx-qr-ai-rainbow/7/square",
+      "cdx-qr-ai-rainbow/8/square",
+      "cdx-qr-ai-rainbow/9/square",
+      "cdx-qr-ai-teapot/5/square",
+      "cdx-qr-ai-teapot/6/square",
+      "cdx-qr-ai-teapot/7/square",
+      "cdx-qr-ai-teapot/8/square",
+      "cdx-qr-ai-teapot/9/square",
+      "cdx-qr-ai-scallop/5/square",
+      "cdx-qr-ai-scallop/6/square",
+      "cdx-qr-ai-scallop/7/square",
+      "cdx-qr-ai-scallop/8/square",
+      "cdx-qr-ai-scallop/9/square",
+      "cdx-qr-ai-blue-vase/5/square",
+      "cdx-qr-ai-blue-vase/6/square",
+      "cdx-qr-ai-blue-vase/7/square",
+      "cdx-qr-ai-blue-vase/8/square",
+      "cdx-qr-ai-blue-vase/9/square",
+      "cdx-qr-ai-squash/5/square",
+      "cdx-qr-ai-squash/6/square",
+      "cdx-qr-ai-squash/7/square",
+      "cdx-qr-ai-squash/8/square",
+      "cdx-qr-ai-squash/9/square",
+      "met-436305/5/square",
+      "met-436305/6/square",
+      "met-436305/7/square",
+      "met-436305/8/square",
+      "met-436305/9/square",
+      "met-459968/5/square",
+      "met-459968/6/square",
+      "met-459968/7/square",
+      "met-459968/8/square",
+      "cdx-qr-ai-mushroom/5/square",
+      "cdx-qr-ai-mushroom/6/square",
+      "cdx-qr-ai-mushroom/7/square",
+      "cdx-qr-ai-mushroom/8/square",
+      "cdx-qr-ai-mushroom/9/square",
+      "met-459968/9/square",
+      "met-9549/5/square",
+      "met-9549/6/square",
+      "met-9549/7/square",
+      "met-9549/8/square",
+      "met-9549/9/square",
+      "met-249072/5/square",
+      "met-249072/6/square",
+      "met-249072/7/square",
+      "met-249072/8/square",
+      "met-249072/9/square",
+      "met-478467/5/square",
+      "met-478467/6/square",
+      "met-478467/7/square",
+      "met-478467/8/square",
+      "met-478467/9/square",
+      "met-556849/5/square",
+      "met-556849/6/square",
+      "met-556849/7/square",
+      "met-556849/8/square",
+      "met-556849/9/square",
+      "met-325462/5/square",
+      "met-325462/6/square",
+      "met-325462/7/square",
+      "met-325462/8/square",
+      "met-325462/9/square",
+      "met-203455/5/square",
+      "met-203455/6/square",
+      "met-203455/7/square",
+      "met-203455/8/square",
+      "met-203455/9/square",
+      "met-196651/5/square",
+      "met-196651/6/square",
+      "met-196651/7/square",
+      "met-196651/8/square",
+      "met-196651/9/square",
+      "met-570235/5/square",
+      "met-570235/6/square",
+      "met-570235/7/square",
+      "met-570235/8/square",
+      "met-570235/9/square",
+      "ai-wave/5/square",
+      "ai-wave/6/square",
+      "ai-wave/7/square",
+      "ai-wave/8/square",
+      "ai-wave/9/square",
+      "ai-arch/5/square",
+      "ai-arch/6/square",
+      "ai-arch/7/square",
+      "ai-arch/8/square",
+      "ai-arch/9/square",
+      "still-life/5/square",
+      "still-life/6/square",
+      "still-life/7/square",
+      "still-life/8/square",
+      "still-life/9/square",
+      "forest/5/square",
+      "forest/6/square",
+      "forest/7/square",
+      "forest/8/square",
+      "forest/9/square",
+      "cdx-qr-ai-fern/5/square",
+      "cdx-qr-ai-fern/6/square",
+      "cdx-qr-ai-fern/7/square",
+      "cdx-qr-ai-fern/8/square",
+      "cdx-qr-ai-fern/9/square",
+      "cdx-qr-ai-cactus/5/square",
+      "cdx-qr-ai-cactus/6/square",
+      "cdx-qr-ai-cactus/7/square",
+      "cdx-qr-ai-cactus/8/square",
+      "cdx-qr-ai-cactus/9/square",
+      "cdx-qr-ai-stacking-rings/5/square",
+      "cdx-qr-ai-stacking-rings/6/square",
+      "cdx-qr-ai-stacking-rings/7/square",
+      "cdx-qr-ai-stacking-rings/8/square",
+      "cdx-qr-ai-stacking-rings/9/square",
+      "cdx-qr-ai-hot-air-balloon/5/square",
+      "cdx-qr-ai-hot-air-balloon/6/square",
+      "cdx-qr-ai-hot-air-balloon/7/square",
+      "cdx-qr-ai-hot-air-balloon/8/square",
+      "cdx-qr-ai-hot-air-balloon/9/square",
+      "cdx-qr-ai-pinecone/5/square",
+      "cdx-qr-ai-pinecone/6/square",
+      "cdx-qr-ai-pinecone/7/square",
+      "cdx-qr-ai-pinecone/8/square",
+      "cdx-qr-ai-pinecone/9/square",
+      "cdx-qr-ai-rook/5/square",
+      "cdx-qr-ai-rook/6/square",
+      "cdx-qr-ai-rook/7/square",
+      "cdx-qr-ai-rook/8/square",
+      "cdx-qr-ai-rook/9/square",
+      "cdx-qr-ai-wood-blocks/5/square",
+      "cdx-qr-ai-wood-blocks/6/square",
+      "cdx-qr-ai-wood-blocks/7/square",
+      "cdx-qr-ai-wood-blocks/8/square",
+      "cdx-qr-ai-wood-blocks/9/square",
+      "cdx-qr-ai-lotus/5/square",
+      "cdx-qr-ai-lotus/6/square",
+      "cdx-qr-ai-lotus/7/square",
+      "cdx-qr-ai-lotus/8/square",
+      "cdx-qr-ai-lotus/9/square",
+      "cdx-qr-ai-pumpkin/5/square",
+      "cdx-qr-ai-pumpkin/6/square",
+      "cdx-qr-ai-pumpkin/7/square",
+      "cdx-qr-ai-pumpkin/8/square",
+      "cdx-qr-ai-pumpkin/9/square",
+      "cdx-qr-ai-ginkgo/5/square",
+      "cdx-qr-ai-ginkgo/6/square",
+      "cdx-qr-ai-ginkgo/7/square",
+      "cdx-qr-ai-ginkgo/8/square",
+      "cdx-qr-ai-ginkgo/9/square",
+      "cdx-qr-ai-pebbles/5/square",
+      "cdx-qr-ai-pebbles/6/square",
+      "cdx-qr-ai-pebbles/7/square",
+      "cdx-qr-ai-pebbles/8/square",
+      "cdx-qr-ai-pebbles/9/square",
+      "met-10181/5/square",
+      "met-10181/6/square",
+      "met-10181/7/square",
+      "met-10181/8/square",
+      "met-10181/9/square",
+      "met-9284/5/square",
+      "met-9284/6/square",
+      "met-9284/7/square",
+      "met-9284/8/square",
+      "cdx-qr-ai-spinning-top/5/square",
+      "cdx-qr-ai-spinning-top/6/square",
+      "cdx-qr-ai-spinning-top/7/square",
+      "cdx-qr-ai-spinning-top/8/square",
+      "cdx-qr-ai-spinning-top/9/square",
+      "met-9284/9/square",
+      "met-9283/5/square",
+      "met-9283/6/square",
+      "met-9283/7/square",
+      "met-9283/8/square",
+      "met-9283/9/square",
+      "met-312624/5/square",
+      "met-312624/6/square",
+      "met-312624/7/square",
+      "met-312624/8/square",
+      "met-312624/9/square",
+      "met-42138/5/square",
+      "met-42138/6/square",
+      "met-42138/7/square",
+      "met-42138/8/square",
+      "met-42138/9/square",
+      "met-244130/5/square",
+      "met-244130/6/square",
+      "met-244130/7/square",
+      "met-244130/8/square",
+      "met-244130/9/square",
+      "met-13181/5/square",
+      "met-13181/6/square",
+      "met-13181/7/square",
+      "met-13181/8/square",
+      "met-13181/9/square",
+      "met-438031/5/square",
+      "met-438031/6/square",
+      "met-438031/7/square",
+      "met-438031/8/square",
+      "met-438031/9/square",
+      "met-3845/5/square",
+      "met-3845/6/square",
+      "met-3845/7/square",
+      "met-3845/8/square",
+      "met-3845/9/square",
+      "met-244131/5/square",
+      "met-244131/6/square",
+      "met-244131/7/square",
+      "met-244131/8/square",
+      "met-244131/9/square"
+    ],
+    "missing": []
+  },
+  "detail": {
+    "codes": 1040,
+    "errors": [],
+    "failedCodes": [],
+    "failedGate": [],
+    "missing": []
+  },
+  "scanRegressions": [],
+  "fidelity": {
+    "phone": {
+      "matched": 1040,
+      "meanGain": 0.14676898490965415,
+      "nonImprovingCodes": [
+        "cdx-qr-ai-fern/9/square",
+        "cdx-qr-ai-green-watering-can/7/square",
+        "cdx-qr-ai-green-watering-can/8/square",
+        "cdx-qr-ai-green-watering-can/9/square",
+        "cdx-qr-ai-cactus/5/square",
+        "cdx-qr-ai-cactus/6/square",
+        "cdx-qr-ai-cactus/7/square",
+        "cdx-qr-ai-cactus/8/square",
+        "cdx-qr-ai-cactus/9/square",
+        "cdx-qr-ai-pitcher/9/square",
+        "cdx-qr-ai-stacking-rings/9/square",
+        "cdx-qr-ai-pear/5/square",
+        "cdx-qr-ai-pear/6/square",
+        "cdx-qr-ai-pear/7/square",
+        "cdx-qr-ai-pear/8/square",
+        "cdx-qr-ai-pear/9/square",
+        "cdx-qr-ai-hot-air-balloon/5/square",
+        "cdx-qr-ai-hot-air-balloon/6/square",
+        "cdx-qr-ai-hot-air-balloon/7/square",
+        "cdx-qr-ai-hot-air-balloon/8/square",
+        "cdx-qr-ai-hot-air-balloon/9/square",
+        "cdx-qr-ai-mushroom/5/square",
+        "cdx-qr-ai-mushroom/6/square",
+        "cdx-qr-ai-mushroom/7/square",
+        "cdx-qr-ai-mushroom/8/square",
+        "cdx-qr-ai-mushroom/9/square",
+        "cdx-qr-ai-spinning-top/6/square",
+        "cdx-qr-ai-spinning-top/8/square",
+        "cdx-qr-ai-spinning-top/9/square",
+        "cdx-qr-ai-tulip/9/square",
+        "cdx-qr-ai-stacked-stones/9/square",
+        "cdx-qr-ai-rook/9/square",
+        "cdx-qr-ai-rainbow/9/square",
+        "cdx-qr-ai-wood-blocks/9/square",
+        "cdx-qr-ai-teapot/9/square",
+        "cdx-qr-ai-lotus/9/square",
+        "cdx-qr-ai-pumpkin/9/square",
+        "cdx-qr-ai-blue-vase/5/square",
+        "cdx-qr-ai-blue-vase/6/square",
+        "cdx-qr-ai-blue-vase/7/square",
+        "cdx-qr-ai-blue-vase/8/square",
+        "cdx-qr-ai-blue-vase/9/square",
+        "cdx-qr-ai-ginkgo/5/square",
+        "cdx-qr-ai-ginkgo/6/square",
+        "cdx-qr-ai-ginkgo/7/square",
+        "cdx-qr-ai-ginkgo/8/square",
+        "cdx-qr-ai-ginkgo/9/square",
+        "cdx-qr-ai-squash/9/square",
+        "cdx-qr-ai-pebbles/9/square",
+        "met-9284/9/square",
+        "met-9283/9/square",
+        "met-42138/6/square",
+        "met-42138/7/square",
+        "met-42138/8/square",
+        "met-42138/9/square",
+        "met-556849/6/square",
+        "met-556849/7/square",
+        "met-556849/8/square",
+        "met-556849/9/square",
+        "met-244130/9/square",
+        "met-203455/9/square",
+        "met-196651/7/square",
+        "met-196651/9/square",
+        "met-570235/5/square",
+        "met-570235/6/square",
+        "met-570235/7/square",
+        "met-570235/8/square",
+        "met-570235/9/square",
+        "met-244131/9/square"
+      ],
+      "nonImprovingPictures": [],
+      "picturesBelowOnePointGain": []
+    },
+    "print": {
+      "matched": 1040,
+      "meanGain": 0.16295262009821954,
+      "nonImprovingCodes": [
+        "cdx-qr-ai-fern/9/square",
+        "cdx-qr-ai-green-watering-can/5/square",
+        "cdx-qr-ai-green-watering-can/7/square",
+        "cdx-qr-ai-green-watering-can/8/square",
+        "cdx-qr-ai-green-watering-can/9/square",
+        "cdx-qr-ai-cactus/5/square",
+        "cdx-qr-ai-cactus/6/square",
+        "cdx-qr-ai-cactus/7/square",
+        "cdx-qr-ai-cactus/8/square",
+        "cdx-qr-ai-cactus/9/square",
+        "cdx-qr-ai-pitcher/7/square",
+        "cdx-qr-ai-pitcher/8/square",
+        "cdx-qr-ai-pitcher/9/square",
+        "cdx-qr-ai-stacking-rings/9/square",
+        "cdx-qr-ai-pear/5/square",
+        "cdx-qr-ai-pear/6/square",
+        "cdx-qr-ai-pear/7/square",
+        "cdx-qr-ai-pear/8/square",
+        "cdx-qr-ai-pear/9/square",
+        "cdx-qr-ai-hot-air-balloon/5/square",
+        "cdx-qr-ai-hot-air-balloon/6/square",
+        "cdx-qr-ai-hot-air-balloon/7/square",
+        "cdx-qr-ai-hot-air-balloon/8/square",
+        "cdx-qr-ai-hot-air-balloon/9/square",
+        "cdx-qr-ai-mushroom/5/square",
+        "cdx-qr-ai-mushroom/6/square",
+        "cdx-qr-ai-mushroom/7/square",
+        "cdx-qr-ai-mushroom/8/square",
+        "cdx-qr-ai-mushroom/9/square",
+        "cdx-qr-ai-spinning-top/6/square",
+        "cdx-qr-ai-spinning-top/8/square",
+        "cdx-qr-ai-spinning-top/9/square",
+        "cdx-qr-ai-tulip/9/square",
+        "cdx-qr-ai-pinecone/8/square",
+        "cdx-qr-ai-stacked-stones/9/square",
+        "cdx-qr-ai-rook/9/square",
+        "cdx-qr-ai-rainbow/9/square",
+        "cdx-qr-ai-wood-blocks/7/square",
+        "cdx-qr-ai-wood-blocks/8/square",
+        "cdx-qr-ai-wood-blocks/9/square",
+        "cdx-qr-ai-teapot/9/square",
+        "cdx-qr-ai-lotus/9/square",
+        "cdx-qr-ai-pumpkin/9/square",
+        "cdx-qr-ai-blue-vase/5/square",
+        "cdx-qr-ai-blue-vase/6/square",
+        "cdx-qr-ai-blue-vase/7/square",
+        "cdx-qr-ai-blue-vase/8/square",
+        "cdx-qr-ai-blue-vase/9/square",
+        "cdx-qr-ai-ginkgo/5/square",
+        "cdx-qr-ai-ginkgo/6/square",
+        "cdx-qr-ai-ginkgo/7/square",
+        "cdx-qr-ai-ginkgo/8/square",
+        "cdx-qr-ai-ginkgo/9/square",
+        "cdx-qr-ai-squash/9/square",
+        "cdx-qr-ai-pebbles/9/square",
+        "met-9284/9/square",
+        "met-9283/9/square",
+        "met-42138/5/square",
+        "met-42138/6/square",
+        "met-42138/7/square",
+        "met-42138/8/square",
+        "met-42138/9/square",
+        "met-556849/5/square",
+        "met-556849/6/square",
+        "met-556849/7/square",
+        "met-556849/8/square",
+        "met-556849/9/square",
+        "met-244130/9/square",
+        "met-203455/7/square",
+        "met-203455/8/square",
+        "met-203455/9/square",
+        "met-196651/7/square",
+        "met-196651/8/square",
+        "met-196651/9/square",
+        "met-570235/5/square",
+        "met-570235/6/square",
+        "met-570235/7/square",
+        "met-570235/8/square",
+        "met-570235/9/square",
+        "met-244131/9/square"
+      ],
+      "nonImprovingPictures": [],
+      "picturesBelowOnePointGain": []
+    }
+  },
+  "pictures": [
+    {
+      "picture": "ai-farm",
+      "label": "Felt farm (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1872581715532596,
+          "detail": 0.47991754221732386,
+          "gain": 0.2926593706640641,
+          "mainRMSE": 0.3695688556096829,
+          "detailRMSE": 0.21503926609279667
+        },
+        "print": {
+          "main": 0.17637567334614557,
+          "detail": 0.4745134710944964,
+          "gain": 0.29813779774835075,
+          "mainRMSE": 0.3773840674662088,
+          "detailRMSE": 0.2237340500988192
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "ai-farm",
+      "label": "Felt farm (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.37130743685080503,
+          "detail": 0.48498957605501836,
+          "gain": 0.11368213920421326,
+          "mainRMSE": 0.18281895197010306,
+          "detailRMSE": 0.20354556815347474
+        },
+        "print": {
+          "main": 0.2887446662457169,
+          "detail": 0.45703252615271034,
+          "gain": 0.16828785990699352,
+          "mainRMSE": 0.22970571339984797,
+          "detailRMSE": 0.24027783693565893
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.36520991005038617,
+            "detail": 0.5677418609966991,
+            "gain": 0.20253195094631288,
+            "mainRMSE": 0.27085950483899357,
+            "detailRMSE": 0.2296492533165564
+          },
+          "print": {
+            "main": 0.3623792105390293,
+            "detail": 0.5638755097562613,
+            "gain": 0.201496299217232,
+            "mainRMSE": 0.2729093015083054,
+            "detailRMSE": 0.23179498348738772
+          }
+        }
+      }
+    },
+    {
+      "picture": "ai-wave",
+      "label": "Glass wave (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.16426296350959246,
+          "detail": 0.3865362140553835,
+          "gain": 0.22227325054579108,
+          "mainRMSE": 0.33261906673525,
+          "detailRMSE": 0.212913818779434
+        },
+        "print": {
+          "main": 0.15401237230910403,
+          "detail": 0.37945505253385536,
+          "gain": 0.2254426802247514,
+          "mainRMSE": 0.3405299572542993,
+          "detailRMSE": 0.22130735435205398
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "ai-wave",
+      "label": "Glass wave (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.27260888787401194,
+          "detail": 0.4300968663186701,
+          "gain": 0.15748797844465828,
+          "mainRMSE": 0.17501543791403543,
+          "detailRMSE": 0.18098425945935814
+        },
+        "print": {
+          "main": 0.19414699747232333,
+          "detail": 0.38973017595676385,
+          "gain": 0.19558317848444046,
+          "mainRMSE": 0.22345448067236343,
+          "detailRMSE": 0.2179555545493695
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.3200579176570838,
+            "detail": 0.5214909885485881,
+            "gain": 0.20143307089150425,
+            "mainRMSE": 0.2380646731459492,
+            "detailRMSE": 0.19737543621835418
+          },
+          "print": {
+            "main": 0.3169271777767788,
+            "detail": 0.5170930377698327,
+            "gain": 0.20016585999305386,
+            "mainRMSE": 0.24014622578205497,
+            "detailRMSE": 0.19940258227217428
+          }
+        }
+      }
+    },
+    {
+      "picture": "ai-mushrooms",
+      "label": "Mushrooms (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1624442399298042,
+          "detail": 0.4558750085539954,
+          "gain": 0.29343076862419115,
+          "mainRMSE": 0.41404001230178905,
+          "detailRMSE": 0.2340405098352269
+        },
+        "print": {
+          "main": 0.15203329619231482,
+          "detail": 0.44949220948406243,
+          "gain": 0.29745891329174756,
+          "mainRMSE": 0.4208264094787859,
+          "detailRMSE": 0.24216593340920928
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "ai-mushrooms",
+      "label": "Mushrooms (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.3137784564472619,
+          "detail": 0.44849647803543435,
+          "gain": 0.13471802158817248,
+          "mainRMSE": 0.18485157040758776,
+          "detailRMSE": 0.2068745919425577
+        },
+        "print": {
+          "main": 0.22938152533654943,
+          "detail": 0.41311102695451396,
+          "gain": 0.18372950161796453,
+          "mainRMSE": 0.2269725276353026,
+          "detailRMSE": 0.24067846944727975
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.3263536888549443,
+            "detail": 0.5404577999157614,
+            "gain": 0.21410411106081723,
+            "mainRMSE": 0.3253219393248079,
+            "detailRMSE": 0.26123108425747765
+          },
+          "print": {
+            "main": 0.3238261829953783,
+            "detail": 0.536505830490057,
+            "gain": 0.21267964749467874,
+            "mainRMSE": 0.3269727258443181,
+            "detailRMSE": 0.26326804819015703
+          }
+        }
+      }
+    },
+    {
+      "picture": "ai-arch",
+      "label": "Stone arch (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.14366876257351546,
+          "detail": 0.3997266101743949,
+          "gain": 0.25605784760087946,
+          "mainRMSE": 0.403235223160865,
+          "detailRMSE": 0.24101566275889783
+        },
+        "print": {
+          "main": 0.13409566745414156,
+          "detail": 0.3932282113492235,
+          "gain": 0.25913254389508195,
+          "mainRMSE": 0.4096485934318658,
+          "detailRMSE": 0.24867833354465335
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "ai-arch",
+      "label": "Stone arch (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.260842958624429,
+          "detail": 0.4155458641313089,
+          "gain": 0.15470290550687996,
+          "mainRMSE": 0.1670982619302311,
+          "detailRMSE": 0.19710878640545895
+        },
+        "print": {
+          "main": 0.18952920544126395,
+          "detail": 0.3766448047227924,
+          "gain": 0.18711559928152843,
+          "mainRMSE": 0.21143763527902731,
+          "detailRMSE": 0.23219366548045595
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.3064317621177402,
+            "detail": 0.5013888942314424,
+            "gain": 0.19495713211370208,
+            "mainRMSE": 0.30811465160111356,
+            "detailRMSE": 0.2409936090960978
+          },
+          "print": {
+            "main": 0.3039593703540862,
+            "detail": 0.4968848681321205,
+            "gain": 0.19292549777803442,
+            "mainRMSE": 0.3097409812420163,
+            "detailRMSE": 0.24315539109401785
+          }
+        }
+      }
+    },
+    {
+      "picture": "wildflowers",
+      "label": "Wildflowers",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.18432962579882858,
+          "detail": 0.45173306785674744,
+          "gain": 0.2674034420579188,
+          "mainRMSE": 0.3809674329339638,
+          "detailRMSE": 0.239062666228787
+        },
+        "print": {
+          "main": 0.17472644360413425,
+          "detail": 0.4480456250353967,
+          "gain": 0.27331918143126244,
+          "mainRMSE": 0.3891311184635323,
+          "detailRMSE": 0.24776182208954395
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "wildflowers",
+      "label": "Wildflowers",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.4311993173018944,
+          "detail": 0.5130824359243527,
+          "gain": 0.08188311862245834,
+          "mainRMSE": 0.1815358695366011,
+          "detailRMSE": 0.1958512433079291
+        },
+        "print": {
+          "main": 0.34914473660951006,
+          "detail": 0.4889549292616813,
+          "gain": 0.13981019265217118,
+          "mainRMSE": 0.23577951697569977,
+          "detailRMSE": 0.23794047243903288
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.36359186915836333,
+            "detail": 0.5354093833034468,
+            "gain": 0.17181751414508356,
+            "mainRMSE": 0.30117565897668597,
+            "detailRMSE": 0.24972761459502874
+          },
+          "print": {
+            "main": 0.3610608436521884,
+            "detail": 0.5318719438309404,
+            "gain": 0.17081110017875195,
+            "mainRMSE": 0.30327599285217577,
+            "detailRMSE": 0.2519914767556567
+          }
+        }
+      }
+    },
+    {
+      "picture": "still-life",
+      "label": "Still life with cheese (a painting)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.08962055115280385,
+          "detail": 0.28586659653685537,
+          "gain": 0.19624604538405152,
+          "mainRMSE": 0.47525714796097385,
+          "detailRMSE": 0.2952239180046715
+        },
+        "print": {
+          "main": 0.08420283731393392,
+          "detail": 0.27836226294781713,
+          "gain": 0.19415942563388316,
+          "mainRMSE": 0.4810602220236534,
+          "detailRMSE": 0.3023358070540243
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "still-life",
+      "label": "Still life with cheese (a painting)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.18851858333621693,
+          "detail": 0.3340351941105041,
+          "gain": 0.14551661077428718,
+          "mainRMSE": 0.20715173772898865,
+          "detailRMSE": 0.24983669921215088
+        },
+        "print": {
+          "main": 0.12788052415304854,
+          "detail": 0.29591226733376264,
+          "gain": 0.16803174318071407,
+          "mainRMSE": 0.2450275521257753,
+          "detailRMSE": 0.2801255764420792
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.27494427150581857,
+            "detail": 0.4696019843008489,
+            "gain": 0.19465771279503025,
+            "mainRMSE": 0.403198836252945,
+            "detailRMSE": 0.3096930605999666
+          },
+          "print": {
+            "main": 0.2730613524711129,
+            "detail": 0.4653014163906124,
+            "gain": 0.1922400639194995,
+            "mainRMSE": 0.4045131373631026,
+            "detailRMSE": 0.31170425484790687
+          }
+        }
+      }
+    },
+    {
+      "picture": "spiral-stairs",
+      "label": "A spiral staircase",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.16788083401429127,
+          "detail": 0.433394589552689,
+          "gain": 0.26551375553839773,
+          "mainRMSE": 0.3309619416009412,
+          "detailRMSE": 0.19843835327492165
+        },
+        "print": {
+          "main": 0.15761948210968688,
+          "detail": 0.4274207973059008,
+          "gain": 0.269801315196214,
+          "mainRMSE": 0.33938113847055407,
+          "detailRMSE": 0.20760823306399465
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "spiral-stairs",
+      "label": "A spiral staircase",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.28621865690373205,
+          "detail": 0.4266623585412589,
+          "gain": 0.1404437016375269,
+          "mainRMSE": 0.16197820577023603,
+          "detailRMSE": 0.1819208041225138
+        },
+        "print": {
+          "main": 0.20529515765555967,
+          "detail": 0.388524037324375,
+          "gain": 0.18322887966881538,
+          "mainRMSE": 0.21155053005601498,
+          "detailRMSE": 0.21963829582035274
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.3112578787099055,
+            "detail": 0.5123445772901507,
+            "gain": 0.20108669858024517,
+            "mainRMSE": 0.2592739825780469,
+            "detailRMSE": 0.22299663450461163
+          },
+          "print": {
+            "main": 0.3086874746510667,
+            "detail": 0.5079774233831911,
+            "gain": 0.19928994873212438,
+            "mainRMSE": 0.26130631259965353,
+            "detailRMSE": 0.22508635209349848
+          }
+        }
+      }
+    },
+    {
+      "picture": "forest",
+      "label": "A forest path",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1363341748499846,
+          "detail": 0.39340594049331634,
+          "gain": 0.25707176564333184,
+          "mainRMSE": 0.40129563786997585,
+          "detailRMSE": 0.23762345070833996
+        },
+        "print": {
+          "main": 0.12696045934508823,
+          "detail": 0.38727751288427426,
+          "gain": 0.2603170535391861,
+          "mainRMSE": 0.40795550303294814,
+          "detailRMSE": 0.24558629674290158
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "forest",
+      "label": "A forest path",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.255433196676934,
+          "detail": 0.3938273961849503,
+          "gain": 0.13839419950801624,
+          "mainRMSE": 0.15805649302282201,
+          "detailRMSE": 0.19399185184088213
+        },
+        "print": {
+          "main": 0.18482629920456936,
+          "detail": 0.3519104998120936,
+          "gain": 0.16708420060752424,
+          "mainRMSE": 0.203780440854479,
+          "detailRMSE": 0.23098810010202397
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.3025544014558927,
+            "detail": 0.46530609070631346,
+            "gain": 0.16275168925042083,
+            "mainRMSE": 0.302766276854282,
+            "detailRMSE": 0.2538245743241874
+          },
+          "print": {
+            "main": 0.3000935407261057,
+            "detail": 0.46048858817897875,
+            "gain": 0.16039504745287306,
+            "mainRMSE": 0.3045099794349416,
+            "detailRMSE": 0.25612009919552636
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-monstera",
+      "label": "Split leaf (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.22832690189974966,
+          "detail": 0.42503306794390694,
+          "gain": 0.19670616604415733,
+          "mainRMSE": 0.3579614733176871,
+          "detailRMSE": 0.25474376021571893
+        },
+        "print": {
+          "main": 0.2187938785550041,
+          "detail": 0.41780448054998914,
+          "gain": 0.19901060199498505,
+          "mainRMSE": 0.3656031008766216,
+          "detailRMSE": 0.26238257308106416
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-monstera",
+      "label": "Split leaf (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.29229377944885254,
+          "detail": 0.42822138291048273,
+          "gain": 0.13592760346163008,
+          "mainRMSE": 0.2066156719488934,
+          "detailRMSE": 0.2125667532942682
+        },
+        "print": {
+          "main": 0.2130988602089241,
+          "detail": 0.3877057755855843,
+          "gain": 0.1746069153766602,
+          "mainRMSE": 0.24960503152679325,
+          "detailRMSE": 0.24614991227825578
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.3027608284029889,
+            "detail": 0.5999865171020817,
+            "gain": 0.2972256886990928,
+            "mainRMSE": 0.28323911340362334,
+            "detailRMSE": 0.2277203729021874
+          },
+          "print": {
+            "main": 0.29971567903864915,
+            "detail": 0.5971937821035868,
+            "gain": 0.29747810306493755,
+            "mainRMSE": 0.2855011617093792,
+            "detailRMSE": 0.229369937691659
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-fern",
+      "label": "Fern frond (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.25190720168251296,
+          "detail": 0.33985887393518316,
+          "gain": 0.08795167225267023,
+          "mainRMSE": 0.3451737931432327,
+          "detailRMSE": 0.283812036328604
+        },
+        "print": {
+          "main": 0.24397313262032583,
+          "detail": 0.3333962122740694,
+          "gain": 0.08942307965374359,
+          "mainRMSE": 0.35324776567221067,
+          "detailRMSE": 0.29133278057322043
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-fern",
+      "label": "Fern frond (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.34163046217682036,
+          "detail": 0.462643382387697,
+          "gain": 0.1210129202108765,
+          "mainRMSE": 0.2297345110813669,
+          "detailRMSE": 0.20888892639709736
+        },
+        "print": {
+          "main": 0.24632498511695497,
+          "detail": 0.42116945058695465,
+          "gain": 0.17484446546999977,
+          "mainRMSE": 0.2714207868746462,
+          "detailRMSE": 0.24230405617386533
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.3312768902556523,
+            "detail": 0.683611703211,
+            "gain": 0.3523348129553475,
+            "mainRMSE": 0.23187360507355503,
+            "detailRMSE": 0.16425442998460732
+          },
+          "print": {
+            "main": 0.32767080895458955,
+            "detail": 0.6808300014503964,
+            "gain": 0.35315919249580696,
+            "mainRMSE": 0.2345394611900466,
+            "detailRMSE": 0.16615426810665976
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-green-watering-can",
+      "label": "Green watering can (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.23743550116111706,
+          "detail": 0.31435283813391945,
+          "gain": 0.07691733697280237,
+          "mainRMSE": 0.3869457709157179,
+          "detailRMSE": 0.28432346345092047
+        },
+        "print": {
+          "main": 0.23069965419598146,
+          "detail": 0.30603046915495613,
+          "gain": 0.07533081495897469,
+          "mainRMSE": 0.39403122545555,
+          "detailRMSE": 0.2914834101476859
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-green-watering-can",
+      "label": "Green watering can (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1733616593451245,
+          "detail": 0.31351493472043485,
+          "gain": 0.1401532753753104,
+          "mainRMSE": 0.22006936546474387,
+          "detailRMSE": 0.2346576326736725
+        },
+        "print": {
+          "main": 0.10608156084986956,
+          "detail": 0.26362375445761116,
+          "gain": 0.1575421936077416,
+          "mainRMSE": 0.2560968567029159,
+          "detailRMSE": 0.26455364433100775
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.22962250964009484,
+            "detail": 0.5742707851247475,
+            "gain": 0.3446482754846526,
+            "mainRMSE": 0.2749053641476398,
+            "detailRMSE": 0.21658848777802414
+          },
+          "print": {
+            "main": 0.22681710523404902,
+            "detail": 0.5714534640002971,
+            "gain": 0.34463635876624804,
+            "mainRMSE": 0.2771091851233297,
+            "detailRMSE": 0.21819145202838391
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-cactus",
+      "label": "Potted cactus (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.27564164782495737,
+          "detail": 0.3331871172784398,
+          "gain": 0.0575454694534824,
+          "mainRMSE": 0.31002577089431005,
+          "detailRMSE": 0.2685806153640749
+        },
+        "print": {
+          "main": 0.26940646194714785,
+          "detail": 0.326223795951483,
+          "gain": 0.05681733400433504,
+          "mainRMSE": 0.31827110959870997,
+          "detailRMSE": 0.2758147029135044
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-cactus",
+      "label": "Potted cactus (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2926500073781123,
+          "detail": 0.40700300563353553,
+          "gain": 0.11435299825542315,
+          "mainRMSE": 0.24855013304883972,
+          "detailRMSE": 0.2341199053868242
+        },
+        "print": {
+          "main": 0.22072992122397092,
+          "detail": 0.3750138439736004,
+          "gain": 0.15428392274962943,
+          "mainRMSE": 0.28991806075731297,
+          "detailRMSE": 0.2665384117609744
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2889444358252645,
+            "detail": 0.6188650031190622,
+            "gain": 0.3299205672937978,
+            "mainRMSE": 0.22074677618612584,
+            "detailRMSE": 0.1584187975040815
+          },
+          "print": {
+            "main": 0.2860139997786706,
+            "detail": 0.615990218544151,
+            "gain": 0.3299762187654804,
+            "mainRMSE": 0.22344820194565912,
+            "detailRMSE": 0.16039364864424044
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-pitcher",
+      "label": "Clay pitcher (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.22269686261139285,
+          "detail": 0.3025799261233482,
+          "gain": 0.07988306351195537,
+          "mainRMSE": 0.35204391247922706,
+          "detailRMSE": 0.25844020715556437
+        },
+        "print": {
+          "main": 0.2156315290542162,
+          "detail": 0.2932010784514198,
+          "gain": 0.07756954939720362,
+          "mainRMSE": 0.3591905237564893,
+          "detailRMSE": 0.2656464747922388
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-pitcher",
+      "label": "Clay pitcher (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.14685977435231454,
+          "detail": 0.30064504843915,
+          "gain": 0.15378527408683548,
+          "mainRMSE": 0.1957105006115321,
+          "detailRMSE": 0.2045833359472558
+        },
+        "print": {
+          "main": 0.0782510813022769,
+          "detail": 0.24724824455922567,
+          "gain": 0.1689971632569488,
+          "mainRMSE": 0.2340517202174628,
+          "detailRMSE": 0.23599051278914795
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.22399749189437887,
+            "detail": 0.548000253395488,
+            "gain": 0.32400276150110924,
+            "mainRMSE": 0.26043879955850624,
+            "detailRMSE": 0.20293704980079422
+          },
+          "print": {
+            "main": 0.220828310829714,
+            "detail": 0.5447329243754538,
+            "gain": 0.32390461354573974,
+            "mainRMSE": 0.26257649368171243,
+            "detailRMSE": 0.2044903205510984
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-stacking-rings",
+      "label": "Wooden stacking rings (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1876473389729695,
+          "detail": 0.3338256090341926,
+          "gain": 0.14617827006122308,
+          "mainRMSE": 0.38193288013434723,
+          "detailRMSE": 0.26953088747268794
+        },
+        "print": {
+          "main": 0.17990593461344978,
+          "detail": 0.3258396587133475,
+          "gain": 0.14593372409989772,
+          "mainRMSE": 0.38887207455060835,
+          "detailRMSE": 0.2766286051961952
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-stacking-rings",
+      "label": "Wooden stacking rings (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.23671745234044952,
+          "detail": 0.37863772393193174,
+          "gain": 0.14192027159148224,
+          "mainRMSE": 0.19775747847961866,
+          "detailRMSE": 0.21070584533667533
+        },
+        "print": {
+          "main": 0.1451625886051798,
+          "detail": 0.3281036235497339,
+          "gain": 0.18294103494455402,
+          "mainRMSE": 0.23541641367900698,
+          "detailRMSE": 0.24200071954238692
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2611891567925337,
+            "detail": 0.6140670282315065,
+            "gain": 0.3528778714389728,
+            "mainRMSE": 0.26458438742018164,
+            "detailRMSE": 0.2023474286245352
+          },
+          "print": {
+            "main": 0.257631626193048,
+            "detail": 0.6114017251418289,
+            "gain": 0.3537700989487809,
+            "mainRMSE": 0.2666681490639123,
+            "detailRMSE": 0.20387344196499776
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-pear",
+      "label": "Pear (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.23939959153959106,
+          "detail": 0.29767891723528217,
+          "gain": 0.05827932569569113,
+          "mainRMSE": 0.3490804039275061,
+          "detailRMSE": 0.2812466505392996
+        },
+        "print": {
+          "main": 0.23244020937970925,
+          "detail": 0.29038667902377246,
+          "gain": 0.05794646964406327,
+          "mainRMSE": 0.35646483425263403,
+          "detailRMSE": 0.2884275646563438
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-pear",
+      "label": "Pear (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1930246196620315,
+          "detail": 0.3395421081051621,
+          "gain": 0.14651748844313056,
+          "mainRMSE": 0.23036537229418946,
+          "detailRMSE": 0.2283102993073967
+        },
+        "print": {
+          "main": 0.12757845388278552,
+          "detail": 0.30153020204107983,
+          "gain": 0.17395174815829423,
+          "mainRMSE": 0.2686478449235575,
+          "detailRMSE": 0.25830236146509467
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.25016065117181807,
+            "detail": 0.6082010385809118,
+            "gain": 0.3580403874090939,
+            "mainRMSE": 0.2572620864953161,
+            "detailRMSE": 0.19601122495420387
+          },
+          "print": {
+            "main": 0.24723082460545737,
+            "detail": 0.6056153404887442,
+            "gain": 0.35838451588328674,
+            "mainRMSE": 0.25958982395561603,
+            "detailRMSE": 0.19759976176252295
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-hot-air-balloon",
+      "label": "Balloon (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2621297231162137,
+          "detail": 0.28202975174254064,
+          "gain": 0.019900028626326966,
+          "mainRMSE": 0.31635545969035955,
+          "detailRMSE": 0.28621861218251
+        },
+        "print": {
+          "main": 0.2561763470952112,
+          "detail": 0.2736048850349172,
+          "gain": 0.017428537939706022,
+          "mainRMSE": 0.32416461779526357,
+          "detailRMSE": 0.2933061515335348
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-hot-air-balloon",
+      "label": "Balloon (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.178024615346916,
+          "detail": 0.32839207128627995,
+          "gain": 0.15036745593936396,
+          "mainRMSE": 0.2222717807916626,
+          "detailRMSE": 0.2187885583226718
+        },
+        "print": {
+          "main": 0.11467727009814432,
+          "detail": 0.2819720449793245,
+          "gain": 0.16729477488118005,
+          "mainRMSE": 0.262269823930656,
+          "detailRMSE": 0.24975948657483255
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.23729697898482457,
+            "detail": 0.6177279727011282,
+            "gain": 0.3804309937163035,
+            "mainRMSE": 0.225775633478216,
+            "detailRMSE": 0.166676956500651
+          },
+          "print": {
+            "main": 0.23427076654841272,
+            "detail": 0.6150124270795106,
+            "gain": 0.3807416605310978,
+            "mainRMSE": 0.22839045831364896,
+            "detailRMSE": 0.16837635934907613
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-mushroom",
+      "label": "Mushroom (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.24103056562591404,
+          "detail": 0.29812436041168117,
+          "gain": 0.05709379478576713,
+          "mainRMSE": 0.29154396255991766,
+          "detailRMSE": 0.2640810014525767
+        },
+        "print": {
+          "main": 0.2333106410376123,
+          "detail": 0.2901275946045301,
+          "gain": 0.05681695356691783,
+          "mainRMSE": 0.2996194036318057,
+          "detailRMSE": 0.2713651044930451
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-mushroom",
+      "label": "Mushroom (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.16720021883772113,
+          "detail": 0.32801801051226337,
+          "gain": 0.16081779167454227,
+          "mainRMSE": 0.21378828061458638,
+          "detailRMSE": 0.20757059547282522
+        },
+        "print": {
+          "main": 0.09762421758131223,
+          "detail": 0.291520889052609,
+          "gain": 0.1938966714712967,
+          "mainRMSE": 0.25612772097363795,
+          "detailRMSE": 0.24018832616671865
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.24201331949756089,
+            "detail": 0.5717207766978021,
+            "gain": 0.32970745720024114,
+            "mainRMSE": 0.2325026901714228,
+            "detailRMSE": 0.17675924978986654
+          },
+          "print": {
+            "main": 0.238686592186122,
+            "detail": 0.5688914355126332,
+            "gain": 0.33020484332651134,
+            "mainRMSE": 0.23497318926576938,
+            "detailRMSE": 0.17845192081024125
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-spinning-top",
+      "label": "Wooden spinning top (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.19596073011828571,
+          "detail": 0.27989530836028365,
+          "gain": 0.08393457824199789,
+          "mainRMSE": 0.36860924267925244,
+          "detailRMSE": 0.26770387331997914
+        },
+        "print": {
+          "main": 0.18904122745856294,
+          "detail": 0.27124037375173166,
+          "gain": 0.08219914629316868,
+          "mainRMSE": 0.3758519308501487,
+          "detailRMSE": 0.2754610185855809
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-spinning-top",
+      "label": "Wooden spinning top (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.19072088226781797,
+          "detail": 0.3509742079192835,
+          "gain": 0.1602533256514655,
+          "mainRMSE": 0.21217533102772101,
+          "detailRMSE": 0.2165087471332936
+        },
+        "print": {
+          "main": 0.11919186955622259,
+          "detail": 0.3066874183183813,
+          "gain": 0.18749554876215876,
+          "mainRMSE": 0.24908554774086747,
+          "detailRMSE": 0.24713855518128386
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.25405875102285197,
+            "detail": 0.6192505540852554,
+            "gain": 0.3651918030624035,
+            "mainRMSE": 0.24607487945988032,
+            "detailRMSE": 0.18220558803091289
+          },
+          "print": {
+            "main": 0.250678795350136,
+            "detail": 0.6162364217469882,
+            "gain": 0.36555762639685224,
+            "mainRMSE": 0.24836815975973217,
+            "detailRMSE": 0.18383257223175994
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-tulip",
+      "label": "Tulip (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2188741010987656,
+          "detail": 0.3484316600037837,
+          "gain": 0.1295575589050181,
+          "mainRMSE": 0.32737484950316076,
+          "detailRMSE": 0.2600453364037382
+        },
+        "print": {
+          "main": 0.21066149803801024,
+          "detail": 0.34125979126969486,
+          "gain": 0.13059829323168465,
+          "mainRMSE": 0.3351603738351917,
+          "detailRMSE": 0.26735601310966306
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-tulip",
+      "label": "Tulip (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2553671370196295,
+          "detail": 0.3822774842100238,
+          "gain": 0.1269103471903943,
+          "mainRMSE": 0.19921699695614495,
+          "detailRMSE": 0.19794931245113967
+        },
+        "print": {
+          "main": 0.16842065615531623,
+          "detail": 0.33935846582359613,
+          "gain": 0.17093780966827987,
+          "mainRMSE": 0.24340874643969976,
+          "detailRMSE": 0.23197522901146667
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2824481291288615,
+            "detail": 0.6124400733541049,
+            "gain": 0.32999194422524336,
+            "mainRMSE": 0.2274579084878007,
+            "detailRMSE": 0.17080840696179442
+          },
+          "print": {
+            "main": 0.27873915132768967,
+            "detail": 0.60929006757574,
+            "gain": 0.33055091624805033,
+            "mainRMSE": 0.230017603431166,
+            "detailRMSE": 0.17259231160375726
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-pinecone",
+      "label": "Pinecone (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.19788942802500142,
+          "detail": 0.3531027872647221,
+          "gain": 0.15521335923972068,
+          "mainRMSE": 0.3747563306838343,
+          "detailRMSE": 0.269960091726002
+        },
+        "print": {
+          "main": 0.18980510452019989,
+          "detail": 0.3461120303264338,
+          "gain": 0.15630692580623387,
+          "mainRMSE": 0.38195263279714,
+          "detailRMSE": 0.2775952746176263
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-pinecone",
+      "label": "Pinecone (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.27648482708043565,
+          "detail": 0.43308289672857,
+          "gain": 0.15659806964813436,
+          "mainRMSE": 0.2092420815048111,
+          "detailRMSE": 0.2250181905836759
+        },
+        "print": {
+          "main": 0.19643427750529383,
+          "detail": 0.3916198131365989,
+          "gain": 0.19518553563130503,
+          "mainRMSE": 0.24927868859740418,
+          "detailRMSE": 0.25701392897699565
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.29530547272977664,
+            "detail": 0.6328163647227079,
+            "gain": 0.33751089199293133,
+            "mainRMSE": 0.2521131071120871,
+            "detailRMSE": 0.19925809541650388
+          },
+          "print": {
+            "main": 0.2920384974815855,
+            "detail": 0.6299414022278595,
+            "gain": 0.3379029047462741,
+            "mainRMSE": 0.2544367513331767,
+            "detailRMSE": 0.20094698727505822
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-stacked-stones",
+      "label": "Stacked stones (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.19397745789012824,
+          "detail": 0.3086834580033302,
+          "gain": 0.11470600011320195,
+          "mainRMSE": 0.34804111346426186,
+          "detailRMSE": 0.2737909786424306
+        },
+        "print": {
+          "main": 0.18685193744769452,
+          "detail": 0.3007285836200141,
+          "gain": 0.11387664617231956,
+          "mainRMSE": 0.3556230615155841,
+          "detailRMSE": 0.2810704419485236
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-stacked-stones",
+      "label": "Stacked stones (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.22276016605173693,
+          "detail": 0.3855002914095696,
+          "gain": 0.1627401253578327,
+          "mainRMSE": 0.19660592867326104,
+          "detailRMSE": 0.19550014259587883
+        },
+        "print": {
+          "main": 0.14362652677903726,
+          "detail": 0.3430200972677234,
+          "gain": 0.19939357048868617,
+          "mainRMSE": 0.2400127094717332,
+          "detailRMSE": 0.22897713110323195
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.25492093688062867,
+            "detail": 0.6200754617567938,
+            "gain": 0.3651545248761651,
+            "mainRMSE": 0.23805719967302275,
+            "detailRMSE": 0.1702049153900378
+          },
+          "print": {
+            "main": 0.25149954803675756,
+            "detail": 0.6175130265589495,
+            "gain": 0.3660134785221919,
+            "mainRMSE": 0.24049246750429454,
+            "detailRMSE": 0.1718784030584774
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-rook",
+      "label": "Wooden rook (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2303855667130804,
+          "detail": 0.3249957811394023,
+          "gain": 0.09461021442632192,
+          "mainRMSE": 0.3626929515256213,
+          "detailRMSE": 0.28416744387085346
+        },
+        "print": {
+          "main": 0.22352723794840984,
+          "detail": 0.3171760936590967,
+          "gain": 0.09364885571068682,
+          "mainRMSE": 0.3700076439178123,
+          "detailRMSE": 0.2913171579869973
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-rook",
+      "label": "Wooden rook (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2168474217949062,
+          "detail": 0.3661008382771292,
+          "gain": 0.14925341648222296,
+          "mainRMSE": 0.23980613987940638,
+          "detailRMSE": 0.23946849432778605
+        },
+        "print": {
+          "main": 0.14811894932458225,
+          "detail": 0.3273889223225106,
+          "gain": 0.17926997299792832,
+          "mainRMSE": 0.2781670872039469,
+          "detailRMSE": 0.2697893556904089
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2591319435900067,
+            "detail": 0.6060553910571923,
+            "gain": 0.3469234474671856,
+            "mainRMSE": 0.27082792700104213,
+            "detailRMSE": 0.19962398764653955
+          },
+          "print": {
+            "main": 0.2561362490476217,
+            "detail": 0.6031615356219763,
+            "gain": 0.3470252865743546,
+            "mainRMSE": 0.273059531642357,
+            "detailRMSE": 0.20130733833796305
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-rainbow",
+      "label": "Paper rainbow (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2074752448448788,
+          "detail": 0.3206673390485861,
+          "gain": 0.11319209420370732,
+          "mainRMSE": 0.3177820203198054,
+          "detailRMSE": 0.261020310691487
+        },
+        "print": {
+          "main": 0.1996842021660346,
+          "detail": 0.3138046094498735,
+          "gain": 0.11412040728383885,
+          "mainRMSE": 0.3258411069612634,
+          "detailRMSE": 0.26833694745234865
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-rainbow",
+      "label": "Paper rainbow (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.19039616924883812,
+          "detail": 0.36674749235246124,
+          "gain": 0.17635132310362314,
+          "mainRMSE": 0.19578946838206074,
+          "detailRMSE": 0.1905023636965755
+        },
+        "print": {
+          "main": 0.12475877201257246,
+          "detail": 0.3295527391539123,
+          "gain": 0.20479396714133985,
+          "mainRMSE": 0.24222841324512653,
+          "detailRMSE": 0.22538307688582174
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2392142850872058,
+            "detail": 0.5846473617360349,
+            "gain": 0.34543307664882905,
+            "mainRMSE": 0.2273902062143478,
+            "detailRMSE": 0.1691684234747963
+          },
+          "print": {
+            "main": 0.2363876084460911,
+            "detail": 0.5821131333796602,
+            "gain": 0.34572552493356923,
+            "mainRMSE": 0.22998933575270003,
+            "detailRMSE": 0.17095903873888554
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-wood-blocks",
+      "label": "Wooden blocks (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2155584192477759,
+          "detail": 0.28852015534803,
+          "gain": 0.07296173610025403,
+          "mainRMSE": 0.3346464722768684,
+          "detailRMSE": 0.2636731541257712
+        },
+        "print": {
+          "main": 0.20870643299713434,
+          "detail": 0.28033941128417955,
+          "gain": 0.07163297828704521,
+          "mainRMSE": 0.34209168687820873,
+          "detailRMSE": 0.2708638737032122
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-wood-blocks",
+      "label": "Wooden blocks (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.18892386884989307,
+          "detail": 0.3347046685348713,
+          "gain": 0.1457807996849782,
+          "mainRMSE": 0.19386404492729664,
+          "detailRMSE": 0.19971588364792459
+        },
+        "print": {
+          "main": 0.1156171322567719,
+          "detail": 0.288369223289651,
+          "gain": 0.17275209103287897,
+          "mainRMSE": 0.2367005622755991,
+          "detailRMSE": 0.23298552615670043
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.23982500896582026,
+            "detail": 0.5575816530387666,
+            "gain": 0.31775664407294635,
+            "mainRMSE": 0.22890733218675816,
+            "detailRMSE": 0.17501262007854695
+          },
+          "print": {
+            "main": 0.23667424934570924,
+            "detail": 0.5544295616032681,
+            "gain": 0.31775531225755876,
+            "mainRMSE": 0.2313189659566476,
+            "detailRMSE": 0.17668716585412905
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-teapot",
+      "label": "Clay teapot (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.21637030319095119,
+          "detail": 0.2953013592292852,
+          "gain": 0.07893105603833397,
+          "mainRMSE": 0.3508114216276209,
+          "detailRMSE": 0.2669022696397446
+        },
+        "print": {
+          "main": 0.2095229087526096,
+          "detail": 0.28667380091540906,
+          "gain": 0.07715089216279954,
+          "mainRMSE": 0.3581009374723854,
+          "detailRMSE": 0.274125591906532
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-teapot",
+      "label": "Clay teapot (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.17057311818275966,
+          "detail": 0.32560279981384793,
+          "gain": 0.15502968163108824,
+          "mainRMSE": 0.19995858234256098,
+          "detailRMSE": 0.20457956780980688
+        },
+        "print": {
+          "main": 0.09917539823693632,
+          "detail": 0.27481324429415943,
+          "gain": 0.17563784605722313,
+          "mainRMSE": 0.23921205556457456,
+          "detailRMSE": 0.23641679452236158
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2243420974716462,
+            "detail": 0.5655054889668631,
+            "gain": 0.341163391495217,
+            "mainRMSE": 0.24237042523234686,
+            "detailRMSE": 0.18594536806310477
+          },
+          "print": {
+            "main": 0.22120777035347577,
+            "detail": 0.5622613275508451,
+            "gain": 0.3410535571973693,
+            "mainRMSE": 0.24468989495171214,
+            "detailRMSE": 0.18755249584872333
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-lotus",
+      "label": "Lotus bloom (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.18027446213128578,
+          "detail": 0.3258761743231719,
+          "gain": 0.14560171219188608,
+          "mainRMSE": 0.33752476374285123,
+          "detailRMSE": 0.2718600519855826
+        },
+        "print": {
+          "main": 0.17369682081314336,
+          "detail": 0.3188394980883175,
+          "gain": 0.14514267727517421,
+          "mainRMSE": 0.34513896649818154,
+          "detailRMSE": 0.27879995430112364
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-lotus",
+      "label": "Lotus bloom (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.14362718338773167,
+          "detail": 0.33307370429557526,
+          "gain": 0.1894465209078435,
+          "mainRMSE": 0.2224790791593489,
+          "detailRMSE": 0.22361399881887375
+        },
+        "print": {
+          "main": 0.0939202295826559,
+          "detail": 0.29168689931606157,
+          "gain": 0.19776666973340565,
+          "mainRMSE": 0.26406615661575883,
+          "detailRMSE": 0.25428262843076116
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2379491162082818,
+            "detail": 0.5742955416765155,
+            "gain": 0.3363464254682337,
+            "mainRMSE": 0.237536262245536,
+            "detailRMSE": 0.18507968416600057
+          },
+          "print": {
+            "main": 0.2352324468984323,
+            "detail": 0.5714186888853318,
+            "gain": 0.3361862419868994,
+            "mainRMSE": 0.24002577535650124,
+            "detailRMSE": 0.18677943820942502
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-scallop",
+      "label": "Scallop shell (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.18735133888347472,
+          "detail": 0.3526020648832096,
+          "gain": 0.16525072599973487,
+          "mainRMSE": 0.3108349729509,
+          "detailRMSE": 0.27114669196187935
+        },
+        "print": {
+          "main": 0.17919178855281087,
+          "detail": 0.34582101100147844,
+          "gain": 0.16662922244866754,
+          "mainRMSE": 0.31908078314695915,
+          "detailRMSE": 0.2782197108962526
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-scallop",
+      "label": "Scallop shell (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2331923995050087,
+          "detail": 0.42188531819130387,
+          "gain": 0.18869291868629512,
+          "mainRMSE": 0.2276647128707472,
+          "detailRMSE": 0.21272364759901233
+        },
+        "print": {
+          "main": 0.15239380426620375,
+          "detail": 0.38184923730014536,
+          "gain": 0.2294554330339416,
+          "mainRMSE": 0.270200016490968,
+          "detailRMSE": 0.24481306728575322
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.270962030122359,
+            "detail": 0.6285568331978422,
+            "gain": 0.3575948030754833,
+            "mainRMSE": 0.21825910344904478,
+            "detailRMSE": 0.1560725471937627
+          },
+          "print": {
+            "main": 0.2675279556703469,
+            "detail": 0.6257108923324515,
+            "gain": 0.35818293666210466,
+            "mainRMSE": 0.22102500586363072,
+            "detailRMSE": 0.1579263704333657
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-pumpkin",
+      "label": "Pumpkin (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.20122434898174085,
+          "detail": 0.32243459148339976,
+          "gain": 0.12121024250165884,
+          "mainRMSE": 0.36156847378178647,
+          "detailRMSE": 0.26000555429269967
+        },
+        "print": {
+          "main": 0.1931170303990981,
+          "detail": 0.3147144711954626,
+          "gain": 0.12159744079636443,
+          "mainRMSE": 0.3686223244162731,
+          "detailRMSE": 0.267261807759127
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-pumpkin",
+      "label": "Pumpkin (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.23014718592817532,
+          "detail": 0.3517174877705843,
+          "gain": 0.12157030184240902,
+          "mainRMSE": 0.19317566472995146,
+          "detailRMSE": 0.2043643639005425
+        },
+        "print": {
+          "main": 0.13620619626850428,
+          "detail": 0.3044161579631236,
+          "gain": 0.1682099616946193,
+          "mainRMSE": 0.23099457684680394,
+          "detailRMSE": 0.23663227377186596
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.26501466503220755,
+            "detail": 0.5931062834211593,
+            "gain": 0.32809161838895184,
+            "mainRMSE": 0.25039565524358726,
+            "detailRMSE": 0.19706337194538515
+          },
+          "print": {
+            "main": 0.26130907134719783,
+            "detail": 0.5902630623450846,
+            "gain": 0.3289539909978869,
+            "mainRMSE": 0.2525825669190612,
+            "detailRMSE": 0.19863342484539187
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-blue-vase",
+      "label": "Blue vase (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.22223239566067696,
+          "detail": 0.27533084591325335,
+          "gain": 0.05309845025257637,
+          "mainRMSE": 0.3316921297387379,
+          "detailRMSE": 0.26359151037774364
+        },
+        "print": {
+          "main": 0.21639438712105435,
+          "detail": 0.2657816819188672,
+          "gain": 0.04938729479781287,
+          "mainRMSE": 0.33928586774105096,
+          "detailRMSE": 0.27079092391634707
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-blue-vase",
+      "label": "Blue vase (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.12578101509472556,
+          "detail": 0.29826249605794736,
+          "gain": 0.1724814809632218,
+          "mainRMSE": 0.19632501135681532,
+          "detailRMSE": 0.19797176811182
+        },
+        "print": {
+          "main": 0.064063323002669,
+          "detail": 0.2458453022989207,
+          "gain": 0.18178197929625167,
+          "mainRMSE": 0.23780161614344086,
+          "detailRMSE": 0.2301726963414985
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.21097640919125404,
+            "detail": 0.5638431636935393,
+            "gain": 0.35286675450228533,
+            "mainRMSE": 0.22645311873939233,
+            "detailRMSE": 0.16681194332084864
+          },
+          "print": {
+            "main": 0.2079760030456191,
+            "detail": 0.5606301158801011,
+            "gain": 0.35265411283448206,
+            "mainRMSE": 0.22888449321721832,
+            "detailRMSE": 0.16847155550646445
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-ginkgo",
+      "label": "Ginkgo leaf (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.24371825475006004,
+          "detail": 0.2722301719993913,
+          "gain": 0.02851191724933134,
+          "mainRMSE": 0.30685010931748824,
+          "detailRMSE": 0.27899181929533406
+        },
+        "print": {
+          "main": 0.23775940220918823,
+          "detail": 0.2638569126548672,
+          "gain": 0.026097510445679022,
+          "mainRMSE": 0.3147216321765047,
+          "detailRMSE": 0.285994876346601
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-ginkgo",
+      "label": "Ginkgo leaf (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1671868437078296,
+          "detail": 0.330653510090842,
+          "gain": 0.16346666638301238,
+          "mainRMSE": 0.22794459125383656,
+          "detailRMSE": 0.21873105915518792
+        },
+        "print": {
+          "main": 0.10786942422009942,
+          "detail": 0.2922629915722596,
+          "gain": 0.18439356735216014,
+          "mainRMSE": 0.2685328447999387,
+          "detailRMSE": 0.2499428353300753
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.23748294588401236,
+            "detail": 0.5827503464971688,
+            "gain": 0.3452674006131565,
+            "mainRMSE": 0.2251523989304315,
+            "detailRMSE": 0.16839928493732556
+          },
+          "print": {
+            "main": 0.23450064891745606,
+            "detail": 0.5797706576549917,
+            "gain": 0.3452700087375358,
+            "mainRMSE": 0.22775315521832895,
+            "detailRMSE": 0.1701174798679697
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-squash",
+      "label": "Autumn squash (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.20239551614379261,
+          "detail": 0.31938421369934145,
+          "gain": 0.11698869755554886,
+          "mainRMSE": 0.3528003512585357,
+          "detailRMSE": 0.26370108156244004
+        },
+        "print": {
+          "main": 0.19429755807729943,
+          "detail": 0.3118040435300856,
+          "gain": 0.11750648545278616,
+          "mainRMSE": 0.36007386167617883,
+          "detailRMSE": 0.27088530664464194
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-squash",
+      "label": "Autumn squash (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2348856941240284,
+          "detail": 0.3677839324628134,
+          "gain": 0.13289823833878492,
+          "mainRMSE": 0.19519309855786743,
+          "detailRMSE": 0.2039849005967866
+        },
+        "print": {
+          "main": 0.13982132127747962,
+          "detail": 0.32043407827238213,
+          "gain": 0.18061275699490248,
+          "mainRMSE": 0.2350774445445114,
+          "detailRMSE": 0.23639498138864426
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2740640726967526,
+            "detail": 0.6078405772544493,
+            "gain": 0.3337765045576967,
+            "mainRMSE": 0.24348838634065678,
+            "detailRMSE": 0.18882693647666896
+          },
+          "print": {
+            "main": 0.2702108687972148,
+            "detail": 0.6048590895567394,
+            "gain": 0.3346482207595246,
+            "mainRMSE": 0.24578828741476216,
+            "detailRMSE": 0.19043573403873854
+          }
+        }
+      }
+    },
+    {
+      "picture": "cdx-qr-ai-pebbles",
+      "label": "Smooth pebbles (AI-made)",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.18442933506794762,
+          "detail": 0.3256971200024698,
+          "gain": 0.14126778493452224,
+          "mainRMSE": 0.3373703803941953,
+          "detailRMSE": 0.2682425412570559
+        },
+        "print": {
+          "main": 0.17742830387700576,
+          "detail": 0.31803474964122813,
+          "gain": 0.14060644576422235,
+          "mainRMSE": 0.34504843394132056,
+          "detailRMSE": 0.2753710765423482
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "cdx-qr-ai-pebbles",
+      "label": "Smooth pebbles (AI-made)",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1880306844512977,
+          "detail": 0.36215820192372195,
+          "gain": 0.17412751747242425,
+          "mainRMSE": 0.21333610344701787,
+          "detailRMSE": 0.21544858084802082
+        },
+        "print": {
+          "main": 0.12396532509377242,
+          "detail": 0.3241512701187767,
+          "gain": 0.2001859450250043,
+          "mainRMSE": 0.2548932327800657,
+          "detailRMSE": 0.24727240207786577
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2395723522147844,
+            "detail": 0.5918910229126599,
+            "gain": 0.3523186706978756,
+            "mainRMSE": 0.22961790506055121,
+            "detailRMSE": 0.17429475625727536
+          },
+          "print": {
+            "main": 0.23673209834004844,
+            "detail": 0.5892917233153513,
+            "gain": 0.3525596249753029,
+            "mainRMSE": 0.23214727341517372,
+            "detailRMSE": 0.17596885599111026
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-436305",
+      "label": "Still Life",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.11487932673167034,
+          "detail": 0.31840925214776317,
+          "gain": 0.20352992541609286,
+          "mainRMSE": 0.44405264861890725,
+          "detailRMSE": 0.27683426216216817
+        },
+        "print": {
+          "main": 0.10716504502756982,
+          "detail": 0.31094781367085506,
+          "gain": 0.2037827686432852,
+          "mainRMSE": 0.449736268499367,
+          "detailRMSE": 0.2838222810878178
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-436305",
+      "label": "Still Life",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.18509620571087954,
+          "detail": 0.3441199919883284,
+          "gain": 0.1590237862774489,
+          "mainRMSE": 0.20848395681698006,
+          "detailRMSE": 0.24851543464689985
+        },
+        "print": {
+          "main": 0.11915909055521631,
+          "detail": 0.30940304350053,
+          "gain": 0.19024395294531365,
+          "mainRMSE": 0.24481859153808902,
+          "detailRMSE": 0.277363038074817
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2747627001470802,
+            "detail": 0.4633325209946794,
+            "gain": 0.18856982084759913,
+            "mainRMSE": 0.38436715332150756,
+            "detailRMSE": 0.30612096707953723
+          },
+          "print": {
+            "main": 0.272686517707315,
+            "detail": 0.4591074992493649,
+            "gain": 0.18642098154204995,
+            "mainRMSE": 0.38568070043893743,
+            "detailRMSE": 0.3080478312434436
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-10181",
+      "label": "Landscape",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.14836307983691738,
+          "detail": 0.3657816859794666,
+          "gain": 0.21741860614254915,
+          "mainRMSE": 0.38908431152361395,
+          "detailRMSE": 0.23612382460019282
+        },
+        "print": {
+          "main": 0.13794639011489623,
+          "detail": 0.3585189531252156,
+          "gain": 0.22057256301031938,
+          "mainRMSE": 0.39581898047874053,
+          "detailRMSE": 0.24399642831703253
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-10181",
+      "label": "Landscape",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.27168822591466074,
+          "detail": 0.40785584343542275,
+          "gain": 0.13616761752076206,
+          "mainRMSE": 0.1815895604766283,
+          "detailRMSE": 0.20559654782557354
+        },
+        "print": {
+          "main": 0.20049628928550253,
+          "detail": 0.3773632014647915,
+          "gain": 0.17686691217928902,
+          "mainRMSE": 0.22847509131775895,
+          "detailRMSE": 0.24201671469045735
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.30350085680851524,
+            "detail": 0.47509189280679437,
+            "gain": 0.1715910359982792,
+            "mainRMSE": 0.2996193646750548,
+            "detailRMSE": 0.2480554074719099
+          },
+          "print": {
+            "main": 0.3010253457766957,
+            "detail": 0.47043158432564247,
+            "gain": 0.16940623854894674,
+            "mainRMSE": 0.3013488169007378,
+            "detailRMSE": 0.25009233624416716
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-459968",
+      "label": "Landscape",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.14272422617118863,
+          "detail": 0.3771710912598849,
+          "gain": 0.23444686508869625,
+          "mainRMSE": 0.32255759535519857,
+          "detailRMSE": 0.21911237978273182
+        },
+        "print": {
+          "main": 0.13272385808152146,
+          "detail": 0.3701400493744329,
+          "gain": 0.2374161912929113,
+          "mainRMSE": 0.3303024033302528,
+          "detailRMSE": 0.22686189123940811
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-459968",
+      "label": "Landscape",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2522825673535047,
+          "detail": 0.38945620071312514,
+          "gain": 0.1371736333596204,
+          "mainRMSE": 0.16904518107718164,
+          "detailRMSE": 0.17795546813738988
+        },
+        "print": {
+          "main": 0.1674711446528147,
+          "detail": 0.3500363662375612,
+          "gain": 0.1825652215847465,
+          "mainRMSE": 0.21687062018582876,
+          "detailRMSE": 0.21451174806586826
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2936451387450113,
+            "detail": 0.5404628630079131,
+            "gain": 0.2468177242629018,
+            "mainRMSE": 0.20454932225918226,
+            "detailRMSE": 0.16941086488721224
+          },
+          "print": {
+            "main": 0.2901684615168918,
+            "detail": 0.5363856625399649,
+            "gain": 0.24621720102307312,
+            "mainRMSE": 0.20696467369923072,
+            "detailRMSE": 0.1713022524518532
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-9284",
+      "label": "Vase",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.23699235597503066,
+          "detail": 0.34813577804972884,
+          "gain": 0.11114342207469821,
+          "mainRMSE": 0.27193202516043324,
+          "detailRMSE": 0.2083902920857595
+        },
+        "print": {
+          "main": 0.2298636551814662,
+          "detail": 0.3403242142902757,
+          "gain": 0.11046055910880952,
+          "mainRMSE": 0.28123934023601943,
+          "detailRMSE": 0.21711003488336494
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-9284",
+      "label": "Vase",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2090976181317183,
+          "detail": 0.38875774224123794,
+          "gain": 0.1796601241095197,
+          "mainRMSE": 0.19349618486831485,
+          "detailRMSE": 0.18969664520591653
+        },
+        "print": {
+          "main": 0.1579088252154391,
+          "detail": 0.3528939188761388,
+          "gain": 0.1949850936606997,
+          "mainRMSE": 0.24320784249007205,
+          "detailRMSE": 0.22698307496756173
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.29757155684271747,
+            "detail": 0.5325998505004934,
+            "gain": 0.23502829365777594,
+            "mainRMSE": 0.21283026616322456,
+            "detailRMSE": 0.17696029922514656
+          },
+          "print": {
+            "main": 0.2949926698782176,
+            "detail": 0.5287803233396497,
+            "gain": 0.23378765346143218,
+            "mainRMSE": 0.21541683595462452,
+            "detailRMSE": 0.17911270429442638
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-9549",
+      "label": "Vase",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.162000828516677,
+          "detail": 0.4331153310034893,
+          "gain": 0.27111450248681235,
+          "mainRMSE": 0.36172440562455127,
+          "detailRMSE": 0.23626066106580645
+        },
+        "print": {
+          "main": 0.1531353266686057,
+          "detail": 0.4265183871227468,
+          "gain": 0.27338306045414107,
+          "mainRMSE": 0.369557575139079,
+          "detailRMSE": 0.24471598614922702
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-9549",
+      "label": "Vase",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.28686342756514194,
+          "detail": 0.42513821703434607,
+          "gain": 0.1382747894692041,
+          "mainRMSE": 0.19303107054683744,
+          "detailRMSE": 0.21432991468450627
+        },
+        "print": {
+          "main": 0.2239189685733148,
+          "detail": 0.3950718461278634,
+          "gain": 0.17115287755454858,
+          "mainRMSE": 0.23858725208326687,
+          "detailRMSE": 0.24903737886914082
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.32828578014134513,
+            "detail": 0.5497469208457522,
+            "gain": 0.22146114070440714,
+            "mainRMSE": 0.3064515524250138,
+            "detailRMSE": 0.24643218444770537
+          },
+          "print": {
+            "main": 0.3260271815496901,
+            "detail": 0.5457831239942288,
+            "gain": 0.21975594244453864,
+            "mainRMSE": 0.30843349007982657,
+            "detailRMSE": 0.24857996066050517
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-9283",
+      "label": "Vase",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2100058103066293,
+          "detail": 0.30336672762116246,
+          "gain": 0.09336091731453318,
+          "mainRMSE": 0.2759238399931153,
+          "detailRMSE": 0.20759970194016136
+        },
+        "print": {
+          "main": 0.20202626766531692,
+          "detail": 0.29492417627218115,
+          "gain": 0.09289790860686431,
+          "mainRMSE": 0.2843589130839526,
+          "detailRMSE": 0.21582712090199957
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-9283",
+      "label": "Vase",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.16506469756486916,
+          "detail": 0.35228597574015186,
+          "gain": 0.1872212781752828,
+          "mainRMSE": 0.17907604349591716,
+          "detailRMSE": 0.17570021708529177
+        },
+        "print": {
+          "main": 0.09666789985773182,
+          "detail": 0.3107715963398109,
+          "gain": 0.21410369648207897,
+          "mainRMSE": 0.2269758512249452,
+          "detailRMSE": 0.21107453583595767
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.27093577336181807,
+            "detail": 0.5096179518620115,
+            "gain": 0.23868217850019344,
+            "mainRMSE": 0.20169952719624784,
+            "detailRMSE": 0.1640245690997224
+          },
+          "print": {
+            "main": 0.26782908163220404,
+            "detail": 0.5053710438685861,
+            "gain": 0.23754196223638196,
+            "mainRMSE": 0.2040413837695505,
+            "detailRMSE": 0.16596894691167757
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-249072",
+      "label": "Vase",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2005752814581983,
+          "detail": 0.32648058944947095,
+          "gain": 0.12590530799127267,
+          "mainRMSE": 0.3048293241796508,
+          "detailRMSE": 0.19405314011894206
+        },
+        "print": {
+          "main": 0.1906971606395717,
+          "detail": 0.31711121519345864,
+          "gain": 0.1264140545538869,
+          "mainRMSE": 0.3130295764570756,
+          "detailRMSE": 0.20260556392506315
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-249072",
+      "label": "Vase",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.22152838855366616,
+          "detail": 0.3552595725254622,
+          "gain": 0.13373118397179612,
+          "mainRMSE": 0.1513525786304598,
+          "detailRMSE": 0.16978063005461191
+        },
+        "print": {
+          "main": 0.13246642545108672,
+          "detail": 0.31002910767939607,
+          "gain": 0.17756268222830923,
+          "mainRMSE": 0.19993194925659968,
+          "detailRMSE": 0.20691422734225257
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.28756854858683967,
+            "detail": 0.5057393087661681,
+            "gain": 0.21817076017932827,
+            "mainRMSE": 0.2179060869481987,
+            "detailRMSE": 0.19083761012255154
+          },
+          "print": {
+            "main": 0.284013168562438,
+            "detail": 0.5015255145160422,
+            "gain": 0.21751234595360427,
+            "mainRMSE": 0.21994694188985336,
+            "detailRMSE": 0.19256952441514347
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-312624",
+      "label": "Animal",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1933120603798709,
+          "detail": 0.3483355966834373,
+          "gain": 0.1550235363035664,
+          "mainRMSE": 0.3637552964500174,
+          "detailRMSE": 0.22971963061063475
+        },
+        "print": {
+          "main": 0.18514401425889668,
+          "detail": 0.3402627706610071,
+          "gain": 0.1551187564021103,
+          "mainRMSE": 0.3704478504582504,
+          "detailRMSE": 0.2374751437789501
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-312624",
+      "label": "Animal",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.19752778205895788,
+          "detail": 0.3529149571539246,
+          "gain": 0.15538717509496675,
+          "mainRMSE": 0.18561338721328513,
+          "detailRMSE": 0.23223210590580773
+        },
+        "print": {
+          "main": 0.13220561338488643,
+          "detail": 0.3125841624491685,
+          "gain": 0.18037854906428208,
+          "mainRMSE": 0.2239597599946491,
+          "detailRMSE": 0.26256332914327135
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.26531458084718357,
+            "detail": 0.5111827012520547,
+            "gain": 0.24586812040487116,
+            "mainRMSE": 0.28212810305619557,
+            "detailRMSE": 0.24428475390290788
+          },
+          "print": {
+            "main": 0.2626911313027326,
+            "detail": 0.5075110468367411,
+            "gain": 0.2448199155340085,
+            "mainRMSE": 0.2838278386196577,
+            "detailRMSE": 0.2458361986828658
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-478467",
+      "label": "Animal",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.15415959449597638,
+          "detail": 0.31909802478673444,
+          "gain": 0.16493843029075816,
+          "mainRMSE": 0.37006617021005195,
+          "detailRMSE": 0.20441522393964537
+        },
+        "print": {
+          "main": 0.1456671163406161,
+          "detail": 0.30940242165186815,
+          "gain": 0.16373530531125205,
+          "mainRMSE": 0.3767680836499649,
+          "detailRMSE": 0.21258021197577626
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-478467",
+      "label": "Animal",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1664440467526665,
+          "detail": 0.33080208536315764,
+          "gain": 0.1643580386104912,
+          "mainRMSE": 0.16579902357445467,
+          "detailRMSE": 0.19412688133343148
+        },
+        "print": {
+          "main": 0.09536438158861939,
+          "detail": 0.2867466488582384,
+          "gain": 0.19138226726961902,
+          "mainRMSE": 0.20880058031789434,
+          "detailRMSE": 0.2275812801713461
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2743418872563595,
+            "detail": 0.4826935252579615,
+            "gain": 0.20835163800160209,
+            "mainRMSE": 0.2989055023514572,
+            "detailRMSE": 0.2484984752976306
+          },
+          "print": {
+            "main": 0.2717097751191637,
+            "detail": 0.4786157371448665,
+            "gain": 0.20690596202570272,
+            "mainRMSE": 0.3003879617315512,
+            "detailRMSE": 0.250239305713858
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-42138",
+      "label": "Fantastic animal",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.20494264135262044,
+          "detail": 0.27778789880889604,
+          "gain": 0.07284525745627557,
+          "mainRMSE": 0.3542123638253575,
+          "detailRMSE": 0.26503031320893045
+        },
+        "print": {
+          "main": 0.19848869776808467,
+          "detail": 0.26963041030323714,
+          "gain": 0.07114171253515247,
+          "mainRMSE": 0.36077183625136217,
+          "detailRMSE": 0.27194949097059967
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-42138",
+      "label": "Fantastic animal",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1580199134028592,
+          "detail": 0.3329015253855125,
+          "gain": 0.17488161198265323,
+          "mainRMSE": 0.21985838644545525,
+          "detailRMSE": 0.234376326047614
+        },
+        "print": {
+          "main": 0.10045520929292837,
+          "detail": 0.292185508686471,
+          "gain": 0.19173029939354266,
+          "mainRMSE": 0.258485037233444,
+          "detailRMSE": 0.2634289059914984
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.27586722490997234,
+            "detail": 0.4987700945755777,
+            "gain": 0.22290286966560538,
+            "mainRMSE": 0.33883716300884825,
+            "detailRMSE": 0.26536991680978556
+          },
+          "print": {
+            "main": 0.27366025699965035,
+            "detail": 0.49486677445294924,
+            "gain": 0.22120651745329895,
+            "mainRMSE": 0.3403370136697613,
+            "detailRMSE": 0.2672012106541149
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-556849",
+      "label": "Animal figurine",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.22932159974237062,
+          "detail": 0.297457758082191,
+          "gain": 0.06813615833982037,
+          "mainRMSE": 0.31447557742379606,
+          "detailRMSE": 0.27160754509988017
+        },
+        "print": {
+          "main": 0.22252745922299924,
+          "detail": 0.28971881081682116,
+          "gain": 0.06719135159382197,
+          "mainRMSE": 0.321513139572947,
+          "detailRMSE": 0.27851688965529464
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-556849",
+      "label": "Animal figurine",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.25652048307765546,
+          "detail": 0.38844660236709183,
+          "gain": 0.1319261192894364,
+          "mainRMSE": 0.19653653237349253,
+          "detailRMSE": 0.20625395631968585
+        },
+        "print": {
+          "main": 0.18240356818212153,
+          "detail": 0.35198677703307013,
+          "gain": 0.16958320885094855,
+          "mainRMSE": 0.23914372359204833,
+          "detailRMSE": 0.23981349275242375
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2930385971355091,
+            "detail": 0.5598029597290274,
+            "gain": 0.26676436259351827,
+            "mainRMSE": 0.28961313894347207,
+            "detailRMSE": 0.2208967256755376
+          },
+          "print": {
+            "main": 0.2900491564272934,
+            "detail": 0.5562726860308256,
+            "gain": 0.2662235296035321,
+            "mainRMSE": 0.29138323400919397,
+            "detailRMSE": 0.22274695232477595
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-244130",
+      "label": "Shell",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2106782592902381,
+          "detail": 0.32079748210004916,
+          "gain": 0.1101192228098111,
+          "mainRMSE": 0.32342198868076594,
+          "detailRMSE": 0.20867501669393335
+        },
+        "print": {
+          "main": 0.20397256284234144,
+          "detail": 0.31210918651131936,
+          "gain": 0.10813662366897796,
+          "mainRMSE": 0.3313679988116919,
+          "detailRMSE": 0.2167797647892004
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-244130",
+      "label": "Shell",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.25329990203559377,
+          "detail": 0.41233858829052067,
+          "gain": 0.15903868625492684,
+          "mainRMSE": 0.18108095437945243,
+          "detailRMSE": 0.18784389861836548
+        },
+        "print": {
+          "main": 0.17432097956455592,
+          "detail": 0.37790252381019296,
+          "gain": 0.20358154424563701,
+          "mainRMSE": 0.22731671494999528,
+          "detailRMSE": 0.22298041456876713
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.30930800021278515,
+            "detail": 0.5471433334089953,
+            "gain": 0.2378353331962101,
+            "mainRMSE": 0.20597393400238215,
+            "detailRMSE": 0.17269006210142643
+          },
+          "print": {
+            "main": 0.30595675477677464,
+            "detail": 0.5434953583107476,
+            "gain": 0.23753860353397288,
+            "mainRMSE": 0.2082238681542755,
+            "detailRMSE": 0.1745961689802312
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-325462",
+      "label": "Scallop shell",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.18627432561226026,
+          "detail": 0.33172738328749085,
+          "gain": 0.1454530576752306,
+          "mainRMSE": 0.34486788816705893,
+          "detailRMSE": 0.21194809119913285
+        },
+        "print": {
+          "main": 0.1784784057783999,
+          "detail": 0.32421020028377895,
+          "gain": 0.14573179450537904,
+          "mainRMSE": 0.352356956609837,
+          "detailRMSE": 0.2203445324845136
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-325462",
+      "label": "Scallop shell",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.3052093174482401,
+          "detail": 0.446607204120931,
+          "gain": 0.1413978866726909,
+          "mainRMSE": 0.1745909862416178,
+          "detailRMSE": 0.18885544316094602
+        },
+        "print": {
+          "main": 0.2577555776945685,
+          "detail": 0.43794032207880224,
+          "gain": 0.18018474438423368,
+          "mainRMSE": 0.23082380775737832,
+          "detailRMSE": 0.23063066726749598
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.3093432376860546,
+            "detail": 0.5226536701689077,
+            "gain": 0.21331043248285325,
+            "mainRMSE": 0.29155746511004743,
+            "detailRMSE": 0.23619377808509778
+          },
+          "print": {
+            "main": 0.3076479042174724,
+            "detail": 0.5197310050531827,
+            "gain": 0.21208310083571033,
+            "mainRMSE": 0.2932984338459845,
+            "detailRMSE": 0.23818707285533547
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-13181",
+      "label": "Fruit",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.1537100078552273,
+          "detail": 0.3651798687425462,
+          "gain": 0.21146986088731898,
+          "mainRMSE": 0.3861460288162515,
+          "detailRMSE": 0.22580728800086938
+        },
+        "print": {
+          "main": 0.1450384115125061,
+          "detail": 0.35705486382649687,
+          "gain": 0.2120164523139907,
+          "mainRMSE": 0.39257591146290965,
+          "detailRMSE": 0.23365959461911417
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-13181",
+      "label": "Fruit",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.20320818697129228,
+          "detail": 0.3768221632695413,
+          "gain": 0.1736139762982491,
+          "mainRMSE": 0.183408721608025,
+          "detailRMSE": 0.22871305179925921
+        },
+        "print": {
+          "main": 0.1355891556978725,
+          "detail": 0.33658649080204606,
+          "gain": 0.2009973351041736,
+          "mainRMSE": 0.2221204746876325,
+          "detailRMSE": 0.2595006910203267
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.298260776691177,
+            "detail": 0.48484348899312313,
+            "gain": 0.18658271230194612,
+            "mainRMSE": 0.3118896662636557,
+            "detailRMSE": 0.2629236394431425
+          },
+          "print": {
+            "main": 0.2958234676101003,
+            "detail": 0.48017992386705793,
+            "gain": 0.1843564562569576,
+            "mainRMSE": 0.31334430624525905,
+            "detailRMSE": 0.2647967163673253
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-203455",
+      "label": "Fruit cluster",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2123234519169163,
+          "detail": 0.2834734929826932,
+          "gain": 0.07115004106577698,
+          "mainRMSE": 0.31299657725500235,
+          "detailRMSE": 0.1956118641658463
+        },
+        "print": {
+          "main": 0.20563801522263242,
+          "detail": 0.27374267887725523,
+          "gain": 0.06810466365462278,
+          "mainRMSE": 0.3210614494499292,
+          "detailRMSE": 0.20421933763807915
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-203455",
+      "label": "Fruit cluster",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.22224403902720966,
+          "detail": 0.3647559782459663,
+          "gain": 0.14251193921875654,
+          "mainRMSE": 0.15029120482527775,
+          "detailRMSE": 0.16644803227780414
+        },
+        "print": {
+          "main": 0.14534896385455504,
+          "detail": 0.319036699114181,
+          "gain": 0.17368773525962594,
+          "mainRMSE": 0.20131682573563672,
+          "detailRMSE": 0.20471099069187634
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2942908048282799,
+            "detail": 0.505985071608049,
+            "gain": 0.211694266779769,
+            "mainRMSE": 0.25089528116017273,
+            "detailRMSE": 0.21215490899765554
+          },
+          "print": {
+            "main": 0.29155698232344823,
+            "detail": 0.5021603622978869,
+            "gain": 0.21060337997443862,
+            "mainRMSE": 0.2526699592149709,
+            "detailRMSE": 0.2139502203828485
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-438031",
+      "label": "Summer Flowers",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.14380896885910519,
+          "detail": 0.3886413003831155,
+          "gain": 0.24483233152401032,
+          "mainRMSE": 0.43625060777453284,
+          "detailRMSE": 0.24570103444779917
+        },
+        "print": {
+          "main": 0.13457904303795545,
+          "detail": 0.38241935617316936,
+          "gain": 0.24784031313521387,
+          "mainRMSE": 0.44290271261044134,
+          "detailRMSE": 0.25367563311060354
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-438031",
+      "label": "Summer Flowers",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.25308662243008695,
+          "detail": 0.4076858737123665,
+          "gain": 0.15459925128227953,
+          "mainRMSE": 0.19868713584326997,
+          "detailRMSE": 0.23281203792359212
+        },
+        "print": {
+          "main": 0.1863812686394542,
+          "detail": 0.37691113715889346,
+          "gain": 0.19052986851943915,
+          "mainRMSE": 0.24323003286486333,
+          "detailRMSE": 0.2670718860780943
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2998318721665821,
+            "detail": 0.48394958325928794,
+            "gain": 0.18411771109270592,
+            "mainRMSE": 0.3437607763022163,
+            "detailRMSE": 0.27811077046304955
+          },
+          "print": {
+            "main": 0.29776913003677286,
+            "detail": 0.47962165283534597,
+            "gain": 0.18185252279857309,
+            "mainRMSE": 0.3453669344949941,
+            "detailRMSE": 0.2801423539596467
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-196651",
+      "label": "Fruit bowl",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.22341081584153555,
+          "detail": 0.314388359943369,
+          "gain": 0.09097754410183348,
+          "mainRMSE": 0.2504535694753794,
+          "detailRMSE": 0.21596281169861747
+        },
+        "print": {
+          "main": 0.21724942964909064,
+          "detail": 0.30709279438762943,
+          "gain": 0.08984336473853877,
+          "mainRMSE": 0.2591016118894036,
+          "detailRMSE": 0.22397655606804312
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-196651",
+      "label": "Fruit bowl",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.17532615625878217,
+          "detail": 0.37302315594676716,
+          "gain": 0.197696999687985,
+          "mainRMSE": 0.1938097031365312,
+          "detailRMSE": 0.19002492620687333
+        },
+        "print": {
+          "main": 0.13189598798184557,
+          "detail": 0.34524952766221884,
+          "gain": 0.21335353968037327,
+          "mainRMSE": 0.24072633277625619,
+          "detailRMSE": 0.22527531060412848
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.2764693160627977,
+            "detail": 0.5125239673834975,
+            "gain": 0.23605465132069972,
+            "mainRMSE": 0.20490438831429775,
+            "detailRMSE": 0.16859437161675395
+          },
+          "print": {
+            "main": 0.27410713780142965,
+            "detail": 0.5085279137174649,
+            "gain": 0.2344207759160352,
+            "mainRMSE": 0.20727181569418965,
+            "detailRMSE": 0.17061718469361944
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-3845",
+      "label": "Fruit Bowl",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.16800075389970692,
+          "detail": 0.3488517717775196,
+          "gain": 0.18085101787781263,
+          "mainRMSE": 0.36942715837357437,
+          "detailRMSE": 0.2200319762367952
+        },
+        "print": {
+          "main": 0.16036478154736117,
+          "detail": 0.34066702111474845,
+          "gain": 0.18030223956738733,
+          "mainRMSE": 0.3767293375898252,
+          "detailRMSE": 0.2281467959761053
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-3845",
+      "label": "Fruit Bowl",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.24480430410254228,
+          "detail": 0.3889095307808542,
+          "gain": 0.1441052266783119,
+          "mainRMSE": 0.18027618555544583,
+          "detailRMSE": 0.2109346807751641
+        },
+        "print": {
+          "main": 0.17891974850777043,
+          "detail": 0.34834530746612485,
+          "gain": 0.16942555895835437,
+          "mainRMSE": 0.22345884740391245,
+          "detailRMSE": 0.24541738519671275
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.29671529030512706,
+            "detail": 0.5213866534853138,
+            "gain": 0.22467136318018666,
+            "mainRMSE": 0.28242593209298644,
+            "detailRMSE": 0.23598277756544275
+          },
+          "print": {
+            "main": 0.2940449558980756,
+            "detail": 0.5172649266610905,
+            "gain": 0.22321997076301484,
+            "mainRMSE": 0.28420729858998034,
+            "detailRMSE": 0.23776409459602924
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-570235",
+      "label": "Cowrie shell",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.233490662113404,
+          "detail": 0.2786608718625959,
+          "gain": 0.04517020974919197,
+          "mainRMSE": 0.28456014760214354,
+          "detailRMSE": 0.23432517147494777
+        },
+        "print": {
+          "main": 0.22913355151508355,
+          "detail": 0.2694650095503245,
+          "gain": 0.04033145803524091,
+          "mainRMSE": 0.29261065433280337,
+          "detailRMSE": 0.24176450546676204
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-570235",
+      "label": "Cowrie shell",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.11786076768126796,
+          "detail": 0.3209650440710862,
+          "gain": 0.20310427638981826,
+          "mainRMSE": 0.23231412066192175,
+          "detailRMSE": 0.22479521094901828
+        },
+        "print": {
+          "main": 0.07537667986352503,
+          "detail": 0.27890263608559024,
+          "gain": 0.20352595622206526,
+          "mainRMSE": 0.27471884910051203,
+          "detailRMSE": 0.2560528703913827
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.24225483877653012,
+            "detail": 0.5198066488427104,
+            "gain": 0.27755181006618024,
+            "mainRMSE": 0.19950476120086597,
+            "detailRMSE": 0.16433722206856566
+          },
+          "print": {
+            "main": 0.2396797093632173,
+            "detail": 0.516105840544552,
+            "gain": 0.27642613118133463,
+            "mainRMSE": 0.20200698252416488,
+            "detailRMSE": 0.16621619748523647
+          }
+        }
+      }
+    },
+    {
+      "picture": "met-244131",
+      "label": "Shell",
+      "shape": "square",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.20045870303748448,
+          "detail": 0.31919641080181366,
+          "gain": 0.11873770776432924,
+          "mainRMSE": 0.32572572004917333,
+          "detailRMSE": 0.1989117502996207
+        },
+        "print": {
+          "main": 0.19397970437625053,
+          "detail": 0.3116056605627334,
+          "gain": 0.11762595618648283,
+          "mainRMSE": 0.3339835623866699,
+          "detailRMSE": 0.20745118118176772
+        }
+      },
+      "sticker": null
+    },
+    {
+      "picture": "met-244131",
+      "label": "Shell",
+      "shape": "circle",
+      "matched": 10,
+      "scores": {
+        "phone": {
+          "main": 0.2859884654636159,
+          "detail": 0.44603338427801215,
+          "gain": 0.16004491881439625,
+          "mainRMSE": 0.17535138497713668,
+          "detailRMSE": 0.1849104940994381
+        },
+        "print": {
+          "main": 0.20930428979466323,
+          "detail": 0.4188387407284805,
+          "gain": 0.20953445093381723,
+          "mainRMSE": 0.22424434554524503,
+          "detailRMSE": 0.22179767774502865
+        }
+      },
+      "sticker": {
+        "matched": 10,
+        "scores": {
+          "phone": {
+            "main": 0.30927477799400893,
+            "detail": 0.5384584977461929,
+            "gain": 0.22918371975218405,
+            "mainRMSE": 0.22029164341297056,
+            "detailRMSE": 0.19381175456543037
+          },
+          "print": {
+            "main": 0.3064900731026399,
+            "detail": 0.5349926283627799,
+            "gain": 0.22850255526013993,
+            "mainRMSE": 0.2224256016201988,
+            "detailRMSE": 0.19565757151706292
+          }
+        }
+      }
+    }
+  ],
+  "conditions": [
+    {
+      "condition": "8px-blur0.2-front",
+      "main": {
+        "jsqr": {
+          "pass": 780,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.2-yaw10",
+      "main": {
+        "jsqr": {
+          "pass": 596,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.2-pitch10",
+      "main": {
+        "jsqr": {
+          "pass": 543,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.2-dim",
+      "main": {
+        "jsqr": {
+          "pass": 780,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.2-bright",
+      "main": {
+        "jsqr": {
+          "pass": 770,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.2-combined",
+      "main": {
+        "jsqr": {
+          "pass": 614,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.3-front",
+      "main": {
+        "jsqr": {
+          "pass": 683,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.3-yaw10",
+      "main": {
+        "jsqr": {
+          "pass": 362,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.3-pitch10",
+      "main": {
+        "jsqr": {
+          "pass": 350,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.3-dim",
+      "main": {
+        "jsqr": {
+          "pass": 699,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 777,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.3-bright",
+      "main": {
+        "jsqr": {
+          "pass": 645,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "8px-blur0.3-combined",
+      "main": {
+        "jsqr": {
+          "pass": 375,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.2-front",
+      "main": {
+        "jsqr": {
+          "pass": 761,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 719,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.2-yaw10",
+      "main": {
+        "jsqr": {
+          "pass": 479,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 780,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.2-pitch10",
+      "main": {
+        "jsqr": {
+          "pass": 425,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 777,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.2-dim",
+      "main": {
+        "jsqr": {
+          "pass": 765,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 717,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.2-bright",
+      "main": {
+        "jsqr": {
+          "pass": 771,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 762,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.2-combined",
+      "main": {
+        "jsqr": {
+          "pass": 478,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 779,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.3-front",
+      "main": {
+        "jsqr": {
+          "pass": 168,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 244,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.3-yaw10",
+      "main": {
+        "jsqr": {
+          "pass": 143,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 333,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.3-pitch10",
+      "main": {
+        "jsqr": {
+          "pass": 105,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 348,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.3-dim",
+      "main": {
+        "jsqr": {
+          "pass": 190,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 246,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.3-bright",
+      "main": {
+        "jsqr": {
+          "pass": 270,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 331,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    },
+    {
+      "condition": "4px-blur0.3-combined",
+      "main": {
+        "jsqr": {
+          "pass": 152,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 329,
+          "tested": 1040
+        }
+      },
+      "detail": {
+        "jsqr": {
+          "pass": 1040,
+          "tested": 1040
+        },
+        "zxingcpp": {
+          "pass": 1040,
+          "tested": 1040
+        }
+      }
+    }
+  ]
+}

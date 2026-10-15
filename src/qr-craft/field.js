@@ -108,11 +108,34 @@ const head = (o, fit) => ({ N: o.size, C: fit.center, S: fit.scale, fg: o.fg, bg
 // o: { size, fg, bg }.
 export function pictureModifier(o, fit) {
   const k = head(o, fit);
+  const photoGlsl = o.photo
+    ? `uniform vec4 uSpPhotoMap;
+void qcPhoto(vec3 rest, float piece) {
+  spPhotoOut = 0u;
+  if (piece < 0.5) return;
+  vec2 uv = clamp(vec2(uSpPhotoMap.x * rest.x + uSpPhotoMap.y, uSpPhotoMap.z * rest.y + uSpPhotoMap.w), 0.0, 1.0);
+  uvec2 q = uvec2(uv * 65533.0 + 1.5);
+  spPhotoOut = q.x | (q.y << 16u);
+}
+`
+    : "";
+  const photoWgsl = o.photo
+    ? `uniform uSpPhotoMap: vec4f;
+fn qcPhoto(rest: vec3f, piece: f32) {
+  spPhotoOut = 0u;
+  if (piece < 0.5) { return; }
+  let uv = clamp(vec2f(uniform.uSpPhotoMap.x * rest.x + uniform.uSpPhotoMap.y, uniform.uSpPhotoMap.z * rest.y + uniform.uSpPhotoMap.w), vec2f(0.0), vec2f(1.0));
+  let q = vec2u(uv * 65533.0 + 1.5);
+  spPhotoOut = q.x | (q.y << 16u);
+}
+`
+    : "";
   // The wave crosses the code in the first 60% of the tap; each tile turns
   // in 40% of it.
-  const glsl = `${GLSL_HEAD(k)}
+  const glsl = `${GLSL_HEAD(k)}${photoGlsl}
 void modifySplatCenter(inout vec3 center) {
   vec4 an = loadSplatAnim();
+  ${o.photo ? "qcPhoto(center, an.z);" : ""}
   if (an.z < 0.5) return;
   vec3 piv = qcPivot(an.z - 1.0);
   vec3 u = center / QS + QC;
@@ -131,9 +154,10 @@ void modifySplatCenter(inout vec3 center) {
   center = (u - QC) * QS;
 }
 `;
-  const wgsl = `${WGSL_HEAD(k)}
+  const wgsl = `${WGSL_HEAD(k)}${photoWgsl}
 fn modifySplatCenter(center: ptr<function, vec3f>) {
   let an = loadSplatAnim();
+  ${o.photo ? "qcPhoto(*center, an.z);" : ""}
   if (an.z < 0.5) { return; }
   let piv = qcPivot(an.z - 1.0);
   var u = *center / QS + QC;
@@ -150,7 +174,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
   *center = (u - QC) * QS;
 }
 `;
-  return { glsl, wgsl };
+  return { glsl, wgsl, ...(o.photo ? { photo: true } : {}) };
 }
 
 // ---- Build a code -------------------------------------------------------------------------
