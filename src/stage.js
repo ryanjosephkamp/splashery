@@ -121,11 +121,13 @@ export class Stage {
     // Rendering is on demand, but splat sorting finishes on a worker a few
     // frames after a change, so every request keeps frames coming briefly.
     this.aliveUntil = 0;
+    this.renderTailPauses = 0;
     this.renderHolds = new Set();
     app.on("update", (dt) => {
       for (const fn of this.updateHandlers) fn(dt);
       if (this.renderHolds.size && !this.captureWaiters.length) app.renderNextFrame = false;
-      else if (performance.now() < this.aliveUntil) app.renderNextFrame = true;
+      else if (!this.renderTailPauses && performance.now() < this.aliveUntil)
+        app.renderNextFrame = true;
     });
     this.graveyard = [];
     this.projectorTries = 0; // Fluids r7 (hookProjector)
@@ -137,8 +139,7 @@ export class Stage {
       this.frames++;
       if (this.projectorTries < 600) this.hookProjector(); // Fluids r7
       if (this.graveyard.length) {
-        // frameend also fires for an update whose covered draw was skipped.
-        // The work-buffer manager can release old textures only after real draws.
+        // Covered updates do not complete draws or retire their textures.
         if (rendered) this.buryToys();
         this.requestRender();
       }
@@ -303,6 +304,21 @@ export class Stage {
     };
   }
 
+  // CPU checks can stop the sorting tail while a still covers the canvas.
+  // Explicit requests and capture waiters continue to draw. Holds nest, and
+  // the last release redraws so the ordinary view resumes immediately.
+  holdRenderTail() {
+    this.renderTailPauses = (this.renderTailPauses || 0) + 1;
+    this.aliveUntil = 0;
+    if (!this.captureWaiters.length && !this.graveyard.length) this.app.renderNextFrame = false;
+    let released = false;
+    return () => {
+      if (released) return;
+      released = true;
+      if (!--this.renderTailPauses) this.requestRender();
+    };
+  }
+
   // The canvas size comes from CSS. app.resizeCanvas() would pin it with
   // inline pixel sizes (and then CSS changes, such as the phone sheet opening
   // or the window resizing, would never reach it), so only the drawing-buffer
@@ -407,7 +423,7 @@ export class Stage {
         parts.unlock();
       }
     }
-    const photoOn = photo && kit && !modifier && !!this.photo; // lane Photo fidelity
+    const photoOn = photo && kit && (!modifier || modifier.photo === true) && !!this.photo;
     const glossOn = !!gloss && kit && !modifier && !photoOn; // lane Kit lab
     entity.gsplat.setWorkBufferModifier(modifier || (photoOn ? MODIFIER_KIT_PHOTO : glossOn ? MODIFIER_KIT_GLOSS : kit ? MODIFIER_KIT : rig ? MODIFIER_RIG : MODIFIER)); // prettier-ignore
     if (glossOn) entity.gsplat.setParameter("uSpGloss", [gloss.strength, gloss.sharpness, 0, 0]);
@@ -753,6 +769,7 @@ export class Stage {
   // work buffer's format and the renderer back as they were. Call it before setToy.
   setPhoto(on) {
     if (!!on === !!this.photo) return;
+    this.lastPhotoUniforms = null;
     if (!on) {
       // the photo toys' entities (shown or buried) stop writing the stream before it goes
       for (const t of [this.toy, ...this.graveyard]) if (t?.photo) t.entity.gsplat.setWorkBufferModifier(MODIFIER_KIT); // prettier-ignore
@@ -826,7 +843,18 @@ export class Stage {
     scope.resolve("uSpPhotoTu").setValue(tu);
     scope.resolve("uSpPhotoTv").setValue(tv);
     scope.resolve("uSpPhotoK").setValue(k);
-    this.requestRender();
+    // A still photo does not need another frame for an identical mapping.
+    // Keep copies: callers may reuse and mutate their uniform arrays.
+    const values = [...map, ...tu, ...tv, ...k];
+    if (!this.lastPhotoUniforms || values.some((v, i) => v !== this.lastPhotoUniforms[i])) {
+      this.lastPhotoUniforms = values;
+      this.requestRender();
+    }
+  }
+
+  // Optional rigid photo tiles: [grid size, ripple progress, tap x, tap y].
+  setPhotoTiles(tiles = [0, 0, 0, 0]) {
+    this.device.scope.resolve("uSpPhotoTiles").setValue(tiles);
   }
 
   // Lab r2: a toy whose splats are mostly faint (the splat field's galaxy)

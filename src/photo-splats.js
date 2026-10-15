@@ -123,6 +123,22 @@ uniform vec4 uSpPhotoTv;
 uniform vec4 uSpPhotoK;
 uniform vec4 uSpPhotoBackK;
 uniform vec2 uSpPhotoPlane; // x the flat photo's z, y shared-plane projection on
+uniform vec4 uSpPhotoTiles;
+float spPhotoTileShade = 1.0;
+vec3 spPhotoTileRotate(vec3 v, vec4 q) { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
+vec4 spPhotoTileRotation(vec2 uv) {
+  if (uSpPhotoTiles.x < 0.5) return vec4(0.0, 0.0, 0.0, 1.0);
+  vec2 tile = floor(uv * uSpPhotoTiles.x);
+  vec2 pivot = vec2(tile.x + 0.5, uSpPhotoTiles.x - tile.y - 0.5) - uSpPhotoTiles.x * 0.5;
+  vec2 dir = pivot - uSpPhotoTiles.zw;
+  float far = length(dir) / (uSpPhotoTiles.x * 1.42);
+  float s = clamp((uSpPhotoTiles.y - 0.6 * far) / 0.4, 0.0, 1.0);
+  s = s < 0.5 ? 4.0 * s * s * s : 1.0 - pow(-2.0 * s + 2.0, 3.0) / 2.0;
+  float tip = (s <= 0.0 || s >= 1.0) ? 0.0 : 1.4 * cos(3.1415927 * s) * sin(3.1415927 * s);
+  spPhotoTileShade = 1.0 + 0.3 * tip;
+  dir = length(dir) > 1e-3 ? normalize(dir) : vec2(1.0, 0.0);
+  return vec4(vec3(-dir.y, dir.x, 0.0) * sin(-tip * 0.5), cos(-tip * 0.5));
+}
 void spPhotoProject(vec3 c) {
   vec4 ph = spPhotoUnpack(loadSpPhoto().x);
   setSpPhotoA(vec4(0.0));
@@ -130,10 +146,13 @@ void spPhotoProject(vec3 c) {
   if (ph.z < 0.5) return;
   mat4 vp = matrix_projection * matrix_view * matrix_model;
   vec4 actual = vp * vec4(c, 1.0);
-  bool samePlane = uSpPhotoPlane.y > 0.5 && ph.z < 1.5;
+  bool tiled = uSpPhotoTiles.x > 0.5 && ph.z < 1.5;
+  bool samePlane = !tiled && uSpPhotoPlane.y > 0.5 && ph.z < 1.5;
   vec4 cc = samePlane ? vp * vec4(c.xy, uSpPhotoPlane.x, 1.0) : actual;
-  vec4 cu = vp * vec4(uSpPhotoTu.xyz, 0.0);
-  vec4 cv = vp * vec4(uSpPhotoTv.xyz, 0.0);
+  vec4 tq = spPhotoTileRotation(ph.xy);
+  if (tiled) ph.z = spPhotoTileShade;
+  vec4 cu = vp * vec4(tiled ? spPhotoTileRotate(uSpPhotoTu.xyz, tq) : uSpPhotoTu.xyz, 0.0);
+  vec4 cv = vp * vec4(tiled ? spPhotoTileRotate(uSpPhotoTv.xyz, tq) : uSpPhotoTv.xyz, 0.0);
   if (cc.w <= 1e-6) return;
   vec2 hv = 0.5 * viewport_size.xy;
   vec2 du = (cu.xy * cc.w - cc.xy * cu.w) / (cc.w * cc.w) * hv;
@@ -167,6 +186,23 @@ uniform uSpPhotoK: vec4f;
 uniform uSpPhotoBackK: vec4f;
 uniform uSpPhotoFill: f32;
 uniform uSpPhotoPlane: vec2f;
+uniform uSpPhotoTiles: vec4f;
+var<private> spPhotoTileShade: f32 = 1.0;
+fn spPhotoTileRotate(v: vec3f, q: vec4f) -> vec3f { return v + 2.0 * cross(q.xyz, cross(q.xyz, v) + q.w * v); }
+fn spPhotoTileRotation(uv: vec2f) -> vec4f {
+  if (uniform.uSpPhotoTiles.x < 0.5) { return vec4f(0.0, 0.0, 0.0, 1.0); }
+  let tile = floor(uv * uniform.uSpPhotoTiles.x);
+  let pivot = vec2f(tile.x + 0.5, uniform.uSpPhotoTiles.x - tile.y - 0.5) - uniform.uSpPhotoTiles.x * 0.5;
+  var dir = pivot - uniform.uSpPhotoTiles.zw;
+  let far = length(dir) / (uniform.uSpPhotoTiles.x * 1.42);
+  var s = clamp((uniform.uSpPhotoTiles.y - 0.6 * far) / 0.4, 0.0, 1.0);
+  s = select(1.0 - pow(-2.0 * s + 2.0, 3.0) / 2.0, 4.0 * s * s * s, s < 0.5);
+  var tip = 0.0;
+  if (s > 0.0 && s < 1.0) { tip = 1.4 * cos(3.1415927 * s) * sin(3.1415927 * s); }
+  spPhotoTileShade = 1.0 + 0.3 * tip;
+  if (length(dir) > 1e-3) { dir = normalize(dir); } else { dir = vec2f(1.0, 0.0); }
+  return vec4f(vec3f(-dir.y, dir.x, 0.0) * sin(-tip * 0.5), cos(-tip * 0.5));
+}
 fn modifySplatCenter(center: ptr<function, vec3f>) {
 }
 fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotation: ptr<function, vec4f>, scale: ptr<function, vec3f>) {
@@ -184,10 +220,13 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
   }
   let vp = uniform.matrix_projection * uniform.matrix_view * uniform.matrix_model;
   let actual = vp * vec4f(center, 1.0);
-  let samePlane = uniform.uSpPhotoPlane.y > 0.5 && kind < 1.5;
+  let tiled = uniform.uSpPhotoTiles.x > 0.5 && kind < 1.5;
+  let samePlane = !tiled && uniform.uSpPhotoPlane.y > 0.5 && kind < 1.5;
   let cc = select(actual, vp * vec4f(center.xy, uniform.uSpPhotoPlane.x, 1.0), samePlane);
-  let cu = vp * vec4f(uniform.uSpPhotoTu.xyz, 0.0);
-  let cv = vp * vec4f(uniform.uSpPhotoTv.xyz, 0.0);
+  let tq = spPhotoTileRotation(ph);
+  if (tiled) { kind = spPhotoTileShade; }
+  let cu = vp * vec4f(select(uniform.uSpPhotoTu.xyz, spPhotoTileRotate(uniform.uSpPhotoTu.xyz, tq), tiled), 0.0);
+  let cv = vp * vec4f(select(uniform.uSpPhotoTv.xyz, spPhotoTileRotate(uniform.uSpPhotoTv.xyz, tq), tiled), 0.0);
   if (cc.w <= 1e-6) { return; }
   let hv = vec2f(0.5, -0.5) * uniform.viewport_size.xy;
   let du = (cu.xy * cc.w - cc.xy * cu.w) / (cc.w * cc.w) * hv;
@@ -219,6 +258,7 @@ uniform sampler2D uSpPhotoBack;
 uniform float uSpPhotoFill;
 uniform vec4 uSpPhotoK;
 uniform vec2 uSpPhotoPlane;
+uniform vec4 uSpPhotoTiles;
 // A flat photo uses a cubic footprint, with nine bilinear taps at one mip.
 // This reconstructs small strokes without the per-patch phase aliasing.
 vec3 spPhotoCubic(vec2 t, float lod) {
@@ -249,6 +289,15 @@ void spPhotoColor(vec2 uv, inout vec4 color) {
   vec2 p = vec2(gy.y * uv.x - gy.x * uv.y, gx.x * uv.y - gx.y * uv.x) / det;
   vec4 m = getSpPhotoM();
   vec2 t = a.xy + m.xy * p.x + m.zw * p.y;
+  if (uSpPhotoTiles.x > 0.5 && a.z < 1.5) {
+    vec2 tile = floor(a.xy * uSpPhotoTiles.x);
+    vec2 lo = tile / uSpPhotoTiles.x, hi = (tile + 1.0) / uSpPhotoTiles.x;
+    if (any(lessThan(t, lo)) || any(greaterThan(t, hi))) { color.a = 0.0; return; }
+    float g = (exp(-4.0 * dot(uv, uv)) - exp(-4.0)) / (1.0 - exp(-4.0));
+    color.a = clamp(color.a / max(g, 1e-5), 0.0, 1.0);
+    color.rgb = textureLod(uSpPhoto, t, a.w).rgb * uSpPhotoK.x * a.z;
+    return;
+  }
   if (uSpPhotoFill > 0.5 && (any(lessThan(t, vec2(0.0))) || any(greaterThan(t, vec2(1.0))))) { color.a = 0.0; return; }
   vec3 c = a.z > 1.5 ? textureLod(uSpPhotoBack, t, a.w).rgb :
     (uSpPhotoPlane.y > 0.5 ? spPhotoCubic(t, a.w) : textureLod(uSpPhoto, t, a.w - (uSpPhotoFill > 0.5 ? 0.75 : 0.0)).rgb);
@@ -263,6 +312,7 @@ var uSpPhotoBackSampler: sampler;
 uniform uSpPhotoFill: f32;
 uniform uSpPhotoK: vec4f;
 uniform uSpPhotoPlane: vec2f;
+uniform uSpPhotoTiles: vec4f;
 fn spPhotoCubic(t: vec2f, lod: f32) -> vec3f {
   let level = floor(max(lod, 0.0));
   let size = max(vec2f(1.0), floor(uniform.uSpPhotoK.yz * exp2(-level)));
@@ -296,6 +346,16 @@ fn spPhotoColor(uv: vec2f, color: ptr<function, vec4f>) {
   let p = vec2f(gy.y * uv.x - gy.x * uv.y, gx.x * uv.y - gx.y * uv.x) / det;
   let m = getSpPhotoM();
   let t = a.xy + m.xy * p.x + m.zw * p.y;
+  if (uniform.uSpPhotoTiles.x > 0.5 && a.z < 1.5) {
+    let tile = floor(a.xy * uniform.uSpPhotoTiles.x);
+    let lo = tile / uniform.uSpPhotoTiles.x;
+    let hi = (tile + 1.0) / uniform.uSpPhotoTiles.x;
+    if (any(t < lo) || any(t > hi)) { *color = vec4f((*color).rgb, 0.0); return; }
+    let g = (exp(-4.0 * dot(uv, uv)) - exp(-4.0)) / (1.0 - exp(-4.0));
+    let alpha = clamp((*color).a / max(g, 1e-5), 0.0, 1.0);
+    *color = vec4f(textureSampleLevel(uSpPhoto, uSpPhotoSampler, t, a.w).rgb * uniform.uSpPhotoK.x * a.z, alpha);
+    return;
+  }
   if (uniform.uSpPhotoFill > 0.5 && (any(t < vec2f(0.0)) || any(t > vec2f(1.0)))) { *color = vec4f((*color).rgb, 0.0); return; }
   var c = textureSampleLevel(uSpPhoto, uSpPhotoSampler, t, a.w - select(0.0, 0.75, uniform.uSpPhotoFill > 0.5)).rgb;
   if (a.z > 1.5) { c = textureSampleLevel(uSpPhotoBack, uSpPhotoBackSampler, t, a.w).rgb; }
@@ -312,11 +372,11 @@ export function withPhotoPS(code) {
     glsl:
       code.glsl.replace("void modifySplatColor(", "void spKernelColor(") +
       PHOTO_PS.glsl +
-      "\nvoid modifySplatColor(vec2 uv, inout vec4 color) {\n  spPhotoColor(uv, color);\n  spKernelColor(uv, color);\n}\n",
+      "\nvoid modifySplatColor(vec2 uv, inout vec4 color) {\n  spPhotoColor(uv, color);\n  float tileAlpha = color.a;\n  spKernelColor(uv, color);\n  vec4 tile = getSpPhotoA();\n  if (uSpPhotoTiles.x > 0.5 && tile.z > 0.5 && tile.z < 1.5) color.a = tileAlpha;\n}\n",
     wgsl:
       code.wgsl.replace("fn modifySplatColor(", "fn spKernelColor(") +
       PHOTO_PS.wgsl +
-      "\nfn modifySplatColor(uv: vec2f, color: ptr<function, vec4f>) {\n  spPhotoColor(uv, color);\n  spKernelColor(uv, color);\n}\n",
+      "\nfn modifySplatColor(uv: vec2f, color: ptr<function, vec4f>) {\n  spPhotoColor(uv, color);\n  let tileAlpha = (*color).a;\n  spKernelColor(uv, color);\n  let tile = getSpPhotoA();\n  if (uniform.uSpPhotoTiles.x > 0.5 && tile.z > 0.5 && tile.z < 1.5) { *color = vec4f((*color).rgb, tileAlpha); }\n}\n",
   };
 }
 
@@ -413,6 +473,7 @@ export function photoRender(pc, app, on, state = null) {
     mat.shaderChunks.glsl.set("gsplatOutputVS", outBase + GLSL_VS_PROJECT);
     mat.shaderChunks.wgsl.set("gsplatModifyVS", WGSL_VS_MODIFY);
     if (gpu) g.renderer = pc.GSPLAT_RENDERER_RASTER_CPU_SORT;
+    app.graphicsDevice.scope.resolve("uSpPhotoTiles").setValue([0, 0, 0, 0]);
     bindBackground(app);
     mat.update();
     return state;
@@ -436,6 +497,7 @@ export function photoRender(pc, app, on, state = null) {
     }
     app.graphicsDevice.scope.resolve("uSpPhotoFill").setValue(0);
     app.graphicsDevice.scope.resolve("uSpPhotoPlane").setValue([0, 0]);
+    app.graphicsDevice.scope.resolve("uSpPhotoTiles").setValue([0, 0, 0, 0]);
     mat.update();
     return null;
   }
