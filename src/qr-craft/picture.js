@@ -848,6 +848,30 @@ export function* detailCandidates(pic, o) {
               if (fraction) candidate.rendering.fraction = fraction;
               return candidate;
             });
+        if (t.shape === "circle")
+          for (const mask of [0, 1, 2, 3, 4, 5, 6, 7])
+            for (const edge of [0.4, 0.42])
+              alternatives.push(() => {
+                const fraction = w.rendering.fraction || 0;
+                const alternateCode = fitPadding(
+                  encodeQR(t.text, t.level, { boost: false, min: code.version, mask }),
+                  pic,
+                );
+                const candidate = decorate(
+                  weaveDetail(
+                    fraction ? fitPictureErrors(alternateCode, pic, fraction) : alternateCode,
+                    pic,
+                    {
+                      ...initialOptions,
+                      finderEdge: edge,
+                      method: fraction ? "correction" : "continuous",
+                    },
+                  ),
+                  false,
+                );
+                if (fraction) candidate.rendering.fraction = fraction;
+                return candidate;
+              });
         for (const build of alternatives) {
           const alternative = build(),
             alternativeKey = renderingKey(alternative);

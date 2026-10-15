@@ -36,6 +36,8 @@ import {
   makeWoven,
   makeWovenAsync,
   checkWoven,
+  checkStrict,
+  weave,
   measure,
   closestScanning,
   closestScanningAsync,
@@ -49,6 +51,7 @@ import { tileColors } from "../qr-craft/frame.js";
 import { withScanPause, withScanTail } from "../qr-craft/scan-pause.js";
 import { loadRasterKernel } from "../qr-craft/fast-raster.js";
 import { loadBlurKernel } from "../qr-craft/fast-blur.js";
+import { detailFraction } from "../qr-craft/detail-policy.js";
 import { SAMPLES, sampleById } from "../qr-craft/samples.js";
 import { pictureModifier, buildModifier, scanModifier } from "../qr-craft/field.js";
 import { code128, ean13, upcA, barSpans, guardModules } from "../qr-craft/barcodes.js";
@@ -287,11 +290,13 @@ function circleColor(pic, half, x, y, dark, style, detail = false) {
     : col.map((c) => 1 - (1 - c) * Math.min(1, 0.2 / Math.max(1 - g, 0.001)));
 }
 
-function pictureSplats(w, budget, shape = "square", pic = null) {
+function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
   const N = w.code.size;
   let { k, G, cells } = w;
   const H = shapeHalf(N, shape);
-  const tiles = w.fidelity === "detail" && detailSettings().texture === "tiles";
+  const simpleFallback = options.simpleFallback === true && w.style === "bw";
+  const tiles = (w.fidelity === "detail" || simpleFallback) && detailSettings().texture === "tiles";
+  if (simpleFallback && tiles) w.rendering ||= {};
   if (w.rendering) w.rendering.texture = tiles ? "tiles" : "splats";
   const make = (fine, layers = 2, plain = false) => {
     const out = [];
@@ -300,7 +305,7 @@ function pictureSplats(w, budget, shape = "square", pic = null) {
     const encodedCount = tiles ? N * N : coarse ? M * M : M * M + (layers - 1) * (M - 1) * (M - 1);
     // The underlay, well behind (a turning tile swings through z < 0).
     if (shape !== "circle")
-      patch(out, -H, -H, H, H, -0.6, w.fidelity === "detail" ? 1.2 : 0.34, BG, [0, 0]);
+      patch(out, -H, -H, H, H, -0.6, w.fidelity === "detail" || plain ? 1.2 : 0.34, BG, [0, 0]);
     // The quiet zone: a sheet just behind the code, around it.
     const qs = w.fidelity === "detail" ? 0.65 : plain || coarse ? 0.8 : 0.34;
     const n = Math.round((2 * H) / qs);
@@ -398,7 +403,16 @@ function pictureSplats(w, budget, shape = "square", pic = null) {
     return out;
   };
   let splats = null;
-  for (const fine of tiles ? [1] : [3, 2, 1]) {
+  if (simpleFallback) {
+    // An explicitly saved long-code fallback keeps every encoded module.
+    // Existing Standard scenes never enable this tier.
+    cells = new Float32Array(N * N * 3);
+    for (let m = 0; m < N * N; m++) cells.set(w.code.dark[m] ? FG : BG, m * 3);
+    k = 1;
+    G = N;
+    splats = make(2, 1, true);
+  }
+  for (const fine of simpleFallback ? [] : tiles ? [1] : [3, 2, 1]) {
     const M = Math.round(G * fine);
     if (
       !tiles &&
@@ -418,7 +432,7 @@ function pictureSplats(w, budget, shape = "square", pic = null) {
     splats = make(1, 2, true);
     if (splats.length > budget) splats = make(1, 1, true);
   }
-  if (shape === "circle" && (!splats || splats.length > budget))
+  if ((shape === "circle" || simpleFallback) && (!splats || splats.length > budget))
     throw new Error(
       "This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text.",
     );
@@ -426,7 +440,10 @@ function pictureSplats(w, budget, shape = "square", pic = null) {
 }
 
 const optionsKey = (o) =>
-  JSON.stringify(tidy(o || {})) + (o?.picture ?? "") + (o?.shape || "square");
+  JSON.stringify(tidy(o || {})) +
+  (o?.picture ?? "") +
+  (o?.shape || "square") +
+  (o?.simpleFallback ? "/simple" : "");
 
 const DETAIL_BUDGET_MS = 20000;
 const DETAIL_MAX_VERSION = 13;
@@ -525,7 +542,7 @@ function detailVersion(options) {
 }
 
 // Study overrides stay on the test hook; saved scenes store only the owner's options.
-function detailSettings(rejected = null) {
+function detailSettings(rejected = null, picture = null, shape = "square") {
   const study = globalThis.__splashery?.qrCraft || {};
   return {
     texture: study.photoTiles !== false ? "tiles" : "splats",
@@ -536,7 +553,7 @@ function detailSettings(rejected = null) {
     preferCorrection: study.preferCorrection !== false,
     errorFraction: Number.isFinite(study.detailErrorFraction)
       ? Math.max(0, Math.min(0.6, study.detailErrorFraction))
-      : 0.4,
+      : detailFraction(picture, shape),
     // A failed stage view gets the full forecast before another expensive rebuild.
     captureValidation: study.captureValidation !== false && !rejected?.length,
     channel: study.detailChannel || "weighted",
@@ -754,7 +771,7 @@ async function makeItScan() {
             attempt.run(() =>
               closestScanningAsync(
                 input,
-                { ...options, ...detailSettings(rejected), extra, rejected },
+                { ...options, ...detailSettings(rejected, pic, options.shape), extra, rejected },
                 readRGBA,
                 (w, p, shape) => validateDetail(w, p, shape, readRGBA),
                 { isCurrent },
@@ -880,6 +897,7 @@ const PICTURE = {
     { key: "shape", label: "Shape", type: "select", default: "square", choices: shapeChoices },
     { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label, group: s.group })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
     { key: "fidelity", label: "Picture detail", type: "select", default: "standard", choices: [{ id: "standard", label: "Standard" }, { id: "detail", label: "Most detail (color)" }] }, // prettier-ignore
+    { key: "simpleFallback", label: "Simple Standard code", type: "switch", default: false, hidden: true }, // prettier-ignore
     { key: "contrast", label: "Contrast", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 }, // prettier-ignore
     { key: "center", label: "Center dot", type: "select", default: "small", choices: CENTERS.map((c) => ({ id: c.id, label: c.label })) }, // prettier-ignore
     { key: "level", label: "Error correction", type: "select", default: "H", choices: LEVELS.map((l) => ({ id: l, label: { L: "L: 7% can be lost", M: "M: 15%", Q: "Q: 25%", H: "H: 30%" }[l] })) }, // prettier-ignore
@@ -941,9 +959,16 @@ const PICTURE = {
     if (requested.fidelity === "detail") {
       attempt = beginDetailAttempt({ ...o, ...requested }, generation);
       if (detailVersion(requested) > DETAIL_MAX_VERSION) {
+        attempt.options = {
+          ...attempt.options,
+          size: "fit",
+          style: "bw",
+          contrast: 1,
+          simpleFallback: true,
+        };
         await fallbackToStandard(
           attempt,
-          "Most detail is not available for this code size. Using Standard.",
+          "Most detail is not available for this code size. Using a black-and-white Standard code.",
         );
         return;
       }
@@ -977,7 +1002,7 @@ const PICTURE = {
                 ...t,
                 extra,
                 rejected,
-                ...detailSettings(rejected),
+                ...detailSettings(rejected, pic, t.shape),
               },
               (w, p, shape) => validateDetail(w, p, shape, readRGBA),
               { isCurrent },
@@ -1008,7 +1033,9 @@ const PICTURE = {
   },
   photo: {
     skipIdenticalUniforms: true,
-    on: (o) => tidy(o).fidelity === "detail" && detailSettings().texture === "tiles",
+    on: (o) =>
+      (tidy(o).fidelity === "detail" || (o.simpleFallback && o.style === "bw")) &&
+      detailSettings().texture === "tiles",
     rect: () => {
       const half = PIC.woven.code.size / 2;
       return [-half, -half, half, half];
@@ -1046,8 +1073,20 @@ const PICTURE = {
     const extra = PIC.extra || 0;
     // Most detail crops and checks the complete sticker in makeWoven; the
     // legacy path keeps its original two passes and saved-scene appearance.
-    const make = (text) =>
-      makeWoven(pic, { ...t, text, extra, shape: o.shape }, jsqr ? readRGBA : null);
+    const make = (text) => {
+      if (o.simpleFallback) {
+        // One checked grid covers the longest ASCII link the input allows.
+        // Try masks with all four original source checks before rendering.
+        for (const mask of [0, 1, 2, 3, 4, 5, 6, 7]) {
+          let code = encodeQR(text, t.level, { boost: false, min: 18, mask });
+          if (code.version === 23) code = encodeQR(text, t.level, { boost: false, min: 24, mask });
+          const candidate = weave(code, null, { ...t, margin: 0.5 });
+          if (!jsqr || checkStrict(candidate, readRGBA)) return candidate;
+        }
+        throw new Error("This Standard code did not pass its scan checks.");
+      }
+      return makeWoven(pic, { ...t, text, extra, shape: o.shape }, jsqr ? readRGBA : null);
+    };
     try {
       w =
         PIC.prepared?.key === optionsKey({ ...o, ...t }) && PIC.prepared.pic === pic
@@ -1055,9 +1094,10 @@ const PICTURE = {
           : make(t.text);
     } catch (err) {
       PIC.error = err.message;
+      if (o.simpleFallback) throw err;
       w = make(DEFAULT_TEXT);
     }
-    if (o.shape === "circle" && pic && t.fidelity !== "detail")
+    if (o.shape === "circle" && pic && t.fidelity !== "detail" && !o.simpleFallback)
       w = makeWoven(
         circleCrop(pic, w.code.size),
         { ...t, text: w.code.text, extra },
@@ -1066,7 +1106,7 @@ const PICTURE = {
     const { splats, half } =
       PIC.prepared?.woven === w && PIC.prepared.geometry
         ? PIC.prepared.geometry
-        : pictureSplats(w, k.count, o.shape, pic);
+        : pictureSplats(w, k.count, o.shape, pic, o);
     PIC.texture = null;
     if (w.rendering?.texture === "tiles" && typeof document !== "undefined") {
       const canvas = document.createElement("canvas");

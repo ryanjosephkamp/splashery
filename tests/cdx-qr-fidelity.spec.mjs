@@ -47,8 +47,12 @@ test("A blurred Circle finder forecast tries a lighter edge after the opposite o
   ]);
 });
 
-for (const link of [5, 8])
-  test(`The pale Sun Circle payload ${link} passes every captured reader condition`, async ({
+for (const [theme, picture, link] of [
+  ["Sun", "cdx-theme-seasons-2-2", 5],
+  ["Sun", "cdx-theme-seasons-2-2", 8],
+  ["Ocean", "cdx-theme-ocean-1-2", 5],
+])
+  test(`The pale ${theme} Circle payload ${link} passes every captured reader condition`, async ({
     page,
   }) => {
     const { LINKS } = await import("../tools/cdx-circle-study.mjs");
@@ -59,24 +63,27 @@ for (const link of [5, 8])
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
     await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
-    await page.evaluate(async (text) => {
-      await import("/src/packs/qr-craft.js");
-      const { app, qrCraft } = window.__splashery;
-      qrCraft.autoCheck = false;
-      await app.chooseToy("qr-picture");
-      qrCraft.autoCheck = true;
-      await app.setToyOptions({
-        text,
-        picture: "cdx-theme-seasons-2-2",
-        shape: "circle",
-        fidelity: "detail",
-        level: "H",
-        size: "more",
-        center: "small",
-        contrast: 0.5,
-        style: "color",
-      });
-    }, text);
+    await page.evaluate(
+      async ({ text, picture }) => {
+        await import("/src/packs/qr-craft.js");
+        const { app, qrCraft } = window.__splashery;
+        qrCraft.autoCheck = false;
+        await app.chooseToy("qr-picture");
+        qrCraft.autoCheck = true;
+        await app.setToyOptions({
+          text,
+          picture,
+          shape: "circle",
+          fidelity: "detail",
+          level: "H",
+          size: "more",
+          center: "small",
+          contrast: 0.5,
+          style: "color",
+        });
+      },
+      { text, picture },
+    );
     await page.waitForFunction(
       () => {
         const { app, qrCraft } = window.__splashery;
@@ -107,7 +114,7 @@ for (const link of [5, 8])
     expect(result.check.stress).toMatchObject({ ok: true, readers: ["jsqr", "zxingcpp"] });
     const { qualifyCapture } = await import("../tools/picture-qr-fidelity/qualify.mjs");
     const independent = await qualifyCapture(
-      loadPicture("assets/toys/qr-picture/themes/cdx-theme-seasons-2-2.jpg"),
+      loadPicture(`assets/toys/qr-picture/themes/${picture}.jpg`),
       result,
       text,
       "circle",
