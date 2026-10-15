@@ -1,0 +1,26 @@
+[
+  {
+    "key": "phone-photo-3d-standard",
+    "frames": 399,
+    "minimumMean": 197.11805555555554,
+    "minimumStandardDeviation": 84.84632576231895
+  },
+  {
+    "key": "phone-photo-3d-high",
+    "frames": 229,
+    "minimumMean": 197.479375,
+    "minimumStandardDeviation": 85.04015946385975
+  },
+  {
+    "key": "phone-donut-standard",
+    "frames": 347,
+    "minimumMean": 241.30090277777776,
+    "minimumStandardDeviation": 25.878843984463877
+  },
+  {
+    "key": "phone-donut-high",
+    "frames": 264,
+    "minimumMean": 241.48229166666667,
+    "minimumStandardDeviation": 25.6421467691147
+  }
+]

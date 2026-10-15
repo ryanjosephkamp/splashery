@@ -4,8 +4,8 @@
   "files": [
     {
       "file": "README.md",
-      "bytes": 9957,
-      "sha256": "f245e4bf97539751d54b91d44fc5b66ac8ff77107de574ffb694ed6814e6f5f4"
+      "bytes": 10615,
+      "sha256": "a28ccaef967d49f8819ab03987ddd4f4c747b9a189b27e75380faead7d62304c"
     },
     {
       "file": "after-desktop-chest-gif.gif",
@@ -663,6 +663,61 @@
       "sha256": "ba500433919dfb7cd644ebb9f58479906b43d67e18d53333379e633e06d62ffb"
     },
     {
+      "file": "r3/frame-checks.json",
+      "bytes": 601,
+      "sha256": "ed5019dc2e2a72bc83201b8af8e420951e50c55061f7427fa6589c953e377981"
+    },
+    {
+      "file": "r3/manual-pdf-r3.json",
+      "bytes": 895,
+      "sha256": "429b9b317716a121c103d9c66d0320829a967a32c59d964b62f2316326ac9fb7"
+    },
+    {
+      "file": "r3/phone-donut-high.webm",
+      "bytes": 2937614,
+      "sha256": "aa948d347bf358067a2df9b054e29b526e88da8a70a12dc372263a2cbfe1cdfb"
+    },
+    {
+      "file": "r3/phone-donut-standard.webm",
+      "bytes": 3424492,
+      "sha256": "f60ca2bd1b02dfdf8afb24abcca07b4948e7f750cc2bea87de63cac558eb364f"
+    },
+    {
+      "file": "r3/phone-photo-3d-high.webm",
+      "bytes": 2418752,
+      "sha256": "e1730cbc3a3d28d7edf7a55af0e4796e9850c5d83146b668571cfca4252b2f11"
+    },
+    {
+      "file": "r3/phone-photo-3d-standard.webm",
+      "bytes": 4213835,
+      "sha256": "2fe5047c5f9b35d6ebff1a786812b3f5eaa39592f9689cc654af8d3b3f329876"
+    },
+    {
+      "file": "r3/record-plans-r3.json",
+      "bytes": 3078,
+      "sha256": "13e7487a44fe9fc98bc9848d9c85e18438e09c661c98e076937fa98f8bb07773"
+    },
+    {
+      "file": "r3/record-rates-contact-sheet.jpg",
+      "bytes": 169688,
+      "sha256": "726a523ba63ba7755db57d0c0e800ef5672eb7615c95a1daf80ee97794ab90ca"
+    },
+    {
+      "file": "r3/record-rates.json",
+      "bytes": 22372,
+      "sha256": "cfb478ee5d3057e571c381ca9e2d1f3e43ee04f08157d9a47535a7fe486590f9"
+    },
+    {
+      "file": "r3/review.md",
+      "bytes": 9348,
+      "sha256": "f7b75497f2c5c670a025557ba8d4c6833ae6630fed70c2a93b42670bf0fa4736"
+    },
+    {
+      "file": "r3/runtime-hashes-r3.json",
+      "bytes": 1358,
+      "sha256": "25dc81e2d8a690206f1b7f27cbe049d9d45d2049f1dfc254bdbf14a4b48ad361"
+    },
+    {
       "file": "record-contact-sheet.jpg",
       "bytes": 53017,
       "sha256": "2ffe07bb5d73dafe71a6073d50f79b091375b9182e8b2dca0cd14cfb112caf6c"
@@ -692,5 +747,6 @@
   "revisionMain": "cb8a8315",
   "revisionReferenceMode": "deterministic renderAt(0, cameraState); earlier visibility-pause study retained separately",
   "phoneDurationImplementationCommit": "cd8ffb7c5d43839e810fa788f5e5d0a78b153600",
-  "phoneDurationMainCommit": "d4df5998675c5b31ae4dae1240a7e2d73a1fface"
+  "phoneDurationMainCommit": "d4df5998675c5b31ae4dae1240a7e2d73a1fface",
+  "phoneDurationEvidenceCommit": "89ec8c3e442e0bc29ec40173c3ec7d8f8d4db04c"
 }

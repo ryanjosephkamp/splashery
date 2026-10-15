@@ -29,7 +29,17 @@ Fresh fixed-scene recordings on merged main, including the real-draw capture fix
 Both phone levels are compared against the same 1170 × 1800 live display reference. Standard is
 enlarged with Lanczos; High is native. Picture-only SSIM is 0.469571 / 0.562608; luma Laplacian
 variance is 154.2 / 826.4. The crop shows more leaf/path detail in High, with compression artifacts.
-Neither saved level matches the live reference. Full-length take measurements are being refreshed.
+Neither saved level matches the live reference.
+
+All four full-length phone takes reached **3:00**, stopped at the time limit, and decoded without
+blank frames. [Photo Standard](r3/phone-photo-3d-standard.webm),
+[Photo High](r3/phone-photo-3d-high.webm), [Donut Standard](r3/phone-donut-standard.webm), and
+[Donut High](r3/phone-donut-high.webm). See
+[measured bytes/second and memory samples](r3/record-rates.json),
+[all-frame checks](r3/frame-checks.json), and
+[motion contact sheet](r3/record-rates-contact-sheet.jpg). These are sparse SwiftShader takes; their
+observed rates do not establish sustained physical-phone 30-fps capacity. The plan retains its
+target-bitrate margin. Compressed-byte and JS-heap samples are not total device RAM measurements.
 
 The six `r3/cdx-export-share-*` captures show Record, Video, and GIF on the merged layout at both
 review sizes.
