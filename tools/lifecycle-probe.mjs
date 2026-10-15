@@ -573,22 +573,9 @@ async function timers(page, cdp, save = async () => {}) {
     return counts;
   });
   await save({ toys, helpers, helperHidden, helperClosed, recording });
-  const retries = [];
-  for (const id of ["qr-code", "qr-damage"]) {
-    const checkpoints = [];
-    for (let i = 0; i < 20; i++) {
-      await choose(page, id);
-      await choose(page, "basketball");
-      await page.waitForTimeout(650);
-      if (i === 0 || i === 19) checkpoints.push({ cycle: i + 1, ...(await snapshot(page)) });
-    }
-    const hidden = await hiddenSample(page);
-    // The two scan-readiness retries have explicit bounds of 40 and 60 attempts.
-    await page.waitForTimeout(id === "qr-code" ? 10500 : 15500);
-    retries.push({ id, checkpoints, hidden, expired: await snapshot(page) });
-    await save({ toys, helpers, helperHidden, helperClosed, recording, retries });
-    process.stderr.write(`  ${id}: 20 switches, retries expired\n`);
-  }
+  const retries = await qrRetries(page, cdp, async (retries) =>
+    save({ toys, helpers, helperHidden, helperClosed, recording, retries }),
+  );
   const activeLive = await livePanel(page, cdp);
   const stageRecording = await stageRecorders(page, cdp);
   const emptyRecording = await emptyRecordings(page, cdp);
@@ -603,6 +590,64 @@ async function timers(page, cdp, save = async () => {}) {
     stageRecording,
     emptyRecording,
   };
+}
+
+async function qrRetries(page, cdp, save = async () => {}) {
+  await page.evaluate(() => window.__splashery.player.stage.setFixedSize([96, 96]));
+  const results = [];
+  const hold = async (id) => {
+    await page.evaluate(async (id) => {
+      const { app } = window.__splashery;
+      const pending = app.chooseToy(id);
+      app.busy = true; // The real readiness gate, held before the toy event schedules its check.
+      await pending;
+    }, id);
+    await page.waitForTimeout(850);
+  };
+  const release = async () => {
+    await page.evaluate(() => {
+      window.__splashery.app.busy = false;
+    });
+    await choose(page, "basketball");
+    await settle(page);
+  };
+  try {
+    for (const id of ["qr-code", "qr-damage"]) {
+      const site = id === "qr-code" ? "packs/qr.js" : "packs/qr-lab.js";
+      const checkpoints = [];
+      let hidden;
+      for (let i = 0; i < 20; i++) {
+        await hold(id);
+        const open = await snapshot(page);
+        if (!Object.keys(open.timeouts).some((k) => k.includes(site)))
+          throw new Error(`${id}: readiness retry was not observed`);
+        if (i === 19) hidden = await hiddenSample(page);
+        await release();
+        if (i === 0 || i === 19)
+          checkpoints.push({ cycle: i + 1, open, closed: await snapshot(page) });
+      }
+      await hold(id);
+      const pending = await snapshot(page);
+      await page.waitForTimeout(id === "qr-code" ? 10500 : 15500);
+      const expired = await snapshot(page);
+      await release();
+      results.push({
+        id,
+        checkpoints,
+        hidden,
+        pending,
+        expired,
+        fixture: "Readiness held by app.busy; ordinary toy-switch listeners remain active",
+      });
+      await save(results);
+      process.stderr.write(`  ${id}: active retry observed, 20 switches, bounded expiration\n`);
+    }
+  } finally {
+    await page.evaluate(() => {
+      window.__splashery.app.busy = false;
+    });
+  }
+  return results;
 }
 
 async function emptyRecordings(page, cdp) {
@@ -795,6 +840,7 @@ export async function runProbe({
               stageRecording: stageRecorders,
               emptyRecording: emptyRecordings,
               fileSource,
+              retries: qrRetries,
             }[name](page, cdp, async (partial) => {
               row[name] = partial;
               if (out) await fs.writeFile(out, JSON.stringify(result, null, 2) + "\n");
