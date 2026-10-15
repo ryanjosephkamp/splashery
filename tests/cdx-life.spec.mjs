@@ -118,3 +118,29 @@ test("generator sliders have the correct values when Make first opens before the
     await page.unrouteAll({ behavior: "wait" });
   }
 });
+
+test("Sound lab stops polling its controls while hidden and still cleans up on a toy switch", async ({
+  page,
+}) => {
+  await page.addInitScript(installCounters);
+  await ready(page);
+  await choose(page, "sound-lab");
+  await settle(page);
+  const hidden = await hiddenSample(page);
+  const site = Object.keys(hidden.after.totals).find((s) => s.includes("/packs/sound-lab.js"));
+  expect(site).toBeTruthy();
+  expect(
+    hidden.after.totals[site].hiddenCalls - hidden.before.totals[site].hiddenCalls,
+  ).toBeGreaterThan(0);
+  // Unconditional sync() writes the real tone, metronome, and note DOM on every hidden tick.
+  expect(
+    hidden.after.totals[site].hiddenMutations - hidden.before.totals[site].hiddenMutations,
+  ).toBe(0);
+  await page.locator("#sll-tone").dispatchEvent("click");
+  await expect(page.locator("#sll-tone")).toHaveText("Stop the tone");
+  await choose(page, "basketball");
+  await settle(page);
+  expect(
+    Object.keys((await snapshot(page)).intervals).some((s) => s.includes("/packs/sound-lab.js")),
+  ).toBe(false);
+});
