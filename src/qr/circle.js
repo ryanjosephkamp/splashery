@@ -3,7 +3,7 @@
 import { QUIET } from "./encode.js";
 import { painter } from "./crisp.js";
 
-export const CIRCLE_QUIET = 4; // No tested margin passed every trial; keep the standard.
+export const CIRCLE_QUIET = 4; // Legacy default: preserve existing scenes and share links.
 export const shapeChoices = [
   { id: "square", label: "Square" },
   { id: "circle", label: "Circle" },
@@ -13,9 +13,9 @@ export function appendSplats(target, splats, transform = null) {
   for (const splat of splats) target.push(transform ? transform(splat) : splat);
 }
 const radius = (size, quiet) => Math.ceil(Math.SQRT2 * (size / 2 + quiet) + 2) + 0.5;
-export const shapeHalf = (code, shape) => {
+export const shapeHalf = (code, shape, quiet = CIRCLE_QUIET) => {
   const size = typeof code === "number" ? code : code.size;
-  return shape === "circle" ? radius(size, CIRCLE_QUIET) : size / 2 + QUIET;
+  return shape === "circle" ? radius(size, quiet) : size / 2 + QUIET;
 };
 
 export function circleLayout(code, quiet = CIRCLE_QUIET) {

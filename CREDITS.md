@@ -1933,3 +1933,8 @@ The local failure finder, metric calibrations, and static gallery are made by Ry
 CC0 1.0; source images retain their recorded terms. Photos and their individual source, author,
 license, byte-hash, and live-license records are kept on `codex/photo-3d-failures-clips`, never
 merged. See [the failure-gallery report](docs/audits/photo-3d-failures-2026-10.md).
+
+# Picture QR fit (Codex task 80)
+
+The crop controls, finder geometry, and scan-study tools are made by Ryan with Codex (GPT-6) under
+Splashery's MIT license.
