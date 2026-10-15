@@ -1,0 +1,33 @@
+{
+  "created": "2026-10-15T20:58:55.217887+00:00",
+  "baseline": "cb8a83157bc502feb2dda18ece6cfa39621abb61",
+  "mergedMain": "d4df5998675c5b31ae4dae1240a7e2d73a1fface",
+  "baseComposite": "review-frozen",
+  "baseCounts": {
+    "main": 865,
+    "detail": 864
+  },
+  "recheckRun": "review-repair-recheck",
+  "remainingRun": "review-repaired",
+  "recheckCases": 128,
+  "remainingCases": 1136,
+  "expectedCodesPerMode": 2000,
+  "pixelControls": [
+    "ai-farm/0/square",
+    "ai-farm/0/circle",
+    "cdx-qr-ai-fern/0/square",
+    "cdx-qr-ai-fern/0/circle",
+    "cdx-theme-seasons-2-2/5/circle",
+    "wildflowers/0/square"
+  ],
+  "policy": {
+    "shape": "square",
+    "condition": "Each RGB channel population standard deviation is at most 0.1 on the browser-decoded source picture",
+    "fractionWhenTrue": 0.6,
+    "fractionOtherwise": 0.4,
+    "circleUnchanged": true
+  },
+  "retentionRule": "Recheck every completed low-contrast Square, every prior fallback and model-validated row in either shape, every Circle accepted after candidate four, and six predeclared pixel controls. Other accepted capture paths finish before the new Circle mask branch, keep fraction 0.4, and use Original geometry. All fixed payloads stay at version 13 or below, so the new long-code fallback is disjoint.",
+  "timing": "Segmented corpus across source revisions and merge. Retain original baseline observations for already-measured keys and preserve every duplicate, replaced observation, failure, interruption, and cold start. Not one fresh balanced trial.",
+  "protocol": "Same frozen ten payloads and source RGBA. Explicit Original crop, default border and eyes, and simpleFallback false; old frozen main ignores unknown options. No reader, condition, threshold, clock boundary, or independent assessment change."
+}

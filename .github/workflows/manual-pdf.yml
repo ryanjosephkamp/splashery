@@ -72,6 +72,7 @@ jobs:
       - name: Print and check the PDF, and rebuild its download links
         run: node tools/manual-pdf.mjs
       - name: Package the changed files
+        id: package
         env:
           ARTIFACT: ${{ runner.temp }}/manual-pdf
         run: |
@@ -97,10 +98,27 @@ jobs:
               shutil.copyfile(source, target)
           (artifact / "source-commit.txt").write_text(os.environ["GITHUB_SHA"] + "\n")
           PYTHON
+      - name: Check every contents title and report remaining private-use characters
+        run: node tools/manual-pdf-check.mjs --json="$RUNNER_TEMP/manual-pdf-check.json"
+      - name: Check the fresh edition in PDF.js and reproduce its bytes
+        run:
+          node tools/suite.mjs --fresh --jobs=1 --files=cdx-manual-pdf,man5
+          --out="$RUNNER_TEMP/manual-pdf-checks"
       - name: Upload the PDF, edition record, and rebuilt pages
+        if: always() && steps.package.outcome == 'success'
         uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: manual-pdf-${{ github.sha }}
           path: ${{ runner.temp }}/manual-pdf
           retention-days: 7
           if-no-files-found: error
+      - name: Upload the original PDF checks and traces
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: manual-pdf-checks-${{ github.sha }}
+          path: |
+            ${{ runner.temp }}/manual-pdf-check.json
+            ${{ runner.temp }}/manual-pdf-checks
+          retention-days: 7
+          if-no-files-found: warn

@@ -70,6 +70,11 @@ export function createUI(app) {
     toySliderInput: $("toy-slider-input"),
     stageDial: $("stage-dial"), // Live r8
     stage: $("stage"), // (lane Photo depth: the slider is placed over it)
+    missingFileNotice: $("missing-file-notice"),
+    missingFileMessage: $("missing-file-message"),
+    missingFileError: $("missing-file-error"),
+    missingFileOpen: $("missing-file-open"),
+    missingFileKeep: $("missing-file-keep"),
     stageDialInput: $("stage-dial-input"),
     stageDialLabel: $("stage-dial-label"),
     stageDialHide: $("stage-dial-hide"),
@@ -320,6 +325,42 @@ export function createUI(app) {
     els.shelfChips.appendChild(b);
     chips.set(c.id, b);
   }
+
+  // The notice stays outside the folded Toy tab, while its button uses the same local picker.
+  let missingFileKey = null;
+  let dismissedMissingFile = null;
+  const setMissingFileError = (message = "") => {
+    if (els.missingFileNotice.hidden) return;
+    els.missingFileError.textContent = message;
+    els.missingFileError.hidden = !message;
+  };
+  const hideMissingFile = () => {
+    const focused = els.missingFileNotice.contains(document.activeElement);
+    els.missingFileNotice.hidden = true;
+    els.missingFileError.textContent = "";
+    els.missingFileError.hidden = true;
+    if (focused) els.stage.focus({ preventScroll: true });
+  };
+  const showMissingFile = (info) => {
+    const name = info.recipe?.input?.missingFile?.(info.options);
+    missingFileKey = name ? `${app.player.scene.toy.id}:${name}` : null;
+    if (!name || missingFileKey === dismissedMissingFile) {
+      hideMissingFile();
+      return;
+    }
+    els.missingFileNotice.hidden = false;
+    const message = `“${name}” wasn't included in this scene. The original file stays on the sender's device. Open the same file on your device to use these settings. The sample is shown meanwhile.`;
+    if (els.missingFileMessage.textContent !== message)
+      els.missingFileMessage.textContent = message;
+  };
+  els.missingFileOpen.addEventListener("click", () => {
+    setMissingFileError();
+    $("toy-input-file")?.click();
+  });
+  els.missingFileKeep.addEventListener("click", () => {
+    dismissedMissingFile = missingFileKey;
+    hideMissingFile();
+  });
 
   function renderShelf() {
     const q = shelf.query.trim();
@@ -1600,6 +1641,9 @@ export function createUI(app) {
     const box = document.createElement("div");
     box.className = "input-box";
     box.id = "toy-input";
+    const noticeError = (message) => {
+      if (box.isConnected) setMissingFileError(message);
+    };
     const title = document.createElement("p");
     title.className = "input-title";
     title.textContent = input.title;
@@ -1626,6 +1670,7 @@ export function createUI(app) {
     };
     const apply = async (text, fileName = "", file = null, files = file ? [file] : []) => {
       error.hidden = true;
+      noticeError();
       try {
         const options = await input.read(text, fileName, file, files, progress);
         progress("");
@@ -1634,6 +1679,7 @@ export function createUI(app) {
         progress("");
         error.textContent = err.message;
         error.hidden = false;
+        noticeError(err.message);
       }
     };
     box.append(title);
@@ -1691,6 +1737,7 @@ export function createUI(app) {
       if (files.reduce((sum, x) => sum + x.size, 0) > cap) {
         error.textContent = input.tooBig?.(cap) || `That file is too big (over ${Math.round(cap / 1e6)} MB).`; // prettier-ignore
         error.hidden = false;
+        noticeError(error.textContent);
         return;
       }
       if (input.binary) apply("", f.name, f, files);
@@ -3403,8 +3450,14 @@ export function createUI(app) {
     },
     setToyPanel(info) {
       renderToyPanel(info);
+      showMissingFile(info);
       helpReady = setToyHelp(info); // Toy help (lane Help)
       showMotion(app.player.effectiveMotion(), app.player.scene.motion.controls);
+    },
+    resetMissingFileNotice() {
+      dismissedMissingFile = null;
+      missingFileKey = null;
+      hideMissingFile();
     },
     async showToyHelp() {
       const info = helpInfo;
