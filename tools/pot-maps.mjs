@@ -9,7 +9,8 @@
 // Sources (all keyless, read once here; the site only serves the JPEGs):
 // - 1,000 km to 10 km: EOxCloudless 2016 (Sentinel-2 cloudless, EOX IT
 //   Services GmbH, contains modified Copernicus Sentinel data 2016), CC BY 4.0.
-// - 3 km: USGS The National Map, "USGS Imagery Only" (NAIP), public domain.
+// - 3 km: USGS The National Map, "USGS Imagery Only" (NAIP), public domain,
+//   color-matched to its neighbors by tools/pol-aerial-match.mjs.
 // - Below 1 km: District of Columbia, Office of the Chief Technology Officer,
 //   2023 orthophoto (3 inch, 8 cm), CC BY 4.0.
 // - The hemisphere: the same USGS service at its smallest scales (Blue
@@ -18,6 +19,7 @@
 import fs from "node:fs/promises";
 import jpeg from "jpeg-js";
 import { TARGET, AERIAL } from "../src/powers/stops.js";
+import { matchAerial } from "./pol-aerial-match.mjs";
 
 const OUT = new URL("../assets/toys/powers-of-ten/", import.meta.url);
 const USGS =
@@ -155,4 +157,7 @@ async function hemisphere() {
 const only = process.argv.slice(2);
 await fs.mkdir(OUT, { recursive: true });
 for (const layer of AERIAL) if (!only.length || only.includes(layer.e.toFixed(1))) await aerial(layer); // prettier-ignore
+// The 3 km picture (NAIP) comes brighter and grayer than its neighbors: match its color to them
+// (lane Polish, October 15, 2026; tools/pol-aerial-match.mjs).
+if (!only.length || ["4.0", "3.5", "3.0"].some((e) => only.includes(e))) matchAerial();
 if (!only.length || only.includes("earth")) await hemisphere();
