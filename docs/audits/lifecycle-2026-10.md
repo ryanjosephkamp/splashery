@@ -293,20 +293,21 @@ failing before its fix and passing afterward. Engine changes use commits titled 
 Sound lab change is a separate pack commit. No toy geometry, sound, behavior, scene schema, save
 cap, or vendored code was changed.
 
-The branch incorporated `main` at `ea35f3de` after the measurements, including its Photo to 3D and
-stage-lifetime changes. Final focused checks ran on merge `26ed9b91`; the baseline numbers continue
-to describe the frozen `95da2ddb` application source, not that later stage implementation.
+The branch incorporated `main` at `ea35f3de` after the measurements, then `d4df5998` before
+publication. Final focused checks ran on merge `765cee97`; the baseline numbers continue to describe
+the frozen `95da2ddb` application source, not the later stage implementations.
 
 All browser checks used `SPLASHERY_CHROMIUM=/usr/bin/chromium`:
 
-- `tests/cdx-life.spec.mjs` and `tests/cdx-p3d4-scene-swap.spec.mjs`: six passed in 51.9 seconds
-  after the merge. This covers all five lifecycle regressions and the incoming ordinary scene-swap
+- `tests/cdx-life.spec.mjs` and `tests/cdx-p3d4-scene-swap.spec.mjs`: six passed in 52.6 seconds
+  after the latest merge. This covers all five lifecycle regressions and the ordinary scene-swap
   retirement check.
 - `tests/sll.spec.mjs`, `tests/live-engine.spec.mjs`, `tests/smoke.spec.mjs`, `tests/kit.spec.mjs`,
   `tests/taps.spec.mjs`, `tests/help.spec.mjs`, and `tests/hta.spec.mjs`: 165 passed, with one
   trace-artifact failure, in 32.0 minutes. A concurrent focused run had removed files from the
   shared Playwright output directory. The affected 360-pixel overflow case passed alone after the
-  merge in 9.0 seconds, using a separate output directory. No assertion failure remains unresolved.
+  latest merge in 9.4 seconds, using a separate output directory. No assertion failure remains
+  unresolved.
 - `tests/unit.spec.mjs`: 20 passed in 10.1 seconds.
 - The original four lifecycle cases also passed three consecutive repetitions: 12 passes in 2.8
   minutes. The asynchronous save-snapshot and pending-toy cases were each reproduced failing before
