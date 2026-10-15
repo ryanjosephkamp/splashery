@@ -1863,6 +1863,31 @@ function keyboardRecipe({ rt, keyAtPoint, drive, build, density = 2, opening = 6
     alive: true,
     density,
     song: rt.song,
+    keyboard: {
+      label: "Play individual notes",
+      items: () =>
+        Array.from({ length: rt.n }, (_, i) => {
+          const midi = rt.low + i;
+          const note =
+            [
+              "C",
+              "C sharp",
+              "D",
+              "D sharp",
+              "E",
+              "F",
+              "F sharp",
+              "G",
+              "G sharp",
+              "A",
+              "A sharp",
+              "B",
+            ][midi % 12] +
+            (Math.floor(midi / 12) - 1);
+          return { id: i, text: note, label: `Play ${note}`, pressed: rt.down[i] > 0.5 };
+        }),
+      activate: (i) => ({ key: "strike", pick: i }),
+    },
     controls: [
       { key: "song", label: "Play the opening", type: "pulse", ease: opening },
       { key: "strike", label: "Play a key", type: "pulse", ease: 1.2 },
