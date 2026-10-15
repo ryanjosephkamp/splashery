@@ -1,0 +1,200 @@
+# The test suite on GitHub Actions (docs/CI.md): the quick checks, the full Playwright suite in
+# shards, and one summary that lands as the job summary and as a PR comment updated in place.
+name: Tests
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: tests-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  SHARDS: 16
+
+jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Prettier
+        run: npx prettier --check .
+      - name: American English in the added lines
+        if: github.event_name == 'pull_request'
+        run: node tools/us-english.mjs --diff=origin/main
+      - name: site/ is up to date
+        run: node tools/site-build.mjs --check
+      - name: The shared lists parse
+        run: |
+          node --check src/toys.js
+          node --check src/toy-help.js
+          node --check src/toy-sounds.js
+          for f in tools/toy-plan.json tools/assets.json tools/models.json tools/sound-review.json tools/suite.json; do
+            node -e 'JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"))' "$f" || exit 1
+          done
+
+  suite:
+    name: Suite ${{ matrix.shard }}/16
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
+    env:
+      # WebGL2 on Mesa's llvmpipe in a virtual display, as the Integrators run it
+      # (docs/OPERATING.md, "Running the suite fast"); WebGPU stays on SwiftShader.
+      SPLASHERY_GL: llvmpipe
+      DISPLAY: ":99"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Some tests read older commits (git show).
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Cache Playwright's Chromium
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - name: Install Chromium, Xvfb, Mesa, ffmpeg and the fonts
+        run: |
+          sudo apt-get update -q
+          # The fonts the cloud container has: tools/manual-pdf.mjs (man5) stops on any other set.
+          sudo apt-get install -y -q xvfb libgl1-mesa-dri ffmpeg fonts-dejavu-core fonts-inter \
+            fonts-liberation fonts-liberation2 fonts-noto-color-emoji
+          npx playwright install --with-deps chromium
+      - name: Where the reports go
+        # Outside the checkout (bld.spec.mjs checks every top-level folder against REPO-MAP.md) and
+        # not under a dot folder (upload-artifact leaves hidden files out).
+        run: echo "OUT=$RUNNER_TEMP/ci-out/shard-${{ matrix.shard }}" >> "$GITHUB_ENV"
+      - name: Prefer Inter, as the cloud container does
+        # Its /etc/fonts/conf.d/56-prefer-inter.conf (from no package): ui-sans-serif, sans-serif and
+        # the system UI names draw in Inter, which the manual's PDF embeds (man5:201).
+        run: |
+          sudo tee /etc/fonts/conf.d/56-prefer-inter.conf > /dev/null <<'EOF'
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+          <fontconfig>
+            <alias><family>system-ui</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>ui-sans-serif</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>-apple-system</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>BlinkMacSystemFont</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>SF Pro Text</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>SF Pro Display</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>Segoe UI</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>Helvetica Neue</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>
+          </fontconfig>
+          EOF
+          fc-cache -f > /dev/null
+          fc-match ui-sans-serif
+      - name: Let Chromium's sandbox start
+        # Ubuntu 24.04's AppArmor blocks the user namespaces Chromium's sandbox needs; man5's PDF
+        # print (tools/manual-pdf.mjs) launches with the sandbox on.
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - name: Start the virtual display
+        run: |
+          Xvfb :99 -screen 0 1920x1080x24 -nolisten tcp &
+          sleep 1
+      - name: Run shard ${{ matrix.shard }}
+        id: suite
+        run: |
+          echo "started=$(date +%s)" >> "$GITHUB_OUTPUT"
+          node tools/suite.mjs --fresh --jobs=2 --shard=${{ matrix.shard }}/$SHARDS --out=$OUT || echo "failed=1" >> "$GITHUB_OUTPUT"
+      - name: Rerun each failure alone
+        if: always()
+        run:
+          node tools/ci-report.mjs recheck $OUT --shard=${{ matrix.shard }}/$SHARDS --started=${{
+          steps.suite.outputs.started }}
+      - name: Upload the reports
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          # One name per attempt: a rerun of the failed jobs uploads again, and the summary keeps
+          # the newest attempt of each spec file.
+          name: suite-${{ matrix.shard }}-a${{ github.run_attempt }}
+          path: ${{ env.OUT }}
+          retention-days: 7
+          if-no-files-found: warn
+      - name: The shard failed
+        if: steps.suite.outputs.failed == '1'
+        run: exit 1
+
+  summary:
+    name: Summary
+    needs: [suite]
+    # Not on a canceled run (a newer push replaced it): its report would be empty or partial.
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      contents: read
+      actions: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@9000827ccba6bdab643e8b6fd33ac0654aef8333 # v8.0.2
+        with:
+          pattern: suite-*
+          path: ${{ runner.temp }}/ci-out
+      - name: Merge the shard reports
+        id: report
+        env:
+          GH_TOKEN: ${{ github.token }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          export RUN_STARTED=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID" --jq .run_started_at || true)
+          node tools/ci-report.mjs summary "$RUNNER_TEMP/ci-out" --out="$RUNNER_TEMP/ci-out/summary.md" || echo "failed=1" >> "$GITHUB_OUTPUT"
+          cat "$RUNNER_TEMP/ci-out/summary.md" >> "$GITHUB_STEP_SUMMARY"
+      - name: Post or update the PR comment
+        if: github.event_name == 'pull_request'
+        # A PR from a fork gets a read-only token; its job summary still has the report.
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          id=$(gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" --paginate \
+            --jq '.[] | select(.user.login == "github-actions[bot]" and (.body | startswith("<!-- splashery-ci -->"))) | .id' | head -1)
+          if [ -n "$id" ]; then
+            gh api -X PATCH "repos/$GITHUB_REPOSITORY/issues/comments/$id" -F body=@"$RUNNER_TEMP/ci-out/summary.md" > /dev/null
+          else
+            gh api "repos/$GITHUB_REPOSITORY/issues/$PR/comments" -F body=@"$RUNNER_TEMP/ci-out/summary.md" > /dev/null
+          fi
+      - name: Upload the merged report
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: summary-a${{ github.run_attempt }}
+          path: |
+            ${{ runner.temp }}/ci-out/summary.md
+            ${{ runner.temp }}/ci-out/times.json
+          retention-days: 7
+      - name: The suite failed
+        if: steps.report.outputs.failed == '1'
+        run: exit 1
