@@ -233,6 +233,21 @@ export class Player {
     this.media.addEventListener("change", () => this.applyLook(), {
       signal: this.lifetime.signal,
     });
+    if (this.opts.reducedMotion === undefined) {
+      const motionMedia = matchMedia("(prefers-reduced-motion: reduce)");
+      motionMedia.addEventListener(
+        "change",
+        (e) => {
+          this.reducedMotion = this.camera.reducedMotion = e.matches;
+          this.motionAllowed = !e.matches;
+          this.camera.setTurntable(this.scene.autoplay.turntable);
+          this.idle.weight = 0;
+          this.stage.requestRender();
+          this.emit("motion-preference", e.matches);
+        },
+        { signal: this.lifetime.signal },
+      );
+    }
     this.applyLook();
     this.watchDeviceShake();
     return this;
@@ -1426,6 +1441,21 @@ export class Player {
   typeKey(ch) {
     const f = this.toyInfo?.recipe?.typeKey;
     const hit = f ? f(ch) : null;
+    return this.actControl(hit);
+  }
+
+  // Named part controls use the same action and sound path as typed keys.
+  playPart(id) {
+    const keyboard = this.toyInfo?.recipe?.keyboard;
+    if (!keyboard) return;
+    if (keyboard.items().find((item) => item.id === id)?.disabled) return;
+    if (keyboard.pause) this.setControl(keyboard.pause, 0);
+    this.actControl(keyboard.activate(id, this.time));
+    this.interact();
+    this.stage.requestRender();
+  }
+
+  actControl(hit) {
     if (!hit) return false;
     const r = this.motion.act(this.time, null, hit);
     this.stage.requestRender();

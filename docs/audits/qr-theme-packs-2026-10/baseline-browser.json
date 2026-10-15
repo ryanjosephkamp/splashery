@@ -1,0 +1,22 @@
+{
+  "mainCommit": "c044dc9d",
+  "checkedSourceCommit": "d40261ee",
+  "method": "Serve an isolated git archive of HEAD src, index.html, styles.css, and the unchanged test files on port 4175, with unchanged vendor and assets. Run the two exact failing browser cases in Chromium 151.0.7922.173, WebGL2/ANGLE/Mesa llvmpipe, one worker, DISPLAY :88, and LP_NUM_THREADS=1.",
+  "baseline": [
+    {
+      "test": "qrc-picture: Picture QR in the browser",
+      "result": "Failed at the post-flip scan, identical to the full feature run and isolated feature rerun.",
+      "sample": "wildflowers",
+      "payload": "Splashery picture QR",
+      "expected": ["Splashery picture QR", "Splashery picture QR"],
+      "actual": [null, null]
+    },
+    {
+      "test": "smoke: Reset everything takes a toy back to how it started",
+      "result": "Failed at the same assertion as the full feature run: the France pattern persists on Jelly blob after Reset everything.",
+      "actual": "Jelly blob · 60k splats · in the colors of France"
+    }
+  ],
+  "isolatedFeatureRerun": "One passed (Reset everything), one failed (Wildflowers post-flip scan). The reset result was inconsistent between runs; no existing test or reset/motion source was changed.",
+  "qrAndResetRuntimeDiffFromLaterMain11d83626": "none"
+}

@@ -97,6 +97,26 @@ export class Viewer {
     const cam = player.camera;
     this.onLeave = () => (this.wheelZooms = false);
     this.canvas.addEventListener("pointerleave", this.onLeave);
+    this.onKey = (e) => {
+      if (e.defaultPrevented || e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.key.startsWith("Arrow")) {
+        cam.begin();
+        cam.rotateBy(
+          e.key === "ArrowLeft" ? -36 : e.key === "ArrowRight" ? 36 : 0,
+          e.key === "ArrowUp" ? -36 : e.key === "ArrowDown" ? 36 : 0,
+          0,
+        );
+        cam.end();
+      } else if (e.key === "+" || e.key === "=") this.zoomBy(1);
+      else if (e.key === "-" || e.key === "_") this.zoomBy(-1);
+      else if (e.key === "Enter" || e.key === " ") player.act();
+      else if (e.key === "r" || e.key === "R") player.resetCamera();
+      else return;
+      e.preventDefault();
+      player.interact();
+      player.stage.requestRender();
+    };
+    this.canvas.addEventListener("keydown", this.onKey);
     this.gestures = new Gestures(this.canvas, {
       classify: () => "orbit",
       onInteract: () => {
@@ -225,6 +245,7 @@ export class Viewer {
 
   destroy() {
     this.canvas.removeEventListener("pointerleave", this.onLeave);
+    this.canvas.removeEventListener("keydown", this.onKey);
     this.gestures?.dispose();
     this.player.destroy();
   }

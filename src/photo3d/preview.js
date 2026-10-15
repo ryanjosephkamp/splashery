@@ -12,13 +12,17 @@ export function photoPreview(photo, canceled = () => {}, ready = null) {
   picture.alt = "Photo preview";
   picture.setAttribute("aria-label", "Photo preview");
   picture.style.cssText =
-    "position:fixed;object-fit:contain;padding:12%;box-sizing:border-box;pointer-events:none;background:var(--stage-bg,#fff);z-index:1";
+    "position:fixed;object-fit:contain;padding:12%;box-sizing:border-box;pointer-events:none;z-index:1";
   let finished = false,
     removed = false,
     url,
     resume,
     rendered;
   const stageRenderer = window.__splashery?.player?.stage;
+  const background = () => {
+    const c = stageRenderer?.cameraEntity?.camera?.clearColor;
+    if (c) picture.style.backgroundColor = `rgba(${c.r * 255},${c.g * 255},${c.b * 255},${c.a})`;
+  };
   const align = () => {
     const r = stage.getBoundingClientRect();
     Object.assign(picture.style, {
@@ -38,6 +42,7 @@ export function photoPreview(photo, canceled = () => {}, ready = null) {
       picture.src = url;
       // #stage is a canvas: its descendants are hidden fallback content.
       // A sibling follows its actual viewport rectangle, including the phone dock.
+      background();
       stage.after(picture);
       align();
       resume = stageRenderer?.holdRendering?.();
@@ -46,6 +51,8 @@ export function photoPreview(photo, canceled = () => {}, ready = null) {
       remove();
     });
   const watch = setInterval(() => {
+    // Looks can change while the worker is building behind this cover.
+    background();
     if (window.__splashery?.player?.scene?.toy?.id !== "photo-3d") {
       remove();
       canceled();
