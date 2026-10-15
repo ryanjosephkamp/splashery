@@ -45,6 +45,19 @@ The six `r3/cdx-export-share-*` captures show Record, Video, and GIF on the merg
 review sizes.
 [Current implementation follow-up](https://github.com/ryanjosephkamp/splashery/blob/codex/export-quality/docs/audits/export-quality/review-r3.md).
 
+## Validation of the current revision
+
+[Verification](r3/verification.json) and [complete local case coverage](r3/local-coverage.json). The
+export spec passed 21 cases; the pinned manual workflow passed 29. The 101-case merged-tree
+selection finished with 97 passed and four initial failures. PDF and lantern/rig reruns passed
+individually unchanged; both QR hashes passed under Node 22, while their Node 24 failures reproduce
+on main. The added surface-input readiness assertion passed three consecutive runs. The non-rim
+pixel comparison passed with unchanged pixel limits and a longer local CLI time budget.
+
+[Every observed failure and its rerun](r3/review.md), including the superseded intermediate runs.
+The [latest full GitHub suite](https://github.com/ryanjosephkamp/splashery/actions/runs/38816580752)
+is still running. The source remains draft at `ca35cab0` for the owner's look.
+
 ## Earlier revision: one-minute High
 
 Record now defaults to **Standard**. Its separate bitrate policy budgets three minutes on the

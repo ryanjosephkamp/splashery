@@ -1,0 +1,533 @@
+{
+  "expected": 101,
+  "completed": 101,
+  "passed": 97,
+  "failed": 4,
+  "missing": [],
+  "unknown": [],
+  "failures": [
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "the moving recording: one tap, its frames and size within the estimate"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Other barcodes \u203a the QR code toy builds the very same splats from the shared builder"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Other barcodes \u203a raw legacy Circle builds retain main's splats without resolved option defaults"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs"
+    }
+  ],
+  "cases": [
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "phone: names, target sizes, and text fit in all six panes",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "desktop: names, target sizes, and text fit in all six panes",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "desktop at 200% zoom: names, target sizes, and text fit in all six panes",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "light: text, boundaries, and keyboard focus have AA contrast",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "dark: text, boundaries, and keyboard focus have AA contrast",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "changing reduced motion stops automatic movement immediately",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "recording and the flag dialog preserve keyboard focus",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "recording focus survives saving and an empty take without stealing later focus",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "the link dialog closes with Escape and restores its opener",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "focus mode hides the brand and Escape returns to its control",
+      "status": "passed"
+    },
+    {
+      "file": "tests/cdx-a11y-layout.spec.mjs",
+      "title": "zoom controls are hidden when graphics are unavailable",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf-engine.spec.mjs",
+      "title": "Save PDF: hidden without labs, and nothing of it loads",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf-engine.spec.mjs",
+      "title": "Save PDF: shown with labs; the module loads only when opened",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "a toy's page made without the app: parses, says what the toy is, and its link and QR open it",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "a catalog: one page per toy, each with its own link",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "Save PDF in the app: the still's link and QR open this scene, as the camera is now",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "the moving recording: one tap, its frames and size within the estimate",
+      "status": "failed"
+    },
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "the estimate formula is an upper bound for frames as busy as 1.6 times the sample",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "the flip book plays, pauses and steps in PDF.js with scripting on",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "the dialog: still by default, an estimate for the recording, then a PDF saved",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "old links still load: a version 2 scene link opens its toy",
+      "status": "passed"
+    },
+    {
+      "file": "tests/pdf.spec.mjs",
+      "title": "polish: the still is 1440 px, rendered larger and brought down, and the frames too",
+      "status": "passed"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Other barcodes \u203a every linear symbol's text sits on its label",
+      "status": "passed"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Other barcodes \u203a Data Matrix and Aztec modules are crisp and seamless, and every module reads right",
+      "status": "passed"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Other barcodes \u203a the QR code toy builds the very same splats from the shared builder",
+      "status": "failed"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Other barcodes \u203a raw legacy Circle builds retain main's splats without resolved option defaults",
+      "status": "failed"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Picture QR: the halftone \u203a every module's center and the plain patterns keep their bits (centers in the photo's hue in color), and the free cells are a halftone",
+      "status": "passed"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Picture QR: the halftone \u203a the picture blurred over each module's 3 \u00d7 3 cells stays close to the photo's gray",
+      "status": "passed"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Picture QR: the halftone \u203a the mask is the one that fits the picture best",
+      "status": "passed"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Picture QR: the halftone \u203a every sample reads in both styles with the nudge stepped up, and a bigger code reads too",
+      "status": "passed"
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "title": "Picture QR in the browser: the splats read back from the stage in both styles",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "390x844 \u203a the tabs go Toy, Share, Tools, Look, Make, then (i), and the arrow keys follow",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "390x844 \u203a the Share tab: Record first, then a clip and a picture, the link and the scene file, PDF, and the web page; nothing cut off or overlapping",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "390x844 \u203a the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "1440x900 \u203a the tabs go Toy, Share, Tools, Look, Make, then (i), and the arrow keys follow",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "1440x900 \u203a the Share tab: Record first, then a clip and a picture, the link and the scene file, PDF, and the web page; nothing cut off or overlapping",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "1440x900 \u203a the preview sheet after Stop plays the take; Discard asks first and frees it; Save still saves",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "the preview sheet, more \u203a a canceled share sheet doesn't count as saved; a finished share does",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "the preview sheet, more \u203a Record again: a second take opens in the sheet, and the first take's listener is gone",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "the preview sheet, more \u203a with no video encoder, Save a clip opens on GIF and the Video side is off",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "the preview sheet, more \u203a WebCodecs video stays available without WebM MediaRecorder",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "a phone on its side (844\u00d7390) \u203a the preview's buttons all fit on the screen",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "Clap to tap \u203a with labs on, it is at the bottom of the Tools tab, not on the Toy tab, and asks for nothing until switched on",
+      "status": "passed"
+    },
+    {
+      "file": "tests/shr.spec.mjs",
+      "title": "Clap to tap \u203a with labs off, it isn't anywhere",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a loads with no console errors and shows the shelf",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the shelf filters by category and search, and Surprise me picks a toy",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a generating a procedural toy changes canvas pixels",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a toggling an effect changes canvas pixels",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a paint and poke tools change the toy where it is touched",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a clay adds and erases blobs on a generated toy and survives a JSON round trip",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a shows a friendly poster when no GPU renderer is available",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a JSON export then import round-trips the scene",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the embed page loads a scene from the hash",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a an embedded captured toy stays under 30 MB of transfer",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the <splashery-toy> element renders without an iframe",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a bring-your-own PLY, SPLAT, SPZ and SOG files load in the browser",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a PNG, GIF and video exports produce files",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a desktop screenshot at 1440x900",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a kit toy loads from its pack, and its action and a tap open and close it",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a kit toy can change shape: the red blood cell curls into a sickle (morph)",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a toys move by themselves once motion is on, and any toy can bounce",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a patterns and flags recolour any toy and travel in the link",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a an old version 2 share link still opens",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a the sound switch remembers its choice",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a tap plays the toy's own sound, and a toggle plays its on and off halves",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a scan rig moves a part of a captured toy: the cat statue turns its head",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+      "status": "failed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a the chess set plays the Opera Game, and the laptop types what you type",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a stretchy toy stretches when dragged and springs back; a drag off it orbits",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a every toy's sound renders: audible, not clipping, under five seconds",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a v3 screenshots at 1440x900 and 390x844",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a an embedded kit toy opens when tapped",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a the Toy tab has the essentials, and Reset everything takes a toy back to how it started",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a the panel and the shelf can be made bigger on a wide screen",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a flag colours lie gently over the chess board, and stay with the toy they were chosen on",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a the chess game bar plays, pauses, steps and jumps, and a tap after the end starts again",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sports balls (WebGL2) \u203a a ball in a country's colours keeps its seams",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sports balls (WebGL2) \u203a ball screenshots at 1440x900 and 390x844",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 2x on a 2x screen at the high tier",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 3x on a 3x screen at the mid tier",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 2x on a 3x screen at the mid tier with ?sharp=0",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 3x on a 3x screen at the max tier",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 1.5x on a 3x screen at the low tier",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a Detail: High raises the tier, stays in this browser and stays out of links",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a a transparent embed stays transparent on a dark-mode page",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a embeds frame the toy closer, take ?zoom= and zoom with buttons and the wheel",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the embed snippet is responsive and has a size picker",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a a shelf thumbnail that fails is fetched once more, then shows a plain tile",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a has no horizontal overflow at 390px and the sheet opens",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a dragging the shelf up opens a grid, and picking a toy folds it back",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a a panel opened while a toy from the grid is still loading stays open",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a the Make pane explains where to find your own splat",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a has no horizontal overflow at 360px",
+      "status": "passed"
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "title": "Splashery on WebGPU \u203a auto picks WebGPU when an adapter exists and effects render",
+      "status": "passed"
+    },
+    {
+      "file": "tests/ui5-engine.spec.mjs",
+      "title": "phone \u203a the gallery button sits in the top row, clear of the name, and opens the full grid",
+      "status": "passed"
+    },
+    {
+      "file": "tests/ui5-engine.spec.mjs",
+      "title": "phone \u203a with a song or game bar up, the stage ends above the bar, so the bar never covers the toy",
+      "status": "passed"
+    },
+    {
+      "file": "tests/ui5-engine.spec.mjs",
+      "title": "phone \u203a Record: the pill shows the time and Stop on the stage, then Save; the video has the sound",
+      "status": "passed"
+    },
+    {
+      "file": "tests/ui5-engine.spec.mjs",
+      "title": "computer \u203a the gallery button beside the search field (and G) opens and closes the gallery page, and never covers the stage",
+      "status": "passed"
+    },
+    {
+      "file": "tests/ui5-engine.spec.mjs",
+      "title": "computer \u203a a toy entry with tilt: \"free\" starts unlocked on a shelf that holds still",
+      "status": "passed"
+    },
+    {
+      "file": "tests/ui5-engine.spec.mjs",
+      "title": "computer \u203a Record stops by itself at its time limit",
+      "status": "passed"
+    },
+    {
+      "file": "tests/ui5-engine.spec.mjs",
+      "title": "computer \u203a a recipe's own file cap (input.maxBytes)",
+      "status": "passed"
+    }
+  ]
+}

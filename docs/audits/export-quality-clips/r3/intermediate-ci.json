@@ -1,0 +1,40 @@
+{
+  "run": 38812613741,
+  "head": "cd8ffb7c5d43839e810fa788f5e5d0a78b153600",
+  "status": "cancelled; superseded by the checked PDF and long-take evidence",
+  "completeSuite": false,
+  "failures": [
+    {
+      "test": "math:368",
+      "alone": "failed",
+      "error": "Expected t-not-allowed warning; received nothing-to-draw warning",
+      "cause": "Next input was typed before the previous surface rebuild installed its input panel",
+      "change": "Wait for the applied equation caption; original assertions retained",
+      "rerunsAfterReadinessCheck": {
+        "passed": 3,
+        "failed": 0
+      }
+    },
+    {
+      "test": "fx4-engine:79",
+      "alone": "failed: ERR_CONNECTION_REFUSED after cancellation",
+      "initialError": "bouncy-ball big pixel difference 348 > 220",
+      "freshIndividualRerun": "Default local run timed out at 240 seconds; longer 600-second CLI run passed in 5.3 minutes with all pixel assertions and repository timeouts unchanged",
+      "thresholdChanged": false
+    },
+    {
+      "test": "man5:201",
+      "alone": "failed",
+      "error": "Shipped PDF out of date",
+      "correction": "Pinned workflow 38812628385: 29 passed; immutable edition e50e5205f56d0c83"
+    },
+    {
+      "test": "hh5-math:104",
+      "alone": "passed"
+    },
+    {
+      "test": "smoke:1054",
+      "alone": "passed"
+    }
+  ]
+}

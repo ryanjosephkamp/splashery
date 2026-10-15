@@ -4,8 +4,8 @@
   "files": [
     {
       "file": "README.md",
-      "bytes": 10615,
-      "sha256": "a28ccaef967d49f8819ab03987ddd4f4c747b9a189b27e75380faead7d62304c"
+      "bytes": 11506,
+      "sha256": "055c43dd107f8a546a436725f9b70ccb7f05e847b31e407dc591ca94e4fe0b40"
     },
     {
       "file": "after-desktop-chest-gif.gif",
@@ -493,6 +493,11 @@
       "sha256": "3f71a4c71b70f936e0d389903fb137e7c92c750a34c49809fc42c673e5ab8363"
     },
     {
+      "file": "r3/ci-c14-summary.md",
+      "bytes": 4258,
+      "sha256": "af3681bef154e217bed5fa69e8881603055d7cdeac4e3581e60d71ac931f21eb"
+    },
+    {
       "file": "r3/fixed/after-desktop-photo-3d-png.png",
       "bytes": 1153148,
       "sha256": "496b59b099e2936c7c0c859e23426eb3ee306be58108098b08e5a6f64ecf5f82"
@@ -668,6 +673,16 @@
       "sha256": "ed5019dc2e2a72bc83201b8af8e420951e50c55061f7427fa6589c953e377981"
     },
     {
+      "file": "r3/intermediate-ci.json",
+      "bytes": 1357,
+      "sha256": "58719b2d5ac8ebcdbe69d4fb85ab46ca75b80374137c167f4b5b526364f7b4c6"
+    },
+    {
+      "file": "r3/local-coverage.json",
+      "bytes": 19510,
+      "sha256": "828740ce79a4d0478716f3e6a94c390b3eab8dd49841a8b6f032f5e43901341c"
+    },
+    {
       "file": "r3/manual-pdf-r3.json",
       "bytes": 895,
       "sha256": "429b9b317716a121c103d9c66d0320829a967a32c59d964b62f2316326ac9fb7"
@@ -709,13 +724,18 @@
     },
     {
       "file": "r3/review.md",
-      "bytes": 9348,
-      "sha256": "f7b75497f2c5c670a025557ba8d4c6833ae6630fed70c2a93b42670bf0fa4736"
+      "bytes": 13767,
+      "sha256": "419437b7195b4156f9587c507c479430136cdb5e239fea590d959650c16af52f"
     },
     {
       "file": "r3/runtime-hashes-r3.json",
       "bytes": 1358,
       "sha256": "25dc81e2d8a690206f1b7f27cbe049d9d45d2049f1dfc254bdbf14a4b48ad361"
+    },
+    {
+      "file": "r3/verification.json",
+      "bytes": 25773,
+      "sha256": "61c6f4784959791e96dd494576b58b5ecce40c21a27fe149a245261cfbfae0ed"
     },
     {
       "file": "record-contact-sheet.jpg",
@@ -748,5 +768,6 @@
   "revisionReferenceMode": "deterministic renderAt(0, cameraState); earlier visibility-pause study retained separately",
   "phoneDurationImplementationCommit": "cd8ffb7c5d43839e810fa788f5e5d0a78b153600",
   "phoneDurationMainCommit": "d4df5998675c5b31ae4dae1240a7e2d73a1fface",
-  "phoneDurationEvidenceCommit": "89ec8c3e442e0bc29ec40173c3ec7d8f8d4db04c"
+  "phoneDurationEvidenceCommit": "89ec8c3e442e0bc29ec40173c3ec7d8f8d4db04c",
+  "finalSourceCommit": "ca35cab08ed7ce3e5045b1f6fd4905085fb9c6e7"
 }
