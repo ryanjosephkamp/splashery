@@ -1922,6 +1922,6 @@ Ryan with Codex (GPT-6), October 15, 2026. Code is MIT. Original capture contrib
 source assets retain their recorded terms. See the
 [loading-color and status audit](docs/audits/photo-3d-status-2026-10.md).
 
-The WebGPU frame-queue backpressure and live-embed regression checks are made by Ryan with Codex
-(GPT-6), October 15, 2026, under the MIT license. See the
+The WebGPU frame-queue backpressure, live-embed regression checks, and manual PDF text checks are
+made by Ryan with Codex (GPT-6), October 15, 2026, under the MIT license. See the
 [live-embed teardown audit](docs/audits/embed-context-close-2026-10.md).

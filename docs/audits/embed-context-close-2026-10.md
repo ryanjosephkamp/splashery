@@ -58,3 +58,46 @@ uses the full suite's pinned setup, fonts, Chromium, and Mesa display, and retai
 report and traces. The existing full suite also includes the same nine cases. Neither workflow's
 original failures are replaced by later passes. No retry, skip, longer timeout, changed renderer
 preference, or relaxed assertion is added. `tests/taps.spec.mjs` is unchanged.
+
+## Manual PDF text follow-up
+
+The
+[Operator's second follow-up](https://github.com/ryanjosephkamp/splashery/pull/645#issuecomment-6194712162)
+belongs in this same PR. The Actions edition `95d730b94fef0ab7` draws the first contents colon with
+an Inter contextual alternate that PDF.js extracts as U+E092. The old navigation checker stripped
+punctuation when comparing headings and never compared visible contents titles, so it accepted that
+edition. It also accepted a deliberately changed web title with a semicolon instead of its colon.
+The new checker rejects the actual broken Actions edition at `#splat`, preserving the private-use
+character in its error.
+
+The printer disables Inter's `calt` feature for printed text, including descendants and pseudo
+elements. Web styling and wording stay as written. The checker associates PDF.js's marked text with
+each tagged Link and its actual annotations, so font runs and wrapped links form a complete title
+without the adjacent page number. It compares that extracted text with the web title after
+normalizing whitespace only. It does not substitute bookmark labels, alternate text, or cleaned
+punctuation for the visible text. Existing destination, bookmark-position, and printed-number checks
+remain in force. A regression deliberately changes a contents colon to a semicolon and requires
+rejection.
+
+Fresh local prints with Inter 3.19 and Inter 4.0 both pass all 108 exact contents titles, 144
+internal links, and 188 bookmark checks. Both have 632 literal colons and 699 private-use
+characters. The remaining characters are the existing tabular digits and decimal points in the
+budget comparison table on pages 22–24, beside the arrows. The arrows themselves extract as U+2192.
+Inspection of Inter 3.19's character map identifies U+E071 as `zero.tf`, U+E072 as `one.tf`, and
+U+E094 as `period.tf`; the table explicitly requests `font-variant-numeric: tabular-nums`. Disabling
+`calt` fixes the new contextual punctuation defect while retaining that existing table styling. The
+JSON report records every remaining private-use code point, count, page, font, and text context.
+
+Those fresh editions have 154 pages, with Glossary on 139 and Quick reference on 151. The old
+153-page edition put them on 138 and 150. The browser navigation test therefore uses numbers
+verified against the PDF's printed contents instead of constants from the previous edition. It still
+checks the exact first-link title, clicks the real contents link, follows the real bookmark, types
+the printed reference number, and checks the expected heading on each exact destination page.
+
+The manual workflow remains dispatch-only with read-only permissions and Chromium's sandbox on.
+After publishing a fresh local edition, it runs the full `cdx-manual-pdf` and `man5` files,
+including the unchanged byte-reproducibility assertion. It uploads the edition and rebuilt download
+links, plus the original check reports and traces. The Operator can dispatch `manual-pdf.yml` on
+this PR's branch, inspect those artifacts, and commit the reviewed edition through the planned Ops
+PR. This PR changes the printer and its checks; it does not commit a container-generated replacement
+PDF. Final Actions evidence and the workflow artifact's measured character counts belong in the PR.
