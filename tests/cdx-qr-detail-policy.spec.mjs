@@ -89,6 +89,27 @@ test("Low-contrast Square pictures reserve more correction share while Circle ke
   const veryFlat = loadPicture("assets/toys/qr-picture/themes/cdx-theme-space-art-2-1.jpg");
   expect(detailFraction(veryFlat, "square")).toBe(0.65);
   expect(detailFraction(veryFlat, "circle")).toBe(0.4);
+  const candidate = detailCandidates(veryFlat, {
+    text: "https://example.org/a/1",
+    fidelity: "detail",
+    shape: "square",
+    level: "H",
+    size: "more",
+    center: "small",
+    style: "color",
+    contrast: 0.5,
+    texture: "tiles",
+    channel: "weighted",
+    preferContinuous: true,
+    preferCorrection: true,
+    errorFraction: detailFraction(veryFlat, "square"),
+    captureValidation: true,
+  }).next().value;
+  expect(candidate.rendering.fraction).toBe(0.65);
+  expect(candidate.code.intentionalErrors.fraction).toBe(0.65);
+  expect(candidate.code.intentionalErrors.limit).toBe(
+    Math.floor(candidate.code.intentionalErrors.maxErrors * 0.65),
+  );
 });
 
 test("A Circle that rejects its first four forecasts tries another QR mask", () => {
