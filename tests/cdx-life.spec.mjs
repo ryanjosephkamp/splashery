@@ -86,3 +86,35 @@ test("JSON saving reports the newest clay edits and paint stamps excluded by the
   await page.evaluate(() => window.__splashery.app.exportJSON());
   await expect(page.locator("#toast")).toHaveText("Scene saved as JSON.");
 });
+
+test("generator sliders have the correct values when Make first opens before the toy loads", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  let release;
+  const held = new Promise((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/assets/toys/cactus/**", async (route) => {
+    await held;
+    await route.continue();
+  });
+  try {
+    await page.goto(URL, { waitUntil: "domcontentloaded" });
+    await page.waitForFunction(() => !!window.__splashery?.app.ui);
+    await page.locator("#sheet-toggle").click();
+    await page.locator("#tab-make").click();
+    await expect(page.locator("#gen-count")).toBeVisible();
+    // Hold the asset, not a guessed timeout: late onToy initialization cannot mask the flash.
+    expect(await page.evaluate(() => window.__splashery.ready)).toBe(false);
+    expect(
+      await page
+        .locator("#pane-make input[type=range]")
+        .evaluateAll((inputs) => inputs.map((e) => e.value)),
+    ).toEqual(["60000", "35", "30", "25"]);
+    await expect(page.locator("#gen-count-value")).toHaveText("60k");
+  } finally {
+    release();
+    await page.unrouteAll({ behavior: "wait" });
+  }
+});

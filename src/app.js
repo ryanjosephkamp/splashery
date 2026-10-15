@@ -161,8 +161,11 @@ class App {
       return;
     }
     const player = this.player;
+    // Make can open while the first toy is loading; initialize its controls before that paint.
+    this.setGenerator({ count: PROFILES[player.profile].defaultCount }, { rebuild: false });
     this.ui = createUI(this);
     const ui = this.ui;
+    ui.setGenerator(this.generator);
     player.on("theme", (theme) => {
       document.documentElement.dataset.theme = theme;
       ui.setLook(player.scene.look, theme);
