@@ -161,7 +161,10 @@ if (components[plan.recheckRun]) {
     } else if (file.endsWith("picture.js")) {
       stripped = stripped
         .replace('import { detailFraction } from "./detail-policy.js";\n', "")
-        .replace("detailFraction(pic, t.shape) === 0.65 ? 0.65 : 0.6", "0.6")
+        .replace(
+          "o.errorFraction === 0.65 && detailFraction(pic, t.shape) === 0.65 ? 0.65 : 0.6",
+          "0.6",
+        )
         .replace(
           "fitPictureErrors(code, pic, fraction, fraction === 0.65 ? 0.65 : 0.6)",
           "fitPictureErrors(code, pic, fraction)",

@@ -3,7 +3,7 @@
   "baseline": "cb8a83157bc502feb2dda18ece6cfa39621abb61",
   "mergedMain": "d4df5998675c5b31ae4dae1240a7e2d73a1fface",
   "parentRuntime": "8abc68ff",
-  "runtime": "c696317e",
+  "runtime": "ed3ff719",
   "baseComposite": "review-pre-third",
   "baseCounts": {
     "main": 1182,
@@ -47,5 +47,6 @@
     "scope": "All original conditions partitioned across local Node workers after the appearance clock ends. The parent awaits every condition before the next measurement.",
     "verification": "qualification-equivalence.json",
     "implementationProof": "The default serial assessment remains unchanged after removing an optional condition-list parameter; the paired clock body is unchanged after removing the scheduler import and provenance entries."
-  }
+  },
+  "ordinaryRequestFix": "The repeated suite caught an oversized request selecting 65% on flat input. The existing regression remains unchanged. Only the exact 65% opt-in and selected source domain now permit that share; oversized requests retain the original 60% cap."
 }

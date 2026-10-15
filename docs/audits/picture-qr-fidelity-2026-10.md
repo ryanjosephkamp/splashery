@@ -246,7 +246,10 @@ fresh detail replicate has predeclared recheck priority. The
 classification, unchanged inputs and assessment code, formatted source equivalence outside the
 explicit budget changes, source epochs, and control pixels. Earlier failed means, trials, and
 observations remain. The focused policy and two-reader budget regression pass, as do all 11
-wall-clock fallback tests; the complete named QR suite is being repeated on this runtime.
+wall-clock fallback tests; the complete named QR suite is being repeated on this runtime. The
+repeated suite caught an oversized request selecting 65% on flat input. The existing regression was
+left unchanged, and the constructor was corrected to require the exact 65% opt-in; oversized
+requests still cap at 60%. The failed attempt and focused guard/policy rerun are retained.
 
 Independent post-capture assessment now partitions the original 24 conditions across four local Node
 workers. The worker jobs finish before another appearance measurement starts. This changes study

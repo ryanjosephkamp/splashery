@@ -27,7 +27,7 @@ for (const name of fs.readdirSync(local))
   if (
     /^theme-.*probe\.(mjs|json)$/.test(name) ||
     /^moon-.*\.(mjs|js|json|log)$/.test(name) ||
-    /^(third-checks|third-smoke-phone|third-policy-constructor|qualification-equivalence|review-third-recheck|review-third-remaining)\.log$/.test(
+    /^(third-checks|third-smoke-phone|third-policy-constructor|third-guard-recheck|qualification-equivalence|review-third-recheck|review-third-remaining)\.log$/.test(
       name,
     ) ||
     /^(finder-edge.*|sun-regression.*|theme-.*|edge-recheck|remaining|full|winterfir-six|near-limit-.*|plain-.*|detail-policy-red|detail-repair-green|merged-focused|repair-focused|review-repair-recheck|review-repaired|final-checks|final-smoke-phone|final-runtime-qr|final-budget-style)\.log$/.test(
@@ -79,6 +79,7 @@ for (const suite of [
   "third-qr-suite",
   "third-smoke-phone-suite",
   "third-policy-constructor-suite",
+  "third-guard-recheck-suite",
 ]) {
   const source = path.join(local, suite);
   if (!fs.existsSync(source)) continue;
@@ -191,9 +192,9 @@ fs.writeFileSync(
     {
       node: process.version,
       headWhenBundled: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
-      runtimeRevision: "c696317e",
-      testRevision: "10f3668e",
-      note: "The third suite repeats every required QR file after the very-flat Square change. Its wall-clock budget tests run alone on SwiftShader; the broad suite uses four files at once on llvmpipe. Earlier suites and the initial smoke phone-sheet failure and isolated recovery remain historical evidence. The earlier qr file started before the Color-return fix and was repeated afterward. Reports retain every attempt; reruns do not add distinct cases.",
+      runtimeRevision: "ed3ff719",
+      testRevision: "ed3ff719",
+      note: "The third suite repeats every required QR file after the very-flat Square change. The oversized-request guard failed on c696317e, was restored on ed3ff719 without changing its test, and the complete guard/policy files passed in the focused rerun. Its wall-clock budget tests run alone on SwiftShader; the broad suite uses four files at once on llvmpipe. Earlier suites and the initial smoke phone-sheet failure and isolated recovery remain historical evidence. The earlier qr file started before the Color-return fix and was repeated afterward. Reports retain every attempt; reruns do not add distinct cases.",
       requiredFiles: JSON.parse(fs.readFileSync(path.join(local, "final-required-files.json"))),
       driver: JSON.parse(fs.readFileSync(path.join(local, "third-check-status.json"))),
       previousDriver: JSON.parse(fs.readFileSync(path.join(local, "final-check-status.json"))),
