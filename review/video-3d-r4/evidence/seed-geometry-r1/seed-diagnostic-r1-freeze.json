@@ -1,0 +1,141 @@
+{
+  "created": "2026-10-15T06:50:02.964Z",
+  "purpose": "Bounded CPU-only cached training-frame geometry diagnostic; no runtime edits or GPU work.",
+  "sourceCapture": {
+    "id": "chameleon-flowers",
+    "label": "Chameleon among flowering branches",
+    "category": [
+      "plant",
+      "animal",
+      "still-held"
+    ],
+    "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "author": "Ventrovert",
+    "duration": 10,
+    "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+    "file": "chameleon-flowers.mp4",
+    "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+    "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+    "captureDuration": 13,
+    "span": {
+      "start": 0,
+      "length": 10
+    },
+    "checked": "October 15, 2026",
+    "transformation": "Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+    "evidence": {
+      "sourcePage": "evidence/chameleon-flowers-source.html",
+      "licensePage": "evidence/cc-by-4-0.html",
+      "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+      "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+      "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+      "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+      "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+      "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+    },
+    "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+    "width": 854,
+    "height": 480,
+    "fps": "24/1",
+    "bytes": 736318
+  },
+  "sourceCacheSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "sourceHelperSha256": "2c649c225af246edb7f4d4248143b5d1ff228530da1c45600f8f068d69ba9054",
+  "invocations": [
+    "node /workspace/v3d-r4-media/seed-depth-probe.mjs",
+    "node /workspace/v3d-r4-media/seed-footprint-probe.mjs"
+  ],
+  "depthParameters": {
+    "maximumPoints": 256,
+    "gridStride": 4,
+    "gridOrigin": 2.5,
+    "relativeDepthBounds": [
+      0.85,
+      1.15
+    ],
+    "inverseDepthSamples": 13,
+    "patchSide": 3,
+    "fitCameras": 2,
+    "validationCameras": 1,
+    "minimumParallaxDegrees": 0.15,
+    "maximumParallaxDegrees": 12,
+    "minimumNormalFacingCosine": 0.15,
+    "minimumReferenceTexture": 0.015,
+    "sparseOcclusionRadiusPixels": 3,
+    "sparseOcclusionDepthRatio": 1.1,
+    "confidenceMaximumFitRmse": 0.08,
+    "confidenceRelativeFitGain": 0.1,
+    "confidenceAbsoluteFitGain": 0.003,
+    "confidenceSeparatedDepthDistance": 0.04,
+    "confidenceUniqueMargin": 0.002,
+    "rejectSearchEndpoints": true,
+    "parametersChosenBeforeReadingAgreementResults": true
+  },
+  "footprintParameters": {
+    "sigmaPixels": 1.05,
+    "maxStretch": 8,
+    "maximumCachedPoints": 256
+  },
+  "noHeldoutImages": true,
+  "noTrainingOrRendering": true,
+  "limitations": [
+    "Only one cached real capture; no retraining or rendered-quality measurement.",
+    "Third training camera is excluded from depth selection and confidence, but the original cached initializer used all views when admitting supported points.",
+    "Sparse occlusion guards can reject known foreground conflicts but do not prove visibility in unobserved regions.",
+    "Normal is fixed to the original sparse triangle; the sweep can test local depth only, not wrong normals, moving leaves, specular changes, or mismatched camera poses.",
+    "No benchmark-held-out photographs are read.",
+    "Single cached chameleon capture; no capture-level statistical generalization.",
+    "Footprint covariance equality is geometric validation, not a quality or time acceptance result.",
+    "Host CPU timings are not physical-phone measurements.",
+    "Point-bootstrap intervals are descriptive and do not account for spatial correlation."
+  ],
+  "artifacts": [
+    {
+      "file": "seed-probe.json",
+      "bytes": 53829727,
+      "sha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f"
+    },
+    {
+      "file": "seed-depth-probe.mjs",
+      "bytes": 15696,
+      "sha256": "8532108bd14b38f3da122183c731d1496d998ac3f6e61354f060555898fe5304"
+    },
+    {
+      "file": "seed-depth-probe-r1.json",
+      "bytes": 253132,
+      "sha256": "f9bce6d8d6cc75a002ed2e20fe46221349c710a91c4d6d2214132b0fe0ffcd23"
+    },
+    {
+      "file": "seed-depth-probe-r1.log",
+      "bytes": 5827,
+      "sha256": "15fcf8387df024717c8e1e2fc153b77d46c0feaa01d6a170cd57e9de810245cc"
+    },
+    {
+      "file": "seed-footprint-probe.mjs",
+      "bytes": 5727,
+      "sha256": "59cb44b296c1f600837bc40bc38eef5387f9ad4c30c3074bae06bfce3d4aff5b"
+    },
+    {
+      "file": "seed-footprint-helper-r1.mjs",
+      "bytes": 10022,
+      "sha256": "2c649c225af246edb7f4d4248143b5d1ff228530da1c45600f8f068d69ba9054"
+    },
+    {
+      "file": "seed-footprint-probe-r1.json",
+      "bytes": 230761,
+      "sha256": "35372e087d0ec35a6e8add6ed0fec22f3b80fae83cea67358bc04bed5ef1a0d6"
+    },
+    {
+      "file": "seed-footprint-probe-r1.log",
+      "bytes": 5318,
+      "sha256": "395da4646618479336a5763464d2f43c162eb175dd6b316164ded2f4e77cc146"
+    },
+    {
+      "file": "seed-geometry-diagnostic-r1.md",
+      "bytes": 6647,
+      "sha256": "b7836886d9a4aab5c7822ac51d34a13dae7ea67e6146bbe9a78050718f7d5d7b"
+    }
+  ]
+}

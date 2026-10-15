@@ -1,0 +1,157 @@
+{
+  "output": "/workspace/v3d-r4-media/seed-depth-probe-r1.json",
+  "geometry": {
+    "sparsePoints": 614,
+    "cameras": 16,
+    "cachedSurfacePoints": 2636,
+    "trainingSizes": [
+      "320x180"
+    ],
+    "intrinsics": "c.f and optional fy/cx/cy scaled by tw/fw; row-major world-to-camera R,t; RGB already undistorted; quaternion is cached w,x,y,z and local z is surface normal.",
+    "maximumAnchorResidualPixels": 0.000014046622818531007,
+    "maximumAnchorReconstructionError": 7.28127732675331e-15
+  },
+  "cost": {
+    "loadMs": 378.875783,
+    "preparationMs": 8.221653000000003,
+    "elapsedMs": 188.14617599999997,
+    "selectedPoints": 256,
+    "bilinearSampleCalls": 51556,
+    "projectedPatchPoints": 32849,
+    "depthHypotheses": 14,
+    "extrapolated2636PointsMs": 1937.3176559999997,
+    "extrapolated10000PointsMs": 7349.459999999999,
+    "caveat": "Single Node/V8 CPU run under concurrent software rendering, not phone timing; extrapolations are arithmetic only and omit reusing geometric/reference-patch work."
+  },
+  "skipped": {
+    "low-reference-texture": 38,
+    "grazing-normal": 92,
+    "too-few-geometric-neighbors": 4,
+    "baseline-fit-visibility": 1,
+    "invalid-reference-patch": 1
+  },
+  "all": {
+    "points": 120,
+    "independentlyVisible": 115,
+    "fitBeforeMedian": 0.02259085134739222,
+    "fitAfterMedian": 0.01958977515830323,
+    "validationBeforeMedian": 0.025151405141306295,
+    "validationAfterMedian": 0.025823245594802553,
+    "pairedValidationImprovementMedian": 0,
+    "validationImproved": 49,
+    "validationWorsened": 43,
+    "validationCenterBeforeMedian": 0.01790139567057153,
+    "validationCenterAfterMedian": 0.017181041488563396,
+    "depthRatioMedian": 1,
+    "endpointSelections": 1
+  },
+  "confident": {
+    "points": 37,
+    "independentlyVisible": 36,
+    "fitBeforeMedian": 0.03240016519839547,
+    "fitAfterMedian": 0.020130537531832055,
+    "validationBeforeMedian": 0.03228310191665941,
+    "validationAfterMedian": 0.02829686255862094,
+    "pairedValidationImprovementMedian": 0.0008791132874288957,
+    "validationImproved": 20,
+    "validationWorsened": 16,
+    "validationCenterBeforeMedian": 0.02093541176661176,
+    "validationCenterAfterMedian": 0.019202994055222314,
+    "depthRatioMedian": 1.0289473684210526,
+    "endpointSelections": 0
+  },
+  "byReference": {
+    "0": {
+      "points": 42,
+      "independentlyVisible": 42,
+      "fitBeforeMedian": 0.028713591101616975,
+      "fitAfterMedian": 0.0218595514199414,
+      "validationBeforeMedian": 0.02944598060690456,
+      "validationAfterMedian": 0.0305099524399037,
+      "pairedValidationImprovementMedian": 0,
+      "validationImproved": 19,
+      "validationWorsened": 15,
+      "validationCenterBeforeMedian": 0.01984725345774621,
+      "validationCenterAfterMedian": 0.020381971981092366,
+      "depthRatioMedian": 1,
+      "endpointSelections": 0
+    },
+    "5": {
+      "points": 59,
+      "independentlyVisible": 55,
+      "fitBeforeMedian": 0.01946749776523393,
+      "fitAfterMedian": 0.017324349005914834,
+      "validationBeforeMedian": 0.021584432069271072,
+      "validationAfterMedian": 0.022041985267496057,
+      "pairedValidationImprovementMedian": 0,
+      "validationImproved": 24,
+      "validationWorsened": 18,
+      "validationCenterBeforeMedian": 0.01790139567057153,
+      "validationCenterAfterMedian": 0.01628083584817184,
+      "depthRatioMedian": 1,
+      "endpointSelections": 0
+    },
+    "10": {
+      "points": 15,
+      "independentlyVisible": 14,
+      "fitBeforeMedian": 0.02338036208862445,
+      "fitAfterMedian": 0.019054047760442748,
+      "validationBeforeMedian": 0.012356917537214547,
+      "validationAfterMedian": 0.020154100777327037,
+      "pairedValidationImprovementMedian": -0.0020163694814757634,
+      "validationImproved": 4,
+      "validationWorsened": 8,
+      "validationCenterBeforeMedian": 0.010331986029103086,
+      "validationCenterAfterMedian": 0.013578710853669775,
+      "depthRatioMedian": 1.0025641025641026,
+      "endpointSelections": 0
+    },
+    "15": {
+      "points": 4,
+      "independentlyVisible": 4,
+      "fitBeforeMedian": 0.031089950058959957,
+      "fitAfterMedian": 0.019048518549367413,
+      "validationBeforeMedian": 0.022953079427152467,
+      "validationAfterMedian": 0.019953838367064047,
+      "pairedValidationImprovementMedian": -0.0031988949376628682,
+      "validationImproved": 2,
+      "validationWorsened": 2,
+      "validationCenterBeforeMedian": 0.015203536653581297,
+      "validationCenterAfterMedian": 0.014376146581767446,
+      "depthRatioMedian": 0.9913029525032092,
+      "endpointSelections": 1
+    }
+  },
+  "projectedAnisotropy": {
+    "cameraDomain": "Raw projected covariance at cached320x180 training intrinsics, without raster minimum footprint/filter inflation. Cached tangent scales equal, thickness is sigmaNormal/sigmaTangent0.15.",
+    "original": {
+      "points": 256,
+      "axisRatioMedian": 3.513116597010284,
+      "axisRatioP90": 6.420144846190041,
+      "axisRatioAbove3": 144,
+      "axisRatioAbove5": 83,
+      "majorSigmaPixelsMedian": 2.8036317978124305,
+      "minorSigmaPixelsMedian": 0.7977439820276706
+    },
+    "cameraFacing": {
+      "points": 256,
+      "axisRatioMedian": 1.0042397620104313,
+      "axisRatioP90": 1.0129443144273824,
+      "axisRatioAbove3": 0,
+      "axisRatioAbove5": 0,
+      "majorSigmaPixelsMedian": 2.8118716300350606,
+      "minorSigmaPixelsMedian": 2.799999950105503
+    },
+    "normalFacingCosineBelow015": 92,
+    "normalFacingCosineBelow025": 128,
+    "normalFacingCosineBelow05": 181
+  },
+  "normalOnlyValidation": {
+    "points": 116,
+    "beforeMedian": 0.025276177314646348,
+    "cameraFacingMedian": 0.02502833085956301,
+    "pairedImprovementMedian": 0.000010777554116703919,
+    "improved": 61,
+    "worsened": 55
+  }
+}

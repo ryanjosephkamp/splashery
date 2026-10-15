@@ -1,0 +1,497 @@
+{
+  "created": "2026-10-15T06:41:10.947Z",
+  "provenance": {
+    "toolSha256": "02fa9e5eb4f08950cc94bf29132ef6b64a94476d97b3eeaa1c9db06fb0fa6006",
+    "sceneObserverSha256": "04e1fa0128ad22b34cee3edf1bcdeb0aeaeba5990239e32921e84b68b57fe542",
+    "profile": "phone",
+    "paneWidth": 390,
+    "paneHeight": 844,
+    "fps": 2,
+    "seconds": 5,
+    "manifestSha256": "bf0fcb849988aedc5ac20965d567e304adec88129b4f6e47fea21bcb0395dbca",
+    "versions": [
+      {
+        "name": "main",
+        "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+        "directory": "/workspace/v3d-r4-media/main-r1",
+        "url": "http://127.0.0.1:4174/",
+        "preservePhotometric": false
+      },
+      {
+        "name": "this-round",
+        "provenanceSha256": "a6d93a0e892a15a181507eb3e4d182b341f9a273e21a5c51de3e502fc8f21b99",
+        "directory": "/workspace/v3d-r4-media/candidate-r3",
+        "url": "http://127.0.0.1:4175/",
+        "preservePhotometric": true
+      }
+    ]
+  },
+  "profile": "phone",
+  "selection": {
+    "profile": "phone",
+    "complete": false,
+    "ranked": false,
+    "rankBasis": "Candidate held-out SSIM, among verified paired successes; failures have no image score.",
+    "pairedSuccesses": 1,
+    "expectedClips": 20,
+    "selected": [
+      {
+        "id": "cat-plays",
+        "group": "unranked",
+        "rank": null
+      }
+    ],
+    "inventory": [
+      {
+        "id": "cat-track",
+        "mainStatus": "explained",
+        "candidateStatus": "explained",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second.",
+        "candidateReason": "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second."
+      },
+      {
+        "id": "cat-plays",
+        "mainStatus": "finished",
+        "candidateStatus": "finished",
+        "paired": true,
+        "mainSsim": 0.3128355397132256,
+        "candidateSsim": 0.3241711055327182,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "buddha",
+        "mainStatus": "explained",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second.",
+        "candidateReason": null
+      },
+      {
+        "id": "chameleon-flowers",
+        "mainStatus": "finished",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": 0.6687733199606671,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "dianthus",
+        "mainStatus": "finished",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": 0.27008633062524745,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "pisac",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "sleeping-dog",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "palace-statue",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "oa-street",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "ullard",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "snaefell",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "fremantle-orbit",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "ihasalu-orbit",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "fresnel-lens",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "saint-denis",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "horse-statue",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "royal-sovereign",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "viljandi-ruins",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "kakerdi-bog",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      },
+      {
+        "id": "fjoloy",
+        "mainStatus": "pending",
+        "candidateStatus": "pending",
+        "paired": false,
+        "mainSsim": null,
+        "candidateSsim": null,
+        "mainReason": null,
+        "candidateReason": null
+      }
+    ],
+    "limitations": [
+      "The selected-profile corpus is incomplete; best/worst ranks are withheld.",
+      "Only 1 verified paired successes are available; ten distinct before/after clips are not available.",
+      "Explicitly selected clips are unranked diagnostic captures."
+    ]
+  },
+  "protocol": "Main / This round at matched recorded video times, using each model's own solved coordinate frame. Exact saved held-out render pixels must match before video capture. Production cleanup retained per version; no image alignment or camera fitting. These clips show replay, not measured device speed.",
+  "cases": [
+    {
+      "id": "cat-plays",
+      "clip": {
+        "id": "cat-plays",
+        "label": "Cat playing outside, handheld tablet",
+        "category": [
+          "pet",
+          "shaky"
+        ],
+        "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Riverarvi",
+        "duration": 8,
+        "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+        "file": "cat-plays.mp4",
+        "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Cat_Plays.webm",
+        "captureSha256": "3258309e1d573fda6595fee0c02e3f055931a06c01bac24d986a5aff28297b32",
+        "captureDuration": 8.336,
+        "span": {
+          "start": 0,
+          "length": 8
+        },
+        "checked": "October 15, 2026",
+        "transformation": "Trimmed 0–8 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+        "evidence": {
+          "sourcePage": "evidence/cat-plays-source.html",
+          "licensePage": "evidence/cc-by-sa-4-0.html",
+          "contactSheet": "contact-sheets/cat-plays.jpg",
+          "commonsMetadata": "evidence/cat-plays-commons-metadata.json",
+          "sourcePageSha256": "38535c97b6bbc487bfddca42357b3aa13f7498f7f96507f7e75d349610e69b59",
+          "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+          "contactSheetSha256": "ede0e5b6aed06fe2fa6b3385318347cbaadc7bb22dbedb2bab4a6f1e3a6b215e",
+          "commonsMetadataSha256": "f97d3c283fe10a29edb6e48968ebd4b8a303254fd808023b82cc2b85d9089a8a"
+        },
+        "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+        "width": 270,
+        "height": 480,
+        "fps": "24/1",
+        "bytes": 616920
+      },
+      "resultFingerprint": "4d1b82ff19c171acd0264be7730a2e0f1e6e35df9cb5b66664cb30515e16707a",
+      "group": "unranked",
+      "status": "captured",
+      "verification": [
+        {
+          "version": "main",
+          "scene": {
+            "uid": "review-capture",
+            "affine": true,
+            "preservePhotometric": false
+          },
+          "frames": [
+            {
+              "index": 0,
+              "time": 1.125,
+              "savedSha256": "1f31da2c796e008f20d7d6f2537aed6f27006de3f615363057263fdb2e7ac2ad",
+              "replaySha256": "1f31da2c796e008f20d7d6f2537aed6f27006de3f615363057263fdb2e7ac2ad",
+              "rgbaSha256": "00e0d4f66089646ba16296e386ba0ba96a6a456153ace7bdff3d15104c3ac1d8",
+              "byteIdentical": true
+            },
+            {
+              "index": 1,
+              "time": 3,
+              "savedSha256": "828f90d56671d421f0fb8089bbb70ce49bed8b04caa6faea79363ef017b7ba50",
+              "replaySha256": "828f90d56671d421f0fb8089bbb70ce49bed8b04caa6faea79363ef017b7ba50",
+              "rgbaSha256": "a77006e572d15864ce23dc0908b8e32b0a135ff72bc70141b9acd8e028289b8b",
+              "byteIdentical": true
+            },
+            {
+              "index": 2,
+              "time": 5,
+              "savedSha256": "141aac91769794861d81ce7859f04ca7cec96b342ac4918964a797fc64de84e1",
+              "replaySha256": "141aac91769794861d81ce7859f04ca7cec96b342ac4918964a797fc64de84e1",
+              "rgbaSha256": "1c3d2b06e3f9ae7c0ebe39cb8872d880fd6b61d0be271cb5326725c77d441bd8",
+              "byteIdentical": true
+            },
+            {
+              "index": 3,
+              "time": 6.875,
+              "savedSha256": "6f72e3b1fcd582de8906de747fc415d4d6569f54bbb58a7b2f2e1fabdb1ee7fd",
+              "replaySha256": "6f72e3b1fcd582de8906de747fc415d4d6569f54bbb58a7b2f2e1fabdb1ee7fd",
+              "rgbaSha256": "336966409cf22e39f5c3ee93cd4ff6d86e5b7e0b23007b03a2854e5a7be2672b",
+              "byteIdentical": true
+            }
+          ]
+        },
+        {
+          "version": "this-round",
+          "scene": {
+            "uid": "review-capture",
+            "affine": true,
+            "preservePhotometric": true
+          },
+          "frames": [
+            {
+              "index": 0,
+              "time": 1.125,
+              "savedSha256": "dde09ce787ba3fba41b9fe048847bfd4f1a5df8adbb8b05298e7f5d870b41744",
+              "replaySha256": "dde09ce787ba3fba41b9fe048847bfd4f1a5df8adbb8b05298e7f5d870b41744",
+              "rgbaSha256": "6608f999cb3dc4216ad45bcbd6e50de6a62d2286d568b8973150a36ccb047d2a",
+              "byteIdentical": true
+            },
+            {
+              "index": 1,
+              "time": 3,
+              "savedSha256": "d354981e05004f46371aff5d740ce544c9a5af79cd784ad9a332ebe90646f82d",
+              "replaySha256": "d354981e05004f46371aff5d740ce544c9a5af79cd784ad9a332ebe90646f82d",
+              "rgbaSha256": "9acff5013a8015602e914fff7109c5fc181ea876e0797c343c3fce940e5209b9",
+              "byteIdentical": true
+            },
+            {
+              "index": 2,
+              "time": 5,
+              "savedSha256": "2da7555e16e73811004b70f69c62d1ee74722078153ea01b28f5bd51da8dabe2",
+              "replaySha256": "2da7555e16e73811004b70f69c62d1ee74722078153ea01b28f5bd51da8dabe2",
+              "rgbaSha256": "5efdfd954ef118502116533940fd1708d49c91b4e653ab2a6d94ecda67f0dff1",
+              "byteIdentical": true
+            },
+            {
+              "index": 3,
+              "time": 6.875,
+              "savedSha256": "876363616232984fec04025905d6ad28d188fe5d0fae1599ddb5e1928cdaad5d",
+              "replaySha256": "876363616232984fec04025905d6ad28d188fe5d0fae1599ddb5e1928cdaad5d",
+              "rgbaSha256": "f8652cb1e95cdedc9afebb7f7ad5cf0f5523ab34a3b995095e1cf4a0616cada2",
+              "byteIdentical": true
+            }
+          ]
+        }
+      ],
+      "timeline": {
+        "start": 0.083,
+        "end": 5.083,
+        "fps": 2,
+        "frames": 11,
+        "sourceSpanSeconds": 5,
+        "playbackSeconds": 5.5,
+        "motionReplaySpeed": 1,
+        "finalFrameHoldSeconds": 0.5,
+        "times": [
+          0.083,
+          0.583,
+          1.083,
+          1.583,
+          2.083,
+          2.583,
+          3.083,
+          3.583,
+          4.083,
+          4.583,
+          5.083
+        ],
+        "protocol": "One frame per recorded 1/fps second, from the common path start. Each model uses its own solved coordinate frame and production flight interpolation. No camera fitting, image alignment, mask, or sharpening. The final frame is displayed for one frame interval."
+      },
+      "frames": [
+        {
+          "time": 0.083,
+          "mainRgbaSha256": "c8581ebe2287446dc013a296aa29a6b54a7c8ccb05efe99d1699830f7a22549f",
+          "candidateRgbaSha256": "e7c8656a5a3138c1f38f0198d90e325466cc9baea5917986ad8a374a1b7ffe51"
+        },
+        {
+          "time": 0.583,
+          "mainRgbaSha256": "329c702e9dbfadde1a91b2739cfa3ab28b7442ab0abaab1a86527db58d47186e",
+          "candidateRgbaSha256": "798b5043c3ceb4d965b87008909e29073a8765817a60538321b888ff2fa72963"
+        },
+        {
+          "time": 1.083,
+          "mainRgbaSha256": "52a5735a6238958a3227155bedfb198ed28b995c9e7b12fa1ebb0a07d6f39c12",
+          "candidateRgbaSha256": "762e3a4dfdfa5e7c9a05b36c4f80c9294e2c1f904f8d44d6997f6fed53d36b22"
+        },
+        {
+          "time": 1.583,
+          "mainRgbaSha256": "ab2367f1b6c5d6e2617ee60813177898ce1c31860284011776a21d9b447cffa0",
+          "candidateRgbaSha256": "e3543a32064110722fc6fd691d040dc9a6aae35d1972ef750ea05f6cb122f302"
+        },
+        {
+          "time": 2.083,
+          "mainRgbaSha256": "b9be34313c55cbbb2c58306c5f114d4a2758d63dbd10b6aee441a057502df39a",
+          "candidateRgbaSha256": "99d4d904398f13efd0ffb0b7ec1c2c995423c5a54f08062124cefacdaed5537b"
+        },
+        {
+          "time": 2.583,
+          "mainRgbaSha256": "3e336f6a83d8faebea92c2d2a16abed53280cd8374f5424e3535b6b4f3011c75",
+          "candidateRgbaSha256": "4cb5387a8c70aa7bd998c067d750c8cf7f14d23790989217ee81df7b76a89b40"
+        },
+        {
+          "time": 3.083,
+          "mainRgbaSha256": "bdd4ebf15061dbf1881240cd0836c4b23551820186e23dd99441af97ca797148",
+          "candidateRgbaSha256": "f0fdc578785980e943b0e6918fb49434909231a695dcd2f8da062d0e40b667bf"
+        },
+        {
+          "time": 3.583,
+          "mainRgbaSha256": "74a0620562363cb782a514c7b447798eb5361bd62314ac3f8da226162ffc7b6a",
+          "candidateRgbaSha256": "a76ff0622d0dd3d78a20fc55c0c2395f24d71b3fd8ffcf7634ab170e5c70caff"
+        },
+        {
+          "time": 4.083,
+          "mainRgbaSha256": "58c27716c85c6021158e701e9611a75bc359124787a1a26b27f200294d9e10e0",
+          "candidateRgbaSha256": "0a3be3c05ad8aaf337714313982201efb91457b4cce3a41085da926ea6997cec"
+        },
+        {
+          "time": 4.583,
+          "mainRgbaSha256": "c30fc1830da88c0e8e97ab7a15fc72a87bfef5f4a30be8a288d0a5812b063ae7",
+          "candidateRgbaSha256": "a202a8ef270d31f5eb0d9e3af24402911835f648aca6a94e1d437e8f88deac8b"
+        },
+        {
+          "time": 5.083,
+          "mainRgbaSha256": "c8b65b274514c8f674dcf3b621cf44583f3cd6a033c943190c3ac2184cd55a94",
+          "candidateRgbaSha256": "da25b6572126a3ce2537e7e126cb719adef890528ac174d9a30b1e3082bcae3c"
+        }
+      ],
+      "modelMetadataSha256": [
+        {
+          "version": "main",
+          "sha256": "4df218c75af69c4a3f8397b7ef62a1abca22618423e5ca8f64b77ddc12fbc057"
+        },
+        {
+          "version": "this-round",
+          "sha256": "c5e87cfa322fc6163267bf1cbb5c23af3d23bd3b786610b400c1548eaa3f3a2e"
+        }
+      ],
+      "files": [
+        {
+          "file": "comparison.mp4",
+          "sha256": "eb03a2b08b351be14e323778de33ad7bc64d6fe23d5ada6668759c6f3addef24"
+        },
+        {
+          "file": "poster.jpg",
+          "sha256": "607cb3a278befaddabfed9ef612d9b31d7e0bf78b76acf88f22a90cd70243b20"
+        },
+        {
+          "file": "attribution.txt",
+          "sha256": "ae045e86e104ddab1d5f3f36d622d2ce444e8f6750dff17d5ae4e57c645e3854"
+        },
+        {
+          "file": "verification.json",
+          "sha256": "e2c63f3927ace75daca687be07bd2cc0d0d9a60148a5c43cffdd6bcb8852cf24"
+        }
+      ]
+    }
+  ],
+  "capturedClips": 1,
+  "rankedMediaComplete": false
+}

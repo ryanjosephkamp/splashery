@@ -46,3 +46,21 @@ timeout or missing paired model cannot count as a goal pass. Review replay must 
 held-out renders before a comparison is accepted. The camera path uses synchronized original video
 times in each reconstruction’s own coordinate frame. This workspace has software graphics; its phone
 profile is emulation, not a physical-phone test.
+
+### Preserved negative results
+
+[Main snapshot](measurements/main-snapshot-0007/run.json) contains seven of 40 declared outcomes,
+including one desktop watchdog timeout. [Candidate r3](measurements/candidate-r3/run.json) missed
+both cat quality thresholds. [Candidate r4](measurements/candidate-r4/run.json) improved cat
+sharpness to 3.346 times main's but increased SSIM only 0.00442 and delayed its first preview. These
+partial results do not establish any corpus acceptance goal.
+
+[Verified r3 comparison](reviews/candidate-r3-cat-diagnostic/index.html) shows the same five source
+seconds at 1× motion, using 11 actual captures at 2 fps, plus a half-second final hold. Both models
+remain visibly blurred. Its eight saved held-out PNGs reproduced exactly before capture; the movie
+is an unranked diagnostic, not one of ten completed best/worst comparisons.
+
+[CPU geometry diagnostic](evidence/seed-geometry-r1/seed-geometry-diagnostic-r1.md) supports
+correcting foreshortened Gaussian footprints. It does not support adding a local depth sweep. The
+compressed training cache decompresses to the original hash-bound bytes. No held-out image was used
+for this diagnostic, and covariance correctness does not establish rendered quality.
