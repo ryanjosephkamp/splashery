@@ -17,6 +17,22 @@ export class GSTrainer {
     return new GSTrainer(gpu.device, opts, gpu.info || {});
   }
 
+  // Buffers belong to this trainer even when its GPU device belongs to the host.
+  dispose() {
+    if (this._disposed) return;
+    this._disposed = true;
+    const destroyed = new Set();
+    for (const [name, value] of Object.entries(this)) {
+      if (!/^(buf|uni)/.test(name)) continue;
+      for (const buffer of Array.isArray(value) ? value : [value]) {
+        if (!buffer || typeof buffer.destroy !== 'function' || destroyed.has(buffer)) continue;
+        destroyed.add(buffer);
+        try { buffer.destroy(); } catch { /* a lost device may already have released it */ }
+      }
+    }
+    this.n = 0;
+  }
+
   constructor(device, opts = {}, gpuInfo = {}) {
     this.device = device;
     this.opts = opts; // { eCut, aMin, opacityReg } — gradcheck uses strict cutoffs

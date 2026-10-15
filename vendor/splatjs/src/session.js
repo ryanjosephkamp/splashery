@@ -132,6 +132,8 @@ export class Session {
   /** @param {SessionOptions} [opts] */
   constructor(opts = {}) {
     this.opts = opts;
+    this._lifetime = new AbortController();
+    this._disposed = false;
     this.frames = [];
     this.recon = null;      // solve() result: { cams, points, k1, k2, ... }
     this.model = null;      // seed() result: { data, n, center, radius }
@@ -152,19 +154,51 @@ export class Session {
   }
 
   on(type, fn) { return this._em.on(type, fn); }
-  _log(m) { this._em.emit('log', m); }
-  _stage(e) { this._em.emit('stage', e); }
+  _log(m) { if (!this._disposed) this._em.emit('log', m); }
+  _stage(e) { if (!this._disposed) this._em.emit('stage', e); }
+
+  _assertActive() {
+    if (this._disposed) throw new DOMException('Session disposed', 'AbortError');
+  }
+
+  async _getGpu() {
+    this._assertActive();
+    if (this.gpu) return this.gpu;
+    const gpu = await createGpu({ device: this.opts.device });
+    if (this._disposed) {
+      if (gpu.owned) gpu.dispose();
+      this._assertActive();
+    }
+    this.gpu = gpu;
+    gpu.onLost = (info) => { if (!this._disposed) this._deviceLost(info); };
+    return gpu;
+  }
+
+  async _createTrainer(options) {
+    this._assertActive();
+    const trainer = await GSTrainer.create(options);
+    if (this._disposed) {
+      trainer.dispose();
+      this._assertActive();
+    }
+    this.trainer = trainer;
+    return trainer;
+  }
 
   /** Decode photographs into Frames. files: File[]/Blob[]/{source,name}[]
    *  360 equirectangular panos (2:1 aspect) are detected here and sliced
    *  into six-face cubemap rigs — the solver then treats each pano as ONE
    *  camera pose and the trainer sees ordinary pinhole faces. */
   async load(files) {
+    this._assertActive();
     this._stage({ stage: 'decode', done: 0, total: files.length });
     const { prepared, rigs, focalNative, faceSize } = await this._slicePanos(files);
-    this.frames = await decodeFrames(prepared, {
-      ...this.opts.frames, log: (m) => this._log(m),
+    this._assertActive();
+    const frames = await decodeFrames(prepared, {
+      ...this.opts.frames, signal: this._lifetime.signal, log: (m) => this._log(m),
     });
+    this._assertActive();
+    this.frames = frames;
     this._stage({ stage: 'decode', done: this.frames.length, total: files.length });
     if (this.frames.length < 2) throw new Error('need at least 2 decodable images');
     if (rigs) {
@@ -185,9 +219,11 @@ export class Session {
     const meta = [];
     let panos = 0, sized = 0, maxW = 0;
     for (const f of files) {
+      this._assertActive();
       const src = f && f.source !== undefined ? f.source : f;
       const name = (f && f.name) || (src && src.name) || `image_${meta.length}`;
       const dims = await probeImageSize(src);
+      this._assertActive();
       const pano = !!dims && isEquirect(dims.w, dims.h);
       if (dims) sized++;
       if (pano) { panos++; maxW = Math.max(maxW, dims.w); }
@@ -204,9 +240,13 @@ export class Session {
     const prepared = [], rigs = [];
     let f = 0, rigId = 0;
     for (const b of meta) {
+      this._assertActive();
       const bmp = await createImageBitmap(b.src);
-      const sl = sliceEquirect(bmp, size);
-      bmp.close?.();
+      let sl;
+      try {
+        this._assertActive();
+        sl = sliceEquirect(bmp, size);
+      } finally { bmp.close?.(); }
       f = sl.f;
       const base = b.name.replace(/\.[^.]+$/, '');
       sl.faces.forEach((cv, k) => {
@@ -221,10 +261,23 @@ export class Session {
   }
 
   /** Use frames prepared elsewhere (e.g. processSource on fetched bitmaps). */
-  useFrames(frames) { this.frames = frames; return frames; }
+  useFrames(frames) { this._assertActive(); this.frames = frames; return frames; }
 
   /** Structure from motion: camera poses + sparse points from the frames. */
   async solve(extra = {}) {
+    this._assertActive();
+    const controller = new AbortController();
+    const signals = [this._lifetime.signal, extra.signal].filter(Boolean);
+    const cancel = () => controller.abort();
+    for (const signal of signals) {
+      signal.addEventListener('abort', cancel, { once: true });
+      if (signal.aborted) cancel();
+    }
+    try { return await this._solve({ ...extra, signal: controller.signal }); }
+    finally { for (const signal of signals) signal.removeEventListener('abort', cancel); }
+  }
+
+  async _solve(extra = {}) {
     const opts = { ...this.opts.sfm, ...extra };
     if (this.rigInfo && !opts.rigs) {
       opts.rigs = this.rigInfo;
@@ -277,11 +330,9 @@ export class Session {
     }
     // the GPU matcher shares the session device (created here rather than at
     // seed) — it carries the raised buffer limits big feature sets need
-    if (!this.gpu) {
-      this.gpu = await createGpu({ device: this.opts.device });
-      this.gpu.onLost = (info) => this._deviceLost(info);
-    }
-    this.recon = await runSfM(
+    await this._getGpu();
+    this._assertActive();
+    const recon = await runSfM(
       this.frames,
       (m) => this._log(m),
       (imgIdx, x, y) => this.frames[imgIdx].sampleColor(x, y),
@@ -291,6 +342,9 @@ export class Session {
         onEvent: (e) => { this._stage(e); if (opts.onEvent) opts.onEvent(e); },
         debug: (d) => { this._debug = d; if (opts.debug) opts.debug(d); },
       });
+    this._assertActive();
+    if (opts.signal?.aborted) throw new DOMException('SfM aborted', 'AbortError');
+    this.recon = recon;
     if (undistortFrames(this.frames, this.recon)) {
       this._log(`undistorted training images (k1 ${this.recon.k1.toFixed(4)}, k2 ${this.recon.k2.toFixed(4)})`);
     }
@@ -308,6 +362,7 @@ export class Session {
 
   /** Load a reconstruction obtained elsewhere ({ cams, points, ... }). */
   useReconstruction(recon) {
+    this._assertActive();
     this.recon = { k1: 0, k2: 0, fScale: 1, medErr: 0, rmsBA: null, ...recon };
     // stored/external recons (a resumed run, a GT solve) usually lack fFeat.
     // undistortFrames divides by it — undefined turned EVERY target pixel
@@ -401,11 +456,16 @@ export class Session {
     return hull;
   }
 
-  /** Seed Gaussians from the sparse cloud and set up the WebGPU trainer. */
+  /** Seed Gaussians from the sparse cloud and set up the WebGPU trainer.
+   *  extra.seedLimit optionally bounds base + appended rows, reserving append capacity first.
+   *  model.appendedSeedCount reports how many appended rows actually fit. */
   async seed(extra = {}) {
+    this._assertActive();
     if (!this.recon) throw new Error('solve() first');
     this._stage({ stage: 'seed', done: 0, total: 1 });
     const allPoints = this.recon.points;
+    if (!allPoints?.length)
+      throw new Error('The camera solve found no 3D points. Try a steadier stretch with more textured detail.');
     // opts.maskTraining === false: the mattes stay on the frames (the hull and
     // the cut after training read them) but training does not see them — no
     // seed filter, no hull kill, no random background, alpha 255 in the
@@ -432,23 +492,63 @@ export class Session {
     // at 6k cycles, 2 dB down). Lift the cap when the cloud is small so the
     // seed still reaches the target.
     const cloneCap = this.recon.points.length < 5000 ? 200 : 24;
-    const clones = Math.min(cloneCap, Math.max(2, Math.round(target / this.recon.points.length) - 1));
+    const desiredClones = Math.min(cloneCap, Math.max(2, Math.round(target / this.recon.points.length) - 1));
     const v2 = this.opts.trainer && this.opts.trainer.engine === 'v2';
-    this.model = initGaussians(this.recon.points, clones, undefined,
-      v2 ? { dc: 'sh', randRot: true } : {});
-    // extra.appendGaussians: ready-made rows (stride 16, sigmoid-DC convention) joined to
-    // the cloud seed as they are — flat, oriented, sized (a face mesh seed, avatar mode)
-    if (extra.appendGaussians && extra.appendGaussians.n > 0) {
-      const g = extra.appendGaussians; const m = this.model; const merged = new Float32Array((m.n + g.n) * 16);
-      merged.set(m.data.subarray(0, m.n * 16), 0); merged.set(g.data.subarray(0, g.n * 16), m.n * 16);
-      this.model = { ...m, data: merged, n: m.n + g.n };
-      this._appendedSeed = { from: m.n, to: m.n + g.n, protectIters: g.protectIters || 0, freezePos: !!g.freezePos };
-      this._log(`+ ${g.n} seed Gaussians appended (${g.note || 'ready-made'})${g.protectIters ? `, protected from relocation for ${g.protectIters} iterations` : ''}`);
+    const convention = v2 ? { dc: 'sh', randRot: true } : {};
+    const appended = extra.appendGaussians;
+    let appendCount = appended?.n > 0 ? appended.n : 0;
+    this._appendedSeed = null;
+    if (extra.seedLimit != null) {
+      if (!Number.isInteger(extra.seedLimit) || extra.seedLimit < 1)
+        throw new Error('seedLimit must be a positive integer');
+      const limit = Math.min(extra.seedLimit, extra.trainer?.maxSplats ?? this.opts.trainer?.maxSplats ?? 600000);
+      appendCount = Math.min(appendCount, limit);
+      const baseLimit = limit - appendCount;
+      const all = this.recon.points;
+      // Keep coverage of the full cloud if one original per point cannot fit. Never take a
+      // prefix: solver ordering is capture-dependent and can otherwise erase a whole region.
+      const points = baseLimit > 0 && baseLimit < all.length
+        ? Array.from({ length: baseLimit }, (_, i) => all[Math.floor((i + 0.5) * all.length / baseLimit)])
+        : all;
+      const clones = Math.min(desiredClones, Math.max(0, Math.ceil(baseLimit / points.length) - 1));
+      const baseCount = Math.min(baseLimit, points.length * (clones + 1));
+      const complete = initGaussians(points, clones, baseCount ? points.length * (clones + 1) : 0, convention);
+      if (clones > 0) {
+        // initGaussians groups each original with its clones. A prefix cut would lose later
+        // originals even when one per point fits, so retain every original before extra copies.
+        const data = new Float32Array(baseCount * 16);
+        for (let i = 0; i < points.length; i++)
+          data.set(complete.data.subarray(i * (clones + 1) * 16, (i * (clones + 1) + 1) * 16), i * 16);
+        const extraCount = baseCount - points.length;
+        for (let i = 0; i < extraCount; i++) {
+          const index = Math.floor((i + 0.5) * points.length * clones / extraCount);
+          const row = Math.floor(index / clones) * (clones + 1) + index % clones + 1;
+          data.set(complete.data.subarray(row * 16, (row + 1) * 16), (points.length + i) * 16);
+        }
+        this.model = { ...complete, data, n: baseCount };
+      } else this.model = complete;
+    } else {
+      // Keep the established count, clone cap, and parameter bytes when no limit is requested.
+      this.model = initGaussians(this.recon.points, desiredClones, undefined, convention);
+    }
+    // Ready-made rows use the sigmoid-DC convention. Reserve their capacity before sparse
+    // clones so a trainer ceiling cannot silently truncate all appended surface detail.
+    this.model.appendedSeedCount = appendCount;
+    if (appendCount > 0) {
+      const g = appended, m = this.model, merged = new Float32Array((m.n + appendCount) * 16);
+      merged.set(m.data.subarray(0, m.n * 16), 0);
+      for (let i = 0; i < appendCount; i++) {
+        const index = Math.floor((i + 0.5) * g.n / appendCount);
+        merged.set(g.data.subarray(index * 16, (index + 1) * 16), (m.n + i) * 16);
+      }
+      this.model = { ...m, data: merged, n: m.n + appendCount };
+      this._appendedSeed = { from: m.n, to: m.n + appendCount, protectIters: g.protectIters || 0, freezePos: !!g.freezePos };
+      this._log(`+ ${appendCount} seed Gaussians appended (${g.note || 'ready-made'})${g.protectIters ? `, protected from relocation for ${g.protectIters} iterations` : ''}`);
     }
     this._log(`initialized ${this.model.n} Gaussians (scene radius ${this.model.radius.toFixed(2)})`);
 
-    if (!this.gpu) this.gpu = await createGpu({ device: this.opts.device });
-    this.gpu.onLost = (info) => this._deviceLost(info);
+    await this._getGpu();
+    this._assertActive();
     const gi = this.gpu.info || {};
     // opts.shHorizontal: SH evaluated on the view direction's horizontal part only —
     // the up axis is the cameras' dominant up (minus each R's second row)
@@ -464,7 +564,8 @@ export class Session {
       ...this.opts.trainer, ...extra.trainer,
       gpu: this.gpu,
     };
-    this.trainer = await GSTrainer.create(trainerOpts);
+    await this._createTrainer(trainerOpts);
+    this._assertActive();
     this._log(`GPU: ${gi.vendor || 'unknown'} ${gi.architecture || ''} — ` +
       `${this.trainer.tileGrad ? 'tile-shared' : 'direct'} gradient accumulation`);
 
@@ -483,6 +584,12 @@ export class Session {
     const maxW = Math.max(this.opts.maxViewW ?? 2560, ...cams.map((c) => c.w));
     const maxH = Math.max(this.opts.maxViewH ?? 1440, ...cams.map((c) => c.h));
     this._setupTrainer(cams, this.frames, maxW, maxH, this.model.radius);
+    if (this._appendedSeed) {
+      const a = this._appendedSeed;
+      this.model.appendedSeedCount = Math.max(0, Math.min(a.to, this.trainer.n) - a.from);
+      a.to = a.from + this.model.appendedSeedCount;
+      if (!this.model.appendedSeedCount) this._appendedSeed = null;
+    }
     if (this.opts.lowMem) {
       // targets now live on the GPU (packed RGBA8); the float32 CPU copies
       // are 3x that size and nothing reads them after setup
@@ -626,13 +733,14 @@ export class Session {
    * schedules where the saved run stopped.
    */
   async seedFrom(gaussians, opts = {}) {
+    this._assertActive();
     if (!this.recon && !opts.viewOnly) throw new Error('useReconstruction() first');
     this._stage({ stage: 'seed', done: 0, total: 1 });
     const radius = opts.sceneRadius ?? this.recon?.sceneRadius ?? 10;
     this.model = { data: gaussians.data, n: gaussians.n, radius, dc: gaussians.dc };
 
-    if (!this.gpu) this.gpu = await createGpu({ device: this.opts.device });
-    this.gpu.onLost = (info) => this._deviceLost(info);
+    await this._getGpu();
+    this._assertActive();
     const shUp2 = this.opts.shHorizontal && this.recon?.cams?.length ? this._camerasUp() : null;
     const trainerOpts = {
       maxIters: this.opts.maxIters ?? 60000,
@@ -645,7 +753,8 @@ export class Session {
       gpu: this.gpu,
     };
     if (gaussians.shK != null) trainerOpts.shDeg = { 0: 0, 3: 1, 8: 2, 15: 3 }[gaussians.shK] ?? trainerOpts.shDeg;
-    this.trainer = await GSTrainer.create(trainerOpts);
+    await this._createTrainer(trainerOpts);
+    this._assertActive();
 
     let cams = [];
     if (!opts.viewOnly) {
@@ -727,10 +836,12 @@ export class Session {
   /** End the run early with the model as it stands: final metrics, then the
    *  same train-complete event an auto-stop emits. */
   async finish() {
+    this._assertActive();
     if (!this.trainer) return;
     this.training = false;
     this._log(`training finished early at ${this.trainer.iter} iterations`);
     await this._emitMetrics(true);
+    this._assertActive();
     this._camDriftDone();
     this._em.emit('event', { kind: 'train-complete', iter: this.trainer.iter, splats: this.trainer.n });
   }
@@ -756,6 +867,7 @@ export class Session {
   /** Rebuild after device loss: a fresh device and trainer from the CPU-side
    *  reconstruction. Training restarts at iteration 0. */
   async recover() {
+    this._assertActive();
     if (!this.recon) throw new Error('nothing to recover — no reconstruction');
     this.training = false;
     this._lost = false;
@@ -838,8 +950,8 @@ export class Session {
       // adapts to the device: ~120ms of GPU work per frame keeps a desktop
       // GPU saturated with few submits AND keeps metrics/UI alive on a phone
       // where the same 15 iterations could take seconds.
-      const batch = this.opts.itersPerFrame ??
-        Math.max(4, Math.min(64, Math.round(this._batch ?? 15)));
+      const batch = Math.min(this._maxIters() - trainer.iter, this.opts.itersPerFrame ??
+        Math.max(4, Math.min(64, Math.round(this._batch ?? 15))));
       const t0 = performance.now();
       // true throughput, stall time included: Safari's stale fences hide the
       // GPU's real pace from per-frame dt, and a slow GPU otherwise ends up
@@ -864,6 +976,7 @@ export class Session {
         // submitted meanwhile would be silently rewound by that write-back,
         // and the six snapshots would come from six different iterations
         const r = await trainer.refine();
+        if (this._disposed) return;
         if (this.perf) {
           this.perf.marks.push({ t: Math.round(r0), kind: 'refine', iter: trainer.iter,
             ms: Math.round(performance.now() - r0), moved: r.moved, grown: r.grown });
@@ -928,7 +1041,7 @@ export class Session {
       await trainer.device.queue.onSubmittedWorkDone();
       this._fences.length = 0;
     }
-    if (this.training || this.view._dirty) this._scheduleFrame();
+    if (!this._disposed && (this.training || this.view._dirty)) this._scheduleFrame();
   }
 
   /** serialize every metric readback: they share the trainer's staging
@@ -936,6 +1049,7 @@ export class Session {
    *  device readbacks would hang forever — fail fast instead. */
   _locked(fn) {
     const call = () => {
+      this._assertActive();
       if (this._lost) throw new Error('GPU device lost');
       return fn();
     };
@@ -1066,10 +1180,20 @@ export class Session {
   }
 
   dispose() {
+    if (this._disposed) return;
+    this._disposed = true;
+    this._lifetime.abort();
     this.training = false;
+    this._framePending = false;
     if (this._sched && this._sched.tickWorker) this._sched.tickWorker.terminate();
-    if (this.gpu && this.gpu.owned) this.gpu.dispose();
+    this.trainer?.dispose();
     this.trainer = null;
+    this.view.ctx?.unconfigure?.();
+    if (this.gpu) {
+      this.gpu.onLost = null;
+      if (this.gpu.owned) this.gpu.dispose();
+    }
+    this.gpu = null;
   }
 }
 
