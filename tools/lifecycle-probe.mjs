@@ -364,7 +364,10 @@ export async function hiddenSample(page) {
   return { before, after };
 }
 
-async function timers(page, cdp) {
+async function timers(page, cdp, save = async () => {}) {
+  // Timer ownership does not depend on raster resolution. Keep the phone layout, but reduce
+  // the stage's offscreen render target so 240 real toy builds do not benchmark SwiftShader.
+  await page.evaluate(() => window.__splashery.player.stage.setFixedSize([96, 96]));
   const toys = [];
   for (const id of ["sound-lab", "song-landscape", "chess-set", "toy-piano"]) {
     await choose(page, id);
@@ -396,6 +399,8 @@ async function timers(page, cdp) {
       closed: await snapshot(page),
       after: await heap(cdp),
     });
+    await save({ toys });
+    process.stderr.write(`  ${id}: 20 rebuilds and 20 switches\n`);
   }
   // Exercise the real Video to 3D lifecycle helpers against the live player without training a
   // video or fetching a large capture. This isolates ownership and disposal from reconstruction.
@@ -449,6 +454,8 @@ async function timers(page, cdp) {
     delete window.__life.card;
   });
   await settle(page);
+  const helperClosed = await snapshot(page);
+  await save({ toys, helpers, helperHidden, helperClosed });
   // Recording timers are take-scoped, rather than toy-scoped. Use real MediaRecorder and a tiny
   // canvas; the test pattern contains no external media, audio, or permissions.
   const recording = await page.evaluate(async () => {
@@ -460,6 +467,10 @@ async function timers(page, cdp) {
     const counts = [];
     for (let i = 0; i < 20; i++) {
       const rec = startRecording({ canvas, maxSeconds: 2 });
+      canvas.getContext("2d").fillStyle = i % 2 ? "red" : "blue";
+      canvas.getContext("2d").fillRect(0, 0, 64, 64);
+      await new Promise(requestAnimationFrame);
+      rec.frame();
       if (i === 19) {
         Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
         Object.defineProperty(document, "visibilityState", {
@@ -470,13 +481,18 @@ async function timers(page, cdp) {
       await new Promise((r) => setTimeout(r, 300));
       if (i === 19) counts.push({ open: window.__life.snapshot() });
       rec.stop();
-      const done = await rec.done;
-      counts.push({ cycle: i + 1, bytes: done.blob.size, closed: window.__life.snapshot() });
+      try {
+        const done = await rec.done;
+        counts.push({ cycle: i + 1, bytes: done.blob.size, closed: window.__life.snapshot() });
+      } catch (error) {
+        counts.push({ cycle: i + 1, error: error.message, closed: window.__life.snapshot() });
+      }
       delete document.hidden;
       delete document.visibilityState;
     }
     return counts;
   });
+  await save({ toys, helpers, helperHidden, helperClosed, recording });
   const retries = [];
   for (const id of ["qr-code", "qr-damage"]) {
     const checkpoints = [];
@@ -490,13 +506,15 @@ async function timers(page, cdp) {
     // The two scan-readiness retries have explicit bounds of 40 and 60 attempts.
     await page.waitForTimeout(id === "qr-code" ? 10500 : 15500);
     retries.push({ id, checkpoints, hidden, expired: await snapshot(page) });
+    await save({ toys, helpers, helperHidden, helperClosed, recording, retries });
+    process.stderr.write(`  ${id}: 20 switches, retries expired\n`);
   }
   const activeLive = await livePanel(page, cdp);
   return {
     toys,
     helpers,
     helperHidden,
-    helperClosed: await snapshot(page),
+    helperClosed,
     recording,
     retries,
     activeLive,
@@ -598,7 +616,14 @@ export async function runProbe({
         else {
           const { context, page, cdp } = await openProbePage(browser, base);
           try {
-            row[name] = await { clay, video, timers, live: livePanel }[name](page, cdp);
+            row[name] = await { clay, video, timers, live: livePanel }[name](
+              page,
+              cdp,
+              async (partial) => {
+                row[name] = partial;
+                if (out) await fs.writeFile(out, JSON.stringify(result, null, 2) + "\n");
+              },
+            );
           } finally {
             await context.close();
           }
