@@ -375,12 +375,17 @@ export async function videoTo3D(file, opts = {}) {
           "The graphics card could not finish this scene in time. Try the Phone-safe setting, or a shorter stretch.",
       });
     } catch (error) {
-      log.push(`Scene finishing failed: ${error?.message || error}`);
+      // This optional display fit never changes the trained model. A slow readback should
+      // keep that model on its original black background, rather than discard a completed bake.
+      // The engine serializes export behind the canceled fit's readback cleanup.
+      backgroundFit = { accepted: false, reason: "fit-unavailable", error: error?.message || String(error) }; // prettier-ignore
+      log.push(`Background fitting unavailable; keeping the trained model: ${backgroundFit.error}`);
+    }
+    mark("background");
+    if (s.deviceLost || s.trainingError)
       throw new Error(
         "The graphics card could not finish this scene. Try the Phone-safe setting, or a shorter stretch.",
       );
-    }
-    mark("background");
     const blob = await runWithDeadline(() => s.exportPlyBlob(), {
       timeoutMs: 60000,
       message:
