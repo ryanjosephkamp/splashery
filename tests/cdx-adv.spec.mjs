@@ -18,9 +18,9 @@ for (const id of ["photo-3d", "moving-photo-3d", "qr-code", "qr-picture", "qr-th
 for (const id of ["qr-code", "qr-picture", "qr-three", "share-qr"]) {
   test(`${id} exports a PNG that both readers decode exactly`, async ({ page, baseURL }) => {
     await openRoute(page, id === "share-qr" ? "qr-code" : id, baseURL);
-    const { png, payload } = await exportCode(page, id);
+    const { png, payload, decodeOptions } = await exportCode(page, id);
     if (id !== "share-qr") expect(payload).toBe(PAYLOAD);
-    expect(await decodePNG(page, await phonePNG(page, png))).toEqual({
+    expect(await decodePNG(page, await phonePNG(page, png), decodeOptions)).toEqual({
       jsqr: payload,
       zxing: payload,
     });
