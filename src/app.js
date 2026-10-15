@@ -1595,11 +1595,29 @@ class App {
     const scene = this.exportScene();
     const blob = new Blob([JSON.stringify(scene, null, 2)], { type: "application/json" });
     downloadBlob(blob, timestampName("json"));
-    this.ui.toast("Scene saved as JSON.");
+    const note = this.sceneSaveNote(scene);
+    this.ui.toast(
+      ["Scene saved as JSON.", note].filter(Boolean).join(" "),
+      note ? 10000 : undefined,
+    );
+  }
+
+  sceneSaveNote(scene) {
+    const clay = (this.player.proc?.clay.length || 0) - (scene.toy.clay?.length || 0);
+    const paint = this.player.scene.paint.stamps.length - scene.paint.stamps.length;
+    const omitted = [];
+    if (clay > 0) omitted.push(`${clay} clay edit${clay === 1 ? "" : "s"}`);
+    if (paint > 0) omitted.push(`${paint} paint stamp${paint === 1 ? "" : "s"}`);
+    return omitted.length
+      ? `The newest ${omitted.join(" and ")} ${clay + paint === 1 ? "was" : "were"} not included. Save limits are 2,000 clay edits and 4,000 paint stamps.`
+      : "";
   }
 
   async copyLink() {
-    const res = await buildShareHash(this.exportScene());
+    const scene = this.exportScene();
+    const res = await buildShareHash(scene);
+    const note = this.sceneSaveNote(scene);
+    if (note) res.notes.push(note);
     if (!res.ok) {
       this.ui.setLinkNote(res.notes.join(" "));
       this.ui.toast("The scene is too big for a link. Save JSON instead.", 5000);
@@ -1628,7 +1646,10 @@ class App {
   }
 
   async updateEmbed() {
-    const res = await buildShareHash(this.exportScene());
+    const scene = this.exportScene();
+    const res = await buildShareHash(scene);
+    const saveNote = this.sceneSaveNote(scene);
+    if (saveNote) res.notes.push(saveNote);
     const transparent = this.ui.embedTransparent();
     const size = this.ui.embedSize();
     if (!res.ok) {
