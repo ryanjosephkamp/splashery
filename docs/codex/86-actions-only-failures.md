@@ -16,11 +16,11 @@ because the shipped manual PDF is out of date. All of these are on the "known" l
 ## The work
 
 1. **Each Actions-only failure, at its cause.** Reproduce it on Actions (push your branch; the
-   workflow runs on your PR, and `workflow_dispatch` lets you rerun it). Find what differs on the
-   runner (timing, the software renderer `SPLASHERY_GL=llvmpipe`, fonts, audio devices, the display)
-   and make the test wait for a real ready signal or measure the right thing. Never add retries,
-   skip or `fixme` a test, or loosen an assertion to get green; if a test checks the wrong thing,
-   say why and fix the check. Never edit `tests/taps.spec.mjs`.
+   Operator adds the `full-suite` label to your PR, so the whole suite runs on each push). Find what
+   differs on the runner (timing, the software renderer `SPLASHERY_GL=llvmpipe`, fonts, audio
+   devices, the display) and make the test wait for a real ready signal or measure the right thing.
+   Never add retries, skip or `fixme` a test, or loosen an assertion to get green; if a test checks
+   the wrong thing, say why and fix the check. Never edit `tests/taps.spec.mjs`.
 2. **The manual's PDF.** The man5 test compares the shipped PDF with a fresh print, and the print
    needs Chromium's sandbox, which works on Actions. Add a workflow,
    `.github/workflows/manual-pdf.yml`, run by hand (`workflow_dispatch`), that prints the PDF with
