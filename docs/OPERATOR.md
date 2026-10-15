@@ -22,6 +22,13 @@ Operator does the handover:
 - moves the routines;
 - stands by for a day without acting unless asked.
 
+Session depth (learned October 15, 2026): each session started by another is one level deeper, and
+`get_session` shows it as `lineage` (`depth` and `limit`, 8 today). A session at the limit can't
+start sessions, so an Operator there couldn't start lanes. When the outgoing Operator's depth is one
+short of the limit or more, it doesn't start its successor: the owner starts the new Operator
+himself, as a new session on the Splashery repo in the Claude app, with the first prompt from the
+handover skill. That resets the depth.
+
 The steps, the new Operator's first prompt and the readback are in
 `.claude/skills/operator-handover/SKILL.md`. The daily digest reports the Operator's age, context
 size and compactions every morning (the owner's request of October 10, 2026), so a handover that's
