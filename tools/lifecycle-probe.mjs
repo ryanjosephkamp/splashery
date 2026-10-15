@@ -510,6 +510,7 @@ async function timers(page, cdp, save = async () => {}) {
     process.stderr.write(`  ${id}: 20 switches, retries expired\n`);
   }
   const activeLive = await livePanel(page, cdp);
+  const stageRecording = await stageRecorders(page, cdp);
   return {
     toys,
     helpers,
@@ -518,7 +519,53 @@ async function timers(page, cdp, save = async () => {}) {
     recording,
     retries,
     activeLive,
+    stageRecording,
   };
+}
+
+async function stageRecorders(page, cdp) {
+  const before = await heap(cdp);
+  const takes = await page.evaluate(async () => {
+    const { StageRecorder } = await import("/src/live/record.js");
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 64;
+    const ctx = canvas.getContext("2d");
+    const pixels = ctx.createImageData(64, 64);
+    let seed = 1;
+    const draw = () => {
+      for (let i = 0; i < pixels.data.length; i += 4) {
+        seed = (seed * 16807) % 2147483647;
+        const v = seed % 256;
+        pixels.data.set([v, 255 - v, v ^ 85, 255], i);
+      }
+      ctx.putImageData(pixels, 0, 0);
+    };
+    const takes = [];
+    for (let i = 0; i < 20; i++) {
+      let rec;
+      const done = new Promise((resolve) => {
+        rec = new StageRecorder(canvas, { onStop: resolve });
+      });
+      const paint = setInterval(draw, 33);
+      draw();
+      if (i === 19)
+        Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
+      await new Promise((r) => setTimeout(r, 650));
+      if (i === 19) takes.push({ open: window.__life.snapshot() });
+      rec.stop();
+      await done;
+      clearInterval(paint);
+      delete document.hidden;
+      takes.push({
+        cycle: i + 1,
+        bytes: rec.blob?.size || 0,
+        empty: rec.empty,
+        closed: window.__life.snapshot(),
+      });
+    }
+    return takes;
+  });
+  return { before, takes, after: await heap(cdp) };
 }
 
 async function livePanel(page, cdp) {
@@ -616,14 +663,16 @@ export async function runProbe({
         else {
           const { context, page, cdp } = await openProbePage(browser, base);
           try {
-            row[name] = await { clay, video, timers, live: livePanel }[name](
-              page,
-              cdp,
-              async (partial) => {
-                row[name] = partial;
-                if (out) await fs.writeFile(out, JSON.stringify(result, null, 2) + "\n");
-              },
-            );
+            row[name] = await {
+              clay,
+              video,
+              timers,
+              live: livePanel,
+              stageRecording: stageRecorders,
+            }[name](page, cdp, async (partial) => {
+              row[name] = partial;
+              if (out) await fs.writeFile(out, JSON.stringify(result, null, 2) + "\n");
+            });
           } finally {
             await context.close();
           }
