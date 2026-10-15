@@ -19,6 +19,8 @@ async function open(page, id) {
   await page.waitForTimeout(500);
   await page.click("#hands-toggle");
   await tick(page, 5);
+  // tick()/drag() own the physics clock; driveOnce() must read that same step.
+  await page.evaluate(() => (window.__splashery.player.stage.updateHandlers = []));
 }
 
 // Steps the clock by hand (SwiftShader draws slowly).

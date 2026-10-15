@@ -98,11 +98,15 @@ async function drawOnPad(page, strokes, per = 10) {
 
 // The pad's cells, read through its "Read my digit" button.
 async function padCells(page) {
+  const pad = await page.locator("#toy-input-pad").elementHandle();
   await page.click("#toy-input-pad-go");
-  await page.waitForFunction(() =>
-    /^pad:/.test(window.__splashery.app.player.scene.toy.options?.digit || ""),
-  );
+  // The option changes before the asynchronous rebuild. On the second read
+  // it already starts with "pad:", so that alone can return the previous input
+  // and let the next stroke land on a pad the rebuild is about to replace.
+  await page.waitForFunction((old) => !old.isConnected && !window.__splashery.player.loading, pad);
+  await pad.dispose();
   const text = await page.evaluate(() => window.__splashery.app.player.scene.toy.options.digit);
+  expect(text).toMatch(/^pad:/);
   return text.slice(4).split(",").map(Number);
 }
 
