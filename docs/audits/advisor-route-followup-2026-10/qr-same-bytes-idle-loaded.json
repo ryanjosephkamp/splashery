@@ -1,0 +1,549 @@
+{
+  "sha256": "a076f364f9f42d84c841a9dc345833acd54e212ff57837b165ebbc3eff03a8d5",
+  "width": 390,
+  "height": 390,
+  "idle": [
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    }
+  ],
+  "loaded": [
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    },
+    {
+      "jsqr": true,
+      "zxing": false,
+      "error": "FormatException",
+      "detectorGrid": 73,
+      "points": [
+        {
+          "x": 26,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 364,
+          "y": 26,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 319,
+          "y": 202,
+          "pitch": 3.4285714285714284
+        },
+        {
+          "x": 36.5,
+          "y": 188
+        }
+      ]
+    }
+  ]
+}

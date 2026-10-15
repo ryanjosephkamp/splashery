@@ -1,0 +1,5 @@
+- region "Open the shared file":
+  - heading "Open the shared file" [level=2]
+  - status: “scene” wasn't included in this scene. The original file stays on the sender's device. Open the same file on your device to use these settings. The sample is shown meanwhile.
+  - button "Open the file"
+  - button "Keep the sample"

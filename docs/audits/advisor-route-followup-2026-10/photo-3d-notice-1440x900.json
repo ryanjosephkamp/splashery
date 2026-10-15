@@ -1,0 +1,32 @@
+{
+  "toyId": "photo-3d",
+  "buildCommit": "7805082258dafdf0acd3e84b5f5c0170e2ce71af",
+  "recordedAt": "2026-10-15T15:02:36.066Z",
+  "browserVersion": "151.0.7922.173",
+  "backend": "webgl2",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "url": "http://127.0.0.1:4173/#s=d.fVPLctswDPwX5Cp75IeSiW79gV7aUzs5QBRss6ZFDglZcTP-9wJwlGaSaX2RQWKxWGD5ApgStFBSwHKgfIEKzpSLjwO0mwpcJmTqv7DkrOv1_WJVL1bN99W2bR7a-nG53TQ_BFKIemhXFXC8QPsCRz9IDN3oA_tBEryG6RA5Lja9xDGxUBTNPXuatIMD5iQ3PSU-QFsvHxqpG8fsSG7dWDie5NpqfMWTHhZHA8H1WkGI8ai1OnTHfY6jsSfckyD4QJaNI0cJ0QmK_8aqnL85DGQC6DnFMmYNpC7tduTY2kzxSPrVwewwFBIoZxr2t27vK5hi12mVetkIdLIR_DO_EXW9z1LdRl1fNSwlhvMnliQ76GdMSTbqG0efY_qQ3Yl4Z01sNdshM-U5_4T7gfg_XT1UkLH3Y7kVEAhPvnxE4ElI2Iq-Vy12wWcvULiAIEvw7qMWma1_FSwJE1EyYPOGfFZkQj986tL_plfGm1dfAxdDFH1wR_ebbn1zwxu-MJ6SlP35JKdOTJNRjy84zbTJs7NSq7VIjyFYZ7IJRhvjZrkVqFpFSM3aPOaB0SRzHmn2iLQwRHWj0uvMB00229t5BbuAe4nUwzn-mhcPU0a1faYkL62YB02Ttg13O_vJ_axP_tXddvfo4MnWG-apzEtZ6RNi9MFcqUuPN6YXwODPb22f4tneEHsR_d5Xyj-wzMJsL13rpq_X6x8",
+  "title": "Splashery · splats you can play with",
+  "fileNameFromMetadata": "scene",
+  "noticeText": "Open the shared file\n\n“scene” wasn't included in this scene. The original file stays on the sender's device. Open the same file on your device to use these settings. The sample is shown meanwhile.\n\nOpen the file\nKeep the sample",
+  "noticeBox": {
+    "x": 18,
+    "y": 86,
+    "width": 448,
+    "height": 178.625
+  },
+  "depthDialBox": {
+    "x": 992,
+    "y": 326,
+    "width": 44,
+    "height": 248
+  },
+  "consoleAndPageErrors": [],
+  "screenshot": "photo-3d-notice-1440x900.png",
+  "bytes": 950101,
+  "sha256": "e957a3ef205674a4aacf113f8b74820973062fec416af99f8c06fa98d8d6792f",
+  "accessibilityTree": "photo-3d-notice-1440x900-aria.txt"
+}

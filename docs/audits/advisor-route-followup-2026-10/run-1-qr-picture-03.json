@@ -1,0 +1,285 @@
+{
+  "buildCommit": "7805082258dafdf0acd3e84b5f5c0170e2ce71af",
+  "recordedAt": "2026-10-15T14:56:35.009Z",
+  "browser": "151.0.7922.173",
+  "runtime": {
+    "node": "v24.19.0",
+    "platform": "linux",
+    "arch": "x64"
+  },
+  "launch": {
+    "executablePath": "/usr/bin/chromium",
+    "headless": true,
+    "args": [
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--ignore-gpu-blocklist",
+      "--enable-webgl"
+    ]
+  },
+  "realGPURequested": false,
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "deviceScaleFactor": 1,
+  "payload": "https://ryanjosephkamp.github.io/splashery/",
+  "sceneSeed": 1,
+  "fixtures": {
+    "tests/fixtures/p3d/scene.jpg": {
+      "synthetic": true,
+      "bytes": 1835,
+      "sha256": "0d5fd4f8ed0a39c86573ca7194a38a710f45e66252785e8e5813ceac3f81645b"
+    },
+    "tests/fixtures/psv3/silent.webm": {
+      "synthetic": true,
+      "bytes": 28808,
+      "sha256": "eaed57b71acf72629ec41e21b08bb67ccbf2aa36b7d0613d45d41c87422eab42"
+    }
+  },
+  "browserPlugin": "Browser plugin not available; task 84 explicitly requests Playwright",
+  "automation": "Real browser, shipped media, real depth inference, no route or model mocks; app hooks used for deterministic controls",
+  "repetition": 1,
+  "toyId": "qr-picture",
+  "owner": "tasks 79 and 80",
+  "step": 3,
+  "name": "Native-size exported decode",
+  "fixture": "shipped sample",
+  "expected": "Both readers also decode the untouched native-size exported PNG",
+  "result": "passed",
+  "evidence": ["run-1-qr-picture-03.png"],
+  "logs": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": []
+  },
+  "qr": {
+    "payload": "https://ryanjosephkamp.github.io/splashery/",
+    "decoded": {
+      "jsqr": "https://ryanjosephkamp.github.io/splashery/",
+      "zxing": "https://ryanjosephkamp.github.io/splashery/"
+    },
+    "settings": {
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "shape": "square",
+        "picture": "ai-farm",
+        "contrast": 0.5,
+        "center": "small",
+        "level": "H",
+        "style": "color",
+        "size": "more"
+      },
+      "metrics": {
+        "module": 3.597154927288817,
+        "center": 18.375705646557403,
+        "darkGray": 0.3004317934609955,
+        "lightGray": 0.6618815659531899,
+        "gap": -0.9186804204928688
+      },
+      "assumed": {
+        "quietModules": 4
+      },
+      "error": ""
+    }
+  },
+  "actual": {
+    "payload": "https://ryanjosephkamp.github.io/splashery/",
+    "decoded": {
+      "jsqr": "https://ryanjosephkamp.github.io/splashery/",
+      "zxing": "https://ryanjosephkamp.github.io/splashery/"
+    },
+    "settings": {
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "shape": "square",
+        "picture": "ai-farm",
+        "contrast": 0.5,
+        "center": "small",
+        "level": "H",
+        "style": "color",
+        "size": "more"
+      },
+      "metrics": {
+        "module": 3.597154927288817,
+        "center": 18.375705646557403,
+        "darkGray": 0.3004317934609955,
+        "lightGray": 0.6618815659531899,
+        "gap": -0.9186804204928688
+      },
+      "assumed": {
+        "quietModules": 4
+      },
+      "error": ""
+    }
+  },
+  "durationMs": 67,
+  "stepLogs": {
+    "consoleErrors": [],
+    "pageErrors": [],
+    "failedRequests": [],
+    "httpErrors": []
+  },
+  "state": {
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2",
+    "title": "Splashery · splats you can play with",
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+    "toyId": "qr-picture",
+    "options": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "shape": "square"
+    },
+    "resolvedOptions": {
+      "text": "https://ryanjosephkamp.github.io/splashery/",
+      "shape": "square",
+      "picture": "ai-farm",
+      "contrast": 0.5,
+      "center": "small",
+      "level": "H",
+      "style": "color",
+      "size": "more"
+    },
+    "scene": {
+      "app": "splashery",
+      "version": 3,
+      "createdAt": "2026-10-15T15:00:43.901Z",
+      "seed": 1,
+      "toy": {
+        "kind": "builtin",
+        "id": "qr-picture",
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square"
+        }
+      },
+      "look": {
+        "background": "page",
+        "theme": "auto",
+        "accent": "auto",
+        "splatScale": 1,
+        "exposure": 1
+      },
+      "effects": {
+        "poke": {
+          "on": false,
+          "strength": 0.6,
+          "wobble": 0.5
+        },
+        "wind": {
+          "on": false,
+          "strength": 0.55,
+          "direction": 0
+        },
+        "dissolve": {
+          "on": false,
+          "spread": 0.55,
+          "speed": 0.5
+        },
+        "drop": {
+          "on": false,
+          "bounce": 0.45,
+          "scatter": 0.5
+        },
+        "magnet": {
+          "on": false,
+          "strength": 0.7,
+          "radius": 0.45
+        },
+        "twist": {
+          "on": false,
+          "amount": 0.5,
+          "wobble": 0.3,
+          "axis": "y"
+        },
+        "slice": {
+          "on": false,
+          "position": 0,
+          "sweep": 0.35,
+          "axis": "x"
+        },
+        "paint": {
+          "on": false,
+          "size": 0.5,
+          "splash": 0.5,
+          "color": "#e63b2e"
+        }
+      },
+      "paint": {
+        "stamps": []
+      },
+      "camera": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.4
+      },
+      "autoplay": {
+        "turntable": true,
+        "effect": "none"
+      },
+      "pattern": {
+        "id": "none",
+        "flag": "",
+        "projection": "wrap",
+        "repeats": 1,
+        "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+        "scale": 0.5,
+        "amount": 1,
+        "detail": 0.6
+      },
+      "motion": {
+        "alive": true,
+        "move": "still",
+        "speed": 0.5,
+        "controls": {}
+      }
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.4
+    },
+    "graphics": {
+      "backend": "WebGL2",
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    "labs": "1",
+    "storage": {
+      "initial": {
+        "local": {},
+        "session": {}
+      },
+      "current": {
+        "splashery.labs": "1"
+      },
+      "session": {}
+    },
+    "input": "Picture QRWhat the code holdsMake the codeSave a PNGVersion 9 (53 × 53 modules), error correction H.Contrast: 3.6 : 1 between whole dark and light modules (the center dots 18.4 : 1).✓ Reads at phone size (8 pixels a module, a little out of focus).✓ Reads at smaller (4 pixels a module, a little out of focus).✓ The splats on the stage read at 8 pixels a module.✓ The splats on the stage read at 4 pixels a module.It scans.Make it scanEach module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it.Open your own picture…Felt farm (AI-made)Your picture is read on this device and never leaves it. A link to this toy can't carry it: it opens with a sample instead.",
+    "statusText": "Picture QR · 123k splats",
+    "visibleText": "Skip to controls\n+\n−\nSplashery\n\nPicture QR · 123k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\n\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nPicture saved, with its quiet zone.",
+    "toast": {
+      "text": "Picture saved, with its quiet zone.",
+      "visible": true
+    },
+    "linkNote": "",
+    "stageUpdateTicks": 602,
+    "firstDraw": {
+      "chooseToyToFirstFrameMs": 4364.69999999553,
+      "navigationToFirstFrameMs": 6686.79999999702,
+      "stageUpdateTicks": 26
+    },
+    "controls": {
+      "turn": 0
+    },
+    "controlState": {
+      "turn": 0
+    }
+  },
+  "runPasses": {
+    "passed": 1,
+    "of": 1,
+    "attempted": 1
+  }
+}
