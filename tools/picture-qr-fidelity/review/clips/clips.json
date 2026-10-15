@@ -1,0 +1,232 @@
+[
+  {
+    "mode": "main",
+    "model": "Codex (GPT-6)",
+    "author": "Ryan with Codex (GPT-6)",
+    "picture": "ai-farm",
+    "shape": "circle",
+    "file": "gpt6-main-ai-farm-circle.gif",
+    "strip": "gpt6-main-ai-farm-circle-strip.png",
+    "check": {
+      "ok": true,
+      "sizes": [
+        {
+          "id": "phone",
+          "label": "phone size",
+          "ppm": 8,
+          "blur": 0.2,
+          "text": "https://example.org/a/1",
+          "ok": true
+        },
+        {
+          "id": "small",
+          "label": "smaller",
+          "ppm": 4,
+          "blur": 0.2,
+          "text": "https://example.org/a/1",
+          "ok": true
+        }
+      ],
+      "measure": {
+        "module": 4.092480188927122,
+        "center": 18.375705646557403,
+        "darkGray": 0.2631062088358058,
+        "lightGray": 0.657297214326905,
+        "gap": -0.8712749152403324
+      },
+      "stage": [
+        {
+          "ppm": 8,
+          "text": "https://example.org/a/1",
+          "ok": true
+        },
+        {
+          "ppm": 4,
+          "text": "https://example.org/a/1",
+          "ok": true
+        }
+      ],
+      "text": "https://example.org/a/1"
+    }
+  },
+  {
+    "mode": "main",
+    "model": "Codex (GPT-6)",
+    "author": "Ryan with Codex (GPT-6)",
+    "picture": "cdx-qr-ai-fern",
+    "shape": "square",
+    "file": "gpt6-main-cdx-qr-ai-fern-square.gif",
+    "strip": "gpt6-main-cdx-qr-ai-fern-square-strip.png",
+    "check": {
+      "ok": true,
+      "sizes": [
+        {
+          "id": "phone",
+          "label": "phone size",
+          "ppm": 8,
+          "blur": 0.2,
+          "text": "https://example.org/a/1",
+          "ok": true
+        },
+        {
+          "id": "small",
+          "label": "smaller",
+          "ppm": 4,
+          "blur": 0.2,
+          "text": "https://example.org/a/1",
+          "ok": true
+        }
+      ],
+      "measure": {
+        "module": 4.181131068093203,
+        "center": 18.375705646557403,
+        "darkGray": 0.3963324640664407,
+        "lightGray": 0.8569285811173838,
+        "gap": -0.7892822692623361
+      },
+      "stage": [
+        {
+          "ppm": 8,
+          "text": "https://example.org/a/1",
+          "ok": true
+        },
+        {
+          "ppm": 4,
+          "text": "https://example.org/a/1",
+          "ok": true
+        }
+      ],
+      "text": "https://example.org/a/1"
+    }
+  },
+  {
+    "mode": "detail",
+    "model": "Codex (GPT-6)",
+    "author": "Ryan with Codex (GPT-6)",
+    "picture": "ai-farm",
+    "shape": "circle",
+    "file": "gpt6-detail-ai-farm-circle.gif",
+    "strip": "gpt6-detail-ai-farm-circle-strip.png",
+    "check": {
+      "ok": true,
+      "sizes": [
+        {
+          "id": "phone",
+          "label": "phone size",
+          "ppm": 8,
+          "blur": 0.2,
+          "text": "https://example.org/a/1",
+          "ok": true
+        },
+        {
+          "id": "small",
+          "label": "smaller",
+          "ppm": 4,
+          "blur": 0.2,
+          "text": "https://example.org/a/1",
+          "ok": true
+        }
+      ],
+      "detail": {
+        "ok": true,
+        "layoutChecked": true,
+        "cameraDeferred": true,
+        "tried": 1,
+        "candidates": 1,
+        "preparationMs": 909.7999999970198
+      },
+      "measure": {
+        "module": 7.3634112536283975,
+        "center": 10.585628828002388,
+        "darkGray": 0.20937317874005204,
+        "lightGray": 0.8032550429509174,
+        "gap": -0.615968530806154
+      },
+      "stage": [
+        {
+          "ppm": 8,
+          "text": "https://example.org/a/1",
+          "ok": true
+        },
+        {
+          "ppm": 4,
+          "text": "https://example.org/a/1",
+          "ok": true
+        }
+      ],
+      "text": "https://example.org/a/1",
+      "stress": {
+        "ok": true,
+        "readers": ["jsqr", "zxingcpp"],
+        "workers": 4,
+        "ms": 598.4000000059605,
+        "parts": [577.5, 516.7999999970198, 504.20000000298023, 591]
+      }
+    }
+  },
+  {
+    "mode": "detail",
+    "model": "Codex (GPT-6)",
+    "author": "Ryan with Codex (GPT-6)",
+    "picture": "cdx-qr-ai-fern",
+    "shape": "square",
+    "file": "gpt6-detail-cdx-qr-ai-fern-square.gif",
+    "strip": "gpt6-detail-cdx-qr-ai-fern-square-strip.png",
+    "check": {
+      "ok": true,
+      "sizes": [
+        {
+          "id": "phone",
+          "label": "phone size",
+          "ppm": 8,
+          "blur": 0.2,
+          "text": "https://example.org/a/1",
+          "ok": true
+        },
+        {
+          "id": "small",
+          "label": "smaller",
+          "ppm": 4,
+          "blur": 0.2,
+          "text": "https://example.org/a/1",
+          "ok": true
+        }
+      ],
+      "detail": {
+        "ok": true,
+        "layoutChecked": true,
+        "cameraDeferred": true,
+        "tried": 1,
+        "candidates": 1,
+        "preparationMs": 612.5
+      },
+      "measure": {
+        "module": 7.424188166424807,
+        "center": 10.526392692458204,
+        "darkGray": 0.26257831345270477,
+        "lightGray": 0.905463092033762,
+        "gap": -0.46921481456458564
+      },
+      "stage": [
+        {
+          "ppm": 8,
+          "text": "https://example.org/a/1",
+          "ok": true
+        },
+        {
+          "ppm": 4,
+          "text": "https://example.org/a/1",
+          "ok": true
+        }
+      ],
+      "text": "https://example.org/a/1",
+      "stress": {
+        "ok": true,
+        "readers": ["jsqr", "zxingcpp"],
+        "workers": 4,
+        "ms": 238.79999999701977,
+        "parts": [143.89999999850988, 221.79999999701977, 192.79999999701977, 235.20000000298023]
+      }
+    }
+  }
+]

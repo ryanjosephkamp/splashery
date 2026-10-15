@@ -1,0 +1,94 @@
+[
+  {
+    "file": "main-all-cdx-qr-ai-fern-square-8-390x844.png",
+    "measurementRun": "main-all",
+    "sha256": "d91c096c11414511fddb30cebb60f358663799667f184ccdce1105309a8a51bc",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "main-all-cdx-qr-ai-fern-square-8-render.png",
+    "measurementRun": "main-all",
+    "sha256": "1a6fc5dbe081fcfdc47b35a6eadb90ee2c432daf8108aa126707f1267cf380e7",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "measurementRun": "final-detail-detail",
+    "picture": "cdx-qr-ai-fern",
+    "link": 8,
+    "shape": "square",
+    "missingNativeImage": true,
+    "notes": "The original writer saved first payloads and failed qualifications; this successful non-first case has numerical evidence only."
+  },
+  {
+    "file": "qualified-retries-detail-cdx-qr-ai-fern-square-8-390x844.png",
+    "measurementRun": "qualified-retries-detail",
+    "sha256": "dededdedde9aaed4b2e495106b40395f4cc0b9113030ae99c1a9731c6ddba632",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "qualified-retries-detail-cdx-qr-ai-fern-square-8-render.png",
+    "measurementRun": "qualified-retries-detail",
+    "sha256": "f37f632f843897b1601fcb04a706e88a20cc614929219771c3c427d683d8f522",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "priority-detail-cdx-qr-ai-fern-square-8-390x844.png",
+    "measurementRun": "priority-detail",
+    "sha256": "dededdedde9aaed4b2e495106b40395f4cc0b9113030ae99c1a9731c6ddba632",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "priority-detail-cdx-qr-ai-fern-square-8-render.png",
+    "measurementRun": "priority-detail",
+    "sha256": "f37f632f843897b1601fcb04a706e88a20cc614929219771c3c427d683d8f522",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "main-all-met-459968-circle-8-390x844.png",
+    "measurementRun": "main-all",
+    "sha256": "e8e3de23297c3ebd4ca884ef429ada8e29aed037eafc3971b61a342351235c25",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "main-all-met-459968-circle-8-render.png",
+    "measurementRun": "main-all",
+    "sha256": "daaadad0fcc3ab2db22f6c3655fb604e5a1df4891d54e24dbf76a31f6448319b",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "final-detail-detail-met-459968-circle-8-390x844.png",
+    "measurementRun": "final-detail-detail",
+    "sha256": "713a4ed7f7219111530e7e5cacffa6582f16a62568ec5cfbee0e6304662ad94f",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "final-detail-detail-met-459968-circle-8-render.png",
+    "measurementRun": "final-detail-detail",
+    "sha256": "e1a24003214d32c1be9904fb30a30d8c7489d40c6c843eec84066733511b0277",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "qualified-retries-detail-met-459968-circle-8-390x844.png",
+    "measurementRun": "qualified-retries-detail",
+    "sha256": "8598ae8728e715cf9f5de4bae8d666c7d2a6c564658603e542967a16cfb04798",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "qualified-retries-detail-met-459968-circle-8-render.png",
+    "measurementRun": "qualified-retries-detail",
+    "sha256": "3bb9da15e94c0582fb14ccb7e1020cff568ef322be6088a03b234f9046c28a06",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "priority-detail-met-459968-circle-8-390x844.png",
+    "measurementRun": "priority-detail",
+    "sha256": "8598ae8728e715cf9f5de4bae8d666c7d2a6c564658603e542967a16cfb04798",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  },
+  {
+    "file": "priority-detail-met-459968-circle-8-render.png",
+    "measurementRun": "priority-detail",
+    "sha256": "3bb9da15e94c0582fb14ccb7e1020cff568ef322be6088a03b234f9046c28a06",
+    "notes": "Native phone or raw720 image from the recorded run; no image editing."
+  }
+]

@@ -1,0 +1,3298 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Picture QR fidelity review · Codex (GPT-6)</title>
+  <style>
+    body {
+      margin: 24px;
+      font:
+        16px/1.5 system-ui,
+        sans-serif;
+      color: #20252b;
+      background: #f4f5f6;
+    }
+    main,
+    header {
+      max-width: 1080px;
+      margin: auto;
+    }
+    h1 {
+      line-height: 1.2;
+    }
+    h2 {
+      margin-top: 3rem;
+    }
+    small {
+      display: block;
+      font-size: 13px;
+      font-weight: 400;
+      color: #59616a;
+    }
+    nav {
+      font-size: 14px;
+    }
+    a {
+      color: #145f9e;
+    }
+    details {
+      margin: 12px 0 28px;
+    }
+    summary {
+      cursor: pointer;
+      padding: 10px;
+      background: white;
+      border: 1px solid #d9dce0;
+      border-radius: 8px;
+    }
+    .pair {
+      display: flex;
+      gap: 16px;
+      overflow: auto;
+      padding: 12px 0;
+    }
+    figure {
+      margin: 0;
+      flex: 0 0 390px;
+    }
+    figcaption {
+      font-weight: 650;
+      margin: 0 0 8px;
+    }
+    img {
+      display: block;
+      max-width: none;
+      background: white;
+      border: 1px solid #d9dce0;
+      border-radius: 8px;
+    }
+    section {
+      scroll-margin-top: 12px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        scroll-behavior: auto;
+      }
+    }
+  </style>
+  <header>
+    <h1>Picture QR: Standard and Most detail</h1>
+    <p>
+      Study and review renders made by Ryan with Codex (GPT-6). Source picture credits are preserved
+      in the corpus manifest and CREDITS.
+    </p>
+    <p>
+      Phone screenshots at their original 390 × 844 size, with the same first fixed payload,
+      picture, Low tier, and camera. Every picture has Square and Circle pairs. The complete encoded
+      square, including function patterns, determines the primary score; Circle’s surrounding photo
+      band is excluded.
+    </p>
+    <p>
+      Numbers are averages across all ten payloads. Each completed code is tested at 8 and 4 pixels
+      per module, both blur levels, and six camera and brightness views with jsQR and zxing-cpp. The
+      full report and individual results distinguish incomplete checks and failures. These pictures
+      compare appearance; they are not timing evidence.
+    </p>
+    <p>
+      The rendered comparison is complete. <a href="summary.json">Machine-readable results</a> ·
+      <a href="../../../docs/audits/picture-qr-fidelity-2026-10.md">Audit</a>
+    </p>
+    <nav aria-label="Pictures">
+      <a href="#ai-farm">Felt farm (AI-made)</a> · <a href="#ai-wave">Glass wave (AI-made)</a> ·
+      <a href="#ai-mushrooms">Mushrooms (AI-made)</a> ·
+      <a href="#ai-arch">Stone arch (AI-made)</a> · <a href="#wildflowers">Wildflowers</a> ·
+      <a href="#still-life">Still life with cheese (a painting)</a> ·
+      <a href="#spiral-stairs">A spiral staircase</a> · <a href="#forest">A forest path</a> ·
+      <a href="#cdx-qr-ai-monstera">Split leaf (AI-made)</a> ·
+      <a href="#cdx-qr-ai-fern">Fern frond (AI-made)</a> ·
+      <a href="#cdx-qr-ai-green-watering-can">Green watering can (AI-made)</a> ·
+      <a href="#cdx-qr-ai-cactus">Potted cactus (AI-made)</a> ·
+      <a href="#cdx-qr-ai-pitcher">Clay pitcher (AI-made)</a> ·
+      <a href="#cdx-qr-ai-stacking-rings">Wooden stacking rings (AI-made)</a> ·
+      <a href="#cdx-qr-ai-pear">Pear (AI-made)</a> ·
+      <a href="#cdx-qr-ai-hot-air-balloon">Balloon (AI-made)</a> ·
+      <a href="#cdx-qr-ai-mushroom">Mushroom (AI-made)</a> ·
+      <a href="#cdx-qr-ai-spinning-top">Wooden spinning top (AI-made)</a> ·
+      <a href="#cdx-qr-ai-tulip">Tulip (AI-made)</a> ·
+      <a href="#cdx-qr-ai-pinecone">Pinecone (AI-made)</a> ·
+      <a href="#cdx-qr-ai-stacked-stones">Stacked stones (AI-made)</a> ·
+      <a href="#cdx-qr-ai-rook">Wooden rook (AI-made)</a> ·
+      <a href="#cdx-qr-ai-rainbow">Paper rainbow (AI-made)</a> ·
+      <a href="#cdx-qr-ai-wood-blocks">Wooden blocks (AI-made)</a> ·
+      <a href="#cdx-qr-ai-teapot">Clay teapot (AI-made)</a> ·
+      <a href="#cdx-qr-ai-lotus">Lotus bloom (AI-made)</a> ·
+      <a href="#cdx-qr-ai-scallop">Scallop shell (AI-made)</a> ·
+      <a href="#cdx-qr-ai-pumpkin">Pumpkin (AI-made)</a> ·
+      <a href="#cdx-qr-ai-blue-vase">Blue vase (AI-made)</a> ·
+      <a href="#cdx-qr-ai-ginkgo">Ginkgo leaf (AI-made)</a> ·
+      <a href="#cdx-qr-ai-squash">Autumn squash (AI-made)</a> ·
+      <a href="#cdx-qr-ai-pebbles">Smooth pebbles (AI-made)</a> ·
+      <a href="#met-436305">Still Life</a> · <a href="#met-10181">Landscape</a> ·
+      <a href="#met-459968">Landscape</a> · <a href="#met-9284">Vase</a> ·
+      <a href="#met-9549">Vase</a> · <a href="#met-9283">Vase</a> · <a href="#met-249072">Vase</a> ·
+      <a href="#met-312624">Animal</a> · <a href="#met-478467">Animal</a> ·
+      <a href="#met-42138">Fantastic animal</a> · <a href="#met-556849">Animal figurine</a> ·
+      <a href="#met-244130">Shell</a> · <a href="#met-325462">Scallop shell</a> ·
+      <a href="#met-13181">Fruit</a> · <a href="#met-203455">Fruit cluster</a> ·
+      <a href="#met-438031">Summer Flowers</a> · <a href="#met-196651">Fruit bowl</a> ·
+      <a href="#met-3845">Fruit Bowl</a> · <a href="#met-570235">Cowrie shell</a> ·
+      <a href="#met-244131">Shell</a>
+    </nav>
+  </header>
+  <main>
+    <section>
+      <h2>Tap motion</h2>
+      <p>
+        Each clip has a 0.4-second lead-in and 3.6 seconds of tap motion, captured at 390 pixels and
+        15 frames per second.
+      </p>
+      <p><a href="clips/gpt6-main-ai-farm-circle.gif">Play main · ai-farm · circle</a></p>
+      <a href="clips/gpt6-main-ai-farm-circle.gif"
+        ><img
+          style="max-width: 100%; height: auto"
+          src="clips/gpt6-main-ai-farm-circle-strip.png"
+          alt="Eight frames of the main tap motion"
+      /></a>
+      <p>
+        <a href="clips/gpt6-main-cdx-qr-ai-fern-square.gif">Play main · cdx-qr-ai-fern · square</a>
+      </p>
+      <a href="clips/gpt6-main-cdx-qr-ai-fern-square.gif"
+        ><img
+          style="max-width: 100%; height: auto"
+          src="clips/gpt6-main-cdx-qr-ai-fern-square-strip.png"
+          alt="Eight frames of the main tap motion"
+      /></a>
+      <p><a href="clips/gpt6-detail-ai-farm-circle.gif">Play detail · ai-farm · circle</a></p>
+      <a href="clips/gpt6-detail-ai-farm-circle.gif"
+        ><img
+          style="max-width: 100%; height: auto"
+          src="clips/gpt6-detail-ai-farm-circle-strip.png"
+          alt="Eight frames of the detail tap motion"
+      /></a>
+      <p>
+        <a href="clips/gpt6-detail-cdx-qr-ai-fern-square.gif"
+          >Play detail · cdx-qr-ai-fern · square</a
+        >
+      </p>
+      <a href="clips/gpt6-detail-cdx-qr-ai-fern-square.gif"
+        ><img
+          style="max-width: 100%; height: auto"
+          src="clips/gpt6-detail-cdx-qr-ai-fern-square-strip.png"
+          alt="Eight frames of the detail tap motion"
+      /></a>
+    </section>
+    <section id="ai-farm">
+      <h2>Felt farm (AI-made) <small>ai-farm</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/ai-farm.png"
+          width="256"
+          alt="Source Felt farm (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2927, print 0.2981</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-ai-farm-square-0-390x844.png"
+              alt="Felt farm (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-ai-farm-square-0-390x844.png"
+              alt="Felt farm (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1137, print 0.1683</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-ai-farm-circle-0-390x844.png"
+              alt="Felt farm (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-ai-farm-circle-0-390x844.png"
+              alt="Felt farm (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="ai-wave">
+      <h2>Glass wave (AI-made) <small>ai-wave</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/ai-wave.png"
+          width="256"
+          alt="Source Glass wave (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2223, print 0.2254</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-ai-wave-square-0-390x844.png"
+              alt="Glass wave (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-ai-wave-square-0-390x844.png"
+              alt="Glass wave (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1575, print 0.1956</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-ai-wave-circle-0-390x844.png"
+              alt="Glass wave (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-ai-wave-circle-0-390x844.png"
+              alt="Glass wave (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="ai-mushrooms">
+      <h2>Mushrooms (AI-made) <small>ai-mushrooms</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/ai-mushrooms.png"
+          width="256"
+          alt="Source Mushrooms (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2934, print 0.2975</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-ai-mushrooms-square-0-390x844.png"
+              alt="Mushrooms (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-ai-mushrooms-square-0-390x844.png"
+              alt="Mushrooms (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1347, print 0.1837</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-ai-mushrooms-circle-0-390x844.png"
+              alt="Mushrooms (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-ai-mushrooms-circle-0-390x844.png"
+              alt="Mushrooms (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="ai-arch">
+      <h2>Stone arch (AI-made) <small>ai-arch</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/ai-arch.png"
+          width="256"
+          alt="Source Stone arch (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2561, print 0.2591</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-ai-arch-square-0-390x844.png"
+              alt="Stone arch (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-ai-arch-square-0-390x844.png"
+              alt="Stone arch (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1547, print 0.1871</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-ai-arch-circle-0-390x844.png"
+              alt="Stone arch (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-ai-arch-circle-0-390x844.png"
+              alt="Stone arch (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="wildflowers">
+      <h2>Wildflowers <small>wildflowers</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/wildflowers.png" width="256" alt="Source Wildflowers" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2674, print 0.2733</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-wildflowers-square-0-390x844.png"
+              alt="Wildflowers square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-wildflowers-square-0-390x844.png"
+              alt="Wildflowers square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.0819, print 0.1398</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-wildflowers-circle-0-390x844.png"
+              alt="Wildflowers circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-wildflowers-circle-0-390x844.png"
+              alt="Wildflowers circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="still-life">
+      <h2>Still life with cheese (a painting) <small>still-life</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/still-life.png"
+          width="256"
+          alt="Source Still life with cheese (a painting)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1962, print 0.1942</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-still-life-square-0-390x844.png"
+              alt="Still life with cheese (a painting) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-still-life-square-0-390x844.png"
+              alt="Still life with cheese (a painting) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1455, print 0.1680</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-still-life-circle-0-390x844.png"
+              alt="Still life with cheese (a painting) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-still-life-circle-0-390x844.png"
+              alt="Still life with cheese (a painting) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="spiral-stairs">
+      <h2>A spiral staircase <small>spiral-stairs</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/spiral-stairs.png"
+          width="256"
+          alt="Source A spiral staircase"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2655, print 0.2698</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-spiral-stairs-square-0-390x844.png"
+              alt="A spiral staircase square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-spiral-stairs-square-0-390x844.png"
+              alt="A spiral staircase square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1404, print 0.1832</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-spiral-stairs-circle-0-390x844.png"
+              alt="A spiral staircase circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-spiral-stairs-circle-0-390x844.png"
+              alt="A spiral staircase circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="forest">
+      <h2>A forest path <small>forest</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/forest.png" width="256" alt="Source A forest path" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2571, print 0.2603</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-forest-square-0-390x844.png"
+              alt="A forest path square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-forest-square-0-390x844.png"
+              alt="A forest path square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1384, print 0.1671</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-forest-circle-0-390x844.png"
+              alt="A forest path circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-forest-circle-0-390x844.png"
+              alt="A forest path circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-monstera">
+      <h2>Split leaf (AI-made) <small>cdx-qr-ai-monstera</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-monstera.png"
+          width="256"
+          alt="Source Split leaf (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1967, print 0.1990</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-monstera-square-0-390x844.png"
+              alt="Split leaf (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-monstera-square-0-390x844.png"
+              alt="Split leaf (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1359, print 0.1746</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-monstera-circle-0-390x844.png"
+              alt="Split leaf (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-monstera-circle-0-390x844.png"
+              alt="Split leaf (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-fern">
+      <h2>Fern frond (AI-made) <small>cdx-qr-ai-fern</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-fern.png"
+          width="256"
+          alt="Source Fern frond (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0880, print 0.0894</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-fern-square-0-390x844.png"
+              alt="Fern frond (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-fern-square-0-390x844.png"
+              alt="Fern frond (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1210, print 0.1748</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-fern-circle-0-390x844.png"
+              alt="Fern frond (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-fern-circle-0-390x844.png"
+              alt="Fern frond (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-green-watering-can">
+      <h2>Green watering can (AI-made) <small>cdx-qr-ai-green-watering-can</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-green-watering-can.png"
+          width="256"
+          alt="Source Green watering can (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0769, print 0.0753</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-green-watering-can-square-0-390x844.png"
+              alt="Green watering can (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-green-watering-can-square-0-390x844.png"
+              alt="Green watering can (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1402, print 0.1575</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-green-watering-can-circle-0-390x844.png"
+              alt="Green watering can (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-green-watering-can-circle-0-390x844.png"
+              alt="Green watering can (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-cactus">
+      <h2>Potted cactus (AI-made) <small>cdx-qr-ai-cactus</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-cactus.png"
+          width="256"
+          alt="Source Potted cactus (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0575, print 0.0568</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-cactus-square-0-390x844.png"
+              alt="Potted cactus (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-cactus-square-0-390x844.png"
+              alt="Potted cactus (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1144, print 0.1543</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-cactus-circle-0-390x844.png"
+              alt="Potted cactus (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-cactus-circle-0-390x844.png"
+              alt="Potted cactus (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-pitcher">
+      <h2>Clay pitcher (AI-made) <small>cdx-qr-ai-pitcher</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-pitcher.png"
+          width="256"
+          alt="Source Clay pitcher (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0799, print 0.0776</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pitcher-square-0-390x844.png"
+              alt="Clay pitcher (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pitcher-square-0-390x844.png"
+              alt="Clay pitcher (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1538, print 0.1690</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pitcher-circle-0-390x844.png"
+              alt="Clay pitcher (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pitcher-circle-0-390x844.png"
+              alt="Clay pitcher (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-stacking-rings">
+      <h2>Wooden stacking rings (AI-made) <small>cdx-qr-ai-stacking-rings</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-stacking-rings.png"
+          width="256"
+          alt="Source Wooden stacking rings (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1462, print 0.1459</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-stacking-rings-square-0-390x844.png"
+              alt="Wooden stacking rings (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-stacking-rings-square-0-390x844.png"
+              alt="Wooden stacking rings (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1419, print 0.1829</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-stacking-rings-circle-0-390x844.png"
+              alt="Wooden stacking rings (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-stacking-rings-circle-0-390x844.png"
+              alt="Wooden stacking rings (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-pear">
+      <h2>Pear (AI-made) <small>cdx-qr-ai-pear</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-pear.png"
+          width="256"
+          alt="Source Pear (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0583, print 0.0579</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pear-square-0-390x844.png"
+              alt="Pear (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pear-square-0-390x844.png"
+              alt="Pear (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1465, print 0.1740</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pear-circle-0-390x844.png"
+              alt="Pear (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pear-circle-0-390x844.png"
+              alt="Pear (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-hot-air-balloon">
+      <h2>Balloon (AI-made) <small>cdx-qr-ai-hot-air-balloon</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-hot-air-balloon.png"
+          width="256"
+          alt="Source Balloon (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0199, print 0.0174</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-hot-air-balloon-square-0-390x844.png"
+              alt="Balloon (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-hot-air-balloon-square-0-390x844.png"
+              alt="Balloon (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1504, print 0.1673</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-hot-air-balloon-circle-0-390x844.png"
+              alt="Balloon (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-hot-air-balloon-circle-0-390x844.png"
+              alt="Balloon (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-mushroom">
+      <h2>Mushroom (AI-made) <small>cdx-qr-ai-mushroom</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-mushroom.png"
+          width="256"
+          alt="Source Mushroom (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0571, print 0.0568</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-mushroom-square-0-390x844.png"
+              alt="Mushroom (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-mushroom-square-0-390x844.png"
+              alt="Mushroom (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1608, print 0.1939</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-mushroom-circle-0-390x844.png"
+              alt="Mushroom (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-mushroom-circle-0-390x844.png"
+              alt="Mushroom (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-spinning-top">
+      <h2>Wooden spinning top (AI-made) <small>cdx-qr-ai-spinning-top</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-spinning-top.png"
+          width="256"
+          alt="Source Wooden spinning top (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0839, print 0.0822</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-spinning-top-square-0-390x844.png"
+              alt="Wooden spinning top (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-spinning-top-square-0-390x844.png"
+              alt="Wooden spinning top (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1603, print 0.1875</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-spinning-top-circle-0-390x844.png"
+              alt="Wooden spinning top (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-spinning-top-circle-0-390x844.png"
+              alt="Wooden spinning top (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-tulip">
+      <h2>Tulip (AI-made) <small>cdx-qr-ai-tulip</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-tulip.png"
+          width="256"
+          alt="Source Tulip (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1296, print 0.1306</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-tulip-square-0-390x844.png"
+              alt="Tulip (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-tulip-square-0-390x844.png"
+              alt="Tulip (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1269, print 0.1709</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-tulip-circle-0-390x844.png"
+              alt="Tulip (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-tulip-circle-0-390x844.png"
+              alt="Tulip (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-pinecone">
+      <h2>Pinecone (AI-made) <small>cdx-qr-ai-pinecone</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-pinecone.png"
+          width="256"
+          alt="Source Pinecone (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1552, print 0.1563</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pinecone-square-0-390x844.png"
+              alt="Pinecone (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pinecone-square-0-390x844.png"
+              alt="Pinecone (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1566, print 0.1952</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pinecone-circle-0-390x844.png"
+              alt="Pinecone (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pinecone-circle-0-390x844.png"
+              alt="Pinecone (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-stacked-stones">
+      <h2>Stacked stones (AI-made) <small>cdx-qr-ai-stacked-stones</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-stacked-stones.png"
+          width="256"
+          alt="Source Stacked stones (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1147, print 0.1139</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-stacked-stones-square-0-390x844.png"
+              alt="Stacked stones (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-stacked-stones-square-0-390x844.png"
+              alt="Stacked stones (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1627, print 0.1994</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-stacked-stones-circle-0-390x844.png"
+              alt="Stacked stones (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-stacked-stones-circle-0-390x844.png"
+              alt="Stacked stones (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-rook">
+      <h2>Wooden rook (AI-made) <small>cdx-qr-ai-rook</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-rook.png"
+          width="256"
+          alt="Source Wooden rook (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0946, print 0.0936</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-rook-square-0-390x844.png"
+              alt="Wooden rook (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-rook-square-0-390x844.png"
+              alt="Wooden rook (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1493, print 0.1793</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-rook-circle-0-390x844.png"
+              alt="Wooden rook (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-rook-circle-0-390x844.png"
+              alt="Wooden rook (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-rainbow">
+      <h2>Paper rainbow (AI-made) <small>cdx-qr-ai-rainbow</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-rainbow.png"
+          width="256"
+          alt="Source Paper rainbow (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1132, print 0.1141</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-rainbow-square-0-390x844.png"
+              alt="Paper rainbow (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-rainbow-square-0-390x844.png"
+              alt="Paper rainbow (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1764, print 0.2048</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-rainbow-circle-0-390x844.png"
+              alt="Paper rainbow (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-rainbow-circle-0-390x844.png"
+              alt="Paper rainbow (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-wood-blocks">
+      <h2>Wooden blocks (AI-made) <small>cdx-qr-ai-wood-blocks</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-wood-blocks.png"
+          width="256"
+          alt="Source Wooden blocks (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0730, print 0.0716</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-wood-blocks-square-0-390x844.png"
+              alt="Wooden blocks (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-wood-blocks-square-0-390x844.png"
+              alt="Wooden blocks (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1458, print 0.1728</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-wood-blocks-circle-0-390x844.png"
+              alt="Wooden blocks (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-wood-blocks-circle-0-390x844.png"
+              alt="Wooden blocks (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-teapot">
+      <h2>Clay teapot (AI-made) <small>cdx-qr-ai-teapot</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-teapot.png"
+          width="256"
+          alt="Source Clay teapot (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0789, print 0.0772</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-teapot-square-0-390x844.png"
+              alt="Clay teapot (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-teapot-square-0-390x844.png"
+              alt="Clay teapot (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1550, print 0.1756</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-teapot-circle-0-390x844.png"
+              alt="Clay teapot (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-teapot-circle-0-390x844.png"
+              alt="Clay teapot (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-lotus">
+      <h2>Lotus bloom (AI-made) <small>cdx-qr-ai-lotus</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-lotus.png"
+          width="256"
+          alt="Source Lotus bloom (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1456, print 0.1451</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-lotus-square-0-390x844.png"
+              alt="Lotus bloom (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-lotus-square-0-390x844.png"
+              alt="Lotus bloom (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1894, print 0.1978</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-lotus-circle-0-390x844.png"
+              alt="Lotus bloom (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-lotus-circle-0-390x844.png"
+              alt="Lotus bloom (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-scallop">
+      <h2>Scallop shell (AI-made) <small>cdx-qr-ai-scallop</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-scallop.png"
+          width="256"
+          alt="Source Scallop shell (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1653, print 0.1666</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-scallop-square-0-390x844.png"
+              alt="Scallop shell (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-scallop-square-0-390x844.png"
+              alt="Scallop shell (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1887, print 0.2295</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-scallop-circle-0-390x844.png"
+              alt="Scallop shell (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-scallop-circle-0-390x844.png"
+              alt="Scallop shell (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-pumpkin">
+      <h2>Pumpkin (AI-made) <small>cdx-qr-ai-pumpkin</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-pumpkin.png"
+          width="256"
+          alt="Source Pumpkin (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1212, print 0.1216</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pumpkin-square-0-390x844.png"
+              alt="Pumpkin (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pumpkin-square-0-390x844.png"
+              alt="Pumpkin (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1216, print 0.1682</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pumpkin-circle-0-390x844.png"
+              alt="Pumpkin (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pumpkin-circle-0-390x844.png"
+              alt="Pumpkin (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-blue-vase">
+      <h2>Blue vase (AI-made) <small>cdx-qr-ai-blue-vase</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-blue-vase.png"
+          width="256"
+          alt="Source Blue vase (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0531, print 0.0494</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-blue-vase-square-0-390x844.png"
+              alt="Blue vase (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-blue-vase-square-0-390x844.png"
+              alt="Blue vase (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1725, print 0.1818</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-blue-vase-circle-0-390x844.png"
+              alt="Blue vase (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-blue-vase-circle-0-390x844.png"
+              alt="Blue vase (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-ginkgo">
+      <h2>Ginkgo leaf (AI-made) <small>cdx-qr-ai-ginkgo</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-ginkgo.png"
+          width="256"
+          alt="Source Ginkgo leaf (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0285, print 0.0261</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-ginkgo-square-0-390x844.png"
+              alt="Ginkgo leaf (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-ginkgo-square-0-390x844.png"
+              alt="Ginkgo leaf (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1635, print 0.1844</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-ginkgo-circle-0-390x844.png"
+              alt="Ginkgo leaf (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-ginkgo-circle-0-390x844.png"
+              alt="Ginkgo leaf (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-squash">
+      <h2>Autumn squash (AI-made) <small>cdx-qr-ai-squash</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-squash.png"
+          width="256"
+          alt="Source Autumn squash (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1170, print 0.1175</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-squash-square-0-390x844.png"
+              alt="Autumn squash (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-squash-square-0-390x844.png"
+              alt="Autumn squash (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1329, print 0.1806</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-squash-circle-0-390x844.png"
+              alt="Autumn squash (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-squash-circle-0-390x844.png"
+              alt="Autumn squash (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="cdx-qr-ai-pebbles">
+      <h2>Smooth pebbles (AI-made) <small>cdx-qr-ai-pebbles</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img
+          loading="lazy"
+          src="sources/cdx-qr-ai-pebbles.png"
+          width="256"
+          alt="Source Smooth pebbles (AI-made)"
+        />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1413, print 0.1406</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pebbles-square-0-390x844.png"
+              alt="Smooth pebbles (AI-made) square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pebbles-square-0-390x844.png"
+              alt="Smooth pebbles (AI-made) square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1741, print 0.2002</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-cdx-qr-ai-pebbles-circle-0-390x844.png"
+              alt="Smooth pebbles (AI-made) circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-cdx-qr-ai-pebbles-circle-0-390x844.png"
+              alt="Smooth pebbles (AI-made) circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-436305">
+      <h2>Still Life <small>met-436305</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-436305.png" width="256" alt="Source Still Life" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2035, print 0.2038</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-436305-square-0-390x844.png"
+              alt="Still Life square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-436305-square-0-390x844.png"
+              alt="Still Life square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1590, print 0.1902</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-436305-circle-0-390x844.png"
+              alt="Still Life circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-436305-circle-0-390x844.png"
+              alt="Still Life circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-10181">
+      <h2>Landscape <small>met-10181</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-10181.png" width="256" alt="Source Landscape" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2174, print 0.2206</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-10181-square-0-390x844.png"
+              alt="Landscape square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-10181-square-0-390x844.png"
+              alt="Landscape square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1362, print 0.1769</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-10181-circle-0-390x844.png"
+              alt="Landscape circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-10181-circle-0-390x844.png"
+              alt="Landscape circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-459968">
+      <h2>Landscape <small>met-459968</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-459968.png" width="256" alt="Source Landscape" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2344, print 0.2374</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-459968-square-0-390x844.png"
+              alt="Landscape square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-459968-square-0-390x844.png"
+              alt="Landscape square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1372, print 0.1826</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-459968-circle-0-390x844.png"
+              alt="Landscape circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-459968-circle-0-390x844.png"
+              alt="Landscape circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-9284">
+      <h2>Vase <small>met-9284</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-9284.png" width="256" alt="Source Vase" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1111, print 0.1105</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-9284-square-0-390x844.png"
+              alt="Vase square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-9284-square-0-390x844.png"
+              alt="Vase square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1797, print 0.1950</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-9284-circle-0-390x844.png"
+              alt="Vase circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-9284-circle-0-390x844.png"
+              alt="Vase circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-9549">
+      <h2>Vase <small>met-9549</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-9549.png" width="256" alt="Source Vase" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2711, print 0.2734</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-9549-square-0-390x844.png"
+              alt="Vase square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-9549-square-0-390x844.png"
+              alt="Vase square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1383, print 0.1712</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-9549-circle-0-390x844.png"
+              alt="Vase circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-9549-circle-0-390x844.png"
+              alt="Vase circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-9283">
+      <h2>Vase <small>met-9283</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-9283.png" width="256" alt="Source Vase" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0934, print 0.0929</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-9283-square-0-390x844.png"
+              alt="Vase square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-9283-square-0-390x844.png"
+              alt="Vase square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1872, print 0.2141</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-9283-circle-0-390x844.png"
+              alt="Vase circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-9283-circle-0-390x844.png"
+              alt="Vase circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-249072">
+      <h2>Vase <small>met-249072</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-249072.png" width="256" alt="Source Vase" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1259, print 0.1264</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-249072-square-0-390x844.png"
+              alt="Vase square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-249072-square-0-390x844.png"
+              alt="Vase square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1337, print 0.1776</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-249072-circle-0-390x844.png"
+              alt="Vase circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-249072-circle-0-390x844.png"
+              alt="Vase circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-312624">
+      <h2>Animal <small>met-312624</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-312624.png" width="256" alt="Source Animal" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1550, print 0.1551</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-312624-square-0-390x844.png"
+              alt="Animal square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-312624-square-0-390x844.png"
+              alt="Animal square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1554, print 0.1804</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-312624-circle-0-390x844.png"
+              alt="Animal circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-312624-circle-0-390x844.png"
+              alt="Animal circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-478467">
+      <h2>Animal <small>met-478467</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-478467.png" width="256" alt="Source Animal" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1649, print 0.1637</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-478467-square-0-390x844.png"
+              alt="Animal square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-478467-square-0-390x844.png"
+              alt="Animal square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1644, print 0.1914</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-478467-circle-0-390x844.png"
+              alt="Animal circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-478467-circle-0-390x844.png"
+              alt="Animal circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-42138">
+      <h2>Fantastic animal <small>met-42138</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-42138.png" width="256" alt="Source Fantastic animal" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0728, print 0.0711</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-42138-square-0-390x844.png"
+              alt="Fantastic animal square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-42138-square-0-390x844.png"
+              alt="Fantastic animal square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1749, print 0.1917</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-42138-circle-0-390x844.png"
+              alt="Fantastic animal circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-42138-circle-0-390x844.png"
+              alt="Fantastic animal circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-556849">
+      <h2>Animal figurine <small>met-556849</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-556849.png" width="256" alt="Source Animal figurine" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0681, print 0.0672</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-556849-square-0-390x844.png"
+              alt="Animal figurine square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-556849-square-0-390x844.png"
+              alt="Animal figurine square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1319, print 0.1696</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-556849-circle-0-390x844.png"
+              alt="Animal figurine circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-556849-circle-0-390x844.png"
+              alt="Animal figurine circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-244130">
+      <h2>Shell <small>met-244130</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-244130.png" width="256" alt="Source Shell" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1101, print 0.1081</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-244130-square-0-390x844.png"
+              alt="Shell square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-244130-square-0-390x844.png"
+              alt="Shell square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1590, print 0.2036</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-244130-circle-0-390x844.png"
+              alt="Shell circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-244130-circle-0-390x844.png"
+              alt="Shell circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-325462">
+      <h2>Scallop shell <small>met-325462</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-325462.png" width="256" alt="Source Scallop shell" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1455, print 0.1457</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-325462-square-0-390x844.png"
+              alt="Scallop shell square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-325462-square-0-390x844.png"
+              alt="Scallop shell square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1414, print 0.1802</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-325462-circle-0-390x844.png"
+              alt="Scallop shell circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-325462-circle-0-390x844.png"
+              alt="Scallop shell circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-13181">
+      <h2>Fruit <small>met-13181</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-13181.png" width="256" alt="Source Fruit" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2115, print 0.2120</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-13181-square-0-390x844.png"
+              alt="Fruit square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-13181-square-0-390x844.png"
+              alt="Fruit square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1736, print 0.2010</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-13181-circle-0-390x844.png"
+              alt="Fruit circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-13181-circle-0-390x844.png"
+              alt="Fruit circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-203455">
+      <h2>Fruit cluster <small>met-203455</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-203455.png" width="256" alt="Source Fruit cluster" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0712, print 0.0681</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-203455-square-0-390x844.png"
+              alt="Fruit cluster square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-203455-square-0-390x844.png"
+              alt="Fruit cluster square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1425, print 0.1737</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-203455-circle-0-390x844.png"
+              alt="Fruit cluster circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-203455-circle-0-390x844.png"
+              alt="Fruit cluster circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-438031">
+      <h2>Summer Flowers <small>met-438031</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-438031.png" width="256" alt="Source Summer Flowers" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.2448, print 0.2478</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-438031-square-0-390x844.png"
+              alt="Summer Flowers square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-438031-square-0-390x844.png"
+              alt="Summer Flowers square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1546, print 0.1905</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-438031-circle-0-390x844.png"
+              alt="Summer Flowers circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-438031-circle-0-390x844.png"
+              alt="Summer Flowers circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-196651">
+      <h2>Fruit bowl <small>met-196651</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-196651.png" width="256" alt="Source Fruit bowl" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0910, print 0.0898</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-196651-square-0-390x844.png"
+              alt="Fruit bowl square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-196651-square-0-390x844.png"
+              alt="Fruit bowl square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1977, print 0.2134</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-196651-circle-0-390x844.png"
+              alt="Fruit bowl circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-196651-circle-0-390x844.png"
+              alt="Fruit bowl circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-3845">
+      <h2>Fruit Bowl <small>met-3845</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-3845.png" width="256" alt="Source Fruit Bowl" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1809, print 0.1803</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-3845-square-0-390x844.png"
+              alt="Fruit Bowl square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-3845-square-0-390x844.png"
+              alt="Fruit Bowl square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1441, print 0.1694</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-3845-circle-0-390x844.png"
+              alt="Fruit Bowl circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-3845-circle-0-390x844.png"
+              alt="Fruit Bowl circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-570235">
+      <h2>Cowrie shell <small>met-570235</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-570235.png" width="256" alt="Source Cowrie shell" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.0452, print 0.0403</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-570235-square-0-390x844.png"
+              alt="Cowrie shell square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-570235-square-0-390x844.png"
+              alt="Cowrie shell square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.2031, print 0.2035</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-570235-circle-0-390x844.png"
+              alt="Cowrie shell circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-570235-circle-0-390x844.png"
+              alt="Cowrie shell circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+    <section id="met-244131">
+      <h2>Shell <small>met-244131</small></h2>
+      <figure>
+        <figcaption>Source pixels; the toy uses a central crop</figcaption>
+        <img loading="lazy" src="sources/met-244131.png" width="256" alt="Source Shell" />
+      </figure>
+      <details open>
+        <summary>Square · mean SSIM gain across 10/10 payloads: phone 0.1187, print 0.1176</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-244131-square-0-390x844.png"
+              alt="Shell square, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-244131-square-0-390x844.png"
+              alt="Shell square, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+      <details open>
+        <summary>Circle · mean SSIM gain across 10/10 payloads: phone 0.1600, print 0.2095</summary>
+        <div class="pair">
+          <figure>
+            <figcaption>Main · Standard</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/main-met-244131-circle-0-390x844.png"
+              alt="Shell circle, Standard on main"
+            />
+          </figure>
+          <figure>
+            <figcaption>Most detail</figcaption>
+            <img
+              loading="lazy"
+              width="390"
+              height="844"
+              src="images/detail-met-244131-circle-0-390x844.png"
+              alt="Shell circle, Most detail"
+            />
+          </figure>
+        </div>
+      </details>
+    </section>
+  </main>
+</html>
