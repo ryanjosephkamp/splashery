@@ -192,7 +192,7 @@ export function renderLive(entries, { error }) {
     });
     timers.push(() => {
       if (REC.take?.recording && !live.on(entry.kind)) REC.take.stop();
-      if (REC.take?.recording || onStage) sync();
+      if (!document.hidden && (REC.take?.recording || onStage)) sync();
     });
     cleanups.push(() => {
       // Another toy: the take stops and goes.
@@ -238,7 +238,8 @@ export function renderLive(entries, { error }) {
       return;
     }
     timers.forEach((f) => f());
-    if (entries.some((e) => e.status && live.on(e.kind))) rows.forEach((f) => f());
+    if (!document.hidden && entries.some((e) => e.status && live.on(e.kind)))
+      rows.forEach((f) => f());
   }, 250);
   return wrap;
 }
