@@ -2,7 +2,7 @@
 
 Codex (GPT-6) built a local failure finder for [task 87](../codex/87-photo-3d-failure-gallery.md).
 The toy is unchanged: no edits under `src/`, `assets/`, or `vendor/`. The
-[gallery and lossless evidence](https://github.com/ryanjosephkamp/splashery/tree/codex/photo-3d-failures-clips/review/photo-3d-failures)
+[gallery and compressed records](https://github.com/ryanjosephkamp/splashery/tree/codex/photo-3d-failures-clips/review/photo-3d-failures)
 are on the separate clips branch, never merged.
 
 **Complete: 118 inputs, 236 input/profile builds, and 2,124 color views**, plus independent mask and
@@ -37,9 +37,11 @@ unchanged.
 
 ## Ten failure patterns to target
 
-This priority follows visible repair value, not comparable units across different metrics.
-Frequencies count unique eligible inputs per profile, using each input's worst supported pose.
-Depth-cue counts are warnings, and cost cutoffs are review aids; they are not all verified defects.
+The ten-pattern order reflects my judgment about repair priority. Frequencies count unique eligible
+inputs per profile, using each input's worst supported pose. They are review-flag frequencies, not
+failure rates. Several appearance filters flag 92–100% of eligible inputs, including 114/114 phone
+edge cases. Depth-cue counts are warnings, and cost cutoffs are review aids. These levels have not
+been calibrated against annotated real-photo negatives.
 
 1. **Repeated ribbons behind foreground objects — fill.** At the 15.0 pp review level: **106/115**
    eligible phone inputs and **105/108** desktop inputs (3 and 10 unsupported, respectively). Excess
@@ -47,11 +49,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
    replace hidden texture.
 
    Examples:
-   [Forest path](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/forest-phone--30-0.png)
+   [Forest path](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/forest-phone--30-0.webp)
    (phone, 57.4 pp);
-   [Still life (painting)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/still-life-desktop--20-0.png)
+   [Still life (painting)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/still-life-desktop--20-0.webp)
    (desktop, 61.9 pp);
-   [Sleeping tabby cat](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-00-147167228-desktop--20-0.png)
+   [Sleeping tabby cat](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-00-147167228-desktop--20-0.webp)
    (desktop, 53.2 pp).
 
    Round 5 measure: Reduce worst-pose coherence excess while preserving texture energy and
@@ -63,11 +65,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
    Sparse probes require visual review.
 
    Examples:
-   [Plant studio (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cdx-plant-studio-desktop-0--20.png)
+   [Plant studio (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cdx-plant-studio-desktop-0--20.webp)
    (desktop, 2.24 CSS px, 69 probes, 22 backgrounds uncertain);
-   [Desert oasis (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-oasis-desktop-0--30.png)
+   [Desert oasis (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-oasis-desktop-0--30.webp)
    (desktop, 2.20 CSS px, 35 probes, 11 backgrounds uncertain);
-   [Empty classroom](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-19-159668739-desktop-30-0.png)
+   [Empty classroom](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-19-159668739-desktop-30-0.webp)
    (desktop, 2.37 CSS px, 41 probes, 22 backgrounds uncertain).
 
    Round 5 measure: Reduce per-input fringe p95 and maximum without erasing thin structures.
@@ -78,11 +80,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
    Individual losses can also be legitimate occlusions, so this is not an object count.
 
    Examples:
-   [Empty classroom](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-19-159668739-desktop--30-0.png)
+   [Empty classroom](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-19-159668739-desktop--30-0.webp)
    (desktop, 48.8%, 41 probes, 16 backgrounds uncertain);
-   [Treehouse village (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-treehouses-desktop-30-0.png)
+   [Treehouse village (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-treehouses-desktop-30-0.webp)
    (desktop, 46.7%, 15 probes, 3 backgrounds uncertain);
-   [Plant studio (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cdx-plant-studio-phone--30-0.png)
+   [Plant studio (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cdx-plant-studio-phone--30-0.webp)
    (phone, 29.2%, 72 probes, 34 backgrounds uncertain).
 
    Round 5 measure: Reduce lost-probe fraction and verify native leaf, stem, and rail continuity.
@@ -93,11 +95,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
    fine structure. Naturally smooth hidden regions remain a confound.
 
    Examples:
-   [Palace staircase](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/palace-stairs-phone-0--20.png)
+   [Palace staircase](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/palace-stairs-phone-0--20.webp)
    (phone, 100.0%);
-   [Spiral staircase](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/spiral-stairs-phone-0--30.png)
+   [Spiral staircase](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/spiral-stairs-phone-0--30.webp)
    (phone, 83.2%);
-   [Still life (painting)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/still-life-phone-0--20.png)
+   [Still life (painting)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/still-life-phone-0--20.webp)
    (phone, 98.7%).
 
    Round 5 measure: Reduce energy loss alongside streak excess; blank fill must not earn a clean
@@ -110,11 +112,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
    pale outlines at its muzzle and ears.
 
    Examples:
-   [Long library (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-library-phone-0--30.png)
+   [Long library (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-library-phone-0--30.webp)
    (phone, 18.5%, 144 profiles);
-   [Dragonfly (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-dragonfly-phone--30-0.png)
+   [Dragonfly (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-dragonfly-phone--30-0.webp)
    (phone, 23.8%, 23 profiles);
-   [Dog on a living-room floor](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-01-131641833-phone-30-0.png)
+   [Dog on a living-room floor](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-01-131641833-phone-30-0.webp)
    (phone, 35.4%, 7 profiles).
 
    Round 5 measure: Reduce anchored RGB error, out-of-palette excess, displacement, and transition
@@ -128,11 +130,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
    rate.
 
    Examples:
-   [Stones under water (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/cdx-hard-submerged-stones-phone-depth.png)
+   [Stones under water (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/cdx-hard-submerged-stones-phone-depth.webp)
    (phone, 80.3%);
-   [Frozen waterfall (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-ice-falls-phone-depth.png)
+   [Frozen waterfall (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-ice-falls-phone-depth.webp)
    (phone, 79.4%);
-   [Fishing cove (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cove-phone-depth.png)
+   [Fishing cove (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cove-phone-depth.webp)
    (phone, 74.6%).
 
    Round 5 measure: Use manually confirmed regions or reference errors; do not turn every texture
@@ -145,11 +147,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
    percentages are hypotheses rather than physical wrong-depth rates.
 
    Examples:
-   [Stoneware (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cdx-stoneware-phone-depth.png)
+   [Stoneware (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cdx-stoneware-phone-depth.webp)
    (phone, 41.6%);
-   [Dragonfly (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-dragonfly-phone-depth.png)
+   [Dragonfly (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-dragonfly-phone-depth.webp)
    (phone, 47.5%);
-   [Mushroom house (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cdx-mushroom-house-phone-depth.png)
+   [Mushroom house (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-cdx-mushroom-house-phone-depth.webp)
    (phone, 35.0%).
 
    Round 5 measure: Reduce confirmed order conflicts while guarding reference-scene pair reversals.
@@ -162,11 +164,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
    turn artifacts also depend on fill and edges.
 
    Examples:
-   [Lattice and colored blocks (reference)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/truth-lattice-phone-depth.png)
+   [Lattice and colored blocks (reference)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/truth-lattice-phone-depth.webp)
    (phone, 13.2%, RMSE 1.47 m);
-   [Arch corridor (reference)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/truth-arches-phone-depth.png)
+   [Arch corridor (reference)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/truth-arches-phone-depth.webp)
    (phone, 11.8%, RMSE 1.35 m);
-   [Night street and lamps (reference)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/truth-night-phone-depth.png)
+   [Night street and lamps (reference)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/truth-night-phone-depth.webp)
    (phone, 7.0%, RMSE 1.37 m).
 
    Round 5 measure: Reduce held-out AbsRel, meter errors, and pair reversals without losing
@@ -179,11 +181,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
    observation is not a latency guarantee.
 
    Examples:
-   [Carbonated water in a blue glass](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-13-61309178-phone-0-0.png)
+   [Carbonated water in a blue glass](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-13-61309178-phone-0-0.webp)
    (phone, 6.98 s);
-   [Cactus flower and spines](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-08-151156803-phone-0-0.png)
+   [Cactus flower and spines](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-08-151156803-phone-0-0.webp)
    (phone, 6.78 s);
-   [Dew on a spiderweb](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-11-159259312-phone-0-0.png)
+   [Dew on a spiderweb](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-11-159259312-phone-0-0.webp)
    (phone, 6.56 s).
 
    Round 5 measure: Reduce repeated per-input phone cold latency with the same first-GPU-frame and
@@ -195,11 +197,11 @@ Depth-cue counts are warnings, and cost cutoffs are review aids; they are not al
     five more frames. This is not dedicated GPU memory; 200 ms sampling can miss short peaks.
 
     Examples:
-    [Carbonated water in a blue glass](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-13-61309178-phone-0-0.png)
+    [Carbonated water in a blue glass](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-13-61309178-phone-0-0.webp)
     (phone, 1316 MiB);
-    [Strawberry close-up](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-03-35525184-phone-0-0.png)
+    [Strawberry close-up](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-03-35525184-phone-0-0.webp)
     (phone, 1285 MiB);
-    [Tomatoes in a metal bowl](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-17-27586242-phone-0-0.png)
+    [Tomatoes in a metal bowl](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-17-27586242-phone-0-0.webp)
     (phone, 1275 MiB).
 
     Round 5 measure: Reduce phone peak process memory alongside latency, with neither increasing.
@@ -219,9 +221,13 @@ file was reviewed at full resolution for people, visible logos, and watermarks.
 The real pack uses **Sharp picture, Fine/photo detail, and depth 0.5**. Built-ins use their baked
 depth; reference and added files use the real file-input path and original on-device model. Poses
 are front, yaw ±20°/±30°, and pitch ±20°/±30°. Phone is CSS 390×844/DPR 3, low profile, with main's
-**585×1266** native buffer; desktop is 1440×900/DPR 1, mid profile. Auto adaptation is disabled. A
-white background, no ground, and a still pose isolate the photo. Color, mask, and UV passes each use
-two completed GPU frames. Gallery crops include colored spill; clicks open native frames.
+**585×1266** native buffer at capture main; desktop is 1440×900/DPR 1, mid profile. Auto adaptation
+is disabled. A white background, no ground, and a still pose isolate the photo. Color, mask, and UV
+passes each use two completed GPU frames. Gallery crops include colored spill. Public review images
+are WebP at most 390×844, including all 2,124 color views; they are resized after scoring. Original
+photos and gzip-compressed numerical records remain public. Full-resolution color/mask/UV/reveal
+PNGs and projected-boundary debug files stay local and can be reproduced at the capture pin. Lossy
+reviews can hide fine fringes; private runs retain their native PNGs.
 
 - **Fill:** local directional coherence excess against nearby visible background, plus gradient
   energy loss. Neither proves believable hidden content. Blank fill cannot win by removing
@@ -244,15 +250,45 @@ two completed GPU frames. Gallery crops include colored spill; clicks open nativ
   shared pages repeatedly. Short peaks can be missed; this is neither GPU memory nor physical-phone
   performance.
 
-The gallery sorts the largest threshold-normalized captured artifact, or the selected metric.
-Flat-depth warnings have a separate filter. A badge's worst pose can differ from the preview's worst
-turn. Thresholds are review aids; none of the existing tests or thresholds changed.
+The default gallery priority is the largest value-to-review-level ratio across unlike quality
+metrics, without perceptual calibration between them. The combined RGB edge/halo metric drives
+**64/118 phone rows** (62/118 desktop rows); this is a priority heuristic rather than an independent
+ordering of visible damage. Selecting a failure sorts that metric. Flat-depth, speed, and memory
+have separate filters. A badge's worst pose can differ from the preview's worst turn.
+
+Separating bleed from misregistration was considered. Details now expose existing out-of-palette
+excess, edge-displacement p95, and transition-width excess per pose, alongside the combined RGB
+score. Out-of-palette excess is not a validated pure-bleed score: blending can stay within the
+source palette, and geometric displacement can also change color. Registration-aware validation
+against annotated edges is still needed. Existing score values and thresholds are unchanged.
 [Full method, environment, and evidence layout](https://github.com/ryanjosephkamp/splashery/tree/codex/photo-3d-failures-clips/review/photo-3d-failures).
+
+## Not validated
+
+Metric calibration uses synthetic fixtures only. The original 41 visual notes cover flagged
+examples; they do not establish false-positive rates or an annotated clean-photo control set. The
+following three lowest-priority phone inputs were subsequently reviewed visually against their
+source, front, worst turn, and depth at both profiles. None is certified clean across both profiles.
+
+| Control                                                                                                                                                                                | Phone / desktop priority rank | Visual observation                                                                                                                                                         |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Mushroom cap among needles](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/new-12-201342968-desktop-worst-crop.webp) | 118 / 110 of 118              | The turned cap has a dark, striped extension, especially at desktop yaw +30°. Phone fill and halo are unsupported, which lowers priority without demonstrating clean fill. |
+| [Alpine lake (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-alpine-lake-desktop-worst-crop.webp)       | 117 / 91 of 118               | Phone yaw −20° remains coherent at review size; desktop pitch +30° exposes foreground color ribbons. Thin probes are unsupported.                                          |
+| [Stone arch (AI-made)](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/renders/dot-arch-phone-worst-crop.webp)                 | 116 / 114 of 118              | The opening remains recognizable, with stepped arch/rock boundaries and stretched foreground details. Its depth has no physical reference.                                 |
+
+One fresh repeat of these three inputs at both profiles and all nine poses used the exact original
+source fingerprint: **54/54 decoded color frames and complete per-pose quality-score records matched
+exactly**. This is limited same-renderer repeatability evidence. The other 115 inputs, latency
+distributions, process-memory repeatability, other renderers, and threshold specificity remain
+unvalidated. Actual macOS, physical-phone performance, and frame rate are untested.
+[Control notes and support](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/verification/review-low-controls.json);
+[repeat proof](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/verification/review-repeat-proof.json).
 
 ## Run your own photos privately on a Mac
 
 Use a new checkout with Node.js 22 or later. Install the browser before disconnecting from the
-Internet. The audit itself uses only loopback HTTP, vendored inference, and local files.
+Internet. The audit itself uses only loopback HTTP, vendored inference, and local files. Clone the
+PR branch below, or use `main` after this PR merges.
 
 ```sh
 git clone --branch codex/photo-3d-failures --single-branch \
@@ -266,11 +302,17 @@ node tools/p3d-failures.mjs \
 open "$HOME/Desktop/photo-3d-private/index.html"
 ```
 
+This Mac command uses the repository's software-GL flags (SwiftShader by default), not native GPU
+timings. Its process-tree memory badge is RSS, which counts shared pages repeatedly. The Linux atlas
+uses Mesa llvmpipe and PSS. Mac speed and memory badges will not match the Linux atlas and should
+not be compared as performance changes.
+
 The input folder can contain JPEG, PNG, WebP, and browser-decodable HEIC/HEIF files. Convert an
 unsupported HEIC to a JPEG copy with Preview's File → Export, and put only the supported copy in the
 audit input folder. Keep the original elsewhere. The tool does not modify originals, recurse into
-unrelated folders, upload anything, or write Git commits. Its output folder must be empty, or an
-identical run resumed with:
+unrelated folders, upload anything, or write Git commits. Output must be outside the checkout or
+under its `.cache/`, including after resolving symlinks; tracked folders such as `docs/` are refused
+before reading private inputs. Its output folder must be empty, or an identical run resumed with:
 
 ```sh
 node tools/p3d-failures.mjs \
@@ -330,39 +372,38 @@ including visible branding and a watermark, are not part of the corpus.
 
 ## Verification and limits
 
-- Own spec: **8 passed (52.8 s)**, covering metric calibration, blank-fill avoidance, genuine holes,
-  thin-part loss, private inventory, real inference, four native phone views, gallery interactions,
-  local-only requests, and resume rejection.
-- Matrix proof: **118 original source/depth/reference inputs**, **118 copied photos**, **10,620
-  native artifact hashes**, **8,496 native PNG dimensions**, and **5,185 valid Linux PSS samples**
-  checked; zero failed capture attempts, unresolved profiles, or browser errors.
+- Revised own spec: **10 passed (58.9 s)**, covering synthetic metric calibration, blank-fill
+  avoidance, genuine holes, thin-part loss, checkout/symlink privacy rejection, resized-review
+  links, real inference, four native phone views, offline gallery interactions, and resume
+  rejection. The new privacy and review-link tests both failed before their respective fixes.
+- Original matrix proof: **118 original source/depth/reference inputs**, **118 copied photos**,
+  **10,620 native artifact hashes**, **8,496 native PNG dimensions**, and **5,185 valid Linux PSS
+  samples** checked; zero failed capture attempts, unresolved profiles, or browser errors.
 - Exact published-folder gallery QA: **52 filter/profile/viewport combinations** passed, including
-  counts, ordering, profile switching, search, reset, empty states, deep links, details, and native
-  links. Phone and desktop have no horizontal overflow or console/page errors. Screenshots and 41
-  visual-review notes are retained.
-- Formatting preserves normalized JSON hashes for **615 capture files**. The catalog correction
-  preserves every numerical profile. The public-manifest helper reproduces all 118 input hashes. A
-  separate supplied-depth smoke verifies its timing label; a mocked-platform/Linux-`ps` smoke
-  verifies unavailable RSS stays null. These smokes are not pooled into the matrix.
+  counts, ordering, profile switching, search, reset, empty states, deep links, edge diagnostics,
+  and WebP/gzip links. Both viewports have no horizontal overflow or console/page errors.
+- Compact package: **2,950 decoded WebP images**, **615 exact gzip-decompressed capture files**, and
+  **118 original photo hashes** checked. All numeric profiles remain unchanged. The package is under
+  170 MB, replacing the old 2.1 GB media payload; native PNGs remain local.
+- A real private-input browser smoke used a public fixture in a temporary folder, wrote outside the
+  checkout, made no outside-origin requests, and left Git status unchanged. The public-manifest
+  helper reproduces all 118 input hashes. Earlier supplied-depth and mocked-Mac-RSS bookkeeping
+  smokes remain separate from the matrix.
 - Full Prettier and American English checks gate every push. The production diff under `src/`,
   `assets/`, and `vendor/` is empty against main.
 
-The final branch merges main `d33f94216` (WebGPU bounds, accessibility, and other toys); photo
-reconstruction, depth-engine, and vendor bytes are unchanged from capture main `ea35f3de`.
-Post-capture tool changes only correct the unused supplied-depth timing description and unavailable
-Mac RSS.
+The revised branch merges main `cb8a83157`, including the loading-cover/status follow-up and camera
+optimizations. The atlas and its limited repeat remain pinned to capture commit `216c34dd` on main
+`ea35f3de`; they are not a fresh numerical baseline of later main. Post-capture tool changes cover
+privacy, presentation, supplied-depth timing, and unavailable Mac RSS.
 [Release provenance](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures-clips/review/photo-3d-failures/verification/release-provenance.json)
-records both fingerprints. Actual macOS, physical-phone performance, and frame rate are untested.
-There are 49 inputs without supported thin probes at each profile; these are not clean-edge passes.
+records the separate source fingerprints. Actual macOS, physical-phone performance, and frame rate
+are untested. There are 49 inputs without supported thin probes at each profile; these are not
+clean-edge passes.
 
-The first pilot exposed an invalid hole ROI: street/desktop at pitch -30° counted seven clear pixels
-outside the actual photo footprint. Its within-photo hole count was zero. The corrected metric clips
-to the footprint, and the same natural case now reports 0/45 uncovered candidates. A new boundary
-test also preserves detection of a genuine interior hole. The rejected pilot, its method commit, the
-intentional interruption, and the correction remain identified separately. A second early pilot was
-stopped for final source-photo screening and the round 4 merge. Neither interrupted pilot supplies
-scores to the final matrix; their notes and capture logs remain separate. The final matrix measures
-main `ea35f3de`, which includes round 4’s startup work.
+Two interrupted pilots are excluded. The first exposed an outside-photo hole ROI, corrected with
+tests for both genuine interior holes and false boundary holes (the natural case now scores 0/45).
+The second stopped for source screening and the round 4 merge. Their logs remain separate.
 
 Default Sharp rendering uses a textured relief mesh. These observations do not demonstrate a
 Gaussian-splat sorting regression. Stage attribution distinguishes measured depth/fill/edge behavior
@@ -370,7 +411,10 @@ from hypotheses; an unisolated cause is not labeled proven. This atlas changes n
 model, shader, sample, or test threshold. The full existing suite is left to the Operator's merge
 PR, as task 87 requests.
 
-Rule check: none.
+Rule check: E1 is touched only by replacing the never-merged media branch, explicitly requested in
+the
+[Operator's review](https://github.com/ryanjosephkamp/splashery/pull/658#issuecomment-6188850181).
+The code branch keeps its history, and neither PR nor main is merged by this task.
 
 ## Draft round 5 Goal
 
@@ -382,11 +426,14 @@ criteria, not results of this task.
 1. On every baseline-flagged input, reduce worst-pose streak excess by at least 30% and revealed
    texture-energy loss by at least 25%, with no per-input increase in either and no newly smeared or
    blank fill in native-frame review.
-2. On every supported thin-part input, reduce worst-pose fringe p95 by at least 30% and keep lost
-   probes at or below 10% without increasing them on any input; also review all unsupported hair,
-   leaf, wire, and web cases visually.
-3. Reach first 3D at least 25% sooner on every input's phone profile versus this frozen round 4
-   baseline, using medians of five fresh-browser runs, with peak process PSS no higher.
+2. On every baseline-flagged edge input, reduce worst-pose anchored mean RGB error by at least 25%,
+   without increasing edge displacement or transition-width p95. On supported thin parts, reduce
+   fringe p95 by at least 30% and keep lost probes at or below 10% without increasing them; review
+   unsupported hair, leaf, wire, and web cases visually.
+3. First re-baseline frozen round 4 and the candidate with five fresh-browser runs per input on the
+   same phone-profile hardware, browser, and settings. Reduce every input's median first-3D time by
+   at least 25%, with its maximum process PSS over those five runs no higher. This atlas's single
+   timing per input is not that acceptance baseline.
 4. Allow no per-input regression in holes, anchored edge errors, held-out reference-depth error, the
    text test (`phf-engine:200`), frame rate, or any existing spec; confirm the result on a physical
    phone before claiming physical-phone performance.
