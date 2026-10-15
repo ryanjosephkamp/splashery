@@ -1,0 +1,2824 @@
+{
+  "order": "candidate,checkpoint,candidate; independent browsers, four picks each, first pick cold",
+  "records": [
+    {
+      "name": "startup-indexed-e",
+      "browser": "151.0.7922.173",
+      "url": "http://127.0.0.1:4219/",
+      "build": {
+        "files": {
+          "src/packs/photo-3d.js": "f895aa114f2cf3648e518f1c05b034609a54d68d9034d027645d2cacfa42d246",
+          "src/packs/photo-3d-core.js": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57",
+          "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+          "src/photo3d/build-worker.js": "0f83e84d1b88ac35c2e1f579b99cabca13dc70ec490c9bd1fe15c4a47338c645",
+          "src/photo3d/prepare.js": "325e06171a1bed49cd242d515946906435e9845212e632a58f44b1539734b014",
+          "src/photo3d/background.js": "92b5950c792f10feeaaba024ae0751273564172279917f0e6c0ca415a254a279",
+          "src/photo3d/depth-edges.js": "5ddf367278f8988f0c75bb75968be5235586839f7690cd2feea27668e1d815e9",
+          "src/photo3d/surface.js": "cfa72273ea86c58635c5f6b12b9da2648fdd1a6e008502a36bf0d25912f41c15",
+          "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+          "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+          "src/live/relief-height.js": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+          "src/stage.js": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+          "src/photo3d/preview.js": "3675e2dfb13a2e25574328153d4429c196ec645a6e555e6d444a36d64f7d6586",
+          "src/photo3d/decode.js": "73e1e4ce8b87ec57aac3031c816e0ff600b5fb7d2076fef0f9eaf7aeb0073510",
+          "src/photo3d/decode-worker.js": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103",
+          "src/photo3d/border.js": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b",
+          "src/depth/engine.js": "2f59ffb7755ee1c96af95de2c93483c80dafc8c7f71007f2fc0bfb89cb332faf",
+          "src/packs/photo-3d-depth.js": "5afd7e5e88a4326add90604fc82c4b20e7f3dd31a1cec340ba7a61196cbe0a68",
+          ".cache/photo-3d-r4/migan/migan.onnx": "593eba0b7e04730f1b61c0a3cbca68d97d8d6a7ff5c6a44a7b9d7fcd880fc5ae"
+        },
+        "hash": "1098630a3678d5f90d65ce912d01cfcd705626d6e84b8079f7d0718c76352ccf"
+      },
+      "methodHash": "f575bd029b53f4987e49d7841a6a7e526f19d0617091b0bfe84ecaddc06e801a",
+      "modelOverride": null,
+      "modelHash": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+      "viewport": [390, 844],
+      "deviceScaleFactor": 3,
+      "results": [
+        {
+          "run": 0,
+          "start": 3237.39999999851,
+          "totalMs": 3972.300000000745,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 3238.89999999851,
+              "worker": "http://127.0.0.1:4219/src/photo3d/decode-worker.js",
+              "ms": 45.600000001490116
+            },
+            {
+              "start": 3286.5,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "type": "colors",
+              "ms": 265.79999999701977
+            },
+            {
+              "start": 3303.099999997765,
+              "worker": "http://127.0.0.1:4219/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 3104,
+              "inferenceMs": 2165.199999999255
+            },
+            {
+              "start": 6408.5,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "ms": 557.0999999977648
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 6989.599999997765,
+              "ms": 6.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 6996.29999999702,
+              "ms": 3.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 6999.79999999702,
+              "ms": 2.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7002.599999997765,
+              "ms": 3.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7006.099999997765,
+              "ms": 3.400000002235174
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7009.5,
+              "ms": 2.599999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7012.099999997765,
+              "ms": 1.6000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7013.699999999255,
+              "ms": 3.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7017.099999997765,
+              "ms": 2.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7019.89999999851,
+              "ms": 3.100000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7023,
+              "ms": 3.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7026.5,
+              "ms": 2.7999999970197678
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7029.29999999702,
+              "ms": 1.6000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7030.89999999851,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7038.5,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7039.89999999851,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7041.099999997765,
+              "ms": 1.1000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7042.199999999255,
+              "ms": 1.5999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7043.79999999702,
+              "ms": 1.2000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7045,
+              "ms": 1.2999999970197678
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7046.29999999702,
+              "ms": 1.1000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7047.39999999851,
+              "ms": 1
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7048.39999999851,
+              "ms": 1.8999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7050.29999999702,
+              "ms": 0.5
+            },
+            {
+              "label": "Kit.fit",
+              "start": 7050.79999999702,
+              "ms": 7.5
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 7058.29999999702,
+              "ms": 5.600000001490116
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 7064,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 7064.89999999851,
+              "ms": 30.199999999254942
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 7095.29999999702,
+              "ms": 0.6000000014901161
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 7099.599999997765,
+              "ms": 21.600000001490116
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 7125,
+              "ms": 0.09999999776482582
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 7125.099999997765,
+              "ms": 2.900000002235174
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 7128,
+              "ms": 4.199999999254942
+            }
+          ],
+          "refinementReadyMs": 3972.300000000745,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4219/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        },
+        {
+          "run": 1,
+          "start": 7246.199999999255,
+          "totalMs": 2905,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 7246.79999999702,
+              "worker": "http://127.0.0.1:4219/src/photo3d/decode-worker.js",
+              "ms": 43.600000001490116
+            },
+            {
+              "start": 7292.599999997765,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "type": "colors",
+              "ms": 305.1000000014901
+            },
+            {
+              "start": 7295.79999999702,
+              "worker": "http://127.0.0.1:4219/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 1989.2000000029802,
+              "inferenceMs": 1939.6000000014901
+            },
+            {
+              "start": 9285.89999999851,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "ms": 580
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 9901.199999999255,
+              "ms": 3.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9904.39999999851,
+              "ms": 3.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9907.699999999255,
+              "ms": 3.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9911.39999999851,
+              "ms": 3.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9915.099999997765,
+              "ms": 3.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9918.29999999702,
+              "ms": 1.7000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9920,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9921.5,
+              "ms": 1.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9923.199999999255,
+              "ms": 7.599999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9930.79999999702,
+              "ms": 1.4000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9932.199999999255,
+              "ms": 6.099999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9938.29999999702,
+              "ms": 1.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9947,
+              "ms": 1.5999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9948.599999997765,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9949.89999999851,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9951.099999997765,
+              "ms": 1.4000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9952.5,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9953.699999999255,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9955,
+              "ms": 1.0999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9956.099999997765,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9957.39999999851,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9958.599999997765,
+              "ms": 1.1000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9959.699999999255,
+              "ms": 2.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9962.39999999851,
+              "ms": 0.10000000149011612
+            },
+            {
+              "label": "Kit.fit",
+              "start": 9962.5,
+              "ms": 42.79999999701977
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 10005.29999999702,
+              "ms": 11.300000000745058
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 10016.599999997765,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 10019.29999999702,
+              "ms": 17.900000002235174
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 10037.199999999255,
+              "ms": 0.3999999985098839
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 10042.79999999702,
+              "ms": 1.1000000014901161
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 10047,
+              "ms": 0.09999999776482582
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 10047.099999997765,
+              "ms": 0.8000000007450581
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 10047.89999999851,
+              "ms": 1.6000000014901161
+            }
+          ],
+          "refinementReadyMs": 2905,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4219/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        },
+        {
+          "run": 2,
+          "start": 10217.89999999851,
+          "totalMs": 2834.300000000745,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 10218.39999999851,
+              "worker": "http://127.0.0.1:4219/src/photo3d/decode-worker.js",
+              "ms": 41.5
+            },
+            {
+              "start": 10265.099999997765,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "type": "colors",
+              "ms": 271.30000000074506
+            },
+            {
+              "start": 10269.099999997765,
+              "worker": "http://127.0.0.1:4219/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 2001.300000000745,
+              "inferenceMs": 1960
+            },
+            {
+              "start": 12272.29999999702,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "ms": 563.8000000007451
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 12853.599999997765,
+              "ms": 3.600000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12857.199999999255,
+              "ms": 3.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12860.5,
+              "ms": 3.599999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12864.099999997765,
+              "ms": 3
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12867.099999997765,
+              "ms": 3.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12870.29999999702,
+              "ms": 1.9000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12872.199999999255,
+              "ms": 2
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12874.199999999255,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12875.599999997765,
+              "ms": 1.4000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12877,
+              "ms": 3.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12880.5,
+              "ms": 1.5999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12882.099999997765,
+              "ms": 1.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12883.79999999702,
+              "ms": 1.4000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12885.199999999255,
+              "ms": 1.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12886.89999999851,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12888.29999999702,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12889.79999999702,
+              "ms": 1.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12891.599999997765,
+              "ms": 2.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12900.099999997765,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12901.599999997765,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12902.89999999851,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12904.39999999851,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12905.79999999702,
+              "ms": 1.9000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12907.699999999255,
+              "ms": 0.09999999776482582
+            },
+            {
+              "label": "Kit.fit",
+              "start": 12907.79999999702,
+              "ms": 26.200000002980232
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 12934,
+              "ms": 7.299999997019768
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 12941.29999999702,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 12943.79999999702,
+              "ms": 11.800000000745058
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 12955.699999999255,
+              "ms": 0.30000000074505806
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 12958,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 12960.39999999851,
+              "ms": 0.19999999925494194
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 12960.599999997765,
+              "ms": 8.600000001490116
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 12969.199999999255,
+              "ms": 2.300000000745058
+            }
+          ],
+          "refinementReadyMs": 2834.300000000745,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4219/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        },
+        {
+          "run": 3,
+          "start": 13091.29999999702,
+          "totalMs": 2555.7000000029802,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 13092.29999999702,
+              "worker": "http://127.0.0.1:4219/src/photo3d/decode-worker.js",
+              "ms": 46.80000000074506
+            },
+            {
+              "start": 13141.199999999255,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "type": "colors",
+              "ms": 267.5999999977648
+            },
+            {
+              "start": 13144.699999999255,
+              "worker": "http://127.0.0.1:4219/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 1927.8999999985099,
+              "inferenceMs": 1892.800000000745
+            },
+            {
+              "start": 15073.599999997765,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "ms": 336.1000000014901
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 15426.29999999702,
+              "ms": 4.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15430.599999997765,
+              "ms": 2.900000002235174
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15433.599999997765,
+              "ms": 3.400000002235174
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15437,
+              "ms": 3
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15440,
+              "ms": 2.7999999970197678
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15442.79999999702,
+              "ms": 1.7000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15444.5,
+              "ms": 1.5999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15446.099999997765,
+              "ms": 1.6000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15447.699999999255,
+              "ms": 1.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15449.39999999851,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15450.89999999851,
+              "ms": 1.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15452.699999999255,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15454.199999999255,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15455.699999999255,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15457.199999999255,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15458.599999997765,
+              "ms": 1.9000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15460.5,
+              "ms": 2
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15462.5,
+              "ms": 1.2999999970197678
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15469.199999999255,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15470.699999999255,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15472,
+              "ms": 1
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15473,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15474.199999999255,
+              "ms": 2.099999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15476.29999999702,
+              "ms": 0.10000000149011612
+            },
+            {
+              "label": "Kit.fit",
+              "start": 15476.39999999851,
+              "ms": 42.5
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 15518.89999999851,
+              "ms": 7.5
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 15526.39999999851,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 15527.39999999851,
+              "ms": 10.5
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 15537.89999999851,
+              "ms": 0.30000000074505806
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 15539.29999999702,
+              "ms": 11.700000002980232
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 15552.099999997765,
+              "ms": 0.19999999925494194
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 15552.29999999702,
+              "ms": 2.600000001490116
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 15554.89999999851,
+              "ms": 2.100000001490116
+            }
+          ],
+          "refinementReadyMs": 2555.7000000029802,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4219/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "startup-indexed-f",
+      "browser": "151.0.7922.173",
+      "url": "http://127.0.0.1:4174/",
+      "build": {
+        "files": {
+          "src/packs/photo-3d.js": "bd1eba55b416860ecbdb41f1c442b83281f9e9f2f9ba8b2888f04edb85ec127b",
+          "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+          "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+          "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+          "src/photo3d/prepare.js": "0259963e210e325403da3f32b24156b60ea9083c1d34525878f40503325c9ee8",
+          "src/photo3d/background.js": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa",
+          "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+          "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+          "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+          "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+          "src/live/relief-height.js": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+          "src/stage.js": "13f9da86865495adfc7863fd105ab759d0dbbd5f1812ddabc2ec1b9506e9ea5c",
+          "src/photo3d/preview.js": "287df71ea977f77a98e1fa756ebc3a939116c6fc7e9cfe8c2b4d8f784e163fce",
+          "src/photo3d/decode.js": "73e1e4ce8b87ec57aac3031c816e0ff600b5fb7d2076fef0f9eaf7aeb0073510",
+          "src/photo3d/decode-worker.js": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103",
+          "src/photo3d/border.js": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b",
+          "src/depth/engine.js": "953ad7094ed535a059f196e32eddbda4e7bbce0286f55baf2cb00eed4a7cbe89",
+          "src/packs/photo-3d-depth.js": "5afd7e5e88a4326add90604fc82c4b20e7f3dd31a1cec340ba7a61196cbe0a68"
+        },
+        "hash": "da709465e9e8df4b35fbde98eff65d9cf278de819b64b576309e9ac0bf6f45f9"
+      },
+      "methodHash": "f575bd029b53f4987e49d7841a6a7e526f19d0617091b0bfe84ecaddc06e801a",
+      "modelOverride": null,
+      "modelHash": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+      "viewport": [390, 844],
+      "deviceScaleFactor": 3,
+      "results": [
+        {
+          "run": 0,
+          "start": 3700.199999999255,
+          "totalMs": 5054.89999999851,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 3701.39999999851,
+              "worker": "http://127.0.0.1:4174/src/photo3d/decode-worker.js",
+              "ms": 39.5
+            },
+            {
+              "start": 3751.199999999255,
+              "worker": "http://127.0.0.1:4174/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 3655.800000000745,
+              "inferenceMs": 2656.60000000149
+            },
+            {
+              "start": 7409.099999997765,
+              "worker": "http://127.0.0.1:4174/src/photo3d/build-worker.js",
+              "ms": 901.3000000007451
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 8341,
+              "ms": 5.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8346.300000000745,
+              "ms": 4.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8351.099999997765,
+              "ms": 3.100000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8354.199999999255,
+              "ms": 3.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8357.800000000745,
+              "ms": 2.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8360.5,
+              "ms": 3
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8363.5,
+              "ms": 2.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8366.199999999255,
+              "ms": 2.399999998509884
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8368.599999997765,
+              "ms": 1.7000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8370.300000000745,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8371.699999999255,
+              "ms": 1.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8373.5,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8374.800000000745,
+              "ms": 4.799999997019768
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8379.599999997765,
+              "ms": 2.600000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8392,
+              "ms": 2.099999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8394.099999997765,
+              "ms": 1.6000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8395.699999999255,
+              "ms": 1.1000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8396.800000000745,
+              "ms": 1.5999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8398.39999999851,
+              "ms": 2.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8401.099999997765,
+              "ms": 3.400000002235174
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8404.5,
+              "ms": 2.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8406.800000000745,
+              "ms": 2.099999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8408.89999999851,
+              "ms": 3.600000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 8412.5,
+              "ms": 0.6999999992549419
+            },
+            {
+              "label": "Kit.fit",
+              "start": 8413.199999999255,
+              "ms": 11.699999999254942
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 8424.89999999851,
+              "ms": 11.400000002235174
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 8436.300000000745,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 8495.89999999851,
+              "ms": 28.300000000745058
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 8524.199999999255,
+              "ms": 0.3999999985098839
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 8547,
+              "ms": 15.199999999254942
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 8565.5,
+              "ms": 0.19999999925494194
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 8565.699999999255,
+              "ms": 2.399999998509884
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 8568.099999997765,
+              "ms": 4.5
+            }
+          ],
+          "refinementReadyMs": 5054.89999999851,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4174/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        },
+        {
+          "run": 1,
+          "start": 8870.099999997765,
+          "totalMs": 3700.900000002235,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 8870.800000000745,
+              "worker": "http://127.0.0.1:4174/src/photo3d/decode-worker.js",
+              "ms": 52.29999999701977
+            },
+            {
+              "start": 8924.89999999851,
+              "worker": "http://127.0.0.1:4174/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 2360,
+              "inferenceMs": 2320.900000002235
+            },
+            {
+              "start": 11286.099999997765,
+              "worker": "http://127.0.0.1:4174/src/photo3d/build-worker.js",
+              "ms": 910.3000000007451
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 12244.099999997765,
+              "ms": 3.2000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12247.300000000745,
+              "ms": 3.599999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12250.89999999851,
+              "ms": 3.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12254.39999999851,
+              "ms": 3.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12257.699999999255,
+              "ms": 3.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12261,
+              "ms": 4.099999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12265.099999997765,
+              "ms": 1.9000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12267,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12268.39999999851,
+              "ms": 1.6000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12270,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12271.39999999851,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12272.89999999851,
+              "ms": 8.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12292.199999999255,
+              "ms": 3.899999998509884
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12296.099999997765,
+              "ms": 1.2000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12297.300000000745,
+              "ms": 3.099999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12300.39999999851,
+              "ms": 2.100000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12302.5,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12303.699999999255,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12305.199999999255,
+              "ms": 1.1000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12306.300000000745,
+              "ms": 2.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12308.800000000745,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12310.300000000745,
+              "ms": 1.0999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12311.39999999851,
+              "ms": 2.100000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12313.5,
+              "ms": 0.09999999776482582
+            },
+            {
+              "label": "Kit.fit",
+              "start": 12313.599999997765,
+              "ms": 57.400000002235174
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 12371,
+              "ms": 3.300000000745058
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 12374.300000000745,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 12381.099999997765,
+              "ms": 16.200000002980232
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 12397.300000000745,
+              "ms": 0.3999999985098839
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 12404.699999999255,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 12409.39999999851,
+              "ms": 0.30000000074505806
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 12409.699999999255,
+              "ms": 16.699999999254942
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 12426.39999999851,
+              "ms": 1.800000000745058
+            }
+          ],
+          "refinementReadyMs": 3700.900000002235,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4174/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        },
+        {
+          "run": 2,
+          "start": 12603.300000000745,
+          "totalMs": 3707.89999999851,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 12603.800000000745,
+              "worker": "http://127.0.0.1:4174/src/photo3d/decode-worker.js",
+              "ms": 53.29999999701977
+            },
+            {
+              "start": 12658.699999999255,
+              "worker": "http://127.0.0.1:4174/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 2457.60000000149,
+              "inferenceMs": 2413.2999999970198
+            },
+            {
+              "start": 15117.099999997765,
+              "worker": "http://127.0.0.1:4174/src/photo3d/build-worker.js",
+              "ms": 883.3000000007451
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 16022.699999999255,
+              "ms": 3.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16026.199999999255,
+              "ms": 3
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16029.199999999255,
+              "ms": 4.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16034,
+              "ms": 3
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16037,
+              "ms": 3.099999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16040.099999997765,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16041.699999999255,
+              "ms": 1.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16043.5,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16045,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16046.300000000745,
+              "ms": 1.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16048,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16049.300000000745,
+              "ms": 1.8999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16051.199999999255,
+              "ms": 1.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16052.89999999851,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16054.39999999851,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16055.699999999255,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16057.099999997765,
+              "ms": 1.7000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16058.800000000745,
+              "ms": 1.2999999970197678
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16066.300000000745,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16067.800000000745,
+              "ms": 1.2999999970197678
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16069.099999997765,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16070.39999999851,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16071.699999999255,
+              "ms": 2.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 16074.099999997765,
+              "ms": 0
+            },
+            {
+              "label": "Kit.fit",
+              "start": 16074.099999997765,
+              "ms": 6
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 16080.099999997765,
+              "ms": 7.200000002980232
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 16087.300000000745,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 16087.39999999851,
+              "ms": 100.90000000223517
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 16188.39999999851,
+              "ms": 0.30000000074505806
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 16191.599999997765,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 16194,
+              "ms": 0.09999999776482582
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 16194.099999997765,
+              "ms": 2.2000000029802322
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 16196.39999999851,
+              "ms": 4.100000001490116
+            }
+          ],
+          "refinementReadyMs": 3707.89999999851,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4174/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        },
+        {
+          "run": 3,
+          "start": 16355,
+          "totalMs": 3671.39999999851,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 16359.099999997765,
+              "worker": "http://127.0.0.1:4174/src/photo3d/decode-worker.js",
+              "ms": 40.80000000074506
+            },
+            {
+              "start": 16401.099999997765,
+              "worker": "http://127.0.0.1:4174/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 2512.7000000029802,
+              "inferenceMs": 2462.60000000149
+            },
+            {
+              "start": 18914.89999999851,
+              "worker": "http://127.0.0.1:4174/src/photo3d/build-worker.js",
+              "ms": 733.5
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 19678.39999999851,
+              "ms": 5.600000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19684.099999997765,
+              "ms": 6.400000002235174
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19690.5,
+              "ms": 4.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19695.199999999255,
+              "ms": 5.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19700.5,
+              "ms": 3.599999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19704.099999997765,
+              "ms": 1.7000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19705.800000000745,
+              "ms": 2.399999998509884
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19708.199999999255,
+              "ms": 3.600000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19711.800000000745,
+              "ms": 2.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19714.5,
+              "ms": 4.399999998509884
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19718.89999999851,
+              "ms": 2.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19721.39999999851,
+              "ms": 2.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19731.599999997765,
+              "ms": 2.600000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19734.199999999255,
+              "ms": 2.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19737,
+              "ms": 2.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19739.699999999255,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19741.099999997765,
+              "ms": 3.600000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19744.699999999255,
+              "ms": 3
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19747.800000000745,
+              "ms": 6.899999998509884
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19754.699999999255,
+              "ms": 2.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19757,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19758.5,
+              "ms": 1.0999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19759.599999997765,
+              "ms": 2.2000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 19764.599999997765,
+              "ms": 0.20000000298023224
+            },
+            {
+              "label": "Kit.fit",
+              "start": 19764.800000000745,
+              "ms": 7.5
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 19772.300000000745,
+              "ms": 5.099999997764826
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 19777.39999999851,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 19777.699999999255,
+              "ms": 13.300000000745058
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 19791,
+              "ms": 0.3999999985098839
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 19829,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 19833.699999999255,
+              "ms": 0.19999999925494194
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 19833.89999999851,
+              "ms": 14.600000001490116
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 19848.5,
+              "ms": 2.5
+            }
+          ],
+          "refinementReadyMs": 3671.39999999851,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4174/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        }
+      ]
+    },
+    {
+      "name": "startup-indexed-g",
+      "browser": "151.0.7922.173",
+      "url": "http://127.0.0.1:4219/",
+      "build": {
+        "files": {
+          "src/packs/photo-3d.js": "f895aa114f2cf3648e518f1c05b034609a54d68d9034d027645d2cacfa42d246",
+          "src/packs/photo-3d-core.js": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57",
+          "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+          "src/photo3d/build-worker.js": "0f83e84d1b88ac35c2e1f579b99cabca13dc70ec490c9bd1fe15c4a47338c645",
+          "src/photo3d/prepare.js": "325e06171a1bed49cd242d515946906435e9845212e632a58f44b1539734b014",
+          "src/photo3d/background.js": "92b5950c792f10feeaaba024ae0751273564172279917f0e6c0ca415a254a279",
+          "src/photo3d/depth-edges.js": "5ddf367278f8988f0c75bb75968be5235586839f7690cd2feea27668e1d815e9",
+          "src/photo3d/surface.js": "cfa72273ea86c58635c5f6b12b9da2648fdd1a6e008502a36bf0d25912f41c15",
+          "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+          "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+          "src/live/relief-height.js": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+          "src/stage.js": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+          "src/photo3d/preview.js": "3675e2dfb13a2e25574328153d4429c196ec645a6e555e6d444a36d64f7d6586",
+          "src/photo3d/decode.js": "73e1e4ce8b87ec57aac3031c816e0ff600b5fb7d2076fef0f9eaf7aeb0073510",
+          "src/photo3d/decode-worker.js": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103",
+          "src/photo3d/border.js": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b",
+          "src/depth/engine.js": "2f59ffb7755ee1c96af95de2c93483c80dafc8c7f71007f2fc0bfb89cb332faf",
+          "src/packs/photo-3d-depth.js": "5afd7e5e88a4326add90604fc82c4b20e7f3dd31a1cec340ba7a61196cbe0a68",
+          ".cache/photo-3d-r4/migan/migan.onnx": "593eba0b7e04730f1b61c0a3cbca68d97d8d6a7ff5c6a44a7b9d7fcd880fc5ae"
+        },
+        "hash": "1098630a3678d5f90d65ce912d01cfcd705626d6e84b8079f7d0718c76352ccf"
+      },
+      "methodHash": "f575bd029b53f4987e49d7841a6a7e526f19d0617091b0bfe84ecaddc06e801a",
+      "modelOverride": null,
+      "modelHash": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+      "viewport": [390, 844],
+      "deviceScaleFactor": 3,
+      "results": [
+        {
+          "run": 0,
+          "start": 3441.900000002235,
+          "totalMs": 3804.599999997765,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 3444.400000002235,
+              "worker": "http://127.0.0.1:4219/src/photo3d/decode-worker.js",
+              "ms": 38.5
+            },
+            {
+              "start": 3485.10000000149,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "type": "colors",
+              "ms": 378
+            },
+            {
+              "start": 3504.60000000149,
+              "worker": "http://127.0.0.1:4219/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 2946,
+              "inferenceMs": 2030.3999999985099
+            },
+            {
+              "start": 6452.60000000149,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "ms": 556.8999999985099
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 7028.699999999255,
+              "ms": 4.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7033,
+              "ms": 1.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7034.800000000745,
+              "ms": 1.6000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7036.400000002235,
+              "ms": 1.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7038.10000000149,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7039.60000000149,
+              "ms": 2.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7041.800000000745,
+              "ms": 2
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7043.800000000745,
+              "ms": 1.8999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7045.699999999255,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7047.199999999255,
+              "ms": 1.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7049,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7050.199999999255,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7051.699999999255,
+              "ms": 1.9000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7053.60000000149,
+              "ms": 1.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7055.300000000745,
+              "ms": 1.6000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7056.900000002235,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7058.10000000149,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7059.60000000149,
+              "ms": 1.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7060.800000000745,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7062.10000000149,
+              "ms": 1.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7063.900000002235,
+              "ms": 1
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7064.900000002235,
+              "ms": 1.0999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7066,
+              "ms": 2.100000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 7074.800000000745,
+              "ms": 0.3999999985098839
+            },
+            {
+              "label": "Kit.fit",
+              "start": 7075.199999999255,
+              "ms": 7.100000001490116
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 7082.300000000745,
+              "ms": 3.899999998509884
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 7086.199999999255,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 7087,
+              "ms": 24.400000002235174
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 7111.5,
+              "ms": 0.4000000022351742
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 7115,
+              "ms": 31.400000002235174
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 7149.199999999255,
+              "ms": 0.10000000149011612
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 7149.400000002235,
+              "ms": 2.2999999970197678
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 7151.699999999255,
+              "ms": 5
+            }
+          ],
+          "refinementReadyMs": 3804.599999997765,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4219/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        },
+        {
+          "run": 1,
+          "start": 7292.800000000745,
+          "totalMs": 2906.39999999851,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 7293.300000000745,
+              "worker": "http://127.0.0.1:4219/src/photo3d/decode-worker.js",
+              "ms": 44.5
+            },
+            {
+              "start": 7340,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "type": "colors",
+              "ms": 281.30000000074506
+            },
+            {
+              "start": 7343.800000000745,
+              "worker": "http://127.0.0.1:4219/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 1986.199999999255,
+              "inferenceMs": 1949.300000000745
+            },
+            {
+              "start": 9331.400000002235,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "ms": 598.8999999985099
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 9970,
+              "ms": 3.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9973.300000000745,
+              "ms": 3.399999998509884
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9976.699999999255,
+              "ms": 3.2000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9979.900000002235,
+              "ms": 3.899999998509884
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9983.900000002235,
+              "ms": 3.2999999970197678
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9987.199999999255,
+              "ms": 2.900000002235174
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9990.10000000149,
+              "ms": 3.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9993.300000000745,
+              "ms": 3.100000001490116
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9996.400000002235,
+              "ms": 2.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 9998.699999999255,
+              "ms": 1.4000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10000.10000000149,
+              "ms": 1.5999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10001.699999999255,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10003.199999999255,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10004.800000000745,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10006.300000000745,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10007.699999999255,
+              "ms": 1.9000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10016.300000000745,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10017.60000000149,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10019,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10020.300000000745,
+              "ms": 1.1000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10021.400000002235,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10022.800000000745,
+              "ms": 1
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10023.800000000745,
+              "ms": 1.8999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 10025.699999999255,
+              "ms": 0.10000000149011612
+            },
+            {
+              "label": "Kit.fit",
+              "start": 10025.800000000745,
+              "ms": 42.5
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 10068.300000000745,
+              "ms": 11.5
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 10079.800000000745,
+              "ms": 0.10000000149011612
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 10082.5,
+              "ms": 15.900000002235174
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 10098.5,
+              "ms": 0.30000000074505806
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 10105.10000000149,
+              "ms": 2.599999997764826
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 10112.199999999255,
+              "ms": 0.4000000022351742
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 10112.60000000149,
+              "ms": 3
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 10115.60000000149,
+              "ms": 1.800000000745058
+            }
+          ],
+          "refinementReadyMs": 2906.39999999851,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4219/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        },
+        {
+          "run": 2,
+          "start": 10237.699999999255,
+          "totalMs": 2768.400000002235,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 10238.400000002235,
+              "worker": "http://127.0.0.1:4219/src/photo3d/decode-worker.js",
+              "ms": 48
+            },
+            {
+              "start": 10288.60000000149,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "type": "colors",
+              "ms": 267.0999999977648
+            },
+            {
+              "start": 10291.60000000149,
+              "worker": "http://127.0.0.1:4219/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 1939.5999999977648,
+              "inferenceMs": 1897.800000000745
+            },
+            {
+              "start": 12232.5,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "ms": 552.4000000022352
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 12802.800000000745,
+              "ms": 4.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12807,
+              "ms": 3.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12810.199999999255,
+              "ms": 3.7000000029802322
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12813.900000002235,
+              "ms": 3.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12817.400000002235,
+              "ms": 3.2999999970197678
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12820.699999999255,
+              "ms": 1.9000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12822.60000000149,
+              "ms": 1.8999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12824.5,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12826,
+              "ms": 1.800000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12827.800000000745,
+              "ms": 2.199999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12830,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12831.5,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12833,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12834.5,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12836,
+              "ms": 1.9000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12837.900000002235,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12839.300000000745,
+              "ms": 2
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12841.300000000745,
+              "ms": 1.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12849.5,
+              "ms": 1.6000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12851.10000000149,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12852.400000002235,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12853.800000000745,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12855.10000000149,
+              "ms": 2
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 12857.10000000149,
+              "ms": 0.19999999925494194
+            },
+            {
+              "label": "Kit.fit",
+              "start": 12857.300000000745,
+              "ms": 26
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 12883.300000000745,
+              "ms": 7.100000001490116
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 12890.400000002235,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 12893.800000000745,
+              "ms": 13.600000001490116
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 12907.400000002235,
+              "ms": 0.29999999701976776
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 12910.699999999255,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 12914.400000002235,
+              "ms": 0.09999999776482582
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 12914.5,
+              "ms": 2.699999999254942
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 12917.199999999255,
+              "ms": 2.300000000745058
+            }
+          ],
+          "refinementReadyMs": 2768.400000002235,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4219/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        },
+        {
+          "run": 3,
+          "start": 13047.199999999255,
+          "totalMs": 2618.10000000149,
+          "sharp": {
+            "views": {
+              "photo-3d": "sharp",
+              "moving-photo-3d": "sharp"
+            },
+            "on": true,
+            "kind": "photo",
+            "grid": [298, 201],
+            "color": [1280, 853],
+            "depth": [664, 448],
+            "video": false,
+            "videoTime": null,
+            "cost": {
+              "color": 5823147,
+              "depth": 297472,
+              "mesh": 3854136,
+              "pieces": 323080,
+              "background": 570112,
+              "triangles": 132276,
+              "total": 10867947
+            },
+            "splatsOff": true
+          },
+          "backgroundPending": false,
+          "workers": [
+            {
+              "start": 13047.800000000745,
+              "worker": "http://127.0.0.1:4219/src/photo3d/decode-worker.js",
+              "ms": 54.69999999925494
+            },
+            {
+              "start": 13107.5,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "type": "colors",
+              "ms": 255.30000000074506
+            },
+            {
+              "start": 13110.300000000745,
+              "worker": "http://127.0.0.1:4219/src/live/depth-worker.js",
+              "type": "photo",
+              "ms": 2002.800000000745,
+              "inferenceMs": 1958
+            },
+            {
+              "start": 15114.10000000149,
+              "worker": "http://127.0.0.1:4219/src/photo3d/build-worker.js",
+              "ms": 318.80000000074506
+            }
+          ],
+          "steps": [
+            {
+              "label": "Kit.emitCloud",
+              "start": 15449.5,
+              "ms": 4
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15453.5,
+              "ms": 3
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15456.5,
+              "ms": 3.900000002235174
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15460.400000002235,
+              "ms": 3.599999997764826
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15464,
+              "ms": 3.699999999254942
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15467.699999999255,
+              "ms": 1.4000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15469.10000000149,
+              "ms": 1.5999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15470.699999999255,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15472,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15473.5,
+              "ms": 1.6000000014901161
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15475.10000000149,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15476.60000000149,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15478,
+              "ms": 1.4000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15479.400000002235,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15480.900000002235,
+              "ms": 1.2999999970197678
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15482.199999999255,
+              "ms": 1.4000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15483.60000000149,
+              "ms": 2
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15485.60000000149,
+              "ms": 1.3999999985098839
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15492.300000000745,
+              "ms": 1.5
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15493.800000000745,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15495.10000000149,
+              "ms": 1.0999999977648258
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15496.199999999255,
+              "ms": 1.300000000745058
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15497.5,
+              "ms": 1.9000000022351742
+            },
+            {
+              "label": "Kit.emitCloud",
+              "start": 15499.400000002235,
+              "ms": 0.09999999776482582
+            },
+            {
+              "label": "Kit.fit",
+              "start": 15499.5,
+              "ms": 41.600000001490116
+            },
+            {
+              "label": "Kit.encodeMorphs",
+              "start": 15541.10000000149,
+              "ms": 6.800000000745058
+            },
+            {
+              "label": "Kit.encodeReliefs",
+              "start": 15547.900000002235,
+              "ms": 0
+            },
+            {
+              "label": "Player.makeContainer",
+              "start": 15549.10000000149,
+              "ms": 9.899999998509884
+            },
+            {
+              "label": "Stage.setToy",
+              "start": 15559.10000000149,
+              "ms": 0.30000000074505806
+            },
+            {
+              "label": "Sharp.setColor",
+              "start": 15560.400000002235,
+              "ms": 10.399999998509884
+            },
+            {
+              "label": "Sharp.setDepth",
+              "start": 15571.900000002235,
+              "ms": 0
+            },
+            {
+              "label": "Sharp.setPieces",
+              "start": 15571.900000002235,
+              "ms": 14
+            },
+            {
+              "label": "Sharp.setBackground",
+              "start": 15585.900000002235,
+              "ms": 1.7999999970197678
+            }
+          ],
+          "refinementReadyMs": 2618.10000000149,
+          "backgroundFill": null,
+          "depthModel": {
+            "url": "http://127.0.0.1:4219/vendor/depth-anything-v2-small/model_quantized.onnx",
+            "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d",
+            "positionTableSha256": null
+          }
+        }
+      ]
+    }
+  ]
+}

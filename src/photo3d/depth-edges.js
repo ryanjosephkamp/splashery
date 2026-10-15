@@ -13,7 +13,7 @@ export function photoEdgeGuide(photo, w, h) {
   return rgb;
 }
 
-export function refineDepthEdges(depth, rgb, w, h, radius) {
+export function prepareDepthEdges(rgb, w, h, radius) {
   radius = Math.max(2, Math.min(24, Math.ceil(radius)));
   const n = w * h;
   const links = new Uint8Array(n);
@@ -86,11 +86,25 @@ export function refineDepthEdges(depth, rgb, w, h, radius) {
     if (i >= w && links[i - w] & 2) push(i - w);
     if (links[i] & 2) push(i + w);
   }
+  return { rgb, w, h, radius, links, donor };
+}
+
+export function refineDepthEdges(depth, rgb, w, h, radius, prepared = null) {
+  radius = Math.max(2, Math.min(24, Math.ceil(radius)));
+  const n = w * h;
+  const base =
+    prepared?.rgb === rgb && prepared.w === w && prepared.h === h && prepared.radius === radius
+      ? prepared
+      : prepareDepthEdges(rgb, w, h, radius);
+  const { links, donor } = base;
+  const queue = new Int32Array(n);
+  let tail = 0;
   const target = depth.slice();
   const slope = new Float32Array(n * 2);
   const gradient = (j, step, before, after) => {
-    const a = before && colorDistance(j, j - step) < 0.14 ** 2;
-    const b = after && colorDistance(j, j + step) < 0.14 ** 2;
+    const bit = step === 1 ? 1 : 2;
+    const a = before && links[j - step] & bit;
+    const b = after && links[j] & bit;
     if (a && b) return (depth[j + step] - depth[j - step]) * 0.5;
     if (a) return depth[j] - depth[j - step];
     if (b) return depth[j + step] - depth[j];
@@ -128,8 +142,9 @@ export function refineDepthEdges(depth, rgb, w, h, radius) {
   for (let y = 0; y < h; y++)
     for (let x = 0; x < w; x++) {
       const i = y * w + x;
-      for (const j of [x + 1 < w ? i + 1 : i, y + 1 < h ? i + w : i]) {
-        if (donor[i] < 0 || donor[j] < 0 || colorDistance(i, j) < 0.14 ** 2) continue;
+      for (let side = 0; side < 2; side++) {
+        const j = side === 0 ? (x + 1 < w ? i + 1 : i) : y + 1 < h ? i + w : i;
+        if (donor[i] < 0 || donor[j] < 0 || j === i || links[i] & (1 << side)) continue;
         // Tangents from distant donors can diverge on a smooth inflection.
         // Require a real cut or a boundary gradient substantially steeper
         // than both stable interiors, rather than the extrapolation alone.
