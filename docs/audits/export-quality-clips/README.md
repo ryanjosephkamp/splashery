@@ -39,7 +39,10 @@ blank frames. [Photo Standard](r3/phone-photo-3d-standard.webm),
 [all-frame checks](r3/frame-checks.json), and
 [motion contact sheet](r3/record-rates-contact-sheet.jpg). These are sparse SwiftShader takes; their
 observed rates do not establish sustained physical-phone 30-fps capacity. The plan retains its
-target-bitrate margin. Compressed-byte and JS-heap samples are not total device RAM measurements.
+target-bitrate margin. The four takes used the default muted speaker and contain silent Opus tracks.
+Their measured rates include those silent tracks; the plan independently reserves 128 kb/s for
+audio. Native sound-on and paused/resumed sound capture passed separately in the export spec.
+Compressed-byte and JS-heap samples are not total device RAM measurements.
 
 The six `r3/cdx-export-share-*` captures show Record, Video, and GIF on the merged layout at both
 review sizes.
@@ -55,8 +58,13 @@ on main. The added surface-input readiness assertion passed three consecutive ru
 pixel comparison passed with unchanged pixel limits and a longer local CLI time budget.
 
 [Every observed failure and its rerun](r3/review.md), including the superseded intermediate runs.
-The [latest full GitHub suite](https://github.com/ryanjosephkamp/splashery/actions/runs/38816580752)
-is still running. The source remains draft at `ca35cab0` for the owner's look.
+The
+[completed full GitHub suite](https://github.com/ryanjosephkamp/splashery/actions/runs/38816580752)
+reported all **319/319 spec files** and **2,806 tests: 2,802 passed, three failed, and one
+skipped**. The hands-on lift/toss, panel resizing, and fake-camera depth-drift failures all passed
+automatic isolated reruns with unchanged assertions and timeouts. Their initial failures still
+count; this is a failed full run. See the [complete CI summary](r3/ci-ca35-summary.md). The source
+remains draft at `ca35cab0` for the owner's look.
 
 ## Earlier revision: one-minute High
 

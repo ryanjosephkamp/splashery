@@ -24,10 +24,11 @@ until Stop, then become a Blob. Nothing is split, uploaded, or written to disk a
 ## Full-length phone takes
 
 All four real takes reached the 180-second time limit, including both High takes. None stopped at
-the byte guard or failed. Each replayed the toy action about every four seconds with sound.
-[The refreshed record-rates-r2.json](record-rates.json) includes retained compressed bytes, samples
-about every five seconds, the largest chunk, and JS heap samples. The earlier short phone/computer
-measurements remain in [record-rates-r2-original.json](../r2/record-rates.json).
+the byte guard or failed. Each replayed the toy action about every four seconds with an audio track.
+The speaker stayed off, the app default. [The refreshed record-rates-r2.json](record-rates.json)
+includes retained compressed bytes, samples about every five seconds, the largest chunk, and JS heap
+samples. The earlier short phone/computer measurements remain in
+[record-rates-r2-original.json](../r2/record-rates.json).
 
 | Toy         | Level    | File bytes | Encoded seconds | Video frames | Bytes/second | MB/min | Bytes below encoded cap |
 | ----------- | -------- | ---------: | --------------: | -----------: | -----------: | -----: | ----------------------: |
@@ -133,4 +134,38 @@ or unknown cases. The moving PDF and lantern/rig cases passed individually witho
 assertions or timeouts. Both exact QR hash checks passed under CI's Node 22 runtime; the Node 24
 failures also reproduce on immutable main. See [the full case coverage](local-coverage.json),
 [verification](verification.json), and the [earlier full CI failures](ci-c14-summary.md). The latest
-GitHub suite is still running.
+GitHub suite is complete; its full results follow.
+
+## Completed full GitHub suite
+
+The [final run at ca35cab0](https://github.com/ryanjosephkamp/splashery/actions/runs/38816580752)
+completed all **319/319 spec files**, with **2,806 tests: 2,802 passed, three failed, and one
+skipped**. All 16 shards reported; none is missing. Quick checks passed. The full run remains failed
+even though every initial failure passed alone.
+
+| Initial failure                                                                                     | Automatic isolated rerun | Error                                |
+| --------------------------------------------------------------------------------------------------- | ------------------------ | ------------------------------------ |
+| `cdx-mir:294`, still: measured drift stays below the baseline, real depth worker with a fake camera | Passed                   | `toBeLessThan`                       |
+| `hl1:92`, Hands-on: lift, toss, land, settle and Reset                                              | Passed                   | Level 1 gaps; full receipts attached |
+| `smoke:1054`, the panel and the shelf can be made bigger on a wide screen                           | Passed                   | `toBeGreaterThan`                    |
+
+Assertions, thresholds, and timeouts in these three cases are unchanged. The readiness fix for the
+surface test and the corrected manual, vendor credits, and Share choices passed in this full run.
+The [workflow summary](ci-ca35-summary.md), [per-file times](ci-ca35-times.json), and
+[machine-readable verification](verification.json) preserve the final results. The earlier seven
+full-run failures, five superseded-run failures, and four local failures remain reported above or in
+the linked coverage; positive reruns do not erase them. The superseded `89ec8c3e` run had no
+observed failures in its eight started shard logs and was canceled for the surface readiness fix; it
+is not a completed suite.
+
+## Audio mode in the long rate study
+
+Correction to the earlier source
+[checkpoint](https://github.com/ryanjosephkamp/splashery/blob/ca35cab08ed7ce3e5045b1f6fd4905085fb9c6e7/docs/audits/export-quality/review-r3.md):
+its “with sound” description was inaccurate. The long rate takes were muted.
+
+The four long takes used the default muted speaker and contain silent Opus tracks (decoded peak −91
+dB). Their measured MB/min therefore includes a silent audio track. The policy calculations always
+reserve 128 kb/s for audio, independently of these small observed files. Native sound-on and
+paused/resumed sound capture passed separately in the export spec. These measurements do not
+establish full-frame-rate hardware or total device-memory capacity.

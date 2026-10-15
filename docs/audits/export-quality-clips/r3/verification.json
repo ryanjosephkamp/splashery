@@ -135,8 +135,56 @@
   "finalGitHub": {
     "run": 38816580752,
     "head": "ca35cab08ed7ce3e5045b1f6fd4905085fb9c6e7",
-    "status": "running",
-    "quickChecks": "success"
+    "status": "completed",
+    "initialFailures": [
+      {
+        "test": "hl1:92",
+        "name": "Hands-on: lift, toss, land, settle and Reset",
+        "alone": "passed",
+        "error": "Level 1 gaps; full receipts are attached",
+        "automaticIsolatedRerun": true,
+        "assertionsAndTimeoutUnchanged": true,
+        "jobId": 116703133200
+      },
+      {
+        "test": "smoke:1054",
+        "name": "the panel and the shelf can be made bigger on a wide screen",
+        "alone": "passed",
+        "error": "expect(received).toBeGreaterThan(expected)",
+        "automaticIsolatedRerun": true,
+        "assertionsAndTimeoutUnchanged": true,
+        "jobId": 116703133202
+      },
+      {
+        "test": "cdx-mir:294",
+        "name": "still: measured drift stays below the baseline (fake camera)",
+        "alone": "passed",
+        "error": "expect(received).toBeLessThan(expected)",
+        "automaticIsolatedRerun": true,
+        "assertionsAndTimeoutUnchanged": true,
+        "jobId": 116703133300
+      }
+    ],
+    "conclusion": "failure",
+    "workflowURL": "https://github.com/ryanjosephkamp/splashery/actions/runs/38816580752",
+    "updatedAt": "2026-10-15T23:02:50Z",
+    "specFilesReported": 319,
+    "specFilesExpected": 319,
+    "missingSpecFiles": [],
+    "tests": 2806,
+    "passed": 2802,
+    "failed": 3,
+    "skipped": 1,
+    "shards": 16,
+    "allInitialFailuresPassedAlone": true,
+    "allPassingAloneStillCountAsInitialFailures": true,
+    "summaryArtifact": {
+      "id": 12013080800,
+      "name": "summary-a1",
+      "bytes": 3139,
+      "sha256": "bcc37f2cafca57cd8af00d387f42d4fd771a96b612602fd82b9f3a2f00b29508",
+      "report": "ci-ca35-summary.md"
+    }
   },
   "localMergedSelection": {
     "expected": 101,
@@ -678,5 +726,35 @@
       "lanternRig": "passed individually, original timeout/assertions",
       "twoQRHashes": "both passed individually under Node22; Node24 failures reproduced on immutablemain d4"
     }
-  }
+  },
+  "longTakeAudioMode": {
+    "speaker": "off (the app default)",
+    "track": "silent Opus audio track included",
+    "levelsDb": [
+      {
+        "key": "phone-photo-3d-standard",
+        "mean_volume": -91.0,
+        "max_volume": -91.0
+      },
+      {
+        "key": "phone-photo-3d-high",
+        "mean_volume": -91.0,
+        "max_volume": -91.0
+      },
+      {
+        "key": "phone-donut-standard",
+        "mean_volume": -91.0,
+        "max_volume": -91.0
+      },
+      {
+        "key": "phone-donut-high",
+        "mean_volume": -91.0,
+        "max_volume": -91.0
+      }
+    ],
+    "budgetAudioBitsPerSecond": 128000,
+    "soundOnBehavior": "Native paused/resumed sound capture is tested separately in cdx-export.",
+    "checkpointCorrection": "The earlier source review-r3.md phrase with sound was inaccurate: the four long rate takes were muted and contain silent Opus tracks. The final evidence report and PR correct it."
+  },
+  "quickChecks": "passed"
 }

@@ -4,8 +4,8 @@
   "files": [
     {
       "file": "README.md",
-      "bytes": 11506,
-      "sha256": "055c43dd107f8a546a436725f9b70ccb7f05e847b31e407dc591ca94e4fe0b40"
+      "bytes": 12131,
+      "sha256": "4a391751baaad954f092a8f2218e38d8c778fa6cc9740045b5c4f409ea1dd6ad"
     },
     {
       "file": "after-desktop-chest-gif.gif",
@@ -498,6 +498,16 @@
       "sha256": "af3681bef154e217bed5fa69e8881603055d7cdeac4e3581e60d71ac931f21eb"
     },
     {
+      "file": "r3/ci-ca35-summary.md",
+      "bytes": 2794,
+      "sha256": "e625d16f5b73d54a3f5c2a711037b6c84a30ba7508d0bad49260e0c90136f8ff"
+    },
+    {
+      "file": "r3/ci-ca35-times.json",
+      "bytes": 5869,
+      "sha256": "0c78e85a414dc3c083462d1240c64aa93079c2b481d736e2ebddb88152139b2e"
+    },
+    {
       "file": "r3/fixed/after-desktop-photo-3d-png.png",
       "bytes": 1153148,
       "sha256": "496b59b099e2936c7c0c859e23426eb3ee306be58108098b08e5a6f64ecf5f82"
@@ -724,8 +734,8 @@
     },
     {
       "file": "r3/review.md",
-      "bytes": 13767,
-      "sha256": "419437b7195b4156f9587c507c479430136cdb5e239fea590d959650c16af52f"
+      "bytes": 16518,
+      "sha256": "a897ccdfdd4a76672ad1e70e3e199b46ef0c6f741d97440c65fbd564412df2a4"
     },
     {
       "file": "r3/runtime-hashes-r3.json",
@@ -734,8 +744,8 @@
     },
     {
       "file": "r3/verification.json",
-      "bytes": 25773,
-      "sha256": "61c6f4784959791e96dd494576b58b5ecce40c21a27fe149a245261cfbfae0ed"
+      "bytes": 28391,
+      "sha256": "9089cd5c3f301e77ec85556a695473191d1ecf14647924bd139223cb6729bda4"
     },
     {
       "file": "record-contact-sheet.jpg",
