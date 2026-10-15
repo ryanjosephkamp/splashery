@@ -95,6 +95,10 @@ merges.
 | 84-advisor-route-evidence.md      | Evidence for the demo route: Photo to 3D, Moving photo to 3D, and the QR codes                      | a route runner, a spec, a report                     | no            |
 | 85-lifecycle-measurements.md      | Four memory and lifetime questions measured before any fix                                          | a probe, a report, fixes only for defects            | no            |
 | 86-actions-only-failures.md       | Three tests that fail only on GitHub Actions, and the manual's PDF                                  | tests, a manual workflow, the known list             | no            |
+| 87-photo-3d-failure-gallery.md    | Photo to 3D: where it still fails, measured, ranked, and shown                                      | a tool, a report, a gallery on the clips branch      | yes           |
+| 88-video-3d-real-clips.md         | Video to 3D on 20 real clips, then a Goal run for sharpness                                         | Video to 3D files, a benchmark, a report             | yes           |
+| 89-export-quality.md              | Exports at full quality: the GIF, the video (MP4), and Record, with the effect loop first           | the exporters, a presets table, tests                | no            |
+| 90-batch-export.md                | Batch export: many photos or many toys, one click, one file each (after task 89)                    | a labs panel, a command-line runner, tests           | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.

@@ -2523,6 +2523,32 @@ export const RECIPES = {
     action: { key: "twist", label: "Scramble or solve" },
     // For tests: whether each face shows one color, and the turns since.
     cube: { solved: () => cubeSolved(), turns: () => cube.history.length },
+    keyboard: {
+      label: "Turn a cube layer",
+      items: () =>
+        ["X", "Y", "Z"].flatMap((axis, a) =>
+          [-1, 0, 1].flatMap((layer) =>
+            [-1, 1].map((q) => {
+              const text = `${axis} ${layer === 0 ? "middle" : layer < 0 ? "negative" : "positive"} layer ${q < 0 ? "negative" : "positive"}`;
+              return {
+                id: `${a},${layer},${q}`,
+                text,
+                label: `Turn ${text}`,
+                disabled: cubeBusy(),
+              };
+            }),
+          ),
+        ),
+      status: () =>
+        `${cubeSolved() ? "Solved" : "Unsolved"}. ${cube.history.length} turns since solved.`,
+      activate(id, time) {
+        if (cubeBusy()) return null;
+        const [axis, layer, q] = id.split(",").map(Number);
+        if (cube.seq?.paused) cube.seq = null;
+        cube.snap = { axis, layer, from: 0, to: q, at: time };
+        return null;
+      },
+    },
     note: "Swipe across a face to turn a row or a column. Tap to scramble, or to solve it again.",
     drag: {
       at: () => !cubeBusy(),
