@@ -262,17 +262,17 @@ const pictureNow = (o) => (o.picture === "own" ? PIC.own : PIC.pictures.get(samp
 const LEAD = 0.004; // the dark splats' step forward (modules)
 function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
   const N = w.code.size;
-  const { k, G, cells } = w;
+  let { k, G, cells } = w;
   const border = borderSettings(options);
   const H = shapeHalf(N, shape, border.quiet);
-  const make = (fine) => {
+  const make = (fine, layers = 2, plain = false) => {
     const out = [];
     const M = G * fine;
-    const encodedCount = M * M + (M - 1) * (M - 1);
+    const encodedCount = M * M + (layers - 1) * (M - 1) * (M - 1);
     // The underlay, well behind (a turning tile swings through z < 0).
     if (shape !== "circle") patch(out, -H, -H, H, H, -0.6, 0.34, BG, [0, 0]);
     // The quiet zone: a sheet just behind the code, around it.
-    const qs = 0.34;
+    const qs = plain ? 0.8 : 0.34;
     const n = Math.round((2 * H) / qs);
     const st = (2 * H) / n;
     const sc0 = [0.6 * st, 0.6 * st, 0.004];
@@ -296,9 +296,9 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
           quiet: border.quiet,
           fg: FG,
           bg: BG,
-          scale,
-          coarse: attempt > 0,
-          sheetSpacing: attempt ? 0.7 + 0.3 * attempt : 0.45,
+          scale: plain ? 3 + attempt : scale,
+          coarse: plain || attempt > 0,
+          sheetSpacing: plain ? 3.4 : attempt ? 0.7 + 0.3 * attempt : 0.45,
           colorAt: (x, y, dark) => {
             const color = decorationColor(
               pic,
@@ -335,7 +335,7 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
     // Dark splats a little tighter: their soft edges lie in front of the
     // light cells next to them, and at the full size every dark dot grew.
     const scd = [0.48 * s0, 0.48 * s0, 0.004];
-    for (let layer = 0; layer < 2; layer++)
+    for (let layer = 0; layer < layers; layer++)
       for (let j = 0; j < M - layer; j++)
         for (let i = 0; i < M - layer; i++) {
           const x = -N / 2 + (i + 0.5 + layer * 0.5) * s0;
@@ -380,6 +380,22 @@ function pictureSplats(w, budget, shape = "square", pic = null, options = {}) {
     splats = make(fine);
     if (splats.length <= budget) break;
   }
+  if (
+    shape === "circle" &&
+    (!splats || splats.length > budget) &&
+    !pic &&
+    (!w.eyeShape || w.eyeShape === "square")
+  ) {
+    // Without a picture, every cell in a module has the same color.
+    // Coalescing those cells keeps the complete code within a small budget.
+    cells = new Float32Array(N * N * 3);
+    for (let m = 0; m < N * N; m++) cells.set(w.code.dark[m] ? FG : BG, m * 3);
+    k = 1;
+    G = N;
+    splats = make(1, 2, true);
+    if (splats.length > budget) splats = make(1, 1, true);
+  }
+  // Curved finders need their submodule outline, even without a picture.
   if (shape === "circle" && (!splats || splats.length > budget)) {
     const reduced = compactPicture(w, budget, H, shape, pic, options);
     if (reduced) return { splats: reduced, half: H, reduced: true };
@@ -777,7 +793,7 @@ const PICTURE = {
       max: 4,
       default: 1,
     },
-    { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
+    { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label, group: s.group })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
     { key: "contrast", label: "Contrast", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 }, // prettier-ignore
     { key: "center", label: "Center dot", type: "select", default: "small", choices: CENTERS.map((c) => ({ id: c.id, label: c.label })) }, // prettier-ignore
     { key: "level", label: "Error correction", type: "select", default: "H", choices: LEVELS.map((l) => ({ id: l, label: { L: "L: 7% can be lost", M: "M: 15%", Q: "Q: 25%", H: "H: 30%" }[l] })) }, // prettier-ignore

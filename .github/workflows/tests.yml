@@ -5,6 +5,8 @@ name: Tests
 on:
   pull_request:
     branches: [main]
+    # `labeled`: adding the `full-suite` label to a PR runs the whole suite on it.
+    types: [opened, synchronize, reopened, ready_for_review, labeled]
   push:
     branches: [main]
   workflow_dispatch:
@@ -52,6 +54,12 @@ jobs:
 
   suite:
     name: Suite ${{ matrix.shard }}/16
+    # The full suite runs on pushes to main, on demand, on the Operator's merge PRs
+    # (`claude/operator-merge-*`), and on any PR labeled `full-suite` (the owner's call of
+    # October 15, 2026). Other PRs get the Checks job only, so the runners don't queue up.
+    if: >-
+      github.event_name != 'pull_request' || startsWith(github.head_ref, 'claude/operator-merge-')
+      || contains(github.event.pull_request.labels.*.name, 'full-suite')
     runs-on: ubuntu-24.04
     timeout-minutes: 90
     strategy:
@@ -147,7 +155,8 @@ jobs:
     name: Summary
     needs: [suite]
     # Not on a canceled run (a newer push replaced it): its report would be empty or partial.
-    if: ${{ !cancelled() }}
+    # Not when the suite was skipped (a PR that only gets the Checks job).
+    if: ${{ !cancelled() && needs.suite.result != 'skipped' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 15
     permissions:

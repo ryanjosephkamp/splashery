@@ -762,7 +762,7 @@ const MICROSCOPE = {
     }
     MIC.want = { name: def.label, table: MIC.samples.get(def.id), custom: false, note: def.note, conserve: def.conserve ?? 0 }; // prettier-ignore
   },
-  drive(t, c, out) {
+  drive(t, c, out, info) {
     // Every localization is drawn at least about a pixel wide, wherever the
     // camera is; the slice narrows from the whole field to 200 nm.
     const s = smoothstep(0, 1, c.slice ?? 0);
@@ -770,6 +770,9 @@ const MICROSCOPE = {
     out.morph = [0, 1, 0.0008, MIC.want?.conserve ?? 0];
     // (on a log scale, so it visibly narrows all the way)
     out.glow = [0, 0, MIC.sliceZ ?? 0, s > 0.01 ? thin * Math.pow(2 / thin, 1 - s) : 0];
+    // Lane Polish: a scale bar beside the view (a round length in nm or
+    // µm), and the slice's depth and thickness while it shows.
+    out.legend = micLegend(info?.eye, s);
   },
   build(k, o) {
     const want = MIC.want;
@@ -876,6 +879,33 @@ const MICROSCOPE = {
     k.data = { microscope: MIC.info };
   },
 };
+
+// Lane Polish: a round length near `um` micrometers, as a scale bar's text.
+function micRuler(um) {
+  const nm = um * 1000;
+  const p = 10 ** Math.floor(Math.log10(nm));
+  const f = nm / p;
+  const nice = (f >= 5 ? 5 : f >= 2 ? 2 : 1) * p;
+  return { um: nice / 1000, text: nice >= 1000 ? `${fmt(nice / 1000)} µm` : `${fmt(nice)} nm` };
+}
+
+// Lane Polish: the microscope's words beside the view: a scale bar about a
+// quarter of the view's height (the camera looks down at the slide, so the
+// height it sees is about its height above the slide times 2·tan(19°), the
+// stage's 38° field of view; the bar itself is measured on screen), and the
+// slice while one shows.
+function micLegend(eye, slice) {
+  const info = MIC.info;
+  if (!info || !eye) return null;
+  const up = Math.max(1e-4, Math.abs(eye[2]));
+  const r = micRuler(up * 0.69 * 0.25);
+  const items = [{ text: r.text, ruler: { size: r.um } }];
+  if (slice > 0.5 && MIC.grid) {
+    const z = (MIC.sliceZ ?? 0) / (MIC.grid.stretch || 1) / UM + MIC.grid.cz;
+    items.push({ text: `A slice ${SLICE_NM * 2} nm thick at z = ${fmt(Math.round(z))} nm`, dim: true }); // prettier-ignore
+  }
+  return { title: "Scale", items };
+}
 
 const mixN = (a, b, t) => a + (b - a) * t;
 
@@ -1060,6 +1090,8 @@ const TEMP_STOPS = [
   [6.3, "#e0362a"],
   [7.2, "#9a1a64"],
 ];
+// Lane Polish: the hot halo's least opacity (see the gas's alpha).
+const HALO_ALPHA = 0.035;
 function tempColor(logT) {
   const S = TEMP_STOPS;
   if (logT <= S[0][0]) return S[0][1];
@@ -1285,13 +1317,16 @@ const GALAXY = {
       const hot = 1 + 3 * smoothstep(4.3, 5.5, logT);
       // A widened piece is as faint as its size says: the thinned diffuse
       // gas stays a faint haze, so the dense arms show through it.
-      const alpha = Math.min(0.8, 0.8 * (0.07 / h) ** 2 * hot);
+      // Lane Polish: the hot halo (above about 100,000 K) is so thin that it
+      // vanished; a faint floor keeps it as an orange haze round the disk,
+      // so peeling it away (the tap) shows.
+      const alpha = Math.max(Math.min(0.8, 0.8 * (0.07 / h) ** 2 * hot), HALO_ALPHA * smoothstep(4.6, 5.4, logT)); // prettier-ignore
       // Denser gas is brighter, so the spiral arms stand out.
       const dense = Math.max(0, Math.min(1, (Math.log10(0.5 / h) + 0.1) / 1.4));
       const color =
         o.color === "density"
           ? tempColor(1 + 7 * dense)
-          : shade(tempColor(logT), 0.6 + 0.95 * dense);
+          : shade(tempColor(logT), Math.max(0.6 + 0.95 * dense, 1.05 * smoothstep(4.6, 5.4, logT))); // prettier-ignore
       return {
         p,
         size: (Math.SQRT2 * sigma) / base,

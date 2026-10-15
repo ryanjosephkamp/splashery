@@ -1,0 +1,5066 @@
+[
+  {
+    "id": "cdx-theme-patterns-1-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 0,
+    "variant": 0,
+    "name": "Scalloped fans",
+    "sha256": "223da938a513759712a742c638c8579c0dced81380c2dd201f1fa475ed621332",
+    "properties": {
+      "contrastRange": 0.10818661307096467,
+      "edgeDensity": 0.006130365411353722,
+      "centerDetail": 0.005282995006966883,
+      "outerDetail": 0.006412822212816025,
+      "color": 0.09726176442927681,
+      "midtones": 1
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.77362793940137,
+        "fidelity": 0.8132911715684114,
+        "edges": 0.06761363340308318,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.89037223334696,
+        "fidelity": 0.8148905794610702,
+        "edges": 0.06825311917751321,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 48.20685029877138,
+        "fidelity": 0.8247983917484313,
+        "edges": 0.06317641672461444,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.50216127645767,
+        "fidelity": 0.8338752644609779,
+        "edges": 0.05864492735786414,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.19536166551225,
+        "fidelity": 0.8332266410262584,
+        "edges": 0.05261992020151192,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 49.476847484806406,
+        "fidelity": 0.8475502868749694,
+        "edges": 0.06359070459295753,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.76022407752261,
+        "fidelity": 0.8537773887433949,
+        "edges": 0.062277059925241865,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 50.1884057240037,
+        "fidelity": 0.8557410955828793,
+        "edges": 0.06939212148767425,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 49.63769844211461,
+        "fidelity": 0.8531910335075301,
+        "edges": 0.06027092442667655,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.12000000000000001,
+        "score": 48.743272611796144,
+        "fidelity": 0.846649504442116,
+        "edges": 0.04838999705510581,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 47.77362793940137,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-1-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 0,
+    "variant": 1,
+    "name": "Scalloped fans · soft",
+    "sha256": "47a9b8124114574a7fe054a0da7ba34865b84fde9e0ea8515b0b3e7ad27167a9",
+    "properties": {
+      "contrastRange": 0.1209691665887832,
+      "edgeDensity": 0.006680139120972042,
+      "centerDetail": 0.004638792355608858,
+      "outerDetail": 0.007360588042759787,
+      "color": 0.08967473478858462,
+      "midtones": 0.5179036458333334
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.343330113927266,
+        "fidelity": 0.812653523590339,
+        "edges": 0.05883080703241375,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.229399759440824,
+        "fidelity": 0.8123103196532638,
+        "edges": 0.056718492855806844,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 47.40700784121804,
+        "fidelity": 0.8225574119999957,
+        "edges": 0.04814111513818387,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.79435593746777,
+        "fidelity": 0.8340648841932885,
+        "edges": 0.0426841623741533,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.305655105072255,
+        "fidelity": 0.8332398232225988,
+        "edges": 0.03283255172954037,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.79704850853141,
+        "fidelity": 0.8470223701834241,
+        "edges": 0.04912929218762403,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.12000000000000001,
+        "score": 47.580402290417595,
+        "fidelity": 0.8314995175870448,
+        "edges": 0.0410650849584473,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.507114767669854,
+        "fidelity": 0.8546575876241604,
+        "edges": 0.055576609963133884,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.81498321484691,
+        "fidelity": 0.8505926922876008,
+        "edges": 0.04516411420064142,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.9583448985296,
+        "fidelity": 0.8589880487443117,
+        "edges": 0.038088938168721255,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 47.229399759440824,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-2-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 1,
+    "variant": 0,
+    "name": "Woven bands",
+    "sha256": "0a48979c62154599d5cfb258488e3d7b7771020cb5b929a71728f3768c4a6953",
+    "properties": {
+      "contrastRange": 0.1143180436253548,
+      "edgeDensity": 0.008387020976283549,
+      "centerDetail": 0.016907958856488086,
+      "outerDetail": 0.00554670834954874,
+      "color": 0.06074207766343736,
+      "midtones": 0.9663628472222222
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.75495721728519,
+        "fidelity": 0.8090197632047865,
+        "edges": 0.05019711646715397,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.55809901611849,
+        "fidelity": 0.8089523404076266,
+        "edges": 0.04590489541553389,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 47.091625845128746,
+        "fidelity": 0.820427883727243,
+        "edges": 0.04373538311400842,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.21999644343813,
+        "fidelity": 0.8273794321250247,
+        "edges": 0.03809172614581698,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.67593780033306,
+        "fidelity": 0.8287353062878671,
+        "edges": 0.04656657676667491,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.39515155871549,
+        "fidelity": 0.8420791202502194,
+        "edges": 0.04623999877674281,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.128061624115574,
+        "fidelity": 0.8491286139539949,
+        "edges": 0.053910841258796784,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.30147383358802,
+        "fidelity": 0.8495565305988229,
+        "edges": 0.05724143668117229,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.05224870661217,
+        "fidelity": 0.847504453483598,
+        "edges": 0.03198897255587272,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.83598245385152,
+        "fidelity": 0.8544553785835582,
+        "edges": 0.04090970292790709,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.55809901611849,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-2-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 1,
+    "variant": 1,
+    "name": "Woven bands · soft",
+    "sha256": "efd5e8bec7c1f052f89265074dbc428f8418c95df2de7354183588915d36938f",
+    "properties": {
+      "contrastRange": 0.12514883421659484,
+      "edgeDensity": 0.009426630571989114,
+      "centerDetail": 0.017429712021663896,
+      "outerDetail": 0.0067589367554309,
+      "color": 0.06258422280209036,
+      "midtones": 0.2838541666666667
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.95416726547768,
+        "fidelity": 0.8039951427237978,
+        "edges": 0.03854298701486209,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.61206743668475,
+        "fidelity": 0.8034674773196625,
+        "edges": 0.03158569298007331,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 46.099970066987474,
+        "fidelity": 0.8146601447326912,
+        "edges": 0.028748046815321192,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.34780747572443,
+        "fidelity": 0.8233750447324972,
+        "edges": 0.023604000343046112,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.94852515381028,
+        "fidelity": 0.8241394260069137,
+        "edges": 0.036019038298445064,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 47.22302922698471,
+        "fidelity": 0.8360583661683921,
+        "edges": 0.027551535282736347,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.04516470429933,
+        "fidelity": 0.8429620901626007,
+        "edges": 0.03738332767458426,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.219070714739665,
+        "fidelity": 0.8447655983131077,
+        "edges": 0.03904361794486078,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 47.008664329834914,
+        "fidelity": 0.8418536294322261,
+        "edges": 0.015704771356944015,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 47.993058168354175,
+        "fidelity": 0.8489343235979443,
+        "edges": 0.02892600823260519,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 45.61206743668475,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-3-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 2,
+    "variant": 0,
+    "name": "Folded ribbons",
+    "sha256": "b5d3698e51479fc606d06ddb3698a8e4dd3162c5609fc2a82d78f49051c7ec43",
+    "properties": {
+      "contrastRange": 0.11611634802818294,
+      "edgeDensity": 0.0047540425115605005,
+      "centerDetail": 0.00620501308420924,
+      "outerDetail": 0.004270385654010919,
+      "color": 0.06411350624532336,
+      "midtones": 0.9572482638888888
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.03732795122358,
+        "fidelity": 0.810005330887351,
+        "edges": 0.03304521672042815,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.23537625535244,
+        "fidelity": 0.8099360400904353,
+        "edges": 0.03753097889729994,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 47.11090277457839,
+        "fidelity": 0.8215476635155141,
+        "edges": 0.04279513958278034,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.49331050490843,
+        "fidelity": 0.828645706452607,
+        "edges": 0.042617703333667475,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.576308821247295,
+        "fidelity": 0.8301753632196458,
+        "edges": 0.04259252987037269,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.74832031159919,
+        "fidelity": 0.8429776504936157,
+        "edges": 0.05298998965445151,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.83547981222699,
+        "fidelity": 0.8497140750294842,
+        "edges": 0.046693459680119086,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.11396270861819,
+        "fidelity": 0.8496195381915076,
+        "edges": 0.0529975135130059,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.52218690304474,
+        "fidelity": 0.848707595202669,
+        "edges": 0.040961537042176414,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.90194243619459,
+        "fidelity": 0.856232164995068,
+        "edges": 0.0402038524770187,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.03732795122358,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-3-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 2,
+    "variant": 1,
+    "name": "Folded ribbons · soft",
+    "sha256": "89633c885bec7263321c1af4335b94f53b07e643b867d834a0be57adcacfaa5f",
+    "properties": {
+      "contrastRange": 0.12800296760797492,
+      "edgeDensity": 0.005382802572248742,
+      "centerDetail": 0.006144083435468519,
+      "outerDetail": 0.005129042284508808,
+      "color": 0.06579937888374035,
+      "midtones": 0.2706163194444444
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.53773860112179,
+        "fidelity": 0.8065505119164784,
+        "edges": 0.026165787682565958,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.60691879993303,
+        "fidelity": 0.8071389894622834,
+        "edges": 0.02698387510016532,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 46.21577810018745,
+        "fidelity": 0.8180154954685398,
+        "edges": 0.027220574431505683,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.828297025504035,
+        "fidelity": 0.8263578837779658,
+        "edges": 0.03063585372702033,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.91167471932075,
+        "fidelity": 0.8276144607297407,
+        "edges": 0.030952875093000355,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.067894768375936,
+        "fidelity": 0.8393617779387589,
+        "edges": 0.04228882181653761,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 47.829636701763945,
+        "fidelity": 0.8462078029963627,
+        "edges": 0.02862683415475539,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.31441944796763,
+        "fidelity": 0.8466155087759744,
+        "edges": 0.03890147700642309,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 47.75636095493402,
+        "fidelity": 0.8455855390230278,
+        "edges": 0.027759029081499714,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.13360399880424,
+        "fidelity": 0.852437359681729,
+        "edges": 0.027767760362425477,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 45.53773860112179,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-4-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 3,
+    "variant": 0,
+    "name": "Spiral tiles",
+    "sha256": "a2fd464f9027c68e24ceb9de60ff79a8be32a188978372b90bbb5b1d321d3c55",
+    "properties": {
+      "contrastRange": 0.11340988504290583,
+      "edgeDensity": 0.013162776099998726,
+      "centerDetail": 0.024897234746183716,
+      "outerDetail": 0.009251289884603737,
+      "color": 0.08731747907586396,
+      "midtones": 0.9437934027777778
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.73922880869655,
+        "fidelity": 0.814980818955496,
+        "edges": 0.06478408369209483,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.79231878639073,
+        "fidelity": 0.8148068938407388,
+        "edges": 0.0661764361144465,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 48.140068814307966,
+        "fidelity": 0.8260358229794635,
+        "edges": 0.06017996778749935,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.10311584557206,
+        "fidelity": 0.8353800400127872,
+        "edges": 0.07016030321930589,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.35372362188564,
+        "fidelity": 0.8347278310283727,
+        "edges": 0.05430428700722539,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 49.8490205789795,
+        "fidelity": 0.8486349987351509,
+        "edges": 0.07053545885658202,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 50.037350608534545,
+        "fidelity": 0.8543849325814896,
+        "edges": 0.0676928737011692,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 50.50509622725985,
+        "fidelity": 0.8570415438726339,
+        "edges": 0.07484025142811086,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 49.82024161447842,
+        "fidelity": 0.8531846431302683,
+        "edges": 0.06433524982919236,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 50.145077506331845,
+        "fidelity": 0.8617959800943509,
+        "edges": 0.06102885780316758,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 47.73922880869655,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-4-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 3,
+    "variant": 1,
+    "name": "Spiral tiles · soft",
+    "sha256": "07ca1353ca4b468f2341ef00966c018f56caaf6e8d5442a31980d673ad533c56",
+    "properties": {
+      "contrastRange": 0.12581066380143158,
+      "edgeDensity": 0.015592146029866069,
+      "centerDetail": 0.028689346471940207,
+      "outerDetail": 0.011226412549174622,
+      "color": 0.08390453594943716,
+      "midtones": 0.3671875
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.70170451708039,
+        "fidelity": 0.8085437837745918,
+        "edges": 0.0495954757661741,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.864366088666955,
+        "fidelity": 0.8091247697524082,
+        "edges": 0.05250008338410006,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 46.81094628529987,
+        "fidelity": 0.8195623543615658,
+        "edges": 0.038555928786972324,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.18454069412116,
+        "fidelity": 0.8298850966840929,
+        "edges": 0.056463563922134405,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.00792254364312,
+        "fidelity": 0.8297225003340384,
+        "edges": 0.0305152227838,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.71957272281271,
+        "fidelity": 0.8423558883232145,
+        "edges": 0.05311108588968676,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.944111524368495,
+        "fidelity": 0.8497987418861314,
+        "edges": 0.04900401601402821,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.247336528306526,
+        "fidelity": 0.8518291002359146,
+        "edges": 0.0532608003406936,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.70099820063208,
+        "fidelity": 0.8484992881314365,
+        "edges": 0.04518971896451268,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.976349452331455,
+        "fidelity": 0.8564653381083114,
+        "edges": 0.0415723523638738,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.70170451708039,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-5-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 4,
+    "variant": 0,
+    "name": "Petal rosette",
+    "sha256": "d6be93683f7fbb6d6fdb6f8cd95c356df4371562193568f4098379ed31da2eb0",
+    "properties": {
+      "contrastRange": 0.11173862828016268,
+      "edgeDensity": 0.005421942555832871,
+      "centerDetail": 0.004588520010918616,
+      "outerDetail": 0.0056997500708042955,
+      "color": 0.07497840367917281,
+      "midtones": 0.9967447916666666
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.68148301098085,
+        "fidelity": 0.8123661276244332,
+        "edges": 0.02225213314748932,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.78140707146968,
+        "fidelity": 0.8122316140451549,
+        "edges": 0.024637073310803562,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 46.74289318620544,
+        "fidelity": 0.8222188911478701,
+        "edges": 0.033796759401612954,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.2313718443648,
+        "fidelity": 0.8305282212313744,
+        "edges": 0.03449599281420459,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.83110035818712,
+        "fidelity": 0.8314504817179461,
+        "edges": 0.02447386363777966,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.166059283352716,
+        "fidelity": 0.8435572456562807,
+        "edges": 0.039342461605717194,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.623040624545766,
+        "fidelity": 0.8506504463937861,
+        "edges": 0.04082813495305622,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.940724099387936,
+        "fidelity": 0.8514693225347079,
+        "edges": 0.046886919110644416,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.25036240078263,
+        "fidelity": 0.8499587578711035,
+        "edges": 0.03339179373048723,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.524448109804716,
+        "fidelity": 0.8577263251789163,
+        "edges": 0.029988893888095905,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 45.68148301098085,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-5-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 4,
+    "variant": 1,
+    "name": "Petal rosette · soft",
+    "sha256": "73a30dab8968d8cc9db2b6332406eaf94babcc78cfc08b7b30b1b365e6f3076c",
+    "properties": {
+      "contrastRange": 0.12340420089960102,
+      "edgeDensity": 0.006175564976831839,
+      "centerDetail": 0.004864070999773451,
+      "outerDetail": 0.006612729635851331,
+      "color": 0.0751976223804781,
+      "midtones": 0.3654513888888889
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 44.98493283133302,
+        "fidelity": 0.8092483157434581,
+        "edges": 0.010583899232062611,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.26919152738314,
+        "fidelity": 0.8100414344116493,
+        "edges": 0.01593139188316511,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 45.90947364821958,
+        "fidelity": 0.8200178214630849,
+        "edges": 0.017966521505553515,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.51146224745722,
+        "fidelity": 0.8290477449555577,
+        "edges": 0.020307472775589835,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.11739547056751,
+        "fidelity": 0.8298939459969229,
+        "edges": 0.010516187571927639,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 47.54718711136749,
+        "fidelity": 0.8417232902708056,
+        "edges": 0.02783124769940398,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 47.85759729876894,
+        "fidelity": 0.8478654821172974,
+        "edges": 0.027222128495946078,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.118008139966726,
+        "fidelity": 0.8481005847242457,
+        "edges": 0.032721688447404605,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 47.799267321681995,
+        "fidelity": 0.8480201261106012,
+        "edges": 0.02573689745775387,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 47.6616916633774,
+        "fidelity": 0.8545363337867125,
+        "edges": 0.014715406780182405,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 44.98493283133302,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-6-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 5,
+    "variant": 0,
+    "name": "Ripple rings",
+    "sha256": "bbee94bcff4989b6ea6c0d8266779ce3e2979c638c2303a762e18179b27bd249",
+    "properties": {
+      "contrastRange": 0.06620552747249597,
+      "edgeDensity": 0.012548245129549145,
+      "centerDetail": 0.03125466948394701,
+      "outerDetail": 0.006312770344749794,
+      "color": 0.06387314056175658,
+      "midtones": 0.9423828125
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.78985382024574,
+        "fidelity": 0.8080188645845578,
+        "edges": 0.05219591706877892,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.939571986009824,
+        "fidelity": 0.8084205691264981,
+        "edges": 0.0550320152011649,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 47.293635206904,
+        "fidelity": 0.8198862289672393,
+        "edges": 0.04888650252679627,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.06273640522273,
+        "fidelity": 0.8298124780897654,
+        "edges": 0.05384555800634721,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.79016849041642,
+        "fidelity": 0.8291002060257414,
+        "edges": 0.04865904797779183,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.896486563605265,
+        "fidelity": 0.8427707247411351,
+        "edges": 0.05653548228539619,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.682398420417265,
+        "fidelity": 0.8494304962647267,
+        "edges": 0.06586046946349547,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.59009549257389,
+        "fidelity": 0.8501273711240268,
+        "edges": 0.06295755735005357,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.91479387144197,
+        "fidelity": 0.848638094060637,
+        "edges": 0.04977108218015423,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 49.37966139925102,
+        "fidelity": 0.8559528371825763,
+        "edges": 0.05116123009354036,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.78985382024574,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-6-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 5,
+    "variant": 1,
+    "name": "Ripple rings · soft",
+    "sha256": "0ef58c96b116f75dc683a92e4f053ec5563f2d22ac53a5a98c45658bd600fa6c",
+    "properties": {
+      "contrastRange": 0.09025060148239139,
+      "edgeDensity": 0.0169063444902747,
+      "centerDetail": 0.041078288981643625,
+      "outerDetail": 0.008849029659818373,
+      "color": 0.06544960321884395,
+      "midtones": 0.2641059027777778
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.777485760000886,
+        "fidelity": 0.802478869020203,
+        "edges": 0.03646995475310482,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.923153629545915,
+        "fidelity": 0.8030386182555446,
+        "edges": 0.039022880566465794,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 45.795005539527864,
+        "fidelity": 0.8134709754189435,
+        "edges": 0.023424486477465867,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.79116511473832,
+        "fidelity": 0.8233251550931219,
+        "edges": 0.03351736854703575,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.2925415726377,
+        "fidelity": 0.8226659294265126,
+        "edges": 0.023242565648433446,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 47.401585153302435,
+        "fidelity": 0.8354589551017135,
+        "edges": 0.032252058282404066,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.51231357403948,
+        "fidelity": 0.8427225039720065,
+        "edges": 0.04805724123509143,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.30233144325387,
+        "fidelity": 0.8436911200677619,
+        "edges": 0.04220710754504364,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 47.57845223466355,
+        "fidelity": 0.8415508821121576,
+        "edges": 0.028736749299886316,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.06289236831836,
+        "fidelity": 0.8490025111946955,
+        "edges": 0.03039453894689124,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 45.777485760000886,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-7-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 6,
+    "variant": 0,
+    "name": "Mosaic diamonds",
+    "sha256": "7cbd3c6517a66b14b1a186cbf99cf87d9a19c43498c4f84c9b013131f00e5f95",
+    "properties": {
+      "contrastRange": 0.11213736361265181,
+      "edgeDensity": 0.010538682839607615,
+      "centerDetail": 0.02022790671765613,
+      "outerDetail": 0.007308941546924807,
+      "color": 0.07854067297173767,
+      "midtones": 0.9705946180555556
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.63041930455573,
+        "fidelity": 0.8130754272780791,
+        "edges": 0.06469490676136394,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.22304790703784,
+        "fidelity": 0.8129542858904772,
+        "edges": 0.05579027073470196,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 48.27393888998652,
+        "fidelity": 0.824315724435919,
+        "edges": 0.06525720102246585,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.920066601482525,
+        "fidelity": 0.8330397703716363,
+        "edges": 0.06895287180094493,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.50046168215202,
+        "fidelity": 0.8337769296523783,
+        "edges": 0.05872734558380485,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 49.64827038689683,
+        "fidelity": 0.8472791031506245,
+        "edges": 0.06773154919138841,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.56750420345494,
+        "fidelity": 0.8528938922773922,
+        "edges": 0.05907422507107474,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.94393061901018,
+        "fidelity": 0.8541804655510528,
+        "edges": 0.0658667780822728,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 49.54826268046903,
+        "fidelity": 0.8523900660430627,
+        "edges": 0.05926242329112397,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.12000000000000001,
+        "score": 48.59128635734979,
+        "fidelity": 0.8426049733120677,
+        "edges": 0.049955840559690184,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 47.22304790703784,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-7-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 6,
+    "variant": 1,
+    "name": "Mosaic diamonds · soft",
+    "sha256": "91894729ca7095db5fe0d51906bf5f6c95d064cd2e5b8de3e285ce354d2ea20a",
+    "properties": {
+      "contrastRange": 0.12602489552497853,
+      "edgeDensity": 0.011773719408723673,
+      "centerDetail": 0.02161887117431086,
+      "outerDetail": 0.00849200215352791,
+      "color": 0.07550053727269794,
+      "midtones": 0.3783637152777778
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.821343417580444,
+        "fidelity": 0.8092431478686783,
+        "edges": 0.05139933966229183,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.15203645031343,
+        "fidelity": 0.8084719774016628,
+        "edges": 0.03746839318271054,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 47.001400545757086,
+        "fidelity": 0.8200637286990016,
+        "edges": 0.04217545482915542,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.85244677247027,
+        "fidelity": 0.8290849375713476,
+        "edges": 0.05006167124546999,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.51383066991653,
+        "fidelity": 0.8297637053390153,
+        "edges": 0.04170726391712627,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.60032314543075,
+        "fidelity": 0.8423414174602482,
+        "edges": 0.05047878189149097,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.51182856278029,
+        "fidelity": 0.8486817995871783,
+        "edges": 0.04076287967745501,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.883720932729005,
+        "fidelity": 0.8502569940645078,
+        "edges": 0.04710191687069054,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.47408234969706,
+        "fidelity": 0.8481602008242078,
+        "edges": 0.040561584541458404,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.72875580940704,
+        "fidelity": 0.8551359998712352,
+        "edges": 0.03769501814420227,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.15203645031343,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-8-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 7,
+    "variant": 0,
+    "name": "Arc quilt",
+    "sha256": "d06e56f3d515136e6820a5e5ff531f6a7fba0a9875cc2b971bd29b9e596c200f",
+    "properties": {
+      "contrastRange": 0.11317108821868893,
+      "edgeDensity": 0.00852242765238836,
+      "centerDetail": 0.017391025174802743,
+      "outerDetail": 0.005566228478250231,
+      "color": 0.0777583059874208,
+      "midtones": 0.9938151041666666
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.605874941778964,
+        "fidelity": 0.8117786278302778,
+        "edges": 0.04351223135808182,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.64592427687949,
+        "fidelity": 0.8117925576614254,
+        "edges": 0.04438519123335758,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 47.32719885619154,
+        "fidelity": 0.8226900150730232,
+        "edges": 0.04620551171500583,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.547531320467826,
+        "fidelity": 0.8332833886797266,
+        "edges": 0.06037655429073023,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.25187472079643,
+        "fidelity": 0.8322529518174236,
+        "edges": 0.055065830463069364,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.94743754797495,
+        "fidelity": 0.8453518038105496,
+        "edges": 0.05451307418654918,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.3651823446935,
+        "fidelity": 0.8525008365647092,
+        "edges": 0.05505858519187753,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.84929197163627,
+        "fidelity": 0.8539592711036728,
+        "edges": 0.06403404579853922,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.12000000000000001,
+        "score": 48.18695448000446,
+        "fidelity": 0.8356555056352803,
+        "edges": 0.049464481556978634,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 49.868528393453396,
+        "fidelity": 0.8585316322831547,
+        "edges": 0.058873080397330795,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.605874941778964,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-8-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 7,
+    "variant": 1,
+    "name": "Arc quilt · soft",
+    "sha256": "f644f74451ebd2cc012c30a9e6c38042dd2bcfff41dc7909190f6832d4b26823",
+    "properties": {
+      "contrastRange": 0.12449273443222053,
+      "edgeDensity": 0.008985198702359956,
+      "centerDetail": 0.016925355766735827,
+      "outerDetail": 0.0063384796809013155,
+      "color": 0.07438241075336312,
+      "midtones": 0.3815104166666667
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.04485258623022,
+        "fidelity": 0.8077219051294366,
+        "edges": 0.03600328453580442,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.049976285851436,
+        "fidelity": 0.8075221375673396,
+        "edges": 0.036361304881061186,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 46.468642480069455,
+        "fidelity": 0.8185287088044034,
+        "edges": 0.03221252212949472,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.0531652013274,
+        "fidelity": 0.829230350560815,
+        "edges": 0.05434435378850167,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.6474436426653,
+        "fidelity": 0.8286330852486476,
+        "edges": 0.046058310088659515,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 47.91389435700179,
+        "fidelity": 0.8410246498394875,
+        "edges": 0.03683419146288835,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.051916052331514,
+        "fidelity": 0.8471465355052046,
+        "edges": 0.032419035545450094,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.81775200035591,
+        "fidelity": 0.8493049691696845,
+        "edges": 0.04679952657829465,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.20127194508731,
+        "fidelity": 0.8460062376402103,
+        "edges": 0.037131752775016576,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 49.04863229615589,
+        "fidelity": 0.8536874366782803,
+        "edges": 0.046573850641121455,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.04485258623022,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-9-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 8,
+    "variant": 0,
+    "name": "Paper folds",
+    "sha256": "41043cb160251fbdfa0f0d7471c79d3817f6150f4843b6fdcfaaf54d769c7832",
+    "properties": {
+      "contrastRange": 0.12251548818349844,
+      "edgeDensity": 0.0055274762698755715,
+      "centerDetail": 0.011326343905634327,
+      "outerDetail": 0.0035945203912893017,
+      "color": 0.051846609955343105,
+      "midtones": 0.9075520833333334
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.1639477531438,
+        "fidelity": 0.8082091005397922,
+        "edges": 0.038054382743449446,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.27544745064653,
+        "fidelity": 0.8079630299948861,
+        "edges": 0.04083290668728436,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 46.54060690443747,
+        "fidelity": 0.8193141501901151,
+        "edges": 0.03285174764402512,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.3739998892896,
+        "fidelity": 0.8293452945392978,
+        "edges": 0.039111304213960404,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.866794876204466,
+        "fidelity": 0.8286929541321939,
+        "edges": 0.028637386642973318,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.253370115215496,
+        "fidelity": 0.8414215841521224,
+        "edges": 0.04389295526330571,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.287476766101875,
+        "fidelity": 0.8482090022060763,
+        "edges": 0.036355147661503814,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.69328857151954,
+        "fidelity": 0.8490072700445939,
+        "edges": 0.0443975270903749,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.4322578740123,
+        "fidelity": 0.847861757159213,
+        "edges": 0.03999691622790184,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.777967786129835,
+        "fidelity": 0.8553509581927747,
+        "edges": 0.03852589078949391,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.1639477531438,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-9-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 8,
+    "variant": 1,
+    "name": "Paper folds · soft",
+    "sha256": "3f8b974b39e93b2a6abb94d287470b6d5c1aa8b637ea32c9e32a48a3e78f8a39",
+    "properties": {
+      "contrastRange": 0.13170272234678282,
+      "edgeDensity": 0.006092683032984758,
+      "centerDetail": 0.011439293610742043,
+      "outerDetail": 0.004310479507065653,
+      "color": 0.056248507449506886,
+      "midtones": 0.2146267361111111
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.61921911713921,
+        "fidelity": 0.8045329601332974,
+        "edges": 0.030442362440174363,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.65847808737604,
+        "fidelity": 0.8042295377980535,
+        "edges": 0.031685633521846494,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 45.51836845624513,
+        "fidelity": 0.8151243586937752,
+        "edges": 0.015256193957499692,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.59473351668126,
+        "fidelity": 0.825491662164508,
+        "edges": 0.026504268836295822,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.05289404074412,
+        "fidelity": 0.8251442242428347,
+        "edges": 0.014888037941960312,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 47.54470967509473,
+        "fidelity": 0.8371285656618087,
+        "edges": 0.033391968082116634,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 47.39829276041942,
+        "fidelity": 0.8433834764331991,
+        "edges": 0.022493367924299457,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 47.73041023502611,
+        "fidelity": 0.8450358526805448,
+        "edges": 0.02785418527991441,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 47.66901152425061,
+        "fidelity": 0.842438525044577,
+        "edges": 0.02966428103997496,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 47.92368574454421,
+        "fidelity": 0.8501353767875157,
+        "edges": 0.025916444916240927,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 45.51836845624513,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-10-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 9,
+    "variant": 0,
+    "name": "Wavy stripes",
+    "sha256": "500b093c29d1ab55a7cd2284c9fbc95eb1d1260909ff665f94f2b9494d077470",
+    "properties": {
+      "contrastRange": 0.11816078360676763,
+      "edgeDensity": 0.014500407047882089,
+      "centerDetail": 0.031349874150305095,
+      "outerDetail": 0.008883918013741063,
+      "color": 0.07195792263761784,
+      "midtones": 0.9127604166666666
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.56573700294335,
+        "fidelity": 0.812402833866975,
+        "edges": 0.06407958089466062,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.44841989303279,
+        "fidelity": 0.8126572941556389,
+        "edges": 0.061161526988281076,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 47.766492460519174,
+        "fidelity": 0.8240927481724126,
+        "edges": 0.05425314024525511,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.33022533355734,
+        "fidelity": 0.8338959973322704,
+        "edges": 0.0770210106729436,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.99621146484581,
+        "fidelity": 0.8348315241102846,
+        "edges": 0.06845505863955889,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 49.5277667554814,
+        "fidelity": 0.8472193965510977,
+        "edges": 0.06512666544824493,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 50.01838235435231,
+        "fidelity": 0.8530782644706365,
+        "edges": 0.06886839574371786,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 50.151506064540804,
+        "fidelity": 0.8548811222627553,
+        "edges": 0.06962320755753927,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 49.69623270726661,
+        "fidelity": 0.8527292440189187,
+        "edges": 0.062136095249468504,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 50.236024260276714,
+        "fidelity": 0.8595031755647032,
+        "edges": 0.06585221342706733,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 47.44841989303279,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-10-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 9,
+    "variant": 1,
+    "name": "Wavy stripes · soft",
+    "sha256": "b74630b1da20fbe0669d0bb0c07ec14911c108d9cd30a793d6fac991ec11390c",
+    "properties": {
+      "contrastRange": 0.13212563332915306,
+      "edgeDensity": 0.016617696582288906,
+      "centerDetail": 0.03530690395748414,
+      "outerDetail": 0.0103879607905571,
+      "color": 0.07252420614693417,
+      "midtones": 0.2737630208333333
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.43624302350339,
+        "fidelity": 0.806261934625759,
+        "edges": 0.04648525820192527,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.385798897658134,
+        "fidelity": 0.8066040877550227,
+        "edges": 0.044946090469597515,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 46.50084578894422,
+        "fidelity": 0.8178443732393064,
+        "edges": 0.03376456135071922,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.098760814632406,
+        "fidelity": 0.8267271468347115,
+        "edges": 0.058417060860517164,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.903647786863715,
+        "fidelity": 0.827925773327979,
+        "edges": 0.05261622786277487,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 47.97319393939341,
+        "fidelity": 0.8402457014747411,
+        "edges": 0.03910400796183657,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.700389133146864,
+        "fidelity": 0.8465691439451786,
+        "edges": 0.04753524924804535,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.91034274860965,
+        "fidelity": 0.8479636194484944,
+        "edges": 0.0504965261987212,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.349421455725306,
+        "fidelity": 0.8458474917741411,
+        "edges": 0.040617986847723185,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.975673277606994,
+        "fidelity": 0.8534253860111193,
+        "edges": 0.04527282326656524,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.385798897658134,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-11-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 10,
+    "variant": 0,
+    "name": "Large chevrons",
+    "sha256": "fec32f1ab31e3de4a4437f9df9bce927147c3e8caca86b58424cda91e40ebac1",
+    "properties": {
+      "contrastRange": 0.12454876940846438,
+      "edgeDensity": 0.007715759455291522,
+      "centerDetail": 0.01652890727729104,
+      "outerDetail": 0.00477804351462503,
+      "color": 0.05116745754235631,
+      "midtones": 0.853515625
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.939995819823196,
+        "fidelity": 0.8079116839734615,
+        "edges": 0.033441182250729014,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.99445097668755,
+        "fidelity": 0.8079821172221697,
+        "edges": 0.034565211765960266,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 47.135814005372254,
+        "fidelity": 0.8197209869145388,
+        "edges": 0.045581327223835955,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.74222458637472,
+        "fidelity": 0.8302719460746579,
+        "edges": 0.04616150116152273,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 47.18359408729851,
+        "fidelity": 0.8285455448468753,
+        "edges": 0.035857536016008176,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.298454026316335,
+        "fidelity": 0.8417015441651734,
+        "edges": 0.04455264660515099,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.6885870271973,
+        "fidelity": 0.8481716178531007,
+        "edges": 0.045314401006150196,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 48.9569313550739,
+        "fidelity": 0.8496111687729815,
+        "edges": 0.049518157167998116,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.103229415682065,
+        "fidelity": 0.8466509687241732,
+        "edges": 0.03416502524116736,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.918536810885435,
+        "fidelity": 0.854569361780479,
+        "edges": 0.04260493139909083,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 45.939995819823196,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-11-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 10,
+    "variant": 1,
+    "name": "Large chevrons · soft",
+    "sha256": "7baeed1ec5da031700a26e6f5e926b6c08e3c4823601c271a34a39e4cd9ddf50",
+    "properties": {
+      "contrastRange": 0.13787487772703166,
+      "edgeDensity": 0.00924049679248136,
+      "centerDetail": 0.019244431282077278,
+      "outerDetail": 0.005905851962616016,
+      "color": 0.05542773777334434,
+      "midtones": 0.1945529513888889
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 44.951160300280506,
+        "fidelity": 0.8030863357031787,
+        "edges": 0.017364707480126192,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 44.922251906026084,
+        "fidelity": 0.8029863514674545,
+        "edges": 0.016844501673690764,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 46.26107950902627,
+        "fidelity": 0.8143526466914255,
+        "edges": 0.032704087577730155,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.74642938107434,
+        "fidelity": 0.8241577726801307,
+        "edges": 0.03150559741482561,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 46.33077332757822,
+        "fidelity": 0.8229160443614977,
+        "edges": 0.023786464171018835,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 47.29135971120913,
+        "fidelity": 0.836119158717239,
+        "edges": 0.028995688483577448,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 47.74138941569894,
+        "fidelity": 0.8427722322776238,
+        "edges": 0.030864814231769483,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 47.95689853463143,
+        "fidelity": 0.8448772858726907,
+        "edges": 0.03308106248074295,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 46.982944889212625,
+        "fidelity": 0.8415252380707671,
+        "edges": 0.015534595451565051,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.04199231742193,
+        "fidelity": 0.8494318244036506,
+        "edges": 0.029405377227136494,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 44.922251906026084,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-12-1",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 11,
+    "variant": 0,
+    "name": "Nested squares",
+    "sha256": "d225cc13bf25dc408e0088d5f1ac805a7fdfca82366ffc0b38e23b8e46d0f5d7",
+    "properties": {
+      "contrastRange": 0.1264917400360107,
+      "edgeDensity": 0.015651259607032123,
+      "centerDetail": 0.03219846110894915,
+      "outerDetail": 0.010135525773059748,
+      "color": 0.06770144274277198,
+      "midtones": 0.916015625
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 47.69562732335648,
+        "fidelity": 0.810982470953906,
+        "edges": 0.06870203157537,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.874466401775386,
+        "fidelity": 0.8116178874321925,
+        "edges": 0.04967739095566207,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 47.992739176185914,
+        "fidelity": 0.8227881225350664,
+        "edges": 0.06087538748349465,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.25617987158672,
+        "fidelity": 0.8330887757339864,
+        "edges": 0.07636216013816585,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 49.2297116284068,
+        "fidelity": 0.8326708881600664,
+        "edges": 0.07628472843562531,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 50.14280620574076,
+        "fidelity": 0.8459599498196506,
+        "edges": 0.08033353257022163,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 50.31933721921846,
+        "fidelity": 0.852732934371019,
+        "edges": 0.07597835175138704,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 50.56811448083355,
+        "fidelity": 0.854170109202876,
+        "edges": 0.07975018832611927,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 49.68642547674969,
+        "fidelity": 0.8511386034564009,
+        "edges": 0.06386227303661417,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 49.89288253692988,
+        "fidelity": 0.858654019538369,
+        "edges": 0.05926469916265755,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 46.874466401775386,
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-patterns-12-2",
+    "theme": "patterns",
+    "group": "Patterns",
+    "motif": 11,
+    "variant": 1,
+    "name": "Nested squares · soft",
+    "sha256": "fbed1827dce2de6ca1694cf288a5dc74d64e13502fa35c094c6eb3c3a2ec7aaa",
+    "properties": {
+      "contrastRange": 0.14184559038877487,
+      "edgeDensity": 0.018023492754211348,
+      "centerDetail": 0.03614962314476312,
+      "outerDetail": 0.011981449290694062,
+      "color": 0.06725031358655542,
+      "midtones": 0.2723524305555556
+    },
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "version": 7,
+        "margin": 0.1,
+        "score": 46.8069435754244,
+        "fidelity": 0.8059448555124149,
+        "edges": 0.05511058938314605,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "version": 7,
+        "margin": 0.1,
+        "score": 45.787213855762644,
+        "fidelity": 0.8050752291855989,
+        "edges": 0.03351280556788217,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "version": 8,
+        "margin": 0.1,
+        "score": 46.62411645075189,
+        "fidelity": 0.8155861814394769,
+        "edges": 0.03926392159068128,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.10183792735117,
+        "fidelity": 0.8268214122276084,
+        "edges": 0.05837022788517115,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "version": 9,
+        "margin": 0.1,
+        "score": 48.06519798606318,
+        "fidelity": 0.8258110723051861,
+        "edges": 0.05879086687284318,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "version": 11,
+        "margin": 0.1,
+        "score": 48.956982453611,
+        "fidelity": 0.8388940266150894,
+        "edges": 0.06261802199513507,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.069825041764894,
+        "fidelity": 0.8458419876597102,
+        "edges": 0.05663368267735172,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "version": 12,
+        "margin": 0.1,
+        "score": 49.35208015260037,
+        "fidelity": 0.8473676938041897,
+        "edges": 0.06104126651933177,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "version": 15,
+        "margin": 0.1,
+        "score": 48.43440385222808,
+        "fidelity": 0.8445337866124304,
+        "edges": 0.044112124189875694,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "version": 17,
+        "margin": 0.1,
+        "score": 48.574085810197175,
+        "fidelity": 0.8521965651102407,
+        "edges": 0.03785054953630974,
+        "scans": [
+          {
+            "trial": "phone",
+            "ok": true
+          },
+          {
+            "trial": "small",
+            "ok": true
+          }
+        ]
+      }
+    ],
+    "score": 45.787213855762644,
+    "eligible": true
+  }
+]
