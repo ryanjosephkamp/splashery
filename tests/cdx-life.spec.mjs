@@ -139,6 +139,49 @@ test("generator sliders have the correct values when Make first opens before the
   }
 });
 
+test("saving a new toy while it loads does not report the previous toy's discarded clay as capped", async ({
+  page,
+}) => {
+  await ready(page);
+  await page.evaluate(async () => {
+    const { app, player } = window.__splashery;
+    await app.makeToy({ ...app.generator, count: 10000 });
+    player.proc.clay = Array.from({ length: 2400 }, () => ["e", 0, 0, 0, 0.04]);
+    player.scene.toy.clay = player.proc.clay.slice();
+  });
+  let release;
+  const held = new Promise((resolve) => {
+    release = resolve;
+  });
+  await page.route("**/assets/toys/cactus/**", async (route) => {
+    await held;
+    await route.continue();
+  });
+  try {
+    await page.evaluate(() => {
+      window.__lifeSwitch = window.__splashery.app.chooseToy("cactus");
+    });
+    await page.waitForFunction(
+      () =>
+        window.__splashery.player.scene.toy.id === "cactus" &&
+        window.__splashery.player.proc?.clay.length === 2400,
+    );
+    const downloaded = page.waitForEvent("download");
+    await page.evaluate(() => window.__splashery.app.exportJSON());
+    const file = await downloaded;
+    const scene = JSON.parse(await fs.readFile(await file.path(), "utf8"));
+    expect(scene.toy).toEqual({ kind: "builtin", id: "cactus" });
+    expect(await page.locator("#toast").textContent()).toBe("Scene saved as JSON.");
+  } finally {
+    release();
+    await page.unrouteAll({ behavior: "wait" });
+    await page.evaluate(async () => {
+      await window.__lifeSwitch;
+      delete window.__lifeSwitch;
+    });
+  }
+});
+
 test("Sound lab stops polling its controls while hidden and still cleans up on a toy switch", async ({
   page,
 }) => {

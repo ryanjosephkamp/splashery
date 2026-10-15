@@ -1606,7 +1606,10 @@ class App {
   }
 
   sceneSaveNote(scene) {
-    const clay = (this.player.proc?.clay.length || 0) - (scene.toy.clay?.length || 0);
+    const clay = scene.toy.clay?.length
+      ? (this.player.proc?.clay.length ?? this.player.scene.toy.clay?.length ?? 0) -
+        scene.toy.clay.length
+      : 0;
     const paint = this.player.scene.paint.stamps.length - scene.paint.stamps.length;
     const omitted = [];
     if (clay > 0) omitted.push(`${clay} clay edit${clay === 1 ? "" : "s"}`);
