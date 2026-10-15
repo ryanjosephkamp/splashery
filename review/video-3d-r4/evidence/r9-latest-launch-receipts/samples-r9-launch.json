@@ -1,0 +1,14 @@
+{
+  "created": "2026-10-15T09:01:32.589034+00:00",
+  "pid": 194913,
+  "command": [
+    "node",
+    "tools/v3d-bench.mjs",
+    "samples",
+    "/workspace/v3d-r4-media/samples-r9-r1",
+    "--url=http://127.0.0.1:4180/",
+    "--reference=/workspace/v3d-r4-media/samples-main-r1"
+  ],
+  "runtimeReceipt": "runtime-r9-freeze.json",
+  "purpose": "All74 views, bothprofiles, unchanged sample models/tiers; exact rendered-pixel comparison against task-start main."
+}

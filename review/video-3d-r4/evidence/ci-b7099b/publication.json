@@ -1,0 +1,52 @@
+{
+  "created": "2026-10-15T10:00:56.848Z",
+  "source": "/workspace/v3d-r4-media/ci-b7099b",
+  "sourceInventory": [
+    {
+      "file": "raw-job-116340024940.log",
+      "bytes": 226628,
+      "sha256": "55fddd291fde09f0309c9163aa0e237174cae532820f9221b229e6b0341a9ae6"
+    },
+    {
+      "file": "raw-job-116340025095.log",
+      "bytes": 226631,
+      "sha256": "114e182f6b827e874aeafb0d9a47f11785ab76bd0dfd0744ae0f002ae9eb5b04"
+    },
+    {
+      "file": "raw-job-116340025117.log",
+      "bytes": 226564,
+      "sha256": "0e9b045cf75868508699a0331855c1fdbd1c5f99bd11c8fb117e2250c72dc504"
+    },
+    {
+      "file": "raw-job-116340025182.log",
+      "bytes": 227550,
+      "sha256": "582fc9523bc15c78f36cd14d18c72a9562f51305cd882387679912037d9a3da8"
+    },
+    {
+      "file": "raw-job-116340025198.log",
+      "bytes": 227017,
+      "sha256": "333e637b60f77ee18916c3d0de654e1120a139940376f8887928c5fdfae3b1b9"
+    },
+    {
+      "file": "raw-job-116340025263.log",
+      "bytes": 227923,
+      "sha256": "eb254a5e749b5e928e31fc4b74d2a9adde8742685aa9184e45ddb257c0c82c72"
+    },
+    {
+      "file": "raw-job-116340025296.log",
+      "bytes": 229773,
+      "sha256": "d5dc2826253bdd525eaba24cec4a6b2a833afe7fde363acc54b4c0b23a5a743c"
+    },
+    {
+      "file": "summary/summary.md",
+      "bytes": 2865,
+      "sha256": "44ac88ce8ef411bbc492c96b0872433b71b753c8fbbaaaaa80e071aa03d31f0e"
+    },
+    {
+      "file": "summary/times.json",
+      "bytes": 6061,
+      "sha256": "7f87df5e679c3252f23693367f16c30aa1b27b220c36506cb5ddb11cc48aa96e"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

@@ -1,0 +1,2 @@
+GitHub Actions on public product b7099b1c:323specs,2789tests,2781passed,7failed,1existing skip. Rechecks do not waive failures. Public original logs and summary retained.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

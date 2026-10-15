@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-10-15T09:33:27.815747+00:00",
+  "scope": [
+    "vendor/splatjs/src/sfm/gpumatch.js",
+    "vendor/splatjs/src/sfm/sfm.js",
+    "tests/cdx-v3d-matcher-lifecycle.spec.mjs"
+  ],
+  "tests": "8 CPU-only tests passed (6.9s); no browser/GPU run",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 2622,
+      "sha256": "61de582dc5afbd0680d4caa4e3034ed2cbfe04907a2384067f677365444a6032"
+    },
+    {
+      "path": "after.log",
+      "bytes": 1486,
+      "sha256": "6d94d9c8088e6009aacb0f69db7ee77fb184ee3acbac38a57942a453c2cabc21"
+    },
+    {
+      "path": "before.log",
+      "bytes": 17140,
+      "sha256": "361151006d8dd2d7d21926434b920292432aa38d44234afb7344cc3b7f2b15a7"
+    },
+    {
+      "path": "final.log",
+      "bytes": 1816,
+      "sha256": "b119ee0a86a8c0f24a501e0570cb3d08686d96e646f407520a6d00fdecc5aa6c"
+    },
+    {
+      "path": "gpumatch-before.js",
+      "bytes": 8812,
+      "sha256": "06eeaa66b67f252f88886cd9cc40c6ce0bc7dc61e24831fb45755cea05b0b0f3"
+    },
+    {
+      "path": "scope.patch",
+      "bytes": 15432,
+      "sha256": "6086a6861e57a759aa2d94e8712389b9d9881fa91a3453cbcca14bd5bac54f95"
+    },
+    {
+      "path": "tests/cdx-v3d-matcher-lifecycle.spec.mjs",
+      "bytes": 14060,
+      "sha256": "5d73cba8ca126b0ff49f03160f2c37cecaf22927aaa286d7787dd9a377bb7821"
+    },
+    {
+      "path": "vendor/splatjs/LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "path": "vendor/splatjs/src/sfm/gpumatch.js",
+      "bytes": 11682,
+      "sha256": "107319b57f6f4b6935f9799c127a90e01620b7fbbafd93c72f1ce7467341c662"
+    },
+    {
+      "path": "vendor/splatjs/src/sfm/sfm.js",
+      "bytes": 107991,
+      "sha256": "fd941c3b4af813b62f69e8e48171813afc69bfa1d9db8a12b093330e717ae06a"
+    }
+  ]
+}

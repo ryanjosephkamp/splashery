@@ -1,0 +1,162 @@
+{
+  "id": "cat-plays",
+  "profile": "phone",
+  "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+  "started": "2026-10-15T08:05:33.159Z",
+  "status": "finished",
+  "provenanceSha256": "b80c296943b98d423b707e284c2b8b1167475cf84b94fc323c82808528c4607b",
+  "referenceEvidence": {
+    "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "resultFingerprint": "7fab3e12b4e59180ee93957c527203286f3893fc713cb976343e5686e99decd6",
+    "evaluationSha256": "13fb7b4d4d3dccfabe04ecf56a31c6211f9a2b64f082f42a3f45c7ed35bf0252"
+  },
+  "firstViewMs": 83594.69999999925,
+  "bakeMs": 558339.896924,
+  "mean": {
+    "psnr": 16.932027503035396,
+    "ssim": 0.31149834558435724,
+    "laplacian": 0.0001055106081615312,
+    "sourceLaplacian": 0.006478526180903956
+  },
+  "peakRssBytes": 1163161600,
+  "hostLoadAtStart": [
+    5.82,
+    7.61,
+    12.79
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": true,
+    "verdict": "caution",
+    "message": "This stretch may work, with some risks.",
+    "reasons": [
+      "Many patches do not line up. Fast motion, a cut, moving objects, or reflections may cause this. Try a steady stretch without moving people or cars."
+    ],
+    "metrics": {
+      "frames": 12,
+      "brightness": 136.58283194581358,
+      "sharpness": 3714.9113676439338,
+      "contrast": 37.47921978324917,
+      "exposure": 5.860403236881325,
+      "motion": 2.23606797749979,
+      "parallax": 1.6073592581964586,
+      "unmatched": 0.43690476190476185,
+      "wideMotion": 7.280109889280519,
+      "outliers": 0.23435019841269839,
+      "residual": 1.2445581495489073,
+      "zoom": 0.059123343527013254,
+      "texturePatches": 21,
+      "worstUnmatched": 0.6190476190476191,
+      "localWindows": true,
+      "reversals": 0
+    },
+    "duration": 8,
+    "start": 0,
+    "end": 8
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "00e9ab2613198bad92390dbf7f8b429412aece6d6f71bf51c4e484c278e5709a",
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 16,
+    "points": 669,
+    "surfacePoints": 11963,
+    "generatedSurfacePoints": 11963,
+    "seedSplats": 15000,
+    "splats": 17250,
+    "iters": 122,
+    "psnr": 18.4,
+    "psnrAtIter": 122,
+    "trainSide": 320,
+    "plyBytes": 1160495,
+    "retried": true,
+    "timedOut": true,
+    "timeLimitMinutes": 8,
+    "softwareSort": true,
+    "trainingLoop": {
+      "batches": 61,
+      "submittedSteps": 122,
+      "encodeMs": 12,
+      "viewSubmitMs": 7,
+      "fenceWaitMs": 207042,
+      "metricsWaitMs": 227740,
+      "batchWallMs": 440770
+    },
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 8,
+    "rate": 2
+  },
+  "timings": {
+    "frames": 10.8,
+    "decode": 0.8,
+    "path": 50.4,
+    "seed": 2.4,
+    "train": 486.4,
+    "export": 0.1,
+    "total": 551
+  },
+  "actualTier": "phone",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": true,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "evaluationSha256": "fe71179e2d5e5486060e3b209f0d3b58bc8c3f42a527276b3de3c1c4d4d93fc0",
+  "frames": [
+    {
+      "time": 1.125,
+      "renderSha256": "1519c126b8a6a2e8700cef6fe609c03d5ea7f111bf1e68b576327f2ee340650f",
+      "referenceSha256": "7aa46fd73b1da3386cc4220e7be6d375fc6cba27624f95c458d48f379c663d3a",
+      "psnr": 17.4264132617656,
+      "exact": false,
+      "ssim": 0.3295472478473639,
+      "laplacian": 0.0001486982722270974,
+      "sourceLaplacian": 0.005128991331658684,
+      "sharpnessRatio": 0.0289917183734076
+    },
+    {
+      "time": 3,
+      "renderSha256": "fb74f71abde2d2701cdb3a781127bbb53b8586c4203ce57073476b9588658374",
+      "referenceSha256": "417f95cd13e24db9ecdc421afd4ca6f321db19ecd0e54ecf44731fd0ed5a366f",
+      "psnr": 16.735911309136807,
+      "exact": false,
+      "ssim": 0.3067430149641271,
+      "laplacian": 0.00008637986903607533,
+      "sourceLaplacian": 0.007366684516452887,
+      "sharpnessRatio": 0.011725745665251846
+    },
+    {
+      "time": 5,
+      "renderSha256": "7c14fb4d420b77b3060609e5067b1d130aeb7315f42ace53f750c2bba1ea2be5",
+      "referenceSha256": "0456f402120854052e5933f24066485dfc152a00816343c23b73be1707f75bc4",
+      "psnr": 16.689929272608197,
+      "exact": false,
+      "ssim": 0.30418897161583575,
+      "laplacian": 0.0000868822196247975,
+      "sourceLaplacian": 0.006940433258501578,
+      "sharpnessRatio": 0.012518270313798126
+    },
+    {
+      "time": 6.875,
+      "renderSha256": "34468cac863618bc38852c27638c242b7eca0cf6bc1bcbf845830864e4a6e7dd",
+      "referenceSha256": "39a9545bc734d73c9335df53a92694423c27671aff988f4667885090df9a613c",
+      "psnr": 16.875856168630982,
+      "exact": false,
+      "ssim": 0.3055141479101023,
+      "laplacian": 0.00010008207175815459,
+      "sourceLaplacian": 0.006477995617002675,
+      "sharpnessRatio": 0.015449542987567177
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "created": "2026-10-15T10:00:55.968Z",
+  "source": "/workspace/v3d-r4-media/candidate-r9-v1-shards/001-cat-plays-desktop-paired",
+  "runSha256": "a56eb4e2bf0ccb63898bab0e93a94ba55d797ab2159e59a7303e33a5ed8e5ceb",
+  "provenanceSha256": "fca50d7bc2b5d22bddecd7ee77d5c5bb0942444fe6ddf12f008d544bcb2d8ca0",
+  "cases": [
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "rowFingerprint": "b911ce724ef1ea7c20def1b3af271f1c3055a9d7d5311873dc6aee5b72b5162c",
+      "files": [
+        {
+          "file": "result.json",
+          "bytes": 2024,
+          "sha256": "4eb9ab9caf6f34e8779a3e42cd47be65e742074461ec5186e6b8c5f6ff7cd64c"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

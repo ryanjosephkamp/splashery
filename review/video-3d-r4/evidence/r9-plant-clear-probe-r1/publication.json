@@ -1,0 +1,77 @@
+{
+  "created": "2026-10-15T10:00:57.094Z",
+  "source": "/workspace/v3d-r4-media/r9-plant-clear-probe-r1",
+  "sourceInventory": [
+    {
+      "file": "original-black-0.png",
+      "bytes": 355785,
+      "sha256": "91abd9cc4906aa0409a7c54bca17dcb2096c12853009fc0d6fb688ff0d33157b"
+    },
+    {
+      "file": "original-black-1.png",
+      "bytes": 392192,
+      "sha256": "9fe919af3d2b8dba745de583b42b42f8a76d7f146689f1c90f838475b8ef7e23"
+    },
+    {
+      "file": "original-black-2.png",
+      "bytes": 356563,
+      "sha256": "851218a45976ceaa903d954cc9e8f9d48b6868df347105b2f67c5d2c04e9b3c7"
+    },
+    {
+      "file": "original-black-3.png",
+      "bytes": 325036,
+      "sha256": "813face689f5b2ff6b67e19656641bce387a1d1aa773eb2745c8f8ab10dc7dab"
+    },
+    {
+      "file": "pre-dispatch.json",
+      "bytes": 1080,
+      "sha256": "12940e01cde6bd82727c751614683cd3e5c124e148f6c03ef4d3d903339c5bfa"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 15939,
+      "sha256": "050955418b9a3b797ead535b683e10210edb8a59c723e9e8dd68ac3dab3f616e"
+    },
+    {
+      "file": "rejected-cache-brown-0.png",
+      "bytes": 324113,
+      "sha256": "01f19b4ecb2027b3d0f89dd2068d0d2203e20e1fc7e60f48bcad1bb5256aa91e"
+    },
+    {
+      "file": "rejected-cache-brown-1.png",
+      "bytes": 367274,
+      "sha256": "92406ff97294f1fbc98025c9f1f1dde2d6dbca9e402a61175111080fc86c0d65"
+    },
+    {
+      "file": "rejected-cache-brown-2.png",
+      "bytes": 336419,
+      "sha256": "67f9bc47aa04d9b01530f170f3688cce45db687c8940948fc3bc60d93b0446fa"
+    },
+    {
+      "file": "rejected-cache-brown-3.png",
+      "bytes": 307556,
+      "sha256": "4f6f521021b8f9d672c766b99877d325278687417ea01ca838763d66af5728b8"
+    },
+    {
+      "file": "white-0.png",
+      "bytes": 355748,
+      "sha256": "5e1965d1ddf7e2372cf6be77771fcee22ad0b9514684ec3ad0589c9fbf1fab70"
+    },
+    {
+      "file": "white-1.png",
+      "bytes": 389674,
+      "sha256": "9c5349591a2005caadd9f8b086a64460c38c18989e9e8b91893c38145c31f64e"
+    },
+    {
+      "file": "white-2.png",
+      "bytes": 359128,
+      "sha256": "6afe6508909c402e9a42be20a42e7c12c4f183cde06dad0c19dd7151ee5f6de8"
+    },
+    {
+      "file": "white-3.png",
+      "bytes": 332554,
+      "sha256": "b22e64e54b989b4ec0e1514a274eccf7db3eb338667edb5df0f60223c2d513a7"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

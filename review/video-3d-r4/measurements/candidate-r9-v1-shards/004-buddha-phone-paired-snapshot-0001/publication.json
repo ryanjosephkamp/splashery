@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T10:00:56.102Z",
+  "source": "/workspace/v3d-r4-media/candidate-r9-v1-shards/004-buddha-phone-paired",
+  "runSha256": "1394598fda320a174f4cc45b6ed6308e81e72b4eb9dbefc5b42c6efcfa5e0853",
+  "provenanceSha256": "fca50d7bc2b5d22bddecd7ee77d5c5bb0942444fe6ddf12f008d544bcb2d8ca0",
+  "cases": [
+    {
+      "id": "buddha",
+      "profile": "phone",
+      "rowFingerprint": "3688a8c7470318b7c301ef4eb409ae4b4005b2d92a9c5a7124749098929ff97c",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207284,
+          "sha256": "d307fe4a114ea59a5084975ef3477a2ff363d0c95092fefc5a39e9e0a52bb42c"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2196,
+          "sha256": "481e917c236f677826e7d9cf6e761e4a3c42d2e2ab6fc91a2685f05561d9a2f7"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

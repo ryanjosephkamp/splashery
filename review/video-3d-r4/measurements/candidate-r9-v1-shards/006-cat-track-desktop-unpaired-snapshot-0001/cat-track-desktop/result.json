@@ -1,0 +1,90 @@
+{
+  "id": "cat-track",
+  "profile": "desktop",
+  "sha256": "598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430",
+  "started": "2026-10-15T09:23:07.849Z",
+  "status": "harness-error",
+  "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+  "firstViewMs": 301289.6000000015,
+  "bakeMs": 1209868.406064,
+  "mean": null,
+  "peakRssBytes": 1791053824,
+  "hostLoadAtStart": [
+    19.57,
+    19.79,
+    19.17
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "This browser cannot play that video. Try an MP4 (H.264) or WebM file, or a shorter clip.",
+    "unplayable": false,
+    "duration": 0
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "c5d2c521f4dcabab4c9d80822b9b7a23afeb4072ab92fa4bca4da16716d6d8c7",
+  "stats": {
+    "tier": "high",
+    "adapter": "google swiftshader",
+    "frames": 24,
+    "registered": 24,
+    "points": 860,
+    "surfacePoints": 10897,
+    "generatedSurfacePoints": 10897,
+    "seedSplats": 59917,
+    "seedBounds": "coordinate-median",
+    "seedSceneRadius": 47.296380420326635,
+    "trainingBackground": [
+      0,
+      0,
+      0
+    ],
+    "splats": 59917,
+    "iters": 38,
+    "psnr": 15.8,
+    "psnrAtIter": 38,
+    "trainSide": 720,
+    "plyBytes": 4074771,
+    "retried": false,
+    "timedOut": true,
+    "timeLimitMinutes": 15,
+    "softwareSort": true,
+    "softwareDirectGradient": true,
+    "trainingLoop": {
+      "batches": 19,
+      "submittedSteps": 38,
+      "encodeMs": 7,
+      "viewSubmitMs": 1,
+      "fenceWaitMs": 498367,
+      "metricsWaitMs": 443435,
+      "batchWallMs": 941844
+    },
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 8,
+    "rate": 3
+  },
+  "timings": {
+    "frames": 47.7,
+    "decode": 3.2,
+    "path": 174.2,
+    "seed": 4.4,
+    "train": 959.9,
+    "export": 0.3,
+    "total": 1189.7
+  },
+  "actualTier": "high",
+  "reason": "page.evaluate: Error: No presented source frame at 3.333333.\n    at eval (eval at evaluate (:290:30), <anonymous>:41:22)\n    at withHostDeadline.timeoutMs (/workspace/splashery-v3d-bench-tools-r9/tools/v3d-bench.mjs:788:48)\n    at async withHostDeadline (/workspace/splashery-v3d-bench-tools-r9/tools/v3d-bench.mjs:187:12)\n    at async main (/workspace/splashery-v3d-bench-tools-r9/tools/v3d-bench.mjs:527:9)\n    at async file:///workspace/splashery-v3d-bench-tools-r9/tools/v3d-bench.mjs:973:3"
+}

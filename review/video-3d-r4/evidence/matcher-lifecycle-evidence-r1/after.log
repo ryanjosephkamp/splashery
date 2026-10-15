@@ -1,0 +1,16 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 09:31:07] "GET / HTTP/1.1" 200 -
+
+Running 6 tests using 1 worker
+
+(node:213179) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:213179) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:181:1 › exact pair chunks preserve default raw integer tables, match order, and unchanged shader (506ms)
+  ✓  2 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:230:1 › chunk bounds and pre-abort reject before GPU allocation; no pairs allocates nothing (71ms)
+  ✓  3 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:255:1 › every partial GPU allocation is released on allocation, submission, mapping, or readback errors (157ms)
+  ✓  4 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:281:1 › abort during pending map settles promptly, removes its listener, and never dispatches later chunks (28ms)
+  ✓  5 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:331:1 › temporary device is destroyed on success and on a late requestDevice after abort (56ms)
+  ✓  6 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:370:1 › SfM forwards cancellation and exact chunk size without CPU fallback after abort (26ms)
+
+  6 passed (8.9s)

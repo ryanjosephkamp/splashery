@@ -1,0 +1,81 @@
+{
+  "created": "2026-10-15T10:00:56.540Z",
+  "source": "/workspace/v3d-r4-media/candidate-r9-v1-shards/007-dianthus-phone-paired",
+  "runSha256": "f51d688bc77d3c5dbbac7bdd023b4b4bbb9effdea7d50cd174d30427f1e5bc8e",
+  "provenanceSha256": "fca50d7bc2b5d22bddecd7ee77d5c5bb0942444fe6ddf12f008d544bcb2d8ca0",
+  "cases": [
+    {
+      "id": "dianthus",
+      "profile": "phone",
+      "rowFingerprint": "7249926b21da14bbae03c56cefc8514c2ec3574b62af56c868ba903067b54504",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11290,
+          "sha256": "12ad19fd88b41279fb71001dc65f18d91a512f5601b885abed80d6397bdd7659"
+        },
+        {
+          "file": "model.json",
+          "bytes": 27487,
+          "sha256": "67c9db4acc6a7a0987ee0c3f03bd5a9a6d854a1974b6b94f72365bc2ecbde3ba"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1169811,
+          "sha256": "df99bf03746c0d869def83edb10989b74402308b8791bbd1fc9d0e0d5cd08aab"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 281418,
+          "sha256": "45eb60df589c7f27d4d7d902a2b6697543aab85acdef1ba32adad3e26ca1b7dc"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 631236,
+          "sha256": "29a44c05ac596e8fb21283db05b05445bb118560a8e7979160702a16c25f4133"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 632069,
+          "sha256": "e27e788eb7d145fe78b513acd3c2c036195a5e52fbdd770c892267a1d70f8c29"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 631256,
+          "sha256": "5dbf522e355f8c3845f05345a544271fde292920272e430e683dc2e89c42ef44"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 624167,
+          "sha256": "cb35ba1a33d7b2d1f2567c440fb2b7cfe0b8d389550637b53f2ee1a87121aa15"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 582247,
+          "sha256": "57cd5085becf22dfa8ca4aa482e8f5406ff0379b1a20630133934abbf43d1677"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 586089,
+          "sha256": "b5a284495e1781dee9cbaabcea128d8e1a85e01b739056ccdcb595ca413469fe"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 564411,
+          "sha256": "291e194728a247db31637fd43586f4dd8a5b2bfa3863e8fb1dc8c6120e8de06d"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 579188,
+          "sha256": "8b8cc3016b7253e6c0d86f5d5ec123cecabbdd4bbc8e3c0fc1aff4f3e35abd70"
+        },
+        {
+          "file": "result.json",
+          "bytes": 4678,
+          "sha256": "80bc2737c4ae9c1e29dc67eccd0358ab2f47e0088e3215bbc79de29ed32b66ee"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

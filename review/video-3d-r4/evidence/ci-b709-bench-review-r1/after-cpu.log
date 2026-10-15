@@ -1,0 +1,19 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 09:52:11] "GET / HTTP/1.1" 200 -
+
+Running 9 tests using 1 worker
+
+(node:228299) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:228299) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:48:1 › an initial RVFC after seeking but before seeked cannot label the new photograph (32ms)
+  ✓  2 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:65:1 › a queued old presentation delivered after seeked is rejected without a VFR proximity cutoff (30ms)
+  ✓  3 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:86:1 › a picture presented before seeked uses bounded real-frame recovery instead of a stale timestamp (133ms)
+  ✓  4 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:103:1 › cancellation after a discarded presentation cleans callbacks and cannot cache its time (36ms)
+  ✓  5 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:121:1 › no fresh terminal presentation fails at the original bound rather than inventing a timestamp (66ms)
+  ✓  6 [chromium] › tests/cdx-v3d-real-clips.spec.mjs:117:1 › training waits for the decoded picture and records its presented timestamp (74ms)
+  ✓  7 [chromium] › tests/cdx-v3d-real-clips.spec.mjs:173:1 › a paused same-frame seek recovers a real presentation and stops advancing on cancellation (432ms)
+  ✓  8 [chromium] › tests/cdx-v3d-real-clips.spec.mjs:234:1 › a late recovery play promise cannot pause the next seek's recovery (306ms)
+  ✓  9 [chromium] › tests/cdx-v3d-real-clips.spec.mjs:309:1 › an identical seek reuses presentation after the browser rounds its position (39ms)
+
+  9 passed (11.1s)

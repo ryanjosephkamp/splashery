@@ -1,0 +1,11 @@
+Old stone handball court, camera walks inside
+Author: A.-K. D.
+Source: https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b
+Changes: Trimmed 8–18 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+Models and rendered/reference PNGs retain the source license. This additive notice is outside the unchanged raw artifact inventory.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

@@ -1,0 +1,382 @@
+{
+  "created": "2026-10-15T10:00:59.607Z",
+  "source": "/workspace/v3d-r4-media/samples-r9-r1",
+  "sourceInventory": [
+    {
+      "file": "adjara-desktop/11.png",
+      "bytes": 1259383,
+      "sha256": "b15e2bf46c954aba873d89284979ac562b461cd64b632b7b2d95f40f6ed676c3"
+    },
+    {
+      "file": "adjara-desktop/19.png",
+      "bytes": 1159553,
+      "sha256": "e107965a8f8c253f25620bda5c991979fc122c9c70a20557290f85569f43c71c"
+    },
+    {
+      "file": "adjara-desktop/27.png",
+      "bytes": 1233893,
+      "sha256": "34fee352f6faa37f341b6c6a5e2dae5be183699aa55a2fca3efe0d50d18bdcfd"
+    },
+    {
+      "file": "adjara-desktop/3.png",
+      "bytes": 1221422,
+      "sha256": "bdbfe870382bcf0c8066fa8646a24f1aee4c0c04df25a7c1d35211bd14f3ee74"
+    },
+    {
+      "file": "adjara-desktop/35.png",
+      "bytes": 1220744,
+      "sha256": "54a9bbbf3882aa65ee43916c9c5ac44f1e949089420c544a8931ec0d95af64c5"
+    },
+    {
+      "file": "adjara-desktop/43.png",
+      "bytes": 1164712,
+      "sha256": "8ddbb3f78fb6d4cf24adb54c77046bb3477fe1de55e7573e6674c137226882c2"
+    },
+    {
+      "file": "adjara-phone/11.png",
+      "bytes": 1217449,
+      "sha256": "e2d19fee3c139a012225463139fa29578650939680c74a394d7d65c28d51f348"
+    },
+    {
+      "file": "adjara-phone/19.png",
+      "bytes": 1115088,
+      "sha256": "387b4c960cc947b03918a56c204c0b19500397320bbaf93ab7bd3bd3283235ab"
+    },
+    {
+      "file": "adjara-phone/27.png",
+      "bytes": 1193224,
+      "sha256": "96583067347cd4bbe0c9093fb02b1c8bef0093cc3749a7b6586df12a40a3e364"
+    },
+    {
+      "file": "adjara-phone/3.png",
+      "bytes": 1182036,
+      "sha256": "1493e6202b444fa979d5e68cd8bb8193df3d0cb8fe2ec7d172c8adf140953c80"
+    },
+    {
+      "file": "adjara-phone/35.png",
+      "bytes": 1180819,
+      "sha256": "df65ab05111d1a32266112a4dfb1a18e9ededd7380d2dec8259bd194e2f9515c"
+    },
+    {
+      "file": "adjara-phone/43.png",
+      "bytes": 1124454,
+      "sha256": "9b3cb972fdb86de5a734adc87e229539c7fa6437e34599e1e43fdda9f4121ed4"
+    },
+    {
+      "file": "edinburgh-desktop/11.png",
+      "bytes": 1050478,
+      "sha256": "0e4ca10e81524129024f308e9bad47a40fb95c3d2ec9fc5da8bc6be2649a20a0"
+    },
+    {
+      "file": "edinburgh-desktop/19.png",
+      "bytes": 1089538,
+      "sha256": "28cce5e682438b64583d95b7352698e4654754dcf0cd4e5e10e8a3275408c7cb"
+    },
+    {
+      "file": "edinburgh-desktop/27.png",
+      "bytes": 1066709,
+      "sha256": "27f0e620ddd71a4cca05b7499dd32268026d1843cda1d3792c05b814e84566e3"
+    },
+    {
+      "file": "edinburgh-desktop/3.png",
+      "bytes": 1004665,
+      "sha256": "2483d8a8d35943a76f43d461017af8f02b815a00bfcffcf887d6fb0def43976a"
+    },
+    {
+      "file": "edinburgh-desktop/35.png",
+      "bytes": 1039873,
+      "sha256": "0ac15cdf4b785a4a461c2fb0e0c7bb8a7e8d8a91ddbe3c94665d710b565bf8c8"
+    },
+    {
+      "file": "edinburgh-desktop/43.png",
+      "bytes": 1006098,
+      "sha256": "d4a528685b372ff326700f5c5ae015c6e27d444882c56d98b474a43a5772266e"
+    },
+    {
+      "file": "edinburgh-desktop/51.png",
+      "bytes": 1019218,
+      "sha256": "628e7772916f641804f5514ef64d8d1a985c381ba3c4a7623d69d95094079c0e"
+    },
+    {
+      "file": "edinburgh-phone/11.png",
+      "bytes": 1033556,
+      "sha256": "177eda616459ef53d8b55376436f248f99bc3c7df60e4765b37e2cc0e47824ab"
+    },
+    {
+      "file": "edinburgh-phone/19.png",
+      "bytes": 1072015,
+      "sha256": "73912b97a9513ba31faf7f3f413cace07e794b6fac0a3654dbb7d69ebc6a0a60"
+    },
+    {
+      "file": "edinburgh-phone/27.png",
+      "bytes": 1049911,
+      "sha256": "ca9c7041a7b0ce47316b9ce4d656d657712a1388c65f17b6f63a7bd7598009c0"
+    },
+    {
+      "file": "edinburgh-phone/3.png",
+      "bytes": 995391,
+      "sha256": "c144757a26ea8b7fb73bcef17c264b02794cffe515c8387e7e4615621f7d3030"
+    },
+    {
+      "file": "edinburgh-phone/35.png",
+      "bytes": 1029140,
+      "sha256": "f18ccb758e617f26b834b736790b8162b7800ae1e00379a7308cecef476b08bc"
+    },
+    {
+      "file": "edinburgh-phone/43.png",
+      "bytes": 995993,
+      "sha256": "08e70d675a4ace41b2398c956e02c6bc1d061217f7eec78d42ad608ba0f5a3fd"
+    },
+    {
+      "file": "edinburgh-phone/51.png",
+      "bytes": 1001126,
+      "sha256": "5b6e34966cec6aa75a870e828aee69b12de183cce326d6c4d8550b6d52bd0c10"
+    },
+    {
+      "file": "liberty-desktop/11.png",
+      "bytes": 1042050,
+      "sha256": "cc5a38cd6c05fc919557d7548266bf1b55a3a5509089fda0a0f2b0d040d24405"
+    },
+    {
+      "file": "liberty-desktop/19.png",
+      "bytes": 1047459,
+      "sha256": "2f39541ed6d7d814b497a42a4a5b374f2841ac268ff22618cb75f0ba5f8be134"
+    },
+    {
+      "file": "liberty-desktop/27.png",
+      "bytes": 1064765,
+      "sha256": "e0b667468702e5cccd77f1d3176b8fea6598eb6b30b44dbedef936649f257a64"
+    },
+    {
+      "file": "liberty-desktop/3.png",
+      "bytes": 1039861,
+      "sha256": "58a35fc69179106f27ae9f50348f6a6d93f74773bb95989f5ceadfa7054897f1"
+    },
+    {
+      "file": "liberty-desktop/35.png",
+      "bytes": 1071817,
+      "sha256": "96433e2098a91f1d178f03764be4fb60ce736d581ca743084341a1b04800fa6c"
+    },
+    {
+      "file": "liberty-desktop/43.png",
+      "bytes": 1070039,
+      "sha256": "d9768179a1b5832d12a79c7a1412b0cad364d1e03be3d511eadaa94a4770da3d"
+    },
+    {
+      "file": "liberty-phone/11.png",
+      "bytes": 987069,
+      "sha256": "f68f78ec38dad5e4d54b6022c42fe122fc6d6f19255ce14a4c9fbbb2ad3ed7a0"
+    },
+    {
+      "file": "liberty-phone/19.png",
+      "bytes": 995246,
+      "sha256": "97fb785df4ef369dc71cac319d720f1eb77cbe7a5d548b95151eef73855a6524"
+    },
+    {
+      "file": "liberty-phone/27.png",
+      "bytes": 1013559,
+      "sha256": "b8b511e803de0fc38fedbe974b7697f9cf145a1353458e4a85173498c3d9aa75"
+    },
+    {
+      "file": "liberty-phone/3.png",
+      "bytes": 986919,
+      "sha256": "c3c32cfd0c9582bb13c481f91bd78bccf418714877726a2aa4ad74df0db88689"
+    },
+    {
+      "file": "liberty-phone/35.png",
+      "bytes": 1023452,
+      "sha256": "d9cef614ebde0474d782ca13979348931639e3390dadc3d1491bb63441244566"
+    },
+    {
+      "file": "liberty-phone/43.png",
+      "bytes": 1022515,
+      "sha256": "bc94a2d3451d697f3b7a3adaa10556db40d6694ff185d9f06aa7e63500bc58db"
+    },
+    {
+      "file": "lihula-desktop/11.png",
+      "bytes": 1153053,
+      "sha256": "b2c4a6a20f0bc29e506213394855f1b5f7ac3dd7b426a1f6713e0965df92a966"
+    },
+    {
+      "file": "lihula-desktop/19.png",
+      "bytes": 1194745,
+      "sha256": "8d0c356258aae844cfaf4fb2537a75d9cb6c14860de4cbb289a4ed4c9a28bd51"
+    },
+    {
+      "file": "lihula-desktop/27.png",
+      "bytes": 1201065,
+      "sha256": "8077f40d8a7839cb52da154b257eddb85465689e15d35b09788bf8d5c953a1ec"
+    },
+    {
+      "file": "lihula-desktop/3.png",
+      "bytes": 1075704,
+      "sha256": "b4c4cb4ee450786f54898ca0a29bc543f08dfe644e9359431a210699a22793ed"
+    },
+    {
+      "file": "lihula-desktop/35.png",
+      "bytes": 1198825,
+      "sha256": "5c0fba1007276af6ebbd0ca9618ef6296f45f0ce49fff386663f5287b289e28e"
+    },
+    {
+      "file": "lihula-desktop/43.png",
+      "bytes": 1141769,
+      "sha256": "02b125df3bdd58265245e267f4d72831f7e2abbca68fd8a21a24662be3009660"
+    },
+    {
+      "file": "lihula-phone/11.png",
+      "bytes": 1130146,
+      "sha256": "2239fd5f82e17202efc23bc5e3ca7c4eb02e8c7229b0c698512f153c757041a5"
+    },
+    {
+      "file": "lihula-phone/19.png",
+      "bytes": 1168755,
+      "sha256": "126484d3731555fad79a02d5939095fcd14df9c30eebc9a9b6a6bbf675ee6935"
+    },
+    {
+      "file": "lihula-phone/27.png",
+      "bytes": 1175857,
+      "sha256": "c684729ad3362edf0af3e56b2a62ed70ae3aafaf6e07c35a7351082347c60a1d"
+    },
+    {
+      "file": "lihula-phone/3.png",
+      "bytes": 1051002,
+      "sha256": "b41767631a4f756047e54b43330bace099cff24ab2d6e8546251de5ff2b385bf"
+    },
+    {
+      "file": "lihula-phone/35.png",
+      "bytes": 1173789,
+      "sha256": "49a04bf1309a049d2796d2ec636e218a1e8282d72cc44da7a910e2867727afa5"
+    },
+    {
+      "file": "lihula-phone/43.png",
+      "bytes": 1118154,
+      "sha256": "ebdff0e5a0399427d417eb3e5f2d5a5df9f6dcd3b7d5ec622b10a839b6770771"
+    },
+    {
+      "file": "poltsamaa-desktop/11.png",
+      "bytes": 1133196,
+      "sha256": "abbab6c4e9f373f3179651bae1d6dff5aee878238961979b416c25b220e0aedd"
+    },
+    {
+      "file": "poltsamaa-desktop/19.png",
+      "bytes": 1170388,
+      "sha256": "139ac3f960a8c014b9c4af0bbe3bc1c166701258bb6ad1d8f1c04f8ce9474599"
+    },
+    {
+      "file": "poltsamaa-desktop/27.png",
+      "bytes": 1173696,
+      "sha256": "4d0145c2e1bf8d8f50f10bd0ffbe712dc543d53e71644b3aaf85c3df9a1c8e07"
+    },
+    {
+      "file": "poltsamaa-desktop/3.png",
+      "bytes": 1076297,
+      "sha256": "5325e52f36f48bfaefd4cc674083815107f0e52c73d2aedb52b21a715c71381f"
+    },
+    {
+      "file": "poltsamaa-desktop/35.png",
+      "bytes": 1170488,
+      "sha256": "14915a5d3ffd0cae359bfbb59cbee082ea19e476c928e3cafd71c5d20bc245a4"
+    },
+    {
+      "file": "poltsamaa-desktop/43.png",
+      "bytes": 1137509,
+      "sha256": "7758e3e87e6aef25163fab3a823dd9e9c2d0f3ebaa93ee16991c805ab69dafc7"
+    },
+    {
+      "file": "poltsamaa-phone/11.png",
+      "bytes": 1113505,
+      "sha256": "9bdb5895587e1ad0709bcacfed72c9c806a31e54c61285ed8bc69c911fd6c164"
+    },
+    {
+      "file": "poltsamaa-phone/19.png",
+      "bytes": 1149239,
+      "sha256": "5ce1b86974ef04915481700780c7312eca900a37760c739e8803bab9fa20bb68"
+    },
+    {
+      "file": "poltsamaa-phone/27.png",
+      "bytes": 1154606,
+      "sha256": "90832313a167df674e272fc2b0e817239ae5f8b745581e9dea57b0cf581523ba"
+    },
+    {
+      "file": "poltsamaa-phone/3.png",
+      "bytes": 1051327,
+      "sha256": "bcd26c0ea94bb9bfb34e469896ac1ef35e571cada12e259fab0aa46fe7dd2c9e"
+    },
+    {
+      "file": "poltsamaa-phone/35.png",
+      "bytes": 1153446,
+      "sha256": "ca7e56464e22bc9af2601b3d4ab6f1eac669a6c5f0cfb80d28e94e11f212083e"
+    },
+    {
+      "file": "poltsamaa-phone/43.png",
+      "bytes": 1119715,
+      "sha256": "a13b452c53dc59ab4a860e86dff8a335e440b5fb571759b9f2b6d848be251c06"
+    },
+    {
+      "file": "samples.json",
+      "bytes": 477206,
+      "sha256": "5f1996999ad102921908916e4aad174dba8dbb0f803dd606389dea3402955bd0"
+    },
+    {
+      "file": "toolse-desktop/11.png",
+      "bytes": 1011385,
+      "sha256": "895a7c68da3d785bb015b556102e719ad98fd0a5bba449be0ae89566f131ef34"
+    },
+    {
+      "file": "toolse-desktop/19.png",
+      "bytes": 1060699,
+      "sha256": "396df82ecb4599a1d17e695d1be3edf13b3eddb7b7b66bca63fca4541f9f4503"
+    },
+    {
+      "file": "toolse-desktop/27.png",
+      "bytes": 1098425,
+      "sha256": "0c06c81be85638059f7f4beddb6cac0c973ab80ce694d0cb0657881f9da1b48a"
+    },
+    {
+      "file": "toolse-desktop/3.png",
+      "bytes": 944653,
+      "sha256": "2df397dd84b93dac09be3324f463c11c6db003418e49a2f08185a19e863d0218"
+    },
+    {
+      "file": "toolse-desktop/35.png",
+      "bytes": 1093289,
+      "sha256": "a36a163321d035c7fde9afec0747314cd2a373b1e19ca6ae56e6ddf8430c10fc"
+    },
+    {
+      "file": "toolse-desktop/43.png",
+      "bytes": 1064324,
+      "sha256": "1360158dd6c2264158344cc041f045fdd93d532d41308db073c26024bae1b42a"
+    },
+    {
+      "file": "toolse-phone/11.png",
+      "bytes": 998928,
+      "sha256": "0500ba2010e6a386a369d7b83bc546119388bb6731d545d6def60c1676112647"
+    },
+    {
+      "file": "toolse-phone/19.png",
+      "bytes": 1048139,
+      "sha256": "efd9108702b4dc5bbd4131ea82088e911a9121cfc49847f04b77238d14865160"
+    },
+    {
+      "file": "toolse-phone/27.png",
+      "bytes": 1084647,
+      "sha256": "6645455147ec4bcb77606c5a168c6d92e5dcfbe380dcf4c81191d4067520ba21"
+    },
+    {
+      "file": "toolse-phone/3.png",
+      "bytes": 933255,
+      "sha256": "2762e323b2185ed30a47aa1a1604fe2a45bb8995ef78f935902d93a9b37ffa99"
+    },
+    {
+      "file": "toolse-phone/35.png",
+      "bytes": 1077222,
+      "sha256": "fdcc20400a6b79a4933b62dbf4fd0e55d1cc758d30f1854a08bdb0bab4360118"
+    },
+    {
+      "file": "toolse-phone/43.png",
+      "bytes": 1048267,
+      "sha256": "11b88e922ac1e3112dce63e8763fd553ab3f0a95210f8875ae87e4716583946e"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

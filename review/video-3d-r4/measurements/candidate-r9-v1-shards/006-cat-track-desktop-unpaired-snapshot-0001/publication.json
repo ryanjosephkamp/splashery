@@ -1,0 +1,31 @@
+{
+  "created": "2026-10-15T10:00:56.341Z",
+  "source": "/workspace/v3d-r4-media/candidate-r9-v1-shards/006-cat-track-desktop-unpaired",
+  "runSha256": "d81c52812ec193572e4c71772f5d6d883c15905689a8385d295317e13855c95e",
+  "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+  "cases": [
+    {
+      "id": "cat-track",
+      "profile": "desktop",
+      "rowFingerprint": "5f3883e94b27930eece5c4281c5d3b3becf1060d390daa8e221fea6cf038c9fa",
+      "files": [
+        {
+          "file": "model.json",
+          "bytes": 39630,
+          "sha256": "11abd84ed4cded74c846aa56973ca6e596c3fdb84c8c32e1768ea366c6a50227"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 4074771,
+          "sha256": "c5d2c521f4dcabab4c9d80822b9b7a23afeb4072ab92fa4bca4da16716d6d8c7"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2714,
+          "sha256": "e4f8cf6676e0ca1edd6629d5053e1d8ee6929d7c4c0542daf340b394cf75c4e4"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

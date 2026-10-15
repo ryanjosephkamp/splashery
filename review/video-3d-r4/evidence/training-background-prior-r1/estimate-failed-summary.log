@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/workspace/v3d-r4-media/training-background-prior-r1/estimate.py", line 189, in <module>
+    main()
+  File "/workspace/v3d-r4-media/training-background-prior-r1/estimate.py", line 186, in main
+    print(json.dumps({k:[{field:r[field] for field in ['label','accepted','color','rgb255','split','gates','crossSplitColorLinf','supportedPixelResidualP90','cpuSeconds']} for r in rows] for k in ['results']},indent=2))
+                                ~^^^^^^^
+KeyError: 'color'

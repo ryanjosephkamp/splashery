@@ -1,0 +1,38 @@
+
+Running 17 tests using 1 worker
+················F
+
+  1) [chromium] › tests/cdx-v3d-bench.spec.mjs:523:1 › the independent decoder matches selected JPEGs and detects an actually repeated frame 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoThrow[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected pattern: [32m/also used for training/[39m
+
+    Received function did not throw
+
+      593 |     crop: { sx: 0, sw: 192 },
+      594 |   });
+    > 595 |   expect(() => assertPixelDisjointness(selected, overlap, [repeatedTime])).toThrow(
+          |                                                                            ^
+      596 |     /also used for training/,
+      597 |   );
+      598 | });
+        at /home/runner/work/splashery/splashery/tests/cdx-v3d-bench.spec.mjs:595:76
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../../_temp/ci-out/shard-4/results/cdx-v3d-bench/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: ../../_temp/ci-out/shard-4/results/cdx-v3d-bench/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../../_temp/ci-out/shard-4/results/cdx-v3d-bench/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../../_temp/ci-out/shard-4/results/cdx-v3d-bench/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-v3d-bench.spec.mjs:523:1 › the independent decoder matches selected JPEGs and detects an actually repeated frame 
+  16 passed (5.1s)

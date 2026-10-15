@@ -1,0 +1,100 @@
+{
+  "call@10": {
+    "value": [
+      {
+        "time": 0,
+        "requestedTime": 0.333,
+        "presentedTime": 0,
+        "sharpness": 2269.0563571624393,
+        "blob": null,
+        "width": 192,
+        "height": 108,
+        "sha256": "57b3fb591ba69553e0b6b9be295d930891a8aa8ca00a2abe44653f2f722f097c"
+      },
+      {
+        "time": 1.333,
+        "requestedTime": 1.333,
+        "presentedTime": 1.333,
+        "sharpness": 2419.1819867913255,
+        "blob": null,
+        "width": 192,
+        "height": 108,
+        "sha256": "a313f6d2347eace72429b93d94cfd267d3730df94ff1309d27c77ff21bb5e535"
+      }
+    ],
+    "milliseconds": 231.16199999999935
+  },
+  "call@12": {
+    "value": {
+      "method": "Independent presented source frames, identical extraction canvas and JPEG encoder; every training JPEG matched, held-out JPEGs disjoint.",
+      "matchedTraining": [
+        {
+          "sha256": "57b3fb591ba69553e0b6b9be295d930891a8aa8ca00a2abe44653f2f722f097c",
+          "repeatedSha256": "57b3fb591ba69553e0b6b9be295d930891a8aa8ca00a2abe44653f2f722f097c",
+          "sourceIndex": 5,
+          "sourceTime": 0.333
+        },
+        {
+          "sha256": "a313f6d2347eace72429b93d94cfd267d3730df94ff1309d27c77ff21bb5e535",
+          "repeatedSha256": "a313f6d2347eace72429b93d94cfd267d3730df94ff1309d27c77ff21bb5e535",
+          "sourceIndex": 20,
+          "sourceTime": 1.333
+        }
+      ],
+      "views": [
+        {
+          "index": 10,
+          "time": 0.667,
+          "mediaTime": 0.667,
+          "width": 192,
+          "height": 108,
+          "sha256": "c7d17e1bc6a2e063e55b96d9857631ee13e145723b09854303b05fe9a99d8616",
+          "repeatedSha256": "c7d17e1bc6a2e063e55b96d9857631ee13e145723b09854303b05fe9a99d8616"
+        },
+        {
+          "index": 25,
+          "time": 1.667,
+          "mediaTime": 1.667,
+          "width": 192,
+          "height": 108,
+          "sha256": "6ff62831cf5fd73c7c7dd3fb8a1c81a556eb057ae44e2bc724b2327bbc70be1a",
+          "repeatedSha256": "6ff62831cf5fd73c7c7dd3fb8a1c81a556eb057ae44e2bc724b2327bbc70be1a"
+        }
+      ],
+      "decodedFrames": 9
+    },
+    "milliseconds": 263.2689999999993
+  },
+  "call@14": {
+    "value": {
+      "method": "Independent presented source frames, identical extraction canvas and JPEG encoder; every training JPEG matched, held-out JPEGs disjoint.",
+      "matchedTraining": [
+        {
+          "sha256": "57b3fb591ba69553e0b6b9be295d930891a8aa8ca00a2abe44653f2f722f097c",
+          "repeatedSha256": "57b3fb591ba69553e0b6b9be295d930891a8aa8ca00a2abe44653f2f722f097c",
+          "sourceIndex": 5,
+          "sourceTime": 0.333
+        },
+        {
+          "sha256": "a313f6d2347eace72429b93d94cfd267d3730df94ff1309d27c77ff21bb5e535",
+          "repeatedSha256": "a313f6d2347eace72429b93d94cfd267d3730df94ff1309d27c77ff21bb5e535",
+          "sourceIndex": 20,
+          "sourceTime": 1.333
+        }
+      ],
+      "views": [
+        {
+          "index": 0,
+          "time": 0,
+          "mediaTime": 0,
+          "width": 192,
+          "height": 108,
+          "sha256": "99d7352b8a3dd730b64a8deb5123e62e8ae984a9b4ebce01b4882363c3cfe121",
+          "repeatedSha256": "99d7352b8a3dd730b64a8deb5123e62e8ae984a9b4ebce01b4882363c3cfe121"
+        }
+      ],
+      "decodedFrames": 7
+    },
+    "milliseconds": 174.39100000000053
+  }
+}

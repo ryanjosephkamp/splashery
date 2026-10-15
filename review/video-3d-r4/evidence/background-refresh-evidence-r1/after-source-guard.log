@@ -1,0 +1,20 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 09:27:00] "GET / HTTP/1.1" 200 -
+
+Running 10 tests using 1 worker
+
+(node:211843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:211843) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-v3d-background.spec.mjs:19:1 › a fitted view restores its prior composite once after leaving (113ms)
+  ✓   2 [chromium] › tests/cdx-v3d-background.spec.mjs:31:1 › host color choices and a newer setter remain authoritative (21ms)
+  ✓   3 [chromium] › tests/cdx-v3d-background.spec.mjs:44:1 › overlapping views do not restore each other's colors (5ms)
+  ✓   4 [chromium] › tests/cdx-v3d-background.spec.mjs:56:1 › direct camera changes, invalid metadata, and absent stages are preserved (87ms)
+  ✓   5 [chromium] › tests/cdx-v3d-background.spec.mjs:71:1 › flight disposal restores only its own background, including a late embed owner (5ms)
+  ✓   6 [chromium] › tests/cdx-v3d-background.spec.mjs:89:1 › routine exposure, accent, and settings refreshes keep the fitted composite (10ms)
+  ✓   7 [chromium] › tests/cdx-v3d-background.spec.mjs:109:1 › an explicit background option wins even when its RGBA matches the old host clear (18ms)
+  ✓   8 [chromium] › tests/cdx-v3d-background.spec.mjs:123:1 › a changed theme color or direct different RGBA remains authoritative (4ms)
+  ✓   9 [chromium] › tests/cdx-v3d-background.spec.mjs:137:1 › overlapping metadata holds preserve the newer fitted color during routine refreshes (5ms)
+  ✓  10 [chromium] › tests/cdx-v3d-background.spec.mjs:150:1 › flight refresh ownership expires immediately for a new generation, source, scene, or player (10ms)
+
+  10 passed (7.5s)

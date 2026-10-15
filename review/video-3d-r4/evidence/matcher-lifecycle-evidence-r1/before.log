@@ -1,0 +1,224 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 09:29:54] "GET / HTTP/1.1" 200 -
+
+Running 6 tests using 1 worker
+
+(node:212725) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:212725) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:116:1 › exact pair chunks preserve default raw integer tables, match order, and unchanged shader (103ms)
+(node:212745) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:212745) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:140:1 › chunk bounds and pre-abort reject before GPU allocation; no pairs allocates nothing (141ms)
+(node:212757) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:212757) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:153:1 › every partial GPU allocation is released on allocation, submission, mapping, or readback errors (57ms)
+(node:212803) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:212803) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  4 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:164:1 › abort during pending map settles promptly, removes its listener, and never dispatches later chunks (113ms)
+(node:212816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 09:30:13] "GET / HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 09:30:13] "GET / HTTP/1.1" 200 -
+(node:212816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  5 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:181:1 › temporary device is destroyed on success and on a late requestDevice after abort (145ms)
+(node:212842) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:212842) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  6 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:198:1 › SfM forwards cancellation and exact chunk size without CPU fallback after abort (187ms)
+
+
+  1) [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:116:1 › exact pair chunks preserve default raw integer tables, match order, and unchanged shader 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 5[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   1,[39m
+    [32m-   1,[39m
+    [32m-   1,[39m
+    [32m-   1,[39m
+    [32m-   1,[39m
+    [31m+   5,[39m
+    [2m  ][22m
+
+      127 |       const raw = device.dispatches.flatMap((d) => d.raw);
+      128 |       if (rawDefault) expect(raw).toEqual(rawDefault); else rawDefault = raw;
+    > 129 |       expect(device.dispatches.map((d) => d.y / 2)).toEqual(
+          |                                                     ^
+      130 |         maxPairsPerChunk === undefined || maxPairsPerChunk >= 5 ? [5] :
+      131 |           maxPairsPerChunk === 1 ? [1, 1, 1, 1, 1] : maxPairsPerChunk === 2 ? [2, 2, 1] : [4, 1],
+      132 |       );
+        at /workspace/splashery-r4-public/tests/cdx-v3d-matcher-lifecycle.spec.mjs:129:53
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--a7963--order-and-unchanged-shader-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--a7963--order-and-unchanged-shader-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:140:1 › chunk bounds and pre-abort reject before GPU allocation; no pairs allocates nothing 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mrejects[2m.[22mtoThrow[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected pattern: [32m/maxPairsPerChunk/[39m
+    Received message: [31m"unexpected adapter"[39m
+
+          140 | test("chunk bounds and pre-abort reject before GPU allocation; no pairs allocates nothing", async () => {
+          141 |   let requests = 0;
+        > 142 |   const restore = install({ requestAdapter: () => { requests++; throw new Error("unexpected adapter"); } });
+              |                                                                       ^
+          143 |   try {
+          144 |     for (const maxPairsPerChunk of [0, -1, 1.5, NaN, Infinity, "4", null, 32768])
+          145 |       await expect(gpuMatchAll([], [], 0.8, () => {}, null, null, { maxPairsPerChunk })).rejects.toThrow(/maxPairsPerChunk/);
+
+          [2mat Object.requestAdapter ([22mfile:/workspace/splashery-r4-public/tests/cdx-v3d-matcher-lifecycle.spec.mjs[2m:142:71)[22m
+          [2mat gpuMatchAll ([22mfile:/workspace/splashery-r4-public/vendor/splatjs/src/sfm/gpumatch.js[2m:93:41)[22m
+          [2mat [22mfile:/workspace/splashery-r4-public/tests/cdx-v3d-matcher-lifecycle.spec.mjs[2m:145:20[22m
+          [2mat [22m../splashery/node_modules/playwright/lib/worker/workerMain.js[2m:310:15[22m
+          [2mat [22m../splashery/node_modules/playwright/lib/worker/testInfo.js[2m:305:17[22m
+          [2mat TimeoutManager.withRunnable ([22m../splashery/node_modules/playwright/lib/worker/timeoutManager.js[2m:68:9)[22m
+          [2mat TestInfoImpl._runWithTimeout ([22m../splashery/node_modules/playwright/lib/worker/testInfo.js[2m:303:34)[22m
+          [2mat [22m../splashery/node_modules/playwright/lib/worker/workerMain.js[2m:308:22[22m
+          [2mat WorkerMain._runTest ([22m../splashery/node_modules/playwright/lib/worker/workerMain.js[2m:283:5)[22m
+          [2mat WorkerMain.runTestGroup ([22m../splashery/node_modules/playwright/lib/worker/workerMain.js[2m:198:11)[22m
+          [2mat process.<anonymous> ([22m../splashery/node_modules/playwright/lib/common/process.js[2m:65:22)[22m
+
+      143 |   try {
+      144 |     for (const maxPairsPerChunk of [0, -1, 1.5, NaN, Infinity, "4", null, 32768])
+    > 145 |       await expect(gpuMatchAll([], [], 0.8, () => {}, null, null, { maxPairsPerChunk })).rejects.toThrow(/maxPairsPerChunk/);
+          |                                                                                                  ^
+      146 |     const controller = new AbortController(); controller.abort();
+      147 |     await expect(gpuMatchAll([], [], 0.8, () => {}, null, null, { signal: controller.signal })).rejects.toMatchObject({ name: "AbortError" });
+      148 |     expect(await gpuMatchAll([], [])).toEqual([]);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-matcher-lifecycle.spec.mjs:145:98
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--fafb9--no-pairs-allocates-nothing-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--fafb9--no-pairs-allocates-nothing-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:153:1 › every partial GPU allocation is released on allocation, submission, mapping, or readback errors 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      110 | }
+      111 | const released = (device, owned = false) => {
+    > 112 |   expect(device.buffers.every((buffer) => buffer.destroyed === 1 && !buffer.mapped)).toBe(true);
+          |                                                                                      ^
+      113 |   expect(device.destroyed).toBe(owned ? 1 : 0);
+      114 | };
+      115 |
+        at released (/workspace/splashery-r4-public/tests/cdx-v3d-matcher-lifecycle.spec.mjs:112:86)
+        at /workspace/splashery-r4-public/tests/cdx-v3d-matcher-lifecycle.spec.mjs:159:7
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--109ab--mapping-or-readback-errors-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--109ab--mapping-or-readback-errors-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:164:1 › abort during pending map settles promptly, removes its listener, and never dispatches later chunks 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"AbortError"[39m
+    Received: [31m"still pending"[39m
+
+      174 |     controller.abort();
+      175 |     const result = await Promise.race([pending, new Promise((resolve) => setTimeout(() => resolve("still pending"), 30))]);
+    > 176 |     expect(result).toBe("AbortError");
+          |                    ^
+      177 |     expect(listeners.size).toBe(0); released(device);
+      178 |   } finally { gate.reject(new Error("late destroyed mapping")); await pending; restore(); }
+      179 | });
+        at /workspace/splashery-r4-public/tests/cdx-v3d-matcher-lifecycle.spec.mjs:176:20
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--0aac7-ver-dispatches-later-chunks-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--0aac7-ver-dispatches-later-chunks-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  5) [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:181:1 › temporary device is destroyed on success and on a late requestDevice after abort 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"AbortError"[39m
+    Received: [31m"still pending"[39m
+
+      189 |       if (late) { await turn(); controller.abort(); }
+      190 |       const result = await Promise.race([pending, new Promise((resolve) => setTimeout(() => resolve("still pending"), 30))]);
+    > 191 |       expect(result).toBe(late ? "AbortError" : "success");
+          |                      ^
+      192 |       if (late) { gate.resolve(device); await turn(); }
+      193 |       released(device, true);
+      194 |     } finally { gate.resolve(device); await pending; restore(); }
+        at /workspace/splashery-r4-public/tests/cdx-v3d-matcher-lifecycle.spec.mjs:191:22
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--4259e-e-requestDevice-after-abort-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--4259e-e-requestDevice-after-abort-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6) [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:198:1 › SfM forwards cancellation and exact chunk size without CPU fallback after abort 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [32m-   2,[39m
+    [31m+   15,[39m
+    [2m  ][22m
+
+      205 |       onEvent(event) { if (event.stage === "matching") controller.abort(); },
+      206 |     })).rejects.toMatchObject({ name: "AbortError" });
+    > 207 |     expect(device.dispatches.map((d) => d.y / 2)).toEqual([2]);
+          |                                                   ^
+      208 |     expect(logs.some((line) => line.includes("CPU fallback"))).toBe(false);
+      209 |     released(device);
+      210 |   } finally { restore(); }
+        at /workspace/splashery-r4-public/tests/cdx-v3d-matcher-lifecycle.spec.mjs:207:51
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--5c11a-ut-CPU-fallback-after-abort-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/gpu-match-lifecycle-r1/before/cdx-v3d-matcher-lifecycle--5c11a-ut-CPU-fallback-after-abort-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  6 failed
+    [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:116:1 › exact pair chunks preserve default raw integer tables, match order, and unchanged shader 
+    [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:140:1 › chunk bounds and pre-abort reject before GPU allocation; no pairs allocates nothing 
+    [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:153:1 › every partial GPU allocation is released on allocation, submission, mapping, or readback errors 
+    [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:164:1 › abort during pending map settles promptly, removes its listener, and never dispatches later chunks 
+    [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:181:1 › temporary device is destroyed on success and on a late requestDevice after abort 
+    [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:198:1 › SfM forwards cancellation and exact chunk size without CPU fallback after abort 

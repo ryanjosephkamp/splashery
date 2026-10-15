@@ -1,0 +1,44 @@
+{
+  "checkedAt": "2026-10-15T09:27:28.036352+00:00",
+  "scope": "Routine unchanged background refresh preservation; current public only. Frozen R9 unchanged.",
+  "tests": {
+    "before": "3 failed, 7 passed",
+    "after": "10 passed",
+    "final": "10 passed (7.5s), source guard added"
+  },
+  "verification": "CPU-only Playwright tests, no page/browser fixtures or GPU; scoped Prettier and git diff --check passed.",
+  "files": [
+    {
+      "path": "src/video3d/background.js",
+      "sha256": "0253e70610a9cc2f98707d677f1774d08607a17c8d5fa765abd0758a77dd00ea",
+      "bytes": 2952
+    },
+    {
+      "path": "src/video3d/flight.js",
+      "sha256": "1ffd88692bdec36535cacc92afa6c02a055cde23c5d3661fe7ba9833a9f01fab",
+      "bytes": 11956
+    },
+    {
+      "path": "tests/cdx-v3d-background.spec.mjs",
+      "sha256": "4029dfaaba8ea5a6f14328493f3f1fb31d43928f875eca04673004b3919829ea",
+      "bytes": 6514
+    },
+    {
+      "path": "before.log",
+      "sha256": "c7b331e694decb3b04a17e10c4385f5450927aca85ae19aaa901fc1628a0d512",
+      "bytes": 8327
+    },
+    {
+      "path": "after.log",
+      "sha256": "4dbfe804c83e8a54c731bb78c34dcf3ed42f4b4f9a6bf84294f3016f6352d349",
+      "bytes": 1932
+    },
+    {
+      "path": "after-source-guard.log",
+      "sha256": "473e9aa0b0a3c76a28091cc3cc621637a55ff3d4826a8fea54f479c7ff36f248",
+      "bytes": 1943
+    }
+  ],
+  "license": "MIT; made by Ryan with Codex (GPT-6)",
+  "limitations": "Actual changed theme color remains authoritative; no new render/quality claim."
+}

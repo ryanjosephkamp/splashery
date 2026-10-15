@@ -1,0 +1,11 @@
+Residential street, aerial lateral pass
+Author: Sillerkiil
+Source: https://commons.wikimedia.org/wiki/File:Aerial_view_of_Oa_street_in_Supilinn,_Tartu,_Estonia._July_2021.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341
+Changes: Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+Models and rendered/reference PNGs retain the source license. This additive notice is outside the unchanged raw artifact inventory.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

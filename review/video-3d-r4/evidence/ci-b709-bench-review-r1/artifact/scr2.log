@@ -1,0 +1,6 @@
+
+Running 6 tests using 1 worker
+······
+  Slow test file: [chromium] › tests/scr2.spec.mjs (11.1m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  6 passed (11.2m)

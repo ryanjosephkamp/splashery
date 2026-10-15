@@ -1,0 +1,6 @@
+
+Running 22 tests using 1 worker
+······················
+  Slow test file: [chromium] › tests/st4.spec.mjs (5.1m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  22 passed (5.3m)

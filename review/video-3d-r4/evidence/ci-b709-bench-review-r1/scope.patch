@@ -1,0 +1,99 @@
+diff --git a/src/video3d/extract.js b/src/video3d/extract.js
+index 224295b6..27c3e4f6 100644
+--- a/src/video3d/extract.js
++++ b/src/video3d/extract.js
+@@ -132,6 +132,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } =
+     let recovery;
+     let advanced = false;
+     let done = false;
++    let seekedAt = null;
+     const finish = (error, mediaTime) => {
+       if (done) return;
+       done = true;
+@@ -139,7 +140,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } =
+       clearTimeout(recovery);
+       signal?.removeEventListener("abort", abort);
+       video.removeEventListener("seeking", arm);
+-      video.removeEventListener("seeked", recover);
++      video.removeEventListener("seeked", settled);
+       if (callback !== undefined) video.cancelVideoFrameCallback(callback);
+       if (advanced && ownsVideo()) video.pause();
+       error ? reject(error) : resolve(mediaTime);
+@@ -150,10 +151,24 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } =
+         finish(new Error("The decoded video frame took too long. Try a shorter MP4 (H.264) clip.")),
+       timeoutMs,
+     );
+-    // Register only once this seek starts. A callback already queued for the previous picture
+-    // must not satisfy a nearby new seek. Frame duration can vary, so proximity is not a test.
++    // Initial/old RVFCs can arrive after seeking starts but before seeked: accepting one and then
++    // waiting for seeked pairs its old mediaTime with the new drawImage picture. Require a fresh
++    // presentation after seeked; presentationTime also rejects an older queued callback delivered
++    // after that event. Frame duration can vary, so mediaTime proximity is never a test.
+     const arm = () => {
+-      callback = video.requestVideoFrameCallback((_, metadata) => finish(null, metadata.mediaTime));
++      callback = video.requestVideoFrameCallback((_, metadata) => {
++        callback = undefined;
++        if (done) return;
++        if (
++          seekedAt === null ||
++          video.seeking ||
++          (Number.isFinite(metadata.presentationTime) && metadata.presentationTime < seekedAt)
++        ) {
++          arm();
++          return;
++        }
++        finish(null, metadata.mediaTime);
++      });
+     };
+     // A paused seek can remain inside the already-presented frame. Chromium then sends seeked
+     // without another presentation callback. Briefly advancing the muted local video requests a
+@@ -181,9 +196,14 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } =
+         );
+       }, 100);
+     };
++    const settled = () => {
++      if (video.seeking || video.readyState < 2) return;
++      seekedAt = performance.now();
++      recover();
++    };
+     cleanup = finish;
+     video.addEventListener("seeking", arm, { once: true });
+-    video.addEventListener("seeked", recover);
++    video.addEventListener("seeked", settled);
+     signal?.addEventListener("abort", abort, { once: true });
+     if (signal?.aborted) abort();
+   });
+diff --git a/tests/cdx-v3d-bench.spec.mjs b/tests/cdx-v3d-bench.spec.mjs
+index 7e7f44d2..d512bc64 100644
+--- a/tests/cdx-v3d-bench.spec.mjs
++++ b/tests/cdx-v3d-bench.spec.mjs
+@@ -584,7 +584,20 @@ test("the independent decoder matches selected JPEGs and detects an actually rep
+   });
+   expect(assertPixelDisjointness(selected, proof, times)).toBe(true);
+   expect(proof.matchedTraining).toHaveLength(2);
+-  const repeatedTime = sourceTimes.find((t) => Math.abs(t - selected[0].time) < 0.001);
++  for (const [index, frame] of proof.matchedTraining.entries()) {
++    expect(Number.isFinite(selected[index].presentedTime)).toBe(true);
++    expect(Math.abs(selected[index].presentedTime - frame.sourceTime)).toBeLessThan(0.0001);
++  }
++  // The independent JPEG match identifies the actual picture even if extraction's timestamp
++  // was stale. Deliberately repeat that source frame, rather than trusting the requested time.
++  const matched = proof.matchedTraining[0];
++  expect(matched.sha256).toBe(selected[0].sha256);
++  expect(matched.repeatedSha256).toBe(selected[0].sha256);
++  expect(Number.isInteger(matched.sourceIndex)).toBe(true);
++  expect(matched.sourceIndex).toBeGreaterThanOrEqual(0);
++  expect(matched.sourceIndex).toBeLessThan(sourceTimes.length);
++  const repeatedTime = sourceTimes[matched.sourceIndex];
++  expect(Math.abs(repeatedTime - matched.sourceTime)).toBeLessThan(0.0001);
+   const overlap = await page.evaluate(sourceFrameReceipts, {
+     base64,
+     sourceTimes,
+@@ -592,6 +605,7 @@ test("the independent decoder matches selected JPEGs and detects an actually rep
+     trainingFrames: selected,
+     crop: { sx: 0, sw: 192 },
+   });
++  expect(overlap.views[0].sha256).toBe(selected[0].sha256);
+   expect(() => assertPixelDisjointness(selected, overlap, [repeatedTime])).toThrow(
+     /also used for training/,
+   );

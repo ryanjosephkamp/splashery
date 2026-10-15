@@ -1,0 +1,23 @@
+{
+  "created": "2026-10-15T09:47:40.945Z",
+  "scriptSha256": "5f53ca9b643abd0396b7d444859433619c7c2d103d2373c87b21108a0579bdd3",
+  "protocol": "Same saved model, camera path, production viewer, and references; exact saved-render reproduction required first. Change only renderer clear/background color: original trained black, white, and a cached-training-only brown estimate whose unchanged confidence gate REJECTED. Brown is diagnostic, not a proposed accepted runtime prior. No image processing, fitting, or change to strict recorded row. Diagnostic only.",
+  "inputs": [
+    {
+      "file": "model.ply",
+      "sha256": "d9381b9f9365791bce24a158d63ded66dacb92e4052986bcb935f914156bde81"
+    },
+    {
+      "file": "model.json",
+      "sha256": "57823fdfafcad01c5808b88d49bde9f6cd5c12196342365596e57898ab52b5d1"
+    },
+    {
+      "file": "evaluation.json",
+      "sha256": "3368dfefd8275291dfb6f55af67e0074b0233f960d1d0b15e87b2610178ba0f8"
+    },
+    {
+      "file": "result.json",
+      "sha256": "86c8efa2f2a01a606605fbad0ef2eb5a6b3db508407e9a9b894878acf281b4d0"
+    }
+  ]
+}

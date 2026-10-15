@@ -1,0 +1,129 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 09:51:36] "GET / HTTP/1.1" 200 -
+
+Running 5 tests using 1 worker
+
+(node:226801) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:226801) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:48:1 › an initial RVFC after seeking but before seeked cannot label the new photograph (33ms)
+(node:226816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:226816) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:65:1 › a queued old presentation delivered after seeked is rejected without a VFR proximity cutoff (32ms)
+(node:226829) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:226829) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:86:1 › a picture presented before seeked uses bounded real-frame recovery instead of a stale timestamp (82ms)
+(node:227237) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:227237) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:103:1 › cancellation after a discarded presentation cleans callbacks and cannot cache its time (69ms)
+  ✘  5 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:120:1 › no fresh terminal presentation fails at the original bound rather than inventing a timestamp (89ms)
+
+
+  1) [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:48:1 › an initial RVFC after seeking but before seeked cannot label the new photograph 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mfalse[39m
+    Received: [31mtrue[39m
+
+      57 |   video.settleSeek(); // drawImage may now see the newly sought .333 picture.
+      58 |   await turn();
+    > 59 |   expect(finished).toBe(false);
+         |                    ^
+      60 |   video.present(0.333);
+      61 |   expect(await pending).toBe(0.333);
+      62 |   expect(video.callbacks.size).toBe(0);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-extraction-timestamp.spec.mjs:59:20
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/ci-b709-bench-review-r1/before/cdx-v3d-extraction-timesta-55600-ot-label-the-new-photograph-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/ci-b709-bench-review-r1/before/cdx-v3d-extraction-timesta-55600-ot-label-the-new-photograph-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:65:1 › a queued old presentation delivered after seeked is rejected without a VFR proximity cutoff 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mfalse[39m
+    Received: [31mtrue[39m
+
+      76 |   video.present(0, queuedAt);
+      77 |   await turn();
+    > 78 |   expect(finished).toBe(false);
+         |                    ^
+      79 |   video.present(1.25); // A fresh long-duration frame can begin well before the requested time.
+      80 |   expect(await pending).toBe(1.25);
+      81 |   expect(await seekPresented(video, 2, { timeoutMs: 20 })).toBe(1.25);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-extraction-timestamp.spec.mjs:78:20
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/ci-b709-bench-review-r1/before/cdx-v3d-extraction-timesta-29fe2-hout-a-VFR-proximity-cutoff-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/ci-b709-bench-review-r1/before/cdx-v3d-extraction-timesta-29fe2-hout-a-VFR-proximity-cutoff-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:86:1 › a picture presented before seeked uses bounded real-frame recovery instead of a stale timestamp 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m0.4[39m
+    Received: [31m0.333[39m
+
+       95 |   video.present(0.333);
+       96 |   video.settleSeek();
+    >  97 |   expect(await pending).toBe(0.4);
+          |                         ^
+       98 |   expect(video.plays).toBe(1);
+       99 |   expect(video.paused).toBe(true);
+      100 |   expect(video.callbacks.size).toBe(0);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-extraction-timestamp.spec.mjs:97:25
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/ci-b709-bench-review-r1/before/cdx-v3d-extraction-timesta-b57fe-nstead-of-a-stale-timestamp-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/ci-b709-bench-review-r1/before/cdx-v3d-extraction-timesta-b57fe-nstead-of-a-stale-timestamp-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:120:1 › no fresh terminal presentation fails at the original bound rather than inventing a timestamp 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mrejects[2m.[22mtoThrow[2m()[22m
+
+    Received promise resolved instead of rejected
+    Resolved to value: [31m0[39m
+
+      123 |   video.present(0);
+      124 |   video.settleSeek();
+    > 125 |   await expect(pending).rejects.toThrow(/decoded video frame took too long/);
+          |         ^
+      126 |   expect(video.callbacks.size).toBe(0);
+      127 | });
+      128 |
+        at /workspace/splashery-r4-public/tests/cdx-v3d-extraction-timestamp.spec.mjs:125:9
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/ci-b709-bench-review-r1/before/cdx-v3d-extraction-timesta-55928--than-inventing-a-timestamp-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/ci-b709-bench-review-r1/before/cdx-v3d-extraction-timesta-55928--than-inventing-a-timestamp-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:48:1 › an initial RVFC after seeking but before seeked cannot label the new photograph 
+    [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:65:1 › a queued old presentation delivered after seeked is rejected without a VFR proximity cutoff 
+    [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:86:1 › a picture presented before seeked uses bounded real-frame recovery instead of a stale timestamp 
+    [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:120:1 › no fresh terminal presentation fails at the original bound rather than inventing a timestamp 
+  1 passed (21.4s)

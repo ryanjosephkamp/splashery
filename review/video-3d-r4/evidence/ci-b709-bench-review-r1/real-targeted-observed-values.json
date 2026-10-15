@@ -1,0 +1,124 @@
+[
+  {
+    "trace": "real-targeted-r1/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/trace.zip",
+    "callId": "call@10",
+    "milliseconds": 1177.9750000000004,
+    "value": [
+      {
+        "time": 0.4,
+        "requestedTime": 0.333,
+        "presentedTime": 0.4,
+        "sharpness": 2333.1100559310216,
+        "blob": null,
+        "width": 192,
+        "height": 108,
+        "sha256": "ffba804288b6be260b0d96ef941ab5683ff4f7844cc33bf3e71da07605afe0c9"
+      },
+      {
+        "time": 1.4,
+        "requestedTime": 1.333,
+        "presentedTime": 1.4,
+        "sharpness": 2347.579347973514,
+        "blob": null,
+        "width": 192,
+        "height": 108,
+        "sha256": "cc16c19e97f3a425a8d8f665bbabc12989185d0b19c44ec9843ba442de8dd949"
+      }
+    ]
+  },
+  {
+    "trace": "real-targeted-r1/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/trace.zip",
+    "callId": "call@12",
+    "milliseconds": 433.4879999999994,
+    "value": {
+      "method": "Independent presented source frames, identical extraction canvas and JPEG encoder; every training JPEG matched, held-out JPEGs disjoint.",
+      "matchedTraining": [
+        {
+          "sha256": "ffba804288b6be260b0d96ef941ab5683ff4f7844cc33bf3e71da07605afe0c9",
+          "repeatedSha256": "ffba804288b6be260b0d96ef941ab5683ff4f7844cc33bf3e71da07605afe0c9",
+          "sourceIndex": 6,
+          "sourceTime": 0.4
+        },
+        {
+          "sha256": "cc16c19e97f3a425a8d8f665bbabc12989185d0b19c44ec9843ba442de8dd949",
+          "repeatedSha256": "cc16c19e97f3a425a8d8f665bbabc12989185d0b19c44ec9843ba442de8dd949",
+          "sourceIndex": 21,
+          "sourceTime": 1.4
+        }
+      ],
+      "views": [
+        {
+          "index": 10,
+          "time": 0.667,
+          "mediaTime": 0.667,
+          "width": 192,
+          "height": 108,
+          "sha256": "c7d17e1bc6a2e063e55b96d9857631ee13e145723b09854303b05fe9a99d8616",
+          "repeatedSha256": "c7d17e1bc6a2e063e55b96d9857631ee13e145723b09854303b05fe9a99d8616"
+        },
+        {
+          "index": 25,
+          "time": 1.667,
+          "mediaTime": 1.667,
+          "width": 192,
+          "height": 108,
+          "sha256": "6ff62831cf5fd73c7c7dd3fb8a1c81a556eb057ae44e2bc724b2327bbc70be1a",
+          "repeatedSha256": "6ff62831cf5fd73c7c7dd3fb8a1c81a556eb057ae44e2bc724b2327bbc70be1a"
+        }
+      ],
+      "decodedFrames": 4
+    }
+  },
+  {
+    "trace": "real-targeted-r1/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/trace.zip",
+    "callId": "call@14",
+    "milliseconds": 315.46000000000095,
+    "value": {
+      "method": "Independent presented source frames, identical extraction canvas and JPEG encoder; every training JPEG matched, held-out JPEGs disjoint.",
+      "matchedTraining": [
+        {
+          "sha256": "ffba804288b6be260b0d96ef941ab5683ff4f7844cc33bf3e71da07605afe0c9",
+          "repeatedSha256": "ffba804288b6be260b0d96ef941ab5683ff4f7844cc33bf3e71da07605afe0c9",
+          "sourceIndex": 6,
+          "sourceTime": 0.4
+        },
+        {
+          "sha256": "cc16c19e97f3a425a8d8f665bbabc12989185d0b19c44ec9843ba442de8dd949",
+          "repeatedSha256": "cc16c19e97f3a425a8d8f665bbabc12989185d0b19c44ec9843ba442de8dd949",
+          "sourceIndex": 21,
+          "sourceTime": 1.4
+        }
+      ],
+      "views": [
+        {
+          "index": 6,
+          "time": 0.4,
+          "mediaTime": 0.4,
+          "width": 192,
+          "height": 108,
+          "sha256": "ffba804288b6be260b0d96ef941ab5683ff4f7844cc33bf3e71da07605afe0c9",
+          "repeatedSha256": "ffba804288b6be260b0d96ef941ab5683ff4f7844cc33bf3e71da07605afe0c9"
+        }
+      ],
+      "decodedFrames": 2
+    }
+  },
+  {
+    "trace": "real-targeted-r1/cdx-v3d-a-real-video-recei-4d7ea-without-loading-the-trainer-chromium/trace.zip",
+    "callId": "call@30",
+    "milliseconds": 1871.5099999999984,
+    "value": {
+      "checked": false,
+      "verdict": "unknown",
+      "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+      "reasons": [],
+      "metrics": {
+        "frames": 0
+      },
+      "diagnostic": "The video took too long to show a frame.",
+      "unplayable": false,
+      "duration": 14,
+      "elapsed": 1800.300000000745
+    }
+  }
+]

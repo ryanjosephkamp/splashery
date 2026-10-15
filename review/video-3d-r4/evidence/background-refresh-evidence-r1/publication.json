@@ -1,0 +1,42 @@
+{
+  "created": "2026-10-15T10:00:56.633Z",
+  "source": "/workspace/v3d-r4-media/background-refresh-evidence-r1",
+  "sourceInventory": [
+    {
+      "file": "after-source-guard.log",
+      "bytes": 1943,
+      "sha256": "473e9aa0b0a3c76a28091cc3cc621637a55ff3d4826a8fea54f479c7ff36f248"
+    },
+    {
+      "file": "after.log",
+      "bytes": 1932,
+      "sha256": "4dbfe804c83e8a54c731bb78c34dcf3ed42f4b4f9a6bf84294f3016f6352d349"
+    },
+    {
+      "file": "before.log",
+      "bytes": 8327,
+      "sha256": "c7b331e694decb3b04a17e10c4385f5450927aca85ae19aaa901fc1628a0d512"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 1519,
+      "sha256": "6088cc00571bcc7d6f2ddac44f2db388bf856f9ccf1b6dc9e1d32971db57b4ec"
+    },
+    {
+      "file": "src/video3d/background.js",
+      "bytes": 2952,
+      "sha256": "0253e70610a9cc2f98707d677f1774d08607a17c8d5fa765abd0758a77dd00ea"
+    },
+    {
+      "file": "src/video3d/flight.js",
+      "bytes": 11956,
+      "sha256": "1ffd88692bdec36535cacc92afa6c02a055cde23c5d3661fe7ba9833a9f01fab"
+    },
+    {
+      "file": "tests/cdx-v3d-background.spec.mjs",
+      "bytes": 6514,
+      "sha256": "4029dfaaba8ea5a6f14328493f3f1fb31d43928f875eca04673004b3919829ea"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

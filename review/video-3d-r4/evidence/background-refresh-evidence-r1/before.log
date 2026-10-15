@@ -1,0 +1,135 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 09:22:44] "GET / HTTP/1.1" 200 -
+
+Running 10 tests using 1 worker
+
+(node:209489) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:209489) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-v3d-background.spec.mjs:19:1 › a fitted view restores its prior composite once after leaving (42ms)
+  ✓   2 [chromium] › tests/cdx-v3d-background.spec.mjs:31:1 › host color choices and a newer setter remain authoritative (18ms)
+  ✓   3 [chromium] › tests/cdx-v3d-background.spec.mjs:44:1 › overlapping views do not restore each other's colors (36ms)
+  ✓   4 [chromium] › tests/cdx-v3d-background.spec.mjs:56:1 › direct camera changes, invalid metadata, and absent stages are preserved (49ms)
+  ✓   5 [chromium] › tests/cdx-v3d-background.spec.mjs:71:1 › flight disposal restores only its own background, including a late embed owner (11ms)
+  ✘   6 [chromium] › tests/cdx-v3d-background.spec.mjs:89:1 › routine exposure, accent, and settings refreshes keep the fitted composite (26ms)
+(node:209502) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:209502) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 [chromium] › tests/cdx-v3d-background.spec.mjs:109:1 › an explicit background option wins even when its RGBA matches the old host clear (25ms)
+  ✓   8 [chromium] › tests/cdx-v3d-background.spec.mjs:123:1 › a changed theme color or direct different RGBA remains authoritative (27ms)
+  ✘   9 [chromium] › tests/cdx-v3d-background.spec.mjs:137:1 › overlapping metadata holds preserve the newer fitted color during routine refreshes (54ms)
+(node:209522) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:209522) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  10 [chromium] › tests/cdx-v3d-background.spec.mjs:150:1 › flight refresh ownership expires immediately for a new generation, scene, or player (15ms)
+
+
+  1) [chromium] › tests/cdx-v3d-background.spec.mjs:89:1 › routine exposure, accent, and settings refreshes keep the fitted composite 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 3[39m
+    [31m+ Received  + 3[39m
+
+    [2m  Array [[22m
+    [32m-   0,[39m
+    [32m-   0,[39m
+    [32m-   0,[39m
+    [31m+   0.8,[39m
+    [31m+   0.9,[39m
+    [2m    1,[22m
+    [31m+   0.5,[39m
+    [2m  ][22m
+
+       96 |   look.exposure = 1.2;
+       97 |   s.setClearColor(host.slice(0, 3), host[3]);
+    >  98 |   expect(color(s)).toEqual([0, 0, 0, 1]);
+          |                    ^
+       99 |   look.accent = "#aabbcc";
+      100 |   s.setClearColor(host.slice(0, 3), host[3]);
+      101 |   expect(color(s)).toEqual([0, 0, 0, 1]);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-background.spec.mjs:98:20
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/background-refresh-r1/before/cdx-v3d-background-routine-a6815-s-keep-the-fitted-composite-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/background-refresh-r1/before/cdx-v3d-background-routine-a6815-s-keep-the-fitted-composite-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-v3d-background.spec.mjs:137:1 › overlapping metadata holds preserve the newer fitted color during routine refreshes 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 3[39m
+    [31m+ Received  + 3[39m
+
+    [2m  Array [[22m
+    [32m-   0.1,[39m
+    [32m-   0.2,[39m
+    [32m-   0.3,[39m
+    [31m+   0.8,[39m
+    [31m+   0.9,[39m
+    [2m    1,[22m
+    [31m+   0.5,[39m
+    [2m  ][22m
+
+      143 |   first();
+      144 |   s.setClearColor(host.slice(0, 3), host[3]);
+    > 145 |   expect(color(s)).toEqual([0.1, 0.2, 0.3, 1]);
+          |                    ^
+      146 |   second();
+      147 |   expect(color(s)).toEqual(host);
+      148 | });
+        at /workspace/splashery-r4-public/tests/cdx-v3d-background.spec.mjs:145:20
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/background-refresh-r1/before/cdx-v3d-background-overlap-facc5-or-during-routine-refreshes-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/background-refresh-r1/before/cdx-v3d-background-overlap-facc5-or-during-routine-refreshes-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/cdx-v3d-background.spec.mjs:150:1 › flight refresh ownership expires immediately for a new generation, scene, or player 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 3[39m
+    [31m+ Received  + 3[39m
+
+    [2m  Array [[22m
+    [32m-   0,[39m
+    [32m-   0,[39m
+    [32m-   0,[39m
+    [31m+   0.8,[39m
+    [31m+   0.9,[39m
+    [2m    1,[22m
+    [31m+   0.5,[39m
+    [2m  ][22m
+
+      166 |       const flight = makeFlight([], null, { background: [0, 0, 0] });
+      167 |       s.setClearColor(host.slice(0, 3), host[3]);
+    > 168 |       expect(color(s)).toEqual([0, 0, 0, 1]);
+          |                        ^
+      169 |       invalidate(player);
+      170 |       s.setClearColor(host.slice(0, 3), host[3]);
+      171 |       expect(color(s)).toEqual(host);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-background.spec.mjs:168:24
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/background-refresh-r1/before/cdx-v3d-background-flight--4c7dd--generation-scene-or-player-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/background-refresh-r1/before/cdx-v3d-background-flight--4c7dd--generation-scene-or-player-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › tests/cdx-v3d-background.spec.mjs:89:1 › routine exposure, accent, and settings refreshes keep the fitted composite 
+    [chromium] › tests/cdx-v3d-background.spec.mjs:137:1 › overlapping metadata holds preserve the newer fitted color during routine refreshes 
+    [chromium] › tests/cdx-v3d-background.spec.mjs:150:1 › flight refresh ownership expires immediately for a new generation, scene, or player 
+  7 passed (12.4s)

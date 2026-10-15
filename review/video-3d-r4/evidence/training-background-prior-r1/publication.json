@@ -1,0 +1,117 @@
+{
+  "created": "2026-10-15T10:00:56.944Z",
+  "source": "/workspace/v3d-r4-media/training-background-prior-r1",
+  "sourceInventory": [
+    {
+      "file": "README.md",
+      "bytes": 5890,
+      "sha256": "0ab15e45a5ec831c25b8a3d37ae8c55c979210e1b28112a8c0f57f302097b250"
+    },
+    {
+      "file": "__pycache__/estimate.cpython-312.pyc",
+      "bytes": 23271,
+      "sha256": "cab312a401c35f38597f754e54bd06d52282da2506c353d1dbb4dff4da2eed48"
+    },
+    {
+      "file": "chameleon-flowers-training-support.png",
+      "bytes": 300226,
+      "sha256": "9b0acbad00e8760e9b2976059bffb40a2a1f8ef3db9412c1b947adb621729f64"
+    },
+    {
+      "file": "control-flat-training-support.png",
+      "bytes": 28112,
+      "sha256": "b74c7d69d0105036780bb029cb07628bf92a82ff73114bebffa83ebe7200402d"
+    },
+    {
+      "file": "control-no-holdout-training-support.png",
+      "bytes": 28364,
+      "sha256": "053e3fd821edba9ffb9cb1649a51ff2ae3a399a59db043f7b97cf663954a48bd"
+    },
+    {
+      "file": "control-shift-training-support.png",
+      "bytes": 25049,
+      "sha256": "fa32d8b36fc5a84d82a1861450794752b40cf5c08f00e2d83e28be5eea8ef0d8"
+    },
+    {
+      "file": "dianthus-training-approx.rgb24",
+      "bytes": 2592000,
+      "sha256": "f442e9260860112c3579689c24b1ae621dcfaffba0ee6644e79d29fb9e310424"
+    },
+    {
+      "file": "dianthus-training-contact.png",
+      "bytes": 575241,
+      "sha256": "51973ab9e756d6cfd6cbc2b03fd8679c0255388628bed772a4052a6d964d8831"
+    },
+    {
+      "file": "estimate-failed-summary.log",
+      "bytes": 515,
+      "sha256": "77e33789e2088fa63696b322f7750fd22e4f03d918be33f29f55dc763b4e1e1c"
+    },
+    {
+      "file": "estimate-final.log",
+      "bytes": 2738,
+      "sha256": "c454c6375f452a407331ec1b0fabee4c9568819d356de9fd7fd8f441360484e1"
+    },
+    {
+      "file": "estimate.log",
+      "bytes": 515,
+      "sha256": "77e33789e2088fa63696b322f7750fd22e4f03d918be33f29f55dc763b4e1e1c"
+    },
+    {
+      "file": "estimate.py",
+      "bytes": 12612,
+      "sha256": "e43f9c2ce7ff553a1cbc339c5ac5d920db11e3569cdb0ca463f9343ac60b2d67"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 4930,
+      "sha256": "13e4bd3893671f76b450436d9d9352a89dc831ad672651034fe4e5c09edb3e5f"
+    },
+    {
+      "file": "parameters-before.json",
+      "bytes": 1362,
+      "sha256": "79f897947dac226bb5ccfe203dd49cf057f9435c4a4001afc48878ccfcb6b735"
+    },
+    {
+      "file": "results-first.json",
+      "bytes": 14996,
+      "sha256": "6647c0e181b7d33d7f1f57cf5e10791ad3817560fd6691397d5460bc3440a7e4"
+    },
+    {
+      "file": "results.json",
+      "bytes": 16502,
+      "sha256": "be0384a69a570eca2ca0a35d591c3bf0c97b4509316bd964d7ef8355cb6a945c"
+    },
+    {
+      "file": "source-credits.json",
+      "bytes": 1092,
+      "sha256": "781de53cd7875ce82ef9e22afd6dbb8d85a4ba916340d5c9f9f54af0b96ab9eb"
+    },
+    {
+      "file": "source-snapshots/vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "source-snapshots/vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119499,
+      "sha256": "6f11213d55191fea9d45443cb2353e231a4b215ab781762cd98a982f9a57c8dd"
+    },
+    {
+      "file": "source-snapshots/vendor/splatjs/src/session.js",
+      "bytes": 64458,
+      "sha256": "84e6c3e60b556e915220bb48c3b03abc8d2ad14157b70867a7e7843d00f90882"
+    },
+    {
+      "file": "test_estimate.py",
+      "bytes": 1655,
+      "sha256": "641b552015a1441d26743d9ca13d7eba9e20d7c3660ed7124279351b6b1a5618"
+    },
+    {
+      "file": "tests.log",
+      "bytes": 101,
+      "sha256": "dcb6f650b9f53902b8fd3369e5a6d72ebadca687271a744666ab5b677290735f"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

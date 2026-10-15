@@ -1,0 +1,453 @@
+{
+  "parameters": {
+    "declaredAt": "2026-10-15T09:40:18.896225+00:00",
+    "tileSide": 8,
+    "localDeviationP90Max": 0.03137254901960784,
+    "adjacentMeanLinfMax": 0.01568627450980392,
+    "candidateGrid": 32,
+    "modeLinfRadius": 0.047058823529411764,
+    "supportMinAreaFraction": 0.35,
+    "edgeSupportMinFraction": 0.4,
+    "edgeCountMin": 3,
+    "fitAndValidationFramePassMinFraction": 0.8,
+    "crossSplitColorLinfMax": 0.03137254901960784,
+    "supportedPixelResidualP90LinfMax": 0.07058823529411765,
+    "excludedInputIndices": [
+      8
+    ],
+    "fitIndices": [
+      0,
+      2,
+      4,
+      6,
+      10,
+      12,
+      14
+    ],
+    "validationIndices": [
+      1,
+      3,
+      5,
+      7,
+      9,
+      11,
+      13,
+      15
+    ],
+    "rule": "fit only on even training cameras; odd cameras independently validate. All-frame tiles including partial borders. Tile valid only if every RGB sample finite and in0..1. Candidate centers are occupied 1/32 grid-bin centers; winner maximizes area-weighted low-texture median support within L-infinity radius12/255; fixed deterministic lexicographic tie break. Refine once to coordinate-wise weighted median. No thresholds adjusted after results.",
+    "noHeldout": "Exclude midpoint internal holdout8 as well as never decode external benchmark holdouts. No heldout images enter estimates.",
+    "artifactLicense": "MIT code; derivative training visuals retain each source license."
+  },
+  "parameterSHA256": "79f897947dac226bb5ccfe203dd49cf057f9435c4a4001afc48878ccfcb6b735",
+  "codeSHA256": "bfeb44d042adad26c29de7ea679e6a57b5c5b084f4b58abdb05b320983bcabba",
+  "rows": [
+    {
+      "label": "chameleon-flowers",
+      "accepted": false,
+      "gates": {
+        "fit": false,
+        "validation": true,
+        "colorDrift": true,
+        "supportedPixelResidual": true
+      },
+      "color": [
+        0.6324639916419983,
+        0.5044199824333191,
+        0.3962929844856262
+      ],
+      "rgb255": [
+        161.2783203125,
+        128.62709045410156,
+        101.0547103881836
+      ],
+      "validationColor": [
+        0.6144164800643921,
+        0.4901960790157318,
+        0.380562961101532
+      ],
+      "crossSplitColorLinf": 0.0180475115776062,
+      "supportedPixelResidualP90": 0.04204583168029785,
+      "split": {
+        "fit": {
+          "frames": 7,
+          "passing": 5,
+          "passFraction": 0.7142857142857143,
+          "supportMin": 0.3138888888888889,
+          "supportMedian": 0.3638888888888889,
+          "supportMax": 0.4272222222222222
+        },
+        "validation": {
+          "frames": 8,
+          "passing": 7,
+          "passFraction": 0.875,
+          "supportMin": 0.28833333333333333,
+          "supportMedian": 0.3797222222222222,
+          "supportMax": 0.4672222222222222
+        }
+      },
+      "frames": [
+        {
+          "lowTextureArea": 0.5116666666666667,
+          "supportArea": 0.31555555555555553,
+          "edgeSupport": {
+            "top": 0.825,
+            "bottom": 0.0,
+            "left": 0.2222222222222222,
+            "right": 0.35555555555555557
+          },
+          "supportedEdges": 1,
+          "pixelResidualP50": 0.026597172021865845,
+          "pixelResidualP90": 0.04579797387123108,
+          "framePass": false,
+          "index": 0,
+          "split": "fit"
+        },
+        {
+          "lowTextureArea": 0.5055555555555555,
+          "supportArea": 0.38,
+          "edgeSupport": {
+            "top": 0.85,
+            "bottom": 0.0,
+            "left": 0.6666666666666666,
+            "right": 0.6222222222222222
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.02470637857913971,
+          "pixelResidualP90": 0.042714111506938934,
+          "framePass": true,
+          "index": 1,
+          "split": "validation"
+        },
+        {
+          "lowTextureArea": 0.5244444444444445,
+          "supportArea": 0.41333333333333333,
+          "edgeSupport": {
+            "top": 0.925,
+            "bottom": 0.0,
+            "left": 0.7555555555555555,
+            "right": 0.7111111111111111
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.02368307113647461,
+          "pixelResidualP90": 0.042771801352500916,
+          "framePass": true,
+          "index": 2,
+          "split": "fit"
+        },
+        {
+          "lowTextureArea": 0.5627777777777778,
+          "supportArea": 0.4672222222222222,
+          "edgeSupport": {
+            "top": 0.925,
+            "bottom": 0.075,
+            "left": 0.8,
+            "right": 0.9333333333333333
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.02232743799686432,
+          "pixelResidualP90": 0.04204532876610756,
+          "framePass": true,
+          "index": 3,
+          "split": "validation"
+        },
+        {
+          "lowTextureArea": 0.5211111111111111,
+          "supportArea": 0.4272222222222222,
+          "edgeSupport": {
+            "top": 0.925,
+            "bottom": 0.175,
+            "left": 0.7555555555555555,
+            "right": 0.7555555555555555
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.021601349115371704,
+          "pixelResidualP90": 0.039565056562423706,
+          "framePass": true,
+          "index": 4,
+          "split": "fit"
+        },
+        {
+          "lowTextureArea": 0.5177777777777778,
+          "supportArea": 0.43666666666666665,
+          "edgeSupport": {
+            "top": 1.0,
+            "bottom": 0.2,
+            "left": 0.8222222222222222,
+            "right": 0.7555555555555555
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.022042185068130493,
+          "pixelResidualP90": 0.04074978455901146,
+          "framePass": true,
+          "index": 5,
+          "split": "validation"
+        },
+        {
+          "lowTextureArea": 0.5,
+          "supportArea": 0.42277777777777775,
+          "edgeSupport": {
+            "top": 0.975,
+            "bottom": 0.225,
+            "left": 0.7777777777777778,
+            "right": 0.7111111111111111
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.020699262619018555,
+          "pixelResidualP90": 0.039594411849975586,
+          "framePass": true,
+          "index": 6,
+          "split": "fit"
+        },
+        {
+          "lowTextureArea": 0.49166666666666664,
+          "supportArea": 0.3794444444444444,
+          "edgeSupport": {
+            "top": 1.0,
+            "bottom": 0.225,
+            "left": 0.7777777777777778,
+            "right": 0.7555555555555555
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.020699262619018555,
+          "pixelResidualP90": 0.039699554443359375,
+          "framePass": true,
+          "index": 7,
+          "split": "validation"
+        },
+        {
+          "lowTextureArea": 0.55,
+          "supportArea": 0.36666666666666664,
+          "edgeSupport": {
+            "top": 0.925,
+            "bottom": 0.1,
+            "left": 0.6444444444444445,
+            "right": 0.6666666666666666
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.021225497126579285,
+          "pixelResidualP90": 0.04030710458755493,
+          "framePass": true,
+          "index": 9,
+          "split": "validation"
+        },
+        {
+          "lowTextureArea": 0.56,
+          "supportArea": 0.355,
+          "edgeSupport": {
+            "top": 0.95,
+            "bottom": 0.125,
+            "left": 0.6,
+            "right": 0.6222222222222222
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.021822690963745117,
+          "pixelResidualP90": 0.040579985827207565,
+          "framePass": true,
+          "index": 10,
+          "split": "fit"
+        },
+        {
+          "lowTextureArea": 0.6011111111111112,
+          "supportArea": 0.365,
+          "edgeSupport": {
+            "top": 0.9,
+            "bottom": 0.025,
+            "left": 0.5777777777777777,
+            "right": 0.5333333333333333
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.023429572582244873,
+          "pixelResidualP90": 0.04207382723689079,
+          "framePass": true,
+          "index": 11,
+          "split": "validation"
+        },
+        {
+          "lowTextureArea": 0.5972222222222222,
+          "supportArea": 0.3138888888888889,
+          "edgeSupport": {
+            "top": 0.9,
+            "bottom": 0.075,
+            "left": 0.4666666666666667,
+            "right": 0.5777777777777777
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.02462083101272583,
+          "pixelResidualP90": 0.04385026916861534,
+          "framePass": false,
+          "index": 12,
+          "split": "fit"
+        },
+        {
+          "lowTextureArea": 0.5872222222222222,
+          "supportArea": 0.28833333333333333,
+          "edgeSupport": {
+            "top": 0.85,
+            "bottom": 0.075,
+            "left": 0.4666666666666667,
+            "right": 0.4888888888888889
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.02474328875541687,
+          "pixelResidualP90": 0.04422867298126221,
+          "framePass": false,
+          "index": 13,
+          "split": "validation"
+        },
+        {
+          "lowTextureArea": 0.6361111111111111,
+          "supportArea": 0.3638888888888889,
+          "edgeSupport": {
+            "top": 0.675,
+            "bottom": 0.025,
+            "left": 0.6666666666666666,
+            "right": 0.4888888888888889
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.02462083101272583,
+          "pixelResidualP90": 0.04419096186757088,
+          "framePass": true,
+          "index": 14,
+          "split": "fit"
+        },
+        {
+          "lowTextureArea": 0.6466666666666666,
+          "supportArea": 0.4083333333333333,
+          "edgeSupport": {
+            "top": 0.925,
+            "bottom": 0.125,
+            "left": 0.8222222222222222,
+            "right": 0.6666666666666666
+          },
+          "supportedEdges": 3,
+          "pixelResidualP50": 0.021118655800819397,
+          "pixelResidualP90": 0.042731307446956635,
+          "framePass": true,
+          "index": 15,
+          "split": "validation"
+        }
+      ],
+      "allTrainingConstantMSE": 0.026137765496969223,
+      "allTrainingBlackMSE": 0.27831321954727173,
+      "allTrainingRGBP05P50P95": [
+        [
+          0.27330567985773085,
+          0.1882352977991104,
+          0.1053534597158432
+        ],
+        [
+          0.6135057210922241,
+          0.4897229075431824,
+          0.3803921639919281
+        ],
+        [
+          0.8956770092248916,
+          0.829238200187683,
+          0.7695940136909485
+        ]
+      ],
+      "cpuSeconds": 9.30153421399882,
+      "provenance": {
+        "kind": "Cached real production Session RGB, prior standalone probe (older extraction/solve than R9)",
+        "path": "/workspace/v3d-r4-media/seed-probe.json",
+        "sha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+        "cachedPoints": 614,
+        "cachedCameras": 16,
+        "excludedInternalHoldout": 8
+      },
+      "credit": {
+        "id": "chameleon-flowers",
+        "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+        "author": "Ventrovert",
+        "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+        "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening."
+      },
+      "interpretation": "Only a dominant low-texture appearance prior; neither far-depth evidence nor object/foreground segmentation. Gate unchanged even if rejected. No render/heldout scores computed."
+    },
+    {
+      "label": "dianthus",
+      "accepted": false,
+      "reason": "No low-texture candidate",
+      "provenance": {
+        "kind": "Approximate CPU source-frame decode at observed production training indices; NOT original JPEG/canvas/undistortion byte parity",
+        "metadata": "/workspace/v3d-r4-media/candidate-r8-phone/dianthus-phone/model.json",
+        "metadataSHA256": "0de216f7cd45c2048bc800443d7497015ecec1542617b16f878aa730437afa3a",
+        "input": "/workspace/v3d-r4-media/corpus/dianthus.mp4",
+        "inputSHA256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+        "sourceFrameIndicesByInput": [
+          2,
+          14,
+          17,
+          26,
+          34,
+          46,
+          58,
+          64,
+          76,
+          82,
+          88,
+          100,
+          108,
+          117,
+          123,
+          132
+        ],
+        "usedInputIndices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15
+        ],
+        "maximumPTSDifference": 0.0,
+        "rawRGBSHA256": "f442e9260860112c3579689c24b1ae621dcfaffba0ee6644e79d29fb9e310424",
+        "ffmpegCommand": [
+          "ffmpeg",
+          "-nostdin",
+          "-v",
+          "error",
+          "-threads",
+          "1",
+          "-i",
+          "/workspace/v3d-r4-media/corpus/dianthus.mp4",
+          "-vf",
+          "select=eq(n\\,2)+eq(n\\,14)+eq(n\\,17)+eq(n\\,26)+eq(n\\,34)+eq(n\\,46)+eq(n\\,58)+eq(n\\,64)+eq(n\\,82)+eq(n\\,88)+eq(n\\,100)+eq(n\\,108)+eq(n\\,117)+eq(n\\,123)+eq(n\\,132),scale=320:180:flags=bicubic",
+          "-fps_mode",
+          "vfr",
+          "-pix_fmt",
+          "rgb24",
+          "-f",
+          "rawvideo",
+          "-threads",
+          "1",
+          "pipe:1"
+        ],
+        "limitations": "No browser canvas JPEG roundtrip; ffmpeg bicubic scaling differs. No undistortion reproduced. Only gross heterogeneity control, not production confidence evidence."
+      },
+      "credit": {
+        "id": "dianthus",
+        "source": "https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+        "author": "Tanvir Rahat",
+        "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+        "transformation": "Trimmed 0\u20136 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening."
+      }
+    }
+  ],
+  "totalCPUWallSeconds": 32.47803742299948,
+  "noHeldoutReads": "No heldout images/reference PNGs read. Frame8 excluded throughout. No source/render crop or image alignment.",
+  "purpose": "Supplementary training-only background-color feasibility; no training, rendered quality, timing acceptance, depth, or runtime integration claim."
+}

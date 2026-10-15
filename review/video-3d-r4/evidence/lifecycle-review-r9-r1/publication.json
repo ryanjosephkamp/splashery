@@ -1,0 +1,22 @@
+{
+  "created": "2026-10-15T10:00:56.831Z",
+  "source": "/workspace/v3d-r4-media/lifecycle-review-r9-r1",
+  "sourceInventory": [
+    {
+      "file": "cpu-repros.json",
+      "bytes": 1265,
+      "sha256": "8fafe1b71f2bacd8da0471c71db97f595da5f72069f2871e9a4ba73805350ef3"
+    },
+    {
+      "file": "cpu-repros.log",
+      "bytes": 1265,
+      "sha256": "8fafe1b71f2bacd8da0471c71db97f595da5f72069f2871e9a4ba73805350ef3"
+    },
+    {
+      "file": "cpu-repros.mjs",
+      "bytes": 2264,
+      "sha256": "880c10d2d09c615c8d73a4cd00b1e306386f64140c3342433781528dec766afc"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

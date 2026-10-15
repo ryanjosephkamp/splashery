@@ -1,0 +1,417 @@
+{
+  "created": "2026-10-15T10:00:56.830Z",
+  "source": "/workspace/v3d-r4-media/ci-b709-bench-review-r1",
+  "sourceInventory": [
+    {
+      "file": "README.md",
+      "bytes": 4374,
+      "sha256": "1ce262294350c0d420325f1b256ab8ae2802a9f256b14f857f40aa3c55e4ed31"
+    },
+    {
+      "file": "after-cpu/.last-run.json",
+      "bytes": 45,
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "file": "after-cpu.log",
+      "bytes": 1945,
+      "sha256": "56eed20f975a37d08647c3ca4939c368a97126ce8b4e731bf4f0aa6c10ae2bd7"
+    },
+    {
+      "file": "artifact/cdx-p3d2-r3-metrics.json",
+      "bytes": 210650,
+      "sha256": "dd09ec3803a6695118ecce8b16074be78fc4b27ce62f00dd2863194a6a0a34e3"
+    },
+    {
+      "file": "artifact/cdx-p3d2-r3-metrics.log",
+      "bytes": 55,
+      "sha256": "5041f9572615f48e61dfebe67a2a1141e0849ba0ee958f2d89ec92a0d0586182"
+    },
+    {
+      "file": "artifact/cdx-p3d4-preparation.json",
+      "bytes": 211754,
+      "sha256": "be14d79fcc85216532e35b0f4c7a8a3a363478555a51d8eb2d10f29a948fc655"
+    },
+    {
+      "file": "artifact/cdx-p3d4-preparation.log",
+      "bytes": 59,
+      "sha256": "1065bd3106dcb5657342a10bbe560f098a94cca0612bb20d5bdfa4e02dc1a397"
+    },
+    {
+      "file": "artifact/cdx-v3d-bench.json",
+      "bytes": 221984,
+      "sha256": "21e64f1d6e61816d86de7111b1b8890652b49277ac1c378e5fc33d36006a9dd5"
+    },
+    {
+      "file": "artifact/cdx-v3d-bench.log",
+      "bytes": 2620,
+      "sha256": "04b757ec148de8a5620ef695e6ea09eb7a4f3d8b83be0b6b8d79e84a65a1c546"
+    },
+    {
+      "file": "artifact/fl7.json",
+      "bytes": 213301,
+      "sha256": "97dbd9498626cac17a27728df1c13b770b16c736736c49af24821604aeb7d19d"
+    },
+    {
+      "file": "artifact/fl7.log",
+      "bytes": 65,
+      "sha256": "74f132f37be7230fd75025bf107642de55d5de4277d364e803c6597e876c2006"
+    },
+    {
+      "file": "artifact/fx12-qr-circle-budget.json",
+      "bytes": 210650,
+      "sha256": "189f7b88420d5e60d3ac5ed334fac3f82a52610c712e8b3c5aba4c20143147df"
+    },
+    {
+      "file": "artifact/fx12-qr-circle-budget.log",
+      "bytes": 56,
+      "sha256": "d4bd7fadc63a6366867a19a0d85a0462839d910cc8f14329dd1f15cba1ac7dac"
+    },
+    {
+      "file": "artifact/hh2-engine.json",
+      "bytes": 210572,
+      "sha256": "589e7bd77384993d2de23a536c93c775a6b22f9ac1faf4555e6810f328428345"
+    },
+    {
+      "file": "artifact/hh2-engine.log",
+      "bytes": 56,
+      "sha256": "e348867355ab083af5587dfc30b02495f0abef7ee469c0ac244eb8386d1aff78"
+    },
+    {
+      "file": "artifact/hh3-storybook.json",
+      "bytes": 210056,
+      "sha256": "2282b5e6541e3440f8f167cc4700012edbb4aca071ac1309092b1fa2fa12859f"
+    },
+    {
+      "file": "artifact/hh3-storybook.log",
+      "bytes": 53,
+      "sha256": "0e57c77f0b5893e3b9ea748b797f012e3caef33e85f08459ba0513d87c19a3c1"
+    },
+    {
+      "file": "artifact/hh5-atoms.json",
+      "bytes": 212231,
+      "sha256": "6ebe517cf20757e6a52fed55e9e3509202a15de5e2b1399352df42c96dcda093"
+    },
+    {
+      "file": "artifact/hh5-atoms.log",
+      "bytes": 62,
+      "sha256": "b8d375425768607c00ec8e2c9c22ebb02ceae65e09175aabdc11ff1e5e884beb"
+    },
+    {
+      "file": "artifact/man3.json",
+      "bytes": 213841,
+      "sha256": "63f014949dd7e8c696cddc25a70c66272a8bd8c5d85e9a28b85eb1158569cca4"
+    },
+    {
+      "file": "artifact/man3.log",
+      "bytes": 68,
+      "sha256": "40d4cee19ec264f0db4f7ec6e072807e9fa6ded051336fd82861a92e446ac609"
+    },
+    {
+      "file": "artifact/opt.json",
+      "bytes": 221104,
+      "sha256": "36ee90a0cd2897c9a272259bf9303c283279b0ca12d02113d83c25bc5532ecaa"
+    },
+    {
+      "file": "artifact/opt.log",
+      "bytes": 96,
+      "sha256": "aaf9ea65fa112f8d6f493f3981a203a9df217142aaece93582451c021e0b59a4"
+    },
+    {
+      "file": "artifact/pdf.json",
+      "bytes": 214344,
+      "sha256": "429036022ba5cde33b8a5c0f980cdebcc841b37bd5d4a5fc0bf9bb9ada3885ee"
+    },
+    {
+      "file": "artifact/pdf.log",
+      "bytes": 69,
+      "sha256": "845a68d6793d40a9d7de80019f0a42285ef3817710905f11a30e7ddf7bd37aef"
+    },
+    {
+      "file": "artifact/pg6-engine.json",
+      "bytes": 214129,
+      "sha256": "b29e5be62a1a65fd13071efaf5b8f14a3efb7baaa8f22fd1f2cd1ebf7b7eea78"
+    },
+    {
+      "file": "artifact/pg6-engine.log",
+      "bytes": 68,
+      "sha256": "82fefa8f1073eaa99410562493252ff24f510824e23cd41eea6e82f90cae8ef4"
+    },
+    {
+      "file": "artifact/phy-engine.json",
+      "bytes": 213776,
+      "sha256": "6d750d22041f94b6f8668aeed2bfdf6dcae34daed411adce8b05723e8419369e"
+    },
+    {
+      "file": "artifact/phy-engine.log",
+      "bytes": 67,
+      "sha256": "39642f840c33fae8801a498ae61d2052ec6c9e3f4be5305de556736a17830c5f"
+    },
+    {
+      "file": "artifact/qr4-craft.json",
+      "bytes": 214097,
+      "sha256": "f7b47d67da079b86bf43f26ac87a03126e18807262fcf60c3a23623506ec963e"
+    },
+    {
+      "file": "artifact/qr4-craft.log",
+      "bytes": 67,
+      "sha256": "ee61f26b661f9efb315e80d8ac99fb2c9dd98650a64ee6381490c71018f8b131"
+    },
+    {
+      "file": "artifact/recheck/cdx-v3d-bench-523.json",
+      "bytes": 211799,
+      "sha256": "f665d07f83256b62528b60285435b2b2c44fe091a1241fea1ad067e24eb3c99c"
+    },
+    {
+      "file": "artifact/recheck.json",
+      "bytes": 122,
+      "sha256": "018b9e77d9b35ff0c91a954895e059302d63577664d2213a6fe800f5c11306c3"
+    },
+    {
+      "file": "artifact/results/cdx-v3d-bench/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/error-context.md",
+      "bytes": 301,
+      "sha256": "b6874f494a18a685222b4559d296b3c114ac25fc6973eff3b98cca000c371454"
+    },
+    {
+      "file": "artifact/results/cdx-v3d-bench/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/test-failed-1.png",
+      "bytes": 16238,
+      "sha256": "ede1147a279c327d39ec7cedd521b94038109d6daf9883c56c5f468487364c7f"
+    },
+    {
+      "file": "artifact/results/cdx-v3d-bench/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/trace.zip",
+      "bytes": 351594,
+      "sha256": "85c390431c70fe6c560c68208deacb6f811526c06c6ccfd816658ed1379f4099"
+    },
+    {
+      "file": "artifact/scr2.json",
+      "bytes": 212759,
+      "sha256": "5d5f98b23bf07e93566651773a3e47ba28a265389637c401846014edf2da7a64"
+    },
+    {
+      "file": "artifact/scr2.log",
+      "bytes": 226,
+      "sha256": "399bce79761c7cd3b066e681d84329bf1eb658c9a31d282565b68f379ba3cbc4"
+    },
+    {
+      "file": "artifact/shard.json",
+      "bytes": 54,
+      "sha256": "bd5df4da294280e0af496ffb290417cdfc60e758a61e11f0c1d7b1562f57e79e"
+    },
+    {
+      "file": "artifact/smd-photo.json",
+      "bytes": 211733,
+      "sha256": "6f911bf4527d9c38a51e3e2cf743c8936547ee9bd4c2ffe5bbc75064f455a46d"
+    },
+    {
+      "file": "artifact/smd-photo.log",
+      "bytes": 60,
+      "sha256": "63287231147693bb90b7544cc426edfc28075f52cf25e0df5f0c231b16eeaabe"
+    },
+    {
+      "file": "artifact/st4-engine.json",
+      "bytes": 210564,
+      "sha256": "0141da52f60690e1e300796601113fe561a721832c6dab112aee309f651b0898"
+    },
+    {
+      "file": "artifact/st4-engine.log",
+      "bytes": 55,
+      "sha256": "67e9a550a64de34c92a763bf2e6f6f2db19970b862e7440bbf047bd1ce39e3e7"
+    },
+    {
+      "file": "artifact/st4.json",
+      "bytes": 221722,
+      "sha256": "71674cefbd975791cd6da1ae820174159f3b1b5a09cf63bb70c1877e9d33bf37"
+    },
+    {
+      "file": "artifact/st4.log",
+      "bytes": 257,
+      "sha256": "662bba0176c0ff87c670a9dfeddef3c921ff0d4d3c39b8bf5b808322862083e3"
+    },
+    {
+      "file": "artifact/summary.md",
+      "bytes": 3430,
+      "sha256": "45e32188f614a46c9652741bbce4838c675dec056ab4f7578e72a194f72ddf97"
+    },
+    {
+      "file": "artifact/tp2-engine.json",
+      "bytes": 210548,
+      "sha256": "dc7706e4a391655d75659353e943fca2227caa5ea351a355d961477c321eb578"
+    },
+    {
+      "file": "artifact/tp2-engine.log",
+      "bytes": 56,
+      "sha256": "42c36f4e7d3c5acbeb06305250fcfcd239939c31f97512aedf3d380dd5880e3a"
+    },
+    {
+      "file": "artifact/tpg-engine.json",
+      "bytes": 210030,
+      "sha256": "66b6f03be0686085c13cf673cf5723fa0c4bb8980fddc9831479e16668a50c11"
+    },
+    {
+      "file": "artifact/tpg-engine.log",
+      "bytes": 52,
+      "sha256": "a617192500b789c944c8499a5267b047dd4604dfedaa42d0d7ffb60a3e68a13d"
+    },
+    {
+      "file": "before/.last-run.json",
+      "bytes": 243,
+      "sha256": "797d6ef3bdb6a557bdf5a092609a5ba166bea9ba1e4669f1e98cdde88063ac01"
+    },
+    {
+      "file": "before/cdx-v3d-extraction-timesta-29fe2-hout-a-VFR-proximity-cutoff-chromium/trace.zip",
+      "bytes": 2430,
+      "sha256": "81c9dc504a95f6334bdc6dccb7b7bb87ca45037c1416f83251d50989c7a9c15d"
+    },
+    {
+      "file": "before/cdx-v3d-extraction-timesta-55600-ot-label-the-new-photograph-chromium/trace.zip",
+      "bytes": 2423,
+      "sha256": "f95abbcc24b0fbf81be96de5323e87f7f0cf9b75d4dd4f04130fb143847ba2ff"
+    },
+    {
+      "file": "before/cdx-v3d-extraction-timesta-55928--than-inventing-a-timestamp-chromium/trace.zip",
+      "bytes": 2450,
+      "sha256": "fda085f4b1a79c4a9d10e58a96069930fe9b778bb7905ebbb320351db1d60203"
+    },
+    {
+      "file": "before/cdx-v3d-extraction-timesta-b57fe-nstead-of-a-stale-timestamp-chromium/trace.zip",
+      "bytes": 2438,
+      "sha256": "d8a001849dc145d5c25de37eb9e657ad011861d6230e7923795a3e22e44ffa8a"
+    },
+    {
+      "file": "before.log",
+      "bytes": 9263,
+      "sha256": "8b3f590860fc763eb4260ec2b3977d32f71d1125f91feba932a896e99f51a57b"
+    },
+    {
+      "file": "ci-observed-values.json",
+      "bytes": 3350,
+      "sha256": "174c897d1f499e5c2790118073ec41c2a01ced69c6173f826cb2fe1e957ce1df"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 14836,
+      "sha256": "01d2ca2175704b72f62d222412d608dfd2818f9af7b9cc7ac003f634e678a146"
+    },
+    {
+      "file": "frozen-r9-source/src/video3d/extract.js",
+      "bytes": 10135,
+      "sha256": "7aeacc1874a88668acb68ea95f2d9b643e96c4f04a434c1490289bcc7b952a5c"
+    },
+    {
+      "file": "real-targeted-observed-values.json",
+      "bytes": 4326,
+      "sha256": "fa6c41187f117f147b653805b5dba61e99749132f502ec5ee1177506b4d557d6"
+    },
+    {
+      "file": "real-targeted-r1/.last-run.json",
+      "bytes": 96,
+      "sha256": "72c2e88e51b51192161e9defb051eeb0987832784fafb5b979fe98fa8d4ed701"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-a-real-decoded-bla-effd3-ly-without-requiring-WebGPU-chromium/trace.zip",
+      "bytes": 23270,
+      "sha256": "f9c59874a305be2df46658a1497ddf28be20c2c785251096b008c8b896ae5ccd"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-a-real-video-recei-4d7ea-without-loading-the-trainer-chromium/error-context.md",
+      "bytes": 301,
+      "sha256": "b6874f494a18a685222b4559d296b3c114ac25fc6973eff3b98cca000c371454"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-a-real-video-recei-4d7ea-without-loading-the-trainer-chromium/test-failed-1.png",
+      "bytes": 14405,
+      "sha256": "9154d46a23d922c7c53f23a2edeb3bbd9afc126db810235d0a624974fb5ff834"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-a-real-video-recei-4d7ea-without-loading-the-trainer-chromium/trace.zip",
+      "bytes": 1111506,
+      "sha256": "8c529d645f6c0f0704d1c232636e7a3d7ed0d9cd1052490ca8e27eb64f7abc2c"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-bench-the-independ-3d792--an-actually-repeated-frame-chromium/trace.zip",
+      "bytes": 332137,
+      "sha256": "09f8c94f6aca51b370ea1d16f8f9cf1a14044584f3151338f2f872af02ad9b39"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-extraction-timesta-29fe2-hout-a-VFR-proximity-cutoff-chromium/trace.zip",
+      "bytes": 2291,
+      "sha256": "494cc81fe05b806a0fddfc0b8a03aa6939d8cb79fbb0dc8d80564cf94aa2a91a"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-extraction-timesta-55600-ot-label-the-new-photograph-chromium/trace.zip",
+      "bytes": 2227,
+      "sha256": "712e75edd4357ebc03d0497485237785d2efa3117d2efbf93566e47588c5dea7"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-extraction-timesta-55928--than-inventing-a-timestamp-chromium/trace.zip",
+      "bytes": 2205,
+      "sha256": "6b0a7319957cba2fbd5ca58da0c8a838a434545af771809a875c961c65073077"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-extraction-timesta-b57fe-nstead-of-a-stale-timestamp-chromium/trace.zip",
+      "bytes": 2262,
+      "sha256": "7ee602d55fd2384133c5e8f7e8fc5c728e86f29dd7e4ebff507463a75d2ecc39"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-extraction-timesta-ed37d-s-and-cannot-cache-its-time-chromium/trace.zip",
+      "bytes": 2272,
+      "sha256": "67726ad886f1179ea62dfc6c11d3cc66a134ee97e3ec7294cac8ed9bc2fb0304"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-real-clips-a-late--7feb8-se-the-next-seek-s-recovery-chromium/trace.zip",
+      "bytes": 4080,
+      "sha256": "e17567995f227c3fc226e6713b446f459e1b07327811baaa1c6c294943fb02cf"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-real-clips-a-pause-47e69-s-advancing-on-cancellation-chromium/trace.zip",
+      "bytes": 4049,
+      "sha256": "9127b2b8223645f161703d3e39a6dcbdb160f665b77f7f3802a95c2ba667e1c5"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-real-clips-an-iden-027dd-browser-rounds-its-position-chromium/trace.zip",
+      "bytes": 3704,
+      "sha256": "8718951e85769d05f3f917d53371cd256a514f7cc9baa6c148f72df8ee2125bc"
+    },
+    {
+      "file": "real-targeted-r1/cdx-v3d-real-clips-trainin-3967c-rds-its-presented-timestamp-chromium/trace.zip",
+      "bytes": 3728,
+      "sha256": "3da97c9404c46865f56b3e173348840f97108c7aefdefeb0da60b57431d79607"
+    },
+    {
+      "file": "real-targeted-r1.log",
+      "bytes": 6925,
+      "sha256": "c51c9083b337e3f2deb9f1928f22a0787ccdac4ef7838f6ff23788153464b585"
+    },
+    {
+      "file": "scope.patch",
+      "bytes": 4924,
+      "sha256": "eacac07a4ed88d1f2311ad988052c08cae2c7d4e1d28ff7701a7f153548fa570"
+    },
+    {
+      "file": "source-snapshots/src/video3d/extract.js",
+      "bytes": 10798,
+      "sha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de"
+    },
+    {
+      "file": "source-snapshots/tests/cdx-v3d-bench.spec.mjs",
+      "bytes": 24071,
+      "sha256": "1a562fbae1120bd54731d687dfd6d7b44f54e52aecf643cf1495667f1fc7bde8"
+    },
+    {
+      "file": "source-snapshots/tests/cdx-v3d-extraction-timestamp.spec.mjs",
+      "bytes": 4214,
+      "sha256": "7729514f50379474735586b8b4cd112ec0fcf0a04b9fc14ac14365f4925f785a"
+    },
+    {
+      "file": "trace-extracted/0-trace.trace",
+      "bytes": 256068,
+      "sha256": "f634a7413485146c4ef5b9ea2dea71ed38568de40593df6ff3de22b3ee0015ed"
+    },
+    {
+      "file": "trace-extracted/test.trace",
+      "bytes": 21306,
+      "sha256": "4a668057159791b71eb7266193d3fbcb90b402c44de0794c2fda835688fcf9ca"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

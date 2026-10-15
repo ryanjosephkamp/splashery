@@ -1,0 +1,102 @@
+{
+  "created": "2026-10-15T10:00:57.113Z",
+  "source": "/workspace/v3d-r4-media/sfm-cat-diagnostic-r1",
+  "sourceInventory": [
+    {
+      "file": "assessment.json",
+      "bytes": 836,
+      "sha256": "2d3a12439ae4bd3f5626419e6475978d3e7d3ccd5f0208b5b7a5c1995a6e66cd"
+    },
+    {
+      "file": "frame-0.jpg",
+      "bytes": 52825,
+      "sha256": "64c6d6c441aeb9a0ee370e5ff80be2033edac7e05534cab637454fc884ff971a"
+    },
+    {
+      "file": "frame-1.jpg",
+      "bytes": 52194,
+      "sha256": "89c1db42e08366345bff22a2e15756a3c7f35c54c11db10ae836de38192b9ed7"
+    },
+    {
+      "file": "frame-10.jpg",
+      "bytes": 52198,
+      "sha256": "990c1af2b1392cdc409c4486a2db9627dc96d685ede7376c11c8e327a80beafb"
+    },
+    {
+      "file": "frame-11.jpg",
+      "bytes": 52182,
+      "sha256": "8f3b70bd0ad9bf0eea544bc6df60af1739fa70238da9e0830de4da79d3695890"
+    },
+    {
+      "file": "frame-12.jpg",
+      "bytes": 52072,
+      "sha256": "d492d413bd7ae530702e9f3a5e790ed21770e83de325cb13a2d6b59183e6edee"
+    },
+    {
+      "file": "frame-13.jpg",
+      "bytes": 53231,
+      "sha256": "a61e5ab3d6e075f8dd32cb53fb8fd5707ec986d0ebca12acab65037982023a4f"
+    },
+    {
+      "file": "frame-14.jpg",
+      "bytes": 52743,
+      "sha256": "bb5d78232be35a6093f83449b7547a92092fd56583ddcbaeeabc45176cdb9e63"
+    },
+    {
+      "file": "frame-15.jpg",
+      "bytes": 51837,
+      "sha256": "cd7d00c0d5e26d26088deb8704a312e63828020964cac96bc13472678b082e7e"
+    },
+    {
+      "file": "frame-2.jpg",
+      "bytes": 51121,
+      "sha256": "8743d304a608b7ce63ddecdf4338e1feef4721b70113bfb335f0eb93b4b55439"
+    },
+    {
+      "file": "frame-3.jpg",
+      "bytes": 51303,
+      "sha256": "b107ebe471f300e1a5b70762dd4f6f2850afea7202f0d97a09744fbf4769d10a"
+    },
+    {
+      "file": "frame-4.jpg",
+      "bytes": 52313,
+      "sha256": "a680759f269b4462ea0b76318d639670cd10e5d41d1277ba305d0a22a90b0ecd"
+    },
+    {
+      "file": "frame-5.jpg",
+      "bytes": 52035,
+      "sha256": "ca807cf6b6937f6a96fe2c8c1537193485f83766eb52317a217913e41b5d1aa2"
+    },
+    {
+      "file": "frame-6.jpg",
+      "bytes": 53395,
+      "sha256": "e4532d372473e4913e3ec1f84f539ef9fe94a176fca32221b012220fa183a933"
+    },
+    {
+      "file": "frame-7.jpg",
+      "bytes": 52689,
+      "sha256": "c4ba8eaa05231bb151d4b718673103c0f471d5fd71b4ba82233dcac98e0df19a"
+    },
+    {
+      "file": "frame-8.jpg",
+      "bytes": 51143,
+      "sha256": "2739b4d92e3d35a002db9c12089c5dce96e06d15595256c70999167d778443e4"
+    },
+    {
+      "file": "frame-9.jpg",
+      "bytes": 52753,
+      "sha256": "a9f9d223a0051bf67ed83b91064709cdb037c9ca6a8c5b16b318ea65befa9470"
+    },
+    {
+      "file": "pre-dispatch.json",
+      "bytes": 68334,
+      "sha256": "a62c67d79a220e29766920b54a12792883df5077841bbe2ccd7b0a404fd082bc"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 331381,
+      "sha256": "bb84ddf2c66474519650b4db56521390fe58229d25c50c7949c112576c43f12c"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

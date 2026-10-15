@@ -1,0 +1,8 @@
+{
+  "sameAll16JpegBytesAsSuccessfulR8": true,
+  "firstSolveError": "Error: no focal candidate produced a valid initialization \u2014 need more parallax/overlap\n    at runSfMOnce (http://127.0.0.1:4180/vendor/splatjs/src/sfm/sfm.js:2029:33)\n    at async runSfM (http://127.0.0.1:4180/vendor/splatjs/src/sfm/sfm.js:2129:17)\n    at async Session._solve (http://127.0.0.1:4180/vendor/splatjs/src/session.js:335:19)\n    at async Session.solve (http://127.0.0.1:4180/vendor/splatjs/src/session.js:276:18)\n    at async eval (eval at evaluate (:290:30), <anonymous>:12:82)\n    at async <anonymous>:316:30",
+  "relaxedCams": 16,
+  "relaxedPoints": 669,
+  "nativeR9FailureCause": "unresolved; failed native path did not retain training photographs or full solver logs",
+  "acceptance": "diagnostic only; no strict row or failure changed"
+}

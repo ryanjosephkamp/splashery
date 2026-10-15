@@ -1,0 +1,39 @@
+{
+  "declaredAt": "2026-10-15T09:40:18.896225+00:00",
+  "tileSide": 8,
+  "localDeviationP90Max": 0.03137254901960784,
+  "adjacentMeanLinfMax": 0.01568627450980392,
+  "candidateGrid": 32,
+  "modeLinfRadius": 0.047058823529411764,
+  "supportMinAreaFraction": 0.35,
+  "edgeSupportMinFraction": 0.4,
+  "edgeCountMin": 3,
+  "fitAndValidationFramePassMinFraction": 0.8,
+  "crossSplitColorLinfMax": 0.03137254901960784,
+  "supportedPixelResidualP90LinfMax": 0.07058823529411765,
+  "excludedInputIndices": [
+    8
+  ],
+  "fitIndices": [
+    0,
+    2,
+    4,
+    6,
+    10,
+    12,
+    14
+  ],
+  "validationIndices": [
+    1,
+    3,
+    5,
+    7,
+    9,
+    11,
+    13,
+    15
+  ],
+  "rule": "fit only on even training cameras; odd cameras independently validate. All-frame tiles including partial borders. Tile valid only if every RGB sample finite and in0..1. Candidate centers are occupied 1/32 grid-bin centers; winner maximizes area-weighted low-texture median support within L-infinity radius12/255; fixed deterministic lexicographic tie break. Refine once to coordinate-wise weighted median. No thresholds adjusted after results.",
+  "noHeldout": "Exclude midpoint internal holdout8 as well as never decode external benchmark holdouts. No heldout images enter estimates.",
+  "artifactLicense": "MIT code; derivative training visuals retain each source license."
+}

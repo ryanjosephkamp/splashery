@@ -1,0 +1,2 @@
+Source and test evidence only. Synthetic fixtures are original CC0. Existing library notices retain their original licenses. Every failed attempt and unchanged assertion is retained.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

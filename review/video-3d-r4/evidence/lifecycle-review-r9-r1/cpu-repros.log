@@ -1,0 +1,35 @@
+{
+  "created": "2026-10-15T09:20:47.428Z",
+  "noBrowserOrGpu": true,
+  "schedulerAfterEncodeError": {
+    "training": true,
+    "framePending": false,
+    "frameRunning": false,
+    "queuedCallbacks": 0,
+    "events": [],
+    "logs": [
+      "frame loop: deterministic encode failure"
+    ]
+  },
+  "schedulerAfterFinish": {
+    "training": false,
+    "events": [
+      {
+        "kind": "train-complete",
+        "iter": 0,
+        "splats": 2
+      }
+    ],
+    "logs": [
+      "frame loop: deterministic encode failure",
+      "training finished early at 0 iterations"
+    ]
+  },
+  "lowMemRecovery": {
+    "error": "TypeError: Cannot read properties of null (reading '0')",
+    "stack": "TypeError: Cannot read properties of null (reading '0')\n    at Object.setup (file:///workspace/splashery-v3d-bench-tools-r9/vendor/splatjs/src/gs/trainer.js:324:22)\n    at Session._setupTrainer (file:///workspace/splashery-v3d-bench-tools-r9/vendor/splatjs/src/session.js:622:24)\n    at Session.seed (file:///workspace/splashery-v3d-bench-tools-r9/vendor/splatjs/src/session.js:587:10)\n    at async file:///workspace/v3d-r4-media/lifecycle-review-r9-r1/cpu-repros.mjs:22:6",
+    "oldTrainerDisposals": 0,
+    "deviceLostAfterFailedRecovery": false,
+    "rgb": null
+  }
+}

@@ -129,3 +129,34 @@ existing skip. Failures that passed alone still count. The
 [revision-9 freeze and controller handoff](evidence/r9-freeze-and-handoff/) records the complete
 product source fingerprint and unchanged five-file benchmark protocol. Current native bakes were
 allowed to finish when scheduling moved to revision 9. Its fresh native results are still pending.
+
+### Revision 9 measurements and preserved failures
+
+The [new main snapshot](measurements/main-master-r1-snapshot-0021/run.json) contains 21 outcomes.
+The [revision-8 phone update](measurements/candidate-r8-phone-snapshot-0009/run.json) retains its
+ninth case. The
+[revision-9 strict snapshot](measurements/candidate-r9-paired-master-v1-snapshot-0005/run.json) and
+[individual completed shards](measurements/candidate-r9-v1-shards/) preserve every captured success,
+explanation, and harness failure. These are incomplete cohorts.
+
+The native Dianthus phone bake raised SSIM from main's 0.270086 to 0.472708, while the plant bake
+fell from 0.668773 to 0.504333 despite a large sharpness increase. The plant's first view was also
+slower. The [saved-model clear-color diagnostic](evidence/r9-plant-clear-probe-r1/receipt.json)
+reproduced the original renders exactly before testing white and a training-cache-derived brown.
+This isolates uncovered regions; the brown estimate remains rejected by its unchanged confidence
+rule, as documented in the
+[training-only prior report](evidence/training-background-prior-r1/README.md). No diagnostic
+replaces a native measurement.
+
+The [complete revision-9 sample check](samples/candidate-r9-r1/samples.json) preserves all 74 views
+across all six samples and both profiles. This checks existing bakes and their viewer behavior. The
+[full CI summary](evidence/ci-b7099b/summary/summary.md) records 2,781 passes, seven failures, and
+one existing skip across 2,789 tests. Every failure still counts.
+
+[Matcher cancellation and parity evidence](evidence/matcher-lifecycle-evidence-r1/) includes eight
+CPU checks and a real-GPU raw-distance and match comparison. The
+[decoder race investigation](evidence/ci-b709-bench-review-r1/) retains the original CI artifact,
+failed CPU reproduction, repaired ordering controls, and real independently matched JPEGs. The
+unchanged quick suitability assertion still failed in that targeted run. The
+[cat solve diagnostic](evidence/sfm-cat-diagnostic-r1/) does not establish the native failure's
+cause.

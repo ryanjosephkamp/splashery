@@ -1,0 +1,544 @@
+{
+  "created": "2026-10-15T09:47:40.945Z",
+  "scriptSha256": "5f53ca9b643abd0396b7d444859433619c7c2d103d2373c87b21108a0579bdd3",
+  "protocol": "Same saved model, camera path, production viewer, and references; exact saved-render reproduction required first. Change only renderer clear/background color: original trained black, white, and a cached-training-only brown estimate whose unchanged confidence gate REJECTED. Brown is diagnostic, not a proposed accepted runtime prior. No image processing, fitting, or change to strict recorded row. Diagnostic only.",
+  "inputs": [
+    {
+      "file": "model.ply",
+      "sha256": "d9381b9f9365791bce24a158d63ded66dacb92e4052986bcb935f914156bde81"
+    },
+    {
+      "file": "model.json",
+      "sha256": "57823fdfafcad01c5808b88d49bde9f6cd5c12196342365596e57898ab52b5d1"
+    },
+    {
+      "file": "evaluation.json",
+      "sha256": "3368dfefd8275291dfb6f55af67e0074b0233f960d1d0b15e87b2610178ba0f8"
+    },
+    {
+      "file": "result.json",
+      "sha256": "86c8efa2f2a01a606605fbad0ef2eb5a6b3db508407e9a9b894878acf281b4d0"
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "exactVerification": [
+    {
+      "index": 0,
+      "time": 1.416667,
+      "savedSha256": "91abd9cc4906aa0409a7c54bca17dcb2096c12853009fc0d6fb688ff0d33157b",
+      "replaySha256": "91abd9cc4906aa0409a7c54bca17dcb2096c12853009fc0d6fb688ff0d33157b",
+      "rgbaSha256": "85edf634fe173e72c8697a5d750cba07b6f4f75d3c4dac6466d070612774077c",
+      "byteIdentical": true
+    },
+    {
+      "index": 1,
+      "time": 3.541667,
+      "savedSha256": "9fe919af3d2b8dba745de583b42b42f8a76d7f146689f1c90f838475b8ef7e23",
+      "replaySha256": "9fe919af3d2b8dba745de583b42b42f8a76d7f146689f1c90f838475b8ef7e23",
+      "rgbaSha256": "46243b8dfa772db4a8c5f623b8abae8fb803b815183c0c358c686bc1f4f583a0",
+      "byteIdentical": true
+    },
+    {
+      "index": 2,
+      "time": 6.25,
+      "savedSha256": "851218a45976ceaa903d954cc9e8f9d48b6868df347105b2f67c5d2c04e9b3c7",
+      "replaySha256": "851218a45976ceaa903d954cc9e8f9d48b6868df347105b2f67c5d2c04e9b3c7",
+      "rgbaSha256": "625b795251ada4bd730448b32e1267a3bbac2416708748eaaa2706f08c825bae",
+      "byteIdentical": true
+    },
+    {
+      "index": 3,
+      "time": 8.916667,
+      "savedSha256": "813face689f5b2ff6b67e19656641bce387a1d1aa773eb2745c8f8ab10dc7dab",
+      "replaySha256": "813face689f5b2ff6b67e19656641bce387a1d1aa773eb2745c8f8ab10dc7dab",
+      "rgbaSha256": "d587f7886cb75af1a2669104c28e717be8477e3b60d35b54b29434d89d14d29d",
+      "byteIdentical": true
+    }
+  ],
+  "frames": [
+    {
+      "label": "original-black",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "index": 0,
+      "file": "original-black-0.png",
+      "byteExactOriginal": true,
+      "sha256": "91abd9cc4906aa0409a7c54bca17dcb2096c12853009fc0d6fb688ff0d33157b",
+      "metrics": {
+        "psnr": 10.238952331667498,
+        "exact": false,
+        "ssim": 0.36281547103651296,
+        "laplacian": 0.00042211691270773594,
+        "sourceLaplacian": 0.006091606604124068,
+        "sharpnessRatio": 0.06929484126928999
+      }
+    },
+    {
+      "label": "original-black",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "index": 1,
+      "file": "original-black-1.png",
+      "byteExactOriginal": true,
+      "sha256": "9fe919af3d2b8dba745de583b42b42f8a76d7f146689f1c90f838475b8ef7e23",
+      "metrics": {
+        "psnr": 12.529337058655512,
+        "exact": false,
+        "ssim": 0.45901295718075813,
+        "laplacian": 0.00022051540444917455,
+        "sourceLaplacian": 0.0052315795151635335,
+        "sharpnessRatio": 0.04215082726163658
+      }
+    },
+    {
+      "label": "original-black",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "index": 2,
+      "file": "original-black-2.png",
+      "byteExactOriginal": true,
+      "sha256": "851218a45976ceaa903d954cc9e8f9d48b6868df347105b2f67c5d2c04e9b3c7",
+      "metrics": {
+        "psnr": 14.155630165044874,
+        "exact": false,
+        "ssim": 0.6123074320846458,
+        "laplacian": 0.00010296923165595758,
+        "sourceLaplacian": 0.0037806786072383165,
+        "sharpnessRatio": 0.027235647975688105
+      }
+    },
+    {
+      "label": "original-black",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "index": 3,
+      "file": "original-black-3.png",
+      "byteExactOriginal": true,
+      "sha256": "813face689f5b2ff6b67e19656641bce387a1d1aa773eb2745c8f8ab10dc7dab",
+      "metrics": {
+        "psnr": 13.119626805554125,
+        "exact": false,
+        "ssim": 0.5831975007203941,
+        "laplacian": 0.0000641758629242198,
+        "sourceLaplacian": 0.0029176378327087802,
+        "sharpnessRatio": 0.021995829024686706
+      }
+    },
+    {
+      "label": "white",
+      "rgb": [
+        1,
+        1,
+        1
+      ],
+      "index": 0,
+      "file": "white-0.png",
+      "byteExactOriginal": false,
+      "sha256": "5e1965d1ddf7e2372cf6be77771fcee22ad0b9514684ec3ad0589c9fbf1fab70",
+      "metrics": {
+        "psnr": 10.063784595720753,
+        "exact": false,
+        "ssim": 0.5718951632935655,
+        "laplacian": 0.0004657650207544675,
+        "sourceLaplacian": 0.006091606604124068,
+        "sharpnessRatio": 0.07646012801272176
+      }
+    },
+    {
+      "label": "white",
+      "rgb": [
+        1,
+        1,
+        1
+      ],
+      "index": 1,
+      "file": "white-1.png",
+      "byteExactOriginal": false,
+      "sha256": "9c5349591a2005caadd9f8b086a64460c38c18989e9e8b91893c38145c31f64e",
+      "metrics": {
+        "psnr": 12.464699997694332,
+        "exact": false,
+        "ssim": 0.5581713059146447,
+        "laplacian": 0.00020587365045451065,
+        "sourceLaplacian": 0.0052315795151635335,
+        "sharpnessRatio": 0.03935210195272646
+      }
+    },
+    {
+      "label": "white",
+      "rgb": [
+        1,
+        1,
+        1
+      ],
+      "index": 2,
+      "file": "white-2.png",
+      "byteExactOriginal": false,
+      "sha256": "6afe6508909c402e9a42be20a42e7c12c4f183cde06dad0c19dd7151ee5f6de8",
+      "metrics": {
+        "psnr": 13.758904024620795,
+        "exact": false,
+        "ssim": 0.673905430287618,
+        "laplacian": 0.00009666921922635988,
+        "sourceLaplacian": 0.0037806786072383165,
+        "sharpnessRatio": 0.025569277177192835
+      }
+    },
+    {
+      "label": "white",
+      "rgb": [
+        1,
+        1,
+        1
+      ],
+      "index": 3,
+      "file": "white-3.png",
+      "byteExactOriginal": false,
+      "sha256": "b22e64e54b989b4ec0e1514a274eccf7db3eb338667edb5df0f60223c2d513a7",
+      "metrics": {
+        "psnr": 12.991431583373354,
+        "exact": false,
+        "ssim": 0.6720386131489935,
+        "laplacian": 0.00006212354828621915,
+        "sourceLaplacian": 0.0029176378327087802,
+        "sharpnessRatio": 0.02129241250910936
+      }
+    },
+    {
+      "label": "rejected-cache-brown",
+      "rgb": [
+        0.6324639916419983,
+        0.5044199824333191,
+        0.3962929844856262
+      ],
+      "index": 0,
+      "file": "rejected-cache-brown-0.png",
+      "byteExactOriginal": false,
+      "sha256": "01f19b4ecb2027b3d0f89dd2068d0d2203e20e1fc7e60f48bcad1bb5256aa91e",
+      "metrics": {
+        "psnr": 19.604675438454635,
+        "exact": false,
+        "ssim": 0.6908232038190518,
+        "laplacian": 0.00032177330984296067,
+        "sourceLaplacian": 0.006091606604124068,
+        "sharpnessRatio": 0.052822404786467575
+      }
+    },
+    {
+      "label": "rejected-cache-brown",
+      "rgb": [
+        0.6324639916419983,
+        0.5044199824333191,
+        0.3962929844856262
+      ],
+      "index": 1,
+      "file": "rejected-cache-brown-1.png",
+      "byteExactOriginal": false,
+      "sha256": "92406ff97294f1fbc98025c9f1f1dde2d6dbca9e402a61175111080fc86c0d65",
+      "metrics": {
+        "psnr": 17.711661433103515,
+        "exact": false,
+        "ssim": 0.6336191379284501,
+        "laplacian": 0.00017902779015354598,
+        "sourceLaplacian": 0.0052315795151635335,
+        "sharpnessRatio": 0.034220600037644607
+      }
+    },
+    {
+      "label": "rejected-cache-brown",
+      "rgb": [
+        0.6324639916419983,
+        0.5044199824333191,
+        0.3962929844856262
+      ],
+      "index": 2,
+      "file": "rejected-cache-brown-2.png",
+      "byteExactOriginal": false,
+      "sha256": "67f9bc47aa04d9b01530f170f3688cce45db687c8940948fc3bc60d93b0446fa",
+      "metrics": {
+        "psnr": 18.427310218214544,
+        "exact": false,
+        "ssim": 0.7336984324882498,
+        "laplacian": 0.00008213330063726256,
+        "sourceLaplacian": 0.0037806786072383165,
+        "sharpnessRatio": 0.021724486307832105
+      }
+    },
+    {
+      "label": "rejected-cache-brown",
+      "rgb": [
+        0.6324639916419983,
+        0.5044199824333191,
+        0.3962929844856262
+      ],
+      "index": 3,
+      "file": "rejected-cache-brown-3.png",
+      "byteExactOriginal": false,
+      "sha256": "4f6f521021b8f9d672c766b99877d325278687417ea01ca838763d66af5728b8",
+      "metrics": {
+        "psnr": 17.4827363076222,
+        "exact": false,
+        "ssim": 0.7307154948027764,
+        "laplacian": 0.000052841556953274466,
+        "sourceLaplacian": 0.0029176378327087802,
+        "sharpnessRatio": 0.018111074774560195
+      }
+    }
+  ],
+  "before": [
+    {
+      "label": "original-black",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "index": 0,
+      "file": "original-black-0.png",
+      "byteExactOriginal": true,
+      "sha256": "91abd9cc4906aa0409a7c54bca17dcb2096c12853009fc0d6fb688ff0d33157b",
+      "metrics": {
+        "psnr": 10.238952331667498,
+        "exact": false,
+        "ssim": 0.36281547103651296,
+        "laplacian": 0.00042211691270773594,
+        "sourceLaplacian": 0.006091606604124068,
+        "sharpnessRatio": 0.06929484126928999
+      }
+    },
+    {
+      "label": "original-black",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "index": 1,
+      "file": "original-black-1.png",
+      "byteExactOriginal": true,
+      "sha256": "9fe919af3d2b8dba745de583b42b42f8a76d7f146689f1c90f838475b8ef7e23",
+      "metrics": {
+        "psnr": 12.529337058655512,
+        "exact": false,
+        "ssim": 0.45901295718075813,
+        "laplacian": 0.00022051540444917455,
+        "sourceLaplacian": 0.0052315795151635335,
+        "sharpnessRatio": 0.04215082726163658
+      }
+    },
+    {
+      "label": "original-black",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "index": 2,
+      "file": "original-black-2.png",
+      "byteExactOriginal": true,
+      "sha256": "851218a45976ceaa903d954cc9e8f9d48b6868df347105b2f67c5d2c04e9b3c7",
+      "metrics": {
+        "psnr": 14.155630165044874,
+        "exact": false,
+        "ssim": 0.6123074320846458,
+        "laplacian": 0.00010296923165595758,
+        "sourceLaplacian": 0.0037806786072383165,
+        "sharpnessRatio": 0.027235647975688105
+      }
+    },
+    {
+      "label": "original-black",
+      "rgb": [
+        0,
+        0,
+        0
+      ],
+      "index": 3,
+      "file": "original-black-3.png",
+      "byteExactOriginal": true,
+      "sha256": "813face689f5b2ff6b67e19656641bce387a1d1aa773eb2745c8f8ab10dc7dab",
+      "metrics": {
+        "psnr": 13.119626805554125,
+        "exact": false,
+        "ssim": 0.5831975007203941,
+        "laplacian": 0.0000641758629242198,
+        "sourceLaplacian": 0.0029176378327087802,
+        "sharpnessRatio": 0.021995829024686706
+      }
+    },
+    {
+      "label": "white",
+      "rgb": [
+        1,
+        1,
+        1
+      ],
+      "index": 0,
+      "file": "white-0.png",
+      "byteExactOriginal": false,
+      "sha256": "5e1965d1ddf7e2372cf6be77771fcee22ad0b9514684ec3ad0589c9fbf1fab70",
+      "metrics": {
+        "psnr": 10.063784595720753,
+        "exact": false,
+        "ssim": 0.5718951632935655,
+        "laplacian": 0.0004657650207544675,
+        "sourceLaplacian": 0.006091606604124068,
+        "sharpnessRatio": 0.07646012801272176
+      }
+    },
+    {
+      "label": "white",
+      "rgb": [
+        1,
+        1,
+        1
+      ],
+      "index": 1,
+      "file": "white-1.png",
+      "byteExactOriginal": false,
+      "sha256": "9c5349591a2005caadd9f8b086a64460c38c18989e9e8b91893c38145c31f64e",
+      "metrics": {
+        "psnr": 12.464699997694332,
+        "exact": false,
+        "ssim": 0.5581713059146447,
+        "laplacian": 0.00020587365045451065,
+        "sourceLaplacian": 0.0052315795151635335,
+        "sharpnessRatio": 0.03935210195272646
+      }
+    },
+    {
+      "label": "white",
+      "rgb": [
+        1,
+        1,
+        1
+      ],
+      "index": 2,
+      "file": "white-2.png",
+      "byteExactOriginal": false,
+      "sha256": "6afe6508909c402e9a42be20a42e7c12c4f183cde06dad0c19dd7151ee5f6de8",
+      "metrics": {
+        "psnr": 13.758904024620795,
+        "exact": false,
+        "ssim": 0.673905430287618,
+        "laplacian": 0.00009666921922635988,
+        "sourceLaplacian": 0.0037806786072383165,
+        "sharpnessRatio": 0.025569277177192835
+      }
+    },
+    {
+      "label": "white",
+      "rgb": [
+        1,
+        1,
+        1
+      ],
+      "index": 3,
+      "file": "white-3.png",
+      "byteExactOriginal": false,
+      "sha256": "b22e64e54b989b4ec0e1514a274eccf7db3eb338667edb5df0f60223c2d513a7",
+      "metrics": {
+        "psnr": 12.991431583373354,
+        "exact": false,
+        "ssim": 0.6720386131489935,
+        "laplacian": 0.00006212354828621915,
+        "sourceLaplacian": 0.0029176378327087802,
+        "sharpnessRatio": 0.02129241250910936
+      }
+    },
+    {
+      "label": "rejected-cache-brown",
+      "rgb": [
+        0.6324639916419983,
+        0.5044199824333191,
+        0.3962929844856262
+      ],
+      "index": 0,
+      "file": "rejected-cache-brown-0.png",
+      "byteExactOriginal": false,
+      "sha256": "01f19b4ecb2027b3d0f89dd2068d0d2203e20e1fc7e60f48bcad1bb5256aa91e",
+      "metrics": {
+        "psnr": 19.604675438454635,
+        "exact": false,
+        "ssim": 0.6908232038190518,
+        "laplacian": 0.00032177330984296067,
+        "sourceLaplacian": 0.006091606604124068,
+        "sharpnessRatio": 0.052822404786467575
+      }
+    },
+    {
+      "label": "rejected-cache-brown",
+      "rgb": [
+        0.6324639916419983,
+        0.5044199824333191,
+        0.3962929844856262
+      ],
+      "index": 1,
+      "file": "rejected-cache-brown-1.png",
+      "byteExactOriginal": false,
+      "sha256": "92406ff97294f1fbc98025c9f1f1dde2d6dbca9e402a61175111080fc86c0d65",
+      "metrics": {
+        "psnr": 17.711661433103515,
+        "exact": false,
+        "ssim": 0.6336191379284501,
+        "laplacian": 0.00017902779015354598,
+        "sourceLaplacian": 0.0052315795151635335,
+        "sharpnessRatio": 0.034220600037644607
+      }
+    },
+    {
+      "label": "rejected-cache-brown",
+      "rgb": [
+        0.6324639916419983,
+        0.5044199824333191,
+        0.3962929844856262
+      ],
+      "index": 2,
+      "file": "rejected-cache-brown-2.png",
+      "byteExactOriginal": false,
+      "sha256": "67f9bc47aa04d9b01530f170f3688cce45db687c8940948fc3bc60d93b0446fa",
+      "metrics": {
+        "psnr": 18.427310218214544,
+        "exact": false,
+        "ssim": 0.7336984324882498,
+        "laplacian": 0.00008213330063726256,
+        "sourceLaplacian": 0.0037806786072383165,
+        "sharpnessRatio": 0.021724486307832105
+      }
+    },
+    {
+      "label": "rejected-cache-brown",
+      "rgb": [
+        0.6324639916419983,
+        0.5044199824333191,
+        0.3962929844856262
+      ],
+      "index": 3,
+      "file": "rejected-cache-brown-3.png",
+      "byteExactOriginal": false,
+      "sha256": "4f6f521021b8f9d672c766b99877d325278687417ea01ca838763d66af5728b8",
+      "metrics": {
+        "psnr": 17.4827363076222,
+        "exact": false,
+        "ssim": 0.7307154948027764,
+        "laplacian": 0.000052841556953274466,
+        "sourceLaplacian": 0.0029176378327087802,
+        "sharpnessRatio": 0.018111074774560195
+      }
+    }
+  ],
+  "errors": [],
+  "status": "diagnostic-complete"
+}

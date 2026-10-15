@@ -1,0 +1,141 @@
+{
+  "checkedAt": "2026-10-15T09:44:26.454885+00:00",
+  "purpose": "Training-only fixed-rule color-prior feasibility; no acceptance, GPU, timing, depth, or runtime integration claim",
+  "inputs": [
+    {
+      "path": "/workspace/v3d-r4-media/seed-probe.json",
+      "bytes": 53829727,
+      "sha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f"
+    },
+    {
+      "path": "/workspace/v3d-r4-media/seed-probe.mjs",
+      "bytes": 2776,
+      "sha256": "2a4e593f7b7d91386191939446cb1183f74312d9e90cfb486881693fcab41b84"
+    },
+    {
+      "path": "/workspace/v3d-r4-media/corpus/dianthus.mp4",
+      "bytes": 1443894,
+      "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5"
+    },
+    {
+      "path": "/workspace/v3d-r4-media/candidate-r8-phone/dianthus-phone/model.json",
+      "bytes": 27340,
+      "sha256": "0de216f7cd45c2048bc800443d7497015ecec1542617b16f878aa730437afa3a"
+    },
+    {
+      "path": "/workspace/v3d-r4-media/corpus-manifest.json",
+      "bytes": 40533,
+      "sha256": "3b76812b6bc098c6ab4e340e942f7493872c648e3da4b854e582ad5f8073c606"
+    }
+  ],
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5890,
+      "sha256": "0ab15e45a5ec831c25b8a3d37ae8c55c979210e1b28112a8c0f57f302097b250"
+    },
+    {
+      "path": "chameleon-flowers-training-support.png",
+      "bytes": 300226,
+      "sha256": "9b0acbad00e8760e9b2976059bffb40a2a1f8ef3db9412c1b947adb621729f64"
+    },
+    {
+      "path": "control-flat-training-support.png",
+      "bytes": 28112,
+      "sha256": "b74c7d69d0105036780bb029cb07628bf92a82ff73114bebffa83ebe7200402d"
+    },
+    {
+      "path": "control-no-holdout-training-support.png",
+      "bytes": 28364,
+      "sha256": "053e3fd821edba9ffb9cb1649a51ff2ae3a399a59db043f7b97cf663954a48bd"
+    },
+    {
+      "path": "control-shift-training-support.png",
+      "bytes": 25049,
+      "sha256": "fa32d8b36fc5a84d82a1861450794752b40cf5c08f00e2d83e28be5eea8ef0d8"
+    },
+    {
+      "path": "dianthus-training-approx.rgb24",
+      "bytes": 2592000,
+      "sha256": "f442e9260860112c3579689c24b1ae621dcfaffba0ee6644e79d29fb9e310424"
+    },
+    {
+      "path": "dianthus-training-contact.png",
+      "bytes": 575241,
+      "sha256": "51973ab9e756d6cfd6cbc2b03fd8679c0255388628bed772a4052a6d964d8831"
+    },
+    {
+      "path": "estimate-failed-summary.log",
+      "bytes": 515,
+      "sha256": "77e33789e2088fa63696b322f7750fd22e4f03d918be33f29f55dc763b4e1e1c"
+    },
+    {
+      "path": "estimate-final.log",
+      "bytes": 2738,
+      "sha256": "c454c6375f452a407331ec1b0fabee4c9568819d356de9fd7fd8f441360484e1"
+    },
+    {
+      "path": "estimate.log",
+      "bytes": 515,
+      "sha256": "77e33789e2088fa63696b322f7750fd22e4f03d918be33f29f55dc763b4e1e1c"
+    },
+    {
+      "path": "estimate.py",
+      "bytes": 12612,
+      "sha256": "e43f9c2ce7ff553a1cbc339c5ac5d920db11e3569cdb0ca463f9343ac60b2d67"
+    },
+    {
+      "path": "parameters-before.json",
+      "bytes": 1362,
+      "sha256": "79f897947dac226bb5ccfe203dd49cf057f9435c4a4001afc48878ccfcb6b735"
+    },
+    {
+      "path": "results-first.json",
+      "bytes": 14996,
+      "sha256": "6647c0e181b7d33d7f1f57cf5e10791ad3817560fd6691397d5460bc3440a7e4"
+    },
+    {
+      "path": "results.json",
+      "bytes": 16502,
+      "sha256": "be0384a69a570eca2ca0a35d591c3bf0c97b4509316bd964d7ef8355cb6a945c"
+    },
+    {
+      "path": "source-credits.json",
+      "bytes": 1092,
+      "sha256": "781de53cd7875ce82ef9e22afd6dbb8d85a4ba916340d5c9f9f54af0b96ab9eb"
+    },
+    {
+      "path": "source-snapshots/vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "path": "source-snapshots/vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119499,
+      "sha256": "6f11213d55191fea9d45443cb2353e231a4b215ab781762cd98a982f9a57c8dd"
+    },
+    {
+      "path": "source-snapshots/vendor/splatjs/src/session.js",
+      "bytes": 64458,
+      "sha256": "84e6c3e60b556e915220bb48c3b03abc8d2ad14157b70867a7e7843d00f90882"
+    },
+    {
+      "path": "test_estimate.py",
+      "bytes": 1655,
+      "sha256": "641b552015a1441d26743d9ca13d7eba9e20d7c3660ed7124279351b6b1a5618"
+    },
+    {
+      "path": "tests.log",
+      "bytes": 101,
+      "sha256": "dcb6f650b9f53902b8fd3369e5a6d72ebadca687271a744666ab5b677290735f"
+    }
+  ],
+  "result": "Both reject; plant color candidate provided for diagnostic only, strictfitcoverage5/7 insufficient; Dianthusapproxno lowtexture candidate.",
+  "tests": "3 CPU controls passed (1.493s)",
+  "limitations": [
+    "Older cache identity cannot bind exact R9selection nor external heldout disjointness; no external heldout images used.",
+    "Dianthus CPU decode is not original target RGB/JPEG byte parity.",
+    "Dominant low-texture color is not semantic background or depth evidence.",
+    "No native bake/replay; no rendered quality measured."
+  ]
+}
