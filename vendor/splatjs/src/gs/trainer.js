@@ -2,7 +2,7 @@
 
 import {
   STRIDE, TILE, ENTRIES_CAP, makeProjectSrc, makeRenderSrc, makeChainSrc,
-  SCAN_SRC, SCATTER_SRC, SORT_SRC, ADAM_SRC, SH_ADAM_SRC, BLIT_SRC, shRestCoefs,
+  SCAN_SRC, SCATTER_SRC, SORT_SRC, SERIAL_SORT_SRC, ADAM_SRC, SH_ADAM_SRC, BLIT_SRC, shRestCoefs,
   VIS_COUNT_SRC, VIS_SCAN_SRC, VIS_SCATTER_SRC, makeAdamSrc, makeSHAdamSrc, makeShapeClampSrc,
   GATHER_SRC, REFINE_APPLY_SRC, REFINE_PATCH_SRC, SSIM_SRC, makeSsaaLossSrc,
 } from './shaders.js';
@@ -42,6 +42,9 @@ export class GSTrainer {
     // FASTER on desktop NVIDIA too (+11% synthetic it/s) — default ON
     // everywhere; opts.tileGrad = false restores the direct path.
     this.tileGrad = opts.tileGrad ?? true;
+    // Explicit opt-in: software adapters can avoid the parallel sort barriers.
+    // Hardware/default behavior continues to use the unchanged bitonic sorter.
+    this.serialSort = opts.serialSort === true;
     // opts.compact: chain / Adam / SH-Adam over VISIBLE splats only (indirect
     // dispatch from a GPU-built list); invisible rows keep regs + noise via a
     // slot-limited pass. Per-splat kernels are ~1/3 of a 1M-splat step.
@@ -118,9 +121,10 @@ export class GSTrainer {
       label: 'tile-scatter', layout: 'auto',
       compute: { module: mk(SCATTER_SRC, 'tile-scatter'), entryPoint: 'main' },
     });
+    const sortLabel = this.serialSort ? 'tile-sort-serial' : 'tile-sort';
     this.pipeSort = d.createComputePipeline({
-      label: 'tile-sort', layout: 'auto',
-      compute: { module: mk(SORT_SRC, 'tile-sort'), entryPoint: 'main' },
+      label: sortLabel, layout: 'auto',
+      compute: { module: mk(this.serialSort ? SERIAL_SORT_SRC : SORT_SRC, sortLabel), entryPoint: 'main' },
     });
     // subgroup-aggregated gradient atomics — DEFAULT OFF (2026-08-25):
     // Tint only allows subgroup builtins in fully-uniform flow, and the
