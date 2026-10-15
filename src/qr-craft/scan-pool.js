@@ -11,8 +11,8 @@ import { shapeHalf } from "../qr/circle.js";
 import { scanEstimate } from "./fidelity.js";
 let workers = null,
   next = 0,
-  serial = 0;
-const previousPredictionFailures = [];
+  serial = 0,
+  previousPredictionFailure = null;
 const pending = new Map();
 function pool() {
   if (workers) return workers;
@@ -172,39 +172,32 @@ export async function validateDetail(woven, picture, shape, read) {
   if (woven.rendering?.validation === "capture")
     return { ok: true, layoutChecked: true, cameraDeferred: true };
   // A failed camera condition is an exact subset of the complete matrix.
-  // Try recent distinct failures before the next model candidate's full pass.
-  // Every accepted candidate still runs the complete matrix below.
-  // Keep only eight coordinates, never picture data.
-  if (previousPredictionFailures.length) {
-    const preferred = [8, 4].flatMap((ppm) => {
-      const remembered = previousPredictionFailures.filter((frame) => frame.ppm === ppm);
-      if (!remembered.length) return [];
-      return cameraFrames((size) => (size === 4 ? small.image : at(size)), {
-        ppm,
-        views: [...new Set(remembered.map((frame) => frame.view))],
-      })
-        .map((frame) => ({ ...frame, blur: frame.blur + (woven.rendering?.textureGuard || 0) }))
-        .filter((frame) =>
-          remembered.some(
-            (previous) => frame.blur === previous.blur && frame.view === previous.view,
-          ),
-        );
-    });
-    const results = await Promise.all(
-      preferred.map(async (frame) => {
-        if (typeof Worker !== "undefined") {
-          try {
-            return await request({ frames: [frame], text: woven.code.text, dual: !!texture });
-          } catch (error) {
-            if (error.name === "AbortError") throw error;
-            /* The worker receives a copy, so the same pixels remain for fallback. */
-          }
+  // Try it first on the next model candidate; every accepted candidate still
+  // runs the complete matrix below. Keep only coordinates, never picture data.
+  if (previousPredictionFailure) {
+    const previous = previousPredictionFailure;
+    const preferred = cameraFrames((ppm) => (ppm === 4 ? small.image : at(ppm)), {
+      ppm: previous.ppm,
+      views: [previous.view],
+    })
+      .map((frame) => ({
+        ...frame,
+        blur: frame.blur + (woven.rendering?.textureGuard || 0),
+      }))
+      .find((frame) => frame.blur === previous.blur);
+    if (preferred) {
+      let early;
+      if (typeof Worker !== "undefined") {
+        try {
+          early = await request({ frames: [preferred], text: woven.code.text, dual: !!texture });
+        } catch (error) {
+          if (error.name === "AbortError") throw error;
+          /* The worker receives a copy, so the same pixels remain for fallback. */
         }
-        return localFrames([frame], woven.code.text, read, !!texture);
-      }),
-    );
-    const failure = results.find((result) => !result.ok);
-    if (failure) return { ...failure, preflight: true, layoutChecked: true };
+      }
+      early ||= await localFrames([preferred], woven.code.text, read, !!texture);
+      if (!early.ok) return { ...early, preflight: true, layoutChecked: true };
+    }
   }
   const prediction = await validateFrames(
     () =>
@@ -223,21 +216,12 @@ export async function validateDetail(woven, picture, shape, read) {
     Number.isInteger(prediction.view) &&
     prediction.view >= 0 &&
     prediction.view <= 5
-  ) {
-    const index = previousPredictionFailures.findIndex(
-      (frame) =>
-        frame.ppm === prediction.ppm &&
-        frame.blur === prediction.blur &&
-        frame.view === prediction.view,
-    );
-    if (index >= 0) previousPredictionFailures.splice(index, 1);
-    previousPredictionFailures.unshift({
+  )
+    previousPredictionFailure = {
       ppm: prediction.ppm,
       blur: prediction.blur,
       view: prediction.view,
-    });
-    previousPredictionFailures.splice(8);
-  }
+    };
   return { ...prediction, layoutChecked: true };
 }
 
