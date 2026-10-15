@@ -141,11 +141,9 @@ export async function phonePNG(page, bytes) {
 }
 
 // Use the vendored browser readers, not regenerated QR matrices or mocked responses.
-// qrModules is only for the share export's bounded, square raster with a four-module
-// quiet zone. Its declared version fixes the sampling geometry, not the payload.
-// General screenshots still use ZXing's finder. On dense valid share codes that
-// finder can stop at a data pattern; PURE_BARCODE also rounds fractional phone
-// module widths incorrectly. Read the actual pixels on the export's known grid.
+// qrModules is an optional geometry-assisted diagnostic for bounded square
+// rasters with a four-module quiet zone. Route and smoke assertions never use
+// it: both readers must find the code independently in the exported pixels.
 export async function decodePNG(page, bytes, { qrModules = null } = {}) {
   if (!(await page.evaluate(() => !!window.jsQR)))
     await page.addScriptTag({ url: new URL("vendor/jsqr/jsQR.js", page.url()).href });
@@ -269,8 +267,7 @@ export async function exportCode(page, id) {
     return {
       png: await fs.readFile(await d.path()),
       payload: share.url,
-      share,
-      decodeOptions: { qrModules: share.version * 4 + 17 },
+      share: await page.evaluate(async () => (await import("/src/qr/share.js")).SHARE.last),
     };
   }
   if (id === "qr-code" || id === "qr-picture") {
@@ -1007,15 +1004,10 @@ async function run() {
                 const phoneName = `run-${repetition}-${id}-export-phone.png`;
                 await fs.writeFile(path.join(OUT, phoneName), phone);
                 r.evidence.push(phoneName);
-                const decoded = await decodePNG(page, phone, exported.decodeOptions);
-                const generalDecoded = exported.decodeOptions
-                  ? await decodePNG(page, phone)
-                  : undefined;
+                const decoded = await decodePNG(page, phone);
                 r.qr = {
                   payload: exported.payload,
                   decoded,
-                  decodeOptions: exported.decodeOptions,
-                  generalDecoded,
                   settings: await qrSettings(page, id),
                 };
                 ensure(
@@ -1039,15 +1031,10 @@ async function run() {
                   throw Object.assign(new Error("No export was produced by the prior step"), {
                     blocked: true,
                   });
-                const decoded = await decodePNG(page, exported.png, exported.decodeOptions);
-                const generalDecoded = exported.decodeOptions
-                  ? await decodePNG(page, exported.png)
-                  : undefined;
+                const decoded = await decodePNG(page, exported.png);
                 r.qr = {
                   payload: exported.payload,
                   decoded,
-                  decodeOptions: exported.decodeOptions,
-                  generalDecoded,
                   settings: await qrSettings(page, id),
                 };
                 ensure(
@@ -1423,7 +1410,7 @@ These Moving photo to 3D measurements do not describe Video to 3D. First-frame t
 
 PNG exports come from the real exporters, not regenerated matrices. Untouched exports and separately saved copies scaled to at most 390 pixels are each decoded with vendor jsQR and ZXing. The visible stage or share-dialog canvas is captured at its actual phone CSS size. Full unscaled viewport screenshots include shelf QR thumbnails; failing reads are inconclusive about the target. Settings marked \`assumed\` in QR metadata are not measurements; app-returned options and metrics are labeled separately. Three QR uses the same payload in all three channels, which does not prove distinct-channel separation.
 
-For bounded Share exports only, ZXing samples the existing raster at module centers using the exporter's declared version, after checking the square dimensions, quiet border, finders, and timing pattern. Its general finder can mistake dense data for a finder, and its pure-image shortcut can round fractional phone module widths to an invalid grid size. The vendored ZXing decoder still reads and error-corrects the sampled data, and jsQR still reads the original raster independently. Export records retain this explicit geometry in \`decodeOptions\` and the separate general finder result in \`generalDecoded\`. On-screen and full-viewport checks retain the general finder; this export check does not measure phone-camera detection.
+Both readers must independently find and decode every exported PNG at native size and at 390 pixels, without geometry hints. The Share exporter tries QR masks only when saving and accepts one only when both readers locate and decode its actual raster at both sizes. The optional geometry-assisted helper is a separate diagnostic covered by rejection tests; it is never used by route pass/fail checks. These digital-image reads do not establish phone-camera detection.
 
 ## Share QR origin and size
 

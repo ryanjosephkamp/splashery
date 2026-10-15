@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { PNG } from "pngjs";
+import fs from "node:fs/promises";
 import { decodePNG, phonePNG } from "../tools/adv-route.mjs";
 
 // Captured from an actual share export at createdAt 2026-10-15T14:31:42.482Z.
@@ -7,6 +8,54 @@ import { decodePNG, phonePNG } from "../tools/adv-route.mjs";
 const PAYLOAD =
   "http://127.0.0.1:4173/#s=d.fVPLltowDP0XzTbDG8pk129oV-2ZheII4sHYrq0MUA7_XskQOoc5bTaxHF3pXunmDBgj1JCjw9xROkEF75SyDR7qeQUmETK1X1lyZpPZ6nk6eZ4uv08X9XxaL2ajxXr2QyCZqIV6WgGHE9Rn2FkvMTS9dWy9JFgNf6VnE1qSMESWDllTmY5avGOOuR6P0wn9W8gUux3u42hrueubkQ3jO8Ox4G_1nfU7iTaWXCvFQJnwyZEcjWRna-ByqcCFsNNWDZrdNoW-YCNulQl3tNd87DlIiMaQ57-xduVvBrWmyKNjDLlPGkhd2mzIcFERw470rWPboMukTBL5LXdQT0arCg6habTKZLQU6KEI-Gf-cllBa5NUL4uYXDTMObj3T12ibKgdMDmWRVx7tCnEh-xGxJtCYqHZBpkpDfl73Hri_7D6UkHC1vb5WkAgfLD5EYF7acKl6EfVYiY8Wt3SCQSZnTWPWmS29iZYEg5EsQCXd-RRkRGt_8TS_qZbx6tPboEJLog-eKLVvJlRccMdn1kcJmV_vsqtwT0l1OsTHgqBaNl05ZSCc-UgO2AsA5yN1vP1i-DUJ9KxuJ775BmLXk49DQaR_j54unLXgXtNLn9EuRcDO9xe7RtTeBu2DoeEUe4SRfkJczFgEaSc4WlTHvk-iJPTpFlsXgy8lt26YSTDRgTfEqN1xZK68XDtdAZ09v1Oex_0LPOxovujqbS_ZxmHev5yufwB";
 const GEOMETRY = { qrModules: 105 };
+
+test("the saved finder counterexample exports a PNG both readers find without geometry hints", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const shared = await page.evaluate(async (payload) => {
+    const { decodeSceneHash } = await import("/src/codec.js");
+    const { openShareQR } = await import("/src/qr/share.js");
+    const scene = await decodeSceneHash(payload.split("#s=")[1]);
+    return openShareQR({ exportScene: () => scene });
+  }, PAYLOAD);
+  expect(shared.url).toBe(PAYLOAD);
+  const downloaded = page.waitForEvent("download");
+  await page.locator("#sqr-save").click();
+  const native = await fs.readFile(await (await downloaded).path());
+  const phone = await phonePNG(page, native);
+  expect(PNG.sync.read(native).width).toBe(1130);
+  expect(PNG.sync.read(phone).width).toBe(390);
+  for (const png of [phone, native])
+    expect(await decodePNG(page, png)).toEqual({ jsqr: PAYLOAD, zxing: PAYLOAD });
+});
+
+test("a reader load failure offers JSON and permits an export retry", async ({ page }) => {
+  await page.route("**/vendor/zxing-js/zxing.min.js", (route) => route.abort());
+  await page.goto("/");
+  await page.evaluate(async (payload) => {
+    const { decodeSceneHash } = await import("/src/codec.js");
+    const { openShareQR } = await import("/src/qr/share.js");
+    const scene = await decodeSceneHash(payload.split("#s=")[1]);
+    await openShareQR({ exportScene: () => scene });
+  }, PAYLOAD);
+  const downloads = [];
+  page.on("download", (d) => downloads.push(d));
+  await page.locator("#sqr-save").click();
+  await expect(page.locator("#sqr-check")).toContainText("Try again, or save JSON");
+  await expect(page.locator("#sqr-json")).toBeVisible();
+  await expect(page.locator("#sqr-save")).toBeEnabled();
+  expect(downloads).toHaveLength(0);
+  await page.unroute("**/vendor/zxing-js/zxing.min.js");
+  const downloaded = page.waitForEvent("download");
+  await page.locator("#sqr-save").click();
+  const png = await fs.readFile(await (await downloaded).path());
+  expect(await decodePNG(page, await phonePNG(page, png))).toEqual({
+    jsqr: PAYLOAD,
+    zxing: PAYLOAD,
+  });
+  expect(downloads).toHaveLength(1);
+});
 
 async function shareRaster(page) {
   await page.goto("/");
@@ -20,7 +69,7 @@ async function shareRaster(page) {
   return Buffer.from(bytes);
 }
 
-test("saved share pixels decode exactly with declared export geometry at native and 390 pixels", async ({
+test("diagnostic: original share pixels decode with geometry while the phone finder fails", async ({
   page,
 }, testInfo) => {
   const native = await shareRaster(page);
