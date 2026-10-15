@@ -37,6 +37,9 @@ const TOOL_HINTS = {
   clay: "Drag on a generated toy to add lumps of clay, or switch to Erase to carve it away.",
 };
 
+// Share lane: m:ss, for Record's pill and its preview sheet.
+const mmss = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
+
 function pct(v) {
   return `${Math.round(v * 100)}%`;
 }
@@ -197,12 +200,27 @@ export function createUI(app) {
     recordRow: $("record-row"), // UI r5
     recordStart: $("record-start"),
     recordUnavailable: $("record-unavailable"),
+    recordNote: $("record-note"), // Share lane
     recPill: $("rec-pill"),
     recTime: $("rec-time"),
     recStop: $("rec-stop"),
     recSave: $("rec-save"),
     recShare: $("rec-share"),
     recClose: $("rec-close"),
+    // Share lane: the clip switch and the preview sheet after Record.
+    clipKind: $("clip-kind"),
+    webmBlock: $("webm-block"),
+    gifBlock: $("gif-block"),
+    recPreview: $("rec-preview"),
+    recVideo: $("rec-video"),
+    recMeta: $("rec-meta"),
+    recActions: $("rec-actions"),
+    recAgain: $("rec-again"),
+    recDiscard: $("rec-discard"),
+    recConfirm: $("rec-confirm"),
+    recConfirmText: $("rec-confirm-text"),
+    recConfirmYes: $("rec-confirm-yes"),
+    recConfirmNo: $("rec-confirm-no"),
     embedTransparent: $("embed-transparent"),
     embedSize: $("embed-size"),
     embedCopy: $("embed-copy"),
@@ -2244,12 +2262,141 @@ export function createUI(app) {
   // Lane PDF lab: Save as PDF (labs).
   els.pdfRow.hidden = !labsOn();
   els.exportPdf.addEventListener("click", () => app.openPdfExport());
-  // UI r5: Record (the Share tab starts it; the pill on the stage stops and saves it).
+  // Share lane: Video or GIF, one block at a time (each keeps its own settings).
+  const clipButtons = [...els.clipKind.querySelectorAll("[data-clip]")];
+  const showClip = (kind) => {
+    for (const b of clipButtons) b.setAttribute("aria-pressed", String(b.dataset.clip === kind));
+    els.webmBlock.hidden = kind !== "video";
+    els.gifBlock.hidden = kind !== "gif";
+  };
+  for (const b of clipButtons) b.addEventListener("click", () => showClip(b.dataset.clip));
+  // UI r5: Record (the Share tab starts it; the pill on the stage shows the time and stops it).
   els.recordStart.addEventListener("click", () => (app.recording ? app.stopRecord() : app.startRecord())); // prettier-ignore
   els.recStop.addEventListener("click", () => app.stopRecord());
-  els.recSave.addEventListener("click", () => app.saveRecord());
-  els.recShare.addEventListener("click", () => app.shareRecord());
-  els.recClose.addEventListener("click", () => app.closeRecord());
+
+  // ---- Share lane: the preview sheet after Record -------------------------------------
+  // When a take stops, the sheet plays it back (play, pause and scrub) before
+  // it is saved. Closing the sheet, by any way, lets go of the recording: the
+  // player lets go of its blob URL, which is revoked, and app.closeRecord()
+  // drops the Blob. Discard, Close, and Record again ask first while the take
+  // hasn't been saved or shared.
+  const preview = { url: null, saved: false, onMeta: null, open: false };
+  function openPreview({ bytes, share }) {
+    const r = app.recorded;
+    if (!r?.blob) return;
+    releasePreview();
+    preview.url = URL.createObjectURL(r.blob);
+    preview.saved = false;
+    const v = els.recVideo;
+    // A MediaRecorder WebM has no length in its header, so Chrome reports an
+    // endless one and the scrub bar can't move. Seeking far past the end once
+    // makes it read the real length; then back to the start.
+    // The listener is kept so a sheet closed before the length loads takes it
+    // off (releasePreview), and it never runs on the next take.
+    preview.onMeta = () => {
+      v.removeEventListener("loadedmetadata", preview.onMeta);
+      preview.onMeta = null;
+      if (v.duration !== Infinity) return;
+      const back = () => {
+        v.removeEventListener("timeupdate", back);
+        v.currentTime = 0;
+      };
+      v.addEventListener("timeupdate", back);
+      v.currentTime = 1e101;
+    };
+    v.addEventListener("loadedmetadata", preview.onMeta);
+    // "#t=0.001" shows the first frame instead of a black box (iOS Safari).
+    v.src = `${preview.url}#t=0.001`;
+    // The player shows the length; this line says what the file is.
+    const kind = /\.mp4$/.test(r.name || "") ? "MP4" : "WebM";
+    els.recMeta.textContent = `${kind} video · ${formatBytes(bytes)}`;
+    els.recShare.hidden = !share;
+    hideConfirm();
+    preview.open = true;
+    if (!els.recPreview.open) els.recPreview.showModal();
+    els.recSave.focus();
+  }
+  function releasePreview() {
+    const v = els.recVideo;
+    if (preview.onMeta) v.removeEventListener("loadedmetadata", preview.onMeta);
+    preview.onMeta = null;
+    v.pause();
+    v.removeAttribute("src");
+    v.load();
+    if (preview.url) URL.revokeObjectURL(preview.url);
+    preview.url = null;
+  }
+  // Every way the sheet closes (Close, Escape, Discard, Record again) ends here,
+  // right away, and again on the dialog's own "close" event for any other way.
+  // Focus goes back to Record when it shows (Record again starts a take instead).
+  let refocus = true;
+  function letGo() {
+    if (!preview.open) return;
+    preview.open = false;
+    hideConfirm();
+    releasePreview();
+    if (app.recorded) app.closeRecord();
+    if (refocus && els.recordStart.offsetParent) els.recordStart.focus();
+  }
+  els.recPreview.addEventListener("close", letGo);
+  let confirmed = null;
+  function ask(text, yes, then) {
+    if (preview.saved) return then();
+    confirmed = then;
+    els.recConfirmText.textContent = text;
+    els.recConfirmYes.textContent = yes;
+    els.recActions.hidden = true;
+    els.recConfirm.hidden = false;
+    els.recConfirmNo.focus();
+  }
+  function hideConfirm() {
+    const was = !els.recConfirm.hidden;
+    confirmed = null;
+    els.recConfirm.hidden = true;
+    els.recActions.hidden = false;
+    return was;
+  }
+  const closePreview = () => {
+    if (els.recPreview.open) els.recPreview.close();
+    letGo();
+  };
+  const askClose = () =>
+    ask("Close and discard this recording? It hasn't been saved.", "Discard", closePreview);
+  els.recSave.addEventListener("click", () => {
+    app.saveRecord();
+    preview.saved = true;
+  });
+  // Saved only when it was shared (or saved instead); a canceled share sheet isn't.
+  els.recShare.addEventListener("click", async () => {
+    if (await app.shareRecord()) preview.saved = true;
+  });
+  els.recAgain.addEventListener("click", () =>
+    ask("Record again? This recording hasn't been saved, so it goes.", "Record again", () => {
+      refocus = false;
+      closePreview();
+      refocus = true;
+      app.startRecord();
+    }),
+  );
+  els.recDiscard.addEventListener("click", () =>
+    ask("Discard this recording? It hasn't been saved.", "Discard", closePreview),
+  );
+  els.recClose.addEventListener("click", askClose);
+  els.recConfirmYes.addEventListener("click", () => {
+    const then = confirmed;
+    hideConfirm();
+    then?.();
+  });
+  els.recConfirmNo.addEventListener("click", () => {
+    hideConfirm();
+    els.recSave.focus();
+  });
+  // Escape: back out of the question first, else ask before closing.
+  els.recPreview.addEventListener("cancel", (e) => {
+    e.preventDefault();
+    if (hideConfirm()) els.recSave.focus();
+    else askClose();
+  });
   els.embedTransparent.addEventListener("change", () => app.updateEmbed());
   els.embedSize.addEventListener("change", () => app.updateEmbed());
   els.embedCopy.addEventListener("click", () =>
@@ -3407,50 +3554,50 @@ export function createUI(app) {
     },
     // UI r5: Record's state: "off", "rec" (with seconds and the limit),
     // "ready" (with seconds, bytes and whether the phone can share it) or "busy".
+    // Share lane: "ready" opens the preview sheet; the pill is only for the take.
     setRecord({ state, seconds = 0, limit = 60, bytes = 0, share = false }) {
       const hadFocus = els.recPill.contains(document.activeElement);
-      const clock = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
       const rec = state === "rec";
       const ready = state === "ready";
-      els.recPill.hidden = state === "off";
+      els.recPill.hidden = state === "off" || ready;
       els.recPill.classList.toggle("recording", rec);
       els.recStop.hidden = !rec;
-      els.recSave.hidden = !ready;
-      els.recShare.hidden = !ready || !share;
-      els.recClose.hidden = !ready;
-      els.recTime.textContent = rec
-        ? `${clock(seconds)} / ${clock(limit)}`
-        : ready
-          ? `${clock(seconds)} · ${formatBytes(bytes)}`
-          : "Saving…";
-      els.recordStart.textContent = rec ? "Stop" : "Record";
-      els.recordStart.classList.toggle("primary", rec);
+      els.recTime.textContent = rec ? `${mmss(seconds)} / ${mmss(limit)}` : "Saving…";
+      els.recordStart.querySelector(".record-label").textContent = rec ? "Stop" : "Record";
+      els.recordStart.classList.toggle("recording", rec);
       els.recordStart.disabled = state === "busy";
-      // Keep keyboard focus through saving, but respect a visitor who moves away.
+      // Share lane: a finished take opens the preview sheet, which takes focus itself.
+      if (ready) return openPreview({ bytes, share });
+      // Task 52: keep keyboard focus through saving, but respect a visitor who moves away.
       if (hadFocus) {
         const target = rec
           ? els.recStop
-          : ready
-            ? els.recSave
-            : state === "busy"
-              ? els.recPill
-              : els.recordStart.checkVisibility()
-                ? els.recordStart
-                : els.sheetToggle.checkVisibility()
-                  ? els.sheetToggle
-                  : els.stage;
+          : state === "busy"
+            ? els.recPill
+            : els.recordStart.checkVisibility()
+              ? els.recordStart
+              : els.sheetToggle.checkVisibility()
+                ? els.sheetToggle
+                : els.stage;
         target.focus({ preventScroll: true });
       }
     },
     setRecordUnavailable(reason) {
       els.recordRow.hidden = !!reason;
+      els.recordNote.hidden = !!reason;
       els.recordUnavailable.hidden = !reason;
       els.recordUnavailable.textContent = reason ? `Recording is unavailable: ${reason}` : "";
     },
     setWebmUnavailable(reason) {
       els.webmRow.hidden = !!reason;
+      els.exportWebm.hidden = !!reason; // Share lane: the button sits under the settings now
       els.webmUnavailable.hidden = !reason;
       els.webmUnavailable.textContent = reason ? `Video export is unavailable: ${reason}` : "";
+      // Share lane: no video here, so Save a clip opens on GIF and the Video side is off.
+      const video = els.clipKind.querySelector("[data-clip=video]");
+      video.disabled = !!reason;
+      video.title = reason ? "Video export is unavailable in this browser" : "";
+      if (reason) showClip("gif");
     },
     setEmbed({ iframe, element, note }) {
       els.embedSnippet.value = iframe || "";
@@ -3618,6 +3765,8 @@ export function createUI(app) {
     isTyping(target) {
       if (!target || target === document.body) return false;
       const tag = target.tagName;
+      // Share lane: keys in an open dialog (the recording's preview, the QR code) stay there.
+      if (target.closest?.("dialog[open]")) return true;
       return tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA" || target.isContentEditable;
     },
   };

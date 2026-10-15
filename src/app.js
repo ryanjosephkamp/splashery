@@ -1340,6 +1340,8 @@ class App {
     addEventListener("keydown", (e) => {
       if (e.defaultPrevented) return;
       if (e.key === "Escape") {
+        // Share lane: an open dialog (the recording's preview) handles its own Escape.
+        if (e.target?.closest?.("dialog[open]")) return;
         this.ui.escape() || this.ui.collapseSheet();
         e.preventDefault();
         return;
@@ -1613,7 +1615,7 @@ class App {
     const res = await buildShareHash(this.exportScene());
     if (!res.ok) {
       this.ui.setLinkNote(res.notes.join(" "));
-      this.ui.toast("The scene is too big for a link. Save JSON instead.", 5000);
+      this.ui.toast("The scene is too big for a link. Save the scene as a file instead.", 5000);
       return;
     }
     const url = shareURL(res.hash);
@@ -1881,14 +1883,20 @@ class App {
   }
 
   // The phone's share sheet (Save Video on an iPhone); saving is the fallback.
+  // Share lane: true when the video was shared or saved, false when the person
+  // canceled the share sheet (the preview then still asks before discarding).
   async shareRecord() {
     const r = this.recorded;
-    const file = r && canShareFile(r.blob, r.name);
-    if (!file) return this.saveRecord();
+    if (!r) return false;
+    const file = canShareFile(r.blob, r.name);
+    if (!file) return (this.saveRecord(), true);
     try {
       await navigator.share({ files: [file], title: "Splashery" });
+      return true;
     } catch (err) {
-      if (err?.name !== "AbortError") this.saveRecord();
+      if (err?.name === "AbortError") return false;
+      this.saveRecord();
+      return true;
     }
   }
 
