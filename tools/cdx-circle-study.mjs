@@ -21,20 +21,24 @@ export const readDirect = (img) => ({
   zxing: readZxing(img),
 });
 
-const turn = (img) => {
+export const turn = (img) => {
   const data = new Uint8ClampedArray(img.data.length);
   for (let y = 0; y < img.height; y++)
     for (let x = 0; x < img.width; x++) {
       const i = (y * img.width + x) * 4;
-      data.set(img.data.subarray(i, i + 4), (x * img.height + img.height - 1 - y) * 4);
+      const o = (x * img.height + img.height - 1 - y) * 4;
+      data[o] = img.data[i];
+      data[o + 1] = img.data[i + 1];
+      data[o + 2] = img.data[i + 2];
+      data[o + 3] = img.data[i + 3];
     }
   return { width: img.height, height: img.width, data };
 };
 
 // Both readers detect the complete frame. Retry orientation and sampling
 // when detection fails; no cropping, finder coordinates, or known text hints.
-export function readBoth(img) {
-  const result = readDirect(img);
+export function readBoth(img, initial = readDirect(img)) {
+  const result = { ...initial };
   if (result.jsqr !== null && result.zxing !== null) return result;
   for (const scale of [1, 0.875, 1.125, 1.5]) {
     let frame = scale === 1 ? img : resize(img, Math.round(img.width * scale));
@@ -47,7 +51,7 @@ export function readBoth(img) {
         if (result.zxing === null) result.zxing = readZxing(frame);
         if (result.jsqr !== null && result.zxing !== null) return result;
       }
-      frame = turn(frame);
+      if (angle < 3) frame = turn(frame);
     }
   }
   return result;
