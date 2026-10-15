@@ -1,0 +1,2562 @@
+[
+  {
+    "id": "j-glass-source",
+    "category": "J",
+    "file": "j/j-glass-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-glass-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-glass-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-glass-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-glass-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-glass-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-glass-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-glass-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-glass-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-glass-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-glass-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-glass-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-glass-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-glass-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-glass-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-glass-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-glass-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "glass",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made glass source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the glass rim and wall coherent; avoid turning refracted background detail into foreground bumps."
+  },
+  {
+    "id": "j-mirror-source",
+    "category": "J",
+    "file": "j/j-mirror-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-mirror-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-mirror-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-mirror-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-mirror-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-mirror-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-mirror-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-mirror-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-mirror-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-mirror-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-mirror-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-mirror-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-mirror-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-mirror-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-mirror-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-mirror-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-mirror-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "mirror",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made mirror source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the mirror boundary coherent; reflected objects have virtual, ambiguous depth rather than an extra solid teapot."
+  },
+  {
+    "id": "j-hair-source",
+    "category": "J",
+    "file": "j/j-hair-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-hair-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-hair-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-hair-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-hair-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-hair-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-hair-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-hair-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-hair-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-hair-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-hair-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-hair-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-hair-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-hair-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-hair-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-hair-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-hair-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "hair",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made hair source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the lock above the cylinder and table, with fine silhouette strands rather than a solid curtain."
+  },
+  {
+    "id": "j-fur-source",
+    "category": "J",
+    "file": "j/j-fur-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-fur-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-fur-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-fur-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-fur-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-fur-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-fur-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-fur-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-fur-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-fur-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-fur-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-fur-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-fur-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-fur-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-fur-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-fur-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-fur-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "fur",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made fur source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve the textile volume above the cube, fine silhouette fibers, and the background ball."
+  },
+  {
+    "id": "j-thin-source",
+    "category": "J",
+    "file": "j/j-thin-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-thin-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-thin-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-thin-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-thin-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-thin-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-thin-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-thin-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-thin-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-thin-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-thin-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-thin-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-thin-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-thin-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-thin-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-thin-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-thin-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "thin",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made thin source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve separate cage wires and open gaps through to the cube and table behind."
+  },
+  {
+    "id": "j-night-source",
+    "category": "J",
+    "file": "j/j-night-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-night-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-night-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-night-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-night-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-night-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-night-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-night-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-night-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-night-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-night-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-night-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-night-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-night-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-night-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-night-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-night-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "night",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made night source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep lantern, pot, ball, and foliage ordered where visible; do not infer geometry from the glow alone."
+  },
+  {
+    "id": "j-painting-source",
+    "category": "J",
+    "file": "j/j-painting-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-painting-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-painting-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-painting-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-painting-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-painting-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-painting-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-painting-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-painting-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-painting-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-painting-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-painting-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-painting-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-painting-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-painting-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-painting-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-painting-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "painting",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made painting source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep its object ordering; the physical painted medium would instead be flat."
+  },
+  {
+    "id": "j-line-art-source",
+    "category": "J",
+    "file": "j/j-line-art-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-line-art-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-line-art-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-line-art-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-line-art-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-line-art-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-line-art-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-line-art-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-line-art-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-line-art-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-line-art-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-line-art-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-line-art-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-line-art-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-line-art-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-line-art-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-line-art-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "line-art",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made line-art source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "If reconstructing the depicted scene, keep occlusion ordering without treating crosshatching as ridges; the paper would be flat."
+  },
+  {
+    "id": "j-graphic-source",
+    "category": "J",
+    "file": "j/j-graphic-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-graphic-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-graphic-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-graphic-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-graphic-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-graphic-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-graphic-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-graphic-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-graphic-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-graphic-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-graphic-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-graphic-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-graphic-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-graphic-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-graphic-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-graphic-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-graphic-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "graphic",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made graphic source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Keep the graphic physically flat; any inferred object depth is an interpretation rather than a measured surface."
+  },
+  {
+    "id": "j-clutter-source",
+    "category": "J",
+    "file": "j/j-clutter-source.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "source",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Fixed AI-made source, normalized to 1280 px JPEG quality 0.78; not a sweep control. Compare the neutral variant with other variants to hold JPEG generation count fixed.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-m15-b00",
+    "category": "J",
+    "file": "j/j-clutter-ev-m15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": -1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-m10-b00",
+    "category": "J",
+    "file": "j/j-clutter-ev-m10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-m05-b00",
+    "category": "J",
+    "file": "j/j-clutter-ev-m05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": -0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p00-b00",
+    "category": "J",
+    "file": "j/j-clutter-ev-p00-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p05-b00",
+    "category": "J",
+    "file": "j/j-clutter-ev-p05-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 0.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p10-b00",
+    "category": "J",
+    "file": "j/j-clutter-ev-p10-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p15-b00",
+    "category": "J",
+    "file": "j/j-clutter-ev-p15-b00.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 1.5,
+      "blurSigmaPx": 0
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p00-b10",
+    "category": "J",
+    "file": "j/j-clutter-ev-p00-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p00-b20",
+    "category": "J",
+    "file": "j/j-clutter-ev-p00-b20.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 2
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p00-b30",
+    "category": "J",
+    "file": "j/j-clutter-ev-p00-b30.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 3
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p00-b40",
+    "category": "J",
+    "file": "j/j-clutter-ev-p00-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 0,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-m10-b10",
+    "category": "J",
+    "file": "j/j-clutter-ev-m10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-m10-b40",
+    "category": "J",
+    "file": "j/j-clutter-ev-m10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": -1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p10-b10",
+    "category": "J",
+    "file": "j/j-clutter-ev-p10-b10.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 1
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  },
+  {
+    "id": "j-clutter-ev-p10-b40",
+    "category": "J",
+    "file": "j/j-clutter-ev-p10-b40.jpg",
+    "width": 1280,
+    "height": 1280,
+    "seed": null,
+    "variables": {
+      "scene": "clutter",
+      "role": "variant",
+      "exposureStops": 1,
+      "blurSigmaPx": 4
+    },
+    "controls": "Same decoded AI-made clutter source, composition, geometry, crop, 1280 px size, JPEG quality 0.78, and JPEG generation count; exposure is fixed at 0 for the blur sweep, and blur is fixed at 0 for the exposure sweep. Grid varies both. Exposure precedes blur. See README for encoding limits.",
+    "expect": "Preserve distinct overlapping pots, tools, twine, and fern edges rather than merging their depth."
+  }
+]

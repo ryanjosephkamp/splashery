@@ -559,7 +559,7 @@ const PICTURE = {
   options: [
     { key: "text", label: "Text", type: "text", default: DEFAULT_TEXT, hidden: true },
     { key: "shape", label: "Shape", type: "select", default: "square", choices: shapeChoices },
-    { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
+    { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label, group: s.group })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
     { key: "contrast", label: "Contrast", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 }, // prettier-ignore
     { key: "center", label: "Center dot", type: "select", default: "small", choices: CENTERS.map((c) => ({ id: c.id, label: c.label })) }, // prettier-ignore
     { key: "level", label: "Error correction", type: "select", default: "H", choices: LEVELS.map((l) => ({ id: l, label: { L: "L: 7% can be lost", M: "M: 15%", Q: "Q: 25%", H: "H: 30%" }[l] })) }, // prettier-ignore
