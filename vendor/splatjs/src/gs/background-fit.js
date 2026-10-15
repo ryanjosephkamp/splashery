@@ -97,3 +97,35 @@ export function backgroundFitSse(moments, rgb) {
   if (sse < -32 * Number.EPSILON * magnitude) throw new Error('Inconsistent background-fit SSE');
   return Math.max(0, sse);
 }
+
+
+// Keep the fitted color direction, reducing its magnitude only when the full fit
+// regresses an internal validation camera. Validation targets select magnitude;
+// benchmark-held-out evaluation frames never enter this rule.
+export function constrainBackgroundFit(rgb, validation) {
+  checkColor(rgb);
+  if (!Array.isArray(validation) || !validation.length)
+    throw new Error('Background color constraint requires validation moments');
+  for (const moments of validation) checkMoments(moments);
+  if (validation.some(m => !m.pixels)) return null;
+  if (validation.every(m => backgroundFitSse(m, rgb) <= m.baseSse))
+    return { rgb: Array.from(rgb), scale: 1 };
+  const norm2 = Array.from(rgb).reduce((s, v) => s + v * v, 0);
+  let scale = 1;
+  for (const moments of validation) {
+    const quadratic = moments.denominator * norm2;
+    const linear = -2 * Array.from(rgb).reduce((s, v, c) => s + v * moments.numerator[c], 0);
+    if (quadratic === 0) {
+      if (linear > 0) return null;
+      continue;
+    }
+    const upper = -linear / quadratic;
+    if (!(upper > 0)) return null;
+    // Stay inside the nonregressing interval rather than on a cancellation boundary.
+    if (upper < 1) scale = Math.min(scale, upper * 0.99);
+  }
+  if (!(scale > 0 && scale < 1)) return null;
+  const bounded = Array.from(rgb, v => v * scale);
+  if (validation.some(m => backgroundFitSse(m, bounded) > m.baseSse)) return null;
+  return { rgb: bounded, scale };
+}

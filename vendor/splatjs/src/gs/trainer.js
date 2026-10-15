@@ -8,7 +8,7 @@ import {
 } from './shaders.js';
 import { rodrigues, m3mul, makeRng } from '../sfm/geometry.js';
 import { createGpu } from '../gpu/context.js';
-import { backgroundFitMoments, accumulateBackgroundFit, solveBackgroundFit, backgroundFitSse } from './background-fit.js';
+import { backgroundFitMoments, accumulateBackgroundFit, solveBackgroundFit, backgroundFitSse, constrainBackgroundFit } from './background-fit.js';
 
 export class GSTrainer {
   /** opts.gpu: a GpuContext from createGpu() — share ONE device between the
@@ -1513,7 +1513,8 @@ export class GSTrainer {
 
   /** Fit only three constant environment-color parameters to the completed model.
    *  Uses the actual packed, undistorted training targets, including on lowMem sessions.
-   *  No splat/optimizer parameter changes; validation cameras never enter the fit. */
+   *  No splat/optimizer parameter changes; validation cameras do not set the color direction.
+   *  Optional shrinkage constrains its magnitude to the same per-camera error guard. */
   async fitBackground({ validationCams = [], signal, isCurrent = () => !this._disposed } = {}) {
     if (this.opts.fitBackground !== true) throw new Error('Background fitting was not enabled at setup');
     if (this.ssaa >= 2) return { accepted: false, reason: 'supersampled-render' };
@@ -1578,15 +1579,38 @@ export class GSTrainer {
       baseMse: pooled.baseSse / Math.max(1, pooled.pixels * 3),
       fittedMse: fittedSse / Math.max(1, pooled.pixels * 3), validation: checks };
     if (improvement < 0.01) return result;
+    const validationMoments = [];
+    let regressed = false;
     for (const ci of validation) {
       const moments = backgroundFitMoments();
       await readCamera(ci, moments);
+      validationMoments.push(moments);
       const sse = backgroundFitSse(moments, rgb);
       checks.push({ ci, pixels: moments.pixels,
         baseMse: moments.baseSse / Math.max(1, moments.pixels * 3),
         fittedMse: sse / Math.max(1, moments.pixels * 3) });
       if (!moments.pixels || sse > moments.baseSse) {
         result.reason = 'validation-regression';
+        regressed = true;
+        if (this.opts.backgroundFitShrink !== true) return result;
+      }
+    }
+    if (regressed) {
+      const bounded = constrainBackgroundFit(rgb, validationMoments);
+      if (!bounded) return result;
+      const sse = backgroundFitSse(pooled, bounded.rgb);
+      result.proposedRgb = rgb;
+      result.rgb = bounded.rgb;
+      result.validationScale = bounded.scale;
+      result.improvement = pooled.baseSse > 0 ? 1 - sse / pooled.baseSse : 0;
+      result.fittedMse = sse / Math.max(1, pooled.pixels * 3);
+      result.validation = validationMoments.map((moments, i) => ({
+        ci: validation[i], pixels: moments.pixels,
+        baseMse: moments.baseSse / Math.max(1, moments.pixels * 3),
+        fittedMse: backgroundFitSse(moments, bounded.rgb) / Math.max(1, moments.pixels * 3),
+      }));
+      if (result.improvement < 0.01) {
+        result.reason = 'insufficient-training-gain';
         return result;
       }
     }
