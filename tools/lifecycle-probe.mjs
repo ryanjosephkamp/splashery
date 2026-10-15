@@ -12,6 +12,8 @@ export const launchArgs = [
   "--enable-unsafe-swiftshader",
   "--ignore-gpu-blocklist",
   "--enable-webgl",
+  "--use-fake-device-for-media-stream",
+  "--use-fake-ui-for-media-stream",
 ];
 
 // Keep only pending handles, never callbacks or detached elements. Counts therefore do not
@@ -489,7 +491,40 @@ async function timers(page, cdp) {
     await page.waitForTimeout(id === "qr-code" ? 10500 : 15500);
     retries.push({ id, checkpoints, hidden, expired: await snapshot(page) });
   }
-  return { toys, helpers, helperHidden, helperClosed: await snapshot(page), recording, retries };
+  const activeLive = await livePanel(page, cdp);
+  return {
+    toys,
+    helpers,
+    helperHidden,
+    helperClosed: await snapshot(page),
+    recording,
+    retries,
+    activeLive,
+  };
+}
+
+async function livePanel(page, cdp) {
+  await choose(page, "sound-lab");
+  await page.locator("#live-mic").dispatchEvent("click");
+  await page.waitForFunction(
+    () => document.getElementById("live-mic")?.getAttribute("aria-pressed") === "true",
+  );
+  await settle(page);
+  const before = await heap(cdp);
+  const hidden = await hiddenSample(page);
+  await page.locator("#live-mic").dispatchEvent("click");
+  await page.waitForFunction(
+    () => document.getElementById("live-mic")?.getAttribute("aria-pressed") === "false",
+  );
+  await choose(page, "basketball");
+  await settle(page);
+  return {
+    source: "Chromium fake microphone; no real device",
+    before,
+    hidden,
+    closed: await snapshot(page),
+    after: await heap(cdp),
+  };
 }
 
 async function sliders(browser, base) {
@@ -563,7 +598,7 @@ export async function runProbe({
         else {
           const { context, page, cdp } = await openProbePage(browser, base);
           try {
-            row[name] = await { clay, video, timers }[name](page, cdp);
+            row[name] = await { clay, video, timers, live: livePanel }[name](page, cdp);
           } finally {
             await context.close();
           }
