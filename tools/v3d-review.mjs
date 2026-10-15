@@ -459,7 +459,7 @@ function smallPoster(video, file) {
   throw new Error("Review poster exceeds the 1 MB image limit.");
 }
 
-async function captureAt(page, time, width, height) {
+export async function captureAt(page, time, width, height) {
   // Two contexts remain open for paired views. Keep the requested page foregrounded so
   // waiting for settled rendered frames does not inherit hidden-page rAF throttling.
   await page.bringToFront();
@@ -479,7 +479,7 @@ async function captureAt(page, time, width, height) {
   return Buffer.from(data.split(",")[1], "base64");
 }
 
-async function replayPage(browser, version, clip, profile) {
+export async function replayPage(browser, version, clip, profile) {
   const phone = profile === "phone";
   const context = await browser.newContext({
     viewport: phone ? { width: 390, height: 844 } : { width: 1440, height: 900 },

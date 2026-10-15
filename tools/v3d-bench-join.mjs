@@ -6,7 +6,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { createHash } from "node:crypto";
 import { pathToFileURL } from "node:url";
-import { verifyArtifacts } from "./v3d-bench.mjs";
+import { assertReferenceEvidence, verifyArtifacts } from "./v3d-bench.mjs";
 import { accountedOutcome, benchmarkCohort, fingerprint, rowKey } from "./v3d-bench-metrics.mjs";
 
 const hash = (bytes) => createHash("sha256").update(bytes).digest("hex");
@@ -91,7 +91,7 @@ function validateCase(directory, row) {
       check(path.join(folder, `${kind}-${index}.png`), frame[`${kind}Sha256`]);
 }
 
-function validateRun(directory, runBytes, cohort, manifestSha256, clips) {
+function validateRun(directory, runBytes, cohort, manifestSha256, clips, reference) {
   const run = JSON.parse(runBytes);
   if (
     !run.provenance ||
@@ -105,8 +105,18 @@ function validateRun(directory, runBytes, cohort, manifestSha256, clips) {
       fingerprint(clips.map(({ id, sha256, duration, file }) => ({ id, sha256, duration, file })))
   )
     throw new Error(`Invalid cohort, manifest, or provenance: ${directory}.`);
-  if (run.provenance.reference !== null || run.reference !== null)
-    throw new Error("Only baseline runs without candidate references can be joined.");
+  if (reference) {
+    const baseline = reference.run;
+    if (
+      run.provenance.reference?.provenanceSha256 !== baseline.provenanceSha256 ||
+      fingerprint(run.reference) !== fingerprint(run.provenance.reference) ||
+      run.provenance.protocolSha256 !== baseline.provenance.protocolSha256 ||
+      fingerprint(run.provenance.environment) !== fingerprint(baseline.provenance.environment) ||
+      fingerprint(run.provenance.options) !== fingerprint(baseline.provenance.options)
+    )
+      throw new Error("Candidate reference, protocol, browser, or options differ from the baseline.");
+  } else if (run.provenance.reference !== null || run.reference !== null)
+    throw new Error("Only baseline runs without candidate references can be joined; candidates require --reference."); // prettier-ignore
   const served = run.provenance.servedSource;
   if (
     !served?.files?.length ||
@@ -142,13 +152,15 @@ function validateRun(directory, runBytes, cohort, manifestSha256, clips) {
     )
       throw new Error(`Invalid or duplicate result row: ${key}.`);
     seen.add(key);
+    if (reference)
+      assertReferenceEvidence(reference.directory, reference.run, row, reference.run.provenanceSha256); // prettier-ignore
   }
   return run;
 }
 
-function sourceSnapshot(directory, cohort, manifestSha256, clips) {
+function sourceSnapshot(directory, cohort, manifestSha256, clips, reference) {
   const runBytes = fs.readFileSync(path.join(directory, "run.json")),
-    run = validateRun(directory, runBytes, cohort, manifestSha256, clips),
+    run = validateRun(directory, runBytes, cohort, manifestSha256, clips, reference),
     files = [{ path: "run.json", type: "file", bytes: runBytes.length, sha256: hash(runBytes) }];
   for (const row of run.results) {
     validateCase(directory, row);
@@ -165,13 +177,14 @@ function sourceSnapshot(directory, cohort, manifestSha256, clips) {
   return { directory, run, runBytes, runSha256: hash(runBytes), files };
 }
 
-function assertSourceUnchanged(snapshot, cohort, manifestSha256, clips) {
+function assertSourceUnchanged(snapshot, cohort, manifestSha256, clips, reference) {
   const current = validateRun(
     snapshot.directory,
     fs.readFileSync(path.join(snapshot.directory, "run.json")),
     cohort,
     manifestSha256,
     clips,
+    reference,
   );
   if (current.provenanceSha256 !== snapshot.run.provenanceSha256)
     throw new Error(`Source provenance changed during the join: ${snapshot.directory}.`);
@@ -189,19 +202,21 @@ function assertSourceUnchanged(snapshot, cohort, manifestSha256, clips) {
   }
 }
 
-export function joinRuns({ manifest, output, inputs }) {
+export function joinRuns({ manifest, output, inputs, reference = null }) {
   if (!Array.isArray(inputs) || inputs.length < 2)
     throw new Error("Provide at least two source run directories.");
   const destination = prospectivePath(output),
-    sources = inputs.map((input) => fs.realpathSync(input));
+    sources = inputs.map((input) => fs.realpathSync(input)),
+    referenceDirectory = reference ? fs.realpathSync(reference) : null,
+    allInputs = [...sources, ...(referenceDirectory ? [referenceDirectory] : [])];
   if (fs.existsSync(destination))
     throw new Error("Join destination must be fresh and nonexistent.");
   if (inProductCheckout(destination))
     throw new Error("Keep joined media outside product checkouts.");
-  for (const [index, source] of sources.entries()) {
+  for (const [index, source] of allInputs.entries()) {
     if (inside(destination, source) || inside(source, destination))
       throw new Error("Source and destination directories must not overlap.");
-    if (sources.slice(0, index).some((other) => inside(source, other) || inside(other, source)))
+    if (allInputs.slice(0, index).some((other) => inside(source, other) || inside(other, source)))
       throw new Error("Source directories must be distinct and must not overlap.");
   }
   const manifestBytes = fs.readFileSync(manifest),
@@ -214,8 +229,11 @@ export function joinRuns({ manifest, output, inputs }) {
   )
     throw new Error("Invalid manifest input IDs.");
   const cohort = benchmarkCohort(clips),
+    baseline = referenceDirectory
+      ? sourceSnapshot(referenceDirectory, cohort, manifestSha256, clips)
+      : null,
     snapshots = sources.map((directory) =>
-      sourceSnapshot(directory, cohort, manifestSha256, clips),
+      sourceSnapshot(directory, cohort, manifestSha256, clips, baseline),
     );
   const base = snapshots[0].run,
     rows = new Map();
@@ -254,7 +272,7 @@ export function joinRuns({ manifest, output, inputs }) {
   coverage.allOutcomesAccounted = !coverage.pending.length && !coverage.unaccounted.length;
   const parent = path.dirname(destination);
   fs.mkdirSync(parent, { recursive: true });
-  const sourceBytes = snapshots.reduce(
+  const sourceBytes = [...snapshots, ...(baseline ? [baseline] : [])].reduce(
     (total, snapshot) =>
       total + snapshot.files.reduce((bytes, file) => bytes + (file.bytes || 0), 0),
     0,
@@ -273,6 +291,18 @@ export function joinRuns({ manifest, output, inputs }) {
       mode: fs.constants.COPYFILE_FICLONE,
     });
   try {
+    if (baseline) {
+      const target = path.join(staging, "join-reference");
+      fs.mkdirSync(target);
+      fs.writeFileSync(path.join(target, "run.json"), baseline.runBytes, { flag: "wx" });
+      for (const row of baseline.run.results) {
+        const folder = `${row.id}-${row.profile}`;
+        copy(path.join(baseline.directory, folder), path.join(target, folder));
+      }
+      if (fingerprint(inventory(target)) !== fingerprint(baseline.files))
+        throw new Error("Copied baseline reference inventory differs.");
+      for (const row of baseline.run.results) validateCase(target, row);
+    }
     for (const [index, snapshot] of snapshots.entries()) {
       snapshot.copy = `join-inputs/${String(index + 1).padStart(3, "0")}`;
       const target = path.join(staging, snapshot.copy);
@@ -303,7 +333,7 @@ export function joinRuns({ manifest, output, inputs }) {
     fs.writeFileSync(path.join(staging, "run.json"), runBytes, { flag: "wx" });
     fs.writeFileSync(path.join(staging, "manifest.json"), manifestBytes, { flag: "wx" });
     const receipt = {
-      version: 1,
+      version: baseline ? 2 : 1,
       created: run.created,
       toolSha256: hash(fs.readFileSync(import.meta.filename)),
       manifestSha256,
@@ -311,6 +341,17 @@ export function joinRuns({ manifest, output, inputs }) {
       provenanceSha256: base.provenanceSha256,
       runSha256: hash(runBytes),
       coverage,
+      ...(baseline
+        ? {
+            reference: {
+              directory: baseline.directory,
+              snapshot: "join-reference",
+              runSha256: baseline.runSha256,
+              provenanceSha256: baseline.run.provenanceSha256,
+              inventory: baseline.files,
+            },
+          }
+        : {}),
       sources: snapshots.map((snapshot) => ({
         directory: snapshot.directory,
         snapshot: snapshot.copy,
@@ -330,7 +371,8 @@ export function joinRuns({ manifest, output, inputs }) {
     // Permit appends without changing this captured selection. Every captured row and artifact
     // must remain immutable, including files outside the benchmark's scored/hash-bound subset.
     for (const snapshot of snapshots)
-      assertSourceUnchanged(snapshot, cohort, manifestSha256, clips);
+      assertSourceUnchanged(snapshot, cohort, manifestSha256, clips, baseline);
+    if (baseline) assertSourceUnchanged(baseline, cohort, manifestSha256, clips);
     if (hash(fs.readFileSync(manifest)) !== manifestSha256)
       throw new Error("Manifest changed during the join.");
     if (fs.existsSync(destination)) throw new Error("Join destination appeared during copying.");
@@ -353,17 +395,14 @@ export function joinRuns({ manifest, output, inputs }) {
 }
 
 export function main(argv = process.argv.slice(2)) {
-  const [manifest, output, ...inputs] = argv;
-  if (
-    !manifest ||
-    !output ||
-    inputs.length < 2 ||
-    argv.some((argument) => argument.startsWith("--"))
-  )
+  const options = argv.filter((argument) => argument.startsWith("--")),
+    reference = options.find((argument) => argument.startsWith("--reference="))?.slice(12),
+    [manifest, output, ...inputs] = argv.filter((argument) => !argument.startsWith("--"));
+  if (!manifest || !output || inputs.length < 2 || options.length > (reference ? 1 : 0))
     throw new Error(
-      "Usage: node tools/v3d-bench-join.mjs <manifest.json> <fresh-output> <run-directory> <run-directory> [...]",
+      "Usage: node tools/v3d-bench-join.mjs <manifest.json> <fresh-output> <run-directory> <run-directory> [...] [--reference=<baseline>]",
     );
-  const joined = joinRuns({ manifest, output, inputs });
+  const joined = joinRuns({ manifest, output, inputs, reference });
   console.log(JSON.stringify({ output: joined.output, ...joined.receipt.coverage }));
 }
 

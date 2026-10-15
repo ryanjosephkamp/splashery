@@ -123,14 +123,19 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
   let cleanup;
   const presented = new Promise((resolve, reject) => {
     let callback;
+    let recovery;
+    let advanced = false;
     let done = false;
     const finish = (error, mediaTime) => {
       if (done) return;
       done = true;
       clearTimeout(timer);
+      clearTimeout(recovery);
       signal?.removeEventListener("abort", abort);
       video.removeEventListener("seeking", arm);
+      video.removeEventListener("seeked", recover);
       if (callback !== undefined) video.cancelVideoFrameCallback(callback);
+      if (advanced) video.pause();
       error ? reject(error) : resolve(mediaTime);
     };
     const abort = () => finish(new DOMException("Stopped", "AbortError"));
@@ -144,8 +149,35 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
     const arm = () => {
       callback = video.requestVideoFrameCallback((_, metadata) => finish(null, metadata.mediaTime));
     };
+    // A paused seek can remain inside the already-presented frame. Chromium then sends seeked
+    // without another presentation callback. Briefly advancing the muted local video requests a
+    // real new picture; pause inside its callback and keep that picture's actual mediaTime.
+    // Never infer a timestamp from currentTime or from identical image content.
+    const recover = () => {
+      if (done || !video.paused || typeof video.play !== "function") return;
+      clearTimeout(recovery);
+      recovery = setTimeout(() => {
+        if (done) return;
+        advanced = true;
+        let playback;
+        try {
+          playback = video.play();
+        } catch {
+          return; // Keep the original deadline if this browser refuses playback synchronously.
+        }
+        Promise.resolve(playback).then(
+          () => {
+            if (done) video.pause();
+          },
+          () => {
+            /* The original presentation deadline still supplies retry advice. */
+          },
+        );
+      }, 100);
+    };
     cleanup = finish;
     video.addEventListener("seeking", arm, { once: true });
+    video.addEventListener("seeked", recover);
     signal?.addEventListener("abort", abort, { once: true });
     if (signal?.aborted) abort();
   });

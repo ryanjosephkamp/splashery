@@ -1,5 +1,5 @@
 // A fast local estimate, not a camera solve or a guarantee. No model, trainer, or network.
-import { openVideo, closeVideo, seekPresented } from "./extract.js";
+import { openVideo, closeVideo, seek } from "./extract.js";
 import { fitSide, sharpness } from "./frames.js";
 
 const median = (a) => a.slice().sort((x, y) => x - y)[Math.floor(a.length / 2)] || 0;
@@ -212,7 +212,10 @@ export async function checkVideo(file, { start = 0, length = 10, signal } = {}) 
     const delta = Math.min(0.25, span * 0.025);
     for (const [group, fraction] of fractions.entries()) {
       for (const offset of [-delta, 0, delta]) {
-        await seekPresented(opened.video, from + span * fraction + offset, {
+        // This quick survey retains the seeked-frame sampling its feedback thresholds were
+        // calibrated on. Exact presentation timestamps are required by training extraction;
+        // waiting for compositor callbacks here can exhaust the survey's 4.5-second budget.
+        await seek(opened.video, from + span * fraction + offset, {
           signal: ctrl.signal,
           timeoutMs: 1000,
         });

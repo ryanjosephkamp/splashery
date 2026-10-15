@@ -121,6 +121,7 @@ export async function videoTo3D(file, opts = {}) {
   };
   const gpu = await webgpuStatus();
   if (!gpu.ok) throw new Error(`${gpu.reason} Video to 3D trains on the graphics card through WebGPU: try a current Chrome, Edge, Safari or Firefox.`); // prettier-ignore
+  const software = /swiftshader|llvmpipe|lavapipe|software/i.test(gpu.adapter);
 
   // 1. Frames.
   const opened = await openVideo(file, { signal: opts.signal });
@@ -164,12 +165,16 @@ export async function videoTo3D(file, opts = {}) {
     maxViewW: Math.max(set.trainSide, opts.preview?.width || 0),
     maxViewH: Math.max(set.trainSide, opts.preview?.height || 0),
     lowMem: gentle || tier === "low" || tier === "mid",
-    // A phone trains a few steps a frame, so each frame stays short and the page stays responsive.
-    ...(gentle ? { itersPerFrame: 2, fenceRing: 2 } : {}),
+    // Software adapters also need bounded submissions: a desktop-sized adaptive batch can
+    // queue minutes of work before the main thread gets a chance to explain a deadline.
+    // Keep the native image sizes, iteration budgets, and optimizer unchanged.
+    ...(gentle || software ? { itersPerFrame: 2, fenceRing: software ? 1 : 2 } : {}),
     initTarget: seedTarget,
     evalHoldEvery: 1e9,
-    sfm: gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}, // prettier-ignore
-    trainer: { shDeg: 0, maxSplats: set.splats, growUntil },
+    sfm: { uiYield: true, ...(gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}) }, // prettier-ignore
+    // Both sorts use the same unsigned depth/id order. A software adapter avoids emulating
+    // the parallel bitonic network's barriers; hardware keeps the established parallel path.
+    trainer: { shDeg: 0, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true } : {}) }, // prettier-ignore
     frames: { trainMaxDim: set.trainSide, featMaxDim: set.featSide },
   });
   const stop = () => {
@@ -372,6 +377,19 @@ export async function videoTo3D(file, opts = {}) {
       R: Array.from(c.R),
       t: Array.from(c.t),
     }));
+    // These wall-time counters already exist in the session. Retain their summary with a
+    // custom bake so a slow run can be diagnosed without adding profiling GPU dispatches.
+    const batches = s.perf?.frames || [],
+      sumBatch = (index) => Math.round(batches.reduce((sum, row) => sum + row[index], 0)),
+      trainingLoop = {
+        batches: batches.length,
+        submittedSteps: sumBatch(2),
+        encodeMs: sumBatch(4),
+        viewSubmitMs: sumBatch(5),
+        fenceWaitMs: sumBatch(6),
+        metricsWaitMs: sumBatch(7),
+        batchWallMs: sumBatch(8),
+      };
     return {
       ply,
       cams,
@@ -396,6 +414,8 @@ export async function videoTo3D(file, opts = {}) {
         retried,
         timedOut,
         timeLimitMinutes,
+        softwareSort: !!s.trainer.serialSort,
+        trainingLoop,
         stoppedEarly: !!opts.signal?.aborted || timedOut,
         start: plan.start,
         end: plan.end,

@@ -147,6 +147,117 @@ function allBytes(directory, relative = "") {
   });
 }
 
+function candidateFixture() {
+  const f = fixture({ partial: true }),
+    baseline = f.join(),
+    candidates = [f.phone, f.desktop].map((source, index) => {
+      const target = path.join(f.root, `candidate-${index}`);
+      fs.cpSync(source, target, { recursive: true });
+      rewriteRun(
+        target,
+        (run) => {
+          run.url = run.provenance.url = "http://127.0.0.1:4176/";
+          run.reference = run.provenance.reference = {
+            path: f.output,
+            provenanceSha256: baseline.run.provenanceSha256,
+          };
+          for (const row of run.results)
+            row.referenceEvidence = referenceEvidence(f.output, baseline.run, row.id, row.profile);
+        },
+        { resign: true },
+      );
+      return target;
+    });
+  return {
+    ...f,
+    baseline,
+    candidates,
+    joinCandidate: (overrides = {}) =>
+      joinRuns({
+        manifest: f.manifest,
+        output: path.join(f.root, "candidate-joined"),
+        inputs: candidates,
+        reference: f.output,
+        ...overrides,
+      }),
+  };
+}
+
+test("candidate shards require an explicit baseline and preserve every reference byte", () => {
+  const f = candidateFixture();
+  try {
+    expect(() => f.joinCandidate({ reference: null })).toThrow(/Only baseline/);
+    const joined = f.joinCandidate();
+    expect(joined.run.results).toHaveLength(2);
+    expect(joined.receipt.coverage.allOutcomesAccounted).toBe(false);
+    expect(joined.receipt.coverage.pending).toEqual(["b/phone", "b/desktop"]);
+    expect(joined.receipt.reference.provenanceSha256).toBe(f.baseline.run.provenanceSha256);
+    for (const source of f.candidates) {
+      const run = readJson(path.join(source, "run.json"));
+      expect(joined.run.provenanceSha256).toBe(run.provenanceSha256);
+      for (const row of run.results) {
+        expect(joined.run.results.find((value) => rowKey(value) === rowKey(row))).toEqual(row);
+        expect(
+          assertReferenceEvidence(
+            path.join(joined.output, "join-reference"),
+            f.baseline.run,
+            row,
+            f.baseline.run.provenanceSha256,
+          ),
+        ).toEqual(row.referenceEvidence);
+      }
+    }
+    for (const [file, bytes] of allBytes(f.output)) {
+      // The joined baseline's own manifest and join receipt are metadata outside its captured
+      // run/case inventory; the captured run and each case must remain byte-exact.
+      if (file === "run.json" || /^[ab]-(phone|desktop)\//.test(file))
+        expect(fs.readFileSync(path.join(joined.output, "join-reference", file))).toEqual(bytes);
+    }
+  } finally {
+    f.dispose();
+  }
+});
+
+test("a re-signed candidate cannot substitute reference evidence, browser, options, or protocol", () => {
+  const mutations = [
+    (run) => {
+      run.results[0].referenceEvidence.resultFingerprint = hash("another row");
+    },
+    (run) => {
+      run.provenance.reference.provenanceSha256 = hash("another baseline");
+    },
+    (run) => {
+      run.provenance.environment.browserVersion = "another browser";
+    },
+    (run) => {
+      run.provenance.options.timeout = 999;
+    },
+    (run) => {
+      run.provenance.protocolSha256 = hash("another protocol");
+    },
+  ];
+  for (const mutate of mutations) {
+    const f = candidateFixture();
+    try {
+      rewriteRun(f.candidates[0], mutate, { resign: true });
+      expect(() => f.joinCandidate()).toThrow(/reference|baseline/i);
+    } finally {
+      f.dispose();
+    }
+  }
+});
+
+test("candidate joins reject a changed baseline artifact and any overlapping reference path", () => {
+  const f = candidateFixture();
+  try {
+    expect(() => f.joinCandidate({ output: path.join(f.output, "nested") })).toThrow(/overlap/);
+    fs.writeFileSync(path.join(f.output, "a-phone", "render-0.png"), "changed");
+    expect(() => f.joinCandidate()).toThrow(/artifact|render|changed/i);
+  } finally {
+    f.dispose();
+  }
+});
+
 test("joining preserves raw case bytes, source runs, failure rows, and existing reference bindings", () => {
   const f = fixture();
   try {
