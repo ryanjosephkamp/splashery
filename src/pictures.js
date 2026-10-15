@@ -254,18 +254,20 @@ export class Pictures {
       // visitor the address and opens it only if they say so: true when the
       // address may open at all (http:, https: or mailto:).
       links: (n = this.page) => self.pageList("links", n),
-      figures: (n = this.page) => self.pageList("figures", n),
+      // (Lane Polish: figures(n, { drawn: true }) also finds figures drawn
+      // as paths, a chart or a diagram.)
+      figures: (n = this.page, opts) => self.pageList("figures", n, opts),
       crop: (n, box, size = 512) => self.crop(n, box, size),
       openLink: (url) => self.openLink(url),
     };
   }
 
   // A PDF page's links or picture boxes (lane Books r5).
-  pageList(what, n) {
+  pageList(what, n, opts) {
     const m = this.media;
     const i = Math.round(n);
     if (!m?.[what] || !(i >= 0 && i < m.count)) return Promise.resolve([]);
-    return m[what](i).catch(() => []);
+    return m[what](i, opts).catch(() => []);
   }
 
   async crop(n, box, size) {
