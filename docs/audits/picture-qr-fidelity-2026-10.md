@@ -582,4 +582,10 @@ camera/lighting combinations. The complete initial capture plus every potentiall
 provides the final code evidence; source and geometry controls separately protect the default and
 old saved-scene behavior.
 
+GitHub email privacy blocked the original commit graph from publication. Its local history is
+preserved. The public branch copies the same final implementation with a public noreply identity;
+the measured source revisions are retained as
+[source-only archives](../../tools/picture-qr-fidelity/results/revision-sources/manifest.json).
+Per-run hashes and the documented historical limits remain authoritative.
+
 Rule check: none.
