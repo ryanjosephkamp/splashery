@@ -236,7 +236,7 @@ export function progressCard() {
       const how = [
         st.retried ? "The first try found no match; looser matching worked." : "",
         st.timedOut
-          ? "Training stopped at the phone's time limit, with what it had."
+          ? `Training stopped at the ${st.timeLimitMinutes ?? 8}-minute time limit, with what it had.`
           : st.stoppedEarly
             ? "Training was stopped early, with what it had."
             : "",

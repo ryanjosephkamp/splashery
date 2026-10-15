@@ -8,6 +8,8 @@
 
 import { planFrames, tierSettings } from "./frames.js";
 import { openVideo, grabFrames, closeVideo } from "./extract.js";
+import { runWithDeadline } from "./deadline.js";
+import { surfaceSeed } from "./surface-seed.js";
 
 const SPLATJS = "../../vendor/splatjs/src/session.js";
 
@@ -89,6 +91,16 @@ const STAGE_OF = {
   train: "train",
 };
 
+// Both the first refinement and its cadence must fit the run. A phone used to finish at
+// 1,200 steps before the trainer's default first refinement at 1,500, so it never grew detail.
+export function refinementSchedule(iters) {
+  return {
+    refineStart: Math.min(1500, Math.max(1, Math.round(iters * 0.1))),
+    refineEvery: Math.max(100, Math.min(2500, Math.round(iters / 30))),
+    growUntil: Math.round(iters * 0.8),
+  };
+}
+
 // file: the video. opts: { start, length, rate, tier, onProgress(e), signal, preview (canvas) }.
 // onProgress gets { stage, done, total, note } with stage one of frames, decode, path, seed,
 // train, export.
@@ -97,6 +109,7 @@ export async function videoTo3D(file, opts = {}) {
   const gentle = tier === "phone";
   // opts.settings overrides the tier's (tools/v3d-sample.mjs trains the samples with it).
   const set = { ...tierSettings(tier), ...(opts.settings || {}) };
+  const timeLimitMinutes = set.maxMinutes ?? 15;
   const progress = (e) => opts.onProgress?.(e);
   const timings = {};
   const t0 = performance.now();
@@ -137,20 +150,26 @@ export async function videoTo3D(file, opts = {}) {
   progress({ stage: "load", done: 0, total: 1, note: "Loading the splat trainer…" });
   if (!splatjs) splatjs = await import(SPLATJS);
   // Splat.js's refine schedule (grow splats where the picture is wrong, move the dead ones) is
-  // set for runs of tens of thousands of steps: its first refine comes at step 2,500, after growth
-  // has stopped in any shorter run, so a few thousand steps kept the seed's splats and stayed
-  // soft. Here it scales with the run: a refine every 1/30 of it, growth until 80% of it.
-  const refineEvery = Math.max(100, Math.min(2500, Math.round(set.iters / 30)));
+  // set for runs of tens of thousands of steps: its first refine starts after step 1,500.
+  // Here the first threshold and cadence scale with the run, with growth until 80% of it.
+  // A very slow device may reach the wall-time limit before reaching the first threshold.
+  const { refineStart, refineEvery, growUntil } = refinementSchedule(set.iters);
+  const seedTarget = set.seed || Math.min(60000, Math.round(set.splats / 3));
   const s = splatjs.createSession({
     maxIters: set.iters,
+    refineStart,
     refineEvery,
+    // The only live view is the small progress preview. Reserving a 2,560 × 1,440 render
+    // target on every phone wastes memory; the session also fits every training camera.
+    maxViewW: Math.max(set.trainSide, opts.preview?.width || 0),
+    maxViewH: Math.max(set.trainSide, opts.preview?.height || 0),
     lowMem: gentle || tier === "low" || tier === "mid",
     // A phone trains a few steps a frame, so each frame stays short and the page stays responsive.
-    ...(gentle ? { itersPerFrame: 2 } : {}),
-    initTarget: set.seed || Math.min(60000, Math.round(set.splats / 3)),
+    ...(gentle ? { itersPerFrame: 2, fenceRing: 2 } : {}),
+    initTarget: seedTarget,
     evalHoldEvery: 1e9,
     sfm: gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}, // prettier-ignore
-    trainer: { shDeg: 0, maxSplats: set.splats, growUntil: Math.round(set.iters * 0.8), growFrac: 0.25 }, // prettier-ignore
+    trainer: { shDeg: 0, maxSplats: set.splats, growUntil },
     frames: { trainMaxDim: set.trainSide, featMaxDim: set.featSide },
   });
   const stop = () => {
@@ -166,13 +185,19 @@ export async function videoTo3D(file, opts = {}) {
   const files = picks.map((p, i) => new File([p.blob], `frame_${String(i).padStart(3, "0")}.jpg`, { type: "image/jpeg" })); // prettier-ignore
   const timeOf = new Map(files.map((f, i) => [f.name, picks[i].time]));
   try {
-    await s.load(files);
+    await runWithDeadline(() => s.load(files), {
+      signal: opts.signal,
+      timeoutMs: 60000,
+      message:
+        "This device could not decode the training pictures in time. Try a shorter MP4 (H.264) clip.",
+    });
     mark("decode");
     if (opts.signal?.aborted) throw new DOMException("Stopped", "AbortError");
     // The camera path, and once more with looser matching if that fails (r7).
-    const solveOnce = async (extra) => {
+    const solveOnce = async (extra, signal) => {
       try {
-        const r = await s.solve({ signal: opts.signal, ...extra });
+        if (signal.aborted) throw new DOMException("Stopped", "AbortError");
+        const r = await s.solve({ signal, ...extra });
         if (r?.cams?.length >= 3) return { recon: r };
         return { error: `only ${r?.cams?.length ?? 0} cameras placed (too few frames matched)` };
       } catch (e) {
@@ -180,44 +205,79 @@ export async function videoTo3D(file, opts = {}) {
         return { error: e?.message || String(e) };
       }
     };
-    let solved = await solveOnce({});
-    let retried = false;
-    if (solved.error) {
-      // Splat.js says why in its own words (kept in the log); the card says what to try.
-      log.push(`solve failed: ${solved.error}; trying again with looser matching`);
-      progress({ stage: "path", done: 0, total: 1, note: "retry" });
-      retried = true;
-      const relaxed = gentle ? { ...RELAXED_SFM, siftFirstOctave: 0 } : RELAXED_SFM;
-      solved = await solveOnce(relaxed);
-    }
-    if (solved.error) {
-      log.push(`solve failed again: ${solved.error}`);
-      throw new Error(solveMessage(solved.error));
-    }
+    const { solved, retried } = await runWithDeadline(
+      async (signal) => {
+        let solved = await solveOnce({}, signal);
+        let retried = false;
+        if (solved.error) {
+          // Splat.js says why in its own words (kept in the log); the card says what to try.
+          log.push(`solve failed: ${solved.error}; trying again with looser matching`);
+          progress({ stage: "path", done: 0, total: 1, note: "retry" });
+          retried = true;
+          const relaxed = gentle ? { ...RELAXED_SFM, siftFirstOctave: 0 } : RELAXED_SFM;
+          solved = await solveOnce(relaxed, signal);
+        }
+        if (solved.error) {
+          log.push(`solve failed again: ${solved.error}`);
+          throw new Error(solveMessage(solved.error));
+        }
+        return { solved, retried };
+      },
+      {
+        signal: opts.signal,
+        timeoutMs: (gentle ? 3 : 6) * 60000,
+        message:
+          "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting.",
+      },
+    );
     const recon = solved.recon;
     mark("path");
-    await s.seed();
+    // Replace some jittered copies of sparse features with small, oriented surface samples.
+    // Every new point lies inside a local sparse triangle and has color support in another
+    // recorded camera. Keep the same total seed budget; unsupported regions retain sparse seeds.
+    const surface = surfaceSeed(recon, s.frames, {
+      maxPoints: Math.min(30000, Math.floor(seedTarget * 0.92)),
+    });
+    const seeded = await runWithDeadline(
+      () =>
+        s.seed({
+          initTarget: seedTarget - surface.n,
+          seedLimit: seedTarget,
+          appendGaussians: {
+            ...surface,
+            protectIters: refineStart + refineEvery,
+            note: "multiview surface detail",
+          },
+        }),
+      {
+        signal: opts.signal,
+        timeoutMs: 90000,
+        message:
+          "The graphics card could not prepare training in time. Try the Phone-safe setting, or a shorter stretch.",
+      },
+    );
     mark("seed");
     if (opts.signal?.aborted) throw new DOMException("Stopped", "AbortError");
     if (opts.preview) {
       try {
         s.view.attach(opts.preview);
         s.view.lookThrough(Math.floor(s.trainer.camMeta.length / 2));
+        // Show the initialized geometry before the first optimizer batch queues behind it.
+        s.view.renderNow();
       } catch {
         // No live picture: training goes on without it.
       }
     }
 
     // 5. Training.
-    let last = { iter: 0, splats: s.trainer.n };
     let lastPsnr = null;
     s.on("metrics", (m) => {
-      last = m;
       if (Number.isFinite(m.psnrTrain)) lastPsnr = { value: m.psnrTrain, iter: m.iter };
       progress({ stage: "train", done: m.iter, total: set.iters, note: `${m.splats} splats` });
     });
     progress({ stage: "train", done: 0, total: set.iters });
     let timedOut = false;
+    let trainingError = null;
     await new Promise((resolve) => {
       let over = false;
       let halt = false; // stopping: the bursts and the tab's visibility no longer restart training
@@ -235,8 +295,16 @@ export async function videoTo3D(file, opts = {}) {
       });
       // Stop keeps what has been trained so far: training finishes early and the splats export.
       const abortTraining = () => {
+        if (halt || over) return;
         halt = true;
-        s.finish().then(end, end);
+        runWithDeadline(() => s.finish(), {
+          timeoutMs: 60000,
+          message:
+            "The graphics card stopped answering while finishing. Try a shorter stretch, or the Phone-safe setting.",
+        }).then(end, (error) => {
+          trainingError = error;
+          end();
+        });
       };
       opts.signal?.addEventListener("abort", abortTraining, { once: true });
       // A phone trains in bursts with rests (about 3 s on, 2 s off) so it stays cool and
@@ -266,24 +334,26 @@ export async function videoTo3D(file, opts = {}) {
             s.start();
           }
         }, 1000);
-        limit = setTimeout(
-          () => {
-            halt = true;
-            timedOut = true;
-            s.finish().then(end, end);
-          },
-          (set.maxMinutes ?? 10) * 60000,
-        );
-        globalThis.document?.addEventListener?.("visibilitychange", onVisible);
       }
+      limit = setTimeout(() => {
+        if (halt || over) return;
+        timedOut = true;
+        abortTraining();
+      }, timeLimitMinutes * 60000);
+      globalThis.document?.addEventListener?.("visibilitychange", onVisible);
       s.start();
     });
+    if (trainingError) throw trainingError;
     if (s.deviceLost) throw new Error("The graphics card stopped the training (the tab may have gone to the background). Try again with a shorter stretch."); // prettier-ignore
     mark("train");
 
     // 6. Export.
     progress({ stage: "export", done: 0, total: 1 });
-    const blob = await s.exportPlyBlob();
+    const blob = await runWithDeadline(() => s.exportPlyBlob(), {
+      timeoutMs: 60000,
+      message:
+        "The graphics card stopped answering while saving the scene. Try the Phone-safe setting, or a shorter stretch.",
+    });
     const ply = new Uint8Array(await blob.arrayBuffer());
     mark("export");
     progress({ stage: "export", done: 1, total: 1 });
@@ -314,7 +384,10 @@ export async function videoTo3D(file, opts = {}) {
         frames: picks.length,
         registered: recon.cams.length,
         points: recon.points.length,
-        splats: last.splats ?? s.trainer.n,
+        surfacePoints: seeded.appendedSeedCount ?? 0,
+        generatedSurfacePoints: surface.n,
+        seedSplats: seeded.n,
+        splats: s.trainer.n,
         iters: s.trainer.iter,
         psnr: lastPsnr ? Math.round(lastPsnr.value * 10) / 10 : null,
         psnrAtIter: lastPsnr?.iter ?? null,
@@ -322,6 +395,7 @@ export async function videoTo3D(file, opts = {}) {
         plyBytes: ply.length,
         retried,
         timedOut,
+        timeLimitMinutes,
         stoppedEarly: !!opts.signal?.aborted || timedOut,
         start: plan.start,
         end: plan.end,

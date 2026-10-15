@@ -20,6 +20,7 @@ import { mountWalk } from "../video3d/walk.js";
 import { buildWalkRegion } from "../video3d/region.js";
 import { mountSceneCredit } from "../video3d/credit.js";
 import { sampleBudget, phoneSample } from "../video3d/tiers.js";
+import { pausePreviousView } from "../video3d/pause-view.js";
 
 const V3D = {
   file: null, // the video somebody opened (a File; it stays on the device)
@@ -41,9 +42,14 @@ export const video3dResult = () => V3D.custom;
 
 // A trained PLY and its solved cameras as the toy's scene: the splats and the camera path in the
 // toy's frame. cams: [{ time, R, t }].
-export function sceneFromPly(bytes, cams, keep = 400000, { affine = false } = {}) {
+export function sceneFromPly(
+  bytes,
+  cams,
+  keep = 400000,
+  { affine = false, preservePhotometric = false } = {},
+) {
   const raw = readSplatPly(bytes, keep);
-  return sceneFromSplats(raw, cams, { affine });
+  return sceneFromSplats(raw, cams, { affine, preservePhotometric });
 }
 
 export function sceneFromSplats(raw, cams, { affine = false, preservePhotometric = false } = {}) {
@@ -174,6 +180,7 @@ async function trainVideo(o, key) {
   const name = V3D.videoName;
   const choice = watchChoice(ctrl);
   const current = () => V3D.trainCtrl === ctrl && file === V3D.file && choice.matches();
+  let releaseView = () => {};
   let card;
   try {
     const [{ videoTo3D }, { progressCard }, { detectProfile }, { downloadBlob }] =
@@ -215,7 +222,7 @@ async function trainVideo(o, key) {
     const set = { ...tierSettings(tier), ...(globalThis.__v3dSettings || {}) };
     const [lo, hi] = estimateMinutes(tier, set);
     const label = SETTING_LABELS[tier] || tier;
-    const plan = `${label}: up to ${set.maxFrames} frames, ${fmt(set.iters)} training steps, up to ${fmt(set.splats)} splats. A rough guess: ${lo} to ${hi} minutes.`; // prettier-ignore
+    const plan = `${label}: up to ${set.maxFrames} frames, ${fmt(set.iters)} training steps, up to ${fmt(set.splats)} splats. A rough guess: ${lo} to ${hi} minutes. Training keeps the result after ${set.maxMinutes ?? 15} minutes on a slower device.`; // prettier-ignore
     const warn = phone
       ? ` On a phone it gets warm. Keep this tab open and the phone plugged in if you can${tier === "phone" ? `; training stops by itself after ${set.maxMinutes} minutes and keeps what it has` : ". A heavier setting than phone-safe can make a phone hot and slow"}. Finish now keeps what has been trained.` // prettier-ignore
       : "";
@@ -231,6 +238,7 @@ async function trainVideo(o, key) {
     }
     card.planLine(plan);
     card.stopButton(() => ctrl.abort());
+    releaseView = pausePreviousView(window.__splashery?.player, { signal: ctrl.signal });
     const r = await videoTo3D(file, {
       start: Number(o.start),
       length: Number(o.length),
@@ -244,7 +252,7 @@ async function trainVideo(o, key) {
       },
     });
     if (!current()) return null;
-    const framed = sceneFromPly(r.ply, r.cams);
+    const framed = sceneFromPly(r.ply, r.cams, undefined, { preservePhotometric: true });
     V3D.custom = { key, ...framed, stats: r.stats, timings: r.timings, ply: r.ply, cams: r.cams, log: r.log, name, uid: key }; // prettier-ignore
     V3D.error = "";
     const base = (V3D.videoName || "video").replace(/[^\w-]+/g, "-").slice(0, 40);
@@ -259,6 +267,7 @@ async function trainVideo(o, key) {
     card?.fail(V3D.error, { advice: e?.name !== "AbortError" && !/WebGPU|graphics card|play that video/.test(V3D.error) }); // prettier-ignore
     return null;
   } finally {
+    releaseView();
     choice.dispose();
     if (V3D.trainCtrl === ctrl && !choice.matches()) {
       V3D.trainCtrl = null;
@@ -276,6 +285,7 @@ export async function openVideoFile(file, name) {
   V3D.checkCtrl = ctrl;
   const choice = watchChoice(ctrl);
   const current = () => V3D.checkCtrl === ctrl && !ctrl.signal.aborted && choice.matches();
+  const releaseView = pausePreviousView(window.__splashery?.player, { signal: ctrl.signal });
   let card;
   try {
     const [{ checkVideo }, { progressCard }] = await Promise.all([
@@ -327,6 +337,7 @@ export async function openVideoFile(file, name) {
     }
     throw error;
   } finally {
+    releaseView();
     choice.dispose();
   }
 }
@@ -512,7 +523,10 @@ const VIDEO_3D = {
           if (V3D.customWalk?.key !== key)
             V3D.customWalk = {
               ...V3D.custom,
-              ...sceneFromPly(V3D.custom.ply, V3D.custom.cams, undefined, { affine: true }),
+              ...sceneFromPly(V3D.custom.ply, V3D.custom.cams, undefined, {
+                affine: true,
+                preservePhotometric: V3D.custom.preservePhotometric,
+              }),
             };
           want = V3D.customWalk;
         } else want = V3D.custom;

@@ -1,5 +1,5 @@
 // A fast local estimate, not a camera solve or a guarantee. No model, trainer, or network.
-import { openVideo, closeVideo, seek } from "./extract.js";
+import { openVideo, closeVideo, seekPresented } from "./extract.js";
 import { fitSide, sharpness } from "./frames.js";
 
 const median = (a) => a.slice().sort((x, y) => x - y)[Math.floor(a.length / 2)] || 0;
@@ -100,6 +100,7 @@ export function assessFrames(frames) {
   const wide = grouped ? centers.slice(1).map((b, i) => motion(centers[i], b)) : motions;
   const metrics = {
     frames: frames.length,
+    brightness: median(stats.map((s) => s.brightness)),
     sharpness: median(stats.map((s) => s.sharp)),
     contrast: median(stats.map((s) => s.contrast)),
     exposure:
@@ -128,6 +129,12 @@ export function assessFrames(frames) {
 export function assessMetrics(metrics) {
   const reasons = [];
   let poor = false;
+  if (Number.isFinite(metrics.brightness) && metrics.brightness < 22) {
+    reasons.push(
+      "This stretch is too dark to recover reliable detail. Try brighter, even light, or choose a better-lit stretch.",
+    );
+    poor = true;
+  }
   if (metrics.contrast < 12 || metrics.texturePatches < 4) {
     reasons.push(
       "Too few textured details to match. Include brick, bark, stone, or other detailed surfaces.",
@@ -182,44 +189,6 @@ export function assessMetrics(metrics) {
   return { checked: true, verdict, message, reasons, metrics };
 }
 
-// A paused video's seeked event can precede presentation of its decoded frame. Reading the
-// canvas then sometimes copies the previous window and invents a sudden zoom. Wait for the
-// matching presented frame, bounded by the same cancellation signal and a short local timeout.
-async function seekPresented(video, time, signal) {
-  if (!video.requestVideoFrameCallback) return seek(video, time, { signal, timeoutMs: 4000 });
-  let cleanup;
-  const presented = new Promise((resolve, reject) => {
-    let callback;
-    let done = false;
-    const finish = (error) => {
-      if (done) return;
-      done = true;
-      clearTimeout(timer);
-      signal.removeEventListener("abort", abort);
-      if (callback !== undefined) video.cancelVideoFrameCallback(callback);
-      error ? reject(error) : resolve();
-    };
-    const abort = () => finish(new DOMException("Stopped", "AbortError"));
-    const timer = setTimeout(
-      () => finish(new Error("The decoded video frame took too long.")),
-      1000,
-    );
-    const frame = (_, metadata) => {
-      if (Math.abs(metadata.mediaTime - time) <= 0.08) finish();
-      else callback = video.requestVideoFrameCallback(frame);
-    };
-    cleanup = finish;
-    signal.addEventListener("abort", abort, { once: true });
-    if (signal.aborted) abort();
-    else callback = video.requestVideoFrameCallback(frame);
-  });
-  try {
-    await Promise.all([seek(video, time, { signal, timeoutMs: 4000 }), presented]);
-  } finally {
-    cleanup();
-  }
-}
-
 export async function checkVideo(file, { start = 0, length = 10, signal } = {}) {
   const ctrl = new AbortController();
   const cancel = () => ctrl.abort();
@@ -243,7 +212,10 @@ export async function checkVideo(file, { start = 0, length = 10, signal } = {}) 
     const delta = Math.min(0.25, span * 0.025);
     for (const [group, fraction] of fractions.entries()) {
       for (const offset of [-delta, 0, delta]) {
-        await seekPresented(opened.video, from + span * fraction + offset, ctrl.signal);
+        await seekPresented(opened.video, from + span * fraction + offset, {
+          signal: ctrl.signal,
+          timeoutMs: 1000,
+        });
         g.drawImage(opened.video, 0, 0, width, height);
         const rgba = g.getImageData(0, 0, width, height).data;
         const gray = Float32Array.from(

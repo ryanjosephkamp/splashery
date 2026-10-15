@@ -99,6 +99,72 @@ export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
   });
 }
 
+// seeked can precede the decoded picture reaching drawImage. Wait for presentation before
+// judging sharpness or making a training photograph, and retain the actual source-frame time.
+// Older browsers without this API return null: a requested time is not presentation evidence.
+const presentedFrames = new WeakMap();
+export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = {}) {
+  if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
+  if (!video.requestVideoFrameCallback) {
+    await seek(video, time, { signal, timeoutMs });
+    return null;
+  }
+  const source = video.currentSrc || video.src;
+  const previous = presentedFrames.get(video);
+  if (
+    previous &&
+    previous.source === source &&
+    previous.requestedTime === time &&
+    video.currentTime === previous.position &&
+    !video.seeking &&
+    video.readyState >= 2
+  )
+    return previous.mediaTime;
+  let cleanup;
+  const presented = new Promise((resolve, reject) => {
+    let callback;
+    let done = false;
+    const finish = (error, mediaTime) => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      signal?.removeEventListener("abort", abort);
+      video.removeEventListener("seeking", arm);
+      if (callback !== undefined) video.cancelVideoFrameCallback(callback);
+      error ? reject(error) : resolve(mediaTime);
+    };
+    const abort = () => finish(new DOMException("Stopped", "AbortError"));
+    const timer = setTimeout(
+      () =>
+        finish(new Error("The decoded video frame took too long. Try a shorter MP4 (H.264) clip.")),
+      timeoutMs,
+    );
+    // Register only once this seek starts. A callback already queued for the previous picture
+    // must not satisfy a nearby new seek. Frame duration can vary, so proximity is not a test.
+    const arm = () => {
+      callback = video.requestVideoFrameCallback((_, metadata) => finish(null, metadata.mediaTime));
+    };
+    cleanup = finish;
+    video.addEventListener("seeking", arm, { once: true });
+    signal?.addEventListener("abort", abort, { once: true });
+    if (signal?.aborted) abort();
+  });
+  try {
+    const [, mediaTime] = await Promise.all([seek(video, time, { signal, timeoutMs }), presented]);
+    // Browsers can round the seek position (for example, 2.01 becomes 2.009999).
+    // Reuse only that exact confirmed position for an identical request and source.
+    presentedFrames.set(video, {
+      source,
+      requestedTime: time,
+      position: video.currentTime,
+      mediaTime,
+    });
+    return mediaTime;
+  } finally {
+    cleanup();
+  }
+}
+
 // Grabs the planned frames. opened: openVideo's result; plan: planFrames's; side: the long side
 // of each photograph; tries: frames looked at per window. onFrame(i, n, blob) reports progress.
 // Resolves [{ blob, time, sharpness, width, height }].
@@ -122,7 +188,7 @@ export async function grabFrames(opened, plan, { side = 960, tries = 3, onFrame,
     if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
     let best = null;
     for (const t of windowTimes(plan.windows[i], tries)) {
-      await seek(video, t, { signal });
+      const presentedTime = await seekPresented(video, t, { signal });
       gs.drawImage(video, crop.sx, 0, crop.sw, opened.height, 0, 0, sw, sh);
       const px = gs.getImageData(0, 0, sw, sh).data;
       for (let k = 0; k < gray.length; k++)
@@ -130,7 +196,7 @@ export async function grabFrames(opened, plan, { side = 960, tries = 3, onFrame,
       const s = sharpness(gray, sw, sh);
       if (!best || s > best.sharpness) {
         g.drawImage(video, crop.sx, 0, crop.sw, opened.height, 0, 0, w, h);
-        best = { time: t, sharpness: s };
+        best = { time: presentedTime ?? t, requestedTime: t, presentedTime, sharpness: s };
         best.blob = await new Promise((r) => canvas.toBlob(r, "image/jpeg", 0.92));
       }
     }
