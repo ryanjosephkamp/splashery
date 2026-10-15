@@ -24,7 +24,14 @@ changed is how the page reads.
   the headline and the live toy; the lead and the numbers follow.
 - **Credits.** The Photo to 3D sample ("Forest Away Path" by Seaq68, CC0 1.0) now has its credit
   beside it; version 1 had none. The walnut's credit moved under its figure.
-- **The end.** A closing line ("Everything above ran in this tab.") and the three buttons.
+- **The end.** A closing line ("Everything above ran in this tab.") and the three buttons. On a
+  desktop, the claims' heading stays beside the list while it is read.
+- **At most three players, on any screen.** Version 1 kept to three only because of how tall its
+  sections were. At 1440×900 this layout let four load at once, and the test caught it. `pitch.js`
+  now runs only the three toys nearest the middle of the screen. A toy that comes closer than one of
+  them takes its place.
+- **The tests.** `tests/pit.spec.mjs` now saves a screenshot of each live section, and its "end"
+  screenshot shows the end of the page (version 1's showed the QR section).
 - Every correction in the Operator's review of #633 still holds: the lead's wording, the manual's
   six claims with "As far as we know. We have not tried every splat tool.", the 97-character link
   sentence, the grape's credit, the video and WebGPU sentence, "Change its shape and opacity here",
@@ -52,12 +59,24 @@ changed is how the page reads.
   the page started loading. Version 1 measured the grape live at about 2.6 s; this round did not
   re-time it (see Known issues).
 
+## Tests (October 14, 2026, headless Chromium on the Mac)
+
+- `tests/pit.spec.mjs`: 8 of 8 pass, including at most three players at 390×844 and 1440×900.
+- The pit, site, spg, tpg, unit, and help specs: 68 of 72 passed before the three-player fix. The
+  failures were the 1440×900 pit test (now fixed) and three help tests (`shows on a pick`,
+  `shows after a refresh`, and `a saved scene (JSON)`). Those three fail only because the Mac's
+  graphics driver logs "GPU stall due to ReadPixels" warnings to the console. They fail the same way
+  on a checkout of `origin/main`, and this branch touches none of their files.
+
 ## Known issues and what was not done
 
 - **Not checked in this round (time box):** Safari, WebGPU timing, memory while scrolling, the
   Android phone, and the clips (`tools/pit-clip.mjs`; the branch `claude/lane-pitch2-clips` was not
   pushed).
 - The full suite was not run; only the specs listed in the PR.
+- The Playwright Chromium that version 1.56.1 pins (build 1194) didn't finish downloading, so the
+  tests ran on the newer headless Chromium already on the Mac (build 1243), through
+  `SPLASHERY_CHROMIUM`.
 
 ## For Codex to audit
 

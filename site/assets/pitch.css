@@ -94,7 +94,7 @@
 .pit-eyebrow span:first-child {
   color: var(--ink);
 }
-.pit-num {
+.pit .pit-num {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -164,7 +164,7 @@
   margin: 0;
   min-width: 0;
 }
-.pit-plate {
+.pit .pit-plate {
   display: flex;
   justify-content: space-between;
   gap: 16px;
@@ -193,6 +193,9 @@
 }
 .pit-credit a {
   color: inherit;
+}
+.pit .pit-links {
+  max-width: none;
 }
 .pit-links {
   display: flex;
@@ -588,6 +591,12 @@
   }
   .pit-claim-list {
     margin-top: 6px;
+  }
+  /* The heading stays beside the list while it is read. */
+  .pit-claims .pit-text {
+    position: sticky;
+    top: 96px;
+    align-self: start;
   }
   .pit-end {
     padding: 80px 0 48px;

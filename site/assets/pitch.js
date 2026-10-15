@@ -81,10 +81,45 @@ function fail(stage, text) {
 if (!can3D) {
   for (const s of stages) fail(s, "This browser cannot start WebGL2 or WebGPU, so this is a still.");
 } else if ("IntersectionObserver" in window) {
-  // Start a little before a toy scrolls in; unload it once it is a screen away.
+  // Start a little before a toy scrolls in; unload it once it is a screen away. On a tall screen
+  // more than three toys can be that close, so at most three run: those nearest the middle of the
+  // screen, and a toy that comes closer than one of them takes its place.
+  const MAX_LIVE = 3;
+  const close = new Set();
+  const dist = (s) => {
+    const r = s.getBoundingClientRect();
+    return Math.abs(r.top + r.height / 2 - innerHeight / 2);
+  };
+  const running = () =>
+    stages.filter((s) => s.dataset.state && s.dataset.state !== "failed" && !s.dataset.keep);
+  const settle = () => {
+    for (const s of [...close].sort((a, b) => dist(a) - dist(b))) {
+      if (s.dataset.state) continue;
+      const live = running().sort((a, b) => dist(b) - dist(a));
+      if (live.length >= MAX_LIVE) {
+        if (dist(live[0]) <= dist(s)) continue;
+        unload(live[0]);
+      }
+      load(s);
+    }
+  };
+  let queued = false;
+  addEventListener(
+    "scroll",
+    () => {
+      if (queued || !close.size) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        settle();
+      });
+    },
+    { passive: true },
+  );
   const near = new IntersectionObserver(
     (entries) => {
-      for (const e of entries) if (e.isIntersecting) load(e.target);
+      for (const e of entries) close[e.isIntersecting ? "add" : "delete"](e.target);
+      settle();
     },
     { rootMargin: "25% 0px" },
   );
