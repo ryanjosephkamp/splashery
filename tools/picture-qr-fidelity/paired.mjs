@@ -10,16 +10,20 @@ import { sourcePicture, qualifyCapture } from "./qualify.mjs";
 const arg = (key, fallback) =>
   process.argv.find((s) => s.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
 const root = ".cache/picture-qr-fidelity",
+  baseline = arg("baseline", "41b21e74"),
+  baselineDirectory = arg("baseline-dir", `${root}/main`),
   ids = arg("photos", "ai-farm,cdx-qr-ai-fern,cdx-qr-ai-cactus").split(","),
   links =
     arg("links", "0,6,9") === "all"
       ? Array.from({ length: 10 }, (_, i) => i)
       : arg("links", "0,6,9").split(",").map(Number),
   shapes = arg("shapes", "square,circle").split(",");
-const corpus = [
-  ...SAMPLES,
-  ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json")),
-].filter((p) => ids.includes("all") || ids.includes(p.id));
+const corpusFile = arg("corpus", "");
+const corpus = (
+  corpusFile
+    ? JSON.parse(fs.readFileSync(corpusFile))
+    : [...SAMPLES, ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json"))]
+).filter((p) => ids.includes("all") || ids.includes(p.id));
 const first = arg("first", "").split(",").filter(Boolean);
 if (first.length)
   corpus.sort(
@@ -72,6 +76,7 @@ const hashes = Object.fromEntries(
     "vendor/jsqr/jsQR.js",
     "package-lock.json",
     ...(casesFile ? [casesFile] : []),
+    ...(corpusFile ? [corpusFile] : []),
     ...corpus.flatMap((picture) => [
       picture.file,
       ...(qualify ? [`${root}/review/sources/${picture.id}.png`] : []),
@@ -82,7 +87,7 @@ const hashes = Object.fromEntries(
 );
 // Every served baseline module must still be the exact frozen Git blob.
 const baselineTree = new Map(
-  execFileSync("git", ["ls-tree", "-r", "41b21e74", "src"], { encoding: "utf8" })
+  execFileSync("git", ["ls-tree", "-r", baseline, "src"], { encoding: "utf8" })
     .trim()
     .split("\n")
     .map((line) => {
@@ -91,10 +96,10 @@ const baselineTree = new Map(
     }),
 );
 const frozenMain = Object.fromEntries(
-  files(`${root}/main/src`)
+  files(`${baselineDirectory}/src`)
     .sort()
     .map((file) => {
-      const relative = file.slice(`${root}/main/`.length),
+      const relative = file.slice(`${baselineDirectory}/`.length),
         bytes = fs.readFileSync(file);
       const blob = createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex");
       if (baselineTree.get(relative) !== blob)
@@ -114,9 +119,11 @@ if (fs.existsSync(provenanceFile)) {
     provenanceFile,
     JSON.stringify(
       {
-        baseline: "41b21e74",
+        baseline,
         head: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
         started: new Date().toISOString(),
+        node: process.version,
+        hardwareConcurrency: 4,
         args: process.argv.slice(2),
         hashes,
         frozenMain,
@@ -138,7 +145,7 @@ const inherited = resumeFrom
   ? JSON.parse(fs.readFileSync(`${root}/paired-${resumeFrom}-provenance.json`))
   : null;
 if (inherited) {
-  if (inherited.baseline !== "41b21e74") throw Error("Frozen main baseline changed");
+  if (inherited.baseline !== baseline) throw Error("Frozen main baseline changed");
   for (const [file, hash] of Object.entries(hashes))
     if (
       (corpus.some((picture) => picture.file === file) ||
@@ -177,10 +184,13 @@ for (const mode of ["main", "detail"]) {
     viewport: { width: 390, height: 844 },
     reducedMotion: "reduce",
   }));
+  await page.addInitScript(() =>
+    Object.defineProperty(navigator, "hardwareConcurrency", { get: () => 4 }),
+  );
   if (mode === "main")
     await page.route("**/src/**", (route) => {
       const pathname = new URL(route.request().url()).pathname,
-        file = `${root}/main${pathname}`;
+        file = `${baselineDirectory}${pathname}`;
       if (!fs.existsSync(file)) throw Error(`Missing frozen main module ${pathname}`);
       return route.fulfill({ contentType: "text/javascript", body: fs.readFileSync(file) });
     });
@@ -196,9 +206,11 @@ for (const mode of ["main", "detail"]) {
       if (settings.up !== null) q.detailUp = settings.up;
       if (settings.blur !== null) q.textureBlur = settings.blur;
       if (settings.fast !== null) q.preferContinuous = settings.fast;
-      q.preferCorrection = settings.errors;
+      if (settings.errors !== null) q.preferCorrection = settings.errors;
+      if (settings.errorFraction !== null) q.detailErrorFraction = settings.errorFraction;
       if (settings.direct !== null) q.captureValidation = settings.direct;
       q.detailChannel = settings.channel;
+      if (settings.finderGuard !== null) q.finderGuard = settings.finderGuard;
       await a.chooseToy("qr-picture");
       const stage = a.player.stage;
       // Stage.frames counts update ticks even when PlayCanvas skips drawing.
@@ -218,9 +230,15 @@ for (const mode of ["main", "detail"]) {
       up: arg("up", "default") === "default" ? null : Number(arg("up", "0")),
       blur: arg("texture-blur", "default") === "default" ? null : Number(arg("texture-blur", "0")),
       fast: arg("fast", "default") === "default" ? null : arg("fast", "0") === "1",
-      errors: arg("errors", "0") === "1",
+      errors: arg("errors", "default") === "default" ? null : arg("errors", "0") === "1",
+      errorFraction:
+        arg("error-fraction", "default") === "default"
+          ? null
+          : Number(arg("error-fraction", "0.4")),
       direct: arg("direct", "default") === "default" ? null : arg("direct", "0") === "1",
       channel: arg("channel", ""),
+      finderGuard:
+        arg("finder-guard", "default") === "default" ? null : Number(arg("finder-guard", "3")),
     },
   );
 }
@@ -398,6 +416,8 @@ for (let repeat = 0; repeat < Number(arg("repeats", "3")); repeat++)
                 2 *
                 ((await import("/src/qr/circle.js")).shapeHalf(p.woven.code, p.options.shape) + 1),
               error: p.error,
+              notice: p.notice || "",
+              fallback: p.fallback || null,
               version: p.woven.code.version,
               margin: p.woven.margin,
               method: p.woven.rendering?.method,
@@ -405,8 +425,13 @@ for (let repeat = 0; repeat < Number(arg("repeats", "3")); repeat++)
               kitCount: a.player.proc.ctx.kit.count,
             };
           });
+          let qualifiedReads = null;
           if (qualify) {
             const assessment = await qualifyCapture(source, result, LINKS[link], shape);
+            qualifiedReads = assessment.scans.reduce(
+              (sum, scan) => sum + Number(scan.jsqr) + Number(scan.zxingcpp),
+              0,
+            );
             const directory = `${root}/review/${name}-${mode}`;
             fs.mkdirSync(directory, { recursive: true });
             if (
@@ -464,6 +489,7 @@ for (let repeat = 0; repeat < Number(arg("repeats", "3")); repeat++)
             Math.round(ms),
             result.check.ok,
             result.method,
+            qualifiedReads === null ? "" : `${qualifiedReads}/48`,
           );
         }
       }

@@ -353,6 +353,7 @@ function chladniCue(mode, on) {
 const CHLADNI = {
   // Lane Live input r3: tilt to see the plate from the side (above the stage only).
   tiltLock: false,
+  frameReaches: true, // lane Polish (see build)
   pitchRange: [0.05, 1.35],
   // Live r7: while the sand moves, a tap bows or stirs it, or sound drives it.
   alive: () => !!SAND.sand?.moving || CH.bowUntil > (CH.last ?? 0) || CH.stirUntil > (CH.last ?? 0) || liveIn.on("mic") || !!CHF.song?.track?.playing || CH.amp.size > 0, // prettier-ignore
@@ -467,6 +468,11 @@ const CHLADNI = {
       if (lead && lead.a > 0.05) SING.lead = lead.mode;
       SING.p = SAND.sand.settled(SING.lead || g.mode);
     }
+    // Lane Polish: while a mode rings (and for 3 s after), its name and
+    // pitch show beside the plate, so you learn which note made which figure.
+    const ringing = drive.reduce((b, d) => (!b || d.a > b.a ? d : b), null);
+    if (ringing && ringing.a > 0.05) CH.named = { mode: ringing.mode, until: time + 3 };
+    out.legend = CH.named && time < CH.named.until ? { title: modeLabel(CH.named.mode), items: [] } : null; // prettier-ignore
     // The bow is drawn along the front edge only while a tap bows or stirs.
     // Its splats fade in by morph channel 1, which is 0 until the drive says
     // so, so a plate just built never shows it either.
@@ -485,7 +491,7 @@ const CHLADNI = {
     // Lane Live input: a new plate's sand starts scattered.
     Object.assign(SING, { p: 0, want: null, asked: false, last: null, lead: null });
     SING.builds++;
-    Object.assign(CH, { last: null, bowUntil: 0, stirUntil: 0, frames: 0, amp: new Map(), sorted: -1, unsorted: true }); // prettier-ignore
+    Object.assign(CH, { last: null, bowUntil: 0, stirUntil: 0, frames: 0, amp: new Map(), sorted: -1, unsorted: true, named: null }); // prettier-ignore
     // The stand: a base, a post, and the plate clamped on top.
     const plate = k.part("plate", { pivot: [0, 0, 0], axis: [0, 1, 0] });
     // Live r8: in fine discs in rows, crisp from the side (was a random fuzz).
@@ -497,7 +503,8 @@ const CHLADNI = {
     // discs (was a box, whose edge showed as a row of beads). Bigger discs
     // on the top were tried and cost a phone's frames (and the sand settles
     // only as fast as frames come).
-    const topColor = (x, z) => mix("#5d6874", "#7a8593", clamp(0.5 + (0.28 * (x - z)) / PLATE, 0, 1)); // prettier-ignore
+    // Lane Polish: a soft band of sheen across it, as on a real steel plate.
+    const topColor = (x, z) => shade(mix("#5d6874", "#7a8593", clamp(0.5 + (0.28 * (x - z)) / PLATE, 0, 1)), 1 + 0.16 * Math.exp(-(((x + z) / PLATE + 0.35) ** 2) * 2.2)); // prettier-ignore
     const inset = 0.012;
     // (The rim's splats come out of the top's share, so the plate costs
     // what it did: on a slow phone the sand settles only as fast as frames
@@ -529,6 +536,9 @@ const CHLADNI = {
     const STICK_Z = PLATE + 0.12;
     const TOP = 0.72;
     const BOT = -0.72;
+    // Lane Polish: the stick tilted a little to the side of the hair, as a
+    // player holds it, so the pale hair shows beside it from the front.
+    const STICK_TILT = 0.034;
     for (let y = BOT; y <= TOP; y += 0.007) {
       const t = (y - BOT) / (TOP - BOT);
       // The stick: nearer the hair in the middle (its camber).
@@ -536,20 +546,21 @@ const CHLADNI = {
       for (let a = 0; a < 6; a++) {
         const th = (a / 6) * Math.PI * 2;
         const n = [Math.cos(th), 0, Math.sin(th)];
-        bowItems.push({ p: [X + 0.011 * n[0], y, z + 0.011 * n[2]], n, flat: 0.15, size: 1.0, color: shade("#6b4026", 0.78 + 0.32 * Math.max(0, n[0] * 0.6 + n[2] * 0.8)), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
+        bowItems.push({ p: [X + STICK_TILT + 0.015 * n[0], y, z + 0.015 * n[2]], n, flat: 0.15, size: 1.15, color: shade("#6b4026", 0.78 + 0.32 * Math.max(0, n[0] * 0.6 + n[2] * 0.8)), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
       }
-      // The hair: a ribbon a centimeter wide, facing the plate and away.
+      // The hair: a ribbon facing the plate and away. Lane Polish: about
+      // twice as wide (was a centimeter), so it shows at phone size.
       if (y > BOT + 0.06 && y < TOP - 0.03)
-        for (let w = -1; w <= 1; w++)
+        for (let w = -3; w <= 3; w++)
           for (const side of [-1, 1])
-            bowItems.push({ p: [X + w * 0.0038, y, HAIR_Z + side * 0.002], n: [0, 0, side], flat: 0.05, size: 0.62, color: shade("#efe7d4", 0.94 + 0.03 * w), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
+            bowItems.push({ p: [X + w * 0.0034, y, HAIR_Z + side * 0.002], n: [0, 0, side], flat: 0.05, size: 0.62, color: shade("#f4eedf", 0.95 + 0.012 * w), opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
     }
     // The frog (where the hand holds it) and the tip, each joining stick and hair.
     const block = (y0, y1, color) => {
       for (let y = y0; y <= y1; y += 0.006)
         for (let z = HAIR_Z; z <= STICK_Z; z += 0.006)
           for (const side of [-1, 1])
-            bowItems.push({ p: [X + side * 0.012, y, z], n: [side, 0, 0], flat: 0.05, size: 0.85, color, opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
+            bowItems.push({ p: [X + (STICK_TILT * (z - HAIR_Z)) / (STICK_Z - HAIR_Z) + side * 0.014, y, z], n: [side, 0, 0], flat: 0.05, size: 0.85, color, opacity: 1, part: bow, pattern: false, ...hidden }); // prettier-ignore
     };
     block(BOT, BOT + 0.08, "#1d1a19");
     block(TOP - 0.035, TOP, "#ece5d6");
@@ -599,6 +610,11 @@ const CHLADNI = {
     k.cloud({ share: n / k.count, size: 0.5, pattern: false, jitter: 0 }, (rand, i) => items[i] || null); // prettier-ignore
     Object.assign(SAND, { sand, cols, rows, home, colors: tones, img: null, version: SAND.version + 1, opts, paint: colors }); // prettier-ignore
     k.reach([0, HOP + 0.3, 0]);
+    // Lane Polish: framed on the plate and the top of its post (frameReaches),
+    // not the whole stand and the hidden bow, so it fills more of a phone.
+    for (const x of [-1, 1])
+      for (const z of [-1, 1]) k.reach([x * PLATE * 0.9, 0, z * PLATE * 0.9]);
+    k.reach([0, -0.85, 0]);
     k.data = { chladni: { mode } };
   },
 };
@@ -915,6 +931,8 @@ function driveR2(g, out, info) {
       }
       const caps = landscapeCaps(R2.land, R2.an, now);
       if (caps) out.tokens = caps;
+      // Lane Polish: how to read it, for the song's first ten seconds.
+      out.legend = now < 10 ? { title: "Reading the land", items: [{ text: "Across: pitch, low to high (each C is marked)" }, { text: "Height: how loud each pitch is" }, { text: "The lines at the left: the loudness, as a wave" }] } : null; // prettier-ignore
     } else out.parts.marker = { offset: [0, 0, -f * g.D] };
   }
   setShown(progressLine());

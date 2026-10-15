@@ -8,6 +8,8 @@ import { LINKS } from "../cdx-circle-study.mjs";
 const arg = (key, fallback) =>
   process.argv.find((value) => value.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
 const out = arg("out", ".cache/picture-qr-fidelity/review-export/clips");
+const baseline = arg("baseline", "cb8a8315"),
+  baselineDirectory = arg("baseline-dir", ".cache/picture-qr-fidelity/review-pass");
 fs.mkdirSync(out, { recursive: true });
 const files = (directory) =>
   fs
@@ -21,13 +23,28 @@ const hash = (list) =>
       .sort()
       .map((file) => [file, createHash("sha256").update(fs.readFileSync(file)).digest("hex")]),
   );
+const baselineTree = new Map(
+  execFileSync("git", ["ls-tree", "-r", baseline, "src"], { encoding: "utf8" })
+    .trim()
+    .split("\n")
+    .map((line) => {
+      const [meta, file] = line.split("\t");
+      return [file, meta.split(" ")[2]];
+    }),
+);
+for (const file of files(`${baselineDirectory}/src`)) {
+  const relative = file.slice(`${baselineDirectory}/`.length),
+    bytes = fs.readFileSync(file),
+    blob = createHash("sha1").update(`blob ${bytes.length}\0`).update(bytes).digest("hex");
+  if (baselineTree.get(relative) !== blob) throw Error(`Frozen main differs from Git: ${relative}`);
+}
 fs.writeFileSync(
   path.join(out, "provenance.json"),
   JSON.stringify(
     {
       model: "Codex (GPT-6)",
       author: "Ryan with Codex (GPT-6)",
-      baseline: "41b21e74",
+      baseline,
       head: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
       created: new Date().toISOString(),
       hashes: hash([
@@ -43,7 +60,7 @@ fs.writeFileSync(
         "assets/toys/photo-3d/ai/farm.jpg",
         "assets/toys/qr-picture/codex/cdx-qr-ai-fern.jpg",
       ]),
-      frozenMain: hash(files(".cache/picture-qr-fidelity/main/src")),
+      frozenMain: hash(files(`${baselineDirectory}/src`)),
     },
     null,
     2,
@@ -56,10 +73,13 @@ const browser = await chromium.launch({
 const clips = [];
 for (const mode of ["main", "detail"]) {
   const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+  await page.addInitScript(() =>
+    Object.defineProperty(navigator, "hardwareConcurrency", { get: () => 4 }),
+  );
   if (mode === "main")
     await page.route("**/src/**", (route) => {
       const pathname = new URL(route.request().url()).pathname;
-      const file = `.cache/picture-qr-fidelity/main${pathname}`;
+      const file = `${baselineDirectory}${pathname}`;
       if (!fs.existsSync(file)) throw Error(`Missing frozen main module ${pathname}`);
       return route.fulfill({ contentType: "text/javascript", body: fs.readFileSync(file) });
     });
@@ -109,7 +129,7 @@ for (const mode of ["main", "detail"]) {
       { timeout: 180000 },
     );
     if (mode === "detail") {
-      fs.mkdirSync("tests/screenshots", { recursive: true });
+      fs.mkdirSync(path.join(out, "screenshots"), { recursive: true });
       for (const size of [
         { width: 390, height: 844 },
         { width: 1440, height: 900 },
@@ -117,7 +137,11 @@ for (const mode of ["main", "detail"]) {
         await page.setViewportSize(size);
         await page.waitForTimeout(500);
         await page.screenshot({
-          path: `tests/screenshots/cdx-qr-fidelity-${picture}-${shape}-${size.width}x${size.height}.png`,
+          path: path.join(
+            out,
+            "screenshots",
+            `cdx-qr-fidelity-${picture}-${shape}-${size.width}x${size.height}.png`,
+          ),
         });
       }
       await page.setViewportSize({ width: 390, height: 844 });

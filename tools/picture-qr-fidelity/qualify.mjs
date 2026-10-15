@@ -1,5 +1,6 @@
 // Independent checks of the pixels captured from the stage. No candidate model is used here.
 import fs from "node:fs";
+import { createHash } from "node:crypto";
 import { PNG } from "pngjs";
 import { read } from "../qrc-picture.mjs";
 import { readZxingCpp } from "../qrs-study/readers.mjs";
@@ -48,5 +49,10 @@ export async function qualifyCapture(picture, result, text, shape) {
       });
     }
   }
-  return { scores, stickerScores, scans };
+  return {
+    captureRGBA8Sha256: createHash("sha256").update(img.data).digest("hex"),
+    scores,
+    stickerScores,
+    scans,
+  };
 }

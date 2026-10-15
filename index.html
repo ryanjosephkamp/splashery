@@ -35,7 +35,7 @@
     <script type="module" src="./src/app.js"></script>
   </head>
   <body class="app">
-    <a class="skip-link" href="#panel">Skip to controls</a>
+    <a class="skip-link" href="#tabs">Skip to controls</a>
 
     <canvas
       id="stage"
@@ -43,6 +43,11 @@
       role="img"
       aria-label="A toy made of splats. Drag to turn it, scroll or pinch to zoom. With a tool selected, drag on the toy to use it."
     ></canvas>
+
+    <div id="stage-zoom" class="stage-zoom" role="group" aria-label="Zoom the toy">
+      <button type="button" id="stage-zoom-in" aria-label="Zoom in">+</button>
+      <button type="button" id="stage-zoom-out" aria-label="Zoom out">−</button>
+    </div>
 
     <header class="brand">
       <h1><a href="./site/" aria-label="Splashery home" title="Splashery home">Splashery</a></h1>
@@ -366,23 +371,58 @@
     <!-- /Lane Pages r6 -->
 
     <!-- UI r5: Record. While it records: the time and Stop; then Save (and Share on a phone). -->
-    <div id="rec-pill" class="rec-pill" role="status" aria-live="polite" hidden>
+    <div id="rec-pill" class="rec-pill" role="status" aria-live="polite" tabindex="-1" hidden>
       <span class="rec-dot" aria-hidden="true"></span>
       <span id="rec-time" class="rec-time">0:00</span>
       <button type="button" id="rec-stop" class="rec-stop">Stop</button>
-      <button type="button" id="rec-save" class="primary" hidden>Save video</button>
-      <button type="button" id="rec-share" hidden>Share</button>
-      <button type="button" id="rec-close" class="rec-close" aria-label="Close" hidden>
-        <svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true">
-          <path
-            d="M4 4l8 8M12 4l-8 8"
-            stroke="currentColor"
-            stroke-width="1.8"
-            stroke-linecap="round"
-          />
-        </svg>
-      </button>
     </div>
+
+    <!-- Share lane: the preview sheet after a take stops. Watch it (play, pause, scrub), then Save,
+         Share (where the device can share files), Record again, or Discard (which asks first).
+         Closing it or Discard frees the recording's memory. -->
+    <dialog id="rec-preview" class="rec-preview" aria-labelledby="rec-preview-title">
+      <div class="rec-preview-head">
+        <h2 id="rec-preview-title">Your recording</h2>
+        <button type="button" id="rec-close" class="rec-close" aria-label="Close">
+          <svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true">
+            <path
+              d="M4 4l8 8M12 4l-8 8"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+            />
+          </svg>
+        </button>
+      </div>
+      <video
+        id="rec-video"
+        class="rec-video"
+        controls
+        playsinline
+        preload="metadata"
+        aria-label="The recording"
+      ></video>
+      <p id="rec-meta" class="note rec-meta"></p>
+      <div class="rec-actions" id="rec-actions">
+        <button type="button" id="rec-save" class="primary">Save video</button>
+        <button type="button" id="rec-share" hidden>Share</button>
+        <button type="button" id="rec-again">Record again</button>
+        <button type="button" id="rec-discard" class="danger">Discard</button>
+      </div>
+      <div
+        class="rec-confirm"
+        id="rec-confirm"
+        role="alertdialog"
+        aria-labelledby="rec-confirm-text"
+        hidden
+      >
+        <p id="rec-confirm-text">Discard this recording? It hasn't been saved.</p>
+        <div class="rec-actions">
+          <button type="button" id="rec-confirm-yes" class="danger">Discard</button>
+          <button type="button" id="rec-confirm-no">Keep it</button>
+        </div>
+      </div>
+    </dialog>
 
     <!-- UI r5: the gallery (every toy on a full page; the full grid on a phone), a round button
          in the top row so it is always one tap away. -->
@@ -634,7 +674,13 @@
           </button>
         </div>
         <nav class="shelf" id="shelf" aria-label="Toy shelf"></nav>
-        <p id="shelf-empty" class="shelf-empty note" hidden></p>
+        <p
+          id="shelf-empty"
+          class="shelf-empty note"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        ></p>
         <div class="toolbar">
           <div class="tools" role="toolbar" aria-label="Tools" id="tools">
             <button type="button" data-tool="orbit" aria-pressed="true" title="Orbit (1)">
@@ -697,6 +743,17 @@
           >
             Toy
           </button>
+          <!-- Share lane: Share comes second, after Toy (the main things people come for). -->
+          <button
+            type="button"
+            role="tab"
+            id="tab-share"
+            aria-controls="pane-share"
+            aria-selected="false"
+            tabindex="-1"
+          >
+            Share
+          </button>
           <button
             type="button"
             role="tab"
@@ -726,16 +783,6 @@
             tabindex="-1"
           >
             Make
-          </button>
-          <button
-            type="button"
-            role="tab"
-            id="tab-share"
-            aria-controls="pane-share"
-            aria-selected="false"
-            tabindex="-1"
-          >
-            Share
           </button>
           <button
             type="button"
@@ -850,6 +897,10 @@
                 </span>
               </div>
             </section>
+            <details id="toy-keyboard" class="toy-keyboard" hidden>
+              <summary>Play with the keyboard</summary>
+              <div id="toy-keyboard-controls"></div>
+            </details>
           </div>
 
           <div class="pane" role="tabpanel" id="pane-tools" aria-labelledby="tab-tools" hidden>
@@ -1162,69 +1213,116 @@
             </section>
           </div>
 
+          <!-- Share lane (October 15, 2026): laid out for a phone first. Record, then a clip
+               (Video or GIF) and a picture, then the link and the scene file, then PDF and the
+               web page. The computer panel has the same order. Codex task 89 fills the choices of
+               gif-kind, gif-frames, gif-size and webm-seconds; keep their ids. -->
           <div class="pane" role="tabpanel" id="pane-share" aria-labelledby="tab-share" hidden>
+            <!-- UI r5: a live recording of the stage while you play, with the sound. -->
+            <section class="group share-record" id="record-group" aria-labelledby="h-record">
+              <h2 id="h-record">Record</h2>
+              <div class="record-main" id="record-row">
+                <button id="record-start" type="button" class="primary record-start">
+                  <span class="record-dot" aria-hidden="true"></span>
+                  <span class="record-label">Record</span>
+                </button>
+                <!-- Codex task 89: Record's quality choice goes here, beside the button. -->
+              </div>
+              <p class="note" id="record-note">
+                You play, it records, with sound (up to 1 minute). When you stop, you can watch it
+                before you save it.
+              </p>
+              <p id="record-unavailable" class="note" hidden></p>
+            </section>
+            <!-- /UI r5 -->
+
+            <section class="group" id="media-group" aria-labelledby="h-media">
+              <h2 id="h-media">Save a clip</h2>
+              <div class="segmented clip-switch" role="group" aria-label="Clip" id="clip-kind">
+                <button type="button" data-clip="video" aria-pressed="true">Video</button>
+                <button type="button" data-clip="gif" aria-pressed="false">GIF</button>
+              </div>
+              <div class="clip-block" id="webm-block" data-clip="video">
+                <div class="clip-settings" id="webm-row">
+                  <label class="clip-field">
+                    <span>Length</span>
+                    <select id="webm-seconds" aria-label="Video length">
+                      <option value="3">3 s</option>
+                      <option value="5" selected>5 s</option>
+                      <option value="8">8 s</option>
+                    </select>
+                  </label>
+                </div>
+                <button id="export-webm" type="button" class="clip-save">Save video</button>
+                <p id="webm-unavailable" class="note" hidden></p>
+              </div>
+              <div class="clip-block" id="gif-block" data-clip="gif" hidden>
+                <div class="clip-settings" id="gif-row">
+                  <label class="clip-field">
+                    <span>Motion</span>
+                    <select id="gif-kind" aria-label="GIF motion">
+                      <option value="turntable">Turntable</option>
+                      <option value="effects">Effect loop</option>
+                    </select>
+                  </label>
+                  <label class="clip-field">
+                    <span>Frames</span>
+                    <select id="gif-frames" aria-label="GIF frames">
+                      <option value="24">24 frames</option>
+                      <option value="48" selected>48 frames</option>
+                      <option value="72">72 frames</option>
+                    </select>
+                  </label>
+                  <label class="clip-field">
+                    <span>Size</span>
+                    <select id="gif-size" aria-label="GIF size">
+                      <option value="256">256 px</option>
+                      <option value="384">384 px</option>
+                      <option value="512" selected>512 px</option>
+                    </select>
+                  </label>
+                </div>
+                <button id="export-gif" type="button" class="clip-save">Save GIF</button>
+              </div>
+              <div class="share-line" id="png-row">
+                <span class="share-line-text">
+                  <strong>Picture</strong>
+                  <span class="note">A PNG of the view as it is</span>
+                </span>
+                <button id="export-png" type="button">Save picture</button>
+              </div>
+            </section>
+
             <section class="group" id="share-group" aria-labelledby="h-share">
               <h2 id="h-share">Link and scene file</h2>
               <div class="button-row">
                 <button id="share-link" type="button">Copy link</button>
                 <button id="share-qr" type="button" hidden>QR code</button>
-                <button id="export-json" type="button">Save JSON</button>
+              </div>
+              <div class="button-row">
+                <button id="export-json" type="button">Save scene</button>
                 <label class="file-button">
-                  <span>Load JSON</span>
+                  <span>Open a scene</span>
                   <input id="import-json" type="file" accept="application/json,.json" />
                 </label>
               </div>
+              <p class="note" id="scene-note">
+                A scene file keeps the toy, its settings, the look, any paint, and the camera.
+                Opening one picks up where you left off. A photo or file you opened yourself isn't
+                inside it, only its name, so open that file again after the scene.
+              </p>
               <p id="link-note" class="note"></p>
             </section>
-            <section class="group" id="media-group" aria-labelledby="h-media">
-              <h2 id="h-media">Picture, GIF and video</h2>
-              <div class="row compact">
-                <span>PNG</span>
-                <button id="export-png" type="button">Save picture</button>
-              </div>
-              <div class="row compact">
-                <span>GIF</span>
-                <select id="gif-kind" aria-label="GIF motion">
-                  <option value="turntable">Turntable</option>
-                  <option value="effects">Effect loop</option>
-                </select>
-                <select id="gif-frames" aria-label="GIF frames">
-                  <option value="24">24 frames</option>
-                  <option value="48" selected>48 frames</option>
-                  <option value="72">72 frames</option>
-                </select>
-                <select id="gif-size" aria-label="GIF size">
-                  <option value="256">256 px</option>
-                  <option value="384">384 px</option>
-                  <option value="512" selected>512 px</option>
-                </select>
-                <button id="export-gif" type="button">Save GIF</button>
-              </div>
-              <div class="row compact" id="webm-row">
-                <span>WebM</span>
-                <select id="webm-seconds" aria-label="Video length">
-                  <option value="3">3 s</option>
-                  <option value="5" selected>5 s</option>
-                  <option value="8">8 s</option>
-                </select>
-                <button id="export-webm" type="button">Save video</button>
-              </div>
-              <p id="webm-unavailable" class="note" hidden></p>
-              <!-- UI r5: a live recording of the stage while you play, with the sound. -->
-              <div class="row compact" id="record-row">
-                <span>Record</span>
-                <button id="record-start" type="button">Record</button>
-                <span class="note">You play, it records (up to 1 minute, with sound)</span>
-              </div>
-              <p id="record-unavailable" class="note" hidden></p>
-              <!-- /UI r5 -->
-              <!-- Lane PDF lab (labs): a still with a live link, or a recording of one tap. -->
-              <div class="row compact" id="pdf-row" hidden>
-                <span>PDF</span>
+
+            <!-- Lane PDF lab (labs): a still with a live link, or a recording of one tap. -->
+            <section class="group" id="pdf-row" aria-labelledby="h-pdf" hidden>
+              <h2 id="h-pdf">PDF</h2>
+              <div class="share-line">
+                <span class="note share-line-text">A still and a live link, or a recording</span>
                 <button id="export-pdf" type="button">Save PDF</button>
-                <span class="note">A still and a live link, or a recording</span>
               </div>
             </section>
+
             <section class="group" id="embed-group" aria-labelledby="h-embed">
               <h2 id="h-embed">Put it on a web page</h2>
               <div class="row compact">
@@ -1260,6 +1358,7 @@
               ></textarea>
               <p id="embed-note" class="note"></p>
             </section>
+            <!-- Codex task 90 (labs): the batch export's button goes here, at the bottom. -->
           </div>
 
           <div class="pane" role="tabpanel" id="pane-about" aria-labelledby="tab-about" hidden>

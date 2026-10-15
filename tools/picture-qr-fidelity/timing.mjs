@@ -73,6 +73,8 @@ const stats = (selected) => ({
     0.95,
   ),
   slowerCases: selected.filter((p) => p.detail > p.main).length,
+  over5sMain: selected.filter((p) => p.main > 5000).length,
+  over5sDetail: selected.filter((p) => p.detail > 5000).length,
 });
 const pictureGroups = new Map();
 for (const pair of pairs) {
@@ -81,10 +83,12 @@ for (const pair of pairs) {
   pictureGroups.get(key).push(pair);
 }
 const pictures = [...pictureGroups].map(([key, selected]) => ({ key, ...stats(selected) }));
-const expected = [
-  ...SAMPLES,
-  ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json")),
-].flatMap((picture) =>
+const corpusFile = arg("corpus", "");
+const expected = (
+  corpusFile
+    ? JSON.parse(fs.readFileSync(corpusFile))
+    : [...SAMPLES, ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json"))]
+).flatMap((picture) =>
   Array.from({ length: 10 }, (_, link) =>
     ["square", "circle"].map((shape) => `${picture.id}/${link}/${shape}/0`),
   ).flat(),
@@ -108,8 +112,8 @@ const summary = {
     : [],
   provenance: JSON.parse(fs.readFileSync(`${root}/paired-${name}-provenance.json`)),
   complete:
-    pairs.length === 1040 &&
-    rows.length === 2080 &&
+    pairs.length === expected.length &&
+    rows.length === expected.length * 2 &&
     expected.every((key) => grouped.get(key)?.main && grouped.get(key)?.detail),
   unfinished: [...grouped].filter(([, p]) => !p.main || !p.detail).map(([key]) => key),
   inactiveRenderViolations: rows.filter((r) => r.inactiveFrames !== 0).length,

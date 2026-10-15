@@ -44,7 +44,7 @@ import {
   gray,
   SIZES_UP,
 } from "../qr-craft/picture.js";
-import { validateDetail, validateCapture } from "../qr-craft/scan-pool.js";
+import { validateDetail, validateCapture, cancelDetailChecks } from "../qr-craft/scan-pool.js";
 import { tileColors } from "../qr-craft/frame.js";
 import { withScanPause, withScanTail } from "../qr-craft/scan-pause.js";
 import { loadRasterKernel } from "../qr-craft/fast-raster.js";
@@ -428,6 +428,102 @@ function pictureSplats(w, budget, shape = "square", pic = null) {
 const optionsKey = (o) =>
   JSON.stringify(tidy(o || {})) + (o?.picture ?? "") + (o?.shape || "square");
 
+const DETAIL_BUDGET_MS = 20000;
+const DETAIL_MAX_VERSION = 13;
+const DETAIL_TIMEOUT_NOTICE = "Most detail took too long. Using Standard.";
+
+function cancelDetailAttempt(attempt) {
+  if (!attempt || attempt.canceled || attempt.finished) return;
+  attempt.canceled = true;
+  clearTimeout(attempt.timer);
+  if (PIC.detailAttempt === attempt) cancelDetailChecks();
+  attempt.reject(new DOMException("The detail request was canceled.", "AbortError"));
+}
+function beginDetailAttempt(options, generation) {
+  const key = optionsKey(options),
+    previous = PIC.detailAttempt;
+  if (previous?.key === key && !previous.canceled && !previous.finished) {
+    previous.generation = generation;
+    return previous;
+  }
+  cancelDetailAttempt(previous);
+  PIC.notice = "";
+  PIC.fallback = null;
+  let reject;
+  const canceled = new Promise((_resolve, fail) => {
+    reject = fail;
+  });
+  canceled.catch(() => {});
+  const override = Number(globalThis.__splashery?.qrCraft?.detailBudgetMs);
+  const milliseconds =
+    Number.isFinite(override) && override > 0
+      ? Math.max(100, Math.min(DETAIL_BUDGET_MS, override))
+      : DETAIL_BUDGET_MS;
+  const attempt = {
+    key,
+    options: { ...options },
+    generation,
+    reject,
+    canceled: false,
+    finished: false,
+    started: performance.now(),
+    run: (work) => Promise.race([Promise.resolve().then(work), canceled]),
+    finish() {
+      this.finished = true;
+      clearTimeout(this.timer);
+    },
+  };
+  PIC.detailAttempt = attempt;
+  attempt.timer = setTimeout(() => {
+    fallbackToStandard(attempt, DETAIL_TIMEOUT_NOTICE).catch(() => {});
+  }, milliseconds);
+  return attempt;
+}
+async function fallbackToStandard(attempt, notice) {
+  if (attempt?.fallback) return attempt.fallback;
+  const player = app()?.player;
+  if (!attempt) return;
+  if (player && player.loadToken !== attempt.generation) {
+    cancelDetailAttempt(attempt);
+    return;
+  }
+  cancelDetailAttempt(attempt);
+  PIC.notice = notice;
+  PIC.fallback = {
+    notice,
+    text: attempt.options.text,
+    shape: attempt.options.shape,
+    elapsedMs: performance.now() - attempt.started,
+  };
+  PIC.panel?.refresh();
+  const options = { ...attempt.options, fidelity: "standard" };
+  attempt.fallback = (async () => {
+    await switchTo(options);
+    // Standard can itself exceed a device's circular-picture geometry budget.
+    // Do not leave an old payload or an unfinished detail code labeled as this one.
+    if (
+      PIC.detailAttempt === attempt &&
+      optionsKey(player?.scene?.toy?.options) === optionsKey(options) &&
+      optionsKey(PIC.options) !== optionsKey(options)
+    ) {
+      PIC.error =
+        "Standard could not build this code on this device. Try Square or a shorter text.";
+      PIC.options = options;
+      PIC.woven = null;
+      PIC.check = null;
+      PIC.checking = false;
+      player.stage.clearToy();
+      release();
+      PIC.panel?.refresh();
+    }
+  })();
+  return attempt.fallback;
+}
+function detailVersion(options) {
+  const smallest = encodeQR(options.text, options.level, { boost: false }).version;
+  return Math.min(40, smallest + SIZES_UP.find((size) => size.id === options.size).up);
+}
+
 // Study overrides stay on the test hook; saved scenes store only the owner's options.
 function detailSettings(rejected = null) {
   const study = globalThis.__splashery?.qrCraft || {};
@@ -437,10 +533,16 @@ function detailSettings(rejected = null) {
     textureBlur: study.textureBlur || 0,
     textureGuard: study.textureGuard || 0,
     preferContinuous: study.preferContinuous !== false,
-    preferCorrection: study.preferCorrection === true,
+    preferCorrection: study.preferCorrection !== false,
+    errorFraction: Number.isFinite(study.detailErrorFraction)
+      ? Math.max(0, Math.min(0.6, study.detailErrorFraction))
+      : 0.4,
     // A failed stage view gets the full forecast before another expensive rebuild.
     captureValidation: study.captureValidation !== false && !rejected?.length,
     channel: study.detailChannel || "weighted",
+    finderGuard: Number.isFinite(study.finderGuard)
+      ? Math.max(0, Math.min(3, Math.round(study.finderGuard)))
+      : 3,
     trace: study.trace === true,
   };
 }
@@ -450,30 +552,32 @@ function detailSettings(rejected = null) {
 // Lane QR r4 (the owner's note of October 9, 2026): the code is scanned
 // before it is shown. From the build until its check is done, a still of the
 // stage stays up with "Please wait. Scanning code…" on it (Stage.cover);
-// Standard retains its original thirty-second guard; Most detail keeps the
-// cover until its current checks settle, including any automatic rebuild.
+// Most detail has a bounded preparation/repair budget and falls back to Standard.
+// Both modes retain a thirty-second scanning-cover watchdog.
 const SCANNING = "Please wait. Scanning code…";
 function guardDetail() {
-  if (app()?.player?.toyInfo?.id !== "qr-picture" || !PIC.checking) return release();
-  PIC.holdTimer = setTimeout(guardDetail, 1000);
+  const player = app()?.player;
+  if (player?.toyInfo?.id === "qr-picture" && PIC.woven?.fidelity === "detail") {
+    fallbackToStandard(PIC.detailAttempt, DETAIL_TIMEOUT_NOTICE).catch(() => {});
+    // Never uncover an unfinished Most detail render while Standard rebuilds.
+    player.stage.clearToy();
+    PIC.woven = null;
+    PIC.checking = false;
+  }
+  release();
 }
 function hold() {
   const stage = app()?.player?.stage;
   if (typeof window === "undefined" || PIC.noAuto || !stage?.cover) return;
-  if (PIC.holding) {
-    if (PIC.options?.fidelity === "detail") {
-      clearTimeout(PIC.holdTimer);
-      PIC.holdTimer = setTimeout(guardDetail, 1000);
-    }
-    return;
+  const key = optionsKey({ ...PIC.options, fidelity: "standard" });
+  if (PIC.holding && PIC.holdKey === key) return;
+  if (!PIC.holding) {
+    PIC.holding = stage;
+    stage.cover({ label: SCANNING });
   }
-  PIC.holding = stage;
-  stage.cover({ label: SCANNING });
+  PIC.holdKey = key;
   clearTimeout(PIC.holdTimer);
-  PIC.holdTimer = setTimeout(
-    PIC.options?.fidelity === "detail" ? guardDetail : release,
-    PIC.options?.fidelity === "detail" ? 1000 : 30000,
-  );
+  PIC.holdTimer = setTimeout(guardDetail, 30000);
 }
 function release() {
   clearTimeout(PIC.holdTimer);
@@ -487,16 +591,23 @@ async function checkPicture() {
   // A previous build's timer can fire during the next async prepare, before
   // PIC.woven is replaced. It must not adopt the new build's load token.
   if (player && PIC.buildGeneration !== player.loadToken) return PIC.check;
-  return PIC.woven?.fidelity === "detail"
-    ? withScanTail(player, () => checkPictureNow())
-    : checkPictureNow();
+  const attempt = PIC.woven?.fidelity === "detail" ? PIC.detailAttempt : null;
+  try {
+    return await (attempt
+      ? attempt.run(() => withScanTail(player, () => checkPictureNow()))
+      : checkPictureNow());
+  } catch (error) {
+    if (error.name === "AbortError") return PIC.check;
+    throw error;
+  }
 }
 
 async function checkPictureNow() {
   const w = PIC.woven,
     player = app()?.player,
     generation = player?.loadToken,
-    isCurrent = () => !player || player.loadToken === generation;
+    attempt = w?.fidelity === "detail" ? PIC.detailAttempt : null,
+    isCurrent = () => (!player || player.loadToken === generation) && !attempt?.canceled;
   if (!w) return null;
   PIC.checking = true;
   let layout;
@@ -524,6 +635,13 @@ async function checkPictureNow() {
       error: "The scan check couldn't finish. Try making the code again.",
       stageError: error.message,
     };
+    if (attempt) {
+      await fallbackToStandard(
+        attempt,
+        "Most detail could not finish its scan check. Using Standard.",
+      );
+      return PIC.check;
+    }
     PIC.checking = false;
     release();
     PIC.panel?.refresh();
@@ -583,6 +701,14 @@ async function checkPictureNow() {
     PIC.check.stageError = err.message;
     if (w.fidelity === "detail") PIC.check.ok = false;
   }
+  if (w.fidelity === "detail" && !PIC.check?.ok) {
+    await fallbackToStandard(
+      attempt,
+      "Most detail could not keep this code readable. Using Standard.",
+    );
+    return PIC.check;
+  }
+  attempt?.finish();
   PIC.checking = false;
   release();
   PIC.panel?.refresh();
@@ -604,9 +730,11 @@ function scheduleCheck(ms = 500) {
 // higher level), applied.
 async function makeItScan() {
   const player = app()?.player,
-    generation = player?.loadToken,
-    isCurrent = () => !player || player.loadToken === generation;
+    generation = player?.loadToken;
   if (player && PIC.buildGeneration !== generation) return null;
+  const attempt =
+    PIC.options?.fidelity === "detail" ? beginDetailAttempt(PIC.options, generation) : null;
+  const isCurrent = () => (!player || player.loadToken === generation) && !attempt?.canceled;
   const pic = pictureNow(PIC.options || {});
   await loadJsQR();
   if (!isCurrent()) return null;
@@ -623,12 +751,14 @@ async function makeItScan() {
     found =
       options.fidelity === "detail"
         ? await pausedScan(() =>
-            closestScanningAsync(
-              input,
-              { ...options, ...detailSettings(rejected), extra, rejected },
-              readRGBA,
-              (w, p, shape) => validateDetail(w, p, shape, readRGBA),
-              { isCurrent },
+            attempt.run(() =>
+              closestScanningAsync(
+                input,
+                { ...options, ...detailSettings(rejected), extra, rejected },
+                readRGBA,
+                (w, p, shape) => validateDetail(w, p, shape, readRGBA),
+                { isCurrent },
+              ),
             ),
           )
         : closestScanning(input, options, readRGBA);
@@ -649,6 +779,7 @@ async function makeItScan() {
     await switchTo(found.options);
     return { changed: found.changed, options: found.options };
   }
+  attempt?.finish();
   PIC.fix = found ? { changed: found.changed, options: found.options } : { none: true };
   PIC.panel?.refresh();
   if (found && found.changed.length) {
@@ -658,13 +789,30 @@ async function makeItScan() {
   return PIC.fix;
 }
 
+function canSavePicture() {
+  const w = PIC.woven;
+  if (!w) return false;
+  if (w.fidelity !== "detail") return true;
+  const check = PIC.check;
+  return (
+    !PIC.checking &&
+    PIC.buildGeneration === app()?.player?.loadToken &&
+    check?.ok === true &&
+    check.stress?.ok === true &&
+    check.text === w.code.text
+  );
+}
+
 async function savePNG(size = 1600) {
   const a = app();
   const w = PIC.woven;
-  if (!a || !w) return null;
+  if (!a || !w || !canSavePicture()) return null;
+  const generation = a.player.loadToken;
   return a.withBusy("Making the picture…", async () => {
     const { canvasToBlob, downloadBlob, timestampName } = await exportsJS();
     const canvas = await renderFront(PIC.kit, shapeHalf(w.code, PIC.options?.shape), size, 0);
+    if (w.fidelity === "detail" && (PIC.woven !== w || a.player.loadToken !== generation))
+      return null;
     const blob = await canvasToBlob(canvas);
     downloadBlob(blob, timestampName("png", "splashery-picture-qr"));
     a.ui?.toast?.("Picture saved, with its quiet zone.");
@@ -695,11 +843,13 @@ function picturePanel() {
       out.replaceChildren();
       const ck = PIC.check;
       const w = PIC.woven;
+      if (PIC.notice) out.append(note(PIC.notice, "qrc-fallback"));
       if (w) out.append(el("p", { style: "margin:2px 0", textContent: `Version ${w.code.version} (${w.code.size} × ${w.code.size} modules), error correction ${w.code.ecc}.` })); // prettier-ignore
       if (w?.fidelity === "detail") out.append(note("Most detail fits the code to your picture, keeping more of its color and shape. The code is checked before it appears.")); // prettier-ignore
       if (PIC.error) out.append(el("p", { style: "margin:2px 0;color:#b3261e", textContent: PIC.error })); // prettier-ignore
       if (!ck) {
-        out.append(el("p", { style: "margin:2px 0", textContent: "Checking that it scans…" }));
+        if (!PIC.error)
+          out.append(el("p", { style: "margin:2px 0", textContent: "Checking that it scans…" }));
       } else {
         const m = ck.measure;
         out.append(el("p", { id: "qrc-contrast", style: "margin:2px 0", textContent: `Contrast: ${m.module.toFixed(1)} : 1 between whole dark and light modules (the center dots ${m.center.toFixed(1)} : 1).` })); // prettier-ignore
@@ -711,6 +861,7 @@ function picturePanel() {
       const f = PIC.fix;
       if (f) out.append(el("p", { className: "note", id: "qrc-fix", textContent: f.none ? "No version close to this one scans. Try a plainer picture or a shorter text." : f.changed.length ? `Changed so it scans: ${f.changed.join(", ")}.` : "It already scans as it is." })); // prettier-ignore
       scan.disabled = !ck || (ck.ok && (!ck.stage || ck.stage.every((s) => s.ok)));
+      png.disabled = !canSavePicture();
     },
   };
   PIC.panel.refresh();
@@ -727,7 +878,7 @@ const PICTURE = {
   options: [
     { key: "text", label: "Text", type: "text", default: DEFAULT_TEXT, hidden: true },
     { key: "shape", label: "Shape", type: "select", default: "square", choices: shapeChoices },
-    { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
+    { key: "picture", label: "Picture", type: "select", default: SAMPLES[0].id, choices: [...SAMPLES.map((s) => ({ id: s.id, label: s.label, group: s.group })), { id: "own", label: "Your own picture" }] }, // prettier-ignore
     { key: "fidelity", label: "Picture detail", type: "select", default: "standard", choices: [{ id: "standard", label: "Standard" }, { id: "detail", label: "Most detail (color)" }] }, // prettier-ignore
     { key: "contrast", label: "Contrast", type: "slider", min: 0, max: 1, step: 0.05, default: 0.5 }, // prettier-ignore
     { key: "center", label: "Center dot", type: "select", default: "small", choices: CENTERS.map((c) => ({ id: c.id, label: c.label })) }, // prettier-ignore
@@ -780,11 +931,31 @@ const PICTURE = {
   },
   async prepare(o) {
     const player = app()?.player,
-      generation = player?.loadToken,
-      isCurrent = () => !player || player.loadToken === generation;
+      generation = player?.loadToken;
+    let attempt = null;
+    const isCurrent = () => (!player || player.loadToken === generation) && !attempt?.canceled;
     PIC.prepared = null;
     if (o.picture === "own" && !PIC.own) return;
     if (typeof document === "undefined") return;
+    const requested = tidy({ ...o, text: o.text ?? DEFAULT_TEXT });
+    if (requested.fidelity === "detail") {
+      attempt = beginDetailAttempt({ ...o, ...requested }, generation);
+      if (detailVersion(requested) > DETAIL_MAX_VERSION) {
+        await fallbackToStandard(
+          attempt,
+          "Most detail is not available for this code size. Using Standard.",
+        );
+        return;
+      }
+    } else {
+      const previous = PIC.detailAttempt;
+      const fallbackKey = previous && optionsKey({ ...previous.options, fidelity: "standard" });
+      if (fallbackKey !== optionsKey({ ...o, ...requested }) || !previous?.fallback) {
+        cancelDetailAttempt(previous);
+        PIC.notice = "";
+        PIC.fallback = null;
+      }
+    }
     // Lane QR r4: the build steps the nudge up until the code reads (jsQR).
     await loadJsQR().catch(() => null);
     await loadPicture(o.picture === "own" ? "own" : sampleById(o.picture)?.id || SAMPLES[0].id);
@@ -799,21 +970,36 @@ const PICTURE = {
       const rejected = PIC.rejected?.key === key ? PIC.rejected.methods : [];
       try {
         const woven = await pausedScan(() =>
-          makeWovenAsync(
-            pic,
-            {
-              ...t,
-              extra,
-              rejected,
-              ...detailSettings(rejected),
-            },
-            (w, p, shape) => validateDetail(w, p, shape, readRGBA),
-            { isCurrent },
+          attempt.run(() =>
+            makeWovenAsync(
+              pic,
+              {
+                ...t,
+                extra,
+                rejected,
+                ...detailSettings(rejected),
+              },
+              (w, p, shape) => validateDetail(w, p, shape, readRGBA),
+              { isCurrent },
+            ),
           ),
         );
+        if (isCurrent() && woven.detailCheck?.ok === false) {
+          await fallbackToStandard(
+            attempt,
+            "Most detail could not keep this code readable. Using Standard.",
+          );
+          return;
+        }
         if (isCurrent()) PIC.prepared = { key, pic, woven };
-      } catch {
-        /* The build reports input errors through the existing panel. */
+      } catch (error) {
+        if (attempt?.fallback) await attempt.fallback;
+        else if (error.name !== "AbortError") {
+          await fallbackToStandard(
+            attempt,
+            "Most detail could not finish this picture. Using Standard.",
+          );
+        }
       }
     }
   },
@@ -821,6 +1007,7 @@ const PICTURE = {
     out.morph = [c.turn > 0 ? 1 - c.turn : 0, 0, PIC.tap[0], PIC.tap[1]];
   },
   photo: {
+    skipIdenticalUniforms: true,
     on: (o) => tidy(o).fidelity === "detail" && detailSettings().texture === "tiles",
     rect: () => {
       const half = PIC.woven.code.size / 2;
@@ -1416,6 +1603,8 @@ if (typeof window !== "undefined" && window.__splashery) {
       check: PIC.check,
       checking: PIC.checking,
       error: PIC.error,
+      notice: PIC.notice || "",
+      fallback: PIC.fallback || null,
       rejected: PIC.rejected?.methods || [],
     }),
     checkPicture: () => checkPicture(),

@@ -7,10 +7,9 @@ export function tileColors(w) {
   if (!tileCache.has(w)) {
     const colors =
       w.rendering?.textureBlur > 0 ? soften(w.cells, w.G, w.rendering.textureBlur * w.k) : w.cells;
-    tileCache.set(
-      w,
-      Uint8ClampedArray.from(colors, (value) => value * 255),
-    );
+    const bytes = new Uint8ClampedArray(colors.length);
+    for (let i = 0; i < colors.length; i++) bytes[i] = colors[i] * 255;
+    tileCache.set(w, bytes);
   }
   return tileCache.get(w);
 }
@@ -73,20 +72,46 @@ export function textureFrame(w, pic, shape = "square", width = 720) {
       return (Math.floor(center * 65533 + 1.5) - 1) / 65533 - center;
     });
   const side = pic ? Math.min(pic.w, pic.h) : 0;
+  // X and Y use the same square footprint. Keep their exact Float64 samples,
+  // and do the module/texel lookup once per axis instead of once per pixel.
+  const coordinates = new Float64Array(width),
+    inside = new Uint8Array(width),
+    starts = new Uint32Array(width),
+    fractions = new Float64Array(width),
+    sourceX = pic ? new Uint32Array(width) : null,
+    sourceY = pic ? new Uint32Array(width) : null;
+  for (let i = 0; i < width; i++) {
+    const p = ((i + 0.5) / width - 0.5) * extent;
+    coordinates[i] = p;
+    if (Math.abs(p) < n / 2) {
+      inside[i] = 1;
+      const module = Math.floor(p + n / 2),
+        t = Math.min(w.G - 1, Math.max(0, (p / n + 0.5 + offsets[module]) * w.G - 0.5)),
+        start = Math.floor(t);
+      starts[i] = start;
+      fractions[i] = t - start;
+    }
+    if (pic) {
+      sourceX[i] = Math.max(
+        0,
+        Math.min(pic.w - 1, Math.floor((pic.w - side) / 2 + (0.5 + p / (2 * half)) * side)),
+      );
+      sourceY[i] = Math.max(
+        0,
+        Math.min(pic.h - 1, Math.floor((pic.h - side) / 2 + (0.5 + p / (2 * half)) * side)),
+      );
+    }
+  }
   for (let y = 0; y < width; y++)
     for (let x = 0; x < width; x++) {
-      const px = ((x + 0.5) / width - 0.5) * extent,
-        py = ((y + 0.5) / width - 0.5) * extent,
+      const px = coordinates[x],
+        py = coordinates[y],
         q = (y * width + x) * 4;
-      if (Math.abs(px) < n / 2 && Math.abs(py) < n / 2) {
-        const col = Math.floor(px + n / 2),
-          row = Math.floor(py + n / 2),
-          tx = Math.min(w.G - 1, Math.max(0, (px / n + 0.5 + offsets[col]) * w.G - 0.5)),
-          ty = Math.min(w.G - 1, Math.max(0, (py / n + 0.5 + offsets[row]) * w.G - 0.5)),
-          x0 = Math.floor(tx),
-          y0 = Math.floor(ty),
-          fx = tx - x0,
-          fy = ty - y0;
+      if (inside[x] && inside[y]) {
+        const x0 = starts[x],
+          y0 = starts[y],
+          fx = fractions[x],
+          fy = fractions[y];
         for (let ch = 0; ch < 3; ch++) {
           let value = 0;
           for (let v = 0; v < 2; v++)
@@ -104,15 +129,7 @@ export function textureFrame(w, pic, shape = "square", width = 720) {
         Math.max(Math.abs(px), Math.abs(py)) >= n / 2 + 4 &&
         Math.hypot(px, py) < half - 0.65
       ) {
-        const sx = Math.max(
-            0,
-            Math.min(pic.w - 1, Math.floor((pic.w - side) / 2 + (0.5 + px / (2 * half)) * side)),
-          ),
-          sy = Math.max(
-            0,
-            Math.min(pic.h - 1, Math.floor((pic.h - side) / 2 + (0.5 + py / (2 * half)) * side)),
-          ),
-          at = (sy * pic.w + sx) * 3;
+        const at = (sourceY[y] * pic.w + sourceX[x]) * 3;
         for (let ch = 0; ch < 3; ch++) data[q + ch] = 255 * pic.data[at + ch];
       }
     }

@@ -233,6 +233,21 @@ export class Player {
     this.media.addEventListener("change", () => this.applyLook(), {
       signal: this.lifetime.signal,
     });
+    if (this.opts.reducedMotion === undefined) {
+      const motionMedia = matchMedia("(prefers-reduced-motion: reduce)");
+      motionMedia.addEventListener(
+        "change",
+        (e) => {
+          this.reducedMotion = this.camera.reducedMotion = e.matches;
+          this.motionAllowed = !e.matches;
+          this.camera.setTurntable(this.scene.autoplay.turntable);
+          this.idle.weight = 0;
+          this.stage.requestRender();
+          this.emit("motion-preference", e.matches);
+        },
+        { signal: this.lifetime.signal },
+      );
+    }
     this.applyLook();
     this.watchDeviceShake();
     return this;
@@ -1426,6 +1441,21 @@ export class Player {
   typeKey(ch) {
     const f = this.toyInfo?.recipe?.typeKey;
     const hit = f ? f(ch) : null;
+    return this.actControl(hit);
+  }
+
+  // Named part controls use the same action and sound path as typed keys.
+  playPart(id) {
+    const keyboard = this.toyInfo?.recipe?.keyboard;
+    if (!keyboard) return;
+    if (keyboard.items().find((item) => item.id === id)?.disabled) return;
+    if (keyboard.pause) this.setControl(keyboard.pause, 0);
+    this.actControl(keyboard.activate(id, this.time));
+    this.interact();
+    this.stage.requestRender();
+  }
+
+  actControl(hit) {
     if (!hit) return false;
     const r = this.motion.act(this.time, null, hit);
     this.stage.requestRender();
@@ -1520,7 +1550,7 @@ export class Player {
     // ordinary photos still follow the common body rotation.
     const q = tiles[0] > 0.5 ? [0, 0, 0, 1] : u.uSpBodyQ && (u.uSpBodyQ[3] || u.uSpBodyQ[0] || u.uSpBodyQ[1] || u.uSpBodyQ[2]) ? u.uSpBodyQ : [0, 0, 0, 1]; // prettier-ignore
     const tex = this.stage.photoTex;
-    this.stage.setPhotoUniforms(photoUniforms({ x0: a[0], x1: b[0], y0: b[1], y1: a[1] }, q, u.uSpClock?.[2] ?? 1, tex ? [tex.width, tex.height] : [1, 1])); // prettier-ignore
+    this.stage.setPhotoUniforms(photoUniforms({ x0: a[0], x1: b[0], y0: b[1], y1: a[1] }, q, u.uSpClock?.[2] ?? 1, tex ? [tex.width, tex.height] : [1, 1]), spec.skipIdenticalUniforms === true); // prettier-ignore
   }
 
   // A world point in the current toy's recipe coordinates: a kit toy's

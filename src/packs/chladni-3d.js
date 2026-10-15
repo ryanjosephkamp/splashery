@@ -1176,6 +1176,22 @@ export const CHLADNI_CELL = {
           frame.push({ p: [0.1 * Math.cos(th), y, 0.1 * Math.sin(th)], n: [Math.cos(th), 0, Math.sin(th)], flat: 0.2, size: 0.8, opacity: 1, color: shade(metal, 0.9 + 0.2 * Math.max(0, Math.cos(th - 0.6))), pattern: false }); // prettier-ignore
         }
     }
+    // Lane Polish: the cube's clear glass, barely there: a faint pale-blue
+    // sheen on its four sides and floor, so it reads as a glass cell of
+    // water without hiding the beads.
+    if (mode.shape === "cube") {
+      const e = H + 0.008;
+      const gstep = 0.07;
+      const glass = (p, n) => frame.push({ p, n, flat: 0.02, size: 4.6, opacity: 0.035, color: "#d8ecf6", pattern: false }); // prettier-ignore
+      for (let u = -H + gstep / 2; u < H; u += gstep)
+        for (let v = -H + gstep / 2; v < H; v += gstep) {
+          glass([-e, u, v], [-1, 0, 0]);
+          glass([e, u, v], [1, 0, 0]);
+          glass([u, v, -e], [0, 0, -1]);
+          glass([u, v, e], [0, 0, 1]);
+          glass([u, -e, v], [0, -1, 0]);
+        }
+    }
     k.cloud({ share: frame.length / k.count, pattern: false, jitter: 0 }, (rand, i) => frame[i] || null); // prettier-ignore
     // The transducer under the cell: a ceramic disc on a dark puck.
     const pz = [];

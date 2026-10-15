@@ -8,10 +8,10 @@ const root = ".cache/picture-qr-fidelity";
 const out = arg("out", `${root}/review-export`);
 const modes = { main: arg("main", "main-all"), detail: arg("detail", "detail-v4") };
 const summary = JSON.parse(fs.readFileSync(arg("summary", `${root}/summary/summary.json`)));
-const corpus = [
-  ...SAMPLES,
-  ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json")),
-];
+const corpusFile = arg("corpus", "");
+const corpus = corpusFile
+  ? JSON.parse(fs.readFileSync(corpusFile))
+  : [...SAMPLES, ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json"))];
 const escape = (value) =>
   String(value).replace(
     /[&<>"']/g,

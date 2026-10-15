@@ -1,5 +1,37 @@
 # Picture QR fidelity study
 
+## October 15 review pass
+
+Use Node 22, the CI runtime. The review pass freezes 100 pictures and ten payloads in
+`results/review-pass/corpus.json` and `results/review-pass/payloads.json`. It compares the locked
+candidate against merged main `cb8a8315`. The report separates these measurements from the
+historical 52-picture pass below.
+
+```sh
+mkdir -p .cache/picture-qr-fidelity/review-main
+git archive cb8a8315 src | tar -x -C .cache/picture-qr-fidelity/review-main
+node tools/picture-qr-fidelity/sources.mjs
+node tools/picture-qr-fidelity/paired.mjs --name=review-full --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-main --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --photos=all --links=all --repeats=1 --qualify=1
+node tools/picture-qr-fidelity/summarize.mjs --baseline=cb8a8315 --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --main=browser-review-full-main-low --detail=browser-review-full-detail-low --out=tools/picture-qr-fidelity/results/review-pass
+node tools/picture-qr-fidelity/timing.mjs --name=review-full --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --out=tools/picture-qr-fidelity/results/review-pass/timing.json
+node tools/picture-qr-fidelity/clips.mjs --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-main --out=.cache/picture-qr-fidelity/review-export/clips
+node tools/picture-qr-fidelity/review.mjs --main=review-full-main --detail=review-full-detail --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --summary=tools/picture-qr-fidelity/results/review-pass/summary.json --out=.cache/picture-qr-fidelity/review-export
+```
+
+Serve the repository on port 4173 before starting. Stop all other study and test workers during
+timing. The harness checks every served main module against its Git blob, preserves the exact source
+hashes and arguments, reports four cores, balances mode order, and rejects inactive-page drawing. An
+explicit corpus file keeps later sample additions from changing the fixed test set. Use a new run
+name after a source or protocol change.
+
+The normal recipe starts at a 40% correction share and retains the original finder guard. The
+50%/60% and narrow-guard pilots are diagnostics, not production defaults. Their complete captured
+rows, including slower cases and the narrow-guard fallback, are retained in
+`results/review-pass/diagnostic-manifest.json`. Source-only probes are labeled separately. Frozen
+source archives live on the clips branch, linked by `results/revision-sources/manifest.json`.
+
+## Historical first-pass commands
+
 The frozen baseline is main `41b21e74`. The corpus has 32 existing samples and 20 test-only CC0
 images in `corpus.json`. That manifest and `tools/assets.json` record live source checks, original
 and derivative hashes, resizing, and the two signature-removing crops. No fixture is loaded by the

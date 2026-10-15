@@ -1640,6 +1640,12 @@ export const MOVING_PHOTO = {
         MOVING.t = 0;
       } else MOVING.t = tr.time();
       MOVING.anchor = null;
+    } else if (tr?.el.ended && !tr.blocked) {
+      // A slow frame can miss the sound's end entirely. Start the next loop,
+      // rather than seeking back to the last displayed time and replaying its tail.
+      MOVING.t = 0;
+      MOVING.anchor = null;
+      tr.play(MOVING.sound);
     } else {
       // Silent (a GIF, or a browser that wants a tap before sound): real
       // time, so the clip keeps its speed however few frames are drawn (r6:

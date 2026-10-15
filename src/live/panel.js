@@ -306,7 +306,8 @@ async function captureFrame(kind, name) {
 }
 
 // ---- Clap to tap (labs) --------------------------------------------------------------
-// A setting in the Play tab: while it is on, the microphone listens for a
+// A setting at the bottom of the Tools tab (the Share lane moved it there
+// from the Toy tab, October 15, 2026): while it is on, the microphone listens for a
 // sharp sound (a clap, a snap, a knock on the table) and taps whatever toy
 // is open. It starts off on every visit.
 
@@ -336,9 +337,8 @@ async function labsOn() {
 
 async function renderClapSetting() {
   if (!(await labsOn())) return;
-  const pane = document.getElementById("pane-play");
-  const after = document.getElementById("toy-group");
-  if (!pane || !after || document.getElementById("live-group")) return;
+  const pane = document.getElementById("pane-tools");
+  if (!pane || document.getElementById("live-group")) return;
   const sec = document.createElement("section");
   sec.className = "group";
   sec.id = "live-group";
@@ -381,7 +381,7 @@ async function renderClapSetting() {
     }
   });
   sec.append(h, row, note, error);
-  after.after(sec);
+  pane.append(sec);
 }
 
 export const clapState = () => ({ on: clap.on, hooked: !!clap.off });

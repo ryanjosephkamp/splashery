@@ -240,8 +240,9 @@ void modifySplatColor(vec3 center, inout vec4 color) {
     }
     // Close up, what is much nearer than the point the camera looks at
     // (uSpCam.w: its distance) fades, so it doesn't fill the view as big
-    // soft spots.
-    if (uSpCam.w > 0.0) a *= smoothstep(0.3, 0.55, length(center - uSpCam.xyz) / uSpCam.w);
+    // soft spots (lane Polish: it fades from 0.85 of that distance and is
+    // gone at 0.55; it was 0.55 and 0.3).
+    if (uSpCam.w > 0.0) a *= smoothstep(0.55, 0.85, length(center - uSpCam.xyz) / uSpCam.w);
   }
   if (!FREE && uSpMorph.w != 0.0) {
     float front = dot(center, normalize(uSpCam.xyz));
@@ -354,7 +355,7 @@ fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
       a = a * mix(1.0, max(t * t / (t * t + f * f), 0.03), uniform.uSpMorph.w);
     }
     if (uniform.uSpCam.w > 0.0) {
-      a = a * smoothstep(0.3, 0.55, length(center - uniform.uSpCam.xyz) / uniform.uSpCam.w);
+      a = a * smoothstep(0.55, 0.85, length(center - uniform.uSpCam.xyz) / uniform.uSpCam.w);
     }
   }
   if (!FREE && uniform.uSpMorph.w != 0.0) {

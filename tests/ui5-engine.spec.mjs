@@ -43,7 +43,11 @@ test.describe("phone", () => {
     expect(g.y).toBeLessThan(60);
     expect(Math.abs(g.y - flag.y)).toBeLessThan(2);
     expect(g.x + g.width).toBeLessThanOrEqual(flag.x);
-    expect(g.x).toBeGreaterThan(name.x + name.width); // the name stays readable
+    // Task 52's approved 44 px controls use a separate row below the name.
+    expect(g.y).toBeGreaterThanOrEqual(name.y + name.height + 4);
+    expect(g.width).toBe(44);
+    expect(g.height).toBe(44);
+    await expect(page.locator(".brand h1")).toBeVisible();
     // Scrolled far along the category row, it is still one tap away.
     await page.evaluate(() => (document.getElementById("shelf-chips").scrollLeft = 2000));
     await page.click("#gallery-open");

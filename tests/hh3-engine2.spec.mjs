@@ -23,6 +23,13 @@ async function handsOn(page) {
   await page.waitForTimeout(800);
   if (!(await page.evaluate(() => window.__splashery.player.handsOn.on)))
     await page.click("#hands-toggle");
+  // tick() drives these engine checks. Renderer frames between driver calls
+  // must not move the world or age a pluck before its explicit next step.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.stage.updateHandlers = [];
+    player.update(0);
+  });
 }
 
 const tick = (page, secs) =>
@@ -141,6 +148,19 @@ test("strings: a drag across the guitar's strings plucks each one, in turn", asy
     window.__strings = list;
   });
   await handsOn(page);
+  // A slow opening can leave the camera easing from the previous toy.
+  // Settle its real clock before projecting fixed endpoints for the drag.
+  const cameraSettled = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    for (let i = 0; i < 120; i++) {
+      if (!player.camera.update(1 / 60)) {
+        player.update(0);
+        return true;
+      }
+    }
+    return false;
+  });
+  expect(cameraSettled).toBe(true);
   // From just outside the low string to just past the high one, across
   // their middles.
   const px = await page.evaluate(() => {
@@ -160,6 +180,14 @@ test("strings: a drag across the guitar's strings plucks each one, in turn", asy
   const before = await page.evaluate(() => window.__splashery.player.handsOn.body?.pos.slice());
   await page.mouse.move(...px[0]);
   await page.mouse.down();
+  // Mouse-down starts an asynchronous GPU pick. Moves before it resolves
+  // are ignored; wait for this real press to acquire the string stroke.
+  await page.waitForFunction(() => {
+    const { app, player } = window.__splashery;
+    return (
+      app.toolState?.tool === "hands" && app.toolState.started && !!player.handsOn.extras?.strum
+    );
+  });
   for (let i = 1; i <= 24; i++) {
     const f = i / 24;
     await page.mouse.move(

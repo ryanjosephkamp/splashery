@@ -131,6 +131,7 @@ function continuous(code, pic, o = {}) {
     contrast: o.contrast ?? 0.5,
     style: "color",
     channel: o.channel || "rgb",
+    finderGuard: o.finderGuard ?? 3,
   };
 }
 
@@ -252,7 +253,7 @@ export function weaveDetail(code, pic, o = {}) {
     adaptive: true,
     areaMargin: 0.03,
     guard: 0,
-    finderGuard: 3,
+    finderGuard: o.finderGuard ?? 3,
   });
   if (code.ecc === "H") w = alignmentMoat(w);
   w = cameraProject(w, { cameraMargin: margin, cameraSigma: 0.36, channel: o.channel });
@@ -285,6 +286,7 @@ export function finishDetail(w, o = {}) {
       edge: o.finderEdge ?? 0.24,
       core: o.finderCore ?? 0.08,
       channel: w.channel || "rgb",
+      finderGuard: w.finderGuard,
     },
   };
 }

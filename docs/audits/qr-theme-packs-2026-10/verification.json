@@ -1,0 +1,67 @@
+[
+  {
+    "check": "Candidate layout screening",
+    "method": "Production CPU weave and jsQR; no mocks",
+    "result": "138 candidates \u00d7 10 links \u00d7 2 checks: 2,760 passed."
+  },
+  {
+    "check": "Retained phone and print-focus matrix",
+    "method": "Real Chromium/WebGL2 renders, decoded by jsQR",
+    "result": "48 backgrounds \u00d7 10 links \u00d7 4 checks: 1,920 passed. Raw 900px diagnostic: 356/480."
+  },
+  {
+    "check": "Capture protocol",
+    "method": "Real Chromium; compare decoded RGBA",
+    "result": "Three payloads byte-identical to the original task-54 helper; all six theme regressions also match the production PNG export."
+  },
+  {
+    "check": "New theme regressions",
+    "method": "Playwright: tests/cdx-qr-themes.spec.mjs; production CPU and real browser",
+    "result": "59 passed, 0 failed (44.5 minutes). Includes all 48 backgrounds with three browser payloads, lazy requests, credits, and two viewport screenshots."
+  },
+  {
+    "check": "Existing regressions",
+    "method": "Playwright: qr*, smoke, help, unit, taps, kit, and hta; one worker",
+    "result": "Initial run: 225 passed, 4 failed (1.4 hours). All four failing assertions also reproduce on the older isolated main baseline; see the current Operator follow-up results below."
+  },
+  {
+    "check": "Isolated browser rechecks",
+    "method": "Exact unchanged qrc-picture and smoke cases, separately on baseline and feature",
+    "result": "Initial baseline: 2 failed. Initial feature rerun: Reset passed; Wildflowers post-flip scan failed. Current-main results are recorded separately in the Operator follow-up."
+  },
+  {
+    "check": "Picture QR build",
+    "method": "node tools/check-packs.mjs qr-picture, after browser runs stopped",
+    "result": "Passed: 122,602 finite splats in 1,038 ms. Earlier concurrent runs exceeded the 1,500 ms timing threshold."
+  },
+  {
+    "check": "Asset licenses",
+    "method": "node tools/nc-assets.mjs --check",
+    "result": "Passed: four existing NC assets remain tagged; no ND license. New backgrounds are original CC0."
+  },
+  {
+    "check": "Formatting",
+    "method": "npx prettier --check .",
+    "result": "Clean."
+  },
+  {
+    "check": "American English",
+    "method": "node tools/us-english.mjs --diff, with all task files staged",
+    "result": "No British spellings found."
+  },
+  {
+    "check": "Artifact and code review",
+    "method": "Read-only independent code review, plus direct image inspection",
+    "result": "Cache-matrix validation and skipped-variant reasons fixed. All 48 hashes/records, 480 CSV rows, six phone sheets, and both viewport screenshots checked."
+  },
+  {
+    "check": "Operator follow-up on current main and updated PR",
+    "method": "Exact unchanged browser cases on isolated main 6c3764ff; exact four failing cases and five theme metadata/viewport checks on the updated feature branch",
+    "result": "Current main: both browser cases pass; the narrow 8,000-splat circle guard and exact shared-builder hash mismatch persist. Updated feature: 7 passed, 2 failed (kit guard and shared-builder hash). Wildflowers and Reset both pass. See operator-recheck.json."
+  },
+  {
+    "check": "Credits-page merge-test follow-up (October 15)",
+    "method": "Merge main d1f300b4 and 3d43af20, rebuild site, run unchanged tests/spg.spec.mjs and the theme metadata case; real Chromium DOM validation of all 48 rows",
+    "result": "All 8 site-page tests and 1 theme metadata test passed (1.3 minutes after the latest main merge). Before the table fix: 7 site-page tests passed and the credits case failed with only Theme missing. All 48 names, source links, makers, and CC0 licenses match; six groups of eight; screenshots at 390\u00d7844 and 1440\u00d7900. Site-build --check is current; license check passes."
+  }
+]

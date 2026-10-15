@@ -667,16 +667,42 @@ export function* detailCandidates(pic, o) {
     return candidate;
   };
   const create = function* () {
-    const options = { ...t, margin, finderEdge, finderCore, channel: o.channel };
+    const options = {
+      ...t,
+      margin,
+      finderEdge,
+      finderCore,
+      channel: o.channel,
+      finderGuard: o.finderGuard,
+    };
     if (o.preferContinuous) {
-      const fraction =
-        o.channel !== "green" &&
-        o.channel !== "weighted" &&
-        o.preferCorrection &&
-        o.texture === "tiles" &&
-        code.ecc === "H"
-          ? 0.4
+      let fraction =
+        o.preferCorrection && o.texture === "tiles" && code.ecc === "H"
+          ? Math.max(0, Math.min(0.6, Number.isFinite(o.errorFraction) ? o.errorFraction : 0.4))
           : 0;
+      // Restore more correction reserve after an actual failure of this family,
+      // before spending another capture on finder-tone changes.
+      if (
+        fraction > 0.4 &&
+        o.rejected?.some((key) => {
+          try {
+            const failed = JSON.parse(key),
+              center = centerById(t.center);
+            return (
+              Array.isArray(failed) &&
+              failed[1] === code.version &&
+              failed[2] === code.ecc &&
+              failed[3] === code.mask &&
+              failed[4] === center.k &&
+              failed[5] === center.c &&
+              failed[6] === margin
+            );
+          } catch {
+            return false;
+          }
+        })
+      )
+        fraction = 0.4;
       const method = fraction ? "correction" : "continuous";
       const base = weaveDetail(fraction ? fitPictureErrors(code, pic, fraction) : code, pic, {
         ...options,
@@ -763,6 +789,61 @@ export function* detailCandidates(pic, o) {
       const check = yield w;
       w.detailCheck = { ...check, tried: step + 1, candidates: tested };
       if (check?.ok) return w;
+      // A different spatial pattern can repair a failed first forecast without
+      // cycling every finder tone. Accepted candidates retain the same checks.
+      if (
+        tested === 1 &&
+        step === 0 &&
+        !o.rejected?.length &&
+        o.preferContinuous &&
+        o.texture === "tiles"
+      ) {
+        const initialOptions = {
+          ...t,
+          margin: initial,
+          finderEdge: 0.24,
+          finderCore: 0.08,
+          channel: o.channel,
+          finderGuard: o.finderGuard,
+        };
+        const opposite = () =>
+          decorate(
+            weaveDetail(
+              rotateCode(fitPadding(baseCode, inversePicture(pic, baseCode.size, 2)), 2),
+              pic,
+              initialOptions,
+            ),
+            false,
+          );
+        const backup = () => {
+          const candidate = decorate(
+            weaveDetail(fitPictureErrors(code, pic, 0.4), pic, {
+              ...initialOptions,
+              method: "correction",
+            }),
+            false,
+          );
+          candidate.rendering.fraction = 0.4;
+          return candidate;
+        };
+        const higherBudget = w.rendering.method === "correction" && w.rendering.fraction > 0.4;
+        const perspective = check?.preflight && [1, 2, 5].includes(check.view);
+        const alternatives = higherBudget
+          ? perspective
+            ? [opposite, backup]
+            : [backup, opposite]
+          : [opposite];
+        for (const build of alternatives) {
+          const alternative = build(),
+            alternativeKey = renderingKey(alternative);
+          if (seen.has(alternativeKey)) continue;
+          seen.add(alternativeKey);
+          tested++;
+          const alternativeCheck = yield alternative;
+          alternative.detailCheck = { ...alternativeCheck, tried: 1, candidates: tested };
+          if (alternativeCheck?.ok) return alternative;
+        }
+      }
     }
   }
   fallback.detailCheck = {
@@ -790,6 +871,7 @@ export function renderingKey(w) {
     w.rendering.core,
     w.rendering.fraction || 0,
     w.rendering.channel || "rgb",
+    w.rendering.finderGuard ?? null,
   ]);
 }
 

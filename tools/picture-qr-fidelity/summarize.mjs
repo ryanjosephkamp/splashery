@@ -9,14 +9,15 @@ import { CONDITIONS } from "./captures.mjs";
 const arg = (key, fallback) =>
   process.argv.find((value) => value.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
 const root = ".cache/picture-qr-fidelity";
+const baseline = arg("baseline", "41b21e74");
 const names = {
   main: arg("main", "browser-main-all-low"),
   detail: arg("detail", "browser-detail-v4-low"),
 };
-const corpus = [
-  ...SAMPLES,
-  ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json")),
-];
+const corpusFile = arg("corpus", "");
+const corpus = corpusFile
+  ? JSON.parse(fs.readFileSync(corpusFile))
+  : [...SAMPLES, ...JSON.parse(fs.readFileSync("tools/picture-qr-fidelity/corpus.json"))];
 const shapes = ["square", "circle"],
   scales = ["phone", "print"],
   readers = ["jsqr", "zxingcpp"];
@@ -134,6 +135,7 @@ const codeSummary = (mode) => {
           (mode === "detail" && r.check?.stress?.ok !== true),
       )
       .map((r) => r.key),
+    fallbacks: rows.filter((r) => r.fallback).map((r) => ({ key: r.key, fallback: r.fallback })),
     missing: expected.filter((key) => !sets[mode].has(key)),
   };
 };
@@ -143,7 +145,7 @@ const regressions = cases
 const complete = Object.values(sets).every((set) => expected.every((key) => set.get(key)?.scores));
 const detailSummary = codeSummary("detail");
 const summary = {
-  baseline: "41b21e74",
+  baseline,
   generated: new Date().toISOString(),
   inputs: names,
   expectedCodes: expected.length,
@@ -272,7 +274,7 @@ if (arg("bundle", "0") === "1") {
   );
   fs.writeFileSync(
     path.join(out, "provenance.json"),
-    JSON.stringify({ baseline: "41b21e74", hashes }, null, 2) + "\n",
+    JSON.stringify({ baseline, hashes }, null, 2) + "\n",
   );
 }
 console.log(

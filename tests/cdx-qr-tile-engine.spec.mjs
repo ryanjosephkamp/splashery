@@ -1,5 +1,47 @@
 import { test, expect } from "@playwright/test";
 
+test("Ordinary photo uniforms redraw even when their mapping is unchanged", async () => {
+  const { Stage } = await import("../src/stage.js");
+  let requested = 0;
+  const stage = {
+    device: { scope: { resolve: () => ({ setValue() {} }) } },
+    requestRender: () => requested++,
+  };
+  const uniforms = {
+    map: [1, 0, 1, 0],
+    tu: [1, 0, 0, 0],
+    tv: [0, 1, 0, 0],
+    k: [1, 64, 64, 0],
+  };
+  Stage.prototype.setPhotoUniforms.call(stage, uniforms);
+  Stage.prototype.setPhotoUniforms.call(stage, uniforms);
+  expect(requested).toBe(2);
+});
+
+test("Opt-in QR photo uniforms redraw on depth and view changes, including reused arrays", async () => {
+  const { Stage } = await import("../src/stage.js");
+  let requested = 0;
+  const stage = {
+    device: { scope: { resolve: () => ({ setValue() {} }) } },
+    requestRender: () => requested++,
+  };
+  const uniforms = {
+    map: [1, 0, 1, 0],
+    tu: [1, 0, 0, 0],
+    tv: [0, 1, 0, 0],
+    k: [1, 64, 64, 0],
+  };
+  const apply = () => Stage.prototype.setPhotoUniforms.call(stage, uniforms, true);
+  apply();
+  apply();
+  expect(requested).toBe(1);
+  uniforms.map[0] = 2;
+  apply();
+  uniforms.tu[2] = 0.5;
+  apply();
+  expect(requested).toBe(3);
+});
+
 test("A render-tail hold stops idle drawing while explicit captures and nested holds work", async ({
   page,
 }) => {
@@ -188,12 +230,12 @@ fn modifySplatColor(c: vec3f, color: ptr<function, vec4f>) { }`,
             tv: [0, 1, 0, 0],
             k: [1, 64, 64, 0],
           };
-          stage.setPhotoUniforms(uniforms);
+          stage.setPhotoUniforms(uniforms, true);
           const first = requested;
-          stage.setPhotoUniforms(uniforms);
+          stage.setPhotoUniforms(uniforms, true);
           const unchanged = requested;
           uniforms.map[0] = 2;
-          stage.setPhotoUniforms(uniforms);
+          stage.setPhotoUniforms(uniforms, true);
           const changed = requested;
           stage.requestRender = requestRender;
           const originalCount = a.player.proc.ctx.kit.count;
