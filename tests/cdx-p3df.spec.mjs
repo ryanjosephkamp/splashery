@@ -187,6 +187,7 @@ test("private inventory is local, narrow, and explicit about publication rights"
 
 test("private output refuses checkout folders and symlink aliases outside .cache", async () => {
   const folder = fs.mkdtempSync(path.join(os.tmpdir(), "p3df-output-"));
+  fs.mkdirSync(path.join(ROOT, ".cache"), { recursive: true });
   const cache = fs.mkdtempSync(path.join(ROOT, ".cache/p3df-output-"));
   try {
     fs.writeFileSync(path.join(folder, "owner photo.jpg"), "private fixture");
