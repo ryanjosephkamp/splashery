@@ -195,7 +195,14 @@ async function clay(page, cdp) {
         () => player.proc.clay.length,
         target,
         25,
-        () => app.applyTool({ tool: "clay" }, [0, 0, 0], false),
+        () => {
+          const i = player.proc.clay.length;
+          app.applyTool(
+            { tool: "clay" },
+            [((i % 101) - 50) / 100, ((Math.floor(i / 101) % 101) - 50) / 100, 0],
+            false,
+          );
+        },
       );
       const start = performance.now();
       player.refreshPaint();
@@ -204,7 +211,10 @@ async function clay(page, cdp) {
         () => player.scene.paint.stamps.length,
         target * 2,
         50,
-        () => player.paintAt([0, 0, 0], false),
+        () => {
+          const i = player.scene.paint.stamps.length;
+          player.paintAt([Math.sin(i * 0.017) * 0.5, Math.cos(i * 0.017) * 0.5, 0], false);
+        },
       );
       return {
         clay: player.proc.clay.length,
@@ -221,19 +231,65 @@ async function clay(page, cdp) {
     samples.push({ ...work, heap: await heap(cdp) });
     process.stderr.write(`  ${work.clay} clay, ${work.paint} paint\n`);
   }
+  // Keep a serialized copy in Node, outside the measured browser heap. Release the real histories
+  // made by editing before using that copy for the independent save/reopen measurements.
+  const full = await page.evaluate(() => ({
+    clay: window.__splashery.player.proc.clay,
+    paint: window.__splashery.player.scene.paint.stamps,
+  }));
+  const releases = [];
+  for (const action of ["reset", "toy", "source"]) {
+    if (action !== "reset") {
+      await page.evaluate(async () => {
+        const { app } = window.__splashery;
+        await app.makeToy({ ...app.generator, count: 10000 });
+      });
+      await page.evaluate(() => window.__life.work(8000));
+    }
+    await page.evaluate(() => {
+      const { player } = window.__splashery;
+      const arrays = [player.proc.clay, player.scene.toy.clay, player.scene.paint.stamps];
+      window.__life.oldEdits = [...arrays, ...arrays.flatMap((a) => [a[0], a.at(-1)])].map(
+        (a) => new WeakRef(a),
+      );
+    });
+    const before = await heap(cdp);
+    await page.evaluate(async (action) => {
+      const { app } = window.__splashery;
+      if (action === "reset") await app.resetAll();
+      else if (action === "toy") await app.chooseToy("basketball");
+      else await app.makeToy({ ...app.generator, shape: "torus", count: 10000 });
+    }, action);
+    await settle(page);
+    releases.push({
+      action,
+      before,
+      after: await heap(cdp),
+      retainedArraysAndEdits: await page.evaluate(() =>
+        window.__life.oldEdits.map((r) => !!r.deref()),
+      ),
+      remaining: await page.evaluate(() => [
+        window.__splashery.player.proc?.clay.length || 0,
+        window.__splashery.player.scene.paint.stamps.length,
+      ]),
+    });
+  }
+  await page.evaluate(async () => {
+    const { app } = window.__splashery;
+    await app.makeToy({ ...app.generator, count: 10000 });
+  });
   const saved = [];
   // Exercise the actual JSON download, parse its bytes, and import through the application.
   for (const n of [1900, 2000, 2400, 8000]) {
-    await page.evaluate((n) => {
-      const { player } = window.__splashery;
-      window.__life.full ||= {
-        clay: player.proc.clay.slice(),
-        paint: player.scene.paint.stamps.slice(),
-      };
-      player.proc.clay = window.__life.full.clay.slice(0, n);
-      player.scene.toy.clay = player.proc.clay.slice();
-      player.scene.paint.stamps = window.__life.full.paint.slice(0, n * 2);
-    }, n);
+    await page.evaluate(
+      ({ n, full }) => {
+        const { player } = window.__splashery;
+        player.proc.clay = full.clay.slice(0, n);
+        player.scene.toy.clay = player.proc.clay.slice();
+        player.scene.paint.stamps = full.paint.slice(0, n * 2);
+      },
+      { n, full },
+    );
     const download = page.waitForEvent("download");
     await page.evaluate(() => window.__splashery.app.exportJSON());
     const file = await download;
@@ -263,43 +319,14 @@ async function clay(page, cdp) {
         window.__splashery.player.scene.paint.stamps.length,
       ]),
       prefix,
+      reopenedMatches: await page.evaluate(
+        (json) =>
+          JSON.stringify(window.__splashery.player.proc.clay) === JSON.stringify(json.toy.clay) &&
+          JSON.stringify(window.__splashery.player.scene.paint.stamps) ===
+            JSON.stringify(json.paint.stamps),
+        json,
+      ),
       notice,
-    });
-  }
-  // Restore the measured long session for each release path. Do not retain its arrays in the
-  // instrumentation when collecting heap sizes.
-  const releases = [];
-  for (const action of ["reset", "toy", "source"]) {
-    await page.evaluate(async () => {
-      const { app, player } = window.__splashery;
-      await app.makeToy({ ...app.generator, count: 10000 });
-      player.proc.clay = Array.from({ length: 8000 }, () => ["e", 0, 0, 0, 0.04]);
-      player.scene.toy.clay = player.proc.clay.slice();
-      player.scene.paint.stamps = Array.from({ length: 16000 }, () => [0, 0, 0, 0.1, "#e63b2e", 1]);
-      delete window.__life.full;
-      window.__life.oldEdits = [
-        player.proc.clay,
-        player.scene.toy.clay,
-        player.scene.paint.stamps,
-      ].map((a) => new WeakRef(a));
-    });
-    const before = await heap(cdp);
-    await page.evaluate(async (action) => {
-      const { app } = window.__splashery;
-      if (action === "reset") await app.resetAll();
-      else if (action === "toy") await app.chooseToy("basketball");
-      else await app.makeToy({ ...app.generator, shape: "torus", count: 10000 });
-    }, action);
-    await settle(page);
-    releases.push({
-      action,
-      before,
-      after: await heap(cdp),
-      retainedArrays: await page.evaluate(() => window.__life.oldEdits.map((r) => !!r.deref())),
-      remaining: await page.evaluate(() => [
-        window.__splashery.player.proc?.clay.length || 0,
-        window.__splashery.player.scene.paint.stamps.length,
-      ]),
     });
   }
   return { samples, saved, releases };
@@ -431,7 +458,21 @@ async function timers(page, cdp, save = async () => {}) {
       });
       const p = progressCard();
       await new Promise((r) => setTimeout(r, 300));
-      if (i === 19) counts.push({ open: window.__life.snapshot() });
+      if (i === 19) {
+        counts.push({ open: window.__life.snapshot() });
+        Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
+        Object.defineProperty(document, "visibilityState", {
+          configurable: true,
+          get: () => "hidden",
+        });
+        document.dispatchEvent(new Event("visibilitychange"));
+        const before = window.__life.snapshot();
+        await new Promise((r) => setTimeout(r, 1100));
+        counts.push({ hidden: { before, after: window.__life.snapshot() } });
+        delete document.hidden;
+        delete document.visibilityState;
+        document.dispatchEvent(new Event("visibilitychange"));
+      }
       current = false;
       player.scene.toy = original;
       await new Promise((r) => setTimeout(r, 300));
@@ -448,7 +489,7 @@ async function timers(page, cdp, save = async () => {}) {
     }
     return counts;
   });
-  const helperHidden = await hiddenSample(page);
+  const helperHidden = helpers.find((s) => s.hidden).hidden;
   await page.evaluate(() => {
     window.__life.card.root.remove();
     delete window.__life.card;
