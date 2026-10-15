@@ -388,9 +388,49 @@
       "sha256": "5cdb9b1a0e894407f43850d0cd785727f0b231059f19e46558709ad8c035dc54"
     },
     {
+      "file": "r2/policy-study/desktop-donut-high.webm",
+      "bytes": 336460,
+      "sha256": "98dfc9190318c13265a03765895b6673ac40c4e666387926fd72858deb31b73c"
+    },
+    {
+      "file": "r2/policy-study/desktop-donut-standard.webm",
+      "bytes": 242724,
+      "sha256": "bc5b91a8163152d0d744238e09953cbf80fbdc6b5e7b1d916ad2e1192ba86865"
+    },
+    {
+      "file": "r2/policy-study/desktop-photo-3d-high.webm",
+      "bytes": 786182,
+      "sha256": "fd9e4c58830f353860010305d63a9c80a6afb7e81fd3a5b222e44f05fd7f4b68"
+    },
+    {
+      "file": "r2/policy-study/desktop-photo-3d-standard.webm",
+      "bytes": 485153,
+      "sha256": "03312d34e0da4f7a3c513d35c51096e3a9c689822ba3577b4e96087a394bb66f"
+    },
+    {
       "file": "r2/policy-study/fixed-measurements.json",
       "bytes": 1822,
       "sha256": "0479c11763171aabcab3d75f8f9c935e07d4aa5973d6a8fb2169182d22dcd5ac"
+    },
+    {
+      "file": "r2/policy-study/phone-donut-high.webm",
+      "bytes": 212279,
+      "sha256": "12c616b12d526089c27a3f2766931c632366d42afa84e8613ba194a2a0cc62e1"
+    },
+    {
+      "file": "r2/policy-study/phone-donut-standard.webm",
+      "bytes": 188793,
+      "sha256": "00b77ec736a6d3132813dd3d44f0d7f368d7320849c980b70d47a06b15cf09a7"
+    },
+    {
+      "file": "r2/policy-study/phone-photo-3d-high.webm",
+      "bytes": 290166,
+      "sha256": "2e8e048965fd366d3ccf8d12a49056b0492fc4ee0bbb30de55bdbbc23475474e"
+    },
+    {
+      "file": "r2/policy-study/phone-photo-3d-standard.webm",
+      "bytes": 396507,
+      "sha256": "7bfead8d77abfe1b7492045254f758ac791d2bd340298bca3fd515b0ccd35a36"
     },
     {
       "file": "r2/policy-study/quality-scores.json",
