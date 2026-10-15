@@ -2238,7 +2238,7 @@ export function createUI(app) {
   // player lets go of its blob URL, which is revoked, and app.closeRecord()
   // drops the Blob. Discard, Close, and Record again ask first while the take
   // hasn't been saved or shared.
-  const preview = { url: null, saved: false };
+  const preview = { url: null, saved: false, onMeta: null, open: false };
   function openPreview({ bytes, share }) {
     const r = app.recorded;
     if (!r?.blob) return;
@@ -2249,19 +2249,20 @@ export function createUI(app) {
     // A MediaRecorder WebM has no length in its header, so Chrome reports an
     // endless one and the scrub bar can't move. Seeking far past the end once
     // makes it read the real length; then back to the start.
-    v.addEventListener(
-      "loadedmetadata",
-      () => {
-        if (v.duration !== Infinity) return;
-        const back = () => {
-          v.removeEventListener("timeupdate", back);
-          v.currentTime = 0;
-        };
-        v.addEventListener("timeupdate", back);
-        v.currentTime = 1e101;
-      },
-      { once: true },
-    );
+    // The listener is kept so a sheet closed before the length loads takes it
+    // off (releasePreview), and it never runs on the next take.
+    preview.onMeta = () => {
+      v.removeEventListener("loadedmetadata", preview.onMeta);
+      preview.onMeta = null;
+      if (v.duration !== Infinity) return;
+      const back = () => {
+        v.removeEventListener("timeupdate", back);
+        v.currentTime = 0;
+      };
+      v.addEventListener("timeupdate", back);
+      v.currentTime = 1e101;
+    };
+    v.addEventListener("loadedmetadata", preview.onMeta);
     // "#t=0.001" shows the first frame instead of a black box (iOS Safari).
     v.src = `${preview.url}#t=0.001`;
     // The player shows the length; this line says what the file is.
@@ -2269,11 +2270,14 @@ export function createUI(app) {
     els.recMeta.textContent = `${kind} video · ${formatBytes(bytes)}`;
     els.recShare.hidden = !share;
     hideConfirm();
+    preview.open = true;
     if (!els.recPreview.open) els.recPreview.showModal();
     els.recSave.focus();
   }
   function releasePreview() {
     const v = els.recVideo;
+    if (preview.onMeta) v.removeEventListener("loadedmetadata", preview.onMeta);
+    preview.onMeta = null;
     v.pause();
     v.removeAttribute("src");
     v.load();
@@ -2282,10 +2286,15 @@ export function createUI(app) {
   }
   // Every way the sheet closes (Close, Escape, Discard, Record again) ends here,
   // right away, and again on the dialog's own "close" event for any other way.
+  // Focus goes back to Record when it shows (Record again starts a take instead).
+  let refocus = true;
   function letGo() {
+    if (!preview.open) return;
+    preview.open = false;
     hideConfirm();
     releasePreview();
     if (app.recorded) app.closeRecord();
+    if (refocus && els.recordStart.offsetParent) els.recordStart.focus();
   }
   els.recPreview.addEventListener("close", letGo);
   let confirmed = null;
@@ -2315,13 +2324,15 @@ export function createUI(app) {
     app.saveRecord();
     preview.saved = true;
   });
+  // Saved only when it was shared (or saved instead); a canceled share sheet isn't.
   els.recShare.addEventListener("click", async () => {
-    await app.shareRecord();
-    preview.saved = true;
+    if (await app.shareRecord()) preview.saved = true;
   });
   els.recAgain.addEventListener("click", () =>
     ask("Record again? This recording hasn't been saved, so it goes.", "Record again", () => {
+      refocus = false;
       closePreview();
+      refocus = true;
       app.startRecord();
     }),
   );
@@ -3478,6 +3489,11 @@ export function createUI(app) {
       els.exportWebm.hidden = !!reason; // Share lane: the button sits under the settings now
       els.webmUnavailable.hidden = !reason;
       els.webmUnavailable.textContent = reason ? `Video export is unavailable: ${reason}` : "";
+      // Share lane: no video here, so Save a clip opens on GIF and the Video side is off.
+      const video = els.clipKind.querySelector("[data-clip=video]");
+      video.disabled = !!reason;
+      video.title = reason ? "Video export is unavailable in this browser" : "";
+      if (reason) showClip("gif");
     },
     setEmbed({ iframe, element, note }) {
       els.embedSnippet.value = iframe || "";

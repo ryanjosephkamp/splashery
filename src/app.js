@@ -1869,14 +1869,20 @@ class App {
   }
 
   // The phone's share sheet (Save Video on an iPhone); saving is the fallback.
+  // Share lane: true when the video was shared or saved, false when the person
+  // canceled the share sheet (the preview then still asks before discarding).
   async shareRecord() {
     const r = this.recorded;
-    const file = r && canShareFile(r.blob, r.name);
-    if (!file) return this.saveRecord();
+    if (!r) return false;
+    const file = canShareFile(r.blob, r.name);
+    if (!file) return (this.saveRecord(), true);
     try {
       await navigator.share({ files: [file], title: "Splashery" });
+      return true;
     } catch (err) {
-      if (err?.name !== "AbortError") this.saveRecord();
+      if (err?.name === "AbortError") return false;
+      this.saveRecord();
+      return true;
     }
   }
 

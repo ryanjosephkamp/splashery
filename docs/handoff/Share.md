@@ -116,7 +116,21 @@ message starts with "READY:", "WORKING:", or "BLOCKED:".
 - Specs run here (all green): `shr`, `smoke`, `ui2`, `ui3`, `ui4-engine`, `ui4`, `ui5-engine`,
   `ui5`, `live3-engine`, `live3`, `cdx-playground-links`, `pdf-engine`, `qr4-2-engine` (127 passed),
   and the three Clap tests in `live`. `cdx-a11y*` isn't on `main` yet (task 52, #594).
-- Next: the owner's marks on the `shr-*` cards.
+- October 15, 2026, morning: the owner marked all nine `shr-*` cards good. The Operator's review on
+  #653 found five gaps in the preview sheet, all fixed, each with a `shr` test that fails on the old
+  code:
+  1. A canceled share sheet no longer counts as saved. `app.shareRecord()` now returns true only
+     when the video was shared (or saved instead), so Discard and Close still ask after a cancel.
+  2. Focus goes back to `#record-start` (when it shows) after Close, Escape, Discard, or Save then
+     Close; not after Record again, which starts a take.
+  3. A phone on its side (844×390): a `max-height: 500px` rule shrinks the player to 36vh, so Save
+     video, Record again, and Discard fit.
+  4. With no WebM recording, Save a clip opens on GIF and the Video side of the switch is disabled.
+  5. The player's `loadedmetadata` listener is kept and taken off in `releasePreview`, so a sheet
+     closed early leaves nothing behind for the next take.
+- Specs run after the fixes: `shr` (12 tests), `ui5-engine`, and `live3-engine` (23 passed).
+- The owner doesn't want the Pause button for now; "Record again from a point" stays a proposal.
+- Next: merge `main` once the Operator's #651 lands, then run `cdx-a11y*` with these specs.
 
 ## Record again from a point (item 5: a proposal, not built)
 

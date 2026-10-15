@@ -3104,6 +3104,34 @@ button.clip-save {
   }
 }
 
+/* A short screen (a phone on its side): a smaller player, so the buttons fit under it. */
+@media (max-height: 500px) {
+  .rec-preview {
+    max-height: calc(100dvh - 16px);
+    margin: auto;
+    padding: 8px 14px 10px;
+    border-radius: var(--radius, 16px);
+  }
+
+  .rec-preview[open] {
+    gap: 6px;
+  }
+
+  .rec-video {
+    max-height: 36vh;
+  }
+
+  .rec-actions button {
+    flex: 0 1 auto;
+    min-height: 0;
+    padding: 6px 14px;
+  }
+
+  .rec-actions #rec-discard {
+    margin-left: auto;
+  }
+}
+
 /* /Share lane */
 
 /* Hands-on (lane Physics) --------------------------------------------------- */

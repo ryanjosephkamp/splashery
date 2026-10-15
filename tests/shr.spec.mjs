@@ -314,6 +314,7 @@ for (const [size, use] of SIZES) {
       }, url);
       expect(freed).toEqual({ recorded: null, src: null, revoked: true });
       await expect(page.locator("#rec-pill")).toBeHidden();
+      await expectRecordFocused(page);
       // Another take: Save still saves, and then Close closes without asking.
       await showTab(page, "share");
       await take(1500);
@@ -326,10 +327,180 @@ for (const [size, use] of SIZES) {
       await page.click("#rec-close");
       await expect(sheet).toBeHidden();
       expect(await page.evaluate(() => window.__splashery.app.recorded)).toBe(null);
+      await expectRecordFocused(page);
+      // By keyboard too: a saved take closes on Escape, and focus goes back to Record.
+      await showTab(page, "share");
+      await take(1200);
+      await page.keyboard.press("Enter"); // focus starts on Save video
+      await page.keyboard.press("Escape");
+      await expect(sheet).toBeHidden();
+      await expectRecordFocused(page);
       expect(errors).toEqual([]);
     });
   });
 }
+
+// When the sheet closes, focus goes back to Record wherever Record shows (on a
+// phone the sheet folds away while recording, so Record may be out of sight).
+async function expectRecordFocused(page) {
+  const got = await page.evaluate(() => {
+    const r = document.getElementById("record-start");
+    return { shown: !!r.offsetParent && r.getBoundingClientRect().height > 0, focused: document.activeElement === r, body: document.activeElement === document.body }; // prettier-ignore
+  });
+  if (got.shown) expect(got.focused).toBe(true);
+  else expect(got.body || got.focused).toBe(true);
+}
+
+// One take from the Share tab, stopped from the pill; the preview opens.
+async function takeOne(page, ms = 1500) {
+  await page.click("#record-start");
+  await expect(page.locator("#rec-pill")).toBeVisible();
+  await page.waitForTimeout(ms);
+  await page.click("#rec-stop");
+  await expect(page.locator("#rec-preview")).toBeVisible({ timeout: 30_000 });
+}
+
+test.describe("the preview sheet, more", () => {
+  test.use(DESK);
+
+  test("a canceled share sheet doesn't count as saved; a finished share does", async ({
+    page,
+  }) => {
+    const errors = watchErrors(page);
+    // A device that can share files; its share sheet is canceled, then used.
+    await page.addInitScript(() => {
+      window.__shareOk = false;
+      window.__shares = 0;
+      navigator.canShare = () => true;
+      navigator.share = async () => {
+        window.__shares++;
+        if (!window.__shareOk) throw new DOMException("Share canceled", "AbortError");
+      };
+    });
+    await open(page);
+    await pick(page, "donut");
+    await showTab(page, "share");
+    await takeOne(page);
+    await expect(page.locator("#rec-share")).toBeVisible();
+    await page.click("#rec-share");
+    await page.waitForFunction(() => window.__shares === 1);
+    // Canceled: Discard still asks, and Keep it keeps the take.
+    await page.click("#rec-discard");
+    await expect(page.locator("#rec-confirm")).toBeVisible();
+    await page.click("#rec-confirm-no");
+    expect(await page.evaluate(() => !!window.__splashery.app.recorded)).toBe(true);
+    // Shared: Close no longer asks.
+    await page.evaluate(() => (window.__shareOk = true));
+    await page.click("#rec-share");
+    await page.waitForFunction(() => window.__shares === 2);
+    await page.click("#rec-close");
+    await expect(page.locator("#rec-preview")).toBeHidden();
+    await expect(page.locator("#rec-confirm")).toBeHidden();
+    expect(await page.evaluate(() => window.__splashery.app.recorded)).toBe(null);
+    await expectRecordFocused(page);
+    expect(errors).toEqual([]);
+  });
+
+  test("Record again: a second take opens in the sheet, and the first take's listener is gone", async ({
+    page,
+  }) => {
+    const errors = watchErrors(page);
+    await open(page);
+    await pick(page, "donut");
+    // Count the player's "loadedmetadata" listeners that are still attached.
+    await page.evaluate(() => {
+      const v = document.getElementById("rec-video");
+      const live = new Set();
+      window.__meta = () => live.size;
+      const add = v.addEventListener.bind(v);
+      const remove = v.removeEventListener.bind(v);
+      v.addEventListener = (t, f, o) => (t === "loadedmetadata" && live.add(f), add(t, f, o));
+      v.removeEventListener = (t, f, o) => (t === "loadedmetadata" && live.delete(f), remove(t, f, o)); // prettier-ignore
+    });
+    await showTab(page, "share");
+    await takeOne(page);
+    const first = await page.evaluate(() => window.__splashery.app.recorded.blob);
+    expect(first).toBeTruthy();
+    // Record again on an unsaved take asks, then starts a new take at once.
+    await page.click("#rec-again");
+    await expect(page.locator("#rec-confirm")).toContainText("Record again?");
+    await page.click("#rec-confirm-yes");
+    await expect(page.locator("#rec-preview")).toBeHidden();
+    expect(await page.evaluate(() => window.__meta())).toBe(0); // taken off with the first take
+    await expect(page.locator("#rec-pill")).toBeVisible({ timeout: 10_000 });
+    await page.waitForTimeout(1500);
+    await page.click("#rec-stop");
+    await expect(page.locator("#rec-preview")).toBeVisible({ timeout: 30_000 });
+    // The second take plays with its own length, and its listener ran once and left.
+    await page.waitForFunction(() => {
+      const v = document.getElementById("rec-video");
+      return v.readyState >= 1 && Number.isFinite(v.duration) && v.duration > 0.5;
+    }, null, { timeout: 30_000 }); // prettier-ignore
+    expect(await page.evaluate(() => window.__meta())).toBe(0);
+    // And a sheet closed before the length loads takes its listener with it.
+    await page.click("#rec-save");
+    await page.click("#rec-close");
+    await takeOne(page, 1000);
+    await page.evaluate(() => document.getElementById("rec-close").click()); // asks (unsaved)
+    await page.click("#rec-confirm-yes");
+    expect(await page.evaluate(() => window.__meta())).toBe(0);
+    expect(errors).toEqual([]);
+  });
+
+  test("with no WebM recording, Save a clip opens on GIF and the Video side is off", async ({
+    page,
+  }) => {
+    const errors = watchErrors(page);
+    await page.addInitScript(() => {
+      const real = MediaRecorder.isTypeSupported.bind(MediaRecorder);
+      MediaRecorder.isTypeSupported = (m) => !/webm/i.test(m) && real(m);
+    });
+    await open(page);
+    await showTab(page, "share");
+    await expect(page.locator("#clip-kind [data-clip=gif]")).toHaveAttribute("aria-pressed", "true"); // prettier-ignore
+    await expect(page.locator("#clip-kind [data-clip=video]")).toBeDisabled();
+    await expect(page.locator("#gif-block")).toBeVisible();
+    await expect(page.locator("#export-gif")).toBeVisible();
+    await expect(page.locator("#webm-block")).toBeHidden();
+    expect(await layoutProblems(page, "pane-share")).toEqual([]);
+    expect(errors).toEqual([]);
+  });
+});
+
+test.describe("a phone on its side (844×390)", () => {
+  test.use({ viewport: { width: 844, height: 390 }, hasTouch: true, isMobile: true });
+
+  test("the preview's buttons all fit on the screen", async ({ page }) => {
+    const errors = watchErrors(page);
+    await open(page);
+    await pick(page, "donut");
+    await showTab(page, "share");
+    await page.locator("#record-start").scrollIntoViewIfNeeded();
+    await takeOne(page);
+    const sheet = await page.locator("#rec-preview").boundingBox();
+    expect(sheet.y).toBeGreaterThanOrEqual(0);
+    expect(sheet.y + sheet.height).toBeLessThanOrEqual(390.5);
+    const boxes = [];
+    for (const id of ["rec-close", "rec-save", "rec-again", "rec-discard"]) {
+      await expect(page.locator(`#${id}`)).toBeInViewport({ ratio: 1 });
+      const b = await page.locator(`#${id}`).boundingBox();
+      expect(b.y + b.height, id).toBeLessThanOrEqual(sheet.y + sheet.height);
+      boxes.push(b);
+    }
+    for (let i = 0; i < boxes.length; i++)
+      for (let j = i + 1; j < boxes.length; j++) {
+        const a = boxes[i];
+        const b = boxes[j];
+        const hit = a.x < b.x + b.width && b.x < a.x + a.width && a.y < b.y + b.height && b.y < a.y + a.height; // prettier-ignore
+        expect(hit).toBe(false);
+      }
+    // The player still shows the take.
+    const v = await page.locator("#rec-video").boundingBox();
+    expect(v.height).toBeGreaterThan(100);
+    await page.screenshot({ path: shot("shr-preview-844x390.png") });
+    expect(errors).toEqual([]);
+  });
+});
 
 test.describe("Clap to tap", () => {
   test.use(DESK);
