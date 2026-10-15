@@ -1,0 +1,70 @@
+{
+  "method": {
+    "samplingMs": 200,
+    "units": "KiB",
+    "pss": "Sum of Chromium process-tree proportional resident sets, sampled from /proc/*/smaps_rollup.",
+    "peakWindow": "File-input change through the first completed new Sharp frame and five further completed frames.",
+    "profile": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 3,
+      "nativeBuffer": [585, 1266]
+    },
+    "caveats": "Sampled peaks can miss shorter transients. RSS sums count shared pages repeatedly. This is Chromium/llvmpipe, not a physical phone. The read-only worker probe is appended only in this measurement, not production."
+  },
+  "builds": {
+    "checkpoint": {
+      "observations": 9,
+      "peakPssMiB": 1241.4150390625,
+      "peakRssMiB": 1560.8828125,
+      "allWeightsCleared": true,
+      "maxObservedDepthWeightsMiB": 0.0,
+      "maxRetainedSourceBuffersMiB": 0.0,
+      "inputs": {
+        "lighthouse.jpg": {
+          "peakPssMiB": 1217.1640625,
+          "medianPssPeakMiB": 1179.62890625,
+          "individualPeakPssMiB": [1158.4443359375, 1179.62890625, 1217.1640625]
+        },
+        "tulips.jpg": {
+          "peakPssMiB": 1241.4150390625,
+          "medianPssPeakMiB": 1208.2861328125,
+          "individualPeakPssMiB": [1166.8349609375, 1208.2861328125, 1241.4150390625]
+        },
+        "forest.jpg": {
+          "peakPssMiB": 1214.26953125,
+          "medianPssPeakMiB": 1212.1162109375,
+          "individualPeakPssMiB": [1183.98046875, 1214.26953125, 1212.1162109375]
+        }
+      }
+    },
+    "branch": {
+      "observations": 9,
+      "peakPssMiB": 1341.3671875,
+      "peakRssMiB": 1659.7265625,
+      "allWeightsCleared": true,
+      "maxObservedDepthWeightsMiB": 56.73828125,
+      "maxRetainedSourceBuffersMiB": 24.745834350585938,
+      "inputs": {
+        "lighthouse.jpg": {
+          "peakPssMiB": 1243.1318359375,
+          "medianPssPeakMiB": 1217.12109375,
+          "individualPeakPssMiB": [1192.1259765625, 1243.1318359375, 1217.12109375]
+        },
+        "tulips.jpg": {
+          "peakPssMiB": 1278.54296875,
+          "medianPssPeakMiB": 1248.28515625,
+          "individualPeakPssMiB": [1236.275390625, 1278.54296875, 1248.28515625]
+        },
+        "forest.jpg": {
+          "peakPssMiB": 1341.3671875,
+          "medianPssPeakMiB": 1307.9560546875,
+          "individualPeakPssMiB": [1307.9560546875, 1279.72265625, 1341.3671875]
+        }
+      }
+    }
+  },
+  "ordinarySwapRowsEqual": true,
+  "peakPssIncreaseMiB": 99.9521484375,
+  "peakPssIncreasePercent": 8.05146911326147
+}
