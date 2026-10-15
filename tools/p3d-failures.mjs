@@ -73,11 +73,25 @@ function atomic(file, data) {
   fs.writeFileSync(tmp, JSON.stringify(data, null, 2) + "\n");
   fs.renameSync(tmp, file);
 }
+
+function realOutputPath(file) {
+  const tail = [];
+  while (!fs.existsSync(file)) {
+    tail.unshift(path.basename(file));
+    file = path.dirname(file);
+  }
+  return path.resolve(fs.realpathSync(file), ...tail);
+}
+
 export async function runAudit(options = {}) {
   const out = path.resolve(options.out || path.join(ROOT, ".cache/p3d-failures/run"));
-  for (const forbidden of ["src", "assets", "vendor", ".git"])
-    if (out === path.join(ROOT, forbidden) || out.startsWith(path.join(ROOT, forbidden) + path.sep))
-      throw new Error("Output must be outside protected production folders.");
+  const within = (folder, file) => file === folder || file.startsWith(folder + path.sep);
+  for (const [root, output] of [
+    [ROOT, out],
+    [fs.realpathSync(ROOT), realOutputPath(out)],
+  ])
+    if (within(root, output) && !within(path.join(root, ".cache"), output))
+      throw new Error("Output inside the checkout is allowed only under .cache/.");
   const all = inventory({ input: options.in, manifest: options.manifest });
   let entries = all;
   if (options.samples) {
@@ -257,6 +271,7 @@ async function main() {
 Options: --resume, --samples id,id, --profiles phone,desktop, --limit N.
 The default inventory includes every built-in/hard-case sample and all 12 truth stills.
 An explicit manifest can add licensed audit photos. No files are uploaded or committed.
+Output must be outside this checkout or under its .cache/ folder, including through symlinks.
 Input folders: JPEG, PNG, WebP, and HEIC/HEIF when Chromium supports decoding them.
 Install dev dependencies and Chromium first; see the report for macOS instructions.
 Open OUT/index.html directly. All gallery data is embedded; no web server is needed.`);

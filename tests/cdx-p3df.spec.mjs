@@ -5,7 +5,7 @@ import os from "node:os";
 import path from "node:path";
 import http from "node:http";
 import { runAudit, parseArgs } from "../tools/p3d-failures.mjs";
-import { inventory } from "../tools/p3df/inputs.mjs";
+import { inventory, ROOT } from "../tools/p3df/inputs.mjs";
 import {
   referenceError,
   cueDepth,
@@ -180,6 +180,38 @@ test("private inventory is local, narrow, and explicit about publication rights"
     expect(parseArgs(["--in", folder, "--out=/tmp/gallery"]).in).toBe(folder);
     expect(() => parseArgs(["--in", folder, "--manifest", "x.json"])).toThrow();
   } finally {
+    fs.rmSync(folder, { recursive: true, force: true });
+  }
+});
+
+test("private output refuses checkout folders and symlink aliases outside .cache", async () => {
+  const folder = fs.mkdtempSync(path.join(os.tmpdir(), "p3df-output-"));
+  const cache = fs.mkdtempSync(path.join(ROOT, ".cache/p3df-output-"));
+  try {
+    fs.writeFileSync(path.join(folder, "owner photo.jpg"), "private fixture");
+    fs.symlinkSync(path.join(ROOT, "docs"), path.join(cache, "into-docs"), "dir");
+    fs.symlinkSync(ROOT, path.join(folder, "checkout"), "dir");
+    const blocked = [
+      ROOT,
+      path.join(ROOT, "docs", "private-gallery"),
+      path.join(ROOT, "tests", "private-gallery"),
+      path.join(ROOT, ".cache-other", "private-gallery"),
+      path.join(cache, "into-docs", "private-gallery"),
+      path.join(folder, "checkout", "docs", "private-gallery"),
+    ];
+    // The invalid profile prevents the unfixed version from starting a browser or copying photos.
+    for (const out of blocked)
+      await expect(runAudit({ in: folder, out, profiles: "invalid" })).rejects.toThrow(
+        "Output inside the checkout is allowed only under .cache/",
+      );
+    for (const out of [path.join(cache, "safe"), path.join(folder, "gallery")]) {
+      await expect(runAudit({ in: folder, out, profiles: "invalid" })).rejects.toThrow(
+        "Profiles are phone and desktop",
+      );
+      expect(fs.existsSync(out)).toBe(false);
+    }
+  } finally {
+    fs.rmSync(cache, { recursive: true, force: true });
     fs.rmSync(folder, { recursive: true, force: true });
   }
 });
