@@ -134,6 +134,7 @@ export class Pictures {
     });
     this.media = null;
     this.page = 0;
+    this.exactPage = null;
     this.order = 0; // a set's order: bumped when it changes, so its pages rebuild (lane Books)
     this.cache = new Map(); // key -> built sheet data (a few, by splat count)
     this.busy = false;
@@ -160,6 +161,7 @@ export class Pictures {
     this.unwatch = null;
     this.media = media;
     this.page = 0;
+    this.exactPage = null;
     this.gifHeldAt = null;
     this.gifLost = 0;
     this.cache.clear();
@@ -193,6 +195,11 @@ export class Pictures {
     return {
       get page() {
         return self.page;
+      },
+      // An explicit text-search selection, including either visible page
+      // of a book spread. Ordinary page steps retain the recipe's behavior.
+      get exactPage() {
+        return self.exactPage;
       },
       get count() {
         return self.media?.count ?? 0;
@@ -254,18 +261,20 @@ export class Pictures {
       // visitor the address and opens it only if they say so: true when the
       // address may open at all (http:, https: or mailto:).
       links: (n = this.page) => self.pageList("links", n),
-      figures: (n = this.page) => self.pageList("figures", n),
+      // (Lane Polish: figures(n, { drawn: true }) also finds figures drawn
+      // as paths, a chart or a diagram.)
+      figures: (n = this.page, opts) => self.pageList("figures", n, opts),
       crop: (n, box, size = 512) => self.crop(n, box, size),
       openLink: (url) => self.openLink(url),
     };
   }
 
   // A PDF page's links or picture boxes (lane Books r5).
-  pageList(what, n) {
+  pageList(what, n, opts) {
     const m = this.media;
     const i = Math.round(n);
     if (!m?.[what] || !(i >= 0 && i < m.count)) return Promise.resolve([]);
-    return m[what](i).catch(() => []);
+    return m[what](i, opts).catch(() => []);
   }
 
   async crop(n, box, size) {
@@ -312,9 +321,10 @@ export class Pictures {
     return m.draw(n, w, h);
   }
 
-  go(n) {
+  go(n, { exact = false } = {}) {
     const count = this.media?.count ?? 1;
     const p = Math.max(0, Math.min(count - 1, Math.round(n)));
+    this.exactPage = exact ? p : null;
     if (p !== this.page) {
       this.page = p;
       this.player.emit("pictures", this.info());

@@ -1355,8 +1355,10 @@ reads the files of the Space r2, Science r3 and photoreal toys named below.
   are not used).
 - 3 km:
   [USGS Imagery Only](https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer)
-  (USDA NAIP, USGS The National Map). Public domain. The half of the Earth for the globe is the same
-  service's Blue Marble: Next Generation (NASA Earth Observatory, Reto Stöckli). Public domain.
+  (USDA NAIP, USGS The National Map). Public domain. Its color is matched to the 10 km and 1 km
+  pictures beside it (one gain per channel, by tools/pol-aerial-match.mjs; October 15, 2026). The
+  half of the Earth for the globe is the same service's Blue Marble: Next Generation (NASA Earth
+  Observatory, Reto Stöckli). Public domain.
 - 1 km to 30 m: District of Columbia, Office of the Chief Technology Officer,
   [Aerial Photography (Orthophoto) 2023](https://opendata.dc.gov/), 3 inch (8 cm),
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (its live license, checked October 6,
@@ -1914,6 +1916,11 @@ under `pictureQrSamples` in `tools/assets.json`. See
 | Ribbon bow                              | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-7-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
 | Flower bouquet                          | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-8-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
 | Paper pinwheel                          | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-10-1.jpg) | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+
+Photo to 3D loading-cover color and Hybrid status follow-up code and regression checks are made by
+Ryan with Codex (GPT-6), October 15, 2026. Code is MIT. Original capture contributions are CC0 1.0;
+source assets retain their recorded terms. See the
+[loading-color and status audit](docs/audits/photo-3d-status-2026-10.md).
 
 # Photo to 3D failure atlas (Codex task 87)
 

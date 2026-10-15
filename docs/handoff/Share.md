@@ -88,4 +88,134 @@ message starts with "READY:", "WORKING:", or "BLOCKED:".
 
 ## State
 
-Not started.
+- Model: Opus 5.5 (claude-opus-5-5), high effort. Branch `claude/lane-share-engine`.
+- October 15, 2026: items 1 to 4 and 6 built, item 5 reported below, item 7's screenshots taken and
+  the cards posted.
+  1. **Tab order:** Toy, Share, Tools, Look, Make, then (i), on phones and computers (`index.html`,
+     the tab buttons only). The arrow keys, Home and End follow the DOM order, so they follow the
+     new order with no code change.
+  2. **Clap to tap** (labs) is the last section of the Tools tab (`src/live/panel.js`
+     `renderClapSetting`). Same switch, same note, same "only on a tap" microphone rule.
+  3. **The Share tab** (`index.html`, `styles.css` "Share lane"): Record (the tab's main button,
+     with its line, and a marked spot beside it for task 89's quality choice); Save a clip (a Video
+     / GIF switch, each block with its settings in one row and one Save button under them, then
+     Picture); Link and scene file (Copy link, QR code (labs), Save scene, Open a scene, and a line
+     on what a scene file holds); PDF (labs); Put it on a web page; and a marked spot at the bottom
+     for task 90. Every id stays (`gif-kind`, `gif-frames`, `gif-size`, `webm-seconds`,
+     `record-start`, `import-json`, and the rest).
+  4. **The preview sheet** (`#rec-preview`, a modal `<dialog>`; `src/ui.js` "the preview sheet after
+     Record"): opens when a take stops, with the take in a video player and Save video, Share (where
+     the device can share files), Record again, and Discard. Discard, Close, Escape, and Record
+     again ask first while the take is unsaved. Every way out revokes the blob URL, empties the
+     player, and calls `app.closeRecord()` (which drops the Blob).
+  5. **Tests:** `tests/shr.spec.mjs` (8 tests). `smoke` and `cdx-playground-links` now tap the GIF
+     switch before using the GIF settings (see "Notes").
+- Cards on Effect review page 2, lane "Share": shr-record-preview (the phone clip of Record, the
+  preview, and Save), shr-share-before-390, shr-share-390, shr-share-gif-390, shr-share-before-1440,
+  shr-share-1440, shr-preview-1440, shr-preview-discard-390, and shr-clap-1440.
+- Specs run here (all green): `shr`, `smoke`, `ui2`, `ui3`, `ui4-engine`, `ui4`, `ui5-engine`,
+  `ui5`, `live3-engine`, `live3`, `cdx-playground-links`, `pdf-engine`, `qr4-2-engine` (127 passed),
+  and the three Clap tests in `live`. `cdx-a11y*` isn't on `main` yet (task 52, #594).
+- October 15, 2026, morning: the owner marked all nine `shr-*` cards good. The Operator's review on
+  #653 found five gaps in the preview sheet, all fixed, each with a `shr` test that fails on the old
+  code:
+  1. A canceled share sheet no longer counts as saved. `app.shareRecord()` now returns true only
+     when the video was shared (or saved instead), so Discard and Close still ask after a cancel.
+  2. Focus goes back to `#record-start` (when it shows) after Close, Escape, Discard, or Save then
+     Close; not after Record again, which starts a take.
+  3. A phone on its side (844×390): a `max-height: 500px` rule shrinks the player to 36vh, so Save
+     video, Record again, and Discard fit.
+  4. With no WebM recording, Save a clip opens on GIF and the Video side of the switch is disabled.
+  5. The player's `loadedmetadata` listener is kept and taken off in `releasePreview`, so a sheet
+     closed early leaves nothing behind for the next take.
+- Specs run after the fixes: `shr` (12 tests), `ui5-engine`, and `live3-engine` (23 passed).
+- The owner doesn't want the Pause button for now; "Record again from a point" stays a proposal.
+- October 15, 2026, 08:15 UTC: merged `main` (d33f9421, the Operator's #651 with task 52's
+  accessibility fixes). One conflict, in `setRecord` (`src/ui.js`): task 52's focus-keeping for the
+  pill stays, and a finished take hands focus to the preview sheet. Two fixes after the merge:
+  - Task 52's global Escape handler calls `preventDefault()`, which stopped the preview's own
+    `cancel` event (Escape to ask first). It now leaves Escape to an open `<dialog>` (`src/app.js`
+    `bindKeys`).
+  - Task 52 draws every select at 16px on phones (so iOS doesn't zoom), so the GIF row's longest
+    choice no longer fit a third of the row at 390×844. On phones the clip's box drops its border
+    and side padding, and the three settings still fit in one row.
+- Specs after the merge (2 workers): `cdx-a11y`, `cdx-a11y-layout`, `shr`, `smoke`,
+  `cdx-playground-links`, `ui5-engine`, and `live3-engine`. All pass except `cdx-a11y-layout`
+  "recording and the flag dialog preserve keyboard focus", which fails under load (two workers on
+  this 4-core machine) on `main` too (2 of 3 runs there): the cactus records too few frames on the
+  software renderer, so the take comes out empty. It passes run alone, here and on `main`.
+  `cdx-a11y` "keyboard focus can keep help open during its dismissal fade" failed once under load
+  and passed on the next run.
+- Next: the Operator's merge; Codex task 89 (#654) then fills `.record-main` and the clip settings
+  rows.
+
+## Record again from a point (item 5: a proposal, not built)
+
+The toy's state at an earlier moment isn't kept (a take is only pixels and sound), so any new take
+starts from the toy as it is now. Three options, smallest first. Times are for one Opus lane.
+
+1. **Pause and resume during a take** (about half a day). A Pause button on the Record pill:
+   `MediaRecorder.pause()` and `resume()` keep one file, so a person can stop, set the toy up again,
+   and carry on in the same take. No re-encoding, works on every browser that records today. It
+   doesn't go back in time, but it covers "I want to redo the next bit" when caught in time.
+2. **Trim the start and end of a take** (about one and a half to two days, after task 89 lands). Two
+   handles under the preview's player; the player plays only the kept part; Save writes the trimmed
+   file. A recording can't be cut cleanly between its keyframes, so the kept part is decoded and
+   encoded again: with WebCodecs and task 89's MP4 muxer where the browser has them (faster than
+   real time), else by playing it into a canvas and recording that in real time (as long as the kept
+   part, and a second encode loses a little sharpness). Memory: one more copy of the kept part while
+   it encodes.
+3. **Keep a take up to a point, then add a new take joined into one file** (option 2 plus about one
+   more day). The trim's end handle marks the point; Record again records a second take at the same
+   size; Save decodes both and encodes them into one file. The join shows a jump, because the toy is
+   where it is now, not where it was at the point; a short crossfade (a few frames) can soften it.
+   Same codec and size checks as option 2, and the second take shares the 1-minute (or task 89's
+   new) limit.
+
+The Operator's suggestion: option 1 now (small, no new code paths in the exporters), and option 2
+once task 89's muxer is on `main`. Option 3 only if the owner still wants it after trying 1 and 2.
+
+## Notes
+
+- The ids Codex task 89 fills are unchanged, and its option lists aren't touched. The settings row
+  sizes its columns by their share of the width (`.clip-settings`), with the longest choices of
+  today's lists tested to fit at 390×844 and 1440×900; task 89's longer lists (and its video
+  settings, which join `#webm-row`) wrap to a second row if they can't fit.
+- The video and GIF blocks show one at a time, so a test that uses the GIF settings taps
+  `#clip-kind [data-clip=gif]` first. `smoke` ("PNG, GIF and WebM exports produce files") and
+  `cdx-playground-links` (the landscape settings test) do now; what they check is unchanged.
+- The preview reads the take from `app.recorded` (a `{ blob, name, seconds }` set by
+  `app.startRecord` before `setRecord({ state: "ready" })`). If task 89 hands the take over another
+  way, `openPreview` in `src/ui.js` is the one place to change.
+- A MediaRecorder WebM has no length in its header (Chrome shows an endless one), so the preview
+  seeks far past the end once on load to make the browser read the real length; the scrub bar then
+  works. MP4 takes don't need it.
+- `ui.isTyping()` now counts any control inside an open `<dialog>` as typing, so keys pressed in the
+  preview (or the QR and PDF dialogs) don't poke the toy, reset the view, or open the gallery.
+- "Close" asks first too while the take is unsaved (the brief asked it of Discard); after Save or
+  Share it closes at once. Saying it here in case the owner wants Close to discard without asking.
+- Scene file wording, from `importJSONFile` and `applyScene` in `src/app.js`: a scene keeps the toy,
+  its options, the look, the effects, any paint and clay, and the camera. A splat file, a photo, a
+  PDF, or any other file someone opened isn't inside; only its name is, and the app asks for that
+  file again (a toast) while the sample shows.
+
+## Known issues
+
+- The Share button on the preview shows only where `navigator.canShare({ files })` says yes (phones,
+  mostly); the headless test browser can't share files, so the test checks Save only.
+- Other places still say "Save JSON" or "Load JSON": `src/exports.js` (two link notes; task 89's
+  file), `src/qr/share.js` (the QR dialog, labs), `manual/`, `site/share/`, and
+  `site/learn/scene-format/` (and `tools/site-hubs.mjs`, which builds `site/share/`). Not this
+  lane's files; listed under "For the Operator". The one in `src/app.js` (Copy link's toast) now
+  says "Save the scene as a file instead."
+
+## For the Operator
+
+- Please relay to the owners of those files (or sweep them in an Ops PR) the rename "Save JSON" to
+  "Save scene" and "Load JSON" to "Open a scene".
+- Task 89 overlap: its `tests/cdx-export.spec.mjs` must tap `#clip-kind [data-clip=gif]` (or
+  `video`) before using a block's settings; its new video settings go inside `#webm-row`, and its
+  Record quality choice inside `#record-row`, beside `#record-start`.
+- Page 2 has no `lanes/Share` record yet, so the cards show under the bare id "Share". Please add
+  the record (title, note, order).
+- Task 90: its labs-only button goes at the bottom of `#pane-share` (the comment marks the spot).

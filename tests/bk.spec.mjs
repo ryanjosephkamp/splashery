@@ -340,8 +340,9 @@ function fakePics(count) {
     page: 0,
     count,
     kind: "pdf",
-    go(p) {
+    go(p, { exact = false } = {}) {
       this.page = Math.max(0, Math.min(count - 1, Math.round(p)));
+      this.exactPage = exact ? this.page : null;
       return this.page;
     },
     next() {
@@ -408,6 +409,46 @@ test.describe("your book, the album and the frame (no browser)", () => {
     pics.go(30); // a jump (a link): the spread that shows page 30
     b.run(0.2);
     expect(pics.page).toBe(31);
+  });
+
+  test("an exact search selection keeps either page of a spread without changing its layout or turns", async () => {
+    for (const style of ["hardcover", "paperback", "magazine", "spiral"]) {
+      const pics = fakePics(40);
+      const b = await play("your-book", { style }, pics);
+      b.frame();
+      pics.go(30);
+      b.run(0.2);
+      expect(pics.page).toBe(31);
+      const layout = structuredClone({
+        sheets: b.out.sheets,
+        leaves: b.out.leaves,
+        view: b.out.view,
+      });
+      for (const n of [0, 30, 31, 30]) {
+        pics.go(n, { exact: true });
+        b.run(1.4);
+        expect(pics.page, `${style}: selected page ${n}`).toBe(n);
+        if (!n) continue;
+        expect({ sheets: b.out.sheets, leaves: b.out.leaves, view: b.out.view }, style).toEqual(
+          layout,
+        );
+        expect(
+          shownSheets(b.out).some(([, s]) => s.page === n),
+          style,
+        ).toBe(true);
+      }
+      // Previous/Next and taps still turn by a whole spread after selecting
+      // its left page, with the existing default right-page selection.
+      pics.next();
+      b.run(1.4);
+      expect(pics.page, style).toBe(33);
+      pics.prev();
+      b.run(1.4);
+      expect(pics.page, style).toBe(31);
+      b.tap();
+      b.run(1.4);
+      expect(pics.page, style).toBe(33);
+    }
   });
 
   test("a tap turns by where it lands: the right page forward, the left back; stapled paper's top quarter back", async () => {
