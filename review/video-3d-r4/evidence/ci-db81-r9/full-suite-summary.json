@@ -1,0 +1,294 @@
+{
+  "createdAt": "2026-10-15T15:01:52.410905+00:00",
+  "runId": 38749424734,
+  "headCommit": "db81b1072fde591ca3542bde0f67fd4609d44fd5",
+  "testedMergeCommit": "b1179daf26dfd8ac81ed804d875eb55402e50adb",
+  "allOriginalShardsComplete": true,
+  "totals": {
+    "files": 341,
+    "expectedFiles": 341,
+    "tests": 2920,
+    "passed": 2914,
+    "failed": 5,
+    "skipped": 1
+  },
+  "shards": [
+    {
+      "jobId": 116471592715,
+      "name": "Suite 2/16",
+      "conclusion": "failure",
+      "file": "raw-job-116471592715.log",
+      "sha256": "e9b9a8e1f7ec128ec386ddfaedbca4d10fe55ad404f5e1b98c6246dba1352950",
+      "bytes": 227516,
+      "files": 20,
+      "expectedFiles": 20,
+      "tests": 248,
+      "passed": 247,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T14:39:48.1833178Z - `spg:138` site pages \u203a the embed guide builds the snippets and shows a live toy: timedOut. Tearing down \"context\" exceeded the test timeout of 240000ms."
+      ],
+      "recheckLines": [
+        "2026-10-15T14:43:05.5201099Z spg:138 the embed guide builds the snippets and shows a live toy: passed alone"
+      ]
+    },
+    {
+      "jobId": 116471592869,
+      "name": "Suite 10/16",
+      "conclusion": "success",
+      "file": "raw-job-116471592869.log",
+      "sha256": "d0860552d86efad623816c04ed56b50eee4e49d55545a7883460f6aee8099afc",
+      "bytes": 226677,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 222,
+      "passed": 221,
+      "failed": 0,
+      "skipped": 1,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471592926,
+      "name": "Suite 9/16",
+      "conclusion": "success",
+      "file": "raw-job-116471592926.log",
+      "sha256": "ccceacb0b713129f9c1558f0cab557250222a396e620453cc87cae644d0aa1d0",
+      "bytes": 226517,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 179,
+      "passed": 179,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471592940,
+      "name": "Suite 16/16",
+      "conclusion": "failure",
+      "file": "raw-job-116471592940.log",
+      "sha256": "2fb5a7c303327ac6ebdc2ebee6eb43ec2f8153f4426136f1c1cf86b7b7ef36d7",
+      "bytes": 230431,
+      "files": 23,
+      "expectedFiles": 23,
+      "tests": 174,
+      "passed": 173,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T14:37:07.9704127Z - `img-engine:85` toys without the volume kind draw as before (webgpu): timedOut. Test timeout of 240000ms exceeded."
+      ],
+      "recheckLines": [
+        "2026-10-15T14:39:49.7957082Z img-engine:85 toys without the volume kind draw as before (webgpu): passed alone"
+      ]
+    },
+    {
+      "jobId": 116471592967,
+      "name": "Suite 14/16",
+      "conclusion": "failure",
+      "file": "raw-job-116471592967.log",
+      "sha256": "b31a2673dd4fdb3b9e18767c49d1fb939fc3d36046d244979f4a79960eceddf2",
+      "bytes": 229938,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 176,
+      "passed": 175,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T14:52:39.8947571Z - `man5:201` the PDF \u203a the same input and the same Chromium print the same bytes: failed. Error: run tools/manual-pdf.mjs again: the shipped PDF is out of date"
+      ],
+      "recheckLines": [
+        "2026-10-15T14:52:58.6311928Z man5:201 the same input and the same Chromium print the same bytes: failed alone"
+      ]
+    },
+    {
+      "jobId": 116471593010,
+      "name": "Suite 1/16",
+      "conclusion": "success",
+      "file": "raw-job-116471593010.log",
+      "sha256": "28124c769a28d789bc21b33eebe90a85f61f7d8937b334c6a602cb8cedf90914",
+      "bytes": 226948,
+      "files": 11,
+      "expectedFiles": 11,
+      "tests": 194,
+      "passed": 194,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471593030,
+      "name": "Suite 8/16",
+      "conclusion": "success",
+      "file": "raw-job-116471593030.log",
+      "sha256": "b218dc26d911584c30224110ae5809938f44b73eab616b95ecfe81b6f8f9e8a2",
+      "bytes": 226965,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 170,
+      "passed": 170,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471593051,
+      "name": "Suite 6/16",
+      "conclusion": "success",
+      "file": "raw-job-116471593051.log",
+      "sha256": "e9678257790481320b2ac885364ecb7eb2b0c167868603cd98d6c395c2a67ee5",
+      "bytes": 227176,
+      "files": 23,
+      "expectedFiles": 23,
+      "tests": 239,
+      "passed": 239,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471593076,
+      "name": "Suite 3/16",
+      "conclusion": "failure",
+      "file": "raw-job-116471593076.log",
+      "sha256": "78a662336e230242a4aae6fc99fe7bfbcc68520700eff09c416752408c7d384e",
+      "bytes": 230060,
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 206,
+      "passed": 205,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T14:40:40.1701884Z - `smoke:881` Splashery v3 engine (WebGL2) \u203a a stretchy toy stretches when dragged and springs back; a drag off it orbits: failed. Error: expect(received).toBe(expected) // Object.is equality"
+      ],
+      "recheckLines": [
+        "2026-10-15T14:41:00.4858197Z smoke:881 a stretchy toy stretches when dragged and springs back; a drag off it orbits: passed alone"
+      ]
+    },
+    {
+      "jobId": 116471593099,
+      "name": "Suite 7/16",
+      "conclusion": "success",
+      "file": "raw-job-116471593099.log",
+      "sha256": "254b96e5b2f34d73612f33548050537c740d7a62d1f31c43c5d6f3403287a613",
+      "bytes": 229562,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 213,
+      "passed": 213,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471593137,
+      "name": "Suite 5/16",
+      "conclusion": "success",
+      "file": "raw-job-116471593137.log",
+      "sha256": "c72ce648207bc9a058593a785d417c491ebcdc6437259e02a916cd7a96aa14c9",
+      "bytes": 226826,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 126,
+      "passed": 126,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471593143,
+      "name": "Suite 13/16",
+      "conclusion": "success",
+      "file": "raw-job-116471593143.log",
+      "sha256": "6832a15eb429bcf92824e72a600ca6b29dd5513fcbc4384515775bad96f93e1d",
+      "bytes": 229795,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 139,
+      "passed": 139,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471593203,
+      "name": "Suite 12/16",
+      "conclusion": "success",
+      "file": "raw-job-116471593203.log",
+      "sha256": "17df22793bc77086e5d953bf4027d7480bbcefeab9b5d0c2d8acdae7a34ab064",
+      "bytes": 226452,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 160,
+      "passed": 160,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471593234,
+      "name": "Suite 15/16",
+      "conclusion": "failure",
+      "file": "raw-job-116471593234.log",
+      "sha256": "7c84155de9730114af372840bc08ab0e8df781f56ea7a81e2ce4f60a979dbd07",
+      "bytes": 230383,
+      "files": 23,
+      "expectedFiles": 23,
+      "tests": 205,
+      "passed": 204,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T14:52:31.0074821Z - `live5:63` a video plays with its own sound: the frames follow its clock, pause and scrub take both: failed. Error: Timed out waiting for async m => (await import(m)).MOVING.clip?.audio?.track?.playing"
+      ],
+      "recheckLines": [
+        "2026-10-15T14:54:16.0091170Z live5:63 a video plays with its own sound: the frames follow its clock, pause and scrub take both: failed alone"
+      ]
+    },
+    {
+      "jobId": 116471593238,
+      "name": "Suite 4/16",
+      "conclusion": "success",
+      "file": "raw-job-116471593238.log",
+      "sha256": "58c31a883dd3e8c14066cfc5f50a9e2153692074acc20f46b968434aaad1bad5",
+      "bytes": 226890,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 151,
+      "passed": 151,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "jobId": 116471593734,
+      "name": "Suite 11/16",
+      "conclusion": "success",
+      "file": "raw-job-116471593734.log",
+      "sha256": "00d475d83e97fe71d7d62f5fb659dcc76c0ff49cb08afbf1a89c9a07b57fbea8",
+      "bytes": 227083,
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 118,
+      "passed": 118,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    }
+  ],
+  "note": "All16 original shard summaries and raw UTF-8 logs retained after the normal cb8a8315 merge. Every failed or timedOut assertion remains listed; alone rechecks never waive failures. Later audit-only source changes do not replace this exact tested commit."
+}

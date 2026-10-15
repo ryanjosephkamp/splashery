@@ -1,0 +1,18 @@
+{
+  "capturedAt": "2026-10-15T14:48:42.714990+00:00",
+  "status": "static-authorization-only-closing-outcomes-not-yet-published",
+  "files": 24,
+  "allOriginalBytesVerified": true,
+  "actualR3Watcher": {
+    "createdAt": "2026-10-15T14:22:34.036609+00:00",
+    "pid": 430124,
+    "startTicks": "3537979",
+    "command": [
+      "python3",
+      "/workspace/v3d-r4-media/queue-r12-review-r3.py",
+      "--run"
+    ],
+    "purpose": "One authorized R3 quiet-window watcher; no timed-work signaling."
+  },
+  "notice": "Only immutable authorization/input bytes are copied. No live quiet state, plan, controller result, or render is promoted. Every payload file is lossless gzip with its original SHA."
+}

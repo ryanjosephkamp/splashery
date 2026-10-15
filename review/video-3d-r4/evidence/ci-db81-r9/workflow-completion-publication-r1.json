@@ -1,0 +1,12 @@
+{
+  "publishedAt": "2026-10-15T15:31:01.121659+00:00",
+  "source": "/workspace/v3d-r4-media/ci-db81/workflow-completion-observation-r1.json",
+  "originalPath": "workflow-completion-observation-r1.json",
+  "storedPath": "workflow-completion-observation-r1.json.gz",
+  "gzip": true,
+  "originalBytes": 875,
+  "originalSha256": "bf1f3c46b46691326b3edc5a6c46ae2b5684b5b53561fe0c09c361e4e7ee012a",
+  "storedSha256": "c7c2e2d084b7484e18d59d3eaf516387a4e8e0764c060ed036c383bc8e614e8d",
+  "originalBytesVerified": true,
+  "notice": "Additive workflow-level completion observation; no earlier log, jobs snapshot, or summary was replaced."
+}
