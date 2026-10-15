@@ -690,7 +690,7 @@ ${docLinks(up)}
 <li><strong>Long scenes.</strong> If a scene is too long for a link (about 12 KB), the paint and then the clay edits are left out, and the app says so.</li>
 <li><strong>Old links keep working.</strong> Version 2 and 3 scenes, from any time, still load.</li>
 <li><strong>In an embed.</strong> The same payload works in the embed player: <code>embed/#s=PAYLOAD</code>, or the element's <code>scene</code> attribute. That is how an embed can show a toy with its exact look and camera.</li>
-<li><strong>As a file.</strong> <strong>Save JSON</strong> in the Share tab saves the same scene as a file, and <strong>Load JSON</strong> (or dropping the file on the page) opens it. The format is written down in <a href="${up}learn/scene-format/">the scene format</a>.</li>
+<li><strong>As a file.</strong> <strong>Save scene</strong> in the Share tab saves the same scene as a file, and <strong>Open a scene</strong> (or dropping the file on the page) opens it. The format is written down in <a href="${up}learn/scene-format/">the scene format</a>.</li>
 </ul>
 <h3 id="h-make-link">Make a link to any toy</h3>
 <p>Pick a toy to get its link, and the same toy as an embed address:</p>

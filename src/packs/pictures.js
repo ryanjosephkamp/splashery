@@ -1264,13 +1264,15 @@ function boxBlur(src, w, h, r) {
   return a;
 }
 
-// P1, layered pop-up scenes: the sheets a figure uses (every pop sheet in
-// layers), and layer i of a figure in layers: the whole picture behind
+// P1, layered pop-up scenes: the sheets a figure uses (in layers, the pop
+// sheets of its layers: a graphic has two, so it never waits for the third,
+// lane Fix13), and layer i of a figure in layers: the whole picture behind
 // (0), then the nearer part (1) and the nearest (2) cut out by its depth
 // map (a graphic: its card, then its strongest shapes), each a flat card a
 // gap in front of the one behind. A layer waits for the map (`ready`).
 function pgSheets(F) {
-  return F.layered ? [0, 1, 2].map((i) => `pop${i}`) : [`pop${F.slot}`];
+  if (!F.layered) return [`pop${F.slot}`];
+  return [0, 1, 2].filter((i) => pgLayer(F, i)).map((i) => `pop${i}`);
 }
 function pgLayer(F, i) {
   const r = F.relief;

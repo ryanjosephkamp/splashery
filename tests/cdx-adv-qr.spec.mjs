@@ -44,7 +44,7 @@ test("a reader load failure offers JSON and permits an export retry", async ({ p
   const downloads = [];
   page.on("download", (d) => downloads.push(d));
   await page.locator("#sqr-save").click();
-  await expect(page.locator("#sqr-check")).toContainText("Try again, or save JSON");
+  await expect(page.locator("#sqr-check")).toContainText("Try again, or use Save scene");
   await expect(page.locator("#sqr-json")).toBeVisible();
   await expect(page.locator("#sqr-save")).toBeEnabled();
   expect(downloads).toHaveLength(0);
