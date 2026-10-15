@@ -12,11 +12,7 @@ export function cancelSurface() {
 export function cancelPendingSurface() {
   if (waiting.size) cancelSurface();
 }
-export function prepareSurface(photo, depth, options, cells) {
-  // A slider rebuild supersedes the previous request. Resolve that obsolete
-  // preparation without a surface (Player drops its stale load token), and
-  // terminate its worker so neither CPU work nor image clones form a queue.
-  cancelPendingSurface();
+function startWorker() {
   if (!worker) {
     worker = new Worker(new URL("./build-worker.js", import.meta.url), { type: "module" });
     const current = worker;
@@ -43,6 +39,26 @@ export function prepareSurface(photo, depth, options, cells) {
       worker = null;
     };
   }
+}
+
+// The depth model and source-only color work can run independently. A missing
+// or obsolete token uses the ordinary, uncached construction path.
+export function prewarmSurface(photo, options) {
+  cancelPendingSurface();
+  startWorker();
+  const id = ++next;
+  worker.postMessage({
+    id,
+    type: "colors",
+    photo: { w: photo.w, h: photo.h, data: photo.data },
+    options,
+  });
+  return id;
+}
+
+export function prepareSurface(photo, depth, options, cells) {
+  cancelPendingSurface();
+  startWorker();
   return new Promise((resolve, reject) => {
     const id = ++next;
     waiting.set(id, { resolve, reject });
