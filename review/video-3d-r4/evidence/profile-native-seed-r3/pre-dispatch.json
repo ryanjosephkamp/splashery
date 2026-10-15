@@ -1,0 +1,48 @@
+{
+  "created": "2026-10-15T08:22:58.126Z",
+  "inputSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "scriptSha256": "847b351c6fd9fb32f98dcb7d81ff9bf33188e7f318b147ff80bcfdb0fcaa6b09",
+  "sourceBefore": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119289,
+      "sha256": "be0773b3c563360875ddc2baec740fcabaf2096e85dcc21904464ffe1abd4a9a"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102351,
+      "sha256": "1fb4699e713fa1d1a0bc7cb4623f87285ab0da420141134c7d5c3deb967f7835"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "protocol": "Fixed cached real plant reconstruction and training photographs; native phone 15000 seed and 320px targets; no solving or wall-clock acceptance. Paired shared/direct variants, each with three cold and three warm timestamp-profiled steps include an extra diagnostic forward pass, excluded from reported production msPerStep. No end-to-end or physical-device performance claim."
+}

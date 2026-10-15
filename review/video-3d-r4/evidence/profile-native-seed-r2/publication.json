@@ -1,0 +1,72 @@
+{
+  "created": "2026-10-15T09:04:21.165Z",
+  "source": "/workspace/v3d-r4-media/profile-native-seed-r2",
+  "sourceInventory": [
+    {
+      "file": "assessment.json",
+      "bytes": 225,
+      "sha256": "1dc6bdb74ffa393ece18c44a269c30de836162ccf737bc59bed3a52d045a316e"
+    },
+    {
+      "file": "direct-out.bin",
+      "bytes": 921600,
+      "sha256": "9b1740d9ff1e33749a4fe5f9beb038eaf028f93633bd3a24a25e361f9c604ab0"
+    },
+    {
+      "file": "direct-params.bin",
+      "bytes": 960000,
+      "sha256": "a91719eb54c2e082db5716262b1c2d080b32367099b6378c650f2e7c548d67a8"
+    },
+    {
+      "file": "direct-stats.bin",
+      "bytes": 16,
+      "sha256": "27fcec75a73457585344a34aa8ac1fc66c4e396b4c7262eb78ae184d12edaf9b"
+    },
+    {
+      "file": "direct-tileCursor.bin",
+      "bytes": 1600,
+      "sha256": "5fc53b16c9d42be4ef52c8345b3105a8add701cbd2232796f07f1bfb8e5337b8"
+    },
+    {
+      "file": "direct-tileStart.bin",
+      "bytes": 1604,
+      "sha256": "15ed8ce10cf056dec045fb52221af531439a6a4a75f75ba5bfd11fa1d19129a7"
+    },
+    {
+      "file": "pre-dispatch.json",
+      "bytes": 1954,
+      "sha256": "98615bdfbcf3ca427a5b96f7f4c016dfd05f39817dafa1c88e772cca1ef9ace6"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 10565,
+      "sha256": "812d144614f3a9bd0f0aecefb2bd7cdfc89288a080d02042e1b5edd0373211c3"
+    },
+    {
+      "file": "shared-out.bin",
+      "bytes": 921600,
+      "sha256": "eaeb9d6399cacbb24d59c56eadeeeda1e74fd031aab74cdf47b4f88d75d5db92"
+    },
+    {
+      "file": "shared-params.bin",
+      "bytes": 960000,
+      "sha256": "3abfaa049256ac585c973b36e2b69ec4e82e7dddd873b06456236dce6046cffd"
+    },
+    {
+      "file": "shared-stats.bin",
+      "bytes": 16,
+      "sha256": "c388ee477f857115032a6ec85aa49bedd34bde53823c6ec3057a6d308d3c3e90"
+    },
+    {
+      "file": "shared-tileCursor.bin",
+      "bytes": 1600,
+      "sha256": "f7fdd487d88a550ebd11279cb30af3b58d1db0efa04e59c5ccfe6889e6d772a1"
+    },
+    {
+      "file": "shared-tileStart.bin",
+      "bytes": 1604,
+      "sha256": "1bd81e99e9530f6652074439d78adf8858c6996da6e3b36797987ad27f5547c9"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

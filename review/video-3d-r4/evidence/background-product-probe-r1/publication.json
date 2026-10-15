@@ -1,0 +1,37 @@
+{
+  "created": "2026-10-15T09:04:21.608Z",
+  "source": "/workspace/v3d-r4-media/background-product-probe-r1",
+  "sourceInventory": [
+    {
+      "file": "black-0.png",
+      "bytes": 582983,
+      "sha256": "5fc3256446083be254de46c2e9e5d6c4b331aecd97bdf0c55decb4d568e60dd8"
+    },
+    {
+      "file": "black-1.png",
+      "bytes": 589118,
+      "sha256": "ccd1ef64ff380f09ce73e4c8507ef351e46d78a841fea19edc9850f97eae1e87"
+    },
+    {
+      "file": "black-2.png",
+      "bytes": 567405,
+      "sha256": "3dcaee8cff1fe549843ff0f67d0624235955f3e52c0cd8d8bf5a52f3afc8dfa0"
+    },
+    {
+      "file": "black-3.png",
+      "bytes": 580888,
+      "sha256": "b04680b18b14b9866bd8f82f569b5fa0ca310f34bf37847e0ec4aa9dec2071e7"
+    },
+    {
+      "file": "pre-dispatch.json",
+      "bytes": 995,
+      "sha256": "e17f3dd1642c77135b44424143f5f4625165c9be8991993445d898fb22be41f3"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 3026,
+      "sha256": "35deba8addef28ab18177d53f41e83bc0422b88abc5cfb70a082c4d5c3215270"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

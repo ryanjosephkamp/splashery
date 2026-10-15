@@ -1,0 +1,3340 @@
+{
+  "created": "2026-10-15T08:41:22.639769+00:00",
+  "cacheSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "codeSha256": "eef965869b782383124deabde9d85db196883e4981bd8d6927456d30363c27e4",
+  "n": 614,
+  "centers": {
+    "arithmeticMean": {
+      "center": [
+        0.1612495741100052,
+        0.08511846504632574,
+        5.320021151713349
+      ],
+      "linearQuantileRadii": {
+        "0.5": 2.395760883312721,
+        "0.9": 2.4818059693391845,
+        "0.95": 2.636220868497363,
+        "0.99": 3.200456676236706,
+        "1.0": 1444.342948885636
+      },
+      "nativeP90OrderStatistic": 2.4819223243420243,
+      "radiusFloorApplied": false
+    },
+    "coordinateMedian": {
+      "center": [
+        -0.013353131698745649,
+        -0.00927936258391112,
+        2.938712951955377
+      ],
+      "linearQuantileRadii": {
+        "0.5": 0.20762175606888386,
+        "0.9": 0.45327241889578906,
+        "0.95": 0.6045681040841645,
+        "0.99": 1.3526438532876504,
+        "1.0": 1446.7322170399273
+      },
+      "nativeP90OrderStatistic": 0.45438785125184455,
+      "radiusFloorApplied": false
+    }
+  },
+  "centerSeparation": 2.389566026911916,
+  "nativeToPlaneRadiusRatio": 5.475564408679889,
+  "coordinateQuantiles": {
+    "0": [
+      -0.5533104342314886,
+      -0.25802791353016286,
+      1.7883472543409193
+    ],
+    "0.01": [
+      -0.3935324004761729,
+      -0.23350209131530225,
+      2.234981717449938
+    ],
+    "0.05": [
+      -0.2807887288801148,
+      -0.18031226732809105,
+      2.781521073936188
+    ],
+    "0.5": [
+      -0.013353131698745649,
+      -0.00927936258391112,
+      2.938712951955377
+    ],
+    "0.9": [
+      0.29478733961589637,
+      0.22078189471338988,
+      3.0227708029679468
+    ],
+    "0.95": [
+      0.35348825760721747,
+      0.30508883437980633,
+      3.15606130825751
+    ],
+    "0.99": [
+      0.4824683732128106,
+      0.5120009155520857,
+      4.228522179443392
+    ],
+    "1": [
+      91.78225559504747,
+      39.117646427463775,
+      1446.225502788947
+    ]
+  },
+  "worstOutliers": [
+    {
+      "rankByMedianDistance": 1,
+      "index": 264,
+      "X": [
+        91.78225559504747,
+        39.117646427463775,
+        1446.225502788947
+      ],
+      "rgb": [
+        0.33137255907058716,
+        0.2078431472182274,
+        0.10784314014017582
+      ],
+      "distanceFromMedian": 1446.7322170399273,
+      "distanceFromMean": 1444.342948885636,
+      "meanShiftIfRemovedNorm": 2.356187518573631,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 16,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 1449.6940039026624,
+          "u": 176.16849514774938,
+          "v": 80.23531027145847,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 1448.9324290570826,
+          "u": 180.97060765192253,
+          "v": 93.5556320491579,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 1448.5942342892438,
+          "u": 185.24080981791673,
+          "v": 96.29750284206997,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 1446.5322357380398,
+          "u": 197.92377011476782,
+          "v": 111.53586048750795,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 4,
+          "depth": 1444.8346823946829,
+          "u": 208.66514720231373,
+          "v": 113.35428231984761,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 5,
+          "depth": 1443.125439700922,
+          "u": 215.19656192169688,
+          "v": 121.15478964404232,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 6,
+          "depth": 1441.4430572398473,
+          "u": 224.9373790779957,
+          "v": 119.34309217867278,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 7,
+          "depth": 1441.0796675193808,
+          "u": 224.26021307191795,
+          "v": 122.60641075220066,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 8,
+          "depth": 1439.9054531127304,
+          "u": 227.601823699622,
+          "v": 126.9401556294397,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 9,
+          "depth": 1434.758079519873,
+          "u": 246.9056386096504,
+          "v": 134.9387254836826,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 10,
+          "depth": 1431.3334118210016,
+          "u": 259.9862229419693,
+          "v": 134.91817309339115,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 11,
+          "depth": 1428.0394626642415,
+          "u": 265.81371245133346,
+          "v": 146.04111318391773,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 12,
+          "depth": 1433.5479391472686,
+          "u": 244.44518670333775,
+          "v": 145.8626930963635,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 13,
+          "depth": 1433.3653165391536,
+          "u": 245.9666589326293,
+          "v": 144.72967063832314,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 14,
+          "depth": 1430.5451377318198,
+          "u": 255.37292540093898,
+          "v": 149.09239139343123,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 15,
+          "depth": 1431.1395335836671,
+          "u": 255.02063131517428,
+          "v": 147.31287924005582,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 2,
+      "index": 214,
+      "X": [
+        -0.27314118972720997,
+        0.9349445293431564,
+        8.039858718660035
+      ],
+      "rgb": [
+        0.2803921699523926,
+        0.2549019679427147,
+        0.0882352963089943
+      ],
+      "distanceFromMedian": 5.194298482600797,
+      "distanceFromMean": 2.8824323176511517,
+      "meanShiftIfRemovedNorm": 0.004702173438256365,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 8.592729037574253,
+          "u": 112.54424046781436,
+          "v": 144.90719884124132,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 7.9567617993982696,
+          "u": 113.68157836322696,
+          "v": 158.9347356727631,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 7.937347764385389,
+          "u": 117.75585208145705,
+          "v": 161.82026583684626,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 7.600734483923467,
+          "u": 127.70573263948147,
+          "v": 180.77856488777368,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 7.3335400562721125,
+          "u": 136.74011097704133,
+          "v": 186.77609369452853,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 7.168373806428603,
+          "u": 142.2941539126411,
+          "v": 197.19237500729065,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 6.978442886370253,
+          "u": 149.96914877220163,
+          "v": 200.03945660749818,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 6.767325746307264,
+          "u": 149.8591404356646,
+          "v": 207.96182986055294,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 6.6237637925879005,
+          "u": 152.06478567296207,
+          "v": 215.89861869911934,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 6.5189503191303855,
+          "u": 170.39452745993543,
+          "v": 226.86111672258212,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 6.458515027789052,
+          "u": 181.8382437592657,
+          "v": 228.67992959174708,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 6.318235926336364,
+          "u": 187.88114344379795,
+          "v": 242.58268297560178,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 6.221521570191834,
+          "u": 168.85672875419223,
+          "v": 245.5888032823169,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 6.22591436159821,
+          "u": 170.2878941304011,
+          "v": 244.24293257166758,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 6.428995996609762,
+          "u": 178.96624369200012,
+          "v": 243.98523018335902,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 6.656534628395474,
+          "u": 177.7809694157472,
+          "v": 236.77193644106757,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 3,
+      "index": 216,
+      "X": [
+        -0.5362830784518391,
+        1.0236074914580426,
+        7.763182727314602
+      ],
+      "rgb": [
+        0.6607843339443207,
+        0.47843137383461,
+        0.3921568691730499
+      ],
+      "distanceFromMedian": 4.961433219929354,
+      "distanceFromMean": 2.708570091132879,
+      "meanShiftIfRemovedNorm": 0.004418548272647437,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 8.309412781420942,
+          "u": 89.2975750524224,
+          "v": 155.3440761752758,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 7.673335057682659,
+          "u": 88.35602517858892,
+          "v": 170.2212238297655,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 7.655080253853501,
+          "u": 92.3774517629044,
+          "v": 173.148680583903,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 7.321139703231391,
+          "u": 101.06319178595652,
+          "v": 192.69429786905803,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 7.057669515464558,
+          "u": 109.05088080662419,
+          "v": 199.24909382102356,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 6.893994485087967,
+          "u": 113.91718682169005,
+          "v": 210.05002114741507,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 6.707930451189447,
+          "u": 120.73248167836448,
+          "v": 213.38423706609393,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 6.49615576333666,
+          "u": 119.70027911973622,
+          "v": 221.96731266252465,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 6.353343847000512,
+          "u": 121.18691812637019,
+          "v": 230.37026147351898,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 6.255015521134839,
+          "u": 138.9944306184319,
+          "v": 241.54246990204138,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 6.199647427706345,
+          "u": 150.0927875232232,
+          "v": 243.48329497252715,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 6.060473981974978,
+          "u": 155.40412337983992,
+          "v": 257.77740812440743,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 5.9554370580827225,
+          "u": 135.9251204892165,
+          "v": 261.4112333275937,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 5.960568507401936,
+          "u": 137.36847236143896,
+          "v": 259.9935572729413,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 6.166706782814996,
+          "u": 147.1610784665647,
+          "v": 259.0562290939728,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 6.394336504235968,
+          "u": 147.06134729757605,
+          "v": 251.05292785806824,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 4,
+      "index": 85,
+      "X": [
+        0.1609132717878935,
+        0.668323041990147,
+        6.3990369109213905
+      ],
+      "rgb": [
+        0.24183007578055063,
+        0.27973857522010803,
+        0.12418301155169804
+      ],
+      "distanceFromMedian": 3.530347815593095,
+      "distanceFromMean": 1.226540949290638,
+      "meanShiftIfRemovedNorm": 0.0020008824621380716,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 4,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 6.961437312396132,
+          "u": 152.77585817436074,
+          "v": 137.3566278960211,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 6.326135989161126,
+          "u": 157.0616719547056,
+          "v": 150.90623186379,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 6.304721051402524,
+          "u": 161.19752765888683,
+          "v": 153.77005635958483,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 5.96519277834519,
+          "u": 172.91174924211305,
+          "v": 173.4513312982294,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 4,
+          "depth": 5.6920840984092225,
+          "u": 183.6127096549722,
+          "v": 180.41675980698236,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 5.52618876999157,
+          "u": 190.2929669476786,
+          "v": 191.42955974364088,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 5.330065430811556,
+          "u": 199.09711867095734,
+          "v": 195.63665494546484,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 5.1206869497419305,
+          "u": 201.16646886339922,
+          "v": 204.7897597007114,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 4.977162570587901,
+          "u": 204.47999018294647,
+          "v": 213.8069633798047,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 4.866120359908956,
+          "u": 223.78665618138606,
+          "v": 225.98733109932377,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 4.799812896914259,
+          "u": 235.47314011680234,
+          "v": 228.57481578226916,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 4.66222030489122,
+          "u": 243.29758471629424,
+          "v": 243.54922809555305,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 4.575026066554171,
+          "u": 225.9918454022366,
+          "v": 247.28659308389845,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 4.578067773871526,
+          "u": 227.39375915102727,
+          "v": 245.9963133389344,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 4.779240441878045,
+          "u": 233.35071788433623,
+          "v": 243.84279086241622,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 5.005973921469275,
+          "u": 229.448657883073,
+          "v": 234.93771422734224,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 5,
+      "index": 170,
+      "X": [
+        -0.24029908479110385,
+        0.6080856095176124,
+        5.103537880523199
+      ],
+      "rgb": [
+        0.8921568691730499,
+        0.5764706134796143,
+        0.5137255191802979
+      ],
+      "distanceFromMedian": 2.2625452361779614,
+      "distanceFromMean": 0.6939747591713399,
+      "meanShiftIfRemovedNorm": 0.0011320958550919084,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 5.6492995424349965,
+          "u": 107.13369302485424,
+          "v": 147.40501832582362,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 5.016736880366857,
+          "u": 105.541682148222,
+          "v": 162.16303318663824,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 4.997611744958288,
+          "u": 109.44352448826521,
+          "v": 165.11385808779966,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 4.665857616244177,
+          "u": 117.21393467839786,
+          "v": 186.6379780004754,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 4.398875272127756,
+          "u": 124.5116996779741,
+          "v": 195.8007062142658,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 4.237551624858905,
+          "u": 128.9754054369486,
+          "v": 208.2947814672348,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 4.047015646059139,
+          "u": 134.56651655362666,
+          "v": 215.08378343480896,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 3.8375787312696286,
+          "u": 134.0362168991057,
+          "v": 227.3159508429192,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 3.6966070588080893,
+          "u": 134.76553079658794,
+          "v": 238.76927601711535,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 3.598886116093073,
+          "u": 152.07948131010073,
+          "v": 252.64744522025117,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 3.5413150267078812,
+          "u": 162.00416774034366,
+          "v": 256.34741802485775,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 3.4094867600078667,
+          "u": 167.68556146079905,
+          "v": 273.5047643615666,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 3.307890996289338,
+          "u": 149.79049683515086,
+          "v": 280.2811813517116,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 3.3117526521617577,
+          "u": 151.22916496722823,
+          "v": 278.78647314865543,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 3.519822207983483,
+          "u": 160.3540544828268,
+          "v": 272.35799809616327,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 3.7460458714341804,
+          "u": 159.6678737122138,
+          "v": 259.2857047057827,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 6,
+      "index": 169,
+      "X": [
+        -0.24029908479110385,
+        0.6080856095176124,
+        5.103537880523199
+      ],
+      "rgb": [
+        0.8921568691730499,
+        0.5764706134796143,
+        0.5137255191802979
+      ],
+      "distanceFromMedian": 2.2625452361779614,
+      "distanceFromMean": 0.6939747591713399,
+      "meanShiftIfRemovedNorm": 0.0011320958550919084,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 5.6492995424349965,
+          "u": 107.13369302485424,
+          "v": 147.40501832582362,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 5.016736880366857,
+          "u": 105.541682148222,
+          "v": 162.16303318663824,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 4.997611744958288,
+          "u": 109.44352448826521,
+          "v": 165.11385808779966,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 4.665857616244177,
+          "u": 117.21393467839786,
+          "v": 186.6379780004754,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 4.398875272127756,
+          "u": 124.5116996779741,
+          "v": 195.8007062142658,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 4.237551624858905,
+          "u": 128.9754054369486,
+          "v": 208.2947814672348,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 4.047015646059139,
+          "u": 134.56651655362666,
+          "v": 215.08378343480896,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 3.8375787312696286,
+          "u": 134.0362168991057,
+          "v": 227.3159508429192,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 3.6966070588080893,
+          "u": 134.76553079658794,
+          "v": 238.76927601711535,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 3.598886116093073,
+          "u": 152.07948131010073,
+          "v": 252.64744522025117,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 3.5413150267078812,
+          "u": 162.00416774034366,
+          "v": 256.34741802485775,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 3.4094867600078667,
+          "u": 167.68556146079905,
+          "v": 273.5047643615666,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 3.307890996289338,
+          "u": 149.79049683515086,
+          "v": 280.2811813517116,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 3.3117526521617577,
+          "u": 151.22916496722823,
+          "v": 278.78647314865543,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 3.519822207983483,
+          "u": 160.3540544828268,
+          "v": 272.35799809616327,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 3.7460458714341804,
+          "u": 159.6678737122138,
+          "v": 259.2857047057827,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 7,
+      "index": 166,
+      "X": [
+        0.400147910294952,
+        0.5156164522182695,
+        4.1179903215269995
+      ],
+      "rgb": [
+        0.7549019753932953,
+        0.615686297416687,
+        0.47647058963775635
+      ],
+      "distanceFromMedian": 1.3554312385770382,
+      "distanceFromMean": 1.2989530587013203,
+      "meanShiftIfRemovedNorm": 0.00211900988368894,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 4.687695324594694,
+          "u": 199.82565455178292,
+          "v": 151.2932159627812,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 4.051714109719376,
+          "u": 211.2407179634915,
+          "v": 167.27788580725985,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 4.028856050878397,
+          "u": 215.59623081537939,
+          "v": 170.26577982373192,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 3.687150074268147,
+          "u": 231.81381032114723,
+          "v": 194.41069880458906,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 3.4107541166457738,
+          "u": 247.31310995907234,
+          "v": 206.63126412157143,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 3.2447977620496538,
+          "u": 257.3943575879366,
+          "v": 221.25285282051817,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 3.0455781597401987,
+          "u": 269.9657836854991,
+          "v": 232.05343694794973,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 2.837248576399734,
+          "u": 279.43521614389454,
+          "v": 248.52237903350624,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 2.6941389080216798,
+          "u": 286.9086020879067,
+          "v": 263.8016378886598,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 2.5818043249159865,
+          "u": 310.08613175565597,
+          "v": 282.1106450862073,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 2.5139051376580905,
+          "u": 323.0578494779652,
+          "v": 288.6895171200252,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 2.3796447393548137,
+          "u": 337.8984618179951,
+          "v": 310.83999603411627,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 2.2949147148492073,
+          "u": 327.67455087179985,
+          "v": 320.5202407064968,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 2.297251255644686,
+          "u": 328.91341086101613,
+          "v": 319.1753707088741,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 2.4989587488004594,
+          "u": 323.57117598840796,
+          "v": 304.78957015996536,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 2.72500810968482,
+          "u": 309.2217003268234,
+          "v": 284.9828303992584,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 8,
+      "index": 583,
+      "X": [
+        -0.2563598256315458,
+        -0.1275599754874593,
+        4.2450384340745755
+      ],
+      "rgb": [
+        0.7470588386058807,
+        0.6333333551883698,
+        0.5156862884759903
+      ],
+      "distanceFromMedian": 1.333989813274054,
+      "distanceFromMean": 1.1726967097431562,
+      "meanShiftIfRemovedNorm": 0.0019130452034961767,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 16,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 4.761587220057327,
+          "u": 100.34675379229819,
+          "v": 53.2085849578328,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 4.142113635787871,
+          "u": 96.77503237292933,
+          "v": 53.98795327130215,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 4.1256906039672545,
+          "u": 100.48996823354994,
+          "v": 56.49797757575204,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 3.809370612093648,
+          "u": 106.84176921904447,
+          "v": 70.09987704576005,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 4,
+          "depth": 3.544388941129169,
+          "u": 112.58807238887843,
+          "v": 72.27432560019778,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 5,
+          "depth": 3.391370936515157,
+          "u": 116.06315609204523,
+          "v": 80.10417874458776,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 6,
+          "depth": 3.199305098312209,
+          "u": 119.77075768366839,
+          "v": 81.54339315170648,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 7,
+          "depth": 2.9932933708144374,
+          "u": 118.17747317238747,
+          "v": 86.96626016416089,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 8,
+          "depth": 2.8570661560884183,
+          "u": 117.3686760709937,
+          "v": 93.59387727896262,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 9,
+          "depth": 2.7690296141661674,
+          "u": 133.76576732653842,
+          "v": 104.13516531601176,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 10,
+          "depth": 2.7126449492292917,
+          "u": 142.2718426938519,
+          "v": 105.83959733785389,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 11,
+          "depth": 2.593183050386334,
+          "u": 147.35598819607168,
+          "v": 117.19634325231337,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 12,
+          "depth": 2.4895855009770016,
+          "u": 129.54178231266292,
+          "v": 119.82690379124307,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 13,
+          "depth": 2.4922420289058005,
+          "u": 131.1800961286596,
+          "v": 118.48939523676272,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 14,
+          "depth": 2.7061962573263902,
+          "u": 141.10202490973566,
+          "v": 121.06873032272397,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 15,
+          "depth": 2.930370281891075,
+          "u": 141.95819869887347,
+          "v": 116.55544095541671,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 9,
+      "index": 194,
+      "X": [
+        0.5817586265450753,
+        0.48780463170916266,
+        3.8893352396730188
+      ],
+      "rgb": [
+        0.7862745225429535,
+        0.637254923582077,
+        0.4529411792755127
+      ],
+      "distanceFromMedian": 1.2267572033976126,
+      "distanceFromMean": 1.5446184612751857,
+      "meanShiftIfRemovedNorm": 0.0025197691048534842,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 4.4656805983204215,
+          "u": 232.29543805737217,
+          "v": 151.40728376993536,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 3.8288022086760023,
+          "u": 249.51419334733686,
+          "v": 167.647173389596,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 3.8049051112211094,
+          "u": 254.12643412122068,
+          "v": 170.64074370845935,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 3.4604363636545146,
+          "u": 274.4709571459638,
+          "v": 195.55117150469593,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 3.1813763934271204,
+          "u": 294.1237841465952,
+          "v": 208.7187976081714,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 3.014113339105028,
+          "u": 307.11724769101147,
+          "v": 224.02429198903442,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 2.812414850771117,
+          "u": 323.58416570946645,
+          "v": 236.1837855181598,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 2.604404262686038,
+          "u": 338.22753114192903,
+          "v": 254.10835395491065,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 2.460684679409585,
+          "u": 349.5591223913142,
+          "v": 270.77308351350337,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 2.344146616763798,
+          "u": 376.51964697292556,
+          "v": 290.8392201048799,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 2.2732576788332697,
+          "u": 391.7754256134399,
+          "v": 298.6067353577727,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 2.1382665604057083,
+          "u": 412.06560558719184,
+          "v": 322.81379887953665,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 2.0584223599445703,
+          "u": 405.5571782111573,
+          "v": 333.5108237313849,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 2.0603218527205556,
+          "u": 406.73581866982386,
+          "v": 332.2480838707137,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 2.260178243891808,
+          "u": 393.08846446282985,
+          "v": 314.6737311978228,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 2.48618238495886,
+          "u": 371.0800356894942,
+          "v": 292.2947967592388,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 10,
+      "index": 521,
+      "X": [
+        -0.017116510046736404,
+        -0.1087891061783434,
+        1.7883472543409193
+      ],
+      "rgb": [
+        0.7529411911964417,
+        0.6803921759128571,
+        0.615686297416687
+      ],
+      "distanceFromMedian": 1.154667740233015,
+      "distanceFromMean": 3.541487699193296,
+      "meanShiftIfRemovedNorm": 0.005777304566383843,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 16,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 2.319482130215642,
+          "u": 141.7928832620743,
+          "v": 51.128816757838884,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 1.6959877753931765,
+          "u": 141.1932101482072,
+          "v": 33.252068967423426,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 1.67741517131077,
+          "u": 144.55053406187838,
+          "v": 35.00169613204418,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 1.3551972413055913,
+          "u": 149.67146507228406,
+          "v": 40.83113115352916,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 4,
+          "depth": 1.0865066395178289,
+          "u": 154.64519153428745,
+          "v": 36.61676345151793,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 5,
+          "depth": 0.9316015870471982,
+          "u": 157.12295858084315,
+          "v": 38.59885533393972,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 6,
+          "depth": 0.7369373218059851,
+          "u": 151.593730316856,
+          "v": 40.015007515534705,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 7,
+          "depth": 0.5311898610173744,
+          "u": 158.27834860350234,
+          "v": 39.04672146300462,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 8,
+          "depth": 0.3943867083197774,
+          "u": 145.7745320720317,
+          "v": 43.30169675967213,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 9,
+          "depth": 0.30346740892685586,
+          "u": 148.86685025446715,
+          "v": 61.22137903881093,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 10,
+          "depth": 0.24573068867628423,
+          "u": 117.24739887108869,
+          "v": 70.47812092463323,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 11,
+          "depth": 0.12722969580577304,
+          "u": 88.55288882213046,
+          "v": 58.99204978750855,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 12,
+          "depth": 0.025693114118733762,
+          "u": 147.77459139991439,
+          "v": 73.26092346754963,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 13,
+          "depth": 0.02794705284916632,
+          "u": 156.50629897752356,
+          "v": 68.92182680937572,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 14,
+          "depth": 0.24153452060096692,
+          "u": 152.1161527464601,
+          "v": 93.55195958191923,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 15,
+          "depth": 0.46543933510976054,
+          "u": 153.71581762233367,
+          "v": 88.2931829376523,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 11,
+      "index": 190,
+      "X": [
+        -0.004722300278684432,
+        0.47748971234013715,
+        3.962975547193187
+      ],
+      "rgb": [
+        0.5745098292827606,
+        0.4803921580314636,
+        0.35098040103912354
+      ],
+      "distanceFromMedian": 1.134077813713287,
+      "distanceFromMean": 1.4223482806747751,
+      "meanShiftIfRemovedNorm": 0.002320307146288377,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 4.514899882656525,
+          "u": 138.42550137930857,
+          "v": 148.58353082212264,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 3.8822262673224306,
+          "u": 140.0991946459325,
+          "v": 164.0517451106487,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 3.861895025985698,
+          "u": 144.04341574868732,
+          "v": 167.0465824252411,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 3.5281341644949693,
+          "u": 153.52662593652067,
+          "v": 190.9472177223891,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 3.2579001560686724,
+          "u": 162.61291040965426,
+          "v": 203.15780106212299,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 3.0960782046979514,
+          "u": 168.31802379393503,
+          "v": 217.78347494915212,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 2.902279172705688,
+          "u": 174.89257104730925,
+          "v": 228.74166839581207,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 2.6937322831724133,
+          "u": 177.54521062231427,
+          "v": 245.74494692050425,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 2.5527609663667468,
+          "u": 179.5181665897418,
+          "v": 261.3872935014753,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 2.451884286525192,
+          "u": 197.86509225340723,
+          "v": 279.26074796822707,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 2.3914275220236068,
+          "u": 207.50997742139953,
+          "v": 285.60235460114416,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 2.261164133194903,
+          "u": 215.9038018367728,
+          "v": 307.6020380639201,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 2.1642255867677194,
+          "u": 201.80551555747633,
+          "v": 319.02621418084595,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 2.1673873195676414,
+          "u": 203.15979762797173,
+          "v": 317.45179843903566,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 2.374611888305407,
+          "u": 207.58098577038405,
+          "v": 302.18875673506034,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 2.600394124717959,
+          "u": 202.65644353095766,
+          "v": 281.65578646925644,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 12,
+      "index": 191,
+      "X": [
+        -0.004722300278684432,
+        0.47748971234013715,
+        3.962975547193187
+      ],
+      "rgb": [
+        0.5745098292827606,
+        0.4803921580314636,
+        0.35098040103912354
+      ],
+      "distanceFromMedian": 1.134077813713287,
+      "distanceFromMean": 1.4223482806747751,
+      "meanShiftIfRemovedNorm": 0.002320307146288377,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 4.514899882656525,
+          "u": 138.42550137930857,
+          "v": 148.58353082212264,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 3.8822262673224306,
+          "u": 140.0991946459325,
+          "v": 164.0517451106487,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 3.861895025985698,
+          "u": 144.04341574868732,
+          "v": 167.0465824252411,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 3.5281341644949693,
+          "u": 153.52662593652067,
+          "v": 190.9472177223891,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 3.2579001560686724,
+          "u": 162.61291040965426,
+          "v": 203.15780106212299,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 3.0960782046979514,
+          "u": 168.31802379393503,
+          "v": 217.78347494915212,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 2.902279172705688,
+          "u": 174.89257104730925,
+          "v": 228.74166839581207,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 2.6937322831724133,
+          "u": 177.54521062231427,
+          "v": 245.74494692050425,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 2.5527609663667468,
+          "u": 179.5181665897418,
+          "v": 261.3872935014753,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 2.451884286525192,
+          "u": 197.86509225340723,
+          "v": 279.26074796822707,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 2.3914275220236068,
+          "u": 207.50997742139953,
+          "v": 285.60235460114416,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 2.261164133194903,
+          "u": 215.9038018367728,
+          "v": 307.6020380639201,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 2.1642255867677194,
+          "u": 201.80551555747633,
+          "v": 319.02621418084595,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 2.1673873195676414,
+          "u": 203.15979762797173,
+          "v": 317.45179843903566,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 2.374611888305407,
+          "u": 207.58098577038405,
+          "v": 302.18875673506034,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 2.600394124717959,
+          "u": 202.65644353095766,
+          "v": 281.65578646925644,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 13,
+      "index": 217,
+      "X": [
+        0.27846479795314383,
+        0.204787023466095,
+        1.9037403852962353
+      ],
+      "rgb": [
+        0.545098066329956,
+        0.550980418920517,
+        0.4490196108818054
+      ],
+      "distanceFromMedian": 1.0964261650653164,
+      "distanceFromMean": 3.4203851022313794,
+      "meanShiftIfRemovedNorm": 0.005579747311959836,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 2.4594993872694957,
+          "u": 226.95024582039963,
+          "v": 142.9205207342705,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 1.828270526643236,
+          "u": 255.85381904044817,
+          "v": 159.06265274467057,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 1.8067537189326577,
+          "u": 260.7236282189118,
+          "v": 162.1907624675922,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 1.4726848349095887,
+          "u": 292.4516068551319,
+          "v": 197.49094251305752,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 1.1988021061699423,
+          "u": 330.5317233750102,
+          "v": 229.44649219115226,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 1.0377763914298246,
+          "u": 360.7376822344994,
+          "v": 261.6112328527499,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 0.8399133934857621,
+          "u": 405.06833848488634,
+          "v": 314.94364154193005,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 0.6330033860690645,
+          "u": 493.6541221410492,
+          "v": 404.1992238616513,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 0.4929114499837923,
+          "u": 579.8010867217049,
+          "v": 511.75653759829015,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 0.390532167255377,
+          "u": 699.7927640178258,
+          "v": 649.2571919277563,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 0.3274090753081864,
+          "u": 785.9201735274585,
+          "v": 768.5951497643226,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 0.2016607798258283,
+          "u": 1183.6756576574883,
+          "v": 1201.8307792300081,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 0.10896132212439236,
+          "u": 2120.8623846862583,
+          "v": 2179.132220161619,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 0.11110645671727304,
+          "u": 2084.0535656513184,
+          "v": 2138.39095864794,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 0.3188318782100208,
+          "u": 829.9984496199152,
+          "v": 806.7854683342142,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 0.5436713847851269,
+          "u": 550.5837110263427,
+          "v": 507.44487024212543,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 14,
+      "index": 57,
+      "X": [
+        0.20612740988914535,
+        0.379229394110333,
+        3.8997253945229993
+      ],
+      "rgb": [
+        0.0941176488995552,
+        0.0313725508749485,
+        0.037254903465509415
+      ],
+      "distanceFromMedian": 1.0595544709610776,
+      "distanceFromMean": 1.4511220819186863,
+      "meanShiftIfRemovedNorm": 0.00236724646316262,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 4,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 4.456334340701996,
+          "u": 172.32164724910004,
+          "v": 134.06487614669317,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 3.824017262123043,
+          "u": 179.58724708022007,
+          "v": 147.23177635272756,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 3.80278691387986,
+          "u": 183.72672765935692,
+          "v": 150.11865842127875,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 3.467317442513109,
+          "u": 197.02487809325925,
+          "v": 172.65553321311398,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 4,
+          "depth": 3.1941567505446677,
+          "u": 209.801184363249,
+          "v": 183.61038758525362,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 3.0314929773155574,
+          "u": 218.01933600127347,
+          "v": 197.35619361999923,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 2.83459191421161,
+          "u": 227.9846661912103,
+          "v": 207.3358989271412,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 2.62671098421725,
+          "u": 234.90233661391272,
+          "v": 222.91859646642712,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 2.485377531943561,
+          "u": 240.09331220770133,
+          "v": 237.56932723391193,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 2.3800291095718307,
+          "u": 261.170323249869,
+          "v": 255.05427163974232,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 2.315848020658601,
+          "u": 272.5138284577371,
+          "v": 261.19061471495854,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 2.1854759636029035,
+          "u": 284.9333225586769,
+          "v": 282.2349465620154,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 2.0946374210536436,
+          "u": 273.91106296789496,
+          "v": 292.2696006210104,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 2.097170491213716,
+          "u": 275.2184990758117,
+          "v": 290.85556984865445,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 2.302441147272746,
+          "u": 272.9848505379393,
+          "v": 277.27476598665,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 2.528033311564725,
+          "u": 262.1224289419206,
+          "v": 258.5042368215804,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 15,
+      "index": 222,
+      "X": [
+        0.3415073883824303,
+        0.2305913087817295,
+        1.9840949635225282
+      ],
+      "rgb": [
+        0.3019607961177826,
+        0.35098040103912354,
+        0.1882352977991104
+      ],
+      "distanceFromMedian": 1.046307522448952,
+      "distanceFromMean": 3.3439585465325488,
+      "meanShiftIfRemovedNorm": 0.00545507103838915,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 2.543339032750721,
+          "u": 241.4829743522979,
+          "v": 147.49900094015646,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 1.9112722605745345,
+          "u": 274.1597170232232,
+          "v": 165.0992363635234,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 1.8893003150509504,
+          "u": 279.2475969609112,
+          "v": 168.27823261636098,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 1.553601819897247,
+          "u": 314.0766992842209,
+          "v": 203.97945503214885,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 1.2787130820037627,
+          "u": 355.2005767506669,
+          "v": 235.5346931037439,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 1.1168165605302258,
+          "u": 387.4412888917166,
+          "v": 266.96001303118794,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 0.9181487475508021,
+          "u": 434.7790445569063,
+          "v": 316.89321986728044,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 0.7111781079948343,
+          "u": 522.2351364135957,
+          "v": 397.23997933596695,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 0.570618456243982,
+          "u": 604.425695935625,
+          "v": 489.25260017454906,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 0.46615522417335953,
+          "u": 715.4571044370742,
+          "v": 602.626205926744,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 0.4018095195159299,
+          "u": 792.2214419387715,
+          "v": 693.9994258682166,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 0.2750659868334939,
+          "u": 1090.402816738006,
+          "v": 982.8970848748562,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 0.18437564387299998,
+          "u": 1578.7868737454398,
+          "v": 1440.5627928599079,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 0.1864245964738902,
+          "u": 1564.336456758152,
+          "v": 1425.2409557353835,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 0.3931002932874015,
+          "u": 827.5268654453926,
+          "v": 726.0081100265023,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 0.6180420047661936,
+          "u": 582.4584367730936,
+          "v": 491.8253596039954,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 16,
+      "index": 249,
+      "X": [
+        -0.04753625682777584,
+        -0.09164855272770935,
+        2.0374567346197914
+      ],
+      "rgb": [
+        0.12941176816821098,
+        0.09607843309640884,
+        0.07647059112787247
+      ],
+      "distanceFromMedian": 0.9056577382292829,
+      "distanceFromMean": 3.2939440271719667,
+      "meanShiftIfRemovedNorm": 0.005373481284130451,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 16,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 2.567637987246672,
+          "u": 132.2807244330046,
+          "v": 56.81482715988976,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 1.9442381689357562,
+          "u": 129.3133792808462,
+          "v": 44.71836405575148,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 1.925847051712528,
+          "u": 132.6793754504025,
+          "v": 46.72582960203594,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 1.6039336406300446,
+          "u": 136.57774906531128,
+          "v": 56.33590235071932,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 4,
+          "depth": 1.3356653222433876,
+          "u": 139.98941978396454,
+          "v": 56.366831725899615,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 5,
+          "depth": 1.180801021292465,
+          "u": 141.38930810715055,
+          "v": 62.16699743188124,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 6,
+          "depth": 0.9865342843516618,
+          "u": 136.60931711204285,
+          "v": 67.42012473392917,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 7,
+          "depth": 0.7806658811793585,
+          "u": 136.9886154564921,
+          "v": 75.0496734092098,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 8,
+          "depth": 0.6438344386849655,
+          "u": 126.0845772581972,
+          "v": 86.99180009129867,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 9,
+          "depth": 0.5531659054894735,
+          "u": 133.13923146993068,
+          "v": 107.51413286038809,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 10,
+          "depth": 0.4956801215600988,
+          "u": 122.14041528677828,
+          "v": 117.47072465573584,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 11,
+          "depth": 0.3768423608837892,
+          "u": 117.63309462424917,
+          "v": 135.5529755986108,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 12,
+          "depth": 0.27491028575670917,
+          "u": 114.79857106367619,
+          "v": 165.3166337561542,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 13,
+          "depth": 0.2772514258374772,
+          "u": 117.2928474638781,
+          "v": 162.96158828485454,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 14,
+          "depth": 0.49083157500186214,
+          "u": 136.94358274359655,
+          "v": 136.59470693357443,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 15,
+          "depth": 0.7148107834437611,
+          "u": 142.62117921518305,
+          "v": 119.02474317498616,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 17,
+      "index": 201,
+      "X": [
+        0.12299515471439197,
+        0.1935069500241601,
+        2.1063254496488697
+      ],
+      "rgb": [
+        0.550980418920517,
+        0.37843137979507446,
+        0.2137254923582077
+      ],
+      "distanceFromMedian": 0.8675148977308937,
+      "distanceFromMean": 3.2157505391038645,
+      "meanShiftIfRemovedNorm": 0.005245922576025879,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 2.654958334165799,
+          "u": 178.06490058279908,
+          "v": 133.75034565906324,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 2.0251567319542056,
+          "u": 189.38364478546447,
+          "v": 146.61866912496916,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 2.0046662896922127,
+          "u": 193.45878717699676,
+          "v": 149.5984528352077,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 1.6737090794275513,
+          "u": 209.40796963630646,
+          "v": 179.71853808569045,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 1.4021922814388699,
+          "u": 227.2041599604044,
+          "v": 203.66101218291743,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 1.242664697556655,
+          "u": 240.0208268117757,
+          "v": 228.33838142221617,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 1.0468288990376504,
+          "u": 254.52001191531602,
+          "v": 264.21647908003115,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 0.8398077227484577,
+          "u": 284.0296108864877,
+          "v": 319.9206253469912,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 0.7004482068211237,
+          "u": 303.56345369830547,
+          "v": 379.8521073072495,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 0.6020366709719478,
+          "u": 340.11236326839327,
+          "v": 447.33218464981644,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 0.541458697227051,
+          "u": 354.4515380958123,
+          "v": 494.3892506797602,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 0.41685844650367465,
+          "u": 419.10653251929335,
+          "v": 625.3573747861628,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 0.32000014142680033,
+          "u": 506.0941429104024,
+          "v": 798.2917834716054,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 0.3224585414599128,
+          "u": 504.84668166006395,
+          "v": 791.6273520337913,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 0.5319858459481512,
+          "u": 372.31421672501114,
+          "v": 519.6803326327188,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 0.7567743976573922,
+          "u": 307.50306127636117,
+          "v": 389.30707543939894,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 18,
+      "index": 202,
+      "X": [
+        0.12299515471439197,
+        0.1935069500241601,
+        2.1063254496488697
+      ],
+      "rgb": [
+        0.550980418920517,
+        0.37843137979507446,
+        0.2137254923582077
+      ],
+      "distanceFromMedian": 0.8675148977308937,
+      "distanceFromMean": 3.2157505391038645,
+      "meanShiftIfRemovedNorm": 0.005245922576025879,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 2.654958334165799,
+          "u": 178.06490058279908,
+          "v": 133.75034565906324,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 2.0251567319542056,
+          "u": 189.38364478546447,
+          "v": 146.61866912496916,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 2.0046662896922127,
+          "u": 193.45878717699676,
+          "v": 149.5984528352077,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 1.6737090794275513,
+          "u": 209.40796963630646,
+          "v": 179.71853808569045,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 1.4021922814388699,
+          "u": 227.2041599604044,
+          "v": 203.66101218291743,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 1.242664697556655,
+          "u": 240.0208268117757,
+          "v": 228.33838142221617,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 1.0468288990376504,
+          "u": 254.52001191531602,
+          "v": 264.21647908003115,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 0.8398077227484577,
+          "u": 284.0296108864877,
+          "v": 319.9206253469912,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 0.7004482068211237,
+          "u": 303.56345369830547,
+          "v": 379.8521073072495,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 0.6020366709719478,
+          "u": 340.11236326839327,
+          "v": 447.33218464981644,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 0.541458697227051,
+          "u": 354.4515380958123,
+          "v": 494.3892506797602,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 0.41685844650367465,
+          "u": 419.10653251929335,
+          "v": 625.3573747861628,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 0.32000014142680033,
+          "u": 506.0941429104024,
+          "v": 798.2917834716054,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 0.3224585414599128,
+          "u": 504.84668166006395,
+          "v": 791.6273520337913,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 0.5319858459481512,
+          "u": 372.31421672501114,
+          "v": 519.6803326327188,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 0.7567743976573922,
+          "u": 307.50306127636117,
+          "v": 389.30707543939894,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 19,
+      "index": 590,
+      "X": [
+        -0.2999990031151871,
+        -0.05303956608530688,
+        3.752864939695465
+      ],
+      "rgb": [
+        0.8745098114013672,
+        0.800000011920929,
+        0.7000000178813934
+      ],
+      "distanceFromMedian": 0.8642478059860559,
+      "distanceFromMean": 1.6394561550784688,
+      "meanShiftIfRemovedNorm": 0.0026744798614656913,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 16,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 4.271491874938862,
+          "u": 89.53389177916084,
+          "v": 64.77722859230663,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 3.6505118193360686,
+          "u": 82.94157056015189,
+          "v": 65.81544013025834,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 3.633933251709136,
+          "u": 86.53157699192471,
+          "v": 68.34887622552768,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 3.3165650265362205,
+          "u": 90.56189260950484,
+          "v": 82.83173370348038,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 4,
+          "depth": 3.0520423244639665,
+          "u": 94.10317138916919,
+          "v": 86.17447577627122,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 5,
+          "depth": 2.898712521869444,
+          "u": 96.09043598944768,
+          "v": 94.74943259171634,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 6,
+          "depth": 2.7075545324092474,
+          "u": 97.3183958179795,
+          "v": 97.82495451152869,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 7,
+          "depth": 2.501177952303892,
+          "u": 93.7082495634477,
+          "v": 105.02030881249124,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 8,
+          "depth": 2.3648300310569885,
+          "u": 90.64329441423146,
+          "v": 113.17461683714745,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 9,
+          "depth": 2.2778955561862135,
+          "u": 105.4543901421986,
+          "v": 125.03840065995196,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 10,
+          "depth": 2.2228951709543674,
+          "u": 112.3331369711911,
+          "v": 127.65858683163805,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 11,
+          "depth": 2.103282918451767,
+          "u": 115.54925613544734,
+          "v": 140.33246629012336,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 12,
+          "depth": 1.997385654114077,
+          "u": 96.8240109893234,
+          "v": 144.8627492547733,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 13,
+          "depth": 2.0002840633188725,
+          "u": 98.51307452710085,
+          "v": 143.43238847913094,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 14,
+          "depth": 2.2148642532911915,
+          "u": 111.87556272522994,
+          "v": 143.23195174238148,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 15,
+          "depth": 2.4391350614951044,
+          "u": 115.62934915221926,
+          "v": 136.1205085244865,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        }
+      ]
+    },
+    {
+      "rankByMedianDistance": 20,
+      "index": 7,
+      "X": [
+        0.13615385028377108,
+        0.4074913161461058,
+        3.672001570241984
+      ],
+      "rgb": [
+        0.7607843279838562,
+        0.5790849924087524,
+        0.4888888994852702
+      ],
+      "distanceFromMedian": 0.8565992843910629,
+      "distanceFromMean": 1.6794411544896761,
+      "meanShiftIfRemovedNorm": 0.0027397082454970246,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3,
+      "projections": [
+        {
+          "imgIdx": 0,
+          "depth": 4.227291757889451,
+          "u": 162.74017548321348,
+          "v": 142.7813817839205,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 1,
+          "depth": 3.5947288185453745,
+          "u": 168.46608851453882,
+          "v": 157.45413807794023,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 2,
+          "depth": 3.57374810670276,
+          "u": 172.53675956907722,
+          "v": 160.41613323605867,
+          "positiveDepth": true,
+          "insideRgbImage": true
+        },
+        {
+          "imgIdx": 3,
+          "depth": 3.2388125417913316,
+          "u": 184.70533849045958,
+          "v": 184.50104348587547,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 4,
+          "depth": 2.966626161434053,
+          "u": 196.49589203221956,
+          "v": 197.21636114622157,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 5,
+          "depth": 2.804339235819498,
+          "u": 204.08000738689628,
+          "v": 212.22344680810428,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 6,
+          "depth": 2.608516067191485,
+          "u": 212.99851017913574,
+          "v": 224.30224540712294,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 7,
+          "depth": 2.4004457912045645,
+          "u": 219.3475714015809,
+          "v": 242.53925691499407,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 8,
+          "depth": 2.259323691039408,
+          "u": 223.75398776847845,
+          "v": 259.4452937988625,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 9,
+          "depth": 2.1558818058733196,
+          "u": 244.17469027489756,
+          "v": 278.8383454116876,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 10,
+          "depth": 2.093233264471537,
+          "u": 254.77768099681268,
+          "v": 286.2464865088517,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 11,
+          "depth": 1.9632818426214687,
+          "u": 266.7521118154574,
+          "v": 310.01566244150007,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 12,
+          "depth": 1.8699170884101166,
+          "u": 256.18291211352636,
+          "v": 322.908766130447,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 13,
+          "depth": 1.87266021076933,
+          "u": 257.46598055004256,
+          "v": 321.3729329776062,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 14,
+          "depth": 2.078887209647544,
+          "u": 255.753279818289,
+          "v": 302.8317727218372,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        },
+        {
+          "imgIdx": 15,
+          "depth": 2.304490472640519,
+          "u": 245.54323502623203,
+          "v": 279.89056544057155,
+          "positiveDepth": true,
+          "insideRgbImage": false
+        }
+      ]
+    }
+  ],
+  "meanLeverageRemoval": [
+    {
+      "removedMostDistantFromMedian": 1,
+      "newMean": [
+        0.011786269018753352,
+        0.021443868044013388,
+        2.969441246921771
+      ],
+      "shiftNorm": 2.3561875185736367,
+      "newMeanP90Radius": 0.43080932598824917,
+      "nativeP90OrderStatistic": 0.431096113702758
+    },
+    {
+      "removedMostDistantFromMedian": 2,
+      "newMean": [
+        0.012251836761802325,
+        0.0199512199046357,
+        2.961156251052918
+      ],
+      "shiftNorm": 2.364464149684234,
+      "newMeanP90Radius": 0.4245688929704277,
+      "nativeP90OrderStatistic": 0.4245867157094722
+    },
+    {
+      "removedMostDistantFromMedian": 5,
+      "newMean": [
+        0.013323141198157765,
+        0.016272792181726167,
+        2.9441081578417507
+      ],
+      "shiftNorm": 2.3815088726843125,
+      "newMeanP90Radius": 0.42204970468876174,
+      "nativeP90OrderStatistic": 0.4236755990401086
+    },
+    {
+      "removedMostDistantFromMedian": 10,
+      "newMean": [
+        0.012658380584946075,
+        0.014130749713397348,
+        2.9367841374097474
+      ],
+      "shiftNorm": 2.3889196857299613,
+      "newMeanP90Radius": 0.4028868056660147,
+      "nativeP90OrderStatistic": 0.40320255945589534
+    },
+    {
+      "removedMostDistantFromMedian": 20,
+      "newMean": [
+        0.011438380434125405,
+        0.010295569997427877,
+        2.9367493821782897
+      ],
+      "shiftNorm": 2.389147585821534,
+      "newMeanP90Radius": 0.380434506659384,
+      "nativeP90OrderStatistic": 0.380434506659384
+    }
+  ],
+  "allCloudProjectionSummary": [
+    {
+      "imgIdx": 0,
+      "positiveDepth": 614,
+      "insideRgbImage": 614,
+      "depthQuantiles": {
+        "0": 2.319482130215642,
+        "0.01": 2.773161848453817,
+        "0.5": 3.475829426339879,
+        "0.9": 3.5614509143127693,
+        "0.99": 4.751981273647185,
+        "1": 1449.6940039026624
+      }
+    },
+    {
+      "imgIdx": 1,
+      "positiveDepth": 614,
+      "insideRgbImage": 614,
+      "depthQuantiles": {
+        "0": 1.6959877753931765,
+        "0.01": 2.147023653531739,
+        "0.5": 2.850415667180484,
+        "0.9": 2.935097717306001,
+        "0.99": 4.130361697398968,
+        "1": 1448.9324290570826
+      }
+    },
+    {
+      "imgIdx": 2,
+      "positiveDepth": 614,
+      "insideRgbImage": 614,
+      "depthQuantiles": {
+        "0": 1.67741517131077,
+        "0.01": 2.127736080868634,
+        "0.5": 2.83132314184535,
+        "0.9": 2.9152348939638966,
+        "0.99": 4.113102112065704,
+        "1": 1448.5942342892438
+      }
+    },
+    {
+      "imgIdx": 3,
+      "positiveDepth": 614,
+      "insideRgbImage": 576,
+      "depthQuantiles": {
+        "0": 1.3551972413055913,
+        "0.01": 1.8018484368979817,
+        "0.5": 2.5054796524309477,
+        "0.9": 2.5887443178486373,
+        "0.99": 3.7934819421763337,
+        "1": 1446.5322357380398
+      }
+    },
+    {
+      "imgIdx": 4,
+      "positiveDepth": 614,
+      "insideRgbImage": 559,
+      "depthQuantiles": {
+        "0": 1.0865066395178289,
+        "0.01": 1.532135436598149,
+        "0.5": 2.2366242033933306,
+        "0.9": 2.320508873381765,
+        "0.99": 3.527016413946328,
+        "1": 1444.8346823946829
+      }
+    },
+    {
+      "imgIdx": 5,
+      "positiveDepth": 614,
+      "insideRgbImage": 536,
+      "depthQuantiles": {
+        "0": 0.9316015870471982,
+        "0.01": 1.3751449414723749,
+        "0.5": 2.080548865130724,
+        "0.9": 2.164982804448971,
+        "0.99": 3.3723164238346426,
+        "1": 1443.125439700922
+      }
+    },
+    {
+      "imgIdx": 6,
+      "positiveDepth": 614,
+      "insideRgbImage": 510,
+      "depthQuantiles": {
+        "0": 0.7369373218059851,
+        "0.01": 1.180143617672477,
+        "0.5": 1.8850024604346476,
+        "0.9": 1.966663712839786,
+        "0.99": 3.179320596297848,
+        "1": 1441.4430572398473
+      }
+    },
+    {
+      "imgIdx": 7,
+      "positiveDepth": 614,
+      "insideRgbImage": 465,
+      "depthQuantiles": {
+        "0": 0.5311898610173744,
+        "0.01": 0.9737472101241306,
+        "0.5": 1.678606949531611,
+        "0.9": 1.7607344948006056,
+        "0.99": 2.9730075475405267,
+        "1": 1441.0796675193808
+      }
+    },
+    {
+      "imgIdx": 8,
+      "positiveDepth": 614,
+      "insideRgbImage": 422,
+      "depthQuantiles": {
+        "0": 0.3943867083197774,
+        "0.01": 0.8357376126486441,
+        "0.5": 1.5401334760389094,
+        "0.9": 1.6205884453542685,
+        "0.99": 2.8358856138397432,
+        "1": 1439.9054531127304
+      }
+    },
+    {
+      "imgIdx": 9,
+      "positiveDepth": 614,
+      "insideRgbImage": 358,
+      "depthQuantiles": {
+        "0": 0.30346740892685586,
+        "0.01": 0.7413538924683913,
+        "0.5": 1.4466774547534154,
+        "0.9": 1.5232499661245753,
+        "0.99": 2.744690326563645,
+        "1": 1434.758079519873
+      }
+    },
+    {
+      "imgIdx": 10,
+      "positiveDepth": 614,
+      "insideRgbImage": 338,
+      "depthQuantiles": {
+        "0": 0.24573068867628423,
+        "0.01": 0.6822924767795677,
+        "0.5": 1.3885498102063039,
+        "0.9": 1.464668843532293,
+        "0.99": 2.6868087737250366,
+        "1": 1431.3334118210016
+      }
+    },
+    {
+      "imgIdx": 11,
+      "positiveDepth": 614,
+      "insideRgbImage": 291,
+      "depthQuantiles": {
+        "0": 0.12722969580577304,
+        "0.01": 0.5606525183084894,
+        "0.5": 1.267063237105855,
+        "0.9": 1.343262504239711,
+        "0.99": 2.5654230699522373,
+        "1": 1428.0394626642415
+      }
+    },
+    {
+      "imgIdx": 12,
+      "positiveDepth": 614,
+      "insideRgbImage": 265,
+      "depthQuantiles": {
+        "0": 0.025693114118733762,
+        "0.01": 0.4613159883273286,
+        "0.5": 1.165834298007299,
+        "0.9": 1.2448461866061211,
+        "0.99": 2.464278298780389,
+        "1": 1433.5479391472686
+      }
+    },
+    {
+      "imgIdx": 13,
+      "positiveDepth": 614,
+      "insideRgbImage": 271,
+      "depthQuantiles": {
+        "0": 0.02794705284916632,
+        "0.01": 0.4637059907163407,
+        "0.5": 1.1685419338140324,
+        "0.9": 1.2470408819392276,
+        "0.99": 2.4668932283818563,
+        "1": 1433.3653165391536
+      }
+    },
+    {
+      "imgIdx": 14,
+      "positiveDepth": 614,
+      "insideRgbImage": 300,
+      "depthQuantiles": {
+        "0": 0.24153452060096692,
+        "0.01": 0.6752843610130344,
+        "0.5": 1.381244329146753,
+        "0.9": 1.4592570630981214,
+        "0.99": 2.67925538121802,
+        "1": 1430.5451377318198
+      }
+    },
+    {
+      "imgIdx": 15,
+      "positiveDepth": 614,
+      "insideRgbImage": 354,
+      "depthQuantiles": {
+        "0": 0.46543933510976054,
+        "0.01": 0.8996551398300344,
+        "0.5": 1.6057999831533851,
+        "0.9": 1.6834616914274767,
+        "0.99": 2.903673199504263,
+        "1": 1431.1395335836671
+      }
+    }
+  ],
+  "interpretationLimits": [
+    "Projection inside an image does not certify actual accepted SfM track visibility.",
+    "No points are removed; leverage removal rows are read-only counterfactual arithmetic, not a proposed geometry filter.",
+    "Plane threshold remains the preregistered coordinate-median P90 radius; no refit with a looser threshold."
+  ],
+  "noHeldoutImages": true,
+  "noGpu": true
+}

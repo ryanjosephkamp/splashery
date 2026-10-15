@@ -1,0 +1,251 @@
+{
+  "created": "2026-10-15T08:51:06.904Z",
+  "codeSha256": "e3aa8a49ab7f22f8a5477784b9fc26e3da3b634d3f7127eecb0ad712c145f698",
+  "backgroundReceiptSha256": "7261c3482b2f6b182652ebbebac146f8164378e3bc0a43df2cc95f76185f5c77",
+  "browserForParentsExistingProbe": "151.0.7922.173",
+  "noBrowserOrGpuLaunchedHere": true,
+  "colorRoundTrip": {
+    "n": 257,
+    "maxAbsDecodedRgbError": 2.9802322387695312e-8,
+    "maxAdditionalFloat16AbsError": 0.0000010132789611816406,
+    "plySha256": "482f663e7f652a22cc161abcfebbf0cc2398fc223d162ad6d27c93664deadce1"
+  },
+  "cpuDefaultCamera": {
+    "shaderOutputGamma": 1,
+    "fog": "none",
+    "defines": {
+      "SCENE_COLORMAP_GAMMA": "",
+      "FOG": "NONE",
+      "TONEMAP": "LINEAR",
+      "GAMMA": "SRGB"
+    },
+    "GAMMA_SRGB": 1,
+    "GAMMA_NONE": 0,
+    "TONEMAP_NONE": 6
+  },
+  "frames": [
+    {
+      "index": 0,
+      "width": 640,
+      "height": 360,
+      "whiteSha256": "d7459a63dfe1a63180cdf648f21e3f652661949b2fc7637bd2b4edcdb1dd6efb",
+      "blackSha256": "5fc3256446083be254de46c2e9e5d6c4b331aecd97bdf0c55decb4d568e60dd8",
+      "referenceSha256": "29a44c05ac596e8fb21283db05b05445bb118560a8e7979160702a16c25f4133",
+      "sourceStrictFrame": {
+        "time": 0.749674,
+        "renderSha256": "d7459a63dfe1a63180cdf648f21e3f652661949b2fc7637bd2b4edcdb1dd6efb",
+        "referenceSha256": "29a44c05ac596e8fb21283db05b05445bb118560a8e7979160702a16c25f4133",
+        "psnr": 11.386640870725307,
+        "exact": false,
+        "ssim": 0.11866538548240765,
+        "laplacian": 0.004317147432726943,
+        "sourceLaplacian": 0.03267034838265646,
+        "sharpnessRatio": 0.13214268125217685
+      },
+      "blackDiagnosticMetrics": {
+        "psnr": 18.26323420217442,
+        "exact": false,
+        "ssim": 0.4955102437964932,
+        "laplacian": 0.002428402420544621,
+        "sourceLaplacian": 0.03267034838265646,
+        "sharpnessRatio": 0.07433047214867701
+      },
+      "nonnegativeRgbDifferenceFraction": 1,
+      "rgbDeltaSpreadAtMostOneByteFraction": 0.5881119791666667,
+      "maxRgbDeltaSpreadBytes": 8,
+      "whiteMinusBlackMeanRgbTransmittanceQuantiles": {
+        "0": 0,
+        "1": 0.996078431372549,
+        "0.05": 0.01437908496732026,
+        "0.5": 0.1450980392156863,
+        "0.9": 0.4366013071895425,
+        "0.95": 0.5359477124183006
+      },
+      "meanWhiteRgb": [
+        0.6461930487472508,
+        0.4897580167483703,
+        0.5610136335784288
+      ],
+      "meanBlackRgb": [
+        0.4527575231481327,
+        0.2962209626906341,
+        0.36745576320805323
+      ],
+      "meanReferenceRgb": [
+        0.46536492374726635,
+        0.30002787990196134,
+        0.3758588813997646
+      ],
+      "meanInferredOpacity": 0.8064898499908947
+    },
+    {
+      "index": 1,
+      "width": 640,
+      "height": 360,
+      "whiteSha256": "53196956c593586dd18eac3c7270254e9c08f225ee38fdf5d9135b0906f7f5b4",
+      "blackSha256": "ccd1ef64ff380f09ce73e4c8507ef351e46d78a841fea19edc9850f97eae1e87",
+      "referenceSha256": "e27e788eb7d145fe78b513acd3c2c036195a5e52fbdd770c892267a1d70f8c29",
+      "sourceStrictFrame": {
+        "time": 2.333008,
+        "renderSha256": "53196956c593586dd18eac3c7270254e9c08f225ee38fdf5d9135b0906f7f5b4",
+        "referenceSha256": "e27e788eb7d145fe78b513acd3c2c036195a5e52fbdd770c892267a1d70f8c29",
+        "psnr": 11.60306584442151,
+        "exact": false,
+        "ssim": 0.1337166237151745,
+        "laplacian": 0.00477577104923204,
+        "sourceLaplacian": 0.030042752606566272,
+        "sharpnessRatio": 0.15896582819073068
+      },
+      "blackDiagnosticMetrics": {
+        "psnr": 17.49323223371869,
+        "exact": false,
+        "ssim": 0.4051406382155438,
+        "laplacian": 0.0025843210430291927,
+        "sourceLaplacian": 0.030042752606566272,
+        "sharpnessRatio": 0.08602144673202657
+      },
+      "nonnegativeRgbDifferenceFraction": 1,
+      "rgbDeltaSpreadAtMostOneByteFraction": 0.5849782986111111,
+      "maxRgbDeltaSpreadBytes": 8,
+      "whiteMinusBlackMeanRgbTransmittanceQuantiles": {
+        "0": 0,
+        "1": 0.996078431372549,
+        "0.05": 0.01437908496732026,
+        "0.5": 0.1450980392156863,
+        "0.9": 0.4300653594771242,
+        "0.95": 0.526797385620915
+      },
+      "meanWhiteRgb": [
+        0.6448450776143774,
+        0.48833055895968136,
+        0.5484690053104485
+      ],
+      "meanBlackRgb": [
+        0.45272002655228194,
+        0.2960847971132991,
+        0.35621093750000055
+      ],
+      "meanReferenceRgb": [
+        0.46883081427016743,
+        0.3045065189270172,
+        0.3663518518518522
+      ],
+      "meanInferredOpacity": 0.8077903730936451
+    },
+    {
+      "index": 2,
+      "width": 640,
+      "height": 360,
+      "whiteSha256": "1f480c5e2efcd6af15a0318210dde03e75cb00e90836b9550f0f51abaefdf27c",
+      "blackSha256": "3dcaee8cff1fe549843ff0f67d0624235955f3e52c0cd8d8bf5a52f3afc8dfa0",
+      "referenceSha256": "5dbf522e355f8c3845f05345a544271fde292920272e430e683dc2e89c42ef44",
+      "sourceStrictFrame": {
+        "time": 3.583008,
+        "renderSha256": "1f480c5e2efcd6af15a0318210dde03e75cb00e90836b9550f0f51abaefdf27c",
+        "referenceSha256": "5dbf522e355f8c3845f05345a544271fde292920272e430e683dc2e89c42ef44",
+        "psnr": 11.111837582532754,
+        "exact": false,
+        "ssim": 0.0907510536117866,
+        "laplacian": 0.0045829136432926285,
+        "sourceLaplacian": 0.032280975108041836,
+        "sharpnessRatio": 0.14196949218398713
+      },
+      "blackDiagnosticMetrics": {
+        "psnr": 16.61906285818199,
+        "exact": false,
+        "ssim": 0.4545797180524481,
+        "laplacian": 0.002512470834707363,
+        "sourceLaplacian": 0.032280975108041836,
+        "sharpnessRatio": 0.0778313178675156
+      },
+      "nonnegativeRgbDifferenceFraction": 1,
+      "rgbDeltaSpreadAtMostOneByteFraction": 0.6013194444444444,
+      "maxRgbDeltaSpreadBytes": 8,
+      "whiteMinusBlackMeanRgbTransmittanceQuantiles": {
+        "0": 0,
+        "1": 1,
+        "0.05": 0.018300653594771243,
+        "0.5": 0.16339869281045752,
+        "0.9": 0.4993464052287582,
+        "0.95": 0.6339869281045751
+      },
+      "meanWhiteRgb": [
+        0.6524178070533585,
+        0.5116140046296208,
+        0.5562336431100153
+      ],
+      "meanBlackRgb": [
+        0.42843378948802946,
+        0.2875389773965222,
+        0.3321101919934692
+      ],
+      "meanReferenceRgb": [
+        0.4684341299019823,
+        0.31630989583333496,
+        0.37180620234205203
+      ],
+      "meanInferredOpacity": 0.7759391680282904
+    },
+    {
+      "index": 3,
+      "width": 640,
+      "height": 360,
+      "whiteSha256": "ebd19e80b0f7a25e532d1794debede1cd0bb6370313b446f1c4310fa14921448",
+      "blackSha256": "b04680b18b14b9866bd8f82f569b5fa0ca310f34bf37847e0ec4aa9dec2071e7",
+      "referenceSha256": "cb35ba1a33d7b2d1f2567c440fb2b7cfe0b8d389550637b53f2ee1a87121aa15",
+      "sourceStrictFrame": {
+        "time": 5.166341,
+        "renderSha256": "ebd19e80b0f7a25e532d1794debede1cd0bb6370313b446f1c4310fa14921448",
+        "referenceSha256": "cb35ba1a33d7b2d1f2567c440fb2b7cfe0b8d389550637b53f2ee1a87121aa15",
+        "psnr": 11.76725762140562,
+        "exact": false,
+        "ssim": 0.10793209070892422,
+        "laplacian": 0.004853881759553473,
+        "sourceLaplacian": 0.019405203691782495,
+        "sharpnessRatio": 0.25013299714081033
+      },
+      "blackDiagnosticMetrics": {
+        "psnr": 18.241578913827233,
+        "exact": false,
+        "ssim": 0.5363702080790748,
+        "laplacian": 0.0027685933763485007,
+        "sourceLaplacian": 0.019405203691782495,
+        "sharpnessRatio": 0.14267272945560033
+      },
+      "nonnegativeRgbDifferenceFraction": 1,
+      "rgbDeltaSpreadAtMostOneByteFraction": 0.5869618055555555,
+      "maxRgbDeltaSpreadBytes": 9,
+      "whiteMinusBlackMeanRgbTransmittanceQuantiles": {
+        "0": 0,
+        "1": 1,
+        "0.05": 0.01568627450980392,
+        "0.5": 0.1542483660130719,
+        "0.9": 0.44836601307189544,
+        "0.95": 0.5568627450980392
+      },
+      "meanWhiteRgb": [
+        0.6243176062091355,
+        0.5004488868463851,
+        0.5418940291394259
+      ],
+      "meanBlackRgb": [
+        0.42108556304465894,
+        0.297136897467322,
+        0.338541224128532
+      ],
+      "meanReferenceRgb": [
+        0.4510634872004441,
+        0.31793850422113573,
+        0.36871194172113064
+      ],
+      "meanInferredOpacity": 0.7967010541484796
+    }
+  ],
+  "diagnosticOnly": true,
+  "limitations": [
+    "Camera defaults are CPU constructor defaults; actual live render shader defines were not queried by this helper.",
+    "Transmittance interpretation is conditional on the standard premultiplied compositing code; RGB-difference channel agreement independently tests its scalar-white-background implication.",
+    "Black-background metrics are separate derived diagnostics; frozen strict rows and acceptance gates remain unchanged.",
+    "No gamma, opacity, geometry, camera, shader, or product edits."
+  ]
+}

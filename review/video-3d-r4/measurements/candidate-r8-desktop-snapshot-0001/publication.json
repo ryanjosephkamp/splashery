@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T09:04:20.689Z",
+  "source": "/workspace/v3d-r4-media/candidate-r8-desktop",
+  "runSha256": "8518d024fe58e38c27c1d402341f5d3af4171bf572258a18d4d13c0aa4006dbd",
+  "provenanceSha256": "b80c296943b98d423b707e284c2b8b1167475cf84b94fc323c82808528c4607b",
+  "cases": [
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "rowFingerprint": "e0acefc6f33d41b429e2d10b4b3703dc4b68ee86012c8b48888934b13da6d89a",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1151423,
+          "sha256": "32bc53dc930f998e1a238f7a4416e23ffbc0cdf85516c915ce1bad770af4e311"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1940,
+          "sha256": "23d90b0515ec0d6a5413aeb29e4814a2c069530fcaea9a8930ceeb4837d9ef41"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

@@ -1,0 +1,67 @@
+{
+  "created": "2026-10-15T09:04:21.242Z",
+  "source": "/workspace/v3d-r4-media/profile-native-seed-r3",
+  "sourceInventory": [
+    {
+      "file": "direct-out.bin",
+      "bytes": 921600,
+      "sha256": "ac67d04e7ecea7716d4cbd45e87adee34f18aedf1a5f317eed554a36ee6dede4"
+    },
+    {
+      "file": "direct-params.bin",
+      "bytes": 960000,
+      "sha256": "4c0dbe8ad512c8b960701aeed1ed1601709adaa0adec78fc9203265ebbfdccba"
+    },
+    {
+      "file": "direct-stats.bin",
+      "bytes": 16,
+      "sha256": "dba53d78b4229717d3813406628f2e80f796d280af25518c8161c72d90095536"
+    },
+    {
+      "file": "direct-tileCursor.bin",
+      "bytes": 1600,
+      "sha256": "078930b8d73836514911cdd1c56dbe3df84123f78db516347f93a71557a07c21"
+    },
+    {
+      "file": "direct-tileStart.bin",
+      "bytes": 1604,
+      "sha256": "daa7b7faaf0ce3e1a643ddbd89444a3ccbd472ebb256ca11256246b8d615a55f"
+    },
+    {
+      "file": "pre-dispatch.json",
+      "bytes": 1954,
+      "sha256": "dcd4cd2444fd3cea1ae886464b963e2322cf9fb8117836ef807d42070f83e611"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 10558,
+      "sha256": "25fbbc25eb7cf28ed183256dab05b321e71091073d59c65035d61e2c290157f4"
+    },
+    {
+      "file": "shared-out.bin",
+      "bytes": 921600,
+      "sha256": "ac67d04e7ecea7716d4cbd45e87adee34f18aedf1a5f317eed554a36ee6dede4"
+    },
+    {
+      "file": "shared-params.bin",
+      "bytes": 960000,
+      "sha256": "4c0dbe8ad512c8b960701aeed1ed1601709adaa0adec78fc9203265ebbfdccba"
+    },
+    {
+      "file": "shared-stats.bin",
+      "bytes": 16,
+      "sha256": "dba53d78b4229717d3813406628f2e80f796d280af25518c8161c72d90095536"
+    },
+    {
+      "file": "shared-tileCursor.bin",
+      "bytes": 1600,
+      "sha256": "078930b8d73836514911cdd1c56dbe3df84123f78db516347f93a71557a07c21"
+    },
+    {
+      "file": "shared-tileStart.bin",
+      "bytes": 1604,
+      "sha256": "daa7b7faaf0ce3e1a643ddbd89444a3ccbd472ebb256ca11256246b8d615a55f"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

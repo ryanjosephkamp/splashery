@@ -1,0 +1,8 @@
+file:///workspace/v3d-r4-media/color-conventions-review-r1/cpu-check.mjs:19
+ halfError=Math.max(halfError,Math.abs(pc.FloatPacking.half2Float(pc.FloatPacking.float2Half(decoded.color[i]))-decoded.color[i]));
+                                                       ^
+
+TypeError: pc.FloatPacking.half2Float is not a function
+    at file:///workspace/v3d-r4-media/color-conventions-review-r1/cpu-check.mjs:19:56
+
+Node.js v22.15.0

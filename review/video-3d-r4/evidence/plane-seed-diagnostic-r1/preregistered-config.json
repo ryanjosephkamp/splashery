@@ -1,0 +1,74 @@
+{
+  "createdBeforePlaneFittingAt": "2026-10-15T08:38:06.163865+00:00",
+  "cache": {
+    "file": "/workspace/v3d-r4-media/seed-probe.json",
+    "sha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f"
+  },
+  "coordinates": "Real SfM world points; row-major world-to-camera R,t. RGB already-undistorted320x180; f,fy,cx,cy scaled by tw/fw.",
+  "planes": {
+    "hypothesesPerPlane": 256,
+    "maximumPlanes": 3,
+    "randomSeed": 8937197,
+    "distanceThresholdRobustRadiusFraction": 0.005,
+    "robustRadius": "90th percentile distance from coordinatewise median center",
+    "minimumInliers": 40,
+    "minimumOriginalCloudFraction": 0.2,
+    "leastSquaresRefitPasses": 3,
+    "sequentialDisjointSupport": true,
+    "degenerateTripleCrossNormMinRadiusSquaredFraction": 1e-06
+  },
+  "extent": {
+    "inlierConvexHullInPlaneBasis": true,
+    "depthBounds": "Full observed inlier min/max in source camera, no expansion",
+    "maximumNearestInlierDistanceRadiusFraction": 0.1,
+    "allNinePatchRaysMustRemainInsideMeasuredExtent": true
+  },
+  "cameras": {
+    "source": 0,
+    "fit": [
+      5,
+      10
+    ],
+    "validation": 15,
+    "selection": "Fixed sequence quartiles before image scores; every pair nonadjacent by5indices. Third corroborating/validation view not read for fitting, geometry, or admission."
+  },
+  "sampling": {
+    "sourcePixelStride": 3,
+    "maximumDenseRows": 13800,
+    "totalSeedCeiling": 15000,
+    "normal": "Least-squares fitted world plane normal",
+    "overlapChoice": "Nearest positive supported plane depth, geometry only",
+    "matchedTriangleMaximumPlaneDistanceRadiusFraction": 0.01
+  },
+  "photometric": {
+    "patchOffsets": [
+      -1,
+      0,
+      1
+    ],
+    "centerRgbRmseMax": 0.08,
+    "patchRgbRmseMax": 0.08,
+    "eachFitCameraMustPass": true,
+    "normalization": "None; absolute sourceRGB0..1 bilinear samples",
+    "projectedSparseFrontRadiusPixels": 3,
+    "maximumSparseOcclusionDepthRatio": 1.02,
+    "trainingVisibilityCertified": false
+  },
+  "baseline": {
+    "source": "/workspace/v3d-r4-media/runtime-r8/src/video3d/surface-seed.js",
+    "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c",
+    "exactFullBaseline": "All16trainingcameras, maxPoints13800",
+    "independentComparisonBaseline": "Same unchanged surfaceSeed restricted to source+fit cameras0,5,10; validation15RGBnot supplied. Both use identical sparse cloud and15000total ceiling.",
+    "baselineFullValidationCaveat": "Exact full runtime initializer already used validation15for admission; use only contextual coverage, not independent comparison."
+  },
+  "exportPolicy": "No dense candidates if geometric support gate fails. Export only world-plane points passing declared geometry, both fit views, and then the separate validation view; preserve all pre-validation outcomes for honest independent assessment.",
+  "recommendationGate": {
+    "minimumMatchedValidationPoints": 40,
+    "minimumMedianPairedPatchRmseImprovement": 0.005,
+    "minimumFractionImproved": 0.6,
+    "note": "Feasibility signal only, not acceptance or rendered-quality proof. No runtime recommendation from uncertified visibility alone."
+  },
+  "noHeldoutImages": true,
+  "noGpu": true,
+  "codeLicense": "MIT; made by Ryan with Codex (GPT-6)."
+}

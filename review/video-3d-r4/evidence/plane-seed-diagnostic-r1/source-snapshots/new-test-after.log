@@ -1,0 +1,17 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 08:44:08] "GET / HTTP/1.1" 200 -
+
+Running 7 tests using 1 worker
+
+(node:183745) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:183745) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:23:1 › legacy initializer bytes remain unchanged unless robust bounds are explicitly enabled (70ms)
+  ✓  2 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:43:1 › one distant point cannot inflate robust bounds or normal-point scales, and remains in the seed (245ms)
+  ✓  3 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:68:1 › robust center and radius are invariant to point order, including even-sized clouds (54ms)
+  ✓  4 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:91:5 › Session passes robust bounds through legacy-capacity seeding with sigmoid conventions (10ms)
+  ✓  5 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:91:5 › Session passes robust bounds through legacy-capacity seeding with v2 conventions (6ms)
+  ✓  6 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:91:5 › Session passes robust bounds through bounded seeding with sigmoid conventions (38ms)
+  ✓  7 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:91:5 › Session passes robust bounds through bounded seeding with v2 conventions (7ms)
+
+  7 passed (5.1s)

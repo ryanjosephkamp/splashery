@@ -1,0 +1,584 @@
+{
+  "created": "2026-10-15T08:39:33.922Z",
+  "scriptSha256": "b465a909500b8a080036a8d99e42eefeefd370d451233751496b7671b34173e1",
+  "inputSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "sourceBefore": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119499,
+      "sha256": "6f11213d55191fea9d45443cb2353e231a4b215ab781762cd98a982f9a57c8dd"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "config": {
+    "weights": [
+      0,
+      0.2
+    ],
+    "seed": 777,
+    "steps": 120,
+    "evalAt": [
+      0,
+      40,
+      120
+    ],
+    "withheldLossCameras": [
+      3,
+      11
+    ],
+    "seedSplats": 15000,
+    "trainSide": 320,
+    "allocationCeiling": 45000
+  },
+  "protocol": "Optimizer-only diagnostic with identical real cached SfM, seed, targets, and camera RNG. Cameras3/11 excluded from loss and surface-color inputs. Sparse geometry and sparse colors were previously constructed using all cached images; this is NOT an independent novel-view or task88 acceptance benchmark. No refinement, no preview, no duty cycling, and no native bake timing. Compare fixed-step image quality and complete raw parameter hashes.",
+  "browser": "151.0.7922.173",
+  "args": [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-unsafe-webgpu",
+    "--enable-features=Vulkan,WebGPU",
+    "--use-webgpu-adapter=swiftshader",
+    "--use-vulkan=swiftshader"
+  ],
+  "results": [
+    {
+      "ssimWeight": 0,
+      "n": 15000,
+      "surface": 3534,
+      "initialParams": {
+        "file": "weight-0-initialParams.f32",
+        "bytes": 960000,
+        "sha256": "a779f81401bed045a98decf6e7ec0ff94bd698819b5b5a115484f8af5c33be73"
+      },
+      "evaluations": [
+        {
+          "iter": 0,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 12.422513986052905,
+          "render": {
+            "file": "weight-0-0-3-render.png",
+            "bytes": 35651,
+            "sha256": "0c14f598d57a1f9948208a16f5bd4c624131437410ad9cc25eb0f2fd60170595"
+          },
+          "reference": {
+            "file": "weight-0-0-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 12.398239755877714,
+            "exact": false,
+            "ssim": 0.5167086975808612,
+            "laplacian": 0.000012633314422420167,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0014203969009802724
+          }
+        },
+        {
+          "iter": 0,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 13.70426272367126,
+          "render": {
+            "file": "weight-0-0-11-render.png",
+            "bytes": 5389,
+            "sha256": "920710763ec4e412bc277ea54c9f2c026f6a1095326a0b80164527fe047ff740"
+          },
+          "reference": {
+            "file": "weight-0-0-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 13.684048530985919,
+            "exact": false,
+            "ssim": 0.6520785875187467,
+            "laplacian": 0.00002506523423074063,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.004910684616770542
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.726139733611543,
+          "render": {
+            "file": "weight-0-40-3-render.png",
+            "bytes": 35954,
+            "sha256": "02a3a19c223ce1b0fa9534ccaf6363c41b72d567ca18552f94b971e5369b67c0"
+          },
+          "reference": {
+            "file": "weight-0-40-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 15.673335729010374,
+            "exact": false,
+            "ssim": 0.5704414195722172,
+            "laplacian": 0.000013000153146337203,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0014616415474118219
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.907602928410537,
+          "render": {
+            "file": "weight-0-40-11-render.png",
+            "bytes": 6166,
+            "sha256": "da388ec648dbf8d42db6474de5ae07191b9f9cb5111a4f0a0adf27289600698c"
+          },
+          "reference": {
+            "file": "weight-0-40-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 15.842279128250706,
+            "exact": false,
+            "ssim": 0.6705878318132847,
+            "laplacian": 0.000007536389286877935,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.001476500502503872
+          }
+        },
+        {
+          "iter": 120,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 17.527902624668982,
+          "render": {
+            "file": "weight-0-120-3-render.png",
+            "bytes": 35123,
+            "sha256": "518e6590316b4db8e1ae56ee633e8bdec0a2e99e8b3eeea377624f26529d2572"
+          },
+          "reference": {
+            "file": "weight-0-120-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 17.458517030663018,
+            "exact": false,
+            "ssim": 0.6108449442842837,
+            "laplacian": 0.000015398625483933027,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.001731308125911764
+          }
+        },
+        {
+          "iter": 120,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.37169906981604,
+          "render": {
+            "file": "weight-0-120-11-render.png",
+            "bytes": 5597,
+            "sha256": "46f40b3b69db11a53ee796521cda60ccfb10a9b427b86afb27683c510fe88147"
+          },
+          "reference": {
+            "file": "weight-0-120-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 16.306314420123524,
+            "exact": false,
+            "ssim": 0.6745982276918558,
+            "laplacian": 0.0000031630581983375465,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.0006196942383836311
+          }
+        }
+      ],
+      "batches": [
+        5637.9000000003725,
+        8213.199999999255,
+        3936,
+        5409.9000000003725,
+        3048.5999999996275,
+        3017.2000000011176,
+        5596.4000000003725,
+        3126.2999999988824,
+        4808.200000001118,
+        2509.5,
+        6223.799999998882,
+        9469.099999999627,
+        3530.800000000745,
+        3249.800000000745,
+        6562.5,
+        7791.199999999255,
+        3224.5999999996275,
+        9685.5,
+        5394,
+        5565.5,
+        5900.300000000745,
+        5477.5999999996275,
+        4089.9000000003725,
+        5280.0999999996275,
+        6372.0999999996275,
+        5904.200000001118,
+        5434.5999999996275,
+        4305.5,
+        7817.0999999996275,
+        6774.300000000745,
+        3819.89999999851,
+        5991.300000000745,
+        7513.4000000003725,
+        5619.799999998882,
+        5152.200000001118,
+        4772.0999999996275,
+        5081.800000000745,
+        4606.699999999255,
+        3343.5999999996275,
+        4515.5999999996275,
+        9147.10000000149,
+        4937.39999999851,
+        8923.89999999851,
+        3784.300000000745,
+        7483,
+        4343.200000001118,
+        4381.799999998882,
+        6539.9000000003725,
+        4706.4000000003725,
+        6500.9000000003725,
+        5929.5,
+        4151,
+        7319.5,
+        5486,
+        6455.0999999996275,
+        7490.9000000003725,
+        6966.699999999255,
+        4360.5,
+        5821.9000000003725,
+        8178.5999999996275
+      ],
+      "finalParams": {
+        "file": "weight-0-finalParams.f32",
+        "bytes": 960000,
+        "sha256": "6d961e8998dc88a714d463cdde72e7930ca9d68128d28ba31edb519e686817af"
+      },
+      "errors": []
+    },
+    {
+      "ssimWeight": 0.2,
+      "n": 15000,
+      "surface": 3534,
+      "initialParams": {
+        "file": "weight-0.2-initialParams.f32",
+        "bytes": 960000,
+        "sha256": "a779f81401bed045a98decf6e7ec0ff94bd698819b5b5a115484f8af5c33be73"
+      },
+      "evaluations": [
+        {
+          "iter": 0,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 12.422513986052905,
+          "render": {
+            "file": "weight-0.2-0-3-render.png",
+            "bytes": 35651,
+            "sha256": "0c14f598d57a1f9948208a16f5bd4c624131437410ad9cc25eb0f2fd60170595"
+          },
+          "reference": {
+            "file": "weight-0.2-0-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 12.398239755877714,
+            "exact": false,
+            "ssim": 0.5167086975808612,
+            "laplacian": 0.000012633314422420167,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0014203969009802724
+          }
+        },
+        {
+          "iter": 0,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 13.70426272367126,
+          "render": {
+            "file": "weight-0.2-0-11-render.png",
+            "bytes": 5389,
+            "sha256": "920710763ec4e412bc277ea54c9f2c026f6a1095326a0b80164527fe047ff740"
+          },
+          "reference": {
+            "file": "weight-0.2-0-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 13.684048530985919,
+            "exact": false,
+            "ssim": 0.6520785875187467,
+            "laplacian": 0.00002506523423074063,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.004910684616770542
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.734720308336037,
+          "render": {
+            "file": "weight-0.2-40-3-render.png",
+            "bytes": 35651,
+            "sha256": "41a3e66ab7485da1885297749e46295046325a8facb8d711e03462b6c70ea744"
+          },
+          "reference": {
+            "file": "weight-0.2-40-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 15.681620500571258,
+            "exact": false,
+            "ssim": 0.5739072040269579,
+            "laplacian": 0.00001456398925247986,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.001637467770407114
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.955493809138906,
+          "render": {
+            "file": "weight-0.2-40-11-render.png",
+            "bytes": 6625,
+            "sha256": "21690ca104efbaf9a16db1fc31bcd2d869a42488becebeca0980b4026553046e"
+          },
+          "reference": {
+            "file": "weight-0.2-40-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 15.888481385834234,
+            "exact": false,
+            "ssim": 0.6703780744281234,
+            "laplacian": 0.000007800150881082701,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.0015281756630562394
+          }
+        },
+        {
+          "iter": 120,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 17.66931142909423,
+          "render": {
+            "file": "weight-0.2-120-3-render.png",
+            "bytes": 36979,
+            "sha256": "03d1ec28d7f09ee4df67cbdbd0ba9ec5f52f737aa60bf19aac997744c642706f"
+          },
+          "reference": {
+            "file": "weight-0.2-120-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 17.600453147490725,
+            "exact": false,
+            "ssim": 0.6245471868674729,
+            "laplacian": 0.00003879244979285202,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.004361537568432036
+          }
+        },
+        {
+          "iter": 120,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.3378382940088,
+          "render": {
+            "file": "weight-0.2-120-11-render.png",
+            "bytes": 6004,
+            "sha256": "01b5cb59c7fd8af3a5357514b7a4ad4e4516897c3487723b46102b662df79b71"
+          },
+          "reference": {
+            "file": "weight-0.2-120-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 16.272980912052567,
+            "exact": false,
+            "ssim": 0.6754869100558227,
+            "laplacian": 0.000003213557362586468,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.0006295878410826561
+          }
+        }
+      ],
+      "batches": [
+        7092.800000000745,
+        7875,
+        4262.799999998882,
+        6242.4000000003725,
+        4546.5999999996275,
+        5652.60000000149,
+        7603.89999999851,
+        4795,
+        7628.200000001118,
+        5333.699999999255,
+        9393.099999999627,
+        10301.700000001118,
+        4737.4000000003725,
+        3852.89999999851,
+        8372.60000000149,
+        8701.599999999627,
+        4706.699999999255,
+        8696.599999999627,
+        5030.799999998882,
+        4965.300000000745,
+        6107.5,
+        5828.299999998882,
+        4575.4000000003725,
+        5588.9000000003725,
+        7063.300000000745,
+        6820.89999999851,
+        7610,
+        4708.10000000149,
+        11694,
+        8182.299999998882,
+        5591.200000001118,
+        8593.199999999255,
+        12001.400000000373,
+        9301.099999999627,
+        7394.300000000745,
+        6379.299999998882,
+        5691.5,
+        6035.800000000745,
+        6052.699999999255,
+        6441.9000000003725,
+        13909.599999999627,
+        8608.60000000149,
+        15284.199999999255,
+        7703.9000000003725,
+        9817,
+        8128.9000000003725,
+        7162.89999999851,
+        9496.10000000149,
+        8251.89999999851,
+        9250.60000000149,
+        11193.599999999627,
+        6849.5999999996275,
+        12093.300000000745,
+        9190,
+        12633.599999999627,
+        10280.199999999255,
+        9185.400000000373,
+        7320.300000000745,
+        10307.89999999851,
+        14035.60000000149
+      ],
+      "finalParams": {
+        "file": "weight-0.2-finalParams.f32",
+        "bytes": 960000,
+        "sha256": "1c8ad94b70fb7ad1089842164c444888504a4ec5ba9ad9f51275617feccffcf6"
+      },
+      "errors": []
+    }
+  ],
+  "identicalInitialParameters": true,
+  "sourceAfter": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119499,
+      "sha256": "6f11213d55191fea9d45443cb2353e231a4b215ab781762cd98a982f9a57c8dd"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "status": "diagnostic-complete"
+}

@@ -1,0 +1,88 @@
+{
+  "created": "2026-10-15T08:38:11.639306+00:00",
+  "cacheSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "configSha256": "c250870247aeaa5240f49b836dfe6582c7577894cb4b4ff03b80ad4a94b34d53",
+  "codeSha256": "8472bfe6cc5e33363c71e8d42b08351d473fb72dd20cc1264a6758a6b47283ac",
+  "numpy": "2.3.5",
+  "pointCount": 614,
+  "robustCenter": [
+    -0.013353131698745649,
+    -0.00927936258391112,
+    2.938712951955377
+  ],
+  "robustRadius": 0.45327241889578906,
+  "distanceThreshold": 0.0022663620944789456,
+  "minimumRequiredSupport": 123,
+  "cpuFitMilliseconds": 369.0154989999428,
+  "visibilityCertified": false,
+  "status": "stopped-no-plane-passes-geometric-support-gate",
+  "newDenseRowsExported": 0,
+  "noHeldoutImages": true,
+  "noGpu": true
+}
+{
+  "trials": [
+    {
+      "planeIndex": 0,
+      "initialRansacInliers": 37,
+      "requiredInliers": 123,
+      "threshold": 0.0022663620944789456,
+      "refits": [
+        {
+          "iteration": 0,
+          "inliers": 40
+        },
+        {
+          "iteration": 1,
+          "inliers": 42
+        },
+        {
+          "iteration": 2,
+          "inliers": 43
+        }
+      ],
+      "degenerateHypotheses": 0,
+      "normal": [
+        -0.10309479891948756,
+        0.29468869574060197,
+        0.9500158077834565
+      ],
+      "offset": -2.7631483133257713,
+      "inliers": 43,
+      "cloudFraction": 0.07003257328990228,
+      "residualMedian": 0.0008504772187287735,
+      "residualRms": 0.001124460830987357,
+      "residualP95": 0.0018936879619020353,
+      "residualP95RadiusFraction": 0.004177814230380978,
+      "center": [
+        0.04290122944937479,
+        -0.039812109398853435,
+        2.925584233046203
+      ],
+      "basisX": [
+        0.0,
+        0.9551050516723099,
+        -0.29626734593949827
+      ],
+      "basisY": [
+        -0.9946715349479699,
+        -0.03054362245604283,
+        -0.09846636324914355
+      ],
+      "fullAxisSpans": [
+        0.4202473379794874,
+        0.7429882285829672
+      ],
+      "robustAxisSpansP05P95": [
+        0.3472163557293183,
+        0.5915325866490613
+      ],
+      "hullAreaWorldUnitsSquared": 0.176317537050066,
+      "sourceInlierDepthMinMax": [
+        3.3952915755101705,
+        3.4891286168823186
+      ],
+      "status": "rejected-insufficient-dominant-support"
+    }
+  ]
+}

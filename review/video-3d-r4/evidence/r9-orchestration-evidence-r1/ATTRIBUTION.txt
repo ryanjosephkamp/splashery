@@ -1,0 +1,1 @@
+Orchestration scripts, tests, receipts, and report made by Ryan with Codex (GPT-6), MIT. CPU/HTTP-only preparation and first-native-dispatch receipt; no native outcome is invented.

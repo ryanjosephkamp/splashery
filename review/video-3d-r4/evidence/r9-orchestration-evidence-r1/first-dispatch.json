@@ -1,0 +1,12 @@
+{
+  "observedAt": "2026-10-15T09:08:20.009154+00:00",
+  "profile": "desktop",
+  "id": "cat-plays",
+  "mode": "paired",
+  "pid": 197304,
+  "coordinatorPid": 196899,
+  "caseOutput": "/workspace/v3d-r4-media/candidate-r9-v1-shards/001-cat-plays-desktop-paired",
+  "runSnapshotSha256": "565a16af3aa816f59516f19e0fa3a9cf52cd6571c597387ea2fd548e21ae1e1a",
+  "rowsAtSnapshot": 0,
+  "notice": "Dispatch/provenance evidence only; not a completed outcome or quality measurement."
+}

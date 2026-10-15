@@ -1,0 +1,17 @@
+{
+  "created": "2026-10-15T09:04:21.064Z",
+  "source": "/workspace/v3d-r4-media/profile-native-seed-r1",
+  "sourceInventory": [
+    {
+      "file": "pre-dispatch.json",
+      "bytes": 1913,
+      "sha256": "30ea9ad6d3a1b3330b0718d128f4ad60de6f416732da9932cb77e868c8cfb65f"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 5765,
+      "sha256": "455c2bafd089fafdd599eebd7b6226118932fc7f70bea5f8cfed3dc8b9b3f01f"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

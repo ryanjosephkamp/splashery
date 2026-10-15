@@ -1,0 +1,23 @@
+{
+  "created": "2026-10-15T08:53:39.806Z",
+  "scriptSha256": "8b80476d0b943c38baf4b41b21e76b33809b5bcb6f4ae716217a87882771ef64",
+  "protocol": "Same stored model, cameras, and references with new trainingBackground metadata. Production flight must automatically apply black; every PNG must match the prior isolated black-background diagnostic exactly. Leave the toy and verify prior white restored. Does not alter historical strict rows or establish native bake acceptance.",
+  "inputs": [
+    {
+      "file": "model.ply",
+      "sha256": "8f46891dd43fcf5e696ad94dd77d1c4769c20a85688e105826fe35e97017dc32"
+    },
+    {
+      "file": "model.json",
+      "sha256": "0de216f7cd45c2048bc800443d7497015ecec1542617b16f878aa730437afa3a"
+    },
+    {
+      "file": "evaluation.json",
+      "sha256": "5281b9d7cf5aa775532747cfba16e19336953e6f993e7154611d2e68e9acdbb4"
+    },
+    {
+      "file": "result.json",
+      "sha256": "4cb1f47af463dd249be065b7faedb32863fe8a74c9747e038b3013fe7c8336ef"
+    }
+  ]
+}

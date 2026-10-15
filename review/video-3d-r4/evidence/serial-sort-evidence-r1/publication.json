@@ -1,0 +1,222 @@
+{
+  "created": "2026-10-15T09:04:21.537Z",
+  "source": "/workspace/v3d-r4-media/serial-sort-evidence-r1",
+  "sourceInventory": [
+    {
+      "file": "ATTRIBUTION.md",
+      "bytes": 1316,
+      "sha256": "bbde1803f3f79de00fa2358f77c40a3f747ec3ecc3bd82494fd0ba836136f375"
+    },
+    {
+      "file": "Splashery-MIT-LICENSE.txt",
+      "bytes": 1066,
+      "sha256": "c090cc9b6b3155d41ce3872f9df4bdc1532988241b7f2bca709fa90e115d8219"
+    },
+    {
+      "file": "Splatjs-MIT-LICENSE.txt",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "file": "assessment.md",
+      "bytes": 5182,
+      "sha256": "67418fb8d1de213178eac84d8e01a3448e4081181437d46e2f50929b68ebc004"
+    },
+    {
+      "file": "cpu-check.mjs",
+      "bytes": 3300,
+      "sha256": "2b85f188aa68820f0da112215f07cd90e95f816a0c30edc8968b208e6942fabe"
+    },
+    {
+      "file": "cpu-proof.json",
+      "bytes": 2538,
+      "sha256": "0886e07b24302bc6e5a70e85af36084d06d70e9a7e2cbf9cbf7a7eb21133f57f"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 5061,
+      "sha256": "f8ce8cf21be032459bde3841094857970b633d46c74f52912810427db83a83ff"
+    },
+    {
+      "file": "gpu-probe.mjs",
+      "bytes": 15902,
+      "sha256": "d5130dec7841d676ba6acea3c51e5b13a284d1696e2056191bca46df817da1a0"
+    },
+    {
+      "file": "gpu-r1/bitonic-coldEntries.bin",
+      "bytes": 1048576,
+      "sha256": "4d8f69dfc6f3458ce5b034e30c1cbe5430b764016e2def365ecfc115ac841588"
+    },
+    {
+      "file": "gpu-r1/bitonic-entries.bin",
+      "bytes": 1048576,
+      "sha256": "4d8f69dfc6f3458ce5b034e30c1cbe5430b764016e2def365ecfc115ac841588"
+    },
+    {
+      "file": "gpu-r1/bitonic-gradP.bin",
+      "bytes": 64000,
+      "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+    },
+    {
+      "file": "gpu-r1/bitonic-out.bin",
+      "bytes": 82944,
+      "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+    },
+    {
+      "file": "gpu-r1/bitonic-params.bin",
+      "bytes": 64000,
+      "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+    },
+    {
+      "file": "gpu-r1/bitonic-stats.bin",
+      "bytes": 16,
+      "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+    },
+    {
+      "file": "gpu-r1/bitonic-tileCursor.bin",
+      "bytes": 96,
+      "sha256": "2222bc607dc9795c08691cb4c841f60f6cb0b58dbda79e938c1f9906daf050bf"
+    },
+    {
+      "file": "gpu-r1/bitonic-tileStart.bin",
+      "bytes": 100,
+      "sha256": "560af7121e484b10493993e79049944dd825b98821a41eff9b7855966bc3faa4"
+    },
+    {
+      "file": "gpu-r1/bitonic-unsortedEntries.bin",
+      "bytes": 1048576,
+      "sha256": "09ba348e4ee4ca79ff2d4f9e178875be2af4e86325346eaf73dd757fdeb12cb2"
+    },
+    {
+      "file": "gpu-r1/config.json",
+      "bytes": 11124,
+      "sha256": "1a6d7aa3ad4ff8074c77d6c107f57303d51824d8c39b7fcead0b7b27cffba0b7"
+    },
+    {
+      "file": "gpu-r1/fixture-bitonic-entries.bin",
+      "bytes": 49416,
+      "sha256": "a8aa7519851bbb3818264bdf752945becf1485f69d1c8839915a565973b48ce5"
+    },
+    {
+      "file": "gpu-r1/fixture-heap-entries.bin",
+      "bytes": 49416,
+      "sha256": "a8aa7519851bbb3818264bdf752945becf1485f69d1c8839915a565973b48ce5"
+    },
+    {
+      "file": "gpu-r1/fixture.json",
+      "bytes": 124476,
+      "sha256": "15b2010584775ac779111f586b1d378d4dce41c98dc6f573bd967b9918f442a9"
+    },
+    {
+      "file": "gpu-r1/heap-coldEntries.bin",
+      "bytes": 1048576,
+      "sha256": "4d8f69dfc6f3458ce5b034e30c1cbe5430b764016e2def365ecfc115ac841588"
+    },
+    {
+      "file": "gpu-r1/heap-entries.bin",
+      "bytes": 1048576,
+      "sha256": "4d8f69dfc6f3458ce5b034e30c1cbe5430b764016e2def365ecfc115ac841588"
+    },
+    {
+      "file": "gpu-r1/heap-gradP.bin",
+      "bytes": 64000,
+      "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+    },
+    {
+      "file": "gpu-r1/heap-out.bin",
+      "bytes": 82944,
+      "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+    },
+    {
+      "file": "gpu-r1/heap-params.bin",
+      "bytes": 64000,
+      "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+    },
+    {
+      "file": "gpu-r1/heap-stats.bin",
+      "bytes": 16,
+      "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+    },
+    {
+      "file": "gpu-r1/heap-tileCursor.bin",
+      "bytes": 96,
+      "sha256": "2222bc607dc9795c08691cb4c841f60f6cb0b58dbda79e938c1f9906daf050bf"
+    },
+    {
+      "file": "gpu-r1/heap-tileStart.bin",
+      "bytes": 100,
+      "sha256": "560af7121e484b10493993e79049944dd825b98821a41eff9b7855966bc3faa4"
+    },
+    {
+      "file": "gpu-r1/heap-unsortedEntries.bin",
+      "bytes": 1048576,
+      "sha256": "70d9f7b311fc242524cfffbcb91510ffe859829010d60d62c8feadc1fc6ce96a"
+    },
+    {
+      "file": "gpu-r1/pre-dispatch-binding.json",
+      "bytes": 4447,
+      "sha256": "16f9490073607406940e91bf643b9884b927d74aae099006001e7ed6ba7de486"
+    },
+    {
+      "file": "gpu-r1/receipt.json",
+      "bytes": 15549,
+      "sha256": "ed93ea6e4fd6edc610bcfebd928ac443fb0f1251338c652276e28967b6430206"
+    },
+    {
+      "file": "gpu-r1.log",
+      "bytes": 11137,
+      "sha256": "c7b89e18f452c8190c22037819106024b740c7536a6f69ea3bfcb3f629bf375b"
+    },
+    {
+      "file": "heapsort.mjs",
+      "bytes": 3639,
+      "sha256": "aa53e24109592710aadb7e9d22ee68e95aee1e349c1fb3672ac73b4434e74791"
+    },
+    {
+      "file": "heapsort.wgsl",
+      "bytes": 2060,
+      "sha256": "031b884f377252a411581fef554168b2df79895cdccd2e1848b97b7e6ed048af"
+    },
+    {
+      "file": "input-image.f32",
+      "bytes": 62208,
+      "sha256": "cace76c4a9dece604c98edd306596896e7dac19b858259dbcf5653dba67d9890"
+    },
+    {
+      "file": "input-params.f32",
+      "bytes": 64000,
+      "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+    },
+    {
+      "file": "input-source-credit.json",
+      "bytes": 1960,
+      "sha256": "1f820891168fa3f9c4efa63921c16c432b9d240d9147130bc121013468dd957c"
+    },
+    {
+      "file": "licensed-freeze.json",
+      "bytes": 6894,
+      "sha256": "66f819836444a09dd3f09ef4162558eedba1c06bf8b8712d6378e588c0adfb7f"
+    },
+    {
+      "file": "served-sources/vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "served-sources/vendor/splatjs/src/gs/shaders.js",
+      "bytes": 100083,
+      "sha256": "d93c29237163bbdcdfbee3ff4e5094499b4932927f5d1ce9f91e8d33ec7decff"
+    },
+    {
+      "file": "served-sources/vendor/splatjs/src/gs/trainer.js",
+      "bytes": 118958,
+      "sha256": "900827c5a164007808f7844cb4940cbbe26b62b58316a256a2a45771e5e31d01"
+    },
+    {
+      "file": "served-sources/vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

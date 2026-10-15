@@ -1,0 +1,839 @@
+{
+  "created": "2026-10-15T08:24:19.828Z",
+  "scriptSha256": "255a6c909bf73e412176b802ffb0b7dcf3787539171a439e183d9e97684c6c5f",
+  "inputSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "sourceBefore": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119289,
+      "sha256": "be0773b3c563360875ddc2baec740fcabaf2096e85dcc21904464ffe1abd4a9a"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102351,
+      "sha256": "1fb4699e713fa1d1a0bc7cb4623f87285ab0da420141134c7d5c3deb967f7835"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "config": {
+    "weights": [
+      0,
+      0.2
+    ],
+    "seed": 777,
+    "steps": 120,
+    "evalAt": [
+      0,
+      40,
+      120
+    ],
+    "withheldLossCameras": [
+      3,
+      11
+    ],
+    "seedSplats": 15000,
+    "trainSide": 320
+  },
+  "protocol": "Optimizer-only diagnostic with identical real cached SfM, seed, targets, and camera RNG. Cameras3/11 excluded from loss and surface-color inputs. Sparse geometry and sparse colors were previously constructed using all cached images; this is NOT an independent novel-view or task88 acceptance benchmark. No refinement, no preview, no duty cycling, and no native bake timing. Compare fixed-step image quality and complete raw parameter hashes.",
+  "browser": "151.0.7922.173",
+  "args": [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-unsafe-webgpu",
+    "--enable-features=Vulkan,WebGPU",
+    "--use-webgpu-adapter=swiftshader",
+    "--use-vulkan=swiftshader"
+  ],
+  "results": [
+    {
+      "ssimWeight": 0,
+      "n": 15000,
+      "surface": 3534,
+      "initialParams": {
+        "file": "weight-0-initialParams.f32",
+        "bytes": 960000,
+        "sha256": "a779f81401bed045a98decf6e7ec0ff94bd698819b5b5a115484f8af5c33be73"
+      },
+      "evaluations": [
+        {
+          "iter": 0,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 12.422513986052905,
+          "render": {
+            "file": "weight-0-0-3-render.png",
+            "bytes": 35651,
+            "sha256": "0c14f598d57a1f9948208a16f5bd4c624131437410ad9cc25eb0f2fd60170595"
+          },
+          "reference": {
+            "file": "weight-0-0-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 12.398239755877714,
+            "exact": false,
+            "ssim": 0.5167086975808612,
+            "laplacian": 0.000012633314422420167,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0014203969009802724
+          }
+        },
+        {
+          "iter": 0,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 13.70426272367126,
+          "render": {
+            "file": "weight-0-0-11-render.png",
+            "bytes": 5389,
+            "sha256": "920710763ec4e412bc277ea54c9f2c026f6a1095326a0b80164527fe047ff740"
+          },
+          "reference": {
+            "file": "weight-0-0-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 13.684048530985919,
+            "exact": false,
+            "ssim": 0.6520785875187467,
+            "laplacian": 0.00002506523423074063,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.004910684616770542
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.726139733611543,
+          "render": {
+            "file": "weight-0-40-3-render.png",
+            "bytes": 35954,
+            "sha256": "02a3a19c223ce1b0fa9534ccaf6363c41b72d567ca18552f94b971e5369b67c0"
+          },
+          "reference": {
+            "file": "weight-0-40-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 15.673335729010374,
+            "exact": false,
+            "ssim": 0.5704414195722172,
+            "laplacian": 0.000013000153146337203,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.0014616415474118219
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 15.907602928410537,
+          "render": {
+            "file": "weight-0-40-11-render.png",
+            "bytes": 6166,
+            "sha256": "da388ec648dbf8d42db6474de5ae07191b9f9cb5111a4f0a0adf27289600698c"
+          },
+          "reference": {
+            "file": "weight-0-40-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 15.842279128250706,
+            "exact": false,
+            "ssim": 0.6705878318132847,
+            "laplacian": 0.000007536389286877935,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.001476500502503872
+          }
+        },
+        {
+          "iter": 120,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": 17.527902624668982,
+          "render": {
+            "file": "weight-0-120-3-render.png",
+            "bytes": 35123,
+            "sha256": "518e6590316b4db8e1ae56ee633e8bdec0a2e99e8b3eeea377624f26529d2572"
+          },
+          "reference": {
+            "file": "weight-0-120-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 17.458517030663018,
+            "exact": false,
+            "ssim": 0.6108449442842837,
+            "laplacian": 0.000015398625483933027,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0.001731308125911764
+          }
+        },
+        {
+          "iter": 120,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": 16.37169906981604,
+          "render": {
+            "file": "weight-0-120-11-render.png",
+            "bytes": 5597,
+            "sha256": "46f40b3b69db11a53ee796521cda60ccfb10a9b427b86afb27683c510fe88147"
+          },
+          "reference": {
+            "file": "weight-0-120-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 16.306314420123524,
+            "exact": false,
+            "ssim": 0.6745982276918558,
+            "laplacian": 0.0000031630581983375465,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0.0006196942383836311
+          }
+        }
+      ],
+      "batches": [
+        5867.39999999851,
+        9512.800000000745,
+        6240.4000000003725,
+        8769.799999998882,
+        4687.4000000003725,
+        3013.9000000003725,
+        5700.300000000745,
+        5172,
+        8116.0999999996275,
+        5220.5999999996275,
+        9673.199999999255,
+        8282.10000000149,
+        5542.5999999996275,
+        4610,
+        12003.5,
+        13488,
+        4912.0999999996275,
+        11310.599999999627,
+        5976.9000000003725,
+        6627.200000001118,
+        4558.699999999255,
+        8541.5,
+        5339.5999999996275,
+        4583.200000001118,
+        8979.599999999627,
+        7201.300000000745,
+        8548.199999999255,
+        4477.9000000003725,
+        9881.799999998882,
+        9098.300000000745,
+        5493.800000000745,
+        8682,
+        9097.799999998882,
+        7115.9000000003725,
+        8831.800000000745,
+        6480.89999999851,
+        6722.5,
+        4893.700000001118,
+        5925.9000000003725,
+        6685.39999999851,
+        11717.5,
+        5752.9000000003725,
+        9626.5,
+        3204.9000000003725,
+        4750.199999999255,
+        6061.200000001118,
+        5855.5999999996275,
+        9043.199999999255,
+        7549.200000001118,
+        8399.699999999255,
+        8499.300000000745,
+        5627.4000000003725,
+        8013,
+        4177.5999999996275,
+        8121.799999998882,
+        7968.60000000149,
+        8137.89999999851,
+        4864.4000000003725,
+        6739.4000000003725,
+        12163
+      ],
+      "finalParams": {
+        "file": "weight-0-finalParams.f32",
+        "bytes": 960000,
+        "sha256": "6d961e8998dc88a714d463cdde72e7930ca9d68128d28ba31edb519e686817af"
+      },
+      "errors": []
+    },
+    {
+      "ssimWeight": 0.2,
+      "n": 15000,
+      "surface": 3534,
+      "initialParams": {
+        "file": "weight-0.2-initialParams.f32",
+        "bytes": 960000,
+        "sha256": "a779f81401bed045a98decf6e7ec0ff94bd698819b5b5a115484f8af5c33be73"
+      },
+      "evaluations": [
+        {
+          "iter": 0,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": null,
+          "render": {
+            "file": "weight-0.2-0-3-render.png",
+            "bytes": 599,
+            "sha256": "a252496071ee48b46e032c971514bdee8b5b8257a2809d24cb65dfa2688e4c18"
+          },
+          "reference": {
+            "file": "weight-0.2-0-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 5.837272290928325,
+            "exact": false,
+            "ssim": 0.00033169842285613943,
+            "laplacian": 0,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0
+          }
+        },
+        {
+          "iter": 0,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": null,
+          "render": {
+            "file": "weight-0.2-0-11-render.png",
+            "bytes": 599,
+            "sha256": "a252496071ee48b46e032c971514bdee8b5b8257a2809d24cb65dfa2688e4c18"
+          },
+          "reference": {
+            "file": "weight-0.2-0-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 5.284588725872908,
+            "exact": false,
+            "ssim": 0.00028794599349095303,
+            "laplacian": 0,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": null,
+          "render": {
+            "file": "weight-0.2-40-3-render.png",
+            "bytes": 599,
+            "sha256": "a252496071ee48b46e032c971514bdee8b5b8257a2809d24cb65dfa2688e4c18"
+          },
+          "reference": {
+            "file": "weight-0.2-40-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 5.837272290928325,
+            "exact": false,
+            "ssim": 0.00033169842285613943,
+            "laplacian": 0,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0
+          }
+        },
+        {
+          "iter": 40,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": null,
+          "render": {
+            "file": "weight-0.2-40-11-render.png",
+            "bytes": 599,
+            "sha256": "a252496071ee48b46e032c971514bdee8b5b8257a2809d24cb65dfa2688e4c18"
+          },
+          "reference": {
+            "file": "weight-0.2-40-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 5.284588725872908,
+            "exact": false,
+            "ssim": 0.00028794599349095303,
+            "laplacian": 0,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0
+          }
+        },
+        {
+          "iter": 120,
+          "ci": 3,
+          "w": 320,
+          "h": 180,
+          "psnr": null,
+          "render": {
+            "file": "weight-0.2-120-3-render.png",
+            "bytes": 599,
+            "sha256": "a252496071ee48b46e032c971514bdee8b5b8257a2809d24cb65dfa2688e4c18"
+          },
+          "reference": {
+            "file": "weight-0.2-120-3-reference.png",
+            "bytes": 88900,
+            "sha256": "b776cda2ffe783f34f4a8fdda82cec90335bff18db3f5f9dd7b0ad46f77fb119"
+          },
+          "metrics": {
+            "psnr": 5.837272290928325,
+            "exact": false,
+            "ssim": 0.00033169842285613943,
+            "laplacian": 0,
+            "sourceLaplacian": 0.008894214295808034,
+            "sharpnessRatio": 0
+          }
+        },
+        {
+          "iter": 120,
+          "ci": 11,
+          "w": 320,
+          "h": 180,
+          "psnr": null,
+          "render": {
+            "file": "weight-0.2-120-11-render.png",
+            "bytes": 599,
+            "sha256": "a252496071ee48b46e032c971514bdee8b5b8257a2809d24cb65dfa2688e4c18"
+          },
+          "reference": {
+            "file": "weight-0.2-120-11-reference.png",
+            "bytes": 71980,
+            "sha256": "1741f1959c7a00e0c33271e822da398543cb45b927c3a6125fb208d8b6bf92d6"
+          },
+          "metrics": {
+            "psnr": 5.284588725872908,
+            "exact": false,
+            "ssim": 0.00028794599349095303,
+            "laplacian": 0,
+            "sourceLaplacian": 0.005104223990508376,
+            "sharpnessRatio": 0
+          }
+        }
+      ],
+      "batches": [
+        5.5,
+        10.5,
+        2.5,
+        3.299999998882413,
+        0.7000000011175871,
+        1.400000000372529,
+        3.199999999254942,
+        1.099999999627471,
+        1.800000000745058,
+        5.900000000372529,
+        2.099999999627471,
+        1.5,
+        4.099999999627471,
+        2.099999999627471,
+        3.400000000372529,
+        3.5,
+        2.900000000372529,
+        1.5,
+        25.90000000037253,
+        1.8999999985098839,
+        2.5,
+        3.100000001490116,
+        2.899999998509884,
+        0.900000000372529,
+        0.8000000007450581,
+        5,
+        0.900000000372529,
+        1,
+        4.299999998882413,
+        4.5,
+        0.900000000372529,
+        2,
+        2,
+        1.900000000372529,
+        3,
+        1.599999999627471,
+        3.599999999627471,
+        2.300000000745058,
+        21.40000000037253,
+        3.400000000372529,
+        6.299999998882413,
+        2,
+        1.200000001117587,
+        0.8999999985098839,
+        2,
+        2.200000001117587,
+        3.199999999254942,
+        2.700000001117587,
+        2.599999999627471,
+        2.299999998882413,
+        2.300000000745058,
+        2.099999999627471,
+        1.5,
+        1.099999999627471,
+        1.900000000372529,
+        1.599999999627471,
+        0.900000000372529,
+        3.200000001117587,
+        1.8999999985098839,
+        1.400000000372529
+      ],
+      "finalParams": {
+        "file": "weight-0.2-finalParams.f32",
+        "bytes": 960000,
+        "sha256": "a779f81401bed045a98decf6e7ec0ff94bd698819b5b5a115484f8af5c33be73"
+      },
+      "errors": [
+        "The number of storage buffers (9) in the Compute stage exceeds the maximum per-stage limit (8). This adapter supports a higher maxStorageBuffersPerShaderStage of 10, which can be specified in requiredLimits when calling requestDevice(). Limits differ by hardware, so always check the adapter limits prior to requesting a higher limit.\n - While validating binding counts\n - While validating [BindGroupLayoutDescriptor]\n - While calling [Device].CreateComputePipeline([ComputePipelineDescriptor \"\"render-bwd\"\"]).\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While Validating GetBindGroupLayout (0) on [Invalid ComputePipeline \"render-bwd\"]\n",
+        "[Invalid BindGroupLayout (unlabeled)] is invalid due to a previous error.\n - While validating [BindGroupDescriptor] against [Invalid BindGroupLayout (unlabeled)]\n - While calling [Device].CreateBindGroup([BindGroupDescriptor]).\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n",
+        "[Invalid ComputePipeline \"render-bwd\"] is invalid due to a previous error.\n - While encoding [ComputePassEncoder (unlabeled)].SetPipeline([Invalid ComputePipeline \"render-bwd\"]).\n - While finishing [CommandEncoder (unlabeled)].\n",
+        "[Invalid CommandBuffer] is invalid due to a previous error.\n - While calling [Queue].Submit([[Invalid CommandBuffer]])\n"
+      ]
+    }
+  ],
+  "identicalInitialParameters": true,
+  "sourceAfter": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119289,
+      "sha256": "be0773b3c563360875ddc2baec740fcabaf2096e85dcc21904464ffe1abd4a9a"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102351,
+      "sha256": "1fb4699e713fa1d1a0bc7cb4623f87285ab0da420141134c7d5c3deb967f7835"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "status": "diagnostic-complete"
+}

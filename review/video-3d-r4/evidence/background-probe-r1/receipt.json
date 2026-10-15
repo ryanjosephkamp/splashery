@@ -1,0 +1,123 @@
+{
+  "created": "2026-10-15T08:46:34.912Z",
+  "scriptSha256": "33d0817ba06be4166b6905a298679d25e0c6b843a0775935d48131968b27cdd9",
+  "protocol": "Same saved model, camera path, production viewer, and references; exact saved-render reproduction required first. Change only renderer clear/background color to match trainer black. No image processing, fitting, or change to strict recorded row. Diagnostic only.",
+  "inputs": [
+    {
+      "file": "model.ply",
+      "sha256": "8f46891dd43fcf5e696ad94dd77d1c4769c20a85688e105826fe35e97017dc32"
+    },
+    {
+      "file": "model.json",
+      "sha256": "0de216f7cd45c2048bc800443d7497015ecec1542617b16f878aa730437afa3a"
+    },
+    {
+      "file": "evaluation.json",
+      "sha256": "5281b9d7cf5aa775532747cfba16e19336953e6f993e7154611d2e68e9acdbb4"
+    },
+    {
+      "file": "result.json",
+      "sha256": "4cb1f47af463dd249be065b7faedb32863fe8a74c9747e038b3013fe7c8336ef"
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "exactVerification": [
+    {
+      "index": 0,
+      "time": 0.749674,
+      "savedSha256": "d7459a63dfe1a63180cdf648f21e3f652661949b2fc7637bd2b4edcdb1dd6efb",
+      "replaySha256": "d7459a63dfe1a63180cdf648f21e3f652661949b2fc7637bd2b4edcdb1dd6efb",
+      "rgbaSha256": "940f2eaac2f0980d1792875ad37922ff7a0331aeb58a4cd0523c192a0184ace9",
+      "byteIdentical": true
+    },
+    {
+      "index": 1,
+      "time": 2.333008,
+      "savedSha256": "53196956c593586dd18eac3c7270254e9c08f225ee38fdf5d9135b0906f7f5b4",
+      "replaySha256": "53196956c593586dd18eac3c7270254e9c08f225ee38fdf5d9135b0906f7f5b4",
+      "rgbaSha256": "f614c1ef0d701057d2b3593d2c8502986125531f76078462a694e1e77b9fb785",
+      "byteIdentical": true
+    },
+    {
+      "index": 2,
+      "time": 3.583008,
+      "savedSha256": "1f480c5e2efcd6af15a0318210dde03e75cb00e90836b9550f0f51abaefdf27c",
+      "replaySha256": "1f480c5e2efcd6af15a0318210dde03e75cb00e90836b9550f0f51abaefdf27c",
+      "rgbaSha256": "d3b5ad3ee5e1df2ff31fa8387f6bdc620dc8ee9602704f54b18cfd46db7dbbf4",
+      "byteIdentical": true
+    },
+    {
+      "index": 3,
+      "time": 5.166341,
+      "savedSha256": "ebd19e80b0f7a25e532d1794debede1cd0bb6370313b446f1c4310fa14921448",
+      "replaySha256": "ebd19e80b0f7a25e532d1794debede1cd0bb6370313b446f1c4310fa14921448",
+      "rgbaSha256": "7752545c8204c9fcbab1c7ab618aa723896747d7d80cbc140ccb1c6410caef6d",
+      "byteIdentical": true
+    }
+  ],
+  "before": {
+    "background": "page",
+    "clear": [
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "frames": [
+    {
+      "index": 0,
+      "file": "black-0.png",
+      "sha256": "5fc3256446083be254de46c2e9e5d6c4b331aecd97bdf0c55decb4d568e60dd8",
+      "metrics": {
+        "psnr": 18.26323420217442,
+        "exact": false,
+        "ssim": 0.4955102437964932,
+        "laplacian": 0.002428402420544621,
+        "sourceLaplacian": 0.03267034838265646,
+        "sharpnessRatio": 0.07433047214867701
+      }
+    },
+    {
+      "index": 1,
+      "file": "black-1.png",
+      "sha256": "ccd1ef64ff380f09ce73e4c8507ef351e46d78a841fea19edc9850f97eae1e87",
+      "metrics": {
+        "psnr": 17.49323223371869,
+        "exact": false,
+        "ssim": 0.4051406382155438,
+        "laplacian": 0.0025843210430291927,
+        "sourceLaplacian": 0.030042752606566272,
+        "sharpnessRatio": 0.08602144673202657
+      }
+    },
+    {
+      "index": 2,
+      "file": "black-2.png",
+      "sha256": "3dcaee8cff1fe549843ff0f67d0624235955f3e52c0cd8d8bf5a52f3afc8dfa0",
+      "metrics": {
+        "psnr": 16.61906285818199,
+        "exact": false,
+        "ssim": 0.4545797180524481,
+        "laplacian": 0.002512470834707363,
+        "sourceLaplacian": 0.032280975108041836,
+        "sharpnessRatio": 0.0778313178675156
+      }
+    },
+    {
+      "index": 3,
+      "file": "black-3.png",
+      "sha256": "b04680b18b14b9866bd8f82f569b5fa0ca310f34bf37847e0ec4aa9dec2071e7",
+      "metrics": {
+        "psnr": 18.241578913827233,
+        "exact": false,
+        "ssim": 0.5363702080790748,
+        "laplacian": 0.0027685933763485007,
+        "sourceLaplacian": 0.019405203691782495,
+        "sharpnessRatio": 0.14267272945560033
+      }
+    }
+  ],
+  "errors": [],
+  "status": "diagnostic-complete"
+}

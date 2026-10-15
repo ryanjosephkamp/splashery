@@ -1,0 +1,23 @@
+{
+  "created": "2026-10-15T08:46:34.912Z",
+  "scriptSha256": "33d0817ba06be4166b6905a298679d25e0c6b843a0775935d48131968b27cdd9",
+  "protocol": "Same saved model, camera path, production viewer, and references; exact saved-render reproduction required first. Change only renderer clear/background color to match trainer black. No image processing, fitting, or change to strict recorded row. Diagnostic only.",
+  "inputs": [
+    {
+      "file": "model.ply",
+      "sha256": "8f46891dd43fcf5e696ad94dd77d1c4769c20a85688e105826fe35e97017dc32"
+    },
+    {
+      "file": "model.json",
+      "sha256": "0de216f7cd45c2048bc800443d7497015ecec1542617b16f878aa730437afa3a"
+    },
+    {
+      "file": "evaluation.json",
+      "sha256": "5281b9d7cf5aa775532747cfba16e19336953e6f993e7154611d2e68e9acdbb4"
+    },
+    {
+      "file": "result.json",
+      "sha256": "4cb1f47af463dd249be065b7faedb32863fe8a74c9747e038b3013fe7c8336ef"
+    }
+  ]
+}

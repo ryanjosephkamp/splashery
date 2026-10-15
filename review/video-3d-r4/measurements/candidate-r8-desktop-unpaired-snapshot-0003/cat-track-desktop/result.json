@@ -1,0 +1,38 @@
+{
+  "id": "cat-track",
+  "profile": "desktop",
+  "sha256": "598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430",
+  "started": "2026-10-15T08:14:10.107Z",
+  "status": "explained",
+  "provenanceSha256": "3051307eee7fbcca5b4b27fc3b8ab53de5560afebdaf1fe079dd0991d70d0914",
+  "firstViewMs": 188880,
+  "bakeMs": 1136139.1541209999,
+  "mean": null,
+  "peakRssBytes": 1786523648,
+  "hostLoadAtStart": [
+    14.35,
+    13.75,
+    13.72
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "This browser cannot play that video. Try an MP4 (H.264) or WebM file, or a shorter clip.",
+    "unplayable": false,
+    "duration": 0
+  },
+  "explanation": {
+    "diagnostic": "The graphics card stopped answering while finishing. Try a shorter stretch, or the Phone-safe setting.",
+    "advice": "The graphics card stopped answering while finishing. Try a shorter stretch, or the Phone-safe setting.",
+    "visible": true
+  },
+  "reason": "The graphics card stopped answering while finishing. Try a shorter stretch, or the Phone-safe setting."
+}

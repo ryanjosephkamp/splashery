@@ -1,0 +1,187 @@
+{
+  "created": "2026-10-15T09:04:20.052Z",
+  "source": "/workspace/v3d-r4-media/candidate-r7-phone",
+  "runSha256": "c241def4763716e901f02192494f256cce3cdecb5a743d6b8368363cb556c5a4",
+  "provenanceSha256": "e620a4d00eb2ecee43fba7bd5112378d412131c41b07b547eec18f400eea9b4f",
+  "cases": [
+    {
+      "id": "cat-track",
+      "profile": "phone",
+      "rowFingerprint": "9fb2e0e1ad05d26307bd1549bc75402b204f1249c11c1bdc3b22777c81fca5fa",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 225647,
+          "sha256": "0b610703ba407a08c7db59d71837c341b817777d5fbc8f32eba9b2c32568547a"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1924,
+          "sha256": "3a5fa8ed033f79c58502a7be512d8c9ef872fdb21381b5209939f97f61a87265"
+        }
+      ]
+    },
+    {
+      "id": "cat-plays",
+      "profile": "phone",
+      "rowFingerprint": "d81885443e5fb1f95d40a42d0738b1620d5a2e2209187522724410966cd13f8b",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11100,
+          "sha256": "fe71179e2d5e5486060e3b209f0d3b58bc8c3f42a527276b3de3c1c4d4d93fc0"
+        },
+        {
+          "file": "model.json",
+          "bytes": 27050,
+          "sha256": "5d0b336bad3a1633816e725baa1345540fed89c4cdc76ff0f262bf3ed9da192d"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1013887,
+          "sha256": "a8d2958437e707737047cca64dc510eb4192e9cde02ceabd17202a881049a4a7"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 189990,
+          "sha256": "66e11832a46fb83c15e24c87def019103093fff06bff15f30452b65dc9dc0ded"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 320314,
+          "sha256": "7aa46fd73b1da3386cc4220e7be6d375fc6cba27624f95c458d48f379c663d3a"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 329491,
+          "sha256": "417f95cd13e24db9ecdc421afd4ca6f321db19ecd0e54ecf44731fd0ed5a366f"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 325079,
+          "sha256": "0456f402120854052e5933f24066485dfc152a00816343c23b73be1707f75bc4"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 313717,
+          "sha256": "39a9545bc734d73c9335df53a92694423c27671aff988f4667885090df9a613c"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 345783,
+          "sha256": "1e19c202ba9d3e44b8e48e76b5c01db6520a7f1f5dcb84b6910cdac3f85a0d79"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 309118,
+          "sha256": "9913d9a3312e475feca34de1ca243b304d2b4c2e5fea9a9b0d22ad9084ea0b1d"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 310388,
+          "sha256": "d4458d2ba85f8be39d752850f4d8a36aba7200a5d8f8000853700d85ba623e2c"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 328607,
+          "sha256": "f1d2bc2ac003f5d0835229e287aca3987fa6112c354dcb76bb2a6c05e02da7fb"
+        },
+        {
+          "file": "result.json",
+          "bytes": 4512,
+          "sha256": "919793d99c0400f8fc86d664dc3fbfe23597ef2fc014883b96cd45ddc9df270b"
+        }
+      ]
+    },
+    {
+      "id": "buddha",
+      "profile": "phone",
+      "rowFingerprint": "82c458e7efe51caa09828400a558b15135392d1b17390e639c0f8a3443d865b0",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 216964,
+          "sha256": "ee9268c3f566a44db1939418e9e5b49dbba1ae6bd01421d8464dcb0c2396beca"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2259,
+          "sha256": "df94079c6357efc4c8c46506e5d827cfbce8a43916ff916ab435ecb17db454b4"
+        }
+      ]
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "rowFingerprint": "b72ced33fa9388f00b0dcff13810c5ace13629c2501ec410dc7462e2e4ffb8a0",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11186,
+          "sha256": "3368dfefd8275291dfb6f55af67e0074b0233f960d1d0b15e87b2610178ba0f8"
+        },
+        {
+          "file": "model.json",
+          "bytes": 26912,
+          "sha256": "54ba1b43f249f27d1efad160e5a2d7f7dc1987e30d789b9d7a3c9692e2e32d7f"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1018919,
+          "sha256": "ee10322e565d6391458513871a86d0286fe3c59b8bc6b220c60d88ee0b54de97"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 153856,
+          "sha256": "7f7de4c8f795bedaeb13bb8bee249d4bc1d6dd5b5c31e304b6b5b05074ed5ade"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 305241,
+          "sha256": "7a7d4067a3acf1ea20bef8650d6eca9af129ca5c477b372c58884c422b3d0445"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 295759,
+          "sha256": "58daa1452f0f65be6a9628418ad59be00d32fe96e1c39c4e9ea51c0aee9f9402"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 270400,
+          "sha256": "fe5e2af86581a4d402a21e2e3cd985bf2ff8816cae05a33272ef2423e554a743"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 229086,
+          "sha256": "af31698fea9603f91273a725870920de5a89ea7b136b8c880426684251a77fb9"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 260122,
+          "sha256": "e775d18f625288b02f574ff5e522d1f8e2758532666a51215b175b0625d35855"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 250736,
+          "sha256": "f44210f222e9b886fd7ede31531b1c9a1539bd3d971d5cec4a25ae03fb320b11"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 250078,
+          "sha256": "c77ada6bfad78ca72542b0974931587f6f580dbb0d9d6192c6a5152ecdb56cfa"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 240256,
+          "sha256": "10c139b7e740b3a9c2068e44fea05da73b37d153e437f15a67d0419b69bd76cc"
+        },
+        {
+          "file": "result.json",
+          "bytes": 4553,
+          "sha256": "363d75ec1ea5310dd9d0364755f15cbccc9a1a20ec7aaced7160489304596579"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

@@ -1,0 +1,2 @@
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.
+Source-byte and orchestration receipts only; no native result is synthesized or replaced.

@@ -1,0 +1,55 @@
+{
+  "created": "2026-10-15T09:04:20.730Z",
+  "source": "/workspace/v3d-r4-media/candidate-r8-desktop-unpaired",
+  "runSha256": "773babd434522243ead828b253385f49e1f680940c35b7d5af03416f989e5177",
+  "provenanceSha256": "3051307eee7fbcca5b4b27fc3b8ab53de5560afebdaf1fe079dd0991d70d0914",
+  "cases": [
+    {
+      "id": "cat-track",
+      "profile": "desktop",
+      "rowFingerprint": "3bba9979bb156b72dccf56c2db0c85c6dbe6139493473f0b67e444113e864fc0",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1174716,
+          "sha256": "1a95a1957965771297b399a8791e50af87849f0691521602d2574db076b6ee96"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1332,
+          "sha256": "3e291db1af012a65bdf84970958fea70bef9d10080f61679342afd81126af6b7"
+        }
+      ]
+    },
+    {
+      "id": "buddha",
+      "profile": "desktop",
+      "rowFingerprint": "70d945c839c13b0a4d6a6222489c0bc75be67be7af87c3e5b65c74711ef4fdf3",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1151620,
+          "sha256": "c9b5c9535f0df43d40ecbae257b688114b5300a6bfa5be5495760d21490b8116"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1806,
+          "sha256": "338cdbe6f91b2febd5d84fc8fc610f1c824fe24d46b71487cf05813dd53c8d39"
+        }
+      ]
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "desktop",
+      "rowFingerprint": "293dae7d43be70a2cb057d7d3ed5f5a29a9ca57a54289483019d4721c3469f2f",
+      "files": [
+        {
+          "file": "result.json",
+          "bytes": 1817,
+          "sha256": "cb00fba7e5cb1395463ae2ffe269d482ee44244ea72e748a3f0bfd4832ec3e5c"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

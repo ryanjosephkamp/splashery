@@ -1,0 +1,422 @@
+{
+  "created": "2026-10-15T08:20:41.718Z",
+  "inputSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "scriptSha256": "b0cd43c50f52c9ed5b49ad33749e6af0862e4d4e9df41e5470bea942cb9fd86d",
+  "sourceBefore": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119289,
+      "sha256": "be0773b3c563360875ddc2baec740fcabaf2096e85dcc21904464ffe1abd4a9a"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102351,
+      "sha256": "1fb4699e713fa1d1a0bc7cb4623f87285ab0da420141134c7d5c3deb967f7835"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "protocol": "Fixed cached real plant reconstruction and training photographs; native phone 15000 seed and 320px targets; no solving or wall-clock acceptance. Paired shared/direct variants, each with three cold and three warm timestamp-profiled steps include an extra diagnostic forward pass, excluded from reported production msPerStep. No end-to-end or physical-device performance claim.",
+  "browser": "151.0.7922.173",
+  "args": [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-unsafe-webgpu",
+    "--enable-features=Vulkan,WebGPU",
+    "--use-webgpu-adapter=swiftshader",
+    "--use-vulkan=swiftshader"
+  ],
+  "results": [
+    {
+      "tileGrad": true,
+      "n": 15000,
+      "surface": 3543,
+      "targets": [
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        }
+      ],
+      "adapter": {},
+      "cold": {
+        "steps": 3,
+        "n": 15000,
+        "msPerStep": 2539.184,
+        "project": 6.565,
+        "scan": 3.363,
+        "scatter": 31.58,
+        "sort": 256.996,
+        "renderFwd": 493.75,
+        "render": 2015.435,
+        "visCount": 11.692,
+        "visScan": 3.095,
+        "visScatter": 62.999,
+        "chain": 16.26,
+        "adam": 78.986,
+        "adamInvis": 52.213,
+        "renderBwd": 1521.685,
+        "tileHist": {
+          "le256": 104,
+          "le512": 57,
+          "le1024": 46,
+          "le2048": 33,
+          "gt2048": 0,
+          "entries": 112117,
+          "maxTile": 1995,
+          "tiles": 240
+        }
+      },
+      "warm": {
+        "steps": 3,
+        "n": 15000,
+        "msPerStep": 2227.304,
+        "project": 10.014,
+        "scan": 16.787,
+        "scatter": 10.165,
+        "sort": 316.19,
+        "renderFwd": 462.627,
+        "render": 1577.947,
+        "visCount": 13.871,
+        "visScan": 17.343,
+        "visScatter": 55.741,
+        "chain": 32.214,
+        "adam": 119.258,
+        "adamInvis": 57.774,
+        "renderBwd": 1115.32,
+        "tileHist": {
+          "le256": 48,
+          "le512": 59,
+          "le1024": 103,
+          "le2048": 30,
+          "gt2048": 0,
+          "entries": 144635,
+          "maxTile": 1500,
+          "tiles": 240
+        }
+      },
+      "errors": [],
+      "files": {
+        "params": {
+          "file": "shared-params.bin",
+          "bytes": 960000,
+          "sha256": "3abfaa049256ac585c973b36e2b69ec4e82e7dddd873b06456236dce6046cffd"
+        },
+        "out": {
+          "file": "shared-out.bin",
+          "bytes": 921600,
+          "sha256": "eaeb9d6399cacbb24d59c56eadeeeda1e74fd031aab74cdf47b4f88d75d5db92"
+        },
+        "stats": {
+          "file": "shared-stats.bin",
+          "bytes": 16,
+          "sha256": "c388ee477f857115032a6ec85aa49bedd34bde53823c6ec3057a6d308d3c3e90"
+        },
+        "tileStart": {
+          "file": "shared-tileStart.bin",
+          "bytes": 1604,
+          "sha256": "1bd81e99e9530f6652074439d78adf8858c6996da6e3b36797987ad27f5547c9"
+        },
+        "tileCursor": {
+          "file": "shared-tileCursor.bin",
+          "bytes": 1600,
+          "sha256": "f7fdd487d88a550ebd11279cb30af3b58d1db0efa04e59c5ccfe6889e6d772a1"
+        }
+      }
+    },
+    {
+      "tileGrad": false,
+      "n": 15000,
+      "surface": 3543,
+      "targets": [
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        },
+        {
+          "w": 320,
+          "h": 180
+        }
+      ],
+      "adapter": {},
+      "cold": {
+        "steps": 3,
+        "n": 15000,
+        "msPerStep": 3476.763,
+        "project": 13.822,
+        "scan": 1.221,
+        "scatter": 34.063,
+        "sort": 288.348,
+        "renderFwd": 658.874,
+        "render": 2894.276,
+        "visCount": 12.618,
+        "visScan": 2.753,
+        "visScatter": 64.566,
+        "chain": 20.599,
+        "adam": 103.484,
+        "adamInvis": 41.014,
+        "renderBwd": 2235.402,
+        "tileHist": {
+          "le256": 93,
+          "le512": 51,
+          "le1024": 65,
+          "le2048": 31,
+          "gt2048": 0,
+          "entries": 124464,
+          "maxTile": 1855,
+          "tiles": 240
+        }
+      },
+      "warm": {
+        "steps": 3,
+        "n": 15000,
+        "msPerStep": 1987.231,
+        "project": 5.589,
+        "scan": 3.82,
+        "scatter": 8.219,
+        "sort": 277.074,
+        "renderFwd": 482.17,
+        "render": 1482.026,
+        "visCount": 30.957,
+        "visScan": 4.881,
+        "visScatter": 32.537,
+        "chain": 16.354,
+        "adam": 80.825,
+        "adamInvis": 44.948,
+        "renderBwd": 999.856,
+        "tileHist": {
+          "le256": 54,
+          "le512": 58,
+          "le1024": 101,
+          "le2048": 27,
+          "gt2048": 0,
+          "entries": 140287,
+          "maxTile": 1478,
+          "tiles": 240
+        }
+      },
+      "errors": [],
+      "files": {
+        "params": {
+          "file": "direct-params.bin",
+          "bytes": 960000,
+          "sha256": "a91719eb54c2e082db5716262b1c2d080b32367099b6378c650f2e7c548d67a8"
+        },
+        "out": {
+          "file": "direct-out.bin",
+          "bytes": 921600,
+          "sha256": "9b1740d9ff1e33749a4fe5f9beb038eaf028f93633bd3a24a25e361f9c604ab0"
+        },
+        "stats": {
+          "file": "direct-stats.bin",
+          "bytes": 16,
+          "sha256": "27fcec75a73457585344a34aa8ac1fc66c4e396b4c7262eb78ae184d12edaf9b"
+        },
+        "tileStart": {
+          "file": "direct-tileStart.bin",
+          "bytes": 1604,
+          "sha256": "15ed8ce10cf056dec045fb52221af531439a6a4a75f75ba5bfd11fa1d19129a7"
+        },
+        "tileCursor": {
+          "file": "direct-tileCursor.bin",
+          "bytes": 1600,
+          "sha256": "5fc53b16c9d42be4ef52c8345b3105a8add701cbd2232796f07f1bfb8e5337b8"
+        }
+      }
+    }
+  ],
+  "parity": {
+    "params": false,
+    "out": false,
+    "stats": false,
+    "tileStart": false,
+    "tileCursor": false
+  },
+  "sourceAfter": [
+    {
+      "file": "src/video3d/surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 64066,
+      "sha256": "cbaa8b65c93f2b4e6b3fb35e4daad1b8483af349f082aa4a60b1de9780150f67"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119289,
+      "sha256": "be0773b3c563360875ddc2baec740fcabaf2096e85dcc21904464ffe1abd4a9a"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102351,
+      "sha256": "1fb4699e713fa1d1a0bc7cb4623f87285ab0da420141134c7d5c3deb967f7835"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    }
+  ],
+  "status": "diagnostic-complete"
+}

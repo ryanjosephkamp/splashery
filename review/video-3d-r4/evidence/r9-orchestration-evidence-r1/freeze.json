@@ -1,0 +1,110 @@
+{
+  "created": "2026-10-15T09:08:20.019109+00:00",
+  "coordinatorPid": 196899,
+  "firstNativePid": 197304,
+  "noRepositorySourceOwners": true,
+  "noSignalsSentByHelper": true,
+  "noAdditionalGpuReviewOrProbeJobs": true,
+  "files": [
+    {
+      "file": "control/README.md",
+      "bytes": 6995,
+      "sha256": "83e4da3f229412381fe66a1a965611b90ad5552df8d086620fa14213cbb19884"
+    },
+    {
+      "file": "control/cpu-tests.log",
+      "bytes": 2530,
+      "sha256": "f53ec661eb38758bdfac13b5bf12eb28f08b0f7be9c859d6f7f3f2f967c95baa"
+    },
+    {
+      "file": "control/declaration-launched.json",
+      "bytes": 32493,
+      "sha256": "6f3ce8c9d4f1abbb710edfe9676cc23f0faece626140decb55085efcd709f880"
+    },
+    {
+      "file": "control/declaration.json",
+      "bytes": 32493,
+      "sha256": "6f3ce8c9d4f1abbb710edfe9676cc23f0faece626140decb55085efcd709f880"
+    },
+    {
+      "file": "control/launch-receipt.json",
+      "bytes": 1092,
+      "sha256": "ab1e8a882ee551fd2c06c48b8cc887a4217614fea8a7c7588ae5496defdc31ce"
+    },
+    {
+      "file": "control/preflight-check.log",
+      "bytes": 218,
+      "sha256": "6748a08932c083eb334824a3df914acea00a5738e1b942999a6eee6874026066"
+    },
+    {
+      "file": "control/prior-native-handoff.json",
+      "bytes": 27859,
+      "sha256": "80bcf83f477a4cd658728bf848cd263c9932d70297ac594451589a07f34b937d"
+    },
+    {
+      "file": "control/provenance-preparation.json",
+      "bytes": 2098,
+      "sha256": "b328fdf6e3629663d034bf2775317b3c4684e213f728bf591aeb5f30d5fedaa2"
+    },
+    {
+      "file": "control/runtime-freeze.json",
+      "bytes": 63995,
+      "sha256": "11ca0ad8ad54d456a180c5b741a62b08d9ddd5a9d833d8e596ae6cd463629046"
+    },
+    {
+      "file": "control/templates/paired.json",
+      "bytes": 75779,
+      "sha256": "f19ba0fc52cbebadc06dc759bd5833f7436177c714fdd0ebad44040aaf960a20"
+    },
+    {
+      "file": "control/templates/unpaired.json",
+      "bytes": 75481,
+      "sha256": "1365d2c1d985a45c6f5c5e7fe72356c090827fc44402389919d07672f97322e0"
+    },
+    {
+      "file": "first-dispatch-run.json",
+      "bytes": 75831,
+      "sha256": "565a16af3aa816f59516f19e0fa3a9cf52cd6571c597387ea2fd548e21ae1e1a"
+    },
+    {
+      "file": "first-dispatch.json",
+      "bytes": 472,
+      "sha256": "a4b3670659bc4b3003de523ac04f3560f9062b43bfc04ee24fe5632df9789b99"
+    },
+    {
+      "file": "project-LICENSE",
+      "bytes": 1066,
+      "sha256": "c090cc9b6b3155d41ce3872f9df4bdc1532988241b7f2bca709fa90e115d8219"
+    },
+    {
+      "file": "scripts/finalize-r9-declaration.py",
+      "bytes": 5189,
+      "sha256": "6fc8ca31359d56310cf063a984636b3fc4d2016d864453b616f183091ed59afc"
+    },
+    {
+      "file": "scripts/follow-r9-v1.py",
+      "bytes": 24043,
+      "sha256": "9a45117d705432b37e9fbdb3394d4665eece6b0d3a20a767f4df5cfb7475b51c"
+    },
+    {
+      "file": "scripts/prepare-r9-code.py",
+      "bytes": 8037,
+      "sha256": "1537627dc40f2ffc9a22312e32cfa937c0a87c60398174453462e78b6fad2520"
+    },
+    {
+      "file": "scripts/prepare-r9-provenance.mjs",
+      "bytes": 5693,
+      "sha256": "d232e61f450228c6cc636fda8abd43ad1b9e10e5764e72a8edd741620ed6ca4b"
+    },
+    {
+      "file": "scripts/r9-follower-integrity.mjs",
+      "bytes": 5082,
+      "sha256": "c5f9cc3749281fe0a9bcab1681df51647ce79bccf9619242625695da313a3aad"
+    },
+    {
+      "file": "scripts/test-follow-r9-v1.py",
+      "bytes": 8891,
+      "sha256": "42da1923a79f092751c3a260e925c68c8a348376a110567b8d393861a079b8de"
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "created": "2026-10-15T09:05:16.452062+00:00",
+  "note": "Post-run byte check: production-background diagnostic overlays are identical to frozen product commit b7099b1c. Runtime overlays were not edited during or after the diagnostic. Stored model and original reference PNGs are bound separately in probe receipt.",
+  "files": [
+    {
+      "file": "src/packs/video3d.js",
+      "bytes": 27085,
+      "sha256": "30f2ff37c6c8d32fbf18e39d47ad77ca1e1e5c71b2993e4bfdd9a8c30b674acd"
+    },
+    {
+      "file": "src/video3d/flight.js",
+      "bytes": 11765,
+      "sha256": "db5b5d488512add6687076c06c004602374a40798e674d8540c6b98886ebae08"
+    },
+    {
+      "file": "src/video3d/background.js",
+      "bytes": 1755,
+      "sha256": "6c18303efebced8d24d32266dba922fdef861cc869eec8cdaad2969d616448f1"
+    }
+  ]
+}

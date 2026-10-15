@@ -1,0 +1,193 @@
+{
+  "created": "2026-10-15T08:47:21.930267+00:00",
+  "scope": "CPU-only cached real-plane support gate, rejected plane, unchanged surfaceSeed context, separate opt-in bounds fix and CPU tests",
+  "inputCacheSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "sourceId": "chameleon-flowers",
+  "acceptedPlanes": 0,
+  "newPlaneRowsExported": 0,
+  "noGpu": true,
+  "noHeldoutImages": true,
+  "noPerformanceOrQualityClaim": true,
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 10055,
+      "sha256": "c50383b6fc8b728525046751265cdc775ad05830b61fa1c8ad0bfdf50d6227eb"
+    },
+    {
+      "file": "baseline-context.json",
+      "bytes": 4346,
+      "sha256": "f60f7f9efa092297e5b842f82be4cf426f9a908f9c5f44d2e1c92f6f1f8192b7"
+    },
+    {
+      "file": "baseline-context.log",
+      "bytes": 4346,
+      "sha256": "f60f7f9efa092297e5b842f82be4cf426f9a908f9c5f44d2e1c92f6f1f8192b7"
+    },
+    {
+      "file": "baseline-context.mjs",
+      "bytes": 4023,
+      "sha256": "11aaaf9c1df076193e298e3aadcdb6ee1ef0fab4e27346ad74c14dc494d8dd41"
+    },
+    {
+      "file": "cached-init-impact.json",
+      "bytes": 40706,
+      "sha256": "d93973f1c3a744e9154289ff5e1323cfaa04af2bbc6bdaef430f66e786d347a7"
+    },
+    {
+      "file": "cached-init-impact.log",
+      "bytes": 3951,
+      "sha256": "07b3dc2b80b43750e3f27652c81650607f9aaadec024a60e89dc9a7f93c22b89"
+    },
+    {
+      "file": "cached-init-impact.mjs",
+      "bytes": 3442,
+      "sha256": "995d39f2281a6d52136fee280f032a757e2a63aacc992df6f93377e6479bf968"
+    },
+    {
+      "file": "cached-init-legacy.f32le",
+      "bytes": 39296,
+      "sha256": "c52d188b4ea06f2485b0584cd7a64365c91f73225f242f5e03e585fa8e71c43e"
+    },
+    {
+      "file": "cached-init-robust.f32le",
+      "bytes": 39296,
+      "sha256": "87be6c0a28d5c0c7331d033e6caabacf2b3492686ee8b759c171008347d9e3b9"
+    },
+    {
+      "file": "cached-session-impact.json",
+      "bytes": 2956,
+      "sha256": "9c0e7bbb86a936a795a482f9d1686ec296453c8dbfa0f60b791a5c70944a0da5"
+    },
+    {
+      "file": "cached-session-impact.log",
+      "bytes": 2956,
+      "sha256": "9c0e7bbb86a936a795a482f9d1686ec296453c8dbfa0f60b791a5c70944a0da5"
+    },
+    {
+      "file": "cached-session-impact.mjs",
+      "bytes": 3554,
+      "sha256": "44ba25f35ab8beb1085200067904a575f1d596018f5cfd729d580a98cd52be4a"
+    },
+    {
+      "file": "cached-session-legacy.f32le",
+      "bytes": 960000,
+      "sha256": "d07da3d9832fdad4e5186f9bd8e024a8e3a59ab4bfc558c1b5a483505c6a44a3"
+    },
+    {
+      "file": "cached-session-robust.f32le",
+      "bytes": 960000,
+      "sha256": "4449eab9d8f239e2cddfadc96f274101a2a0b7ccf73634fd4b030bdd572dcef8"
+    },
+    {
+      "file": "fit-planes.py",
+      "bytes": 6464,
+      "sha256": "8472bfe6cc5e33363c71e8d42b08351d473fb72dd20cc1264a6758a6b47283ac"
+    },
+    {
+      "file": "full-context-all-16.f32le",
+      "bytes": 226752,
+      "sha256": "e31c219f7f0882d0e121fe04ec0f6da37a8a30b1ac62ab52bf8e9c427348619e"
+    },
+    {
+      "file": "plane-fit-report.json",
+      "bytes": 51589,
+      "sha256": "9b728781ad89f6ab5b3e62604e70d5a5ee6aecc09d8c85f8e5e422e2d2eed885"
+    },
+    {
+      "file": "plane-fit.log",
+      "bytes": 2338,
+      "sha256": "9add96f9d30b160f34b3c2057c684fd93a483850752b37bd516e7f83e0df6c51"
+    },
+    {
+      "file": "preregistered-config.json",
+      "bytes": 3288,
+      "sha256": "c250870247aeaa5240f49b836dfe6582c7577894cb4b4ff03b80ad4a94b34d53"
+    },
+    {
+      "file": "radius-audit.json",
+      "bytes": 89698,
+      "sha256": "a19021ecfd0d3be4b6b27165a8697debf071ebbc74ef566c830e65696ae0cb00"
+    },
+    {
+      "file": "radius-audit.log",
+      "bytes": 6475,
+      "sha256": "6f25c1ca4ad1f1ff6972d4f08873933addb65ca6d3793ef72a4e41654b68ce51"
+    },
+    {
+      "file": "radius-audit.py",
+      "bytes": 3979,
+      "sha256": "eef965869b782383124deabde9d85db196883e4981bd8d6927456d30363c27e4"
+    },
+    {
+      "file": "restricted-independent-validation-15.f32le",
+      "bytes": 184320,
+      "sha256": "bdc3de56004ba1538a626a24709e049134b5269e1d29e48fecbb5ad587f6b65d"
+    },
+    {
+      "file": "source-credit.json",
+      "bytes": 1960,
+      "sha256": "1f820891168fa3f9c4efa63921c16c432b9d240d9147130bc121013468dd957c"
+    },
+    {
+      "file": "source-snapshots/frozen-r8-init.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "source-snapshots/frozen-r8-scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "source-snapshots/frozen-r8-surface-seed.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "source-snapshots/init-before.js",
+      "bytes": 4310,
+      "sha256": "b8adfdcf4505e5785689427ed01ae07136858cabc57902c45ad7b8f7f5ba6251"
+    },
+    {
+      "file": "source-snapshots/legacy-before.json",
+      "bytes": 4548,
+      "sha256": "9b20afea1d7c97f34a626f17a990639e37696af10790ebd00193b8c1d79d600a"
+    },
+    {
+      "file": "source-snapshots/new-test-after.log",
+      "bytes": 1569,
+      "sha256": "492f2988dc90377343fbd32d11be85b5595b093575d173aa14aaefab27053393"
+    },
+    {
+      "file": "source-snapshots/new-test-before.log",
+      "bytes": 6084,
+      "sha256": "20e3c23b0a42a2c5c51b3c1fa3f6b3874616c08c39f7c7ff2bb1b64295ef7f04"
+    },
+    {
+      "file": "source-snapshots/project-LICENSE",
+      "bytes": 1066,
+      "sha256": "c090cc9b6b3155d41ce3872f9df4bdc1532988241b7f2bca709fa90e115d8219"
+    },
+    {
+      "file": "source-snapshots/public-init-after.js",
+      "bytes": 4965,
+      "sha256": "0d0807678ca0f01ef9eb75fe315b75449a11ff30336307601ad9a2787f263138"
+    },
+    {
+      "file": "source-snapshots/public-seed-bounds-test.mjs",
+      "bytes": 5225,
+      "sha256": "1380d922381902c7b4532ecb6ebd2afa78273ee0f0640e2abbe9a2c0df9e8c87"
+    },
+    {
+      "file": "source-snapshots/public-session-after.js",
+      "bytes": 64458,
+      "sha256": "84e6c3e60b556e915220bb48c3b03abc8d2ad14157b70867a7e7843d00f90882"
+    },
+    {
+      "file": "source-snapshots/splatjs-LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    }
+  ]
+}

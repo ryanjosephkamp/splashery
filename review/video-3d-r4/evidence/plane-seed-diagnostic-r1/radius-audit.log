@@ -1,0 +1,247 @@
+{
+  "created": "2026-10-15T08:41:22.639769+00:00",
+  "cacheSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "codeSha256": "eef965869b782383124deabde9d85db196883e4981bd8d6927456d30363c27e4",
+  "n": 614,
+  "centers": {
+    "arithmeticMean": {
+      "center": [
+        0.1612495741100052,
+        0.08511846504632574,
+        5.320021151713349
+      ],
+      "linearQuantileRadii": {
+        "0.5": 2.395760883312721,
+        "0.9": 2.4818059693391845,
+        "0.95": 2.636220868497363,
+        "0.99": 3.200456676236706,
+        "1.0": 1444.342948885636
+      },
+      "nativeP90OrderStatistic": 2.4819223243420243,
+      "radiusFloorApplied": false
+    },
+    "coordinateMedian": {
+      "center": [
+        -0.013353131698745649,
+        -0.00927936258391112,
+        2.938712951955377
+      ],
+      "linearQuantileRadii": {
+        "0.5": 0.20762175606888386,
+        "0.9": 0.45327241889578906,
+        "0.95": 0.6045681040841645,
+        "0.99": 1.3526438532876504,
+        "1.0": 1446.7322170399273
+      },
+      "nativeP90OrderStatistic": 0.45438785125184455,
+      "radiusFloorApplied": false
+    }
+  },
+  "centerSeparation": 2.389566026911916,
+  "nativeToPlaneRadiusRatio": 5.475564408679889,
+  "coordinateQuantiles": {
+    "0": [
+      -0.5533104342314886,
+      -0.25802791353016286,
+      1.7883472543409193
+    ],
+    "0.01": [
+      -0.3935324004761729,
+      -0.23350209131530225,
+      2.234981717449938
+    ],
+    "0.05": [
+      -0.2807887288801148,
+      -0.18031226732809105,
+      2.781521073936188
+    ],
+    "0.5": [
+      -0.013353131698745649,
+      -0.00927936258391112,
+      2.938712951955377
+    ],
+    "0.9": [
+      0.29478733961589637,
+      0.22078189471338988,
+      3.0227708029679468
+    ],
+    "0.95": [
+      0.35348825760721747,
+      0.30508883437980633,
+      3.15606130825751
+    ],
+    "0.99": [
+      0.4824683732128106,
+      0.5120009155520857,
+      4.228522179443392
+    ],
+    "1": [
+      91.78225559504747,
+      39.117646427463775,
+      1446.225502788947
+    ]
+  },
+  "meanLeverageRemoval": [
+    {
+      "removedMostDistantFromMedian": 1,
+      "newMean": [
+        0.011786269018753352,
+        0.021443868044013388,
+        2.969441246921771
+      ],
+      "shiftNorm": 2.3561875185736367,
+      "newMeanP90Radius": 0.43080932598824917,
+      "nativeP90OrderStatistic": 0.431096113702758
+    },
+    {
+      "removedMostDistantFromMedian": 2,
+      "newMean": [
+        0.012251836761802325,
+        0.0199512199046357,
+        2.961156251052918
+      ],
+      "shiftNorm": 2.364464149684234,
+      "newMeanP90Radius": 0.4245688929704277,
+      "nativeP90OrderStatistic": 0.4245867157094722
+    },
+    {
+      "removedMostDistantFromMedian": 5,
+      "newMean": [
+        0.013323141198157765,
+        0.016272792181726167,
+        2.9441081578417507
+      ],
+      "shiftNorm": 2.3815088726843125,
+      "newMeanP90Radius": 0.42204970468876174,
+      "nativeP90OrderStatistic": 0.4236755990401086
+    },
+    {
+      "removedMostDistantFromMedian": 10,
+      "newMean": [
+        0.012658380584946075,
+        0.014130749713397348,
+        2.9367841374097474
+      ],
+      "shiftNorm": 2.3889196857299613,
+      "newMeanP90Radius": 0.4028868056660147,
+      "nativeP90OrderStatistic": 0.40320255945589534
+    },
+    {
+      "removedMostDistantFromMedian": 20,
+      "newMean": [
+        0.011438380434125405,
+        0.010295569997427877,
+        2.9367493821782897
+      ],
+      "shiftNorm": 2.389147585821534,
+      "newMeanP90Radius": 0.380434506659384,
+      "nativeP90OrderStatistic": 0.380434506659384
+    }
+  ],
+  "interpretationLimits": [
+    "Projection inside an image does not certify actual accepted SfM track visibility.",
+    "No points are removed; leverage removal rows are read-only counterfactual arithmetic, not a proposed geometry filter.",
+    "Plane threshold remains the preregistered coordinate-median P90 radius; no refit with a looser threshold."
+  ],
+  "noHeldoutImages": true,
+  "noGpu": true
+}
+{
+  "worstOutliers": [
+    {
+      "rankByMedianDistance": 1,
+      "index": 264,
+      "X": [
+        91.78225559504747,
+        39.117646427463775,
+        1446.225502788947
+      ],
+      "rgb": [
+        0.33137255907058716,
+        0.2078431472182274,
+        0.10784314014017582
+      ],
+      "distanceFromMedian": 1446.7322170399273,
+      "distanceFromMean": 1444.342948885636,
+      "meanShiftIfRemovedNorm": 2.356187518573631,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 16
+    },
+    {
+      "rankByMedianDistance": 2,
+      "index": 214,
+      "X": [
+        -0.27314118972720997,
+        0.9349445293431564,
+        8.039858718660035
+      ],
+      "rgb": [
+        0.2803921699523926,
+        0.2549019679427147,
+        0.0882352963089943
+      ],
+      "distanceFromMedian": 5.194298482600797,
+      "distanceFromMean": 2.8824323176511517,
+      "meanShiftIfRemovedNorm": 0.004702173438256365,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3
+    },
+    {
+      "rankByMedianDistance": 3,
+      "index": 216,
+      "X": [
+        -0.5362830784518391,
+        1.0236074914580426,
+        7.763182727314602
+      ],
+      "rgb": [
+        0.6607843339443207,
+        0.47843137383461,
+        0.3921568691730499
+      ],
+      "distanceFromMedian": 4.961433219929354,
+      "distanceFromMean": 2.708570091132879,
+      "meanShiftIfRemovedNorm": 0.004418548272647437,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3
+    },
+    {
+      "rankByMedianDistance": 4,
+      "index": 85,
+      "X": [
+        0.1609132717878935,
+        0.668323041990147,
+        6.3990369109213905
+      ],
+      "rgb": [
+        0.24183007578055063,
+        0.27973857522010803,
+        0.12418301155169804
+      ],
+      "distanceFromMedian": 3.530347815593095,
+      "distanceFromMean": 1.226540949290638,
+      "meanShiftIfRemovedNorm": 0.0020008824621380716,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 4
+    },
+    {
+      "rankByMedianDistance": 5,
+      "index": 170,
+      "X": [
+        -0.24029908479110385,
+        0.6080856095176124,
+        5.103537880523199
+      ],
+      "rgb": [
+        0.8921568691730499,
+        0.5764706134796143,
+        0.5137255191802979
+      ],
+      "distanceFromMedian": 2.2625452361779614,
+      "distanceFromMean": 0.6939747591713399,
+      "meanShiftIfRemovedNorm": 0.0011320958550919084,
+      "positiveDepthCameras": 16,
+      "insideRgbCameras": 3
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "created": "2026-10-15T08:45:52.411Z",
+  "cacheSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "surfaceSha256": "e31c219f7f0882d0e121fe04ec0f6da37a8a30b1ac62ab52bf8e9c427348619e",
+  "sessionSourceSha256": "84e6c3e60b556e915220bb48c3b03abc8d2ad14157b70867a7e7843d00f90882",
+  "initSourceSha256": "0d0807678ca0f01ef9eb75fe315b75449a11ff30336307601ad9a2787f263138",
+  "codeSha256": "44ba25f35ab8beb1085200067904a575f1d596018f5cfd729d580a98cd52be4a",
+  "results": [
+    {
+      "robustSeedBounds": false,
+      "n": 15000,
+      "baseRows": 11457,
+      "appendedRows": 3543,
+      "center": [
+        0.1612495741100052,
+        0.08511846504632574,
+        5.320021151713349
+      ],
+      "radius": 2.4819223243420243,
+      "positionsOfAll614SparseOriginalsRetained": true,
+      "appendedRowsByteIdentical": true,
+      "dataSha256": "d07da3d9832fdad4e5186f9bd8e024a8e3a59ab4bfc558c1b5a483505c6a44a3",
+      "baseSigmaQuantiles": {
+        "0": 0.0005956612229021976,
+        "1": 0.1240961301567778,
+        "0.1": 0.0006829442621533125,
+        "0.5": 0.01191863976878722,
+        "0.9": 0.04063546657503299,
+        "0.95": 0.067782769195428,
+        "0.99": 0.09927690151826446
+      },
+      "fullSigmaQuantiles": {
+        "0": 0.0005956612229021976,
+        "1": 0.1240961301567778,
+        "0.1": 0.0009450128085241243,
+        "0.5": 0.008867944612922984,
+        "0.9": 0.02866280419515975,
+        "0.95": 0.05479765877269813,
+        "0.99": 0.09927690151826446
+      }
+    },
+    {
+      "robustSeedBounds": true,
+      "n": 15000,
+      "baseRows": 11457,
+      "appendedRows": 3543,
+      "center": [
+        -0.013353131698745649,
+        -0.00927936258391112,
+        2.938712951955377
+      ],
+      "radius": 0.45438785125184455,
+      "positionsOfAll614SparseOriginalsRetained": true,
+      "appendedRowsByteIdentical": true,
+      "dataSha256": "4449eab9d8f239e2cddfadc96f274101a2a0b7ccf73634fd4b030bdd572dcef8",
+      "baseSigmaQuantiles": {
+        "0": 0.00010905313184561009,
+        "1": 0.02271939391652395,
+        "0.1": 0.0006425933408744337,
+        "0.5": 0.01191863976878722,
+        "0.9": 0.018175514655903353,
+        "0.95": 0.018175514655903353,
+        "0.99": 0.02271939391652395
+      },
+      "fullSigmaQuantiles": {
+        "0": 0.00010905313184561009,
+        "1": 0.02271939391652395,
+        "0.1": 0.0009450128085241243,
+        "0.5": 0.008867944612922984,
+        "0.9": 0.018175514655903353,
+        "0.95": 0.018175514655903353,
+        "0.99": 0.02271939391652395
+      }
+    }
+  ],
+  "noGpu": true,
+  "noHeldoutImages": true,
+  "limitations": [
+    "Actual unchanged Session.seed capacity/append/init code executes on CPU, with GPU creation replaced by a throwing boundary.",
+    "No decoding, solve, training, rendering, timing acceptance, or quality claim.",
+    "surfaceSeed RGB admission already saw all16 training cameras; no heldout images are accessed."
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "created": "2026-10-15T09:03:25.823Z",
+  "codeSha256": "d232e61f450228c6cc636fda8abd43ad1b9e10e5764e72a8edd741620ed6ca4b",
+  "sourceFreezeSha256": "11ca0ad8ad54d456a180c5b741a62b08d9ddd5a9d833d8e596ae6cd463629046",
+  "productCommit": "b7099b1cd82c3f04ff29598a82eb3bcae23aca32",
+  "servedSourceSha256": "0a11b9de53398925bf17e8783c7e84b1388c3fb054073dbeaeea62849e372793",
+  "servedPaths": 377,
+  "protocolSha256": "bf94e388a2d71f1d3f7c75dd5d1855a4d69ddd8ba946dc81905faa85746e57ad",
+  "protocolFiles": [
+    {
+      "file": "v3d-bench.mjs",
+      "sha256": "84cdac18c13afb599a598e0bd7606c4fc620ffc29ef6911322629766644ca0c3"
+    },
+    {
+      "file": "v3d-bench-metrics.mjs",
+      "sha256": "a4dac3c6d33ae13110d0455db9aa455785bf6f66cb1e7f9745652f74ee29ab69"
+    },
+    {
+      "file": "v3d-bench-samples.mjs",
+      "sha256": "6057b1482ca95c0a61888fcf083997619ad052bfbe57962504071ba798b26cfc"
+    },
+    {
+      "file": "v3d-bench-pixels.mjs",
+      "sha256": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f"
+    },
+    {
+      "file": "cdx-v3d-clarity-metrics.mjs",
+      "sha256": "7d20c250557e0e98dd5fc6286420d147e9196f995ee6c6932d52883eaadeee16"
+    }
+  ],
+  "browserVersion": "151.0.7922.173",
+  "templates": {
+    "paired": {
+      "file": "/workspace/v3d-r4-media/follow-r9-v1-control/templates/paired.json",
+      "sha256": "f19ba0fc52cbebadc06dc759bd5833f7436177c714fdd0ebad44040aaf960a20",
+      "provenanceSha256": "fca50d7bc2b5d22bddecd7ee77d5c5bb0942444fe6ddf12f008d544bcb2d8ca0"
+    },
+    "unpaired": {
+      "file": "/workspace/v3d-r4-media/follow-r9-v1-control/templates/unpaired.json",
+      "sha256": "1365d2c1d985a45c6f5c5e7fe72356c090827fc44402389919d07672f97322e0",
+      "provenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835"
+    }
+  },
+  "noGpuOrBrowserLaunch": true,
+  "method": "Exact exported wrapper strings/functions and same five files; actual HTTP served bytes, input bytes, installed executable/version/environment; native default options. Unchanged strict runner independently recomputes before first browser."
+}

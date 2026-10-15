@@ -1,0 +1,29 @@
+{
+  "created": "2026-10-15T08:04:57.158Z",
+  "rows": [
+    {
+      "run": "main-r1",
+      "url": "http://127.0.0.1:4174/",
+      "requestedFiles": 372,
+      "expectedSha256": "96cca2a891ed56d5c04bac58d66e45ce4a1e85b4bcc3fed3b02d0124546f3336",
+      "actualSha256": "96cca2a891ed56d5c04bac58d66e45ce4a1e85b4bcc3fed3b02d0124546f3336",
+      "identical": true
+    },
+    {
+      "run": "candidate-r7-phone",
+      "url": "http://127.0.0.1:4178/",
+      "requestedFiles": 374,
+      "expectedSha256": "2b207107c7012d3ddd03a583c6f2c72c326aab2a006e0a81fdecc4c06ce2ff63",
+      "actualSha256": "2b207107c7012d3ddd03a583c6f2c72c326aab2a006e0a81fdecc4c06ce2ff63",
+      "identical": true
+    },
+    {
+      "run": "candidate-r8-desktop",
+      "url": "http://127.0.0.1:4179/",
+      "requestedFiles": 374,
+      "expectedSha256": "8104905b149d658e8cd469e7ad2cc2788ed0933f36b57c81d2096c5c3d5bf918",
+      "actualSha256": "8104905b149d658e8cd469e7ad2cc2788ed0933f36b57c81d2096c5c3d5bf918",
+      "identical": true
+    }
+  ]
+}

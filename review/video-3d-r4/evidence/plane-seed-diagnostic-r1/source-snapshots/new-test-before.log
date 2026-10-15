@@ -1,0 +1,84 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 08:43:23] "GET / HTTP/1.1" 200 -
+
+Running 7 tests using 1 worker
+
+(node:183552) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:183552) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:19:1 › legacy initializer bytes remain unchanged unless robust bounds are explicitly enabled (121ms)
+  ✘  2 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:32:1 › one distant point cannot inflate robust bounds or normal-point scales, and remains in the seed (101ms)
+(node:183612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:183612) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:51:1 › robust center and radius are invariant to point order, including even-sized clouds (44ms)
+(node:183631) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:183631) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  4 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:69:5 › Session passes robust bounds through legacy-capacity seeding with sigmoid conventions (59ms)
+  ✓  5 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:69:5 › Session passes robust bounds through legacy-capacity seeding with v2 conventions (74ms)
+  ✓  6 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:69:5 › Session passes robust bounds through bounded seeding with sigmoid conventions (52ms)
+  ✓  7 [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:69:5 › Session passes robust bounds through bounded seeding with v2 conventions (28ms)
+
+
+  1) [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:32:1 › one distant point cannot inflate robust bounds or normal-point scales, and remains in the seed 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeLessThan[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected: < [32m0.2[39m
+    Received:   [31m7547.166928471997[39m
+
+      36 |     ordinary = initGaussians(points.slice(0, -1), 0, undefined, { robustBounds: true });
+      37 |   expect(legacy.radius).toBeGreaterThan(7000);
+    > 38 |   expect(robust.radius).toBeLessThan(0.2);
+         |                         ^
+      39 |   expect(robust.radius).toBeLessThan(ordinary.radius * 1.5);
+      40 |   expect(robust.n).toBe(points.length);
+      41 |   expect(robust.data.every(Number.isFinite)).toBe(true);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-seed-bounds.spec.mjs:38:25
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/seed-bounds-r1/before/cdx-v3d-seed-bounds-one-di-38d86-les-and-remains-in-the-seed-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/seed-bounds-r1/before/cdx-v3d-seed-bounds-one-di-38d86-les-and-remains-in-the-seed-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:51:1 › robust center and radius are invariant to point order, including even-sized clouds 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 1[39m
+    [31m+ Received  + 1[39m
+
+    [2m  Array [[22m
+    [2m    3200,[22m
+    [2m    -2400,[22m
+    [32m-   6401.9488,[39m
+    [31m+   6401.948799999999,[39m
+    [2m  ][22m
+
+      54 |     for (const ordered of [points.toReversed(), points.filter((_, i) => i % 2).concat(points.filter((_, i) => !(i % 2)))]) {
+      55 |       const actual = initGaussians(ordered, 0, undefined, { robustBounds: true });
+    > 56 |       expect(actual.center).toEqual(expected.center);
+         |                             ^
+      57 |       expect(actual.radius).toBe(expected.radius);
+      58 |     }
+      59 |     for (let axis = 0; axis < 3; axis++) {
+        at /workspace/splashery-r4-public/tests/cdx-v3d-seed-bounds.spec.mjs:56:29
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/seed-bounds-r1/before/cdx-v3d-seed-bounds-robust-4ebe0-including-even-sized-clouds-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/seed-bounds-r1/before/cdx-v3d-seed-bounds-robust-4ebe0-including-even-sized-clouds-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:32:1 › one distant point cannot inflate robust bounds or normal-point scales, and remains in the seed 
+    [chromium] › tests/cdx-v3d-seed-bounds.spec.mjs:51:1 › robust center and radius are invariant to point order, including even-sized clouds 
+  5 passed (16.0s)

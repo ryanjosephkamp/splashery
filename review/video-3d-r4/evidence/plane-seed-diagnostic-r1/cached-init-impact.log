@@ -1,0 +1,105 @@
+{
+  "created": "2026-10-15T08:44:26.531Z",
+  "cacheSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "codeSha256": "995d39f2281a6d52136fee280f032a757e2a63aacc992df6f93377e6479bf968",
+  "initializerSource": "/workspace/splashery-r4-public/vendor/splatjs/src/gs/init.js",
+  "initializerSourceSha256": "0d0807678ca0f01ef9eb75fe315b75449a11ff30336307601ad9a2787f263138",
+  "results": [
+    {
+      "robustBounds": false,
+      "center": [
+        0.1612495741100052,
+        0.08511846504632574,
+        5.320021151713349
+      ],
+      "radius": 2.4819223243420243,
+      "n": 614,
+      "allOriginalPositionsRetained": true,
+      "cpuMilliseconds": 14.925181000000066,
+      "dataSha256": "c52d188b4ea06f2485b0584cd7a64365c91f73225f242f5e03e585fa8e71c43e",
+      "sigmaQuantilesAll": {
+        "0": 0.0007445765481814242,
+        "1": 0.1240961301567778,
+        "0.1": 0.000809057730737711,
+        "0.5": 0.014739753957509715,
+        "0.9": 0.050081865130133865,
+        "0.95": 0.07958656332455542,
+        "0.99": 0.1240961301567778
+      },
+      "sigmaQuantilesExcludingFarPoint264": {
+        "0": 0.0007445765481814242,
+        "1": 0.1240961301567778,
+        "0.1": 0.0008071190528875916,
+        "0.5": 0.01473287660756045,
+        "0.9": 0.04830472652976204,
+        "0.95": 0.07681784772734229,
+        "0.99": 0.1240961301567778
+      },
+      "minimumScaleLaw": 0.0007445766973026072,
+      "maximumScaleLaw": 0.12409611621710122,
+      "hashGridCell": 0.10341343018091768,
+      "positionLrV1BeforeAdditionalScale": 0.0007445766973026072,
+      "positionLrV2BeforeAdditionalScale": 0.00004963844648684049
+    },
+    {
+      "robustBounds": true,
+      "center": [
+        -0.013353131698745649,
+        -0.00927936258391112,
+        2.938712951955377
+      ],
+      "radius": 0.45438785125184455,
+      "n": 614,
+      "allOriginalPositionsRetained": true,
+      "cpuMilliseconds": 5.0188620000001265,
+      "dataSha256": "87be6c0a28d5c0c7331d033e6caabacf2b3492686ee8b759c171008347d9e3b9",
+      "sigmaQuantilesAll": {
+        "0": 0.0001363164183868826,
+        "1": 0.02271939391652395,
+        "0.1": 0.000809057730737711,
+        "0.5": 0.014739753957509715,
+        "0.9": 0.02271939391652395,
+        "0.95": 0.02271939391652395,
+        "0.99": 0.02271939391652395
+      },
+      "sigmaQuantilesExcludingFarPoint264": {
+        "0": 0.0001363164183868826,
+        "1": 0.02271939391652395,
+        "0.1": 0.0008071190528875916,
+        "0.5": 0.01473287660756045,
+        "0.9": 0.02271939391652395,
+        "0.95": 0.02271939391652395,
+        "0.99": 0.02271939391652395
+      },
+      "minimumScaleLaw": 0.00013631635537555335,
+      "maximumScaleLaw": 0.022719392562592228,
+      "hashGridCell": 0.018932827135493522,
+      "positionLrV1BeforeAdditionalScale": 0.00013631635537555335,
+      "positionLrV2BeforeAdditionalScale": 0.000009087757025036892
+    }
+  ],
+  "robustToLegacyRadiusRatio": 0.18307899759606944,
+  "sigmaRatioQuantiles": {
+    "0": 0.18307898794121324,
+    "1": 1.4891589227277748,
+    "0.1": 0.18307911888955652,
+    "0.5": 1,
+    "0.9": 1,
+    "0.95": 1,
+    "0.99": 1.1951708481099592
+  },
+  "normalPointCounts": {
+    "sameWithin1e6": 361,
+    "decreasedOver1Percent": 225,
+    "increasedOver1Percent": 21
+  },
+  "risks": [
+    "Read-only initializer sensitivity only; no renderer, optimizer, performance, or quality comparison.",
+    "Coordinate-median bounds retain far points and can represent multimodal or elongated scenes differently from mean bounds.",
+    "Same P90 order statistic and scale laws: changed radius affects spatial hash neighborhoods, scale clamps/fallback, and position learning rate.",
+    "Position learning-rate figures are algebraic setup values, not measured convergence; camera translation learning rates and scale floors also use scene radius.",
+    "No runtime flag enabled by this helper."
+  ],
+  "noHeldoutImages": true,
+  "noGpu": true
+}

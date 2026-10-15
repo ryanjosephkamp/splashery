@@ -1,0 +1,150 @@
+{
+  "created": "2026-10-15T08:41:46.340Z",
+  "cacheSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "configSha256": "c250870247aeaa5240f49b836dfe6582c7577894cb4b4ff03b80ad4a94b34d53",
+  "codeSha256": "11aaaf9c1df076193e298e3aadcdb6ee1ef0fab4e27346ad74c14dc494d8dd41",
+  "baselineSourceSha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c",
+  "node": "v24.19.0",
+  "results": [
+    {
+      "name": "full-context-all-16",
+      "cameraIndices": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15
+      ],
+      "rowFile": "full-context-all-16.f32le",
+      "rowSha256": "e31c219f7f0882d0e121fe04ec0f6da37a8a30b1ac62ab52bf8e9c427348619e",
+      "n": 3543,
+      "candidates": 8276,
+      "supported": 3543,
+      "cpuMilliseconds": 2701.669306,
+      "budget": {
+        "totalCeiling": 15000,
+        "appendedRows": 3543,
+        "baseTarget": 11457,
+        "sparsePointCount": 614,
+        "desiredClones": 18,
+        "retainedBaseRows": 11457,
+        "totalRows": 15000
+      },
+      "coverage": [
+        {
+          "imgIdx": 0,
+          "projectedRows": 3543,
+          "occupied4pxBins": 942,
+          "total4pxBins": 3600,
+          "projected4pxBinCoverage": 0.26166666666666666
+        },
+        {
+          "imgIdx": 5,
+          "projectedRows": 3147,
+          "occupied4pxBins": 1570,
+          "total4pxBins": 3600,
+          "projected4pxBinCoverage": 0.4361111111111111
+        },
+        {
+          "imgIdx": 10,
+          "projectedRows": 1919,
+          "occupied4pxBins": 1286,
+          "total4pxBins": 3600,
+          "projected4pxBinCoverage": 0.3572222222222222
+        },
+        {
+          "imgIdx": 15,
+          "projectedRows": 2057,
+          "occupied4pxBins": 1272,
+          "total4pxBins": 3600,
+          "projected4pxBinCoverage": 0.35333333333333333
+        }
+      ],
+      "qualityScores": null,
+      "qualityScoresReason": "No accepted plane comparator exists. Projection coverage is context only and does not certify visibility or occupied surface."
+    },
+    {
+      "name": "restricted-independent-validation-15",
+      "cameraIndices": [
+        0,
+        5,
+        10
+      ],
+      "rowFile": "restricted-independent-validation-15.f32le",
+      "rowSha256": "bdc3de56004ba1538a626a24709e049134b5269e1d29e48fecbb5ad587f6b65d",
+      "n": 2880,
+      "candidates": 6349,
+      "supported": 2880,
+      "cpuMilliseconds": 996.0589129999998,
+      "budget": {
+        "totalCeiling": 15000,
+        "appendedRows": 2880,
+        "baseTarget": 12120,
+        "sparsePointCount": 614,
+        "desiredClones": 19,
+        "retainedBaseRows": 12120,
+        "totalRows": 15000
+      },
+      "coverage": [
+        {
+          "imgIdx": 0,
+          "projectedRows": 2880,
+          "occupied4pxBins": 685,
+          "total4pxBins": 3600,
+          "projected4pxBinCoverage": 0.19027777777777777
+        },
+        {
+          "imgIdx": 5,
+          "projectedRows": 2880,
+          "occupied4pxBins": 1534,
+          "total4pxBins": 3600,
+          "projected4pxBinCoverage": 0.4261111111111111
+        },
+        {
+          "imgIdx": 10,
+          "projectedRows": 1718,
+          "occupied4pxBins": 1242,
+          "total4pxBins": 3600,
+          "projected4pxBinCoverage": 0.345
+        },
+        {
+          "imgIdx": 15,
+          "projectedRows": 1846,
+          "occupied4pxBins": 1231,
+          "total4pxBins": 3600,
+          "projected4pxBinCoverage": 0.34194444444444444
+        }
+      ],
+      "qualityScores": null,
+      "qualityScoresReason": "No accepted plane comparator exists. Projection coverage is context only and does not certify visibility or occupied surface."
+    }
+  ],
+  "planeProposals": {
+    "acceptedPlanes": 0,
+    "rows": 0,
+    "threeViewPatchScores": null,
+    "reason": "Stopped before reading diagnostic RGB because geometric support gate failed; no unsupported plane rows exported.",
+    "budgetIfNoReplacement": {
+      "totalCeiling": 15000,
+      "appendedRows": 0,
+      "baseTarget": 15000,
+      "sparsePointCount": 614,
+      "desiredClones": 23,
+      "retainedBaseRows": 14736,
+      "totalRows": 14736
+    }
+  },
+  "noHeldoutImages": true,
+  "noGpu": true
+}

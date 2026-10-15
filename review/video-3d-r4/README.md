@@ -95,3 +95,37 @@ speed difference. [Serial-sort prototype](evidence/serial-sort-prototype/) verif
 gradient, pixel, and loss parity on fixed small inputs, including a large padded tile. Its sort
 timing is a narrow software-GPU diagnostic, not an end-to-end or physical-phone speed claim. Each
 diagnostic retains its original byte-bound reports, scripts, and raw outputs.
+
+### Revision 8 and the background diagnosis
+
+The [later main snapshot](measurements/main-master-r1-snapshot-0017/run.json) preserves 17 recorded
+outcomes. [Revision 8 phone](measurements/candidate-r8-phone-snapshot-0008/run.json),
+[paired desktop](measurements/candidate-r8-desktop-snapshot-0001/run.json), and
+[unpaired desktop](measurements/candidate-r8-desktop-unpaired-snapshot-0003/run.json) preserve all
+listed successes and failures. These are partial collections, not acceptance results. The phone cat
+reached 1.524 times main's sharpness but lost 0.00134 SSIM and showed its first view later. The
+plant and Dianthus also missed quality thresholds.
+
+[Background diagnosis](evidence/background-probe-r1/receipt.json) reproduced every original white
+Dianthus held-out PNG before changing only the clear color to training's black. Mean SSIM rose from
+0.112766 to 0.472900; sharpness became 4.3756 times main's on this clip. The
+[production metadata check](evidence/background-product-probe-r1/receipt.json) reproduced all four
+black controls byte for byte and restored white when leaving the toy. These saved-model diagnostics
+do not replace native rows. [Color-path review](evidence/color-conventions-review-r1/README.md)
+found no substantial double-gamma defect.
+
+[Robust seed-bound analysis](evidence/plane-seed-diagnostic-r1/) retains the distant-point
+diagnosis, legacy-byte checks, and rejected plane proposal.
+[Structural-loss probe](evidence/ssim-loss-probe-r2/receipt.json) completed without GPU errors and
+improved a cached input's two-view mean SSIM by 0.00730, while batch time increased about 40%. It
+remains off by default. The [earlier invalid probe](evidence/ssim-loss-probe-r1/assessment.json) is
+retained, including its GPU validation failures. Exact full-parameter gradient probes in
+[one order](evidence/profile-native-seed-r3/receipt.json) and
+[reverse order](evidence/profile-native-seed-r4/receipt.json) support the software direct-gradient
+path; neither establishes native bake or physical-phone speed.
+
+[Earlier full CI](evidence/ci-c0c924-summary/summary.md) recorded 2,525 passes, 12 failures, and one
+existing skip. Failures that passed alone still count. The
+[revision-9 freeze and controller handoff](evidence/r9-freeze-and-handoff/) records the complete
+product source fingerprint and unchanged five-file benchmark protocol. Current native bakes were
+allowed to finish when scheduling moved to revision 9. Its fresh native results are still pending.

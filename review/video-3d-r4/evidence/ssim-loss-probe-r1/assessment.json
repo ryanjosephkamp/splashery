@@ -1,0 +1,5 @@
+{
+  "validComparison": false,
+  "status": "rejected-shader-compilation-error",
+  "reason": "SSIM backward pipeline is invalid. Collector preserved GPU errors but did not reject them in its status field. All SSIM image scores/timings are invalid; no integration or acceptance claim."
+}

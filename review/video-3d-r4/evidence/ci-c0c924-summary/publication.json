@@ -1,0 +1,17 @@
+{
+  "created": "2026-10-15T09:04:21.720Z",
+  "source": "/workspace/v3d-r4-media/ci-c0c924/summary",
+  "sourceInventory": [
+    {
+      "file": "summary.md",
+      "bytes": 3898,
+      "sha256": "5ae1d800a092eb0e759b802acc6505f86b8058a0a3d483007c90ff140c38faf5"
+    },
+    {
+      "file": "times.json",
+      "bytes": 5680,
+      "sha256": "c0c5645dd76610a61c8cc9edb821fe4a853d2f718ce6590bd55543d27427b9a4"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

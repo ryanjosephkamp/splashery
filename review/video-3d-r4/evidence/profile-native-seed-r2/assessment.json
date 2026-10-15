@@ -1,0 +1,1 @@
+{"validComparison":false,"reason":"The trainer camera RNG was not fixed; variants sampled different camera sequences. Neither timing nor raw mismatch establishes a gradient-path difference. Retained; r3 uses fixed seed777."}

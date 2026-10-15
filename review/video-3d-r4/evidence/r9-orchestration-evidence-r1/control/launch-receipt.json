@@ -1,0 +1,20 @@
+{
+  "preparedAt": "2026-10-15T09:06:40.060240+00:00",
+  "command": [
+    "python3",
+    "/workspace/v3d-r4-media/follow-r9-v1.py"
+  ],
+  "cwd": "/workspace/v3d-r4-media",
+  "declarationSha256": "6f3ce8c9d4f1abbb710edfe9676cc23f0faece626140decb55085efcd709f880",
+  "coordinatorCodeSha256": "9a45117d705432b37e9fbdb3394d4665eece6b0d3a20a767f4df5cfb7475b51c",
+  "integrityCodeSha256": "c5f9cc3749281fe0a9bcab1681df51647ce79bccf9619242625695da313a3aad",
+  "priorNativeReceiptSha256": "80bcf83f477a4cd658728bf848cd263c9932d70297ac594451589a07f34b937d",
+  "pairedProvenanceSha256": "fca50d7bc2b5d22bddecd7ee77d5c5bb0942444fe6ddf12f008d544bcb2d8ca0",
+  "unpairedProvenanceSha256": "6c337b4c990bb9d33da5b92f76245436cad75382b851d7e23b132c10f45f2835",
+  "deadline": "2026-10-15T16:15:00+00:00",
+  "authorization": "Parent explicitly authorized detached R9 launch after frozen-source and CPU checks, waiting only recorded prior native identities/descendants per profile.",
+  "signalsSentByThisHelper": [],
+  "pid": 196899,
+  "launchedAt": "2026-10-15T09:06:40.065337+00:00",
+  "startTicks": "1642582"
+}

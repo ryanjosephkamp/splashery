@@ -1,0 +1,53 @@
+{
+  "created": "2026-10-15T08:06:33.323621+00:00",
+  "note": "Fresh continuation shards preserve all prior recorded outcomes, including incomplete rows. Empty metadata freezes the original provenance/source-file inventory before the runner independently verifies it; no result is fabricated.",
+  "shards": [
+    {
+      "profile": "phone",
+      "original": "main-r1",
+      "output": "main-phone-r2",
+      "pending": [
+        "snaefell",
+        "fremantle-orbit",
+        "ihasalu-orbit",
+        "fresnel-lens",
+        "saint-denis",
+        "horse-statue",
+        "royal-sovereign",
+        "viljandi-ruins",
+        "kakerdi-bog",
+        "fjoloy"
+      ],
+      "pid": 158993,
+      "initialMetadataSha256": "0105d9cd161e39a98c1fbdb4afb4e85a42de86fa6913d35e1c7b1e28f3d7c48e",
+      "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6"
+    },
+    {
+      "profile": "desktop",
+      "original": "main-desktop-r1",
+      "output": "main-desktop-r2",
+      "pending": [
+        "dianthus",
+        "pisac",
+        "sleeping-dog",
+        "palace-statue",
+        "oa-street",
+        "ullard",
+        "snaefell",
+        "fremantle-orbit",
+        "ihasalu-orbit",
+        "fresnel-lens",
+        "saint-denis",
+        "horse-statue",
+        "royal-sovereign",
+        "viljandi-ruins",
+        "kakerdi-bog",
+        "fjoloy"
+      ],
+      "pid": 158994,
+      "initialMetadataSha256": "fae87b05a6edd59b72719c3e9cef751e27411801995fd2fd5ca0f9ade585902a",
+      "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6"
+    }
+  ],
+  "collectorPid": 158995
+}

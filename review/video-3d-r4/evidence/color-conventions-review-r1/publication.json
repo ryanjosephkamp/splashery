@@ -1,0 +1,177 @@
+{
+  "created": "2026-10-15T09:04:21.720Z",
+  "source": "/workspace/v3d-r4-media/color-conventions-review-r1",
+  "sourceInventory": [
+    {
+      "file": "README.md",
+      "bytes": 8363,
+      "sha256": "54479c4012cdb0e3082564008f961077819c878cd4ce04b5f588212101293670"
+    },
+    {
+      "file": "cpu-check-first-error.log",
+      "bytes": 426,
+      "sha256": "f02ef30d8d5c2f3a6033ce1b8cc51609c0ba9e70830fa4c55317d1ff5dc626cc"
+    },
+    {
+      "file": "cpu-check-grid-colors.json",
+      "bytes": 8995,
+      "sha256": "5a13b036228eac3513b17722e9bd7d23a64c8a82237361f5e180ae0d1f2c1882"
+    },
+    {
+      "file": "cpu-check-grid-colors.log",
+      "bytes": 8995,
+      "sha256": "5a13b036228eac3513b17722e9bd7d23a64c8a82237361f5e180ae0d1f2c1882"
+    },
+    {
+      "file": "cpu-check.json",
+      "bytes": 9223,
+      "sha256": "1ed79087532d12e5cd6b8e000b779a207ebf5da6a6fc8f873491051a26200e2a"
+    },
+    {
+      "file": "cpu-check.log",
+      "bytes": 9223,
+      "sha256": "1ed79087532d12e5cd6b8e000b779a207ebf5da6a6fc8f873491051a26200e2a"
+    },
+    {
+      "file": "cpu-check.mjs",
+      "bytes": 5252,
+      "sha256": "dbb1e34bf67f3f49c56caa858574bef58f5d034e167153e7e013a9efba62a42a"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 5822,
+      "sha256": "86d9ab779ad820d00b63678f0229b9d1bf12aa38d146689b95902b1b6e4aa4d8"
+    },
+    {
+      "file": "source-hashes.json",
+      "bytes": 4802,
+      "sha256": "3fc354b284e16bab0cfe93a61a0e9203a41cb05fbaf444f5bedd69a1f9973498"
+    },
+    {
+      "file": "source-snapshots/parent-background-probe-code.mjs",
+      "bytes": 3429,
+      "sha256": "33d0817ba06be4166b6905a298679d25e0c6b843a0775935d48131968b27cdd9"
+    },
+    {
+      "file": "source-snapshots/parent-background-probe-receipt.json",
+      "bytes": 4175,
+      "sha256": "7261c3482b2f6b182652ebbebac146f8164378e3bc0a43df2cc95f76185f5c77"
+    },
+    {
+      "file": "source-snapshots/playcanvas-LICENSE",
+      "bytes": 1064,
+      "sha256": "42fa51ddd556be151a29f381fb97ee975825dcc454e805ea3ea9c079cca04d34"
+    },
+    {
+      "file": "source-snapshots/project-LICENSE",
+      "bytes": 1066,
+      "sha256": "c090cc9b6b3155d41ce3872f9df4bdc1532988241b7f2bca709fa90e115d8219"
+    },
+    {
+      "file": "source-snapshots/splatjs-LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "file": "source-snapshots/src/baked.js",
+      "bytes": 16565,
+      "sha256": "012277a32f5f92432519fe8bff8033bbd9c0944014348f849fdc31ccabbc9851"
+    },
+    {
+      "file": "source-snapshots/src/effects.js",
+      "bytes": 89392,
+      "sha256": "0f262a9447475f89f31089d96f73ceaddd56a3a8a750d10f25a41283ef3c07ac"
+    },
+    {
+      "file": "source-snapshots/src/generators.js",
+      "bytes": 26672,
+      "sha256": "2caaa058fa3d86c09f1dad734c81cdc57454d43d34059f42aa954df738ee10ea"
+    },
+    {
+      "file": "source-snapshots/src/kernels.js",
+      "bytes": 3494,
+      "sha256": "44490c9020a575159741488f888eac1ee9b4cd0ae3409515b34c53bb2daa28d8"
+    },
+    {
+      "file": "source-snapshots/src/kit.js",
+      "bytes": 48544,
+      "sha256": "dd6f68bebf7435386855cc1cd4bf9fb12e4a196a7a7b5bb2b2343831baf42509"
+    },
+    {
+      "file": "source-snapshots/src/packs/video3d.js",
+      "bytes": 26708,
+      "sha256": "cf99da29e0e889e731c4b2f65bb908edb299395cd5d03ac99a83fbdc9dc04bdc"
+    },
+    {
+      "file": "source-snapshots/src/player.js",
+      "bytes": 84896,
+      "sha256": "caeed0f306bd9b05bbc44d44ffcb961f41a62155e1a1fe01c61667c171b32571"
+    },
+    {
+      "file": "source-snapshots/src/stage.js",
+      "bytes": 40993,
+      "sha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c"
+    },
+    {
+      "file": "source-snapshots/src/state.js",
+      "bytes": 12987,
+      "sha256": "2350aa35ec5879aea45e8a36acb8e0e836564316a1b48b114f22c2c0249b6e97"
+    },
+    {
+      "file": "source-snapshots/src/video3d/baked.js",
+      "bytes": 1107,
+      "sha256": "172281c6ae5889dffa7e66260d1f4f23c62cfe15fa2238c858fef1f9b5f7d9e6"
+    },
+    {
+      "file": "source-snapshots/src/video3d/cleanup.js",
+      "bytes": 5688,
+      "sha256": "e6b04516018d85130f96c3a31adc15774a17535a0e16f92fe5ff97430748ddc6"
+    },
+    {
+      "file": "source-snapshots/src/video3d/ply.js",
+      "bytes": 2673,
+      "sha256": "bd08fb3df69cbce7c8b577cc5b8bdf551846b47bd778b7f39bc4fc1e7b7b6fad"
+    },
+    {
+      "file": "source-snapshots/src/video3d/scene.js",
+      "bytes": 12159,
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39"
+    },
+    {
+      "file": "source-snapshots/tools/cdx-v3d-cpu-bake.mjs",
+      "bytes": 12111,
+      "sha256": "4c44bae161c0a45f70a09f8b7dcad811149eaae9a41847be729d58562431c100"
+    },
+    {
+      "file": "source-snapshots/tools/cdx-v3d-cpu-train.cpp",
+      "bytes": 20621,
+      "sha256": "ac00ca7159d7c59975b818676dbd5f1f3326f561a4f749c9d12941d7f7b57f4e"
+    },
+    {
+      "file": "source-snapshots/vendor/playcanvas/playcanvas.min.mjs",
+      "bytes": 2465494,
+      "sha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c"
+    },
+    {
+      "file": "source-snapshots/vendor/splatjs/src/gs/shaders.js",
+      "bytes": 102351,
+      "sha256": "1fb4699e713fa1d1a0bc7cb4623f87285ab0da420141134c7d5c3deb967f7835"
+    },
+    {
+      "file": "source-snapshots/vendor/splatjs/src/gs/trainer.js",
+      "bytes": 119289,
+      "sha256": "be0773b3c563360875ddc2baec740fcabaf2096e85dcc21904464ffe1abd4a9a"
+    },
+    {
+      "file": "source-snapshots/vendor/splatjs/src/io/frames.js",
+      "bytes": 17135,
+      "sha256": "aacba5fec86cb0ce5ec2e8acbbce52e893980e3d7f3542d8bac9f5e5500c814e"
+    },
+    {
+      "file": "source-snapshots/vendor/splatjs/src/io/ply.js",
+      "bytes": 6449,
+      "sha256": "db748b836793bcb27a7f4649c6cb822b273b22107dd691f1238109e6d8dcfd2b"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

@@ -1,0 +1,122 @@
+[
+  {
+    "file": "vendor/splatjs/src/io/frames.js",
+    "publicSha256": "aacba5fec86cb0ce5ec2e8acbbce52e893980e3d7f3542d8bac9f5e5500c814e",
+    "frozenR8Sha256": "aacba5fec86cb0ce5ec2e8acbbce52e893980e3d7f3542d8bac9f5e5500c814e",
+    "identical": true
+  },
+  {
+    "file": "vendor/splatjs/src/io/ply.js",
+    "publicSha256": "db748b836793bcb27a7f4649c6cb822b273b22107dd691f1238109e6d8dcfd2b",
+    "frozenR8Sha256": "db748b836793bcb27a7f4649c6cb822b273b22107dd691f1238109e6d8dcfd2b",
+    "identical": true
+  },
+  {
+    "file": "vendor/splatjs/src/gs/trainer.js",
+    "publicSha256": "6f11213d55191fea9d45443cb2353e231a4b215ab781762cd98a982f9a57c8dd",
+    "frozenR8Sha256": "be0773b3c563360875ddc2baec740fcabaf2096e85dcc21904464ffe1abd4a9a",
+    "identical": false
+  },
+  {
+    "file": "vendor/splatjs/src/gs/shaders.js",
+    "publicSha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75",
+    "frozenR8Sha256": "1fb4699e713fa1d1a0bc7cb4623f87285ab0da420141134c7d5c3deb967f7835",
+    "identical": false
+  },
+  {
+    "file": "src/video3d/ply.js",
+    "publicSha256": "bd08fb3df69cbce7c8b577cc5b8bdf551846b47bd778b7f39bc4fc1e7b7b6fad",
+    "frozenR8Sha256": "bd08fb3df69cbce7c8b577cc5b8bdf551846b47bd778b7f39bc4fc1e7b7b6fad",
+    "identical": true
+  },
+  {
+    "file": "src/video3d/scene.js",
+    "publicSha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39",
+    "frozenR8Sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39",
+    "identical": true
+  },
+  {
+    "file": "src/video3d/cleanup.js",
+    "publicSha256": "e6b04516018d85130f96c3a31adc15774a17535a0e16f92fe5ff97430748ddc6",
+    "frozenR8Sha256": "e6b04516018d85130f96c3a31adc15774a17535a0e16f92fe5ff97430748ddc6",
+    "identical": true
+  },
+  {
+    "file": "src/packs/video3d.js",
+    "publicSha256": "507e9f9e6d2497f9f0d6932e976e8b59fdc85b5883230639dfffcd4d4a542cae",
+    "frozenR8Sha256": "cf99da29e0e889e731c4b2f65bb908edb299395cd5d03ac99a83fbdc9dc04bdc",
+    "identical": false
+  },
+  {
+    "file": "src/kit.js",
+    "publicSha256": "dd6f68bebf7435386855cc1cd4bf9fb12e4a196a7a7b5bb2b2343831baf42509",
+    "frozenR8Sha256": "dd6f68bebf7435386855cc1cd4bf9fb12e4a196a7a7b5bb2b2343831baf42509",
+    "identical": true
+  },
+  {
+    "file": "src/generators.js",
+    "publicSha256": "2caaa058fa3d86c09f1dad734c81cdc57454d43d34059f42aa954df738ee10ea",
+    "frozenR8Sha256": "2caaa058fa3d86c09f1dad734c81cdc57454d43d34059f42aa954df738ee10ea",
+    "identical": true
+  },
+  {
+    "file": "src/player.js",
+    "publicSha256": "f4c5402592a3771552bf094c5c8b74e4feb696e3945927347e66a02bbd48856e",
+    "frozenR8Sha256": "caeed0f306bd9b05bbc44d44ffcb961f41a62155e1a1fe01c61667c171b32571",
+    "identical": false
+  },
+  {
+    "file": "src/stage.js",
+    "publicSha256": "37af8f1915728208d6139e6000ec7b02f63104e3819b3927a47bd245c1e860c3",
+    "frozenR8Sha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+    "identical": false
+  },
+  {
+    "file": "src/effects.js",
+    "publicSha256": "0f262a9447475f89f31089d96f73ceaddd56a3a8a750d10f25a41283ef3c07ac",
+    "frozenR8Sha256": "0f262a9447475f89f31089d96f73ceaddd56a3a8a750d10f25a41283ef3c07ac",
+    "identical": true
+  },
+  {
+    "file": "src/kernels.js",
+    "publicSha256": "44490c9020a575159741488f888eac1ee9b4cd0ae3409515b34c53bb2daa28d8",
+    "frozenR8Sha256": "44490c9020a575159741488f888eac1ee9b4cd0ae3409515b34c53bb2daa28d8",
+    "identical": true
+  },
+  {
+    "file": "src/baked.js",
+    "publicSha256": "012277a32f5f92432519fe8bff8033bbd9c0944014348f849fdc31ccabbc9851",
+    "frozenR8Sha256": "012277a32f5f92432519fe8bff8033bbd9c0944014348f849fdc31ccabbc9851",
+    "identical": true
+  },
+  {
+    "file": "src/video3d/baked.js",
+    "publicSha256": "172281c6ae5889dffa7e66260d1f4f23c62cfe15fa2238c858fef1f9b5f7d9e6",
+    "frozenR8Sha256": "172281c6ae5889dffa7e66260d1f4f23c62cfe15fa2238c858fef1f9b5f7d9e6",
+    "identical": true
+  },
+  {
+    "file": "src/state.js",
+    "publicSha256": "2350aa35ec5879aea45e8a36acb8e0e836564316a1b48b114f22c2c0249b6e97",
+    "frozenR8Sha256": "2350aa35ec5879aea45e8a36acb8e0e836564316a1b48b114f22c2c0249b6e97",
+    "identical": true
+  },
+  {
+    "file": "vendor/playcanvas/playcanvas.min.mjs",
+    "publicSha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c",
+    "frozenR8Sha256": "cfa18c70e2e0fd5362399f37897c531b7796a7f41a652144ab4ceda991b5d46c",
+    "identical": true
+  },
+  {
+    "file": "tools/cdx-v3d-cpu-train.cpp",
+    "publicSha256": "ac00ca7159d7c59975b818676dbd5f1f3326f561a4f749c9d12941d7f7b57f4e",
+    "frozenR8Sha256": null,
+    "identical": false
+  },
+  {
+    "file": "tools/cdx-v3d-cpu-bake.mjs",
+    "publicSha256": "4c44bae161c0a45f70a09f8b7dcad811149eaae9a41847be729d58562431c100",
+    "frozenR8Sha256": null,
+    "identical": false
+  }
+]
