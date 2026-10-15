@@ -552,6 +552,7 @@ async function timers(page, cdp, save = async () => {}) {
   }
   const activeLive = await livePanel(page, cdp);
   const stageRecording = await stageRecorders(page, cdp);
+  const emptyRecording = await emptyRecordings(page, cdp);
   return {
     toys,
     helpers,
@@ -561,7 +562,50 @@ async function timers(page, cdp, save = async () => {}) {
     retries,
     activeLive,
     stageRecording,
+    emptyRecording,
   };
+}
+
+async function emptyRecordings(page, cdp) {
+  await page.evaluate(() => {
+    window.__splashery.app.setAutoplay({ turntable: false });
+    window.__splashery.player.stage.setFixedSize([96, 96]);
+  });
+  const before = await heap(cdp);
+  const takes = await page.evaluate(async () => {
+    const { startRecording } = await import("/src/exports.js");
+    const takes = [];
+    for (let i = 0; i < 20; i++) {
+      // An undrawn canvas has no frame to encode: exercise the real bounded empty-take retry.
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = 64;
+      if (i === 19)
+        Object.defineProperty(document, "hidden", { configurable: true, get: () => true });
+      const first = window.__life.snapshot();
+      const take = startRecording({ canvas });
+      await new Promise((r) => setTimeout(r, 300));
+      take.stop();
+      try {
+        const result = await take.done;
+        takes.push({
+          cycle: i + 1,
+          bytes: result.blob.size,
+          before: first,
+          closed: window.__life.snapshot(),
+        });
+      } catch (error) {
+        takes.push({
+          cycle: i + 1,
+          error: error.message,
+          before: first,
+          closed: window.__life.snapshot(),
+        });
+      }
+      delete document.hidden;
+    }
+    return takes;
+  });
+  return { before, takes, after: await heap(cdp) };
 }
 
 async function stageRecorders(page, cdp) {
@@ -710,6 +754,7 @@ export async function runProbe({
               timers,
               live: livePanel,
               stageRecording: stageRecorders,
+              emptyRecording: emptyRecordings,
             }[name](page, cdp, async (partial) => {
               row[name] = partial;
               if (out) await fs.writeFile(out, JSON.stringify(result, null, 2) + "\n");
