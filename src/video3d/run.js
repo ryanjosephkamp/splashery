@@ -181,7 +181,7 @@ export async function videoTo3D(file, opts = {}) {
     // the parallel bitonic network's barriers; hardware keeps the established parallel path.
     // Smaller software raster tiles are enabled only when the engine can reserve every
     // possible padded contribution. Large views and smaller devices keep tile16.
-    trainer: { shDeg: 0, fitBackground: true, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true, tileGrad: false, tileSize: 8, maxRasterTiles: Math.ceil(maxViewW / 8) * Math.ceil(maxViewH / 8) } : {}) }, // prettier-ignore
+    trainer: { shDeg: 0, fitBackground: true, backgroundFitShrink: true, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true, tileGrad: false, tileSize: 8, maxRasterTiles: Math.ceil(maxViewW / 8) * Math.ceil(maxViewH / 8) } : {}) }, // prettier-ignore
     frames: { trainMaxDim: set.trainSide, featMaxDim: set.featSide },
   });
   const stop = () => {
@@ -445,7 +445,7 @@ export async function videoTo3D(file, opts = {}) {
         seedSceneRadius: seeded.radius,
         trainingBackground: [0, 0, 0],
         ...(backgroundFit.accepted ? { renderBackground: backgroundFit.rgb } : {}),
-        backgroundFit: { method: "constant-training-environment", ...backgroundFit },
+        backgroundFit: { method: "constant-environment-validation-constrained", ...backgroundFit },
         splats: s.trainer.n,
         iters: s.trainer.iter,
         psnr: lastPsnr ? Math.round(lastPsnr.value * 10) / 10 : null,
