@@ -36,6 +36,16 @@ function pool() {
   });
   return workers;
 }
+// Timeouts and replaced requests cancel work instead of restarting it locally.
+export function cancelDetailChecks() {
+  const error = new DOMException("The detail request was canceled.", "AbortError");
+  for (const job of pending.values()) job.reject(error);
+  pending.clear();
+  for (const worker of workers || []) worker.terminate();
+  workers = null;
+  next = 0;
+}
+
 function request(job, transfer = []) {
   return new Promise((resolve, reject) => {
     const active = pool(),
@@ -97,7 +107,8 @@ async function validateFrames(makeFrames, text, read, dual = false) {
         ms: performance.now() - start,
         parts: results.map((r) => r.ms),
       };
-    } catch {
+    } catch (error) {
+      if (error.name === "AbortError") throw error;
       // Rebuild identical pixels: transferred buffers may already be detached.
       return localFrames(makeFrames(), text, read, dual);
     }
@@ -130,7 +141,8 @@ export async function validateDetail(woven, picture, shape, read) {
     if (typeof Worker !== "undefined") {
       try {
         return await request({ frames: [frame], text: woven.code.text });
-      } catch {
+      } catch (error) {
+        if (error.name === "AbortError") throw error;
         /* Run the same prediction locally if a worker cannot run. */
       }
     }
@@ -178,7 +190,8 @@ export async function validateDetail(woven, picture, shape, read) {
       if (typeof Worker !== "undefined") {
         try {
           early = await request({ frames: [preferred], text: woven.code.text, dual: !!texture });
-        } catch {
+        } catch (error) {
+          if (error.name === "AbortError") throw error;
           /* The worker receives a copy, so the same pixels remain for fallback. */
         }
       }
@@ -232,7 +245,8 @@ async function validateStrict(woven, read) {
         frames.map((frame) => request({ frames: [frame], text: woven.code.text })),
       );
       return results.every((r) => r.ok);
-    } catch {
+    } catch (error) {
+      if (error.name === "AbortError") throw error;
       /* Keep every original layout check if workers are unavailable. */
     }
   }
