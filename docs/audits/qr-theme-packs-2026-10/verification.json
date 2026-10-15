@@ -61,7 +61,7 @@
   },
   {
     "check": "Credits-page merge-test follow-up (October 15)",
-    "method": "Merge main d1f300b4, rebuild site, run unchanged tests/spg.spec.mjs and the theme metadata case; real Chromium DOM validation of all 48 rows",
-    "result": "All 8 site-page tests and 1 theme metadata test passed (1.1 minutes). Before the table fix: 7 site-page tests passed and the credits case failed with only Theme missing. All 48 names, source links, makers, and CC0 licenses match; six groups of eight; screenshots at 390\u00d7844 and 1440\u00d7900. Site-build --check is current; license check passes."
+    "method": "Merge main d1f300b4 and 3d43af20, rebuild site, run unchanged tests/spg.spec.mjs and the theme metadata case; real Chromium DOM validation of all 48 rows",
+    "result": "All 8 site-page tests and 1 theme metadata test passed (1.3 minutes after the latest main merge). Before the table fix: 7 site-page tests passed and the credits case failed with only Theme missing. All 48 names, source links, makers, and CC0 licenses match; six groups of eight; screenshots at 390\u00d7844 and 1440\u00d7900. Site-build --check is current; license check passes."
   }
 ]

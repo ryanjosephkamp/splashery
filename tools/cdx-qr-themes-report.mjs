@@ -244,6 +244,8 @@ check all 48 picture names individually. The original credit content from curren
 preserved, and every new link uses a plain address. The site Markdown reader is unchanged.
 The report generator writes the corrected table, and \`node tools/site-build.mjs\` regenerates
 the credits page, the Picture QR toy page's credit, and the service-worker version.
+Main \`3d43af20\` was subsequently merged, bringing Powers of ten labels and checkpoint
+documentation; the site was rebuilt again with both branches' generated pages included.
 
 ## Scope, deviations, and cuts
 
