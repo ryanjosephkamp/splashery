@@ -2,10 +2,11 @@
 import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
+import { fileURLToPath } from "node:url";
 import { ALL_SAMPLES } from "../../src/packs/photo-3d.js";
 import { HARD_CASE_SAMPLES } from "../../src/packs/hard-case-samples.js";
 export const hash = (bytes) => crypto.createHash("sha256").update(bytes).digest("hex");
-export const ROOT = path.resolve(new URL("../../", import.meta.url).pathname);
+export const ROOT = path.resolve(fileURLToPath(new URL("../../", import.meta.url)));
 export function inventory({ input, manifest } = {}) {
   let rows = [];
   if (input) {
