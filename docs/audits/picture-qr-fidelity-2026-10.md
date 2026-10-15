@@ -51,8 +51,14 @@ the feature tree and copied with matching hashes to the clips branch. Their
 [manifest](../../tools/picture-qr-fidelity/results/revision-sources/manifest.json) supplies the new
 URLs. Existing public Git history is retained.
 
-The required QR/help suite and the isolated budget suite are running on the locked source. Their
-fresh results will replace this pending statement before publication.
+The fresh Node 22 run passes **276/276 tests across 31 files, with no skips or failures**. All named
+QR prefixes, kit, smoke, and help pass in the 30-file llvmpipe suite; all seven wall-clock budget
+tests pass alone on SwiftShader. WebGPU cases use real SwiftShader adapters. The
+[check manifest](../../tools/picture-qr-fidelity/results/review-pass/node22-checks.json) links the
+complete compressed Playwright reports, exact commands, runtime, and tested source revision.
+Prettier and the US English check are clean. Four refreshed 390-pixel motion clips compare
+`cb8a8315` and this recipe; both Most detail clips pass the full pre-motion reader gate. Review
+media is published only on the clips branch.
 
 ## Method and retained candidate
 

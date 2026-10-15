@@ -129,7 +129,7 @@ for (const mode of ["main", "detail"]) {
       { timeout: 180000 },
     );
     if (mode === "detail") {
-      fs.mkdirSync("tests/screenshots", { recursive: true });
+      fs.mkdirSync(path.join(out, "screenshots"), { recursive: true });
       for (const size of [
         { width: 390, height: 844 },
         { width: 1440, height: 900 },
@@ -137,7 +137,11 @@ for (const mode of ["main", "detail"]) {
         await page.setViewportSize(size);
         await page.waitForTimeout(500);
         await page.screenshot({
-          path: `tests/screenshots/cdx-qr-fidelity-${picture}-${shape}-${size.width}x${size.height}.png`,
+          path: path.join(
+            out,
+            "screenshots",
+            `cdx-qr-fidelity-${picture}-${shape}-${size.width}x${size.height}.png`,
+          ),
         });
       }
       await page.setViewportSize({ width: 390, height: 844 });
