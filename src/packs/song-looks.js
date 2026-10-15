@@ -18,6 +18,7 @@
 //          of it as it is heard, then recedes
 
 import { mix, shade } from "../kit.js";
+import { inked } from "../font.js";
 import { FIELDS, F, HOP } from "./song-analysis.js";
 import { DB_FLOOR, F_MIN, F_MAX } from "./studio-audio.js";
 
@@ -583,6 +584,30 @@ export function buildLandscapeLong(k, { nf, duration, look, live, W, H, songColo
           const b = sg * (across / 2 - es * (0.75 + r));
           fl.push({ p: alongX ? [a, -0.005, b] : [b, -0.005, a], n: [0, 1, 0], flat: 0.03, size: (es * 0.7) / 0.01, color: "#2a303a", opacity: 1, part: live ? 0 : part, pattern: false }); // prettier-ignore
         }
+  // Lane Polish: a note ruler in front of the plain, like a keyboard's
+  // octaves: a small tick for every C from C1 to C9 that falls in the bands,
+  // and the names of C2, C4 (middle C), C6 and C8, standing at the front
+  // where the land rises.
+  const ruler = [];
+  const PX = 0.016;
+  const z0 = D / 2 + 0.07;
+  const logSpan = Math.log2(F_MAX / F_MIN);
+  for (let oct = 1; oct <= 9; oct++) {
+    const hz = 440 * 2 ** ((12 * (oct + 1) - 69) / 12);
+    const idx = (Math.log2(hz / F_MIN) / logSpan) * nf - 0.5;
+    if (idx < 0 || idx > nf - 1) continue;
+    const cx = x(idx);
+    for (let d = 0; d < 6; d++) ruler.push({ p: [cx, -0.002, D / 2 + 0.012 + d * 0.006], n: [0, 1, 0], flat: 0.03, size: 0.35, color: "#c9ced6", opacity: 0.9 }); // prettier-ignore
+    // (Every C gets a tick; every other one, from C2, its name, so the names
+    // don't run together on a phone.)
+    if (oct % 2) continue;
+    const word = `C${oct}`;
+    const w = word.length * 6 - 1;
+    for (let gy = 0; gy < 7; gy++)
+      for (let gx = 0; gx < w; gx++)
+        if (inked([word], gx + 0.5, gy + 0.5)) ruler.push({ p: [cx + (gx + 0.5 - w / 2) * PX, (6.5 - gy) * PX + 0.004, z0], n: [0, 0, 1], flat: 0.03, size: (PX * 0.9) / 0.01, color: oct === 4 ? "#ffe9a8" : "#c9ced6", opacity: 0.95 }); // prettier-ignore
+  }
+  for (const r of ruler) fl.push(Object.assign(r, { part: live ? 0 : part, pattern: false }));
   k.cloud({ share: fl.length / k.count, pattern: false }, (rand, i) => fl[i] || null);
   // The marker at the front, and (Live) the caps that ride the loudness there.
   const marker = k.part("marker");

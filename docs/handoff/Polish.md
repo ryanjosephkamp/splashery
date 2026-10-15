@@ -6,8 +6,20 @@ You are a Splashery worker session (lane "Polish", prefix `pol`), started by the
 (session_01UFMfX9RBAFMSqMHSrisZuo) for the owner, Ryan. Model: Opus 5.5, high effort. Repo:
 ryanjosephkamp/splashery. Branch: `claude/lane-polish` (and `claude/lane-polish-engine` for any
 small additive "Engine: …" PR). PR title: "Phase Polish: the favorites at their best". Handoff file:
-docs/handoff/Polish.md (this brief under "## Brief", then "## State", "## Notes", "## Known issues",
-"## For the Operator").
+docs/handoff/Polish.md (this brief under "## Brief", then "## State",- October 15, 2026, round 2
+(WORKING): Ryan marked all 13 audit cards good (through the Operator's routine). Engine PR #643
+(`claude/lane-polish-engine`: a morph channel that shrinks as it goes, and a nearer fade in the free
+science view) is open and merged into this branch; it must merge first. Done in the lane so far: the
+Chladni plate (framed on the plate, the mode named beside it, a wider bow hair shown beside the
+tilted stick, a soft sheen), Sound in a box (faint glass walls), the Song landscape (a C ruler in
+front of the plain, a ten-second reading key), Model to splats (the lift on shrinking channels and
+farther out, framed on the model), Powers of ten (the 3 km picture color-matched by
+`tools/pol-aerial-match.mjs`, crisper planet dots and brighter orbits), the microscope (a scale bar
+and the slice's depth), the galaxy (the hot halo as a faint haze the tap peels away), and Point
+clouds (bigger points, framed by the diagonal, a height key, About text). The page toys (Picture
+lab, Your book, Photo album) are with this lane's helper.
+
+"## Notes", "## Known issues", "## For the Operator").
 
 Read CLAUDE.md (above all "Effect quality rules"), docs/PACKS.md ("Effect quality"),
 docs/OPERATING.md ("The Effect review page", "Steps for a lane"), and
