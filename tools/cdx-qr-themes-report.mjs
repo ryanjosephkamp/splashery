@@ -230,6 +230,21 @@ five theme metadata/viewport checks pass; the broad kit guard and shared-builder
 The earlier browser failures' cause remains undetermined; no additional runtime fix was made.
 See [the Operator follow-up measurements](qr-theme-packs-2026-10/operator-recheck.json).
 
+## Credits-page follow-up: October 15, 2026
+
+Merged current main \`d1f300b4\` for the Operator's merge-batch follow-up. The committed
+credits page initially omitted the task-58 section. Rebuilding exposed the remaining failure:
+the first-column header “Theme” was treated as an entry by \`tests/spg.spec.mjs\`, while the
+page's CSS displays that header as “THEME.” The rebuilt-page run had seven passes and this
+one failure, with only “Theme” in its missing-entry list.
+
+The theme-pack table now uses the standard “Name” header and puts each picture's name first,
+followed by its theme, file, maker, and license. This also makes the unchanged credits test
+check all 48 picture names individually. The original credit content from current main is
+preserved, and every new link uses a plain address. The site Markdown reader is unchanged.
+The report generator writes the corrected table, and \`node tools/site-build.mjs\` regenerates
+the credits page, the Picture QR toy page's credit, and the service-worker version.
+
 ## Scope, deviations, and cuts
 
 No renderer, encoder, manual, existing test, Photo to 3D, Moving photo, or Video to 3D source was
@@ -241,7 +256,7 @@ by #581 are changed. PR #566 was already merged when this task started.
 All artwork is code-made, a permitted choice in the brief. Unselected subjects and unused
 palette variants are cut by the score/diversity rule or scan results above. There is no new
 runtime library, thumbnail prefetch, server call, or payload-derived background. The generated
-\`site/\` copy is left to the Operator's normal rebuild after merge.
+\`site/\` copy is rebuilt for the Operator's credits-page follow-up.
 
 ## Task record
 
@@ -287,11 +302,11 @@ picture uses a QR payload or grid. Each choice says code-made; pictures load onl
 The complete records and SHA-256 hashes are under \`pictureQrSamples\` in \`tools/assets.json\`.
 See [the scan report](docs/audits/qr-theme-packs-2026-10.md) for ten-link results and detail scores.
 
-| Theme | Picture | File | Maker | License |
+| Name | Theme | File | Maker | License |
 | --- | --- | --- | --- | --- |
 `;
 for (const s of THEME_PICTURES)
-  credits += `| ${s.group} | ${s.label} | [JPEG](${s.file}) | Made by Ryan with Codex (GPT-6) | CC0 1.0 |\n`;
+  credits += `| ${s.label} | ${s.group} | [JPEG](${s.file}) | Made by Ryan with Codex (GPT-6) | CC0 1.0 |\n`;
 fs.writeFileSync("CREDITS.md", credits);
 console.log(
   `Wrote report, ${kept.length * LINKS.length} scan-table rows, 12 contact sheets, and additive credits.`,
