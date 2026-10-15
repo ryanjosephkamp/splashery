@@ -1,0 +1,41 @@
+{
+  "reason": "GitHub email privacy blocked publication of the original commit graph. Original local branches are preserved. Public branches copy the same final source tree with a public noreply identity. These source-only Git-tree archives contain no commit author metadata. Recorded per-run input hashes remain authoritative; a Git snapshot does not invent unarchived exploratory working-tree revisions.",
+  "originalFinalHead": "20cc9f7ab67d930f2e651b837d93bb2e3f1da254",
+  "snapshots": [
+    {
+      "originalHead": "14bfc8c742d93c6870fe4e45c23d3297e03325f9",
+      "file": "14bfc8c742d9.tar.gz",
+      "uncompressedSha256": "0aa0f192702de34afa3f10b9305a50c6e6790158833083576dfab4c77c8f925d"
+    },
+    {
+      "originalHead": "20cc9f7ab67d930f2e651b837d93bb2e3f1da254",
+      "file": "20cc9f7ab67d.tar.gz",
+      "uncompressedSha256": "3740c1d5c394faf9232fcf67db6cb74b850bbe54eb7483a605f133c556c78e68"
+    },
+    {
+      "originalHead": "58cf41f7db2a255aeec85dfa2d2c968dc58d0d27",
+      "file": "58cf41f7db2a.tar.gz",
+      "uncompressedSha256": "3407ca7d84cd09c4378e48c8f101d4e4d015698a12d059549843d949a3ee2138"
+    },
+    {
+      "originalHead": "6236cc8089059295bea35a6578f1810a439cb369",
+      "file": "6236cc808905.tar.gz",
+      "uncompressedSha256": "711d28af8030ea94d5851ee64700c5670dc85eb4e46a9f1e205ce91464c4e9c8"
+    },
+    {
+      "originalHead": "729569330504a2d49f0764e75ee4a0821fd47e9a",
+      "file": "729569330504.tar.gz",
+      "uncompressedSha256": "345d59b786d3e9626f7aac4076934a3ac2349fb8b4169928b5cc81c13d75cb00"
+    },
+    {
+      "originalHead": "d0ba5599a715b9b0c396b4599a041a1680263b23",
+      "file": "d0ba5599a715.tar.gz",
+      "uncompressedSha256": "f05caf89118ddd716d887db85067525e1a2188e02e3625537fdee253bf3e9e30"
+    },
+    {
+      "originalHead": "ebff95508ede439db62dbcf875e0a33b8c21d48a",
+      "file": "ebff95508ede.tar.gz",
+      "uncompressedSha256": "b36c33b37c1aaf61e5e99099779e886cad16e48814ebf15381e22ea706d06fbc"
+    }
+  ]
+}
