@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
-import { makeWoven, makeWovenAsync } from "../src/qr-craft/picture.js";
+import { makeWoven, makeWovenAsync, renderingKey } from "../src/qr-craft/picture.js";
 import { validateDetail } from "../src/qr-craft/scan-pool.js";
 import { loadBlurKernel } from "../src/qr-craft/fast-blur.js";
 import { loadSecondReader } from "../src/qr-craft/second-reader.js";
@@ -100,4 +100,47 @@ test("A rejected first tile candidate tries the opposite orientation before cycl
   );
   expect(w.detailCheck).toMatchObject({ ok: true, readers: ["jsqr", "zxingcpp"] });
   expect(rotations).toEqual([0, 2]);
+});
+
+test("An initial correction request retains at least forty percent of the correction reserve", () => {
+  const pic = { w: 24, h: 24, data: new Float32Array(24 * 24 * 3).fill(0.5) };
+  const options = {
+    text: "https://example.org/correction-reserve",
+    shape: "square",
+    fidelity: "detail",
+    level: "H",
+    size: "more",
+    center: "small",
+    style: "color",
+    contrast: 0.5,
+    preferContinuous: true,
+    preferCorrection: true,
+    texture: "tiles",
+    channel: "weighted",
+  };
+  expect(makeWoven(pic, { ...options, errorFraction: 0.6 }).rendering.fraction).toBe(0.6);
+  expect(makeWoven(pic, { ...options, errorFraction: 99 }).rendering.fraction).toBe(0.6);
+});
+
+test("An actual rejection reduces the correction budget before another finder-only attempt", () => {
+  const pic = { w: 24, h: 24, data: new Float32Array(24 * 24 * 3).fill(0.5) };
+  const options = {
+    text: "https://example.org/correction-backoff",
+    shape: "square",
+    fidelity: "detail",
+    level: "H",
+    size: "more",
+    center: "small",
+    style: "color",
+    contrast: 0.5,
+    preferContinuous: true,
+    preferCorrection: true,
+    texture: "tiles",
+    channel: "weighted",
+    errorFraction: 0.6,
+  };
+  const rejected = makeWoven(pic, options);
+  expect(
+    makeWoven(pic, { ...options, rejected: [renderingKey(rejected)] }).rendering.fraction,
+  ).toBe(0.4);
 });

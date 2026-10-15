@@ -676,7 +676,33 @@ export function* detailCandidates(pic, o) {
       finderGuard: o.finderGuard,
     };
     if (o.preferContinuous) {
-      const fraction = o.preferCorrection && o.texture === "tiles" && code.ecc === "H" ? 0.4 : 0;
+      let fraction =
+        o.preferCorrection && o.texture === "tiles" && code.ecc === "H"
+          ? Math.max(0, Math.min(0.6, Number.isFinite(o.errorFraction) ? o.errorFraction : 0.4))
+          : 0;
+      // Restore more correction reserve after an actual failure of this family,
+      // before spending another capture on finder-tone changes.
+      if (
+        fraction > 0.4 &&
+        o.rejected?.some((key) => {
+          try {
+            const failed = JSON.parse(key),
+              center = centerById(t.center);
+            return (
+              Array.isArray(failed) &&
+              failed[1] === code.version &&
+              failed[2] === code.ecc &&
+              failed[3] === code.mask &&
+              failed[4] === center.k &&
+              failed[5] === center.c &&
+              failed[6] === margin
+            );
+          } catch {
+            return false;
+          }
+        })
+      )
+        fraction = 0.4;
       const method = fraction ? "correction" : "continuous";
       const base = weaveDetail(fraction ? fitPictureErrors(code, pic, fraction) : code, pic, {
         ...options,
@@ -772,6 +798,29 @@ export function* detailCandidates(pic, o) {
         o.preferContinuous &&
         o.texture === "tiles"
       ) {
+        if (w.rendering.method === "correction" && w.rendering.fraction > 0.4) {
+          const backup = decorate(
+            weaveDetail(fitPictureErrors(code, pic, 0.4), pic, {
+              ...t,
+              margin: initial,
+              finderEdge: 0.24,
+              finderCore: 0.08,
+              channel: o.channel,
+              finderGuard: o.finderGuard,
+              method: "correction",
+            }),
+            false,
+          );
+          backup.rendering.fraction = 0.4;
+          const backupKey = renderingKey(backup);
+          if (!seen.has(backupKey)) {
+            seen.add(backupKey);
+            tested++;
+            const backupCheck = yield backup;
+            backup.detailCheck = { ...backupCheck, tried: 1, candidates: tested };
+            if (backupCheck?.ok) return backup;
+          }
+        }
         const opposite = rotateCode(fitPadding(baseCode, inversePicture(pic, baseCode.size, 2)), 2);
         const alternative = decorate(
           weaveDetail(opposite, pic, {

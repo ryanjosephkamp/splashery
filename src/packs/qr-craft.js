@@ -533,7 +533,10 @@ function detailSettings(rejected = null) {
     textureBlur: study.textureBlur || 0,
     textureGuard: study.textureGuard || 0,
     preferContinuous: study.preferContinuous !== false,
-    preferCorrection: study.preferCorrection === true,
+    preferCorrection: study.preferCorrection !== false,
+    errorFraction: Number.isFinite(study.detailErrorFraction)
+      ? Math.max(0, Math.min(0.6, study.detailErrorFraction))
+      : 0.4,
     // A failed stage view gets the full forecast before another expensive rebuild.
     captureValidation: study.captureValidation !== false && !rejected?.length,
     channel: study.detailChannel || "weighted",

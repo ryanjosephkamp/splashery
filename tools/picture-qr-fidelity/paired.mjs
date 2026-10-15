@@ -203,7 +203,8 @@ for (const mode of ["main", "detail"]) {
       if (settings.up !== null) q.detailUp = settings.up;
       if (settings.blur !== null) q.textureBlur = settings.blur;
       if (settings.fast !== null) q.preferContinuous = settings.fast;
-      q.preferCorrection = settings.errors;
+      if (settings.errors !== null) q.preferCorrection = settings.errors;
+      if (settings.errorFraction !== null) q.detailErrorFraction = settings.errorFraction;
       if (settings.direct !== null) q.captureValidation = settings.direct;
       q.detailChannel = settings.channel;
       if (settings.finderGuard !== null) q.finderGuard = settings.finderGuard;
@@ -226,7 +227,11 @@ for (const mode of ["main", "detail"]) {
       up: arg("up", "default") === "default" ? null : Number(arg("up", "0")),
       blur: arg("texture-blur", "default") === "default" ? null : Number(arg("texture-blur", "0")),
       fast: arg("fast", "default") === "default" ? null : arg("fast", "0") === "1",
-      errors: arg("errors", "0") === "1",
+      errors: arg("errors", "default") === "default" ? null : arg("errors", "0") === "1",
+      errorFraction:
+        arg("error-fraction", "default") === "default"
+          ? null
+          : Number(arg("error-fraction", "0.4")),
       direct: arg("direct", "default") === "default" ? null : arg("direct", "0") === "1",
       channel: arg("channel", ""),
       finderGuard:

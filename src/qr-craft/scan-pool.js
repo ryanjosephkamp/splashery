@@ -158,9 +158,9 @@ export async function validateDetail(woven, picture, shape, read) {
       [
         // Put the smaller images first so their workers can take the last
         // two phone-size checks while the other phone checks are running.
-        ...cameraFrames(predictedAt, { ppm: 4, blur: 0.3, views: [1, 5] }),
-        ...cameraFrames(predictedAt, { ppm: 8, views: [1, 2, 5] }).filter((f) =>
-          f.blur === 0.2 ? f.view !== 5 : f.view !== 2,
+        ...cameraFrames(predictedAt, { ppm: 4, blur: 0.3, views: [1, 2, 5] }),
+        ...cameraFrames(predictedAt, { ppm: 8, views: [1, 2, 5] }).filter(
+          (f) => f.blur !== 0.2 || f.view !== 5,
         ),
       ].map(checkPrediction),
     );

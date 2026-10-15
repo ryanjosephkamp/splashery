@@ -162,7 +162,12 @@ test("Most detail checks its actual phone render before uncovering it", async ({
     const p = window.__splashery.qrCraft.picture();
     return { check: p.check, rendering: p.woven.rendering };
   });
-  expect(rendering).toMatchObject({ texture: "tiles", channel: "weighted", validation: "capture" });
+  expect(rendering).toMatchObject({
+    method: "correction",
+    texture: "tiles",
+    channel: "weighted",
+    validation: "capture",
+  });
   expect(check.ok).toBe(true);
   expect(check.stress?.ok).toBe(true);
   expect(check.stress?.readers).toEqual(["jsqr", "zxingcpp"]);
@@ -551,8 +556,10 @@ test("Captured-detail predictions keep every check and run perspective and light
         "8/0.2/1",
         "8/0.2/2",
         "4/0.3/1",
+        "4/0.3/2",
         "4/0.3/5",
         "8/0.3/1",
+        "8/0.3/2",
         "8/0.3/5",
       ].sort(),
     );
