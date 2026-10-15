@@ -2,6 +2,7 @@
 // also cancels cooperative work. A late resolution or rejection cannot replace the visible result.
 export function runWithDeadline(work, { signal, timeoutMs, message }) {
   const controller = new AbortController();
+  const expiresAt = performance.now() + timeoutMs;
   return new Promise((resolve, reject) => {
     let settled = false;
     const finish = (value, error = false) => {
@@ -15,21 +16,32 @@ export function runWithDeadline(work, { signal, timeoutMs, message }) {
       finish(new DOMException("Stopped", "AbortError"), true);
       controller.abort();
     };
-    const timer = setTimeout(() => {
+    const expire = () => {
       finish(new Error(message), true);
       controller.abort();
-    }, timeoutMs);
+    };
+    const timer = setTimeout(expire, timeoutMs);
     signal?.addEventListener("abort", cancel, { once: true });
     if (signal?.aborted) cancel();
     else
       Promise.resolve()
         .then(() => {
           if (controller.signal.aborted) throw new DOMException("Stopped", "AbortError");
+          if (performance.now() >= expiresAt) {
+            expire();
+            return;
+          }
           return work(controller.signal);
         })
         .then(
-          (value) => finish(value),
-          (error) => finish(error, true),
+          (value) => {
+            if (performance.now() >= expiresAt) expire();
+            else finish(value);
+          },
+          (error) => {
+            if (performance.now() >= expiresAt) expire();
+            else finish(error, true);
+          },
         );
   });
 }

@@ -172,7 +172,7 @@ test("both GPU sorters match unsigned JS ordering, padded tails, and disjoint ca
   });
 });
 
-test("serial sort preserves full raster bytes and three real optimizer steps produce finite PLY", async ({
+test("software sort and direct gradients preserve raster bytes and three real optimizer steps", async ({
   page,
 }, testInfo) => {
   await emptyPage(page);
@@ -250,8 +250,8 @@ test("serial sort preserves full raster bytes and three real optimizer steps pro
         readback.destroy();
       }
     };
-    const setup = (serialSort) => {
-      const trainer = new GSTrainer(device, { ...opts, serialSort, gpu }, gpu.info);
+    const setup = (config) => {
+      const trainer = new GSTrainer(device, { ...opts, ...config, gpu }, gpu.info);
       trainer.setup(
         { data: params.slice(), n, dc: "sigmoid" },
         [camera],
@@ -263,9 +263,13 @@ test("serial sort preserves full raster bytes and three real optimizer steps pro
       return trainer;
     };
     try {
-      for (const serialSort of [false, true]) {
+      for (const config of [
+        { serialSort: false, tileGrad: true },
+        { serialSort: true, tileGrad: true },
+        { serialSort: true, tileGrad: false },
+      ]) {
         device.pushErrorScope("validation");
-        const trainer = setup(serialSort),
+        const trainer = setup(config),
           bytes = {};
         try {
           trainer._writeTrainUniforms(trainer.camUniforms[0]);
@@ -289,7 +293,7 @@ test("serial sort preserves full raster bytes and three real optimizer steps pro
           trainer.dispose();
         }
         // Fresh buffers ensure the gradient-only probe cannot affect training.
-        const trained = setup(serialSort);
+        const trained = setup(config);
         try {
           for (let i = 0; i < 3; i++) {
             trained.stepOnce();
@@ -302,7 +306,7 @@ test("serial sort preserves full raster bytes and three real optimizer steps pro
           bytes.trainedParameters = base64(new Uint8Array(model.data.buffer));
           bytes.ply = base64(ply);
           rows.push({
-            serialSort,
+            ...config,
             bytes,
             iterations: trained.iter,
             count: parsed.count,
@@ -335,7 +339,7 @@ test("serial sort preserves full raster bytes and three real optimizer steps pro
       files.push(
         await saveRaw(
           testInfo,
-          `${row.serialSort ? "serial" : "bitonic"}-${kind}.bin`,
+          `${row.serialSort ? (row.tileGrad ? "serial" : "serial-direct") : "bitonic"}-${kind}.bin`,
           Buffer.from(encoded, "base64"),
         ),
       );
@@ -344,10 +348,11 @@ test("serial sort preserves full raster bytes and three real optimizer steps pro
     expect(row.changed).toBe(true);
     expect(row.finite).toBe(true);
   }
-  for (const kind of Object.keys(result.rows[0].bytes))
-    expect(result.rows[1].bytes[kind], `${kind} must remain byte-identical`).toBe(
-      result.rows[0].bytes[kind],
-    );
+  for (const row of result.rows.slice(1))
+    for (const kind of Object.keys(result.rows[0].bytes))
+      expect(row.bytes[kind], `${kind} must remain byte-identical`).toBe(
+        result.rows[0].bytes[kind],
+      );
   const gradients = Buffer.from(result.rows[0].bytes.gradients, "base64"),
     output = Buffer.from(result.rows[0].bytes.output, "base64"),
     stats = Buffer.from(result.rows[0].bytes.stats, "base64");

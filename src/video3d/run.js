@@ -110,7 +110,7 @@ export async function videoTo3D(file, opts = {}) {
   // opts.settings overrides the tier's (tools/v3d-sample.mjs trains the samples with it).
   const set = { ...tierSettings(tier), ...(opts.settings || {}) };
   const timeLimitMinutes = set.maxMinutes ?? 15;
-  const progress = (e) => opts.onProgress?.(e);
+  const progress = (e) => opts.onProgress?.(e.stage === "train" ? { ...e, timeLimitMinutes } : e);
   const timings = {};
   const t0 = performance.now();
   let lap = t0;
@@ -174,7 +174,7 @@ export async function videoTo3D(file, opts = {}) {
     sfm: { uiYield: true, ...(gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}) }, // prettier-ignore
     // Both sorts use the same unsigned depth/id order. A software adapter avoids emulating
     // the parallel bitonic network's barriers; hardware keeps the established parallel path.
-    trainer: { shDeg: 0, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true } : {}) }, // prettier-ignore
+    trainer: { shDeg: 0, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true, tileGrad: false } : {}) }, // prettier-ignore
     frames: { trainMaxDim: set.trainSide, featMaxDim: set.featSide },
   });
   const stop = () => {
@@ -302,6 +302,7 @@ export async function videoTo3D(file, opts = {}) {
       const abortTraining = () => {
         if (halt || over) return;
         halt = true;
+        progress({ stage: "train", done: s.trainer?.iter ?? 0, total: set.iters, finishing: true });
         runWithDeadline(() => s.finish(), {
           timeoutMs: 60000,
           message:
@@ -415,6 +416,7 @@ export async function videoTo3D(file, opts = {}) {
         timedOut,
         timeLimitMinutes,
         softwareSort: !!s.trainer.serialSort,
+        softwareDirectGradient: software && !s.trainer.tileGrad,
         trainingLoop,
         stoppedEarly: !!opts.signal?.aborted || timedOut,
         start: plan.start,

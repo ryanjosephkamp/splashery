@@ -290,6 +290,11 @@
                   >Photo to 3D round 3 test tools (not shipped)</a
                 >
               </li>
+              <li>
+                <a href="#video-to-3d-real-clip-benchmark-tools-task-88-not-shipped"
+                  >Video to 3D real-clip benchmark tools (task 88, not shipped)</a
+                >
+              </li>
             </ul>
           </li>
         </ul>
@@ -4203,6 +4208,13 @@
             <code>codex/video-3d-r3-clips</code> branch; earlier task 40 media remains on
             <code>codex/video-3d-r2-clips</code>. Their source licenses and hashes are recorded
             beside them; the audit links to that evidence.
+          </p>
+          <p>
+            Video to 3D real-clip work for task 88 was made by Ryan with Codex (GPT-6), under MIT.
+            Its 20-source manifest is <code>tools/v3d-corpus.json</code>; footage, derived models,
+            screenshots, license receipts, and comparison clips live only on
+            <code>codex/video-3d-r4-clips</code>. Each derivative retains its source's license and
+            attribution beside the asset. The task-88 audit records measurements.
           </p>
           <p>
             The camera path and the splats are worked out on the device by
@@ -8912,7 +8924,7 @@ OR OTHER DEALINGS IN THE SOFTWARE.</code></pre>
               <a href="https://github.com/arrival-space/splat.js" target="_blank" rel="noopener"
                 >https://github.com/arrival-space/splat.js</a
               >, commit <code>88efe9aaf32279b0b9bcb781ea0deb4d60c49dff</code> (September 23, 2026;
-              package version 0.1.0). Files in <code>vendor/splatjs/src/</code>: the 20 modules that
+              package version 0.1.0). Files in <code>vendor/splatjs/src/</code>: the modules that
               <code>session.js</code> and its two workers reach (structure from motion, the WebGPU
               trainer, frame decoding and the PLY writer), unchanged except for the local changes
               below; the list and what was left out are in <code>vendor/splatjs/VERSION.md</code>.
@@ -8935,9 +8947,9 @@ OR OTHER DEALINGS IN THE SOFTWARE.</code></pre>
               hardcoded <code>trainer.iter &gt; 1500</code> check with
               <code>trainer.iter &gt; (this.opts.refineStart ?? 1500)</code> so a build tool can
               refine a short run explicitly. Omitted or null values retain the original 1,500-step
-              threshold; <code>src/video3d/run.js</code> does not pass this option, so browser
-              training keeps the upstream schedule. The vendor edit is isolated in commit
-              <code>ffcc71cc</code>. The MIT notice is retained.
+              threshold. Task 88's browser integration now passes a threshold that fits each tier's
+              budget. The original vendor edit is isolated in commit <code>ffcc71cc</code>. The MIT
+              notice is retained.
             </li>
             <li>
               Local change by Codex for task 55 (October 13, 2026):
@@ -8947,6 +8959,17 @@ OR OTHER DEALINGS IN THE SOFTWARE.</code></pre>
               iteration counter continued advancing. The offline tool requests the nine storage
               bindings this pass needs and rejects GPU validation errors. The browser toy still uses
               the original MSE training default. The MIT notice is retained.
+            </li>
+            <li>
+              Local changes by Codex for task 88 (October 15, 2026): a session owns its outstanding
+              worker, frame-decoder, and GPU resources through disposal. An abort-safe worker queue
+              terminates both feature and pair workers on cancellation or error. The optional
+              <code>seedLimit</code> reserves room for appended surface samples without increasing
+              the requested seed count or changing default Gaussian parameters. Trainer buffers are
+              released separately from a host-owned GPU device. The last training batch is limited
+              to the remaining iteration budget. <code>vendor/splatjs/VERSION.md</code> records the
+              patched files. The upstream MIT notice is retained; original task 88 code is offered
+              under this repository's MIT license.
             </li>
           </ul>
           <h3 id="codex-cpu-gaussian-fitter-task-55-build-only">
@@ -9691,6 +9714,56 @@ subject to the following conditions:
               original rendered output is CC0.
             </li>
           </ul>
+          <h3 id="video-to-3d-real-clip-benchmark-tools-task-88-not-shipped">
+            Video to 3D real-clip benchmark tools (task 88, not shipped)
+          </h3>
+          <p>
+            The benchmark reuses the Playwright, PNG.js, Chromium, FFmpeg, and Xvfb test tools
+            listed above. No executable, test font, or browser distribution is copied into the site
+            or review media. The corpus manifest records each source's own license; trained models
+            and review clips retain it.
+          </p>
+          <ul>
+            <li>
+              Node.js 22.15.0 (MIT and the bundled third-party notices),
+              <a
+                href="https://raw.githubusercontent.com/nodejs/node/v22.15.0/LICENSE"
+                target="_blank"
+                rel="noopener"
+                >https://raw.githubusercontent.com/nodejs/node/v22.15.0/LICENSE</a
+              >: a temporary pinned runtime for the existing regression suite. The benchmark itself
+              records its actual Node.js version.
+            </li>
+            <li>
+              Chrome for Testing 141.0.7390.37,
+              <a
+                href="https://developer.chrome.com/blog/chrome-for-testing"
+                target="_blank"
+                rel="noopener"
+                >https://developer.chrome.com/blog/chrome-for-testing</a
+              >: a temporary browser pin for existing regression tests. Its
+              <code>ABOUT</code> notice identifies Google Chrome, Copyright 2025 Google LLC, and the
+              Chromium project and third-party credits. Its distribution's terms are
+              <a href="https://www.google.com/chrome/terms/" target="_blank" rel="noopener"
+                >https://www.google.com/chrome/terms/</a
+              >; it is not redistributed here.
+            </li>
+            <li>
+              Inter 4.1 (SIL Open Font License 1.1),
+              <a
+                href="https://raw.githubusercontent.com/rsms/inter/v4.1/LICENSE.txt"
+                target="_blank"
+                rel="noopener"
+                >https://raw.githubusercontent.com/rsms/inter/v4.1/LICENSE.txt</a
+              >: an environment-only font pin for the existing PDF and code-scanning checks. The
+              font and its notices stay in the test workspace.
+            </li>
+          </ul>
+          <p>
+            The linked notices were opened on October 15, 2026, and retained with the test evidence.
+            The original surface initializer, benchmark, and resource tests are offered under this
+            repository's MIT license. No new third-party browser library was added.
+          </p>
         </div>
       </section>
       <p class="note">

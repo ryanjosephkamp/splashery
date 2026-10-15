@@ -231,6 +231,81 @@ test("a paused same-frame seek recovers a real presentation and stops advancing 
   expect(video.plays).toBe(2);
 });
 
+test("a late recovery play promise cannot pause the next seek's recovery", async () => {
+  const { seekPresented } = await import("../src/video3d/extract.js");
+  class Video extends EventTarget {
+    paused = true;
+    readyState = 2;
+    seeking = false;
+    callbacks = new Map();
+    next = 0;
+    playResolvers = [];
+    pauses = 0;
+    requestVideoFrameCallback(fn) {
+      this.callbacks.set(++this.next, fn);
+      return this.next;
+    }
+    cancelVideoFrameCallback(id) {
+      this.callbacks.delete(id);
+    }
+    set currentTime(value) {
+      this.time = value;
+      this.seeking = true;
+      queueMicrotask(() => {
+        this.dispatchEvent(new Event("seeking"));
+        this.seeking = false;
+        this.dispatchEvent(new Event("seeked"));
+      });
+    }
+    get currentTime() {
+      return this.time;
+    }
+    play() {
+      this.paused = false;
+      return new Promise((resolve) => this.playResolvers.push(resolve));
+    }
+    pause() {
+      this.paused = true;
+      this.pauses++;
+    }
+    present(mediaTime) {
+      const callbacks = [...this.callbacks.values()];
+      this.callbacks.clear();
+      callbacks.forEach((fn) => fn(0, { mediaTime }));
+    }
+  }
+  const video = new Video(),
+    controller = new AbortController();
+  let second;
+  try {
+    const first = seekPresented(video, 1, { timeoutMs: 1500 });
+    await expect.poll(() => video.playResolvers.length).toBe(1);
+    video.present(1.01);
+    expect(await first).toBe(1.01);
+    expect(video.paused).toBe(true);
+    second = seekPresented(video, 2, { signal: controller.signal, timeoutMs: 1500 }).then(
+      (time) => ({ time }),
+      (error) => ({ error }),
+    );
+    await expect.poll(() => video.playResolvers.length).toBe(2);
+    expect(video.paused).toBe(false);
+    const pauses = video.pauses;
+    video.playResolvers[0]();
+    await Promise.resolve();
+    expect(video.paused).toBe(false);
+    expect(video.pauses).toBe(pauses);
+    expect(video.callbacks.size).toBe(1);
+    video.present(2.01);
+    expect(await second).toEqual({ time: 2.01 });
+    expect(video.paused).toBe(true);
+    expect(video.callbacks.size).toBe(0);
+  } finally {
+    controller.abort();
+    await second;
+    for (const resolve of video.playResolvers) resolve();
+  }
+});
+
 test("an identical seek reuses presentation after the browser rounds its position", async () => {
   const { seekPresented } = await import("../src/video3d/extract.js");
   class Video extends EventTarget {

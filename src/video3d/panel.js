@@ -192,13 +192,26 @@ export function progressCard() {
       const count = e.total > 1 ? `${e.done} / ${e.total}` : "";
       rows[current].lastChild.textContent = count;
       if (e.stage === "train") {
+        if (e.finishing) {
+          note.textContent = "Finishing with what has been trained…";
+          return;
+        }
         // Time left, from the pace measured since the first step (r7).
         let left = "";
+        let estimatedMs = Infinity;
         if (e.done > 0 && !pace) pace = { t: now, done: e.done };
         else if (pace && e.done > pace.done && now - pace.t > 5000 && e.total) {
           const perStep = (now - pace.t) / (e.done - pace.done);
-          const mins = ((e.total - e.done) * perStep) / 60000;
+          estimatedMs = (e.total - e.done) * perStep;
+          const mins = estimatedMs / 60000;
           left = mins < 1 ? ", under a minute left" : `, about ${Math.round(mins)} min left`;
+        }
+        const limitMs = Number(e.timeLimitMinutes) * 60000;
+        const remainingMs = Math.max(0, limitMs - (now - started.train));
+        if (limitMs > 0 && remainingMs < estimatedMs) {
+          const time =
+            remainingMs < 60000 ? "under a minute" : `up to ${Math.ceil(remainingMs / 60000)} min`;
+          left = `, ${time} before keeping the result`;
         }
         note.textContent = e.note ? `Training: ${e.note}${left}` : "";
       } else if (e.stage === "path")

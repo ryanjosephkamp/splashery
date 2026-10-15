@@ -148,7 +148,7 @@ const isBrowser = () => typeof window !== "undefined" && typeof document !== "un
 
 // A file operation belongs to the toy/source that opened it. A newer load also invalidates
 // the old operation when someone leaves and returns before the next check tick.
-function watchChoice(ctrl) {
+function watchChoice(ctrl, onLeave) {
   const player = globalThis.window?.__splashery?.player;
   const id = player?.scene?.toy?.id;
   const source = player?.scene?.toy?.options?.source || SAMPLES[0]?.id;
@@ -166,7 +166,10 @@ function watchChoice(ctrl) {
   const timer =
     ctrl &&
     setInterval(() => {
-      if (!matches()) ctrl.abort();
+      if (!matches()) {
+        onLeave?.();
+        ctrl.abort();
+      }
     }, 100);
   return { matches, dispose: () => clearInterval(timer) };
 }
@@ -178,9 +181,9 @@ async function trainVideo(o, key) {
   V3D.trainCtrl = ctrl;
   const file = V3D.file;
   const name = V3D.videoName;
-  const choice = watchChoice(ctrl);
-  const current = () => V3D.trainCtrl === ctrl && file === V3D.file && choice.matches();
   let releaseView = () => {};
+  const choice = watchChoice(ctrl, () => releaseView());
+  const current = () => V3D.trainCtrl === ctrl && file === V3D.file && choice.matches();
   let card;
   try {
     const [{ videoTo3D }, { progressCard }, { detectProfile }, { downloadBlob }] =
@@ -238,7 +241,9 @@ async function trainVideo(o, key) {
     }
     card.planLine(plan);
     card.stopButton(() => ctrl.abort());
-    releaseView = pausePreviousView(window.__splashery?.player, { signal: ctrl.signal });
+    // Finish now still drains training and exports the result. Keep the previous scene's
+    // rendering held until the operation's finally block releases its GPU ownership.
+    releaseView = pausePreviousView(window.__splashery?.player);
     const r = await videoTo3D(file, {
       start: Number(o.start),
       length: Number(o.length),

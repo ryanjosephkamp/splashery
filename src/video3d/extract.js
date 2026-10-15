@@ -103,8 +103,14 @@ export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
 // judging sharpness or making a training photograph, and retain the actual source-frame time.
 // Older browsers without this API return null: a requested time is not presentation evidence.
 const presentedFrames = new WeakMap();
+const presentationOwners = new WeakMap();
 export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = {}) {
   if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
+  // Keep ownership after completion: play() can settle after its presentation callback,
+  // and an older continuation must not pause a later seek on this same local video.
+  const owner = {};
+  presentationOwners.set(video, owner);
+  const ownsVideo = () => presentationOwners.get(video) === owner;
   if (!video.requestVideoFrameCallback) {
     await seek(video, time, { signal, timeoutMs });
     return null;
@@ -135,7 +141,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
       video.removeEventListener("seeking", arm);
       video.removeEventListener("seeked", recover);
       if (callback !== undefined) video.cancelVideoFrameCallback(callback);
-      if (advanced) video.pause();
+      if (advanced && ownsVideo()) video.pause();
       error ? reject(error) : resolve(mediaTime);
     };
     const abort = () => finish(new DOMException("Stopped", "AbortError"));
@@ -157,7 +163,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
       if (done || !video.paused || typeof video.play !== "function") return;
       clearTimeout(recovery);
       recovery = setTimeout(() => {
-        if (done) return;
+        if (done || !ownsVideo()) return;
         advanced = true;
         let playback;
         try {
@@ -167,7 +173,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
         }
         Promise.resolve(playback).then(
           () => {
-            if (done) video.pause();
+            if (done && ownsVideo()) video.pause();
           },
           () => {
             /* The original presentation deadline still supplies retry advice. */
@@ -185,12 +191,13 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
     const [, mediaTime] = await Promise.all([seek(video, time, { signal, timeoutMs }), presented]);
     // Browsers can round the seek position (for example, 2.01 becomes 2.009999).
     // Reuse only that exact confirmed position for an identical request and source.
-    presentedFrames.set(video, {
-      source,
-      requestedTime: time,
-      position: video.currentTime,
-      mediaTime,
-    });
+    if (ownsVideo())
+      presentedFrames.set(video, {
+        source,
+        requestedTime: time,
+        position: video.currentTime,
+        mediaTime,
+      });
     return mediaTime;
   } finally {
     cleanup();
