@@ -29,7 +29,7 @@ const SWATCHES = [
 ];
 const TOOL_HINTS = {
   orbit: "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll.",
-  // UI r2 (the labs switch): moving the toy.
+  // UI r2 (on for everyone): moving the toy.
   orbit2:
     "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll. Shift-drag or two fingers move it.",
   // The Orbit tool on a stretchy toy (a recipe with `grab`).
