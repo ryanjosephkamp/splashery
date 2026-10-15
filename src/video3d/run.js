@@ -156,14 +156,16 @@ export async function videoTo3D(file, opts = {}) {
   // A very slow device may reach the wall-time limit before reaching the first threshold.
   const { refineStart, refineEvery, growUntil } = refinementSchedule(set.iters);
   const seedTarget = set.seed || Math.min(60000, Math.round(set.splats / 3));
+  const maxViewW = Math.max(set.trainSide, opts.preview?.width || 0);
+  const maxViewH = Math.max(set.trainSide, opts.preview?.height || 0);
   const s = splatjs.createSession({
     maxIters: set.iters,
     refineStart,
     refineEvery,
     // The only live view is the small progress preview. Reserving a 2,560 × 1,440 render
     // target on every phone wastes memory; the session also fits every training camera.
-    maxViewW: Math.max(set.trainSide, opts.preview?.width || 0),
-    maxViewH: Math.max(set.trainSide, opts.preview?.height || 0),
+    maxViewW,
+    maxViewH,
     lowMem: gentle || tier === "low" || tier === "mid",
     // Software adapters also need bounded submissions: a desktop-sized adaptive batch can
     // queue minutes of work before the main thread gets a chance to explain a deadline.
@@ -177,7 +179,9 @@ export async function videoTo3D(file, opts = {}) {
     sfm: { uiYield: true, ...(software ? { maxPairsPerChunk: 4 } : {}), ...(gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}) }, // prettier-ignore
     // Both sorts use the same unsigned depth/id order. A software adapter avoids emulating
     // the parallel bitonic network's barriers; hardware keeps the established parallel path.
-    trainer: { shDeg: 0, fitBackground: true, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true, tileGrad: false } : {}) }, // prettier-ignore
+    // Smaller software raster tiles are enabled only when the engine can reserve every
+    // possible padded contribution. Large views and smaller devices keep tile16.
+    trainer: { shDeg: 0, fitBackground: true, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true, tileGrad: false, tileSize: 8, maxRasterTiles: Math.ceil(maxViewW / 8) * Math.ceil(maxViewH / 8) } : {}) }, // prettier-ignore
     frames: { trainMaxDim: set.trainSide, featMaxDim: set.featSide },
   });
   const stop = () => {
@@ -453,6 +457,7 @@ export async function videoTo3D(file, opts = {}) {
         timeLimitMinutes,
         softwareSort: !!s.trainer.serialSort,
         softwareDirectGradient: software && !s.trainer.tileGrad,
+        rasterTileSize: s.trainer.tileSize ?? 16,
         trainingLoop,
         stoppedEarly: !!opts.signal?.aborted || timedOut,
         start: plan.start,
