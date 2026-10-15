@@ -403,3 +403,30 @@ test("An impossible plain Standard fallback clears the old payload and releases 
     }),
   ).toEqual({ woven: null, check: null, hasToy: false, checking: false, cover: 0 });
 });
+
+test("Choosing Color after a plain fallback restores the picture and requested code size", async ({
+  page,
+}) => {
+  await open(page);
+  await page.evaluate(async () => {
+    await window.__splashery.app.setToyOptions({
+      text: "https://example.org/picture-again",
+      picture: "ai-farm",
+      shape: "square",
+      fidelity: "standard",
+      style: "color",
+      size: "fit",
+      level: "H",
+      simpleFallback: true,
+    });
+  });
+  const state = await page.evaluate(() => {
+    const p = window.__splashery.qrCraft.picture();
+    return {
+      version: p.woven.code.version,
+      hasPictureColor: p.woven.cells.some((value) => value > 0.15 && value < 0.9),
+    };
+  });
+  expect(state.version).toBeLessThan(18);
+  expect(state.hasPictureColor).toBe(true);
+});
