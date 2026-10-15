@@ -8,6 +8,7 @@
 // halftone. They are labeled AI-made beside them, in the picker and in the credit.
 // Task 54 adds subject pictures tested with five links; AI-made ones keep the owner's label.
 import { QR_PICTURES } from "./codex-pictures.js";
+import { THEME_PICTURES } from "./theme-pictures.js";
 
 const AI = (id, name, prompt) => ({ id: `ai-${id}`, label: `${name} (AI-made)`, file: `assets/toys/photo-3d/ai/${id}.jpg`, author: "Ryan, the owner of Splashery (made with an AI image tool)", page: "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md", ai: true, prompt }); // prettier-ignore
 
@@ -24,5 +25,6 @@ export const SAMPLES = [
     ...s,
     label: s.ai ? `${s.label} (AI-made)` : `${s.label} (CC0, Ryan with Codex)`,
   })),
+  ...THEME_PICTURES.map((s) => ({ ...s, label: `${s.label} (code-made, CC0)` })),
 ];
 export const sampleById = (id) => SAMPLES.find((s) => s.id === id) || null;
