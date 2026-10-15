@@ -10,12 +10,14 @@ Codex (GPT-6) built this follow-up to the
 [Operator's request](https://github.com/ryanjosephkamp/splashery/pull/650#issuecomment-6194345842).
 Rule check: none.
 
-## Fresh route
+## Earlier recipient route
 
 Recorded October 15, 2026 at 10:56:35 AM EDT, source build
 `7805082258dafdf0acd3e84b5f5c0170e2ce71af`, Chromium 151.0.7922.173. This is **one run**, not
-three-run evidence: 56 passed, 0 failed, 2 inconclusive, 4 blocked. The source includes main through
-`cb8a8315`. All 62 records and their original image evidence are pinned to
+three-run evidence: 56 passed, 0 failed, 2 inconclusive, 4 blocked at capture time. The two
+share-export checks then used geometry assistance; they are superseded by the unassisted 50-case
+study below. The accepted recipient checks and notice code are unchanged. The source includes main
+through `cb8a8315`. All 62 records and their original image evidence are pinned to
 [evidence-only commit 4ef87103](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/README.md)
 on `codex/advisor-route-evidence-clips`; **never merge that branch**.
 [Full step report](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/route-report.md)
@@ -61,57 +63,63 @@ Native screen-reader speech was not tested; the region, live status, alert, and 
 checked through Chromium's accessibility tree. The Browser plugin was unavailable, so the
 repository's Playwright workflow was used.
 
-## Share PNG decoding
+## Share PNG exports
 
-The local reproduction uses a real, already-complete share export. Eight captured URLs differ only
-in their scene creation timestamps; five native images and one unchanged 390-pixel copy fail ZXing's
-generic location step while jsQR reads every payload exactly. The retained
-[native PNG](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/qr-case-0-native.png),
-[390-pixel PNG](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/qr-case-0-phone.png),
-and
-[payload/results](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/qr-case-0.json)
-reproduce the same exact assertion used by the original test.
-[Twenty reads of identical pixels](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/qr-same-bytes-idle-loaded.json),
-ten idle and ten with four CPU workers, fail ZXing location identically.
-[Timestamp comparison](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/qr-timestamp-only.json).
-The original Actions PNGs were unavailable here, so this is a deterministic local reproduction
-rather than a byte-for-byte diagnosis of those artifacts.
+The original assertion is restored: both readers must independently find and decode the exported
+code at exactly 390 pixels, without geometry hints. The route also requires an unassisted
+native-size read. Geometry-assisted sampling remains a separate diagnostic and cannot make either
+check pass.
 
-The finder mistakes data for a corner and samples a 73-module phone grid instead of 105. The export
-is drawn synchronously from an immutable matrix, so another wait cannot fix those saved pixels. The
-helper now uses the share sheet's declared version for the bounded export's sampling grid. It
-validates square dimensions, legal module count, the quiet border, finder shapes, and timing lines,
-then lets the unchanged vendored ZXing decoder read and error-correct the actual sampled pixels.
-jsQR still reads the original full raster. No expected payload or regenerated matrix supplies the
-decoder's data. Original PNG bytes, the exact 390-pixel resize, both readers' exact equality checks,
-and the general screenshot finder remain unchanged. Wrong geometry, blank pixels, a dirty border,
-and data corruption are rejected by the new regressions.
+Save PNG now tests the encoder's preferred mask and then the remaining masks, downloading the first
+candidate that both vendored readers independently locate and decode exactly at 390 pixels and
+native size (1130 pixels in this study). The payload, version, correction level, quiet border, and
+dimensions remain unchanged. The export checker and ZXing load only when saving; jsQR already checks
+the dialog's displayed code. A failed scan check offers Save JSON, and a reader-load failure offers
+JSON or retry.
 
-Generic finder outcomes remain in each share export record as `generalDecoded`, beside strict
-`decoded` and explicit `decodeOptions`. They are compatibility diagnostics; this change makes no
-general phone-camera detection claim.
+[Complete paired study and all 200 PNGs](https://github.com/ryanjosephkamp/splashery/blob/6a8981fc245c3ee3b000ab30792c6629f37897ad/docs/audits/advisor-route-followup-2026-10/share-mask-study/README.md),
+corrected source `f567e0be91dff6a11397cf62a9539a6f46858a99`. The same 50 real app-export scene
+inputs are replayed before and after; they differ only in their creation timestamps.
 
-| Fresh share check           | Strict result | Generic jsQR | Generic ZXing    | Evidence                                                                                                                                                              |
-| --------------------------- | ------------- | ------------ | ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Export and decode PNG       | passed        | exact        | exact            | [Record](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/run-1-share-qr-02.json) |
-| Native-size exported decode | passed        | exact        | null / different | [Record](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/run-1-share-qr-03.json) |
+| Reader | 390 pixels before | 390 pixels after | 1130 pixels before | 1130 pixels after |
+| ------ | ----------------- | ---------------- | ------------------ | ----------------- |
+| jsQR   | 50/50             | 50/50            | 50/50              | 50/50             |
+| ZXing  | 45/50             | 50/50            | 33/50              | 50/50             |
+
+Independent validation re-read all 200 images with both unassisted vendored readers: all 400 results
+match the browser records. Eighteen exports needed a different mask, and one needed all eight
+candidates. The study retains exact URLs, decoded strings, hashes, dimensions, and attempted masks.
+The baseline used the original exporter's cached modules loaded before editing; its dirty-checkout
+and source provenance are documented in the study. Every native baseline raster also matches the
+original automatic mask pixel for pixel.
+
+The earlier
+[saved counterexample](https://github.com/ryanjosephkamp/splashery/blob/4ef871030269556932115961bf44ad7433b09c57/docs/audits/advisor-route-followup-2026-10/qr-case-0-phone.png)
+still fails ZXing's general finder unchanged. It now passes through the real corrected Save PNG path
+with both independent readers. The initial geometry-assisted change reduced the assertion's
+coverage; it was not an export fix. That limitation is corrected here. No wait was increased.
+
+These rates describe one version-22 scene with 50 timestamps, not every possible link or a physical
+phone scan. The dialog's on-screen code retains the encoder's original choice before saving.
+Hardware export latency, on-screen camera detection, and real-device performance remain unmeasured.
+The loopback links cannot be reached by another phone.
 
 ## Verification and limits
 
-- [Combined advisor specs](regression.txt): **21 passed** with two workers (9 original checks, 10
-  recipient checks, and 2 QR regressions). The log names the exact spec blobs in the captured source
-  tree.
-- Actual share export and the counterexample: **6/6 passed**, repeated three times with two browser
-  workers; the separate log is retained with the regression output.
-- Review found one hidden picker-error issue; it was fixed and covered by a failing-then-passing
-  regression. No actionable review findings remain.
-- PNGs are at most 950,101 bytes each; the manifest records every published artifact's size and
-  SHA-256 hash.
-- **Full-suite Actions proof is pending the Operator's `full-suite` label.** No full-suite label or
-  workflow dispatch was added here.
+- [Current regression log](qr-mask-regression.txt): **16 targeted tests passed** with two workers,
+  followed by **10 notice tests passed** with one worker. The targeted run covers the original
+  unassisted export assertions, saved finder counterexample, reader-load failure and retry, separate
+  geometry diagnostics, existing camera-view Share test, and oversized-scene fallback.
+- The earlier [21-test log](regression.txt) remains historical evidence from the first
+  implementation; its geometry-assisted Share assertion is superseded.
+- All study PNGs and dialog screenshots stay on the evidence-only clips branch. Its manifest records
+  artifact sizes and SHA-256 hashes.
+- Independent code review found no actionable issues. The original notice files and four
+  owner-review images are unchanged in this revision. The owner still needs to review those images.
+- **Full-suite Actions proof is pending the Operator's full-suite label.** No label or workflow
+  dispatch was added here.
 - Second-phone scans stay blocked, needs the owner. Hardware smoothness, real-device load times, GPU
-  presentation, and hardware WebGPU are unmeasured by this software-rendered run.
+  presentation, and hardware WebGPU remain unmeasured.
 
-To rerun: start `npm run serve`, then
-`SPLASHERY_CHROMIUM=/path/to/chromium ADV_RUNS=1 ADV_OUT=.cache/advisor-route-followup node tools/adv-route.mjs`.
-The long route remains outside the default regression suite.
+To rerun the paired study, follow its linked instructions and use `tools/adv-share-masks.mjs`. The
+long route remains outside the default regression suite.

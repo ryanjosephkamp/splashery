@@ -1392,7 +1392,7 @@ The ${findingGroups.size} distinct observations below group repeated runs by cau
 | --- | --- | --- | --- | --- |
 ${findings || "| All attempted checks | passed | None | — | See results below |"}
 
-A local-file link carries settings and file details, never the file bytes. Recipient records and screenshots show exactly what a fresh recipient sees and whether the page clearly asks them to reopen the file. A failure here belongs to the toy's owning task; this PR fixes no toys.
+A local-file link carries settings and file details, never the file bytes. Recipient records and screenshots show exactly what a fresh recipient sees and whether the page clearly asks them to reopen the file. Failed recipient checks name the toy's owning task.
 
 ## Run it again
 
