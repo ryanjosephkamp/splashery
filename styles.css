@@ -2991,6 +2991,8 @@ body.focus #pop-toggle {
   .toy-slider {
     left: 50%;
     bottom: calc(var(--dock-h, 200px) + 54px);
+    /* (Lane Polish: narrow enough to stay clear of the ▶ Play button.) */
+    width: min(320px, calc(100vw - 120px));
   }
 
   body.sheet-open .toy-slider,
