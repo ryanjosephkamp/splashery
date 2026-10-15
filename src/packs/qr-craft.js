@@ -1024,7 +1024,7 @@ function canSavePicture() {
 async function savePNG(size = 1600) {
   const a = app();
   const w = PIC.woven;
-  if (!a || !w || !canSavePicture()) return null;
+  if (!a || !w || (w.fidelity === "detail" && !canSavePicture())) return null;
   const generation = a.player.loadToken;
   if (!PIC.noAuto) {
     const checked =
@@ -1043,8 +1043,7 @@ async function savePNG(size = 1600) {
       size,
       0,
     );
-    if (w.fidelity === "detail" && (PIC.woven !== w || a.player.loadToken !== generation))
-      return null;
+    if (PIC.woven !== w || a.player.loadToken !== generation) return null;
     const blob = await canvasToBlob(canvas);
     downloadBlob(blob, timestampName("png", "splashery-picture-qr"));
     a.ui?.toast?.("Picture saved, with its quiet zone.");
