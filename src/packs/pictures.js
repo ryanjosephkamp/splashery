@@ -698,7 +698,7 @@ function bookStep(st) {
 // bk5pop0, and so on), so it moves as one piece. The slider over the stage
 // sets the depth of the figure raised last (from its own depth up to five
 // times more); a depth other than its own is kept in the scene (toy.figures).
-const BK5 = { key: "", links: new Map(), figs: new Map(), popOn: false, boxOn: false, drawing: null, lastK: -1, frame: 0 }; // prettier-ignore
+const BK5 = { key: "", links: new Map(), figs: new Map(), popOn: false, boxOn: false, drawing: null, lastK: -1, frame: 0, drawn: true }; // prettier-ignore
 // Three at once keeps a phone smooth: each risen figure is a sheet of its own
 // (a photo's up to a few hundred thousand splats on a phone's budget).
 const POP_CAP = 3;
@@ -1358,7 +1358,10 @@ function bk5Drive(c, out, pics, N, time, info = null, moving = false) {
         if (map.has(s)) continue;
         map.set(s, null);
         const key = BK5.key;
-        pics[what](s).then((list) => BK5.key === key && map.set(s, list || []), () => map.delete(s)); // prettier-ignore
+        // (Lane Polish: Your book, the album and the lab also raise figures
+        // drawn as paths, a chart or a diagram; the Storybook keeps its
+        // pictures alone, BK5.drawn.)
+        pics[what](s, what === "figures" && BK5.drawn ? { drawn: true } : undefined).then((list) => BK5.key === key && map.set(s, list || []), () => map.delete(s)); // prettier-ignore
       }
     }
   // Pop out switched off: the figures it raised lie back (drawn boxes stay).
@@ -2008,6 +2011,9 @@ const BOOK_RECIPE = {
     bk5Drive(c, out, pics, N, time, info, !!BOOK.anim); // lane Books r5: links and the pop-out
   },
   build(k, o) {
+    // Lane Polish: drawn figures rise too, except in a recipe that says not
+    // (the Storybook, whose own lane chose its figures).
+    BK5.drawn = this?.drawnFigures !== false;
     const st = BOOK_STYLES[o.style] || BOOK_STYLES.hardcover;
     const H = PAGE_H;
     // The page follows the PDF's own shape (k.media, once it is open).
@@ -2555,6 +2561,7 @@ const STORY_RECIPE = {
   tiltLock: false, // (the Storybook's own default: it opens with the tilt free, UI r5)
   pictures: { ...BOOK_RECIPE.pictures, sample: () => "assets/toys/storybook/storybook.pdf" },
   input: undefined,
+  drawnFigures: false, // lane Polish: Pop out raises its pictures alone, as before
 };
 
 const ALBUM_RECIPE = {
@@ -2615,6 +2622,7 @@ const ALBUM_RECIPE = {
   },
   drive: (t, c, out, info) => BOOK_RECIPE.drive(t, c, out, info),
   build(k, o) {
+    BK5.drawn = true; // lane Polish (see the book's build)
     const look = ALBUM_STYLES[o.cover] || ALBUM_STYLES.leather;
     const st = ALBUM_BOOK;
     const W = ALBUM_W;
@@ -3185,6 +3193,7 @@ export const RECIPES = {
       const [cw, ch] = a > 0 ? (a > 1 ? [2.08, 2 / a + 0.08] : [2 * a + 0.08, 2.08]) : [2.08, 2.08];
       rect(k, { share: 1, at: [-cw / 2, -ch / 2, -0.03], u: [cw, 0, 0], v: [0, ch, 0], n: [0, 0, 1], color: () => "#c3c7ce", part: lp }); // prettier-ignore
       PG.host = "lab";
+      BK5.drawn = true; // lane Polish (see the book's build)
       bk5Build(k, 0.04, LAB_DIMS); // lane Pages r6: the pop sheets and a drawn box's corners
     },
   },

@@ -3,12 +3,11 @@
 // lab opens close on a phone and slides its pages, raised photos open at a
 // visible depth, a book holds the whole book in view while its cover or a
 // page turns, links follow only a tap right on them, a closed book's cover
-// takes part in Pop out, the album's captions read as words, and the depth
-// slider stays clear of the Play button.
+// takes part in Pop out, and the album's captions read as words. (The
+// engine's halves, drawn figures and the depth slider, are tested in
+// tests/pol-engine.spec.mjs.)
 
 import { test, expect } from "@playwright/test";
-
-const APP = "/?renderer=webgl2&adapt=off&profile=mid&labs=1";
 
 // ---- In Node: the recipes with stand-in pictures (as tests/bk5.spec.mjs) -------------
 
@@ -274,58 +273,12 @@ test.describe("Your book and the album (no browser)", () => {
 
 // ---- In the app ----------------------------------------------------------------------
 
-test.describe("in the app", () => {
-  test.setTimeout(240_000);
-
-  test("Pop out finds the article's drawn chart, and no tables or panels in the manual", async ({
-    page,
-  }) => {
-    await page.goto("/tests/");
-    const r = await page.evaluate(async () => {
-      const lib = await import("/vendor/pdfjs/pdf.min.mjs");
-      lib.GlobalWorkerOptions.workerSrc = "/vendor/pdfjs/pdf.worker.min.mjs";
-      const { pdfFigures } = await import("/src/media.js");
-      const { MANUAL_PDF } = await import("/manual/pdf-edition.js");
-      const read = async (url, pages) => {
-        const data = new Uint8Array(await (await fetch(url)).arrayBuffer());
-        const doc = await lib.getDocument({ data, isEvalSupported: false }).promise;
-        const out = [];
-        for (const i of pages) out.push((await pdfFigures(lib.OPS, await doc.getPage(i + 1))).map((f) => f.box)); // prettier-ignore
-        return out;
-      };
-      return {
-        article: await read("/assets/toys/picture-lab/article.pdf", [0, 1]),
-        // Pages 19 to 21: tables and panels; 18: a drawn diagram; 4: three pictures on a dark panel.
-        manual: await read(`/manual/${MANUAL_PDF}`, [4, 18, 19, 20, 21]),
-      };
-    });
-    expect(r.article[0].length).toBe(1);
-    const [x0, y0, x1, y1] = r.article[0][0];
-    expect(x0).toBeGreaterThan(0.45);
-    expect(x1).toBeLessThan(0.95);
-    expect(y0).toBeGreaterThan(0.3);
-    expect(y1).toBeLessThan(0.6);
-    expect(r.article[1]).toEqual([]);
-    expect(r.manual[0].length).toBe(3); // the pictures stay three figures
-    expect(r.manual[1].length).toBe(1);
-    expect(r.manual.slice(2)).toEqual([[], [], []]);
-  });
-
-  test("on a phone the depth slider stays clear of the Play button", async ({ page }) => {
-    await page.setViewportSize({ width: 390, height: 844 });
-    await page.goto(APP);
-    await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-    const r = await page.evaluate(() => {
-      const s = document.getElementById("toy-slider");
-      s.hidden = false;
-      const bar = document.getElementById("hands-bar");
-      bar.hidden = false;
-      const a = s.getBoundingClientRect();
-      const p = document.getElementById("hands-play").getBoundingClientRect();
-      return { right: a.right, left: a.left, playLeft: p.left, playTop: p.top, bottom: a.bottom, top: a.top, pb: p.bottom }; // prettier-ignore
-    });
-    const overlapY = r.top < r.pb && r.bottom > r.playTop;
-    if (overlapY) expect(r.right).toBeLessThan(r.playLeft);
-    expect(r.left).toBeGreaterThanOrEqual(0);
+test.describe("Pop out's drawn figures", () => {
+  test("Your book, the album and the lab ask for drawn figures; the Storybook doesn't", async () => {
+    const { RECIPES } = await import("../src/packs/pictures.js");
+    expect(RECIPES.book.drawnFigures).toBe(false);
+    expect(RECIPES["your-book"].drawnFigures).not.toBe(false);
+    expect(RECIPES["photo-album"].drawnFigures).not.toBe(false);
+    expect(RECIPES["picture-lab"].drawnFigures).not.toBe(false);
   });
 });
