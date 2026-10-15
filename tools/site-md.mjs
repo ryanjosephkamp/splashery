@@ -59,11 +59,11 @@ export function mdToHtml(text, opts = {}) {
       return `\u0000${codes.length - 1}\u0000`;
     });
     s = esc(s.replace(/\\\|/g, "|"));
-    // [text](url), one level of parentheses allowed in the url
+    // [text](<url>) or [text](url), with one balanced level in a bare URL.
     s = s.replace(
-      /\[([^\]]+)\]\(((?:[^()\s]|\([^()\s]*\))+)(?:\s+&quot;[^&]*&quot;)?\)/g,
-      (_, t, u) => {
-        const url = u.replace(/&amp;/g, "&");
+      /\[([^\]]+)\]\((?:&lt;([^\s]+?)&gt;|((?:[^()\s]|\([^()\s]*\))+))(?:\s+&quot;[^&]*&quot;)?\)/g,
+      (_, t, angled, bare) => {
+        const url = (angled ?? bare).replace(/&amp;/g, "&");
         return `<a href="${esc(repoLink(url))}">${t}</a>`;
       },
     );

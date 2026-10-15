@@ -12,30 +12,75 @@ export function photoPreview(photo, canceled = () => {}, ready = null) {
   picture.alt = "Photo preview";
   picture.setAttribute("aria-label", "Photo preview");
   picture.style.cssText =
-    "position:absolute;inset:0;width:100%;height:100%;object-fit:contain;padding:12%;box-sizing:border-box;pointer-events:none;background:var(--stage-bg,#fff);z-index:1";
+    "position:fixed;object-fit:contain;padding:12%;box-sizing:border-box;pointer-events:none;z-index:1";
   let finished = false,
     removed = false,
-    url;
+    url,
+    resume,
+    rendered;
+  const stageRenderer = window.__splashery?.player?.stage;
+  const background = () => {
+    const c = stageRenderer?.cameraEntity?.camera?.clearColor;
+    if (c) picture.style.backgroundColor = `rgba(${c.r * 255},${c.g * 255},${c.b * 255},${c.a})`;
+  };
+  const align = () => {
+    const r = stage.getBoundingClientRect();
+    Object.assign(picture.style, {
+      left: `${r.left}px`,
+      top: `${r.top}px`,
+      width: `${r.width}px`,
+      height: `${r.height}px`,
+    });
+  };
+  const layout = new ResizeObserver(align);
+  layout.observe(stage);
   Promise.resolve()
     .then(() => photo.preview || previewBytes(photo))
     .then((blob) => {
       if (removed) return;
       url = URL.createObjectURL(blob);
       picture.src = url;
-      stage.append(picture);
+      // #stage is a canvas: its descendants are hidden fallback content.
+      // A sibling follows its actual viewport rectangle, including the phone dock.
+      background();
+      stage.after(picture);
+      align();
+      resume = stageRenderer?.holdRendering?.();
     })
     .catch(() => {
       remove();
     });
   const watch = setInterval(() => {
+    // Looks can change while the worker is building behind this cover.
+    background();
     if (window.__splashery?.player?.scene?.toy?.id !== "photo-3d") {
       remove();
       canceled();
-    } else if (finished && ready?.()) remove();
+    } else if (finished && ready?.() && !rendered) {
+      // Draw the new relief before lifting its cover. The picture and camera
+      // stay at their original resolution and pose throughout the handoff.
+      resume?.();
+      resume = null;
+      if (stageRenderer) {
+        let frames = 0;
+        rendered = () => {
+          frames++;
+          // Sharp is complete on its first draw. Splats need the worker's
+          // asynchronous sort handoff before their cover can be lifted.
+          if (window.__psv?.state().on || frames >= 3) remove();
+        };
+        stageRenderer.app.on("postrender", rendered);
+        stageRenderer.requestRender();
+      } else remove();
+    }
   }, 50);
   const remove = () => {
     removed = true;
     clearInterval(watch);
+    layout.disconnect();
+    if (rendered) stageRenderer?.app.off("postrender", rendered);
+    resume?.();
+    resume = null;
     picture.remove();
     if (url) URL.revokeObjectURL(url);
     if (current === remove) current = null;

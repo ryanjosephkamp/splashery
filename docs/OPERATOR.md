@@ -22,6 +22,13 @@ Operator does the handover:
 - moves the routines;
 - stands by for a day without acting unless asked.
 
+Session depth (learned October 15, 2026): each session started by another is one level deeper, and
+`get_session` shows it as `lineage` (`depth` and `limit`, 8 today). A session at the limit can't
+start sessions, so an Operator there couldn't start lanes. When the outgoing Operator's depth is one
+short of the limit or more, it doesn't start its successor: the owner starts the new Operator
+himself, as a new session on the Splashery repo in the Claude app, with the first prompt from the
+handover skill. That resets the depth.
+
 The steps, the new Operator's first prompt and the readback are in
 `.claude/skills/operator-handover/SKILL.md`. The daily digest reports the Operator's age, context
 size and compactions every morning (the owner's request of October 10, 2026), so a handover that's
@@ -80,7 +87,8 @@ Operator reads it.
 
 Who may merge what (CLAUDE.md, "Pull requests"):
 
-- **Labs, additive engine and Ops PRs:** once a full test run passes.
+- **Labs, additive engine and Ops PRs:** once a full test run passes (the CI comment's ✅ on the
+  merge PR is one; docs/CI.md).
 - **Changes to toys the public sees:** a full test run and the owner's "good" marks.
 - Workers never merge.
 
@@ -98,9 +106,14 @@ The steps, in a scratch worktree:
 
    Commit the rebuild as its own "Ops: rebuild site/ …" commit.
 
-4. Run the PR's own specs plus the shared ones it could touch (help, hta, unit, kit, smoke, taps
-   with `-g <pack>`, site, tpg, spg) on this exact tree. The Integrator's full run covers the rest.
-   When a lane's head moved after the Integrator run, rerun only what changed.
+4. Push the branch and open the PR as a draft (step 5), then wait for the CI comment (docs/CI.md):
+   GitHub Actions runs the checks and the full suite on the merge PR in about 20 to 30 minutes and
+   posts one comment, "Test suite on GitHub Actions", updated on each push. Read it instead of
+   running the suite here. Merge on ✅. On ❌, compare each failure with "Known flaky tests" below
+   and with its rerun alone; a new failure that also failed alone is real and goes back to its lane.
+   **Fallback** (no comment after an hour, or Actions is down): run the PR's own specs plus the
+   shared ones it could touch (help, hta, unit, kit, smoke, taps with `-g <pack>`, site, tpg, spg)
+   on this exact tree, as before.
 5. Push the branch and open the PR as a draft:
    `gh api repos/ryanjosephkamp/splashery/pulls -X POST -f title=… -f head=… -f base=main -F draft=true -F body=@file`.
    The body has the five sections: Summary, Verification, Deviations, Known issues, What was cut.

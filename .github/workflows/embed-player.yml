@@ -1,0 +1,95 @@
+# Keep the live embed's teardown check visible on its own as well as in the full suite.
+name: Embed player
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/embed-player.yml"
+      - "src/stage.js"
+      - "src/player.js"
+      - "src/viewer.js"
+      - "src/embed.js"
+      - "site/assets/hubs.js"
+      - "site/assets/play.js"
+      - "tests/spg.spec.mjs"
+      - "playwright.config.mjs"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: embed-player-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  embed:
+    name: spg alone
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      SPLASHERY_GL: llvmpipe
+      DISPLAY: ":99"
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Some tests read older commits (git show).
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Cache Playwright's Chromium
+        uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - name: Install Chromium, Xvfb, Mesa, ffmpeg and the fonts
+        run: |
+          sudo apt-get update -q
+          # The fonts the cloud container has: tools/manual-pdf.mjs (man5) stops on any other set.
+          sudo apt-get install -y -q xvfb libgl1-mesa-dri ffmpeg fonts-dejavu-core fonts-inter \
+            fonts-liberation fonts-liberation2 fonts-noto-color-emoji
+          npx playwright install --with-deps chromium
+      - name: Prefer Inter, as the cloud container does
+        # Its /etc/fonts/conf.d/56-prefer-inter.conf (from no package): ui-sans-serif, sans-serif and
+        # the system UI names draw in Inter, which the manual's PDF embeds (man5:201).
+        run: |
+          sudo tee /etc/fonts/conf.d/56-prefer-inter.conf > /dev/null <<'EOF'
+          <?xml version="1.0"?>
+          <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+          <fontconfig>
+            <alias><family>system-ui</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>ui-sans-serif</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>-apple-system</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>BlinkMacSystemFont</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>SF Pro Text</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>SF Pro Display</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>Segoe UI</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>Helvetica Neue</family><prefer><family>Inter</family></prefer></alias>
+            <alias><family>sans-serif</family><prefer><family>Inter</family></prefer></alias>
+          </fontconfig>
+          EOF
+          fc-cache -f > /dev/null
+          fc-match ui-sans-serif
+      - name: Let Chromium's sandbox start
+        # Ubuntu 24.04's AppArmor blocks the user namespaces Chromium's sandbox needs; man5's PDF
+        # print (tools/manual-pdf.mjs) launches with the sandbox on.
+        run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
+      - name: Start the virtual display
+        run: |
+          Xvfb :99 -screen 0 1920x1080x24 -nolisten tcp &
+          sleep 1
+      - name: Run spg alone
+        run: node tools/suite.mjs --fresh --jobs=1 --files=spg --out="$RUNNER_TEMP/embed-player"
+      - name: Upload the original report and traces
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: embed-player-a${{ github.run_attempt }}
+          path: ${{ runner.temp }}/embed-player
+          retention-days: 7
+          if-no-files-found: error

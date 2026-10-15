@@ -72,8 +72,18 @@ test.describe("a PDF's words in the Toy tab", () => {
     // Copy puts the page's words on the clipboard.
     const copy = page.locator("#toy-media-copy");
     await expect(copy).toBeVisible();
+    // "Copied" lasts 1.8 seconds. Record that feedback where it appears, so a
+    // delayed driver response cannot miss it after the button has reset.
+    await copy.evaluate((button) => {
+      window.__copyFeedback = [];
+      const observer = new MutationObserver(() => {
+        window.__copyFeedback.push(button.textContent);
+        if (button.textContent === "Copy") observer.disconnect();
+      });
+      observer.observe(button, { childList: true, subtree: true, characterData: true });
+    });
     await copy.click();
-    await expect(copy).toHaveText("Copied");
+    await page.waitForFunction(() => window.__copyFeedback.includes("Copied"));
     const clip = await page.evaluate(() => navigator.clipboard.readText());
     expect(clip).toContain("How a toy is built"); // page 2 now holds the rest of the contents
     expect(clip).toContain("\n\n"); // paragraphs apart
@@ -106,6 +116,17 @@ test.describe("a PDF's words in the Toy tab", () => {
     await expect(hits.first()).toContainText(`Page ${target + 1}:`);
     await expect(hits.first().locator("mark")).toHaveText(/^trefoil$/i);
     await hits.first().click();
+    // Let the real book drive open the requested spread before inspecting
+    // its selected text. A transient page assignment can otherwise pass
+    // before the book replaces a left-page selection with its right page.
+    await page.waitForFunction(
+      (n) =>
+        Object.values(window.__splashery.player.motion.out.sheets || {}).some(
+          (s) => s.page === n && s.visible > 0,
+        ),
+      target,
+    );
+    expect(await page.evaluate(() => window.__splashery.player.pictures.page)).toBe(target);
     await expect(words).toHaveAttribute("aria-label", `Words on page ${target + 1}`);
     await expect(words.locator("mark").first()).toHaveText(/^trefoil$/i);
     await expect(page.locator("#toy-media-now")).toContainText(`page ${target + 1} of`);

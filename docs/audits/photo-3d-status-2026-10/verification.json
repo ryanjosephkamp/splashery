@@ -1,0 +1,78 @@
+{
+  "checkedUTC": "2026-10-15T08:19:19.114Z",
+  "baseline": {
+    "checkedUTC": "2026-10-15T08:12:03.077766+00:00",
+    "main": "d33f94216e78ff034c08fc6c9ae2bbeae4b98cb6",
+    "sourceDiff": "",
+    "files": {
+      "tests/cdx-p3d-status.spec.mjs": "44c756458cac080a86622e9ab2e34e1decdb0fe7804d939f451f313e82837fff",
+      "src/photo3d/preview.js": "3675e2dfb13a2e25574328153d4429c196ec645a6e555e6d444a36d64f7d6586",
+      "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a"
+    },
+    "testsFailed": 3,
+    "reproduced": [
+      "white cover RGB255 versus camera RGB16",
+      "white cover after light-to-dark theme change",
+      "Photo to 3D · undefined · Hybrid"
+    ]
+  },
+  "testsUnchangedBetweenRedAndGreen": true,
+  "ownRegressionTests": {
+    "mainFailed": 3,
+    "fixedPassed": 3
+  },
+  "existingRenderHoldTestsPassed": 3,
+  "existingMovingPhotoTestPassed": 1,
+  "screenshots": [
+    {
+      "file": "cdx-p3d-status-dark-before-390x844.png",
+      "dimensions": [390, 844],
+      "bytes": 163076,
+      "originalSha256": "13d1f301deb630f869101050d5bc90f8226a16a21857b4536ede4877b50c490e",
+      "publishedSha256": "13d1f301deb630f869101050d5bc90f8226a16a21857b4536ede4877b50c490e",
+      "originalRgbaSha256": "f993dfc74875e97700011ae5f4877fe6c20d48fd1d7e78d6225c85e454546185",
+      "changes": "Unchanged PNG capture."
+    },
+    {
+      "file": "cdx-p3d-status-dark-after-390x844.png",
+      "dimensions": [390, 844],
+      "bytes": 157474,
+      "originalSha256": "6b7c994e4ddd0193356a3aae79de5392ee6ba7ea74797e3d3e145cf7a3392b83",
+      "publishedSha256": "6b7c994e4ddd0193356a3aae79de5392ee6ba7ea74797e3d3e145cf7a3392b83",
+      "originalRgbaSha256": "73aca43b25b909aaa7f5d3ffb5594e7b8dd0a1384f72be1c09c2be786c424dd4",
+      "changes": "Unchanged PNG capture."
+    },
+    {
+      "file": "cdx-p3d-status-hybrid-1440x900.jpg",
+      "dimensions": [1440, 900],
+      "bytes": 344816,
+      "originalSha256": "b217be0a8e2d244b1df37cdf70a246e8a7850dfa846993d9db99211e713ecdba",
+      "publishedSha256": "6b3f0e461f429fbb099ddaae8a58af865372e5d34b97a45e5df39299da63e191",
+      "originalRgbaSha256": "a301c486fdff37addcc956facf004b3949bc9dfc64e8c45f697629df78581450",
+      "changes": "JPEG quality 90 preview of the original PNG; dimensions unchanged. Original PNG retained locally."
+    }
+  ],
+  "logs": [
+    {
+      "summary": "main-red.log",
+      "completeOriginal": "main-red.raw.log.gz",
+      "originalSha256": "417f2e9c16024fe0ae90be578c440d4d36e0196256bf8af49bbd0fb833774351",
+      "summarySha256": "c713621611caa4b5ee09721f98308a0a570e4c8c2340b08181647c7be06e557d",
+      "changes": "Text preview removes only ANSI escapes and HTTP server request lines; gzip preserves complete original bytes."
+    },
+    {
+      "summary": "fixed-green.log",
+      "completeOriginal": "fixed-green.raw.log.gz",
+      "originalSha256": "98ba929201235c3ed6cf9d0ab0ec145ae007fbb99384f2d3b1cc7a20c7a17cca",
+      "summarySha256": "b282b2b94f9497b81fc7e9d7f8ae49a37ab48c0e274330fa39c83f05d6e5dff0",
+      "changes": "Text preview removes only ANSI escapes and HTTP server request lines; gzip preserves complete original bytes."
+    },
+    {
+      "summary": "moving-status.log",
+      "completeOriginal": "moving-status.raw.log.gz",
+      "originalSha256": "2e294941e20ea99dec2105aad94efc03828e78b860efac5c374c9b87c3664340",
+      "summarySha256": "b98e217cf29b03c648ee17d78ce3b0757ae57e1914000c83459aeeafa2dee3c1",
+      "changes": "Text preview removes only ANSI escapes and HTTP server request lines; gzip preserves complete original bytes."
+    }
+  ]
+}

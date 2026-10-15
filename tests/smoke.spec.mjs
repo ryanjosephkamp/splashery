@@ -44,6 +44,24 @@ async function waitForToy(page, label) {
   await page.waitForTimeout(1500);
 }
 
+// Waits until the camera has eased into the toy's home view (Fix12: in a slow browser, frames come
+// about once a second and the ease moves at most 0.1 s a frame, so it outlasts waitForToy's pause).
+async function cameraStill(page) {
+  await page.waitForFunction(
+    () => {
+      const c = window.__splashery.player.camera;
+      const d = Math.abs(c.cur.yaw - c.tgt.yaw) + Math.abs(c.cur.pitch - c.tgt.pitch) + Math.abs(c.cur.distance - c.tgt.distance) / (c.tgt.distance || 1); // prettier-ignore
+      return (
+        d < 1e-4 &&
+        c.target.every((v, i) => v === c.aim[i]) &&
+        c.offset.every((v, i) => v === c.follow[i])
+      );
+    },
+    null,
+    { timeout: 30_000 },
+  );
+}
+
 // Counts pixels that differ between two PNG screenshots, decoded in the page.
 async function countDifferentPixels(page, a, b) {
   return page.evaluate(
@@ -454,6 +472,8 @@ test.describe("Splashery app (WebGL2)", () => {
     const png = await save("#export-png");
     expect(png.name).toMatch(/\.png$/);
     expect(png.size).toBeGreaterThan(5000);
+    // The Share tab shows Video or GIF, one at a time (Share lane, October 15, 2026).
+    await page.click("#clip-kind [data-clip=gif]");
     await page.selectOption("#gif-frames", "24");
     await page.selectOption("#gif-size", "256");
     const gif = await save("#export-gif");
@@ -461,6 +481,7 @@ test.describe("Splashery app (WebGL2)", () => {
     expect(gif.size).toBeGreaterThan(20000);
     const webm = await page.evaluate(() => !document.getElementById("webm-row").hidden);
     if (webm) {
+      await page.click("#clip-kind [data-clip=video]");
       await page.selectOption("#webm-seconds", "3");
       const video = await save("#export-webm");
       expect(video.name).toMatch(/\.webm$/);
@@ -741,6 +762,7 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     // Strawberry: the seeds (a color key) pop out and the berry blushes, then settles.
     await page.click(".toy-card[data-toy='strawberry']");
     await waitForToy(page, "Strawberry");
+    await cameraStill(page);
     await expect(page.locator("#toy-action")).toHaveText("Pop seeds");
     const rest = await canvas.screenshot({ type: "png" });
     await page.click("#toy-action");
@@ -748,7 +770,17 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     const popped = await canvas.screenshot({ type: "png" });
     const moved = await countDifferentPixels(page, rest, popped);
     expect(moved).toBeGreaterThan(3000);
-    // It settles back; slow machines take longer than the effect's own few seconds.
+    // It settles back; slow machines take longer than the effect's own few seconds. Fix12: the pulse
+    // runs on frame time, and a canvas screenshot takes about 5 s while it plays in a slow browser,
+    // so the poll starts once the pulse has run out (a sample taken mid-effect missed the deadline).
+    await page.waitForFunction(
+      () => {
+        const m = window.__splashery.player.motion;
+        return m.state[m.recipe.action.key] === 0;
+      },
+      null,
+      { timeout: 60_000 },
+    );
     const settled = async () =>
       countDifferentPixels(page, rest, await canvas.screenshot({ type: "png" }));
     await expect
@@ -757,6 +789,7 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     // Lantern: a toggle lights a flame add-on; a second tap puts it out.
     await page.click(".toy-card[data-toy='lantern']");
     await waitForToy(page, "Lantern");
+    await cameraStill(page);
     expect(await page.evaluate(() => !!window.__splashery.player.stage.toy.addon)).toBe(true);
     const dark = await canvas.screenshot({ type: "png" });
     await page.click("#toy-action");
@@ -771,6 +804,7 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     await page.click(".chip[data-category='shapes']");
     await page.click(".toy-card[data-toy='blob']");
     await waitForToy(page, "Jelly blob");
+    await cameraStill(page);
     await expect(page.locator("#toy-action")).toHaveText("Split");
     const whole = await canvas.screenshot({ type: "png" });
     await page.click("#toy-action");

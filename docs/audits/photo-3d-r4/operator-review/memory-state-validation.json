@@ -1,0 +1,16 @@
+{
+  "checkpoint": {
+    "conversions": 9,
+    "nativeBuffer": [585, 1266],
+    "allSettled": true,
+    "noAccountingDenied": true,
+    "allPostBuildWeightBytesZero": true
+  },
+  "branch": {
+    "conversions": 9,
+    "nativeBuffer": [585, 1266],
+    "allSettled": true,
+    "noAccountingDenied": true,
+    "allPostBuildWeightBytesZero": true
+  }
+}
