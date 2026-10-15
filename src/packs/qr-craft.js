@@ -536,7 +536,7 @@ function detailSettings(rejected = null) {
     preferCorrection: study.preferCorrection !== false,
     errorFraction: Number.isFinite(study.detailErrorFraction)
       ? Math.max(0, Math.min(0.6, study.detailErrorFraction))
-      : 0.6,
+      : 0.4,
     // A failed stage view gets the full forecast before another expensive rebuild.
     captureValidation: study.captureValidation !== false && !rejected?.length,
     channel: study.detailChannel || "weighted",
