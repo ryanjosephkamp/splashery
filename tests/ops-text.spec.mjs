@@ -72,8 +72,18 @@ test.describe("a PDF's words in the Toy tab", () => {
     // Copy puts the page's words on the clipboard.
     const copy = page.locator("#toy-media-copy");
     await expect(copy).toBeVisible();
+    // "Copied" lasts 1.8 seconds. Record that feedback where it appears, so a
+    // delayed driver response cannot miss it after the button has reset.
+    await copy.evaluate((button) => {
+      window.__copyFeedback = [];
+      const observer = new MutationObserver(() => {
+        window.__copyFeedback.push(button.textContent);
+        if (button.textContent === "Copy") observer.disconnect();
+      });
+      observer.observe(button, { childList: true, subtree: true, characterData: true });
+    });
     await copy.click();
-    await expect(copy).toHaveText("Copied");
+    await page.waitForFunction(() => window.__copyFeedback.includes("Copied"));
     const clip = await page.evaluate(() => navigator.clipboard.readText());
     expect(clip).toContain("How a toy is built"); // page 2 now holds the rest of the contents
     expect(clip).toContain("\n\n"); // paragraphs apart

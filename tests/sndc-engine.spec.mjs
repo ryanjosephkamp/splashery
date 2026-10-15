@@ -24,6 +24,36 @@ const audio = (page) =>
     return { state: s.ctx?.state, t: s.ctx?.currentTime ?? 0, sched: s.scheduled, paused: s.toyPaused }; // prettier-ignore
   });
 
+// Observe the real audio clock at the click and at the native state change.
+// A driver round trip (or a delayed statechange task) is not audio latency:
+// the context can already be silent while the runner waits for its reply.
+async function observeAudio(page) {
+  await page.evaluate(() => {
+    const ctx = window.__splashery.app.sound.ctx;
+    window.__sndcTransitions = [];
+    document.querySelector("#toy-action").addEventListener("click", () => {
+      window.__sndcClick = ctx.currentTime;
+      window.__sndcClickWall = performance.now();
+    }, { capture: true }); // prettier-ignore
+    ctx.addEventListener("statechange", () => {
+      window.__sndcTransitions.push({ state: ctx.state, t: ctx.currentTime, from: window.__sndcClick, wall: performance.now(), fromWall: window.__sndcClickWall }); // prettier-ignore
+    });
+  });
+}
+
+async function audioTransition(page, state) {
+  await page.waitForFunction((state) => window.__sndcTransitions.some((a) => a.state === state), state); // prettier-ignore
+  return page.evaluate((state) => window.__sndcTransitions.find((a) => a.state === state), state);
+}
+
+function expectPromptResume(resumed) {
+  // Subtract the audio that has already played when the event task arrives.
+  // This preserves the 500 ms native resume deadline without counting a delayed
+  // event-loop/protocol reply as time the AudioContext was still suspended.
+  const delay = (resumed.wall - resumed.fromWall) / 1000 - (resumed.t - resumed.from);
+  expect(delay).toBeLessThan(0.5);
+}
+
 test("a paused effect's sound stops at once (ringing notes too) and resumes from the same moment", async ({
   page,
 }) => {
@@ -31,15 +61,23 @@ test("a paused effect's sound stops at once (ringing notes too) and resumes from
   page.on("pageerror", (e) => errors.push(e.message));
   await open(page);
   await pick(page, "toy-piano");
+  const start = await audio(page);
   await page.click("#toy-action");
-  await page.waitForFunction(() => window.__splashery.player.motion.effectState() === "running");
-  await page.waitForTimeout(900);
+  await page.waitForFunction((sched) => {
+    const { player, app } = window.__splashery;
+    const s = app.sound;
+    const h = s.held.toy;
+    // Scheduling looks ahead; let the first note actually ring before pausing.
+    return player.motion.effectState() === "running" && player.motion.unseen === null && s.ctx?.state === "running" && s.scheduled > sched && s.ctx.currentTime > h.start + h.events[0].t + 0.1; // prettier-ignore
+  }, start.sched);
   const playing = await audio(page);
   expect(playing.state).toBe("running");
+  await observeAudio(page);
   // Pause: the whole context stops within a frame or two, so notes already
   // sounding stop with it, and its clock (every sound's schedule) holds.
   await page.click("#toy-action");
-  await expect.poll(() => audio(page).then((a) => a.state), { timeout: 100, intervals: [10] }).toBe("suspended"); // prettier-ignore
+  const stopped = await audioTransition(page, "suspended");
+  expect(stopped.t - stopped.from).toBeLessThan(0.1);
   const paused = await audio(page);
   expect(paused.paused).toBe(true);
   await page.waitForTimeout(800);
@@ -48,8 +86,13 @@ test("a paused effect's sound stops at once (ringing notes too) and resumes from
   expect(still.sched).toBe(paused.sched);
   // Resume: the clock runs again from where it stopped and the tune goes on.
   await page.click("#toy-action");
-  await expect.poll(() => audio(page).then((a) => a.state), { timeout: 500 }).toBe("running");
-  await page.waitForTimeout(800);
+  const resumed = await audioTransition(page, "running");
+  expectPromptResume(resumed);
+  expect(resumed.from).toBe(still.t);
+  await page.waitForFunction(({ t, sched }) => {
+    const s = window.__splashery.app.sound;
+    return s.ctx.currentTime > t + 0.3 && s.scheduled > sched;
+  }, still);
   const later = await audio(page);
   expect(later.paused).toBe(false);
   expect(later.t).toBeGreaterThan(still.t + 0.3);
@@ -140,15 +183,28 @@ test("a recipe's `sounds` (its cues' samples, by option) load with the toy; noth
 });
 
 test("a quiet tap (its sound from cues) pauses and resumes its sound too", async ({ page }) => {
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(e.message));
   await open(page);
   await pick(page, "gaussian-splatting");
+  const start = await audio(page);
   await page.click("#toy-action");
-  await page.waitForFunction(() => window.__splashery.player.motion.effectState() === "running");
-  await page.waitForTimeout(400);
+  await page.waitForFunction((sched) => {
+    const { player, app } = window.__splashery;
+    return player.motion.effectState() === "running" && player.motion.unseen === null && app.sound.ctx?.state === "running" && app.sound.scheduled > sched; // prettier-ignore
+  }, start.sched);
+  await observeAudio(page);
   await page.click("#toy-action");
-  await expect.poll(() => audio(page).then((a) => a.state), { timeout: 500 }).toBe("suspended");
+  const stopped = await audioTransition(page, "suspended");
+  expect(stopped.t - stopped.from).toBeLessThan(0.1);
+  expect((await audio(page)).paused).toBe(true);
   await page.click("#toy-action");
-  await expect.poll(() => audio(page).then((a) => a.state), { timeout: 500 }).toBe("running");
+  const resumed = await audioTransition(page, "running");
+  expectPromptResume(resumed);
+  expect(resumed.from).toBe(stopped.t);
+  await page.waitForFunction((t) => window.__splashery.app.sound.ctx.currentTime > t, stopped.t);
+  expect((await audio(page)).paused).toBe(false);
+  expect(errors).toEqual([]);
 });
 
 test("a recipe's `sounds` are credited in the About tab, and its drive sees the camera's turn", async ({

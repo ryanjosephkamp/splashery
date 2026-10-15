@@ -44,6 +44,31 @@ const look = (page) =>
     };
   });
 
+// Read a tap's result in its action event. A slow renderer can draw several
+// frames before Playwright returns from click(), so reading then measures a
+// partly elapsed effect instead of its starting or resumed position.
+async function clickAction(page) {
+  await page.evaluate(() => {
+    const { player, app } = window.__splashery;
+    if (!window.__ui3Watching) {
+      window.__ui3Watching = true;
+      player.on("action", () => {
+        const m = player.motion;
+        window.__ui3Action = {
+          v: m.state[m.recipe.action.key],
+          state: m.effectState(),
+          sched: app.sound.scheduled,
+          n: m.tap?.n ?? 0,
+          label: document.querySelector("#toy-action").textContent.trim(),
+        };
+      });
+    }
+    window.__ui3Action = null;
+  });
+  await page.click("#toy-action");
+  return page.evaluate(() => window.__ui3Action);
+}
+
 test.describe("pause and resume", () => {
   test.use(DESK);
 
@@ -56,15 +81,18 @@ test.describe("pause and resume", () => {
     const start = await look(page);
     expect(start.state).toBeNull();
     // First tap: the tune plays (a click, so the page may make sound).
-    await page.click("#toy-action");
-    await page.waitForFunction(() => window.__splashery.player.motion.effectState() === "running");
-    await page.waitForTimeout(1200);
+    await clickAction(page);
+    // "running" is set before the first frame; an unseen effect restarts
+    // on the next tap. Wait until it has drawn and its audio has scheduled.
+    await page.waitForFunction((sched) => {
+      const { player, app } = window.__splashery;
+      return player.motion.effectState() === "running" && player.motion.unseen === null && app.sound.ctx?.state === "running" && app.sound.scheduled > sched; // prettier-ignore
+    }, start.sched);
     const playing = await look(page);
     expect(playing.sched).toBeGreaterThan(start.sched);
     expect(playing.label).toBe("Pause");
     // Second tap: it pauses, and no new sound is scheduled while it waits.
-    await page.click("#toy-action");
-    const paused = await look(page);
+    const paused = await clickAction(page);
     expect(paused.state).toBe("paused");
     await page.waitForTimeout(1500);
     const still = await look(page);
@@ -73,12 +101,19 @@ test.describe("pause and resume", () => {
     expect(still.label).toBe("Resume");
     await page.screenshot({ path: shot("ui3-paused-1440x900.png") });
     // Third tap: it carries on from the same place (same tap, same position).
-    await page.click("#toy-action");
-    const resumed = await look(page);
+    const resumed = await clickAction(page);
     expect(resumed.state).toBe("running");
     expect(resumed.n).toBe(playing.n);
     expect(Math.abs(resumed.v - paused.v)).toBeLessThan(0.02);
-    await page.waitForTimeout(1200);
+    await page.waitForFunction(
+      ({ v, sched }) => {
+        const { player, app } = window.__splashery;
+        return (
+          player.motion.state[player.motion.recipe.action.key] < v && app.sound.scheduled > sched
+        );
+      },
+      { v: resumed.v, sched: still.sched },
+    );
     const later = await look(page);
     expect(later.v).toBeLessThan(resumed.v);
     expect(later.sched).toBeGreaterThan(still.sched);
@@ -87,8 +122,7 @@ test.describe("pause and resume", () => {
       const m = window.__splashery.player.motion;
       m.state[m.recipe.action.key] = 0; // the tune has run to its end
     });
-    await page.click("#toy-action");
-    const again = await look(page);
+    const again = await clickAction(page);
     expect(again.state).toBe("running");
     expect(again.n).toBe(later.n + 1);
     expect(again.v).toBeGreaterThan(0.95);
@@ -131,11 +165,14 @@ test.describe("pause and resume", () => {
     await open(page);
     await pick(page, "popcorn");
     await page.click("#toy-action");
-    await page.waitForTimeout(300);
+    await page.waitForFunction(() => {
+      const m = window.__splashery.player.motion;
+      const v = m.state[m.recipe.action.key];
+      return v > 0 && v < 1;
+    });
     const one = await look(page);
     expect(one.state).toBeNull(); // short: never "running" in the pause sense
-    await page.click("#toy-action");
-    const two = await look(page);
+    const two = await clickAction(page);
     expect(two.n).toBe(one.n + 1);
     expect(two.v).toBeGreaterThan(0.95);
     expect(two.label).not.toBe("Pause");

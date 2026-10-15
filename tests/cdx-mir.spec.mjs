@@ -354,7 +354,10 @@ test("matched camera frames keep real feature contrast and improve held-pose sta
       // variation, allowing a tight absolute regression bound too.
       expect(a.heightJitter).toBeLessThan(a.clip === "still" ? 0.00001 : 0.002);
       expect(a.shownJitterTurned).toBeLessThan(b.shownJitterTurned * 0.85);
-      expect(a.drawMs).toBeLessThan(b.drawMs * 1.1);
+      // The same 10% cost bound, measured in alternating matched batches in
+      // one browser. Separate before/after browser runs see different CPU load.
+      expect(a.referenceDrawMs).toBeGreaterThan(0);
+      expect(a.drawMs).toBeLessThan(a.referenceDrawMs * 1.1);
     }
   } finally {
     fs.rmSync(dir, { recursive: true, force: true });

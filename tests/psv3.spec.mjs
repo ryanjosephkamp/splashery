@@ -147,6 +147,10 @@ for (const clip of LOOPS) {
       page,
     }) => {
       test.setTimeout(300_000);
+      // This checks playback and frame selection at phone size. A large
+      // software-rendered canvas can draw fewer frames than a short GIF has
+      // loops, making even a frame observer alias entire cycles.
+      await page.setViewportSize({ width: 390, height: 844 });
       const errors = await ready(page);
       await page.evaluate(() => window.__splashery.app.chooseToy("moving-photo-3d"));
       await built(page, "moving-photo-3d");
@@ -166,14 +170,50 @@ for (const clip of LOOPS) {
         app.setControl("play", 1);
         const rate = m.speedRate(speed);
         const rows = [];
-        const end = performance.now() + ((2.7 * c.duration) / rate) * 1000;
-        while (performance.now() < end) {
-          await new Promise((res) => requestAnimationFrame(res));
-          rows.push({ t: M.t, f: M.frame, at: performance.now() });
-        }
+        const stage = app.player.stage;
+        // Sample after the player's drive, starting at its first frame. Native
+        // media startup and seeks can stall while the renderer is busy; wall
+        // time before that frame is not 2.7 periods of clip playback.
+        await new Promise((resolve) => {
+          let previous = null;
+          let elapsed = 0;
+          let started = false;
+          const collect = () => {
+            const audio = c.audio?.track;
+            if (!started && audio && !audio.playing && !audio.blocked) return;
+            started = true;
+            const now = performance.now();
+            const clock =
+              !audio || audio.blocked ? (now / 1000) * rate : audio.playing ? audio.time() : null;
+            if (clock !== null) {
+              if (previous !== null) {
+                const dt = clock - previous;
+                elapsed += dt < -c.duration / 2 ? c.duration + dt : Math.max(0, dt);
+              }
+              previous = clock;
+            }
+            // A stopped track can leave its last frame displayed. Keep those
+            // observations so the existing end-stall check still sees them.
+            rows.push({
+              t: M.t,
+              f: M.frame,
+              at: now,
+              elapsed,
+              rate: audio?.el.playbackRate ?? rate,
+            });
+            if (elapsed >= 2.7 * c.duration) {
+              stage.updateHandlers = stage.updateHandlers.filter((fn) => fn !== collect);
+              resolve();
+            }
+          };
+          stage.onUpdate(collect);
+          stage.requestRender();
+        });
         return { rows, duration: c.duration, n: c.n, rate, sound: !!c.audio, start: m.frameAt(c, 0.5 * rate) }; // prettier-ignore
       }, speed);
       expect(r.sound).toBe(!!clip.sound || clip.file.endsWith(".webm"));
+      for (const row of r.rows) expect(row.rate).toBeCloseTo(r.rate, 5);
+      expect(r.rows.at(-1).elapsed).toBeGreaterThanOrEqual(2.7 * r.duration);
       // Each wrap: the time drops from near the end to near the start.
       const wraps = [];
       for (let i = 1; i < r.rows.length; i++)

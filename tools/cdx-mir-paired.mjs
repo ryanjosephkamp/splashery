@@ -443,11 +443,9 @@ async function poseMeasure(page, pose, file, label) {
     await profiler.send("Profiler.enable");
     await profiler.send("Profiler.start");
   }
-  const work = await page.evaluate(async () => {
+  const work = await page.evaluate(async (compare) => {
     const S = window.__cdxPair;
     S.mod.MIRROR.depth = S.mod.MIRROR.gain = S.depth;
-    // Drain software GPU work before timing CPU filtering. The actual
-    // production draw (including camera readback) is timed separately.
     const stage = window.__splashery.player.stage;
     const handlers = stage.updateHandlers,
       request = stage.requestRender;
@@ -455,20 +453,80 @@ async function poseMeasure(page, pose, file, label) {
     stage.requestRender = () => {};
     stage.aliveUntil = 0;
     stage.app.renderNextFrame = false;
-    await new Promise((r) => setTimeout(r, 300));
-    for (let i = 0; i < 24; i++) S.cam.draw(S.out.getContext("2d"), { gain: S.depth, dt: 1 / 30 });
-    const times = [];
-    for (let batch = 0; batch < 5; batch++) {
-      const start = performance.now();
-      for (let i = 0; i < 12; i++)
-        S.cam.draw(S.out.getContext("2d"), { gain: S.mod.MIRROR.gain, dt: 1 / 30 });
-      times.push((performance.now() - start) / 12);
+    // Finish outstanding GPU work instead of guessing that a 300 ms sleep drained it.
+    stage.device.gl?.finish();
+    const cameras = [];
+    try {
+      const modules = compare ? [await import("/src/live/relief-pair-before.js"), S.mod] : [S.mod];
+      // Independent filters, with exactly the same recorded sensor frames and
+      // model replies. The before/after CPU work runs in this one renderer process.
+      for (const mod of modules) {
+        const cam = new mod.CameraDepth(S.video, S.opts);
+        cameras.push(cam);
+        const out = document.createElement("canvas");
+        out.width = S.out.width;
+        out.height = S.out.height;
+        const g = out.getContext("2d");
+        const send = cam.ask.bind(cam);
+        cam.ask = () => {};
+        let answer;
+        cam.worker = {
+          terminate() {},
+          postMessage(m) {
+            if (
+              m.data.length !== answer.input.length ||
+              !m.data.every((v, i) => v === answer.input[i])
+            )
+              throw new Error("Benchmark replay input differs from the recorded model input");
+            cam.onAnswer({ type: "depth", ...answer, id: m.id });
+          },
+        };
+        cam.benchmarkDraw = () => cam.draw(g, { gain: S.depth, dt: 1 / 30 });
+        for (let i = 0; i < 12; i++) {
+          S.video
+            .getContext("2d")
+            .putImageData(
+              new ImageData(
+                new Uint8ClampedArray(S.rgba, i * 320 * 240 * 4, 320 * 240 * 4),
+                320,
+                240,
+              ),
+              0,
+              0,
+            );
+          answer = S.answers[i];
+          cam.benchmarkDraw();
+          send();
+          for (let j = 0; j < 6; j++) cam.benchmarkDraw();
+        }
+      }
+      for (let i = 0; i < 24; i++) for (const cam of cameras) cam.benchmarkDraw();
+      const times = cameras.map(() => []);
+      // Alternate order, so both versions share load, thermal state, and timer
+      // conditions. Separate browser lifetimes made a 10% comparison measure
+      // scheduler contention rather than a change in filtering cost.
+      for (let batch = 0; batch < 8; batch++) {
+        const order = cameras.map((_, i) => i);
+        if (batch % 2) order.reverse();
+        for (const i of order) {
+          const start = performance.now();
+          for (let j = 0; j < 12; j++) cameras[i].benchmarkDraw();
+          times[i].push((performance.now() - start) / 12);
+        }
+      }
+      return {
+        draw: times.at(-1),
+        reference: compare ? times[0] : null,
+        answer: S.answerWork.slice(8),
+        moving: S.cam.moving,
+      };
+    } finally {
+      for (const cam of cameras) cam.close();
+      stage.updateHandlers = handlers;
+      stage.requestRender = request;
+      stage.requestRender();
     }
-    stage.updateHandlers = handlers;
-    stage.requestRender = request;
-    stage.requestRender();
-    return { draw: times, answer: S.answerWork.slice(8), moving: S.cam.moving };
-  });
+  }, label.endsWith("-after"));
   if (profiler) {
     const { profile } = await profiler.send("Profiler.stop");
     fs.writeFileSync(path.join(pose.folder, `${label}-cpu.json`), JSON.stringify(profile));
@@ -486,6 +544,8 @@ async function poseMeasure(page, pose, file, label) {
     ...features,
     drawMs: median(work.draw),
     drawBatches: work.draw,
+    referenceDrawMs: work.reference ? median(work.reference) : null,
+    referenceDrawBatches: work.reference,
     answerMs: median(work.answer),
     moving: work.moving,
   };
@@ -529,6 +589,7 @@ export async function paired(
       const prior = results[`${profile}-${label}`];
       if (
         resume &&
+        prior?.benchmarkVersion === 2 &&
         prior?.sourceHash === hash(source) &&
         prior.modelHash === modelHash &&
         (!liveTiming || prior.live) &&
@@ -555,6 +616,9 @@ export async function paired(
           viewport: { width: 390, height: 844 },
           deviceScaleFactor: 2,
         });
+        await page.route("**/src/live/relief-pair-before.js", (route) =>
+          route.fulfill({ contentType: "text/javascript", body: sources.before }),
+        );
         await page.route("**/src/live/relief.js", (route) =>
           route.fulfill({ contentType: "text/javascript", body: source }),
         );
@@ -571,6 +635,7 @@ export async function paired(
           console.log(`${profile} ${label} ${pose.clip} phase ${pose.phase}: ${JSON.stringify(m)}`);
         }
         results[`${profile}-${label}`] = {
+          benchmarkVersion: 2,
           sourceHash: hash(source),
           modelHash,
           ...meta,

@@ -84,3 +84,29 @@ The `known` list in `tools/suite.json` holds the tests known to fail on plain `m
 cloud container, or only on Actions: docs/handoff/CI.md has the evidence), as `file:line`
 (docs/OPERATOR.md, "Known flaky tests"): the report marks them but still counts them. Add one only
 with evidence (it fails on `main` too), and take it off when it is fixed.
+
+## Printing the manual's PDF
+
+`.github/workflows/manual-pdf.yml` is a manual-only workflow with `contents: read`. It uses the
+Tests workflow's Ubuntu 24.04, Node 22, Playwright Chromium, font packages, Inter aliases, and
+Chromium sandbox setup. It runs `node tools/manual-pdf.mjs` without browser or font overrides,
+checks the PDF's navigation, rebuilds its edition links, and uploads the changed files. It never
+commits or pushes. The artifact lasts seven days.
+
+After this workflow is available on `main`, the Operator can:
+
+1. Open **Actions → Manual PDF → Run workflow**, and select the branch to print. Or run
+   `gh workflow run manual-pdf.yml --ref main`.
+2. Wait for that run to pass, note its source commit, and download its `manual-pdf-<commit>`
+   artifact with
+   `gh run download <run-id> --name manual-pdf-<commit> --dir .cache/manual-pdf-artifact`.
+3. On a new branch from that same commit, copy the artifact's `manual/` folder into the checkout,
+   and its `site/` folder too if present. Keep earlier immutable PDFs. `source-commit.txt` records
+   which input was printed; it is provenance, not a site file to commit.
+4. Review the PDF and the diff, run `node tools/manual-pdf-check.mjs`,
+   `node tools/site-build.mjs --check`, the formatting and English checks, and `man5` on Actions.
+   Commit the new edition, the legacy PDF copy, `manual/pdf-edition.js`, and the rebuilt pages in
+   one draft PR. Remove `man5:201` from the known list only when that check passes.
+
+The workflow itself does not refresh the PDF already committed on `main`. Its stale-edition failure
+stays visible until the Operator reviews and commits the artifact.

@@ -17,18 +17,19 @@ test("a GIF held on its frame stays there, then plays on from it", async ({ page
     await app.openMedia(`${location.origin}/assets/toys/screen/horse.gif`);
   });
   await page.waitForFunction(() => window.__splashery.player.pictures?.media?.kind === "gif", null, { timeout: 120_000 }); // prettier-ignore
+  // Exercise the real player's GIF clock at 60 Hz. An automatic renderer frame
+  // between hold(false) and the next read would correctly advance the GIF and
+  // invalidate the test's assertion about its very first resumed frame.
+  await page.evaluate(() => (window.__splashery.player.stage.updateHandlers = []));
   // The frames shown over `sec` seconds of the player's clock (the GIF's
   // clock), however slow the renderer is.
   const frames = async (sec) =>
-    page.evaluate(async (sec) => {
+    page.evaluate((sec) => {
       const pl = window.__splashery.player;
       const p = pl.pictures;
       const seen = new Set();
-      const t0 = pl.time;
-      const w0 = performance.now();
-      while (pl.time - t0 < sec && performance.now() - w0 < 60_000) {
-        pl.stage.requestRender();
-        await new Promise((r) => setTimeout(r, 30));
+      for (let i = 0; i < Math.ceil(sec * 60); i++) {
+        pl.update(1 / 60);
         seen.add(p.gifFrame);
       }
       return [...seen];
