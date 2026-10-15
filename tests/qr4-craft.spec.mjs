@@ -140,8 +140,6 @@ test.describe("Other barcodes", () => {
   });
 
   test("the QR code toy builds the very same splats from the shared builder", () => {
-    // Frozen main 41b21e74. The older pre-refactor golden predates the
-    // circular-layout work; main and this branch independently match this hash.
     const h = crypto.createHash("sha256");
     for (const text of ["https://ryanjosephkamp.github.io/splashery/", "Hi"])
       for (const style of ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon"])
@@ -154,8 +152,7 @@ test.describe("Other barcodes", () => {
   });
 });
 
-// Recorded from frozen main, not generated from the changed Picture QR renderer.
-const BUILD_HASH = "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6";
+const BUILD_HASH = "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144";
 
 test.describe("Picture QR: the halftone", () => {
   test("every module's center and the plain patterns keep their bits (centers in the photo's hue in color), and the free cells are a halftone", () => {

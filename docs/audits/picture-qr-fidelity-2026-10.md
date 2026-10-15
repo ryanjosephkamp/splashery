@@ -20,6 +20,19 @@ photo-preview rendering hold. Both rendering hold APIs coexist. All 36 pre/post-
 Standard/Most detail picture geometry controls match exactly; the final model-path rerun uses the
 integrated source. The reference remains the main revision from the start of the run.
 
+## Operator review follow-up (October 15, 2026)
+
+The original 191/191 result was a local **Node 24** run with an incorrectly changed shared-builder
+golden; it did not establish the CI result on Node 22. The Operator reproduced the canonical
+`b3918a78…` hash on main, frozen main, and this branch under Node 22. A fresh Node 22.23.3 run
+reproduced the failure against the altered `d98ad9f6…` expectation. The test now retains main's
+canonical expectation; no threshold or assertion is relaxed. The earlier “stale golden” explanation
+was a runtime-dependent inference and was incorrect for CI. Historical test output is retained as
+historical evidence, not current validation.
+
+The follow-up run starts at 14:17:55 UTC on October 15 and is bounded by 02:17:55 UTC on October 16.
+PR #641 remains a merge-order dependency. Further fixes and fresh measurements are recorded below.
+
 ## Corpus and protocol
 
 The fixed corpus contains all 32 current Picture QR samples and 20 additional CC0 museum photographs
