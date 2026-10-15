@@ -682,7 +682,7 @@ export function* detailCandidates(pic, o) {
           ? Math.max(
               0,
               Math.min(
-                detailFraction(pic, t.shape) === 0.65 ? 0.65 : 0.6,
+                o.errorFraction === 0.65 && detailFraction(pic, t.shape) === 0.65 ? 0.65 : 0.6,
                 Number.isFinite(o.errorFraction) ? o.errorFraction : 0.4,
               ),
             )
