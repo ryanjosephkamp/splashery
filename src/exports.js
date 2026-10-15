@@ -5,6 +5,7 @@
 import { GIFEncoder, quantize, applyPalette } from "gifenc";
 import { EXPORT_PRESETS, gifPlan, recordingPlan } from "./export/presets.js";
 import { encodeVideo, videoSupport } from "./export/video.js";
+import { recordingAudioTap } from "./export/record.js";
 import { encodeSceneHash } from "./codec.js";
 import { formatBytes } from "./state.js";
 
@@ -186,27 +187,14 @@ export function startRecording({
   const track = video.getVideoTracks()[0];
   const tracks = [track];
   let tap = null;
-  if (audio?.ctx && audio?.node && audio.ctx.createMediaStreamDestination) {
-    // The site's limiter sits after `node` and is not exposed, so the
-    // recording gets its own copy of it.
-    const ctx = audio.ctx;
-    const limit = ctx.createDynamicsCompressor();
-    limit.threshold.value = -10;
-    limit.knee.value = 6;
-    limit.ratio.value = 8;
-    limit.attack.value = 0.003;
-    limit.release.value = 0.2;
-    const dest = ctx.createMediaStreamDestination();
-    audio.node.connect(limit);
-    limit.connect(dest);
-    // Keep the destination's audio clock running even before the visitor
-    // plays a sound. An idle graph can otherwise hold up both recorder tracks.
-    const clock = ctx.createConstantSource();
-    clock.offset.value = 0;
-    clock.connect(dest);
-    clock.start();
-    tap = { node: audio.node, limit, dest, clock };
-    tracks.push(...dest.stream.getAudioTracks());
+  try {
+    if (audio?.ctx && audio?.node && audio.ctx.createMediaStreamDestination) {
+      tap = audio.tap || recordingAudioTap(audio);
+      tracks.push(...tap.tracks);
+    }
+  } catch (error) {
+    track.stop();
+    throw error;
   }
   const stream = new MediaStream(tracks);
   // Standard keeps the former 8 Mb/s; High and Max scale with pixels.
@@ -221,17 +209,8 @@ export function startRecording({
   };
   const cleanup = () => {
     for (const t of stream.getTracks()) t.stop();
-    if (tap) {
-      try {
-        tap.node.disconnect(tap.limit);
-      } catch {
-        /* Context already gone. */
-      }
-      tap.limit.disconnect();
-      tap.clock.stop();
-      tap.clock.disconnect();
-      tap = null;
-    }
+    tap?.dispose();
+    tap = null;
   };
   let rec;
   try {

@@ -49,7 +49,7 @@ import {
 } from "./export/presets.js";
 import { videoSupport, encodeVideo } from "./export/video.js";
 import { steppedCapture } from "./export/capture.js";
-import { recordingPerformanceMonitor } from "./export/record.js";
+import { recordingPerformanceMonitor, recordingAudioTap } from "./export/record.js";
 
 const canvas = document.getElementById("stage");
 
@@ -1826,6 +1826,14 @@ class App {
     // switched on while recording is in the video too).
     const ctx = this.sound.audio?.();
     const audio = ctx && this.sound.master ? { ctx, node: this.sound.master } : null;
+    // Create the independent recording clock in the actual button gesture,
+    // before waiting for layout or a potentially slow full-size render.
+    try {
+      if (audio) audio.tap = recordingAudioTap(audio);
+    } catch (err) {
+      this.ui.toast(`Could not record: ${err.message || err}`);
+      return;
+    }
     // On a phone the sheet closes first, so the take starts at the stage's
     // own size (two frames for the new size to reach the canvas).
     this.ui.collapseSheet?.();
@@ -1845,21 +1853,34 @@ class App {
       });
     } catch (err) {
       this.recordWait = false;
+      audio?.tap?.dispose();
       this.ui.toast(err.message);
       return;
     }
     if (plan.maxBytes < 1024 * 1024) {
       this.recordWait = false;
+      audio?.tap?.dispose();
       this.ui.toast(
         "This recording size needs more memory than this device's budget. Choose Standard.",
       );
       return;
     }
-    stage.adaptive = false;
-    stage.reduced = false;
-    stage.setFixedSize([plan.width, plan.height]);
-    // Let the new drawing buffer reach the stage before captureStream starts.
-    const initialFrame = await stage.captureFrame();
+    let initialFrame;
+    try {
+      stage.adaptive = false;
+      stage.reduced = false;
+      stage.setFixedSize([plan.width, plan.height]);
+      // Let the new buffer reach the stage before captureStream starts.
+      initialFrame = await stage.captureFrame();
+    } catch (err) {
+      this.recordWait = false;
+      audio?.tap?.dispose();
+      stage.adaptive = saved.adaptive;
+      stage.reduced = saved.reduced;
+      stage.setFixedSize(saved.fixedSize);
+      this.ui.toast(`Could not record: ${err.message || err}`);
+      return;
+    }
     let rec;
     let frameStart = 0;
     let rendered = false;
@@ -1914,6 +1935,7 @@ class App {
       });
     } catch (err) {
       this.recordWait = false;
+      audio?.tap?.dispose();
       restore();
       this.ui.toast(`Could not record: ${err.message || err}`);
       return;

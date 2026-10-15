@@ -194,6 +194,69 @@ test("Record warns and stops at its byte budget, returning a playable Blob", asy
   expect(out.type).toMatch(/^video\/(mp4|webm)$/);
 });
 
+test("Record keeps a paused sound context paused and captures sound after resume", async ({
+  page,
+}) => {
+  await openEncoder(page);
+  const out = await page.evaluate(async () => {
+    const { startRecording } = await import("/src/exports.js");
+    const ctx = new AudioContext();
+    await ctx.resume();
+    await ctx.suspend();
+    const node = ctx.createGain();
+    node.gain.value = 0.2;
+    const osc = ctx.createOscillator();
+    osc.connect(node);
+    const canvas = document.createElement("canvas");
+    canvas.width = 160;
+    canvas.height = 120;
+    const rec = startRecording({ canvas, audio: { ctx, node }, maxSeconds: 4 });
+    const paused = ctx.state;
+    let frame = 0;
+    const draw = setInterval(() => {
+      const g = canvas.getContext("2d");
+      g.fillStyle = `hsl(${frame++ * 47} 70% 50%)`;
+      g.fillRect(0, 0, 160, 120);
+      rec.frame();
+    }, 40);
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await ctx.resume();
+      osc.start();
+      const result = await rec.done;
+      const audio = await ctx.decodeAudioData(await result.blob.arrayBuffer());
+      const samples = audio.getChannelData(0);
+      let quiet = 0,
+        peak = 0;
+      for (let i = 0; i < samples.length; i++) {
+        const value = Math.abs(samples[i]);
+        if (i < audio.sampleRate * 0.4) quiet = Math.max(quiet, value);
+        peak = Math.max(peak, value);
+      }
+      const v = document.createElement("video");
+      const url = URL.createObjectURL(result.blob);
+      v.src = url;
+      await new Promise((resolve, reject) => {
+        v.onloadedmetadata = resolve;
+        v.onerror = reject;
+      });
+      const width = v.videoWidth;
+      URL.revokeObjectURL(url);
+      return { paused, sourceAfter: ctx.state, quiet, peak, width, size: result.size };
+    } finally {
+      clearInterval(draw);
+      osc.stop();
+      await ctx.close();
+    }
+  });
+  expect(out.paused).toBe("suspended");
+  expect(out.sourceAfter).toBe("running");
+  expect(out.quiet).toBeLessThan(0.001);
+  expect(out.peak).toBeGreaterThan(0.05);
+  expect(out.width).toBe(160);
+  expect(out.size).toBeGreaterThan(1024);
+});
+
 // Replacing the canvas-only capture with a page/screen capture must fail this
 // test: fluorescent DOM markers occupy the actual overlay elements.
 for (const toy of ["photo-3d", "powers-of-ten"]) {

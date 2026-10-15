@@ -62,7 +62,12 @@ for row in rows:
             aligned = reference[:h, :w]
         else:
             aligned = reference
-        frames.append({"file": file.name, "ssim": ssim(aligned, decoded), "sharpness": sharp(decoded)})
-    scores.append({"key": row["key"], "referenceSharpness": sharp(reference), "ssim": float(np.mean([f["ssim"] for f in frames])), "decodedSharpness": float(np.mean([f["sharpness"] for f in frames])), "frames": frames})
+        # Report raw SSIM first. A separate +/-1-pixel horizontal check makes
+        # tiny capture offsets visible instead of silently registering them.
+        h, w = decoded.shape
+        candidates = [(ssim(aligned[:, 1:-1], decoded[:, 1 + dx:w - 1 + dx]), dx) for dx in [-1, 0, 1]]
+        registered, dx = max(candidates)
+        frames.append({"file": file.name, "ssim": ssim(aligned, decoded), "sharpness": sharp(decoded), "horizontalAlignmentSSIM": registered, "horizontalShiftPixels": dx})
+    scores.append({"key": row["key"], "referenceSharpness": sharp(reference), "ssim": float(np.mean([f["ssim"] for f in frames])), "decodedSharpness": float(np.mean([f["sharpness"] for f in frames])), "horizontalAlignmentSSIM": float(np.mean([f["horizontalAlignmentSSIM"] for f in frames])), "frames": frames})
 (root / "quality-scores.json").write_text(json.dumps(scores, indent=2) + "\n")
 print(json.dumps(scores, indent=2))
