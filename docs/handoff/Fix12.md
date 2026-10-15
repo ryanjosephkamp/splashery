@@ -22,12 +22,11 @@ and docs/handoff/Fix11.md (the last lane that did this job, and how).
    its test, and show kit:87 red before and green after. Ryan approved fixing it ("fix circle QR").
    Note: Codex tasks 79 and 80 are changing Picture QR right now; keep your change small and say
    exactly which lines it touches.
-2. **`tests/smoke.spec.mjs:734`** ("rigs pick splats by colour, run effects and show add-ons; shelf
-   shapes have rigs"): on plain main it fails every time in the Operator's container, e.g.
-   `expect(received).toBeLessThan(expected)`, received 82,335 against an expected bound near 9,179
-   (another run: 82,304 vs 22,801). It used to be an occasional flake. Find which merge made it
-   consistent (bisect over main's recent merges: #617 full resolution within the device cap, #620,
-   #621, #624 are candidates) and whether the toy or the test is wrong.
+2. **`tests/smoke.spec.mjs:734`** (the rigs test): on plain main it fails every time in the
+   Operator's container, e.g. `expect(received).toBeLessThan(expected)`, received 82,335 against an
+   expected bound near 9,179 (another run: 82,304 vs 22,801). It used to be an occasional flake.
+   Find which merge made it consistent (bisect over main's recent merges: #617 full resolution
+   within the device cap, #620, #621, #624 are candidates) and whether the toy or the test is wrong.
 3. **`tests/tpg.spec.mjs:205`** ("toy pages (browser) › a sample of 25 pages loads, fits a phone and
    links on"): fails every time now with "page.evaluate: Test ended" (a timeout). Same approach.
 4. **`tests/man5.spec.mjs:201`** fails only in Claude cloud containers, because #615 launches the
