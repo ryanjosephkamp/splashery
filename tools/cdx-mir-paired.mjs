@@ -136,6 +136,79 @@ async function controlled(page) {
     };
     mod.mirrorScreen.draw = (g) => g.drawImage(out, 0, 0);
     mod.mirrorScreen.version = () => 0;
+    // The replay owns its clock, including camera uniforms. Browser frames
+    // still run the real renderer, but must not advance this held pose.
+    const stage = window.__splashery.player.stage;
+    stage.updateHandlers = [];
+    S.sortEpoch = 0;
+    S.sortObservers = new Map();
+    S.sortManagers = () => {
+      const director = stage.app.renderer.gsplatDirector;
+      if (!director?.camerasMap) throw new Error("Missing real splat sort state");
+      const managers = Array.from(director.camerasMap.values())
+        .flatMap((camera) =>
+          Array.from(camera.layersMap.values()).flatMap((layer) =>
+            [layer.gsplatManager, layer.gsplatManagerShadow].filter(Boolean),
+          ),
+        )
+        .filter((manager) =>
+          [manager.world.currentVersion, manager.world.lastWorldStateVersion].some(
+            (version) => manager.world.getState(version)?.totalActiveSplats > 0,
+          ),
+        );
+      if (!managers.length) throw new Error("No active splat renderer in captured frame");
+      return managers;
+    };
+    S.observeSortManager = (manager) => {
+      if (S.sortObservers.has(manager)) return S.sortObservers.get(manager);
+      const sorter = manager.cpuSorter;
+      if (!sorter?.worker || !Number.isInteger(sorter.jobsInFlight) || sorter.jobsInFlight < 0)
+        throw new Error("Missing real CPU splat sorter");
+      const record = { error: null, appliedEpochByVersion: new Map() };
+      S.sortObservers.set(manager, record);
+      // Existing requests and any already-returned order belong to an older view.
+      const requests = Array(sorter.jobsInFlight).fill(-1);
+      const epochs = new WeakMap();
+      if (sorter.pendingSorted) epochs.set(sorter.pendingSorted.orderData, -1);
+      const post = sorter.worker.postMessage;
+      sorter.worker.postMessage = function (message, ...rest) {
+        if (message.command === "sort") requests.push(S.sortEpoch);
+        const result = post.call(this, message, ...rest);
+        if (message.command === "sort" && requests.length !== sorter.jobsInFlight)
+          record.error = "Observed sort requests disagree with native jobs";
+        return result;
+      };
+      // The engine's earlier worker listener processes the real response first.
+      // Match its pending order by identity; do not invoke onSorted a second time.
+      sorter.worker.addEventListener("message", (event) => {
+        if (!event.data.order) return;
+        const epoch = requests.shift();
+        const pending = sorter.pendingSorted;
+        if (epoch === undefined || requests.length !== sorter.jobsInFlight)
+          record.error = "Sort response has no matching native request";
+        else if (!pending || pending.orderData.buffer !== event.data.order)
+          record.error = "Native pending splat order differs from its worker response";
+        else epochs.set(pending.orderData, epoch);
+      });
+      // The manager's earlier sorted listener applies this order to the renderer.
+      sorter.on("sorted", (_count, version, order) => {
+        const epoch = epochs.get(order);
+        if (epoch === undefined) {
+          record.error = "Applied splat order has no observed worker response";
+          return;
+        }
+        if (
+          manager.world.currentVersion === version &&
+          manager.world.getState(version)?.sortedBefore
+        )
+          record.appliedEpochByVersion.set(
+            version,
+            Math.max(record.appliedEpochByVersion.get(version) ?? -1, epoch),
+          );
+      });
+      return record;
+    };
+    for (const manager of S.sortManagers()) S.observeSortManager(manager);
     return {
       side,
       grid: `${old.cols}x${old.rows}`,
@@ -312,7 +385,7 @@ async function flatFeature(page, pose, label) {
     S.cam.draw(S.out.getContext("2d"), { gain: 0, dt: 1 / 30 });
   });
   const flat = await sample(page, null, 0);
-  const image = PNG.sync.read(await page.screenshot({ clip: flat.box }));
+  const image = capturedPixels(flat);
   await page.evaluate(async (url) => {
     const S = window.__cdxPair;
     const bytes = await (await fetch(url)).arrayBuffer();
@@ -334,16 +407,46 @@ async function flatFeature(page, pose, label) {
     S.out.getContext("2d").putImageData(g.getImageData(0, 0, ref.width, ref.height), 0, 0);
   }, pose.clean);
   const reference = await sample(page, null, 0);
-  const clean = PNG.sync.read(await page.screenshot({ clip: reference.box }));
+  const clean = capturedPixels(reference);
   fs.writeFileSync(path.join(pose.folder, `${label}-flat.png`), PNG.sync.write(image));
   fs.writeFileSync(path.join(pose.folder, `${label}-clean.png`), PNG.sync.write(clean));
   return featureContrast(image, clean);
 }
 
+// sample() already waits for the real renderer's completed frame. Read that
+// frame, rather than asking browser composition to render another later one.
+const capturedPixels = (sample) => PNG.sync.read(Buffer.from(sample.image.split(",")[1], "base64"));
+
 async function sample(page, index, turn) {
   return page.evaluate(
     async ({ index, turn, F }) => {
       const S = window.__cdxPair;
+      const epoch = ++S.sortEpoch;
+      const p = window.__splashery.player;
+      const captureSorted = async () => {
+        const started = performance.now();
+        for (;;) {
+          for (const manager of S.sortManagers()) S.observeSortManager(manager);
+          const captured = await p.stage.captureFrame();
+          const managers = S.sortManagers();
+          // ALWAYS work buffers request a replacement sort every frame. Wait
+          // for this view's order to be applied, while later work may be in flight.
+          const ready = managers.map((manager) => {
+            const record = S.observeSortManager(manager);
+            if (record.error) throw new Error(record.error);
+            const version = manager.world.currentVersion;
+            return (
+              version === manager.world.lastWorldStateVersion &&
+              manager.world.getState(version)?.sortedBefore &&
+              (record.appliedEpochByVersion.get(version) ?? -1) >= epoch &&
+              !manager.testCameraMovedForSort()
+            );
+          });
+          if (ready.every(Boolean)) return captured;
+          if (performance.now() - started > 30000)
+            throw new Error("Captured camera view did not finish sorting");
+        }
+      };
       if (index !== null) S.step(index);
       const cam = S.cam;
       const h = [],
@@ -354,11 +457,11 @@ async function sample(page, index, turn) {
           h.push(cam.heights[k]);
           c.push(cam.lastColors[k * 4], cam.lastColors[k * 4 + 1], cam.lastColors[k * 4 + 2]);
         }
-      const p = window.__splashery.player;
       p.camera.setState({ ...S.view, yaw: S.view.yaw + turn }, { snap: true });
+      p.update(0);
       p.screen.g.drawImage(S.out, 0, 0);
       p.stage.setScreenCanvas(p.screen.canvas);
-      await p.stage.captureFrame();
+      const captured = await captureSorted();
       const height = (2 * cam.rows) / cam.cols;
       const z = 0.9 * S.mod.MIRROR.gain * 0.8;
       const pts = [
@@ -378,6 +481,22 @@ async function sample(page, index, turn) {
       };
       const w = Math.round(box.width * 2),
         hh = Math.round(box.height * 2);
+      const crop = document.createElement("canvas");
+      crop.width = w;
+      crop.height = hh;
+      crop
+        .getContext("2d")
+        .drawImage(
+          captured,
+          ((box.x - rect.left) / rect.width) * captured.width,
+          ((box.y - rect.top) / rect.height) * captured.height,
+          (box.width / rect.width) * captured.width,
+          (box.height / rect.height) * captured.height,
+          0,
+          0,
+          w,
+          hh,
+        );
       const image = document.createElement("canvas");
       image.width = w;
       image.height = hh;
@@ -400,6 +519,7 @@ async function sample(page, index, turn) {
         h,
         c,
         box,
+        image: crop.toDataURL("image/png"),
         reference: { width: w, height: hh, data: Array.from(g.getImageData(0, 0, w, hh).data) },
         answers: cam.answers,
       };
@@ -419,9 +539,9 @@ async function poseMeasure(page, pose, file, label) {
   let previous = null;
   for (let i = 8; i < 12; i++) {
     const front = await sample(page, i, 0);
-    const face = PNG.sync.read(await page.screenshot({ clip: front.box }));
+    const face = capturedPixels(front);
     const side = await sample(page, null, 0.35);
-    const turn = PNG.sync.read(await page.screenshot({ clip: side.box }));
+    const turn = capturedPixels(side);
     if (front.answers !== i + 1) throw new Error("Replay skipped a model answer");
     if (previous) {
       height.push(delta(front.h, previous.h));
@@ -589,7 +709,7 @@ export async function paired(
       const prior = results[`${profile}-${label}`];
       if (
         resume &&
-        prior?.benchmarkVersion === 2 &&
+        prior?.benchmarkVersion === 5 &&
         prior?.sourceHash === hash(source) &&
         prior.modelHash === modelHash &&
         (!liveTiming || prior.live) &&
@@ -624,7 +744,7 @@ export async function paired(
         );
         const errors = [];
         page.on("pageerror", (e) => errors.push(e.message));
-        await openProfile(page, process.env.SPLASHERY_URL || "http://127.0.0.1:4173/", profile);
+        await openProfile(page, process.env.SPLASHERY_URL || config.use.baseURL, profile);
         const live = liveTiming ? await timing(page) : null;
         const meta = await controlled(page);
         const all = [];
@@ -635,7 +755,7 @@ export async function paired(
           console.log(`${profile} ${label} ${pose.clip} phase ${pose.phase}: ${JSON.stringify(m)}`);
         }
         results[`${profile}-${label}`] = {
-          benchmarkVersion: 2,
+          benchmarkVersion: 5,
           sourceHash: hash(source),
           modelHash,
           ...meta,

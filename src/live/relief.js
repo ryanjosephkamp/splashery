@@ -659,7 +659,8 @@ export class CameraDepth {
         m += moved[k];
       }
       this.moving = m / n;
-      const near = grow(moved, cols, rows, 1);
+      // An empty motion mask is already its own dilation.
+      const near = m === 0 ? moved : grow(moved, cols, rows, 1);
       for (let k = 0; k < n; k++) still[k] = near[k] ? 0 : Math.min(60, still[k] + dt);
       // Once the color average reaches its two-second cap, every held
       // cell has the same weight. Compute that exponential once per draw.

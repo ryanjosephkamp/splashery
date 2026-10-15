@@ -1,8 +1,9 @@
 # Actions-only failures: task 86
 
 Made by Ryan with Codex (GPT-6), October 15, 2026. Branch: `codex/actions-only-failures`. Test and
-measurement changes only; no toy, renderer, or sandbox behavior changes. The draft PR's Verification
-section records the final Actions run.
+measurement changes, plus an exact-output optimization for an empty camera motion mask. No toy,
+renderer, or sandbox behavior changes. The draft PR's Verification section records the final Actions
+run.
 
 ## Evidence and causes
 
@@ -28,10 +29,12 @@ reported lines can differ from the source lines, and adding helpers moves them a
 ## Executed local evidence
 
 This environment has Debian Chromium 151 at `/usr/bin/chromium`, not Actions' Playwright
-Chromium 141. Browser runs use the existing SwiftShader flags. No rendering or audio APIs are
-replaced in the committed tests. Camera input is the existing generated fixture; its depth model and
-worker remain real. The hand-stepped GIF/physics clocks and recorded worker transport are explicit
-test controls, not measurements of real-time speed.
+Chromium 141. Browser runs use the existing SwiftShader flags. The committed checks use the real
+renderer and audio APIs. The camera tool labels native sort requests and responses, forwards every
+request unchanged, and waits for the renderer to apply the current view's returned order. Camera
+input is the existing generated fixture; its depth model and worker remain real. The hand-stepped
+GIF/physics clocks and recorded depth-worker transport are explicit test controls, not measurements
+of real-time speed.
 
 - Five original targets (pulsar, chromosome, GIF hold, pad, and PDF text) passed locally before
   edits. The original embed-guide test also passed locally. This is not an Actions reproduction.
@@ -45,9 +48,45 @@ test controls, not measurements of real-time speed.
 - A genuine injected 200 ms delay in native audio suspension still fails the revised strict check:
   0.17995 seconds of audio-clock advance against `<0.1`. The test distinguishes real audio delay
   from slow protocol delivery.
+- An injected 800 ms native resume delay fails both retained 500 ms checks (0.79169 and 0.78588
+  seconds). An 800 ms state-change notification delay passes when native audio resumes promptly.
 - The original real-browser loop cases failed under concurrent load: the fast video observed one
-  wrap, and the fast GIF observed none. Their other five selected cases passed. The remaining
-  changed files and the paired benchmark are verified in the draft PR's test results.
+  wrap, and the fast GIF observed none. Their other five selected cases passed. The revised complete
+  hh4-space, hh4-tiny, ops-text, ui2, scr2-engine, spg, live4, and psv3 files passed all 54 tests,
+  with zero skips. After reviewing stopped-frame coverage, the six loop cases also passed. A
+  deterministic 2.3-second end stall remains recorded against the original one-second stay limit.
+- The first complete camera file passed nine tests, but its paired check exceeded 600 seconds. Its
+  trace showed repeated browser screenshots taking five to eight seconds after an already completed
+  GPU capture. Reuse that actual captured framebuffer, with the same face crop and output scale, and
+  wait for all real splat-sort jobs to be applied after a camera change. The resulting comparison
+  completed but still rejected 20.658 ms against the unchanged 20.451 ms cost limit. Profiling and
+  exact-output checks address the remaining CPU cost; final evidence is recorded in the draft PR.
+- The camera profile attributed about 1.10 ms per held-pose draw to growing an all-zero motion mask.
+  That mask already equals its dilation. Reuse it only when its counted motion is zero; moving
+  frames retain the original expansion. Twelve recorded frames per clip and a 96-frame browser
+  sequence spanning no, partial, and full motion produced exactly identical color/depth pixels and
+  filter state. The new regression rejects a deliberately incorrect always-skip shortcut (946 pixel
+  and 12,331 height differences, among others). Both exact-output regressions passed after the
+  minimal source change. Default-canvas diagnostic timing improved from 15.658 to 15.217 ms for
+  still frames, and from 16.925 to 16.500 ms for low-light frames; this is diagnostic evidence, not
+  a substitute for the original paired bound.
+- The final batch exposed the paired tool's hardcoded port: it requested port 4173 even when the
+  suite used 4192. Honor the existing Playwright base URL, retaining the explicit `SPLASHERY_URL`
+  override. The next run reached the real camera pipeline and rejected an incorrect sort-idleness
+  wait: this toy rebuilds its work buffer every frame, so each rendered frame starts another sort.
+  Observe actual submitted jobs and native applied-order events instead. A front, turned, front
+  probe rejected each first frame's older order and accepted each current order after it was
+  applied, even though a replacement job was already running. The world version must also match.
+- The core batch reproduces the existing `kit:87` failure, "every kit toy has a recipe that builds
+  deterministically and fits the unit ball": the circular Picture QR recipe rejects its default code
+  as too detailed. That recipe and its known entry are outside this change.
+- Final local batch: 17 complete files, 238 tests, 236 passed, two failed, and zero skipped. Its
+  paired-camera failure was the hardcoded-port launch error above; after the base-URL and
+  native-sort corrections, the complete paired check passed in 3.8 minutes. Both original
+  image/depth checks and the 1.1 cost bound passed: still 21.083/19.975 ms (1.0555), and low light
+  21.600/20.233 ms (1.0675). The only remaining local failure is the known circular-QR case above.
+  Complete ui3 and sndc-engine files passed all 14 tests; every requested test file was exercised on
+  the final production source. The original failed reports remain in the ignored cache.
 
 Temporary fault-injection probes and their logs stay in the ignored local cache. They are not
 shipped or added to the suite. No retry, skip, `fixme`, threshold increase, or edit to
@@ -68,7 +107,7 @@ entries stay in place. Newly reported failures that were never known need no rem
 
 Status: implemented for review. No recipe, asset, license, public behavior, or effect changes.
 Reused: the existing application, renderer, clocks, fixtures, depth worker, and PDF printer. New:
-test observation/control, matched benchmark timing, the artifact workflow, and these instructions.
-No performance claim about a real phone is made. The paired cost measurement is software-browser CPU
-filtering, not a device frame-rate claim. Final check commands, counts, unresolved failures, and the
-Actions link are in the draft PR body. Rule check: none.
+test observation/control, matched benchmark timing, an empty-mask shortcut, the artifact workflow,
+and these instructions. No performance claim about a real phone is made. The paired cost measurement
+is software-browser CPU filtering, not a device frame-rate claim. Final check commands, counts,
+unresolved failures, and the Actions link are in the draft PR body. Rule check: none.

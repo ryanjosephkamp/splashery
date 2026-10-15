@@ -363,3 +363,88 @@ test("matched camera frames keep real feature contrast and improve held-pose sta
     fs.rmSync(dir, { recursive: true, force: true });
   }
 });
+
+test("skipping empty motion dilation preserves camera pixels and depth through still and moving frames", async ({
+  page,
+}) => {
+  const before = execFileSync("git", ["show", "9de7551e:src/live/relief.js"], { encoding: "utf8" });
+  await page.route(/\/src\/live\/relief\.js\?cdx-draw-before$/, (route) =>
+    route.fulfill({ contentType: "text/javascript", body: before }),
+  );
+  await page.goto("/tests/");
+  const result = await page.evaluate(async () => {
+    const before = await import("/src/live/relief.js?cdx-draw-before");
+    const after = await import("/src/live/relief.js");
+    const w = 64,
+      h = 48;
+    const video = document.createElement("canvas");
+    video.width = video.videoWidth = w;
+    video.height = video.videoHeight = h;
+    const vg = video.getContext("2d", { willReadFrequently: true });
+    let frame = 0;
+    const cameras = [before, after].map((mod) => {
+      const out = document.createElement("canvas");
+      out.width = w * 2;
+      out.height = h * 2;
+      const g = out.getContext("2d", { willReadFrequently: true });
+      const cam = new mod.CameraDepth(video, {
+        cols: w,
+        rows: h,
+        tier: "low",
+        mirror: true,
+        depth: false,
+        back: { cols: 16, rows: 12 },
+      });
+      // Replay deterministic model replies; the canvas, frame capture,
+      // temporal filters, depth processing, and drawing are the real code.
+      cam.worker = {
+        terminate() {},
+        postMessage(m) {
+          const d = Float32Array.from(
+            { length: 16 * 12 },
+            (_, i) => (i % 16 < 7 ? 0.8 : 0.2) + Math.sin(i + frame) * 0.015,
+          );
+          cam.onAnswer({ type: "depth", id: m.id, w: 16, h: 12, d, ms: 0 });
+        },
+      };
+      return { cam, g };
+    });
+    const different = { pixels: 0, heights: 0, target: 0, colors: 0, still: 0, moved: 0, back: 0 };
+    const motion = { none: 0, partial: 0, all: 0 };
+    const compare = (key, a, b) => {
+      if (a.length !== b.length) throw new Error(`${key}: different lengths`);
+      for (let i = 0; i < a.length; i++) if (!Object.is(a[i], b[i])) different[key]++;
+    };
+    try {
+      for (frame = 0; frame < 96; frame++) {
+        const pixels = vg.createImageData(w, h);
+        for (let y = 0; y < h; y++)
+          for (let x = 0; x < w; x++) {
+            const p = (y * w + x) * 4;
+            const moving = frame > 72 && frame < 81 && x >= (frame - 73) * 6 && x < (frame - 73) * 6 + 16 && y > 12 && y < 35; // prettier-ignore
+            pixels.data.set(
+              frame === 72 ? [255, 0, 255, 255] : moving ? [0, 255, 0, 255] : [40 + x % 23, 80 + y % 29, 120 + (x + y) % 31, 255], // prettier-ignore
+              p,
+            );
+          }
+        vg.putImageData(pixels, 0, 0);
+        const dt = [1 / 60, 1 / 30, 0.1][frame % 3];
+        for (const { cam, g } of cameras) cam.draw(g, { gain: 0.5, dt });
+        const [a, b] = cameras.map((c) => c.cam);
+        compare("pixels", cameras[0].g.getImageData(0, 0, w * 2, h * 2).data, cameras[1].g.getImageData(0, 0, w * 2, h * 2).data); // prettier-ignore
+        compare("heights", a.heights, b.heights);
+        compare("target", a.target, b.target);
+        compare("colors", a.lastSmooth, b.lastSmooth);
+        compare("still", a.stillT, b.stillT);
+        compare("moved", a.movedBuf || [], b.movedBuf || []);
+        compare("back", a.back.vals, b.back.vals);
+        motion[b.moving === 0 ? "none" : b.moving === 1 ? "all" : "partial"]++;
+      }
+      return { different, motion };
+    } finally {
+      for (const { cam } of cameras) cam.close();
+    }
+  });
+  expect(Object.values(result.different)).toEqual(Array(7).fill(0));
+  for (const count of Object.values(result.motion)) expect(count).toBeGreaterThan(0);
+});
