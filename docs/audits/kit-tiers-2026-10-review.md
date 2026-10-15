@@ -1,5 +1,9 @@
 # Task 66: main comparison and upper-tier review
 
+The [October 15 merge-batch investigation](kit-tiers-2026-10-batch-review.md) records the newer
+snowman/Eiffel follow-up against current main and the combined task tree. The results below remain
+the pinned October 14 comparison.
+
 Made by Ryan with Codex (GPT-6), October 14, 2026. This completes the requested follow-up for
 [draft PR 599](https://github.com/ryanjosephkamp/splashery/pull/599). The Math repair remains
 unchanged; engine tiers are proposals only.

@@ -1,5 +1,9 @@
 # Record: T2, open-shelf kit tiers
 
+The [October 15 merge-batch investigation](kit-tiers-2026-10-batch-review.md) records the newer
+snowman/Eiffel follow-up against current main and the combined task tree. The results below remain
+the pinned October 14 comparison.
+
 ## Identity and status
 
 - Task: Codex 66 / T2, Science, Space, and Math kit tiers.
