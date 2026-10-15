@@ -1,0 +1,23 @@
+[
+  {
+    "text": "http://example.org/",
+    "same": true,
+    "fastMs": 11204,
+    "referenceMs": 22983,
+    "rgbaSha256": "7941561dffd7ca3069f798ca969a74f12a28bd054dd23271f7fa74bf0f903a08"
+  },
+  {
+    "text": "http://example.net/a?x=1&y=two",
+    "same": true,
+    "fastMs": 8761,
+    "referenceMs": 23078,
+    "rgbaSha256": "059ca09a576fa57ae37486a63df2c04ef177c226255481913daba5fca33b6e51"
+  },
+  {
+    "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+    "same": true,
+    "fastMs": 7577,
+    "referenceMs": 20027,
+    "rgbaSha256": "bd4688410ada641355da8810267a45ebe35b65197baa8595de7a20d37d77f655"
+  }
+]
