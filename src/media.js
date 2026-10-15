@@ -20,7 +20,8 @@
 // or { box, page }] (box [x0, y0, x1, y1] in fractions of the page from its
 // top-left corner; url only http:, https: or mailto:, page 0-based), and
 // await m.figures(i) -> the boxes its pictures are painted in, [{ box }]
-// (lane Polish: and its figures drawn as paths, a chart or a drawing).
+// (lane Polish: m.figures(i, { drawn: true }) also gives its figures drawn as
+// paths, a chart or a drawing).
 // m.draw(i, w, h, region) draws only `region` ([x0, y0, x1, y1], the same
 // fractions) of a PDF page or a picture into w x h.
 
@@ -402,7 +403,11 @@ async function openPDF(src, limits) {
     return map.get(i);
   };
   const links = once(new Map(), (page, i) => pdfLinks(doc, page, i));
-  const figures = once(new Map(), (page) => pdfFigures(lib.OPS, page));
+  const plainFigures = once(new Map(), (page) => pdfFigures(lib.OPS, page));
+  // (Lane Polish: figures(i, { drawn: true }) also finds figures drawn as
+  // paths; figures(i) is the pictures alone, as before.)
+  const drawnFigs = once(new Map(), (page) => pdfFigures(lib.OPS, page, { drawn: true }));
+  const figures = (i, opts) => (opts?.drawn ? drawnFigs(i) : plainFigures(i));
   return {
     kind: "pdf",
     name: src.name,
@@ -519,7 +524,7 @@ export async function pdfLinks(doc, page, i) {
 // touch are joined (a picture painted in strips), tiny ones (an icon, a
 // bullet) are dropped, and so is one that covers the whole page (a scan).
 // Lane Polish: figures drawn as vector paths are found too (drawnFigures).
-export async function pdfFigures(OPS, page) {
+export async function pdfFigures(OPS, page, { drawn: withDrawn = false } = {}) {
   const viewport = page.getViewport({ scale: 1 });
   const list = await page.getOperatorList();
   const mulM = (m, n) => [
@@ -583,7 +588,9 @@ export async function pdfFigures(OPS, page) {
     return w * h >= 0.004 && w >= 0.04 && h >= 0.03 && w * h <= 0.9;
   };
   // (Lane Polish: and the figures drawn as paths, apart from the pictures.)
-  if (drawn.length && drawn.length <= DRAWN_MAX)
+  // (Only when asked, { drawn: true }: every other caller gets the pictures
+  // alone, as before.)
+  if (withDrawn && drawn.length && drawn.length <= DRAWN_MAX)
     boxes.push(...(await drawnFigures(page, viewport, drawn, joinBoxes(boxes).filter(sized))));
   return joinBoxes(boxes)
     .filter(sized)
