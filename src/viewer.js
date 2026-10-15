@@ -85,7 +85,7 @@ export class Viewer {
     player.scene = scene;
     player.applyLook();
     await player.loadToy(scene.toy);
-    player.applySettings(scene);
+    player.applySettings(scene, { restoredCamera: !!this.hash });
     // A flat toy's tilt starts locked (lane Viewer).
     player.camera.setTiltLock(!!player.toyInfo?.recipe?.tiltLock);
     this.bindGestures();
