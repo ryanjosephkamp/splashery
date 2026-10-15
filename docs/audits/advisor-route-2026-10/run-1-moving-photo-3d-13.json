@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -68,7 +68,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2mtgwme7ufU3tKd29qA4InhxbI-tECiT_17ZIXSHnZYLlqKnpyc_3wC9hwqiNxiPFK5QwJlC1M5CtSlABUKm5htLzbpc7xercrHa_Si31XZdbb4uV6-vPwUSiRqoVgWwu0J1g5O2EkPda8PaSoFOYefO2rYLf3TsFptG0s6zMMUEUUbnQbDzhmAcCzDOndKXGtWpDa7PLT22JEA-UkcSYs9OQlSKLP-Nkxz-rlA6pano4l3sQwqkLx0OpDiTenei9J_UHtBEEigHsi0foSqX-wIGV9epS7ncCXTIuv5Zv9sV0Ogg3fP-yjGFMTpz_sTiZbHNjIk-72_iaILzT9W1iFd5iG2qVshMYa7vsLXE_5nqSwEBG93HqYFAeNDxGYGdkHBu-lG1eAAvWqBwBUFGo9WzFtmtvguWgoHIZ-DugbwkpEdtP02pf9OdcTLgPVDOONEHL7Tf1OvJDQ98ZLGItP31JlmFHQVM6SsOeQCvWR3zKThj8kHugDEvcLPcCiiZROiyU7kPljGL5dDT7A4ht87SNHjatk3F2cU5X8DBYCuRnHxw7_OVwxDQSy6Ql4cTs_uymjQwvBzyT77PyuRU1tvDq4K3fLFm3sd8HYJviFGb7Md03W5iugEafX6MLW8rvYfIWkR_dFTityy7SIYfx_EP",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLjtswDPwX7tUJnIezWN_2G9pTiz3QMu2oUSRBovNo4H8vJcfpIos2l4g0h8OhRjdA76GG6A3GPYUrFHCiELWzUG8KUIGQqX1nqVmX691iVS5W1feyqsvXulovt2-bHwKJRC3UqwLYXaG-wUFbiaEZtGFtpUCn8OhO2vYLv3fsFptW0s6zMMUEUUbnQfDoDcE4FmCcO6QvDapDH9yQW3rsSYC8pyNJiAM7CVEpsvw3TnL4m0LplKaii3dxCCmQvtR1pDiTeneg9J_UdmgiCZQD2Z73UJfLXQFn1zSpS7msBHrOuv5ZX1UFtDpI97y_ckxhjM6cvrB4WWw7Y6LP-5s42uD8U3Uj4lUeYpuqFTJTmOuP2Fvi_0z1WkDAVg9xaiAQPuv4jMCjkHBu-lm1eAAvWqBwBUFGo9WzFtmtvguWgjORz8DqgbwkpEdtv0ypf9OdcTLgPVDOONEHL7TbNOvJDQ98ZLGItP35IVmFRwqY0lc85wG8ZrXPp-CMyQe5A8a8wM1yK6BkEqHLTuUhWMYslsNAszuE3DpL0-Bp2zYVZxfnfAGdwV4iOfngfs1XDueAXnKBvDycmN2X1aSB4aXLP_k-K5NT2Wy7NwUf-WLNvI_5OgTfEqM22Y_put3EdAM0-vQYW95Weg-RtYj-7KjEb1l2kQw_juMf",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "moving-photo-3d",
@@ -85,7 +85,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:42:42.599Z",
+      "createdAt": "2026-10-15T05:07:56.895Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -218,7 +218,7 @@
       "color": [640, 360],
       "depth": [480, 270],
       "video": true,
-      "videoTime": 1.513801,
+      "videoTime": 1.405464,
       "cost": {
         "color": 1228800,
         "depth": 129600,
@@ -230,7 +230,7 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 40,
+    "stageUpdateTicks": 42,
     "controls": {
       "play": 1
     },

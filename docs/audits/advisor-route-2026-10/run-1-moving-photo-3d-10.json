@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -58,7 +58,7 @@
     {
       "requested": "sample",
       "hidden": false,
-      "pos": 0.03195099999925494,
+      "pos": 0.062281,
       "length": 6,
       "playing": true,
       "mic": false,
@@ -66,70 +66,70 @@
       "recorded": 0,
       "recording": 0,
       "frame": 0,
-      "last": 0.15,
+      "last": 0.2166999999999971,
       "sample": "sample",
       "frames": 96
     },
     {
       "requested": "custom",
       "hidden": false,
-      "pos": 0.039776,
+      "pos": 0.274882,
       "length": 2.4999999999999973,
       "playing": true,
       "mic": false,
       "live": false,
       "recorded": 0,
       "recording": 0,
-      "frame": 0,
-      "last": 0.11660000000000582,
+      "frame": 4,
+      "last": 0.15010000000002038,
       "frames": 38
     },
     {
       "requested": "sample",
       "hidden": false,
-      "pos": 0.043025,
+      "pos": 0.081716,
       "length": 6,
       "playing": true,
       "mic": false,
       "live": false,
       "recorded": 0,
       "recording": 0,
-      "frame": 0,
-      "last": 0.2500999999999913,
+      "frame": 1,
+      "last": 0.30000000000000004,
       "sample": "sample",
       "frames": 96
     },
     {
       "requested": "custom",
       "hidden": false,
-      "pos": 0.2191,
+      "pos": 0.326008,
       "length": 2.4999999999999973,
       "playing": true,
       "mic": false,
       "live": false,
       "recorded": 0,
       "recording": 0,
-      "frame": 3,
+      "frame": 4,
+      "last": 0.3334000000000088,
+      "frames": 38
+    },
+    {
+      "requested": "sample",
+      "hidden": false,
+      "pos": 0.072473,
+      "length": 6,
+      "playing": true,
+      "mic": false,
+      "live": false,
+      "recorded": 0,
+      "recording": 0,
+      "frame": 1,
       "last": 0.23330000000000292,
-      "frames": 38
-    },
-    {
-      "requested": "sample",
-      "hidden": false,
-      "pos": 0.015975,
-      "length": 6,
-      "playing": true,
-      "mic": false,
-      "live": false,
-      "recorded": 0,
-      "recording": 0,
-      "frame": 0,
-      "last": 0.2333000000000029,
       "sample": "sample",
       "frames": 96
     }
   ],
-  "durationMs": 1389,
+  "durationMs": 2098,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -137,7 +137,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLjtswDPwX7tUJnDfqW3-gl_bUYg-0zCRqZEmQ6Dwa5N9LMXGwyKLNJSLNIWeo0RUwRmggR4d5T-kCFRwpZRs8NIsKTCJk6r6y1Mzr-Xoyqyez1Y962SznzbyebjarnwLJRB00swo4XKC5wsF6iaEdrGPrpcCWsA9H63eTuA8cJotO0iGyTMoFYpwtRMyQOfTyqcTfsKdCzjryDLdbBS6EQ6lu0Rx2KQw6JuKOBMF70nIcOEiIxhTUMy4S-btBR8qUzjHkIZVA-tJ2S4aVSAwHKv9lA1t0mQTKifyO99DU03UFp9C2pUs9XQn0pFr_Wb9aVdDZJN11p_WthDkHd_w0JcqyuxGTo-70PqNLIb5UtyLeKIllqTbITGms73Hnif_DalNBws4O-d5AIHyy-RWBvQxhbfpRtfgCz1agcAFBZmfNqxbZrX0IloITUVTg6ok8F2RE6z-xtH_oMfFuykdggguiD95ovWjnpG544jNjH6Xtr3fJGnFNwpK-4EkJRMtmr6cUnNOD3AGjLnAxXQqomETGqXt5SJ5RxXIaaHSHDPfB05142bYvxepszVewdbiTSE4xhd_jlcMpYZRcoiiPKav7VE0hDG9b_cn3UZmc6na5_WLgXS_WjfsYr0PwHTFap34s1x3uk66Azh6ftOW96fNhK6I_OqrM9yy7uBteZc9ut9tf",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLjtswDPwX7tUJnOdifesP9NKeWuyBlhlHG0USJDqPBvn3UkwcLLJoc4lIc8gZanQBjBEayNFh3lI6QwUHStkGD82iApMImbpvLDXzer6ezOrJbPWzXjX1a7NYTt_e6l8CyUQdNLMKOJyhucDOeomhHaxj66XAlnAfDtb3k7gNHCaLTtIhskzKBWKcLUTMkDns5VOJv-OeCjnryDNcrxW4EHalukWz61MYdEzEngTBW9JyHDhIiMYU1CMuEvmHQUfKlE4x5CGVQPrSZkOGlUgMOyr_ZQMbdJkEyol8z1to6um6gmNo29Klnq4EelSt_6xfrSrobJLuutP6WsKcgzt8mRJl2d2IyVF3epvRpRCfqlsRb5TEslQbZKY01u-x98T_YfVaQcLODvnWQCB8tPkZgXsZwtr0s2rxBZ6sQOEMgszOmmctslt7FywFR6KowNUDeSrIiNZ_YWn_0H3izZT3wAQXRB-80HrRzknd8MBnxn2Utr_fJWvENQlL-oxHJRAtm62eUnBOD3IHjLrAxXQpoGISGafu5SF5RhXLaaDRHTLcB0834mXbvhSrszVfwcZhL5GcYgof45XDMWGUXKIojymr-1RNIQwvG_3J91GZnOp2uXkz8K4X68Z9jNch-I4YrVM_lusOt0kXQGcPD9ry3vT5sBXRnx1V5nuWXdwMr7Jn1-v1Lw",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "moving-photo-3d",
@@ -155,7 +155,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:42:33.906Z",
+      "createdAt": "2026-10-15T05:07:48.904Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -289,7 +289,7 @@
       "color": [640, 360],
       "depth": [480, 270],
       "video": true,
-      "videoTime": 0.090683,
+      "videoTime": 0.01555,
       "cost": {
         "color": 1228800,
         "depth": 129600,
@@ -301,11 +301,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 596,
+    "stageUpdateTicks": 657,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 6212.5,
-      "navigationToFirstFrameMs": 8302.400000000373,
-      "stageUpdateTicks": 43
+      "chooseToyToFirstFrameMs": 6274.4000000003725,
+      "navigationToFirstFrameMs": 9052.800000000745,
+      "stageUpdateTicks": 44
     },
     "controls": {
       "play": 1

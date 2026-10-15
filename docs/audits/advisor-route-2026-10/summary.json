@@ -1,7 +1,7 @@
 {
   "environment": {
-    "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-    "recordedAt": "2026-10-15T04:40:12.966Z",
+    "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+    "recordedAt": "2026-10-15T05:05:22.828Z",
     "browser": "151.0.7922.173",
     "runtime": {
       "node": "v24.19.0",
@@ -43,8 +43,8 @@
   },
   "requestedRuns": 3,
   "totals": {
-    "passed": 149,
-    "failed": 16,
+    "passed": 150,
+    "failed": 15,
     "inconclusive": 9,
     "blocked": 12
   },
@@ -60,8 +60,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-01.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-01.json"
       ]
     },
     {
@@ -75,8 +75,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-02.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-02.json"
       ]
     },
     {
@@ -90,8 +90,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-03.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-03.json"
       ]
     },
     {
@@ -105,8 +105,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-04.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-04.json"
       ]
     },
     {
@@ -120,8 +120,8 @@
       "result": "failed",
       "records": [
         "run-1-photo-3d-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-05.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-05.json"
       ]
     },
     {
@@ -135,8 +135,8 @@
       "result": "failed",
       "records": [
         "run-1-photo-3d-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-06.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-06.json"
       ]
     },
     {
@@ -150,8 +150,8 @@
       "result": "failed",
       "records": [
         "run-1-photo-3d-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-07.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-07.json"
       ]
     },
     {
@@ -165,8 +165,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-08.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-08.json"
       ]
     },
     {
@@ -180,8 +180,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-09.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-09.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-09.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-09.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-09.json"
       ]
     },
     {
@@ -195,8 +195,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-10.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-10.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-10.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-10.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-10.json"
       ]
     },
     {
@@ -210,8 +210,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-11.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-11.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-11.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-11.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-11.json"
       ]
     },
     {
@@ -225,8 +225,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-12.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-12.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-12.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-12.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-12.json"
       ]
     },
     {
@@ -240,8 +240,8 @@
       "result": "failed",
       "records": [
         "run-1-photo-3d-13.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-13.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-13.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-13.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-13.json"
       ]
     },
     {
@@ -255,8 +255,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-14.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-14.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-14.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-14.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-14.json"
       ]
     },
     {
@@ -270,8 +270,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-15.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-15.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-15.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-15.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-15.json"
       ]
     },
     {
@@ -285,8 +285,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-16.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-16.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-16.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-16.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-16.json"
       ]
     },
     {
@@ -300,8 +300,8 @@
       "result": "passed",
       "records": [
         "run-1-photo-3d-17.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-17.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-17.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-photo-3d-17.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-photo-3d-17.json"
       ]
     },
     {
@@ -315,8 +315,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-01.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-01.json"
       ]
     },
     {
@@ -330,8 +330,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-02.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-02.json"
       ]
     },
     {
@@ -345,8 +345,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-03.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-03.json"
       ]
     },
     {
@@ -360,8 +360,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-04.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-04.json"
       ]
     },
     {
@@ -375,8 +375,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-05.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-05.json"
       ]
     },
     {
@@ -390,8 +390,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-06.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-06.json"
       ]
     },
     {
@@ -405,8 +405,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-07.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-07.json"
       ]
     },
     {
@@ -420,8 +420,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-08.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-08.json"
       ]
     },
     {
@@ -435,8 +435,8 @@
       "result": "failed",
       "records": [
         "run-1-moving-photo-3d-09.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-09.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-09.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-09.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-09.json"
       ]
     },
     {
@@ -450,8 +450,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-10.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-10.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-10.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-10.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-10.json"
       ]
     },
     {
@@ -465,8 +465,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-11.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-11.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-11.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-11.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-11.json"
       ]
     },
     {
@@ -480,8 +480,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-12.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-12.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-12.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-12.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-12.json"
       ]
     },
     {
@@ -495,8 +495,8 @@
       "result": "passed",
       "records": [
         "run-1-moving-photo-3d-13.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-13.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-13.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-13.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-13.json"
       ]
     },
     {
@@ -510,8 +510,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-code-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-01.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-code-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-code-01.json"
       ]
     },
     {
@@ -525,8 +525,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-code-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-02.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-code-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-code-02.json"
       ]
     },
     {
@@ -540,8 +540,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-code-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-03.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-code-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-code-03.json"
       ]
     },
     {
@@ -555,8 +555,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-code-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-04.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-code-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-code-04.json"
       ]
     },
     {
@@ -570,8 +570,8 @@
       "result": "inconclusive",
       "records": [
         "run-1-qr-code-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-05.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-code-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-code-05.json"
       ]
     },
     {
@@ -585,8 +585,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-code-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-06.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-code-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-code-06.json"
       ]
     },
     {
@@ -600,8 +600,8 @@
       "result": "blocked",
       "records": [
         "run-1-qr-code-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-07.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-code-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-code-07.json"
       ]
     },
     {
@@ -615,8 +615,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-code-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-08.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-code-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-code-08.json"
       ]
     },
     {
@@ -630,8 +630,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-picture-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-01.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-picture-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-picture-01.json"
       ]
     },
     {
@@ -645,8 +645,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-picture-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-02.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-picture-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-picture-02.json"
       ]
     },
     {
@@ -660,8 +660,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-picture-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-03.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-picture-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-picture-03.json"
       ]
     },
     {
@@ -675,8 +675,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-picture-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-04.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-picture-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-picture-04.json"
       ]
     },
     {
@@ -690,8 +690,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-picture-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-05.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-picture-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-picture-05.json"
       ]
     },
     {
@@ -705,8 +705,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-picture-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-06.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-picture-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-picture-06.json"
       ]
     },
     {
@@ -720,8 +720,8 @@
       "result": "blocked",
       "records": [
         "run-1-qr-picture-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-07.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-picture-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-picture-07.json"
       ]
     },
     {
@@ -735,8 +735,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-picture-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-08.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-picture-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-picture-08.json"
       ]
     },
     {
@@ -750,8 +750,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-three-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-01.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-three-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-three-01.json"
       ]
     },
     {
@@ -765,8 +765,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-three-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-02.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-three-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-three-02.json"
       ]
     },
     {
@@ -780,8 +780,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-three-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-03.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-three-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-three-03.json"
       ]
     },
     {
@@ -795,8 +795,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-three-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-04.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-three-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-three-04.json"
       ]
     },
     {
@@ -810,8 +810,8 @@
       "result": "inconclusive",
       "records": [
         "run-1-qr-three-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-05.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-three-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-three-05.json"
       ]
     },
     {
@@ -825,8 +825,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-three-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-06.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-three-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-three-06.json"
       ]
     },
     {
@@ -840,8 +840,8 @@
       "result": "blocked",
       "records": [
         "run-1-qr-three-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-07.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-three-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-three-07.json"
       ]
     },
     {
@@ -855,8 +855,8 @@
       "result": "passed",
       "records": [
         "run-1-qr-three-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-08.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-qr-three-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-qr-three-08.json"
       ]
     },
     {
@@ -870,8 +870,8 @@
       "result": "passed",
       "records": [
         "run-1-share-qr-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-01.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-01.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-share-qr-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-share-qr-01.json"
       ]
     },
     {
@@ -885,23 +885,23 @@
       "result": "passed",
       "records": [
         "run-1-share-qr-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-02.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-02.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-share-qr-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-share-qr-02.json"
       ]
     },
     {
       "step": "share-qr: Native-size exported decode",
-      "passed": 2,
-      "failed": 1,
+      "passed": 3,
+      "failed": 0,
       "inconclusive": 0,
       "blocked": 0,
       "attempted": 3,
       "planned": 3,
-      "result": "failed",
+      "result": "passed",
       "records": [
         "run-1-share-qr-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-03.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-03.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-share-qr-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-share-qr-03.json"
       ]
     },
     {
@@ -915,8 +915,8 @@
       "result": "passed",
       "records": [
         "run-1-share-qr-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-04.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-04.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-share-qr-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-share-qr-04.json"
       ]
     },
     {
@@ -930,8 +930,8 @@
       "result": "inconclusive",
       "records": [
         "run-1-share-qr-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-05.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-05.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-share-qr-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-share-qr-05.json"
       ]
     },
     {
@@ -945,8 +945,8 @@
       "result": "passed",
       "records": [
         "run-1-share-qr-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-06.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-06.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-share-qr-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-share-qr-06.json"
       ]
     },
     {
@@ -960,8 +960,8 @@
       "result": "blocked",
       "records": [
         "run-1-share-qr-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-07.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-07.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-share-qr-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-share-qr-07.json"
       ]
     },
     {
@@ -975,8 +975,8 @@
       "result": "passed",
       "records": [
         "run-1-share-qr-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-08.json",
-        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-08.json"
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-2-share-qr-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/03a049525093dfb186e9a97f301af14d4c431d5a/docs/audits/advisor-route-2026-10/run-3-share-qr-08.json"
       ]
     }
   ]

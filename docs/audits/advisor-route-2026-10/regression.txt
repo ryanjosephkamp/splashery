@@ -1,22 +1,22 @@
 Command: SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/cdx-adv.spec.mjs
-Build: dfeb81777131094e4a78c8db75f24cfa13f7a044
+Build: 25ba908cf5a30d398aaacdaeb3949056d37a8124
 Spec blob: e384f7c5ae7cdc87df8dc1ab993baf80af7db72e
 
 
 Running 9 tests using 1 worker
 
-(node:28388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:40413) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-(node:28388) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(node:40413) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
 (Use `node --trace-warnings ...` to show where the warning was created)
-  ✓  1 [chromium] › tests/cdx-adv.spec.mjs:11:3 › photo-3d opens without console or page errors (8.2s)
-  ✓  2 [chromium] › tests/cdx-adv.spec.mjs:11:3 › moving-photo-3d opens without console or page errors (12.6s)
-  ✓  3 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-code opens without console or page errors (9.8s)
-  ✓  4 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-picture opens without console or page errors (9.1s)
-  ✓  5 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-three opens without console or page errors (9.0s)
-  ✓  6 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-code exports a PNG that both readers decode exactly (15.4s)
-  ✓  7 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-picture exports a PNG that both readers decode exactly (25.3s)
-  ✓  8 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-three exports a PNG that both readers decode exactly (11.1s)
-  ✓  9 [chromium] › tests/cdx-adv.spec.mjs:24:3 › share-qr exports a PNG that both readers decode exactly (16.8s)
+  ✓  1 [chromium] › tests/cdx-adv.spec.mjs:11:3 › photo-3d opens without console or page errors (7.6s)
+  ✓  2 [chromium] › tests/cdx-adv.spec.mjs:11:3 › moving-photo-3d opens without console or page errors (11.2s)
+  ✓  3 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-code opens without console or page errors (11.0s)
+  ✓  4 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-picture opens without console or page errors (13.4s)
+  ✓  5 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-three opens without console or page errors (9.3s)
+  ✓  6 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-code exports a PNG that both readers decode exactly (16.1s)
+  ✓  7 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-picture exports a PNG that both readers decode exactly (25.1s)
+  ✓  8 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-three exports a PNG that both readers decode exactly (12.9s)
+  ✓  9 [chromium] › tests/cdx-adv.spec.mjs:24:3 › share-qr exports a PNG that both readers decode exactly (15.8s)
 
-  9 passed (2.0m)
+  9 passed (2.1m)

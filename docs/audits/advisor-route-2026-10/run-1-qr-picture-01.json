@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -73,7 +73,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:43:47.547Z",
+        "createdAt": "2026-10-15T05:08:54.235Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -190,11 +190,11 @@
         "visible": false
       },
       "linkNote": "",
-      "stageUpdateTicks": 24,
+      "stageUpdateTicks": 26,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 3343.5,
-        "navigationToFirstFrameMs": 6047.700000001118,
-        "stageUpdateTicks": 22
+        "chooseToyToFirstFrameMs": 3359.5,
+        "navigationToFirstFrameMs": 6227.9000000003725,
+        "stageUpdateTicks": 24
       },
       "controls": {
         "turn": 0
@@ -203,10 +203,10 @@
         "turn": 0
       }
     },
-    "navigationThroughSettledCaptureMs": 6420.4000000003725,
+    "navigationThroughSettledCaptureMs": 6267.0999999996275,
     "method": "Navigation time origin and chooseToy performance.now through first postrender event of the nonbusy target with Sharp picture visible for photo routes; not a GPU presentation timestamp"
   },
-  "durationMs": 6426,
+  "durationMs": 6275,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -231,7 +231,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:43:47.903Z",
+      "createdAt": "2026-10-15T05:08:54.247Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -350,9 +350,9 @@
     "linkNote": "",
     "stageUpdateTicks": 27,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 3343.5,
-      "navigationToFirstFrameMs": 6047.700000001118,
-      "stageUpdateTicks": 22
+      "chooseToyToFirstFrameMs": 3359.5,
+      "navigationToFirstFrameMs": 6227.9000000003725,
+      "stageUpdateTicks": 24
     },
     "controls": {
       "turn": 0

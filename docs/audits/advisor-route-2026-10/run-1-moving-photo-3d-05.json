@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -56,77 +56,92 @@
   },
   "actual": {
     "method": "performance.now at PlayCanvas postrender during unmodified playback (CPU event, not GPU presentation)",
-    "elapsedMs": 1801.800000000745,
+    "elapsedMs": 1800.2000000011176,
     "samples": [
       {
-        "at": 16591.599999999627,
+        "at": 17041.599999999627,
         "clipTime": 5.6,
         "sourceFrame": 89
       },
       {
-        "at": 16724.900000000373,
-        "clipTime": 0.12001299999962747,
-        "sourceFrame": 1
+        "at": 17273.800000000745,
+        "clipTime": 0.213846,
+        "sourceFrame": 3
       },
       {
-        "at": 16743.799999998882,
-        "clipTime": 0.136752,
-        "sourceFrame": 2
+        "at": 17293.599999999627,
+        "clipTime": 0.23513299999962747,
+        "sourceFrame": 3
       },
       {
-        "at": 16757,
-        "clipTime": 0.154706,
-        "sourceFrame": 2
+        "at": 17410.599999999627,
+        "clipTime": 0.349966,
+        "sourceFrame": 5
       },
       {
-        "at": 17011.699999999255,
-        "clipTime": 0.406781,
-        "sourceFrame": 6
+        "at": 17442.099999999627,
+        "clipTime": 0.359078,
+        "sourceFrame": 5
       },
       {
-        "at": 17024.099999999627,
-        "clipTime": 0.419887,
-        "sourceFrame": 6
+        "at": 17699.099999999627,
+        "clipTime": 0.639527,
+        "sourceFrame": 10
       },
       {
-        "at": 17437.900000000373,
-        "clipTime": 0.8330560000014902,
-        "sourceFrame": 13
+        "at": 17707.400000000373,
+        "clipTime": 0.644776,
+        "sourceFrame": 10
       },
       {
-        "at": 17441.299999998882,
-        "clipTime": 0.838282,
-        "sourceFrame": 13
+        "at": 17820,
+        "clipTime": 0.761121,
+        "sourceFrame": 12
       },
       {
-        "at": 17457.699999999255,
-        "clipTime": 0.85537,
-        "sourceFrame": 13
+        "at": 17947.5,
+        "clipTime": 0.887856,
+        "sourceFrame": 14
       },
       {
-        "at": 17870.5,
-        "clipTime": 1.266775,
+        "at": 17954.300000000745,
+        "clipTime": 0.896561,
+        "sourceFrame": 14
+      },
+      {
+        "at": 18088.099999999627,
+        "clipTime": 1.028065,
+        "sourceFrame": 16
+      },
+      {
+        "at": 18210.900000000373,
+        "clipTime": 1.151596,
+        "sourceFrame": 18
+      },
+      {
+        "at": 18361.5,
+        "clipTime": 1.294998,
         "sourceFrame": 20
       },
       {
-        "at": 18013.099999999627,
-        "clipTime": 1.409189,
+        "at": 18492.099999999627,
+        "clipTime": 1.431784,
         "sourceFrame": 22
       },
       {
-        "at": 18021.699999999255,
-        "clipTime": 1.419778,
-        "sourceFrame": 22
+        "at": 18611.400000000373,
+        "clipTime": 1.548548,
+        "sourceFrame": 24
       }
     ],
     "frameTimeMs": {
-      "min": 3.399999998509884,
-      "median": 18.899999998509884,
-      "p95": 412.80000000074506,
-      "max": 413.80000000074506
+      "min": 6.800000000745058,
+      "median": 119.30000000074506,
+      "p95": 232.2000000011176,
+      "max": 257
     }
   },
-  "durationMs": 1810,
+  "durationMs": 1805,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -148,7 +163,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:41:32.228Z",
+      "createdAt": "2026-10-15T05:06:36.552Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -278,7 +293,7 @@
       "color": [640, 360],
       "depth": [480, 270],
       "video": true,
-      "videoTime": 1.667015,
+      "videoTime": 1.652591,
       "cost": {
         "color": 1228800,
         "depth": 129600,
@@ -290,11 +305,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 117,
+    "stageUpdateTicks": 120,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 6212.5,
-      "navigationToFirstFrameMs": 8302.400000000373,
-      "stageUpdateTicks": 43
+      "chooseToyToFirstFrameMs": 6274.4000000003725,
+      "navigationToFirstFrameMs": 9052.800000000745,
+      "stageUpdateTicks": 44
     },
     "controls": {
       "play": 1

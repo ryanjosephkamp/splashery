@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -56,227 +56,212 @@
   },
   "actual": {
     "method": "performance.now at PlayCanvas postrender during unmodified playback (CPU event, not GPU presentation)",
-    "elapsedMs": 3000.2999999988824,
+    "elapsedMs": 3000.300000000745,
     "samples": [
       {
-        "at": 63433.09999999963,
-        "clipTime": 0.771187,
-        "sourceFrame": 11
-      },
-      {
-        "at": 63561.59999999963,
-        "clipTime": 0.899517,
-        "sourceFrame": 13
-      },
-      {
-        "at": 63589.29999999888,
-        "clipTime": 0.927782,
-        "sourceFrame": 14
-      },
-      {
-        "at": 63710,
-        "clipTime": 1.046847,
-        "sourceFrame": 15
-      },
-      {
-        "at": 63721.90000000037,
-        "clipTime": 1.060221,
-        "sourceFrame": 16
-      },
-      {
-        "at": 63831.40000000037,
-        "clipTime": 1.170064,
-        "sourceFrame": 17
-      },
-      {
-        "at": 63837.09999999963,
-        "clipTime": 1.176617,
-        "sourceFrame": 17
-      },
-      {
-        "at": 63958.79999999888,
-        "clipTime": 1.295181,
-        "sourceFrame": 19
-      },
-      {
-        "at": 63992.09999999963,
-        "clipTime": 1.329873,
-        "sourceFrame": 20
-      },
-      {
-        "at": 64112.29999999888,
-        "clipTime": 1.449309,
-        "sourceFrame": 22
-      },
-      {
-        "at": 64121.199999999255,
-        "clipTime": 1.4601419999996275,
-        "sourceFrame": 22
-      },
-      {
-        "at": 64245.699999999255,
-        "clipTime": 1.584126,
-        "sourceFrame": 24
-      },
-      {
-        "at": 64254.90000000037,
-        "clipTime": 1.59348,
-        "sourceFrame": 24
-      },
-      {
-        "at": 64428.199999999255,
-        "clipTime": 1.765964,
-        "sourceFrame": 26
-      },
-      {
-        "at": 64437.699999999255,
-        "clipTime": 1.776797,
-        "sourceFrame": 27
-      },
-      {
-        "at": 64556.199999999255,
-        "clipTime": 1.8945,
-        "sourceFrame": 28
-      },
-      {
-        "at": 64590.90000000037,
-        "clipTime": 1.927923,
-        "sourceFrame": 29
-      },
-      {
-        "at": 64637.09999999963,
-        "clipTime": 1.975851,
-        "sourceFrame": 30
-      },
-      {
-        "at": 64714.199999999255,
-        "clipTime": 2.05144,
-        "sourceFrame": 31
-      },
-      {
-        "at": 64766.199999999255,
-        "clipTime": 2.10539,
-        "sourceFrame": 32
-      },
-      {
-        "at": 64841.199999999255,
-        "clipTime": 2.179128,
-        "sourceFrame": 33
-      },
-      {
-        "at": 64918.59999999963,
-        "clipTime": 2.256805,
-        "sourceFrame": 34
-      },
-      {
-        "at": 65007.199999999255,
-        "clipTime": 2.343873,
-        "sourceFrame": 35
-      },
-      {
-        "at": 65065,
-        "clipTime": 2.401776,
-        "sourceFrame": 36
-      },
-      {
-        "at": 65138.5,
-        "clipTime": 2.477441,
-        "sourceFrame": 37
-      },
-      {
-        "at": 65211.79999999888,
-        "clipTime": 2.477441,
-        "sourceFrame": 37
-      },
-      {
-        "at": 65290.199999999255,
-        "clipTime": 0.05394100000001245,
-        "sourceFrame": 0
-      },
-      {
-        "at": 65344.199999999255,
-        "clipTime": 0.107123,
-        "sourceFrame": 1
-      },
-      {
-        "at": 65414.09999999963,
-        "clipTime": 0.1761,
-        "sourceFrame": 2
-      },
-      {
-        "at": 65487.5,
-        "clipTime": 0.230011,
-        "sourceFrame": 3
-      },
-      {
-        "at": 65541.59999999963,
-        "clipTime": 0.302808,
-        "sourceFrame": 4
-      },
-      {
-        "at": 65621.79999999888,
-        "clipTime": 0.384667,
-        "sourceFrame": 5
-      },
-      {
-        "at": 65695.5,
-        "clipTime": 0.45779,
-        "sourceFrame": 6
-      },
-      {
-        "at": 65757.29999999888,
-        "clipTime": 0.520387,
-        "sourceFrame": 7
-      },
-      {
-        "at": 65832.69999999925,
-        "clipTime": 0.596066,
-        "sourceFrame": 9
-      },
-      {
-        "at": 65907.09999999963,
-        "clipTime": 0.669911,
-        "sourceFrame": 10
-      },
-      {
-        "at": 65987.5,
-        "clipTime": 0.72984,
-        "sourceFrame": 11
-      },
-      {
-        "at": 66043.5,
-        "clipTime": 0.805701,
+        "at": 73847.30000000075,
+        "clipTime": 0.819826,
         "sourceFrame": 12
       },
       {
-        "at": 66120.79999999888,
-        "clipTime": 0.884061,
+        "at": 73909.30000000075,
+        "clipTime": 0.883899,
         "sourceFrame": 13
       },
       {
-        "at": 66198.5,
-        "clipTime": 0.962018,
+        "at": 74009.5,
+        "clipTime": 0.983826,
         "sourceFrame": 14
       },
       {
-        "at": 66257.09999999963,
-        "clipTime": 1.020029,
+        "at": 74086.5,
+        "clipTime": 1.061777,
+        "sourceFrame": 16
+      },
+      {
+        "at": 74172.70000000112,
+        "clipTime": 1.14834,
+        "sourceFrame": 17
+      },
+      {
+        "at": 74252.59999999963,
+        "clipTime": 1.227468,
+        "sourceFrame": 18
+      },
+      {
+        "at": 74343.20000000112,
+        "clipTime": 1.29653,
+        "sourceFrame": 19
+      },
+      {
+        "at": 74416.20000000112,
+        "clipTime": 1.390821,
+        "sourceFrame": 21
+      },
+      {
+        "at": 74500.5,
+        "clipTime": 1.475396,
+        "sourceFrame": 22
+      },
+      {
+        "at": 74589.20000000112,
+        "clipTime": 1.563819,
+        "sourceFrame": 23
+      },
+      {
+        "at": 74686.5,
+        "clipTime": 1.658609,
+        "sourceFrame": 25
+      },
+      {
+        "at": 74767.59999999963,
+        "clipTime": 1.74217,
+        "sourceFrame": 26
+      },
+      {
+        "at": 74867.30000000075,
+        "clipTime": 1.840708,
+        "sourceFrame": 27
+      },
+      {
+        "at": 74945.70000000112,
+        "clipTime": 1.920782,
+        "sourceFrame": 29
+      },
+      {
+        "at": 74998.5,
+        "clipTime": 1.973928,
+        "sourceFrame": 30
+      },
+      {
+        "at": 75068.80000000075,
+        "clipTime": 2.043917,
+        "sourceFrame": 31
+      },
+      {
+        "at": 75121.5,
+        "clipTime": 2.096334,
+        "sourceFrame": 31
+      },
+      {
+        "at": 75200.5,
+        "clipTime": 2.17499,
+        "sourceFrame": 33
+      },
+      {
+        "at": 75270.70000000112,
+        "clipTime": 2.245226,
+        "sourceFrame": 34
+      },
+      {
+        "at": 75317.70000000112,
+        "clipTime": 2.293538,
+        "sourceFrame": 34
+      },
+      {
+        "at": 75388.59999999963,
+        "clipTime": 2.363615,
+        "sourceFrame": 35
+      },
+      {
+        "at": 75464.70000000112,
+        "clipTime": 2.438398,
+        "sourceFrame": 37
+      },
+      {
+        "at": 75518,
+        "clipTime": 0,
+        "sourceFrame": 0
+      },
+      {
+        "at": 75599,
+        "clipTime": 0.05353,
+        "sourceFrame": 0
+      },
+      {
+        "at": 75681.09999999963,
+        "clipTime": 0.132811,
+        "sourceFrame": 2
+      },
+      {
+        "at": 75766.30000000075,
+        "clipTime": 0.216116,
+        "sourceFrame": 3
+      },
+      {
+        "at": 75818.30000000075,
+        "clipTime": 0.273035,
+        "sourceFrame": 4
+      },
+      {
+        "at": 75903,
+        "clipTime": 0.357868,
+        "sourceFrame": 5
+      },
+      {
+        "at": 75975.30000000075,
+        "clipTime": 0.430171,
+        "sourceFrame": 6
+      },
+      {
+        "at": 76045.40000000037,
+        "clipTime": 0.500312,
+        "sourceFrame": 7
+      },
+      {
+        "at": 76107.90000000037,
+        "clipTime": 0.562433,
+        "sourceFrame": 8
+      },
+      {
+        "at": 76189.40000000037,
+        "clipTime": 0.644646,
+        "sourceFrame": 9
+      },
+      {
+        "at": 76271.90000000037,
+        "clipTime": 0.72607,
+        "sourceFrame": 11
+      },
+      {
+        "at": 76365.90000000037,
+        "clipTime": 0.820675,
+        "sourceFrame": 12
+      },
+      {
+        "at": 76448.40000000037,
+        "clipTime": 0.903012,
+        "sourceFrame": 13
+      },
+      {
+        "at": 76506.20000000112,
+        "clipTime": 0.96108,
+        "sourceFrame": 14
+      },
+      {
+        "at": 76584.90000000037,
+        "clipTime": 1.04,
         "sourceFrame": 15
       },
       {
-        "at": 66328.69999999925,
-        "clipTime": 1.092077,
-        "sourceFrame": 16
+        "at": 76666.40000000037,
+        "clipTime": 1.121112,
+        "sourceFrame": 17
+      },
+      {
+        "at": 76745.5,
+        "clipTime": 1.200218,
+        "sourceFrame": 18
       }
     ],
     "frameTimeMs": {
-      "min": 5.699999999254942,
-      "median": 73.5,
-      "p95": 124.5,
-      "max": 173.2999999988824
+      "min": 47,
+      "median": 79,
+      "p95": 97.29999999888241,
+      "max": 100.19999999925494
     }
   },
-  "durationMs": 3007,
+  "durationMs": 3015,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -284,7 +269,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPBktowDP0X7TUwCQE6zW2_oT21swfFEcHFsT22QqBM_r2yIVtmd1ousYye3nuSfAP0HhqI3mA8UrhCAWcKUTsLTV2ACoRM3StLzqbc7FdVuap238tts62aul5XZfVDIJGog6YqgN0VmhuctJUY2lEb1lYSdAoHd9a2X_mjY7eqO5gLMM6dEqBFdeqDGzPMY0-C4SMNJCGO7CREpcjy3zhJ5m8KDWVmungXx5ACqUuHAymOqbR3J0rf5OiAJpJAOZDt-QhNud4XMLm2TVXK9U6gU9b-z_zdroBOB6mee1TOKYzRmfMnFi_N6xZM9LlHd44uOP8huxXzKovYpmyFzBSW_AF7S_wfVV8KCNjpMd4LCIQnHT8icBASzkWfXcuc8aIFCtc0k2i0-uhFeqsfhiVhIvIZuHtHXhLSo7afVOrf9GC8L9kjUM448QcvtK_bDcH8jI-Mg5eyP9_kVuFAAdP1FacswGtWx3wKzph8kBkw5gbW662A0pIIXd5GHoNlzGY5jLRsh5BbZ-kuPHXbpuS8qfm-gIPBXiI5-eB-LSOHKaCXu0BeHkfM25fdJMHwcsg_-X9xJqey3R6-KnjLgzVLP5ZxCL4jRm3yPqZxuzvTDdDo87tseT_pPUTWYvp5oxK_ZenFfeGz7Wqe5z8",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLstowDP0X3W1gwiMwza7f0K7auQvFEeDi2B5bIVAm_17ZIbcMd1o2sYyOzjmSfAf0HmqI3mA8UbhBARcKUTsL9aYAFQiZ2q8sOetyvVusysWq-l5WdbmrN_vlvqp-CCQStVCvCmB3g_oOZ20lhqbXhrWVBJ3Czl20PS78ybFbbFoYCzDOnROgQXU-BtdnmMcjCYZP1JGE2LOTEJUiy3_jJJm_KTSUmenqXexDCqQuHQ6kOKbS3p0pfZOjA5pIAuVA9sgnqMvlroDBNU2qUi4rgQ5Z-z_zq6qAVgepnntUjimM0ZnLJxYvzWtnTPS5RxNHG5x_yW7EvMoitilbITOFOb_DoyX-j6p9AQFb3cepgEB40PEVgZ2QcC767FrmjFctULilmUSj1asX6a1-GJaEgchnYPWBvCakR20_qdS_6cE4LdkjUM448QdvtNs0a4LxGR8ZOy9lf77LrcKOAqbrGw5ZgNesTvkUnDH5IDNgzA3cLLcCSksidHkbuQ-WMZvl0NO8HUJunaVJeOq2Tcl5U_N9AQeDR4nk5IP7NY8choBe7gJ5eRwxb192kwTD2yH_5P_ZmZzKZnv4ouA9D9bM_ZjHIfiWGLXJ-5jG7SamO6DRlw_Z8n7Se4isxfTzRiV-y9KLaeGz7dU4jn8A",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "moving-photo-3d",
@@ -302,7 +287,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:42:20.466Z",
+      "createdAt": "2026-10-15T05:07:34.600Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -436,7 +421,7 @@
       "color": [192, 108],
       "depth": [192, 108],
       "video": true,
-      "videoTime": 1.191321,
+      "videoTime": 1.26752,
       "cost": {
         "color": 110592,
         "depth": 20736,
@@ -448,11 +433,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 451,
+    "stageUpdateTicks": 516,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 6212.5,
-      "navigationToFirstFrameMs": 8302.400000000373,
-      "stageUpdateTicks": 43
+      "chooseToyToFirstFrameMs": 6274.4000000003725,
+      "navigationToFirstFrameMs": 9052.800000000745,
+      "stageUpdateTicks": 44
     },
     "controls": {
       "play": 1

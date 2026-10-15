@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -55,13 +55,13 @@
     "httpErrors": []
   },
   "recipient": {
-    "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
+    "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2muA8Nkht_6G9tTOHhRHEC_G9toKgTL575UNoTvsdHOJ5ejpPUkvV0DvoYLoDcaWwgUKOFGI2lmolgWoQMjUfGfJWZSLzWReTubrn-W6KrfVvJyutttfAolEDVTzAthdoLrCQVuJoe60YW0lQafwPUy8VtwFkhvnWUhiymY6p_ots4_VbBYuaN9cJN8e8Oine81tV0-1mz1EzhJli56S8vcOpeAwFGCcO6R6NarDPrgua_C4T3Tc0jGlY8dOQlSKLP-LU2n-odBQboPO3sWks5pLXdrtSHGW6t2B0juNZ4cmkkA5kN1zC1U53RTQu7pOVcrpWqB9HsR_89frAhodpHoeeDmkMEZnTp9YvGyiGTHR54HfOJrg_FN2Lc2rLGKVshUyUxjzj7i3xF-o-lZAwEZ38VZAINzr-IzAo5BwLvqxazENnrVA4QKCjEar515ktvresCT0RD4D1w_kOSE9avtJpf5Dd8abGe6BcsZJf_BCm2W9uLnhgY8sNpKyv1_lVuGRAqbrC_ZZgNes2nwKzph8kB0w5gEupysBJZMIXba22Ncy5mY5dDS6Q8its3QTnqZtU3K2fb4vYGdwL5GcfHBv48qhD-jlLpCXPy1m9-VukmB42eVHvo-dyamsV7utgte8WDPOY1yH4Bti1Cb7Ma3b3ZiugEafHrKP7pR_H9bS9EdHJX7LMotk-GEY_gI",
     "localFile": false,
     "fileBytesIncluded": false,
     "fixtureDescriptor": null,
     "linkFileMetadata": {},
     "sender": {
-      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
+      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2muA8Nkht_6G9tTOHhRHEC_G9toKgTL575UNoTvsdHOJ5ejpPUkvV0DvoYLoDcaWwgUKOFGI2lmolgWoQMjUfGfJWZSLzWReTubrn-W6KrfVvJyutttfAolEDVTzAthdoLrCQVuJoe60YW0lQafwPUy8VtwFkhvnWUhiymY6p_ots4_VbBYuaN9cJN8e8Oine81tV0-1mz1EzhJli56S8vcOpeAwFGCcO6R6NarDPrgua_C4T3Tc0jGlY8dOQlSKLP-LU2n-odBQboPO3sWks5pLXdrtSHGW6t2B0juNZ4cmkkA5kN1zC1U53RTQu7pOVcrpWqB9HsR_89frAhodpHoeeDmkMEZnTp9YvGyiGTHR54HfOJrg_FN2Lc2rLGKVshUyUxjzj7i3xF-o-lZAwEZ38VZAINzr-IzAo5BwLvqxazENnrVA4QKCjEar515ktvresCT0RD4D1w_kOSE9avtJpf5Dd8abGe6BcsZJf_BCm2W9uLnhgY8sNpKyv1_lVuGRAqbrC_ZZgNes2nwKzph8kB0w5gEupysBJZMIXba22Ncy5mY5dDS6Q8its3QTnqZtU3K2fb4vYGdwL5GcfHBv48qhD-jlLpCXPy1m9-VukmB42eVHvo-dyamsV7utgte8WDPOY1yH4Bti1Cb7Ma3b3ZiugEafHrKP7pR_H9bS9EdHJX7LMotk-GEY_gI",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-picture",
@@ -82,7 +82,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:44:04.557Z",
+        "createdAt": "2026-10-15T05:09:10.515Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -203,11 +203,11 @@
         "visible": true
       },
       "linkNote": "",
-      "stageUpdateTicks": 615,
+      "stageUpdateTicks": 624,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 3343.5,
-        "navigationToFirstFrameMs": 6047.700000001118,
-        "stageUpdateTicks": 22
+        "chooseToyToFirstFrameMs": 3359.5,
+        "navigationToFirstFrameMs": 6227.9000000003725,
+        "stageUpdateTicks": 24
       },
       "controls": {
         "turn": 0
@@ -217,7 +217,7 @@
       }
     },
     "recipient": {
-      "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
+      "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2muA8Nkht_6G9tTOHhRHEC_G9toKgTL575UNoTvsdHOJ5ejpPUkvV0DvoYLoDcaWwgUKOFGI2lmolgWoQMjUfGfJWZSLzWReTubrn-W6KrfVvJyutttfAolEDVTzAthdoLrCQVuJoe60YW0lQafwPUy8VtwFkhvnWUhiymY6p_ots4_VbBYuaN9cJN8e8Oine81tV0-1mz1EzhJli56S8vcOpeAwFGCcO6R6NarDPrgua_C4T3Tc0jGlY8dOQlSKLP-LU2n-odBQboPO3sWks5pLXdrtSHGW6t2B0juNZ4cmkkA5kN1zC1U53RTQu7pOVcrpWqB9HsR_89frAhodpHoeeDmkMEZnTp9YvGyiGTHR54HfOJrg_FN2Lc2rLGKVshUyUxjzj7i3xF-o-lZAwEZ38VZAINzr-IzAo5BwLvqxazENnrVA4QKCjEar515ktvresCT0RD4D1w_kOSE9avtJpf5Dd8abGe6BcsZJf_BCm2W9uLnhgY8sNpKyv1_lVuGRAqbrC_ZZgNes2nwKzph8kB0w5gEupysBJZMIXba22Ncy5mY5dDS6Q8its3QTnqZtU3K2fb4vYGdwL5GcfHBv48qhD-jlLpCXPy1m9-VukmB42eVHvo-dyamsV7utgte8WDPOY1yH4Bti1Cb7Ma3b3ZiugEafHrKP7pR_H9bS9EdHJX7LMotk-GEY_gI",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-picture",
@@ -238,7 +238,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:44:07.429Z",
+        "createdAt": "2026-10-15T05:09:14.096Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -357,7 +357,7 @@
         "visible": false
       },
       "linkNote": "",
-      "stageUpdateTicks": 15,
+      "stageUpdateTicks": 16,
       "controls": {
         "turn": 0
       },
@@ -373,13 +373,13 @@
     }
   },
   "actual": {
-    "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
+    "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2muA8Nkht_6G9tTOHhRHEC_G9toKgTL575UNoTvsdHOJ5ejpPUkvV0DvoYLoDcaWwgUKOFGI2lmolgWoQMjUfGfJWZSLzWReTubrn-W6KrfVvJyutttfAolEDVTzAthdoLrCQVuJoe60YW0lQafwPUy8VtwFkhvnWUhiymY6p_ots4_VbBYuaN9cJN8e8Oine81tV0-1mz1EzhJli56S8vcOpeAwFGCcO6R6NarDPrgua_C4T3Tc0jGlY8dOQlSKLP-LU2n-odBQboPO3sWks5pLXdrtSHGW6t2B0juNZ4cmkkA5kN1zC1U53RTQu7pOVcrpWqB9HsR_89frAhodpHoeeDmkMEZnTp9YvGyiGTHR54HfOJrg_FN2Lc2rLGKVshUyUxjzj7i3xF-o-lZAwEZ38VZAINzr-IzAo5BwLvqxazENnrVA4QKCjEar515ktvresCT0RD4D1w_kOSE9avtJpf5Dd8abGe6BcsZJf_BCm2W9uLnhgY8sNpKyv1_lVuGRAqbrC_ZZgNes2nwKzph8kB0w5gEupysBJZMIXba22Ncy5mY5dDS6Q8its3QTnqZtU3K2fb4vYGdwL5GcfHBv48qhD-jlLpCXPy1m9-VukmB42eVHvo-dyamsV7utgte8WDPOY1yH4Bti1Cb7Ma3b3ZiugEafHrKP7pR_H9bS9EdHJX7LMotk-GEY_gI",
     "localFile": false,
     "fileBytesIncluded": false,
     "fixtureDescriptor": null,
     "linkFileMetadata": {},
     "sender": {
-      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
+      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2muA8Nkht_6G9tTOHhRHEC_G9toKgTL575UNoTvsdHOJ5ejpPUkvV0DvoYLoDcaWwgUKOFGI2lmolgWoQMjUfGfJWZSLzWReTubrn-W6KrfVvJyutttfAolEDVTzAthdoLrCQVuJoe60YW0lQafwPUy8VtwFkhvnWUhiymY6p_ots4_VbBYuaN9cJN8e8Oine81tV0-1mz1EzhJli56S8vcOpeAwFGCcO6R6NarDPrgua_C4T3Tc0jGlY8dOQlSKLP-LU2n-odBQboPO3sWks5pLXdrtSHGW6t2B0juNZ4cmkkA5kN1zC1U53RTQu7pOVcrpWqB9HsR_89frAhodpHoeeDmkMEZnTp9YvGyiGTHR54HfOJrg_FN2Lc2rLGKVshUyUxjzj7i3xF-o-lZAwEZ38VZAINzr-IzAo5BwLvqxazENnrVA4QKCjEar515ktvresCT0RD4D1w_kOSE9avtJpf5Dd8abGe6BcsZJf_BCm2W9uLnhgY8sNpKyv1_lVuGRAqbrC_ZZgNes2nwKzph8kB0w5gEupysBJZMIXba22Ncy5mY5dDS6Q8its3QTnqZtU3K2fb4vYGdwL5GcfHBv48qhD-jlLpCXPy1m9-VukmB42eVHvo-dyamsV7utgte8WDPOY1yH4Bti1Cb7Ma3b3ZiugEafHrKP7pR_H9bS9EdHJX7LMotk-GEY_gI",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-picture",
@@ -400,7 +400,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:44:04.557Z",
+        "createdAt": "2026-10-15T05:09:10.515Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -521,11 +521,11 @@
         "visible": true
       },
       "linkNote": "",
-      "stageUpdateTicks": 615,
+      "stageUpdateTicks": 624,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 3343.5,
-        "navigationToFirstFrameMs": 6047.700000001118,
-        "stageUpdateTicks": 22
+        "chooseToyToFirstFrameMs": 3359.5,
+        "navigationToFirstFrameMs": 6227.9000000003725,
+        "stageUpdateTicks": 24
       },
       "controls": {
         "turn": 0
@@ -535,7 +535,7 @@
       }
     },
     "recipient": {
-      "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
+      "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2muA8Nkht_6G9tTOHhRHEC_G9toKgTL575UNoTvsdHOJ5ejpPUkvV0DvoYLoDcaWwgUKOFGI2lmolgWoQMjUfGfJWZSLzWReTubrn-W6KrfVvJyutttfAolEDVTzAthdoLrCQVuJoe60YW0lQafwPUy8VtwFkhvnWUhiymY6p_ots4_VbBYuaN9cJN8e8Oine81tV0-1mz1EzhJli56S8vcOpeAwFGCcO6R6NarDPrgua_C4T3Tc0jGlY8dOQlSKLP-LU2n-odBQboPO3sWks5pLXdrtSHGW6t2B0juNZ4cmkkA5kN1zC1U53RTQu7pOVcrpWqB9HsR_89frAhodpHoeeDmkMEZnTp9YvGyiGTHR54HfOJrg_FN2Lc2rLGKVshUyUxjzj7i3xF-o-lZAwEZ38VZAINzr-IzAo5BwLvqxazENnrVA4QKCjEar515ktvresCT0RD4D1w_kOSE9avtJpf5Dd8abGe6BcsZJf_BCm2W9uLnhgY8sNpKyv1_lVuGRAqbrC_ZZgNes2nwKzph8kB0w5gEupysBJZMIXba22Ncy5mY5dDS6Q8its3QTnqZtU3K2fb4vYGdwL5GcfHBv48qhD-jlLpCXPy1m9-VukmB42eVHvo-dyamsV7utgte8WDPOY1yH4Bti1Cb7Ma3b3ZiugEafHrKP7pR_H9bS9EdHJX7LMotk-GEY_gI",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-picture",
@@ -556,7 +556,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:44:07.429Z",
+        "createdAt": "2026-10-15T05:09:14.096Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -675,7 +675,7 @@
         "visible": false
       },
       "linkNote": "",
-      "stageUpdateTicks": 15,
+      "stageUpdateTicks": 16,
       "controls": {
         "turn": 0
       },
@@ -690,7 +690,7 @@
       "httpErrors": []
     }
   },
-  "durationMs": 5638,
+  "durationMs": 5563,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -698,7 +698,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2muA8Nkht_6G9tTOHhRHEC_G9toKgTL575UNoTvsdHOJ5ejpPUkvV0DvoYLoDcaWwgUKOFGI2lmolgWoQMjUfGfJWZSLzWReTubrn-W6KrfVvJyutttfAolEDVTzAthdoLrCQVuJoe60YW0lQafwPUy8VtwFkhvnWUhiymY6p_ots4_VbBYuaN9cJN8e8Oine81tV0-1mz1EzhJli56S8vcOpeAwFGCcO6R6NarDPrgua_C4T3Tc0jGlY8dOQlSKLP-LU2n-odBQboPO3sWks5pLXdrtSHGW6t2B0juNZ4cmkkA5kN1zC1U53RTQu7pOVcrpWqB9HsR_89frAhodpHoeeDmkMEZnTp9YvGyiGTHR54HfOJrg_FN2Lc2rLGKVshUyUxjzj7i3xF-o-lZAwEZ38VZAINzr-IzAo5BwLvqxazENnrVA4QKCjEar515ktvresCT0RD4D1w_kOSE9avtJpf5Dd8abGe6BcsZJf_BCm2W9uLnhgY8sNpKyv1_lVuGRAqbrC_ZZgNes2nwKzph8kB0w5gEupysBJZMIXba22Ncy5mY5dDS6Q8its3QTnqZtU3K2fb4vYGdwL5GcfHBv48qhD-jlLpCXPy1m9-VukmB42eVHvo-dyamsV7utgte8WDPOY1yH4Bti1Cb7Ma3b3ZiugEafHrKP7pR_H9bS9EdHJX7LMotk-GEY_gI",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "qr-picture",
@@ -719,7 +719,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:44:10.421Z",
+      "createdAt": "2026-10-15T05:09:16.717Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -840,11 +840,11 @@
       "visible": false
     },
     "linkNote": "",
-    "stageUpdateTicks": 879,
+    "stageUpdateTicks": 941,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 3343.5,
-      "navigationToFirstFrameMs": 6047.700000001118,
-      "stageUpdateTicks": 22
+      "chooseToyToFirstFrameMs": 3359.5,
+      "navigationToFirstFrameMs": 6227.9000000003725,
+      "stageUpdateTicks": 24
     },
     "controls": {
       "turn": 0
