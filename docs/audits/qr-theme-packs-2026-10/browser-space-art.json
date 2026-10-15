@@ -1,0 +1,4416 @@
+[
+  {
+    "id": "cdx-theme-space-art-1-1",
+    "sha256": "8ec5d01862e58d3ab9abb593029abc6f1e60ae2170cf114e909d7c6cc486cdd3",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "c35645fbdf509624505e1d0f318aaf94d3fce6e0409d331e2791df44816b2749"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "f7131a896ed87b61360cd5707ac1bcb72a3ea17ae3f14fd8ef048bc76d29a0d1"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": false,
+        "rgbaSha256": "4a567f14397589caf98a7e00d47e050da4ff61641243dc7fae7f6eb562e381b3"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.12000000000000001,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "6876ece29eb916f31d11fc006bfac65fb5d9d605e657aa998bf38ff7990a1f49"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "f4a22212ce348a8f36561a1eb720137bf7e9005ab9a1ee81bab670438deda1c4"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "57faa3eed2a6aaeb83e1d2daaccd16874c9100aa8d21461e4bc5c922d121212c"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.12000000000000001,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "74427d59edaf5528d5bf449a1173bbbc57700a7af8bec22ee2881970753365f7"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "168a6cb4bb1ff240426a6dc65a01330581cce94eb707d509ff639278117fefc7"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "96f2dfcb6ced8d5fa99c2cffee9ed2da7c8b888633ca6c962d8c780d39e13b86"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "1738ca9fec37a29ad96f09b3172dd10533a48debf73ac745d3b51f027ede99b3"
+      }
+    ],
+    "eligible": false
+  },
+  {
+    "id": "cdx-theme-space-art-9-1",
+    "sha256": "d3612954a4eca24b6017040e980b59d602ad40ca65352ae9fe95e9a7c8a3715f",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "35fa01f3f0a8625d86dc8bf4ce593086250f4bff6a4890b368163a1c92760cb6"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "5585afe70dde656f4b14f2419957f77057a13c7f1ded07c09d92a79a00141f72"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "1c4f1b81477ea0f15c67d588f29ae904346ff52b9868e545f04fc0a7c7290b4e"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "516c9b99ad9477c27d0a4014ea20e80a46a5d4d6809a57de89f31b81b6b1abe7"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "a0e5da170c6608253996dc8d108a6fe8268127bf14c6f4e796244b443c1524d8"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "91e5bbba9d3adc603961650989a17da62b340d0b1d1bdaf30eb332699d914714"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "87c6831d6347c0781755915a41487306dcc3d14a2127cb4b41429001f6301f78"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "00129ca0dae91dcddabe42e42f8f5aefdbf0e42d9be3a744bbed597da8a0651b"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "b85937267a41e6c76f22ad4e8289adfa112df5d58b551299fdec036d6fc981d8"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "4a4ac8d03e661680a4178fa484b2bf406a3c65abf32dd037e2fa46bf3bac8c00"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-space-art-1-2",
+    "sha256": "b7763d7680caee6eb8ab86dd06e6d9158f3b63e9a786c4399c298e319f812388",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "c2d6e07fef56e2ed6d9741b4226ab5ef3fd9476cb2d43702d33f73c436cda713"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "47f6dc062879b36b75c0150b107208e92d38bfc6ee3f49a46a22dbc9e14fd223"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "d838e7202b3b45be390703da110743f6d054d1cef3f6f01f266a93cfe5ec524a"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "be5229300fd550339cc6b1e8e9b4d88f67d208e8c30081179743c04f82d1e4e7"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "849447315732da808b8b9f725b2c578b85d704b0421d2c5a1974a0ed57250df9"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "b0da7e2deaeabe4f38d039d859b157b5e8a6a7297b556029a5e4ac3c409037a3"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "f45d81e645952a6eaeca4ad8277465b352ac8887df01c9a598859903a6bfc950"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "6ded66427ac01fbf0ba1155a15fdaebb73918e3137080d92ba2826e252ab2cf3"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "8a073ff394ef550a670e91dfd7dcfa028c3b73daa44a88b4c76cf0dfafbb8d8f"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "cb2a4c674accea49a95f92fc6e084c6c535f8cc7cbfdd5606efc3e46bb5b3972"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-space-art-4-1",
+    "sha256": "8fab15751c783da6c3a8fd55978ecdeb832a99a2f28e16723d55e3911d578ce5",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "e6f633502b1553bfb91d7dad93f2f54a4adb4f90df7974f719ed9266e05979e5"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "8ba7d6d6c8e32e847ab2c90b9ad69ed8277a8e3f65ad48547cdea78e40b49ff0"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "6c93e81a93f52f2556ee41b993fe63d2e4ee6c8fc9f872f3cf184fbe396081cc"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "971d073f74e61a84eb2c088d3c5c02bb7ba846f1ad6a5dfcdbe11cea8ae3a5e0"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "22abaa471fa71f87cfe81ac424cb4964c5e88a3a61f01cd60abe45ec6bcebdad"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "a490bb5d76290183d6686b4d34622b8dab85ec2770e8b26ffd5a84ef5083d8a3"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "3bf3a6baa12d2e9e080cef0bd11009fc59655705f44e709c30d0ff43bfd7b0f2"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "93be3f1caa99b0c7d360562fa570114fda3544a1732217ffe26e85407a9fd5ae"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": false
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": false,
+        "rgbaSha256": "884d16fc0045698e18acf5a07587cc2334a0e81bb6a3f70abed06c2f76eba626"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "be03e6dc83ee0dfca305830fcd15336c18cb36a409b8831925265c5074bfc7e4"
+      }
+    ],
+    "eligible": false
+  },
+  {
+    "id": "cdx-theme-space-art-6-1",
+    "sha256": "88fd4b98ccdd71a3a2ed6e43994a266068439be97931c57ca34fdaa281d99fd6",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "1f9fa8a7d361e4102ec21461f0109418c85b2adbe19ebe30f289a41a94ad4393"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "649fedef601a3c6be8318d17d056b159ee36806f044fc1126bdcb4aeaf38ff1f"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "fa4e5776ac48d741a4231f8717363631c3451c1c591125e08f966e015ea22b0f"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "ee605b73dd038b3f3c56511b410c9c6996a25056d85b6ba7203c8428aaa7924b"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "b8e3831cd1866b945a0b0a81a5bc437d54c8f5be4f0c1416ebf2492e7591a904"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "94f1dba937566a634061c459ff9567b0b7f645bd41a03dc46fe3d9afe8ddad5d"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "aa5239c95349a8260b2a9d5db72ad7b9ae30df77a9395effee3d95c6409e1839"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "e2611222dff4a9d4157e11e6dc278668f0c3d1a34c03e4df401a31da7ba10ee3"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "30c173f42db2e7e7f3c48f92cf5b4e80e619457bb925af461aec11514f538aed"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "fb339359b1ac04842ef30f345cb4931fcbd72db55d82fa7723bddabb807c22bc"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-space-art-5-1",
+    "sha256": "9d6abf5fb2808c7cef0794db1793a6725d31b3eccbbd8772ed6845422daa35e0",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "1c6cca6178fbde48f805f2d97d5c64982b17b9fcf98f1922b6c682bbf9794d7f"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "4129bf68cb0bdbaa342da17cb9c0dbecbb135fa5be2278e86514038e0164667b"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "19dbb440840339a25b3e44eb33a0b27dd8a0eb6a22528889b27e72c8ee8fcb8b"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "d29ba9894d054cd8bc93a050e7fcb63f4f8598728298bce09add628b8d697389"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "31e2b661c684d0014feaad0018b732f7209af46f48a22c3df1726b2dbf3eccb3"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "3e4f82fde8809c6e13d859176177936060ebdc841548548adc7ee69fd3cd5a2c"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "3f8aa988e9eba7d4102ee8f4fa4894680fa047269ded683ec0aa7bd38d8846e2"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "ad9012d4d54f6eda868aca3d7908b4dbfb31dc471547ac3caf0bff51b65197b5"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "cd53a02b3c2db995a148ad07db26ef01752ddde3bdebce1ab243e9ca14107152"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "fde3c6f0c887cf248972964e9cb1d027257b09410ce466da0ea39c06e3ed3c2f"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-space-art-8-1",
+    "sha256": "5c6c22d1002075320884ecc4de1e05e02b12f4527c44ac01c20063cfe82068a8",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "629a2281232d80aff5d88cf97ba77f523ff046457d697f52391d816e54cc330f"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "89220a6276a336fea75f51e5fa4b449171c94c82e7286fdac76328b92eaab0d8"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": false
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": false,
+        "rgbaSha256": "c0d25ff101c2935601aed93e892e66c004bbcdf961d397737a05153d1642c736"
+      }
+    ],
+    "eligible": false
+  },
+  {
+    "id": "cdx-theme-space-art-2-1",
+    "sha256": "204a6a1e4301b98e8c68bd1e2176b823a46ca03176f0444d23e86f589e08072b",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "b4b604f4197b2bc6c45da80fbf63087119ed2e16336f71e6b5cfd5c9c979a643"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "b7f7c9bb28a16b799b5229f9b018310a32468f7b345f4f5b1650e55313c67710"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "7221e08635d7b898d8159da35f71e45a21d31195fcb4c82f77df5692b83c46e2"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "4579521c2767cd0190cc2bd125b462038d07868a2f6353f30e0be8919792d726"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "98969e473cea64203e1510fedb137b7f2ae18944cf2759ea4145bf98604c2a51"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "ddd01b016845c3eef9573e4a34c763b4e1b876b72ba2a2f62757e96931d60a6f"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "7e6c1e54e860b5d4cba332c507243736d0b9735a2cdaf5407db5e84659e6e04f"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "4a6432f8ac84a1c20058cc86c0e43c8aac983b62fd0228fa8b8937e0d5b2bf70"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "c61c579b82c2f2eecb93a1683e439ef2d38bde1fdc8550913870e4a18d87724e"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "7919e97752c05e8757b4ea40514502fb6c90af20339b7172a32ce51217e4dc0c"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-space-art-8-2",
+    "sha256": "8de64ed303b588bc661167b2943d72b5bb95fe8cbfa6c000103e93b8c19b8992",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "efca3c9f945b4a45463da361fb633e96ccf734d3de72fa7223e8e7de633fcb99"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "83d7f625a6b62fce81b85461feff5d3d64eb0bdbf0996e890b97b40f5110731b"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "c387b64d2ab5a631fe15b14116851b7042ebcbc2f506d6a567da5d09cfa8fe33"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "48fa9ce968b5cbda3f7e8f89d9171324f2aee819c7575255a82863b31f748dc4"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "bf698de5cb050bca5b5937aedf609ce795edc70f73d86cf6b50d8bc930bf110d"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "b94d33bad85dc1fd75778f037548a19ff4f3bd4b72cf12c77bc3f36eac26ec80"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "0452c7e76eb4743ca9acf6c93af6bffa84313fe93ba321af66ea3224443d6959"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "15dc9408f8515746ac6c14661d00d37b49c2d47cf3fe268c93c219f1c5aff13e"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "abae5ffbe69072b19373679d0137121cea4f2ccb066617cb939af367420a2b53"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "93e6e197745a01a6776cd9c401df673c1b803fee884a99b925e6a7e7cd2581dd"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-space-art-10-1",
+    "sha256": "062fc879e0f75e247fafd62143ad8c5ad1ce37975925e32510d00b13a25e8a22",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "4d69236d10f9a16679379b3ec918d55514b42f76df28ca49c2f465f8943b61b3"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "f6e2425a20b4da4b6d0548b2073f4152e8a58e278b9a9f5c1f85c0f10431082c"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "f45199d4f931e0b6377f51ed93861c9dcc24cc0051920f7e1df399b22405bfdd"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "01eaffe62a5e26361c97179a1af42adc98a8b54410306724f3d4285e16ab91a6"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "5edce686338c6249ef7849c7f3a79d1ad7b53aed81cf6d13d1d2ac7e694607f5"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "e40ece73d406f2782cf80c071e4fd3b38d921eab7b5aa3fc4d05938b08d397bd"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "47ad25dff18c47015136a75038300c0bbfe05bf4727a0e8887896c30d035b1c8"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "9b11379b3f581b74de4a7b914b1e743c682b318e213fa366a0f0764d7b1a2c4e"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "f058749eb2530721813022c482fde5c38bb85ae22024f01bf6347d0fb54f640f"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "31116b79696f013741e26c5b648a0bfc6413b29e5a0e0b5544ac87eaf4934151"
+      }
+    ],
+    "eligible": true
+  },
+  {
+    "id": "cdx-theme-space-art-4-2",
+    "sha256": "b24e0dfced1877b9cddada56640ab75d4b33c8a96dc79fd291421388cedccc4b",
+    "renderer": "Chromium WebGL2, ANGLE/Mesa llvmpipe",
+    "links": [
+      {
+        "text": "http://example.org/",
+        "characters": 19,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "http://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "8e36aeb401e55e8c245f83f96d47859e8888d9f23aeaca411265c411b7315d62"
+      },
+      {
+        "text": "https://example.org/",
+        "characters": 20,
+        "margin": 0.1,
+        "codeSize": 45,
+        "options": {
+          "text": "https://example.org/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 424,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 212,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "96078a20d02007cc62d8e5e505c3743af194d26df99e3193445ffdd6ac46b63c"
+      },
+      {
+        "text": "http://example.net/a?x=1&y=two",
+        "characters": 30,
+        "margin": 0.1,
+        "codeSize": 49,
+        "options": {
+          "text": "http://example.net/a?x=1&y=two",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 456,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 228,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "44b04498884d431c05374c62089ca73c41e78daa6718215afc86501431a38c73"
+      },
+      {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "characters": 43,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://ryanjosephkamp.github.io/splashery/",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "8187ffe506ef21796e532a0a95de657acd26e49bf4d54363dd6942c0591e887b"
+      },
+      {
+        "text": "https://example.com/gallery/summer-leaves",
+        "characters": 41,
+        "margin": 0.1,
+        "codeSize": 53,
+        "options": {
+          "text": "https://example.com/gallery/summer-leaves",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 488,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 244,
+            "ok": true
+          }
+        ],
+        "raw900": false,
+        "eligible": true,
+        "rgbaSha256": "aad0449c77e76d0ef0d7ce51612f6faa21b6e422652ab1bfa1461e00297a57ca"
+      },
+      {
+        "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+        "characters": 59,
+        "margin": 0.1,
+        "codeSize": 61,
+        "options": {
+          "text": "https://example.net/exhibits/ceramics?view=phone&color=blue",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 552,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 276,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "558a7ba893c7e451ad9392bde9901a9ed75ca3401dcb1038dbff2e68e99e1fe6"
+      },
+      {
+        "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+        "characters": 78,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "http://example.com/invitations/celebration?date=2026-10-14&guests=8&view=print",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "5102e565952e3a130279b31c3a5f3a1fa19e30282a3d82f2fa606925278e63fa"
+      },
+      {
+        "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+        "characters": 82,
+        "margin": 0.1,
+        "codeSize": 65,
+        "options": {
+          "text": "https://example.net/search?q=forest%20art&filter=green&sort=newest&page=12#gallery",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 584,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 292,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "8059bd15334e3426d2060f08031e41014efe1241ef5e5d109bcfef9fd283e726"
+      },
+      {
+        "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+        "characters": 130,
+        "margin": 0.1,
+        "codeSize": 77,
+        "options": {
+          "text": "https://example.org/collections/botanical-studies/2026/autumn/large-format-print?item=fern-frond&edition=public&ref=mobile-preview",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 680,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 340,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "60ebb04502d6f259005df9b2fcd51560b8f0d7f2d7049279687f5ef1573d15aa"
+      },
+      {
+        "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+        "characters": 168,
+        "margin": 0.1,
+        "codeSize": 85,
+        "options": {
+          "text": "http://example.org/collections/imaginary-space-art/2026/autumn/large-format-print?item=ringed-planet&edition=public&ref=mobile-preview&palette=blue&size=phone&copies=10",
+          "shape": "square",
+          "picture": "own",
+          "contrast": 0.5,
+          "center": "small",
+          "level": "H",
+          "style": "color",
+          "size": "more"
+        },
+        "scans": [
+          {
+            "trial": "phone-330",
+            "pixels": 330,
+            "ok": true
+          },
+          {
+            "trial": "print-900-focus",
+            "pixels": 900,
+            "blurModules": 0.2,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-8",
+            "pixels": 744,
+            "ok": true
+          },
+          {
+            "trial": "stage-scale-4",
+            "pixels": 372,
+            "ok": true
+          }
+        ],
+        "raw900": true,
+        "eligible": true,
+        "rgbaSha256": "67d211c07eed642fdb82aa3d1a690c165ace1a225d9efdec430156c0e220e233"
+      }
+    ],
+    "eligible": true
+  }
+]

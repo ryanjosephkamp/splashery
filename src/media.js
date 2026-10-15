@@ -569,7 +569,7 @@ export async function pdfFigures(OPS, page, { drawn: withDrawn = false } = {}) {
         const b = unitBox(mulM(ctm, it.transform));
         if (b) boxes.push(b);
       }
-    } else if (fn === OPS.constructPath && args) {
+    } else if (withDrawn && fn === OPS.constructPath && args) {
       // Lane Polish: a path that is painted (filled or stroked; a clip alone
       // paints nothing), as the box of its bounds, and whether it draws a
       // shape (a curve or a slanted line) rather than only straight rules.

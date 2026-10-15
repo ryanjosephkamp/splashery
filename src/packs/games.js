@@ -473,6 +473,30 @@ export const RECIPES = {
       { key: "touch", label: "Move a piece", type: "pulse", ease: 0.2 },
       { key: "pace", label: "Move speed", default: 0.5 },
     ],
+    keyboard: {
+      label: "Move a chess piece",
+      pause: "play",
+      items() {
+        const pos = positionAfter(playedBy(play.g));
+        const names = { P: "pawn", R: "rook", N: "knight", B: "bishop", Q: "queen", K: "king" };
+        return Array.from({ length: 64 }, (_, i) => {
+          const id = FILES[i % 8] + (8 - Math.floor(i / 8));
+          const piece = pos?.board[squareIndexOf(id)];
+          const label = piece
+            ? `${piece[0] === "w" ? "white" : "black"} ${names[piece[1]]}`
+            : "empty";
+          return { id, text: id, label: `${id}, ${label}`, pressed: touch.sel === id };
+        });
+      },
+      status() {
+        const pos = positionAfter(playedBy(play.g));
+        return `${pos?.turn === "b" ? "Black" : "White"} to move.${touch.sel ? ` ${touch.sel} selected; choose a destination.` : " Choose a piece, then its destination."}`;
+      },
+      activate(sq) {
+        touch.pending = [...touch.pending, sq].slice(-4);
+        return { key: "touch", pick: sq };
+      },
+    },
     // A tap plays or pauses the game; once it is over, a tap starts it again.
     action: {
       key: "play",

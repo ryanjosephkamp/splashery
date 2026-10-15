@@ -1701,6 +1701,30 @@ Picture QR (lane QR r4, October 10, 2026) also offers four of them as its sample
 AI-made in its picker and its credit: Felt farm (D37), Glass wave (D38), Mushrooms (D27), and Stone
 arch (D17).
 
+## AI-made Studio test inputs: depth lab J (Codex task 75e)
+
+Made by Ryan with Codex (GPT-6) and **ChatGPT Images** (the OpenAI native image tool), October
+14, 2026. These are **AI-made by the owner**, original fictional Studio test inputs, CC0 under Rules
+B4. They are never real captures, real places, or measured depth references. They are not used in
+science, math, or engineering toys, or on photoreal shelves. No people, faces, text, logos, or
+identifiable landmarks were seen in the ten inspected native images.
+
+The 160 JPEGs under `assets/depth-lab/j/` comprise ten source pictures and 150 fixed-source
+exposure/blur variants. Every picture is 1,280 × 1,280, JPEG quality 0.78. The native images were
+1,254 × 1,254 and were resampled once; this does not add captured detail. The image tool did not
+expose its model identity or generation seed. Prompts, native hashes, individual file hashes,
+dimensions, dates, transformations, and credits are recorded under `depthLabSamples` in
+`tools/assets.json`. The [J manifest](tools/depth-lab/j.json),
+[contact sheet](docs/audits/depth-lab/j.jpg), and
+[J README section](docs/audits/depth-lab/README.md#j-hard-real-world-cases-part-e) label them as
+AI-made. No public picker or runtime source was changed.
+
+The source files are `j-glass-source.jpg`, `j-mirror-source.jpg`, `j-hair-source.jpg`,
+`j-fur-source.jpg`, `j-thin-source.jpg`, `j-night-source.jpg`, `j-painting-source.jpg`,
+`j-line-art-source.jpg`, `j-graphic-source.jpg`, and `j-clutter-source.jpg`, all in that directory.
+Their variants keep the same scene prefix. Full prompts and deterministic variant processing are in
+`tools/depth-lab/gen-j.mjs` (code offered under Splashery's MIT license).
+
 ## AI-made Studio samples: hard cases (Codex task 57)
 
 Made by Ryan with Codex (GPT-6) and the OpenAI native image tool, October 13, 2026. These 20
@@ -1814,6 +1838,11 @@ The full prompts, hashes, scores, five-link scan rates, and phone-size contact s
 [the sample-pictures audit](docs/audits/sample-pictures-2026-10.md). No new asset loads before it is
 picked.
 
+Photo to 3D round 4 startup work, comparison tools, and review recordings were made by Ryan with
+Codex (GPT-6), October 14, 2026. Code is MIT; the original recording contribution is CC0 1.0,
+subject to each source image's existing license. See the
+[round 4 audit](docs/audits/photo-3d-r4-2026-10.md).
+
 # Studio truth fixtures (Codex task 56)
 
 The original procedural fixtures in `tests/fixtures/truth/`, including their rendered pictures,
@@ -1822,3 +1851,66 @@ dedicated to CC0-1.0. These are rendered scenes, not real captures. No outside a
 Their source is `tools/studio-truth-generate.py`, and each committed file's size and SHA-256 are
 recorded in `tests/fixtures/truth/assets.json`. Full sequences are kept separately from the shipped
 site. The build-time code is offered under this repository's MIT license.
+
+## Picture QR theme packs (Codex task 58)
+
+48 original code-made illustrations, selected from 138 candidates, **Made by Ryan with Codex
+(GPT-6)**. All are offered under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/),
+checked October 14, 2026. Source:
+[the original illustration generator](tools/cdx-qr-themes-art.mjs). Fictional artwork; Space-art is
+imaginary art, never a real capture or scientific data. Chromium 151.0.7922.173 rasterizes the
+original SVG to 960×960 JPEGs at quality 88. No source picture uses a QR payload or grid. Each
+choice says code-made; pictures load only when selected. The complete records and SHA-256 hashes are
+under `pictureQrSamples` in `tools/assets.json`. See
+[the scan report](docs/audits/qr-theme-packs-2026-10.md) for ten-link results and detail scores.
+
+| Name                                    | Theme        | File                                                                  | Maker                           | License |
+| --------------------------------------- | ------------ | --------------------------------------------------------------------- | ------------------------------- | ------- |
+| Summer sun · soft                       | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-2-2.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Autumn maple                            | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-3-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Winter snowflake                        | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-4-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Winter mittens · soft                   | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-8-2.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Apple                                   | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-9-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Spring buds                             | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-10-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Winter fir · soft                       | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-11-2.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Autumn acorn                            | Seasons      | [JPEG](assets/toys/qr-picture/themes/cdx-theme-seasons-12-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Scallop shell · soft                    | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-1-2.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Rolling wave                            | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-3-1.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Starfish                                | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-4-1.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Reef fish · soft                        | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-5-2.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Coral fan · soft                        | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-6-2.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Pearl shell                             | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-8-1.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Sea turtle · soft                       | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-9-2.jpg)         | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Jellyfish · soft                        | Ocean        | [JPEG](assets/toys/qr-picture/themes/cdx-theme-ocean-10-2.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Fern frond                              | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-1-1.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Woodland mushroom · soft                | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-2-2.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Pinecone · soft                         | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-3-2.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Oak leaf · soft                         | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-5-2.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Acorn                                   | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-6-1.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Berry branch                            | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-9-1.jpg)        | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Pond leaves                             | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-10-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Birch branch                            | Forest       | [JPEG](assets/toys/qr-picture/themes/cdx-theme-forest-12-1.jpg)       | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Ringed planet · soft (imaginary art)    | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-1-2.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Crescent moon (imaginary art)           | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-2-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Spiral galaxy · soft (imaginary art)    | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-4-2.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Paper rocket (imaginary art)            | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-5-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Orbital rings (imaginary art)           | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-6-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Imaginary nebula · soft (imaginary art) | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-8-2.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Twin planets (imaginary art)            | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-9-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Meteor shower (imaginary art)           | Space-art    | [JPEG](assets/toys/qr-picture/themes/cdx-theme-space-art-10-1.jpg)    | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Woven bands                             | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-2-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Spiral tiles                            | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-4-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Ripple rings                            | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-6-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Mosaic diamonds · soft                  | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-7-2.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Arc quilt · soft                        | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-8-2.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Paper folds                             | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-9-1.jpg)      | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Wavy stripes                            | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-10-1.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Large chevrons · soft                   | Patterns     | [JPEG](assets/toys/qr-picture/themes/cdx-theme-patterns-11-2.jpg)     | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Balloons                                | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-1-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Party cake                              | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-3-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Paper bunting                           | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-4-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Confetti                                | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-5-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Festival lantern · soft                 | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-6-2.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Ribbon bow                              | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-7-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Flower bouquet                          | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-8-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+| Paper pinwheel                          | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-10-1.jpg) | Made by Ryan with Codex (GPT-6) | CC0 1.0 |

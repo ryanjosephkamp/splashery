@@ -49,6 +49,7 @@ function showFallback(reason) {
   if (reason) document.getElementById("fallback-reason").textContent += ` (${reason})`;
   fb.hidden = false;
   canvas.hidden = true;
+  document.getElementById("stage-zoom").hidden = true;
   document.getElementById("panel").hidden = true;
   document.body.dataset.ready = "true";
 }
@@ -176,6 +177,10 @@ class App {
     player.on("action", (r) => this.onAction(r));
     // A toy's slider dragged on the toy itself: the panel's slider follows.
     player.on("controls", (targets) => ui.setMotion(player.scene.motion, targets));
+    player.on("motion-preference", (reduced) => {
+      ui.setAutoplay(player.scene.autoplay, reduced);
+      ui.setMotion(player.scene.motion, player.scene.motion.controls);
+    });
     player.on("tilt", (locked) => ui.setTiltLock(locked)); // lane Pages r6: a tilt the toy freed
     // A tap that switches the toy's options rebuilds it the way the Toy tab does.
     // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
@@ -587,6 +592,7 @@ class App {
       this.holdStill(toy); // UI r3
       player.syncDrop();
       this.ui.setMotion(scene.motion);
+      await this.ui.showToyHelp();
     } catch (err) {
       this.ui.toast(err.message, 5000);
     }
@@ -1332,6 +1338,12 @@ class App {
     const player = this.player;
     const cam = player.camera;
     addEventListener("keydown", (e) => {
+      if (e.defaultPrevented) return;
+      if (e.key === "Escape") {
+        this.ui.escape() || this.ui.collapseSheet();
+        e.preventDefault();
+        return;
+      }
       // A toy that takes typing (the laptop) gets the keys it knows first.
       const typing = this.ui.isTyping(e.target) || e.metaKey || e.ctrlKey || e.altKey;
       if (!typing && player.toyInfo?.recipe?.typeKey && player.typeKey(e.key)) {
@@ -1352,7 +1364,6 @@ class App {
       if (/^[1-5]$/.test(e.key)) this.setTool(tools[Number(e.key) - 1]);
       else if (e.key === "p" || e.key === "P") this.pokeRandom();
       else if (e.key === "r" || e.key === "R") this.resetCamera();
-      else if (e.key === "Escape") this.ui.escape() || this.ui.collapseSheet();
       else if (ui2On() && (e.key === "f" || e.key === "F"))
         this.ui.toggleFocus(); // UI r2
       else if (ui2On() && e.key === "[")
@@ -1838,6 +1849,7 @@ class App {
     this.recording = rec;
     this.recorded = null;
     this.ui.setRecord({ state: "rec", seconds: 0, limit: RECORD_LIMIT });
+    document.getElementById("rec-stop").focus({ preventScroll: true });
     stage.requestRender();
     rec.done
       .then(({ blob, ext, seconds }) => {

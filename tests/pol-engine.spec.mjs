@@ -5,7 +5,8 @@
 // - the free science view (the microscope and the galaxy) fades what is nearer than the point the
 //   camera looks at from 0.85 of that distance (gone at 0.55; it was 0.55 and 0.3).
 // - a PDF page's figures(i, { drawn: true }) also finds figures drawn as paths (a chart); unasked,
-//   only the pictures, as before. The stage's depth slider stays clear of the Play button on phones.
+//   only the pictures, as before (the path scan runs only when asked). On a phone, a stage slider
+//   that shares its row with the Play button is narrower, clear of it; every other is as before.
 
 import { test, expect } from "@playwright/test";
 
@@ -126,21 +127,41 @@ test.describe("Pop out's figures in a PDF", () => {
     expect(r.manual.slice(2)).toEqual([[], [], []]);
   });
 
-  test("on a phone the stage's depth slider stays clear of the Play button", async ({ page }) => {
+  test("on a phone only a slider sharing its row with Play is narrower; every other is as before", async ({
+    page,
+  }) => {
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto(APP);
     await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
-    const r = await page.evaluate(() => {
-      const s = document.getElementById("toy-slider");
-      s.hidden = false;
-      const bar = document.getElementById("hands-bar");
-      bar.hidden = false;
-      const a = s.getBoundingClientRect();
-      const p = document.getElementById("hands-play").getBoundingClientRect();
-      return { right: a.right, left: a.left, playLeft: p.left, playTop: p.top, bottom: a.bottom, top: a.top, pb: p.bottom }; // prettier-ignore
-    });
-    const overlapY = r.top < r.pb && r.bottom > r.playTop;
-    if (overlapY) expect(r.right).toBeLessThan(r.playLeft);
-    expect(r.left).toBeGreaterThanOrEqual(0);
+    const box = (sel) => {
+      const r = document.querySelector(sel).getBoundingClientRect();
+      return { left: r.left, right: r.right, top: r.top, bottom: r.bottom, width: r.width };
+    };
+    const measure = (show) =>
+      page.evaluate(
+        ({ show, src }) => {
+          const box = new Function(`return (${src})`)();
+          document.getElementById("toy-slider").hidden = false;
+          document.getElementById("hands-bar").hidden = !show.hands;
+          document.getElementById("hands-play").hidden = !show.play;
+          document.getElementById("game-bar").hidden = !show.game;
+          return { slider: box("#toy-slider"), play: box("#hands-play") };
+        },
+        { show, src: box.toString() },
+      );
+    // No Play beside it (no Hands-on column, or a column without Play): as on main.
+    for (const show of [
+      { hands: false, play: false, game: false },
+      { hands: true, play: false, game: false },
+    ])
+      expect((await measure(show)).slider.width).toBeCloseTo(320, 0);
+    // A game or song bar lifts the column above the slider: as on main.
+    expect((await measure({ hands: true, play: true, game: true })).slider.width).toBeCloseTo(320, 0); // prettier-ignore
+    // Play in the same row: narrower, and clear of the button.
+    const r = await measure({ hands: true, play: true, game: false });
+    expect(r.slider.width).toBeCloseTo(270, 0);
+    const sameRow = r.slider.top < r.play.bottom && r.slider.bottom > r.play.top;
+    if (sameRow) expect(r.slider.right).toBeLessThan(r.play.left);
+    expect(r.slider.left).toBeGreaterThanOrEqual(0);
   });
 });
