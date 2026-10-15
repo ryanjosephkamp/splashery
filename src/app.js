@@ -1102,7 +1102,7 @@ class App {
 
   // A page by its number (from 0), for the words box's search results.
   pictureGo(n) {
-    this.player.pictures?.go(n);
+    this.player.pictures?.go(n, { exact: true });
   }
 
   // A video's place, from the Toy tab's scrub bar (lane Books).

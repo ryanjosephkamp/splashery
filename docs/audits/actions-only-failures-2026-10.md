@@ -1,9 +1,9 @@
 # Actions-only failures: task 86
 
 Made by Ryan with Codex (GPT-6), October 15, 2026. Branch: `codex/actions-only-failures`. Test and
-measurement changes, plus an exact-output optimization for an empty camera motion mask. No toy,
-renderer, or sandbox behavior changes. The draft PR's Verification section records the final Actions
-run.
+measurement changes, an exact-output optimization for an empty camera motion mask, and an exact
+PDF-search page selection. Book layouts, turns, rendering, and sandbox settings stay the same. The
+draft PR's Verification section records the final Actions run.
 
 ## Evidence and causes
 
@@ -13,14 +13,25 @@ and the audio-clock failures. The owner also identified the failures in the docs
 [PR 638](https://github.com/ryanjosephkamp/splashery/pull/638). Select tests by title: Playwright's
 reported lines can differ from the source lines, and adding helpers moves them again.
 
+The GitHub connector retrieved the original reports and traces from
+[PR 638's run](https://github.com/ryanjosephkamp/splashery/actions/runs/38659183166), after the
+command-line storage redirect initially failed. The original reports show the camera draw cost at
+35.242 ms against a 32.386 ms limit, the resumed audio's scheduled count still at 42, and the pad's
+leftover amount at 0.177778 against `<0.15`. The PDF search trace changes the selected page from 45
+to 46 about 70 ms after the search click, with both pages physically open and no intervening
+navigation. Its missing highlight persists for the full assertion timeout. The first revision's
+[Actions run](https://github.com/ryanjosephkamp/splashery/actions/runs/38673108892) reproduced that
+exact page-label failure, exposing that the earlier Copy-feedback change alone did not fix this
+case. Only original shard results count; the existing CI diagnostic runs do not erase them.
+
 | Original test                       | Cause and change                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `hh4-space:147`, `hh4-tiny:206`     | These tests manually step physics, but automatic renderer updates also ran between protocol calls. The joint and its drive were sampled at different simulation times. Stop automatic player updates after setup; retain every manual step and numeric assertion.                                                                                                                                                                                    |
 | `scr2-engine:10`                    | The GIF can advance between releasing its hold and asking for its first resumed frame. Give this API test exclusive control of the real player's clock at 60 Hz. Keep the frame-count, hold, resume-position, and playing-state assertions.                                                                                                                                                                                                          |
 | `ui2:361`                           | After the first submission, the options already start with `pad:`. Waiting for that prefix does not wait for the next rebuild; later strokes can land on the pad that is about to be replaced. Wait for the old pad to disconnect and the build to finish before reading or drawing again.                                                                                                                                                           |
-| `ui3:50`, `ui3:129`                 | Driver latency permits the effect to decay before the test reads its initial or resumed value. Capture the actual action event, retaining the `>0.95` and `<0.02` limits. Wait for a drawn effect and scheduled audio before changing phases.                                                                                                                                                                                                        |
+| `ui3:50`, `ui3:129`                 | The actual Actions failure reads the unchanged scheduled count (42) after Resume; fixed sleeps do not establish another scheduling pass. Driver latency also permits the effect to decay before the test reads its initial or resumed value. Capture the actual action event, retaining the `>0.95` and `<0.02` limits. Wait for a drawn effect and scheduled audio before changing phases.                                                          |
 | `sndc-engine:27`, `sndc-engine:142` | A protocol polling deadline is not the audio's silence deadline; fixed sleeps also do not establish rendered or scheduled progress. Observe native context transitions and the audio clock at the click. Keep the 100 ms freeze bound, the 500 ms native resume bound, unchanged paused time, and resumed scheduling checks. Wait for an actually ringing note before pausing the piano.                                                             |
-| `ops-text:41`                       | The Copy feedback lasts 1.8 seconds, independently of driver transport. Observe the actual button mutation in the browser, then verify the real clipboard and the label's reset.                                                                                                                                                                                                                                                                     |
+| `ops-text:41`                       | The actual Actions trace selects page 45, then the book replaces that left-page selection with page 46 of the same spread. Mark an explicit search selection and retain its exact page; ordinary spread navigation is unchanged. Wait for the actual book drive before the original text, highlight, status, and API assertions. Also observe transient Copy feedback in the browser, retaining clipboard and reset checks.                          |
 | `spg:138`                           | The form navigates the live iframe three times. The old test neither awaited those players nor verified that a toy actually started before replacing its GPU context. Wait for each URL and the real strawberry player before the next navigation. This strengthens the live-example check; Actions must verify the teardown result.                                                                                                                 |
 | `cdx-mir:329`                       | The 10% draw-cost bound compared separate browser runs under different load. Replay the same recorded frames and real worker replies into independent before/after filters in one browser, alternate timing order, and finish pending GPU work explicitly. Keep the same 1.1 ratio and every image/depth assertion. Version the benchmark's resume cache.                                                                                            |
 | `live4:149`                         | Node polling can miss a drawn mode, and a transport delay after Start over can move the audio beyond its initial-position check. Capture the actual settled modes per player frame and pause at that observed phase. Read seek/start results in the same browser call. Keep both settledness thresholds and all transport/privacy checks.                                                                                                            |
@@ -41,6 +52,13 @@ of real-time speed.
 - Deliberately adding 500 ms between the original joint/drive snapshots or GIF resume/read, and
   delaying pad rebuilding by 500 ms, made all four original tests fail. The same probes with the
   fixes passed all four, retaining their assertions.
+- The PDF search regression now waits for the requested page to appear in the real book drive's
+  visible sheets. Against the original source it fails deterministically: selected index 45 instead
+  of 44. The engine regression likewise rejects index 31 instead of the explicitly requested 30. The
+  production change distinguishes exact search requests from ordinary steps; its engine regression
+  passes for four binding styles, both sides of a spread, and a neighboring selection in the same
+  spread. It compares sheets, leaf geometry, and view exactly with the original layout, then checks
+  the existing Previous, Next, and tap behavior.
 - The original UI/audio tests passed locally without injected latency. With delayed driver replies,
   the original short-effect assertion read `0.9333333333333333` instead of `>0.95`, and the original
   audio poll exceeded 100 ms. The revised four cases passed with the same delayed replies. Both
@@ -84,9 +102,11 @@ of real-time speed.
   paired-camera failure was the hardcoded-port launch error above; after the base-URL and
   native-sort corrections, the complete paired check passed in 3.8 minutes. Both original
   image/depth checks and the 1.1 cost bound passed: still 21.083/19.975 ms (1.0555), and low light
-  21.600/20.233 ms (1.0675). The only remaining local failure is the known circular-QR case above.
-  Complete ui3 and sndc-engine files passed all 14 tests; every requested test file was exercised on
-  the final production source. The original failed reports remain in the ignored cache.
+  21.600/20.233 ms (1.0675). The known circular-QR case remains. This batch preceded the
+  deterministic search regression and its source fix; the subsequent book/search results are
+  recorded in the draft PR. Complete ui3 and sndc-engine files passed all 14 tests; every requested
+  test file was exercised on the final production source. The original failed reports remain in the
+  ignored cache.
 
 Temporary fault-injection probes and their logs stay in the ignored local cache. They are not
 shipped or added to the suite. No retry, skip, `fixme`, threshold increase, or edit to
@@ -105,9 +125,11 @@ entries stay in place. Newly reported failures that were never known need no rem
 
 ## Record
 
-Status: implemented for review. No recipe, asset, license, public behavior, or effect changes.
-Reused: the existing application, renderer, clocks, fixtures, depth worker, and PDF printer. New:
-test observation/control, matched benchmark timing, an empty-mask shortcut, the artifact workflow,
-and these instructions. No performance claim about a real phone is made. The paired cost measurement
-is software-browser CPU filtering, not a device frame-rate claim. Final check commands, counts,
-unresolved failures, and the Actions link are in the draft PR body. Rule check: none.
+Status: implemented for review. No asset, license, book layout, turn behavior, or effect changes.
+The PDF search keeps the exact selected page and its text after the book updates. Reused: the
+existing application, renderer, clocks, fixtures, depth worker, and PDF printer. New: test
+observation/control, matched benchmark timing, an empty-mask shortcut, exact search selection, the
+artifact workflow, and these instructions. No performance claim about a real phone is made. The
+paired cost measurement is software-browser CPU filtering, not a device frame-rate claim. Final
+check commands, counts, unresolved failures, and the Actions link are in the draft PR body. Rule
+check: none.
