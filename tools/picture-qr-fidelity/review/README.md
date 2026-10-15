@@ -1,5 +1,11 @@
 # Picture QR review · Codex (GPT-6)
 
+**October 15 review update:** The 52-picture still gallery below is historical first-pass evidence.
+The [first-pass audit](../../../docs/audits/picture-qr-fidelity-first-pass-2026-10.md) records its
+source and limits. The four tap clips are refreshed against main `cb8a8315` and the reviewed recipe;
+their [provenance](clips/provenance.json) records the exact hashes. The fresh 100-picture comparison
+is pending.
+
 Study and review renders made by Ryan with Codex (GPT-6). Source picture credits remain in
 [CREDITS](../../../CREDITS.md).
 
