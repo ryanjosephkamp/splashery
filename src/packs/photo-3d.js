@@ -543,11 +543,22 @@ export async function openPhoto(file, name) {
   const photo = await decodePhoto(file);
   const { photoPreview } = await import("../photo3d/preview.js");
   const close = photoPreview(photo);
+  const colors =
+    typeof Worker === "undefined"
+      ? Promise.resolve(null)
+      : import("../photo3d/prepare.js")
+          .then(({ prewarmSurface }) => {
+            const pl = globalThis.window?.__splashery?.player;
+            const count = pl?.splatBudget?.(PHOTO_DENSITY) ?? PHOTO_BUDGETS.mid;
+            return prewarmSurface(photo, { count: Math.max(100, Math.floor(count * 0.95)) });
+          })
+          .catch(() => null);
   try {
     const { estimateDepth } = await import("./photo-3d-depth.js");
     const depth = await estimateDepth(photo);
     const p = usePhoto(photo, { w: depth.w, h: depth.h, d: depth.d }, name || "Your photo");
     p.ms = depth.ms;
+    p.colorKey = await colors;
     return p;
   } finally {
     close();
@@ -753,6 +764,7 @@ const PHOTO_3D = {
             src.depth,
             {
               count: budget,
+              colorKey: src.colorKey,
               depth: o.depth ?? 0.5,
               keepFlat: src === P3D.custom,
               bitmap: P3D.canvasFor !== src.uid || !P3D.canvas,

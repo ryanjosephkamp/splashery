@@ -407,10 +407,12 @@ const MODEL_SPLATS = {
       if (!n) n = out;
       // Outward: face the same way as the position from the middle.
       const flip = n[0] * out[0] + n[1] * out[1] + n[2] * out[2] < 0 ? -1 : 1;
-      const up1 = 0.05 + 0.12 * rand();
+      // Lane Polish: farther out (was 0.05 to 0.17 up and 0.15 aside), so the
+      // splats part in the cloud.
+      const up1 = 0.08 + 0.22 * rand();
       const a = rand() * Math.PI * 2;
       const b = 2 * rand() - 1;
-      const r = 0.15 * rand();
+      const r = 0.26 * Math.sqrt(rand());
       const s = Math.sqrt(1 - b * b);
       it.to = [
         x + n[0] * flip * up1 + out[0] * 0.06 + Math.cos(a) * s * r,
@@ -419,6 +421,10 @@ const MODEL_SPLATS = {
       ];
       it.channel = Math.min(3, Math.floor(((y - ymin) / span) * 4));
     }
+    // Lane Polish: framed on the model itself (the lifted cloud may pass the
+    // frame for a moment), so the model fills more of a phone.
+    k.fitMorphs = false;
+    for (const it of items) k.reach(it.p);
     const share = Math.min(1, items.length / k.count);
     k.cloud({ share, pattern: false }, (_r, i) => {
       const it = items[i];
@@ -433,7 +439,10 @@ const MODEL_SPLATS = {
         color: it.color,
         opacity: it.opacity,
         to: it.to,
-        channel: it.channel,
+        // Lane Polish: channels 4 to 7 (the same four), so each splat shrinks
+        // to 40% as it lifts and the cloud reads as separate flat discs, not
+        // a fuzzy puff; it grows back as it lands.
+        channel: it.channel + 4,
         pattern: false,
       };
     });

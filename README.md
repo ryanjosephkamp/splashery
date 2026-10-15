@@ -172,17 +172,25 @@ panel, as before.
 
 ## Controls
 
-| Input                                 | Does                                             |
-| ------------------------------------- | ------------------------------------------------ |
-| Drag, one finger                      | Turn the toy (or use the picked tool on the toy) |
-| Right-drag, Space + drag, two fingers | Always turn the toy                              |
-| Wheel, pinch                          | Zoom, within limits around the toy               |
-| A clear two-finger twist              | Roll (not when the tilt is locked)               |
-| Double-click, double-tap              | Reset the view                                   |
-| Top-bar buttons                       | Reset view, Tilt lock and Turntable              |
-| 1 to 5                                | Orbit, Poke, Paint, Magnet, Clay                 |
-| P / R                                 | Poke a random spot / reset the view              |
-| Arrows, + and −                       | Turn and zoom from the keyboard (canvas focused) |
+| Input                                 | Does                                                                                                |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Drag, one finger                      | Turn the toy (or use the picked tool on the toy)                                                    |
+| Right-drag, Space + drag, two fingers | Always turn the toy                                                                                 |
+| Wheel, pinch                          | Zoom, within limits around the toy                                                                  |
+| A clear two-finger twist              | Roll (not when the tilt is locked)                                                                  |
+| Double-click, double-tap              | Reset the view                                                                                      |
+| Top-bar buttons                       | Reset view, Tilt lock and Turntable                                                                 |
+| 1 to 5                                | Orbit, Poke, Paint, Magnet, Clay                                                                    |
+| P / R                                 | Poke a random spot / reset the view                                                                 |
+| F                                     | Hide the controls to focus on the toy; press again to bring them back (full screen where available) |
+| [                                     | Fold the panel away or show it again on a computer                                                  |
+| G                                     | Open or close the toy gallery (the full toy grid on a phone)                                        |
+| Arrows                                | Turn the toy when the 3D view has keyboard focus                                                    |
+| + / − (also = / \_)                   | Zoom from the keyboard, including when a button has focus                                           |
+
+Keyboard shortcuts stay off while typing in a field or using another input control (including a
+slider), or while Command, Control, or Option is held. A toy that accepts typing gets the keys it
+recognizes first.
 
 The camera eases in and out, coasts after a flick, and turns slowly when you leave it alone (never
 when your system asks for reduced motion).

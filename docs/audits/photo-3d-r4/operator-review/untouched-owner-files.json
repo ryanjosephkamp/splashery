@@ -1,0 +1,112 @@
+{
+  "checkedUTC": "2026-10-14T18:26:33.541072+00:00",
+  "head": "7815d41902f94509ad623121679bd0f02d36a1fd",
+  "main": "915e6793d6c91a3b4dd6ebd086a9274efb82a1f5",
+  "files": [
+    {
+      "file": "src/live/relief-height.js",
+      "sha256": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+      "equalsMain": true
+    },
+    {
+      "file": "src/live/relief-mesh.js",
+      "sha256": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+      "equalsMain": true
+    },
+    {
+      "file": "src/live/relief.js",
+      "sha256": "2115a20815fd31979db1f53453cb477521c7dd5fd690f8204bb217bb7bd870e1",
+      "equalsMain": true
+    },
+    {
+      "file": "src/packs/moving-photo.js",
+      "sha256": "9d99d3d619025d4bd072bae91b991203bf51583ee21054b466dabc3ae86764e3",
+      "equalsMain": true
+    },
+    {
+      "file": "src/photo-splats.js",
+      "sha256": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/baked.js",
+      "sha256": "172281c6ae5889dffa7e66260d1f4f23c62cfe15fa2238c858fef1f9b5f7d9e6",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/cleanup.js",
+      "sha256": "e6b04516018d85130f96c3a31adc15774a17535a0e16f92fe5ff97430748ddc6",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/credit.js",
+      "sha256": "3be797f2805045ea1970b703482c67da1c01060958680788d1bc16e2531beac0",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/extract.js",
+      "sha256": "9106a4bb04798be6dafe396005501e8fe5ea44e1bd1b6dc87135e9a876774206",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/flight.js",
+      "sha256": "a1b2957cd82edfa58a6c3f36ae377a9a8feaa0dafcfa70a7a97bd0331bb4b855",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/frames.js",
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/guide.js",
+      "sha256": "5ce4eb0ae36603a18db0975fa4bca7409ba74b0e23ffae4200a78bec141512aa",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/panel.js",
+      "sha256": "b31ad9952d75d1185686999cc21a595e002f300fc86b4f43ee41296a8199a12e",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/ply.js",
+      "sha256": "bd08fb3df69cbce7c8b577cc5b8bdf551846b47bd778b7f39bc4fc1e7b7b6fad",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/region.js",
+      "sha256": "f9b2f0e42dfaaa6bb781dc0f958812999e32bfea6946e9c79c6b8e704a3e48cf",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/run.js",
+      "sha256": "1b93a7788c4355f45cab3e23de8cf2fcb9b94463b8b22da2d727a15ea85b3f84",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/samples.js",
+      "sha256": "f2e7b59c601a9484e2b2a56cbeb472def99bd394a6d73154c3116b8265503b85",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/scene.js",
+      "sha256": "405d401cf5c87a7d62b93b31ae52c7a8f0e3323923068bb1419d7a685438ed39",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/suitability.js",
+      "sha256": "8e6b6f18145abe36fbcc2f50230dd1bd39c4081581e99bf4dce20f47afb6ca9f",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/tiers.js",
+      "sha256": "37781fba7d9086d2ca688bed3cf534f7eacf49146e28639ac95a2b4bdd3c11ef",
+      "equalsMain": true
+    },
+    {
+      "file": "src/video3d/walk.js",
+      "sha256": "a6f1690d1a68c668b298e5b3f41e40a02970ca90fe7fa9f55bed45d6c9418c12",
+      "equalsMain": true
+    }
+  ]
+}

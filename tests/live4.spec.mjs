@@ -158,26 +158,55 @@ test("your audio plays to the plate: its strongest pitch rings the modes, re-sor
   expect(await page.evaluate(() => document.getElementById("chladni-transport")?.hidden)).toBe(true); // prettier-ignore
   const before = await page.evaluate(async (m) => (await import(m)).chladniFileState().builds, studio); // prettier-ignore
   await watchBow(page);
+  // Capture each drawn mode in the browser. A driver round trip can miss a
+  // settled first tune, or return after the second tune has already ended.
+  await page.evaluate(async () => {
+    const { chladniFileState } = await import("/src/packs/studio.js");
+    window.__fileModes = {};
+    const stage = window.__splashery.player.stage;
+    const observe = () => {
+      const s = chladniFileState();
+      if (!s.name || !s.playing) return;
+      if (!window.__fileModes.a && s.lead?.startsWith("2-3") && s.p > 0.4) window.__fileModes.a = s;
+      if (window.__fileModes.a && s.lead?.startsWith("3-4") && s.p > 0.3) {
+        window.__fileModes.b = s;
+        // Pause at the observed phase, before more media time elapses during
+        // protocol transport. The original pause/clock/sand checks follow.
+        document.getElementById("chladni-play").click();
+        stage.updateHandlers = stage.updateHandlers.filter((fn) => fn !== observe);
+      }
+    };
+    stage.onUpdate(observe);
+  });
   await page.setInputFiles("#toy-input-file", SONG);
   await until(page, async (m) => (await import(m)).chladniFileState().name, studio, 60_000);
   // A browser that wants a tap before sound plays gets one (as a phone may).
-  if (!(await page.evaluate(async (m) => (await import(m)).chladniFileState().playing, studio)))
+  if (
+    !(await page.evaluate(
+      async (m) => (await import(m)).chladniFileState().playing || !!window.__fileModes.b,
+      studio,
+    ))
+  )
     await page.evaluate(() => document.getElementById("chladni-play").click());
-  await until(page, async (m) => (await import(m)).chladniFileState().playing, studio, 60_000);
+  await until(
+    page,
+    async (m) => (await import(m)).chladniFileState().playing || !!window.__fileModes.b,
+    studio,
+    60_000,
+  );
   // The first tune keeps the 195 Hz plate and settles its sand. (Live r7: it
   // waits for that mode to lead, as below for the second tune; on a loaded
   // machine the sand could look settled while another mode led for a moment.)
-  const a = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.lead?.startsWith("2-3") && s.p > 0.4 ? s : null; }, studio, 90_000); // prettier-ignore
+  const a = await until(page, () => window.__fileModes.a, null, 90_000); // prettier-ignore
   expect(a.builds).toBeGreaterThanOrEqual(before);
   expect(a.lead).toMatch(/^2-3/);
   // The second tune (F♯4 and around it) takes the sand to the 375 Hz figure.
   // (Live r7: on the same plate, from where it lies; until r7 a new plate.)
-  const b = await until(page, async (m) => { const s = (await import(m)).chladniFileState(); return s.lead?.startsWith("3-4") && s.p > 0.3 ? s : null; }, studio, 60_000); // prettier-ignore
+  const b = await until(page, () => window.__fileModes.b, null, 60_000); // prettier-ignore
   expect(b.builds).toBe(a.builds);
   expect(b.playing).toBe(true); // the audio played on through the switch
   // Pause: the clock and the sand hold. (Live r7: the sand stops on the next
   // frame; its settledness is read a moment later.)
-  await page.evaluate(() => document.getElementById("chladni-play").click());
   await page.waitForTimeout(400);
   const p0 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
   await page.waitForTimeout(1000);
@@ -186,16 +215,19 @@ test("your audio plays to the plate: its strongest pitch rings the modes, re-sor
   expect(Math.abs(p1.pos - p0.pos)).toBeLessThan(0.05);
   expect(p1.p).toBeCloseTo(p0.p, 5);
   // Scrub to the middle; Start over plays from the top.
-  await page.evaluate(() => {
+  const p2 = await page.evaluate(async (m) => {
     const s = document.getElementById("chladni-seek");
     s.value = "500";
     s.dispatchEvent(new Event("input"));
     s.dispatchEvent(new Event("change"));
-  });
-  const p2 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
+    return (await import(m)).chladniFileState();
+  }, studio);
   expect(Math.abs(p2.pos - 12)).toBeLessThan(0.5);
-  await page.evaluate(() => document.getElementById("chladni-start").click());
-  const p3 = await page.evaluate(async (m) => (await import(m)).chladniFileState(), studio);
+  const p3 = await page.evaluate(async (m) => {
+    const { chladniFileState } = await import(m);
+    document.getElementById("chladni-start").click();
+    return chladniFileState();
+  }, studio);
   expect(p3.pos).toBeLessThan(0.3);
   expect(p3.playing).toBe(true);
   // Nothing left the device.
