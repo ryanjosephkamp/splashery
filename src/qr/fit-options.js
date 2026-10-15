@@ -22,7 +22,10 @@ export function pictureFitOptions(o) {
 }
 export function borderSettings(o = {}) {
   const quiet = { wide: 4, medium: 2, thin: 1, none: 0 }[o.circleBorder];
-  return { quiet: quiet ?? 4, pale: quiet !== undefined || (o.eyeShape && o.eyeShape !== "style") };
+  return {
+    quiet: quiet ?? 4,
+    pale: Boolean(quiet !== undefined || (o.eyeShape && o.eyeShape !== "style")),
+  };
 }
 export function fittedOptions(o = {}) {
   return (

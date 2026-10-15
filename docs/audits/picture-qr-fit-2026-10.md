@@ -206,13 +206,20 @@ before merge; the PR remains a draft. Review images go only on the clips branch.
   existing motions.
 - Generation is deterministic. The study uses the existing circular layout, QR encoder, halftone
   weave, capture simulator, and readers.
-- Environment: managed Debian container, Node 24.19.0, installed Chromium 151, software WebGL2.
+- Environment: managed Debian container, installed Chromium 151, software WebGL2. The study and
+  original verification used Node 24.19.0; review regression checks use Node 22.23.3 to match CI.
   Physical-device performance, memory, and frame rate are unmeasured.
 - Node pack checks: QR code 158,428 splats and Picture QR 122,602 splats. The compact Circle render
   is also checked at an 8,000-splat budget with all three readers.
-- The preexisting shared-builder fingerprint was stale on starting main `41b21e74`. Its complete
-  fingerprint, `d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6`, is identical on
-  this branch. The existing fixture now records that verified baseline.
+- The shared-builder Square fixture retains main's original fingerprint,
+  `b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144`, and its original comment. That
+  fingerprint matches both main and this branch under Node 22, which CI uses. The initial Node 24
+  comparison did not justify replacing the fixture; the claim that it was stale was incorrect.
+- A second full-output fixture covers raw legacy Circle builds across the same two payloads, seven
+  styles, and two plates, with no `eyeShape` or `circleBorder` defaults supplied. Main `c00e1cb8`
+  under Node 22 produces `51848ddea445d56959c8558a2dd4682e8d688bae3fde5f232e7c1b51448a95fb`. The
+  regression test catches extra decoration dots from an undefined `pale` value; `borderSettings` now
+  always returns a boolean for that flag. Explicit new options retain their existing behavior.
 - No thresholds were lowered, tap tests were not edited, and source picture pixels are never
   included in saved metadata.
 
@@ -227,11 +234,12 @@ assumption under software rendering.
 
 ## Completed checks
 
-All 184 required cases across 23 spec files passed, with no skips. Runs resumed after environment
-reconnects; unchanged passing cases were retained, and changed or failing cases reran. Two unrelated
-smoke cases passed unchanged when run without the reader workload. The complete kit loop covered all
-394 toys and their choices twice in 5.4 minutes under its original 600-second timeout. The final
-scan study completed October 15, 2026 at 00:30 UTC.
+All 185 required cases across 23 spec files passed in one fresh Node 22.23.3 run after the
+Operator's review fixes, with no skips or failures. Both full-output fingerprints match main. The
+new raw Circle regression first failed on the extra-dot output and passed after the boolean fix. The
+complete kit loop covered all 394 toys and their choices twice in 6.8 minutes under its original
+600-second timeout. The qualification study completed October 15, 2026 at 00:30 UTC; its geometry,
+data, and reader thresholds are unchanged by this follow-up.
 
 The 44-image
 [review set](https://github.com/ryanjosephkamp/splashery/blob/codex/picture-qr-fit-clips/tests/screenshots/cdx-qr-fit-review.md)
@@ -239,7 +247,7 @@ contains 36 finished-code frames, four crop-editor views, and four option-panel 
 finished-code frame passed its built-in check and all three readers at 390 px. The editor views also
 verify the crop preview, zoom, and action buttons fit the scrollable panel.
 
-The required spec selection is:
+The required spec selection, run with Node 22 to match CI, is:
 
 ```sh
 SPLASHERY_PORT=4175 SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/qr*.spec.mjs tests/cdx-circle-qr.spec.mjs tests/cdx-qr-*.spec.mjs tests/kit.spec.mjs tests/smoke.spec.mjs tests/help.spec.mjs tests/hta.spec.mjs
