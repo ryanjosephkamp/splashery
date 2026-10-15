@@ -1925,3 +1925,16 @@ source assets retain their recorded terms. See the
 The WebGPU frame-queue backpressure, live-embed regression checks, and manual PDF text checks are
 made by Ryan with Codex (GPT-6), October 15, 2026, under the MIT license. See the
 [live-embed teardown audit](docs/audits/embed-context-close-2026-10.md).
+
+# Photo to 3D failure atlas (Codex task 87)
+
+The local failure finder, metric calibrations, and static gallery are made by Ryan with Codex
+(GPT-6), October 15, 2026. Tool and gallery code are MIT. Original audit capture contributions are
+CC0 1.0; source images retain their recorded terms. Photos and their individual source, author,
+license, byte-hash, and live-license records are kept on `codex/photo-3d-failures-clips`, never
+merged. See [the failure-gallery report](docs/audits/photo-3d-failures-2026-10.md).
+
+# Picture QR fit (Codex task 80)
+
+The crop controls, finder geometry, and scan-study tools are made by Ryan with Codex (GPT-6) under
+Splashery's MIT license.

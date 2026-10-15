@@ -69,6 +69,10 @@ export const MOVING = {
   status: "",
 };
 
+// Match the saved display name too, so a different open clip cannot stand in for it.
+const hasOwnClip = (o) =>
+  o.clip === "custom" && MOVING.custom && (!o.clipName || MOVING.custom.name === o.clipName);
+
 export const movingState = () => ({
   clip: MOVING.clip ? { name: MOVING.clip.name, n: MOVING.clip.n, w: MOVING.clip.w, h: MOVING.clip.h } : null, // prettier-ignore
   frame: MOVING.frame,
@@ -1562,6 +1566,7 @@ export const MOVING_PHOTO = {
   },
   input: {
     title: "Your GIF or video",
+    missingFile: (o) => (o.clip === "custom" && o.clipName && !hasOwnClip(o) ? o.clipName : null),
     accept: "image/gif,.gif,video/*,.mp4,.webm,.mov,.m4v",
     binary: true,
     maxBytes: 200e6,
@@ -1611,7 +1616,7 @@ export const MOVING_PHOTO = {
     },
   },
   async prepare(o) {
-    MOVING.want = o.clip === "custom" && MOVING.custom ? MOVING.custom : await loadSample(o.clip === "custom" ? "sample" : o.clip); // prettier-ignore
+    MOVING.want = hasOwnClip(o) ? MOVING.custom : await loadSample(o.clip === "custom" ? "sample" : o.clip); // prettier-ignore
   },
   drive(t, c, out, info) {
     const time = info?.time ?? t;
