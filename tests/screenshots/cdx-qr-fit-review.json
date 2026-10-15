@@ -1,0 +1,1494 @@
+{
+  "text": "https://example.org/fit-your-picture",
+  "viewports": [
+    [390, 844],
+    [1440, 900]
+  ],
+  "errors": [],
+  "rows": [
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-square-eyes-style-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "square-eyes-style",
+        "shape": "square",
+        "eyeShape": "style",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-square-eyes-square-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "square-eyes-square",
+        "shape": "square",
+        "eyeShape": "square",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-square-eyes-rounded-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "square-eyes-rounded",
+        "shape": "square",
+        "eyeShape": "rounded",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-eyes-style-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-eyes-style",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-eyes-square-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-eyes-square",
+        "shape": "circle",
+        "eyeShape": "square",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-eyes-rounded-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-eyes-rounded",
+        "shape": "circle",
+        "eyeShape": "rounded",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-border-wide-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-border-wide",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "wide"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-border-thin-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-border-thin",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "thin"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-controls-qr-code-390x844.png",
+      "width": 390,
+      "height": 844,
+      "controls": true
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-square-eyes-style-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "square-eyes-style",
+        "shape": "square",
+        "eyeShape": "style",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-eyes-style-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-eyes-style",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-eyes-square-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-eyes-square",
+        "shape": "circle",
+        "eyeShape": "square",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-eyes-rounded-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-eyes-rounded",
+        "shape": "circle",
+        "eyeShape": "rounded",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-border-wide-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-border-wide",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "wide"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-border-thin-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-border-thin",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "thin"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-controls-qr-picture-390x844.png",
+      "width": 390,
+      "height": 844,
+      "controls": true
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-square-crop-before-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "square-crop-before",
+        "shape": "square",
+        "picture": "own",
+        "pictureFit": "code",
+        "cropX": 0.5,
+        "cropY": 0.5,
+        "cropZoom": 1,
+        "circleBorder": "legacy",
+        "eyeShape": "style"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-square-crop-after-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "square-crop-after",
+        "shape": "square",
+        "picture": "own",
+        "pictureFit": "code",
+        "cropX": 0.85,
+        "cropY": 0.3,
+        "cropZoom": 1.6,
+        "circleBorder": "legacy",
+        "eyeShape": "style"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-crop-editor-square-390x844.png",
+      "width": 390,
+      "height": 844,
+      "source": "assets/toys/photo-3d/wildflowers.jpg",
+      "editor": true
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-crop-before-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-crop-before",
+        "shape": "circle",
+        "picture": "own",
+        "pictureFit": "code",
+        "cropX": 0.5,
+        "cropY": 0.5,
+        "cropZoom": 1,
+        "circleBorder": "legacy",
+        "eyeShape": "style"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-crop-after-390x844.png",
+      "width": 390,
+      "height": 844,
+      "options": {
+        "name": "circle-crop-after",
+        "shape": "circle",
+        "picture": "own",
+        "pictureFit": "circle",
+        "cropX": 0.85,
+        "cropY": 0.3,
+        "cropZoom": 1.6,
+        "circleBorder": "legacy",
+        "eyeShape": "style"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-crop-editor-circle-390x844.png",
+      "width": 390,
+      "height": 844,
+      "source": "assets/toys/photo-3d/wildflowers.jpg",
+      "editor": true
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-square-eyes-style-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "square-eyes-style",
+        "shape": "square",
+        "eyeShape": "style",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-square-eyes-square-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "square-eyes-square",
+        "shape": "square",
+        "eyeShape": "square",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-square-eyes-rounded-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "square-eyes-rounded",
+        "shape": "square",
+        "eyeShape": "rounded",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-eyes-style-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-eyes-style",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-eyes-square-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-eyes-square",
+        "shape": "circle",
+        "eyeShape": "square",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-eyes-rounded-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-eyes-rounded",
+        "shape": "circle",
+        "eyeShape": "rounded",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-border-wide-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-border-wide",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "wide"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-qr-code-circle-border-thin-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-border-thin",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "thin"
+      },
+      "check": {
+        "ok": true,
+        "read": "https://example.org/fit-your-picture",
+        "reader": "jsQR",
+        "inverted": false,
+        "text": "https://example.org/fit-your-picture"
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-code",
+      "name": "cdx-qr-fit-controls-qr-code-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "controls": true
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-square-eyes-style-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "square-eyes-style",
+        "shape": "square",
+        "eyeShape": "style",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-eyes-style-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-eyes-style",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-eyes-square-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-eyes-square",
+        "shape": "circle",
+        "eyeShape": "square",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-eyes-rounded-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-eyes-rounded",
+        "shape": "circle",
+        "eyeShape": "rounded",
+        "circleBorder": "legacy"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-border-wide-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-border-wide",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "wide"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-border-thin-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-border-thin",
+        "shape": "circle",
+        "eyeShape": "style",
+        "circleBorder": "thin"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-controls-qr-picture-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "controls": true
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-square-crop-before-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "square-crop-before",
+        "shape": "square",
+        "picture": "own",
+        "pictureFit": "code",
+        "cropX": 0.5,
+        "cropY": 0.5,
+        "cropZoom": 1,
+        "circleBorder": "legacy",
+        "eyeShape": "style"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-square-crop-after-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "square-crop-after",
+        "shape": "square",
+        "picture": "own",
+        "pictureFit": "code",
+        "cropX": 0.85,
+        "cropY": 0.3,
+        "cropZoom": 1.6,
+        "circleBorder": "legacy",
+        "eyeShape": "style"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-crop-editor-square-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "source": "assets/toys/photo-3d/wildflowers.jpg",
+      "editor": true
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-crop-before-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-crop-before",
+        "shape": "circle",
+        "picture": "own",
+        "pictureFit": "code",
+        "cropX": 0.5,
+        "cropY": 0.5,
+        "cropZoom": 1,
+        "circleBorder": "legacy",
+        "eyeShape": "style"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-qr-picture-circle-crop-after-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "options": {
+        "name": "circle-crop-after",
+        "shape": "circle",
+        "picture": "own",
+        "pictureFit": "circle",
+        "cropX": 0.85,
+        "cropY": 0.3,
+        "cropZoom": 1.6,
+        "circleBorder": "legacy",
+        "eyeShape": "style"
+      },
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ],
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/fit-your-picture",
+            "ok": true
+          }
+        ]
+      },
+      "reads": {
+        "jsqr": "https://example.org/fit-your-picture",
+        "zxing": "https://example.org/fit-your-picture",
+        "zxingcpp": "https://example.org/fit-your-picture"
+      }
+    },
+    {
+      "id": "qr-picture",
+      "name": "cdx-qr-fit-crop-editor-circle-1440x900.png",
+      "width": 1440,
+      "height": 900,
+      "source": "assets/toys/photo-3d/wildflowers.jpg",
+      "editor": true
+    }
+  ]
+}
