@@ -54,8 +54,11 @@ decode is not a phone scan: **scanned with a second phone: blocked, needs the ow
 phone and camera as the missing input.
 
 Only Photo to 3D's checkpoint file existed on main at this build. The requested Moving photo, QR
-code, and Picture QR checkpoint files were not yet present. No changes were made to src/, assets/,
-vendor/, or existing toy tests.
+code, and Picture QR checkpoint files were not yet present. They landed on main at `3d43af20` after
+capture and were read before publication. Merging that main changed no implementation used by these
+routes. The other checkpoint observations use different settings and timing methods, so they do not
+replace this run’s measurements. No changes were made to src/, assets/, vendor/, or existing toy
+tests.
 
 ## Findings to hand back
 
