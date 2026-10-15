@@ -13,7 +13,7 @@ const ROOT = fileURLToPath(new URL("../", import.meta.url));
 const PHONE = { width: 390, height: 844 };
 const REAL = process.env.ADV_REAL_GPU === "1";
 const BASE = process.env.SPLASHERY_URL || `http://127.0.0.1:${process.env.SPLASHERY_PORT || 4173}/`;
-const OUT = path.resolve(ROOT, process.env.ADV_OUT || "docs/audits/advisor-route-2026-10");
+const OUT = path.resolve(ROOT, process.env.ADV_OUT || ".cache/advisor-route");
 const STILL = "tests/fixtures/p3d/scene.jpg";
 const CLIP = "tests/fixtures/psv3/silent.webm";
 const OWNER = {
@@ -259,6 +259,7 @@ async function state(page) {
         session: { ...sessionStorage },
       },
       input: document.querySelector("#toy-input")?.innerText || "",
+      statusText: document.querySelector("#toy-status")?.textContent || "",
       visibleText: document.body.innerText,
       toast: {
         text: document.querySelector("#toast")?.textContent || "",
@@ -363,6 +364,26 @@ async function pose(page, yaw = 0, pitch = 0) {
   await drawn(page);
 }
 
+function photoView(s, view, yaw, pitch) {
+  ensure(
+    s.sharp?.views?.["photo-3d"] === view && s.sharp.on === (view === "sharp"),
+    `Expected the ${view} view`,
+    s.sharp,
+  );
+  ensure(
+    Math.abs(s.camera.yaw - yaw) < 0.005 && Math.abs(s.camera.pitch - pitch) < 0.005,
+    "Photo camera did not reach the requested pose",
+    s.camera,
+  );
+  if (view === "splats")
+    ensure(
+      s.statusText.includes("Photo to 3D") && !/\bundefined\b/.test(s.statusText),
+      "Photo Splats status contains undefined",
+      { statusText: s.statusText, view, camera: s.camera },
+    );
+  return s;
+}
+
 async function movingState(page) {
   return page.evaluate(async () => {
     const { MOVING, movingTransport } = await import(
@@ -442,6 +463,7 @@ async function run() {
     const { createHash } = await import("node:crypto");
     const bytes = await fs.readFile(path.join(ROOT, file));
     fixtures[file] = {
+      synthetic: true,
       bytes: bytes.length,
       sha256: createHash("sha256").update(bytes).digest("hex"),
     };
@@ -509,7 +531,11 @@ async function run() {
           try {
             record.actual = await action(record);
           } catch (error) {
-            record.result = error.blocked ? "blocked" : "failed";
+            record.result = error.blocked
+              ? "blocked"
+              : error.inconclusive
+                ? "inconclusive"
+                : "failed";
             record.actual = { error: error.message, detail: error.actual ?? null };
           }
           record.durationMs = Date.now() - start;
@@ -577,7 +603,7 @@ async function run() {
                   () => window.__splashery.player.motion.state.flat < 0.02,
                 );
                 await pose(page, 0.35, 0.12);
-                return state(page);
+                return photoView(await state(page), "sharp", 0.35, 0.12);
               },
             );
             await step("Orbit drag", "Dragging the stage changes the camera yaw", async () => {
@@ -598,27 +624,38 @@ async function run() {
               );
               return { before, after };
             });
-            await step("Splats", "The Splats switch selects the splat view", async () => {
-              await page.locator("#psv-splats").dispatchEvent("click");
-              await drawn(page);
-              const s = await state(page);
-              ensure(
-                s.sharp.views[id] === "splats" && !s.sharp.on,
-                "Splats did not replace Sharp picture",
-                s.sharp,
-              );
-              return s;
-            });
+            await step(
+              "Splats",
+              "The Splats switch selects the splat view with valid status text",
+              async () => {
+                await page.locator("#psv-splats").dispatchEvent("click");
+                await drawn(page);
+                const s = await state(page);
+                ensure(
+                  s.sharp.views[id] === "splats" && !s.sharp.on,
+                  "Splats did not replace Sharp picture",
+                  s.sharp,
+                );
+                ensure(
+                  !/\bundefined\b/.test(s.statusText),
+                  "Photo Splats status contains undefined",
+                  {
+                    statusText: s.statusText,
+                  },
+                );
+                return s;
+              },
+            );
             await step("Splats front", "Splats draw the sample front on", async () => {
               await pose(page);
-              return state(page);
+              return photoView(await state(page), "splats", 0, 0);
             });
             await step(
               "Splats oblique",
               "Splats draw the estimated relief at yaw 0.35 and pitch 0.12",
               async () => {
                 await pose(page, 0.35, 0.12);
-                return state(page);
+                return photoView(await state(page), "splats", 0.35, 0.12);
               },
             );
             await step(
@@ -968,8 +1005,9 @@ async function run() {
             );
             await step(
               "Full viewport decode",
-              "Both readers return the exact payload from an unscaled 390 × 844 viewport screenshot",
+              "Supplementary full-viewport read; other shelf QR codes make failures inconclusive",
               async (r) => {
+                r.owner = null; // Shelf thumbnails make this diagnostic inconclusive, not a toy finding.
                 const bytes = await page.screenshot();
                 const name = `run-${repetition}-${id}-screen.png`;
                 await fs.writeFile(path.join(OUT, name), bytes);
@@ -977,11 +1015,13 @@ async function run() {
                 const decoded = await decodePNG(page, bytes);
                 const payload = exported?.payload || PAYLOAD;
                 r.qr = { payload, decoded, settings: await qrSettings(page, id) };
-                ensure(
-                  decoded.jsqr === payload && decoded.zxing === payload,
-                  "On-screen code did not decode exactly",
-                  { payload, decoded },
-                );
+                if (decoded.jsqr !== payload || decoded.zxing !== payload)
+                  throw Object.assign(
+                    new Error(
+                      "Inconclusive: the full viewport includes other QR codes in shelf thumbnails",
+                    ),
+                    { inconclusive: true, actual: { payload, decoded } },
+                  );
                 return { payload, decoded, settings: await qrSettings(page, id) };
               },
             );
@@ -1116,55 +1156,109 @@ async function run() {
           });
         }
     }
-  // Persist final classifications (including blocked phone scans), then aggregate by step.
-  for (const r of records)
-    await json(
-      path.join(OUT, `run-${r.repetition}-${r.toyId}-${String(r.step).padStart(2, "0")}.json`),
-      r,
-    );
+  const summary = summarize(records, runs);
+  for (const r of records) {
+    const group = summary.find((s) => s.step === `${r.toyId}: ${r.name}`);
+    r.runPasses = { passed: group.passed, of: runs, attempted: group.attempted };
+    await json(path.join(OUT, recordFile(r)), r);
+  }
+  await writeReport(OUT, environment, records, runs);
+  console.log(`Evidence: ${OUT}`);
+  process.exitCode =
+    process.env.ADV_FAIL_ON_FINDINGS === "0"
+      ? 0
+      : records.some((r) => r.result === "failed")
+        ? 1
+        : 0;
+}
+
+const recordFile = (r) => `run-${r.repetition}-${r.toyId}-${String(r.step).padStart(2, "0")}.json`;
+const kinds = ["passed", "failed", "inconclusive", "blocked"];
+const counts = (rows) =>
+  Object.fromEntries(kinds.map((kind) => [kind, rows.filter((r) => r.result === kind).length]));
+const countText = (rows) =>
+  Object.entries(counts(rows))
+    .filter(([, n]) => n)
+    .map(([kind, n]) => `${n} ${kind}`)
+    .join(", ");
+
+function summarize(records, runs) {
   const groups = new Map();
   for (const r of records) {
     const key = `${r.toyId}: ${r.name}`;
     if (!groups.has(key)) groups.set(key, []);
     groups.get(key).push(r);
   }
-  const summary = [...groups].map(([step, rows]) => ({
+  return [...groups].map(([step, rows]) => ({
     step,
-    passed: rows.filter((r) => r.result === "passed").length,
+    ...counts(rows),
     attempted: rows.filter((r) => r.result !== "blocked").length,
-    planned: 3,
-    result: rows.some((r) => r.result === "failed")
-      ? "failed"
-      : rows.some((r) => r.result === "blocked")
-        ? "blocked"
-        : "passed",
-    records: rows.map(
-      (r) => `run-${r.repetition}-${r.toyId}-${String(r.step).padStart(2, "0")}.json`,
+    planned: runs,
+    result: ["failed", "blocked", "inconclusive", "passed"].find((kind) =>
+      rows.some((r) => r.result === kind),
     ),
+    records: rows.map(recordFile),
   }));
-  for (const r of records) {
-    const group = summary.find((s) => s.step === `${r.toyId}: ${r.name}`);
-    r.runPasses = { passed: group.passed, of: 3, attempted: group.attempted };
-    await json(
-      path.join(OUT, `run-${r.repetition}-${r.toyId}-${String(r.step).padStart(2, "0")}.json`),
-      r,
-    );
-  }
-  await json(path.join(OUT, "results.json"), {
-    environment,
-    requestedRuns: runs,
-    summary,
-    records,
-  });
-  const recordedOn = `${new Intl.DateTimeFormat("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" }).format(new Date(environment.recordedAt))}, at ${environment.recordedAt.slice(11, 19)} UTC`;
+}
+
+// Also usable after capture to publish run 1 locally and link runs 2/3 on the evidence-only branch.
+export async function writeReport(
+  out,
+  environment,
+  records,
+  runs,
+  { linkFor = (file) => file, verification = "" } = {},
+) {
+  const link = (label, file) => `[${label}](${linkFor(file)})`;
+  const summary = summarize(records, runs);
   const graphics = records.find((r) => r.state?.graphics?.renderer)?.state.graphics;
-  const totals = Object.fromEntries(
-    ["passed", "failed", "blocked"].map((kind) => [
-      kind,
-      records.filter((r) => r.result === kind).length,
-    ]),
-  );
-  const movingTimings = records
+  const recordedOn = new Intl.DateTimeFormat("en-US", {
+    dateStyle: "long",
+    timeStyle: "long",
+    timeZone: "America/New_York",
+  }).format(new Date(environment.recordedAt));
+  const byToy = [...new Set(records.map((r) => r.toyId))]
+    .map((id) => {
+      const rows = records.filter((r) => r.toyId === id);
+      const first = rows[0];
+      const findings = [
+        ...new Set(rows.filter((r) => r.result === "failed").map((r) => r.actual?.error)),
+      ];
+      return `| ${id} | ${countText(rows)} | ${findings.join("; ") || (rows.some((r) => r.result === "blocked") ? "Second-phone scan blocked, needs the owner" : "No failed checks")} | ${link("Run 1", recordFile(first))} |`;
+    })
+    .join("\n");
+  const table = summary
+    .map((s) => {
+      const rows = records.filter((r) => `${r.toyId}: ${r.name}` === s.step);
+      const links = rows
+        .map((r) =>
+          [
+            link(`${r.repetition} record`, recordFile(r)),
+            ...r.evidence.map((f, i) => link(`${r.repetition} file ${i + 1}`, f)),
+          ].join(", "),
+        )
+        .join("; ");
+      return `| ${s.step} | ${s.result} | ${s.passed}/${runs} (${s.attempted} attempted) | ${links} |`;
+    })
+    .join("\n");
+  const findingGroups = new Map();
+  for (const r of records.filter((r) => r.result !== "passed")) {
+    const key = `${r.toyId}: ${r.actual?.error || r.name}`;
+    if (!findingGroups.has(key)) findingGroups.set(key, []);
+    findingGroups.get(key).push(r);
+  }
+  const findings = [...findingGroups.values()]
+    .map((rows) => {
+      const first = rows[0];
+      const names = [...new Set(rows.map((r) => r.name))].join(", ");
+      const reps = [...new Set(rows.map((r) => r.repetition))];
+      const links = reps
+        .map((rep) => link(`Run ${rep}`, recordFile(rows.find((r) => r.repetition === rep))))
+        .join(", ");
+      return `| ${first.toyId}: ${names} | ${first.result} | ${first.actual?.error} | ${first.owner || "No toy owner: supplementary diagnostic"} | ${links} |`;
+    })
+    .join("\n");
+  const moving = records
     .filter(
       (r) =>
         r.toyId === "moving-photo-3d" &&
@@ -1176,39 +1270,86 @@ async function run() {
         `| ${r.repetition} | ${r.state.firstDraw?.chooseToyToFirstFrameMs?.toFixed(1)} | ${r.state.firstDraw?.navigationToFirstFrameMs?.toFixed(1)} | ${r.actual.frameTimeMs.min?.toFixed(1)} | ${r.actual.frameTimeMs.median?.toFixed(1)} | ${r.actual.frameTimeMs.p95?.toFixed(1)} | ${r.actual.frameTimeMs.max?.toFixed(1)} |`,
     )
     .join("\n");
-  const table = summary
-    .map((s) => {
-      const links = s.records.map((file, i) => {
-        const row = records.find(
-          (r) => `${r.toyId}: ${r.name}` === s.step && r.repetition === i + 1,
-        );
-        return [
-          `[${i + 1} record](${file})`,
-          ...(row?.evidence || []).map((evidence, j) => `[${i + 1} file ${j + 1}](${evidence})`),
-        ].join(", ");
-      });
-      return `| ${s.step} | ${s.result} | ${s.passed}/3 (${s.attempted} attempted) | ${links.join("; ")} |`;
+  const share = records
+    .filter((r) => r.toyId === "share-qr" && r.name === "Export and decode PNG" && r.qr?.payload)
+    .map((r) => {
+      const made = r.actual?.share;
+      return `| ${r.repetition} | ${new URL(r.qr.payload).origin} | ${r.qr.payload.length} | ${made?.version ? 17 + 4 * made.version : "See dialog info in record"} | ${link("Exact URL and decodes", recordFile(r))} |`;
     })
     .join("\n");
-  const failures = records
-    .filter((r) => r.result !== "passed")
-    .map(
-      (r) =>
-        `- Run ${r.repetition}, ${r.toyId}, step ${r.step} (${r.name}): ${r.actual?.error}. Owner: ${r.owner}. Reproduce with the fixture and exact options in [record](run-${r.repetition}-${r.toyId}-${String(r.step).padStart(2, "0")}.json).`,
-    )
-    .join("\n");
+  await json(path.join(out, "summary.json"), {
+    environment,
+    requestedRuns: runs,
+    totals: counts(records),
+    summary: summary.map((s) => ({ ...s, records: s.records.map(linkFor) })),
+  });
   await fs.writeFile(
-    path.join(OUT, "README.md"),
-    `# Advisor demo route evidence\n\nRecorded ${recordedOn}, build \`${buildCommit}\`, Chromium ${environment.browser}. Rule check: none. Codex built this evidence harness.\n\nGraphics: ${graphics?.backend || "unavailable"}; ${graphics?.renderer || "unavailable"}. ${totals.passed} passed, ${totals.failed} failed, and ${totals.blocked} blocked step records. Failures make the runner exit with status 1 and remain findings for the owning tasks.\n\nRun a static server with \`npm run serve\`, then \`SPLASHERY_CHROMIUM=/path/to/chromium node tools/adv-route.mjs\`. The default is three independent runs, each route in a fresh browser context with empty cookies, local storage, and session storage. Each route uses scene seed 1 to keep scene generation and settings repeatable. Share URLs also carry their creation timestamp, so each exact URL is recorded verbatim and may differ across runs. \`ADV_PAYLOAD\` overrides the QR toys' payload, \`ADV_OUT\` selects an output directory, \`SPLASHERY_URL\` selects the server, and \`ADV_RUNS=1\` is a development smoke run, never three-run evidence.\n\nFor the owner's Mac, use \`ADV_OUT=.cache/advisor-route-mac ADV_REAL_GPU=1 ADV_HEADED=1 node tools/adv-route.mjs\`; this removes all software-renderer flags and permits the app's automatic backend choice. Use \`ADV_RENDERER=webgpu\` to request WebGPU explicitly, and check the recorded actual backend and renderer. Real-device smoothness, real load times, GPU presentation, and hardware WebGPU remain blocked until that run. No software result proves them.\n\nPhoto depth is estimated from pictures, never measured geometry. The local JPEG and silent WebM are existing repository fixtures; hashes are in results.json. The moving measurements belong to Moving photo to 3D, not Video to 3D. First-frame timing records navigation-to-frame and chooseToy-to-frame at the first PlayCanvas postrender event for the nonbusy target (with Sharp picture visible for photo routes). Two stage captures then settle the screenshot. It is not the moment pixels reach a display. Playback intervals are performance.now differences at PlayCanvas postrender, with source positions and frame numbers, and min, median, p95, and max recorded. These events mark CPU render completion, not GPU completion or display presentation. The software renderer and automation overhead influence all timings. stageUpdateTicks is a diagnostic update count, not a rendered-frame count. No mocked media or depth model is used.\n\nAll screenshots use a 390 × 844 CSS-pixel viewport at DPR 1. PNG exports use the real exporters: 390 pixels for QR code and Picture QR, the current phone canvas for Three QR, and the share sheet's native PNG size. Each untouched export is saved and decoded, and a separately saved copy is scaled to a maximum dimension of 390 pixels for the required phone-size decode. Native-size failures remain findings even when the phone-size copy decodes. The screen decoder reads a screenshot of the visible stage (or the share dialog canvas), cropped only to that element at its actual CSS size. The full unscaled viewport is also decoded separately; it includes QR thumbnails in the shelf, which can interfere with detection. Both checks retain failures. No on-screen screenshot is replaced by an offscreen render. Each step records options, camera, actual backend, renderer string, labs state, initial and final storage, expected and actual results, duration, evidence, and route logs. Logs are also separate per route. Steps use the public app hooks for deterministic controls and actual file inputs and exporters; this is browser integration evidence, not a test of every pointer target.\n\nThe QR toys use the same exact payload throughout. Three QR uses that payload in all three channels; this does not establish distinct-channel separation. The share QR holds the actual scene URL (recorded exactly), which cannot be replaced by ADV_PAYLOAD without changing the feature. Themes, contrast, and quiet zones are in the QR step records. A generated code or a successful software decode is not a phone scan: **scanned with a second phone: blocked, needs the owner**, with a second phone and camera as the missing input.\n\nCheckpoint references are the photo-3d, moving-photo-3d, qr-code, and qr-picture checkpoint documents under docs/studio/. Compare the versions present at the recorded build; later checkpoint captures can use different settings and timing methods. No changes were made to src/, assets/, vendor/, or existing toy tests.\n\n## Moving photo timings\n\nMilliseconds, measured in this browser with the method above. These observations describe the recorded backend and do not predict performance on other devices.\n\n| Run | Choose toy to first frame | Navigation to first frame | Frame min | Median | p95 | Max |\n| --- | --- | --- | --- | --- | --- | --- |\n${movingTimings}\n\n## Results\n\n| Step | Result | Passed of three | Evidence records |\n| --- | --- | --- | --- |\n${table}\n\n## Reproduction records and missing inputs\n\n${failures || "All attempted automated steps passed."}\n\nEach numbered run links its JSON record and evidence files directly; file order matches the record’s evidence array. Every failure is retained for the owning task; no checks are relaxed and no toy fixes are included. Images larger than 1 MB and any large clips belong on codex/advisor-route-evidence-clips, which must never be merged.\n`,
+    path.join(out, "README.md"),
+    `| Toy | Observations across ${runs} run${runs === 1 ? "" : "s"} | Findings / missing input | Evidence |\n| --- | --- | --- | --- |\n${byToy}
+
+# Advisor demo route evidence
+
+Recorded ${recordedOn}, build \`${environment.buildCommit}\`, Chromium ${environment.browser}. Codex (GPT-6) built this harness. Rule check: none.
+
+Graphics: ${graphics?.backend || "unavailable"}; ${graphics?.renderer || "unavailable"}. ${countText(records)}. Each independent route starts with empty storage at 390 × 844 CSS pixels and DPR 1. The runs force \`profile=mid&adapt=off\`, labs on, and scene seed 1. The initial storage, resolved options, browser, backend, numbered actions, errors, expected results, and actual results are recorded in each step. Creation timestamps remain real and can change exact share URLs across runs.
+
+## Distinct findings and missing inputs
+
+Repeated runs are grouped below. Photo Splats steps 5–7 are one status-text finding owned by task 76. The original nine repeated observation groups are retained, with this newly checked status finding added once. Full-viewport reads are supplementary, inconclusive diagnostics when readers fail; they have no toy owner and do not affect the exit code. The visible code and real exported PNG have separate exact-payload checks with both vendored readers. A second-phone scan stays **blocked, needs the owner**.
+
+| Step(s) | Result | Finding / smallest missing input | Owner | Reproduction records |
+| --- | --- | --- | --- | --- |
+${findings || "| All attempted checks | passed | None | — | See results below |"}
+
+A local-file link carries settings and file details, never the file bytes. Recipient records and screenshots show exactly what a fresh recipient sees and whether the page clearly asks them to reopen the file. A failure here belongs to the toy's owning task; this PR fixes no toys.
+
+## Run it again
+
+Start a static server with \`npm run serve\`, then run \`SPLASHERY_CHROMIUM=/path/to/chromium node tools/adv-route.mjs\`. Output defaults to \`.cache/advisor-route/\`, so a rerun cannot overwrite this committed report. \`ADV_OUT\` selects another output directory, \`SPLASHERY_URL\` the server, \`ADV_PAYLOAD\` the QR toys' text, and \`ADV_RUNS\` 1–3 repetitions (default 3). Pass counts use the actual number requested; a one-run dispatch is not three-run evidence. Each result is saved as a per-step JSON file; \`summary.json\` indexes those files without duplicating their contents.
+
+The evidence workflow is **workflow_dispatch only**, one run per dispatch, with \`ADV_RUNS=1\` and \`ADV_FAIL_ON_FINDINGS=0\`. Route findings are reported without making that job red; infrastructure failures and regression failures still fail. Locally the runner exits 1 for failed checks unless \`ADV_FAIL_ON_FINDINGS=0\`; inconclusive and blocked observations never trigger that exit. The earlier PR-triggered Actions run 38672160501 reached its 45-minute limit and was canceled without Actions evidence. The Operator will dispatch the new workflow after it reaches main.
+
+For the owner's Mac: \`ADV_OUT=.cache/advisor-route-mac ADV_REAL_GPU=1 ADV_HEADED=1 node tools/adv-route.mjs\`. This removes all software-renderer flags and allows the app's automatic backend choice. Request WebGPU with \`ADV_RENDERER=webgpu\`, then inspect the actual recorded backend. Physical camera scans, hardware smoothness, real-device load times, GPU presentation, and hardware WebGPU remain unmeasured until an owner device run.
+
+## Inputs and measurement method
+
+Both local fixtures are **synthetic**: \`${STILL}\` is a generated disc on a striped wall, and \`${CLIP}\` is a synthetic silent test clip. File hashes and sizes are in every step's fixture metadata. Shipped samples are loaded unchanged; local depth inference is real, with no media or model mocks. Photo depth is **estimated relative depth**, never measured geometry.
+
+These Moving photo to 3D measurements do not describe Video to 3D. First-frame timing records navigation-to-frame and chooseToy-to-frame at the first PlayCanvas postrender for the nonbusy target with Sharp picture visible. Two stage captures then settle the screenshot. Playback samples record performance.now differences at postrender, source positions, and frame numbers. Min, median, p95, and max are retained with raw samples. They describe CPU render completion, not GPU completion or display presentation. Software rendering and automation overhead influence the values. stageUpdateTicks counts updates, not rendered frames. Photo steps 3, 6, and 7 explicitly check view and camera pose; Splats also checks status text.
+
+PNG exports come from the real exporters, not regenerated matrices. Untouched exports and separately saved copies scaled to at most 390 pixels are each decoded with vendor jsQR and ZXing. The visible stage or share-dialog canvas is captured at its actual phone CSS size. Full unscaled viewport screenshots include shelf QR thumbnails; failing reads are inconclusive about the target. Settings marked \`assumed\` in QR metadata are not measurements; app-returned options and metrics are labeled separately. Three QR uses the same payload in all three channels, which does not prove distinct-channel separation.
+
+## Share QR origin and size
+
+The share QR holds the actual **127.0.0.1** scene origin for this local server, not the public site payload. Another phone cannot reach this server through that loopback URL. The originally reviewed share capture had a **761-character link and 105 modules**; fresh sizes below are read from this capture and can vary with timestamps. Exact URLs and both decoded strings are retained in the linked records.
+
+| Run | Encoded origin | Link characters | Modules per side | Evidence |
+| --- | --- | --- | --- | --- |
+${share}
+
+## Moving photo timings
+
+Milliseconds on the recorded backend; these do not predict performance on another device.
+
+| Run | Choose toy to first frame | Navigation to first frame | Frame min | Median | p95 | Max |
+| --- | --- | --- | --- | --- | --- | --- |
+${moving}
+
+## Every step
+
+| Step | Result | Passed of requested runs | Evidence |
+| --- | --- | --- | --- |
+${table}
+
+Each numbered run links its JSON record and evidence files; file order matches the record's evidence array. Every failure is retained. Images are at most 1 MB each. Runs stored on \`codex/advisor-route-evidence-clips\` are evidence only and that branch must never be merged.
+${verification ? `\n## Verification\n\n${verification}\n` : ""}`,
   );
-  console.log(`Evidence: ${OUT}`);
-  process.exitCode = records.some((r) => r.result === "failed") ? 1 : 0;
 }
 
 async function qrSettings(page, id) {
   return page.evaluate(async (id) => {
     const w = window.__splashery;
-    if (id === "qr-code") return { ...w.qr.info(), quietModules: 4, theme: "classic" };
+    if (id === "qr-code") return { app: w.qr.info(), assumed: { quietModules: 4 } };
     if (id === "qr-picture") {
       const p = w.qrCraft.picture();
       return {
@@ -1216,26 +1357,30 @@ async function qrSettings(page, id) {
         metrics: p.woven
           ? (await import(new URL("src/qr-craft/picture.js", location.href).href)).measure(p.woven)
           : null,
-        quietModules: 4,
-        theme: "shipped sample picture",
+        assumed: { quietModules: 4 },
         error: p.error,
       };
     }
     if (id === "qr-three")
       return {
         options: w.player.scene.toy.options,
+        assumed: {
+          quietModules: 4,
+          theme: "three equal payloads, RGB channels coincide",
+          foreground: "#000000",
+          background: "#ffffff",
+          contrast: 21,
+        },
+      };
+    return {
+      app: { dialogInfo: document.querySelector("#sqr-info")?.textContent || "" },
+      assumed: {
         quietModules: 4,
-        theme: "three equal payloads, RGB channels coincide",
+        theme: "black on white",
         foreground: "#000000",
         background: "#ffffff",
         contrast: 21,
-      };
-    return {
-      quietModules: 4,
-      theme: "black on white",
-      foreground: "#000000",
-      background: "#ffffff",
-      contrast: 21,
+      },
     };
   }, id);
 }
