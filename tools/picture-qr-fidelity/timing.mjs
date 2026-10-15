@@ -73,6 +73,8 @@ const stats = (selected) => ({
     0.95,
   ),
   slowerCases: selected.filter((p) => p.detail > p.main).length,
+  over5sMain: selected.filter((p) => p.main > 5000).length,
+  over5sDetail: selected.filter((p) => p.detail > 5000).length,
 });
 const pictureGroups = new Map();
 for (const pair of pairs) {

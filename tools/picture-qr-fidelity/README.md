@@ -14,6 +14,8 @@ node tools/picture-qr-fidelity/sources.mjs
 node tools/picture-qr-fidelity/paired.mjs --name=review-full --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-main --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --photos=all --links=all --repeats=1 --qualify=1
 node tools/picture-qr-fidelity/summarize.mjs --baseline=cb8a8315 --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --main=browser-review-full-main-low --detail=browser-review-full-detail-low --out=tools/picture-qr-fidelity/results/review-pass
 node tools/picture-qr-fidelity/timing.mjs --name=review-full --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --out=tools/picture-qr-fidelity/results/review-pass/timing.json
+node tools/picture-qr-fidelity/clips.mjs --baseline=cb8a8315 --baseline-dir=.cache/picture-qr-fidelity/review-main --out=.cache/picture-qr-fidelity/review-export/clips
+node tools/picture-qr-fidelity/review.mjs --main=review-full-main --detail=review-full-detail --corpus=tools/picture-qr-fidelity/results/review-pass/corpus.json --summary=tools/picture-qr-fidelity/results/review-pass/summary.json --out=.cache/picture-qr-fidelity/review-export
 ```
 
 Serve the repository on port 4173 before starting. Stop all other study and test workers during
