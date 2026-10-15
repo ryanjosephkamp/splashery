@@ -1854,11 +1854,6 @@ Their source is `tools/studio-truth-generate.py`, and each committed file's size
 recorded in `tests/fixtures/truth/assets.json`. Full sequences are kept separately from the shipped
 site. The build-time code is offered under this repository's MIT license.
 
-# Picture QR fit (Codex task 80)
-
-The crop controls, finder geometry, and scan-study tools are made by Ryan with Codex (GPT-6) under
-Splashery's MIT license.
-
 ## Picture QR theme packs (Codex task 58)
 
 48 original code-made illustrations, selected from 138 candidates, **Made by Ryan with Codex
@@ -1926,3 +1921,8 @@ Photo to 3D loading-cover color and Hybrid status follow-up code and regression 
 Ryan with Codex (GPT-6), October 15, 2026. Code is MIT. Original capture contributions are CC0 1.0;
 source assets retain their recorded terms. See the
 [loading-color and status audit](docs/audits/photo-3d-status-2026-10.md).
+
+# Picture QR fit (Codex task 80)
+
+The crop controls, finder geometry, and scan-study tools are made by Ryan with Codex (GPT-6) under
+Splashery's MIT license.

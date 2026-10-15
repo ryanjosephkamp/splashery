@@ -46,7 +46,7 @@ test("new border and eye choices meet their complete three-reader qualification 
         for (const size of ["phone", "8ppm"]) {
           const part = row.byKind[kind][size];
           expect(part.trials, `${kind}/${eye.id}/${shape}/${size}`).toBe(
-            (kind === "plain" ? 80 : 160) * 6,
+            (kind === "plain" ? 80 : SAMPLES.length * 5) * 6,
           );
           for (const reader of ["jsqr", "zxing", "zxingcpp"])
             expect(part[reader], `${kind}/${eye.id}/${shape}/${size}/${reader}`).toBe(part.trials);

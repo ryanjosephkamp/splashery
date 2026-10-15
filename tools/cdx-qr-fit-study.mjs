@@ -417,6 +417,38 @@ async function runJob(job, candidates) {
   }
   return rows;
 }
+// The committed report keeps the qualification gate's inputs. The checkpoint
+// retains every trial; --raw-out keeps the full summary and failed trial details.
+export function qualificationReport(result) {
+  const counts = ({ trials, jsqr, zxing, zxingcpp }) => ({ trials, jsqr, zxing, zxingcpp });
+  return {
+    quick: result.quick,
+    plainOnly: result.plainOnly,
+    geometryExtra: result.geometryExtra,
+    decorationBand: result.decorationBand,
+    pictureCrop: result.pictureCrop,
+    pictures: result.pictures.map(({ id }) => ({ id })),
+    summary: result.summary.map(({ id, trials, all, byKind }) => ({
+      id,
+      trials,
+      all,
+      byKind: Object.fromEntries(
+        Object.entries(byKind).map(([kind, sizes]) => [
+          kind,
+          Object.fromEntries(
+            ["phone", "8ppm"]
+              .filter((size) => sizes[size])
+              .map((size) => [size, counts(sizes[size])]),
+          ),
+        ]),
+      ),
+    })),
+    failures: [...new Set(result.failures.map(({ candidate }) => candidate))].map((candidate) => ({
+      candidate,
+    })),
+  };
+}
+
 if (!isMainThread) {
   parentPort.on("message", async (job) => {
     try {
@@ -587,7 +619,12 @@ if (!isMainThread) {
     };
   });
   const result = {
-    date: "October 14, 2026",
+    date: new Date().toLocaleDateString("en-US", {
+      timeZone: "America/New_York",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }),
     quick,
     plainOnly,
     resumedTrials,
@@ -612,6 +649,8 @@ if (!isMainThread) {
     failures: rows.filter((r) => !r.jsqr || !r.zxing || !r.zxingcpp),
   };
   const out = flag("out", "docs/audits/picture-qr-fit-2026-10-study.json");
-  fs.writeFileSync(out, JSON.stringify(result, null, 2) + "\n");
+  const rawOut = flag("raw-out", "");
+  if (rawOut) fs.writeFileSync(rawOut, JSON.stringify(result, null, 2) + "\n");
+  fs.writeFileSync(out, JSON.stringify(qualificationReport(result), null, 2) + "\n");
   console.log(JSON.stringify(summary, null, 2));
 }

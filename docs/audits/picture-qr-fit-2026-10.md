@@ -39,7 +39,7 @@ Square eyes use the original 7×7 finder. Rounded eyes use outer, hole, and cent
 latter preserve the axial dark/light center runs but must qualify with all three readers. Every
 other functional pattern and every encoded data module is unchanged.
 
-Small Circle budgets use one forced-center tint per module, continuous finder patches, a coarser
+The compact Circle tier uses one forced-center tint per module, continuous finder patches, a coarser
 backing, and complete decoration, instead of truncating or rejecting an otherwise representable
 code. The interface identifies the reduced picture detail. Impossible fine grids are skipped before
 allocation. This also addresses the pre-existing circular Picture QR failure in the 8,000-splat kit
@@ -54,9 +54,9 @@ to another toy releases only the departing toy's cover; a newly loaded QR keeps 
 ## Study protocol
 
 `tools/cdx-qr-fit-study.mjs` uses all 20 payloads and all four error-correction levels from
-`tools/cdx-circle-study.mjs`, then all 32 current Picture QR samples with all five payloads from
+`tools/cdx-circle-study.mjs`, then all 80 current Picture QR samples with all five payloads from
 `tools/cdx-pics-links.mjs` at the existing H/more/color/small-center defaults. There are 80 plain
-codes and 160 picture codes per candidate. Pictures use the original sample crop, matching the saved
+codes and 400 picture codes per candidate. Pictures use the original sample crop, matching the saved
 recipes: the center square for Square, and the original integer crop from the full disc for Circle.
 New own-picture crops are checked in the browser evidence and by the built-in check on each build.
 
@@ -67,10 +67,10 @@ Each candidate gets 390 px, 600 px, 8 pixels per module, and 4 pixels per module
 size is checked clean; with Gaussian blur at 0.12 module; with perspective (8° yaw, 12° pitch, and
 5° roll); with that perspective plus 0.12-module blur; and with 0.2- and 0.3-module blur. This
 preserves the previous 640-trial margin grid as a subset and adds smaller sizes, softer focus,
-pictures, and the C++ reader. Each candidate has 5,760 trials. The 17 candidates include Rounded
-eyes at each thinner margin, for 97,920 candidate/trial combinations and 293,760 recorded reader
+pictures, and the C++ reader. Each candidate has 11,520 trials. The 17 candidates include Rounded
+eyes at each thinner margin, for 195,840 candidate/trial combinations and 587,520 recorded reader
 outcomes. In the CPU rasterizer, Wide pale borders and Square eyes on Circle have identical pixels;
-their results are reused explicitly, giving 92,160 distinct image evaluations in a fresh run.
+their results are reused explicitly, giving 184,320 distinct image evaluations in a fresh run.
 
 The readers are jsQR 1.4.0, zxing-js 0.21.3, and zxing-cpp through zxing-wasm 3.1.4. Success means
 exactly the encoded payload. jsQR and zxing-js use the existing full-frame orientation/resampling
@@ -88,18 +88,19 @@ separately.
 
 A new border is eligible only when all three readers pass every trial. An alternate eye shape is
 eligible only where every reader passes every phone trial (390 px and 8 pixels per module). The full
-print and small-size results are retained even when they are not the eye eligibility criterion.
-Eligibility is recorded separately for plain QR and Picture QR, and for Square and Circle. Picture
-QR retains its original eyes in Square mode because the alternate Square and Rounded candidates fail
-the phone grid on some pictures. Circular eyes and the 2- and zero-module borders are withheld. The
-2-module band candidate and its Rounded combination each fail zxing-js for the pumpkin sample with
-the long botanical-study URL at 8 pixels per module under perspective; the 1-module candidate passes
-those captures. Existing legacy defaults are preserved rather than relabeled as newly qualified.
+print and small-size results are retained in the raw report even when they are not the eye
+eligibility criterion. Eligibility is recorded separately for plain QR and Picture QR, and for
+Square and Circle. Picture QR retains its original eyes in Square mode because the alternate Square
+and Rounded candidates fail the phone grid on some pictures. Circular eyes and the 2- and
+zero-module borders are withheld. The 2-module band candidate and its Rounded combination each fail
+zxing-js for the pumpkin sample with the long botanical-study URL at 8 pixels per module under
+perspective; the 1-module candidate passes those captures. Existing legacy defaults are preserved
+rather than relabeled as newly qualified.
 
 To reproduce the complete qualification from the repository root:
 
 ```sh
-node tools/cdx-qr-fit-study.mjs --jobs=4
+node tools/cdx-qr-fit-study.mjs --jobs=4 --raw-out=.cache/picture-qr-fit-full-study.json
 ```
 
 `--resume=.cache/picture-qr-fit-rows.jsonl` reuses complete, compatible trial groups after an
@@ -109,36 +110,37 @@ The qualification spec rejects quick runs, subsets, incomplete totals, and faile
 
 ## Qualification results
 
-Wide (4 modules, pale band) and Thin (1 module, pale band) each pass all 5,760 trials in all three
-readers. Medium (2 modules) fails one zxing-js trial and is unavailable; None also fails. Rounded
-eyes qualify on both QR code shapes and on Circle Picture QR. Square Picture QR retains its original
+Wide (4 modules, pale band) and Thin (1 module, pale band) each pass all 11,520 trials in all three
+readers. Medium (2 modules) fails qualification and is unavailable; None also fails. Rounded eyes
+qualify on both QR code shapes and on Circle Picture QR. Square Picture QR retains its original
 eyes. Circular candidates fail phone trials and are unavailable.
 
-The [complete data](picture-qr-fit-2026-10-study.json) contain 97,920 candidate/trial combinations
-and 293,760 recorded reader outcomes (92,160 distinct image evaluations because identical
-Wide/Square-on-Circle CPU rasterizations are reused). Every image must return the exact payload.
-Counts include the existing orientation and resampling retries; direct counts and every failed
-capture are retained in the data.
+The study records 195,840 candidate/trial combinations and 587,520 reader outcomes (184,320 distinct
+image evaluations because identical Wide/Square-on-Circle CPU rasterizations are reused). The
+[qualification data](picture-qr-fit-2026-10-study.json) retain only the gate inputs. A read passes
+only when it returns the exact payload. Counts include the existing orientation and resampling
+retries; direct counts and every failed capture are retained in the
+[raw archive](https://github.com/ryanjosephkamp/splashery/blob/bbbe254c0aab56827811765c8d20b0454a1f9ff5/docs/audits/picture-qr-fit-2026-10-study.json).
 
-| Candidate             | jsQR                  | zxing-js              | zxing-cpp             | All three             |
-| --------------------- | --------------------- | --------------------- | --------------------- | --------------------- |
-| border-4-original     | 5,701/5,760 (98.98%)  | 5,679/5,760 (98.59%)  | 5,712/5,760 (99.17%)  | 5,597/5,760 (97.17%)  |
-| border-2-original     | 5,679/5,760 (98.59%)  | 5,682/5,760 (98.65%)  | 5,733/5,760 (99.53%)  | 5,611/5,760 (97.41%)  |
-| border-1-original     | 5,683/5,760 (98.66%)  | 5,674/5,760 (98.51%)  | 5,739/5,760 (99.64%)  | 5,601/5,760 (97.24%)  |
-| border-0-original     | 1,843/5,760 (32.00%)  | 1,105/5,760 (19.18%)  | 2,472/5,760 (42.92%)  | 999/5,760 (17.34%)    |
-| border-4-pale         | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) |
-| border-2-pale         | 5,760/5,760 (100.00%) | 5,759/5,760 (99.98%)  | 5,760/5,760 (100.00%) | 5,759/5,760 (99.98%)  |
-| border-1-pale         | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) |
-| border-0-pale         | 5,760/5,760 (100.00%) | 5,702/5,760 (98.99%)  | 5,760/5,760 (100.00%) | 5,702/5,760 (98.99%)  |
-| eyes-square-square    | 5,646/5,760 (98.02%)  | 5,691/5,760 (98.80%)  | 5,632/5,760 (97.78%)  | 5,606/5,760 (97.33%)  |
-| eyes-square-circle    | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) |
-| eyes-rounded-square   | 5,751/5,760 (99.84%)  | 5,696/5,760 (98.89%)  | 5,632/5,760 (97.78%)  | 5,632/5,760 (97.78%)  |
-| eyes-rounded-circle   | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) |
-| eyes-circle-square    | 5,696/5,760 (98.89%)  | 5,696/5,760 (98.89%)  | 4,868/5,760 (84.51%)  | 4,868/5,760 (84.51%)  |
-| eyes-circle-circle    | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 4,889/5,760 (84.88%)  | 4,889/5,760 (84.88%)  |
-| eyes-rounded-border-2 | 5,760/5,760 (100.00%) | 5,759/5,760 (99.98%)  | 5,760/5,760 (100.00%) | 5,759/5,760 (99.98%)  |
-| eyes-rounded-border-1 | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) | 5,760/5,760 (100.00%) |
-| eyes-rounded-border-0 | 5,760/5,760 (100.00%) | 5,700/5,760 (98.96%)  | 5,760/5,760 (100.00%) | 5,700/5,760 (98.96%)  |
+| Candidate             | jsQR                    | zxing-js                | zxing-cpp               | All three               |
+| --------------------- | ----------------------- | ----------------------- | ----------------------- | ----------------------- |
+| border-4-original     | 11,428/11,520 (99.20%)  | 11,406/11,520 (99.01%)  | 11,418/11,520 (99.11%)  | 11,242/11,520 (97.59%)  |
+| border-2-original     | 11,407/11,520 (99.02%)  | 11,432/11,520 (99.24%)  | 11,480/11,520 (99.65%)  | 11,321/11,520 (98.27%)  |
+| border-1-original     | 11,375/11,520 (98.74%)  | 11,328/11,520 (98.33%)  | 11,497/11,520 (99.80%)  | 11,232/11,520 (97.50%)  |
+| border-0-original     | 3,880/11,520 (33.68%)   | 2,299/11,520 (19.96%)   | 5,282/11,520 (45.85%)   | 2,096/11,520 (18.19%)   |
+| border-4-pale         | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) |
+| border-2-pale         | 11,520/11,520 (100.00%) | 11,519/11,520 (99.99%)  | 11,520/11,520 (100.00%) | 11,519/11,520 (99.99%)  |
+| border-1-pale         | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) |
+| border-0-pale         | 11,520/11,520 (100.00%) | 11,368/11,520 (98.68%)  | 11,520/11,520 (100.00%) | 11,368/11,520 (98.68%)  |
+| eyes-square-square    | 11,309/11,520 (98.17%)  | 11,355/11,520 (98.57%)  | 11,200/11,520 (97.22%)  | 11,174/11,520 (97.00%)  |
+| eyes-square-circle    | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) |
+| eyes-rounded-square   | 11,466/11,520 (99.53%)  | 11,360/11,520 (98.61%)  | 11,200/11,520 (97.22%)  | 11,200/11,520 (97.22%)  |
+| eyes-rounded-circle   | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) |
+| eyes-circle-square    | 11,360/11,520 (98.61%)  | 11,360/11,520 (98.61%)  | 9,495/11,520 (82.42%)   | 9,495/11,520 (82.42%)   |
+| eyes-circle-circle    | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 9,472/11,520 (82.22%)   | 9,472/11,520 (82.22%)   |
+| eyes-rounded-border-2 | 11,520/11,520 (100.00%) | 11,519/11,520 (99.99%)  | 11,520/11,520 (100.00%) | 11,519/11,520 (99.99%)  |
+| eyes-rounded-border-1 | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) | 11,520/11,520 (100.00%) |
+| eyes-rounded-border-0 | 11,520/11,520 (100.00%) | 11,366/11,520 (98.66%)  | 11,520/11,520 (100.00%) | 11,366/11,520 (98.66%)  |
 
 Phone eligibility combines 390 px and 8 pixels per module, including every condition. Eligibility is
 specific to each toy and shape.
@@ -146,19 +148,19 @@ specific to each toy and shape.
 | Toy        | Eyes    | Shape  | jsQR                  | zxing-js              | zxing-cpp             | Eligible |
 | ---------- | ------- | ------ | --------------------- | --------------------- | --------------------- | -------- |
 | QR code    | square  | square | 960/960 (100.00%)     | 960/960 (100.00%)     | 960/960 (100.00%)     | Yes      |
-| Picture QR | square  | square | 1,845/1,920 (96.09%)  | 1,856/1,920 (96.67%)  | 1,856/1,920 (96.67%)  | No       |
+| Picture QR | square  | square | 4,629/4,800 (96.44%)  | 4,640/4,800 (96.67%)  | 4,640/4,800 (96.67%)  | No       |
 | QR code    | square  | circle | 960/960 (100.00%)     | 960/960 (100.00%)     | 960/960 (100.00%)     | Yes      |
-| Picture QR | square  | circle | 1,920/1,920 (100.00%) | 1,920/1,920 (100.00%) | 1,920/1,920 (100.00%) | Yes      |
+| Picture QR | square  | circle | 4,800/4,800 (100.00%) | 4,800/4,800 (100.00%) | 4,800/4,800 (100.00%) | Yes      |
 | QR code    | rounded | square | 960/960 (100.00%)     | 960/960 (100.00%)     | 960/960 (100.00%)     | Yes      |
-| Picture QR | rounded | square | 1,911/1,920 (99.53%)  | 1,856/1,920 (96.67%)  | 1,856/1,920 (96.67%)  | No       |
+| Picture QR | rounded | square | 4,746/4,800 (98.88%)  | 4,640/4,800 (96.67%)  | 4,640/4,800 (96.67%)  | No       |
 | QR code    | rounded | circle | 960/960 (100.00%)     | 960/960 (100.00%)     | 960/960 (100.00%)     | Yes      |
-| Picture QR | rounded | circle | 1,920/1,920 (100.00%) | 1,920/1,920 (100.00%) | 1,920/1,920 (100.00%) | Yes      |
+| Picture QR | rounded | circle | 4,800/4,800 (100.00%) | 4,800/4,800 (100.00%) | 4,800/4,800 (100.00%) | Yes      |
 | QR code    | circle  | square | 960/960 (100.00%)     | 960/960 (100.00%)     | 801/960 (83.44%)      | No       |
-| Picture QR | circle  | square | 1,856/1,920 (96.67%)  | 1,856/1,920 (96.67%)  | 1,574/1,920 (81.98%)  | No       |
+| Picture QR | circle  | square | 4,640/4,800 (96.67%)  | 4,640/4,800 (96.67%)  | 3,880/4,800 (80.83%)  | No       |
 | QR code    | circle  | circle | 960/960 (100.00%)     | 960/960 (100.00%)     | 899/960 (93.65%)      | No       |
-| Picture QR | circle  | circle | 1,920/1,920 (100.00%) | 1,920/1,920 (100.00%) | 1,478/1,920 (76.98%)  | No       |
+| Picture QR | circle  | circle | 4,800/4,800 (100.00%) | 4,800/4,800 (100.00%) | 3,689/4,800 (76.85%)  | No       |
 
-Each border requires all 5,760 trials to pass in all three readers. Rounded eyes with thinner
+Each border requires all 11,520 trials to pass in all three readers. Rounded eyes with thinner
 borders are checked as separate candidates. Legacy appearance remains the default for compatibility;
 unlightened controls that fail the expanded grid are not described as newly qualified.
 
@@ -209,9 +211,9 @@ before merge; the PR remains a draft. Review images go only on the clips branch.
 - Generation is deterministic. The study uses the existing circular layout, QR encoder, halftone
   weave, capture simulator, and readers.
 - Environment: managed Debian container, installed Chromium 151, software WebGL2. The study and
-  original verification used Node 24.19.0; review regression checks use Node 22.23.3 to match CI.
-  The AI background selection uses Mesa llvmpipe under Xvfb with two Playwright workers.
-  Physical-device performance, memory, and frame rate are unmeasured.
+  original verification used Node 24.19.0; the added theme trials and review regression checks use
+  Node 22.23.3 to match CI. The AI background selection uses Mesa llvmpipe under Xvfb with two
+  Playwright workers. Physical-device performance, memory, and frame rate are unmeasured.
 - Node pack checks: QR code 158,428 splats and Picture QR 122,602 splats. The compact Circle render
   is also checked at an 8,000-splat budget with all three readers.
 - The shared-builder Square fixture retains main's original fingerprint,
@@ -258,21 +260,76 @@ conditions, the production scan, credits, lazy loading, and the actual longest-l
 measured-facts test passed. No scan threshold, test assertion, splat budget, or source picture
 changed.
 
+## Main integration and study archive
+
+Merge `14ad918c` brings in main `cb8a8315`, including Fix12's Circle budget handling and the 48
+theme pictures. The full lattice is tried first. Without a picture and with original or Square eyes,
+the code then tries main's coalesced two-layer and one-layer tiers. A Circle that still does not fit
+uses the compact tier; curved eyes use that tier to preserve their outline. Both paths retain the
+chosen quiet zone and decoration colors. An impossible one-splat budget still throws the original
+error. Square keeps main's final lattice and budget clipping.
+
+The picture picker retains main's theme groups alongside the crop controls. Both credits sections
+are retained, and the facts and site outputs were regenerated after the merge.
+
+The qualification expands from 32 to 80 pictures. All 32 original image files, the CPU image
+generation code, and the readers retain identical source bytes across the merge. The extension
+reuses 97,920 compatible trials and adds 97,920 for the theme pictures. The picture-count assertion
+now derives its expected total from `SAMPLES`; its 100% reader requirement is unchanged.
+
+The [committed qualification data](picture-qr-fit-2026-10-study.json) keep only the gate's inputs:
+coverage flags, geometry settings, picture identifiers, candidate totals, phone reader counts, and
+one failure witness per candidate with a failed trial. The compact file is 17,242 bytes; the archive
+retains all 15,236 raw failure rows. The
+[full summary and raw failure rows](https://github.com/ryanjosephkamp/splashery/blob/bbbe254c0aab56827811765c8d20b0454a1f9ff5/docs/audits/picture-qr-fit-2026-10-study.json)
+stay on the clips branch. `--raw-out` preserves that complete report when the study is rerun; the
+ordinary output remains compact.
+
 ## Completed checks
 
-The follow-up selected 210 cases across 25 spec files: the 185 required cases, all 24 five-link
-background cases, and the measured-facts test. Under Node 22.23.3 and Mesa with two workers, 208
-passed, two failed, and none were skipped. The procedural-generator smoke case saved seed 1 instead
-of 4242; it passed unchanged in a fresh SwiftShader process. The Damage lab's fixed-set meter test
-timed out at its existing 600-second limit under Mesa and again under SwiftShader while the smoke
-run was active. Its final quiet, one-worker SwiftShader recheck passed unchanged in 9.5 minutes. All
-210 selected cases therefore passed across the main run and unchanged rechecks, with no skips.
+### Post-merge verification
+
+All 108 cases in the six requested specs passed in 33.2 minutes under Node 22.23.3, Chromium 151,
+and Mesa llvmpipe under Xvfb with two fully parallel workers. The two qualification cases also
+passed with one worker. All 110 cases passed on their first attempt, with no failures, flaky
+results, or skips.
+
+| Spec                    | Passed |
+| ----------------------- | ------ |
+| `fx12-qr-circle-budget` | 2      |
+| `cdx-circle-qr`         | 14     |
+| `cdx-qr-fit`            | 21     |
+| `qr4-craft`             | 9      |
+| `cdx-pics`              | 51     |
+| `shw`                   | 11     |
+| `cdx-qr-fit-study`      | 2      |
+
+The one-splat error, both original full-output fingerprints, and all 24 five-link background browser
+cases pass. The background cases include the production scan, credits, lazy loading, and actual
+longest-link PNG exports. The compact Circle render passes all three readers. The expanded
+80-picture qualification completed October 15, 2026, with unchanged reader requirements.
+
+```sh
+DISPLAY=:98 SPLASHERY_GL=llvmpipe SPLASHERY_PORT=4175 SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/fx12-qr-circle-budget.spec.mjs tests/cdx-circle-qr.spec.mjs tests/cdx-qr-fit.spec.mjs tests/qr4-craft.spec.mjs tests/cdx-pics.spec.mjs tests/shw.spec.mjs --workers=2 --fully-parallel
+npx playwright test tests/cdx-qr-fit-study.spec.mjs --workers=1
+```
+
+### Earlier regression checks
+
+The earlier AI-background follow-up selected 210 cases across 25 spec files: the 185 required cases,
+all 24 five-link background cases, and the measured-facts test. Under Node 22.23.3 and Mesa with two
+workers, 208 passed, two failed, and none were skipped. The procedural-generator smoke case saved
+seed 1 instead of 4242; it passed unchanged in a fresh SwiftShader process. The Damage lab's
+fixed-set meter test timed out at its existing 600-second limit under Mesa and again under
+SwiftShader while the smoke run was active. Its final quiet, one-worker SwiftShader recheck passed
+unchanged in 9.5 minutes. All 210 selected cases therefore passed across the main run and unchanged
+rechecks, with no skips.
 
 Both full-output fingerprints match main. The new raw Circle regression first failed on the
 extra-dot output and passed after the boolean fix. The complete kit loop covered all 394 toys and
-their choices twice in 8.7 minutes under its original 600-second timeout. The qualification study
-completed October 14, 2026, at 8:30 p.m. EDT; its generator, data, and reader thresholds are
-unchanged by this follow-up.
+their choices twice in 8.7 minutes under its original 600-second timeout. The original 32-picture
+qualification completed October 14, 2026, at 8:30 p.m. EDT. The post-merge extension uses the same
+image-generation and reader logic with the additional 48 theme pictures.
 
 The 44-image
 [review set](https://github.com/ryanjosephkamp/splashery/blob/codex/picture-qr-fit-clips/tests/screenshots/cdx-qr-fit-review.md)
@@ -299,6 +356,5 @@ build took 605 ms against its 1.5-second limit. `node tools/shw-facts.mjs --chec
 regenerated, and their contact sheet was reviewed. The cover tests retain failed-code protection
 through retries, stale checks, and a switch to another toy while preserving any unrelated cover.
 
-Main advanced to `c00e1cb8` with CI tooling and documentation during verification. Those updates
-were merged into this branch; the application and required test files are unchanged by that
-integration.
+The earlier verification merged main `c00e1cb8`, which brought CI tooling and documentation. The
+application and required test files were unchanged by that earlier integration.
