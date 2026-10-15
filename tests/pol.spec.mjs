@@ -108,3 +108,22 @@ test("Powers of ten: the 3 km picture's colors are within 12% of its neighbors'"
     expect(Math.abs(middle[c] / inner[c] - 1)).toBeLessThan(0.12);
   }
 });
+
+// The phone slider (engine PR, lane Polish): every toy with a stage slider today (Powers of ten,
+// the volume viewer, Picture lab's depth, and the Solar System's date) has Play beside it, so the
+// slider is narrower and clear of Play. A slider without Play beside it, or under a game bar, keeps
+// main's width; tests/pol-engine.spec.mjs checks those by the page's own bars.
+test("Powers of ten at 390×844: the zoom slider sits clear of Play", async ({ page }) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  const errors = await open(page, "powers-of-ten");
+  await page.waitForFunction(() => !document.getElementById("toy-slider").hidden, null, { timeout: 120_000 }); // prettier-ignore
+  const r = await page.evaluate(() => {
+    const box = (id) => document.getElementById(id).getBoundingClientRect().toJSON();
+    return { slider: box("toy-slider"), play: box("hands-play"), game: document.getElementById("game-bar").hidden }; // prettier-ignore
+  });
+  expect(r.game).toBe(true);
+  expect(r.slider.width).toBeCloseTo(270, 0);
+  expect(r.slider.left).toBeGreaterThanOrEqual(0);
+  expect(r.slider.right).toBeLessThan(r.play.left);
+  expect(errors).toEqual([]);
+});

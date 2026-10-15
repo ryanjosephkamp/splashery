@@ -1355,8 +1355,10 @@ reads the files of the Space r2, Science r3 and photoreal toys named below.
   are not used).
 - 3 km:
   [USGS Imagery Only](https://basemap.nationalmap.gov/arcgis/rest/services/USGSImageryOnly/MapServer)
-  (USDA NAIP, USGS The National Map). Public domain. The half of the Earth for the globe is the same
-  service's Blue Marble: Next Generation (NASA Earth Observatory, Reto Stöckli). Public domain.
+  (USDA NAIP, USGS The National Map). Public domain. Its color is matched to the 10 km and 1 km
+  pictures beside it (one gain per channel, by tools/pol-aerial-match.mjs; October 15, 2026). The
+  half of the Earth for the globe is the same service's Blue Marble: Next Generation (NASA Earth
+  Observatory, Reto Stöckli). Public domain.
 - 1 km to 30 m: District of Columbia, Office of the Chief Technology Officer,
   [Aerial Photography (Orthophoto) 2023](https://opendata.dc.gov/), 3 inch (8 cm),
   [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) (its live license, checked October 6,

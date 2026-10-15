@@ -46,6 +46,22 @@ or "BLOCKED:".
 
 ## State
 
+- October 15, 2026, review fixes READY; the lane stands down. Ryan marked all 11 `-r2` cards good.
+  The Operator's five fixes from PR #636: (1) the Storybook keeps main's book exactly: its recipe's
+  `polish: false` turns off every book change of this lane (`POL` in `src/packs/pictures.js`: the
+  pull-back views, the wait before a turn, the wider page view, the cover figure, the link slack and
+  tint, the bare pages, and drawn figures), with tests that its views, timings, links, and figures
+  are main's. (2) Engine: the phone slider is narrower only when Play shares its row (no Play, or a
+  game bar, keeps main's width), tested by the page's own bars and on Powers of ten at 390×844. (3)
+  Engine: `pdfFigures`' plain path is literally as before (`withDrawn &&`). (4) The photo card's
+  shape is read from the built buffer; the Storybook's figures are asked for without options; bk5's
+  bare-page check is strict again. (5) The 3 km picture's color match is recorded in
+  `tools/assets.json` and `CREDITS.md`, and `tools/pot-maps.mjs` runs `tools/pol-aerial-match.mjs`
+  after a fetch, so a rerun keeps it. Engine PR #643 (`claude/lane-polish-engine`) has the engine
+  part; it is merged into `claude/lane-polish`, and main is merged into both. Local: pol 6 of 6,
+  pol-engine 5 of 5, pol-pages, bk5, and hh3-storybook all passing (31 of 31 plus the new phone
+  test).
+
 - October 15, 2026, round 2 READY: Ryan marked all 13 audit cards good; all 13 have their round 2
   answer. `-r2` cards (before on the left, after on the right) on Effect review page 2 for 11 toys;
   each says what changed, what didn't, and why. No change, with reasons: the Splat mirror (its ghost

@@ -199,7 +199,7 @@ test.describe("links and pop-out (no browser)", () => {
     b.run(1.2);
     expect(BOOKS_R5.POP.phase).toBe("idle");
     expect(b.out.parts.bk5pop0.visible).toBe(0);
-    expect(Object.values(b.out.sheets).some((s) => s.variant?.startsWith("hole"))).toBe(false);
+    expect(Object.values(b.out.sheets).every((s) => !s.variant || s.variant === "bare")).toBe(true);
     expect(pics.page).toBe(1); // (the tap did not turn the page)
   });
 

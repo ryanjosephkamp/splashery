@@ -53,7 +53,7 @@ async function play(id, options = {}, pics = null) {
   const settle = async () => {
     for (let i = 0; i < 4; i++) await new Promise((res) => setTimeout(res, 0));
   };
-  return { r, kit: b.value.kit, tap, run, set, frame, settle, get out() { return out; }, get time() { return time; } }; // prettier-ignore
+  return { r, kit: b.value.kit, buf: b.value.buf, tap, run, set, frame, settle, get out() { return out; }, get time() { return time; } }; // prettier-ignore
 }
 
 function fakeCanvas(w = 40, h = 30) {
@@ -96,6 +96,71 @@ async function shaped(upright, fn) {
     Object.assign(globalThis, { innerWidth: had[0], innerHeight: had[1] });
   }
 }
+
+test.describe("the Storybook keeps main's book (no browser)", () => {
+  // The Storybook (`book`, Hands-on H3's toy) shares Your book's recipe, so its recipe's
+  // polish: false keeps it exactly as on main: no pull-back views, no waits before a turn, the
+  // page view one page wide, the old link slack and tinted links, and no cover figures.
+  const watch = async (id) => {
+    const pics = fakePics(12);
+    const b = await play(id, { reading: "one" }, pics);
+    const seen = [];
+    const step = (s) => {
+      for (let t = 0; t < s; t += 1 / 30) {
+        b.run(1 / 30);
+        seen.push({ t: b.time, key: b.out.view.key, w: b.out.view.size?.[0], page: pics.page });
+      }
+    };
+    const t0 = b.time;
+    b.tap([0.3, 0, 0.02]); // opens the cover
+    step(1.6);
+    b.tap([0.55, 0, 0.02]); // turns a page
+    const t1 = b.time;
+    step(1.6);
+    return { seen, t0, t1, pics };
+  };
+
+  test("its views and timings are main's; Your book's are the new ones", async () => {
+    const W = 612 / 792;
+    const story = await watch("book");
+    const keys = new Set(story.seen.map((s) => s.key));
+    expect(keys.has("book")).toBe(false);
+    expect(keys.has("turn")).toBe(false);
+    for (const s of story.seen) if (s.key === "R" || s.key === "L") expect(s.w).toBeCloseTo(W, 4);
+    const yours = await watch("your-book");
+    expect(yours.seen.some((s) => s.key === "book")).toBe(true);
+    expect(yours.seen.some((s) => s.key === "turn")).toBe(true);
+    // The Storybook's page turns as soon as it is tapped (no wait for the view): its page index
+    // moves at least a quarter second sooner than Your book's.
+    const moved = (w) => w.seen.find((s) => s.t > w.t1 && s.page !== w.seen.find((x) => x.t > w.t1)?.page)?.t - w.t1; // prettier-ignore
+    const a = moved(story);
+    const b = moved(yours);
+    if (Number.isFinite(a) && Number.isFinite(b)) expect(a).toBeLessThan(b - 0.25);
+  });
+
+  test("its links keep their slack and their tint; its figures are asked for plainly", async () => {
+    const asked = [];
+    const pics = fakePics(12);
+    pics.name = "storybook-figures"; // (its own name: the figures found are kept per file)
+    const plain = pics.figures;
+    pics.figures = (n, opts) => {
+      asked.push(opts);
+      return plain(n);
+    };
+    const b = await play("book", { reading: "one" }, pics);
+    b.set("pop", 1);
+    await b.settle();
+    b.run(0.1);
+    await b.settle();
+    b.tap([0.3, 0, 0.02]);
+    b.run(2);
+    await b.settle();
+    expect(asked.length).toBeGreaterThan(0);
+    expect(asked.every((o) => o === undefined)).toBe(true);
+    const variants = Object.values(b.out.sheets || {}).map((sh) => sh.variant || "");
+    expect(variants.some((v) => v.includes("bare"))).toBe(false);
+  });
+});
 
 test.describe("Picture lab (no browser)", () => {
   test("on a phone held upright it opens close on the page itself; otherwise on the whole lab", async () => {
@@ -141,11 +206,21 @@ test.describe("Picture lab (no browser)", () => {
     const { BOOKS_R5 } = await import("../src/packs/pictures.js");
     const pics = { ...fakePics(1, "image", 1.5), crop: async () => null };
     const b = await shaped(false, () => play("picture-lab", {}, pics));
-    // The card's splats lie within the photo's shape (2.08 by 2 / 1.5 + 0.08).
-    const ys = [];
-    const pos = b.kit.positions || b.kit.data?.positions;
-    if (pos) for (let i = 1; i < pos.length; i += 3) ys.push(Math.abs(pos[i]));
-    if (ys.length) expect(Math.max(...ys)).toBeLessThan(2 / 1.5 / 2 + 0.1);
+    // The card takes the photo's shape (2.08 by 2 / 1.5 + 0.08, so about 0.68 as tall as it is
+    // wide), where a PDF's card is square: the built splats' extent says so.
+    const extent = (buf) => {
+      let x = 0;
+      let y = 0;
+      for (let i = 0; i < buf.count; i++) {
+        x = Math.max(x, Math.abs(buf.pos[i * 3]));
+        y = Math.max(y, Math.abs(buf.pos[i * 3 + 1]));
+      }
+      return y / x;
+    };
+    expect(b.buf.count).toBeGreaterThan(1000);
+    expect(extent(b.buf)).toBeCloseTo((2 / 1.5 + 0.08) / 2.08, 1);
+    const square = await shaped(false, () => play("picture-lab", {}, fakePics(3)));
+    expect(extent(square.buf)).toBeCloseTo(1, 1);
     b.set("pop", 1);
     b.tap(BOOKS_R5.point(0, [0.5, 0.5]));
     b.run(4.2);
@@ -276,9 +351,9 @@ test.describe("Your book and the album (no browser)", () => {
 test.describe("Pop out's drawn figures", () => {
   test("Your book, the album and the lab ask for drawn figures; the Storybook doesn't", async () => {
     const { RECIPES } = await import("../src/packs/pictures.js");
-    expect(RECIPES.book.drawnFigures).toBe(false);
-    expect(RECIPES["your-book"].drawnFigures).not.toBe(false);
-    expect(RECIPES["photo-album"].drawnFigures).not.toBe(false);
-    expect(RECIPES["picture-lab"].drawnFigures).not.toBe(false);
+    expect(RECIPES.book.polish).toBe(false);
+    expect(RECIPES["your-book"].polish).not.toBe(false);
+    expect(RECIPES["photo-album"].polish).not.toBe(false);
+    expect(RECIPES["picture-lab"].polish).not.toBe(false);
   });
 });
