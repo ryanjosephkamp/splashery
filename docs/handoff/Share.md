@@ -130,7 +130,24 @@ message starts with "READY:", "WORKING:", or "BLOCKED:".
      closed early leaves nothing behind for the next take.
 - Specs run after the fixes: `shr` (12 tests), `ui5-engine`, and `live3-engine` (23 passed).
 - The owner doesn't want the Pause button for now; "Record again from a point" stays a proposal.
-- Next: merge `main` once the Operator's #651 lands, then run `cdx-a11y*` with these specs.
+- October 15, 2026, 08:15 UTC: merged `main` (d33f9421, the Operator's #651 with task 52's
+  accessibility fixes). One conflict, in `setRecord` (`src/ui.js`): task 52's focus-keeping for the
+  pill stays, and a finished take hands focus to the preview sheet. Two fixes after the merge:
+  - Task 52's global Escape handler calls `preventDefault()`, which stopped the preview's own
+    `cancel` event (Escape to ask first). It now leaves Escape to an open `<dialog>` (`src/app.js`
+    `bindKeys`).
+  - Task 52 draws every select at 16px on phones (so iOS doesn't zoom), so the GIF row's longest
+    choice no longer fit a third of the row at 390×844. On phones the clip's box drops its border
+    and side padding, and the three settings still fit in one row.
+- Specs after the merge (2 workers): `cdx-a11y`, `cdx-a11y-layout`, `shr`, `smoke`,
+  `cdx-playground-links`, `ui5-engine`, and `live3-engine`. All pass except `cdx-a11y-layout`
+  "recording and the flag dialog preserve keyboard focus", which fails under load (two workers on
+  this 4-core machine) on `main` too (2 of 3 runs there): the cactus records too few frames on the
+  software renderer, so the take comes out empty. It passes run alone, here and on `main`.
+  `cdx-a11y` "keyboard focus can keep help open during its dismissal fade" failed once under load
+  and passed on the next run.
+- Next: the Operator's merge; Codex task 89 (#654) then fills `.record-main` and the clip settings
+  rows.
 
 ## Record again from a point (item 5: a proposal, not built)
 

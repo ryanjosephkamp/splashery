@@ -1,0 +1,211 @@
+{
+  "device": {
+    "type": "webgpu",
+    "renderer": "WebGPU",
+    "demotedShaders": 0
+  },
+  "viewport": [390, 844],
+  "dpr": 1,
+  "results": [
+    {
+      "state": "together",
+      "canvas": [390, 645],
+      "samples": 2454,
+      "max": 34,
+      "p95": 6,
+      "bright": 0,
+      "worst": [
+        {
+          "ch": 2,
+          "row": 9,
+          "col": 7,
+          "brightness": 13
+        },
+        {
+          "ch": 0,
+          "row": 1,
+          "col": 0,
+          "brightness": 14
+        },
+        {
+          "ch": 1,
+          "row": 1,
+          "col": 0,
+          "brightness": 14
+        },
+        {
+          "ch": 2,
+          "row": 1,
+          "col": 0,
+          "brightness": 14
+        },
+        {
+          "ch": 1,
+          "row": 11,
+          "col": 10,
+          "brightness": 15
+        },
+        {
+          "ch": 1,
+          "row": 13,
+          "col": 18,
+          "brightness": 15
+        },
+        {
+          "ch": 2,
+          "row": 12,
+          "col": 7,
+          "brightness": 15
+        },
+        {
+          "ch": 1,
+          "row": 18,
+          "col": 7,
+          "brightness": 34
+        }
+      ],
+      "bounds": {
+        "checkedCorners": 360,
+        "outside": 0,
+        "min": [-0.6286215782165527, -0.6286215782165527, -0.05452834814786911],
+        "max": [0.6286215782165527, 0.6286215782165527, 0.043311089277267456],
+        "helperApplied": false,
+        "placementMatches": true
+      }
+    },
+    {
+      "state": "apart",
+      "canvas": [390, 645],
+      "samples": 2454,
+      "max": 82,
+      "p95": 31,
+      "bright": 0,
+      "worst": [
+        {
+          "ch": 2,
+          "row": 11,
+          "col": 21,
+          "brightness": 57
+        },
+        {
+          "ch": 2,
+          "row": 16,
+          "col": 28,
+          "brightness": 63
+        },
+        {
+          "ch": 2,
+          "row": 23,
+          "col": 28,
+          "brightness": 63
+        },
+        {
+          "ch": 2,
+          "row": 0,
+          "col": 16,
+          "brightness": 66
+        },
+        {
+          "ch": 1,
+          "row": 25,
+          "col": 30,
+          "brightness": 74
+        },
+        {
+          "ch": 1,
+          "row": 16,
+          "col": 30,
+          "brightness": 78
+        },
+        {
+          "ch": 0,
+          "row": 16,
+          "col": 15,
+          "brightness": 79
+        },
+        {
+          "ch": 2,
+          "row": 7,
+          "col": 16,
+          "brightness": 82
+        }
+      ],
+      "bounds": {
+        "checkedCorners": 376,
+        "outside": 0,
+        "min": [-2.019094467163086, -0.6286215782165527, -4.027308098971844],
+        "max": [2.019094467163086, 0.6551067773252726, 0.043311089277267456],
+        "helperApplied": false,
+        "placementMatches": true
+      }
+    },
+    {
+      "state": "returned",
+      "canvas": [390, 645],
+      "samples": 2454,
+      "max": 44,
+      "p95": 5,
+      "bright": 0,
+      "worst": [
+        {
+          "ch": 2,
+          "row": 9,
+          "col": 7,
+          "brightness": 13
+        },
+        {
+          "ch": 0,
+          "row": 4,
+          "col": 0,
+          "brightness": 14
+        },
+        {
+          "ch": 0,
+          "row": 12,
+          "col": 0,
+          "brightness": 14
+        },
+        {
+          "ch": 1,
+          "row": 4,
+          "col": 0,
+          "brightness": 14
+        },
+        {
+          "ch": 2,
+          "row": 4,
+          "col": 0,
+          "brightness": 14
+        },
+        {
+          "ch": 1,
+          "row": 18,
+          "col": 7,
+          "brightness": 19
+        },
+        {
+          "ch": 1,
+          "row": 18,
+          "col": 2,
+          "brightness": 36
+        },
+        {
+          "ch": 2,
+          "row": 12,
+          "col": 7,
+          "brightness": 44
+        }
+      ],
+      "bounds": {
+        "checkedCorners": 360,
+        "outside": 0,
+        "min": [-2.019094467163086, -0.6286215782165527, -4.027308098971844],
+        "max": [2.019094467163086, 0.6551067773252726, 0.043311089277267456],
+        "helperApplied": false,
+        "placementMatches": true
+      }
+    }
+  ],
+  "errors": [],
+  "coverage": "webgpu-runtime"
+}

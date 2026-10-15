@@ -35,7 +35,7 @@
     <script type="module" src="./src/app.js"></script>
   </head>
   <body class="app">
-    <a class="skip-link" href="#panel">Skip to controls</a>
+    <a class="skip-link" href="#tabs">Skip to controls</a>
 
     <canvas
       id="stage"
@@ -43,6 +43,11 @@
       role="img"
       aria-label="A toy made of splats. Drag to turn it, scroll or pinch to zoom. With a tool selected, drag on the toy to use it."
     ></canvas>
+
+    <div id="stage-zoom" class="stage-zoom" role="group" aria-label="Zoom the toy">
+      <button type="button" id="stage-zoom-in" aria-label="Zoom in">+</button>
+      <button type="button" id="stage-zoom-out" aria-label="Zoom out">−</button>
+    </div>
 
     <header class="brand">
       <h1><a href="./site/" aria-label="Splashery home" title="Splashery home">Splashery</a></h1>
@@ -366,7 +371,7 @@
     <!-- /Lane Pages r6 -->
 
     <!-- UI r5: Record. While it records: the time and Stop; then Save (and Share on a phone). -->
-    <div id="rec-pill" class="rec-pill" role="status" aria-live="polite" hidden>
+    <div id="rec-pill" class="rec-pill" role="status" aria-live="polite" tabindex="-1" hidden>
       <span class="rec-dot" aria-hidden="true"></span>
       <span id="rec-time" class="rec-time">0:00</span>
       <button type="button" id="rec-stop" class="rec-stop">Stop</button>
@@ -669,7 +674,13 @@
           </button>
         </div>
         <nav class="shelf" id="shelf" aria-label="Toy shelf"></nav>
-        <p id="shelf-empty" class="shelf-empty note" hidden></p>
+        <p
+          id="shelf-empty"
+          class="shelf-empty note"
+          role="status"
+          aria-live="polite"
+          aria-atomic="true"
+        ></p>
         <div class="toolbar">
           <div class="tools" role="toolbar" aria-label="Tools" id="tools">
             <button type="button" data-tool="orbit" aria-pressed="true" title="Orbit (1)">
@@ -886,6 +897,10 @@
                 </span>
               </div>
             </section>
+            <details id="toy-keyboard" class="toy-keyboard" hidden>
+              <summary>Play with the keyboard</summary>
+              <div id="toy-keyboard-controls"></div>
+            </details>
           </div>
 
           <div class="pane" role="tabpanel" id="pane-tools" aria-labelledby="tab-tools" hidden>
