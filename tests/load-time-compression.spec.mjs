@@ -12,6 +12,9 @@ test("opening gzip copies preserve every original byte", () => {
   const copies = JSON.parse(
     fs.readFileSync("docs/audits/load-time-2026-10/compressed-opening.json"),
   );
+  expect(copies.map(({ source }) => source).sort()).toEqual(
+    [`manual/${MANUAL_PDF}`, "manual/tinkerers-manual.pdf"].sort(),
+  );
   for (const { source, file } of copies)
     expect(gunzipSync(fs.readFileSync(file)).equals(fs.readFileSync(source)), source).toBe(true);
 });
