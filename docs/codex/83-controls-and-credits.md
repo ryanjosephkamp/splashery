@@ -43,6 +43,7 @@ look.
 No change to how any toy looks or plays. American English and the serial comma. Before you push:
 `node tools/site-build.mjs --check`, `npx prettier --check .`, and
 `node tools/us-english.mjs --diff` are clean, and your new tests pass. The test suite on GitHub
-Actions runs on your PR and posts its result as a comment; any failure that isn't marked "(known on
-main)" is yours to fix. PR body with Summary, Verification, Deviations, Known issues, and What was
-cut.
+Actions runs the quick checks on your PR; the full suite runs on the Operator's merge PR (or on
+yours when the Operator adds the `full-suite` label) and posts its result as a comment; any failure
+that isn't marked "(known on main)" is yours to fix. PR body with Summary, Verification, Deviations,
+Known issues, and What was cut.

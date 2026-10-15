@@ -1,8 +1,11 @@
 # The test suite on GitHub Actions
 
-`.github/workflows/tests.yml` (lane CI, October 14, 2026) runs the checks and the full Playwright
-suite for every PR to `main`, every push to `main`, and on demand. The repository is public, so
-GitHub's runners cost nothing, and no Claude session has to run the suite for a merge.
+`.github/workflows/tests.yml` (lane CI, October 14, 2026) runs the checks on every PR to `main`, and
+the full Playwright suite on every push to `main`, on demand, on the Operator's merge PRs
+(`claude/operator-merge-*`), and on any PR labeled `full-suite` (the owner's call of October 15,
+2026, so lane and Codex pushes don't queue up the runners). The repository is public, so GitHub's
+runners cost nothing, and no Claude session has to run the suite for a merge. To run the whole suite
+on another PR, add the `full-suite` label; each later push runs it again.
 
 ## What runs
 
