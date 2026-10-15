@@ -1,0 +1,983 @@
+{
+  "environment": {
+    "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
+    "recordedAt": "2026-10-15T04:40:12.966Z",
+    "browser": "151.0.7922.173",
+    "runtime": {
+      "node": "v24.19.0",
+      "platform": "linux",
+      "arch": "x64"
+    },
+    "launch": {
+      "executablePath": "/usr/bin/chromium",
+      "headless": true,
+      "args": [
+        "--use-angle=swiftshader",
+        "--enable-unsafe-swiftshader",
+        "--ignore-gpu-blocklist",
+        "--enable-webgl"
+      ]
+    },
+    "realGPURequested": false,
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 1,
+    "payload": "https://ryanjosephkamp.github.io/splashery/",
+    "sceneSeed": 1,
+    "fixtures": {
+      "tests/fixtures/p3d/scene.jpg": {
+        "synthetic": true,
+        "bytes": 1835,
+        "sha256": "0d5fd4f8ed0a39c86573ca7194a38a710f45e66252785e8e5813ceac3f81645b"
+      },
+      "tests/fixtures/psv3/silent.webm": {
+        "synthetic": true,
+        "bytes": 28808,
+        "sha256": "eaed57b71acf72629ec41e21b08bb67ccbf2aa36b7d0613d45d41c87422eab42"
+      }
+    },
+    "browserPlugin": "Browser plugin not available; task 84 explicitly requests Playwright",
+    "automation": "Real browser, shipped media, real depth inference, no route or model mocks; app hooks used for deterministic controls"
+  },
+  "requestedRuns": 3,
+  "totals": {
+    "passed": 149,
+    "failed": 16,
+    "inconclusive": 9,
+    "blocked": 12
+  },
+  "summary": [
+    {
+      "step": "photo-3d: Fresh load",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-01.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Sample front",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-02.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Sample oblique",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-03.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Orbit drag",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-04.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Splats",
+      "passed": 0,
+      "failed": 3,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "failed",
+      "records": [
+        "run-1-photo-3d-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-05.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Splats front",
+      "passed": 0,
+      "failed": 3,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "failed",
+      "records": [
+        "run-1-photo-3d-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-06.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Splats oblique",
+      "passed": 0,
+      "failed": 3,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "failed",
+      "records": [
+        "run-1-photo-3d-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-07.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Sharp picture and depth slider",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-08.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Reset camera",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-09.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-09.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-09.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Local still",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-10.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-10.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-10.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Local front",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-11.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-11.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-11.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Local oblique",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-12.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-12.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-12.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Local-file recipient",
+      "passed": 0,
+      "failed": 3,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "failed",
+      "records": [
+        "run-1-photo-3d-13.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-13.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-13.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Back to sample",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-14.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-14.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-14.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Save scene and reopen",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-15.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-15.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-15.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Sample recipient",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-16.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-16.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-16.json"
+      ]
+    },
+    {
+      "step": "photo-3d: Route console and network health",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-photo-3d-17.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-photo-3d-17.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-photo-3d-17.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Fresh load",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-01.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Play and frame-time spread",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-02.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Pause",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-03.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Seek",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-04.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: End and loop",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-05.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Sample recipient",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-06.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Local clip",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-07.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Local clip playback",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-08.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Local-file recipient",
+      "passed": 0,
+      "failed": 3,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "failed",
+      "records": [
+        "run-1-moving-photo-3d-09.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-09.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-09.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Switch sources five times",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-10.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-10.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-10.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Back to still photo",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-11.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-11.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-11.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Reload",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-12.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-12.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-12.json"
+      ]
+    },
+    {
+      "step": "moving-photo-3d: Route console and network health",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-moving-photo-3d-13.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-moving-photo-3d-13.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-moving-photo-3d-13.json"
+      ]
+    },
+    {
+      "step": "qr-code: Fresh load",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-code-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-01.json"
+      ]
+    },
+    {
+      "step": "qr-code: Export and decode PNG",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-code-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-02.json"
+      ]
+    },
+    {
+      "step": "qr-code: Native-size exported decode",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-code-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-03.json"
+      ]
+    },
+    {
+      "step": "qr-code: On-screen decode at phone size",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-code-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-04.json"
+      ]
+    },
+    {
+      "step": "qr-code: Full viewport decode",
+      "passed": 0,
+      "failed": 0,
+      "inconclusive": 3,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "inconclusive",
+      "records": [
+        "run-1-qr-code-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-05.json"
+      ]
+    },
+    {
+      "step": "qr-code: Recipient link",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-code-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-06.json"
+      ]
+    },
+    {
+      "step": "qr-code: Second-phone scan",
+      "passed": 0,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 3,
+      "attempted": 0,
+      "planned": 3,
+      "result": "blocked",
+      "records": [
+        "run-1-qr-code-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-07.json"
+      ]
+    },
+    {
+      "step": "qr-code: Route console and network health",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-code-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-code-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-code-08.json"
+      ]
+    },
+    {
+      "step": "qr-picture: Fresh load",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-picture-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-01.json"
+      ]
+    },
+    {
+      "step": "qr-picture: Export and decode PNG",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-picture-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-02.json"
+      ]
+    },
+    {
+      "step": "qr-picture: Native-size exported decode",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-picture-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-03.json"
+      ]
+    },
+    {
+      "step": "qr-picture: On-screen decode at phone size",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-picture-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-04.json"
+      ]
+    },
+    {
+      "step": "qr-picture: Full viewport decode",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-picture-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-05.json"
+      ]
+    },
+    {
+      "step": "qr-picture: Recipient link",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-picture-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-06.json"
+      ]
+    },
+    {
+      "step": "qr-picture: Second-phone scan",
+      "passed": 0,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 3,
+      "attempted": 0,
+      "planned": 3,
+      "result": "blocked",
+      "records": [
+        "run-1-qr-picture-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-07.json"
+      ]
+    },
+    {
+      "step": "qr-picture: Route console and network health",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-picture-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-picture-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-picture-08.json"
+      ]
+    },
+    {
+      "step": "qr-three: Fresh load",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-three-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-01.json"
+      ]
+    },
+    {
+      "step": "qr-three: Export and decode PNG",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-three-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-02.json"
+      ]
+    },
+    {
+      "step": "qr-three: Native-size exported decode",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-three-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-03.json"
+      ]
+    },
+    {
+      "step": "qr-three: On-screen decode at phone size",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-three-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-04.json"
+      ]
+    },
+    {
+      "step": "qr-three: Full viewport decode",
+      "passed": 0,
+      "failed": 0,
+      "inconclusive": 3,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "inconclusive",
+      "records": [
+        "run-1-qr-three-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-05.json"
+      ]
+    },
+    {
+      "step": "qr-three: Recipient link",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-three-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-06.json"
+      ]
+    },
+    {
+      "step": "qr-three: Second-phone scan",
+      "passed": 0,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 3,
+      "attempted": 0,
+      "planned": 3,
+      "result": "blocked",
+      "records": [
+        "run-1-qr-three-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-07.json"
+      ]
+    },
+    {
+      "step": "qr-three: Route console and network health",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-qr-three-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-qr-three-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-qr-three-08.json"
+      ]
+    },
+    {
+      "step": "share-qr: Fresh load",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-share-qr-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-01.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-01.json"
+      ]
+    },
+    {
+      "step": "share-qr: Export and decode PNG",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-share-qr-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-02.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-02.json"
+      ]
+    },
+    {
+      "step": "share-qr: Native-size exported decode",
+      "passed": 2,
+      "failed": 1,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "failed",
+      "records": [
+        "run-1-share-qr-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-03.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-03.json"
+      ]
+    },
+    {
+      "step": "share-qr: On-screen decode at phone size",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-share-qr-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-04.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-04.json"
+      ]
+    },
+    {
+      "step": "share-qr: Full viewport decode",
+      "passed": 0,
+      "failed": 0,
+      "inconclusive": 3,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "inconclusive",
+      "records": [
+        "run-1-share-qr-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-05.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-05.json"
+      ]
+    },
+    {
+      "step": "share-qr: Recipient link",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-share-qr-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-06.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-06.json"
+      ]
+    },
+    {
+      "step": "share-qr: Second-phone scan",
+      "passed": 0,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 3,
+      "attempted": 0,
+      "planned": 3,
+      "result": "blocked",
+      "records": [
+        "run-1-share-qr-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-07.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-07.json"
+      ]
+    },
+    {
+      "step": "share-qr: Route console and network health",
+      "passed": 3,
+      "failed": 0,
+      "inconclusive": 0,
+      "blocked": 0,
+      "attempted": 3,
+      "planned": 3,
+      "result": "passed",
+      "records": [
+        "run-1-share-qr-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-2-share-qr-08.json",
+        "https://github.com/ryanjosephkamp/splashery/blob/4e25daedbe54c071721f243588f88acb455b68e8/docs/audits/advisor-route-2026-10/run-3-share-qr-08.json"
+      ]
+    }
+  ]
+}

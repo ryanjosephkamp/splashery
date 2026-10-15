@@ -1224,7 +1224,12 @@ export async function writeReport(
       const findings = [
         ...new Set(rows.filter((r) => r.result === "failed").map((r) => r.actual?.error)),
       ];
-      return `| ${id} | ${countText(rows)} | ${findings.join("; ") || (rows.some((r) => r.result === "blocked") ? "Second-phone scan blocked, needs the owner" : "No failed checks")} | ${link("Run 1", recordFile(first))} |`;
+      const missing = [
+        ...new Set(
+          rows.filter((r) => r.result === "blocked").map((r) => r.actual?.error || r.name),
+        ),
+      ];
+      return `| ${id} | ${countText(rows)} | ${findings.join("; ") || missing.join("; ") || "No failed checks"} | ${link("Run 1", recordFile(first))} |`;
     })
     .join("\n");
   const table = summary
@@ -1253,7 +1258,15 @@ export async function writeReport(
       const names = [...new Set(rows.map((r) => r.name))].join(", ");
       const reps = [...new Set(rows.map((r) => r.repetition))];
       const links = reps
-        .map((rep) => link(`Run ${rep}`, recordFile(rows.find((r) => r.repetition === rep))))
+        .flatMap((rep) => {
+          const row = rows.find((r) => r.repetition === rep);
+          return [
+            link(`Run ${rep}`, recordFile(row)),
+            ...(row.name === "Native-size exported decode"
+              ? [link(`Run ${rep} native PNG`, `run-${rep}-${row.toyId}-export.png`)]
+              : []),
+          ];
+        })
         .join(", ");
       return `| ${first.toyId}: ${names} | ${first.result} | ${first.actual?.error} | ${first.owner || "No toy owner: supplementary diagnostic"} | ${links} |`;
     })
@@ -1270,8 +1283,18 @@ export async function writeReport(
         `| ${r.repetition} | ${r.state.firstDraw?.chooseToyToFirstFrameMs?.toFixed(1)} | ${r.state.firstDraw?.navigationToFirstFrameMs?.toFixed(1)} | ${r.actual.frameTimeMs.min?.toFixed(1)} | ${r.actual.frameTimeMs.median?.toFixed(1)} | ${r.actual.frameTimeMs.p95?.toFixed(1)} | ${r.actual.frameTimeMs.max?.toFixed(1)} |`,
     )
     .join("\n");
-  const share = records
-    .filter((r) => r.toyId === "share-qr" && r.name === "Export and decode PNG" && r.qr?.payload)
+  const shareRecords = records.filter(
+    (r) => r.toyId === "share-qr" && r.name === "Export and decode PNG" && r.qr?.payload,
+  );
+  const shareOrigins = [...new Set(shareRecords.map((r) => new URL(r.qr.payload).origin))];
+  const loopback = shareOrigins.some((origin) =>
+    ["127.0.0.1", "localhost", "[::1]"].includes(new URL(origin).hostname),
+  );
+  const firstShare = shareRecords[0];
+  const firstShareSize = firstShare?.actual?.share?.version
+    ? `Run ${firstShare.repetition} has a **${firstShare.qr.payload.length}-character link and ${17 + 4 * firstShare.actual.share.version} modules per side**. `
+    : "";
+  const share = shareRecords
     .map((r) => {
       const made = r.actual?.share;
       return `| ${r.repetition} | ${new URL(r.qr.payload).origin} | ${r.qr.payload.length} | ${made?.version ? 17 + 4 * made.version : "See dialog info in record"} | ${link("Exact URL and decodes", recordFile(r))} |`;
@@ -1295,7 +1318,7 @@ Graphics: ${graphics?.backend || "unavailable"}; ${graphics?.renderer || "unavai
 
 ## Distinct findings and missing inputs
 
-Repeated runs are grouped below. Photo Splats steps 5–7 are one status-text finding owned by task 76. The original nine repeated observation groups are retained, with this newly checked status finding added once. Full-viewport reads are supplementary, inconclusive diagnostics when readers fail; they have no toy owner and do not affect the exit code. The visible code and real exported PNG have separate exact-payload checks with both vendored readers. A second-phone scan stays **blocked, needs the owner**.
+The ${findingGroups.size} distinct observations below group repeated runs by cause. Photo Splats status failures in steps 5–7 share one status-text finding owned by task 76 when present. Full-viewport reads are supplementary, inconclusive diagnostics when readers fail; they have no toy owner and do not affect the exit code. The visible code and real exported PNG have separate exact-payload checks with both vendored readers. A second-phone scan stays **blocked, needs the owner**.
 
 | Step(s) | Result | Finding / smallest missing input | Owner | Reproduction records |
 | --- | --- | --- | --- | --- |
@@ -1321,7 +1344,7 @@ PNG exports come from the real exporters, not regenerated matrices. Untouched ex
 
 ## Share QR origin and size
 
-The share QR holds the actual **127.0.0.1** scene origin for this local server, not the public site payload. Another phone cannot reach this server through that loopback URL. The originally reviewed share capture had a **761-character link and 105 modules**; fresh sizes below are read from this capture and can vary with timestamps. Exact URLs and both decoded strings are retained in the linked records.
+The share QR holds the actual scene URL, including the captured origin: ${shareOrigins.map((origin) => `**${origin}**`).join(", ") || "no share export was captured"}. ${loopback ? "Another phone cannot reach this server through that loopback URL. " : ""}${firstShareSize}Sizes below are read from this capture and can vary with timestamps. Exact URLs and both decoded strings are retained in the linked records.
 
 | Run | Encoded origin | Link characters | Modules per side | Evidence |
 | --- | --- | --- | --- | --- |

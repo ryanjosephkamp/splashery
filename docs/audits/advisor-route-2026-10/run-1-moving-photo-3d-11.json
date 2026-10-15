@@ -1,6 +1,6 @@
 {
-  "buildCommit": "4cc7d635bd641cbac436e3f4a20b2c3e8e46f199",
-  "recordedAt": "2026-10-15T02:13:31.716Z",
+  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
+  "recordedAt": "2026-10-15T04:40:12.966Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -27,10 +27,12 @@
   "sceneSeed": 1,
   "fixtures": {
     "tests/fixtures/p3d/scene.jpg": {
+      "synthetic": true,
       "bytes": 1835,
       "sha256": "0d5fd4f8ed0a39c86573ca7194a38a710f45e66252785e8e5813ceac3f81645b"
     },
     "tests/fixtures/psv3/silent.webm": {
+      "synthetic": true,
       "bytes": 28808,
       "sha256": "eaed57b71acf72629ec41e21b08bb67ccbf2aa36b7d0613d45d41c87422eab42"
     }
@@ -53,7 +55,7 @@
     "httpErrors": []
   },
   "actual": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2mtgwkfoNLf-gV7aUzt7UBwBXoztsRUCZfjvlQVhdnan5YKl6Envyc9XwBihhRwd5j2lC1RwopRt8NCuKjCJkKn_xlKzrJeb2aKeLZqf9bJdNO16NV-u6l8CyUQ9tIsKOFygvcLBeomhG6xj66XAlvAYTtbvZnEfOMxWvaRDZJmUC8Q4W4iYIXM4yqcSf8cjFXLWkWe43SpwIRxKdYfmsEth0DERdyQI3pOW48BBQjSmoJ5xkcg_DDpSpnSOIQ-pBNKXtlsyrERiOFD5LxvYosskUE7kd7yHtp5vKhhD15Uu9bwR6Kha_1nfNBX0Nkl33Wl9K2HOwZ0-TYmy7H7C5Kg7vc_oU4gfqjsRb5TEulQbZKY01R9x54n_w-pLBQl7O-R7A4HwaPNHBB5lCGvT96rFF3i2AoULCDI7az5qkd3ah2ApGImiApsn8lyQEa3_xNL-ocfEuykfgQkuiD54oc2qW5K64YnPjMcobX-_StaIaxKW9AVHJRAtm72eUnBOD3IHjLrA1XwtoGISGafu5SF5RhXLaaDJHTLcB0934mXbvhSrszVfwdbhTiI5xRTepiuHMWGUXKIojymr-1RNIQwvW_3J90mZnOpuvf1q4FUv1k37mK5D8D0xWqd-LNcd7pOugM6enrTlvenzYSui3zuqzPcsu7gbXmUvbrfbXw",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLjtswDPwX7tUJnDfqW3-gl_bUYg-0zCRqZEmQ6Dwa5N9LMXGwyKLNJSLNIWeo0RUwRmggR4d5T-kCFRwpZRs8NIsKTCJk6r6y1Mzr-Xoyqyez1Y962SznzbyebjarnwLJRB00swo4XKC5wsF6iaEdrGPrpcCWsA9H63eTuA8cJotO0iGyTMoFYpwtRMyQOfTyqcTfsKdCzjryDLdbBS6EQ6lu0Rx2KQw6JuKOBMF70nIcOEiIxhTUMy4S-btBR8qUzjHkIZVA-tJ2S4aVSAwHKv9lA1t0mQTKifyO99DU03UFp9C2pUs9XQn0pFr_Wb9aVdDZJN11p_WthDkHd_w0JcqyuxGTo-70PqNLIb5UtyLeKIllqTbITGms73Hnif_DalNBws4O-d5AIHyy-RWBvQxhbfpRtfgCz1agcAFBZmfNqxbZrX0IloITUVTg6ok8F2RE6z-xtH_oMfFuykdggguiD95ovWjnpG544jNjH6Xtr3fJGnFNwpK-4EkJRMtmr6cUnNOD3AGjLnAxXQqomETGqXt5SJ5RxXIaaHSHDPfB05142bYvxepszVewdbiTSE4xhd_jlcMpYZRcoiiPKav7VE0hDG9b_cn3UZmc6na5_WLgXS_WjfsYr0PwHTFap34s1x3uk66Azh6ftOW96fNhK6I_OqrM9yy7uBteZc9ut9tf",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "photo-3d",
@@ -68,7 +70,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T02:16:00.997Z",
+      "createdAt": "2026-10-15T04:42:36.911Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -178,6 +180,7 @@
       "session": {}
     },
     "input": "Your own photoUse my cameraTake the pictureUse the back cameraRecord a videoSave the videoSplatsSharp pictureFine Splats (hybrid) adds a filled background sheet behind the splats. Splat exports omit the sheet; scene saves keep the view settings.Sound of the depth rising and settling:PaperSoft chimePop-up layersWater dropNoneUse my own sound…Your own sound stays on this device: it isn't uploaded or saved with the scene or its link.Stays on this device. Nothing is recorded or sent.Open a photo…Forest path: 199,498 splats in 10 pieces of surface.Open a JPEG, PNG or WebP photo (HEIC too, where the browser can read it). Large photos are scaled down to 2,048 pixels on the long side, and turned upright by their camera tag. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Your photo never leaves your device. It takes a few seconds, longer on a phone.",
+    "statusText": "Photo to 3D · Sharp picture",
     "visibleText": "Skip to controls\nSplashery\n\nPhoto to 3D · Sharp picture\n\n×\nDepth\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nLink copied.",
     "toast": {
       "text": "Link copied.",
@@ -207,11 +210,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 633,
+    "stageUpdateTicks": 617,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 6751.799999999814,
-      "navigationToFirstFrameMs": 9793.100000000093,
-      "stageUpdateTicks": 42
+      "chooseToyToFirstFrameMs": 6212.5,
+      "navigationToFirstFrameMs": 8302.400000000373,
+      "stageUpdateTicks": 43
     },
     "controls": {
       "flat": 1,
@@ -222,7 +225,7 @@
       "layers": 0
     }
   },
-  "durationMs": 2792,
+  "durationMs": 2546,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -230,7 +233,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2mtgwkfoNLf-gV7aUzt7UBwBXoztsRUCZfjvlQVhdnan5YKl6Envyc9XwBihhRwd5j2lC1RwopRt8NCuKjCJkKn_xlKzrJeb2aKeLZqf9bJdNO16NV-u6l8CyUQ9tIsKOFygvcLBeomhG6xj66XAlvAYTtbvZnEfOMxWvaRDZJmUC8Q4W4iYIXM4yqcSf8cjFXLWkWe43SpwIRxKdYfmsEth0DERdyQI3pOW48BBQjSmoJ5xkcg_DDpSpnSOIQ-pBNKXtlsyrERiOFD5LxvYosskUE7kd7yHtp5vKhhD15Uu9bwR6Kha_1nfNBX0Nkl33Wl9K2HOwZ0-TYmy7H7C5Kg7vc_oU4gfqjsRb5TEulQbZKY01R9x54n_w-pLBQl7O-R7A4HwaPNHBB5lCGvT96rFF3i2AoULCDI7az5qkd3ah2ApGImiApsn8lyQEa3_xNL-ocfEuykfgQkuiD54oc2qW5K64YnPjMcobX-_StaIaxKW9AVHJRAtm72eUnBOD3IHjLrA1XwtoGISGafu5SF5RhXLaaDJHTLcB0934mXbvhSrszVfwdbhTiI5xRTepiuHMWGUXKIojymr-1RNIQwvW_3J90mZnOpuvf1q4FUv1k37mK5D8D0xWqd-LNcd7pOugM6enrTlvenzYSui3zuqzPcsu7gbXmUvbrfbXw",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLjtswDPwX7tUJnDfqW3-gl_bUYg-0zCRqZEmQ6Dwa5N9LMXGwyKLNJSLNIWeo0RUwRmggR4d5T-kCFRwpZRs8NIsKTCJk6r6y1Mzr-Xoyqyez1Y962SznzbyebjarnwLJRB00swo4XKC5wsF6iaEdrGPrpcCWsA9H63eTuA8cJotO0iGyTMoFYpwtRMyQOfTyqcTfsKdCzjryDLdbBS6EQ6lu0Rx2KQw6JuKOBMF70nIcOEiIxhTUMy4S-btBR8qUzjHkIZVA-tJ2S4aVSAwHKv9lA1t0mQTKifyO99DU03UFp9C2pUs9XQn0pFr_Wb9aVdDZJN11p_WthDkHd_w0JcqyuxGTo-70PqNLIb5UtyLeKIllqTbITGms73Hnif_DalNBws4O-d5AIHyy-RWBvQxhbfpRtfgCz1agcAFBZmfNqxbZrX0IloITUVTg6ok8F2RE6z-xtH_oMfFuykdggguiD95ovWjnpG544jNjH6Xtr3fJGnFNwpK-4EkJRMtmr6cUnNOD3AGjLnAxXQqomETGqXt5SJ5RxXIaaHSHDPfB05142bYvxepszVewdbiTSE4xhd_jlcMpYZRcoiiPKav7VE0hDG9b_cn3UZmc6na5_WLgXS_WjfsYr0PwHTFap34s1x3uk66Azh6ftOW96fNhK6I_OqrM9yy7uBteZc9ut9tf",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "photo-3d",
@@ -245,7 +248,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T02:16:01.087Z",
+      "createdAt": "2026-10-15T04:42:37.023Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -355,6 +358,7 @@
       "session": {}
     },
     "input": "Your own photoUse my cameraTake the pictureUse the back cameraRecord a videoSave the videoSplatsSharp pictureFine Splats (hybrid) adds a filled background sheet behind the splats. Splat exports omit the sheet; scene saves keep the view settings.Sound of the depth rising and settling:PaperSoft chimePop-up layersWater dropNoneUse my own sound…Your own sound stays on this device: it isn't uploaded or saved with the scene or its link.Stays on this device. Nothing is recorded or sent.Open a photo…Forest path: 199,498 splats in 10 pieces of surface.Open a JPEG, PNG or WebP photo (HEIC too, where the browser can read it). Large photos are scaled down to 2,048 pixels on the long side, and turned upright by their camera tag. A depth model that runs on this device (about 27 MB, loaded the first time) works out how far away each part of the picture is, and the photo is rebuilt as splats in 3D. Your photo never leaves your device. It takes a few seconds, longer on a phone.",
+    "statusText": "Photo to 3D · Sharp picture",
     "visibleText": "Skip to controls\nSplashery\n\nPhoto to 3D · Sharp picture\n\n×\nDepth\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nLink copied.",
     "toast": {
       "text": "Link copied.",
@@ -384,11 +388,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 634,
+    "stageUpdateTicks": 618,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 6751.799999999814,
-      "navigationToFirstFrameMs": 9793.100000000093,
-      "stageUpdateTicks": 42
+      "chooseToyToFirstFrameMs": 6212.5,
+      "navigationToFirstFrameMs": 8302.400000000373,
+      "stageUpdateTicks": 43
     },
     "controls": {
       "flat": 1,

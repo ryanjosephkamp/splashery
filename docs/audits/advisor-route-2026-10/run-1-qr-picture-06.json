@@ -1,6 +1,6 @@
 {
-  "buildCommit": "4cc7d635bd641cbac436e3f4a20b2c3e8e46f199",
-  "recordedAt": "2026-10-15T02:13:31.716Z",
+  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
+  "recordedAt": "2026-10-15T04:40:12.966Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -27,10 +27,12 @@
   "sceneSeed": 1,
   "fixtures": {
     "tests/fixtures/p3d/scene.jpg": {
+      "synthetic": true,
       "bytes": 1835,
       "sha256": "0d5fd4f8ed0a39c86573ca7194a38a710f45e66252785e8e5813ceac3f81645b"
     },
     "tests/fixtures/psv3/silent.webm": {
+      "synthetic": true,
       "bytes": 28808,
       "sha256": "eaed57b71acf72629ec41e21b08bb67ccbf2aa36b7d0613d45d41c87422eab42"
     }
@@ -53,13 +55,13 @@
     "httpErrors": []
   },
   "recipient": {
-    "url": "http://127.0.0.1:4173/#s=d.fVPLctswDPwX5Crb8jMT3foN7amdHCAKshhTJENCll2P_70gbbmZZFpdRFBY7AJYXQC9hwqiNxg7Cmco4EghamehWhegAiFT840lZ1WudrNlOVtuf5SravlcrTbz7erlp0AiUQPVsgB2Z6gucNBWYqgHbVhbSdApfA8zrxUPgeTGeRaSmLKZTql-x-xjtViEM9o3F8l3B-z9fK-5G-q5douHyEWi7NBTUv4-oBS8Xgswzh1SvRrVYR_ckDV43Cc67qhP6TiwkxCVIst_41Savys0lNugk3cx6ayWUpfalhRnqd4dKL3TeFo0kQTKgeyeO6jK-a6A0dV1qlLOtwId8yD-mb_dFtDoINXzwMtrCmN05viFxcsmmgkTfR74jaMJzn_KrqV5lUVsUrZCZgpTfo97S_wfVc8FBGz0EG8FBMKjjp8R2AsJ56IfuxbT4EkLFM4gyGi0-tyLzFbfG5aEkchn4PaBPCWkR22_qNS_6c54M8M9UM446Q-eaLeuVzc3PPCRxUZS9ter3CrsKWC6PuOYBXjNqsun4IzJB9kBYx7ger4RUDKJ0GVri30tY26Ww0CTO4TcOks34WnaNiVn2-f7AlqDe4nk5IN7m1YOY0Avd4G8_Gkxuy93kwTDU5sf-T51Jqey3rQvCl7zYs00j2kdgm-IUZvsx7Rud2O6ABp9fMju3TH_Pqyl6Y-OSvyWZRbJ8Nfr9Q8",
+    "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
     "localFile": false,
     "fileBytesIncluded": false,
     "fixtureDescriptor": null,
     "linkFileMetadata": {},
     "sender": {
-      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLctswDPwX5Crb8jMT3foN7amdHCAKshhTJENCll2P_70gbbmZZFpdRFBY7AJYXQC9hwqiNxg7Cmco4EghamehWhegAiFT840lZ1WudrNlOVtuf5SravlcrTbz7erlp0AiUQPVsgB2Z6gucNBWYqgHbVhbSdApfA8zrxUPgeTGeRaSmLKZTql-x-xjtViEM9o3F8l3B-z9fK-5G-q5douHyEWi7NBTUv4-oBS8Xgswzh1SvRrVYR_ckDV43Cc67qhP6TiwkxCVIst_41Savys0lNugk3cx6ayWUpfalhRnqd4dKL3TeFo0kQTKgeyeO6jK-a6A0dV1qlLOtwId8yD-mb_dFtDoINXzwMtrCmN05viFxcsmmgkTfR74jaMJzn_KrqV5lUVsUrZCZgpTfo97S_wfVc8FBGz0EG8FBMKjjp8R2AsJ56IfuxbT4EkLFM4gyGi0-tyLzFbfG5aEkchn4PaBPCWkR22_qNS_6c54M8M9UM446Q-eaLeuVzc3PPCRxUZS9ter3CrsKWC6PuOYBXjNqsun4IzJB9kBYx7ger4RUDKJ0GVri30tY26Ww0CTO4TcOks34WnaNiVn2-f7AlqDe4nk5IN7m1YOY0Avd4G8_Gkxuy93kwTDU5sf-T51Jqey3rQvCl7zYs00j2kdgm-IUZvsx7Rud2O6ABp9fMju3TH_Pqyl6Y-OSvyWZRbJ8Nfr9Q8",
+      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-picture",
@@ -80,7 +82,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T02:17:24.544Z",
+        "createdAt": "2026-10-15T04:44:04.557Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -194,17 +196,18 @@
         "session": {}
       },
       "input": "Picture QRWhat the code holdsMake the codeSave a PNGVersion 9 (53 × 53 modules), error correction H.Contrast: 3.6 : 1 between whole dark and light modules (the center dots 18.4 : 1).✓ Reads at phone size (8 pixels a module, a little out of focus).✓ Reads at smaller (4 pixels a module, a little out of focus).✓ The splats on the stage read at 8 pixels a module.✓ The splats on the stage read at 4 pixels a module.It scans.Make it scanEach module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it.Open your own picture…Felt farm (AI-made)Your picture is read on this device and never leaves it. A link to this toy can't carry it: it opens with a sample instead.",
+      "statusText": "Picture QR · 123k splats",
       "visibleText": "Skip to controls\nSplashery\n\nPicture QR · 123k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nLink copied.",
       "toast": {
         "text": "Link copied.",
         "visible": true
       },
       "linkNote": "",
-      "stageUpdateTicks": 618,
+      "stageUpdateTicks": 615,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 4025.3000000002794,
-        "navigationToFirstFrameMs": 6727.5,
-        "stageUpdateTicks": 24
+        "chooseToyToFirstFrameMs": 3343.5,
+        "navigationToFirstFrameMs": 6047.700000001118,
+        "stageUpdateTicks": 22
       },
       "controls": {
         "turn": 0
@@ -214,7 +217,7 @@
       }
     },
     "recipient": {
-      "url": "http://127.0.0.1:4173/#s=d.fVPLctswDPwX5Crb8jMT3foN7amdHCAKshhTJENCll2P_70gbbmZZFpdRFBY7AJYXQC9hwqiNxg7Cmco4EghamehWhegAiFT840lZ1WudrNlOVtuf5SravlcrTbz7erlp0AiUQPVsgB2Z6gucNBWYqgHbVhbSdApfA8zrxUPgeTGeRaSmLKZTql-x-xjtViEM9o3F8l3B-z9fK-5G-q5douHyEWi7NBTUv4-oBS8Xgswzh1SvRrVYR_ckDV43Cc67qhP6TiwkxCVIst_41Savys0lNugk3cx6ayWUpfalhRnqd4dKL3TeFo0kQTKgeyeO6jK-a6A0dV1qlLOtwId8yD-mb_dFtDoINXzwMtrCmN05viFxcsmmgkTfR74jaMJzn_KrqV5lUVsUrZCZgpTfo97S_wfVc8FBGz0EG8FBMKjjp8R2AsJ56IfuxbT4EkLFM4gyGi0-tyLzFbfG5aEkchn4PaBPCWkR22_qNS_6c54M8M9UM446Q-eaLeuVzc3PPCRxUZS9ter3CrsKWC6PuOYBXjNqsun4IzJB9kBYx7ger4RUDKJ0GVri30tY26Ww0CTO4TcOks34WnaNiVn2-f7AlqDe4nk5IN7m1YOY0Avd4G8_Gkxuy93kwTDU5sf-T51Jqey3rQvCl7zYs00j2kdgm-IUZvsx7Rud2O6ABp9fMju3TH_Pqyl6Y-OSvyWZRbJ8Nfr9Q8",
+      "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-picture",
@@ -235,7 +238,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T02:17:29.205Z",
+        "createdAt": "2026-10-15T04:44:07.429Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -304,7 +307,7 @@
           "yaw": 0,
           "pitch": 0,
           "roll": 0,
-          "distance": 3.4
+          "distance": 2.9042
         },
         "autoplay": {
           "turntable": true,
@@ -331,7 +334,7 @@
         "yaw": 0,
         "pitch": 0,
         "roll": 0,
-        "distance": 3.4
+        "distance": 2.9042
       },
       "graphics": {
         "backend": "WebGL2",
@@ -346,14 +349,15 @@
         "current": {},
         "session": {}
       },
-      "input": "Picture QRWhat the code holdsMake the codeSave a PNGVersion 9 (53 × 53 modules), error correction H.Contrast: 3.6 : 1 between whole dark and light modules (the center dots 18.4 : 1).✓ Reads at phone size (8 pixels a module, a little out of focus).✓ Reads at smaller (4 pixels a module, a little out of focus).✓ The splats on the stage read at 8 pixels a module.✓ The splats on the stage read at 4 pixels a module.It scans.Make it scanEach module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it.Open your own picture…Felt farm (AI-made)Your picture is read on this device and never leaves it. A link to this toy can't carry it: it opens with a sample instead.",
+      "input": "Picture QRWhat the code holdsMake the codeSave a PNGVersion 9 (53 × 53 modules), error correction H.Contrast: 3.6 : 1 between whole dark and light modules (the center dots 18.4 : 1).✓ Reads at phone size (8 pixels a module, a little out of focus).✓ Reads at smaller (4 pixels a module, a little out of focus).It scans.Make it scanEach module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it.Open your own picture…Felt farm (AI-made)Your picture is read on this device and never leaves it. A link to this toy can't carry it: it opens with a sample instead.",
+      "statusText": "Picture QR · 274k splats",
       "visibleText": "Skip to controls\nSplashery\n\nPicture QR · 274k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nPeriodic table\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore",
       "toast": {
         "text": "",
         "visible": false
       },
       "linkNote": "",
-      "stageUpdateTicks": 18,
+      "stageUpdateTicks": 15,
       "controls": {
         "turn": 0
       },
@@ -369,13 +373,13 @@
     }
   },
   "actual": {
-    "url": "http://127.0.0.1:4173/#s=d.fVPLctswDPwX5Crb8jMT3foN7amdHCAKshhTJENCll2P_70gbbmZZFpdRFBY7AJYXQC9hwqiNxg7Cmco4EghamehWhegAiFT840lZ1WudrNlOVtuf5SravlcrTbz7erlp0AiUQPVsgB2Z6gucNBWYqgHbVhbSdApfA8zrxUPgeTGeRaSmLKZTql-x-xjtViEM9o3F8l3B-z9fK-5G-q5douHyEWi7NBTUv4-oBS8Xgswzh1SvRrVYR_ckDV43Cc67qhP6TiwkxCVIst_41Savys0lNugk3cx6ayWUpfalhRnqd4dKL3TeFo0kQTKgeyeO6jK-a6A0dV1qlLOtwId8yD-mb_dFtDoINXzwMtrCmN05viFxcsmmgkTfR74jaMJzn_KrqV5lUVsUrZCZgpTfo97S_wfVc8FBGz0EG8FBMKjjp8R2AsJ56IfuxbT4EkLFM4gyGi0-tyLzFbfG5aEkchn4PaBPCWkR22_qNS_6c54M8M9UM446Q-eaLeuVzc3PPCRxUZS9ter3CrsKWC6PuOYBXjNqsun4IzJB9kBYx7ger4RUDKJ0GVri30tY26Ww0CTO4TcOks34WnaNiVn2-f7AlqDe4nk5IN7m1YOY0Avd4G8_Gkxuy93kwTDU5sf-T51Jqey3rQvCl7zYs00j2kdgm-IUZvsx7Rud2O6ABp9fMju3TH_Pqyl6Y-OSvyWZRbJ8Nfr9Q8",
+    "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
     "localFile": false,
     "fileBytesIncluded": false,
     "fixtureDescriptor": null,
     "linkFileMetadata": {},
     "sender": {
-      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLctswDPwX5Crb8jMT3foN7amdHCAKshhTJENCll2P_70gbbmZZFpdRFBY7AJYXQC9hwqiNxg7Cmco4EghamehWhegAiFT840lZ1WudrNlOVtuf5SravlcrTbz7erlp0AiUQPVsgB2Z6gucNBWYqgHbVhbSdApfA8zrxUPgeTGeRaSmLKZTql-x-xjtViEM9o3F8l3B-z9fK-5G-q5douHyEWi7NBTUv4-oBS8Xgswzh1SvRrVYR_ckDV43Cc67qhP6TiwkxCVIst_41Savys0lNugk3cx6ayWUpfalhRnqd4dKL3TeFo0kQTKgeyeO6jK-a6A0dV1qlLOtwId8yD-mb_dFtDoINXzwMtrCmN05viFxcsmmgkTfR74jaMJzn_KrqV5lUVsUrZCZgpTfo97S_wfVc8FBGz0EG8FBMKjjp8R2AsJ56IfuxbT4EkLFM4gyGi0-tyLzFbfG5aEkchn4PaBPCWkR22_qNS_6c54M8M9UM446Q-eaLeuVzc3PPCRxUZS9ter3CrsKWC6PuOYBXjNqsun4IzJB9kBYx7ger4RUDKJ0GVri30tY26Ww0CTO4TcOks34WnaNiVn2-f7AlqDe4nk5IN7m1YOY0Avd4G8_Gkxuy93kwTDU5sf-T51Jqey3rQvCl7zYs00j2kdgm-IUZvsx7Rud2O6ABp9fMju3TH_Pqyl6Y-OSvyWZRbJ8Nfr9Q8",
+      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-picture",
@@ -396,7 +400,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T02:17:24.544Z",
+        "createdAt": "2026-10-15T04:44:04.557Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -510,17 +514,18 @@
         "session": {}
       },
       "input": "Picture QRWhat the code holdsMake the codeSave a PNGVersion 9 (53 × 53 modules), error correction H.Contrast: 3.6 : 1 between whole dark and light modules (the center dots 18.4 : 1).✓ Reads at phone size (8 pixels a module, a little out of focus).✓ Reads at smaller (4 pixels a module, a little out of focus).✓ The splats on the stage read at 8 pixels a module.✓ The splats on the stage read at 4 pixels a module.It scans.Make it scanEach module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it.Open your own picture…Felt farm (AI-made)Your picture is read on this device and never leaves it. A link to this toy can't carry it: it opens with a sample instead.",
+      "statusText": "Picture QR · 123k splats",
       "visibleText": "Skip to controls\nSplashery\n\nPicture QR · 123k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nLink copied.",
       "toast": {
         "text": "Link copied.",
         "visible": true
       },
       "linkNote": "",
-      "stageUpdateTicks": 618,
+      "stageUpdateTicks": 615,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 4025.3000000002794,
-        "navigationToFirstFrameMs": 6727.5,
-        "stageUpdateTicks": 24
+        "chooseToyToFirstFrameMs": 3343.5,
+        "navigationToFirstFrameMs": 6047.700000001118,
+        "stageUpdateTicks": 22
       },
       "controls": {
         "turn": 0
@@ -530,7 +535,7 @@
       }
     },
     "recipient": {
-      "url": "http://127.0.0.1:4173/#s=d.fVPLctswDPwX5Crb8jMT3foN7amdHCAKshhTJENCll2P_70gbbmZZFpdRFBY7AJYXQC9hwqiNxg7Cmco4EghamehWhegAiFT840lZ1WudrNlOVtuf5SravlcrTbz7erlp0AiUQPVsgB2Z6gucNBWYqgHbVhbSdApfA8zrxUPgeTGeRaSmLKZTql-x-xjtViEM9o3F8l3B-z9fK-5G-q5douHyEWi7NBTUv4-oBS8Xgswzh1SvRrVYR_ckDV43Cc67qhP6TiwkxCVIst_41Savys0lNugk3cx6ayWUpfalhRnqd4dKL3TeFo0kQTKgeyeO6jK-a6A0dV1qlLOtwId8yD-mb_dFtDoINXzwMtrCmN05viFxcsmmgkTfR74jaMJzn_KrqV5lUVsUrZCZgpTfo97S_wfVc8FBGz0EG8FBMKjjp8R2AsJ56IfuxbT4EkLFM4gyGi0-tyLzFbfG5aEkchn4PaBPCWkR22_qNS_6c54M8M9UM446Q-eaLeuVzc3PPCRxUZS9ter3CrsKWC6PuOYBXjNqsun4IzJB9kBYx7ger4RUDKJ0GVri30tY26Ww0CTO4TcOks34WnaNiVn2-f7AlqDe4nk5IN7m1YOY0Avd4G8_Gkxuy93kwTDU5sf-T51Jqey3rQvCl7zYs00j2kdgm-IUZvsx7Rud2O6ABp9fMju3TH_Pqyl6Y-OSvyWZRbJ8Nfr9Q8",
+      "url": "http://127.0.0.1:4173/#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-picture",
@@ -551,7 +556,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T02:17:29.205Z",
+        "createdAt": "2026-10-15T04:44:07.429Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -620,7 +625,7 @@
           "yaw": 0,
           "pitch": 0,
           "roll": 0,
-          "distance": 3.4
+          "distance": 2.9042
         },
         "autoplay": {
           "turntable": true,
@@ -647,7 +652,7 @@
         "yaw": 0,
         "pitch": 0,
         "roll": 0,
-        "distance": 3.4
+        "distance": 2.9042
       },
       "graphics": {
         "backend": "WebGL2",
@@ -662,14 +667,15 @@
         "current": {},
         "session": {}
       },
-      "input": "Picture QRWhat the code holdsMake the codeSave a PNGVersion 9 (53 × 53 modules), error correction H.Contrast: 3.6 : 1 between whole dark and light modules (the center dots 18.4 : 1).✓ Reads at phone size (8 pixels a module, a little out of focus).✓ Reads at smaller (4 pixels a module, a little out of focus).✓ The splats on the stage read at 8 pixels a module.✓ The splats on the stage read at 4 pixels a module.It scans.Make it scanEach module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it.Open your own picture…Felt farm (AI-made)Your picture is read on this device and never leaves it. A link to this toy can't carry it: it opens with a sample instead.",
+      "input": "Picture QRWhat the code holdsMake the codeSave a PNGVersion 9 (53 × 53 modules), error correction H.Contrast: 3.6 : 1 between whole dark and light modules (the center dots 18.4 : 1).✓ Reads at phone size (8 pixels a module, a little out of focus).✓ Reads at smaller (4 pixels a module, a little out of focus).It scans.Make it scanEach module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it.Open your own picture…Felt farm (AI-made)Your picture is read on this device and never leaves it. A link to this toy can't carry it: it opens with a sample instead.",
+      "statusText": "Picture QR · 274k splats",
       "visibleText": "Skip to controls\nSplashery\n\nPicture QR · 274k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nPeriodic table\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore",
       "toast": {
         "text": "",
         "visible": false
       },
       "linkNote": "",
-      "stageUpdateTicks": 18,
+      "stageUpdateTicks": 15,
       "controls": {
         "turn": 0
       },
@@ -684,7 +690,7 @@
       "httpErrors": []
     }
   },
-  "durationMs": 6384,
+  "durationMs": 5638,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -692,7 +698,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLctswDPwX5Crb8jMT3foN7amdHCAKshhTJENCll2P_70gbbmZZFpdRFBY7AJYXQC9hwqiNxg7Cmco4EghamehWhegAiFT840lZ1WudrNlOVtuf5SravlcrTbz7erlp0AiUQPVsgB2Z6gucNBWYqgHbVhbSdApfA8zrxUPgeTGeRaSmLKZTql-x-xjtViEM9o3F8l3B-z9fK-5G-q5douHyEWi7NBTUv4-oBS8Xgswzh1SvRrVYR_ckDV43Cc67qhP6TiwkxCVIst_41Savys0lNugk3cx6ayWUpfalhRnqd4dKL3TeFo0kQTKgeyeO6jK-a6A0dV1qlLOtwId8yD-mb_dFtDoINXzwMtrCmN05viFxcsmmgkTfR74jaMJzn_KrqV5lUVsUrZCZgpTfo97S_wfVc8FBGz0EG8FBMKjjp8R2AsJ56IfuxbT4EkLFM4gyGi0-tyLzFbfG5aEkchn4PaBPCWkR22_qNS_6c54M8M9UM446Q-eaLeuVzc3PPCRxUZS9ter3CrsKWC6PuOYBXjNqsun4IzJB9kBYx7ger4RUDKJ0GVri30tY26Ww0CTO4TcOks34WnaNiVn2-f7AlqDe4nk5IN7m1YOY0Avd4G8_Gkxuy93kwTDU5sf-T51Jqey3rQvCl7zYs00j2kdgm-IUZvsx7Rud2O6ABp9fMju3TH_Pqyl6Y-OSvyWZRbJ8Nfr9Q8",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2msIAQKd5tbf0J7a2YPiCOLFsb22wkcZ_ntlQ-gOO20usRw9vSfp5QLoPTQQvcHYUzhDAQcKUTsLzaoAFQiZum8sOctquZktqtli_aOqm7puqrpc1_VPgUSiDppFAezO0Fxgr63E0I7asLaSoFP4HmZeKx4DyY3zLCQxZTOdUv2e2cdmPg9ntG8uku_3OPhyp7kf21K7-UPkPFH26Ckpfx9RCl6vBRjn9qlei2q_C27MGjzuEh33NKR0HNlJiEqR5b9xKs3fFRrKbdDJu5h0NgupS9stKc5SvdtTeqfxbNFEEigHsjvuoanKTQFH17apSlWuBXrMg_hn_npdQKeDVM8Dr64pjNGZwycWL5voJkz0eeA3ji44_5TdSvMqi6hTtkJmClP-gDtL_B9VXwoI2Okx3goIhI86PiNwEBLORT92LabBkxYonEGQ0Wj13IvMVt8bloQjkc_A9QN5SkiP2n5SqX_TnfFmhnugnHHSH7zQZtUub2544COLjaTsr1e5VThQwHR9xmMW4DWrPp-CMyYfZAeMeYCrshZQMonQZWuLfS1jbpbDSJM7hNw6Szfhado2JWfb5_sCtgZ3EsnJB_c2rRyOAb3cBfLyp8XsvtxNEgwv2_zI96kzOVVtvf2q4DUv1kzzmNYh-I4Ytcl-TOt2N6YLoNGHh-zBHfLvw1qa_uioxG9ZZpEMf71e_wA",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "qr-picture",
@@ -713,7 +719,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T02:17:31.214Z",
+      "createdAt": "2026-10-15T04:44:10.421Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -827,17 +833,18 @@
       "session": {}
     },
     "input": "Picture QRWhat the code holdsMake the codeSave a PNGVersion 9 (53 × 53 modules), error correction H.Contrast: 3.6 : 1 between whole dark and light modules (the center dots 18.4 : 1).✓ Reads at phone size (8 pixels a module, a little out of focus).✓ Reads at smaller (4 pixels a module, a little out of focus).✓ The splats on the stage read at 8 pixels a module.✓ The splats on the stage read at 4 pixels a module.It scans.Make it scanEach module's middle keeps its bit, dark or light, because a camera reads every module at its center. The rest of the module carries the picture as a halftone: small dark and light dots that average out to the picture's tones. Where a module would read wrong, a few of its dots take its color; the contrast sets how clearly every module reads. The eyes, the timing lines, and the format information stay plain. Your picture is read on this device and never leaves it.Open your own picture…Felt farm (AI-made)Your picture is read on this device and never leaves it. A link to this toy can't carry it: it opens with a sample instead.",
+    "statusText": "Picture QR · 123k splats",
     "visibleText": "Skip to controls\nSplashery\n\nPicture QR · 123k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nLink copied.",
     "toast": {
       "text": "Link copied.",
       "visible": false
     },
     "linkNote": "",
-    "stageUpdateTicks": 921,
+    "stageUpdateTicks": 879,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 4025.3000000002794,
-      "navigationToFirstFrameMs": 6727.5,
-      "stageUpdateTicks": 24
+      "chooseToyToFirstFrameMs": 3343.5,
+      "navigationToFirstFrameMs": 6047.700000001118,
+      "stageUpdateTicks": 22
     },
     "controls": {
       "turn": 0

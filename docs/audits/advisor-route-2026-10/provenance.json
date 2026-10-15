@@ -1,7 +1,0 @@
-{
-  "localCaptureCommit": "4cc7d635bd641cbac436e3f4a20b2c3e8e46f199",
-  "publicCaptureCommit": "15087858a65c479428a4f98745c53880d6644312",
-  "identicalTree": "6757cb266888a580b4bf20086848b454ba1ec146",
-  "parentMainCommit": "d1f300b412f7776efd00cbb852d065af66232cc9",
-  "reason": "GitHub email privacy blocked publication of the local commits. A new public commit uses the identical source tree and a GitHub no-reply identity; the original local history is preserved. Capture records retain their original build commit."
-}

@@ -1,6 +1,6 @@
 {
-  "buildCommit": "4cc7d635bd641cbac436e3f4a20b2c3e8e46f199",
-  "recordedAt": "2026-10-15T02:13:31.716Z",
+  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
+  "recordedAt": "2026-10-15T04:40:12.966Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -27,10 +27,12 @@
   "sceneSeed": 1,
   "fixtures": {
     "tests/fixtures/p3d/scene.jpg": {
+      "synthetic": true,
       "bytes": 1835,
       "sha256": "0d5fd4f8ed0a39c86573ca7194a38a710f45e66252785e8e5813ceac3f81645b"
     },
     "tests/fixtures/psv3/silent.webm": {
+      "synthetic": true,
       "bytes": 28808,
       "sha256": "eaed57b71acf72629ec41e21b08bb67ccbf2aa36b7d0613d45d41c87422eab42"
     }
@@ -53,13 +55,13 @@
     "httpErrors": []
   },
   "recipient": {
-    "url": "http://127.0.0.1:4173/#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_VvJ5t6uWmnFVffgolErVQzwpgd4b6AnttBUPTa8PaioNO8HeYcBeIBDvPkiImX57JVcfsYz2dhjPaFxfJd3s8-HKnueubUrvpo8CpsHn-ecrik5TrtQDj3D6V2KDa74LrsyiPu6SAOzqQQOzZCUSlyPI_nCLxd4WGcl_o5F3sQwISl7ZbUpzVe7en9E_93qKJJFQOZHfcQV2V6wIG1zQpSlWuhDrkzn7ov1oV0Oog0fMEq2uCMTpzfJfFy2jbkRN9nuAtRxucf-PdiHiVi1gmb4XMFEb_A-4s8X-q2hQQsNV9vAUQCg86vmXgQZJwDvpatWwhnrRQ4QzCjEart1qkt_ouWBwGIp-JqwfzlJgetX1Xpf5D94y32d-BcsaJPnii9aKZU96GBz-ybI2E_fUspwoPFDAdn3HIBXjNqstWcMZkQ2bAmBu4KJdCSksi6fJb4T5YxiyWQ0_jdkhy6yzdCk_dtsk5v6N8XsDW4E6QWD64l3HkMAT0chbIy9ONefuymlQwPG3zJ_ejMrGqZrn9quA5D9aM_RjHIfyWGLXJ-5jG7W6ZLoBGHx9lH1yypTlaRL_eqJTfsvQiLfz1ev0L",
+    "url": "http://127.0.0.1:4173/#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_Vsl4u6_mq_LLZ_BRKJGqhnhXA7gz1BfbaCoam14a1FQed4O8w4S4QCXaeJUVMvjyTq47Zx3o6DWe0Ly6S7_Z48OVOc9c3pXbTR4FTYfP885TFJynXawHGuX0qsUG13wXXZ1Eed0kBd3QggdizE4hKkeV_OEXi7woN5b7QybvYhwQkLm23pDir925P6Z_6vUUTSagcyO64g7oq1wUMrmlSlKpcCXXInf3Qf7UqoNVBoucJVtcEY3Tm-C6Ll9G2Iyf6PMFbjjY4_8a7EfEqF7FM3gqZKYz-B9xZ4v9UtSkgYKv7eAsgFB50fMvAgyThHPS1atlCPGmhwhmEGY1Wb7VIb_VdsDgMRD4TVw_mKTE9avuuSv2H7hlvs78D5YwTffBE60Uzp7wND35k2RoJ--tZThUeKGA6PuOQC_CaVZet4IzJhsyAMTdwUS6FlJZE0uW3wn2wjFksh57G7ZDk1lm6FZ66bZNzfkf5vICtwZ0gsXxwL-PIYQjo5SyQl6cb8_ZlNalgeNrmT-5HZWJVzXL7VcFzHqwZ-zGOQ_gtMWqT9zGN290yXQCNPj7KPrhkS3O0iH69USm_ZelFWvjr9foX",
     "localFile": false,
     "fileBytesIncluded": false,
     "fixtureDescriptor": null,
     "linkFileMetadata": {},
     "sender": {
-      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_VvJ5t6uWmnFVffgolErVQzwpgd4b6AnttBUPTa8PaioNO8HeYcBeIBDvPkiImX57JVcfsYz2dhjPaFxfJd3s8-HKnueubUrvpo8CpsHn-ecrik5TrtQDj3D6V2KDa74LrsyiPu6SAOzqQQOzZCUSlyPI_nCLxd4WGcl_o5F3sQwISl7ZbUpzVe7en9E_93qKJJFQOZHfcQV2V6wIG1zQpSlWuhDrkzn7ov1oV0Oog0fMEq2uCMTpzfJfFy2jbkRN9nuAtRxucf-PdiHiVi1gmb4XMFEb_A-4s8X-q2hQQsNV9vAUQCg86vmXgQZJwDvpatWwhnrRQ4QzCjEart1qkt_ouWBwGIp-JqwfzlJgetX1Xpf5D94y32d-BcsaJPnii9aKZU96GBz-ybI2E_fUspwoPFDAdn3HIBXjNqstWcMZkQ2bAmBu4KJdCSksi6fJb4T5YxiyWQ0_jdkhy6yzdCk_dtsk5v6N8XsDW4E6QWD64l3HkMAT0chbIy9ONefuymlQwPG3zJ_ejMrGqZrn9quA5D9aM_RjHIfyWGLXJ-5jG7W6ZLoBGHx9lH1yypTlaRL_eqJTfsvQiLfz1ev0L",
+      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_Vsl4u6_mq_LLZ_BRKJGqhnhXA7gz1BfbaCoam14a1FQed4O8w4S4QCXaeJUVMvjyTq47Zx3o6DWe0Ly6S7_Z48OVOc9c3pXbTR4FTYfP885TFJynXawHGuX0qsUG13wXXZ1Eed0kBd3QggdizE4hKkeV_OEXi7woN5b7QybvYhwQkLm23pDir925P6Z_6vUUTSagcyO64g7oq1wUMrmlSlKpcCXXInf3Qf7UqoNVBoucJVtcEY3Tm-C6Ll9G2Iyf6PMFbjjY4_8a7EfEqF7FM3gqZKYz-B9xZ4v9UtSkgYKv7eAsgFB50fMvAgyThHPS1atlCPGmhwhmEGY1Wb7VIb_VdsDgMRD4TVw_mKTE9avuuSv2H7hlvs78D5YwTffBE60Uzp7wND35k2RoJ--tZThUeKGA6PuOQC_CaVZet4IzJhsyAMTdwUS6FlJZE0uW3wn2wjFksh57G7ZDk1lm6FZ66bZNzfkf5vICtwZ0gsXxwL-PIYQjo5SyQl6cb8_ZlNalgeNrmT-5HZWJVzXL7VcFzHqwZ-zGOQ_gtMWqT9zGN290yXQCNPj7KPrhkS3O0iH69USm_ZelFWvjr9foX",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-three",
@@ -80,7 +82,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T02:17:47.127Z",
+        "createdAt": "2026-10-15T04:44:25.894Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -195,17 +197,18 @@
         "session": {}
       },
       "input": "Three codes in oneRed codeGreen codeBlue codeMake the codesRead all threeEach module's red, green and blue come from three different QR codes, so one square holds three codes: eight colors from white to black. Splashery's reader splits the picture into its red, green and blue and reads each one. An ordinary reader sees only the gray of each module, most of it from green. Tap the square to pull the three codes apart and back.Open a file…",
+      "statusText": "Three QR codes in one · 128k splats",
       "visibleText": "Skip to controls\nSplashery\n\nThree QR codes in one · 128k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nLink copied.",
       "toast": {
         "text": "Link copied.",
         "visible": true
       },
       "linkNote": "",
-      "stageUpdateTicks": 86,
+      "stageUpdateTicks": 88,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 1806.5,
-        "navigationToFirstFrameMs": 4525.100000000093,
-        "stageUpdateTicks": 22
+        "chooseToyToFirstFrameMs": 1390.0999999996275,
+        "navigationToFirstFrameMs": 3939.5999999996275,
+        "stageUpdateTicks": 23
       },
       "controls": {
         "apart": 0
@@ -215,7 +218,7 @@
       }
     },
     "recipient": {
-      "url": "http://127.0.0.1:4173/#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_VvJ5t6uWmnFVffgolErVQzwpgd4b6AnttBUPTa8PaioNO8HeYcBeIBDvPkiImX57JVcfsYz2dhjPaFxfJd3s8-HKnueubUrvpo8CpsHn-ecrik5TrtQDj3D6V2KDa74LrsyiPu6SAOzqQQOzZCUSlyPI_nCLxd4WGcl_o5F3sQwISl7ZbUpzVe7en9E_93qKJJFQOZHfcQV2V6wIG1zQpSlWuhDrkzn7ov1oV0Oog0fMEq2uCMTpzfJfFy2jbkRN9nuAtRxucf-PdiHiVi1gmb4XMFEb_A-4s8X-q2hQQsNV9vAUQCg86vmXgQZJwDvpatWwhnrRQ4QzCjEart1qkt_ouWBwGIp-JqwfzlJgetX1Xpf5D94y32d-BcsaJPnii9aKZU96GBz-ybI2E_fUspwoPFDAdn3HIBXjNqstWcMZkQ2bAmBu4KJdCSksi6fJb4T5YxiyWQ0_jdkhy6yzdCk_dtsk5v6N8XsDW4E6QWD64l3HkMAT0chbIy9ONefuymlQwPG3zJ_ejMrGqZrn9quA5D9aM_RjHIfyWGLXJ-5jG7W6ZLoBGHx9lH1yypTlaRL_eqJTfsvQiLfz1ev0L",
+      "url": "http://127.0.0.1:4173/#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_Vsl4u6_mq_LLZ_BRKJGqhnhXA7gz1BfbaCoam14a1FQed4O8w4S4QCXaeJUVMvjyTq47Zx3o6DWe0Ly6S7_Z48OVOc9c3pXbTR4FTYfP885TFJynXawHGuX0qsUG13wXXZ1Eed0kBd3QggdizE4hKkeV_OEXi7woN5b7QybvYhwQkLm23pDir925P6Z_6vUUTSagcyO64g7oq1wUMrmlSlKpcCXXInf3Qf7UqoNVBoucJVtcEY3Tm-C6Ll9G2Iyf6PMFbjjY4_8a7EfEqF7FM3gqZKYz-B9xZ4v9UtSkgYKv7eAsgFB50fMvAgyThHPS1atlCPGmhwhmEGY1Wb7VIb_VdsDgMRD4TVw_mKTE9avuuSv2H7hlvs78D5YwTffBE60Uzp7wND35k2RoJ--tZThUeKGA6PuOQC_CaVZet4IzJhsyAMTdwUS6FlJZE0uW3wn2wjFksh57G7ZDk1lm6FZ66bZNzfkf5vICtwZ0gsXxwL-PIYQjo5SyQl6cb8_ZlNalgeNrmT-5HZWJVzXL7VcFzHqwZ-zGOQ_gtMWqT9zGN290yXQCNPj7KPrhkS3O0iH69USm_ZelFWvjr9foX",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-three",
@@ -236,7 +239,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T02:18:02.265Z",
+        "createdAt": "2026-10-15T04:44:36.405Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -349,13 +352,14 @@
         "session": {}
       },
       "input": "Three codes in oneRed codeGreen codeBlue codeMake the codesRead all threeEach module's red, green and blue come from three different QR codes, so one square holds three codes: eight colors from white to black. Splashery's reader splits the picture into its red, green and blue and reads each one. An ordinary reader sees only the gray of each module, most of it from green. Tap the square to pull the three codes apart and back.Open a file…",
+      "statusText": "Three QR codes in one · 181k splats",
       "visibleText": "Skip to controls\nSplashery\n\nThree QR codes in one · 181k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nPeriodic table\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore",
       "toast": {
         "text": "",
         "visible": false
       },
       "linkNote": "",
-      "stageUpdateTicks": 9,
+      "stageUpdateTicks": 11,
       "controls": {
         "apart": 0
       },
@@ -371,13 +375,13 @@
     }
   },
   "actual": {
-    "url": "http://127.0.0.1:4173/#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_VvJ5t6uWmnFVffgolErVQzwpgd4b6AnttBUPTa8PaioNO8HeYcBeIBDvPkiImX57JVcfsYz2dhjPaFxfJd3s8-HKnueubUrvpo8CpsHn-ecrik5TrtQDj3D6V2KDa74LrsyiPu6SAOzqQQOzZCUSlyPI_nCLxd4WGcl_o5F3sQwISl7ZbUpzVe7en9E_93qKJJFQOZHfcQV2V6wIG1zQpSlWuhDrkzn7ov1oV0Oog0fMEq2uCMTpzfJfFy2jbkRN9nuAtRxucf-PdiHiVi1gmb4XMFEb_A-4s8X-q2hQQsNV9vAUQCg86vmXgQZJwDvpatWwhnrRQ4QzCjEart1qkt_ouWBwGIp-JqwfzlJgetX1Xpf5D94y32d-BcsaJPnii9aKZU96GBz-ybI2E_fUspwoPFDAdn3HIBXjNqstWcMZkQ2bAmBu4KJdCSksi6fJb4T5YxiyWQ0_jdkhy6yzdCk_dtsk5v6N8XsDW4E6QWD64l3HkMAT0chbIy9ONefuymlQwPG3zJ_ejMrGqZrn9quA5D9aM_RjHIfyWGLXJ-5jG7W6ZLoBGHx9lH1yypTlaRL_eqJTfsvQiLfz1ev0L",
+    "url": "http://127.0.0.1:4173/#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_Vsl4u6_mq_LLZ_BRKJGqhnhXA7gz1BfbaCoam14a1FQed4O8w4S4QCXaeJUVMvjyTq47Zx3o6DWe0Ly6S7_Z48OVOc9c3pXbTR4FTYfP885TFJynXawHGuX0qsUG13wXXZ1Eed0kBd3QggdizE4hKkeV_OEXi7woN5b7QybvYhwQkLm23pDir925P6Z_6vUUTSagcyO64g7oq1wUMrmlSlKpcCXXInf3Qf7UqoNVBoucJVtcEY3Tm-C6Ll9G2Iyf6PMFbjjY4_8a7EfEqF7FM3gqZKYz-B9xZ4v9UtSkgYKv7eAsgFB50fMvAgyThHPS1atlCPGmhwhmEGY1Wb7VIb_VdsDgMRD4TVw_mKTE9avuuSv2H7hlvs78D5YwTffBE60Uzp7wND35k2RoJ--tZThUeKGA6PuOQC_CaVZet4IzJhsyAMTdwUS6FlJZE0uW3wn2wjFksh57G7ZDk1lm6FZ66bZNzfkf5vICtwZ0gsXxwL-PIYQjo5SyQl6cb8_ZlNalgeNrmT-5HZWJVzXL7VcFzHqwZ-zGOQ_gtMWqT9zGN290yXQCNPj7KPrhkS3O0iH69USm_ZelFWvjr9foX",
     "localFile": false,
     "fileBytesIncluded": false,
     "fixtureDescriptor": null,
     "linkFileMetadata": {},
     "sender": {
-      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_VvJ5t6uWmnFVffgolErVQzwpgd4b6AnttBUPTa8PaioNO8HeYcBeIBDvPkiImX57JVcfsYz2dhjPaFxfJd3s8-HKnueubUrvpo8CpsHn-ecrik5TrtQDj3D6V2KDa74LrsyiPu6SAOzqQQOzZCUSlyPI_nCLxd4WGcl_o5F3sQwISl7ZbUpzVe7en9E_93qKJJFQOZHfcQV2V6wIG1zQpSlWuhDrkzn7ov1oV0Oog0fMEq2uCMTpzfJfFy2jbkRN9nuAtRxucf-PdiHiVi1gmb4XMFEb_A-4s8X-q2hQQsNV9vAUQCg86vmXgQZJwDvpatWwhnrRQ4QzCjEart1qkt_ouWBwGIp-JqwfzlJgetX1Xpf5D94y32d-BcsaJPnii9aKZU96GBz-ybI2E_fUspwoPFDAdn3HIBXjNqstWcMZkQ2bAmBu4KJdCSksi6fJb4T5YxiyWQ0_jdkhy6yzdCk_dtsk5v6N8XsDW4E6QWD64l3HkMAT0chbIy9ONefuymlQwPG3zJ_ejMrGqZrn9quA5D9aM_RjHIfyWGLXJ-5jG7W6ZLoBGHx9lH1yypTlaRL_eqJTfsvQiLfz1ev0L",
+      "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_Vsl4u6_mq_LLZ_BRKJGqhnhXA7gz1BfbaCoam14a1FQed4O8w4S4QCXaeJUVMvjyTq47Zx3o6DWe0Ly6S7_Z48OVOc9c3pXbTR4FTYfP885TFJynXawHGuX0qsUG13wXXZ1Eed0kBd3QggdizE4hKkeV_OEXi7woN5b7QybvYhwQkLm23pDir925P6Z_6vUUTSagcyO64g7oq1wUMrmlSlKpcCXXInf3Qf7UqoNVBoucJVtcEY3Tm-C6Ll9G2Iyf6PMFbjjY4_8a7EfEqF7FM3gqZKYz-B9xZ4v9UtSkgYKv7eAsgFB50fMvAgyThHPS1atlCPGmhwhmEGY1Wb7VIb_VdsDgMRD4TVw_mKTE9avuuSv2H7hlvs78D5YwTffBE60Uzp7wND35k2RoJ--tZThUeKGA6PuOQC_CaVZet4IzJhsyAMTdwUS6FlJZE0uW3wn2wjFksh57G7ZDk1lm6FZ66bZNzfkf5vICtwZ0gsXxwL-PIYQjo5SyQl6cb8_ZlNalgeNrmT-5HZWJVzXL7VcFzHqwZ-zGOQ_gtMWqT9zGN290yXQCNPj7KPrhkS3O0iH69USm_ZelFWvjr9foX",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-three",
@@ -398,7 +402,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T02:17:47.127Z",
+        "createdAt": "2026-10-15T04:44:25.894Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -513,17 +517,18 @@
         "session": {}
       },
       "input": "Three codes in oneRed codeGreen codeBlue codeMake the codesRead all threeEach module's red, green and blue come from three different QR codes, so one square holds three codes: eight colors from white to black. Splashery's reader splits the picture into its red, green and blue and reads each one. An ordinary reader sees only the gray of each module, most of it from green. Tap the square to pull the three codes apart and back.Open a file…",
+      "statusText": "Three QR codes in one · 128k splats",
       "visibleText": "Skip to controls\nSplashery\n\nThree QR codes in one · 128k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nLink copied.",
       "toast": {
         "text": "Link copied.",
         "visible": true
       },
       "linkNote": "",
-      "stageUpdateTicks": 86,
+      "stageUpdateTicks": 88,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 1806.5,
-        "navigationToFirstFrameMs": 4525.100000000093,
-        "stageUpdateTicks": 22
+        "chooseToyToFirstFrameMs": 1390.0999999996275,
+        "navigationToFirstFrameMs": 3939.5999999996275,
+        "stageUpdateTicks": 23
       },
       "controls": {
         "apart": 0
@@ -533,7 +538,7 @@
       }
     },
     "recipient": {
-      "url": "http://127.0.0.1:4173/#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_VvJ5t6uWmnFVffgolErVQzwpgd4b6AnttBUPTa8PaioNO8HeYcBeIBDvPkiImX57JVcfsYz2dhjPaFxfJd3s8-HKnueubUrvpo8CpsHn-ecrik5TrtQDj3D6V2KDa74LrsyiPu6SAOzqQQOzZCUSlyPI_nCLxd4WGcl_o5F3sQwISl7ZbUpzVe7en9E_93qKJJFQOZHfcQV2V6wIG1zQpSlWuhDrkzn7ov1oV0Oog0fMEq2uCMTpzfJfFy2jbkRN9nuAtRxucf-PdiHiVi1gmb4XMFEb_A-4s8X-q2hQQsNV9vAUQCg86vmXgQZJwDvpatWwhnrRQ4QzCjEart1qkt_ouWBwGIp-JqwfzlJgetX1Xpf5D94y32d-BcsaJPnii9aKZU96GBz-ybI2E_fUspwoPFDAdn3HIBXjNqstWcMZkQ2bAmBu4KJdCSksi6fJb4T5YxiyWQ0_jdkhy6yzdCk_dtsk5v6N8XsDW4E6QWD64l3HkMAT0chbIy9ONefuymlQwPG3zJ_ejMrGqZrn9quA5D9aM_RjHIfyWGLXJ-5jG7W6ZLoBGHx9lH1yypTlaRL_eqJTfsvQiLfz1ev0L",
+      "url": "http://127.0.0.1:4173/#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_Vsl4u6_mq_LLZ_BRKJGqhnhXA7gz1BfbaCoam14a1FQed4O8w4S4QCXaeJUVMvjyTq47Zx3o6DWe0Ly6S7_Z48OVOc9c3pXbTR4FTYfP885TFJynXawHGuX0qsUG13wXXZ1Eed0kBd3QggdizE4hKkeV_OEXi7woN5b7QybvYhwQkLm23pDir925P6Z_6vUUTSagcyO64g7oq1wUMrmlSlKpcCXXInf3Qf7UqoNVBoucJVtcEY3Tm-C6Ll9G2Iyf6PMFbjjY4_8a7EfEqF7FM3gqZKYz-B9xZ4v9UtSkgYKv7eAsgFB50fMvAgyThHPS1atlCPGmhwhmEGY1Wb7VIb_VdsDgMRD4TVw_mKTE9avuuSv2H7hlvs78D5YwTffBE60Uzp7wND35k2RoJ--tZThUeKGA6PuOQC_CaVZet4IzJhsyAMTdwUS6FlJZE0uW3wn2wjFksh57G7ZDk1lm6FZ66bZNzfkf5vICtwZ0gsXxwL-PIYQjo5SyQl6cb8_ZlNalgeNrmT-5HZWJVzXL7VcFzHqwZ-zGOQ_gtMWqT9zGN290yXQCNPj7KPrhkS3O0iH69USm_ZelFWvjr9foX",
       "title": "Splashery · splats you can play with",
       "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
       "toyId": "qr-three",
@@ -554,7 +559,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T02:18:02.265Z",
+        "createdAt": "2026-10-15T04:44:36.405Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -667,13 +672,14 @@
         "session": {}
       },
       "input": "Three codes in oneRed codeGreen codeBlue codeMake the codesRead all threeEach module's red, green and blue come from three different QR codes, so one square holds three codes: eight colors from white to black. Splashery's reader splits the picture into its red, green and blue and reads each one. An ordinary reader sees only the gray of each module, most of it from green. Tap the square to pull the three codes apart and back.Open a file…",
+      "statusText": "Three QR codes in one · 181k splats",
       "visibleText": "Skip to controls\nSplashery\n\nThree QR codes in one · 181k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nPeriodic table\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore",
       "toast": {
         "text": "",
         "visible": false
       },
       "linkNote": "",
-      "stageUpdateTicks": 9,
+      "stageUpdateTicks": 11,
       "controls": {
         "apart": 0
       },
@@ -688,7 +694,7 @@
       "httpErrors": []
     }
   },
-  "durationMs": 16796,
+  "durationMs": 12049,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -696,7 +702,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_VvJ5t6uWmnFVffgolErVQzwpgd4b6AnttBUPTa8PaioNO8HeYcBeIBDvPkiImX57JVcfsYz2dhjPaFxfJd3s8-HKnueubUrvpo8CpsHn-ecrik5TrtQDj3D6V2KDa74LrsyiPu6SAOzqQQOzZCUSlyPI_nCLxd4WGcl_o5F3sQwISl7ZbUpzVe7en9E_93qKJJFQOZHfcQV2V6wIG1zQpSlWuhDrkzn7ov1oV0Oog0fMEq2uCMTpzfJfFy2jbkRN9nuAtRxucf-PdiHiVi1gmb4XMFEb_A-4s8X-q2hQQsNV9vAUQCg86vmXgQZJwDvpatWwhnrRQ4QzCjEart1qkt_ouWBwGIp-JqwfzlJgetX1Xpf5D94y32d-BcsaJPnii9aKZU96GBz-ybI2E_fUspwoPFDAdn3HIBXjNqstWcMZkQ2bAmBu4KJdCSksi6fJb4T5YxiyWQ0_jdkhy6yzdCk_dtsk5v6N8XsDW4E6QWD64l3HkMAT0chbIy9ONefuymlQwPG3zJ_ejMrGqZrn9quA5D9aM_RjHIfyWGLXJ-5jG7W6ZLoBGHx9lH1yypTlaRL_eqJTfsvQiLfz1ev0L",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.lVPLctswDPwX5CrL8rvVrd_QntrJAaJgizFNsiRk2fX43wvSlptJJp2JLsKSWAALgBdA76GG6A3GjsIZCjhSiNpZqBcFqEDI1H5j8ZlX8_VkVk1mqx_Vsl4u6_mq_LLZ_BRKJGqhnhXA7gz1BfbaCoam14a1FQed4O8w4S4QCXaeJUVMvjyTq47Zx3o6DWe0Ly6S7_Z48OVOc9c3pXbTR4FTYfP885TFJynXawHGuX0qsUG13wXXZ1Eed0kBd3QggdizE4hKkeV_OEXi7woN5b7QybvYhwQkLm23pDir925P6Z_6vUUTSagcyO64g7oq1wUMrmlSlKpcCXXInf3Qf7UqoNVBoucJVtcEY3Tm-C6Ll9G2Iyf6PMFbjjY4_8a7EfEqF7FM3gqZKYz-B9xZ4v9UtSkgYKv7eAsgFB50fMvAgyThHPS1atlCPGmhwhmEGY1Wb7VIb_VdsDgMRD4TVw_mKTE9avuuSv2H7hlvs78D5YwTffBE60Uzp7wND35k2RoJ--tZThUeKGA6PuOQC_CaVZet4IzJhsyAMTdwUS6FlJZE0uW3wn2wjFksh57G7ZDk1lm6FZ66bZNzfkf5vICtwZ0gsXxwL-PIYQjo5SyQl6cb8_ZlNalgeNrmT-5HZWJVzXL7VcFzHqwZ-zGOQ_gtMWqT9zGN290yXQCNPj7KPrhkS3O0iH69USm_ZelFWvjr9foX",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "qr-three",
@@ -717,7 +723,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T02:18:03.953Z",
+      "createdAt": "2026-10-15T04:44:38.064Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -832,17 +838,18 @@
       "session": {}
     },
     "input": "Three codes in oneRed codeGreen codeBlue codeMake the codesRead all threeEach module's red, green and blue come from three different QR codes, so one square holds three codes: eight colors from white to black. Splashery's reader splits the picture into its red, green and blue and reads each one. An ordinary reader sees only the gray of each module, most of it from green. Tap the square to pull the three codes apart and back.Open a file…",
+    "statusText": "Three QR codes in one · 128k splats",
     "visibleText": "Skip to controls\nSplashery\n\nThree QR codes in one · 128k splats\n\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nLink copied.",
     "toast": {
       "text": "Link copied.",
       "visible": false
     },
     "linkNote": "",
-    "stageUpdateTicks": 174,
+    "stageUpdateTicks": 154,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 1806.5,
-      "navigationToFirstFrameMs": 4525.100000000093,
-      "stageUpdateTicks": 22
+      "chooseToyToFirstFrameMs": 1390.0999999996275,
+      "navigationToFirstFrameMs": 3939.5999999996275,
+      "stageUpdateTicks": 23
     },
     "controls": {
       "apart": 0
