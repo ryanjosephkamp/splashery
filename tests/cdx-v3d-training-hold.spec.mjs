@@ -77,3 +77,71 @@ test("Finish now retains its GPU hold, and leaving releases it before cleanup se
   });
   expect(await page.evaluate(() => window.activeHolds)).toBe(0);
 });
+
+test("retrying the same file clears the previous failure while new training is pending", async ({
+  page,
+}) => {
+  await page.route("**/tests/fixtures/v3d/", (route) =>
+    route.fulfill({
+      contentType: "text/html",
+      body: '<!doctype html><script type="importmap">{"imports":{"gifenc":"/vendor/gifenc/gifenc.esm.js"}}</script>',
+    }),
+  );
+  await page.route("**/src/video3d/suitability.js", (route) =>
+    route.fulfill({
+      contentType: "text/javascript",
+      body: 'export const checkVideo=async()=>({duration:8,checked:true,verdict:"promising",message:"Checked",reasons:[]});',
+    }),
+  );
+  await page.route("**/src/video3d/run.js", (route) =>
+    route.fulfill({
+      contentType: "text/javascript",
+      body: `export const webgpuStatus=async()=>({ok:true}), isPhone=()=>false, estimateMinutes=()=>[1,2];
+    export async function videoTo3D(file,opts){
+      window.trainingAttempt=(window.trainingAttempt||0)+1;
+      if(window.trainingAttempt===1)throw Error('First training failed. Try again.');
+      opts.onProgress({stage:'train',done:0,total:1200});
+      await new Promise(resolve=>window.retryDrain=resolve);
+      throw new DOMException('Stopped','AbortError');
+    }`,
+    }),
+  );
+  await page.goto("/tests/fixtures/v3d/");
+  await page.evaluate(async () => {
+    window.__v3dSettings = {};
+    const options = { source: "custom", start: "0", length: "10", rate: "3", setting: "phone" };
+    window.__splashery = {
+      player: {
+        loadToken: 1,
+        profile: "low",
+        paused: false,
+        scene: { toy: { id: "video-3d", options } },
+        setPaused(v) {
+          this.paused = !!v;
+        },
+      },
+    };
+    const { openVideoFile, RECIPES, video3dState } = await import("/src/packs/video3d.js");
+    await openVideoFile(new File(["mock video"], "clip.webm", { type: "video/webm" }), "clip");
+    await RECIPES["video-3d"].prepare(options);
+    window.firstFailure = video3dState().error;
+    window.retryPending = RECIPES["video-3d"].prepare(options);
+  });
+  await expect.poll(() => page.evaluate(() => typeof window.retryDrain)).toBe("function");
+  const state = await page.evaluate(async () => ({
+    first: window.firstFailure,
+    error: (await import("/src/packs/video3d.js")).video3dState().error,
+    diagnostic: document.querySelector("#v3d-card .v3d-err").textContent,
+    diagnosticHidden: document.querySelector("#v3d-card .v3d-err").hidden,
+  }));
+  expect(state).toEqual({
+    first: "First training failed. Try again.",
+    error: "",
+    diagnostic: "",
+    diagnosticHidden: true,
+  });
+  await page.evaluate(async () => {
+    window.retryDrain();
+    await window.retryPending;
+  });
+});

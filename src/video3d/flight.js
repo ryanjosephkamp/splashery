@@ -151,7 +151,10 @@ export function makeFlight(cams, media, { isCurrent = () => true, background = n
           (!owner.scene?.toy || owner.scene.toy.id === "video-3d")));
     if (belongs && owner?.stage && !backgroundStage) {
       backgroundStage = owner.stage;
-      releaseBackground = holdTrainingBackground(backgroundStage, background);
+      releaseBackground = holdTrainingBackground(backgroundStage, background, {
+        // The owner/generation check also applies before the disposal timer notices a new scene.
+        readBackground: () => (current() ? owner.scene?.look?.background : null),
+      });
     }
     return belongs;
   };

@@ -199,6 +199,7 @@ async function trainVideo(o, key) {
     card = progressCard();
     if (!current()) return null;
     card.reset(`${V3D.videoName}: ${o.length} s from ${o.start} s`);
+    V3D.error = "";
     const { checkVideo } = await import("../video3d/suitability.js");
     const checkKey = `${V3D.fileUid}/${o.start}/${o.length}`;
     if (V3D.checkKey !== checkKey) {

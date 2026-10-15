@@ -144,6 +144,7 @@ export function progressCard() {
       assessment.hidden = true;
       guide.hidden = true;
       err.hidden = true;
+      err.textContent = "";
       stats.hidden = true;
       stats.replaceChildren();
       buttons.replaceChildren();

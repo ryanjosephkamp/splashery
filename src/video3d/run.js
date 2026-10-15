@@ -174,7 +174,7 @@ export async function videoTo3D(file, opts = {}) {
     // the scene. Keep every point, with robust bounds for initial scales and learning rates.
     robustSeedBounds: true,
     evalHoldEvery: 1e9,
-    sfm: { uiYield: true, ...(gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}) }, // prettier-ignore
+    sfm: { uiYield: true, ...(software ? { maxPairsPerChunk: 4 } : {}), ...(gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}) }, // prettier-ignore
     // Both sorts use the same unsigned depth/id order. A software adapter avoids emulating
     // the parallel bitonic network's barriers; hardware keeps the established parallel path.
     trainer: { shDeg: 0, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true, tileGrad: false } : {}) }, // prettier-ignore
@@ -299,6 +299,12 @@ export async function videoTo3D(file, opts = {}) {
         resolve();
       };
       s.on("event", (e) => {
+        if (e.kind === "train-error") {
+          trainingError = new Error(
+            "The graphics card could not continue training. Try the Phone-safe setting, or a shorter stretch.",
+          );
+          end();
+        }
         if (e.kind === "train-complete" || e.kind === "device-lost") end();
       });
       // Stop keeps what has been trained so far: training finishes early and the splats export.
