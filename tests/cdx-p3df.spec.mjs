@@ -95,11 +95,36 @@ test("reveal coverage counts actual unfilled mask pixels, with foreground exclud
     data = new Uint8Array(4 * 4 * 4),
     mask = { width: 4, height: 4, data };
   expect([...rasterQuads(quad, 4, 4)].reduce((a, b) => a + b, 0)).toBe(16);
-  expect(coverage(mask, quad).holeFraction).toBe(1);
+  expect(coverage(mask, quad, quad[0]).holeFraction).toBe(1);
   for (let i = 0; i < 16; i++) data[i * 4 + 1] = 128;
-  expect(coverage(mask, quad).holeFraction).toBe(0);
+  expect(coverage(mask, quad, quad[0]).holeFraction).toBe(0);
   for (let i = 0; i < 16; i++) data[i * 4 + 1] = 64;
-  expect(coverage(mask, quad).holeFraction).toBeNull();
+  expect(coverage(mask, quad, quad[0]).holeFraction).toBeNull();
+});
+
+test("candidate slabs outside the photo are not counted as holes", () => {
+  const w = 8,
+    data = new Uint8Array(w * w * 4),
+    mask = { width: w, height: w, data };
+  const slab = [
+      [
+        [0, 0, 1],
+        [8, 0, 1],
+        [8, 8, 1],
+        [0, 8, 1],
+      ],
+    ],
+    border = [
+      [2, 2],
+      [6, 2],
+      [6, 6],
+      [2, 6],
+    ];
+  for (let y = 2; y < 6; y++) for (let x = 2; x < 6; x++) data[(y * w + x) * 4 + 1] = 128;
+  expect(coverage(mask, slab, border).holeFraction).toBe(0);
+  data[(3 * w + 3) * 4 + 1] = 0;
+  expect(coverage(mask, slab, border).holeFraction).toBeGreaterThan(0);
+  expect(() => coverage(mask, slab)).toThrow("boundary is required");
 });
 
 test("thin profiles penalize blur and record vanished parts separately", () => {

@@ -415,6 +415,12 @@ export async function measureProfile(
       png(path.join(folder, file), actual);
       const artifacts = {};
       artifacts["renders/" + file] = hash(fs.readFileSync(path.join(folder, file)));
+      const boundaryFile = `renders/${prefix}-${yaw}-${pitch}-boundary.json.gz`;
+      fs.writeFileSync(
+        path.join(out, boundaryFile),
+        zlib.gzipSync(JSON.stringify(color.corners), { level: 3 }),
+      );
+      artifacts[boundaryFile] = hash(fs.readFileSync(path.join(out, boundaryFile)));
       let scores = {};
       if (diagnostics) {
         const m = await poseR3(page, yaw, pitch, "mask", [0, 0, 0], 2),
@@ -445,7 +451,22 @@ export async function measureProfile(
           projectedThin,
           projectedReveal,
           source,
+          corners: color.corners,
         });
+        const reveal = {
+          width: mask.width,
+          height: mask.height,
+          data: Buffer.alloc(mask.width * mask.height * 4),
+        };
+        for (let i = 0; i < scores.holes.roi.length; i++) {
+          const v = scores.holes.roi[i];
+          if (v) reveal.data.set(v === 255 ? [255, 70, 70, 255] : [70, 150, 255, 255], i * 4);
+        }
+        const revealFile = `renders/${prefix}-${yaw}-${pitch}-reveal.png`;
+        png(path.join(out, revealFile), reveal);
+        artifacts[revealFile] = hash(fs.readFileSync(path.join(out, revealFile)));
+        // The atlas retains counts and the hashed PNG, not a native-size raster per pose.
+        scores.holes = { ...scores.holes };
       }
       rows.push({
         yaw,
@@ -455,7 +476,7 @@ export async function measureProfile(
         image: "renders/" + file,
         rgbaSha256: hash(actual.data),
         native: state.native,
-        corners: color.corners,
+        boundaryFile,
         artifacts,
       });
     }
@@ -472,7 +493,10 @@ export async function measureProfile(
     ])
       png(
         path.join(folder, `${prefix}-${label}-crop.png`),
-        crop(PNG.sync.read(fs.readFileSync(path.join(out, row.image))), row.corners),
+        crop(
+          PNG.sync.read(fs.readFileSync(path.join(out, row.image))),
+          JSON.parse(zlib.gunzipSync(fs.readFileSync(path.join(out, row.boundaryFile)))),
+        ),
       );
     const finite = (key) => samples.map((s) => s[key]).filter(Number.isFinite);
     const pss = finite("pssBytes"),

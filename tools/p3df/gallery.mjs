@@ -9,7 +9,13 @@ export function galleryHtml(data) {
       profiles: Object.fromEntries(
         Object.entries(e.profiles || {}).map(([k, p]) => [
           k,
-          { ...p, rows: undefined, memory: undefined },
+          {
+            ...p,
+            rows: undefined,
+            memoryAccounting:
+              p.memory?.peakPssBytes != null ? "Process-tree PSS" : "Process-tree RSS",
+            memory: undefined,
+          },
         ]),
       ),
     })),

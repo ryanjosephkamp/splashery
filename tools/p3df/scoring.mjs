@@ -175,23 +175,61 @@ export function rasterQuads(quads, w, h) {
   return mask;
 }
 
-export function coverage(mask, projected) {
-  const roi = rasterQuads(projected, mask.width, mask.height);
+export function footprint(corners, w, h) {
+  if (!corners?.length) throw new Error("The actual rendered photo boundary is required");
+  const result = new Uint8Array(w * h);
+  for (let y = 0; y < h; y++) {
+    const hits = [];
+    for (let i = 0; i < corners.length; i++) {
+      const a = corners[i],
+        b = corners[(i + 1) % corners.length];
+      if (a[1] > y + 0.5 !== b[1] > y + 0.5)
+        hits.push(a[0] + ((y + 0.5 - a[1]) * (b[0] - a[0])) / (b[1] - a[1]));
+    }
+    hits.sort((a, b) => a - b);
+    for (let i = 0; i + 1 < hits.length; i += 2)
+      for (let x = Math.max(0, Math.ceil(hits[i] - 0.5)); x < w && x + 0.5 < hits[i + 1]; x++)
+        result[y * w + x] = 1;
+  }
+  // A one-buffer-pixel inset excludes the paper silhouette's raster antialiasing.
+  return result.map((v, i) =>
+    v &&
+    i >= w &&
+    i < result.length - w &&
+    i % w > 0 &&
+    i % w < w - 1 &&
+    [i - 1, i + 1, i - w, i + w].every((j) => result[j])
+      ? 1
+      : 0,
+  );
+}
+
+export function coverage(mask, projected, corners) {
+  const roi = rasterQuads(projected, mask.width, mask.height),
+    inside = footprint(corners, mask.width, mask.height);
   let revealed = 0,
     holes = 0;
   for (let i = 0; i < roi.length; i++) {
     const c = mask.data[i * 4 + 1];
-    if (!roi[i] || (c >= 8 && c < 96)) continue;
+    if (!roi[i] || !inside[i] || (c >= 8 && c < 96)) {
+      roi[i] = 0;
+      continue;
+    }
     revealed++;
-    if (c < 8) holes++;
+    if (c < 8) {
+      holes++;
+      roi[i] = 255;
+    } else roi[i] = 64;
   }
-  return {
+  const result = {
     candidateRevealedPixels: revealed,
     uncoveredPixels: holes,
     holeFraction: revealed ? holes / revealed : null,
     definition:
-      "Projected strong-depth-cut slabs, excluding covered foreground; binary coverage >= 0.5. Not hidden-scene truth.",
+      "Projected strong-depth-cut slabs inside the actual photo footprint (one drawing-buffer pixel inset), excluding covered foreground; binary coverage >= 0.5. Not hidden-scene truth.",
   };
+  Object.defineProperty(result, "roi", { value: roi, enumerable: false });
+  return result;
 }
 
 export function poseScores({
@@ -207,12 +245,13 @@ export function poseScores({
   projectedThin,
   projectedReveal,
   source,
+  corners,
 }) {
   const classes = cohorts(mask, uv, field, minimum, ratio),
     streak = streakR4(color, classes);
   const halo = anchoredEdgesR3(color, projectedEdges, edges, source);
   const fringe = fringeR4(color, projectedThin, thin, ratio, { localBackground: true });
-  return { streak, holes: coverage(mask, projectedReveal), halo, fringe };
+  return { streak, holes: coverage(mask, projectedReveal, corners), halo, fringe };
 }
 
 export function metrics(row) {
