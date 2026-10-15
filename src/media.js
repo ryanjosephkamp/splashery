@@ -19,7 +19,8 @@
 // Lane Books r5: for a PDF, await m.links(i) -> page i's links, [{ box, url }
 // or { box, page }] (box [x0, y0, x1, y1] in fractions of the page from its
 // top-left corner; url only http:, https: or mailto:, page 0-based), and
-// await m.figures(i) -> the boxes its pictures are painted in, [{ box }].
+// await m.figures(i) -> the boxes its pictures are painted in, [{ box }]
+// (lane Polish: and its figures drawn as paths, a chart or a drawing).
 // m.draw(i, w, h, region) draws only `region` ([x0, y0, x1, y1], the same
 // fractions) of a PDF page or a picture into w x h.
 
@@ -517,6 +518,7 @@ export async function pdfLinks(doc, page, i) {
 // image paint fills the unit square of the transform in force. Boxes that
 // touch are joined (a picture painted in strips), tiny ones (an icon, a
 // bullet) are dropped, and so is one that covers the whole page (a scan).
+// Lane Polish: figures drawn as vector paths are found too (drawnFigures).
 export async function pdfFigures(OPS, page) {
   const viewport = page.getViewport({ scale: 1 });
   const list = await page.getOperatorList();
@@ -533,6 +535,7 @@ export async function pdfFigures(OPS, page) {
   let ctm = [1, 0, 0, 1, 0, 0];
   const stack = [];
   const boxes = [];
+  const drawn = []; // (lane Polish: drawn figures, [{ box, shape }])
   const { fnArray, argsArray } = list;
   for (let k = 0; k < fnArray.length; k++) {
     const fn = fnArray[k];
@@ -561,15 +564,171 @@ export async function pdfFigures(OPS, page) {
         const b = unitBox(mulM(ctm, it.transform));
         if (b) boxes.push(b);
       }
+    } else if (fn === OPS.constructPath && args) {
+      // Lane Polish: a path that is painted (filled or stroked; a clip alone
+      // paints nothing), as the box of its bounds, and whether it draws a
+      // shape (a curve or a slanted line) rather than only straight rules.
+      // (PDF.js 5 and on: [paint, [data], minMax].)
+      const mm = args[2];
+      if (typeof args[0] === "number" && args[0] !== OPS.endPath && mm?.length >= 4) {
+        const [x0, y0, x1, y1] = mm;
+        const box = [x0, y0, x1, y1].every(Number.isFinite) && drawnBox(viewport, [at(ctm, x0, y0), at(ctm, x1, y0), at(ctm, x0, y1), at(ctm, x1, y1)]); // prettier-ignore
+        if (box) drawn.push({ box, shape: drawnShape(args[1]?.[0], mm) });
+      }
     }
   }
+  const sized = (b) => {
+    const w = b[2] - b[0];
+    const h = b[3] - b[1];
+    return w * h >= 0.004 && w >= 0.04 && h >= 0.03 && w * h <= 0.9;
+  };
+  // (Lane Polish: and the figures drawn as paths, apart from the pictures.)
+  if (drawn.length && drawn.length <= DRAWN_MAX)
+    boxes.push(...(await drawnFigures(page, viewport, drawn, joinBoxes(boxes).filter(sized))));
   return joinBoxes(boxes)
-    .filter((b) => {
-      const w = b[2] - b[0];
-      const h = b[3] - b[1];
-      return w * h >= 0.004 && w >= 0.04 && h >= 0.03 && w * h <= 0.9;
-    })
+    .filter(sized)
     .map((box) => ({ box }));
+}
+
+// Lane Polish: figures drawn as vector paths (a chart, a diagram), which
+// have no picture to find. The painted paths that lie near each other make a
+// group; a group is a figure when it draws shapes (at least DRAWN_PARTS
+// paths, DRAWN_SHAPES of them curves or slanted lines of some size: a
+// chart's lines, a drawing's outlines, an ellipse), is mostly free of the
+// page's text, and holds no picture (the pictures are figures already). So a
+// table's rules, a rounded panel behind a paragraph, a table or a code
+// block, and bullets are not figures. Paths as big as most of the page (a
+// background) are left out. (The Picture lab's article: its Figure 1 chart.)
+const DRAWN_MAX = 4000; // more paths than this (a map, a drawing): no search
+const DRAWN_PARTS = 3;
+const DRAWN_SHAPES = 2;
+const DRAWN_TEXT = 0.25; // the most of a figure's area its text may cover
+function drawnBox(viewport, pts) {
+  const xs = [];
+  const ys = [];
+  for (const [x, y] of pts) {
+    const [vx, vy] = viewport.convertToViewportPoint(x, y);
+    xs.push(vx / viewport.width);
+    ys.push(vy / viewport.height);
+  }
+  const c = (v) => Math.max(0, Math.min(1, v));
+  // (A line has no width of its own: a hair's breadth, so lines that cross join.)
+  const p = 0.002;
+  const box = [c(Math.min(...xs) - p), c(Math.min(...ys) - p), c(Math.max(...xs) + p), c(Math.max(...ys) + p)]; // prettier-ignore
+  const w = box[2] - box[0];
+  const h = box[3] - box[1];
+  if (!(w > 1e-4 && h > 1e-4) || w * h > 0.6) return null;
+  return box;
+}
+// Whether a path's data (PDF.js's: 0 move, 1 line, 2 curve, 3 quadratic
+// curve, 4 close, each followed by its points; mm its bounds) draws a shape:
+// a slanted line, or curves that are more than a box's rounded corners (a
+// rounded box or a pill, straight sides with curves only in its corners, is
+// a panel).
+function drawnShape(d, [x0, y0, x1, y1]) {
+  if (!d?.length) return false;
+  const r = Math.min(x1 - x0, y1 - y0) / 2 + 1e-3;
+  // (Slanted pieces count when they are more than specks and a good part of
+  // the path: a dashed border's corners are a few tiny slanted dashes among
+  // many straight ones.)
+  const speck = 0.015 * Math.hypot(x1 - x0, y1 - y0);
+  const corner = (x, y) => Math.min(x - x0, x1 - x) <= r && Math.min(y - y0, y1 - y) <= r;
+  let x = 0;
+  let y = 0;
+  let curves = 0;
+  let round = 0;
+  let lines = 0;
+  let slant = 0;
+  for (let i = 0; i < d.length; ) {
+    const op = d[i];
+    if (op === 0 || op === 1) {
+      const nx = d[i + 1];
+      const ny = d[i + 2];
+      const dx = Math.abs(nx - x);
+      const dy = Math.abs(ny - y);
+      if (op === 1 && Math.min(dx, dy) > 0.05 * Math.max(dx, dy) && Math.hypot(dx, dy) > speck) slant++; // prettier-ignore
+      if (op === 1 && dx + dy > 0) lines++;
+      x = nx;
+      y = ny;
+      i += 3;
+    } else if (op === 2 || op === 3) {
+      i += op === 2 ? 7 : 5;
+      x = d[i - 2];
+      y = d[i - 1];
+      curves++;
+      if (corner(x, y)) round++;
+    } else if (op === 4) i += 1;
+    else return false;
+  }
+  if (lines && slant >= 0.25 * lines) return true;
+  return curves > 0 && !(lines >= 2 && round === curves);
+}
+async function drawnFigures(page, viewport, drawn, pictures) {
+  // Groups: paths whose boxes overlap or nearly touch, joined until none do.
+  const gap = 0.008;
+  const near = (A, B, g = gap) => !(A[0] - g > B[2] || B[0] - g > A[2] || A[1] - g > B[3] || B[1] - g > A[3]); // prettier-ignore
+  const big = (b) => Math.max(b[2] - b[0], b[3] - b[1]) > 0.02;
+  let groups = drawn.map((d) => ({ box: d.box.slice(), items: [d] }));
+  let joined = true;
+  while (joined) {
+    joined = false;
+    const out = [];
+    for (const g of groups) {
+      const o = out.find((q) => near(q.box, g.box));
+      if (!o) {
+        out.push(g);
+        continue;
+      }
+      const A = o.box;
+      const B = g.box;
+      o.box = [Math.min(A[0], B[0]), Math.min(A[1], B[1]), Math.max(A[2], B[2]), Math.max(A[3], B[3])]; // prettier-ignore
+      o.items.push(...g.items);
+      joined = true;
+    }
+    groups = out;
+  }
+  const area = (b) => (b[2] - b[0]) * (b[3] - b[1]);
+  groups = groups.filter(({ box: b, items }) => {
+    const w = b[2] - b[0];
+    const h = b[3] - b[1];
+    if (items.length < DRAWN_PARTS || w < 0.04 || h < 0.03 || w * h < 0.004) return false;
+    if (pictures.some((p) => near(p, b, 0))) return false;
+    // (A frame round the rest, a rounded panel behind a table, is no shape.)
+    const shapes = items.filter((d) => d.shape && big(d.box) && area(d.box) < 0.6 * w * h).length;
+    return shapes >= DRAWN_SHAPES;
+  });
+  if (!groups.length) return [];
+  // The page's text, as boxes.
+  let items = [];
+  try {
+    items = (await page.getTextContent()).items || [];
+  } catch {
+    items = [];
+  }
+  const text = [];
+  for (const it of items) {
+    const t = it?.transform;
+    if (!t || !(it.width > 0) || typeof it.str !== "string" || !it.str.trim()) continue;
+    const h = it.height > 0 ? it.height : Math.hypot(t[2], t[3]);
+    const b = pageBox(viewport, [
+      [t[4], t[5]],
+      [t[4] + it.width, t[5]],
+      [t[4], t[5] + h],
+      [t[4] + it.width, t[5] + h],
+    ]);
+    if (b) text.push(b);
+  }
+  return groups
+    .filter(({ box: g }) => {
+      let covered = 0;
+      for (const b of text) {
+        const w = Math.min(g[2], b[2]) - Math.max(g[0], b[0]);
+        const h = Math.min(g[3], b[3]) - Math.max(g[1], b[1]);
+        if (w > 0 && h > 0) covered += w * h;
+      }
+      return covered <= DRAWN_TEXT * (g[2] - g[0]) * (g[3] - g[1]);
+    })
+    .map((g) => g.box);
 }
 
 // Joins boxes that overlap or touch (within a hair), until none do.
