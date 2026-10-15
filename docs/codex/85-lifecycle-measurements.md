@@ -41,5 +41,6 @@ can't settle them; each needs a measurement. Measure first, and fix only what th
 
 Don't change how any toy looks or plays. American English and the serial comma. Before you push:
 `npx prettier --check .` and `node tools/us-english.mjs --diff` are clean, and your tests pass. The
-test suite on GitHub Actions runs on your PR and posts its result as a comment. PR body with
-Summary, Verification, Deviations, Known issues, and What was cut.
+test suite on GitHub Actions runs the quick checks on your PR; the full suite runs on the Operator's
+merge PR (or on yours when the Operator adds the `full-suite` label) and posts its result as a
+comment. PR body with Summary, Verification, Deviations, Known issues, and What was cut.

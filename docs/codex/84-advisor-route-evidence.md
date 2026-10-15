@@ -57,5 +57,6 @@ No change under `src/`, `assets/`, or `vendor/`, and no change to these toys' te
 repository at most 1 MB each. American English and the serial comma. Before you push:
 `npx prettier --check .` and `node tools/us-english.mjs --diff` are clean, and the new spec passes.
 A route step that fails is a finding for the report, never a reason to loosen a check. The test
-suite on GitHub Actions runs on your PR and posts its result as a comment. PR body with Summary,
-Verification, Deviations, Known issues, and What was cut.
+suite on GitHub Actions runs the quick checks on your PR; the full suite runs on the Operator's
+merge PR (or on yours when the Operator adds the `full-suite` label) and posts its result as a
+comment. PR body with Summary, Verification, Deviations, Known issues, and What was cut.
