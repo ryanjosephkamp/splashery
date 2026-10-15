@@ -3276,6 +3276,15 @@ body.focus #pop-toggle {
     bottom: calc(var(--dock-h, 200px) + 54px);
   }
 
+  /* Lane Polish: when the slider shares its row with the ▶ Play button (the
+     Hands-on column shows Play, and no game or song bar lifts the column
+     above it), it is narrower, so it stays clear of the button. Every
+     other slider is as before. */
+  body:has(#hands-bar:not([hidden]) #hands-play:not([hidden])):not(:has(#game-bar:not([hidden])))
+    .toy-slider {
+    width: min(320px, calc(100vw - 120px));
+  }
+
   body.sheet-open .toy-slider,
   body.shelf-grid .toy-slider {
     display: none;
