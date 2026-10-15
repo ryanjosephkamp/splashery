@@ -3408,6 +3408,7 @@ export function createUI(app) {
     // UI r5: Record's state: "off", "rec" (with seconds and the limit),
     // "ready" (with seconds, bytes and whether the phone can share it) or "busy".
     setRecord({ state, seconds = 0, limit = 60, bytes = 0, share = false }) {
+      const hadFocus = els.recPill.contains(document.activeElement);
       const clock = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
       const rec = state === "rec";
       const ready = state === "ready";
@@ -3425,6 +3426,21 @@ export function createUI(app) {
       els.recordStart.textContent = rec ? "Stop" : "Record";
       els.recordStart.classList.toggle("primary", rec);
       els.recordStart.disabled = state === "busy";
+      // Keep keyboard focus through saving, but respect a visitor who moves away.
+      if (hadFocus) {
+        const target = rec
+          ? els.recStop
+          : ready
+            ? els.recSave
+            : state === "busy"
+              ? els.recPill
+              : els.recordStart.checkVisibility()
+                ? els.recordStart
+                : els.sheetToggle.checkVisibility()
+                  ? els.sheetToggle
+                  : els.stage;
+        target.focus({ preventScroll: true });
+      }
     },
     setRecordUnavailable(reason) {
       els.recordRow.hidden = !!reason;

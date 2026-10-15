@@ -2206,7 +2206,8 @@ body.embed #stage {
    it shows, the Live pill drops below it (it widens with Save and Share). */
 @media (min-width: 761px) {
   body:has(#rec-pill:not([hidden])) .live-indicator {
-    top: calc(env(safe-area-inset-top, 0px) + 116px);
+    /* Record starts at 64 px and its 44 px controls make the pill 56 px tall. */
+    top: calc(env(safe-area-inset-top, 0px) + 132px);
   }
 }
 
@@ -3299,7 +3300,8 @@ body.focus .stage-zoom {
   }
 
   body.app .toy-status {
-    top: 94px;
+    /* A 4 px gap after the 44 px toolbar leaves room for the help action too. */
+    top: 90px;
   }
   body.app .toy-legend {
     top: 150px;

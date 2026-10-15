@@ -147,8 +147,29 @@ test("recording and the flag dialog preserve keyboard focus", async ({ page }) =
   await page.locator("#record-start").focus();
   await page.keyboard.press("Enter");
   await expect(page.locator("#rec-stop")).toBeFocused();
+  // A usable recording needs footage; an immediate stop can correctly be empty.
+  await expect(page.locator("#rec-time")).toHaveText(/^0:0[1-9] \/ 1:00$/);
   await page.keyboard.press("Enter");
   await expect(page.locator("#rec-save")).toBeVisible();
+  await expect(page.locator("#rec-save")).toBeFocused();
+});
+
+test("recording focus survives saving and an empty take without stealing later focus", async ({
+  page,
+}) => {
+  await open(page, 390, 844);
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "rec" }));
+  await page.locator("#rec-stop").focus();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "busy" }));
+  await expect(page.locator("#rec-pill")).toBeFocused();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "off" }));
+  await expect(page.locator("#sheet-toggle")).toBeFocused();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "rec" }));
+  await page.locator("#rec-stop").focus();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "busy" }));
+  await page.locator("#help-toggle").focus();
+  await page.evaluate(() => window.__splashery.app.ui.setRecord({ state: "ready", bytes: 1000 }));
+  await expect(page.locator("#help-toggle")).toBeFocused();
 });
 
 test("the link dialog closes with Escape and restores its opener", async ({ page }) => {
