@@ -13,6 +13,9 @@ import { initLive, renderLive } from "./live/panel.js"; // lane Live input
 import { ui2On } from "./player.js"; // UI r2
 import { SITE_TOY_IDS } from "./site-toy-pages.js";
 
+import { populateExportControls, exportChoices } from "./export/controls.js";
+import { EXPORT_PRESETS } from "./export/presets.js";
+
 const $ = (id) => document.getElementById(id);
 const siteToyIds = new Set(SITE_TOY_IDS);
 
@@ -2297,15 +2300,10 @@ export function createUI(app) {
     if (f) app.openFile(f);
     els.importJson.value = "";
   });
+  populateExportControls(app);
   els.exportPng.addEventListener("click", () => app.exportPNG());
-  els.exportGif.addEventListener("click", () =>
-    app.exportGIF({
-      kind: els.gifKind.value,
-      frames: Number(els.gifFrames.value),
-      size: Number(els.gifSize.value),
-    }),
-  );
-  els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
+  els.exportGif.addEventListener("click", () => app.exportGIF(exportChoices("gif")));
+  els.exportWebm.addEventListener("click", () => app.exportWebM(exportChoices("video")));
   // Lane PDF lab: Save as PDF (labs).
   els.pdfRow.hidden = !labsOn();
   els.exportPdf.addEventListener("click", () => app.openPdfExport());
@@ -2598,12 +2596,14 @@ export function createUI(app) {
   const UI2 = ui2On();
   document.body.classList.toggle("ui2", UI2);
   let full = false;
+  let rowDockHeight = 0;
   function refreshDock() {
     if (!narrow.matches) {
       document.documentElement.style.removeProperty("--dock-h");
       return;
     }
     const h = els.panel.getBoundingClientRect().height;
+    if (mode === "row") rowDockHeight = h;
     document.documentElement.style.setProperty("--dock-h", `${Math.round(h)}px`);
   }
   const applySheet = () => {
@@ -3608,7 +3608,13 @@ export function createUI(app) {
     // UI r5: Record's state: "off", "rec" (with seconds and the limit),
     // "ready" (with seconds, bytes and whether the phone can share it) or "busy".
     // Share lane: "ready" opens the preview sheet; the pill is only for the take.
-    setRecord({ state, seconds = 0, limit = 60, bytes = 0, share = false }) {
+    setRecord({
+      state,
+      seconds = 0,
+      limit = EXPORT_PRESETS.record.maxSeconds,
+      bytes = 0,
+      share = false,
+    }) {
       const hadFocus = els.recPill.contains(document.activeElement);
       const rec = state === "rec";
       const ready = state === "ready";
@@ -3619,6 +3625,8 @@ export function createUI(app) {
       els.recordStart.querySelector(".record-label").textContent = rec ? "Stop" : "Record";
       els.recordStart.classList.toggle("recording", rec);
       els.recordStart.disabled = state === "busy";
+      const quality = $("record-quality");
+      if (quality) quality.disabled = rec || state === "busy";
       // Share lane: a finished take opens the preview sheet, which takes focus itself.
       if (ready) return openPreview({ bytes, share });
       // Task 52: keep keyboard focus through saving, but respect a visitor who moves away.
@@ -3767,6 +3775,13 @@ export function createUI(app) {
     },
     collapseSheet() {
       setMode("row");
+    },
+    // Task 89: Record closes the phone sheet before choosing its buffer.
+    // Give its settings the same bounds without changing the visible sheet.
+    recordingSize() {
+      const r = els.stage.getBoundingClientRect();
+      const dock = narrow.matches ? els.panel.getBoundingClientRect().height - rowDockHeight : 0;
+      return { width: r.width, height: r.height + dock };
     },
     // True when the phone sheet (the grid or the panel) covers part of the stage.
     sheetOpen() {

@@ -1,8 +1,11 @@
-// Exports: PNG of the view, GIF (vendored gifenc), WebM (MediaRecorder), a
+// Exports: PNG of the view, GIF (vendored gifenc), MP4/WebM (WebCodecs), a
 // live recording (Record, UI r5), JSON downloads, and the embed snippets
 // (iframe and custom element).
 
 import { GIFEncoder, quantize, applyPalette } from "gifenc";
+import { EXPORT_PRESETS, gifPlan, recordingPlan } from "./export/presets.js";
+import { encodeVideo, videoSupport } from "./export/video.js";
+import { recordingAudioTap } from "./export/record.js";
 import { encodeSceneHash } from "./codec.js";
 import { formatBytes } from "./state.js";
 
@@ -32,83 +35,80 @@ export function canvasToBlob(canvas, type = "image/png") {
   );
 }
 
-const nextFrame = () => new Promise((r) => requestAnimationFrame(() => r()));
-
 // ---- GIF ------------------------------------------------------------------
 
-// renderFrame(i, n) resolves with a 2D canvas of size x size.
+// One uncompressed frame at a time. Only encoded chunks accumulate, under a
+// preflight and runtime byte budget. Resetting gifenc releases its output buffer
+// after each frame instead of growing a second whole-file typed array.
 export async function encodeGIF({
   renderFrame,
-  frames = 48,
-  size = 512,
-  loopMs = 4000,
+  frames = EXPORT_PRESETS.gif.defaults.frames,
+  size = EXPORT_PRESETS.gif.defaults.size,
+  width = size,
+  height = size,
+  loopMs = EXPORT_PRESETS.gif.loopSeconds * 1000,
   onProgress,
 }) {
-  const gif = GIFEncoder();
-  const delay = Math.max(20, Math.round(loopMs / frames));
+  const plan = gifPlan({ width, height, frames });
+  if (!plan.ok)
+    throw new Error(
+      "This GIF needs more memory than this device's export budget. Choose fewer frames or a smaller size.",
+    );
+  const gif = GIFEncoder({ auto: false });
+  const chunks = [];
+  let bytes = 0;
   for (let i = 0; i < frames; i++) {
     const canvas = await renderFrame(i, frames);
-    const rgba = canvas.getContext("2d").getImageData(0, 0, size, size).data;
+    const rgba = canvas.getContext("2d").getImageData(0, 0, width, height).data;
     const palette = quantize(rgba, 256, { format: "rgb565" });
     const index = applyPalette(rgba, palette, "rgb565");
-    gif.writeFrame(index, size, size, { palette, delay, repeat: 0 });
+    if (i === 0) gif.writeHeader();
+    // GIF delays are centiseconds. Distribute rounding so the loop's total
+    // duration stays correct even with 72 or 144 frames.
+    const delay =
+      (Math.round(((i + 1) * loopMs) / frames / 10) - Math.round((i * loopMs) / frames / 10)) * 10;
+    gif.writeFrame(index, width, height, { first: i === 0, palette, delay, repeat: 0 });
+    if (i === frames - 1) gif.finish();
+    const chunk = gif.bytes();
+    bytes += chunk.byteLength;
+    if (bytes > plan.maxBytes)
+      throw new Error(
+        "This GIF reached the device's memory budget. Choose fewer frames or a smaller size.",
+      );
+    chunks.push(chunk);
+    gif.reset();
     onProgress?.((i + 1) / frames);
+    // Allow the progress display, input cancellation by navigation, and GC.
+    await new Promise((r) => setTimeout(r, 0));
   }
-  gif.finish();
-  return new Blob([gif.bytes()], { type: "image/gif" });
+  return new Blob(chunks, { type: "image/gif" });
 }
 
 // ---- WebM -----------------------------------------------------------------
 
 export function webmSupport() {
-  if (typeof MediaRecorder === "undefined") {
-    return { ok: false, reason: "this browser has no MediaRecorder." };
-  }
-  if (typeof HTMLCanvasElement === "undefined" || !HTMLCanvasElement.prototype.captureStream) {
-    return { ok: false, reason: "this browser cannot record a canvas." };
-  }
-  const candidates = ["video/webm;codecs=vp9", "video/webm;codecs=vp8", "video/webm"];
-  const mime = candidates.find((m) => MediaRecorder.isTypeSupported(m));
-  if (!mime) return { ok: false, reason: "this browser's MediaRecorder cannot produce WebM." };
-  return { ok: true, mime };
+  return { ...videoSupport(), mime: "video/webm;codecs=vp9" };
 }
 
-// Records `seconds` of video. drawFrame(t01) renders one frame (resolves
-// once it is on the canvas). Frames are paced in real time so the recorder
-// gets correctly spaced timestamps.
-export async function recordWebM({ canvas, seconds = 5, fps = 30, drawFrame, onProgress, mime }) {
-  const stream = canvas.captureStream(0);
-  const track = stream.getVideoTracks()[0];
-  const rec = new MediaRecorder(stream, { mimeType: mime, videoBitsPerSecond: 6_000_000 });
-  const chunks = [];
-  rec.ondataavailable = (e) => {
-    if (e.data && e.data.size) chunks.push(e.data);
-  };
-  const stopped = new Promise((resolve) => (rec.onstop = resolve));
-  rec.start();
-  const start = performance.now();
-  const total = seconds * 1000;
-  let last = -Infinity;
-  for (;;) {
-    const elapsed = performance.now() - start;
-    if (elapsed >= total) break;
-    if (elapsed - last >= 1000 / fps - 2) {
-      last = elapsed;
-      await drawFrame(elapsed / total);
-      track.requestFrame?.();
-      onProgress?.(elapsed / total);
-    } else {
-      await nextFrame();
-    }
-  }
-  await drawFrame(0.9999);
-  track.requestFrame?.();
-  await new Promise((r) => setTimeout(r, 150));
-  rec.stop();
-  await stopped;
-  track.stop();
-  onProgress?.(1);
-  return new Blob(chunks, { type: mime.split(";")[0] });
+// Compatibility for the Data in 3D toy, whose file picker expects WebM.
+// The clock is stepped here too; drawFrame still accepts a fraction.
+export async function recordWebM({
+  canvas,
+  seconds = EXPORT_PRESETS.video.defaults.seconds,
+  fps = EXPORT_PRESETS.video.defaults.fps,
+  drawFrame,
+  onProgress,
+}) {
+  const out = await encodeVideo({
+    width: canvas.width,
+    height: canvas.height,
+    seconds,
+    fps,
+    webmOnly: true,
+    drawFrame: async (t) => (await drawFrame(t / seconds)) || canvas,
+    onProgress,
+  });
+  return out.blob;
 }
 
 // ---- Record (UI r5) -------------------------------------------------------------
@@ -116,7 +116,7 @@ export async function recordWebM({ canvas, seconds = 5, fps = 30, drawFrame, onP
 // (drags, taps, effects, the turning view) and the site's sound, as MP4 where
 // the browser records it (Safari, recent Chrome), otherwise WebM.
 
-export const RECORD_LIMIT = 60; // seconds
+export const RECORD_LIMIT = EXPORT_PRESETS.record.maxSeconds;
 
 // MP4 only with H.264 (what phones' photo libraries take); a browser that
 // only says "video/mp4" without H.264 (open-source Chromium) gets WebM first.
@@ -131,7 +131,7 @@ const RECORD_TYPES = [
   ["video/mp4", "mp4"],
 ];
 
-export function recordSupport() {
+export function recordSupport({ audio = false } = {}) {
   if (typeof MediaRecorder === "undefined") {
     return { ok: false, reason: "this browser cannot record video." };
   }
@@ -145,7 +145,11 @@ export function recordSupport() {
       return false;
     }
   };
-  const hit = RECORD_TYPES.find(([m]) => supported(m));
+  // A video-only MP4 capability does not establish AAC support. With sound,
+  // require the complete codec pair; otherwise use VP9/Opus WebM.
+  const hit = RECORD_TYPES.find(
+    ([m]) => (!audio || !m.startsWith("video/mp4") || m.includes("mp4a")) && supported(m),
+  );
   if (!hit) return { ok: false, reason: "this browser cannot record MP4 or WebM." };
   return { ok: true, mime: hit[0], ext: hit[1] };
 }
@@ -159,48 +163,98 @@ export function recordSupport() {
 export function startRecording({
   canvas,
   audio = null,
+  initialFrame = canvas,
   maxSeconds = RECORD_LIMIT,
   onTick,
-  fps = 30,
+  fps = EXPORT_PRESETS.record.defaults.fps,
+  quality = EXPORT_PRESETS.record.defaults.quality,
+  bitrate,
+  maxBytes = recordingPlan({ width: canvas.width, height: canvas.height, quality }).maxBytes,
+  onWarning,
 }) {
-  const sup = recordSupport();
+  const sup = recordSupport({ audio: !!audio });
   if (!sup.ok) throw new Error(sup.reason);
-  // Frames are handed over by frame() (the stage draws on demand, and not
-  // every browser captures a WebGL canvas by itself).
-  const video = canvas.captureStream(0);
+  // A same-size 2D copy marks each submitted frame dirty. Some browsers
+  // emit an audio-only take from an unchanged WebGL canvas, even with
+  // requestFrame(). This adds one bounded surface, with no resampling.
+  const capture = document.createElement("canvas");
+  capture.width = canvas.width;
+  capture.height = canvas.height;
+  const copy = capture.getContext("2d", { alpha: false, willReadFrequently: true });
+  copy.drawImage(initialFrame, 0, 0);
+  let cachedFrame = copy.getImageData(0, 0, capture.width, capture.height);
+  const video = capture.captureStream(fps);
   const track = video.getVideoTracks()[0];
   const tracks = [track];
   let tap = null;
-  if (audio?.ctx && audio?.node && audio.ctx.createMediaStreamDestination) {
-    // The site's limiter sits after `node` and is not exposed, so the
-    // recording gets its own copy of it.
-    const ctx = audio.ctx;
-    const limit = ctx.createDynamicsCompressor();
-    limit.threshold.value = -10;
-    limit.knee.value = 6;
-    limit.ratio.value = 8;
-    limit.attack.value = 0.003;
-    limit.release.value = 0.2;
-    const dest = ctx.createMediaStreamDestination();
-    audio.node.connect(limit);
-    limit.connect(dest);
-    tap = { node: audio.node, limit, dest };
-    tracks.push(...dest.stream.getAudioTracks());
+  try {
+    if (audio?.ctx && audio?.node && audio.ctx.createMediaStreamDestination) {
+      tap = audio.tap || recordingAudioTap(audio);
+      tracks.push(...tap.tracks);
+    }
+  } catch (error) {
+    track.stop();
+    throw error;
   }
   const stream = new MediaStream(tracks);
-  // About 8 Mb/s for the picture: sharp at a phone's full resolution.
-  const opts = { mimeType: sup.mime, videoBitsPerSecond: 8_000_000, audioBitsPerSecond: 128_000 };
+  // Live Record uses its duration-aware policy, independently of stepped video.
+  const opts = {
+    mimeType: sup.mime,
+    videoBitsPerSecond:
+      bitrate ?? recordingPlan({ width: canvas.width, height: canvas.height, quality }).bitrate,
+    audioBitsPerSecond: EXPORT_PRESETS.record.audioBitrate,
+  };
+  const cleanup = () => {
+    for (const t of stream.getTracks()) t.stop();
+    tap?.dispose();
+    tap = null;
+  };
   let rec;
   try {
     rec = new MediaRecorder(stream, opts);
-  } catch {
-    rec = new MediaRecorder(stream); // the browser's own choice of type
+  } catch (err) {
+    cleanup();
+    throw err;
   }
   const type = (rec.mimeType || sup.mime).split(";")[0];
   const ext = /mp4/.test(type) ? "mp4" : "webm";
   const chunks = [];
+  let bytes = 0;
+  let warned = false;
+  let reason = "stop";
+  let largestChunk = 0;
+  let overflow = false;
+  let pendingStop = null;
+  let stopWait = 0;
   rec.ondataavailable = (e) => {
-    if (e.data && e.data.size) chunks.push(e.data);
+    if (!e.data?.size || overflow) return;
+    if (e.data.size > maxBytes - bytes) {
+      // Never keep a truncated container or retain an oversized final flush.
+      // The browser allocates incoming chunks; our retained output is bounded.
+      overflow = true;
+      chunks.length = 0;
+      pendingStop = "size";
+      finishStop();
+      return;
+    }
+    chunks.push(e.data);
+    bytes += e.data.size;
+    largestChunk = Math.max(largestChunk, e.data.size);
+    if (pendingStop && bytes > 1024) {
+      finishStop();
+      return;
+    }
+    if (!warned && bytes >= maxBytes * EXPORT_PRESETS.record.warningFraction) {
+      warned = true;
+      onWarning?.(
+        "Recording has used 80% of its size budget. It will stop soon so you can save the take.",
+      );
+    }
+    // Reserve at least two chunks and two seconds at the target bitrate for
+    // the final flush. maxBytes is the encoded budget, not total device RAM.
+    const reserve = Math.max(largestChunk * 2, (opts.videoBitsPerSecond / 8) * 2);
+    if (bytes >= Math.max(maxBytes * EXPORT_PRESETS.record.warningFraction, maxBytes - reserve))
+      stop("size");
   };
   const t0 = performance.now();
   const seconds = () => (performance.now() - t0) / 1000;
@@ -209,51 +263,86 @@ export function startRecording({
   const done = new Promise((resolve, reject) => {
     rec.onstop = () => {
       clearInterval(timer);
-      for (const t of video.getTracks()) t.stop();
-      if (tap) {
-        try {
-          tap.node.disconnect(tap.limit);
-        } catch {
-          // Already gone with its context.
-        }
-        tap.limit.disconnect();
+      clearTimeout(stopWait);
+      cleanup();
+      if (overflow) {
+        reject(
+          new Error(
+            "The browser returned a recording chunk larger than this device's size budget. The take was released. Choose Standard or a shorter recording.",
+          ),
+        );
+        return;
       }
       // A busy device can hand over the last piece a moment after the stop:
       // wait a little for it before calling the take empty.
       const finish = (tries) => {
-        if (chunks.length) resolve({ blob: new Blob(chunks, { type }), ext, seconds: length });
-        else if (tries > 0) setTimeout(() => finish(tries - 1), 250);
-        else reject(new Error("The recording came out empty."));
+        if (bytes > 1024) {
+          const blob = new Blob(chunks, { type });
+          chunks.length = 0;
+          resolve({ blob, type, size: blob.size, ext, seconds: length, reason });
+        } else if (tries > 0) setTimeout(() => finish(tries - 1), 250);
+        else
+          reject(new Error("The recording came out empty. Try a longer take or Standard quality."));
       };
       finish(8);
     };
-    rec.onerror = (e) => reject(e.error || new Error("The recording stopped."));
+    rec.onerror = (e) => {
+      clearInterval(timer);
+      clearTimeout(stopWait);
+      cleanup();
+      chunks.length = 0;
+      reject(e.error || new Error("The recording stopped."));
+    };
   });
   let lastFrame = -Infinity;
-  const frame = () => {
+  const frame = (copySource = true) => {
     const now = performance.now();
     if (rec.state !== "recording" || now - lastFrame < 1000 / fps - 2) return;
     lastFrame = now;
+    if (copySource && !pendingStop) {
+      copy.drawImage(canvas, 0, 0);
+      cachedFrame = copy.getImageData(0, 0, capture.width, capture.height);
+    }
+    // Submit the whole cached picture. A one-pixel dirty region does not
+    // reliably produce video frames in Chromium when the source is idle.
+    copy.putImageData(cachedFrame, 0, 0);
     track.requestFrame?.();
   };
-  const stop = () => {
+  const finishStop = () => {
     if (rec.state === "inactive") return;
+    clearTimeout(stopWait);
+    reason = pendingStop || reason;
     length = Math.min(maxSeconds, seconds());
     try {
-      rec.requestData(); // what the encoder holds so far
+      rec.requestData();
     } catch {
       // Not recording any more.
     }
     rec.stop();
   };
-  // A timeslice keeps memory in small pieces on long takes.
-  rec.start(1000);
-  frame();
+  const stop = (why = "stop") => {
+    if (rec.state === "inactive" || pendingStop) return;
+    pendingStop = why;
+    // A software encoder can still be starting when a short take ends.
+    // WebM may have emitted only its one-byte header. Keep submitting the
+    // cached last picture until actual output arrives, with a bounded wait.
+    // Size overflow must release memory immediately instead of waiting.
+    if (!overflow && bytes <= 1024) stopWait = setTimeout(finishStop, 10_000);
+    else finishStop();
+  };
+  // Chunks are kept in RAM, never uploaded or persisted without Save.
+  try {
+    rec.start(EXPORT_PRESETS.record.sliceMs);
+  } catch (err) {
+    cleanup();
+    throw err;
+  }
+  frame(false); // Keep the rendered initial snapshot, not a cleared WebGL buffer.
   timer = setInterval(() => {
     const s = seconds();
-    onTick?.(Math.min(s, maxSeconds));
-    if (s >= maxSeconds) stop();
-    else frame(); // a still stage still gives the video a few frames a second
+    if (!pendingStop) onTick?.(Math.min(s, maxSeconds));
+    if (s >= maxSeconds) stop("time");
+    frame(false); // Repeat the last drawn picture, never read a cleared WebGL buffer.
   }, 250);
   return { stop, frame, done, ext };
 }

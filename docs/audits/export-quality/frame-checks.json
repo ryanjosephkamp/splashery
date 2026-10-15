@@ -1,0 +1,58 @@
+[
+  {
+    "key": "before-desktop-record-standard",
+    "frames": 3,
+    "minimumMean": 235.8800390625,
+    "minimumStandardDeviation": 0.0,
+    "nearUniformFrames": [2],
+    "darkFrames": []
+  },
+  {
+    "key": "before-phone-record-standard",
+    "frames": 3,
+    "minimumMean": 200.5150390625,
+    "minimumStandardDeviation": 0.07905384363123082,
+    "nearUniformFrames": [2],
+    "darkFrames": []
+  },
+  {
+    "key": "after-desktop-record-standard",
+    "frames": 6,
+    "minimumMean": 232.8741015625,
+    "minimumStandardDeviation": 60.460586011988724,
+    "nearUniformFrames": [],
+    "darkFrames": []
+  },
+  {
+    "key": "after-desktop-record-high",
+    "frames": 5,
+    "minimumMean": 185.1335546875,
+    "minimumStandardDeviation": 90.88292012727304,
+    "nearUniformFrames": [],
+    "darkFrames": []
+  },
+  {
+    "key": "after-desktop-record-max",
+    "frames": 20,
+    "minimumMean": 181.089375,
+    "minimumStandardDeviation": 91.89119242200117,
+    "nearUniformFrames": [],
+    "darkFrames": []
+  },
+  {
+    "key": "after-phone-record-standard",
+    "frames": 4,
+    "minimumMean": 238.967890625,
+    "minimumStandardDeviation": 52.28140975154678,
+    "nearUniformFrames": [],
+    "darkFrames": []
+  },
+  {
+    "key": "after-phone-record-high",
+    "frames": 4,
+    "minimumMean": 210.270703125,
+    "minimumStandardDeviation": 79.88340954727028,
+    "nearUniformFrames": [],
+    "darkFrames": []
+  }
+]

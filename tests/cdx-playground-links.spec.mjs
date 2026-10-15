@@ -192,16 +192,16 @@ for (const viewport of [
       await page.locator("#tab-share").click();
       // The Share tab shows Video or GIF, one at a time (Share lane, October 15, 2026).
       await page.locator("#clip-kind [data-clip='gif']").click();
-      await page.locator("#gif-size").selectOption("256");
-      await expect(page.locator("#gif-size")).toHaveValue("256");
+      await page.locator("#gif-size").selectOption("512");
+      await expect(page.locator("#gif-size")).toHaveValue("512");
 
       // Rotate both ways without rebuilding the app or losing settings.
       await page.setViewportSize({ width: 390, height: 844 });
       await page.locator("#sheet-toggle").click();
       await expect(page.locator("#tab-share")).toHaveAttribute("aria-selected", "true");
-      await expect(page.locator("#gif-size")).toHaveValue("256");
+      await expect(page.locator("#gif-size")).toHaveValue("512");
       await page.setViewportSize(viewport);
-      await expect(page.locator("#gif-size")).toHaveValue("256");
+      await expect(page.locator("#gif-size")).toHaveValue("512");
       await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
       await page.locator("#tab-play").click();
       await expect(page.locator("#auto-turntable")).not.toBeChecked();

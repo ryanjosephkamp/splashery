@@ -1,0 +1,31 @@
+{
+  "workflowRun": 38812628385,
+  "workflowURL": "https://github.com/ryanjosephkamp/splashery/actions/runs/38812628385",
+  "sourceCommit": "cd8ffb7c5d43839e810fa788f5e5d0a78b153600",
+  "environment": "GitHub Ubuntu 24.04, Node 22, Chromium 141, pinned font configuration",
+  "pdf": "manual/tinkerers-manual-e50e5205f56d0c83.pdf",
+  "bytes": 7985410,
+  "sha256": "e50e5205f56d0c83e216f0f2507d7b40eae2145922d8c74f1d65408b95e5c69e",
+  "pages": 154,
+  "internalLinks": 144,
+  "bookmarks": 188,
+  "contents": 108,
+  "specs": {
+    "man5": {
+      "startTime": "2026-10-15T21:51:38.432Z",
+      "duration": 38346.786,
+      "expected": 19,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-manual-pdf": {
+      "startTime": "2026-10-15T21:51:01.005Z",
+      "duration": 36525.163,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
+}

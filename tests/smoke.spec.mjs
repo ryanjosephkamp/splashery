@@ -457,7 +457,7 @@ test.describe("Splashery app (WebGL2)", () => {
     expect(problems).toEqual([]);
   });
 
-  test("PNG, GIF and WebM exports produce files", async ({ page }) => {
+  test("PNG, GIF and video exports produce files", async ({ page }) => {
     const problems = watchConsole(page);
     await loadApp(page);
     await page.click(".toy-card[data-toy='knot']");
@@ -474,17 +474,18 @@ test.describe("Splashery app (WebGL2)", () => {
     expect(png.size).toBeGreaterThan(5000);
     // The Share tab shows Video or GIF, one at a time (Share lane, October 15, 2026).
     await page.click("#clip-kind [data-clip=gif]");
-    await page.selectOption("#gif-frames", "24");
-    await page.selectOption("#gif-size", "256");
+    await page.selectOption("#gif-frames", "48");
+    await page.selectOption("#gif-size", "512");
     const gif = await save("#export-gif");
     expect(gif.name).toMatch(/\.gif$/);
     expect(gif.size).toBeGreaterThan(20000);
     const webm = await page.evaluate(() => !document.getElementById("webm-row").hidden);
     if (webm) {
       await page.click("#clip-kind [data-clip=video]");
-      await page.selectOption("#webm-seconds", "3");
+      await page.selectOption("#webm-seconds", "4");
+      await page.selectOption("#webm-size", "720");
       const video = await save("#export-webm");
-      expect(video.name).toMatch(/\.webm$/);
+      expect(video.name).toMatch(/\.(mp4|webm)$/);
       expect(video.size).toBeGreaterThan(1000);
     } else {
       await expect(page.locator("#webm-unavailable")).toBeVisible();

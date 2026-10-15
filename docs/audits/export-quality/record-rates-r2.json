@@ -1,0 +1,890 @@
+[
+  {
+    "key": "phone-photo-3d-standard",
+    "file": "phone-photo-3d-standard.webm",
+    "plan": {
+      "width": 586,
+      "height": 900,
+      "quality": "standard",
+      "fps": 30,
+      "bitrate": 3151107,
+      "maxBytes": 92224896,
+      "maxSeconds": 180
+    },
+    "bytes": 4213835,
+    "type": "video/webm",
+    "seconds": 180,
+    "reason": "time",
+    "requestedSeconds": 180,
+    "memory": {
+      "bytes": 4213835,
+      "largestChunk": 101807,
+      "samples": [
+        {
+          "seconds": 0.00009999999776482581,
+          "encodedBytes": 0,
+          "jsHeapBytes": 78886832
+        },
+        {
+          "seconds": 5.719800000000745,
+          "encodedBytes": 109025,
+          "jsHeapBytes": 88753393
+        },
+        {
+          "seconds": 10.4135,
+          "encodedBytes": 255946,
+          "jsHeapBytes": 79180142
+        },
+        {
+          "seconds": 15.514699999999255,
+          "encodedBytes": 365038,
+          "jsHeapBytes": 72625418
+        },
+        {
+          "seconds": 20.95989999999851,
+          "encodedBytes": 487502,
+          "jsHeapBytes": 88137582
+        },
+        {
+          "seconds": 26.6865,
+          "encodedBytes": 592736,
+          "jsHeapBytes": 70557118
+        },
+        {
+          "seconds": 31.204199999999254,
+          "encodedBytes": 703406,
+          "jsHeapBytes": 83782298
+        },
+        {
+          "seconds": 35.1635,
+          "encodedBytes": 821682,
+          "jsHeapBytes": 74826582
+        },
+        {
+          "seconds": 40.19939999999851,
+          "encodedBytes": 913552,
+          "jsHeapBytes": 87933826
+        },
+        {
+          "seconds": 45.95730000000074,
+          "encodedBytes": 1168739,
+          "jsHeapBytes": 75090934
+        },
+        {
+          "seconds": 50.56689999999851,
+          "encodedBytes": 1242076,
+          "jsHeapBytes": 77169434
+        },
+        {
+          "seconds": 56.03280000000075,
+          "encodedBytes": 1346554,
+          "jsHeapBytes": 68485726
+        },
+        {
+          "seconds": 60.006,
+          "encodedBytes": 1524164,
+          "jsHeapBytes": 81824742
+        },
+        {
+          "seconds": 65.80869999999925,
+          "encodedBytes": 1647844,
+          "jsHeapBytes": 77292878
+        },
+        {
+          "seconds": 70.1283999999985,
+          "encodedBytes": 1774262,
+          "jsHeapBytes": 91604215
+        },
+        {
+          "seconds": 75.00109999999776,
+          "encodedBytes": 1956757,
+          "jsHeapBytes": 84017286
+        },
+        {
+          "seconds": 80.73589999999851,
+          "encodedBytes": 2057792,
+          "jsHeapBytes": 70752554
+        },
+        {
+          "seconds": 86.39739999999851,
+          "encodedBytes": 2144394,
+          "jsHeapBytes": 81776110
+        },
+        {
+          "seconds": 90.8573999999985,
+          "encodedBytes": 2321233,
+          "jsHeapBytes": 68531162
+        },
+        {
+          "seconds": 97.64569999999925,
+          "encodedBytes": 2442693,
+          "jsHeapBytes": 83709018
+        },
+        {
+          "seconds": 101.15839999999851,
+          "encodedBytes": 2480826,
+          "jsHeapBytes": 90291466
+        },
+        {
+          "seconds": 105.16419999999925,
+          "encodedBytes": 2571842,
+          "jsHeapBytes": 75173594
+        },
+        {
+          "seconds": 110.196,
+          "encodedBytes": 2662418,
+          "jsHeapBytes": 77246578
+        },
+        {
+          "seconds": 115.48680000000074,
+          "encodedBytes": 2775612,
+          "jsHeapBytes": 90453526
+        },
+        {
+          "seconds": 120.39419999999926,
+          "encodedBytes": 2865245,
+          "jsHeapBytes": 73024750
+        },
+        {
+          "seconds": 126.34930000000074,
+          "encodedBytes": 2976790,
+          "jsHeapBytes": 87673778
+        },
+        {
+          "seconds": 130.629,
+          "encodedBytes": 3082058,
+          "jsHeapBytes": 79429834
+        },
+        {
+          "seconds": 135.22089999999852,
+          "encodedBytes": 3239666,
+          "jsHeapBytes": 92449862
+        },
+        {
+          "seconds": 140.35609999999775,
+          "encodedBytes": 3349096,
+          "jsHeapBytes": 73038442
+        },
+        {
+          "seconds": 145.23669999999925,
+          "encodedBytes": 3431400,
+          "jsHeapBytes": 81838066
+        },
+        {
+          "seconds": 150.65430000000075,
+          "encodedBytes": 3513594,
+          "jsHeapBytes": 70815210
+        },
+        {
+          "seconds": 156.753,
+          "encodedBytes": 3656564,
+          "jsHeapBytes": 77303822
+        },
+        {
+          "seconds": 160.01009999999778,
+          "encodedBytes": 3695745,
+          "jsHeapBytes": 73076518
+        },
+        {
+          "seconds": 165.6013999999985,
+          "encodedBytes": 3805422,
+          "jsHeapBytes": 86162254
+        },
+        {
+          "seconds": 170.14069999999924,
+          "encodedBytes": 3908946,
+          "jsHeapBytes": 73169934
+        },
+        {
+          "seconds": 175.51539999999852,
+          "encodedBytes": 4044221,
+          "jsHeapBytes": 88524354
+        },
+        {
+          "seconds": 181.22669999999925,
+          "encodedBytes": 4213835,
+          "jsHeapBytes": 81962193
+        },
+        {
+          "seconds": 181.22669999999925,
+          "encodedBytes": 4213835,
+          "jsHeapBytes": 81962773
+        }
+      ]
+    },
+    "wallSeconds": 186.665,
+    "duration": 180.662,
+    "width": 586,
+    "height": 900,
+    "decodedFrames": 399,
+    "MBPerMinute": 1.3994647463218608,
+    "encodedBytesPerSecond": 23324.412438697676,
+    "policyHeadroomBytes": 88011061
+  },
+  {
+    "key": "phone-photo-3d-high",
+    "file": "phone-photo-3d-high.webm",
+    "plan": {
+      "width": 1170,
+      "height": 1800,
+      "quality": "high",
+      "fps": 30,
+      "bitrate": 2253059,
+      "maxBytes": 66967296,
+      "maxSeconds": 180
+    },
+    "bytes": 2418752,
+    "type": "video/webm",
+    "seconds": 180,
+    "reason": "time",
+    "requestedSeconds": 180,
+    "memory": {
+      "bytes": 2418752,
+      "largestChunk": 151539,
+      "samples": [
+        {
+          "seconds": 0.000800000000745058,
+          "encodedBytes": 0,
+          "jsHeapBytes": 87667519
+        },
+        {
+          "seconds": 6.284199999999255,
+          "encodedBytes": 28540,
+          "jsHeapBytes": 113137505
+        },
+        {
+          "seconds": 10.46810000000149,
+          "encodedBytes": 101539,
+          "jsHeapBytes": 104606136
+        },
+        {
+          "seconds": 15.9945,
+          "encodedBytes": 135975,
+          "jsHeapBytes": 138562164
+        },
+        {
+          "seconds": 21.37489999999851,
+          "encodedBytes": 245937,
+          "jsHeapBytes": 104632592
+        },
+        {
+          "seconds": 25.394699999999254,
+          "encodedBytes": 273917,
+          "jsHeapBytes": 138557176
+        },
+        {
+          "seconds": 32.594,
+          "encodedBytes": 366079,
+          "jsHeapBytes": 172515856
+        },
+        {
+          "seconds": 36.753699999999256,
+          "encodedBytes": 386195,
+          "jsHeapBytes": 112959508
+        },
+        {
+          "seconds": 41.65210000000149,
+          "encodedBytes": 490772,
+          "jsHeapBytes": 146885328
+        },
+        {
+          "seconds": 46.04189999999851,
+          "encodedBytes": 552144,
+          "jsHeapBytes": 163864380
+        },
+        {
+          "seconds": 50.90019999999925,
+          "encodedBytes": 596600,
+          "jsHeapBytes": 197756900
+        },
+        {
+          "seconds": 56.06089999999851,
+          "encodedBytes": 674700,
+          "jsHeapBytes": 104548972
+        },
+        {
+          "seconds": 61.28410000000149,
+          "encodedBytes": 718911,
+          "jsHeapBytes": 146863488
+        },
+        {
+          "seconds": 68.1085,
+          "encodedBytes": 777477,
+          "jsHeapBytes": 172299508
+        },
+        {
+          "seconds": 72.18989999999852,
+          "encodedBytes": 788814,
+          "jsHeapBytes": 189211864
+        },
+        {
+          "seconds": 76.36660000000148,
+          "encodedBytes": 833473,
+          "jsHeapBytes": 214613604
+        },
+        {
+          "seconds": 84.2528999999985,
+          "encodedBytes": 858879,
+          "jsHeapBytes": 87609708
+        },
+        {
+          "seconds": 88.04239999999851,
+          "encodedBytes": 880565,
+          "jsHeapBytes": 104555356
+        },
+        {
+          "seconds": 91.43289999999851,
+          "encodedBytes": 979291,
+          "jsHeapBytes": 129924848
+        },
+        {
+          "seconds": 95.11080000000075,
+          "encodedBytes": 1124153,
+          "jsHeapBytes": 155389844
+        },
+        {
+          "seconds": 100.49469999999926,
+          "encodedBytes": 1151484,
+          "jsHeapBytes": 189341884
+        },
+        {
+          "seconds": 106.79339999999851,
+          "encodedBytes": 1167432,
+          "jsHeapBytes": 223199220
+        },
+        {
+          "seconds": 113.01569999999926,
+          "encodedBytes": 1277766,
+          "jsHeapBytes": 256061077
+        },
+        {
+          "seconds": 116.68889999999851,
+          "encodedBytes": 1312927,
+          "jsHeapBytes": 113000928
+        },
+        {
+          "seconds": 120.00719999999926,
+          "encodedBytes": 1429983,
+          "jsHeapBytes": 121619252
+        },
+        {
+          "seconds": 125.28,
+          "encodedBytes": 1444895,
+          "jsHeapBytes": 155542792
+        },
+        {
+          "seconds": 131.9533999999985,
+          "encodedBytes": 1535354,
+          "jsHeapBytes": 206442032
+        },
+        {
+          "seconds": 135.0921000000015,
+          "encodedBytes": 1727231,
+          "jsHeapBytes": 222623248
+        },
+        {
+          "seconds": 141.05030000000073,
+          "encodedBytes": 1771655,
+          "jsHeapBytes": 130013188
+        },
+        {
+          "seconds": 146.593,
+          "encodedBytes": 1870776,
+          "jsHeapBytes": 87679152
+        },
+        {
+          "seconds": 151.6298999999985,
+          "encodedBytes": 1905474,
+          "jsHeapBytes": 104671912
+        },
+        {
+          "seconds": 156.09139999999852,
+          "encodedBytes": 1974826,
+          "jsHeapBytes": 113086652
+        },
+        {
+          "seconds": 161.361,
+          "encodedBytes": 2043841,
+          "jsHeapBytes": 96122612
+        },
+        {
+          "seconds": 165.6736000000015,
+          "encodedBytes": 2145170,
+          "jsHeapBytes": 121620688
+        },
+        {
+          "seconds": 171.0525,
+          "encodedBytes": 2246052,
+          "jsHeapBytes": 155542688
+        },
+        {
+          "seconds": 175.82419999999925,
+          "encodedBytes": 2264084,
+          "jsHeapBytes": 87701308
+        },
+        {
+          "seconds": 180.6171000000015,
+          "encodedBytes": 2418752,
+          "jsHeapBytes": 104785595
+        },
+        {
+          "seconds": 180.61719999999926,
+          "encodedBytes": 2418752,
+          "jsHeapBytes": 104786175
+        }
+      ]
+    },
+    "wallSeconds": 191.671,
+    "duration": 179.747,
+    "width": 1170,
+    "height": 1800,
+    "decodedFrames": 229,
+    "MBPerMinute": 0.8073854918301835,
+    "encodedBytesPerSecond": 13456.424863836392,
+    "policyHeadroomBytes": 64548544
+  },
+  {
+    "key": "phone-donut-standard",
+    "file": "phone-donut-standard.webm",
+    "plan": {
+      "width": 586,
+      "height": 900,
+      "quality": "standard",
+      "fps": 30,
+      "bitrate": 3151107,
+      "maxBytes": 92224896,
+      "maxSeconds": 180
+    },
+    "bytes": 3424492,
+    "type": "video/webm",
+    "seconds": 180,
+    "reason": "time",
+    "requestedSeconds": 180,
+    "memory": {
+      "bytes": 3424492,
+      "largestChunk": 210471,
+      "samples": [
+        {
+          "seconds": 0.00010000000149011611,
+          "encodedBytes": 0,
+          "jsHeapBytes": 73693066
+        },
+        {
+          "seconds": 5.29689999999851,
+          "encodedBytes": 26249,
+          "jsHeapBytes": 66776705
+        },
+        {
+          "seconds": 10.3695,
+          "encodedBytes": 154701,
+          "jsHeapBytes": 64620123
+        },
+        {
+          "seconds": 15.31189999999851,
+          "encodedBytes": 155956,
+          "jsHeapBytes": 78077283
+        },
+        {
+          "seconds": 21.36310000000149,
+          "encodedBytes": 245580,
+          "jsHeapBytes": 66920383
+        },
+        {
+          "seconds": 27.161300000000747,
+          "encodedBytes": 291352,
+          "jsHeapBytes": 67283487
+        },
+        {
+          "seconds": 30.17039999999851,
+          "encodedBytes": 308850,
+          "jsHeapBytes": 64664587
+        },
+        {
+          "seconds": 36.89939999999851,
+          "encodedBytes": 333818,
+          "jsHeapBytes": 73442639
+        },
+        {
+          "seconds": 40.40919999999925,
+          "encodedBytes": 371918,
+          "jsHeapBytes": 73677415
+        },
+        {
+          "seconds": 45.68919999999925,
+          "encodedBytes": 576849,
+          "jsHeapBytes": 84582779
+        },
+        {
+          "seconds": 50.552,
+          "encodedBytes": 605023,
+          "jsHeapBytes": 69499487
+        },
+        {
+          "seconds": 55.609,
+          "encodedBytes": 607703,
+          "jsHeapBytes": 80411462
+        },
+        {
+          "seconds": 60.0025,
+          "encodedBytes": 871187,
+          "jsHeapBytes": 62886199
+        },
+        {
+          "seconds": 65.41139999999851,
+          "encodedBytes": 903834,
+          "jsHeapBytes": 71710467
+        },
+        {
+          "seconds": 70.23939999999851,
+          "encodedBytes": 1143346,
+          "jsHeapBytes": 62554771
+        },
+        {
+          "seconds": 75.76060000000149,
+          "encodedBytes": 1239348,
+          "jsHeapBytes": 78319503
+        },
+        {
+          "seconds": 80.7965,
+          "encodedBytes": 1320824,
+          "jsHeapBytes": 60262895
+        },
+        {
+          "seconds": 85.0003999999985,
+          "encodedBytes": 1354548,
+          "jsHeapBytes": 71817439
+        },
+        {
+          "seconds": 90.00469999999926,
+          "encodedBytes": 1519550,
+          "jsHeapBytes": 71817631
+        },
+        {
+          "seconds": 95.45080000000074,
+          "encodedBytes": 1549092,
+          "jsHeapBytes": 82904642
+        },
+        {
+          "seconds": 101.16510000000149,
+          "encodedBytes": 1576522,
+          "jsHeapBytes": 71266420
+        },
+        {
+          "seconds": 106.116,
+          "encodedBytes": 1955578,
+          "jsHeapBytes": 62576831
+        },
+        {
+          "seconds": 110.27480000000074,
+          "encodedBytes": 2092533,
+          "jsHeapBytes": 62623213
+        },
+        {
+          "seconds": 117.20269999999925,
+          "encodedBytes": 2147559,
+          "jsHeapBytes": 73677855
+        },
+        {
+          "seconds": 120.0005,
+          "encodedBytes": 2147929,
+          "jsHeapBytes": 62982095
+        },
+        {
+          "seconds": 125.45910000000148,
+          "encodedBytes": 2275410,
+          "jsHeapBytes": 64916319
+        },
+        {
+          "seconds": 130.001,
+          "encodedBytes": 2395734,
+          "jsHeapBytes": 67442438
+        },
+        {
+          "seconds": 136.82419999999925,
+          "encodedBytes": 2399614,
+          "jsHeapBytes": 73742442
+        },
+        {
+          "seconds": 140.0003999999985,
+          "encodedBytes": 2588816,
+          "jsHeapBytes": 65271286
+        },
+        {
+          "seconds": 145.91480000000075,
+          "encodedBytes": 2592994,
+          "jsHeapBytes": 74118291
+        },
+        {
+          "seconds": 150.1736000000015,
+          "encodedBytes": 2861200,
+          "jsHeapBytes": 62761535
+        },
+        {
+          "seconds": 155.31239999999852,
+          "encodedBytes": 2880657,
+          "jsHeapBytes": 76213423
+        },
+        {
+          "seconds": 161.319,
+          "encodedBytes": 3091113,
+          "jsHeapBytes": 64717597
+        },
+        {
+          "seconds": 166.44280000000074,
+          "encodedBytes": 3169234,
+          "jsHeapBytes": 62605519
+        },
+        {
+          "seconds": 170.0006000000015,
+          "encodedBytes": 3173363,
+          "jsHeapBytes": 76198667
+        },
+        {
+          "seconds": 176.0223999999985,
+          "encodedBytes": 3264886,
+          "jsHeapBytes": 85646458
+        },
+        {
+          "seconds": 180.0003999999985,
+          "encodedBytes": 3424492,
+          "jsHeapBytes": 69870693
+        },
+        {
+          "seconds": 180.0021000000015,
+          "encodedBytes": 3424492,
+          "jsHeapBytes": 69870961
+        }
+      ]
+    },
+    "wallSeconds": 189.196,
+    "duration": 179.975,
+    "width": 586,
+    "height": 900,
+    "decodedFrames": 347,
+    "MBPerMinute": 1.141655896652313,
+    "encodedBytesPerSecond": 19027.59827753855,
+    "policyHeadroomBytes": 88800404
+  },
+  {
+    "key": "phone-donut-high",
+    "file": "phone-donut-high.webm",
+    "plan": {
+      "width": 1170,
+      "height": 1800,
+      "quality": "high",
+      "fps": 30,
+      "bitrate": 2253059,
+      "maxBytes": 66967296,
+      "maxSeconds": 180
+    },
+    "bytes": 2937614,
+    "type": "video/webm",
+    "seconds": 180,
+    "reason": "time",
+    "requestedSeconds": 180,
+    "memory": {
+      "bytes": 2937614,
+      "largestChunk": 202260,
+      "samples": [
+        {
+          "seconds": 0.00009999999776482581,
+          "encodedBytes": 0,
+          "jsHeapBytes": 77925140
+        },
+        {
+          "seconds": 7.63539999999851,
+          "encodedBytes": 1,
+          "jsHeapBytes": 96349612
+        },
+        {
+          "seconds": 11.923599999997764,
+          "encodedBytes": 16181,
+          "jsHeapBytes": 87759117
+        },
+        {
+          "seconds": 16.1825,
+          "encodedBytes": 28838,
+          "jsHeapBytes": 104735557
+        },
+        {
+          "seconds": 20.01489999999851,
+          "encodedBytes": 168594,
+          "jsHeapBytes": 120239669
+        },
+        {
+          "seconds": 26.2525,
+          "encodedBytes": 179134,
+          "jsHeapBytes": 87709857
+        },
+        {
+          "seconds": 31.459599999997764,
+          "encodedBytes": 250402,
+          "jsHeapBytes": 96281197
+        },
+        {
+          "seconds": 36.02519999999925,
+          "encodedBytes": 333243,
+          "jsHeapBytes": 94783325
+        },
+        {
+          "seconds": 40.16309999999776,
+          "encodedBytes": 334151,
+          "jsHeapBytes": 113450109
+        },
+        {
+          "seconds": 46.92809999999776,
+          "encodedBytes": 400428,
+          "jsHeapBytes": 79329054
+        },
+        {
+          "seconds": 51.577699999999254,
+          "encodedBytes": 408437,
+          "jsHeapBytes": 96350083
+        },
+        {
+          "seconds": 56.79809999999777,
+          "encodedBytes": 585534,
+          "jsHeapBytes": 112962661
+        },
+        {
+          "seconds": 60.0025,
+          "encodedBytes": 680770,
+          "jsHeapBytes": 86374413
+        },
+        {
+          "seconds": 66.77489999999851,
+          "encodedBytes": 701645,
+          "jsHeapBytes": 113416160
+        },
+        {
+          "seconds": 71.2765,
+          "encodedBytes": 701731,
+          "jsHeapBytes": 79305053
+        },
+        {
+          "seconds": 76.52619999999925,
+          "encodedBytes": 841954,
+          "jsHeapBytes": 87817741
+        },
+        {
+          "seconds": 81.2285,
+          "encodedBytes": 1097235,
+          "jsHeapBytes": 103209269
+        },
+        {
+          "seconds": 87.25239999999852,
+          "encodedBytes": 1368916,
+          "jsHeapBytes": 86326689
+        },
+        {
+          "seconds": 90.3245,
+          "encodedBytes": 1514609,
+          "jsHeapBytes": 94872321
+        },
+        {
+          "seconds": 96.28119999999926,
+          "encodedBytes": 1559081,
+          "jsHeapBytes": 77804620
+        },
+        {
+          "seconds": 102.00139999999851,
+          "encodedBytes": 1634702,
+          "jsHeapBytes": 87825123
+        },
+        {
+          "seconds": 106.80309999999777,
+          "encodedBytes": 1673145,
+          "jsHeapBytes": 113364281
+        },
+        {
+          "seconds": 110.00419999999926,
+          "encodedBytes": 1686873,
+          "jsHeapBytes": 103240837
+        },
+        {
+          "seconds": 116.87309999999776,
+          "encodedBytes": 1827334,
+          "jsHeapBytes": 138729765
+        },
+        {
+          "seconds": 120.00030000000075,
+          "encodedBytes": 1932065,
+          "jsHeapBytes": 86379268
+        },
+        {
+          "seconds": 127.26730000000074,
+          "encodedBytes": 1932065,
+          "jsHeapBytes": 96450093
+        },
+        {
+          "seconds": 132.48889999999852,
+          "encodedBytes": 1936672,
+          "jsHeapBytes": 77825311
+        },
+        {
+          "seconds": 136.60909999999777,
+          "encodedBytes": 1937790,
+          "jsHeapBytes": 87939400
+        },
+        {
+          "seconds": 140.68230000000074,
+          "encodedBytes": 2077399,
+          "jsHeapBytes": 103269805
+        },
+        {
+          "seconds": 146.1755,
+          "encodedBytes": 2158640,
+          "jsHeapBytes": 104736963
+        },
+        {
+          "seconds": 151.74809999999778,
+          "encodedBytes": 2516360,
+          "jsHeapBytes": 138262933
+        },
+        {
+          "seconds": 155.304,
+          "encodedBytes": 2517412,
+          "jsHeapBytes": 103280317
+        },
+        {
+          "seconds": 160.52459999999778,
+          "encodedBytes": 2690467,
+          "jsHeapBytes": 121995953
+        },
+        {
+          "seconds": 166.637,
+          "encodedBytes": 2737202,
+          "jsHeapBytes": 87933649
+        },
+        {
+          "seconds": 170.007,
+          "encodedBytes": 2746044,
+          "jsHeapBytes": 94879445
+        },
+        {
+          "seconds": 178.38459999999776,
+          "encodedBytes": 2890855,
+          "jsHeapBytes": 96437485
+        },
+        {
+          "seconds": 180.046,
+          "encodedBytes": 2937614,
+          "jsHeapBytes": 103521792
+        },
+        {
+          "seconds": 180.04719999999926,
+          "encodedBytes": 2937614,
+          "jsHeapBytes": 103522060
+        }
+      ]
+    },
+    "wallSeconds": 217.65,
+    "duration": 179.662,
+    "width": 1170,
+    "height": 1800,
+    "decodedFrames": 264,
+    "MBPerMinute": 0.9810468546492859,
+    "encodedBytesPerSecond": 16350.780910821431,
+    "policyHeadroomBytes": 64029682
+  }
+]

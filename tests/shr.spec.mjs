@@ -445,13 +445,16 @@ test.describe("the preview sheet, more", () => {
     expect(errors).toEqual([]);
   });
 
-  test("with no WebM recording, Save a clip opens on GIF and the Video side is off", async ({
+  test("with no video encoder, Save a clip opens on GIF and the Video side is off", async ({
     page,
   }) => {
     const errors = watchErrors(page);
     await page.addInitScript(() => {
       const real = MediaRecorder.isTypeSupported.bind(MediaRecorder);
       MediaRecorder.isTypeSupported = (m) => !/webm/i.test(m) && real(m);
+      // Task 89 uses WebCodecs for clips. Disable that API too so the
+      // original no-video fallback checks still exercise an unavailable encoder.
+      Object.defineProperty(window, "VideoEncoder", { configurable: true, value: undefined });
     });
     await open(page);
     await showTab(page, "share");
@@ -461,6 +464,24 @@ test.describe("the preview sheet, more", () => {
     await expect(page.locator("#export-gif")).toBeVisible();
     await expect(page.locator("#webm-block")).toBeHidden();
     expect(await layoutProblems(page, "pane-share")).toEqual([]);
+    expect(errors).toEqual([]);
+  });
+
+  test("WebCodecs video stays available without WebM MediaRecorder", async ({ page }) => {
+    const errors = watchErrors(page);
+    await page.addInitScript(() => {
+      const real = MediaRecorder.isTypeSupported.bind(MediaRecorder);
+      MediaRecorder.isTypeSupported = (m) => !/webm/i.test(m) && real(m);
+    });
+    await open(page);
+    await showTab(page, "share");
+    await expect(page.locator("#clip-kind [data-clip=video]")).toBeEnabled();
+    await expect(page.locator("#clip-kind [data-clip=video]")).toHaveAttribute(
+      "aria-pressed",
+      "true",
+    );
+    await expect(page.locator("#export-webm")).toBeVisible();
+    await expect(page.locator("#gif-block")).toBeHidden();
     expect(errors).toEqual([]);
   });
 });

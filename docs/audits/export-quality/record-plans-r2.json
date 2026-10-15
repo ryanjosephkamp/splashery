@@ -1,0 +1,114 @@
+{
+  "policy": "Ceilings are policy choices, not measured device memory.",
+  "defaults": {
+    "quality": "standard",
+    "fps": 30
+  },
+  "plans": [
+    {
+      "size": {
+        "width": 390,
+        "height": 664,
+        "dpr": 3,
+        "phone": true
+      },
+      "width": 586,
+      "height": 996,
+      "quality": "standard",
+      "fps": 30,
+      "bitrate": 3119104,
+      "maxBytes": 91324800,
+      "maxSeconds": 180
+    },
+    {
+      "size": {
+        "width": 390,
+        "height": 664,
+        "dpr": 3,
+        "phone": true
+      },
+      "width": 1170,
+      "height": 1992,
+      "quality": "high",
+      "fps": 30,
+      "bitrate": 6631792,
+      "maxBytes": 63373056,
+      "maxSeconds": 60
+    },
+    {
+      "size": {
+        "width": 430,
+        "height": 900,
+        "dpr": 3,
+        "phone": true
+      },
+      "width": 646,
+      "height": 1350,
+      "quality": "standard",
+      "fps": 30,
+      "bitrate": 2955011,
+      "maxBytes": 86709696,
+      "maxSeconds": 180
+    },
+    {
+      "size": {
+        "width": 430,
+        "height": 900,
+        "dpr": 3,
+        "phone": true
+      },
+      "width": 1290,
+      "height": 2700,
+      "quality": "high",
+      "fps": 30,
+      "bitrate": 4665098,
+      "maxBytes": 44935296,
+      "maxSeconds": 60
+    },
+    {
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "phone": false
+      },
+      "width": 1440,
+      "height": 900,
+      "quality": "standard",
+      "fps": 30,
+      "bitrate": 8888888,
+      "maxBytes": 381917184,
+      "maxSeconds": 271
+    },
+    {
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "phone": false
+      },
+      "width": 2560,
+      "height": 1600,
+      "quality": "high",
+      "fps": 30,
+      "bitrate": 35831166,
+      "maxBytes": 337117184,
+      "maxSeconds": 60
+    },
+    {
+      "size": {
+        "width": 1440,
+        "height": 900,
+        "dpr": 1,
+        "phone": false
+      },
+      "width": 3840,
+      "height": 2400,
+      "quality": "max",
+      "fps": 30,
+      "bitrate": 54314065,
+      "maxBytes": 255197184,
+      "maxSeconds": 30
+    }
+  ]
+}

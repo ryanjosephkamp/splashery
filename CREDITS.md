@@ -1854,6 +1854,12 @@ Their source is `tools/studio-truth-generate.py`, and each committed file's size
 recorded in `tests/fixtures/truth/assets.json`. Full sequences are kept separately from the shipped
 site. The build-time code is offered under this repository's MIT license.
 
+## Full-quality exports (Codex task 89)
+
+The export presets, stepped GIF and video captures, recording quality levels, and their tests are
+made by Ryan with Codex (GPT-6), October 15, 2026, under Splashery's MIT license. The video muxers
+are by Vanilagy, MIT; see [LICENSES.md](LICENSES.md#video-export-muxers-codex-task-89).
+
 ## Picture QR theme packs (Codex task 58)
 
 48 original code-made illustrations, selected from 138 candidates, **Made by Ryan with Codex

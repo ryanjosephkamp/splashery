@@ -471,3 +471,21 @@ These tool versions are retained with the public review evidence.
   https://ffmpeg.org/legal.html: H.264 video encoding with libx264 and checks of frame counts,
   duration, and dimensions. No executable is served. These are build tools allowed by Rules v1; the
   original rendered output is CC0.
+
+## Video export muxers (Codex task 89)
+
+- `mp4-muxer@5.2.2`, MIT, Vanilagy:
+  [source and license](https://raw.githubusercontent.com/Vanilagy/mp4-muxer/v5.2.2/LICENSE).
+  Unmodified npm ESM build at `vendor/mp4-muxer/mp4-muxer.mjs`; license beside it.
+- `webm-muxer@5.1.4`, MIT, Vanilagy:
+  [source and license](https://raw.githubusercontent.com/Vanilagy/webm-muxer/v5.1.4/LICENSE).
+  Unmodified npm ESM build at `vendor/webm-muxer/webm-muxer.mjs`; license beside it.
+
+Both load only when a video is encoded. They make no network calls. Source licenses checked on
+October 15, 2026. The export implementation is made by Ryan with Codex (GPT-6) under Splashery's MIT
+license.
+
+The task 89 measurement scripts additionally use the workspace's Python 3, NumPy 2.3.5, Pillow
+12.3.0, and FFmpeg / ffprobe 7.1.5. These are build-time tools only; none ships with the page.
+Pillow and this FFmpeg build are listed above. NumPy is BSD-3-Clause:
+https://numpy.org/doc/2.3/license.html.

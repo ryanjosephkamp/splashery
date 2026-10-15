@@ -1244,8 +1244,8 @@
                 <!-- Codex task 89: Record's quality choice goes here, beside the button. -->
               </div>
               <p class="note" id="record-note">
-                You play, it records, with sound (up to 1 minute). When you stop, you can watch it
-                before you save it.
+                You play, it records, with sound. Choose a quality to see its time limit. When you
+                stop, you can watch it before you save it.
               </p>
               <p id="record-unavailable" class="note" hidden></p>
             </section>
@@ -1261,11 +1261,7 @@
                 <div class="clip-settings" id="webm-row">
                   <label class="clip-field">
                     <span>Length</span>
-                    <select id="webm-seconds" aria-label="Video length">
-                      <option value="3">3 s</option>
-                      <option value="5" selected>5 s</option>
-                      <option value="8">8 s</option>
-                    </select>
+                    <select id="webm-seconds" aria-label="Video length"></select>
                   </label>
                 </div>
                 <button id="export-webm" type="button" class="clip-save">Save video</button>
@@ -1275,26 +1271,15 @@
                 <div class="clip-settings" id="gif-row">
                   <label class="clip-field">
                     <span>Motion</span>
-                    <select id="gif-kind" aria-label="GIF motion">
-                      <option value="turntable">Turntable</option>
-                      <option value="effects">Effect loop</option>
-                    </select>
+                    <select id="gif-kind" aria-label="GIF motion"></select>
                   </label>
                   <label class="clip-field">
                     <span>Frames</span>
-                    <select id="gif-frames" aria-label="GIF frames">
-                      <option value="24">24 frames</option>
-                      <option value="48" selected>48 frames</option>
-                      <option value="72">72 frames</option>
-                    </select>
+                    <select id="gif-frames" aria-label="GIF frames"></select>
                   </label>
                   <label class="clip-field">
                     <span>Size</span>
-                    <select id="gif-size" aria-label="GIF size">
-                      <option value="256">256 px</option>
-                      <option value="384">384 px</option>
-                      <option value="512" selected>512 px</option>
-                    </select>
+                    <select id="gif-size" aria-label="GIF size"></select>
                   </label>
                 </div>
                 <button id="export-gif" type="button" class="clip-save">Save GIF</button>

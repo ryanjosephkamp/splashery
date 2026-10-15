@@ -30,17 +30,26 @@ import {
   timestampName,
   canvasToBlob,
   encodeGIF,
-  webmSupport,
-  recordWebM,
   recordSupport, // UI r5
   startRecording,
   canShareFile,
-  RECORD_LIMIT,
   buildShareHash,
   shareURL,
   iframeSnippet,
   elementSnippet,
 } from "./exports.js";
+
+import {
+  EXPORT_PRESETS as EXPORTS,
+  exportDimensions,
+  sourcePicture,
+  gifPlan,
+  gifLoopSeconds,
+  recordingPlan,
+} from "./export/presets.js";
+import { videoSupport, encodeVideo } from "./export/video.js";
+import { steppedCapture } from "./export/capture.js";
+import { recordingPerformanceMonitor, recordingAudioTap } from "./export/record.js";
 
 const canvas = document.getElementById("stage");
 
@@ -213,7 +222,7 @@ class App {
     });
     player.on("chunks", () => this.updateStatus()); // lane Powers of ten
     player.on("media", (m) => ui.setPictures?.(player.pictures?.info() || null, m));
-    const wm = webmSupport();
+    const wm = videoSupport();
     ui.setWebmUnavailable(wm.ok ? null : wm.reason);
     const rs = recordSupport(); // UI r5
     ui.setRecordUnavailable(rs.ok ? null : rs.reason);
@@ -1690,7 +1699,7 @@ class App {
 
   // Runs fn with a fixed-size, frozen player and restores it afterwards.
   // label: a short message shown over the stage meanwhile (Stage.cover).
-  async withCapture(size, fn, { label = "" } = {}) {
+  async withCapture(size, fn, { label = "", stepped = false } = {}) {
     const player = this.player;
     // Engine (QR r4): the fixed size and the export camera stay off screen.
     await player.stage.cover({ label });
@@ -1698,21 +1707,33 @@ class App {
     const look = player.scene.look;
     const fx = player.scene.effects;
     const savedWind = { ...fx.wind };
+    const clipTime = window.__clipT;
+    const wasFrozen = player.frozen;
+    let clock;
     if (look.background === "transparent") {
       player.stage.setClearColor(hexRgb(THEMES[player.resolvedTheme()].page), 1);
     }
     player.idle.weight = 0;
     player.stage.setFixedSize(size);
     try {
+      if (stepped) {
+        clock = await steppedCapture(player, base);
+        base.frame = clock.frame;
+        base.loop = clock.loop;
+      }
       return await fn(base, savedWind);
     } finally {
+      clock?.restore();
+      if (clipTime === undefined) delete window.__clipT;
+      else window.__clipT = clipTime;
       fx.wind = savedWind;
       player.stage.setFixedSize(null);
       player.camera.setState(base.cam, { snap: true });
       player.time = base.time;
       player.idle.weight = base.idle;
       player.applyLook();
-      player.resume();
+      player.frozen = wasFrozen;
+      player.stage.requestRender();
       player.stage.uncover();
     }
   }
@@ -1722,55 +1743,60 @@ class App {
     return ["wind", "dissolve", "drop", "twist", "slice"].some((id) => fx[id].on);
   }
 
-  async exportGIF({ kind = "turntable", frames = 48, size = 512 } = {}) {
-    const player = this.player;
-    return this.withBusy("Making a GIF…", (progress) =>
-      this.withCapture([size, size], async (base) => {
-        if (kind === "effects" && !this.anyAmbientOn()) {
-          player.scene.effects.wind = { ...player.scene.effects.wind, on: true, strength: 0.4 };
-          this.ui.toast("No effect was on, so the GIF uses a breeze.");
-        }
-        const loop = 4;
-        const blob = await encodeGIF({
-          frames,
-          size,
-          loopMs: loop * 1000,
-          onProgress: (f) => progress(f, "Making a GIF…"),
-          renderFrame: (i, n) => {
-            const pose =
-              kind === "turntable"
-                ? { ...base.cam, yaw: base.cam.yaw + (i / n) * Math.PI * 2 }
-                : base.cam;
-            return player.renderAt(base.time + (i / n) * loop, pose);
+  async exportGIF(options = {}) {
+    const { kind, frames, size, shape } = { ...EXPORTS.gif.defaults, ...options };
+    const dims = exportDimensions(size, shape, sourcePicture(this.player));
+    const plan = gifPlan({ ...dims, frames });
+    return this.withBusy(
+      `Estimated GIF: ${formatBytes(plan.estimatedBytes)}. Making a GIF…`,
+      (progress) => {
+        if (!plan.ok)
+          throw new Error(
+            "This GIF needs more memory than this device's export budget. Choose fewer frames or a smaller size.",
+          );
+        return this.withCapture(
+          [dims.width, dims.height],
+          async (base) => {
+            const loop = gifLoopSeconds(base.loop, kind);
+            const blob = await encodeGIF({
+              frames,
+              ...dims,
+              loopMs: loop * 1000,
+              onProgress: (f) => progress(f, "Making a GIF…"),
+              renderFrame: (i, n) => base.frame((i / n) * loop, kind, loop),
+            });
+            downloadBlob(blob, timestampName("gif"));
+            this.ui.toast(`GIF saved (${formatBytes(blob.size)}).`);
+            return blob;
           },
-        });
-        downloadBlob(blob, timestampName("gif"));
-        this.ui.toast(`GIF saved (${formatBytes(blob.size)}).`);
-        return blob;
-      }),
+          { stepped: true, label: "Making a GIF…" },
+        );
+      },
     );
   }
 
-  async exportWebM(seconds = 5) {
-    const wm = webmSupport();
-    if (!wm.ok) return;
-    const player = this.player;
-    return this.withBusy("Recording a video…", (progress) =>
-      this.withCapture([720, 720], async (base) => {
-        const blob = await recordWebM({
-          canvas,
-          seconds,
-          mime: wm.mime,
-          onProgress: (f) => progress(f, "Recording a video…"),
-          drawFrame: (t) => {
-            const pose = { ...base.cam, yaw: base.cam.yaw + t * Math.PI * 2 };
-            return player.renderAt(base.time + t * seconds, pose);
-          },
-        });
-        downloadBlob(blob, timestampName("webm"));
-        this.ui.toast(`Video saved (${formatBytes(blob.size)}).`);
-        return blob;
-      }),
+  // Keep this name for existing UI callers; the result may now be MP4.
+  async exportWebM(options = {}) {
+    if (typeof options === "number") options = { seconds: options };
+    const { kind, seconds, size, fps, shape } = { ...EXPORTS.video.defaults, ...options };
+    const dims = exportDimensions(size, shape, sourcePicture(this.player));
+    return this.withBusy("Making a video…", (progress) =>
+      this.withCapture(
+        [dims.width, dims.height],
+        async (base) => {
+          const result = await encodeVideo({
+            ...dims,
+            seconds,
+            fps,
+            onProgress: (f) => progress(f, "Making a video…"),
+            drawFrame: (t) => base.frame(t, kind, seconds),
+          });
+          downloadBlob(result.blob, timestampName(result.ext));
+          this.ui.toast(`Video saved (${formatBytes(result.blob.size)}).`);
+          return result.blob;
+        },
+        { stepped: true, label: "Making a video…" },
+      ),
     );
   }
 
@@ -1803,8 +1829,10 @@ class App {
   // ---- UI r5: Record ---------------------------------------------------------------
   // A live recording of the stage while someone plays, with the site's sound.
   // The Share tab starts it; the pill on the stage shows the time, stops it and
-  // then saves (or, on a phone, shares) the video. 60 seconds at most.
-  async startRecord() {
+  // then saves (or, on a phone, shares) the video. Ten minutes at most.
+  async startRecord({
+    quality = document.getElementById("record-quality")?.value || EXPORTS.record.defaults.quality,
+  } = {}) {
     if (this.recording || this.recordWait || this.busy) return;
     const player = this.player;
     const stage = player.stage;
@@ -1812,53 +1840,146 @@ class App {
     // switched on while recording is in the video too).
     const ctx = this.sound.audio?.();
     const audio = ctx && this.sound.master ? { ctx, node: this.sound.master } : null;
+    // Create the independent recording clock in the actual button gesture,
+    // before waiting for layout or a potentially slow full-size render.
+    try {
+      if (audio) audio.tap = recordingAudioTap(audio);
+    } catch (err) {
+      this.ui.toast(`Could not record: ${err.message || err}`);
+      return;
+    }
     // On a phone the sheet closes first, so the take starts at the stage's
     // own size (two frames for the new size to reach the canvas).
     this.ui.collapseSheet?.();
     this.recordWait = true;
     await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
-    this.recordWait = false;
-    // A steady size for the encoder: no drop in resolution while dragging,
-    // and at most 1920 pixels on the long side.
-    const saved = { adaptive: stage.adaptive, cap: stage.pixelCap };
+    // Fixed buffer sizes bypass tier, fluid, and drag caps during the take.
+    const saved = { adaptive: stage.adaptive, reduced: stage.reduced, fixedSize: stage.fixedSize };
     const r = canvas.getBoundingClientRect();
-    const long = Math.max(r.width, r.height, 1);
-    stage.adaptive = false;
-    stage.reduced = false;
-    stage.setPixelRatio(Math.min(saved.cap ?? 3, 1920 / long));
+    let plan;
+    try {
+      plan = recordingPlan({
+        width: r.width,
+        height: r.height,
+        dpr: window.devicePixelRatio || 1,
+        tierCap: stage.pixelCap ?? 3,
+        quality,
+      });
+    } catch (err) {
+      this.recordWait = false;
+      audio?.tap?.dispose();
+      this.ui.toast(err.message);
+      return;
+    }
+    if (plan.maxBytes < 1024 * 1024) {
+      this.recordWait = false;
+      audio?.tap?.dispose();
+      this.ui.toast(
+        "This recording size needs more memory than this device's budget. Choose Standard.",
+      );
+      return;
+    }
+    let initialFrame;
+    try {
+      stage.adaptive = false;
+      stage.reduced = false;
+      stage.setFixedSize([plan.width, plan.height]);
+      // Let the new buffer reach the stage before captureStream starts.
+      initialFrame = await stage.captureFrame();
+    } catch (err) {
+      this.recordWait = false;
+      audio?.tap?.dispose();
+      stage.adaptive = saved.adaptive;
+      stage.reduced = saved.reduced;
+      stage.setFixedSize(saved.fixedSize);
+      this.ui.toast(`Could not record: ${err.message || err}`);
+      return;
+    }
     let rec;
-    const kick = () => rec?.frame(); // each drawn frame goes into the video
+    let frameStart = 0;
+    let rendered = false;
+    const markRendered = () => {
+      rendered = true;
+    };
+    const checkPerformance = recordingPerformanceMonitor(() => rec?.stop("performance"));
+    const beginFrame = () => {
+      frameStart = performance.now();
+      rendered = false;
+    };
+    stage.app.on("frameupdate", beginFrame);
+    const kick = () => {
+      if (!rendered) return;
+      rendered = false;
+      rec?.frame();
+      const now = performance.now();
+      // Measure work inside a frame, rather than gaps between idle frames.
+      // A 700 ms render counts as slow; waiting 700 ms for a tap does not.
+      const work = now - frameStart;
+      if (quality === "max" && frameStart) {
+        checkPerformance(work);
+      }
+    };
+    // postrender precedes the graphics device's final blit. Read at frameend,
+    // but only after postrender marked that this frame actually drew.
+    stage.app.on("postrender", markRendered);
     stage.app.on("frameend", kick);
     const restore = () => {
+      stage.app.off("postrender", markRendered);
       stage.app.off("frameend", kick);
+      stage.app.off("frameupdate", beginFrame);
       stage.adaptive = saved.adaptive;
-      stage.setPixelRatio(saved.cap);
+      stage.reduced = saved.reduced;
+      stage.setFixedSize(saved.fixedSize);
     };
     try {
       rec = startRecording({
         canvas,
+        initialFrame,
         audio,
-        maxSeconds: RECORD_LIMIT,
+        quality,
+        bitrate: plan.bitrate,
+        fps: plan.fps,
+        maxBytes: plan.maxBytes,
+        maxSeconds: plan.maxSeconds,
+        onWarning: (message) => this.ui.toast(message, 10000),
         onTick: (seconds) => {
-          this.ui.setRecord({ state: "rec", seconds, limit: RECORD_LIMIT });
+          this.ui.setRecord({ state: "rec", seconds, limit: plan.maxSeconds });
           stage.requestRender(0); // a still toy still gives the video a few frames a second
         },
       });
     } catch (err) {
+      this.recordWait = false;
+      audio?.tap?.dispose();
       restore();
       this.ui.toast(`Could not record: ${err.message || err}`);
       return;
     }
     this.recording = rec;
+    this.recordWait = false;
     this.recorded = null;
-    this.ui.setRecord({ state: "rec", seconds: 0, limit: RECORD_LIMIT });
+    this.ui.setRecord({ state: "rec", seconds: 0, limit: plan.maxSeconds });
     document.getElementById("rec-stop").focus({ preventScroll: true });
     stage.requestRender();
     rec.done
-      .then(({ blob, ext, seconds }) => {
-        this.recorded = { blob, name: timestampName(ext), seconds };
+      .then(({ blob, ext, seconds, type, size, reason }) => {
+        this.recorded = { blob, name: timestampName(ext), seconds, type, size, reason };
+        if (reason === "size")
+          this.ui.toast(
+            "Recording stopped at this device's size budget. Your take is ready to save.",
+            10000,
+          );
+        else if (reason === "time")
+          this.ui.toast(
+            "Recording reached the time limit for this quality. Your take is ready to save.",
+            10000,
+          );
+        if (reason === "performance")
+          this.ui.toast(
+            "This device could not keep up with Max. Your take is ready to save; choose High for the next recording.",
+            10000,
+          );
         const share = !!canShareFile(blob, this.recorded.name);
-        this.ui.setRecord({ state: "ready", seconds, bytes: blob.size, share });
+        this.ui.setRecord({ state: "ready", blob, type, seconds, bytes: size, share, reason });
       })
       .catch((err) => {
         this.ui.setRecord({ state: "off" });
@@ -1868,6 +1989,10 @@ class App {
         this.recording = null;
         restore();
       });
+    // A short take must contain a rendered video frame, even when this toy
+    // needs longer than the person's next tap to finish its first draw.
+    await stage.captureFrame();
+    rec.frame();
   }
 
   stopRecord() {

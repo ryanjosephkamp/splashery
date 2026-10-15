@@ -1,0 +1,173 @@
+[
+  {
+    "input": {
+      "phone": true,
+      "width": 390,
+      "height": 600,
+      "dpr": 3,
+      "tierCap": 1.5,
+      "quality": "standard"
+    },
+    "plan": {
+      "width": 586,
+      "height": 900,
+      "quality": "standard",
+      "fps": 30,
+      "bitrate": 3151107,
+      "maxBytes": 92224896,
+      "maxSeconds": 180
+    }
+  },
+  {
+    "input": {
+      "phone": true,
+      "width": 390,
+      "height": 600,
+      "dpr": 3,
+      "tierCap": 1.5,
+      "quality": "high"
+    },
+    "plan": {
+      "width": 1170,
+      "height": 1800,
+      "quality": "high",
+      "fps": 30,
+      "bitrate": 2253059,
+      "maxBytes": 66967296,
+      "maxSeconds": 180
+    }
+  },
+  {
+    "input": {
+      "phone": true,
+      "width": 390,
+      "height": 664,
+      "dpr": 3,
+      "tierCap": 1.5,
+      "quality": "standard"
+    },
+    "plan": {
+      "width": 586,
+      "height": 996,
+      "quality": "standard",
+      "fps": 30,
+      "bitrate": 3119104,
+      "maxBytes": 91324800,
+      "maxSeconds": 180
+    }
+  },
+  {
+    "input": {
+      "phone": true,
+      "width": 390,
+      "height": 664,
+      "dpr": 3,
+      "tierCap": 1.5,
+      "quality": "high"
+    },
+    "plan": {
+      "width": 1170,
+      "height": 1992,
+      "quality": "high",
+      "fps": 30,
+      "bitrate": 2125264,
+      "maxBytes": 63373056,
+      "maxSeconds": 180
+    }
+  },
+  {
+    "input": {
+      "phone": true,
+      "width": 430,
+      "height": 900,
+      "dpr": 3,
+      "tierCap": 1.5,
+      "quality": "standard"
+    },
+    "plan": {
+      "width": 646,
+      "height": 1350,
+      "quality": "standard",
+      "fps": 30,
+      "bitrate": 2955011,
+      "maxBytes": 86709696,
+      "maxSeconds": 180
+    }
+  },
+  {
+    "input": {
+      "phone": true,
+      "width": 430,
+      "height": 900,
+      "dpr": 3,
+      "tierCap": 1.5,
+      "quality": "high"
+    },
+    "plan": {
+      "width": 1290,
+      "height": 2700,
+      "quality": "high",
+      "fps": 30,
+      "bitrate": 1469699,
+      "maxBytes": 44935296,
+      "maxSeconds": 180
+    }
+  },
+  {
+    "input": {
+      "phone": false,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "tierCap": 1.5,
+      "quality": "standard"
+    },
+    "plan": {
+      "width": 1440,
+      "height": 900,
+      "quality": "standard",
+      "fps": 30,
+      "bitrate": 8888888,
+      "maxBytes": 381917184,
+      "maxSeconds": 271
+    }
+  },
+  {
+    "input": {
+      "phone": false,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "tierCap": 1.5,
+      "quality": "high"
+    },
+    "plan": {
+      "width": 2560,
+      "height": 1600,
+      "quality": "high",
+      "fps": 30,
+      "bitrate": 35831166,
+      "maxBytes": 337117184,
+      "maxSeconds": 60
+    }
+  },
+  {
+    "input": {
+      "phone": false,
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "tierCap": 1.5,
+      "quality": "max"
+    },
+    "plan": {
+      "width": 3840,
+      "height": 2400,
+      "quality": "max",
+      "fps": 30,
+      "bitrate": 54314065,
+      "maxBytes": 255197184,
+      "maxSeconds": 30
+    }
+  }
+]
