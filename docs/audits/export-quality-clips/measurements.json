@@ -1,0 +1,196 @@
+[
+  {
+    "key": "before-desktop-photo-3d-gif",
+    "file": "before-desktop-photo-3d-gif.gif",
+    "bytes": 2992258,
+    "type": "image/gif",
+    "wallSeconds": 13.010199999999953,
+    "before": true
+  },
+  {
+    "key": "before-desktop-photo-3d-video",
+    "file": "before-desktop-photo-3d-video.webm",
+    "bytes": 364348,
+    "type": "video/webm",
+    "wallSeconds": 6.56129999999993,
+    "before": true
+  },
+  {
+    "key": "before-desktop-donut-gif",
+    "file": "before-desktop-donut-gif.gif",
+    "bytes": 1296857,
+    "type": "image/gif",
+    "wallSeconds": 43.67979999999993,
+    "before": true
+  },
+  {
+    "key": "before-desktop-record-standard",
+    "file": "before-desktop-record-standard.mp4",
+    "bytes": 28697,
+    "type": "video/mp4",
+    "seconds": 3.4095,
+    "wallSeconds": 3.7969000000000235,
+    "width": 1072,
+    "height": 900,
+    "before": true
+  },
+  {
+    "key": "before-phone-photo-3d-gif",
+    "file": "before-phone-photo-3d-gif.gif",
+    "bytes": 2992258,
+    "type": "image/gif",
+    "wallSeconds": 19.842,
+    "before": true
+  },
+  {
+    "key": "before-phone-photo-3d-video",
+    "file": "before-phone-photo-3d-video.webm",
+    "bytes": 292456,
+    "type": "video/webm",
+    "wallSeconds": 7.498599999999977,
+    "before": true
+  },
+  {
+    "key": "before-phone-record-standard",
+    "file": "before-phone-record-standard.mp4",
+    "bytes": 41796,
+    "type": "video/mp4",
+    "seconds": 3.3726999999999534,
+    "wallSeconds": 3.7447000000000696,
+    "width": 585,
+    "height": 967,
+    "before": true
+  },
+  {
+    "key": "after-desktop-photo-3d-video",
+    "file": "after-desktop-photo-3d-video.mp4",
+    "bytes": 11866301,
+    "type": "video/mp4",
+    "wallSeconds": 279.69820000000004,
+    "before": false
+  },
+  {
+    "key": "before-desktop-chest-gif",
+    "file": "before-desktop-chest-gif.gif",
+    "bytes": 901632,
+    "type": "image/gif",
+    "wallSeconds": 30.0345,
+    "before": true
+  },
+  {
+    "key": "after-desktop-photo-3d-gif",
+    "file": "after-desktop-photo-3d-gif.gif",
+    "bytes": 14543419,
+    "type": "image/gif",
+    "wallSeconds": 118.31119999999996,
+    "before": false
+  },
+  {
+    "key": "after-desktop-chest-gif",
+    "file": "after-desktop-chest-gif.gif",
+    "bytes": 3237321,
+    "type": "image/gif",
+    "wallSeconds": 99.84530000000005,
+    "before": false
+  },
+  {
+    "key": "after-desktop-donut-gif",
+    "file": "after-desktop-donut-gif.gif",
+    "bytes": 5272509,
+    "type": "image/gif",
+    "wallSeconds": 99.63469999999995,
+    "before": false
+  },
+  {
+    "key": "after-phone-photo-3d-gif",
+    "file": "after-phone-photo-3d-gif.gif",
+    "bytes": 14543419,
+    "type": "image/gif",
+    "wallSeconds": 88.81839999999991,
+    "before": false
+  },
+  {
+    "key": "after-phone-photo-3d-video",
+    "file": "after-phone-photo-3d-video.mp4",
+    "bytes": 11847576,
+    "type": "video/mp4",
+    "wallSeconds": 313.7157000000002,
+    "before": false
+  },
+  {
+    "key": "after-desktop-photo-3d-png",
+    "file": "after-desktop-photo-3d-png.png",
+    "bytes": 537426,
+    "type": "image/png",
+    "wallSeconds": 0.9315,
+    "before": false
+  },
+  {
+    "key": "after-phone-photo-3d-png",
+    "file": "after-phone-photo-3d-png.png",
+    "bytes": 231310,
+    "type": "image/png",
+    "wallSeconds": 0.43609999999962745,
+    "before": false
+  },
+  {
+    "key": "after-desktop-record-standard",
+    "file": "after-desktop-record-standard.webm",
+    "width": 1072,
+    "height": 900,
+    "bytes": 47915,
+    "type": "video/webm",
+    "seconds": 7.9877999999998135,
+    "reason": "stop",
+    "wallSeconds": 19.207,
+    "before": false
+  },
+  {
+    "key": "after-desktop-record-high",
+    "file": "after-desktop-record-high.webm",
+    "width": 2560,
+    "height": 2150,
+    "bytes": 647271,
+    "type": "video/webm",
+    "seconds": 45.986900000000375,
+    "reason": "stop",
+    "wallSeconds": 105.469,
+    "before": false
+  },
+  {
+    "key": "after-desktop-record-max",
+    "file": "after-desktop-record-max.webm",
+    "width": 3840,
+    "height": 3224,
+    "bytes": 2651252,
+    "type": "video/webm",
+    "seconds": 59.97829999999981,
+    "reason": "performance",
+    "wallSeconds": 130.594,
+    "before": false
+  },
+  {
+    "key": "after-phone-record-standard",
+    "file": "after-phone-record-standard.webm",
+    "width": 586,
+    "height": 968,
+    "bytes": 21562,
+    "type": "video/webm",
+    "seconds": 3.8115,
+    "reason": "stop",
+    "wallSeconds": 10.268,
+    "before": false
+  },
+  {
+    "key": "after-phone-record-high",
+    "file": "after-phone-record-high.webm",
+    "width": 1170,
+    "height": 1936,
+    "bytes": 214121,
+    "type": "video/webm",
+    "seconds": 13.575,
+    "reason": "stop",
+    "wallSeconds": 41.04,
+    "before": false
+  }
+]

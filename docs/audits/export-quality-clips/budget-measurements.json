@@ -1,0 +1,22 @@
+[
+  {
+    "phone": true,
+    "maxBytes": 100663296,
+    "bytes": 82021926,
+    "seconds": 23.787,
+    "reason": "size",
+    "warningAt": 23.790100000000095,
+    "drawn": 705,
+    "type": "video/mp4"
+  },
+  {
+    "phone": false,
+    "maxBytes": 402653184,
+    "bytes": 382973259,
+    "seconds": 115.89480000000005,
+    "reason": "size",
+    "warningAt": 99.10759999999986,
+    "drawn": 3368,
+    "type": "video/mp4"
+  }
+]

@@ -1,0 +1,211 @@
+{
+  "implementationCommit": "5db26cc2c1f682558f1a95bf3d1e2d0298fc7296",
+  "qualityCaptureCommit": "fa92d2427cffa8b5a3b5292d96f038fe773ecb87",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 4550,
+      "sha256": "62c4bcbfd871ac0c810043740a421abaacf99d2e2d90b84324dd5e6062ba5335"
+    },
+    {
+      "file": "after-desktop-chest-gif.gif",
+      "bytes": 3237321,
+      "sha256": "1b9722cc273be9df63e868bf6d3f42898286e9366943c1246341031a8d3d7b87"
+    },
+    {
+      "file": "after-desktop-donut-gif.gif",
+      "bytes": 5272509,
+      "sha256": "fae1534198f2366b8c33f431ef7e6e6a5c980a4c88c8052b403ad7e1f444b4c6"
+    },
+    {
+      "file": "after-desktop-photo-3d-gif.gif",
+      "bytes": 14543419,
+      "sha256": "ee06c618676166c2f4792fd5d7c87ed4f8c6cee5ef35308af431fa2f6578840e"
+    },
+    {
+      "file": "after-desktop-photo-3d-png.png",
+      "bytes": 537426,
+      "sha256": "de14212c62a89dfdbf494e2603ad20b33dfeb12018bccf4b358ab462b4e74077"
+    },
+    {
+      "file": "after-desktop-photo-3d-video.mp4",
+      "bytes": 11866301,
+      "sha256": "aaadfa6abd570b9f965759471a28b816dfc43f2ffc5734104f2d99fd7b05c404"
+    },
+    {
+      "file": "after-desktop-record-high-reference.png",
+      "bytes": 6053118,
+      "sha256": "e25509440a175630df2f79a31066bc0245be7d08c7b3116f73acd93f0cc629e6"
+    },
+    {
+      "file": "after-desktop-record-high.webm",
+      "bytes": 647271,
+      "sha256": "c8b3c3895636df648673e43c5c204aab88c0da985408d8b7a915369788660e3c"
+    },
+    {
+      "file": "after-desktop-record-max-reference.png",
+      "bytes": 13059560,
+      "sha256": "f7e8c6a010da9c7e556e523d4edb4045ebbbf8955654329ac0d134268bcd5a6f"
+    },
+    {
+      "file": "after-desktop-record-max.webm",
+      "bytes": 2651252,
+      "sha256": "d75bedb3b606d36cf337579241e2f2e40f413f2676cb55ccf0d00fe3b685e7f7"
+    },
+    {
+      "file": "after-desktop-record-standard-reference.png",
+      "bytes": 383236,
+      "sha256": "3a95cbfed4d7d47dd44e75e6cc606c6f59993d31047a6b1f435ed1877e0eabdd"
+    },
+    {
+      "file": "after-desktop-record-standard.webm",
+      "bytes": 47915,
+      "sha256": "3be03351c3c13c66667d16944a0c3995864fae3d1dbe29d9ded02fe577b7603f"
+    },
+    {
+      "file": "after-phone-photo-3d-gif.gif",
+      "bytes": 14543419,
+      "sha256": "ee06c618676166c2f4792fd5d7c87ed4f8c6cee5ef35308af431fa2f6578840e"
+    },
+    {
+      "file": "after-phone-photo-3d-png.png",
+      "bytes": 231310,
+      "sha256": "22f2ac62d5b8e16963c0f31c23b2642b30bc9fe17d85849210357b92736de423"
+    },
+    {
+      "file": "after-phone-photo-3d-video.mp4",
+      "bytes": 11847576,
+      "sha256": "75bc8956f730ce20e18bf252f982d2db60d72f3ccc7cb676f3ce30445dd536ae"
+    },
+    {
+      "file": "after-phone-record-high-reference.png",
+      "bytes": 1760594,
+      "sha256": "2ea93f37fa98408cf726d6893f4386792ad4fd239383dc2fd514ce4e9e7fd268"
+    },
+    {
+      "file": "after-phone-record-high.webm",
+      "bytes": 214121,
+      "sha256": "fd092fcb027de2a08142dd644b00d965bbeee846de10d5c52e23c1cbe2cdfd35"
+    },
+    {
+      "file": "after-phone-record-standard-reference.png",
+      "bytes": 164886,
+      "sha256": "25546c4231400217f0ed71a2bcee85958ab78796755428c3c62ac95a6597bdc4"
+    },
+    {
+      "file": "after-phone-record-standard.webm",
+      "bytes": 21562,
+      "sha256": "1c1e4ec88a45fb6633b9bb75115c421716a95643821376c2f38d528aee145050"
+    },
+    {
+      "file": "before-desktop-chest-gif.gif",
+      "bytes": 901632,
+      "sha256": "4687f166f5a1a79f9b816f57b143c0260b1f5857a895b6ee9fe9ae5dc7638260"
+    },
+    {
+      "file": "before-desktop-donut-gif.gif",
+      "bytes": 1296857,
+      "sha256": "d73b40460ce4f4ba2630ba6b91f30866f79c701185fe24226d62b4fb395ff18d"
+    },
+    {
+      "file": "before-desktop-photo-3d-gif.gif",
+      "bytes": 2992258,
+      "sha256": "70de5673021748d31888c533b89092dbbeb897530661c53fc8fc0cef1568883a"
+    },
+    {
+      "file": "before-desktop-photo-3d-video.webm",
+      "bytes": 364348,
+      "sha256": "059cdc8884da8573ff570db1c8476df63e0dc81e2421d2c6f05e3e40d8a92d67"
+    },
+    {
+      "file": "before-desktop-record-standard-reference.png",
+      "bytes": 314464,
+      "sha256": "227c666bf0ffa9b343080ee2fd03b15c51cf24f1bcc38c683fafd2a9ab9696ce"
+    },
+    {
+      "file": "before-desktop-record-standard.mp4",
+      "bytes": 28697,
+      "sha256": "e83838f2ba27dad830d1d35f6fb3476e2221fd170a6748032e4203d76203dc2f"
+    },
+    {
+      "file": "before-phone-photo-3d-gif.gif",
+      "bytes": 2992258,
+      "sha256": "70de5673021748d31888c533b89092dbbeb897530661c53fc8fc0cef1568883a"
+    },
+    {
+      "file": "before-phone-photo-3d-video.webm",
+      "bytes": 292456,
+      "sha256": "7dab4508f06a318dd40c832f99d71514940e5a22a6b0d03d6bfa6c8eed0ebb1f"
+    },
+    {
+      "file": "before-phone-record-standard-reference.png",
+      "bytes": 493582,
+      "sha256": "fa1977a4c8708b6a6c96e00163b8a9d88137bdd26303fe735cdac8ece241fcbc"
+    },
+    {
+      "file": "before-phone-record-standard.mp4",
+      "bytes": 41796,
+      "sha256": "02c3c332c9c4080c11013751df2c6a8ae57696e06280967f95bebbadd6cb7410"
+    },
+    {
+      "file": "budget-measurements.json",
+      "bytes": 421,
+      "sha256": "aac28a5cbd67083122f84f53c88cb9902fbee18fbb14179c9c7e6b10706f3ca5"
+    },
+    {
+      "file": "frame-checks.json",
+      "bytes": 1414,
+      "sha256": "263736fa9cc1bf907594c23168fd6a6c7bdd9ed5a20a89d3020637352cce9019"
+    },
+    {
+      "file": "gif-contact-sheet.jpg",
+      "bytes": 81790,
+      "sha256": "7ced5a6c7b4e3b0d2599d248220711e109e98a8107952fd496c932638a52192b"
+    },
+    {
+      "file": "measurements.json",
+      "bytes": 4723,
+      "sha256": "bda62c641a70a1204b7102b986002a85898b368d78b47fea202849648dc04479"
+    },
+    {
+      "file": "media-metadata.json",
+      "bytes": 4655,
+      "sha256": "5f0b4ed9bc1a45a7042c1cf8ad4991b06dce5291ab87073446aa64e625c1c144"
+    },
+    {
+      "file": "phone-detail.jpg",
+      "bytes": 200926,
+      "sha256": "8878ae5e1453d96ed1ac5bd4145ad0ac986a9ad0a7e041adc871f62b0b710f85"
+    },
+    {
+      "file": "quality-scores.json",
+      "bytes": 6840,
+      "sha256": "a84f008566fed4902be0260eac3f750bd1917e7a734ed3804d2017518c721877"
+    },
+    {
+      "file": "record-contact-sheet.jpg",
+      "bytes": 53017,
+      "sha256": "2ffe07bb5d73dafe71a6073d50f79b091375b9182e8b2dca0cd14cfb112caf6c"
+    },
+    {
+      "file": "share-1440x900.png",
+      "bytes": 1048436,
+      "sha256": "cd652c25755e44a7cff746dee5bb75735aa27e3bd1670d88f0817e3ecc813676"
+    },
+    {
+      "file": "share-390x844.png",
+      "bytes": 1075896,
+      "sha256": "eb3f8001e2dcd37e35b2431a115baa205f84ebd91a7300c3fe86a3d067c8ad68"
+    },
+    {
+      "file": "verification.json",
+      "bytes": 1236,
+      "sha256": "6d24dfb38bede9a2ea5d8507bf2cede4bae9765f220b0e64629916ac60396be7"
+    },
+    {
+      "file": "video-contact-sheet.jpg",
+      "bytes": 26610,
+      "sha256": "3b5f229a01f2f9c0658664ad7314a8452d7c328b7a1acfb6955c478d29c6f69c"
+    }
+  ]
+}
