@@ -1181,11 +1181,19 @@ export class Session {
   evalTestPsnr() {
     if (!this.testCams || !this.testCams.length) return Promise.resolve(null);
     return this._locked(async () => {
+      const trainer = this.trainer;
+      const assertCurrent = () => {
+        this._assertActive();
+        if (this._lost) throw new Error('GPU device lost');
+        if (this.trainer !== trainer) throw new DOMException('Training session changed', 'AbortError');
+      };
       const frames = [];
       let sum = 0;
       for (const c of this.testCams) {
-        const psnr = await this.trainer.evalCamPsnr(c);
-        frames.push({ cam: c, imgIdx: this.trainer.camMeta[c].imgIdx, psnr });
+        assertCurrent();
+        const psnr = await trainer.evalCamPsnr(c);
+        assertCurrent();
+        frames.push({ cam: c, imgIdx: trainer.camMeta[c].imgIdx, psnr });
         sum += psnr;
       }
       return { psnr: sum / frames.length, frames };
