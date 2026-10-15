@@ -1184,29 +1184,14 @@
               </div>
               <div class="row compact">
                 <span>GIF</span>
-                <select id="gif-kind" aria-label="GIF motion">
-                  <option value="turntable">Turntable</option>
-                  <option value="effects">Effect loop</option>
-                </select>
-                <select id="gif-frames" aria-label="GIF frames">
-                  <option value="24">24 frames</option>
-                  <option value="48" selected>48 frames</option>
-                  <option value="72">72 frames</option>
-                </select>
-                <select id="gif-size" aria-label="GIF size">
-                  <option value="256">256 px</option>
-                  <option value="384">384 px</option>
-                  <option value="512" selected>512 px</option>
-                </select>
+                <select id="gif-kind" aria-label="GIF motion"></select>
+                <select id="gif-frames" aria-label="GIF frames"></select>
+                <select id="gif-size" aria-label="GIF size"></select>
                 <button id="export-gif" type="button">Save GIF</button>
               </div>
               <div class="row compact" id="webm-row">
-                <span>WebM</span>
-                <select id="webm-seconds" aria-label="Video length">
-                  <option value="3">3 s</option>
-                  <option value="5" selected>5 s</option>
-                  <option value="8">8 s</option>
-                </select>
+                <span>Video</span>
+                <select id="webm-seconds" aria-label="Video length"></select>
                 <button id="export-webm" type="button">Save video</button>
               </div>
               <p id="webm-unavailable" class="note" hidden></p>
@@ -1214,7 +1199,7 @@
               <div class="row compact" id="record-row">
                 <span>Record</span>
                 <button id="record-start" type="button">Record</button>
-                <span class="note">You play, it records (up to 1 minute, with sound)</span>
+                <span class="note">You play, it records (up to 10 minutes, with sound)</span>
               </div>
               <p id="record-unavailable" class="note" hidden></p>
               <!-- /UI r5 -->

@@ -13,6 +13,9 @@ import { initLive, renderLive } from "./live/panel.js"; // lane Live input
 import { ui2On } from "./player.js"; // UI r2
 import { SITE_TOY_IDS } from "./site-toy-pages.js";
 
+import { populateExportControls, exportChoices } from "./export/controls.js";
+import { EXPORT_PRESETS } from "./export/presets.js";
+
 const $ = (id) => document.getElementById(id);
 const siteToyIds = new Set(SITE_TOY_IDS);
 
@@ -2190,15 +2193,10 @@ export function createUI(app) {
     if (f) app.openFile(f);
     els.importJson.value = "";
   });
+  populateExportControls(app);
   els.exportPng.addEventListener("click", () => app.exportPNG());
-  els.exportGif.addEventListener("click", () =>
-    app.exportGIF({
-      kind: els.gifKind.value,
-      frames: Number(els.gifFrames.value),
-      size: Number(els.gifSize.value),
-    }),
-  );
-  els.exportWebm.addEventListener("click", () => app.exportWebM(Number(els.webmSeconds.value)));
+  els.exportGif.addEventListener("click", () => app.exportGIF(exportChoices("gif")));
+  els.exportWebm.addEventListener("click", () => app.exportWebM(exportChoices("video")));
   // Lane PDF lab: Save as PDF (labs).
   els.pdfRow.hidden = !labsOn();
   els.exportPdf.addEventListener("click", () => app.openPdfExport());
@@ -3318,7 +3316,13 @@ export function createUI(app) {
     },
     // UI r5: Record's state: "off", "rec" (with seconds and the limit),
     // "ready" (with seconds, bytes and whether the phone can share it) or "busy".
-    setRecord({ state, seconds = 0, limit = 60, bytes = 0, share = false }) {
+    setRecord({
+      state,
+      seconds = 0,
+      limit = EXPORT_PRESETS.record.maxSeconds,
+      bytes = 0,
+      share = false,
+    }) {
       const clock = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
       const rec = state === "rec";
       const ready = state === "ready";
