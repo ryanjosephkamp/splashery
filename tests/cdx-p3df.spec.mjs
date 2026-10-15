@@ -247,6 +247,14 @@ test("two real inputs render at the phone profile, score truth, and generate a s
     await expect(page.locator("article")).toHaveCount(1);
     await page.locator("#reset").click();
     await expect(page.locator("article")).toHaveCount(2);
+    await expect(page.locator(".badge", { hasText: "Flat depth pairs / cues" })).toHaveCount(2);
+    await page.goto(url + "?q=truth-room&profile=phone&failure=all");
+    await expect(page.locator("article")).toHaveCount(1);
+    await expect(page.locator("article")).toHaveAttribute("id", "case-truth-room");
+    await page.locator("article summary").click();
+    await expect(page.locator("article pre")).toContainText("thinProfilesPerPose");
+    await expect(page.locator("article pre")).toContainText("scoredPixels");
+    await page.locator("#reset").click();
     await page.locator("#failure").selectOption("errors");
     await expect(page.locator("#empty")).toBeVisible();
     await expect(page.locator("#count")).toContainText("0 of 2");
