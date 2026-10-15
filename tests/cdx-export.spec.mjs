@@ -41,8 +41,100 @@ test("Share defaults come from the export presets", async ({ page }) => {
   await expect(page.locator("#webm-seconds")).toHaveValue("8");
   await expect(page.locator("#webm-size")).toHaveValue("1080");
   await expect(page.locator("#webm-fps")).toHaveValue("30");
-  await expect(page.locator("#record-quality")).toHaveValue("high");
+  await expect(page.locator("#record-quality")).toHaveValue("standard");
   await expect(page.locator("#gif-estimate")).toContainText(/Estimated.*MB/);
+});
+
+for (const viewport of [
+  { width: 390, height: 844 },
+  { width: 1440, height: 900 },
+]) {
+  test(`merged Share controls fit and show the selected Record limit at ${viewport.width}×${viewport.height}`, async ({
+    browser,
+  }) => {
+    const phone = viewport.width === 390;
+    const context = await browser.newContext({
+      viewport,
+      isMobile: phone,
+      hasTouch: phone,
+      deviceScaleFactor: phone ? 3 : 1,
+    });
+    const page = await context.newPage();
+    const errors = [];
+    page.on("pageerror", (e) => errors.push(e.message));
+    try {
+      await open(page);
+      if (phone) await page.click("#sheet-toggle");
+      await page.click("#tab-share");
+      const limit = async (quality) => {
+        await page.selectOption("#record-quality", quality);
+        return page.evaluate(async (quality) => {
+          const { recordingPlan } = await import("/src/export/presets.js");
+          const { app, player } = window.__splashery;
+          const plan = recordingPlan({
+            ...app.ui.recordingSize(),
+            quality,
+            dpr: devicePixelRatio,
+            tierCap: player.stage.pixelCap ?? 3,
+          });
+          return `${Math.floor(plan.maxSeconds / 60)}:${String(plan.maxSeconds % 60).padStart(2, "0")}`;
+        }, quality);
+      };
+      await expect(page.locator("#record-note")).toContainText(`up to ${await limit("high")}`);
+      await expect(page.locator("#record-note")).toContainText(`up to ${await limit("standard")}`);
+      await page.screenshot({
+        path: `tests/screenshots/cdx-export-share-record-${viewport.width}x${viewport.height}.png`,
+      });
+      await expect(page.locator("#webm-seconds").locator("..")).toContainText("Length");
+      for (const kind of ["video", "gif"]) {
+        await page.click(`#clip-kind [data-clip=${kind}]`);
+        const problems = await page
+          .locator(`#${kind === "gif" ? "gif" : "webm"}-block`)
+          .evaluate((block) =>
+            [...block.querySelectorAll("select, button")].flatMap((el) => {
+              const r = el.getBoundingClientRect();
+              const b = block.getBoundingClientRect();
+              return r.width < 80 || r.left < b.left || r.right > b.right + 1 ? [el.id] : [];
+            }),
+          );
+        expect(problems).toEqual([]);
+        await page
+          .locator(kind === "gif" ? "#export-gif" : "#export-webm")
+          .scrollIntoViewIfNeeded();
+        await page.screenshot({
+          path: `tests/screenshots/cdx-export-share-${kind}-${viewport.width}x${viewport.height}.png`,
+        });
+      }
+      expect(errors).toEqual([]);
+    } finally {
+      await context.close();
+    }
+  });
+}
+
+test("an exported GIF caps a long effect clock at eight seconds", async ({ page }) => {
+  await open(page);
+  const duration = await page.evaluate(async () => {
+    const { app } = window.__splashery;
+    const capture = app.withCapture;
+    // Model the length reported by a 60-second source without changing the
+    // scene, renderer, clock stepping, or native GIF encoder.
+    app.withCapture = function (size, fn, options) {
+      return capture.call(this, size, (base, wind) => fn({ ...base, loop: 60 }, wind), options);
+    };
+    try {
+      const blob = await app.exportGIF({ size: 64, frames: 4 });
+      const { GifReader } = await import("/vendor/omggif/omggif.js");
+      const gif = new GifReader(new Uint8Array(await blob.arrayBuffer()));
+      return Array.from({ length: gif.numFrames() }, (_, i) => gif.frameInfo(i).delay * 10).reduce(
+        (a, b) => a + b,
+        0,
+      );
+    } finally {
+      app.withCapture = capture;
+    }
+  });
+  expect(duration).toBe(8000);
 });
 
 test("recording limit is ten minutes, with full-screen High and phone budgets", async ({
@@ -65,7 +157,85 @@ test("recording limit is ten minutes, with full-screen High and phone budgets", 
   expect(out.high.height).toBe(1800);
   expect(out.max.height).toBe(3840);
   expect(out.high.maxBytes).toBeLessThan(out.max.maxBytes);
+  expect(out.standard.maxSeconds).toBeGreaterThanOrEqual(180);
+  expect(out.high.maxSeconds).toBeGreaterThanOrEqual(60);
   expect(out.huge.ok).toBe(false);
+});
+
+test("phone Record defaults reserve three minutes at both phone sizes", async ({ page }) => {
+  await openEncoder(page);
+  const plans = await page.evaluate(async () => {
+    const { recordingPlan, gifLoopSeconds } = await import("/src/export/presets.js");
+    return {
+      loops: [
+        gifLoopSeconds(30),
+        gifLoopSeconds(60),
+        gifLoopSeconds(2),
+        gifLoopSeconds(60, "turntable"),
+      ],
+      plans: [664, 900].map((height, i) =>
+        ["standard", "high"].map((quality) =>
+          recordingPlan({
+            width: i ? 430 : 390,
+            height,
+            dpr: 3,
+            tierCap: 1.5,
+            phone: true,
+            quality,
+          }),
+        ),
+      ),
+    };
+  });
+  expect(plans.loops).toEqual([8, 8, 2, 4]);
+  for (const [standard, high] of plans.plans) {
+    expect(standard.maxSeconds).toBeGreaterThanOrEqual(180);
+    expect(high.maxSeconds).toBeGreaterThanOrEqual(60);
+    for (const p of [standard, high]) {
+      expect(p.maxSeconds).toBeLessThanOrEqual(600);
+      expect(((p.bitrate + 128_000) * p.maxSeconds) / 8).toBeLessThanOrEqual(p.maxBytes * 0.8);
+    }
+  }
+});
+
+test("export controls tolerate missing slots and preserve existing controls", async ({ page }) => {
+  await openEncoder(page);
+  const out = await page.evaluate(async () => {
+    const { populateExportControls, exportChoices } = await import("/src/export/controls.js");
+    const app = { player: { on() {} } };
+    populateExportControls(app); // No Share markup at all must be safe.
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      '<div id="webm-row"><label><span id="length-label">Length</span><select id="webm-seconds"></select></label><select id="webm-kind"></select></div><div id="gif-row"></div><div id="record-row"></div>',
+    );
+    const existing = document.getElementById("webm-kind");
+    populateExportControls(app);
+    populateExportControls(app);
+    return {
+      preserved: existing === document.getElementById("webm-kind"),
+      label: document.getElementById("length-label").textContent,
+      ids: [
+        "gif-shape",
+        "webm-kind",
+        "webm-size",
+        "webm-shape",
+        "webm-fps",
+        "record-quality",
+        "gif-estimate",
+      ].map((id) => document.querySelectorAll(`#${id}`).length),
+      choices: exportChoices("video"),
+    };
+  });
+  expect(out.preserved).toBe(true);
+  expect(out.label).toBe("Length");
+  expect(out.ids).toEqual([1, 1, 1, 1, 1, 1, 1]);
+  expect(out.choices).toEqual({
+    kind: "effects",
+    seconds: 8,
+    size: 1080,
+    shape: "square",
+    fps: 30,
+  });
 });
 
 for (const webmOnly of [false, true]) {
@@ -542,9 +712,9 @@ test.describe("phone export controls", () => {
     hasTouch: true,
     deviceScaleFactor: 3,
   });
-  test("High is the default and Max is not offered", async ({ page }) => {
+  test("Standard is the default and Max is not offered", async ({ page }) => {
     await open(page);
-    await expect(page.locator("#record-quality")).toHaveValue("high");
+    await expect(page.locator("#record-quality")).toHaveValue("standard");
     await expect(page.locator('#record-quality option[value="max"]')).toHaveCount(0);
   });
 });

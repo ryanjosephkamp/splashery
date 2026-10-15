@@ -7,6 +7,7 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
 import { execFileSync } from "node:child_process";
+import { EXPORT_PRESETS } from "../src/export/presets.js";
 
 const out = path.resolve(process.argv[2] || "/tmp/export-quality/evidence");
 fs.mkdirSync(out, { recursive: true });
@@ -95,8 +96,11 @@ try {
         const key = `${label}-record-${quality}`;
         if (results.some((r) => r.key === key)) continue;
         console.log("START", key);
-        await page.evaluate(() => {
-          window.__splashery.player.paused = true;
+        await page.evaluate(async () => {
+          const { player } = window.__splashery;
+          // Freeze the deterministic clock and snap the camera, while still
+          // allowing render/layout work at each recording buffer size.
+          await player.renderAt(0, player.camera.getState());
         });
         if (phone && !(await page.locator("#tab-share").isVisible()))
           await page.click("#sheet-toggle");
@@ -136,7 +140,7 @@ try {
           await new Promise((r) => setTimeout(r, 3000));
           app.stopRecord();
           const recorded = await done;
-          player.paused = false;
+          player.resume();
           const ref = window.recordReference;
           if (!ref) throw new Error("The recording has no live-canvas reference");
           return {
@@ -160,13 +164,15 @@ try {
         );
         delete measured.reference;
         const download = page.waitForEvent("download");
-        await page.evaluate(() => window.__splashery.app.saveRecord());
+        if (!before) await page.click("#rec-save");
+        else await page.evaluate(() => window.__splashery.app.saveRecord());
         const dl = await download;
         const file = `${key}${path.extname(dl.suggestedFilename())}`;
         await dl.saveAs(path.join(out, file));
         results.push({ key, file, ...measured });
         saveResults();
-        await page.evaluate(() => window.__splashery.app.closeRecord());
+        if (!before) await page.click("#rec-close");
+        else await page.evaluate(() => window.__splashery.app.closeRecord());
         console.log("DONE", key, measured);
       }
       if (!before) {
@@ -194,7 +200,7 @@ try {
         if (phone && !(await page.locator("#tab-share").isVisible()))
           await page.click("#sheet-toggle");
         await page.click("#tab-share");
-        await page.selectOption("#record-quality", "high");
+        await page.selectOption("#record-quality", EXPORT_PRESETS.record.defaults.quality);
         await page.screenshot({
           path: path.join(out, `share-${phone ? "390x844" : "1440x900"}.png`),
         });

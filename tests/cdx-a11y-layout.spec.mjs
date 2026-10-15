@@ -148,7 +148,19 @@ test("recording and the flag dialog preserve keyboard focus", async ({ page }) =
   await page.keyboard.press("Enter");
   await expect(page.locator("#rec-stop")).toBeFocused();
   // A usable recording needs footage; an immediate stop can correctly be empty.
-  await expect(page.locator("#rec-time")).toHaveText(/^0:0[1-9] \/ 1:00$/);
+  const limit = await page.evaluate(async () => {
+    const { recordingPlan } = await import("/src/export/presets.js");
+    const r = document.getElementById("stage").getBoundingClientRect();
+    return recordingPlan({
+      width: r.width,
+      height: r.height,
+      dpr: devicePixelRatio,
+      tierCap: window.__splashery.player.stage.pixelCap ?? 3,
+    }).maxSeconds;
+  });
+  expect(limit).toBeGreaterThanOrEqual(180);
+  const clock = `${Math.floor(limit / 60)}:${String(limit % 60).padStart(2, "0")}`;
+  await expect(page.locator("#rec-time")).toHaveText(new RegExp(`^0:0[1-9] / ${clock}$`));
   await page.keyboard.press("Enter");
   await expect(page.locator("#rec-save")).toBeVisible();
   await expect(page.locator("#rec-save")).toBeFocused();

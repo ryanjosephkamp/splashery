@@ -1,0 +1,50 @@
+[
+  {
+    "key": "phone-photo-3d-standard",
+    "frames": 62,
+    "minimumMean": 197.103515625,
+    "minimumStandardDeviation": 85.66461265209655
+  },
+  {
+    "key": "phone-photo-3d-high",
+    "frames": 34,
+    "minimumMean": 197.4285546875,
+    "minimumStandardDeviation": 85.89393047591322
+  },
+  {
+    "key": "phone-donut-standard",
+    "frames": 46,
+    "minimumMean": 241.2760546875,
+    "minimumStandardDeviation": 26.439210342411393
+  },
+  {
+    "key": "phone-donut-high",
+    "frames": 20,
+    "minimumMean": 241.61,
+    "minimumStandardDeviation": 26.911634366952466
+  },
+  {
+    "key": "desktop-photo-3d-standard",
+    "frames": 45,
+    "minimumMean": 180.842421875,
+    "minimumStandardDeviation": 91.49556232293976
+  },
+  {
+    "key": "desktop-photo-3d-high",
+    "frames": 8,
+    "minimumMean": 180.8337109375,
+    "minimumStandardDeviation": 91.99307615493512
+  },
+  {
+    "key": "desktop-donut-standard",
+    "frames": 39,
+    "minimumMean": 237.4573828125,
+    "minimumStandardDeviation": 29.065624512401214
+  },
+  {
+    "key": "desktop-donut-high",
+    "frames": 19,
+    "minimumMean": 238.958515625,
+    "minimumStandardDeviation": 30.90368414879043
+  }
+]

@@ -115,7 +115,22 @@ test.describe("phone", () => {
     await expect(page.locator("body")).not.toHaveClass(/sheet-open/);
     await page.evaluate(() => window.__splashery.app.sound.setEnabled(true));
     await page.evaluate(() => window.__splashery.app.sound.play({ voice: "bell", f: 660, vol: 1 }, { key: "ui5" })); // prettier-ignore
-    await expect(page.locator("#rec-time")).toHaveText(/^0:0[1-9] \/ 10:00$/, { timeout: 10_000 });
+    // Task 89: the pill must show this quality's actual enforced time limit.
+    const limit = await page.evaluate(async () => {
+      const { recordingPlan } = await import("/src/export/presets.js");
+      const r = document.getElementById("stage").getBoundingClientRect();
+      return recordingPlan({
+        width: r.width,
+        height: r.height,
+        dpr: devicePixelRatio,
+        tierCap: window.__splashery.player.stage.pixelCap ?? 3,
+      }).maxSeconds;
+    });
+    expect(limit).toBeGreaterThanOrEqual(180);
+    const clock = `${Math.floor(limit / 60)}:${String(limit % 60).padStart(2, "0")}`;
+    await expect(page.locator("#rec-time")).toHaveText(new RegExp(`^0:0[1-9] / ${clock}$`), {
+      timeout: 10_000,
+    });
     await page.screenshot({ path: shot("ui5-record-390x844.png") });
     await page.click("#rec-stop");
     await expect(page.locator("#rec-save")).toBeVisible({ timeout: 20_000 });

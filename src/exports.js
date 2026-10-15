@@ -197,14 +197,11 @@ export function startRecording({
     throw error;
   }
   const stream = new MediaStream(tracks);
-  // Standard keeps the former 8 Mb/s; High and Max scale with pixels.
+  // Live Record uses its duration-aware policy, independently of stepped video.
   const opts = {
     mimeType: sup.mime,
     videoBitsPerSecond:
-      bitrate ??
-      (quality === "standard"
-        ? 8_000_000
-        : recordingPlan({ width: canvas.width, height: canvas.height, quality }).bitrate),
+      bitrate ?? recordingPlan({ width: canvas.width, height: canvas.height, quality }).bitrate,
     audioBitsPerSecond: EXPORT_PRESETS.record.audioBitrate,
   };
   const cleanup = () => {
@@ -250,7 +247,7 @@ export function startRecording({
     if (!warned && bytes >= maxBytes * EXPORT_PRESETS.record.warningFraction) {
       warned = true;
       onWarning?.(
-        "Recording has used 80% of this device's size budget. It will stop and keep the take before memory runs short.",
+        "Recording has used 80% of its size budget. It will stop soon so you can save the take.",
       );
     }
     // Reserve at least two chunks and two seconds at the target bitrate for

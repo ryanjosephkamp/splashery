@@ -17,6 +17,7 @@ export const EXPORT_PRESETS = {
     sizes: [512, 720, 1080],
     defaults: { kind: "effects", frames: 72, size: 720, shape: "square" },
     loopSeconds: 4, // One tap cycle when the recipe does not name its own duration.
+    maxLoopSeconds: 8, // Sample at most eight seconds, including long source clips.
   },
   video: {
     kinds,
@@ -33,7 +34,7 @@ export const EXPORT_PRESETS = {
       { value: "high", label: "High" },
       { value: "max", label: "Max (computer)" },
     ],
-    defaults: { quality: "high", fps: 30 },
+    defaults: { quality: "standard", fps: 30 },
     maxSeconds: 600, // Ten minutes; the byte budget can end a take sooner.
     standardLongSide: 1920,
     highLongSide: 2560,
@@ -41,8 +42,13 @@ export const EXPORT_PRESETS = {
     maxMinFps: 20,
     maxSlowSeconds: 2, // End Max after sustained slow drawing.
     audioBitrate: 128_000,
+    // Budget three default minutes; higher levels trade length for detail.
+    bitratePer1080: { standard: 8_000_000, high: 12_000_000, max: 16_000_000 },
+    minimumSeconds: { standard: 180, high: 60, max: 30 },
+    minBitrate: 750_000,
+    maxBitrate: 80_000_000,
     phoneBytes: 96 * MiB,
-    desktopBytes: 384 * MiB, // Encoded chunks stay in memory.
+    desktopBytes: 384 * MiB, // Policy ceilings, not measured free device RAM; chunks stay in RAM.
     warningFraction: 0.8,
     sliceMs: 250, // Reserve multiple timeslices for the encoder's final flush.
   },
@@ -125,6 +131,11 @@ export function videoBitrate(width, height, fps = 30) {
   );
 }
 
+export function gifLoopSeconds(loop, kind = "effects") {
+  const g = EXPORT_PRESETS.gif;
+  return Math.min(g.maxLoopSeconds, kind === "effects" ? loop || g.loopSeconds : g.loopSeconds);
+}
+
 export function recordingPlan({
   width,
   height,
@@ -148,21 +159,44 @@ export function recordingPlan({
     width: Math.max(2, Math.round((width * ratio) / 2) * 2),
     height: Math.max(2, Math.round((height * ratio) / 2) * 2),
   };
+  const maxBytes = Math.min(
+    phone ? r.phoneBytes : r.desktopBytes,
+    Math.max(
+      0,
+      Math.floor(
+        (memoryBudget(phone) -
+          dims.width * dims.height * EXPORT_PRESETS.memory.workingBytesPerPixel) /
+          2,
+      ),
+    ),
+  );
+  // Use 80% for the advertised duration, leaving room for VBR overshoot,
+  // audio, container overhead, and the final encoder flush. The byte guard
+  // still ends an unusually large take earlier. Never infer available RAM.
+  const usableBits = maxBytes * r.warningFraction * 8;
+  const bitrate = Math.max(
+    1,
+    Math.floor(
+      Math.min(
+        r.maxBitrate,
+        Math.max(
+          r.minBitrate,
+          (r.bitratePer1080[quality] * dims.width * dims.height) / (1080 * 1080),
+        ),
+        usableBits / r.minimumSeconds[quality] - r.audioBitrate,
+      ),
+    ),
+  );
+  const maxSeconds = Math.max(
+    1,
+    Math.min(r.maxSeconds, Math.floor(usableBits / (bitrate + r.audioBitrate))),
+  );
   return {
     ...dims,
     quality,
     fps: r.defaults.fps,
-    bitrate: quality === "standard" ? 8_000_000 : videoBitrate(dims.width, dims.height),
-    maxBytes: Math.min(
-      phone ? r.phoneBytes : r.desktopBytes,
-      Math.max(
-        0,
-        Math.floor(
-          (memoryBudget(phone) -
-            dims.width * dims.height * EXPORT_PRESETS.memory.workingBytesPerPixel) /
-            2,
-        ),
-      ),
-    ),
+    bitrate,
+    maxBytes,
+    maxSeconds,
   };
 }

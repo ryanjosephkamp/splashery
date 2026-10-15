@@ -33,7 +33,6 @@ import {
   recordSupport, // UI r5
   startRecording,
   canShareFile,
-  RECORD_LIMIT,
   buildShareHash,
   shareURL,
   iframeSnippet,
@@ -45,6 +44,7 @@ import {
   exportDimensions,
   sourcePicture,
   gifPlan,
+  gifLoopSeconds,
   recordingPlan,
 } from "./export/presets.js";
 import { videoSupport, encodeVideo } from "./export/video.js";
@@ -1756,7 +1756,7 @@ class App {
         return this.withCapture(
           [dims.width, dims.height],
           async (base) => {
-            const loop = kind === "effects" ? base.loop : EXPORTS.gif.loopSeconds;
+            const loop = gifLoopSeconds(base.loop, kind);
             const blob = await encodeGIF({
               frames,
               ...dims,
@@ -1939,10 +1939,10 @@ class App {
         bitrate: plan.bitrate,
         fps: plan.fps,
         maxBytes: plan.maxBytes,
-        maxSeconds: RECORD_LIMIT,
+        maxSeconds: plan.maxSeconds,
         onWarning: (message) => this.ui.toast(message, 10000),
         onTick: (seconds) => {
-          this.ui.setRecord({ state: "rec", seconds, limit: RECORD_LIMIT });
+          this.ui.setRecord({ state: "rec", seconds, limit: plan.maxSeconds });
           stage.requestRender(0); // a still toy still gives the video a few frames a second
         },
       });
@@ -1956,7 +1956,7 @@ class App {
     this.recording = rec;
     this.recordWait = false;
     this.recorded = null;
-    this.ui.setRecord({ state: "rec", seconds: 0, limit: RECORD_LIMIT });
+    this.ui.setRecord({ state: "rec", seconds: 0, limit: plan.maxSeconds });
     document.getElementById("rec-stop").focus({ preventScroll: true });
     stage.requestRender();
     rec.done
@@ -1969,7 +1969,7 @@ class App {
           );
         else if (reason === "time")
           this.ui.toast(
-            "Recording reached the 10-minute limit. Your take is ready to save.",
+            "Recording reached the time limit for this quality. Your take is ready to save.",
             10000,
           );
         if (reason === "performance")

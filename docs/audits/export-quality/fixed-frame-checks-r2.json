@@ -1,0 +1,32 @@
+[
+  {
+    "key": "after-desktop-record-standard",
+    "decodedFrames": 9,
+    "minimumMean": 180.9698046875,
+    "minimumStandardDeviation": 91.8506661631225
+  },
+  {
+    "key": "after-desktop-record-high",
+    "decodedFrames": 4,
+    "minimumMean": 180.847109375,
+    "minimumStandardDeviation": 91.99568769585109
+  },
+  {
+    "key": "after-desktop-record-max",
+    "decodedFrames": 5,
+    "minimumMean": 180.867265625,
+    "minimumStandardDeviation": 91.99602057399609
+  },
+  {
+    "key": "after-phone-record-standard",
+    "decodedFrames": 8,
+    "minimumMean": 197.10234375,
+    "minimumStandardDeviation": 86.74235396653282
+  },
+  {
+    "key": "after-phone-record-high",
+    "decodedFrames": 9,
+    "minimumMean": 197.4916015625,
+    "minimumStandardDeviation": 86.53407536924793
+  }
+]

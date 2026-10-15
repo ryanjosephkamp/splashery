@@ -1,0 +1,37 @@
+{
+  "status": "known on main",
+  "test": "tests/qr4-craft.spec.mjs: shared builder SHA-256 snapshot",
+  "baselineMain": "cb8a8315",
+  "alreadyDocumented": "docs/audits/circular-qr-2026-10.md:173",
+  "expected": "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144",
+  "actualOnBranchAndImmutableMain": "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6",
+  "runtime": "v24.19.0",
+  "method": "Ran the exact hash loop against separately extracted immutable main modules. Protected assertion unchanged.",
+  "files": [
+    {
+      "file": "src/qr/build.js",
+      "sha256": "9f4638032f0a88e9fd357df07a3cdd6b841bf1121650265e7732681925189fde",
+      "identicalToMain": true
+    },
+    {
+      "file": "src/qr/encode.js",
+      "sha256": "c71999bfeb3156d5cf9782905e679280a3392eb74b302210050e2608a336b900",
+      "identicalToMain": true
+    },
+    {
+      "file": "src/qr/crisp.js",
+      "sha256": "ac82e83dce4eb5aeb7ded9d60af2bfc94d2d072f25e7b9ad1df84f3954160a75",
+      "identicalToMain": true
+    },
+    {
+      "file": "src/qr/circle.js",
+      "sha256": "3a4df9200d697cfdfa100b04012977e9adb3865fccd1b844217d3acecc92f057",
+      "identicalToMain": true
+    },
+    {
+      "file": "vendor/qrcodegen/qrcodegen.js",
+      "sha256": "606ab7d5730d03af24c0c5358a7babc5328a50e47fdbf4719efafa679c5f4aa5",
+      "identicalToMain": true
+    }
+  ]
+}
