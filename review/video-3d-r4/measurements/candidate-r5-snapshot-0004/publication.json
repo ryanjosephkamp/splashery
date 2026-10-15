@@ -1,0 +1,122 @@
+{
+  "created": "2026-10-15T07:48:54.699Z",
+  "source": "/workspace/v3d-r4-media/candidate-r5",
+  "runSha256": "3f730ee7da18aad98a41fe144ccb00a72a6eac993ec7c5c1da76b1d85f349824",
+  "provenanceSha256": "2c2cb39f51847b885a326ba966cce7bf6fc12e80e8814fe1d1839cdbb2c4cfee",
+  "cases": [
+    {
+      "id": "cat-track",
+      "profile": "phone",
+      "rowFingerprint": "888cb9fc369455b47baa8badd5eacda2b7d71481d660db9fb5dba90ea538dc26",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 216964,
+          "sha256": "ee9268c3f566a44db1939418e9e5b49dbba1ae6bd01421d8464dcb0c2396beca"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2280,
+          "sha256": "99888e5bd03ef1e40aaf1e6d7f50f1c00ef6d19fd442ff00c9610702abcde537"
+        }
+      ]
+    },
+    {
+      "id": "cat-plays",
+      "profile": "phone",
+      "rowFingerprint": "59f171d9748983c4ec304b630188be227c91f0692d42e9867d2d3af230fa65ad",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11100,
+          "sha256": "fe71179e2d5e5486060e3b209f0d3b58bc8c3f42a527276b3de3c1c4d4d93fc0"
+        },
+        {
+          "file": "model.json",
+          "bytes": 26646,
+          "sha256": "6e24383703b37284a1600f9769efa443dfceac5cdf06a976abf264ab93f825a0"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 998043,
+          "sha256": "0d0dcbd8c592c6027e29f8d7a1d0d825b189056079bf437981d0372b6b4d709a"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 207461,
+          "sha256": "c60b563436f94068a9c73bb38aaf5a98d566d11b2a5afe17e420d452a394023d"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 320314,
+          "sha256": "7aa46fd73b1da3386cc4220e7be6d375fc6cba27624f95c458d48f379c663d3a"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 329491,
+          "sha256": "417f95cd13e24db9ecdc421afd4ca6f321db19ecd0e54ecf44731fd0ed5a366f"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 325079,
+          "sha256": "0456f402120854052e5933f24066485dfc152a00816343c23b73be1707f75bc4"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 313717,
+          "sha256": "39a9545bc734d73c9335df53a92694423c27671aff988f4667885090df9a613c"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 400799,
+          "sha256": "f6f874cefb36c0360bc5a472df8eb2abeb13b1927d077d87732260b7adf9baa5"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 339165,
+          "sha256": "a6bab71cbb0087b9c623d4362967d08fed7583de3d7ec27e79a7f31b6e4b5b25"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 340522,
+          "sha256": "bd5b0f66f44584cf530dff627329b415f02259dff087e60de96f207cd8e7659c"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 372972,
+          "sha256": "8e021f45778cd64f901630d1fd2eb9aa1f760a53e19428227cd72463fce06155"
+        },
+        {
+          "file": "result.json",
+          "bytes": 4296,
+          "sha256": "2426d846328a0c0b14c419d397ef9aae3da861348953950b61e80f3c4eabd10c"
+        }
+      ]
+    },
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "rowFingerprint": "88767d46a67604f4dc9a8a5c518161802207f92abc29e57061e4d9be94555427",
+      "files": [
+        {
+          "file": "result.json",
+          "bytes": 2007,
+          "sha256": "60e0d10072170a32cba667433a15b11265125fb31f52802e1b2d36f4f5bf7a0a"
+        }
+      ]
+    },
+    {
+      "id": "buddha",
+      "profile": "phone",
+      "rowFingerprint": "edc39f177d5e179c13ee4fc09b0ebf7e11194e7835331bc0b0fcbc4f9fa4c379",
+      "files": [
+        {
+          "file": "result.json",
+          "bytes": 1156,
+          "sha256": "457b8ee7b0c5a45d9ee8da52539674df780299a013b73006f67d714765426530"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. R5 buddha/phone was interrupted by retiring its scheduler and is not a native product conclusion."
+}

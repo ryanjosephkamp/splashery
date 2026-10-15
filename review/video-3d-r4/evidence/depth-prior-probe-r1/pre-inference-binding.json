@@ -1,0 +1,127 @@
+{
+  "created": "2026-10-15T07:22:45.911Z",
+  "cache": {
+    "file": "/workspace/v3d-r4-media/seed-probe.json",
+    "bytes": 53829727,
+    "sha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f"
+  },
+  "configSha256": "d503e0fe4bb1e6f9c880cd33c92e43e9ebb857f871e8d3379c32f7ea18222fcf",
+  "collectorSha256": "a7cf415305aa0c3025c38e0f79b6ce25eab89b3af8dc253fba176d9b2ec57ace",
+  "evaluatorSha256": "88e547555447eb00b00d21d54f62812bd64d060b0bc2f389f9784cfe6b82c16a",
+  "sourceBefore": [
+    {
+      "file": "src/depth/client.js",
+      "bytes": 1944,
+      "sha256": "cd1951ee564cf8a1ba7d655497cea0fc6cfe80ac72b4d382782fb2b998845a9e"
+    },
+    {
+      "file": "src/live/depth-worker.js",
+      "bytes": 2189,
+      "sha256": "1b4a7f49d69fe87cc83cd724540c5537d767f97a7f1e8195573be97160aa6ac7"
+    },
+    {
+      "file": "src/depth/engine.js",
+      "bytes": 5439,
+      "sha256": "953ad7094ed535a059f196e32eddbda4e7bbce0286f55baf2cb00eed4a7cbe89"
+    },
+    {
+      "file": "src/depth/io.js",
+      "bytes": 826,
+      "sha256": "a6b4c2bad43cbc9ca34367afdb5fd72106b888f26532b651788161d43c0c700d"
+    },
+    {
+      "file": "src/depth/clip.js",
+      "bytes": 3483,
+      "sha256": "9ab5111438dcee5c0f293ec4bf80d6c083baa3b15d6d6467120b58a72654a295"
+    },
+    {
+      "file": "src/packs/photo-3d-core.js",
+      "bytes": 31900,
+      "sha256": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c"
+    },
+    {
+      "file": "src/photo3d/background.js",
+      "bytes": 8146,
+      "sha256": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa"
+    },
+    {
+      "file": "src/photo3d/depth-edges.js",
+      "bytes": 5694,
+      "sha256": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70"
+    },
+    {
+      "file": "vendor/depth-anything-v2-small/model_quantized.onnx",
+      "bytes": 27258801,
+      "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d"
+    },
+    {
+      "file": "vendor/onnxruntime-web/ort.wasm.min.mjs",
+      "bytes": 50126,
+      "sha256": "219e6a1fc8a9938268d18efca3c91d310bd2f4a59bbd13744df5b2b7fc6cee3b"
+    },
+    {
+      "file": "vendor/onnxruntime-web/ort-wasm-simd-threaded.mjs",
+      "bytes": 24381,
+      "sha256": "e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b"
+    },
+    {
+      "file": "vendor/onnxruntime-web/ort-wasm-simd-threaded.wasm",
+      "bytes": 14239897,
+      "sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2"
+    }
+  ],
+  "clip": {
+    "id": "chameleon-flowers",
+    "label": "Chameleon among flowering branches",
+    "category": [
+      "plant",
+      "animal",
+      "still-held"
+    ],
+    "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "author": "Ventrovert",
+    "duration": 10,
+    "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+    "file": "chameleon-flowers.mp4",
+    "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+    "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+    "captureDuration": 13,
+    "span": {
+      "start": 0,
+      "length": 10
+    },
+    "checked": "October 15, 2026",
+    "transformation": "Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+    "evidence": {
+      "sourcePage": "evidence/chameleon-flowers-source.html",
+      "licensePage": "evidence/cc-by-4-0.html",
+      "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+      "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+      "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+      "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+      "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+      "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+    },
+    "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+    "width": 854,
+    "height": 480,
+    "fps": "24/1",
+    "bytes": 736318
+  },
+  "launchArgs": [
+    "--disable-gpu"
+  ],
+  "environment": {
+    "node": "v24.19.0",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpuQuota": "400000 100000",
+    "browserExecutable": "/usr/bin/chromium",
+    "browserExecutableSha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779"
+  },
+  "anchors": [],
+  "status": "pending",
+  "noHeldoutRead": true,
+  "visibilityEvidence": "Uncertified projected color consistency; accepted track observations are absent from cache."
+}

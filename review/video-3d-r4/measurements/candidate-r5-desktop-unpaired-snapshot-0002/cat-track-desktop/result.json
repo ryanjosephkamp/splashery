@@ -1,0 +1,22 @@
+{
+  "id": "cat-track",
+  "profile": "desktop",
+  "sha256": "598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430",
+  "started": "2026-10-15T06:42:33.414Z",
+  "status": "timeout",
+  "provenanceSha256": "d98e63a5586225f9b6dbe0276b7b347bb09e0697252d20e68a4f5b253af1e666",
+  "firstViewMs": 1254336.1000000006,
+  "bakeMs": 1361141.119123,
+  "mean": null,
+  "peakRssBytes": 1904046080,
+  "hostLoadAtStart": [
+    26.38,
+    25.85,
+    23.55
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "Error: cat-track/desktop (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery-r4-public/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

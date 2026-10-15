@@ -1,0 +1,444 @@
+{
+  "created": "2026-10-15T07:45:42.902Z",
+  "status": "diagnostic-complete",
+  "scriptSha256": "d5130dec7841d676ba6acea3c51e5b13a284d1696e2056191bca46df817da1a0",
+  "prototypeSha256": "031b884f377252a411581fef554168b2df79895cdccd2e1848b97b7e6ed048af",
+  "input": {
+    "source": "/workspace/v3d-r4-media/tilegrad-probe-r1",
+    "paramsSha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608",
+    "imageSha256": "cace76c4a9dece604c98edd306596896e7dac19b858259dbcf5653dba67d9890"
+  },
+  "environment": {
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpuQuota": "400000 100000",
+    "node": "v24.19.0",
+    "chromiumWrapperSha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+    "launchArgs": [
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--ignore-gpu-blocklist",
+      "--enable-unsafe-webgpu",
+      "--enable-features=Vulkan,WebGPU",
+      "--use-webgpu-adapter=swiftshader",
+      "--use-vulkan=swiftshader"
+    ],
+    "browserVersion": "151.0.7922.173"
+  },
+  "variants": [
+    {
+      "variant": "bitonic",
+      "constructorCpuMs": 2.599999999627471,
+      "setupWallMs": 5526.5,
+      "prototypePipelineCreateCpuMs": 0,
+      "stages": [
+        {
+          "name": "project",
+          "wallMs": 16,
+          "gpuMs": 1.631022
+        },
+        {
+          "name": "scan-0",
+          "wallMs": 12.599999999627471,
+          "gpuMs": 3.357172
+        },
+        {
+          "name": "scatter-0",
+          "wallMs": 11.400000000372529,
+          "gpuMs": 0.9061
+        },
+        {
+          "name": "scan-1",
+          "wallMs": 9.400000000372529,
+          "gpuMs": 0.774946
+        },
+        {
+          "name": "scatter-1",
+          "wallMs": 12.700000001117587,
+          "gpuMs": 0.376994
+        },
+        {
+          "name": "scan-2",
+          "wallMs": 6.5,
+          "gpuMs": 2.696639
+        },
+        {
+          "name": "scatter-2",
+          "wallMs": 9.600000001490116,
+          "gpuMs": 6.097573
+        },
+        {
+          "name": "scan-3",
+          "wallMs": 2.5,
+          "gpuMs": 2.000892
+        },
+        {
+          "name": "scatter-3",
+          "wallMs": 7.300000000745058,
+          "gpuMs": 2.180697
+        },
+        {
+          "name": "forwardColdPipeline",
+          "wallMs": 51,
+          "gpuMs": 44.313904
+        },
+        {
+          "name": "renderBackwardWarmPipeline",
+          "wallMs": 144.2999999988824,
+          "gpuMs": 143.400414
+        }
+      ],
+      "sort": [
+        {
+          "name": "sort-cold-dispatch",
+          "wallMs": 222.59999999962747,
+          "gpuMs": 212.364065
+        },
+        {
+          "name": "sort-warm-1",
+          "wallMs": 177.2000000011176,
+          "gpuMs": 173.105269
+        },
+        {
+          "name": "sort-warm-2",
+          "wallMs": 155.30000000074506,
+          "gpuMs": 154.574986
+        },
+        {
+          "name": "sort-warm-3",
+          "wallMs": 147.10000000149012,
+          "gpuMs": 144.87875
+        }
+      ],
+      "n": 1000,
+      "cap": 1000,
+      "renderFeat": {
+        "camGrad": false,
+        "stats": false,
+        "robust": false,
+        "covW": 0,
+        "covSubjW": 0,
+        "randBg": false
+      },
+      "files": [
+        {
+          "kind": "unsortedEntries",
+          "file": "bitonic-unsortedEntries.bin",
+          "bytes": 1048576,
+          "sha256": "09ba348e4ee4ca79ff2d4f9e178875be2af4e86325346eaf73dd757fdeb12cb2"
+        },
+        {
+          "kind": "coldEntries",
+          "file": "bitonic-coldEntries.bin",
+          "bytes": 1048576,
+          "sha256": "4d8f69dfc6f3458ce5b034e30c1cbe5430b764016e2def365ecfc115ac841588"
+        },
+        {
+          "kind": "entries",
+          "file": "bitonic-entries.bin",
+          "bytes": 1048576,
+          "sha256": "4d8f69dfc6f3458ce5b034e30c1cbe5430b764016e2def365ecfc115ac841588"
+        },
+        {
+          "kind": "gradP",
+          "file": "bitonic-gradP.bin",
+          "bytes": 64000,
+          "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+        },
+        {
+          "kind": "out",
+          "file": "bitonic-out.bin",
+          "bytes": 82944,
+          "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+        },
+        {
+          "kind": "stats",
+          "file": "bitonic-stats.bin",
+          "bytes": 16,
+          "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+        },
+        {
+          "kind": "tileStart",
+          "file": "bitonic-tileStart.bin",
+          "bytes": 100,
+          "sha256": "560af7121e484b10493993e79049944dd825b98821a41eff9b7855966bc3faa4"
+        },
+        {
+          "kind": "tileCursor",
+          "file": "bitonic-tileCursor.bin",
+          "bytes": 96,
+          "sha256": "2222bc607dc9795c08691cb4c841f60f6cb0b58dbda79e938c1f9906daf050bf"
+        },
+        {
+          "kind": "params",
+          "file": "bitonic-params.bin",
+          "bytes": 64000,
+          "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+        }
+      ]
+    },
+    {
+      "variant": "heap",
+      "constructorCpuMs": 0.5,
+      "setupWallMs": 6613.699999999255,
+      "prototypePipelineCreateCpuMs": 0.10000000149011612,
+      "stages": [
+        {
+          "name": "project",
+          "wallMs": 209.69999999925494,
+          "gpuMs": 0.500624
+        },
+        {
+          "name": "scan-0",
+          "wallMs": 5.800000000745058,
+          "gpuMs": 0.756481
+        },
+        {
+          "name": "scatter-0",
+          "wallMs": 4.900000000372529,
+          "gpuMs": 3.128175
+        },
+        {
+          "name": "scan-1",
+          "wallMs": 6.699999999254942,
+          "gpuMs": 0.880422
+        },
+        {
+          "name": "scatter-1",
+          "wallMs": 7.699999999254942,
+          "gpuMs": 0.255276
+        },
+        {
+          "name": "scan-2",
+          "wallMs": 2.400000000372529,
+          "gpuMs": 0.683925
+        },
+        {
+          "name": "scatter-2",
+          "wallMs": 4.799999998882413,
+          "gpuMs": 0.532944
+        },
+        {
+          "name": "scan-3",
+          "wallMs": 2.400000000372529,
+          "gpuMs": 0.604328
+        },
+        {
+          "name": "scatter-3",
+          "wallMs": 2.400000000372529,
+          "gpuMs": 0.254655
+        },
+        {
+          "name": "forwardColdPipeline",
+          "wallMs": 66,
+          "gpuMs": 63.912802
+        },
+        {
+          "name": "renderBackwardWarmPipeline",
+          "wallMs": 130.2000000011176,
+          "gpuMs": 128.758382
+        }
+      ],
+      "sort": [
+        {
+          "name": "sort-cold-dispatch",
+          "wallMs": 18,
+          "gpuMs": 1.88161
+        },
+        {
+          "name": "sort-warm-1",
+          "wallMs": 31.799999998882413,
+          "gpuMs": 24.223221
+        },
+        {
+          "name": "sort-warm-2",
+          "wallMs": 4.199999999254942,
+          "gpuMs": 1.8656
+        },
+        {
+          "name": "sort-warm-3",
+          "wallMs": 4.200000001117587,
+          "gpuMs": 1.909332
+        }
+      ],
+      "n": 1000,
+      "cap": 1000,
+      "renderFeat": {
+        "camGrad": false,
+        "stats": false,
+        "robust": false,
+        "covW": 0,
+        "covSubjW": 0,
+        "randBg": false
+      },
+      "files": [
+        {
+          "kind": "unsortedEntries",
+          "file": "heap-unsortedEntries.bin",
+          "bytes": 1048576,
+          "sha256": "70d9f7b311fc242524cfffbcb91510ffe859829010d60d62c8feadc1fc6ce96a"
+        },
+        {
+          "kind": "coldEntries",
+          "file": "heap-coldEntries.bin",
+          "bytes": 1048576,
+          "sha256": "4d8f69dfc6f3458ce5b034e30c1cbe5430b764016e2def365ecfc115ac841588"
+        },
+        {
+          "kind": "entries",
+          "file": "heap-entries.bin",
+          "bytes": 1048576,
+          "sha256": "4d8f69dfc6f3458ce5b034e30c1cbe5430b764016e2def365ecfc115ac841588"
+        },
+        {
+          "kind": "gradP",
+          "file": "heap-gradP.bin",
+          "bytes": 64000,
+          "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+        },
+        {
+          "kind": "out",
+          "file": "heap-out.bin",
+          "bytes": 82944,
+          "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+        },
+        {
+          "kind": "stats",
+          "file": "heap-stats.bin",
+          "bytes": 16,
+          "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+        },
+        {
+          "kind": "tileStart",
+          "file": "heap-tileStart.bin",
+          "bytes": 100,
+          "sha256": "560af7121e484b10493993e79049944dd825b98821a41eff9b7855966bc3faa4"
+        },
+        {
+          "kind": "tileCursor",
+          "file": "heap-tileCursor.bin",
+          "bytes": 96,
+          "sha256": "2222bc607dc9795c08691cb4c841f60f6cb0b58dbda79e938c1f9906daf050bf"
+        },
+        {
+          "kind": "params",
+          "file": "heap-params.bin",
+          "bytes": 64000,
+          "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+        }
+      ]
+    }
+  ],
+  "adapter": {
+    "vendor": "google",
+    "architecture": "swiftshader",
+    "description": ""
+  },
+  "timestampQuery": true,
+  "fixtureVariants": [
+    {
+      "variant": "bitonic",
+      "timing": {
+        "name": "integer-fixture-sort",
+        "wallMs": 4905.700000001118,
+        "gpuMs": 62.059936
+      },
+      "files": [
+        {
+          "kind": "entries",
+          "file": "fixture-bitonic-entries.bin",
+          "bytes": 49416,
+          "sha256": "a8aa7519851bbb3818264bdf752945becf1485f69d1c8839915a565973b48ce5"
+        }
+      ]
+    },
+    {
+      "variant": "heap",
+      "timing": {
+        "name": "integer-fixture-sort",
+        "wallMs": 126.80000000074506,
+        "gpuMs": 15.516715
+      },
+      "files": [
+        {
+          "kind": "entries",
+          "file": "fixture-heap-entries.bin",
+          "bytes": 49416,
+          "sha256": "a8aa7519851bbb3818264bdf752945becf1485f69d1c8839915a565973b48ce5"
+        }
+      ]
+    }
+  ],
+  "parity": {
+    "entries": {
+      "byteExact": true,
+      "bytes": 1048576
+    },
+    "coldEntries": {
+      "byteExact": true,
+      "bytes": 1048576
+    },
+    "gradP": {
+      "byteExact": true,
+      "bytes": 64000
+    },
+    "out": {
+      "byteExact": true,
+      "bytes": 82944
+    },
+    "stats": {
+      "byteExact": true,
+      "bytes": 16
+    },
+    "tileStart": {
+      "byteExact": true,
+      "bytes": 100
+    },
+    "tileCursor": {
+      "byteExact": true,
+      "bytes": 96
+    },
+    "params": {
+      "byteExact": true,
+      "bytes": 64000
+    },
+    "fixture": {
+      "byteExact": true
+    }
+  },
+  "independentJsOracle": {
+    "realColdAndWarm": true,
+    "fixturePaddedTailAndCanary": true
+  },
+  "realTileCounts": [
+    8,
+    98,
+    173,
+    26,
+    0,
+    0,
+    7,
+    223,
+    380,
+    258,
+    27,
+    0,
+    2,
+    19,
+    82,
+    96,
+    46,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "stats": [
+    57407,
+    211045520,
+    5184,
+    0
+  ]
+}

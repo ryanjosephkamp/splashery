@@ -1,0 +1,46 @@
+{
+  "anchorCameraIndices": [
+    0,
+    5,
+    10,
+    15
+  ],
+  "side": 294,
+  "maximumPointsPerAnchor": 256,
+  "hostDeadlineMs": 600000,
+  "calibration": {
+    "knownTrackVisibility": false,
+    "sourceFitColorRmseMax": 0.08,
+    "fitCameras": 2,
+    "unusedValidationCameras": 1,
+    "minimumParallaxDegrees": 0.15,
+    "maximumParallaxDegrees": 12,
+    "minimumCorrespondences": 30,
+    "minimumOccupiedTiles": 6,
+    "gridTiles": 4,
+    "spatialValidationTileModulo": 4,
+    "minimumFitPoints": 20,
+    "minimumValidationPoints": 8,
+    "minimumInverseDepthIqrFraction": 0.08,
+    "minimumModelIqrFraction": 0.05,
+    "ransacHypotheses": 96,
+    "ransacRelativeError": 0.08,
+    "minimumInlierFraction": 0.6,
+    "maximumSpatialValidationMedianRelativeError": 0.12,
+    "huberIterations": 4
+  },
+  "admission": {
+    "fitPatchSide": 3,
+    "maximumFitPatchRmse": 0.08,
+    "sparseOcclusionRadiusPixels": 3,
+    "sparseOcclusionDepthRatio": 1.1,
+    "depthQuantileBounds": [
+      0.025,
+      0.975
+    ],
+    "depthBoundExpansion": 0.15,
+    "minimumNormalFacingCosine": 0.15,
+    "maximumNeighborInverseDepthJump": 0.15
+  },
+  "protocol": "Raw relative inverse depth; fixed 4 cached TRAINING anchors, no held-out images, no relief/card/camera fit. Per-anchor two geometry-selected fit images and separate third TRAINING image. Cached track visibility absent; projected color consistency only, explicitly uncertified. No runtime-integration recommendation from this diagnostic."
+}

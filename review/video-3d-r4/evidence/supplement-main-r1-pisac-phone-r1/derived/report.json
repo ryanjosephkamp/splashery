@@ -1,0 +1,144 @@
+{
+  "kind": "supplemental-read-only-evaluation",
+  "status": "supplemental-quality-diagnostic",
+  "bindingSha256": "635b86b02cd42924907956edc7bf9107f146dd018b1b0184faaa2081d5e43b8e",
+  "originalStatus": "harness-error",
+  "originalTimingCensored": true,
+  "strictAcceptanceEvidence": false,
+  "timingRecovered": false,
+  "originalMetadataByteVerification": false,
+  "sourceUrl": "http://127.0.0.1:4174/",
+  "servedSourceSha256": "96cca2a891ed56d5c04bac58d66e45ce4a1e85b4bcc3fed3b02d0124546f3336",
+  "metadataEvidence": {
+    "sha256": "6f22a657b1f214b2b2b7817635285dfe3b130eff66a54c2197d94c694cb2693a",
+    "newlyHashBound": true,
+    "historicallyBenchmarkHashBound": false,
+    "cameraPath": "Stored metadata poses are used unchanged; no solve, fitting, or image alignment."
+  },
+  "cleanup": "main",
+  "frames": [
+    {
+      "time": 1.041667,
+      "sourceIndex": 25,
+      "renderSha256": "adf4838b5dc84329ad3b9a52180303bc023b46b791c9ca5e286e1c6b4cabbeba",
+      "originalRenderVerification": null,
+      "captureEvidence": "New read-only evaluation; no original saved render exists",
+      "referenceSha256": "f028e2a8e618c217ec0e4eb2c58627ff70b246a90b460b76a3cc85e8712cc91c",
+      "psnr": 14.21935010191837,
+      "exact": false,
+      "ssim": 0.5102651613773862,
+      "laplacian": 0.0001573336949334849,
+      "sourceLaplacian": 0.004928635130651347,
+      "sharpnessRatio": 0.03192236608366916
+    },
+    {
+      "time": 3.541667,
+      "sourceIndex": 85,
+      "renderSha256": "d3e95a7ae698f47e648c5eab01a4c3807fd622adaa4d6584bddd16847acd558b",
+      "originalRenderVerification": null,
+      "captureEvidence": "New read-only evaluation; no original saved render exists",
+      "referenceSha256": "14fb85abfa121be9911bfae70ada0dab926ba35e4cade15833f5898af5e47aac",
+      "psnr": 16.77101488337766,
+      "exact": false,
+      "ssim": 0.5469556307269388,
+      "laplacian": 0.00019204578093973582,
+      "sourceLaplacian": 0.0039014756593218703,
+      "sharpnessRatio": 0.049223882886691134
+    },
+    {
+      "time": 6.208333,
+      "sourceIndex": 149,
+      "renderSha256": "2e22705d87f888aa877ebfd8596e7f2e22a04a31b038d7cb3272c920fee53362",
+      "originalRenderVerification": null,
+      "captureEvidence": "New read-only evaluation; no original saved render exists",
+      "referenceSha256": "baf3a42f0095b4276df876fc3badc96a5fd2a84ade09f1a283f2c051633d7d9d",
+      "psnr": 15.655660432165469,
+      "exact": false,
+      "ssim": 0.57941761031526,
+      "laplacian": 0.00010813047771512386,
+      "sourceLaplacian": 0.0024401997225227995,
+      "sharpnessRatio": 0.04431214245173883
+    },
+    {
+      "time": 8.958333,
+      "sourceIndex": 215,
+      "renderSha256": "c26765f86f5cbb01d36aaa55bb7fcb00302149606acf747d61b3129e0529d35e",
+      "originalRenderVerification": null,
+      "captureEvidence": "New read-only evaluation; no original saved render exists",
+      "referenceSha256": "98e6c71cb1e2004cb9118ff10b4acbe68013f761abccb53bba68b2f16206f6b6",
+      "psnr": 14.523072103323415,
+      "exact": false,
+      "ssim": 0.6024881558968143,
+      "laplacian": 0.00004774795687279937,
+      "sourceLaplacian": 0.002570430278424704,
+      "sharpnessRatio": 0.018575861509872133
+    }
+  ],
+  "limitations": [
+    "Supplemental quality diagnostics only; original harness-error status remains unchanged.",
+    "No censored timing is recovered, and this cannot establish strict benchmark acceptance.",
+    "Stored model metadata bytes are newly hash-bound; original benchmark row hashes PLY and evaluation but not model.json.",
+    "No stored original render PNG means newly captured read-only evaluation, not original capture verification."
+  ],
+  "scene": {
+    "uid": "review-capture",
+    "affine": true,
+    "preservePhotometric": false
+  },
+  "pixelDisjointnessReverified": true,
+  "mean": {
+    "psnr": 15.292274380196229,
+    "ssim": 0.5597816395790998,
+    "laplacian": 0.000126314477615286,
+    "sourceLaplacian": 0.00346018519773018
+  },
+  "originalRenderPngsExactlyVerified": 0,
+  "originalCaptureVerificationComplete": false,
+  "artifacts": [
+    {
+      "file": "pixel-receipts.json",
+      "bytes": 5306,
+      "sha256": "112e12c1288ff4c00e59bddfd896dd4f5d48671ef3650eab225dc5af12a21178"
+    },
+    {
+      "file": "reference-0.png",
+      "bytes": 377624,
+      "sha256": "f028e2a8e618c217ec0e4eb2c58627ff70b246a90b460b76a3cc85e8712cc91c"
+    },
+    {
+      "file": "reference-1.png",
+      "bytes": 374956,
+      "sha256": "14fb85abfa121be9911bfae70ada0dab926ba35e4cade15833f5898af5e47aac"
+    },
+    {
+      "file": "reference-2.png",
+      "bytes": 350780,
+      "sha256": "baf3a42f0095b4276df876fc3badc96a5fd2a84ade09f1a283f2c051633d7d9d"
+    },
+    {
+      "file": "reference-3.png",
+      "bytes": 343367,
+      "sha256": "98e6c71cb1e2004cb9118ff10b4acbe68013f761abccb53bba68b2f16206f6b6"
+    },
+    {
+      "file": "render-0.png",
+      "bytes": 398030,
+      "sha256": "adf4838b5dc84329ad3b9a52180303bc023b46b791c9ca5e286e1c6b4cabbeba"
+    },
+    {
+      "file": "render-1.png",
+      "bytes": 424268,
+      "sha256": "d3e95a7ae698f47e648c5eab01a4c3807fd622adaa4d6584bddd16847acd558b"
+    },
+    {
+      "file": "render-2.png",
+      "bytes": 391226,
+      "sha256": "2e22705d87f888aa877ebfd8596e7f2e22a04a31b038d7cb3272c920fee53362"
+    },
+    {
+      "file": "render-3.png",
+      "bytes": 313976,
+      "sha256": "c26765f86f5cbb01d36aaa55bb7fcb00302149606acf747d61b3129e0529d35e"
+    }
+  ]
+}

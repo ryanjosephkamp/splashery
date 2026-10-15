@@ -1,0 +1,213 @@
+{
+  "created": "2026-10-15T07:23:49.330Z",
+  "config": {
+    "anchorCameraIndices": [
+      0,
+      5,
+      10,
+      15
+    ],
+    "side": 294,
+    "maximumPointsPerAnchor": 256,
+    "hostDeadlineMs": 600000,
+    "calibration": {
+      "knownTrackVisibility": false,
+      "sourceFitColorRmseMax": 0.08,
+      "fitCameras": 2,
+      "unusedValidationCameras": 1,
+      "minimumParallaxDegrees": 0.15,
+      "maximumParallaxDegrees": 12,
+      "minimumCorrespondences": 30,
+      "minimumOccupiedTiles": 6,
+      "gridTiles": 4,
+      "spatialValidationTileModulo": 4,
+      "minimumFitPoints": 20,
+      "minimumValidationPoints": 8,
+      "minimumInverseDepthIqrFraction": 0.08,
+      "minimumModelIqrFraction": 0.05,
+      "ransacHypotheses": 96,
+      "ransacRelativeError": 0.08,
+      "minimumInlierFraction": 0.6,
+      "maximumSpatialValidationMedianRelativeError": 0.12,
+      "huberIterations": 4
+    },
+    "admission": {
+      "fitPatchSide": 3,
+      "maximumFitPatchRmse": 0.08,
+      "sparseOcclusionRadiusPixels": 3,
+      "sparseOcclusionDepthRatio": 1.1,
+      "depthQuantileBounds": [
+        0.025,
+        0.975
+      ],
+      "depthBoundExpansion": 0.15,
+      "minimumNormalFacingCosine": 0.15,
+      "maximumNeighborInverseDepthJump": 0.15
+    },
+    "protocol": "Raw relative inverse depth; fixed 4 cached TRAINING anchors, no held-out images, no relief/card/camera fit. Per-anchor two geometry-selected fit images and separate third TRAINING image. Cached track visibility absent; projected color consistency only, explicitly uncertified. No runtime-integration recommendation from this diagnostic."
+  },
+  "cacheSha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f",
+  "collectorReceiptSha256": "21a203f1a78fac3c100184882e9e5be71a7ae79317c2fe1ccc27e110c56d54bf",
+  "evaluatorSha256": "88e547555447eb00b00d21d54f62812bd64d060b0bc2f389f9784cfe6b82c16a",
+  "cpuEvaluationMs": 177.18233099999998,
+  "acceptedCalibrations": 0,
+  "allDepthOnly": {
+    "evaluated": 0,
+    "independentVisiblePairs": 0,
+    "beforeFitMedian": null,
+    "afterFitMedian": null,
+    "beforeThirdMedian": null,
+    "afterThirdMedian": null,
+    "pairedThirdImprovementMedian": null,
+    "improved": 0,
+    "worsened": 0,
+    "depthRatioMedian": null
+  },
+  "selectedDepthOnly": {
+    "evaluated": 0,
+    "independentVisiblePairs": 0,
+    "beforeFitMedian": null,
+    "afterFitMedian": null,
+    "beforeThirdMedian": null,
+    "afterThirdMedian": null,
+    "pairedThirdImprovementMedian": null,
+    "improved": 0,
+    "worsened": 0,
+    "depthRatioMedian": null
+  },
+  "allDepthAndNormal": {
+    "evaluated": 0,
+    "independentVisiblePairs": 0,
+    "beforeFitMedian": null,
+    "afterFitMedian": null,
+    "beforeThirdMedian": null,
+    "afterThirdMedian": null,
+    "pairedThirdImprovementMedian": null,
+    "improved": 0,
+    "worsened": 0,
+    "depthRatioMedian": null
+  },
+  "selectedDepthAndNormal": {
+    "evaluated": 0,
+    "independentVisiblePairs": 0,
+    "beforeFitMedian": null,
+    "afterFitMedian": null,
+    "beforeThirdMedian": null,
+    "afterThirdMedian": null,
+    "pairedThirdImprovementMedian": null,
+    "improved": 0,
+    "worsened": 0,
+    "depthRatioMedian": null
+  },
+  "anchors": [
+    {
+      "anchor": 0,
+      "visibilityCertified": false,
+      "fitCameraIndices": [
+        1,
+        2
+      ],
+      "validationCameraIndex": 3,
+      "neighborParallaxDegrees": [
+        1.1179410338005118,
+        1.1562711617877321,
+        1.276747899489025
+      ],
+      "calibration": {
+        "points": 545,
+        "trainingPoints": 447,
+        "spatialValidationPoints": 98,
+        "tiles": 13,
+        "sourceInverseDepthIqrFraction": 0.016365545989168666,
+        "modelIqrFraction": 0.2739300544193954,
+        "status": "rejected",
+        "reason": "Insufficient inverse-depth/model spread; do not force affine calibration"
+      },
+      "skips": {}
+    },
+    {
+      "anchor": 5,
+      "visibilityCertified": false,
+      "fitCameraIndices": [
+        4,
+        6
+      ],
+      "validationCameraIndex": 7,
+      "neighborParallaxDegrees": [
+        0.1920336102793463,
+        0.7878597289094285,
+        1.2931044982171727
+      ],
+      "calibration": {
+        "points": 463,
+        "trainingPoints": 364,
+        "spatialValidationPoints": 99,
+        "tiles": 14,
+        "sourceInverseDepthIqrFraction": 0.023963042721859742,
+        "modelIqrFraction": 0.21445695459357006,
+        "status": "rejected",
+        "reason": "Insufficient inverse-depth/model spread; do not force affine calibration"
+      },
+      "skips": {}
+    },
+    {
+      "anchor": 10,
+      "visibilityCertified": false,
+      "fitCameraIndices": [
+        14,
+        9
+      ],
+      "validationCameraIndex": 11,
+      "neighborParallaxDegrees": [
+        0.5874656355575038,
+        0.6517107647714823,
+        0.5786451354902143
+      ],
+      "calibration": {
+        "points": 242,
+        "trainingPoints": 167,
+        "spatialValidationPoints": 75,
+        "tiles": 13,
+        "sourceInverseDepthIqrFraction": 0.03324997327168934,
+        "modelIqrFraction": 0.31407080199184845,
+        "status": "rejected",
+        "reason": "Insufficient inverse-depth/model spread; do not force affine calibration"
+      },
+      "skips": {}
+    },
+    {
+      "anchor": 15,
+      "visibilityCertified": false,
+      "fitCameraIndices": [
+        8,
+        7
+      ],
+      "validationCameraIndex": 9,
+      "neighborParallaxDegrees": [
+        0.5898658109570407,
+        1.1360639318806782,
+        0.5731232254207395
+      ],
+      "calibration": {
+        "points": 298,
+        "trainingPoints": 191,
+        "spatialValidationPoints": 107,
+        "tiles": 10,
+        "sourceInverseDepthIqrFraction": 0.030337383191730568,
+        "modelIqrFraction": 0.2656924848745129,
+        "status": "rejected",
+        "reason": "Insufficient inverse-depth/model spread; do not force affine calibration"
+      },
+      "skips": {}
+    }
+  ],
+  "limitations": [
+    "No accepted SfM observation membership in cached input; calibration visibility is uncertified projected multiview color consistency.",
+    "Third training RGB is excluded from this new calibration/admission, but original SfM and seed admission had used training images.",
+    "One cached real capture, four anchors, at most256proposed points per anchor; no bake or benchmark-held-out image.",
+    "Baseline cached initializer coefficient differs from laterR4/R6; this compares local geometry/normal patches, not final models.",
+    "Historical cached seeds are sampled to pair geometry at identical source pixels; unsupported gaps and total dense coverage are not tested.",
+    "No runtime integration recommendation can follow from uncertified visibility in this diagnostic."
+  ],
+  "runtimeIntegrationRecommended": false
+}

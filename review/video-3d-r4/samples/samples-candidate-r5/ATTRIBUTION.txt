@@ -1,0 +1,2 @@
+Six separate source-derived sample evaluations; each sample/profile directory carries its own source license. This is exact rendered-pixel preservation of existing bakes, not new training.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

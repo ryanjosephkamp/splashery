@@ -1,0 +1,102 @@
+{
+  "created": "2026-10-15T07:48:55.309Z",
+  "source": "/workspace/v3d-r4-media/supplement-main-r1-pisac-phone-r1",
+  "sourceInventory": [
+    {
+      "file": "binding.json",
+      "bytes": 86109,
+      "sha256": "635b86b02cd42924907956edc7bf9107f146dd018b1b0184faaa2081d5e43b8e"
+    },
+    {
+      "file": "completion-receipt.json",
+      "bytes": 3686,
+      "sha256": "77207e4c03c817e094dc96e47330e218cae6d86c28eb6c5be2430f633cee10a5"
+    },
+    {
+      "file": "derived/pixel-receipts.json",
+      "bytes": 5306,
+      "sha256": "112e12c1288ff4c00e59bddfd896dd4f5d48671ef3650eab225dc5af12a21178"
+    },
+    {
+      "file": "derived/reference-0.png",
+      "bytes": 377624,
+      "sha256": "f028e2a8e618c217ec0e4eb2c58627ff70b246a90b460b76a3cc85e8712cc91c"
+    },
+    {
+      "file": "derived/reference-1.png",
+      "bytes": 374956,
+      "sha256": "14fb85abfa121be9911bfae70ada0dab926ba35e4cade15833f5898af5e47aac"
+    },
+    {
+      "file": "derived/reference-2.png",
+      "bytes": 350780,
+      "sha256": "baf3a42f0095b4276df876fc3badc96a5fd2a84ade09f1a283f2c051633d7d9d"
+    },
+    {
+      "file": "derived/reference-3.png",
+      "bytes": 343367,
+      "sha256": "98e6c71cb1e2004cb9118ff10b4acbe68013f761abccb53bba68b2f16206f6b6"
+    },
+    {
+      "file": "derived/render-0.png",
+      "bytes": 398030,
+      "sha256": "adf4838b5dc84329ad3b9a52180303bc023b46b791c9ca5e286e1c6b4cabbeba"
+    },
+    {
+      "file": "derived/render-1.png",
+      "bytes": 424268,
+      "sha256": "d3e95a7ae698f47e648c5eab01a4c3807fd622adaa4d6584bddd16847acd558b"
+    },
+    {
+      "file": "derived/render-2.png",
+      "bytes": 391226,
+      "sha256": "2e22705d87f888aa877ebfd8596e7f2e22a04a31b038d7cb3272c920fee53362"
+    },
+    {
+      "file": "derived/render-3.png",
+      "bytes": 313976,
+      "sha256": "c26765f86f5cbb01d36aaa55bb7fcb00302149606acf747d61b3129e0529d35e"
+    },
+    {
+      "file": "derived/report.json",
+      "bytes": 5436,
+      "sha256": "dd378a5b6c27f073037b091c67ef10972af1ed614cbf9dff218a8b522a86dfc5"
+    },
+    {
+      "file": "render.log",
+      "bytes": 5436,
+      "sha256": "dd378a5b6c27f073037b091c67ef10972af1ed614cbf9dff218a8b522a86dfc5"
+    },
+    {
+      "file": "source/captured-run.json",
+      "bytes": 97566,
+      "sha256": "cc2c7261bc7216d9e7aa8fc343641431173bf188cd65707c1afd6e18e2ebc14a"
+    },
+    {
+      "file": "source/case/evaluation.json",
+      "bytes": 11103,
+      "sha256": "3f9aa9e146f8ca7ac0a98bb0f18756e5cb9b2787e6d25e3e5b31395d986ad11c"
+    },
+    {
+      "file": "source/case/model.json",
+      "bytes": 26429,
+      "sha256": "6f22a657b1f214b2b2b7817635285dfe3b130eff66a54c2197d94c694cb2693a"
+    },
+    {
+      "file": "source/case/model.ply",
+      "bytes": 922699,
+      "sha256": "efad3d4cf5c3138b4c25b5060d4f4366efed20d93cc300048d8066a64da93453"
+    },
+    {
+      "file": "source/case/result.json",
+      "bytes": 2237,
+      "sha256": "0c972d8ad18c859c64aadd839495dcafac63e2b4ced994c06e1fab85190bb3fd"
+    },
+    {
+      "file": "source/manifest.json",
+      "bytes": 40102,
+      "sha256": "bf0fcb849988aedc5ac20965d567e304adec88129b4f6e47fea21bcb0395dbca"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

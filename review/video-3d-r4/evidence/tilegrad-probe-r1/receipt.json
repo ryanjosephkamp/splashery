@@ -1,0 +1,276 @@
+{
+  "created": "2026-10-15T07:37:09.539Z",
+  "scriptSha256": "f32e53d2ce16806feb383105fe090f8edb8a8a8ef29039446d7cd28f43699a5d",
+  "configSha256": "16b42dbea560d54e34a5d73625ede3604a082ed84c6a137e236877918ae7de57",
+  "cache": {
+    "file": "/workspace/v3d-r4-media/seed-probe.json",
+    "bytes": 53829727,
+    "sha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f"
+  },
+  "inputHashes": {
+    "params": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608",
+    "image": "cace76c4a9dece604c98edd306596896e7dac19b858259dbcf5653dba67d9890"
+  },
+  "sourceBefore": [
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 118958,
+      "sha256": "900827c5a164007808f7844cb4940cbbe26b62b58316a256a2a45771e5e31d01"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 100083,
+      "sha256": "d93c29237163bbdcdfbee3ff4e5094499b4932927f5d1ce9f91e8d33ec7decff"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    }
+  ],
+  "environment": {
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpuQuota": "400000 100000",
+    "node": "v24.19.0",
+    "executableSha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+    "launchArgs": [
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--ignore-gpu-blocklist",
+      "--enable-unsafe-webgpu",
+      "--enable-features=Vulkan,WebGPU",
+      "--use-webgpu-adapter=swiftshader",
+      "--use-vulkan=swiftshader"
+    ],
+    "browserVersion": "151.0.7922.173"
+  },
+  "status": "diagnostic-complete",
+  "variants": [
+    {
+      "tileGrad": true,
+      "constructorCpuMs": 35.79999999888241,
+      "setupWallMs": 20470.60000000149,
+      "stages": [
+        {
+          "name": "project",
+          "wallMs": 50.69999999925494,
+          "gpuMs": 5.697331
+        },
+        {
+          "name": "scan",
+          "wallMs": 3.5,
+          "gpuMs": 2.563674
+        },
+        {
+          "name": "scatter",
+          "wallMs": 7.099999999627471,
+          "gpuMs": 5.156682
+        },
+        {
+          "name": "sort",
+          "wallMs": 283.19999999925494,
+          "gpuMs": 265.486864
+        },
+        {
+          "name": "forwardColdPipeline",
+          "wallMs": 62.30000000074506,
+          "gpuMs": 60.090819
+        },
+        {
+          "name": "renderBackwardWarmPipeline",
+          "wallMs": 190.2999999988824,
+          "gpuMs": 185.266925
+        }
+      ],
+      "n": 1000,
+      "cap": 1000,
+      "renderFeat": {
+        "camGrad": false,
+        "stats": false,
+        "robust": false,
+        "covW": 0,
+        "covSubjW": 0,
+        "randBg": false
+      },
+      "files": [
+        {
+          "kind": "gradP",
+          "file": "shared-gradP.bin",
+          "bytes": 64000,
+          "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+        },
+        {
+          "kind": "out",
+          "file": "shared-out.bin",
+          "bytes": 82944,
+          "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+        },
+        {
+          "kind": "stats",
+          "file": "shared-stats.bin",
+          "bytes": 16,
+          "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+        },
+        {
+          "kind": "tileStart",
+          "file": "shared-tileStart.bin",
+          "bytes": 100,
+          "sha256": "560af7121e484b10493993e79049944dd825b98821a41eff9b7855966bc3faa4"
+        },
+        {
+          "kind": "tileCursor",
+          "file": "shared-tileCursor.bin",
+          "bytes": 96,
+          "sha256": "2222bc607dc9795c08691cb4c841f60f6cb0b58dbda79e938c1f9906daf050bf"
+        },
+        {
+          "kind": "params",
+          "file": "shared-params.bin",
+          "bytes": 64000,
+          "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+        }
+      ]
+    },
+    {
+      "tileGrad": false,
+      "constructorCpuMs": 0.8000000007450581,
+      "setupWallMs": 15247.699999999255,
+      "stages": [
+        {
+          "name": "project",
+          "wallMs": 21,
+          "gpuMs": 4.51285
+        },
+        {
+          "name": "scan",
+          "wallMs": 4.299999998882413,
+          "gpuMs": 0.765889
+        },
+        {
+          "name": "scatter",
+          "wallMs": 6.200000001117587,
+          "gpuMs": 0.274853
+        },
+        {
+          "name": "sort",
+          "wallMs": 194.5,
+          "gpuMs": 190.645747
+        },
+        {
+          "name": "forwardColdPipeline",
+          "wallMs": 78.5,
+          "gpuMs": 66.910966
+        },
+        {
+          "name": "renderBackwardWarmPipeline",
+          "wallMs": 189,
+          "gpuMs": 187.634279
+        }
+      ],
+      "n": 1000,
+      "cap": 1000,
+      "renderFeat": {
+        "camGrad": false,
+        "stats": false,
+        "robust": false,
+        "covW": 0,
+        "covSubjW": 0,
+        "randBg": false
+      },
+      "files": [
+        {
+          "kind": "gradP",
+          "file": "direct-gradP.bin",
+          "bytes": 64000,
+          "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+        },
+        {
+          "kind": "out",
+          "file": "direct-out.bin",
+          "bytes": 82944,
+          "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+        },
+        {
+          "kind": "stats",
+          "file": "direct-stats.bin",
+          "bytes": 16,
+          "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+        },
+        {
+          "kind": "tileStart",
+          "file": "direct-tileStart.bin",
+          "bytes": 100,
+          "sha256": "560af7121e484b10493993e79049944dd825b98821a41eff9b7855966bc3faa4"
+        },
+        {
+          "kind": "tileCursor",
+          "file": "direct-tileCursor.bin",
+          "bytes": 96,
+          "sha256": "2222bc607dc9795c08691cb4c841f60f6cb0b58dbda79e938c1f9906daf050bf"
+        },
+        {
+          "kind": "params",
+          "file": "direct-params.bin",
+          "bytes": 64000,
+          "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+        }
+      ]
+    }
+  ],
+  "adapter": {
+    "vendor": "google",
+    "architecture": "swiftshader",
+    "description": ""
+  },
+  "timestampQuery": true,
+  "parity": {
+    "gradP": {
+      "byteExact": true,
+      "differentWords": 0,
+      "maxAbsoluteIntegerDifference": 0
+    },
+    "out": {
+      "byteExact": true,
+      "maxAbsoluteFloatDifference": 0
+    },
+    "stats": {
+      "byteExact": true
+    },
+    "tileStart": {
+      "byteExact": true
+    },
+    "tileCursor": {
+      "byteExact": true
+    },
+    "params": {
+      "byteExact": true
+    }
+  },
+  "sourceAfter": [
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 118958,
+      "sha256": "900827c5a164007808f7844cb4940cbbe26b62b58316a256a2a45771e5e31d01"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 100083,
+      "sha256": "d93c29237163bbdcdfbee3ff4e5094499b4932927f5d1ce9f91e8d33ec7decff"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    }
+  ]
+}

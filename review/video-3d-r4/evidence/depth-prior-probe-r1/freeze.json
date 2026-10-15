@@ -1,0 +1,145 @@
+{
+  "created": "2026-10-15T07:25:20.438Z",
+  "kind": "Bounded optional depth prior diagnostic; all calibrations stopped before point generation",
+  "sourceCache": {
+    "file": "/workspace/v3d-r4-media/seed-probe.json",
+    "bytes": 53829727,
+    "sha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f"
+  },
+  "sourceDependencies": [
+    {
+      "file": "src/depth/client.js",
+      "bytes": 1944,
+      "sha256": "cd1951ee564cf8a1ba7d655497cea0fc6cfe80ac72b4d382782fb2b998845a9e"
+    },
+    {
+      "file": "src/live/depth-worker.js",
+      "bytes": 2189,
+      "sha256": "1b4a7f49d69fe87cc83cd724540c5537d767f97a7f1e8195573be97160aa6ac7"
+    },
+    {
+      "file": "src/depth/engine.js",
+      "bytes": 5439,
+      "sha256": "953ad7094ed535a059f196e32eddbda4e7bbce0286f55baf2cb00eed4a7cbe89"
+    },
+    {
+      "file": "src/depth/io.js",
+      "bytes": 826,
+      "sha256": "a6b4c2bad43cbc9ca34367afdb5fd72106b888f26532b651788161d43c0c700d"
+    },
+    {
+      "file": "src/depth/clip.js",
+      "bytes": 3483,
+      "sha256": "9ab5111438dcee5c0f293ec4bf80d6c083baa3b15d6d6467120b58a72654a295"
+    },
+    {
+      "file": "src/packs/photo-3d-core.js",
+      "bytes": 31900,
+      "sha256": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c"
+    },
+    {
+      "file": "src/photo3d/background.js",
+      "bytes": 8146,
+      "sha256": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa"
+    },
+    {
+      "file": "src/photo3d/depth-edges.js",
+      "bytes": 5694,
+      "sha256": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70"
+    },
+    {
+      "file": "vendor/depth-anything-v2-small/model_quantized.onnx",
+      "bytes": 27258801,
+      "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d"
+    },
+    {
+      "file": "vendor/onnxruntime-web/ort.wasm.min.mjs",
+      "bytes": 50126,
+      "sha256": "219e6a1fc8a9938268d18efca3c91d310bd2f4a59bbd13744df5b2b7fc6cee3b"
+    },
+    {
+      "file": "vendor/onnxruntime-web/ort-wasm-simd-threaded.mjs",
+      "bytes": 24381,
+      "sha256": "e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b"
+    },
+    {
+      "file": "vendor/onnxruntime-web/ort-wasm-simd-threaded.wasm",
+      "bytes": 14239897,
+      "sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2"
+    }
+  ],
+  "noHeldoutImagesRead": true,
+  "noCameraFit": true,
+  "noTraining": true,
+  "rawDepthOnly": true,
+  "proposedPoints": 0,
+  "thirdCameraScoresMeasured": false,
+  "runtimeIntegrationRecommended": false,
+  "artifacts": [
+    {
+      "file": "anchor-0.f32",
+      "bytes": 197568,
+      "sha256": "e77f906d12fc6b61d464de3e65a51c853fdf2fd4efd4dbc580b16aec3d6ee09a"
+    },
+    {
+      "file": "anchor-10.f32",
+      "bytes": 197568,
+      "sha256": "a63ae83b9b7f23d0299c981d26ac533cebb201bbd2bf14cce15b6ee0c3748985"
+    },
+    {
+      "file": "anchor-15.f32",
+      "bytes": 197568,
+      "sha256": "d2b046eca35fed6486b5f5c3312d0454144c8bc3a24952dfa591c40d16f217ef"
+    },
+    {
+      "file": "anchor-5.f32",
+      "bytes": 197568,
+      "sha256": "06786b4290e34478b70780a45213754c03d0728f69abce9ccd4dd2ac7ec2364c"
+    },
+    {
+      "file": "assessment.md",
+      "bytes": 5496,
+      "sha256": "e2816b6093f1945f622f304898c025d29ebc7d4217858e02bd9934fb4cd4c883"
+    },
+    {
+      "file": "collect-prior-r1.log",
+      "bytes": 3566,
+      "sha256": "05f1d4e0660b17d4b3074758daed2a81daa2262fbbaccf431feb68f22e142513"
+    },
+    {
+      "file": "evaluate-prior-r1.log",
+      "bytes": 6830,
+      "sha256": "f0a7071fa6348104ce348b39552876d2189509308ebfdf4f073f4925a92e9662"
+    },
+    {
+      "file": "geometry-report.json",
+      "bytes": 378387,
+      "sha256": "ab9f0cc5997b062922079cb2fa1e128c4ff6ae6ba9d451eba7abf4cc062d63b5"
+    },
+    {
+      "file": "inference-receipt.json",
+      "bytes": 12375,
+      "sha256": "21a203f1a78fac3c100184882e9e5be71a7ae79317c2fe1ccc27e110c56d54bf"
+    },
+    {
+      "file": "pre-inference-binding.json",
+      "bytes": 5039,
+      "sha256": "2394f1542fa74baeb24dc0116403cdec88764441aa58f5e292870a5e21f52c76"
+    },
+    {
+      "file": "preregistered-config.json",
+      "bytes": 1487,
+      "sha256": "d503e0fe4bb1e6f9c880cd33c92e43e9ebb857f871e8d3379c32f7ea18222fcf"
+    },
+    {
+      "file": "scripts/collect-prior-r1.mjs",
+      "bytes": 8366,
+      "sha256": "a7cf415305aa0c3025c38e0f79b6ce25eab89b3af8dc253fba176d9b2ec57ace"
+    },
+    {
+      "file": "scripts/evaluate-prior-r1.mjs",
+      "bytes": 15951,
+      "sha256": "88e547555447eb00b00d21d54f62812bd64d060b0bc2f389f9784cfe6b82c16a"
+    }
+  ]
+}

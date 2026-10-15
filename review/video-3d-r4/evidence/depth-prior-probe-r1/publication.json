@@ -1,0 +1,77 @@
+{
+  "created": "2026-10-15T07:48:55.110Z",
+  "source": "/workspace/v3d-r4-media/depth-prior-probe-r1",
+  "sourceInventory": [
+    {
+      "file": "anchor-0.f32",
+      "bytes": 197568,
+      "sha256": "e77f906d12fc6b61d464de3e65a51c853fdf2fd4efd4dbc580b16aec3d6ee09a"
+    },
+    {
+      "file": "anchor-10.f32",
+      "bytes": 197568,
+      "sha256": "a63ae83b9b7f23d0299c981d26ac533cebb201bbd2bf14cce15b6ee0c3748985"
+    },
+    {
+      "file": "anchor-15.f32",
+      "bytes": 197568,
+      "sha256": "d2b046eca35fed6486b5f5c3312d0454144c8bc3a24952dfa591c40d16f217ef"
+    },
+    {
+      "file": "anchor-5.f32",
+      "bytes": 197568,
+      "sha256": "06786b4290e34478b70780a45213754c03d0728f69abce9ccd4dd2ac7ec2364c"
+    },
+    {
+      "file": "assessment.md",
+      "bytes": 5496,
+      "sha256": "e2816b6093f1945f622f304898c025d29ebc7d4217858e02bd9934fb4cd4c883"
+    },
+    {
+      "file": "collect-prior-r1.log",
+      "bytes": 3566,
+      "sha256": "05f1d4e0660b17d4b3074758daed2a81daa2262fbbaccf431feb68f22e142513"
+    },
+    {
+      "file": "evaluate-prior-r1.log",
+      "bytes": 6830,
+      "sha256": "f0a7071fa6348104ce348b39552876d2189509308ebfdf4f073f4925a92e9662"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 4595,
+      "sha256": "a51e875e72cf49113143d1a3e218924e4790f8483824c7b022d507a6d4ee39ff"
+    },
+    {
+      "file": "geometry-report.json",
+      "bytes": 378387,
+      "sha256": "ab9f0cc5997b062922079cb2fa1e128c4ff6ae6ba9d451eba7abf4cc062d63b5"
+    },
+    {
+      "file": "inference-receipt.json",
+      "bytes": 12375,
+      "sha256": "21a203f1a78fac3c100184882e9e5be71a7ae79317c2fe1ccc27e110c56d54bf"
+    },
+    {
+      "file": "pre-inference-binding.json",
+      "bytes": 5039,
+      "sha256": "2394f1542fa74baeb24dc0116403cdec88764441aa58f5e292870a5e21f52c76"
+    },
+    {
+      "file": "preregistered-config.json",
+      "bytes": 1487,
+      "sha256": "d503e0fe4bb1e6f9c880cd33c92e43e9ebb857f871e8d3379c32f7ea18222fcf"
+    },
+    {
+      "file": "scripts/collect-prior-r1.mjs",
+      "bytes": 8366,
+      "sha256": "a7cf415305aa0c3025c38e0f79b6ce25eab89b3af8dc253fba176d9b2ec57ace"
+    },
+    {
+      "file": "scripts/evaluate-prior-r1.mjs",
+      "bytes": 15951,
+      "sha256": "88e547555447eb00b00d21d54f62812bd64d060b0bc2f389f9784cfe6b82c16a"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

@@ -1,0 +1,7 @@
+Adjara2025walking-summer-forest (20 seconds from 0 seconds)
+Author: Vitaly Zdanevich
+Source: https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm
+License: CC BY 4.0
+License URL: https://creativecommons.org/licenses/by/4.0/
+Transformation: actual production-viewer screenshots of the existing trained bake; source license retained.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

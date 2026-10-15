@@ -1,0 +1,102 @@
+{
+  "created": "2026-10-15T07:48:55.124Z",
+  "source": "/workspace/v3d-r4-media/tilegrad-probe-r1",
+  "sourceInventory": [
+    {
+      "file": "assessment.md",
+      "bytes": 1078,
+      "sha256": "2548490bf50289796aa2ef65da88689a31666804ea43996ace11afda83bc54f6"
+    },
+    {
+      "file": "config.json",
+      "bytes": 11108,
+      "sha256": "16b42dbea560d54e34a5d73625ede3604a082ed84c6a137e236877918ae7de57"
+    },
+    {
+      "file": "direct-gradP.bin",
+      "bytes": 64000,
+      "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+    },
+    {
+      "file": "direct-out.bin",
+      "bytes": 82944,
+      "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+    },
+    {
+      "file": "direct-params.bin",
+      "bytes": 64000,
+      "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+    },
+    {
+      "file": "direct-stats.bin",
+      "bytes": 16,
+      "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+    },
+    {
+      "file": "direct-tileCursor.bin",
+      "bytes": 96,
+      "sha256": "2222bc607dc9795c08691cb4c841f60f6cb0b58dbda79e938c1f9906daf050bf"
+    },
+    {
+      "file": "direct-tileStart.bin",
+      "bytes": 100,
+      "sha256": "560af7121e484b10493993e79049944dd825b98821a41eff9b7855966bc3faa4"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 2885,
+      "sha256": "044abb4c2e00be3973efaf60f1f6e7a3cc98e2aa0960de0ff90f0acdedc5b2ca"
+    },
+    {
+      "file": "input-image.f32",
+      "bytes": 62208,
+      "sha256": "cace76c4a9dece604c98edd306596896e7dac19b858259dbcf5653dba67d9890"
+    },
+    {
+      "file": "input-params.f32",
+      "bytes": 64000,
+      "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+    },
+    {
+      "file": "pre-dispatch-binding.json",
+      "bytes": 1538,
+      "sha256": "f0bf4270fc8791fe3b032492fda0948bb39cd671b65dd1a3813e15b50280c0d0"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 7667,
+      "sha256": "bdd7444caf82e0d6c29318c018a61d1f048235deaec96b2bd80f38712de2e41e"
+    },
+    {
+      "file": "shared-gradP.bin",
+      "bytes": 64000,
+      "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+    },
+    {
+      "file": "shared-out.bin",
+      "bytes": 82944,
+      "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+    },
+    {
+      "file": "shared-params.bin",
+      "bytes": 64000,
+      "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+    },
+    {
+      "file": "shared-stats.bin",
+      "bytes": 16,
+      "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+    },
+    {
+      "file": "shared-tileCursor.bin",
+      "bytes": 96,
+      "sha256": "2222bc607dc9795c08691cb4c841f60f6cb0b58dbda79e938c1f9906daf050bf"
+    },
+    {
+      "file": "shared-tileStart.bin",
+      "bytes": 100,
+      "sha256": "560af7121e484b10493993e79049944dd825b98821a41eff9b7855966bc3faa4"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

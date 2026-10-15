@@ -1,0 +1,38 @@
+{
+  "created": "2026-10-15T07:48:54.726Z",
+  "source": "/workspace/v3d-r4-media/candidate-r5-desktop-unpaired",
+  "runSha256": "39167d9c6582fc70ff736351adcfe6430ad10dd69b0906a42eaa8a2bcd73792d",
+  "provenanceSha256": "d98e63a5586225f9b6dbe0276b7b347bb09e0697252d20e68a4f5b253af1e666",
+  "cases": [
+    {
+      "id": "cat-track",
+      "profile": "desktop",
+      "rowFingerprint": "82f8e0769f6e5a4c1dc19e1f025e3a686c0ff93590dc07293f5688f14c322f71",
+      "files": [
+        {
+          "file": "result.json",
+          "bytes": 848,
+          "sha256": "c52fb598ea593588f1c9a931836ac67150acd078c3526411428b713b1b72cd6f"
+        }
+      ]
+    },
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "rowFingerprint": "ffcbd42a5a49d45a4d16d2c00eb3437d40e6c90508680d6cf2e995520bfebf41",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1151425,
+          "sha256": "daadaf714483fc9465255b77b212bc698cc5f719f584f30d43bc2abf698d6141"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1810,
+          "sha256": "0208159ae2f39937baff0b2d6a48b61e5bf927ffbc9022504e14685b4d8fa700"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. R5 buddha/phone was interrupted by retiring its scheduler and is not a native product conclusion."
+}

@@ -64,3 +64,34 @@ is an unranked diagnostic, not one of ten completed best/worst comparisons.
 correcting foreshortened Gaussian footprints. It does not support adding a local depth sweep. The
 compressed training cache decompresses to the original hash-bound bytes. No held-out image was used
 for this diagnostic, and covariance correctness does not establish rendered quality.
+
+### Later results and preserved samples
+
+[Revision 5](measurements/candidate-r5-snapshot-0004/run.json), its
+[unpaired desktop attempts](measurements/candidate-r5-desktop-unpaired-snapshot-0002/run.json), and
+[revision 6](measurements/candidate-r6-snapshot-0002/run.json) retain all recorded outcomes. The
+revision-6 footprint correction regressed the cat and plant quality scores and is excluded from the
+product default. One revision-5 Buddha attempt was interrupted when retiring its scheduler; its
+retained harness error is not a native product conclusion.
+
+[Revision 7 phone snapshot](measurements/candidate-r7-phone-snapshot-0003/run.json) still misses the
+cat SSIM target and delays the first preview. Missing cases stay pending. Exact experimental source
+overlays and served-byte receipts are [retained here](evidence/runtime-overlays/README.md).
+
+[Main samples](samples/samples-main-r1/samples.json) and
+[candidate samples](samples/samples-candidate-r5/samples.json) include all 74 held-out PNGs across
+six samples and both profiles. Every candidate view preserved exact pixels, without browser errors.
+This checks existing bakes and the production viewer; it does not retrain the samples.
+
+[Supplemental Pisac evaluation](evidence/supplement-main-r1-pisac-phone-r1/derived/report.json)
+reproduced all training/source JPEG receipts and scored the saved timeout model. Its original
+harness error and censored timing remain unchanged; these diagnostic scores are excluded from strict
+acceptance.
+
+[Depth-prior probe](evidence/depth-prior-probe-r1/assessment.md) stopped all four anchors at its
+fixed minimum-depth-spread gate and proposed no points.
+[Gradient-path probe](evidence/tilegrad-probe-r1/receipt.json) found exact math parity but no useful
+speed difference. [Serial-sort prototype](evidence/serial-sort-prototype/) verified exact entry,
+gradient, pixel, and loss parity on fixed small inputs, including a large padded tile. Its sort
+timing is a narrow software-GPU diagnostic, not an end-to-end or physical-phone speed claim. Each
+diagnostic retains its original byte-bound reports, scripts, and raw outputs.

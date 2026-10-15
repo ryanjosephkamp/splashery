@@ -1,0 +1,7 @@
+Walking in EDINBURGH - Scotland (UK) - 4K 60fps (UHD) (10 s from 7:32)
+Author: POPtravel
+Source: https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm
+License: CC BY 3.0
+License URL: https://creativecommons.org/licenses/by/3.0/
+Transformation: actual production-viewer screenshots of the existing trained bake; source license retained.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

@@ -1,0 +1,7 @@
+Toolse castle in Estonia (Fall 2021) (20 seconds from 14 seconds)
+Author: Sillerkiil
+Source: https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm
+License: CC BY-SA 4.0
+License URL: https://creativecommons.org/licenses/by-sa/4.0/
+Transformation: actual production-viewer screenshots of the existing trained bake; source license retained.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

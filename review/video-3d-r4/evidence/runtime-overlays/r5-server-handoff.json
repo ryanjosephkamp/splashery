@@ -1,0 +1,10 @@
+{
+  "started": "2026-10-15T07:02:25.149178+00:00",
+  "ready": "2026-10-15T07:02:25.367765+00:00",
+  "previousPid": 97708,
+  "pid": 115007,
+  "port": 4176,
+  "runtime": "/workspace/v3d-r4-media/runtime-r5",
+  "expectedSourceSha256": "2c291d16cd487ae2042fc20e9481f37fe257fe2cffffe3e251eb423d6eff0840",
+  "reason": "Move unchanged measured bytes to the immutable runtime snapshot before further product work."
+}

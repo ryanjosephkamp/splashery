@@ -1,0 +1,111 @@
+{
+  "created": "2026-10-15T07:22:45.911Z",
+  "cache": {
+    "file": "/workspace/v3d-r4-media/seed-probe.json",
+    "bytes": 53829727,
+    "sha256": "a58563911299803f7b9203214ac7a67a19817d6709dc4d1797d30bfa562d910f"
+  },
+  "configSha256": "d503e0fe4bb1e6f9c880cd33c92e43e9ebb857f871e8d3379c32f7ea18222fcf",
+  "collectorSha256": "a7cf415305aa0c3025c38e0f79b6ce25eab89b3af8dc253fba176d9b2ec57ace",
+  "evaluatorSha256": "88e547555447eb00b00d21d54f62812bd64d060b0bc2f389f9784cfe6b82c16a",
+  "launchArgs": [
+    "--disable-gpu"
+  ],
+  "environment": {
+    "node": "v24.19.0",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "cpuQuota": "400000 100000",
+    "browserExecutable": "/usr/bin/chromium",
+    "browserExecutableSha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+    "browserVersion": "151.0.7922.173"
+  },
+  "anchors": [
+    {
+      "index": 0,
+      "order": 0,
+      "w": 294,
+      "h": 168,
+      "wallMs": 3851.7000000011176,
+      "inferenceMs": 3749.5999999996275,
+      "provider": "wasm",
+      "threads": 1,
+      "fallback": null,
+      "file": "anchor-0.f32",
+      "bytes": 197568,
+      "sha256": "e77f906d12fc6b61d464de3e65a51c853fdf2fd4efd4dbc580b16aec3d6ee09a",
+      "inputRgbaSha256": "986ca91d8cdd5f18d758ca9ea2ee7d9c7abe65797f6518308a2c63a6cd538f47",
+      "validMaskSha256": "b03c161546b8ac65df8c904de01a8e4a85ce5fa4f8b1738a5e49fc99e8788794",
+      "sourceSize": [
+        320,
+        180
+      ]
+    },
+    {
+      "index": 5,
+      "order": 1,
+      "w": 294,
+      "h": 168,
+      "wallMs": 2779.199999999255,
+      "inferenceMs": 2716.699999999255,
+      "provider": "wasm",
+      "threads": 1,
+      "fallback": null,
+      "file": "anchor-5.f32",
+      "bytes": 197568,
+      "sha256": "06786b4290e34478b70780a45213754c03d0728f69abce9ccd4dd2ac7ec2364c",
+      "inputRgbaSha256": "a05bc48a3386d87d9e55a37d84da993fd708baad03b0363b75442880d9632969",
+      "validMaskSha256": "b03c161546b8ac65df8c904de01a8e4a85ce5fa4f8b1738a5e49fc99e8788794",
+      "sourceSize": [
+        320,
+        180
+      ]
+    },
+    {
+      "index": 10,
+      "order": 2,
+      "w": 294,
+      "h": 168,
+      "wallMs": 1362.300000000745,
+      "inferenceMs": 1235.0999999996275,
+      "provider": "wasm",
+      "threads": 1,
+      "fallback": null,
+      "file": "anchor-10.f32",
+      "bytes": 197568,
+      "sha256": "a63ae83b9b7f23d0299c981d26ac533cebb201bbd2bf14cce15b6ee0c3748985",
+      "inputRgbaSha256": "3f289f79e2f195195df746623cc215bde8512f3b2be30bd95b6cd61a06b1a8a7",
+      "validMaskSha256": "b03c161546b8ac65df8c904de01a8e4a85ce5fa4f8b1738a5e49fc99e8788794",
+      "sourceSize": [
+        320,
+        180
+      ]
+    },
+    {
+      "index": 15,
+      "order": 3,
+      "w": 294,
+      "h": 168,
+      "wallMs": 1871.199999999255,
+      "inferenceMs": 1813.5,
+      "provider": "wasm",
+      "threads": 1,
+      "fallback": null,
+      "file": "anchor-15.f32",
+      "bytes": 197568,
+      "sha256": "d2b046eca35fed6486b5f5c3312d0454144c8bc3a24952dfa591c40d16f217ef",
+      "inputRgbaSha256": "6711f2cc38654d9c67680d26d67af9532ca7317244096d251b8b938bc11c8f30",
+      "validMaskSha256": "b03c161546b8ac65df8c904de01a8e4a85ce5fa4f8b1738a5e49fc99e8788794",
+      "sourceSize": [
+        320,
+        180
+      ]
+    }
+  ],
+  "status": "collected",
+  "noHeldoutRead": true,
+  "visibilityEvidence": "Uncertified projected color consistency; accepted track observations are absent from cache.",
+  "loadWallMs": 5782.4000000003725,
+  "totalWallMs": 15647,
+  "coldLoadPlusFirstWallMs": 9634.10000000149,
+  "pageErrors": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "buddha",
+  "profile": "phone",
+  "sha256": "765070736b87205ff07211410a25b23b02e5e8e0092282a742e3c70f3e02f388",
+  "started": "2026-10-15T07:20:42.124Z",
+  "status": "harness-error",
+  "provenanceSha256": "2c2cb39f51847b885a326ba966cce7bf6fc12e80e8814fe1d1839cdbb2c4cfee",
+  "referenceEvidence": {
+    "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "resultFingerprint": "cef9eceb92d7d9f08a57c46342e05b0426f524a5c065b5f2862f367259649172"
+  },
+  "firstViewMs": null,
+  "bakeMs": 21415.685033999995,
+  "mean": null,
+  "peakRssBytes": 950640640,
+  "hostLoadAtStart": [
+    18.55,
+    20.76,
+    24.28
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "page.waitForTimeout: Target page, context or browser has been closed\n    at withHostDeadline.timeoutMs (/workspace/splashery-r4-public/tools/v3d-bench.mjs:660:26)\n    at async withHostDeadline (/workspace/splashery-r4-public/tools/v3d-bench.mjs:187:12)\n    at async main (/workspace/splashery-r4-public/tools/v3d-bench.mjs:527:9)\n    at async file:///workspace/splashery-r4-public/tools/v3d-bench.mjs:973:3"
+}
