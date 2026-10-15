@@ -1,0 +1,221 @@
+{
+  "before-desktop-photo-3d-video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "width": 720,
+        "height": 720,
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "27"
+      }
+    ],
+    "format": {
+      "duration": "4.629077"
+    }
+  },
+  "before-desktop-record-standard": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1072,
+        "height": 900,
+        "avg_frame_rate": "45000/15103",
+        "nb_read_frames": "3"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "53"
+      }
+    ],
+    "format": {
+      "duration": "3.320479"
+    }
+  },
+  "before-phone-photo-3d-video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "width": 720,
+        "height": 720,
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "20"
+      }
+    ],
+    "format": {
+      "duration": "4.825995"
+    }
+  },
+  "before-phone-record-standard": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 584,
+        "height": 966,
+        "avg_frame_rate": "90000/27809",
+        "nb_read_frames": "3"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "50"
+      }
+    ],
+    "format": {
+      "duration": "3.312708"
+    }
+  },
+  "after-desktop-photo-3d-video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1080,
+        "avg_frame_rate": "30/1",
+        "nb_read_frames": "240"
+      }
+    ],
+    "format": {
+      "duration": "8.000000"
+    }
+  },
+  "after-phone-photo-3d-video": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "h264",
+        "codec_type": "video",
+        "width": 1080,
+        "height": 1080,
+        "avg_frame_rate": "30/1",
+        "nb_read_frames": "240"
+      }
+    ],
+    "format": {
+      "duration": "8.000000"
+    }
+  },
+  "after-desktop-record-standard": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "width": 1072,
+        "height": 900,
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "6"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "115"
+      }
+    ],
+    "format": {}
+  },
+  "after-desktop-record-high": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "330"
+      },
+      {
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "width": 2560,
+        "height": 2150,
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "5"
+      }
+    ],
+    "format": {}
+  },
+  "after-desktop-record-max": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "width": 3840,
+        "height": 3224,
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "20"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "692"
+      }
+    ],
+    "format": {}
+  },
+  "after-phone-record-standard": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "width": 586,
+        "height": 968,
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "4"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "58"
+      }
+    ],
+    "format": {}
+  },
+  "after-phone-record-high": {
+    "programs": [],
+    "stream_groups": [],
+    "streams": [
+      {
+        "codec_name": "vp9",
+        "codec_type": "video",
+        "width": 1170,
+        "height": 1936,
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "4"
+      },
+      {
+        "codec_name": "opus",
+        "codec_type": "audio",
+        "avg_frame_rate": "0/0",
+        "nb_read_frames": "200"
+      }
+    ],
+    "format": {}
+  }
+}
