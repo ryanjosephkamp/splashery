@@ -1,5 +1,9 @@
 import { test, expect } from "@playwright/test";
-import { holdTrainingBackground, trainingBackground } from "../src/video3d/background.js";
+import {
+  holdTrainingBackground,
+  trainingBackground,
+  modelBackground,
+} from "../src/video3d/background.js";
 import { makeFlight } from "../src/video3d/flight.js";
 
 function stage() {
@@ -15,6 +19,19 @@ function stage() {
   };
 }
 const color = (s) => Object.values(s.cameraEntity.camera.clearColor);
+
+test("a validated model environment takes precedence while older bakes retain their background", () => {
+  const rgb = [0.6, 0.4, 0.2];
+  const picked = modelBackground({ renderBackground: rgb, trainingBackground: [0, 0, 0] });
+  expect(picked).toEqual(rgb);
+  picked[0] = 0;
+  expect(rgb).toEqual([0.6, 0.4, 0.2]);
+  expect(modelBackground({ renderBackground: [NaN, 1, 0], trainingBackground: [0, 0, 0] })).toEqual(
+    [0, 0, 0],
+  );
+  expect(modelBackground({ trainingBackground: [0.1, 0.2, 0.3] })).toEqual([0.1, 0.2, 0.3]);
+  expect(modelBackground({})).toBe(null);
+});
 
 test("a fitted view restores its prior composite once after leaving", () => {
   const s = stage(),

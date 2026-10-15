@@ -21,7 +21,7 @@ import { buildWalkRegion } from "../video3d/region.js";
 import { mountSceneCredit } from "../video3d/credit.js";
 import { sampleBudget, phoneSample } from "../video3d/tiers.js";
 import { pausePreviousView } from "../video3d/pause-view.js";
-import { trainingBackground } from "../video3d/background.js";
+import { modelBackground } from "../video3d/background.js";
 
 const V3D = {
   file: null, // the video somebody opened (a File; it stays on the device)
@@ -591,7 +591,7 @@ const VIDEO_3D = {
       return;
     }
     const s = src.scene;
-    const background = trainingBackground(src.stats?.trainingBackground);
+    const background = modelBackground(src.stats);
     k.fitOn = false; // the scene and its camera path share the frame scene.js made
     if (src.affine || src.preservePhotometric) {
       // Frame camera limits on the captured area rather than extreme background splats.

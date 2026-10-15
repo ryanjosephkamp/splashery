@@ -177,7 +177,7 @@ export async function videoTo3D(file, opts = {}) {
     sfm: { uiYield: true, ...(software ? { maxPairsPerChunk: 4 } : {}), ...(gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}) }, // prettier-ignore
     // Both sorts use the same unsigned depth/id order. A software adapter avoids emulating
     // the parallel bitonic network's barriers; hardware keeps the established parallel path.
-    trainer: { shDeg: 0, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true, tileGrad: false } : {}) }, // prettier-ignore
+    trainer: { shDeg: 0, fitBackground: true, maxSplats: set.splats, growUntil, ...(software ? { serialSort: true, tileGrad: false } : {}) }, // prettier-ignore
     frames: { trainMaxDim: set.trainSide, featMaxDim: set.featSide },
   });
   const stop = () => {
@@ -364,6 +364,23 @@ export async function videoTo3D(file, opts = {}) {
 
     // 6. Export.
     progress({ stage: "export", done: 0, total: 1 });
+    // Fit only three display-environment parameters to the completed model's actual training
+    // targets. The engine excludes every evaluation camera and requires >=1% training MSE gain
+    // with no MSE increase on any existing internal validation camera. Otherwise keep black.
+    let backgroundFit;
+    try {
+      backgroundFit = await runWithDeadline((signal) => s.fitBackground({ signal }), {
+        timeoutMs: 60000,
+        message:
+          "The graphics card could not finish this scene in time. Try the Phone-safe setting, or a shorter stretch.",
+      });
+    } catch (error) {
+      log.push(`Scene finishing failed: ${error?.message || error}`);
+      throw new Error(
+        "The graphics card could not finish this scene. Try the Phone-safe setting, or a shorter stretch.",
+      );
+    }
+    mark("background");
     const blob = await runWithDeadline(() => s.exportPlyBlob(), {
       timeoutMs: 60000,
       message:
@@ -418,6 +435,8 @@ export async function videoTo3D(file, opts = {}) {
         seedBounds: "coordinate-median",
         seedSceneRadius: seeded.radius,
         trainingBackground: [0, 0, 0],
+        ...(backgroundFit.accepted ? { renderBackground: backgroundFit.rgb } : {}),
+        backgroundFit: { method: "constant-training-environment", ...backgroundFit },
         splats: s.trainer.n,
         iters: s.trainer.iter,
         psnr: lastPsnr ? Math.round(lastPsnr.value * 10) / 10 : null,

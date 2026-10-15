@@ -8,6 +8,11 @@ export function trainingBackground(value) {
     ? value.slice()
     : null;
 }
+export function modelBackground(stats) {
+  return (
+    trainingBackground(stats?.renderBackground) || trainingBackground(stats?.trainingBackground)
+  );
+}
 const rgba = (color) => [color?.r, color?.g, color?.b, color?.a];
 export function holdTrainingBackground(stage, value, { readBackground } = {}) {
   const rgb = trainingBackground(value),
