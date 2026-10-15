@@ -833,6 +833,21 @@ export function* detailCandidates(pic, o) {
             ? [opposite, backup]
             : [backup, opposite]
           : [opposite];
+        if (t.shape === "circle")
+          for (const edge of [0.4, 0.42])
+            alternatives.push(() => {
+              const fraction = w.rendering.fraction || 0;
+              const candidate = decorate(
+                weaveDetail(fraction ? fitPictureErrors(code, pic, fraction) : code, pic, {
+                  ...initialOptions,
+                  finderEdge: edge,
+                  method: fraction ? "correction" : "continuous",
+                }),
+                false,
+              );
+              if (fraction) candidate.rendering.fraction = fraction;
+              return candidate;
+            });
         for (const build of alternatives) {
           const alternative = build(),
             alternativeKey = renderingKey(alternative);

@@ -20,6 +20,102 @@ const OPTIONS = {
 };
 const pic = loadPicture("assets/toys/photo-3d/wildflowers.jpg");
 
+test("A blurred Circle finder forecast tries a lighter edge after the opposite orientation", async () => {
+  const { detailCandidates } = await import("../src/qr-craft/picture.js");
+  const candidates = detailCandidates(pic, {
+    ...OPTIONS,
+    fidelity: "detail",
+    shape: "circle",
+    texture: "tiles",
+    channel: "weighted",
+    preferContinuous: true,
+    preferCorrection: true,
+    errorFraction: 0.4,
+    captureValidation: true,
+  });
+  const tried = [];
+  let next = candidates.next();
+  for (let i = 0; i < 4 && !next.done; i++) {
+    tried.push({ rotation: next.value.code.rotation || 0, edge: next.value.rendering.edge });
+    next = candidates.next({ ok: false, preflight: true, ppm: 4, blur: 0.3, view: 1 });
+  }
+  expect(tried).toEqual([
+    { rotation: 0, edge: 0.24 },
+    { rotation: 2, edge: 0.24 },
+    { rotation: 0, edge: 0.4 },
+    { rotation: 0, edge: 0.42 },
+  ]);
+});
+
+for (const link of [5, 8])
+  test(`The pale Sun Circle payload ${link} passes every captured reader condition`, async ({
+    page,
+  }) => {
+    const { LINKS } = await import("../tools/cdx-circle-study.mjs");
+    const text = LINKS[link];
+    await page.addInitScript(() =>
+      Object.defineProperty(navigator, "hardwareConcurrency", { get: () => 4 }),
+    );
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto("/?renderer=webgl2&adapt=off&profile=low&labs=1");
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+    await page.evaluate(async (text) => {
+      await import("/src/packs/qr-craft.js");
+      const { app, qrCraft } = window.__splashery;
+      qrCraft.autoCheck = false;
+      await app.chooseToy("qr-picture");
+      qrCraft.autoCheck = true;
+      await app.setToyOptions({
+        text,
+        picture: "cdx-theme-seasons-2-2",
+        shape: "circle",
+        fidelity: "detail",
+        level: "H",
+        size: "more",
+        center: "small",
+        contrast: 0.5,
+        style: "color",
+      });
+    }, text);
+    await page.waitForFunction(
+      () => {
+        const { app, qrCraft } = window.__splashery;
+        const p = qrCraft.picture();
+        return (
+          !app.busy && !p.checking && p.check?.stage?.length === 2 && !app.player.stage.coverDepth
+        );
+      },
+      null,
+      { timeout: 40000 },
+    );
+    const result = await page.evaluate(async () => {
+      const { qrCraft } = window.__splashery,
+        p = qrCraft.picture();
+      const { shapeHalf } = await import("/src/qr/circle.js");
+      return {
+        fidelity: p.options.fidelity,
+        fallback: p.fallback,
+        check: p.check,
+        shot: qrCraft.lastShot(),
+        codeSize: p.woven.code.size,
+        modules: 2 * (shapeHalf(p.woven.code, "circle") + 1),
+      };
+    });
+    expect(result.fidelity).toBe("detail");
+    expect(result.fallback).toBeNull();
+    expect(result.check.ok).toBe(true);
+    expect(result.check.stress).toMatchObject({ ok: true, readers: ["jsqr", "zxingcpp"] });
+    const { qualifyCapture } = await import("../tools/picture-qr-fidelity/qualify.mjs");
+    const independent = await qualifyCapture(
+      loadPicture("assets/toys/qr-picture/themes/cdx-theme-seasons-2-2.jpg"),
+      result,
+      text,
+      "circle",
+    );
+    expect(independent.scans).toHaveLength(24);
+    expect(independent.scans.every((scan) => scan.jsqr && scan.zxingcpp)).toBe(true);
+  });
+
 test("Most detail preserves more of the source picture at phone and print size", () => {
   const standard = makeWoven(pic, OPTIONS, read),
     detail = makeWoven(pic, { ...OPTIONS, fidelity: "detail" }, read);
