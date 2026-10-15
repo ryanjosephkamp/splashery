@@ -1,0 +1,188 @@
+{
+  "commit": "e404cf36b60e7509f2cabc21dcd0f9f076fa8ef4",
+  "host": {
+    "cpu": "AMD EPYC 9V74 virtual CPU",
+    "logicalCPUs": 5,
+    "availableRAMMiB": 18007,
+    "physicalGPU": false,
+    "physicalPhone": false
+  },
+  "files": {
+    "src/packs/photo-3d.js": {
+      "bytes": 38783,
+      "sha256": "bd1eba55b416860ecbdb41f1c442b83281f9e9f2f9ba8b2888f04edb85ec127b"
+    },
+    "src/packs/photo-3d-core.js": {
+      "bytes": 31900,
+      "sha256": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c"
+    },
+    "src/packs/photo-sharp.js": {
+      "bytes": 19529,
+      "sha256": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a"
+    },
+    "src/photo-splats.js": {
+      "bytes": 20907,
+      "sha256": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3"
+    },
+    "src/photo3d/build-worker.js": {
+      "bytes": 2311,
+      "sha256": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5"
+    },
+    "src/photo3d/prepare.js": {
+      "bytes": 1890,
+      "sha256": "0259963e210e325403da3f32b24156b60ea9083c1d34525878f40503325c9ee8"
+    },
+    "src/photo3d/background.js": {
+      "bytes": 8146,
+      "sha256": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa"
+    },
+    "src/photo3d/depth-edges.js": {
+      "bytes": 5694,
+      "sha256": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70"
+    },
+    "src/photo3d/surface.js": {
+      "bytes": 5362,
+      "sha256": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433"
+    },
+    "src/photo3d/border.js": {
+      "bytes": 1840,
+      "sha256": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b"
+    },
+    "src/photo3d/decode-worker.js": {
+      "bytes": 1667,
+      "sha256": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103"
+    },
+    "src/live/relief-mesh.js": {
+      "bytes": 46809,
+      "sha256": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971"
+    },
+    "src/live/relief-height.js": {
+      "bytes": 8045,
+      "sha256": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c"
+    },
+    "src/depth/engine.js": {
+      "bytes": 5439,
+      "sha256": "953ad7094ed535a059f196e32eddbda4e7bbce0286f55baf2cb00eed4a7cbe89"
+    },
+    "src/depth/client.js": {
+      "bytes": 1944,
+      "sha256": "cd1951ee564cf8a1ba7d655497cea0fc6cfe80ac72b4d382782fb2b998845a9e"
+    },
+    "src/packs/photo-3d-depth.js": {
+      "bytes": 3200,
+      "sha256": "5afd7e5e88a4326add90604fc82c4b20e7f3dd31a1cec340ba7a61196cbe0a68"
+    },
+    "vendor/depth-anything-v2-small/model_quantized.onnx": {
+      "bytes": 27258801,
+      "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d"
+    },
+    "vendor/onnxruntime-web/ort.wasm.min.mjs": {
+      "bytes": 50126,
+      "sha256": "219e6a1fc8a9938268d18efca3c91d310bd2f4a59bbd13744df5b2b7fc6cee3b"
+    },
+    "vendor/onnxruntime-web/ort-wasm-simd-threaded.mjs": {
+      "bytes": 24381,
+      "sha256": "e13f7f94fc51b4ca72b12faeb1ee95f4ace6dfbc8939bc718aabdc0a27c4299b"
+    },
+    "vendor/onnxruntime-web/ort-wasm-simd-threaded.wasm": {
+      "bytes": 14239897,
+      "sha256": "3398c10d07d229bd91b364548e130e0e51a8e5704b88c7c083ebbeb78842dee2"
+    },
+    ".cache/photo-3d-explained/measure.mjs": {
+      "bytes": 10275,
+      "sha256": "ac1d56cd73d78d3ec0d58377d5186533b0d4c84b1006982a3b71e5805f5221ff"
+    },
+    ".cache/photo-3d-explained/depthy.html": {
+      "bytes": 940,
+      "sha256": "610cc8d42cd2c96e1ec120e882aef7f89f936e265d38c288c6aea108b01a0d3f"
+    },
+    ".cache/photo-3d-explained/pixi.js": {
+      "bytes": 264957,
+      "sha256": "91c71bdcd9ec0d358e70a32a5320e278c18c5278f4df414b1d96e2f57ffa38ea"
+    },
+    ".cache/photo-3d-explained/lodash.js": {
+      "bytes": 229855,
+      "sha256": "14fd5488cd35a65a9c8d98f0ac5e97fca338d1a3532179ee3dc92d7e4667c4ce"
+    }
+  },
+  "originalFigures": {
+    "committedInCurrentTree": false,
+    "storage": ".cache/photo-3d-explained/raw-figures",
+    "previousPrCommit": "7cb11c2b953f8121b1bed8917fb1ec50253e5f06",
+    "note": "Raw originals are not committed in this revision. The earlier PR history is not rewritten.",
+    "files": {
+      "forest.png": {
+        "bytes": 3362115,
+        "sha256": "89551b81e7566f711b3c782cc123943ceedddda28e9bcf82670eeba5aa04057c",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "street.png": {
+        "bytes": 3582884,
+        "sha256": "bc7093dd956795173f03378d0eb50b77106c82b65aa19316f60d85bffdb364e9",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "still-life.png": {
+        "bytes": 3249422,
+        "sha256": "806d6ec56b5815d4d849515fd7b378d150b21407d14194a46de9acd6464fb028",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "spiral-stairs.png": {
+        "bytes": 2756915,
+        "sha256": "6f75f4f882141f25dd5c76e61e88a6ab8b59a3a5556ed5ed597d5bb4969c87f7",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "palace-stairs.png": {
+        "bytes": 2587063,
+        "sha256": "9eb342e9443b4fc758194f147c08ee8fd893d642ce5f9469d72cf19813bfacef",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "wildflowers.png": {
+        "bytes": 3229240,
+        "sha256": "3a1a07cf16537c44f7c762e7239a601a9e356807c976c49eaef6497aef3ac3a1",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "cdx-hard-glass-jug.png": {
+        "bytes": 3030974,
+        "sha256": "0c947ba2ee89eb0e9c8e90c6334075e53cf54f27d311a55d5566290ba13a6ab9",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "cdx-hard-bicycle-spokes.png": {
+        "bytes": 3657164,
+        "sha256": "95965dad8ece350a660297ca8947731eea090d9f56b6f28d0e4792931e2502b4",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "cdx-hard-puddle-reflection.png": {
+        "bytes": 3301536,
+        "sha256": "51696d34d3f2877b8bb961d8fb28e0c5aa04eb459a26243d5672f54dc1818537",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      },
+      "cdx-hard-workshop-bench.png": {
+        "bytes": 2903185,
+        "sha256": "b3564d692145e842b957e439591b43b9bad3744a730aaf602e0cfc25059ecea7",
+        "dimensions": [2472, 1120],
+        "committedInCurrentTree": false
+      }
+    }
+  },
+  "figurePublication": {
+    "format": "JPEG",
+    "width": 1600,
+    "quality": 85,
+    "resample": "LANCZOS",
+    "originalFiguresCommittedInCurrentTree": false,
+    "originalsStorage": ".cache/photo-3d-explained/raw-figures",
+    "originalFiguresBytes": 31660498,
+    "publishedFiguresBytes": 2283390,
+    "pixelExact": false,
+    "note": "Published previews are resized and lossy. Native capture hashes, dimensions, and exact-pixel checks describe the original PNGs, not these JPEG previews. Earlier PR commit 7cb11c2b953f8121b1bed8917fb1ec50253e5f06 contains the former PNGs; its history is preserved, while the revised file tree contains only previews."
+  }
+}

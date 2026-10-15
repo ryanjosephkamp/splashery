@@ -6,10 +6,11 @@ work is in [OPERATING.md](OPERATING.md).
 
 ## Now (October 14, 2026, about 06:50 UTC)
 
-The Operator is handing over on schedule from `session_011WeiHJ3ygHhoTrrJiThHzX` (Opus 5.5, since
-October 12, 08:47 UTC) to a fresh Opus 5.5 session, which updates this line with its id in its first
-Ops PR. Its own handover is due two days after it takes over, or sooner at about 400k tokens. This
-section is current. The sections below it are history. The runbook is [OPERATOR.md](OPERATOR.md).
+The Operator is `session_01UFMfX9RBAFMSqMHSrisZuo` (Opus 5.5), since October 14, 2026, 07:33 UTC. It
+took over from `session_011WeiHJ3ygHhoTrrJiThHzX` (October 12, 08:47 UTC, to October 14), which
+stands by for a day. Its own handover is due by October 16, 2026, about 07:30 UTC, or sooner at
+about 400k tokens. This section is current. The sections below it are history. The runbook is
+[OPERATOR.md](OPERATOR.md).
 
 **Main** is `236f29bb4` (Ops #617). Merged October 13 and 14: tasks 57 (#586), 39 and 53 (#590), 70
 (#593), 54 (#598), 69, the circular QR codes (#603), 73, the manual PDF per edition (#615), and
@@ -23,6 +24,9 @@ Every later change to it must beat the checkpoint branch or be reverted.
 
 - `kit.spec.mjs:87` since #603: a circular QR recipe stops with "too much detail for a circular
   picture on this device" in the cloud browser. A fix task is offered to the owner.
+- `smoke.spec.mjs:734` (rigs) and `tpg.spec.mjs:205` (25 toy pages) fail alone on plain main in the
+  Operator's container every time since October 14, 2026 (found during #562's merge tests); they
+  were on the known-flake list before. To be investigated.
 - `man5.spec.mjs:201` only where Chromium's sandbox can't start (Claude cloud containers run as
   root): since #615 the PDF tool keeps the sandbox on. Keep it on; the owner chose to merge as is.
   Task 77's GitHub Actions run should cover it.
@@ -35,6 +39,11 @@ Splash Shop: 42 to 46, 49, 59 to 64, 67, and 68.
 
 **The Splash Shop** (`ryanjosephkamp/splashdot`) is read-only for Splashery sessions. Work comes
 back only through a promotion note the owner brings, then an Operator-written port.
+
+**Merged October 14 (this Operator):** #620 (Codex 75a to 75d, the depth lab pictures), #621 (#562,
+Video to 3D, sharper samples, labs, the owner's tentative good so he can try it), #624 (#611, Photo
+to 3D explained, and #602, the calibrated Studio scenes). Codex task files 79 to 82 (Picture QR
+fidelity and fit, Powers of ten labels, toy checkpoints) in this PR.
 
 **Next for the Operator:** review each Codex PR as it reports done (a Sonnet helper, one comment);
 merge labs work after its tests; send public changes to the owner first; write docs/STATUS.md after

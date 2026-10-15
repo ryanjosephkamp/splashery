@@ -1,0 +1,490 @@
+{
+  "date": "2026-10-14T03:53:24.476Z",
+  "commit": "e404cf36b60e7509f2cabc21dcd0f9f076fa8ef4",
+  "browser": "151.0.7922.173",
+  "renderer": "ANGLE SwiftShader (software)",
+  "cpu": "x86_64",
+  "physicalPhone": false,
+  "cpuThrottled": false,
+  "rows": [
+    {
+      "layout": "phone",
+      "name": "phone",
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "tier": "low",
+      "nominalBudget": 90000,
+      "foregroundBudget": 85500,
+      "actualSplats": 89824,
+      "source": [1280, 853],
+      "depth": [518, 350],
+      "stages": {
+        "decodeMs": 695.3999999999069,
+        "workerGeometryMs": 1040.6000000000931,
+        "returnedSurfaceBytes": 11293146,
+        "sampleReadyMs": 1090.6000000000931
+      },
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "photo",
+        "grid": [298, 201],
+        "color": [1280, 853],
+        "depth": [664, 448],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 5823147,
+          "depth": 297472,
+          "mesh": 3854072,
+          "pieces": 323080,
+          "background": 570112,
+          "triangles": 132276,
+          "total": 10867883
+        },
+        "splatsOff": true
+      },
+      "heapBytes": 93550314,
+      "buffer": [585, 1266],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "times": [
+        226.89999999990687, 163.29999999981374, 267.69999999995343, 237.89999999990687, 223,
+        357.5999999998603, 325, 210.19999999995343, 240.4000000001397, 220.9000000001397,
+        250.70000000018626, 282.30000000004657, 253.4000000001397, 290.80000000004657,
+        253.9000000001397, 262.79999999981374, 284, 220.29999999981374, 232.80000000004657,
+        280.30000000004657, 432.20000000018626, 233.9000000001397, 221.79999999981374,
+        227.19999999995343, 211.5, 255.69999999995343, 196.5, 231.4000000001397, 267.29999999981374,
+        217.10000000009313
+      ],
+      "medianMs": 237.89999999990687,
+      "p95Ms": 357.5999999998603,
+      "meanMs": 252.62666666666823
+    },
+    {
+      "layout": "phone",
+      "name": "phone",
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "tier": "mid",
+      "nominalBudget": 210000,
+      "foregroundBudget": 199500,
+      "actualSplats": 208000,
+      "source": [1280, 853],
+      "depth": [518, 350],
+      "stages": {
+        "decodeMs": 747.4000000001397,
+        "workerGeometryMs": 3314.3000000000466,
+        "returnedSurfaceBytes": 21170562,
+        "sampleReadyMs": 3336.3000000000466
+      },
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "photo",
+        "grid": [422, 284],
+        "color": [1280, 853],
+        "depth": [808, 544],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 5823147,
+          "depth": 439552,
+          "mesh": 7180696,
+          "pieces": 465160,
+          "background": 712192,
+          "triangles": 252176,
+          "total": 14620747
+        },
+        "splatsOff": true
+      },
+      "heapBytes": 151338915,
+      "buffer": [1170, 2532],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "times": [
+        532.1000000000931, 511.4000000001397, 485.10000000009313, 563.8999999999069,
+        328.0999999998603, 504.69999999995343, 335.79999999981374, 376.19999999995343,
+        582.6000000000931, 603.6999999999534, 618.4000000001397, 558.1000000000931,
+        496.19999999995343, 502.5, 320.10000000009313, 494.5, 576.1000000000931, 354.69999999995343,
+        406.5, 578.6000000000931, 582.2999999998137, 650, 533.1000000000931, 527.1999999999534, 377,
+        889.0999999998603, 467.4000000001397, 704, 587.1999999999534, 558.3000000000466
+      ],
+      "medianMs": 527.1999999999534,
+      "p95Ms": 704,
+      "meanMs": 520.163333333338
+    },
+    {
+      "layout": "phone",
+      "name": "phone",
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "tier": "high",
+      "nominalBudget": 300000,
+      "foregroundBudget": 285000,
+      "actualSplats": 293928,
+      "source": [1280, 853],
+      "depth": [518, 350],
+      "stages": {
+        "decodeMs": 746.8000000000466,
+        "workerGeometryMs": 2887.3000000000466,
+        "returnedSurfaceBytes": 31279596,
+        "sampleReadyMs": 4203.300000000047
+      },
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "photo",
+        "grid": [547, 366],
+        "color": [1280, 853],
+        "depth": [968, 648],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 5823147,
+          "depth": 627264,
+          "mesh": 11561932,
+          "pieces": 652484,
+          "background": 899904,
+          "triangles": 412692,
+          "total": 19564731
+        },
+        "splatsOff": true
+      },
+      "heapBytes": 193266238,
+      "buffer": [1170, 2532],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "times": [
+        717, 770.3999999999069, 970.8999999999069, 716.1000000000931, 516.5, 769.8999999999069,
+        709.8000000000466, 645.2999999998137, 660, 691.2999999998137, 713.9000000001397, 750.5,
+        761.8999999999069, 466.89999999990687, 905.8000000000466, 717, 724.5, 674.7000000001863,
+        703.1000000000931, 728.4000000001397, 683.5, 629.3000000000466, 666.3000000000466,
+        729.8999999999069, 751.3000000000466, 746.1000000000931, 690.3999999999069,
+        682.3999999999069, 696.1999999999534, 823.9000000001397
+      ],
+      "medianMs": 713.9000000001397,
+      "p95Ms": 905.8000000000466,
+      "meanMs": 713.7733333333318
+    },
+    {
+      "layout": "phone",
+      "name": "phone",
+      "width": 390,
+      "height": 844,
+      "dpr": 3,
+      "tier": "max",
+      "nominalBudget": 400000,
+      "foregroundBudget": 380000,
+      "actualSplats": 388926,
+      "source": [1280, 853],
+      "depth": [518, 350],
+      "stages": {
+        "decodeMs": 817.3999999999069,
+        "workerGeometryMs": 2946.1999999999534,
+        "returnedSurfaceBytes": 43000950,
+        "sampleReadyMs": 5767.600000000093
+      },
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "photo",
+        "grid": [672, 446],
+        "color": [1280, 853],
+        "depth": [1120, 744],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 5823147,
+          "depth": 833280,
+          "mesh": 16948220,
+          "pieces": 858500,
+          "background": 1105920,
+          "triangles": 611712,
+          "total": 25569067
+        },
+        "splatsOff": true
+      },
+      "heapBytes": 213462589,
+      "buffer": [1170, 2532],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "times": [
+        993.6999999999534, 1009.0999999998603, 1019.8999999999069, 1388.1999999999534,
+        1067.3999999999069, 1026.8000000000466, 987.6000000000931, 1230.8999999999069,
+        911.1999999999534, 933.9000000001397, 1155.1000000000931, 835.5, 518.7000000001863,
+        908.8000000000466, 872, 800.3999999999069, 776.0999999998603, 849.1000000000931,
+        935.3000000000466, 590.8000000000466, 977.6000000000931, 1179.5999999998603,
+        898.6999999999534, 597.6999999999534, 892.7000000001863, 876.1999999999534, 1529,
+        837.1999999999534, 874.8000000000466, 933
+      ],
+      "medianMs": 911.1999999999534,
+      "p95Ms": 1388.1999999999534,
+      "meanMs": 946.9
+    },
+    {
+      "layout": "desktop",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "tier": "low",
+      "nominalBudget": 90000,
+      "foregroundBudget": 85500,
+      "actualSplats": 89824,
+      "source": [1280, 853],
+      "depth": [518, 350],
+      "stages": {
+        "decodeMs": 367.20000000018626,
+        "workerGeometryMs": 971.5,
+        "returnedSurfaceBytes": 11293146,
+        "sampleReadyMs": 1948.3000000000466
+      },
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "photo",
+        "grid": [298, 201],
+        "color": [1280, 853],
+        "depth": [664, 448],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 5823147,
+          "depth": 297472,
+          "mesh": 3854072,
+          "pieces": 323080,
+          "background": 570112,
+          "triangles": 132276,
+          "total": 10867883
+        },
+        "splatsOff": true
+      },
+      "heapBytes": 78798212,
+      "buffer": [1440, 900],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "times": [
+        312.39999999990687, 240.69999999995343, 346.69999999995343, 455.30000000004657,
+        339.69999999995343, 355, 304.79999999981374, 325.9000000001397, 312, 295.0999999998603, 305,
+        294.19999999995343, 303, 460.4000000001397, 587.1000000000931, 353.5, 204.19999999995343,
+        340.5, 204, 303.60000000009313, 314.60000000009313, 279.80000000004657, 308.5999999998603,
+        257.80000000004657, 329.80000000004657, 315.5999999998603, 322, 323.4000000001397,
+        337.80000000004657, 206.20000000018626
+      ],
+      "medianMs": 312.39999999990687,
+      "p95Ms": 460.4000000001397,
+      "meanMs": 321.2900000000062
+    },
+    {
+      "layout": "desktop",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "tier": "mid",
+      "nominalBudget": 210000,
+      "foregroundBudget": 199500,
+      "actualSplats": 208000,
+      "source": [1280, 853],
+      "depth": [518, 350],
+      "stages": {
+        "decodeMs": 1067,
+        "workerGeometryMs": 1297,
+        "returnedSurfaceBytes": 21170562,
+        "sampleReadyMs": 2507.399999999907
+      },
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "photo",
+        "grid": [422, 284],
+        "color": [1280, 853],
+        "depth": [808, 544],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 5823147,
+          "depth": 439552,
+          "mesh": 7180696,
+          "pieces": 465160,
+          "background": 712192,
+          "triangles": 252176,
+          "total": 14620747
+        },
+        "splatsOff": true
+      },
+      "heapBytes": 124648587,
+      "buffer": [1440, 900],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "times": [
+        406.89999999990687, 543.2999999998137, 458.39999999990687, 436.39999999990687, 453.5, 444.5,
+        460.80000000004657, 450.5, 460.89999999990687, 439.89999999990687, 403.0999999998603,
+        383.80000000004657, 385.79999999981374, 277.39999999990687, 440.30000000004657,
+        458.80000000004657, 437.30000000004657, 468.89999999990687, 489.39999999990687, 446.5,
+        502.10000000009313, 346.69999999995343, 456.10000000009313, 663.5, 327, 374.60000000009313,
+        694, 572.5, 561.8000000000466, 543.6999999999534
+      ],
+      "medianMs": 450.5,
+      "p95Ms": 663.5,
+      "meanMs": 459.61333333330697
+    },
+    {
+      "layout": "desktop",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "tier": "high",
+      "nominalBudget": 300000,
+      "foregroundBudget": 285000,
+      "actualSplats": 293928,
+      "source": [1280, 853],
+      "depth": [518, 350],
+      "stages": {
+        "decodeMs": 1040.6000000000931,
+        "workerGeometryMs": 2371.5,
+        "returnedSurfaceBytes": 31279596,
+        "sampleReadyMs": 1802.3999999999069
+      },
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "photo",
+        "grid": [547, 366],
+        "color": [1280, 853],
+        "depth": [968, 648],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 5823147,
+          "depth": 627264,
+          "mesh": 11561932,
+          "pieces": 652484,
+          "background": 899904,
+          "triangles": 412692,
+          "total": 19564731
+        },
+        "splatsOff": true
+      },
+      "heapBytes": 194897933,
+      "buffer": [1440, 900],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "times": [
+        800, 405.39999999990687, 409.39999999990687, 663.1000000000931, 620.5, 684.9000000001397,
+        639.5999999998603, 636.6999999999534, 733.4000000001397, 618.1999999999534,
+        668.2000000001863, 605.5999999998603, 595, 537.6999999999534, 787.2999999998137,
+        254.4000000001397, 917.9000000001397, 443.69999999995343, 597, 738.8999999999069, 597,
+        702.3000000000466, 465.5, 673.6999999999534, 696.1000000000931, 677.1999999999534,
+        424.60000000009313, 585.6999999999534, 550.1000000000931, 592.7999999998137
+      ],
+      "medianMs": 618.1999999999534,
+      "p95Ms": 800,
+      "meanMs": 610.729999999997
+    },
+    {
+      "layout": "desktop",
+      "name": "desktop",
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "tier": "max",
+      "nominalBudget": 400000,
+      "foregroundBudget": 380000,
+      "actualSplats": 388926,
+      "source": [1280, 853],
+      "depth": [518, 350],
+      "stages": {
+        "decodeMs": 1181.9000000001397,
+        "workerGeometryMs": 2558.2000000001863,
+        "returnedSurfaceBytes": 43000950,
+        "sampleReadyMs": 10526.90000000014
+      },
+      "sharp": {
+        "views": {
+          "photo-3d": "sharp",
+          "moving-photo-3d": "sharp"
+        },
+        "on": true,
+        "kind": "photo",
+        "grid": [672, 446],
+        "color": [1280, 853],
+        "depth": [1120, 744],
+        "video": false,
+        "videoTime": null,
+        "cost": {
+          "color": 5823147,
+          "depth": 833280,
+          "mesh": 16948220,
+          "pieces": 858500,
+          "background": 1105920,
+          "triangles": 611712,
+          "total": 25569067
+        },
+        "splatsOff": true
+      },
+      "heapBytes": 213431739,
+      "buffer": [1440, 900],
+      "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+      "times": [
+        1005.6999999999534, 939.8999999999069, 972.1000000000931, 785.2999999998137,
+        1284.5999999998603, 705.6999999999534, 753.5, 689.1000000000931, 710.5, 777.1000000000931,
+        757.8999999999069, 741.6999999999534, 1215.6999999999534, 758.6000000000931,
+        845.1000000000931, 732.4000000001397, 728.3999999999069, 493.69999999995343, 772.5,
+        517.3000000000466, 863.2999999998137, 1000.3999999999069, 968.6999999999534, 626, 627.5,
+        428, 749.6999999999534, 729.1999999999534, 709.0999999998603, 1233.5
+      ],
+      "medianMs": 753.5,
+      "p95Ms": 1233.5,
+      "meanMs": 804.0733333333085
+    }
+  ],
+  "inference": {
+    "profile": "low",
+    "runs": [
+      {
+        "cold": true,
+        "wallMs": 2877.8000000000466,
+        "inferenceMs": 2249.6999999999534,
+        "provider": "wasm",
+        "threads": 1,
+        "input": [518, 350]
+      },
+      {
+        "cold": false,
+        "wallMs": 2451.6999999999534,
+        "inferenceMs": 2404.5999999998603,
+        "provider": "wasm",
+        "threads": 1,
+        "input": [518, 350]
+      },
+      {
+        "cold": false,
+        "wallMs": 2565.0999999998603,
+        "inferenceMs": 2548.5,
+        "provider": "wasm",
+        "threads": 1,
+        "input": [518, 350]
+      }
+    ]
+  }
+}

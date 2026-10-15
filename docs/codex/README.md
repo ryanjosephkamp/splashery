@@ -87,6 +87,14 @@ merges.
 | 76-photo-3d-r4.md                 | Photo to 3D round 4: better fill behind objects, clean thin parts, faster (a Goal run)              | Photo to 3D, tests, clips                            | yes           |
 | 77-ci-suite.md                    | The test suite on GitHub Actions, sharded, for every PR                                             | a workflow, a short doc                              | no            |
 | 78-portfolio-toys.md              | Four splat toys from the owner's portfolio concepts, in four parallel parts (a to d)                | four labs toys, tests, clips                         | no            |
+| 79-picture-qr-fidelity.md         | Picture QR at its sharpest: a measured Goal run, every code still scanning                          | the QR toys, tools, report                           | yes           |
+| 80-picture-qr-fit.md              | Picture QR: crop your picture, a thinner circle border, round corner eyes                           | the QR toys, tests                                   | no            |
+| 81-powers-of-ten-labels.md        | Powers of ten: two distance labels checked and reworded                                             | labels, evidence, site page                          | yes           |
+| 82-toy-checkpoints.md             | Checkpoints and how-it-works docs for 18 favorite toys, in five parts (a to e)                      | docs only                                            | no            |
+| 83-controls-and-credits.md        | The README's keyboard help, a stale comment, and two broken credit links                            | README, a comment, the Markdown reader, tests        | no            |
+| 84-advisor-route-evidence.md      | Evidence for the demo route: Photo to 3D, Moving photo to 3D, and the QR codes                      | a route runner, a spec, a report                     | no            |
+| 85-lifecycle-measurements.md      | Four memory and lifetime questions measured before any fix                                          | a probe, a report, fixes only for defects            | no            |
+| 86-actions-only-failures.md       | Three tests that fail only on GitHub Actions, and the manual's PDF                                  | tests, a manual workflow, the known list             | no            |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.
