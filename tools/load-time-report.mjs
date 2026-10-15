@@ -65,8 +65,8 @@ function load(root) {
   }
   return result;
 }
-const timing = load(option("timing", "../load-time-runs/round3-reviewed"));
-const payload = load(option("payload", "../load-time-runs/round3-top20"));
+const timing = load(option("timing", "../load-time-runs/round4/reviewed"));
+const payload = load(option("payload", "../load-time-runs/round4/top20"));
 const reviewed = ["pyrite-cubes", "soda-can", "sunglasses", "fountain-pen"];
 const expectedTiming = ["phone", "desktop"]
   .flatMap((device) => reviewed.map((id) => `${device}:${id}`))
@@ -84,18 +84,43 @@ if (
   timing.method.before.candidateSource !== payload.method.before.candidateSource
 )
   throw Error("Current datasets use different sources");
+const fallback = load(option("fallback", "../load-time-runs/round4/full-scan-fallback"));
+const fallbackKeys = ["phone:sunglasses", "phone:soda-can", "phone:fountain-pen"].sort();
+if (
+  JSON.stringify([...new Set(fallback.before.map(key))].sort()) !== JSON.stringify(fallbackKeys) ||
+  fallback.method.before.frozenMain !== payload.method.before.frozenMain
+)
+  throw Error("Unexpected fallback groups or baseline");
 const current = {
   before: [...payload.before, ...timing.before],
   after: [...payload.after, ...timing.after],
   method: payload.method,
   timingMethod: timing.method,
+  fallbackMethod: fallback.method,
+  finalCandidateSource: fallback.method.after.candidateSource,
 };
+for (const phase of ["before", "after"])
+  current[phase] = current[phase].map((row) => {
+    const replacement = fallback[phase].find((r) => key(r) === key(row) && r.sample === row.sample);
+    return {
+      ...(replacement || row),
+      measuredSource:
+        phase === "before"
+          ? current.method.before.frozenMain
+          : replacement
+            ? current.finalCandidateSource
+            : current.method.after.candidateSource,
+    };
+  });
 if (new Set(current.before.map((r) => `${key(r)}:${r.sample}`)).size !== current.before.length)
   throw Error("Duplicate current group");
 fs.writeFileSync(`${dir}/current-results.json`, JSON.stringify(current, null, 2) + "\n");
 const stats = (rows) => {
+  if (new Set(rows.map((r) => r.measuredSource)).size !== 1)
+    throw Error("Mixed candidate revisions within one group");
   const values = rows.map((r) => r.firstFrameMs).sort((a, b) => a - b);
   return {
+    source: rows[0].measuredSource,
     n: rows.length,
     median: values[2],
     min: values[0],
@@ -115,56 +140,102 @@ const rows = keys.map((k) => ({
 const heavy = rows.filter((r) => payload.before.some((x) => key(x) === r.k));
 const before = heavy.reduce((n, r) => n + r.b.bytes, 0),
   after = heavy.reduce((n, r) => n + r.a.bytes, 0);
-const images = read(`${dir}/image-diffs.json`),
-  compression = read(`${dir}/compressed-opening.json`),
-  museum = read(`${dir}/museum-prefixes.json`);
-const verification = read(`${dir}/verification.json`).round3;
+const images = read(`${dir}/image-diffs.json`);
+const compression = read(`${dir}/compressed-opening.json`);
+const verification = read(`${dir}/verification.json`).round4;
+const strawberry = read(`${dir}/strawberry-repeat.json`);
+const currentStrawberry = strawberry.currentTest;
+const control = read(`${dir}/same-main-control.json`);
 if (
-  verification?.runtimeSource !== current.method.after.candidateSource ||
-  verification?.frozenMain !== current.method.before.frozenMain
+  verification?.runtimeSource !== current.finalCandidateSource ||
+  verification?.frozenMain !== current.method.before.frozenMain ||
+  strawberry.groups.after.source !== current.method.after.candidateSource ||
+  strawberry.groups.before.source !== verification.frozenMain ||
+  currentStrawberry?.groups.after.source !== current.method.after.candidateSource ||
+  currentStrawberry?.groups.before.source !== verification.frozenMain
 )
-  throw Error("Current verification source does not match the measured sources");
+  throw Error("Current evidence has mixed source pins");
+const higher = rows.filter((r) => r.a.median > r.b.median);
+const originalSlower = [
+  "phone:video-3d",
+  "phone:living-city",
+  "phone:celestial-globe",
+  "phone:crochet-earth",
+  "phone:seeded-loaf",
+  "phone:moving-photo-3d",
+  "phone:turtle-souvenir",
+  "phone:maple-tree",
+  "phone:cave-lioness",
+  "phone:soda-can",
+  "phone:sunglasses",
+  "desktop:pyrite-cubes",
+];
 const lines = [
-  "# Load-time audit — October 14, 2026",
+  "# Load-time audit — October 15, 2026",
   "",
-  "Codex (GPT-6) built the lossless changes and this audit on `codex/load-time`. This revision addresses [the Operator's newest review](https://github.com/ryanjosephkamp/splashery/pull/588#issuecomment-6163399711).",
+  "Codex (GPT-6) built these lossless changes and this audit on `codex/load-time`. This revision addresses [the Operator's October 15 review](https://github.com/ryanjosephkamp/splashery/pull/588#issuecomment-6198837043).",
   "",
   "## Current opening results",
   "",
-  `Baseline main: \`${current.method.before.frozenMain}\`. Candidate: \`${current.method.after.candidateSource}\`. This is the only current timing table. Each group has five fresh-browser before/after pairs, adjacent and alternating in order, collected with no other rendering or heavy validation job running. Sunglasses uses five new pairs from one session; none of the old five or extended 15 observations are mixed in.`,
+  `Baseline main: \`${current.method.before.frozenMain}\`. Final candidate: \`${current.finalCandidateSource}\`. The three phone full-scan fallbacks were measured on that revision; the other 25 groups retain their actual \`${current.method.after.candidateSource}\` source pins. A guarded diff confirms that the only later runtime change removes these three prefix-selector entries; every other data selection and loader/build function is unchanged. Each group has five adjacent, alternating before/after pairs on the same Linux software-rendering device. Every opening uses a fresh browser and context, disabled cache, and the same renderer, viewport, profile, count, seed, and camera. No repeated-test or other rendering job ran alongside these measurements. Superseded experiments and the replaced prefix samples are not pooled into this table.`,
   "",
-  `The original top-20 phone set averages ${fmt(before)} → ${fmt(after)} bytes combined (${((1 - after / before) * 100).toFixed(1)}% saving); ${heavy.filter((r) => r.a.bytes <= r.b.bytes * 0.75).length}/20 individually reach 25%. ${heavy.filter((r) => r.a.median > r.b.median).length}/20 have a higher measured first-frame median.`,
+  `The original top-20 phone set averages ${fmt(before)} → ${fmt(after)} local HTTP-body bytes combined (${((1 - after / before) * 100).toFixed(1)}% saving); ${heavy.filter((r) => r.a.bytes <= r.b.bytes * 0.75).length}/20 individually reach 25%. The combined 25% target is ${after <= before * 0.75 ? "met" : "not met"}. Public per-toy wire savings were not measured.`,
   "",
-  `The combined 25% local opening-body target is ${after <= before * 0.75 ? "met" : "not met"}. The no-slower screen is ${rows.some((r) => r.a.median > r.b.median) ? "not met" : "met in these five-pair observations"} across all 28 groups (${rows.filter((r) => r.a.median > r.b.median).length} higher medians). Public per-toy wire saving was not measured.`,
+  `The strict median screen has ${higher.length}/28 higher medians. ${higher.length ? "It is not claimed met; each measured increase remains visible below." : "It is met in these observations, without establishing a universal timing guarantee."}`,
   "",
-  "| Toy | Setting | Samples per phase | Bytes before → after | Requests before → after | First-frame median before → after (ms) | Change | Before range (ms) | After range (ms) |",
-  "| --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
+  "| Toy | Setting | Measured candidate | Samples per phase | Bytes before → after | Requests before → after | First-frame median before → after (ms) | Change | Before range (ms) | After range (ms) |",
+  "| --- | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |",
 ];
 for (const r of rows)
   lines.push(
-    `| ${r.k.split(":")[1]} | ${r.k.split(":")[0]} | 5 | ${fmt(r.b.bytes)} → ${fmt(r.a.bytes)} | ${r.b.requests} → ${r.a.requests} | ${ms(r.b.median)} → ${ms(r.a.median)} | ${((r.a.median / r.b.median - 1) * 100).toFixed(1)}% | ${ms(r.b.min)}–${ms(r.b.max)} | ${ms(r.a.min)}–${ms(r.a.max)} |`,
+    `| ${r.k.split(":")[1]} | ${r.k.split(":")[0]} | ${r.a.source.slice(0, 8)} | 5 | ${fmt(r.b.bytes)} → ${fmt(r.a.bytes)} | ${r.b.requests} → ${r.a.requests} | ${ms(r.b.median)} → ${ms(r.a.median)} | ${((r.a.median / r.b.median - 1) * 100).toFixed(1)}% | ${ms(r.b.min)}–${ms(r.b.max)} | ${ms(r.a.min)}–${ms(r.a.max)} |`,
   );
 lines.push(
   "",
-  "All observations and device/profile metadata are in [current-results.json](load-time-2026-10/current-results.json). Higher medians remain visible; a smaller payload does not establish a faster opening.",
+  "All observations and settings are in [current-results.json](load-time-2026-10/current-results.json). Bytes and request counts are means; first-frame times are medians with full ranges. A smaller payload alone does not prove a faster opening.",
   "",
-  "## Causes and changes",
+  `A separate fixed five-pair control opened the identical frozen main on the same HTTP origin in both phases for all 12 previously slower groups. It produced ${control.higherMedians}/12 higher medians, with group median changes from ${control.minMedianChangePercent.toFixed(1)}% to ${control.maxMedianChangePercent.toFixed(1)}%. [same-main-control.json](load-time-2026-10/same-main-control.json) records all settings and ranges. This quantifies repeatability on this device; it is not pooled with candidate results and does not establish that any particular candidate increase is noise.`,
   "",
-  "The custom engine bootstrap added a full-body gzip decode, a Blob module, and an import-map gate before native evaluation. Its first revision also serialized app dependency discovery behind engine transfer. Restoring the original HTTP engine URL, module preload, and native app/embed entry removes that extra path for every toy. A held-engine browser test verifies app and player requests start before the engine response is released; the engine is requested once.",
+  "## Eager fallback for every previously slower group",
   "",
-  "GitHub Pages already gzips the [native engine](https://ryanjosephkamp.github.io/splashery/vendor/playcanvas/playcanvas.min.mjs): an actual public GET transferred 640,711 bytes, versus 634,277 bytes for our custom gzip (6,434 bytes difference). The decoded response exactly matches the vendored source. The earlier 26% combined saving used an uncompressed localhost server and is superseded; it was not a comparable public-wire saving. Native loading preserves the browser's ordinary module streaming, source URL, and cache behavior.",
+  "The preceding implementation still awaited an opening-pack promise before renderer creation, decoded shared scenes again inside Player.init, started scan preparation before GPU initialization, loaded scan helpers dynamically, and inflated a Blob help module. The current change removes those paths globally. The app, Player, UI, and embed JavaScript entry files match the frozen main byte for byte; the original HTML engine preload and native app entry remain. The original eager museum-helper import is restored, and the scan decoder is back in its original module so it adds no runtime module request.",
   "",
-  "The eight higher phone medians in round 2 were your-book, video-3d, splat-toolkit, powers-of-ten, dog-plush, moving-photo-3d, maple-tree, and cave-lioness. All used this custom engine startup. The final change retains the old native engine entry globally, including every named toy. This removes the shared extra loading path; it does not prove that each earlier multi-second difference had that single cause. No per-toy cause is inferred from a five-sample timing difference alone. The final table keeps any remaining higher medians visible.",
+  "A new browser regression test holds compressed shared-scene decoding. Before the fix, renderer creation never starts within the unchanged test window; after the fix, it starts before the scene is released and the same shared toy then loads. Two further tests hold the unused PDF decompressor and edition metadata responses and verify that an ordinary opening can finish. Both PDF-only module dependencies are removed from ordinary startup. Red and green receipts, source hashes, the parser-based eager import comparison, and exact fallback coverage are recorded in [eager-fallback.json](load-time-2026-10/eager-fallback.json). These tests establish the removed startup dependencies; they do not assign each historical median difference to one cause.",
   "",
-  "A separate native opening-pack module starts selected scan helper discovery alongside the app graph. A held-ui response test first failed when this module could start only through the app; starting it independently in HTML removes that serialization. App and embed await its shared promise before GPU initialization. GIF export keeps its import map. No compressed-engine mapping or source-preload promotion remains.",
+  "The fallback covers all 12 groups named in the review:",
   "",
-  "In the final phone observations, Sunglasses and Soda can still have higher first-frame medians despite earlier median scan-response completion. [startup-stages.json](load-time-2026-10/startup-stages.json) records the completed-response stages. A response finishing before GPU setup leaves that setup in the later interval; these traces do not time module evaluation or GPU work and do not establish the remaining cause. No further timing fix is claimed.",
+  ...originalSlower.map(
+    (key) =>
+      `- ${key.replace(":", " / ")}: restored main's eager startup order and native help loading.`,
+  ),
   "",
-  "The latest main also changed the default manual to a content-addressed filename. The previous compressed loader matched only the legacy filename. The current and legacy documents now use exact gzip copies, overlapping PDF.js transfer and retaining every page, filename, notice, and original URL.",
+  "Sunglasses, Soda can, and Fountain pen now use their unchanged original full scan files at every detail setting. The new full-file selection tests failed before this fallback and pass after. Their three phone groups use five fresh pairs on the final revision; none of the earlier prefix measurements is pooled into them. The disabled prefix files remain as generated artifacts with their original byte proofs; they are not requested at runtime. Water bottle and Baseball cap retain exact-record prefixes with original population counts; four museum scans also retain the exact full-scan Float64 smoothing means. Higher detail uses the original full scan. Geometry, rendered splat counts, precision, textures, controls, clocks, and cameras are unchanged. PDF gzip retains every decoded byte; GIF encoding code remains deferred until export.",
   "",
-  "Museum helpers and scan transfers overlap. Selected scan helpers finish before GPU setup in app and embed. App shared-scene openings also start scan preparation before WebGL initialization; embed scan preparation retains its normal order after GPU setup. The native engine retains its module preload. Five Real Objects prefixes and the globe, armillary, Stannern, and Pyrite prefixes retain exact records, original population counts, and exact full-scan Float64 means where needed. Higher budgets still use full scans. No rendered count, camera, texture, color precision, or engine version was reduced.",
+  "## Strawberry repeated comparison",
   "",
-  "| Lossless source | Original bytes | Gzip bytes | Saving |",
+  `The original protected test from 613213cf was run ten times per source on the eager-startup revision b222e93a and frozen main, in alternating adjacent order, without changed controls, clocks, thresholds, waits, retries, or fixture observers. Main: ${strawberry.groups.before.passed}/10 passed, ${strawberry.groups.before.failed}/10 failed. Candidate: ${strawberry.groups.after.passed}/10 passed, ${strawberry.groups.after.failed}/10 failed. Complete per-run statuses, failure messages, dates, source pins, and the original test hash are in [strawberry-repeat.json](load-time-2026-10/strawberry-repeat.json). Pilot or interrupted batches are excluded.`,
+  "",
+  `In the separate current-test batch with the upstream readiness fix, the strawberry section passed ${currentStrawberry.groups.before.strawberry.passed}/10 on main and ${currentStrawberry.groups.after.strawberry.passed}/10 on the candidate. Strawberry-section failures: ${currentStrawberry.groups.before.strawberry.failed} main, ${currentStrawberry.groups.after.strawberry.failed} candidate; unclassified outcomes: ${currentStrawberry.groups.before.strawberry.unknown} main, ${currentStrawberry.groups.after.strawberry.unknown} candidate. The full composite test, which continues through Lantern and Jelly blob, passed ${currentStrawberry.groups.before.passed}/10 on main (${currentStrawberry.groups.before.failed} failures) and ${currentStrawberry.groups.after.passed}/10 on the candidate (${currentStrawberry.groups.after.failed} failures). Every later failure and its source location remains recorded. Section completion is inferred only from a passed full test or a failure after that section. Distinct test hashes and complete ten-run receipts are retained; the two versions are not pooled, and differing observed rates are not proof of equal underlying rates.`,
+  "",
+  "The retained failure traces show why this is sensitive to wall time: one original main return-frame screenshot took 26,841 ms, longer than the entire 15,000 ms poll. In the branch failure, the two return-frame screenshots took 4,029 and 6,027 ms. These are timings from the existing Playwright traces, with no added observer. The fixed test waits for camera and pulse readiness before entering that image poll; the animation clock and pixel thresholds are unchanged.",
+  "",
+  "Current main independently changed this smoke test to wait for its camera to settle and for its animation pulse to finish before comparing return frames. Those upstream changes arrived through an ordinary merge; this PR does not edit the protected test. The ten-per-source comparison deliberately uses the earlier, unchanged test, so the result does not come from relaxing that predicate. [Earlier observed failures](load-time-2026-10/superseded/round3-strawberry-timing.json) on both sources expired with the pulse still running (1.8667 and 1.9332 of its 2.2 simulation seconds). That observation explains why a 15-second wall-time poll can miss the end on a slow software renderer; it is historical evidence with its own source pins, not a new rate measurement.",
+  "",
+  "## Visual and regression evidence",
+  "",
+  `${images.length} prior GPU-finished comparisons remain in [image-diffs.json](load-time-2026-10/image-diffs.json): 49 are pixel-identical; the desktop book differs at eight pixels by at most one RGB level. Every recorded tap pose moved. Their original capture source pins remain intact. The eager fallback changes discovery order; the final three scan fallbacks restore the original data files. The 13 shared renderer, rig, camera, entry, and help files are unchanged from the repeated-test source and frozen main. The exact-buffer and decoded-byte tests verify the retained lossless data. Lossy point-budget alternatives remain unshipped in [lossy-options.json](load-time-2026-10/lossy-options.json).`,
+  "",
+  `Required regression results: ${verification.required.passed} passed, ${verification.required.failed} failed, and ${verification.required.skipped} skipped. ${verification.required.processFailures.length} spec processes returned a nonzero exit code.`,
+  "",
+  ...verification.required.groups.flatMap((group) =>
+    group.cases
+      .filter((row) => !["passed", "skipped"].includes(row.status))
+      .map((row) => `- ${group.name}: ${row.title} — ${row.status}.`),
+  ),
+  "",
+  "Latest validation, all red tests by name, commands, source pins, and protected-file checks are in [verification.json](load-time-2026-10/verification.json). Required smoke, taps, kit, unit, Real Objects, and all load-time specs run on the final runtime source. The repeated Strawberry runs retain their actual earlier source pins; the only subsequent runtime change is the three scan selectors, and no rig, camera, renderer, or clock code changed. Historical validation is labeled by its actual source and is not counted as this run.",
+  "",
+  "| Lossless PDF source | Original bytes | Gzip bytes | Saving |",
   "| --- | ---: | ---: | ---: |",
 );
 for (const r of compression)
@@ -173,54 +244,24 @@ for (const r of compression)
   );
 lines.push(
   "",
-  "Exact hashes and unchanged-byte checks: [compressed-opening.json](load-time-2026-10/compressed-opening.json). Scan hashes and inherited license records: [museum-prefixes.json](load-time-2026-10/museum-prefixes.json). Armillary and Stannern's live pages were opened on October 13, 2026. Pyrite's page returned 503 on October 14; its [live model API](https://api.sketchfab.com/v3/models/0b7c6e8e32144b72806ed31cb49b4145) confirmed CC0 and Digital Atlas of Ancient Life. NC tags and in-app notices remain.",
+  "Hashes and unchanged-byte proofs are in [compressed-opening.json](load-time-2026-10/compressed-opening.json), [prefixes.json](load-time-2026-10/prefixes.json), and [museum-prefixes.json](load-time-2026-10/museum-prefixes.json). Asset licenses, notices, and NC tags remain unchanged. No new asset source was introduced by this review change.",
   "",
-  "## Visual and regression evidence",
+  "## Method and limits",
   "",
-  `${images.length} existing GPU-finished comparisons remain in [image-diffs.json](load-time-2026-10/image-diffs.json): 49 are pixel-identical; the desktop book differs at eight pixels by at most one RGB level and is visually identical. All 23 recorded tap poses moved. These captures use the previous frozen sources recorded in each row; restoring native engine discovery does not change their scene buffers. The updated manual's decoded bytes are checked separately.`,
+  "Phone: 390×844, DPR 3, touch/mobile, weak/low. Desktop: 1440×900, DPR 1, high. Chromium 151, WebGL2 through Linux llvmpipe, three Mesa threads, four CPU quota, nice 10, display :99. Sound and adaptation are off; seed is 424242. This is one software-rendering device using phone and desktop settings, not a physical phone or the earlier Mac/Metal device. First frame is navigation through the first submitted postrender after the requested toy becomes ready.",
   "",
-  "All openings now use the original HTTP engine. This is not a demonstrated strawberry fix: prior raw-path runs both passed and failed. An observer around the unchanged original protected test found latest main and candidate still running the effect when its wall-time predicate expired. Candidate had advanced 1.8667 of 2.2 simulation seconds, and main 1.9332 seconds; their pop controls remained 0.1515 and 0.1213. Both observed executions used the original HTTP engine. The unchanged update clamps large frame deltas at 0.1 seconds; slow software frames can leave this simulation-time effect unfinished at the wall-time deadline. See [strawberry-timing.json](load-time-2026-10/strawberry-timing.json). The protected predicate, production clocks, and animation remain unchanged; current full-suite outcomes are recorded below.",
+  "Payload counts completed HTTP bodies at a 1.5-second settling cutoff and excludes headers, unfinished responses, and blob/data URLs. Local plain-server bodies are not public transfer sizes. Historical public per-file GETs in [production-transport.json](load-time-2026-10/production-transport.json) showed that Pages already compresses native JavaScript; custom engine and help gzip loading have both been removed. The candidate data files have not been deployed, and their public transfer savings are unmeasured.",
   "",
-  `Current full-suite strawberry return-to-rest result: **${verification.finalStrawberry.result.status}** in the unchanged protected rig case on \`${verification.finalStrawberry.source}\`. Earlier native-path runs both passed and failed. This current outcome is reported separately from the preceding diagnostic failures; a pass does not establish a causal fix.`,
+  "Serve frozen main on 4174 and candidate on 4173. Run `node tools/load-time-paired.mjs --only=ID,ID --device=phone --samples=5 --out=DIR --frozen-main=COMMIT --candidate-source=COMMIT`. Run the four reviewed toys at both settings in a separate directory. `node tools/load-time-report.mjs --timing=DIR --payload=DIR --fallback=DIR` validates complete groups and source pins, then writes this single current table. Raw request traces, repeated-test JSON, and browser artifacts stay outside Git; the compact audit remains strictly below 3,000,000 bytes.",
   "",
-  "The strawberry probe leaves production clocks, controls, and cameras running. It records control decay, simulation time, wall time, and paired rest/pop/settled images. Its raw captures stay outside Git. The current verification receipt states the original smoke results and main comparison; the protected smoke test was not edited.",
+  "Older numeric screens and verification receipts are superseded, with their source metadata retained. The original heavy set is retained for comparison; the full catalog has not been rescreened on current main. No frame-cadence or heap claim is made. Protected PLY assets remain unchanged, so the unused-column option is still deferred.",
   "",
-  verification
-    ? verification.summary
-    : "Current required-suite verification is not complete; no passing result is claimed.",
-  "",
-  `Measured main \`${current.method.before.frozenMain}\` is merged into the candidate, including its video-loading updates. Latest main \`${verification.integratedLatestMain.main}\` was then merged before validation; its only additional change is docs/STATUS.md. The repeated validation uses \`${verification.validationSource}\`, with zero runtime/test/tool/asset differences from measured candidate \`${current.method.after.candidateSource}\`. Earlier comparisons retain their actual source pins in the verification receipt.`,
-  "",
-  "Details, commands, source pins, initial failures, and comparison results are retained in [verification.json](load-time-2026-10/verification.json).",
-  "",
-  ...(verification.finalChecks
-    ? [
-        `Final check receipts: Prettier, American English, whitespace, and the audit-budget test all exit 0. All ${verification.finalChecks.protected.unionCount} fully paginated protected paths have zero committed and working-tree intersections. Commands and results are in verification.json; the strict final audit size remains below 3,000,000 bytes.`,
-        "",
-      ]
-    : []),
-  "## Method and reproduction",
-  "",
-  "Phone: 390×844, DPR 3, touch/mobile, weak/low. Desktop: 1440×900, DPR 1, high. WebGL2, sound and adaptation off, seed 424242, preset camera, localhost, disabled HTTP cache, and blocked service workers. Raw method files record Chromium, renderer, process priority, thread count, and display. This Linux software-renderer session is not a physical-phone or task 06 Mac/Metal measurement. First frame means submitted postrender readiness; captures separately finish the GPU.",
-  "",
-  "Bytes and requests are means; timings are medians and full ranges. Opening bytes count completed bodies after a real 1.5-second delay, excluding headers, blob/data URLs, and incomplete responses. This local plain-server byte metric is not public transfer size. Actual public per-file headers and byte comparisons are retained in [production-transport.json](load-time-2026-10/production-transport.json). Pages already compresses [help](https://ryanjosephkamp.github.io/splashery/src/toy-help.js) to 118,347 bytes, so its local custom gzip is only 2,494 bytes smaller than the public encoded body; the [current PDF](https://ryanjosephkamp.github.io/splashery/manual/tinkerers-manual-85d32b96193ea275.pdf) is served uncompressed at 7,792,711 bytes, and its local 5,858,411-byte exact gzip is 1,934,300 bytes smaller. The candidate gzip files have not been deployed, so their public transfer size is not measured. A public per-toy opening was not measured. The full catalog was not rescreened after the latest main merge; this current screen covers the original top-20 phone set and four reviewed toys at both settings. Frame cadence and a heap census were not repeated.",
-  "",
-  "Serve archived baseline main on port 4174 and the frozen candidate on 4173. `tools/load-time-paired.mjs --only=ID,ID --device=phone --samples=5 --out=DIR --frozen-main=COMMIT --candidate-source=COMMIT` runs the adjacent alternating pairs. Raw runs default outside the repository. `tools/load-time-report.mjs --timing=DIR --payload=DIR` validates complete groups and writes this single current table. `tools/load-time-compress.mjs`, `tools/load-time-prefixes.mjs`, and `tools/load-time-smoothing.mjs` regenerate the lossless files.",
-  "",
-  "## Superseded results and remaining limits",
-  "",
-  "All earlier catalog, paired, top-20, and mixed-session Sunglasses observations are **superseded**. Their compact records are archived under [superseded/](load-time-2026-10/superseded/); they are not current results and no historical numeric table is reproduced here. Earlier verification receipts remain labeled by source and date.",
-  "",
-  "Unused PLY-column removal remains deferred because PR #562's protected manifest pins the original file and its loading path. Already compressed SOG captures keep their drawn points and precision. Both combined and individual 25% targets are reported above. Restoring the native engine gives up the misleading local-only gzip win; the target is not claimed met when measured savings fall short. The audit stays below 3,000,000 bytes; raw request traces and bulk captures remain outside Git, and no added -diff attributes remain.",
-  "",
-  "Lossy point-budget options were not shipped. Their paired stills and diffs remain in [lossy-options.json](load-time-2026-10/lossy-options.json) for the owner.",
-  "",
-  "Rule check: the prior unpublished email metadata history rewrite conflicts with E1. Subsequent review changes are additive.",
+  "Rule check: the prior unpublished email metadata history rewrite conflicts with E1. All subsequent review changes, including the current main merge, are additive.",
   "",
 );
 fs.writeFileSync(`${dir}.md`, lines.join("\n"));
 console.log({
   groups: rows.length,
   combinedSaving: (1 - after / before) * 100,
-  higherMedians: heavy.filter((r) => r.a.median > r.b.median).map((r) => r.k),
+  higherMedians: higher.map((r) => r.k),
 });

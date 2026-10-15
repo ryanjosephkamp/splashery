@@ -1,0 +1,491 @@
+{
+  "method": "Ten fresh single-worker browser runs per source, adjacent alternating source order on each pair, original smoke test bytes from 613213cf with no fixture observer, changed controls, clock, thresholds, waits, or retries. The current main test has since added camera/effect readiness waits; these runs deliberately retain the earlier original body to investigate the reported failure.",
+  "testSha256": "69bf1ea0f8829ccc24e6afff27437a0095cd910f57f5bf37ee92e97c42ffa049",
+  "renderer": {
+    "browser": "/usr/bin/chromium 151.0.7922.173",
+    "device": "same Linux container; 4 CPU quota",
+    "display": ":99",
+    "mesaThreads": 3,
+    "gl": "llvmpipe",
+    "priority": 10,
+    "viewport": "Unchanged smoke describe.use: 1280×800, DPR 1, reducedMotion reduce",
+    "workers": 1
+  },
+  "groups": {
+    "before": {
+      "source": "c13a9d3fab17c8a928299bdf115003502a7823d4",
+      "passed": 8,
+      "failed": 2,
+      "runs": [
+        {
+          "sample": 0,
+          "status": "passed",
+          "durationMs": 72223,
+          "exitCode": 0,
+          "started": "2026-10-15T18:27:25.607Z",
+          "finished": "2026-10-15T18:28:44.213Z"
+        },
+        {
+          "sample": 1,
+          "status": "passed",
+          "durationMs": 63648,
+          "exitCode": 0,
+          "started": "2026-10-15T18:31:12.048Z",
+          "finished": "2026-10-15T18:32:23.155Z"
+        },
+        {
+          "sample": 2,
+          "status": "passed",
+          "durationMs": 56343,
+          "exitCode": 0,
+          "started": "2026-10-15T18:32:23.157Z",
+          "finished": "2026-10-15T18:33:30.115Z"
+        },
+        {
+          "sample": 3,
+          "status": "passed",
+          "durationMs": 65675,
+          "exitCode": 0,
+          "started": "2026-10-15T18:35:52.129Z",
+          "finished": "2026-10-15T18:37:08.534Z"
+        },
+        {
+          "sample": 4,
+          "status": "passed",
+          "durationMs": 56601,
+          "exitCode": 0,
+          "started": "2026-10-15T18:37:08.549Z",
+          "finished": "2026-10-15T18:38:26.459Z"
+        },
+        {
+          "sample": 5,
+          "status": "passed",
+          "durationMs": 50896,
+          "exitCode": 0,
+          "started": "2026-10-15T18:40:44.018Z",
+          "finished": "2026-10-15T18:41:42.989Z"
+        },
+        {
+          "sample": 6,
+          "status": "failed",
+          "durationMs": 56231,
+          "exitCode": 1,
+          "started": "2026-10-15T18:41:43.000Z",
+          "finished": "2026-10-15T18:42:49.301Z",
+          "error": "Error: Timeout 15000ms exceeded while waiting on the predicate"
+        },
+        {
+          "sample": 7,
+          "status": "failed",
+          "durationMs": 49722,
+          "exitCode": 1,
+          "started": "2026-10-15T18:44:52.315Z",
+          "finished": "2026-10-15T18:45:49.587Z",
+          "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 20544.5\nReceived:   82322\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate"
+        },
+        {
+          "sample": 8,
+          "status": "passed",
+          "durationMs": 70020,
+          "exitCode": 0,
+          "started": "2026-10-15T18:45:49.590Z",
+          "finished": "2026-10-15T18:47:08.488Z"
+        },
+        {
+          "sample": 9,
+          "status": "passed",
+          "durationMs": 64469,
+          "exitCode": 0,
+          "started": "2026-10-15T18:50:14.652Z",
+          "finished": "2026-10-15T18:51:29.015Z"
+        }
+      ]
+    },
+    "after": {
+      "source": "b222e93aad709e03dd7b3814d456612ebaf6c900",
+      "passed": 9,
+      "failed": 1,
+      "runs": [
+        {
+          "sample": 0,
+          "status": "passed",
+          "durationMs": 59005,
+          "exitCode": 0,
+          "started": "2026-10-15T18:28:44.217Z",
+          "finished": "2026-10-15T18:29:49.008Z"
+        },
+        {
+          "sample": 1,
+          "status": "passed",
+          "durationMs": 76429,
+          "exitCode": 0,
+          "started": "2026-10-15T18:29:49.010Z",
+          "finished": "2026-10-15T18:31:12.044Z"
+        },
+        {
+          "sample": 2,
+          "status": "passed",
+          "durationMs": 77692,
+          "exitCode": 0,
+          "started": "2026-10-15T18:33:30.115Z",
+          "finished": "2026-10-15T18:34:53.601Z"
+        },
+        {
+          "sample": 3,
+          "status": "failed",
+          "durationMs": 46471,
+          "exitCode": 1,
+          "started": "2026-10-15T18:34:53.602Z",
+          "finished": "2026-10-15T18:35:52.095Z",
+          "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 22889.25\nReceived:   63184\n\nCall Log:\n- Timeout 15000ms exceeded while waiting on the predicate"
+        },
+        {
+          "sample": 4,
+          "status": "passed",
+          "durationMs": 63292,
+          "exitCode": 0,
+          "started": "2026-10-15T18:38:26.463Z",
+          "finished": "2026-10-15T18:39:35.512Z"
+        },
+        {
+          "sample": 5,
+          "status": "passed",
+          "durationMs": 62271,
+          "exitCode": 0,
+          "started": "2026-10-15T18:39:35.514Z",
+          "finished": "2026-10-15T18:40:44.017Z"
+        },
+        {
+          "sample": 6,
+          "status": "passed",
+          "durationMs": 53685,
+          "exitCode": 0,
+          "started": "2026-10-15T18:42:49.304Z",
+          "finished": "2026-10-15T18:43:50.799Z"
+        },
+        {
+          "sample": 7,
+          "status": "passed",
+          "durationMs": 55662,
+          "exitCode": 0,
+          "started": "2026-10-15T18:43:50.801Z",
+          "finished": "2026-10-15T18:44:52.313Z"
+        },
+        {
+          "sample": 8,
+          "status": "passed",
+          "durationMs": 81307,
+          "exitCode": 0,
+          "started": "2026-10-15T18:47:08.492Z",
+          "finished": "2026-10-15T18:48:48.141Z"
+        },
+        {
+          "sample": 9,
+          "status": "passed",
+          "durationMs": 78313,
+          "exitCode": 0,
+          "started": "2026-10-15T18:48:48.142Z",
+          "finished": "2026-10-15T18:50:14.638Z"
+        }
+      ]
+    }
+  },
+  "currentTest": {
+    "method": "Ten fresh single-worker browser runs per source of the unchanged current-main smoke test after upstream fix5c187e64; adjacent alternating source order. No fixture observer, production control or clock change, retries, or local edits to the protected test. This separate batch verifies main's camera/effect readiness fix; it is not pooled with the earlier original-body comparison.",
+    "testSha256": "f46e96d4506621e1a884d4bd6b6e1bcd61946c400f11c91613ed929ee1125c8f",
+    "renderer": {
+      "browser": "/usr/bin/chromium 151.0.7922.173",
+      "device": "same Linux container; 4 CPU quota",
+      "display": ":99",
+      "mesaThreads": 3,
+      "gl": "llvmpipe",
+      "priority": 10,
+      "viewport": "Unchanged smoke describe.use: 1280×800, DPR 1, reducedMotion reduce",
+      "workers": 1
+    },
+    "groups": {
+      "before": {
+        "source": "c13a9d3fab17c8a928299bdf115003502a7823d4",
+        "strawberry": {
+          "passed": 10,
+          "failed": 0,
+          "unknown": 0
+        },
+        "passed": 8,
+        "failed": 2,
+        "runs": [
+          {
+            "sample": 0,
+            "status": "failed",
+            "strawberrySection": "passed",
+            "failureLocation": {
+              "file": "/workspace/load-time-round3-current-main/tests/smoke.spec.mjs",
+              "column": 57,
+              "line": 802
+            },
+            "durationMs": 63331,
+            "exitCode": 1,
+            "started": "2026-10-15T18:51:31.778Z",
+            "finished": "2026-10-15T18:52:57.989Z",
+            "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 400\nReceived:   2378",
+            "errorStack": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 400\nReceived:   2378\n\n  800 |     await page.waitForTimeout(1500);\n  801 |     const out = await canvas.screenshot({ type: \"png\" });\n> 802 |     expect(await countDifferentPixels(page, dark, out)).toBeLessThan(400);\n      |                                                         ^\n  803 |     // The jelly blob (a procedural shelf shape) splits in three.\n  804 |     await page.click(\".chip[data-category='shapes']\");\n  805 |     await page.click(\".toy-card[data-toy='blob']\");\n    at /workspace/load-time-round3-current-main/tests/smoke.spec.mjs:802:57"
+          },
+          {
+            "sample": 1,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 59863,
+            "exitCode": 0,
+            "started": "2026-10-15T18:55:34.645Z",
+            "finished": "2026-10-15T18:56:41.057Z"
+          },
+          {
+            "sample": 2,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 81604,
+            "exitCode": 0,
+            "started": "2026-10-15T18:56:41.058Z",
+            "finished": "2026-10-15T18:58:09.113Z"
+          },
+          {
+            "sample": 3,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 63096,
+            "exitCode": 0,
+            "started": "2026-10-15T19:00:41.262Z",
+            "finished": "2026-10-15T19:01:59.400Z"
+          },
+          {
+            "sample": 4,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 90690,
+            "exitCode": 0,
+            "started": "2026-10-15T19:01:59.400Z",
+            "finished": "2026-10-15T19:03:43.295Z"
+          },
+          {
+            "sample": 5,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 88591,
+            "exitCode": 0,
+            "started": "2026-10-15T19:06:57.647Z",
+            "finished": "2026-10-15T19:08:41.661Z"
+          },
+          {
+            "sample": 6,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 99552,
+            "exitCode": 0,
+            "started": "2026-10-15T19:08:41.665Z",
+            "finished": "2026-10-15T19:10:44.745Z"
+          },
+          {
+            "sample": 7,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 61269,
+            "exitCode": 0,
+            "started": "2026-10-15T19:14:25.454Z",
+            "finished": "2026-10-15T19:15:34.783Z"
+          },
+          {
+            "sample": 8,
+            "status": "failed",
+            "strawberrySection": "passed",
+            "failureLocation": {
+              "file": "/workspace/load-time-round3-current-main/tests/smoke.spec.mjs",
+              "column": 57,
+              "line": 802
+            },
+            "durationMs": 58655,
+            "exitCode": 1,
+            "started": "2026-10-15T19:15:34.788Z",
+            "finished": "2026-10-15T19:16:45.541Z",
+            "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 400\nReceived:   2400",
+            "errorStack": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 400\nReceived:   2400\n\n  800 |     await page.waitForTimeout(1500);\n  801 |     const out = await canvas.screenshot({ type: \"png\" });\n> 802 |     expect(await countDifferentPixels(page, dark, out)).toBeLessThan(400);\n      |                                                         ^\n  803 |     // The jelly blob (a procedural shelf shape) splits in three.\n  804 |     await page.click(\".chip[data-category='shapes']\");\n  805 |     await page.click(\".toy-card[data-toy='blob']\");\n    at /workspace/load-time-round3-current-main/tests/smoke.spec.mjs:802:57"
+          },
+          {
+            "sample": 9,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 66163,
+            "exitCode": 0,
+            "started": "2026-10-15T19:20:40.351Z",
+            "finished": "2026-10-15T19:21:53.993Z"
+          }
+        ]
+      },
+      "after": {
+        "source": "b222e93aad709e03dd7b3814d456612ebaf6c900",
+        "strawberry": {
+          "passed": 10,
+          "failed": 0,
+          "unknown": 0
+        },
+        "passed": 10,
+        "failed": 0,
+        "runs": [
+          {
+            "sample": 0,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 88070,
+            "exitCode": 0,
+            "started": "2026-10-15T18:52:57.996Z",
+            "finished": "2026-10-15T18:54:33.701Z"
+          },
+          {
+            "sample": 1,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 53441,
+            "exitCode": 0,
+            "started": "2026-10-15T18:54:33.702Z",
+            "finished": "2026-10-15T18:55:34.644Z"
+          },
+          {
+            "sample": 2,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 65547,
+            "exitCode": 0,
+            "started": "2026-10-15T18:58:09.113Z",
+            "finished": "2026-10-15T18:59:22.003Z"
+          },
+          {
+            "sample": 3,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 70410,
+            "exitCode": 0,
+            "started": "2026-10-15T18:59:22.007Z",
+            "finished": "2026-10-15T19:00:41.261Z"
+          },
+          {
+            "sample": 4,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 70241,
+            "exitCode": 0,
+            "started": "2026-10-15T19:03:43.296Z",
+            "finished": "2026-10-15T19:05:11.925Z"
+          },
+          {
+            "sample": 5,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 93348,
+            "exitCode": 0,
+            "started": "2026-10-15T19:05:11.927Z",
+            "finished": "2026-10-15T19:06:57.643Z"
+          },
+          {
+            "sample": 6,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 82199,
+            "exitCode": 0,
+            "started": "2026-10-15T19:10:44.746Z",
+            "finished": "2026-10-15T19:12:15.892Z"
+          },
+          {
+            "sample": 7,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 108935,
+            "exitCode": 0,
+            "started": "2026-10-15T19:12:15.894Z",
+            "finished": "2026-10-15T19:14:25.448Z"
+          },
+          {
+            "sample": 8,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 63237,
+            "exitCode": 0,
+            "started": "2026-10-15T19:16:45.544Z",
+            "finished": "2026-10-15T19:17:57.617Z"
+          },
+          {
+            "sample": 9,
+            "status": "passed",
+            "strawberrySection": "passed",
+            "durationMs": 151742,
+            "exitCode": 0,
+            "started": "2026-10-15T19:17:57.618Z",
+            "finished": "2026-10-15T19:20:40.350Z"
+          }
+        ]
+      }
+    }
+  },
+  "originalFailureScreenshotStages": {
+    "method": "Existing retained Playwright test.trace before/after events; no added observer. Durations are screenshot wall time, not simulation time.",
+    "runs": [
+      {
+        "run": "before-6",
+        "screenshots": [
+          {
+            "originalTestLine": 745,
+            "durationMs": 7318.9
+          },
+          {
+            "originalTestLine": 748,
+            "durationMs": 5178.6
+          },
+          {
+            "originalTestLine": 753,
+            "durationMs": 26841
+          }
+        ]
+      },
+      {
+        "run": "before-7",
+        "screenshots": [
+          {
+            "originalTestLine": 745,
+            "durationMs": 9390.9
+          },
+          {
+            "originalTestLine": 748,
+            "durationMs": 4214.8
+          },
+          {
+            "originalTestLine": 753,
+            "durationMs": 5572.8
+          },
+          {
+            "originalTestLine": 753,
+            "durationMs": 4547.8
+          }
+        ]
+      },
+      {
+        "run": "after-3",
+        "screenshots": [
+          {
+            "originalTestLine": 745,
+            "durationMs": 3471.2
+          },
+          {
+            "originalTestLine": 748,
+            "durationMs": 3712.8
+          },
+          {
+            "originalTestLine": 753,
+            "durationMs": 4029.4
+          },
+          {
+            "originalTestLine": 753,
+            "durationMs": 6027
+          }
+        ]
+      }
+    ]
+  }
+}

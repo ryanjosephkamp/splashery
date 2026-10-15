@@ -1,221 +1,205 @@
-# Load-time audit — October 14, 2026
+# Load-time audit — October 15, 2026
 
-Codex (GPT-6) built the lossless changes and this audit on `codex/load-time`. This revision
+Codex (GPT-6) built these lossless changes and this audit on `codex/load-time`. This revision
 addresses
-[the Operator's newest review](https://github.com/ryanjosephkamp/splashery/pull/588#issuecomment-6163399711).
+[the Operator's October 15 review](https://github.com/ryanjosephkamp/splashery/pull/588#issuecomment-6198837043).
 
 ## Current opening results
 
-Baseline main: `226644fb2b4e70dbd02136caec8e0f57c9f7f662`. Candidate:
-`2b5eaae37a07961de240a4b426a90c6a91060787`. This is the only current timing table. Each group has
-five fresh-browser before/after pairs, adjacent and alternating in order, collected with no other
-rendering or heavy validation job running. Sunglasses uses five new pairs from one session; none of
-the old five or extended 15 observations are mixed in.
+Baseline main: `c13a9d3fab17c8a928299bdf115003502a7823d4`. Final candidate:
+`30ed36e55974a012d2d6042a6a97d4fa5fe04007`. The three phone full-scan fallbacks were measured on
+that revision; the other 25 groups retain their actual `b222e93aad709e03dd7b3814d456612ebaf6c900`
+source pins. A guarded diff confirms that the only later runtime change removes these three
+prefix-selector entries; every other data selection and loader/build function is unchanged. Each
+group has five adjacent, alternating before/after pairs on the same Linux software-rendering device.
+Every opening uses a fresh browser and context, disabled cache, and the same renderer, viewport,
+profile, count, seed, and camera. No repeated-test or other rendering job ran alongside these
+measurements. Superseded experiments and the replaced prefix samples are not pooled into this table.
 
-The original top-20 phone set averages 187,499,319 → 172,087,022 bytes combined (8.2% saving); 2/20
-individually reach 25%. 9/20 have a higher measured first-frame median.
+The original top-20 phone set averages 187,676,516 → 180,003,320 local HTTP-body bytes combined
+(4.1% saving); 1/20 individually reach 25%. The combined 25% target is not met. Public per-toy wire
+savings were not measured.
 
-The combined 25% local opening-body target is not met. The no-slower screen is not met across all 28
-groups (12 higher medians). Public per-toy wire saving was not measured.
+The strict median screen has 10/28 higher medians. It is not claimed met; each measured increase
+remains visible below.
 
-| Toy                 | Setting | Samples per phase |    Bytes before → after | Requests before → after | First-frame median before → after (ms) | Change | Before range (ms) | After range (ms) |
-| ------------------- | ------- | ----------------: | ----------------------: | ----------------------: | -------------------------------------: | -----: | ----------------: | ---------------: |
-| your-book           | phone   |                 5 | 15,072,943 → 12,816,407 |               106 → 106 |                        6596.9 → 5498.2 | -16.7% |     3406.7–8045.6 |   3707.9–17326.5 |
-| video-3d            | phone   |                 5 |   6,647,111 → 6,200,356 |               121 → 112 |                        4777.9 → 5116.5 |   7.1% |     3862.8–6126.0 |   4339.6–10011.8 |
-| splat-toolkit       | phone   |                 5 | 11,561,533 → 11,306,184 |               110 → 116 |                      14872.1 → 14198.6 |  -4.5% |    7704.9–45634.4 |  10315.3–33083.7 |
-| living-city         | phone   |                 5 | 10,579,375 → 10,257,285 |                99 → 100 |                        5014.2 → 6230.0 |  24.2% |    3171.0–22859.8 |   3944.4–10947.8 |
-| powers-of-ten       | phone   |                 5 |   7,061,334 → 5,945,562 |               103 → 104 |                        5043.8 → 3883.1 | -23.0% |    2612.6–19373.5 |    2838.9–7764.6 |
-| point-clouds        | phone   |                 5 |   9,151,914 → 8,829,824 |               110 → 111 |                       12878.1 → 8690.5 | -32.5% |    4684.0–17205.5 |   5424.5–17280.4 |
-| celestial-globe     | phone   |                 5 |   9,258,711 → 6,581,300 |                101 → 99 |                        4318.6 → 5096.7 |  18.0% |    2722.6–12500.3 |    2559.5–6816.7 |
-| stannern-meteorites | phone   |                 5 |   9,169,749 → 7,041,036 |                96 → 104 |                        4321.1 → 4269.6 |  -1.2% |     3042.7–5694.9 |    2738.9–6490.1 |
-| crochet-earth       | phone   |                 5 |   9,163,097 → 8,841,007 |                 96 → 97 |                        4130.2 → 4680.0 |  13.3% |     3380.5–6166.3 |    3486.0–7024.4 |
-| seeded-loaf         | phone   |                 5 |   9,182,038 → 8,802,746 |                 94 → 92 |                        3567.9 → 4025.6 |  12.8% |     2818.7–5985.5 |    2439.7–7420.5 |
-| dog-plush           | phone   |                 5 |   9,121,395 → 8,799,305 |                 96 → 97 |                        3878.4 → 3811.3 |  -1.7% |     3729.0–6119.0 |    3390.4–4723.8 |
-| alum-crystal        | phone   |                 5 |   9,097,791 → 8,775,701 |                 96 → 97 |                        5178.0 → 4794.9 |  -7.4% |     3087.0–8942.0 |    3674.5–5304.0 |
-| mushroom-photo      | phone   |                 5 |   9,137,127 → 8,815,037 |               100 → 101 |                        4090.6 → 3872.1 |  -5.3% |     3051.6–4996.5 |    2997.1–9205.2 |
-| moving-photo-3d     | phone   |                 5 |   9,033,471 → 8,711,381 |               128 → 129 |                      13242.5 → 13616.2 |   2.8% |    9843.9–19243.6 |   9726.4–15723.8 |
-| turtle-souvenir     | phone   |                 5 |   9,071,454 → 8,778,981 |                96 → 100 |                        3533.7 → 4170.9 |  18.0% |     2858.2–4573.5 |   2650.5–21116.9 |
-| armillary-sphere    | phone   |                 5 |   9,059,075 → 6,697,741 |                 96 → 99 |                        4103.7 → 3902.2 |  -4.9% |     3271.8–5656.1 |    2450.7–4805.7 |
-| murex-shell         | phone   |                 5 |   9,050,643 → 8,728,553 |                 96 → 97 |                        3794.7 → 3362.2 | -11.4% |     2929.9–8421.2 |    3105.4–6896.2 |
-| maple-tree          | phone   |                 5 |   9,034,584 → 8,756,822 |                96 → 102 |                        3920.5 → 4080.7 |   4.1% |    3896.1–13216.1 |    3602.6–4895.7 |
-| cave-lioness        | phone   |                 5 |   9,026,924 → 8,704,834 |                 96 → 97 |                        3924.4 → 4540.0 |  15.7% |     3079.7–5525.9 |    3230.1–6688.4 |
-| toy-trex            | phone   |                 5 |   9,019,050 → 8,696,960 |                 96 → 97 |                        4470.4 → 4075.4 |  -8.8% |     3326.6–9118.9 |   2820.2–18167.0 |
-| pyrite-cubes        | phone   |                 5 |   8,578,799 → 6,725,925 |                 96 → 99 |                        3928.7 → 3160.3 | -19.6% |     2768.5–4154.1 |    2708.4–6176.0 |
-| soda-can            | phone   |                 5 |   8,882,577 → 5,673,043 |                 96 → 99 |                        3030.0 → 4172.2 |  37.7% |     2438.5–3611.9 |    2424.5–6916.9 |
-| sunglasses          | phone   |                 5 |   8,902,661 → 5,795,159 |                 96 → 99 |                        2726.5 → 3593.6 |  31.8% |     2120.3–4163.9 |    1933.1–3908.0 |
-| fountain-pen        | phone   |                 5 |   8,886,507 → 5,741,247 |                 96 → 99 |                        4457.7 → 2685.3 | -39.8% |     2391.8–5167.9 |    2428.6–3930.9 |
-| pyrite-cubes        | desktop |                 5 |   9,347,411 → 9,118,767 |               175 → 178 |                        5378.0 → 5999.7 |  11.6% |     4000.8–6904.4 |    5058.6–9988.2 |
-| soda-can            | desktop |                 5 |  10,218,207 → 9,989,563 |               239 → 242 |                        5527.8 → 4730.3 | -14.4% |     4607.9–8096.0 |    3802.3–6659.5 |
-| sunglasses          | desktop |                 5 |   9,982,749 → 9,754,105 |               239 → 242 |                        4993.3 → 4497.5 |  -9.9% |     3387.5–7243.8 |    3338.5–6250.2 |
-| fountain-pen        | desktop |                 5 |   9,992,027 → 9,763,383 |               239 → 242 |                        4616.3 → 4458.9 |  -3.4% |     3763.2–6712.6 |    4156.7–5678.8 |
+| Toy                 | Setting | Measured candidate | Samples per phase |    Bytes before → after | Requests before → after | First-frame median before → after (ms) | Change | Before range (ms) | After range (ms) |
+| ------------------- | ------- | ------------------ | ----------------: | ----------------------: | ----------------------: | -------------------------------------: | -----: | ----------------: | ---------------: |
+| your-book           | phone   | b222e93a           |                 5 | 15,002,450 → 13,064,878 |                 97 → 96 |                        3702.2 → 3101.4 | -16.2% |     2182.7–5009.0 |    2358.4–5116.9 |
+| video-3d            | phone   | b222e93a           |                 5 |   6,495,007 → 6,545,887 |               107 → 110 |                        3005.3 → 4258.8 |  41.7% |     2743.8–4109.4 |    3066.7–7563.6 |
+| splat-toolkit       | phone   | b222e93a           |                 5 | 11,541,043 → 11,537,771 |               106 → 105 |                        9173.9 → 9508.9 |   3.7% |    7881.3–19557.2 |   7666.5–15093.9 |
+| living-city         | phone   | b222e93a           |                 5 | 10,579,904 → 10,576,632 |                 95 → 94 |                        4274.6 → 3165.9 | -25.9% |     2718.3–6534.8 |    3025.7–8656.0 |
+| powers-of-ten       | phone   | b222e93a           |                 5 |   7,836,208 → 8,609,569 |                 99 → 98 |                        3812.5 → 2195.5 | -42.4% |    1929.1–16410.5 |    1500.2–2909.4 |
+| point-clouds        | phone   | b222e93a           |                 5 |   9,113,842 → 9,110,570 |               106 → 105 |                        7335.5 → 4999.0 | -31.9% |    3692.1–13448.7 |   3484.0–10802.8 |
+| celestial-globe     | phone   | b222e93a           |                 5 |   9,196,086 → 6,799,127 |                 92 → 91 |                        2232.6 → 2059.7 |  -7.7% |     2180.5–4250.3 |    1742.2–6391.6 |
+| stannern-meteorites | phone   | b222e93a           |                 5 |   9,174,970 → 7,210,861 |                 92 → 91 |                        2753.7 → 2673.4 |  -2.9% |     2005.2–8036.1 |   1964.4–15931.7 |
+| crochet-earth       | phone   | b222e93a           |                 5 |   9,157,088 → 9,153,816 |                 92 → 91 |                        3020.0 → 2501.5 | -17.2% |     2684.5–9289.4 |    2414.9–4522.3 |
+| seeded-loaf         | phone   | b222e93a           |                 5 |   9,134,851 → 9,131,579 |                 90 → 89 |                        4102.9 → 3024.4 | -26.3% |     2010.1–5324.2 |    2306.8–5558.9 |
+| dog-plush           | phone   | b222e93a           |                 5 |   9,110,272 → 9,107,000 |                 92 → 91 |                        4027.7 → 5057.3 |  25.6% |    3042.7–14157.1 |   4221.3–15515.9 |
+| alum-crystal        | phone   | b222e93a           |                 5 |   9,048,542 → 9,045,270 |                 92 → 91 |                        4330.8 → 3307.9 | -23.6% |     2147.7–4902.5 |   2310.0–18602.9 |
+| mushroom-photo      | phone   | b222e93a           |                 5 |   9,102,439 → 9,099,167 |                 92 → 91 |                        3046.4 → 2863.4 |  -6.0% |     2065.6–6587.6 |    2611.2–4535.4 |
+| moving-photo-3d     | phone   | b222e93a           |                 5 |   9,023,626 → 9,020,354 |               125 → 124 |                       8996.7 → 12190.1 |  35.5% |    8860.1–17548.4 |   7157.2–25126.0 |
+| turtle-souvenir     | phone   | b222e93a           |                 5 |   9,052,117 → 9,048,845 |                 92 → 91 |                        3748.3 → 3299.6 | -12.0% |     2250.7–7135.8 |    2322.4–6999.9 |
+| armillary-sphere    | phone   | b222e93a           |                 5 |   9,047,458 → 6,922,122 |                 92 → 91 |                        4176.8 → 3549.3 | -15.0% |    3921.2–11968.5 |    1959.5–5360.8 |
+| murex-shell         | phone   | b222e93a           |                 5 |   9,029,146 → 9,025,874 |                 92 → 91 |                        5932.0 → 4046.7 | -31.8% |     3441.6–6942.4 |    2469.4–5083.6 |
+| maple-tree          | phone   | b222e93a           |                 5 |   9,041,111 → 9,037,839 |                 92 → 91 |                        3603.0 → 5632.9 |  56.3% |    2425.9–15817.9 |    2440.9–7772.3 |
+| cave-lioness        | phone   | b222e93a           |                 5 |   8,995,571 → 8,964,646 |                 92 → 91 |                        4439.4 → 3917.6 | -11.8% |     2401.4–7540.6 |   2462.6–24569.3 |
+| toy-trex            | phone   | b222e93a           |                 5 |   8,994,785 → 8,991,513 |                 92 → 91 |                        3119.8 → 3476.7 |  11.4% |     2316.2–8667.3 |   3129.8–15320.2 |
+| pyrite-cubes        | phone   | b222e93a           |                 5 |   8,576,038 → 6,948,536 |                 92 → 91 |                        2823.8 → 2396.9 | -15.1% |     2203.4–4201.8 |    1987.2–2461.9 |
+| soda-can            | phone   | 30ed36e5           |                 5 |   8,878,102 → 8,918,262 |                 92 → 95 |                        2061.2 → 2157.2 |   4.7% |    1980.8–10299.2 |    2015.3–6782.0 |
+| sunglasses          | phone   | 30ed36e5           |                 5 |   8,895,766 → 8,892,431 |                 92 → 91 |                        2142.5 → 1995.4 |  -6.9% |     1499.6–6738.9 |    1802.7–3726.7 |
+| fountain-pen        | phone   | 30ed36e5           |                 5 |   8,879,504 → 8,876,169 |                 92 → 91 |                        2387.5 → 1870.3 | -21.7% |     1647.6–8794.9 |    1526.0–2845.8 |
+| pyrite-cubes        | desktop | b222e93a           |                 5 |   9,343,416 → 9,340,144 |               172 → 171 |                        4233.9 → 4558.0 |   7.7% |     3332.1–8306.5 |    2968.2–5774.9 |
+| soda-can            | desktop | b222e93a           |                 5 | 10,106,382 → 10,103,110 |               220 → 219 |                        4094.4 → 4406.1 |   7.6% |     2326.9–5274.3 |   2433.1–18560.7 |
+| sunglasses          | desktop | b222e93a           |                 5 |   9,866,324 → 9,863,052 |               220 → 219 |                        4108.6 → 4328.5 |   5.4% |     2588.5–4595.6 |   2746.5–13438.3 |
+| fountain-pen        | desktop | b222e93a           |                 5 |   9,844,492 → 9,841,220 |               220 → 219 |                        5231.2 → 4415.9 | -15.6% |    3779.5–18242.0 |    3022.8–5608.7 |
 
-All observations and device/profile metadata are in
-[current-results.json](load-time-2026-10/current-results.json). Higher medians remain visible; a
-smaller payload does not establish a faster opening.
+All observations and settings are in [current-results.json](load-time-2026-10/current-results.json).
+Bytes and request counts are means; first-frame times are medians with full ranges. A smaller
+payload alone does not prove a faster opening.
 
-## Causes and changes
+A separate fixed five-pair control opened the identical frozen main on the same HTTP origin in both
+phases for all 12 previously slower groups. It produced 8/12 higher medians, with group median
+changes from -24.7% to 62.6%. [same-main-control.json](load-time-2026-10/same-main-control.json)
+records all settings and ranges. This quantifies repeatability on this device; it is not pooled with
+candidate results and does not establish that any particular candidate increase is noise.
 
-The custom engine bootstrap added a full-body gzip decode, a Blob module, and an import-map gate
-before native evaluation. Its first revision also serialized app dependency discovery behind engine
-transfer. Restoring the original HTTP engine URL, module preload, and native app/embed entry removes
-that extra path for every toy. A held-engine browser test verifies app and player requests start
-before the engine response is released; the engine is requested once.
+## Eager fallback for every previously slower group
 
-GitHub Pages already gzips the
-[native engine](https://ryanjosephkamp.github.io/splashery/vendor/playcanvas/playcanvas.min.mjs): an
-actual public GET transferred 640,711 bytes, versus 634,277 bytes for our custom gzip (6,434 bytes
-difference). The decoded response exactly matches the vendored source. The earlier 26% combined
-saving used an uncompressed localhost server and is superseded; it was not a comparable public-wire
-saving. Native loading preserves the browser's ordinary module streaming, source URL, and cache
-behavior.
+The preceding implementation still awaited an opening-pack promise before renderer creation, decoded
+shared scenes again inside Player.init, started scan preparation before GPU initialization, loaded
+scan helpers dynamically, and inflated a Blob help module. The current change removes those paths
+globally. The app, Player, UI, and embed JavaScript entry files match the frozen main byte for byte;
+the original HTML engine preload and native app entry remain. The original eager museum-helper
+import is restored, and the scan decoder is back in its original module so it adds no runtime module
+request.
 
-The eight higher phone medians in round 2 were your-book, video-3d, splat-toolkit, powers-of-ten,
-dog-plush, moving-photo-3d, maple-tree, and cave-lioness. All used this custom engine startup. The
-final change retains the old native engine entry globally, including every named toy. This removes
-the shared extra loading path; it does not prove that each earlier multi-second difference had that
-single cause. No per-toy cause is inferred from a five-sample timing difference alone. The final
-table keeps any remaining higher medians visible.
+A new browser regression test holds compressed shared-scene decoding. Before the fix, renderer
+creation never starts within the unchanged test window; after the fix, it starts before the scene is
+released and the same shared toy then loads. Two further tests hold the unused PDF decompressor and
+edition metadata responses and verify that an ordinary opening can finish. Both PDF-only module
+dependencies are removed from ordinary startup. Red and green receipts, source hashes, the
+parser-based eager import comparison, and exact fallback coverage are recorded in
+[eager-fallback.json](load-time-2026-10/eager-fallback.json). These tests establish the removed
+startup dependencies; they do not assign each historical median difference to one cause.
 
-A separate native opening-pack module starts selected scan helper discovery alongside the app graph.
-A held-ui response test first failed when this module could start only through the app; starting it
-independently in HTML removes that serialization. App and embed await its shared promise before GPU
-initialization. GIF export keeps its import map. No compressed-engine mapping or source-preload
-promotion remains.
+The fallback covers all 12 groups named in the review:
 
-In the final phone observations, Sunglasses and Soda can still have higher first-frame medians
-despite earlier median scan-response completion.
-[startup-stages.json](load-time-2026-10/startup-stages.json) records the completed-response stages.
-A response finishing before GPU setup leaves that setup in the later interval; these traces do not
-time module evaluation or GPU work and do not establish the remaining cause. No further timing fix
-is claimed.
+- phone / video-3d: restored main's eager startup order and native help loading.
+- phone / living-city: restored main's eager startup order and native help loading.
+- phone / celestial-globe: restored main's eager startup order and native help loading.
+- phone / crochet-earth: restored main's eager startup order and native help loading.
+- phone / seeded-loaf: restored main's eager startup order and native help loading.
+- phone / moving-photo-3d: restored main's eager startup order and native help loading.
+- phone / turtle-souvenir: restored main's eager startup order and native help loading.
+- phone / maple-tree: restored main's eager startup order and native help loading.
+- phone / cave-lioness: restored main's eager startup order and native help loading.
+- phone / soda-can: restored main's eager startup order and native help loading.
+- phone / sunglasses: restored main's eager startup order and native help loading.
+- desktop / pyrite-cubes: restored main's eager startup order and native help loading.
 
-The latest main also changed the default manual to a content-addressed filename. The previous
-compressed loader matched only the legacy filename. The current and legacy documents now use exact
-gzip copies, overlapping PDF.js transfer and retaining every page, filename, notice, and original
-URL.
+Sunglasses, Soda can, and Fountain pen now use their unchanged original full scan files at every
+detail setting. The new full-file selection tests failed before this fallback and pass after. Their
+three phone groups use five fresh pairs on the final revision; none of the earlier prefix
+measurements is pooled into them. The disabled prefix files remain as generated artifacts with their
+original byte proofs; they are not requested at runtime. Water bottle and Baseball cap retain
+exact-record prefixes with original population counts; four museum scans also retain the exact
+full-scan Float64 smoothing means. Higher detail uses the original full scan. Geometry, rendered
+splat counts, precision, textures, controls, clocks, and cameras are unchanged. PDF gzip retains
+every decoded byte; GIF encoding code remains deferred until export.
 
-Museum helpers and scan transfers overlap. Selected scan helpers finish before GPU setup in app and
-embed. App shared-scene openings also start scan preparation before WebGL initialization; embed scan
-preparation retains its normal order after GPU setup. The native engine retains its module preload.
-Five Real Objects prefixes and the globe, armillary, Stannern, and Pyrite prefixes retain exact
-records, original population counts, and exact full-scan Float64 means where needed. Higher budgets
-still use full scans. No rendered count, camera, texture, color precision, or engine version was
-reduced.
+## Strawberry repeated comparison
 
-| Lossless source                              | Original bytes | Gzip bytes | Saving |
-| -------------------------------------------- | -------------: | ---------: | -----: |
-| src/toy-help.js                              |        344,750 |    115,853 |  66.4% |
-| manual/tinkerers-manual.pdf                  |      7,792,711 |  5,858,411 |  24.8% |
-| manual/tinkerers-manual-85d32b96193ea275.pdf |      7,792,711 |  5,858,411 |  24.8% |
+The original protected test from 613213cf was run ten times per source on the eager-startup revision
+b222e93a and frozen main, in alternating adjacent order, without changed controls, clocks,
+thresholds, waits, retries, or fixture observers. Main: 8/10 passed, 2/10 failed. Candidate: 9/10
+passed, 1/10 failed. Complete per-run statuses, failure messages, dates, source pins, and the
+original test hash are in [strawberry-repeat.json](load-time-2026-10/strawberry-repeat.json). Pilot
+or interrupted batches are excluded.
 
-Exact hashes and unchanged-byte checks:
-[compressed-opening.json](load-time-2026-10/compressed-opening.json). Scan hashes and inherited
-license records: [museum-prefixes.json](load-time-2026-10/museum-prefixes.json). Armillary and
-Stannern's live pages were opened on October 13, 2026. Pyrite's page returned 503 on October 14; its
-[live model API](https://api.sketchfab.com/v3/models/0b7c6e8e32144b72806ed31cb49b4145) confirmed CC0
-and Digital Atlas of Ancient Life. NC tags and in-app notices remain.
+In the separate current-test batch with the upstream readiness fix, the strawberry section passed
+10/10 on main and 10/10 on the candidate. Strawberry-section failures: 0 main, 0 candidate;
+unclassified outcomes: 0 main, 0 candidate. The full composite test, which continues through Lantern
+and Jelly blob, passed 8/10 on main (2 failures) and 10/10 on the candidate (0 failures). Every
+later failure and its source location remains recorded. Section completion is inferred only from a
+passed full test or a failure after that section. Distinct test hashes and complete ten-run receipts
+are retained; the two versions are not pooled, and differing observed rates are not proof of equal
+underlying rates.
+
+The retained failure traces show why this is sensitive to wall time: one original main return-frame
+screenshot took 26,841 ms, longer than the entire 15,000 ms poll. In the branch failure, the two
+return-frame screenshots took 4,029 and 6,027 ms. These are timings from the existing Playwright
+traces, with no added observer. The fixed test waits for camera and pulse readiness before entering
+that image poll; the animation clock and pixel thresholds are unchanged.
+
+Current main independently changed this smoke test to wait for its camera to settle and for its
+animation pulse to finish before comparing return frames. Those upstream changes arrived through an
+ordinary merge; this PR does not edit the protected test. The ten-per-source comparison deliberately
+uses the earlier, unchanged test, so the result does not come from relaxing that predicate.
+[Earlier observed failures](load-time-2026-10/superseded/round3-strawberry-timing.json) on both
+sources expired with the pulse still running (1.8667 and 1.9332 of its 2.2 simulation seconds). That
+observation explains why a 15-second wall-time poll can miss the end on a slow software renderer; it
+is historical evidence with its own source pins, not a new rate measurement.
 
 ## Visual and regression evidence
 
-50 existing GPU-finished comparisons remain in
-[image-diffs.json](load-time-2026-10/image-diffs.json): 49 are pixel-identical; the desktop book
-differs at eight pixels by at most one RGB level and is visually identical. All 23 recorded tap
-poses moved. These captures use the previous frozen sources recorded in each row; restoring native
-engine discovery does not change their scene buffers. The updated manual's decoded bytes are checked
-separately.
+50 prior GPU-finished comparisons remain in [image-diffs.json](load-time-2026-10/image-diffs.json):
+49 are pixel-identical; the desktop book differs at eight pixels by at most one RGB level. Every
+recorded tap pose moved. Their original capture source pins remain intact. The eager fallback
+changes discovery order; the final three scan fallbacks restore the original data files. The 13
+shared renderer, rig, camera, entry, and help files are unchanged from the repeated-test source and
+frozen main. The exact-buffer and decoded-byte tests verify the retained lossless data. Lossy
+point-budget alternatives remain unshipped in
+[lossy-options.json](load-time-2026-10/lossy-options.json).
 
-All openings now use the original HTTP engine. This is not a demonstrated strawberry fix: prior
-raw-path runs both passed and failed. An observer around the unchanged original protected test found
-latest main and candidate still running the effect when its wall-time predicate expired. Candidate
-had advanced 1.8667 of 2.2 simulation seconds, and main 1.9332 seconds; their pop controls remained
-0.1515 and 0.1213. Both observed executions used the original HTTP engine. The unchanged update
-clamps large frame deltas at 0.1 seconds; slow software frames can leave this simulation-time effect
-unfinished at the wall-time deadline. See
-[strawberry-timing.json](load-time-2026-10/strawberry-timing.json). The protected predicate,
-production clocks, and animation remain unchanged; current full-suite outcomes are recorded below.
+Required regression results: 190 passed, 0 failed, and 0 skipped. 0 spec processes returned a
+nonzero exit code.
 
-Current full-suite strawberry return-to-rest result: **passed** in the unchanged protected rig case
-on `d52fa21f0120e532f1e1a14beae48ea97df90db7`. Earlier native-path runs both passed and failed. This
-current outcome is reported separately from the preceding diagnostic failures; a pass does not
-establish a causal fix.
+Latest validation, all red tests by name, commands, source pins, and protected-file checks are in
+[verification.json](load-time-2026-10/verification.json). Required smoke, taps, kit, unit, Real
+Objects, and all load-time specs run on the final runtime source. The repeated Strawberry runs
+retain their actual earlier source pins; the only subsequent runtime change is the three scan
+selectors, and no rig, camera, renderer, or clock code changed. Historical validation is labeled by
+its actual source and is not counted as this run.
 
-The strawberry probe leaves production clocks, controls, and cameras running. It records control
-decay, simulation time, wall time, and paired rest/pop/settled images. Its raw captures stay outside
-Git. The current verification receipt states the original smoke results and main comparison; the
-protected smoke test was not edited.
+| Lossless PDF source                          | Original bytes | Gzip bytes | Saving |
+| -------------------------------------------- | -------------: | ---------: | -----: |
+| manual/tinkerers-manual.pdf                  |      7,792,711 |  5,858,411 |  24.8% |
+| manual/tinkerers-manual-85d32b96193ea275.pdf |      7,792,711 |  5,858,411 |  24.8% |
 
-Current validation on d52fa21f0120e532f1e1a14beae48ea97df90db7 (runtime byte-identical to measured
-2b5eaae37a07961de240a4b426a90c6a91060787): 183 passed, 1 failed, 0 skipped. Smoke (three sequential
-shards), kit, Real Objects, catalog, manual, scan-prefix, and smoothing browser checks repeat after
-the latest merge and global native-entry restoration. Taps, unit, and the pure Node load-time checks
-also repeat on this source; the final 17-case startup/compression run precedes the
-documentation-only merge and has byte-identical runtime and test files. The latest main 41b21e74 kit
-run has 9 passes and 1 failure; no deadline overrun was recorded in that run. The earlier main 6c
-kit run had 9 passes and one unchanged 600,000 ms catalog timeout; the protected QR recipe error
-reproduces on both sources. The native entry removes the custom engine path globally; the current
-original strawberry case passed, and no causal timing fix is claimed. Both latest main and the
-candidate failed the observed original test before the effect completed; prior original-test passes
-and failures remain source-pinned. Exact current failures are retained in the verification receipt.
+Hashes and unchanged-byte proofs are in
+[compressed-opening.json](load-time-2026-10/compressed-opening.json),
+[prefixes.json](load-time-2026-10/prefixes.json), and
+[museum-prefixes.json](load-time-2026-10/museum-prefixes.json). Asset licenses, notices, and NC tags
+remain unchanged. No new asset source was introduced by this review change.
 
-Measured main `226644fb2b4e70dbd02136caec8e0f57c9f7f662` is merged into the candidate, including its
-video-loading updates. Latest main `41b21e74e04ccca178b95ac02b4e5dc0e51b4b45` was then merged before
-validation; its only additional change is docs/STATUS.md. The repeated validation uses
-`d52fa21f0120e532f1e1a14beae48ea97df90db7`, with zero runtime/test/tool/asset differences from
-measured candidate `2b5eaae37a07961de240a4b426a90c6a91060787`. Earlier comparisons retain their
-actual source pins in the verification receipt.
+## Method and limits
 
-Details, commands, source pins, initial failures, and comparison results are retained in
-[verification.json](load-time-2026-10/verification.json).
+Phone: 390×844, DPR 3, touch/mobile, weak/low. Desktop: 1440×900, DPR 1, high. Chromium 151, WebGL2
+through Linux llvmpipe, three Mesa threads, four CPU quota, nice 10, display :99. Sound and
+adaptation are off; seed is 424242. This is one software-rendering device using phone and desktop
+settings, not a physical phone or the earlier Mac/Metal device. First frame is navigation through
+the first submitted postrender after the requested toy becomes ready.
 
-Final check receipts: Prettier, American English, whitespace, and the audit-budget test all exit 0.
-All 388 fully paginated protected paths have zero committed and working-tree intersections. Commands
-and results are in verification.json; the strict final audit size remains below 3,000,000 bytes.
+Payload counts completed HTTP bodies at a 1.5-second settling cutoff and excludes headers,
+unfinished responses, and blob/data URLs. Local plain-server bodies are not public transfer sizes.
+Historical public per-file GETs in
+[production-transport.json](load-time-2026-10/production-transport.json) showed that Pages already
+compresses native JavaScript; custom engine and help gzip loading have both been removed. The
+candidate data files have not been deployed, and their public transfer savings are unmeasured.
 
-## Method and reproduction
+Serve frozen main on 4174 and candidate on 4173. Run
+`node tools/load-time-paired.mjs --only=ID,ID --device=phone --samples=5 --out=DIR --frozen-main=COMMIT --candidate-source=COMMIT`.
+Run the four reviewed toys at both settings in a separate directory.
+`node tools/load-time-report.mjs --timing=DIR --payload=DIR --fallback=DIR` validates complete
+groups and source pins, then writes this single current table. Raw request traces, repeated-test
+JSON, and browser artifacts stay outside Git; the compact audit remains strictly below 3,000,000
+bytes.
 
-Phone: 390×844, DPR 3, touch/mobile, weak/low. Desktop: 1440×900, DPR 1, high. WebGL2, sound and
-adaptation off, seed 424242, preset camera, localhost, disabled HTTP cache, and blocked service
-workers. Raw method files record Chromium, renderer, process priority, thread count, and display.
-This Linux software-renderer session is not a physical-phone or task 06 Mac/Metal measurement. First
-frame means submitted postrender readiness; captures separately finish the GPU.
+Older numeric screens and verification receipts are superseded, with their source metadata retained.
+The original heavy set is retained for comparison; the full catalog has not been rescreened on
+current main. No frame-cadence or heap claim is made. Protected PLY assets remain unchanged, so the
+unused-column option is still deferred.
 
-Bytes and requests are means; timings are medians and full ranges. Opening bytes count completed
-bodies after a real 1.5-second delay, excluding headers, blob/data URLs, and incomplete responses.
-This local plain-server byte metric is not public transfer size. Actual public per-file headers and
-byte comparisons are retained in
-[production-transport.json](load-time-2026-10/production-transport.json). Pages already compresses
-[help](https://ryanjosephkamp.github.io/splashery/src/toy-help.js) to 118,347 bytes, so its local
-custom gzip is only 2,494 bytes smaller than the public encoded body; the
-[current PDF](https://ryanjosephkamp.github.io/splashery/manual/tinkerers-manual-85d32b96193ea275.pdf)
-is served uncompressed at 7,792,711 bytes, and its local 5,858,411-byte exact gzip is 1,934,300
-bytes smaller. The candidate gzip files have not been deployed, so their public transfer size is not
-measured. A public per-toy opening was not measured. The full catalog was not rescreened after the
-latest main merge; this current screen covers the original top-20 phone set and four reviewed toys
-at both settings. Frame cadence and a heap census were not repeated.
-
-Serve archived baseline main on port 4174 and the frozen candidate on 4173.
-`tools/load-time-paired.mjs --only=ID,ID --device=phone --samples=5 --out=DIR --frozen-main=COMMIT --candidate-source=COMMIT`
-runs the adjacent alternating pairs. Raw runs default outside the repository.
-`tools/load-time-report.mjs --timing=DIR --payload=DIR` validates complete groups and writes this
-single current table. `tools/load-time-compress.mjs`, `tools/load-time-prefixes.mjs`, and
-`tools/load-time-smoothing.mjs` regenerate the lossless files.
-
-## Superseded results and remaining limits
-
-All earlier catalog, paired, top-20, and mixed-session Sunglasses observations are **superseded**.
-Their compact records are archived under [superseded/](load-time-2026-10/superseded/); they are not
-current results and no historical numeric table is reproduced here. Earlier verification receipts
-remain labeled by source and date.
-
-Unused PLY-column removal remains deferred because PR #562's protected manifest pins the original
-file and its loading path. Already compressed SOG captures keep their drawn points and precision.
-Both combined and individual 25% targets are reported above. Restoring the native engine gives up
-the misleading local-only gzip win; the target is not claimed met when measured savings fall short.
-The audit stays below 3,000,000 bytes; raw request traces and bulk captures remain outside Git, and
-no added -diff attributes remain.
-
-Lossy point-budget options were not shipped. Their paired stills and diffs remain in
-[lossy-options.json](load-time-2026-10/lossy-options.json) for the owner.
-
-Rule check: the prior unpublished email metadata history rewrite conflicts with E1. Subsequent
-review changes are additive.
+Rule check: the prior unpublished email metadata history rewrite conflicts with E1. All subsequent
+review changes, including the current main merge, are additive.
