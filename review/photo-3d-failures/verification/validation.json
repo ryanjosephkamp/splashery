@@ -1,0 +1,43 @@
+{
+  "checkedUTC": "2026-10-15T08:09:04.134Z",
+  "complete": true,
+  "captureSource": "216c34dd05ed0482ec43a896590d94d22233e68a",
+  "methodSha256": "da9dd312972fb05de2e4507125d55ad534bf30f3b8af67f3c58edb06c097071c",
+  "profiles": 236,
+  "poses": 2124,
+  "originalInputFilesMatched": 118,
+  "sourcePhotosMatched": 118,
+  "uniqueSourcePhotoHashes": 118,
+  "artifactHashesMatched": 10620,
+  "nativePNGs": 8496,
+  "nativeCounts": {
+    "585x1266": 4248,
+    "1440x900": 4248
+  },
+  "kinds": {
+    "builtin": 76,
+    "truth": 12,
+    "additional": 30
+  },
+  "failedAttempts": 0,
+  "unresolvedProfileErrors": 0,
+  "externalRequests": 0,
+  "browserErrors": 0,
+  "validMemorySamples": 5185,
+  "invalidMemorySamples": 0,
+  "unsupportedInputProfileMetrics": {
+    "phone:depthAbsRel": 106,
+    "desktop:depthAbsRel": 106,
+    "desktop:fringes": 49,
+    "desktop:missing": 49,
+    "phone:fringes": 49,
+    "phone:missing": 49,
+    "phone:halos": 4,
+    "desktop:halos": 5,
+    "phone:streaks": 3,
+    "phone:textureLoss": 3,
+    "desktop:streaks": 10,
+    "desktop:textureLoss": 10
+  },
+  "numericSignature": "289e0ba262de45488bf350940f4dc5930efc5a0e71701171d0692d28a04a6c3a"
+}

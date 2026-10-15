@@ -1,0 +1,51 @@
+
+Running 1 test using 1 worker
+
+(node:677483) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:677483) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-p3df.spec.mjs:227:1 › slim review gallery uses its WebP map and labels resized evidence honestly (1.0m)
+
+
+  1) [chromium] › tests/cdx-p3df.spec.mjs:227:1 › slim review gallery uses its WebP map and labels resized evidence honestly
+
+    Error: expect(locator).toHaveAttribute(expected) failed
+
+    Locator:  locator('.images img').first()
+    Expected: "previews/source.webp"
+    Received: "inputs/source.jpg"
+    Timeout:  60000ms
+
+    Call log:
+      - Expect "toHaveAttribute" with timeout 60000ms
+      - waiting for locator('.images img').first()
+        63 × locator resolved to <img loading="lazy" alt="Fixture original" src="inputs/source.jpg"/>
+           - unexpected value "inputs/source.jpg"
+
+
+      248 |   ));
+      249 |   await page.goto("http://p3df.test/");
+    > 250 |   await expect(page.locator(".images img").first()).toHaveAttribute("src", "previews/source.webp");
+          |                                                     ^
+      251 |   await expect(page.locator("#method")).toContainText("lossy WebP");
+      252 |   await expect(page.locator("figcaption").nth(1)).toContainText("phone-size WebP");
+      253 |   await page.locator("#failure").selectOption("fringes");
+        at /workspace/splashery/tests/cdx-p3df.spec.mjs:250:53
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-p3df-slim-review-galle-1db64-s-resized-evidence-honestly-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-p3df-slim-review-galle-1db64-s-resized-evidence-honestly-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-p3df-slim-review-galle-1db64-s-resized-evidence-honestly-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-p3df-slim-review-galle-1db64-s-resized-evidence-honestly-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-p3df.spec.mjs:227:1 › slim review gallery uses its WebP map and labels resized evidence honestly

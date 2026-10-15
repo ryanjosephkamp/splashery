@@ -1,0 +1,55 @@
+
+Running 1 test using 1 worker
+
+(node:675353) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:675353) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-p3df.spec.mjs:193:1 › private output refuses checkout folders and symlink aliases outside .cache (21ms)
+
+
+  1) [chromium] › tests/cdx-p3df.spec.mjs:193:1 › private output refuses checkout folders and symlink aliases outside .cache
+
+    Error: expect(received).rejects.toThrow(expected)
+
+    Expected substring: "Output inside the checkout is allowed only under .cache/"
+    Received message:   "Profiles are phone and desktop."
+
+           97 |     profiles.some((p) => !PROFILES[p])
+           98 |   )
+        >  99 |     throw new Error("Profiles are phone and desktop.");
+              |           ^
+          100 |   const poses = options.poses || POSES,
+          101 |     source = fingerprint();
+          102 |   const { RECIPES } = await import("../src/packs/photo-3d.js");
+
+          at runAudit (file:/workspace/splashery/tools/p3d-failures.mjs:99:11)
+          at file:/workspace/splashery/tests/cdx-p3df.spec.mjs:204:20
+          at node_modules/playwright/lib/worker/workerMain.js:310:15
+          at node_modules/playwright/lib/worker/testInfo.js:305:17
+          at TimeoutManager.withRunnable (node_modules/playwright/lib/worker/timeoutManager.js:68:9)
+          at TestInfoImpl._runWithTimeout (node_modules/playwright/lib/worker/testInfo.js:303:34)
+          at node_modules/playwright/lib/worker/workerMain.js:308:22
+          at WorkerMain._runTest (node_modules/playwright/lib/worker/workerMain.js:283:5)
+          at WorkerMain.runTestGroup (node_modules/playwright/lib/worker/workerMain.js:198:11)
+          at process.<anonymous> (node_modules/playwright/lib/common/process.js:65:22)
+
+      202 |     // The invalid profile prevents the unfixed version from starting a browser or copying photos.
+      203 |     for (const out of blocked)
+    > 204 |       await expect(runAudit({ in: folder, out, profiles: "invalid" })).rejects.toThrow(
+          |                                                                                ^
+      205 |         "Output inside the checkout is allowed only under .cache/",
+      206 |       );
+      207 |     for (const out of [path.join(cache, "safe"), path.join(folder, "gallery")]) {
+        at /workspace/splashery/tests/cdx-p3df.spec.mjs:204:80
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-p3df-private-output-re-c127d-mlink-aliases-outside-cache-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-p3df-private-output-re-c127d-mlink-aliases-outside-cache-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-p3df.spec.mjs:193:1 › private output refuses checkout folders and symlink aliases outside .cache

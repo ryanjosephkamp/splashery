@@ -1,0 +1,7 @@
+{
+  "checkedUTC": "2026-10-15T08:26:16.297Z",
+  "files": 615,
+  "normalizedJsonHashesMatched": true,
+  "aggregateSha256": "6b4bd154c7c5f6e8eb878eda9a1f503b2a4a140a3a1873d965116c53a34184db",
+  "method": "SHA-256 of JSON.stringify(JSON.parse(file)); capture atlas, per-input records, raw model responses, source anchors, and depth diagnostics. Formatting whitespace only."
+}

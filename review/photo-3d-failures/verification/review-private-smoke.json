@@ -1,0 +1,15 @@
+{
+  "checkedUTC": "2026-10-15T14:43:25.536Z",
+  "fixture": "Existing public forest sample copied to a temporary private input folder; no owner photos used",
+  "sourceHash": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+  "codeHead": "19c8e1bf7f8844a88576a858e0a674d8072d82bd",
+  "actualBrowser": true,
+  "actualPrivateInputPath": true,
+  "outputOutsideCheckout": true,
+  "profiles": 1,
+  "views": 1,
+  "errors": [],
+  "externalRequests": [],
+  "gitStatusUnchanged": true,
+  "note": "A functional smoke, excluded from corpus scores and performance claims."
+}

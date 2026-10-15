@@ -1,0 +1,52 @@
+
+Running 7 tests using 1 worker
+
+(node:616509) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:616509) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/7] [chromium] › tests/cdx-p3df.spec.mjs:11:1 › reference-depth error holds out calibration pixels and detects reversed ordering
+[2/7] [chromium] › tests/cdx-p3df.spec.mjs:29:1 › T-junction warnings distinguish correct, reversed, flattened, and unsupported maps
+[3/7] [chromium] › tests/cdx-p3df.spec.mjs:64:1 › directional streak excess penalizes extrusion against textured nearby controls
+[4/7] [chromium] › tests/cdx-p3df.spec.mjs:90:1 › reveal coverage counts actual unfilled mask pixels, with foreground excluded
+[5/7] [chromium] › tests/cdx-p3df.spec.mjs:105:1 › thin profiles penalize blur and record vanished parts separately
+[6/7] [chromium] › tests/cdx-p3df.spec.mjs:145:1 › private inventory is local, narrow, and explicit about publication rights
+[7/7] [chromium] › tests/cdx-p3df.spec.mjs:165:1 › two real inputs render at the phone profile, score truth, and generate a safe offline gallery
+  1) [chromium] › tests/cdx-p3df.spec.mjs:165:1 › two real inputs render at the phone profile, score truth, and generate a safe offline gallery
+
+    Error: page.goto: net::ERR_BLOCKED_BY_ADMINISTRATOR at file:///tmp/p3df-browser-t0VpMx/index.html
+    Call log:
+      - navigating to "file:///tmp/p3df-browser-t0VpMx/index.html", waiting until "load"
+
+
+      189 |       if (/^https?:/.test(r.url())) network.push(r.url());
+      190 |     });
+    > 191 |     await page.goto(pathToFileURL(path.join(folder, "index.html")).href);
+          |                ^
+      192 |     await expect(page).toHaveTitle("Photo to 3D · Failure atlas");
+      193 |     await expect(page.locator("h1")).toHaveText("Where the picture breaks.");
+      194 |     await expect(page.locator("article")).toHaveCount(2);
+        at /workspace/splashery/tests/cdx-p3df.spec.mjs:191:16
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    .cache/p3d-failures/test-artifacts/cdx-p3df-two-real-inputs-r-e4af7-rate-a-safe-offline-gallery-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: .cache/p3d-failures/test-artifacts/cdx-p3df-two-real-inputs-r-e4af7-rate-a-safe-offline-gallery-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    .cache/p3d-failures/test-artifacts/cdx-p3df-two-real-inputs-r-e4af7-rate-a-safe-offline-gallery-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace .cache/p3d-failures/test-artifacts/cdx-p3df-two-real-inputs-r-e4af7-rate-a-safe-offline-gallery-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+  1 failed
+    [chromium] › tests/cdx-p3df.spec.mjs:165:1 › two real inputs render at the phone profile, score truth, and generate a safe offline gallery
+  6 passed (36.3s)

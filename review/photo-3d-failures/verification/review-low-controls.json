@@ -1,0 +1,262 @@
+{
+  "checkedUTC": "2026-10-15T14:36:20.658Z",
+  "reviewer": "Codex (GPT-6)",
+  "method": "Source, front, selected worst turn, and depth contact sheets at both profiles; individual native mushroom-desktop, lake-phone, and arch-phone crops inspected. Selection: the three lowest phone default priorities.",
+  "entries": [
+    {
+      "id": "new-12-201342968",
+      "label": "Mushroom cap among needles",
+      "observation": "Mushroom cap among needles: the cap and nearby needles remain recognizable, but the turned cap acquires a conspicuous dark, striped extension, especially on desktop yaw +30. Phone fill and halo scores are unsupported, so its last-place priority is not evidence of clean fill.",
+      "cleanControl": false,
+      "profiles": {
+        "phone": {
+          "priorityRank": 118,
+          "severity": 1.4215686274509802,
+          "values": {
+            "streaks": null,
+            "textureLoss": null,
+            "holes": 0,
+            "halos": null,
+            "fringes": 0.7471006162665242,
+            "missing": 0.07692307692307693,
+            "depth": 0.28431372549019607,
+            "depthAbsRel": null,
+            "speed": 4949.29999999702,
+            "memory": 1303433216
+          },
+          "worstPose": [-20, 0],
+          "sourceReview": "previews/new-12-201342968-source.webp",
+          "frontReview": "renders/new-12-201342968-phone-front-crop.webp",
+          "turnReview": "renders/new-12-201342968-phone-worst-crop.webp",
+          "depthReview": "renders/new-12-201342968-phone-depth.webp"
+        },
+        "desktop": {
+          "priorityRank": 110,
+          "severity": 2.3600306779204048,
+          "values": {
+            "streaks": null,
+            "textureLoss": null,
+            "holes": 0,
+            "halos": null,
+            "fringes": 1.7700230084403037,
+            "missing": 0.08823529411764706,
+            "depth": 0.23232323232323232,
+            "depthAbsRel": null,
+            "speed": 4454.399999991059,
+            "memory": 1451660288
+          },
+          "worstPose": [30, 0],
+          "sourceReview": "previews/new-12-201342968-source.webp",
+          "frontReview": "renders/new-12-201342968-desktop-front-crop.webp",
+          "turnReview": "renders/new-12-201342968-desktop-worst-crop.webp",
+          "depthReview": "renders/new-12-201342968-desktop-depth.webp"
+        }
+      },
+      "inspectedCaptureHashes": [
+        {
+          "file": "inputs/new-12-201342968.jpg",
+          "sha256": "d3951057469a00f164b32a1d63fb2310915fea2b5e01efa3d93e38dd2b70ac5d"
+        },
+        {
+          "file": "renders/new-12-201342968-phone-front-crop.png",
+          "sha256": "816a0bc633e4e5858a5990240d1fdc129c0dd39e6e4bea715a11b3b000555f45"
+        },
+        {
+          "file": "renders/new-12-201342968-phone-worst-crop.png",
+          "sha256": "1353cdaed13996c83491d47fcee647cee52e79ba9acf83fec67d6a83bd3e3044"
+        },
+        {
+          "file": "renders/new-12-201342968-phone-depth.png",
+          "sha256": "c06f14ba43741efced78aecb65203790ce6538b808d8eb2683fbe711867c427b"
+        },
+        {
+          "file": "renders/new-12-201342968-desktop-front-crop.png",
+          "sha256": "fd74c82dfa662303d0f1e60556b976d5300c7ffbb57338a14e2fb49f0694ba4c"
+        },
+        {
+          "file": "renders/new-12-201342968-desktop-worst-crop.png",
+          "sha256": "0ac7e077bd3b7147c9e9845ac955e91d73d134c7415944d2a3eca54f5433be4d"
+        },
+        {
+          "file": "renders/new-12-201342968-desktop-depth.png",
+          "sha256": "f58cefa51f45c48a77a47bfdac22b723215880aebd3d46cbbe11ba5975cce763"
+        }
+      ]
+    },
+    {
+      "id": "dot-alpine-lake",
+      "label": "Alpine lake (AI-made)",
+      "observation": "Alpine lake (AI-made): the phone yaw -20 landscape remains coherent at review size. Desktop pitch +30 shows long foreground color ribbons under rocks and plants. Thin-part support is absent; a low phone priority is not a clean result for both profiles.",
+      "cleanControl": false,
+      "profiles": {
+        "phone": {
+          "priorityRank": 117,
+          "severity": 1.6979497875250453,
+          "values": {
+            "streaks": 0.2546924681287568,
+            "textureLoss": 0.4326113298071529,
+            "holes": 0,
+            "halos": 0.06751323877662713,
+            "fringes": null,
+            "missing": null,
+            "depth": 0.1263537906137184,
+            "depthAbsRel": null,
+            "speed": 1878.5999999940395,
+            "memory": 843275264
+          },
+          "worstPose": [-20, 0],
+          "sourceReview": "previews/dot-alpine-lake-source.webp",
+          "frontReview": "renders/dot-alpine-lake-phone-front-crop.webp",
+          "turnReview": "renders/dot-alpine-lake-phone-worst-crop.webp",
+          "depthReview": "renders/dot-alpine-lake-phone-depth.webp"
+        },
+        "desktop": {
+          "priorityRank": 91,
+          "severity": 2.840151610113711,
+          "values": {
+            "streaks": 0.3399091522173985,
+            "textureLoss": 0,
+            "holes": 0,
+            "halos": 0.11360606440454846,
+            "fringes": null,
+            "missing": null,
+            "depth": 0.10588235294117647,
+            "depthAbsRel": null,
+            "speed": 2577.5,
+            "memory": 1078159360
+          },
+          "worstPose": [0, 30],
+          "sourceReview": "previews/dot-alpine-lake-source.webp",
+          "frontReview": "renders/dot-alpine-lake-desktop-front-crop.webp",
+          "turnReview": "renders/dot-alpine-lake-desktop-worst-crop.webp",
+          "depthReview": "renders/dot-alpine-lake-desktop-depth.webp"
+        }
+      },
+      "inspectedCaptureHashes": [
+        {
+          "file": "inputs/dot-alpine-lake.jpg",
+          "sha256": "92f52289f7e3acee7cd0cdc50d106bcec524830e5b3c79ef2c9cb370cf775a7c"
+        },
+        {
+          "file": "renders/dot-alpine-lake-phone-front-crop.png",
+          "sha256": "d5b2290cb041e3f48f7d5478505a02cb9241057f77d9a6ae65a339d8c1f773d9"
+        },
+        {
+          "file": "renders/dot-alpine-lake-phone-worst-crop.png",
+          "sha256": "de1bdac66376e84f5208d163e1c4096758b15f5472a4cb8f89cd53565a31c757"
+        },
+        {
+          "file": "renders/dot-alpine-lake-phone-depth.png",
+          "sha256": "47eff955fa29f750ea000de1ed851547813514e514c9d4325b6be58b6923792a"
+        },
+        {
+          "file": "renders/dot-alpine-lake-desktop-front-crop.png",
+          "sha256": "d79da145643dd593a0b00dc4bb2ea811d789e1b390dd0966658b897a64511dc2"
+        },
+        {
+          "file": "renders/dot-alpine-lake-desktop-worst-crop.png",
+          "sha256": "79815409844c0a0e3e502da68c0bf9bf628a1de591ad36164e8cd10311538a31"
+        },
+        {
+          "file": "renders/dot-alpine-lake-desktop-depth.png",
+          "sha256": "cf86c47c78200f7c090aac707365e5cd06ea84f2a3b4a5962d5e4df5176b6f91"
+        }
+      ]
+    },
+    {
+      "id": "dot-arch",
+      "label": "Stone arch (AI-made)",
+      "observation": "Stone arch (AI-made): the opening remains recognizable, but phone yaw -30 has stepped inner-arch and outer-rock edges and stretched foreground details. The depth map has no physical reference. This is a relatively mild control, not a certified negative.",
+      "cleanControl": false,
+      "profiles": {
+        "phone": {
+          "priorityRank": 116,
+          "severity": 1.8634092962966253,
+          "values": {
+            "streaks": 0.2795113944444938,
+            "textureLoss": 0.7387188856361258,
+            "holes": 0,
+            "halos": 0.06288724909085806,
+            "fringes": null,
+            "missing": null,
+            "depth": 0.2543352601156069,
+            "depthAbsRel": null,
+            "speed": 2184.1000000089407,
+            "memory": 800331776
+          },
+          "worstPose": [-30, 0],
+          "sourceReview": "previews/dot-arch-source.webp",
+          "frontReview": "renders/dot-arch-phone-front-crop.webp",
+          "turnReview": "renders/dot-arch-phone-worst-crop.webp",
+          "depthReview": "renders/dot-arch-phone-depth.webp"
+        },
+        "desktop": {
+          "priorityRank": 114,
+          "severity": 2.150950709864094,
+          "values": {
+            "streaks": 0.32264260647961407,
+            "textureLoss": 0.636431664035465,
+            "holes": 0,
+            "halos": 0.0543010372678373,
+            "fringes": null,
+            "missing": null,
+            "depth": 0.189873417721519,
+            "depthAbsRel": null,
+            "speed": 2843.7999999970198,
+            "memory": 1058780160
+          },
+          "worstPose": [0, -20],
+          "sourceReview": "previews/dot-arch-source.webp",
+          "frontReview": "renders/dot-arch-desktop-front-crop.webp",
+          "turnReview": "renders/dot-arch-desktop-worst-crop.webp",
+          "depthReview": "renders/dot-arch-desktop-depth.webp"
+        }
+      },
+      "inspectedCaptureHashes": [
+        {
+          "file": "inputs/dot-arch.jpg",
+          "sha256": "c50d1b4f5e0a918f099f84ade78d83f83b514be18f406b8b9f538ef78abd7c5e"
+        },
+        {
+          "file": "renders/dot-arch-phone-front-crop.png",
+          "sha256": "5757b9ee89e60a26a1478a278df50791c0cbfdca73caf9380923d113f5ad8c24"
+        },
+        {
+          "file": "renders/dot-arch-phone-worst-crop.png",
+          "sha256": "caddfde515e9aa99ae0c129b213abbe3a351b3beb01cb6309be93d9a518f373a"
+        },
+        {
+          "file": "renders/dot-arch-phone-depth.png",
+          "sha256": "b819e31f27cc382da814cd723aa306c37764a3505e98f46bf8aeb79e36ab8e91"
+        },
+        {
+          "file": "renders/dot-arch-desktop-front-crop.png",
+          "sha256": "79f51141210627902349137c08ed3a00af2753c0c4fd0e5bfd8a72afe2771624"
+        },
+        {
+          "file": "renders/dot-arch-desktop-worst-crop.png",
+          "sha256": "dcbd63b3de0e776b108c4911002b1f1256161ffca1a8f85aa895e8428d736ed0"
+        },
+        {
+          "file": "renders/dot-arch-desktop-depth.png",
+          "sha256": "f28e053b764188bdee0375eab6044e0f56ce87e47e13bb96cdc2fc7d8dbb9d33"
+        }
+      ]
+    }
+  ],
+  "dominance": {
+    "phone": {
+      "streaks": 39,
+      "missing": 14,
+      "halos": 64,
+      "depth": 1
+    },
+    "desktop": {
+      "streaks": 39,
+      "halos": 62,
+      "missing": 9,
+      "fringes": 8
+    }
+  },
+  "limit": "Three selected controls, none certified clean. This is not an annotated negative set or a false-positive-rate estimate."
+}

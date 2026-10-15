@@ -1,0 +1,1297 @@
+{
+  "captureSource": "216c34dd05ed0482ec43a896590d94d22233e68a",
+  "notes": [
+    {
+      "id": "forest",
+      "profile": "phone",
+      "source": "216c34dd",
+      "observations": [
+        "The source has separate fine leaves and needles; the front and turned captures show clipped, thickened foreground foliage at the right and lower edges.",
+        "The turned view has repeated edge-colored bands around foreground boundaries."
+      ],
+      "limit": "The forest has only five thin anchors and one color-edge profile at this profile; it is an illustration, not exhaustive foliage coverage.",
+      "captureReferences": {
+        "source": "inputs/forest.jpg",
+        "depth": "renders/forest-phone-depth.png",
+        "record": "records/forest.json",
+        "nativeRender": "renders/forest-phone--30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/forest.jpg",
+        "depth": "renders/forest-phone-depth.webp",
+        "record": "records/forest.json.gz",
+        "render": "renders/forest-phone--30-0.webp"
+      }
+    },
+    {
+      "id": "still-life",
+      "profile": "phone",
+      "source": "216c34dd",
+      "observations": [
+        "The bowl creates a broad vertical ribbon pattern beneath the rim in the worst turned capture.",
+        "The source is a painting, explicitly retained as an existing sample."
+      ],
+      "captureReferences": {
+        "source": "inputs/still-life.jpg",
+        "depth": "renders/still-life-phone-depth.png",
+        "record": "records/still-life.json",
+        "nativeRender": "renders/still-life-phone-0-30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/still-life.jpg",
+        "depth": "renders/still-life-phone-depth.webp",
+        "record": "records/still-life.json.gz",
+        "render": "renders/still-life-phone-0-30.webp"
+      }
+    },
+    {
+      "id": "palace-stairs",
+      "profile": "phone",
+      "source": "216c34dd",
+      "observations": [
+        "The staircase/railing region produces light rectangular bands and edge displacement on the left turn."
+      ],
+      "coverageCheck": {
+        "footprintPixels": 74081,
+        "uncoveredPixels": 0
+      },
+      "captureReferences": {
+        "source": "inputs/palace-stairs.jpg",
+        "depth": "renders/palace-stairs-phone-depth.png",
+        "record": "records/palace-stairs.json",
+        "nativeRender": "renders/palace-stairs-phone--20-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/palace-stairs.jpg",
+        "depth": "renders/palace-stairs-phone-depth.webp",
+        "record": "records/palace-stairs.json.gz",
+        "render": "renders/palace-stairs-phone--20-0.webp"
+      }
+    },
+    {
+      "id": "spiral-stairs",
+      "profile": "desktop",
+      "source": "216c34dd",
+      "observations": [
+        "The left side of the spiral has broad flat fill bands, including dark horizontal stripe echoes, while the original repeats fine stair and rail texture."
+      ],
+      "coverageCheck": {
+        "footprintPixels": 185091,
+        "uncoveredPixels": 0
+      },
+      "captureReferences": {
+        "source": "inputs/spiral-stairs.jpg",
+        "depth": "renders/spiral-stairs-desktop-depth.png",
+        "record": "records/spiral-stairs.json",
+        "nativeRender": "renders/spiral-stairs-desktop-20-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/spiral-stairs.jpg",
+        "depth": "renders/spiral-stairs-desktop-depth.webp",
+        "record": "records/spiral-stairs.json.gz",
+        "render": "renders/spiral-stairs-desktop-20-0.webp"
+      }
+    },
+    {
+      "id": "dot-oasis",
+      "profile": "desktop",
+      "metric": "fringes",
+      "pose": [0, -30],
+      "value": 2.1973875140086827,
+      "native": "renders/dot-oasis-desktop-0--30.png",
+      "observations": [
+        "The thin palm crowns look thicker and less separate after the turn; the source retains fine separate leaf lines. The source has intentional depth-of-field blur in other regions, which is not counted as a new defect."
+      ],
+      "support": {
+        "fringe": {
+          "evaluated": 35,
+          "missing": 0,
+          "fringeMean": 0.8178459297399229,
+          "fringeP95": 2.1973875140086827,
+          "fringeMax": 2.3044722882530513,
+          "widthErrorMean": 0.8129966006909657,
+          "units": "CSS pixels per thin edge",
+          "correctedBackgrounds": 24,
+          "backgroundUncertain": 11
+        },
+        "edgeProfiles": 41
+      },
+      "captureReferences": {
+        "source": "inputs/dot-oasis.jpg",
+        "depth": "renders/dot-oasis-desktop-depth.png",
+        "record": "records/dot-oasis.json",
+        "nativeRender": "renders/dot-oasis-desktop-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-oasis.jpg",
+        "depth": "renders/dot-oasis-desktop-depth.webp",
+        "record": "records/dot-oasis.json.gz",
+        "render": "renders/dot-oasis-desktop-0--30.webp"
+      }
+    },
+    {
+      "id": "dot-treehouses",
+      "profile": "desktop",
+      "metric": "fringes",
+      "pose": [0, -20],
+      "value": 1.769169469875239,
+      "native": "renders/dot-treehouses-desktop-0--20.png",
+      "observations": [
+        "Fine bridge/leaf edges thicken or become discontinuous on the turn. The saved relative-depth map also merges many fine features into broader masses."
+      ],
+      "support": {
+        "fringe": {
+          "evaluated": 15,
+          "missing": 3,
+          "fringeMean": 1.0195204870442458,
+          "fringeP95": 1.769169469875239,
+          "fringeMax": 1.7953735855901523,
+          "widthErrorMean": 1.1469730839652723,
+          "units": "CSS pixels per thin edge",
+          "correctedBackgrounds": 5,
+          "backgroundUncertain": 10
+        },
+        "edgeProfiles": 1
+      },
+      "captureReferences": {
+        "source": "inputs/dot-treehouses.jpg",
+        "depth": "renders/dot-treehouses-desktop-depth.png",
+        "record": "records/dot-treehouses.json",
+        "nativeRender": "renders/dot-treehouses-desktop-0--20.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-treehouses.jpg",
+        "depth": "renders/dot-treehouses-desktop-depth.webp",
+        "record": "records/dot-treehouses.json.gz",
+        "render": "renders/dot-treehouses-desktop-0--20.webp"
+      }
+    },
+    {
+      "id": "dot-library",
+      "profile": "phone",
+      "metric": "halos",
+      "pose": [0, -30],
+      "value": 0.1848049575857746,
+      "native": "renders/dot-library-phone-0--30.png",
+      "observations": [
+        "The turned desk/bookcase boundaries show broad edge-colored bands and displaced contours. The normalized profile error combines color contamination and misregistration."
+      ],
+      "support": {
+        "fringe": {
+          "evaluated": 0,
+          "missing": 0,
+          "fringeMean": null,
+          "fringeP95": null,
+          "fringeMax": null,
+          "widthErrorMean": null,
+          "units": "CSS pixels per thin edge",
+          "correctedBackgrounds": 0,
+          "backgroundUncertain": 0
+        },
+        "edgeProfiles": 144
+      },
+      "captureReferences": {
+        "source": "inputs/dot-library.jpg",
+        "depth": "renders/dot-library-phone-depth.png",
+        "record": "records/dot-library.json",
+        "nativeRender": "renders/dot-library-phone-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-library.jpg",
+        "depth": "renders/dot-library-phone-depth.webp",
+        "record": "records/dot-library.json.gz",
+        "render": "renders/dot-library-phone-0--30.webp"
+      }
+    },
+    {
+      "id": "forest",
+      "label": "Forest path",
+      "metric": "streaks",
+      "profile": "phone",
+      "value": 0.5743608711366746,
+      "pose": [-30, 0],
+      "photo": "inputs/forest.jpg",
+      "depth": "renders/forest-phone-depth.png",
+      "render": "renders/forest-phone--30-0.png",
+      "front": "renders/forest-phone-0-0.png",
+      "preview": "renders/forest-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Separate source foliage becomes repeated edge-colored strips on the yaw -30 view; only five thin anchors and one broad-edge profile, so this is not exhaustive foliage evidence."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/forest.jpg",
+        "depth": "renders/forest-phone-depth.png",
+        "record": "records/forest.json",
+        "nativeRender": "renders/forest-phone--30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/forest.jpg",
+        "depth": "renders/forest-phone-depth.webp",
+        "record": "records/forest.json.gz",
+        "render": "renders/forest-phone--30-0.webp"
+      }
+    },
+    {
+      "id": "still-life",
+      "label": "Still life",
+      "metric": "streaks",
+      "profile": "desktop",
+      "value": 0.618954252485435,
+      "pose": [-20, 0],
+      "photo": "inputs/still-life.jpg",
+      "depth": "renders/still-life-desktop-depth.png",
+      "render": "renders/still-life-desktop--20-0.png",
+      "front": "renders/still-life-desktop-0-0.png",
+      "preview": "renders/still-life-desktop-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "The painting bowl rim leaves repeated vertical bands underneath the bowl. Source is a painting, not a photograph."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/still-life.jpg",
+        "depth": "renders/still-life-desktop-depth.png",
+        "record": "records/still-life.json",
+        "nativeRender": "renders/still-life-desktop--20-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/still-life.jpg",
+        "depth": "renders/still-life-desktop-depth.webp",
+        "record": "records/still-life.json.gz",
+        "render": "renders/still-life-desktop--20-0.webp"
+      }
+    },
+    {
+      "id": "dot-canyon",
+      "label": "Canyon at sunset (AI-made)",
+      "metric": "streaks",
+      "profile": "desktop",
+      "value": 0.6524817052438394,
+      "pose": [-20, 0],
+      "photo": "inputs/dot-canyon.jpg",
+      "depth": "renders/dot-canyon-desktop-depth.png",
+      "render": "renders/dot-canyon-desktop--20-0.png",
+      "front": "renders/dot-canyon-desktop-0-0.png",
+      "preview": "renders/dot-canyon-desktop-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Behind the foreground tree/canyon cuts, elongated background-colored bands replace fine cliff texture."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-canyon.jpg",
+        "depth": "renders/dot-canyon-desktop-depth.png",
+        "record": "records/dot-canyon.json",
+        "nativeRender": "renders/dot-canyon-desktop--20-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-canyon.jpg",
+        "depth": "renders/dot-canyon-desktop-depth.webp",
+        "record": "records/dot-canyon.json.gz",
+        "render": "renders/dot-canyon-desktop--20-0.webp"
+      }
+    },
+    {
+      "id": "palace-stairs",
+      "label": "Palace staircase",
+      "metric": "textureLoss",
+      "profile": "phone",
+      "value": 0.99993904076991,
+      "pose": [0, -20],
+      "photo": "inputs/palace-stairs.jpg",
+      "depth": "renders/palace-stairs-phone-depth.png",
+      "render": "renders/palace-stairs-phone-0--20.png",
+      "front": "renders/palace-stairs-phone-0-0.png",
+      "preview": "renders/palace-stairs-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Wide light/dark rectangular fill bands break the stair/rail background texture; full-footprint check found coverage, not empty pixels."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/palace-stairs.jpg",
+        "depth": "renders/palace-stairs-phone-depth.png",
+        "record": "records/palace-stairs.json",
+        "nativeRender": "renders/palace-stairs-phone-0--20.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/palace-stairs.jpg",
+        "depth": "renders/palace-stairs-phone-depth.webp",
+        "record": "records/palace-stairs.json.gz",
+        "render": "renders/palace-stairs-phone-0--20.webp"
+      }
+    },
+    {
+      "id": "dot-library",
+      "label": "Long library (AI-made)",
+      "metric": "halos",
+      "profile": "phone",
+      "value": 0.1848049575857746,
+      "pose": [0, -30],
+      "photo": "inputs/dot-library.jpg",
+      "depth": "renders/dot-library-phone-depth.png",
+      "render": "renders/dot-library-phone-0--30.png",
+      "front": "renders/dot-library-phone-0-0.png",
+      "preview": "renders/dot-library-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Table/chair boundaries shift into stepped brown bands and pale floor-colored outlines; the error combines silhouette displacement and fill."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-library.jpg",
+        "depth": "renders/dot-library-phone-depth.png",
+        "record": "records/dot-library.json",
+        "nativeRender": "renders/dot-library-phone-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-library.jpg",
+        "depth": "renders/dot-library-phone-depth.webp",
+        "record": "records/dot-library.json.gz",
+        "render": "renders/dot-library-phone-0--30.webp"
+      }
+    },
+    {
+      "id": "dot-dragonfly",
+      "label": "Dragonfly (AI-made)",
+      "metric": "halos",
+      "profile": "phone",
+      "value": 0.23799247846254876,
+      "pose": [-30, 0],
+      "photo": "inputs/dot-dragonfly.jpg",
+      "depth": "renders/dot-dragonfly-phone-depth.png",
+      "render": "renders/dot-dragonfly-phone--30-0.png",
+      "front": "renders/dot-dragonfly-phone-0-0.png",
+      "preview": "renders/dot-dragonfly-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "The turned wing, abdomen, and twig boundaries show broad color extensions and repeated strips into the blurred background."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-dragonfly.jpg",
+        "depth": "renders/dot-dragonfly-phone-depth.png",
+        "record": "records/dot-dragonfly.json",
+        "nativeRender": "renders/dot-dragonfly-phone--30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-dragonfly.jpg",
+        "depth": "renders/dot-dragonfly-phone-depth.webp",
+        "record": "records/dot-dragonfly.json.gz",
+        "render": "renders/dot-dragonfly-phone--30-0.webp"
+      }
+    },
+    {
+      "id": "dot-greenhouse",
+      "label": "Greenhouse (AI-made)",
+      "metric": "halos",
+      "profile": "desktop",
+      "value": 0.19849531162867864,
+      "pose": [0, -30],
+      "photo": "inputs/dot-greenhouse.jpg",
+      "depth": "renders/dot-greenhouse-desktop-depth.png",
+      "render": "renders/dot-greenhouse-desktop-0--30.png",
+      "front": "renders/dot-greenhouse-desktop-0-0.png",
+      "preview": "renders/dot-greenhouse-desktop-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "The nearest bench/fern boundaries leave broad strips and shifted silhouettes; the source has dense structure that the inferred field merges."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-greenhouse.jpg",
+        "depth": "renders/dot-greenhouse-desktop-depth.png",
+        "record": "records/dot-greenhouse.json",
+        "nativeRender": "renders/dot-greenhouse-desktop-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-greenhouse.jpg",
+        "depth": "renders/dot-greenhouse-desktop-depth.webp",
+        "record": "records/dot-greenhouse.json.gz",
+        "render": "renders/dot-greenhouse-desktop-0--30.webp"
+      }
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "label": "Plant studio (AI-made)",
+      "metric": "fringes",
+      "profile": "desktop",
+      "value": 2.2447760908297867,
+      "pose": [0, -20],
+      "photo": "inputs/dot-cdx-plant-studio.jpg",
+      "depth": "renders/dot-cdx-plant-studio-desktop-depth.png",
+      "render": "renders/dot-cdx-plant-studio-desktop-0--20.png",
+      "front": "renders/dot-cdx-plant-studio-desktop-0-0.png",
+      "preview": "renders/dot-cdx-plant-studio-desktop-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Thin stems/leaf edges become thicker, stepped, or discontinuous; the foreground leaf tips have poor separation on the pitch -20 turn."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-cdx-plant-studio.jpg",
+        "depth": "renders/dot-cdx-plant-studio-desktop-depth.png",
+        "record": "records/dot-cdx-plant-studio.json",
+        "nativeRender": "renders/dot-cdx-plant-studio-desktop-0--20.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-cdx-plant-studio.jpg",
+        "depth": "renders/dot-cdx-plant-studio-desktop-depth.webp",
+        "record": "records/dot-cdx-plant-studio.json.gz",
+        "render": "renders/dot-cdx-plant-studio-desktop-0--20.webp"
+      }
+    },
+    {
+      "id": "dot-oasis",
+      "label": "Desert oasis (AI-made)",
+      "metric": "fringes",
+      "profile": "desktop",
+      "value": 2.1973875140086827,
+      "pose": [0, -30],
+      "photo": "inputs/dot-oasis.jpg",
+      "depth": "renders/dot-oasis-desktop-depth.png",
+      "render": "renders/dot-oasis-desktop-0--30.png",
+      "front": "renders/dot-oasis-desktop-0-0.png",
+      "preview": "renders/dot-oasis-desktop-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Fine palm leaves lose separation on the pitch -30 turn. Original foreground depth-of-field blur is intentional and should not count as new loss."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-oasis.jpg",
+        "depth": "renders/dot-oasis-desktop-depth.png",
+        "record": "records/dot-oasis.json",
+        "nativeRender": "renders/dot-oasis-desktop-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-oasis.jpg",
+        "depth": "renders/dot-oasis-desktop-depth.webp",
+        "record": "records/dot-oasis.json.gz",
+        "render": "renders/dot-oasis-desktop-0--30.webp"
+      }
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "label": "Cliff terrace (AI-made)",
+      "metric": "fringes",
+      "profile": "desktop",
+      "value": 2.437301865693062,
+      "pose": [0, -30],
+      "photo": "inputs/dot-cdx-cliff-terrace.jpg",
+      "depth": "renders/dot-cdx-cliff-terrace-desktop-depth.png",
+      "render": "renders/dot-cdx-cliff-terrace-desktop-0--30.png",
+      "front": "renders/dot-cdx-cliff-terrace-desktop-0-0.png",
+      "preview": "renders/dot-cdx-cliff-terrace-desktop-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Fine plants beside the stairs lose separation at the -30 pitch. Only seven thin probes, requiring cautious interpretation."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-cdx-cliff-terrace.jpg",
+        "depth": "renders/dot-cdx-cliff-terrace-desktop-depth.png",
+        "record": "records/dot-cdx-cliff-terrace.json",
+        "nativeRender": "renders/dot-cdx-cliff-terrace-desktop-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-cdx-cliff-terrace.jpg",
+        "depth": "renders/dot-cdx-cliff-terrace-desktop-depth.webp",
+        "record": "records/dot-cdx-cliff-terrace.json.gz",
+        "render": "renders/dot-cdx-cliff-terrace-desktop-0--30.webp"
+      }
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "label": "Arched room (AI-made)",
+      "metric": "missing",
+      "profile": "phone",
+      "value": 0.5555555555555556,
+      "pose": [0, 0],
+      "photo": "inputs/dot-cdx-arched-room.jpg",
+      "depth": "renders/dot-cdx-arched-room-phone-depth.png",
+      "render": "renders/dot-cdx-arched-room-phone-0-0.png",
+      "front": "renders/dot-cdx-arched-room-phone-0-0.png",
+      "preview": "renders/dot-cdx-arched-room-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Small source foliage has weak/discontinuous detail even at the frontal relief. Five of nine projected probes fall below the contrast threshold; the metric is not an object count."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-cdx-arched-room.jpg",
+        "depth": "renders/dot-cdx-arched-room-phone-depth.png",
+        "record": "records/dot-cdx-arched-room.json",
+        "nativeRender": "renders/dot-cdx-arched-room-phone-0-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-cdx-arched-room.jpg",
+        "depth": "renders/dot-cdx-arched-room-phone-depth.webp",
+        "record": "records/dot-cdx-arched-room.json.gz",
+        "render": "renders/dot-cdx-arched-room-phone-0-0.webp"
+      }
+    },
+    {
+      "id": "dot-treehouses",
+      "label": "Treehouse village (AI-made)",
+      "metric": "missing",
+      "profile": "desktop",
+      "value": 0.4666666666666667,
+      "pose": [30, 0],
+      "photo": "inputs/dot-treehouses.jpg",
+      "depth": "renders/dot-treehouses-desktop-depth.png",
+      "render": "renders/dot-treehouses-desktop-30-0.png",
+      "front": "renders/dot-treehouses-desktop-0-0.png",
+      "preview": "renders/dot-treehouses-desktop-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Thin bridges/leaves show weakened or discontinuous segments on yaw +30. Novel-view occlusion is a confound for any individual projected probe."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-treehouses.jpg",
+        "depth": "renders/dot-treehouses-desktop-depth.png",
+        "record": "records/dot-treehouses.json",
+        "nativeRender": "renders/dot-treehouses-desktop-30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-treehouses.jpg",
+        "depth": "renders/dot-treehouses-desktop-depth.webp",
+        "record": "records/dot-treehouses.json.gz",
+        "render": "renders/dot-treehouses-desktop-30-0.webp"
+      }
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "label": "Plant studio (AI-made)",
+      "metric": "missing",
+      "profile": "phone",
+      "value": 0.2916666666666667,
+      "pose": [-30, 0],
+      "photo": "inputs/dot-cdx-plant-studio.jpg",
+      "depth": "renders/dot-cdx-plant-studio-phone-depth.png",
+      "render": "renders/dot-cdx-plant-studio-phone--30-0.png",
+      "front": "renders/dot-cdx-plant-studio-phone-0-0.png",
+      "preview": "renders/dot-cdx-plant-studio-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "The yaw +30 view loses source leaf/stem continuity near the window and foreground plant. Some losses could be occlusions; 72 probes provide broader support."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-cdx-plant-studio.jpg",
+        "depth": "renders/dot-cdx-plant-studio-phone-depth.png",
+        "record": "records/dot-cdx-plant-studio.json",
+        "nativeRender": "renders/dot-cdx-plant-studio-phone--30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-cdx-plant-studio.jpg",
+        "depth": "renders/dot-cdx-plant-studio-phone-depth.webp",
+        "record": "records/dot-cdx-plant-studio.json.gz",
+        "render": "renders/dot-cdx-plant-studio-phone--30-0.webp"
+      }
+    },
+    {
+      "id": "palace-stairs",
+      "label": "Palace staircase",
+      "metric": "textureLoss",
+      "profile": "phone",
+      "value": 0.99993904076991,
+      "pose": [0, -20],
+      "photo": "inputs/palace-stairs.jpg",
+      "depth": "renders/palace-stairs-phone-depth.png",
+      "render": "renders/palace-stairs-phone-0--20.png",
+      "front": "renders/palace-stairs-phone-0-0.png",
+      "preview": "renders/palace-stairs-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Wide light/dark rectangular fill bands break the stair/rail background texture; full-footprint check found coverage, not empty pixels."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/palace-stairs.jpg",
+        "depth": "renders/palace-stairs-phone-depth.png",
+        "record": "records/palace-stairs.json",
+        "nativeRender": "renders/palace-stairs-phone-0--20.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/palace-stairs.jpg",
+        "depth": "renders/palace-stairs-phone-depth.webp",
+        "record": "records/palace-stairs.json.gz",
+        "render": "renders/palace-stairs-phone-0--20.webp"
+      }
+    },
+    {
+      "id": "spiral-stairs",
+      "label": "Spiral staircase",
+      "metric": "textureLoss",
+      "profile": "phone",
+      "value": 0.8315121276112875,
+      "pose": [0, -30],
+      "photo": "inputs/spiral-stairs.jpg",
+      "depth": "renders/spiral-stairs-phone-depth.png",
+      "render": "renders/spiral-stairs-phone-0--30.png",
+      "front": "renders/spiral-stairs-phone-0-0.png",
+      "preview": "renders/spiral-stairs-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Turned spiral reveals broad gray and pale bands that lack the repeated fine stair/rail structure in the source; no geometric holes in the saved candidate score."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/spiral-stairs.jpg",
+        "depth": "renders/spiral-stairs-phone-depth.png",
+        "record": "records/spiral-stairs.json",
+        "nativeRender": "renders/spiral-stairs-phone-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/spiral-stairs.jpg",
+        "depth": "renders/spiral-stairs-phone-depth.webp",
+        "record": "records/spiral-stairs.json.gz",
+        "render": "renders/spiral-stairs-phone-0--30.webp"
+      }
+    },
+    {
+      "id": "still-life",
+      "label": "Still life",
+      "metric": "textureLoss",
+      "profile": "phone",
+      "value": 0.9868731662345462,
+      "pose": [0, -20],
+      "photo": "inputs/still-life.jpg",
+      "depth": "renders/still-life-phone-depth.png",
+      "render": "renders/still-life-phone-0--20.png",
+      "front": "renders/still-life-phone-0-0.png",
+      "preview": "renders/still-life-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Broad dark bands appear below the bowl; smooth fill partly follows a naturally dark source, so energy loss alone cannot establish semantic wrongness."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/still-life.jpg",
+        "depth": "renders/still-life-phone-depth.png",
+        "record": "records/still-life.json",
+        "nativeRender": "renders/still-life-phone-0--20.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/still-life.jpg",
+        "depth": "renders/still-life-phone-depth.webp",
+        "record": "records/still-life.json.gz",
+        "render": "renders/still-life-phone-0--20.webp"
+      }
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "label": "Stoneware (AI-made)",
+      "metric": "depth",
+      "profile": "phone",
+      "value": 0.4161073825503356,
+      "pose": [0, 0],
+      "photo": "inputs/dot-cdx-stoneware.jpg",
+      "depth": "renders/dot-cdx-stoneware-phone-depth.png",
+      "render": "renders/dot-cdx-stoneware-phone-0-0.png",
+      "front": "renders/dot-cdx-stoneware-phone-0-0.png",
+      "preview": "renders/dot-cdx-stoneware-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Depth map resolves broad pot ordering but merges twig/leaf junctions. High T-cue flips are a hypothesis count, not verified physical reversals."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-cdx-stoneware.jpg",
+        "depth": "renders/dot-cdx-stoneware-phone-depth.png",
+        "record": "records/dot-cdx-stoneware.json",
+        "nativeRender": "renders/dot-cdx-stoneware-phone-0-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-cdx-stoneware.jpg",
+        "depth": "renders/dot-cdx-stoneware-phone-depth.webp",
+        "record": "records/dot-cdx-stoneware.json.gz",
+        "render": "renders/dot-cdx-stoneware-phone-0-0.webp"
+      }
+    },
+    {
+      "id": "dot-dragonfly",
+      "label": "Dragonfly (AI-made)",
+      "metric": "depth",
+      "profile": "phone",
+      "value": 0.4745222929936306,
+      "pose": [0, 0],
+      "photo": "inputs/dot-dragonfly.jpg",
+      "depth": "renders/dot-dragonfly-phone-depth.png",
+      "render": "renders/dot-dragonfly-phone-0-0.png",
+      "front": "renders/dot-dragonfly-phone-0-0.png",
+      "preview": "renders/dot-dragonfly-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Wings and twig are broad near patches in the inferred map despite transparent, textured overlap. The T-cue assumption is especially unreliable on wings."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-dragonfly.jpg",
+        "depth": "renders/dot-dragonfly-phone-depth.png",
+        "record": "records/dot-dragonfly.json",
+        "nativeRender": "renders/dot-dragonfly-phone-0-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-dragonfly.jpg",
+        "depth": "renders/dot-dragonfly-phone-depth.webp",
+        "record": "records/dot-dragonfly.json.gz",
+        "render": "renders/dot-dragonfly-phone-0-0.webp"
+      }
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "label": "Mushroom house (AI-made)",
+      "metric": "depth",
+      "profile": "phone",
+      "value": 0.35,
+      "pose": [0, 0],
+      "photo": "inputs/dot-cdx-mushroom-house.jpg",
+      "depth": "renders/dot-cdx-mushroom-house-phone-depth.png",
+      "render": "renders/dot-cdx-mushroom-house-phone-0-0.png",
+      "front": "renders/dot-cdx-mushroom-house-phone-0-0.png",
+      "preview": "renders/dot-cdx-mushroom-house-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Foreground vegetation and house silhouette have smooth joined depth regions; texture junctions inside the house can generate false T-cue conflicts."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-cdx-mushroom-house.jpg",
+        "depth": "renders/dot-cdx-mushroom-house-phone-depth.png",
+        "record": "records/dot-cdx-mushroom-house.json",
+        "nativeRender": "renders/dot-cdx-mushroom-house-phone-0-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-cdx-mushroom-house.jpg",
+        "depth": "renders/dot-cdx-mushroom-house-phone-depth.webp",
+        "record": "records/dot-cdx-mushroom-house.json.gz",
+        "render": "renders/dot-cdx-mushroom-house-phone-0-0.webp"
+      }
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "label": "Stones under water (AI-made)",
+      "metric": "depthFlat",
+      "profile": "phone",
+      "value": 0.802610114192496,
+      "pose": [0, 0],
+      "photo": "inputs/cdx-hard-submerged-stones.jpg",
+      "depth": "renders/cdx-hard-submerged-stones-phone-depth.png",
+      "render": "renders/cdx-hard-submerged-stones-phone-0-0.png",
+      "front": "renders/cdx-hard-submerged-stones-phone-0-0.png",
+      "preview": "renders/cdx-hard-submerged-stones-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Visible underwater rock outlines largely become a smooth water-depth patch. Refraction/texture violates simple occlusion cues; no physical wrong-depth percentage is claimed."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/cdx-hard-submerged-stones.jpg",
+        "depth": "renders/cdx-hard-submerged-stones-phone-depth.png",
+        "record": "records/cdx-hard-submerged-stones.json",
+        "nativeRender": "renders/cdx-hard-submerged-stones-phone-0-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/cdx-hard-submerged-stones.jpg",
+        "depth": "renders/cdx-hard-submerged-stones-phone-depth.webp",
+        "record": "records/cdx-hard-submerged-stones.json.gz",
+        "render": "renders/cdx-hard-submerged-stones-phone-0-0.webp"
+      }
+    },
+    {
+      "id": "dot-ice-falls",
+      "label": "Frozen waterfall (AI-made)",
+      "metric": "depthFlat",
+      "profile": "phone",
+      "value": 0.7936842105263158,
+      "pose": [0, 0],
+      "photo": "inputs/dot-ice-falls.jpg",
+      "depth": "renders/dot-ice-falls-phone-depth.png",
+      "render": "renders/dot-ice-falls-phone-0-0.png",
+      "front": "renders/dot-ice-falls-phone-0-0.png",
+      "preview": "renders/dot-ice-falls-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Fine ice structures become a broad smooth depth band. Many image junctions are texture, so the flat warning alone is not proof of error."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-ice-falls.jpg",
+        "depth": "renders/dot-ice-falls-phone-depth.png",
+        "record": "records/dot-ice-falls.json",
+        "nativeRender": "renders/dot-ice-falls-phone-0-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-ice-falls.jpg",
+        "depth": "renders/dot-ice-falls-phone-depth.webp",
+        "record": "records/dot-ice-falls.json.gz",
+        "render": "renders/dot-ice-falls-phone-0-0.webp"
+      }
+    },
+    {
+      "id": "dot-cove",
+      "label": "Fishing cove (AI-made)",
+      "metric": "depthFlat",
+      "profile": "phone",
+      "value": 0.7456521739130435,
+      "pose": [0, 0],
+      "photo": "inputs/dot-cove.jpg",
+      "depth": "renders/dot-cove-phone-depth.png",
+      "render": "renders/dot-cove-phone-0-0.png",
+      "front": "renders/dot-cove-phone-0-0.png",
+      "preview": "renders/dot-cove-phone-worst-crop.png",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Distant buildings and rock textures largely merge into a smooth slope in depth. Some distant scene flattening can be appropriate at this relief scale."
+      ],
+      "source": "216c34dd",
+      "captureReferences": {
+        "source": "inputs/dot-cove.jpg",
+        "depth": "renders/dot-cove-phone-depth.png",
+        "record": "records/dot-cove.json",
+        "nativeRender": "renders/dot-cove-phone-0-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/dot-cove.jpg",
+        "depth": "renders/dot-cove-phone-depth.webp",
+        "record": "records/dot-cove.json.gz",
+        "render": "renders/dot-cove-phone-0-0.webp"
+      }
+    },
+    {
+      "id": "truth-lattice",
+      "profile": "phone",
+      "metric": "depthAbsRel",
+      "value": 0.13181825072144607,
+      "reference": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.042582787909661704,
+          "shift": 0.06798809127142763,
+          "calibrationPixels": 13829,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 96755,
+        "scoredPixels": 96755,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.13181825072144607,
+        "rmseMeters": 1.4699389037536086,
+        "p95Meters": 2.6186997531156138,
+        "pairs": 3328,
+        "reversedFraction": 0.11268028846153846,
+        "flattenedFraction": 0.03936298076923077
+      },
+      "reviewedSourceDepthAndMetricFrame": true,
+      "renderReviewed": "renders/truth-lattice-phone-0--30.png",
+      "poseReviewed": [0, -30],
+      "observations": [
+        "The source has a near regular lattice and more distant colored blocks. The inferred field merges some bars into the blocks; the turned view has jagged/merged bars and broad background bands. Source-model pairs have an independently measured 11.3% reversal fraction."
+      ],
+      "limit": "The shown grayscale is the relief depth texture. It is not a calibrated ground-truth error heatmap.",
+      "captureReferences": {
+        "source": "inputs/truth-lattice.jpg",
+        "depth": "renders/truth-lattice-phone-depth.png",
+        "record": "records/truth-lattice.json",
+        "nativeRender": "renders/truth-lattice-phone-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/truth-lattice.jpg",
+        "depth": "renders/truth-lattice-phone-depth.webp",
+        "record": "records/truth-lattice.json.gz",
+        "render": "renders/truth-lattice-phone-0--30.webp"
+      }
+    },
+    {
+      "id": "truth-arches",
+      "profile": "phone",
+      "metric": "depthAbsRel",
+      "value": 0.11776588982061371,
+      "reference": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.046740833277858045,
+          "shift": 0.045727078639509255,
+          "calibrationPixels": 15225,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 106462,
+        "scoredPixels": 106462,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.11776588982061371,
+        "rmseMeters": 1.3539839292626568,
+        "p95Meters": 3.0622151397493376,
+        "pairs": 4433,
+        "reversedFraction": 0.028648770584254454,
+        "flattenedFraction": 0.01466275659824047
+      },
+      "reviewedSourceDepthAndMetricFrame": true,
+      "renderReviewed": "renders/truth-arches-phone--30-0.png",
+      "poseReviewed": [-30, 0],
+      "observations": [
+        "Nested column/arch depth is graded but some column edges merge with the background. The turned view shows broad copied column strips; reference range error is measured from raw model output, not inferred from the visible artifacts."
+      ],
+      "limit": "The shown grayscale is the relief depth texture. It is not a calibrated ground-truth error heatmap.",
+      "captureReferences": {
+        "source": "inputs/truth-arches.jpg",
+        "depth": "renders/truth-arches-phone-depth.png",
+        "record": "records/truth-arches.json",
+        "nativeRender": "renders/truth-arches-phone--30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/truth-arches.jpg",
+        "depth": "renders/truth-arches-phone-depth.webp",
+        "record": "records/truth-arches.json.gz",
+        "render": "renders/truth-arches-phone--30-0.webp"
+      }
+    },
+    {
+      "id": "truth-night",
+      "profile": "phone",
+      "metric": "depthAbsRel",
+      "value": 0.07021886048702225,
+      "reference": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.03591685270849339,
+          "shift": 0.028146858163877058,
+          "calibrationPixels": 10365,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 72581,
+        "scoredPixels": 72581,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.07021886048702225,
+        "rmseMeters": 1.370853605783655,
+        "p95Meters": 1.6863311920197752,
+        "pairs": 1968,
+        "reversedFraction": 0.019817073170731708,
+        "flattenedFraction": 0.012703252032520325
+      },
+      "reviewedSourceDepthAndMetricFrame": true,
+      "renderReviewed": "renders/truth-night-phone-0--30.png",
+      "poseReviewed": [0, -30],
+      "observations": [
+        "The low-light source has repeated near/far lamp posts. The map resolves a depth gradient but the turned view shows enlarged/banded background strips at posts. Reference error is from the retained raw model response."
+      ],
+      "limit": "The shown grayscale is the relief depth texture. It is not a calibrated ground-truth error heatmap.",
+      "captureReferences": {
+        "source": "inputs/truth-night.jpg",
+        "depth": "renders/truth-night-phone-depth.png",
+        "record": "records/truth-night.json",
+        "nativeRender": "renders/truth-night-phone-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/truth-night.jpg",
+        "depth": "renders/truth-night-phone-depth.webp",
+        "record": "records/truth-night.json.gz",
+        "render": "renders/truth-night-phone-0--30.webp"
+      }
+    },
+    {
+      "id": "new-01-131641833",
+      "profile": "phone",
+      "metric": "halos",
+      "value": 0.35449762662715617,
+      "pose": [30, 0],
+      "edgeProfiles": 7,
+      "reviewedSourceDepthAndMetricFrame": true,
+      "renderReviewed": "renders/new-01-131641833-phone-30-0.png",
+      "observations": [
+        "At yaw +30, the real dog silhouette leaves a broad vertically banded, gray/brown extension against the room, with pale speckled outlines around the muzzle and ears. The source has soft fur and a blurred room, but no corresponding broad strips.",
+        "The relative-depth map treats the dog as one broad near patch. There are seven stable broad-edge profiles and no eligible thin anchors, so no claim of quantitatively clean fur is possible."
+      ],
+      "limit": "The RGB edge metric combines displacement and color bleeding; this view does not isolate one cause. White-colored fill is not automatically an uncovered geometric hole.",
+      "captureReferences": {
+        "source": "inputs/new-01-131641833.jpg",
+        "depth": "renders/new-01-131641833-phone-depth.png",
+        "record": "records/new-01-131641833.json",
+        "nativeRender": "renders/new-01-131641833-phone-30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/new-01-131641833.jpg",
+        "depth": "renders/new-01-131641833-phone-depth.webp",
+        "record": "records/new-01-131641833.json.gz",
+        "render": "renders/new-01-131641833-phone-30-0.webp"
+      }
+    },
+    {
+      "id": "new-00-147167228",
+      "profile": "desktop",
+      "metric": "streaks",
+      "pose": [-20, 0],
+      "value": 0.5315093320039493,
+      "support": {
+        "revealed": {
+          "pixels": 8453,
+          "texturedPixels": 3523,
+          "coherence": 0.9394358925480747,
+          "gradientEnergy": 15.997179463199261,
+          "flatFraction": 0.5832248905713948
+        },
+        "visible": {
+          "pixels": 4355,
+          "texturedPixels": 4275,
+          "coherence": 0.40792656054412535,
+          "gradientEnergy": 48.658695768332976,
+          "flatFraction": 0.018369690011481057
+        },
+        "directionalExcess": 0.5315093320039493,
+        "textureEnergyRatio": 0.32876301369364297
+      },
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "The real cat source has fine fur and distinct leather texture. The yaw -20 render leaves elongated edge-colored patches behind the head/ear and loses nearby hidden leather texture. The measured revealed region has 3,523 textured pixels and 4,275 nearby visible-control pixels."
+      ],
+      "limit": "Hidden leather truth is unavailable. Directionality and energy changes flag texture transport, not semantic correctness; only one thin anchor exists, so this is not quantitative fur-coverage evidence.",
+      "captureReferences": {
+        "source": "inputs/new-00-147167228.png",
+        "depth": "renders/new-00-147167228-desktop-depth.png",
+        "record": "records/new-00-147167228.json",
+        "nativeRender": "renders/new-00-147167228-desktop--20-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/new-00-147167228.png",
+        "depth": "renders/new-00-147167228-desktop-depth.webp",
+        "record": "records/new-00-147167228.json.gz",
+        "render": "renders/new-00-147167228-desktop--20-0.webp"
+      }
+    },
+    {
+      "id": "new-19-159668739",
+      "profile": "desktop",
+      "metric": "fringes",
+      "pose": [30, 0],
+      "value": 2.373930745252553,
+      "support": {
+        "evaluated": 41,
+        "missing": 0,
+        "fringeMean": 0.9712656859256744,
+        "fringeP95": 2.373930745252553,
+        "fringeMax": 2.40018228376251,
+        "widthErrorMean": 0.8040555465133802,
+        "units": "CSS pixels per thin edge",
+        "correctedBackgrounds": 19,
+        "backgroundUncertain": 22
+      },
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "The real classroom source has narrow bench/desk bars. Yaw +30 thickens/frays their boundaries and adds adjacent bands. Of 41 evaluated probes, 22 have uncertain local backgrounds, limiting precision."
+      ],
+      "limit": "The relief field merges fine structure, and the rendered background changes with viewpoint. The metric does not isolate edge handling from inferred depth or legitimate occlusion.",
+      "captureReferences": {
+        "source": "inputs/new-19-159668739.jpg",
+        "depth": "renders/new-19-159668739-desktop-depth.png",
+        "record": "records/new-19-159668739.json",
+        "nativeRender": "renders/new-19-159668739-desktop-30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/new-19-159668739.jpg",
+        "depth": "renders/new-19-159668739-desktop-depth.webp",
+        "record": "records/new-19-159668739.json.gz",
+        "render": "renders/new-19-159668739-desktop-30-0.webp"
+      }
+    },
+    {
+      "id": "new-19-159668739",
+      "profile": "desktop",
+      "metric": "missing",
+      "pose": [-30, 0],
+      "value": 0.4878048780487805,
+      "support": {
+        "evaluated": 41,
+        "missing": 20,
+        "fringeMean": 0.4072014373734922,
+        "fringeP95": 1.4828700638313808,
+        "fringeMax": 1.5631462784969896,
+        "widthErrorMean": 2.6296192669797844,
+        "units": "CSS pixels per thin edge",
+        "correctedBackgrounds": 25,
+        "backgroundUncertain": 16
+      },
+      "reviewedSourceDepthAndMetricFrame": true,
+      "observations": [
+        "Yaw -30 weakens or breaks thin bars at repeated bench/desk boundaries. Twenty of 41 probes fall below contrast threshold, with 16 uncertain local backgrounds. Novel-view occlusion can explain individual losses, so 48.8% is a probe review flag, not a verified count of missing bars."
+      ],
+      "limit": "The relief field merges fine structure, and the rendered background changes with viewpoint. The metric does not isolate edge handling from inferred depth or legitimate occlusion.",
+      "captureReferences": {
+        "source": "inputs/new-19-159668739.jpg",
+        "depth": "renders/new-19-159668739-desktop-depth.png",
+        "record": "records/new-19-159668739.json",
+        "nativeRender": "renders/new-19-159668739-desktop--30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/new-19-159668739.jpg",
+        "depth": "renders/new-19-159668739-desktop-depth.webp",
+        "record": "records/new-19-159668739.json.gz",
+        "render": "renders/new-19-159668739-desktop--30-0.webp"
+      }
+    },
+    {
+      "id": "new-13-61309178",
+      "label": "Carbonated water in a blue glass",
+      "photo": "inputs/new-13-61309178.jpg",
+      "depth": "renders/new-13-61309178-phone-depth.png",
+      "render": "renders/new-13-61309178-phone-30-0.png",
+      "pose": [30, 0],
+      "speed": 6976.79999999702,
+      "memoryMiB": 1315.677734375,
+      "thin": 0,
+      "edge": 195,
+      "profile": "phone",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "metric": "speed and/or memory examples",
+      "observations": [
+        "Reviewed the source, relief depth, and saved worst-turned frame. The image illustrates the input and rendering; latency and process-memory evidence comes from the per-input timing and memory samples, not the still image."
+      ],
+      "limit": "One fresh-browser cost observation, software renderer; not physical-phone performance. Thin support is sparse and cannot establish clean fine parts.",
+      "captureReferences": {
+        "source": "inputs/new-13-61309178.jpg",
+        "depth": "renders/new-13-61309178-phone-depth.png",
+        "record": "records/new-13-61309178.json",
+        "nativeRender": "renders/new-13-61309178-phone-30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/new-13-61309178.jpg",
+        "depth": "renders/new-13-61309178-phone-depth.webp",
+        "record": "records/new-13-61309178.json.gz",
+        "render": "renders/new-13-61309178-phone-30-0.webp"
+      }
+    },
+    {
+      "id": "new-08-151156803",
+      "label": "Cactus flower and spines",
+      "photo": "inputs/new-08-151156803.jpg",
+      "depth": "renders/new-08-151156803-phone-depth.png",
+      "render": "renders/new-08-151156803-phone-0--30.png",
+      "pose": [0, -30],
+      "speed": 6783.600000008941,
+      "memoryMiB": 1174.8291015625,
+      "thin": 4,
+      "edge": 41,
+      "profile": "phone",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "metric": "speed and/or memory examples",
+      "observations": [
+        "Reviewed the source, relief depth, and saved worst-turned frame. The image illustrates the input and rendering; latency and process-memory evidence comes from the per-input timing and memory samples, not the still image."
+      ],
+      "limit": "One fresh-browser cost observation, software renderer; not physical-phone performance. Thin support is sparse and cannot establish clean fine parts.",
+      "captureReferences": {
+        "source": "inputs/new-08-151156803.jpg",
+        "depth": "renders/new-08-151156803-phone-depth.png",
+        "record": "records/new-08-151156803.json",
+        "nativeRender": "renders/new-08-151156803-phone-0--30.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/new-08-151156803.jpg",
+        "depth": "renders/new-08-151156803-phone-depth.webp",
+        "record": "records/new-08-151156803.json.gz",
+        "render": "renders/new-08-151156803-phone-0--30.webp"
+      }
+    },
+    {
+      "id": "new-11-159259312",
+      "label": "Dew on a spiderweb",
+      "photo": "inputs/new-11-159259312.jpg",
+      "depth": "renders/new-11-159259312-phone-depth.png",
+      "render": "renders/new-11-159259312-phone-0-20.png",
+      "pose": [0, 20],
+      "speed": 6556.100000008941,
+      "memoryMiB": 1204.1435546875,
+      "thin": 1,
+      "edge": 7,
+      "profile": "phone",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "metric": "speed and/or memory examples",
+      "observations": [
+        "Reviewed the source, relief depth, and saved worst-turned frame. The image illustrates the input and rendering; latency and process-memory evidence comes from the per-input timing and memory samples, not the still image."
+      ],
+      "limit": "One fresh-browser cost observation, software renderer; not physical-phone performance. Thin support is sparse and cannot establish clean fine parts.",
+      "captureReferences": {
+        "source": "inputs/new-11-159259312.jpg",
+        "depth": "renders/new-11-159259312-phone-depth.png",
+        "record": "records/new-11-159259312.json",
+        "nativeRender": "renders/new-11-159259312-phone-0-20.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/new-11-159259312.jpg",
+        "depth": "renders/new-11-159259312-phone-depth.webp",
+        "record": "records/new-11-159259312.json.gz",
+        "render": "renders/new-11-159259312-phone-0-20.webp"
+      }
+    },
+    {
+      "id": "new-03-35525184",
+      "label": "Strawberry close-up",
+      "photo": "inputs/new-03-35525184.jpg",
+      "depth": "renders/new-03-35525184-phone-depth.png",
+      "render": "renders/new-03-35525184-phone-20-0.png",
+      "pose": [20, 0],
+      "speed": 5953.0999999940395,
+      "memoryMiB": 1284.9130859375,
+      "thin": 0,
+      "edge": 11,
+      "profile": "phone",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "metric": "speed and/or memory examples",
+      "observations": [
+        "Reviewed the source, relief depth, and saved worst-turned frame. The image illustrates the input and rendering; latency and process-memory evidence comes from the per-input timing and memory samples, not the still image."
+      ],
+      "limit": "One fresh-browser cost observation, software renderer; not physical-phone performance. Thin support is sparse and cannot establish clean fine parts.",
+      "captureReferences": {
+        "source": "inputs/new-03-35525184.jpg",
+        "depth": "renders/new-03-35525184-phone-depth.png",
+        "record": "records/new-03-35525184.json",
+        "nativeRender": "renders/new-03-35525184-phone-20-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/new-03-35525184.jpg",
+        "depth": "renders/new-03-35525184-phone-depth.webp",
+        "record": "records/new-03-35525184.json.gz",
+        "render": "renders/new-03-35525184-phone-20-0.webp"
+      }
+    },
+    {
+      "id": "new-17-27586242",
+      "label": "Tomatoes in a metal bowl",
+      "photo": "inputs/new-17-27586242.jpg",
+      "depth": "renders/new-17-27586242-phone-depth.png",
+      "render": "renders/new-17-27586242-phone--30-0.png",
+      "pose": [-30, 0],
+      "speed": 5948.899999991059,
+      "memoryMiB": 1274.521484375,
+      "thin": 4,
+      "edge": 153,
+      "profile": "phone",
+      "reviewedSourceDepthAndMetricFrame": true,
+      "metric": "speed and/or memory examples",
+      "observations": [
+        "Reviewed the source, relief depth, and saved worst-turned frame. The image illustrates the input and rendering; latency and process-memory evidence comes from the per-input timing and memory samples, not the still image."
+      ],
+      "limit": "One fresh-browser cost observation, software renderer; not physical-phone performance. Thin support is sparse and cannot establish clean fine parts.",
+      "captureReferences": {
+        "source": "inputs/new-17-27586242.jpg",
+        "depth": "renders/new-17-27586242-phone-depth.png",
+        "record": "records/new-17-27586242.json",
+        "nativeRender": "renders/new-17-27586242-phone--30-0.png"
+      },
+      "reviewFiles": {
+        "source": "inputs/new-17-27586242.jpg",
+        "depth": "renders/new-17-27586242-phone-depth.webp",
+        "record": "records/new-17-27586242.json.gz",
+        "render": "renders/new-17-27586242-phone--30-0.webp"
+      }
+    }
+  ],
+  "presentation": "Original notes inspect native captures. Published review files are resized WebP; capture references are historical local-native identifiers."
+}

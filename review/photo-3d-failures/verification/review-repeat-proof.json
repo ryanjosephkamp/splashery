@@ -1,0 +1,97 @@
+{
+  "checkedUTC": "2026-10-15T14:31:24.306Z",
+  "sourceMatches": true,
+  "sourceFingerprint": "da9dd312972fb05de2e4507125d55ad534bf30f3b8af67f3c58edb06c097071c",
+  "profiles": 6,
+  "colorViews": 54,
+  "rgbaMatches": 54,
+  "failedAttempts": 0,
+  "metricDeltas": [
+    {
+      "id": "dot-arch",
+      "profile": "phone",
+      "metricDeltas": {
+        "streaks": 0,
+        "textureLoss": 0,
+        "holes": 0,
+        "halos": 0,
+        "fringes": null,
+        "missing": null,
+        "depth": 0,
+        "depthAbsRel": null
+      }
+    },
+    {
+      "id": "dot-arch",
+      "profile": "desktop",
+      "metricDeltas": {
+        "streaks": 0,
+        "textureLoss": 0,
+        "holes": 0,
+        "halos": 0,
+        "fringes": null,
+        "missing": null,
+        "depth": 0,
+        "depthAbsRel": null
+      }
+    },
+    {
+      "id": "dot-alpine-lake",
+      "profile": "phone",
+      "metricDeltas": {
+        "streaks": 0,
+        "textureLoss": 0,
+        "holes": 0,
+        "halos": 0,
+        "fringes": null,
+        "missing": null,
+        "depth": 0,
+        "depthAbsRel": null
+      }
+    },
+    {
+      "id": "dot-alpine-lake",
+      "profile": "desktop",
+      "metricDeltas": {
+        "streaks": 0,
+        "textureLoss": 0,
+        "holes": 0,
+        "halos": 0,
+        "fringes": null,
+        "missing": null,
+        "depth": 0,
+        "depthAbsRel": null
+      }
+    },
+    {
+      "id": "new-12-201342968",
+      "profile": "phone",
+      "metricDeltas": {
+        "streaks": null,
+        "textureLoss": null,
+        "holes": 0,
+        "halos": null,
+        "fringes": 0,
+        "missing": 0,
+        "depth": 0,
+        "depthAbsRel": null
+      }
+    },
+    {
+      "id": "new-12-201342968",
+      "profile": "desktop",
+      "metricDeltas": {
+        "streaks": null,
+        "textureLoss": null,
+        "holes": 0,
+        "halos": null,
+        "fringes": 0,
+        "missing": 0,
+        "depth": 0,
+        "depthAbsRel": null
+      }
+    }
+  ],
+  "limit": "One repeat on three selected low-ranking controls only, on the same software renderer. Does not establish full-corpus reliability, false-positive rates, or latency repeatability. Timings and memory are deliberately excluded.",
+  "completePerPoseQualityRowsMatched": 54
+}

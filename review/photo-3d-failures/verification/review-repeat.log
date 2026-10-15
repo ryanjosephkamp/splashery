@@ -1,0 +1,7 @@
+{"id":"dot-arch","profile":"phone","error":null,"completed":1,"expected":6}
+{"id":"dot-arch","profile":"desktop","error":null,"completed":2,"expected":6}
+{"id":"dot-alpine-lake","profile":"phone","error":null,"completed":3,"expected":6}
+{"id":"dot-alpine-lake","profile":"desktop","error":null,"completed":4,"expected":6}
+{"id":"new-12-201342968","profile":"phone","error":null,"completed":5,"expected":6}
+{"id":"new-12-201342968","profile":"desktop","error":null,"completed":6,"expected":6}
+{"expectedProfiles":6,"completedProfiles":6,"expectedPoses":54,"completedPoses":54,"failedAttempts":0}

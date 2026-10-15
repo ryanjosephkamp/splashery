@@ -1,0 +1,34 @@
+{
+  "checkedUTC": "2026-10-15T14:46:13.511Z",
+  "capture": {
+    "head": "216c34dd05ed0482ec43a896590d94d22233e68a",
+    "main": "ea35f3de4ebef10f63ead8eecbae971ef65feecd",
+    "methodSha256": "da9dd312972fb05de2e4507125d55ad534bf30f3b8af67f3c58edb06c097071c",
+    "numericSignature": "289e0ba262de45488bf350940f4dc5930efc5a0e71701171d0692d28a04a6c3a"
+  },
+  "publishedTool": {
+    "codeHead": "19c8e1bf7f8844a88576a858e0a674d8072d82bd",
+    "methodSha256": "2da79f7fe0a578cb29e399f0010eb79c05c57696be39b8ae5331e039074e41e6",
+    "mergedMain": "cb8a83157bc502feb2dda18ece6cfa39621abb61"
+  },
+  "galleryGeneratorSha256": "4794c96b1e52e7993e12d58c61abdd35a9e882143bb85852f7a3cd3e4804c988",
+  "postCaptureChanges": [
+    "Private output is refused inside the checkout except .cache, checking lexical and resolved paths.",
+    "Optional review-file maps, lossy labels, and separate existing edge diagnostics affect gallery presentation only.",
+    "Supplied-depth timing and missing macOS RSS bookkeeping were corrected after capture.",
+    "Current main is merged, including the loading-cover/status follow-up and camera optimizations. This frozen atlas is not a new numerical capture of current main.",
+    "One exact-fingerprint repeat at capture commit 216c34dd reproduced 54 frames and complete quality records for three selected low-ranking controls."
+  ],
+  "nativeArtifactHashesValidated": 10620,
+  "capturedJsonFilesValuesPreserved": 615,
+  "actualMacOSExecution": false,
+  "presentation": {
+    "originalPhotos": 118,
+    "reviewWebPImages": 2950,
+    "colorViews": 2124,
+    "exactGzipCaptureFiles": 615,
+    "maxDimensions": [390, 844],
+    "nativePngsHosted": false,
+    "mediaBranchReplacement": "The Operator explicitly requested deleting the old unmerged media branch and pushing this slim replacement under the same name."
+  }
+}

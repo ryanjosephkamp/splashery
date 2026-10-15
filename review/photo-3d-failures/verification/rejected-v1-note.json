@@ -1,0 +1,5 @@
+{
+  "stoppedUTC": "2026-10-15T05:00:01.094214+00:00",
+  "sourceHead": "c5c73f22805b866cbc9e0965c559b46cbd0fa931",
+  "reason": "Candidate reveal slabs could extend outside the actual photo footprint. Street desktop pitch -30 counted seven uncovered ROI pixels out of 54, all outside the footprint; actual within-photo hole count was zero. Clip the candidate reveal ROI to the rendered photo boundary and restart in a new output folder. Preserve this pilot, not a final ranking."
+}

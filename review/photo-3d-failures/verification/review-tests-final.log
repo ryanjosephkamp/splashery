@@ -1,0 +1,19 @@
+
+Running 10 tests using 1 worker
+
+(node:678110) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:678110) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-p3df.spec.mjs:12:1 › reference-depth error holds out calibration pixels and detects reversed ordering (26ms)
+  ✓   2 [chromium] › tests/cdx-p3df.spec.mjs:30:1 › T-junction warnings distinguish correct, reversed, flattened, and unsupported maps (14ms)
+  ✓   3 [chromium] › tests/cdx-p3df.spec.mjs:65:1 › directional streak excess penalizes extrusion against textured nearby controls (58ms)
+  ✓   4 [chromium] › tests/cdx-p3df.spec.mjs:103:1 › reveal coverage counts actual unfilled mask pixels, with foreground excluded (3ms)
+  ✓   5 [chromium] › tests/cdx-p3df.spec.mjs:118:1 › candidate slabs outside the photo are not counted as holes (6ms)
+  ✓   6 [chromium] › tests/cdx-p3df.spec.mjs:134:1 › thin profiles penalize blur and record vanished parts separately (3ms)
+  ✓   7 [chromium] › tests/cdx-p3df.spec.mjs:174:1 › private inventory is local, narrow, and explicit about publication rights (13ms)
+  ✓   8 [chromium] › tests/cdx-p3df.spec.mjs:194:1 › private output refuses checkout folders and symlink aliases outside .cache (10ms)
+  ✓   9 [chromium] › tests/cdx-p3df.spec.mjs:227:1 › slim review gallery uses its WebP map and labels resized evidence honestly (1.7s)
+  ✓  10 [chromium] › tests/cdx-p3df.spec.mjs:317:1 › two real inputs render at the phone profile, score truth, and generate a safe offline gallery (54.5s)
+
+  10 passed (58.9s)

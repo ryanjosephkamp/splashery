@@ -1,0 +1,14 @@
+{
+  "checkedUTC": "2026-10-15T08:09:44.681Z",
+  "numericSignatureBefore": "289e0ba262de45488bf350940f4dc5930efc5a0e71701171d0692d28a04a6c3a",
+  "numericSignatureAfter": "289e0ba262de45488bf350940f4dc5930efc5a0e71701171d0692d28a04a6c3a",
+  "corrections": [
+    {
+      "id": "new-09-66685155",
+      "field": "label",
+      "before": "Moonlit harbor",
+      "after": "Refinery at night",
+      "reason": "The checked source identifies a refinery at night; no moonlight claim is supported. Catalog wording only; image bytes and all numerical observations are unchanged."
+    }
+  ]
+}

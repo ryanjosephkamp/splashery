@@ -1,0 +1,2 @@
+# Capture indices are generated JSON; keep Git patches bounded.
+review/photo-3d-failures/atlas.json -diff

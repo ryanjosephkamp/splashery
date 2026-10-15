@@ -1921,3 +1921,12 @@ Photo to 3D loading-cover color and Hybrid status follow-up code and regression 
 Ryan with Codex (GPT-6), October 15, 2026. Code is MIT. Original capture contributions are CC0 1.0;
 source assets retain their recorded terms. See the
 [loading-color and status audit](docs/audits/photo-3d-status-2026-10.md).
+
+# Photo to 3D failure atlas (Codex task 87)
+
+The local failure finder, metric calibrations, and static gallery are made by Ryan with Codex
+(GPT-6), October 15, 2026. Tool and gallery code are MIT. Original audit capture contributions are
+CC0 1.0; source images retain their recorded terms. Photos and their individual source, author,
+license, byte-hash, and live-license records are kept on `codex/photo-3d-failures-clips`, never
+merged. See
+[the failure-gallery report](https://github.com/ryanjosephkamp/splashery/blob/codex/photo-3d-failures/docs/audits/photo-3d-failures-2026-10.md).

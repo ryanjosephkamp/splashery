@@ -1,0 +1,10 @@
+
+Running 1 test using 1 worker
+
+(node:675407) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:675407) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-p3df.spec.mjs:193:1 › private output refuses checkout folders and symlink aliases outside .cache (23ms)
+
+  1 passed (1.3s)

@@ -1,0 +1,20 @@
+
+Running 8 tests using 1 worker
+
+(node:620729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:620729) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/8] [chromium] › tests/cdx-p3df.spec.mjs:11:1 › reference-depth error holds out calibration pixels and detects reversed ordering
+[2/8] [chromium] › tests/cdx-p3df.spec.mjs:29:1 › T-junction warnings distinguish correct, reversed, flattened, and unsupported maps
+[3/8] [chromium] › tests/cdx-p3df.spec.mjs:64:1 › directional streak excess penalizes extrusion against textured nearby controls
+[4/8] [chromium] › tests/cdx-p3df.spec.mjs:90:1 › reveal coverage counts actual unfilled mask pixels, with foreground excluded
+[5/8] [chromium] › tests/cdx-p3df.spec.mjs:105:1 › candidate slabs outside the photo are not counted as holes
+[6/8] [chromium] › tests/cdx-p3df.spec.mjs:121:1 › thin profiles penalize blur and record vanished parts separately
+[7/8] [chromium] › tests/cdx-p3df.spec.mjs:161:1 › private inventory is local, narrow, and explicit about publication rights
+[8/8] [chromium] › tests/cdx-p3df.spec.mjs:181:1 › two real inputs render at the phone profile, score truth, and generate a safe offline gallery
+  8 passed (38.9s)

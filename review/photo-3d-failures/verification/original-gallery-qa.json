@@ -1,0 +1,297 @@
+{
+  "checkedUTC": "2026-10-15T08:28:13.298Z",
+  "root": "/workspace/splashery-p3df-clips/review/photo-3d-failures",
+  "complete": true,
+  "results": [
+    {
+      "screen": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 900,
+        "dpr": 1
+      },
+      "checks": [
+        {
+          "profile": "phone",
+          "key": "all",
+          "count": 118
+        },
+        {
+          "profile": "phone",
+          "key": "streaks",
+          "count": 106
+        },
+        {
+          "profile": "phone",
+          "key": "textureLoss",
+          "count": 75
+        },
+        {
+          "profile": "phone",
+          "key": "holes",
+          "count": 0
+        },
+        {
+          "profile": "phone",
+          "key": "halos",
+          "count": 114
+        },
+        {
+          "profile": "phone",
+          "key": "fringes",
+          "count": 37
+        },
+        {
+          "profile": "phone",
+          "key": "missing",
+          "count": 33
+        },
+        {
+          "profile": "phone",
+          "key": "depth",
+          "count": 48
+        },
+        {
+          "profile": "phone",
+          "key": "depthFlat",
+          "count": 104
+        },
+        {
+          "profile": "phone",
+          "key": "depthAbsRel",
+          "count": 0
+        },
+        {
+          "profile": "phone",
+          "key": "speed",
+          "count": 16
+        },
+        {
+          "profile": "phone",
+          "key": "memory",
+          "count": 42
+        },
+        {
+          "profile": "phone",
+          "key": "errors",
+          "count": 0
+        },
+        {
+          "profile": "desktop",
+          "key": "all",
+          "count": 118
+        },
+        {
+          "profile": "desktop",
+          "key": "streaks",
+          "count": 105
+        },
+        {
+          "profile": "desktop",
+          "key": "textureLoss",
+          "count": 67
+        },
+        {
+          "profile": "desktop",
+          "key": "holes",
+          "count": 0
+        },
+        {
+          "profile": "desktop",
+          "key": "halos",
+          "count": 113
+        },
+        {
+          "profile": "desktop",
+          "key": "fringes",
+          "count": 69
+        },
+        {
+          "profile": "desktop",
+          "key": "missing",
+          "count": 23
+        },
+        {
+          "profile": "desktop",
+          "key": "depth",
+          "count": 40
+        },
+        {
+          "profile": "desktop",
+          "key": "depthFlat",
+          "count": 105
+        },
+        {
+          "profile": "desktop",
+          "key": "depthAbsRel",
+          "count": 0
+        },
+        {
+          "profile": "desktop",
+          "key": "speed",
+          "count": 29
+        },
+        {
+          "profile": "desktop",
+          "key": "memory",
+          "count": 74
+        },
+        {
+          "profile": "desktop",
+          "key": "errors",
+          "count": 0
+        }
+      ],
+      "deepLinks": true,
+      "searchAndReset": true,
+      "supportAndNativeLinks": true,
+      "overflow": false
+    },
+    {
+      "screen": {
+        "name": "phone",
+        "width": 390,
+        "height": 844,
+        "dpr": 3
+      },
+      "checks": [
+        {
+          "profile": "phone",
+          "key": "all",
+          "count": 118
+        },
+        {
+          "profile": "phone",
+          "key": "streaks",
+          "count": 106
+        },
+        {
+          "profile": "phone",
+          "key": "textureLoss",
+          "count": 75
+        },
+        {
+          "profile": "phone",
+          "key": "holes",
+          "count": 0
+        },
+        {
+          "profile": "phone",
+          "key": "halos",
+          "count": 114
+        },
+        {
+          "profile": "phone",
+          "key": "fringes",
+          "count": 37
+        },
+        {
+          "profile": "phone",
+          "key": "missing",
+          "count": 33
+        },
+        {
+          "profile": "phone",
+          "key": "depth",
+          "count": 48
+        },
+        {
+          "profile": "phone",
+          "key": "depthFlat",
+          "count": 104
+        },
+        {
+          "profile": "phone",
+          "key": "depthAbsRel",
+          "count": 0
+        },
+        {
+          "profile": "phone",
+          "key": "speed",
+          "count": 16
+        },
+        {
+          "profile": "phone",
+          "key": "memory",
+          "count": 42
+        },
+        {
+          "profile": "phone",
+          "key": "errors",
+          "count": 0
+        },
+        {
+          "profile": "desktop",
+          "key": "all",
+          "count": 118
+        },
+        {
+          "profile": "desktop",
+          "key": "streaks",
+          "count": 105
+        },
+        {
+          "profile": "desktop",
+          "key": "textureLoss",
+          "count": 67
+        },
+        {
+          "profile": "desktop",
+          "key": "holes",
+          "count": 0
+        },
+        {
+          "profile": "desktop",
+          "key": "halos",
+          "count": 113
+        },
+        {
+          "profile": "desktop",
+          "key": "fringes",
+          "count": 69
+        },
+        {
+          "profile": "desktop",
+          "key": "missing",
+          "count": 23
+        },
+        {
+          "profile": "desktop",
+          "key": "depth",
+          "count": 40
+        },
+        {
+          "profile": "desktop",
+          "key": "depthFlat",
+          "count": 105
+        },
+        {
+          "profile": "desktop",
+          "key": "depthAbsRel",
+          "count": 0
+        },
+        {
+          "profile": "desktop",
+          "key": "speed",
+          "count": 29
+        },
+        {
+          "profile": "desktop",
+          "key": "memory",
+          "count": 74
+        },
+        {
+          "profile": "desktop",
+          "key": "errors",
+          "count": 0
+        }
+      ],
+      "deepLinks": true,
+      "searchAndReset": true,
+      "supportAndNativeLinks": true,
+      "overflow": false
+    }
+  ],
+  "errors": [],
+  "outside": []
+}

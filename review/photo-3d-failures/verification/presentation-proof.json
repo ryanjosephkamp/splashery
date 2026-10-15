@@ -1,0 +1,12 @@
+{
+  "checkedUTC": "2026-10-15T14:39:47.393Z",
+  "inputs": 118,
+  "profiles": 236,
+  "colorViews": 2124,
+  "originalPhotoHashesMatched": 118,
+  "allNumericalProfilesUnchanged": true,
+  "exactOriginalLedger": "atlas.json.gz",
+  "reviewLedger": "atlas.json",
+  "reviewImages": "WebP at most 390 by 844; color quality 84; depth previews use lossless WebP after resizing",
+  "scope": "Public presentation only; the private CLI continues to keep native lossless captures locally."
+}

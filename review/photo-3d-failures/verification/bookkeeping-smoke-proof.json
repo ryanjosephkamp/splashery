@@ -1,0 +1,19 @@
+{
+  "checkedUTC": "2026-10-15T08:22:23.742Z",
+  "suppliedDepthTiming": {
+    "first3dMs": 1441.5999999940395,
+    "source": "supplied-depth construction (decode excluded) -> completed new custom Sharp frame",
+    "backgroundPending": false
+  },
+  "realBrowserProfile": true,
+  "views": 1,
+  "errors": [],
+  "externalRequests": [],
+  "accountingParserSmoke": {
+    "platformMock": "darwin",
+    "actualPsPlatform": "linux",
+    "presentRssBytes": 576389120,
+    "missingPidRss": null
+  },
+  "actualMacOSExecution": false
+}

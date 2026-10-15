@@ -1,0 +1,9 @@
+{
+  "allImagesDecoded": 2950,
+  "maxReviewDimensions": [390, 844],
+  "exactGzipCaptureFiles": 615,
+  "originalPhotoHashesMatched": 118,
+  "packageBytesAtValidation": 163413853,
+  "under200DecimalMB": true,
+  "note": "Numerical data is checked against original native captures, never rescored from lossy images."
+}

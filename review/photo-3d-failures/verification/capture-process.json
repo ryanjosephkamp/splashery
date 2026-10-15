@@ -1,0 +1,20 @@
+{
+  "pid": 628148,
+  "head": "216c34dd05ed0482ec43a896590d94d22233e68a",
+  "main": "ea35f3de4ebef10f63ead8eecbae971ef65feecd",
+  "out": "/workspace/splashery/.cache/p3d-failures/atlas-v3",
+  "command": [
+    "node",
+    "tools/p3d-failures.mjs",
+    "--manifest",
+    "/workspace/splashery/.cache/p3d-failures/public-inputs.json",
+    "--out",
+    "/workspace/splashery/.cache/p3d-failures/atlas-v3"
+  ],
+  "startedUTC": "2026-10-15T05:26:46.609749+00:00",
+  "environmentOverrides": {
+    "DISPLAY": ":98",
+    "SPLASHERY_GL": "llvmpipe",
+    "SPLASHERY_CHROMIUM": "/usr/bin/chromium"
+  }
+}

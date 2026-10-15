@@ -1,0 +1,12 @@
+{
+  "rejected": true,
+  "out": "atlas-v2",
+  "source": "b98310facfa09f5e42bb6644c219a26de3a28078",
+  "stoppedUTC": "2026-10-15T05:23:48.772496+00:00",
+  "completedProfiles": 25,
+  "reason": "Full-resolution corpus review found an embossed manufacturer stamp on new-14-114005486. Removed it before it was captured; also replaced a distant ambiguous figure in new-08-151522300, and corrected a daylight landscape label. SIGINT intentionally stopped the early matrix. No prior profiles are reused in the final matrix.",
+  "replacements": {
+    "new-14-114005486": "new-13-105399732",
+    "new-08-151522300": "new-19-62150806"
+  }
+}
