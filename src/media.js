@@ -27,7 +27,6 @@
 
 import { LIMITS } from "./loaders.js";
 import { normalizeMediaURL } from "./state.js";
-import { MANUAL_PDF } from "../manual/pdf-edition.js";
 
 // Exact static gzip files, including servers that already decoded Content-Encoding.
 async function gzipBytes(url) {
@@ -163,19 +162,26 @@ async function readSource(source, limits) {
     // The site's manual is an exact gzip copy, with its original PDF retained.
     // Its PDF decoder can load while the document transfers.
     if (
-      ["tinkerers-manual.pdf", MANUAL_PDF].some(
-        (file) => url === new URL(`manual/${file}`, ROOT).href,
-      ) &&
+      url.startsWith(new URL("manual/", ROOT).href) &&
       typeof DecompressionStream === "function"
     ) {
-      try {
-        const [bytes] = await Promise.all([gzipBytes(`${url}.gz`), loadPDFJS()]);
-        if (bytes.byteLength > limits.bytes) throw tooBig(bytes.byteLength, limits.bytes);
-        const blob = new Blob([bytes], { type: "application/pdf" });
-        return { kind: "pdf", name, blob, size: blob.size, url };
-      } catch (error) {
-        if (error instanceof MediaError) throw error;
-        // A missing compressed copy uses the existing original request below.
+      // Ordinary toys retain main's module graph. The edition is needed only
+      // for a local manual; the Pictures pack already imports it when opened.
+      const { MANUAL_PDF } = await import("../manual/pdf-edition.js");
+      if (
+        ["tinkerers-manual.pdf", MANUAL_PDF].some(
+          (file) => url === new URL(`manual/${file}`, ROOT).href,
+        )
+      ) {
+        try {
+          const [bytes] = await Promise.all([gzipBytes(`${url}.gz`), loadPDFJS()]);
+          if (bytes.byteLength > limits.bytes) throw tooBig(bytes.byteLength, limits.bytes);
+          const blob = new Blob([bytes], { type: "application/pdf" });
+          return { kind: "pdf", name, blob, size: blob.size, url };
+        } catch (error) {
+          if (error instanceof MediaError) throw error;
+          // A missing compressed copy uses the existing original request below.
+        }
       }
     }
     let res;
