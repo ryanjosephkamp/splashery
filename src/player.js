@@ -1244,8 +1244,9 @@ export class Player {
 
   // ---- Scene ----------------------------------------------------------------
 
-  // Applies everything except the toy itself.
-  applySettings(scene, { camera = true, restoredCamera = true } = {}) {
+  // Applies everything except the toy itself. Saved-scene callers opt in to
+  // camera restoration; generated scenes keep the toy's native opening view.
+  applySettings(scene, { camera = true, restoredCamera = false } = {}) {
     this.scene = scene;
     this.camera.setTurntable(scene.autoplay.turntable);
     if (camera) {

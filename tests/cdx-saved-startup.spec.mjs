@@ -101,6 +101,34 @@ for (const fixture of fixtures) {
   }
 }
 
+test("plain applySettings preserves a video's native opening pose", async ({ page }) => {
+  test.setTimeout(120_000);
+  await page.goto(`/embed/${query}&toy=video-3d`);
+  await ready(page);
+  await page.waitForFunction(() => {
+    const p = window.__splashery.player;
+    const home = p.motion.ctx.kit.data.flight.state.homePose;
+    return home && Math.abs(p.camera.cur.yaw - home.yaw) < 1e-6;
+  });
+  const native = await page.evaluate(() => window.__splashery.player.camera.getState());
+  const fixture = fixtures.find((f) => f.scene.toy.id === "video-3d");
+  await page.evaluate((camera) => {
+    const p = window.__splashery.player;
+    const scene = structuredClone(p.scene);
+    scene.camera = camera;
+    // Showcase and capture callers do not opt in to saved-camera restoration.
+    p.applySettings(scene);
+  }, fixture.expected.camera);
+  await expect
+    .poll(() => page.evaluate(() => window.__splashery.player.camera.getState()))
+    .toMatchObject({
+      yaw: native.yaw,
+      pitch: native.pitch,
+      roll: native.roll,
+      distance: native.distance,
+    });
+});
+
 test("a newly chosen video opens at its native pose and Replay still changes a restored pose", async ({
   page,
 }) => {

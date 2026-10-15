@@ -5,10 +5,11 @@ changes only shared startup code, adds a regression spec with unchanged copies o
 inputs, and leaves the protected Photo to 3D, Moving photo to 3D, and Video to 3D files untouched.
 
 An embed now publishes its player before the first toy build. The existing photo-view hook can read
-`view: "splats"` from the restored scene at the time it builds the relief. When applying a saved
-camera, the player marks the existing flight state as visitor-owned. The idle opening pose therefore
-leaves that camera alone. New video selections keep the native opening behavior; explicitly starting
-Replay still flies the path. No schema, asset, renderer setting, or threshold changes.
+`view: "splats"` from the restored scene at the time it builds the relief. When a caller opts in to
+restoring a saved camera, the player marks the existing flight state as visitor-owned. The idle
+opening pose therefore leaves that camera alone. New video selections keep the native opening
+behavior; explicitly starting Replay still flies the path. No schema, asset, renderer setting, or
+threshold changes.
 
 ## Introducing commits
 
@@ -74,6 +75,39 @@ The first attempt failed at its absolute-origin presence assertion because the d
 used port 4174 while `smoke.spec.mjs` expects port 4173. That **0 passed / 1 failed, 15.166-second**
 harness attempt is retained. The rerun used the expected port without changing the test or
 threshold.
+
+## Camera restoration opt-in — October 15, 2026
+
+Codex (GPT-6) changed the shared `Player.applySettings` default to `restoredCamera: false`. The
+app's saved-scene path passes the restoration flag explicitly, including Load JSON; the viewer
+passes it when a saved hash decoded successfully, covering embeds. Generated showcase and ASCII
+capture scenes continue calling the method without that option and keep the native opening view.
+Neither caller, protected Studio files, frozen inputs, nor thresholds were changed by this revision.
+
+A new real-browser regression calls `applySettings(scene)` without options after a video opens, then
+checks that subsequent idle driver frames return the supplied pose to the native opening pose. On
+current main merged with the prior Engine implementation, this test failed as expected: **0 passed,
+1 failed, 0 skipped, 0 retries, 64.033 seconds**. The failure and trace remain outside Git under
+`/tmp/splashery-startup-oct15/before/`.
+
+Main `c13a9d3fab17c8a928299bdf115003502a7823d4` is merged into this branch. The fresh run completed
+**28 passed, 0 failed, 0 skipped, 0 retries, 229.362 seconds**: all eight startup regressions,
+including the new plain-call assertion, and all 20 source units. Both schema versions still preserve
+the saved photo views and actual video cameras through app links, embeds, real Save JSON downloads,
+and fresh-context imports and saves. Native opening and explicit Replay pass. The report and 12
+actual Studio JSON downloads are retained outside Git under `/tmp/splashery-startup-oct15/`.
+
+```sh
+SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test \
+  --config tests/fixtures/cdx-saved-startup/playwright.config.mjs \
+  tests/cdx-saved-startup.spec.mjs tests/unit.spec.mjs --workers=1
+```
+
+The unchanged embed transfer check passed separately on its expected port 4173, with the same safe
+launch options: **1 passed, 0 failed, 0 skipped, 0 retries, 14.017 seconds**, reporting **9.2 MB**
+under the unchanged 30 MB threshold. The October 14 results above remain historical evidence. The
+full task-65 corpus, Worlds, full smoke/help suite, actual showcase/ASCII capture flows, physical
+phones, other browsers, and WebGPU have not been rerun for this revision.
 
 ## Remaining limits
 
