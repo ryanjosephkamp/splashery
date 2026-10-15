@@ -536,7 +536,9 @@ async function runSfMOnce(images, log, sampleColor, opts = {}) {
   if (useSift && typeof navigator !== 'undefined' && navigator.gpu) {
     try {
       gpuAll = await gpuMatchAll(feats, pairs, 0.8, log, opts.gpu && opts.gpu.device,
-        (d, t) => ev({ stage: 'matching', done: d, total: t, detail: { usable: 0, pair: null, gpu: true } }));
+        (d, t) => ev({ stage: 'matching', done: d, total: t, detail: { usable: 0, pair: null, gpu: true } }),
+        { signal, maxPairsPerChunk: opts.maxPairsPerChunk });
+      checkAbort();
     } catch (e) {
       checkAbort();
       log(`  GPU matcher unavailable (${e.message}) — CPU fallback`);

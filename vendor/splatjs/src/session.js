@@ -142,6 +142,7 @@ export class Session {
     this.holdout = -1;
     this.testCams = [];
     this.training = false;
+    this._trainingFailure = null;
     this.lossHistory = [];  // [iter, psnrTrain]
     this._fences = [];      // in-flight batch fences (see _frameLoop)
     // Per-frame loop timings, recorded by default — the cost is a handful of
@@ -182,6 +183,7 @@ export class Session {
       this._assertActive();
     }
     this.trainer = trainer;
+    this._trainingFailure = null;
     return trainer;
   }
 
@@ -814,6 +816,7 @@ export class Session {
   start() {
     this._assertActive();
     if (!this.trainer) throw new Error('seed() first');
+    if (this.trainingError) throw this.trainingError;
     if (this.training || this._finishing) return;
     this.training = true;
     this._stage({ stage: 'train', done: this.trainer.iter, total: this._maxIters() });
@@ -840,6 +843,7 @@ export class Session {
   async finish() {
     this._assertActive();
     if (!this.trainer) return;
+    if (this.trainingError) throw this.trainingError;
     if (this._finishPromise) return this._finishPromise;
     const trainer = this.trainer;
     this.training = false;
@@ -851,6 +855,7 @@ export class Session {
       await this._frameRunning;
       this._assertActive();
       if (this.trainer !== trainer || this._lost) throw new Error('Training device changed while finishing');
+      if (this.trainingError) throw this.trainingError;
       if (this._completedTrainer === trainer && this._completedAtIter === trainer.iter) return;
       this._log(`training finished early at ${this.trainer.iter} iterations`);
       await this._emitMetrics(true);
@@ -871,6 +876,7 @@ export class Session {
 
   _completeTraining(trainer) {
     if (this._disposed || this._lost || this.trainer !== trainer ||
+        this.trainingError ||
         (this._completedTrainer === trainer && this._completedAtIter === trainer.iter)) return;
     this._completedTrainer = trainer;
     this._completedAtIter = trainer.iter;
@@ -896,6 +902,20 @@ export class Session {
 
   get deviceLost() { return !!this._lost; }
 
+  get trainingError() {
+    return this._trainingFailure?.trainer === this.trainer ? this._trainingFailure.error : null;
+  }
+
+  _trainingFailed(trainer, failure) {
+    if (!trainer || !this._currentTrainer(trainer) || this.trainingError) return;
+    const error = failure instanceof Error ? failure : new Error(String(failure));
+    this._trainingFailure = { trainer, error };
+    this.training = false;
+    this._framePending = false;
+    this._log(`training failed: ${error.message}`);
+    this._em.emit('event', { kind: 'train-error', iter: trainer.iter, message: error.message });
+  }
+
   /** Rebuild after device loss: a fresh device and trainer from the CPU-side
    *  reconstruction. Training restarts at iteration 0. */
   async recover() {
@@ -903,6 +923,7 @@ export class Session {
     if (!this.recon) throw new Error('nothing to recover — no reconstruction');
     this.training = false;
     this._lost = false;
+    this._trainingFailure = null;
     this._fences = [];
     this._ips = null;
     this._thrT = null;
@@ -938,9 +959,10 @@ export class Session {
     const runFrame = () => {
       if (!this._framePending || this._frameRunning || this._finishing || this._disposed) return;
       this._framePending = false;
-      // a readback rejecting mid-flight (device loss) must not become an
-      // unhandled rejection — the loop stops, the device-lost event explains
-      const work = this._frameLoop().catch((e) => this._log(`frame loop: ${(e && e.message) || e}`));
+      // Encoding/readback errors must stop and explain this trainer's run. A late rejection
+      // from a disposed or replaced trainer cannot fail its replacement.
+      const trainer = this.trainer;
+      const work = this._frameLoop().catch((e) => this._trainingFailed(trainer, e));
       this._frameRunning = work;
       work.finally(() => {
         if (this._frameRunning !== work) return;
@@ -1062,7 +1084,11 @@ export class Session {
       // overlap; the frame period becomes ~latency/4 and the same adapter now
       // GROWS the batch until real GPU work dominates. Prompt-fence devices
       // (desktop) behave as before.
-      this._fences.push(trainer.device.queue.onSubmittedWorkDone());
+      const fence = trainer.device.queue.onSubmittedWorkDone();
+      // Attach immediately, even while the fence is still waiting its turn in the ring.
+      // Keep its rejection intact for the later await and the run's error event.
+      fence.catch(() => {});
+      this._fences.push(fence);
       const s0 = performance.now();
       // fence ring depth trades UI latency for fence-latency overlap
       // (phones run 2: the compositor shares the GPU with training, and
@@ -1260,6 +1286,7 @@ export class Session {
     if (this._sched && this._sched.tickWorker) this._sched.tickWorker.terminate();
     this.trainer?.dispose();
     this.trainer = null;
+    this._trainingFailure = null;
     this.view.ctx?.unconfigure?.();
     if (this.gpu) {
       this.gpu.onLost = null;
