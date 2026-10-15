@@ -354,7 +354,7 @@ function sheetsOf(i, fb, side) {
 
 // Starts a turn from the current spread to K2 (a jump of more than one
 // spread, from a link or a page number, happens at once).
-function bookGo(K2, time, pics, N) {
+function bookGo(K2, time, pics, N, selectedPage = null) {
   const st = BOOK.style;
   const Kmax = lastSpread(st, N);
   K2 = Math.max(0, Math.min(Kmax, K2));
@@ -370,7 +370,7 @@ function bookGo(K2, time, pics, N) {
     else if (K2 === K - 1) type = K === 1 ? "shut" : "back";
     else if (K2 === 0) type = "close";
   }
-  const page = spreadPage(st, K2, N);
+  const page = selectedPage ?? spreadPage(st, K2, N);
   BOOK.lastPage = page;
   if (pics && pics.page !== page) pics.go(page);
   if (!type) {
@@ -1974,11 +1974,13 @@ const BOOK_RECIPE = {
     if (N && !BOOK.anim && !PG.pops.length) {
       if (pics && pics.page !== BOOK.lastPage) {
         // The Toy tab's Previous and Next step one spread; any other page
-        // (a link, a jump) opens the spread that shows it.
+        // (a link, a jump) opens the spread that shows it. A search result
+        // retains its exact page, even on the left or already in this spread.
         const d = pics.page - BOOK.lastPage;
-        const K2 = d === 1 ? BOOK.K + 1 : d === -1 ? BOOK.K - 1 : pageSpread(st, pics.page);
+        const selected = pics.exactPage === pics.page ? pics.page : null;
+        const K2 = selected !== null ? pageSpread(st, selected) : d === 1 ? BOOK.K + 1 : d === -1 ? BOOK.K - 1 : pageSpread(st, pics.page); // prettier-ignore
         BOOK.lastPage = pics.page;
-        bookGo(K2, time, pics, N);
+        bookGo(K2, time, pics, N, selected);
       } else if (BOOK.queue.length > 0 && !bookStep(st)) {
         if (BOOK.queue.shift() > 0)
           bookGo(BOOK.K < lastSpread(st, N) ? BOOK.K + 1 : 0, time, pics, N);
