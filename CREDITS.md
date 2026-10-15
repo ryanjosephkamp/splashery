@@ -1822,3 +1822,8 @@ dedicated to CC0-1.0. These are rendered scenes, not real captures. No outside a
 Their source is `tools/studio-truth-generate.py`, and each committed file's size and SHA-256 are
 recorded in `tests/fixtures/truth/assets.json`. Full sequences are kept separately from the shipped
 site. The build-time code is offered under this repository's MIT license.
+
+# Picture QR fit (Codex task 80)
+
+The crop controls, finder geometry, and scan-study tools are made by Ryan with Codex (GPT-6) under
+Splashery's MIT license.
