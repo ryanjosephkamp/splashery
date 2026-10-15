@@ -1,0 +1,31 @@
+{
+  "main": "d4df5998675c5b31ae4dae1240a7e2d73a1fface",
+  "node24": "v24.19.0",
+  "immutableMainNode24Hashes": [
+    {
+      "shape": "default",
+      "actual": "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6",
+      "expected": "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144"
+    },
+    {
+      "shape": "circle",
+      "actual": "3d7e0ad8fd43c822e5a7bff8efcad22c8893313f86818d01cbd3b07b6096d563",
+      "expected": "51848ddea445d56959c8558a2dd4682e8d688bae3fde5f232e7c1b51448a95fb"
+    }
+  ],
+  "currentBuilderIdenticalToMain": {
+    "src/qr/build.js": "de4b0c82fd35b885feaca3b2dba609256b74c61500c73fc17e6e21e5d53d2260",
+    "src/qr/encode.js": "c71999bfeb3156d5cf9782905e679280a3392eb74b302210050e2608a336b900",
+    "src/qr/crisp.js": "ac82e83dce4eb5aeb7ded9d60af2bfc94d2d072f25e7b9ad1df84f3954160a75",
+    "src/qr/circle.js": "3e16d2137cf9cfceb89394707a65b6e207bc31e2d02053123d4f57b1f6a8bce8",
+    "src/qr/eyes.js": "39df90962ae3cea4a0de66dd1a0ed5074d68470e5a7f3f7ffaf89acfb5d0588e",
+    "src/qr/fit-options.js": "ef18d399d17f98a0388e3e2ea8e5e4e6e947fd45195080c8a985236576a3cec6",
+    "vendor/qrcodegen/qrcodegen.js": "606ab7d5730d03af24c0c5358a7babc5328a50e47fdbf4719efafa679c5f4aa5"
+  },
+  "node22": "v22.23.3",
+  "node22IsolatedHashCases": {
+    "passed": 2,
+    "failed": 0,
+    "assertionsUnchanged": true
+  }
+}

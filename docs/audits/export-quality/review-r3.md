@@ -21,6 +21,36 @@ These are policy budgets, not measurements of available phone memory. Compressed
 until Stop, then become a Blob. Nothing is split, uploaded, or written to disk automatically. The
 96/384-MiB phone/computer ceilings still reserve render surfaces and a second output copy.
 
+## Full-length phone takes
+
+All four real takes reached the 180-second time limit, including both High takes. None stopped at
+the byte guard or failed. Each replayed the toy action about every four seconds with sound.
+[The refreshed record-rates-r2.json](record-rates-r2.json) includes retained compressed bytes,
+samples about every five seconds, the largest chunk, and JS heap samples. The earlier short
+phone/computer measurements remain in
+[record-rates-r2-original.json](record-rates-r2-original.json).
+
+| Toy         | Level    | File bytes | Encoded seconds | Video frames | Bytes/second | MB/min | Bytes below encoded cap |
+| ----------- | -------- | ---------: | --------------: | -----------: | -----------: | -----: | ----------------------: |
+| Photo to 3D | Standard |  4,213,835 |         180.662 |          399 |       23,324 |  1.399 |              88,011,061 |
+| Photo to 3D | High     |  2,418,752 |         179.747 |          229 |       13,456 |  0.807 |              64,548,544 |
+| Donut       | Standard |  3,424,492 |         179.975 |          347 |       19,028 |  1.142 |              88,800,404 |
+| Donut       | High     |  2,937,614 |         179.662 |          264 |       16,351 |  0.981 |              64,029,682 |
+
+MB means 1,000,000 bytes. Duration is the span of actual audio/video packet timestamps; UI time is
+clamped at 180 seconds. These sparse SwiftShader recordings establish elapsed duration and retained
+output for this emulation, not sustained hardware 30-fps throughput. Local regression tests ran
+concurrently. Actual-rate measurements therefore do not replace the conservative bitrate budget used
+to calculate the limit.
+[Every video frame was independently decoded](record-rates-frame-checks-r3.json); none was dark or
+near uniform.
+
+The byte samples count the compressed chunks the recorder retains, without retaining extra Blob
+copies in the observer. JS heap samples include the app and garbage-collection churn; they exclude
+native codec, canvas, GPU, and Blob backing allocations, and are not total device memory. The 20%
+reserve is a bitrate policy margin, not a measured free-RAM margin. Physical phone capacity remains
+unmeasured.
+
 ## Picture comparison
 
 Fresh captures use main's fix that waits for an actual draw. Phone emulation is 390 × 844, DPR 3,
@@ -36,9 +66,9 @@ alone is not a fidelity score. Neither level matches the live reference. Per-lev
 compression scores are retained separately; their different reference resolutions cannot establish
 which saved picture has more detail.
 
-Reproduce the fixed captures with `tools/export-quality.mjs --records-only`, then run
-`python3 tools/export-quality-score.py <directory> --compare-phone`. Review clips, reference PNGs,
-and the comparison crop go only on `codex/export-quality-clips`.
+Reproduce the fixed captures with `node tools/export-quality.mjs <directory> --records-only`, then
+run `python3 tools/export-quality-score.py <directory> --compare-phone`. Review clips, reference
+PNGs, and the comparison crop go only on `codex/export-quality-clips`.
 
 ## Integration and failure investigation
 
@@ -50,15 +80,32 @@ The [previous full GitHub run](https://github.com/ryanjosephkamp/splashery/actio
 reported 2,748 passed, seven failed, and one skipped across 314 files. Every failure follows, with
 its automatic isolated rerun result. Passing alone did not erase a failure.
 
-| Previous failure                     | Passed alone?                        | Investigation / correction                                                                                                                         |
-| ------------------------------------ | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `man5:201`, reproducible shipped PDF | No; marked known on main in that run | Main brought a refreshed immutable PDF. Adding the two missing library rows requires another print in the pinned CI environment.                   |
-| `man5:252`, complete vendor table    | No                                   | Reproduced. Added both MIT muxers, their pinned versions, jobs, and lazy loading point to the manual; rebuilt its combined page. Passed afterward. |
-| `man7a:67`, animated grid figure     | Yes                                  | Retained as a reported timing failure; no assertion changed.                                                                                       |
-| `math:368`, typed surface            | Yes                                  | Retained as a reported timing failure; no assertion changed.                                                                                       |
-| `shr:135`, desktop Share layout      | No                                   | CI trace identified `gif-frames` clipping at “144 frames.” The Frames field now contains just the number; no layout or assertion changed.          |
-| `spg:46`, complete site credits      | No                                   | Reproduced. Rebuilt the generated credits page from CREDITS.md and LICENSES.md; passed afterward.                                                  |
-| `ui3:76`, pause/resume               | Yes                                  | Retained as a reported timing failure; no assertion changed.                                                                                       |
+| Previous failure                     | Passed alone?                        | Investigation / correction                                                                                                                                                 |
+| ------------------------------------ | ------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `man5:201`, reproducible shipped PDF | No; marked known on main in that run | Imported a fresh immutable edition from the pinned Chromium 141 workflow after adding the library rows. All 29 manual and PDF checks passed, including reproducible bytes. |
+| `man5:252`, complete vendor table    | No                                   | Reproduced. Added both MIT muxers, their pinned versions, jobs, and lazy loading point to the manual; rebuilt its combined page. Passed afterward.                         |
+| `man7a:67`, animated grid figure     | Yes                                  | Retained as a reported timing failure; no assertion changed.                                                                                                               |
+| `math:368`, typed surface            | Yes                                  | Retained as a reported timing failure; no assertion changed.                                                                                                               |
+| `shr:135`, desktop Share layout      | No                                   | CI trace identified `gif-frames` clipping at “144 frames.” The Frames field now contains just the number; no layout or assertion changed.                                  |
+| `spg:46`, complete site credits      | No                                   | Reproduced. Rebuilt the generated credits page from CREDITS.md and LICENSES.md; passed afterward.                                                                          |
+| `ui3:76`, pause/resume               | Yes                                  | Retained as a reported timing failure; no assertion changed.                                                                                                               |
 
-Full-length take measurements, requested merged-tree specs, and the next full GitHub run are in
-progress. Final results will be recorded here before hand-back.
+## Validation checkpoint
+
+The merged-tree export spec passed all 21 cases. The duration regression failed at 60 seconds before
+the fix and passes at 180 afterward. The pinned
+[manual-PDF workflow](https://github.com/ryanjosephkamp/splashery/actions/runs/38812628385) passed
+all 29 manual/PDF cases. Its immutable edition is `tinkerers-manual-e50e5205f56d0c83.pdf`; the
+downloaded artifact's source commit and PDF content hash were checked before import.
+
+The broader local run uses Node 24 and SwiftShader. Its moving-PDF case timed out under concurrent
+capture load, then passed individually in 3.7 minutes with the original 240-second timeout and every
+assertion unchanged. The initial timeout still counts. Both exact QR builder hashes fail under Node
+24, including on extracted immutable main `d4df5998`; both pass individually under Node 22.23.3,
+matching CI's runtime. Builder source files are identical to main. Assertions are unchanged. See
+[the runtime comparison](runtime-hashes-r3.json) and [the PDF build record](manual-pdf-r3.json).
+
+Final merged-tree local results and full GitHub results, including every failure and its isolated
+rerun, are maintained in [PR #654](https://github.com/ryanjosephkamp/splashery/pull/654) and the
+clips branch's `r3/verification.json`. The Operator's `full-suite` label is retained. This
+checkpoint does not claim a green full suite.

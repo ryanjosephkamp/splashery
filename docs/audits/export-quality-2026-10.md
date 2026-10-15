@@ -198,7 +198,7 @@ Real, unpaused takes replayed each toy's action about every four seconds, with t
 recorder and its audio track. Each requested 15 seconds after startup. MB means 1,000,000 bytes;
 MB/min divides the entire saved file size by its actual encoded duration across both tracks,
 measured with FFprobe packet timestamps. UI elapsed time is retained separately in
-[record-rates-r2.json](export-quality/record-rates-r2.json). Independent
+[original R2 rates](export-quality/record-rates-r2-original.json). Independent
 [all-frame checks](export-quality/record-rates-frame-checks-r2.json) decoded every video frame; none
 was dark or near uniform.
 
