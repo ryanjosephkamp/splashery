@@ -6,6 +6,7 @@ import { chromium } from "@playwright/test";
 import fs from "node:fs/promises";
 import { pathToFileURL } from "node:url";
 import { execFileSync } from "node:child_process";
+import { makeSplat } from "../tests/fixtures.mjs";
 
 export const launchArgs = [
   "--use-angle=swiftshader",
@@ -155,7 +156,7 @@ export async function choose(page, id) {
 }
 export const settle = (page) => page.waitForTimeout(550); // Two complete cleanup periods.
 
-async function clay(page, cdp) {
+async function prepareClay(page) {
   await page.evaluate(async () => {
     const { app } = window.__splashery;
     app.sound.setEnabled(false);
@@ -225,6 +226,10 @@ async function clay(page, cdp) {
       };
     };
   });
+}
+
+async function clay(page, cdp) {
+  await prepareClay(page);
   const samples = [];
   for (const n of [0, 1900, 2000, 2400, 4000, 8000]) {
     const work = await page.evaluate((n) => window.__life.work(n), n);
@@ -329,7 +334,41 @@ async function clay(page, cdp) {
       notice,
     });
   }
-  return { samples, saved, releases };
+  const sourceFile = await fileSource(page, cdp);
+  return { samples, saved, releases: [...releases, sourceFile] };
+}
+
+async function fileSource(page, cdp) {
+  await prepareClay(page);
+  await page.evaluate(() => window.__life.work(8000));
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const arrays = [player.proc.clay, player.scene.toy.clay, player.scene.paint.stamps];
+    window.__life.oldEdits = [...arrays, ...arrays.flatMap((a) => [a[0], a.at(-1)])].map(
+      (a) => new WeakRef(a),
+    );
+  });
+  const before = await heap(cdp);
+  await page.evaluate(
+    async (bytes) => {
+      await window.__splashery.app.openFile(new File([new Uint8Array(bytes)], "lifecycle.splat"));
+    },
+    Array.from(makeSplat(256)),
+  );
+  await settle(page);
+  return {
+    action: "local file source",
+    before,
+    after: await heap(cdp),
+    retainedArraysAndEdits: await page.evaluate(() =>
+      window.__life.oldEdits.map((r) => !!r.deref()),
+    ),
+    remaining: await page.evaluate(() => [
+      window.__splashery.player.proc?.clay.length || 0,
+      window.__splashery.player.scene.paint.stamps.length,
+    ]),
+    toyKind: await page.evaluate(() => window.__splashery.player.scene.toy.kind),
+  };
 }
 
 async function openVideo(page) {
@@ -755,6 +794,7 @@ export async function runProbe({
               live: livePanel,
               stageRecording: stageRecorders,
               emptyRecording: emptyRecordings,
+              fileSource,
             }[name](page, cdp, async (partial) => {
               row[name] = partial;
               if (out) await fs.writeFile(out, JSON.stringify(result, null, 2) + "\n");
