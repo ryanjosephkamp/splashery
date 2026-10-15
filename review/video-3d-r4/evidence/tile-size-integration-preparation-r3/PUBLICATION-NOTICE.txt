@@ -1,0 +1,2 @@
+Own synthetic controls are CC0; original/modified library code retains MIT notices. Preparation and all failed intermediate attempts are preserved. Final R5 has22CPU controls and six actual-GPU cases; integrated checks have24cases. No native performance or quality acceptance claim.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

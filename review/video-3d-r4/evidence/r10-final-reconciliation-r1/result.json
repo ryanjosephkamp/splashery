@@ -1,0 +1,419 @@
+{
+  "status": "strict-final-r10-paired-snapshot",
+  "at": "2026-10-15T12:13:51.992138+00:00",
+  "sourceRunCounts": {
+    "paired": 15,
+    "unpaired": 11
+  },
+  "recordedRows": {
+    "paired": 15,
+    "unpaired": 11
+  },
+  "snapshot": "/workspace/v3d-r4-media/candidate-r10-final-reconcile-snapshots-r1/0001",
+  "runSha256": "11b59f9751d90b1c0093e9c13ee2450911a71e11d52b5b30b4e4826e221189c0",
+  "pairedProvenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "unpairedProvenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "comparison": "/workspace/v3d-r4-media/follow-r10-final-reconcile-r1-control/comparison-0001.json",
+  "coverage": {
+    "expectedRows": 40,
+    "recordedRows": 15,
+    "pending": [
+      "cat-track/desktop",
+      "buddha/desktop",
+      "chameleon-flowers/desktop",
+      "dianthus/desktop",
+      "pisac/phone",
+      "pisac/desktop",
+      "sleeping-dog/desktop",
+      "palace-statue/phone",
+      "palace-statue/desktop",
+      "oa-street/desktop",
+      "ullard/desktop",
+      "snaefell/desktop",
+      "fremantle-orbit/desktop",
+      "ihasalu-orbit/desktop",
+      "fresnel-lens/desktop",
+      "saint-denis/desktop",
+      "horse-statue/desktop",
+      "royal-sovereign/phone",
+      "royal-sovereign/desktop",
+      "viljandi-ruins/phone",
+      "viljandi-ruins/desktop",
+      "kakerdi-bog/phone",
+      "kakerdi-bog/desktop",
+      "fjoloy/phone",
+      "fjoloy/desktop"
+    ],
+    "unaccounted": [
+      "horse-statue/phone"
+    ],
+    "allOutcomesAccounted": false
+  },
+  "master": "/workspace/v3d-r4-media/candidate-r10-paired-master-v1",
+  "rows": [
+    {
+      "id": "cat-track",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "cat-plays",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "buddha",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 18.345199102902615,
+        "ssim": 0.6888563937334138,
+        "laplacian": 0.00014007688795279389,
+        "sourceLaplacian": 0.004505375639808675
+      }
+    },
+    {
+      "id": "dianthus",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 17.533233933009335,
+        "ssim": 0.42263565497424904,
+        "laplacian": 0.0023708820785028704,
+        "sourceLaplacian": 0.028599819947261768
+      }
+    },
+    {
+      "id": "sleeping-dog",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "oa-street",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "ullard",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 14.892017725252733,
+        "ssim": 0.43298239043079745,
+        "laplacian": 0.0004625427788070021,
+        "sourceLaplacian": 0.018890581034057746
+      }
+    },
+    {
+      "id": "snaefell",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 18.337164898009874,
+        "ssim": 0.6217945311110148,
+        "laplacian": 9.662059423249837e-05,
+        "sourceLaplacian": 0.01122117442889559
+      }
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 17.480776184778207,
+        "ssim": 0.7687941294830936,
+        "laplacian": 3.704384639601725e-05,
+        "sourceLaplacian": 0.00256720915425588
+      }
+    },
+    {
+      "id": "ihasalu-orbit",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 19.624641288996298,
+        "ssim": 0.6504589705941352,
+        "laplacian": 0.00027452687948421243,
+        "sourceLaplacian": 0.005889642353105264
+      }
+    },
+    {
+      "id": "fresnel-lens",
+      "profile": "phone",
+      "status": "explained",
+      "mean": null
+    },
+    {
+      "id": "saint-denis",
+      "profile": "phone",
+      "status": "finished",
+      "mean": {
+        "psnr": 13.567197248075798,
+        "ssim": 0.2971990058933221,
+        "laplacian": 0.0032682094154641078,
+        "sourceLaplacian": 0.018137129972124688
+      }
+    },
+    {
+      "id": "horse-statue",
+      "profile": "phone",
+      "status": "harness-error",
+      "mean": null
+    }
+  ],
+  "unpairedRunsPreserved": [
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/006-cat-track-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "f157a2853c4277709bfd53b4f05de3449b79d5b8a2fcf7c703821fe2ec405d86",
+      "rows": [
+        {
+          "id": "cat-track",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "b03ee80cf2c8f5fa2bac7afb59960dfa983308683af0fdf400e8a8843f3d4b74",
+          "caseInventorySha256": "6181c232fce6f9288dcfe9f21a65e8cf49bcf5cf3f99f8ce96ac847ca8082815"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "cat-track",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/007-buddha-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "d98dea93e10afc73467bf2ac4dc80a73eea3c8b3cecff159fb1c33f82389d90b",
+      "rows": [
+        {
+          "id": "buddha",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "f520c133ce21dff3aeeea33688f8c09f324130ade67ee477ffe3bdeac0aa5cdb",
+          "caseInventorySha256": "a16224950b48892200055b3340d536c3bced031d3d46861506a859c365257f06"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "buddha",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/009-chameleon-flowers-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "39a5ba17e92346e97fab56cf66c958613aef4f7c96c3c8eb6ca27c16149846ef",
+      "rows": [
+        {
+          "id": "chameleon-flowers",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "c4d8e6b8b45bde29af5a0f3891861d6c0ffadbc6d89d2f4ed1c70ddfd810aacb",
+          "caseInventorySha256": "4b8205242b3277cd1daabaad04e927c67525257146fd3c03abad320c91b8d174"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "chameleon-flowers",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/010-dianthus-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "b2535e1ea66c81a5dc223bc4063fd9b050a498f46984ccca27b193f60262e2a7",
+      "rows": [
+        {
+          "id": "dianthus",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "7a8c82f2d77a9f3045063057b619b79ccb9f309d4bb83410e200894d3336e186",
+          "caseInventorySha256": "24154f30b6a5c2e35ce4286bd3392ceac17d33178ee9786c2307b0a047314403"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "dianthus",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/013-pisac-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "c2a86c200d55e812b8ffe3985476771ef016ec7e2e21555b9ee6930373864151",
+      "rows": [
+        {
+          "id": "pisac",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "aae85b0f2ef4fdf531eca2f36c26f097403af60848917e79ccda9b3bbf0de5b1",
+          "caseInventorySha256": "0f611cfa1ec9b352f5ae6089448f657ead7462859388db545454c3a63cc4c1e0"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "pisac",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/016-sleeping-dog-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "04b981b0b01cb752bf5794ee93fe39ec3fbe5304e019f76e61d49fac20ce568e",
+      "rows": [
+        {
+          "id": "sleeping-dog",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "84781d7ed2b3d5d5a4f0e36b1a8f65bee392aca50dccd925d8b7c6e20efde7d3",
+          "caseInventorySha256": "913a532dee5619e7a2c849f1d858399ef9326662d3a9d37256d8bc01a9448100"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "sleeping-dog",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/018-palace-statue-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "802a435eef69c768ea0daed7d1630331fe1e13f520c4fe37a82ba57441f2b992",
+      "rows": [
+        {
+          "id": "palace-statue",
+          "profile": "desktop",
+          "status": "harness-error",
+          "accounted": false,
+          "rowFingerprint": "bda7e95c438a74d7acfdd1b5bdc1fa5f2df558edc31e5108db5ffc6b1c59c4f6",
+          "caseInventorySha256": "67af030dc3c786c75afb471cc79f605aa6858743f29c0a17c710e6eab8c1bb8e"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "palace-statue",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/020-oa-street-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "34e209ac494aae1fc15fd20f9dc5525e5e76bfb5f0e3d7a73be125b59abe0154",
+      "rows": [
+        {
+          "id": "oa-street",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "9fbe0316b5a7ec378141cfe7e8849fd3246cafe7e9b1a32f2eee362f4ca2f564",
+          "caseInventorySha256": "0fd046f1511d5e85f2b2bef30e72e848d89a6688bd69a76bf320d84217789f9a"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "oa-street",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/023-ullard-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "4eece19b039f2f184f1e9ffad7b500ce53eb260e140bcadf560cebbce3620561",
+      "rows": [
+        {
+          "id": "ullard",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "b569bb86d5f31945949a56c04c4a9846aa2712e8892408f3d6d8f2d515b97153",
+          "caseInventorySha256": "3cdf2edbfe2d8c9221f60c857e7f0b21dcbe0741eb9a1445d6a9d193c618db0e"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "ullard",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/025-snaefell-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "4f7955e9edf82e74777336d0df3dde208a81559aebe13a660f764110eb99ef5d",
+      "rows": [
+        {
+          "id": "snaefell",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "c275a20e11265424b037ad544a38f29bfdf1ed8cee23c90b901e6e813c5e21b4",
+          "caseInventorySha256": "d9b40ffcc98305308655bfefbf726b6c19d748e2c399f2575f88bb6ef7e0d5e1"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "snaefell",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/026-fremantle-orbit-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "f14279ce930196c3424bfb7e0b636dd0f58c70443219c4dfa5e850d8109f6d91",
+      "rows": [
+        {
+          "id": "fremantle-orbit",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "af2480f0e08686ca96d2d6e8987c6908b2bcc3ce4d69ac05537a70723f40aefd",
+          "caseInventorySha256": "e1c0e68c5d0a62166a7c8777fac5c7ce29b2e0b96ed10e7165dfffedbb55d394"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "fremantle-orbit",
+          "profile": "desktop"
+        }
+      ]
+    }
+  ],
+  "originalControlUnchanged": true,
+  "rawRowsArtifactsUnchanged": true,
+  "noSignals": true,
+  "noNativeLaunch": true,
+  "noR11StateMutation": true,
+  "limitations": "Missing/unaccounted cases still block strict acceptance; emulator shared-load timing is not physical-phone or isolated performance."
+}

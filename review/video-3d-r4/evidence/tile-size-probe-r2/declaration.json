@@ -1,0 +1,163 @@
+{
+  "at": "2026-10-15T11:38:10.529Z",
+  "scriptSha256": "0f78b4e032c8e7197d2cedeb0e40cf02e6ea91b17d8672937848069437d8cc2d",
+  "sourceBefore": [
+    {
+      "file": "v16/src/gs/trainer.js",
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "v16/src/gs/shaders.js",
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "v16/src/sfm/geometry.js",
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "v16/src/gpu/context.js",
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "v8/src/gs/trainer.js",
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "v8/src/gs/shaders.js",
+      "sha256": "548d82d08926ef80f1c1d7985eb7846b1437ce61969e4ff37ec353800548c611"
+    },
+    {
+      "file": "v8/src/sfm/geometry.js",
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "v8/src/gpu/context.js",
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    }
+  ],
+  "sourceBinding": [
+    {
+      "file": "v16/src/gs/trainer.js",
+      "bytes": 124142,
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "v16/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "v16/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "v16/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "v8/src/gs/trainer.js",
+      "bytes": 124142,
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "v8/src/gs/shaders.js",
+      "bytes": 102362,
+      "sha256": "548d82d08926ef80f1c1d7985eb7846b1437ce61969e4ff37ec353800548c611"
+    },
+    {
+      "file": "v8/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "v8/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    }
+  ],
+  "cases": [
+    {
+      "id": "small",
+      "n": 1000,
+      "w": 96,
+      "h": 54,
+      "order": [
+        8,
+        16
+      ],
+      "camera": {
+        "imgIdx": 0,
+        "R": [
+          0.9991706726422123,
+          -0.0022052071506650692,
+          -0.04065838158524904,
+          0.0005443122838700204,
+          0.9991665358031275,
+          -0.04081589709065806,
+          0.04071450178801998,
+          0.04075991649402895,
+          0.9983390999813397
+        ],
+        "t": [
+          0.03038902086164858,
+          0.05534470780309189,
+          0.5392362669250202
+        ],
+        "f": 214.0641975468974,
+        "cx": 48,
+        "cy": 27,
+        "fy": 214.0641975468974,
+        "w": 96,
+        "h": 54
+      },
+      "paramsFile": "small-params.f32",
+      "imageFile": "small-image.f32",
+      "paramsSha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608",
+      "imageSha256": "cace76c4a9dece604c98edd306596896e7dac19b858259dbcf5653dba67d9890",
+      "steps": 4
+    },
+    {
+      "id": "phone",
+      "n": 15000,
+      "w": 320,
+      "h": 180,
+      "order": [
+        16,
+        8
+      ],
+      "camera": {
+        "imgIdx": 0,
+        "R": [
+          0.9991706726422123,
+          -0.0022052071506650692,
+          -0.04065838158524904,
+          0.0005443122838700204,
+          0.9991665358031275,
+          -0.04081589709065806,
+          0.04071450178801998,
+          0.04075991649402895,
+          0.9983390999813397
+        ],
+        "t": [
+          0.03038902086164858,
+          0.05534470780309189,
+          0.5392362669250202
+        ],
+        "f": 713.5473251563245,
+        "cx": 160,
+        "cy": 90,
+        "fy": 713.5473251563245,
+        "w": 320,
+        "h": 180
+      },
+      "paramsFile": "phone-params.f32",
+      "imageFile": "phone-image.f32",
+      "paramsSha256": "f957cbc1ac0e35d212c421f200fcd94dadbdf088a0d3f1608f0d3c58c6a3efe2",
+      "imageSha256": "41a2bc8e822304238d1249cff2b35dc6829498710cd4e3943abee01dee6bd560",
+      "steps": 4
+    }
+  ],
+  "protocol": "Four complete fenced stepOnce calls per variant, identical fixed real cached inputs and optimizer seeds; opposite tile orders by case. Preserve raw model, both Adam moments, fixed-point/float gradients, rendered pixels, and statistics. Exact byte parity and zero GPU/page errors required. Includes optimizer work, no camera solve/refinement/held-out images/bakes or native goal claims. Source copies remain outside product and immutable."
+}

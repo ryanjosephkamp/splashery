@@ -1,0 +1,5 @@
+{
+  "startedAt": "2026-10-15T10:40:17.361Z",
+  "endedAt": "2026-10-15T10:40:17.452Z",
+  "error": "page.evaluate: UnsupportedMp4: Nontrivial edit list unsupported\n    at fail (http://127.0.0.1:4195/mp4-decode-research-r2/demux.mjs:6:22)\n    at demuxAvc (http://127.0.0.1:4195/mp4-decode-research-r2/demux.mjs:41:153)\n    at Module.probe (http://127.0.0.1:4195/mp4-browser-probe-r1/decode-v4.mjs:5:118)\n    at async eval (eval at evaluate (:290:30), <anonymous>:1:88)\n    at async <anonymous>:316:30\n    at /workspace/v3d-r4-media/mp4-browser-probe-r1/run-v4.mjs:4:189"
+}

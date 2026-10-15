@@ -1,0 +1,984 @@
+{
+  "at": "2026-10-15T11:13:18.910376+00:00",
+  "scope": "One bounded native SwiftShader HTML playback extraction experiment; six fixed pairs plus actual cancel control; no source/runtime/protocol/coordinator mutations or signals",
+  "codeAttribution": "Made by Ryan with Codex (GPT-6), original helper MIT; copied sources/corpus retain original rights",
+  "outcome": {
+    "sequentialVerifiedPairs": 2,
+    "expectedPairs": 6,
+    "verifiedSequentialJpegs": 32,
+    "totalVerifiedJpegs": 170,
+    "imageTolerance": 0,
+    "ptsToleranceSeconds": 1e-06,
+    "extensionDisabled": true,
+    "nativeAbort": "No complete photographs, paused/closed source; one actual trial",
+    "browserServerClosedAt": "2026-10-15T11:10:41.765Z"
+  },
+  "timingNotice": "Same-page extraction-only under concurrent load; one1440x900context for native phone/high frame settings; no bakes/physical-device/acceptance claim",
+  "knownLimitations": [
+    "No explicit exact-ceil source-frame guard in R1; failed desktopFremantle included5late trialPTS",
+    "First cold-start missed target has no returned full RVFC telemetry",
+    "No R2 or startup variant launched"
+  ],
+  "files": [
+    {
+      "file": "01-chameleon-flowers-phone-seek/0.jpg",
+      "bytes": 32573,
+      "sha256": "c8c3422ad0133060588f67d681eaff6b3b8a0403ba1276a0fc61272348f70bf5"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/1.jpg",
+      "bytes": 32983,
+      "sha256": "a1a9f4bfb119837a78833da4475b7e21ba36a00dc7b961c8cfbe6cb0c74f2509"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/10.jpg",
+      "bytes": 27810,
+      "sha256": "69136f0dba0e6b530e1630693531306a137ea5180970ec81825b47df03bd9606"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/11.jpg",
+      "bytes": 25958,
+      "sha256": "3eb58904390439b80f83d062c59a89c52021b4170dbdccbcab501ab4cb782c24"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/12.jpg",
+      "bytes": 25471,
+      "sha256": "79e4d32fbd639e60be467a9cd1ec7be163cedb963750daa4b4a89260e7bd6306"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/13.jpg",
+      "bytes": 25667,
+      "sha256": "f2df66d1c5ddb0f99f95aea413b4f2e64d0e759ffaed3b61f7765e66b17ea119"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/14.jpg",
+      "bytes": 24457,
+      "sha256": "ca619a74afe824b6872d3d9649bbc78a65eae35346ead9eea7d81c851c683ce5"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/15.jpg",
+      "bytes": 25218,
+      "sha256": "0b3f9bc7cc8ef5d83cc4a7021f1a4c15b90f4cc13937d03fb96bed18f969d335"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/2.jpg",
+      "bytes": 33109,
+      "sha256": "b7e7d3e26905e2017af14f28d51edc3a943ac00d3ba03c35b0b93eab1a8998c1"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/3.jpg",
+      "bytes": 31875,
+      "sha256": "1203855f1edb99d3e30df757fc08f71b1fb23bc4cdbc5675964bb94e0720849c"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/4.jpg",
+      "bytes": 32846,
+      "sha256": "2e3865ea8511528a89a610c90fddf62f789af06e43a17d5b1afc5dd5e25f08a6"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/5.jpg",
+      "bytes": 32612,
+      "sha256": "9c9f666495f4181da9016b28523f7c02ea8cc717be631c785a7d1e7dc6aa9049"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/6.jpg",
+      "bytes": 32556,
+      "sha256": "c6625e1250bbc34694be7d8d149648d5d7befd5d46680a55191e82c60f1da349"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/7.jpg",
+      "bytes": 32179,
+      "sha256": "4bfa76e0286af1d4daa9078b9ab1de2a2d41249fc0fa91868dc74f8bd6ed52b4"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/8.jpg",
+      "bytes": 31023,
+      "sha256": "ee18e8c0209a68c77c812c254079339085306c88db7add91ab7a0151e9cb0e31"
+    },
+    {
+      "file": "01-chameleon-flowers-phone-seek/9.jpg",
+      "bytes": 28655,
+      "sha256": "ddb18add90bf201c9686a141e7cafc5ff66bca69f2f2e1a5f3a0d56695d645f2"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/0.jpg",
+      "bytes": 53417,
+      "sha256": "2fe66928a3e100fbb9e58b40b1591140195c2eeacd4ad57089a9643d0aa919cc"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/1.jpg",
+      "bytes": 51748,
+      "sha256": "13c133b86e894f0b571ef09e972cb06c84a2ac64fb2a4796f88a9948f62e4ffb"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/10.jpg",
+      "bytes": 51693,
+      "sha256": "8ebbe351a737e283b18922871f341a85e079b5d3d86466f03c190b18f4d839f3"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/11.jpg",
+      "bytes": 52949,
+      "sha256": "6e594e8d0651cab9bb4ff9245be3471f9f72e82594e7deb13f568c6fecc99c44"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/12.jpg",
+      "bytes": 55767,
+      "sha256": "787576df6401700996349cff7355d2e10e1e5a64194ad2c3083daa63f5fb4562"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/13.jpg",
+      "bytes": 56020,
+      "sha256": "4834afb0c4f9f6dfaa0c2c0ff71f48563836649d2c0811192b469741a8c34253"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/14.jpg",
+      "bytes": 55478,
+      "sha256": "79c57c42365b0eb45849298a200c9dd97e3648a5013c99c255b2f07e2667038b"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/15.jpg",
+      "bytes": 53727,
+      "sha256": "ae99ee228308abf6ede2c195e561cd67282ef4f4ad869a5d3f5c9a6f4130dbaf"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/2.jpg",
+      "bytes": 51488,
+      "sha256": "35e70f2d0d9b8bcb6d1213a5672ef1389c00371e34e852e7986f11ba61e8aa2b"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/3.jpg",
+      "bytes": 50407,
+      "sha256": "beb4ee796f98a844502f58420d182a48abe8adebbe082264bb2cfea3e266bee4"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/4.jpg",
+      "bytes": 51377,
+      "sha256": "a14380647eaf5f2a9334a0cc484febea7b46d47174bcf0fb6a291dc2cc1e0ade"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/5.jpg",
+      "bytes": 51617,
+      "sha256": "059a72fd3004de6c1aedd517c25a32eef016024e12a72d79b56f161288b79365"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/6.jpg",
+      "bytes": 51981,
+      "sha256": "9631cac1a0531a65dc97e8ac8f85d7485e40aee4af7208b6578fec30219633de"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/7.jpg",
+      "bytes": 52364,
+      "sha256": "acc039141b16fa22287c0d360a25f3974fbfe06d68d38c107079609603370863"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/8.jpg",
+      "bytes": 51048,
+      "sha256": "e2af4d6442aa9f10864fc7d0c350ed6eede8f03afd30b01939e2d0bddaf39131"
+    },
+    {
+      "file": "02-cat-plays-phone-seek/9.jpg",
+      "bytes": 52161,
+      "sha256": "5f84b3333b4c6ab3e11adf881c5c0054a6beb3044bbc08e6f29c6c2fe2554934"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/0.jpg",
+      "bytes": 53417,
+      "sha256": "2fe66928a3e100fbb9e58b40b1591140195c2eeacd4ad57089a9643d0aa919cc"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/1.jpg",
+      "bytes": 51748,
+      "sha256": "13c133b86e894f0b571ef09e972cb06c84a2ac64fb2a4796f88a9948f62e4ffb"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/10.jpg",
+      "bytes": 52198,
+      "sha256": "990c1af2b1392cdc409c4486a2db9627dc96d685ede7376c11c8e327a80beafb"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/11.jpg",
+      "bytes": 52182,
+      "sha256": "8f3b70bd0ad9bf0eea544bc6df60af1739fa70238da9e0830de4da79d3695890"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/12.jpg",
+      "bytes": 55767,
+      "sha256": "787576df6401700996349cff7355d2e10e1e5a64194ad2c3083daa63f5fb4562"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/13.jpg",
+      "bytes": 55704,
+      "sha256": "f44df0e79e9c84744e03054567869389a62fb5dc8b45596f6c151d012c9aadda"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/14.jpg",
+      "bytes": 54856,
+      "sha256": "04cdf64ce5172ccce648330846395999e13fb605c74672492cb5324bdb0be851"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/15.jpg",
+      "bytes": 51837,
+      "sha256": "cd7d00c0d5e26d26088deb8704a312e63828020964cac96bc13472678b082e7e"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/2.jpg",
+      "bytes": 51529,
+      "sha256": "11cb882895fe9f0c54109940f6b4b9b132caa4def0016a4c2881e17ead52aca9"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/3.jpg",
+      "bytes": 51071,
+      "sha256": "f898dbf6c92cd516dcb0f3e90a72ea329456b0c8bec2dab74eaa3a3f6e11cdd5"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/4.jpg",
+      "bytes": 51377,
+      "sha256": "a14380647eaf5f2a9334a0cc484febea7b46d47174bcf0fb6a291dc2cc1e0ade"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/5.jpg",
+      "bytes": 51617,
+      "sha256": "059a72fd3004de6c1aedd517c25a32eef016024e12a72d79b56f161288b79365"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/6.jpg",
+      "bytes": 53395,
+      "sha256": "e4532d372473e4913e3ec1f84f539ef9fe94a176fca32221b012220fa183a933"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/7.jpg",
+      "bytes": 52275,
+      "sha256": "2da15ca0b90bf6640701f678af3fe3f7825c2c5c14b16f8c7acaaca36d02f527"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/8.jpg",
+      "bytes": 51048,
+      "sha256": "e2af4d6442aa9f10864fc7d0c350ed6eede8f03afd30b01939e2d0bddaf39131"
+    },
+    {
+      "file": "03-cat-plays-phone-sequential/9.jpg",
+      "bytes": 52753,
+      "sha256": "a9f9d223a0051bf67ed83b91064709cdb037c9ca6a8c5b16b318ea65befa9470"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/0.jpg",
+      "bytes": 22884,
+      "sha256": "71262df560b28d95cb03026be9a3277a632604b42f5eaf0279307fe6c2d84185"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/1.jpg",
+      "bytes": 23159,
+      "sha256": "312c0e82a9d33ff5c33f4ed89f3ceaa16156f8239185641b2f2e780e8a0a0359"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/10.jpg",
+      "bytes": 20838,
+      "sha256": "7ef1f35cd7e34dde959e30828c43355b75657ce478a8c86578f507d74c817195"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/11.jpg",
+      "bytes": 20884,
+      "sha256": "4286b6f85ce28ed60fd7798f0603d905ed5be1832175094c9e2fd2326ea0eeef"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/12.jpg",
+      "bytes": 20746,
+      "sha256": "1ba814dc780987fb11f71812d29202d2f67e73a14248093221d17e5ccf976fee"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/13.jpg",
+      "bytes": 21092,
+      "sha256": "c1d00e2fdfef1be1c6a55a1b2d1b6b9fc74092766533acca92038e3751a0937b"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/14.jpg",
+      "bytes": 21481,
+      "sha256": "00f49fc19130bec6cd202de1c17550ff0660e2cff2a71b74bfef34495aab365b"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/15.jpg",
+      "bytes": 21115,
+      "sha256": "8ccc4d2c4aed5468ea3cdbe334c68b84482c70628642294edbedf6846a72d382"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/2.jpg",
+      "bytes": 23345,
+      "sha256": "dcd19a1ac9d98080785a9fe8899d95f15b96dd66518d570674fa0a1cb82a6818"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/3.jpg",
+      "bytes": 23674,
+      "sha256": "c86b77a38c711df22bf9145a20fa97c5c485bf7dd230bd1f8b4e9cf34b570e41"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/4.jpg",
+      "bytes": 23075,
+      "sha256": "489ab460c49b2a4f46e7e529f51da4d12badae770ddd94ed3869300ea7ec2e43"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/5.jpg",
+      "bytes": 22733,
+      "sha256": "168e199570239cc62558ae1fbe2ae458d5586bba9a20f71e138d6fcda2db9202"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/6.jpg",
+      "bytes": 22481,
+      "sha256": "48be2d421bdb590e2078012b51db0a4a99545469624d0efe44a9323e120b0157"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/7.jpg",
+      "bytes": 22086,
+      "sha256": "3abd61860196689ab33eeceaa27904e478d5a8eeefaae29e7131013f03f2a85c"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/8.jpg",
+      "bytes": 21340,
+      "sha256": "c52ae4a62f8b16fbb462b00abf60c2c2a20f5ea37313c37cf782aa303f72f85f"
+    },
+    {
+      "file": "04-fremantle-orbit-phone-sequential/9.jpg",
+      "bytes": 21223,
+      "sha256": "8191f25071771d5f156f36e403decb0ae5bf11e341d218a79bdbb1dc08bba03f"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/0.jpg",
+      "bytes": 23597,
+      "sha256": "90e58e782fab8030254102cd8dff5e70dc793df55f8aed9c8ff833a5f86c4e98"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/1.jpg",
+      "bytes": 23908,
+      "sha256": "939175436563997b0851f7c514f1bf57f5c4eff4be7b825cb73d07b2549f58d7"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/10.jpg",
+      "bytes": 21038,
+      "sha256": "9b00154c935e641e1f2a3238cea3136497c2a1d8ea3f32be10f188d85ea96610"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/11.jpg",
+      "bytes": 21208,
+      "sha256": "1b5b72418387584dce2ce9ea34ee3c2962fb31dc45fa0ade437cc5c4c24e9e88"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/12.jpg",
+      "bytes": 21064,
+      "sha256": "22ceb1aed870bfe43fff82d81bb16fcd9aed472d10953fe0ad672f229e244f9d"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/13.jpg",
+      "bytes": 21734,
+      "sha256": "289ee42db54d030858efee9d6f5fb02ea7b9ff9e6376ee9a86cf5644ec803d7b"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/14.jpg",
+      "bytes": 22051,
+      "sha256": "229b6ea26ea81742935b9af53acbb5dbf530301b0e925877a579eb6151a105ed"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/15.jpg",
+      "bytes": 21839,
+      "sha256": "f5ccad5ec3b29efd37eff4d9f96c65950d83c2ebcf28566c0cd7f8f12c4abeea"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/2.jpg",
+      "bytes": 23775,
+      "sha256": "e4cff3e146bcb2a214a9d1fc4101773f382f25dfce6bd7c3feb43d39b1a27bfe"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/3.jpg",
+      "bytes": 22744,
+      "sha256": "bb4e3f59efaf18a49362704a7a4c729409cb517a253d646dcaf5ea02c12614eb"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/4.jpg",
+      "bytes": 22498,
+      "sha256": "fcc74ca150bb182770ccbf389d8c307c3e4636c58b014cf8900487680e20a89c"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/5.jpg",
+      "bytes": 22311,
+      "sha256": "f22639a38cc347646ea609a6ff49d1ded6e38b1cc63ddcd444db2346acf1c6ca"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/6.jpg",
+      "bytes": 22089,
+      "sha256": "18dbd53f6f9e1e450a96be189b83407d0a525005cc99fe9406294d8703d83993"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/7.jpg",
+      "bytes": 21644,
+      "sha256": "b6896cc47447f2c93049e8f94bd59fa97282aee3a716c8734cf737ef6bfa44f9"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/8.jpg",
+      "bytes": 20859,
+      "sha256": "69fa8152cc42873a13cceb73e5e77aa6302897cc9d51c67e62c1229afd5d085f"
+    },
+    {
+      "file": "05-fremantle-orbit-phone-seek/9.jpg",
+      "bytes": 21118,
+      "sha256": "3db23c752fb649c68ea94c422dd73ab241e03b9f3647813efcb8284814537088"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/0.jpg",
+      "bytes": 73076,
+      "sha256": "89e154967c8b12cbba2a4be2ce078b2ef51d0adef8397a9b04dd370064195ee6"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/1.jpg",
+      "bytes": 72662,
+      "sha256": "defa9629e360d9995671aa0958a53445dfc674b2e30411d0039341d50aa7d630"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/10.jpg",
+      "bytes": 72314,
+      "sha256": "bd921b24d8fc7dff190c0f356a20e46db8b48e527883a0a7167f5db793b12122"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/11.jpg",
+      "bytes": 73317,
+      "sha256": "184cb148b19a7adea423f7f73e2380fadabaccf564ae3a726bc3eacd252a2ea8"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/12.jpg",
+      "bytes": 72120,
+      "sha256": "499e8d9020cc80725f4bc3488d8e19bcb1f5de83d3b4398d6408cc6d12b11275"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/13.jpg",
+      "bytes": 72418,
+      "sha256": "f129b1705867ad1ecd16ca15baee6032598f6ee4962e2b1128039dcd6c046089"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/14.jpg",
+      "bytes": 71241,
+      "sha256": "d0978741cb39f222077cd29c121e0f1fb00e967658f9391e8f6a7e3392d99afd"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/15.jpg",
+      "bytes": 68681,
+      "sha256": "445b7038f79b9ea907021530a30c045f381b29ff79dce59678404a05869702f6"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/16.jpg",
+      "bytes": 65040,
+      "sha256": "10025458564fda5333b21389a452a04096c818c2b7462d18baa2fe20b95f9a2d"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/17.jpg",
+      "bytes": 61899,
+      "sha256": "a5133b531dad61c226cf2a772b0119825cf23a2675d00c7763d868de271ada32"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/18.jpg",
+      "bytes": 61128,
+      "sha256": "f410ea7cceadec82f8e1440bee00bd1a16b8ea8062dd7a3f3ad60f0c95914a13"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/19.jpg",
+      "bytes": 61383,
+      "sha256": "e009f8320eb06147b7ffdc83cd18c3670fe9e03cc7a709b58f6fcbb81aac6ff6"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/2.jpg",
+      "bytes": 74909,
+      "sha256": "a17f4424c5d4bf4167ffd5c6e2f4c6c67358a01fcb9339a966f11ec75fd50e07"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/20.jpg",
+      "bytes": 59478,
+      "sha256": "702233655a4629323ece2c42b0b06b918f924acac50bf93d7642e8ce36d83df3"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/21.jpg",
+      "bytes": 57001,
+      "sha256": "16430a330cef72791ed9ef6eb5d086da9fd6a6d4fecfcf5ec65c9f5d25417916"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/22.jpg",
+      "bytes": 56599,
+      "sha256": "9626cd0522f6ee766297f6137c432d59d558e6427661d75a4172b8c92f0deedb"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/23.jpg",
+      "bytes": 55334,
+      "sha256": "9060957fd770bcf60b780972e24ef36275fa002424dbdcb058b73af4eea9974f"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/24.jpg",
+      "bytes": 55549,
+      "sha256": "21054dbcd9865f8c5922b412e23d9d36638509db103ed5f2b39082c9e96d77ce"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/25.jpg",
+      "bytes": 55293,
+      "sha256": "c04f1aa7d6c5c87adbbaec3d48329bb5896866a968d65d2b0d3bc1ec189eddca"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/26.jpg",
+      "bytes": 53970,
+      "sha256": "31260567f4a08b5f6ce58dcf599d9a03a7806b5701937e9a2197ba758ed7662b"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/27.jpg",
+      "bytes": 53685,
+      "sha256": "ce954af7e85611bfc87dc74d01dedc181b7c830191791b6319d2081003dc3e2f"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/28.jpg",
+      "bytes": 55487,
+      "sha256": "c3b653373d5011ed9d6264090558b75250ff86e10e23195f69d7ad93b95be927"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/29.jpg",
+      "bytes": 56208,
+      "sha256": "10afc3639c745b7e6462d44e3e61013e0e76a758791f03356fa2c4a264ff7656"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/3.jpg",
+      "bytes": 73943,
+      "sha256": "af6e41d807534b51d18ae9375ada6fa02a36918972d310c8be34189d91a40d44"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/4.jpg",
+      "bytes": 74638,
+      "sha256": "c52eb22ed5ecc01f73f4007e369ab62000e085b2e5deae0cb1fae52ce5ebe920"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/5.jpg",
+      "bytes": 73350,
+      "sha256": "8ca28e94702ff4de67f5a891f1f3b5bb2706590d8980f6350d3afd48575bb950"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/6.jpg",
+      "bytes": 70951,
+      "sha256": "8929c4eb3f923c348630f808c21ae1c6d8e358023c77308f0cf2d60b91b1cccc"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/7.jpg",
+      "bytes": 73985,
+      "sha256": "2103a991fed6b73de9578b8fc60a59fa10195305fdbb3f3db2ba44d44af4397e"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/8.jpg",
+      "bytes": 74155,
+      "sha256": "e9fc6382ecd944149ef4e0a9f29597c5f164b365716d0dba09d5f66643c36c1f"
+    },
+    {
+      "file": "06-chameleon-flowers-desktop-seek/9.jpg",
+      "bytes": 73879,
+      "sha256": "0a66227e1de87b9b69ac42a00ee0b95fc0a0024a4de3e78d66abd2f807ec468d"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/0.jpg",
+      "bytes": 53417,
+      "sha256": "2fe66928a3e100fbb9e58b40b1591140195c2eeacd4ad57089a9643d0aa919cc"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/1.jpg",
+      "bytes": 51687,
+      "sha256": "7ff6b59a84101f21d69f6e9aadccd8bd92ff7a18a2cadc7210cd9cbd6917e241"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/10.jpg",
+      "bytes": 52689,
+      "sha256": "c4ba8eaa05231bb151d4b718673103c0f471d5fd71b4ba82233dcac98e0df19a"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/11.jpg",
+      "bytes": 52275,
+      "sha256": "2da15ca0b90bf6640701f678af3fe3f7825c2c5c14b16f8c7acaaca36d02f527"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/12.jpg",
+      "bytes": 51290,
+      "sha256": "3e55c3343c39dd171a9042f17138fff09f423b2aec8bab4085c502b8c3b8c676"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/13.jpg",
+      "bytes": 51700,
+      "sha256": "2fe7ff25775e8a000286163f3fa82f594507a01f3e8fa085ad99966dbef32e41"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/14.jpg",
+      "bytes": 51932,
+      "sha256": "6c6da11d69a520f4c9b65bfc597eec013e21a6e007bb89ff65f9cd8f9e33a01a"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/15.jpg",
+      "bytes": 52059,
+      "sha256": "1b2bed5c1e8bc3962ba11136fb0f71bd2736d3760d515fdae0fabe1d9beab357"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/16.jpg",
+      "bytes": 52540,
+      "sha256": "1ee490eb8366f6d4dd279c39c639f9f13d3e473962740feb56e0f3781ec474c2"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/17.jpg",
+      "bytes": 52182,
+      "sha256": "8f3b70bd0ad9bf0eea544bc6df60af1739fa70238da9e0830de4da79d3695890"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/18.jpg",
+      "bytes": 55420,
+      "sha256": "0631211b358d1d6b76300227bb8cd49e6a4009c01f407ada0ae86a60afb4a560"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/19.jpg",
+      "bytes": 55781,
+      "sha256": "911005b22a158a701fae6e0017257f635fe2c747ef747abaa3831a3bdd3f7bb5"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/2.jpg",
+      "bytes": 51208,
+      "sha256": "fc4d0564a8ff6f978e4ff94021b6be7b0070835d7e1c9ac708cdf5ab89136c39"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/20.jpg",
+      "bytes": 55704,
+      "sha256": "f44df0e79e9c84744e03054567869389a62fb5dc8b45596f6c151d012c9aadda"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/21.jpg",
+      "bytes": 55478,
+      "sha256": "79c57c42365b0eb45849298a200c9dd97e3648a5013c99c255b2f07e2667038b"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/22.jpg",
+      "bytes": 54739,
+      "sha256": "ed04f257635077a3f5cad3ba515b72199316e4b8be8629a05e874ed24f90f9e0"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/23.jpg",
+      "bytes": 51837,
+      "sha256": "cd7d00c0d5e26d26088deb8704a312e63828020964cac96bc13472678b082e7e"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/3.jpg",
+      "bytes": 54040,
+      "sha256": "2705676c0a5e356218729fee905195cd03f0a5049256db57a74507c8d86a4518"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/4.jpg",
+      "bytes": 50800,
+      "sha256": "1afb611d7c004e6d915ca880c0e3ecc7f4f493d0642e174d587b4aa743bc4535"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/5.jpg",
+      "bytes": 51071,
+      "sha256": "f898dbf6c92cd516dcb0f3e90a72ea329456b0c8bec2dab74eaa3a3f6e11cdd5"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/6.jpg",
+      "bytes": 51377,
+      "sha256": "a14380647eaf5f2a9334a0cc484febea7b46d47174bcf0fb6a291dc2cc1e0ade"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/7.jpg",
+      "bytes": 54766,
+      "sha256": "56e99ba7b74f0488a10982fa29d8c4acb9a49b3d61b97dab90ec0930ff12cc56"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/8.jpg",
+      "bytes": 52506,
+      "sha256": "fbafe07df69e089b87b1c28b4eb9e986779569c55e315da931976ba706dc659d"
+    },
+    {
+      "file": "09-cat-plays-desktop-seek/9.jpg",
+      "bytes": 55299,
+      "sha256": "d185f5af9574fb132032cae2edefba8b8cbdef228329e7a4ebe85c8e620490e4"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/0.jpg",
+      "bytes": 58466,
+      "sha256": "fb9204e2c42ac2cbfdc21c7e047d9433e352a26896f44e9344a10c03bf6844f6"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/1.jpg",
+      "bytes": 57662,
+      "sha256": "d5335b484da598d933ac654e6ffdfaed3b90468f034462ed76275ed0970fe40e"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/10.jpg",
+      "bytes": 56726,
+      "sha256": "d1eccb53df0dde48c3fdb02025fbc73e4be37177d9260193cff3aa5fe2b1672e"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/11.jpg",
+      "bytes": 56003,
+      "sha256": "f6f3b6e84c56d4e8f8d606222dcd228a99a9a92805ab2097f30f90f6c9a99221"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/12.jpg",
+      "bytes": 54963,
+      "sha256": "70b101733d741fb0a733d9eeb40c6ede52dc04288861cee324cf8567e8784594"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/13.jpg",
+      "bytes": 55072,
+      "sha256": "59431a0b14ff52690f443e0b4e9ee315cef57acdc68553e3f9592e6e2aa29de5"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/14.jpg",
+      "bytes": 54887,
+      "sha256": "469e59cde76e9670d2d438fd18aef8d41280a50338eb129c805655d29efce301"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/15.jpg",
+      "bytes": 54857,
+      "sha256": "bdc49fe9c527c4e3c295bf5fe564e2f4b09128c35de05dcb403b5eda8d2843e9"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/16.jpg",
+      "bytes": 53764,
+      "sha256": "0991fbce028de1bd713594bfd3d54b36809a2da6d8a532e710a7a5653775ca69"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/17.jpg",
+      "bytes": 51994,
+      "sha256": "a67535e7b7a8878536b8e818b93522dc35e3d1c5ad5157675450c3115179ce61"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/18.jpg",
+      "bytes": 51274,
+      "sha256": "3c38c0c8959d910c273a08554f73018892c62ce77b1833d7a4ac7a932072fedc"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/19.jpg",
+      "bytes": 51397,
+      "sha256": "47e185c1cc7602186d4b110402a31db2830db2bd57cc411a97e65248d7eeb832"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/2.jpg",
+      "bytes": 58095,
+      "sha256": "27c6249a2624700b87007651a3a5059c5a59beb48308188a8fc2103c020d1689"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/20.jpg",
+      "bytes": 51462,
+      "sha256": "bf1ccd110882eff4c06408019525b0363014aaaed79f1c0f5e8f782581d45637"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/21.jpg",
+      "bytes": 50105,
+      "sha256": "64afd128a4de09ebeea788e90da78e4f3d09f538931893b6f9e463929be7e266"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/22.jpg",
+      "bytes": 51417,
+      "sha256": "4fa2d444f2da01f7222b32f2ed0fe57cfca8b614dd206be455033db30a9b75ec"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/23.jpg",
+      "bytes": 51597,
+      "sha256": "ca0f973ebfd8f954521cd9d9b17c728bef36a1de8089bee3a859e5799bebfa3d"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/24.jpg",
+      "bytes": 50893,
+      "sha256": "14e936e00689ca8215cd9b7020f7bb355c0b7b5d40e8e4ec73749b45ef400434"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/25.jpg",
+      "bytes": 50895,
+      "sha256": "23d9fa1e2e379600acac65802517e24a09d71ffcc041c480301a34c60a62c01c"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/26.jpg",
+      "bytes": 51121,
+      "sha256": "18497d4c1f0312d41fdb81e1fee7d894f0ec046c3db21cbafd3105cd5c82e907"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/27.jpg",
+      "bytes": 51813,
+      "sha256": "23e8577913bd686463e061a4f6e5bdb577ee826869ae33e473d8f52b1b6165f0"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/28.jpg",
+      "bytes": 50750,
+      "sha256": "a628b4140398b1d800f7b1d2216d157b7f7e00f9362501cebd07345a4389981f"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/29.jpg",
+      "bytes": 50881,
+      "sha256": "059c51561ac0f5e581704444f3677f5fc719462d0cc617704ba0e5a27294a3c2"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/3.jpg",
+      "bytes": 58112,
+      "sha256": "f6ac5037d31061ce96f08e5263f4fdb0c8328fd11a7d81085dcf6da010904408"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/30.jpg",
+      "bytes": 51338,
+      "sha256": "9eb02617e0db09c7a685635e37e8629b90cd0a3137eff6fad9c5be7769dc204f"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/31.jpg",
+      "bytes": 51907,
+      "sha256": "6fe2c594628b5deed91b8e9511318d16c2478f7948dcecd845131f7f510443bd"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/32.jpg",
+      "bytes": 51399,
+      "sha256": "c63400cba809aa2e0a3f6894c571eb55260c1761d71797e01d7f281021d23b7f"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/33.jpg",
+      "bytes": 52085,
+      "sha256": "4d818f17a3fd84bbf25dd02eff651b039b29a7165147ffd1f0d7ae6504618bd1"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/34.jpg",
+      "bytes": 52217,
+      "sha256": "f0d1008e2054e1c4d99a5d00a670bbc887dd4fca54bffd10db8bf17f3619735a"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/35.jpg",
+      "bytes": 53156,
+      "sha256": "5b8a5969e12338d4659570d53c24419a6dae5ca21fa8de98656d76b3c8a996d0"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/4.jpg",
+      "bytes": 58280,
+      "sha256": "a6af44545c6481e8adfa668cc341b54b53ac7443eadfe8ef4e5ce82bdd04d91d"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/5.jpg",
+      "bytes": 56910,
+      "sha256": "44a0ab4b97606f136c2172f096dd05341a5070c9fca1ca3df8e4dc0bb2536df3"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/6.jpg",
+      "bytes": 57964,
+      "sha256": "78c419fefc463fcaf155f49a940c0b7ec229ce19fbc60d04eb9b10495e2b489d"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/7.jpg",
+      "bytes": 58073,
+      "sha256": "bc25b47fa5eec2c57ecb7e905294f4e859018a75b70047e4c50bc8d241390344"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/8.jpg",
+      "bytes": 57147,
+      "sha256": "fb56c577776e072efc8531c94c9e3cfafad8e690d9879c26f04a27fd124a9f5e"
+    },
+    {
+      "file": "10-fremantle-orbit-desktop-seek/9.jpg",
+      "bytes": 56296,
+      "sha256": "10950009c287b4bd53868a52505bf9a12c25a84a7e9f9b7a655e08838a363c9b"
+    },
+    {
+      "file": "LICENSE",
+      "bytes": 1208,
+      "sha256": "faf5e0356d9ff00d35ca2e2ea28d4edfa8eb0be49a9abf720a36cabff8a932ce"
+    },
+    {
+      "file": "README.md",
+      "bytes": 10054,
+      "sha256": "37735622d8446d406d2575828bc06076f2bb9488a96cf2d34266459b5caa05f8"
+    },
+    {
+      "file": "audit-ceil.py",
+      "bytes": 2104,
+      "sha256": "6d45ea94e995728d224f7a43e31f32346f649505069b4523cf486c1f7e0cbcc6"
+    },
+    {
+      "file": "cat-plays-ffprobe.json",
+      "bytes": 14506,
+      "sha256": "71ed2f59fee42811a9b9f6ccc68ea57d34effd0e763418423c89b0e50a3a02f2"
+    },
+    {
+      "file": "ceil-analysis.json",
+      "bytes": 99454,
+      "sha256": "c19ee4295062cec3fb5bd87eeea4590140c61470ac70e54585fe806c2ad7246d"
+    },
+    {
+      "file": "chameleon-flowers-ffprobe.json",
+      "bytes": 18058,
+      "sha256": "de7a3ef3372c3a939001ff6551c75b44a121fafacd95be4c83ce1d0aeb9d87c8"
+    },
+    {
+      "file": "client.mjs",
+      "bytes": 4035,
+      "sha256": "b678b6a5c8c941bed014c5078f2c7e395261a7c985d0273ee986954dd922a383"
+    },
+    {
+      "file": "cpu-tests.log",
+      "bytes": 624,
+      "sha256": "21e18d439dbdf34c0aeb69ddfa1056eb6ce8415d2d14195ba895b596aa1a6039"
+    },
+    {
+      "file": "fremantle-orbit-ffprobe.json",
+      "bytes": 21658,
+      "sha256": "96012f5965f561129f0f0568e54c4960a7d0a68287edc9505a71c4dcc0d35b89"
+    },
+    {
+      "file": "input-bindings.json",
+      "bytes": 1866,
+      "sha256": "c177673931b7d864f379d46750a39989529f36eb156b3f0e26233a4399e97648"
+    },
+    {
+      "file": "probe.log",
+      "bytes": 5624,
+      "sha256": "535f7489abfb52959b2c80c2c2cc2e947d15a7c59545b433391d1f0d89eaa028"
+    },
+    {
+      "file": "probe.mjs",
+      "bytes": 5781,
+      "sha256": "e32a1ee07b442b8768be34031712966cd66a13259a5473d9bdc841486d13f652"
+    },
+    {
+      "file": "results.json",
+      "bytes": 325646,
+      "sha256": "acc1507ab70e32d4389b7f9c90ad7bdba5446371e05a7e991b5a8eae6e77bc83"
+    },
+    {
+      "file": "sequential.mjs",
+      "bytes": 4111,
+      "sha256": "18466772c4370d0ae72b805036b6a294f07efb6d64b5d1848994a678b6b0170b"
+    },
+    {
+      "file": "source-credits.json",
+      "bytes": 6437,
+      "sha256": "2505e02f4ec7ee37bf42974fab641aaabbaa7760c5db9cbf51d2c1e82ca182a8"
+    },
+    {
+      "file": "source-pixels.mjs",
+      "bytes": 6466,
+      "sha256": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f"
+    },
+    {
+      "file": "src/extract.js",
+      "bytes": 10798,
+      "sha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de"
+    },
+    {
+      "file": "src/frames.js",
+      "bytes": 4573,
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "file": "summarize.mjs",
+      "bytes": 4928,
+      "sha256": "6104f775da97415be4ed40643c2bdd3267d7492ef64bc780ae4f2886d1941178"
+    },
+    {
+      "file": "summary.json",
+      "bytes": 9345,
+      "sha256": "24dff4a1188909c470355884bdc0f525211b0cf61e168a4a683a97b6d24d6771"
+    },
+    {
+      "file": "summary.md",
+      "bytes": 1666,
+      "sha256": "026cb853f4a3d5542cd3e44fb36111800d9971a0d9fbd81061f55018c674ef8e"
+    },
+    {
+      "file": "test.mjs",
+      "bytes": 3622,
+      "sha256": "9aab0660a3b01a2a85fdd769390b2b0f3432b772c9802e470d7f45287706595f"
+    }
+  ]
+}

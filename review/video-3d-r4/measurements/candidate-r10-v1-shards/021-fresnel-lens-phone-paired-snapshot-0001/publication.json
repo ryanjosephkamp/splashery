@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T12:17:52.154Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/021-fresnel-lens-phone-paired",
+  "runSha256": "49320514ed796ca78229eb60bc0185b66d3002461cd69da99fdeb0afaf961206",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "cases": [
+    {
+      "id": "fresnel-lens",
+      "profile": "phone",
+      "rowFingerprint": "a072cd7a195fcc2ee9f707dd45a5879e0d3ff6ae15340c11b2260fb1984b220a",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207284,
+          "sha256": "d307fe4a114ea59a5084975ef3477a2ff363d0c95092fefc5a39e9e0a52bb42c"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2300,
+          "sha256": "b30021e9b8d8f70de60f7556a688faaa40dfd9df4a39be63d0fd1c18614799b1"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

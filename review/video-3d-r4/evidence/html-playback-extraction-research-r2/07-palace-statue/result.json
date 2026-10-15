@@ -1,0 +1,1392 @@
+{
+  "id": "palace-statue",
+  "profile": "phone",
+  "method": "exact-ceil-continuous-html-playback",
+  "startedAt": "2026-10-15T11:23:48.139Z",
+  "researchLimitMs": 90000,
+  "abortAfterTrials": null,
+  "inputSha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+  "parseMs": 30.399999998509884,
+  "table": {
+    "timescale": 12288,
+    "samples": 120,
+    "editOffset": 1024
+  },
+  "tier": {
+    "maxFrames": 16,
+    "frameSide": 480,
+    "featSide": 480,
+    "trainSide": 320,
+    "iters": 1200,
+    "splats": 30000,
+    "seed": 15000,
+    "maxMinutes": 8
+  },
+  "plan": {
+    "start": 0,
+    "end": 5,
+    "rate": 3,
+    "step": 0.333,
+    "windows": [
+      {
+        "t": 0.167,
+        "from": 0,
+        "to": 0.333
+      },
+      {
+        "t": 0.5,
+        "from": 0.333,
+        "to": 0.667
+      },
+      {
+        "t": 0.833,
+        "from": 0.667,
+        "to": 1
+      },
+      {
+        "t": 1.167,
+        "from": 1,
+        "to": 1.333
+      },
+      {
+        "t": 1.5,
+        "from": 1.333,
+        "to": 1.667
+      },
+      {
+        "t": 1.833,
+        "from": 1.667,
+        "to": 2
+      },
+      {
+        "t": 2.167,
+        "from": 2,
+        "to": 2.333
+      },
+      {
+        "t": 2.5,
+        "from": 2.333,
+        "to": 2.667
+      },
+      {
+        "t": 2.833,
+        "from": 2.667,
+        "to": 3
+      },
+      {
+        "t": 3.167,
+        "from": 3,
+        "to": 3.333
+      },
+      {
+        "t": 3.5,
+        "from": 3.333,
+        "to": 3.667
+      },
+      {
+        "t": 3.833,
+        "from": 3.667,
+        "to": 4
+      },
+      {
+        "t": 4.167,
+        "from": 4,
+        "to": 4.333
+      },
+      {
+        "t": 4.5,
+        "from": 4.333,
+        "to": 4.667
+      },
+      {
+        "t": 4.833,
+        "from": 4.667,
+        "to": 5
+      }
+    ]
+  },
+  "natural": {
+    "width": 270,
+    "height": 480,
+    "duration": 5
+  },
+  "crop": {
+    "sx": 0,
+    "sw": 270
+  },
+  "prepareMs": 783.8999999985099,
+  "status": "extraction-or-proof-fallback",
+  "error": {
+    "name": "Error",
+    "message": "Exact ceil source frame was skipped",
+    "stack": "Error: Exact ceil source frame was skipped\n    at sample (http://127.0.0.1:4201/sequential.mjs:24:145)\n    at http://127.0.0.1:4201/sequential.mjs:19:87"
+  },
+  "exactDiagnostics": {
+    "targets": [
+      {
+        "window": 0,
+        "trial": 0,
+        "requestedTime": 0.056,
+        "pts": 1024,
+        "time": 0.08333333333333333,
+        "micros": 83333,
+        "sourcePresentationIndex": 2
+      },
+      {
+        "window": 0,
+        "trial": 1,
+        "requestedTime": 0.167,
+        "pts": 2560,
+        "time": 0.20833333333333334,
+        "micros": 208333,
+        "sourcePresentationIndex": 5
+      },
+      {
+        "window": 0,
+        "trial": 2,
+        "requestedTime": 0.278,
+        "pts": 3584,
+        "time": 0.2916666666666667,
+        "micros": 291667,
+        "sourcePresentationIndex": 7
+      },
+      {
+        "window": 1,
+        "trial": 0,
+        "requestedTime": 0.389,
+        "pts": 5120,
+        "time": 0.4166666666666667,
+        "micros": 416667,
+        "sourcePresentationIndex": 10
+      },
+      {
+        "window": 1,
+        "trial": 1,
+        "requestedTime": 0.5,
+        "pts": 6144,
+        "time": 0.5,
+        "micros": 500000,
+        "sourcePresentationIndex": 12
+      },
+      {
+        "window": 1,
+        "trial": 2,
+        "requestedTime": 0.611,
+        "pts": 7680,
+        "time": 0.625,
+        "micros": 625000,
+        "sourcePresentationIndex": 15
+      },
+      {
+        "window": 2,
+        "trial": 0,
+        "requestedTime": 0.723,
+        "pts": 9216,
+        "time": 0.75,
+        "micros": 750000,
+        "sourcePresentationIndex": 18
+      },
+      {
+        "window": 2,
+        "trial": 1,
+        "requestedTime": 0.834,
+        "pts": 10752,
+        "time": 0.875,
+        "micros": 875000,
+        "sourcePresentationIndex": 21
+      },
+      {
+        "window": 2,
+        "trial": 2,
+        "requestedTime": 0.945,
+        "pts": 11776,
+        "time": 0.9583333333333334,
+        "micros": 958333,
+        "sourcePresentationIndex": 23
+      },
+      {
+        "window": 3,
+        "trial": 0,
+        "requestedTime": 1.055,
+        "pts": 13312,
+        "time": 1.0833333333333333,
+        "micros": 1083333,
+        "sourcePresentationIndex": 26
+      },
+      {
+        "window": 3,
+        "trial": 1,
+        "requestedTime": 1.166,
+        "pts": 14336,
+        "time": 1.1666666666666667,
+        "micros": 1166667,
+        "sourcePresentationIndex": 28
+      },
+      {
+        "window": 3,
+        "trial": 2,
+        "requestedTime": 1.277,
+        "pts": 15872,
+        "time": 1.2916666666666667,
+        "micros": 1291667,
+        "sourcePresentationIndex": 31
+      },
+      {
+        "window": 4,
+        "trial": 0,
+        "requestedTime": 1.389,
+        "pts": 17408,
+        "time": 1.4166666666666667,
+        "micros": 1416667,
+        "sourcePresentationIndex": 34
+      },
+      {
+        "window": 4,
+        "trial": 1,
+        "requestedTime": 1.5,
+        "pts": 18432,
+        "time": 1.5,
+        "micros": 1500000,
+        "sourcePresentationIndex": 36
+      },
+      {
+        "window": 4,
+        "trial": 2,
+        "requestedTime": 1.611,
+        "pts": 19968,
+        "time": 1.625,
+        "micros": 1625000,
+        "sourcePresentationIndex": 39
+      },
+      {
+        "window": 5,
+        "trial": 0,
+        "requestedTime": 1.723,
+        "pts": 21504,
+        "time": 1.75,
+        "micros": 1750000,
+        "sourcePresentationIndex": 42
+      },
+      {
+        "window": 5,
+        "trial": 1,
+        "requestedTime": 1.834,
+        "pts": 23040,
+        "time": 1.875,
+        "micros": 1875000,
+        "sourcePresentationIndex": 45
+      },
+      {
+        "window": 5,
+        "trial": 2,
+        "requestedTime": 1.945,
+        "pts": 24064,
+        "time": 1.9583333333333333,
+        "micros": 1958333,
+        "sourcePresentationIndex": 47
+      },
+      {
+        "window": 6,
+        "trial": 0,
+        "requestedTime": 2.056,
+        "pts": 25600,
+        "time": 2.0833333333333335,
+        "micros": 2083333,
+        "sourcePresentationIndex": 50
+      },
+      {
+        "window": 6,
+        "trial": 1,
+        "requestedTime": 2.167,
+        "pts": 27136,
+        "time": 2.2083333333333335,
+        "micros": 2208333,
+        "sourcePresentationIndex": 53
+      },
+      {
+        "window": 6,
+        "trial": 2,
+        "requestedTime": 2.278,
+        "pts": 28160,
+        "time": 2.2916666666666665,
+        "micros": 2291667,
+        "sourcePresentationIndex": 55
+      },
+      {
+        "window": 7,
+        "trial": 0,
+        "requestedTime": 2.389,
+        "pts": 29696,
+        "time": 2.4166666666666665,
+        "micros": 2416667,
+        "sourcePresentationIndex": 58
+      },
+      {
+        "window": 7,
+        "trial": 1,
+        "requestedTime": 2.5,
+        "pts": 30720,
+        "time": 2.5,
+        "micros": 2500000,
+        "sourcePresentationIndex": 60
+      },
+      {
+        "window": 7,
+        "trial": 2,
+        "requestedTime": 2.611,
+        "pts": 32256,
+        "time": 2.625,
+        "micros": 2625000,
+        "sourcePresentationIndex": 63
+      },
+      {
+        "window": 8,
+        "trial": 0,
+        "requestedTime": 2.722,
+        "pts": 33792,
+        "time": 2.75,
+        "micros": 2750000,
+        "sourcePresentationIndex": 66
+      },
+      {
+        "window": 8,
+        "trial": 1,
+        "requestedTime": 2.834,
+        "pts": 35328,
+        "time": 2.875,
+        "micros": 2875000,
+        "sourcePresentationIndex": 69
+      },
+      {
+        "window": 8,
+        "trial": 2,
+        "requestedTime": 2.944,
+        "pts": 36352,
+        "time": 2.9583333333333335,
+        "micros": 2958333,
+        "sourcePresentationIndex": 71
+      },
+      {
+        "window": 9,
+        "trial": 0,
+        "requestedTime": 3.056,
+        "pts": 37888,
+        "time": 3.0833333333333335,
+        "micros": 3083333,
+        "sourcePresentationIndex": 74
+      },
+      {
+        "window": 9,
+        "trial": 1,
+        "requestedTime": 3.167,
+        "pts": 39424,
+        "time": 3.2083333333333335,
+        "micros": 3208333,
+        "sourcePresentationIndex": 77
+      },
+      {
+        "window": 9,
+        "trial": 2,
+        "requestedTime": 3.278,
+        "pts": 40448,
+        "time": 3.2916666666666665,
+        "micros": 3291667,
+        "sourcePresentationIndex": 79
+      },
+      {
+        "window": 10,
+        "trial": 0,
+        "requestedTime": 3.389,
+        "pts": 41984,
+        "time": 3.4166666666666665,
+        "micros": 3416667,
+        "sourcePresentationIndex": 82
+      },
+      {
+        "window": 10,
+        "trial": 1,
+        "requestedTime": 3.5,
+        "pts": 43008,
+        "time": 3.5,
+        "micros": 3500000,
+        "sourcePresentationIndex": 84
+      },
+      {
+        "window": 10,
+        "trial": 2,
+        "requestedTime": 3.611,
+        "pts": 44544,
+        "time": 3.625,
+        "micros": 3625000,
+        "sourcePresentationIndex": 87
+      },
+      {
+        "window": 11,
+        "trial": 0,
+        "requestedTime": 3.722,
+        "pts": 46080,
+        "time": 3.75,
+        "micros": 3750000,
+        "sourcePresentationIndex": 90
+      },
+      {
+        "window": 11,
+        "trial": 1,
+        "requestedTime": 3.834,
+        "pts": 47616,
+        "time": 3.875,
+        "micros": 3875000,
+        "sourcePresentationIndex": 93
+      },
+      {
+        "window": 11,
+        "trial": 2,
+        "requestedTime": 3.944,
+        "pts": 48640,
+        "time": 3.9583333333333335,
+        "micros": 3958333,
+        "sourcePresentationIndex": 95
+      },
+      {
+        "window": 12,
+        "trial": 0,
+        "requestedTime": 4.056,
+        "pts": 50176,
+        "time": 4.083333333333333,
+        "micros": 4083333,
+        "sourcePresentationIndex": 98
+      },
+      {
+        "window": 12,
+        "trial": 1,
+        "requestedTime": 4.167,
+        "pts": 51712,
+        "time": 4.208333333333333,
+        "micros": 4208333,
+        "sourcePresentationIndex": 101
+      },
+      {
+        "window": 12,
+        "trial": 2,
+        "requestedTime": 4.278,
+        "pts": 52736,
+        "time": 4.291666666666667,
+        "micros": 4291667,
+        "sourcePresentationIndex": 103
+      },
+      {
+        "window": 13,
+        "trial": 0,
+        "requestedTime": 4.389,
+        "pts": 54272,
+        "time": 4.416666666666667,
+        "micros": 4416667,
+        "sourcePresentationIndex": 106
+      },
+      {
+        "window": 13,
+        "trial": 1,
+        "requestedTime": 4.5,
+        "pts": 55296,
+        "time": 4.5,
+        "micros": 4500000,
+        "sourcePresentationIndex": 108
+      },
+      {
+        "window": 13,
+        "trial": 2,
+        "requestedTime": 4.611,
+        "pts": 56832,
+        "time": 4.625,
+        "micros": 4625000,
+        "sourcePresentationIndex": 111
+      },
+      {
+        "window": 14,
+        "trial": 0,
+        "requestedTime": 4.723,
+        "pts": 58368,
+        "time": 4.75,
+        "micros": 4750000,
+        "sourcePresentationIndex": 114
+      },
+      {
+        "window": 14,
+        "trial": 1,
+        "requestedTime": 4.834,
+        "pts": 59904,
+        "time": 4.875,
+        "micros": 4875000,
+        "sourcePresentationIndex": 117
+      },
+      {
+        "window": 14,
+        "trial": 2,
+        "requestedTime": 4.945,
+        "pts": 60928,
+        "time": 4.958333333333333,
+        "micros": 4958333,
+        "sourcePresentationIndex": 119
+      }
+    ],
+    "telemetry": [
+      {
+        "wallMs": 1319.9000000022352,
+        "kind": "startup-presented",
+        "requestedTime": 0.5,
+        "actualTime": 1.375,
+        "position": 1.59072,
+        "presentationTime": 3172.2,
+        "wallNow": 3225.2
+      },
+      {
+        "wallMs": 2573.300000000745,
+        "kind": "startup-presented",
+        "requestedTime": 0.001,
+        "actualTime": 0.041667,
+        "position": 0.052533,
+        "presentationTime": 4444.6,
+        "wallNow": 4475.2
+      },
+      {
+        "wallMs": 2589,
+        "kind": "rvfc",
+        "time": 0.083333,
+        "micros": 83333,
+        "origin": "rvfc",
+        "target": 0,
+        "presentedFrames": 8
+      },
+      {
+        "wallMs": 3388,
+        "kind": "trial",
+        "window": 0,
+        "trial": 0,
+        "requestedTime": 0.056,
+        "actualTime": 0.083333,
+        "actualMicros": 83333,
+        "desiredMicros": 83333,
+        "desiredPts": 1024
+      },
+      {
+        "wallMs": 3422.60000000149,
+        "kind": "rvfc",
+        "time": 0.125,
+        "micros": 125000,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 9
+      },
+      {
+        "wallMs": 3472.800000000745,
+        "kind": "rvfc",
+        "time": 0.166667,
+        "micros": 166667,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 10
+      },
+      {
+        "wallMs": 3522.5,
+        "kind": "rvfc",
+        "time": 0.208333,
+        "micros": 208333,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 11
+      },
+      {
+        "wallMs": 3769.10000000149,
+        "kind": "trial",
+        "window": 0,
+        "trial": 1,
+        "requestedTime": 0.167,
+        "actualTime": 0.208333,
+        "actualMicros": 208333,
+        "desiredMicros": 208333,
+        "desiredPts": 2560
+      },
+      {
+        "wallMs": 3804.800000000745,
+        "kind": "rvfc",
+        "time": 0.25,
+        "micros": 250000,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 12
+      },
+      {
+        "wallMs": 3834.800000000745,
+        "kind": "rvfc",
+        "time": 0.291667,
+        "micros": 291667,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 13
+      },
+      {
+        "wallMs": 3881.7000000029802,
+        "kind": "trial",
+        "window": 0,
+        "trial": 2,
+        "requestedTime": 0.278,
+        "actualTime": 0.291667,
+        "actualMicros": 291667,
+        "desiredMicros": 291667,
+        "desiredPts": 3584
+      },
+      {
+        "wallMs": 3881.7000000029802,
+        "kind": "window",
+        "done": 1,
+        "total": 15,
+        "selectedTime": 0.291667
+      },
+      {
+        "wallMs": 3917.60000000149,
+        "kind": "rvfc",
+        "time": 0.333333,
+        "micros": 333333,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 14
+      },
+      {
+        "wallMs": 3972.900000002235,
+        "kind": "rvfc",
+        "time": 0.375,
+        "micros": 375000,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 15
+      },
+      {
+        "wallMs": 4018,
+        "kind": "rvfc",
+        "time": 0.416667,
+        "micros": 416667,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 16
+      },
+      {
+        "wallMs": 4034.7000000029802,
+        "kind": "trial",
+        "window": 1,
+        "trial": 0,
+        "requestedTime": 0.389,
+        "actualTime": 0.416667,
+        "actualMicros": 416667,
+        "desiredMicros": 416667,
+        "desiredPts": 5120
+      },
+      {
+        "wallMs": 4085.400000002235,
+        "kind": "rvfc",
+        "time": 0.458333,
+        "micros": 458333,
+        "origin": "rvfc",
+        "target": 4,
+        "presentedFrames": 17
+      },
+      {
+        "wallMs": 4104.70000000298,
+        "kind": "rvfc",
+        "time": 0.5,
+        "micros": 500000,
+        "origin": "rvfc",
+        "target": 4,
+        "presentedFrames": 18
+      },
+      {
+        "wallMs": 4129.10000000149,
+        "kind": "trial",
+        "window": 1,
+        "trial": 1,
+        "requestedTime": 0.5,
+        "actualTime": 0.5,
+        "actualMicros": 500000,
+        "desiredMicros": 500000,
+        "desiredPts": 6144
+      },
+      {
+        "wallMs": 4186.10000000149,
+        "kind": "rvfc",
+        "time": 0.541667,
+        "micros": 541667,
+        "origin": "rvfc",
+        "target": 5,
+        "presentedFrames": 19
+      },
+      {
+        "wallMs": 4234.300000000745,
+        "kind": "rvfc",
+        "time": 0.583333,
+        "micros": 583333,
+        "origin": "rvfc",
+        "target": 5,
+        "presentedFrames": 20
+      },
+      {
+        "wallMs": 4277,
+        "kind": "rvfc",
+        "time": 0.625,
+        "micros": 625000,
+        "origin": "rvfc",
+        "target": 5,
+        "presentedFrames": 21
+      },
+      {
+        "wallMs": 4292.300000000745,
+        "kind": "trial",
+        "window": 1,
+        "trial": 2,
+        "requestedTime": 0.611,
+        "actualTime": 0.625,
+        "actualMicros": 625000,
+        "desiredMicros": 625000,
+        "desiredPts": 7680
+      },
+      {
+        "wallMs": 4292.300000000745,
+        "kind": "window",
+        "done": 2,
+        "total": 15,
+        "selectedTime": 0.5
+      },
+      {
+        "wallMs": 4300.800000000745,
+        "kind": "rvfc",
+        "time": 0.666667,
+        "micros": 666667,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 22
+      },
+      {
+        "wallMs": 4376.70000000298,
+        "kind": "rvfc",
+        "time": 0.708333,
+        "micros": 708333,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 23
+      },
+      {
+        "wallMs": 4384.10000000149,
+        "kind": "rvfc",
+        "time": 0.75,
+        "micros": 750000,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 24
+      },
+      {
+        "wallMs": 4402.5,
+        "kind": "trial",
+        "window": 2,
+        "trial": 0,
+        "requestedTime": 0.723,
+        "actualTime": 0.75,
+        "actualMicros": 750000,
+        "desiredMicros": 750000,
+        "desiredPts": 9216
+      },
+      {
+        "wallMs": 4436.800000000745,
+        "kind": "rvfc",
+        "time": 0.791667,
+        "micros": 791667,
+        "origin": "rvfc",
+        "target": 7,
+        "presentedFrames": 25
+      },
+      {
+        "wallMs": 4486.70000000298,
+        "kind": "rvfc",
+        "time": 0.833333,
+        "micros": 833333,
+        "origin": "rvfc",
+        "target": 7,
+        "presentedFrames": 26
+      },
+      {
+        "wallMs": 4525.10000000149,
+        "kind": "rvfc",
+        "time": 0.875,
+        "micros": 875000,
+        "origin": "rvfc",
+        "target": 7,
+        "presentedFrames": 27
+      },
+      {
+        "wallMs": 4564.900000002235,
+        "kind": "trial",
+        "window": 2,
+        "trial": 1,
+        "requestedTime": 0.834,
+        "actualTime": 0.875,
+        "actualMicros": 875000,
+        "desiredMicros": 875000,
+        "desiredPts": 10752
+      },
+      {
+        "wallMs": 4604.70000000298,
+        "kind": "rvfc",
+        "time": 0.916667,
+        "micros": 916667,
+        "origin": "rvfc",
+        "target": 8,
+        "presentedFrames": 28
+      },
+      {
+        "wallMs": 4673.800000000745,
+        "kind": "rvfc",
+        "time": 0.958333,
+        "micros": 958333,
+        "origin": "rvfc",
+        "target": 8,
+        "presentedFrames": 29
+      },
+      {
+        "wallMs": 4698.20000000298,
+        "kind": "trial",
+        "window": 2,
+        "trial": 2,
+        "requestedTime": 0.945,
+        "actualTime": 0.958333,
+        "actualMicros": 958333,
+        "desiredMicros": 958333,
+        "desiredPts": 11776
+      },
+      {
+        "wallMs": 4698.300000000745,
+        "kind": "window",
+        "done": 3,
+        "total": 15,
+        "selectedTime": 0.958333
+      },
+      {
+        "wallMs": 4736.800000000745,
+        "kind": "rvfc",
+        "time": 1,
+        "micros": 1000000,
+        "origin": "rvfc",
+        "target": 9,
+        "presentedFrames": 30
+      },
+      {
+        "wallMs": 4768.800000000745,
+        "kind": "rvfc",
+        "time": 1.041667,
+        "micros": 1041667,
+        "origin": "rvfc",
+        "target": 9,
+        "presentedFrames": 31
+      },
+      {
+        "wallMs": 4818,
+        "kind": "rvfc",
+        "time": 1.083333,
+        "micros": 1083333,
+        "origin": "rvfc",
+        "target": 9,
+        "presentedFrames": 32
+      },
+      {
+        "wallMs": 4869.60000000149,
+        "kind": "trial",
+        "window": 3,
+        "trial": 0,
+        "requestedTime": 1.055,
+        "actualTime": 1.083333,
+        "actualMicros": 1083333,
+        "desiredMicros": 1083333,
+        "desiredPts": 13312
+      },
+      {
+        "wallMs": 4888.400000002235,
+        "kind": "rvfc",
+        "time": 1.125,
+        "micros": 1125000,
+        "origin": "rvfc",
+        "target": 10,
+        "presentedFrames": 33
+      },
+      {
+        "wallMs": 4974.70000000298,
+        "kind": "rvfc",
+        "time": 1.208333,
+        "micros": 1208333,
+        "origin": "rvfc",
+        "target": 10,
+        "presentedFrames": 35
+      }
+    ],
+    "startup": [
+      {
+        "time": 1.375,
+        "requestedTime": 0.5,
+        "before": 0,
+        "position": 1.590901,
+        "observedSeeking": true,
+        "phase": "warm"
+      },
+      {
+        "time": 0.041667,
+        "requestedTime": 0.001,
+        "before": 1.590901,
+        "position": 0.052603,
+        "observedSeeking": true,
+        "phase": "single-rewind"
+      }
+    ],
+    "completedTrials": 10,
+    "completedWindows": 3
+  },
+  "attemptedExtractionMs": 4976.800000000745,
+  "noPartialExtractionReturned": true,
+  "cleanup": {
+    "pausedBeforeClose": true,
+    "readyStateBeforeClose": 4,
+    "srcRemoved": true,
+    "pausedAfterClose": true
+  },
+  "progress": [
+    {
+      "wallMs": 1319.9000000022352,
+      "kind": "startup-presented",
+      "requestedTime": 0.5,
+      "actualTime": 1.375,
+      "position": 1.59072,
+      "presentationTime": 3172.2,
+      "wallNow": 3225.2
+    },
+    {
+      "wallMs": 2573.300000000745,
+      "kind": "startup-presented",
+      "requestedTime": 0.001,
+      "actualTime": 0.041667,
+      "position": 0.052533,
+      "presentationTime": 4444.6,
+      "wallNow": 4475.2
+    },
+    {
+      "wallMs": 2589,
+      "kind": "rvfc",
+      "time": 0.083333,
+      "micros": 83333,
+      "origin": "rvfc",
+      "target": 0,
+      "presentedFrames": 8
+    },
+    {
+      "wallMs": 3388,
+      "kind": "trial",
+      "window": 0,
+      "trial": 0,
+      "requestedTime": 0.056,
+      "actualTime": 0.083333,
+      "actualMicros": 83333,
+      "desiredMicros": 83333,
+      "desiredPts": 1024
+    },
+    {
+      "wallMs": 3422.60000000149,
+      "kind": "rvfc",
+      "time": 0.125,
+      "micros": 125000,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 9
+    },
+    {
+      "wallMs": 3472.800000000745,
+      "kind": "rvfc",
+      "time": 0.166667,
+      "micros": 166667,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 10
+    },
+    {
+      "wallMs": 3522.5,
+      "kind": "rvfc",
+      "time": 0.208333,
+      "micros": 208333,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 11
+    },
+    {
+      "wallMs": 3769.10000000149,
+      "kind": "trial",
+      "window": 0,
+      "trial": 1,
+      "requestedTime": 0.167,
+      "actualTime": 0.208333,
+      "actualMicros": 208333,
+      "desiredMicros": 208333,
+      "desiredPts": 2560
+    },
+    {
+      "wallMs": 3804.800000000745,
+      "kind": "rvfc",
+      "time": 0.25,
+      "micros": 250000,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 12
+    },
+    {
+      "wallMs": 3834.800000000745,
+      "kind": "rvfc",
+      "time": 0.291667,
+      "micros": 291667,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 13
+    },
+    {
+      "wallMs": 3881.7000000029802,
+      "kind": "trial",
+      "window": 0,
+      "trial": 2,
+      "requestedTime": 0.278,
+      "actualTime": 0.291667,
+      "actualMicros": 291667,
+      "desiredMicros": 291667,
+      "desiredPts": 3584
+    },
+    {
+      "wallMs": 3881.7000000029802,
+      "kind": "window",
+      "done": 1,
+      "total": 15,
+      "selectedTime": 0.291667
+    },
+    {
+      "wallMs": 3917.60000000149,
+      "kind": "rvfc",
+      "time": 0.333333,
+      "micros": 333333,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 14
+    },
+    {
+      "wallMs": 3972.900000002235,
+      "kind": "rvfc",
+      "time": 0.375,
+      "micros": 375000,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 15
+    },
+    {
+      "wallMs": 4018,
+      "kind": "rvfc",
+      "time": 0.416667,
+      "micros": 416667,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 16
+    },
+    {
+      "wallMs": 4034.7000000029802,
+      "kind": "trial",
+      "window": 1,
+      "trial": 0,
+      "requestedTime": 0.389,
+      "actualTime": 0.416667,
+      "actualMicros": 416667,
+      "desiredMicros": 416667,
+      "desiredPts": 5120
+    },
+    {
+      "wallMs": 4085.400000002235,
+      "kind": "rvfc",
+      "time": 0.458333,
+      "micros": 458333,
+      "origin": "rvfc",
+      "target": 4,
+      "presentedFrames": 17
+    },
+    {
+      "wallMs": 4104.70000000298,
+      "kind": "rvfc",
+      "time": 0.5,
+      "micros": 500000,
+      "origin": "rvfc",
+      "target": 4,
+      "presentedFrames": 18
+    },
+    {
+      "wallMs": 4129.10000000149,
+      "kind": "trial",
+      "window": 1,
+      "trial": 1,
+      "requestedTime": 0.5,
+      "actualTime": 0.5,
+      "actualMicros": 500000,
+      "desiredMicros": 500000,
+      "desiredPts": 6144
+    },
+    {
+      "wallMs": 4186.10000000149,
+      "kind": "rvfc",
+      "time": 0.541667,
+      "micros": 541667,
+      "origin": "rvfc",
+      "target": 5,
+      "presentedFrames": 19
+    },
+    {
+      "wallMs": 4234.300000000745,
+      "kind": "rvfc",
+      "time": 0.583333,
+      "micros": 583333,
+      "origin": "rvfc",
+      "target": 5,
+      "presentedFrames": 20
+    },
+    {
+      "wallMs": 4277,
+      "kind": "rvfc",
+      "time": 0.625,
+      "micros": 625000,
+      "origin": "rvfc",
+      "target": 5,
+      "presentedFrames": 21
+    },
+    {
+      "wallMs": 4292.300000000745,
+      "kind": "trial",
+      "window": 1,
+      "trial": 2,
+      "requestedTime": 0.611,
+      "actualTime": 0.625,
+      "actualMicros": 625000,
+      "desiredMicros": 625000,
+      "desiredPts": 7680
+    },
+    {
+      "wallMs": 4292.300000000745,
+      "kind": "window",
+      "done": 2,
+      "total": 15,
+      "selectedTime": 0.5
+    },
+    {
+      "wallMs": 4300.800000000745,
+      "kind": "rvfc",
+      "time": 0.666667,
+      "micros": 666667,
+      "origin": "rvfc",
+      "target": 6,
+      "presentedFrames": 22
+    },
+    {
+      "wallMs": 4376.70000000298,
+      "kind": "rvfc",
+      "time": 0.708333,
+      "micros": 708333,
+      "origin": "rvfc",
+      "target": 6,
+      "presentedFrames": 23
+    },
+    {
+      "wallMs": 4384.10000000149,
+      "kind": "rvfc",
+      "time": 0.75,
+      "micros": 750000,
+      "origin": "rvfc",
+      "target": 6,
+      "presentedFrames": 24
+    },
+    {
+      "wallMs": 4402.5,
+      "kind": "trial",
+      "window": 2,
+      "trial": 0,
+      "requestedTime": 0.723,
+      "actualTime": 0.75,
+      "actualMicros": 750000,
+      "desiredMicros": 750000,
+      "desiredPts": 9216
+    },
+    {
+      "wallMs": 4436.800000000745,
+      "kind": "rvfc",
+      "time": 0.791667,
+      "micros": 791667,
+      "origin": "rvfc",
+      "target": 7,
+      "presentedFrames": 25
+    },
+    {
+      "wallMs": 4486.70000000298,
+      "kind": "rvfc",
+      "time": 0.833333,
+      "micros": 833333,
+      "origin": "rvfc",
+      "target": 7,
+      "presentedFrames": 26
+    },
+    {
+      "wallMs": 4525.10000000149,
+      "kind": "rvfc",
+      "time": 0.875,
+      "micros": 875000,
+      "origin": "rvfc",
+      "target": 7,
+      "presentedFrames": 27
+    },
+    {
+      "wallMs": 4564.900000002235,
+      "kind": "trial",
+      "window": 2,
+      "trial": 1,
+      "requestedTime": 0.834,
+      "actualTime": 0.875,
+      "actualMicros": 875000,
+      "desiredMicros": 875000,
+      "desiredPts": 10752
+    },
+    {
+      "wallMs": 4604.70000000298,
+      "kind": "rvfc",
+      "time": 0.916667,
+      "micros": 916667,
+      "origin": "rvfc",
+      "target": 8,
+      "presentedFrames": 28
+    },
+    {
+      "wallMs": 4673.800000000745,
+      "kind": "rvfc",
+      "time": 0.958333,
+      "micros": 958333,
+      "origin": "rvfc",
+      "target": 8,
+      "presentedFrames": 29
+    },
+    {
+      "wallMs": 4698.20000000298,
+      "kind": "trial",
+      "window": 2,
+      "trial": 2,
+      "requestedTime": 0.945,
+      "actualTime": 0.958333,
+      "actualMicros": 958333,
+      "desiredMicros": 958333,
+      "desiredPts": 11776
+    },
+    {
+      "wallMs": 4698.300000000745,
+      "kind": "window",
+      "done": 3,
+      "total": 15,
+      "selectedTime": 0.958333
+    },
+    {
+      "wallMs": 4736.800000000745,
+      "kind": "rvfc",
+      "time": 1,
+      "micros": 1000000,
+      "origin": "rvfc",
+      "target": 9,
+      "presentedFrames": 30
+    },
+    {
+      "wallMs": 4768.800000000745,
+      "kind": "rvfc",
+      "time": 1.041667,
+      "micros": 1041667,
+      "origin": "rvfc",
+      "target": 9,
+      "presentedFrames": 31
+    },
+    {
+      "wallMs": 4818,
+      "kind": "rvfc",
+      "time": 1.083333,
+      "micros": 1083333,
+      "origin": "rvfc",
+      "target": 9,
+      "presentedFrames": 32
+    },
+    {
+      "wallMs": 4869.60000000149,
+      "kind": "trial",
+      "window": 3,
+      "trial": 0,
+      "requestedTime": 1.055,
+      "actualTime": 1.083333,
+      "actualMicros": 1083333,
+      "desiredMicros": 1083333,
+      "desiredPts": 13312
+    },
+    {
+      "wallMs": 4888.400000002235,
+      "kind": "rvfc",
+      "time": 1.125,
+      "micros": 1125000,
+      "origin": "rvfc",
+      "target": 10,
+      "presentedFrames": 33
+    },
+    {
+      "wallMs": 4974.70000000298,
+      "kind": "rvfc",
+      "time": 1.208333,
+      "micros": 1208333,
+      "origin": "rvfc",
+      "target": 10,
+      "presentedFrames": 35
+    }
+  ],
+  "elapsedMs": 5762.300000000745,
+  "inputBinding": {
+    "id": "palace-statue",
+    "label": "Palace entrance statue, handheld approach",
+    "category": [
+      "statue",
+      "shaky",
+      "camera-translation"
+    ],
+    "source": "https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "author": "Sayvhior",
+    "duration": 5,
+    "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+    "file": "palace-statue.mp4",
+    "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/9/90/A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+    "captureSha256": "e22b8a7fd5886ebad610e34d80b06ae797406f715adc04bbb4e4e11a9cbcd098",
+    "captureDuration": 10.241,
+    "span": {
+      "start": 0,
+      "length": 5
+    },
+    "checked": "October 15, 2026",
+    "transformation": "Trimmed 0–5 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+    "evidence": {
+      "sourcePage": "evidence/palace-statue-source.html",
+      "licensePage": "evidence/cc-by-sa-4-0.html",
+      "contactSheet": "contact-sheets/palace-statue.jpg",
+      "commonsMetadata": "evidence/palace-statue-commons-metadata.json",
+      "sourcePageSha256": "568112cbe48562ed643b7c37c9f1f53007031e04dddb9cba6a34f3cb78543f71",
+      "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+      "contactSheetSha256": "1f4044b1f5acfd792e36e6ae2f851d02fb7c5e2fe244ecd254583f793e20f549",
+      "commonsMetadataSha256": "5428267c98d6fe6344d2f8d2bb182ada8f3260e247d3bb248f4c5987ca44d46a"
+    },
+    "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+    "width": 270,
+    "height": 480,
+    "fps": "24/1",
+    "bytes": 700939,
+    "ffprobeSha256": "be0f4cf2b7150b372c499fdcf16b321b97fc2523d12b47176e678ce84ef8d1b5"
+  },
+  "hostContextClosed": true
+}

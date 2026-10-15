@@ -1,0 +1,103 @@
+{
+  "at": "2026-10-15T11:51:41.797360+00:00",
+  "priorPreparationFreezeSha256": "5e1c463defe12f6a1cdd4ba2dfdae55c0c22e05cfcd8da7a785cdc49edd738c3",
+  "change": "Reject explicit tile8 setups above existing16384-tile scan capacity before GPU buffer allocation. Product must use tile16 when its view/target rectangle exceeds that bound. Default16 and valid8 compiled programs are unchanged.",
+  "files": [
+    {
+      "file": "vendor/splatjs/LICENSE",
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "file": "vendor/splatjs/VERSION.md",
+      "sha256": "cdfdaccd5e332354ece2d228987d511b271b15d516f6de3c4f8f341375a6887f"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/background-fit.js",
+      "sha256": "9b40decb9665ce73a5ef9b829d7e89887263c4cc7dbb75296ddb64fdcc5e6110"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/hull.js",
+      "sha256": "debc8a865d3fa888a5b38f2d18e0def03ddb8c81aad7cff60dae3a3519a3e593"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "sha256": "0d0807678ca0f01ef9eb75fe315b75449a11ff30336307601ad9a2787f263138"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "sha256": "2f88a29325b57b5b791ef12afc495d1ebb86ca24299bdc13432ebab066d436b8"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "sha256": "5602267f95d031e21826bc924a5b1788f9815997558f9cb2084fbb3231024ae8"
+    },
+    {
+      "file": "vendor/splatjs/src/io/exif.js",
+      "sha256": "1b6c2f0686405a8983e4e25ed14bc8ae25b274da5093cfb5a714af080ecdf719"
+    },
+    {
+      "file": "vendor/splatjs/src/io/frames.js",
+      "sha256": "aacba5fec86cb0ce5ec2e8acbbce52e893980e3d7f3542d8bac9f5e5500c814e"
+    },
+    {
+      "file": "vendor/splatjs/src/io/pano.js",
+      "sha256": "8a718f685aafbc0b6b996f941256fa9c87e22b8ee9ccd46872d7bc52cd1f97e2"
+    },
+    {
+      "file": "vendor/splatjs/src/io/ply.js",
+      "sha256": "db748b836793bcb27a7f4649c6cb822b273b22107dd691f1238109e6d8dcfd2b"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "sha256": "e50c9b04231c4e62ce804f6c48ab367155426d007674cece64c8f8773c287d8f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/ba.js",
+      "sha256": "760c181010415311e8ce84e52fc9e4429767108373d13b9121cdc724ef18ce63"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/features.js",
+      "sha256": "36724e6226d5169b883015cca2775e913229ca57f5651aca2b149b3b2395140b"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/featworker.js",
+      "sha256": "881c8b47d89505f2bc517ae0b0eca27bdecacfb4b90d0f6075e5c8d0cdfc3061"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/global.js",
+      "sha256": "9f58fe80ed84a85ba4e890df12e094ec6fa49297bd3b62f88a1d5a27d4bec75d"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/gpumatch.js",
+      "sha256": "107319b57f6f4b6935f9799c127a90e01620b7fbbafd93c72f1ce7467341c662"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/matching.js",
+      "sha256": "193f47de0488cab6eebd19d1125655e2c7702c706ffbacdba8dc60618102fb88"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/pairworker.js",
+      "sha256": "03c0281f1ab833791d669c0ec8bfa35538eab2c5be2b08f951ad9b15d8c1b543"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/sfm.js",
+      "sha256": "fd941c3b4af813b62f69e8e48171813afc69bfa1d9db8a12b093330e717ae06a"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/sift.js",
+      "sha256": "4c75e5a2110a046ba957f415696d63eada1b460f449098f96fc1a6bfa65b2f59"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/worker-pool.js",
+      "sha256": "cba333d31e0f86802a503bf1f4f530b386e47b14c540c2f976b47ca3dae1cca6"
+    }
+  ]
+}

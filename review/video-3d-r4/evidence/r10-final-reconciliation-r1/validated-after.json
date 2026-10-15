@@ -1,0 +1,1027 @@
+{
+  "baseline": {
+    "directory": "/workspace/v3d-r4-media/main-joined-snapshots/0030",
+    "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "runSha256": "dafdbeff8e4ac87b7611b0afe55037fd198864f96fa3fd286b3917f34f5fcf69",
+    "rows": [
+      {
+        "id": "cat-track",
+        "profile": "phone",
+        "status": "explained",
+        "accounted": true,
+        "rowFingerprint": "4703705ce76940450a85a3440295de6f52a0b07ce1ff069c92fb831df8f0c332",
+        "caseInventorySha256": "a273409c68ddd675574042408d5b4239554a49e3a057c66acc3314d57a4420c8",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "4703705ce76940450a85a3440295de6f52a0b07ce1ff069c92fb831df8f0c332"
+        }
+      },
+      {
+        "id": "cat-track",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "aa71d3622a19e7857983378db5737ab66cadc4f2951502b005c2fb3fa59809ac",
+        "caseInventorySha256": "2b58929f68f9fddbaba91b4744eb2909052c48f584475a212981d86c9a7a5b03"
+      },
+      {
+        "id": "cat-plays",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "7fab3e12b4e59180ee93957c527203286f3893fc713cb976343e5686e99decd6",
+        "caseInventorySha256": "f436eea2aef4921c8200b1250f52cc7d914ecf2e261191103f130f87f524e62f",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "7fab3e12b4e59180ee93957c527203286f3893fc713cb976343e5686e99decd6",
+          "evaluationSha256": "13fb7b4d4d3dccfabe04ecf56a31c6211f9a2b64f082f42a3f45c7ed35bf0252"
+        }
+      },
+      {
+        "id": "cat-plays",
+        "profile": "desktop",
+        "status": "explained",
+        "accounted": true,
+        "rowFingerprint": "35d71ad73a77d9f0936ce78085d7e1340c91dea9d838c71eaf61518cd57795d4",
+        "caseInventorySha256": "ab9015257c3dcc9b689e16134fdbbeb991412029fb5a89f72f4fcaee4b7a7be6",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "35d71ad73a77d9f0936ce78085d7e1340c91dea9d838c71eaf61518cd57795d4"
+        }
+      },
+      {
+        "id": "buddha",
+        "profile": "phone",
+        "status": "explained",
+        "accounted": true,
+        "rowFingerprint": "cef9eceb92d7d9f08a57c46342e05b0426f524a5c065b5f2862f367259649172",
+        "caseInventorySha256": "1e93c074dfec664bc350dbe9664845446fc94bb36d8157bdb12f1f4d263e8fa1",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "cef9eceb92d7d9f08a57c46342e05b0426f524a5c065b5f2862f367259649172"
+        }
+      },
+      {
+        "id": "buddha",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "21a8a23c6492cd52128bca30a40f4a90e21cdf94b3522cad95022b6850d2816d",
+        "caseInventorySha256": "a8744a05863e03d5e6d76f382caa81cd048b3695612d078c037f40fa2fc3dc57"
+      },
+      {
+        "id": "chameleon-flowers",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "a824f4353544f538711afb0fa3dbd2cc609eff0ede1eba75086a6372f1c3b730",
+        "caseInventorySha256": "9caae82aa6dd7765760a80031224c1da75bc26b6395b7f9b48bf57d38b996c3e",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "a824f4353544f538711afb0fa3dbd2cc609eff0ede1eba75086a6372f1c3b730",
+          "evaluationSha256": "a3db781cdd5d1575897e33f738e5949a5e8eae38386abcd182363487bbb6d646"
+        }
+      },
+      {
+        "id": "chameleon-flowers",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "12525d2865e4073854c69b9b414c738ea7054bee7cd354a7490cedda3f521813",
+        "caseInventorySha256": "78fb22e5d4abeec91d768fe484e004c851acbf0fb134f1c00559d6212bcd37a5"
+      },
+      {
+        "id": "dianthus",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "40c9ca624a34f760cd934b032ec2c79e0dbb06e90a672916e855a87060b4f113",
+        "caseInventorySha256": "8620d3e664fb8151db89fbf32367ada8b14c727550cfd9dddbcf537394758bf1",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "40c9ca624a34f760cd934b032ec2c79e0dbb06e90a672916e855a87060b4f113",
+          "evaluationSha256": "c3da2710b9519297484e444bf8ca8b6d1fa5735f8e035f79ff769144a0ca51f1"
+        }
+      },
+      {
+        "id": "dianthus",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "6de07e983fd4d3f93357c95ec1cbf8c359bffa48987e8532d4ee87e31aa064ae",
+        "caseInventorySha256": "8bc751e3b71c6d1ec6f16766a81ce21f5ebc1f568ddfcd843705b399805d25f3"
+      },
+      {
+        "id": "pisac",
+        "profile": "phone",
+        "status": "harness-error",
+        "accounted": false,
+        "rowFingerprint": "a4a3fbeb4a455d657c6650edbda942e7a6dfe282129b8c5ef19893abd3e47830",
+        "caseInventorySha256": "30615463fa198289394528524541a48a1250cdeaa4f15557ed4e5ab571aab5b0"
+      },
+      {
+        "id": "pisac",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "eba4c98a8f0d923ffe005c736be60d37757f7963356dbb8a386a3ca9fab070fc",
+        "caseInventorySha256": "b794bd28bea1f76d8d4cfe6c268b11608a85c5cf2e0eb5ed6b6b3f5c6746ddd4"
+      },
+      {
+        "id": "sleeping-dog",
+        "profile": "phone",
+        "status": "explained",
+        "accounted": true,
+        "rowFingerprint": "43dfcce0b484f7d9f2038d14a4c2ea87f25521f38f3c074ad99b0cd396e902bb",
+        "caseInventorySha256": "b5f77817d3ec0398e403d9f1796551cbf59686fad89889670c0762c885dadc03",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "43dfcce0b484f7d9f2038d14a4c2ea87f25521f38f3c074ad99b0cd396e902bb"
+        }
+      },
+      {
+        "id": "sleeping-dog",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "841d06a74365008a37dc3f2d8a0d613202df214649505db8f22253ce99ee7a62",
+        "caseInventorySha256": "e23e25fc79c7e1ca310a9c7381df0f57b871517701e6fdb7a0c78c843ab49cf7"
+      },
+      {
+        "id": "palace-statue",
+        "profile": "phone",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "d148115f358d1acfa5e0811dc0f7cfb4bd4d4f8645948d32328f32ea074de995",
+        "caseInventorySha256": "793ecaf17086585edd4b93ff6c50f02a547d3279a8ec44c4e4aea142491d872e"
+      },
+      {
+        "id": "palace-statue",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "783f06a6e3b4f721e76b05ea529f94086f4539aace9b09f2a99fe49003927601",
+        "caseInventorySha256": "97dd4550efae5c5fe9f28287830ac2115a98bb7bfb21eb807b446e343cc5fb19"
+      },
+      {
+        "id": "oa-street",
+        "profile": "phone",
+        "status": "explained",
+        "accounted": true,
+        "rowFingerprint": "06d3d78510c8c76ecbc966f444fc487c7f57ff7f6884ea4cb819bf8a44e5fb42",
+        "caseInventorySha256": "60680f3c27af7b9b36c7fc951c7fc8a68d45a3eeba38da33ba33d55921f3e9b7",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "06d3d78510c8c76ecbc966f444fc487c7f57ff7f6884ea4cb819bf8a44e5fb42"
+        }
+      },
+      {
+        "id": "oa-street",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "ee7fa20083bf1104e123e139d2ae26cb3707cd60666b83a3232c3afa89970595",
+        "caseInventorySha256": "66775ca656ab0a00013f5c69d4b7e77808129a97c248f4247bb7d2a343e916e1"
+      },
+      {
+        "id": "ullard",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "9bcbaff59213d8bb49efddb00cec973f044ad37b7ebc165e9449ed578439d668",
+        "caseInventorySha256": "a6ce01cc5d6580c765c4069fa3573348bf79b8d85217a384c1e55be36bdab46e",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "9bcbaff59213d8bb49efddb00cec973f044ad37b7ebc165e9449ed578439d668",
+          "evaluationSha256": "1f73febcf5c597f32e7cd97d3e0c2ba26354767b84ac2fd5bc1a5dcd77baa7a7"
+        }
+      },
+      {
+        "id": "ullard",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "50a7c6051b782f6f257d8b4bc70e6fbb9ab2bcebb5127f223eb7caf341464a96",
+        "caseInventorySha256": "da1d09b6fe9f4bf5bc275f35126956f944dea21ce0e442893105d86f2a830bbe"
+      },
+      {
+        "id": "snaefell",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "93691839e6a9f9ca2fa6b2fffa93314438ef4b5aea7db97ba7c8017f0a87ea4e",
+        "caseInventorySha256": "5f586193f64f16ac4483217ad12c22e1f11b252582e8af6f62dc39dcfc670d6e",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "93691839e6a9f9ca2fa6b2fffa93314438ef4b5aea7db97ba7c8017f0a87ea4e",
+          "evaluationSha256": "e2774adad8dc0788d407d6560dd111229a19eb5b6896fbf64ce274ee313f313d"
+        }
+      },
+      {
+        "id": "snaefell",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "82ba3b285dd2a8e13e43209c6ccbed8f9ea5bc62aea7168b198bc58ffc52ad7f",
+        "caseInventorySha256": "03363c158f096cf5a16955606fb0ee4ac96bb19add95ec419028594534b053ef"
+      },
+      {
+        "id": "fremantle-orbit",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "5ada7f0d4e4f129130f330f59d1f462a12f5608245d6ccc1717d7ba4437c5e65",
+        "caseInventorySha256": "ace3f4d2ff2dd3a44755bd96773a2ed394f49ee2d2818229f58b54e86496ae29",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "5ada7f0d4e4f129130f330f59d1f462a12f5608245d6ccc1717d7ba4437c5e65",
+          "evaluationSha256": "6d6ab88c73f91d0ac0c432a4bdebe2aeaefa41ff2b054ca25cf07f26d5eb8d4f"
+        }
+      },
+      {
+        "id": "fremantle-orbit",
+        "profile": "desktop",
+        "status": "timeout",
+        "accounted": false,
+        "rowFingerprint": "8c71ceb5a2a1b5458becdd793f499c6d91e10f16a5b5eaf151599d42b46103bd",
+        "caseInventorySha256": "c853771b1d3a41fd53d6b1e49893c3e6426b0903c7267f8d27b859d2f5112451"
+      },
+      {
+        "id": "ihasalu-orbit",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "c0d7696f3d8d12ad3f8d47676431dbd06b505ea44a2d91ac9bfb7e531b3a3b12",
+        "caseInventorySha256": "30bd5fd1613b3c76f640134dfd74801ea5d32807d573b80fefeed07ca17e9d0f",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "c0d7696f3d8d12ad3f8d47676431dbd06b505ea44a2d91ac9bfb7e531b3a3b12",
+          "evaluationSha256": "a09393aab526498646ce5ce7f4278a173f921a5af0223f2bd4f14d5304cc6cb9"
+        }
+      },
+      {
+        "id": "fresnel-lens",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "a9ad89103fbac2350a786506eeec55f5d9d8db4a2558bcf0de1e69c200f31fce",
+        "caseInventorySha256": "c37a1d8cad67adfab518fde39d4fc9dce6b34e2e800c38e0fde4b7f3563b393c",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "a9ad89103fbac2350a786506eeec55f5d9d8db4a2558bcf0de1e69c200f31fce",
+          "evaluationSha256": "578efb94d09a7a04e09bc368ddf4797f1867171426e36e691a1e8f54c3d8193d"
+        }
+      },
+      {
+        "id": "saint-denis",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "49451d11e2aad24ae147ed3989a534f1d7b2adf9116093f3ca2c75df109bd8c9",
+        "caseInventorySha256": "f393c34becdd1d3c7885150bb435bb15be8139af9092dd3e3bcafe038d166c7e",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "49451d11e2aad24ae147ed3989a534f1d7b2adf9116093f3ca2c75df109bd8c9",
+          "evaluationSha256": "e5370161a0f19b3fab2d7a15e841c97ff84da7390a3afa814327fe799e16c99e"
+        }
+      },
+      {
+        "id": "horse-statue",
+        "profile": "phone",
+        "status": "explained",
+        "accounted": true,
+        "rowFingerprint": "2bd56dd02edda5be33134eb78dfcc3e4abbf32e042a9593be5a1ebd725bd442b",
+        "caseInventorySha256": "873549b3561e5916fda9bb4a56c093cbde8706cbdecad233319ebdd9fdeddf32",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "2bd56dd02edda5be33134eb78dfcc3e4abbf32e042a9593be5a1ebd725bd442b"
+        }
+      },
+      {
+        "id": "royal-sovereign",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "c861977734a4c61bfdb41234552d673f8f40933a0d93fc0730bd4aec0debac5f",
+        "caseInventorySha256": "427cffb11fc501dd8309eb33eb550fb2ac281917bbc247c9865f53f47954f2fb",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "c861977734a4c61bfdb41234552d673f8f40933a0d93fc0730bd4aec0debac5f",
+          "evaluationSha256": "96518ae413fe0146010a94ac4112e476ddd79435a205778ff317acac0c3abc43"
+        }
+      },
+      {
+        "id": "viljandi-ruins",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "25b08d8a189684f5a2de026edf21ee086a3d9cd6c3439318891cdeba4da7ccc7",
+        "caseInventorySha256": "123c4db3e62bd6449fc16791ef50640d4a504fd97e3e0903a9fb42be578252d0",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "25b08d8a189684f5a2de026edf21ee086a3d9cd6c3439318891cdeba4da7ccc7",
+          "evaluationSha256": "bb55feb6ee14e335fb9ae82a28aefef83de244ee90ade8dc585f42bdd6dcf988"
+        }
+      },
+      {
+        "id": "kakerdi-bog",
+        "profile": "phone",
+        "status": "finished",
+        "accounted": true,
+        "rowFingerprint": "4892f5aa1168f3b58ada107209f11f5feea4cd73ef3bacd2ebc7c03cc804708e",
+        "caseInventorySha256": "84b82b7de2daf84d1e39b3d6d124780f1228c26e135aad22729fc137ec27c0cd",
+        "evidence": {
+          "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+          "resultFingerprint": "4892f5aa1168f3b58ada107209f11f5feea4cd73ef3bacd2ebc7c03cc804708e",
+          "evaluationSha256": "63c0236908bcc2ad7e7f2705d762f204b30c9b831ea32af708c2845b59cb428b"
+        }
+      },
+      {
+        "id": "fjoloy",
+        "profile": "phone",
+        "status": "harness-error",
+        "accounted": false,
+        "rowFingerprint": "d715235ef781d8ba9b90503fd8d58d2a3b2bd97e83d306eb849f62a07f4e684f",
+        "caseInventorySha256": "6c98a37ccf04de5d1489c2ee7eb1a819c3025b51439657bd69fd8ba43c431af3"
+      }
+    ],
+    "attempts": [
+      {
+        "id": "buddha",
+        "profile": "desktop"
+      },
+      {
+        "id": "buddha",
+        "profile": "phone"
+      },
+      {
+        "id": "cat-plays",
+        "profile": "desktop"
+      },
+      {
+        "id": "cat-plays",
+        "profile": "phone"
+      },
+      {
+        "id": "cat-track",
+        "profile": "desktop"
+      },
+      {
+        "id": "cat-track",
+        "profile": "phone"
+      },
+      {
+        "id": "chameleon-flowers",
+        "profile": "desktop"
+      },
+      {
+        "id": "chameleon-flowers",
+        "profile": "phone"
+      },
+      {
+        "id": "dianthus",
+        "profile": "desktop"
+      },
+      {
+        "id": "dianthus",
+        "profile": "phone"
+      },
+      {
+        "id": "fjoloy",
+        "profile": "phone"
+      },
+      {
+        "id": "fremantle-orbit",
+        "profile": "desktop"
+      },
+      {
+        "id": "fremantle-orbit",
+        "profile": "phone"
+      },
+      {
+        "id": "fresnel-lens",
+        "profile": "phone"
+      },
+      {
+        "id": "horse-statue",
+        "profile": "phone"
+      },
+      {
+        "id": "ihasalu-orbit",
+        "profile": "phone"
+      },
+      {
+        "id": "kakerdi-bog",
+        "profile": "phone"
+      },
+      {
+        "id": "oa-street",
+        "profile": "desktop"
+      },
+      {
+        "id": "oa-street",
+        "profile": "phone"
+      },
+      {
+        "id": "palace-statue",
+        "profile": "desktop"
+      },
+      {
+        "id": "palace-statue",
+        "profile": "phone"
+      },
+      {
+        "id": "pisac",
+        "profile": "desktop"
+      },
+      {
+        "id": "pisac",
+        "profile": "phone"
+      },
+      {
+        "id": "royal-sovereign",
+        "profile": "phone"
+      },
+      {
+        "id": "saint-denis",
+        "profile": "phone"
+      },
+      {
+        "id": "sleeping-dog",
+        "profile": "desktop"
+      },
+      {
+        "id": "sleeping-dog",
+        "profile": "phone"
+      },
+      {
+        "id": "snaefell",
+        "profile": "desktop"
+      },
+      {
+        "id": "snaefell",
+        "profile": "phone"
+      },
+      {
+        "id": "ullard",
+        "profile": "desktop"
+      },
+      {
+        "id": "ullard",
+        "profile": "phone"
+      },
+      {
+        "id": "viljandi-ruins",
+        "profile": "phone"
+      }
+    ]
+  },
+  "runs": [
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/001-cat-track-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "d053d17a4bd6240fde19f1e757bb3b36c3793c4069289e6b4cad1532ebe1da29",
+      "rows": [
+        {
+          "id": "cat-track",
+          "profile": "phone",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "a889d9fdeb54252e70cbf8fd5104bb18ada00e26c08e02bbe7f8a1017127e7b3",
+          "caseInventorySha256": "328eb852db539b5437ab1fbb369bd55ee26fed1f49379fbfc5c410c93c56e3ff"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "cat-track",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/002-cat-plays-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "f5138bc337739e0464432c13d0258ae1392e7791de0ff6ec1b98fc92f538fb1d",
+      "rows": [
+        {
+          "id": "cat-plays",
+          "profile": "phone",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "fbf5a6deaccdc62cf811bf0d382cf8794f4f3d42ba81925194fcf9a72b159134",
+          "caseInventorySha256": "78110c5da003ead89dadccd2fe0a5d50a2d3b3a55bda9aa5e8d76b491babd6af"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "cat-plays",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/003-buddha-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "6bb01d29e727de01337a9be52f2e29c3cb845273d51f4ff61c17f7e3620b79f3",
+      "rows": [
+        {
+          "id": "buddha",
+          "profile": "phone",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "6582d49b771e41a0814c7d19d5c3dd42bdc9c28d9480387d810293782de0bd7d",
+          "caseInventorySha256": "974874f1707cee44dd3ee54562d7d591992cff5e746c1a308493fefaba8883c2"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "buddha",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/004-chameleon-flowers-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "9225f822a7fac85f38d1ccf6ef11c8b06f0763b3391d723f03a0d7d0c4ad020b",
+      "rows": [
+        {
+          "id": "chameleon-flowers",
+          "profile": "phone",
+          "status": "finished",
+          "accounted": true,
+          "rowFingerprint": "641f6c1c6649a293dccc3b86d48d82bfdfa5c734d61b231c6b1ddb9223820733",
+          "caseInventorySha256": "f343bda420d435d63b4560e721e3f70d8ae0eed5ed9fd0006d2b52ef30675c5e"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "chameleon-flowers",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/005-cat-plays-desktop-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "48534c42eb73f31992d9debcac35bd77730c8620da3646a72771a6101ab75359",
+      "rows": [
+        {
+          "id": "cat-plays",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "8b78f486988b28416c7736f6b9f8d939a0bd1c311c888925c129d43765253469",
+          "caseInventorySha256": "edd60526a8fed184d49a17e194d0bfc30cd7379cc81acace824703c06e4b295e"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "cat-plays",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/006-cat-track-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "f157a2853c4277709bfd53b4f05de3449b79d5b8a2fcf7c703821fe2ec405d86",
+      "rows": [
+        {
+          "id": "cat-track",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "b03ee80cf2c8f5fa2bac7afb59960dfa983308683af0fdf400e8a8843f3d4b74",
+          "caseInventorySha256": "6181c232fce6f9288dcfe9f21a65e8cf49bcf5cf3f99f8ce96ac847ca8082815"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "cat-track",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/007-buddha-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "d98dea93e10afc73467bf2ac4dc80a73eea3c8b3cecff159fb1c33f82389d90b",
+      "rows": [
+        {
+          "id": "buddha",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "f520c133ce21dff3aeeea33688f8c09f324130ade67ee477ffe3bdeac0aa5cdb",
+          "caseInventorySha256": "a16224950b48892200055b3340d536c3bced031d3d46861506a859c365257f06"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "buddha",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/008-dianthus-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "54cf8546997697f307ed8668e0f7eb8a058690345fa9b3c3f50bbc9362a5e822",
+      "rows": [
+        {
+          "id": "dianthus",
+          "profile": "phone",
+          "status": "finished",
+          "accounted": true,
+          "rowFingerprint": "2a8700a7edddfc81c2169939174113c4414a94966d085081a934a23a33fccc0b",
+          "caseInventorySha256": "507d94ae5758a6b84bbefae8cc6ae7e8fb6d41bb107703d8dae91a1510cc1808"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "dianthus",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/009-chameleon-flowers-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "39a5ba17e92346e97fab56cf66c958613aef4f7c96c3c8eb6ca27c16149846ef",
+      "rows": [
+        {
+          "id": "chameleon-flowers",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "c4d8e6b8b45bde29af5a0f3891861d6c0ffadbc6d89d2f4ed1c70ddfd810aacb",
+          "caseInventorySha256": "4b8205242b3277cd1daabaad04e927c67525257146fd3c03abad320c91b8d174"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "chameleon-flowers",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/010-dianthus-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "b2535e1ea66c81a5dc223bc4063fd9b050a498f46984ccca27b193f60262e2a7",
+      "rows": [
+        {
+          "id": "dianthus",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "7a8c82f2d77a9f3045063057b619b79ccb9f309d4bb83410e200894d3336e186",
+          "caseInventorySha256": "24154f30b6a5c2e35ce4286bd3392ceac17d33178ee9786c2307b0a047314403"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "dianthus",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/011-sleeping-dog-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "0b9f9171056320616604465bc1919a91a92aef16228dacc20e022fdff1620e23",
+      "rows": [
+        {
+          "id": "sleeping-dog",
+          "profile": "phone",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "6cba31238bb5ccff6c1bda9c921db5ee5dc772974cb6a233b6bb14f8da1eb854",
+          "caseInventorySha256": "e68c5af891d9c69d6b1615c56f8b5c2b7be4a38ed5345f7d0287b8e836294726"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "sleeping-dog",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/012-oa-street-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "9dba2f4a5bac98fcc6450c26f4530e5c7c195e10f924365472ee60170314ce04",
+      "rows": [
+        {
+          "id": "oa-street",
+          "profile": "phone",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "1f3fb399a42b1ef1cf9c7203a11ea79a79668a28cb1cbd5fbc7c11de9a1c432b",
+          "caseInventorySha256": "a3de9a44d90fa6c71787e9837a120fbeb7d584efb75a78e337fa032f48565fe1"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "oa-street",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/013-pisac-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "c2a86c200d55e812b8ffe3985476771ef016ec7e2e21555b9ee6930373864151",
+      "rows": [
+        {
+          "id": "pisac",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "aae85b0f2ef4fdf531eca2f36c26f097403af60848917e79ccda9b3bbf0de5b1",
+          "caseInventorySha256": "0f611cfa1ec9b352f5ae6089448f657ead7462859388db545454c3a63cc4c1e0"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "pisac",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/014-ullard-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "48c48db0279e8b50d8fcd984a21aca14739e91aca066982940ea16cd2c60137d",
+      "rows": [
+        {
+          "id": "ullard",
+          "profile": "phone",
+          "status": "finished",
+          "accounted": true,
+          "rowFingerprint": "dc820525e416d8ec8dc778d9192b176fb027dcd96d4176df8e9a19c7d05e3c91",
+          "caseInventorySha256": "32a2ffe4e3083235370145937ecb5ffdbe4eef228cbf92d41b3d3f06935b7428"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "ullard",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/015-snaefell-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "4e831083ada47a293ce8eb73e695a2070565e1fc779850b6eb811aa7d6fdd22a",
+      "rows": [
+        {
+          "id": "snaefell",
+          "profile": "phone",
+          "status": "finished",
+          "accounted": true,
+          "rowFingerprint": "ac23f39db3e17d6ebd63485f927df3789a31e515e23aa25322943e607d26d3c9",
+          "caseInventorySha256": "8796883650359a30894c70109e2c174e5510f8d35dae46c10f56091ce24bd525"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "snaefell",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/016-sleeping-dog-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "04b981b0b01cb752bf5794ee93fe39ec3fbe5304e019f76e61d49fac20ce568e",
+      "rows": [
+        {
+          "id": "sleeping-dog",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "84781d7ed2b3d5d5a4f0e36b1a8f65bee392aca50dccd925d8b7c6e20efde7d3",
+          "caseInventorySha256": "913a532dee5619e7a2c849f1d858399ef9326662d3a9d37256d8bc01a9448100"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "sleeping-dog",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/017-fremantle-orbit-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "56941dd06dffbb8aec256e8014993f98e4ee947fe8021c7abd93c3b2ce0faa55",
+      "rows": [
+        {
+          "id": "fremantle-orbit",
+          "profile": "phone",
+          "status": "finished",
+          "accounted": true,
+          "rowFingerprint": "cf5fa9e46f5e39e602569617e86cca3852f5f22a0739153f755e06d250a39242",
+          "caseInventorySha256": "e1efe625aad0fd5b1cd75de4c488929165f80b1126f563be125b63b815a7a6ea"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "fremantle-orbit",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/018-palace-statue-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "802a435eef69c768ea0daed7d1630331fe1e13f520c4fe37a82ba57441f2b992",
+      "rows": [
+        {
+          "id": "palace-statue",
+          "profile": "desktop",
+          "status": "harness-error",
+          "accounted": false,
+          "rowFingerprint": "bda7e95c438a74d7acfdd1b5bdc1fa5f2df558edc31e5108db5ffc6b1c59c4f6",
+          "caseInventorySha256": "67af030dc3c786c75afb471cc79f605aa6858743f29c0a17c710e6eab8c1bb8e"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "palace-statue",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/019-ihasalu-orbit-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "1686657e4dd7f3295b56515b977315654b51e921df1e929cb11d57e9ce40649c",
+      "rows": [
+        {
+          "id": "ihasalu-orbit",
+          "profile": "phone",
+          "status": "finished",
+          "accounted": true,
+          "rowFingerprint": "4c23e7066a95f927adb388c3bfbb53ade295f59355736b238b6e878546eb6c3b",
+          "caseInventorySha256": "51a1f653c9f8aec8343ce482538b413da43582b6e02decf1abb91c6700f97526"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "ihasalu-orbit",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/020-oa-street-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "34e209ac494aae1fc15fd20f9dc5525e5e76bfb5f0e3d7a73be125b59abe0154",
+      "rows": [
+        {
+          "id": "oa-street",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "9fbe0316b5a7ec378141cfe7e8849fd3246cafe7e9b1a32f2eee362f4ca2f564",
+          "caseInventorySha256": "0fd046f1511d5e85f2b2bef30e72e848d89a6688bd69a76bf320d84217789f9a"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "oa-street",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/021-fresnel-lens-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "49320514ed796ca78229eb60bc0185b66d3002461cd69da99fdeb0afaf961206",
+      "rows": [
+        {
+          "id": "fresnel-lens",
+          "profile": "phone",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "a072cd7a195fcc2ee9f707dd45a5879e0d3ff6ae15340c11b2260fb1984b220a",
+          "caseInventorySha256": "c7dd6fda8eab2e76255e68a45dd41b0e45cc5f71a360d4016a7cc492bfc749dc"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "fresnel-lens",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/022-saint-denis-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "12d3755c7cf50b65ce4594ae1a71a1eae84d40ef48f1fc67ffa96b4bd598161a",
+      "rows": [
+        {
+          "id": "saint-denis",
+          "profile": "phone",
+          "status": "finished",
+          "accounted": true,
+          "rowFingerprint": "b37f4048466754b4c293c667e3c63d6751c95879b0933a95d1bab9d939fac1a2",
+          "caseInventorySha256": "7a8144a3b40f65be1c5c0e5e05dc4770d7c6049d22e28e7e267ce4ad7bd22716"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "saint-denis",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/023-ullard-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "4eece19b039f2f184f1e9ffad7b500ce53eb260e140bcadf560cebbce3620561",
+      "rows": [
+        {
+          "id": "ullard",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "b569bb86d5f31945949a56c04c4a9846aa2712e8892408f3d6d8f2d515b97153",
+          "caseInventorySha256": "3cdf2edbfe2d8c9221f60c857e7f0b21dcbe0741eb9a1445d6a9d193c618db0e"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "ullard",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/024-horse-statue-phone-paired",
+      "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+      "runSha256": "f3e68ddc7da32f99c53e717b9441a00762ce11cabc0ba2b1c7d8c595f5d2ef60",
+      "rows": [
+        {
+          "id": "horse-statue",
+          "profile": "phone",
+          "status": "harness-error",
+          "accounted": false,
+          "rowFingerprint": "2d0a7fd37209d181b739c53dd6413701e87eb17bea6545846d33cdcc75242578",
+          "caseInventorySha256": "553abd018b60b12e719ba239d8f8c8f4dfdba4bbf43b8f4f2cd1037b9b830862"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "horse-statue",
+          "profile": "phone"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/025-snaefell-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "4f7955e9edf82e74777336d0df3dde208a81559aebe13a660f764110eb99ef5d",
+      "rows": [
+        {
+          "id": "snaefell",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "c275a20e11265424b037ad544a38f29bfdf1ed8cee23c90b901e6e813c5e21b4",
+          "caseInventorySha256": "d9b40ffcc98305308655bfefbf726b6c19d748e2c399f2575f88bb6ef7e0d5e1"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "snaefell",
+          "profile": "desktop"
+        }
+      ]
+    },
+    {
+      "directory": "/workspace/v3d-r4-media/candidate-r10-v1-shards/026-fremantle-orbit-desktop-unpaired",
+      "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+      "runSha256": "f14279ce930196c3424bfb7e0b636dd0f58c70443219c4dfa5e850d8109f6d91",
+      "rows": [
+        {
+          "id": "fremantle-orbit",
+          "profile": "desktop",
+          "status": "explained",
+          "accounted": true,
+          "rowFingerprint": "af2480f0e08686ca96d2d6e8987c6908b2bcc3ce4d69ac05537a70723f40aefd",
+          "caseInventorySha256": "e1c0e68c5d0a62166a7c8777fac5c7ce29b2e0b96ed10e7165dfffedbb55d394"
+        }
+      ],
+      "attempts": [
+        {
+          "id": "fremantle-orbit",
+          "profile": "desktop"
+        }
+      ]
+    }
+  ]
+}

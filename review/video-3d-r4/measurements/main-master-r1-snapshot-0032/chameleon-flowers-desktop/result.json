@@ -1,0 +1,22 @@
+{
+  "id": "chameleon-flowers",
+  "profile": "desktop",
+  "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+  "started": "2026-10-15T07:26:29.168Z",
+  "status": "timeout",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": null,
+  "bakeMs": 1737330.3565569995,
+  "mean": null,
+  "peakRssBytes": 2145648640,
+  "hostLoadAtStart": [
+    24.01,
+    25.89,
+    25.63
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "Error: chameleon-flowers/desktop (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

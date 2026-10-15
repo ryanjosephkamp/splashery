@@ -1,0 +1,738 @@
+{
+  "id": "chameleon-flowers",
+  "profile": "phone",
+  "method": "one-way-exact-prefix-canonical-hybrid",
+  "startedAt": "2026-10-15T11:47:51.390Z",
+  "researchLimitMs": 150000,
+  "abortAfterTrials": 1,
+  "abortOnTransition": false,
+  "inputSha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+  "table": {
+    "timescale": 12288,
+    "samples": 240,
+    "editOffset": 1024
+  },
+  "parseMs": 10.300000000745058,
+  "tier": {
+    "maxFrames": 16,
+    "frameSide": 480,
+    "featSide": 480,
+    "trainSide": 320,
+    "iters": 1200,
+    "splats": 30000,
+    "seed": 15000,
+    "maxMinutes": 8
+  },
+  "plan": {
+    "start": 0,
+    "end": 10,
+    "rate": 1.6,
+    "step": 0.625,
+    "windows": [
+      {
+        "t": 0.313,
+        "from": 0,
+        "to": 0.625
+      },
+      {
+        "t": 0.938,
+        "from": 0.625,
+        "to": 1.25
+      },
+      {
+        "t": 1.563,
+        "from": 1.25,
+        "to": 1.875
+      },
+      {
+        "t": 2.188,
+        "from": 1.875,
+        "to": 2.5
+      },
+      {
+        "t": 2.813,
+        "from": 2.5,
+        "to": 3.125
+      },
+      {
+        "t": 3.438,
+        "from": 3.125,
+        "to": 3.75
+      },
+      {
+        "t": 4.063,
+        "from": 3.75,
+        "to": 4.375
+      },
+      {
+        "t": 4.688,
+        "from": 4.375,
+        "to": 5
+      },
+      {
+        "t": 5.313,
+        "from": 5,
+        "to": 5.625
+      },
+      {
+        "t": 5.938,
+        "from": 5.625,
+        "to": 6.25
+      },
+      {
+        "t": 6.563,
+        "from": 6.25,
+        "to": 6.875
+      },
+      {
+        "t": 7.188,
+        "from": 6.875,
+        "to": 7.5
+      },
+      {
+        "t": 7.813,
+        "from": 7.5,
+        "to": 8.125
+      },
+      {
+        "t": 8.438,
+        "from": 8.125,
+        "to": 8.75
+      },
+      {
+        "t": 9.063,
+        "from": 8.75,
+        "to": 9.375
+      },
+      {
+        "t": 9.688,
+        "from": 9.375,
+        "to": 10
+      }
+    ]
+  },
+  "natural": {
+    "width": 854,
+    "height": 481,
+    "duration": 10
+  },
+  "crop": {
+    "sx": 0,
+    "sw": 854
+  },
+  "prepareMs": 119.10000000149012,
+  "status": "research-abort-no-result",
+  "error": {
+    "name": "AbortError",
+    "message": "Stopped"
+  },
+  "hybridDiagnostics": {
+    "targets": [
+      {
+        "window": 0,
+        "trial": 0,
+        "requestedTime": 0.104,
+        "pts": 1536,
+        "time": 0.125,
+        "micros": 125000,
+        "sourcePresentationIndex": 3
+      },
+      {
+        "window": 0,
+        "trial": 1,
+        "requestedTime": 0.313,
+        "pts": 4096,
+        "time": 0.3333333333333333,
+        "micros": 333333,
+        "sourcePresentationIndex": 8
+      },
+      {
+        "window": 0,
+        "trial": 2,
+        "requestedTime": 0.521,
+        "pts": 6656,
+        "time": 0.5416666666666666,
+        "micros": 541667,
+        "sourcePresentationIndex": 13
+      },
+      {
+        "window": 1,
+        "trial": 0,
+        "requestedTime": 0.729,
+        "pts": 9216,
+        "time": 0.75,
+        "micros": 750000,
+        "sourcePresentationIndex": 18
+      },
+      {
+        "window": 1,
+        "trial": 1,
+        "requestedTime": 0.938,
+        "pts": 11776,
+        "time": 0.9583333333333334,
+        "micros": 958333,
+        "sourcePresentationIndex": 23
+      },
+      {
+        "window": 1,
+        "trial": 2,
+        "requestedTime": 1.146,
+        "pts": 14336,
+        "time": 1.1666666666666667,
+        "micros": 1166667,
+        "sourcePresentationIndex": 28
+      },
+      {
+        "window": 2,
+        "trial": 0,
+        "requestedTime": 1.354,
+        "pts": 16896,
+        "time": 1.375,
+        "micros": 1375000,
+        "sourcePresentationIndex": 33
+      },
+      {
+        "window": 2,
+        "trial": 1,
+        "requestedTime": 1.563,
+        "pts": 19456,
+        "time": 1.5833333333333333,
+        "micros": 1583333,
+        "sourcePresentationIndex": 38
+      },
+      {
+        "window": 2,
+        "trial": 2,
+        "requestedTime": 1.771,
+        "pts": 22016,
+        "time": 1.7916666666666667,
+        "micros": 1791667,
+        "sourcePresentationIndex": 43
+      },
+      {
+        "window": 3,
+        "trial": 0,
+        "requestedTime": 1.979,
+        "pts": 24576,
+        "time": 2,
+        "micros": 2000000,
+        "sourcePresentationIndex": 48
+      },
+      {
+        "window": 3,
+        "trial": 1,
+        "requestedTime": 2.188,
+        "pts": 27136,
+        "time": 2.2083333333333335,
+        "micros": 2208333,
+        "sourcePresentationIndex": 53
+      },
+      {
+        "window": 3,
+        "trial": 2,
+        "requestedTime": 2.396,
+        "pts": 29696,
+        "time": 2.4166666666666665,
+        "micros": 2416667,
+        "sourcePresentationIndex": 58
+      },
+      {
+        "window": 4,
+        "trial": 0,
+        "requestedTime": 2.604,
+        "pts": 32256,
+        "time": 2.625,
+        "micros": 2625000,
+        "sourcePresentationIndex": 63
+      },
+      {
+        "window": 4,
+        "trial": 1,
+        "requestedTime": 2.813,
+        "pts": 34816,
+        "time": 2.8333333333333335,
+        "micros": 2833333,
+        "sourcePresentationIndex": 68
+      },
+      {
+        "window": 4,
+        "trial": 2,
+        "requestedTime": 3.021,
+        "pts": 37376,
+        "time": 3.0416666666666665,
+        "micros": 3041667,
+        "sourcePresentationIndex": 73
+      },
+      {
+        "window": 5,
+        "trial": 0,
+        "requestedTime": 3.229,
+        "pts": 39936,
+        "time": 3.25,
+        "micros": 3250000,
+        "sourcePresentationIndex": 78
+      },
+      {
+        "window": 5,
+        "trial": 1,
+        "requestedTime": 3.438,
+        "pts": 42496,
+        "time": 3.4583333333333335,
+        "micros": 3458333,
+        "sourcePresentationIndex": 83
+      },
+      {
+        "window": 5,
+        "trial": 2,
+        "requestedTime": 3.646,
+        "pts": 45056,
+        "time": 3.6666666666666665,
+        "micros": 3666667,
+        "sourcePresentationIndex": 88
+      },
+      {
+        "window": 6,
+        "trial": 0,
+        "requestedTime": 3.854,
+        "pts": 47616,
+        "time": 3.875,
+        "micros": 3875000,
+        "sourcePresentationIndex": 93
+      },
+      {
+        "window": 6,
+        "trial": 1,
+        "requestedTime": 4.063,
+        "pts": 50176,
+        "time": 4.083333333333333,
+        "micros": 4083333,
+        "sourcePresentationIndex": 98
+      },
+      {
+        "window": 6,
+        "trial": 2,
+        "requestedTime": 4.271,
+        "pts": 52736,
+        "time": 4.291666666666667,
+        "micros": 4291667,
+        "sourcePresentationIndex": 103
+      },
+      {
+        "window": 7,
+        "trial": 0,
+        "requestedTime": 4.479,
+        "pts": 55296,
+        "time": 4.5,
+        "micros": 4500000,
+        "sourcePresentationIndex": 108
+      },
+      {
+        "window": 7,
+        "trial": 1,
+        "requestedTime": 4.688,
+        "pts": 57856,
+        "time": 4.708333333333333,
+        "micros": 4708333,
+        "sourcePresentationIndex": 113
+      },
+      {
+        "window": 7,
+        "trial": 2,
+        "requestedTime": 4.896,
+        "pts": 60416,
+        "time": 4.916666666666667,
+        "micros": 4916667,
+        "sourcePresentationIndex": 118
+      },
+      {
+        "window": 8,
+        "trial": 0,
+        "requestedTime": 5.104,
+        "pts": 62976,
+        "time": 5.125,
+        "micros": 5125000,
+        "sourcePresentationIndex": 123
+      },
+      {
+        "window": 8,
+        "trial": 1,
+        "requestedTime": 5.313,
+        "pts": 65536,
+        "time": 5.333333333333333,
+        "micros": 5333333,
+        "sourcePresentationIndex": 128
+      },
+      {
+        "window": 8,
+        "trial": 2,
+        "requestedTime": 5.521,
+        "pts": 68096,
+        "time": 5.541666666666667,
+        "micros": 5541667,
+        "sourcePresentationIndex": 133
+      },
+      {
+        "window": 9,
+        "trial": 0,
+        "requestedTime": 5.729,
+        "pts": 70656,
+        "time": 5.75,
+        "micros": 5750000,
+        "sourcePresentationIndex": 138
+      },
+      {
+        "window": 9,
+        "trial": 1,
+        "requestedTime": 5.938,
+        "pts": 73216,
+        "time": 5.958333333333333,
+        "micros": 5958333,
+        "sourcePresentationIndex": 143
+      },
+      {
+        "window": 9,
+        "trial": 2,
+        "requestedTime": 6.146,
+        "pts": 75776,
+        "time": 6.166666666666667,
+        "micros": 6166667,
+        "sourcePresentationIndex": 148
+      },
+      {
+        "window": 10,
+        "trial": 0,
+        "requestedTime": 6.354,
+        "pts": 78336,
+        "time": 6.375,
+        "micros": 6375000,
+        "sourcePresentationIndex": 153
+      },
+      {
+        "window": 10,
+        "trial": 1,
+        "requestedTime": 6.563,
+        "pts": 80896,
+        "time": 6.583333333333333,
+        "micros": 6583333,
+        "sourcePresentationIndex": 158
+      },
+      {
+        "window": 10,
+        "trial": 2,
+        "requestedTime": 6.771,
+        "pts": 83456,
+        "time": 6.791666666666667,
+        "micros": 6791667,
+        "sourcePresentationIndex": 163
+      },
+      {
+        "window": 11,
+        "trial": 0,
+        "requestedTime": 6.979,
+        "pts": 86016,
+        "time": 7,
+        "micros": 7000000,
+        "sourcePresentationIndex": 168
+      },
+      {
+        "window": 11,
+        "trial": 1,
+        "requestedTime": 7.188,
+        "pts": 88576,
+        "time": 7.208333333333333,
+        "micros": 7208333,
+        "sourcePresentationIndex": 173
+      },
+      {
+        "window": 11,
+        "trial": 2,
+        "requestedTime": 7.396,
+        "pts": 91136,
+        "time": 7.416666666666667,
+        "micros": 7416667,
+        "sourcePresentationIndex": 178
+      },
+      {
+        "window": 12,
+        "trial": 0,
+        "requestedTime": 7.604,
+        "pts": 93696,
+        "time": 7.625,
+        "micros": 7625000,
+        "sourcePresentationIndex": 183
+      },
+      {
+        "window": 12,
+        "trial": 1,
+        "requestedTime": 7.813,
+        "pts": 96256,
+        "time": 7.833333333333333,
+        "micros": 7833333,
+        "sourcePresentationIndex": 188
+      },
+      {
+        "window": 12,
+        "trial": 2,
+        "requestedTime": 8.021,
+        "pts": 98816,
+        "time": 8.041666666666666,
+        "micros": 8041667,
+        "sourcePresentationIndex": 193
+      },
+      {
+        "window": 13,
+        "trial": 0,
+        "requestedTime": 8.229,
+        "pts": 101376,
+        "time": 8.25,
+        "micros": 8250000,
+        "sourcePresentationIndex": 198
+      },
+      {
+        "window": 13,
+        "trial": 1,
+        "requestedTime": 8.438,
+        "pts": 103936,
+        "time": 8.458333333333334,
+        "micros": 8458333,
+        "sourcePresentationIndex": 203
+      },
+      {
+        "window": 13,
+        "trial": 2,
+        "requestedTime": 8.646,
+        "pts": 106496,
+        "time": 8.666666666666666,
+        "micros": 8666667,
+        "sourcePresentationIndex": 208
+      },
+      {
+        "window": 14,
+        "trial": 0,
+        "requestedTime": 8.854,
+        "pts": 109056,
+        "time": 8.875,
+        "micros": 8875000,
+        "sourcePresentationIndex": 213
+      },
+      {
+        "window": 14,
+        "trial": 1,
+        "requestedTime": 9.063,
+        "pts": 111616,
+        "time": 9.083333333333334,
+        "micros": 9083333,
+        "sourcePresentationIndex": 218
+      },
+      {
+        "window": 14,
+        "trial": 2,
+        "requestedTime": 9.271,
+        "pts": 114176,
+        "time": 9.291666666666666,
+        "micros": 9291667,
+        "sourcePresentationIndex": 223
+      },
+      {
+        "window": 15,
+        "trial": 0,
+        "requestedTime": 9.479,
+        "pts": 116736,
+        "time": 9.5,
+        "micros": 9500000,
+        "sourcePresentationIndex": 228
+      },
+      {
+        "window": 15,
+        "trial": 1,
+        "requestedTime": 9.688,
+        "pts": 119296,
+        "time": 9.708333333333334,
+        "micros": 9708333,
+        "sourcePresentationIndex": 233
+      },
+      {
+        "window": 15,
+        "trial": 2,
+        "requestedTime": 9.896,
+        "pts": 121856,
+        "time": 9.916666666666666,
+        "micros": 9916667,
+        "sourcePresentationIndex": 238
+      }
+    ],
+    "telemetry": [
+      {
+        "wallMs": 598.9000000022352,
+        "kind": "startup-presented",
+        "requestedTime": 0.5,
+        "actualTime": 0.666667,
+        "position": 0.897572,
+        "presentationTime": 872,
+        "wallNow": 980.5
+      },
+      {
+        "wallMs": 971.4000000022352,
+        "kind": "startup-presented",
+        "requestedTime": 0.001,
+        "actualTime": 0.041667,
+        "position": 0.045588,
+        "presentationTime": 1349.6,
+        "wallNow": 1363.9
+      },
+      {
+        "wallMs": 1019.7000000029802,
+        "kind": "rvfc",
+        "time": 0.083333,
+        "micros": 83333,
+        "origin": "rvfc",
+        "target": 0,
+        "presentedFrames": 5
+      },
+      {
+        "wallMs": 1032.7000000029802,
+        "kind": "rvfc",
+        "time": 0.125,
+        "micros": 125000,
+        "origin": "rvfc",
+        "target": 0,
+        "presentedFrames": 6
+      },
+      {
+        "wallMs": 1093.800000000745,
+        "kind": "trial",
+        "window": 0,
+        "trial": 0,
+        "path": "exact-prefix",
+        "requestedTime": 0.104,
+        "actualTime": 0.125,
+        "actualMicros": 125000,
+        "desiredMicros": 125000,
+        "desiredPts": 1536
+      }
+    ],
+    "startup": [
+      {
+        "time": 0.666667,
+        "requestedTime": 0.5,
+        "before": 0,
+        "position": 0.898147,
+        "observedSeeking": true,
+        "phase": "warm"
+      },
+      {
+        "time": 0.041667,
+        "requestedTime": 0.001,
+        "before": 0.898147,
+        "position": 0.045788,
+        "observedSeeking": true,
+        "phase": "single-rewind"
+      }
+    ],
+    "transition": null,
+    "completedTrials": 0,
+    "completedWindows": 0
+  },
+  "noPhotoArrayReturned": true,
+  "attemptedCaptureMs": 1115.2000000029802,
+  "attemptedExtractionMs": 1234.4000000022352,
+  "cleanup": {
+    "pausedBeforeClose": true,
+    "readyStateBeforeClose": 4,
+    "srcRemoved": true,
+    "pausedAfterClose": true
+  },
+  "progress": [
+    {
+      "wallMs": 598.9000000022352,
+      "kind": "startup-presented",
+      "requestedTime": 0.5,
+      "actualTime": 0.666667,
+      "position": 0.897572,
+      "presentationTime": 872,
+      "wallNow": 980.5
+    },
+    {
+      "wallMs": 971.4000000022352,
+      "kind": "startup-presented",
+      "requestedTime": 0.001,
+      "actualTime": 0.041667,
+      "position": 0.045588,
+      "presentationTime": 1349.6,
+      "wallNow": 1363.9
+    },
+    {
+      "wallMs": 1019.7000000029802,
+      "kind": "rvfc",
+      "time": 0.083333,
+      "micros": 83333,
+      "origin": "rvfc",
+      "target": 0,
+      "presentedFrames": 5
+    },
+    {
+      "wallMs": 1032.7000000029802,
+      "kind": "rvfc",
+      "time": 0.125,
+      "micros": 125000,
+      "origin": "rvfc",
+      "target": 0,
+      "presentedFrames": 6
+    },
+    {
+      "wallMs": 1093.800000000745,
+      "kind": "trial",
+      "window": 0,
+      "trial": 0,
+      "path": "exact-prefix",
+      "requestedTime": 0.104,
+      "actualTime": 0.125,
+      "actualMicros": 125000,
+      "desiredMicros": 125000,
+      "desiredPts": 1536
+    }
+  ],
+  "elapsedMs": 1234.800000000745,
+  "inputBinding": {
+    "id": "chameleon-flowers",
+    "label": "Chameleon among flowering branches",
+    "category": [
+      "plant",
+      "animal",
+      "still-held"
+    ],
+    "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+    "author": "Ventrovert",
+    "duration": 10,
+    "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+    "file": "chameleon-flowers.mp4",
+    "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+    "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+    "captureDuration": 13,
+    "span": {
+      "start": 0,
+      "length": 10
+    },
+    "checked": "October 15, 2026",
+    "transformation": "Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+    "evidence": {
+      "sourcePage": "evidence/chameleon-flowers-source.html",
+      "licensePage": "evidence/cc-by-4-0.html",
+      "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+      "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+      "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+      "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+      "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+      "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+    },
+    "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+    "width": 854,
+    "height": 480,
+    "fps": "24/1",
+    "bytes": 736318,
+    "ffprobeSha256": "de7a3ef3372c3a939001ff6551c75b44a121fafacd95be4c83ce1d0aeb9d87c8"
+  },
+  "hostContextClosed": true
+}

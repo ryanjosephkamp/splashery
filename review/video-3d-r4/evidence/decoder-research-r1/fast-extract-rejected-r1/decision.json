@@ -1,0 +1,85 @@
+{
+  "at": "2026-10-15T10:56:25.038102+00:00",
+  "baseProductCommit": "1cbccf108294437a2b6ae8b07dead9c56d3f3609",
+  "decision": "Rejected for production: exact native SwiftShader source pixels differ. CPU-only parity does not establish native parity; unchanged old extraction remains active. R11 orchestration was prepared only and never launched.",
+  "sourceFiles": [
+    {
+      "file": "src/video3d/extract.js",
+      "sha256": "4287f7f23f17f5dd560a21a220e94a1621d4755a5b15dec184ce70598046008c",
+      "bytes": 11360
+    },
+    {
+      "file": "src/video3d/run.js",
+      "sha256": "265190fbf8dc8f998c607f1978003b79bf22079c052cc62647876dfc65e94526",
+      "bytes": 20607
+    },
+    {
+      "file": "src/video3d/mp4.js",
+      "sha256": "ca9968d11ae0e9d68f303c384778977ecae80f5d244b87cde050772182f0b117",
+      "bytes": 16081
+    },
+    {
+      "file": "src/video3d/fast-extract.js",
+      "sha256": "5ade500e601eda4e5b65142bd8946bbe7adad935ce8bc0b01435227d0c43dddd",
+      "bytes": 11546
+    },
+    {
+      "file": "tests/cdx-v3d-mp4.spec.mjs",
+      "sha256": "3ace0cd24ff693ea4ce6bba0f41d221895e0448c69412dc906532fb4fb9c8f9a",
+      "bytes": 8299
+    },
+    {
+      "file": "tests/cdx-v3d-fast-extract.spec.mjs",
+      "sha256": "a86a59cd7b4f67d23bcf4c7a4a43ed5a8bc3dbc87c325b9911025a2b5008e639",
+      "bytes": 8566
+    },
+    {
+      "file": "tests/cdx-v3d-fast-extract-browser.spec.mjs",
+      "sha256": "fef44c17afd91dc91de9144cdbea78ea46db6012cec9cc83196d3242987ecd1f",
+      "bytes": 5522
+    },
+    {
+      "file": "tests/helpers/v3d-mp4-fixture.mjs",
+      "sha256": "03699cf5864379a9b76424b51ab35ed4775ee0b6a2518b9668db18b6a1410d01",
+      "bytes": 2804
+    }
+  ],
+  "logs": [
+    {
+      "file": "logs/v3d-r4-fast-extraction-browser-r1.log",
+      "sha256": "88945e7c5ddbe826a2cb33418be60a8a7187cb47eb6ff3543985de267d8e6802"
+    },
+    {
+      "file": "logs/v3d-r4-fast-extraction-browser-r2.log",
+      "sha256": "2489f127b793f752ba56283634709e45f2cf38f66c9dff2bfe93914692f56f7d"
+    },
+    {
+      "file": "logs/v3d-r4-fast-extraction-browser-r3.log",
+      "sha256": "5d5bab49db0b90e3e888a31d99ff51d59bb09ce961d731b5bc74868cdda3a43f"
+    },
+    {
+      "file": "logs/v3d-r4-fast-extraction-browser-r4.log",
+      "sha256": "3f3d7b066eee0cc64b8e5234b617b447f1d5a6fb17d13c52857399baf0fac2b0"
+    },
+    {
+      "file": "logs/v3d-r4-fast-extraction-browser-r5.log",
+      "sha256": "5c0801c520ec961190959bb654bccb5636b8086ac36794f1119b747268ee5005"
+    },
+    {
+      "file": "logs/v3d-r4-fast-extraction-browser-r6.log",
+      "sha256": "f5680aef621c05b45c4964a2919f7a3b15ee7480f32899656375906ebac6d01c"
+    },
+    {
+      "file": "logs/v3d-r4-fast-extraction-cpu-r1.log",
+      "sha256": "2d29526cfdf35736bb4ba57f923204c70ba35914f9fd70a4b58a2f24a7d4ea59"
+    }
+  ],
+  "nativeEvidence": [
+    "fast-extract-integration-r1/probe-native-r1.json",
+    "fast-extract-integration-r1/probe-native-corpus-r1.json",
+    "fast-extract-integration-r2/probe-native-corpus-r2.json"
+  ],
+  "originalTestsChanged": false,
+  "originalTestsRemoved": false,
+  "benchProtocolChanged": false
+}

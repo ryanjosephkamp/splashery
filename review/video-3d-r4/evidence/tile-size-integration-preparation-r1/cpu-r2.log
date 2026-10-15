@@ -1,0 +1,18 @@
+✔ all default compiled pipelines remain exact {} (10.513959ms)
+✔ all default compiled pipelines remain exact {"tileGrad":false} (0.612582ms)
+✔ all default compiled pipelines remain exact {"ssimWeight":0.2} (8.53731ms)
+✔ all default compiled pipelines remain exact {"tileGrad":false,"ssimWeight":0.2} (0.730863ms)
+✔ tile8 compiles direct raster workgroups without changing image-wide SSIM workgroups (1.961368ms)
+✔ tile size validation rejects unsupported sizes and shared-gradient combinations before GPU allocation (0.797628ms)
+✔ uniform tile counts follow the explicit tile size for partial edge tiles (0.807105ms)
+✔ source specialization preserves default bytes and rejects ambiguous raster anchors (0.379508ms)
+✔ tile8 pipelines match the separately GPU-verified prototype 0 (2.626778ms)
+✔ tile8 pipelines match the separately GPU-verified prototype 0.2 (1.497693ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 408.813856

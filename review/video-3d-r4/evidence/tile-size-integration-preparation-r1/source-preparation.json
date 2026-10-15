@@ -1,0 +1,17 @@
+{
+  "at": "2026-10-15T11:42:13.300076+00:00",
+  "scope": "Outside-only explicit opt-in implementation. Product remains unchanged during the active284-case regression run. Tile8 requires direct gradients. Default shader sources remain unchanged.",
+  "replacedTileDivisions": 18,
+  "files": [
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "beforeSha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75",
+      "afterSha256": "2f88a29325b57b5b791ef12afc495d1ebb86ca24299bdc13432ebab066d436b8"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "beforeSha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258",
+      "afterSha256": "ac1b47d5a134a739916f35043b9e6e99a1666d9aaa065753646634212688da84"
+    }
+  ]
+}

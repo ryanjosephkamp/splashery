@@ -1,0 +1,130 @@
+{
+  "manifestSha256": "3b76812b6bc098c6ab4e340e942f7493872c648e3da4b854e582ad5f8073c606",
+  "realInputs": [
+    {
+      "id": "cat-plays",
+      "label": "Cat playing outside, handheld tablet",
+      "category": [
+        "pet",
+        "shaky"
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "author": "Riverarvi",
+      "duration": 8.0,
+      "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+      "file": "cat-plays.mp4",
+      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/f/f9/Cat_Plays.webm",
+      "captureSha256": "3258309e1d573fda6595fee0c02e3f055931a06c01bac24d986a5aff28297b32",
+      "captureDuration": 8.336,
+      "span": {
+        "start": 0,
+        "length": 8
+      },
+      "checked": "October 15, 2026",
+      "transformation": "Trimmed 0\u20138 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+      "evidence": {
+        "sourcePage": "evidence/cat-plays-source.html",
+        "licensePage": "evidence/cc-by-sa-4-0.html",
+        "contactSheet": "contact-sheets/cat-plays.jpg",
+        "commonsMetadata": "evidence/cat-plays-commons-metadata.json",
+        "sourcePageSha256": "38535c97b6bbc487bfddca42357b3aa13f7498f7f96507f7e75d349610e69b59",
+        "licensePageSha256": "b462fb0a649a8ec875bba7590abad7dc1e72c0456ddec070cf3a28183689dceb",
+        "contactSheetSha256": "ede0e5b6aed06fe2fa6b3385318347cbaadc7bb22dbedb2bab4a6f1e3a6b215e",
+        "commonsMetadataSha256": "f97d3c283fe10a29edb6e48968ebd4b8a303254fd808023b82cc2b85d9089a8a"
+      },
+      "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+      "width": 270,
+      "height": 480,
+      "fps": "24/1",
+      "bytes": 616920
+    },
+    {
+      "id": "chameleon-flowers",
+      "label": "Chameleon among flowering branches",
+      "category": [
+        "plant",
+        "animal",
+        "still-held"
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "author": "Ventrovert",
+      "duration": 10.0,
+      "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+      "file": "chameleon-flowers.mp4",
+      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/4/49/Chameleon_on_ixora_flowers.webm/Chameleon_on_ixora_flowers.webm.480p.vp9.webm",
+      "captureSha256": "7dfad884aaf47b960d93856c8232a83a191a1b6f7b09e651d43930058539fc1b",
+      "captureDuration": 13.0,
+      "span": {
+        "start": 0,
+        "length": 10
+      },
+      "checked": "October 15, 2026",
+      "transformation": "Trimmed 0\u201310 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+      "evidence": {
+        "sourcePage": "evidence/chameleon-flowers-source.html",
+        "licensePage": "evidence/cc-by-4-0.html",
+        "contactSheet": "contact-sheets/chameleon-flowers.jpg",
+        "commonsMetadata": "evidence/chameleon-flowers-commons-metadata.json",
+        "sourcePageSha256": "08ac501290aadc4ec4dc9996d9102b5d2983f43fa0158b54113dbffd672b8e7d",
+        "licensePageSha256": "8dda1ccec4be91fc80821d4e4fd5c568072b9a3a74b2fdc07c249a27e920ef01",
+        "contactSheetSha256": "37a3323f755ef7b2c5ec6accd099f6e49aa44da546537650d8ffd85186442f09",
+        "commonsMetadataSha256": "076b2a179db38b7a7e6a20f07fd17f8457fadcc99ee995ba7389acbbb0e24f97"
+      },
+      "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+      "width": 854,
+      "height": 480,
+      "fps": "24/1",
+      "bytes": 736318
+    },
+    {
+      "id": "fremantle-orbit",
+      "label": "Lighthouse at sunset, camera orbits the tower",
+      "category": [
+        "object-orbit",
+        "camera-translation",
+        "low-light"
+      ],
+      "source": "https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "author": "JamesBromberger",
+      "duration": 12.0,
+      "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+      "file": "fremantle-orbit.mp4",
+      "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/6/65/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm/Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm.480p.vp9.webm",
+      "captureSha256": "44b5478f7a44f3791ff66be401e9810ddefc4f6b19c0a2fd25f49a442da57358",
+      "captureDuration": 111.0,
+      "span": {
+        "start": 10,
+        "length": 12
+      },
+      "checked": "October 15, 2026",
+      "transformation": "Trimmed 10\u201322 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+      "evidence": {
+        "sourcePage": "evidence/fremantle-orbit-source.html",
+        "licensePage": "evidence/cc0.html",
+        "contactSheet": "contact-sheets/fremantle-orbit.jpg",
+        "commonsMetadata": "evidence/fremantle-orbit-commons-metadata.json",
+        "sourcePageSha256": "b889054a0b36e8be4138ad4260088d82ab2bf164ced1d2c53f08f70b1bad54cb",
+        "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+        "contactSheetSha256": "92516c89fefb8fe623c1ad0b3ce686e496bc4e7e41414eb5b2dfc3c79df3ed38",
+        "commonsMetadataSha256": "6802a49fbeebdf75bef08bc9104d58a194ee3844daf29c12b84bb7380f63fc00"
+      },
+      "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+      "width": 854,
+      "height": 480,
+      "fps": "24/1",
+      "bytes": 1146265
+    }
+  ],
+  "synthetic": {
+    "id": "b-sar",
+    "source": "Existing root FFmpeg synthetic SAR control; not a real corpus capture",
+    "file": "/workspace/v3d-r4-media/fast-extract-integration-r1/b-sar.mp4",
+    "sha256": "32006544236dcf65f9d6ca36178d762f2a80eb6513363b119b622d60cf5e4ace"
+  }
+}

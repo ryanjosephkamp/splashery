@@ -1,0 +1,123 @@
+{
+  "at": "2026-10-15T11:31:19.564313+00:00",
+  "ids": [
+    "cat-track",
+    "cat-plays",
+    "buddha",
+    "chameleon-flowers",
+    "dianthus",
+    "pisac",
+    "sleeping-dog",
+    "palace-statue",
+    "oa-street",
+    "ullard",
+    "snaefell",
+    "fremantle-orbit",
+    "ihasalu-orbit",
+    "fresnel-lens",
+    "saint-denis",
+    "horse-statue",
+    "royal-sovereign",
+    "viljandi-ruins",
+    "kakerdi-bog",
+    "fjoloy"
+  ],
+  "manifestSha256": "3b76812b6bc098c6ab4e340e942f7493872c648e3da4b854e582ad5f8073c606",
+  "context": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 1,
+    "isMobile": true,
+    "hasTouch": true,
+    "userAgent": "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+  },
+  "nativeSettings": {
+    "maxFrames": 16,
+    "frameSide": 480,
+    "tries": 3,
+    "rate": 3,
+    "span": "Smallest5/10/20s covering full source; native planFrames (palace15)"
+  },
+  "startup": "Uniformwarmseekmin(.5,duration/4), warmHTML2Dcopy, atmostoneactualrewindto0.001; no cached presentation or repeatedchasing",
+  "gate": "Every fast trial actual RVFC rounded micro == exact ceil sourcePTS; first miss not consumed. Canonical source unchanged, all3trials/window retained. Every selectedJPEG/repeatedJPEG independent exact plus sourcePTS1us, no photos array on abort/proof failure.",
+  "sourceCopies": [
+    {
+      "source": "/workspace/splashery-v3d-bench-tools-r10/src/video3d/extract.js",
+      "copy": "src/extract.js",
+      "sha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de"
+    },
+    {
+      "source": "/workspace/splashery-v3d-bench-tools-r10/src/video3d/frames.js",
+      "copy": "src/frames.js",
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "source": "/workspace/splashery-v3d-bench-tools-r10/tools/v3d-bench-pixels.mjs",
+      "copy": "source-pixels.mjs",
+      "sha256": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f"
+    },
+    {
+      "source": "/workspace/v3d-r4-media/mp4-decode-research-r2/demux.mjs",
+      "copy": "demux.mjs",
+      "sha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d"
+    }
+  ],
+  "noSourceRuntimeProtocolControllerEdits": true,
+  "algorithm": "One exact-ceil sequential prefix, then at FIRST miss permanently retire prefix owner/callbacks and canonical seekPresented at missed original target and ALL remaining targets. Retain exact prefix window/trial/current best only. Unsupported3 canonical entireplan. No retries or second prefix.",
+  "controls": [
+    {
+      "id": "chameleon-flowers",
+      "abortAfterTrials": 1
+    },
+    {
+      "id": "chameleon-flowers",
+      "abortOnTransition": true
+    }
+  ],
+  "timeAccounting": "extractMs starts before fetch/hash/parse/open and includes warm+rewind+prefix+rejected work+canonical fallback+selected JPEG hash serialization. Proof separately. Research capture deadline150s/case, host210s, collection20min; censored rows no success.",
+  "noOldSeekControlReruns": true,
+  "code": [
+    {
+      "file": "client.mjs",
+      "sha256": "57740dc3827ba64cb15a3eedd718f6da9afb9a0a85c1c3f7b1d5d21223f14e4a"
+    },
+    {
+      "file": "demux.mjs",
+      "sha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d"
+    },
+    {
+      "file": "hybrid.mjs",
+      "sha256": "dba57ccda2455adac930b7edc6295359a6e7b4cda43a42e2bcc1c6889e4b4562"
+    },
+    {
+      "file": "ownership.mjs",
+      "sha256": "75059463dc26690060b98fe2d3b3e42bffd9c8dc6b6057a3037aaccba95b928d"
+    },
+    {
+      "file": "probe.mjs",
+      "sha256": "6bf5c327bae6f3bc746cb3eea7e21918b63bb70dbbdcd05ca7e1277d221facf6"
+    },
+    {
+      "file": "source-pixels.mjs",
+      "sha256": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f"
+    },
+    {
+      "file": "src/extract.js",
+      "sha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de"
+    },
+    {
+      "file": "src/frames.js",
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "file": "targets.mjs",
+      "sha256": "d09d04a609199fda4002528cbd2878acb36ebb1eb58a10ae6151968d352d545f"
+    },
+    {
+      "file": "test.mjs",
+      "sha256": "d45fc38bf4d02adce7097edddd4c228c54d497b7f123472140f4ffd5a5c6ba86"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "created": "2026-10-15T12:17:53.634Z",
+  "source": "/workspace/v3d-r4-media/follow-r10-final-reconcile-r1-control",
+  "sourceInventory": [
+    {
+      "file": "aggregate-0001.log",
+      "bytes": 728,
+      "sha256": "c6f343090e93b941f2a6bc26811794309fa5c4bccde1c499ed35f53155d51826"
+    },
+    {
+      "file": "blockers.json",
+      "bytes": 25418,
+      "sha256": "2e47d406890abe64821a746cb99b8a959bbee256a3bd91ae75b0918631cb970a"
+    },
+    {
+      "file": "comparison-0001.json",
+      "bytes": 11040,
+      "sha256": "a9c3186d28cbb9fd3e119d530c1319fee37a77ec770333f367afa638532c2360"
+    },
+    {
+      "file": "comparison-0001.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "file": "events.jsonl",
+      "bytes": 1613,
+      "sha256": "bfea93fcc840f48e34e589270baa5424e22511fe764a1d9b5b252df302d6dd16"
+    },
+    {
+      "file": "launch.json",
+      "bytes": 420,
+      "sha256": "f5ba13aa263c94c8a86f35f4070059d5c6a592df0fa56c45570df116dd8a00ae"
+    },
+    {
+      "file": "r10-declaration-original.json",
+      "bytes": 33710,
+      "sha256": "ab9411e64212456e403a0a9e738b54b51fcfa1fb4c690b669fd94d741f4d65f0"
+    },
+    {
+      "file": "r10-state-original.json",
+      "bytes": 85249,
+      "sha256": "05d77514431aefdd86f7f5a8453ea10794ed99eee02b556ac98fab00130b5bb6"
+    },
+    {
+      "file": "result.json",
+      "bytes": 13350,
+      "sha256": "2a4bcdbf2108a0d6252b6419ba3d04b8b6f35a1861aadcc35b998a9de954bc6e"
+    },
+    {
+      "file": "root-handoff.json",
+      "bytes": 26775,
+      "sha256": "95f2a46e5d67a468cf2190c1d018301b1c49112b98a91b589ca7c35f694c366b"
+    },
+    {
+      "file": "started.json",
+      "bytes": 545,
+      "sha256": "f4bed4bd3f6c9cbee1a4c33879d82cf250b03f823e1bb4aa4f62f56bf5807c1b"
+    },
+    {
+      "file": "state.json",
+      "bytes": 87451,
+      "sha256": "c5913c973e7e8a2fccfae4aa243cf9007212a27bf16bac9ac4721db8a34b28c3"
+    },
+    {
+      "file": "validated-after.json",
+      "bytes": 38240,
+      "sha256": "1661b5fb0e48435050571b28da16588d844a3a0ae26a11fa050eefa85fef3890"
+    },
+    {
+      "file": "validated-before.json",
+      "bytes": 38240,
+      "sha256": "1661b5fb0e48435050571b28da16588d844a3a0ae26a11fa050eefa85fef3890"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

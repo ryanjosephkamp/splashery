@@ -1,0 +1,22 @@
+{
+  "id": "dianthus",
+  "profile": "desktop",
+  "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+  "started": "2026-10-15T08:06:39.009Z",
+  "status": "timeout",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": null,
+  "bakeMs": 1759268.931164,
+  "mean": null,
+  "peakRssBytes": 1995481088,
+  "hostLoadAtStart": [
+    7.1,
+    7.53,
+    12.41
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "Error: dianthus/desktop (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

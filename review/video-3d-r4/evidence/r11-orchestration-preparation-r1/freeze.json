@@ -1,0 +1,144 @@
+{
+  "createdAt": "2026-10-15T10:47:02.356566+00:00",
+  "scope": "Preparation only, no source freeze or live predecessor identities; no launch/signals/browser/GPU",
+  "codeAttribution": "Made by Ryan with Codex (GPT-6), MIT",
+  "tests": {
+    "cpu": 32,
+    "passed": 32,
+    "seconds": 16.875,
+    "fixturesOnly": "Copied old R8case/frozen R9protocol used for CPU corruption controls; no old rows imported into live R11."
+  },
+  "sourceOwners": "Root exclusively; no product/vendor/protocol ownership assigned",
+  "files": [
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1.py",
+      "bytes": 32042,
+      "sha256": "810f6110ad29509bc542a183cc36e35bbd65111c2610994e01bb897fce221779"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/test-follow-r11-v1.py",
+      "bytes": 18347,
+      "sha256": "9a72ed98a01bd6199715bb5bb28bf8045bd59e1e238b42ac7a6aed68315cff88"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/r11-follower-integrity.mjs",
+      "bytes": 5084,
+      "sha256": "f7bb54558db0df96fb69ef71f2c5eb9d23bd283e1bb9c0d88a7b384c0dfe60f7"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/prepare-r11-provenance.mjs",
+      "bytes": 7196,
+      "sha256": "b33cdca75adeec3dfef65bc93fd190476c69a6cdf3b2621ff0e705a17229ae05"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/finalize-r11-declaration.py",
+      "bytes": 4834,
+      "sha256": "d47be291858bafea6fc2393d35831df56291b03d37acaf6e8f4cfff7a3966b70"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/state.json",
+      "bytes": 124,
+      "sha256": "c5a4479afed7b4aa19df7268b6de908b479e37073d3945eb5240ad66968173aa"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/root-handoff-template.json",
+      "bytes": 706,
+      "sha256": "9e8d72e26535f97acc3565c8a4541f04cce2ed8b71da4b904520c59f9bf7d1a0"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/README.md",
+      "bytes": 7394,
+      "sha256": "5d846231a5ae88565873ba6940036ddca406b06fa0f21a9b51e864d80c8d0561"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-tests-final.log",
+      "bytes": 4672,
+      "sha256": "0bb4776a128e8aeedc331516f83ff33a28c00d5ce4d11727dab04ac9c41fd031"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/declaration.json",
+      "bytes": 4077,
+      "sha256": "4564a4283b2a4b80a8871133f37c058bfc0fe4e0e10d80c4b9c225a7a85ed882"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/prior-frozen-r10-identity.json",
+      "bytes": 675,
+      "sha256": "a4c0bf6d865b374f7f273e6b329e2046dd2e82579aae34291260839730839ccd"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/run.json",
+      "bytes": 59631,
+      "sha256": "e446b441cbdf6c6d2c9c051777e30def30ccc10e98c089766a9a98bf9e3ef278"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/TEST-FIXTURE-ONLY.txt",
+      "bytes": 97,
+      "sha256": "d187ef456cdab62f717b0ef00f6a4e46cf4b493436c947dd3a4b00effc823bfa"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/render-1.png",
+      "bytes": 336262,
+      "sha256": "fb74f71abde2d2701cdb3a781127bbb53b8586c4203ce57073476b9588658374"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/render-0.png",
+      "bytes": 343581,
+      "sha256": "1519c126b8a6a2e8700cef6fe609c03d5ea7f111bf1e68b576327f2ee340650f"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/outcome.png",
+      "bytes": 195680,
+      "sha256": "77508378179c3f353b000722882445bb26a0cddff954ee4f8eede9d1323e661c"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/reference-1.png",
+      "bytes": 329491,
+      "sha256": "417f95cd13e24db9ecdc421afd4ca6f321db19ecd0e54ecf44731fd0ed5a366f"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/reference-0.png",
+      "bytes": 320314,
+      "sha256": "7aa46fd73b1da3386cc4220e7be6d375fc6cba27624f95c458d48f379c663d3a"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/model.json",
+      "bytes": 27115,
+      "sha256": "3663e71ce9264d5e9a8fdbaf6b099ac17df1df1e52bb96702b5397306b2049a3"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/model.ply",
+      "bytes": 1160495,
+      "sha256": "00e9ab2613198bad92390dbf7f8b429412aece6d6f71bf51c4e484c278e5709a"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/evaluation.json",
+      "bytes": 11100,
+      "sha256": "fe71179e2d5e5486060e3b209f0d3b58bc8c3f42a527276b3de3c1c4d4d93fc0"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/render-3.png",
+      "bytes": 341451,
+      "sha256": "34468cac863618bc38852c27638c242b7eca0cf6bc1bcbf845830864e4a6e7dd"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/reference-2.png",
+      "bytes": 325079,
+      "sha256": "0456f402120854052e5933f24066485dfc152a00816343c23b73be1707f75bc4"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/render-2.png",
+      "bytes": 335185,
+      "sha256": "7c14fb4d420b77b3060609e5067b1d130aeb7315f42ace53f750c2bba1ea2be5"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/result.json",
+      "bytes": 5081,
+      "sha256": "cdcfe421e3fc878baf721f183a686649bcc60ad457779d77a6c31226787b15df"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/follow-r11-v1-control/cpu-test-fixtures-267238/cat-plays-phone/reference-3.png",
+      "bytes": 313717,
+      "sha256": "39a9545bc734d73c9335df53a92694423c27671aff988f4667885090df9a613c"
+    }
+  ]
+}

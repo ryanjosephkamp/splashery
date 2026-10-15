@@ -1,0 +1,47 @@
+{
+  "created": "2026-10-15T12:17:53.391Z",
+  "source": "/workspace/v3d-r4-media/ca841-regressions-r1",
+  "sourceInventory": [
+    {
+      "file": "cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/error-context.md",
+      "bytes": 301,
+      "sha256": "b6874f494a18a685222b4559d296b3c114ac25fc6973eff3b98cca000c371454"
+    },
+    {
+      "file": "cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/test-failed-1.png",
+      "bytes": 14446,
+      "sha256": "930087e2e5ceaff7eb20dea2a652d1f9bdfaf3684ef12097ab79e2430a6dcaba"
+    },
+    {
+      "file": "cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/trace.zip",
+      "bytes": 2670699,
+      "sha256": "5f637c8e78b8d4f5970218f971ae0b811888a55fc5ff957b53f523e3fd3ecbd8"
+    },
+    {
+      "file": "cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/error-context.md",
+      "bytes": 301,
+      "sha256": "b6874f494a18a685222b4559d296b3c114ac25fc6973eff3b98cca000c371454"
+    },
+    {
+      "file": "cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/test-failed-1.png",
+      "bytes": 14446,
+      "sha256": "930087e2e5ceaff7eb20dea2a652d1f9bdfaf3684ef12097ab79e2430a6dcaba"
+    },
+    {
+      "file": "cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/trace.zip",
+      "bytes": 2580706,
+      "sha256": "f2198bc8830e2004c73b8c3180e29bf0dbb7fac43d67b021bc87b484ed5c656b"
+    },
+    {
+      "file": "full-run.log",
+      "bytes": 1432960,
+      "sha256": "5463be9d88edfdccd50f218cf036485945fa0a90732ce3639720b930ecb15122"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 1440,
+      "sha256": "3289adc8dbe926f6fff402677eb574f61aa9ed5bf6b21a3579700e7b305ed3ed"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

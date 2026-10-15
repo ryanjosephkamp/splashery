@@ -1,0 +1,2 @@
+All16 original full-suite shard logs, exact returned UTF-8 bytes. GitHub merge acdc31904:332specs,2848tests,2834passed,13failed,1existing skip. Alone rechecks never waive failures.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

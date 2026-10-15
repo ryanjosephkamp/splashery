@@ -1,0 +1,8 @@
+{
+  "at": "2026-10-15T11:27:08.965Z",
+  "checks": "all20order/context/code/inputbytes/nativeplan/fulltrialbudgets/ceil-targets/actualsuccessfultrialPTS/cleanup/oneframe-skips/abort",
+  "successfulExactTrialsIncludingDiscardedPrefixesAndAbortControl": 387,
+  "skippedCases": 13,
+  "assertions": "passed",
+  "notice": "Discarded prefix trial PTS are telemetry only; no discarded photo arrays or training result claimed."
+}

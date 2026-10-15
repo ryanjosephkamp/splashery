@@ -1,0 +1,217 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:12:54] "GET / HTTP/1.1" 200 -
+
+Running 12 tests using 1 worker
+
+(node:339376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:339376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:12:59] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:12:59] code 404, message File not found
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:12:59] "GET /favicon.ico HTTP/1.1" 404 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:00] "GET /src/video3d/suitability.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:00] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:00] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:00] "GET /assets/toys/video-3d/liberty-source.webm HTTP/1.1" 200 -
+  ✓   1 [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real liberty source cut receives calibrated feedback without a GPU (3.1s)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:02] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:02] "GET /src/video3d/suitability.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:02] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:02] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:02] "GET /assets/toys/video-3d/edinburgh-source.webm HTTP/1.1" 200 -
+  ✘   2 [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real edinburgh source cut receives calibrated feedback without a GPU (6.2s)
+(node:339818) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:339818) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:12] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:12] code 404, message File not found
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:12] "GET /favicon.ico HTTP/1.1" 404 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:12] "GET /src/video3d/suitability.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:12] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:12] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:12] "GET /assets/toys/video-3d/adjara-source.webm HTTP/1.1" 200 -
+  ✘   3 [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real adjara source cut receives calibrated feedback without a GPU (6.0s)
+(node:340047) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:340047) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:23] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:23] code 404, message File not found
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:23] "GET /favicon.ico HTTP/1.1" 404 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:23] "GET /src/video3d/suitability.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:23] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:23] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:23] "GET /assets/toys/video-3d/lihula-source.webm HTTP/1.1" 200 -
+  ✘   4 [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real lihula source cut receives calibrated feedback without a GPU (6.1s)
+(node:341044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:341044) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:34] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:34] code 404, message File not found
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:34] "GET /favicon.ico HTTP/1.1" 404 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:34] "GET /src/video3d/suitability.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:34] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:34] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:34] "GET /assets/toys/video-3d/toolse-source.webm HTTP/1.1" 200 -
+  ✓   5 [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real toolse source cut receives calibrated feedback without a GPU (6.0s)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:40] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:40] "GET /src/video3d/suitability.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:40] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:40] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:41] "GET /assets/toys/video-3d/poltsamaa-source.webm HTTP/1.1" 200 -
+  ✘   6 [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real poltsamaa source cut receives calibrated feedback without a GPU (6.3s)
+(node:342190) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:342190) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   7 [chromium] › tests/cdx-v3d-calibration.spec.mjs:125:3 › measured real shaky pan remains a risk at the calibrated thresholds (39ms)
+  ✓   8 [chromium] › tests/cdx-v3d-calibration.spec.mjs:125:3 › measured real moving crowd remains a risk at the calibrated thresholds (42ms)
+  ✓   9 [chromium] › tests/cdx-v3d-calibration.spec.mjs:125:3 › measured real crash zoom remains a risk at the calibrated thresholds (13ms)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:52] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:52] code 404, message File not found
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:52] "GET /favicon.ico HTTP/1.1" 404 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:52] "GET /src/video3d/suitability.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:52] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 12:13:52] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+  ✓  10 [chromium] › tests/cdx-v3d-calibration.spec.mjs:133:1 › bad local input stays unknown, and cancellation stays owned by the caller (732ms)
+  ✓  11 [chromium] › tests/cdx-v3d-calibration.spec.mjs:158:1 › Mac import keeps original COLMAP pose, unequal focal lengths, and principal point (95ms)
+  -  12 [chromium] › tests/cdx-v3d-calibration.spec.mjs:215:1 › retained real counterexample clips decode to caution or poor
+
+
+  1) [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real edinburgh source cut receives calibrated feedback without a GPU 
+
+    Error: {"checked":false,"verdict":"unknown","message":"Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.","reasons":[],"metrics":{"frames":0},"diagnostic":"Stopped","unplayable":false,"duration":10,"elapsedMs":4509.300000000745}
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      41 |       return { ...result, elapsedMs: performance.now() - before };
+      42 |     }, id);
+    > 43 |     expect(result.checked, JSON.stringify(result)).toBe(true);
+         |                                                    ^
+      44 |     expect(result.verdict, JSON.stringify(result)).toBe(verdict);
+      45 |     expect(result.metrics.frames).toBe(12);
+      46 |     expect(result.elapsedMs).toBeLessThan(5100);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-calibration.spec.mjs:43:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-calibration-real-e-8800b-ated-feedback-without-a-GPU-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real adjara source cut receives calibrated feedback without a GPU 
+
+    Error: {"checked":false,"verdict":"unknown","message":"Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.","reasons":[],"metrics":{"frames":0},"diagnostic":"Stopped","unplayable":false,"duration":20,"elapsedMs":4502.300000000745}
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      41 |       return { ...result, elapsedMs: performance.now() - before };
+      42 |     }, id);
+    > 43 |     expect(result.checked, JSON.stringify(result)).toBe(true);
+         |                                                    ^
+      44 |     expect(result.verdict, JSON.stringify(result)).toBe(verdict);
+      45 |     expect(result.metrics.frames).toBe(12);
+      46 |     expect(result.elapsedMs).toBeLessThan(5100);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-calibration.spec.mjs:43:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-v3d-calibration-real-a-a1f4e-ated-feedback-without-a-GPU-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-v3d-calibration-real-a-a1f4e-ated-feedback-without-a-GPU-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-calibration-real-a-a1f4e-ated-feedback-without-a-GPU-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-calibration-real-a-a1f4e-ated-feedback-without-a-GPU-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real lihula source cut receives calibrated feedback without a GPU 
+
+    Error: {"checked":false,"verdict":"unknown","message":"Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.","reasons":[],"metrics":{"frames":0},"diagnostic":"Stopped","unplayable":false,"duration":20,"elapsedMs":4501.800000000745}
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      41 |       return { ...result, elapsedMs: performance.now() - before };
+      42 |     }, id);
+    > 43 |     expect(result.checked, JSON.stringify(result)).toBe(true);
+         |                                                    ^
+      44 |     expect(result.verdict, JSON.stringify(result)).toBe(verdict);
+      45 |     expect(result.metrics.frames).toBe(12);
+      46 |     expect(result.elapsedMs).toBeLessThan(5100);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-calibration.spec.mjs:43:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-v3d-calibration-real-l-b299f-ated-feedback-without-a-GPU-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-v3d-calibration-real-l-b299f-ated-feedback-without-a-GPU-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-calibration-real-l-b299f-ated-feedback-without-a-GPU-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-calibration-real-l-b299f-ated-feedback-without-a-GPU-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4) [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real poltsamaa source cut receives calibrated feedback without a GPU 
+
+    Error: {"checked":false,"verdict":"unknown","message":"Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.","reasons":[],"metrics":{"frames":0},"diagnostic":"Stopped","unplayable":false,"duration":20,"elapsedMs":4506}
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mtrue[39m
+    Received: [31mfalse[39m
+
+      41 |       return { ...result, elapsedMs: performance.now() - before };
+      42 |     }, id);
+    > 43 |     expect(result.checked, JSON.stringify(result)).toBe(true);
+         |                                                    ^
+      44 |     expect(result.verdict, JSON.stringify(result)).toBe(verdict);
+      45 |     expect(result.metrics.frames).toBe(12);
+      46 |     expect(result.elapsedMs).toBeLessThan(5100);
+        at /workspace/splashery-r4-public/tests/cdx-v3d-calibration.spec.mjs:43:52
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-calibration-real-p-3891f-ated-feedback-without-a-GPU-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  4 failed
+    [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real edinburgh source cut receives calibrated feedback without a GPU 
+    [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real adjara source cut receives calibrated feedback without a GPU 
+    [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real lihula source cut receives calibrated feedback without a GPU 
+    [chromium] › tests/cdx-v3d-calibration.spec.mjs:27:3 › real poltsamaa source cut receives calibrated feedback without a GPU 
+  1 skipped
+  7 passed (59.8s)

@@ -1,0 +1,202 @@
+{
+  "checkedAt": "2026-10-15T10:38:26.013892+00:00",
+  "freezeSha256": "aa3188ffc98faac44e6ca57cd8af7a137fb70b6d11f935d930d9b8ae7b4885e0",
+  "files": [
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/README.md",
+      "sha256": "aea7b163bdd1e414daf3fcd5bd6f05b88698deef8d84a55e33575acad3a9d760"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/compare.mjs",
+      "sha256": "06aeb3c15a37db27dd9f2dbccb7749974b4eb3960ae7cd8453fb2eea310adbfe"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls/bframes-cfr-ffprobe.json",
+      "sha256": "e6c8fb4ff3017e65e97ed198d4e2c7c42cf6b1797076306202a6d70d6887c186"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls/bframes-cfr.mp4",
+      "sha256": "8055ef2b8b0e12ce30fb6a7f46d517e2311d3e550d47bdb3f2cfc11ba4aa32cb"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls/bframes-vfr-signed-ffprobe.json",
+      "sha256": "53cf9aaee580630db02db4e0d67f30a94eb7a98e9b9879d9d9d3b61046d839a3"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls/bframes-vfr-signed.mp4",
+      "sha256": "6557fdd5563f6ab22b2d40bd0e157ca700018914a38d866524055511018efb6a"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls/no-bframes-vfr-ffprobe.json",
+      "sha256": "7c24e1e741fbc44e4f38149011e3c59c9409c8f400d2c18d3ce25c27912d5b40"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls/no-bframes-vfr.mp4",
+      "sha256": "f109778bfd81acdbaae481327913be1a290e0366bb88b714617eb1503e6dc8f8"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls/results.json",
+      "sha256": "95816a25ec9120fa33a27677a64222a92953e8574d86a13f0c1d48beb3127221"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls-initial-r1/bframes-cfr-ffprobe.json",
+      "sha256": "e6c8fb4ff3017e65e97ed198d4e2c7c42cf6b1797076306202a6d70d6887c186"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls-initial-r1/bframes-cfr.mp4",
+      "sha256": "8055ef2b8b0e12ce30fb6a7f46d517e2311d3e550d47bdb3f2cfc11ba4aa32cb"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls-initial-r1/bframes-vfr-signed-ffprobe.json",
+      "sha256": "53cf9aaee580630db02db4e0d67f30a94eb7a98e9b9879d9d9d3b61046d839a3"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls-initial-r1/bframes-vfr-signed.mp4",
+      "sha256": "6557fdd5563f6ab22b2d40bd0e157ca700018914a38d866524055511018efb6a"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls-initial-r1/results.json",
+      "sha256": "dabbc9cfc83f7c6257a322cbed2361d8816e2c8fe3e561f104f8094ab92831c4"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls-initial-r1.log",
+      "sha256": "f64980a562c0ed2c61d62f29b96cf3e40baabe0407fbcb39a2a26002f2ff7dca"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls.log",
+      "sha256": "d9cb7a016bfb6e2561ae6ad45422d9c39e1be617f475607f1b14caacea743c95"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/controls.mjs",
+      "sha256": "4060f63815375dd0fd630a4025eca065bbdc50c37ac0c28e3c097f023fcc3bd9"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-comparison.json",
+      "sha256": "69bac8cd0bc561e9b68530a0f7c74a6e61280240ecbfbfbb9b8a88d876696772"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-comparison.log",
+      "sha256": "69bac8cd0bc561e9b68530a0f7c74a6e61280240ecbfbfbb9b8a88d876696772"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/buddha-ffprobe.json",
+      "sha256": "6bc716c2bf3959aaed65c1c746ed3d43d294446254e9a24fde79849473c9364b"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/cat-plays-demux.json",
+      "sha256": "96df18c802e9136aaa0fe93bd737d53f0b01d39989de7647c17e622cabebca9d"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/cat-plays-ffprobe.json",
+      "sha256": "e248f4300ce90fa05e47f8b7e88d31f98a20150c9d17fa69e8cd76356fc572b8"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/cat-track-ffprobe.json",
+      "sha256": "41c982225c7c9aa6ac1c9ed87c0bc461bd098257cb01f72ed533b594cfe863da"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/chameleon-flowers-ffprobe.json",
+      "sha256": "e3382291d4ecb1c78f9299d26d222d579829e1e3b1a3948ae426737ca7982e05"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/dianthus-ffprobe.json",
+      "sha256": "a04d2e08336d17823f5a2a2dd2452a67a4dad75ab8ab6c0c1354f6129daa0e7c"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/fjoloy-ffprobe.json",
+      "sha256": "603daab69442357ed62fc29e1b33e151ceb616867bd85f21f3c6102a2694bd7e"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/fremantle-orbit-ffprobe.json",
+      "sha256": "80d095a0a04d208cefd15dd3d0a490613187a8480b67e06f4ebf5561dec94d55"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/fresnel-lens-demux.json",
+      "sha256": "3cb7925905874a4fe9a58fe67357b14254fc66ef8a71bc28de60eec8642bafc2"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/fresnel-lens-ffprobe.json",
+      "sha256": "0756ebef0c36bf202aa4c2117bd3cab6d6af97bef0f84b964785a11edee75334"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/horse-statue-ffprobe.json",
+      "sha256": "a9635b8119ff1f7be309b4f320e8cece9785f5f496438c235dc21392f66d1f2e"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/ihasalu-orbit-ffprobe.json",
+      "sha256": "cb8da043ecfc69f22ed3c4c5f41cd34d716d3e096641c2769d4fa822db93bdfe"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/kakerdi-bog-ffprobe.json",
+      "sha256": "94abc4c9c4824af5ea3b8122b066e9e14e9ac58d01df616125207ae13540a4d0"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/oa-street-ffprobe.json",
+      "sha256": "6904591e4ded8444a6e5ed4603f4e2cc3dbadae3c3764d34c3351f8bf5580256"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/palace-statue-demux.json",
+      "sha256": "2fca242a473e7f5e7b74784484a7e74aaef6cd4b3247858c1e2e183b5a6e05b8"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/palace-statue-ffprobe.json",
+      "sha256": "b00ef545f6d438d231b926c04b554dd89e3de045082c04a6f6f104dcdc79b118"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/pisac-demux.json",
+      "sha256": "183f76b7cded3bd951f6f34d80c581d9a583801a96f22f936f8284dfc6f767e0"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/pisac-ffprobe.json",
+      "sha256": "5d965ab2a0e165eee87432c2167bd517c9ef62a0f7fd3695a4fea086dfbd16b2"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/royal-sovereign-ffprobe.json",
+      "sha256": "16535e3956764db2bb1197c9148bc26ed907760ccf04dd26e721b0bd1211f99d"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/saint-denis-ffprobe.json",
+      "sha256": "f164b907d438fdf82cfbdf9259830d2b2be441f0cb3418e0c021c17b340f1da7"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/sleeping-dog-ffprobe.json",
+      "sha256": "847b7d5da210fb8bd861b1945f7e2efd514e93ed34b98884bc445c0b3ed8bc9e"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/snaefell-ffprobe.json",
+      "sha256": "a2eacf34ee34ca3071452ed0eddd5e0e0a00a8d55d73f0cb2e942f1c691ebaa2"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/ullard-ffprobe.json",
+      "sha256": "8aab95fc44b87e2f9bb4d5d0453c4ba2197083259ecde9f2252ba205f38a3456"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/corpus-receipts/viljandi-ruins-ffprobe.json",
+      "sha256": "a0c4e87089c78c7be69a75c705e995f6c0e766a35e0764fcbfac2829d5d7972e"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/cpu-tests-before-fixture-offset-fix.log",
+      "sha256": "396ed24ce5340ff545127eae5bf0e386b4480765b7f78216c0a37e603c96dd70"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/cpu-tests.log",
+      "sha256": "281a69c887474d79bcdfcc39960636bb83f40562cf6ed1b534767ef6614770ec"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/demux.mjs",
+      "sha256": "becb21a5b51def2fd54d2877b0db8a600136c83102d8a468c495d451c8b38e37"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/io.mjs",
+      "sha256": "f9cdf3d759f4ec89812750ee1c33353fcaafaf56940394094129a253e38d4c0f"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/test.mjs",
+      "sha256": "0d886e5158b34e30d89a434e6b876554e55e8a259bb5373668b271c2f846878e"
+    },
+    {
+      "file": "/workspace/v3d-r4-media/mp4-decode-research-r1/LICENSE",
+      "sha256": "5fafec288541004082096a6cf313d9882e613f4080fd3ec8e33bf3843922ba9f"
+    }
+  ]
+}

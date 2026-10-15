@@ -1,0 +1,65 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:54:19] "GET / HTTP/1.1" 200 -
+
+Running 17 tests using 1 worker
+
+(node:277341) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:277341) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:54:28] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:54:29] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:54:29] "GET /src/video3d/fast-extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:54:29] "GET /src/video3d/mp4.js HTTP/1.1" 200 -
+
+  ✘   1 [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources (7.5s)
+(node:277669) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:277669) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › tests/cdx-v3d-mp4.spec.mjs:8:1 › one terminal zero-delta VFR sample keeps its explicit PTS; earlier zero deltas reject (468ms)
+  ✓   3 [chromium] › tests/cdx-v3d-mp4.spec.mjs:18:1 › unsigned ctts, B-order, variable stsc chunks and linear edit match hardcoded independent expected rows (28ms)
+  ✓   4 [chromium] › tests/cdx-v3d-mp4.spec.mjs:29:1 › signed ctts-v1 and co64 preserve negative offsets without unsigned reinterpretation (53ms)
+  ✓   5 [chromium] › tests/cdx-v3d-mp4.spec.mjs:40:1 › no stss correctly means all samples are sync (25ms)
+  ✓   6 [chromium] › tests/cdx-v3d-mp4.spec.mjs:45:1 › avc3 reports its actual codec prefix and copies config bytes independently (4ms)
+  ✓   7 [chromium] › tests/cdx-v3d-mp4.spec.mjs:58:1 › unsafe co64 integers and duplicate box inventories reject (2ms)
+  ✓   8 [chromium] › tests/cdx-v3d-mp4.spec.mjs:66:1 › unsupported geometry/encryption/fragments fail closed (3ms)
+  ✓   9 [chromium] › tests/cdx-v3d-mp4.spec.mjs:75:1 › unsafe counts, table truncation, nonunit edit, bad mdat offsets and sizes fail before large allocation (49ms)
+  ✓  10 [chromium] › tests/cdx-v3d-mp4.spec.mjs:92:1 › bounded deterministic byte mutations either reject or return only safe in-mdat sample spans (168ms)
+  ✓  11 [chromium] › tests/cdx-v3d-mp4.spec.mjs:122:1 › ordinary nonsquare aspect preserves source pixels and exposes exact reduced DAR and stored16.16 display (2ms)
+  ✓  12 [chromium] › tests/cdx-v3d-mp4.spec.mjs:139:1 › absent pasp means1:1 and proportional track display scaling is geometry-consistent (44ms)
+  ✓  13 [chromium] › tests/cdx-v3d-mp4.spec.mjs:146:1 › 16.16 display quantization tolerance accepts oneLSB rounding but rejects inconsistent geometry (75ms)
+  ✓  14 [chromium] › tests/cdx-v3d-mp4.spec.mjs:158:1 › zero/extreme pasp and unsafe display sides reject without huge allocation (24ms)
+  ✓  15 [chromium] › tests/cdx-v3d-mp4.spec.mjs:171:1 › nclc/nclx raw numeric metadata is preserved; unknown/HDR codes are never silently applied (24ms)
+  ✓  16 [chromium] › tests/cdx-v3d-mp4.spec.mjs:190:1 › malformed colr lengths, unknown type, reserved bits and duplicate color boxes reject (23ms)
+  ✓  17 [chromium] › tests/cdx-v3d-mp4.spec.mjs:204:1 › malformed pasp/table payload bounds fail rather than reading adjacent boxes (2ms)
+
+
+  1) [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources 
+
+    Error: Edit excludes a retained sample
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"webcodecs-avc"[39m
+    Received: [31m"video-element"[39m
+
+      111 |         { base64, variant },
+      112 |       );
+    > 113 |       expect(result.extraction?.method, result.fastDecodeFailure || variant).toBe("webcodecs-avc");
+          |                                                                              ^
+      114 |       expect(result.extraction.independentlyPresentedColorChecks).toBe(2);
+      115 |       expect(result.frames).toHaveLength(4);
+      116 |       expect(result.progress).toEqual([
+        at /workspace/splashery-r4-public/tests/cdx-v3d-fast-extract-browser.spec.mjs:113:78
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/fast-extraction-browser-r6/cdx-v3d-fast-extract-brows-48ca0-are-cropped-and-VFR-sources-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/fast-extraction-browser-r6/cdx-v3d-fast-extract-brows-48ca0-are-cropped-and-VFR-sources-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources 
+  16 passed (20.9s)

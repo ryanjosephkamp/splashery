@@ -1,0 +1,165 @@
+{
+  "id": "small",
+  "variants": [
+    {
+      "tile": 8,
+      "steps": [
+        {
+          "iter": 1,
+          "wallMs": 500.30000000074506
+        },
+        {
+          "iter": 2,
+          "wallMs": 142.19999999925494
+        },
+        {
+          "iter": 3,
+          "wallMs": 87.5
+        },
+        {
+          "iter": 4,
+          "wallMs": 203.80000000074506
+        }
+      ],
+      "files": [
+        {
+          "kind": "params",
+          "file": "small-tile8-params.bin",
+          "bytes": 64000,
+          "sha256": "10e2863161f9cafbbbd92c275dd59af6135e94cfe1a231dcc83b135a4c4f079b"
+        },
+        {
+          "kind": "adamM",
+          "file": "small-tile8-adamM.bin",
+          "bytes": 64000,
+          "sha256": "0e7a6ea7f0320baef04561b700a1ff00894de6edf9a0405ee30c9dfd5469032d"
+        },
+        {
+          "kind": "adamV",
+          "file": "small-tile8-adamV.bin",
+          "bytes": 64000,
+          "sha256": "26e3ada95b2af46353df6b6990c9b907d287a2e9439392f52b1151ecb819d2c4"
+        },
+        {
+          "kind": "gradP",
+          "file": "small-tile8-gradP.bin",
+          "bytes": 64000,
+          "sha256": "4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74"
+        },
+        {
+          "kind": "gradF",
+          "file": "small-tile8-gradF.bin",
+          "bytes": 64000,
+          "sha256": "cd6975b17eb36f4ac1e4d7d89169fa64ce170587d20d54f302d489adaa5a437e"
+        },
+        {
+          "kind": "out",
+          "file": "small-tile8-out.bin",
+          "bytes": 82944,
+          "sha256": "cc16adbd9ee94c53532a814ffd019c56a7ede240eb9c30b517048b6a1611dd8f"
+        },
+        {
+          "kind": "stats",
+          "file": "small-tile8-stats.bin",
+          "bytes": 16,
+          "sha256": "487b609967225a3eb20e366453e6de837c991b6b7ceb38d6db6fdd605e390fdc"
+        }
+      ]
+    },
+    {
+      "tile": 16,
+      "steps": [
+        {
+          "iter": 1,
+          "wallMs": 336.5
+        },
+        {
+          "iter": 2,
+          "wallMs": 292.9000000022352
+        },
+        {
+          "iter": 3,
+          "wallMs": 268.1000000014901
+        },
+        {
+          "iter": 4,
+          "wallMs": 196.09999999776483
+        }
+      ],
+      "files": [
+        {
+          "kind": "params",
+          "file": "small-tile16-params.bin",
+          "bytes": 64000,
+          "sha256": "10e2863161f9cafbbbd92c275dd59af6135e94cfe1a231dcc83b135a4c4f079b"
+        },
+        {
+          "kind": "adamM",
+          "file": "small-tile16-adamM.bin",
+          "bytes": 64000,
+          "sha256": "0e7a6ea7f0320baef04561b700a1ff00894de6edf9a0405ee30c9dfd5469032d"
+        },
+        {
+          "kind": "adamV",
+          "file": "small-tile16-adamV.bin",
+          "bytes": 64000,
+          "sha256": "26e3ada95b2af46353df6b6990c9b907d287a2e9439392f52b1151ecb819d2c4"
+        },
+        {
+          "kind": "gradP",
+          "file": "small-tile16-gradP.bin",
+          "bytes": 64000,
+          "sha256": "4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74"
+        },
+        {
+          "kind": "gradF",
+          "file": "small-tile16-gradF.bin",
+          "bytes": 64000,
+          "sha256": "cd6975b17eb36f4ac1e4d7d89169fa64ce170587d20d54f302d489adaa5a437e"
+        },
+        {
+          "kind": "out",
+          "file": "small-tile16-out.bin",
+          "bytes": 82944,
+          "sha256": "cc16adbd9ee94c53532a814ffd019c56a7ede240eb9c30b517048b6a1611dd8f"
+        },
+        {
+          "kind": "stats",
+          "file": "small-tile16-stats.bin",
+          "bytes": 16,
+          "sha256": "487b609967225a3eb20e366453e6de837c991b6b7ceb38d6db6fdd605e390fdc"
+        }
+      ]
+    }
+  ],
+  "parity": {
+    "params": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "adamM": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "adamV": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "gradP": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "gradF": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "out": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "stats": {
+      "byteExact": true,
+      "differentBytes": 0
+    }
+  }
+}

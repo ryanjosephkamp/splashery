@@ -1,0 +1,22 @@
+{
+  "id": "pisac",
+  "profile": "desktop",
+  "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+  "started": "2026-10-15T08:36:42.147Z",
+  "status": "timeout",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": null,
+  "bakeMs": 1754470.669206,
+  "mean": null,
+  "peakRssBytes": 1806032896,
+  "hostLoadAtStart": [
+    17.37,
+    18.28,
+    17.54
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "Error: pisac/desktop (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

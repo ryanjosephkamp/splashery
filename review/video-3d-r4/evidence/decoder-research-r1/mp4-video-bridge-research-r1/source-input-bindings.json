@@ -1,0 +1,37 @@
+{
+  "at": "2026-10-15T10:52:22.944232+00:00",
+  "files": [
+    {
+      "source": "/workspace/splashery-r4-public/src/video3d/extract.js",
+      "copy": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/src/extract.js",
+      "sha256": "4287f7f23f17f5dd560a21a220e94a1621d4755a5b15dec184ce70598046008c"
+    },
+    {
+      "source": "/workspace/splashery-r4-public/src/video3d/fast-extract.js",
+      "copy": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/src/fast-extract.js",
+      "sha256": "5ade500e601eda4e5b65142bd8946bbe7adad935ce8bc0b01435227d0c43dddd"
+    },
+    {
+      "source": "/workspace/splashery-r4-public/src/video3d/frames.js",
+      "copy": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/src/frames.js",
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "source": "/workspace/splashery-r4-public/src/video3d/mp4.js",
+      "copy": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/src/mp4.js",
+      "sha256": "5a3ee62186ba8bb3c5b4ee246d45b084ab6de02ccbbb44a2d96f8aabcf0fe7aa"
+    },
+    {
+      "source": "/workspace/v3d-r4-media/mp4-decode-research-r2/demux.mjs",
+      "copy": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/demux.mjs",
+      "sha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d"
+    }
+  ],
+  "planned": [
+    "b-sar",
+    "chameleon-flowers",
+    "cat-plays",
+    "fremantle-orbit"
+  ],
+  "noProductEdits": true
+}

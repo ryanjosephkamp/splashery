@@ -1,0 +1,60 @@
+{
+  "id": "horse-statue",
+  "profile": "phone",
+  "method": "exact-ceil-continuous-html-playback",
+  "startedAt": "2026-10-15T11:25:49.317Z",
+  "researchLimitMs": 90000,
+  "abortAfterTrials": null,
+  "inputSha256": "42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045",
+  "status": "unsupported-table-immediate-fallback",
+  "error": {
+    "name": "Error",
+    "message": "Nontrivial edit list unsupported"
+  },
+  "cleanup": {
+    "noOpenedVideo": true
+  },
+  "progress": [],
+  "elapsedMs": 90.40000000223517,
+  "inputBinding": {
+    "id": "horse-statue",
+    "label": "Horse sculpture close detail, camera tilts up",
+    "category": [
+      "statue",
+      "pan"
+    ],
+    "source": "https://commons.wikimedia.org/wiki/File:Traveler_horse_statue.webm",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "author": "Angelarene88",
+    "duration": 7.958333,
+    "sha256": "42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045",
+    "file": "horse-statue.mp4",
+    "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Traveler_horse_statue.webm",
+    "captureSha256": "21f369bb03b860c466f400437bda77df06b26bb1255f10294cb11c8989331e9d",
+    "captureDuration": 66.567,
+    "span": {
+      "start": 24,
+      "length": 8
+    },
+    "checked": "October 15, 2026",
+    "transformation": "Trimmed 24–32 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+    "evidence": {
+      "sourcePage": "evidence/horse-statue-source.html",
+      "licensePage": "evidence/cc-by-sa-3-0.html",
+      "contactSheet": "contact-sheets/horse-statue.jpg",
+      "commonsMetadata": "evidence/horse-statue-commons-metadata.json",
+      "sourcePageSha256": "4262a2785a03a79bcf76a53158d5dde64a959072176896bb1bc98e649e36cbf0",
+      "licensePageSha256": "9a17cd36de36b242cbe4234773116f2036f86a8ce4459af8b37fd120482ca931",
+      "contactSheetSha256": "129573b3b7dfe394b3638c1227ddc6e422021bdf6d9f42eb7720f28a182d0cb9",
+      "commonsMetadataSha256": "9764360178141271a77e5fa4d9baf2aea3da07d9ac3c5003ce8c465b87353b7f"
+    },
+    "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+    "width": 982,
+    "height": 480,
+    "fps": "24/1",
+    "bytes": 1546297,
+    "ffprobeSha256": "5174859bfeeb383ec3c9d9d744b1b746eaadbff03f5f7bbbd94a711542fa38e8"
+  },
+  "hostContextClosed": true
+}

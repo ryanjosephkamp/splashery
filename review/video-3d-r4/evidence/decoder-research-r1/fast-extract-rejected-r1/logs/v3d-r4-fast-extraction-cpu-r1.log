@@ -1,0 +1,40 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:45:09] "GET / HTTP/1.1" 200 -
+
+Running 30 tests using 1 worker
+
+(node:267870) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:267870) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:48:1 › an initial RVFC after seeking but before seeked cannot label the new photograph (23ms)
+  ✓   2 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:65:1 › a queued old presentation delivered after seeked is rejected without a VFR proximity cutoff (34ms)
+  ✓   3 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:86:1 › a picture presented before seeked uses bounded real-frame recovery instead of a stale timestamp (116ms)
+  ✓   4 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:103:1 › cancellation after a discarded presentation cleans callbacks and cannot cache its time (18ms)
+  ✓   5 [chromium] › tests/cdx-v3d-extraction-timestamp.spec.mjs:121:1 › no fresh terminal presentation fails at the original bound rather than inventing a timestamp (94ms)
+  ✓   6 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:119:1 › B-order and VFR select the actual containing presentation interval (60ms)
+  ✓   7 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:133:1 › color metadata is explicit, defaults follow resolution, and unsupported HDR falls back (48ms)
+  ✓   8 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:149:1 › an unsupported path never reads the file or allocates a decoder (17ms)
+  ✓   9 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:164:1 › canceling a file read rejects immediately and ignores its late result (20ms)
+  ✓  10 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:177:1 › canceling support discovery cannot create a late decoder (45ms)
+  ✓  11 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:195:1 › codec failures return no partial photographs and close their owned decoder (18ms)
+  ✓  12 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:203:1 › canceling a flush closes current and late frames without applying results (43ms)
+  ✓  13 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:224:1 › late JPEG completion after cancellation cannot publish a result (72ms)
+  ✓  14 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:238:1 › failed source-pixel equality and null JPEGs both preserve fallback (121ms)
+  ✓  15 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:248:1 › a successful bounded extraction reports decoded PTS without claiming RVFC evidence (38ms)
+  ✓  16 [chromium] › tests/cdx-v3d-mp4.spec.mjs:8:1 › unsigned ctts, B-order, variable stsc chunks and linear edit match hardcoded independent expected rows (2ms)
+  ✓  17 [chromium] › tests/cdx-v3d-mp4.spec.mjs:19:1 › signed ctts-v1 and co64 preserve negative offsets without unsigned reinterpretation (2ms)
+  ✓  18 [chromium] › tests/cdx-v3d-mp4.spec.mjs:30:1 › no stss correctly means all samples are sync (23ms)
+  ✓  19 [chromium] › tests/cdx-v3d-mp4.spec.mjs:35:1 › avc3 reports its actual codec prefix and copies config bytes independently (5ms)
+  ✓  20 [chromium] › tests/cdx-v3d-mp4.spec.mjs:48:1 › unsafe co64 integers and duplicate box inventories reject (22ms)
+  ✓  21 [chromium] › tests/cdx-v3d-mp4.spec.mjs:56:1 › unsupported geometry/encryption/fragments fail closed (21ms)
+  ✓  22 [chromium] › tests/cdx-v3d-mp4.spec.mjs:65:1 › unsafe counts, table truncation, nonunit edit, bad mdat offsets and sizes fail before large allocation (45ms)
+  ✓  23 [chromium] › tests/cdx-v3d-mp4.spec.mjs:82:1 › bounded deterministic byte mutations either reject or return only safe in-mdat sample spans (85ms)
+  ✓  24 [chromium] › tests/cdx-v3d-mp4.spec.mjs:112:1 › ordinary nonsquare aspect preserves source pixels and exposes exact reduced DAR and stored16.16 display (33ms)
+  ✓  25 [chromium] › tests/cdx-v3d-mp4.spec.mjs:129:1 › absent pasp means1:1 and proportional track display scaling is geometry-consistent (14ms)
+  ✓  26 [chromium] › tests/cdx-v3d-mp4.spec.mjs:136:1 › 16.16 display quantization tolerance accepts oneLSB rounding but rejects inconsistent geometry (31ms)
+  ✓  27 [chromium] › tests/cdx-v3d-mp4.spec.mjs:148:1 › zero/extreme pasp and unsafe display sides reject without huge allocation (11ms)
+  ✓  28 [chromium] › tests/cdx-v3d-mp4.spec.mjs:161:1 › nclc/nclx raw numeric metadata is preserved; unknown/HDR codes are never silently applied (35ms)
+  ✓  29 [chromium] › tests/cdx-v3d-mp4.spec.mjs:180:1 › malformed colr lengths, unknown type, reserved bits and duplicate color boxes reject (6ms)
+  ✓  30 [chromium] › tests/cdx-v3d-mp4.spec.mjs:194:1 › malformed pasp/table payload bounds fail rather than reading adjacent boxes (9ms)
+
+  30 passed (8.5s)

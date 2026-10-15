@@ -1,0 +1,147 @@
+{
+  "at": "2026-10-15T11:45:37.463Z",
+  "sourcesBefore": [
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "sha256": "ac1b47d5a134a739916f35043b9e6e99a1666d9aaa065753646634212688da84"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "sha256": "2f88a29325b57b5b791ef12afc495d1ebb86ca24299bdc13432ebab066d436b8"
+    },
+    {
+      "file": "gpu-fixture.mjs",
+      "sha256": "f832c458dd6b985f60e76104e0d436dc7c986e6ffdefbc6e1689e04ee952143e"
+    }
+  ],
+  "status": "passed",
+  "protocol": "Three predeclared synthetic actual-GPU fixtures, four complete optimizer steps each, direct tile16 vs tile8; partial edge tiles, clipped/behind-camera splats, invalid pixels, serial/parallel sort, and structural loss. Not a bake or native speed/quality claim.",
+  "result": {
+    "cases": [
+      {
+        "w": 35,
+        "h": 27,
+        "ssimWeight": 0,
+        "serialSort": true,
+        "variants": [
+          {
+            "tileSize": 16,
+            "iters": 4,
+            "maxTiles": 6,
+            "expectedTiles": 6,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          },
+          {
+            "tileSize": 8,
+            "iters": 4,
+            "maxTiles": 20,
+            "expectedTiles": 20,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          }
+        ],
+        "exact": {
+          "params": true,
+          "adamM": true,
+          "adamV": true,
+          "gradP": true,
+          "gradF": true,
+          "out": true,
+          "stats": true
+        }
+      },
+      {
+        "w": 47,
+        "h": 31,
+        "ssimWeight": 0.2,
+        "serialSort": true,
+        "variants": [
+          {
+            "tileSize": 16,
+            "iters": 4,
+            "maxTiles": 6,
+            "expectedTiles": 6,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          },
+          {
+            "tileSize": 8,
+            "iters": 4,
+            "maxTiles": 24,
+            "expectedTiles": 24,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          }
+        ],
+        "exact": {
+          "params": true,
+          "adamM": true,
+          "adamV": true,
+          "gradP": true,
+          "gradF": true,
+          "out": true,
+          "stats": true
+        }
+      },
+      {
+        "w": 32,
+        "h": 24,
+        "ssimWeight": 0,
+        "serialSort": false,
+        "variants": [
+          {
+            "tileSize": 16,
+            "iters": 4,
+            "maxTiles": 4,
+            "expectedTiles": 4,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          },
+          {
+            "tileSize": 8,
+            "iters": 4,
+            "maxTiles": 12,
+            "expectedTiles": 12,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          }
+        ],
+        "exact": {
+          "params": true,
+          "adamM": true,
+          "adamV": true,
+          "gradP": true,
+          "gradF": true,
+          "out": true,
+          "stats": true
+        }
+      }
+    ],
+    "errors": [],
+    "storageBindings": 8
+  },
+  "pageErrors": [],
+  "sourcesAfter": [
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "sha256": "ac1b47d5a134a739916f35043b9e6e99a1666d9aaa065753646634212688da84"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "sha256": "2f88a29325b57b5b791ef12afc495d1ebb86ca24299bdc13432ebab066d436b8"
+    },
+    {
+      "file": "gpu-fixture.mjs",
+      "sha256": "f832c458dd6b985f60e76104e0d436dc7c986e6ffdefbc6e1689e04ee952143e"
+    }
+  ],
+  "passed": true,
+  "finishedAt": "2026-10-15T11:46:12.543Z"
+}

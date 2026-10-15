@@ -1,0 +1,397 @@
+{
+  "created": "2026-10-15T12:17:53.045Z",
+  "source": "/workspace/v3d-r4-media/tile-size-probe-r1",
+  "sourceInventory": [
+    {
+      "file": "ASSESSMENT.md",
+      "bytes": 851,
+      "sha256": "9cbaf9412fa58271935419c0a2582c7abb1f834cf738479b5cf5f26a69af193b"
+    },
+    {
+      "file": "ATTRIBUTION.txt",
+      "bytes": 387,
+      "sha256": "50045a129d7726d0d135154dddbb483f782b8620b6c4025742ef84fa6acc7c01"
+    },
+    {
+      "file": "attribution-correction.json",
+      "bytes": 692,
+      "sha256": "53dd90b43ef6b2a50da0794301abcaba218bea28770761994e2a23cf405949fb"
+    },
+    {
+      "file": "declaration.json",
+      "bytes": 4976,
+      "sha256": "4557641eb6d3a3a4beb3e83e1a062055802eb043b1041dbd943a7e8849f3b725"
+    },
+    {
+      "file": "freeze-with-attribution-correction.json",
+      "bytes": 12220,
+      "sha256": "340afe9b9ee6c5695c6fb33d405e61f7b963e0a9229f19264ca756976548f814"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 11652,
+      "sha256": "7a28efbb4789ba985eb45f12f227f0afb22e859f14c4a6f8bedec5896f162a37"
+    },
+    {
+      "file": "phone-image.f32",
+      "bytes": 691200,
+      "sha256": "41a2bc8e822304238d1249cff2b35dc6829498710cd4e3943abee01dee6bd560"
+    },
+    {
+      "file": "phone-params.f32",
+      "bytes": 960000,
+      "sha256": "f957cbc1ac0e35d212c421f200fcd94dadbdf088a0d3f1608f0d3c58c6a3efe2"
+    },
+    {
+      "file": "phone-result.json",
+      "bytes": 3628,
+      "sha256": "6229b937c6bc3d92d178632d8965a9fb2ba4d45760a596c82429ae2400c1846e"
+    },
+    {
+      "file": "phone-tile16-gradP.bin",
+      "bytes": 960000,
+      "sha256": "f7bf064b332b759a4645f8b9a4fd63ae158adf7f28dccb88157a9ec82ee2acdd"
+    },
+    {
+      "file": "phone-tile16-out.bin",
+      "bytes": 921600,
+      "sha256": "d809489f291d25cef39bf9bc44f24f8bd641983c1fc732425f35e7203d2a42b1"
+    },
+    {
+      "file": "phone-tile16-params.bin",
+      "bytes": 960000,
+      "sha256": "f957cbc1ac0e35d212c421f200fcd94dadbdf088a0d3f1608f0d3c58c6a3efe2"
+    },
+    {
+      "file": "phone-tile16-stats.bin",
+      "bytes": 16,
+      "sha256": "5b2257823ba9105b59cdcc6128517d44c95db741ccbb201cb091fb216b885ca1"
+    },
+    {
+      "file": "phone-tile8-gradP.bin",
+      "bytes": 960000,
+      "sha256": "f7bf064b332b759a4645f8b9a4fd63ae158adf7f28dccb88157a9ec82ee2acdd"
+    },
+    {
+      "file": "phone-tile8-out.bin",
+      "bytes": 921600,
+      "sha256": "d809489f291d25cef39bf9bc44f24f8bd641983c1fc732425f35e7203d2a42b1"
+    },
+    {
+      "file": "phone-tile8-params.bin",
+      "bytes": 960000,
+      "sha256": "f957cbc1ac0e35d212c421f200fcd94dadbdf088a0d3f1608f0d3c58c6a3efe2"
+    },
+    {
+      "file": "phone-tile8-stats.bin",
+      "bytes": 16,
+      "sha256": "5b2257823ba9105b59cdcc6128517d44c95db741ccbb201cb091fb216b885ca1"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 8611,
+      "sha256": "75656f74f047a2f278d78dcdf13c814e395db4417902a8cf0b75a00c403cd7c0"
+    },
+    {
+      "file": "small-image.f32",
+      "bytes": 62208,
+      "sha256": "cace76c4a9dece604c98edd306596896e7dac19b858259dbcf5653dba67d9890"
+    },
+    {
+      "file": "small-params.f32",
+      "bytes": 64000,
+      "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+    },
+    {
+      "file": "small-result.json",
+      "bytes": 3613,
+      "sha256": "86a394af9c4ab094769bf4591c6c44ee96cf24e1d6d798632b7858a9e948fd8d"
+    },
+    {
+      "file": "small-tile16-gradP.bin",
+      "bytes": 64000,
+      "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+    },
+    {
+      "file": "small-tile16-out.bin",
+      "bytes": 82944,
+      "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+    },
+    {
+      "file": "small-tile16-params.bin",
+      "bytes": 64000,
+      "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+    },
+    {
+      "file": "small-tile16-stats.bin",
+      "bytes": 16,
+      "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+    },
+    {
+      "file": "small-tile8-gradP.bin",
+      "bytes": 64000,
+      "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+    },
+    {
+      "file": "small-tile8-out.bin",
+      "bytes": 82944,
+      "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+    },
+    {
+      "file": "small-tile8-params.bin",
+      "bytes": 64000,
+      "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+    },
+    {
+      "file": "small-tile8-stats.bin",
+      "bytes": 16,
+      "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+    },
+    {
+      "file": "tile-size-probe-r1.mjs",
+      "bytes": 10507,
+      "sha256": "2e6f6baebf36db339629f8d1b432cb27d9a89d9c01acc95ada8fc7c1b26abaf8"
+    },
+    {
+      "file": "v16/LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "file": "v16/VERSION.md",
+      "bytes": 3431,
+      "sha256": "cdfdaccd5e332354ece2d228987d511b271b15d516f6de3c4f8f341375a6887f"
+    },
+    {
+      "file": "v16/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "v16/src/gs/background-fit.js",
+      "bytes": 4475,
+      "sha256": "9b40decb9665ce73a5ef9b829d7e89887263c4cc7dbb75296ddb64fdcc5e6110"
+    },
+    {
+      "file": "v16/src/gs/hull.js",
+      "bytes": 9911,
+      "sha256": "debc8a865d3fa888a5b38f2d18e0def03ddb8c81aad7cff60dae3a3519a3e593"
+    },
+    {
+      "file": "v16/src/gs/init.js",
+      "bytes": 4965,
+      "sha256": "0d0807678ca0f01ef9eb75fe315b75449a11ff30336307601ad9a2787f263138"
+    },
+    {
+      "file": "v16/src/gs/shaders.js",
+      "bytes": 102365,
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "v16/src/gs/trainer.js",
+      "bytes": 124142,
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "v16/src/io/exif.js",
+      "bytes": 7542,
+      "sha256": "1b6c2f0686405a8983e4e25ed14bc8ae25b274da5093cfb5a714af080ecdf719"
+    },
+    {
+      "file": "v16/src/io/frames.js",
+      "bytes": 17135,
+      "sha256": "aacba5fec86cb0ce5ec2e8acbbce52e893980e3d7f3542d8bac9f5e5500c814e"
+    },
+    {
+      "file": "v16/src/io/pano.js",
+      "bytes": 6278,
+      "sha256": "8a718f685aafbc0b6b996f941256fa9c87e22b8ee9ccd46872d7bc52cd1f97e2"
+    },
+    {
+      "file": "v16/src/io/ply.js",
+      "bytes": 6449,
+      "sha256": "db748b836793bcb27a7f4649c6cb822b273b22107dd691f1238109e6d8dcfd2b"
+    },
+    {
+      "file": "v16/src/session.js",
+      "bytes": 67471,
+      "sha256": "e50c9b04231c4e62ce804f6c48ab367155426d007674cece64c8f8773c287d8f"
+    },
+    {
+      "file": "v16/src/sfm/ba.js",
+      "bytes": 20084,
+      "sha256": "760c181010415311e8ce84e52fc9e4429767108373d13b9121cdc724ef18ce63"
+    },
+    {
+      "file": "v16/src/sfm/features.js",
+      "bytes": 10555,
+      "sha256": "36724e6226d5169b883015cca2775e913229ca57f5651aca2b149b3b2395140b"
+    },
+    {
+      "file": "v16/src/sfm/featworker.js",
+      "bytes": 557,
+      "sha256": "881c8b47d89505f2bc517ae0b0eca27bdecacfb4b90d0f6075e5c8d0cdfc3061"
+    },
+    {
+      "file": "v16/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "v16/src/sfm/global.js",
+      "bytes": 17686,
+      "sha256": "9f58fe80ed84a85ba4e890df12e094ec6fa49297bd3b62f88a1d5a27d4bec75d"
+    },
+    {
+      "file": "v16/src/sfm/gpumatch.js",
+      "bytes": 11682,
+      "sha256": "107319b57f6f4b6935f9799c127a90e01620b7fbbafd93c72f1ce7467341c662"
+    },
+    {
+      "file": "v16/src/sfm/matching.js",
+      "bytes": 1359,
+      "sha256": "193f47de0488cab6eebd19d1125655e2c7702c706ffbacdba8dc60618102fb88"
+    },
+    {
+      "file": "v16/src/sfm/pairworker.js",
+      "bytes": 1249,
+      "sha256": "03c0281f1ab833791d669c0ec8bfa35538eab2c5be2b08f951ad9b15d8c1b543"
+    },
+    {
+      "file": "v16/src/sfm/sfm.js",
+      "bytes": 107991,
+      "sha256": "fd941c3b4af813b62f69e8e48171813afc69bfa1d9db8a12b093330e717ae06a"
+    },
+    {
+      "file": "v16/src/sfm/sift.js",
+      "bytes": 14540,
+      "sha256": "4c75e5a2110a046ba957f415696d63eada1b460f449098f96fc1a6bfa65b2f59"
+    },
+    {
+      "file": "v16/src/sfm/worker-pool.js",
+      "bytes": 2088,
+      "sha256": "cba333d31e0f86802a503bf1f4f530b386e47b14c540c2f976b47ca3dae1cca6"
+    },
+    {
+      "file": "v8/LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "file": "v8/VERSION.md",
+      "bytes": 3431,
+      "sha256": "cdfdaccd5e332354ece2d228987d511b271b15d516f6de3c4f8f341375a6887f"
+    },
+    {
+      "file": "v8/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "v8/src/gs/background-fit.js",
+      "bytes": 4475,
+      "sha256": "9b40decb9665ce73a5ef9b829d7e89887263c4cc7dbb75296ddb64fdcc5e6110"
+    },
+    {
+      "file": "v8/src/gs/hull.js",
+      "bytes": 9911,
+      "sha256": "debc8a865d3fa888a5b38f2d18e0def03ddb8c81aad7cff60dae3a3519a3e593"
+    },
+    {
+      "file": "v8/src/gs/init.js",
+      "bytes": 4965,
+      "sha256": "0d0807678ca0f01ef9eb75fe315b75449a11ff30336307601ad9a2787f263138"
+    },
+    {
+      "file": "v8/src/gs/shaders.js",
+      "bytes": 102362,
+      "sha256": "548d82d08926ef80f1c1d7985eb7846b1437ce61969e4ff37ec353800548c611"
+    },
+    {
+      "file": "v8/src/gs/trainer.js",
+      "bytes": 124142,
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "v8/src/io/exif.js",
+      "bytes": 7542,
+      "sha256": "1b6c2f0686405a8983e4e25ed14bc8ae25b274da5093cfb5a714af080ecdf719"
+    },
+    {
+      "file": "v8/src/io/frames.js",
+      "bytes": 17135,
+      "sha256": "aacba5fec86cb0ce5ec2e8acbbce52e893980e3d7f3542d8bac9f5e5500c814e"
+    },
+    {
+      "file": "v8/src/io/pano.js",
+      "bytes": 6278,
+      "sha256": "8a718f685aafbc0b6b996f941256fa9c87e22b8ee9ccd46872d7bc52cd1f97e2"
+    },
+    {
+      "file": "v8/src/io/ply.js",
+      "bytes": 6449,
+      "sha256": "db748b836793bcb27a7f4649c6cb822b273b22107dd691f1238109e6d8dcfd2b"
+    },
+    {
+      "file": "v8/src/session.js",
+      "bytes": 67471,
+      "sha256": "e50c9b04231c4e62ce804f6c48ab367155426d007674cece64c8f8773c287d8f"
+    },
+    {
+      "file": "v8/src/sfm/ba.js",
+      "bytes": 20084,
+      "sha256": "760c181010415311e8ce84e52fc9e4429767108373d13b9121cdc724ef18ce63"
+    },
+    {
+      "file": "v8/src/sfm/features.js",
+      "bytes": 10555,
+      "sha256": "36724e6226d5169b883015cca2775e913229ca57f5651aca2b149b3b2395140b"
+    },
+    {
+      "file": "v8/src/sfm/featworker.js",
+      "bytes": 557,
+      "sha256": "881c8b47d89505f2bc517ae0b0eca27bdecacfb4b90d0f6075e5c8d0cdfc3061"
+    },
+    {
+      "file": "v8/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "v8/src/sfm/global.js",
+      "bytes": 17686,
+      "sha256": "9f58fe80ed84a85ba4e890df12e094ec6fa49297bd3b62f88a1d5a27d4bec75d"
+    },
+    {
+      "file": "v8/src/sfm/gpumatch.js",
+      "bytes": 11682,
+      "sha256": "107319b57f6f4b6935f9799c127a90e01620b7fbbafd93c72f1ce7467341c662"
+    },
+    {
+      "file": "v8/src/sfm/matching.js",
+      "bytes": 1359,
+      "sha256": "193f47de0488cab6eebd19d1125655e2c7702c706ffbacdba8dc60618102fb88"
+    },
+    {
+      "file": "v8/src/sfm/pairworker.js",
+      "bytes": 1249,
+      "sha256": "03c0281f1ab833791d669c0ec8bfa35538eab2c5be2b08f951ad9b15d8c1b543"
+    },
+    {
+      "file": "v8/src/sfm/sfm.js",
+      "bytes": 107991,
+      "sha256": "fd941c3b4af813b62f69e8e48171813afc69bfa1d9db8a12b093330e717ae06a"
+    },
+    {
+      "file": "v8/src/sfm/sift.js",
+      "bytes": 14540,
+      "sha256": "4c75e5a2110a046ba957f415696d63eada1b460f449098f96fc1a6bfa65b2f59"
+    },
+    {
+      "file": "v8/src/sfm/worker-pool.js",
+      "bytes": 2088,
+      "sha256": "cba333d31e0f86802a503bf1f4f530b386e47b14c540c2f976b47ca3dae1cca6"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

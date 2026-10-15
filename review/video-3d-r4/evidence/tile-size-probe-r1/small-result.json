@@ -1,0 +1,147 @@
+{
+  "id": "small",
+  "variants": [
+    {
+      "tile": 16,
+      "maxTiles": 24,
+      "stages": [
+        {
+          "name": "project",
+          "wallMs": 44.599999997764826,
+          "gpuMs": 5.87973
+        },
+        {
+          "name": "scan",
+          "wallMs": 19,
+          "gpuMs": 11.283823
+        },
+        {
+          "name": "scatter",
+          "wallMs": 64.40000000223517,
+          "gpuMs": 63.614426
+        },
+        {
+          "name": "sort",
+          "wallMs": 7.200000002980232,
+          "gpuMs": 5.929573
+        },
+        {
+          "name": "forwardColdPipeline",
+          "wallMs": 59.899999998509884,
+          "gpuMs": 53.342636
+        },
+        {
+          "name": "renderBackwardWarmPipeline",
+          "wallMs": 166.30000000074506,
+          "gpuMs": 160.83768
+        }
+      ],
+      "files": [
+        {
+          "kind": "gradP",
+          "file": "small-tile16-gradP.bin",
+          "bytes": 64000,
+          "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+        },
+        {
+          "kind": "out",
+          "file": "small-tile16-out.bin",
+          "bytes": 82944,
+          "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+        },
+        {
+          "kind": "stats",
+          "file": "small-tile16-stats.bin",
+          "bytes": 16,
+          "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+        },
+        {
+          "kind": "params",
+          "file": "small-tile16-params.bin",
+          "bytes": 64000,
+          "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+        }
+      ]
+    },
+    {
+      "tile": 8,
+      "maxTiles": 84,
+      "stages": [
+        {
+          "name": "project",
+          "wallMs": 14.100000001490116,
+          "gpuMs": 0.305922
+        },
+        {
+          "name": "scan",
+          "wallMs": 7.5,
+          "gpuMs": 3.97016
+        },
+        {
+          "name": "scatter",
+          "wallMs": 96.09999999776483,
+          "gpuMs": 83.840519
+        },
+        {
+          "name": "sort",
+          "wallMs": 6.199999999254942,
+          "gpuMs": 3.002764
+        },
+        {
+          "name": "forwardColdPipeline",
+          "wallMs": 9.600000001490116,
+          "gpuMs": 3.800713
+        },
+        {
+          "name": "renderBackwardWarmPipeline",
+          "wallMs": 56.19999999925494,
+          "gpuMs": 24.858653
+        }
+      ],
+      "files": [
+        {
+          "kind": "gradP",
+          "file": "small-tile8-gradP.bin",
+          "bytes": 64000,
+          "sha256": "935d1eb02e73e3da34aee08124adc5bc31861b61f7e0631fdb161185ae060cf9"
+        },
+        {
+          "kind": "out",
+          "file": "small-tile8-out.bin",
+          "bytes": 82944,
+          "sha256": "eb2f4b0f7b28fd4e6aa0589b7c1295a8e3f127db57ef4abb674b2db84f9a54cd"
+        },
+        {
+          "kind": "stats",
+          "file": "small-tile8-stats.bin",
+          "bytes": 16,
+          "sha256": "df4062f0a4953c86523a6432580c2527750727affc77b3b4a6f23c47cc0b2682"
+        },
+        {
+          "kind": "params",
+          "file": "small-tile8-params.bin",
+          "bytes": 64000,
+          "sha256": "68f036739eb9b3188223f64b5164f14e6aa0cdf595ba13884dcae09ee0ff7608"
+        }
+      ]
+    }
+  ],
+  "parity": {
+    "gradP": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "out": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "stats": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "params": {
+      "byteExact": true,
+      "differentBytes": 0
+    }
+  }
+}

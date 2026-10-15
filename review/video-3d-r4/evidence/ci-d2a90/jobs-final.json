@@ -1,0 +1,116 @@
+{
+  "capturedAt": "2026-10-15 12:07:42 UTC",
+  "runId": 38725571170,
+  "headCommit": "d2a90b31b7ac305b473afe31330d0303bdfb47ad",
+  "jobs": [
+    {
+      "id": 116390461013,
+      "name": "Suite 7/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116390461232,
+      "name": "Checks",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116390461236,
+      "name": "Suite 10/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116390461238,
+      "name": "Suite 2/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116390461243,
+      "name": "Suite 15/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116390461273,
+      "name": "Suite 9/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116390461284,
+      "name": "Suite 13/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116390461292,
+      "name": "Suite 1/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116390461322,
+      "name": "Suite 14/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116390461367,
+      "name": "Suite 12/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116390461375,
+      "name": "Suite 6/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116390461393,
+      "name": "Suite 5/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116390461405,
+      "name": "Suite 11/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116390461410,
+      "name": "Suite 8/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116390461591,
+      "name": "Suite 16/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116390461644,
+      "name": "Suite 4/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 116390461860,
+      "name": "Suite 3/16",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    {
+      "id": 116412106784,
+      "name": "Summary",
+      "status": "completed",
+      "conclusion": "failure"
+    }
+  ],
+  "note": "All original shard failures retained. Full suite checkout uses GitHub PR merge context; head identity alone is not a claim of task-start main."
+}

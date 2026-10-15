@@ -1,0 +1,104 @@
+{
+  "id": "saint-denis",
+  "profile": "phone",
+  "sha256": "231358f2f7f9a1ad04e78c782106ad13e56bf0fcd88f665d86497365117fd405",
+  "started": "2026-10-15T09:40:50.467Z",
+  "status": "finished",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": 216691.5,
+  "bakeMs": 1374854.5803260002,
+  "mean": {
+    "psnr": 10.520237721094228,
+    "ssim": 0.2542876716345405,
+    "laplacian": 0.0007005905940201272,
+    "sourceLaplacian": 0.018137129972124688
+  },
+  "peakRssBytes": 1420156928,
+  "hostLoadAtStart": [
+    22.2,
+    20.33,
+    19.62
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "The decoded video frame took too long.",
+    "unplayable": false,
+    "duration": 10
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "cc5d805cda5c9ebdfc791a30a0b0eb04d15f4e37264c90153c430217b7f6ea91",
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 9,
+    "points": 864,
+    "splats": 14688,
+    "iters": 216,
+    "psnr": 18,
+    "psnrAtIter": 216,
+    "trainSide": 320,
+    "plyBytes": 828723,
+    "retried": false,
+    "timedOut": true,
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 10,
+    "rate": 1.6
+  },
+  "timings": {
+    "frames": 51.7,
+    "decode": 1.8,
+    "path": 132.1,
+    "seed": 0.1,
+    "train": 1181.3,
+    "export": 0.2,
+    "total": 1367.3
+  },
+  "actualTier": "phone",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": false,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "evaluationSha256": "e5370161a0f19b3fab2d7a15e841c97ff84da7390a3afa814327fe799e16c99e",
+  "frames": [
+    {
+      "time": 5.833333,
+      "renderSha256": "24393aea27d21cef7a76a2fe43fd84a4f07c4acfedf983b67fd36627c3b9bde6",
+      "referenceSha256": "655a41a80448a49c74dd794e0d3ecfc3dae8e13996d006d65f61e28a32911417",
+      "psnr": 10.144370316604142,
+      "exact": false,
+      "ssim": 0.29171573781478727,
+      "laplacian": 0.0006637533690376626,
+      "sourceLaplacian": 0.013112667340863518,
+      "sharpnessRatio": 0.05061924868399445
+    },
+    {
+      "time": 8.125,
+      "renderSha256": "b46b705b304a1eb69d877855f9fcbeb05459e2175c998c66ff6a09f1d3ee760f",
+      "referenceSha256": "7315658600ca6e82bca609aa2565e74ab09bfcd9abb62df05fea18a0000e8d4b",
+      "psnr": 10.896105125584313,
+      "exact": false,
+      "ssim": 0.21685960545429375,
+      "laplacian": 0.0007374278190025919,
+      "sourceLaplacian": 0.023161592603385857,
+      "sharpnessRatio": 0.03183839002913779
+    }
+  ]
+}

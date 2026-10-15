@@ -1,0 +1,211 @@
+// SPDX-License-Identifier: MIT
+// Made by Ryan with Codex (GPT-6). CPU-only format/property controls, no decoding.
+import { test, expect } from "@playwright/test";
+import assert from "node:assert/strict";
+import { demuxAvc, LIMITS } from "../src/video3d/mp4.js";
+import { fixture, box } from "./helpers/v3d-mp4-fixture.mjs";
+
+test("one terminal zero-delta VFR sample keeps its explicit PTS; earlier zero deltas reject", () => {
+  const bytes = fixture({ zeroLast: true });
+  const result = demuxAvc(bytes);
+  expect(result.samples.map((sample) => sample.duration)).toEqual([10, 20, 0]);
+  expect(result.samples.map((sample) => sample.pts)).toEqual([0, 20, 10]);
+  const broken = Buffer.from(bytes);
+  broken.writeUInt32BE(0, broken.indexOf("stts") + 16);
+  expect(() => demuxAvc(broken)).toThrow(/Invalid stts run/);
+});
+
+test("unsigned ctts, B-order, variable stsc chunks and linear edit match hardcoded independent expected rows", () => {
+  const b = fixture(),
+    d = demuxAvc(b);
+  assert.equal(d.codec, "avc1.64001f");
+  assert.deepEqual(d.samples, [
+    { offset: 32, size: 3, dts: -20, pts: 0, duration: 10, key: true },
+    { offset: 35, size: 4, dts: -10, pts: 20, duration: 20, key: false },
+    { offset: 39, size: 5, dts: 10, pts: 10, duration: 20, key: false },
+  ]);
+  assert.deepEqual([...d.description], [1, 100, 0, 31, 255, 225, 0, 1, 103, 1, 0, 1, 104]);
+});
+test("signed ctts-v1 and co64 preserve negative offsets without unsigned reinterpretation", () => {
+  const d = demuxAvc(fixture({ cttsVersion: 1, co64: true }));
+  assert.deepEqual(
+    d.samples.map((s) => s.pts),
+    [0, 30, 20],
+  );
+  assert.deepEqual(
+    d.samples.map((s) => s.dts),
+    [0, 10, 30],
+  );
+});
+test("no stss correctly means all samples are sync", () =>
+  assert.deepEqual(
+    demuxAvc(fixture({ stss: false })).samples.map((s) => s.key),
+    [true, true, true],
+  ));
+test("avc3 reports its actual codec prefix and copies config bytes independently", () => {
+  const b = fixture(),
+    p = b.indexOf("avc1", b.indexOf("stsd"));
+  b.write("avc3", p);
+  const d = demuxAvc(b);
+  assert.equal(d.config.codec, "avc3.64001f");
+  assert.equal(d.config.codedWidth, 96);
+  assert.equal(d.config.codedHeight, 64);
+  assert(d.config.description instanceof Uint8Array);
+  const value = d.description[0];
+  b[b.indexOf("avcC") + 4] ^= 255;
+  assert.equal(d.description[0], value);
+});
+test("unsafe co64 integers and duplicate box inventories reject", () => {
+  const b = fixture({ co64: true }),
+    p = b.indexOf("co64");
+  b.writeBigUInt64BE(9007199254740992n, p + 12);
+  assert.throws(() => demuxAvc(b), /Unsafe 64-bit/);
+  const original = fixture();
+  assert.throws(() => demuxAvc(Buffer.concat([original, box("moov")])), /Expected one moov/);
+});
+test("unsupported geometry/encryption/fragments fail closed", () => {
+  for (const args of [
+    { pasp: [2, 1] },
+    { rotate: true },
+    { encrypted: true },
+    { fragmented: true },
+  ])
+    assert.throws(() => demuxAvc(fixture(args)));
+});
+test("unsafe counts, table truncation, nonunit edit, bad mdat offsets and sizes fail before large allocation", () => {
+  const original = fixture();
+  for (const [needle, relative, value] of [
+    ["stsz", 12, LIMITS.samples + 1],
+    ["stco", 12, 0xffffffff],
+    ["stsz", 16, 0xffffffff],
+    ["elst", 20, 0],
+    ["stts", 12, 0xffffffff],
+  ]) {
+    const b = Buffer.from(original),
+      p = b.indexOf(needle);
+    b.writeUInt32BE(value, p + relative);
+    assert.throws(() => demuxAvc(b), needle);
+  }
+  for (const n of [0, 7, 31, original.length - 1])
+    assert.throws(() => demuxAvc(original.subarray(0, n)));
+});
+test("bounded deterministic byte mutations either reject or return only safe in-mdat sample spans", () => {
+  const original = fixture();
+  let rejects = 0;
+  for (let i = 0; i < 256; i++) {
+    const b = Buffer.from(original),
+      at = (i * 131 + 7) % b.length;
+    b[at] ^= ((i * 17) % 255) + 1;
+    try {
+      const d = demuxAvc(b);
+      assert(d.samples.length <= LIMITS.samples);
+      for (const s of d.samples) {
+        assert(Number.isSafeInteger(s.offset) && s.offset >= 32 && s.offset + s.size <= 44);
+        assert(Number.isSafeInteger(s.pts));
+      }
+    } catch (e) {
+      if (e.code === "ERR_ASSERTION") throw e;
+      rejects++;
+    }
+  }
+  assert(rejects > 128);
+});
+const color = (type, p, t, m, last = null) => {
+  const b = Buffer.alloc(last === null ? 10 : 11);
+  b.write(type, 0, 4, "latin1");
+  b.writeUInt16BE(p, 4);
+  b.writeUInt16BE(t, 6);
+  b.writeUInt16BE(m, 8);
+  if (last !== null) b[10] = last;
+  return b;
+};
+test("ordinary nonsquare aspect preserves source pixels and exposes exact reduced DAR and stored16.16 display", () => {
+  const square = demuxAvc(fixture()),
+    d = demuxAvc(fixture({ pasp: [8, 6], displayWidth: 128 }));
+  assert.deepEqual(d.sampleAspectRatio, { hSpacing: 8, vSpacing: 6 });
+  assert.deepEqual(d.trackDisplay, {
+    width: 128,
+    height: 64,
+    widthFixed16: 8388608,
+    heightFixed16: 4194304,
+  });
+  assert.equal(d.config.codedWidth, 96);
+  assert.equal(d.config.codedHeight, 64);
+  assert.equal(d.config.displayAspectWidth, 2);
+  assert.equal(d.config.displayAspectHeight, 1);
+  assert.deepEqual(d.samples, square.samples);
+  assert.deepEqual(d.description, square.description);
+});
+test("absent pasp means1:1 and proportional track display scaling is geometry-consistent", () => {
+  const d = demuxAvc(fixture({ pasp: null, displayWidth: 192, displayHeight: 128 }));
+  assert.deepEqual(d.sampleAspectRatio, { hSpacing: 1, vSpacing: 1 });
+  assert.equal(d.config.displayAspectWidth, 3);
+  assert.equal(d.config.displayAspectHeight, 2);
+  assert.equal(d.trackDisplayWidth, 192);
+});
+test("16.16 display quantization tolerance accepts oneLSB rounding but rejects inconsistent geometry", () => {
+  const ideal = (96 * 1280) / 1281,
+    d = demuxAvc(fixture({ pasp: [1280, 1281], displayWidth: ideal }));
+  assert.equal(d.config.displayAspectWidth, 640);
+  assert.equal(d.config.displayAspectHeight, 427);
+  assert(Math.abs(d.trackDisplayWidth - ideal) < 1 / 65536);
+  assert.throws(
+    () => demuxAvc(fixture({ pasp: [1280, 1281], displayWidth: ideal + 0.01 })),
+    /geometry inconsistent/,
+  );
+  assert.throws(() => demuxAvc(fixture({ pasp: [4, 3] })), /geometry inconsistent/);
+});
+test("zero/extreme pasp and unsafe display sides reject without huge allocation", () => {
+  for (const pasp of [
+    [0, 1],
+    [1, 0],
+    [1000001, 1000000],
+    [65, 1],
+    [1, 65],
+    [0xffffffff, 0xffffffff],
+  ])
+    assert.throws(() => demuxAvc(fixture({ pasp })), /aspect/);
+  assert.throws(() => demuxAvc(fixture({ displayWidth: 0 })), /display/);
+  assert.throws(() => demuxAvc(fixture({ displayWidth: 32769 })), /display/);
+});
+test("nclc/nclx raw numeric metadata is preserved; unknown/HDR codes are never silently applied", () => {
+  for (const payload of [
+    color("nclc", 1, 1, 1),
+    color("nclx", 6, 6, 6, 0),
+    color("nclx", 9, 16, 9, 128),
+    color("nclx", 65535, 65534, 65533, 0),
+  ]) {
+    const d = demuxAvc(fixture({ colrPayload: payload }));
+    assert.deepEqual(d.colorMetadata, {
+      type: payload.toString("latin1", 0, 4),
+      primaries: payload.readUInt16BE(4),
+      transfer: payload.readUInt16BE(6),
+      matrix: payload.readUInt16BE(8),
+      fullRange: payload.length === 11 ? !!(payload[10] & 128) : null,
+    });
+    assert.equal("colorSpace" in d.config, false);
+  }
+  assert.equal(demuxAvc(fixture()).colorMetadata, null);
+});
+test("malformed colr lengths, unknown type, reserved bits and duplicate color boxes reject", () => {
+  for (const payload of [
+    color("nclx", 1, 1, 1),
+    color("nclc", 1, 1, 1, 0),
+    color("nclx", 1, 1, 1, 1),
+    color("prof", 1, 1, 1),
+    Buffer.from("ncl"),
+  ])
+    assert.throws(() => demuxAvc(fixture({ colrPayload: payload })), /colr|Truncated|reserved/);
+  const b = fixture({ colrPayload: color("nclx", 1, 1, 1, 0) }),
+    p = b.indexOf("pasp");
+  b.write("colr", p);
+  assert.throws(() => demuxAvc(b), /one colr/);
+});
+test("malformed pasp/table payload bounds fail rather than reading adjacent boxes", () => {
+  for (const name of ["pasp", "stsc", "stco", "stts", "ctts"]) {
+    const b = fixture(),
+      p = b.indexOf(name) - 4;
+    b.writeUInt32BE(b.readUInt32BE(p) + 1, p);
+    assert.throws(() => demuxAvc(b), name);
+  }
+});

@@ -1,0 +1,17 @@
+{
+  "created": "2026-10-15T12:17:53.324Z",
+  "source": "/workspace/v3d-r4-media/original-spec-byte-audit-r1",
+  "sourceInventory": [
+    {
+      "file": "check-original-specs-r1.py",
+      "bytes": 2469,
+      "sha256": "288455a7a05b9ca9da1753d29155ee9c2a816297d700abd61261c86c83e81f19"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 90447,
+      "sha256": "33d1b71c4922a8bfc9fc4ee300e20d85af651c525166f76bf44e49dc6f61ccda"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

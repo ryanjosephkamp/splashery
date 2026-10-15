@@ -1,0 +1,23 @@
+✔ unsigned ctts, B-order, variable stsc chunks and linear edit match hardcoded independent expected rows (14.899602ms)
+✔ signed ctts-v1 and co64 preserve negative offsets without unsigned reinterpretation (0.668106ms)
+✔ no stss correctly means all samples are sync (8.64707ms)
+✔ avc3 reports its actual codec prefix and copies config bytes independently (0.677784ms)
+✔ unsafe co64 integers and duplicate box inventories reject (31.560119ms)
+✔ unsupported geometry/encryption/fragments fail closed (0.92767ms)
+✔ unsafe counts, table truncation, nonunit edit, bad mdat offsets and sizes fail before large allocation (0.981211ms)
+✔ bounded deterministic byte mutations either reject or return only safe in-mdat sample spans (51.996909ms)
+✔ ordinary nonsquare aspect preserves source pixels and exposes exact reduced DAR and stored16.16 display (5.392338ms)
+✔ absent pasp means1:1 and proportional track display scaling is geometry-consistent (0.418801ms)
+✔ 16.16 display quantization tolerance accepts oneLSB rounding but rejects inconsistent geometry (3.936011ms)
+✔ zero/extreme pasp and unsafe display sides reject without huge allocation (2.025688ms)
+✔ nclc/nclx raw numeric metadata is preserved; unknown/HDR codes are never silently applied (0.832834ms)
+✔ malformed colr lengths, unknown type, reserved bits and duplicate color boxes reject (32.298596ms)
+✔ malformed pasp/table payload bounds fail rather than reading adjacent boxes (0.665291ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 487.861743

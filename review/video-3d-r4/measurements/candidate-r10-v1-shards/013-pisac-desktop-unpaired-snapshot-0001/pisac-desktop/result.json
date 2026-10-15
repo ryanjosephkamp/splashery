@@ -1,0 +1,38 @@
+{
+  "id": "pisac",
+  "profile": "desktop",
+  "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+  "started": "2026-10-15T10:53:56.763Z",
+  "status": "explained",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "firstViewMs": 182628.09999999776,
+  "bakeMs": 1145286.613169,
+  "mean": null,
+  "peakRssBytes": 1676853248,
+  "hostLoadAtStart": [
+    19.69,
+    18.91,
+    18.98
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "This browser cannot play that video. Try an MP4 (H.264) or WebM file, or a shorter clip.",
+    "unplayable": false,
+    "duration": 0
+  },
+  "explanation": {
+    "diagnostic": "The graphics card could not finish this scene. Try the Phone-safe setting, or a shorter stretch.",
+    "advice": "The graphics card could not finish this scene. Try the Phone-safe setting, or a shorter stretch.",
+    "visible": true
+  },
+  "reason": "The graphics card could not finish this scene. Try the Phone-safe setting, or a shorter stretch."
+}

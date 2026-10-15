@@ -1,0 +1,171 @@
+{
+  "id": "fremantle-orbit",
+  "profile": "phone",
+  "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+  "started": "2026-10-15T11:20:49.139Z",
+  "status": "finished",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "referenceEvidence": {
+    "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "resultFingerprint": "5ada7f0d4e4f129130f330f59d1f462a12f5608245d6ccc1717d7ba4437c5e65",
+    "evaluationSha256": "6d6ab88c73f91d0ac0c432a4bdebe2aeaefa41ff2b054ca25cf07f26d5eb8d4f"
+  },
+  "firstViewMs": 128276.09999999776,
+  "bakeMs": 612157.1436569999,
+  "mean": {
+    "psnr": 17.480776184778207,
+    "ssim": 0.7687941294830936,
+    "laplacian": 0.00003704384639601725,
+    "sourceLaplacian": 0.00256720915425588
+  },
+  "peakRssBytes": 1130094592,
+  "hostLoadAtStart": [
+    16.21,
+    15.79,
+    16.91
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "Stopped",
+    "unplayable": false,
+    "duration": 12
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "370d730a05dfc93dcd87b7b60db1cc553a40ee7e9a6498291aa3a0acfa52d36e",
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 7,
+    "points": 157,
+    "surfacePoints": 1470,
+    "generatedSurfacePoints": 1470,
+    "seedSplats": 14972,
+    "seedBounds": "coordinate-median",
+    "seedSceneRadius": 15.531383273853434,
+    "trainingBackground": [
+      0,
+      0,
+      0
+    ],
+    "renderBackground": [
+      0.6590706948023513,
+      0.661483451208833,
+      0.6531292322355196
+    ],
+    "backgroundFit": {
+      "method": "constant-training-environment",
+      "accepted": true,
+      "reason": "training-and-validation-improved",
+      "rgb": [
+        0.6590706948023513,
+        0.661483451208833,
+        0.6531292322355196
+      ],
+      "trainCams": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "validationCams": [
+        3
+      ],
+      "pixels": 345600,
+      "invalidPixels": 0,
+      "improvement": 0.9063945515260787,
+      "baseMse": 0.18779773234356842,
+      "fittedMse": 0.017578890958405157,
+      "validation": [
+        {
+          "ci": 3,
+          "pixels": 57600,
+          "baseMse": 0.1920192311580264,
+          "fittedMse": 0.01776227866870137
+        }
+      ]
+    },
+    "splats": 17218,
+    "iters": 134,
+    "psnr": 7.2,
+    "psnrAtIter": 134,
+    "trainSide": 320,
+    "plyBytes": 1077671,
+    "retried": false,
+    "timedOut": true,
+    "timeLimitMinutes": 8,
+    "softwareSort": true,
+    "softwareDirectGradient": true,
+    "trainingLoop": {
+      "batches": 67,
+      "submittedSteps": 134,
+      "encodeMs": 29,
+      "viewSubmitMs": 11,
+      "fenceWaitMs": 269120,
+      "metricsWaitMs": 171171,
+      "batchWallMs": 445295
+    },
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 12,
+    "rate": 1.333
+  },
+  "timings": {
+    "frames": 34.1,
+    "decode": 1.7,
+    "path": 67.4,
+    "seed": 1.5,
+    "train": 485.2,
+    "background": 8.2,
+    "export": 0.3,
+    "total": 598.4
+  },
+  "actualTier": "phone",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": true,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "evaluationSha256": "4dc198d077c11b0e74c8cee6bdce1aa0c2567bacba7f24e7d3186009ffcf9670",
+  "frames": [
+    {
+      "time": 6.791667,
+      "renderSha256": "dad41b70f6ca2495bae8354ad84aa0da5f4665e38a4d7348e5d368a72cebfb35",
+      "referenceSha256": "234a9ce663c189aff5fe2b8dd3071d0efc1e646739a62dc5f41e3bc41da03671",
+      "psnr": 17.82988373021177,
+      "exact": false,
+      "ssim": 0.7646829544092223,
+      "laplacian": 0.000035289877209999294,
+      "sourceLaplacian": 0.0026555909791770534,
+      "sharpnessRatio": 0.013288897833556938
+    },
+    {
+      "time": 10,
+      "renderSha256": "753f5e8e33c9c7e8138cfc858d7e51dc3de864e8bb6b336de039abfc7667ef60",
+      "referenceSha256": "235a78c951d3258de5987d0005773cff9f4c8d68d9c65603a3c1f2e5d9ae68b9",
+      "psnr": 17.131668639344642,
+      "exact": false,
+      "ssim": 0.7729053045569647,
+      "laplacian": 0.000038797815582035204,
+      "sourceLaplacian": 0.002478827329334707,
+      "sharpnessRatio": 0.015651681390993925
+    }
+  ]
+}

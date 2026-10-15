@@ -1,0 +1,924 @@
+{
+  "at": "2026-10-15T11:48:56.826Z",
+  "rawSha256": "613eb1b5998fda20ed5634ef731d5a6d92eea1ce3a40615eda9bad138f75a6c1",
+  "notice": "Outside-only predeclared one-way hybrid phone extraction research. Shared-load total extraction includes preparation/warm/rejected/fallback work; proof separate. No bakes, physical-phone, held-out quality or integration acceptance claim.",
+  "predeclaredCases": 20,
+  "verifiedCases": 16,
+  "diagnosticCases": 4,
+  "verifiedJpegs": 255,
+  "successfulCaseExactTrials": 278,
+  "successfulCaseCanonicalTrials": 487,
+  "allObservedExactTrials": 328,
+  "allObservedCanonicalTrials": 630,
+  "rows": [
+    {
+      "id": "cat-track",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 19,
+      "canonicalTrials": 29,
+      "totalTrials": 48,
+      "extractSeconds": 38.44520000000298,
+      "captureSeconds": 35.66879999999702,
+      "prepareSeconds": 2.724,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 6.1895,
+      "totalSeconds": 44.63580000000074,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 19,
+        "retainedWindows": 6,
+        "retainedCurrentBest": true,
+        "missedTarget": {
+          "window": 6,
+          "trial": 1,
+          "requestedTime": 3.25,
+          "pts": 39936,
+          "time": 3.25,
+          "micros": 3250000,
+          "sourcePresentationIndex": 78
+        },
+        "lastActual": {
+          "wallMs": 10265.300000000745,
+          "kind": "rvfc",
+          "time": 3.291667,
+          "micros": 3291667,
+          "origin": "rvfc",
+          "target": 19,
+          "presentedFrames": 83
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "cat-plays",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 14,
+      "canonicalTrials": 34,
+      "totalTrials": 48,
+      "extractSeconds": 27.617199999999254,
+      "captureSeconds": 26.410400000002234,
+      "prepareSeconds": 1.10189999999851,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 6.813300000000745,
+      "totalSeconds": 34.45689999999851,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 14,
+        "retainedWindows": 4,
+        "retainedCurrentBest": true,
+        "missedTarget": {
+          "window": 4,
+          "trial": 2,
+          "requestedTime": 2.417,
+          "pts": 30208,
+          "time": 2.4583333333333335,
+          "micros": 2458333,
+          "sourcePresentationIndex": 59
+        },
+        "lastActual": {
+          "wallMs": 5448.10000000149,
+          "kind": "rvfc",
+          "time": 2.5,
+          "micros": 2500000,
+          "origin": "rvfc",
+          "target": 14,
+          "presentedFrames": 63
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "buddha",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 0,
+      "canonicalTrials": 48,
+      "totalTrials": 48,
+      "extractSeconds": 43.91279999999702,
+      "captureSeconds": 43.5915,
+      "prepareSeconds": 0.1915,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 11.760300000000745,
+      "totalSeconds": 55.674,
+      "transition": {
+        "reason": "Single rewind already passed first desired frame",
+        "retainedTrials": 0,
+        "retainedWindows": 0,
+        "retainedCurrentBest": false,
+        "missedTarget": {
+          "window": 0,
+          "trial": 0,
+          "requestedTime": 0.083,
+          "pts": 1024,
+          "time": 0.08333333333333333,
+          "micros": 83333,
+          "sourcePresentationIndex": 2
+        },
+        "lastActual": null
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "chameleon-flowers",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 48,
+      "canonicalTrials": 0,
+      "totalTrials": 48,
+      "extractSeconds": 17.34289999999851,
+      "captureSeconds": 16.301400000002236,
+      "prepareSeconds": 0.8795,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 10.59770000000298,
+      "totalSeconds": 27.941199999999256,
+      "transition": null,
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "dianthus",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 0,
+      "canonicalTrials": 48,
+      "totalTrials": 48,
+      "extractSeconds": 40.33409999999777,
+      "captureSeconds": 39.0645,
+      "prepareSeconds": 0.9426999999992549,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 11.33339999999851,
+      "totalSeconds": 51.672,
+      "transition": {
+        "reason": "Unsupported source table; canonical whole plan",
+        "retainedTrials": 0,
+        "retainedWindows": 0,
+        "retainedCurrentBest": false,
+        "missedTarget": {
+          "window": 0,
+          "trial": 0,
+          "requestedTime": 0.062
+        }
+      },
+      "tableFallback": {
+        "name": "Error",
+        "message": "Nontrivial edit list unsupported"
+      },
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "pisac",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 8,
+      "canonicalTrials": 40,
+      "totalTrials": 48,
+      "extractSeconds": 28.9735,
+      "captureSeconds": 27.75789999999851,
+      "prepareSeconds": 1.1021000000014902,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 6.639199999999255,
+      "totalSeconds": 35.61320000000298,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 8,
+        "retainedWindows": 2,
+        "retainedCurrentBest": true,
+        "missedTarget": {
+          "window": 2,
+          "trial": 2,
+          "requestedTime": 1.771,
+          "pts": 22016,
+          "time": 1.7916666666666667,
+          "micros": 1791667,
+          "sourcePresentationIndex": 43
+        },
+        "lastActual": {
+          "wallMs": 5172.20000000298,
+          "kind": "rvfc",
+          "time": 1.833333,
+          "micros": 1833333,
+          "origin": "rvfc",
+          "target": 8,
+          "presentedFrames": 51
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "sleeping-dog",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 1,
+      "canonicalTrials": 47,
+      "totalTrials": 48,
+      "extractSeconds": 49.04760000000149,
+      "captureSeconds": 48.11359999999777,
+      "prepareSeconds": 0.8468999999985098,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 11.462699999999256,
+      "totalSeconds": 60.51139999999851,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 1,
+        "retainedWindows": 0,
+        "retainedCurrentBest": true,
+        "missedTarget": {
+          "window": 0,
+          "trial": 1,
+          "requestedTime": 0.25,
+          "pts": 3072,
+          "time": 0.25,
+          "micros": 250000,
+          "sourcePresentationIndex": 6
+        },
+        "lastActual": {
+          "wallMs": 1612.1000000014901,
+          "kind": "rvfc",
+          "time": 0.333333,
+          "micros": 333333,
+          "origin": "rvfc",
+          "target": 1,
+          "presentedFrames": 10
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "palace-statue",
+      "status": "verified-complete-hybrid",
+      "windows": 15,
+      "photos": 15,
+      "exactTrials": 45,
+      "canonicalTrials": 0,
+      "totalTrials": 45,
+      "extractSeconds": 10.329699999999255,
+      "captureSeconds": 8.931099999997764,
+      "prepareSeconds": 1.204,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 4.99939999999851,
+      "totalSeconds": 15.33579999999702,
+      "transition": null,
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "oa-street",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 42,
+      "canonicalTrials": 6,
+      "totalTrials": 48,
+      "extractSeconds": 23.872900000002236,
+      "captureSeconds": 22.64689999999851,
+      "prepareSeconds": 1.0901000000014902,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 12.317600000001491,
+      "totalSeconds": 36.19120000000298,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 42,
+        "retainedWindows": 14,
+        "retainedCurrentBest": false,
+        "missedTarget": {
+          "window": 14,
+          "trial": 0,
+          "requestedTime": 8.854,
+          "pts": 109056,
+          "time": 8.875,
+          "micros": 8875000,
+          "sourcePresentationIndex": 213
+        },
+        "lastActual": {
+          "wallMs": 14058.89999999851,
+          "kind": "rvfc",
+          "time": 8.916667,
+          "micros": 8916667,
+          "origin": "rvfc",
+          "target": 42,
+          "presentedFrames": 217
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "ullard",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 5,
+      "canonicalTrials": 43,
+      "totalTrials": 48,
+      "extractSeconds": 55.69360000000149,
+      "captureSeconds": 55.3645,
+      "prepareSeconds": 0.1385,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 17.21929999999702,
+      "totalSeconds": 72.91780000000074,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 5,
+        "retainedWindows": 1,
+        "retainedCurrentBest": true,
+        "missedTarget": {
+          "window": 1,
+          "trial": 2,
+          "requestedTime": 1.146,
+          "pts": 14336,
+          "time": 1.1666666666666667,
+          "micros": 1166667,
+          "sourcePresentationIndex": 28
+        },
+        "lastActual": {
+          "wallMs": 3174.199999999255,
+          "kind": "rvfc",
+          "time": 1.208333,
+          "micros": 1208333,
+          "origin": "rvfc",
+          "target": 5,
+          "presentedFrames": 34
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "snaefell",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 0,
+      "canonicalTrials": 48,
+      "totalTrials": 48,
+      "extractSeconds": 46.762800000000745,
+      "captureSeconds": 46.443,
+      "prepareSeconds": 0.11120000000298023,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 12.17970000000298,
+      "totalSeconds": 58.94330000000075,
+      "transition": {
+        "reason": "Single rewind already passed first desired frame",
+        "retainedTrials": 0,
+        "retainedWindows": 0,
+        "retainedCurrentBest": false,
+        "missedTarget": {
+          "window": 0,
+          "trial": 0,
+          "requestedTime": 0.104,
+          "pts": 1536,
+          "time": 0.125,
+          "micros": 125000,
+          "sourcePresentationIndex": 3
+        },
+        "lastActual": null
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "fremantle-orbit",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 4,
+      "canonicalTrials": 44,
+      "totalTrials": 48,
+      "extractSeconds": 48.63570000000298,
+      "captureSeconds": 48.017,
+      "prepareSeconds": 0.5202000000029803,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 12.56010000000149,
+      "totalSeconds": 61.19690000000224,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 4,
+        "retainedWindows": 1,
+        "retainedCurrentBest": true,
+        "missedTarget": {
+          "window": 1,
+          "trial": 1,
+          "requestedTime": 1.125,
+          "pts": 13824,
+          "time": 1.125,
+          "micros": 1125000,
+          "sourcePresentationIndex": 27
+        },
+        "lastActual": {
+          "wallMs": 4108.599999997765,
+          "kind": "rvfc",
+          "time": 1.166667,
+          "micros": 1166667,
+          "origin": "rvfc",
+          "target": 4,
+          "presentedFrames": 31
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "ihasalu-orbit",
+      "status": "extraction-or-proof-no-result",
+      "windows": 16,
+      "photos": 0,
+      "exactTrials": 0,
+      "canonicalTrials": 47,
+      "totalTrials": 47,
+      "extractSeconds": null,
+      "captureSeconds": null,
+      "prepareSeconds": 1.19810000000149,
+      "attemptedExtractionSeconds": 47.877900000002235,
+      "proofSeconds": null,
+      "totalSeconds": 47.87860000000149,
+      "transition": {
+        "reason": "Single rewind already passed first desired frame",
+        "retainedTrials": 0,
+        "retainedWindows": 0,
+        "retainedCurrentBest": false,
+        "missedTarget": {
+          "window": 0,
+          "trial": 0,
+          "requestedTime": 0.125,
+          "pts": 1536,
+          "time": 0.125,
+          "micros": 125000,
+          "sourcePresentationIndex": 3
+        },
+        "lastActual": null
+      },
+      "tableFallback": null,
+      "error": {
+        "name": "Error",
+        "message": "The decoded video frame took too long. Try a shorter MP4 (H.264) clip.",
+        "stack": "Error: The decoded video frame took too long. Try a shorter MP4 (H.264) clip.\n    at http://127.0.0.1:4202/src/extract.js:151:16"
+      },
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "fresnel-lens",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 48,
+      "canonicalTrials": 0,
+      "totalTrials": 48,
+      "extractSeconds": 15.75860000000149,
+      "captureSeconds": 15.00710000000149,
+      "prepareSeconds": 0.5621000000014901,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 7.4866000000014905,
+      "totalSeconds": 23.246,
+      "transition": null,
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "saint-denis",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 3,
+      "canonicalTrials": 45,
+      "totalTrials": 48,
+      "extractSeconds": 53.933,
+      "captureSeconds": 52.36330000000075,
+      "prepareSeconds": 1.318699999999255,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 14.782599999997764,
+      "totalSeconds": 68.71979999999702,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 3,
+        "retainedWindows": 1,
+        "retainedCurrentBest": false,
+        "missedTarget": {
+          "window": 1,
+          "trial": 0,
+          "requestedTime": 0.729,
+          "pts": 9216,
+          "time": 0.75,
+          "micros": 750000,
+          "sourcePresentationIndex": 18
+        },
+        "lastActual": {
+          "wallMs": 3405.300000000745,
+          "kind": "rvfc",
+          "time": 0.791667,
+          "micros": 791667,
+          "origin": "rvfc",
+          "target": 3,
+          "presentedFrames": 25
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "horse-statue",
+      "status": "extraction-or-proof-no-result",
+      "windows": 16,
+      "photos": 0,
+      "exactTrials": 0,
+      "canonicalTrials": 48,
+      "totalTrials": 48,
+      "extractSeconds": 38.40420000000298,
+      "captureSeconds": 37.88380000000075,
+      "prepareSeconds": 0.468,
+      "attemptedExtractionSeconds": 51.27120000000298,
+      "proofSeconds": 12.864100000001491,
+      "totalSeconds": 51.272,
+      "transition": {
+        "reason": "Unsupported source table; canonical whole plan",
+        "retainedTrials": 0,
+        "retainedWindows": 0,
+        "retainedCurrentBest": false,
+        "missedTarget": {
+          "window": 0,
+          "trial": 0,
+          "requestedTime": 0.083
+        }
+      },
+      "tableFallback": {
+        "name": "Error",
+        "message": "Nontrivial edit list unsupported"
+      },
+      "error": {
+        "name": "Error",
+        "message": "Independent JPEG or source PTS proof failed",
+        "stack": "Error: Independent JPEG or source PTS proof failed\n    at Module.runCase (http://127.0.0.1:4202/client.mjs:14:106)\n    at async <anonymous>:316:30"
+      },
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "royal-sovereign",
+      "status": "extraction-or-proof-no-result",
+      "windows": 16,
+      "photos": 0,
+      "exactTrials": 0,
+      "canonicalTrials": 48,
+      "totalTrials": 48,
+      "extractSeconds": 31.412300000000744,
+      "captureSeconds": 30.790300000000745,
+      "prepareSeconds": 0.4541000000014901,
+      "attemptedExtractionSeconds": 41.75030000000074,
+      "proofSeconds": 10.3375,
+      "totalSeconds": 41.75789999999851,
+      "transition": {
+        "reason": "Unsupported source table; canonical whole plan",
+        "retainedTrials": 0,
+        "retainedWindows": 0,
+        "retainedCurrentBest": false,
+        "missedTarget": {
+          "window": 0,
+          "trial": 0,
+          "requestedTime": 0.125
+        }
+      },
+      "tableFallback": {
+        "name": "Error",
+        "message": "Nontrivial edit list unsupported"
+      },
+      "error": {
+        "name": "Error",
+        "message": "Independent JPEG or source PTS proof failed",
+        "stack": "Error: Independent JPEG or source PTS proof failed\n    at Module.runCase (http://127.0.0.1:4202/client.mjs:14:106)\n    at async <anonymous>:316:30"
+      },
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "viljandi-ruins",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 40,
+      "canonicalTrials": 8,
+      "totalTrials": 48,
+      "extractSeconds": 20.84189999999851,
+      "captureSeconds": 20.025699999999254,
+      "prepareSeconds": 0.6440999999977648,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 10.119400000002235,
+      "totalSeconds": 30.967300000000744,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 40,
+        "retainedWindows": 13,
+        "retainedCurrentBest": true,
+        "missedTarget": {
+          "window": 13,
+          "trial": 1,
+          "requestedTime": 10.125,
+          "pts": 124416,
+          "time": 10.125,
+          "micros": 10125000,
+          "sourcePresentationIndex": 243
+        },
+        "lastActual": {
+          "wallMs": 14796.70000000298,
+          "kind": "rvfc",
+          "time": 10.166667,
+          "micros": 10166667,
+          "origin": "rvfc",
+          "target": 40,
+          "presentedFrames": 248
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "kakerdi-bog",
+      "status": "extraction-or-proof-no-result",
+      "windows": 16,
+      "photos": 0,
+      "exactTrials": 48,
+      "canonicalTrials": 0,
+      "totalTrials": 48,
+      "extractSeconds": 16.457699999999257,
+      "captureSeconds": 16.003099999997765,
+      "prepareSeconds": 0.3003000000007451,
+      "attemptedExtractionSeconds": 26.309800000000745,
+      "proofSeconds": 9.851699999999255,
+      "totalSeconds": 26.31410000000149,
+      "transition": null,
+      "tableFallback": null,
+      "error": {
+        "name": "Error",
+        "message": "Independent JPEG or source PTS proof failed",
+        "stack": "Error: Independent JPEG or source PTS proof failed\n    at Module.runCase (http://127.0.0.1:4202/client.mjs:14:106)\n    at async <anonymous>:316:30"
+      },
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "fjoloy",
+      "status": "verified-complete-hybrid",
+      "windows": 16,
+      "photos": 16,
+      "exactTrials": 1,
+      "canonicalTrials": 47,
+      "totalTrials": 48,
+      "extractSeconds": 42.199,
+      "captureSeconds": 41.27069999999925,
+      "prepareSeconds": 0.7731000000014902,
+      "attemptedExtractionSeconds": null,
+      "proofSeconds": 11.0645,
+      "totalSeconds": 53.27260000000149,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 1,
+        "retainedWindows": 0,
+        "retainedCurrentBest": true,
+        "missedTarget": {
+          "window": 0,
+          "trial": 1,
+          "requestedTime": 0.375,
+          "pts": 4608,
+          "time": 0.375,
+          "micros": 375000,
+          "sourcePresentationIndex": 9
+        },
+        "lastActual": {
+          "wallMs": 2173.199999999255,
+          "kind": "rvfc",
+          "time": 0.416667,
+          "micros": 416667,
+          "origin": "rvfc",
+          "target": 1,
+          "presentedFrames": 13
+        }
+      },
+      "tableFallback": null,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    }
+  ],
+  "controls": [
+    {
+      "id": "chameleon-flowers",
+      "abortAfterTrials": 1,
+      "abortOnTransition": false,
+      "status": "research-abort-no-result",
+      "error": {
+        "name": "AbortError",
+        "message": "Stopped"
+      },
+      "trials": 1,
+      "transition": null,
+      "photoArrayReturned": false,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    },
+    {
+      "id": "chameleon-flowers",
+      "abortAfterTrials": null,
+      "abortOnTransition": true,
+      "status": "research-abort-no-result",
+      "error": {
+        "name": "AbortError",
+        "message": "Stopped"
+      },
+      "trials": 1,
+      "transition": {
+        "reason": "Exact ceil source frame was skipped",
+        "retainedTrials": 1,
+        "retainedWindows": 0,
+        "retainedCurrentBest": true,
+        "missedTarget": {
+          "window": 0,
+          "trial": 1,
+          "requestedTime": 0.313,
+          "pts": 4096,
+          "time": 0.3333333333333333,
+          "micros": 333333,
+          "sourcePresentationIndex": 8
+        },
+        "lastActual": {
+          "wallMs": 1573.699999999255,
+          "kind": "rvfc",
+          "time": 0.791667,
+          "micros": 791667,
+          "origin": "rvfc",
+          "target": 1,
+          "presentedFrames": 10
+        }
+      },
+      "photoArrayReturned": false,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "context": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 1,
+    "isMobile": true,
+    "hasTouch": true,
+    "userAgent": "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+  },
+  "startedAt": "2026-10-15T11:31:52.899Z",
+  "endedAt": "2026-10-15T11:47:56.640Z",
+  "integrity": "all assertions passed"
+}

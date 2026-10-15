@@ -1,0 +1,165 @@
+{
+  "id": "phone",
+  "variants": [
+    {
+      "tile": 16,
+      "steps": [
+        {
+          "iter": 1,
+          "wallMs": 2924.599999997765
+        },
+        {
+          "iter": 2,
+          "wallMs": 2825.400000002235
+        },
+        {
+          "iter": 3,
+          "wallMs": 2841.7999999970198
+        },
+        {
+          "iter": 4,
+          "wallMs": 3035.2000000029802
+        }
+      ],
+      "files": [
+        {
+          "kind": "params",
+          "file": "phone-tile16-params.bin",
+          "bytes": 960000,
+          "sha256": "a16531993c15f48255f16d354e641186b43aefbc4c8c1cd3b7dc279eef1ea39d"
+        },
+        {
+          "kind": "adamM",
+          "file": "phone-tile16-adamM.bin",
+          "bytes": 960000,
+          "sha256": "901fbe278dea558f33facb31b91633ada4a6760d5ea4e5f3064dd5b05eee46af"
+        },
+        {
+          "kind": "adamV",
+          "file": "phone-tile16-adamV.bin",
+          "bytes": 960000,
+          "sha256": "3eca6cb88fd2b0e11832ddeba07f908237617bd17522c4638ab7a7c374bef665"
+        },
+        {
+          "kind": "gradP",
+          "file": "phone-tile16-gradP.bin",
+          "bytes": 960000,
+          "sha256": "b9163d03c43083a18e6101539b555cb5e363eed61fa4b3a3b54f50ae60eb5b52"
+        },
+        {
+          "kind": "gradF",
+          "file": "phone-tile16-gradF.bin",
+          "bytes": 960000,
+          "sha256": "8476d1af9ba405063b304b60f76a38324b8ca3a744bcd165d9e82dbfacb0f5d4"
+        },
+        {
+          "kind": "out",
+          "file": "phone-tile16-out.bin",
+          "bytes": 921600,
+          "sha256": "8221194f925958db5aa64353da8632ad562069f90c9c637187f3638a2fc9dccd"
+        },
+        {
+          "kind": "stats",
+          "file": "phone-tile16-stats.bin",
+          "bytes": 16,
+          "sha256": "10d5ef9628698856a3901db32b2aef8688345b7f998934133ce95f374d9ea806"
+        }
+      ]
+    },
+    {
+      "tile": 8,
+      "steps": [
+        {
+          "iter": 1,
+          "wallMs": 1771.0999999977648
+        },
+        {
+          "iter": 2,
+          "wallMs": 1898.300000000745
+        },
+        {
+          "iter": 3,
+          "wallMs": 1732.9000000022352
+        },
+        {
+          "iter": 4,
+          "wallMs": 1803
+        }
+      ],
+      "files": [
+        {
+          "kind": "params",
+          "file": "phone-tile8-params.bin",
+          "bytes": 960000,
+          "sha256": "a16531993c15f48255f16d354e641186b43aefbc4c8c1cd3b7dc279eef1ea39d"
+        },
+        {
+          "kind": "adamM",
+          "file": "phone-tile8-adamM.bin",
+          "bytes": 960000,
+          "sha256": "901fbe278dea558f33facb31b91633ada4a6760d5ea4e5f3064dd5b05eee46af"
+        },
+        {
+          "kind": "adamV",
+          "file": "phone-tile8-adamV.bin",
+          "bytes": 960000,
+          "sha256": "3eca6cb88fd2b0e11832ddeba07f908237617bd17522c4638ab7a7c374bef665"
+        },
+        {
+          "kind": "gradP",
+          "file": "phone-tile8-gradP.bin",
+          "bytes": 960000,
+          "sha256": "b9163d03c43083a18e6101539b555cb5e363eed61fa4b3a3b54f50ae60eb5b52"
+        },
+        {
+          "kind": "gradF",
+          "file": "phone-tile8-gradF.bin",
+          "bytes": 960000,
+          "sha256": "8476d1af9ba405063b304b60f76a38324b8ca3a744bcd165d9e82dbfacb0f5d4"
+        },
+        {
+          "kind": "out",
+          "file": "phone-tile8-out.bin",
+          "bytes": 921600,
+          "sha256": "8221194f925958db5aa64353da8632ad562069f90c9c637187f3638a2fc9dccd"
+        },
+        {
+          "kind": "stats",
+          "file": "phone-tile8-stats.bin",
+          "bytes": 16,
+          "sha256": "10d5ef9628698856a3901db32b2aef8688345b7f998934133ce95f374d9ea806"
+        }
+      ]
+    }
+  ],
+  "parity": {
+    "params": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "adamM": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "adamV": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "gradP": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "gradF": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "out": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "stats": {
+      "byteExact": true,
+      "differentBytes": 0
+    }
+  }
+}

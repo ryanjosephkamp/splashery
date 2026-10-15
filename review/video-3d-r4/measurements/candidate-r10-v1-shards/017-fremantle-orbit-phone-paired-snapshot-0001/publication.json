@@ -1,0 +1,61 @@
+{
+  "created": "2026-10-15T12:17:51.931Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/017-fremantle-orbit-phone-paired",
+  "runSha256": "56941dd06dffbb8aec256e8014993f98e4ee947fe8021c7abd93c3b2ce0faa55",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "cases": [
+    {
+      "id": "fremantle-orbit",
+      "profile": "phone",
+      "rowFingerprint": "cf5fa9e46f5e39e602569617e86cca3852f5f22a0739153f755e06d250a39242",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 10615,
+          "sha256": "4dc198d077c11b0e74c8cee6bdce1aa0c2567bacba7f24e7d3186009ffcf9670"
+        },
+        {
+          "file": "model.json",
+          "bytes": 18706,
+          "sha256": "56264735f9ed6ea4b348ed5589bdf8c0d477da7f40b7309c79178e02fb2515bf"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1077671,
+          "sha256": "370d730a05dfc93dcd87b7b60db1cc553a40ee7e9a6498291aa3a0acfa52d36e"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 135412,
+          "sha256": "2f7eef3bdffc8aa2143f5e08e83d8654ca34eb1a242ebc36b66ad55ff7768c80"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 212252,
+          "sha256": "234a9ce663c189aff5fe2b8dd3071d0efc1e646739a62dc5f41e3bc41da03671"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 208019,
+          "sha256": "235a78c951d3258de5987d0005773cff9f4c8d68d9c65603a3c1f2e5d9ae68b9"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 219638,
+          "sha256": "dad41b70f6ca2495bae8354ad84aa0da5f4665e38a4d7348e5d368a72cebfb35"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 217162,
+          "sha256": "753f5e8e33c9c7e8138cfc858d7e51dc3de864e8bb6b336de039abfc7667ef60"
+        },
+        {
+          "file": "result.json",
+          "bytes": 4679,
+          "sha256": "f3734037e3483e44e21433cb9eff972e741e41f78b5371d3fd38a0de69381468"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

@@ -1,0 +1,1335 @@
+{
+  "startedAt": "2026-10-15T10:54:03.831Z",
+  "notice": "Diagnostic under concurrent native/probe load. No isolated/native-device timing claim. One local browser; no device/camera request, upload, source edit or photo alteration.",
+  "browserExecutable": "/usr/bin/chromium",
+  "executableSha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779",
+  "args": [
+    "--use-angle=swiftshader",
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+    "--enable-webgl",
+    "--enable-unsafe-webgpu",
+    "--enable-features=Vulkan,WebGPU",
+    "--use-webgpu-adapter=swiftshader",
+    "--use-vulkan=swiftshader"
+  ],
+  "node": "v24.19.0",
+  "cpuQuota": "400000 100000",
+  "hostLoadAtStart": [
+    20.53,
+    19.12,
+    19.04
+  ],
+  "planned": [
+    "b-sar",
+    "chameleon-flowers",
+    "cat-plays",
+    "fremantle-orbit"
+  ],
+  "inputBindings": [
+    {
+      "id": "b-sar",
+      "file": "/workspace/v3d-r4-media/fast-extract-integration-r1/b-sar.mp4",
+      "sha256": "32006544236dcf65f9d6ca36178d762f2a80eb6513363b119b622d60cf5e4ace"
+    },
+    {
+      "id": "chameleon-flowers",
+      "file": "/workspace/v3d-r4-media/corpus/chameleon-flowers.mp4",
+      "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e"
+    },
+    {
+      "id": "cat-plays",
+      "file": "/workspace/v3d-r4-media/corpus/cat-plays.mp4",
+      "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085"
+    },
+    {
+      "id": "fremantle-orbit",
+      "file": "/workspace/v3d-r4-media/corpus/fremantle-orbit.mp4",
+      "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747"
+    }
+  ],
+  "sourceBindings": [
+    {
+      "url": "/client.mjs",
+      "file": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/client.mjs",
+      "sha256": "a85313f025a00ef84d62011fd3acd9b3ad66213244297f9f91784fdedefbb42a"
+    },
+    {
+      "url": "/demux.mjs",
+      "file": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/demux.mjs",
+      "sha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d"
+    },
+    {
+      "url": "/src/extract.js",
+      "file": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/src/extract.js",
+      "sha256": "4287f7f23f17f5dd560a21a220e94a1621d4755a5b15dec184ce70598046008c"
+    },
+    {
+      "url": "/src/frames.js",
+      "file": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/src/frames.js",
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "url": "/src/mp4.js",
+      "file": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/src/mp4.js",
+      "sha256": "5a3ee62186ba8bb3c5b4ee246d45b084ab6de02ccbbb44a2d96f8aabcf0fe7aa"
+    },
+    {
+      "url": "/src/fast-extract.js",
+      "file": "/workspace/v3d-r4-media/mp4-video-bridge-research-r1/src/fast-extract.js",
+      "sha256": "5ade500e601eda4e5b65142bd8946bbe7adad935ce8bc0b01435227d0c43dddd"
+    }
+  ],
+  "results": [
+    {
+      "id": "b-sar",
+      "side": 160,
+      "requestedFractions": [
+        0.2,
+        0.5,
+        0.8
+      ],
+      "api": {
+        "MediaStreamTrackGenerator": "function",
+        "VideoTrackGenerator": "undefined"
+      },
+      "samples": [
+        {
+          "requestedTime": 0.4,
+          "sourcePresentedTime": 0.8,
+          "sourceTimestamp": 800000,
+          "sourcePacket": {
+            "offset": 16277,
+            "size": 664,
+            "dts": 11264,
+            "pts": 12288,
+            "duration": 1024,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "01c5ff34633166cc69b55c180da4cbcdb5adc90cd9ee62cf93264d1a41a946e6",
+            "jpegSha256": "a087cb239fde26c6fb4c43f46b4d3d6dd06e34d5a2eef2a1ea902d99c4b0f127",
+            "jpegBytes": 5945,
+            "rgbaFile": "b-sar/0-reference.rgba",
+            "jpegFile": "b-sar/0-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 800000,
+            "codedWidth": 192,
+            "codedHeight": 130,
+            "displayWidth": 256,
+            "displayHeight": 128,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 192,
+              "height": 128,
+              "top": 0,
+              "right": 192,
+              "bottom": 128,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "56ef2fb89644aa679f4895a3741f1e39f1a067104d377601635b9e73fa503dcc",
+            "jpegSha256": "6a5918b3eb9472c7c31be7eed724dad72d744c8efcac7f8f0393f0f47ffb14cd",
+            "jpegBytes": 5903,
+            "rgbaFile": "b-sar/0-direct.rgba",
+            "jpegFile": "b-sar/0-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 7503.4,
+            "expectedDisplayTime": 7514,
+            "height": 128,
+            "mediaTime": 0.8,
+            "presentationTime": 7514,
+            "presentedFrames": 1,
+            "width": 192
+          },
+          "bridgeNatural": {
+            "width": 256,
+            "height": 128
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "c5275bdb3a59fd45a5d21cb798a1138243477aec6cd7549b6585f6aac7ce49ff",
+            "jpegSha256": "8910b34ea1ef242353a64e6d6eedb7636a17dfa4c818f504f47a7a766787cf0a",
+            "jpegBytes": 5945,
+            "rgbaFile": "b-sar/0-bridge.rgba",
+            "jpegFile": "b-sar/0-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        },
+        {
+          "requestedTime": 1,
+          "sourcePresentedTime": 1.066667,
+          "sourceTimestamp": 1066667,
+          "sourcePacket": {
+            "offset": 16941,
+            "size": 1392,
+            "dts": 12288,
+            "pts": 16384,
+            "duration": 1024,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "fc4b5e3d560746c3550899471935b693adf577b21b1e43b99829db60987a5f28",
+            "jpegSha256": "bce136e29035701170465b53eb572616317b7bdff166e51ae1562159c555c363",
+            "jpegBytes": 6081,
+            "rgbaFile": "b-sar/1-reference.rgba",
+            "jpegFile": "b-sar/1-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 1066667,
+            "codedWidth": 192,
+            "codedHeight": 130,
+            "displayWidth": 256,
+            "displayHeight": 128,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 192,
+              "height": 128,
+              "top": 0,
+              "right": 192,
+              "bottom": 128,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "72a387dc14c46c3c706159b2bb394ce2c1cc9122e2b1d86a8c929e1525e6a608",
+            "jpegSha256": "c43097325fa1f1fdb5348cbc573f9d08506db3de9fa58a0e7821af3b9ddbe7cc",
+            "jpegBytes": 6030,
+            "rgbaFile": "b-sar/1-direct.rgba",
+            "jpegFile": "b-sar/1-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 7853.4,
+            "expectedDisplayTime": 7853.4,
+            "height": 128,
+            "mediaTime": 1.066667,
+            "presentationTime": 7836.7,
+            "presentedFrames": 2,
+            "width": 192
+          },
+          "bridgeNatural": {
+            "width": 256,
+            "height": 128
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "c969429052485a58242dc1655ef71770517e11dd71450425d682e12d8b9d4310",
+            "jpegSha256": "77e364afb32797c9dc2f71a42ff9fa36f06387fb03f92bbd1a8ae9102a1c7bc5",
+            "jpegBytes": 6085,
+            "rgbaFile": "b-sar/1-bridge.rgba",
+            "jpegFile": "b-sar/1-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        },
+        {
+          "requestedTime": 1.6,
+          "sourcePresentedTime": 1.666667,
+          "sourceTimestamp": 1666667,
+          "sourcePacket": {
+            "offset": 24561,
+            "size": 1352,
+            "dts": 21504,
+            "pts": 25600,
+            "duration": 1024,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "aa1e40a65c596976a763ad05618d48d2bafc9fd2f21a587e44cad4a9e8a2ff6d",
+            "jpegSha256": "9d7504f90badf7e475dbe1187ede549eb9db0a5d256cb9a8dadc27b801717770",
+            "jpegBytes": 5857,
+            "rgbaFile": "b-sar/2-reference.rgba",
+            "jpegFile": "b-sar/2-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 1666667,
+            "codedWidth": 192,
+            "codedHeight": 130,
+            "displayWidth": 256,
+            "displayHeight": 128,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 192,
+              "height": 128,
+              "top": 0,
+              "right": 192,
+              "bottom": 128,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "2cde1caa8c5324eb7c9913002ba4673149263f0f9ba359fddc59ef3ee0b82b21",
+            "jpegSha256": "cf41d396d5a1c4b5af146badaa035c2b7fd11c317d0168c90f150bc5518537db",
+            "jpegBytes": 5843,
+            "rgbaFile": "b-sar/2-direct.rgba",
+            "jpegFile": "b-sar/2-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 8003.5,
+            "expectedDisplayTime": 7853.4,
+            "height": 128,
+            "mediaTime": 1.666667,
+            "presentationTime": 8003.5,
+            "presentedFrames": 3,
+            "width": 192
+          },
+          "bridgeNatural": {
+            "width": 256,
+            "height": 128
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "4f02fa7b36f72e76a933a1edf8ad6645785a18e32afce265a37f3bbf4af133ca",
+            "jpegSha256": "514375cbc0b3501029c02b949d6d0c9587bda9805935d15c683bdef58ba8d6ce",
+            "jpegBytes": 5870,
+            "rgbaFile": "b-sar/2-bridge.rgba",
+            "jpegFile": "b-sar/2-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        }
+      ],
+      "counts": {
+        "framesDecoded": 30,
+        "framesKept": 3,
+        "framesClosed": 33,
+        "bridgeWrites": 3,
+        "rvfcCanceled": 0
+      },
+      "inputSha256": "32006544236dcf65f9d6ca36178d762f2a80eb6513363b119b622d60cf5e4ace",
+      "sourceNatural": {
+        "width": 256,
+        "height": 128,
+        "duration": 2
+      },
+      "mp4": {
+        "timescale": 15360,
+        "editOffset": 2048,
+        "sampleCount": 30,
+        "config": {
+          "codec": "avc1.64000a",
+          "codedWidth": 192,
+          "codedHeight": 128,
+          "displayAspectWidth": 2,
+          "displayAspectHeight": 1
+        },
+        "sar": {
+          "hSpacing": 4,
+          "vSpacing": 3
+        },
+        "trackDisplay": {
+          "width": 256,
+          "height": 128,
+          "widthFixed16": 16777216,
+          "heightFixed16": 8388608
+        },
+        "color": null
+      },
+      "crop": {
+        "sx": 7,
+        "sw": 243
+      },
+      "output": {
+        "width": 160,
+        "height": 84
+      },
+      "colorConfig": {
+        "primaries": "smpte170m",
+        "transfer": "smpte170m",
+        "matrix": "smpte170m",
+        "fullRange": false
+      },
+      "decodeWallMs": 91,
+      "bridgeApi": "MediaStreamTrackGenerator",
+      "bridgeAllRgbaExact": false,
+      "bridgeAllJpegExact": false,
+      "bridgeOffsets": [
+        0,
+        0,
+        0
+      ],
+      "status": "completed",
+      "elapsedMs": 7536.699999999255,
+      "cleanup": {
+        "kept": 0,
+        "rvfcPending": 0,
+        "decoderClosed": true,
+        "trackState": "ended"
+      },
+      "hostWallMs": 7793
+    },
+    {
+      "id": "chameleon-flowers",
+      "side": 320,
+      "requestedFractions": [
+        0.2,
+        0.5,
+        0.8
+      ],
+      "api": {
+        "MediaStreamTrackGenerator": "function",
+        "VideoTrackGenerator": "undefined"
+      },
+      "samples": [
+        {
+          "requestedTime": 2,
+          "sourcePresentedTime": 2.041667,
+          "sourceTimestamp": 2041667,
+          "sourcePacket": {
+            "offset": 197959,
+            "size": 2670,
+            "dts": 24064,
+            "pts": 25088,
+            "duration": 512,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "5b152cbdae9f13d164a5b7bb07fff798b04fa204627ce96cb5ea8feaf80b7f06",
+            "jpegSha256": "b5c372e5b274e7c56f623eb5fb5c0b02ee90ac2ca9009f26cfc4f4d8e62e3525",
+            "jpegBytes": 17920,
+            "rgbaFile": "chameleon-flowers/0-reference.rgba",
+            "jpegFile": "chameleon-flowers/0-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 2041667,
+            "codedWidth": 864,
+            "codedHeight": 482,
+            "displayWidth": 854,
+            "displayHeight": 481,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 854,
+              "height": 480,
+              "top": 0,
+              "right": 854,
+              "bottom": 480,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "c152be5bd02feba6bc2d4ad5f072629fb134ef6df59c468b3481336cc55e187a",
+            "jpegSha256": "ee09b0494c9a5c5ad20b6237c3e760c0bcbd76cb345cd25d183dc280acb1d1ec",
+            "jpegBytes": 17740,
+            "rgbaFile": "chameleon-flowers/0-direct.rgba",
+            "jpegFile": "chameleon-flowers/0-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 12586.6,
+            "expectedDisplayTime": 12562.1,
+            "height": 480,
+            "mediaTime": 2.041667,
+            "presentationTime": 12562.1,
+            "presentedFrames": 1,
+            "width": 854
+          },
+          "bridgeNatural": {
+            "width": 854,
+            "height": 481
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "299af016918adec1c76db1812d60e5f5efd9dfb480debd3c1b574b9b648175b1",
+            "jpegSha256": "eab69f8fffb57101c6a0133412d90b78fb0a9bfbb93e4eb8b9457d9f581f3ba3",
+            "jpegBytes": 17931,
+            "rgbaFile": "chameleon-flowers/0-bridge.rgba",
+            "jpegFile": "chameleon-flowers/0-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        },
+        {
+          "requestedTime": 5,
+          "sourcePresentedTime": 5.041667,
+          "sourceTimestamp": 5041667,
+          "sourcePacket": {
+            "offset": 437530,
+            "size": 1257,
+            "dts": 61440,
+            "pts": 61952,
+            "duration": 512,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "e19178f56d8ac11c1ac22daf3b9f8f3e47f4d877174a0d363d1eb011a849015d",
+            "jpegSha256": "17e6e9b352dbb92803eb162483919c93381a20640fe4b2622cf8e23f817f2b6f",
+            "jpegBytes": 18181,
+            "rgbaFile": "chameleon-flowers/1-reference.rgba",
+            "jpegFile": "chameleon-flowers/1-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 5041667,
+            "codedWidth": 864,
+            "codedHeight": 482,
+            "displayWidth": 854,
+            "displayHeight": 481,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 854,
+              "height": 480,
+              "top": 0,
+              "right": 854,
+              "bottom": 480,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "e95f6d0385164f33c91d685717ccc0e5d5da0af7427dddd8f518ca9a549f23a6",
+            "jpegSha256": "f5e6142ea621fe97794594b4aaa3ea865d4275c200b1d4a8dd52bfe75066d441",
+            "jpegBytes": 17975,
+            "rgbaFile": "chameleon-flowers/1-direct.rgba",
+            "jpegFile": "chameleon-flowers/1-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 13003.2,
+            "expectedDisplayTime": 12986.6,
+            "height": 480,
+            "mediaTime": 5.041667,
+            "presentationTime": 13002.2,
+            "presentedFrames": 2,
+            "width": 854
+          },
+          "bridgeNatural": {
+            "width": 854,
+            "height": 481
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "2122da275b96a97dbb3164d2592bebc333569cd4275ec48d082bb1b1ae098737",
+            "jpegSha256": "a47330aeed7003021743ed7fb960b4272fbb393b4adf078059ef4d6a036c1c5a",
+            "jpegBytes": 18187,
+            "rgbaFile": "chameleon-flowers/1-bridge.rgba",
+            "jpegFile": "chameleon-flowers/1-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        },
+        {
+          "requestedTime": 8,
+          "sourcePresentedTime": 8.041667,
+          "sourceTimestamp": 8041667,
+          "sourcePacket": {
+            "offset": 618329,
+            "size": 592,
+            "dts": 98304,
+            "pts": 98816,
+            "duration": 512,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "a4eb3400f37a40d43688d3ec919436977fd61abcbee2a2fa5e92d28a0f78165f",
+            "jpegSha256": "36e67c18dc1f0cef598d3a30dcc824abf0a27682b3d7465c6aac0ca37d5c38f1",
+            "jpegBytes": 14816,
+            "rgbaFile": "chameleon-flowers/2-reference.rgba",
+            "jpegFile": "chameleon-flowers/2-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 8041667,
+            "codedWidth": 864,
+            "codedHeight": 482,
+            "displayWidth": 854,
+            "displayHeight": 481,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 854,
+              "height": 480,
+              "top": 0,
+              "right": 854,
+              "bottom": 480,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "0913f19bd0870a8f282b9d298b6923caea68ae93044e41d19e49dd79ba1c1a60",
+            "jpegSha256": "d9ea6ae3ed10740f0d6dd0a221ecec3c3c27cfa914378f741a1db2dd231b5d4d",
+            "jpegBytes": 14705,
+            "rgbaFile": "chameleon-flowers/2-direct.rgba",
+            "jpegFile": "chameleon-flowers/2-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 13319.9,
+            "expectedDisplayTime": 13036.6,
+            "height": 480,
+            "mediaTime": 8.041667,
+            "presentationTime": 13301.3,
+            "presentedFrames": 3,
+            "width": 854
+          },
+          "bridgeNatural": {
+            "width": 854,
+            "height": 481
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "8240f5785ceada0ce7dde8919658d40bd6fefa9d36b8aa3d2a22074d314fcac6",
+            "jpegSha256": "f2a15847c42b8bbc83b8eb509087eb0872006d446960d64bc2af6352399e9d02",
+            "jpegBytes": 14822,
+            "rgbaFile": "chameleon-flowers/2-bridge.rgba",
+            "jpegFile": "chameleon-flowers/2-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        }
+      ],
+      "counts": {
+        "framesDecoded": 240,
+        "framesKept": 3,
+        "framesClosed": 243,
+        "bridgeWrites": 3,
+        "rvfcCanceled": 0
+      },
+      "inputSha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+      "sourceNatural": {
+        "width": 854,
+        "height": 481,
+        "duration": 10
+      },
+      "mp4": {
+        "timescale": 12288,
+        "editOffset": 1024,
+        "sampleCount": 240,
+        "config": {
+          "codec": "avc1.64001e",
+          "codedWidth": 854,
+          "codedHeight": 480,
+          "displayAspectWidth": 853,
+          "displayAspectHeight": 480
+        },
+        "sar": {
+          "hSpacing": 853,
+          "vSpacing": 854
+        },
+        "trackDisplay": {
+          "width": 853,
+          "height": 480,
+          "widthFixed16": 55902208,
+          "heightFixed16": 31457280
+        },
+        "color": null
+      },
+      "crop": {
+        "sx": 0,
+        "sw": 854
+      },
+      "output": {
+        "width": 320,
+        "height": 180
+      },
+      "colorConfig": {
+        "primaries": "smpte170m",
+        "transfer": "smpte170m",
+        "matrix": "smpte170m",
+        "fullRange": false
+      },
+      "decodeWallMs": 1012.6000000014901,
+      "bridgeApi": "MediaStreamTrackGenerator",
+      "bridgeAllRgbaExact": false,
+      "bridgeAllJpegExact": false,
+      "bridgeOffsets": [
+        0,
+        0,
+        0
+      ],
+      "status": "completed",
+      "elapsedMs": 5302,
+      "cleanup": {
+        "kept": 0,
+        "rvfcPending": 0,
+        "decoderClosed": true,
+        "trackState": "ended"
+      },
+      "hostWallMs": 5601
+    },
+    {
+      "id": "cat-plays",
+      "side": 320,
+      "requestedFractions": [
+        0.2,
+        0.5,
+        0.8
+      ],
+      "api": {
+        "MediaStreamTrackGenerator": "function",
+        "VideoTrackGenerator": "undefined"
+      },
+      "samples": [
+        {
+          "requestedTime": 1.6,
+          "sourcePresentedTime": 1.625,
+          "sourceTimestamp": 1625000,
+          "sourcePacket": {
+            "offset": 162336,
+            "size": 893,
+            "dts": 19456,
+            "pts": 19968,
+            "duration": 512,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "8c343606dae0162935806059b77f8f67ec07f036ed69e81742a2168e02328d0f",
+            "jpegSha256": "b20c8d8506831fcd776792fdbd3a3f4e3d785aee39d2344f5383eca97a3a3446",
+            "jpegBytes": 24689,
+            "rgbaFile": "cat-plays/0-reference.rgba",
+            "jpegFile": "cat-plays/0-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 1625000,
+            "codedWidth": 272,
+            "codedHeight": 482,
+            "displayWidth": 270,
+            "displayHeight": 480,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 270,
+              "height": 480,
+              "top": 0,
+              "right": 270,
+              "bottom": 480,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "d67ca2fc1d6be6d059525647732449c2667066999c25fc0f89cd356ae56c65bb",
+            "jpegSha256": "d6823671fa62ee1b0f7b5a6b971aaf35bbc5c6f63e648d130d790ac98a7a312c",
+            "jpegBytes": 24714,
+            "rgbaFile": "cat-plays/0-direct.rgba",
+            "jpegFile": "cat-plays/0-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 17186.5,
+            "expectedDisplayTime": 17198.2,
+            "height": 480,
+            "mediaTime": 1.625,
+            "presentationTime": 17198.2,
+            "presentedFrames": 1,
+            "width": 270
+          },
+          "bridgeNatural": {
+            "width": 270,
+            "height": 480
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "2967553b72cc17ef3373cb56102f198913f1f472769df0d4d9bcc5d3a71fd4ae",
+            "jpegSha256": "85cc422a8993ba3fc3136dab962c8cd4379779c845e10fb94ca59e5d69700c21",
+            "jpegBytes": 24702,
+            "rgbaFile": "cat-plays/0-bridge.rgba",
+            "jpegFile": "cat-plays/0-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        },
+        {
+          "requestedTime": 4,
+          "sourcePresentedTime": 4.083333,
+          "sourceTimestamp": 4083333,
+          "sourcePacket": {
+            "offset": 354738,
+            "size": 863,
+            "dts": 49152,
+            "pts": 50176,
+            "duration": 512,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "61084c9722c32f5823681f0681928c2a3e4886e56efaad2e54ab17897e991cdf",
+            "jpegSha256": "cab0fdfc6aa0d454eb3fe85fd3ef2f6cfec46767fd81bc5a457e78b4e6a5b7c8",
+            "jpegBytes": 24801,
+            "rgbaFile": "cat-plays/1-reference.rgba",
+            "jpegFile": "cat-plays/1-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 4083333,
+            "codedWidth": 272,
+            "codedHeight": 482,
+            "displayWidth": 270,
+            "displayHeight": 480,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 270,
+              "height": 480,
+              "top": 0,
+              "right": 270,
+              "bottom": 480,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "dada938bb92a8c395757316772bab40e9cad6e796a0e599a9438a566888af61d",
+            "jpegSha256": "d6201b6ced0dbbc7006a63b40fbcc08cd04545928f2d1d8308de9e9ef9e962a4",
+            "jpegBytes": 24779,
+            "rgbaFile": "cat-plays/1-direct.rgba",
+            "jpegFile": "cat-plays/1-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 17603.1,
+            "expectedDisplayTime": 17619.7,
+            "height": 480,
+            "mediaTime": 4.083333,
+            "presentationTime": 17603.1,
+            "presentedFrames": 2,
+            "width": 270
+          },
+          "bridgeNatural": {
+            "width": 270,
+            "height": 480
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "faacf7c382f450bae0fe31ce683f92e2efe8a60f9146d058b7e5a70a1220b0e6",
+            "jpegSha256": "a4ffa5f0fcb228d980c0a9e68bb5bfe619e672bbc9e1d985c6dab84a9207f2f1",
+            "jpegBytes": 24795,
+            "rgbaFile": "cat-plays/1-bridge.rgba",
+            "jpegFile": "cat-plays/1-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        },
+        {
+          "requestedTime": 6.4,
+          "sourcePresentedTime": 6.416667,
+          "sourceTimestamp": 6416667,
+          "sourcePacket": {
+            "offset": 541338,
+            "size": 170,
+            "dts": 78336,
+            "pts": 78848,
+            "duration": 512,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "f1b4cd9bf48218d8533ec6338232010f89d12b17842694bb1b403b591880bb95",
+            "jpegSha256": "15590c47fa09dad2374fe95d3dae6b514875a1694f1b93cb6939dcf65e7b39df",
+            "jpegBytes": 25384,
+            "rgbaFile": "cat-plays/2-reference.rgba",
+            "jpegFile": "cat-plays/2-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 6416667,
+            "codedWidth": 272,
+            "codedHeight": 482,
+            "displayWidth": 270,
+            "displayHeight": 480,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 270,
+              "height": 480,
+              "top": 0,
+              "right": 270,
+              "bottom": 480,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "smpte170m",
+              "primaries": "smpte170m",
+              "transfer": "smpte170m"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "99081eb0b253c5b1293de766fd06984ff7d9e3aeebf38a09ac32f327e20f29d7",
+            "jpegSha256": "9b8c5053ea2e709f11db98290b8ad690a9bd09a9602c9af25f60c86bb4407f75",
+            "jpegBytes": 25395,
+            "rgbaFile": "cat-plays/2-direct.rgba",
+            "jpegFile": "cat-plays/2-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 18036.4,
+            "expectedDisplayTime": 17619.7,
+            "height": 480,
+            "mediaTime": 6.416667,
+            "presentationTime": 18022.2,
+            "presentedFrames": 3,
+            "width": 270
+          },
+          "bridgeNatural": {
+            "width": 270,
+            "height": 480
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "60eb67fc5c39b924d3eb4f5ff73d33a4a30da7659127b794c1674a41d1e5c137",
+            "jpegSha256": "51df9036abf74e255b40e53a1e7d57aa87774ec492212e1a9b0e6a03601bff2e",
+            "jpegBytes": 25388,
+            "rgbaFile": "cat-plays/2-bridge.rgba",
+            "jpegFile": "cat-plays/2-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        }
+      ],
+      "counts": {
+        "framesDecoded": 192,
+        "framesKept": 3,
+        "framesClosed": 195,
+        "bridgeWrites": 3,
+        "rvfcCanceled": 0
+      },
+      "inputSha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+      "sourceNatural": {
+        "width": 270,
+        "height": 480,
+        "duration": 8
+      },
+      "mp4": {
+        "timescale": 12288,
+        "editOffset": 1024,
+        "sampleCount": 192,
+        "config": {
+          "codec": "avc1.640015",
+          "codedWidth": 270,
+          "codedHeight": 480,
+          "displayAspectWidth": 9,
+          "displayAspectHeight": 16
+        },
+        "sar": {
+          "hSpacing": 1,
+          "vSpacing": 1
+        },
+        "trackDisplay": {
+          "width": 270,
+          "height": 480,
+          "widthFixed16": 17694720,
+          "heightFixed16": 31457280
+        },
+        "color": null
+      },
+      "crop": {
+        "sx": 0,
+        "sw": 270
+      },
+      "output": {
+        "width": 180,
+        "height": 320
+      },
+      "colorConfig": {
+        "primaries": "smpte170m",
+        "transfer": "smpte170m",
+        "matrix": "smpte170m",
+        "fullRange": false
+      },
+      "decodeWallMs": 1198.800000000745,
+      "bridgeApi": "MediaStreamTrackGenerator",
+      "bridgeAllRgbaExact": false,
+      "bridgeAllJpegExact": false,
+      "bridgeOffsets": [
+        0,
+        0,
+        0
+      ],
+      "status": "completed",
+      "elapsedMs": 4519.89999999851,
+      "cleanup": {
+        "kept": 0,
+        "rvfcPending": 0,
+        "decoderClosed": true,
+        "trackState": "ended"
+      },
+      "hostWallMs": 5502
+    },
+    {
+      "id": "fremantle-orbit",
+      "side": 320,
+      "requestedFractions": [
+        0.2,
+        0.5,
+        0.8
+      ],
+      "api": {
+        "MediaStreamTrackGenerator": "function",
+        "VideoTrackGenerator": "undefined"
+      },
+      "samples": [
+        {
+          "requestedTime": 2.4000000000000004,
+          "sourcePresentedTime": 2.416667,
+          "sourceTimestamp": 2416667,
+          "sourcePacket": {
+            "offset": 289506,
+            "size": 799,
+            "dts": 29184,
+            "pts": 29696,
+            "duration": 512,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "a71dd856b160e5cc1c90ed3e74ccac613f1d933923a58c31381062901fd18c71",
+            "jpegSha256": "ecfc1128031ee2d62f4b06b1c3ddab10fe474023b7fa08b7747cd762c787792e",
+            "jpegBytes": 12376,
+            "rgbaFile": "fremantle-orbit/0-reference.rgba",
+            "jpegFile": "fremantle-orbit/0-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 2416667,
+            "codedWidth": 864,
+            "codedHeight": 482,
+            "displayWidth": 854,
+            "displayHeight": 481,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 854,
+              "height": 480,
+              "top": 0,
+              "right": 854,
+              "bottom": 480,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "bt709",
+              "primaries": "bt709",
+              "transfer": "bt709"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "a6cb02068f37994da3d288936b93aa7aace46cca001d51d1bb83e71783c13037",
+            "jpegSha256": "0e325d0525c14ca2733fd563f4613caf876133bdaa056e7250369131e451c10a",
+            "jpegBytes": 12045,
+            "rgbaFile": "fremantle-orbit/0-direct.rgba",
+            "jpegFile": "fremantle-orbit/0-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 25302.8,
+            "expectedDisplayTime": 25301.8,
+            "height": 480,
+            "mediaTime": 2.416667,
+            "presentationTime": 25301.8,
+            "presentedFrames": 1,
+            "width": 854
+          },
+          "bridgeNatural": {
+            "width": 854,
+            "height": 481
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "786e495f3aa697238c81119e5c5c75d54080aa5f04da3dba4514692091316a39",
+            "jpegSha256": "04ae1edcc2673f23efd3542cb44da494b5ed50a79d2b4ece337cbbb623aa3a4a",
+            "jpegBytes": 12388,
+            "rgbaFile": "fremantle-orbit/0-bridge.rgba",
+            "jpegFile": "fremantle-orbit/0-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        },
+        {
+          "requestedTime": 6,
+          "sourcePresentedTime": 6.041667,
+          "sourceTimestamp": 6041667,
+          "sourcePacket": {
+            "offset": 645313,
+            "size": 2424,
+            "dts": 73216,
+            "pts": 74240,
+            "duration": 512,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "ec9e5849637fd1e3453f2dd91842d4f442bc9fe117c61e31b1d2e971905e75bc",
+            "jpegSha256": "6a08b987699689760d45b5d515bb856646c50a9a698a7c4388a1675f4361b20e",
+            "jpegBytes": 11505,
+            "rgbaFile": "fremantle-orbit/1-reference.rgba",
+            "jpegFile": "fremantle-orbit/1-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 6041667,
+            "codedWidth": 864,
+            "codedHeight": 482,
+            "displayWidth": 854,
+            "displayHeight": 481,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 854,
+              "height": 480,
+              "top": 0,
+              "right": 854,
+              "bottom": 480,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "bt709",
+              "primaries": "bt709",
+              "transfer": "bt709"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "d02fc9d9de5876d2d1820cd52ac1a61c815b69acf6ffe6ccfbf7fa28e3605d9e",
+            "jpegSha256": "c8f9bcd77606dac191cdbdbc631cf9d152c54128d5a1ffef57a6f499db1b39e4",
+            "jpegBytes": 11235,
+            "rgbaFile": "fremantle-orbit/1-direct.rgba",
+            "jpegFile": "fremantle-orbit/1-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 25652.8,
+            "expectedDisplayTime": 25669.4,
+            "height": 480,
+            "mediaTime": 6.041667,
+            "presentationTime": 25646.1,
+            "presentedFrames": 2,
+            "width": 854
+          },
+          "bridgeNatural": {
+            "width": 854,
+            "height": 481
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "1e6c7466ec15b0abfffd29b33446460a3d02b9ab7ef871e53ae4a642602fb870",
+            "jpegSha256": "4c11a8992db350857d60db80e12f36bb74aaf416451659fe924e8e11add47dfc",
+            "jpegBytes": 11502,
+            "rgbaFile": "fremantle-orbit/1-bridge.rgba",
+            "jpegFile": "fremantle-orbit/1-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        },
+        {
+          "requestedTime": 9.600000000000001,
+          "sourcePresentedTime": 9.625,
+          "sourceTimestamp": 9625000,
+          "sourcePacket": {
+            "offset": 958047,
+            "size": 774,
+            "dts": 118272,
+            "pts": 118272,
+            "duration": 512,
+            "key": false
+          },
+          "reference": {
+            "rgbaSha256": "974ba8cd3123f1f81bc866096f2068500e4f39712ed44e0d1b116c29b95327dc",
+            "jpegSha256": "b640762c3d37487e15d915e2c18b1fdc13a4bbf9d664dabc134a9631dfd937d0",
+            "jpegBytes": 11505,
+            "rgbaFile": "fremantle-orbit/2-reference.rgba",
+            "jpegFile": "fremantle-orbit/2-reference.jpg"
+          },
+          "decoded": {
+            "timestamp": 9625000,
+            "codedWidth": 864,
+            "codedHeight": 482,
+            "displayWidth": 854,
+            "displayHeight": 481,
+            "visibleRect": {
+              "x": 0,
+              "y": 0,
+              "width": 854,
+              "height": 480,
+              "top": 0,
+              "right": 854,
+              "bottom": 480,
+              "left": 0
+            },
+            "color": {
+              "fullRange": false,
+              "matrix": "bt709",
+              "primaries": "bt709",
+              "transfer": "bt709"
+            }
+          },
+          "direct": {
+            "rgbaSha256": "fce666912fe462e69a18e6111187bb0884bc0c441d0fa783c14f1934c8d00d6e",
+            "jpegSha256": "2cef94de6bb5b68dc6642b240ca82574a6ef22cfe78972af7632c6679d8f74c1",
+            "jpegBytes": 11200,
+            "rgbaFile": "fremantle-orbit/2-direct.rgba",
+            "jpegFile": "fremantle-orbit/2-direct.jpg"
+          },
+          "directRgbaExact": false,
+          "directJpegExact": false,
+          "bridgeCallback": {
+            "now": 25936.1,
+            "expectedDisplayTime": 25669.4,
+            "height": 480,
+            "mediaTime": 9.625,
+            "presentationTime": 25944.9,
+            "presentedFrames": 3,
+            "width": 854
+          },
+          "bridgeNatural": {
+            "width": 854,
+            "height": 481
+          },
+          "bridgeTimeMinusSource": 0,
+          "bridge": {
+            "rgbaSha256": "f419b32ee35926681e37066aa4d1b8bbe560fd0f67d60fe3b6279055eb0d74a9",
+            "jpegSha256": "6412227be8e3f2ed13235f9a827bb12771d174a69b57ccde47b71fca2eb816bb",
+            "jpegBytes": 11522,
+            "rgbaFile": "fremantle-orbit/2-bridge.rgba",
+            "jpegFile": "fremantle-orbit/2-bridge.jpg"
+          },
+          "bridgeRgbaExact": false,
+          "bridgeJpegExact": false
+        }
+      ],
+      "counts": {
+        "framesDecoded": 288,
+        "framesKept": 3,
+        "framesClosed": 291,
+        "bridgeWrites": 3,
+        "rvfcCanceled": 0
+      },
+      "inputSha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+      "sourceNatural": {
+        "width": 854,
+        "height": 481,
+        "duration": 12
+      },
+      "mp4": {
+        "timescale": 12288,
+        "editOffset": 1024,
+        "sampleCount": 288,
+        "config": {
+          "codec": "avc1.64001e",
+          "codedWidth": 854,
+          "codedHeight": 480,
+          "displayAspectWidth": 853,
+          "displayAspectHeight": 480
+        },
+        "sar": {
+          "hSpacing": 853,
+          "vSpacing": 854
+        },
+        "trackDisplay": {
+          "width": 853,
+          "height": 480,
+          "widthFixed16": 55902208,
+          "heightFixed16": 31457280
+        },
+        "color": {
+          "type": "nclx",
+          "primaries": 1,
+          "transfer": 1,
+          "matrix": 1,
+          "fullRange": false
+        }
+      },
+      "crop": {
+        "sx": 0,
+        "sw": 854
+      },
+      "output": {
+        "width": 320,
+        "height": 180
+      },
+      "colorConfig": {
+        "primaries": "bt709",
+        "transfer": "bt709",
+        "matrix": "bt709",
+        "fullRange": false
+      },
+      "decodeWallMs": 1630.3999999985099,
+      "bridgeApi": "MediaStreamTrackGenerator",
+      "bridgeAllRgbaExact": false,
+      "bridgeAllJpegExact": false,
+      "bridgeOffsets": [
+        0,
+        0,
+        0
+      ],
+      "status": "completed",
+      "elapsedMs": 6777.29999999702,
+      "cleanup": {
+        "kept": 0,
+        "rvfcPending": 0,
+        "decoderClosed": true,
+        "trackState": "ended"
+      },
+      "hostWallMs": 7052
+    }
+  ],
+  "browserVersion": "151.0.7922.173",
+  "browserInfo": {
+    "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
+    "hardwareConcurrency": 5,
+    "secureContext": true
+  },
+  "endedAt": "2026-10-15T10:54:32.265Z",
+  "hostLoadAtEnd": [
+    22.01,
+    19.6,
+    19.21
+  ]
+}

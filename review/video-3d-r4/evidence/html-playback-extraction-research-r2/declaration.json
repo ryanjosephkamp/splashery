@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-15T11:18:32.664221+00:00",
+  "ids": [
+    "cat-track",
+    "cat-plays",
+    "buddha",
+    "chameleon-flowers",
+    "dianthus",
+    "pisac",
+    "sleeping-dog",
+    "palace-statue",
+    "oa-street",
+    "ullard",
+    "snaefell",
+    "fremantle-orbit",
+    "ihasalu-orbit",
+    "fresnel-lens",
+    "saint-denis",
+    "horse-statue",
+    "royal-sovereign",
+    "viljandi-ruins",
+    "kakerdi-bog",
+    "fjoloy"
+  ],
+  "manifestSha256": "3b76812b6bc098c6ab4e340e942f7493872c648e3da4b854e582ad5f8073c606",
+  "context": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 1,
+    "isMobile": true,
+    "hasTouch": true,
+    "userAgent": "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+  },
+  "nativeSettings": {
+    "maxFrames": 16,
+    "frameSide": 480,
+    "tries": 3,
+    "rate": 3,
+    "span": "Smallest5/10/20s covering full source; native planFrames (palace15)"
+  },
+  "startup": "Uniformwarmseekmin(.5,duration/4), warmHTML2Dcopy, atmostoneactualrewindto0.001; no cached presentation or repeatedchasing",
+  "gate": "EverytrialactualRVFCroundmicro==exactceilsourcePTS; anyskip/nonmonotonic/crosswindow=>fallback/no completedphotos; everyselectedJPEGindependentexact/sourceTime1us",
+  "sourceCopies": [
+    {
+      "source": "/workspace/splashery-v3d-bench-tools-r10/src/video3d/extract.js",
+      "copy": "src/extract.js",
+      "sha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de"
+    },
+    {
+      "source": "/workspace/splashery-v3d-bench-tools-r10/src/video3d/frames.js",
+      "copy": "src/frames.js",
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "source": "/workspace/splashery-v3d-bench-tools-r10/tools/v3d-bench-pixels.mjs",
+      "copy": "source-pixels.mjs",
+      "sha256": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f"
+    },
+    {
+      "source": "/workspace/v3d-r4-media/mp4-decode-research-r2/demux.mjs",
+      "copy": "demux.mjs",
+      "sha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d"
+    }
+  ],
+  "noSourceRuntimeProtocolControllerEdits": true
+}

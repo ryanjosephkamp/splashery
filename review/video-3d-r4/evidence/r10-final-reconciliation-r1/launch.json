@@ -1,0 +1,10 @@
+{
+  "at": "2026-10-15T12:13:24.093550+00:00",
+  "pid": 340553,
+  "command": [
+    "python3",
+    "/workspace/v3d-r4-media/reconcile-r10-final-r1.py"
+  ],
+  "codeSha256": "f515bf9ed9fc7780d1413dcf0e17f7619e3bd277a4f7e3743150f788af39ec42",
+  "purpose": "Read-only drain of all root-observed R10 native descendants, then strict CPU reconciliation only. Original state/results never mutated; no native launch or signals."
+}

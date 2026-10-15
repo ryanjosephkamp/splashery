@@ -1,0 +1,173 @@
+[
+  {
+    "executablePath": "/usr/bin/chromium",
+    "browser": "151.0.7922.173",
+    "result": {
+      "elapsed": 11042.10000000149,
+      "opened": [
+        256,
+        128,
+        2
+      ],
+      "extraction": {
+        "method": "video-element"
+      },
+      "failure": "Source decoder colors differ",
+      "config": {
+        "codec": "avc1.64000a",
+        "codedWidth": 192,
+        "codedHeight": 128,
+        "displayAspectWidth": 2,
+        "displayAspectHeight": 1
+      },
+      "crop": {
+        "sx": 7,
+        "sw": 243
+      },
+      "frames": [
+        {
+          "time": 0.333333,
+          "requestedTime": 0.313,
+          "presentedTime": 0.333333,
+          "sharpness": 1563.435159771877,
+          "width": 160,
+          "height": 84
+        },
+        {
+          "time": 0.6,
+          "requestedTime": 0.563,
+          "presentedTime": 0.6,
+          "sharpness": 1591.9543069916856,
+          "width": 160,
+          "height": 84
+        },
+        {
+          "time": 1,
+          "requestedTime": 0.938,
+          "presentedTime": 1,
+          "sharpness": 1542.2886389172188,
+          "width": 160,
+          "height": 84
+        },
+        {
+          "time": 1.2,
+          "requestedTime": 1.188,
+          "presentedTime": 1.2,
+          "sharpness": 1582.9015257614199,
+          "width": 160,
+          "height": 84
+        }
+      ],
+      "metadata": [
+        {
+          "pts": 0,
+          "coded": [
+            192,
+            130
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 66667,
+          "coded": [
+            192,
+            130
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 133333,
+          "coded": [
+            192,
+            130
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 200000,
+          "coded": [
+            192,
+            130
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        }
+      ]
+    }
+  }
+]

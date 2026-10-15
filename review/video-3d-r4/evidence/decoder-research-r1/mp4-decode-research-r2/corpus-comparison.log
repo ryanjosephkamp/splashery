@@ -1,0 +1,853 @@
+{
+  "createdAt": "2026-10-15T10:39:37.491Z",
+  "noDecode": true,
+  "ffprobe": "ffprobe version 7.1.5-0+deb13u1 Copyright (c) 2007-2026 the FFmpeg developers",
+  "manifestSha256": "3b76812b6bc098c6ab4e340e942f7493872c648e3da4b854e582ad5f8073c606",
+  "supported": 17,
+  "exactMatches": 17,
+  "total": 20,
+  "results": [
+    {
+      "id": "cat-track",
+      "input": "/workspace/v3d-r4-media/corpus/cat-track.mp4",
+      "inputSha256": "598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430",
+      "source": "https://commons.wikimedia.org/wiki/File:Cat_playing_with_a_round_track_toy.webm",
+      "author": "Clément Bucco-Lechat",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "probeSha256": "41c982225c7c9aa6ac1c9ed87c0bc461bd098257cb01f72ed533b594cfe863da",
+      "ffprobe": {
+        "packets": 192,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "1280:1281",
+        "dar": "16:9",
+        "color": {
+          "space": "bt470bg",
+          "range": "tv"
+        },
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "8f193620dec4eaac00a04b7d1b3f162316db1f64fff85480bb02415c7442da3b",
+      "samplesSha256": "0f93d0f2bc3da738ff3bc0832a886ee644a6da275264ba7f18cec9dc512d4c59",
+      "mediaTimeOffset": 1024,
+      "editDuration": 98304,
+      "sampleAspectRatio": {
+        "hSpacing": 1280,
+        "vSpacing": 1281
+      },
+      "trackDisplay": {
+        "width": 853.3333282470703,
+        "height": 480,
+        "widthFixed16": 55924053,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 16,
+        "height": 9
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "cat-plays",
+      "input": "/workspace/v3d-r4-media/corpus/cat-plays.mp4",
+      "inputSha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+      "source": "https://commons.wikimedia.org/wiki/File:Cat_Plays.webm",
+      "author": "Riverarvi",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "probeSha256": "e248f4300ce90fa05e47f8b7e88d31f98a20150c9d17fa69e8cd76356fc572b8",
+      "ffprobe": {
+        "packets": 192,
+        "width": 270,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "1:1",
+        "dar": "9:16",
+        "color": {
+          "space": "bt470bg",
+          "range": "tv"
+        },
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.640015",
+      "descriptionSha256": "1aae97aeac9bb30f56cecc2f07630e5eeafd2f49d0c4e828b7089b77df980534",
+      "samplesSha256": "e428d76fbea2f9808c1de382b125e596f24341550115d44a589915d81bdaf125",
+      "mediaTimeOffset": 1024,
+      "editDuration": 98304,
+      "sampleAspectRatio": {
+        "hSpacing": 1,
+        "vSpacing": 1
+      },
+      "trackDisplay": {
+        "width": 270,
+        "height": 480,
+        "widthFixed16": 17694720,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 9,
+        "height": 16
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "buddha",
+      "input": "/workspace/v3d-r4-media/corpus/buddha.mp4",
+      "inputSha256": "765070736b87205ff07211410a25b23b02e5e8e0092282a742e3c70f3e02f388",
+      "source": "https://commons.wikimedia.org/wiki/File:Statue_of_Buddha.webm",
+      "author": "https://www.youtube.com/user/Editor",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "probeSha256": "6bc716c2bf3959aaed65c1c746ed3d43d294446254e9a24fde79849473c9364b",
+      "ffprobe": {
+        "packets": 192,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "1280:1281",
+        "dar": "16:9",
+        "color": {
+          "space": "bt470bg",
+          "range": "tv"
+        },
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "8f193620dec4eaac00a04b7d1b3f162316db1f64fff85480bb02415c7442da3b",
+      "samplesSha256": "4035f718f1fee5b635c67c61f03cf9a18176f6a391e7a80519de0cb65a02810f",
+      "mediaTimeOffset": 1024,
+      "editDuration": 98304,
+      "sampleAspectRatio": {
+        "hSpacing": 1280,
+        "vSpacing": 1281
+      },
+      "trackDisplay": {
+        "width": 853.3333282470703,
+        "height": 480,
+        "widthFixed16": 55924053,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 16,
+        "height": 9
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "chameleon-flowers",
+      "input": "/workspace/v3d-r4-media/corpus/chameleon-flowers.mp4",
+      "inputSha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+      "source": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+      "author": "Ventrovert",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "probeSha256": "e3382291d4ecb1c78f9299d26d222d579829e1e3b1a3948ae426737ca7982e05",
+      "ffprobe": {
+        "packets": 240,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "3c6067163f9873f12c1aecf06ab28b6dc438d0cc998769c7e750b6f4848ec3e4",
+      "samplesSha256": "5a26449411f507fa7cc0630131aca12d6be550f2321d297b456d1e2a1e32913a",
+      "mediaTimeOffset": 1024,
+      "editDuration": 122880,
+      "sampleAspectRatio": {
+        "hSpacing": 853,
+        "vSpacing": 854
+      },
+      "trackDisplay": {
+        "width": 853,
+        "height": 480,
+        "widthFixed16": 55902208,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 853,
+        "height": 480
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "dianthus",
+      "input": "/workspace/v3d-r4-media/corpus/dianthus.mp4",
+      "inputSha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5",
+      "source": "https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm",
+      "author": "Tanvir Rahat",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "probeSha256": "a04d2e08336d17823f5a2a2dd2452a67a4dad75ab8ab6c0c1354f6129daa0e7c",
+      "ffprobe": {
+        "packets": 142,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": false,
+      "reason": "Nontrivial edit list unsupported"
+    },
+    {
+      "id": "pisac",
+      "input": "/workspace/v3d-r4-media/corpus/pisac.mp4",
+      "inputSha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d",
+      "source": "https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm",
+      "author": "MorePix",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "probeSha256": "5d965ab2a0e165eee87432c2167bd517c9ef62a0f7fd3695a4fea086dfbd16b2",
+      "ffprobe": {
+        "packets": 240,
+        "width": 270,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "1:1",
+        "dar": "9:16",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.640015",
+      "descriptionSha256": "b26e9e0d5f4462d315441ef07a1c1779a4a4af81745cc7a7c8d7a70839c58313",
+      "samplesSha256": "f925f949ad20618951b2e3945ad3cfaf8ecd2de7bcb9235a6817a3ca07ce1134",
+      "mediaTimeOffset": 1024,
+      "editDuration": 122880,
+      "sampleAspectRatio": {
+        "hSpacing": 1,
+        "vSpacing": 1
+      },
+      "trackDisplay": {
+        "width": 270,
+        "height": 480,
+        "widthFixed16": 17694720,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 9,
+        "height": 16
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "sleeping-dog",
+      "input": "/workspace/v3d-r4-media/corpus/sleeping-dog.mp4",
+      "inputSha256": "c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9",
+      "source": "https://commons.wikimedia.org/wiki/File:REM_-_Rapid_eye_movement_sleep_of_a_dog.webm",
+      "author": "Amada44",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "probeSha256": "847b7d5da210fb8bd861b1945f7e2efd514e93ed34b98884bc445c0b3ed8bc9e",
+      "ffprobe": {
+        "packets": 192,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "1280:1281",
+        "dar": "16:9",
+        "color": {
+          "space": "bt470bg",
+          "range": "tv"
+        },
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "8f193620dec4eaac00a04b7d1b3f162316db1f64fff85480bb02415c7442da3b",
+      "samplesSha256": "f0df968bd451d38ae9137ed0e9f753847c6c2f114d6e92ff96421a6645e32b71",
+      "mediaTimeOffset": 1024,
+      "editDuration": 98304,
+      "sampleAspectRatio": {
+        "hSpacing": 1280,
+        "vSpacing": 1281
+      },
+      "trackDisplay": {
+        "width": 853.3333282470703,
+        "height": 480,
+        "widthFixed16": 55924053,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 16,
+        "height": 9
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "palace-statue",
+      "input": "/workspace/v3d-r4-media/corpus/palace-statue.mp4",
+      "inputSha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+      "source": "https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm",
+      "author": "Sayvhior",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "probeSha256": "b00ef545f6d438d231b926c04b554dd89e3de045082c04a6f6f104dcdc79b118",
+      "ffprobe": {
+        "packets": 120,
+        "width": 270,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "1:1",
+        "dar": "9:16",
+        "color": {
+          "space": "bt709",
+          "primaries": "bt709",
+          "transfer": "bt709",
+          "range": "tv"
+        },
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.640015",
+      "descriptionSha256": "6feca3d2189252dd8780069b84089ca7a68b72fece1cc73fdfa6da0f08fcc9c6",
+      "samplesSha256": "207a452dd677b8c384467d4e50c2b0f3331a68916f27f8708fa35f5648a3c5bd",
+      "mediaTimeOffset": 1024,
+      "editDuration": 61440,
+      "sampleAspectRatio": {
+        "hSpacing": 1,
+        "vSpacing": 1
+      },
+      "trackDisplay": {
+        "width": 270,
+        "height": 480,
+        "widthFixed16": 17694720,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 9,
+        "height": 16
+      },
+      "colorMetadata": {
+        "type": "nclx",
+        "primaries": 1,
+        "transfer": 1,
+        "matrix": 1,
+        "fullRange": false
+      }
+    },
+    {
+      "id": "oa-street",
+      "input": "/workspace/v3d-r4-media/corpus/oa-street.mp4",
+      "inputSha256": "f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341",
+      "source": "https://commons.wikimedia.org/wiki/File:Aerial_view_of_Oa_street_in_Supilinn,_Tartu,_Estonia._July_2021.webm",
+      "author": "Sillerkiil",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "probeSha256": "6904591e4ded8444a6e5ed4603f4e2cc3dbadae3c3764d34c3351f8bf5580256",
+      "ffprobe": {
+        "packets": 240,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "3c6067163f9873f12c1aecf06ab28b6dc438d0cc998769c7e750b6f4848ec3e4",
+      "samplesSha256": "021b0f87b7d111e04694793e3d98d64147e14fe5ecd0209ebca6a8a1a892303b",
+      "mediaTimeOffset": 1024,
+      "editDuration": 122880,
+      "sampleAspectRatio": {
+        "hSpacing": 853,
+        "vSpacing": 854
+      },
+      "trackDisplay": {
+        "width": 853,
+        "height": 480,
+        "widthFixed16": 55902208,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 853,
+        "height": 480
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "ullard",
+      "input": "/workspace/v3d-r4-media/corpus/ullard.mp4",
+      "inputSha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b",
+      "source": "https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm",
+      "author": "A.-K. D.",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "probeSha256": "8aab95fc44b87e2f9bb4d5d0453c4ba2197083259ecde9f2252ba205f38a3456",
+      "ffprobe": {
+        "packets": 240,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {
+          "space": "bt470bg",
+          "range": "tv"
+        },
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "14dd6fe7967c04412f8b9747de7964287799884ea8309dd76b0ab85cc33d208c",
+      "samplesSha256": "8b4d64a7128ef6ec5c30ea53c5cbfbc56d4d08ab733d98810a6dae094ba7f912",
+      "mediaTimeOffset": 1024,
+      "editDuration": 122880,
+      "sampleAspectRatio": {
+        "hSpacing": 853,
+        "vSpacing": 854
+      },
+      "trackDisplay": {
+        "width": 853,
+        "height": 480,
+        "widthFixed16": 55902208,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 853,
+        "height": 480
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "snaefell",
+      "input": "/workspace/v3d-r4-media/corpus/snaefell.mp4",
+      "inputSha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+      "source": "https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm",
+      "author": "Tiny Toast",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+      "probeSha256": "a2eacf34ee34ca3071452ed0eddd5e0e0a00a8d55d73f0cb2e942f1c691ebaa2",
+      "ffprobe": {
+        "packets": 240,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "3c6067163f9873f12c1aecf06ab28b6dc438d0cc998769c7e750b6f4848ec3e4",
+      "samplesSha256": "45c15f1cc9c707adef01fb7e3a1ab98779eb577809262bfeea21865bc00491c2",
+      "mediaTimeOffset": 1024,
+      "editDuration": 122880,
+      "sampleAspectRatio": {
+        "hSpacing": 853,
+        "vSpacing": 854
+      },
+      "trackDisplay": {
+        "width": 853,
+        "height": 480,
+        "widthFixed16": 55902208,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 853,
+        "height": 480
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "fremantle-orbit",
+      "input": "/workspace/v3d-r4-media/corpus/fremantle-orbit.mp4",
+      "inputSha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+      "source": "https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm",
+      "author": "JamesBromberger",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "probeSha256": "80d095a0a04d208cefd15dd3d0a490613187a8480b67e06f4ebf5561dec94d55",
+      "ffprobe": {
+        "packets": 288,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {
+          "space": "bt709",
+          "primaries": "bt709",
+          "transfer": "bt709",
+          "range": "tv"
+        },
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "3784d3e7d25d467b9d36e351189b992b9db586db00e8e8f8f2dadd485f5c2ac6",
+      "samplesSha256": "4e7c8b4857cfa58381061577f916a78b5cd718c5563b53d8f6e7f3a9ad9ac69b",
+      "mediaTimeOffset": 1024,
+      "editDuration": 147456,
+      "sampleAspectRatio": {
+        "hSpacing": 853,
+        "vSpacing": 854
+      },
+      "trackDisplay": {
+        "width": 853,
+        "height": 480,
+        "widthFixed16": 55902208,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 853,
+        "height": 480
+      },
+      "colorMetadata": {
+        "type": "nclx",
+        "primaries": 1,
+        "transfer": 1,
+        "matrix": 1,
+        "fullRange": false
+      }
+    },
+    {
+      "id": "ihasalu-orbit",
+      "input": "/workspace/v3d-r4-media/corpus/ihasalu-orbit.mp4",
+      "inputSha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d",
+      "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm",
+      "author": "Sillerkiil",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "probeSha256": "cb8da043ecfc69f22ed3c4c5f41cd34d716d3e096641c2769d4fa822db93bdfe",
+      "ffprobe": {
+        "packets": 288,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "3c6067163f9873f12c1aecf06ab28b6dc438d0cc998769c7e750b6f4848ec3e4",
+      "samplesSha256": "58179de4420c1dbd132b925bb30fdbf11884c19f1c65115700d5b522a95ee1db",
+      "mediaTimeOffset": 1024,
+      "editDuration": 147456,
+      "sampleAspectRatio": {
+        "hSpacing": 853,
+        "vSpacing": 854
+      },
+      "trackDisplay": {
+        "width": 853,
+        "height": 480,
+        "widthFixed16": 55902208,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 853,
+        "height": 480
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "fresnel-lens",
+      "input": "/workspace/v3d-r4-media/corpus/fresnel-lens.mp4",
+      "inputSha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+      "source": "https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm",
+      "author": "Myotus",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "probeSha256": "0756ebef0c36bf202aa4c2117bd3cab6d6af97bef0f84b964785a11edee75334",
+      "ffprobe": {
+        "packets": 240,
+        "width": 270,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "1:1",
+        "dar": "9:16",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.640015",
+      "descriptionSha256": "b26e9e0d5f4462d315441ef07a1c1779a4a4af81745cc7a7c8d7a70839c58313",
+      "samplesSha256": "0fbfd9eb2f0cba6b3bf8dcd29343a2e04d5c90635a275588dac97a9abf11f6d1",
+      "mediaTimeOffset": 1024,
+      "editDuration": 122880,
+      "sampleAspectRatio": {
+        "hSpacing": 1,
+        "vSpacing": 1
+      },
+      "trackDisplay": {
+        "width": 270,
+        "height": 480,
+        "widthFixed16": 17694720,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 9,
+        "height": 16
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "saint-denis",
+      "input": "/workspace/v3d-r4-media/corpus/saint-denis.mp4",
+      "inputSha256": "231358f2f7f9a1ad04e78c782106ad13e56bf0fcd88f665d86497365117fd405",
+      "source": "https://commons.wikimedia.org/wiki/File:Interior_of_Basilique_Saint-Denis_134306.webm",
+      "author": "Quahadi",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "probeSha256": "f164b907d438fdf82cfbdf9259830d2b2be441f0cb3418e0c021c17b340f1da7",
+      "ffprobe": {
+        "packets": 240,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "3c6067163f9873f12c1aecf06ab28b6dc438d0cc998769c7e750b6f4848ec3e4",
+      "samplesSha256": "d4b4beff04c33ffa63b418e2ab59aa7a1a9d284194c249a19a67b7d7879cb370",
+      "mediaTimeOffset": 1024,
+      "editDuration": 122880,
+      "sampleAspectRatio": {
+        "hSpacing": 853,
+        "vSpacing": 854
+      },
+      "trackDisplay": {
+        "width": 853,
+        "height": 480,
+        "widthFixed16": 55902208,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 853,
+        "height": 480
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "horse-statue",
+      "input": "/workspace/v3d-r4-media/corpus/horse-statue.mp4",
+      "inputSha256": "42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045",
+      "source": "https://commons.wikimedia.org/wiki/File:Traveler_horse_statue.webm",
+      "author": "Angelarene88",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+      "probeSha256": "a9635b8119ff1f7be309b4f320e8cece9785f5f496438c235dc21392f66d1f2e",
+      "ffprobe": {
+        "packets": 191,
+        "width": 982,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "4905:5401",
+        "dar": "327:176",
+        "color": {
+          "space": "bt470bg",
+          "range": "tv"
+        },
+        "codec": "avc1"
+      },
+      "supported": false,
+      "reason": "Nontrivial edit list unsupported"
+    },
+    {
+      "id": "royal-sovereign",
+      "input": "/workspace/v3d-r4-media/corpus/royal-sovereign.mp4",
+      "inputSha256": "8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6",
+      "source": "https://commons.wikimedia.org/wiki/File:Royal_Sovereign_Lighthouse_drone_visit.webm",
+      "author": "Alexis Markwick",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "probeSha256": "16535e3956764db2bb1197c9148bc26ed907760ccf04dd26e721b0bd1211f99d",
+      "ffprobe": {
+        "packets": 287,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {
+          "space": "bt709",
+          "primaries": "bt709",
+          "transfer": "bt709",
+          "range": "tv"
+        },
+        "codec": "avc1"
+      },
+      "supported": false,
+      "reason": "Nontrivial edit list unsupported"
+    },
+    {
+      "id": "viljandi-ruins",
+      "input": "/workspace/v3d-r4-media/corpus/viljandi-ruins.mp4",
+      "inputSha256": "d8c69186d35269f6d5f9c23cec21b46fa053659e97988098863d06ceaa7e508d",
+      "source": "https://commons.wikimedia.org/wiki/File:Viljandi_ordulinnus_2021,_droonivideo.webm",
+      "author": "Sillerkiil",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "probeSha256": "a0c4e87089c78c7be69a75c705e995f6c0e766a35e0764fcbfac2829d5d7972e",
+      "ffprobe": {
+        "packets": 288,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "3c6067163f9873f12c1aecf06ab28b6dc438d0cc998769c7e750b6f4848ec3e4",
+      "samplesSha256": "587e92dc4c9a88b533312c196ef3fcebf83c7c8ce6b0406a6e959f0d5856d1e6",
+      "mediaTimeOffset": 1024,
+      "editDuration": 147456,
+      "sampleAspectRatio": {
+        "hSpacing": 853,
+        "vSpacing": 854
+      },
+      "trackDisplay": {
+        "width": 853,
+        "height": 480,
+        "widthFixed16": 55902208,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 853,
+        "height": 480
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "kakerdi-bog",
+      "input": "/workspace/v3d-r4-media/corpus/kakerdi-bog.mp4",
+      "inputSha256": "5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8",
+      "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_Kakerdi_lake_and_Kakerdaja_bog_in_Estonia,_september_2021.webm",
+      "author": "Sillerkiil",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "probeSha256": "94abc4c9c4824af5ea3b8122b066e9e14e9ac58d01df616125207ae13540a4d0",
+      "ffprobe": {
+        "packets": 288,
+        "width": 854,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "853:854",
+        "dar": "853:480",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001e",
+      "descriptionSha256": "3c6067163f9873f12c1aecf06ab28b6dc438d0cc998769c7e750b6f4848ec3e4",
+      "samplesSha256": "02edcd41e2f88344435f256dcebeaddf98b67dd9f027bc9ff9f8308136df57e0",
+      "mediaTimeOffset": 1024,
+      "editDuration": 147456,
+      "sampleAspectRatio": {
+        "hSpacing": 853,
+        "vSpacing": 854
+      },
+      "trackDisplay": {
+        "width": 853,
+        "height": 480,
+        "widthFixed16": 55902208,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 853,
+        "height": 480
+      },
+      "colorMetadata": null
+    },
+    {
+      "id": "fjoloy",
+      "input": "/workspace/v3d-r4-media/corpus/fjoloy.mp4",
+      "inputSha256": "2e01259d5d6dce77a46d98e43af9def48429d184b9422e0833957d82a1f9f210",
+      "source": "https://commons.wikimedia.org/wiki/File:Aerial_views_of_Fj%C3%B8l%C3%B8y_Lighthouse,_Rennes%C3%B8y,_Rogaland_county,_Norway.webm",
+      "author": "Rik Knops",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0",
+      "probeSha256": "603daab69442357ed62fc29e1b33e151ceb616867bd85f21f3c6102a2694bd7e",
+      "ffprobe": {
+        "packets": 288,
+        "width": 1126,
+        "height": 480,
+        "time_base": "1/12288",
+        "sar": "51300:51233",
+        "dar": "855:364",
+        "color": {},
+        "codec": "avc1"
+      },
+      "supported": true,
+      "matches": true,
+      "differences": [],
+      "codec": "avc1.64001f",
+      "descriptionSha256": "aa3eb0adb2dad4453c6f99e081ee4f38ccd5f9afa2aca7db1b035138ae775f8d",
+      "samplesSha256": "24e3a5ce41272c839818cf0a5f5164eb026a7d9cab95f6271b99d61bd253e74c",
+      "mediaTimeOffset": 1024,
+      "editDuration": 147456,
+      "sampleAspectRatio": {
+        "hSpacing": 51300,
+        "vSpacing": 51233
+      },
+      "trackDisplay": {
+        "width": 1127.4725341796875,
+        "height": 480,
+        "widthFixed16": 73890040,
+        "heightFixed16": 31457280
+      },
+      "displayAspectRatio": {
+        "width": 855,
+        "height": 364
+      },
+      "colorMetadata": null
+    }
+  ]
+}

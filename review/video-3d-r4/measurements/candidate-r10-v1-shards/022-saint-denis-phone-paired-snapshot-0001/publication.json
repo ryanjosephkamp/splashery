@@ -1,0 +1,61 @@
+{
+  "created": "2026-10-15T12:17:52.231Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/022-saint-denis-phone-paired",
+  "runSha256": "12d3755c7cf50b65ce4594ae1a71a1eae84d40ef48f1fc67ffa96b4bd598161a",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "cases": [
+    {
+      "id": "saint-denis",
+      "profile": "phone",
+      "rowFingerprint": "b37f4048466754b4c293c667e3c63d6751c95879b0933a95d1bab9d939fac1a2",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 10518,
+          "sha256": "f8c7e1810708f4bf4eb0bf68938a6a69b5a2567be1712f7fa0d4c7026987fefb"
+        },
+        {
+          "file": "model.json",
+          "bytes": 20163,
+          "sha256": "b478f5350cf35be10f8fa157e69f7304decea5f2d8082fa11c21ec6247f1b1de"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1331855,
+          "sha256": "865d3e2d543a94637d37e70823d8524f4e3733fc0aa31f5c27e7525479f44005"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 215845,
+          "sha256": "0508a23f0bbc4d4e1b079c27dc243b56989232d2f05741489dafb6e6b93ff255"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 328598,
+          "sha256": "655a41a80448a49c74dd794e0d3ecfc3dae8e13996d006d65f61e28a32911417"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 419905,
+          "sha256": "7315658600ca6e82bca609aa2565e74ab09bfcd9abb62df05fea18a0000e8d4b"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 492957,
+          "sha256": "ad208ce6366741612d223a157693da86ee4af7b71a4b6012bd92b70450d0c81e"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 487894,
+          "sha256": "0407780106a78efd5660aa5f2d7f9fc82048001ebf56f54e6919fd383a8b03aa"
+        },
+        {
+          "file": "result.json",
+          "bytes": 4690,
+          "sha256": "6c08d26b24e961d0be55fa0319ac387a566edc385e54e9600a2be07245d8845f"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

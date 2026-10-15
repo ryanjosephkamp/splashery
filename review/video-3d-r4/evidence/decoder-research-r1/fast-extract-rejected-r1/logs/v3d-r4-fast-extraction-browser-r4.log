@@ -1,0 +1,45 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:50:35] "GET / HTTP/1.1" 200 -
+
+Running 1 test using 1 worker
+
+(node:272944) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:272944) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:50:44] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:50:44] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:50:44] "GET /src/video3d/fast-extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:50:44] "GET /src/video3d/mp4.js HTTP/1.1" 200 -
+[AVFilterGraph @ 0x56319d045440] No such filter: '3))+not(mod(n'
+Error opening output file /tmp/v3d-fast-source-VEEcnN/vfr-signed.mp4.
+Error opening output files: Filter not found
+  ✘  1 [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources (5.1s)
+
+
+  1) [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources 
+
+    Error: Command failed: ffmpeg -v error -f lavfi -i testsrc2=size=192x128:rate=15:duration=2 -vf select=not(mod(n,3))+not(mod(n,5)),setpts=PTS-STARTPTS,setsar=1 -c:v libx264 -pix_fmt yuv420p -bf 2 -g 30 -fps_mode vfr -movflags +faststart+negative_cts_offsets -y /tmp/v3d-fast-source-VEEcnN/vfr-signed.mp4
+    [AVFilterGraph @ 0x56319d045440] No such filter: '3))+not(mod(n'
+    Error opening output file /tmp/v3d-fast-source-VEEcnN/vfr-signed.mp4.
+    Error opening output files: Filter not found
+
+
+      29 |           ? "setsar=4/3"
+      30 |           : "select=not(mod(n\,3))+not(mod(n\,5)),setpts=PTS-STARTPTS,setsar=1";
+    > 31 |       execFileSync("ffmpeg", [
+         |       ^
+      32 |         "-v",
+      33 |         "error",
+      34 |         "-f",
+        at /workspace/splashery-r4-public/tests/cdx-v3d-fast-extract-browser.spec.mjs:31:7
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/fast-extraction-browser-r4/cdx-v3d-fast-extract-brows-48ca0-are-cropped-and-VFR-sources-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/fast-extraction-browser-r4/cdx-v3d-fast-extract-brows-48ca0-are-cropped-and-VFR-sources-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources 

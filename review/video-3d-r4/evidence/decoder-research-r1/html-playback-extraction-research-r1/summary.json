@@ -1,0 +1,342 @@
+{
+  "at": "2026-10-15T11:12:32.437Z",
+  "rawSha256": "acc1507ab70e32d4389b7f9c90ad7bdba5446371e05a7e991b5a8eae6e77bc83",
+  "notice": "Exact training-picture/source-time proof only; shared-load extraction timings. No bakes, held-out metrics, physical-device or acceptance claim.",
+  "pairedCases": 6,
+  "sequentialVerifiedPairs": 2,
+  "verifiedFasterPairs": 2,
+  "allSixFastAndExact": false,
+  "extensionGate": false,
+  "verifiedJpegs": 170,
+  "sequentialVerifiedJpegs": 32,
+  "pairs": [
+    {
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "frames": 16,
+      "sequentialStatus": "diagnostic-error-no-complete-result",
+      "seekStatus": "verified",
+      "sequentialSeconds": null,
+      "seekSeconds": 49.72169999999925,
+      "verifiedFaster": false,
+      "ratioSeekOverSequential": null
+    },
+    {
+      "id": "cat-plays",
+      "profile": "phone",
+      "frames": 16,
+      "sequentialStatus": "verified",
+      "seekStatus": "verified",
+      "sequentialSeconds": 10.17260000000149,
+      "seekSeconds": 29.180599999997764,
+      "verifiedFaster": true,
+      "ratioSeekOverSequential": 2.8685488469018234
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "phone",
+      "frames": 16,
+      "sequentialStatus": "verified",
+      "seekStatus": "verified",
+      "sequentialSeconds": 16.509,
+      "seekSeconds": 46.4675,
+      "verifiedFaster": true,
+      "ratioSeekOverSequential": 2.814676842934157
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "desktop",
+      "frames": 30,
+      "sequentialStatus": "diagnostic-error-no-complete-result",
+      "seekStatus": "verified",
+      "sequentialSeconds": null,
+      "seekSeconds": 89.25840000000224,
+      "verifiedFaster": false,
+      "ratioSeekOverSequential": null
+    },
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "frames": 24,
+      "sequentialStatus": "diagnostic-error-no-complete-result",
+      "seekStatus": "verified",
+      "sequentialSeconds": null,
+      "seekSeconds": 38.84739999999851,
+      "verifiedFaster": false,
+      "ratioSeekOverSequential": null
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "desktop",
+      "frames": 36,
+      "sequentialStatus": "diagnostic-error-no-complete-result",
+      "seekStatus": "verified",
+      "sequentialSeconds": null,
+      "seekSeconds": 83.93290000000223,
+      "verifiedFaster": false,
+      "ratioSeekOverSequential": null
+    }
+  ],
+  "rows": [
+    {
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "method": "sequential",
+      "control": null,
+      "status": "diagnostic-error-no-complete-result",
+      "expectedFrames": 16,
+      "photos": 0,
+      "sampledTrials": null,
+      "verified": false,
+      "extractSeconds": null,
+      "proofSeconds": null,
+      "elapsedSeconds": 0.9234000000022352,
+      "error": "Playback missed a trial target",
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "method": "seek",
+      "control": null,
+      "status": "verified",
+      "expectedFrames": 16,
+      "photos": 16,
+      "sampledTrials": null,
+      "verified": true,
+      "extractSeconds": 49.72169999999925,
+      "proofSeconds": 12.8015,
+      "elapsedSeconds": 62.7005,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "cat-plays",
+      "profile": "phone",
+      "method": "seek",
+      "control": null,
+      "status": "verified",
+      "expectedFrames": 16,
+      "photos": 16,
+      "sampledTrials": null,
+      "verified": true,
+      "extractSeconds": 29.180599999997764,
+      "proofSeconds": 8.321300000000745,
+      "elapsedSeconds": 37.954,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "cat-plays",
+      "profile": "phone",
+      "method": "sequential",
+      "control": null,
+      "status": "verified",
+      "expectedFrames": 16,
+      "photos": 16,
+      "sampledTrials": 48,
+      "verified": true,
+      "extractSeconds": 10.17260000000149,
+      "proofSeconds": 6.198,
+      "elapsedSeconds": 16.70010000000149,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "phone",
+      "method": "sequential",
+      "control": null,
+      "status": "verified",
+      "expectedFrames": 16,
+      "photos": 16,
+      "sampledTrials": 48,
+      "verified": true,
+      "extractSeconds": 16.509,
+      "proofSeconds": 10.99689999999851,
+      "elapsedSeconds": 27.87229999999702,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "phone",
+      "method": "seek",
+      "control": null,
+      "status": "verified",
+      "expectedFrames": 16,
+      "photos": 16,
+      "sampledTrials": null,
+      "verified": true,
+      "extractSeconds": 46.4675,
+      "proofSeconds": 12.410300000000746,
+      "elapsedSeconds": 59.05680000000074,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "desktop",
+      "method": "seek",
+      "control": null,
+      "status": "verified",
+      "expectedFrames": 30,
+      "photos": 30,
+      "sampledTrials": null,
+      "verified": true,
+      "extractSeconds": 89.25840000000224,
+      "proofSeconds": 26.9015,
+      "elapsedSeconds": 116.82740000000223,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "desktop",
+      "method": "sequential",
+      "control": null,
+      "status": "diagnostic-error-no-complete-result",
+      "expectedFrames": 30,
+      "photos": 0,
+      "sampledTrials": null,
+      "verified": false,
+      "extractSeconds": null,
+      "proofSeconds": null,
+      "elapsedSeconds": 11.989800000000745,
+      "error": "Actual picture crossed its sampling window",
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "method": "sequential",
+      "control": null,
+      "status": "diagnostic-error-no-complete-result",
+      "expectedFrames": 24,
+      "photos": 0,
+      "sampledTrials": null,
+      "verified": false,
+      "extractSeconds": null,
+      "proofSeconds": null,
+      "elapsedSeconds": 1.4078999999985098,
+      "error": "Actual picture crossed its sampling window",
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "method": "seek",
+      "control": null,
+      "status": "verified",
+      "expectedFrames": 24,
+      "photos": 24,
+      "sampledTrials": null,
+      "verified": true,
+      "extractSeconds": 38.84739999999851,
+      "proofSeconds": 8.092,
+      "elapsedSeconds": 47.48560000000149,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "desktop",
+      "method": "seek",
+      "control": null,
+      "status": "verified",
+      "expectedFrames": 36,
+      "photos": 36,
+      "sampledTrials": null,
+      "verified": true,
+      "extractSeconds": 83.93290000000223,
+      "proofSeconds": 30.89929999999702,
+      "elapsedSeconds": 115.38390000000223,
+      "error": null,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "desktop",
+      "method": "sequential",
+      "control": null,
+      "status": "diagnostic-error-no-complete-result",
+      "expectedFrames": 36,
+      "photos": 0,
+      "sampledTrials": null,
+      "verified": false,
+      "extractSeconds": null,
+      "proofSeconds": null,
+      "elapsedSeconds": 22.467900000002235,
+      "error": "Playback ended before all trial targets",
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "method": "sequential",
+      "control": "cancel-after-first-actual-trial",
+      "status": "research-abort-no-complete-result",
+      "expectedFrames": 16,
+      "photos": 0,
+      "sampledTrials": null,
+      "verified": false,
+      "extractSeconds": null,
+      "proofSeconds": null,
+      "elapsedSeconds": 0.3306999999992549,
+      "error": "Stopped",
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true
+      }
+    }
+  ]
+}

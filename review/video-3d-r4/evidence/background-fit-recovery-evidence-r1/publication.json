@@ -1,0 +1,52 @@
+{
+  "created": "2026-10-15T12:17:53.319Z",
+  "source": "/workspace/v3d-r4-media/background-fit-recovery-evidence-r1",
+  "sourceInventory": [
+    {
+      "file": "README.md",
+      "bytes": 1223,
+      "sha256": "75706921ac21433354e013ae79a848cbfe4c9b976900127ec939de032f732f3e"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 1623,
+      "sha256": "b1942c663adc5c341149e3657dfa99e7f2c735c0fbf14fc8fdba95e672808be9"
+    },
+    {
+      "file": "green-r1.log",
+      "bytes": 18419,
+      "sha256": "ec819a25a76b9ded1d609f4f6264b9f99873b222771e1cef1aec45c1a4a092b3"
+    },
+    {
+      "file": "green-r2.log",
+      "bytes": 22163,
+      "sha256": "77d48735cc915b7e57e4aaffbfa2e36c9bab9210e174d590828db9cb43934842"
+    },
+    {
+      "file": "red-original/cdx-v3d-background-recover-cba25-fter-releasing-its-readback-chromium/test-failed-1.png",
+      "bytes": 4253,
+      "sha256": "27abb4affaed83ae85739b62b71e5e860d2e6ee7b4fa91c915f5a3c26227b944"
+    },
+    {
+      "file": "red-original/cdx-v3d-background-recover-cba25-fter-releasing-its-readback-chromium/trace.zip",
+      "bytes": 81944,
+      "sha256": "4260402403c32df8e43c2ceac0de1b35d5d973cfa4d0f35f6f2d9cbae031b3d1"
+    },
+    {
+      "file": "red-original.log",
+      "bytes": 5575,
+      "sha256": "3041ca0bbc99a9834a30c0376dae6334e1eebc43635c194d12afcb77b15b5573"
+    },
+    {
+      "file": "source/src/video3d/run.js",
+      "bytes": 20882,
+      "sha256": "b25c6c94427d311f2c5a1d0791b439287fdc56bea50076273baa312730d484e4"
+    },
+    {
+      "file": "source/tests/cdx-v3d-background-recovery.spec.mjs",
+      "bytes": 7970,
+      "sha256": "64eba6a893eb97beadafefdea27705ecf045c07a174751e52103259862a27283"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

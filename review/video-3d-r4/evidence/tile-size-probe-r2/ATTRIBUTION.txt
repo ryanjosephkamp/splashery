@@ -1,0 +1,3 @@
+Ventrovert; CC BY 4.0; https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm; https://creativecommons.org/licenses/by/4.0
+Original assessment citation had a filename typo; attribution-correction.json supersedes it. Raw experiment bytes remain unchanged.
+Original diagnostic code made by Ryan with Codex (GPT-6), MIT. Existing Splat.js MIT notices remain authoritative.

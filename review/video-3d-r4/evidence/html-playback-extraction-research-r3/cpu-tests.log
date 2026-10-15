@@ -1,0 +1,18 @@
+✔ full exact prefix keeps all three trials without canonical seeks (91.002573ms)
+✔ first miss retains an exact best trial, seeks missed and remaining targets exactly once (10.370423ms)
+✔ completed windows retained and never resampled after a later miss (35.426505ms)
+✔ unsupported table immediately uses canonical complete three-trial plan (7.483798ms)
+✔ abort during exact prefix never launches canonical fallback and returns no partial photos (7.267756ms)
+✔ abort at fallback transition discards even a completed prefix window (7.020945ms)
+✔ late retired prefix play fulfillment cannot pause canonical fallback (13.08207ms)
+✔ canvas failure is fatal, not hidden by a retry or partial result (0.894468ms)
+✔ old play promise cannot pause a new owner; terminal current owner is paused (3.397026ms)
+✔ ceil targets preserve original trial count and exact rational source arithmetic (0.282006ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 538.588462

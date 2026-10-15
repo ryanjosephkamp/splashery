@@ -1,0 +1,142 @@
+{
+  "id": "cat-plays",
+  "profile": "phone",
+  "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+  "started": "2026-10-15T05:29:26.521Z",
+  "status": "finished",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": 69634,
+  "bakeMs": 875779.804611,
+  "mean": {
+    "psnr": 15.038269321002332,
+    "ssim": 0.3128355397132256,
+    "laplacian": 0.00006922760172753247,
+    "sourceLaplacian": 0.006478526180903956
+  },
+  "peakRssBytes": 1469140992,
+  "hostLoadAtStart": [
+    8.75,
+    7.89,
+    7.84
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": true,
+    "verdict": "caution",
+    "message": "This stretch may work, with some risks.",
+    "reasons": [
+      "Many patches do not line up. Fast motion, a cut, moving objects, or reflections may cause this. Try a steady stretch without moving people or cars."
+    ],
+    "metrics": {
+      "frames": 12,
+      "sharpness": 3714.9113676439338,
+      "contrast": 37.47921978324917,
+      "exposure": 5.860403236881325,
+      "motion": 2.23606797749979,
+      "parallax": 1.6073592581964586,
+      "unmatched": 0.43690476190476185,
+      "wideMotion": 7.280109889280519,
+      "outliers": 0.23435019841269839,
+      "residual": 1.2445581495489073,
+      "zoom": 0.059123343527013254,
+      "texturePatches": 21,
+      "worstUnmatched": 0.6190476190476191,
+      "localWindows": true,
+      "reversals": 0
+    },
+    "duration": 8,
+    "start": 0,
+    "end": 8
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "23c175fa5c0298a14136c6e67bc850b65e4f8e11b2576c6c6de0afb7b7788819",
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 16,
+    "points": 711,
+    "splats": 14931,
+    "iters": 214,
+    "psnr": 17.7,
+    "psnrAtIter": 214,
+    "trainSide": 320,
+    "plyBytes": 933919,
+    "retried": true,
+    "timedOut": true,
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 8,
+    "rate": 2
+  },
+  "timings": {
+    "frames": 6.6,
+    "decode": 0.4,
+    "path": 37.4,
+    "seed": 0.1,
+    "train": 826.2,
+    "export": 0.1,
+    "total": 870.8
+  },
+  "actualTier": "phone",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": false,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "evaluationSha256": "13fb7b4d4d3dccfabe04ecf56a31c6211f9a2b64f082f42a3f45c7ed35bf0252",
+  "frames": [
+    {
+      "time": 1.125,
+      "renderSha256": "1f31da2c796e008f20d7d6f2537aed6f27006de3f615363057263fdb2e7ac2ad",
+      "referenceSha256": "7aa46fd73b1da3386cc4220e7be6d375fc6cba27624f95c458d48f379c663d3a",
+      "psnr": 16.5922871603325,
+      "exact": false,
+      "ssim": 0.3432177159584533,
+      "laplacian": 0.00009552039070919423,
+      "sourceLaplacian": 0.005128991331658684,
+      "sharpnessRatio": 0.01862362100703795
+    },
+    {
+      "time": 3,
+      "renderSha256": "828f90d56671d421f0fb8089bbb70ce49bed8b04caa6faea79363ef017b7ba50",
+      "referenceSha256": "417f95cd13e24db9ecdc421afd4ca6f321db19ecd0e54ecf44731fd0ed5a366f",
+      "psnr": 14.152420739659382,
+      "exact": false,
+      "ssim": 0.3044785096527112,
+      "laplacian": 0.0000350175466982435,
+      "sourceLaplacian": 0.007366684516452887,
+      "sharpnessRatio": 0.004753501608496288
+    },
+    {
+      "time": 5,
+      "renderSha256": "141aac91769794861d81ce7859f04ca7cec96b342ac4918964a797fc64de84e1",
+      "referenceSha256": "0456f402120854052e5933f24066485dfc152a00816343c23b73be1707f75bc4",
+      "psnr": 13.59389963285599,
+      "exact": false,
+      "ssim": 0.2974695510585557,
+      "laplacian": 0.0000667457838825507,
+      "sourceLaplacian": 0.006940433258501578,
+      "sharpnessRatio": 0.009616947731727192
+    },
+    {
+      "time": 6.875,
+      "renderSha256": "6f72e3b1fcd582de8906de747fc415d4d6569f54bbb58a7b2f2e1fabdb1ee7fd",
+      "referenceSha256": "39a9545bc734d73c9335df53a92694423c27671aff988f4667885090df9a613c",
+      "psnr": 15.81446975116145,
+      "exact": false,
+      "ssim": 0.3061763821831822,
+      "laplacian": 0.00007962668562014146,
+      "sourceLaplacian": 0.006477995617002675,
+      "sharpnessRatio": 0.012291870869925687
+    }
+  ]
+}

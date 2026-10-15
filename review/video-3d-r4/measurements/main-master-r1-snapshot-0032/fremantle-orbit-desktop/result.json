@@ -1,0 +1,22 @@
+{
+  "id": "fremantle-orbit",
+  "profile": "desktop",
+  "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747",
+  "started": "2026-10-15T11:37:01.446Z",
+  "status": "timeout",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": null,
+  "bakeMs": 1752549.8779160008,
+  "mean": null,
+  "peakRssBytes": 2179035136,
+  "hostLoadAtStart": [
+    15.04,
+    17.19,
+    17.57
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "Error: fremantle-orbit/desktop (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

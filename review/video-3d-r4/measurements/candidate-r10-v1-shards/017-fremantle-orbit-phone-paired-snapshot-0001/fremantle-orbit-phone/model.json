@@ -1,0 +1,703 @@
+{
+  "cams": [
+    {
+      "time": 6.666667,
+      "R": [
+        0.9298356754460996,
+        0.012484836389436378,
+        0.36776316499620487,
+        -0.02088021971516348,
+        0.9996041176882478,
+        0.01885800427794001,
+        -0.3673821349662278,
+        -0.025213820833608368,
+        0.9297282560762731
+      ],
+      "t": [
+        -8.15587882416543,
+        -0.4493185071428045,
+        0.8032003336532352
+      ],
+      "f": 235.74161807580168,
+      "w": 480,
+      "h": 270
+    },
+    {
+      "time": 8.166667,
+      "R": [
+        0.9780141590279618,
+        0.010215206107187194,
+        0.20828815209948354,
+        -0.007462888951929036,
+        0.9998742068345982,
+        -0.013995563417564638,
+        -0.2084049184384117,
+        0.012133427836831068,
+        0.9779673664798878
+      ],
+      "t": [
+        -5.224207497194122,
+        0.38888158737432543,
+        1.0352426447967014
+      ],
+      "f": 235.74161807580168,
+      "w": 480,
+      "h": 270
+    },
+    {
+      "time": 8.916667,
+      "R": [
+        0.9901632739155741,
+        0.002962915678860838,
+        0.1398853534844607,
+        -0.0017323819476466904,
+        0.9999587360911408,
+        -0.00891767726463664,
+        -0.13990600359377028,
+        0.008587621654958513,
+        0.9901275488101179
+      ],
+      "t": [
+        -3.6417494255869687,
+        0.2597082984459428,
+        0.648951301423484
+      ],
+      "f": 235.74161807580168,
+      "w": 480,
+      "h": 270
+    },
+    {
+      "time": 9.416667,
+      "R": [
+        0.9951433364736847,
+        -0.0006176640664962158,
+        0.09843453846655668,
+        0.0010493795444634125,
+        0.9999900571403283,
+        -0.0043341000283183264,
+        -0.09843088272790577,
+        0.0044163459539269204,
+        0.9951340900671727
+      ],
+      "t": [
+        -2.677129767355372,
+        0.139347739708695,
+        0.41522586371217657
+      ],
+      "f": 235.74161807580168,
+      "w": 480,
+      "h": 270
+    },
+    {
+      "time": 10.416667,
+      "R": [
+        0.999675389508741,
+        -0.0018263865677632931,
+        0.025412200271772132,
+        0.001960581173577399,
+        0.9999842609488989,
+        -0.005256802825374838,
+        -0.025402199353783836,
+        0.005304919093459174,
+        0.9996632363458215
+      ],
+      "t": [
+        -0.8964600072390786,
+        0.10540562915048188,
+        0.09006338145395999
+      ],
+      "f": 235.74161807580168,
+      "w": 480,
+      "h": 270
+    },
+    {
+      "time": 10.916667,
+      "R": [
+        0.9999977776030463,
+        -0.0016825963603571117,
+        -0.0012702985698096311,
+        0.0016800117680139271,
+        0.9999965222978039,
+        -0.002032966491869996,
+        0.0012737148141094981,
+        0.0020308278572652824,
+        0.9999971266902652
+      ],
+      "t": [
+        0.033097485628907276,
+        0.007665086353251196,
+        0.005880724344576844
+      ],
+      "f": 235.74161807580168,
+      "w": 480,
+      "h": 270
+    },
+    {
+      "time": 11.416667,
+      "R": [
+        0.9996744380766117,
+        -0.0018795983418988423,
+        -0.025445725894249423,
+        0.001865991179932935,
+        0.9999981030831216,
+        -0.0005584864138187719,
+        0.025446727355959913,
+        0.0005108230918220645,
+        0.9996760490912249
+      ],
+      "t": [
+        0.9721551328037369,
+        -0.05591536485418839,
+        -0.03383948348521452
+      ],
+      "f": 235.74161807580168,
+      "w": 480,
+      "h": 270
+    }
+  ],
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 7,
+    "points": 157,
+    "surfacePoints": 1470,
+    "generatedSurfacePoints": 1470,
+    "seedSplats": 14972,
+    "seedBounds": "coordinate-median",
+    "seedSceneRadius": 15.531383273853434,
+    "trainingBackground": [
+      0,
+      0,
+      0
+    ],
+    "renderBackground": [
+      0.6590706948023513,
+      0.661483451208833,
+      0.6531292322355196
+    ],
+    "backgroundFit": {
+      "method": "constant-training-environment",
+      "accepted": true,
+      "reason": "training-and-validation-improved",
+      "rgb": [
+        0.6590706948023513,
+        0.661483451208833,
+        0.6531292322355196
+      ],
+      "trainCams": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6
+      ],
+      "validationCams": [
+        3
+      ],
+      "pixels": 345600,
+      "invalidPixels": 0,
+      "improvement": 0.9063945515260787,
+      "baseMse": 0.18779773234356842,
+      "fittedMse": 0.017578890958405157,
+      "validation": [
+        {
+          "ci": 3,
+          "pixels": 57600,
+          "baseMse": 0.1920192311580264,
+          "fittedMse": 0.01776227866870137
+        }
+      ]
+    },
+    "splats": 17218,
+    "iters": 134,
+    "psnr": 7.2,
+    "psnrAtIter": 134,
+    "trainSide": 320,
+    "plyBytes": 1077671,
+    "retried": false,
+    "timedOut": true,
+    "timeLimitMinutes": 8,
+    "softwareSort": true,
+    "softwareDirectGradient": true,
+    "trainingLoop": {
+      "batches": 67,
+      "submittedSteps": 134,
+      "encodeMs": 29,
+      "viewSubmitMs": 11,
+      "fenceWaitMs": 269120,
+      "metricsWaitMs": 171171,
+      "batchWallMs": 445295
+    },
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 12,
+    "rate": 1.333
+  },
+  "timings": {
+    "frames": 34.1,
+    "decode": 1.7,
+    "path": 67.4,
+    "seed": 1.5,
+    "train": 485.2,
+    "background": 8.2,
+    "export": 0.3,
+    "total": 598.4
+  },
+  "log": [
+    "focal 0.96x maxDim: 7/16 cams, 180 pts, median reproj 0.53px (angular 8.71e-4) in 0.3s",
+    "focal 0.78x maxDim: 7/16 cams, 173 pts, median reproj 0.55px (angular 10.95e-4) in 0.2s",
+    "focal 0.69x maxDim: 7/16 cams, 167 pts, median reproj 0.46px (angular 10.48e-4) in 0.2s",
+    "focal 1.39x maxDim: no valid initialization (0.1s)",
+    "focal 1.56x maxDim: no valid initialization (0.1s)",
+    "focal bracket 0.62x maxDim: 7/16 cams, median reproj 0.36px in 0.2s — better, stepping on",
+    "focal bracket 0.55x maxDim: 7/16 cams, median reproj 0.28px in 0.2s — better, stepping on",
+    "focal bracket 0.49x maxDim: 7/16 cams, median reproj 0.28px in 0.2s — better, stepping on",
+    "focal bracket 0.44x maxDim: 7/16 cams, median reproj 0.29px in 0.2s — stop",
+    "focal search winner: 0.49x maxDim — rerunning with BA ...",
+    "  init trial 0: 7/16 cams, median reproj 0.28px",
+    "  init trial 1: 7/16 cams, median reproj 0.26px",
+    "  init trial 2: 7/16 cams, median reproj 0.26px",
+    "  init trials: seeding the final pass from the rank-1 pair",
+    "init pair: images 14 + 15 (72 E-inliers, 63 points, median parallax 2.7 deg)",
+    "registered image 13 (44/44 inliers, +42 points)",
+    "registered image 12 (32/33 inliers, +11 points)",
+    "registered image 11 (28/29 inliers, +21 points)",
+    "registered image 10 (25/25 inliers, +16 points)",
+    "registered image 8 (8/8 inliers, +6 points)",
+    "subpixel LK refine: 247/293 obs refined (46 rejected) in 0.1s",
+    "  final registration + BA in 0.8s",
+    "  init trial 0: 7/16 cams, median reproj 0.46px",
+    "  init trial 1: 7/16 cams, median reproj 0.46px",
+    "  init trial 2: 7/16 cams, median reproj 0.46px",
+    "init pair: images 13 + 15 (60 E-inliers, 69 points, median parallax 5.3 deg)",
+    "registered image 14 (48/48 inliers, +46 points)",
+    "registered image 12 (34/35 inliers, +13 points)",
+    "registered image 11 (30/30 inliers, +22 points)",
+    "registered image 10 (27/27 inliers, +17 points)",
+    "registered image 8 (8/8 inliers, +5 points)",
+    "subpixel LK refine: 259/312 obs refined (53 rejected) in 0.1s",
+    "final trial 0.69x: 7/16 cams, rms 0.61px against 7/16 at 0.36px in 0.7s — keeping the first",
+    "SfM done: 7/16 cameras registered, 157 points, median reproj 0.36px",
+    "retry registered 7/16 (first pass 6) — keeping the retry",
+    "+ 1470 seed Gaussians appended (multiview surface detail), protected from relocation for 220 iterations",
+    "initialized 14972 Gaussians (scene radius 15.53)",
+    "GPU: google swiftshader — direct gradient accumulation",
+    "refine @122: relocated 0, grew +2246 -> 17218 splats (dead 0, last round 0/0 survived)",
+    "training finished early at 134 iterations"
+  ],
+  "observed": {
+    "holdout": 3,
+    "options": {
+      "maxIters": 1200,
+      "refineStart": 120
+    },
+    "cameras": [
+      {
+        "imgIdx": 8,
+        "R": [
+          0.9298356754460996,
+          0.012484836389436378,
+          0.36776316499620487,
+          -0.02088021971516348,
+          0.9996041176882478,
+          0.01885800427794001,
+          -0.3673821349662278,
+          -0.025213820833608368,
+          0.9297282560762731
+        ],
+        "t": [
+          -8.15587882416543,
+          -0.4493185071428045,
+          0.8032003336532352
+        ],
+        "f": 157.16107871720112,
+        "cx": 160,
+        "cy": 90,
+        "w": 320,
+        "h": 180,
+        "offset": 0,
+        "f0": 157.16107871720112,
+        "fy0": 157.16107871720112
+      },
+      {
+        "imgIdx": 10,
+        "R": [
+          0.9780141590279618,
+          0.010215206107187194,
+          0.20828815209948354,
+          -0.007462888951929036,
+          0.9998742068345982,
+          -0.013995563417564638,
+          -0.2084049184384117,
+          0.012133427836831068,
+          0.9779673664798878
+        ],
+        "t": [
+          -5.224207497194122,
+          0.38888158737432543,
+          1.0352426447967014
+        ],
+        "f": 157.16107871720112,
+        "cx": 160,
+        "cy": 90,
+        "w": 320,
+        "h": 180,
+        "offset": 57600,
+        "f0": 157.16107871720112,
+        "fy0": 157.16107871720112
+      },
+      {
+        "imgIdx": 11,
+        "R": [
+          0.9901632739155741,
+          0.002962915678860838,
+          0.1398853534844607,
+          -0.0017323819476466904,
+          0.9999587360911408,
+          -0.00891767726463664,
+          -0.13990600359377028,
+          0.008587621654958513,
+          0.9901275488101179
+        ],
+        "t": [
+          -3.6417494255869687,
+          0.2597082984459428,
+          0.648951301423484
+        ],
+        "f": 157.16107871720112,
+        "cx": 160,
+        "cy": 90,
+        "w": 320,
+        "h": 180,
+        "offset": 115200,
+        "f0": 157.16107871720112,
+        "fy0": 157.16107871720112
+      },
+      {
+        "imgIdx": 12,
+        "R": [
+          0.9951433364736847,
+          -0.0006176640664962158,
+          0.09843453846655668,
+          0.0010493795444634125,
+          0.9999900571403283,
+          -0.0043341000283183264,
+          -0.09843088272790577,
+          0.0044163459539269204,
+          0.9951340900671727
+        ],
+        "t": [
+          -2.677129767355372,
+          0.139347739708695,
+          0.41522586371217657
+        ],
+        "f": 157.16107871720112,
+        "cx": 160,
+        "cy": 90,
+        "w": 320,
+        "h": 180,
+        "offset": 172800,
+        "f0": 157.16107871720112,
+        "fy0": 157.16107871720112
+      },
+      {
+        "imgIdx": 13,
+        "R": [
+          0.999675389508741,
+          -0.0018263865677632931,
+          0.025412200271772132,
+          0.001960581173577399,
+          0.9999842609488989,
+          -0.005256802825374838,
+          -0.025402199353783836,
+          0.005304919093459174,
+          0.9996632363458215
+        ],
+        "t": [
+          -0.8964600072390786,
+          0.10540562915048188,
+          0.09006338145395999
+        ],
+        "f": 157.16107871720112,
+        "cx": 160,
+        "cy": 90,
+        "w": 320,
+        "h": 180,
+        "offset": 230400,
+        "f0": 157.16107871720112,
+        "fy0": 157.16107871720112
+      },
+      {
+        "imgIdx": 14,
+        "R": [
+          0.9999977776030463,
+          -0.0016825963603571117,
+          -0.0012702985698096311,
+          0.0016800117680139271,
+          0.9999965222978039,
+          -0.002032966491869996,
+          0.0012737148141094981,
+          0.0020308278572652824,
+          0.9999971266902652
+        ],
+        "t": [
+          0.033097485628907276,
+          0.007665086353251196,
+          0.005880724344576844
+        ],
+        "f": 157.16107871720112,
+        "cx": 160,
+        "cy": 90,
+        "w": 320,
+        "h": 180,
+        "offset": 288000,
+        "f0": 157.16107871720112,
+        "fy0": 157.16107871720112
+      },
+      {
+        "imgIdx": 15,
+        "R": [
+          0.9996744380766117,
+          -0.0018795983418988423,
+          -0.025445725894249423,
+          0.001865991179932935,
+          0.9999981030831216,
+          -0.0005584864138187719,
+          0.025446727355959913,
+          0.0005108230918220645,
+          0.9996760490912249
+        ],
+        "t": [
+          0.9721551328037369,
+          -0.05591536485418839,
+          -0.03383948348521452
+        ],
+        "f": 157.16107871720112,
+        "cx": 160,
+        "cy": 90,
+        "w": 320,
+        "h": 180,
+        "offset": 345600,
+        "f0": 157.16107871720112,
+        "fy0": 157.16107871720112
+      }
+    ],
+    "trainingTimes": [
+      0.416667,
+      1.416667,
+      1.666667,
+      2.916667,
+      3.666667,
+      4.416667,
+      4.916667,
+      5.458333,
+      6.666667,
+      6.916667,
+      8.166667,
+      8.916667,
+      9.416667,
+      10.416667,
+      10.916667,
+      11.416667
+    ],
+    "attemptedTimes": [
+      0.125,
+      0.375,
+      0.625,
+      0.875,
+      1.125,
+      1.375,
+      1.625,
+      1.875,
+      2.125,
+      2.375,
+      2.625,
+      2.875,
+      3.125,
+      3.375,
+      3.625,
+      3.875,
+      4.125,
+      4.375,
+      4.625,
+      4.875,
+      5.125,
+      5.375,
+      5.625,
+      5.875,
+      6.125,
+      6.375,
+      6.625,
+      6.875,
+      7.125,
+      7.375,
+      7.625,
+      7.875,
+      8.125,
+      8.375,
+      8.625,
+      8.875,
+      9.125,
+      9.375,
+      9.625,
+      9.875,
+      10.125,
+      10.375,
+      10.625,
+      10.875,
+      11.125,
+      11.375,
+      11.625,
+      11.875
+    ],
+    "trainingFrames": [
+      {
+        "time": 0.416667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 0.375,
+        "presentedTime": 0.416667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "90e58e782fab8030254102cd8dff5e70dc793df55f8aed9c8ff833a5f86c4e98"
+      },
+      {
+        "time": 1.416667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 1.375,
+        "presentedTime": 1.416667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "97b662f054ba98ccd0b836e0604ef432fb845efd032836e4a8975bb0794386fd"
+      },
+      {
+        "time": 1.666667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 1.625,
+        "presentedTime": 1.666667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "e4cff3e146bcb2a214a9d1fc4101773f382f25dfce6bd7c3feb43d39b1a27bfe"
+      },
+      {
+        "time": 2.916667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 2.875,
+        "presentedTime": 2.916667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "bb4e3f59efaf18a49362704a7a4c729409cb517a253d646dcaf5ea02c12614eb"
+      },
+      {
+        "time": 3.666667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 3.625,
+        "presentedTime": 3.666667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "fcc74ca150bb182770ccbf389d8c307c3e4636c58b014cf8900487680e20a89c"
+      },
+      {
+        "time": 4.416667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 4.375,
+        "presentedTime": 4.416667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "f22639a38cc347646ea609a6ff49d1ded6e38b1cc63ddcd444db2346acf1c6ca"
+      },
+      {
+        "time": 4.916667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 4.875,
+        "presentedTime": 4.916667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "18dbd53f6f9e1e450a96be189b83407d0a525005cc99fe9406294d8703d83993"
+      },
+      {
+        "time": 5.458333,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 5.375,
+        "presentedTime": 5.458333,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "ee73ef27ef01aaf035491aa227dae9c401cebcad45bc35991880367828b9b112"
+      },
+      {
+        "time": 6.666667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 6.625,
+        "presentedTime": 6.666667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "69fa8152cc42873a13cceb73e5e77aa6302897cc9d51c67e62c1229afd5d085f"
+      },
+      {
+        "time": 6.916667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 6.875,
+        "presentedTime": 6.916667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "3db23c752fb649c68ea94c422dd73ab241e03b9f3647813efcb8284814537088"
+      },
+      {
+        "time": 8.166667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 8.125,
+        "presentedTime": 8.166667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "9b00154c935e641e1f2a3238cea3136497c2a1d8ea3f32be10f188d85ea96610"
+      },
+      {
+        "time": 8.916667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 8.875,
+        "presentedTime": 8.916667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "1b5b72418387584dce2ce9ea34ee3c2962fb31dc45fa0ade437cc5c4c24e9e88"
+      },
+      {
+        "time": 9.416667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 9.375,
+        "presentedTime": 9.416667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "22ceb1aed870bfe43fff82d81bb16fcd9aed472d10953fe0ad672f229e244f9d"
+      },
+      {
+        "time": 10.416667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 10.375,
+        "presentedTime": 10.416667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "289ee42db54d030858efee9d6f5fb02ea7b9ff9e6376ee9a86cf5644ec803d7b"
+      },
+      {
+        "time": 10.916667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 10.875,
+        "presentedTime": 10.916667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "229b6ea26ea81742935b9af53acbb5dbf530301b0e925877a579eb6151a105ed"
+      },
+      {
+        "time": 11.416667,
+        "width": 480,
+        "height": 270,
+        "requestedTime": 11.375,
+        "presentedTime": 11.416667,
+        "timestampEvidence": "presented-media-time",
+        "sha256": "f5ccad5ec3b29efd37eff4d9f96c65950d83c2ebcf28566c0cd7f8f12c4abeea"
+      }
+    ],
+    "timestampEvidence": "presented-media-time"
+  }
+}

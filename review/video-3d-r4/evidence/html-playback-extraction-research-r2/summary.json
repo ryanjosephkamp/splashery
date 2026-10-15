@@ -1,0 +1,1034 @@
+{
+  "at": "2026-10-15T11:26:39.164Z",
+  "rawSha256": "9fa804873bf47865d6cd27e9160f27e41d2ba6f636d6429c4ba8d529e0b28d3e",
+  "notice": "Outside-only phone exact-ceil extraction research. All20 outcomes retained. No product integration, end-to-end bake, held-out quality, physical-phone timing or acceptance claim.",
+  "predeclaredCases": 20,
+  "verifiedCases": 4,
+  "unsupportedCases": 3,
+  "fallbackCases": 16,
+  "verifiedJpegs": 64,
+  "exactTrials": 192,
+  "rows": [
+    {
+      "id": "cat-track",
+      "status": "verified-exact-ceil",
+      "frames": 16,
+      "photos": 16,
+      "trials": 48,
+      "extractSeconds": 16.246800000000746,
+      "failedAttemptSeconds": null,
+      "proofSeconds": 9.10689999999851,
+      "totalSeconds": 28.015,
+      "error": null,
+      "lastActualObservation": null,
+      "desiredAtFailure": null,
+      "completedWindowsAtFailure": null,
+      "startup": [
+        {
+          "time": 2.166667,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 2.286083,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 2.286083,
+          "position": 0.007971,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "cat-plays",
+      "status": "verified-exact-ceil",
+      "frames": 16,
+      "photos": 16,
+      "trials": 48,
+      "extractSeconds": 11.99539999999851,
+      "failedAttemptSeconds": null,
+      "proofSeconds": 9.30139999999851,
+      "totalSeconds": 22.901,
+      "error": null,
+      "lastActualObservation": null,
+      "desiredAtFailure": null,
+      "completedWindowsAtFailure": null,
+      "startup": [
+        {
+          "time": 1.125,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 1.376454,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 1.376454,
+          "position": 0.021259,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": 29.180599999997764,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "buddha",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 40,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 41.92389999999851,
+      "proofSeconds": null,
+      "totalSeconds": 43.586699999999254,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 41918.800000000745,
+        "kind": "rvfc",
+        "time": 6.791667,
+        "micros": 6791667,
+        "origin": "rvfc",
+        "target": 40,
+        "presentedFrames": 167
+      },
+      "desiredAtFailure": {
+        "window": 13,
+        "trial": 1,
+        "requestedTime": 6.75,
+        "pts": 82944,
+        "time": 6.75,
+        "micros": 6750000,
+        "sourcePresentationIndex": 162
+      },
+      "completedWindowsAtFailure": 13,
+      "startup": [
+        {
+          "time": 0.625,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.765095,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 0.765095,
+          "position": 0.035268,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "chameleon-flowers",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 22,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 9.96689999999851,
+      "proofSeconds": null,
+      "totalSeconds": 11.364300000000744,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 9964.89999999851,
+        "kind": "rvfc",
+        "time": 4.75,
+        "micros": 4750000,
+        "origin": "rvfc",
+        "target": 22,
+        "presentedFrames": 119
+      },
+      "desiredAtFailure": {
+        "window": 7,
+        "trial": 1,
+        "requestedTime": 4.688,
+        "pts": 57856,
+        "time": 4.708333333333333,
+        "micros": 4708333,
+        "sourcePresentationIndex": 113
+      },
+      "completedWindowsAtFailure": 7,
+      "startup": [
+        {
+          "time": 0.625,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.76087,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.083333,
+          "requestedTime": 0.001,
+          "before": 0.76087,
+          "position": 0.080761,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": 49.72169999999925,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "dianthus",
+      "status": "unsupported-table-immediate-fallback",
+      "frames": null,
+      "photos": 0,
+      "trials": 0,
+      "extractSeconds": null,
+      "failedAttemptSeconds": null,
+      "proofSeconds": null,
+      "totalSeconds": 0.07910000000149012,
+      "error": "Nontrivial edit list unsupported",
+      "lastActualObservation": null,
+      "desiredAtFailure": null,
+      "completedWindowsAtFailure": null,
+      "startup": [],
+      "cleanup": {
+        "noOpenedVideo": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "pisac",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 45,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 13.47110000000149,
+      "proofSeconds": null,
+      "totalSeconds": 14.904699999999256,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 13469.300000000745,
+        "kind": "rvfc",
+        "time": 9.541667,
+        "micros": 9541667,
+        "origin": "rvfc",
+        "target": 45,
+        "presentedFrames": 234
+      },
+      "desiredAtFailure": {
+        "window": 15,
+        "trial": 0,
+        "requestedTime": 9.479,
+        "pts": 116736,
+        "time": 9.5,
+        "micros": 9500000,
+        "sourcePresentationIndex": 228
+      },
+      "completedWindowsAtFailure": 15,
+      "startup": [
+        {
+          "time": 1.375,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 1.681026,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 1.681026,
+          "position": 0.033881,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "sleeping-dog",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 3,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 3.7161000000014903,
+      "proofSeconds": null,
+      "totalSeconds": 5.47970000000298,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 3714.199999999255,
+        "kind": "rvfc",
+        "time": 0.625,
+        "micros": 625000,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 18
+      },
+      "desiredAtFailure": {
+        "window": 1,
+        "trial": 0,
+        "requestedTime": 0.583,
+        "pts": 7168,
+        "time": 0.5833333333333334,
+        "micros": 583333,
+        "sourcePresentationIndex": 14
+      },
+      "completedWindowsAtFailure": 1,
+      "startup": [
+        {
+          "time": 0.541667,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.523504,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 0.523504,
+          "position": 0.021917,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "palace-statue",
+      "status": "extraction-or-proof-fallback",
+      "frames": 15,
+      "photos": 0,
+      "trials": 10,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 4.976800000000745,
+      "proofSeconds": null,
+      "totalSeconds": 5.762300000000745,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 4974.70000000298,
+        "kind": "rvfc",
+        "time": 1.208333,
+        "micros": 1208333,
+        "origin": "rvfc",
+        "target": 10,
+        "presentedFrames": 35
+      },
+      "desiredAtFailure": {
+        "window": 3,
+        "trial": 1,
+        "requestedTime": 1.166,
+        "pts": 14336,
+        "time": 1.1666666666666667,
+        "micros": 1166667,
+        "sourcePresentationIndex": 28
+      },
+      "completedWindowsAtFailure": 3,
+      "startup": [
+        {
+          "time": 1.375,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 1.590901,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 1.590901,
+          "position": 0.052603,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "oa-street",
+      "status": "verified-exact-ceil",
+      "frames": 16,
+      "photos": 16,
+      "trials": 48,
+      "extractSeconds": 16.0065,
+      "failedAttemptSeconds": null,
+      "proofSeconds": 11.424199999999255,
+      "totalSeconds": 28.900300000000744,
+      "error": null,
+      "lastActualObservation": null,
+      "desiredAtFailure": null,
+      "completedWindowsAtFailure": null,
+      "startup": [
+        {
+          "time": 1.125,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 1.280834,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 1.280834,
+          "position": 0.038729,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "ullard",
+      "status": "verified-exact-ceil",
+      "frames": 16,
+      "photos": 16,
+      "trials": 48,
+      "extractSeconds": 17.619800000000744,
+      "failedAttemptSeconds": null,
+      "proofSeconds": 14.911099999997765,
+      "totalSeconds": 33.880199999999256,
+      "error": null,
+      "lastActualObservation": null,
+      "desiredAtFailure": null,
+      "completedWindowsAtFailure": null,
+      "startup": [
+        {
+          "time": 0.666667,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.76824,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 0.76824,
+          "position": 0.030214,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "snaefell",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 6,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 4.588,
+      "proofSeconds": null,
+      "totalSeconds": 5.5475,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 4579.199999999255,
+        "kind": "rvfc",
+        "time": 1.416667,
+        "micros": 1416667,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 37
+      },
+      "desiredAtFailure": {
+        "window": 2,
+        "trial": 0,
+        "requestedTime": 1.354,
+        "pts": 16896,
+        "time": 1.375,
+        "micros": 1375000,
+        "sourcePresentationIndex": 33
+      },
+      "completedWindowsAtFailure": 2,
+      "startup": [
+        {
+          "time": 0.583333,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.605178,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 0.605178,
+          "position": 0.062977,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "fremantle-orbit",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 14,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 6.47320000000298,
+      "proofSeconds": null,
+      "totalSeconds": 7.66739999999851,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 6456.70000000298,
+        "kind": "rvfc",
+        "time": 3.666667,
+        "micros": 3666667,
+        "origin": "rvfc",
+        "target": 14,
+        "presentedFrames": 89
+      },
+      "desiredAtFailure": {
+        "window": 4,
+        "trial": 2,
+        "requestedTime": 3.625,
+        "pts": 44544,
+        "time": 3.625,
+        "micros": 3625000,
+        "sourcePresentationIndex": 87
+      },
+      "completedWindowsAtFailure": 4,
+      "startup": [
+        {
+          "time": 0.625,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.989056,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 0.989056,
+          "position": 0.051134,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": 46.4675,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "ihasalu-orbit",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 2,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 2.917800000000745,
+      "proofSeconds": null,
+      "totalSeconds": 4.898199999999255,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 2915.5,
+        "kind": "rvfc",
+        "time": 0.666667,
+        "micros": 666667,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 20
+      },
+      "desiredAtFailure": {
+        "window": 0,
+        "trial": 2,
+        "requestedTime": 0.625,
+        "pts": 7680,
+        "time": 0.625,
+        "micros": 625000,
+        "sourcePresentationIndex": 15
+      },
+      "completedWindowsAtFailure": 0,
+      "startup": [
+        {
+          "time": 0.625,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.734105,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 0.734105,
+          "position": 0.06314,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "fresnel-lens",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 12,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 5.437,
+      "proofSeconds": null,
+      "totalSeconds": 6.8355,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 5405,
+        "kind": "rvfc",
+        "time": 2.666667,
+        "micros": 2666667,
+        "origin": "rvfc",
+        "target": 12,
+        "presentedFrames": 65
+      },
+      "desiredAtFailure": {
+        "window": 4,
+        "trial": 0,
+        "requestedTime": 2.604,
+        "pts": 32256,
+        "time": 2.625,
+        "micros": 2625000,
+        "sourcePresentationIndex": 63
+      },
+      "completedWindowsAtFailure": 4,
+      "startup": [
+        {
+          "time": 0.541667,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.559323,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0,
+          "requestedTime": 0.001,
+          "before": 0.559323,
+          "position": 0.001,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "saint-denis",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 0,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 1.6757999999970197,
+      "proofSeconds": null,
+      "totalSeconds": 2.944900000002235,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 1661.199999999255,
+        "kind": "rvfc",
+        "time": 0.166667,
+        "micros": 166667,
+        "origin": "rvfc",
+        "target": 0,
+        "presentedFrames": 8
+      },
+      "desiredAtFailure": {
+        "window": 0,
+        "trial": 0,
+        "requestedTime": 0.104,
+        "pts": 1536,
+        "time": 0.125,
+        "micros": 125000,
+        "sourcePresentationIndex": 3
+      },
+      "completedWindowsAtFailure": 0,
+      "startup": [
+        {
+          "time": 0.583333,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.607664,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 0.607664,
+          "position": 0.043686,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "horse-statue",
+      "status": "unsupported-table-immediate-fallback",
+      "frames": null,
+      "photos": 0,
+      "trials": 0,
+      "extractSeconds": null,
+      "failedAttemptSeconds": null,
+      "proofSeconds": null,
+      "totalSeconds": 0.09040000000223518,
+      "error": "Nontrivial edit list unsupported",
+      "lastActualObservation": null,
+      "desiredAtFailure": null,
+      "completedWindowsAtFailure": null,
+      "startup": [],
+      "cleanup": {
+        "noOpenedVideo": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "royal-sovereign",
+      "status": "unsupported-table-immediate-fallback",
+      "frames": null,
+      "photos": 0,
+      "trials": 0,
+      "extractSeconds": null,
+      "failedAttemptSeconds": null,
+      "proofSeconds": null,
+      "totalSeconds": 0.022,
+      "error": "Nontrivial edit list unsupported",
+      "lastActualObservation": null,
+      "desiredAtFailure": null,
+      "completedWindowsAtFailure": null,
+      "startup": [],
+      "cleanup": {
+        "noOpenedVideo": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "viljandi-ruins",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 6,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 4.65610000000149,
+      "proofSeconds": null,
+      "totalSeconds": 5.5565,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 4654,
+        "kind": "rvfc",
+        "time": 1.666667,
+        "micros": 1666667,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 43
+      },
+      "desiredAtFailure": {
+        "window": 2,
+        "trial": 0,
+        "requestedTime": 1.625,
+        "pts": 19968,
+        "time": 1.625,
+        "micros": 1625000,
+        "sourcePresentationIndex": 39
+      },
+      "completedWindowsAtFailure": 2,
+      "startup": [
+        {
+          "time": 0.625,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.814248,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 0.814248,
+          "position": 0.027109,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "kakerdi-bog",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 13,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 6.964699999999255,
+      "proofSeconds": null,
+      "totalSeconds": 7.985699999999255,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 6959.5,
+        "kind": "rvfc",
+        "time": 3.416667,
+        "micros": 3416667,
+        "origin": "rvfc",
+        "target": 13,
+        "presentedFrames": 85
+      },
+      "desiredAtFailure": {
+        "window": 4,
+        "trial": 1,
+        "requestedTime": 3.375,
+        "pts": 41472,
+        "time": 3.375,
+        "micros": 3375000,
+        "sourcePresentationIndex": 81
+      },
+      "completedWindowsAtFailure": 4,
+      "startup": [
+        {
+          "time": 0.625,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 0.783896,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 0.783896,
+          "position": 0.026308,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    },
+    {
+      "id": "fjoloy",
+      "status": "extraction-or-proof-fallback",
+      "frames": 16,
+      "photos": 0,
+      "trials": 21,
+      "extractSeconds": null,
+      "failedAttemptSeconds": 9.545,
+      "proofSeconds": null,
+      "totalSeconds": 10.815800000000745,
+      "error": "Exact ceil source frame was skipped",
+      "lastActualObservation": {
+        "wallMs": 9543.199999999255,
+        "kind": "rvfc",
+        "time": 5.416667,
+        "micros": 5416667,
+        "origin": "rvfc",
+        "target": 21,
+        "presentedFrames": 135
+      },
+      "desiredAtFailure": {
+        "window": 7,
+        "trial": 0,
+        "requestedTime": 5.375,
+        "pts": 66048,
+        "time": 5.375,
+        "micros": 5375000,
+        "sourcePresentationIndex": 129
+      },
+      "completedWindowsAtFailure": 7,
+      "startup": [
+        {
+          "time": 1.375,
+          "requestedTime": 0.5,
+          "before": 0,
+          "position": 1.711514,
+          "observedSeeking": true,
+          "phase": "warm"
+        },
+        {
+          "time": 0.041667,
+          "requestedTime": 0.001,
+          "before": 1.711514,
+          "position": 0.044694,
+          "observedSeeking": true,
+          "phase": "single-rewind"
+        }
+      ],
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true,
+      "r1HistoricalSeekSeconds": null,
+      "r1HistoricalContext": "Separate earlier1440x900 research context; different time/load, not a matched mobile timing control."
+    }
+  ],
+  "abortControl": [
+    {
+      "id": "chameleon-flowers",
+      "status": "research-abort-fallback",
+      "error": {
+        "name": "AbortError",
+        "message": "Stopped"
+      },
+      "completedExtractionReturned": false,
+      "noPartialExtractionReturned": true,
+      "trialCount": 1,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "context": {
+    "viewport": {
+      "width": 390,
+      "height": 844
+    },
+    "deviceScaleFactor": 1,
+    "isMobile": true,
+    "hasTouch": true,
+    "userAgent": "Mozilla/5.0 (Linux; Android 14) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Mobile Safari/537.36"
+  },
+  "startedAt": "2026-10-15T11:21:20.060Z",
+  "endedAt": "2026-10-15T11:26:34.906Z"
+}

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "cat-track",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "cat-plays",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "buddha",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "chameleon-flowers",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "dianthus",
+    "status": "fallback",
+    "reason": "Nontrivial edit list unsupported"
+  },
+  {
+    "id": "pisac",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "sleeping-dog",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "palace-statue",
+    "status": "supported",
+    "frames": 15
+  },
+  {
+    "id": "oa-street",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "ullard",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "snaefell",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "fremantle-orbit",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "ihasalu-orbit",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "fresnel-lens",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "saint-denis",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "horse-statue",
+    "status": "fallback",
+    "reason": "Nontrivial edit list unsupported"
+  },
+  {
+    "id": "royal-sovereign",
+    "status": "fallback",
+    "reason": "Nontrivial edit list unsupported"
+  },
+  {
+    "id": "viljandi-ruins",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "kakerdi-bog",
+    "status": "supported",
+    "frames": 16
+  },
+  {
+    "id": "fjoloy",
+    "status": "supported",
+    "frames": 16
+  }
+]

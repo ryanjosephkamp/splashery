@@ -1,0 +1,14 @@
+✔ samples all three actual trial frames and keeps actual winning PTS (77.568805ms)
+✔ cross-window output returns no photograph array and pauses (0.748426ms)
+✔ crossing two trial targets rejects rather than reducing trial budget (0.34345ms)
+✔ nonmonotonic RVFC timestamps reject without source relabelling (0.349441ms)
+✔ abort during first trial cannot restart playback or publish partial results (0.817936ms)
+✔ synchronous canvas failure immediately stops the owned playback callback (0.351816ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 592.303689

@@ -1,0 +1,269 @@
+[
+  {
+    "executablePath": "/usr/bin/chromium",
+    "browser": "151.0.7922.173",
+    "result": {
+      "elapsed": 52575.89999999851,
+      "opened": [
+        854,
+        481,
+        10
+      ],
+      "extraction": {
+        "method": "video-element"
+      },
+      "failure": "Local decoder deadline",
+      "config": {
+        "codec": "avc1.64001e",
+        "codedWidth": 854,
+        "codedHeight": 480,
+        "displayAspectWidth": 853,
+        "displayAspectHeight": 480
+      },
+      "crop": {
+        "sx": 0,
+        "sw": 854
+      },
+      "frames": [
+        {
+          "time": 0.333333,
+          "requestedTime": 0.313,
+          "presentedTime": 0.333333,
+          "sharpness": 2387.781277457346,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 1.208333,
+          "requestedTime": 1.146,
+          "presentedTime": 1.208333,
+          "sharpness": 2445.80557619867,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 1.583333,
+          "requestedTime": 1.563,
+          "presentedTime": 1.583333,
+          "sharpness": 2514.19042792785,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 2.416667,
+          "requestedTime": 2.396,
+          "presentedTime": 2.416667,
+          "sharpness": 2360.863619893949,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 2.625,
+          "requestedTime": 2.604,
+          "presentedTime": 2.625,
+          "sharpness": 2419.937238090122,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 3.25,
+          "requestedTime": 3.229,
+          "presentedTime": 3.25,
+          "sharpness": 2185.8429069318136,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 3.875,
+          "requestedTime": 3.854,
+          "presentedTime": 3.875,
+          "sharpness": 2030.4516633134313,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 4.708333,
+          "requestedTime": 4.688,
+          "presentedTime": 4.708333,
+          "sharpness": 1863.871502533747,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 5.125,
+          "requestedTime": 5.104,
+          "presentedTime": 5.125,
+          "sharpness": 1707.5578988949765,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 5.75,
+          "requestedTime": 5.729,
+          "presentedTime": 5.75,
+          "sharpness": 1541.9205094457502,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 6.583333,
+          "requestedTime": 6.563,
+          "presentedTime": 6.583333,
+          "sharpness": 1533.0574673604526,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 7,
+          "requestedTime": 6.979,
+          "presentedTime": 7,
+          "sharpness": 1375.6320159778677,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 7.833333,
+          "requestedTime": 7.813,
+          "presentedTime": 7.833333,
+          "sharpness": 1324.7180332769021,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 8.25,
+          "requestedTime": 8.229,
+          "presentedTime": 8.25,
+          "sharpness": 1362.685494664147,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 9.291667,
+          "requestedTime": 9.271,
+          "presentedTime": 9.291667,
+          "sharpness": 1250.2868549350012,
+          "width": 480,
+          "height": 270
+        },
+        {
+          "time": 9.916667,
+          "requestedTime": 9.896,
+          "presentedTime": 9.916667,
+          "sharpness": 1356.9987393394538,
+          "width": 480,
+          "height": 270
+        }
+      ],
+      "metadata": [
+        {
+          "pts": 0,
+          "coded": [
+            864,
+            482
+          ],
+          "display": [
+            854,
+            481
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 854,
+            "height": 480,
+            "top": 0,
+            "right": 854,
+            "bottom": 480,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 41667,
+          "coded": [
+            864,
+            482
+          ],
+          "display": [
+            854,
+            481
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 854,
+            "height": 480,
+            "top": 0,
+            "right": 854,
+            "bottom": 480,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 83333,
+          "coded": [
+            864,
+            482
+          ],
+          "display": [
+            854,
+            481
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 854,
+            "height": 480,
+            "top": 0,
+            "right": 854,
+            "bottom": 480,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 125000,
+          "coded": [
+            864,
+            482
+          ],
+          "display": [
+            854,
+            481
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 854,
+            "height": 480,
+            "top": 0,
+            "right": 854,
+            "bottom": 480,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        }
+      ]
+    }
+  }
+]

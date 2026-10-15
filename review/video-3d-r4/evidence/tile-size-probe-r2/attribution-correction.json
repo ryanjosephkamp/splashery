@@ -1,0 +1,11 @@
+{
+  "at": "2026-10-15T11:41:23.630086+00:00",
+  "kind": "attribution-correction",
+  "incorrectAssessmentUrl": "https://commons.wikimedia.org/wiki/File:Chameleon_on_flowers.webm",
+  "correctSource": "https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm",
+  "author": "Ventrovert",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0",
+  "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e",
+  "notice": "The assessment typed the source filename incorrectly. This additive correction supersedes that citation only. Original assessment, source-byte input binding, measured data, and prior freeze remain unchanged."
+}

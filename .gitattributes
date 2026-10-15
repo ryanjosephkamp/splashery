@@ -1,0 +1,2 @@
+# Raw RGBA pixel buffers are binary evidence; retain their exact bytes.
+review/video-3d-r4/evidence/**/*.rgba binary

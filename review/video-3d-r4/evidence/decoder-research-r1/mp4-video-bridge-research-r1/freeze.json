@@ -1,0 +1,550 @@
+{
+  "frozenAt": "2026-10-15T10:56:37.845656+00:00",
+  "scope": "One native SwiftShader browser; four fixed inputs/12anchors; outside-only negative exact-parity diagnostic",
+  "results": {
+    "anchors": 12,
+    "bridgeExactRgba": 0,
+    "bridgeExactJpeg": 0,
+    "allRecordedTimestampOffsetsZero": true,
+    "sourceImageIdentity": "Not proven: original-vs-bridge image bytes differ despite matching timestamps",
+    "cleanup": "All four cases: frame/RVFC maps empty, decoder closed, track ended; browser/server closed normally"
+  },
+  "timingNotice": "Concurrent load; software GPU; no isolated/native-device timing claim",
+  "noProductRuntimeCoordinatorEditsOrSignals": true,
+  "files": [
+    {
+      "file": "LICENSE",
+      "bytes": 1232,
+      "sha256": "49ef4964bc04a7ee905bb75c8b658e6e4284206b15e32277f63594aa701bab21",
+      "rights": "Original helper MIT code/report"
+    },
+    {
+      "file": "README.md",
+      "bytes": 7185,
+      "sha256": "daa4fc7dc2536ff90f01058db387566cf29f3c5871662b53e749fc5c951b0fd8",
+      "rights": "Original helper MIT code/report"
+    },
+    {
+      "file": "analysis.json",
+      "bytes": 23698,
+      "sha256": "39e3b3f003558a93d74530a1971e035ffbb637e243116f23a644717a0772f9a3",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "analyze.mjs",
+      "bytes": 2512,
+      "sha256": "2623c6db42f8118b02da88dd91584b3aab15c1069ebeae9dd1af144e7a9a3749",
+      "rights": "Original helper MIT code/report"
+    },
+    {
+      "file": "b-sar/0-bridge.jpg",
+      "bytes": 5945,
+      "sha256": "8910b34ea1ef242353a64e6d6eedb7636a17dfa4c818f504f47a7a766787cf0a",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/0-bridge.rgba",
+      "bytes": 53760,
+      "sha256": "c5275bdb3a59fd45a5d21cb798a1138243477aec6cd7549b6585f6aac7ce49ff",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/0-direct.jpg",
+      "bytes": 5903,
+      "sha256": "6a5918b3eb9472c7c31be7eed724dad72d744c8efcac7f8f0393f0f47ffb14cd",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/0-direct.rgba",
+      "bytes": 53760,
+      "sha256": "56ef2fb89644aa679f4895a3741f1e39f1a067104d377601635b9e73fa503dcc",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/0-reference.jpg",
+      "bytes": 5945,
+      "sha256": "a087cb239fde26c6fb4c43f46b4d3d6dd06e34d5a2eef2a1ea902d99c4b0f127",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/0-reference.rgba",
+      "bytes": 53760,
+      "sha256": "01c5ff34633166cc69b55c180da4cbcdb5adc90cd9ee62cf93264d1a41a946e6",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/1-bridge.jpg",
+      "bytes": 6085,
+      "sha256": "77e364afb32797c9dc2f71a42ff9fa36f06387fb03f92bbd1a8ae9102a1c7bc5",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/1-bridge.rgba",
+      "bytes": 53760,
+      "sha256": "c969429052485a58242dc1655ef71770517e11dd71450425d682e12d8b9d4310",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/1-direct.jpg",
+      "bytes": 6030,
+      "sha256": "c43097325fa1f1fdb5348cbc573f9d08506db3de9fa58a0e7821af3b9ddbe7cc",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/1-direct.rgba",
+      "bytes": 53760,
+      "sha256": "72a387dc14c46c3c706159b2bb394ce2c1cc9122e2b1d86a8c929e1525e6a608",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/1-reference.jpg",
+      "bytes": 6081,
+      "sha256": "bce136e29035701170465b53eb572616317b7bdff166e51ae1562159c555c363",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/1-reference.rgba",
+      "bytes": 53760,
+      "sha256": "fc4b5e3d560746c3550899471935b693adf577b21b1e43b99829db60987a5f28",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/2-bridge.jpg",
+      "bytes": 5870,
+      "sha256": "514375cbc0b3501029c02b949d6d0c9587bda9805935d15c683bdef58ba8d6ce",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/2-bridge.rgba",
+      "bytes": 53760,
+      "sha256": "4f02fa7b36f72e76a933a1edf8ad6645785a18e32afce265a37f3bbf4af133ca",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/2-direct.jpg",
+      "bytes": 5843,
+      "sha256": "cf41d396d5a1c4b5af146badaa035c2b7fd11c317d0168c90f150bc5518537db",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/2-direct.rgba",
+      "bytes": 53760,
+      "sha256": "2cde1caa8c5324eb7c9913002ba4673149263f0f9ba359fddc59ef3ee0b82b21",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/2-reference.jpg",
+      "bytes": 5857,
+      "sha256": "9d7504f90badf7e475dbe1187ede549eb9db0a5d256cb9a8dadc27b801717770",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "b-sar/2-reference.rgba",
+      "bytes": 53760,
+      "sha256": "aa1e40a65c596976a763ad05618d48d2bafc9fd2f21a587e44cad4a9e8a2ff6d",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/0-bridge.jpg",
+      "bytes": 24702,
+      "sha256": "85cc422a8993ba3fc3136dab962c8cd4379779c845e10fb94ca59e5d69700c21",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/0-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "2967553b72cc17ef3373cb56102f198913f1f472769df0d4d9bcc5d3a71fd4ae",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/0-direct.jpg",
+      "bytes": 24714,
+      "sha256": "d6823671fa62ee1b0f7b5a6b971aaf35bbc5c6f63e648d130d790ac98a7a312c",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/0-direct.rgba",
+      "bytes": 230400,
+      "sha256": "d67ca2fc1d6be6d059525647732449c2667066999c25fc0f89cd356ae56c65bb",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/0-reference.jpg",
+      "bytes": 24689,
+      "sha256": "b20c8d8506831fcd776792fdbd3a3f4e3d785aee39d2344f5383eca97a3a3446",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/0-reference.rgba",
+      "bytes": 230400,
+      "sha256": "8c343606dae0162935806059b77f8f67ec07f036ed69e81742a2168e02328d0f",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/1-bridge.jpg",
+      "bytes": 24795,
+      "sha256": "a4ffa5f0fcb228d980c0a9e68bb5bfe619e672bbc9e1d985c6dab84a9207f2f1",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/1-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "faacf7c382f450bae0fe31ce683f92e2efe8a60f9146d058b7e5a70a1220b0e6",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/1-direct.jpg",
+      "bytes": 24779,
+      "sha256": "d6201b6ced0dbbc7006a63b40fbcc08cd04545928f2d1d8308de9e9ef9e962a4",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/1-direct.rgba",
+      "bytes": 230400,
+      "sha256": "dada938bb92a8c395757316772bab40e9cad6e796a0e599a9438a566888af61d",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/1-reference.jpg",
+      "bytes": 24801,
+      "sha256": "cab0fdfc6aa0d454eb3fe85fd3ef2f6cfec46767fd81bc5a457e78b4e6a5b7c8",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/1-reference.rgba",
+      "bytes": 230400,
+      "sha256": "61084c9722c32f5823681f0681928c2a3e4886e56efaad2e54ab17897e991cdf",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/2-bridge.jpg",
+      "bytes": 25388,
+      "sha256": "51df9036abf74e255b40e53a1e7d57aa87774ec492212e1a9b0e6a03601bff2e",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/2-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "60eb67fc5c39b924d3eb4f5ff73d33a4a30da7659127b794c1674a41d1e5c137",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/2-direct.jpg",
+      "bytes": 25395,
+      "sha256": "9b8c5053ea2e709f11db98290b8ad690a9bd09a9602c9af25f60c86bb4407f75",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/2-direct.rgba",
+      "bytes": 230400,
+      "sha256": "99081eb0b253c5b1293de766fd06984ff7d9e3aeebf38a09ac32f327e20f29d7",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/2-reference.jpg",
+      "bytes": 25384,
+      "sha256": "15590c47fa09dad2374fe95d3dae6b514875a1694f1b93cb6939dcf65e7b39df",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "cat-plays/2-reference.rgba",
+      "bytes": 230400,
+      "sha256": "f1b4cd9bf48218d8533ec6338232010f89d12b17842694bb1b403b591880bb95",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/0-bridge.jpg",
+      "bytes": 17931,
+      "sha256": "eab69f8fffb57101c6a0133412d90b78fb0a9bfbb93e4eb8b9457d9f581f3ba3",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/0-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "299af016918adec1c76db1812d60e5f5efd9dfb480debd3c1b574b9b648175b1",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/0-direct.jpg",
+      "bytes": 17740,
+      "sha256": "ee09b0494c9a5c5ad20b6237c3e760c0bcbd76cb345cd25d183dc280acb1d1ec",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/0-direct.rgba",
+      "bytes": 230400,
+      "sha256": "c152be5bd02feba6bc2d4ad5f072629fb134ef6df59c468b3481336cc55e187a",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/0-reference.jpg",
+      "bytes": 17920,
+      "sha256": "b5c372e5b274e7c56f623eb5fb5c0b02ee90ac2ca9009f26cfc4f4d8e62e3525",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/0-reference.rgba",
+      "bytes": 230400,
+      "sha256": "5b152cbdae9f13d164a5b7bb07fff798b04fa204627ce96cb5ea8feaf80b7f06",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/1-bridge.jpg",
+      "bytes": 18187,
+      "sha256": "a47330aeed7003021743ed7fb960b4272fbb393b4adf078059ef4d6a036c1c5a",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/1-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "2122da275b96a97dbb3164d2592bebc333569cd4275ec48d082bb1b1ae098737",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/1-direct.jpg",
+      "bytes": 17975,
+      "sha256": "f5e6142ea621fe97794594b4aaa3ea865d4275c200b1d4a8dd52bfe75066d441",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/1-direct.rgba",
+      "bytes": 230400,
+      "sha256": "e95f6d0385164f33c91d685717ccc0e5d5da0af7427dddd8f518ca9a549f23a6",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/1-reference.jpg",
+      "bytes": 18181,
+      "sha256": "17e6e9b352dbb92803eb162483919c93381a20640fe4b2622cf8e23f817f2b6f",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/1-reference.rgba",
+      "bytes": 230400,
+      "sha256": "e19178f56d8ac11c1ac22daf3b9f8f3e47f4d877174a0d363d1eb011a849015d",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/2-bridge.jpg",
+      "bytes": 14822,
+      "sha256": "f2a15847c42b8bbc83b8eb509087eb0872006d446960d64bc2af6352399e9d02",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/2-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "8240f5785ceada0ce7dde8919658d40bd6fefa9d36b8aa3d2a22074d314fcac6",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/2-direct.jpg",
+      "bytes": 14705,
+      "sha256": "d9ea6ae3ed10740f0d6dd0a221ecec3c3c27cfa914378f741a1db2dd231b5d4d",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/2-direct.rgba",
+      "bytes": 230400,
+      "sha256": "0913f19bd0870a8f282b9d298b6923caea68ae93044e41d19e49dd79ba1c1a60",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/2-reference.jpg",
+      "bytes": 14816,
+      "sha256": "36e67c18dc1f0cef598d3a30dcc824abf0a27682b3d7465c6aac0ca37d5c38f1",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "chameleon-flowers/2-reference.rgba",
+      "bytes": 230400,
+      "sha256": "a4eb3400f37a40d43688d3ec919436977fd61abcbee2a2fa5e92d28a0f78165f",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "client.mjs",
+      "bytes": 8948,
+      "sha256": "a85313f025a00ef84d62011fd3acd9b3ad66213244297f9f91784fdedefbb42a",
+      "rights": "Original helper MIT code/report"
+    },
+    {
+      "file": "demux.mjs",
+      "bytes": 12484,
+      "sha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "docs/mdn-mediastreamtrackgenerator.html",
+      "bytes": 147955,
+      "sha256": "68dbf88897f6cb9e68ab67e442e673b37eb004180896cfabe5db4f2b10684180",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "docs/mdn-videotrackgenerator.html",
+      "bytes": 151094,
+      "sha256": "db85cce0914b999f05e5c4b767565bb6503e5c360344cae6e7decb07dc5ec437",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/0-bridge.jpg",
+      "bytes": 12388,
+      "sha256": "04ae1edcc2673f23efd3542cb44da494b5ed50a79d2b4ece337cbbb623aa3a4a",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/0-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "786e495f3aa697238c81119e5c5c75d54080aa5f04da3dba4514692091316a39",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/0-direct.jpg",
+      "bytes": 12045,
+      "sha256": "0e325d0525c14ca2733fd563f4613caf876133bdaa056e7250369131e451c10a",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/0-direct.rgba",
+      "bytes": 230400,
+      "sha256": "a6cb02068f37994da3d288936b93aa7aace46cca001d51d1bb83e71783c13037",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/0-reference.jpg",
+      "bytes": 12376,
+      "sha256": "ecfc1128031ee2d62f4b06b1c3ddab10fe474023b7fa08b7747cd762c787792e",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/0-reference.rgba",
+      "bytes": 230400,
+      "sha256": "a71dd856b160e5cc1c90ed3e74ccac613f1d933923a58c31381062901fd18c71",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/1-bridge.jpg",
+      "bytes": 11502,
+      "sha256": "4c11a8992db350857d60db80e12f36bb74aaf416451659fe924e8e11add47dfc",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/1-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "1e6c7466ec15b0abfffd29b33446460a3d02b9ab7ef871e53ae4a642602fb870",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/1-direct.jpg",
+      "bytes": 11235,
+      "sha256": "c8f9bcd77606dac191cdbdbc631cf9d152c54128d5a1ffef57a6f499db1b39e4",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/1-direct.rgba",
+      "bytes": 230400,
+      "sha256": "d02fc9d9de5876d2d1820cd52ac1a61c815b69acf6ffe6ccfbf7fa28e3605d9e",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/1-reference.jpg",
+      "bytes": 11505,
+      "sha256": "6a08b987699689760d45b5d515bb856646c50a9a698a7c4388a1675f4361b20e",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/1-reference.rgba",
+      "bytes": 230400,
+      "sha256": "ec9e5849637fd1e3453f2dd91842d4f442bc9fe117c61e31b1d2e971905e75bc",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/2-bridge.jpg",
+      "bytes": 11522,
+      "sha256": "6412227be8e3f2ed13235f9a827bb12771d174a69b57ccde47b71fca2eb816bb",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/2-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "f419b32ee35926681e37066aa4d1b8bbe560fd0f67d60fe3b6279055eb0d74a9",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/2-direct.jpg",
+      "bytes": 11200,
+      "sha256": "2cef94de6bb5b68dc6642b240ca82574a6ef22cfe78972af7632c6679d8f74c1",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/2-direct.rgba",
+      "bytes": 230400,
+      "sha256": "fce666912fe462e69a18e6111187bb0884bc0c441d0fa783c14f1934c8d00d6e",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/2-reference.jpg",
+      "bytes": 11505,
+      "sha256": "b640762c3d37487e15d915e2c18b1fdc13a4bbf9d664dabc134a9631dfd937d0",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "fremantle-orbit/2-reference.rgba",
+      "bytes": 230400,
+      "sha256": "974ba8cd3123f1f81bc866096f2068500e4f39712ed44e0d1b116c29b95327dc",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "probe.log",
+      "bytes": 1413,
+      "sha256": "a11f48186338643231e8afce21d6a5c028c8d05ae91c97ea478707fa50a542c6",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "probe.mjs",
+      "bytes": 4042,
+      "sha256": "dab0f87a6d0fa2ada4b734b2a9831c53ccbdbc224189fc0749f1cc91a15da81e",
+      "rights": "Original helper MIT code/report"
+    },
+    {
+      "file": "results.json",
+      "bytes": 42436,
+      "sha256": "faaf7978479b6ce3f4386cc74d4c4c6bb1bccb9b6e4f8f3542ffe0bf7eaefe77",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "source-credits.json",
+      "bytes": 6727,
+      "sha256": "d0f2afbd2f9bb47fcb874025d12a8daf719914b7f4545761c445519329f6f9ad",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "source-input-bindings.json",
+      "bytes": 1455,
+      "sha256": "cbf207e37cba944d30b2f65e97f6dff1d4de18c053c00e1d66dfb40c88f9b449",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "src/extract.js",
+      "bytes": 11360,
+      "sha256": "4287f7f23f17f5dd560a21a220e94a1621d4755a5b15dec184ce70598046008c",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "src/fast-extract.js",
+      "bytes": 11546,
+      "sha256": "5ade500e601eda4e5b65142bd8946bbe7adad935ce8bc0b01435227d0c43dddd",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "src/frames.js",
+      "bytes": 4573,
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    },
+    {
+      "file": "src/mp4.js",
+      "bytes": 15868,
+      "sha256": "5a3ee62186ba8bb3c5b4ee246d45b084ab6de02ccbbb44a2d96f8aabcf0fe7aa",
+      "rights": "Source snapshots, corpus metadata/output, generated pattern, or documentation retain original rights"
+    }
+  ]
+}

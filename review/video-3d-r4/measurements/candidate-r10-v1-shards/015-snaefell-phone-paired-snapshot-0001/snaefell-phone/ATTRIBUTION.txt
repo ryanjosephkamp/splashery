@@ -1,0 +1,11 @@
+Mountain panorama, handheld sweep
+Author: Tiny Toast
+Source: https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm
+License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0)
+Checked: October 15, 2026
+File SHA-256: cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6
+Changes: Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+Models and rendered/reference PNGs retain the source license. This additive notice is outside the unchanged raw artifact inventory.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

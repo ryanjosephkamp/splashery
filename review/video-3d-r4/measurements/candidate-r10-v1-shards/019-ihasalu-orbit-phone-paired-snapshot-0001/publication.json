@@ -1,0 +1,81 @@
+{
+  "created": "2026-10-15T12:17:52.098Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/019-ihasalu-orbit-phone-paired",
+  "runSha256": "1686657e4dd7f3295b56515b977315654b51e921df1e929cb11d57e9ce40649c",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "cases": [
+    {
+      "id": "ihasalu-orbit",
+      "profile": "phone",
+      "rowFingerprint": "4c23e7066a95f927adb388c3bfbb53ade295f59355736b238b6e878546eb6c3b",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11305,
+          "sha256": "8cdc5a939be127906929c7713059886ce1721be173d4656dc30f873c1e7ab62c"
+        },
+        {
+          "file": "model.json",
+          "bytes": 28190,
+          "sha256": "8da43d3b41ea0a085e331ff011a9e3cae4ab8ffb24096981a438a2f4f632599a"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1148119,
+          "sha256": "013535b32353716637278a7f28db4215a2e291227c4243ea9693eaaba485dd61"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 181117,
+          "sha256": "b9a5a33077868933555f6f37090dce98e54ab5700d4541965c7c28dc51c80317"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 309478,
+          "sha256": "4c9417e232285ee39a8c14666ff6d8516e0adc2928a65abcd782ef1e743c457d"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 329599,
+          "sha256": "740e3c8b13f5dad301d99fc121ba1da7cc0998ad0c13a18f35d1b31fbb00beb6"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 342439,
+          "sha256": "66d2f3a1238d43dc0658b213b649abe18f07ed29f402daa530abdbdec71bbb18"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 360044,
+          "sha256": "7a1700b626edec51d4c08918ca9f8ef428d5688d8dbd1da1aabc962054762583"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 353192,
+          "sha256": "2981b1d2420e08dee58b39cd954dc8293d3362653c1b664fa06ec8d3f6dbec10"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 365636,
+          "sha256": "0dd06ecab515e9e3ffd8f28f1a7868f0c7b9be58e764258b60eb78475dce2f36"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 378733,
+          "sha256": "8819bca4d1ea319372e46545d7ef04dec4ca506dbb1e2ffa4adb07ff5eb364c2"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 375099,
+          "sha256": "8c145d82a84c5fb252f26ecbdd9d7049b10700cace7a3ccca8d2da94f1919289"
+        },
+        {
+          "file": "result.json",
+          "bytes": 5658,
+          "sha256": "fa7cce3f5c24aa768503303d3b0b2e38bdf0c84dd92a4fe0ca6f95bf43e5c657"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "notice": "Made by Ryan with Codex (GPT-6), MIT. Default expectations generated only from frozen 1cbccf engine; tile8 expectations from the independently GPU-verified global8 prototype. Source program/descriptor hashes include exact shader text. SSAA default descriptor added from the same frozen baseline on October 15, 2026. No production candidate supplies its own expected result.",
+  "original": [
+    {
+      "options": {
+        "shDeg": 0,
+        "compact": false
+      },
+      "programs": {
+        "pipeProject": "363b8c964ec55887f1c19fa67fbc3b1818a9c8a21399f8010a21de19496c725b",
+        "pipeScan": "5d1bf5d213a4befb38523f28564383fda9ab4df7143c1f7a3958f52c6340a63c",
+        "pipeScatter": "0fa285cc7b3cdcf769b2a7d57a851440d5378d9771e51d93979994187bdb1cf0",
+        "pipeSort": "d8000131b0fabb27dbdfe0fd054650a77ec9f31d3cbee48a4da4908fa9c02efd",
+        "pipeRender": "53351c7d3b0f9de23092ddd45ca86d9f8686e1f83e291b8d31c8f1a794bbf98d",
+        "pipeChain": "0be9e6a9e4d7bdc60e1c91c5bb4686e67bf14898d96a111fa1d534bd5b76ab80",
+        "pipeShape": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pipeAdam": "1f9765431b927c441de700df57a2204444e92718450c3f291a24e9b6aa122abc",
+        "pipeGather": "c940e567f509edb0cdc60913db717cef9ab93026fb2aecdaed98bd146f7e0b06",
+        "pipeRefinePatch": "c00e3dd4071011cc5845cd1c8d89b9eca5f953a2f5a8bbc236129d4c127e26de",
+        "pipeRefineApply": "9542c0dd026de6618e4b94833220928fc21afdb2be4aa48df1e58d02840837e4",
+        "pipeBlit": "63971a011b8a8a10ce52fa5cd95ddd3d1bd5627ab8732635bff326e5247e79f1"
+      }
+    },
+    {
+      "options": {
+        "shDeg": 0,
+        "compact": false,
+        "tileGrad": false
+      },
+      "programs": {
+        "pipeProject": "363b8c964ec55887f1c19fa67fbc3b1818a9c8a21399f8010a21de19496c725b",
+        "pipeScan": "5d1bf5d213a4befb38523f28564383fda9ab4df7143c1f7a3958f52c6340a63c",
+        "pipeScatter": "0fa285cc7b3cdcf769b2a7d57a851440d5378d9771e51d93979994187bdb1cf0",
+        "pipeSort": "d8000131b0fabb27dbdfe0fd054650a77ec9f31d3cbee48a4da4908fa9c02efd",
+        "pipeRender": "5199e6f599305ad6b923530f566eb35a020f5b69d1d2ddca434c5647575f6089",
+        "pipeChain": "0be9e6a9e4d7bdc60e1c91c5bb4686e67bf14898d96a111fa1d534bd5b76ab80",
+        "pipeShape": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pipeAdam": "1f9765431b927c441de700df57a2204444e92718450c3f291a24e9b6aa122abc",
+        "pipeGather": "c940e567f509edb0cdc60913db717cef9ab93026fb2aecdaed98bd146f7e0b06",
+        "pipeRefinePatch": "c00e3dd4071011cc5845cd1c8d89b9eca5f953a2f5a8bbc236129d4c127e26de",
+        "pipeRefineApply": "9542c0dd026de6618e4b94833220928fc21afdb2be4aa48df1e58d02840837e4",
+        "pipeBlit": "63971a011b8a8a10ce52fa5cd95ddd3d1bd5627ab8732635bff326e5247e79f1"
+      }
+    },
+    {
+      "options": {
+        "shDeg": 0,
+        "compact": false,
+        "ssimWeight": 0.2
+      },
+      "programs": {
+        "pipeProject": "363b8c964ec55887f1c19fa67fbc3b1818a9c8a21399f8010a21de19496c725b",
+        "pipeScan": "5d1bf5d213a4befb38523f28564383fda9ab4df7143c1f7a3958f52c6340a63c",
+        "pipeScatter": "0fa285cc7b3cdcf769b2a7d57a851440d5378d9771e51d93979994187bdb1cf0",
+        "pipeSort": "d8000131b0fabb27dbdfe0fd054650a77ec9f31d3cbee48a4da4908fa9c02efd",
+        "pipeRender": "53351c7d3b0f9de23092ddd45ca86d9f8686e1f83e291b8d31c8f1a794bbf98d",
+        "pipeRenderFwd": "3bbf6682715708acdf546085fb3af7659b0445e723760f9fee136195b1c5c43f",
+        "pipeRenderBwd": "ec3a26c63e559d59b93c03873548e8baf55d56c8af983ea5a56943c9c025e8fc",
+        "pipeSsimPrep": "c9e27c5f0c0eb48885ebeb8df04b5e6e619ca18ce95dd8c4aea3a14394beaf4e",
+        "pipeSsimBH15": "c465d1428f0ba42b8a4dff47ed76def711aaef5cc8d746bf152ad05463a7d673",
+        "pipeSsimBV15": "503bfeccfb79703ed1d9df8bdc43182f3c58dc574de737e63e4d673c94fba04f",
+        "pipeSsimCoeff": "a7604c8f48bf76a1bb9156a13fc50a893af1a0617ca30be964f895154cee6ca1",
+        "pipeSsimBH9": "3d3abe59309fe98dd7f12ac71eb07b6425d3402aaae238cdfdb31291a20b0dc1",
+        "pipeSsimFinal": "543be2382500af327c9a70e7936463eaf9c3d9f22214aa89bc730fcbfb4bb3b5",
+        "pipeChain": "0be9e6a9e4d7bdc60e1c91c5bb4686e67bf14898d96a111fa1d534bd5b76ab80",
+        "pipeShape": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pipeAdam": "1f9765431b927c441de700df57a2204444e92718450c3f291a24e9b6aa122abc",
+        "pipeGather": "c940e567f509edb0cdc60913db717cef9ab93026fb2aecdaed98bd146f7e0b06",
+        "pipeRefinePatch": "c00e3dd4071011cc5845cd1c8d89b9eca5f953a2f5a8bbc236129d4c127e26de",
+        "pipeRefineApply": "9542c0dd026de6618e4b94833220928fc21afdb2be4aa48df1e58d02840837e4",
+        "pipeBlit": "63971a011b8a8a10ce52fa5cd95ddd3d1bd5627ab8732635bff326e5247e79f1"
+      }
+    },
+    {
+      "options": {
+        "shDeg": 0,
+        "compact": false,
+        "tileGrad": false,
+        "ssimWeight": 0.2
+      },
+      "programs": {
+        "pipeProject": "363b8c964ec55887f1c19fa67fbc3b1818a9c8a21399f8010a21de19496c725b",
+        "pipeScan": "5d1bf5d213a4befb38523f28564383fda9ab4df7143c1f7a3958f52c6340a63c",
+        "pipeScatter": "0fa285cc7b3cdcf769b2a7d57a851440d5378d9771e51d93979994187bdb1cf0",
+        "pipeSort": "d8000131b0fabb27dbdfe0fd054650a77ec9f31d3cbee48a4da4908fa9c02efd",
+        "pipeRender": "5199e6f599305ad6b923530f566eb35a020f5b69d1d2ddca434c5647575f6089",
+        "pipeRenderFwd": "e754bc9b461e226da5ce01e1a443e1ba6b0e2721880d58951f621b90eba17407",
+        "pipeRenderBwd": "15e83d5904668c871687473cd185d17a89b72f8946e922b46ea9aedb223b175f",
+        "pipeSsimPrep": "c9e27c5f0c0eb48885ebeb8df04b5e6e619ca18ce95dd8c4aea3a14394beaf4e",
+        "pipeSsimBH15": "c465d1428f0ba42b8a4dff47ed76def711aaef5cc8d746bf152ad05463a7d673",
+        "pipeSsimBV15": "503bfeccfb79703ed1d9df8bdc43182f3c58dc574de737e63e4d673c94fba04f",
+        "pipeSsimCoeff": "a7604c8f48bf76a1bb9156a13fc50a893af1a0617ca30be964f895154cee6ca1",
+        "pipeSsimBH9": "3d3abe59309fe98dd7f12ac71eb07b6425d3402aaae238cdfdb31291a20b0dc1",
+        "pipeSsimFinal": "543be2382500af327c9a70e7936463eaf9c3d9f22214aa89bc730fcbfb4bb3b5",
+        "pipeChain": "0be9e6a9e4d7bdc60e1c91c5bb4686e67bf14898d96a111fa1d534bd5b76ab80",
+        "pipeShape": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pipeAdam": "1f9765431b927c441de700df57a2204444e92718450c3f291a24e9b6aa122abc",
+        "pipeGather": "c940e567f509edb0cdc60913db717cef9ab93026fb2aecdaed98bd146f7e0b06",
+        "pipeRefinePatch": "c00e3dd4071011cc5845cd1c8d89b9eca5f953a2f5a8bbc236129d4c127e26de",
+        "pipeRefineApply": "9542c0dd026de6618e4b94833220928fc21afdb2be4aa48df1e58d02840837e4",
+        "pipeBlit": "63971a011b8a8a10ce52fa5cd95ddd3d1bd5627ab8732635bff326e5247e79f1"
+      }
+    },
+    {
+      "options": {
+        "shDeg": 0,
+        "compact": false,
+        "tileGrad": false,
+        "ssaa": 2
+      },
+      "programs": {
+        "pipeProject": "363b8c964ec55887f1c19fa67fbc3b1818a9c8a21399f8010a21de19496c725b",
+        "pipeScan": "efb3e1f9953cfa7570c933a54c70f210eb42f9711231684adde9c657e56bb094",
+        "pipeScatter": "0fa285cc7b3cdcf769b2a7d57a851440d5378d9771e51d93979994187bdb1cf0",
+        "pipeSort": "d8000131b0fabb27dbdfe0fd054650a77ec9f31d3cbee48a4da4908fa9c02efd",
+        "pipeRender": "5199e6f599305ad6b923530f566eb35a020f5b69d1d2ddca434c5647575f6089",
+        "pipeRenderFwd": "e754bc9b461e226da5ce01e1a443e1ba6b0e2721880d58951f621b90eba17407",
+        "pipeRenderBwd3": "ac5281338bbe7be6ee6bc94e6662b44781152c4b54361cdf3e4e4d0d24901610",
+        "pipeSsaaLoss": "25eacf33efb9d1ecc9f76cd95638d0bb77414ea9a55283d5ec941d42c24b88ed",
+        "pipeChain": "0be9e6a9e4d7bdc60e1c91c5bb4686e67bf14898d96a111fa1d534bd5b76ab80",
+        "pipeShape": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pipeAdam": "1f9765431b927c441de700df57a2204444e92718450c3f291a24e9b6aa122abc",
+        "pipeGather": "c940e567f509edb0cdc60913db717cef9ab93026fb2aecdaed98bd146f7e0b06",
+        "pipeRefinePatch": "c00e3dd4071011cc5845cd1c8d89b9eca5f953a2f5a8bbc236129d4c127e26de",
+        "pipeRefineApply": "9542c0dd026de6618e4b94833220928fc21afdb2be4aa48df1e58d02840837e4",
+        "pipeBlit": "63971a011b8a8a10ce52fa5cd95ddd3d1bd5627ab8732635bff326e5247e79f1"
+      }
+    }
+  ],
+  "tile8": [
+    {
+      "options": {
+        "shDeg": 0,
+        "compact": false,
+        "tileGrad": false,
+        "ssimWeight": 0,
+        "serialSort": true
+      },
+      "programs": {
+        "pipeProject": "aa683e674f1f58ba82a3b349ce762483f888a95c4927d5659e01c3d3af051661",
+        "pipeScan": "8aa7c22603abe331585d02e346fee1988cf64b3cd24dd90e45a3da47d8f2636f",
+        "pipeScatter": "da048fbc71870c20bee6807d81fd90b46b38ef2e42fdeb960aafba42640ebac5",
+        "pipeSort": "b8ec3d3becfcbc95431a7b444d4fccd8f0322f478ba023455b50f4808458501f",
+        "pipeRender": "dd710fda3cc6ebf948ae1fcd4b16034254efd4f449ded195f6acc4c916b7a4ce",
+        "pipeChain": "c6399db9209289cb77a2b67cb754b86ded4228deb23b6ab4e1755f207aa98d76",
+        "pipeShape": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pipeAdam": "1f9765431b927c441de700df57a2204444e92718450c3f291a24e9b6aa122abc",
+        "pipeGather": "c940e567f509edb0cdc60913db717cef9ab93026fb2aecdaed98bd146f7e0b06",
+        "pipeRefinePatch": "c00e3dd4071011cc5845cd1c8d89b9eca5f953a2f5a8bbc236129d4c127e26de",
+        "pipeRefineApply": "9542c0dd026de6618e4b94833220928fc21afdb2be4aa48df1e58d02840837e4",
+        "pipeBlit": "1d0d5687c7513844745d9e1fb61fbc438b9a28f7c9e993133ae34b9967654f21"
+      }
+    },
+    {
+      "options": {
+        "shDeg": 0,
+        "compact": false,
+        "tileGrad": false,
+        "ssimWeight": 0.2,
+        "serialSort": true
+      },
+      "programs": {
+        "pipeProject": "aa683e674f1f58ba82a3b349ce762483f888a95c4927d5659e01c3d3af051661",
+        "pipeScan": "8aa7c22603abe331585d02e346fee1988cf64b3cd24dd90e45a3da47d8f2636f",
+        "pipeScatter": "da048fbc71870c20bee6807d81fd90b46b38ef2e42fdeb960aafba42640ebac5",
+        "pipeSort": "b8ec3d3becfcbc95431a7b444d4fccd8f0322f478ba023455b50f4808458501f",
+        "pipeRender": "dd710fda3cc6ebf948ae1fcd4b16034254efd4f449ded195f6acc4c916b7a4ce",
+        "pipeRenderFwd": "2cd489f997522a8c91672318f3cd95dd943ec6f8b31f7e01314ee57489d99e2d",
+        "pipeRenderBwd": "d8cf3ab7f5efdfe7ae1ba4b9c8aa4a22e2478738b8692bec2c83ba490699fee2",
+        "pipeSsimPrep": "5533c8934a2df6f2d3ecdc7f28176fcf3c9fbcda0c0581fd81c26c9b5e126fef",
+        "pipeSsimBH15": "2083b37d319e5a674f4592b65d8e3e234c607084f6114785193b2a9dc032737e",
+        "pipeSsimBV15": "a3d913299305aaa4eafe806d8f12ba96a2b41c6f6ff6f7e8f522bbd63ab18cf4",
+        "pipeSsimCoeff": "86f77ade29b6394a6915da4645347d49c7f77e5e63e995adf768807d498d56df",
+        "pipeSsimBH9": "7b9b322eda5afc0f39259e461b354e530dfda99bb1ff980c1f24673e72c64cdc",
+        "pipeSsimFinal": "ec6e434d2bdba38d1eeeddb988c113384a44efc010d4aac519944b9709067495",
+        "pipeChain": "c6399db9209289cb77a2b67cb754b86ded4228deb23b6ab4e1755f207aa98d76",
+        "pipeShape": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "pipeAdam": "1f9765431b927c441de700df57a2204444e92718450c3f291a24e9b6aa122abc",
+        "pipeGather": "c940e567f509edb0cdc60913db717cef9ab93026fb2aecdaed98bd146f7e0b06",
+        "pipeRefinePatch": "c00e3dd4071011cc5845cd1c8d89b9eca5f953a2f5a8bbc236129d4c127e26de",
+        "pipeRefineApply": "9542c0dd026de6618e4b94833220928fc21afdb2be4aa48df1e58d02840837e4",
+        "pipeBlit": "1d0d5687c7513844745d9e1fb61fbc438b9a28f7c9e993133ae34b9967654f21"
+      }
+    }
+  ]
+}

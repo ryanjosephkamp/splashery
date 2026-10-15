@@ -1,0 +1,44 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:52:28] "GET / HTTP/1.1" 200 -
+
+Running 1 test using 1 worker
+
+(node:274846) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:274846) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:52:36] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:52:36] "GET /src/video3d/fast-extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:52:36] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:52:36] "GET /src/video3d/mp4.js HTTP/1.1" 200 -
+
+  ✘  1 [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources (7.0s)
+
+
+  1) [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources 
+
+    Error: Invalid stts run
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"webcodecs-avc"[39m
+    Received: [31m"video-element"[39m
+
+      111 |         { base64, variant },
+      112 |       );
+    > 113 |       expect(result.extraction?.method, result.fastDecodeFailure || variant).toBe("webcodecs-avc");
+          |                                                                              ^
+      114 |       expect(result.extraction.independentlyPresentedColorChecks).toBe(2);
+      115 |       expect(result.frames).toHaveLength(4);
+      116 |       expect(result.progress).toEqual([
+        at /workspace/splashery-r4-public/tests/cdx-v3d-fast-extract-browser.spec.mjs:113:78
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/fast-extraction-browser-r5/cdx-v3d-fast-extract-brows-48ca0-are-cropped-and-VFR-sources-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/fast-extraction-browser-r5/cdx-v3d-fast-extract-brows-48ca0-are-cropped-and-VFR-sources-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources 

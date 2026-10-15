@@ -1,0 +1,50 @@
+{
+  "at": "2026-10-15T11:25:20.839627+00:00",
+  "notice": "Supplementary binary and immutable-source bindings captured during the sole research browser run; source receipts unchanged. No product/native process modified.",
+  "binaries": [
+    {
+      "path": "/usr/bin/chromium",
+      "sha256": "2c8d32d29dc6781c35ae196ea83299d507ac88fc339301abe74672feda299779"
+    },
+    {
+      "path": "/usr/lib/chromium/chromium",
+      "sha256": "d387400aaf740ccb75e5e996a34aa0940e6e97683a4eabd6ae34c1eed6804723"
+    },
+    {
+      "path": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node",
+      "sha256": "bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12"
+    }
+  ],
+  "sourceCopies": [
+    {
+      "copy": "src/extract.js",
+      "expected": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de",
+      "copySha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de",
+      "originalSha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de"
+    },
+    {
+      "copy": "src/frames.js",
+      "expected": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3",
+      "copySha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3",
+      "originalSha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "copy": "source-pixels.mjs",
+      "expected": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f",
+      "copySha256": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f",
+      "originalSha256": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f"
+    },
+    {
+      "copy": "demux.mjs",
+      "expected": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d",
+      "copySha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d",
+      "originalSha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d"
+    }
+  ],
+  "inheritedEnvironment": {
+    "DISPLAY": null,
+    "FONTCONFIG_FILE": null,
+    "SPLASHERY_GL": null,
+    "SPLASHERY_CHROMIUM": null
+  }
+}

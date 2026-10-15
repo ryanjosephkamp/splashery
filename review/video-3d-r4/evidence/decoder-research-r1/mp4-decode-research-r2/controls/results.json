@@ -1,0 +1,645 @@
+{
+  "at": "2026-10-15T10:41:06.002Z",
+  "noDecode": true,
+  "results": [
+    {
+      "id": "bframes-cfr",
+      "inputSha256": "8055ef2b8b0e12ce30fb6a7f46d517e2311d3e550d47bdb3f2cfc11ba4aa32cb",
+      "ffmpegArgs": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-f",
+        "lavfi",
+        "-i",
+        "testsrc2=s=96x64:r=24:d=1",
+        "-an",
+        "-c:v",
+        "libx264",
+        "-threads",
+        "1",
+        "-filter_threads",
+        "1",
+        "-preset",
+        "fast",
+        "-g",
+        "12",
+        "-bf",
+        "2",
+        "-use_editlist",
+        "0",
+        "-y",
+        "/workspace/v3d-r4-media/mp4-decode-research-r2/controls/bframes-cfr.mp4"
+      ],
+      "ffprobeSha256": "e6c8fb4ff3017e65e97ed198d4e2c7c42cf6b1797076306202a6d70d6887c186",
+      "source": "FFmpeg built-in testsrc2; generated diagnostic pattern, not a corpus capture",
+      "sampleCount": 24,
+      "descriptionSha256": "7238833a8fb0aed730fccd6a0024dd2ded7178757af1dfc361dc5f7018921bae",
+      "cttsVersion": 0,
+      "variableDuration": false,
+      "presentationReorders": true,
+      "exact": true,
+      "ptsStorageHeadersConfigExact": true,
+      "ffprobeDtsMinusLiteralDts": [
+        0
+      ],
+      "ffprobeDurations": [
+        512
+      ],
+      "literalSttsDurations": [
+        512
+      ],
+      "differences": [],
+      "samples": [
+        {
+          "offset": 48,
+          "size": 2096,
+          "dts": 0,
+          "pts": 1024,
+          "duration": 512,
+          "key": true
+        },
+        {
+          "offset": 2144,
+          "size": 480,
+          "dts": 512,
+          "pts": 2560,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 2624,
+          "size": 201,
+          "dts": 1024,
+          "pts": 1536,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 2825,
+          "size": 130,
+          "dts": 1536,
+          "pts": 2048,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 2955,
+          "size": 378,
+          "dts": 2048,
+          "pts": 3072,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 3333,
+          "size": 456,
+          "dts": 2560,
+          "pts": 4608,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 3789,
+          "size": 168,
+          "dts": 3072,
+          "pts": 3584,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 3957,
+          "size": 157,
+          "dts": 3584,
+          "pts": 4096,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 4114,
+          "size": 678,
+          "dts": 4096,
+          "pts": 6144,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 4792,
+          "size": 243,
+          "dts": 4608,
+          "pts": 5120,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 5035,
+          "size": 160,
+          "dts": 5120,
+          "pts": 5632,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 5195,
+          "size": 254,
+          "dts": 5632,
+          "pts": 6656,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 5449,
+          "size": 1772,
+          "dts": 6144,
+          "pts": 7168,
+          "duration": 512,
+          "key": true
+        },
+        {
+          "offset": 7221,
+          "size": 416,
+          "dts": 6656,
+          "pts": 8704,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 7637,
+          "size": 215,
+          "dts": 7168,
+          "pts": 7680,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 7852,
+          "size": 187,
+          "dts": 7680,
+          "pts": 8192,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 8039,
+          "size": 501,
+          "dts": 8192,
+          "pts": 10240,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 8540,
+          "size": 244,
+          "dts": 8704,
+          "pts": 9216,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 8784,
+          "size": 186,
+          "dts": 9216,
+          "pts": 9728,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 8970,
+          "size": 445,
+          "dts": 9728,
+          "pts": 11264,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 9415,
+          "size": 179,
+          "dts": 10240,
+          "pts": 10752,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 9594,
+          "size": 437,
+          "dts": 10752,
+          "pts": 12800,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 10031,
+          "size": 203,
+          "dts": 11264,
+          "pts": 11776,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 10234,
+          "size": 244,
+          "dts": 11776,
+          "pts": 12288,
+          "duration": 512,
+          "key": false
+        }
+      ]
+    },
+    {
+      "id": "bframes-vfr-signed",
+      "inputSha256": "6557fdd5563f6ab22b2d40bd0e157ca700018914a38d866524055511018efb6a",
+      "ffmpegArgs": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-f",
+        "lavfi",
+        "-i",
+        "testsrc2=s=96x64:r=24:d=1",
+        "-an",
+        "-c:v",
+        "libx264",
+        "-threads",
+        "1",
+        "-filter_threads",
+        "1",
+        "-preset",
+        "fast",
+        "-g",
+        "12",
+        "-vf",
+        "select=not(eq(mod(n\\,3)\\,1))",
+        "-fps_mode",
+        "vfr",
+        "-bf",
+        "2",
+        "-movflags",
+        "+negative_cts_offsets",
+        "-use_editlist",
+        "0",
+        "-y",
+        "/workspace/v3d-r4-media/mp4-decode-research-r2/controls/bframes-vfr-signed.mp4"
+      ],
+      "ffprobeSha256": "53cf9aaee580630db02db4e0d67f30a94eb7a98e9b9879d9d9d3b61046d839a3",
+      "source": "FFmpeg built-in testsrc2; generated diagnostic pattern, not a corpus capture",
+      "sampleCount": 16,
+      "descriptionSha256": "7238833a8fb0aed730fccd6a0024dd2ded7178757af1dfc361dc5f7018921bae",
+      "cttsVersion": 1,
+      "variableDuration": true,
+      "presentationReorders": true,
+      "exact": false,
+      "ptsStorageHeadersConfigExact": true,
+      "ffprobeDtsMinusLiteralDts": [
+        -1024
+      ],
+      "ffprobeDurations": [
+        512
+      ],
+      "literalSttsDurations": [
+        1024,
+        512
+      ],
+      "differences": [
+        "0:dts",
+        "0:duration",
+        "1:dts",
+        "2:dts",
+        "2:duration",
+        "3:dts",
+        "4:dts",
+        "4:duration",
+        "5:dts",
+        "6:dts",
+        "6:duration",
+        "7:dts",
+        "8:dts",
+        "8:duration",
+        "9:dts",
+        "10:dts",
+        "10:duration",
+        "11:dts",
+        "12:dts",
+        "12:duration",
+        "13:dts",
+        "14:dts",
+        "14:duration",
+        "15:dts"
+      ],
+      "samples": [
+        {
+          "offset": 52,
+          "size": 2193,
+          "dts": 0,
+          "pts": 0,
+          "duration": 1024,
+          "key": true
+        },
+        {
+          "offset": 2245,
+          "size": 381,
+          "dts": 1024,
+          "pts": 1024,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 2626,
+          "size": 570,
+          "dts": 1536,
+          "pts": 2560,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 3196,
+          "size": 210,
+          "dts": 2560,
+          "pts": 1536,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 3406,
+          "size": 516,
+          "dts": 3072,
+          "pts": 4096,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 3922,
+          "size": 170,
+          "dts": 4096,
+          "pts": 3072,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 4092,
+          "size": 635,
+          "dts": 4608,
+          "pts": 6144,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 4727,
+          "size": 193,
+          "dts": 5632,
+          "pts": 4608,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 4920,
+          "size": 262,
+          "dts": 6144,
+          "pts": 5632,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 5182,
+          "size": 524,
+          "dts": 7168,
+          "pts": 7680,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 5706,
+          "size": 203,
+          "dts": 7680,
+          "pts": 7168,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 5909,
+          "size": 236,
+          "dts": 8704,
+          "pts": 8704,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 6145,
+          "size": 1668,
+          "dts": 9216,
+          "pts": 9216,
+          "duration": 1024,
+          "key": true
+        },
+        {
+          "offset": 7813,
+          "size": 475,
+          "dts": 10240,
+          "pts": 10240,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 8288,
+          "size": 521,
+          "dts": 10752,
+          "pts": 11776,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 8809,
+          "size": 210,
+          "dts": 11776,
+          "pts": 10752,
+          "duration": 512,
+          "key": false
+        }
+      ]
+    },
+    {
+      "id": "no-bframes-vfr",
+      "inputSha256": "f109778bfd81acdbaae481327913be1a290e0366bb88b714617eb1503e6dc8f8",
+      "ffmpegArgs": [
+        "-hide_banner",
+        "-loglevel",
+        "error",
+        "-f",
+        "lavfi",
+        "-i",
+        "testsrc2=s=96x64:r=24:d=1",
+        "-an",
+        "-c:v",
+        "libx264",
+        "-threads",
+        "1",
+        "-filter_threads",
+        "1",
+        "-preset",
+        "fast",
+        "-g",
+        "12",
+        "-vf",
+        "select=not(eq(mod(n\\,3)\\,1))",
+        "-fps_mode",
+        "vfr",
+        "-bf",
+        "0",
+        "-use_editlist",
+        "0",
+        "-y",
+        "/workspace/v3d-r4-media/mp4-decode-research-r2/controls/no-bframes-vfr.mp4"
+      ],
+      "ffprobeSha256": "7c24e1e741fbc44e4f38149011e3c59c9409c8f400d2c18d3ce25c27912d5b40",
+      "source": "FFmpeg built-in testsrc2; generated diagnostic pattern, not a corpus capture",
+      "sampleCount": 16,
+      "descriptionSha256": "343cdc89240409f8d46d49f0e47b310cc0a6056e6b7aaa0a00bb8fed6d7eb558",
+      "cttsVersion": null,
+      "variableDuration": true,
+      "presentationReorders": false,
+      "exact": true,
+      "ptsStorageHeadersConfigExact": true,
+      "ffprobeDtsMinusLiteralDts": [
+        0
+      ],
+      "ffprobeDurations": [
+        1024,
+        512
+      ],
+      "literalSttsDurations": [
+        1024,
+        512
+      ],
+      "differences": [],
+      "samples": [
+        {
+          "offset": 48,
+          "size": 2098,
+          "dts": 0,
+          "pts": 0,
+          "duration": 1024,
+          "key": true
+        },
+        {
+          "offset": 2146,
+          "size": 368,
+          "dts": 1024,
+          "pts": 1024,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 2514,
+          "size": 361,
+          "dts": 1536,
+          "pts": 1536,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 2875,
+          "size": 452,
+          "dts": 2560,
+          "pts": 2560,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 3327,
+          "size": 390,
+          "dts": 3072,
+          "pts": 3072,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 3717,
+          "size": 412,
+          "dts": 4096,
+          "pts": 4096,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 4129,
+          "size": 308,
+          "dts": 4608,
+          "pts": 4608,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 4437,
+          "size": 470,
+          "dts": 5632,
+          "pts": 5632,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 4907,
+          "size": 510,
+          "dts": 6144,
+          "pts": 6144,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 5417,
+          "size": 333,
+          "dts": 7168,
+          "pts": 7168,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 5750,
+          "size": 419,
+          "dts": 7680,
+          "pts": 7680,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 6169,
+          "size": 394,
+          "dts": 8704,
+          "pts": 8704,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 6563,
+          "size": 1670,
+          "dts": 9216,
+          "pts": 9216,
+          "duration": 1024,
+          "key": true
+        },
+        {
+          "offset": 8233,
+          "size": 482,
+          "dts": 10240,
+          "pts": 10240,
+          "duration": 512,
+          "key": false
+        },
+        {
+          "offset": 8715,
+          "size": 431,
+          "dts": 10752,
+          "pts": 10752,
+          "duration": 1024,
+          "key": false
+        },
+        {
+          "offset": 9146,
+          "size": 420,
+          "dts": 11776,
+          "pts": 11776,
+          "duration": 512,
+          "key": false
+        }
+      ]
+    }
+  ]
+}

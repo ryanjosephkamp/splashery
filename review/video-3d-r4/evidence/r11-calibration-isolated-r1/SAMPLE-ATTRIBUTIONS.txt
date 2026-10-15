@@ -1,0 +1,7 @@
+liberty: the Dronalist; CC BY 3.0; https://commons.wikimedia.org/wiki/File:Statue_Of_Liberty_4k_Drone.webm
+edinburgh: POPtravel; CC BY 3.0; https://commons.wikimedia.org/wiki/File:Walking_in_EDINBURGH_-_Scotland_(UK)_-_4K_60fps_(UHD).webm
+adjara: Vitaly Zdanevich; CC BY 4.0; https://commons.wikimedia.org/wiki/File:Adjara2025walking-summer-forest.webm
+lihula: Sillerkiil; CC0 1.0; https://commons.wikimedia.org/wiki/File:Drone_video_of_ruins_of_Lihula_stronghold,_the_manor_and_town_(august_2021).webm
+toolse: Sillerkiil; CC BY-SA 4.0; https://commons.wikimedia.org/wiki/File:Toolse_castle_in_Estonia_(Fall_2021).webm
+poltsamaa: Sillerkiil; CC BY-SA 4.0; https://commons.wikimedia.org/wiki/File:Drone_video_of_P%C3%B5ltsamaa_river_and_castle_in_Estonia.webm
+Existing sample footage and derivative trace/screenshot data retain their separate source licenses. Own fixture/test code is MIT. No media from different licenses is merged.

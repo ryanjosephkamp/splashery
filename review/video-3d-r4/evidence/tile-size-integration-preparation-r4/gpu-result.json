@@ -1,0 +1,306 @@
+{
+  "at": "2026-10-15T12:03:01.764Z",
+  "sourcesBefore": [
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "sha256": "018dc2ae72d6a94446fa84bf597656811ea4a7282f563d2c916abce44a7489c6"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "sha256": "2f88a29325b57b5b791ef12afc495d1ebb86ca24299bdc13432ebab066d436b8"
+    },
+    {
+      "file": "gpu-fixture.mjs",
+      "sha256": "1ea8dd5065749b80ae2c0b7836b65e7629b982d41ca1425b5ccbfca2e6e857a9"
+    }
+  ],
+  "status": "passed",
+  "protocol": "Six predeclared synthetic actual-GPU fixtures, four complete optimizer steps each, direct tile16 vs requested tile8; partial edges, clipped/behind-camera splats, invalid pixels, serial/parallel sort, structural loss, SSAA2, 2049 whole-view opaque splats requiring a raised padded entry cap, and scan-limit fallback. Not a bake or native speed/quality claim.",
+  "result": {
+    "cases": [
+      {
+        "w": 35,
+        "h": 27,
+        "ssimWeight": 0,
+        "serialSort": true,
+        "ssaa": 0,
+        "n": 48,
+        "forceFallback": false,
+        "variants": [
+          {
+            "requestedTileSize": 16,
+            "tileSize": 16,
+            "entriesCap": 16384,
+            "tileEntryBound": 0,
+            "iters": 4,
+            "maxTiles": 6,
+            "expectedTiles": 6,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          },
+          {
+            "requestedTileSize": 8,
+            "tileSize": 8,
+            "entriesCap": 16384,
+            "tileEntryBound": 1280,
+            "iters": 4,
+            "maxTiles": 20,
+            "expectedTiles": 20,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          }
+        ],
+        "exact": {
+          "params": true,
+          "adamM": true,
+          "adamV": true,
+          "gradP": true,
+          "gradF": true,
+          "out": true,
+          "stats": true
+        }
+      },
+      {
+        "w": 47,
+        "h": 31,
+        "ssimWeight": 0.2,
+        "serialSort": true,
+        "ssaa": 0,
+        "n": 48,
+        "forceFallback": false,
+        "variants": [
+          {
+            "requestedTileSize": 16,
+            "tileSize": 16,
+            "entriesCap": 16384,
+            "tileEntryBound": 0,
+            "iters": 4,
+            "maxTiles": 6,
+            "expectedTiles": 6,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          },
+          {
+            "requestedTileSize": 8,
+            "tileSize": 8,
+            "entriesCap": 16384,
+            "tileEntryBound": 1536,
+            "iters": 4,
+            "maxTiles": 24,
+            "expectedTiles": 24,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          }
+        ],
+        "exact": {
+          "params": true,
+          "adamM": true,
+          "adamV": true,
+          "gradP": true,
+          "gradF": true,
+          "out": true,
+          "stats": true
+        }
+      },
+      {
+        "w": 32,
+        "h": 24,
+        "ssimWeight": 0,
+        "serialSort": false,
+        "ssaa": 0,
+        "n": 48,
+        "forceFallback": false,
+        "variants": [
+          {
+            "requestedTileSize": 16,
+            "tileSize": 16,
+            "entriesCap": 16384,
+            "tileEntryBound": 0,
+            "iters": 4,
+            "maxTiles": 4,
+            "expectedTiles": 4,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          },
+          {
+            "requestedTileSize": 8,
+            "tileSize": 8,
+            "entriesCap": 16384,
+            "tileEntryBound": 768,
+            "iters": 4,
+            "maxTiles": 12,
+            "expectedTiles": 12,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          }
+        ],
+        "exact": {
+          "params": true,
+          "adamM": true,
+          "adamV": true,
+          "gradP": true,
+          "gradF": true,
+          "out": true,
+          "stats": true
+        }
+      },
+      {
+        "w": 29,
+        "h": 21,
+        "ssimWeight": 0,
+        "serialSort": true,
+        "ssaa": 2,
+        "n": 48,
+        "forceFallback": false,
+        "variants": [
+          {
+            "requestedTileSize": 16,
+            "tileSize": 16,
+            "entriesCap": 16384,
+            "tileEntryBound": 0,
+            "iters": 4,
+            "maxTiles": 16,
+            "expectedTiles": 16,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          },
+          {
+            "requestedTileSize": 8,
+            "tileSize": 8,
+            "entriesCap": 16384,
+            "tileEntryBound": 3072,
+            "iters": 4,
+            "maxTiles": 48,
+            "expectedTiles": 48,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          }
+        ],
+        "exact": {
+          "params": true,
+          "adamM": true,
+          "adamV": true,
+          "gradP": true,
+          "gradF": true,
+          "out": true,
+          "stats": true
+        }
+      },
+      {
+        "w": 17,
+        "h": 13,
+        "ssimWeight": 0,
+        "serialSort": true,
+        "ssaa": 0,
+        "n": 2049,
+        "forceFallback": false,
+        "variants": [
+          {
+            "requestedTileSize": 16,
+            "tileSize": 16,
+            "entriesCap": 16384,
+            "tileEntryBound": 0,
+            "iters": 4,
+            "maxTiles": 2,
+            "expectedTiles": 2,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          },
+          {
+            "requestedTileSize": 8,
+            "tileSize": 8,
+            "entriesCap": 24576,
+            "tileEntryBound": 24576,
+            "iters": 4,
+            "maxTiles": 6,
+            "expectedTiles": 6,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          }
+        ],
+        "exact": {
+          "params": true,
+          "adamM": true,
+          "adamV": true,
+          "gradP": true,
+          "gradF": true,
+          "out": true,
+          "stats": true
+        }
+      },
+      {
+        "w": 35,
+        "h": 27,
+        "ssimWeight": 0,
+        "serialSort": true,
+        "ssaa": 0,
+        "n": 48,
+        "forceFallback": true,
+        "variants": [
+          {
+            "requestedTileSize": 16,
+            "tileSize": 16,
+            "entriesCap": 16384,
+            "tileEntryBound": 0,
+            "iters": 4,
+            "maxTiles": 6,
+            "expectedTiles": 6,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          },
+          {
+            "requestedTileSize": 8,
+            "tileSize": 16,
+            "entriesCap": 16384,
+            "tileEntryBound": 0,
+            "iters": 4,
+            "maxTiles": 6,
+            "expectedTiles": 6,
+            "finite": true,
+            "changed": true,
+            "entryOverflow": 0
+          }
+        ],
+        "exact": {
+          "params": true,
+          "adamM": true,
+          "adamV": true,
+          "gradP": true,
+          "gradF": true,
+          "out": true,
+          "stats": true
+        }
+      }
+    ],
+    "errors": [],
+    "storageBindings": 8
+  },
+  "pageErrors": [],
+  "sourcesAfter": [
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "sha256": "018dc2ae72d6a94446fa84bf597656811ea4a7282f563d2c916abce44a7489c6"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "sha256": "2f88a29325b57b5b791ef12afc495d1ebb86ca24299bdc13432ebab066d436b8"
+    },
+    {
+      "file": "gpu-fixture.mjs",
+      "sha256": "1ea8dd5065749b80ae2c0b7836b65e7629b982d41ca1425b5ccbfca2e6e857a9"
+    }
+  ],
+  "passed": true,
+  "finishedAt": "2026-10-15T12:04:06.454Z"
+}

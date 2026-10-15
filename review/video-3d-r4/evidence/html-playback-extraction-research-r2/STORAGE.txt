@@ -1,0 +1,5 @@
+Large machine telemetry is stored losslessly as individual gzip streams.
+See lossless-telemetry-archives.json for original paths, hashes, and restoration instructions.
+Every decompressed byte was verified against the unchanged original capture.
+Original code, tests, reports, images, and freeze/publication receipts remain unchanged.
+Restore telemetry in a separate copy before reproducing the frozen inventory.

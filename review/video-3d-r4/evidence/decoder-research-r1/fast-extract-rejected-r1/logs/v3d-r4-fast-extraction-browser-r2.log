@@ -1,0 +1,62 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:47:21] "GET / HTTP/1.1" 200 -
+
+Running 11 tests using 1 worker
+
+(node:269892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:269892) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:47:30] "GET /src/video3d/extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:47:30] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:47:30] "GET /src/video3d/fast-extract.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 10:47:30] "GET /src/video3d/mp4.js HTTP/1.1" 200 -
+  ✘   1 [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources (6.7s)
+(node:270059) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:270059) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   2 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:119:1 › B-order and VFR select the actual containing presentation interval (112ms)
+  ✓   3 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:133:1 › color metadata is explicit, defaults follow resolution, and unsupported HDR falls back (69ms)
+  ✓   4 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:149:1 › an unsupported path never reads the file or allocates a decoder (95ms)
+  ✓   5 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:164:1 › canceling a file read rejects immediately and ignores its late result (39ms)
+  ✓   6 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:177:1 › canceling support discovery cannot create a late decoder (22ms)
+  ✓   7 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:195:1 › codec failures return no partial photographs and close their owned decoder (15ms)
+  ✓   8 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:203:1 › canceling a flush closes current and late frames without applying results (60ms)
+  ✓   9 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:224:1 › late JPEG completion after cancellation cannot publish a result (64ms)
+  ✓  10 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:238:1 › failed source-pixel equality and null JPEGs both preserve fallback (51ms)
+  ✓  11 [chromium] › tests/cdx-v3d-fast-extract.spec.mjs:248:1 › a successful bounded extraction reports decoded PTS without claiming RVFC evidence (19ms)
+
+
+  1) [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources 
+
+    Error: Source decoder colors differ
+
+    [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"webcodecs-avc"[39m
+    Received: [31m"video-element"[39m
+
+      107 |         { base64, variant },
+      108 |       );
+    > 109 |       expect(result.extraction?.method, result.fastDecodeFailure || variant).toBe("webcodecs-avc");
+          |                                                                              ^
+      110 |       expect(result.extraction.independentlyPresentedColorChecks).toBe(2);
+      111 |       expect(result.frames).toHaveLength(4);
+      112 |       expect(result.progress).toEqual([
+        at /workspace/splashery-r4-public/tests/cdx-v3d-fast-extract-browser.spec.mjs:109:78
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/fast-extraction-browser-r2/cdx-v3d-fast-extract-brows-48ca0-are-cropped-and-VFR-sources-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    ../v3d-r4-media/targeted/fast-extraction-browser-r2/cdx-v3d-fast-extract-brows-48ca0-are-cropped-and-VFR-sources-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace ../v3d-r4-media/targeted/fast-extraction-browser-r2/cdx-v3d-fast-extract-brows-48ca0-are-cropped-and-VFR-sources-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-v3d-fast-extract-browser.spec.mjs:9:1 › the fast path preserves every selected JPEG on B-frame, nonsquare, cropped, and VFR sources 
+  10 passed (17.4s)

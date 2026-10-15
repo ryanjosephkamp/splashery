@@ -1,0 +1,201 @@
+Cat playing with a circular toy indoors
+Author: Clément Bucco-Lechat
+Source: https://commons.wikimedia.org/wiki/File:Cat_playing_with_a_round_track_toy.webm
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)
+Checked: October 15, 2026
+File SHA-256: 598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430
+Changes: Trimmed seconds 3–11; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Cat playing outside, handheld tablet
+Author: Riverarvi
+Source: https://commons.wikimedia.org/wiki/File:Cat_Plays.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085
+Changes: Trimmed 0–8 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Buddha statue, camera held still
+Author: https://www.youtube.com/user/Editor
+Source: https://commons.wikimedia.org/wiki/File:Statue_of_Buddha.webm
+License: CC BY 3.0 (https://creativecommons.org/licenses/by/3.0)
+Checked: October 15, 2026
+File SHA-256: 765070736b87205ff07211410a25b23b02e5e8e0092282a742e3c70f3e02f388
+Changes: Trimmed 2–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Chameleon among flowering branches
+Author: Ventrovert
+Source: https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm
+License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0)
+Checked: October 15, 2026
+File SHA-256: 01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e
+Changes: Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Potted flowering plants, handheld
+Author: Tanvir Rahat
+Source: https://commons.wikimedia.org/wiki/File:Dianthus_plants_and_flowers_,_Rajshahi_,_Bangladesh.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: 10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5
+Changes: Trimmed 0–6 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Stone ruins, handheld panorama
+Author: MorePix
+Source: https://commons.wikimedia.org/wiki/File:Panorama_of_P%C3%ADsac_Ruins,_Peru_2024.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: 410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d
+Changes: Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Sleeping dog close up indoors
+Author: Amada44
+Source: https://commons.wikimedia.org/wiki/File:REM_-_Rapid_eye_movement_sleep_of_a_dog.webm
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)
+Checked: October 15, 2026
+File SHA-256: c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9
+Changes: Trimmed 10–18 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Palace entrance statue, handheld approach
+Author: Sayvhior
+Source: https://commons.wikimedia.org/wiki/File:A_moulded_statue_at_the_entrance_to_the_palace_of_the_Obi_of_Issele_Uku.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de
+Changes: Trimmed 0–5 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Residential street, aerial lateral pass
+Author: Sillerkiil
+Source: https://commons.wikimedia.org/wiki/File:Aerial_view_of_Oa_street_in_Supilinn,_Tartu,_Estonia._July_2021.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341
+Changes: Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Old stone handball court, camera walks inside
+Author: A.-K. D.
+Source: https://commons.wikimedia.org/wiki/File:Ullard_handball_alley.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b
+Changes: Trimmed 8–18 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Mountain panorama, handheld sweep
+Author: Tiny Toast
+Source: https://commons.wikimedia.org/wiki/File:Panorama_on_Snaefell.webm
+License: CC BY 4.0 (https://creativecommons.org/licenses/by/4.0)
+Checked: October 15, 2026
+File SHA-256: cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6
+Changes: Trimmed 0–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Lighthouse at sunset, camera orbits the tower
+Author: JamesBromberger
+Source: https://commons.wikimedia.org/wiki/File:Orbit_around_Fremantle_South_Mole_Lighthouse_at_sunset.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747
+Changes: Trimmed 10–22 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Abandoned lighthouse and textured ground, aerial orbit
+Author: Sillerkiil
+Source: https://commons.wikimedia.org/wiki/File:Drone_video_of_abandoned_Ihasalu_lighthouse_near_Neeme_village_in_Estonia_(July_2022).webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: 12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d
+Changes: Trimmed 10–22 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Rotating Fresnel lens inside a lighthouse
+Author: Myotus
+Source: https://commons.wikimedia.org/wiki/File:Fresnel_lenses_rotating_at_Split_Rock_Lighthouse.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: 5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8
+Changes: Trimmed 4–14 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Basilica interior ceiling and stained glass, handheld tilt
+Author: Quahadi
+Source: https://commons.wikimedia.org/wiki/File:Interior_of_Basilique_Saint-Denis_134306.webm
+License: CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0)
+Checked: October 15, 2026
+File SHA-256: 231358f2f7f9a1ad04e78c782106ad13e56bf0fcd88f665d86497365117fd405
+Changes: Trimmed 72–82 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Horse sculpture close detail, camera tilts up
+Author: Angelarene88
+Source: https://commons.wikimedia.org/wiki/File:Traveler_horse_statue.webm
+License: CC BY-SA 3.0 (https://creativecommons.org/licenses/by-sa/3.0)
+Checked: October 15, 2026
+File SHA-256: 42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045
+Changes: Trimmed 24–32 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Offshore lighthouse platform, close drone approach
+Author: Alexis Markwick
+Source: https://commons.wikimedia.org/wiki/File:Royal_Sovereign_Lighthouse_drone_visit.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: 8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6
+Changes: Trimmed 35–47 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Stone castle ruins, aerial orbit
+Author: Sillerkiil
+Source: https://commons.wikimedia.org/wiki/File:Viljandi_ordulinnus_2021,_droonivideo.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: d8c69186d35269f6d5f9c23cec21b46fa053659e97988098863d06ceaa7e508d
+Changes: Trimmed 15–27 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Bog islands and shore, low aerial pass
+Author: Sillerkiil
+Source: https://commons.wikimedia.org/wiki/File:Drone_video_of_Kakerdi_lake_and_Kakerdaja_bog_in_Estonia,_september_2021.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: 5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8
+Changes: Trimmed 15–27 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+
+Rocky island houses and lighthouse, fast drone pass
+Author: Rik Knops
+Source: https://commons.wikimedia.org/wiki/File:Aerial_views_of_Fj%C3%B8l%C3%B8y_Lighthouse,_Rennes%C3%B8y,_Rogaland_county,_Norway.webm
+License: CC BY 3.0 (https://creativecommons.org/licenses/by/3.0)
+Checked: October 15, 2026
+File SHA-256: 2e01259d5d6dce77a46d98e43af9def48429d184b9422e0833957d82a1f9f210
+Changes: Trimmed 45–57 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+Rejected extraction research only. Source-specific JPEG derivatives retain each clip license; own scripts are MIT. No native acceptance claim.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

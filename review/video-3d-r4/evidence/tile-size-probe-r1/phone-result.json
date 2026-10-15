@@ -1,0 +1,147 @@
+{
+  "id": "phone",
+  "variants": [
+    {
+      "tile": 8,
+      "maxTiles": 920,
+      "stages": [
+        {
+          "name": "project",
+          "wallMs": 14.399999998509884,
+          "gpuMs": 6.509228
+        },
+        {
+          "name": "scan",
+          "wallMs": 3.699999999254942,
+          "gpuMs": 1.40485
+        },
+        {
+          "name": "scatter",
+          "wallMs": 76.60000000149012,
+          "gpuMs": 43.822013
+        },
+        {
+          "name": "sort",
+          "wallMs": 108.39999999850988,
+          "gpuMs": 105.481555
+        },
+        {
+          "name": "forwardColdPipeline",
+          "wallMs": 488.30000000074506,
+          "gpuMs": 452.5869
+        },
+        {
+          "name": "renderBackwardWarmPipeline",
+          "wallMs": 1455.4000000022352,
+          "gpuMs": 1449.512897
+        }
+      ],
+      "files": [
+        {
+          "kind": "gradP",
+          "file": "phone-tile8-gradP.bin",
+          "bytes": 960000,
+          "sha256": "f7bf064b332b759a4645f8b9a4fd63ae158adf7f28dccb88157a9ec82ee2acdd"
+        },
+        {
+          "kind": "out",
+          "file": "phone-tile8-out.bin",
+          "bytes": 921600,
+          "sha256": "d809489f291d25cef39bf9bc44f24f8bd641983c1fc732425f35e7203d2a42b1"
+        },
+        {
+          "kind": "stats",
+          "file": "phone-tile8-stats.bin",
+          "bytes": 16,
+          "sha256": "5b2257823ba9105b59cdcc6128517d44c95db741ccbb201cb091fb216b885ca1"
+        },
+        {
+          "kind": "params",
+          "file": "phone-tile8-params.bin",
+          "bytes": 960000,
+          "sha256": "f957cbc1ac0e35d212c421f200fcd94dadbdf088a0d3f1608f0d3c58c6a3efe2"
+        }
+      ]
+    },
+    {
+      "tile": 16,
+      "maxTiles": 240,
+      "stages": [
+        {
+          "name": "project",
+          "wallMs": 42.099999997764826,
+          "gpuMs": 5.939945
+        },
+        {
+          "name": "scan",
+          "wallMs": 4,
+          "gpuMs": 2.282356
+        },
+        {
+          "name": "scatter",
+          "wallMs": 60,
+          "gpuMs": 56.35518
+        },
+        {
+          "name": "sort",
+          "wallMs": 101.60000000149012,
+          "gpuMs": 99.845392
+        },
+        {
+          "name": "forwardColdPipeline",
+          "wallMs": 980.8000000007451,
+          "gpuMs": 978.992947
+        },
+        {
+          "name": "renderBackwardWarmPipeline",
+          "wallMs": 2461.099999997765,
+          "gpuMs": 2459.426495
+        }
+      ],
+      "files": [
+        {
+          "kind": "gradP",
+          "file": "phone-tile16-gradP.bin",
+          "bytes": 960000,
+          "sha256": "f7bf064b332b759a4645f8b9a4fd63ae158adf7f28dccb88157a9ec82ee2acdd"
+        },
+        {
+          "kind": "out",
+          "file": "phone-tile16-out.bin",
+          "bytes": 921600,
+          "sha256": "d809489f291d25cef39bf9bc44f24f8bd641983c1fc732425f35e7203d2a42b1"
+        },
+        {
+          "kind": "stats",
+          "file": "phone-tile16-stats.bin",
+          "bytes": 16,
+          "sha256": "5b2257823ba9105b59cdcc6128517d44c95db741ccbb201cb091fb216b885ca1"
+        },
+        {
+          "kind": "params",
+          "file": "phone-tile16-params.bin",
+          "bytes": 960000,
+          "sha256": "f957cbc1ac0e35d212c421f200fcd94dadbdf088a0d3f1608f0d3c58c6a3efe2"
+        }
+      ]
+    }
+  ],
+  "parity": {
+    "gradP": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "out": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "stats": {
+      "byteExact": true,
+      "differentBytes": 0
+    },
+    "params": {
+      "byteExact": true,
+      "differentBytes": 0
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "id": "royal-sovereign",
+  "profile": "phone",
+  "sha256": "8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6",
+  "started": "2026-10-15T10:07:32.943Z",
+  "status": "finished",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": 92647.39999999851,
+  "bakeMs": 1479863.266419001,
+  "mean": {
+    "psnr": 12.819506988695501,
+    "ssim": 0.600749953909052,
+    "laplacian": 0.00017112742364729284,
+    "sourceLaplacian": 0.005615864599295702
+  },
+  "peakRssBytes": 1416310784,
+  "hostLoadAtStart": [
+    13.26,
+    18.11,
+    19.32
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "Stopped",
+    "unplayable": false,
+    "duration": 11.958333
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "0394696976a4db88104ccf8768aecadb0ecb4c3541d7f554412e4dcdf25f426d",
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 16,
+    "points": 403,
+    "splats": 14911,
+    "iters": 214,
+    "psnr": 19.8,
+    "psnrAtIter": 214,
+    "trainSide": 320,
+    "plyBytes": 932491,
+    "retried": false,
+    "timedOut": true,
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 11.958,
+    "rate": 1.338
+  },
+  "timings": {
+    "frames": 17.3,
+    "decode": 1,
+    "path": 33.2,
+    "seed": 0.1,
+    "train": 1421.4,
+    "export": 0.2,
+    "total": 1473.2
+  },
+  "actualTier": "phone",
+  "heldoutEvidence": {
+    "trainingPresentationVerified": false,
+    "trainingJpegsIndependentlyMatched": true,
+    "referencePresentationVerified": true,
+    "pixelDisjointnessVerified": true,
+    "complete": true
+  },
+  "evaluationSha256": "96518ae413fe0146010a94ac4112e476ddd79435a205778ff317acac0c3abc43",
+  "frames": [
+    {
+      "time": 1.666016,
+      "renderSha256": "19ffe71ccd6dbabe1e967fd07f6f09a5eb8acdf23b5339fc7796d3fafa489373",
+      "referenceSha256": "e7954b6910a1abc95a227adf6b7afba833e9f402f65a6d5e432044b7ddfb0425",
+      "psnr": 13.237627741998313,
+      "exact": false,
+      "ssim": 0.6121765491254989,
+      "laplacian": 0.000180053431215148,
+      "sourceLaplacian": 0.005090775364868603,
+      "sharpnessRatio": 0.03536856732231699
+    },
+    {
+      "time": 4.749349,
+      "renderSha256": "4fb857ea470f0f1e9fdb0a7e5f1deda61817d29ce645f4fd99a640f1b18c6b28",
+      "referenceSha256": "0dd258077d907bb7a682aa1e4554da661d2d70bfc18eff3c5bab829a859c0624",
+      "psnr": 12.307670058081099,
+      "exact": false,
+      "ssim": 0.5906009044123887,
+      "laplacian": 0.00018259214250538694,
+      "sourceLaplacian": 0.005728673259289953,
+      "sharpnessRatio": 0.031873373509177676
+    },
+    {
+      "time": 7.541016,
+      "renderSha256": "f19665c6e27c4672ea3508724f51b8f4f9fc6007d5eee847b68341a932d55225",
+      "referenceSha256": "1311dca493ee1b08da9c0e40c3a38ac837e6a4751a8185e26c07d5eab41872a1",
+      "psnr": 12.934029324821063,
+      "exact": false,
+      "ssim": 0.6025083455565202,
+      "laplacian": 0.00015926922366768506,
+      "sourceLaplacian": 0.005643437320467395,
+      "sharpnessRatio": 0.02822202402958455
+    },
+    {
+      "time": 10.207682,
+      "renderSha256": "377d4607d494ba0232f6e1f4434623d185d2b55e0866d2ee8fe1143770a9733c",
+      "referenceSha256": "8851ad1c05ee1d01d349e3e155506a1b0c599ac7be55968d0d972c1a2b54da3f",
+      "psnr": 12.79870082988153,
+      "exact": false,
+      "ssim": 0.5977140165418,
+      "laplacian": 0.0001625948972009514,
+      "sourceLaplacian": 0.006000572452556858,
+      "sharpnessRatio": 0.027096564283907502
+    }
+  ]
+}

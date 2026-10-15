@@ -1,0 +1,371 @@
+{
+  "at": "2026-10-15T12:30:45.744198+00:00",
+  "codeSha256": "4149728536c234699f0d6c69e1900b4ffcdbe4ff87a7ef67837f05a4f2496dad",
+  "uncompressedPublicationRetainedAt": "/workspace/v3d-r4-media/decoder-research-publication-before-packet-archives-r1",
+  "format": "Individual gzip streams with zero timestamp. Original files remain exactly reproducible after decompression; original inventories remain unchanged.",
+  "restore": "Decompress archivedFile to originalFile in a separate copy, then verify originalSha256.",
+  "runtimeInterruption": "Original archive process was interrupted while the managed execution tools reconnected around 12:26 UTC. Existing streams were verified against the complete uncompressed backup before resuming.",
+  "interruptedArchives": [],
+  "files": [
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/buddha-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/buddha-ffprobe.json.gz",
+      "originalBytes": 10689836,
+      "originalSha256": "6bc716c2bf3959aaed65c1c746ed3d43d294446254e9a24fde79849473c9364b",
+      "archiveBytes": 5616335,
+      "archiveSha256": "69697b9a3ea02e1bc975ad4c17daf694cef88d10f32267b4b483e3af5e8e3b32",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/cat-plays-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/cat-plays-ffprobe.json.gz",
+      "originalBytes": 2733587,
+      "originalSha256": "e248f4300ce90fa05e47f8b7e88d31f98a20150c9d17fa69e8cd76356fc572b8",
+      "archiveBytes": 1411798,
+      "archiveSha256": "6ee4a619eae5148a870e2e997b9547eaf15494da81671920f2897d2a28a6144d",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/cat-track-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/cat-track-ffprobe.json.gz",
+      "originalBytes": 1667951,
+      "originalSha256": "41c982225c7c9aa6ac1c9ed87c0bc461bd098257cb01f72ed533b594cfe863da",
+      "archiveBytes": 837777,
+      "archiveSha256": "3bc62eca572942551d5dbc844a1b844b4848f35acef4b3e14f951c3ac0a5acec",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/chameleon-flowers-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/chameleon-flowers-ffprobe.json.gz",
+      "originalBytes": 3267097,
+      "originalSha256": "e3382291d4ecb1c78f9299d26d222d579829e1e3b1a3948ae426737ca7982e05",
+      "archiveBytes": 1674170,
+      "archiveSha256": "772a9a105055957e17341764e99458f1a1aa112390b12e32afb6bd47c0c129bd",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/dianthus-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/dianthus-ffprobe.json.gz",
+      "originalBytes": 6288336,
+      "originalSha256": "a04d2e08336d17823f5a2a2dd2452a67a4dad75ab8ab6c0c1354f6129daa0e7c",
+      "archiveBytes": 3289816,
+      "archiveSha256": "d8b5eab7820ac23e1e9e1c4bbd54179550f9b22967b5f40693e78cf1fa0cd073",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/fjoloy-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/fjoloy-ffprobe.json.gz",
+      "originalBytes": 10457713,
+      "originalSha256": "603daab69442357ed62fc29e1b33e151ceb616867bd85f21f3c6102a2694bd7e",
+      "archiveBytes": 5460833,
+      "archiveSha256": "dee18a6a1a0bca13993b0f0f843ae4cb483f2f5bed2a5f74ef74663776d844a2",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/fremantle-orbit-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/fremantle-orbit-ffprobe.json.gz",
+      "originalBytes": 5055474,
+      "originalSha256": "80d095a0a04d208cefd15dd3d0a490613187a8480b67e06f4ebf5561dec94d55",
+      "archiveBytes": 2614529,
+      "archiveSha256": "d761bc075056e4fd98a87b4fa0cf97e496488cbf3a3b3d18ba556e6dc61298bc",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/fresnel-lens-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/fresnel-lens-ffprobe.json.gz",
+      "originalBytes": 2104042,
+      "originalSha256": "0756ebef0c36bf202aa4c2117bd3cab6d6af97bef0f84b964785a11edee75334",
+      "archiveBytes": 1054276,
+      "archiveSha256": "80131538e6a4c43d751d1cf01d3816959891523b4baa271df804797f72d3fdbc",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/horse-statue-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/horse-statue-ffprobe.json.gz",
+      "originalBytes": 6748789,
+      "originalSha256": "a9635b8119ff1f7be309b4f320e8cece9785f5f496438c235dc21392f66d1f2e",
+      "archiveBytes": 3517214,
+      "archiveSha256": "ad864e8b244f442c1af8c86386a21d243e26155a6851bd4bfc44e72f78038e70",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/ihasalu-orbit-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/ihasalu-orbit-ffprobe.json.gz",
+      "originalBytes": 6430399,
+      "originalSha256": "cb8da043ecfc69f22ed3c4c5f41cd34d716d3e096641c2769d4fa822db93bdfe",
+      "archiveBytes": 3341666,
+      "archiveSha256": "d1b5d702ce8903be957737bc3d09e905d2983cb39a9a0a234c104be13a2e7da8",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/kakerdi-bog-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/kakerdi-bog-ffprobe.json.gz",
+      "originalBytes": 4758714,
+      "originalSha256": "94abc4c9c4824af5ea3b8122b066e9e14e9ac58d01df616125207ae13540a4d0",
+      "archiveBytes": 2462736,
+      "archiveSha256": "a93c5ab57675ee3498def36c4c8f7b89b803962a2e0b87d562bd2c98843c734e",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/oa-street-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/oa-street-ffprobe.json.gz",
+      "originalBytes": 6464345,
+      "originalSha256": "6904591e4ded8444a6e5ed4603f4e2cc3dbadae3c3764d34c3351f8bf5580256",
+      "archiveBytes": 3374194,
+      "archiveSha256": "671f1309e8ad97e679e4844b6e1e5233413bcb7cf1b8e30ba55f012cdd88b2e4",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/palace-statue-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/palace-statue-ffprobe.json.gz",
+      "originalBytes": 3070937,
+      "originalSha256": "b00ef545f6d438d231b926c04b554dd89e3de045082c04a6f6f104dcdc79b118",
+      "archiveBytes": 1601501,
+      "archiveSha256": "fed09be0d6a4a511cd28b4fcf0243587dd286d70ae6ee81703ef7773e9b3465a",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/pisac-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/pisac-ffprobe.json.gz",
+      "originalBytes": 1827563,
+      "originalSha256": "5d965ab2a0e165eee87432c2167bd517c9ef62a0f7fd3695a4fea086dfbd16b2",
+      "archiveBytes": 910251,
+      "archiveSha256": "420f7179d923881e3c5af1bb32ba7f05280d698cc6b0bfe6ca80ebc8da7d2ce7",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/royal-sovereign-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/royal-sovereign-ffprobe.json.gz",
+      "originalBytes": 3611359,
+      "originalSha256": "16535e3956764db2bb1197c9148bc26ed907760ccf04dd26e721b0bd1211f99d",
+      "archiveBytes": 1854830,
+      "archiveSha256": "8f031a9a0f105a1a86892c0c8030c8f03e6778c8e7305daf86df8805f0de4a92",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/saint-denis-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/saint-denis-ffprobe.json.gz",
+      "originalBytes": 9767856,
+      "originalSha256": "f164b907d438fdf82cfbdf9259830d2b2be441f0cb3418e0c021c17b340f1da7",
+      "archiveBytes": 5111509,
+      "archiveSha256": "7a8842822139da9b969b2f4d0438b54c531707fe16f231a1290cdc722a88178d",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/sleeping-dog-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/sleeping-dog-ffprobe.json.gz",
+      "originalBytes": 10697221,
+      "originalSha256": "847b7d5da210fb8bd861b1945f7e2efd514e93ed34b98884bc445c0b3ed8bc9e",
+      "archiveBytes": 5614100,
+      "archiveSha256": "56720708c3344d8954bb728fac98b78ec864af83e19b72445f8308ca14ea24ab",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/snaefell-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/snaefell-ffprobe.json.gz",
+      "originalBytes": 5376294,
+      "originalSha256": "a2eacf34ee34ca3071452ed0eddd5e0e0a00a8d55d73f0cb2e942f1c691ebaa2",
+      "archiveBytes": 2792867,
+      "archiveSha256": "89593eea090f2166790188ce5ef4f585b68fec223c8ba9b535df4bb47d1f6bd0",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/ullard-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/ullard-ffprobe.json.gz",
+      "originalBytes": 9047094,
+      "originalSha256": "8aab95fc44b87e2f9bb4d5d0453c4ba2197083259ecde9f2252ba205f38a3456",
+      "archiveBytes": 4728566,
+      "archiveSha256": "b73db0a0057218abf1e1c050516dcb8fe3cc77b43b3512818847379ed1cb749a",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r1/corpus-receipts/viljandi-ruins-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r1/corpus-receipts/viljandi-ruins-ffprobe.json.gz",
+      "originalBytes": 7412179,
+      "originalSha256": "a0c4e87089c78c7be69a75c705e995f6c0e766a35e0764fcbfac2829d5d7972e",
+      "archiveBytes": 3856566,
+      "archiveSha256": "ba3e4fb733d180a3e22d83d4d7840f2b692e2318f735cc8d8507bcc33891fe3b",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/buddha-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/buddha-ffprobe.json.gz",
+      "originalBytes": 10689836,
+      "originalSha256": "6bc716c2bf3959aaed65c1c746ed3d43d294446254e9a24fde79849473c9364b",
+      "archiveBytes": 5616335,
+      "archiveSha256": "69697b9a3ea02e1bc975ad4c17daf694cef88d10f32267b4b483e3af5e8e3b32",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/cat-plays-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/cat-plays-ffprobe.json.gz",
+      "originalBytes": 2733587,
+      "originalSha256": "e248f4300ce90fa05e47f8b7e88d31f98a20150c9d17fa69e8cd76356fc572b8",
+      "archiveBytes": 1411798,
+      "archiveSha256": "6ee4a619eae5148a870e2e997b9547eaf15494da81671920f2897d2a28a6144d",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/cat-track-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/cat-track-ffprobe.json.gz",
+      "originalBytes": 1667951,
+      "originalSha256": "41c982225c7c9aa6ac1c9ed87c0bc461bd098257cb01f72ed533b594cfe863da",
+      "archiveBytes": 837777,
+      "archiveSha256": "3bc62eca572942551d5dbc844a1b844b4848f35acef4b3e14f951c3ac0a5acec",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/chameleon-flowers-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/chameleon-flowers-ffprobe.json.gz",
+      "originalBytes": 3267097,
+      "originalSha256": "e3382291d4ecb1c78f9299d26d222d579829e1e3b1a3948ae426737ca7982e05",
+      "archiveBytes": 1674170,
+      "archiveSha256": "772a9a105055957e17341764e99458f1a1aa112390b12e32afb6bd47c0c129bd",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/dianthus-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/dianthus-ffprobe.json.gz",
+      "originalBytes": 6288336,
+      "originalSha256": "a04d2e08336d17823f5a2a2dd2452a67a4dad75ab8ab6c0c1354f6129daa0e7c",
+      "archiveBytes": 3289816,
+      "archiveSha256": "d8b5eab7820ac23e1e9e1c4bbd54179550f9b22967b5f40693e78cf1fa0cd073",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/fjoloy-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/fjoloy-ffprobe.json.gz",
+      "originalBytes": 10457713,
+      "originalSha256": "603daab69442357ed62fc29e1b33e151ceb616867bd85f21f3c6102a2694bd7e",
+      "archiveBytes": 5460833,
+      "archiveSha256": "dee18a6a1a0bca13993b0f0f843ae4cb483f2f5bed2a5f74ef74663776d844a2",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/fremantle-orbit-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/fremantle-orbit-ffprobe.json.gz",
+      "originalBytes": 5055474,
+      "originalSha256": "80d095a0a04d208cefd15dd3d0a490613187a8480b67e06f4ebf5561dec94d55",
+      "archiveBytes": 2614529,
+      "archiveSha256": "d761bc075056e4fd98a87b4fa0cf97e496488cbf3a3b3d18ba556e6dc61298bc",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/fresnel-lens-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/fresnel-lens-ffprobe.json.gz",
+      "originalBytes": 2104042,
+      "originalSha256": "0756ebef0c36bf202aa4c2117bd3cab6d6af97bef0f84b964785a11edee75334",
+      "archiveBytes": 1054276,
+      "archiveSha256": "80131538e6a4c43d751d1cf01d3816959891523b4baa271df804797f72d3fdbc",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/horse-statue-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/horse-statue-ffprobe.json.gz",
+      "originalBytes": 6748789,
+      "originalSha256": "a9635b8119ff1f7be309b4f320e8cece9785f5f496438c235dc21392f66d1f2e",
+      "archiveBytes": 3517214,
+      "archiveSha256": "ad864e8b244f442c1af8c86386a21d243e26155a6851bd4bfc44e72f78038e70",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/ihasalu-orbit-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/ihasalu-orbit-ffprobe.json.gz",
+      "originalBytes": 6430399,
+      "originalSha256": "cb8da043ecfc69f22ed3c4c5f41cd34d716d3e096641c2769d4fa822db93bdfe",
+      "archiveBytes": 3341666,
+      "archiveSha256": "d1b5d702ce8903be957737bc3d09e905d2983cb39a9a0a234c104be13a2e7da8",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/kakerdi-bog-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/kakerdi-bog-ffprobe.json.gz",
+      "originalBytes": 4758714,
+      "originalSha256": "94abc4c9c4824af5ea3b8122b066e9e14e9ac58d01df616125207ae13540a4d0",
+      "archiveBytes": 2462736,
+      "archiveSha256": "a93c5ab57675ee3498def36c4c8f7b89b803962a2e0b87d562bd2c98843c734e",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/oa-street-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/oa-street-ffprobe.json.gz",
+      "originalBytes": 6464345,
+      "originalSha256": "6904591e4ded8444a6e5ed4603f4e2cc3dbadae3c3764d34c3351f8bf5580256",
+      "archiveBytes": 3374194,
+      "archiveSha256": "671f1309e8ad97e679e4844b6e1e5233413bcb7cf1b8e30ba55f012cdd88b2e4",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/palace-statue-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/palace-statue-ffprobe.json.gz",
+      "originalBytes": 3070937,
+      "originalSha256": "b00ef545f6d438d231b926c04b554dd89e3de045082c04a6f6f104dcdc79b118",
+      "archiveBytes": 1601501,
+      "archiveSha256": "fed09be0d6a4a511cd28b4fcf0243587dd286d70ae6ee81703ef7773e9b3465a",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/pisac-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/pisac-ffprobe.json.gz",
+      "originalBytes": 1827563,
+      "originalSha256": "5d965ab2a0e165eee87432c2167bd517c9ef62a0f7fd3695a4fea086dfbd16b2",
+      "archiveBytes": 910251,
+      "archiveSha256": "420f7179d923881e3c5af1bb32ba7f05280d698cc6b0bfe6ca80ebc8da7d2ce7",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/royal-sovereign-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/royal-sovereign-ffprobe.json.gz",
+      "originalBytes": 3611359,
+      "originalSha256": "16535e3956764db2bb1197c9148bc26ed907760ccf04dd26e721b0bd1211f99d",
+      "archiveBytes": 1854830,
+      "archiveSha256": "8f031a9a0f105a1a86892c0c8030c8f03e6778c8e7305daf86df8805f0de4a92",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/saint-denis-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/saint-denis-ffprobe.json.gz",
+      "originalBytes": 9767856,
+      "originalSha256": "f164b907d438fdf82cfbdf9259830d2b2be441f0cb3418e0c021c17b340f1da7",
+      "archiveBytes": 5111509,
+      "archiveSha256": "7a8842822139da9b969b2f4d0438b54c531707fe16f231a1290cdc722a88178d",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/sleeping-dog-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/sleeping-dog-ffprobe.json.gz",
+      "originalBytes": 10697221,
+      "originalSha256": "847b7d5da210fb8bd861b1945f7e2efd514e93ed34b98884bc445c0b3ed8bc9e",
+      "archiveBytes": 5614100,
+      "archiveSha256": "56720708c3344d8954bb728fac98b78ec864af83e19b72445f8308ca14ea24ab",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/snaefell-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/snaefell-ffprobe.json.gz",
+      "originalBytes": 5376294,
+      "originalSha256": "a2eacf34ee34ca3071452ed0eddd5e0e0a00a8d55d73f0cb2e942f1c691ebaa2",
+      "archiveBytes": 2792867,
+      "archiveSha256": "89593eea090f2166790188ce5ef4f585b68fec223c8ba9b535df4bb47d1f6bd0",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/ullard-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/ullard-ffprobe.json.gz",
+      "originalBytes": 9047094,
+      "originalSha256": "8aab95fc44b87e2f9bb4d5d0453c4ba2197083259ecde9f2252ba205f38a3456",
+      "archiveBytes": 4728566,
+      "archiveSha256": "b73db0a0057218abf1e1c050516dcb8fe3cc77b43b3512818847379ed1cb749a",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "mp4-decode-research-r2/corpus-receipts/viljandi-ruins-ffprobe.json",
+      "archivedFile": "mp4-decode-research-r2/corpus-receipts/viljandi-ruins-ffprobe.json.gz",
+      "originalBytes": 7412179,
+      "originalSha256": "a0c4e87089c78c7be69a75c705e995f6c0e766a35e0764fcbfac2829d5d7972e",
+      "archiveBytes": 3856566,
+      "archiveSha256": "ba3e4fb733d180a3e22d83d4d7840f2b692e2318f735cc8d8507bcc33891fe3b",
+      "decompressedByteExact": true
+    }
+  ]
+}

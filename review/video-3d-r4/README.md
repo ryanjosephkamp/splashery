@@ -4,6 +4,60 @@ This branch is review evidence only and must never be merged. The accepted corpu
 candidate quality measurements. The product branch is `codex/video-3d-r4`. The audit records results
 and limitations; the goal is still being measured.
 
+## Revision 11 in progress
+
+The new frozen source is `636a7605fd15f3aa1e41d43cc6b5ff35432750b6`, with served-source SHA-256
+`065978f64c7d586b46591356192df441e669243e8478e8e84a46b0eda4cc600b` across 378 paths. Fresh native
+corpus and six-sample checks are running. All older measurements retain their original source
+identity and failures. The deadline remains October 15, 2026, at 16:32:25 UTC.
+
+The [new main snapshot](measurements/main-master-r1-snapshot-0032/run.json) has 32 recorded
+outcomes. The
+[final revision-10 snapshot](measurements/candidate-r10-paired-master-v1-snapshot-0015/run.json) has
+15 paired rows, including seven completed phone quality measurements and a horse-statue
+independent-JPEG verification failure. All 26 raw attempts, including eleven unpaired attempts,
+remain under [the shard snapshots](measurements/candidate-r10-v1-shards/).
+[Final reconciliation](evidence/r10-final-reconciliation-r1/result.json) checks that the original
+state, raw rows, and artifacts stayed unchanged. No completed desktop quality baseline exists in
+this capture, and the corpus gates remain unproved. The earlier interactive dashboard below is a
+point-in-time view and does not contain this newer snapshot.
+
+[Bounded raster preparation](evidence/tile-size-integration-preparation-r5/) records 22 CPU controls
+and six real GPU fixtures. Complete optimizer state matches after four steps in each fixture,
+including dense overlap, supersampling, and capacity fallback. Integrated checks passed 24 cases.
+The smaller tiles require enough space for every possible padded contribution; the full square phone
+entry allocation can grow from 96 MiB to 400 MiB. Native time and sampled memory must be measured
+before claiming an end-to-end benefit. Earlier preparation failures are retained beside the final
+proof. The [cached-input probes](evidence/tile-size-probe-r2/) are diagnostics only. Their additive
+attribution correction supersedes a mistyped source URL in the original assessment: the correct
+source is Ventrovert's
+[Chameleon on ixora flowers](https://commons.wikimedia.org/wiki/File:Chameleon_on_ixora_flowers.webm),
+under CC BY 4.0.
+
+[Optional-fit recovery](evidence/background-fit-recovery-evidence-r1/) preserves a trained model
+when finishing color fitting fails, while device loss, training failure, and export failure remain
+fatal. The reproduced failure and eight passing controlled browser cases are retained.
+[The original-spec byte audit](evidence/original-spec-byte-audit-r2/receipt.json) confirms 285
+original specs were untouched by this task; four differences came only from normally merged main.
+This is a byte audit, not a passing-suite claim.
+
+[The latest full CI](evidence/ci-d2a90/full-suite-summary.json) tested GitHub merge `acdc31904`: 332
+spec files, 2,834 passes, 13 failures, and one existing skip. All sixteen original shard logs remain
+intact; alone rechecks never waive a failure. The
+[broader local run](evidence/ca841-regressions-r1/) had 281 passes, two calibration decode-deadline
+failures, and one existing skip. The
+[separate calibration run](evidence/r11-calibration-isolated-r1/) had seven passes, four failures,
+and the same existing skip under overlapping workload. These failures remain open; no assertion or
+deadline was weakened.
+
+The [decoder research archive](evidence/decoder-research-r1/) preserves the rejected direct and
+bridge decoding paths. Later [strict playback](evidence/html-playback-extraction-research-r2/)
+verified four supported cases and retained thirteen timestamp misses. The
+[playback/seek hybrid](evidence/html-playback-extraction-research-r3/) verified sixteen cases and
+255 selected JPEGs, but retained four nonresults, including matching JPEGs without matching
+independent presentation time. The entire hybrid remains rejected. The production extractor keeps
+its seek and presentation checks.
+
 ## Revision 10 capture
 
 The [static interactive review](evidence/review-dashboard-public-r1/snapshot-0001/index.html) keeps

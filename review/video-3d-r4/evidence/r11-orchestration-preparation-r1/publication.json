@@ -1,0 +1,12 @@
+{
+  "created": "2026-10-15T12:17:53.325Z",
+  "source": "/workspace/v3d-r4-media/r11-orchestration-preparation-r1",
+  "sourceInventory": [
+    {
+      "file": "freeze.json",
+      "bytes": 6149,
+      "sha256": "7e04d132182ec2ebb25b7c33e67e45360aae2226471f4fef246e11abd2bbffab"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

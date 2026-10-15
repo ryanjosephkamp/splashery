@@ -1,0 +1,374 @@
+{
+  "at": "2026-10-15T11:38:10.534Z",
+  "status": "diagnostic-complete",
+  "cases": [
+    {
+      "id": "small",
+      "variants": [
+        {
+          "tile": 8,
+          "steps": [
+            {
+              "iter": 1,
+              "wallMs": 500.30000000074506
+            },
+            {
+              "iter": 2,
+              "wallMs": 142.19999999925494
+            },
+            {
+              "iter": 3,
+              "wallMs": 87.5
+            },
+            {
+              "iter": 4,
+              "wallMs": 203.80000000074506
+            }
+          ],
+          "files": [
+            {
+              "kind": "params",
+              "file": "small-tile8-params.bin",
+              "bytes": 64000,
+              "sha256": "10e2863161f9cafbbbd92c275dd59af6135e94cfe1a231dcc83b135a4c4f079b"
+            },
+            {
+              "kind": "adamM",
+              "file": "small-tile8-adamM.bin",
+              "bytes": 64000,
+              "sha256": "0e7a6ea7f0320baef04561b700a1ff00894de6edf9a0405ee30c9dfd5469032d"
+            },
+            {
+              "kind": "adamV",
+              "file": "small-tile8-adamV.bin",
+              "bytes": 64000,
+              "sha256": "26e3ada95b2af46353df6b6990c9b907d287a2e9439392f52b1151ecb819d2c4"
+            },
+            {
+              "kind": "gradP",
+              "file": "small-tile8-gradP.bin",
+              "bytes": 64000,
+              "sha256": "4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74"
+            },
+            {
+              "kind": "gradF",
+              "file": "small-tile8-gradF.bin",
+              "bytes": 64000,
+              "sha256": "cd6975b17eb36f4ac1e4d7d89169fa64ce170587d20d54f302d489adaa5a437e"
+            },
+            {
+              "kind": "out",
+              "file": "small-tile8-out.bin",
+              "bytes": 82944,
+              "sha256": "cc16adbd9ee94c53532a814ffd019c56a7ede240eb9c30b517048b6a1611dd8f"
+            },
+            {
+              "kind": "stats",
+              "file": "small-tile8-stats.bin",
+              "bytes": 16,
+              "sha256": "487b609967225a3eb20e366453e6de837c991b6b7ceb38d6db6fdd605e390fdc"
+            }
+          ]
+        },
+        {
+          "tile": 16,
+          "steps": [
+            {
+              "iter": 1,
+              "wallMs": 336.5
+            },
+            {
+              "iter": 2,
+              "wallMs": 292.9000000022352
+            },
+            {
+              "iter": 3,
+              "wallMs": 268.1000000014901
+            },
+            {
+              "iter": 4,
+              "wallMs": 196.09999999776483
+            }
+          ],
+          "files": [
+            {
+              "kind": "params",
+              "file": "small-tile16-params.bin",
+              "bytes": 64000,
+              "sha256": "10e2863161f9cafbbbd92c275dd59af6135e94cfe1a231dcc83b135a4c4f079b"
+            },
+            {
+              "kind": "adamM",
+              "file": "small-tile16-adamM.bin",
+              "bytes": 64000,
+              "sha256": "0e7a6ea7f0320baef04561b700a1ff00894de6edf9a0405ee30c9dfd5469032d"
+            },
+            {
+              "kind": "adamV",
+              "file": "small-tile16-adamV.bin",
+              "bytes": 64000,
+              "sha256": "26e3ada95b2af46353df6b6990c9b907d287a2e9439392f52b1151ecb819d2c4"
+            },
+            {
+              "kind": "gradP",
+              "file": "small-tile16-gradP.bin",
+              "bytes": 64000,
+              "sha256": "4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74"
+            },
+            {
+              "kind": "gradF",
+              "file": "small-tile16-gradF.bin",
+              "bytes": 64000,
+              "sha256": "cd6975b17eb36f4ac1e4d7d89169fa64ce170587d20d54f302d489adaa5a437e"
+            },
+            {
+              "kind": "out",
+              "file": "small-tile16-out.bin",
+              "bytes": 82944,
+              "sha256": "cc16adbd9ee94c53532a814ffd019c56a7ede240eb9c30b517048b6a1611dd8f"
+            },
+            {
+              "kind": "stats",
+              "file": "small-tile16-stats.bin",
+              "bytes": 16,
+              "sha256": "487b609967225a3eb20e366453e6de837c991b6b7ceb38d6db6fdd605e390fdc"
+            }
+          ]
+        }
+      ],
+      "parity": {
+        "params": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "adamM": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "adamV": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "gradP": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "gradF": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "out": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "stats": {
+          "byteExact": true,
+          "differentBytes": 0
+        }
+      }
+    },
+    {
+      "id": "phone",
+      "variants": [
+        {
+          "tile": 16,
+          "steps": [
+            {
+              "iter": 1,
+              "wallMs": 2924.599999997765
+            },
+            {
+              "iter": 2,
+              "wallMs": 2825.400000002235
+            },
+            {
+              "iter": 3,
+              "wallMs": 2841.7999999970198
+            },
+            {
+              "iter": 4,
+              "wallMs": 3035.2000000029802
+            }
+          ],
+          "files": [
+            {
+              "kind": "params",
+              "file": "phone-tile16-params.bin",
+              "bytes": 960000,
+              "sha256": "a16531993c15f48255f16d354e641186b43aefbc4c8c1cd3b7dc279eef1ea39d"
+            },
+            {
+              "kind": "adamM",
+              "file": "phone-tile16-adamM.bin",
+              "bytes": 960000,
+              "sha256": "901fbe278dea558f33facb31b91633ada4a6760d5ea4e5f3064dd5b05eee46af"
+            },
+            {
+              "kind": "adamV",
+              "file": "phone-tile16-adamV.bin",
+              "bytes": 960000,
+              "sha256": "3eca6cb88fd2b0e11832ddeba07f908237617bd17522c4638ab7a7c374bef665"
+            },
+            {
+              "kind": "gradP",
+              "file": "phone-tile16-gradP.bin",
+              "bytes": 960000,
+              "sha256": "b9163d03c43083a18e6101539b555cb5e363eed61fa4b3a3b54f50ae60eb5b52"
+            },
+            {
+              "kind": "gradF",
+              "file": "phone-tile16-gradF.bin",
+              "bytes": 960000,
+              "sha256": "8476d1af9ba405063b304b60f76a38324b8ca3a744bcd165d9e82dbfacb0f5d4"
+            },
+            {
+              "kind": "out",
+              "file": "phone-tile16-out.bin",
+              "bytes": 921600,
+              "sha256": "8221194f925958db5aa64353da8632ad562069f90c9c637187f3638a2fc9dccd"
+            },
+            {
+              "kind": "stats",
+              "file": "phone-tile16-stats.bin",
+              "bytes": 16,
+              "sha256": "10d5ef9628698856a3901db32b2aef8688345b7f998934133ce95f374d9ea806"
+            }
+          ]
+        },
+        {
+          "tile": 8,
+          "steps": [
+            {
+              "iter": 1,
+              "wallMs": 1771.0999999977648
+            },
+            {
+              "iter": 2,
+              "wallMs": 1898.300000000745
+            },
+            {
+              "iter": 3,
+              "wallMs": 1732.9000000022352
+            },
+            {
+              "iter": 4,
+              "wallMs": 1803
+            }
+          ],
+          "files": [
+            {
+              "kind": "params",
+              "file": "phone-tile8-params.bin",
+              "bytes": 960000,
+              "sha256": "a16531993c15f48255f16d354e641186b43aefbc4c8c1cd3b7dc279eef1ea39d"
+            },
+            {
+              "kind": "adamM",
+              "file": "phone-tile8-adamM.bin",
+              "bytes": 960000,
+              "sha256": "901fbe278dea558f33facb31b91633ada4a6760d5ea4e5f3064dd5b05eee46af"
+            },
+            {
+              "kind": "adamV",
+              "file": "phone-tile8-adamV.bin",
+              "bytes": 960000,
+              "sha256": "3eca6cb88fd2b0e11832ddeba07f908237617bd17522c4638ab7a7c374bef665"
+            },
+            {
+              "kind": "gradP",
+              "file": "phone-tile8-gradP.bin",
+              "bytes": 960000,
+              "sha256": "b9163d03c43083a18e6101539b555cb5e363eed61fa4b3a3b54f50ae60eb5b52"
+            },
+            {
+              "kind": "gradF",
+              "file": "phone-tile8-gradF.bin",
+              "bytes": 960000,
+              "sha256": "8476d1af9ba405063b304b60f76a38324b8ca3a744bcd165d9e82dbfacb0f5d4"
+            },
+            {
+              "kind": "out",
+              "file": "phone-tile8-out.bin",
+              "bytes": 921600,
+              "sha256": "8221194f925958db5aa64353da8632ad562069f90c9c637187f3638a2fc9dccd"
+            },
+            {
+              "kind": "stats",
+              "file": "phone-tile8-stats.bin",
+              "bytes": 16,
+              "sha256": "10d5ef9628698856a3901db32b2aef8688345b7f998934133ce95f374d9ea806"
+            }
+          ]
+        }
+      ],
+      "parity": {
+        "params": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "adamM": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "adamV": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "gradP": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "gradF": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "out": {
+          "byteExact": true,
+          "differentBytes": 0
+        },
+        "stats": {
+          "byteExact": true,
+          "differentBytes": 0
+        }
+      }
+    }
+  ],
+  "browser": "151.0.7922.173",
+  "sourceAfter": [
+    {
+      "file": "v16/src/gs/trainer.js",
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "v16/src/gs/shaders.js",
+      "sha256": "8503091e42eb2b696d422429877e861c54381b629d94d389e159001ce1b19b75"
+    },
+    {
+      "file": "v16/src/sfm/geometry.js",
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "v16/src/gpu/context.js",
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "v8/src/gs/trainer.js",
+      "sha256": "d9307642ced45efd0c030b0773ac92cb93be3d506e78def2d07511c6c7ea4258"
+    },
+    {
+      "file": "v8/src/gs/shaders.js",
+      "sha256": "548d82d08926ef80f1c1d7985eb7846b1437ce61969e4ff37ec353800548c611"
+    },
+    {
+      "file": "v8/src/sfm/geometry.js",
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "v8/src/gpu/context.js",
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    }
+  ],
+  "allParityExact": true,
+  "gpuAndPageErrors": [],
+  "finishedAt": "2026-10-15T11:39:10.166Z"
+}

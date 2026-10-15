@@ -1,0 +1,19 @@
+{
+  "at": "2026-10-15T12:03:01.764Z",
+  "sourcesBefore": [
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "sha256": "018dc2ae72d6a94446fa84bf597656811ea4a7282f563d2c916abce44a7489c6"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "sha256": "2f88a29325b57b5b791ef12afc495d1ebb86ca24299bdc13432ebab066d436b8"
+    },
+    {
+      "file": "gpu-fixture.mjs",
+      "sha256": "1ea8dd5065749b80ae2c0b7836b65e7629b982d41ca1425b5ccbfca2e6e857a9"
+    }
+  ],
+  "status": "pending",
+  "protocol": "Six predeclared synthetic actual-GPU fixtures, four complete optimizer steps each, direct tile16 vs requested tile8; partial edges, clipped/behind-camera splats, invalid pixels, serial/parallel sort, structural loss, SSAA2, 2049 whole-view opaque splats requiring a raised padded entry cap, and scan-limit fallback. Not a bake or native speed/quality claim."
+}

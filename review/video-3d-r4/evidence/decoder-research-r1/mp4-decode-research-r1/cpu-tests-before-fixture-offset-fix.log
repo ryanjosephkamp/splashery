@@ -1,0 +1,85 @@
+✖ unsigned ctts, B-order, variable stsc chunks and linear edit match hardcoded independent expected rows (47.885124ms)
+✔ signed ctts-v1 and co64 preserve negative offsets without unsigned reinterpretation (0.790895ms)
+✔ no stss correctly means all samples are sync (0.540878ms)
+✔ unsupported geometry/encryption/fragments fail closed (11.022639ms)
+✔ unsafe counts, table truncation, nonunit edit, bad mdat offsets and sizes fail before large allocation (7.083232ms)
+✖ bounded deterministic byte mutations either reject or return only safe in-mdat sample spans (23.766679ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 4
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 484.216249
+
+✖ failing tests:
+
+test at v3d-r4-media/mp4-decode-research-r1/test.mjs:6:1
+✖ unsigned ctts, B-order, variable stsc chunks and linear edit match hardcoded independent expected rows (47.885124ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+    [
+      {
+        dts: -20,
+        duration: 10,
+        key: true,
+  +     offset: 32,
+  -     offset: 36,
+        pts: 0,
+        size: 3
+      },
+      {
+        dts: -10,
+        duration: 20,
+        key: false,
+  +     offset: 35,
+  -     offset: 39,
+        pts: 20,
+        size: 4
+      },
+      {
+        dts: 10,
+        duration: 20,
+        key: false,
+  +     offset: 39,
+  -     offset: 43,
+        pts: 10,
+        size: 5
+      }
+    ]
+  
+      at TestContext.<anonymous> (file:///workspace/v3d-r4-media/mp4-decode-research-r1/test.mjs:6:191)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.start (node:internal/test_runner/test:1242:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ { offset: 32, size: 3, dts: -20, pts: 0, duration: 10, key: true }, { offset: 35, size: 4, dts: -10, pts: 20, duration: 20, key: false }, { offset: 39, size: 5, dts: 10, pts: 10, duration: 20, key: false } ],
+    expected: [ { offset: 36, size: 3, dts: -20, pts: 0, duration: 10, key: true }, { offset: 39, size: 4, dts: -10, pts: 20, duration: 20, key: false }, { offset: 43, size: 5, dts: 10, pts: 10, duration: 20, key: false } ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at v3d-r4-media/mp4-decode-research-r1/test.mjs:11:1
+✖ bounded deterministic byte mutations either reject or return only safe in-mdat sample spans (23.766679ms)
+  AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+  
+    assert(Number.isSafeInteger(s.offset)&&s.offset>=36&&s.offset+s.size<=48)
+  
+      at TestContext.<anonymous> (file:///workspace/v3d-r4-media/mp4-decode-research-r1/test.mjs:11:330)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: '==',
+    diff: 'simple'
+  }

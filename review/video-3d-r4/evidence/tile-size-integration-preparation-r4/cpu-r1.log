@@ -1,0 +1,29 @@
+✔ full phone bound includes every padded segment and raises capacity only when all fit (27.49483ms)
+✔ binding and buffer limits independently select unchanged tile16 without raising memory (2.033742ms)
+✔ missing ceilings, scan overflow, and unsafe multiplication select tile16 (0.715374ms)
+✔ explicit malformed ceilings fail before allocating buffers (0.668387ms)
+✔ SSAA scaling cannot undo the final complete entry bound or exceed device capacity (0.645815ms)
+✔ adversarial whole-view opaque splats require more than the inherited 12M entries (15.963834ms)
+✔ seed overflow fails before conversion, truncation, or GPU allocation (10.333613ms)
+✔ later draws respect allocated tiles, allocated pixels, and grown splat count (0.72377ms)
+✔ ssim image kernels keep 16-wide dispatch while raster uses tile8 (1.051181ms)
+✔ ssaa image kernels keep 16-wide dispatch while raster uses tile8 (30.426237ms)
+✔ all default compiled pipelines remain exact {} (17.021897ms)
+✔ all default compiled pipelines remain exact {"tileGrad":false} (28.808861ms)
+✔ all default compiled pipelines remain exact {"ssimWeight":0.2} (2.360662ms)
+✔ all default compiled pipelines remain exact {"tileGrad":false,"ssimWeight":0.2} (17.349197ms)
+✔ tile8 compiles direct raster workgroups without changing image-wide SSIM workgroups (1.171565ms)
+✔ tile size validation rejects unsupported sizes and shared-gradient combinations before GPU allocation (1.130389ms)
+✔ uniform tile counts follow the explicit tile size for partial edge tiles (0.813747ms)
+✔ source specialization preserves default bytes and rejects ambiguous raster anchors (13.995683ms)
+✔ tile8 pipelines match the separately GPU-verified prototype 0 (8.973926ms)
+✔ tile8 pipelines match the separately GPU-verified prototype 0.2 (1.023408ms)
+✔ tile8 rejects view allocations beyond the actual scan capacity before touching GPU buffers (5.614772ms)
+ℹ tests 21
+ℹ suites 0
+ℹ pass 21
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 602.415496

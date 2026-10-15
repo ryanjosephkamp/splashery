@@ -1,0 +1,30 @@
+✔ full phone bound includes every padded segment and raises capacity only when all fit (15.246841ms)
+✔ binding and buffer limits independently select unchanged tile16 without raising memory (15.103032ms)
+✔ missing ceilings, scan overflow, and unsafe multiplication select tile16 (0.785936ms)
+✔ explicit malformed ceilings fail before allocating buffers (0.686781ms)
+✔ SSAA scaling cannot undo the final complete entry bound or exceed device capacity (0.641697ms)
+✔ adversarial whole-view opaque splats require more than the inherited 12M entries (5.203626ms)
+✔ seed overflow fails before conversion, truncation, or GPU allocation (4.683486ms)
+✔ later draws respect allocated tiles, allocated pixels, and grown splat count (0.516784ms)
+✔ ssim image kernels keep 16-wide dispatch while raster uses tile8 (6.486499ms)
+✔ ssaa image kernels keep 16-wide dispatch while raster uses tile8 (0.458856ms)
+✔ caller options cannot enlarge a compiled tile8 capacity bound or growth allocation (0.666063ms)
+✔ all default compiled pipelines remain exact {} (10.711089ms)
+✔ all default compiled pipelines remain exact {"tileGrad":false} (0.488761ms)
+✔ all default compiled pipelines remain exact {"ssimWeight":0.2} (7.146961ms)
+✔ all default compiled pipelines remain exact {"tileGrad":false,"ssimWeight":0.2} (1.219124ms)
+✔ tile8 compiles direct raster workgroups without changing image-wide SSIM workgroups (0.833655ms)
+✔ tile size validation rejects unsupported sizes and shared-gradient combinations before GPU allocation (4.467604ms)
+✔ uniform tile counts follow the explicit tile size for partial edge tiles (0.862168ms)
+✔ source specialization preserves default bytes and rejects ambiguous raster anchors (0.30024ms)
+✔ tile8 pipelines match the separately GPU-verified prototype 0 (7.189701ms)
+✔ tile8 pipelines match the separately GPU-verified prototype 0.2 (6.843326ms)
+✔ tile8 rejects view allocations beyond the actual scan capacity before touching GPU buffers (1.589515ms)
+ℹ tests 22
+ℹ suites 0
+ℹ pass 22
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 399.374676

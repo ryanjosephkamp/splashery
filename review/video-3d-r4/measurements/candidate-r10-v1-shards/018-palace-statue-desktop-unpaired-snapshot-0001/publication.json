@@ -1,0 +1,31 @@
+{
+  "created": "2026-10-15T12:17:51.994Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/018-palace-statue-desktop-unpaired",
+  "runSha256": "802a435eef69c768ea0daed7d1630331fe1e13f520c4fe37a82ba57441f2b992",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "cases": [
+    {
+      "id": "palace-statue",
+      "profile": "desktop",
+      "rowFingerprint": "bda7e95c438a74d7acfdd1b5bdc1fa5f2df558edc31e5108db5ffc6b1c59c4f6",
+      "files": [
+        {
+          "file": "model.json",
+          "bytes": 26469,
+          "sha256": "7584ebb823ce082f0dd8d1ee7178a27d1192a4fb59507aa9aefcf5fe0cb78b19"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 4042947,
+          "sha256": "ef069861370b312d30d521a54cdeaf0f6c975b1efe2b63162bb2142ee69aac1a"
+        },
+        {
+          "file": "result.json",
+          "bytes": 3590,
+          "sha256": "a6bf740b0af7a0aee70a4c8eafef5a515df98006313915ea63600f8c713e4ffb"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T12:17:51.643Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/013-pisac-desktop-unpaired",
+  "runSha256": "c2a86c200d55e812b8ffe3985476771ef016ec7e2e21555b9ee6930373864151",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "cases": [
+    {
+      "id": "pisac",
+      "profile": "desktop",
+      "rowFingerprint": "aae85b0f2ef4fdf531eca2f36c26f097403af60848917e79ccda9b3bbf0de5b1",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1159875,
+          "sha256": "bc834d721d0995e8f4da2c06998a4c1518afc1df452c860658db4885720cc120"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1318,
+          "sha256": "1e5503eb06f8170c7b52c02986b53c054cc3f28be59769726a33fb2c03678f0d"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

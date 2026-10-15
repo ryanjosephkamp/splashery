@@ -1,0 +1,38 @@
+{
+  "id": "snaefell",
+  "profile": "desktop",
+  "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6",
+  "started": "2026-10-15T12:02:49.304Z",
+  "status": "explained",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "firstViewMs": null,
+  "bakeMs": 30796.371243,
+  "mean": null,
+  "peakRssBytes": 1193607168,
+  "hostLoadAtStart": [
+    16.38,
+    14.99,
+    15.57
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "Stopped",
+    "unplayable": false,
+    "duration": 10
+  },
+  "explanation": {
+    "diagnostic": "The decoded video frame took too long. Try a shorter MP4 (H.264) clip.",
+    "advice": "What worksWalk slowly around an object, or through a place, so the camera moves sideways and sees the same things from new angles.10 to 40 seconds, held steady, in even light.Plenty of texture: stone, bark, brick, leaves, signs.No zoom, and few people or cars moving.A drone circling a building or a statue is ideal.A file under 40 MB (trim a long video first).What failsTurning on the spot, or a panorama: the camera has to move, not just turn.A tripod time-lapse: the camera never moves.Blank walls, sky or water: nothing to match.Blur from fast moves or low light.",
+    "visible": true
+  },
+  "reason": "The decoded video frame took too long. Try a shorter MP4 (H.264) clip."
+}

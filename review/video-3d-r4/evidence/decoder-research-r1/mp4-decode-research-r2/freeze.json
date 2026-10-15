@@ -1,0 +1,371 @@
+{
+  "at": "2026-10-15T10:41:31.433188+00:00",
+  "scope": "r2 helper-owned CPU parser extension and metadata comparison; no browser/GPU/source/runtime/protocol mutations",
+  "implementationLicense": "MIT original helper code only; all corpus/documentation rights separate as README describes",
+  "r1FrozenInventoryUnchanged": true,
+  "r1FreezeSha256": "aa3188ffc98faac44e6ca57cd8af7a137fb70b6d11f935d930d9b8ae7b4885e0",
+  "results": {
+    "cpuTests": 15,
+    "passed": 15,
+    "realCorpusInputs": 20,
+    "supported": 17,
+    "exactFFprobeMatches": 17,
+    "exactSamples": 4008,
+    "rejected": [
+      "dianthus",
+      "horse-statue",
+      "royal-sovereign"
+    ],
+    "signedVfrBframeLimitation": "PTS/storage/config exact; literal DTS/duration differs FFprobe normalized packet convention; raw receipts preserved"
+  },
+  "files": [
+    {
+      "file": "LICENSE",
+      "sha256": "5fafec288541004082096a6cf313d9882e613f4080fd3ec8e33bf3843922ba9f",
+      "bytes": 1225,
+      "rights": "MIT original helper code/text"
+    },
+    {
+      "file": "README.md",
+      "sha256": "813cfdc779c93234288623336952c215ca732b0681b1a5919065ac7bfed163a0",
+      "bytes": 8183,
+      "rights": "MIT original helper code/text"
+    },
+    {
+      "file": "compare.mjs",
+      "sha256": "79582872aad837a2101205e289d695ca3d434dba38d19ef1075f0d427bfd0869",
+      "bytes": 3748,
+      "rights": "MIT original helper code/text"
+    },
+    {
+      "file": "controls/bframes-cfr-ffprobe.json",
+      "sha256": "e6c8fb4ff3017e65e97ed198d4e2c7c42cf6b1797076306202a6d70d6887c186",
+      "bytes": 57309,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "controls/bframes-cfr.mp4",
+      "sha256": "8055ef2b8b0e12ce30fb6a7f46d517e2311d3e550d47bdb3f2cfc11ba4aa32cb",
+      "bytes": 11503,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "controls/bframes-vfr-signed-ffprobe.json",
+      "sha256": "53cf9aaee580630db02db4e0d67f30a94eb7a98e9b9879d9d9d3b61046d839a3",
+      "bytes": 47800,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "controls/bframes-vfr-signed.mp4",
+      "sha256": "6557fdd5563f6ab22b2d40bd0e157ca700018914a38d866524055511018efb6a",
+      "bytes": 10100,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "controls/no-bframes-vfr-ffprobe.json",
+      "sha256": "7c24e1e741fbc44e4f38149011e3c59c9409c8f400d2c18d3ce25c27912d5b40",
+      "bytes": 50168,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "controls/no-bframes-vfr.mp4",
+      "sha256": "f109778bfd81acdbaae481327913be1a290e0366bb88b714617eb1503e6dc8f8",
+      "bytes": 10525,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "controls/results.json",
+      "sha256": "c3810b5ac44d718c059e9a02ab022b0f8d41a00098beef4af64b0c1cfbc2e75c",
+      "bytes": 14142,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "controls.log",
+      "sha256": "cb9b986edbfdaa426eebe5c48026f636d97dc01817cc90a24ecba604831c3a78",
+      "bytes": 4074,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "controls.mjs",
+      "sha256": "4060f63815375dd0fd630a4025eca065bbdc50c37ac0c28e3c097f023fcc3bd9",
+      "bytes": 3239,
+      "rights": "MIT original helper code/text"
+    },
+    {
+      "file": "corpus-comparison.json",
+      "sha256": "132db24f3730a1aa83fa6277f56ad3b274e6145be86e78a84619381accfe5f02",
+      "bytes": 28353,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-comparison.log",
+      "sha256": "132db24f3730a1aa83fa6277f56ad3b274e6145be86e78a84619381accfe5f02",
+      "bytes": 28353,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/buddha-demux.json",
+      "sha256": "528784c021582d1a7025bc4294287c7fb09535856332e2059acfdf09020c873d",
+      "bytes": 28077,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/buddha-ffprobe.json",
+      "sha256": "6bc716c2bf3959aaed65c1c746ed3d43d294446254e9a24fde79849473c9364b",
+      "bytes": 10689836,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/cat-plays-demux.json",
+      "sha256": "f46ab0c478458c248c5d869d6ff15a0e819cd99eaaba7c5370021683a5d96298",
+      "bytes": 27702,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/cat-plays-ffprobe.json",
+      "sha256": "e248f4300ce90fa05e47f8b7e88d31f98a20150c9d17fa69e8cd76356fc572b8",
+      "bytes": 2733587,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/cat-track-demux.json",
+      "sha256": "1beec30e82fff3016a25d15c5c64c4fdbb3a48c9cd1aa263df23c257bb253955",
+      "bytes": 27712,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/cat-track-ffprobe.json",
+      "sha256": "41c982225c7c9aa6ac1c9ed87c0bc461bd098257cb01f72ed533b594cfe863da",
+      "bytes": 1667951,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/chameleon-flowers-demux.json",
+      "sha256": "7346164c9ae1f76cbd144b69d7fc8775a5767fa254fdd33cde8cadb2340d3c0d",
+      "bytes": 34521,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/chameleon-flowers-ffprobe.json",
+      "sha256": "e3382291d4ecb1c78f9299d26d222d579829e1e3b1a3948ae426737ca7982e05",
+      "bytes": 3267097,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/dianthus-ffprobe.json",
+      "sha256": "a04d2e08336d17823f5a2a2dd2452a67a4dad75ab8ab6c0c1354f6129daa0e7c",
+      "bytes": 6288336,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/fjoloy-demux.json",
+      "sha256": "0b06aad1292bd2c91caf542b46304643e639f5d5ed091b286dbe3a63566bfc3c",
+      "bytes": 41628,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/fjoloy-ffprobe.json",
+      "sha256": "603daab69442357ed62fc29e1b33e151ceb616867bd85f21f3c6102a2694bd7e",
+      "bytes": 10457713,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/fremantle-orbit-demux.json",
+      "sha256": "480d4c9ef4200973a57249417f461a465ef0973f951118e704798c573202a3ac",
+      "bytes": 41464,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/fremantle-orbit-ffprobe.json",
+      "sha256": "80d095a0a04d208cefd15dd3d0a490613187a8480b67e06f4ebf5561dec94d55",
+      "bytes": 5055474,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/fresnel-lens-demux.json",
+      "sha256": "e3e4afddd4b4ebfafc66606e16b51afba167d83b24da09057193eaefd846cf4c",
+      "bytes": 34393,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/fresnel-lens-ffprobe.json",
+      "sha256": "0756ebef0c36bf202aa4c2117bd3cab6d6af97bef0f84b964785a11edee75334",
+      "bytes": 2104042,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/horse-statue-ffprobe.json",
+      "sha256": "a9635b8119ff1f7be309b4f320e8cece9785f5f496438c235dc21392f66d1f2e",
+      "bytes": 6748789,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/ihasalu-orbit-demux.json",
+      "sha256": "f806f78f02bf5b2887d8bf2736e08fa8fd7ec110832b0b1d59f4a3a3dbaa4ca4",
+      "bytes": 41418,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/ihasalu-orbit-ffprobe.json",
+      "sha256": "cb8da043ecfc69f22ed3c4c5f41cd34d716d3e096641c2769d4fa822db93bdfe",
+      "bytes": 6430399,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/kakerdi-bog-demux.json",
+      "sha256": "eb27f8af1dcc3b50d891f4285f2afd466a3c1b02b4960c8b0bbf4ee63bf79593",
+      "bytes": 41259,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/kakerdi-bog-ffprobe.json",
+      "sha256": "94abc4c9c4824af5ea3b8122b066e9e14e9ac58d01df616125207ae13540a4d0",
+      "bytes": 4758714,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/oa-street-demux.json",
+      "sha256": "985e38a385ceee3c5444924b3a216c4af250fa1ed426572c34d0bed5815dce59",
+      "bytes": 34523,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/oa-street-ffprobe.json",
+      "sha256": "6904591e4ded8444a6e5ed4603f4e2cc3dbadae3c3764d34c3351f8bf5580256",
+      "bytes": 6464345,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/palace-statue-demux.json",
+      "sha256": "1a45fbf553b16983c2e4e3ce1e9a1872b6c21001b93197cd6608776aaa48a3b0",
+      "bytes": 17901,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/palace-statue-ffprobe.json",
+      "sha256": "b00ef545f6d438d231b926c04b554dd89e3de045082c04a6f6f104dcdc79b118",
+      "bytes": 3070937,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/pisac-demux.json",
+      "sha256": "9c018708b6d0c68728ce563dc50e711381b0050d9a7a64b83e2908810442cdc4",
+      "bytes": 34335,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/pisac-ffprobe.json",
+      "sha256": "5d965ab2a0e165eee87432c2167bd517c9ef62a0f7fd3695a4fea086dfbd16b2",
+      "bytes": 1827563,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/royal-sovereign-ffprobe.json",
+      "sha256": "16535e3956764db2bb1197c9148bc26ed907760ccf04dd26e721b0bd1211f99d",
+      "bytes": 3611359,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/saint-denis-demux.json",
+      "sha256": "a6c7394a49db4af08ac01545fbc00737103e8fb36e7926e865018f136f08d8e2",
+      "bytes": 34785,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/saint-denis-ffprobe.json",
+      "sha256": "f164b907d438fdf82cfbdf9259830d2b2be441f0cb3418e0c021c17b340f1da7",
+      "bytes": 9767856,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/sleeping-dog-demux.json",
+      "sha256": "f2794f89149136c594db846ff52d543f8835ea631db3fab7d935fa21198ce01e",
+      "bytes": 28041,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/sleeping-dog-ffprobe.json",
+      "sha256": "847b7d5da210fb8bd861b1945f7e2efd514e93ed34b98884bc445c0b3ed8bc9e",
+      "bytes": 10697221,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/snaefell-demux.json",
+      "sha256": "7e8a077ef108ceed48e6bbb52978bc7780869ff0aff19e4a9c2382b59f20ca9c",
+      "bytes": 34654,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/snaefell-ffprobe.json",
+      "sha256": "a2eacf34ee34ca3071452ed0eddd5e0e0a00a8d55d73f0cb2e942f1c691ebaa2",
+      "bytes": 5376294,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/ullard-demux.json",
+      "sha256": "a10f4a1357824558bea9451f401a1726cdd1367910b0b6acf585164be60bae7e",
+      "bytes": 34850,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/ullard-ffprobe.json",
+      "sha256": "8aab95fc44b87e2f9bb4d5d0453c4ba2197083259ecde9f2252ba205f38a3456",
+      "bytes": 9047094,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/viljandi-ruins-demux.json",
+      "sha256": "4db1119069be189e6f5b474f661f8b56a2e1a309daa7935612501c74318afd28",
+      "bytes": 41468,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "corpus-receipts/viljandi-ruins-ffprobe.json",
+      "sha256": "a0c4e87089c78c7be69a75c705e995f6c0e766a35e0764fcbfac2829d5d7972e",
+      "bytes": 7412179,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "cpu-tests-final.log",
+      "sha256": "aad5c254d315eb19e5b3d4948b9eba05e908c0722c9b2f6b6e0c157ff03a6572",
+      "bytes": 1596,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "cpu-tests.log",
+      "sha256": "7542269cf0e0772af729497f333ad9884362197b38870a4403a6ae6b40bf2810",
+      "bytes": 1595,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "demux.mjs",
+      "sha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d",
+      "bytes": 12484,
+      "rights": "MIT original helper code/text"
+    },
+    {
+      "file": "io.mjs",
+      "sha256": "f9cdf3d759f4ec89812750ee1c33353fcaafaf56940394094129a253e38d4c0f",
+      "bytes": 411,
+      "rights": "MIT original helper code/text"
+    },
+    {
+      "file": "r1-binding-after.json",
+      "sha256": "a5770d8f95dce109287ed8b887dcdda929a945ee177010ffff3f3ff16fa4076c",
+      "bytes": 205,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "r1-binding-before.json",
+      "sha256": "bf6f4142e470abb15eaa2fcda9303b6a3702b97c82090733d2bd1d6680065e19",
+      "bytes": 9592,
+      "rights": "Factual CPU receipt, generated pattern, or corpus metadata under original source licenses"
+    },
+    {
+      "file": "test.mjs",
+      "sha256": "b582db49b819e6974ee9ed55f1e5fabcc8ad271568b6225a9307bfe6309d780c",
+      "bytes": 8472,
+      "rights": "MIT original helper code/text"
+    }
+  ]
+}

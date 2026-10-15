@@ -1,0 +1,63 @@
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:23:53] "GET / HTTP/1.1" 200 -
+
+Running 1 test using 1 worker
+
+(node:290836) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:290836) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /src/video3d/run.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /src/video3d/deadline.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/sfm/sfm.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/sfm/worker-pool.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/sfm/features.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/sfm/sift.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/sfm/gpumatch.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/sfm/matching.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/sfm/ba.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/sfm/global.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [15/Oct/2026 11:24:00] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✘  1 [chromium] › tests/cdx-v3d-background-recovery.spec.mjs:95:3 › optional background failed keeps the completed model after releasing its readback (2.4s)
+
+
+  1) [chromium] › tests/cdx-v3d-background-recovery.spec.mjs:95:3 › optional background failed keeps the completed model after releasing its readback 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeUndefined[2m()[22m
+
+    Received: [31m"The graphics card could not finish this scene. Try the Phone-safe setting, or a shorter stretch."[39m
+
+       97 |     if (mode === "deadline") await page.clock.runFor(60001);
+       98 |     const r = await page.evaluate(() => window.pendingBake);
+    >  99 |     expect(r.error).toBeUndefined();
+          |                     ^
+      100 |     expect(r.ply).toEqual([0, 255, 17, 128, 3]);
+      101 |     expect(r.stats.trainingBackground).toEqual([0, 0, 0]);
+      102 |     expect(r.stats.renderBackground).toBeUndefined();
+        at /workspace/splashery-r4-public/tests/cdx-v3d-background-recovery.spec.mjs:99:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-v3d-background-recover-cba25-fter-releasing-its-readback-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    attachment #2: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-background-recover-cba25-fter-releasing-its-readback-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-background-recover-cba25-fter-releasing-its-readback-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-v3d-background-recovery.spec.mjs:95:3 › optional background failed keeps the completed model after releasing its readback 

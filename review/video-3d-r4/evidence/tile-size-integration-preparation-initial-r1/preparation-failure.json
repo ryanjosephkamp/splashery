@@ -1,0 +1,4 @@
+{
+  "at": "2026-10-15T11:42:12.196989+00:00",
+  "error": "Preflight expected17 textual tile division occurrences; frozen trainer contains18. No trainer file was written, no GPU was launched, and the active checkout was untouched. Original failed preparation retained before correcting expected inventory count."
+}

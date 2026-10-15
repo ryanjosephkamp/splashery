@@ -1,0 +1,35 @@
+Failed to load resource: the server responded with a status of 404 (Not Found)
+{"phase":"extraction-start","id":"chameleon-flowers","profile":"phone","method":"sequential","frames":16,"trialTargets":48}
+{"phase":"case-result","id":"chameleon-flowers","profile":"phone","method":"sequential","status":"diagnostic-error-no-complete-result","error":{"name":"Error","message":"Playback missed a trial target","stack":"Error: Playback missed a trial target\n    at frame (http://127.0.0.1:4200/sequential.mjs:20:61)"},"progress":0}
+{"phase":"extraction-start","id":"chameleon-flowers","profile":"phone","method":"seek","frames":16,"trialTargets":48}
+{"phase":"proof-start","id":"chameleon-flowers","profile":"phone","method":"seek","extractMs":49721.699999999255,"photos":16}
+{"phase":"case-result","id":"chameleon-flowers","profile":"phone","method":"seek","status":"verified","extractMs":49721.699999999255,"proofMs":12801.5,"violations":[],"progress":16}
+{"phase":"extraction-start","id":"cat-plays","profile":"phone","method":"seek","frames":16,"trialTargets":48}
+{"phase":"proof-start","id":"cat-plays","profile":"phone","method":"seek","extractMs":29180.599999997765,"photos":16}
+{"phase":"case-result","id":"cat-plays","profile":"phone","method":"seek","status":"verified","extractMs":29180.599999997765,"proofMs":8321.300000000745,"violations":[],"progress":16}
+{"phase":"extraction-start","id":"cat-plays","profile":"phone","method":"sequential","frames":16,"trialTargets":48}
+{"phase":"proof-start","id":"cat-plays","profile":"phone","method":"sequential","extractMs":10172.60000000149,"photos":16}
+{"phase":"case-result","id":"cat-plays","profile":"phone","method":"sequential","status":"verified","extractMs":10172.60000000149,"proofMs":6198,"violations":[],"progress":64}
+{"phase":"extraction-start","id":"fremantle-orbit","profile":"phone","method":"sequential","frames":16,"trialTargets":48}
+{"phase":"proof-start","id":"fremantle-orbit","profile":"phone","method":"sequential","extractMs":16509,"photos":16}
+{"phase":"case-result","id":"fremantle-orbit","profile":"phone","method":"sequential","status":"verified","extractMs":16509,"proofMs":10996.89999999851,"violations":[],"progress":64}
+{"phase":"extraction-start","id":"fremantle-orbit","profile":"phone","method":"seek","frames":16,"trialTargets":48}
+{"phase":"proof-start","id":"fremantle-orbit","profile":"phone","method":"seek","extractMs":46467.5,"photos":16}
+{"phase":"case-result","id":"fremantle-orbit","profile":"phone","method":"seek","status":"verified","extractMs":46467.5,"proofMs":12410.300000000745,"violations":[],"progress":16}
+{"phase":"extraction-start","id":"chameleon-flowers","profile":"desktop","method":"seek","frames":30,"trialTargets":90}
+{"phase":"proof-start","id":"chameleon-flowers","profile":"desktop","method":"seek","extractMs":89258.40000000224,"photos":30}
+{"phase":"case-result","id":"chameleon-flowers","profile":"desktop","method":"seek","status":"verified","extractMs":89258.40000000224,"proofMs":26901.5,"violations":[],"progress":30}
+{"phase":"extraction-start","id":"chameleon-flowers","profile":"desktop","method":"sequential","frames":30,"trialTargets":90}
+{"phase":"case-result","id":"chameleon-flowers","profile":"desktop","method":"sequential","status":"diagnostic-error-no-complete-result","error":{"name":"Error","message":"Actual picture crossed its sampling window","stack":"Error: Actual picture crossed its sampling window\n    at frame (http://127.0.0.1:4200/sequential.mjs:19:39)"},"progress":82}
+{"phase":"extraction-start","id":"cat-plays","profile":"desktop","method":"sequential","frames":24,"trialTargets":72}
+{"phase":"case-result","id":"cat-plays","profile":"desktop","method":"sequential","status":"diagnostic-error-no-complete-result","error":{"name":"Error","message":"Actual picture crossed its sampling window","stack":"Error: Actual picture crossed its sampling window\n    at frame (http://127.0.0.1:4200/sequential.mjs:19:39)"},"progress":10}
+{"phase":"extraction-start","id":"cat-plays","profile":"desktop","method":"seek","frames":24,"trialTargets":72}
+{"phase":"proof-start","id":"cat-plays","profile":"desktop","method":"seek","extractMs":38847.39999999851,"photos":24}
+{"phase":"case-result","id":"cat-plays","profile":"desktop","method":"seek","status":"verified","extractMs":38847.39999999851,"proofMs":8092,"violations":[],"progress":24}
+{"phase":"extraction-start","id":"fremantle-orbit","profile":"desktop","method":"seek","frames":36,"trialTargets":108}
+{"phase":"proof-start","id":"fremantle-orbit","profile":"desktop","method":"seek","extractMs":83932.90000000224,"photos":36}
+{"phase":"case-result","id":"fremantle-orbit","profile":"desktop","method":"seek","status":"verified","extractMs":83932.90000000224,"proofMs":30899.29999999702,"violations":[],"progress":36}
+{"phase":"extraction-start","id":"fremantle-orbit","profile":"desktop","method":"sequential","frames":36,"trialTargets":108}
+{"phase":"case-result","id":"fremantle-orbit","profile":"desktop","method":"sequential","status":"diagnostic-error-no-complete-result","error":{"name":"Error","message":"Playback ended before all trial targets","stack":"Error: Playback ended before all trial targets\n    at HTMLVideoElement.ended (http://127.0.0.1:4200/sequential.mjs:11:85)"},"progress":142}
+{"phase":"extraction-start","id":"chameleon-flowers","profile":"phone","method":"sequential","frames":16,"trialTargets":48}
+{"phase":"case-result","id":"chameleon-flowers","profile":"phone","method":"sequential","status":"research-abort-no-complete-result","error":{"name":"AbortError","message":"Stopped"},"progress":1}

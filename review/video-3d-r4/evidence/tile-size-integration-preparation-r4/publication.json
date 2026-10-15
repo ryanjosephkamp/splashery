@@ -1,0 +1,192 @@
+{
+  "created": "2026-10-15T12:17:53.214Z",
+  "source": "/workspace/v3d-r4-media/tile-size-integration-preparation-r4",
+  "sourceInventory": [
+    {
+      "file": "bounds-test.mjs",
+      "bytes": 4843,
+      "sha256": "6d0be51aed7083a0cc4e360c6ee75d998263810101aef3fb4e36ce1865e1eb85"
+    },
+    {
+      "file": "candidate-tests/cdx-v3d-tile-size-gpu.spec.mjs",
+      "bytes": 1602,
+      "sha256": "b268d12ee1612aa648b7d0b88c52e556c834a5b82765659196008470f95c6ad6"
+    },
+    {
+      "file": "candidate-tests/cdx-v3d-tile-size.spec.mjs",
+      "bytes": 11638,
+      "sha256": "4a7a42d3a993524845fe3362ab63d0f06b41d6af21e8a502bf8cfc9792c583c1"
+    },
+    {
+      "file": "candidate-tests/fixtures/v3d-tile-source-hashes.json",
+      "bytes": 11622,
+      "sha256": "6704bead653cc33c1a57c2e767553e8ee4da11acf9867e469086a847da09a700"
+    },
+    {
+      "file": "candidate-tests/helpers/v3d-tile-fixture.mjs",
+      "bytes": 5261,
+      "sha256": "c8f0274e3973c6cdb200251020b107357b18bd6d25ffdbcd243134d624a95b83"
+    },
+    {
+      "file": "cpu-r1.log",
+      "bytes": 2035,
+      "sha256": "139be00a2aedb1a0326f96c8d6daf77f32a4c7997f4da1347d0328e3a84acef4"
+    },
+    {
+      "file": "derivation.json",
+      "bytes": 281,
+      "sha256": "2cf2266cb8c802068a22c101792703db273e8393eb089453bc8e11ad12c8e962"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 3993,
+      "sha256": "e8f6dcf774b3fb0d90d5622f327048a9de9af93573fa5082bbad0b8759b8697d"
+    },
+    {
+      "file": "gpu-check.mjs",
+      "bytes": 2924,
+      "sha256": "957d9906a10069c47114b44d91a772a4bf8d49ab662ea08a7f60d4d07806b340"
+    },
+    {
+      "file": "gpu-declaration.json",
+      "bytes": 883,
+      "sha256": "e432ff6efb5fc02584aa052750e432d30779d6f9111a5ff9ddc8586e3047d84e"
+    },
+    {
+      "file": "gpu-fixture.mjs",
+      "bytes": 3504,
+      "sha256": "1ea8dd5065749b80ae2c0b7836b65e7629b982d41ca1425b5ccbfca2e6e857a9"
+    },
+    {
+      "file": "gpu-result.json",
+      "bytes": 7870,
+      "sha256": "4f9c9492de9cdfbb26c27a9bd37310d2b5276d0d50ee6fac685229f6c032a512"
+    },
+    {
+      "file": "test.mjs",
+      "bytes": 5134,
+      "sha256": "0382d94bc7fde6995c2ad67f704836d10b89ae42dda82580ef09e2eab05df73e"
+    },
+    {
+      "file": "vendor/splatjs/LICENSE",
+      "bytes": 1070,
+      "sha256": "18624e1299d279fd21e41745d3e7c7a61bbb1fe55940ce384fb9dbd60f1d4964"
+    },
+    {
+      "file": "vendor/splatjs/VERSION.md",
+      "bytes": 3431,
+      "sha256": "cdfdaccd5e332354ece2d228987d511b271b15d516f6de3c4f8f341375a6887f"
+    },
+    {
+      "file": "vendor/splatjs/src/gpu/context.js",
+      "bytes": 3407,
+      "sha256": "beb8428d6d4d790fecc6efbe7d5906ed279e785e3e161d477580390845aeb44f"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/background-fit.js",
+      "bytes": 4475,
+      "sha256": "9b40decb9665ce73a5ef9b829d7e89887263c4cc7dbb75296ddb64fdcc5e6110"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/hull.js",
+      "bytes": 9911,
+      "sha256": "debc8a865d3fa888a5b38f2d18e0def03ddb8c81aad7cff60dae3a3519a3e593"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/init.js",
+      "bytes": 4965,
+      "sha256": "0d0807678ca0f01ef9eb75fe315b75449a11ff30336307601ad9a2787f263138"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/shaders.js",
+      "bytes": 103322,
+      "sha256": "2f88a29325b57b5b791ef12afc495d1ebb86ca24299bdc13432ebab066d436b8"
+    },
+    {
+      "file": "vendor/splatjs/src/gs/trainer.js",
+      "bytes": 127889,
+      "sha256": "018dc2ae72d6a94446fa84bf597656811ea4a7282f563d2c916abce44a7489c6"
+    },
+    {
+      "file": "vendor/splatjs/src/io/exif.js",
+      "bytes": 7542,
+      "sha256": "1b6c2f0686405a8983e4e25ed14bc8ae25b274da5093cfb5a714af080ecdf719"
+    },
+    {
+      "file": "vendor/splatjs/src/io/frames.js",
+      "bytes": 17135,
+      "sha256": "aacba5fec86cb0ce5ec2e8acbbce52e893980e3d7f3542d8bac9f5e5500c814e"
+    },
+    {
+      "file": "vendor/splatjs/src/io/pano.js",
+      "bytes": 6278,
+      "sha256": "8a718f685aafbc0b6b996f941256fa9c87e22b8ee9ccd46872d7bc52cd1f97e2"
+    },
+    {
+      "file": "vendor/splatjs/src/io/ply.js",
+      "bytes": 6449,
+      "sha256": "db748b836793bcb27a7f4649c6cb822b273b22107dd691f1238109e6d8dcfd2b"
+    },
+    {
+      "file": "vendor/splatjs/src/session.js",
+      "bytes": 67471,
+      "sha256": "e50c9b04231c4e62ce804f6c48ab367155426d007674cece64c8f8773c287d8f"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/ba.js",
+      "bytes": 20084,
+      "sha256": "760c181010415311e8ce84e52fc9e4429767108373d13b9121cdc724ef18ce63"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/features.js",
+      "bytes": 10555,
+      "sha256": "36724e6226d5169b883015cca2775e913229ca57f5651aca2b149b3b2395140b"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/featworker.js",
+      "bytes": 557,
+      "sha256": "881c8b47d89505f2bc517ae0b0eca27bdecacfb4b90d0f6075e5c8d0cdfc3061"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/geometry.js",
+      "bytes": 30165,
+      "sha256": "795833989b1fa8a2905e690dce8191769a07e96ddd067d715e96c3b122ba41f0"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/global.js",
+      "bytes": 17686,
+      "sha256": "9f58fe80ed84a85ba4e890df12e094ec6fa49297bd3b62f88a1d5a27d4bec75d"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/gpumatch.js",
+      "bytes": 11682,
+      "sha256": "107319b57f6f4b6935f9799c127a90e01620b7fbbafd93c72f1ce7467341c662"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/matching.js",
+      "bytes": 1359,
+      "sha256": "193f47de0488cab6eebd19d1125655e2c7702c706ffbacdba8dc60618102fb88"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/pairworker.js",
+      "bytes": 1249,
+      "sha256": "03c0281f1ab833791d669c0ec8bfa35538eab2c5be2b08f951ad9b15d8c1b543"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/sfm.js",
+      "bytes": 107991,
+      "sha256": "fd941c3b4af813b62f69e8e48171813afc69bfa1d9db8a12b093330e717ae06a"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/sift.js",
+      "bytes": 14540,
+      "sha256": "4c75e5a2110a046ba957f415696d63eada1b460f449098f96fc1a6bfa65b2f59"
+    },
+    {
+      "file": "vendor/splatjs/src/sfm/worker-pool.js",
+      "bytes": 2088,
+      "sha256": "cba333d31e0f86802a503bf1f4f530b386e47b14c540c2f976b47ca3dae1cca6"
+    }
+  ],
+  "note": "Original bytes preserved. ATTRIBUTION.txt and this publication receipt are additive and outside the original artifact inventories."
+}

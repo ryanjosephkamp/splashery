@@ -1,0 +1,5 @@
+{
+  "at": "2026-10-15T12:05:02.599731+00:00",
+  "parentFreezeSha256": "e8f6dcf774b3fb0d90d5622f327048a9de9af93573fa5082bbad0b8759b8697d",
+  "scope": "Snapshot validated tile/splat bounds; constrain growth cap and all subsequent guards to those original values."
+}

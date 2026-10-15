@@ -1,0 +1,150 @@
+{
+  "cases": 20,
+  "verified": 4,
+  "fallback": 16,
+  "unsupported": 3,
+  "jpegs": 64,
+  "exactTrials": 192,
+  "rows": [
+    {
+      "id": "cat-track",
+      "status": "verified-exact-ceil",
+      "extractSeconds": 16.246800000000746,
+      "error": null
+    },
+    {
+      "id": "cat-plays",
+      "status": "verified-exact-ceil",
+      "extractSeconds": 11.99539999999851,
+      "error": null
+    },
+    {
+      "id": "buddha",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "chameleon-flowers",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "dianthus",
+      "status": "unsupported-table-immediate-fallback",
+      "extractSeconds": null,
+      "error": "Nontrivial edit list unsupported"
+    },
+    {
+      "id": "pisac",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "sleeping-dog",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "palace-statue",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "oa-street",
+      "status": "verified-exact-ceil",
+      "extractSeconds": 16.0065,
+      "error": null
+    },
+    {
+      "id": "ullard",
+      "status": "verified-exact-ceil",
+      "extractSeconds": 17.619800000000744,
+      "error": null
+    },
+    {
+      "id": "snaefell",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "fremantle-orbit",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "ihasalu-orbit",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "fresnel-lens",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "saint-denis",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "horse-statue",
+      "status": "unsupported-table-immediate-fallback",
+      "extractSeconds": null,
+      "error": "Nontrivial edit list unsupported"
+    },
+    {
+      "id": "royal-sovereign",
+      "status": "unsupported-table-immediate-fallback",
+      "extractSeconds": null,
+      "error": "Nontrivial edit list unsupported"
+    },
+    {
+      "id": "viljandi-ruins",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "kakerdi-bog",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    },
+    {
+      "id": "fjoloy",
+      "status": "extraction-or-proof-fallback",
+      "extractSeconds": null,
+      "error": "Exact ceil source frame was skipped"
+    }
+  ],
+  "abort": [
+    {
+      "id": "chameleon-flowers",
+      "status": "research-abort-fallback",
+      "error": {
+        "name": "AbortError",
+        "message": "Stopped"
+      },
+      "completedExtractionReturned": false,
+      "noPartialExtractionReturned": true,
+      "trialCount": 1,
+      "cleanup": {
+        "pausedBeforeClose": true,
+        "readyStateBeforeClose": 4,
+        "srcRemoved": true,
+        "pausedAfterClose": true
+      },
+      "hostContextClosed": true
+    }
+  ]
+}

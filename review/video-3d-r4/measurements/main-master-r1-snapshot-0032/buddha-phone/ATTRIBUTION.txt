@@ -1,0 +1,11 @@
+Buddha statue, camera held still
+Author: https://www.youtube.com/user/Editor
+Source: https://commons.wikimedia.org/wiki/File:Statue_of_Buddha.webm
+License: CC BY 3.0 (https://creativecommons.org/licenses/by/3.0)
+Checked: October 15, 2026
+File SHA-256: 765070736b87205ff07211410a25b23b02e5e8e0092282a742e3c70f3e02f388
+Changes: Trimmed 2–10 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+Models and rendered/reference PNGs retain the source license. This additive notice is outside the unchanged raw artifact inventory.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

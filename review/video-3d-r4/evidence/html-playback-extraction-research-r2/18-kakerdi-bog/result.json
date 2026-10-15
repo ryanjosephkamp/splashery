@@ -1,0 +1,2422 @@
+{
+  "id": "kakerdi-bog",
+  "profile": "phone",
+  "method": "exact-ceil-continuous-html-playback",
+  "startedAt": "2026-10-15T11:26:04.521Z",
+  "researchLimitMs": 90000,
+  "abortAfterTrials": null,
+  "inputSha256": "5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8",
+  "parseMs": 15.400000002235174,
+  "table": {
+    "timescale": 12288,
+    "samples": 288,
+    "editOffset": 1024
+  },
+  "tier": {
+    "maxFrames": 16,
+    "frameSide": 480,
+    "featSide": 480,
+    "trainSide": 320,
+    "iters": 1200,
+    "splats": 30000,
+    "seed": 15000,
+    "maxMinutes": 8
+  },
+  "plan": {
+    "start": 0,
+    "end": 12,
+    "rate": 1.333,
+    "step": 0.75,
+    "windows": [
+      {
+        "t": 0.375,
+        "from": 0,
+        "to": 0.75
+      },
+      {
+        "t": 1.125,
+        "from": 0.75,
+        "to": 1.5
+      },
+      {
+        "t": 1.875,
+        "from": 1.5,
+        "to": 2.25
+      },
+      {
+        "t": 2.625,
+        "from": 2.25,
+        "to": 3
+      },
+      {
+        "t": 3.375,
+        "from": 3,
+        "to": 3.75
+      },
+      {
+        "t": 4.125,
+        "from": 3.75,
+        "to": 4.5
+      },
+      {
+        "t": 4.875,
+        "from": 4.5,
+        "to": 5.25
+      },
+      {
+        "t": 5.625,
+        "from": 5.25,
+        "to": 6
+      },
+      {
+        "t": 6.375,
+        "from": 6,
+        "to": 6.75
+      },
+      {
+        "t": 7.125,
+        "from": 6.75,
+        "to": 7.5
+      },
+      {
+        "t": 7.875,
+        "from": 7.5,
+        "to": 8.25
+      },
+      {
+        "t": 8.625,
+        "from": 8.25,
+        "to": 9
+      },
+      {
+        "t": 9.375,
+        "from": 9,
+        "to": 9.75
+      },
+      {
+        "t": 10.125,
+        "from": 9.75,
+        "to": 10.5
+      },
+      {
+        "t": 10.875,
+        "from": 10.5,
+        "to": 11.25
+      },
+      {
+        "t": 11.625,
+        "from": 11.25,
+        "to": 12
+      }
+    ]
+  },
+  "natural": {
+    "width": 854,
+    "height": 481,
+    "duration": 12
+  },
+  "crop": {
+    "sx": 0,
+    "sw": 854
+  },
+  "prepareMs": 1016.3000000007451,
+  "status": "extraction-or-proof-fallback",
+  "error": {
+    "name": "Error",
+    "message": "Exact ceil source frame was skipped",
+    "stack": "Error: Exact ceil source frame was skipped\n    at sample (http://127.0.0.1:4201/sequential.mjs:24:145)\n    at http://127.0.0.1:4201/sequential.mjs:19:87"
+  },
+  "exactDiagnostics": {
+    "targets": [
+      {
+        "window": 0,
+        "trial": 0,
+        "requestedTime": 0.125,
+        "pts": 1536,
+        "time": 0.125,
+        "micros": 125000,
+        "sourcePresentationIndex": 3
+      },
+      {
+        "window": 0,
+        "trial": 1,
+        "requestedTime": 0.375,
+        "pts": 4608,
+        "time": 0.375,
+        "micros": 375000,
+        "sourcePresentationIndex": 9
+      },
+      {
+        "window": 0,
+        "trial": 2,
+        "requestedTime": 0.625,
+        "pts": 7680,
+        "time": 0.625,
+        "micros": 625000,
+        "sourcePresentationIndex": 15
+      },
+      {
+        "window": 1,
+        "trial": 0,
+        "requestedTime": 0.875,
+        "pts": 10752,
+        "time": 0.875,
+        "micros": 875000,
+        "sourcePresentationIndex": 21
+      },
+      {
+        "window": 1,
+        "trial": 1,
+        "requestedTime": 1.125,
+        "pts": 13824,
+        "time": 1.125,
+        "micros": 1125000,
+        "sourcePresentationIndex": 27
+      },
+      {
+        "window": 1,
+        "trial": 2,
+        "requestedTime": 1.375,
+        "pts": 16896,
+        "time": 1.375,
+        "micros": 1375000,
+        "sourcePresentationIndex": 33
+      },
+      {
+        "window": 2,
+        "trial": 0,
+        "requestedTime": 1.625,
+        "pts": 19968,
+        "time": 1.625,
+        "micros": 1625000,
+        "sourcePresentationIndex": 39
+      },
+      {
+        "window": 2,
+        "trial": 1,
+        "requestedTime": 1.875,
+        "pts": 23040,
+        "time": 1.875,
+        "micros": 1875000,
+        "sourcePresentationIndex": 45
+      },
+      {
+        "window": 2,
+        "trial": 2,
+        "requestedTime": 2.125,
+        "pts": 26112,
+        "time": 2.125,
+        "micros": 2125000,
+        "sourcePresentationIndex": 51
+      },
+      {
+        "window": 3,
+        "trial": 0,
+        "requestedTime": 2.375,
+        "pts": 29184,
+        "time": 2.375,
+        "micros": 2375000,
+        "sourcePresentationIndex": 57
+      },
+      {
+        "window": 3,
+        "trial": 1,
+        "requestedTime": 2.625,
+        "pts": 32256,
+        "time": 2.625,
+        "micros": 2625000,
+        "sourcePresentationIndex": 63
+      },
+      {
+        "window": 3,
+        "trial": 2,
+        "requestedTime": 2.875,
+        "pts": 35328,
+        "time": 2.875,
+        "micros": 2875000,
+        "sourcePresentationIndex": 69
+      },
+      {
+        "window": 4,
+        "trial": 0,
+        "requestedTime": 3.125,
+        "pts": 38400,
+        "time": 3.125,
+        "micros": 3125000,
+        "sourcePresentationIndex": 75
+      },
+      {
+        "window": 4,
+        "trial": 1,
+        "requestedTime": 3.375,
+        "pts": 41472,
+        "time": 3.375,
+        "micros": 3375000,
+        "sourcePresentationIndex": 81
+      },
+      {
+        "window": 4,
+        "trial": 2,
+        "requestedTime": 3.625,
+        "pts": 44544,
+        "time": 3.625,
+        "micros": 3625000,
+        "sourcePresentationIndex": 87
+      },
+      {
+        "window": 5,
+        "trial": 0,
+        "requestedTime": 3.875,
+        "pts": 47616,
+        "time": 3.875,
+        "micros": 3875000,
+        "sourcePresentationIndex": 93
+      },
+      {
+        "window": 5,
+        "trial": 1,
+        "requestedTime": 4.125,
+        "pts": 50688,
+        "time": 4.125,
+        "micros": 4125000,
+        "sourcePresentationIndex": 99
+      },
+      {
+        "window": 5,
+        "trial": 2,
+        "requestedTime": 4.375,
+        "pts": 53760,
+        "time": 4.375,
+        "micros": 4375000,
+        "sourcePresentationIndex": 105
+      },
+      {
+        "window": 6,
+        "trial": 0,
+        "requestedTime": 4.625,
+        "pts": 56832,
+        "time": 4.625,
+        "micros": 4625000,
+        "sourcePresentationIndex": 111
+      },
+      {
+        "window": 6,
+        "trial": 1,
+        "requestedTime": 4.875,
+        "pts": 59904,
+        "time": 4.875,
+        "micros": 4875000,
+        "sourcePresentationIndex": 117
+      },
+      {
+        "window": 6,
+        "trial": 2,
+        "requestedTime": 5.125,
+        "pts": 62976,
+        "time": 5.125,
+        "micros": 5125000,
+        "sourcePresentationIndex": 123
+      },
+      {
+        "window": 7,
+        "trial": 0,
+        "requestedTime": 5.375,
+        "pts": 66048,
+        "time": 5.375,
+        "micros": 5375000,
+        "sourcePresentationIndex": 129
+      },
+      {
+        "window": 7,
+        "trial": 1,
+        "requestedTime": 5.625,
+        "pts": 69120,
+        "time": 5.625,
+        "micros": 5625000,
+        "sourcePresentationIndex": 135
+      },
+      {
+        "window": 7,
+        "trial": 2,
+        "requestedTime": 5.875,
+        "pts": 72192,
+        "time": 5.875,
+        "micros": 5875000,
+        "sourcePresentationIndex": 141
+      },
+      {
+        "window": 8,
+        "trial": 0,
+        "requestedTime": 6.125,
+        "pts": 75264,
+        "time": 6.125,
+        "micros": 6125000,
+        "sourcePresentationIndex": 147
+      },
+      {
+        "window": 8,
+        "trial": 1,
+        "requestedTime": 6.375,
+        "pts": 78336,
+        "time": 6.375,
+        "micros": 6375000,
+        "sourcePresentationIndex": 153
+      },
+      {
+        "window": 8,
+        "trial": 2,
+        "requestedTime": 6.625,
+        "pts": 81408,
+        "time": 6.625,
+        "micros": 6625000,
+        "sourcePresentationIndex": 159
+      },
+      {
+        "window": 9,
+        "trial": 0,
+        "requestedTime": 6.875,
+        "pts": 84480,
+        "time": 6.875,
+        "micros": 6875000,
+        "sourcePresentationIndex": 165
+      },
+      {
+        "window": 9,
+        "trial": 1,
+        "requestedTime": 7.125,
+        "pts": 87552,
+        "time": 7.125,
+        "micros": 7125000,
+        "sourcePresentationIndex": 171
+      },
+      {
+        "window": 9,
+        "trial": 2,
+        "requestedTime": 7.375,
+        "pts": 90624,
+        "time": 7.375,
+        "micros": 7375000,
+        "sourcePresentationIndex": 177
+      },
+      {
+        "window": 10,
+        "trial": 0,
+        "requestedTime": 7.625,
+        "pts": 93696,
+        "time": 7.625,
+        "micros": 7625000,
+        "sourcePresentationIndex": 183
+      },
+      {
+        "window": 10,
+        "trial": 1,
+        "requestedTime": 7.875,
+        "pts": 96768,
+        "time": 7.875,
+        "micros": 7875000,
+        "sourcePresentationIndex": 189
+      },
+      {
+        "window": 10,
+        "trial": 2,
+        "requestedTime": 8.125,
+        "pts": 99840,
+        "time": 8.125,
+        "micros": 8125000,
+        "sourcePresentationIndex": 195
+      },
+      {
+        "window": 11,
+        "trial": 0,
+        "requestedTime": 8.375,
+        "pts": 102912,
+        "time": 8.375,
+        "micros": 8375000,
+        "sourcePresentationIndex": 201
+      },
+      {
+        "window": 11,
+        "trial": 1,
+        "requestedTime": 8.625,
+        "pts": 105984,
+        "time": 8.625,
+        "micros": 8625000,
+        "sourcePresentationIndex": 207
+      },
+      {
+        "window": 11,
+        "trial": 2,
+        "requestedTime": 8.875,
+        "pts": 109056,
+        "time": 8.875,
+        "micros": 8875000,
+        "sourcePresentationIndex": 213
+      },
+      {
+        "window": 12,
+        "trial": 0,
+        "requestedTime": 9.125,
+        "pts": 112128,
+        "time": 9.125,
+        "micros": 9125000,
+        "sourcePresentationIndex": 219
+      },
+      {
+        "window": 12,
+        "trial": 1,
+        "requestedTime": 9.375,
+        "pts": 115200,
+        "time": 9.375,
+        "micros": 9375000,
+        "sourcePresentationIndex": 225
+      },
+      {
+        "window": 12,
+        "trial": 2,
+        "requestedTime": 9.625,
+        "pts": 118272,
+        "time": 9.625,
+        "micros": 9625000,
+        "sourcePresentationIndex": 231
+      },
+      {
+        "window": 13,
+        "trial": 0,
+        "requestedTime": 9.875,
+        "pts": 121344,
+        "time": 9.875,
+        "micros": 9875000,
+        "sourcePresentationIndex": 237
+      },
+      {
+        "window": 13,
+        "trial": 1,
+        "requestedTime": 10.125,
+        "pts": 124416,
+        "time": 10.125,
+        "micros": 10125000,
+        "sourcePresentationIndex": 243
+      },
+      {
+        "window": 13,
+        "trial": 2,
+        "requestedTime": 10.375,
+        "pts": 127488,
+        "time": 10.375,
+        "micros": 10375000,
+        "sourcePresentationIndex": 249
+      },
+      {
+        "window": 14,
+        "trial": 0,
+        "requestedTime": 10.625,
+        "pts": 130560,
+        "time": 10.625,
+        "micros": 10625000,
+        "sourcePresentationIndex": 255
+      },
+      {
+        "window": 14,
+        "trial": 1,
+        "requestedTime": 10.875,
+        "pts": 133632,
+        "time": 10.875,
+        "micros": 10875000,
+        "sourcePresentationIndex": 261
+      },
+      {
+        "window": 14,
+        "trial": 2,
+        "requestedTime": 11.125,
+        "pts": 136704,
+        "time": 11.125,
+        "micros": 11125000,
+        "sourcePresentationIndex": 267
+      },
+      {
+        "window": 15,
+        "trial": 0,
+        "requestedTime": 11.375,
+        "pts": 139776,
+        "time": 11.375,
+        "micros": 11375000,
+        "sourcePresentationIndex": 273
+      },
+      {
+        "window": 15,
+        "trial": 1,
+        "requestedTime": 11.625,
+        "pts": 142848,
+        "time": 11.625,
+        "micros": 11625000,
+        "sourcePresentationIndex": 279
+      },
+      {
+        "window": 15,
+        "trial": 2,
+        "requestedTime": 11.875,
+        "pts": 145920,
+        "time": 11.875,
+        "micros": 11875000,
+        "sourcePresentationIndex": 285
+      }
+    ],
+    "telemetry": [
+      {
+        "wallMs": 551.8999999985099,
+        "kind": "startup-presented",
+        "requestedTime": 0.5,
+        "actualTime": 0.625,
+        "position": 0.783619,
+        "presentationTime": 2150,
+        "wallNow": 2144.3
+      },
+      {
+        "wallMs": 1179.300000000745,
+        "kind": "startup-presented",
+        "requestedTime": 0.001,
+        "actualTime": 0.041667,
+        "position": 0.026243,
+        "presentationTime": 2778.5,
+        "wallNow": 2777.7
+      },
+      {
+        "wallMs": 1246.3999999985099,
+        "kind": "rvfc",
+        "time": 0.083333,
+        "micros": 83333,
+        "origin": "rvfc",
+        "target": 0,
+        "presentedFrames": 5
+      },
+      {
+        "wallMs": 1266.8999999985099,
+        "kind": "rvfc",
+        "time": 0.125,
+        "micros": 125000,
+        "origin": "rvfc",
+        "target": 0,
+        "presentedFrames": 6
+      },
+      {
+        "wallMs": 2604.300000000745,
+        "kind": "trial",
+        "window": 0,
+        "trial": 0,
+        "requestedTime": 0.125,
+        "actualTime": 0.125,
+        "actualMicros": 125000,
+        "desiredMicros": 125000,
+        "desiredPts": 1536
+      },
+      {
+        "wallMs": 2659.800000000745,
+        "kind": "rvfc",
+        "time": 0.166667,
+        "micros": 166667,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 7
+      },
+      {
+        "wallMs": 2674.800000000745,
+        "kind": "rvfc",
+        "time": 0.208333,
+        "micros": 208333,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 8
+      },
+      {
+        "wallMs": 2748.89999999851,
+        "kind": "rvfc",
+        "time": 0.25,
+        "micros": 250000,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 9
+      },
+      {
+        "wallMs": 2791,
+        "kind": "rvfc",
+        "time": 0.291667,
+        "micros": 291667,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 10
+      },
+      {
+        "wallMs": 2852.599999997765,
+        "kind": "rvfc",
+        "time": 0.333333,
+        "micros": 333333,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 11
+      },
+      {
+        "wallMs": 2863.300000000745,
+        "kind": "rvfc",
+        "time": 0.375,
+        "micros": 375000,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 12
+      },
+      {
+        "wallMs": 2955.599999997765,
+        "kind": "trial",
+        "window": 0,
+        "trial": 1,
+        "requestedTime": 0.375,
+        "actualTime": 0.375,
+        "actualMicros": 375000,
+        "desiredMicros": 375000,
+        "desiredPts": 4608
+      },
+      {
+        "wallMs": 2977.800000000745,
+        "kind": "rvfc",
+        "time": 0.416667,
+        "micros": 416667,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 13
+      },
+      {
+        "wallMs": 3051.599999997765,
+        "kind": "rvfc",
+        "time": 0.458333,
+        "micros": 458333,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 14
+      },
+      {
+        "wallMs": 3067.39999999851,
+        "kind": "rvfc",
+        "time": 0.5,
+        "micros": 500000,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 15
+      },
+      {
+        "wallMs": 3093.099999997765,
+        "kind": "rvfc",
+        "time": 0.541667,
+        "micros": 541667,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 16
+      },
+      {
+        "wallMs": 3163.300000000745,
+        "kind": "rvfc",
+        "time": 0.583333,
+        "micros": 583333,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 17
+      },
+      {
+        "wallMs": 3178.199999999255,
+        "kind": "rvfc",
+        "time": 0.625,
+        "micros": 625000,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 18
+      },
+      {
+        "wallMs": 3269.5,
+        "kind": "trial",
+        "window": 0,
+        "trial": 2,
+        "requestedTime": 0.625,
+        "actualTime": 0.625,
+        "actualMicros": 625000,
+        "desiredMicros": 625000,
+        "desiredPts": 7680
+      },
+      {
+        "wallMs": 3269.599999997765,
+        "kind": "window",
+        "done": 1,
+        "total": 16,
+        "selectedTime": 0.625
+      },
+      {
+        "wallMs": 3315.5,
+        "kind": "rvfc",
+        "time": 0.666667,
+        "micros": 666667,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 19
+      },
+      {
+        "wallMs": 3362.199999999255,
+        "kind": "rvfc",
+        "time": 0.708333,
+        "micros": 708333,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 20
+      },
+      {
+        "wallMs": 3406.099999997765,
+        "kind": "rvfc",
+        "time": 0.75,
+        "micros": 750000,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 21
+      },
+      {
+        "wallMs": 3454.699999999255,
+        "kind": "rvfc",
+        "time": 0.791667,
+        "micros": 791667,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 22
+      },
+      {
+        "wallMs": 3479,
+        "kind": "rvfc",
+        "time": 0.833333,
+        "micros": 833333,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 23
+      },
+      {
+        "wallMs": 3551.5,
+        "kind": "rvfc",
+        "time": 0.875,
+        "micros": 875000,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 24
+      },
+      {
+        "wallMs": 3604.199999999255,
+        "kind": "trial",
+        "window": 1,
+        "trial": 0,
+        "requestedTime": 0.875,
+        "actualTime": 0.875,
+        "actualMicros": 875000,
+        "desiredMicros": 875000,
+        "desiredPts": 10752
+      },
+      {
+        "wallMs": 3647.300000000745,
+        "kind": "rvfc",
+        "time": 0.916667,
+        "micros": 916667,
+        "origin": "rvfc",
+        "target": 4,
+        "presentedFrames": 25
+      },
+      {
+        "wallMs": 3687.300000000745,
+        "kind": "rvfc",
+        "time": 0.958333,
+        "micros": 958333,
+        "origin": "rvfc",
+        "target": 4,
+        "presentedFrames": 26
+      },
+      {
+        "wallMs": 3706,
+        "kind": "rvfc",
+        "time": 1,
+        "micros": 1000000,
+        "origin": "rvfc",
+        "target": 4,
+        "presentedFrames": 27
+      },
+      {
+        "wallMs": 3746.699999999255,
+        "kind": "rvfc",
+        "time": 1.041667,
+        "micros": 1041667,
+        "origin": "rvfc",
+        "target": 4,
+        "presentedFrames": 28
+      },
+      {
+        "wallMs": 3793.599999997765,
+        "kind": "rvfc",
+        "time": 1.083333,
+        "micros": 1083333,
+        "origin": "rvfc",
+        "target": 4,
+        "presentedFrames": 29
+      },
+      {
+        "wallMs": 3843.099999997765,
+        "kind": "rvfc",
+        "time": 1.125,
+        "micros": 1125000,
+        "origin": "rvfc",
+        "target": 4,
+        "presentedFrames": 30
+      },
+      {
+        "wallMs": 3892.89999999851,
+        "kind": "trial",
+        "window": 1,
+        "trial": 1,
+        "requestedTime": 1.125,
+        "actualTime": 1.125,
+        "actualMicros": 1125000,
+        "desiredMicros": 1125000,
+        "desiredPts": 13824
+      },
+      {
+        "wallMs": 3963.199999999255,
+        "kind": "rvfc",
+        "time": 1.208333,
+        "micros": 1208333,
+        "origin": "rvfc",
+        "target": 5,
+        "presentedFrames": 32
+      },
+      {
+        "wallMs": 4011.800000000745,
+        "kind": "rvfc",
+        "time": 1.25,
+        "micros": 1250000,
+        "origin": "rvfc",
+        "target": 5,
+        "presentedFrames": 33
+      },
+      {
+        "wallMs": 4048.099999997765,
+        "kind": "rvfc",
+        "time": 1.291667,
+        "micros": 1291667,
+        "origin": "rvfc",
+        "target": 5,
+        "presentedFrames": 34
+      },
+      {
+        "wallMs": 4104.5,
+        "kind": "rvfc",
+        "time": 1.333333,
+        "micros": 1333333,
+        "origin": "rvfc",
+        "target": 5,
+        "presentedFrames": 35
+      },
+      {
+        "wallMs": 4122.699999999255,
+        "kind": "rvfc",
+        "time": 1.375,
+        "micros": 1375000,
+        "origin": "rvfc",
+        "target": 5,
+        "presentedFrames": 36
+      },
+      {
+        "wallMs": 4270.800000000745,
+        "kind": "trial",
+        "window": 1,
+        "trial": 2,
+        "requestedTime": 1.375,
+        "actualTime": 1.375,
+        "actualMicros": 1375000,
+        "desiredMicros": 1375000,
+        "desiredPts": 16896
+      },
+      {
+        "wallMs": 4270.800000000745,
+        "kind": "window",
+        "done": 2,
+        "total": 16,
+        "selectedTime": 0.875
+      },
+      {
+        "wallMs": 4309.89999999851,
+        "kind": "rvfc",
+        "time": 1.416667,
+        "micros": 1416667,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 37
+      },
+      {
+        "wallMs": 4359.599999997765,
+        "kind": "rvfc",
+        "time": 1.458333,
+        "micros": 1458333,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 38
+      },
+      {
+        "wallMs": 4389.300000000745,
+        "kind": "rvfc",
+        "time": 1.5,
+        "micros": 1500000,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 39
+      },
+      {
+        "wallMs": 4457.599999997765,
+        "kind": "rvfc",
+        "time": 1.541667,
+        "micros": 1541667,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 40
+      },
+      {
+        "wallMs": 4472.599999997765,
+        "kind": "rvfc",
+        "time": 1.583333,
+        "micros": 1583333,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 41
+      },
+      {
+        "wallMs": 4559.5,
+        "kind": "rvfc",
+        "time": 1.625,
+        "micros": 1625000,
+        "origin": "rvfc",
+        "target": 6,
+        "presentedFrames": 42
+      },
+      {
+        "wallMs": 4619.39999999851,
+        "kind": "trial",
+        "window": 2,
+        "trial": 0,
+        "requestedTime": 1.625,
+        "actualTime": 1.625,
+        "actualMicros": 1625000,
+        "desiredMicros": 1625000,
+        "desiredPts": 19968
+      },
+      {
+        "wallMs": 4648.099999997765,
+        "kind": "rvfc",
+        "time": 1.666667,
+        "micros": 1666667,
+        "origin": "rvfc",
+        "target": 7,
+        "presentedFrames": 43
+      },
+      {
+        "wallMs": 4689.800000000745,
+        "kind": "rvfc",
+        "time": 1.708333,
+        "micros": 1708333,
+        "origin": "rvfc",
+        "target": 7,
+        "presentedFrames": 44
+      },
+      {
+        "wallMs": 4755.5,
+        "kind": "rvfc",
+        "time": 1.75,
+        "micros": 1750000,
+        "origin": "rvfc",
+        "target": 7,
+        "presentedFrames": 45
+      },
+      {
+        "wallMs": 4791.300000000745,
+        "kind": "rvfc",
+        "time": 1.791667,
+        "micros": 1791667,
+        "origin": "rvfc",
+        "target": 7,
+        "presentedFrames": 46
+      },
+      {
+        "wallMs": 4851.199999999255,
+        "kind": "rvfc",
+        "time": 1.833333,
+        "micros": 1833333,
+        "origin": "rvfc",
+        "target": 7,
+        "presentedFrames": 47
+      },
+      {
+        "wallMs": 4875.5,
+        "kind": "rvfc",
+        "time": 1.875,
+        "micros": 1875000,
+        "origin": "rvfc",
+        "target": 7,
+        "presentedFrames": 48
+      },
+      {
+        "wallMs": 4961.5,
+        "kind": "trial",
+        "window": 2,
+        "trial": 1,
+        "requestedTime": 1.875,
+        "actualTime": 1.875,
+        "actualMicros": 1875000,
+        "desiredMicros": 1875000,
+        "desiredPts": 23040
+      },
+      {
+        "wallMs": 5006,
+        "kind": "rvfc",
+        "time": 1.916667,
+        "micros": 1916667,
+        "origin": "rvfc",
+        "target": 8,
+        "presentedFrames": 49
+      },
+      {
+        "wallMs": 5045.300000000745,
+        "kind": "rvfc",
+        "time": 1.958333,
+        "micros": 1958333,
+        "origin": "rvfc",
+        "target": 8,
+        "presentedFrames": 50
+      },
+      {
+        "wallMs": 5095.39999999851,
+        "kind": "rvfc",
+        "time": 2,
+        "micros": 2000000,
+        "origin": "rvfc",
+        "target": 8,
+        "presentedFrames": 51
+      },
+      {
+        "wallMs": 5155.800000000745,
+        "kind": "rvfc",
+        "time": 2.041667,
+        "micros": 2041667,
+        "origin": "rvfc",
+        "target": 8,
+        "presentedFrames": 52
+      },
+      {
+        "wallMs": 5175.300000000745,
+        "kind": "rvfc",
+        "time": 2.083333,
+        "micros": 2083333,
+        "origin": "rvfc",
+        "target": 8,
+        "presentedFrames": 53
+      },
+      {
+        "wallMs": 5214,
+        "kind": "rvfc",
+        "time": 2.125,
+        "micros": 2125000,
+        "origin": "rvfc",
+        "target": 8,
+        "presentedFrames": 54
+      },
+      {
+        "wallMs": 5319.5,
+        "kind": "trial",
+        "window": 2,
+        "trial": 2,
+        "requestedTime": 2.125,
+        "actualTime": 2.125,
+        "actualMicros": 2125000,
+        "desiredMicros": 2125000,
+        "desiredPts": 26112
+      },
+      {
+        "wallMs": 5319.5,
+        "kind": "window",
+        "done": 3,
+        "total": 16,
+        "selectedTime": 2.125
+      },
+      {
+        "wallMs": 5372.699999999255,
+        "kind": "rvfc",
+        "time": 2.166667,
+        "micros": 2166667,
+        "origin": "rvfc",
+        "target": 9,
+        "presentedFrames": 55
+      },
+      {
+        "wallMs": 5406,
+        "kind": "rvfc",
+        "time": 2.208333,
+        "micros": 2208333,
+        "origin": "rvfc",
+        "target": 9,
+        "presentedFrames": 56
+      },
+      {
+        "wallMs": 5472.599999997765,
+        "kind": "rvfc",
+        "time": 2.25,
+        "micros": 2250000,
+        "origin": "rvfc",
+        "target": 9,
+        "presentedFrames": 57
+      },
+      {
+        "wallMs": 5502.39999999851,
+        "kind": "rvfc",
+        "time": 2.291667,
+        "micros": 2291667,
+        "origin": "rvfc",
+        "target": 9,
+        "presentedFrames": 58
+      },
+      {
+        "wallMs": 5567.39999999851,
+        "kind": "rvfc",
+        "time": 2.333333,
+        "micros": 2333333,
+        "origin": "rvfc",
+        "target": 9,
+        "presentedFrames": 59
+      },
+      {
+        "wallMs": 5572.5,
+        "kind": "rvfc",
+        "time": 2.375,
+        "micros": 2375000,
+        "origin": "rvfc",
+        "target": 9,
+        "presentedFrames": 60
+      },
+      {
+        "wallMs": 5667.300000000745,
+        "kind": "trial",
+        "window": 3,
+        "trial": 0,
+        "requestedTime": 2.375,
+        "actualTime": 2.375,
+        "actualMicros": 2375000,
+        "desiredMicros": 2375000,
+        "desiredPts": 29184
+      },
+      {
+        "wallMs": 5711.39999999851,
+        "kind": "rvfc",
+        "time": 2.416667,
+        "micros": 2416667,
+        "origin": "rvfc",
+        "target": 10,
+        "presentedFrames": 61
+      },
+      {
+        "wallMs": 5746.300000000745,
+        "kind": "rvfc",
+        "time": 2.458333,
+        "micros": 2458333,
+        "origin": "rvfc",
+        "target": 10,
+        "presentedFrames": 62
+      },
+      {
+        "wallMs": 5795.5,
+        "kind": "rvfc",
+        "time": 2.5,
+        "micros": 2500000,
+        "origin": "rvfc",
+        "target": 10,
+        "presentedFrames": 63
+      },
+      {
+        "wallMs": 5855.800000000745,
+        "kind": "rvfc",
+        "time": 2.541667,
+        "micros": 2541667,
+        "origin": "rvfc",
+        "target": 10,
+        "presentedFrames": 64
+      },
+      {
+        "wallMs": 5889.599999997765,
+        "kind": "rvfc",
+        "time": 2.583333,
+        "micros": 2583333,
+        "origin": "rvfc",
+        "target": 10,
+        "presentedFrames": 65
+      },
+      {
+        "wallMs": 5959.199999999255,
+        "kind": "rvfc",
+        "time": 2.625,
+        "micros": 2625000,
+        "origin": "rvfc",
+        "target": 10,
+        "presentedFrames": 66
+      },
+      {
+        "wallMs": 6020.89999999851,
+        "kind": "trial",
+        "window": 3,
+        "trial": 1,
+        "requestedTime": 2.625,
+        "actualTime": 2.625,
+        "actualMicros": 2625000,
+        "desiredMicros": 2625000,
+        "desiredPts": 32256
+      },
+      {
+        "wallMs": 6072.5,
+        "kind": "rvfc",
+        "time": 2.708333,
+        "micros": 2708333,
+        "origin": "rvfc",
+        "target": 11,
+        "presentedFrames": 68
+      },
+      {
+        "wallMs": 6147.599999997765,
+        "kind": "rvfc",
+        "time": 2.75,
+        "micros": 2750000,
+        "origin": "rvfc",
+        "target": 11,
+        "presentedFrames": 69
+      },
+      {
+        "wallMs": 6155.800000000745,
+        "kind": "rvfc",
+        "time": 2.791667,
+        "micros": 2791667,
+        "origin": "rvfc",
+        "target": 11,
+        "presentedFrames": 70
+      },
+      {
+        "wallMs": 6213.199999999255,
+        "kind": "rvfc",
+        "time": 2.833333,
+        "micros": 2833333,
+        "origin": "rvfc",
+        "target": 11,
+        "presentedFrames": 71
+      },
+      {
+        "wallMs": 6255.39999999851,
+        "kind": "rvfc",
+        "time": 2.875,
+        "micros": 2875000,
+        "origin": "rvfc",
+        "target": 11,
+        "presentedFrames": 72
+      },
+      {
+        "wallMs": 6355.699999999255,
+        "kind": "trial",
+        "window": 3,
+        "trial": 2,
+        "requestedTime": 2.875,
+        "actualTime": 2.875,
+        "actualMicros": 2875000,
+        "desiredMicros": 2875000,
+        "desiredPts": 35328
+      },
+      {
+        "wallMs": 6355.699999999255,
+        "kind": "window",
+        "done": 4,
+        "total": 16,
+        "selectedTime": 2.875
+      },
+      {
+        "wallMs": 6367.39999999851,
+        "kind": "rvfc",
+        "time": 2.916667,
+        "micros": 2916667,
+        "origin": "rvfc",
+        "target": 12,
+        "presentedFrames": 73
+      },
+      {
+        "wallMs": 6411.599999997765,
+        "kind": "rvfc",
+        "time": 2.958333,
+        "micros": 2958333,
+        "origin": "rvfc",
+        "target": 12,
+        "presentedFrames": 74
+      },
+      {
+        "wallMs": 6448.699999999255,
+        "kind": "rvfc",
+        "time": 3,
+        "micros": 3000000,
+        "origin": "rvfc",
+        "target": 12,
+        "presentedFrames": 75
+      },
+      {
+        "wallMs": 6491.599999997765,
+        "kind": "rvfc",
+        "time": 3.041667,
+        "micros": 3041667,
+        "origin": "rvfc",
+        "target": 12,
+        "presentedFrames": 76
+      },
+      {
+        "wallMs": 6554.099999997765,
+        "kind": "rvfc",
+        "time": 3.083333,
+        "micros": 3083333,
+        "origin": "rvfc",
+        "target": 12,
+        "presentedFrames": 77
+      },
+      {
+        "wallMs": 6599.39999999851,
+        "kind": "rvfc",
+        "time": 3.125,
+        "micros": 3125000,
+        "origin": "rvfc",
+        "target": 12,
+        "presentedFrames": 78
+      },
+      {
+        "wallMs": 6688.099999997765,
+        "kind": "trial",
+        "window": 4,
+        "trial": 0,
+        "requestedTime": 3.125,
+        "actualTime": 3.125,
+        "actualMicros": 3125000,
+        "desiredMicros": 3125000,
+        "desiredPts": 38400
+      },
+      {
+        "wallMs": 6713.599999997765,
+        "kind": "rvfc",
+        "time": 3.166667,
+        "micros": 3166667,
+        "origin": "rvfc",
+        "target": 13,
+        "presentedFrames": 79
+      },
+      {
+        "wallMs": 6772.89999999851,
+        "kind": "rvfc",
+        "time": 3.208333,
+        "micros": 3208333,
+        "origin": "rvfc",
+        "target": 13,
+        "presentedFrames": 80
+      },
+      {
+        "wallMs": 6789.699999999255,
+        "kind": "rvfc",
+        "time": 3.25,
+        "micros": 3250000,
+        "origin": "rvfc",
+        "target": 13,
+        "presentedFrames": 81
+      },
+      {
+        "wallMs": 6857.5,
+        "kind": "rvfc",
+        "time": 3.291667,
+        "micros": 3291667,
+        "origin": "rvfc",
+        "target": 13,
+        "presentedFrames": 82
+      },
+      {
+        "wallMs": 6875.89999999851,
+        "kind": "rvfc",
+        "time": 3.333333,
+        "micros": 3333333,
+        "origin": "rvfc",
+        "target": 13,
+        "presentedFrames": 83
+      },
+      {
+        "wallMs": 6959.5,
+        "kind": "rvfc",
+        "time": 3.416667,
+        "micros": 3416667,
+        "origin": "rvfc",
+        "target": 13,
+        "presentedFrames": 85
+      }
+    ],
+    "startup": [
+      {
+        "time": 0.625,
+        "requestedTime": 0.5,
+        "before": 0,
+        "position": 0.783896,
+        "observedSeeking": true,
+        "phase": "warm"
+      },
+      {
+        "time": 0.041667,
+        "requestedTime": 0.001,
+        "before": 0.783896,
+        "position": 0.026308,
+        "observedSeeking": true,
+        "phase": "single-rewind"
+      }
+    ],
+    "completedTrials": 13,
+    "completedWindows": 4
+  },
+  "attemptedExtractionMs": 6964.699999999255,
+  "noPartialExtractionReturned": true,
+  "cleanup": {
+    "pausedBeforeClose": true,
+    "readyStateBeforeClose": 4,
+    "srcRemoved": true,
+    "pausedAfterClose": true
+  },
+  "progress": [
+    {
+      "wallMs": 551.8999999985099,
+      "kind": "startup-presented",
+      "requestedTime": 0.5,
+      "actualTime": 0.625,
+      "position": 0.783619,
+      "presentationTime": 2150,
+      "wallNow": 2144.3
+    },
+    {
+      "wallMs": 1179.300000000745,
+      "kind": "startup-presented",
+      "requestedTime": 0.001,
+      "actualTime": 0.041667,
+      "position": 0.026243,
+      "presentationTime": 2778.5,
+      "wallNow": 2777.7
+    },
+    {
+      "wallMs": 1246.3999999985099,
+      "kind": "rvfc",
+      "time": 0.083333,
+      "micros": 83333,
+      "origin": "rvfc",
+      "target": 0,
+      "presentedFrames": 5
+    },
+    {
+      "wallMs": 1266.8999999985099,
+      "kind": "rvfc",
+      "time": 0.125,
+      "micros": 125000,
+      "origin": "rvfc",
+      "target": 0,
+      "presentedFrames": 6
+    },
+    {
+      "wallMs": 2604.300000000745,
+      "kind": "trial",
+      "window": 0,
+      "trial": 0,
+      "requestedTime": 0.125,
+      "actualTime": 0.125,
+      "actualMicros": 125000,
+      "desiredMicros": 125000,
+      "desiredPts": 1536
+    },
+    {
+      "wallMs": 2659.800000000745,
+      "kind": "rvfc",
+      "time": 0.166667,
+      "micros": 166667,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 7
+    },
+    {
+      "wallMs": 2674.800000000745,
+      "kind": "rvfc",
+      "time": 0.208333,
+      "micros": 208333,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 8
+    },
+    {
+      "wallMs": 2748.89999999851,
+      "kind": "rvfc",
+      "time": 0.25,
+      "micros": 250000,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 9
+    },
+    {
+      "wallMs": 2791,
+      "kind": "rvfc",
+      "time": 0.291667,
+      "micros": 291667,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 10
+    },
+    {
+      "wallMs": 2852.599999997765,
+      "kind": "rvfc",
+      "time": 0.333333,
+      "micros": 333333,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 11
+    },
+    {
+      "wallMs": 2863.300000000745,
+      "kind": "rvfc",
+      "time": 0.375,
+      "micros": 375000,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 12
+    },
+    {
+      "wallMs": 2955.599999997765,
+      "kind": "trial",
+      "window": 0,
+      "trial": 1,
+      "requestedTime": 0.375,
+      "actualTime": 0.375,
+      "actualMicros": 375000,
+      "desiredMicros": 375000,
+      "desiredPts": 4608
+    },
+    {
+      "wallMs": 2977.800000000745,
+      "kind": "rvfc",
+      "time": 0.416667,
+      "micros": 416667,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 13
+    },
+    {
+      "wallMs": 3051.599999997765,
+      "kind": "rvfc",
+      "time": 0.458333,
+      "micros": 458333,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 14
+    },
+    {
+      "wallMs": 3067.39999999851,
+      "kind": "rvfc",
+      "time": 0.5,
+      "micros": 500000,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 15
+    },
+    {
+      "wallMs": 3093.099999997765,
+      "kind": "rvfc",
+      "time": 0.541667,
+      "micros": 541667,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 16
+    },
+    {
+      "wallMs": 3163.300000000745,
+      "kind": "rvfc",
+      "time": 0.583333,
+      "micros": 583333,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 17
+    },
+    {
+      "wallMs": 3178.199999999255,
+      "kind": "rvfc",
+      "time": 0.625,
+      "micros": 625000,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 18
+    },
+    {
+      "wallMs": 3269.5,
+      "kind": "trial",
+      "window": 0,
+      "trial": 2,
+      "requestedTime": 0.625,
+      "actualTime": 0.625,
+      "actualMicros": 625000,
+      "desiredMicros": 625000,
+      "desiredPts": 7680
+    },
+    {
+      "wallMs": 3269.599999997765,
+      "kind": "window",
+      "done": 1,
+      "total": 16,
+      "selectedTime": 0.625
+    },
+    {
+      "wallMs": 3315.5,
+      "kind": "rvfc",
+      "time": 0.666667,
+      "micros": 666667,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 19
+    },
+    {
+      "wallMs": 3362.199999999255,
+      "kind": "rvfc",
+      "time": 0.708333,
+      "micros": 708333,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 20
+    },
+    {
+      "wallMs": 3406.099999997765,
+      "kind": "rvfc",
+      "time": 0.75,
+      "micros": 750000,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 21
+    },
+    {
+      "wallMs": 3454.699999999255,
+      "kind": "rvfc",
+      "time": 0.791667,
+      "micros": 791667,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 22
+    },
+    {
+      "wallMs": 3479,
+      "kind": "rvfc",
+      "time": 0.833333,
+      "micros": 833333,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 23
+    },
+    {
+      "wallMs": 3551.5,
+      "kind": "rvfc",
+      "time": 0.875,
+      "micros": 875000,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 24
+    },
+    {
+      "wallMs": 3604.199999999255,
+      "kind": "trial",
+      "window": 1,
+      "trial": 0,
+      "requestedTime": 0.875,
+      "actualTime": 0.875,
+      "actualMicros": 875000,
+      "desiredMicros": 875000,
+      "desiredPts": 10752
+    },
+    {
+      "wallMs": 3647.300000000745,
+      "kind": "rvfc",
+      "time": 0.916667,
+      "micros": 916667,
+      "origin": "rvfc",
+      "target": 4,
+      "presentedFrames": 25
+    },
+    {
+      "wallMs": 3687.300000000745,
+      "kind": "rvfc",
+      "time": 0.958333,
+      "micros": 958333,
+      "origin": "rvfc",
+      "target": 4,
+      "presentedFrames": 26
+    },
+    {
+      "wallMs": 3706,
+      "kind": "rvfc",
+      "time": 1,
+      "micros": 1000000,
+      "origin": "rvfc",
+      "target": 4,
+      "presentedFrames": 27
+    },
+    {
+      "wallMs": 3746.699999999255,
+      "kind": "rvfc",
+      "time": 1.041667,
+      "micros": 1041667,
+      "origin": "rvfc",
+      "target": 4,
+      "presentedFrames": 28
+    },
+    {
+      "wallMs": 3793.599999997765,
+      "kind": "rvfc",
+      "time": 1.083333,
+      "micros": 1083333,
+      "origin": "rvfc",
+      "target": 4,
+      "presentedFrames": 29
+    },
+    {
+      "wallMs": 3843.099999997765,
+      "kind": "rvfc",
+      "time": 1.125,
+      "micros": 1125000,
+      "origin": "rvfc",
+      "target": 4,
+      "presentedFrames": 30
+    },
+    {
+      "wallMs": 3892.89999999851,
+      "kind": "trial",
+      "window": 1,
+      "trial": 1,
+      "requestedTime": 1.125,
+      "actualTime": 1.125,
+      "actualMicros": 1125000,
+      "desiredMicros": 1125000,
+      "desiredPts": 13824
+    },
+    {
+      "wallMs": 3963.199999999255,
+      "kind": "rvfc",
+      "time": 1.208333,
+      "micros": 1208333,
+      "origin": "rvfc",
+      "target": 5,
+      "presentedFrames": 32
+    },
+    {
+      "wallMs": 4011.800000000745,
+      "kind": "rvfc",
+      "time": 1.25,
+      "micros": 1250000,
+      "origin": "rvfc",
+      "target": 5,
+      "presentedFrames": 33
+    },
+    {
+      "wallMs": 4048.099999997765,
+      "kind": "rvfc",
+      "time": 1.291667,
+      "micros": 1291667,
+      "origin": "rvfc",
+      "target": 5,
+      "presentedFrames": 34
+    },
+    {
+      "wallMs": 4104.5,
+      "kind": "rvfc",
+      "time": 1.333333,
+      "micros": 1333333,
+      "origin": "rvfc",
+      "target": 5,
+      "presentedFrames": 35
+    },
+    {
+      "wallMs": 4122.699999999255,
+      "kind": "rvfc",
+      "time": 1.375,
+      "micros": 1375000,
+      "origin": "rvfc",
+      "target": 5,
+      "presentedFrames": 36
+    },
+    {
+      "wallMs": 4270.800000000745,
+      "kind": "trial",
+      "window": 1,
+      "trial": 2,
+      "requestedTime": 1.375,
+      "actualTime": 1.375,
+      "actualMicros": 1375000,
+      "desiredMicros": 1375000,
+      "desiredPts": 16896
+    },
+    {
+      "wallMs": 4270.800000000745,
+      "kind": "window",
+      "done": 2,
+      "total": 16,
+      "selectedTime": 0.875
+    },
+    {
+      "wallMs": 4309.89999999851,
+      "kind": "rvfc",
+      "time": 1.416667,
+      "micros": 1416667,
+      "origin": "rvfc",
+      "target": 6,
+      "presentedFrames": 37
+    },
+    {
+      "wallMs": 4359.599999997765,
+      "kind": "rvfc",
+      "time": 1.458333,
+      "micros": 1458333,
+      "origin": "rvfc",
+      "target": 6,
+      "presentedFrames": 38
+    },
+    {
+      "wallMs": 4389.300000000745,
+      "kind": "rvfc",
+      "time": 1.5,
+      "micros": 1500000,
+      "origin": "rvfc",
+      "target": 6,
+      "presentedFrames": 39
+    },
+    {
+      "wallMs": 4457.599999997765,
+      "kind": "rvfc",
+      "time": 1.541667,
+      "micros": 1541667,
+      "origin": "rvfc",
+      "target": 6,
+      "presentedFrames": 40
+    },
+    {
+      "wallMs": 4472.599999997765,
+      "kind": "rvfc",
+      "time": 1.583333,
+      "micros": 1583333,
+      "origin": "rvfc",
+      "target": 6,
+      "presentedFrames": 41
+    },
+    {
+      "wallMs": 4559.5,
+      "kind": "rvfc",
+      "time": 1.625,
+      "micros": 1625000,
+      "origin": "rvfc",
+      "target": 6,
+      "presentedFrames": 42
+    },
+    {
+      "wallMs": 4619.39999999851,
+      "kind": "trial",
+      "window": 2,
+      "trial": 0,
+      "requestedTime": 1.625,
+      "actualTime": 1.625,
+      "actualMicros": 1625000,
+      "desiredMicros": 1625000,
+      "desiredPts": 19968
+    },
+    {
+      "wallMs": 4648.099999997765,
+      "kind": "rvfc",
+      "time": 1.666667,
+      "micros": 1666667,
+      "origin": "rvfc",
+      "target": 7,
+      "presentedFrames": 43
+    },
+    {
+      "wallMs": 4689.800000000745,
+      "kind": "rvfc",
+      "time": 1.708333,
+      "micros": 1708333,
+      "origin": "rvfc",
+      "target": 7,
+      "presentedFrames": 44
+    },
+    {
+      "wallMs": 4755.5,
+      "kind": "rvfc",
+      "time": 1.75,
+      "micros": 1750000,
+      "origin": "rvfc",
+      "target": 7,
+      "presentedFrames": 45
+    },
+    {
+      "wallMs": 4791.300000000745,
+      "kind": "rvfc",
+      "time": 1.791667,
+      "micros": 1791667,
+      "origin": "rvfc",
+      "target": 7,
+      "presentedFrames": 46
+    },
+    {
+      "wallMs": 4851.199999999255,
+      "kind": "rvfc",
+      "time": 1.833333,
+      "micros": 1833333,
+      "origin": "rvfc",
+      "target": 7,
+      "presentedFrames": 47
+    },
+    {
+      "wallMs": 4875.5,
+      "kind": "rvfc",
+      "time": 1.875,
+      "micros": 1875000,
+      "origin": "rvfc",
+      "target": 7,
+      "presentedFrames": 48
+    },
+    {
+      "wallMs": 4961.5,
+      "kind": "trial",
+      "window": 2,
+      "trial": 1,
+      "requestedTime": 1.875,
+      "actualTime": 1.875,
+      "actualMicros": 1875000,
+      "desiredMicros": 1875000,
+      "desiredPts": 23040
+    },
+    {
+      "wallMs": 5006,
+      "kind": "rvfc",
+      "time": 1.916667,
+      "micros": 1916667,
+      "origin": "rvfc",
+      "target": 8,
+      "presentedFrames": 49
+    },
+    {
+      "wallMs": 5045.300000000745,
+      "kind": "rvfc",
+      "time": 1.958333,
+      "micros": 1958333,
+      "origin": "rvfc",
+      "target": 8,
+      "presentedFrames": 50
+    },
+    {
+      "wallMs": 5095.39999999851,
+      "kind": "rvfc",
+      "time": 2,
+      "micros": 2000000,
+      "origin": "rvfc",
+      "target": 8,
+      "presentedFrames": 51
+    },
+    {
+      "wallMs": 5155.800000000745,
+      "kind": "rvfc",
+      "time": 2.041667,
+      "micros": 2041667,
+      "origin": "rvfc",
+      "target": 8,
+      "presentedFrames": 52
+    },
+    {
+      "wallMs": 5175.300000000745,
+      "kind": "rvfc",
+      "time": 2.083333,
+      "micros": 2083333,
+      "origin": "rvfc",
+      "target": 8,
+      "presentedFrames": 53
+    },
+    {
+      "wallMs": 5214,
+      "kind": "rvfc",
+      "time": 2.125,
+      "micros": 2125000,
+      "origin": "rvfc",
+      "target": 8,
+      "presentedFrames": 54
+    },
+    {
+      "wallMs": 5319.5,
+      "kind": "trial",
+      "window": 2,
+      "trial": 2,
+      "requestedTime": 2.125,
+      "actualTime": 2.125,
+      "actualMicros": 2125000,
+      "desiredMicros": 2125000,
+      "desiredPts": 26112
+    },
+    {
+      "wallMs": 5319.5,
+      "kind": "window",
+      "done": 3,
+      "total": 16,
+      "selectedTime": 2.125
+    },
+    {
+      "wallMs": 5372.699999999255,
+      "kind": "rvfc",
+      "time": 2.166667,
+      "micros": 2166667,
+      "origin": "rvfc",
+      "target": 9,
+      "presentedFrames": 55
+    },
+    {
+      "wallMs": 5406,
+      "kind": "rvfc",
+      "time": 2.208333,
+      "micros": 2208333,
+      "origin": "rvfc",
+      "target": 9,
+      "presentedFrames": 56
+    },
+    {
+      "wallMs": 5472.599999997765,
+      "kind": "rvfc",
+      "time": 2.25,
+      "micros": 2250000,
+      "origin": "rvfc",
+      "target": 9,
+      "presentedFrames": 57
+    },
+    {
+      "wallMs": 5502.39999999851,
+      "kind": "rvfc",
+      "time": 2.291667,
+      "micros": 2291667,
+      "origin": "rvfc",
+      "target": 9,
+      "presentedFrames": 58
+    },
+    {
+      "wallMs": 5567.39999999851,
+      "kind": "rvfc",
+      "time": 2.333333,
+      "micros": 2333333,
+      "origin": "rvfc",
+      "target": 9,
+      "presentedFrames": 59
+    },
+    {
+      "wallMs": 5572.5,
+      "kind": "rvfc",
+      "time": 2.375,
+      "micros": 2375000,
+      "origin": "rvfc",
+      "target": 9,
+      "presentedFrames": 60
+    },
+    {
+      "wallMs": 5667.300000000745,
+      "kind": "trial",
+      "window": 3,
+      "trial": 0,
+      "requestedTime": 2.375,
+      "actualTime": 2.375,
+      "actualMicros": 2375000,
+      "desiredMicros": 2375000,
+      "desiredPts": 29184
+    },
+    {
+      "wallMs": 5711.39999999851,
+      "kind": "rvfc",
+      "time": 2.416667,
+      "micros": 2416667,
+      "origin": "rvfc",
+      "target": 10,
+      "presentedFrames": 61
+    },
+    {
+      "wallMs": 5746.300000000745,
+      "kind": "rvfc",
+      "time": 2.458333,
+      "micros": 2458333,
+      "origin": "rvfc",
+      "target": 10,
+      "presentedFrames": 62
+    },
+    {
+      "wallMs": 5795.5,
+      "kind": "rvfc",
+      "time": 2.5,
+      "micros": 2500000,
+      "origin": "rvfc",
+      "target": 10,
+      "presentedFrames": 63
+    },
+    {
+      "wallMs": 5855.800000000745,
+      "kind": "rvfc",
+      "time": 2.541667,
+      "micros": 2541667,
+      "origin": "rvfc",
+      "target": 10,
+      "presentedFrames": 64
+    },
+    {
+      "wallMs": 5889.599999997765,
+      "kind": "rvfc",
+      "time": 2.583333,
+      "micros": 2583333,
+      "origin": "rvfc",
+      "target": 10,
+      "presentedFrames": 65
+    },
+    {
+      "wallMs": 5959.199999999255,
+      "kind": "rvfc",
+      "time": 2.625,
+      "micros": 2625000,
+      "origin": "rvfc",
+      "target": 10,
+      "presentedFrames": 66
+    },
+    {
+      "wallMs": 6020.89999999851,
+      "kind": "trial",
+      "window": 3,
+      "trial": 1,
+      "requestedTime": 2.625,
+      "actualTime": 2.625,
+      "actualMicros": 2625000,
+      "desiredMicros": 2625000,
+      "desiredPts": 32256
+    },
+    {
+      "wallMs": 6072.5,
+      "kind": "rvfc",
+      "time": 2.708333,
+      "micros": 2708333,
+      "origin": "rvfc",
+      "target": 11,
+      "presentedFrames": 68
+    },
+    {
+      "wallMs": 6147.599999997765,
+      "kind": "rvfc",
+      "time": 2.75,
+      "micros": 2750000,
+      "origin": "rvfc",
+      "target": 11,
+      "presentedFrames": 69
+    },
+    {
+      "wallMs": 6155.800000000745,
+      "kind": "rvfc",
+      "time": 2.791667,
+      "micros": 2791667,
+      "origin": "rvfc",
+      "target": 11,
+      "presentedFrames": 70
+    },
+    {
+      "wallMs": 6213.199999999255,
+      "kind": "rvfc",
+      "time": 2.833333,
+      "micros": 2833333,
+      "origin": "rvfc",
+      "target": 11,
+      "presentedFrames": 71
+    },
+    {
+      "wallMs": 6255.39999999851,
+      "kind": "rvfc",
+      "time": 2.875,
+      "micros": 2875000,
+      "origin": "rvfc",
+      "target": 11,
+      "presentedFrames": 72
+    },
+    {
+      "wallMs": 6355.699999999255,
+      "kind": "trial",
+      "window": 3,
+      "trial": 2,
+      "requestedTime": 2.875,
+      "actualTime": 2.875,
+      "actualMicros": 2875000,
+      "desiredMicros": 2875000,
+      "desiredPts": 35328
+    },
+    {
+      "wallMs": 6355.699999999255,
+      "kind": "window",
+      "done": 4,
+      "total": 16,
+      "selectedTime": 2.875
+    },
+    {
+      "wallMs": 6367.39999999851,
+      "kind": "rvfc",
+      "time": 2.916667,
+      "micros": 2916667,
+      "origin": "rvfc",
+      "target": 12,
+      "presentedFrames": 73
+    },
+    {
+      "wallMs": 6411.599999997765,
+      "kind": "rvfc",
+      "time": 2.958333,
+      "micros": 2958333,
+      "origin": "rvfc",
+      "target": 12,
+      "presentedFrames": 74
+    },
+    {
+      "wallMs": 6448.699999999255,
+      "kind": "rvfc",
+      "time": 3,
+      "micros": 3000000,
+      "origin": "rvfc",
+      "target": 12,
+      "presentedFrames": 75
+    },
+    {
+      "wallMs": 6491.599999997765,
+      "kind": "rvfc",
+      "time": 3.041667,
+      "micros": 3041667,
+      "origin": "rvfc",
+      "target": 12,
+      "presentedFrames": 76
+    },
+    {
+      "wallMs": 6554.099999997765,
+      "kind": "rvfc",
+      "time": 3.083333,
+      "micros": 3083333,
+      "origin": "rvfc",
+      "target": 12,
+      "presentedFrames": 77
+    },
+    {
+      "wallMs": 6599.39999999851,
+      "kind": "rvfc",
+      "time": 3.125,
+      "micros": 3125000,
+      "origin": "rvfc",
+      "target": 12,
+      "presentedFrames": 78
+    },
+    {
+      "wallMs": 6688.099999997765,
+      "kind": "trial",
+      "window": 4,
+      "trial": 0,
+      "requestedTime": 3.125,
+      "actualTime": 3.125,
+      "actualMicros": 3125000,
+      "desiredMicros": 3125000,
+      "desiredPts": 38400
+    },
+    {
+      "wallMs": 6713.599999997765,
+      "kind": "rvfc",
+      "time": 3.166667,
+      "micros": 3166667,
+      "origin": "rvfc",
+      "target": 13,
+      "presentedFrames": 79
+    },
+    {
+      "wallMs": 6772.89999999851,
+      "kind": "rvfc",
+      "time": 3.208333,
+      "micros": 3208333,
+      "origin": "rvfc",
+      "target": 13,
+      "presentedFrames": 80
+    },
+    {
+      "wallMs": 6789.699999999255,
+      "kind": "rvfc",
+      "time": 3.25,
+      "micros": 3250000,
+      "origin": "rvfc",
+      "target": 13,
+      "presentedFrames": 81
+    },
+    {
+      "wallMs": 6857.5,
+      "kind": "rvfc",
+      "time": 3.291667,
+      "micros": 3291667,
+      "origin": "rvfc",
+      "target": 13,
+      "presentedFrames": 82
+    },
+    {
+      "wallMs": 6875.89999999851,
+      "kind": "rvfc",
+      "time": 3.333333,
+      "micros": 3333333,
+      "origin": "rvfc",
+      "target": 13,
+      "presentedFrames": 83
+    },
+    {
+      "wallMs": 6959.5,
+      "kind": "rvfc",
+      "time": 3.416667,
+      "micros": 3416667,
+      "origin": "rvfc",
+      "target": 13,
+      "presentedFrames": 85
+    }
+  ],
+  "elapsedMs": 7985.699999999255,
+  "inputBinding": {
+    "id": "kakerdi-bog",
+    "label": "Bog islands and shore, low aerial pass",
+    "category": [
+      "plant",
+      "landscape",
+      "camera-translation"
+    ],
+    "source": "https://commons.wikimedia.org/wiki/File:Drone_video_of_Kakerdi_lake_and_Kakerdaja_bog_in_Estonia,_september_2021.webm",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "author": "Sillerkiil",
+    "duration": 12,
+    "sha256": "5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8",
+    "file": "kakerdi-bog.mp4",
+    "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b8/Drone_video_of_Kakerdi_lake_and_Kakerdaja_bog_in_Estonia%2C_september_2021.webm/Drone_video_of_Kakerdi_lake_and_Kakerdaja_bog_in_Estonia%2C_september_2021.webm.480p.vp9.webm",
+    "captureSha256": "eca6b4f6a2525cc1d9c76f4c9f00c2c485ef49be02ea5953678ca6a2654591dd",
+    "captureDuration": 52.586,
+    "span": {
+      "start": 15,
+      "length": 12
+    },
+    "checked": "October 15, 2026",
+    "transformation": "Trimmed 15–27 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+    "evidence": {
+      "sourcePage": "evidence/kakerdi-bog-source.html",
+      "licensePage": "evidence/cc0.html",
+      "contactSheet": "contact-sheets/kakerdi-bog.jpg",
+      "commonsMetadata": "evidence/kakerdi-bog-commons-metadata.json",
+      "sourcePageSha256": "9f71bf772677ef7f93a00766d0e94172a786390c7423653ae0e76eec99c9551b",
+      "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+      "contactSheetSha256": "ffe04ba187b869730fb9aea9b732dcce3a6e791dccabe874d3b84f0616404453",
+      "commonsMetadataSha256": "a413d04f5c6fa8ac16742465111cd47444f4ea09202683657560c9741549ad92"
+    },
+    "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+    "width": 854,
+    "height": 480,
+    "fps": "24/1",
+    "bytes": 1077596,
+    "ffprobeSha256": "96012f5965f561129f0f0568e54c4960a7d0a68287edc9505a71c4dcc0d35b89"
+  },
+  "hostContextClosed": true
+}

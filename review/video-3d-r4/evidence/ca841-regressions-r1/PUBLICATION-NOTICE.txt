@@ -1,0 +1,2 @@
+Original failures retained, without weakened assertions, deadlines, or skips. Trace/screenshot files concern the existing source samples and empty fixture page; source sample licenses remain unchanged.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.

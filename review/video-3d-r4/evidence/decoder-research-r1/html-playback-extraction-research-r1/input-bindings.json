@@ -1,0 +1,72 @@
+{
+  "at": "2026-10-15T11:00:05.154163+00:00",
+  "frozenToolProductCommit": "1cbccf108294437a2b6ae8b07dead9c56d3f3609",
+  "files": [
+    {
+      "source": "/workspace/splashery-v3d-bench-tools-r10/src/video3d/extract.js",
+      "copy": "src/extract.js",
+      "sha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de"
+    },
+    {
+      "source": "/workspace/splashery-v3d-bench-tools-r10/src/video3d/frames.js",
+      "copy": "src/frames.js",
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "source": "/workspace/splashery-v3d-bench-tools-r10/tools/v3d-bench-pixels.mjs",
+      "copy": "source-pixels.mjs",
+      "sha256": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f"
+    }
+  ],
+  "order": [
+    {
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "methods": [
+        "sequential",
+        "seek"
+      ]
+    },
+    {
+      "id": "cat-plays",
+      "profile": "phone",
+      "methods": [
+        "seek",
+        "sequential"
+      ]
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "phone",
+      "methods": [
+        "sequential",
+        "seek"
+      ]
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "desktop",
+      "methods": [
+        "seek",
+        "sequential"
+      ]
+    },
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "methods": [
+        "sequential",
+        "seek"
+      ]
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "desktop",
+      "methods": [
+        "seek",
+        "sequential"
+      ]
+    }
+  ],
+  "semantics": "playback1x; pause inside RVFC before synchronous gray/full-frame copy; one frame at/after each target within same window;3trialtargets perwindow; reject crossing/unprocessedtarget/nonmonotonic/abort/deadline with no partialresult; actual RVFC times only"
+}

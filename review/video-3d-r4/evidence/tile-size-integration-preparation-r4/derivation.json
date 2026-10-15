@@ -1,0 +1,5 @@
+{
+  "at": "2026-10-15T12:02:59.492335+00:00",
+  "parentFreezeSha256": "0cc12ba50c9d5fd0c13f001137123df9d2082487dcf7a0cd3460a82245f43d0b",
+  "scope": "Keep all six GPU assertions; fix inherited SSAA missing camera-gradient binding; reject malformed dimensions before allocation."
+}

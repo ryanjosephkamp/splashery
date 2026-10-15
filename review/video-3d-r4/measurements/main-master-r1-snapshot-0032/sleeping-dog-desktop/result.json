@@ -1,0 +1,22 @@
+{
+  "id": "sleeping-dog",
+  "profile": "desktop",
+  "sha256": "c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9",
+  "started": "2026-10-15T09:06:45.108Z",
+  "status": "timeout",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": null,
+  "bakeMs": 1750532.2492859997,
+  "mean": null,
+  "peakRssBytes": 1533067264,
+  "hostLoadAtStart": [
+    14.65,
+    16.1,
+    17.05
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "Error: sleeping-dog/desktop (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

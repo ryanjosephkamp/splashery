@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T12:17:52.120Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/020-oa-street-desktop-unpaired",
+  "runSha256": "34e209ac494aae1fc15fd20f9dc5525e5e76bfb5f0e3d7a73be125b59abe0154",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "cases": [
+    {
+      "id": "oa-street",
+      "profile": "desktop",
+      "rowFingerprint": "9fbe0316b5a7ec378141cfe7e8849fd3246cafe7e9b1a32f2eee362f4ca2f564",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 957145,
+          "sha256": "96322fa2579ac83ec14b19ad33f8a2cd5479d7afd5c06906736c04786da04079"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1809,
+          "sha256": "751885062b10d32e003ad076b0ffd0e1af76fe5847cb33a71e742ba0b2deefda"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

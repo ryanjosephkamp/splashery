@@ -1,0 +1,252 @@
+{
+  "createdAt": "2026-10-15T12:07:05.027867+00:00",
+  "runId": 38725571170,
+  "commit": "d2a90b31b7ac305b473afe31330d0303bdfb47ad",
+  "note": "Derived from all 16 unchanged original shard logs. Alone rechecks are supplementary and never waive original failures. Raw logs retain exact tool-returned UTF-8 bytes.",
+  "totals": {
+    "files": 332,
+    "expectedFiles": 332,
+    "tests": 2848,
+    "passed": 2834,
+    "failed": 13,
+    "skipped": 1
+  },
+  "shards": [
+    {
+      "file": "raw-job-116390461013.log",
+      "sha256": "9d426bb0c00efa21fbea115baa77b9a1ad4a9466b02361f247830833fd1e9f24",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 208,
+      "passed": 208,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116390461236.log",
+      "sha256": "89a54140fab6590df27f86ddb5858d323fcf76f5afc8cf15420488101e33874f",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 138,
+      "passed": 136,
+      "failed": 2,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T11:42:32.4280565Z - `ui3:50` pause and resume \u203a the second tap freezes a long effect and its sound, the third resumes it, and a tap after the end starts it again: failed. Error: expect(received).toBeGreaterThan(expected)",
+        "2026-10-15T11:42:32.4283088Z - `ui3:129` pause and resume \u203a a short effect restarts on a second tap, as before: failed. Error: expect(received).toBeGreaterThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T11:43:11.0289525Z ui3:50 the second tap freezes a long effect and its sound, the third resumes it, and a tap after the end starts it again: failed alone",
+        "2026-10-15T11:43:33.6133292Z ui3:129 a short effect restarts on a second tap, as before: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116390461238.log",
+      "sha256": "b3a7f9a87f2463425b8829307414cfbef23eaef7601fa847da6276aaac70c1c8",
+      "files": 20,
+      "expectedFiles": 20,
+      "tests": 156,
+      "passed": 155,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T11:25:28.5626742Z - `man5:201` the PDF \u203a the same input and the same Chromium print the same bytes: failed. Error: run tools/manual-pdf.mjs again: the shipped PDF is out of date"
+      ],
+      "recheckLines": [
+        "2026-10-15T11:25:42.7137548Z man5:201 the same input and the same Chromium print the same bytes: failed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116390461243.log",
+      "sha256": "3051592f1cd88160f542bc2c06d23ff97b97cd55900e531979c0515465867eae",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 165,
+      "passed": 163,
+      "failed": 2,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T11:37:39.4742193Z - `cdx-mir:329` matched camera frames keep real feature contrast and improve held-pose stability: failed. Error: expect(received).toBeLessThan(expected)",
+        "2026-10-15T11:37:39.4744052Z - `hh4-space:147` pulsar: a flick spins it up and the beams sweep faster: failed. Error: expect(received).toBeCloseTo(expected, precision)"
+      ],
+      "recheckLines": [
+        "2026-10-15T11:40:58.0661489Z cdx-mir:329 matched camera frames keep real feature contrast and improve held-pose stability: passed alone",
+        "2026-10-15T11:41:08.8867886Z hh4-space:147 pulsar: a flick spins it up and the beams sweep faster: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116390461273.log",
+      "sha256": "be4302f69ec18215b5597802e1d5ed66990a854b28db976be7f39965b179c581",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 180,
+      "passed": 179,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T11:34:55.5126783Z - `hh4-weather:141` lava lamp: tipped, the wax slides to the glass's upper side, and back when upright: failed. Error: expect(received).toBeLessThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T11:35:11.8507310Z hh4-weather:141 lava lamp: tipped, the wax slides to the glass's upper side, and back when upright: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116390461284.log",
+      "sha256": "f79e2a7bac6703426e652f378090f3d4a283f73b89ba58580c31b79ca0c15930",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 216,
+      "passed": 215,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T12:05:15.0991873Z - `phy:64` Pebbles: stones pick up and stack into a new cairn; a careless one topples: failed. Error: expect(received).toBeGreaterThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T12:05:53.2622482Z phy:64 Pebbles: stones pick up and stack into a new cairn; a careless one topples: failed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116390461292.log",
+      "sha256": "cda1fd18afd2a3dc7992b403437d7f733c2e76bb53734b83ad46417e089563a8",
+      "files": 10,
+      "expectedFiles": 10,
+      "tests": 116,
+      "passed": 114,
+      "failed": 1,
+      "skipped": 1,
+      "failureLines": [
+        "2026-10-15T11:50:54.1364818Z - `scr2-engine:10` a GIF held on its frame stays there, then plays on from it: failed. Error: expect(received).toBe(expected) // Object.is equality"
+      ],
+      "recheckLines": [
+        "2026-10-15T11:51:08.9512805Z scr2-engine:10 a GIF held on its frame stays there, then plays on from it: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116390461322.log",
+      "sha256": "993e9b5e32e937ba317202db2904289a14d22a38db9cc65aebc3bd4a99f6d90f",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 194,
+      "passed": 194,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116390461367.log",
+      "sha256": "8f9900d1f38e6ee0999916e9d334bfd422e3dfdff2678926a86784cee0cd6eab",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 148,
+      "passed": 146,
+      "failed": 2,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T11:39:50.9049720Z - `fx4-engine:79` toys without the rim kind draw as before (webgpu): timedOut. Test timeout of 240000ms exceeded.",
+        "2026-10-15T11:39:50.9052531Z - `hh5-gems:119` crystal ball: lifted off its stand, it rolls off the stand's base onto the table; brought back, it settles in its cup: failed. Error: expect(received).toBeLessThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T11:42:38.7432941Z fx4-engine:79 toys without the rim kind draw as before (webgpu): passed alone",
+        "2026-10-15T11:42:47.8691075Z hh5-gems:119 crystal ball: lifted off its stand, it rolls off the stand's base onto the table; brought back, it settles in its cup: passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116390461375.log",
+      "sha256": "2a739b6481d42493793eeebeb0a2154efad16166d5e8997982fe5139d062d84b",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 259,
+      "passed": 259,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116390461393.log",
+      "sha256": "ac6d259c141f8110821cf05128456c5afc422d81c6efe021f622025f2f4f9205",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 152,
+      "passed": 152,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116390461405.log",
+      "sha256": "1d01e819a1647cdf44f49fe8704565e99a293f29e5f78ae3635e921f20f5ada1",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 197,
+      "passed": 197,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116390461410.log",
+      "sha256": "70337329cc91cc099f995069c405b528c4a6e038408be80d5f11b5ea1180f3c3",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 167,
+      "passed": 167,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116390461591.log",
+      "sha256": "78039f838436bc5d480e8b275aad4baab50a10f5a5f21337c3759198e1545599",
+      "files": 22,
+      "expectedFiles": 22,
+      "tests": 204,
+      "passed": 203,
+      "failed": 1,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T11:39:24.7132928Z - `img-engine:85` toys without the volume kind draw as before (webgpu): timedOut. Test timeout of 240000ms exceeded."
+      ],
+      "recheckLines": [
+        "2026-10-15T11:42:09.3844326Z img-engine:85 toys without the volume kind draw as before (webgpu): passed alone"
+      ]
+    },
+    {
+      "file": "raw-job-116390461644.log",
+      "sha256": "dcbaf6f59b4b33d365f12ca06763c05a794685cc7d06df94b79378831bfe90d3",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 164,
+      "passed": 164,
+      "failed": 0,
+      "skipped": 0,
+      "failureLines": [],
+      "recheckLines": []
+    },
+    {
+      "file": "raw-job-116390461860.log",
+      "sha256": "34ba7f7dd3c5d0f79682a282fb8254bba05ccd890bc8a74eabbf0e7e1098bfb1",
+      "files": 21,
+      "expectedFiles": 21,
+      "tests": 184,
+      "passed": 182,
+      "failed": 2,
+      "skipped": 0,
+      "failureLines": [
+        "2026-10-15T11:45:00.6144710Z - `smoke:881` Splashery v3 engine (WebGL2) \u203a a stretchy toy stretches when dragged and springs back; a drag off it orbits: failed. Error: expect(received).toBe(expected) // Object.is equality",
+        "2026-10-15T11:45:00.6146333Z - `sndc-engine:27` a paused effect's sound stops at once (ringing notes too) and resumes from the same moment: failed. Error: expect(received).toBeGreaterThan(expected)"
+      ],
+      "recheckLines": [
+        "2026-10-15T11:45:17.5434137Z smoke:881 a stretchy toy stretches when dragged and springs back; a drag off it orbits: passed alone",
+        "2026-10-15T11:45:39.5499310Z sndc-engine:27 a paused effect's sound stops at once (ringing notes too) and resumes from the same moment: failed alone"
+      ]
+    }
+  ]
+}

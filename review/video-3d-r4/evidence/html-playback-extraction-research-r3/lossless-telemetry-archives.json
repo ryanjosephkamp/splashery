@@ -1,0 +1,207 @@
+{
+  "at": "2026-10-15T12:34:52.363554+00:00",
+  "codeSha256": "0ae15bbc6cabe6af06d09b825b1ae41e85228be09251ad7a6c6515513c2dc71d",
+  "scope": "Raw machine telemetry only: large JSON records and browser output. Source code, tests, human-written reports, JPEGs, and original freeze/publication receipts remain unchanged.",
+  "restore": "In a separate copy, decompress archiveFile to originalFile and verify originalSha256 before reproducing the original frozen inventory.",
+  "originalCopiesRetainedAt": "/workspace/v3d-r4-media/html-playback-extraction-research-r3",
+  "files": [
+    {
+      "originalFile": "00-cat-track/result.json",
+      "archiveFile": "00-cat-track/result.json.gz",
+      "originalBytes": 104853,
+      "originalSha256": "64db3b231681b635469ed98bc133a315915fc68fc9e0206856d0c92ab2c0ada7",
+      "archiveBytes": 12105,
+      "archiveSha256": "3cdc2e498cefc18804912cf884bd1995ef1f30c182716244fa44196db8b275c5",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "01-cat-plays/result.json",
+      "archiveFile": "01-cat-plays/result.json.gz",
+      "originalBytes": 99779,
+      "originalSha256": "0b4e08eb41cd633b17d6c56f612b5c1075c30fb43ac6e24d05a9f8094f7a2509",
+      "archiveBytes": 11674,
+      "archiveSha256": "caa056c911c67dd2058a56e2f765768bdd46bad392d82705ba2cf20c0d94114a",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "02-buddha/result.json",
+      "archiveFile": "02-buddha/result.json.gz",
+      "originalBytes": 82471,
+      "originalSha256": "d219221afeda28ddc1fe2a53eabbdda61fb64f414649d5c48361ba127f673ecb",
+      "archiveBytes": 9881,
+      "archiveSha256": "357e0e47444d0c09b9c93ef6e0559cd9f5e1f12336d8ddac8b4eed44cc95d9c3",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "03-chameleon-flowers/result.json",
+      "archiveFile": "03-chameleon-flowers/result.json.gz",
+      "originalBytes": 153503,
+      "originalSha256": "25275cc633431262e129f008e682a64b49fdfa193ba1dc1dacb59cef120e57b9",
+      "archiveBytes": 16334,
+      "archiveSha256": "80d7ea6e7fcc8f3f93c28ce9fc3d776c95366697b68025da660620b991bc7b54",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "04-dianthus/result.json",
+      "archiveFile": "04-dianthus/result.json.gz",
+      "originalBytes": 75362,
+      "originalSha256": "4d7dacebef1f9baecb6580920e1c90c49536e7daa204c75b206d438465ff72d7",
+      "archiveBytes": 8368,
+      "archiveSha256": "0d001b9c64f5352595fe2867f537d1209a10996f5c71f49415639922b5fb3365",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "05-pisac/result.json",
+      "archiveFile": "05-pisac/result.json.gz",
+      "originalBytes": 95437,
+      "originalSha256": "7fdc54c94133abef0b8afa461eb6a9383dc31411bde074cb5dfb2ee643316a63",
+      "archiveBytes": 11562,
+      "archiveSha256": "c858bc779557c24464b1b621c73ab68c5204617fa3e6b5057fd79ac5a7da6b35",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "06-sleeping-dog/result.json",
+      "archiveFile": "06-sleeping-dog/result.json.gz",
+      "originalBytes": 84602,
+      "originalSha256": "316f3731b7ea61790769b77b0c474b622ed2f38398a561dd894693b400a9f9e3",
+      "archiveBytes": 10194,
+      "archiveSha256": "e1dd743944ed8cb110e4116a8090fdff1cfb0c7099b679b3f69aab3e6efcbb6c",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "07-palace-statue/result.json",
+      "archiveFile": "07-palace-statue/result.json.gz",
+      "originalBytes": 104562,
+      "originalSha256": "ce120fc572896de10cbdfccd9b79a68aea323689a8775ea290e5b5e05b1dc2f9",
+      "archiveBytes": 11953,
+      "archiveSha256": "82bc1aa74eeb213a069016c998bd0ac9b331ef128129e342700709ff97acf5e4",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "08-oa-street/result.json",
+      "archiveFile": "08-oa-street/result.json.gz",
+      "originalBytes": 147138,
+      "originalSha256": "4311c296e4c109604b92070436cf44e6d3f8acd1023c49e2389c9ba4696ce380",
+      "archiveBytes": 16121,
+      "archiveSha256": "02b6a22c6a6a404b9ffee517b52b0f13ec57a98b7662a19e6829dde461b5a088",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "09-ullard/result.json",
+      "archiveFile": "09-ullard/result.json.gz",
+      "originalBytes": 91476,
+      "originalSha256": "1f7ee6116f08e2bd16f001981653fc66933906660ed76032d931392b1752549f",
+      "archiveBytes": 11309,
+      "archiveSha256": "9082dc115863130b22869d194bc6db57ba0918a18c43b56ed1d691b0b8ff5d25",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "10-snaefell/result.json",
+      "archiveFile": "10-snaefell/result.json.gz",
+      "originalBytes": 82428,
+      "originalSha256": "d0bccc0469fd74be1c7e80bd8b82977f705bfbb8a1a6e7409ed5394dddf88933",
+      "archiveBytes": 10410,
+      "archiveSha256": "7c9d790f01b1dd7cf1ff43eb5883c46286bbfc66cde0405bcd0f4c3845475bd6",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "11-fremantle-orbit/result.json",
+      "archiveFile": "11-fremantle-orbit/result.json.gz",
+      "originalBytes": 91852,
+      "originalSha256": "28623ce2faab3e06433fdfbcf63e58ecf1e7c483fc2ba27d4641e85fd8746d53",
+      "archiveBytes": 10968,
+      "archiveSha256": "4cca178d61f8dbd86e430a9e4b8071ef44838fbdf84cfa32aa9bc62d444fa047",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "12-ihasalu-orbit/result.json",
+      "archiveFile": "12-ihasalu-orbit/result.json.gz",
+      "originalBytes": 68561,
+      "originalSha256": "f606090d9f91506850a44c677fa9e484bb57cdd0e314f2e039dbe4e545c382c4",
+      "archiveBytes": 7792,
+      "archiveSha256": "43e506819cfc6f0eac396f4b9fdfd537890cbd8bf33ac8223ed26be45c5b0c8d",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "13-fresnel-lens/result.json",
+      "archiveFile": "13-fresnel-lens/result.json.gz",
+      "originalBytes": 153066,
+      "originalSha256": "58c9f95ecd35a5c69c9ab4ca28c16b9da3d2d80e80d288b967a9bf79f575b711",
+      "archiveBytes": 16340,
+      "archiveSha256": "a6ee1bb8d0f07457cbdec119b37f962bef9c4be9ffe0ff4bddb20a6933bbb319",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "14-saint-denis/result.json",
+      "archiveFile": "14-saint-denis/result.json.gz",
+      "originalBytes": 88463,
+      "originalSha256": "d4f17d9196d4883d7dc3eaf5af93c9af35924703db4e4f5c9618d0ea71194ec6",
+      "archiveBytes": 11112,
+      "archiveSha256": "c9442eb661c1ca05a3b7160a03eb574a65fcd8c050b38d7c133c92602d6d3856",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "15-horse-statue/result.json",
+      "archiveFile": "15-horse-statue/result.json.gz",
+      "originalBytes": 69567,
+      "originalSha256": "c81df511a932436e4a2469673525f435f65a57fa2dfae985b56009fdaf0f00e4",
+      "archiveBytes": 8215,
+      "archiveSha256": "f1ca146c2beaeb10ef387d9de09f625653149620e99c3d579b508af52a927a14",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "16-royal-sovereign/result.json",
+      "archiveFile": "16-royal-sovereign/result.json.gz",
+      "originalBytes": 69819,
+      "originalSha256": "4e2729b7fdc984761e43d5a028db2640859168722f4c0b9ba8a4a6eaad16fb15",
+      "archiveBytes": 8271,
+      "archiveSha256": "c9c79d16102692127dbf6cd6b19c6b157ca093723ccfb6689671a2babc5e9eb8",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "17-viljandi-ruins/result.json",
+      "archiveFile": "17-viljandi-ruins/result.json.gz",
+      "originalBytes": 159459,
+      "originalSha256": "20397dfa9ddc8416badcb2331fcf2a597ab15db3bb2f5dddd4866e6e59fc1ac8",
+      "archiveBytes": 16519,
+      "archiveSha256": "f9961f06d4c28797b16e867598cb4fa11a3b7bd8602b2ba43c6894102b86a1f9",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "18-kakerdi-bog/result.json",
+      "archiveFile": "18-kakerdi-bog/result.json.gz",
+      "originalBytes": 163400,
+      "originalSha256": "b7b02da55a54c1097ccd066239a2774b7405608a48abf05cd8537e76659a8d31",
+      "archiveBytes": 16905,
+      "archiveSha256": "ca108b24f789c7eb248af85f701818208292856e1f12f87f3457f95d433a7aca",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "19-fjoloy/result.json",
+      "archiveFile": "19-fjoloy/result.json.gz",
+      "originalBytes": 85915,
+      "originalSha256": "16f2154621e60700952f617eee8e25d9559c073dfe2e1bf8782642e41d97e6e0",
+      "archiveBytes": 10384,
+      "archiveSha256": "186791e5323eb49a20c3ff57b904949f19545183ee5db9a9ec6baf56055fcfb9",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "browser.log",
+      "archiveFile": "browser.log.gz",
+      "originalBytes": 685686,
+      "originalSha256": "b53d2132df19e6ec45f2292a1ee69b03d750a9f8bf31a623b832ef09f3933444",
+      "archiveBytes": 62590,
+      "archiveSha256": "df58430a764deaa549d84ed810f97fc3ce20d6b62ec1fc5909a1af048609034a",
+      "decompressedByteExact": true
+    },
+    {
+      "originalFile": "results.json",
+      "archiveFile": "results.json.gz",
+      "originalBytes": 2475560,
+      "originalSha256": "613eb1b5998fda20ed5634ef731d5a6d92eea1ce3a40615eda9bad138f75a6c1",
+      "archiveBytes": 241414,
+      "archiveSha256": "3f692fb8aa19a5ded47e3b5c5473bd23fd760e11c69072f72ed8da067d3c8bf3",
+      "decompressedByteExact": true
+    }
+  ]
+}

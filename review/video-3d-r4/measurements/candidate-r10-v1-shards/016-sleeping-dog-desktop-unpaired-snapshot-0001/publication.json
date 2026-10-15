@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T12:17:51.848Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/016-sleeping-dog-desktop-unpaired",
+  "runSha256": "04b981b0b01cb752bf5794ee93fe39ec3fbe5304e019f76e61d49fac20ce568e",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "cases": [
+    {
+      "id": "sleeping-dog",
+      "profile": "desktop",
+      "rowFingerprint": "84781d7ed2b3d5d5a4f0e36b1a8f65bee392aca50dccd925d8b7c6e20efde7d3",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1134636,
+          "sha256": "7ba8c85ed72a29a60d3d100d2a4c33fdfde7ce4235bc38946010c1e019aa94b4"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1813,
+          "sha256": "f362d5ce18dbd9613498734997396cc79bbafc1189b14e03a0a5afc5c9bfdd7e"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

@@ -1,0 +1,23 @@
+✔ reordered source PTS yields the exact ceil for every original trial (4.391911ms)
+✔ rational ceil comparison preserves source ticks rather than choosing nearest frame (0.372735ms)
+✔ missing, duplicate and cross-window desired frames fail closed (1.793415ms)
+✔ startup only captures confirmed exact PTS or requests one rewind (0.181579ms)
+✔ late old play fulfillment cannot pause a new continuous playback owner (0.317613ms)
+✔ late play fulfillment after terminal same-owner disposal is paused (1.48001ms)
+✔ startup same-position is rejected, never a manufactured real rewind (1.02451ms)
+✔ one warm + one actual rewind, full three-trial budget and actual PTS (42.535077ms)
+✔ one skipped exact target discards prior completed windows/trials (3.276852ms)
+✔ abort inside an actual trial cannot resume or return a partial photograph array (2.016941ms)
+✔ single rewind that is still later than desired fails rather than seeking again (0.449137ms)
+✔ abort pending startup cancels callback/listeners and pauses (2.013785ms)
+✔ exact paused first desired frame needs no rewind or duplicate callback (4.11295ms)
+✔ nonmonotonic presentation is rejected while awaiting a later target (3.787404ms)
+✔ failure after a completed window still returns no partial photograph array (2.210062ms)
+ℹ tests 15
+ℹ suites 0
+ℹ pass 15
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 292.088568

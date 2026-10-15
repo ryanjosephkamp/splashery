@@ -1,0 +1,614 @@
+{
+  "created": "2026-10-15T12:17:51.602Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-paired-master-v1",
+  "runSha256": "11b59f9751d90b1c0093e9c13ee2450911a71e11d52b5b30b4e4826e221189c0",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "cases": [
+    {
+      "id": "cat-track",
+      "profile": "phone",
+      "rowFingerprint": "a889d9fdeb54252e70cbf8fd5104bb18ada00e26c08e02bbe7f8a1017127e7b3",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207379,
+          "sha256": "fc8bded4ac1585744b054115bed2c8bdf379a3fc01c3d12a96e034b2aaef2f3f"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2204,
+          "sha256": "90d2033275d83272e536aaa049e514ac6eecb32bfb382474a9c49b8caddd49e0"
+        }
+      ]
+    },
+    {
+      "id": "cat-plays",
+      "profile": "phone",
+      "rowFingerprint": "fbf5a6deaccdc62cf811bf0d382cf8794f4f3d42ba81925194fcf9a72b159134",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207284,
+          "sha256": "d307fe4a114ea59a5084975ef3477a2ff363d0c95092fefc5a39e9e0a52bb42c"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2291,
+          "sha256": "9034cd22259679ecd7979063841d2b250305fd3899286de86a3c61d0e4dfea10"
+        }
+      ]
+    },
+    {
+      "id": "cat-plays",
+      "profile": "desktop",
+      "rowFingerprint": "8b78f486988b28416c7736f6b9f8d939a0bd1c311c888925c129d43765253469",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1142155,
+          "sha256": "5badfc8c442ea7afbf76ea43548eb6ba09bfe967983717403feec99470e4724f"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1944,
+          "sha256": "8841e7f5fb10898fe20d058d69abba59524c92f7971b0b07ef13b5ff472ddeda"
+        }
+      ]
+    },
+    {
+      "id": "buddha",
+      "profile": "phone",
+      "rowFingerprint": "6582d49b771e41a0814c7d19d5c3dd42bdc9c28d9480387d810293782de0bd7d",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207379,
+          "sha256": "fc8bded4ac1585744b054115bed2c8bdf379a3fc01c3d12a96e034b2aaef2f3f"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2195,
+          "sha256": "742f879e8a6af9ef6595d252fde6c30a137169e54a57e3e9aaa55cd01bcfaf17"
+        }
+      ]
+    },
+    {
+      "id": "chameleon-flowers",
+      "profile": "phone",
+      "rowFingerprint": "641f6c1c6649a293dccc3b86d48d82bfdfa5c734d61b231c6b1ddb9223820733",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11185,
+          "sha256": "78919769ad6d39486de93cbcce561b61bc09eeaf6cf537427fa11471bfb40fd0"
+        },
+        {
+          "file": "model.json",
+          "bytes": 28270,
+          "sha256": "bc531375628e6b3ee298c05a9d0d8565a1e53df64c893021e4d0ae05a2b8d99f"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1110243,
+          "sha256": "9cfcde06568cc3a8da4c05a5f14543d190b6b21e6ce58a6fe078747dcf658394"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 167942,
+          "sha256": "fbacd19565299dd5b71a810434f38a6a742171b6b23c5cf4b9737a7ce91a7ad9"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 305241,
+          "sha256": "7a7d4067a3acf1ea20bef8650d6eca9af129ca5c477b372c58884c422b3d0445"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 295759,
+          "sha256": "58daa1452f0f65be6a9628418ad59be00d32fe96e1c39c4e9ea51c0aee9f9402"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 270400,
+          "sha256": "fe5e2af86581a4d402a21e2e3cd985bf2ff8816cae05a33272ef2423e554a743"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 229086,
+          "sha256": "af31698fea9603f91273a725870920de5a89ea7b136b8c880426684251a77fb9"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 326300,
+          "sha256": "b8b50ce62b66e614c4e8fa21cbf6bb3a5278a47aa1f93a79cf726b9d3a4f53c5"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 375825,
+          "sha256": "ab2f338f9662c599baef96defae8a1f8a1aea83cf4cec9364bbecb4def7dbef4"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 326847,
+          "sha256": "59742aac76a6a3d8902fe4e4b1de028b1f7199086dfd057ed1dbe8db6fa10d0d"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 318122,
+          "sha256": "26bfc41834e55f4fab7b1245443930027908ab81ba19a555b7d4c58ecefb9bf9"
+        },
+        {
+          "file": "result.json",
+          "bytes": 5670,
+          "sha256": "a9ee43bd935a73775832b4a0397df2255250fd2d39a4f47c7ca019dba0756c77"
+        }
+      ]
+    },
+    {
+      "id": "dianthus",
+      "profile": "phone",
+      "rowFingerprint": "2a8700a7edddfc81c2169939174113c4414a94966d085081a934a23a33fccc0b",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11288,
+          "sha256": "f0c36346e1cfe8bbc7006fc61aea267e10b73db0790565ac52b53521a10969b3"
+        },
+        {
+          "file": "model.json",
+          "bytes": 28255,
+          "sha256": "bbff433d3b4d9ba0bd3ff654f7cbb14245a6961a05e263ef82ce47ad467037d2"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1169675,
+          "sha256": "352ed4ab5eeb5f7eac320704e85f5981c5551f58fd82d83ec2724b2a655884a2"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 279164,
+          "sha256": "a234b320ff534bc5a5927f9c9a28db7f585c52e2cbfaa6d1948cf7587abf7b24"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 631236,
+          "sha256": "29a44c05ac596e8fb21283db05b05445bb118560a8e7979160702a16c25f4133"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 632069,
+          "sha256": "e27e788eb7d145fe78b513acd3c2c036195a5e52fbdd770c892267a1d70f8c29"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 631256,
+          "sha256": "5dbf522e355f8c3845f05345a544271fde292920272e430e683dc2e89c42ef44"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 624167,
+          "sha256": "cb35ba1a33d7b2d1f2567c440fb2b7cfe0b8d389550637b53f2ee1a87121aa15"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 582039,
+          "sha256": "54da9b789f1becb3d42954b824e651b4cfb4c9c7ded73a2d3d08ba6625fc9815"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 586697,
+          "sha256": "ec8ebb1f4fffb209aacf19cbe660992cc56cb61a2f566d0f9645807009f1efe6"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 570580,
+          "sha256": "a7ebfbd4f05d7751bc356cf7811e04e154b3be6bd52fb1196f2f56c002f6ce6f"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 573919,
+          "sha256": "572baec8d3cffce1cfc6eb7058420e30ea67cffc8adde1c5eaa0695db6b9dbee"
+        },
+        {
+          "file": "result.json",
+          "bytes": 5571,
+          "sha256": "779a8761fae5e033edd4dbef113132233d0bfcf8c1176378d825e00c699ba077"
+        }
+      ]
+    },
+    {
+      "id": "sleeping-dog",
+      "profile": "phone",
+      "rowFingerprint": "6cba31238bb5ccff6c1bda9c921db5ee5dc772974cb6a233b6bb14f8da1eb854",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207284,
+          "sha256": "d307fe4a114ea59a5084975ef3477a2ff363d0c95092fefc5a39e9e0a52bb42c"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2206,
+          "sha256": "228e6f8189f6b53e2d21c7dbfa9dbc26270f3240935986762f90165174307899"
+        }
+      ]
+    },
+    {
+      "id": "oa-street",
+      "profile": "phone",
+      "rowFingerprint": "1f3fb399a42b1ef1cf9c7203a11ea79a79668a28cb1cbd5fbc7c11de9a1c432b",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207379,
+          "sha256": "fc8bded4ac1585744b054115bed2c8bdf379a3fc01c3d12a96e034b2aaef2f3f"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2204,
+          "sha256": "8c5584bf9e0825c5c9beddd58af1f65c61712c8f8d2362ec8904b91fc470aea8"
+        }
+      ]
+    },
+    {
+      "id": "ullard",
+      "profile": "phone",
+      "rowFingerprint": "dc820525e416d8ec8dc778d9192b176fb027dcd96d4176df8e9a19c7d05e3c91",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11162,
+          "sha256": "55b0f5d5669e4126bdd15d37c8ca47b22b3385bcaf2c531432d3d6d83bcba481"
+        },
+        {
+          "file": "model.json",
+          "bytes": 28260,
+          "sha256": "9dadd8109a0baead09517f7091a225b4b40e90cb437679cf756a79c5ac6c64b0"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1117043,
+          "sha256": "fa1b8de92fb3026a35f42084ba035b87d87accaef2363688a2e7532c14eb73ef"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 189838,
+          "sha256": "f1ce9289db9d821233028e812bf382678b7a69cf4f3815c022789850732433af"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 570684,
+          "sha256": "76cd454d3883cd9e080745b11c364f5438b2a65fd27c8e1ec7c6b792fa5f876f"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 466308,
+          "sha256": "c391dda83176625ca6fd3a7eb41da78652c82cab73a34912d9b4afeb638fbe9a"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 348108,
+          "sha256": "f7b0f9d88c2bbff51c5f397b62f5081a830b613dbc6937ef6129bdd05327f63f"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 369723,
+          "sha256": "edbb117051a43db55409892be2530d7bc03632e353e3addb63fb38b9c7bc50e6"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 375916,
+          "sha256": "47fa224adea8a3e02312421ee11f8c10e11173794eb54982b0beca1dfaee4c43"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 392364,
+          "sha256": "5e2e68d71baa73d502c936d7afe390e99f733eba33bf39ff4b7abc873f8e569a"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 385189,
+          "sha256": "c2eb403637ec30717da12ef53996f5e73353cabf92affb396743331a69e0fb8c"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 395825,
+          "sha256": "f578337e16c915dda979e69837cd0c9f34e8b7c94b47e3fc592f05406038a5ef"
+        },
+        {
+          "file": "result.json",
+          "bytes": 5657,
+          "sha256": "cf1349f8004c7858e24416ff3990a15bda63807c25741e3264ed3b7f0875c693"
+        }
+      ]
+    },
+    {
+      "id": "snaefell",
+      "profile": "phone",
+      "rowFingerprint": "ac23f39db3e17d6ebd63485f927df3789a31e515e23aa25322943e607d26d3c9",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11175,
+          "sha256": "a53e69ab750bef2369763a1188b6e4c98a976bae7d75cecfedf1efb4b8e3b9cc"
+        },
+        {
+          "file": "model.json",
+          "bytes": 28085,
+          "sha256": "8a2eb81f02fc28de407eb65227212a7492dbc5d4a3836383d19837b1e7d274d1"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1131323,
+          "sha256": "09e46183d6835731fa56cce2c6bab2f4cfc414809053d86d9a66a6b843cb312e"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 163546,
+          "sha256": "af49c952ff2b2077c2c02361f75baf6b49c6dce997f6e419815e690a5dcdf3af"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 299867,
+          "sha256": "208c3552f54654259e957e712d3a31ad1b2fec81b818bc07dccbfdfd641880a7"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 291360,
+          "sha256": "8a52a7a10d41e6bde8ae1b75085fe91b6d5fa6e9e4fc2f8b6e4d3d37195fdb7a"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 298222,
+          "sha256": "1ad7c428f1a1586e8590a824c20401fa6ffc0ba6875f1ef0c61508e4ea82e13d"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 314601,
+          "sha256": "dd37c93ac7a4c20227dc723d789a88fca2845cb78014589faadb213b9da1b16c"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 292644,
+          "sha256": "240d8f83df20db31d215ad67dbf0078e84401f317bbee3d444d859c1352e97b0"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 338973,
+          "sha256": "d16a1332e71166fc362c36f757bd706b1d768443a430d5f12a4349483a01095e"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 289585,
+          "sha256": "00e9f9122be5f0513a1b2c68619f7c86fc5832208ce543e0995ac10ff043b6cd"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 300659,
+          "sha256": "05a5ec55382aac2953a2424bed4db36a0b7e95ee03a99f59e85df7801ecdc940"
+        },
+        {
+          "file": "result.json",
+          "bytes": 5656,
+          "sha256": "06e910be82aead2bba6354d03e754256ef49b6e89b9bbe8ab00073263492732c"
+        }
+      ]
+    },
+    {
+      "id": "fremantle-orbit",
+      "profile": "phone",
+      "rowFingerprint": "cf5fa9e46f5e39e602569617e86cca3852f5f22a0739153f755e06d250a39242",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 10615,
+          "sha256": "4dc198d077c11b0e74c8cee6bdce1aa0c2567bacba7f24e7d3186009ffcf9670"
+        },
+        {
+          "file": "model.json",
+          "bytes": 18706,
+          "sha256": "56264735f9ed6ea4b348ed5589bdf8c0d477da7f40b7309c79178e02fb2515bf"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1077671,
+          "sha256": "370d730a05dfc93dcd87b7b60db1cc553a40ee7e9a6498291aa3a0acfa52d36e"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 135412,
+          "sha256": "2f7eef3bdffc8aa2143f5e08e83d8654ca34eb1a242ebc36b66ad55ff7768c80"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 212252,
+          "sha256": "234a9ce663c189aff5fe2b8dd3071d0efc1e646739a62dc5f41e3bc41da03671"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 208019,
+          "sha256": "235a78c951d3258de5987d0005773cff9f4c8d68d9c65603a3c1f2e5d9ae68b9"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 219638,
+          "sha256": "dad41b70f6ca2495bae8354ad84aa0da5f4665e38a4d7348e5d368a72cebfb35"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 217162,
+          "sha256": "753f5e8e33c9c7e8138cfc858d7e51dc3de864e8bb6b336de039abfc7667ef60"
+        },
+        {
+          "file": "result.json",
+          "bytes": 4679,
+          "sha256": "f3734037e3483e44e21433cb9eff972e741e41f78b5371d3fd38a0de69381468"
+        }
+      ]
+    },
+    {
+      "id": "ihasalu-orbit",
+      "profile": "phone",
+      "rowFingerprint": "4c23e7066a95f927adb388c3bfbb53ade295f59355736b238b6e878546eb6c3b",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 11305,
+          "sha256": "8cdc5a939be127906929c7713059886ce1721be173d4656dc30f873c1e7ab62c"
+        },
+        {
+          "file": "model.json",
+          "bytes": 28190,
+          "sha256": "8da43d3b41ea0a085e331ff011a9e3cae4ab8ffb24096981a438a2f4f632599a"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1148119,
+          "sha256": "013535b32353716637278a7f28db4215a2e291227c4243ea9693eaaba485dd61"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 181117,
+          "sha256": "b9a5a33077868933555f6f37090dce98e54ab5700d4541965c7c28dc51c80317"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 309478,
+          "sha256": "4c9417e232285ee39a8c14666ff6d8516e0adc2928a65abcd782ef1e743c457d"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 329599,
+          "sha256": "740e3c8b13f5dad301d99fc121ba1da7cc0998ad0c13a18f35d1b31fbb00beb6"
+        },
+        {
+          "file": "reference-2.png",
+          "bytes": 342439,
+          "sha256": "66d2f3a1238d43dc0658b213b649abe18f07ed29f402daa530abdbdec71bbb18"
+        },
+        {
+          "file": "reference-3.png",
+          "bytes": 360044,
+          "sha256": "7a1700b626edec51d4c08918ca9f8ef428d5688d8dbd1da1aabc962054762583"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 353192,
+          "sha256": "2981b1d2420e08dee58b39cd954dc8293d3362653c1b664fa06ec8d3f6dbec10"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 365636,
+          "sha256": "0dd06ecab515e9e3ffd8f28f1a7868f0c7b9be58e764258b60eb78475dce2f36"
+        },
+        {
+          "file": "render-2.png",
+          "bytes": 378733,
+          "sha256": "8819bca4d1ea319372e46545d7ef04dec4ca506dbb1e2ffa4adb07ff5eb364c2"
+        },
+        {
+          "file": "render-3.png",
+          "bytes": 375099,
+          "sha256": "8c145d82a84c5fb252f26ecbdd9d7049b10700cace7a3ccca8d2da94f1919289"
+        },
+        {
+          "file": "result.json",
+          "bytes": 5658,
+          "sha256": "fa7cce3f5c24aa768503303d3b0b2e38bdf0c84dd92a4fe0ca6f95bf43e5c657"
+        }
+      ]
+    },
+    {
+      "id": "fresnel-lens",
+      "profile": "phone",
+      "rowFingerprint": "a072cd7a195fcc2ee9f707dd45a5879e0d3ff6ae15340c11b2260fb1984b220a",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 207284,
+          "sha256": "d307fe4a114ea59a5084975ef3477a2ff363d0c95092fefc5a39e9e0a52bb42c"
+        },
+        {
+          "file": "result.json",
+          "bytes": 2300,
+          "sha256": "b30021e9b8d8f70de60f7556a688faaa40dfd9df4a39be63d0fd1c18614799b1"
+        }
+      ]
+    },
+    {
+      "id": "saint-denis",
+      "profile": "phone",
+      "rowFingerprint": "b37f4048466754b4c293c667e3c63d6751c95879b0933a95d1bab9d939fac1a2",
+      "files": [
+        {
+          "file": "evaluation.json",
+          "bytes": 10518,
+          "sha256": "f8c7e1810708f4bf4eb0bf68938a6a69b5a2567be1712f7fa0d4c7026987fefb"
+        },
+        {
+          "file": "model.json",
+          "bytes": 20163,
+          "sha256": "b478f5350cf35be10f8fa157e69f7304decea5f2d8082fa11c21ec6247f1b1de"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1331855,
+          "sha256": "865d3e2d543a94637d37e70823d8524f4e3733fc0aa31f5c27e7525479f44005"
+        },
+        {
+          "file": "outcome.png",
+          "bytes": 215845,
+          "sha256": "0508a23f0bbc4d4e1b079c27dc243b56989232d2f05741489dafb6e6b93ff255"
+        },
+        {
+          "file": "reference-0.png",
+          "bytes": 328598,
+          "sha256": "655a41a80448a49c74dd794e0d3ecfc3dae8e13996d006d65f61e28a32911417"
+        },
+        {
+          "file": "reference-1.png",
+          "bytes": 419905,
+          "sha256": "7315658600ca6e82bca609aa2565e74ab09bfcd9abb62df05fea18a0000e8d4b"
+        },
+        {
+          "file": "render-0.png",
+          "bytes": 492957,
+          "sha256": "ad208ce6366741612d223a157693da86ee4af7b71a4b6012bd92b70450d0c81e"
+        },
+        {
+          "file": "render-1.png",
+          "bytes": 487894,
+          "sha256": "0407780106a78efd5660aa5f2d7f9fc82048001ebf56f54e6919fd383a8b03aa"
+        },
+        {
+          "file": "result.json",
+          "bytes": 4690,
+          "sha256": "6c08d26b24e961d0be55fa0319ac387a566edc385e54e9600a2be07245d8845f"
+        }
+      ]
+    },
+    {
+      "id": "horse-statue",
+      "profile": "phone",
+      "rowFingerprint": "2d0a7fd37209d181b739c53dd6413701e87eb17bea6545846d33cdcc75242578",
+      "files": [
+        {
+          "file": "model.json",
+          "bytes": 28541,
+          "sha256": "da685ceec927f0ed61313feca8f01678638a2fae0aceada1b7b756af3a356220"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1549183,
+          "sha256": "0f194511f7fecb4727f767edb6609b76957b5c5af39b0fd78b1b2a03c8de7ca8"
+        },
+        {
+          "file": "result.json",
+          "bytes": 3908,
+          "sha256": "5545e6edbfc15de01dade1e5126852e828c5547587a6307f448942803cd57cc6"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

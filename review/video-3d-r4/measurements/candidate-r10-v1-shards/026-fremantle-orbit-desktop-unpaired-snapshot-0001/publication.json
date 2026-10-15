@@ -1,0 +1,21 @@
+{
+  "created": "2026-10-15T12:17:52.337Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/026-fremantle-orbit-desktop-unpaired",
+  "runSha256": "f14279ce930196c3424bfb7e0b636dd0f58c70443219c4dfa5e850d8109f6d91",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "cases": [
+    {
+      "id": "fremantle-orbit",
+      "profile": "desktop",
+      "rowFingerprint": "af2480f0e08686ca96d2d6e8987c6908b2bcc3ce4d69ac05537a70723f40aefd",
+      "files": [
+        {
+          "file": "result.json",
+          "bytes": 1816,
+          "sha256": "30c38758fd5fa66b817f35df873d3f78d3c304f7c82d2fa15ba84a8fb5407af8"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

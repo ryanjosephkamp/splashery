@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-15T12:31:59.922680+00:00",
+  "originalPublicationFreezeSha256": "a008ed99387cc674c1f05fc8ab2fa0dbff300e391a008181899fedeeba574f89",
+  "originalFilesRestoredAndVerified": 469,
+  "allOriginalBytesPreserved": true,
+  "readmeRestore": {
+    "originalFile": "README.md",
+    "storedOriginalFile": "README.before-packet-archives.md.txt",
+    "originalSha256": "3736cd3dfc631e04610febef499fc31e62c4f4a1842dcb44836b790b23e48beb",
+    "currentDocumentationSha256": "7bd5463c67462e66fe9c29f612cb235c1f3868a17fcd29738ef0df5944d82b9d"
+  },
+  "packetRestoreMapping": "lossless-packet-archives.json",
+  "note": "In a separate copy, restore the original README from storedOriginalFile and decompress each mapped packet dump before checking the original publication inventory. Current README contains additive storage instructions; original documentation bytes are retained."
+}

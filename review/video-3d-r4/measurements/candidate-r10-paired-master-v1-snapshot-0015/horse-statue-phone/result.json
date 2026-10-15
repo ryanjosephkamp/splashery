@@ -1,0 +1,139 @@
+{
+  "id": "horse-statue",
+  "profile": "phone",
+  "sha256": "42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045",
+  "started": "2026-10-15T11:59:11.634Z",
+  "status": "harness-error",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "referenceEvidence": {
+    "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "resultFingerprint": "2bd56dd02edda5be33134eb78dfcc3e4abbf32e042a9593be5a1ebd725bd442b"
+  },
+  "firstViewMs": 108437,
+  "bakeMs": 596595.593301,
+  "mean": null,
+  "peakRssBytes": 1134575616,
+  "hostLoadAtStart": [
+    16.07,
+    14.89,
+    15.78
+  ],
+  "consoleErrors": [],
+  "phase": "evaluation",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "Stopped",
+    "unplayable": false,
+    "duration": 7.958333
+  },
+  "explanation": {
+    "diagnostic": "",
+    "advice": "",
+    "visible": false
+  },
+  "modelSha256": "0f194511f7fecb4727f767edb6609b76957b5c5af39b0fd78b1b2a03c8de7ca8",
+  "stats": {
+    "tier": "phone",
+    "adapter": "google swiftshader",
+    "frames": 16,
+    "registered": 16,
+    "points": 1203,
+    "surfacePoints": 13800,
+    "generatedSurfacePoints": 13800,
+    "seedSplats": 15000,
+    "seedBounds": "coordinate-median",
+    "seedSceneRadius": 5.4107875529303575,
+    "trainingBackground": [
+      0,
+      0,
+      0
+    ],
+    "renderBackground": [
+      0.06173930016808607,
+      0.052195920897863714,
+      0.023147017415352657
+    ],
+    "backgroundFit": {
+      "method": "constant-training-environment",
+      "accepted": true,
+      "reason": "training-and-validation-improved",
+      "rgb": [
+        0.06173930016808607,
+        0.052195920897863714,
+        0.023147017415352657
+      ],
+      "trainCams": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        13,
+        14,
+        15
+      ],
+      "validationCams": [
+        11
+      ],
+      "pixels": 605440,
+      "invalidPixels": 0,
+      "improvement": 0.037661707441697945,
+      "baseMse": 0.0025166653524575176,
+      "fittedMse": 0.0024218834382246047,
+      "validation": [
+        {
+          "ci": 11,
+          "pixels": 55040,
+          "baseMse": 0.03647140352557741,
+          "fittedMse": 0.035451838145818385
+        }
+      ]
+    },
+    "splats": 22814,
+    "iters": 380,
+    "psnr": 33.8,
+    "psnrAtIter": 380,
+    "trainSide": 320,
+    "plyBytes": 1549183,
+    "retried": false,
+    "timedOut": true,
+    "timeLimitMinutes": 8,
+    "softwareSort": true,
+    "softwareDirectGradient": true,
+    "trainingLoop": {
+      "batches": 190,
+      "submittedSteps": 380,
+      "encodeMs": 104,
+      "viewSubmitMs": 4,
+      "fenceWaitMs": 258034,
+      "metricsWaitMs": 144446,
+      "batchWallMs": 412031
+    },
+    "stoppedEarly": true,
+    "start": 0,
+    "end": 7.958,
+    "rate": 2.01
+  },
+  "timings": {
+    "frames": 39,
+    "decode": 1.1,
+    "path": 55.4,
+    "seed": 0.9,
+    "train": 483.9,
+    "background": 7.5,
+    "export": 0.2,
+    "total": 588
+  },
+  "actualTier": "phone",
+  "reason": "page.evaluate: Error: A training JPEG could not be matched to an independently presented source frame.\n    at sourceFrameReceipts (eval at evaluate (:290:30), <anonymous>:95:15)\n    at async <anonymous>:316:30\n    at withHostDeadline.timeoutMs (/workspace/splashery-v3d-bench-tools-r10/tools/v3d-bench.mjs:788:48)\n    at async withHostDeadline (/workspace/splashery-v3d-bench-tools-r10/tools/v3d-bench.mjs:187:12)\n    at async main (/workspace/splashery-v3d-bench-tools-r10/tools/v3d-bench.mjs:527:9)\n    at async file:///workspace/splashery-v3d-bench-tools-r10/tools/v3d-bench.mjs:973:3"
+}

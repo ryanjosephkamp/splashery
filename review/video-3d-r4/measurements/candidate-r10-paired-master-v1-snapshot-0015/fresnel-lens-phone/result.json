@@ -1,0 +1,43 @@
+{
+  "id": "fresnel-lens",
+  "profile": "phone",
+  "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8",
+  "started": "2026-10-15T11:44:34.068Z",
+  "status": "explained",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "referenceEvidence": {
+    "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "resultFingerprint": "a9ad89103fbac2350a786506eeec55f5d9d8db4a2558bcf0de1e69c200f31fce",
+    "evaluationSha256": "578efb94d09a7a04e09bc368ddf4797f1867171426e36e691a1e8f54c3d8193d"
+  },
+  "firstViewMs": null,
+  "bakeMs": 125818.99837300001,
+  "mean": null,
+  "peakRssBytes": 1100238848,
+  "hostLoadAtStart": [
+    18.36,
+    18.41,
+    18.12
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "Stopped",
+    "unplayable": false,
+    "duration": 10
+  },
+  "explanation": {
+    "diagnostic": "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second.",
+    "advice": "What worksWalk slowly around an object, or through a place, so the camera moves sideways and sees the same things from new angles.10 to 40 seconds, held steady, in even light.Plenty of texture: stone, bark, brick, leaves, signs.No zoom, and few people or cars moving.A drone circling a building or a statue is ideal.A file under 40 MB (trim a long video first).What failsTurning on the spot, or a panorama: the camera has to move, not just turn.A tripod time-lapse: the camera never moves.Blank walls, sky or water: nothing to match.Blur from fast moves or low light.",
+    "visible": true
+  },
+  "reason": "The camera path could not be worked out: the frames show the scene from too nearly the same place, or share too little. Try a stretch where the camera moves more (a walk, an orbit, a low flight), or a longer stretch at fewer frames a second."
+}

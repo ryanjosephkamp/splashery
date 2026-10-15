@@ -1,0 +1,8 @@
+{
+  "source": "/workspace/v3d-r4-media/original-spec-byte-audit-r2",
+  "sourceFiles": {
+    "check-original-specs-r2.py": "ffc7d43856b7368f1d34f0bae8b9a2ecaaa048c5ba61919b36cfd242139ec2c9",
+    "receipt.json": "cea7f4e4d0fb9fed749d21ce0c463917292e3923884dbe0448f2df7b11673bab"
+  },
+  "rawBytesPreserved": true
+}

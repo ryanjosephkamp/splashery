@@ -1,0 +1,31 @@
+{
+  "created": "2026-10-15T12:17:52.308Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/024-horse-statue-phone-paired",
+  "runSha256": "f3e68ddc7da32f99c53e717b9441a00762ce11cabc0ba2b1c7d8c595f5d2ef60",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "cases": [
+    {
+      "id": "horse-statue",
+      "profile": "phone",
+      "rowFingerprint": "2d0a7fd37209d181b739c53dd6413701e87eb17bea6545846d33cdcc75242578",
+      "files": [
+        {
+          "file": "model.json",
+          "bytes": 28541,
+          "sha256": "da685ceec927f0ed61313feca8f01678638a2fae0aceada1b7b756af3a356220"
+        },
+        {
+          "file": "model.ply",
+          "bytes": 1549183,
+          "sha256": "0f194511f7fecb4727f767edb6609b76957b5c5af39b0fd78b1b2a03c8de7ca8"
+        },
+        {
+          "file": "result.json",
+          "bytes": 3908,
+          "sha256": "5545e6edbfc15de01dade1e5126852e828c5547587a6307f448942803cd57cc6"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

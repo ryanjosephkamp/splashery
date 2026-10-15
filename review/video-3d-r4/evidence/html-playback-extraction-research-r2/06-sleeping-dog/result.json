@@ -1,0 +1,989 @@
+{
+  "id": "sleeping-dog",
+  "profile": "phone",
+  "method": "exact-ceil-continuous-html-playback",
+  "startedAt": "2026-10-15T11:23:40.027Z",
+  "researchLimitMs": 90000,
+  "abortAfterTrials": null,
+  "inputSha256": "c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9",
+  "parseMs": 14.5,
+  "table": {
+    "timescale": 12288,
+    "samples": 192,
+    "editOffset": 1024
+  },
+  "tier": {
+    "maxFrames": 16,
+    "frameSide": 480,
+    "featSide": 480,
+    "trainSide": 320,
+    "iters": 1200,
+    "splats": 30000,
+    "seed": 15000,
+    "maxMinutes": 8
+  },
+  "plan": {
+    "start": 0,
+    "end": 8,
+    "rate": 2,
+    "step": 0.5,
+    "windows": [
+      {
+        "t": 0.25,
+        "from": 0,
+        "to": 0.5
+      },
+      {
+        "t": 0.75,
+        "from": 0.5,
+        "to": 1
+      },
+      {
+        "t": 1.25,
+        "from": 1,
+        "to": 1.5
+      },
+      {
+        "t": 1.75,
+        "from": 1.5,
+        "to": 2
+      },
+      {
+        "t": 2.25,
+        "from": 2,
+        "to": 2.5
+      },
+      {
+        "t": 2.75,
+        "from": 2.5,
+        "to": 3
+      },
+      {
+        "t": 3.25,
+        "from": 3,
+        "to": 3.5
+      },
+      {
+        "t": 3.75,
+        "from": 3.5,
+        "to": 4
+      },
+      {
+        "t": 4.25,
+        "from": 4,
+        "to": 4.5
+      },
+      {
+        "t": 4.75,
+        "from": 4.5,
+        "to": 5
+      },
+      {
+        "t": 5.25,
+        "from": 5,
+        "to": 5.5
+      },
+      {
+        "t": 5.75,
+        "from": 5.5,
+        "to": 6
+      },
+      {
+        "t": 6.25,
+        "from": 6,
+        "to": 6.5
+      },
+      {
+        "t": 6.75,
+        "from": 6.5,
+        "to": 7
+      },
+      {
+        "t": 7.25,
+        "from": 7,
+        "to": 7.5
+      },
+      {
+        "t": 7.75,
+        "from": 7.5,
+        "to": 8
+      }
+    ]
+  },
+  "natural": {
+    "width": 854,
+    "height": 480,
+    "duration": 8
+  },
+  "crop": {
+    "sx": 0,
+    "sw": 854
+  },
+  "prepareMs": 1762.6000000014901,
+  "status": "extraction-or-proof-fallback",
+  "error": {
+    "name": "Error",
+    "message": "Exact ceil source frame was skipped",
+    "stack": "Error: Exact ceil source frame was skipped\n    at sample (http://127.0.0.1:4201/sequential.mjs:24:145)\n    at http://127.0.0.1:4201/sequential.mjs:19:87"
+  },
+  "exactDiagnostics": {
+    "targets": [
+      {
+        "window": 0,
+        "trial": 0,
+        "requestedTime": 0.083,
+        "pts": 1024,
+        "time": 0.08333333333333333,
+        "micros": 83333,
+        "sourcePresentationIndex": 2
+      },
+      {
+        "window": 0,
+        "trial": 1,
+        "requestedTime": 0.25,
+        "pts": 3072,
+        "time": 0.25,
+        "micros": 250000,
+        "sourcePresentationIndex": 6
+      },
+      {
+        "window": 0,
+        "trial": 2,
+        "requestedTime": 0.417,
+        "pts": 5632,
+        "time": 0.4583333333333333,
+        "micros": 458333,
+        "sourcePresentationIndex": 11
+      },
+      {
+        "window": 1,
+        "trial": 0,
+        "requestedTime": 0.583,
+        "pts": 7168,
+        "time": 0.5833333333333334,
+        "micros": 583333,
+        "sourcePresentationIndex": 14
+      },
+      {
+        "window": 1,
+        "trial": 1,
+        "requestedTime": 0.75,
+        "pts": 9216,
+        "time": 0.75,
+        "micros": 750000,
+        "sourcePresentationIndex": 18
+      },
+      {
+        "window": 1,
+        "trial": 2,
+        "requestedTime": 0.917,
+        "pts": 11776,
+        "time": 0.9583333333333334,
+        "micros": 958333,
+        "sourcePresentationIndex": 23
+      },
+      {
+        "window": 2,
+        "trial": 0,
+        "requestedTime": 1.083,
+        "pts": 13312,
+        "time": 1.0833333333333333,
+        "micros": 1083333,
+        "sourcePresentationIndex": 26
+      },
+      {
+        "window": 2,
+        "trial": 1,
+        "requestedTime": 1.25,
+        "pts": 15360,
+        "time": 1.25,
+        "micros": 1250000,
+        "sourcePresentationIndex": 30
+      },
+      {
+        "window": 2,
+        "trial": 2,
+        "requestedTime": 1.417,
+        "pts": 17920,
+        "time": 1.4583333333333333,
+        "micros": 1458333,
+        "sourcePresentationIndex": 35
+      },
+      {
+        "window": 3,
+        "trial": 0,
+        "requestedTime": 1.583,
+        "pts": 19456,
+        "time": 1.5833333333333333,
+        "micros": 1583333,
+        "sourcePresentationIndex": 38
+      },
+      {
+        "window": 3,
+        "trial": 1,
+        "requestedTime": 1.75,
+        "pts": 21504,
+        "time": 1.75,
+        "micros": 1750000,
+        "sourcePresentationIndex": 42
+      },
+      {
+        "window": 3,
+        "trial": 2,
+        "requestedTime": 1.917,
+        "pts": 24064,
+        "time": 1.9583333333333333,
+        "micros": 1958333,
+        "sourcePresentationIndex": 47
+      },
+      {
+        "window": 4,
+        "trial": 0,
+        "requestedTime": 2.083,
+        "pts": 25600,
+        "time": 2.0833333333333335,
+        "micros": 2083333,
+        "sourcePresentationIndex": 50
+      },
+      {
+        "window": 4,
+        "trial": 1,
+        "requestedTime": 2.25,
+        "pts": 27648,
+        "time": 2.25,
+        "micros": 2250000,
+        "sourcePresentationIndex": 54
+      },
+      {
+        "window": 4,
+        "trial": 2,
+        "requestedTime": 2.417,
+        "pts": 30208,
+        "time": 2.4583333333333335,
+        "micros": 2458333,
+        "sourcePresentationIndex": 59
+      },
+      {
+        "window": 5,
+        "trial": 0,
+        "requestedTime": 2.583,
+        "pts": 31744,
+        "time": 2.5833333333333335,
+        "micros": 2583333,
+        "sourcePresentationIndex": 62
+      },
+      {
+        "window": 5,
+        "trial": 1,
+        "requestedTime": 2.75,
+        "pts": 33792,
+        "time": 2.75,
+        "micros": 2750000,
+        "sourcePresentationIndex": 66
+      },
+      {
+        "window": 5,
+        "trial": 2,
+        "requestedTime": 2.917,
+        "pts": 36352,
+        "time": 2.9583333333333335,
+        "micros": 2958333,
+        "sourcePresentationIndex": 71
+      },
+      {
+        "window": 6,
+        "trial": 0,
+        "requestedTime": 3.083,
+        "pts": 37888,
+        "time": 3.0833333333333335,
+        "micros": 3083333,
+        "sourcePresentationIndex": 74
+      },
+      {
+        "window": 6,
+        "trial": 1,
+        "requestedTime": 3.25,
+        "pts": 39936,
+        "time": 3.25,
+        "micros": 3250000,
+        "sourcePresentationIndex": 78
+      },
+      {
+        "window": 6,
+        "trial": 2,
+        "requestedTime": 3.417,
+        "pts": 42496,
+        "time": 3.4583333333333335,
+        "micros": 3458333,
+        "sourcePresentationIndex": 83
+      },
+      {
+        "window": 7,
+        "trial": 0,
+        "requestedTime": 3.583,
+        "pts": 44032,
+        "time": 3.5833333333333335,
+        "micros": 3583333,
+        "sourcePresentationIndex": 86
+      },
+      {
+        "window": 7,
+        "trial": 1,
+        "requestedTime": 3.75,
+        "pts": 46080,
+        "time": 3.75,
+        "micros": 3750000,
+        "sourcePresentationIndex": 90
+      },
+      {
+        "window": 7,
+        "trial": 2,
+        "requestedTime": 3.917,
+        "pts": 48640,
+        "time": 3.9583333333333335,
+        "micros": 3958333,
+        "sourcePresentationIndex": 95
+      },
+      {
+        "window": 8,
+        "trial": 0,
+        "requestedTime": 4.083,
+        "pts": 50176,
+        "time": 4.083333333333333,
+        "micros": 4083333,
+        "sourcePresentationIndex": 98
+      },
+      {
+        "window": 8,
+        "trial": 1,
+        "requestedTime": 4.25,
+        "pts": 52224,
+        "time": 4.25,
+        "micros": 4250000,
+        "sourcePresentationIndex": 102
+      },
+      {
+        "window": 8,
+        "trial": 2,
+        "requestedTime": 4.417,
+        "pts": 54784,
+        "time": 4.458333333333333,
+        "micros": 4458333,
+        "sourcePresentationIndex": 107
+      },
+      {
+        "window": 9,
+        "trial": 0,
+        "requestedTime": 4.583,
+        "pts": 56320,
+        "time": 4.583333333333333,
+        "micros": 4583333,
+        "sourcePresentationIndex": 110
+      },
+      {
+        "window": 9,
+        "trial": 1,
+        "requestedTime": 4.75,
+        "pts": 58368,
+        "time": 4.75,
+        "micros": 4750000,
+        "sourcePresentationIndex": 114
+      },
+      {
+        "window": 9,
+        "trial": 2,
+        "requestedTime": 4.917,
+        "pts": 60928,
+        "time": 4.958333333333333,
+        "micros": 4958333,
+        "sourcePresentationIndex": 119
+      },
+      {
+        "window": 10,
+        "trial": 0,
+        "requestedTime": 5.083,
+        "pts": 62464,
+        "time": 5.083333333333333,
+        "micros": 5083333,
+        "sourcePresentationIndex": 122
+      },
+      {
+        "window": 10,
+        "trial": 1,
+        "requestedTime": 5.25,
+        "pts": 64512,
+        "time": 5.25,
+        "micros": 5250000,
+        "sourcePresentationIndex": 126
+      },
+      {
+        "window": 10,
+        "trial": 2,
+        "requestedTime": 5.417,
+        "pts": 67072,
+        "time": 5.458333333333333,
+        "micros": 5458333,
+        "sourcePresentationIndex": 131
+      },
+      {
+        "window": 11,
+        "trial": 0,
+        "requestedTime": 5.583,
+        "pts": 68608,
+        "time": 5.583333333333333,
+        "micros": 5583333,
+        "sourcePresentationIndex": 134
+      },
+      {
+        "window": 11,
+        "trial": 1,
+        "requestedTime": 5.75,
+        "pts": 70656,
+        "time": 5.75,
+        "micros": 5750000,
+        "sourcePresentationIndex": 138
+      },
+      {
+        "window": 11,
+        "trial": 2,
+        "requestedTime": 5.917,
+        "pts": 73216,
+        "time": 5.958333333333333,
+        "micros": 5958333,
+        "sourcePresentationIndex": 143
+      },
+      {
+        "window": 12,
+        "trial": 0,
+        "requestedTime": 6.083,
+        "pts": 74752,
+        "time": 6.083333333333333,
+        "micros": 6083333,
+        "sourcePresentationIndex": 146
+      },
+      {
+        "window": 12,
+        "trial": 1,
+        "requestedTime": 6.25,
+        "pts": 76800,
+        "time": 6.25,
+        "micros": 6250000,
+        "sourcePresentationIndex": 150
+      },
+      {
+        "window": 12,
+        "trial": 2,
+        "requestedTime": 6.417,
+        "pts": 79360,
+        "time": 6.458333333333333,
+        "micros": 6458333,
+        "sourcePresentationIndex": 155
+      },
+      {
+        "window": 13,
+        "trial": 0,
+        "requestedTime": 6.583,
+        "pts": 80896,
+        "time": 6.583333333333333,
+        "micros": 6583333,
+        "sourcePresentationIndex": 158
+      },
+      {
+        "window": 13,
+        "trial": 1,
+        "requestedTime": 6.75,
+        "pts": 82944,
+        "time": 6.75,
+        "micros": 6750000,
+        "sourcePresentationIndex": 162
+      },
+      {
+        "window": 13,
+        "trial": 2,
+        "requestedTime": 6.917,
+        "pts": 85504,
+        "time": 6.958333333333333,
+        "micros": 6958333,
+        "sourcePresentationIndex": 167
+      },
+      {
+        "window": 14,
+        "trial": 0,
+        "requestedTime": 7.083,
+        "pts": 87040,
+        "time": 7.083333333333333,
+        "micros": 7083333,
+        "sourcePresentationIndex": 170
+      },
+      {
+        "window": 14,
+        "trial": 1,
+        "requestedTime": 7.25,
+        "pts": 89088,
+        "time": 7.25,
+        "micros": 7250000,
+        "sourcePresentationIndex": 174
+      },
+      {
+        "window": 14,
+        "trial": 2,
+        "requestedTime": 7.417,
+        "pts": 91648,
+        "time": 7.458333333333333,
+        "micros": 7458333,
+        "sourcePresentationIndex": 179
+      },
+      {
+        "window": 15,
+        "trial": 0,
+        "requestedTime": 7.583,
+        "pts": 93184,
+        "time": 7.583333333333333,
+        "micros": 7583333,
+        "sourcePresentationIndex": 182
+      },
+      {
+        "window": 15,
+        "trial": 1,
+        "requestedTime": 7.75,
+        "pts": 95232,
+        "time": 7.75,
+        "micros": 7750000,
+        "sourcePresentationIndex": 186
+      },
+      {
+        "window": 15,
+        "trial": 2,
+        "requestedTime": 7.917,
+        "pts": 97792,
+        "time": 7.958333333333333,
+        "micros": 7958333,
+        "sourcePresentationIndex": 191
+      }
+    ],
+    "telemetry": [
+      {
+        "wallMs": 327.3999999985099,
+        "kind": "startup-presented",
+        "requestedTime": 0.5,
+        "actualTime": 0.541667,
+        "position": 0.523319,
+        "presentationTime": 3223.7,
+        "wallNow": 3223.4
+      },
+      {
+        "wallMs": 2863.199999999255,
+        "kind": "startup-presented",
+        "requestedTime": 0.001,
+        "actualTime": 0.041667,
+        "position": 0.021872,
+        "presentationTime": 5759.1,
+        "wallNow": 5756.5
+      },
+      {
+        "wallMs": 2912.7999999970198,
+        "kind": "rvfc",
+        "time": 0.083333,
+        "micros": 83333,
+        "origin": "rvfc",
+        "target": 0,
+        "presentedFrames": 5
+      },
+      {
+        "wallMs": 3039.699999999255,
+        "kind": "trial",
+        "window": 0,
+        "trial": 0,
+        "requestedTime": 0.083,
+        "actualTime": 0.083333,
+        "actualMicros": 83333,
+        "desiredMicros": 83333,
+        "desiredPts": 1024
+      },
+      {
+        "wallMs": 3097.7999999970198,
+        "kind": "rvfc",
+        "time": 0.125,
+        "micros": 125000,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 6
+      },
+      {
+        "wallMs": 3110.39999999851,
+        "kind": "rvfc",
+        "time": 0.166667,
+        "micros": 166667,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 7
+      },
+      {
+        "wallMs": 3159.89999999851,
+        "kind": "rvfc",
+        "time": 0.208333,
+        "micros": 208333,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 8
+      },
+      {
+        "wallMs": 3200.599999997765,
+        "kind": "rvfc",
+        "time": 0.25,
+        "micros": 250000,
+        "origin": "rvfc",
+        "target": 1,
+        "presentedFrames": 9
+      },
+      {
+        "wallMs": 3262.099999997765,
+        "kind": "trial",
+        "window": 0,
+        "trial": 1,
+        "requestedTime": 0.25,
+        "actualTime": 0.25,
+        "actualMicros": 250000,
+        "desiredMicros": 250000,
+        "desiredPts": 3072
+      },
+      {
+        "wallMs": 3300.199999999255,
+        "kind": "rvfc",
+        "time": 0.291667,
+        "micros": 291667,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 10
+      },
+      {
+        "wallMs": 3326.89999999851,
+        "kind": "rvfc",
+        "time": 0.333333,
+        "micros": 333333,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 11
+      },
+      {
+        "wallMs": 3406.5,
+        "kind": "rvfc",
+        "time": 0.375,
+        "micros": 375000,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 12
+      },
+      {
+        "wallMs": 3413.699999999255,
+        "kind": "rvfc",
+        "time": 0.416667,
+        "micros": 416667,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 13
+      },
+      {
+        "wallMs": 3470.199999999255,
+        "kind": "rvfc",
+        "time": 0.458333,
+        "micros": 458333,
+        "origin": "rvfc",
+        "target": 2,
+        "presentedFrames": 14
+      },
+      {
+        "wallMs": 3545.2999999970198,
+        "kind": "trial",
+        "window": 0,
+        "trial": 2,
+        "requestedTime": 0.417,
+        "actualTime": 0.458333,
+        "actualMicros": 458333,
+        "desiredMicros": 458333,
+        "desiredPts": 5632
+      },
+      {
+        "wallMs": 3545.39999999851,
+        "kind": "window",
+        "done": 1,
+        "total": 16,
+        "selectedTime": 0.458333
+      },
+      {
+        "wallMs": 3603.39999999851,
+        "kind": "rvfc",
+        "time": 0.5,
+        "micros": 500000,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 15
+      },
+      {
+        "wallMs": 3643.199999999255,
+        "kind": "rvfc",
+        "time": 0.541667,
+        "micros": 541667,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 16
+      },
+      {
+        "wallMs": 3714.199999999255,
+        "kind": "rvfc",
+        "time": 0.625,
+        "micros": 625000,
+        "origin": "rvfc",
+        "target": 3,
+        "presentedFrames": 18
+      }
+    ],
+    "startup": [
+      {
+        "time": 0.541667,
+        "requestedTime": 0.5,
+        "before": 0,
+        "position": 0.523504,
+        "observedSeeking": true,
+        "phase": "warm"
+      },
+      {
+        "time": 0.041667,
+        "requestedTime": 0.001,
+        "before": 0.523504,
+        "position": 0.021917,
+        "observedSeeking": true,
+        "phase": "single-rewind"
+      }
+    ],
+    "completedTrials": 3,
+    "completedWindows": 1
+  },
+  "attemptedExtractionMs": 3716.10000000149,
+  "noPartialExtractionReturned": true,
+  "cleanup": {
+    "pausedBeforeClose": true,
+    "readyStateBeforeClose": 4,
+    "srcRemoved": true,
+    "pausedAfterClose": true
+  },
+  "progress": [
+    {
+      "wallMs": 327.3999999985099,
+      "kind": "startup-presented",
+      "requestedTime": 0.5,
+      "actualTime": 0.541667,
+      "position": 0.523319,
+      "presentationTime": 3223.7,
+      "wallNow": 3223.4
+    },
+    {
+      "wallMs": 2863.199999999255,
+      "kind": "startup-presented",
+      "requestedTime": 0.001,
+      "actualTime": 0.041667,
+      "position": 0.021872,
+      "presentationTime": 5759.1,
+      "wallNow": 5756.5
+    },
+    {
+      "wallMs": 2912.7999999970198,
+      "kind": "rvfc",
+      "time": 0.083333,
+      "micros": 83333,
+      "origin": "rvfc",
+      "target": 0,
+      "presentedFrames": 5
+    },
+    {
+      "wallMs": 3039.699999999255,
+      "kind": "trial",
+      "window": 0,
+      "trial": 0,
+      "requestedTime": 0.083,
+      "actualTime": 0.083333,
+      "actualMicros": 83333,
+      "desiredMicros": 83333,
+      "desiredPts": 1024
+    },
+    {
+      "wallMs": 3097.7999999970198,
+      "kind": "rvfc",
+      "time": 0.125,
+      "micros": 125000,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 6
+    },
+    {
+      "wallMs": 3110.39999999851,
+      "kind": "rvfc",
+      "time": 0.166667,
+      "micros": 166667,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 7
+    },
+    {
+      "wallMs": 3159.89999999851,
+      "kind": "rvfc",
+      "time": 0.208333,
+      "micros": 208333,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 8
+    },
+    {
+      "wallMs": 3200.599999997765,
+      "kind": "rvfc",
+      "time": 0.25,
+      "micros": 250000,
+      "origin": "rvfc",
+      "target": 1,
+      "presentedFrames": 9
+    },
+    {
+      "wallMs": 3262.099999997765,
+      "kind": "trial",
+      "window": 0,
+      "trial": 1,
+      "requestedTime": 0.25,
+      "actualTime": 0.25,
+      "actualMicros": 250000,
+      "desiredMicros": 250000,
+      "desiredPts": 3072
+    },
+    {
+      "wallMs": 3300.199999999255,
+      "kind": "rvfc",
+      "time": 0.291667,
+      "micros": 291667,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 10
+    },
+    {
+      "wallMs": 3326.89999999851,
+      "kind": "rvfc",
+      "time": 0.333333,
+      "micros": 333333,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 11
+    },
+    {
+      "wallMs": 3406.5,
+      "kind": "rvfc",
+      "time": 0.375,
+      "micros": 375000,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 12
+    },
+    {
+      "wallMs": 3413.699999999255,
+      "kind": "rvfc",
+      "time": 0.416667,
+      "micros": 416667,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 13
+    },
+    {
+      "wallMs": 3470.199999999255,
+      "kind": "rvfc",
+      "time": 0.458333,
+      "micros": 458333,
+      "origin": "rvfc",
+      "target": 2,
+      "presentedFrames": 14
+    },
+    {
+      "wallMs": 3545.2999999970198,
+      "kind": "trial",
+      "window": 0,
+      "trial": 2,
+      "requestedTime": 0.417,
+      "actualTime": 0.458333,
+      "actualMicros": 458333,
+      "desiredMicros": 458333,
+      "desiredPts": 5632
+    },
+    {
+      "wallMs": 3545.39999999851,
+      "kind": "window",
+      "done": 1,
+      "total": 16,
+      "selectedTime": 0.458333
+    },
+    {
+      "wallMs": 3603.39999999851,
+      "kind": "rvfc",
+      "time": 0.5,
+      "micros": 500000,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 15
+    },
+    {
+      "wallMs": 3643.199999999255,
+      "kind": "rvfc",
+      "time": 0.541667,
+      "micros": 541667,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 16
+    },
+    {
+      "wallMs": 3714.199999999255,
+      "kind": "rvfc",
+      "time": 0.625,
+      "micros": 625000,
+      "origin": "rvfc",
+      "target": 3,
+      "presentedFrames": 18
+    }
+  ],
+  "elapsedMs": 5479.70000000298,
+  "inputBinding": {
+    "id": "sleeping-dog",
+    "label": "Sleeping dog close up indoors",
+    "category": [
+      "pet",
+      "still-held"
+    ],
+    "source": "https://commons.wikimedia.org/wiki/File:REM_-_Rapid_eye_movement_sleep_of_a_dog.webm",
+    "license": "CC BY-SA 3.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
+    "author": "Amada44",
+    "duration": 8,
+    "sha256": "c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9",
+    "file": "sleeping-dog.mp4",
+    "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/7/73/REM_-_Rapid_eye_movement_sleep_of_a_dog.webm",
+    "captureSha256": "6c998730298d6321ad915cbad76129f19b226c761c1237cae6018efafedb3be1",
+    "captureDuration": 27.519,
+    "span": {
+      "start": 10,
+      "length": 8
+    },
+    "checked": "October 15, 2026",
+    "transformation": "Trimmed 10–18 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+    "evidence": {
+      "sourcePage": "evidence/sleeping-dog-source.html",
+      "licensePage": "evidence/cc-by-sa-3-0.html",
+      "contactSheet": "contact-sheets/sleeping-dog.jpg",
+      "commonsMetadata": "evidence/sleeping-dog-commons-metadata.json",
+      "sourcePageSha256": "59ea03da324d14de16f3b89d159af0cff09ff3f448fec577ccdecfb90e17369c",
+      "licensePageSha256": "9a17cd36de36b242cbe4234773116f2036f86a8ce4459af8b37fd120482ca931",
+      "contactSheetSha256": "f8e55a79716d26f45c1428bc3e55385fe6e6656f7f874874cb212fab54706b08",
+      "commonsMetadataSha256": "3f7860cf19c266cdd975f9fcfa5237b1b55fa52c72dfcc2b3a268c09f041d375"
+    },
+    "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+    "width": 854,
+    "height": 480,
+    "fps": "24/1",
+    "bytes": 2460226,
+    "ffprobeSha256": "9fdfd63bf473cd4a3349bc32e5af4a8fa60074063970b3864a54e05adb2705fc"
+  },
+  "hostContextClosed": true
+}

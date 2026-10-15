@@ -1,0 +1,2351 @@
+{
+  "created": "2026-10-15T11:29:48.000289+00:00",
+  "scope": "Final public subset and additive rights/omission receipts; this freeze excludes itself.",
+  "files": [
+    {
+      "file": "ATTRIBUTION.txt",
+      "bytes": 5543,
+      "sha256": "e1dfb5cf78b3abac068bbbe0cf10e2bbb430c85cf9adac1f0e02e732126e5a68"
+    },
+    {
+      "file": "README.md",
+      "bytes": 1625,
+      "sha256": "3736cd3dfc631e04610febef499fc31e62c4f4a1842dcb44836b790b23e48beb"
+    },
+    {
+      "file": "fast-extract-integration-r1/b-sar.mp4",
+      "bytes": 30524,
+      "sha256": "32006544236dcf65f9d6ca36178d762f2a80eb6513363b119b622d60cf5e4ace"
+    },
+    {
+      "file": "fast-extract-integration-r1/probe-native-corpus-r1.json",
+      "bytes": 6247,
+      "sha256": "c7e1d8f4c4025157cf15ea6cf9581cbe33d170f77b809fb4690c19ee61d22198"
+    },
+    {
+      "file": "fast-extract-integration-r1/probe-native-corpus-r1.mjs",
+      "bytes": 2196,
+      "sha256": "7f425a3a9e01910c0b9976ed541f4200f3b1d43281e6c2f2656a1a3b1f78e7ca"
+    },
+    {
+      "file": "fast-extract-integration-r1/probe-native-r1.json",
+      "bytes": 3743,
+      "sha256": "0a831d1341cb4e5261e821a5c3a35526141d2cadc8938e1fc1bd5c716314a49b"
+    },
+    {
+      "file": "fast-extract-integration-r1/probe-native-r1.mjs",
+      "bytes": 2171,
+      "sha256": "580977358c77d298a32083984569498765bd4960c3c734bc079ecfca23630524"
+    },
+    {
+      "file": "fast-extract-integration-r1/probe.json",
+      "bytes": 8503,
+      "sha256": "91615bd391fdd5e7ce37d6376d70adb0f9dfa7dd6e5a4d76722cd06eb812bc4c"
+    },
+    {
+      "file": "fast-extract-integration-r1/probe.mjs",
+      "bytes": 2061,
+      "sha256": "7cf7b9daf2d59b6c705c9c2e918fafd9aa325dbc556954542e4add54c716a0aa"
+    },
+    {
+      "file": "fast-extract-integration-r1/src/extract.js",
+      "bytes": 11360,
+      "sha256": "4287f7f23f17f5dd560a21a220e94a1621d4755a5b15dec184ce70598046008c"
+    },
+    {
+      "file": "fast-extract-integration-r1/src/fast-extract.js",
+      "bytes": 11546,
+      "sha256": "5ade500e601eda4e5b65142bd8946bbe7adad935ce8bc0b01435227d0c43dddd"
+    },
+    {
+      "file": "fast-extract-integration-r1/src/frames.js",
+      "bytes": 4573,
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "file": "fast-extract-integration-r1/src/mp4.js",
+      "bytes": 15868,
+      "sha256": "5a3ee62186ba8bb3c5b4ee246d45b084ab6de02ccbbb44a2d96f8aabcf0fe7aa"
+    },
+    {
+      "file": "fast-extract-integration-r1/vfr-signed.mp4",
+      "bytes": 21704,
+      "sha256": "d9412e9322981af9558f011672825ea5bfcbba72efff72ffae1c0470d11e00ee"
+    },
+    {
+      "file": "fast-extract-integration-r2/probe-native-corpus-r2.json",
+      "bytes": 7663,
+      "sha256": "105fb413f29bcf421a01110d13c8de7c31bdf2a07b4bca871ecf05361dcf11e9"
+    },
+    {
+      "file": "fast-extract-integration-r2/probe-native-corpus-r2.mjs",
+      "bytes": 2368,
+      "sha256": "d4780325b0570a9ecfae35b54ced22265f9ce12c3a213ae7ede2f7433a2f598f"
+    },
+    {
+      "file": "fast-extract-integration-r2/src/extract.js",
+      "bytes": 11360,
+      "sha256": "4287f7f23f17f5dd560a21a220e94a1621d4755a5b15dec184ce70598046008c"
+    },
+    {
+      "file": "fast-extract-integration-r2/src/fast-extract.js",
+      "bytes": 11546,
+      "sha256": "80575a35ed6339ec65fe6efc69922e6f21634df65b657ecbac1d5f91c2136b10"
+    },
+    {
+      "file": "fast-extract-integration-r2/src/frames.js",
+      "bytes": 4573,
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "file": "fast-extract-integration-r2/src/mp4.js",
+      "bytes": 15868,
+      "sha256": "5a3ee62186ba8bb3c5b4ee246d45b084ab6de02ccbbb44a2d96f8aabcf0fe7aa"
+    },
+    {
+      "file": "fast-extract-rejected-r1/decision.json",
+      "bytes": 3090,
+      "sha256": "dd93edb982a4d81b1f3e0a1f41b2c795e3964773629ff1c16c5121f873f45402"
+    },
+    {
+      "file": "fast-extract-rejected-r1/logs/v3d-r4-fast-extraction-browser-r1.log",
+      "bytes": 3530,
+      "sha256": "88945e7c5ddbe826a2cb33418be60a8a7187cb47eb6ff3543985de267d8e6802"
+    },
+    {
+      "file": "fast-extract-rejected-r1/logs/v3d-r4-fast-extraction-browser-r2.log",
+      "bytes": 5486,
+      "sha256": "2489f127b793f752ba56283634709e45f2cf38f66c9dff2bfe93914692f56f7d"
+    },
+    {
+      "file": "fast-extract-rejected-r1/logs/v3d-r4-fast-extraction-browser-r3.log",
+      "bytes": 3194,
+      "sha256": "5d5bab49db0b90e3e888a31d99ff51d59bb09ce961d731b5bc74868cdda3a43f"
+    },
+    {
+      "file": "fast-extract-rejected-r1/logs/v3d-r4-fast-extraction-browser-r4.log",
+      "bytes": 3238,
+      "sha256": "3f3d7b066eee0cc64b8e5234b617b447f1d5a6fb17d13c52857399baf0fac2b0"
+    },
+    {
+      "file": "fast-extract-rejected-r1/logs/v3d-r4-fast-extraction-browser-r5.log",
+      "bytes": 2978,
+      "sha256": "5c0801c520ec961190959bb654bccb5636b8086ac36794f1119b747268ee5005"
+    },
+    {
+      "file": "fast-extract-rejected-r1/logs/v3d-r4-fast-extraction-browser-r6.log",
+      "bytes": 5744,
+      "sha256": "f5680aef621c05b45c4964a2919f7a3b15ee7480f32899656375906ebac6d01c"
+    },
+    {
+      "file": "fast-extract-rejected-r1/logs/v3d-r4-fast-extraction-cpu-r1.log",
+      "bytes": 5072,
+      "sha256": "2d29526cfdf35736bb4ba57f923204c70ba35914f9fd70a4b58a2f24a7d4ea59"
+    },
+    {
+      "file": "fast-extract-rejected-r1/scope.patch",
+      "bytes": 6044,
+      "sha256": "c4a75a619031e9718c3e7a575ae92c7dca5b8abc6e69b9b7cf27f763fbf2b619"
+    },
+    {
+      "file": "fast-extract-rejected-r1/source-snapshots/src/video3d/extract.js",
+      "bytes": 11360,
+      "sha256": "4287f7f23f17f5dd560a21a220e94a1621d4755a5b15dec184ce70598046008c"
+    },
+    {
+      "file": "fast-extract-rejected-r1/source-snapshots/src/video3d/fast-extract.js",
+      "bytes": 11546,
+      "sha256": "5ade500e601eda4e5b65142bd8946bbe7adad935ce8bc0b01435227d0c43dddd"
+    },
+    {
+      "file": "fast-extract-rejected-r1/source-snapshots/src/video3d/mp4.js",
+      "bytes": 16081,
+      "sha256": "ca9968d11ae0e9d68f303c384778977ecae80f5d244b87cde050772182f0b117"
+    },
+    {
+      "file": "fast-extract-rejected-r1/source-snapshots/src/video3d/run.js",
+      "bytes": 20607,
+      "sha256": "265190fbf8dc8f998c607f1978003b79bf22079c052cc62647876dfc65e94526"
+    },
+    {
+      "file": "fast-extract-rejected-r1/source-snapshots/tests/cdx-v3d-fast-extract-browser.spec.mjs",
+      "bytes": 5522,
+      "sha256": "fef44c17afd91dc91de9144cdbea78ea46db6012cec9cc83196d3242987ecd1f"
+    },
+    {
+      "file": "fast-extract-rejected-r1/source-snapshots/tests/cdx-v3d-fast-extract.spec.mjs",
+      "bytes": 8566,
+      "sha256": "a86a59cd7b4f67d23bcf4c7a4a43ed5a8bc3dbc87c325b9911025a2b5008e639"
+    },
+    {
+      "file": "fast-extract-rejected-r1/source-snapshots/tests/cdx-v3d-mp4.spec.mjs",
+      "bytes": 8299,
+      "sha256": "3ace0cd24ff693ea4ce6bba0f41d221895e0448c69412dc906532fb4fb9c8f9a"
+    },
+    {
+      "file": "fast-extract-rejected-r1/source-snapshots/tests/helpers/v3d-mp4-fixture.mjs",
+      "bytes": 2804,
+      "sha256": "03699cf5864379a9b76424b51ab35ed4775ee0b6a2518b9668db18b6a1410d01"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/0.jpg",
+      "bytes": 32573,
+      "sha256": "c8c3422ad0133060588f67d681eaff6b3b8a0403ba1276a0fc61272348f70bf5"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/1.jpg",
+      "bytes": 32983,
+      "sha256": "a1a9f4bfb119837a78833da4475b7e21ba36a00dc7b961c8cfbe6cb0c74f2509"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/10.jpg",
+      "bytes": 27810,
+      "sha256": "69136f0dba0e6b530e1630693531306a137ea5180970ec81825b47df03bd9606"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/11.jpg",
+      "bytes": 25958,
+      "sha256": "3eb58904390439b80f83d062c59a89c52021b4170dbdccbcab501ab4cb782c24"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/12.jpg",
+      "bytes": 25471,
+      "sha256": "79e4d32fbd639e60be467a9cd1ec7be163cedb963750daa4b4a89260e7bd6306"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/13.jpg",
+      "bytes": 25667,
+      "sha256": "f2df66d1c5ddb0f99f95aea413b4f2e64d0e759ffaed3b61f7765e66b17ea119"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/14.jpg",
+      "bytes": 24457,
+      "sha256": "ca619a74afe824b6872d3d9649bbc78a65eae35346ead9eea7d81c851c683ce5"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/15.jpg",
+      "bytes": 25218,
+      "sha256": "0b3f9bc7cc8ef5d83cc4a7021f1a4c15b90f4cc13937d03fb96bed18f969d335"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/2.jpg",
+      "bytes": 33109,
+      "sha256": "b7e7d3e26905e2017af14f28d51edc3a943ac00d3ba03c35b0b93eab1a8998c1"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/3.jpg",
+      "bytes": 31875,
+      "sha256": "1203855f1edb99d3e30df757fc08f71b1fb23bc4cdbc5675964bb94e0720849c"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/4.jpg",
+      "bytes": 32846,
+      "sha256": "2e3865ea8511528a89a610c90fddf62f789af06e43a17d5b1afc5dd5e25f08a6"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/5.jpg",
+      "bytes": 32612,
+      "sha256": "9c9f666495f4181da9016b28523f7c02ea8cc717be631c785a7d1e7dc6aa9049"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/6.jpg",
+      "bytes": 32556,
+      "sha256": "c6625e1250bbc34694be7d8d149648d5d7befd5d46680a55191e82c60f1da349"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/7.jpg",
+      "bytes": 32179,
+      "sha256": "4bfa76e0286af1d4daa9078b9ab1de2a2d41249fc0fa91868dc74f8bd6ed52b4"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/8.jpg",
+      "bytes": 31023,
+      "sha256": "ee18e8c0209a68c77c812c254079339085306c88db7add91ab7a0151e9cb0e31"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/01-chameleon-flowers-phone-seek/9.jpg",
+      "bytes": 28655,
+      "sha256": "ddb18add90bf201c9686a141e7cafc5ff66bca69f2f2e1a5f3a0d56695d645f2"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/0.jpg",
+      "bytes": 53417,
+      "sha256": "2fe66928a3e100fbb9e58b40b1591140195c2eeacd4ad57089a9643d0aa919cc"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/1.jpg",
+      "bytes": 51748,
+      "sha256": "13c133b86e894f0b571ef09e972cb06c84a2ac64fb2a4796f88a9948f62e4ffb"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/10.jpg",
+      "bytes": 51693,
+      "sha256": "8ebbe351a737e283b18922871f341a85e079b5d3d86466f03c190b18f4d839f3"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/11.jpg",
+      "bytes": 52949,
+      "sha256": "6e594e8d0651cab9bb4ff9245be3471f9f72e82594e7deb13f568c6fecc99c44"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/12.jpg",
+      "bytes": 55767,
+      "sha256": "787576df6401700996349cff7355d2e10e1e5a64194ad2c3083daa63f5fb4562"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/13.jpg",
+      "bytes": 56020,
+      "sha256": "4834afb0c4f9f6dfaa0c2c0ff71f48563836649d2c0811192b469741a8c34253"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/14.jpg",
+      "bytes": 55478,
+      "sha256": "79c57c42365b0eb45849298a200c9dd97e3648a5013c99c255b2f07e2667038b"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/15.jpg",
+      "bytes": 53727,
+      "sha256": "ae99ee228308abf6ede2c195e561cd67282ef4f4ad869a5d3f5c9a6f4130dbaf"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/2.jpg",
+      "bytes": 51488,
+      "sha256": "35e70f2d0d9b8bcb6d1213a5672ef1389c00371e34e852e7986f11ba61e8aa2b"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/3.jpg",
+      "bytes": 50407,
+      "sha256": "beb4ee796f98a844502f58420d182a48abe8adebbe082264bb2cfea3e266bee4"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/4.jpg",
+      "bytes": 51377,
+      "sha256": "a14380647eaf5f2a9334a0cc484febea7b46d47174bcf0fb6a291dc2cc1e0ade"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/5.jpg",
+      "bytes": 51617,
+      "sha256": "059a72fd3004de6c1aedd517c25a32eef016024e12a72d79b56f161288b79365"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/6.jpg",
+      "bytes": 51981,
+      "sha256": "9631cac1a0531a65dc97e8ac8f85d7485e40aee4af7208b6578fec30219633de"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/7.jpg",
+      "bytes": 52364,
+      "sha256": "acc039141b16fa22287c0d360a25f3974fbfe06d68d38c107079609603370863"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/8.jpg",
+      "bytes": 51048,
+      "sha256": "e2af4d6442aa9f10864fc7d0c350ed6eede8f03afd30b01939e2d0bddaf39131"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/02-cat-plays-phone-seek/9.jpg",
+      "bytes": 52161,
+      "sha256": "5f84b3333b4c6ab3e11adf881c5c0054a6beb3044bbc08e6f29c6c2fe2554934"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/0.jpg",
+      "bytes": 53417,
+      "sha256": "2fe66928a3e100fbb9e58b40b1591140195c2eeacd4ad57089a9643d0aa919cc"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/1.jpg",
+      "bytes": 51748,
+      "sha256": "13c133b86e894f0b571ef09e972cb06c84a2ac64fb2a4796f88a9948f62e4ffb"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/10.jpg",
+      "bytes": 52198,
+      "sha256": "990c1af2b1392cdc409c4486a2db9627dc96d685ede7376c11c8e327a80beafb"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/11.jpg",
+      "bytes": 52182,
+      "sha256": "8f3b70bd0ad9bf0eea544bc6df60af1739fa70238da9e0830de4da79d3695890"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/12.jpg",
+      "bytes": 55767,
+      "sha256": "787576df6401700996349cff7355d2e10e1e5a64194ad2c3083daa63f5fb4562"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/13.jpg",
+      "bytes": 55704,
+      "sha256": "f44df0e79e9c84744e03054567869389a62fb5dc8b45596f6c151d012c9aadda"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/14.jpg",
+      "bytes": 54856,
+      "sha256": "04cdf64ce5172ccce648330846395999e13fb605c74672492cb5324bdb0be851"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/15.jpg",
+      "bytes": 51837,
+      "sha256": "cd7d00c0d5e26d26088deb8704a312e63828020964cac96bc13472678b082e7e"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/2.jpg",
+      "bytes": 51529,
+      "sha256": "11cb882895fe9f0c54109940f6b4b9b132caa4def0016a4c2881e17ead52aca9"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/3.jpg",
+      "bytes": 51071,
+      "sha256": "f898dbf6c92cd516dcb0f3e90a72ea329456b0c8bec2dab74eaa3a3f6e11cdd5"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/4.jpg",
+      "bytes": 51377,
+      "sha256": "a14380647eaf5f2a9334a0cc484febea7b46d47174bcf0fb6a291dc2cc1e0ade"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/5.jpg",
+      "bytes": 51617,
+      "sha256": "059a72fd3004de6c1aedd517c25a32eef016024e12a72d79b56f161288b79365"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/6.jpg",
+      "bytes": 53395,
+      "sha256": "e4532d372473e4913e3ec1f84f539ef9fe94a176fca32221b012220fa183a933"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/7.jpg",
+      "bytes": 52275,
+      "sha256": "2da15ca0b90bf6640701f678af3fe3f7825c2c5c14b16f8c7acaaca36d02f527"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/8.jpg",
+      "bytes": 51048,
+      "sha256": "e2af4d6442aa9f10864fc7d0c350ed6eede8f03afd30b01939e2d0bddaf39131"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/03-cat-plays-phone-sequential/9.jpg",
+      "bytes": 52753,
+      "sha256": "a9f9d223a0051bf67ed83b91064709cdb037c9ca6a8c5b16b318ea65befa9470"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/0.jpg",
+      "bytes": 22884,
+      "sha256": "71262df560b28d95cb03026be9a3277a632604b42f5eaf0279307fe6c2d84185"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/1.jpg",
+      "bytes": 23159,
+      "sha256": "312c0e82a9d33ff5c33f4ed89f3ceaa16156f8239185641b2f2e780e8a0a0359"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/10.jpg",
+      "bytes": 20838,
+      "sha256": "7ef1f35cd7e34dde959e30828c43355b75657ce478a8c86578f507d74c817195"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/11.jpg",
+      "bytes": 20884,
+      "sha256": "4286b6f85ce28ed60fd7798f0603d905ed5be1832175094c9e2fd2326ea0eeef"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/12.jpg",
+      "bytes": 20746,
+      "sha256": "1ba814dc780987fb11f71812d29202d2f67e73a14248093221d17e5ccf976fee"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/13.jpg",
+      "bytes": 21092,
+      "sha256": "c1d00e2fdfef1be1c6a55a1b2d1b6b9fc74092766533acca92038e3751a0937b"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/14.jpg",
+      "bytes": 21481,
+      "sha256": "00f49fc19130bec6cd202de1c17550ff0660e2cff2a71b74bfef34495aab365b"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/15.jpg",
+      "bytes": 21115,
+      "sha256": "8ccc4d2c4aed5468ea3cdbe334c68b84482c70628642294edbedf6846a72d382"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/2.jpg",
+      "bytes": 23345,
+      "sha256": "dcd19a1ac9d98080785a9fe8899d95f15b96dd66518d570674fa0a1cb82a6818"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/3.jpg",
+      "bytes": 23674,
+      "sha256": "c86b77a38c711df22bf9145a20fa97c5c485bf7dd230bd1f8b4e9cf34b570e41"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/4.jpg",
+      "bytes": 23075,
+      "sha256": "489ab460c49b2a4f46e7e529f51da4d12badae770ddd94ed3869300ea7ec2e43"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/5.jpg",
+      "bytes": 22733,
+      "sha256": "168e199570239cc62558ae1fbe2ae458d5586bba9a20f71e138d6fcda2db9202"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/6.jpg",
+      "bytes": 22481,
+      "sha256": "48be2d421bdb590e2078012b51db0a4a99545469624d0efe44a9323e120b0157"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/7.jpg",
+      "bytes": 22086,
+      "sha256": "3abd61860196689ab33eeceaa27904e478d5a8eeefaae29e7131013f03f2a85c"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/8.jpg",
+      "bytes": 21340,
+      "sha256": "c52ae4a62f8b16fbb462b00abf60c2c2a20f5ea37313c37cf782aa303f72f85f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/04-fremantle-orbit-phone-sequential/9.jpg",
+      "bytes": 21223,
+      "sha256": "8191f25071771d5f156f36e403decb0ae5bf11e341d218a79bdbb1dc08bba03f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/0.jpg",
+      "bytes": 23597,
+      "sha256": "90e58e782fab8030254102cd8dff5e70dc793df55f8aed9c8ff833a5f86c4e98"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/1.jpg",
+      "bytes": 23908,
+      "sha256": "939175436563997b0851f7c514f1bf57f5c4eff4be7b825cb73d07b2549f58d7"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/10.jpg",
+      "bytes": 21038,
+      "sha256": "9b00154c935e641e1f2a3238cea3136497c2a1d8ea3f32be10f188d85ea96610"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/11.jpg",
+      "bytes": 21208,
+      "sha256": "1b5b72418387584dce2ce9ea34ee3c2962fb31dc45fa0ade437cc5c4c24e9e88"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/12.jpg",
+      "bytes": 21064,
+      "sha256": "22ceb1aed870bfe43fff82d81bb16fcd9aed472d10953fe0ad672f229e244f9d"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/13.jpg",
+      "bytes": 21734,
+      "sha256": "289ee42db54d030858efee9d6f5fb02ea7b9ff9e6376ee9a86cf5644ec803d7b"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/14.jpg",
+      "bytes": 22051,
+      "sha256": "229b6ea26ea81742935b9af53acbb5dbf530301b0e925877a579eb6151a105ed"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/15.jpg",
+      "bytes": 21839,
+      "sha256": "f5ccad5ec3b29efd37eff4d9f96c65950d83c2ebcf28566c0cd7f8f12c4abeea"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/2.jpg",
+      "bytes": 23775,
+      "sha256": "e4cff3e146bcb2a214a9d1fc4101773f382f25dfce6bd7c3feb43d39b1a27bfe"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/3.jpg",
+      "bytes": 22744,
+      "sha256": "bb4e3f59efaf18a49362704a7a4c729409cb517a253d646dcaf5ea02c12614eb"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/4.jpg",
+      "bytes": 22498,
+      "sha256": "fcc74ca150bb182770ccbf389d8c307c3e4636c58b014cf8900487680e20a89c"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/5.jpg",
+      "bytes": 22311,
+      "sha256": "f22639a38cc347646ea609a6ff49d1ded6e38b1cc63ddcd444db2346acf1c6ca"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/6.jpg",
+      "bytes": 22089,
+      "sha256": "18dbd53f6f9e1e450a96be189b83407d0a525005cc99fe9406294d8703d83993"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/7.jpg",
+      "bytes": 21644,
+      "sha256": "b6896cc47447f2c93049e8f94bd59fa97282aee3a716c8734cf737ef6bfa44f9"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/8.jpg",
+      "bytes": 20859,
+      "sha256": "69fa8152cc42873a13cceb73e5e77aa6302897cc9d51c67e62c1229afd5d085f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/05-fremantle-orbit-phone-seek/9.jpg",
+      "bytes": 21118,
+      "sha256": "3db23c752fb649c68ea94c422dd73ab241e03b9f3647813efcb8284814537088"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/0.jpg",
+      "bytes": 73076,
+      "sha256": "89e154967c8b12cbba2a4be2ce078b2ef51d0adef8397a9b04dd370064195ee6"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/1.jpg",
+      "bytes": 72662,
+      "sha256": "defa9629e360d9995671aa0958a53445dfc674b2e30411d0039341d50aa7d630"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/10.jpg",
+      "bytes": 72314,
+      "sha256": "bd921b24d8fc7dff190c0f356a20e46db8b48e527883a0a7167f5db793b12122"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/11.jpg",
+      "bytes": 73317,
+      "sha256": "184cb148b19a7adea423f7f73e2380fadabaccf564ae3a726bc3eacd252a2ea8"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/12.jpg",
+      "bytes": 72120,
+      "sha256": "499e8d9020cc80725f4bc3488d8e19bcb1f5de83d3b4398d6408cc6d12b11275"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/13.jpg",
+      "bytes": 72418,
+      "sha256": "f129b1705867ad1ecd16ca15baee6032598f6ee4962e2b1128039dcd6c046089"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/14.jpg",
+      "bytes": 71241,
+      "sha256": "d0978741cb39f222077cd29c121e0f1fb00e967658f9391e8f6a7e3392d99afd"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/15.jpg",
+      "bytes": 68681,
+      "sha256": "445b7038f79b9ea907021530a30c045f381b29ff79dce59678404a05869702f6"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/16.jpg",
+      "bytes": 65040,
+      "sha256": "10025458564fda5333b21389a452a04096c818c2b7462d18baa2fe20b95f9a2d"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/17.jpg",
+      "bytes": 61899,
+      "sha256": "a5133b531dad61c226cf2a772b0119825cf23a2675d00c7763d868de271ada32"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/18.jpg",
+      "bytes": 61128,
+      "sha256": "f410ea7cceadec82f8e1440bee00bd1a16b8ea8062dd7a3f3ad60f0c95914a13"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/19.jpg",
+      "bytes": 61383,
+      "sha256": "e009f8320eb06147b7ffdc83cd18c3670fe9e03cc7a709b58f6fcbb81aac6ff6"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/2.jpg",
+      "bytes": 74909,
+      "sha256": "a17f4424c5d4bf4167ffd5c6e2f4c6c67358a01fcb9339a966f11ec75fd50e07"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/20.jpg",
+      "bytes": 59478,
+      "sha256": "702233655a4629323ece2c42b0b06b918f924acac50bf93d7642e8ce36d83df3"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/21.jpg",
+      "bytes": 57001,
+      "sha256": "16430a330cef72791ed9ef6eb5d086da9fd6a6d4fecfcf5ec65c9f5d25417916"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/22.jpg",
+      "bytes": 56599,
+      "sha256": "9626cd0522f6ee766297f6137c432d59d558e6427661d75a4172b8c92f0deedb"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/23.jpg",
+      "bytes": 55334,
+      "sha256": "9060957fd770bcf60b780972e24ef36275fa002424dbdcb058b73af4eea9974f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/24.jpg",
+      "bytes": 55549,
+      "sha256": "21054dbcd9865f8c5922b412e23d9d36638509db103ed5f2b39082c9e96d77ce"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/25.jpg",
+      "bytes": 55293,
+      "sha256": "c04f1aa7d6c5c87adbbaec3d48329bb5896866a968d65d2b0d3bc1ec189eddca"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/26.jpg",
+      "bytes": 53970,
+      "sha256": "31260567f4a08b5f6ce58dcf599d9a03a7806b5701937e9a2197ba758ed7662b"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/27.jpg",
+      "bytes": 53685,
+      "sha256": "ce954af7e85611bfc87dc74d01dedc181b7c830191791b6319d2081003dc3e2f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/28.jpg",
+      "bytes": 55487,
+      "sha256": "c3b653373d5011ed9d6264090558b75250ff86e10e23195f69d7ad93b95be927"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/29.jpg",
+      "bytes": 56208,
+      "sha256": "10afc3639c745b7e6462d44e3e61013e0e76a758791f03356fa2c4a264ff7656"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/3.jpg",
+      "bytes": 73943,
+      "sha256": "af6e41d807534b51d18ae9375ada6fa02a36918972d310c8be34189d91a40d44"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/4.jpg",
+      "bytes": 74638,
+      "sha256": "c52eb22ed5ecc01f73f4007e369ab62000e085b2e5deae0cb1fae52ce5ebe920"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/5.jpg",
+      "bytes": 73350,
+      "sha256": "8ca28e94702ff4de67f5a891f1f3b5bb2706590d8980f6350d3afd48575bb950"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/6.jpg",
+      "bytes": 70951,
+      "sha256": "8929c4eb3f923c348630f808c21ae1c6d8e358023c77308f0cf2d60b91b1cccc"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/7.jpg",
+      "bytes": 73985,
+      "sha256": "2103a991fed6b73de9578b8fc60a59fa10195305fdbb3f3db2ba44d44af4397e"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/8.jpg",
+      "bytes": 74155,
+      "sha256": "e9fc6382ecd944149ef4e0a9f29597c5f164b365716d0dba09d5f66643c36c1f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/06-chameleon-flowers-desktop-seek/9.jpg",
+      "bytes": 73879,
+      "sha256": "0a66227e1de87b9b69ac42a00ee0b95fc0a0024a4de3e78d66abd2f807ec468d"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/0.jpg",
+      "bytes": 53417,
+      "sha256": "2fe66928a3e100fbb9e58b40b1591140195c2eeacd4ad57089a9643d0aa919cc"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/1.jpg",
+      "bytes": 51687,
+      "sha256": "7ff6b59a84101f21d69f6e9aadccd8bd92ff7a18a2cadc7210cd9cbd6917e241"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/10.jpg",
+      "bytes": 52689,
+      "sha256": "c4ba8eaa05231bb151d4b718673103c0f471d5fd71b4ba82233dcac98e0df19a"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/11.jpg",
+      "bytes": 52275,
+      "sha256": "2da15ca0b90bf6640701f678af3fe3f7825c2c5c14b16f8c7acaaca36d02f527"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/12.jpg",
+      "bytes": 51290,
+      "sha256": "3e55c3343c39dd171a9042f17138fff09f423b2aec8bab4085c502b8c3b8c676"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/13.jpg",
+      "bytes": 51700,
+      "sha256": "2fe7ff25775e8a000286163f3fa82f594507a01f3e8fa085ad99966dbef32e41"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/14.jpg",
+      "bytes": 51932,
+      "sha256": "6c6da11d69a520f4c9b65bfc597eec013e21a6e007bb89ff65f9cd8f9e33a01a"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/15.jpg",
+      "bytes": 52059,
+      "sha256": "1b2bed5c1e8bc3962ba11136fb0f71bd2736d3760d515fdae0fabe1d9beab357"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/16.jpg",
+      "bytes": 52540,
+      "sha256": "1ee490eb8366f6d4dd279c39c639f9f13d3e473962740feb56e0f3781ec474c2"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/17.jpg",
+      "bytes": 52182,
+      "sha256": "8f3b70bd0ad9bf0eea544bc6df60af1739fa70238da9e0830de4da79d3695890"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/18.jpg",
+      "bytes": 55420,
+      "sha256": "0631211b358d1d6b76300227bb8cd49e6a4009c01f407ada0ae86a60afb4a560"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/19.jpg",
+      "bytes": 55781,
+      "sha256": "911005b22a158a701fae6e0017257f635fe2c747ef747abaa3831a3bdd3f7bb5"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/2.jpg",
+      "bytes": 51208,
+      "sha256": "fc4d0564a8ff6f978e4ff94021b6be7b0070835d7e1c9ac708cdf5ab89136c39"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/20.jpg",
+      "bytes": 55704,
+      "sha256": "f44df0e79e9c84744e03054567869389a62fb5dc8b45596f6c151d012c9aadda"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/21.jpg",
+      "bytes": 55478,
+      "sha256": "79c57c42365b0eb45849298a200c9dd97e3648a5013c99c255b2f07e2667038b"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/22.jpg",
+      "bytes": 54739,
+      "sha256": "ed04f257635077a3f5cad3ba515b72199316e4b8be8629a05e874ed24f90f9e0"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/23.jpg",
+      "bytes": 51837,
+      "sha256": "cd7d00c0d5e26d26088deb8704a312e63828020964cac96bc13472678b082e7e"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/3.jpg",
+      "bytes": 54040,
+      "sha256": "2705676c0a5e356218729fee905195cd03f0a5049256db57a74507c8d86a4518"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/4.jpg",
+      "bytes": 50800,
+      "sha256": "1afb611d7c004e6d915ca880c0e3ecc7f4f493d0642e174d587b4aa743bc4535"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/5.jpg",
+      "bytes": 51071,
+      "sha256": "f898dbf6c92cd516dcb0f3e90a72ea329456b0c8bec2dab74eaa3a3f6e11cdd5"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/6.jpg",
+      "bytes": 51377,
+      "sha256": "a14380647eaf5f2a9334a0cc484febea7b46d47174bcf0fb6a291dc2cc1e0ade"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/7.jpg",
+      "bytes": 54766,
+      "sha256": "56e99ba7b74f0488a10982fa29d8c4acb9a49b3d61b97dab90ec0930ff12cc56"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/8.jpg",
+      "bytes": 52506,
+      "sha256": "fbafe07df69e089b87b1c28b4eb9e986779569c55e315da931976ba706dc659d"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/09-cat-plays-desktop-seek/9.jpg",
+      "bytes": 55299,
+      "sha256": "d185f5af9574fb132032cae2edefba8b8cbdef228329e7a4ebe85c8e620490e4"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/0.jpg",
+      "bytes": 58466,
+      "sha256": "fb9204e2c42ac2cbfdc21c7e047d9433e352a26896f44e9344a10c03bf6844f6"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/1.jpg",
+      "bytes": 57662,
+      "sha256": "d5335b484da598d933ac654e6ffdfaed3b90468f034462ed76275ed0970fe40e"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/10.jpg",
+      "bytes": 56726,
+      "sha256": "d1eccb53df0dde48c3fdb02025fbc73e4be37177d9260193cff3aa5fe2b1672e"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/11.jpg",
+      "bytes": 56003,
+      "sha256": "f6f3b6e84c56d4e8f8d606222dcd228a99a9a92805ab2097f30f90f6c9a99221"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/12.jpg",
+      "bytes": 54963,
+      "sha256": "70b101733d741fb0a733d9eeb40c6ede52dc04288861cee324cf8567e8784594"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/13.jpg",
+      "bytes": 55072,
+      "sha256": "59431a0b14ff52690f443e0b4e9ee315cef57acdc68553e3f9592e6e2aa29de5"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/14.jpg",
+      "bytes": 54887,
+      "sha256": "469e59cde76e9670d2d438fd18aef8d41280a50338eb129c805655d29efce301"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/15.jpg",
+      "bytes": 54857,
+      "sha256": "bdc49fe9c527c4e3c295bf5fe564e2f4b09128c35de05dcb403b5eda8d2843e9"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/16.jpg",
+      "bytes": 53764,
+      "sha256": "0991fbce028de1bd713594bfd3d54b36809a2da6d8a532e710a7a5653775ca69"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/17.jpg",
+      "bytes": 51994,
+      "sha256": "a67535e7b7a8878536b8e818b93522dc35e3d1c5ad5157675450c3115179ce61"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/18.jpg",
+      "bytes": 51274,
+      "sha256": "3c38c0c8959d910c273a08554f73018892c62ce77b1833d7a4ac7a932072fedc"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/19.jpg",
+      "bytes": 51397,
+      "sha256": "47e185c1cc7602186d4b110402a31db2830db2bd57cc411a97e65248d7eeb832"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/2.jpg",
+      "bytes": 58095,
+      "sha256": "27c6249a2624700b87007651a3a5059c5a59beb48308188a8fc2103c020d1689"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/20.jpg",
+      "bytes": 51462,
+      "sha256": "bf1ccd110882eff4c06408019525b0363014aaaed79f1c0f5e8f782581d45637"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/21.jpg",
+      "bytes": 50105,
+      "sha256": "64afd128a4de09ebeea788e90da78e4f3d09f538931893b6f9e463929be7e266"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/22.jpg",
+      "bytes": 51417,
+      "sha256": "4fa2d444f2da01f7222b32f2ed0fe57cfca8b614dd206be455033db30a9b75ec"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/23.jpg",
+      "bytes": 51597,
+      "sha256": "ca0f973ebfd8f954521cd9d9b17c728bef36a1de8089bee3a859e5799bebfa3d"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/24.jpg",
+      "bytes": 50893,
+      "sha256": "14e936e00689ca8215cd9b7020f7bb355c0b7b5d40e8e4ec73749b45ef400434"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/25.jpg",
+      "bytes": 50895,
+      "sha256": "23d9fa1e2e379600acac65802517e24a09d71ffcc041c480301a34c60a62c01c"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/26.jpg",
+      "bytes": 51121,
+      "sha256": "18497d4c1f0312d41fdb81e1fee7d894f0ec046c3db21cbafd3105cd5c82e907"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/27.jpg",
+      "bytes": 51813,
+      "sha256": "23e8577913bd686463e061a4f6e5bdb577ee826869ae33e473d8f52b1b6165f0"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/28.jpg",
+      "bytes": 50750,
+      "sha256": "a628b4140398b1d800f7b1d2216d157b7f7e00f9362501cebd07345a4389981f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/29.jpg",
+      "bytes": 50881,
+      "sha256": "059c51561ac0f5e581704444f3677f5fc719462d0cc617704ba0e5a27294a3c2"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/3.jpg",
+      "bytes": 58112,
+      "sha256": "f6ac5037d31061ce96f08e5263f4fdb0c8328fd11a7d81085dcf6da010904408"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/30.jpg",
+      "bytes": 51338,
+      "sha256": "9eb02617e0db09c7a685635e37e8629b90cd0a3137eff6fad9c5be7769dc204f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/31.jpg",
+      "bytes": 51907,
+      "sha256": "6fe2c594628b5deed91b8e9511318d16c2478f7948dcecd845131f7f510443bd"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/32.jpg",
+      "bytes": 51399,
+      "sha256": "c63400cba809aa2e0a3f6894c571eb55260c1761d71797e01d7f281021d23b7f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/33.jpg",
+      "bytes": 52085,
+      "sha256": "4d818f17a3fd84bbf25dd02eff651b039b29a7165147ffd1f0d7ae6504618bd1"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/34.jpg",
+      "bytes": 52217,
+      "sha256": "f0d1008e2054e1c4d99a5d00a670bbc887dd4fca54bffd10db8bf17f3619735a"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/35.jpg",
+      "bytes": 53156,
+      "sha256": "5b8a5969e12338d4659570d53c24419a6dae5ca21fa8de98656d76b3c8a996d0"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/4.jpg",
+      "bytes": 58280,
+      "sha256": "a6af44545c6481e8adfa668cc341b54b53ac7443eadfe8ef4e5ce82bdd04d91d"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/5.jpg",
+      "bytes": 56910,
+      "sha256": "44a0ab4b97606f136c2172f096dd05341a5070c9fca1ca3df8e4dc0bb2536df3"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/6.jpg",
+      "bytes": 57964,
+      "sha256": "78c419fefc463fcaf155f49a940c0b7ec229ce19fbc60d04eb9b10495e2b489d"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/7.jpg",
+      "bytes": 58073,
+      "sha256": "bc25b47fa5eec2c57ecb7e905294f4e859018a75b70047e4c50bc8d241390344"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/8.jpg",
+      "bytes": 57147,
+      "sha256": "fb56c577776e072efc8531c94c9e3cfafad8e690d9879c26f04a27fd124a9f5e"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/10-fremantle-orbit-desktop-seek/9.jpg",
+      "bytes": 56296,
+      "sha256": "10950009c287b4bd53868a52505bf9a12c25a84a7e9f9b7a655e08838a363c9b"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/LICENSE",
+      "bytes": 1208,
+      "sha256": "faf5e0356d9ff00d35ca2e2ea28d4edfa8eb0be49a9abf720a36cabff8a932ce"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/README.md",
+      "bytes": 10054,
+      "sha256": "37735622d8446d406d2575828bc06076f2bb9488a96cf2d34266459b5caa05f8"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/audit-ceil.py",
+      "bytes": 2104,
+      "sha256": "6d45ea94e995728d224f7a43e31f32346f649505069b4523cf486c1f7e0cbcc6"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/cat-plays-ffprobe.json",
+      "bytes": 14506,
+      "sha256": "71ed2f59fee42811a9b9f6ccc68ea57d34effd0e763418423c89b0e50a3a02f2"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/ceil-analysis.json",
+      "bytes": 99454,
+      "sha256": "c19ee4295062cec3fb5bd87eeea4590140c61470ac70e54585fe806c2ad7246d"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/chameleon-flowers-ffprobe.json",
+      "bytes": 18058,
+      "sha256": "de7a3ef3372c3a939001ff6551c75b44a121fafacd95be4c83ce1d0aeb9d87c8"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/client.mjs",
+      "bytes": 4035,
+      "sha256": "b678b6a5c8c941bed014c5078f2c7e395261a7c985d0273ee986954dd922a383"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/cpu-tests.log",
+      "bytes": 624,
+      "sha256": "21e18d439dbdf34c0aeb69ddfa1056eb6ce8415d2d14195ba895b596aa1a6039"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/freeze.json",
+      "bytes": 33748,
+      "sha256": "6489916bc4f4da3b6c30652dc7927401543b9a9c249a83be7a174193e850d225"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/fremantle-orbit-ffprobe.json",
+      "bytes": 21658,
+      "sha256": "96012f5965f561129f0f0568e54c4960a7d0a68287edc9505a71c4dcc0d35b89"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/input-bindings.json",
+      "bytes": 1866,
+      "sha256": "c177673931b7d864f379d46750a39989529f36eb156b3f0e26233a4399e97648"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/probe.log",
+      "bytes": 5624,
+      "sha256": "535f7489abfb52959b2c80c2c2cc2e947d15a7c59545b433391d1f0d89eaa028"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/probe.mjs",
+      "bytes": 5781,
+      "sha256": "e32a1ee07b442b8768be34031712966cd66a13259a5473d9bdc841486d13f652"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/results.json",
+      "bytes": 325646,
+      "sha256": "acc1507ab70e32d4389b7f9c90ad7bdba5446371e05a7e991b5a8eae6e77bc83"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/sequential.mjs",
+      "bytes": 4111,
+      "sha256": "18466772c4370d0ae72b805036b6a294f07efb6d64b5d1848994a678b6b0170b"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/source-credits.json",
+      "bytes": 6437,
+      "sha256": "2505e02f4ec7ee37bf42974fab641aaabbaa7760c5db9cbf51d2c1e82ca182a8"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/source-pixels.mjs",
+      "bytes": 6466,
+      "sha256": "584fc92a8c4144ede70fee60d80ea9e5837f60a2b85619cb9f98c363640e8a2f"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/src/extract.js",
+      "bytes": 10798,
+      "sha256": "0163b878f835d746d3827eebb3d0f485b63628d2bdc18ed2e3c560a4b43933de"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/src/frames.js",
+      "bytes": 4573,
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/summarize.mjs",
+      "bytes": 4928,
+      "sha256": "6104f775da97415be4ed40643c2bdd3267d7492ef64bc780ae4f2886d1941178"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/summary.json",
+      "bytes": 9345,
+      "sha256": "24dff4a1188909c470355884bdc0f525211b0cf61e168a4a683a97b6d24d6771"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/summary.md",
+      "bytes": 1666,
+      "sha256": "026cb853f4a3d5542cd3e44fb36111800d9971a0d9fbd81061f55018c674ef8e"
+    },
+    {
+      "file": "html-playback-extraction-research-r1/test.mjs",
+      "bytes": 3622,
+      "sha256": "9aab0660a3b01a2a85fdd769390b2b0f3432b772c9802e470d7f45287706595f"
+    },
+    {
+      "file": "mp4-browser-probe-r1/buddha.mp4.v4.json",
+      "bytes": 10169,
+      "sha256": "b8f42b7ac9a7db394bd6f7300ea014b21f9bc41b4de8ad63970ab34a25179f1e"
+    },
+    {
+      "file": "mp4-browser-probe-r1/capability.json",
+      "bytes": 562,
+      "sha256": "52e1c5852f17a83a2e79294537140aa152f1a5a3fcee7c0b265961b3b1ab3008"
+    },
+    {
+      "file": "mp4-browser-probe-r1/capability.mjs",
+      "bytes": 1067,
+      "sha256": "02b4a3ebb5ab5b11c3fa50715fbe5e56713b3cfa54989be9f981116b6a93987b"
+    },
+    {
+      "file": "mp4-browser-probe-r1/cat-plays.mp4.json",
+      "bytes": 9272,
+      "sha256": "156ad21c26e751258efa4a14252b4509cc597385bb148d8873c9caa4444140a8"
+    },
+    {
+      "file": "mp4-browser-probe-r1/cat-plays.mp4.v4.json",
+      "bytes": 10158,
+      "sha256": "7a19d8e3ba5e0b67aaa5b50530ed953c5b496ffdf194971a59ca3785c5595894"
+    },
+    {
+      "file": "mp4-browser-probe-r1/cat-track.mp4.v4.json",
+      "bytes": 10160,
+      "sha256": "6b7588fe08244903fdab4a5dc6dd59c1c3b0f8d2e94b6faed8bd465348dd17d6"
+    },
+    {
+      "file": "mp4-browser-probe-r1/chameleon-flowers.mp4.v4.json",
+      "bytes": 11184,
+      "sha256": "c44c41d0e752942c11ee7fa220632116a3c1deaf4ccd3fe0ea034de942b9c483"
+    },
+    {
+      "file": "mp4-browser-probe-r1/colors-v2.json",
+      "bytes": 110735,
+      "sha256": "0120744e5ae0eb5485257c57121f965e3d7111905b3dee26a67aad48158c9713"
+    },
+    {
+      "file": "mp4-browser-probe-r1/colors-v2.mjs",
+      "bytes": 1421,
+      "sha256": "5860c47aad1901f345774f6210e7090ab5b0904129ba6cd6b89ecf8f70f61c16"
+    },
+    {
+      "file": "mp4-browser-probe-r1/colors-v3.json",
+      "bytes": 47808,
+      "sha256": "b9005531716f61d665538415d9eb3d5815d82147176dd240fb3e77705a653e44"
+    },
+    {
+      "file": "mp4-browser-probe-r1/colors-v3.mjs",
+      "bytes": 1726,
+      "sha256": "0bc0a25977df66ab6a8e00f5598e49e9c9761da2daaaefad1fbaab7f2f7ca954"
+    },
+    {
+      "file": "mp4-browser-probe-r1/decode-v1.mjs",
+      "bytes": 5303,
+      "sha256": "27f4d20845f1af1acc589bc02b5c8303b3c9c1f8077fe7b71fb9fda387e32506"
+    },
+    {
+      "file": "mp4-browser-probe-r1/decode-v2.mjs",
+      "bytes": 5333,
+      "sha256": "c8b79ac18ace83598a4eb84c7da3dd364f880b2c4be960fb4e996f73b217d1ab"
+    },
+    {
+      "file": "mp4-browser-probe-r1/decode-v4.mjs",
+      "bytes": 5650,
+      "sha256": "e480cf83165c905c94b208fb552b2643c836f6b859af08a29c77f71954c0c343"
+    },
+    {
+      "file": "mp4-browser-probe-r1/decode.mjs",
+      "bytes": 5333,
+      "sha256": "c8b79ac18ace83598a4eb84c7da3dd364f880b2c4be960fb4e996f73b217d1ab"
+    },
+    {
+      "file": "mp4-browser-probe-r1/dianthus.mp4.v4.error.json",
+      "bytes": 576,
+      "sha256": "3b38b06f39e73660c113b9ead3289dc9fb1c0d064c0dc736646871f1421ba454"
+    },
+    {
+      "file": "mp4-browser-probe-r1/fjoloy.mp4.v4.json",
+      "bytes": 12208,
+      "sha256": "47af94e862ce422005bf5745e9dd872ea36edf1256d4718f144c45d2fbed40e9"
+    },
+    {
+      "file": "mp4-browser-probe-r1/fremantle-orbit.mp4.v4.json",
+      "bytes": 12138,
+      "sha256": "2fd3f125d3a3855135fa45ed070f6b8f73403a2bff8b41b6eaa9cbcdb8792eb0"
+    },
+    {
+      "file": "mp4-browser-probe-r1/fresnel-lens.mp4.json",
+      "bytes": 10289,
+      "sha256": "94dd82e61a7f3b8b303e270d0c2dea0cfaafa20a0b8840ee963fc45726134f91"
+    },
+    {
+      "file": "mp4-browser-probe-r1/fresnel-lens.mp4.v4.json",
+      "bytes": 11175,
+      "sha256": "242f2b2033ea3536ba34ed6d2100e935362e8e21c032481fe3b46e85bfc005e9"
+    },
+    {
+      "file": "mp4-browser-probe-r1/horse-statue.mp4.v4.error.json",
+      "bytes": 576,
+      "sha256": "bad2d34ddcafc0afb7d9b32b203b314d437ee282725d5c03b52daabf19b76277"
+    },
+    {
+      "file": "mp4-browser-probe-r1/ihasalu-orbit.mp4.v4.json",
+      "bytes": 12208,
+      "sha256": "1a320a4f6fef8f72c6c48e99413342656f7d9237c2139f944b9883fc239c3ff9"
+    },
+    {
+      "file": "mp4-browser-probe-r1/kakerdi-bog.mp4.v4.json",
+      "bytes": 12218,
+      "sha256": "c8186eba9d63982e2d8d5a3e8dcfdba55489c06694310041deae8c1f2f209ca1"
+    },
+    {
+      "file": "mp4-browser-probe-r1/oa-street.mp4.v4.json",
+      "bytes": 11176,
+      "sha256": "d0e91285f100b7f11b3f40008cb56306279a285fe7bcc7676912ea7b68b4943b"
+    },
+    {
+      "file": "mp4-browser-probe-r1/palace-statue.mp4.json",
+      "bytes": 7800,
+      "sha256": "173ffce7c8c04f2bb9bf6613f96678aa360c7809826a28ba735f3ea63009aa5a"
+    },
+    {
+      "file": "mp4-browser-probe-r1/palace-statue.mp4.v4.json",
+      "bytes": 8613,
+      "sha256": "d6c78ed3bb61d7a93eef99c101896f55190845e0bf51d195e921d53bb20e906e"
+    },
+    {
+      "file": "mp4-browser-probe-r1/pisac.mp4.json",
+      "bytes": 10282,
+      "sha256": "19f49400930fd24e5244ce3510cfe13730248b2575bf9633db2d55e117123f89"
+    },
+    {
+      "file": "mp4-browser-probe-r1/pisac.mp4.v4.json",
+      "bytes": 11155,
+      "sha256": "3548c0f0d81161d17c4a435d8ee9ca9bbc04e1a4bec85ebaa8e5e2cb6636f8a9"
+    },
+    {
+      "file": "mp4-browser-probe-r1/run-v1.mjs",
+      "bytes": 1377,
+      "sha256": "7a50b49b9975aa2e019c9f75291598d58b8893e9d41a2144ac8e79955703e2fd"
+    },
+    {
+      "file": "mp4-browser-probe-r1/run-v4.mjs",
+      "bytes": 1386,
+      "sha256": "4a5cdc765f7d2d45984b48ac0fe0dc2f53457003c69600e92ee3d5fe89a60af7"
+    },
+    {
+      "file": "mp4-browser-probe-r1/run.mjs",
+      "bytes": 1377,
+      "sha256": "7a50b49b9975aa2e019c9f75291598d58b8893e9d41a2144ac8e79955703e2fd"
+    },
+    {
+      "file": "mp4-browser-probe-r1/saint-denis.mp4.v4.json",
+      "bytes": 11176,
+      "sha256": "0d505456eec8e1c8cf946ef53d0ce52a1e68ed945e10fcc4ba1416fe4954be78"
+    },
+    {
+      "file": "mp4-browser-probe-r1/server-launch.json",
+      "bytes": 220,
+      "sha256": "d971ae847280de809b7df641d6f4acbb950bc593380b7fdb3c5ba6e3b67ce217"
+    },
+    {
+      "file": "mp4-browser-probe-r1/server.log",
+      "bytes": 8664,
+      "sha256": "04c8eddd0023d3225a1c5b536a27bf262f2dc17ca073ebc5687b36cf0b1ef8dd"
+    },
+    {
+      "file": "mp4-browser-probe-r1/sleeping-dog.mp4.v4.json",
+      "bytes": 10175,
+      "sha256": "dec2ca496266d62b35f76254ac443f0a8fc207451421912dc96def3ea5592791"
+    },
+    {
+      "file": "mp4-browser-probe-r1/snaefell.mp4.v4.json",
+      "bytes": 11174,
+      "sha256": "853a303dcfb50bafb091922f3e5c89fbf940de918a6e061560117e880a9f6a1c"
+    },
+    {
+      "file": "mp4-browser-probe-r1/ullard.mp4.v4.json",
+      "bytes": 11171,
+      "sha256": "13563781b97b2e8b01105e3005080e9c7328a74c250e5c9a83470fc99a0d2240"
+    },
+    {
+      "file": "mp4-browser-probe-r1/viljandi-ruins.mp4.v4.json",
+      "bytes": 12220,
+      "sha256": "509ba18b3044e3e990a0bed70e07f3365afb4d99af2425b99b94c421065bbc7a"
+    },
+    {
+      "file": "mp4-decode-research-r1/LICENSE",
+      "bytes": 1225,
+      "sha256": "5fafec288541004082096a6cf313d9882e613f4080fd3ec8e33bf3843922ba9f"
+    },
+    {
+      "file": "mp4-decode-research-r1/README.md",
+      "bytes": 7413,
+      "sha256": "aea7b163bdd1e414daf3fcd5bd6f05b88698deef8d84a55e33575acad3a9d760"
+    },
+    {
+      "file": "mp4-decode-research-r1/compare.mjs",
+      "bytes": 3125,
+      "sha256": "06aeb3c15a37db27dd9f2dbccb7749974b4eb3960ae7cd8453fb2eea310adbfe"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls/bframes-cfr-ffprobe.json",
+      "bytes": 57309,
+      "sha256": "e6c8fb4ff3017e65e97ed198d4e2c7c42cf6b1797076306202a6d70d6887c186"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls/bframes-cfr.mp4",
+      "bytes": 11503,
+      "sha256": "8055ef2b8b0e12ce30fb6a7f46d517e2311d3e550d47bdb3f2cfc11ba4aa32cb"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls/bframes-vfr-signed-ffprobe.json",
+      "bytes": 47800,
+      "sha256": "53cf9aaee580630db02db4e0d67f30a94eb7a98e9b9879d9d9d3b61046d839a3"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls/bframes-vfr-signed.mp4",
+      "bytes": 10100,
+      "sha256": "6557fdd5563f6ab22b2d40bd0e157ca700018914a38d866524055511018efb6a"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls/no-bframes-vfr-ffprobe.json",
+      "bytes": 50168,
+      "sha256": "7c24e1e741fbc44e4f38149011e3c59c9409c8f400d2c18d3ce25c27912d5b40"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls/no-bframes-vfr.mp4",
+      "bytes": 10525,
+      "sha256": "f109778bfd81acdbaae481327913be1a290e0366bb88b714617eb1503e6dc8f8"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls/results.json",
+      "bytes": 14142,
+      "sha256": "95816a25ec9120fa33a27677a64222a92953e8574d86a13f0c1d48beb3127221"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls-initial-r1/bframes-cfr-ffprobe.json",
+      "bytes": 57309,
+      "sha256": "e6c8fb4ff3017e65e97ed198d4e2c7c42cf6b1797076306202a6d70d6887c186"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls-initial-r1/bframes-cfr.mp4",
+      "bytes": 11503,
+      "sha256": "8055ef2b8b0e12ce30fb6a7f46d517e2311d3e550d47bdb3f2cfc11ba4aa32cb"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls-initial-r1/bframes-vfr-signed-ffprobe.json",
+      "bytes": 47800,
+      "sha256": "53cf9aaee580630db02db4e0d67f30a94eb7a98e9b9879d9d9d3b61046d839a3"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls-initial-r1/bframes-vfr-signed.mp4",
+      "bytes": 10100,
+      "sha256": "6557fdd5563f6ab22b2d40bd0e157ca700018914a38d866524055511018efb6a"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls-initial-r1/results.json",
+      "bytes": 9602,
+      "sha256": "dabbc9cfc83f7c6257a322cbed2361d8816e2c8fe3e561f104f8094ab92831c4"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls-initial-r1.log",
+      "bytes": 2531,
+      "sha256": "f64980a562c0ed2c61d62f29b96cf3e40baabe0407fbcb39a2a26002f2ff7dca"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls.log",
+      "bytes": 4074,
+      "sha256": "d9cb7a016bfb6e2561ae6ad45422d9c39e1be617f475607f1b14caacea743c95"
+    },
+    {
+      "file": "mp4-decode-research-r1/controls.mjs",
+      "bytes": 3239,
+      "sha256": "4060f63815375dd0fd630a4025eca065bbdc50c37ac0c28e3c097f023fcc3bd9"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-comparison.json",
+      "bytes": 17032,
+      "sha256": "69bac8cd0bc561e9b68530a0f7c74a6e61280240ecbfbfbb9b8a88d876696772"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-comparison.log",
+      "bytes": 17032,
+      "sha256": "69bac8cd0bc561e9b68530a0f7c74a6e61280240ecbfbfbb9b8a88d876696772"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/buddha-ffprobe.json",
+      "bytes": 10689836,
+      "sha256": "6bc716c2bf3959aaed65c1c746ed3d43d294446254e9a24fde79849473c9364b"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/cat-plays-demux.json",
+      "bytes": 27287,
+      "sha256": "96df18c802e9136aaa0fe93bd737d53f0b01d39989de7647c17e622cabebca9d"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/cat-plays-ffprobe.json",
+      "bytes": 2733587,
+      "sha256": "e248f4300ce90fa05e47f8b7e88d31f98a20150c9d17fa69e8cd76356fc572b8"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/cat-track-ffprobe.json",
+      "bytes": 1667951,
+      "sha256": "41c982225c7c9aa6ac1c9ed87c0bc461bd098257cb01f72ed533b594cfe863da"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/chameleon-flowers-ffprobe.json",
+      "bytes": 3267097,
+      "sha256": "e3382291d4ecb1c78f9299d26d222d579829e1e3b1a3948ae426737ca7982e05"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/dianthus-ffprobe.json",
+      "bytes": 6288336,
+      "sha256": "a04d2e08336d17823f5a2a2dd2452a67a4dad75ab8ab6c0c1354f6129daa0e7c"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/fjoloy-ffprobe.json",
+      "bytes": 10457713,
+      "sha256": "603daab69442357ed62fc29e1b33e151ceb616867bd85f21f3c6102a2694bd7e"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/fremantle-orbit-ffprobe.json",
+      "bytes": 5055474,
+      "sha256": "80d095a0a04d208cefd15dd3d0a490613187a8480b67e06f4ebf5561dec94d55"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/fresnel-lens-demux.json",
+      "bytes": 33978,
+      "sha256": "3cb7925905874a4fe9a58fe67357b14254fc66ef8a71bc28de60eec8642bafc2"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/fresnel-lens-ffprobe.json",
+      "bytes": 2104042,
+      "sha256": "0756ebef0c36bf202aa4c2117bd3cab6d6af97bef0f84b964785a11edee75334"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/horse-statue-ffprobe.json",
+      "bytes": 6748789,
+      "sha256": "a9635b8119ff1f7be309b4f320e8cece9785f5f496438c235dc21392f66d1f2e"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/ihasalu-orbit-ffprobe.json",
+      "bytes": 6430399,
+      "sha256": "cb8da043ecfc69f22ed3c4c5f41cd34d716d3e096641c2769d4fa822db93bdfe"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/kakerdi-bog-ffprobe.json",
+      "bytes": 4758714,
+      "sha256": "94abc4c9c4824af5ea3b8122b066e9e14e9ac58d01df616125207ae13540a4d0"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/oa-street-ffprobe.json",
+      "bytes": 6464345,
+      "sha256": "6904591e4ded8444a6e5ed4603f4e2cc3dbadae3c3764d34c3351f8bf5580256"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/palace-statue-demux.json",
+      "bytes": 17386,
+      "sha256": "2fca242a473e7f5e7b74784484a7e74aaef6cd4b3247858c1e2e183b5a6e05b8"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/palace-statue-ffprobe.json",
+      "bytes": 3070937,
+      "sha256": "b00ef545f6d438d231b926c04b554dd89e3de045082c04a6f6f104dcdc79b118"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/pisac-demux.json",
+      "bytes": 33920,
+      "sha256": "183f76b7cded3bd951f6f34d80c581d9a583801a96f22f936f8284dfc6f767e0"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/pisac-ffprobe.json",
+      "bytes": 1827563,
+      "sha256": "5d965ab2a0e165eee87432c2167bd517c9ef62a0f7fd3695a4fea086dfbd16b2"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/royal-sovereign-ffprobe.json",
+      "bytes": 3611359,
+      "sha256": "16535e3956764db2bb1197c9148bc26ed907760ccf04dd26e721b0bd1211f99d"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/saint-denis-ffprobe.json",
+      "bytes": 9767856,
+      "sha256": "f164b907d438fdf82cfbdf9259830d2b2be441f0cb3418e0c021c17b340f1da7"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/sleeping-dog-ffprobe.json",
+      "bytes": 10697221,
+      "sha256": "847b7d5da210fb8bd861b1945f7e2efd514e93ed34b98884bc445c0b3ed8bc9e"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/snaefell-ffprobe.json",
+      "bytes": 5376294,
+      "sha256": "a2eacf34ee34ca3071452ed0eddd5e0e0a00a8d55d73f0cb2e942f1c691ebaa2"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/ullard-ffprobe.json",
+      "bytes": 9047094,
+      "sha256": "8aab95fc44b87e2f9bb4d5d0453c4ba2197083259ecde9f2252ba205f38a3456"
+    },
+    {
+      "file": "mp4-decode-research-r1/corpus-receipts/viljandi-ruins-ffprobe.json",
+      "bytes": 7412179,
+      "sha256": "a0c4e87089c78c7be69a75c705e995f6c0e766a35e0764fcbfac2829d5d7972e"
+    },
+    {
+      "file": "mp4-decode-research-r1/cpu-tests-before-fixture-offset-fix.log",
+      "bytes": 3353,
+      "sha256": "396ed24ce5340ff545127eae5bf0e386b4480765b7f78216c0a37e603c96dd70"
+    },
+    {
+      "file": "mp4-decode-research-r1/cpu-tests.log",
+      "bytes": 866,
+      "sha256": "281a69c887474d79bcdfcc39960636bb83f40562cf6ed1b534767ef6614770ec"
+    },
+    {
+      "file": "mp4-decode-research-r1/demux.mjs",
+      "bytes": 10573,
+      "sha256": "becb21a5b51def2fd54d2877b0db8a600136c83102d8a468c495d451c8b38e37"
+    },
+    {
+      "file": "mp4-decode-research-r1/freeze.json",
+      "bytes": 14725,
+      "sha256": "aa3188ffc98faac44e6ca57cd8af7a137fb70b6d11f935d930d9b8ae7b4885e0"
+    },
+    {
+      "file": "mp4-decode-research-r1/io.mjs",
+      "bytes": 411,
+      "sha256": "f9cdf3d759f4ec89812750ee1c33353fcaafaf56940394094129a253e38d4c0f"
+    },
+    {
+      "file": "mp4-decode-research-r1/test.mjs",
+      "bytes": 4934,
+      "sha256": "0d886e5158b34e30d89a434e6b876554e55e8a259bb5373668b271c2f846878e"
+    },
+    {
+      "file": "mp4-decode-research-r2/LICENSE",
+      "bytes": 1225,
+      "sha256": "5fafec288541004082096a6cf313d9882e613f4080fd3ec8e33bf3843922ba9f"
+    },
+    {
+      "file": "mp4-decode-research-r2/README.original.md.txt",
+      "bytes": 8183,
+      "sha256": "813cfdc779c93234288623336952c215ca732b0681b1a5919065ac7bfed163a0"
+    },
+    {
+      "file": "mp4-decode-research-r2/compare.mjs",
+      "bytes": 3748,
+      "sha256": "79582872aad837a2101205e289d695ca3d434dba38d19ef1075f0d427bfd0869"
+    },
+    {
+      "file": "mp4-decode-research-r2/controls/bframes-cfr-ffprobe.json",
+      "bytes": 57309,
+      "sha256": "e6c8fb4ff3017e65e97ed198d4e2c7c42cf6b1797076306202a6d70d6887c186"
+    },
+    {
+      "file": "mp4-decode-research-r2/controls/bframes-cfr.mp4",
+      "bytes": 11503,
+      "sha256": "8055ef2b8b0e12ce30fb6a7f46d517e2311d3e550d47bdb3f2cfc11ba4aa32cb"
+    },
+    {
+      "file": "mp4-decode-research-r2/controls/bframes-vfr-signed-ffprobe.json",
+      "bytes": 47800,
+      "sha256": "53cf9aaee580630db02db4e0d67f30a94eb7a98e9b9879d9d9d3b61046d839a3"
+    },
+    {
+      "file": "mp4-decode-research-r2/controls/bframes-vfr-signed.mp4",
+      "bytes": 10100,
+      "sha256": "6557fdd5563f6ab22b2d40bd0e157ca700018914a38d866524055511018efb6a"
+    },
+    {
+      "file": "mp4-decode-research-r2/controls/no-bframes-vfr-ffprobe.json",
+      "bytes": 50168,
+      "sha256": "7c24e1e741fbc44e4f38149011e3c59c9409c8f400d2c18d3ce25c27912d5b40"
+    },
+    {
+      "file": "mp4-decode-research-r2/controls/no-bframes-vfr.mp4",
+      "bytes": 10525,
+      "sha256": "f109778bfd81acdbaae481327913be1a290e0366bb88b714617eb1503e6dc8f8"
+    },
+    {
+      "file": "mp4-decode-research-r2/controls/results.json",
+      "bytes": 14142,
+      "sha256": "c3810b5ac44d718c059e9a02ab022b0f8d41a00098beef4af64b0c1cfbc2e75c"
+    },
+    {
+      "file": "mp4-decode-research-r2/controls.log",
+      "bytes": 4074,
+      "sha256": "cb9b986edbfdaa426eebe5c48026f636d97dc01817cc90a24ecba604831c3a78"
+    },
+    {
+      "file": "mp4-decode-research-r2/controls.mjs",
+      "bytes": 3239,
+      "sha256": "4060f63815375dd0fd630a4025eca065bbdc50c37ac0c28e3c097f023fcc3bd9"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-comparison.json",
+      "bytes": 28353,
+      "sha256": "132db24f3730a1aa83fa6277f56ad3b274e6145be86e78a84619381accfe5f02"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-comparison.log",
+      "bytes": 28353,
+      "sha256": "132db24f3730a1aa83fa6277f56ad3b274e6145be86e78a84619381accfe5f02"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/buddha-demux.json",
+      "bytes": 28077,
+      "sha256": "528784c021582d1a7025bc4294287c7fb09535856332e2059acfdf09020c873d"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/buddha-ffprobe.json",
+      "bytes": 10689836,
+      "sha256": "6bc716c2bf3959aaed65c1c746ed3d43d294446254e9a24fde79849473c9364b"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/cat-plays-demux.json",
+      "bytes": 27702,
+      "sha256": "f46ab0c478458c248c5d869d6ff15a0e819cd99eaaba7c5370021683a5d96298"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/cat-plays-ffprobe.json",
+      "bytes": 2733587,
+      "sha256": "e248f4300ce90fa05e47f8b7e88d31f98a20150c9d17fa69e8cd76356fc572b8"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/cat-track-demux.json",
+      "bytes": 27712,
+      "sha256": "1beec30e82fff3016a25d15c5c64c4fdbb3a48c9cd1aa263df23c257bb253955"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/cat-track-ffprobe.json",
+      "bytes": 1667951,
+      "sha256": "41c982225c7c9aa6ac1c9ed87c0bc461bd098257cb01f72ed533b594cfe863da"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/chameleon-flowers-demux.json",
+      "bytes": 34521,
+      "sha256": "7346164c9ae1f76cbd144b69d7fc8775a5767fa254fdd33cde8cadb2340d3c0d"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/chameleon-flowers-ffprobe.json",
+      "bytes": 3267097,
+      "sha256": "e3382291d4ecb1c78f9299d26d222d579829e1e3b1a3948ae426737ca7982e05"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/dianthus-ffprobe.json",
+      "bytes": 6288336,
+      "sha256": "a04d2e08336d17823f5a2a2dd2452a67a4dad75ab8ab6c0c1354f6129daa0e7c"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/fjoloy-demux.json",
+      "bytes": 41628,
+      "sha256": "0b06aad1292bd2c91caf542b46304643e639f5d5ed091b286dbe3a63566bfc3c"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/fjoloy-ffprobe.json",
+      "bytes": 10457713,
+      "sha256": "603daab69442357ed62fc29e1b33e151ceb616867bd85f21f3c6102a2694bd7e"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/fremantle-orbit-demux.json",
+      "bytes": 41464,
+      "sha256": "480d4c9ef4200973a57249417f461a465ef0973f951118e704798c573202a3ac"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/fremantle-orbit-ffprobe.json",
+      "bytes": 5055474,
+      "sha256": "80d095a0a04d208cefd15dd3d0a490613187a8480b67e06f4ebf5561dec94d55"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/fresnel-lens-demux.json",
+      "bytes": 34393,
+      "sha256": "e3e4afddd4b4ebfafc66606e16b51afba167d83b24da09057193eaefd846cf4c"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/fresnel-lens-ffprobe.json",
+      "bytes": 2104042,
+      "sha256": "0756ebef0c36bf202aa4c2117bd3cab6d6af97bef0f84b964785a11edee75334"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/horse-statue-ffprobe.json",
+      "bytes": 6748789,
+      "sha256": "a9635b8119ff1f7be309b4f320e8cece9785f5f496438c235dc21392f66d1f2e"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/ihasalu-orbit-demux.json",
+      "bytes": 41418,
+      "sha256": "f806f78f02bf5b2887d8bf2736e08fa8fd7ec110832b0b1d59f4a3a3dbaa4ca4"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/ihasalu-orbit-ffprobe.json",
+      "bytes": 6430399,
+      "sha256": "cb8da043ecfc69f22ed3c4c5f41cd34d716d3e096641c2769d4fa822db93bdfe"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/kakerdi-bog-demux.json",
+      "bytes": 41259,
+      "sha256": "eb27f8af1dcc3b50d891f4285f2afd466a3c1b02b4960c8b0bbf4ee63bf79593"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/kakerdi-bog-ffprobe.json",
+      "bytes": 4758714,
+      "sha256": "94abc4c9c4824af5ea3b8122b066e9e14e9ac58d01df616125207ae13540a4d0"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/oa-street-demux.json",
+      "bytes": 34523,
+      "sha256": "985e38a385ceee3c5444924b3a216c4af250fa1ed426572c34d0bed5815dce59"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/oa-street-ffprobe.json",
+      "bytes": 6464345,
+      "sha256": "6904591e4ded8444a6e5ed4603f4e2cc3dbadae3c3764d34c3351f8bf5580256"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/palace-statue-demux.json",
+      "bytes": 17901,
+      "sha256": "1a45fbf553b16983c2e4e3ce1e9a1872b6c21001b93197cd6608776aaa48a3b0"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/palace-statue-ffprobe.json",
+      "bytes": 3070937,
+      "sha256": "b00ef545f6d438d231b926c04b554dd89e3de045082c04a6f6f104dcdc79b118"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/pisac-demux.json",
+      "bytes": 34335,
+      "sha256": "9c018708b6d0c68728ce563dc50e711381b0050d9a7a64b83e2908810442cdc4"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/pisac-ffprobe.json",
+      "bytes": 1827563,
+      "sha256": "5d965ab2a0e165eee87432c2167bd517c9ef62a0f7fd3695a4fea086dfbd16b2"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/royal-sovereign-ffprobe.json",
+      "bytes": 3611359,
+      "sha256": "16535e3956764db2bb1197c9148bc26ed907760ccf04dd26e721b0bd1211f99d"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/saint-denis-demux.json",
+      "bytes": 34785,
+      "sha256": "a6c7394a49db4af08ac01545fbc00737103e8fb36e7926e865018f136f08d8e2"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/saint-denis-ffprobe.json",
+      "bytes": 9767856,
+      "sha256": "f164b907d438fdf82cfbdf9259830d2b2be441f0cb3418e0c021c17b340f1da7"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/sleeping-dog-demux.json",
+      "bytes": 28041,
+      "sha256": "f2794f89149136c594db846ff52d543f8835ea631db3fab7d935fa21198ce01e"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/sleeping-dog-ffprobe.json",
+      "bytes": 10697221,
+      "sha256": "847b7d5da210fb8bd861b1945f7e2efd514e93ed34b98884bc445c0b3ed8bc9e"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/snaefell-demux.json",
+      "bytes": 34654,
+      "sha256": "7e8a077ef108ceed48e6bbb52978bc7780869ff0aff19e4a9c2382b59f20ca9c"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/snaefell-ffprobe.json",
+      "bytes": 5376294,
+      "sha256": "a2eacf34ee34ca3071452ed0eddd5e0e0a00a8d55d73f0cb2e942f1c691ebaa2"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/ullard-demux.json",
+      "bytes": 34850,
+      "sha256": "a10f4a1357824558bea9451f401a1726cdd1367910b0b6acf585164be60bae7e"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/ullard-ffprobe.json",
+      "bytes": 9047094,
+      "sha256": "8aab95fc44b87e2f9bb4d5d0453c4ba2197083259ecde9f2252ba205f38a3456"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/viljandi-ruins-demux.json",
+      "bytes": 41468,
+      "sha256": "4db1119069be189e6f5b474f661f8b56a2e1a309daa7935612501c74318afd28"
+    },
+    {
+      "file": "mp4-decode-research-r2/corpus-receipts/viljandi-ruins-ffprobe.json",
+      "bytes": 7412179,
+      "sha256": "a0c4e87089c78c7be69a75c705e995f6c0e766a35e0764fcbfac2829d5d7972e"
+    },
+    {
+      "file": "mp4-decode-research-r2/cpu-tests-final.log",
+      "bytes": 1596,
+      "sha256": "aad5c254d315eb19e5b3d4948b9eba05e908c0722c9b2f6b6e0c157ff03a6572"
+    },
+    {
+      "file": "mp4-decode-research-r2/cpu-tests.log",
+      "bytes": 1595,
+      "sha256": "7542269cf0e0772af729497f333ad9884362197b38870a4403a6ae6b40bf2810"
+    },
+    {
+      "file": "mp4-decode-research-r2/demux.mjs",
+      "bytes": 12484,
+      "sha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d"
+    },
+    {
+      "file": "mp4-decode-research-r2/freeze.json",
+      "bytes": 16491,
+      "sha256": "a3e7a7de255bb3c174b133dc23bf6e758a894801e593babc6cc2b77c451c944c"
+    },
+    {
+      "file": "mp4-decode-research-r2/io.mjs",
+      "bytes": 411,
+      "sha256": "f9cdf3d759f4ec89812750ee1c33353fcaafaf56940394094129a253e38d4c0f"
+    },
+    {
+      "file": "mp4-decode-research-r2/r1-binding-after.json",
+      "bytes": 205,
+      "sha256": "a5770d8f95dce109287ed8b887dcdda929a945ee177010ffff3f3ff16fa4076c"
+    },
+    {
+      "file": "mp4-decode-research-r2/r1-binding-before.json",
+      "bytes": 9592,
+      "sha256": "bf6f4142e470abb15eaa2fcda9303b6a3702b97c82090733d2bd1d6680065e19"
+    },
+    {
+      "file": "mp4-decode-research-r2/test.mjs",
+      "bytes": 8472,
+      "sha256": "b582db49b819e6974ee9ed55f1e5fabcc8ad271568b6225a9307bfe6309d780c"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/LICENSE",
+      "bytes": 1232,
+      "sha256": "49ef4964bc04a7ee905bb75c8b658e6e4284206b15e32277f63594aa701bab21"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/README.md",
+      "bytes": 7185,
+      "sha256": "daa4fc7dc2536ff90f01058db387566cf29f3c5871662b53e749fc5c951b0fd8"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/analysis.json",
+      "bytes": 23698,
+      "sha256": "39e3b3f003558a93d74530a1971e035ffbb637e243116f23a644717a0772f9a3"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/analyze.mjs",
+      "bytes": 2512,
+      "sha256": "2623c6db42f8118b02da88dd91584b3aab15c1069ebeae9dd1af144e7a9a3749"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/0-bridge.jpg",
+      "bytes": 5945,
+      "sha256": "8910b34ea1ef242353a64e6d6eedb7636a17dfa4c818f504f47a7a766787cf0a"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/0-bridge.rgba",
+      "bytes": 53760,
+      "sha256": "c5275bdb3a59fd45a5d21cb798a1138243477aec6cd7549b6585f6aac7ce49ff"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/0-direct.jpg",
+      "bytes": 5903,
+      "sha256": "6a5918b3eb9472c7c31be7eed724dad72d744c8efcac7f8f0393f0f47ffb14cd"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/0-direct.rgba",
+      "bytes": 53760,
+      "sha256": "56ef2fb89644aa679f4895a3741f1e39f1a067104d377601635b9e73fa503dcc"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/0-reference.jpg",
+      "bytes": 5945,
+      "sha256": "a087cb239fde26c6fb4c43f46b4d3d6dd06e34d5a2eef2a1ea902d99c4b0f127"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/0-reference.rgba",
+      "bytes": 53760,
+      "sha256": "01c5ff34633166cc69b55c180da4cbcdb5adc90cd9ee62cf93264d1a41a946e6"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/1-bridge.jpg",
+      "bytes": 6085,
+      "sha256": "77e364afb32797c9dc2f71a42ff9fa36f06387fb03f92bbd1a8ae9102a1c7bc5"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/1-bridge.rgba",
+      "bytes": 53760,
+      "sha256": "c969429052485a58242dc1655ef71770517e11dd71450425d682e12d8b9d4310"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/1-direct.jpg",
+      "bytes": 6030,
+      "sha256": "c43097325fa1f1fdb5348cbc573f9d08506db3de9fa58a0e7821af3b9ddbe7cc"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/1-direct.rgba",
+      "bytes": 53760,
+      "sha256": "72a387dc14c46c3c706159b2bb394ce2c1cc9122e2b1d86a8c929e1525e6a608"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/1-reference.jpg",
+      "bytes": 6081,
+      "sha256": "bce136e29035701170465b53eb572616317b7bdff166e51ae1562159c555c363"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/1-reference.rgba",
+      "bytes": 53760,
+      "sha256": "fc4b5e3d560746c3550899471935b693adf577b21b1e43b99829db60987a5f28"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/2-bridge.jpg",
+      "bytes": 5870,
+      "sha256": "514375cbc0b3501029c02b949d6d0c9587bda9805935d15c683bdef58ba8d6ce"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/2-bridge.rgba",
+      "bytes": 53760,
+      "sha256": "4f02fa7b36f72e76a933a1edf8ad6645785a18e32afce265a37f3bbf4af133ca"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/2-direct.jpg",
+      "bytes": 5843,
+      "sha256": "cf41d396d5a1c4b5af146badaa035c2b7fd11c317d0168c90f150bc5518537db"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/2-direct.rgba",
+      "bytes": 53760,
+      "sha256": "2cde1caa8c5324eb7c9913002ba4673149263f0f9ba359fddc59ef3ee0b82b21"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/2-reference.jpg",
+      "bytes": 5857,
+      "sha256": "9d7504f90badf7e475dbe1187ede549eb9db0a5d256cb9a8dadc27b801717770"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/b-sar/2-reference.rgba",
+      "bytes": 53760,
+      "sha256": "aa1e40a65c596976a763ad05618d48d2bafc9fd2f21a587e44cad4a9e8a2ff6d"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/0-bridge.jpg",
+      "bytes": 24702,
+      "sha256": "85cc422a8993ba3fc3136dab962c8cd4379779c845e10fb94ca59e5d69700c21"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/0-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "2967553b72cc17ef3373cb56102f198913f1f472769df0d4d9bcc5d3a71fd4ae"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/0-direct.jpg",
+      "bytes": 24714,
+      "sha256": "d6823671fa62ee1b0f7b5a6b971aaf35bbc5c6f63e648d130d790ac98a7a312c"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/0-direct.rgba",
+      "bytes": 230400,
+      "sha256": "d67ca2fc1d6be6d059525647732449c2667066999c25fc0f89cd356ae56c65bb"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/0-reference.jpg",
+      "bytes": 24689,
+      "sha256": "b20c8d8506831fcd776792fdbd3a3f4e3d785aee39d2344f5383eca97a3a3446"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/0-reference.rgba",
+      "bytes": 230400,
+      "sha256": "8c343606dae0162935806059b77f8f67ec07f036ed69e81742a2168e02328d0f"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/1-bridge.jpg",
+      "bytes": 24795,
+      "sha256": "a4ffa5f0fcb228d980c0a9e68bb5bfe619e672bbc9e1d985c6dab84a9207f2f1"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/1-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "faacf7c382f450bae0fe31ce683f92e2efe8a60f9146d058b7e5a70a1220b0e6"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/1-direct.jpg",
+      "bytes": 24779,
+      "sha256": "d6201b6ced0dbbc7006a63b40fbcc08cd04545928f2d1d8308de9e9ef9e962a4"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/1-direct.rgba",
+      "bytes": 230400,
+      "sha256": "dada938bb92a8c395757316772bab40e9cad6e796a0e599a9438a566888af61d"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/1-reference.jpg",
+      "bytes": 24801,
+      "sha256": "cab0fdfc6aa0d454eb3fe85fd3ef2f6cfec46767fd81bc5a457e78b4e6a5b7c8"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/1-reference.rgba",
+      "bytes": 230400,
+      "sha256": "61084c9722c32f5823681f0681928c2a3e4886e56efaad2e54ab17897e991cdf"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/2-bridge.jpg",
+      "bytes": 25388,
+      "sha256": "51df9036abf74e255b40e53a1e7d57aa87774ec492212e1a9b0e6a03601bff2e"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/2-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "60eb67fc5c39b924d3eb4f5ff73d33a4a30da7659127b794c1674a41d1e5c137"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/2-direct.jpg",
+      "bytes": 25395,
+      "sha256": "9b8c5053ea2e709f11db98290b8ad690a9bd09a9602c9af25f60c86bb4407f75"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/2-direct.rgba",
+      "bytes": 230400,
+      "sha256": "99081eb0b253c5b1293de766fd06984ff7d9e3aeebf38a09ac32f327e20f29d7"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/2-reference.jpg",
+      "bytes": 25384,
+      "sha256": "15590c47fa09dad2374fe95d3dae6b514875a1694f1b93cb6939dcf65e7b39df"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/cat-plays/2-reference.rgba",
+      "bytes": 230400,
+      "sha256": "f1b4cd9bf48218d8533ec6338232010f89d12b17842694bb1b403b591880bb95"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/0-bridge.jpg",
+      "bytes": 17931,
+      "sha256": "eab69f8fffb57101c6a0133412d90b78fb0a9bfbb93e4eb8b9457d9f581f3ba3"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/0-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "299af016918adec1c76db1812d60e5f5efd9dfb480debd3c1b574b9b648175b1"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/0-direct.jpg",
+      "bytes": 17740,
+      "sha256": "ee09b0494c9a5c5ad20b6237c3e760c0bcbd76cb345cd25d183dc280acb1d1ec"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/0-direct.rgba",
+      "bytes": 230400,
+      "sha256": "c152be5bd02feba6bc2d4ad5f072629fb134ef6df59c468b3481336cc55e187a"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/0-reference.jpg",
+      "bytes": 17920,
+      "sha256": "b5c372e5b274e7c56f623eb5fb5c0b02ee90ac2ca9009f26cfc4f4d8e62e3525"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/0-reference.rgba",
+      "bytes": 230400,
+      "sha256": "5b152cbdae9f13d164a5b7bb07fff798b04fa204627ce96cb5ea8feaf80b7f06"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/1-bridge.jpg",
+      "bytes": 18187,
+      "sha256": "a47330aeed7003021743ed7fb960b4272fbb393b4adf078059ef4d6a036c1c5a"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/1-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "2122da275b96a97dbb3164d2592bebc333569cd4275ec48d082bb1b1ae098737"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/1-direct.jpg",
+      "bytes": 17975,
+      "sha256": "f5e6142ea621fe97794594b4aaa3ea865d4275c200b1d4a8dd52bfe75066d441"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/1-direct.rgba",
+      "bytes": 230400,
+      "sha256": "e95f6d0385164f33c91d685717ccc0e5d5da0af7427dddd8f518ca9a549f23a6"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/1-reference.jpg",
+      "bytes": 18181,
+      "sha256": "17e6e9b352dbb92803eb162483919c93381a20640fe4b2622cf8e23f817f2b6f"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/1-reference.rgba",
+      "bytes": 230400,
+      "sha256": "e19178f56d8ac11c1ac22daf3b9f8f3e47f4d877174a0d363d1eb011a849015d"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/2-bridge.jpg",
+      "bytes": 14822,
+      "sha256": "f2a15847c42b8bbc83b8eb509087eb0872006d446960d64bc2af6352399e9d02"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/2-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "8240f5785ceada0ce7dde8919658d40bd6fefa9d36b8aa3d2a22074d314fcac6"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/2-direct.jpg",
+      "bytes": 14705,
+      "sha256": "d9ea6ae3ed10740f0d6dd0a221ecec3c3c27cfa914378f741a1db2dd231b5d4d"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/2-direct.rgba",
+      "bytes": 230400,
+      "sha256": "0913f19bd0870a8f282b9d298b6923caea68ae93044e41d19e49dd79ba1c1a60"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/2-reference.jpg",
+      "bytes": 14816,
+      "sha256": "36e67c18dc1f0cef598d3a30dcc824abf0a27682b3d7465c6aac0ca37d5c38f1"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/chameleon-flowers/2-reference.rgba",
+      "bytes": 230400,
+      "sha256": "a4eb3400f37a40d43688d3ec919436977fd61abcbee2a2fa5e92d28a0f78165f"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/client.mjs",
+      "bytes": 8948,
+      "sha256": "a85313f025a00ef84d62011fd3acd9b3ad66213244297f9f91784fdedefbb42a"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/demux.mjs",
+      "bytes": 12484,
+      "sha256": "7456defdf8ffa218100da658d77c7cbabe125add82f731649cfec6b2522d2f4d"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/docs/mdn-mediastreamtrackgenerator.html",
+      "bytes": 147955,
+      "sha256": "68dbf88897f6cb9e68ab67e442e673b37eb004180896cfabe5db4f2b10684180"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/docs/mdn-videotrackgenerator.html",
+      "bytes": 151094,
+      "sha256": "db85cce0914b999f05e5c4b767565bb6503e5c360344cae6e7decb07dc5ec437"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/freeze.json",
+      "bytes": 25279,
+      "sha256": "b6b28af1321c25f23c5a6b3e5511a87c18ac8bf8de1992da93d98b40091d857e"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/0-bridge.jpg",
+      "bytes": 12388,
+      "sha256": "04ae1edcc2673f23efd3542cb44da494b5ed50a79d2b4ece337cbbb623aa3a4a"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/0-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "786e495f3aa697238c81119e5c5c75d54080aa5f04da3dba4514692091316a39"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/0-direct.jpg",
+      "bytes": 12045,
+      "sha256": "0e325d0525c14ca2733fd563f4613caf876133bdaa056e7250369131e451c10a"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/0-direct.rgba",
+      "bytes": 230400,
+      "sha256": "a6cb02068f37994da3d288936b93aa7aace46cca001d51d1bb83e71783c13037"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/0-reference.jpg",
+      "bytes": 12376,
+      "sha256": "ecfc1128031ee2d62f4b06b1c3ddab10fe474023b7fa08b7747cd762c787792e"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/0-reference.rgba",
+      "bytes": 230400,
+      "sha256": "a71dd856b160e5cc1c90ed3e74ccac613f1d933923a58c31381062901fd18c71"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/1-bridge.jpg",
+      "bytes": 11502,
+      "sha256": "4c11a8992db350857d60db80e12f36bb74aaf416451659fe924e8e11add47dfc"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/1-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "1e6c7466ec15b0abfffd29b33446460a3d02b9ab7ef871e53ae4a642602fb870"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/1-direct.jpg",
+      "bytes": 11235,
+      "sha256": "c8f9bcd77606dac191cdbdbc631cf9d152c54128d5a1ffef57a6f499db1b39e4"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/1-direct.rgba",
+      "bytes": 230400,
+      "sha256": "d02fc9d9de5876d2d1820cd52ac1a61c815b69acf6ffe6ccfbf7fa28e3605d9e"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/1-reference.jpg",
+      "bytes": 11505,
+      "sha256": "6a08b987699689760d45b5d515bb856646c50a9a698a7c4388a1675f4361b20e"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/1-reference.rgba",
+      "bytes": 230400,
+      "sha256": "ec9e5849637fd1e3453f2dd91842d4f442bc9fe117c61e31b1d2e971905e75bc"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/2-bridge.jpg",
+      "bytes": 11522,
+      "sha256": "6412227be8e3f2ed13235f9a827bb12771d174a69b57ccde47b71fca2eb816bb"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/2-bridge.rgba",
+      "bytes": 230400,
+      "sha256": "f419b32ee35926681e37066aa4d1b8bbe560fd0f67d60fe3b6279055eb0d74a9"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/2-direct.jpg",
+      "bytes": 11200,
+      "sha256": "2cef94de6bb5b68dc6642b240ca82574a6ef22cfe78972af7632c6679d8f74c1"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/2-direct.rgba",
+      "bytes": 230400,
+      "sha256": "fce666912fe462e69a18e6111187bb0884bc0c441d0fa783c14f1934c8d00d6e"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/2-reference.jpg",
+      "bytes": 11505,
+      "sha256": "b640762c3d37487e15d915e2c18b1fdc13a4bbf9d664dabc134a9631dfd937d0"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/fremantle-orbit/2-reference.rgba",
+      "bytes": 230400,
+      "sha256": "974ba8cd3123f1f81bc866096f2068500e4f39712ed44e0d1b116c29b95327dc"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/probe.log",
+      "bytes": 1413,
+      "sha256": "a11f48186338643231e8afce21d6a5c028c8d05ae91c97ea478707fa50a542c6"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/probe.mjs",
+      "bytes": 4042,
+      "sha256": "dab0f87a6d0fa2ada4b734b2a9831c53ccbdbc224189fc0749f1cc91a15da81e"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/results.json",
+      "bytes": 42436,
+      "sha256": "faaf7978479b6ce3f4386cc74d4c4c6bb1bccb9b6e4f8f3542ffe0bf7eaefe77"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/source-credits.json",
+      "bytes": 6727,
+      "sha256": "d0f2afbd2f9bb47fcb874025d12a8daf719914b7f4545761c445519329f6f9ad"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/source-input-bindings.json",
+      "bytes": 1455,
+      "sha256": "cbf207e37cba944d30b2f65e97f6dff1d4de18c053c00e1d66dfb40c88f9b449"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/src/extract.js",
+      "bytes": 11360,
+      "sha256": "4287f7f23f17f5dd560a21a220e94a1621d4755a5b15dec184ce70598046008c"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/src/fast-extract.js",
+      "bytes": 11546,
+      "sha256": "5ade500e601eda4e5b65142bd8946bbe7adad935ce8bc0b01435227d0c43dddd"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/src/frames.js",
+      "bytes": 4573,
+      "sha256": "b04b0d7f64cbb593cad93fba932f1938660bed24ea3f66be9b859e3f17e357c3"
+    },
+    {
+      "file": "mp4-video-bridge-research-r1/src/mp4.js",
+      "bytes": 15868,
+      "sha256": "5a3ee62186ba8bb3c5b4ee246d45b084ab6de02ccbbb44a2d96f8aabcf0fe7aa"
+    },
+    {
+      "file": "publication.json",
+      "bytes": 211872,
+      "sha256": "d196b71cbd402340158f861047fc379e3ae1310c400b3a2c62734522b870dfdf"
+    },
+    {
+      "file": "publish-decoder-research-r1.py",
+      "bytes": 8310,
+      "sha256": "4339ef2a83c25fa60286bffdbebb4bf85be51d589fef7ca768e6569cfa900a90"
+    }
+  ]
+}

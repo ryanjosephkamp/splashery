@@ -1,0 +1,22 @@
+{
+  "id": "palace-statue",
+  "profile": "phone",
+  "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de",
+  "started": "2026-10-15T06:55:54.032Z",
+  "status": "timeout",
+  "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+  "firstViewMs": 211882.40000000037,
+  "bakeMs": 1756977.5209609997,
+  "mean": null,
+  "peakRssBytes": 1372803072,
+  "hostLoadAtStart": [
+    31.69,
+    29.82,
+    27.52
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "reason": "Error: palace-statue/phone (setup) exceeded its host deadline of 1800000 ms.\n    at Timeout.<anonymous> (file:///workspace/splashery/tools/v3d-bench.mjs:191:25)\n    at listOnTimeout (node:internal/timers:635:17)\n    at process.processTimers (node:internal/timers:571:7)",
+  "timingCensored": true
+}

@@ -1,0 +1,26 @@
+{
+  "capturedAt": "2026-10-15T10:32:56.263Z",
+  "browser": "151.0.7922.173",
+  "flags": [
+    "--no-sandbox",
+    "--disable-gpu",
+    "--disable-software-rasterizer",
+    "--disable-dev-shm-usage"
+  ],
+  "result": {
+    "secure": true,
+    "videoDecoder": "function",
+    "videoFrame": "function",
+    "config": {
+      "config": {
+        "codec": "avc1.64001f",
+        "codedHeight": 720,
+        "codedWidth": 1280,
+        "flip": false,
+        "hardwareAcceleration": "prefer-software",
+        "rotation": 0
+      },
+      "supported": true
+    }
+  }
+}

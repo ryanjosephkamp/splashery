@@ -1,0 +1,42 @@
+{
+  "id": "cat-plays",
+  "profile": "desktop",
+  "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085",
+  "started": "2026-10-15T10:30:01.409Z",
+  "status": "explained",
+  "provenanceSha256": "f70db69af1bab5db2f3a9752e073dfa30676c2931dc1fdd5c98e2a243520b91f",
+  "referenceEvidence": {
+    "provenanceSha256": "7c714d23fd839129b6abbf718460cd7bf5bad59c34988292a26e4c5046aa05e6",
+    "resultFingerprint": "35d71ad73a77d9f0936ce78085d7e1340c91dea9d838c71eaf61518cd57795d4"
+  },
+  "firstViewMs": null,
+  "bakeMs": 17209.436088999995,
+  "mean": null,
+  "peakRssBytes": 1212022784,
+  "hostLoadAtStart": [
+    16.5,
+    17.38,
+    17.76
+  ],
+  "consoleErrors": [],
+  "phase": "bake",
+  "browser": "151.0.7922.173",
+  "assessment": {
+    "checked": false,
+    "verdict": "unknown",
+    "message": "Could not check this video quickly. Try an MP4 or WebM, or a shorter stretch. Training may still work.",
+    "reasons": [],
+    "metrics": {
+      "frames": 0
+    },
+    "diagnostic": "This browser cannot play that video. Try an MP4 (H.264) or WebM file, or a shorter clip.",
+    "unplayable": false,
+    "duration": 0
+  },
+  "explanation": {
+    "diagnostic": "The decoded video frame took too long. Try a shorter MP4 (H.264) clip.",
+    "advice": "What worksWalk slowly around an object, or through a place, so the camera moves sideways and sees the same things from new angles.10 to 40 seconds, held steady, in even light.Plenty of texture: stone, bark, brick, leaves, signs.No zoom, and few people or cars moving.A drone circling a building or a statue is ideal.A file under 40 MB (trim a long video first).What failsTurning on the spot, or a panorama: the camera has to move, not just turn.A tripod time-lapse: the camera never moves.Blank walls, sky or water: nothing to match.Blur from fast moves or low light.",
+    "visible": true
+  },
+  "reason": "The decoded video frame took too long. Try a shorter MP4 (H.264) clip."
+}

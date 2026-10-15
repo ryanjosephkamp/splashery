@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T12:17:52.251Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/023-ullard-desktop-unpaired",
+  "runSha256": "4eece19b039f2f184f1e9ffad7b500ce53eb260e140bcadf560cebbce3620561",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "cases": [
+    {
+      "id": "ullard",
+      "profile": "desktop",
+      "rowFingerprint": "b569bb86d5f31945949a56c04c4a9846aa2712e8892408f3d6d8f2d515b97153",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1134879,
+          "sha256": "4331c4b6d69497b2dadd1a80311fb549158b3aaa1a4d62e926391fd7e16604aa"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1811,
+          "sha256": "5e658aafff7734f7ef1eab6d6365e08adc757be0f79bd981912a1c4204832548"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

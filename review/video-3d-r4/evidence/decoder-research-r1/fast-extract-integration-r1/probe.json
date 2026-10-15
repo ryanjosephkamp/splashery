@@ -1,0 +1,368 @@
+[
+  {
+    "executablePath": "/workspace/v3d-tools/chrome-linux64/chrome",
+    "browser": "141.0.7390.37",
+    "result": {
+      "elapsed": 460.4000000022352,
+      "opened": [
+        256,
+        128,
+        2
+      ],
+      "extraction": {
+        "method": "webcodecs-avc",
+        "timestampSource": "decoded-presentation-time",
+        "independentlyPresentedColorChecks": 2,
+        "sampleCount": 30,
+        "timescale": 15360,
+        "editOffset": 2048
+      },
+      "config": {
+        "codec": "avc1.64000a",
+        "codedWidth": 192,
+        "codedHeight": 128,
+        "displayAspectWidth": 2,
+        "displayAspectHeight": 1
+      },
+      "crop": {
+        "sx": 7,
+        "sw": 243
+      },
+      "frames": [
+        {
+          "time": 0.266667,
+          "decodedTime": 0.266667,
+          "requestedTime": 0.313,
+          "presentedTime": null,
+          "timestampSource": "decoded-presentation-time",
+          "sharpness": 1577.5594288147424,
+          "width": 160,
+          "height": 84
+        },
+        {
+          "time": 0.4,
+          "decodedTime": 0.4,
+          "requestedTime": 0.438,
+          "presentedTime": null,
+          "timestampSource": "decoded-presentation-time",
+          "sharpness": 1760.2676508439226,
+          "width": 160,
+          "height": 84
+        },
+        {
+          "time": 0.8,
+          "decodedTime": 0.8,
+          "requestedTime": 0.813,
+          "presentedTime": null,
+          "timestampSource": "decoded-presentation-time",
+          "sharpness": 1719.3035555324607,
+          "width": 160,
+          "height": 84
+        },
+        {
+          "time": 1.4,
+          "decodedTime": 1.4,
+          "requestedTime": 1.438,
+          "presentedTime": null,
+          "timestampSource": "decoded-presentation-time",
+          "sharpness": 1709.707306214754,
+          "width": 160,
+          "height": 84
+        }
+      ],
+      "metadata": [
+        {
+          "pts": 0,
+          "coded": [
+            192,
+            128
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 66667,
+          "coded": [
+            192,
+            128
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 133333,
+          "coded": [
+            192,
+            128
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 200000,
+          "coded": [
+            192,
+            128
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        }
+      ]
+    }
+  },
+  {
+    "executablePath": "/usr/bin/chromium",
+    "browser": "151.0.7922.173",
+    "result": {
+      "elapsed": 563.3000000007451,
+      "opened": [
+        256,
+        128,
+        2
+      ],
+      "extraction": {
+        "method": "webcodecs-avc",
+        "timestampSource": "decoded-presentation-time",
+        "independentlyPresentedColorChecks": 2,
+        "sampleCount": 30,
+        "timescale": 15360,
+        "editOffset": 2048
+      },
+      "config": {
+        "codec": "avc1.64000a",
+        "codedWidth": 192,
+        "codedHeight": 128,
+        "displayAspectWidth": 2,
+        "displayAspectHeight": 1
+      },
+      "crop": {
+        "sx": 7,
+        "sw": 243
+      },
+      "frames": [
+        {
+          "time": 0.266667,
+          "decodedTime": 0.266667,
+          "requestedTime": 0.313,
+          "presentedTime": null,
+          "timestampSource": "decoded-presentation-time",
+          "sharpness": 1577.5594288147424,
+          "width": 160,
+          "height": 84
+        },
+        {
+          "time": 0.4,
+          "decodedTime": 0.4,
+          "requestedTime": 0.438,
+          "presentedTime": null,
+          "timestampSource": "decoded-presentation-time",
+          "sharpness": 1760.2676508439226,
+          "width": 160,
+          "height": 84
+        },
+        {
+          "time": 0.8,
+          "decodedTime": 0.8,
+          "requestedTime": 0.813,
+          "presentedTime": null,
+          "timestampSource": "decoded-presentation-time",
+          "sharpness": 1719.3035555324607,
+          "width": 160,
+          "height": 84
+        },
+        {
+          "time": 1.4,
+          "decodedTime": 1.4,
+          "requestedTime": 1.438,
+          "presentedTime": null,
+          "timestampSource": "decoded-presentation-time",
+          "sharpness": 1709.707306214754,
+          "width": 160,
+          "height": 84
+        }
+      ],
+      "metadata": [
+        {
+          "pts": 0,
+          "coded": [
+            192,
+            130
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 66667,
+          "coded": [
+            192,
+            130
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 133333,
+          "coded": [
+            192,
+            130
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        },
+        {
+          "pts": 200000,
+          "coded": [
+            192,
+            130
+          ],
+          "display": [
+            256,
+            128
+          ],
+          "visible": {
+            "x": 0,
+            "y": 0,
+            "width": 192,
+            "height": 128,
+            "top": 0,
+            "right": 192,
+            "bottom": 128,
+            "left": 0
+          },
+          "color": {
+            "fullRange": false,
+            "matrix": "smpte170m",
+            "primaries": "smpte170m",
+            "transfer": "smpte170m"
+          }
+        }
+      ]
+    }
+  }
+]

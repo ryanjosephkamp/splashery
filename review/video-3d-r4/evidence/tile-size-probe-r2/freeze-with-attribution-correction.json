@@ -1,0 +1,192 @@
+{
+  "at": "2026-10-15T11:41:23.664540+00:00",
+  "priorFreezeSha256": "6b030dfef090bcc9e8559f8b66ae9c7cf77136feccdd776ef03f130b6bb549c7",
+  "scope": "Additive source-citation correction only; original freeze and data preserved. This final freeze excludes itself.",
+  "files": [
+    {
+      "file": "ASSESSMENT.md",
+      "bytes": 924,
+      "sha256": "d0030613a6e790dc953b7d6c683abbd81d0f75e5685b8a9d1b0aa12252e4c83f"
+    },
+    {
+      "file": "ATTRIBUTION.txt",
+      "bytes": 387,
+      "sha256": "50045a129d7726d0d135154dddbb483f782b8620b6c4025742ef84fa6acc7c01"
+    },
+    {
+      "file": "attribution-correction.json",
+      "bytes": 692,
+      "sha256": "2bd442e2761eac185b7b9e7a857151c52799b5d6248e0b0efd1887e2bb0736b8"
+    },
+    {
+      "file": "declaration.json",
+      "bytes": 5014,
+      "sha256": "36a6f360a386b7f8bc680ac1418d0431477da33356eadac03f94dbfeab7b7ca8"
+    },
+    {
+      "file": "freeze.json",
+      "bytes": 5484,
+      "sha256": "6b030dfef090bcc9e8559f8b66ae9c7cf77136feccdd776ef03f130b6bb549c7"
+    },
+    {
+      "file": "phone-result.json",
+      "bytes": 4223,
+      "sha256": "fb0aa2a5b72771996a6da24da1c353f452e082f16bd2d0a4140b50ce0bacb9ad"
+    },
+    {
+      "file": "phone-tile16-adamM.bin",
+      "bytes": 960000,
+      "sha256": "901fbe278dea558f33facb31b91633ada4a6760d5ea4e5f3064dd5b05eee46af"
+    },
+    {
+      "file": "phone-tile16-adamV.bin",
+      "bytes": 960000,
+      "sha256": "3eca6cb88fd2b0e11832ddeba07f908237617bd17522c4638ab7a7c374bef665"
+    },
+    {
+      "file": "phone-tile16-gradF.bin",
+      "bytes": 960000,
+      "sha256": "8476d1af9ba405063b304b60f76a38324b8ca3a744bcd165d9e82dbfacb0f5d4"
+    },
+    {
+      "file": "phone-tile16-gradP.bin",
+      "bytes": 960000,
+      "sha256": "b9163d03c43083a18e6101539b555cb5e363eed61fa4b3a3b54f50ae60eb5b52"
+    },
+    {
+      "file": "phone-tile16-out.bin",
+      "bytes": 921600,
+      "sha256": "8221194f925958db5aa64353da8632ad562069f90c9c637187f3638a2fc9dccd"
+    },
+    {
+      "file": "phone-tile16-params.bin",
+      "bytes": 960000,
+      "sha256": "a16531993c15f48255f16d354e641186b43aefbc4c8c1cd3b7dc279eef1ea39d"
+    },
+    {
+      "file": "phone-tile16-stats.bin",
+      "bytes": 16,
+      "sha256": "10d5ef9628698856a3901db32b2aef8688345b7f998934133ce95f374d9ea806"
+    },
+    {
+      "file": "phone-tile8-adamM.bin",
+      "bytes": 960000,
+      "sha256": "901fbe278dea558f33facb31b91633ada4a6760d5ea4e5f3064dd5b05eee46af"
+    },
+    {
+      "file": "phone-tile8-adamV.bin",
+      "bytes": 960000,
+      "sha256": "3eca6cb88fd2b0e11832ddeba07f908237617bd17522c4638ab7a7c374bef665"
+    },
+    {
+      "file": "phone-tile8-gradF.bin",
+      "bytes": 960000,
+      "sha256": "8476d1af9ba405063b304b60f76a38324b8ca3a744bcd165d9e82dbfacb0f5d4"
+    },
+    {
+      "file": "phone-tile8-gradP.bin",
+      "bytes": 960000,
+      "sha256": "b9163d03c43083a18e6101539b555cb5e363eed61fa4b3a3b54f50ae60eb5b52"
+    },
+    {
+      "file": "phone-tile8-out.bin",
+      "bytes": 921600,
+      "sha256": "8221194f925958db5aa64353da8632ad562069f90c9c637187f3638a2fc9dccd"
+    },
+    {
+      "file": "phone-tile8-params.bin",
+      "bytes": 960000,
+      "sha256": "a16531993c15f48255f16d354e641186b43aefbc4c8c1cd3b7dc279eef1ea39d"
+    },
+    {
+      "file": "phone-tile8-stats.bin",
+      "bytes": 16,
+      "sha256": "10d5ef9628698856a3901db32b2aef8688345b7f998934133ce95f374d9ea806"
+    },
+    {
+      "file": "receipt.json",
+      "bytes": 11067,
+      "sha256": "aa8c6ab2d0d5f94cb1bfd292b9959173c1bc92b3005e44671f21ab735d326163"
+    },
+    {
+      "file": "small-result.json",
+      "bytes": 4199,
+      "sha256": "622edd9f70bdf03b05f837f706d3956b22cbc0eea9ca811d0737d49df31c3017"
+    },
+    {
+      "file": "small-tile16-adamM.bin",
+      "bytes": 64000,
+      "sha256": "0e7a6ea7f0320baef04561b700a1ff00894de6edf9a0405ee30c9dfd5469032d"
+    },
+    {
+      "file": "small-tile16-adamV.bin",
+      "bytes": 64000,
+      "sha256": "26e3ada95b2af46353df6b6990c9b907d287a2e9439392f52b1151ecb819d2c4"
+    },
+    {
+      "file": "small-tile16-gradF.bin",
+      "bytes": 64000,
+      "sha256": "cd6975b17eb36f4ac1e4d7d89169fa64ce170587d20d54f302d489adaa5a437e"
+    },
+    {
+      "file": "small-tile16-gradP.bin",
+      "bytes": 64000,
+      "sha256": "4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74"
+    },
+    {
+      "file": "small-tile16-out.bin",
+      "bytes": 82944,
+      "sha256": "cc16adbd9ee94c53532a814ffd019c56a7ede240eb9c30b517048b6a1611dd8f"
+    },
+    {
+      "file": "small-tile16-params.bin",
+      "bytes": 64000,
+      "sha256": "10e2863161f9cafbbbd92c275dd59af6135e94cfe1a231dcc83b135a4c4f079b"
+    },
+    {
+      "file": "small-tile16-stats.bin",
+      "bytes": 16,
+      "sha256": "487b609967225a3eb20e366453e6de837c991b6b7ceb38d6db6fdd605e390fdc"
+    },
+    {
+      "file": "small-tile8-adamM.bin",
+      "bytes": 64000,
+      "sha256": "0e7a6ea7f0320baef04561b700a1ff00894de6edf9a0405ee30c9dfd5469032d"
+    },
+    {
+      "file": "small-tile8-adamV.bin",
+      "bytes": 64000,
+      "sha256": "26e3ada95b2af46353df6b6990c9b907d287a2e9439392f52b1151ecb819d2c4"
+    },
+    {
+      "file": "small-tile8-gradF.bin",
+      "bytes": 64000,
+      "sha256": "cd6975b17eb36f4ac1e4d7d89169fa64ce170587d20d54f302d489adaa5a437e"
+    },
+    {
+      "file": "small-tile8-gradP.bin",
+      "bytes": 64000,
+      "sha256": "4f7988030a00d082fe445e00a2ac5dab502300ff1b80e8592dd569867b60ef74"
+    },
+    {
+      "file": "small-tile8-out.bin",
+      "bytes": 82944,
+      "sha256": "cc16adbd9ee94c53532a814ffd019c56a7ede240eb9c30b517048b6a1611dd8f"
+    },
+    {
+      "file": "small-tile8-params.bin",
+      "bytes": 64000,
+      "sha256": "10e2863161f9cafbbbd92c275dd59af6135e94cfe1a231dcc83b135a4c4f079b"
+    },
+    {
+      "file": "small-tile8-stats.bin",
+      "bytes": 16,
+      "sha256": "487b609967225a3eb20e366453e6de837c991b6b7ceb38d6db6fdd605e390fdc"
+    },
+    {
+      "file": "tile-size-probe-r2.mjs",
+      "bytes": 6080,
+      "sha256": "0f78b4e032c8e7197d2cedeb0e40cf02e6ea91b17d8672937848069437d8cc2d"
+    }
+  ]
+}

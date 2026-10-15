@@ -1,0 +1,16 @@
+✔ unsigned ctts, B-order, variable stsc chunks and linear edit match hardcoded independent expected rows (8.829422ms)
+✔ signed ctts-v1 and co64 preserve negative offsets without unsigned reinterpretation (0.677484ms)
+✔ no stss correctly means all samples are sync (0.649161ms)
+✔ avc3 reports its actual codec prefix and copies config bytes independently (0.811674ms)
+✔ unsafe co64 integers and duplicate box inventories reject (1.276131ms)
+✔ unsupported geometry/encryption/fragments fail closed (2.099166ms)
+✔ unsafe counts, table truncation, nonunit edit, bad mdat offsets and sizes fail before large allocation (2.433149ms)
+✔ bounded deterministic byte mutations either reject or return only safe in-mdat sample spans (53.377125ms)
+ℹ tests 8
+ℹ suites 0
+ℹ pass 8
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 279.541524

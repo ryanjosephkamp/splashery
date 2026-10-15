@@ -1,0 +1,26 @@
+{
+  "created": "2026-10-15T12:17:52.328Z",
+  "source": "/workspace/v3d-r4-media/candidate-r10-v1-shards/025-snaefell-desktop-unpaired",
+  "runSha256": "4f7955e9edf82e74777336d0df3dde208a81559aebe13a660f764110eb99ef5d",
+  "provenanceSha256": "1d25d8080b1cabec6f28f04dc6f2a72acb030bc6a17bc94276b11468e0a931e0",
+  "cases": [
+    {
+      "id": "snaefell",
+      "profile": "desktop",
+      "rowFingerprint": "c275a20e11265424b037ad544a38f29bfdf1ed8cee23c90b901e6e813c5e21b4",
+      "files": [
+        {
+          "file": "outcome.png",
+          "bytes": 1143034,
+          "sha256": "2c8c3eafbc6c81c349f13f06b31839af8291454c38b50363cdef2d5eac370cc6"
+        },
+        {
+          "file": "result.json",
+          "bytes": 1644,
+          "sha256": "476105fa3786e7e8e571f9429dcd6834cc3b5a5c623b990e31b4560602d1b52a"
+        }
+      ]
+    }
+  ],
+  "note": "Captured listed rows only. All failures remain unchanged; current unlisted cases are excluded. ATTRIBUTION notices and this receipt are additive. Current native attempts are unlisted and are not promoted to rows."
+}

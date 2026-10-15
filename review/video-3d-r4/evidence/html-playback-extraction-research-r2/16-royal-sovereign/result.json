@@ -1,0 +1,60 @@
+{
+  "id": "royal-sovereign",
+  "profile": "phone",
+  "method": "exact-ceil-continuous-html-playback",
+  "startedAt": "2026-10-15T11:25:52.094Z",
+  "researchLimitMs": 90000,
+  "abortAfterTrials": null,
+  "inputSha256": "8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6",
+  "status": "unsupported-table-immediate-fallback",
+  "error": {
+    "name": "Error",
+    "message": "Nontrivial edit list unsupported"
+  },
+  "cleanup": {
+    "noOpenedVideo": true
+  },
+  "progress": [],
+  "elapsedMs": 22,
+  "inputBinding": {
+    "id": "royal-sovereign",
+    "label": "Offshore lighthouse platform, close drone approach",
+    "category": [
+      "object-orbit",
+      "camera-translation"
+    ],
+    "source": "https://commons.wikimedia.org/wiki/File:Royal_Sovereign_Lighthouse_drone_visit.webm",
+    "license": "CC0",
+    "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+    "author": "Alexis Markwick",
+    "duration": 11.958333,
+    "sha256": "8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6",
+    "file": "royal-sovereign.mp4",
+    "captureUrl": "https://upload.wikimedia.org/wikipedia/commons/transcoded/b/bf/Royal_Sovereign_Lighthouse_drone_visit.webm/Royal_Sovereign_Lighthouse_drone_visit.webm.480p.vp9.webm",
+    "captureSha256": "007b276b9a8fa062825868da8b9f0171f5c764858e7ca27004d915f165447b22",
+    "captureDuration": 240.032,
+    "span": {
+      "start": 35,
+      "length": 12
+    },
+    "checked": "October 15, 2026",
+    "transformation": "Trimmed 35–47 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.",
+    "evidence": {
+      "sourcePage": "evidence/royal-sovereign-source.html",
+      "licensePage": "evidence/cc0.html",
+      "contactSheet": "contact-sheets/royal-sovereign.jpg",
+      "commonsMetadata": "evidence/royal-sovereign-commons-metadata.json",
+      "sourcePageSha256": "f8b1839442ac77713961ff1bc16c4c46958abb9f4788a88539814e5bf1f89c97",
+      "licensePageSha256": "abb4d48fc8b85de52b377dd105532c6c549f515d492a8e1712bc99e7316a1f12",
+      "contactSheetSha256": "b3654a2b35d95c1bb2cb7d3405aac4205a5496793038b84fd0518447667283a5",
+      "commonsMetadataSha256": "0c35344883f4a52ece2512cf45b93bab4c864312ccdd4ad4b340199b18c704b6"
+    },
+    "inspection": "Eight evenly spaced contact-sheet frames visually inspected on October 15, 2026: no identifiable people, visible brand names, or logos. Camera and scene labels reflect the unaltered source span.",
+    "width": 854,
+    "height": 480,
+    "fps": "24/1",
+    "bytes": 811967,
+    "ffprobeSha256": "3099b161222592baf64623e37d6db2fe93e07371b08991585b63ea230d28df91"
+  },
+  "hostContextClosed": true
+}

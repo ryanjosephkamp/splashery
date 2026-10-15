@@ -1,0 +1,11 @@
+Offshore lighthouse platform, close drone approach
+Author: Alexis Markwick
+Source: https://commons.wikimedia.org/wiki/File:Royal_Sovereign_Lighthouse_drone_visit.webm
+License: CC0 (http://creativecommons.org/publicdomain/zero/1.0/deed.en)
+Checked: October 15, 2026
+File SHA-256: 8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6
+Changes: Trimmed 35–47 seconds; audio removed; scaled to 480 pixels high at 24 fps; H.264 MP4, CRF 23. No stabilization, artificial camera motion, brightness changes, or sharpening.
+All derivatives retain this source license.
+
+Models and rendered/reference PNGs retain the source license. This additive notice is outside the unchanged raw artifact inventory.
+Code and diagnostic scripts made by Ryan with Codex (GPT-6), MIT.
