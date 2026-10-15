@@ -72,6 +72,26 @@ test("JSON saving reports the newest clay edits and paint stamps excluded by the
   await expect(page.locator("#link-note")).toContainText("not included");
   await page.evaluate(() => window.__splashery.app.updateEmbed());
   await expect(page.locator("#embed-note")).toContainText("not included");
+  for (const [method, selector] of [
+    ["copyLink", "#link-note"],
+    ["updateEmbed", "#embed-note"],
+  ]) {
+    await page.evaluate(async (method) => {
+      const { app, player } = window.__splashery;
+      const clay = player.proc.clay,
+        paint = player.scene.paint.stamps;
+      const pending = app[method]();
+      player.proc.clay = [];
+      player.scene.toy.clay = [];
+      player.scene.paint.stamps = [];
+      await pending;
+      player.proc.clay = clay;
+      player.scene.toy.clay = clay.slice();
+      player.scene.paint.stamps = paint;
+    }, method);
+    await expect(page.locator(selector)).toContainText("400 clay edits");
+    await expect(page.locator(selector)).toContainText("800 paint stamps");
+  }
   await page.evaluate(async (scene) => {
     await window.__splashery.app.importJSONFile(
       new File([JSON.stringify(scene)], "lifecycle.json", { type: "application/json" }),

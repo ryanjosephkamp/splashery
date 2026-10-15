@@ -1618,8 +1618,8 @@ class App {
 
   async copyLink() {
     const scene = this.exportScene();
-    const res = await buildShareHash(scene);
     const note = this.sceneSaveNote(scene);
+    const res = await buildShareHash(scene);
     if (note) res.notes.push(note);
     if (!res.ok) {
       this.ui.setLinkNote(res.notes.join(" "));
@@ -1650,8 +1650,8 @@ class App {
 
   async updateEmbed() {
     const scene = this.exportScene();
-    const res = await buildShareHash(scene);
     const saveNote = this.sceneSaveNote(scene);
+    const res = await buildShareHash(scene);
     if (saveNote) res.notes.push(saveNote);
     const transparent = this.ui.embedTransparent();
     const size = this.ui.embedSize();
