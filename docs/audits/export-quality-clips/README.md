@@ -9,14 +9,40 @@ computer viewport and a 390 × 844 phone viewport (DPR 3). Phone emulation is no
 Existing toy assets retain the licenses and credits in [CREDITS.md](../../../CREDITS.md) and
 [LICENSES.md](../../../LICENSES.md). Export code is MIT.
 
-## Revised defaults after Operator review
+## Current phone High follow-up
+
+Phone Standard and High now both budget **three minutes**. High keeps native screen pixels; its
+bitrate fits video and audio into 80% of the encoded-output budget. The Record line shows the plan's
+actual limit. The 96/384 MiB ceilings remain policy choices, not measured device memory.
+
+Fresh fixed-scene recordings on merged main, including the real-draw capture fix:
+
+- [Phone Standard](r3/fixed/after-phone-record-standard.webm) and
+  [phone High](r3/fixed/after-phone-record-high.webm).
+- [Computer Standard](r3/fixed/after-desktop-record-standard.webm),
+  [High](r3/fixed/after-desktop-record-high.webm), and
+  [Max](r3/fixed/after-desktop-record-max.webm).
+- [Centered phone detail comparison](r3/fixed/phone-detail-comparison.png),
+  [common display-size scores](r3/fixed/phone-comparison.json), and
+  [per-level saved/live compression scores](r3/fixed/quality-scores.json).
+
+Both phone levels are compared against the same 1170 × 1800 live display reference. Standard is
+enlarged with Lanczos; High is native. Picture-only SSIM is 0.469571 / 0.562608; luma Laplacian
+variance is 154.2 / 826.4. The crop shows more leaf/path detail in High, with compression artifacts.
+Neither saved level matches the live reference. Full-length take measurements are being refreshed.
+
+The six `r3/cdx-export-share-*` captures show Record, Video, and GIF on the merged layout at both
+review sizes.
+[Current implementation follow-up](https://github.com/ryanjosephkamp/splashery/blob/codex/export-quality/docs/audits/export-quality/review-r3.md).
+
+## Earlier revision: one-minute High
 
 Record now defaults to **Standard**. Its separate bitrate policy budgets three minutes on the
 reviewed phone sizes. High shows one minute; Max has a shorter computer-only limit. The 96/384 MiB
 ceilings are policy ceilings, not measured device memory. GIF and stepped video keep their original
 defaults; GIF effect sampling is now capped at eight seconds.
 
-| Current Record choice         | Computer                                   | Phone                                    |
+| Earlier Record choice         | Computer                                   | Phone                                    |
 | ----------------------------- | ------------------------------------------ | ---------------------------------------- |
 | Standard default, Photo to 3D | [Video](r2/desktop-photo-3d-standard.webm) | [Video](r2/phone-photo-3d-standard.webm) |
 | Standard default, Donut       | [Video](r2/desktop-donut-standard.webm)    | [Video](r2/phone-donut-standard.webm)    |

@@ -4,8 +4,8 @@
   "files": [
     {
       "file": "README.md",
-      "bytes": 8392,
-      "sha256": "065e39c613f8c6477f9d31e78200edfe63d1fa8d7a42d1464b97e09d4bde04f7"
+      "bytes": 9957,
+      "sha256": "f245e4bf97539751d54b91d44fc5b66ac8ff77107de574ffb694ed6814e6f5f4"
     },
     {
       "file": "after-desktop-chest-gif.gif",
@@ -463,6 +463,206 @@
       "sha256": "0bf3162a883840b23fc7451678062f69b72761358026e771e3584c34c39a24a1"
     },
     {
+      "file": "r3/cdx-export-share-gif-1440x900.png",
+      "bytes": 402540,
+      "sha256": "faaf14054d92e83e3dbac4f92747df4ea203a7f85c9b1e1f9190f95abcdda89d"
+    },
+    {
+      "file": "r3/cdx-export-share-gif-390x844.png",
+      "bytes": 548113,
+      "sha256": "a72d7f3da678bea7d315b3a6070ea1b0e5270e9ef40475726eac0f6e397d4a00"
+    },
+    {
+      "file": "r3/cdx-export-share-record-1440x900.png",
+      "bytes": 404926,
+      "sha256": "c08f8ed354b1138552ab75c68a127f2b582e9567acad5d911430dc2bc1bd6780"
+    },
+    {
+      "file": "r3/cdx-export-share-record-390x844.png",
+      "bytes": 552565,
+      "sha256": "59a2b0f47237e86bfc6e638c6860cd09a6a215c4406a2a3477afcb89a7cc0f10"
+    },
+    {
+      "file": "r3/cdx-export-share-video-1440x900.png",
+      "bytes": 401488,
+      "sha256": "6ad6734301b4e0dfed8fd29e48e4fd3833e607a7d88434c70cfa31573d05f5dc"
+    },
+    {
+      "file": "r3/cdx-export-share-video-390x844.png",
+      "bytes": 543334,
+      "sha256": "3f71a4c71b70f936e0d389903fb137e7c92c750a34c49809fc42c673e5ab8363"
+    },
+    {
+      "file": "r3/fixed/after-desktop-photo-3d-png.png",
+      "bytes": 1153148,
+      "sha256": "496b59b099e2936c7c0c859e23426eb3ee306be58108098b08e5a6f64ecf5f82"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-high-decoded-01.png",
+      "bytes": 5710004,
+      "sha256": "e7730779fb4e21905b8bf6735413f57dd1e85d40449a7532aeb7d80c0e2f4772"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-high-decoded-02.png",
+      "bytes": 5700809,
+      "sha256": "9d2d0fc8df0c2ecc4e6fd0fef874cce6d9d500c63fb12ec6891fc672003dac4a"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-high-decoded-03.png",
+      "bytes": 5759153,
+      "sha256": "6530fc1fb9d81fddac07af8f08effa9986ec2080b7c10fb2b21cdaf625e450b9"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-high-reference.png",
+      "bytes": 6135325,
+      "sha256": "1c3de6a13312c070f3a0266f9e3eee2371ee0bf3320c779d18ccc276d11ea6bf"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-high.webm",
+      "bytes": 459319,
+      "sha256": "6d57cce3e84c0c4fefe32c451a55df46792e5249b54f88c3964d216c9e184041"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-max-decoded-01.png",
+      "bytes": 11831537,
+      "sha256": "7e7b91ea25bcf89c40c21991af1be23c524c439b50aed6deec399f8981891124"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-max-decoded-02.png",
+      "bytes": 11819528,
+      "sha256": "75cfa59479b1f9452a06fc8797714607a441b9d3235047779394bef62562fefd"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-max-decoded-03.png",
+      "bytes": 11846690,
+      "sha256": "bc9a2326e93e2ab806e0bcfea73888165b332ea0a501eb071f01333651669013"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-max-reference.png",
+      "bytes": 12495537,
+      "sha256": "99158b5f6f3d745e71528a5a25640dc16d8475de698b54098730395785dee9e1"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-max.webm",
+      "bytes": 555485,
+      "sha256": "07a27e28f9f9dcad45babd13fd5c9555ddde4765e80fac1d0649b9d404897d18"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-standard-decoded-01.png",
+      "bytes": 1006255,
+      "sha256": "be09894aa57a434621e3136c3be02604f04cf0b0d9b6f5ee4c66f1deec39783f"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-standard-decoded-02.png",
+      "bytes": 1004218,
+      "sha256": "46f2daee76246aa498071dbcfb1e061db4665b0f3b2f38e7ff461f14e37811f9"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-standard-decoded-03.png",
+      "bytes": 1012689,
+      "sha256": "a8d7b7ee80f1aecb039ec8c9d8e973526345cd4de872c4bbe9b8d342c1080f36"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-standard-reference.png",
+      "bytes": 1153148,
+      "sha256": "496b59b099e2936c7c0c859e23426eb3ee306be58108098b08e5a6f64ecf5f82"
+    },
+    {
+      "file": "r3/fixed/after-desktop-record-standard.webm",
+      "bytes": 110363,
+      "sha256": "6c873c27745c9ef643602c37607b116b1aa88e9021cc674520cf24a953480aa2"
+    },
+    {
+      "file": "r3/fixed/after-phone-photo-3d-png.png",
+      "bytes": 490850,
+      "sha256": "11fb61c27e7cd860b0c0ec968e6e2aa1d48f427c71de10887f473889fb29d27d"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-high-decoded-01.png",
+      "bytes": 1285053,
+      "sha256": "9385729a583a089004c21d4529451f06ab66ba600367bda110ed3fd8062af2d8"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-high-decoded-02.png",
+      "bytes": 1291602,
+      "sha256": "a706272d80a0d0f40102444871e68849931781d27b217fe93f8e07261a57a768"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-high-decoded-03.png",
+      "bytes": 1375731,
+      "sha256": "1e6c6e066ae4d04591b12cc0527321b8604ccd4bf96bafc5c59c2d83fad0bce6"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-high-reference.png",
+      "bytes": 1958061,
+      "sha256": "50765589df7059fabd49f08cd70a61c6ec29afb5a2f6b08ff96f04ca730b222f"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-high.webm",
+      "bytes": 76942,
+      "sha256": "f31d1a8c1668f501a96efed2e271c813039c0d140be75dc90a3281b9dee109c1"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-standard-decoded-01.png",
+      "bytes": 418330,
+      "sha256": "6ddf39174fedae3f1cf93372a82e004ab1b3ea296286b5cb93c90597187e2126"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-standard-decoded-02.png",
+      "bytes": 417063,
+      "sha256": "3e94abf578b98b8601e28ec2ff61a2134df1564c860086f38cdb4eab45c6eb34"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-standard-decoded-03.png",
+      "bytes": 425820,
+      "sha256": "708da3a7ac180c3acd7e410677c8d00bf09d7e6d925a45a1d7a1b428ad9065ec"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-standard-reference.png",
+      "bytes": 494672,
+      "sha256": "54116ed80cd6da6621847729452f2de4cb1fa33be9d63761a4ed6ce5c321c602"
+    },
+    {
+      "file": "r3/fixed/after-phone-record-standard.webm",
+      "bytes": 65146,
+      "sha256": "4d911f7d167dd584a8571ea58ed512866526ea196bc72f1952f2a39eb655bde4"
+    },
+    {
+      "file": "r3/fixed/frame-checks.json",
+      "bytes": 767,
+      "sha256": "da11aea4ea3e53e123f90e21b180425ad974f0f1b07c2bdeab6595c11e793468"
+    },
+    {
+      "file": "r3/fixed/measurements.json",
+      "bytes": 1813,
+      "sha256": "c89f3b4e8fe49abda226e448ce2917275a4cf8837714ca36937b367a7656904c"
+    },
+    {
+      "file": "r3/fixed/phone-comparison.json",
+      "bytes": 1910,
+      "sha256": "3a481f23c48bad87f1f6b3d2d0418f906b85624f605e8d752bddd4b01a084a50"
+    },
+    {
+      "file": "r3/fixed/phone-detail-comparison.png",
+      "bytes": 521139,
+      "sha256": "9de1d7774021e54654d39bec9b33c6debe3c774d513401704e36cc4b76f71547"
+    },
+    {
+      "file": "r3/fixed/quality-scores.json",
+      "bytes": 4867,
+      "sha256": "ef86c9588899d7d0aa3453c5507c07bddadc0cf3b19cf8e647f5774a97e54188"
+    },
+    {
+      "file": "r3/fixed/share-1440x900.png",
+      "bytes": 1043849,
+      "sha256": "dd565839af779a16d5e92e9b25a53e32b07da84570d13caf523251dbfbe94223"
+    },
+    {
+      "file": "r3/fixed/share-390x844.png",
+      "bytes": 1056418,
+      "sha256": "ba500433919dfb7cd644ebb9f58479906b43d67e18d53333379e633e06d62ffb"
+    },
+    {
       "file": "record-contact-sheet.jpg",
       "bytes": 53017,
       "sha256": "2ffe07bb5d73dafe71a6073d50f79b091375b9182e8b2dca0cd14cfb112caf6c"
@@ -490,5 +690,7 @@
   ],
   "revisionImplementationCommit": "c14ddf38e5f77112dcbdc71a0ee9d326759227a4",
   "revisionMain": "cb8a8315",
-  "revisionReferenceMode": "deterministic renderAt(0, cameraState); earlier visibility-pause study retained separately"
+  "revisionReferenceMode": "deterministic renderAt(0, cameraState); earlier visibility-pause study retained separately",
+  "phoneDurationImplementationCommit": "cd8ffb7c5d43839e810fa788f5e5d0a78b153600",
+  "phoneDurationMainCommit": "d4df5998675c5b31ae4dae1240a7e2d73a1fface"
 }

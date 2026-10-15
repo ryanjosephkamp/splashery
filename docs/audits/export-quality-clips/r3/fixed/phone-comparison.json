@@ -1,0 +1,58 @@
+{
+  "displaySize": [1170, 1800],
+  "pictureCrop": [83, 565, 1087, 1235],
+  "referencePictureSharpness": 3580.0362597938934,
+  "method": "First three decoded frames; Lanczos resize to the High live display size; picture crop is the live non-white bounding box; no registration.",
+  "levels": [
+    {
+      "quality": "standard",
+      "pictureSSIM": 0.4695706519629701,
+      "pictureSharpness": 154.2225407522424,
+      "frames": [
+        {
+          "file": "after-phone-record-standard-decoded-01.png",
+          "fullSSIM": 0.8261837726662556,
+          "pictureSSIM": 0.46833718762024784,
+          "pictureSharpness": 152.28116223908916
+        },
+        {
+          "file": "after-phone-record-standard-decoded-02.png",
+          "fullSSIM": 0.8261513140234692,
+          "pictureSSIM": 0.46810382380167526,
+          "pictureSharpness": 150.38320649832434
+        },
+        {
+          "file": "after-phone-record-standard-decoded-03.png",
+          "fullSSIM": 0.827652080667405,
+          "pictureSSIM": 0.4722709444669872,
+          "pictureSharpness": 160.0032535193137
+        }
+      ]
+    },
+    {
+      "quality": "high",
+      "pictureSSIM": 0.5626080115578862,
+      "pictureSharpness": 826.3686701724522,
+      "frames": [
+        {
+          "file": "after-phone-record-high-decoded-01.png",
+          "fullSSIM": 0.8520348961786927,
+          "pictureSSIM": 0.5586987634232776,
+          "pictureSharpness": 840.1491797711486
+        },
+        {
+          "file": "after-phone-record-high-decoded-02.png",
+          "fullSSIM": 0.8524621155969476,
+          "pictureSSIM": 0.5591404492565534,
+          "pictureSharpness": 805.7279364840141
+        },
+        {
+          "file": "after-phone-record-high-decoded-03.png",
+          "fullSSIM": 0.8563788670169055,
+          "pictureSSIM": 0.5699848219938276,
+          "pictureSharpness": 833.228894262194
+        }
+      ]
+    }
+  ]
+}
