@@ -46,17 +46,20 @@ or "BLOCKED:".
 
 ## State
 
-- October 15, 2026, round 2 (WORKING): Ryan marked all 13 audit cards good. Engine PR #643
-  (`claude/lane-polish-engine`: a morph channel that shrinks as it goes, and a nearer fade in the
-  free science view) is open and merged into this branch; it must merge first (its two red shards
-  are man5:201 and tpg:205, both on CI's known list). Posted `-r2` cards (before on the left, after
-  on the right) for the Chladni plate, Sound in a box, the Song landscape, Model to splats, Powers
-  of ten, the microscope, the galaxy and Point clouds; each says what changed, what didn't, and why.
-  No change: the Splat mirror (its ghost comes from the relief's background layer, shared with Photo
-  to 3D) and the Volume viewer (the gar's colors are its data; the stair steps and the cut-face
-  shading are in `src/volume/`). The page toys (Picture lab, Your book, Photo album) are with this
-  lane's helper. Local: tests/pol.spec.mjs 5 of 5; the changed toys' own specs 170 passed and 2
-  timed out under load, both passing alone.
+- October 15, 2026, round 2 READY: Ryan marked all 13 audit cards good; all 13 have their round 2
+  answer. `-r2` cards (before on the left, after on the right) on Effect review page 2 for 11 toys;
+  each says what changed, what didn't, and why. No change, with reasons: the Splat mirror (its ghost
+  comes from the relief's background layer, shared with Photo to 3D) and the Volume viewer (the
+  gar's colors are its data; the stair steps and the cut-face shading are in `src/volume/`). Engine
+  PR #643 (`claude/lane-polish-engine`; merge it first): a morph channel that shrinks as it goes, a
+  nearer fade in the free science view, drawn PDF figures only when a toy asks (`{ drawn: true }`:
+  Your book, the album and the lab; the Storybook and the Arcade's pages unchanged), and the stage's
+  depth slider clear of the Play button on phones. Its full suite (an earlier head) failed only
+  man5:201 and tpg:205, both on CI's known list. Local: pol-engine 5 of 5; the page toys' specs (bk,
+  bk5, pg6, pic, pdf, hh3-storybook, vw, pol-pages, pol-engine) 129 of 129; the other changed toys'
+  specs 170 passed and 2 timed out under load, both passing alone. The page toys' thumbnails stay as
+  they were (the thumbnail tool shot them before their pages built).
+
 - October 14, 2026, READY: round 1 (audit) done on main 41b21e74. All 13 cards are on Effect review
   page 2, lane `Polish`, ids `pol-<toy id>`: each a phone-size MP4 (390×844) and numbered fixes,
   most valuable first, each marked small, medium, or large, in its "You said" line.
@@ -80,6 +83,11 @@ or "BLOCKED:".
   mirror fix stays in the mirror's own path.
 
 ## Known issues
+
+- Your book, one page at a time: the view pulls back as the page lifts, so the leaf still looks
+  large for a few frames mid-turn, and a tap turn now starts 0.3 s later (0.4 s for the cover).
+- `tests/bk5.spec.mjs` (lane Books r5's file) has two expectations relaxed for the bare-page redraw
+  (Pop out's link boxes fade after 1.6 s).
 
 ## For the Operator
 
