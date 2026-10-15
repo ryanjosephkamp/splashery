@@ -61,8 +61,12 @@ framing) until it is drawn, and keeps it with a note where WebGL2 and WebGPU are
   someone's photo isn't unloaded when scrolled away.
 - The player's "Open in Splashery" link is set to open a new tab, as the site's links to the app do.
 - The page's `?renderer=` passes on to the players (the tests force WebGL2, as the other specs do).
-- The "Photo to 3D", "Walnut CT scan" and "QR code" toys are behind the labs switch; the page links
-  to them anyway (it is not linked from anywhere public yet). Their toy pages exist.
+- The "Photo to 3D", "Walnut CT scan" and "QR code" toys are behind the labs switch. Their demos
+  stay on the page with their Playground links, but their "Its page" links (and `tools/#qr`) are
+  left out until they leave labs (the owner's call, Option A, October 14, 2026): `links()` in
+  tools/site-pitch.mjs drops a labs toy's page link by itself.
+- The lane stands down after this round; the owner uses #633 as the structural reference for a
+  second version built in another session.
 - The link length in the claims list (the grape's whole scene) is computed at build time.
 - First screen on a phone (local, uncompressed): the still paints at about 0.2 s and the grape is
   live at about 2.6 s; 3.6 MB, 2.5 MB of it the PlayCanvas engine (gzipped on GitHub Pages).

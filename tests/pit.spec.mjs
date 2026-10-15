@@ -9,6 +9,7 @@ import path from "node:path";
 import { PNG } from "pngjs";
 import jsQR from "jsqr";
 import { PITCH_DEMOS } from "../tools/site-pitch.mjs";
+import { TOYS } from "../src/toys.js";
 
 const ORIGIN = `http://127.0.0.1:${Number(process.env.SPLASHERY_PORT) || 4173}`;
 const URL_ = `${ORIGIN}/site/about/splashery/`;
@@ -31,7 +32,11 @@ test("the page is built, with its own preview card, and stays off the home page"
     expect(html).toContain(`data-pit-demo="${d.id}"`);
     // Each toy's still, rendered by tools/pit-stills.mjs, is there.
     expect(fs.existsSync(`site/assets/pitch/${d.id}.webp`), d.id).toBe(true);
+    // A toy in labs keeps its Playground link but not a link to its page (the owner's call).
+    const labs = TOYS.find((t) => t.id === d.id)?.labs;
+    if (labs) expect(html, d.id).not.toContain(`toys/${d.id}/"`);
   }
+  expect(html).not.toContain("tools/#qr");
   // No hype: no exclamation marks in the words, and American English is checked by the tool.
   const words = html.replace(/<script[\s\S]*?<\/script>/g, "").replace(/<[^>]+>/g, " ");
   expect(words).not.toMatch(/!/);

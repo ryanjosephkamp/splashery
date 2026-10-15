@@ -40,7 +40,11 @@ export function pitchPage(page, ctx) {
   };
   const links = (id, more = "") => {
     const t = toy(id);
-    return `<p class="pit-links"><a href="${up}${galleryHref(t)}">Open it in the Playground${arrow}</a><a href="${up}${toyPath(t)}">Its page</a>${more}</p>`; // prettier-ignore
+    // A toy still in labs keeps its Playground link but not its page, which shows the labs screen
+    // to anyone without the switch (the owner's call, October 14, 2026); it returns when the toy
+    // leaves labs.
+    const page = t.labs ? "" : `<a href="${up}${toyPath(t)}">Its page</a>`;
+    return `<p class="pit-links"><a href="${up}${galleryHref(t)}">Open it in the Playground${arrow}</a>${page}${more}</p>`; // prettier-ignore
   };
   const grape = toy("grape");
   const linkChars = `${grape ? "#s=" + galleryHash(grape) : ""}`.length;
@@ -127,7 +131,7 @@ ${live("walnut-ct")}
 <p class="pit-num">05</p>
 <h2 id="h-pit-qr">A code that scans</h2>
 <p>Text, pictures, PDFs, and codes can all become splats. This QR code is made of them, and it still reads: point a phone's camera at it. The QR tools also show how a code works, how much damage it survives, and how to hide three in one picture.</p>
-${links("qr-code", `<a href="${up}tools/#qr">QR tools</a>`)}
+${links("qr-code")}
 </div>
 <figure class="pit-figure">
 ${live("qr-code")}
