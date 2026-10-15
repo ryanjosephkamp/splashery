@@ -219,6 +219,11 @@
               </li>
               <li><a href="#task-54-more-sample-pictures">Task 54: more sample pictures</a></li>
               <li>
+                <a href="#full-quality-exports-codex-task-89"
+                  >Full-quality exports (Codex task 89)</a
+                >
+              </li>
+              <li>
                 <a href="#picture-qr-theme-packs-codex-task-58"
                   >Picture QR theme packs (Codex task 58)</a
                 >
@@ -289,6 +294,9 @@
                 <a href="#photo-to-3d-round-3-test-tools-not-shipped"
                   >Photo to 3D round 3 test tools (not shipped)</a
                 >
+              </li>
+              <li>
+                <a href="#video-export-muxers-codex-task-89">Video export muxers (Codex task 89)</a>
               </li>
             </ul>
           </li>
@@ -7978,6 +7986,13 @@
             separately from the shipped site. The build-time code is offered under this repository's
             MIT license.
           </p>
+          <h2 id="full-quality-exports-codex-task-89">Full-quality exports (Codex task 89)</h2>
+          <p>
+            The export presets, stepped GIF and video captures, recording quality levels, and their
+            tests are made by Ryan with Codex (GPT-6), October 15, 2026, under Splashery's MIT
+            license. The video muxers are by Vanilagy, MIT; see
+            <a href="../../about/credits/#video-export-muxers-codex-task-89">LICENSES.md</a>.
+          </p>
           <h2 id="picture-qr-theme-packs-codex-task-58">Picture QR theme packs (Codex task 58)</h2>
           <p>
             48 original code-made illustrations, selected from 138 candidates,
@@ -9731,6 +9746,42 @@ subject to the following conditions:
               original rendered output is CC0.
             </li>
           </ul>
+          <h3 id="video-export-muxers-codex-task-89">Video export muxers (Codex task 89)</h3>
+          <ul>
+            <li>
+              <code>mp4-muxer@5.2.2</code>, MIT, Vanilagy:
+              <a
+                href="https://raw.githubusercontent.com/Vanilagy/mp4-muxer/v5.2.2/LICENSE"
+                target="_blank"
+                rel="noopener"
+                >source and license</a
+              >. Unmodified npm ESM build at <code>vendor/mp4-muxer/mp4-muxer.mjs</code>; license
+              beside it.
+            </li>
+            <li>
+              <code>webm-muxer@5.1.4</code>, MIT, Vanilagy:
+              <a
+                href="https://raw.githubusercontent.com/Vanilagy/webm-muxer/v5.1.4/LICENSE"
+                target="_blank"
+                rel="noopener"
+                >source and license</a
+              >. Unmodified npm ESM build at <code>vendor/webm-muxer/webm-muxer.mjs</code>; license
+              beside it.
+            </li>
+          </ul>
+          <p>
+            Both load only when a video is encoded. They make no network calls. Source licenses
+            checked on October 15, 2026. The export implementation is made by Ryan with Codex
+            (GPT-6) under Splashery's MIT license.
+          </p>
+          <p>
+            The task 89 measurement scripts additionally use the workspace's Python 3, NumPy 2.3.5,
+            Pillow 12.3.0, and FFmpeg / ffprobe 7.1.5. These are build-time tools only; none ships
+            with the page. Pillow and this FFmpeg build are listed above. NumPy is BSD-3-Clause:
+            <a href="https://numpy.org/doc/2.3/license.html" target="_blank" rel="noopener"
+              >https://numpy.org/doc/2.3/license.html</a
+            >.
+          </p>
         </div>
       </section>
       <p class="note">

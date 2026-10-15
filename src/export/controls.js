@@ -63,7 +63,8 @@ export function populateExportControls(app) {
     fill(`${prefix}-size`, preset.sizes, preset.defaults.size, " px");
     fill(`${prefix}-shape`, preset.shapes, preset.defaults.shape);
   }
-  fill("gif-frames", P.gif.frames, P.gif.defaults.frames, " frames");
+  // The field already says Frames; keep three-digit choices inside Share's narrow row.
+  fill("gif-frames", P.gif.frames, P.gif.defaults.frames, "");
   fill("webm-seconds", P.video.seconds, P.video.defaults.seconds, " s");
   fill("webm-fps", P.video.fps, P.video.defaults.fps, " fps");
   fill(

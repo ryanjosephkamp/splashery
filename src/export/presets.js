@@ -42,9 +42,10 @@ export const EXPORT_PRESETS = {
     maxMinFps: 20,
     maxSlowSeconds: 2, // End Max after sustained slow drawing.
     audioBitrate: 128_000,
-    // Budget three default minutes; higher levels trade length for detail.
+    // Both phone levels budget three minutes, including audio and VBR margin.
     bitratePer1080: { standard: 8_000_000, high: 12_000_000, max: 16_000_000 },
     minimumSeconds: { standard: 180, high: 60, max: 30 },
+    phoneMinimumSeconds: 180,
     minBitrate: 750_000,
     maxBitrate: 80_000_000,
     phoneBytes: 96 * MiB,
@@ -183,7 +184,8 @@ export function recordingPlan({
           r.minBitrate,
           (r.bitratePer1080[quality] * dims.width * dims.height) / (1080 * 1080),
         ),
-        usableBits / r.minimumSeconds[quality] - r.audioBitrate,
+        usableBits / Math.max(r.minimumSeconds[quality], phone ? r.phoneMinimumSeconds : 0) -
+          r.audioBitrate,
       ),
     ),
   );

@@ -7,6 +7,9 @@ import path from "node:path";
 import { execFileSync } from "node:child_process";
 
 const out = path.resolve(process.argv[2] || "/tmp/export-quality/record-rates");
+const seconds = Number(process.argv.find((a) => a.startsWith("--seconds="))?.split("=")[1] || 15);
+if (!(seconds > 0 && seconds <= 600)) throw new Error("Choose 1 to 600 seconds.");
+const phonesOnly = process.argv.includes("--phone-only");
 fs.mkdirSync(out, { recursive: true });
 const resultsPath = path.join(out, "record-rates.json");
 const results = fs.existsSync(resultsPath) ? JSON.parse(fs.readFileSync(resultsPath)) : [];
@@ -17,10 +20,11 @@ const browser = await chromium.launch({
     "--enable-unsafe-swiftshader",
     "--ignore-gpu-blocklist",
     "--enable-webgl",
+    "--enable-precise-memory-info",
   ],
 });
 try {
-  for (const phone of [true, false]) {
+  for (const phone of phonesOnly ? [true] : [true, false]) {
     const context = await browser.newContext({
       viewport: phone ? { width: 390, height: 844 } : { width: 1440, height: 900 },
       deviceScaleFactor: phone ? 3 : 1,
@@ -51,6 +55,20 @@ try {
         await page.evaluate(() => {
           const { app } = window.__splashery;
           const start = app.startRecord.bind(app);
+          const NativeRecorder = window.MediaRecorder;
+          window.recordMemory = { bytes: 0, largestChunk: 0, samples: [] };
+          window.MediaRecorder = class extends NativeRecorder {
+            constructor(...args) {
+              super(...args);
+              this.addEventListener("dataavailable", ({ data }) => {
+                window.recordMemory.bytes += data.size;
+                window.recordMemory.largestChunk = Math.max(
+                  window.recordMemory.largestChunk,
+                  data.size,
+                );
+              });
+            }
+          };
           window.recordStartComplete = false;
           app.startRecord = async (...args) => {
             try {
@@ -58,6 +76,7 @@ try {
             } finally {
               window.recordStartComplete = true;
               app.startRecord = start;
+              window.MediaRecorder = NativeRecorder;
             }
           };
         });
@@ -65,7 +84,7 @@ try {
         await page.click("#record-start", { noWaitAfter: true });
         await page.waitForFunction(() => window.recordStartComplete);
         const take = await page.evaluate(
-          async ({ quality }) => {
+          async ({ quality, seconds }) => {
             const { app, player } = window.__splashery;
             if (!app.recording) throw new Error(document.getElementById("toast").textContent);
             const { recordingPlan } = await import("/src/export/presets.js");
@@ -78,12 +97,23 @@ try {
               quality,
             });
             const done = app.recording.done;
+            const sample = () =>
+              window.recordMemory.samples.push({
+                seconds: (performance.now() - sampleStart) / 1000,
+                encodedBytes: window.recordMemory.bytes,
+                jsHeapBytes: performance.memory?.usedJSHeapSize ?? null,
+              });
+            const sampleStart = performance.now();
+            sample();
+            const memoryTimer = setInterval(sample, 5000);
             const replay = () => player.motion.act(player.time);
             replay();
             const loop = setInterval(replay, 4000);
-            await new Promise((r) => setTimeout(r, 15_000));
+            await new Promise((r) => setTimeout(r, seconds * 1000));
             clearInterval(loop);
-            app.stopRecord();
+            clearInterval(memoryTimer);
+            sample();
+            if (app.recording) app.stopRecord();
             const result = await done;
             return {
               plan,
@@ -91,9 +121,11 @@ try {
               type: result.type,
               seconds: result.seconds,
               reason: result.reason,
+              requestedSeconds: seconds,
+              memory: window.recordMemory,
             };
           },
-          { quality },
+          { quality, seconds },
         );
         const download = page.waitForEvent("download");
         await page.click("#rec-save");
@@ -148,6 +180,8 @@ try {
           height: video.height,
           decodedFrames: Number(video.nb_read_frames),
           MBPerMinute: ((take.bytes / duration) * 60) / 1_000_000,
+          encodedBytesPerSecond: take.bytes / duration,
+          policyHeadroomBytes: take.plan.maxBytes - take.bytes,
         };
         results.push(row);
         fs.writeFileSync(resultsPath, JSON.stringify(results, null, 2) + "\n");

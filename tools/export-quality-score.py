@@ -10,7 +10,7 @@ import subprocess
 import sys
 
 import numpy as np
-from PIL import Image
+from PIL import Image, ImageDraw
 
 root = pathlib.Path(sys.argv[1])
 rows = json.loads((root / "measurements.json").read_text())
@@ -70,4 +70,38 @@ for row in rows:
         frames.append({"file": file.name, "ssim": ssim(aligned, decoded), "sharpness": sharp(decoded), "horizontalAlignmentSSIM": registered, "horizontalShiftPixels": dx})
     scores.append({"key": row["key"], "referenceSharpness": sharp(reference), "ssim": float(np.mean([f["ssim"] for f in frames])), "decodedSharpness": float(np.mean([f["sharpness"] for f in frames])), "horizontalAlignmentSSIM": float(np.mean([f["horizontalAlignmentSSIM"] for f in frames])), "frames": frames})
 (root / "quality-scores.json").write_text(json.dumps(scores, indent=2) + "\n")
+if "--compare-phone" in sys.argv:
+    # Compare both levels at the same display size. Their separate saved/live
+    # scores above measure compression, not the detail lost by Standard's
+    # smaller render buffer. Keep the raw, unregistered results in both views.
+    reference_image = Image.open(root / "after-phone-record-high-reference.png").convert("RGB")
+    rgb = np.asarray(reference_image)
+    ys, xs = np.nonzero((rgb < 240).any(axis=2))
+    box = (int(xs.min()), int(ys.min()), int(xs.max() + 1), int(ys.max() + 1))
+    luminance = lambda im: np.asarray(im, dtype=np.float64) @ np.array([0.2126, 0.7152, 0.0722])
+    reference = luminance(reference_image)
+    picture = luminance(reference_image.crop(box))
+    comparison = []
+    examples = []
+    for quality in ["standard", "high"]:
+        frames = []
+        for file in sorted(root.glob(f"after-phone-record-{quality}-decoded-[0-9][0-9].png")):
+            decoded = Image.open(file).convert("RGB").resize(reference_image.size, Image.Resampling.LANCZOS)
+            if not frames:
+                examples.append(decoded)
+            crop = luminance(decoded.crop(box))
+            frames.append({"file": file.name, "fullSSIM": ssim(reference, luminance(decoded)), "pictureSSIM": ssim(picture, crop), "pictureSharpness": sharp(crop)})
+        if not frames:
+            raise ValueError(f"No phone {quality} frames")
+        comparison.append({"quality": quality, "pictureSSIM": float(np.mean([f["pictureSSIM"] for f in frames])), "pictureSharpness": float(np.mean([f["pictureSharpness"] for f in frames])), "frames": frames})
+    result = {"displaySize": reference_image.size, "pictureCrop": box, "referencePictureSharpness": sharp(picture), "method": "First three decoded frames; Lanczos resize to the High live display size; picture crop is the live non-white bounding box; no registration.", "levels": comparison}
+    (root / "phone-comparison.json").write_text(json.dumps(result, indent=2) + "\n")
+    # A centered, unscaled detail crop lets the owner inspect the difference.
+    x, y = (box[0] + box[2]) // 2 - 160, (box[1] + box[3]) // 2 - 160
+    sheet = Image.new("RGB", (960, 355), "white")
+    draw = ImageDraw.Draw(sheet)
+    for i, (label, im) in enumerate(zip(["Standard at display size", "High at display size", "Live display reference"], examples + [reference_image])):
+        draw.text((i * 320 + 5, 5), label, fill="black")
+        sheet.paste(im.crop((x, y, x + 320, y + 320)), (i * 320, 35))
+    sheet.save(root / "phone-detail-comparison.png")
 print(json.dumps(scores, indent=2))

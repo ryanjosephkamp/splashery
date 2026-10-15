@@ -4,6 +4,9 @@ Made by Ryan with Codex (GPT-6), under Splashery's MIT license. Task:
 [89-export-quality.md](../codex/89-export-quality.md). Status: implemented for owner review; not
 accepted or merged. Rule check: none.
 
+The current phone-duration follow-up is [review-r3.md](export-quality/review-r3.md). Earlier
+measurements below retain their original policy and capture setup.
+
 ## What changed
 
 `src/export/presets.js` is the shared source of choices, defaults, bitrate scaling, and budgets.
@@ -31,13 +34,14 @@ preview remain the Share lane's work. No engine files changed.
 Video uses 12 Mb/s at 1080 square and 30 fps, scaled by pixel area and frame rate, between 2 and 80
 Mb/s. Live Record has a separate duration policy: Standard/High/Max request 8/12/16 Mb/s per
 1080-square frame at 30 fps, with a 750-kb/s nominal floor and an 80-Mb/s ceiling. The actual
-request is capped further so 80% of the encoded budget can hold three minutes, one minute, and 30
-seconds respectively, including a 128-kb/s audio allowance. The enforced limit is the lesser of ten
-minutes and that 80%-budget duration at the requested video-plus-audio rate. Unusual
-variable-bitrate output can still reach the byte guard first. High keeps its native phone pixels,
-but those pixels do not establish a better saved picture; the fixed-scene comparison below does not
-establish a High advantage on this phone emulation. The Operator requested this default change after
-reviewing the first measurements.
+request is capped further so 80% of the encoded budget can hold three minutes for both phone levels.
+On computers it reserves three minutes, one minute, and 30 seconds respectively, including a
+128-kb/s audio allowance. The enforced limit is the lesser of ten minutes and that 80%-budget
+duration at the requested video-plus-audio rate. Unusual variable-bitrate output can still reach the
+byte guard first. High keeps its native phone pixels, and the current comparison measures both
+levels against the same native display reference; the earlier per-level compression scores below do
+not measure the detail lost by Standard's smaller render buffer. The Operator requested this default
+change after reviewing the first measurements.
 
 The GIF encoder retains one raw frame at a time and resets its encoder buffer between compressed
 frames. It distributes GIF's centisecond delay rounding across the loop. Share shows a size estimate
@@ -156,7 +160,7 @@ estimates of available operating-system RAM. No stress-take binary is shipped.
 
 ## Operator follow-up: usable Record duration and merged Share layout
 
-The newest Operator review is
+The first Operator review was
 [PR #654, October 15, 2026](https://github.com/ryanjosephkamp/splashery/pull/654#issuecomment-6187329510).
 Main was merged after Share #653 landed. Controls use explicit ids, tolerate absent slots, and
 preserve controls already supplied by Share. Added selectors live beside Record or in its clip
@@ -282,9 +286,9 @@ which must never be merged. That branch holds phone and desktop defaults, before
 scene recordings, references, measurements, and a review index. The implementation branch holds this
 report and the reproducible runners.
 
-## Verification and limits
+## Earlier revision verification and limits
 
-The current nine-file selection contains **136 cases**. Coverage was completed across the broad
+The prior nine-file selection contains **136 cases**. Coverage was completed across the broad
 135-case run and targeted corrections: **135 passed, one (known on main) QR snapshot failure, and no
 missing or skipped cases**. The initial run had 133 passes and two failures; the Share capability
 case was corrected and rerun, with a new companion check. This is not a single green suite run.
@@ -313,8 +317,9 @@ Existing Record clock checks now compare with the enforced plan and require at l
 at the default. Smoke and playground choices follow the new lists; file-size, persistence, and error
 assertions were retained.
 
-All **30 kit/unit tests** passed in the earlier implementation run. The whole repository suite was
-not run; it remains the Operator's merge-PR check, as task 89 specifies.
+All **30 kit/unit tests** passed in the earlier implementation run. At that revision the whole
+repository suite had not run. The Operator subsequently added the `full-suite` label; current
+results and every failure are in the follow-up report.
 
 - Independent FFmpeg decoding confirms both 240-frame defaults and the Record observations above.
   Vendored ESM bytes match the pinned npm packages; their SHA-256 values are in the verification
@@ -330,8 +335,8 @@ Small source-branch evidence: [measurements](export-quality/measurements.json),
 The export spec uses the same WebGL2 SwiftShader launch flags as `tools/effect-clip.mjs`. The shared
 suite config additionally enables Vulkan/WebGPU; exploratory runs with those additional flags
 produced empty short recordings on this software renderer. No Vulkan, hardware-encoder, real-phone
-frame-rate, or phone photo-library compatibility claim is made from the emulation. The full suite
-remains the Operator's merge-PR check, as task 89 specifies.
+frame-rate, or phone photo-library compatibility claim is made from the emulation. The current full
+GitHub suite is enabled by the Operator's `full-suite` label.
 
 The reviewer found issues in byte-cap enforcement, flight-camera ownership, lens restoration, and
 long slow frames. Those were corrected. Controls and motion clocks are isolated for export; Moving

@@ -158,11 +158,11 @@ test("recording limit is ten minutes, with full-screen High and phone budgets", 
   expect(out.max.height).toBe(3840);
   expect(out.high.maxBytes).toBeLessThan(out.max.maxBytes);
   expect(out.standard.maxSeconds).toBeGreaterThanOrEqual(180);
-  expect(out.high.maxSeconds).toBeGreaterThanOrEqual(60);
+  expect(out.high.maxSeconds).toBeGreaterThanOrEqual(180);
   expect(out.huge.ok).toBe(false);
 });
 
-test("phone Record defaults reserve three minutes at both phone sizes", async ({ page }) => {
+test("phone Standard and High reserve three minutes at both phone sizes", async ({ page }) => {
   await openEncoder(page);
   const plans = await page.evaluate(async () => {
     const { recordingPlan, gifLoopSeconds } = await import("/src/export/presets.js");
@@ -190,7 +190,7 @@ test("phone Record defaults reserve three minutes at both phone sizes", async ({
   expect(plans.loops).toEqual([8, 8, 2, 4]);
   for (const [standard, high] of plans.plans) {
     expect(standard.maxSeconds).toBeGreaterThanOrEqual(180);
-    expect(high.maxSeconds).toBeGreaterThanOrEqual(60);
+    expect(high.maxSeconds).toBeGreaterThanOrEqual(180);
     for (const p of [standard, high]) {
       expect(p.maxSeconds).toBeLessThanOrEqual(600);
       expect(((p.bitrate + 128_000) * p.maxSeconds) / 8).toBeLessThanOrEqual(p.maxBytes * 0.8);
