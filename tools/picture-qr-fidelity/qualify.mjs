@@ -18,7 +18,7 @@ export function sourcePicture(id) {
     for (let ch = 0; ch < 3; ch++) data[i * 3 + ch] = png.data[i * 4 + ch] / 255;
   return { w: png.width, h: png.height, data };
 }
-export async function qualifyCapture(picture, result, text, shape) {
+export async function qualifyCapture(picture, result, text, shape, conditions = CONDITIONS) {
   const img = PNG.sync.read(Buffer.from(result.shot.split(",")[1], "base64")),
     scans = [];
   const reference = shape === "circle" ? circleCrop(picture, result.codeSize) : picture;
@@ -27,7 +27,7 @@ export async function qualifyCapture(picture, result, text, shape) {
     shape === "circle" ? stickerFidelity(picture, { code: { size: result.codeSize } }, img) : null;
   for (const ppm of [8, 4]) {
     const sticker = resize(img, Math.round(result.modules * ppm));
-    for (const c of CONDITIONS.filter((c) => c.ppm === ppm)) {
+    for (const c of conditions.filter((c) => c.ppm === ppm)) {
       let frame =
         c.yaw || c.pitch
           ? capture(sticker, {

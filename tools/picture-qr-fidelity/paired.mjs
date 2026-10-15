@@ -6,7 +6,7 @@ import { execFileSync } from "node:child_process";
 import { chromium } from "@playwright/test";
 import { SAMPLES } from "../../src/qr-craft/samples.js";
 import { LINKS } from "../cdx-circle-study.mjs";
-import { sourcePicture, qualifyCapture } from "./qualify.mjs";
+import { sourcePicture, qualifyCapture } from "./qualify-parallel.mjs";
 const arg = (key, fallback) =>
   process.argv.find((s) => s.startsWith(`--${key}=`))?.slice(key.length + 3) ?? fallback;
 const root = ".cache/picture-qr-fidelity",
@@ -68,6 +68,9 @@ const hashes = Object.fromEntries(
     "styles.css",
     "tools/picture-qr-fidelity/paired.mjs",
     "tools/picture-qr-fidelity/qualify.mjs",
+    "tools/picture-qr-fidelity/qualify-parallel.mjs",
+    "tools/picture-qr-fidelity/qualify-worker.mjs",
+    "tools/picture-qr-fidelity/results/review-pass/qualification-equivalence.json",
     "tools/picture-qr-fidelity/metrics.mjs",
     "tools/picture-qr-fidelity/captures.mjs",
     "tools/qrs-study/readers.mjs",

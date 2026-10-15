@@ -18,6 +18,16 @@ const escape = (value) =>
     (s) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[s],
   );
 const f = (value) => (value == null ? "pending" : value.toFixed(4));
+const scanStatus = summary.complete
+  ? `${summary.detail.codes - summary.detail.failedCodes.length} of ${summary.detail.codes} requested Most detail codes pass every independent reader condition; ${summary.detail.failedGate.length} have an incomplete or failed detail gate. ${summary.scanRegressions.length} codes lose a reader result that passed on main.`
+  : "Full-corpus scan qualification is pending.";
+const fidelityStatus =
+  ["phone", "print"]
+    .map(
+      (scale) =>
+        `${scale}: ${summary.fidelity[scale].nonImprovingPictures.length} completed picture/shape means fail to improve, and ${summary.fidelity[scale].nonImprovingCodes.length} individual codes fail to improve`,
+    )
+    .join("; ") + ".";
 fs.mkdirSync(path.join(out, "images"), { recursive: true });
 fs.mkdirSync(path.join(out, "pictures"), { recursive: true });
 fs.mkdirSync(path.join(out, "sources"), { recursive: true });
@@ -88,13 +98,14 @@ fs.writeFileSync(
 <p>Study and review renders made by Ryan with Codex (GPT-6). Source picture credits are preserved in the corpus manifest and CREDITS.</p>
 <p>Phone screenshots at their original 390 × 844 size, with the same first fixed payload, picture, Low tier, and camera. Every picture has Square and Circle pairs. The complete encoded square, including function patterns, determines the primary score; Circle’s surrounding photo band is excluded.</p>
 <p>Numbers are averages across all ten payloads. Each completed code is tested at 8 and 4 pixels per module, both blur levels, and six camera and brightness views with jsQR and zxing-cpp. The full report and individual results distinguish incomplete checks and failures. These pictures compare appearance; they are not timing evidence.</p>
+<p>${escape(scanStatus)} ${escape(fidelityStatus)}</p>
 <p>${summary.complete ? "The rendered comparison is complete." : "Work in progress: this export is incomplete."} <a href="summary.json">Machine-readable results</a> · <a href="../../../docs/audits/picture-qr-fidelity-2026-10.md">Audit</a></p>
 <nav aria-label="Pictures">${links}</nav></header><main>${clipHtml}${sections}</main></html>\n`,
 );
 fs.writeFileSync(path.join(out, "summary.json"), JSON.stringify(summary, null, 2) + "\n");
 fs.writeFileSync(
   path.join(out, "README.md"),
-  `# Picture QR review · Codex (GPT-6)\n\nStudy and review renders made by Ryan with Codex (GPT-6). Source picture credits remain in [CREDITS](../../../CREDITS.md).\n\nThis branch is for review pictures and clips and is never merged. Each page below shows native 390×844 before-and-after pairs in Square and Circle, using the first fixed payload. Scores average all ten payloads. The code and full audit are on \`codex/picture-qr-fidelity\`. Open \`index.html\` through the repository’s local server for the complete gallery.\n\n${clips.length ? "## Tap motion\n\n" + clips.map((c) => `- [${c.mode} · ${c.picture} · ${c.shape}](clips/${c.file}) — [frame strip](clips/${c.strip})`).join("\n") + "\n\n" : ""}## Pictures\n\n${corpus.map((p) => `- [${p.label}](pictures/${p.id}.md)`).join("\n")}\n`,
+  `# Picture QR review · Codex (GPT-6)\n\nStudy and review renders made by Ryan with Codex (GPT-6). Source picture credits remain in [CREDITS](../../../CREDITS.md).\n\nThis branch is for review pictures and clips and is never merged. Each page below shows native 390×844 before-and-after pairs in Square and Circle, using the first fixed payload. Scores average all ten payloads. The code and full audit are on \`codex/picture-qr-fidelity\`. Open \`index.html\` through the repository’s local server for the complete gallery.\n\n${scanStatus}\n\n${fidelityStatus}\n\n${clips.length ? "## Tap motion\n\n" + clips.map((c) => `- [${c.mode} · ${c.picture} · ${c.shape}](clips/${c.file}) — [frame strip](clips/${c.strip})`).join("\n") + "\n\n" : ""}## Pictures\n\n${corpus.map((p) => `- [${p.label}](pictures/${p.id}.md)`).join("\n")}\n`,
 );
 if (fs.existsSync(path.join(out, "diagnostics", "README.md")))
   fs.appendFileSync(
