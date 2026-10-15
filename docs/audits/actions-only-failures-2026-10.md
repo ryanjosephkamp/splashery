@@ -148,6 +148,12 @@ of real-time speed.
   pluck list. Waiting for the actual Hands-on string stroke before moving passes the same
   delayed-pick probe with all six plucks. Keep all 24 real pointer moves, manual ticks, age limits,
   and no-body-pickup assertions. No pick result or input is synthesized.
+- A separate setup probe holds the opening camera before its automatic easing updates. Even with the
+  acquired-stroke wait, the original fixed screen endpoints then cross only three strings:
+  subsequent manual ticks move the camera toward the guitar's view beneath the drag. Step the real
+  camera at 60 Hz until its own update reports settled, apply that pose, and only then project the
+  endpoints. The bounded setup fails if the camera cannot settle. With both this stalled opening and
+  the five-second native pick delay, all six plucks and every original assertion pass.
 - The next [Actions run](https://github.com/ryanjosephkamp/splashery/actions/runs/38683915392)
   passes all eight ui3 checks and the three weather checks, but still rejects the paired camera
   cost: 23.033 ms against 21.395 ms. Keep that failure and the unchanged bound. Most smoothed RGB

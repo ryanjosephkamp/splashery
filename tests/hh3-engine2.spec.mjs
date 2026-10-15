@@ -148,6 +148,19 @@ test("strings: a drag across the guitar's strings plucks each one, in turn", asy
     window.__strings = list;
   });
   await handsOn(page);
+  // A slow opening can leave the camera easing from the previous toy.
+  // Settle its real clock before projecting fixed endpoints for the drag.
+  const cameraSettled = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    for (let i = 0; i < 120; i++) {
+      if (!player.camera.update(1 / 60)) {
+        player.update(0);
+        return true;
+      }
+    }
+    return false;
+  });
+  expect(cameraSettled).toBe(true);
   // From just outside the low string to just past the high one, across
   // their middles.
   const px = await page.evaluate(() => {
