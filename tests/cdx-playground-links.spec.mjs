@@ -190,6 +190,8 @@ for (const viewport of [
       await page.locator("#gen-seed").fill("70");
       await expect(page.locator("#gen-seed")).toHaveValue("70");
       await page.locator("#tab-share").click();
+      // The Share tab shows Video or GIF, one at a time (Share lane, October 15, 2026).
+      await page.locator("#clip-kind [data-clip='gif']").click();
       await page.locator("#gif-size").selectOption("256");
       await expect(page.locator("#gif-size")).toHaveValue("256");
 
