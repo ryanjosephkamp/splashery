@@ -2,6 +2,41 @@
 
 October 14, 2026. Built by Codex (GPT-6) for Ryan.
 
+## October 15 synchronization and verification
+
+The branch was synchronized with `main` at `c13a9d3f` in merge commit `69a30eb6`. The source credit
+conflict preserves all of main's credits and appends this specimen's credit. Main's versions of the
+generated credits page and service worker were taken, then `tools/site-build.mjs` and
+`tools/toy-plan.mjs` regenerated the derived files. The neuron recipe and its eight-test spec were
+unchanged. This report remains on the clips branch, outside the implementation PR.
+
+| Spec    | Passed | Failed |
+| ------- | -----: | -----: |
+| cdx-pfb |      8 |      0 |
+| smoke   |     49 |      1 |
+| taps    |     63 |      0 |
+| kit     |     10 |      0 |
+| unit    |     20 |      0 |
+| site    |     11 |      0 |
+| tpg     |     11 |      0 |
+
+The fresh seven-file run had 173 tests: 172 passed, one failed, and none were skipped. The sole
+failure was `generating a procedural toy changes canvas pixels`: the exported seed was 1 after the
+test entered 4242. That test passed alone in 10.9 seconds. The generator, app, and smoke test are
+unchanged from main; the initial failure remains in the full-run counts. The previous Picture QR kit
+failure and rig smoke failure now pass with main's fixes.
+
+Both WebGL2 and WebGPU neuron checks passed, as did all 63 tap checks and 20 unit tests. The embed
+transfer check passed at 9.2 MB. Pack builds passed at 65,535 stored desktop splats in 377 ms and
+16,383 phone splats in 108 ms. Site generation, Playground-link checks, Prettier, and American
+English checks passed.
+
+Separate real-browser checks opened the original public Neuron and clicked Bacterium without labs at
+390×844 and 1440×900. The specimen's About panel displayed the stored and drawn counts at both sizes
+without page errors. Its count screenshots were refreshed and inspected, as were the part b
+screenshots. Bacterium still ranks ninth in the original Neuron page's eight-card related list.
+Standard screenshots were restored; no engine or shared-test changes belong to part b.
+
 ## Delivered
 
 `src/packs/neuron.js` grows a textbook-style multipolar neuron, with branching dendrites and spines,
@@ -41,7 +76,7 @@ this part's addition and its derived indexes. Original geometry and the thumbnai
 with Codex (GPT-6), CC0; code is offered under Splashery's MIT license. The synthesized sound is a
 quiet illustrative cue, not the sound of a real nerve cell.
 
-## Verification
+## October 14 verification
 
 - `tests/cdx-pfb.spec.mjs`: eight passing tests. Every merge and every focus level conserve the
   moments, all covariances are positive definite, stain shares sum to one, and the GPU axes
@@ -98,13 +133,14 @@ The minimum geometry depth emits 8,191 stored splats in an artificial 8,000-spla
 low profile and the Detail slider start at a higher budget, and both supported profile budgets are
 respected. This small test-budget floor is retained.
 
-## Regression failures
+## October 14 regression failures
 
 The generic kit determinism test fails before reaching this new toy: `qr-picture`, with
 `shape: "circle"` and an 8,000-splat budget, throws "This code has too much detail for a circular
 picture on this device." The same case was reproduced from unchanged `main` at `c044dc9d` in a
 separate worktree. The QR source, engine, and kit test are unchanged by this part. The kit run
-reported nine passing tests and this one failure. It is retained as a known issue in the draft PR.
+reported nine passing tests and this one failure. It was recorded as a known issue in the October 14
+draft PR. Current results are above.
 
 ## Operator follow-up
 

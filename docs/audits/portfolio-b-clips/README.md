@@ -9,7 +9,8 @@ The [port and verification report](portfolio-b.md) is kept on this review branch
 implementation PR.
 
 The updated About panel explains the stored and drawn counts on [phone](counts-390x844.png) and
-[desktop](counts-1440x900.png).
+[desktop](counts-1440x900.png). These screenshots were refreshed after synchronizing with main on
+October 15, 2026.
 
 ![Neuron specimen spike](specimen-neuron.gif)
 
