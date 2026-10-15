@@ -30,6 +30,22 @@
 
 export const STRIDE = 16;
 export const TILE = 16;
+
+// The established tile16 kernels stay byte-identical by default. Direct-gradient software
+// rasterization can use tile8 to avoid testing so many irrelevant splats at each pixel.
+// Image-wide SSIM/SSAA kernels keep their own workgroup dimensions; only tile rasters change.
+export function tileShaderSource(source, tileSize = TILE, raster = false) {
+  if (tileSize === TILE) return source;
+  if (tileSize !== 8) throw new RangeError('Raster tile size must be 8 or 16');
+  const marker = `const TILEF = ${TILE}.0;`;
+  if (raster && !source.includes(marker)) throw new Error('Raster tile constant is missing');
+  const result = source.replace(marker, `const TILEF = ${tileSize}.0;`);
+  if (!raster) return result;
+  const workgroup = '@compute @workgroup_size(16, 16)';
+  if (result.split(workgroup).length !== 2) throw new Error('Raster workgroup is ambiguous');
+  return result.replace(workgroup, `@compute @workgroup_size(${tileSize}, ${tileSize})`);
+}
+
 export const SHARED_SORT = 2048;    // shared-memory sort fast path (16KB workgroup mem)
 export const ENTRIES_CAP = 12000000; // global (key,id) pair budget across all tiles (96MB)
 export const FIXED = 16384.0;
