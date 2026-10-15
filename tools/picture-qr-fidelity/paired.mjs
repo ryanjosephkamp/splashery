@@ -63,12 +63,9 @@ const files = (directory) =>
     );
 const hashes = Object.fromEntries(
   [
-    ...files("src/qr-craft"),
-    ...files("src/qr"),
-    "src/packs/qr-craft.js",
-    "src/player.js",
-    "src/stage.js",
-    "src/photo-splats.js",
+    ...files("src"),
+    "index.html",
+    "styles.css",
     "tools/picture-qr-fidelity/paired.mjs",
     "tools/picture-qr-fidelity/qualify.mjs",
     "tools/picture-qr-fidelity/metrics.mjs",

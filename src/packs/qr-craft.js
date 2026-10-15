@@ -1372,6 +1372,7 @@ const PICTURE = {
   build(k, o) {
     o = pictureFitOptions(o);
     const t = tidy({ ...o, text: o.text ?? DEFAULT_TEXT });
+    const simpleFallback = o.simpleFallback === true && t.style === "bw";
     let pic = pictureNow(o);
     PIC.error = "";
     if (o.picture === "own" && !PIC.own) PIC.error = "Your own picture isn't on this device any more (a link can't carry it). Open it again, or pick a sample."; // prettier-ignore
@@ -1386,7 +1387,7 @@ const PICTURE = {
     // Most detail crops and checks the complete sticker in makeWoven; the
     // legacy path keeps its original two passes and saved-scene appearance.
     const make = (text) => {
-      if (o.simpleFallback) {
+      if (simpleFallback) {
         // One checked grid covers the longest ASCII link the input allows.
         // Try masks with all four original source checks before rendering.
         for (const mask of [0, 1, 2, 3, 4, 5, 6, 7]) {
@@ -1406,13 +1407,13 @@ const PICTURE = {
           : make(t.text);
     } catch (err) {
       PIC.error = err.message;
-      if (o.simpleFallback) throw err;
+      if (simpleFallback) throw err;
       w = make(DEFAULT_TEXT);
     }
     const source =
       pic &&
       t.fidelity !== "detail" &&
-      !o.simpleFallback &&
+      !simpleFallback &&
       (o.shape === "circle" || cropSettings(o).pictureFit !== "legacy")
         ? codePicture(pic, { ...o, quiet: borderSettings(o).quiet }, w.code.size)
         : pic;
