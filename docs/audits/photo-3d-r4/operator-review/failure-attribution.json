@@ -1,0 +1,3706 @@
+{
+  "files": 38,
+  "completedPairs": 38,
+  "classifications": {
+    "branch passes; main fails": 1,
+    "every branch failure also fails main; main has additional failures": 1,
+    "generated recipe-size data fixed; original assertion now passes": 1,
+    "intermittent baseline failure; reproduced with both stage versions": 1,
+    "passes both": 28,
+    "same failed titles/assertion lines on main": 6
+  },
+  "rows": [
+    {
+      "file": "arc.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "Longtail: the net folds into a cube; a trail across a face edge carries on onto the next face, and a berry makes it longer",
+          "line": 212,
+          "status": "failed",
+          "error": "TimeoutError: page.waitForSelector: Timeout 120000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('body[data-ready=\\'true\\']') to be visible\u001b[22m\n"
+        },
+        {
+          "title": "Volley Table: a ball past the computer's paddle is your point",
+          "line": 485,
+          "status": "failed",
+          "error": "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded."
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:03:23.550Z",
+            "duration": 10123.089,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Longtail: the net folds into a cube; a trail across a face edge carries on onto the next face, and a berry makes it longer",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Volley Table: a ball past the computer's paddle is your point",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "ff052d6106938c72ba9cb04c8fc2a8dbccf61820bf17b8f9ca7033f68f53eb26"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:03:35.182Z",
+            "duration": 10558.122,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Longtail: the net folds into a cube; a trail across a face edge carries on onto the next face, and a berry makes it longer",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Volley Table: a ball past the computer's paddle is your point",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "ff052d6106938c72ba9cb04c8fc2a8dbccf61820bf17b8f9ca7033f68f53eb26"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "arc2.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "Grain Garden: the \u2715 leaves the whole-page view (its materials no longer cover it)",
+          "line": 72,
+          "status": "failed",
+          "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/?renderer=webgl2&adapt=off&watch=off&labs=1&profile=low\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/?renderer=webgl2&adapt=off&watch=off&labs=1&profile=low\", waiting until \"load\"\u001b[22m\n"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:47:01.809Z",
+            "duration": 5848.137000000001,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Grain Garden: the \u2715 leaves the whole-page view (its materials no longer cover it)",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "b5ed07a988baf86feb3e5f294237e3d887a2709b09792370024c60df2d46426f"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:47:09.036Z",
+            "duration": 5972.5599999999995,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Grain Garden: the \u2715 leaves the whole-page view (its materials no longer cover it)",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "b5ed07a988baf86feb3e5f294237e3d887a2709b09792370024c60df2d46426f"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "cdx-mir.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "matched camera frames keep real feature contrast and improve held-pose stability",
+          "line": 392,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m48.27166666680326\u001b[39m\nReceived:   \u001b[31m70.8416666664804\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:03:47.068Z",
+            "duration": 172100.639,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "matched camera frames keep real feature contrast and improve held-pose stability",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "90eee0d17fadaa17d20d98b585f251436cac31e4339a78e02b0d9fdd790acd61"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:06:40.437Z",
+            "duration": 170893.294,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "matched camera frames keep real feature contrast and improve held-pose stability",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "90eee0d17fadaa17d20d98b585f251436cac31e4339a78e02b0d9fdd790acd61"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "cdx-pics.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "Split leaf: five-link browser scans, credits, and lazy loading",
+          "line": 127,
+          "status": "timedOut",
+          "error": "\u001b[31mTest timeout of 240000ms exceeded.\u001b[39m"
+        },
+        {
+          "title": "Green watering can: five-link browser scans, credits, and lazy loading",
+          "line": 127,
+          "status": "timedOut",
+          "error": "\u001b[31mTest timeout of 240000ms exceeded.\u001b[39m"
+        },
+        {
+          "title": "Wooden stacking rings: five-link browser scans, credits, and lazy loading",
+          "line": 127,
+          "status": "timedOut",
+          "error": "\u001b[31mTest timeout of 240000ms exceeded.\u001b[39m"
+        },
+        {
+          "title": "Pear: five-link browser scans, credits, and lazy loading",
+          "line": 127,
+          "status": "timedOut",
+          "error": "\u001b[31mTest timeout of 240000ms exceeded.\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:23:08.436Z",
+            "duration": 321912.17699999997,
+            "expected": 4,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Split leaf: five-link browser scans, credits, and lazy loading",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Green watering can: five-link browser scans, credits, and lazy loading",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Wooden stacking rings: five-link browser scans, credits, and lazy loading",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Pear: five-link browser scans, credits, and lazy loading",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "062261471bbcaf0edf4f7cea8b4a4f07e9adcdd4bb15f9b45e99e1e1ef5cf400"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:28:31.714Z",
+            "duration": 322914.375,
+            "expected": 4,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Split leaf: five-link browser scans, credits, and lazy loading",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Green watering can: five-link browser scans, credits, and lazy loading",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Wooden stacking rings: five-link browser scans, credits, and lazy loading",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Pear: five-link browser scans, credits, and lazy loading",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "062261471bbcaf0edf4f7cea8b4a4f07e9adcdd4bb15f9b45e99e1e1ef5cf400"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "e5.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "orange mid-tap screenshots at 390x844 and 1440x900",
+          "line": 192,
+          "status": "failed",
+          "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/?renderer=webgl2&profile=weak\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/?renderer=webgl2&profile=weak\", waiting until \"load\"\u001b[22m\n"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:46:19.511Z",
+            "duration": 19031.507999999998,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "orange mid-tap screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "325c3a025fc06a798c61a61aa37ff7c3bf7d47ae0e4b9b527c6b2486eebdd674"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:46:40.032Z",
+            "duration": 19972.014000000003,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "orange mid-tap screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "325c3a025fc06a798c61a61aa37ff7c3bf7d47ae0e4b9b527c6b2486eebdd674"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "fb.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [],
+      "initialGlobalErrors": [
+        {
+          "message": "Error: Process from config.webServer was not able to start. Exit code: 1",
+          "stack": "Error: Process from config.webServer was not able to start. Exit code: 1"
+        }
+      ],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:04:46.726Z",
+            "duration": 112126.814,
+            "expected": 6,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the even box and cylinder sample the kit's surfaces, with the same fields",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the even torus, disc, ellipsoid, tube and rounded box are on their surfaces",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "every toy the lane changed builds at the phone tier, within its budget",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "marble screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "ocean-liner screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "supertall screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": true,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "0c5720895d5bcbe015958bc2299b2c9faecb4e0ec6c380f586bad2e1bf639f95"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:06:40.098Z",
+            "duration": 116944.152,
+            "expected": 6,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the even box and cylinder sample the kit's surfaces, with the same fields",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the even torus, disc, ellipsoid, tube and rounded box are on their surfaces",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "every toy the lane changed builds at the phone tier, within its budget",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "marble screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "ocean-liner screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "supertall screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": true,
+          "head": "9a4680f6ddf8df91015e105c48139aba51dbd550",
+          "testSha256": "0c5720895d5bcbe015958bc2299b2c9faecb4e0ec6c380f586bad2e1bf639f95"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "fx4-engine.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "toys without the rim kind draw as before (webgl2)",
+          "line": 110,
+          "status": "failed",
+          "error": "Error: bouncy-ball: pixels that changed a lot\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: <= \u001b[32m220\u001b[39m\nReceived:    \u001b[31m261\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:33:30.808Z",
+            "duration": 125844.298,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "toys without the rim kind draw as before (webgl2)",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "13a44073abb28148390bb91012d12e547dbceccee39d75878fc9399898acdfe6"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:35:37.989Z",
+            "duration": 106732.684,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "toys without the rim kind draw as before (webgl2)",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "13a44073abb28148390bb91012d12e547dbceccee39d75878fc9399898acdfe6"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "fx7.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [],
+      "initialGlobalErrors": [
+        {
+          "message": "Error: Cannot find module '/workspace/splashery-r4-suite/manual/pdf-edition.js' imported from /workspace/splashery-r4-suite/src/packs/pictures.js",
+          "stack": "Error: Cannot find module '/workspace/splashery-r4-suite/manual/pdf-edition.js' imported from /workspace/splashery-r4-suite/src/packs/pictures.js"
+        },
+        {
+          "message": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments.",
+          "stack": "Error: No tests found.\nMake sure that arguments are regular expressions matching test files.\nYou may need to escape symbols like \"$\" or \"*\" and quote the arguments."
+        }
+      ],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:23:13.798Z",
+            "duration": 67698.044,
+            "expected": 20,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "storm cloud: the tapped bolt strikes under the tap",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "shield: the blow lands where the tap lands",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "splat field: a second tap adds a pulse beside the first, never pausing",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "fireworks: rapid taps launch more shells at once, and a tap never pauses",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "paper lantern: a tap mid-swing pushes it again, without a jump or a pause",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "puzzle cube: a tap pauses a scramble after the turn in progress, a hand move ends it",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Gaussian splatting, one splat: a tap trains it from a guess to the target",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "taps that used to miss: the one splat's corners and the sunglasses' lenses",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the splat field's ocean takes two stones at once, in the browser",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "lane Fix7 screenshots at 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "molecule and crystal: bonds stretch between their atoms (skinned), so atoms never leave them",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "marble: its glass tint is a rim shell, clearer face on than at the edge",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "protein: a tap while it is apart brings it back at once",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "lungs: the deep breath goes well past the old fill",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the splat equation's grid closes where u wraps: no column is left out",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "periodic table: a 57-71 or 89-103 cell lights its row; the wide table puts them in their periods",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "bananas: the fruit and the inner peel show only while a banana is peeled",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "your book: a tapped turn starts at once, even before its pages are built",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "clothes take flag colors on their cloth",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Enigma: a step back takes the last letter off the pad and turns the rotors back one",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": true,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "737a691e8ace9e977081a6ac0825d47080597d532a69b611c9985a1c58790102"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:24:22.796Z",
+            "duration": 66632.031,
+            "expected": 20,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "storm cloud: the tapped bolt strikes under the tap",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "shield: the blow lands where the tap lands",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "splat field: a second tap adds a pulse beside the first, never pausing",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "fireworks: rapid taps launch more shells at once, and a tap never pauses",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "paper lantern: a tap mid-swing pushes it again, without a jump or a pause",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "puzzle cube: a tap pauses a scramble after the turn in progress, a hand move ends it",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Gaussian splatting, one splat: a tap trains it from a guess to the target",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "taps that used to miss: the one splat's corners and the sunglasses' lenses",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the splat field's ocean takes two stones at once, in the browser",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "lane Fix7 screenshots at 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "molecule and crystal: bonds stretch between their atoms (skinned), so atoms never leave them",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "marble: its glass tint is a rim shell, clearer face on than at the edge",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "protein: a tap while it is apart brings it back at once",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "lungs: the deep breath goes well past the old fill",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the splat equation's grid closes where u wraps: no column is left out",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "periodic table: a 57-71 or 89-103 cell lights its row; the wide table puts them in their periods",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "bananas: the fruit and the inner peel show only while a banana is peeled",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "your book: a tapped turn starts at once, even before its pages are built",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "clothes take flag colors on their cloth",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Enigma: a step back takes the last letter off the pad and turns the rotors back one",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": true,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "737a691e8ace9e977081a6ac0825d47080597d532a69b611c9985a1c58790102"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "hea.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "basketball: its own bounce, and an upward flick spins it on the fingertip",
+          "line": 22,
+          "status": "failed",
+          "error": "Error: page.evaluate: TypeError: Cannot read properties of null (reading 'spin')\n    at eval (eval at evaluate (:290:30), <anonymous>:18:29)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:37:26.248Z",
+            "duration": 10057.427,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "basketball: its own bounce, and an upward flick spins it on the fingertip",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "c39241b4121c3d5fcae95a48604a5c035e90950baa51f4d97ccba8d2e9d93d4a"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:37:37.591Z",
+            "duration": 9606.744999999999,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "basketball: its own bounce, and an upward flick spins it on the fingertip",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "c39241b4121c3d5fcae95a48604a5c035e90950baa51f4d97ccba8d2e9d93d4a"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "hh2-nature.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "oak and maple: a shake on the trunk drops the leaves",
+          "line": 144,
+          "status": "failed",
+          "error": "TimeoutError: page.waitForFunction: Timeout 5000ms exceeded."
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:44:06.073Z",
+            "duration": 16611.005999999998,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "oak and maple: a shake on the trunk drops the leaves",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "14b55d5e11d384c43ae10f077ea24c563991294f5c0e9486937cf0bd4a67922e"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:44:24.240Z",
+            "duration": 16181.413999999999,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "oak and maple: a shake on the trunk drops the leaves",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "14b55d5e11d384c43ae10f077ea24c563991294f5c0e9486937cf0bd4a67922e"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "hh4-tiny.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "chromosome: the chromatids pulled apart at the waist spring back together",
+          "line": 226,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeCloseTo\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m, \u001b[22mprecision\u001b[2m)\u001b[22m\n\nExpected: \u001b[32m0.8016587693373658\u001b[39m\nReceived: \u001b[31m0.547470322359553\u001b[39m\n\nExpected precision:    1\nExpected difference: < \u001b[32m0.05\u001b[39m\nReceived difference:   \u001b[31m0.25418844697781284\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:45:56.270Z",
+            "duration": 11218.286,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "chromosome: the chromatids pulled apart at the waist spring back together",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "d13b8a17bbf1eff8397c4283b0230481b6424e8895d87e4cf0e472b0fd47c908"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:46:08.769Z",
+            "duration": 9514.920999999998,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "chromosome: the chromatids pulled apart at the waist spring back together",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "d13b8a17bbf1eff8397c4283b0230481b6424e8895d87e4cf0e472b0fd47c908"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "hh4-weather.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "lava lamp: tipped, the wax slides to the glass's upper side, and back when upright",
+          "line": 173,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.03\u001b[39m\nReceived:   \u001b[31m0.030413651414038394\u001b[39m"
+        },
+        {
+          "title": "iceberg: pushed down it bobs back; the chunk pulled off floats",
+          "line": 200,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32mtrue\u001b[39m\nReceived: \u001b[31mfalse\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:52:35.892Z",
+            "duration": 51744.432,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "lava lamp: tipped, the wax slides to the glass's upper side, and back when upright",
+              "status": "failed",
+              "assertion": {
+                "line": 164,
+                "column": 68,
+                "file": "hh4-weather.spec.mjs"
+              },
+              "error": "Error: expect(received).toBeLessThan(expected)\n\nExpected: < 0.03\nReceived:   0.0341740789654086"
+            },
+            {
+              "title": "iceberg: pushed down it bobs back; the chunk pulled off floats",
+              "status": "failed",
+              "assertion": {
+                "line": 188,
+                "column": 21,
+                "file": "hh4-weather.spec.mjs"
+              },
+              "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false"
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "d704394cf56feddb3e10ee923beae44a469ea18791e090680ae142aba901f60c"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:53:28.974Z",
+            "duration": 49220.979,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "lava lamp: tipped, the wax slides to the glass's upper side, and back when upright",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "iceberg: pushed down it bobs back; the chunk pulled off floats",
+              "status": "failed",
+              "assertion": {
+                "line": 188,
+                "column": 21,
+                "file": "hh4-weather.spec.mjs"
+              },
+              "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: true\nReceived: false"
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "d704394cf56feddb3e10ee923beae44a469ea18791e090680ae142aba901f60c"
+        }
+      },
+      "classification": "every branch failure also fails main; main has additional failures"
+    },
+    {
+      "file": "hh5-animals.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "pufferfish: puffs while held, any way up; deflates slowly once let go",
+          "line": 188,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0.1\u001b[39m\nReceived:   \u001b[31m0.1\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:01:28.185Z",
+            "duration": 12481.029999999999,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "pufferfish: puffs while held, any way up; deflates slowly once let go",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "e3c91499ddf5a3cffe8d0b75497ac35f3c43436624f068cb441f58c84ca1a731"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:01:41.936Z",
+            "duration": 11581.43,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "pufferfish: puffs while held, any way up; deflates slowly once let go",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "e3c91499ddf5a3cffe8d0b75497ac35f3c43436624f068cb441f58c84ca1a731"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "hh5-gems.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "crystal ball: lifted off its stand, it rolls off the stand's base onto the table; brought back, it settles in its cup",
+          "line": 133,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.000001\u001b[39m\nReceived:   \u001b[31m0.08047573534139353\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:37:48.549Z",
+            "duration": 9716.946,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "crystal ball: lifted off its stand, it rolls off the stand's base onto the table; brought back, it settles in its cup",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "a26111dd0c32a9fbce597a73095d51522766f824a40575f2b62b0ef5177214e5"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:37:59.659Z",
+            "duration": 9823.193,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "crystal ball: lifted off its stand, it rolls off the stand's base onto the table; brought back, it settles in its cup",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "a26111dd0c32a9fbce597a73095d51522766f824a40575f2b62b0ef5177214e5"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "kit.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+          "line": 139,
+          "status": "failed",
+          "error": "Error: This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text."
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:55:18.263Z",
+            "duration": 159351.805,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+              "status": "failed",
+              "assertion": {
+                "line": 395,
+                "column": 72,
+                "file": "qr-craft.js"
+              },
+              "error": "Error: This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text."
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "cc7a423b5e6e894a16dc7ba1eb26c4107a5cc77cd614fe4582f46601795b7666"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:57:58.926Z",
+            "duration": 175121.179,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+              "status": "failed",
+              "assertion": {
+                "line": 395,
+                "column": 72,
+                "file": "qr-craft.js"
+              },
+              "error": "Error: This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text."
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "cc7a423b5e6e894a16dc7ba1eb26c4107a5cc77cd614fe4582f46601795b7666"
+        }
+      },
+      "classification": "same failed titles/assertion lines on main"
+    },
+    {
+      "file": "lab.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "a tap on the Splat field fires its pulse, for every field (1440\u00d7900)",
+          "line": 160,
+          "status": "failed",
+          "error": "Error: galaxy: the tap fires the pulse\n\n\u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"pulse\"\u001b[39m\nReceived: \u001b[31m\"hop\"\u001b[39m\n\nCall Log:\n- Timeout 60000ms exceeded while waiting on the predicate"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:54:19.480Z",
+            "duration": 26193.324999999997,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "a tap on the Splat field fires its pulse, for every field (1440\u00d7900)",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "15dee0ae878ed47ae54c6fc9772aec6267ebc85b7d809ad8a6bab0cc9ff694cd"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:54:47.164Z",
+            "duration": 29808.263,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "a tap on the Splat field fires its pulse, for every field (1440\u00d7900)",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "15dee0ae878ed47ae54c6fc9772aec6267ebc85b7d809ad8a6bab0cc9ff694cd"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "live-engine.spec.mjs",
+      "initialLatestStatus": "passed-final-source",
+      "originalFailures": [
+        {
+          "title": "a tap turns the microphone and camera on; Stop ends every track",
+          "line": 82,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThanOrEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: >= \u001b[32m40\u001b[39m\nReceived:    \u001b[31m32\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:00:55.390Z",
+            "duration": 15886.535000000002,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "a tap turns the microphone and camera on; Stop ends every track",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "df270971b1b5f6379cbb1b5d6603a1f92ef2736270e722ea39304ba51fb3a091"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:01:12.746Z",
+            "duration": 14129.359,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "a tap turns the microphone and camera on; Stop ends every track",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "df270971b1b5f6379cbb1b5d6603a1f92ef2736270e722ea39304ba51fb3a091"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "man5.spec.mjs",
+      "initialLatestStatus": "passed-final-source",
+      "originalFailures": [
+        {
+          "title": "F08 and F24: a thin matrix is valid with a warning; a negative size is not printed as NaN",
+          "line": 113,
+          "status": "failed",
+          "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/manual/splat.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/manual/splat.html\", waiting until \"load\"\u001b[22m\n"
+        },
+        {
+          "title": "the same input and the same Chromium print the same bytes",
+          "line": 197,
+          "status": "failed",
+          "error": "Error: Command failed: node tools/manual-pdf.mjs /tmp/man5-pdf-62v3n2/a.pdf --allow-other-browser\n(node:280432) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\nThe PDF embeds DejaVuSans, DejaVuSansMono, LiberationSans, LiberationSerif, NotoColorEmoji, NotoSans; the shipped one embeds DejaVuSans, DejaVuSansMono, Inter, LiberationSans, LiberationSerif, NotoColorEmoji. Print on a machine with those fonts, or pass --allow-other-fonts.\n"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:21:40.835Z",
+            "duration": 22624.116,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "F08 and F24: a thin matrix is valid with a warning; a negative size is not printed as NaN",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the same input and the same Chromium print the same bytes",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "a4e3a98c20106e9bd8930af046d8595aa044ca9d38540cee06bdbb4746ceb113"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:22:04.871Z",
+            "duration": 24356.94,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "F08 and F24: a thin matrix is valid with a warning; a negative size is not printed as NaN",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the same input and the same Chromium print the same bytes",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "a4e3a98c20106e9bd8930af046d8595aa044ca9d38540cee06bdbb4746ceb113"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "man7a.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "a live canvas walks a ring across the grid; reduced motion keeps it still",
+          "line": 76,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mnot\u001b[2m.\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: not \u001b[32m\"49.4,160.6\"\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:02:40.754Z",
+            "duration": 4509.235000000001,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "a live canvas walks a ring across the grid; reduced motion keeps it still",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "751f4d4de4ca8b7983e6d75ce3da17b35445ee8a4bf7366dab46dd6cd670c4a4"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:02:46.535Z",
+            "duration": 4524.772,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "a live canvas walks a ring across the grid; reduced motion keeps it still",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "751f4d4de4ca8b7983e6d75ce3da17b35445ee8a4bf7366dab46dd6cd670c4a4"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "man7b.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "photo3d.html: no sideways scroll, and a screenshot of its opening",
+          "line": 251,
+          "status": "failed",
+          "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/manual/photo3d.html\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/manual/photo3d.html\", waiting until \"load\"\u001b[22m\n"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:22:30.820Z",
+            "duration": 3816.6420000000003,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "photo3d.html: no sideways scroll, and a screenshot of its opening",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "6d21aa9724fb61528f456bb287154a6e978da265ca692386f5a3c48a0aa3c75a"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:22:36.029Z",
+            "duration": 3629.49,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "photo3d.html: no sideways scroll, and a screenshot of its opening",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "6d21aa9724fb61528f456bb287154a6e978da265ca692386f5a3c48a0aa3c75a"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "math.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "the surface plotter plots a typed surface",
+          "line": 524,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoHaveText\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#toy-input .warning')\nExpected pattern: \u001b[32m/^That can't be drawn: \u201ct\u201d can't be used here/\u001b[39m\nReceived string:  \u001b[31m\"That can't be drawn: there is nothing to draw. Try something like z = x\u00b2 \u2212 y\u00b2.\"\u001b[39m\nTimeout: 60000ms\n\nCall log:\n\u001b[2m  - Expect \"toHaveText\" with timeout 60000ms\u001b[22m\n\u001b[2m  - waiting for locator('#toy-input .warning')\u001b[22m\n\u001b[2m    61 \u00d7 locator resolved to <div role=\"alert\" class=\"warning\">That can't be drawn: there is nothing to draw. Tr\u2026</div>\u001b[22m\n\u001b[2m       - unexpected value \"That can't be drawn: there is nothing to draw. Try something like z = x\u00b2 \u2212 y\u00b2.\"\u001b[22m\n"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:20:17.680Z",
+            "duration": 71411.03799999999,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the surface plotter plots a typed surface",
+              "status": "failed",
+              "assertion": {
+                "line": 383,
+                "column": 53,
+                "file": "math.spec.mjs"
+              },
+              "error": "Error: expect(locator).toHaveText(expected) failed\n\nLocator: locator('#toy-input .warning')\nExpected pattern: /^That can't be drawn: \u201ct\u201d can't be used here/\nReceived string:  \"That can't be drawn: there is nothing to draw. Try something like z = x\u00b2 \u2212 y\u00b2.\"\nTimeout: 60000ms\n\nCall log:\n  - Expect \"toHaveText\" with timeout 60000ms\n  - waiting for locator('#toy-input .warning')\n    61 \u00d7 locator resolved to <div role=\"alert\" class=\"warning\">That can't be drawn: there is nothing to draw. Tr\u2026</div>\n       - unexpected value \"That can't be drawn: there is nothing to draw. Try something like z = x\u00b2 \u2212 y\u00b2.\"\n"
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "5369492fe0bfc5b217ecdb5b9f7a4756548fe7022f0bc7e6ddb83405143fa1fb"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:21:30.275Z",
+            "duration": 9252.145,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the surface plotter plots a typed surface",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "5369492fe0bfc5b217ecdb5b9f7a4756548fe7022f0bc7e6ddb83405143fa1fb"
+        }
+      },
+      "classification": "branch passes; main fails"
+    },
+    {
+      "file": "mt2.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "rossler-attractor mid-tap screenshots at 390x844 and 1440x900",
+          "line": 370,
+          "status": "failed",
+          "error": "TimeoutError: page.waitForSelector: Timeout 180000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('body[data-ready=\\'true\\']') to be visible\u001b[22m\n"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:09:32.760Z",
+            "duration": 20432.666999999998,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "rossler-attractor mid-tap screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "6d13b5ecd009546ea8c903057d06523e616d30ff30c4f2db67af0b9d07afff3e"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:09:54.480Z",
+            "duration": 21090.762,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "rossler-attractor mid-tap screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "6d13b5ecd009546ea8c903057d06523e616d30ff30c4f2db67af0b9d07afff3e"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "ops-text.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "your book: the words of the page on show, following the pages, copied and found",
+          "line": 38,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#toy-media-text-box')\nExpected: visible\nTimeout: 120000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 120000ms\u001b[22m\n\u001b[2m  - waiting for locator('#toy-media-text-box')\u001b[22m\n"
+        },
+        {
+          "title": "a page with no text layer (like a scan) says so",
+          "line": 124,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#toy-media-text-box')\nExpected: visible\nTimeout: 120000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 120000ms\u001b[22m\n\u001b[2m  - waiting for locator('#toy-media-text-box')\u001b[22m\n"
+        },
+        {
+          "title": "picture lab: the box shows for its article, not for its photo",
+          "line": 149,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('#toy-media-text-box')\nExpected: visible\nTimeout: 120000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 120000ms\u001b[22m\n\u001b[2m  - waiting for locator('#toy-media-text-box')\u001b[22m\n"
+        },
+        {
+          "title": "screenshots of your book with its words open, at 390x844 and 1440x900",
+          "line": 167,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"pdf\"\u001b[39m\nReceived: \u001b[31mnull\u001b[39m\n\nCall Log:\n- Timeout 120000ms exceeded while waiting on the predicate"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:13:23.427Z",
+            "duration": 138838.715,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "your book: the words of the page on show, following the pages, copied and found",
+              "status": "failed",
+              "assertion": {
+                "line": 109,
+                "column": 25,
+                "file": "ops-text.spec.mjs"
+              },
+              "error": "Error: expect(locator).toHaveAttribute(expected) failed\n\nLocator:  locator('#toy-media-text')\nExpected: \"Words on page 45\"\nReceived: \"Words on page 46\"\nTimeout:  60000ms\n\nCall log:\n  - Expect \"toHaveAttribute\" with timeout 60000ms\n  - waiting for locator('#toy-media-text')\n    60 \u00d7 locator resolved to <div tabindex=\"0\" role=\"region\" class=\"media-text\" id=\"toy-media-text\" aria-label=\"Words on page 46\">\u2026</div>\n       - unexpected value \"Words on page 46\"\n"
+            },
+            {
+              "title": "a page with no text layer (like a scan) says so",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "picture lab: the box shows for its article, not for its photo",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "screenshots of your book with its words open, at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "ba5e610b1279aa0018bb405f4fbd0d79b82330d3140c39b8852c056d86c175ba"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:15:43.637Z",
+            "duration": 134596.60400000002,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "your book: the words of the page on show, following the pages, copied and found",
+              "status": "failed",
+              "assertion": {
+                "line": 109,
+                "column": 25,
+                "file": "ops-text.spec.mjs"
+              },
+              "error": "Error: expect(locator).toHaveAttribute(expected) failed\n\nLocator:  locator('#toy-media-text')\nExpected: \"Words on page 45\"\nReceived: \"Words on page 46\"\nTimeout:  60000ms\n\nCall log:\n  - Expect \"toHaveAttribute\" with timeout 60000ms\n  - waiting for locator('#toy-media-text')\n    58 \u00d7 locator resolved to <div tabindex=\"0\" role=\"region\" class=\"media-text\" id=\"toy-media-text\" aria-label=\"Words on page 46\">\u2026</div>\n       - unexpected value \"Words on page 46\"\n"
+            },
+            {
+              "title": "a page with no text layer (like a scan) says so",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "picture lab: the box shows for its article, not for its photo",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "screenshots of your book with its words open, at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "ba5e610b1279aa0018bb405f4fbd0d79b82330d3140c39b8852c056d86c175ba"
+        }
+      },
+      "classification": "same failed titles/assertion lines on main"
+    },
+    {
+      "file": "phf.spec.mjs",
+      "initialLatestStatus": "passed-final-source",
+      "originalFailures": [
+        {
+          "title": "Moving photo to 3D: a long video's picture comes from its playing copy, at the video's size",
+          "line": 141,
+          "status": "failed",
+          "error": "Error: Timed out waiting for async m => !!(await import(m)).MOVING.grid"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:38:52.341Z",
+            "duration": 12296.47,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Moving photo to 3D: a long video's picture comes from its playing copy, at the video's size",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "3b2ca72be11303ae81209e1b84c7728a02c32ae60aa42d901d584945d0737d34"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:39:05.980Z",
+            "duration": 12507.885,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Moving photo to 3D: a long video's picture comes from its playing copy, at the video's size",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "3b2ca72be11303ae81209e1b84c7728a02c32ae60aa42d901d584945d0737d34"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "phy.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+          "line": 66,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m0.21939774131526532\u001b[39m\nReceived:   \u001b[31m0.17341211183964603\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:38:10.744Z",
+            "duration": 19525.936999999998,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:38:31.744Z",
+            "duration": 19268.592,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Pebbles: stones pick up and stack into a new cairn; a careless one topples",
+              "status": "failed",
+              "assertion": {
+                "line": 82,
+                "column": 19,
+                "file": "phy.spec.mjs"
+              },
+              "error": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0.2193966612322126\nReceived:   0.17341211096935114"
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb"
+        }
+      },
+      "classification": "intermittent baseline failure; reproduced with both stage versions",
+      "stageExchangeControls": [
+        {
+          "index": 0,
+          "name": "branch",
+          "root": "/workspace/splashery",
+          "stageSource": "/workspace/splashery/src/stage.js",
+          "stageSha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+          "returncode": 0,
+          "stats": {
+            "startTime": "2026-10-14T16:41:16.924Z",
+            "duration": 17992.396,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "finishedUTC": "2026-10-14T16:41:34.941510+00:00"
+        },
+        {
+          "index": 1,
+          "name": "main",
+          "root": "/workspace/splashery-r4-public",
+          "stageSource": "/workspace/splashery-r4-public/src/stage.js",
+          "stageSha256": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+          "returncode": 1,
+          "stats": {
+            "startTime": "2026-10-14T16:41:35.996Z",
+            "duration": 20962.402000000002,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "finishedUTC": "2026-10-14T16:41:56.987040+00:00"
+        },
+        {
+          "index": 2,
+          "name": "main-with-branch-stage",
+          "root": "/workspace/splashery-r4-public",
+          "stageSource": "/workspace/splashery/src/stage.js",
+          "stageSha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+          "returncode": 1,
+          "stats": {
+            "startTime": "2026-10-14T16:41:57.957Z",
+            "duration": 19615.374,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "finishedUTC": "2026-10-14T16:42:17.602194+00:00"
+        },
+        {
+          "index": 3,
+          "name": "branch-with-main-stage",
+          "root": "/workspace/splashery",
+          "stageSource": "/workspace/splashery-r4-public/src/stage.js",
+          "stageSha256": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+          "returncode": 0,
+          "stats": {
+            "startTime": "2026-10-14T16:42:18.609Z",
+            "duration": 18078.293999999998,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "finishedUTC": "2026-10-14T16:42:36.715666+00:00"
+        },
+        {
+          "index": 4,
+          "name": "branch-with-main-stage",
+          "root": "/workspace/splashery",
+          "stageSource": "/workspace/splashery-r4-public/src/stage.js",
+          "stageSha256": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+          "returncode": 1,
+          "stats": {
+            "startTime": "2026-10-14T16:42:37.641Z",
+            "duration": 19645.263,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "finishedUTC": "2026-10-14T16:42:57.314432+00:00"
+        },
+        {
+          "index": 5,
+          "name": "main-with-branch-stage",
+          "root": "/workspace/splashery-r4-public",
+          "stageSource": "/workspace/splashery/src/stage.js",
+          "stageSha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+          "returncode": 1,
+          "stats": {
+            "startTime": "2026-10-14T16:42:58.236Z",
+            "duration": 20523.013,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "finishedUTC": "2026-10-14T16:43:18.787551+00:00"
+        },
+        {
+          "index": 6,
+          "name": "main",
+          "root": "/workspace/splashery-r4-public",
+          "stageSource": "/workspace/splashery-r4-public/src/stage.js",
+          "stageSha256": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+          "returncode": 1,
+          "stats": {
+            "startTime": "2026-10-14T16:43:19.722Z",
+            "duration": 21815.464,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "finishedUTC": "2026-10-14T16:43:41.573687+00:00"
+        },
+        {
+          "index": 7,
+          "name": "branch",
+          "root": "/workspace/splashery",
+          "stageSource": "/workspace/splashery/src/stage.js",
+          "stageSha256": "4bb86af07b2c6a69931cd0c25b126136811ed1406ba49b1fae46e68daedafb0c",
+          "testSha256": "0100467edc3f8a6719e5f7dafaf89f7637b3f64b83e8f722ba9ff802f88a9afb",
+          "returncode": 1,
+          "stats": {
+            "startTime": "2026-10-14T16:43:42.669Z",
+            "duration": 21849.326,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "finishedUTC": "2026-10-14T16:44:04.547260+00:00"
+        }
+      ],
+      "initialPairHasBranchOnlyFailure": true
+    },
+    {
+      "file": "pno.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "upright-piano: screenshots at 390x844 and 1440x900",
+          "line": 246,
+          "status": "failed",
+          "error": "Error: page.goto: net::ERR_CONNECTION_REFUSED at http://127.0.0.1:4173/?renderer=webgl2&adapt=off&profile=mid\nCall log:\n\u001b[2m  - navigating to \"http://127.0.0.1:4173/?renderer=webgl2&adapt=off&profile=mid\", waiting until \"load\"\u001b[22m\n"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:01:54.801Z",
+            "duration": 21092.157,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "upright-piano: screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "004ff565e9a0905d52092e87df01e6b9517b0a739675e32e86c743a2ab45e332"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:02:17.161Z",
+            "duration": 22307.618,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "upright-piano: screenshots at 390x844 and 1440x900",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "004ff565e9a0905d52092e87df01e6b9517b0a739675e32e86c743a2ab45e332"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "qr4-craft.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "the QR code toy builds the very same splats from the shared builder",
+          "line": 151,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144\"\u001b[39m\nReceived: \u001b[31m\"d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6\"\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:47:16.335Z",
+            "duration": 13442.175,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the QR code toy builds the very same splats from the shared builder",
+              "status": "failed",
+              "assertion": {
+                "line": 153,
+                "column": 29,
+                "file": "qr4-craft.spec.mjs"
+              },
+              "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144\"\nReceived: \"d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6\""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "3cec52c6f69ae4d797289e5fd4ab9993ba6f72ee861fd100ba96e24566434019"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:47:31.051Z",
+            "duration": 12124.251999999999,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the QR code toy builds the very same splats from the shared builder",
+              "status": "failed",
+              "assertion": {
+                "line": 153,
+                "column": 29,
+                "file": "qr4-craft.spec.mjs"
+              },
+              "error": "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144\"\nReceived: \"d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6\""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "3cec52c6f69ae4d797289e5fd4ab9993ba6f72ee861fd100ba96e24566434019"
+        }
+      },
+      "classification": "same failed titles/assertion lines on main"
+    },
+    {
+      "file": "qr5.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "the Damage lab: tapped damage lands where the tap says",
+          "line": 214,
+          "status": "failed",
+          "error": "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded."
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:25:30.708Z",
+            "duration": 197459.701,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the Damage lab: tapped damage lands where the tap says",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "05a2ace37e6952ccfb0fcf6719e6c2152ba5f63af86841f4ea789916cf24bcc4"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:30:11.402Z",
+            "duration": 198099.222,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the Damage lab: tapped damage lands where the tap says",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "05a2ace37e6952ccfb0fcf6719e6c2152ba5f63af86841f4ea789916cf24bcc4"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "qrc-picture.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads",
+          "line": 132,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  - 2\u001b[39m\n\u001b[31m+ Received  + 2\u001b[39m\n\n\u001b[2m  Array [\u001b[22m\n\u001b[32m-   \"Splashery picture QR\",\u001b[39m\n\u001b[32m-   \"Splashery picture QR\",\u001b[39m\n\u001b[31m+   null,\u001b[39m\n\u001b[31m+   null,\u001b[39m\n\u001b[2m  ]\u001b[22m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:44:41.738Z",
+            "duration": 36668.704,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "451ea0d6c336bccea4abb1e557f5ba8fe3a6a288240887faecb07356c52da1e0"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:45:19.730Z",
+            "duration": 35053.827000000005,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "451ea0d6c336bccea4abb1e557f5ba8fe3a6a288240887faecb07356c52da1e0"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "shw.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [],
+      "initialGlobalErrors": [
+        {
+          "message": "Error: Process from config.webServer was not able to start. Exit code: 1",
+          "stack": "Error: Process from config.webServer was not able to start. Exit code: 1"
+        }
+      ],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:08:38.310Z",
+            "duration": 168605.661,
+            "expected": 11,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the playlist names shelf toys, with words, a card and a length",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the measured facts are current",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "every caption fits at phone size, with the longest numbers",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Things that come apart\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Instruments that are played\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Real data and real captures\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Your own files, turned 3D on your device\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Science you can check\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Recipes: tiny, editable, any size\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Open this toy opens the same toy in the app",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the controls: pause holds the scene, next and the chapter list move on",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": true,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "bac88226d314d6b583060f642dcbab6ffcf970ccc67bb680057377f92604a75e"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:11:28.218Z",
+            "duration": 172643.793,
+            "expected": 10,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the playlist names shelf toys, with words, a card and a length",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the measured facts are current",
+              "status": "failed",
+              "assertion": {
+                "line": 35,
+                "column": 15,
+                "file": "shw.spec.mjs"
+              },
+              "error": "Error: Command failed: node tools/shw-facts.mjs --check\nsrc/showcase/facts.json is out of date: run node tools/shw-facts.mjs\n"
+            },
+            {
+              "title": "every caption fits at phone size, with the longest numbers",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Things that come apart\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Instruments that are played\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Real data and real captures\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Your own files, turned 3D on your device\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Science you can check\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "chapter \"Recipes: tiny, editable, any size\": every toy opens and plays",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "Open this toy opens the same toy in the app",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            },
+            {
+              "title": "the controls: pause holds the scene, next and the chapter list move on",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": true,
+          "head": "9a4680f6ddf8df91015e105c48139aba51dbd550",
+          "testSha256": "bac88226d314d6b583060f642dcbab6ffcf970ccc67bb680057377f92604a75e"
+        }
+      },
+      "classification": "generated recipe-size data fixed; original assertion now passes",
+      "followup": {
+        "name": "showcase-facts-fixed",
+        "stats": {
+          "startTime": "2026-10-14T16:16:59.534Z",
+          "duration": 1453.516,
+          "expected": 1,
+          "skipped": 0,
+          "unexpected": 0,
+          "flaky": 0
+        },
+        "cases": [
+          {
+            "title": "the measured facts are current",
+            "status": "passed",
+            "assertion": {
+              "line": null,
+              "column": null,
+              "file": ""
+            },
+            "error": ""
+          }
+        ]
+      }
+    },
+    {
+      "file": "smd-moving.spec.mjs",
+      "initialLatestStatus": "passed-final-source",
+      "originalFailures": [
+        {
+          "title": "machine on a slow device plays at its source's speed",
+          "line": 143,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeLessThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: < \u001b[32m0.03\u001b[39m\nReceived:   \u001b[31m0.05162999331544904\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:02:52.431Z",
+            "duration": 14008.686,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "machine on a slow device plays at its source's speed",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "abcbdc26557e7c6cdfe9e61df7dd1a12a9e56490a9ac0e6c72ddafb8bbdab5d9"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:03:07.664Z",
+            "duration": 14606.203,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "machine on a slow device plays at its source's speed",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "abcbdc26557e7c6cdfe9e61df7dd1a12a9e56490a9ac0e6c72ddafb8bbdab5d9"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "initialLatestStatus": "passed-final-source",
+      "originalFailures": [
+        {
+          "title": "the panel and the shelf can be made bigger on a wide screen",
+          "line": 1210,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m520\u001b[39m\nReceived:   \u001b[31m344\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:22:41.043Z",
+            "duration": 12404.616,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the panel and the shelf can be made bigger on a wide screen",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "69bf1ea0f8829ccc24e6afff27437a0095cd910f57f5bf37ee92e97c42ffa049"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:22:54.748Z",
+            "duration": 12364.752,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the panel and the shelf can be made bigger on a wide screen",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "69bf1ea0f8829ccc24e6afff27437a0095cd910f57f5bf37ee92e97c42ffa049"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "st4.spec.mjs",
+      "initialLatestStatus": "passed-final-source",
+      "originalFailures": [
+        {
+          "title": "the 404 page (live today) and the staged front door, at phone and desktop size",
+          "line": 572,
+          "status": "timedOut",
+          "error": "\u001b[31mTest timeout of 240000ms exceeded.\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:11:04.400Z",
+            "duration": 48214.068999999996,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the 404 page (live today) and the staged front door, at phone and desktop size",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "8be69e8812998be16ae0be64e1d33a6f2be296a56b785315921c1d7ed0831a27"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:11:53.861Z",
+            "duration": 88366.001,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the 404 page (live today) and the staged front door, at phone and desktop size",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "8be69e8812998be16ae0be64e1d33a6f2be296a56b785315921c1d7ed0831a27"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "st5.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "on the live layout each card is one link; it opens the toy in a new tab; the toy tiles still open the toy's page",
+          "line": 71,
+          "status": "failed",
+          "error": "TypeError: Invalid URL"
+        },
+        {
+          "title": "in the staged front door the cards open the Playground at playground/",
+          "line": 112,
+          "status": "failed",
+          "error": "TypeError: Invalid URL"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:51:59.808Z",
+            "duration": 18909.46,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "on the live layout each card is one link; it opens the toy in a new tab; the toy tiles still open the toy's page",
+              "status": "failed",
+              "assertion": {
+                "line": 100,
+                "column": 14,
+                "file": "st5.spec.mjs"
+              },
+              "error": "TypeError: Invalid URL"
+            },
+            {
+              "title": "in the staged front door the cards open the Playground at playground/",
+              "status": "failed",
+              "assertion": {
+                "line": 139,
+                "column": 14,
+                "file": "st5.spec.mjs"
+              },
+              "error": "TypeError: Invalid URL"
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "99ab29902b23c4723c4ae9eb033a9e71e214a65a153c69752c7a6fc31e48a13d"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:52:21.573Z",
+            "duration": 12944.270999999999,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 2,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "on the live layout each card is one link; it opens the toy in a new tab; the toy tiles still open the toy's page",
+              "status": "failed",
+              "assertion": {
+                "line": 100,
+                "column": 14,
+                "file": "st5.spec.mjs"
+              },
+              "error": "TypeError: Invalid URL"
+            },
+            {
+              "title": "in the staged front door the cards open the Playground at playground/",
+              "status": "failed",
+              "assertion": {
+                "line": 139,
+                "column": 14,
+                "file": "st5.spec.mjs"
+              },
+              "error": "TypeError: Invalid URL"
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "99ab29902b23c4723c4ae9eb033a9e71e214a65a153c69752c7a6fc31e48a13d"
+        }
+      },
+      "classification": "same failed titles/assertion lines on main"
+    },
+    {
+      "file": "stm.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "screenshots at phone and desktop size",
+          "line": 473,
+          "status": "failed",
+          "error": "TimeoutError: page.waitForSelector: Timeout 180000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('body[data-ready=\\'true\\']') to be visible\u001b[22m\n"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:10:16.813Z",
+            "duration": 23007.993,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "screenshots at phone and desktop size",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "be6c807cb39cb6eb02c5ad3c8b36679d284ae033e4f82e65ff4c7912d9d2ff4c"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:10:41.242Z",
+            "duration": 21787.663,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "screenshots at phone and desktop size",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "be6c807cb39cb6eb02c5ad3c8b36679d284ae033e4f82e65ff4c7912d9d2ff4c"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "tp2.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "the toy on its page plays its sound, mutes, and the app link opens a new tab",
+          "line": 68,
+          "status": "failed",
+          "error": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoContain\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // indexOf\u001b[22m\n\nExpected substring: \u001b[32m\"#s=j.\"\u001b[39m\nReceived string:    \u001b[31m\"\"\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:39:19.774Z",
+            "duration": 48922.036,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the toy on its page plays its sound, mutes, and the app link opens a new tab",
+              "status": "failed",
+              "assertion": {
+                "line": 100,
+                "column": 23,
+                "file": "tp2.spec.mjs"
+              },
+              "error": "Error: expect(received).toContain(expected) // indexOf\n\nExpected substring: \"#s=j.\"\nReceived string:    \"\""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "5f992efb91ade1cb124e09bacebab3459185ecee3a6be7a2f0385173fc400abf"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:40:10.004Z",
+            "duration": 43837.369000000006,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "the toy on its page plays its sound, mutes, and the app link opens a new tab",
+              "status": "failed",
+              "assertion": {
+                "line": 100,
+                "column": 23,
+                "file": "tp2.spec.mjs"
+              },
+              "error": "Error: expect(received).toContain(expected) // indexOf\n\nExpected substring: \"#s=j.\"\nReceived string:    \"\""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "5f992efb91ade1cb124e09bacebab3459185ecee3a6be7a2f0385173fc400abf"
+        }
+      },
+      "classification": "same failed titles/assertion lines on main"
+    },
+    {
+      "file": "tpg.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "a sample of 25 pages loads, fits a phone and links on",
+          "line": 198,
+          "status": "timedOut",
+          "error": "\u001b[31mTest timeout of 240000ms exceeded.\u001b[39m"
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T16:47:44.507Z",
+            "duration": 120603.54599999999,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "a sample of 25 pages loads, fits a phone and links on",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "1482ec8401ef0f92e504e5c4df649e78d214eb8dfc92c124f6fd1071a5a1873d"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T16:49:46.607Z",
+            "duration": 131747.31699999998,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "a sample of 25 pages loads, fits a phone and links on",
+              "status": "passed",
+              "assertion": {
+                "line": null,
+                "column": null,
+                "file": ""
+              },
+              "error": ""
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "1482ec8401ef0f92e504e5c4df649e78d214eb8dfc92c124f6fd1071a5a1873d"
+        }
+      },
+      "classification": "passes both"
+    },
+    {
+      "file": "vol.spec.mjs",
+      "initialLatestStatus": "failed-or-incomplete",
+      "originalFailures": [
+        {
+          "title": "in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why",
+          "line": 346,
+          "status": "failed",
+          "error": "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded."
+        }
+      ],
+      "initialGlobalErrors": [],
+      "builds": {
+        "main": {
+          "stats": {
+            "startTime": "2026-10-14T17:17:59.456Z",
+            "duration": 67720.184,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why",
+              "status": "failed",
+              "assertion": {
+                "line": 299,
+                "column": 18,
+                "file": "vol.spec.mjs"
+              },
+              "error": "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded."
+            }
+          ],
+          "fullFile": false,
+          "head": "4907a003a43be0be97ce25403d94f6f1e9208600",
+          "testSha256": "7833a11a9fef9f98e4c5687eed59be15fb0073222395072a4e1ce963778e6262"
+        },
+        "branch": {
+          "stats": {
+            "startTime": "2026-10-14T17:19:08.535Z",
+            "duration": 67802.44099999999,
+            "expected": 0,
+            "skipped": 0,
+            "unexpected": 1,
+            "flaky": 0
+          },
+          "globalErrors": [],
+          "cases": [
+            {
+              "title": "in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why",
+              "status": "failed",
+              "assertion": {
+                "line": 299,
+                "column": 18,
+                "file": "vol.spec.mjs"
+              },
+              "error": "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded."
+            }
+          ],
+          "fullFile": false,
+          "head": "c4e21a288ab05b91807790aebe401e24d202a73d",
+          "testSha256": "7833a11a9fef9f98e4c5687eed59be15fb0073222395072a4e1ce963778e6262"
+        }
+      },
+      "classification": "same failed titles/assertion lines on main"
+    }
+  ]
+}

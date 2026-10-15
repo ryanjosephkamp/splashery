@@ -1,0 +1,17 @@
+{
+  "browser": "Chromium 151.0.7922.173 built on Debian GNU/Linux 13 (trixie)",
+  "models": [
+    {
+      "build": "checkpoint",
+      "file": "vendor/depth-anything-v2-small/model_quantized.onnx",
+      "bytes": 27258801,
+      "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d"
+    },
+    {
+      "build": "branch",
+      "file": "vendor/depth-anything-v2-small/model_quantized.onnx",
+      "bytes": 27258801,
+      "sha256": "fcf51f1b230362b28690bb9d1809bf0431f29cad20534e3f589bd7285547f20d"
+    }
+  ]
+}
