@@ -93,8 +93,9 @@ with evidence (it fails on `main` too), and take it off when it is fixed.
 `.github/workflows/manual-pdf.yml` is a manual-only workflow with `contents: read`. It uses the
 Tests workflow's Ubuntu 24.04, Node 22, Playwright Chromium, font packages, Inter aliases, and
 Chromium sandbox setup. It runs `node tools/manual-pdf.mjs` without browser or font overrides,
-checks the PDF's navigation, rebuilds its edition links, and uploads the changed files. It never
-commits or pushes. The artifact lasts seven days.
+checks the PDF's navigation and exact contents titles, rebuilds its edition links, and runs the full
+`cdx-manual-pdf` and `man5` files against that fresh edition. It uploads the changed files and the
+original check reports and traces. It never commits or pushes. The artifacts last seven days.
 
 After this workflow is available on `main`, the Operator can:
 
@@ -102,7 +103,10 @@ After this workflow is available on `main`, the Operator can:
    `gh workflow run manual-pdf.yml --ref main`.
 2. Wait for that run to pass, note its source commit, and download its `manual-pdf-<commit>`
    artifact with
-   `gh run download <run-id> --name manual-pdf-<commit> --dir .cache/manual-pdf-artifact`.
+   `gh run download <run-id> --name manual-pdf-<commit> --dir .cache/manual-pdf-artifact`. Review
+   `manual-pdf-checks-<commit>` too: `manual-pdf-check.json` lists the exact contents checks and
+   every remaining private-use text character by page, code point, font, and context. The suite's
+   original JSON reports and traces are retained even when a check fails.
 3. On a new branch from that same commit, copy the artifact's `manual/` folder into the checkout,
    and its `site/` folder too if present. Keep earlier immutable PDFs. `source-commit.txt` records
    which input was printed; it is provenance, not a site file to commit.

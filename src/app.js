@@ -258,6 +258,7 @@ class App {
   async applyScene(scene, { file = null } = {}) {
     const player = this.player;
     const ui = this.ui;
+    ui.resetMissingFileNotice?.();
     // The device's turntable choice holds for links too (lane Viewer).
     if (turntablePref() === false) scene.autoplay = { ...scene.autoplay, turntable: false };
     player.scene = scene;

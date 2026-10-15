@@ -141,41 +141,97 @@ export async function phonePNG(page, bytes) {
 }
 
 // Use the vendored browser readers, not regenerated QR matrices or mocked responses.
-export async function decodePNG(page, bytes) {
+// qrModules is an optional geometry-assisted diagnostic for bounded square
+// rasters with a four-module quiet zone. Route and smoke assertions never use
+// it: both readers must find the code independently in the exported pixels.
+export async function decodePNG(page, bytes, { qrModules = null } = {}) {
   if (!(await page.evaluate(() => !!window.jsQR)))
     await page.addScriptTag({ url: new URL("vendor/jsqr/jsQR.js", page.url()).href });
   if (!(await page.evaluate(() => !!window.ZXing)))
     await page.addScriptTag({ url: new URL("vendor/zxing-js/zxing.min.js", page.url()).href });
-  return page.evaluate(async (base64) => {
-    const img = new Image();
-    img.src = `data:image/png;base64,${base64}`;
-    await img.decode();
-    const c = document.createElement("canvas");
-    c.width = img.width;
-    c.height = img.height;
-    const g = c.getContext("2d");
-    g.drawImage(img, 0, 0);
-    const pixels = g.getImageData(0, 0, c.width, c.height);
-    const jsqr = (window.jsQR.default || window.jsQR)(pixels.data, c.width, c.height)?.data ?? null;
-    const Z = window.ZXing;
-    const lum = new Uint8ClampedArray(c.width * c.height);
-    for (let i = 0; i < lum.length; i++) {
-      const j = i * 4;
-      lum[i] = (pixels.data[j] * 306 + pixels.data[j + 1] * 601 + pixels.data[j + 2] * 117) >> 10;
-    }
-    let zxing = null;
-    try {
-      const bitmap = new Z.BinaryBitmap(
-        new Z.HybridBinarizer(new Z.RGBLuminanceSource(lum, c.width, c.height)),
-      );
-      zxing = new Z.QRCodeReader()
-        .decode(bitmap, new Map([[Z.DecodeHintType.TRY_HARDER, true]]))
-        .getText();
-    } catch {
-      /* a failed decode is a finding, represented by null */
-    }
-    return { jsqr, zxing };
-  }, Buffer.from(bytes).toString("base64"));
+  return page.evaluate(
+    async ({ base64, qrModules }) => {
+      const img = new Image();
+      img.src = `data:image/png;base64,${base64}`;
+      await img.decode();
+      const c = document.createElement("canvas");
+      c.width = img.width;
+      c.height = img.height;
+      const g = c.getContext("2d");
+      g.drawImage(img, 0, 0);
+      const pixels = g.getImageData(0, 0, c.width, c.height);
+      const jsqr =
+        (window.jsQR.default || window.jsQR)(pixels.data, c.width, c.height)?.data ?? null;
+      const Z = window.ZXing;
+      const lum = new Uint8ClampedArray(c.width * c.height);
+      for (let i = 0; i < lum.length; i++) {
+        const j = i * 4;
+        lum[i] = (pixels.data[j] * 306 + pixels.data[j + 1] * 601 + pixels.data[j + 2] * 117) >> 10;
+      }
+      let zxing = null;
+      try {
+        const bitmap = new Z.BinaryBitmap(
+          new Z.HybridBinarizer(new Z.RGBLuminanceSource(lum, c.width, c.height)),
+        );
+        const reader = new Z.QRCodeReader();
+        const hints = new Map([[Z.DecodeHintType.TRY_HARDER, true]]);
+        if (qrModules === null) zxing = reader.decode(bitmap, hints).getText();
+        else {
+          const n = qrModules;
+          if (
+            c.width !== c.height ||
+            !Number.isInteger(n) ||
+            n < 21 ||
+            n > 177 ||
+            (n - 17) % 4 !== 0 ||
+            c.width < n + 8
+          )
+            throw new Error("Invalid share export geometry.");
+          const source = bitmap.getBlackMatrix();
+          const ppm = c.width / (n + 8);
+          const quiet = Math.floor(4 * ppm);
+          for (let y = 0; y < c.height; y++)
+            for (let x = 0; x < c.width; x++)
+              if (
+                (x < quiet || y < quiet || x >= c.width - quiet || y >= c.height - quiet) &&
+                source.get(x, y)
+              )
+                throw new Error("Share export quiet zone is not clear.");
+          const bits = new Z.BitMatrix(n);
+          for (let y = 0; y < n; y++)
+            for (let x = 0; x < n; x++)
+              if (source.get(Math.floor((x + 4.5) * ppm), Math.floor((y + 4.5) * ppm)))
+                bits.set(x, y);
+          // Reject a supplied grid that does not match the pixels. These standard
+          // finder and timing shapes contain no expected payload or encoded data.
+          for (const [left, top] of [
+            [0, 0],
+            [n - 7, 0],
+            [0, n - 7],
+          ])
+            for (let y = 0; y < 7; y++)
+              for (let x = 0; x < 7; x++) {
+                const dark =
+                  x === 0 ||
+                  y === 0 ||
+                  x === 6 ||
+                  y === 6 ||
+                  (x >= 2 && x <= 4 && y >= 2 && y <= 4);
+                if (bits.get(left + x, top + y) !== dark)
+                  throw new Error("Share export finder geometry does not match.");
+              }
+          for (let i = 8; i < n - 8; i++)
+            if (bits.get(i, 6) !== (i % 2 === 0) || bits.get(6, i) !== (i % 2 === 0))
+              throw new Error("Share export timing geometry does not match.");
+          zxing = reader.getDecoder().decodeBitMatrix(bits, hints).getText();
+        }
+      } catch {
+        /* a failed decode is a finding, represented by null */
+      }
+      return { jsqr, zxing };
+    },
+    { base64: Buffer.from(bytes).toString("base64"), qrModules },
+  );
 }
 
 async function configureCode(page, id) {
@@ -208,7 +264,11 @@ export async function exportCode(page, id) {
     const download = page.waitForEvent("download");
     await page.locator("#sqr-save").click();
     const d = await download;
-    return { png: await fs.readFile(await d.path()), payload: share.url, share };
+    return {
+      png: await fs.readFile(await d.path()),
+      payload: share.url,
+      share: await page.evaluate(async () => (await import("/src/qr/share.js")).SHARE.last),
+    };
   }
   if (id === "qr-code" || id === "qr-picture") {
     const data = await page.evaluate(async (id) => {
@@ -945,7 +1005,11 @@ async function run() {
                 await fs.writeFile(path.join(OUT, phoneName), phone);
                 r.evidence.push(phoneName);
                 const decoded = await decodePNG(page, phone);
-                r.qr = { payload: exported.payload, decoded, settings: await qrSettings(page, id) };
+                r.qr = {
+                  payload: exported.payload,
+                  decoded,
+                  settings: await qrSettings(page, id),
+                };
                 ensure(
                   decoded.jsqr === exported.payload && decoded.zxing === exported.payload,
                   "Export did not decode exactly",
@@ -968,7 +1032,11 @@ async function run() {
                     blocked: true,
                   });
                 const decoded = await decodePNG(page, exported.png);
-                r.qr = { payload: exported.payload, decoded, settings: await qrSettings(page, id) };
+                r.qr = {
+                  payload: exported.payload,
+                  decoded,
+                  settings: await qrSettings(page, id),
+                };
                 ensure(
                   decoded.jsqr === exported.payload && decoded.zxing === exported.payload,
                   "Native export did not decode exactly",
@@ -1324,13 +1392,13 @@ The ${findingGroups.size} distinct observations below group repeated runs by cau
 | --- | --- | --- | --- | --- |
 ${findings || "| All attempted checks | passed | None | — | See results below |"}
 
-A local-file link carries settings and file details, never the file bytes. Recipient records and screenshots show exactly what a fresh recipient sees and whether the page clearly asks them to reopen the file. A failure here belongs to the toy's owning task; this PR fixes no toys.
+A local-file link carries settings and file details, never the file bytes. Recipient records and screenshots show exactly what a fresh recipient sees and whether the page clearly asks them to reopen the file. Failed recipient checks name the toy's owning task.
 
 ## Run it again
 
 Start a static server with \`npm run serve\`, then run \`SPLASHERY_CHROMIUM=/path/to/chromium node tools/adv-route.mjs\`. Output defaults to \`.cache/advisor-route/\`, so a rerun cannot overwrite this committed report. \`ADV_OUT\` selects another output directory, \`SPLASHERY_URL\` the server, \`ADV_PAYLOAD\` the QR toys' text, and \`ADV_RUNS\` 1–3 repetitions (default 3). Pass counts use the actual number requested; a one-run dispatch is not three-run evidence. Each result is saved as a per-step JSON file; \`summary.json\` indexes those files without duplicating their contents.
 
-The evidence workflow is **workflow_dispatch only**, one run per dispatch, with \`ADV_RUNS=1\` and \`ADV_FAIL_ON_FINDINGS=0\`. Route findings are reported without making that job red; infrastructure failures and regression failures still fail. Locally the runner exits 1 for failed checks unless \`ADV_FAIL_ON_FINDINGS=0\`; inconclusive and blocked observations never trigger that exit. The earlier PR-triggered Actions run 38672160501 reached its 45-minute limit and was canceled without Actions evidence. The Operator will dispatch the new workflow after it reaches main.
+The evidence workflow is **workflow_dispatch only**, one run per dispatch, with \`ADV_RUNS=1\` and \`ADV_FAIL_ON_FINDINGS=0\`. Route findings are reported without making that job red; infrastructure failures and regression failures still fail. Locally the runner exits 1 for failed checks unless \`ADV_FAIL_ON_FINDINGS=0\`; inconclusive and blocked observations never trigger that exit. The Operator controls manual evidence dispatches and the full-suite label. Check the latest Actions run separately from these local results.
 
 For the owner's Mac: \`ADV_OUT=.cache/advisor-route-mac ADV_REAL_GPU=1 ADV_HEADED=1 node tools/adv-route.mjs\`. This removes all software-renderer flags and allows the app's automatic backend choice. Request WebGPU with \`ADV_RENDERER=webgpu\`, then inspect the actual recorded backend. Physical camera scans, hardware smoothness, real-device load times, GPU presentation, and hardware WebGPU remain unmeasured until an owner device run.
 
@@ -1341,6 +1409,8 @@ Both local fixtures are **synthetic**: \`${STILL}\` is a generated disc on a str
 These Moving photo to 3D measurements do not describe Video to 3D. First-frame timing records navigation-to-frame and chooseToy-to-frame at the first PlayCanvas postrender for the nonbusy target with Sharp picture visible. Two stage captures then settle the screenshot. Playback samples record performance.now differences at postrender, source positions, and frame numbers. Min, median, p95, and max are retained with raw samples. They describe CPU render completion, not GPU completion or display presentation. Software rendering and automation overhead influence the values. stageUpdateTicks counts updates, not rendered frames. Photo steps 3, 6, and 7 explicitly check view and camera pose; Splats also checks status text.
 
 PNG exports come from the real exporters, not regenerated matrices. Untouched exports and separately saved copies scaled to at most 390 pixels are each decoded with vendor jsQR and ZXing. The visible stage or share-dialog canvas is captured at its actual phone CSS size. Full unscaled viewport screenshots include shelf QR thumbnails; failing reads are inconclusive about the target. Settings marked \`assumed\` in QR metadata are not measurements; app-returned options and metrics are labeled separately. Three QR uses the same payload in all three channels, which does not prove distinct-channel separation.
+
+Both readers must independently find and decode every exported PNG at native size and at 390 pixels, without geometry hints. The Share exporter tries QR masks only when saving and accepts one only when both readers locate and decode its actual raster at both sizes. The optional geometry-assisted helper is a separate diagnostic covered by rejection tests; it is never used by route pass/fail checks. These digital-image reads do not establish phone-camera detection.
 
 ## Share QR origin and size
 

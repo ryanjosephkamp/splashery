@@ -153,7 +153,10 @@ test("Picture QR in the browser: the splats read back, the PNG reads back, and a
     const p = window.__splashery.app.player;
     p.motion.act(p.time, null, { key: "turn" });
   });
-  await page.waitForTimeout(4500);
+  // Software rendering can advance the animation more slowly than wall time.
+  await page.waitForFunction(() => window.__splashery.app.player.motion.state.turn === 0, null, {
+    timeout: 60000,
+  });
   const after = await page.evaluate(() => window.__splashery.qrCraft.checkPicture().then((c) => c.stage.map((s) => s.text))); // prettier-ignore
   expect(after).toEqual([own, own]);
   expect(errors).toEqual([]);
