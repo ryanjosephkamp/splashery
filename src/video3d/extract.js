@@ -132,6 +132,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
     let recovery;
     let advanced = false;
     let done = false;
+    let seekedAt = null;
     const finish = (error, mediaTime) => {
       if (done) return;
       done = true;
@@ -139,7 +140,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
       clearTimeout(recovery);
       signal?.removeEventListener("abort", abort);
       video.removeEventListener("seeking", arm);
-      video.removeEventListener("seeked", recover);
+      video.removeEventListener("seeked", settled);
       if (callback !== undefined) video.cancelVideoFrameCallback(callback);
       if (advanced && ownsVideo()) video.pause();
       error ? reject(error) : resolve(mediaTime);
@@ -150,10 +151,24 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
         finish(new Error("The decoded video frame took too long. Try a shorter MP4 (H.264) clip.")),
       timeoutMs,
     );
-    // Register only once this seek starts. A callback already queued for the previous picture
-    // must not satisfy a nearby new seek. Frame duration can vary, so proximity is not a test.
+    // Initial/old RVFCs can arrive after seeking starts but before seeked: accepting one and then
+    // waiting for seeked pairs its old mediaTime with the new drawImage picture. Require a fresh
+    // presentation after seeked; presentationTime also rejects an older queued callback delivered
+    // after that event. Frame duration can vary, so mediaTime proximity is never a test.
     const arm = () => {
-      callback = video.requestVideoFrameCallback((_, metadata) => finish(null, metadata.mediaTime));
+      callback = video.requestVideoFrameCallback((_, metadata) => {
+        callback = undefined;
+        if (done) return;
+        if (
+          seekedAt === null ||
+          video.seeking ||
+          (Number.isFinite(metadata.presentationTime) && metadata.presentationTime < seekedAt)
+        ) {
+          arm();
+          return;
+        }
+        finish(null, metadata.mediaTime);
+      });
     };
     // A paused seek can remain inside the already-presented frame. Chromium then sends seeked
     // without another presentation callback. Briefly advancing the muted local video requests a
@@ -181,9 +196,14 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
         );
       }, 100);
     };
+    const settled = () => {
+      if (video.seeking || video.readyState < 2) return;
+      seekedAt = performance.now();
+      recover();
+    };
     cleanup = finish;
     video.addEventListener("seeking", arm, { once: true });
-    video.addEventListener("seeked", recover);
+    video.addEventListener("seeked", settled);
     signal?.addEventListener("abort", abort, { once: true });
     if (signal?.aborted) abort();
   });

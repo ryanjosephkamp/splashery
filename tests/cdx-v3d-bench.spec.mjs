@@ -584,7 +584,20 @@ test("the independent decoder matches selected JPEGs and detects an actually rep
   });
   expect(assertPixelDisjointness(selected, proof, times)).toBe(true);
   expect(proof.matchedTraining).toHaveLength(2);
-  const repeatedTime = sourceTimes.find((t) => Math.abs(t - selected[0].time) < 0.001);
+  for (const [index, frame] of proof.matchedTraining.entries()) {
+    expect(Number.isFinite(selected[index].presentedTime)).toBe(true);
+    expect(Math.abs(selected[index].presentedTime - frame.sourceTime)).toBeLessThan(0.0001);
+  }
+  // The independent JPEG match identifies the actual picture even if extraction's timestamp
+  // was stale. Deliberately repeat that source frame, rather than trusting the requested time.
+  const matched = proof.matchedTraining[0];
+  expect(matched.sha256).toBe(selected[0].sha256);
+  expect(matched.repeatedSha256).toBe(selected[0].sha256);
+  expect(Number.isInteger(matched.sourceIndex)).toBe(true);
+  expect(matched.sourceIndex).toBeGreaterThanOrEqual(0);
+  expect(matched.sourceIndex).toBeLessThan(sourceTimes.length);
+  const repeatedTime = sourceTimes[matched.sourceIndex];
+  expect(Math.abs(repeatedTime - matched.sourceTime)).toBeLessThan(0.0001);
   const overlap = await page.evaluate(sourceFrameReceipts, {
     base64,
     sourceTimes,
@@ -592,6 +605,7 @@ test("the independent decoder matches selected JPEGs and detects an actually rep
     trainingFrames: selected,
     crop: { sx: 0, sw: 192 },
   });
+  expect(overlap.views[0].sha256).toBe(selected[0].sha256);
   expect(() => assertPixelDisjointness(selected, overlap, [repeatedTime])).toThrow(
     /also used for training/,
   );
