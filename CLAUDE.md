@@ -57,6 +57,10 @@ with a hand-back rule. These ground rules are the full set for Claude sessions; 
   toy opens, listed in `LICENSES.md` and named in the PR. A copyleft license (GPL, AGPL), a library
   that calls a server, or one over 2 MB goes to the owner first. He approved a LAZ reader for point
   clouds and a DICOM reader for medical volumes the same day.
+- Fonts (the owner's "fonts OK" of October 15, 2026): the Pitch page (`site/about/splashery/`) may
+  use a web font under the SIL Open Font License or another open license: subset woff2 files
+  vendored beside the page, loaded only by it with a system-font fallback, and listed in
+  `LICENSES.md` and `CREDITS.md`. The rest of the site keeps system fonts.
 - Live input (approved September 30, 2026): a toy asks for the microphone, the camera or screen
   capture only when the person taps to start it. Nothing is requested or loaded before that, and
   nothing is recorded, stored or sent anywhere. One exception (the owner's request of October 4,
