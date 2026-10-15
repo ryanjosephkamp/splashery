@@ -472,6 +472,8 @@ test.describe("Splashery app (WebGL2)", () => {
     const png = await save("#export-png");
     expect(png.name).toMatch(/\.png$/);
     expect(png.size).toBeGreaterThan(5000);
+    // The Share tab shows Video or GIF, one at a time (Share lane, October 15, 2026).
+    await page.click("#clip-kind [data-clip=gif]");
     await page.selectOption("#gif-frames", "24");
     await page.selectOption("#gif-size", "256");
     const gif = await save("#export-gif");
@@ -479,6 +481,7 @@ test.describe("Splashery app (WebGL2)", () => {
     expect(gif.size).toBeGreaterThan(20000);
     const webm = await page.evaluate(() => !document.getElementById("webm-row").hidden);
     if (webm) {
+      await page.click("#clip-kind [data-clip=video]");
       await page.selectOption("#webm-seconds", "3");
       const video = await save("#export-webm");
       expect(video.name).toMatch(/\.webm$/);

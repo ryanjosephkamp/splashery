@@ -1,0 +1,884 @@
+{
+  "quick": false,
+  "plainOnly": false,
+  "geometryExtra": 0.28,
+  "decorationBand": 2,
+  "pictureCrop": "Original sample crop, matching the default saved recipes",
+  "pictures": [
+    {
+      "id": "ai-farm"
+    },
+    {
+      "id": "ai-wave"
+    },
+    {
+      "id": "ai-mushrooms"
+    },
+    {
+      "id": "ai-arch"
+    },
+    {
+      "id": "wildflowers"
+    },
+    {
+      "id": "still-life"
+    },
+    {
+      "id": "spiral-stairs"
+    },
+    {
+      "id": "forest"
+    },
+    {
+      "id": "cdx-qr-ai-monstera"
+    },
+    {
+      "id": "cdx-qr-ai-fern"
+    },
+    {
+      "id": "cdx-qr-ai-green-watering-can"
+    },
+    {
+      "id": "cdx-qr-ai-cactus"
+    },
+    {
+      "id": "cdx-qr-ai-pitcher"
+    },
+    {
+      "id": "cdx-qr-ai-stacking-rings"
+    },
+    {
+      "id": "cdx-qr-ai-pear"
+    },
+    {
+      "id": "cdx-qr-ai-hot-air-balloon"
+    },
+    {
+      "id": "cdx-qr-ai-mushroom"
+    },
+    {
+      "id": "cdx-qr-ai-spinning-top"
+    },
+    {
+      "id": "cdx-qr-ai-tulip"
+    },
+    {
+      "id": "cdx-qr-ai-pinecone"
+    },
+    {
+      "id": "cdx-qr-ai-stacked-stones"
+    },
+    {
+      "id": "cdx-qr-ai-rook"
+    },
+    {
+      "id": "cdx-qr-ai-rainbow"
+    },
+    {
+      "id": "cdx-qr-ai-wood-blocks"
+    },
+    {
+      "id": "cdx-qr-ai-teapot"
+    },
+    {
+      "id": "cdx-qr-ai-lotus"
+    },
+    {
+      "id": "cdx-qr-ai-scallop"
+    },
+    {
+      "id": "cdx-qr-ai-pumpkin"
+    },
+    {
+      "id": "cdx-qr-ai-blue-vase"
+    },
+    {
+      "id": "cdx-qr-ai-ginkgo"
+    },
+    {
+      "id": "cdx-qr-ai-squash"
+    },
+    {
+      "id": "cdx-qr-ai-pebbles"
+    },
+    {
+      "id": "cdx-theme-seasons-2-2"
+    },
+    {
+      "id": "cdx-theme-seasons-3-1"
+    },
+    {
+      "id": "cdx-theme-seasons-4-1"
+    },
+    {
+      "id": "cdx-theme-seasons-8-2"
+    },
+    {
+      "id": "cdx-theme-seasons-9-1"
+    },
+    {
+      "id": "cdx-theme-seasons-10-1"
+    },
+    {
+      "id": "cdx-theme-seasons-11-2"
+    },
+    {
+      "id": "cdx-theme-seasons-12-1"
+    },
+    {
+      "id": "cdx-theme-ocean-1-2"
+    },
+    {
+      "id": "cdx-theme-ocean-3-1"
+    },
+    {
+      "id": "cdx-theme-ocean-4-1"
+    },
+    {
+      "id": "cdx-theme-ocean-5-2"
+    },
+    {
+      "id": "cdx-theme-ocean-6-2"
+    },
+    {
+      "id": "cdx-theme-ocean-8-1"
+    },
+    {
+      "id": "cdx-theme-ocean-9-2"
+    },
+    {
+      "id": "cdx-theme-ocean-10-2"
+    },
+    {
+      "id": "cdx-theme-forest-1-1"
+    },
+    {
+      "id": "cdx-theme-forest-2-2"
+    },
+    {
+      "id": "cdx-theme-forest-3-2"
+    },
+    {
+      "id": "cdx-theme-forest-5-2"
+    },
+    {
+      "id": "cdx-theme-forest-6-1"
+    },
+    {
+      "id": "cdx-theme-forest-9-1"
+    },
+    {
+      "id": "cdx-theme-forest-10-1"
+    },
+    {
+      "id": "cdx-theme-forest-12-1"
+    },
+    {
+      "id": "cdx-theme-space-art-1-2"
+    },
+    {
+      "id": "cdx-theme-space-art-2-1"
+    },
+    {
+      "id": "cdx-theme-space-art-4-2"
+    },
+    {
+      "id": "cdx-theme-space-art-5-1"
+    },
+    {
+      "id": "cdx-theme-space-art-6-1"
+    },
+    {
+      "id": "cdx-theme-space-art-8-2"
+    },
+    {
+      "id": "cdx-theme-space-art-9-1"
+    },
+    {
+      "id": "cdx-theme-space-art-10-1"
+    },
+    {
+      "id": "cdx-theme-patterns-2-1"
+    },
+    {
+      "id": "cdx-theme-patterns-4-1"
+    },
+    {
+      "id": "cdx-theme-patterns-6-1"
+    },
+    {
+      "id": "cdx-theme-patterns-7-2"
+    },
+    {
+      "id": "cdx-theme-patterns-8-2"
+    },
+    {
+      "id": "cdx-theme-patterns-9-1"
+    },
+    {
+      "id": "cdx-theme-patterns-10-1"
+    },
+    {
+      "id": "cdx-theme-patterns-11-2"
+    },
+    {
+      "id": "cdx-theme-celebrations-1-1"
+    },
+    {
+      "id": "cdx-theme-celebrations-3-1"
+    },
+    {
+      "id": "cdx-theme-celebrations-4-1"
+    },
+    {
+      "id": "cdx-theme-celebrations-5-1"
+    },
+    {
+      "id": "cdx-theme-celebrations-6-2"
+    },
+    {
+      "id": "cdx-theme-celebrations-7-1"
+    },
+    {
+      "id": "cdx-theme-celebrations-8-1"
+    },
+    {
+      "id": "cdx-theme-celebrations-10-1"
+    }
+  ],
+  "summary": [
+    {
+      "id": "border-4-original",
+      "trials": 11520,
+      "all": 11242,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 470,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2394,
+            "zxing": 2372,
+            "zxingcpp": 2306
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2323,
+            "zxing": 2342,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "border-2-original",
+      "trials": 11520,
+      "all": 11321,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 470,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2387,
+            "zxing": 2374,
+            "zxingcpp": 2365
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2331,
+            "zxing": 2375,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "border-1-original",
+      "trials": 11520,
+      "all": 11232,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 478,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 464,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2393,
+            "zxing": 2378,
+            "zxingcpp": 2381
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2280,
+            "zxing": 2292,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "border-0-original",
+      "trials": 11520,
+      "all": 2096,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 217,
+            "zxing": 72,
+            "zxingcpp": 180
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 284,
+            "zxing": 169,
+            "zxingcpp": 327
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 1024,
+            "zxing": 592,
+            "zxingcpp": 1404
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 948,
+            "zxing": 807,
+            "zxingcpp": 1625
+          }
+        }
+      }
+    },
+    {
+      "id": "border-4-pale",
+      "trials": 11520,
+      "all": 11520,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "border-2-pale",
+      "trials": 11520,
+      "all": 11519,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2399,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "border-1-pale",
+      "trials": 11520,
+      "all": 11520,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "border-0-pale",
+      "trials": 11520,
+      "all": 11368,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2396,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2252,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "eyes-square-square",
+      "trials": 11520,
+      "all": 11174,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2394,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2235,
+            "zxing": 2240,
+            "zxingcpp": 2240
+          }
+        }
+      }
+    },
+    {
+      "id": "eyes-square-circle",
+      "trials": 11520,
+      "all": 11520,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "eyes-rounded-square",
+      "trials": 11520,
+      "all": 11200,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2346,
+            "zxing": 2240,
+            "zxingcpp": 2240
+          }
+        }
+      }
+    },
+    {
+      "id": "eyes-rounded-circle",
+      "trials": 11520,
+      "all": 11520,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "eyes-circle-square",
+      "trials": 11520,
+      "all": 9495,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 400
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 401
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 1960
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2240,
+            "zxing": 2240,
+            "zxingcpp": 1920
+          }
+        }
+      }
+    },
+    {
+      "id": "eyes-circle-circle",
+      "trials": 11520,
+      "all": 9472,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 430
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 469
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 1609
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2080
+          }
+        }
+      }
+    },
+    {
+      "id": "eyes-rounded-border-2",
+      "trials": 11520,
+      "all": 11519,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2399,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "eyes-rounded-border-1",
+      "trials": 11520,
+      "all": 11520,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2400,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    },
+    {
+      "id": "eyes-rounded-border-0",
+      "trials": 11520,
+      "all": 11366,
+      "byKind": {
+        "plain": {
+          "phone": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          },
+          "8ppm": {
+            "trials": 480,
+            "jsqr": 480,
+            "zxing": 480,
+            "zxingcpp": 480
+          }
+        },
+        "picture": {
+          "phone": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2394,
+            "zxingcpp": 2400
+          },
+          "8ppm": {
+            "trials": 2400,
+            "jsqr": 2400,
+            "zxing": 2252,
+            "zxingcpp": 2400
+          }
+        }
+      }
+    }
+  ],
+  "failures": [
+    {
+      "candidate": "border-0-original"
+    },
+    {
+      "candidate": "border-0-pale"
+    },
+    {
+      "candidate": "border-1-original"
+    },
+    {
+      "candidate": "border-2-original"
+    },
+    {
+      "candidate": "border-2-pale"
+    },
+    {
+      "candidate": "border-4-original"
+    },
+    {
+      "candidate": "eyes-circle-circle"
+    },
+    {
+      "candidate": "eyes-circle-square"
+    },
+    {
+      "candidate": "eyes-rounded-border-0"
+    },
+    {
+      "candidate": "eyes-rounded-border-2"
+    },
+    {
+      "candidate": "eyes-rounded-square"
+    },
+    {
+      "candidate": "eyes-square-square"
+    }
+  ]
+}
