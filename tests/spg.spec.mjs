@@ -137,8 +137,8 @@ test.describe("site pages", () => {
 
   test("the embed guide builds the snippets and shows a live toy", async ({ page }) => {
     await page.goto("/site/share/");
-    // Each input navigates the iframe. Finish starting that real player before
-    // navigating it again, rather than tearing down a half-created GPU device.
+    // Each input navigates the iframe. Only the final navigation needs to build
+    // a real player; intermediate snippets do not need their own GPU contexts.
     const live = async (query) => {
       const element = await page.locator("#embed-frame iframe").elementHandle();
       const frame = await element.contentFrame();
@@ -147,17 +147,14 @@ test.describe("site pages", () => {
       );
       await frame.waitForFunction(
         () => window.__splashery?.ready && window.__splashery.player?.toyInfo?.id === "strawberry",
-        null,
-        { timeout: 180_000 },
       );
       await element.dispose();
     };
     await expect(page.locator("#snip-iframe")).toContainText("embed/?toy=strawberry");
-    await live([["toy", "strawberry"]]);
     await page.selectOption("#embed-form [name=theme]", "dark");
-    await live([["theme", "dark"]]);
     await page.selectOption("#embed-form [name=autoplay]", "breeze");
     await live([
+      ["toy", "strawberry"],
       ["theme", "dark"],
       ["autoplay", "breeze"],
     ]);

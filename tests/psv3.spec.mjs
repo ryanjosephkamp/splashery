@@ -291,6 +291,34 @@ function fakeTrack(duration, seek) {
 }
 
 for (const speed of [0.5, 1])
+  for (const last of [2.22836, 2.41809])
+    test(`a completed sound loops from the start after a slow frame at ${last} s, speed ${speed}`, () => {
+      const saved = { window: globalThis.window, clip: MOVING.clip, t: MOVING.t, anchor: MOVING.anchor, frame: MOVING.frame }; // prettier-ignore
+      const duration = 2.508;
+      const tr = fakeTrack(duration, 0);
+      globalThis.window = { __splashery: { player: { scene: { motion: { speed } } } }, __clipT: 1 };
+      try {
+        MOVING.clip = { duration, n: 38, delays: Array(38).fill((duration * 1000) / 38), audio: { track: tr }, video: null }; // prettier-ignore
+        MOVING.t = last;
+        MOVING.anchor = null;
+        tr.play();
+        tr.step(duration + 0.1); // the sound ends before another frame is drawn
+        expect(tr.el.ended).toBe(true);
+        MOVING_PHOTO.drive(1, { play: 1 }, {}, { time: 1 });
+        expect(MOVING.t).toBe(0);
+        expect(MOVING.frame).toBe(0);
+        expect(tr.el.currentTime).toBe(0);
+        expect(tr.playing).toBe(true);
+      } finally {
+        globalThis.window = saved.window;
+        MOVING.clip = saved.clip;
+        MOVING.t = saved.t;
+        MOVING.anchor = saved.anchor;
+        MOVING.frame = saved.frame;
+      }
+    });
+
+for (const speed of [0.5, 1])
   for (const duration of [2.52, 2.53])
     test(`a clip of ${duration} s with sound loops on a device drawing 30 frames a second${speed === 1 ? ", at 1.75 times" : ""}`, () => {
       const saved = { window: globalThis.window, clip: MOVING.clip, t: MOVING.t };

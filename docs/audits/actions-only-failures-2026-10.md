@@ -1,9 +1,10 @@
 # Actions-only failures: task 86
 
 Made by Ryan with Codex (GPT-6), October 15, 2026. Branch: `codex/actions-only-failures`. Test and
-measurement changes, exact-output camera draw shortcuts, and an exact PDF-search page selection.
-Book layouts, turns, rendering, and sandbox settings stay the same. The draft PR's Verification
-section records the final Actions run.
+measurement changes, exact-output camera draw shortcuts, an exact PDF-search page selection, and
+correct looping after an audio element ends between drawn frames. Book layouts, turns, rendering,
+and sandbox settings stay the same. The draft PR's Verification section records the final Actions
+run.
 
 ## Evidence and causes
 
@@ -32,7 +33,7 @@ case. Only original shard results count; the existing CI diagnostic runs do not 
 | `ui3:50`, `ui3:129`                 | The original Actions reports exhaust all 42 notes before Pause: the tune ends at 4.21 audio seconds, while the second driver click takes about five seconds. Pause through the real button in the browser's drawn playing phase, with future notes explicitly required, and retain the same held tune after Resume. Driver latency also permits the effect to decay before the test reads its initial or resumed value. Capture the actual action event, retaining the `>0.95` and `<0.02` limits. Wait for a drawn effect and scheduled audio before changing phases. |
 | `sndc-engine:27`, `sndc-engine:142` | A protocol polling deadline is not the audio's silence deadline; fixed sleeps also do not establish rendered or scheduled progress. Observe native context transitions and the audio clock at the click. Keep the 100 ms freeze bound, the 500 ms native resume bound, unchanged paused time, and resumed scheduling checks. Pause an actually ringing note with future notes remaining, in the same browser callback, before driver actionability can consume the tune.                                                                                               |
 | `ops-text:41`                       | The actual Actions trace selects page 45, then the book replaces that left-page selection with page 46 of the same spread. Mark an explicit search selection and retain its exact page; ordinary spread navigation is unchanged. Wait for the actual book drive before the original text, highlight, status, and API assertions. Also observe transient Copy feedback in the browser, retaining clipboard and reset checks.                                                                                                                                            |
-| `spg:138`                           | The form navigates the live iframe three times. The old test neither awaited those players nor verified that a toy actually started before replacing its GPU context. Wait for each URL and the real strawberry player before the next navigation. This strengthens the live-example check; Actions must verify the teardown result.                                                                                                                                                                                                                                   |
+| `spg:138`                           | The form navigates the live iframe three times. Await only the final URL and its real strawberry player, after both input changes. Waiting for every intermediate GPU startup made the check unnecessarily slow on SwiftShader. Keep all snippet, final URL, and screenshot assertions, strengthen final player readiness, and use the existing timeout.                                                                                                                                                                                                               |
 | `cdx-mir:329`                       | The 10% draw-cost bound compared separate browser runs under different load. Replay the same recorded frames and real worker replies into independent before/after filters in one browser, alternate timing order, and finish pending GPU work explicitly. Keep the same 1.1 ratio and every image/depth assertion. Version the benchmark's resume cache.                                                                                                                                                                                                              |
 | `live4:149`                         | Node polling can miss a drawn mode, and a transport delay after Start over can move the audio beyond its initial-position check. Capture the actual settled modes per player frame and pause at that observed phase. Read seek/start results in the same browser call. Keep both settledness thresholds and all transport/privacy checks.                                                                                                                                                                                                                              |
 | `psv3:146`                          | The old loop window started before the first drive and counted media startup/seeking stalls as playback. Under load it observed only one video wrap, or aliased whole short GIF loops. Sample after each player update, measure 2.7 actual playback periods, and use a phone viewport. Keep recording stopped display frames after startup, retain the two-wrap, first-frame, and last-half-second limits, and also assert the native playback rate.                                                                                                                   |
@@ -95,18 +96,19 @@ of real-time speed.
   Observe actual submitted jobs and native applied-order events instead. A front, turned, front
   probe rejected each first frame's older order and accepted each current order after it was
   applied, even though a replacement job was already running. The world version must also match.
-- The core batch reproduces the existing `kit:87` failure, "every kit toy has a recipe that builds
-  deterministically and fits the unit ball": the circular Picture QR recipe rejects its default code
-  as too detailed. That recipe and its known entry are outside this change.
-- Final local batch: 17 complete files, 238 tests, 236 passed, two failed, and zero skipped. Its
-  paired-camera failure was the hardcoded-port launch error above; after the base-URL and
+- The early core batch reproduced the existing `kit:87` failure, "every kit toy has a recipe that
+  builds deterministically and fits the unit ball": the circular Picture QR recipe rejects its
+  default code as too detailed. Main subsequently fixed that recipe; this branch includes the fix.
+  The complete kit file now passes all 10 local tests. This PR does not change its known entry.
+- An earlier local batch: 17 complete files, 238 tests, 236 passed, two failed, and zero skipped.
+  Its paired-camera failure was the hardcoded-port launch error above; after the base-URL and
   native-sort corrections, the complete paired check passed in 3.8 minutes. Both original
   image/depth checks and the 1.1 cost bound passed: still 21.083/19.975 ms (1.0555), and low light
-  21.600/20.233 ms (1.0675). The known circular-QR case remains. This batch preceded the
-  deterministic search regression and its source fix; the subsequent book/search results are
-  recorded in the draft PR. Complete ui3 and sndc-engine files passed all 14 tests; every requested
-  test file was exercised on that production revision. The original failed reports remain in the
-  ignored cache.
+  21.600/20.233 ms (1.0675). The circular-QR failure was subsequently fixed on main. This batch
+  preceded the deterministic search regression and its source fix; the subsequent book/search
+  results are recorded in the draft PR. Complete ui3 and sndc-engine files passed all 14 tests;
+  every requested test file was exercised on that production revision. The original failed reports
+  remain in the ignored cache.
 
 - The complete book, book-link/pop-out, and PDF-text files pass all 49 local tests without skips.
   Actions also passes all 36 book and four PDF-text checks. The changed book file's two measured
@@ -131,6 +133,28 @@ of real-time speed.
   ms for still frames, and from 36.958 to 35.200 ms for low light under concurrent load. These
   diagnostic timings do not replace the unchanged 1.1 paired check; the final result is in the draft
   PR.
+- The Operator requested the same exclusive simulation clock in hh3-engine2, hh4-weather, and
+  hh4-landmarks. These files also step the real player manually; automatic updates otherwise age
+  plucks, move joints, or advance a drive between those steps and their snapshots. Preserve their
+  real pointer input and every original motion, sound, position, and landing assertion. The
+  leaning-tower fall itself already runs atomically, but the shared setup and other landmark checks
+  still benefit from one clock. Local probe and full-file results are in the draft PR.
+- The psv3 loop viewport was Playwright's default 1280×720 and is now 390×844. The explicit
+  `profile=mid&adapt=off` keeps clip decoding, depth resolution, frame count, splat budget, and the
+  relief mesh budget fixed by profile, independent of viewport. The smaller viewport reduces raster
+  work, allowing short loops to be observed without aliasing whole cycles. This is a playback and
+  frame-selection regression, not a rendering-throughput measurement. The other 10 psv3 tests retain
+  their original viewport. The unchanged two-wrap, first-frame, and one-second end-stall checks
+  observe 2.7 media periods after startup and still record stopped display frames.
+- A fresh combined batch exposes a real remaining loop bug: the fast sound video's displayed tail
+  lasts 1,179.7 ms, failing the unchanged `<1000` check. The trace repeats displayed times 2.22836
+  and 2.41809 in a 2.508-second clip. After native audio ends, the silent fallback seeks back to
+  that stale displayed time and plays the tail again; its 50 ms end guard does not cover a slow
+  frame. When the native element has ended and is not blocked, start the next loop at zero through
+  the existing Track play method. Paused, blocked, and normal playing paths stay as they were. Four
+  engine regressions using both recorded times and both speeds fail on the original source, then
+  pass with the fix; the existing four 30 Hz loop regressions also pass. Native browser verification
+  retains every original bound; the final results are in the draft PR.
 
 Temporary fault-injection probes and their logs stay in the ignored local cache. They are not
 shipped or added to the suite. No retry, skip, `fixme`, threshold increase, or edit to

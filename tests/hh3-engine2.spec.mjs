@@ -23,6 +23,13 @@ async function handsOn(page) {
   await page.waitForTimeout(800);
   if (!(await page.evaluate(() => window.__splashery.player.handsOn.on)))
     await page.click("#hands-toggle");
+  // tick() drives these engine checks. Renderer frames between driver calls
+  // must not move the world or age a pluck before its explicit next step.
+  await page.evaluate(() => {
+    const { player } = window.__splashery;
+    player.stage.updateHandlers = [];
+    player.update(0);
+  });
 }
 
 const tick = (page, secs) =>
