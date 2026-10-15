@@ -21,6 +21,7 @@ import { buildWalkRegion } from "../video3d/region.js";
 import { mountSceneCredit } from "../video3d/credit.js";
 import { sampleBudget, phoneSample } from "../video3d/tiers.js";
 import { pausePreviousView } from "../video3d/pause-view.js";
+import { trainingBackground } from "../video3d/background.js";
 
 const V3D = {
   file: null, // the video somebody opened (a File; it stays on the device)
@@ -589,6 +590,7 @@ const VIDEO_3D = {
       return;
     }
     const s = src.scene;
+    const background = trainingBackground(src.stats?.trainingBackground);
     k.fitOn = false; // the scene and its camera path share the frame scene.js made
     if (src.affine || src.preservePhotometric) {
       // Frame camera limits on the captured area rather than extreme background splats.
@@ -665,6 +667,7 @@ const VIDEO_3D = {
     if (isBrowser() && src.path.length) {
       V3D.flight = makeFlight(src.path, src.uid === V3D.custom?.uid ? { file: V3D.file } : null, {
         isCurrent: () => V3D.shown === src,
+        background,
       });
       k.data.flight = V3D.flight;
       if (o.navigation === "walk") {

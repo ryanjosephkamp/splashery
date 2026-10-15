@@ -8,6 +8,8 @@
 // The orbit camera always looks at a target from a distance, so each video camera becomes a
 // target just in front of it, seen from the camera's own place and angle.
 
+import { holdTrainingBackground } from "./background.js";
+
 // cams: [{ time, pos, forward, yaw, pitch, roll }] sorted by time (scene.js toyCamera, plus time).
 // Returns { at(time) } giving the camera at a time (blended between the two nearest), and the
 // path's start and end.
@@ -121,7 +123,7 @@ const samePose = (cam, p) =>
 
 // The flight for one built scene. media: { file, start } for a video somebody opened (its sound
 // plays), or null (a sample: no sound). Returns drive's hook: fly(v, info), v the Replay toggle.
-export function makeFlight(cams, media, { isCurrent = () => true } = {}) {
+export function makeFlight(cams, media, { isCurrent = () => true, background = null } = {}) {
   const path = flightPath(cams);
   const st = { active: false, clock: 0, home: null, endTarget: null, audio: null, done: false };
   // The visitor's turn and zoom during the flight, and the pose the flight last set.
@@ -132,6 +134,8 @@ export function makeFlight(cams, media, { isCurrent = () => true } = {}) {
   let disposed = false;
   let owner = globalThis.window?.__splashery?.player || null;
   let token = owner?.loadToken;
+  let backgroundStage = null;
+  let releaseBackground = () => {};
   const current = () => {
     const player = globalThis.window?.__splashery?.player;
     // Standalone embeds publish their player after the first toy has built.
@@ -139,14 +143,19 @@ export function makeFlight(cams, media, { isCurrent = () => true } = {}) {
       owner = player;
       token = player.loadToken;
     }
-    return (
+    const belongs =
       isCurrent() &&
       (!owner ||
         (player === owner &&
           token === owner.loadToken &&
-          (!owner.scene?.toy || owner.scene.toy.id === "video-3d")))
-    );
+          (!owner.scene?.toy || owner.scene.toy.id === "video-3d")));
+    if (belongs && owner?.stage && !backgroundStage) {
+      backgroundStage = owner.stage;
+      releaseBackground = holdTrainingBackground(backgroundStage, background);
+    }
+    return belongs;
   };
+  current();
 
   const stopAudio = () => {
     if (st.audio) {
@@ -271,6 +280,7 @@ export function makeFlight(cams, media, { isCurrent = () => true } = {}) {
     if (disposed) return;
     disposed = true;
     clearInterval(timer);
+    releaseBackground();
     stopAudio();
     putLens(st.lens);
     st.lens = null;

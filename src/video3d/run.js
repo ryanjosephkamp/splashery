@@ -170,6 +170,9 @@ export async function videoTo3D(file, opts = {}) {
     // Keep the native image sizes, iteration budgets, and optimizer unchanged.
     ...(gentle || software ? { itersPerFrame: 2, fenceRing: software ? 1 : 2 } : {}),
     initTarget: seedTarget,
+    // Distant low-parallax triangulations can move the arithmetic mean far outside
+    // the scene. Keep every point, with robust bounds for initial scales and learning rates.
+    robustSeedBounds: true,
     evalHoldEvery: 1e9,
     sfm: { uiYield: true, ...(gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}) }, // prettier-ignore
     // Both sorts use the same unsigned depth/id order. A software adapter avoids emulating
@@ -406,6 +409,9 @@ export async function videoTo3D(file, opts = {}) {
         surfacePoints: seeded.appendedSeedCount ?? 0,
         generatedSurfacePoints: surface.n,
         seedSplats: seeded.n,
+        seedBounds: "coordinate-median",
+        seedSceneRadius: seeded.radius,
+        trainingBackground: [0, 0, 0],
         splats: s.trainer.n,
         iters: s.trainer.iter,
         psnr: lastPsnr ? Math.round(lastPsnr.value * 10) / 10 : null,
