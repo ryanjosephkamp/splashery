@@ -523,7 +523,9 @@ export class GSTrainer {
           { binding: 4, resource: { buffer: this.bufTarget } },
           { binding: 5, resource: { buffer: this.bufOut } },
           { binding: 6, resource: { buffer: this.bufGradP } },
-          { binding: 8, resource: { buffer: this.bufCamGrad } },
+          // With camera gradients disabled, the SSIM backward needs exactly eight storage
+          // bindings. An artificial camera reference would exceed WebGPU's default limit.
+          ...(this.camGrads ? [{ binding: 8, resource: { buffer: this.bufCamGrad } }] : []),
           { binding: 9, resource: { buffer: this.bufEnd } },
           { binding: 10, resource: { buffer: this.bufGssim } },
         ],

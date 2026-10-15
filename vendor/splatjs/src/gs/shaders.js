@@ -793,7 +793,7 @@ fn main(@builtin(global_invocation_id) g: vec3u,
 ${tileGrad ? `  sgPart = li % ${P}u;` : ''}${K > 1 ? '  sgBase = 0u;' : ''}
   let W = u32(cam.size.x);
   let H = u32(cam.size.y);
-${camGrad ? '' : `  // camera gradients compiled out: keep gradCam statically referenced so the
+${camGrad || mode === 2 ? '' : `  // camera gradients compiled out: keep gradCam statically referenced so the
   // 'auto' pipeline layout still has binding 8 (the bind groups pass it)
   if (cam.size.x < 0.0) { camAdd(0u, 0.0); }`}
 ${tileGrad ? '  let pxOk = g.x < W && g.y < H;' : '  if (g.x >= W || g.y >= H) { return; }'}
