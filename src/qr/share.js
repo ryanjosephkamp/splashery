@@ -110,15 +110,15 @@ export async function openShareQR(app) {
         SHARE.last.check = ok;
         check.textContent = ok
           ? "✓ It scans."
-          : "This code didn't read back here. Save JSON to keep the scene.";
+          : "This code didn't read back here. Use Save scene to keep the scene.";
       })
       .catch(() => (check.textContent = ""));
   } else {
     const n = (made.bytes || res.bytes || 0).toLocaleString("en-US");
     body.push(
-      el("p", { id: "sqr-long", text: res.ok ? `This scene's link is ${n} characters, more than one QR code can hold (about 2,900). Save the scene as a file instead, and open it with Load JSON.` : "This scene is too big for a link, so it can't be a QR code either. Save the scene as a file instead, and open it with Load JSON." }), // prettier-ignore
+      el("p", { id: "sqr-long", text: res.ok ? `This scene's link is ${n} characters, more than one QR code can hold (about 2,900). Save the scene as a file instead, and open it with Open a scene.` : "This scene is too big for a link, so it can't be a QR code either. Save the scene as a file instead, and open it with Open a scene." }), // prettier-ignore
     );
-    const json = el("button", { type: "button", class: "primary", id: "sqr-json", text: "Save JSON" }); // prettier-ignore
+    const json = el("button", { type: "button", class: "primary", id: "sqr-json", text: "Save scene" }); // prettier-ignore
     json.addEventListener("click", () => {
       dialog.close();
       app.exportJSON();
