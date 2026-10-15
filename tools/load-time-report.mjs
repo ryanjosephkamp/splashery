@@ -142,7 +142,9 @@ const before = heavy.reduce((n, r) => n + r.b.bytes, 0),
   after = heavy.reduce((n, r) => n + r.a.bytes, 0);
 const images = read(`${dir}/image-diffs.json`);
 const compression = read(`${dir}/compressed-opening.json`);
-const verification = read(`${dir}/verification.json`).round4;
+const verificationFile = read(`${dir}/verification.json`);
+const verification = verificationFile.round4;
+const postMerge = verificationFile.postMerge;
 const strawberry = read(`${dir}/strawberry-repeat.json`);
 const currentStrawberry = strawberry.currentTest;
 const control = read(`${dir}/same-main-control.json`);
@@ -177,8 +179,14 @@ const lines = [
   "",
   "## Current opening results",
   "",
-  `Baseline main: \`${current.method.before.frozenMain}\`. Final candidate: \`${current.finalCandidateSource}\`. The three phone full-scan fallbacks were measured on that revision; the other 25 groups retain their actual \`${current.method.after.candidateSource}\` source pins. A guarded diff confirms that the only later runtime change removes these three prefix-selector entries; every other data selection and loader/build function is unchanged. Each group has five adjacent, alternating before/after pairs on the same Linux software-rendering device. Every opening uses a fresh browser and context, disabled cache, and the same renderer, viewport, profile, count, seed, and camera. No repeated-test or other rendering job ran alongside these measurements. Superseded experiments and the replaced prefix samples are not pooled into this table.`,
+  `Baseline main: \`${current.method.before.frozenMain}\`. Measured fallback candidate: \`${current.finalCandidateSource}\`. The three phone full-scan fallbacks were measured on that revision; the other 25 groups retain their actual \`${current.method.after.candidateSource}\` source pins. A guarded diff between the two measured candidate revisions confirms that their only runtime difference removes these three prefix-selector entries; every other data selection and loader/build function is unchanged. Each group has five adjacent, alternating before/after pairs on the same Linux software-rendering device. Every opening uses a fresh browser and context, disabled cache, and the same renderer, viewport, profile, count, seed, and camera. No repeated-test or other rendering job ran alongside these measurements. Superseded experiments and the replaced prefix samples are not pooled into this table.`,
   "",
+  ...(postMerge
+    ? [
+        `After timing collection, main \`${postMerge.integratedMain}\` was merged additively at \`${postMerge.merge}\`, followed by refreshed byte-identical compressed manuals at \`${postMerge.validationSource}\`. The table retains its actual earlier baseline and candidate pins; these upstream UI, QR, photo, and manual changes were not timed again. Shared rig, camera, and animation-clock files remain unchanged. Final regression checks are recorded separately below.`,
+        "",
+      ]
+    : []),
   `The original top-20 phone set averages ${fmt(before)} → ${fmt(after)} local HTTP-body bytes combined (${((1 - after / before) * 100).toFixed(1)}% saving); ${heavy.filter((r) => r.a.bytes <= r.b.bytes * 0.75).length}/20 individually reach 25%. The combined 25% target is ${after <= before * 0.75 ? "met" : "not met"}. Public per-toy wire savings were not measured.`,
   "",
   `The strict median screen has ${higher.length}/28 higher medians. ${higher.length ? "It is not claimed met; each measured increase remains visible below." : "It is met in these observations, without establishing a universal timing guarantee."}`,
@@ -198,7 +206,7 @@ lines.push(
   "",
   "## Eager fallback for every previously slower group",
   "",
-  "The preceding implementation still awaited an opening-pack promise before renderer creation, decoded shared scenes again inside Player.init, started scan preparation before GPU initialization, loaded scan helpers dynamically, and inflated a Blob help module. The current change removes those paths globally. The app, Player, UI, and embed JavaScript entry files match the frozen main byte for byte; the original HTML engine preload and native app entry remain. The original eager museum-helper import is restored, and the scan decoder is back in its original module so it adds no runtime module request.",
+  "The preceding implementation still awaited an opening-pack promise before renderer creation, decoded shared scenes again inside Player.init, started scan preparation before GPU initialization, loaded scan helpers dynamically, and inflated a Blob help module. The current change removes those paths globally. On measured fallback revision 30ed36e5, the app, Player, UI, and embed JavaScript entry files match the frozen main byte for byte; the original HTML engine preload and native app entry remain. The original eager museum-helper import is restored, and the scan decoder is back in its original module so it adds no runtime module request.",
   "",
   "A new browser regression test holds compressed shared-scene decoding. Before the fix, renderer creation never starts within the unchanged test window; after the fix, it starts before the scene is released and the same shared toy then loads. Two further tests hold the unused PDF decompressor and edition metadata responses and verify that an ordinary opening can finish. Both PDF-only module dependencies are removed from ordinary startup. Red and green receipts, source hashes, the parser-based eager import comparison, and exact fallback coverage are recorded in [eager-fallback.json](load-time-2026-10/eager-fallback.json). These tests establish the removed startup dependencies; they do not assign each historical median difference to one cause.",
   "",
@@ -223,7 +231,7 @@ lines.push(
   "",
   "## Visual and regression evidence",
   "",
-  `${images.length} prior GPU-finished comparisons remain in [image-diffs.json](load-time-2026-10/image-diffs.json): 49 are pixel-identical; the desktop book differs at eight pixels by at most one RGB level. Every recorded tap pose moved. Their original capture source pins remain intact. The eager fallback changes discovery order; the final three scan fallbacks restore the original data files. The 13 shared renderer, rig, camera, entry, and help files are unchanged from the repeated-test source and frozen main. The exact-buffer and decoded-byte tests verify the retained lossless data. Lossy point-budget alternatives remain unshipped in [lossy-options.json](load-time-2026-10/lossy-options.json).`,
+  `${images.length} prior GPU-finished comparisons remain in [image-diffs.json](load-time-2026-10/image-diffs.json): 49 are pixel-identical; the desktop book differs at eight pixels by at most one RGB level. Every recorded tap pose moved. Their original capture source pins remain intact. The eager fallback changes discovery order; the final three scan fallbacks restore the original data files. At measured fallback revision 30ed36e5, the 13 shared renderer, rig, camera, entry, and help files are unchanged from the repeated-test source and frozen main. The exact-buffer and decoded-byte tests verify the retained lossless data. Lossy point-budget alternatives remain unshipped in [lossy-options.json](load-time-2026-10/lossy-options.json).`,
   "",
   `Required regression results: ${verification.required.passed} passed, ${verification.required.failed} failed, and ${verification.required.skipped} skipped. ${verification.required.processFailures.length} spec processes returned a nonzero exit code.`,
   "",
@@ -233,8 +241,19 @@ lines.push(
       .map((row) => `- ${group.name}: ${row.title} — ${row.status}.`),
   ),
   "",
-  "Latest validation, all red tests by name, commands, source pins, and protected-file checks are in [verification.json](load-time-2026-10/verification.json). Required smoke, taps, kit, unit, Real Objects, and all load-time specs run on the final runtime source. The repeated Strawberry runs retain their actual earlier source pins; the only subsequent runtime change is the three scan selectors, and no rig, camera, renderer, or clock code changed. Historical validation is labeled by its actual source and is not counted as this run.",
+  "Latest validation, all red tests by name, commands, source pins, and protected-file checks are in [verification.json](load-time-2026-10/verification.json). These required smoke, taps, kit, unit, Real Objects, and load-time results belong to measured fallback source 30ed36e5. The repeated Strawberry runs retain their actual earlier source pins; the scan-selector fallback and later upstream main merge did not change the shared rig, camera, renderer, or clock files. Historical validation is labeled by its actual source and is not counted as this run.",
   "",
+  ...(postMerge
+    ? [
+        `After the final main merge and manual refresh, ${postMerge.required.passed} tests passed, ${postMerge.required.failed} failed, and ${postMerge.required.skipped} were skipped on \`${postMerge.validationSource}\`. The scope repeats smoke, taps, kit, unit, Real Objects, all load-time specs, and help. The captured-toy embed transfer check remains below 30 MB. ${postMerge.required.processFailures.length} spec processes returned a nonzero exit code. The complete cases and commands are retained separately from the earlier run.`,
+        ...postMerge.required.groups.flatMap((group) =>
+          group.cases
+            .filter((row) => !["passed", "skipped"].includes(row.status))
+            .map((row) => `- ${group.name}: ${row.title} — ${row.status}.`),
+        ),
+        "",
+      ]
+    : []),
   "| Lossless PDF source | Original bytes | Gzip bytes | Saving |",
   "| --- | ---: | ---: | ---: |",
 );

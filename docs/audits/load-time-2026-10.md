@@ -6,15 +6,23 @@ addresses
 
 ## Current opening results
 
-Baseline main: `c13a9d3fab17c8a928299bdf115003502a7823d4`. Final candidate:
+Baseline main: `c13a9d3fab17c8a928299bdf115003502a7823d4`. Measured fallback candidate:
 `30ed36e55974a012d2d6042a6a97d4fa5fe04007`. The three phone full-scan fallbacks were measured on
 that revision; the other 25 groups retain their actual `b222e93aad709e03dd7b3814d456612ebaf6c900`
-source pins. A guarded diff confirms that the only later runtime change removes these three
-prefix-selector entries; every other data selection and loader/build function is unchanged. Each
-group has five adjacent, alternating before/after pairs on the same Linux software-rendering device.
-Every opening uses a fresh browser and context, disabled cache, and the same renderer, viewport,
-profile, count, seed, and camera. No repeated-test or other rendering job ran alongside these
-measurements. Superseded experiments and the replaced prefix samples are not pooled into this table.
+source pins. A guarded diff between the two measured candidate revisions confirms that their only
+runtime difference removes these three prefix-selector entries; every other data selection and
+loader/build function is unchanged. Each group has five adjacent, alternating before/after pairs on
+the same Linux software-rendering device. Every opening uses a fresh browser and context, disabled
+cache, and the same renderer, viewport, profile, count, seed, and camera. No repeated-test or other
+rendering job ran alongside these measurements. Superseded experiments and the replaced prefix
+samples are not pooled into this table.
+
+After timing collection, main `d4df5998675c5b31ae4dae1240a7e2d73a1fface` was merged additively at
+`3c904ae83e8089428cefa39781453011dd0d6fb9`, followed by refreshed byte-identical compressed manuals
+at `d29d9219a60db83c361d32eb897986f7992a1912`. The table retains its actual earlier baseline and
+candidate pins; these upstream UI, QR, photo, and manual changes were not timed again. Shared rig,
+camera, and animation-clock files remain unchanged. Final regression checks are recorded separately
+below.
 
 The original top-20 phone set averages 187,676,516 → 180,003,320 local HTTP-body bytes combined
 (4.1% saving); 1/20 individually reach 25%. The combined 25% target is not met. Public per-toy wire
@@ -69,10 +77,10 @@ candidate results and does not establish that any particular candidate increase 
 The preceding implementation still awaited an opening-pack promise before renderer creation, decoded
 shared scenes again inside Player.init, started scan preparation before GPU initialization, loaded
 scan helpers dynamically, and inflated a Blob help module. The current change removes those paths
-globally. The app, Player, UI, and embed JavaScript entry files match the frozen main byte for byte;
-the original HTML engine preload and native app entry remain. The original eager museum-helper
-import is restored, and the scan decoder is back in its original module so it adds no runtime module
-request.
+globally. On measured fallback revision 30ed36e5, the app, Player, UI, and embed JavaScript entry
+files match the frozen main byte for byte; the original HTML engine preload and native app entry
+remain. The original eager museum-helper import is restored, and the scan decoder is back in its
+original module so it adds no runtime module request.
 
 A new browser regression test holds compressed shared-scene decoding. Before the fix, renderer
 creation never starts within the unchanged test window; after the fix, it starts before the scene is
@@ -146,26 +154,32 @@ is historical evidence with its own source pins, not a new rate measurement.
 50 prior GPU-finished comparisons remain in [image-diffs.json](load-time-2026-10/image-diffs.json):
 49 are pixel-identical; the desktop book differs at eight pixels by at most one RGB level. Every
 recorded tap pose moved. Their original capture source pins remain intact. The eager fallback
-changes discovery order; the final three scan fallbacks restore the original data files. The 13
-shared renderer, rig, camera, entry, and help files are unchanged from the repeated-test source and
-frozen main. The exact-buffer and decoded-byte tests verify the retained lossless data. Lossy
-point-budget alternatives remain unshipped in
+changes discovery order; the final three scan fallbacks restore the original data files. At measured
+fallback revision 30ed36e5, the 13 shared renderer, rig, camera, entry, and help files are unchanged
+from the repeated-test source and frozen main. The exact-buffer and decoded-byte tests verify the
+retained lossless data. Lossy point-budget alternatives remain unshipped in
 [lossy-options.json](load-time-2026-10/lossy-options.json).
 
 Required regression results: 190 passed, 0 failed, and 0 skipped. 0 spec processes returned a
 nonzero exit code.
 
 Latest validation, all red tests by name, commands, source pins, and protected-file checks are in
-[verification.json](load-time-2026-10/verification.json). Required smoke, taps, kit, unit, Real
-Objects, and all load-time specs run on the final runtime source. The repeated Strawberry runs
-retain their actual earlier source pins; the only subsequent runtime change is the three scan
-selectors, and no rig, camera, renderer, or clock code changed. Historical validation is labeled by
-its actual source and is not counted as this run.
+[verification.json](load-time-2026-10/verification.json). These required smoke, taps, kit, unit,
+Real Objects, and load-time results belong to measured fallback source 30ed36e5. The repeated
+Strawberry runs retain their actual earlier source pins; the scan-selector fallback and later
+upstream main merge did not change the shared rig, camera, renderer, or clock files. Historical
+validation is labeled by its actual source and is not counted as this run.
+
+After the final main merge and manual refresh, 204 tests passed, 0 failed, and 0 were skipped on
+`d29d9219a60db83c361d32eb897986f7992a1912`. The scope repeats smoke, taps, kit, unit, Real Objects,
+all load-time specs, and help. The captured-toy embed transfer check remains below 30 MB. 0 spec
+processes returned a nonzero exit code. The complete cases and commands are retained separately from
+the earlier run.
 
 | Lossless PDF source                          | Original bytes | Gzip bytes | Saving |
 | -------------------------------------------- | -------------: | ---------: | -----: |
-| manual/tinkerers-manual.pdf                  |      7,792,711 |  5,858,411 |  24.8% |
-| manual/tinkerers-manual-85d32b96193ea275.pdf |      7,792,711 |  5,858,411 |  24.8% |
+| manual/tinkerers-manual.pdf                  |      7,978,241 |  6,003,256 |  24.8% |
+| manual/tinkerers-manual-9dff70c3c725e9fc.pdf |      7,978,241 |  6,003,256 |  24.8% |
 
 Hashes and unchanged-byte proofs are in
 [compressed-opening.json](load-time-2026-10/compressed-opening.json),

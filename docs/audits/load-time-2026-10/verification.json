@@ -1,5 +1,5 @@
 {
-  "current": "round4",
+  "current": "postMerge",
   "round4": {
     "measuredBaseCandidateSource": "b222e93aad709e03dd7b3814d456612ebaf6c900",
     "fullScanFallback": {
@@ -4741,5 +4741,1750 @@
       },
       "summary": "Current validation on d52fa21f0120e532f1e1a14beae48ea97df90db7 (runtime byte-identical to measured 2b5eaae37a07961de240a4b426a90c6a91060787): 183 passed, 1 failed, 0 skipped. Smoke (three sequential shards), kit, Real Objects, catalog, manual, scan-prefix, and smoothing browser checks repeat after the latest merge and global native-entry restoration. Taps, unit, and the pure Node load-time checks also repeat on this source; the final 17-case startup/compression run precedes the documentation-only merge and has byte-identical runtime and test files. The latest main 41b21e74 kit run has 9 passes and 1 failure; no deadline overrun was recorded in that run. The earlier main 6c kit run had 9 passes and one unchanged 600,000 ms catalog timeout; the protected QR recipe error reproduces on both sources. The native entry removes the custom engine path globally; the current original strawberry case passed, and no causal timing fix is claimed. Both latest main and the candidate failed the observed original test before the effect completed; prior original-test passes and failures remain source-pinned. Exact current failures are retained in the verification receipt."
     }
-  }
+  },
+  "postMerge": {
+    "at": "2026-10-15T22:33:06.176Z",
+    "integratedMain": "d4df5998675c5b31ae4dae1240a7e2d73a1fface",
+    "merge": "3c904ae83e8089428cefa39781453011dd0d6fb9",
+    "validationSource": "d29d9219a60db83c361d32eb897986f7992a1912",
+    "scope": "Main advanced after frozen timing collection. The normal merge brought upstream UI, QR, photo, and manual changes. Timing measurements remain pinned to c13a9d3f, b222e93a, and 30ed36e5; no timing observation is relabeled as collected on this merged source.",
+    "files": [
+      {
+        "path": "src/app.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": false
+      },
+      {
+        "path": "src/player.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/ui.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": false
+      },
+      {
+        "path": "src/embed.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/pc.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/stage.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/rigs.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/motion.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/camera.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/effects.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/generators.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/toys.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": true
+      },
+      {
+        "path": "src/toy-help.js",
+        "sameAsIntegratedMain": true,
+        "sameAsMeasuredFallback": false
+      }
+    ],
+    "staticGraph": {
+      "method": "Babel AST: static import/export declarations reachable from src/app.js, including comments and re-exports. Dynamic imports excluded. gifenc resolved through existing import map.",
+      "mainSource": "d4df5998675c5b31ae4dae1240a7e2d73a1fface",
+      "candidateSource": "d29d9219a60db83c361d32eb897986f7992a1912",
+      "mainModules": 55,
+      "candidateModules": 54,
+      "candidateOnly": [],
+      "mainOnly": ["vendor/gifenc/gifenc.esm.js"]
+    },
+    "required": {
+      "passed": 204,
+      "failed": 0,
+      "skipped": 0,
+      "processFailures": [],
+      "groups": [
+        {
+          "name": "smoke",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T21:47:26.269Z",
+          "finished": "2026-10-15T22:10:18.402Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/smoke.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/smoke-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T21:47:28.957Z",
+            "duration": 1369217.1609999998,
+            "expected": 50,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "loads with no console errors and shows the shelf",
+              "status": "passed",
+              "durationMs": 34712
+            },
+            {
+              "title": "the shelf filters by category and search, and Surprise me picks a toy",
+              "status": "passed",
+              "durationMs": 19081
+            },
+            {
+              "title": "generating a procedural toy changes canvas pixels",
+              "status": "passed",
+              "durationMs": 33320
+            },
+            {
+              "title": "toggling an effect changes canvas pixels",
+              "status": "passed",
+              "durationMs": 42956
+            },
+            {
+              "title": "paint and poke tools change the toy where it is touched",
+              "status": "passed",
+              "durationMs": 45001
+            },
+            {
+              "title": "clay adds and erases blobs on a generated toy and survives a JSON round trip",
+              "status": "passed",
+              "durationMs": 95270
+            },
+            {
+              "title": "shows a friendly poster when no GPU renderer is available",
+              "status": "passed",
+              "durationMs": 2438
+            },
+            {
+              "title": "JSON export then import round-trips the scene",
+              "status": "passed",
+              "durationMs": 29029
+            },
+            {
+              "title": "the embed page loads a scene from the hash",
+              "status": "passed",
+              "durationMs": 59203
+            },
+            {
+              "title": "an embedded captured toy stays under 30 MB of transfer",
+              "status": "passed",
+              "durationMs": 8836
+            },
+            {
+              "title": "the <splashery-toy> element renders without an iframe",
+              "status": "passed",
+              "durationMs": 20739
+            },
+            {
+              "title": "bring-your-own PLY, SPLAT, SPZ and SOG files load in the browser",
+              "status": "passed",
+              "durationMs": 44581
+            },
+            {
+              "title": "PNG, GIF and WebM exports produce files",
+              "status": "passed",
+              "durationMs": 64490
+            },
+            {
+              "title": "desktop screenshot at 1440x900",
+              "status": "passed",
+              "durationMs": 40883
+            },
+            {
+              "title": "a kit toy loads from its pack, and its action and a tap open and close it",
+              "status": "passed",
+              "durationMs": 32569
+            },
+            {
+              "title": "a kit toy can change shape: the red blood cell curls into a sickle (morph)",
+              "status": "passed",
+              "durationMs": 21608
+            },
+            {
+              "title": "toys move by themselves once motion is on, and any toy can bounce",
+              "status": "passed",
+              "durationMs": 36692
+            },
+            {
+              "title": "patterns and flags recolour any toy and travel in the link",
+              "status": "passed",
+              "durationMs": 42584
+            },
+            {
+              "title": "an old version 2 share link still opens",
+              "status": "passed",
+              "durationMs": 14288
+            },
+            {
+              "title": "the sound switch remembers its choice",
+              "status": "passed",
+              "durationMs": 12255
+            },
+            {
+              "title": "a tap plays the toy's own sound, and a toggle plays its on and off halves",
+              "status": "passed",
+              "durationMs": 33541
+            },
+            {
+              "title": "a scan rig moves a part of a captured toy: the cat statue turns its head",
+              "status": "passed",
+              "durationMs": 28308
+            },
+            {
+              "title": "rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+              "status": "passed",
+              "durationMs": 56518
+            },
+            {
+              "title": "the chess set plays the Opera Game, and the laptop types what you type",
+              "status": "passed",
+              "durationMs": 38384
+            },
+            {
+              "title": "a stretchy toy stretches when dragged and springs back; a drag off it orbits",
+              "status": "passed",
+              "durationMs": 32510
+            },
+            {
+              "title": "every toy's sound renders: audible, not clipping, under five seconds",
+              "status": "passed",
+              "durationMs": 11477
+            },
+            {
+              "title": "v3 screenshots at 1440x900 and 390x844",
+              "status": "passed",
+              "durationMs": 31163
+            },
+            {
+              "title": "an embedded kit toy opens when tapped",
+              "status": "passed",
+              "durationMs": 8201
+            },
+            {
+              "title": "the Toy tab has the essentials, and Reset everything takes a toy back to how it started",
+              "status": "passed",
+              "durationMs": 21579
+            },
+            {
+              "title": "the panel and the shelf can be made bigger on a wide screen",
+              "status": "passed",
+              "durationMs": 17729
+            },
+            {
+              "title": "flag colours lie gently over the chess board, and stay with the toy they were chosen on",
+              "status": "passed",
+              "durationMs": 29119
+            },
+            {
+              "title": "the chess game bar plays, pauses, steps and jumps, and a tap after the end starts again",
+              "status": "passed",
+              "durationMs": 41141
+            },
+            {
+              "title": "a ball in a country's colours keeps its seams",
+              "status": "passed",
+              "durationMs": 30019
+            },
+            {
+              "title": "ball screenshots at 1440x900 and 390x844",
+              "status": "passed",
+              "durationMs": 29868
+            },
+            {
+              "title": "the canvas renders at 2x on a 2x screen at the high tier",
+              "status": "passed",
+              "durationMs": 5110
+            },
+            {
+              "title": "the canvas renders at 3x on a 3x screen at the mid tier",
+              "status": "passed",
+              "durationMs": 9027
+            },
+            {
+              "title": "the canvas renders at 2x on a 3x screen at the mid tier with ?sharp=0",
+              "status": "passed",
+              "durationMs": 8250
+            },
+            {
+              "title": "the canvas renders at 3x on a 3x screen at the max tier",
+              "status": "passed",
+              "durationMs": 5841
+            },
+            {
+              "title": "the canvas renders at 1.5x on a 3x screen at the low tier",
+              "status": "passed",
+              "durationMs": 3756
+            },
+            {
+              "title": "Detail: High raises the tier, stays in this browser and stays out of links",
+              "status": "passed",
+              "durationMs": 14953
+            },
+            {
+              "title": "a transparent embed stays transparent on a dark-mode page",
+              "status": "passed",
+              "durationMs": 11975
+            },
+            {
+              "title": "embeds frame the toy closer, take ?zoom= and zoom with buttons and the wheel",
+              "status": "passed",
+              "durationMs": 19892
+            },
+            {
+              "title": "the embed snippet is responsive and has a size picker",
+              "status": "passed",
+              "durationMs": 12473
+            },
+            {
+              "title": "a shelf thumbnail that fails is fetched once more, then shows a plain tile",
+              "status": "passed",
+              "durationMs": 11481
+            },
+            {
+              "title": "has no horizontal overflow at 390px and the sheet opens",
+              "status": "passed",
+              "durationMs": 34390
+            },
+            {
+              "title": "dragging the shelf up opens a grid, and picking a toy folds it back",
+              "status": "passed",
+              "durationMs": 40079
+            },
+            {
+              "title": "a panel opened while a toy from the grid is still loading stays open",
+              "status": "passed",
+              "durationMs": 16759
+            },
+            {
+              "title": "the Make pane explains where to find your own splat",
+              "status": "passed",
+              "durationMs": 9829
+            },
+            {
+              "title": "has no horizontal overflow at 360px",
+              "status": "passed",
+              "durationMs": 10160
+            },
+            {
+              "title": "auto picks WebGPU when an adapter exists and effects render",
+              "status": "passed",
+              "durationMs": 36459
+            }
+          ]
+        },
+        {
+          "name": "taps",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:10:18.409Z",
+          "finished": "2026-10-15T22:11:49.130Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/taps.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/taps-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:10:21.120Z",
+            "duration": 87947.14499999999,
+            "expected": 62,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "every finished kit toy has its own tap: a pulse or a toggle",
+              "status": "passed",
+              "durationMs": 5771
+            },
+            {
+              "title": "every exception names a kit toy and a check, with a reason",
+              "status": "passed",
+              "durationMs": 63
+            },
+            {
+              "title": "every shapes-torus toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 270
+            },
+            {
+              "title": "every photoreal-r3 toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 3547
+            },
+            {
+              "title": "every balls toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 891
+            },
+            {
+              "title": "every anatomy toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 528
+            },
+            {
+              "title": "every elements toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 659
+            },
+            {
+              "title": "every objects toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 508
+            },
+            {
+              "title": "every space toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1050
+            },
+            {
+              "title": "every space-r2 toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 19833
+            },
+            {
+              "title": "every powers-of-ten toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 26
+            },
+            {
+              "title": "every space-r4 toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 398
+            },
+            {
+              "title": "every tiny toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1403
+            },
+            {
+              "title": "every tiny-r2 toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 456
+            },
+            {
+              "title": "every atoms toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 286
+            },
+            {
+              "title": "every lattices toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 246
+            },
+            {
+              "title": "every molecule-viewer toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 75
+            },
+            {
+              "title": "every chemistry toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 120
+            },
+            {
+              "title": "every real-elements toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 301
+            },
+            {
+              "title": "every gems toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 423
+            },
+            {
+              "title": "every anatomy-atlas toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 436
+            },
+            {
+              "title": "every nature toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1231
+            },
+            {
+              "title": "every food toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 2058
+            },
+            {
+              "title": "every playthings toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 729
+            },
+            {
+              "title": "every games toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 77
+            },
+            {
+              "title": "every maths toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1238
+            },
+            {
+              "title": "every splat-equation toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 35
+            },
+            {
+              "title": "every pictures toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 136
+            },
+            {
+              "title": "every real-objects toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1737
+            },
+            {
+              "title": "every medieval toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1041
+            },
+            {
+              "title": "every animals toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 839
+            },
+            {
+              "title": "every holidays toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 440
+            },
+            {
+              "title": "every music toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 447
+            },
+            {
+              "title": "every pianos toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 623
+            },
+            {
+              "title": "every vehicles toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1254
+            },
+            {
+              "title": "every landmarks toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1113
+            },
+            {
+              "title": "every computing toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1177
+            },
+            {
+              "title": "every splatting toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 118
+            },
+            {
+              "title": "every computing-history toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 373
+            },
+            {
+              "title": "every studio toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 3393
+            },
+            {
+              "title": "every live toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 7614
+            },
+            {
+              "title": "every studio-models toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 352
+            },
+            {
+              "title": "every qr toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 671
+            },
+            {
+              "title": "every qr-lab toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1041
+            },
+            {
+              "title": "every qr-craft toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 720
+            },
+            {
+              "title": "every photo-3d toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 803
+            },
+            {
+              "title": "every video3d toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1923
+            },
+            {
+              "title": "every sound-lab toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 711
+            },
+            {
+              "title": "every viewers toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 6288
+            },
+            {
+              "title": "every volume-viewer toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 328
+            },
+            {
+              "title": "every lab toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 52
+            },
+            {
+              "title": "every light-lab toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 19
+            },
+            {
+              "title": "every baked-demo toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 86
+            },
+            {
+              "title": "every science toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1378
+            },
+            {
+              "title": "every optics toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 474
+            },
+            {
+              "title": "every fluid-lab toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 76
+            },
+            {
+              "title": "every geo toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 3173
+            },
+            {
+              "title": "every imaging toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 1483
+            },
+            {
+              "title": "every screens toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 163
+            },
+            {
+              "title": "every arcade toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 286
+            },
+            {
+              "title": "every night-sky toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 261
+            },
+            {
+              "title": "every data-climate toy's tap ends where the toy rests",
+              "status": "passed",
+              "durationMs": 298
+            }
+          ]
+        },
+        {
+          "name": "kit",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:11:49.131Z",
+          "finished": "2026-10-15T22:20:29.233Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/kit.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/kit-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:11:51.417Z",
+            "duration": 517666.347,
+            "expected": 10,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "scene version 3 adds pattern and motion; version 2 scenes and links still load",
+              "status": "passed",
+              "durationMs": 75
+            },
+            {
+              "title": "v3 fields are validated: options, clay on shelf toys, pattern and motion",
+              "status": "passed",
+              "durationMs": 15
+            },
+            {
+              "title": "every kit toy has a recipe that builds deterministically and fits the unit ball",
+              "status": "passed",
+              "durationMs": 511942
+            },
+            {
+              "title": "the kit shares the budget by area and moves part pivots with the fit",
+              "status": "passed",
+              "durationMs": 37
+            },
+            {
+              "title": "the flag catalogue is public domain, complete and safe to draw",
+              "status": "passed",
+              "durationMs": 784
+            },
+            {
+              "title": "patterns normalise and are drawn at the aspect of the surface they wrap",
+              "status": "passed",
+              "durationMs": 8
+            },
+            {
+              "title": "flag colours tint the chess board gently and leave the pieces their own colours",
+              "status": "passed",
+              "durationMs": 220
+            },
+            {
+              "title": "the pixel font has digits, and every flag knows its shape",
+              "status": "passed",
+              "durationMs": 140
+            },
+            {
+              "title": "the motion driver hops, eases toggles and fills the part uniforms",
+              "status": "passed",
+              "durationMs": 9
+            },
+            {
+              "title": "a culled part sends its visibility as -1 - v so the shader hides its far side",
+              "status": "passed",
+              "durationMs": 2
+            }
+          ]
+        },
+        {
+          "name": "unit",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:20:29.236Z",
+          "finished": "2026-10-15T22:20:46.583Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/unit.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/unit-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:20:32.071Z",
+            "duration": 14441.489999999998,
+            "expected": 20,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "a default scene normalises to itself",
+              "status": "passed",
+              "durationMs": 23
+            },
+            {
+              "title": "normalizeScene clamps garbage and refuses non-scenes",
+              "status": "passed",
+              "durationMs": 149
+            },
+            {
+              "title": "the link codec round-trips a scene through deflate and base64url",
+              "status": "passed",
+              "durationMs": 39
+            },
+            {
+              "title": "generators are deterministic, finite and stay inside the unit ball",
+              "status": "passed",
+              "durationMs": 2113
+            },
+            {
+              "title": "the low tier stays bounded and the tiers grow in order",
+              "status": "passed",
+              "durationMs": 11
+            },
+            {
+              "title": "every shelf toy has its own sound, and no two share the exact same spec",
+              "status": "passed",
+              "durationMs": 16
+            },
+            {
+              "title": "twins sound different: they use different voices",
+              "status": "passed",
+              "durationMs": 4
+            },
+            {
+              "title": "old sound names still work, and specs are checked",
+              "status": "passed",
+              "durationMs": 18
+            },
+            {
+              "title": "embeds never load the sound code",
+              "status": "passed",
+              "durationMs": 14
+            },
+            {
+              "title": "a tap knows where it landed: a xylophone bar strikes that bar",
+              "status": "passed",
+              "durationMs": 36
+            },
+            {
+              "title": "every rig fits the rig limits and names real parts, keys and effects",
+              "status": "passed",
+              "durationMs": 71
+            },
+            {
+              "title": "a rig's effects and part glow reach the modifier's uniforms",
+              "status": "passed",
+              "durationMs": 21
+            },
+            {
+              "title": "the chess set plays the real Opera Game (Paris, 1858) to its final position",
+              "status": "passed",
+              "durationMs": 26
+            },
+            {
+              "title": "the chess rules count every legal move (perft) from tricky positions",
+              "status": "passed",
+              "durationMs": 679
+            },
+            {
+              "title": "a PGN game is read move by move: tags, comments, variations, castling, en passant, promotion",
+              "status": "passed",
+              "durationMs": 33
+            },
+            {
+              "title": "the chess set plays a loaded game: spares rise for a promotion, the en passant pawn leaves",
+              "status": "passed",
+              "durationMs": 27
+            },
+            {
+              "title": "a turning planet shows only the copy within a quarter turn of how it was built",
+              "status": "passed",
+              "durationMs": 652
+            },
+            {
+              "title": "a heated molecule moves each atom on its own, along its bonds",
+              "status": "passed",
+              "durationMs": 246
+            },
+            {
+              "title": "the Moon landing is hidden at rest, lands, and leaves nothing behind",
+              "status": "passed",
+              "durationMs": 24
+            },
+            {
+              "title": "a morph splat packs the offset to its target; band, fade and skin pack their channel",
+              "status": "passed",
+              "durationMs": 6583
+            }
+          ]
+        },
+        {
+          "name": "ro",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:20:46.584Z",
+          "finished": "2026-10-15T22:23:46.957Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/ro.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/ro-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:20:49.646Z",
+            "duration": 177259.466,
+            "expected": 4,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "each toy is on its shelf, with its baked model in place",
+              "status": "passed",
+              "durationMs": 496
+            },
+            {
+              "title": "each toy builds within every tier's budget",
+              "status": "passed",
+              "durationMs": 15507
+            },
+            {
+              "title": "taps move the model's pieces as solid parts and end at rest",
+              "status": "passed",
+              "durationMs": 27994
+            },
+            {
+              "title": "each toy opens and plays its tap in the app, with screenshots",
+              "status": "passed",
+              "durationMs": 127608
+            }
+          ]
+        },
+        {
+          "name": "help",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:23:46.958Z",
+          "finished": "2026-10-15T22:28:31.932Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/help.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/help-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:23:50.237Z",
+            "duration": 281618.45900000003,
+            "expected": 14,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "the line stays clear of the toy at 390x844",
+              "status": "passed",
+              "durationMs": 56414
+            },
+            {
+              "title": "the line stays clear of the toy at 1440x900",
+              "status": "passed",
+              "durationMs": 58217
+            },
+            {
+              "title": "every toy gets a non-empty how-to line and a short one",
+              "status": "passed",
+              "durationMs": 25154
+            },
+            {
+              "title": "every entry names a shelf toy and has plain, checked text",
+              "status": "passed",
+              "durationMs": 1884
+            },
+            {
+              "title": "toy-help.js is never a static import of the page",
+              "status": "passed",
+              "durationMs": 51
+            },
+            {
+              "title": "shows on a pick, fades, and '?' brings it back",
+              "status": "passed",
+              "durationMs": 36559
+            },
+            {
+              "title": "shows after a refresh and from a link, old links included",
+              "status": "passed",
+              "durationMs": 16739
+            },
+            {
+              "title": "a saved scene (JSON) still loads and shows its toy's line",
+              "status": "passed",
+              "durationMs": 11245
+            },
+            {
+              "title": "an automated browser without ?help=show gets only the '?' button",
+              "status": "passed",
+              "durationMs": 5889
+            },
+            {
+              "title": "loads its text after the first paint",
+              "status": "passed",
+              "durationMs": 6458
+            },
+            {
+              "title": "respects reduced motion: no fade, still shown and hidden",
+              "status": "passed",
+              "durationMs": 12838
+            },
+            {
+              "title": "the embed shows no line",
+              "status": "passed",
+              "durationMs": 11736
+            },
+            {
+              "title": "shows the toy's text, or the default, at 390x844",
+              "status": "passed",
+              "durationMs": 15524
+            },
+            {
+              "title": "shows the toy's text, or the default, at 1440x900",
+              "status": "passed",
+              "durationMs": 16404
+            }
+          ]
+        },
+        {
+          "name": "load-time-audit-budget",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:28:31.934Z",
+          "finished": "2026-10-15T22:28:35.593Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-audit-budget.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-audit-budget-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:28:34.000Z",
+            "duration": 1524.482,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "the task 51 audit stays below 3 MB and retains no raw runs",
+              "status": "passed",
+              "durationMs": 36
+            }
+          ]
+        },
+        {
+          "name": "load-time-catalog",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:28:35.593Z",
+          "finished": "2026-10-15T22:28:56.769Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-catalog.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-catalog-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:28:37.081Z",
+            "duration": 19648.483,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "unrelated toys retain eager helpers without scan payloads; a scan loads and responds",
+              "status": "passed",
+              "durationMs": 9499
+            },
+            {
+              "title": "an eager museum helper keeps the scan payload deferred until selection",
+              "status": "passed",
+              "durationMs": 8020
+            }
+          ]
+        },
+        {
+          "name": "load-time-compression",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:28:56.769Z",
+          "finished": "2026-10-15T22:30:04.292Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-compression.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-compression-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:28:58.695Z",
+            "duration": 65527.21399999999,
+            "expected": 11,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "opening gzip copies preserve every original byte",
+              "status": "passed",
+              "durationMs": 303
+            },
+            {
+              "title": "the opening scan retains main's transfer order after GPU initialization",
+              "status": "passed",
+              "durationMs": 5239
+            },
+            {
+              "title": "the native engine finishes transferring while the app entry is held",
+              "status": "passed",
+              "durationMs": 6374
+            },
+            {
+              "title": "the app graph transfers while the selected scan helper is held",
+              "status": "passed",
+              "durationMs": 5302
+            },
+            {
+              "title": "the selected scan helper transfers while an app dependency is held",
+              "status": "passed",
+              "durationMs": 5381
+            },
+            {
+              "title": "j links finish their scan helper before GPU initialization",
+              "status": "passed",
+              "durationMs": 4641
+            },
+            {
+              "title": "d links finish their scan helper before GPU initialization",
+              "status": "passed",
+              "durationMs": 4719
+            },
+            {
+              "title": "engine transfer starts while the stylesheet still blocks DOM readiness",
+              "status": "passed",
+              "durationMs": 5756
+            },
+            {
+              "title": "native startup preserves the complete live PlayCanvas namespace and native help",
+              "status": "passed",
+              "durationMs": 4976
+            },
+            {
+              "title": "unsupported native decompression retains the original engine and help",
+              "status": "passed",
+              "durationMs": 6514
+            },
+            {
+              "title": "the manual transfer overlaps PDF.js loading and keeps the original PDF pages",
+              "status": "passed",
+              "durationMs": 13185
+            }
+          ]
+        },
+        {
+          "name": "load-time-eager",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:30:04.293Z",
+          "finished": "2026-10-15T22:30:22.784Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-eager.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-eager-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:30:07.191Z",
+            "duration": 15542.829000000002,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "an unused PDF decompressor cannot block an ordinary opening",
+              "status": "passed",
+              "durationMs": 2114
+            },
+            {
+              "title": "unused manual edition metadata cannot block an ordinary opening",
+              "status": "passed",
+              "durationMs": 3361
+            },
+            {
+              "title": "renderer creation retains main's order before shared-scene decoding",
+              "status": "passed",
+              "durationMs": 6525
+            }
+          ]
+        },
+        {
+          "name": "load-time-exports",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:30:22.785Z",
+          "finished": "2026-10-15T22:30:26.331Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-exports.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-exports-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:30:24.431Z",
+            "duration": 1857.9939999999997,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "ordinary exports defer GIF encoding, and the first GIF export still works",
+              "status": "passed",
+              "durationMs": 477
+            }
+          ]
+        },
+        {
+          "name": "load-time-format",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:30:26.331Z",
+          "finished": "2026-10-15T22:30:30.336Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-format.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-format-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:30:28.217Z",
+            "duration": 2066.102,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "a scan prefix preserves its original sampling count and every loaded value",
+              "status": "passed",
+              "durationMs": 102
+            }
+          ]
+        },
+        {
+          "name": "load-time-full-scan-fallback",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:30:30.336Z",
+          "finished": "2026-10-15T22:30:34.695Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-full-scan-fallback.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-full-scan-fallback-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:30:32.805Z",
+            "duration": 1852.7620000000002,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "sunglasses retains the original full scan at phone detail",
+              "status": "passed",
+              "durationMs": 434
+            },
+            {
+              "title": "soda-can retains the original full scan at phone detail",
+              "status": "passed",
+              "durationMs": 71
+            },
+            {
+              "title": "fountain-pen retains the original full scan at phone detail",
+              "status": "passed",
+              "durationMs": 53
+            }
+          ]
+        },
+        {
+          "name": "load-time-manual",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:30:34.695Z",
+          "finished": "2026-10-15T22:30:42.676Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-manual.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-manual-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:30:36.514Z",
+            "duration": 6116.07,
+            "expected": 1,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "the current content-addressed manual uses lossless compression",
+              "status": "passed",
+              "durationMs": 4131
+            }
+          ]
+        },
+        {
+          "name": "load-time-means",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:30:42.677Z",
+          "finished": "2026-10-15T22:30:47.391Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-means.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-means-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:30:44.506Z",
+            "duration": 2842.2529999999997,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "opening smoothing means preserve double precision and original population",
+              "status": "passed",
+              "durationMs": 255
+            },
+            {
+              "title": "an exact mean prefix builds the same shaded buffers as a complete scan",
+              "status": "passed",
+              "durationMs": 660
+            }
+          ]
+        },
+        {
+          "name": "load-time-metrics",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:30:47.392Z",
+          "finished": "2026-10-15T22:30:50.523Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-metrics.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-metrics-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:30:49.437Z",
+            "duration": 1039.5590000000002,
+            "expected": 2,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "a response that completes during worker inspection stays outside opening bytes",
+              "status": "passed",
+              "durationMs": 13
+            },
+            {
+              "title": "a worker's imports count separately from identical parent modules",
+              "status": "passed",
+              "durationMs": 8
+            }
+          ]
+        },
+        {
+          "name": "load-time-smoothing",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:30:50.524Z",
+          "finished": "2026-10-15T22:31:33.795Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-smoothing.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-smoothing-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:30:52.468Z",
+            "duration": 41248.704,
+            "expected": 5,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "a compressed exact-mean scan preserves low-budget and high-detail buffers",
+              "status": "passed",
+              "durationMs": 2309
+            },
+            {
+              "title": "museum openings preserve all low and high geometry and shading buffers",
+              "status": "passed",
+              "durationMs": 5869
+            },
+            {
+              "title": "the low tier requests compressed exact means and raises detail safely",
+              "status": "passed",
+              "durationMs": 12626
+            },
+            {
+              "title": "an HTTP-decoded opening body also loads correctly",
+              "status": "passed",
+              "durationMs": 7879
+            },
+            {
+              "title": "a browser without native decompression retains the original full scan",
+              "status": "passed",
+              "durationMs": 8325
+            }
+          ]
+        },
+        {
+          "name": "load-time-startup",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:31:33.796Z",
+          "finished": "2026-10-15T22:32:13.114Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-startup.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-startup-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:31:39.650Z",
+            "duration": 33372.763,
+            "expected": 6,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "the app graph transfers alongside the native engine",
+              "status": "passed",
+              "durationMs": 2875
+            },
+            {
+              "title": "warmed homepage graph responses do not produce preload warnings",
+              "status": "passed",
+              "durationMs": 8913
+            },
+            {
+              "title": "warmed shared-scene graph responses do not produce preload warnings",
+              "status": "passed",
+              "durationMs": 7474
+            },
+            {
+              "title": "the default homepage keeps the original engine module",
+              "status": "passed",
+              "durationMs": 1696
+            },
+            {
+              "title": "j Book links use the native engine entry",
+              "status": "passed",
+              "durationMs": 2718
+            },
+            {
+              "title": "d Book links use the native engine entry",
+              "status": "passed",
+              "durationMs": 2547
+            }
+          ]
+        },
+        {
+          "name": "load-time-store",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:32:13.115Z",
+          "finished": "2026-10-15T22:32:19.620Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-store.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-store-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:32:16.153Z",
+            "duration": 3236.9700000000003,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "completed journal observations resume and replace the same sample",
+              "status": "passed",
+              "durationMs": 21
+            },
+            {
+              "title": "checkpoint and final output retain distinct settings and samples",
+              "status": "passed",
+              "durationMs": 21
+            },
+            {
+              "title": "only an incomplete final journal record may be discarded",
+              "status": "passed",
+              "durationMs": 15
+            }
+          ]
+        },
+        {
+          "name": "load-time",
+          "source": "d29d9219a60db83c361d32eb897986f7992a1912",
+          "started": "2026-10-15T22:32:19.623Z",
+          "finished": "2026-10-15T22:32:56.211Z",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/required/load-time-artifacts"
+          ],
+          "exitCode": 0,
+          "stats": {
+            "startTime": "2026-10-15T22:32:21.100Z",
+            "duration": 35047.953,
+            "expected": 3,
+            "skipped": 0,
+            "unexpected": 0,
+            "flaky": 0
+          },
+          "errors": [],
+          "cases": [
+            {
+              "title": "a late phone read cannot replace a larger scan needed by another player",
+              "status": "passed",
+              "durationMs": 693
+            },
+            {
+              "title": "phone prefixes and original-file fallbacks preserve the full-scan buffers",
+              "status": "passed",
+              "durationMs": 14362
+            },
+            {
+              "title": "phone opening requests use prefixes and larger budgets retain full scans",
+              "status": "passed",
+              "durationMs": 15009
+            }
+          ]
+        }
+      ]
+    },
+    "manualRefresh": {
+      "fixSource": "d29d9219a60db83c361d32eb897986f7992a1912",
+      "red": {
+        "sourceAtRun": "3c904ae83e8089428cefa39781453011dd0d6fb9",
+        "workingTree": "The current-edition manifest assertion was added and uncommitted; compressed assets and manifest were still from the preceding edition.",
+        "startTime": "2026-10-15T21:46:15.261Z",
+        "durationMs": 12422.474999999999,
+        "passed": 0,
+        "failed": 1,
+        "skipped": 0
+      },
+      "green": {
+        "sourceAtRun": "3c904ae83e8089428cefa39781453011dd0d6fb9",
+        "workingTree": "The test and refreshed assets were uncommitted; these exact changes were subsequently committed as d29d9219.",
+        "startTime": "2026-10-15T21:46:35.619Z",
+        "durationMs": 5463.893,
+        "passed": 1,
+        "failed": 0,
+        "skipped": 0
+      },
+      "originalByteMismatchDiagnostic": {
+        "sourceAtStart": "3c904ae83e8089428cefa39781453011dd0d6fb9",
+        "startTime": "2026-10-15T21:45:29.890Z",
+        "durationMs": 109361.48700000001,
+        "passed": 10,
+        "failed": 1,
+        "skipped": 0
+      },
+      "diagnosticScope": "The exploratory full compression run began on the merged snapshot and found the generic manual gzip byte mismatch. Assets were refreshed during its later cases; it is diagnostic evidence only, excluded from final pass counts. The subsequent targeted red/green verifies current-edition coverage, and final required scopes rerun on the committed manual refresh.",
+      "manifest": "compressed-opening.json",
+      "previousManifest": "superseded/round4-before-new-manual-compression.json"
+    },
+    "finalChecks": {
+      "status": "completed",
+      "at": "2026-10-15T22:35:22.762Z",
+      "runtimeSource": "d29d9219a60db83c361d32eb897986f7992a1912",
+      "checks": [
+        {
+          "name": "prettier",
+          "command": ["npx", "prettier", "--check", "."],
+          "started": "2026-10-15T22:33:08.484Z",
+          "finished": "2026-10-15T22:35:05.191Z",
+          "exitCode": 0
+        },
+        {
+          "name": "english",
+          "command": ["node", "tools/us-english.mjs", "--diff"],
+          "started": "2026-10-15T22:35:05.197Z",
+          "finished": "2026-10-15T22:35:05.680Z",
+          "exitCode": 0
+        },
+        {
+          "name": "diff",
+          "command": ["git", "diff", "--check"],
+          "started": "2026-10-15T22:35:05.682Z",
+          "finished": "2026-10-15T22:35:05.751Z",
+          "exitCode": 0
+        },
+        {
+          "name": "audit-budget",
+          "command": [
+            "npx",
+            "playwright",
+            "test",
+            "tests/load-time-audit-budget.spec.mjs",
+            "--workers=1",
+            "--reporter=json",
+            "--output=/workspace/load-time-runs/round4/post-merge/final-checks/audit-budget-artifacts"
+          ],
+          "started": "2026-10-15T22:35:05.751Z",
+          "finished": "2026-10-15T22:35:22.591Z",
+          "exitCode": 0
+        }
+      ],
+      "auditBudget": {
+        "limitBytesExclusive": 3000000,
+        "bytesBeforeThisReceipt": 2950550,
+        "scope": "Entire task audit directory plus root Markdown; images and superseded records included."
+      },
+      "protected": {
+        "checkedAt": "2026-10-15 22:31:22 UTC",
+        "prCounts": {
+          "560": 37,
+          "562": 124,
+          "566": 86,
+          "581": 25,
+          "582": 123
+        },
+        "count": 388,
+        "intersections": []
+      }
+    },
+    "ruleCheck": "Historical E1 violation: ten unpublished email-metadata commits were rewritten in a previous turn. Every subsequent review change is additive; no force push, main push, PR merge, or ready-for-review action."
+  },
+  "currentMeasurement": "round4"
 }
