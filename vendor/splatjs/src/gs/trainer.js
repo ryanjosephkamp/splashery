@@ -8,6 +8,7 @@ import {
 } from './shaders.js';
 import { rodrigues, m3mul, makeRng } from '../sfm/geometry.js';
 import { createGpu } from '../gpu/context.js';
+import { backgroundFitMoments, accumulateBackgroundFit, solveBackgroundFit, backgroundFitSse } from './background-fit.js';
 
 export class GSTrainer {
   /** opts.gpu: a GpuContext from createGpu() — share ONE device between the
@@ -378,7 +379,8 @@ export class GSTrainer {
     this.bufTileCursor = buf(this.maxTiles * 4, B.STORAGE | B.COPY_SRC, 'tileCursor');
     this.bufEntries = buf(this.entriesCap * 2 * 4, B.STORAGE | B.COPY_SRC, 'entries');
     this.bufOut = buf(maxPix * ssq * 4 * 4, B.STORAGE | B.COPY_SRC, 'outImg');
-    this.bufTarget = buf(Math.max(16, total * 4), B.STORAGE | B.COPY_DST, 'targets');
+    this.bufTarget = buf(Math.max(16, total * 4), B.STORAGE | B.COPY_DST |
+      (this.opts.fitBackground === true ? B.COPY_SRC : 0), 'targets');
     d.queue.writeBuffer(this.bufTarget, 0, targetData);
     this.bufStats = buf(16, B.STORAGE | B.COPY_DST | B.COPY_SRC, 'stats');
     d.queue.writeBuffer(this.bufStats, 0, new Uint32Array(4));
@@ -1444,6 +1446,90 @@ export class GSTrainer {
   renderTrainCam(ci, ctx) {
     const meta = this.camMeta[ci];
     this.renderView(meta, ctx, 0, meta.offset);
+  }
+
+  /** Fit only three constant environment-color parameters to the completed model.
+   *  Uses the actual packed, undistorted training targets, including on lowMem sessions.
+   *  No splat/optimizer parameter changes; validation cameras never enter the fit. */
+  async fitBackground({ validationCams = [], signal, isCurrent = () => !this._disposed } = {}) {
+    if (this.opts.fitBackground !== true) throw new Error('Background fitting was not enabled at setup');
+    if (this.ssaa >= 2) return { accepted: false, reason: 'supersampled-render' };
+    const check = () => {
+      if (signal?.aborted || this._disposed || !isCurrent())
+        throw new DOMException('Background fitting stopped', 'AbortError');
+    };
+    check();
+    const validation = [...new Set(validationCams)].filter(i =>
+      Number.isInteger(i) && i >= 0 && i < this.camMeta.length);
+    if (!validation.length) return { accepted: false, reason: 'no-validation-camera' };
+    const held = new Set(validation), train = [];
+    for (let i = 0; i < this.camMeta.length; i++)
+      if (!held.has(i) && i !== this.holdout && !this.excluded?.has(i)) train.push(i);
+    const d = this.device, pooled = backgroundFitMoments(), checks = [];
+    const readCamera = async (ci, moments) => {
+      check();
+      const meta = this.camMeta[ci], pixels = meta.w * meta.h, imageBytes = pixels * 16;
+      const rb = d.createBuffer({ size: pixels * 20,
+        usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ, label: 'background-fit-read' });
+      let abort;
+      try {
+        const uniform = this._camUniform({ ...meta, bg: [0, 0, 0] }, 0, meta.offset, ci);
+        d.queue.writeBuffer(this.uniView, 0, uniform);
+        d.queue.writeBuffer(this.bufTileCnt, 0, this.tileZero);
+        const enc = d.createCommandEncoder(), pass = enc.beginComputePass();
+        this.encodeRaster(pass, meta, false);
+        pass.end();
+        enc.copyBufferToBuffer(this.bufOut, 0, rb, 0, imageBytes);
+        enc.copyBufferToBuffer(this.bufTarget, meta.offset * 4, rb, imageBytes, pixels * 4);
+        d.queue.submit([enc.finish()]);
+        const mapped = rb.mapAsync(GPUMapMode.READ);
+        if (signal) {
+          const stopped = new Promise((_, reject) => {
+            abort = () => reject(new DOMException('Background fitting stopped', 'AbortError'));
+            signal.addEventListener('abort', abort, { once: true });
+            if (signal.aborted) abort();
+          });
+          await Promise.race([mapped, stopped]);
+        } else await mapped;
+        check();
+        const data = rb.getMappedRange();
+        accumulateBackgroundFit(moments, new Float32Array(data, 0, pixels * 4),
+          new Uint32Array(data, imageBytes, pixels), { gain: uniform[19], bias: uniform[31] });
+      } finally {
+        if (abort) signal.removeEventListener('abort', abort);
+        try { rb.unmap(); } catch { /* cancellation can destroy a pending map */ }
+        rb.destroy();
+      }
+      // Give cancellation and the host UI a turn between bounded per-camera readbacks.
+      await new Promise(resolve => setTimeout(resolve, 0));
+      check();
+    };
+    for (const ci of train) await readCamera(ci, pooled);
+    const rgb = solveBackgroundFit(pooled);
+    if (!rgb) return { accepted: false, reason: 'no-background-signal', trainCams: train, pixels: pooled.pixels };
+    const fittedSse = backgroundFitSse(pooled, rgb), improvement =
+      pooled.baseSse > 0 ? 1 - fittedSse / pooled.baseSse : 0;
+    const result = { accepted: false, reason: 'insufficient-training-gain', rgb,
+      trainCams: train, validationCams: validation, pixels: pooled.pixels,
+      invalidPixels: pooled.invalidPixels, improvement,
+      baseMse: pooled.baseSse / Math.max(1, pooled.pixels * 3),
+      fittedMse: fittedSse / Math.max(1, pooled.pixels * 3), validation: checks };
+    if (improvement < 0.01) return result;
+    for (const ci of validation) {
+      const moments = backgroundFitMoments();
+      await readCamera(ci, moments);
+      const sse = backgroundFitSse(moments, rgb);
+      checks.push({ ci, pixels: moments.pixels,
+        baseMse: moments.baseSse / Math.max(1, moments.pixels * 3),
+        fittedMse: sse / Math.max(1, moments.pixels * 3) });
+      if (!moments.pixels || sse > moments.baseSse) {
+        result.reason = 'validation-regression';
+        return result;
+      }
+    }
+    result.accepted = true;
+    result.reason = 'training-and-validation-improved';
+    return result;
   }
 
   /** Phase-2 MCMC refine (default): dead splats relocate as EXACT copies of

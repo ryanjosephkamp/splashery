@@ -817,6 +817,7 @@ export class Session {
     this._assertActive();
     if (!this.trainer) throw new Error('seed() first');
     if (this.trainingError) throw this.trainingError;
+    if (this._backgroundFitTrainer === this.trainer) throw new Error('Wait for background fitting to finish');
     if (this.training || this._finishing) return;
     this.training = true;
     this._stage({ stage: 'train', done: this.trainer.iter, total: this._maxIters() });
@@ -957,7 +958,8 @@ export class Session {
     this._framePending = false;
     this._frameScheduledAt = 0;
     const runFrame = () => {
-      if (!this._framePending || this._frameRunning || this._finishing || this._disposed) return;
+      if (!this._framePending || this._frameRunning || this._finishing || this._disposed ||
+          (this._backgroundFitTrainer && this._backgroundFitTrainer === this.trainer)) return;
       this._framePending = false;
       // Encoding/readback errors must stop and explain this trainer's run. A late rejection
       // from a disposed or replaced trainer cannot fail its replacement.
@@ -991,7 +993,8 @@ export class Session {
   }
 
   _scheduleFrame() {
-    if (this._disposed || this._framePending || this._finishing) return;
+    if (this._disposed || this._framePending || this._finishing ||
+        (this._backgroundFitTrainer && this._backgroundFitTrainer === this.trainer)) return;
     this._framePending = true;
     // Coalesce resume/view requests until the active frame releases its GPU work.
     if (this._frameRunning) return;
@@ -1225,6 +1228,35 @@ export class Session {
       }
       return { psnr: sum / frames.length, frames };
     });
+  }
+
+  /** Fit a constant display background without racing preview rasters or optimizer work. */
+  async fitBackground({ signal } = {}) {
+    this._assertActive();
+    if (this.training) throw new Error('Pause or finish training before fitting the background');
+    await this._finishPromise;
+    const trainer = this.trainer;
+    if (!trainer) throw new Error('seed() first');
+    if (this.trainingError) throw this.trainingError;
+    if (this._backgroundFitTrainer === trainer) throw new Error('Background fitting is already running');
+    // The raster shares output buffers with the preview. Join and suppress frames until the
+    // serialized fit releases them; a late fit cannot read a replacement trainer's targets.
+    this._backgroundFitTrainer = trainer;
+    this._framePending = false;
+    try {
+      await this._frameRunning;
+      this._assertActive();
+      if (this.trainer !== trainer || this._lost || this.training)
+        throw new Error('Training device changed while fitting the background');
+      return await this._locked(() => trainer.fitBackground({ signal,
+        validationCams: [this.holdout, ...(this.testCams || [])],
+        isCurrent: () => this._currentTrainer(trainer) && !this.training }));
+    } finally {
+      if (this._backgroundFitTrainer === trainer) {
+        this._backgroundFitTrainer = null;
+        if (this._currentTrainer(trainer) && this.view._dirty) this._scheduleFrame();
+      }
+    }
   }
 
   /** Index of the camera the trainer most recently stepped on (UI pulse). */
