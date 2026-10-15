@@ -1,6 +1,6 @@
 // Shared inference implementation. Import and run it inside a dedicated worker; all model
 // downloading, area resampling, tensor packing, and inference happen away from the page.
-import { modelSize, resampleArea } from "../packs/photo-3d-core.js";
+import { modelSize, resampleArea } from "../photo3d/pixels.js";
 import { fetchBytes } from "./io.js";
 
 export const MODEL_URL = new URL(

@@ -1,0 +1,257 @@
+{
+  "reference": "Checkpoint 58f3d8ed refineDepthEdges unchanged geometric policy",
+  "rows": [
+    {
+      "w": 2,
+      "h": 2,
+      "pattern": "slope",
+      "radius": 2,
+      "sha256": "bedbcbc8ee415888be1f38da5324ea54c637319a70a77e764a829621b1037ad0"
+    },
+    {
+      "w": 2,
+      "h": 2,
+      "pattern": "slope",
+      "radius": 4.25,
+      "sha256": "bedbcbc8ee415888be1f38da5324ea54c637319a70a77e764a829621b1037ad0"
+    },
+    {
+      "w": 2,
+      "h": 2,
+      "pattern": "slope",
+      "radius": 25,
+      "sha256": "bedbcbc8ee415888be1f38da5324ea54c637319a70a77e764a829621b1037ad0"
+    },
+    {
+      "w": 2,
+      "h": 2,
+      "pattern": "step",
+      "radius": 2,
+      "sha256": "45f5781d65678a68d1884c42c7d528f59d3ef888e28ef0fb73c76c1b8a40cfdd"
+    },
+    {
+      "w": 2,
+      "h": 2,
+      "pattern": "step",
+      "radius": 4.25,
+      "sha256": "45f5781d65678a68d1884c42c7d528f59d3ef888e28ef0fb73c76c1b8a40cfdd"
+    },
+    {
+      "w": 2,
+      "h": 2,
+      "pattern": "step",
+      "radius": 25,
+      "sha256": "45f5781d65678a68d1884c42c7d528f59d3ef888e28ef0fb73c76c1b8a40cfdd"
+    },
+    {
+      "w": 2,
+      "h": 2,
+      "pattern": "noise",
+      "radius": 2,
+      "sha256": "c46beccbc1ae9accc688aa04db5ce5377f4fa656ea8782625ca108ede7e257b7"
+    },
+    {
+      "w": 2,
+      "h": 2,
+      "pattern": "noise",
+      "radius": 4.25,
+      "sha256": "c46beccbc1ae9accc688aa04db5ce5377f4fa656ea8782625ca108ede7e257b7"
+    },
+    {
+      "w": 2,
+      "h": 2,
+      "pattern": "noise",
+      "radius": 25,
+      "sha256": "c46beccbc1ae9accc688aa04db5ce5377f4fa656ea8782625ca108ede7e257b7"
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "pattern": "slope",
+      "radius": 2,
+      "sha256": "a902bf21b8ae2a9bc402b93850b87fbd6bbfdabd10f1d921f1575c307fbd807d"
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "pattern": "slope",
+      "radius": 4.25,
+      "sha256": "a902bf21b8ae2a9bc402b93850b87fbd6bbfdabd10f1d921f1575c307fbd807d"
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "pattern": "slope",
+      "radius": 25,
+      "sha256": "a902bf21b8ae2a9bc402b93850b87fbd6bbfdabd10f1d921f1575c307fbd807d"
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "pattern": "step",
+      "radius": 2,
+      "sha256": "e8f3dd97bdcb7dbb786207a9238c559802716984bd0d27e78d49625ec40f2dd5"
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "pattern": "step",
+      "radius": 4.25,
+      "sha256": "e8f3dd97bdcb7dbb786207a9238c559802716984bd0d27e78d49625ec40f2dd5"
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "pattern": "step",
+      "radius": 25,
+      "sha256": "e8f3dd97bdcb7dbb786207a9238c559802716984bd0d27e78d49625ec40f2dd5"
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "pattern": "noise",
+      "radius": 2,
+      "sha256": "aa8d8ae38638abb411b01da9bebcefdfacb55a40c39b28493ccd453e33af4dd0"
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "pattern": "noise",
+      "radius": 4.25,
+      "sha256": "aa8d8ae38638abb411b01da9bebcefdfacb55a40c39b28493ccd453e33af4dd0"
+    },
+    {
+      "w": 37,
+      "h": 23,
+      "pattern": "noise",
+      "radius": 25,
+      "sha256": "aa8d8ae38638abb411b01da9bebcefdfacb55a40c39b28493ccd453e33af4dd0"
+    },
+    {
+      "w": 96,
+      "h": 80,
+      "pattern": "slope",
+      "radius": 2,
+      "sha256": "099cb85735fe04003de1b173aa512982a546c4bd60d649207a171f93ee5839f5"
+    },
+    {
+      "w": 96,
+      "h": 80,
+      "pattern": "slope",
+      "radius": 4.25,
+      "sha256": "099cb85735fe04003de1b173aa512982a546c4bd60d649207a171f93ee5839f5"
+    },
+    {
+      "w": 96,
+      "h": 80,
+      "pattern": "slope",
+      "radius": 25,
+      "sha256": "099cb85735fe04003de1b173aa512982a546c4bd60d649207a171f93ee5839f5"
+    },
+    {
+      "w": 96,
+      "h": 80,
+      "pattern": "step",
+      "radius": 2,
+      "sha256": "826993136967641a7b31ff1db1f1939b95522443ddfca2d9d8ea68aa822f87ad"
+    },
+    {
+      "w": 96,
+      "h": 80,
+      "pattern": "step",
+      "radius": 4.25,
+      "sha256": "826993136967641a7b31ff1db1f1939b95522443ddfca2d9d8ea68aa822f87ad"
+    },
+    {
+      "w": 96,
+      "h": 80,
+      "pattern": "step",
+      "radius": 25,
+      "sha256": "826993136967641a7b31ff1db1f1939b95522443ddfca2d9d8ea68aa822f87ad"
+    },
+    {
+      "w": 96,
+      "h": 80,
+      "pattern": "noise",
+      "radius": 2,
+      "sha256": "1044a3c11cbd726b55692232d111507b776980c2baeca8789fe3a711c0d668f2"
+    },
+    {
+      "w": 96,
+      "h": 80,
+      "pattern": "noise",
+      "radius": 4.25,
+      "sha256": "1044a3c11cbd726b55692232d111507b776980c2baeca8789fe3a711c0d668f2"
+    },
+    {
+      "w": 96,
+      "h": 80,
+      "pattern": "noise",
+      "radius": 25,
+      "sha256": "1044a3c11cbd726b55692232d111507b776980c2baeca8789fe3a711c0d668f2"
+    },
+    {
+      "w": 17,
+      "h": 61,
+      "pattern": "slope",
+      "radius": 2,
+      "sha256": "f135fedfb42288ed349b7c4232d1e5c73a59b75fedfa8da78a9d78e118b7a96c"
+    },
+    {
+      "w": 17,
+      "h": 61,
+      "pattern": "slope",
+      "radius": 4.25,
+      "sha256": "f135fedfb42288ed349b7c4232d1e5c73a59b75fedfa8da78a9d78e118b7a96c"
+    },
+    {
+      "w": 17,
+      "h": 61,
+      "pattern": "slope",
+      "radius": 25,
+      "sha256": "f135fedfb42288ed349b7c4232d1e5c73a59b75fedfa8da78a9d78e118b7a96c"
+    },
+    {
+      "w": 17,
+      "h": 61,
+      "pattern": "step",
+      "radius": 2,
+      "sha256": "2f4355f75b2987db9d18f36fe62deb901216400653a51bf3d91ae6bdb82301cd"
+    },
+    {
+      "w": 17,
+      "h": 61,
+      "pattern": "step",
+      "radius": 4.25,
+      "sha256": "2f4355f75b2987db9d18f36fe62deb901216400653a51bf3d91ae6bdb82301cd"
+    },
+    {
+      "w": 17,
+      "h": 61,
+      "pattern": "step",
+      "radius": 25,
+      "sha256": "2f4355f75b2987db9d18f36fe62deb901216400653a51bf3d91ae6bdb82301cd"
+    },
+    {
+      "w": 17,
+      "h": 61,
+      "pattern": "noise",
+      "radius": 2,
+      "sha256": "6efb3e8e07fa0796dd1ff1debfce5ae2a184d55015d0b7a1a06df5e0b56dbce9"
+    },
+    {
+      "w": 17,
+      "h": 61,
+      "pattern": "noise",
+      "radius": 4.25,
+      "sha256": "6efb3e8e07fa0796dd1ff1debfce5ae2a184d55015d0b7a1a06df5e0b56dbce9"
+    },
+    {
+      "w": 17,
+      "h": 61,
+      "pattern": "noise",
+      "radius": 25,
+      "sha256": "6efb3e8e07fa0796dd1ff1debfce5ae2a184d55015d0b7a1a06df5e0b56dbce9"
+    }
+  ]
+}
