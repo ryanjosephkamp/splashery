@@ -83,16 +83,28 @@ export async function localServer(entries) {
 const decode = (uri) => PNG.sync.read(Buffer.from(uri.split(",")[1], "base64"));
 const png = (file, image) => fs.writeFileSync(file, PNG.sync.write(image, { deflateLevel: 3 }));
 function crop(image, corners) {
-  const x = Math.max(0, Math.floor(Math.min(...corners.map((p) => p[0]))) - 10),
-    y = Math.max(0, Math.floor(Math.min(...corners.map((p) => p[1]))) - 10);
-  const width = Math.max(
-      1,
-      Math.min(image.width, Math.ceil(Math.max(...corners.map((p) => p[0]))) + 10) - x,
-    ),
-    height = Math.max(
-      1,
-      Math.min(image.height, Math.ceil(Math.max(...corners.map((p) => p[1]))) + 10) - y,
-    );
+  let left = Math.min(...corners.map((p) => p[0])),
+    top = Math.min(...corners.map((p) => p[1])),
+    right = Math.max(...corners.map((p) => p[0])),
+    bottom = Math.max(...corners.map((p) => p[1]));
+  // Include visible spill outside the photo; a review crop must not hide it.
+  for (let y = 0; y < image.height; y++)
+    for (let x = 0; x < image.width; x++) {
+      const p = (y * image.width + x) * 4;
+      if (
+        image.data[p + 3] &&
+        Math.min(image.data[p], image.data[p + 1], image.data[p + 2]) < 250
+      ) {
+        left = Math.min(left, x);
+        right = Math.max(right, x + 1);
+        top = Math.min(top, y);
+        bottom = Math.max(bottom, y + 1);
+      }
+    }
+  const x = Math.max(0, Math.min(image.width - 1, Math.floor(left)) - 10),
+    y = Math.max(0, Math.min(image.height - 1, Math.floor(top)) - 10);
+  const width = Math.max(1, Math.min(image.width, Math.ceil(right) + 10) - x),
+    height = Math.max(1, Math.min(image.height, Math.ceil(bottom) + 10) - y);
   const data = Buffer.alloc(width * height * 4);
   for (let row = 0; row < height; row++)
     image.data.copy(
