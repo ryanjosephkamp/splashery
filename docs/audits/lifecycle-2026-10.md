@@ -13,6 +13,20 @@ baseline server continued serving the original source throughout all three runs.
 identify the probe checkout; `baselineSourceCommit` identifies the separately served application
 source for the baseline and supplemental baseline cases.
 
+Before publication, the owner approved recreating 16 unpublished commits with GitHub's noreply email
+after GitHub rejected the initial push for email privacy. File trees, commit messages, names, and
+dates were preserved; commit IDs changed. Raw observations retain the original checkout IDs. Their
+published equivalents have identical trees:
+
+| Recorded checkout | Published equivalent |
+| ----------------- | -------------------- |
+| `f99abb91`        | `16c12782`           |
+| `34cbb2fd`        | `532bed39`           |
+| `769fa45f`        | `f8e17249`           |
+| `e0e3e8ed`        | `af440cd4`           |
+| `e0da9c6d`        | `28c91e09`           |
+| `26ed9b91`        | `1e3ee702`           |
+
 [The probe](../../tools/lifecycle-probe.mjs) uses Playwright and the Chromium DevTools protocol. It
 runs a fresh browser context for each question, at 390 × 844, with the low device profile, WebGL2,
 SwiftShader, labs enabled, and adaptation disabled. The browser is Chromium 151.0.7922.173 on the
@@ -306,4 +320,5 @@ repository's standard screenshots were restored. `npx prettier --check .`,
 No requested measurement was cut. The full repository suite was not run locally; task 85 reserves it
 for the Operator's merge PR or the `full-suite` label.
 
-Rule check: none.
+Rule check: E1 — the owner approved recreating the 16 unpublished commits solely to replace the
+private email with the GitHub noreply email. No force-push.
