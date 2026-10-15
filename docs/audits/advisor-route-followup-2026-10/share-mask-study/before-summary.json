@@ -1,0 +1,23 @@
+{
+  "environment": {
+    "buildCommit": "c4ce886289be9d73a2e3c242967238e66d1a5b5e",
+    "dirty": true,
+    "browser": "151.0.7922.173",
+    "phase": "before",
+    "count": 50,
+    "base": "http://127.0.0.1:4173/",
+    "startedAt": "2026-10-15T15:52:29.918Z"
+  },
+  "totals": {
+    "native": {
+      "jsqr": 50,
+      "zxing": 33
+    },
+    "phone": {
+      "jsqr": 50,
+      "zxing": 45
+    }
+  },
+  "errors": [],
+  "records": "before-records.json"
+}

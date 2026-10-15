@@ -1,0 +1,18 @@
+{
+  "state": "reader-error",
+  "viewport": {
+    "width": 1440,
+    "height": 900
+  },
+  "payload": "http://127.0.0.1:4173/#s=d.fVPLctswDPwX5KrYsh2lE936De2pnRwgCrYY0yRLQn7U438vQFtuJplWFxEUFtgFVmfAGKGFHB3mgdIJKthTyjZ4aFcVmETI1H9lyVnWy-fHRf24aL4vmrZZtqt6tnpZ_RBIJuqhXVTA4QTtGbbWSwzdaB1bLwlWw1_p0YSeJAyRpUPWVKajFh-YY27n83RC_xYyxWGLuzjbWB7GbmbD_M5wLvhbfWf9VqK1JddLMVAmfHIkRyPZ2Rq4XCpwIWy1VYdmu0lhLNiIG2XCA-00H0cOEqIx5PlvrF35m0GtKfLoGEMekwZSl9ZrMlxUxLAlfevY1ugyKZNEfsMDtPXsuYJD6DqtUs8agR6KgH_mN00FvU1SvSyivmiYc3D7T12ibKifMDmWRVx79CnED9mdiDeFxJNmG2SmNOXvcOOJ_8PqSwUJezvmawGB8MHmjwjcSRMuRd-rFjPh0eqWTiDI7Kz5qEVma2-CJeFAFAuwuSOPioxo_SeW9jfdOl59cgtMcEH0wQM9r7olFTfc8ZnFYVL256vcGtxRQr0-4aEQiJbNUE4pOFcOsgPGMsDVTA2gJpF2xfI8Js9YxHIaaXKHNPfB05W4Tttrcvkdyr241-Hm6t2Ywtu0cjgkjHKXKMofmIv7iholDA_r8sj3SZmc6u5p_WLgtSzWTfOY1iH4nhitK37UdYdrpzOgs_s77V3QswzHiuj3jtL-nmUWavjL5fIH",
+  "errors": [],
+  "browser": "151.0.7922.173",
+  "status": "The QR readers couldn't finish. Try again, or save JSON.",
+  "dialog": {
+    "x": 512,
+    "y": 87.640625,
+    "width": 416,
+    "height": 724.703125
+  },
+  "expectedBlockedRequest": "/vendor/zxing-js/zxing.min.js"
+}

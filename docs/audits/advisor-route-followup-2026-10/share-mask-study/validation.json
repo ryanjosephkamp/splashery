@@ -1,0 +1,33 @@
+{
+  "files": 200,
+  "maxPNG": 53809,
+  "uniqueTimestamps": 50,
+  "pairedPayloads": 50,
+  "onlyCreatedAtDiffers": true,
+  "independentUnassistedReads": 400,
+  "allNativeRastersMatchMasks": true,
+  "totals": {
+    "before": {
+      "native": {
+        "jsqr": 50,
+        "zxing": 33
+      },
+      "phone": {
+        "jsqr": 50,
+        "zxing": 45
+      }
+    },
+    "after": {
+      "native": {
+        "jsqr": 50,
+        "zxing": 50
+      },
+      "phone": {
+        "jsqr": 50,
+        "zxing": 50
+      }
+    }
+  },
+  "changedMasks": 18,
+  "maxTrials": 8
+}

@@ -1,0 +1,11 @@
+- dialog "This scene as a QR code":
+  - heading "This scene as a QR code" [level=2]
+  - paragraph: Scan it with a phone camera to open this scene, set up just as it is now.
+  - img "A QR code that opens this scene"
+  - paragraph: The QR readers couldn't finish. Try again, or save JSON.
+  - paragraph: Version 22 (105 × 105 modules), error correction M. The link is 755 characters.
+  - paragraph: The code holds only the link. Nothing is uploaded.
+  - button "Close"
+  - button "Show as splats"
+  - button "Save JSON"
+  - button "Save PNG"

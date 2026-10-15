@@ -1,0 +1,4852 @@
+[
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:52:30.393Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:52:38.258Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:52:43.108Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:52:49.068Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:52:53.936Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:53:00.013Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:53:05.167Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:53:10.515Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:53:20.154Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:53:24.985Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:53:33.168Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:53:42.355Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:53:50.712Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:53:56.455Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:54:02.853Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:54:08.287Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:54:13.315Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:54:25.719Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:54:46.194Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:55:01.081Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:55:22.329Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:55:44.108Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:56:09.670Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:56:33.362Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:56:49.196Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:57:14.112Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:57:28.489Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:57:43.652Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:57:54.561Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:58:13.657Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:58:24.998Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:58:32.563Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:58:38.765Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:58:44.293Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:58:49.297Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:58:55.729Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:59:01.871Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:59:07.082Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:59:12.581Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:59:19.270Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:59:26.752Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:59:32.530Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:59:39.706Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:59:47.208Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T15:59:55.365Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T16:00:01.855Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T16:00:08.005Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T16:00:15.830Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T16:00:24.563Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  },
+  {
+    "app": "splashery",
+    "version": 3,
+    "createdAt": "2026-10-15T16:00:31.253Z",
+    "seed": 1,
+    "toy": {
+      "kind": "builtin",
+      "id": "qr-code",
+      "options": {
+        "text": "https://ryanjosephkamp.github.io/splashery/",
+        "kind": "link",
+        "fields": "",
+        "style": "classic"
+      }
+    },
+    "look": {
+      "background": "page",
+      "theme": "auto",
+      "accent": "auto",
+      "splatScale": 1,
+      "exposure": 1
+    },
+    "effects": {
+      "poke": {
+        "on": false,
+        "strength": 0.6,
+        "wobble": 0.5
+      },
+      "wind": {
+        "on": false,
+        "strength": 0.55,
+        "direction": 0
+      },
+      "dissolve": {
+        "on": false,
+        "spread": 0.55,
+        "speed": 0.5
+      },
+      "drop": {
+        "on": false,
+        "bounce": 0.45,
+        "scatter": 0.5
+      },
+      "magnet": {
+        "on": false,
+        "strength": 0.7,
+        "radius": 0.45
+      },
+      "twist": {
+        "on": false,
+        "amount": 0.5,
+        "wobble": 0.3,
+        "axis": "y"
+      },
+      "slice": {
+        "on": false,
+        "position": 0,
+        "sweep": 0.35,
+        "axis": "x"
+      },
+      "paint": {
+        "on": false,
+        "size": 0.5,
+        "splash": 0.5,
+        "color": "#e63b2e"
+      }
+    },
+    "paint": {
+      "stamps": []
+    },
+    "camera": {
+      "yaw": 0,
+      "pitch": 0,
+      "roll": 0,
+      "distance": 3.1
+    },
+    "autoplay": {
+      "turntable": true,
+      "effect": "none"
+    },
+    "pattern": {
+      "id": "none",
+      "flag": "",
+      "projection": "wrap",
+      "repeats": 1,
+      "colors": ["#ffffff", "#e63b2e", "#0b4f9c"],
+      "scale": 0.5,
+      "amount": 1,
+      "detail": 0.6
+    },
+    "motion": {
+      "alive": true,
+      "move": "still",
+      "speed": 0.5,
+      "controls": {}
+    }
+  }
+]

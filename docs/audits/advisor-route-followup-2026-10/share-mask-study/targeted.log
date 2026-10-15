@@ -1,0 +1,29 @@
+
+Running 16 tests using 2 workers
+
+(node:87440) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:87439) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:87440) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:87439) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-adv.spec.mjs:11:3 › photo-3d opens without console or page errors (17.5s)
+  ✓   2 [chromium] › tests/cdx-adv-qr.spec.mjs:12:1 › the saved finder counterexample exports a PNG both readers find without geometry hints (28.7s)
+  ✓   3 [chromium] › tests/cdx-adv.spec.mjs:11:3 › moving-photo-3d opens without console or page errors (26.1s)
+  ✓   4 [chromium] › tests/cdx-adv-qr.spec.mjs:40:1 › a reader load failure offers JSON and permits an export retry (30.1s)
+  ✓   5 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-code opens without console or page errors (24.8s)
+  ✓   6 [chromium] › tests/cdx-adv-qr.spec.mjs:93:1 › diagnostic: original share pixels decode with geometry while the phone finder fails (23.0s)
+  ✓   7 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-picture opens without console or page errors (26.5s)
+  ✓   8 [chromium] › tests/cdx-adv-qr.spec.mjs:118:1 › declared export geometry rejects wrong dimensions, blank pixels, and corrupted data (28.1s)
+  ✓  10 [chromium] › tests/qr4-2.spec.mjs:78:3 › the scene as a QR code: sizes › links of real lengths get M, then L, and a link longer than one code is refused (307ms)
+  ✓   9 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-three opens without console or page errors (18.3s)
+  ✓  12 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-code exports a PNG that both readers decode exactly (39.7s)
+  ✓  11 [chromium] › tests/qr4-2.spec.mjs:93:1 › Share → QR code: the code reads back, as a camera sees it too, and opens the same scene (1.2m)
+  ✓  14 [chromium] › tests/qr4-2.spec.mjs:158:1 › a scene too long for one QR code says so and offers Save JSON (11.4s)
+  ✓  13 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-picture exports a PNG that both readers decode exactly (45.4s)
+  ✓  15 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-three exports a PNG that both readers decode exactly (20.1s)
+  ✓  16 [chromium] › tests/cdx-adv.spec.mjs:24:3 › share-qr exports a PNG that both readers decode exactly (31.0s)
+
+  16 passed (4.2m)

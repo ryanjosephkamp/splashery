@@ -1,0 +1,43 @@
+{
+  "baseline": "c4ce886289be9d73a2e3c242967238e66d1a5b5e",
+  "source": "f567e0be91dff6a11397cf62a9539a6f46858a99",
+  "before": {
+    "buildCommit": "c4ce886289be9d73a2e3c242967238e66d1a5b5e",
+    "dirty": true,
+    "browser": "151.0.7922.173",
+    "phase": "before",
+    "count": 50,
+    "base": "http://127.0.0.1:4173/",
+    "startedAt": "2026-10-15T15:52:29.918Z"
+  },
+  "after": {
+    "buildCommit": "f567e0be91dff6a11397cf62a9539a6f46858a99",
+    "dirty": false,
+    "browser": "151.0.7922.173",
+    "phase": "after",
+    "count": 50,
+    "base": "http://127.0.0.1:4173/",
+    "startedAt": "2026-10-15T16:00:58.968Z"
+  },
+  "baselineBlobs": {
+    "src/qr/share.js": "136e7d8d8deaba2886784ef1cd7f796e9729bb73",
+    "src/qr/share-code.js": "f8668b96396073c995e732755b2ae3438070e632",
+    "src/qr/scan.js": "53e932d4aef9878eb0834c72631be4458f324343",
+    "src/qr/export-check.js": null,
+    "src/qr/encode.js": "23e10009878005b02831ee70cce1f8b9fdad8faf",
+    "vendor/qrcodegen/qrcodegen.js": "15b131055c61e9977a83035de6f6a2c8eee6fdcc",
+    "vendor/jsqr/jsQR.js": "429896a9d087eb3977cf67521f738d01af17c808",
+    "vendor/zxing-js/zxing.min.js": "f85dd18072097d112eec4cb2b1c7bc9972c62a12"
+  },
+  "sourceBlobs": {
+    "src/qr/share.js": "bc3fd9d9e19fc8ba6c12a6596fb190622e64b158",
+    "src/qr/share-code.js": "63cbdead5beb5edf6536344fea433f4a1799f969",
+    "src/qr/scan.js": "4363c2dcee41ad7128ad2987582918d02a93ac22",
+    "src/qr/export-check.js": "83bcf79f536d420cdc1217b2b897903aa8eabaa0",
+    "src/qr/encode.js": "23e10009878005b02831ee70cce1f8b9fdad8faf",
+    "vendor/qrcodegen/qrcodegen.js": "15b131055c61e9977a83035de6f6a2c8eee6fdcc",
+    "vendor/jsqr/jsQR.js": "429896a9d087eb3977cf67521f738d01af17c808",
+    "vendor/zxing-js/zxing.min.js": "f85dd18072097d112eec4cb2b1c7bc9972c62a12"
+  },
+  "method": "The before browser loaded the original modules before production edits and retained those cached ES modules for its 50 exports. The checkout was dirty with test and measurement work. Before exports have no selector metadata; every retained native raster independently matches the original penalty-selected matrix. The after browser loaded committed source f567e0be and reused the same 50 stored real app-export scene inputs."
+}
