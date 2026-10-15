@@ -413,6 +413,9 @@ function bookLayout(st, N, time, uAt = null) {
     v = easeTurn(u);
   }
   const bend = Math.sin(Math.PI * v) * (a?.pull?.bendK ?? 1);
+  // Lane Polish: seen a page at a time, a turning page bends a little more,
+  // so it reads as paper going over, not a stiff board.
+  const flex = BOOK.focus && !a?.pull ? BK_FOCUS_FLEX : 1;
   // The page under a turning leaf shows once the leaf has lifted clear of it
   // (about 17 degrees): before that the two lie too close and mix.
   const lifted = Math.PI * v > 0.3;
@@ -471,14 +474,14 @@ function bookLayout(st, N, time, uAt = null) {
     if (K >= 3) leaf(K - 2, { angle: Math.PI, ahead: 1 });
     if (K >= 2) leaf(K - 1, { angle: Math.PI, bv: landing ? 0 : 1 });
     leaf(K + 1, { fv: lifted ? 1 : 0, ahead: 1 });
-    leaf(K, { angle: Math.PI * v, curl: -st.curl * bend, fv: 1, bv: 1 });
+    leaf(K, { angle: Math.PI * v, curl: -st.curl * bend * flex, fv: 1, bv: 1 });
     L.cover = Math.PI;
     L.open = 1;
   } else if (a.type === "back") {
     leaf(K + 1, { ahead: 1 });
     leaf(K, { fv: landing ? 0 : 1, ahead: 1 });
     if (K >= 3) leaf(K - 2, { angle: Math.PI, bv: lifted ? 1 : 0, ahead: 1 });
-    leaf(K - 1, { angle: Math.PI * (1 - v), curl: st.curl * bend, fv: 1, bv: 1 });
+    leaf(K - 1, { angle: Math.PI * (1 - v), curl: st.curl * bend * flex, fv: 1, bv: 1 });
     L.cover = Math.PI;
     L.open = 1;
   } else {
@@ -650,6 +653,8 @@ function bookView(st, out) {
   // the binding read as a book.)
   out.view = { key: f, center: [x, 0, 0], size: f === "C" ? [W + 2 * ov, H + 2 * ov] : [BK_PAGE_VIEW * W, H] }; // prettier-ignore
 }
+const BK_FOCUS_FLEX = 1.4; // lane Polish: a page's bend as it turns, seen a page at a time
+const BK_COVER_WAIT = 0.4; // lane Polish: seconds a cover waits for the view to pull back
 const BK_TURN_VIEW = 1.5; // lane Polish: the view's width while a page turns, in pages
 const BK_PAGE_VIEW = 1.14; // lane Polish: and while a page is read
 // A tap forward on a left page in view (or back on a right one) glides to
@@ -1937,7 +1942,11 @@ const BOOK_RECIPE = {
         if (s.fv) need(i, "f", s.f);
         if (s.bv) need(i, "b", s.b);
       });
-      if (!pics || time - a.asked > 0.2 || want.every((id) => pics.ready(id))) a.t0 = time;
+      // (Lane Polish: seen a page at a time, the cover waits a moment while
+      // the view pulls back to the whole book, so it turns in view.)
+      const cover = a.type === "open" || a.type === "shut" || a.type === "close";
+      const wait = cover && BOOK.focus && st.bound === "side" && time - a.asked < BK_COVER_WAIT;
+      if (!wait && (!pics || time - a.asked > 0.2 || want.every((id) => pics.ready(id)))) a.t0 = time; // prettier-ignore
     }
     if (a && !a.pull && a.t0 !== null && time - a.t0 >= a.dur) {
       BOOK.K = a.to;
