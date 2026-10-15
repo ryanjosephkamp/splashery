@@ -811,8 +811,9 @@ export class Session {
   // ---- the training loop (policy that used to live in the demo page) ----
 
   start() {
+    this._assertActive();
     if (!this.trainer) throw new Error('seed() first');
-    if (this.training) return;
+    if (this.training || this._finishing) return;
     this.training = true;
     this._stage({ stage: 'train', done: this.trainer.iter, total: this._maxIters() });
     this._ensureScheduler();
@@ -838,12 +839,42 @@ export class Session {
   async finish() {
     this._assertActive();
     if (!this.trainer) return;
+    if (this._finishPromise) return this._finishPromise;
+    const trainer = this.trainer;
     this.training = false;
-    this._log(`training finished early at ${this.trainer.iter} iterations`);
-    await this._emitMetrics(true);
-    this._assertActive();
+    this._finishing = true;
+    this._framePending = false;
+    const work = (async () => {
+      // A phone's duty cycle can pause and resume while a GPU fence or readback
+      // is pending. Finish must join that frame before using its staging buffers.
+      await this._frameRunning;
+      this._assertActive();
+      if (this.trainer !== trainer || this._lost) throw new Error('Training device changed while finishing');
+      if (this._completedTrainer === trainer && this._completedAtIter === trainer.iter) return;
+      this._log(`training finished early at ${this.trainer.iter} iterations`);
+      await this._emitMetrics(true);
+      this._assertActive();
+      this._completeTraining(trainer);
+    })();
+    this._finishPromise = work;
+    try {
+      await work;
+    } finally {
+      if (this._finishPromise === work) {
+        this._finishPromise = null;
+        this._finishing = false;
+        if (!this._disposed && this.view._dirty) this._scheduleFrame();
+      }
+    }
+  }
+
+  _completeTraining(trainer) {
+    if (this._disposed || this._lost || this.trainer !== trainer ||
+        (this._completedTrainer === trainer && this._completedAtIter === trainer.iter)) return;
+    this._completedTrainer = trainer;
+    this._completedAtIter = trainer.iter;
     this._camDriftDone();
-    this._em.emit('event', { kind: 'train-complete', iter: this.trainer.iter, splats: this.trainer.n });
+    this._em.emit('event', { kind: 'train-complete', iter: trainer.iter, splats: trainer.n });
   }
 
   _maxIters() { return this.opts.maxIters ?? 60000; }
@@ -878,6 +909,9 @@ export class Session {
     this._lastStats = performance.now();
     this._metricsLock = null;    // readbacks on the dead device never resolve
     this._framePending = false;
+    this._frameRunning = null;
+    this._finishPromise = null;
+    this._finishing = false;
     this.lossHistory = [];
     this._lastHold = null;
     this._lastHoldEval = 0;
@@ -901,11 +935,20 @@ export class Session {
     this._framePending = false;
     this._frameScheduledAt = 0;
     const runFrame = () => {
-      if (!this._framePending) return;
+      if (!this._framePending || this._frameRunning || this._finishing || this._disposed) return;
       this._framePending = false;
       // a readback rejecting mid-flight (device loss) must not become an
       // unhandled rejection — the loop stops, the device-lost event explains
-      this._frameLoop().catch((e) => this._log(`frame loop: ${(e && e.message) || e}`));
+      const work = this._frameLoop().catch((e) => this._log(`frame loop: ${(e && e.message) || e}`));
+      this._frameRunning = work;
+      work.finally(() => {
+        if (this._frameRunning !== work) return;
+        this._frameRunning = null;
+        if (this._framePending && !this._disposed && !this._finishing) {
+          this._framePending = false;
+          this._scheduleFrame();
+        }
+      });
     };
     if (tickWorker) {
       tickWorker.onmessage = () => {
@@ -925,7 +968,10 @@ export class Session {
   }
 
   _scheduleFrame() {
+    if (this._disposed || this._framePending || this._finishing) return;
     this._framePending = true;
+    // Coalesce resume/view requests until the active frame releases its GPU work.
+    if (this._frameRunning) return;
     this._frameScheduledAt = performance.now();
     this._sched.raf(this._sched.runFrame);
   }
@@ -941,8 +987,7 @@ export class Session {
       await this._emitMetrics(true);
       // emitted AFTER the final readback: listeners typically call metrics()
       // right away, which must not interleave with ours on the staging buffer
-      this._camDriftDone();
-      this._em.emit('event', { kind: 'train-complete', iter: trainer.iter, splats: trainer.n });
+      this._completeTraining(trainer);
     }
 
     if (this.training) {

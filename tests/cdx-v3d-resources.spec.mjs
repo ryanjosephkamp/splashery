@@ -53,6 +53,145 @@ function pool(options = {}) {
   return { workers, work };
 }
 
+test("phone pause and resume never overlap a pending GPU frame, and Finish joins it", async () => {
+  const originalRaf = globalThis.requestAnimationFrame,
+    callbacks = [],
+    fence = deferred(),
+    events = [],
+    metrics = [];
+  globalThis.requestAnimationFrame = (callback) => callbacks.push(callback);
+  const s = session({ maxIters: 10, itersPerFrame: 1, fenceRing: 0 });
+  s.trainer = {
+    iter: 0,
+    n: 20,
+    camMeta: [{}],
+    device: { queue: { onSubmittedWorkDone: () => fence.promise } },
+    stepOnce() {
+      this.iter++;
+    },
+    dispose() {},
+  };
+  s.view._tick = () => {};
+  s._emitMetrics = async (final) => metrics.push({ final, iter: s.trainer.iter });
+  s.on("event", (event) => events.push(event));
+  try {
+    s.start();
+    expect(callbacks).toHaveLength(1);
+    callbacks.shift()();
+    expect(s.trainer.iter).toBe(1);
+    for (let i = 0; i < 3; i++) {
+      s.pause();
+      s.start();
+    }
+    expect(callbacks).toHaveLength(0);
+    expect(s.trainer.iter).toBe(1);
+    const finished = s.finish(),
+      finishedAgain = s.finish();
+    s.start(); // A late duty-cycle tick cannot restart a finishing run.
+    await turn();
+    expect(metrics).toEqual([]);
+    expect(events).toEqual([]);
+    expect(s.training).toBe(false);
+    fence.resolve();
+    await Promise.all([finished, finishedAgain]);
+    expect(metrics).toEqual([{ final: true, iter: 1 }]);
+    expect(events).toEqual([{ kind: "train-complete", iter: 1, splats: 20 }]);
+    expect(callbacks).toHaveLength(0);
+    expect(s._frameRunning).toBeNull();
+  } finally {
+    fence.resolve();
+    s.dispose();
+    if (originalRaf === undefined) delete globalThis.requestAnimationFrame;
+    else globalThis.requestAnimationFrame = originalRaf;
+  }
+});
+
+test("a resume request starts one next frame after its pending GPU fence settles", async () => {
+  const originalRaf = globalThis.requestAnimationFrame,
+    callbacks = [],
+    fence = deferred();
+  globalThis.requestAnimationFrame = (callback) => callbacks.push(callback);
+  const s = session({ maxIters: 10, itersPerFrame: 1, fenceRing: 0 });
+  s.trainer = {
+    iter: 0,
+    n: 20,
+    camMeta: [{}],
+    device: { queue: { onSubmittedWorkDone: () => fence.promise } },
+    stepOnce() {
+      this.iter++;
+    },
+    dispose() {},
+  };
+  s.view._tick = () => {};
+  try {
+    s.start();
+    callbacks.shift()();
+    s.pause();
+    s.start();
+    s.pause();
+    s.start();
+    expect(callbacks).toHaveLength(0);
+    fence.resolve();
+    await turn();
+    expect(callbacks).toHaveLength(1);
+    expect(s.trainer.iter).toBe(1);
+    callbacks.shift()();
+    expect(s.trainer.iter).toBe(2);
+    s.pause();
+    await turn();
+    s.dispose();
+    for (const callback of callbacks) callback();
+    expect(s.trainer).toBeNull();
+  } finally {
+    fence.resolve();
+    s.dispose();
+    if (originalRaf === undefined) delete globalThis.requestAnimationFrame;
+    else globalThis.requestAnimationFrame = originalRaf;
+  }
+});
+
+test("Finish joins automatic completion without a second final readback or completion event", async () => {
+  const originalRaf = globalThis.requestAnimationFrame,
+    callbacks = [],
+    readback = deferred(),
+    events = [];
+  let metricCalls = 0;
+  globalThis.requestAnimationFrame = (callback) => callbacks.push(callback);
+  const s = session({ maxIters: 3 });
+  s.trainer = {
+    iter: 3,
+    n: 20,
+    camMeta: [{}],
+    device: { queue: { onSubmittedWorkDone: async () => {} } },
+    dispose() {},
+  };
+  s.view._tick = () => {};
+  s._emitMetrics = async () => {
+    metricCalls++;
+    await readback.promise;
+  };
+  s.on("event", (event) => events.push(event));
+  try {
+    s.start();
+    callbacks.shift()();
+    expect(metricCalls).toBe(1);
+    const finishing = s.finish();
+    expect(events).toEqual([]);
+    readback.resolve();
+    await finishing;
+    expect(metricCalls).toBe(1);
+    expect(events).toEqual([{ kind: "train-complete", iter: 3, splats: 20 }]);
+    await s.finish();
+    expect(metricCalls).toBe(1);
+    expect(events).toHaveLength(1);
+  } finally {
+    readback.resolve();
+    s.dispose();
+    if (originalRaf === undefined) delete globalThis.requestAnimationFrame;
+    else globalThis.requestAnimationFrame = originalRaf;
+  }
+});
+
 test("SfM pool abort stops queued jobs and terminates all active workers", async () => {
   const ctrl = new AbortController(),
     results = [];

@@ -31,6 +31,9 @@
   `model.appendedSeedCount` reports how many appended rows reach the trainer.
 - Task 88 caps the last training batch at the remaining requested steps, so a short run cannot
   advance past its iteration budget while waiting for the next frame callback.
+- Task 88 serializes scheduled training frames across pause and resume. Finishing joins an active
+  frame before the final readback, and automatic and requested completion emit only once for the
+  same trainer and iteration. A phone's duty-cycle resume cannot queue overlapping training loops.
 - Task 88's local `src/sfm/worker-pool.js` owns workers through completion, error, or abort.
   `src/sfm/sfm.js` uses it for both feature-extraction passes and pair matching, and propagates
   cancellation through retry paths. The matching jobs, options, and per-pair seeds are retained.
