@@ -1914,3 +1914,8 @@ under `pictureQrSamples` in `tools/assets.json`. See
 | Ribbon bow                              | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-7-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
 | Flower bouquet                          | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-8-1.jpg)  | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
 | Paper pinwheel                          | Celebrations | [JPEG](assets/toys/qr-picture/themes/cdx-theme-celebrations-10-1.jpg) | Made by Ryan with Codex (GPT-6) | CC0 1.0 |
+
+Photo to 3D loading-cover color and Hybrid status follow-up code and regression checks are made by
+Ryan with Codex (GPT-6), October 15, 2026. Code is MIT. Original capture contributions are CC0 1.0;
+source assets retain their recorded terms. See the
+[loading-color and status audit](docs/audits/photo-3d-status-2026-10.md).

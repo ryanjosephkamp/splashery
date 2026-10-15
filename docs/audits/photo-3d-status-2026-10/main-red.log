@@ -1,0 +1,134 @@
+# Test output; HTTP server request lines and ANSI color escapes omitted.
+# Complete original output is in main-red.raw.log.gz.
+
+
+Running 3 tests using 1 worker
+
+(node:667707) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:667707) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-p3d-status.spec.mjs:71:3 › dark loading cover follows the camera color on open and rebuild (8.5s)
+(node:667967) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:667967) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [chromium] › tests/cdx-p3d-status.spec.mjs:71:3 › light loading cover follows the camera color on open and rebuild (8.0s)
+(node:668224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:668224) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 [chromium] › tests/cdx-p3d-status.spec.mjs:129:1 › Splats with the hybrid background uses the ordinary splat label (1.1m)
+
+
+  1) [chromium] › tests/cdx-p3d-status.spec.mjs:71:3 › dark loading cover follows the camera color on open and rebuild 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "match"
+    Received: "rgb(255, 255, 255) versus rgb(16, 16, 16)"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      51 | async function expectBackground(page) {
+      52 |   await expect(preview(page)).toBeVisible();
+    > 53 |   await expect
+         |   ^
+      54 |     .poll(
+      55 |       () =>
+      56 |         page.evaluate(() => {
+        at expectBackground (/workspace/splashery-p3d-status/tests/cdx-p3d-status.spec.mjs:53:3)
+        at /workspace/splashery-p3d-status/tests/cdx-p3d-status.spec.mjs:93:5
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-p3d-status-dark-loadin-b9318-a-color-on-open-and-rebuild-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-p3d-status-dark-loadin-b9318-a-color-on-open-and-rebuild-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-p3d-status-dark-loadin-b9318-a-color-on-open-and-rebuild-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-p3d-status-dark-loadin-b9318-a-color-on-open-and-rebuild-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-p3d-status.spec.mjs:71:3 › light loading cover follows the camera color on open and rebuild 
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "match"
+    Received: "rgb(255, 255, 255) versus rgb(16, 16, 16)"
+
+    Call Log:
+    - Timeout 5000ms exceeded while waiting on the predicate
+
+      51 | async function expectBackground(page) {
+      52 |   await expect(preview(page)).toBeVisible();
+    > 53 |   await expect
+         |   ^
+      54 |     .poll(
+      55 |       () =>
+      56 |         page.evaluate(() => {
+        at expectBackground (/workspace/splashery-p3d-status/tests/cdx-p3d-status.spec.mjs:53:3)
+        at /workspace/splashery-p3d-status/tests/cdx-p3d-status.spec.mjs:101:7
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-p3d-status-light-loadi-1f7a3-a-color-on-open-and-rebuild-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-p3d-status-light-loadi-1f7a3-a-color-on-open-and-rebuild-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-p3d-status-light-loadi-1f7a3-a-color-on-open-and-rebuild-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-p3d-status-light-loadi-1f7a3-a-color-on-open-and-rebuild-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/cdx-p3d-status.spec.mjs:129:1 › Splats with the hybrid background uses the ordinary splat label 
+
+    Error: expect(locator).not.toContainText(expected) failed
+
+    Locator: locator('#toy-status')
+    Expected substring: not "undefined"
+    Received string: "Photo to 3D · undefined · Hybrid"
+    Timeout: 60000ms
+
+    Call log:
+      - Expect "not toContainText" with timeout 60000ms
+      - waiting for locator('#toy-status')
+        53 × locator resolved to <p id="toy-status" class="toy-status" aria-live="polite">Photo to 3D · undefined · Hybrid</p>
+           - unexpected value "Photo to 3D · undefined · Hybrid"
+
+
+      125 |   const status = page.locator("#toy-status");
+      126 |   await expect(status).toHaveText(/ · Hybrid$/);
+    > 127 |   await expect(status).not.toContainText("undefined");
+          |                            ^
+      128 |   const ordinary = await page.evaluate(async () => {
+      129 |     const { formatCount } = await import("/src/state.js");
+      130 |     const p = window.__splashery.player;
+        at /workspace/splashery-p3d-status/tests/cdx-p3d-status.spec.mjs:127:28
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-p3d-status-Splats-with-20502-es-the-ordinary-splat-label-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-p3d-status-Splats-with-20502-es-the-ordinary-splat-label-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-p3d-status-Splats-with-20502-es-the-ordinary-splat-label-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-p3d-status-Splats-with-20502-es-the-ordinary-splat-label-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › tests/cdx-p3d-status.spec.mjs:71:3 › dark loading cover follows the camera color on open and rebuild 
+    [chromium] › tests/cdx-p3d-status.spec.mjs:71:3 › light loading cover follows the camera color on open and rebuild 
+    [chromium] › tests/cdx-p3d-status.spec.mjs:129:1 › Splats with the hybrid background uses the ordinary splat label 
