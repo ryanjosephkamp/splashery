@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -56,122 +56,122 @@
   },
   "actual": {
     "method": "performance.now at PlayCanvas postrender during unmodified playback (CPU event, not GPU presentation)",
-    "elapsedMs": 3000.5,
+    "elapsedMs": 3000.4000000003725,
     "samples": [
       {
-        "at": 10230.39999999851,
-        "clipTime": 4.627004,
-        "sourceFrame": 74
+        "at": 10615.599999999627,
+        "clipTime": 4.904459,
+        "sourceFrame": 78
       },
       {
-        "at": 10351,
-        "clipTime": 4.74734,
-        "sourceFrame": 75
+        "at": 10746.700000001118,
+        "clipTime": 5.044901,
+        "sourceFrame": 80
       },
       {
-        "at": 10475.199999999255,
-        "clipTime": 4.869141,
-        "sourceFrame": 77
+        "at": 10851.099999999627,
+        "clipTime": 5.147836,
+        "sourceFrame": 82
       },
       {
-        "at": 10614.799999998882,
-        "clipTime": 4.990661,
-        "sourceFrame": 79
+        "at": 10974.599999999627,
+        "clipTime": 5.269995,
+        "sourceFrame": 84
       },
       {
-        "at": 10739.099999999627,
-        "clipTime": 5.114456,
-        "sourceFrame": 81
+        "at": 11128.300000000745,
+        "clipTime": 5.426767,
+        "sourceFrame": 86
       },
       {
-        "at": 10864.699999999255,
-        "clipTime": 5.24031500000149,
-        "sourceFrame": 83
-      },
-      {
-        "at": 11002.299999998882,
-        "clipTime": 5.356819,
-        "sourceFrame": 85
-      },
-      {
-        "at": 11130.39999999851,
-        "clipTime": 5.507833,
+        "at": 11246.900000000373,
+        "clipTime": 5.543901,
         "sourceFrame": 88
       },
       {
-        "at": 11260.89999999851,
-        "clipTime": 5.616214,
-        "sourceFrame": 89
+        "at": 11379.5,
+        "clipTime": 5.676259,
+        "sourceFrame": 90
       },
       {
-        "at": 11383.799999998882,
-        "clipTime": 5.741183,
-        "sourceFrame": 91
+        "at": 11526.599999999627,
+        "clipTime": 5.824375,
+        "sourceFrame": 93
       },
       {
-        "at": 11521.099999999627,
-        "clipTime": 5.876007,
-        "sourceFrame": 94
+        "at": 11661.900000000373,
+        "clipTime": 5.960244,
+        "sourceFrame": 95
       },
       {
-        "at": 11676.699999999255,
+        "at": 11827.200000001118,
         "clipTime": 0,
         "sourceFrame": 0
       },
       {
-        "at": 11774.5,
-        "clipTime": 0.048201,
-        "sourceFrame": 0
+        "at": 11984,
+        "clipTime": 0.099084,
+        "sourceFrame": 1
       },
       {
-        "at": 11943.39999999851,
-        "clipTime": 0.209197,
-        "sourceFrame": 3
+        "at": 12135.099999999627,
+        "clipTime": 0.253279,
+        "sourceFrame": 4
       },
       {
-        "at": 12055.799999998882,
-        "clipTime": 0.325657,
-        "sourceFrame": 5
+        "at": 12266.800000000745,
+        "clipTime": 0.38233499999962745,
+        "sourceFrame": 6
       },
       {
-        "at": 12170.5,
-        "clipTime": 0.439329,
-        "sourceFrame": 7
+        "at": 12414.599999999627,
+        "clipTime": 0.533554,
+        "sourceFrame": 8
       },
       {
-        "at": 12332.599999999627,
-        "clipTime": 0.604932,
-        "sourceFrame": 9
-      },
-      {
-        "at": 12504,
-        "clipTime": 0.754343,
+        "at": 12684.400000000373,
+        "clipTime": 0.803441,
         "sourceFrame": 12
       },
       {
-        "at": 12656.599999999627,
-        "clipTime": 0.9287839999996275,
-        "sourceFrame": 14
+        "at": 12711.700000001118,
+        "clipTime": 0.821008,
+        "sourceFrame": 13
       },
       {
-        "at": 12839.099999999627,
-        "clipTime": 1.107063,
+        "at": 12956.900000000373,
+        "clipTime": 1.073524,
         "sourceFrame": 17
       },
       {
-        "at": 13037.099999999627,
-        "clipTime": 1.300709,
+        "at": 12964.5,
+        "clipTime": 1.084271,
+        "sourceFrame": 17
+      },
+      {
+        "at": 13133.599999999627,
+        "clipTime": 1.252753,
         "sourceFrame": 20
+      },
+      {
+        "at": 13266.700000001118,
+        "clipTime": 1.385157,
+        "sourceFrame": 22
+      },
+      {
+        "at": 13385.700000001118,
+        "clipTime": 1.503255,
+        "sourceFrame": 24
       }
     ],
     "frameTimeMs": {
-      "min": 97.80000000074506,
-      "median": 130.5,
-      "p95": 182.5,
-      "max": 198
+      "min": 7.599999999627471,
+      "median": 133.10000000149012,
+      "p95": 245.19999999925494,
+      "max": 269.80000000074506
     }
   },
-  "durationMs": 3005,
+  "durationMs": 3003,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -193,7 +193,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:51:54.000Z",
+      "createdAt": "2026-10-15T05:17:10.065Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -323,7 +323,7 @@
       "color": [640, 360],
       "depth": [480, 270],
       "video": true,
-      "videoTime": 1.465525,
+      "videoTime": 1.647201,
       "cost": {
         "color": 1228800,
         "depth": 129600,
@@ -335,11 +335,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 76,
+    "stageUpdateTicks": 73,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 6640.4000000003725,
-      "navigationToFirstFrameMs": 9232.699999999255,
-      "stageUpdateTicks": 46
+      "chooseToyToFirstFrameMs": 6492.699999999255,
+      "navigationToFirstFrameMs": 9150.5,
+      "stageUpdateTicks": 43
     },
     "controls": {
       "play": 1

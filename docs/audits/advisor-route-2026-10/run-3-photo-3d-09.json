@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -81,7 +81,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:51:09.268Z",
+        "createdAt": "2026-10-15T05:16:25.685Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -227,11 +227,11 @@
         },
         "splatsOff": true
       },
-      "stageUpdateTicks": 223,
+      "stageUpdateTicks": 213,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 1822.800000000745,
-        "navigationToFirstFrameMs": 4456.9000000003725,
-        "stageUpdateTicks": 90
+        "chooseToyToFirstFrameMs": 1575.5,
+        "navigationToFirstFrameMs": 4171.5,
+        "stageUpdateTicks": 75
       },
       "controls": {
         "flat": 0,
@@ -243,7 +243,7 @@
       }
     }
   },
-  "durationMs": 781,
+  "durationMs": 807,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -270,7 +270,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:51:09.363Z",
+      "createdAt": "2026-10-15T05:16:25.777Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -416,11 +416,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 224,
+    "stageUpdateTicks": 214,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 1822.800000000745,
-      "navigationToFirstFrameMs": 4456.9000000003725,
-      "stageUpdateTicks": 90
+      "chooseToyToFirstFrameMs": 1575.5,
+      "navigationToFirstFrameMs": 4171.5,
+      "stageUpdateTicks": 75
     },
     "controls": {
       "flat": 0,

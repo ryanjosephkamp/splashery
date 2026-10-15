@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -73,7 +73,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:48:57.059Z",
+        "createdAt": "2026-10-15T05:14:11.236Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -192,9 +192,9 @@
       "linkNote": "",
       "stageUpdateTicks": 27,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 3406.39999999851,
-        "navigationToFirstFrameMs": 6098.39999999851,
-        "stageUpdateTicks": 22
+        "chooseToyToFirstFrameMs": 3358.300000000745,
+        "navigationToFirstFrameMs": 5931,
+        "stageUpdateTicks": 23
       },
       "controls": {
         "turn": 0
@@ -203,10 +203,10 @@
         "turn": 0
       }
     },
-    "navigationThroughSettledCaptureMs": 6716.299999998882,
+    "navigationThroughSettledCaptureMs": 6525.9000000003725,
     "method": "Navigation time origin and chooseToy performance.now through first postrender event of the nonbusy target with Sharp picture visible for photo routes; not a GPU presentation timestamp"
   },
-  "durationMs": 6719,
+  "durationMs": 6529,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -231,7 +231,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:48:57.374Z",
+      "createdAt": "2026-10-15T05:14:11.557Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -350,9 +350,9 @@
     "linkNote": "",
     "stageUpdateTicks": 28,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 3406.39999999851,
-      "navigationToFirstFrameMs": 6098.39999999851,
-      "stageUpdateTicks": 22
+      "chooseToyToFirstFrameMs": 3358.300000000745,
+      "navigationToFirstFrameMs": 5931,
+      "stageUpdateTicks": 23
     },
     "controls": {
       "turn": 0

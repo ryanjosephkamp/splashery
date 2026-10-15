@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -58,7 +58,7 @@
     "error": "blocked, needs the owner: a second phone and camera scan",
     "detail": null
   },
-  "durationMs": 1,
+  "durationMs": 0,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -66,7 +66,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLctswDPwX5KrYsmOnjm79hvbUTg4QBVuMaZIlIT_q8b8XoC03k0yriwgKC-wCqzNgjNBAjg5zT-kEFewpZRs8NE8VmETI1H1lyZnX8-fHWf04W36vF81i1cyXk5dV_UMgmaiDZlYBhxM0Z9haLzG0g3VsvSRYDX-lRxM6kjBElg5ZU5mOWrxnjrmZTtMJ_VvIFPst7uJkY7kf2okN0zvDqeBv9Z31W4nWllwnxUCZ8MmRHI1kZ2vgcqnAhbDVVi2a7SaFoWAjbpQJ97TTfBw4SIjGkOe_sXblbwa1psijYwx5SBpIXVqvyXBREcOW9K1jW6PLpEwS-Q330NST5woOoW21Sj1ZCvRQBPwzf7msoLNJqpdF1BcNcw5u_6lLlA11IybHsohrjy6F-CG7FfGmkFhotkFmSmP-Djee-D-svlSQsLNDvhYQCB9s_ojAnTThUvS9ajETHq1u6QSCzM6aj1pktvYmWBIORLEAl3fkUZERrf_E0v6mW8erT26BCS6IPnig56d2TsUNd3xmcZiU_fkqtwZ3lFCvT3goBKJl05dTCs6Vg-yAsQxwPlk9rV4Epz6RjsX1PCTPWPRyGmg0iPT3wdOVuw7ca3L5I8q9GNjh5mrfmMLbuHU4JIxylyjKT5iLAYsg5QwP6_LI91GcnOp2sX4x8Fp268aRjBsRfEeM1hVL6sbDtdMZ0Nn9nfYu6FnmY0X3e1Npf88yDvX85XL5Aw",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLctswDPwX5KrY8rOJbv2G9tRODhAFW4xpkiWh2K7H_16AttxMMq0uIigssAuszoAxQgM5Osw9pRNU8EYp2-ChWVRgEiFT95UlZ17P14-z-nG2-l6vmtmiWTxN1vPlD4Fkog6aWQUcTtCcYWe9xNAO1rH1kmA1_JUeTehIwhBZOmRNZTpq8Z455mY6TSf0ryFT7He4j5Ot5X5oJzZM7wyngr_Vd9bvJNpYcp0UA2XCJ0dyNJKdrYHLpQIXwk5btWh22xSGgo24VSbc017zceAgIRpDnv_G2pW_GdSaIo-OMeQhaSB1abMhw0VFDDvSt45tgy6TMknkt9xDU0_WFRxC22qVerIS6KEI-Gf-alVBZ5NUL4uoLxrmHNzbpy5RNtSNmBzLIq49uhTih-xWxJtCYqnZBpkpjfl73Hri_7D6UkHCzg75WkAgfLD5IwL30oRL0feqxUx4tLqlEwgyO2s-apHZ2ptgSTgQxQJc3ZFHRUa0_hNL-5tuHa8-uQUmuCD64IHWi3ZOxQ13fGZxmJT9-SK3BveUUK9PeCgEomXTl1MKzpWD7ICxDHA-eVo8PQtOfSIdi-t5SJ6x6OU00GgQ6e-Dpyt3HbjX5PJHlHsxsMPt1b4xhddx63BIGOUuUZSfMBcDFkHKGR425ZHvozg51e1y82zgpezWjSMZNyL4jhitK5bUjYdrpzOgs2932vugZ5mPFd3vTaX9Pcs41POXy-UP",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "qr-code",
@@ -98,7 +98,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:48:47.820Z",
+      "createdAt": "2026-10-15T05:14:01.612Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -221,11 +221,11 @@
       "visible": false
     },
     "linkNote": "",
-    "stageUpdateTicks": 168,
+    "stageUpdateTicks": 176,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 2472.7999999988824,
-      "navigationToFirstFrameMs": 5103.0999999996275,
-      "stageUpdateTicks": 26
+      "chooseToyToFirstFrameMs": 2232.7000000011176,
+      "navigationToFirstFrameMs": 4898.300000000745,
+      "stageUpdateTicks": 24
     },
     "controls": {
       "assemble": 0,

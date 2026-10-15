@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -55,7 +55,7 @@
     "httpErrors": []
   },
   "actual": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPBktowDP0X7TUwWUhgNrf9hvbUzh4UR4CLY3tshUCZ_HtlQ-gOOy0XLEVPT09-vgJ6Dw1EbzAeKFyggBOFqJ2FZl2ACoRM3TtLzapcbRav5eK1_l5WTbVt6mr5ti1_CCQSddC8FsDuAs0VjtpKDO2gDWsrBTqFvTtpu1_4g2O3WHeSdp6FKSaIMjoPgr03BNNUgHHumL60qI774Ibc0uOeBMgH6klCHNhJiEqR5b9xksPfFEqnNBWdvYtDSIH0pd2OFGdS746U_pPaHZpIAuVAds8HaMrlpoDRtW3qUi5rgY5Z1z_r67qATgfpnvdXTimM0ZnTFxYvi-1mTPR5fzeOLjj_VN2KeJWHqFK1QmYKc32Pe0v8n6m2BQTs9BBvDQTCo47PCOyFhHPTz6rFA3jWAoULCDIarZ61yG71XbAUjEQ-A-sH8pyQHrX9MqX-TXfGmwHvgXLGiT54oc26Xd3c8MBHFotI258fklXYU8CUvuCYB_Ca1SGfgjMmH-QOGPMC18tKQMkkQpedykOwjFksh4Fmdwi5dZZug6dt21ScXZzzBewM7iWSkw_u13zlMAb0kgvk5eHE7L6sJg0ML7v8k--zMjmVbbV7U_CRL9bM-5ivQ_AdMWqT_Ziu292YroBGnx5jy9tK7yGyFtGfHZX4LcsukuGnafoD",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2mtgwkdoN7f-hvbUzh4URwEvxvbYCoEy-e-VHUJ32Gm5YCl6enry8w3Qe6gheoPxQOEKBZwpRO0s1JsCVCBkar-x1KzL9W6xKher6kdZ1atNXX5dbl6rnwKJRC3UqwLYXaG-wVFbiaHptWFtpUCn8OTO2u4X_uDYLTatpJ1nYYoJoozOg-DJG4JxLMA4d0xfGlTHfXB9bulxTwLkA51IQuzZSYhKkeW_cZLD3xVKpzQVXbyLfUiB9KWuI8WZ1Lsjpf-ktkMTSaAcyO75AHW53BUwuKZJXcplJdAh6_pnfVUV0Oog3fP-yjGFMTpz_sTiZbHtjIk-72_iaIPzT9WNiFd5iG2qVshMYa4_4d4S_2eqLwUEbHUfpwYC4UHHZwSehIRz04-qxQN40QKFKwgyGq2etchu9V2wFAxEPgOrB_KSkB61_TSl_k13xsmA90A540QfvNBu06wnNzzwkcUi0vbXm2QVnihgSl9xyAN4zeqQT8EZkw9yB4x5gZvlVkDJJEKXncp9sIxZLIeeZncIuXWWpsHTtm0qzi7O-QI6g3uJ5OSDe5-vHIaAXnKBvDycmN2X1aSB4aXLP_k-K5NT2Wy7VwVv-WLNvI_5OgTfEqM22Y_put3EdAM0-vwYW95Weg-RtYj-6KjEb1l2kQw_juMf",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "moving-photo-3d",
@@ -72,7 +72,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:47:58.175Z",
+      "createdAt": "2026-10-15T05:13:11.767Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -205,7 +205,7 @@
       "color": [640, 360],
       "depth": [480, 270],
       "video": true,
-      "videoTime": 0.495165,
+      "videoTime": 0.545314,
       "cost": {
         "color": 1228800,
         "depth": 129600,
@@ -225,7 +225,7 @@
       "play": 1
     }
   },
-  "durationMs": 4176,
+  "durationMs": 4184,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -233,7 +233,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPBktowDP0X7TUwWUhgNrf9hvbUzh4UR4CLY3tshUCZ_HtlQ-gOOy0XLEVPT09-vgJ6Dw1EbzAeKFyggBOFqJ2FZl2ACoRM3TtLzapcbRav5eK1_l5WTbVt6mr5ti1_CCQSddC8FsDuAs0VjtpKDO2gDWsrBTqFvTtpu1_4g2O3WHeSdp6FKSaIMjoPgr03BNNUgHHumL60qI774Ibc0uOeBMgH6klCHNhJiEqR5b9xksPfFEqnNBWdvYtDSIH0pd2OFGdS746U_pPaHZpIAuVAds8HaMrlpoDRtW3qUi5rgY5Z1z_r67qATgfpnvdXTimM0ZnTFxYvi-1mTPR5fzeOLjj_VN2KeJWHqFK1QmYKc32Pe0v8n6m2BQTs9BBvDQTCo47PCOyFhHPTz6rFA3jWAoULCDIarZ61yG71XbAUjEQ-A-sH8pyQHrX9MqX-TXfGmwHvgXLGiT54oc26Xd3c8MBHFotI258fklXYU8CUvuCYB_Ca1SGfgjMmH-QOGPMC18tKQMkkQpedykOwjFksh4Fmdwi5dZZug6dt21ScXZzzBewM7iWSkw_u13zlMAb0kgvk5eHE7L6sJg0ML7v8k--zMjmVbbV7U_CRL9bM-5ivQ_AdMWqT_Ziu292YroBGnx5jy9tK7yGyFtGfHZX4LcsukuGnafoD",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2mtgwkdoN7f-hvbUzh4URwEvxvbYCoEy-e-VHUJ32Gm5YCl6enry8w3Qe6gheoPxQOEKBZwpRO0s1JsCVCBkar-x1KzL9W6xKher6kdZ1atNXX5dbl6rnwKJRC3UqwLYXaG-wVFbiaHptWFtpUCn8OTO2u4X_uDYLTatpJ1nYYoJoozOg-DJG4JxLMA4d0xfGlTHfXB9bulxTwLkA51IQuzZSYhKkeW_cZLD3xVKpzQVXbyLfUiB9KWuI8WZ1Lsjpf-ktkMTSaAcyO75AHW53BUwuKZJXcplJdAh6_pnfVUV0Oog3fP-yjGFMTpz_sTiZbHtjIk-72_iaIPzT9WNiFd5iG2qVshMYa4_4d4S_2eqLwUEbHUfpwYC4UHHZwSehIRz04-qxQN40QKFKwgyGq2etchu9V2wFAxEPgOrB_KSkB61_TSl_k13xsmA90A540QfvNBu06wnNzzwkcUi0vbXm2QVnihgSl9xyAN4zeqQT8EZkw9yB4x5gZvlVkDJJEKXncp9sIxZLIeeZncIuXWWpsHTtm0qzi7O-QI6g3uJ5OSDe5-vHIaAXnKBvDycmN2X1aSB4aXLP_k-K5NT2Wy7VwVv-WLNvI_5OgTfEqM22Y_put3EdAM0-vwYW95Weg-RtYj-6KjEb1l2kQw_juMf",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "moving-photo-3d",
@@ -250,7 +250,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:47:58.403Z",
+      "createdAt": "2026-10-15T05:13:11.897Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -383,7 +383,7 @@
       "color": [640, 360],
       "depth": [480, 270],
       "video": true,
-      "videoTime": 0.866159,
+      "videoTime": 0.840369,
       "cost": {
         "color": 1228800,
         "depth": 129600,

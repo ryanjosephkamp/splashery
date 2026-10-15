@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -82,7 +82,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:49:57.113Z",
+        "createdAt": "2026-10-15T05:15:12.462Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -199,10 +199,10 @@
         "visible": false
       },
       "linkNote": "",
-      "stageUpdateTicks": 27,
+      "stageUpdateTicks": 25,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 526,
-        "navigationToFirstFrameMs": 2989.800000000745,
+        "chooseToyToFirstFrameMs": 2284.800000000745,
+        "navigationToFirstFrameMs": 4954.9000000003725,
         "stageUpdateTicks": 23
       },
       "controls": {
@@ -232,10 +232,10 @@
         "speed": 0.5
       }
     },
-    "navigationThroughSettledCaptureMs": 6791,
+    "navigationThroughSettledCaptureMs": 5612.4000000003725,
     "method": "Navigation time origin and chooseToy performance.now through first postrender event of the nonbusy target with Sharp picture visible for photo routes; not a GPU presentation timestamp"
   },
-  "durationMs": 6801,
+  "durationMs": 5615,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -269,7 +269,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:49:57.915Z",
+      "createdAt": "2026-10-15T05:15:12.468Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -334,7 +334,7 @@
         "yaw": 0,
         "pitch": 0,
         "roll": 0,
-        "distance": 3.1
+        "distance": 2.8389
       },
       "autoplay": {
         "turntable": true,
@@ -361,7 +361,7 @@
       "yaw": 0,
       "pitch": 0,
       "roll": 0,
-      "distance": 3.1
+      "distance": 2.8389
     },
     "graphics": {
       "backend": "WebGL2",
@@ -386,10 +386,10 @@
       "visible": false
     },
     "linkNote": "",
-    "stageUpdateTicks": 29,
+    "stageUpdateTicks": 25,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 526,
-      "navigationToFirstFrameMs": 2989.800000000745,
+      "chooseToyToFirstFrameMs": 2284.800000000745,
+      "navigationToFirstFrameMs": 4954.9000000003725,
       "stageUpdateTicks": 23
     },
     "controls": {

@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -59,119 +59,119 @@
     "elapsedMs": 3000.4000000003725,
     "samples": [
       {
-        "at": 9284.700000001118,
-        "clipTime": 3.621374,
-        "sourceFrame": 57
+        "at": 9298.700000001118,
+        "clipTime": 3.517444,
+        "sourceFrame": 56
       },
       {
-        "at": 9302.300000000745,
-        "clipTime": 3.637327,
+        "at": 9441.60000000149,
+        "clipTime": 3.660607,
         "sourceFrame": 58
       },
       {
-        "at": 9583.300000000745,
-        "clipTime": 3.907191,
-        "sourceFrame": 62
+        "at": 9610.900000000373,
+        "clipTime": 3.829209,
+        "sourceFrame": 61
       },
       {
-        "at": 9837.60000000149,
-        "clipTime": 4.17542,
-        "sourceFrame": 66
+        "at": 9735.60000000149,
+        "clipTime": 3.95434500000149,
+        "sourceFrame": 63
       },
       {
-        "at": 9844.200000001118,
-        "clipTime": 4.184664,
-        "sourceFrame": 66
+        "at": 9861.10000000149,
+        "clipTime": 4.08207,
+        "sourceFrame": 65
       },
       {
-        "at": 9886.10000000149,
-        "clipTime": 4.221926,
+        "at": 10019.400000000373,
+        "clipTime": 4.240401,
         "sourceFrame": 67
       },
       {
-        "at": 10109.60000000149,
-        "clipTime": 4.446719,
-        "sourceFrame": 71
+        "at": 10167.300000000745,
+        "clipTime": 4.388309,
+        "sourceFrame": 70
       },
       {
-        "at": 10117.900000000373,
-        "clipTime": 4.458004,
-        "sourceFrame": 71
+        "at": 10302.800000000745,
+        "clipTime": 4.522632,
+        "sourceFrame": 72
       },
       {
-        "at": 10413.5,
-        "clipTime": 4.751742,
+        "at": 10428.200000001118,
+        "clipTime": 4.649491,
+        "sourceFrame": 74
+      },
+      {
+        "at": 10547.300000000745,
+        "clipTime": 4.768386,
         "sourceFrame": 76
       },
       {
-        "at": 10427.60000000149,
-        "clipTime": 4.766161,
-        "sourceFrame": 76
-      },
-      {
-        "at": 10541,
-        "clipTime": 4.879726,
+        "at": 10701.800000000745,
+        "clipTime": 4.920114,
         "sourceFrame": 78
       },
       {
-        "at": 10693.10000000149,
-        "clipTime": 5.030202,
+        "at": 10828.900000000373,
+        "clipTime": 5.048281,
         "sourceFrame": 80
       },
       {
-        "at": 10804.200000001118,
-        "clipTime": 5.142535,
-        "sourceFrame": 82
+        "at": 10967.300000000745,
+        "clipTime": 5.18826,
+        "sourceFrame": 83
       },
       {
-        "at": 10931.400000000373,
-        "clipTime": 5.269446,
-        "sourceFrame": 84
+        "at": 11125.200000001118,
+        "clipTime": 5.345141,
+        "sourceFrame": 85
       },
       {
-        "at": 11098.800000000745,
-        "clipTime": 5.435916,
-        "sourceFrame": 86
+        "at": 11269.400000000373,
+        "clipTime": 5.487357,
+        "sourceFrame": 87
       },
       {
-        "at": 11222.800000000745,
-        "clipTime": 5.561197999999628,
-        "sourceFrame": 88
+        "at": 11414.10000000149,
+        "clipTime": 5.632232,
+        "sourceFrame": 90
       },
       {
-        "at": 11353,
-        "clipTime": 5.689336,
-        "sourceFrame": 91
+        "at": 11543.400000000373,
+        "clipTime": 5.760614,
+        "sourceFrame": 92
       },
       {
-        "at": 11503,
-        "clipTime": 5.841308,
-        "sourceFrame": 93
+        "at": 11697.60000000149,
+        "clipTime": 5.903993,
+        "sourceFrame": 94
       },
       {
-        "at": 11634.60000000149,
-        "clipTime": 5.969571,
-        "sourceFrame": 95
-      },
-      {
-        "at": 11787.5,
+        "at": 11836.900000000373,
         "clipTime": 0,
         "sourceFrame": 0
       },
       {
-        "at": 11925.700000001118,
-        "clipTime": 0.085794,
+        "at": 12001.400000000373,
+        "clipTime": 0.11362,
         "sourceFrame": 1
+      },
+      {
+        "at": 12133.400000000373,
+        "clipTime": 0.245795,
+        "sourceFrame": 3
       }
     ],
     "frameTimeMs": {
-      "min": 6.599999999627471,
-      "median": 130.19999999925494,
-      "p95": 281,
-      "max": 295.59999999962747
+      "min": 119.09999999962747,
+      "median": 139.2999999988824,
+      "p95": 164.5,
+      "max": 169.2999999988824
     }
   },
-  "durationMs": 3004,
+  "durationMs": 3020,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -193,7 +193,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:46:43.414Z",
+      "createdAt": "2026-10-15T05:11:43.554Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -323,7 +323,7 @@
       "color": [640, 360],
       "depth": [480, 270],
       "video": true,
-      "videoTime": 0.241155,
+      "videoTime": 0.38349,
       "cost": {
         "color": 1228800,
         "depth": 129600,
@@ -335,10 +335,10 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 71,
+    "stageUpdateTicks": 72,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 5485.300000000745,
-      "navigationToFirstFrameMs": 8184.60000000149,
+      "chooseToyToFirstFrameMs": 5563.199999999255,
+      "navigationToFirstFrameMs": 8292,
       "stageUpdateTicks": 42
     },
     "controls": {

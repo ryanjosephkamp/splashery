@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -56,227 +56,207 @@
   },
   "actual": {
     "method": "performance.now at PlayCanvas postrender during unmodified playback (CPU event, not GPU presentation)",
-    "elapsedMs": 3000.2999999988824,
+    "elapsedMs": 3014.4000000003725,
     "samples": [
       {
-        "at": 70912.79999999888,
-        "clipTime": 0.938595,
-        "sourceFrame": 14
-      },
-      {
-        "at": 70969.59999999963,
-        "clipTime": 0.995938,
-        "sourceFrame": 15
-      },
-      {
-        "at": 71048.69999999925,
-        "clipTime": 1.074764,
-        "sourceFrame": 16
-      },
-      {
-        "at": 71126.29999999888,
-        "clipTime": 1.152573,
-        "sourceFrame": 17
-      },
-      {
-        "at": 71201.59999999963,
-        "clipTime": 1.209656,
-        "sourceFrame": 18
-      },
-      {
-        "at": 71254.29999999888,
-        "clipTime": 1.280781,
-        "sourceFrame": 19
-      },
-      {
-        "at": 71328.59999999963,
-        "clipTime": 1.355213,
-        "sourceFrame": 20
-      },
-      {
-        "at": 71404.39999999851,
-        "clipTime": 1.429831,
-        "sourceFrame": 21
-      },
-      {
-        "at": 71459.69999999925,
-        "clipTime": 1.486314,
-        "sourceFrame": 22
-      },
-      {
-        "at": 71533.59999999963,
-        "clipTime": 1.559471,
-        "sourceFrame": 23
-      },
-      {
-        "at": 71612.39999999851,
-        "clipTime": 1.638693,
-        "sourceFrame": 24
-      },
-      {
-        "at": 71666.69999999925,
-        "clipTime": 1.693639,
-        "sourceFrame": 25
-      },
-      {
-        "at": 71744.29999999888,
-        "clipTime": 1.770425,
-        "sourceFrame": 26
-      },
-      {
-        "at": 71818.79999999888,
-        "clipTime": 1.845049,
-        "sourceFrame": 28
-      },
-      {
-        "at": 71871.59999999963,
-        "clipTime": 1.898474,
-        "sourceFrame": 28
-      },
-      {
-        "at": 71944.79999999888,
-        "clipTime": 1.971426,
-        "sourceFrame": 29
-      },
-      {
-        "at": 72023.69999999925,
-        "clipTime": 2.050149,
-        "sourceFrame": 31
-      },
-      {
-        "at": 72076.69999999925,
-        "clipTime": 2.103781,
-        "sourceFrame": 31
-      },
-      {
-        "at": 72164.09999999963,
-        "clipTime": 2.190298,
-        "sourceFrame": 33
-      },
-      {
-        "at": 72242.69999999925,
-        "clipTime": 2.269164,
-        "sourceFrame": 34
-      },
-      {
-        "at": 72315.59999999963,
-        "clipTime": 2.342345,
-        "sourceFrame": 35
-      },
-      {
-        "at": 72369.79999999888,
-        "clipTime": 2.396301,
-        "sourceFrame": 36
-      },
-      {
-        "at": 72444.09999999963,
-        "clipTime": 2.470557,
-        "sourceFrame": 37
-      },
-      {
-        "at": 72517.39999999851,
-        "clipTime": 2.470557,
-        "sourceFrame": 37
-      },
-      {
-        "at": 72600.89999999851,
-        "clipTime": 0.030757000001119916,
-        "sourceFrame": 0
-      },
-      {
-        "at": 72663.79999999888,
-        "clipTime": 0.113982,
-        "sourceFrame": 1
-      },
-      {
-        "at": 72740.19999999925,
-        "clipTime": 0.190021,
-        "sourceFrame": 2
-      },
-      {
-        "at": 72828.5,
-        "clipTime": 0.278124,
-        "sourceFrame": 4
-      },
-      {
-        "at": 72912.59999999963,
-        "clipTime": 0.361969,
-        "sourceFrame": 5
-      },
-      {
-        "at": 73003.5,
-        "clipTime": 0.453104,
-        "sourceFrame": 6
-      },
-      {
-        "at": 73069.79999999888,
-        "clipTime": 0.518915,
-        "sourceFrame": 7
-      },
-      {
-        "at": 73139.59999999963,
-        "clipTime": 0.589401,
-        "sourceFrame": 8
-      },
-      {
-        "at": 73214.59999999963,
-        "clipTime": 0.664585,
+        "at": 61849.800000000745,
+        "clipTime": 0.667206,
         "sourceFrame": 10
       },
       {
-        "at": 73271.39999999851,
-        "clipTime": 0.721644,
-        "sourceFrame": 10
+        "at": 61945.40000000037,
+        "clipTime": 0.762862,
+        "sourceFrame": 11
       },
       {
-        "at": 73345.59999999963,
-        "clipTime": 0.795624,
-        "sourceFrame": 12
-      },
-      {
-        "at": 73421.79999999888,
-        "clipTime": 0.871641,
+        "at": 62038.70000000112,
+        "clipTime": 0.856451,
         "sourceFrame": 13
       },
       {
-        "at": 73474.89999999851,
-        "clipTime": 0.924782,
+        "at": 62131,
+        "clipTime": 0.948038,
         "sourceFrame": 14
       },
       {
-        "at": 73552.5,
-        "clipTime": 1.002445,
+        "at": 62227.20000000112,
+        "clipTime": 1.044466,
         "sourceFrame": 15
       },
       {
-        "at": 73626.59999999963,
-        "clipTime": 1.076359,
-        "sourceFrame": 16
-      },
-      {
-        "at": 73701.79999999888,
-        "clipTime": 1.130029,
+        "at": 62326.40000000037,
+        "clipTime": 1.14276,
         "sourceFrame": 17
       },
       {
-        "at": 73752.39999999851,
-        "clipTime": 1.202195,
+        "at": 62413,
+        "clipTime": 1.230211,
         "sourceFrame": 18
       },
       {
-        "at": 73830.89999999851,
-        "clipTime": 1.280357,
+        "at": 62484,
+        "clipTime": 1.302095,
         "sourceFrame": 19
+      },
+      {
+        "at": 62566,
+        "clipTime": 1.383639,
+        "sourceFrame": 21
+      },
+      {
+        "at": 62648.70000000112,
+        "clipTime": 1.466143,
+        "sourceFrame": 22
+      },
+      {
+        "at": 62727.800000000745,
+        "clipTime": 1.546197,
+        "sourceFrame": 23
+      },
+      {
+        "at": 62812.300000000745,
+        "clipTime": 1.629584,
+        "sourceFrame": 24
+      },
+      {
+        "at": 62865.59999999963,
+        "clipTime": 1.683937,
+        "sourceFrame": 25
+      },
+      {
+        "at": 62941.90000000037,
+        "clipTime": 1.759751,
+        "sourceFrame": 26
+      },
+      {
+        "at": 63021.5,
+        "clipTime": 1.838641,
+        "sourceFrame": 27
+      },
+      {
+        "at": 63080.800000000745,
+        "clipTime": 1.898314,
+        "sourceFrame": 28
+      },
+      {
+        "at": 63163.40000000037,
+        "clipTime": 1.981141,
+        "sourceFrame": 30
+      },
+      {
+        "at": 63242.90000000037,
+        "clipTime": 2.06062,
+        "sourceFrame": 31
+      },
+      {
+        "at": 63315.300000000745,
+        "clipTime": 2.133307,
+        "sourceFrame": 32
+      },
+      {
+        "at": 63378.70000000112,
+        "clipTime": 2.196564,
+        "sourceFrame": 33
+      },
+      {
+        "at": 63453.800000000745,
+        "clipTime": 2.271336,
+        "sourceFrame": 34
+      },
+      {
+        "at": 63549.20000000112,
+        "clipTime": 2.366524,
+        "sourceFrame": 35
+      },
+      {
+        "at": 63630.90000000037,
+        "clipTime": 2.449128,
+        "sourceFrame": 37
+      },
+      {
+        "at": 63683.5,
+        "clipTime": 0,
+        "sourceFrame": 0
+      },
+      {
+        "at": 63759.70000000112,
+        "clipTime": 0.071367,
+        "sourceFrame": 1
+      },
+      {
+        "at": 63835.70000000112,
+        "clipTime": 0.1471149999996275,
+        "sourceFrame": 2
+      },
+      {
+        "at": 63914.70000000112,
+        "clipTime": 0.203875,
+        "sourceFrame": 3
+      },
+      {
+        "at": 63964.5,
+        "clipTime": 0.276162,
+        "sourceFrame": 4
+      },
+      {
+        "at": 64040.59999999963,
+        "clipTime": 0.351883,
+        "sourceFrame": 5
+      },
+      {
+        "at": 64122.59999999963,
+        "clipTime": 0.433765,
+        "sourceFrame": 6
+      },
+      {
+        "at": 64211.20000000112,
+        "clipTime": 0.500081,
+        "sourceFrame": 7
+      },
+      {
+        "at": 64281.20000000112,
+        "clipTime": 0.592264,
+        "sourceFrame": 9
+      },
+      {
+        "at": 64363.70000000112,
+        "clipTime": 0.675247,
+        "sourceFrame": 10
+      },
+      {
+        "at": 64443.09999999963,
+        "clipTime": 0.754615,
+        "sourceFrame": 11
+      },
+      {
+        "at": 64526.300000000745,
+        "clipTime": 0.838354,
+        "sourceFrame": 12
+      },
+      {
+        "at": 64610,
+        "clipTime": 0.900026,
+        "sourceFrame": 13
+      },
+      {
+        "at": 64675.59999999963,
+        "clipTime": 0.98724,
+        "sourceFrame": 15
+      },
+      {
+        "at": 64760.09999999963,
+        "clipTime": 1.071177,
+        "sourceFrame": 16
       }
     ],
     "frameTimeMs": {
-      "min": 50.59999999962747,
-      "median": 74.30000000074506,
-      "p95": 87.40000000037253,
-      "max": 90.90000000037253
+      "min": 49.79999999888241,
+      "median": 79.59999999962747,
+      "p95": 95.59999999962747,
+      "max": 99.19999999925494
     }
   },
-  "durationMs": 3009,
+  "durationMs": 3027,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -284,7 +264,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLjtswDPwX7tUJnIdT1Lf9hvbUYg-0zDhqZEmQ6Dhp4H8vJcfbYBdtLhYVDmeGpO6A3kMN0RuMJwo3KOBCIWpnod4VoAIhU_vKkrMtt4fVplxtqu_lvq62dVmu97vtD4FEohbqTQHsblDf4aytxNAM2rC2kqBT2LuLtt3Knxy71a6FqQDj3DkBGlTnLrghwzx2JBg-UU8S4sBOQlSKLP-Nk2T-ptBQZqard3EIKZC6dDyS4phKe3em9E2OjmgiCZQD2Y5PUJfrQwGja5pUpVxXAh2z9n_mV1UBrQ5SPfeonFIYozOXTyxemtcumOhzj2aONjj_IbsR8yqL2KdshcwUlvweO0v8H1VfCgjY6iHOBQTCo44fEdgLCeeiz65lznjVAoVbmkk0Wn30Ir3VD8OSMBL5DKzekdeE9KjtJ5X6Nz0Y5yV7BMoZJ_7ghQ67ZkswPeMjY--l7M83uVXYU8B0fcMxC_Ca1SmfgjMmH2QGjLmBu_VeQGlJhC5vIw_BMmazHAZatkPIrbM0C0_dtik5b2q-L-BosJNITj64X8vIYQzo5S6Ql8cR8_ZlN0kwvBzzT_5fnMmpbPbHrwre8mDN0o9lHIJviVGbvI9p3G5mugMafXmXLe8nvYfIWkw_b1Tityy9mBc-295M0_QH",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVNNk9owDP0v2mtgwkfY2dz2N7SndvagOAJcHNtjKwTK5L9XdsiWYaflEsvo6b0nyTdA76GG6A3GI4UrFHCmELWzUG8KUIGQqX1nyVmX691iVS5W1feyqlev9apaVm_bHwKJRC3UqwLYXaG-wUlbiaHptWFtJUGnsHNnbQ8Lf3TsFpsWxgKMc6cEaFCdDsH1GebxQILhI3UkIfbsJESlyPLfOEnmbwoNZWa6eBf7kAKpS_s9KY6ptHcnSt_kaI8mkkA5kD3wEepyuStgcE2TqpTLSqBD1v7P_KoqoNVBqucelWMKY3Tm_IXFS_PaGRN97tHE0Qbnn7IbMa-yiG3KVshMYc7v8GCJ_6PqtYCAre7jVEAgPOj4jMBOSDgXfXQtc8aLFihc00yi0erZi_RW3w1LwkDkM7D6RF4S0qO2X1Tq33RnnJbsHihnnPiDF9ptmjXB-IiPjJ2Xsj8_5FZhRwHT9RWHLMBrVsd8Cs6YfJAZMOYGbpZbAaUlEbq8jdwHy5jNcuhp3g4ht87SJDx126bkvKn5voC9wYNEcvLB_ZpHDkNAL3eBvDyOmLcvu0mC4WWff_L_7ExOZbPdvyn4yIM1cz_mcQi-JUZt8j6mcbuJ6QZo9PlTtryf9B4iazH9uFGJ37L0Ylr4bHs1juMf",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "moving-photo-3d",
@@ -302,7 +282,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:52:54.714Z",
+      "createdAt": "2026-10-15T05:18:01.356Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -417,7 +397,7 @@
       },
       "session": {}
     },
-    "input": "Your GIF or videoStart overPauseLive view0:01 / 0:02Play back the recordingSave the recordingCancel the depthSplatsSharp pictureSharp picture: the picture at its full size on a 3D relief, so small text stays readable. Splats: the picture rebuilt from splats.Open a GIF or video…silent: 2.5 s, 38 frames (15 a second)Open a GIF or a video. A clip up to 8 seconds is read whole on this device, at its own speed and up to 24 frames a second (fewer on a phone), and the depth model (about 27 MB, loaded the first time) works out how near each part of every frame is. A longer video plays whole: its depth is worked out a few times a second, in order, and it plays as that goes, with a line saying how long is left (a long video takes a while, longer on a phone). A GIF plays its first 8 seconds. It plays back in 3D, a video with its own sound. Nothing is uploaded. Tap to pause or play.",
+    "input": "Your GIF or videoStart overPauseLive view0:00 / 0:02Play back the recordingSave the recordingCancel the depthSplatsSharp pictureSharp picture: the picture at its full size on a 3D relief, so small text stays readable. Splats: the picture rebuilt from splats.Open a GIF or video…silent: 2.5 s, 38 frames (15 a second)Open a GIF or a video. A clip up to 8 seconds is read whole on this device, at its own speed and up to 24 frames a second (fewer on a phone), and the depth model (about 27 MB, loaded the first time) works out how near each part of every frame is. A longer video plays whole: its depth is worked out a few times a second, in order, and it plays as that goes, with a line saying how long is left (a long video takes a while, longer on a phone). A GIF plays its first 8 seconds. It plays back in 3D, a video with its own sound. Nothing is uploaded. Tap to pause or play.",
     "statusText": "Moving photo to 3D · Sharp picture",
     "visibleText": "Skip to controls\nSplashery\n\nMoving photo to 3D · Sharp picture\n\n×\nDepth\n?\nSurprise me\nAll\nPhotoreal\nShapes\nBalls\nSpace\nTiny world\nAtoms\nGems\nBody\nNature\nWeather & fire\nFood\nToys\nOpen me\nClothing\nMedieval\nAnimals\nMath\nAI and computing\nPictures and pages\nStudio\nLab\nArcade\nScience\nImaging\nEarth and maps\nHolidays\nMusic\nVehicles\nLandmarks\nCactus\nStrawberry\nHeart cookie\nHoneybee\nCluster fly\nMay beetle\nMillipede\nCarder bumblebee\nRaspberry\nBlackberry\nBlueberry\nGrape\nCinnamon star cookie\nTomatoes\nMandeltorus\nBasket\nHeart donut\nSushi boat\nSeeded bread loaf\nCowboy steak\nStollen\nOrange (photo)\nPhysalis\nCrystal\nAlum crystal\nPuffin\nToy T. rex\nMonkey doll\nSouvenir elephant\nSouvenir turtle\nCave lioness\nDog plush\nBMX bicycle\nMurex shell\nSunflower (photo)\nWhite roses\nBonsai tree (photo)\nMushroom (photo)\nCactus (photo 2)\nCrochet Earth\nDesk globe\nCherry blossom (photo)\nGolden maple\nPeonies in a vase\nMoney tree\nKnight on a horse\nTriceratops skull\nCone shell\nCelestial globe\nArmillary sphere\nStannern meteorite\nFluorite\nAmmonite\nMorasko meteorite\nPyrite\nMegalodon tooth\nReal rubber duck\nGarden gnome\nWooden elephant\nMarble bust\nUkulele\nReal alarm clock\nVintage camera\nBoombox\nReal croissant\nCarrot cake\nPomegranate\nLantern\nCat statue\nHorse statue\nReal pencil\nReal tin can\nTorus\nJelly blob\nNeon knot\nBasketball\nSoccer ball\nAmerican football\nTennis ball\nBaseball\nSoftball\nBeach ball\nGolf ball\nRugby ball\nVolleyball\nWater polo ball\nPing-pong ball\nCricket ball\nBowling ball\nPool ball\nPickleball\nDodgeball\nMedicine ball\nLacrosse ball\nSquash ball\nBouncy ball\nMarble\nHockey puck\nShuttlecock\nFlying disc\nSun\nSolar system\nMercury\nVenus\nEarth\nMoon\nMars\nJupiter\nSaturn\nUranus\nNeptune\nTiny planet\nAurora world\nAsteroid\nComet\nMeteor\nStar\nPulsar\nBlack hole\nStar cluster\nRing nebula\nNebula\nSupernova\nSpiral galaxy\nThe real Moon\nThe real Mars\nThe real Earth\nThe real Mercury\nThe real Venus\nReal moons\nPluto, Ceres and Vesta\nStars near the Sun\nReal star systems\nReal galaxies\nPowers of ten\nSaturn V\nSpace Launch System\nSpace Shuttle\nThe solar system on real orbits\nNight sky\nVirus\nBacteriophage\nBacterium\nRed blood cell\nNeuron\nAstrocyte\nAnimal cell\nDNA\nWhite blood cell\nMicroglia\nDiatom\nTardigrade\nPollen grain\nSnowflake\nChromosome\nMitochondrion\nParamecium\nAmoeba\nDNA to protein\nCell division\nApoptosis\nPhagocytosis\nElectron orbital\nAtom\nMolecule\nProtein\nCrystal lattice\nUnit cells\nOrbital atlas\nMolecule viewer\nPeriodic table\nReal elements\nDiamond\nRuby\nEmerald\nAmethyst geode\nSapphire\nQuartz cluster\nOpal\nPearl\nBeating heart\nBrain\nEye\nLungs\nTooth\nKidney\nAnatomy atlas\nOak tree\nPine tree\nPalm tree\nCherry blossom\nMaple tree\nBonsai\nWeeping willow\nSunflower\nRose\nDandelion\nTulips\nDaisies\nLotus\nToadstool\nFern\nSaguaro cactus\nCoral reef\nPinecone\nAcorns\nSucculent\nBamboo\nPebbles\nKelp\nCampfire\nStorm cloud\nLava lamp\nSnow globe\nVolcano\nIce swan\nCandle\nTornado\nRainbow\nIceberg\nWaterfall\nOcean wave\nGeyser\nIce cream\nWatermelon\nBirthday cake\nPopcorn\nJelly\nPancakes\nCupcake\nLollipop\nCandy cane\nMacarons\nDonut\nGummy bear\nPretzel\nCroissant\nPizza\nBurger\nSushi\nTaco\nBoiled egg\nCoffee\nApple\nBananas\nOrange\nKiwi\nPineapple\nCherries\nGrapes\nAvocado\nBuilding bricks\nRubber duck\nSpinning top\nDice\nNewton's cradle\nTeddy bear\nYo-yo\nPuzzle cube\nSpring toy\nKite\nPaper plane\nOrigami crane\nBalloon dog\nSoap bubbles\nWind-up robot\nChess set\nTreasure chest\nStorybook\nLaptop\nMusic box\nAlarm clock\nGift box\nUmbrella\nDesk fan\nDesk lamp\nPotion bottle\nTelescope\nFountain pen\nWater bottle\nSoda can\nRunning shoe\nHoodie\nSunglasses\nBaseball cap\nSword in the stone\nHeraldic shield\nBow and target\nTrebuchet\nCrossbow\nKnight's helmet\nCrown\nDragon egg\nWizard's orb\nCrystal ball\nJellyfish\nSchool of fish\nButterfly\nPufferfish\nNautilus\nLadybug\nSnail\nOctopus\nStarfish\nSea urchin\nFrog\nPenguin\nOwl\nLorenz attractor\nMöbius strip\nKlein bottle\nMenger sponge\nHypercube\nTorus knot\nGyroid\nMandelbulb\nSierpinski tetrahedron\nPlatonic solids\nSeashell spiral\nGraph plotter\nSurface plotter\nCircle and waves\nFourier circles\nPythagoras proof\nRössler attractor\nThomas attractor\nAizawa attractor\n5-cell\n16-cell\n24-cell\nDuoprism\nSplat equation\nPerceptron\nMultilayer perceptron\nNeural network\nConvolutional network\nRecurrent network\nTransformer\nLooped transformer\nDiffusion model\nGradient descent\nGaussian splatting\nWord vectors\nSorting machine\nHalf adder\nTuring machine\nDifference engine\nEnigma machine\nBombe\nPicture lab\nYour book\nPhoto album\nPicture frame\nScreen\nSong landscape\nChladni plate\nSound in a box\nRoom echo meter\nSplat mirror\nModel to splats\nQR code\nHow a QR code works\nQR damage lab\nThree QR codes in one\nPicture QR\nQR from real things\nOther barcodes\nPhoto to 3D\nMoving photo to 3D\nVideo to 3D\nSound lab\nSound recorder\nSplat toolkit\nPoint clouds\nVolume viewer\nData in 3D\nSplat field\nLight lab\nBaked chest\nFluid lab\nShardball\nLongtail\nGrain Garden\nPage Breaker\nStrata\nVolley Table\nStone Belt\nSoft Landing\nNight Owl Pinball\nCast a Shadow\nPhoto Dash\nNote Rider\nThermal ellipsoids\nSuper-resolution microscope\nGalaxy in a box\nCryo-EM map\nContour lab\nTerrain in a box\nRipple tank\nLight bench\nClimate records\nAirport X-ray scanner\nHow CT works\nWalnut CT scan\nMRI of a fruit\nElectron microscope\nThermal camera\nGrand Canyon\nMount St. Helens\nThe sea floor\nTides at Bar Harbor\nHurricane\nRelief map\nLiving city\nStork migration\nEarthquakes\nJack-o'-lantern\nSnowman\nFireworks\nDecorated tree\nPatterned egg\nPaper lantern\nDiya\nMenorah\nAcoustic guitar\nSnare drum\nXylophone\nToy piano\nGrand piano\nUpright piano\nHarpsichord\nElectronic keyboard\nRocket\nHelicopter\nHot-air balloon\nSteam train\nOcean liner\nSports car\nBus\nPropeller plane\nJet airliner\nSailboat\nSubmarine\nBicycle\nTractor\nFlying saucer\nEiffel Tower\nWashington Monument\nPyramids of Giza\nTwisting supertall\nLighthouse\nStatue of Liberty\nWhite House\nLeaning Tower of Pisa\nColosseum\nParthenon\nStonehenge\nBig Ben\nTaj Mahal\nCastle\nPagoda\nWindmill\nOrbit\nPoke\nPaint\nMagnet\nClay\nMore\nLink copied.",
     "toast": {
@@ -436,7 +416,7 @@
       "color": [192, 108],
       "depth": [192, 108],
       "video": true,
-      "videoTime": 1.365708,
+      "videoTime": 1.159687,
       "cost": {
         "color": 110592,
         "depth": 20736,
@@ -448,11 +428,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 502,
+    "stageUpdateTicks": 426,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 6640.4000000003725,
-      "navigationToFirstFrameMs": 9232.699999999255,
-      "stageUpdateTicks": 46
+      "chooseToyToFirstFrameMs": 6492.699999999255,
+      "navigationToFirstFrameMs": 9150.5,
+      "stageUpdateTicks": 43
     },
     "controls": {
       "play": 1

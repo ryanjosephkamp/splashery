@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -56,79 +56,79 @@
   },
   "actual": {
     "method": "performance.now at PlayCanvas postrender during unmodified playback (CPU event, not GPU presentation)",
-    "elapsedMs": 1800.300000000745,
+    "elapsedMs": 1800.5,
     "samples": [
       {
-        "at": 15285.300000000745,
+        "at": 15930.60000000149,
         "clipTime": 5.6,
         "sourceFrame": 89
       },
       {
-        "at": 15435,
-        "clipTime": 0.110584,
-        "sourceFrame": 1
+        "at": 16104.800000000745,
+        "clipTime": 0.131496,
+        "sourceFrame": 2
       },
       {
-        "at": 15444.700000001118,
-        "clipTime": 0.121953,
-        "sourceFrame": 1
+        "at": 16222.60000000149,
+        "clipTime": 0.246611,
+        "sourceFrame": 3
       },
       {
-        "at": 15711.10000000149,
-        "clipTime": 0.38453,
+        "at": 16355.60000000149,
+        "clipTime": 0.38007,
         "sourceFrame": 6
       },
       {
-        "at": 15717.300000000745,
-        "clipTime": 0.395042,
-        "sourceFrame": 6
-      },
-      {
-        "at": 15834.700000001118,
-        "clipTime": 0.507827,
+        "at": 16524.5,
+        "clipTime": 0.549803,
         "sourceFrame": 8
       },
       {
-        "at": 15982.10000000149,
-        "clipTime": 0.648662,
+        "at": 16647.5,
+        "clipTime": 0.677321,
         "sourceFrame": 10
       },
       {
-        "at": 16103.60000000149,
-        "clipTime": 0.778209,
-        "sourceFrame": 12
+        "at": 16796.300000000745,
+        "clipTime": 0.825085,
+        "sourceFrame": 13
       },
       {
-        "at": 16245.300000000745,
-        "clipTime": 0.918186,
-        "sourceFrame": 14
+        "at": 16911.900000000373,
+        "clipTime": 0.941456,
+        "sourceFrame": 15
       },
       {
-        "at": 16524.400000000373,
-        "clipTime": 1.19537,
+        "at": 17032.900000000373,
+        "clipTime": 1.062877,
+        "sourceFrame": 17
+      },
+      {
+        "at": 17160.800000000745,
+        "clipTime": 1.189836,
         "sourceFrame": 19
       },
       {
-        "at": 16647,
-        "clipTime": 1.322041,
+        "at": 17299.60000000149,
+        "clipTime": 1.326181,
         "sourceFrame": 21
       },
       {
-        "at": 16672.60000000149,
-        "clipTime": 1.340812,
-        "sourceFrame": 21
-      },
-      {
-        "at": 16822.300000000745,
-        "clipTime": 1.497169,
+        "at": 17425.5,
+        "clipTime": 1.456025,
         "sourceFrame": 23
+      },
+      {
+        "at": 17554.400000000373,
+        "clipTime": 1.583041,
+        "sourceFrame": 25
       }
     ],
     "frameTimeMs": {
-      "min": 6.199999999254942,
-      "median": 122.59999999962747,
-      "p95": 266.40000000037253,
-      "max": 279.09999999962747
+      "min": 115.59999999962747,
+      "median": 127.90000000037253,
+      "p95": 168.89999999850988,
+      "max": 174.19999999925494
     }
   },
   "durationMs": 1806,
@@ -153,7 +153,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:46:48.330Z",
+      "createdAt": "2026-10-15T05:11:48.992Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -283,7 +283,7 @@
       "color": [640, 360],
       "depth": [480, 270],
       "video": true,
-      "videoTime": 1.73534,
+      "videoTime": 1.634519,
       "cost": {
         "color": 1228800,
         "depth": 129600,
@@ -295,10 +295,10 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 108,
+    "stageUpdateTicks": 111,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 5485.300000000745,
-      "navigationToFirstFrameMs": 8184.60000000149,
+      "chooseToyToFirstFrameMs": 5563.199999999255,
+      "navigationToFirstFrameMs": 8292,
       "stageUpdateTicks": 42
     },
     "controls": {

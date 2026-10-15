@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -68,7 +68,7 @@
     "httpErrors": []
   },
   "state": {
-    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPLctswDPwX5KrY8kNJq1u_oT21kwNEwRZjmmRJKLab8b8XoC03k0yqiwgKC-wCq1fAGKGFHB3mgdIJKnihlG3w0K4qMImQqf_GkrOslw_3i_p-0fyo123TtKv17HGx_CmQTNRDu6iAwwnaV9hZLzF0o3VsvSRYDX-nexN6kjBElg5ZU5mOWnxgjrmdz9MJ_XPIFIcd7uNsa3kYu5kN8xvDueCv9Z31O4k2llwvxUCZ8MmRHI1kZ2vgfK7AhbDTVh2a3TaFsWAjbpUJD7TXfBw5SIjGkOd_sXbl7wa1psijYwx5TBpIXdpsyHBREcOO9K1j26DLpEwS-S0P0NazhwoOoeu0Sj1rBHooAj7Nb5oKepukellEfdYw5-BePnSJsqF-wuRYFnHp0acQ32V3It4UEmvNNshMacrf49YT_4fVYwUJezvmSwGB8MHm9wjcSxMuRd-qFjPh0eqWTiDI7Kx5r0Vma6-CJeFAFAuwuSGPioxo_QeW9g9dO158cg1McEH0wR09rLolFTfc8JnFYVL215PcGtxTQr0-4aEQiJbNUE4pOFcOsgPGMsDVbFEvvghOfSIdi-t5TJ6x6OU00mQQ6e-Dpwt3HbjX5PJHlHsxsMPtxb4xhedp63BIGOUuUZSfMBcDFkHKGe425ZHvkzg51d1689XAU9mtm0YybUTwPTFaVyypGw-XTq-Azr7caO-DnmU-VnS_NZX29yzjUM-fz-e_",
+    "url": "http://127.0.0.1:4173/?labs=1&adapt=off&profile=mid&renderer=webgl2#s=d.fVPRdtowDP0X9TVAgKZr87Zv2J620wfFEcTF2J6tFFgP_z7JENbTni0vsRxd6V7p5g0wRmghR4d5oHSCCl4pZRs8tOsKTCJk6r-y5Kzq1cNsWc-Wzfe6aVd1u36cN0_3PwSSiXpolxVwOEH7BjvrJYZutI6tlwSr4a80M6EnCUNk6ZA1lemoxQfmmNvFIp3Qv4RMcdjhPs63loexm9uwuDFcCP5a31m_k2hjyfVSDJQJnxzJ0Uh2tgbO5wpcCDtt1aHZbVMYCzbiVpnwQHvNx5GDhGgMef4ba1f-ZlBrijw6xpDHpIHUpc2GDBcVMexI3zq2DbpMyiSR3_IAbT1_qOAQuk6r1PNGoIci4J_5TVNBb5NUL4uozxrmHNzrpy5RNtRPmBzLIi49-hTih-xOxJtC4l6zDTJTmvL3uPXE_2H1pYKEvR3zpYBA-GDzRwTupQmXou9Vi5nwaHVLJxBkdtZ81CKztVfBknAgigXY3JBHRUa0_hNL-5uuHS8-uQYmuCD64I4e1t2Kihtu-MziMCn781luDe4poV6f8FAIRMtmKKcUnCsH2QFjGeB6vqyXj4JTn0jH4noek2csejmNNBlE-vvg6cJdB-41ufwR5V4M7HB7sW9M4WXaOhwSRrlLFOUnzMWARZByhrtNeeT7JE5OdXe_eTLwXHbrppFMGxF8T4zWFUvqxsOl0xugs6832vugZ5mPFd3vTaX9Pcs41PPn8_kP",
     "title": "Splashery · splats you can play with",
     "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/151.0.0.0 Safari/537.36",
     "toyId": "qr-code",
@@ -100,7 +100,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:55:58.508Z",
+      "createdAt": "2026-10-15T05:21:00.824Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -223,11 +223,11 @@
       "visible": false
     },
     "linkNote": "",
-    "stageUpdateTicks": 180,
+    "stageUpdateTicks": 181,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 2452.89999999851,
-      "navigationToFirstFrameMs": 5092.299999998882,
-      "stageUpdateTicks": 24
+      "chooseToyToFirstFrameMs": 1932.9000000003725,
+      "navigationToFirstFrameMs": 4441.0999999996275,
+      "stageUpdateTicks": 23
     },
     "controls": {
       "assemble": 0,

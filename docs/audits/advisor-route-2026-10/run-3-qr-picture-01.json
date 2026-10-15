@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -73,7 +73,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:54:13.997Z",
+        "createdAt": "2026-10-15T05:19:20.125Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -190,11 +190,11 @@
         "visible": false
       },
       "linkNote": "",
-      "stageUpdateTicks": 24,
+      "stageUpdateTicks": 28,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 3372.2000000011176,
-        "navigationToFirstFrameMs": 5917.4000000003725,
-        "stageUpdateTicks": 21
+        "chooseToyToFirstFrameMs": 3318.2999999988824,
+        "navigationToFirstFrameMs": 6005.0999999996275,
+        "stageUpdateTicks": 23
       },
       "controls": {
         "turn": 0
@@ -203,10 +203,10 @@
         "turn": 0
       }
     },
-    "navigationThroughSettledCaptureMs": 6299.0999999996275,
+    "navigationThroughSettledCaptureMs": 6635.700000001118,
     "method": "Navigation time origin and chooseToy performance.now through first postrender event of the nonbusy target with Sharp picture visible for photo routes; not a GPU presentation timestamp"
   },
-  "durationMs": 6300,
+  "durationMs": 6638,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -231,7 +231,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:54:14.004Z",
+      "createdAt": "2026-10-15T05:19:20.457Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -348,11 +348,11 @@
       "visible": false
     },
     "linkNote": "",
-    "stageUpdateTicks": 24,
+    "stageUpdateTicks": 29,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 3372.2000000011176,
-      "navigationToFirstFrameMs": 5917.4000000003725,
-      "stageUpdateTicks": 21
+      "chooseToyToFirstFrameMs": 3318.2999999988824,
+      "navigationToFirstFrameMs": 6005.0999999996275,
+      "stageUpdateTicks": 23
     },
     "controls": {
       "turn": 0

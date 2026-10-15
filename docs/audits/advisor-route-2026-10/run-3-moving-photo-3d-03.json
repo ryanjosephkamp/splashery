@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -57,7 +57,7 @@
   "actual": {
     "a": {
       "hidden": false,
-      "pos": 2.319321999999255,
+      "pos": 2.355039000001118,
       "length": 6,
       "playing": false,
       "mic": false,
@@ -65,13 +65,13 @@
       "recorded": 0,
       "recording": 0,
       "frame": 37,
-      "last": 3.7334000000000027,
+      "last": 3.3001,
       "sample": "sample",
       "frames": 96
     },
     "b": {
       "hidden": false,
-      "pos": 2.319321999999255,
+      "pos": 2.355039000001118,
       "length": 6,
       "playing": false,
       "mic": false,
@@ -79,12 +79,12 @@
       "recorded": 0,
       "recording": 0,
       "frame": 37,
-      "last": 4.0667,
+      "last": 3.8001000000000005,
       "sample": "sample",
       "frames": 96
     }
   },
-  "durationMs": 1218,
+  "durationMs": 900,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -106,7 +106,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:51:55.991Z",
+      "createdAt": "2026-10-15T05:17:11.576Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -236,7 +236,7 @@
       "color": [640, 360],
       "depth": [480, 270],
       "video": true,
-      "videoTime": 2.31645,
+      "videoTime": 2.355244,
       "cost": {
         "color": 1228800,
         "depth": 129600,
@@ -248,11 +248,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 88,
+    "stageUpdateTicks": 85,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 6640.4000000003725,
-      "navigationToFirstFrameMs": 9232.699999999255,
-      "stageUpdateTicks": 46
+      "chooseToyToFirstFrameMs": 6492.699999999255,
+      "navigationToFirstFrameMs": 9150.5,
+      "stageUpdateTicks": 43
     },
     "controls": {
       "play": 0

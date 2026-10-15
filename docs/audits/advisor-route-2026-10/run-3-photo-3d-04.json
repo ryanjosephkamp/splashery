@@ -1,6 +1,6 @@
 {
-  "buildCommit": "dfeb81777131094e4a78c8db75f24cfa13f7a044",
-  "recordedAt": "2026-10-15T04:40:12.966Z",
+  "buildCommit": "25ba908cf5a30d398aaacdaeb3949056d37a8124",
+  "recordedAt": "2026-10-15T05:05:22.828Z",
   "browser": "151.0.7922.173",
   "runtime": {
     "node": "v24.19.0",
@@ -71,7 +71,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:50:51.811Z",
+        "createdAt": "2026-10-15T05:16:11.268Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -213,11 +213,11 @@
         },
         "splatsOff": true
       },
-      "stageUpdateTicks": 153,
+      "stageUpdateTicks": 144,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 1822.800000000745,
-        "navigationToFirstFrameMs": 4456.9000000003725,
-        "stageUpdateTicks": 90
+        "chooseToyToFirstFrameMs": 1575.5,
+        "navigationToFirstFrameMs": 4171.5,
+        "stageUpdateTicks": 75
       },
       "controls": {
         "flat": 0,
@@ -244,7 +244,7 @@
       "scene": {
         "app": "splashery",
         "version": 3,
-        "createdAt": "2026-10-15T04:50:52.871Z",
+        "createdAt": "2026-10-15T05:16:12.197Z",
         "seed": 1,
         "toy": {
           "kind": "builtin",
@@ -306,8 +306,8 @@
           "stamps": []
         },
         "camera": {
-          "yaw": -0.6091,
-          "pitch": 0.3292,
+          "yaw": -0.6208,
+          "pitch": 0.3318,
           "roll": 0,
           "distance": 3.4
         },
@@ -335,8 +335,8 @@
         }
       },
       "camera": {
-        "yaw": -0.6091,
-        "pitch": 0.3292,
+        "yaw": -0.6208,
+        "pitch": 0.3318,
         "roll": 0,
         "distance": 3.4
       },
@@ -386,11 +386,11 @@
         },
         "splatsOff": true
       },
-      "stageUpdateTicks": 166,
+      "stageUpdateTicks": 156,
       "firstDraw": {
-        "chooseToyToFirstFrameMs": 1822.800000000745,
-        "navigationToFirstFrameMs": 4456.9000000003725,
-        "stageUpdateTicks": 90
+        "chooseToyToFirstFrameMs": 1575.5,
+        "navigationToFirstFrameMs": 4171.5,
+        "stageUpdateTicks": 75
       },
       "controls": {
         "flat": 0,
@@ -402,7 +402,7 @@
       }
     }
   },
-  "durationMs": 1066,
+  "durationMs": 936,
   "stepLogs": {
     "consoleErrors": [],
     "pageErrors": [],
@@ -425,7 +425,7 @@
     "scene": {
       "app": "splashery",
       "version": 3,
-      "createdAt": "2026-10-15T04:50:52.876Z",
+      "createdAt": "2026-10-15T05:16:12.205Z",
       "seed": 1,
       "toy": {
         "kind": "builtin",
@@ -487,8 +487,8 @@
         "stamps": []
       },
       "camera": {
-        "yaw": -0.6091,
-        "pitch": 0.3292,
+        "yaw": -0.6313,
+        "pitch": 0.3341,
         "roll": 0,
         "distance": 3.4
       },
@@ -516,8 +516,8 @@
       }
     },
     "camera": {
-      "yaw": -0.6091,
-      "pitch": 0.3292,
+      "yaw": -0.6313,
+      "pitch": 0.3341,
       "roll": 0,
       "distance": 3.4
     },
@@ -567,11 +567,11 @@
       },
       "splatsOff": true
     },
-    "stageUpdateTicks": 166,
+    "stageUpdateTicks": 157,
     "firstDraw": {
-      "chooseToyToFirstFrameMs": 1822.800000000745,
-      "navigationToFirstFrameMs": 4456.9000000003725,
-      "stageUpdateTicks": 90
+      "chooseToyToFirstFrameMs": 1575.5,
+      "navigationToFirstFrameMs": 4171.5,
+      "stageUpdateTicks": 75
     },
     "controls": {
       "flat": 0,
