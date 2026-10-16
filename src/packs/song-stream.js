@@ -17,19 +17,30 @@ import { makeFeatures, FIELDS } from "./song-analysis.js";
 import { mp3Frames } from "./song-mp3.js";
 
 export class Track {
-  constructor(url) {
-    const el = new Audio();
+  constructor(url, media = null) {
+    // Moving photo can route its already decoded video through the same
+    // speaker controls and clock, without opening a second media pipeline.
+    const el = media || new Audio();
     el.preload = "auto";
-    el.src = url;
+    if (!media || (el.src !== url && el.getAttribute("src") !== url)) el.src = url;
     this.el = el;
     this.src = null;
     this.ctx = null;
     this.blocked = false;
     this.anchor = null;
-    this.ready = new Promise((resolve, reject) => {
-      el.addEventListener("loadedmetadata", () => resolve(el.duration), { once: true });
-      el.addEventListener("error", () => reject(new Error("This browser cannot read that sound file. Try an MP3, WAV, OGG or M4A.")), { once: true }); // prettier-ignore
-    });
+    this.sound = null;
+    this.soundTimer = null;
+    // Check after a UI gesture's handlers, while audio activation is still
+    // available. The bounded poll also follows programmatic toggles and
+    // paused tracks, without changing the shared Sound instance or its API.
+    this.soundGesture = () => this.syncSound();
+    this.ready =
+      el.readyState >= 1
+        ? Promise.resolve(el.duration)
+        : new Promise((resolve, reject) => {
+            el.addEventListener("loadedmetadata", () => resolve(el.duration), { once: true });
+            el.addEventListener("error", () => reject(new Error("This browser cannot read that sound file. Try an MP3, WAV, OGG or M4A.")), { once: true }); // prettier-ignore
+          });
   }
 
   get duration() {
@@ -43,15 +54,29 @@ export class Track {
   // Through the site's sound (its speaker button and volume), once; with the
   // sound off the element plays muted, so the picture still runs.
   route(sound) {
+    this.sound = sound;
+    if (sound && !this.soundTimer) {
+      this.soundTimer = setInterval(() => this.syncSound(), 50);
+      globalThis.addEventListener?.("click", this.soundGesture);
+      globalThis.addEventListener?.("keydown", this.soundGesture);
+    }
+    this.syncSound();
+  }
+
+  syncSound() {
+    const sound = this.sound;
     if (!this.src && sound?.enabled) {
       const ctx = sound.audio?.();
       if (ctx && sound.master) {
         this.src = ctx.createMediaElementSource(this.el);
-        this.src.connect(sound.master);
+        this.gain = ctx.createGain();
+        this.src.connect(this.gain).connect(sound.master);
         this.ctx = ctx;
       }
     }
-    this.el.muted = !this.src;
+    const audible = !!this.src && !!sound?.enabled;
+    this.el.muted = !audible;
+    if (this.gain) this.gain.gain.value = audible ? 1 : 0;
   }
 
   play(sound) {
@@ -80,6 +105,7 @@ export class Track {
 
   // The audio clock: the second of the song being heard now.
   time() {
+    if (this.sound) this.syncSound();
     const el = this.el;
     let t = el.currentTime || 0;
     if (this.playing) {
@@ -95,9 +121,15 @@ export class Track {
   }
 
   close() {
+    clearInterval(this.soundTimer);
+    this.soundTimer = null;
+    this.sound = null;
+    globalThis.removeEventListener?.("click", this.soundGesture);
+    globalThis.removeEventListener?.("keydown", this.soundGesture);
     this.el.pause();
     try {
       this.src?.disconnect();
+      this.gain?.disconnect();
     } catch {
       // Already disconnected.
     }

@@ -171,10 +171,14 @@ const answers = () =>
 async function serve() {
   // Every Playwright process would start its own server otherwise, all at once on one port.
   if (await answers()) return null;
-  const server = spawn("python3", ["-m", "http.server", String(PORT), "--bind", "127.0.0.1"], {
-    cwd: root,
-    stdio: "ignore",
-  });
+  const server = spawn(
+    process.execPath,
+    [path.join(root, "tools/cdx-mp2-server.mjs"), String(PORT)],
+    {
+      cwd: root,
+      stdio: "ignore",
+    },
+  );
   for (let i = 0; i < 100 && !(await answers()); i++) await new Promise((ok) => setTimeout(ok, 100)); // prettier-ignore
   return server;
 }

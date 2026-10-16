@@ -500,3 +500,20 @@ manifest records each source's own license; trained models and review clips reta
 The linked notices were opened on October 15, 2026, and retained with the test evidence. The
 original surface initializer, benchmark, and resource tests are offered under this repository's MIT
 license. No new third-party browser library was added.
+
+# Moving photo round 4 build and verification tools (not shipped)
+
+- Node.js 22.14.0 ([MIT and bundled notices](https://github.com/nodejs/node/blob/v22.14.0/LICENSE)):
+  the temporary test runtime matches CI's Node 22 major version. The official Linux archive was
+  checked against its published SHA-256. The initial full run used the environment's Node 24.19.0;
+  final isolated whole-file rechecks use Node 22. No Node executable is served.
+- Zig 0.14.1 ([MIT](https://raw.githubusercontent.com/ziglang/zig/0.14.1/LICENSE)) and its bundled
+  Clang compiler ([LLVM license](https://llvm.org/LICENSE.txt)): compile the original
+  `tools/cdx-mp2-geometry.c` to a freestanding WebAssembly module. The module imports no runtime or
+  library. The compiler is not served.
+  [Build documentation](https://ziglang.org/documentation/0.14.1/).
+- FFmpeg / ffprobe 7.1.5-0+deb13u1: the existing build tool listed above encodes the five original
+  test clips and review films. No executable is served.
+- Xvfb 21.1.16 ([X.Org licenses](https://www.x.org/releases/current/doc/xorg-docs/License.html)): a
+  virtual display for real Chromium verification with Mesa's software renderer. The installed X.Org
+  copyright file identifies the canonical X11/MIT form. No X server is served with the site.
