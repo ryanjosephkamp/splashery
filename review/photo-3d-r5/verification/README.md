@@ -6,14 +6,23 @@ decoded and checked against its recorded RGBA hash. Every native color hash and 
 matches the earlier atlas. Those application source fingerprints differ, so this stability
 comparison is not counted as identical-source repeat noise.
 
-The actual repeat studies cover 72 input/profile pairs across 36 inputs, with one repeat each. All
-measured quality differences are zero. The remaining 164 profiles have zero tolerance. The three
-bounded repeat records keep their incomplete-corpus flags; no missing capture is invented.
+The [expanded identical-source repeat record](noise-expanded.json) covers **236 of 236 input/profile
+cases across 118 of 118 inputs**, with one actual repeat per covered case. All observed differences
+are zero in every supported quality metric. Every original input/profile case has one actual repeat.
+The four source capture records retain their original bounded-corpus flags; aggregate coverage is
+complete because all 236 distinct pairs were actually observed.
 
-An [independent check of the initial repeats](initial-repeat-integrity.json) decoded all 648 native
-color poses and rehashed all 3,240 artifacts across those 72 profiles. Every repeated native color
-pixel and quality value matches the baseline. Each of the three original bounded capture records
-retains its incomplete-corpus flag.
+The initial [72-profile integrity record](initial-repeat-integrity.json) verifies 648 decoded color
+poses and 3,240 artifact hashes. The [additional integrity record](additional-repeat-integrity.json)
+verifies 1476 further color poses and 7380 artifact hashes across 164 actual completed profiles.
+Combined verification covers 2124 decoded native color poses and 10620 artifact hashes. Every
+repeated native color pixel matches the baseline.
+
+Coverage refers to the exact additional-atlas snapshot pinned by the integrity record, as of
+2026-10-16T13:13:38.115Z. The [expanded-noise current comparison](current-comparison-expanded.json)
+still reports zero quality regressions and 0% reduction in every selected class; none reaches 25%.
+Repeat noise uses the original baseline's identical source fingerprint. The separate current-source
+preservation study has a different application fingerprint and is not counted as repeat noise.
 
 The gzip files preserve the exact original JSON bytes. Their compressed and decompressed hashes are
 listed in [evidence.json](evidence.json). Relative image paths describe the original capture layout;

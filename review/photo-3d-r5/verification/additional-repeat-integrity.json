@@ -1,0 +1,848 @@
+{
+  "kind": "Independent integrity verification of actual completed profiles in an additional 82-input/164-profile identical-source repeat. A bounded snapshot does not claim complete requested-scope or 118-input coverage. Concurrent capture timing and memory are excluded from cost acceptance.",
+  "createdUTC": "2026-10-16T10:53:50.453Z",
+  "methodSha256": "5ffa6995fff0b86b4367f274222c3a9de66fd780bee21e451f02f3a36afb18ef",
+  "baselineAtlasSha256": "f939791c31e0372b39d698d48aa7054c64cb3c550ae329d856179154ac387f48",
+  "sourceSha256": "4b28210795941d736d0c1dabd0d36afa48d516ae8f278108ecde53a86521b504",
+  "expectedAdditionalInputs": 82,
+  "expectedAdditionalProfiles": 164,
+  "profilesChecked": 164,
+  "colorPosesDecoded": 1476,
+  "artifactHashesChecked": 7380,
+  "actualSourcePhotosChecked": 82,
+  "savedSourcePhotosChecked": 82,
+  "actualInputDepthHashesChecked": 46,
+  "baselinePixelDifferences": [],
+  "baselineQualityDifferences": [],
+  "profiles": [
+    {
+      "id": "dot-dragonfly",
+      "profile": "phone",
+      "signature": "9795b2bf34835d169a166ff95865c59a9a9d2bdddd7fe643332550af3c371c6a"
+    },
+    {
+      "id": "dot-dragonfly",
+      "profile": "desktop",
+      "signature": "57602e33038e8013ae3cdaed849a3282280e9a433e4fe00307254ab6b2fa00a1"
+    },
+    {
+      "id": "dot-mushrooms",
+      "profile": "phone",
+      "signature": "8d85a3aca4dda798ff9b1ebb169441b68478d7aac668472bcbb86dbfc9e6518a"
+    },
+    {
+      "id": "dot-mushrooms",
+      "profile": "desktop",
+      "signature": "c816bf35ad414e22002f3666f570dc5ff13e4cce657a40186c17207b39b8c642"
+    },
+    {
+      "id": "dot-market",
+      "profile": "phone",
+      "signature": "7c2031725efb689954dcfeb6fbb8029b70fcb6fbb173b744d95d6967884eb655"
+    },
+    {
+      "id": "dot-market",
+      "profile": "desktop",
+      "signature": "5328c81d9af00c0419ba17bb34dd4c7f242546ce96e4ca9b4a1d01e775f2f569"
+    },
+    {
+      "id": "dot-gears",
+      "profile": "phone",
+      "signature": "08dfbe440342319b34e83034e668a8b86de7e5721527499881bd53eb0b260ff6"
+    },
+    {
+      "id": "dot-gears",
+      "profile": "desktop",
+      "signature": "42e8f01bd21e4536a78b7078c5340652cf9733a56d2a1c3773671b61b30c219e"
+    },
+    {
+      "id": "dot-chess",
+      "profile": "phone",
+      "signature": "f0a5a59b55af678d3af3c28829db35828aedb1b018878c6faf824c6f9ed76eb1"
+    },
+    {
+      "id": "dot-chess",
+      "profile": "desktop",
+      "signature": "b5966be7e117d6a66e28413e3b0991ce547bf6a0100f7c5b13283f19b45920c3"
+    },
+    {
+      "id": "dot-book-city",
+      "profile": "phone",
+      "signature": "9ed2cf63f059589fd08e177c21618a2665d6db272bd404be7a25f456f751631a"
+    },
+    {
+      "id": "dot-book-city",
+      "profile": "desktop",
+      "signature": "c086919a3d026bfe45467aba46b9e5d6ff3c8a6ce9a88a8772a2d3001840b840"
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "profile": "phone",
+      "signature": "44f5bfe21b14d939941e0decea1795e6ea58e0268cc5ef257d5e03194cbb94cf"
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "profile": "desktop",
+      "signature": "4e70182143415f48a7f5e0fceeb30b5c95ebad3c46378690339f7970ad3a3a72"
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "profile": "phone",
+      "signature": "8986f6a374ee863cb8424fee82c2dd051d9f1add95162cc6aa993f80c9dce8a1"
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "profile": "desktop",
+      "signature": "ac7c7aab05c046e7b20b3f1594a919e29063e5c87dabd770d43e526cd2115b28"
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "profile": "phone",
+      "signature": "209871e78da51d51451e2013d9bfd2ffdbb345a83f79bc5217b8b70777ea56f7"
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "profile": "desktop",
+      "signature": "b0fb2ac7fec8310f00fbbe914292d1b681168caaff68b4f49d796a3daf487b7d"
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "profile": "phone",
+      "signature": "79e931ba1883ca65ffff196f2445467969551b0e56bc743cfed981fb9ec978c0"
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "profile": "desktop",
+      "signature": "2a07e59532163715a9d51cd7c32642c3ea8b5dc7aa3f83edd3223a48d18f778e"
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "profile": "phone",
+      "signature": "818f72d141742faf6a2300e64d56c77d2d4c8feb58cbcde116812e379a2048ee"
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "profile": "desktop",
+      "signature": "14840be23fdc8e9fcc645c69cfb630b8ffa1c19932748a98c8169beafaea937e"
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "profile": "phone",
+      "signature": "caeec678e9aaff022d6fbecfc10f7124a2052361f4e6e40ebb288f150a06cce6"
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "profile": "desktop",
+      "signature": "3cbdc80b9206c56be516a29887314476154d8cb70a3c26d5f6aa084c30de35fa"
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "profile": "phone",
+      "signature": "f7d4082a823e7600bd0728690976066ea909a7ac678fe38b1ad2f948a5b2c9c9"
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "profile": "desktop",
+      "signature": "6aafa1be8a66284daa3b3d81a5dee0f12dfd86ddfc86251a1e1a581079e1dde0"
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "profile": "phone",
+      "signature": "0a31be4f16aa082aa931f37d738a70d4b81cca5dda21df6d34d47490ea12bc74"
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "profile": "desktop",
+      "signature": "cf7b4e41a7652f1f083e9ef02c889d22736804dbe59ccf69bcfac1187755b53d"
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "profile": "phone",
+      "signature": "63f8554a06782c08c73eb9019af769b56fd6224a0dae5b877b488122bda32085"
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "profile": "desktop",
+      "signature": "3a364492c85de75307abd07dc0ac27ec941ed434aff0c51a9eb13b86e9c093ea"
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "profile": "phone",
+      "signature": "ddb57c8aec0e64d678a9ad6f143b0e9746a02d4e1c5e88b496cf7041ea4082c4"
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "profile": "desktop",
+      "signature": "d09f2b9a7816c55cdf3b55eea1daa47e902b0f22266bcc159f3deb5959e9b861"
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "profile": "phone",
+      "signature": "848f1d069dbd51db808a36ed0ce77092c614557c5e0ef2adbb42d9fb0592f840"
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "profile": "desktop",
+      "signature": "e36464cc3efe5d509954f30f353181e156fca116b5f61485d746071692db47fd"
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "profile": "phone",
+      "signature": "df03ea4ba9f7d0c5ae5d3ab3e80c7fd21cede228eb5cfb52a1f1bda2943b0a13"
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "profile": "desktop",
+      "signature": "8907ce7a2c086aa3167c89a1511b67cac63a25139ae1c2d2f0ff6615c55db5a0"
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "profile": "phone",
+      "signature": "b87949df07113ba59c6658e38cb5082671ce1764f3b847843fcc907d444248c2"
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "profile": "desktop",
+      "signature": "cd87142a48e0b9e2f56f68b8fd8338f537cbd51d25f64daaa5997d3dbdd34f12"
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "profile": "phone",
+      "signature": "5b866d7d367c1915cb0e3e0738ebab702f346dc23dcf8c5acd0d56940500b468"
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "profile": "desktop",
+      "signature": "bf80f9aa7a7539e25ac9acaa04def7d6b72338e4e6e8d4f9608d42cbc0f01fdb"
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "profile": "phone",
+      "signature": "d8a2f7427820944b58d3be844e84068906e22795bee64b58ffc61a2bb289607b"
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "profile": "desktop",
+      "signature": "101816bf4cb344252e0963d51615c143a99df9f83d81df65849b5ca772b198c9"
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "profile": "phone",
+      "signature": "f41caea2c2d009174263fc366bc704cd93124a5e92afe6feb8e8482d982942c9"
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "profile": "desktop",
+      "signature": "1c776e2cba3156861b4faa46989d48006b1df37faffc226323df81b200f245eb"
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "profile": "phone",
+      "signature": "e616109e69bb273df0bca74fda06bb62d7117318511b8f8fcf36d6ae0178c407"
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "profile": "desktop",
+      "signature": "a7c9838285dfccf66b36be2bfe75432ea6e1e85ec0520c7ae9a296567eeb6672"
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "profile": "phone",
+      "signature": "1a009c9b294042eecbffb655605ce7267d581659aac2537188b23e09da96788b"
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "profile": "desktop",
+      "signature": "a00a311ff9899464a11daebcbe79cb86b9d0e5fdb300ccf01db96948fde65be1"
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "profile": "phone",
+      "signature": "2f36e372b2b363eadf033c1949006add635e2fe746076359a6df2177858b1489"
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "profile": "desktop",
+      "signature": "b2b64c8f7c27a04cc6ede8e73fa380e807c2b2d55c1353054fc2dd0ea2f13b3c"
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "profile": "phone",
+      "signature": "de0668706a22dd819f1b5b5befb848421c99956b4fbe4f1526e44528c2fa63b3"
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "profile": "desktop",
+      "signature": "8b54d3848458f7698614c8d3aa2fccf66887ed297054a17b056200b133c4e799"
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "profile": "phone",
+      "signature": "45d3e97de63e7791fac55dadad286ca480a322baad35125e314f0384b75cece5"
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "profile": "desktop",
+      "signature": "369c4333af1b948f139e831cfe36db2c7ac48d107ab41ae9929dcf4199f38cba"
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "profile": "phone",
+      "signature": "c55a750fb9057f982e768ac4c29af473adfe6924f7d55139c6e34258d9bc603a"
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "profile": "desktop",
+      "signature": "290f2ea1b895ddbab89d27785395829284656a19f0aa798917abc2a62e97af94"
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "profile": "phone",
+      "signature": "5116749462ef589c2d802a62634effe5527f615d2054d3b0b74b2dd9275f0ef7"
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "profile": "desktop",
+      "signature": "709ec7231affd3acef14cd7e224e285335540a4b14265ba5389c53d73e910b2c"
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "profile": "phone",
+      "signature": "116ead77a33bb6e8184b9953096803695f243cf7db4dfe4f89218364b6b7819f"
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "profile": "desktop",
+      "signature": "e2709f26d533337d2db7595a1fdd594bc4cb99be70dfb3b3396fad2597f7b0ca"
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "profile": "phone",
+      "signature": "f883327fc3a532e14505915b2d113344af37d8ef815086c005496e274c243075"
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "profile": "desktop",
+      "signature": "22e3d3219d04ffa4bf40dc08650fc77bd154825e0e703a9be7a851ba439368d8"
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "profile": "phone",
+      "signature": "5ac6647804cbbaa3c3393fdc04352582e011d957cd1c0a5eeb48697615576682"
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "profile": "desktop",
+      "signature": "191a06df978dce5de7e7806ea666f61c661e10926f8c028ecf00603572fe9a72"
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "profile": "phone",
+      "signature": "4df1997cabb84e9b803b87e92e014c30cb2acc143d2a591bdc9370392cce7815"
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "profile": "desktop",
+      "signature": "409a1da094792f3b4862bcb1c26b7c4f7d725d591810c0bd498a99e519f87d80"
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "profile": "phone",
+      "signature": "6da371975b8126b3a545c08be4dfce386b8aeda709bb18321e40e2b2169e1fd6"
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "profile": "desktop",
+      "signature": "dde6332a6e25dd7ad12e96e4b652f45fade2e90e38b33a73d834973aeb7e6d6e"
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "profile": "phone",
+      "signature": "759d32dd47c40c26d2c4c72dff347c0e5afc81b7bea1207bf1cce1387940e98f"
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "profile": "desktop",
+      "signature": "2558ac03cc1aa5b895fb7a5a9f09ac1334d5dd39cb7723b7f9376d4cc91c607a"
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "profile": "phone",
+      "signature": "71a3fb90b24e0033f8877e49e38a4be448e33ef63b3521c794ce3a7e7331a2b5"
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "profile": "desktop",
+      "signature": "f6355b5dd49bdd4e3a0a6647931f313ef618b5132b15590ad03cca8da5d32664"
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "profile": "phone",
+      "signature": "b086851284929e8f81279151343aae69d82db5393aed1004408dfc4839d88286"
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "profile": "desktop",
+      "signature": "e3391a7828fd2e2f9c80ca75a30596bbc1b1aed4a38cbadf4d9f175a8aaff315"
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "profile": "phone",
+      "signature": "8d2ab5ab2129390fe5a590189dbd5b9bfce1bb958086909dca62a3ce66343402"
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "profile": "desktop",
+      "signature": "3c6191ee80b1f078861d904e0ce90936cdd5f9aa478e8612d045b5816cdb80f0"
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "profile": "phone",
+      "signature": "3caaffb246ba2120d463f158d2ce280818645a6759d98eeb3d4e3091a0ee84c6"
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "profile": "desktop",
+      "signature": "57cf6846729401aba8ede33584afec5c0ab924d4d6e844dd458e8b5b7252690a"
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "profile": "phone",
+      "signature": "3ceb7c10ac9273709143818d4ac24cf421e3c3c0ec2f72ff04759e20c72644c3"
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "profile": "desktop",
+      "signature": "ea52e293670b04fb5321a44f4ab76ce1222eb3990993e3cdfaac6fdd6c40f516"
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "profile": "phone",
+      "signature": "0e6a8c95f047971adefaa16d2184ba48765fb63699488708ae02f5ee0c77bf34"
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "profile": "desktop",
+      "signature": "c96ff7800864ae812f8f4d031ab25b9dc112ab278d82ea27299b7335536a80bb"
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "profile": "phone",
+      "signature": "857c7e858373feab666bfdef52149eab77d06cd0dc16313820862f659aadd739"
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "profile": "desktop",
+      "signature": "47c7064a57bb1f21c9b0396cddd3238b84bcc67ac151025e8287876284f9ba62"
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "profile": "phone",
+      "signature": "ac1d75542e6d3e09a6fdaf810665a7347223d381781a853e42fd5c0601ecf51c"
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "profile": "desktop",
+      "signature": "94dd30944003e98b557dcbd2ab45a0c2f1d208a4ef7e91c701dbf3cb893c47b3"
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "profile": "phone",
+      "signature": "efd9a9fbab96e38b8d5b64901a7ca2bd06c0a14c8abf65a0386415e726e63368"
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "profile": "desktop",
+      "signature": "a7536342e74931d1da0881eb527e880e09cb3839477ab89da65651a4fa3ece56"
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "profile": "phone",
+      "signature": "f39a134c781d38a3af4bb776eea209128ace70336f0b1967e64f5f4221c31918"
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "profile": "desktop",
+      "signature": "88817423e12bfeb629b9e4a0910245ea4bba91cea0830df375ee724e11a2b18a"
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "profile": "phone",
+      "signature": "d99cedb8adb549537855ccc329f3af67b5e5c0390a3d643d36a105e9f76ed6ce"
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "profile": "desktop",
+      "signature": "c906e1450d8493eb11eb751b3f8fe98e63cb13e3161088f79e6ca5dabe77200d"
+    },
+    {
+      "id": "truth-room",
+      "profile": "phone",
+      "signature": "f528e437ac453834968021e5cb3c3737f4bbe776ef64a63f4d2847a4cd474533"
+    },
+    {
+      "id": "truth-room",
+      "profile": "desktop",
+      "signature": "3fce8ea9617fd6e7de8560e7d21f4b0d24611f7e37dae5131a09aac9606da94e"
+    },
+    {
+      "id": "truth-forest",
+      "profile": "phone",
+      "signature": "3deb5f47b7c5d7558c0d1d08e7ed0ac38516aeb6b6d493132dd977281e1e9252"
+    },
+    {
+      "id": "truth-forest",
+      "profile": "desktop",
+      "signature": "0ace2e39b09e61809569c8d7bb4ba5ba9a2161611886b0292026b3ab7ffa7acf"
+    },
+    {
+      "id": "truth-stairs",
+      "profile": "phone",
+      "signature": "6ee8206e0f8b3dd504afd1976795f5a88ab54fa9dd0533b0656886634ea7cc86"
+    },
+    {
+      "id": "truth-stairs",
+      "profile": "desktop",
+      "signature": "751ff5643a05d2a7eee6338ae2dfecbb7372155f891e7d9c0fd69ea258140ec2"
+    },
+    {
+      "id": "truth-coast",
+      "profile": "phone",
+      "signature": "0840aebd8e6b7a939add7c51a2997e413fd6604df257b9df9b7cc139fc3f966f"
+    },
+    {
+      "id": "truth-coast",
+      "profile": "desktop",
+      "signature": "170c35f955b532f69168ee1e32148781c7cfbab6eabe27e2c5e6e2d7c5fc0c47"
+    },
+    {
+      "id": "truth-desk",
+      "profile": "phone",
+      "signature": "c8d07650f0f5e9b500ed74065dc302a63148feb7db7db06dca0119b6d8cb40c8"
+    },
+    {
+      "id": "truth-desk",
+      "profile": "desktop",
+      "signature": "4fd9f4962eabec8857dff95fc188eaea44a7ecf13aaf7caa5d4aeb983df10396"
+    },
+    {
+      "id": "truth-fur",
+      "profile": "phone",
+      "signature": "e29252edb4aa9502c6a109e2ad4e432786757ee1a24532eb98746a966276d1cf"
+    },
+    {
+      "id": "truth-fur",
+      "profile": "desktop",
+      "signature": "504e1274bf9d5144d683723d003e796cc59152da45afd271709ed4dadd1b7722"
+    },
+    {
+      "id": "truth-arches",
+      "profile": "phone",
+      "signature": "32b5a1b07a6125355be54f218534996f3e6485b0db12fa0e17f3b59b5dec5e32"
+    },
+    {
+      "id": "truth-arches",
+      "profile": "desktop",
+      "signature": "4e9a362d4b965dc9f0be6360294994f60544b610f988fe135b58b6a9cd076b2b"
+    },
+    {
+      "id": "truth-leaves",
+      "profile": "phone",
+      "signature": "ee4bbb7ecfa9f8a590bc14a8e22b2011bd6845027e3f02a33f7992f52d1f9c4f"
+    },
+    {
+      "id": "truth-leaves",
+      "profile": "desktop",
+      "signature": "c9d6fa3053f48dba3637644d1eb51b8dce14af4f577a3aa3100af4f56ab63bb2"
+    },
+    {
+      "id": "truth-steps",
+      "profile": "phone",
+      "signature": "a6d63e773760652a033830c3d7da24e6b2d96a8e0794f341e8a5d6a210989eeb"
+    },
+    {
+      "id": "truth-steps",
+      "profile": "desktop",
+      "signature": "8e9221b067548013781c8156d9354d44e6dcaa2db3ab4a932c77c1ec48704983"
+    },
+    {
+      "id": "new-00-147167228",
+      "profile": "phone",
+      "signature": "82626e4e9777334b1ac43ccd7c71ef23563cb7bb6d080e9add767590c35cf793"
+    },
+    {
+      "id": "new-00-147167228",
+      "profile": "desktop",
+      "signature": "2686c5457cf8cdb4d43dd4b35ee5d83c604dead8edc8552e8c10ef83932db9fd"
+    },
+    {
+      "id": "new-01-131641833",
+      "profile": "phone",
+      "signature": "bc3d83db74b31af7a7905aa998c93d263dcbf9d3987da4c43999ebe765fe4dcb"
+    },
+    {
+      "id": "new-01-131641833",
+      "profile": "desktop",
+      "signature": "103ea28ed0baeb24cdcd7f27df32382322e183dd746a1b965b4abab884c6c002"
+    },
+    {
+      "id": "new-02-104101424",
+      "profile": "phone",
+      "signature": "7fd2fb9fb2d6659ca2af1b87781bc79a1e21df381d91b2c912b5a29929c0e874"
+    },
+    {
+      "id": "new-02-104101424",
+      "profile": "desktop",
+      "signature": "393bc2ef7120ca14be4b79eb344174e0aeecd612ed0e06e574da95d8f0058d71"
+    },
+    {
+      "id": "new-02-88494704",
+      "profile": "phone",
+      "signature": "c43a11f6e0f1b529d9b17dca6cd7b7904481552b13c9540b20f1b4aa55fc3deb"
+    },
+    {
+      "id": "new-02-88494704",
+      "profile": "desktop",
+      "signature": "7c6ca4946ce0d5b2b91c14ed1d7a138fb631c66739009b6602bb7790812d3213"
+    },
+    {
+      "id": "new-03-25399041",
+      "profile": "phone",
+      "signature": "d5b10d83e9c2f8eb5e43e41382f9c607154e91c3314b6c9501c01dd6a6ea7a5b"
+    },
+    {
+      "id": "new-03-25399041",
+      "profile": "desktop",
+      "signature": "96e4e0df01433df532ee430988cf5a67400ede32c2a6332f565f53bc7652fee1"
+    },
+    {
+      "id": "new-03-35525184",
+      "profile": "phone",
+      "signature": "bb1f51bb316c4226ee46dd00e40da965dee58d16861f46aa24c60c524b96eeae"
+    },
+    {
+      "id": "new-03-35525184",
+      "profile": "desktop",
+      "signature": "043d6db1809a1b8142e85b378dbe8a45b131261526d6ba075b556aad81beb71e"
+    },
+    {
+      "id": "new-19-159668739",
+      "profile": "phone",
+      "signature": "5d507e216686d0211160bc2f1e515e069a73a1dd2e6c2a8e874a5b8ea5c2f6e8"
+    },
+    {
+      "id": "new-19-159668739",
+      "profile": "desktop",
+      "signature": "52013e2971acb94c5eae8b9aa6027aadcc1b55df2c2e3ee15755b2ecbe76e870"
+    },
+    {
+      "id": "new-20-160820542",
+      "profile": "phone",
+      "signature": "d4198d8f2548ebcd4d0ea11164e8bbeba12d75c95d345a932052a23db8a5c758"
+    },
+    {
+      "id": "new-20-160820542",
+      "profile": "desktop",
+      "signature": "b5f037cb7a52c653779ff60870ccdb5374e46557bac3e9ca9b3510bdc51c8f0b"
+    },
+    {
+      "id": "new-07-198117086",
+      "profile": "phone",
+      "signature": "4e598236f8ad7c55864e29b90d3fd0ae116681253386dce1d1e440889d4f72cd"
+    },
+    {
+      "id": "new-07-198117086",
+      "profile": "desktop",
+      "signature": "070ffece8c1bd246d3f6ffe20a54415394453d1320ffd6460c676678a6eb085f"
+    },
+    {
+      "id": "new-07-131897774",
+      "profile": "phone",
+      "signature": "c383c287399a44fab5c9bc45dccdf5708ea989db18aef029dad79cf89787a0b9"
+    },
+    {
+      "id": "new-07-131897774",
+      "profile": "desktop",
+      "signature": "422526e44b0e84f817dd55fb70e112ad09e5818dc86b3ac616785c2a7c16e92d"
+    },
+    {
+      "id": "new-07-27184681",
+      "profile": "phone",
+      "signature": "01fda73e140b0a0c1d821921779f4593f1f67f070723d288234de8324f514c5c"
+    },
+    {
+      "id": "new-07-27184681",
+      "profile": "desktop",
+      "signature": "3166cf6efcaadd66f53e0d4ff3fe421b3c25c6c1ceceeab3bc15aa96469765e0"
+    },
+    {
+      "id": "new-08-151156803",
+      "profile": "phone",
+      "signature": "e2778bd4b83ed1bf7f08ef7002d12c93b93e1de6c36edb81b1ca8d0bec53ff99"
+    },
+    {
+      "id": "new-08-151156803",
+      "profile": "desktop",
+      "signature": "0b68af771a74d95a201e2331b4ff203ad48f5e461189265ad446fbbd9de6c7a2"
+    },
+    {
+      "id": "new-19-62150806",
+      "profile": "phone",
+      "signature": "3a49660c2f36d54afe0ee1d93d660cacbbb89558b6388a25ccb22059b9eb076e"
+    },
+    {
+      "id": "new-19-62150806",
+      "profile": "desktop",
+      "signature": "550519f46e0a8c4b6014d91b7219ac547fd7c24c29f1ae2ab59cc6c3b406cc0f"
+    },
+    {
+      "id": "new-09-66685155",
+      "profile": "phone",
+      "signature": "373fccd6581c3d94555df68ce3da959f6d4898aafd2bc244220050804ee14cc2"
+    },
+    {
+      "id": "new-09-66685155",
+      "profile": "desktop",
+      "signature": "13841fc9f06b83228f247990db7e71e9a749bba2e90c4c5731dfc0d94c56f5c6"
+    },
+    {
+      "id": "new-11-159259312",
+      "profile": "phone",
+      "signature": "dcecf430255bb0d26599783f98ca8100badfabf3128d5bea49e9360e57f52422"
+    },
+    {
+      "id": "new-11-159259312",
+      "profile": "desktop",
+      "signature": "b6309ae69caef638b7ef8a7a30eb1ef05f72dd90818083a20476d2a366663125"
+    },
+    {
+      "id": "new-11-71852781",
+      "profile": "phone",
+      "signature": "2c9d78788be49ad80e497e3d55a0dfbcaf8004e8d5b2dfc591e3104c3cd3ada9"
+    },
+    {
+      "id": "new-11-71852781",
+      "profile": "desktop",
+      "signature": "972371e2835397432f31f4d28465b64f4baeb4bcc93be0971267c1dd939e3c08"
+    },
+    {
+      "id": "new-11-89189482",
+      "profile": "phone",
+      "signature": "cb72dd4385dfffb81bf3b73061d98c112d780a73d6cfb0f56451d92ef07a3000"
+    },
+    {
+      "id": "new-11-89189482",
+      "profile": "desktop",
+      "signature": "a0e2dc63a2e7751cee8bc1e8ec7a0ad8fcfd596d155aadfa8acfea63560fcbbe"
+    },
+    {
+      "id": "new-12-201484048",
+      "profile": "phone",
+      "signature": "b996e68403c3917db83b08124b6f1ba681a2f471cd27fcccb7c2e5a23716db26"
+    },
+    {
+      "id": "new-12-201484048",
+      "profile": "desktop",
+      "signature": "4e8cabc95b1daa3df7472de5d11d7d42ac9be8f05f45df1f697ed3287cc3ee22"
+    },
+    {
+      "id": "new-12-201342968",
+      "profile": "phone",
+      "signature": "a9780b72f0126e4bea2b509dfa5a3c7f866617a6013c82b0c921801679dc47af"
+    },
+    {
+      "id": "new-12-201342968",
+      "profile": "desktop",
+      "signature": "3ba1b6a41a4d0b61cf14e49aecd70e45a8f2f8148a59812a0a1eb12a8946b5f3"
+    },
+    {
+      "id": "new-12-201385356",
+      "profile": "phone",
+      "signature": "ae1138fabeb48ae8509afa0359aa5fe6be8499e62ad8dc714dd9d52e64a4c1ca"
+    },
+    {
+      "id": "new-12-201385356",
+      "profile": "desktop",
+      "signature": "33392858e44dfdb6c355d1cce9c4ab7e42cc7a4ff3425acefd914f3017e32d4a"
+    },
+    {
+      "id": "new-13-61309178",
+      "profile": "phone",
+      "signature": "d216aef811397d90d3727a469ea23619da0d1676ed86940560f4be5edfa593e1"
+    },
+    {
+      "id": "new-13-61309178",
+      "profile": "desktop",
+      "signature": "b5f8a066f4ad41f23f9ca9370f2525186a2524449226ec66bfd7de4022630f10"
+    },
+    {
+      "id": "new-13-105399732",
+      "profile": "phone",
+      "signature": "0970d87eafcc3aa1605185c235d2ef67fa1da1a995a91e6b207bb855b5df144e"
+    },
+    {
+      "id": "new-13-105399732",
+      "profile": "desktop",
+      "signature": "98437648fa1db6735a6b7230eaebdbcbe6e6bf8742c7df4a2d843cbce8487198"
+    },
+    {
+      "id": "new-14-76271548",
+      "profile": "phone",
+      "signature": "4c6e94b5c224b0733e1a9c2c8df5859aed8d6b652e3c8db517523b2337c4e090"
+    },
+    {
+      "id": "new-14-76271548",
+      "profile": "desktop",
+      "signature": "60aefe2d77afc71d9b5b98f139b55ad0b5f67aac7f4b53c8c2dfe6d7428f8a4f"
+    },
+    {
+      "id": "new-14-16503745",
+      "profile": "phone",
+      "signature": "272b688ff7f8b47e4a64096af2393f08038797560f643c54481f2856ac69c269"
+    },
+    {
+      "id": "new-14-16503745",
+      "profile": "desktop",
+      "signature": "bc75197c3cac7755b17331fb680cbb5315a057175a037dc5e58de87bf39257ec"
+    },
+    {
+      "id": "new-15-152970382",
+      "profile": "phone",
+      "signature": "dd63e5a3859eed50d70470390a0d661d71b504a89154370d80c4d5b64d22bf4d"
+    },
+    {
+      "id": "new-15-152970382",
+      "profile": "desktop",
+      "signature": "94caed7cef420505501ff9eb53c4bf31dc13546a8af838bc8529b253a8fb50fa"
+    },
+    {
+      "id": "new-17-199401836",
+      "profile": "phone",
+      "signature": "122f7ebd8d3b04fdbea6ff5fa366a7d747e32c01f3831036adaddea06782e2fc"
+    },
+    {
+      "id": "new-17-199401836",
+      "profile": "desktop",
+      "signature": "916be146c9239e07819437e066ce3d9fae5dba03d3f534784ac242e244d79c29"
+    },
+    {
+      "id": "new-17-27586242",
+      "profile": "phone",
+      "signature": "0fb03e5c3988296fc02fb59b3dcdf5e7db32df0fc7a2678878d6bb39decdf899"
+    },
+    {
+      "id": "new-17-27586242",
+      "profile": "desktop",
+      "signature": "b9291d784483a4f69ad91e00f5d0631851c9d7eceae3ff2805154d6c64ebcce6"
+    }
+  ],
+  "complete": true,
+  "scopeComplete": true,
+  "completeCorpus": false,
+  "repeatAtlasSha256": "02ee089d2d46a800d3ae5b96c7931145a526c1ded418c927f646f746dfbc8975",
+  "captureFinishedUTC": "2026-10-16T13:13:31.244Z",
+  "failedAttempts": [],
+  "updatedUTC": "2026-10-16T13:13:38.115Z",
+  "sourceFingerprintFilesChecked": 378,
+  "finishedUTC": "2026-10-16T13:13:38.231Z"
+}

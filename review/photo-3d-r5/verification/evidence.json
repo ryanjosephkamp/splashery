@@ -60,6 +60,17 @@
       "completeCorpus": false,
       "inputProfileCount": 26,
       "scope": "Separate 13 legacy checkpoint review inputs at both profiles; not merged into the frozen target corpus."
+    },
+    {
+      "name": "additional-identical-source-repeat",
+      "file": "additional-repeat-atlas.json.gz",
+      "sha256": "289039ff42988d5d47014e04d99fda8518133279b7eb3bedddf41b2e8df9934a",
+      "uncompressedSha256": "02ee089d2d46a800d3ae5b96c7931145a526c1ded418c927f646f746dfbc8975",
+      "bytes": 1316679,
+      "completeCorpus": false,
+      "scopeComplete": true,
+      "inputProfileCount": 164,
+      "scope": "Additional original-baseline identical-source observations from 82 requested inputs, outside the initial 36 repeated inputs. Actual successful profiles only; original bounded-corpus flag retained."
     }
   ],
   "methods": [
@@ -94,9 +105,17 @@
     {
       "file": "verify-initial-repeats.mjs.txt",
       "sha256": "3bfceafc60bf09ea0cbca9d040b0d152b7693fe9b3372632712758baaded1fe3"
+    },
+    {
+      "file": "verify-repeat-remaining.mjs.txt",
+      "sha256": "5ffa6995fff0b86b4367f274222c3a9de66fd780bee21e451f02f3a36afb18ef"
+    },
+    {
+      "file": "finalize-expanded-review.mjs.txt",
+      "sha256": "bc4b6d7989239210484aaf78e30b9d98e3c8e914c9b9055b3f3fd90f103f2cfa"
     }
   ],
-  "repeatPolicy": "72 actual paired profiles across 36 inputs; one repeat each. All measured quality differences are zero. The remaining 164 profiles have zero acceptance tolerance. This is not complete-corpus repeat-noise coverage.",
+  "repeatPolicy": "All 236 original input/profile cases have one actual identical-source repeat across four bounded capture records. Every per-input tolerance comes from its own observations; raw incomplete-corpus flags remain unchanged.",
   "history": "The baseline preserves one browser attempt interrupted during an operator-requested shutdown, followed by a successful retry. All 236 saved final profiles have clean Sharp captures.",
   "checkpointRecording": {
     "file": "checkpoint-recording-original.json.gz",
@@ -122,7 +141,7 @@
     "profiles": 26,
     "poses": 234
   },
-  "updatedUTC": "2026-10-16T10:34:15.060Z",
+  "updatedUTC": "2026-10-16T13:13:41.976Z",
   "currentComparison": {
     "file": "current-comparison-original.json.gz",
     "sha256": "e2856d72da4da22db2916c074f07b06a2b3d5ba66fa98a825f7baab1004afb04",
@@ -140,5 +159,65 @@
     "artifactHashesChecked": 3240,
     "nativeColorDifferences": 0,
     "qualityDifferences": 0
+  },
+  "expandedRepeat": {
+    "completeCorpus": true,
+    "coveredProfiles": 236,
+    "requiredProfiles": 236,
+    "coveredInputs": 118,
+    "requiredInputs": 118,
+    "oneActualRepeatPerCoveredProfile": true,
+    "unmeasuredProfiles": 0,
+    "additionalScopeComplete": true,
+    "additionalProfiles": 164,
+    "decodedColorPoses": 2124,
+    "artifactHashesChecked": 10620,
+    "nativePoseDifferences": 0,
+    "maximumByMetric": {
+      "streaks": 0,
+      "textureLoss": 0,
+      "holes": 0,
+      "halos": 0,
+      "fringes": 0,
+      "missing": 0,
+      "depth": 0,
+      "paletteExcess": 0,
+      "edgeDisplacement": 0,
+      "transitionWidth": 0,
+      "lostTransitions": 0,
+      "fringeMaximum": 0,
+      "thinWidthError": 0,
+      "badProjectionFits": 0,
+      "lostProjectedThinSupport": 0,
+      "flatDepth": 0,
+      "depthAbsRel": 0,
+      "referenceFlatDepth": 0,
+      "referenceHoleFraction": 0,
+      "referenceRmse": 0,
+      "referenceP95": 0
+    },
+    "additionalFailedAttempts": 0,
+    "snapshotUTC": "2026-10-16T13:13:38.115Z",
+    "integrity": {
+      "file": "additional-repeat-integrity-original.json.gz",
+      "sha256": "60039f7a73a5b671d37f6839a55874a8d7da230bbc65271f6033adc144e37d8d",
+      "uncompressedSha256": "da0ceb419453bc5fefd702616908a3fa58431cf49c2b5f79d35495a9e2ea2392",
+      "bytes": 8250,
+      "formattedCopy": "additional-repeat-integrity.json"
+    },
+    "noise": {
+      "file": "noise-expanded-original.json.gz",
+      "sha256": "9358bb40458db4712a090bd8a761e9e8ba3c3fcb75d0befe0fe77ea1980ee1ec",
+      "uncompressedSha256": "195ab3749839bb43551d44cd8fa032a2b157d13fb605fc968c0453a7de22bff2",
+      "bytes": 16133,
+      "formattedCopy": "noise-expanded.json"
+    },
+    "currentComparison": {
+      "file": "current-comparison-expanded-original.json.gz",
+      "sha256": "29478c18daea26ce06b167b983349be12f2170a1fc30a2f950d1ad00778a0753",
+      "uncompressedSha256": "90e5f72ef03e11b41457bb4f10683e8d4e4d5551d5f89123eaecd98fc25b9193",
+      "bytes": 46932,
+      "formattedCopy": "current-comparison-expanded.json"
+    }
   }
 }
