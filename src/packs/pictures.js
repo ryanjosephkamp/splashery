@@ -1875,6 +1875,7 @@ const BOOK_RECIPE = {
   focus: bookFocus,
   drag: bk5Drag(bookDrag(BOOK_PULL)),
   pictures: {
+    solid: true,
     // The current edition of the Tinkerer's Manual (lane Manual).
     sample: () => `manual/${MANUAL_PDF}`,
     accept: ["pdf"],
@@ -1883,7 +1884,7 @@ const BOOK_RECIPE = {
   input: {
     title: "Your own book",
     media: { accept: ["pdf"] },
-    note: "Open a PDF of any length, or paste a web address to one, and page through it with a tap or the buttons. Your file stays on this device; nothing is uploaded.",
+    note: "Open a PDF of any length, or paste a web address to one, and page through it with a tap or the buttons. Hybrid pages combine sharp picture faces with splat paper. Your file stays on this device; nothing is uploaded.",
   },
   drive(t, c, out, info) {
     const st = BOOK.style;
@@ -2575,7 +2576,11 @@ const ALBUM_BOXES = (W, H) => ({
 const STORY_RECIPE = {
   ...BOOK_RECIPE,
   tiltLock: false, // (the Storybook's own default: it opens with the tilt free, UI r5)
-  pictures: { ...BOOK_RECIPE.pictures, sample: () => "assets/toys/storybook/storybook.pdf" },
+  pictures: {
+    ...BOOK_RECIPE.pictures,
+    solid: false,
+    sample: () => "assets/toys/storybook/storybook.pdf",
+  },
   input: undefined,
   polish: false, // lane Polish: none of its book changes (POL), and Pop out's pictures alone, as before
 };
@@ -2612,6 +2617,7 @@ const ALBUM_RECIPE = {
   // readily.
   drag: bk5Drag(bookDrag(ALBUM_PULL)),
   pictures: {
+    solid: true,
     sample: () => ALBUM_SAMPLE.map((n) => `assets/toys/photo-album/${n}.jpg`),
     accept: ["image"],
     decorate: albumDecorate,
@@ -2634,7 +2640,7 @@ const ALBUM_RECIPE = {
   input: {
     title: "Your own photos",
     media: { accept: ["image"], multiple: true, button: "Open photos…" },
-    note: "Pick several photos at once (a folder's worth) and turn through them in the album. Your photos stay on this device; nothing is uploaded.",
+    note: "Pick several photos at once (a folder's worth) and turn through them in the album. Hybrid pages combine sharp picture faces with splat paper. Your photos stay on this device; nothing is uploaded.",
   },
   drive: (t, c, out, info) => BOOK_RECIPE.drive(t, c, out, info),
   build(k, o) {
@@ -3134,6 +3140,7 @@ export const RECIPES = {
     // What the toy opens before you open something of your own, and what
     // it accepts.
     pictures: {
+      solid: true,
       sample: (o) =>
         o.sample === "photo" ? "assets/toys/picture-lab/photo.jpg" : "assets/toys/picture-lab/article.pdf", // prettier-ignore
       accept: ["pdf", "image", "gif", "video"],
@@ -3152,7 +3159,7 @@ export const RECIPES = {
     input: {
       title: "Your own picture",
       media: { accept: ["pdf", "image", "gif", "video"] },
-      note: "Open a PDF, a photo, a GIF or a video, or paste a web address. Files stay on this device; nothing is uploaded.",
+      note: "Open a PDF, a photo, a GIF, or a video, or paste a web address. Hybrid pages combine sharp picture faces with splat paper. Files stay on this device; nothing is uploaded.",
     },
     drive(t, c, out, info) {
       const pics = info.data?.pictures;
