@@ -60,7 +60,9 @@ with a hand-back rule. These ground rules are the full set for Claude sessions; 
 - Fonts (the owner's "fonts OK" of October 15, 2026): the Pitch page (`site/about/splashery/`) may
   use a web font under the SIL Open Font License or another open license: subset woff2 files
   vendored beside the page, loaded only by it with a system-font fallback, and listed in
-  `LICENSES.md` and `CREDITS.md`. The rest of the site keeps system fonts.
+  `LICENSES.md` and `CREDITS.md`. The "Your name in splats" toy may use Fredoka (SIL OFL) on the
+  same terms, loaded only when that toy opens (the owner's OK of October 16, 2026). The rest of the
+  site keeps system fonts.
 - Live input (approved September 30, 2026): a toy asks for the microphone, the camera or screen
   capture only when the person taps to start it. Nothing is requested or loaded before that, and
   nothing is recorded, stored or sent anywhere. One exception (the owner's request of October 4,
