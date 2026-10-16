@@ -162,7 +162,9 @@ new or changed effect against them before calling it done.
   - Run `node tools/check-packs.mjs <pack>`.
   - Review a contact sheet made with `tools/contact-sheet.mjs`.
   - Re-render thumbnails with `tools/make-thumbs.mjs`.
-  - The tools expect `python3 -m http.server 4173 --bind 127.0.0.1` to be running.
+  - The tools expect a static server on 4173: `node tools/cdx-mp2-server.mjs 4173`, the one
+    Playwright starts. It serves byte ranges, which the Moving photo specs need and
+    `python3 -m http.server` lacks.
 - Take screenshots at 390×844 and 1440×900 and save them in `tests/screenshots/`. A lane names its
   own `<prefix>-<name>-390x844.png` and `…-1440x900.png`, and after the full test run puts the
   standard screenshots back with `node tools/upkeep.mjs --restore-shots` (the Operator refreshes

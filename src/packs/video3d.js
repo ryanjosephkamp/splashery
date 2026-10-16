@@ -227,7 +227,7 @@ async function trainVideo(o, key) {
     const set = { ...tierSettings(tier), ...(globalThis.__v3dSettings || {}) };
     const [lo, hi] = estimateMinutes(tier, set);
     const label = SETTING_LABELS[tier] || tier;
-    const plan = `${label}: up to ${set.maxFrames} frames, ${fmt(set.iters)} training steps, up to ${fmt(set.splats)} splats. A rough guess: ${lo} to ${hi} minutes. Training keeps the result after ${set.maxMinutes ?? 15} minutes on a slower device.`; // prettier-ignore
+    const plan = `${label}: up to ${set.maxFrames} frames, ${fmt(set.iters)} training steps, up to ${fmt(set.splats)} splats. A rough guess: ${lo} to ${hi} minutes.${tier === "phone" && !phone ? ` Training stops after ${set.maxMinutes ?? 8} minutes and keeps what it has.` : ""}`; // prettier-ignore
     const warn = phone
       ? ` On a phone it gets warm. Keep this tab open and the phone plugged in if you can${tier === "phone" ? `; training stops by itself after ${set.maxMinutes} minutes and keeps what it has` : ". A heavier setting than phone-safe can make a phone hot and slow"}. Finish now keeps what has been trained.` // prettier-ignore
       : "";

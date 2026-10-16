@@ -468,9 +468,9 @@ differ. A local lane's brief says "Local lane" at the top. Its session:
   already answers on its port, so a lane on another lane's port tests the wrong files. Before any
   test or tool, in each new shell:
   `export SPLASHERY_PORT=<its port> SPLASHERY_URL=http://127.0.0.1:<its port>/`, and start the
-  tools' server from the lane's own folder with
-  `python3 -m http.server <its port> --bind 127.0.0.1`. Never use 4173 there. Most tools read
-  `SPLASHERY_URL`; `tools/sound-check.mjs` takes `--base=http://127.0.0.1:<its port>` instead.
+  tools' server from the lane's own folder with `node tools/cdx-mp2-server.mjs <its port>` (it
+  serves byte ranges). Never use 4173 there. Most tools read `SPLASHERY_URL`;
+  `tools/sound-check.mjs` takes `--base=http://127.0.0.1:<its port>` instead.
 - **Tests** its own spec files, plus `tests/kit.spec.mjs`, `tests/taps.spec.mjs`,
   `tests/help.spec.mjs` and `tests/unit.spec.mjs`, on its port. Four files still expect 4173 (`bk`,
   `pic`, `smoke`, `vw`): skip them locally and say so in the PR; the Integrators run the full suite
