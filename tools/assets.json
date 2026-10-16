@@ -12792,8 +12792,8 @@
       "license": "CC0 1.0",
       "checked": "October 16, 2026",
       "thumbnail": "assets/toys/name-toy/thumb.webp",
-      "sha256": "648554282bc6f491eb3e3975fc60fb7ac9ebcb00a179489fc758a70c23ae6aad",
-      "sourceNote": "From Ryan Kamp's Toy Box name toy. Original procedural splat letters drawn from the device's own fonts by src/text-splats.js (lane PT1, October 16, 2026). Code is MIT; shapes and the thumbnail are CC0. No reference fonts, files, or renderer are shipped."
+      "sha256": "56db9bb4b378af1f9eb68bda5d06bc977c999bae2c9386a2401ad400a846a430",
+      "sourceNote": "From Ryan Kamp's Toy Box name toy. Original procedural splat letters drawn by src/text-splats.js in Fredoka (SIL OFL 1.1, vendor/fredoka/; the owner's OK of October 16, 2026), with the device's own fonts for other scripts and emoji (lane PT1). Code is MIT; shapes and the thumbnail are CC0. No reference files or renderer are shipped."
     }
   ]
 }

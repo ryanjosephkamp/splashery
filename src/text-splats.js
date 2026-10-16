@@ -97,11 +97,13 @@ const glyphCache = new Map();
 // { w, h, alpha (Uint8Array w*h), rgb (Uint8Array w*h*3) or null for a plain
 // glyph, advance, ox, oy } in pixels: (ox, oy) is the pen's origin on the
 // baseline, advance its width, PX pixels to the em.
-export function glyphRaster(g) {
-  const key = `${typeof document !== "undefined" ? "c" : "b"}|${g}`;
+// `round`: plain glyphs get a round-joined outline (for system fonts that
+// are not rounded already).
+export function glyphRaster(g, family = TEXT_FONT, round = true) {
+  const key = `${typeof document !== "undefined" ? "c" : "b"}|${family}|${round}|${g}`;
   let r = glyphCache.get(key);
   if (!r) {
-    r = typeof document !== "undefined" ? canvasGlyph(g) : bitmapGlyph(g);
+    r = typeof document !== "undefined" ? canvasGlyph(g, family, round) : bitmapGlyph(g);
     if (glyphCache.size > 600) glyphCache.delete(glyphCache.keys().next().value);
     glyphCache.set(key, r);
   }
@@ -109,12 +111,12 @@ export function glyphRaster(g) {
 }
 
 let scratch = null;
-function canvasGlyph(g) {
+function canvasGlyph(g, family, round) {
   if (!scratch) {
     const c = document.createElement("canvas");
     scratch = { canvas: c, ctx: null };
   }
-  const font = `700 ${PX}px ${TEXT_FONT}`;
+  const font = `700 ${PX}px ${family}`;
   const probe = scratch.canvas.getContext("2d", { willReadFrequently: true });
   probe.font = font;
   const m = probe.measureText(g);
@@ -178,9 +180,9 @@ function canvasGlyph(g) {
     ctx.strokeStyle = "#ffffff";
     ctx.lineJoin = "round";
     ctx.lineCap = "round";
-    ctx.lineWidth = PX * 0.075;
+    ctx.lineWidth = round ? PX * 0.075 : 0;
     ctx.fillText(g, ox, oy);
-    ctx.strokeText(g, ox, oy);
+    if (round) ctx.strokeText(g, ox, oy);
     const d = ctx.getImageData(0, 0, w, h).data;
     for (let i = 3, j = 0; j < alpha.length; i += 4, j++) alpha[j] = d[i];
   }
@@ -228,14 +230,14 @@ function hashText(s) {
 // The layout alone (cheap): every visible grapheme's place in em units,
 // centered on the origin, rows `line` apart. glyphs: [{ g, row, x, y (the
 // pen's origin), box: [x0, y0, x1, y1], center }].
-export function layoutText(text, { cols = 8, line = 1.08 } = {}) {
+export function layoutText(text, { cols = 8, line = 1.08, font = TEXT_FONT, round = true } = {}) {
   const rows = textRows(text, cols);
   const glyphs = [];
   const widths = [];
   rows.forEach((row, r) => {
     let x = 0;
     for (const g of row) {
-      const ras = glyphRaster(g);
+      const ras = glyphRaster(g, font, round);
       const adv = ras.advance / PX;
       if (g === " " || isBlank(g)) {
         x += Math.max(adv, 0.28);
@@ -300,9 +302,11 @@ const splatCache = new Map();
 export function textSplats(text, opts = {}) {
   const { count = 24000, seed = 1999, cols = 8, line = 1.08, depth = 0.17, back = 0.35 } = opts;
   const colorOf = opts.colorOf || (() => [1, 0.86, 0.1]);
-  const layout = layoutText(text, { cols, line });
+  const font = opts.font || TEXT_FONT;
+  const round = opts.round ?? true;
+  const layout = layoutText(text, { cols, line, font, round });
   const glyphs = layout.glyphs;
-  const key = `${text}|${count}|${seed}|${cols}|${line}|${depth}|${back}|${opts.colorKey ?? ""}|${typeof document !== "undefined"}`; // prettier-ignore
+  const key = `${text}|${count}|${seed}|${cols}|${line}|${depth}|${back}|${opts.colorKey ?? ""}|${font}|${round}|${typeof document !== "undefined"}`; // prettier-ignore
   const hit = splatCache.get(key);
   if (hit) return hit;
   // Each glyph's outline and ink, and its share of the budget by area.

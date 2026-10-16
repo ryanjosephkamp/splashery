@@ -8,10 +8,30 @@
 // pile up, and puts them back together; Blow pushes the letters away from a
 // held finger. Every letter (and every piece of one) moves as a solid piece:
 // a small rigid-body simulation here, sent to the GPU as tokens.
-import { textSplats, cleanText, visibleCount } from "../text-splats.js";
+import { textSplats, cleanText, visibleCount, TEXT_FONT } from "../text-splats.js";
 import { quatFromTo } from "../kit.js";
 import { TOY_SOUNDS } from "../toy-sounds.js";
 import { parseNotes } from "../voices.js";
+
+// The letters' face, in one place: Fredoka, as in Toy Box (SIL OFL; the
+// owner's OK of October 16, 2026), a subset at weight 700 vendored in
+// vendor/fredoka/ and loaded only when this toy opens, before its letters
+// are drawn. Other scripts and emoji fall back to the device's fonts.
+const FACE = "Splashery Fredoka";
+const FONT = { font: `"${FACE}", ${TEXT_FONT}`, round: false };
+let fontLoad = null;
+export function loadFont() {
+  if (typeof document === "undefined" || typeof FontFace === "undefined") return Promise.resolve(false); // prettier-ignore
+  fontLoad ||=
+    new FontFace(FACE, `url(${new URL("../../vendor/fredoka/fredoka-700.woff2", import.meta.url)})`, { weight: "700" }) // prettier-ignore
+      .load()
+      .then((face) => {
+        document.fonts.add(face);
+        return true;
+      })
+      .catch(() => false);
+  return fontLoad;
+}
 
 const MAX_LETTERS = 48; // one token per piece; 48 tokens at most
 const DETAIL = [12000, 24000, 48000, 96000, 192000];
@@ -181,7 +201,7 @@ export function nameLayout(text, count = 12000) {
   const name = safeName(text);
   const key = `${name}|${count}`;
   if (layoutCache.has(key)) return layoutCache.get(key);
-  const s = textSplats(name, { count, seed: 1999, cols: colsFor(name), depth: DEPTH, back: 0.35 });
+  const s = textSplats(name, { count, seed: 1999, cols: colsFor(name), depth: DEPTH, back: 0.35, ...FONT }); // prettier-ignore
   const L = s.layout.glyphs.length;
   const per = clamp(Math.floor(MAX_LETTERS / Math.max(1, L)), 1, 4);
   const letters = s.layout.glyphs.map((gl, i) => {
@@ -722,6 +742,10 @@ export const RECIPES = {
       },
     ],
     controls: [{ key: "play", label: "Play", type: "pulse", ease: 3.4, pausable: false }],
+    // Fredoka before the first build, so a link rebuilds the same letters.
+    async prepare() {
+      await loadFont();
+    },
     action: {
       key: "play",
       label: "Use the tool",
@@ -915,7 +939,7 @@ export const RECIPES = {
         rgbOf(PAINTS[paints[i] === "." ? DEFAULT_COLORS[i % DEFAULT_COLORS.length] : Number(paints[i])].hex), // prettier-ignore
       );
       // A name built with other colors than the cached layout: same places, new colors.
-      const s = textSplats(name, { count, seed: 1999, cols: colsFor(name), depth: DEPTH, back: 0.35, colorOf: (i) => colors[i], colorKey: paints }); // prettier-ignore
+      const s = textSplats(name, { count, seed: 1999, cols: colsFor(name), depth: DEPTH, back: 0.35, colorOf: (i) => colors[i], colorKey: paints, ...FONT }); // prettier-ignore
       // Keep the live simulation through a rebuild of the same name (detail,
       // paint), so nothing jumps.
       const same =

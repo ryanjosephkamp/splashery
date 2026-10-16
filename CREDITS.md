@@ -240,10 +240,12 @@ Visitor pictures are processed locally and are not shipped assets.
 ### Your name in splats (Codex task 78d)
 
 From Ryan Kamp's Toy Box name toy. Rebuilt by lane PT1 (made by Ryan with Claude, Opus 5.5, October
-16, 2026): letters drawn with the device's own fonts (emoji included) by `src/text-splats.js`, Toy
-Box's five tools, and synthesized sounds. The procedural letters, paint colors, and sounds are CC0
-1.0; the code is MIT. No concept fonts, renderers, or external assets ship with the toy. The first
-version was made by Ryan with Codex (GPT-6), October 14, 2026.
+16, 2026): letters drawn by `src/text-splats.js`, Toy Box's five tools, and synthesized sounds. The
+procedural letters, paint colors, and sounds are CC0 1.0; the code is MIT. The letters use Fredoka,
+as Toy Box does (Milena Brandão and Hafontia; [SIL Open Font License 1.1](vendor/fredoka/OFL.txt); a
+subset at weight 700 in `vendor/fredoka/`, allowed by the owner on October 16, 2026). Other scripts
+and emoji use the device's own fonts. No concept renderer or other external asset ships with the
+toy. The first version was made by Ryan with Codex (GPT-6), October 14, 2026.
 
 ### Baked assets (lane Baked engine)
 

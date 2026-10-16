@@ -267,6 +267,10 @@ for (const [width, height] of [
     const errors = await open(page, "name-toy", width, height);
     const row = page.locator("#toy-toolbar");
     await expect(row.locator("button:visible")).toHaveText(["Spin", "Poke", "Paint", "Drop", "Blow"]); // prettier-ignore
+    // Fredoka (the owner's OK of October 16, 2026) is loaded before the letters are drawn.
+    const fredoka = () =>
+      [...document.fonts].some((f) => /Splashery Fredoka/.test(f.family) && f.status === "loaded");
+    expect(await page.evaluate(fredoka)).toBe(true);
     await page.screenshot({ path: `tests/screenshots/pt1-name-toy-${width}x${height}.png` });
     // An emoji name: color glyphs keep their colors.
     await page.evaluate(() => window.__splashery.app.setToyOptions({ name: "Ryan 🎉" }));

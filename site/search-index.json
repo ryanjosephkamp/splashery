@@ -3635,8 +3635,8 @@
     "u": "toys/name-toy/",
     "k": "toy",
     "s": "Pictures and pages",
-    "d": "Type a name in Toy. Pick an action, then tap a letter; turn on sound to hear its note.",
-    "w": "your name in splats pictures and pages pictures and pages name words letters text spin poke paint drop blow portfolio toybox name-toy",
+    "d": "Type a name in Toy, emoji too. Pick Spin, Poke, Paint, Drop, or Blow on the stage, then touch the letters.",
+    "w": "your name in splats pictures and pages pictures and pages name words letters text emoji spin poke paint drop blow portfolio toybox name-toy",
     "i": "../assets/toys/name-toy/thumb.webp",
     "l": 1
   },
@@ -3895,8 +3895,8 @@
     "u": "toys/shape-morph/",
     "k": "toy",
     "s": "Lab",
-    "d": "Pick a form in the Toy tab. Drag to push the splats; tap to scatter and re-form.",
-    "w": "shape morph lab lab overprint word lorenz attractor klein bottle gyroid loop qr code splat cloud morph ink drag shape-morph",
+    "d": "Tap to morph to the next form. Add words, emoji, shapes, or QR codes in the Toy tab; drag to push the splats.",
+    "w": "shape morph lab lab overprint word emoji list lorenz attractor klein bottle gyroid loop qr code splat cloud morph ink drag shape-morph",
     "i": "../assets/toys/shape-morph/thumb.webp",
     "l": 1
   },
