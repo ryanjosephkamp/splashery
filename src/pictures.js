@@ -718,7 +718,7 @@ export class Pictures {
           sparse,
           ...geom,
         }),
-        Promise.resolve().then(() => this.compactSurface({ surface }, monochrome)),
+        Promise.resolve().then(() => this.compactSurface({ surface }, monochrome, sparse)),
       ]);
       if (solid && backing !== canvas) backing.width = backing.height = 1;
       if (surface) data.surface = surface;
@@ -740,6 +740,8 @@ export class Pictures {
       data.h = h;
       data.drawMs = t1 - t0;
       data.totalMs = performance.now() - t0;
+      if (sparse)
+        data.resolutionKey = `${sheet.i}|${want.page}|${want.method}|${this.order}|${want.variant || ""}`;
       this.stats.builds++;
       this.stats.lastMs = data.totalMs;
       this.stats.lastCount = data.count;
@@ -760,15 +762,16 @@ export class Pictures {
   // Check the full raster before compacting; a reduced backing can miss a
   // tiny colored mark. Grayscale is exact; a color ramp must reproduce every
   // source channel within one 8-bit step. Other pixels keep their full raster.
-  compactSurface(data, candidate) {
+  compactSurface(data, candidate, rawColor = false) {
     const face = data.surface;
-    if (!face || !candidate) return;
+    if (!face || (!candidate && !rawColor)) return;
     const c = face.source;
     const rgba = c.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, c.width, c.height).data; // prettier-ignore
-    const mono = grayPixels(rgba);
-    const ramp = mono ? null : rampPixels(rgba);
-    if (!mono && !ramp) return;
-    face.pixels = mono || ramp.pixels;
+    const mono = candidate ? grayPixels(rgba) : null;
+    const ramp = candidate && !mono ? rampPixels(rgba) : null;
+    if (!mono && !ramp && !rawColor) return;
+    face.pixels = mono || ramp?.pixels || new Uint8Array(rgba.buffer, rgba.byteOffset, rgba.byteLength);
+    face.channels = mono || ramp ? 1 : 4;
     if (ramp) {
       face.low = ramp.low;
       face.high = ramp.high;
@@ -828,6 +831,11 @@ export class Pictures {
   // Keeps built pages up to about 600,000 splats (68 bytes each, about
   // 40 MB), or one sheet's budget if that is more; the oldest go first.
   remember(key, data) {
+    // A single native image needs its latest detail, rather than duplicate
+    // Gaussian buffers for every step crossed during the opening glide.
+    if (data.resolutionKey)
+      for (const [oldKey, old] of this.cache)
+        if (old.resolutionKey === data.resolutionKey) this.cache.delete(oldKey);
     this.cache.delete(key);
     this.cache.set(key, data);
     const limit = Math.max(600e3, this.budget.ink);
