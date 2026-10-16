@@ -29,6 +29,7 @@ const escape = (value) =>
     (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c],
   );
 await fs.mkdir(out, { recursive: true });
+await fs.copyFile("LICENSE", path.join(out, "LICENSE-MIT.txt"));
 for (const [name, root, title] of groups) {
   const bytes = await fs.readFile(path.join(root, "manifest.json")).catch(() => null);
   if (!bytes) continue;
@@ -76,7 +77,7 @@ for (const [name, root, title] of groups) {
   const movies = publicFiles.filter((file) => accepted.has(file) && file.endsWith(".mp4"));
   manifest.groups.push({ directory: name, title, cases: records.length, movies });
   galleries.push(
-    `<section id="${name}"><h2>${escape(shortTitles[name])}</h2><details><summary>Recording details</summary><p>${escape(data.note || data.protocol)}</p></details>${records
+    `<section id="${name}"><h2>${escape(shortTitles[name])}</h2><details><summary>Recording details</summary><p>${escape([data.note || data.protocol, data.limitation, data.initialCompositorNote].filter(Boolean).join(" "))}</p></details>${records
       .map((row) => {
         const output =
             (row.outputs || []).find((entry) => entry.file.endsWith("side-by-side.mp4")) ||
@@ -102,7 +103,7 @@ for (const [name, root, title] of groups) {
       : [];
   });
   sections.push(
-    `## ${title}\n\n${data.note || data.protocol || ""}\n\n` +
+    `## ${title}\n\n${[data.note || data.protocol, data.limitation, data.initialCompositorNote].filter(Boolean).join("\n\n")}\n\n` +
       posters.join("\n\n") +
       "\n\n" +
       movies.map((file) => `- [${file}](${name}/${file})`).join("\n") +
@@ -139,8 +140,10 @@ const ledgers = [
   "r4-test-ledger.json",
   "r4-test-ledger.md",
   "r4-node-tests.json",
+  "r4-photo-equivalence.json",
   "r4-node-tests.tap",
   "r4-gallery-check.json",
+  "r4-archive-verification.json",
   "r4-phone-main.json",
   "r4-phone-r3.json",
   "r4-phone-r4.json",
@@ -219,9 +222,10 @@ picture quality, not live frame rate. Individual phone cards are 390 × 844; pai
 Their paired exports duplicate held pictures at 60 fps without interpolation; exact VFR recordings
 remain available separately. Clean cadence and startup have separate isolated ledgers.
 
-Original procedural inputs are CC0 1.0. Existing films and renderings keep their specific CC BY
+Original procedural inputs are CC0 1.0. Existing films and renderings keep their recorded
 licenses, authors, and source pages in each manifest and on each film. No blanket relicensing of
-the film content is intended. Export code is MIT. All supplied poster images are below 1 MB.
+the film content is intended. Gallery HTML and export code use the [MIT license](LICENSE-MIT.txt).
+All supplied poster images are below 1 MB.
 
 ${sections.join("\n")}
 ## Measurement ledgers\n\n${manifest.ledgers.map((file) => `- [${file}](ledgers/${file})`).join("\n")}

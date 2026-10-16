@@ -40,7 +40,9 @@ const report = {
   protocol:
     "Actual CDP screencast presentations at their original wall timestamps; fixed camera; no source-clock stepping or interpolated pictures",
   limitation:
-    "Silent recording with JPEG capture overhead, hidden UI overlays, and a fixed camera. Clean cadence is measured separately with the natural camera and normal UI. Cropping removes only space outside the stage",
+    "Silent recording with JPEG capture overhead, UI hiding requested before capture, and a fixed camera. Clean cadence is measured separately with the natural camera and normal UI. Cropping removes only space outside the stage",
+  initialCompositorNote:
+    "The initial native screencast frame can retain the prior UI before the requested visibility change is composited. It is preserved with its original timestamp. Poster images use the actual recorded picture at one second.",
   contribution:
     "Made by Ryan with Codex (GPT-6); capture/export code is MIT; source film licenses remain attached",
   cases: [],
@@ -291,7 +293,28 @@ try {
         expected.some((time, i) => Math.abs(time - encoded[i]) > 0.001)
       )
         throw Error("Live presentation timestamps changed during encoding");
-      const bytes = await fs.readFile(file);
+      const bytes = await fs.readFile(file),
+        poster = path.join(out, `${item.id}-live.jpg`);
+      execFileSync("ffmpeg", [
+        "-v",
+        "error",
+        "-y",
+        "-threads",
+        "1",
+        "-ss",
+        "1",
+        "-i",
+        file,
+        "-frames:v",
+        "1",
+        "-q:v",
+        "5",
+        "-threads",
+        "1",
+        poster,
+      ]);
+      const posterBytes = await fs.readFile(poster);
+      if (posterBytes.length > 1000000) throw Error("Live poster exceeds 1 MB");
       report.cases.push({
         id: item.id,
         title: credit.label,
@@ -306,6 +329,13 @@ try {
         captures: accepted.map((frame) => ({ ...frame, time: frame.at - accepted[0].at })),
         draws,
         errors,
+        poster: {
+          file: path.basename(poster),
+          bytes: posterBytes.length,
+          sha256: sha(posterBytes),
+          sourceMovieSha256: sha(bytes),
+          time: 1,
+        },
         output: {
           file: path.basename(file),
           bytes: bytes.length,

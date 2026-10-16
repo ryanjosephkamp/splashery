@@ -383,10 +383,13 @@ The review films are silent phone-size exports of verified source frames. They p
 to within one millisecond; they demonstrate picture quality, not live frame rate. Separate live
 timing ledgers measure speed. Every film keeps its source author, license, source page, input hash,
 and transformation record. Author, license, and source links are also embedded in the MP4 metadata;
-a short export pilot verified those tags without changing frame counts, timestamps, or holds.
-Individual PR images stay below 1 MB. The final fourteen comparison posters were reviewed as two
-contact sheets: all show the intended subjects, and the solid borders retain the source picture.
-Contact-frame review and timestamp validation do not amount to watching every film continuously.
+a short export pilot verified those tags without changing frame counts, timestamps, or holds. Actual
+live recordings retain their first queued compositor frame, which can briefly show prior UI before
+the requested hiding is composited. No presentation or timestamp is dropped. Their four poster
+images use the recorded picture at one second and include the source movie hash. Individual PR
+images stay below 1 MB. The final fourteen comparison posters were reviewed as two contact sheets:
+all show the intended subjects, and the solid borders retain the source picture. Contact-frame
+review and timestamp validation do not amount to watching every film continuously.
 
 All 94 measured input-hash records match accessible public commits, including bundled depth assets.
 Main lacks the four long-film shelf inputs and the five original local files; those unchanged native

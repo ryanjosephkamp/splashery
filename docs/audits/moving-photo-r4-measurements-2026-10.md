@@ -1,6 +1,6 @@
 # Round 4 measurement tables
 
-Generated 2026-10-16T12:12:12.329Z. Missing cases are pending, never passes.
+Generated 2026-10-16T12:21:32.757Z. Missing cases are pending, never passes.
 
 ## Picture coverage and stability
 
@@ -224,8 +224,8 @@ media-clock age at acceptance, not physical audio-to-display latency.
 
 ## Test ledger
 
-200/331 complete whole-file reports. Latest totals:
-{"passed":2041,"failed":15,"skipped":0,"flaky":0,"expectedFailures":0}. Every earlier failure
+223/331 complete whole-file reports. Latest totals:
+{"passed":2243,"failed":15,"skipped":1,"flaky":0,"expectedFailures":0}. Every earlier failure
 remains in the ledger. Individual run revisions were not recorded by Playwright; the full suite
 spans implementation and upstream merges, with affected files rerun.
 
