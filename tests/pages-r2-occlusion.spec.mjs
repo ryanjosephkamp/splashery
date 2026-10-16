@@ -205,7 +205,13 @@ for (const renderer of ["webgl2", "webgpu"])
           inspected = 0,
           captureDraws = 0;
         const failures = [];
-        const destinations = toy === "photo-album" ? [1, 2, 0, "close"] : [1, 2, 0];
+        const leafSlots = new Set();
+        const destinations =
+          toy === "photo-album"
+            ? [1, 2, 5, 2, 0, "close"]
+            : value === "stapled"
+              ? [1, 2, 3, 4, 0]
+              : [1, 2, 4, 6, 8, 0];
         for (const destination of destinations) {
           if (destination === "close") p.act(p.fromRecipe([-0.3, 0, 0.02]));
           else p.pictures.go(destination);
@@ -233,6 +239,9 @@ for (const renderer of ["webgl2", "webgpu"])
                   failures.push({ destination, frame, axis: k, v, min: min[k], max: max[k] });
               }
             const out = p.motion.out;
+            out.leaves?.slice(0, 4).forEach((leaf, slot) => {
+              if (leaf.angle > 0.05 && leaf.angle < Math.PI - 0.05) leafSlots.add(slot);
+            });
             if (
               (out.parts.cover?.angle > 0.05 && out.parts.cover.angle < Math.PI - 0.05) ||
               out.leaves?.some((l) => l.angle > 0.05 && l.angle < Math.PI - 0.05)
@@ -243,13 +252,21 @@ for (const renderer of ["webgl2", "webgpu"])
         }
         const out = p.motion.out;
         const cover = out.parts.cover?.angle ?? out.leaves[value === "stapled" ? 0 : 8]?.angle;
-        return { failures, moving, inspected, captureDraws, cover };
+        return {
+          failures,
+          moving,
+          inspected,
+          captureDraws,
+          cover,
+          leafSlots: [...leafSlots].sort(),
+        };
       }, item);
       results.push({ ...item, ...result });
       expect(result.failures, JSON.stringify(item)).toEqual([]);
       expect(result.moving, JSON.stringify(item)).toBeGreaterThan(4);
-      expect(result.inspected).toBe(item.toy === "photo-album" ? 80 : 60);
-      expect(result.captureDraws).toBe(item.toy === "photo-album" ? 20 : 15);
+      expect(result.inspected).toBe(item.value === "stapled" ? 100 : 120);
+      expect(result.captureDraws).toBe(item.value === "stapled" ? 25 : 30);
+      expect(result.leafSlots).toEqual(item.toy === "photo-album" ? [1, 2] : [0, 1, 2, 3]);
       expect(result.cover).toBe(0);
     }
     console.log("Complete book turn volumes:", renderer, JSON.stringify(results));
