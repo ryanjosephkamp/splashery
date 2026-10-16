@@ -240,10 +240,17 @@ class App {
     if (!scene && !s) {
       // ?first-toy=cactus pins smoke tests and screenshots. It only affects
       // this app's default; shared scenes, saved scenes, and embeds keep theirs.
-      const pinned = findToy(new URLSearchParams(location.search).get("first-toy"));
+      // Automated browsers (the test suite, clip tools) start on the shelf's first
+      // toy so runs repeat; ?first-toy=featured asks for the visitor's random pick.
+      const asked = new URLSearchParams(location.search).get("first-toy");
+      const pinned = findToy(asked);
       const pool = featuredToys();
       const first =
-        pinned && onShelf(pinned) ? pinned : pool[Math.floor(Math.random() * pool.length)];
+        pinned && onShelf(pinned)
+          ? pinned
+          : navigator.webdriver && asked !== "featured"
+            ? TOYS[0]
+            : pool[Math.floor(Math.random() * pool.length)];
       scene = createScene({ toy: { kind: "builtin", id: first.id } });
     }
     // An unreadable shared scene keeps the same fallback as before.
