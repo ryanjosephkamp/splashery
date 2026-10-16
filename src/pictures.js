@@ -770,7 +770,8 @@ export class Pictures {
     const mono = candidate ? grayPixels(rgba) : null;
     const ramp = candidate && !mono ? rampPixels(rgba) : null;
     if (!mono && !ramp && !rawColor) return;
-    face.pixels = mono || ramp?.pixels || new Uint8Array(rgba.buffer, rgba.byteOffset, rgba.byteLength);
+    face.pixels =
+      mono || ramp?.pixels || new Uint8Array(rgba.buffer, rgba.byteOffset, rgba.byteLength);
     face.channels = mono || ramp ? 1 : 4;
     if (ramp) {
       face.low = ramp.low;

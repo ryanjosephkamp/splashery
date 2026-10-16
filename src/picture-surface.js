@@ -276,7 +276,12 @@ export class PictureSurface {
     if (!data.pixels) this.color.setSource(data.source);
     this.color.upload();
     this.material.setParameter("uColor", this.color);
-    this.material.setParameter("uColorFlags", [data.pixels && data.channels !== 4 ? 1 : 0, 0, 0, 0]);
+    this.material.setParameter("uColorFlags", [
+      data.pixels && data.channels !== 4 ? 1 : 0,
+      0,
+      0,
+      0,
+    ]);
     this.material.setParameter("uColorLow", [...(data.low || [0, 0, 0]), 0]);
     this.material.setParameter("uColorHigh", [...(data.high || [1, 1, 1]), 0]);
     this.mask = null;
