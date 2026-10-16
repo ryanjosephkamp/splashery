@@ -304,15 +304,43 @@ async function run(toy, input, profile, repeat) {
   await page.evaluate(() => {
     const p = window.__splashery.player;
     p.frozen = true;
+    // Snap to the toy's own settled reading rectangle. An opening can
+    // enqueue a second focus request after its first glide ends; relying
+    // on whichever distance happens to be present makes repeats unequal.
+    const view = p.motion.out?.view;
+    if (view?.center && view?.size) {
+      p.glideTo(view);
+      const { target, ...angles } = p.glide.to;
+      p.camera.cur = { ...angles };
+      p.camera.tgt = { ...angles };
+      p.camera.target = target.slice();
+      p.camera.aim = target.slice();
+      p.camera.easeAim = false;
+    }
     p.glide = null;
     for (const k of ["yaw", "pitch", "roll"]) p.camera.cur[k] = p.camera.tgt[k] = 0;
-    // Use the same explicit reading pose in every repeat. The recipe can
-    // request a second one-page focus after its opening animation lands.
-    p.camera.cur.distance = p.camera.tgt.distance = 3.2;
-    p.camera.setPan(null, true);
     p.stage.requestRender(2000);
+    window.__benchReadingKey = null;
+    window.__benchReadingSince = performance.now();
   });
-  await page.waitForTimeout(2000);
+  await page.waitForFunction(
+    () => {
+      const p = window.__splashery.player;
+      p.stage.requestRender();
+      const key = JSON.stringify(p.pictures.sheets.map((s) => s.want?.key || ""));
+      if (
+        key !== window.__benchReadingKey ||
+        !p.pictures.sheets.every((s) => !s.want || s.shown?.key === s.want.key)
+      ) {
+        window.__benchReadingKey = key;
+        window.__benchReadingSince = performance.now();
+        return false;
+      }
+      return performance.now() - window.__benchReadingSince >= 600;
+    },
+    null,
+    { timeout: 120000 },
+  );
   // Measure the app before the independent reference raster and screenshots
   // allocate their own large canvases and image encoders.
   await page.evaluate(async () => {

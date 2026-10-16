@@ -271,7 +271,16 @@ async function record(scene) {
   // The book open on page 2 of the test PDF (one page at a time, as on a phone), Pop out on.
   const dbg = (m) =>
     process.env.PG6_DEBUG && console.log(new Date().toISOString().slice(11, 19), m);
-  const bookTwo = async () => {
+  const prepareStep = async () => {
+    await run((dt) => {
+      const pl = window.__splashery.player;
+      pl.time += dt;
+      pl.stage.requestRender();
+    }, STEP);
+    await draw();
+    await settle();
+  };
+  const bookTwo = async (omitPreparation = false) => {
     await warm();
     dbg("warm");
     await open("your-book", { reading: "one" });
@@ -284,7 +293,9 @@ async function record(scene) {
     await popOn();
     await play(0.5);
     dbg("pop on");
-    for (let i = 0; i < 60 && (await figs(1)).length < 2; i++) await play(STEP);
+    for (let i = 0; i < 60 && (await figs(1)).length < 2; i++)
+      if (omitPreparation) await prepareStep();
+      else await play(STEP);
     return figs(1);
   };
   const raise = async (n, box) => {
@@ -317,7 +328,7 @@ async function record(scene) {
   };
 
   if (scene === "r2-book") {
-    const [a] = await bookTwo();
+    const [a] = await bookTwo(true);
     await hold(650);
     await r2Cycle(1, a);
     await tapAt(await at(1, [0.9, 0.96]));
@@ -337,7 +348,7 @@ async function record(scene) {
   } else if (scene === "r2-lab") {
     await open("picture-lab", {});
     await play(0.6);
-    for (let i = 0; i < 60 && !(await figs(0)).length; i++) await play(STEP);
+    for (let i = 0; i < 60 && !(await figs(0)).length; i++) await prepareStep();
     await hold(650);
     await r2Cycle(0, (await figs(0))[0]);
     await run(() => window.__splashery.app.pictureStep(1));

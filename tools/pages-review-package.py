@@ -40,11 +40,12 @@ def encode(label, scene):
         ends.append(total)
     seq = work / 'video-frames' / f'{label}-{scene}'
     seq.mkdir(parents=True, exist_ok=True)
+    for stale in seq.glob('[0-9]*.png'):
+        stale.unlink()
     for i in range(math.ceil(total * 24)):
         n = min(len(entries) - 1, bisect.bisect_right(ends, (i + .5) / 24))
         target = seq / f'{i:06d}.png'
-        if not target.exists():
-            os.link(raw / entries[n][0], target)
+        os.link(raw / entries[n][0], target)
     movie = work / f'{label}-{scene}.mkv'
     ffmpeg(['-framerate', '24', '-i', str(seq / '%06d.png'), '-c:v', 'ffv1', '-level', '3', '-pix_fmt', 'bgr0', '-threads', '2', str(movie)])
     solo = out / f'{scenes[scene]}-{label}.mp4'
