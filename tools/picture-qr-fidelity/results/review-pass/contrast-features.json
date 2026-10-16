@@ -1,0 +1,802 @@
+[
+  {
+    "picture": "ai-farm",
+    "width": 640,
+    "height": 427,
+    "sourceRGBA8Sha256": "51ab89a7b1bb1164a60e71b231a3e662e31238e0a2a6dabb648988749f036400",
+    "rgbPopulationStddev": [0.23428840202932497, 0.20650806750862977, 0.2580448268054052],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "ai-wave",
+    "width": 640,
+    "height": 427,
+    "sourceRGBA8Sha256": "410c195167462b277ae52ff38e3f108de0f5a881e9c55c6d3ba516cefe590386",
+    "rgbPopulationStddev": [0.2885873320951267, 0.17941928025868406, 0.12964596658631672],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "ai-mushrooms",
+    "width": 640,
+    "height": 427,
+    "sourceRGBA8Sha256": "eb7489c09b925b91c36cceb397dd2b13975e4e1bd2c730311d3cb277d9044acd",
+    "rgbPopulationStddev": [0.23771743468319415, 0.21163971983922594, 0.18714090194980437],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "ai-arch",
+    "width": 640,
+    "height": 427,
+    "sourceRGBA8Sha256": "8cba6616013e30eabf3f0b821ff6e5fa6e2bd0e5d54b629ef710dbbd07f7213e",
+    "rgbPopulationStddev": [0.20237447983650683, 0.18309888667142932, 0.18650529225428972],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "wildflowers",
+    "width": 640,
+    "height": 427,
+    "sourceRGBA8Sha256": "8690006731da8e1b10c7d40eb0b7163d8cd7d9c360d67048feedfa20ae6536ef",
+    "rgbPopulationStddev": [0.28328961137917374, 0.2507969223375784, 0.25914509171283295],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "still-life",
+    "width": 640,
+    "height": 601,
+    "sourceRGBA8Sha256": "8aee5172112e7a85c902554483dc8e7ee76f17f1b42abbfa08003d0027ec9173",
+    "rgbPopulationStddev": [0.18517909677447275, 0.16867482082142055, 0.12401630725600703],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "spiral-stairs",
+    "width": 640,
+    "height": 427,
+    "sourceRGBA8Sha256": "229608cb813d9f86fbbbe7ff6e73680a9fe21a0bb5f0953603bf5f0518339337",
+    "rgbPopulationStddev": [0.1637058078370318, 0.16733657519890377, 0.17010766816683878],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "forest",
+    "width": 640,
+    "height": 427,
+    "sourceRGBA8Sha256": "c00d79870b36d2ad98cfb3d778deed8b239ce8a3dd1a2e2a6c022df1a1c2a155",
+    "rgbPopulationStddev": [0.20264935043933002, 0.20277217493715258, 0.1727750569384052],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-monstera",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "f8052219c19b8f7a2d99317658b875e2ec7af2649172c1a211a40a8815c67aef",
+    "rgbPopulationStddev": [0.31655898565904367, 0.2817627282391491, 0.31592310737711204],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-fern",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "043868bdfd321f932b965b3069c836cec1c00addeb2d034172972d7e7e6564fa",
+    "rgbPopulationStddev": [0.2614165592533402, 0.22544593794446371, 0.3322906256812309],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-green-watering-can",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "a67d0599d72d17591688405671a001b6829abb6153b7f29dec6a370d592480c0",
+    "rgbPopulationStddev": [0.3680760266501948, 0.32373906376485195, 0.3365045339182836],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-cactus",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "ab38662549c4f59f6a30bc6924a84156f2696f8f3ae1a47bc7895639990a83a4",
+    "rgbPopulationStddev": [0.21831568636200768, 0.2024055441313642, 0.22314354076849194],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-pitcher",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "3c4754bbd0af004b4a318471d350c7a138383fb617f7e16192ce33d976571bf4",
+    "rgbPopulationStddev": [0.19717060174888495, 0.29505216618951113, 0.3342737423953665],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-stacking-rings",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "b931017e3c9421f3a8f812de7e35c1d478c7986a23a9bde5a30409523c8aa0d1",
+    "rgbPopulationStddev": [0.2698511291856532, 0.3224732295080722, 0.3554415943741793],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-pear",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "1caea98e4f05fa9d9fc6236d05eac0a2254abdc7a1ca08372b930620db82e17c",
+    "rgbPopulationStddev": [0.20077699102735133, 0.23742002627041517, 0.367883354488237],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-hot-air-balloon",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "3505548c08b833bfadecd06da8184bbed2c83a7115ce541a57d6b33c13c16a7b",
+    "rgbPopulationStddev": [0.1975906221339234, 0.24010887277135873, 0.2934563712724397],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-mushroom",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "5e050b70f905badef9612e41222295024daf81d3e20015c8aeee1bb6df1916e5",
+    "rgbPopulationStddev": [0.12785124140974125, 0.20647855680330526, 0.2851529969897141],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-spinning-top",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "05d0a4a85dda48cfbf15c032aa17971b6fcc7c43a3a3e251d478069a0021a93d",
+    "rgbPopulationStddev": [0.25195547017775355, 0.3104117593350315, 0.36010107362748617],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-tulip",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "3d8856b105410a64590498b44b692b31b6f1f6c9fd1150a47a612630316cdbf1",
+    "rgbPopulationStddev": [0.21176512217262494, 0.2294183119217189, 0.2539586148567388],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-pinecone",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "c7b1ed260f1d9e3c393d313f35403b0fa7cdd33999cf162bcacaa9fc87dbd3bc",
+    "rgbPopulationStddev": [0.2839971235767375, 0.3207469104360218, 0.332813018235536],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-stacked-stones",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "c34970a16edfc0dcd66334a7ce869243fba568e3661204331e3fd0a19327a8b5",
+    "rgbPopulationStddev": [0.24571434677898174, 0.25578093245310213, 0.2678060674519192],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-rook",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "b3d240a84b01b4c054b2ee2cb0116458d17878fd520d3f09bea99d08053720fc",
+    "rgbPopulationStddev": [0.2848004094948678, 0.3297479523252125, 0.34858935003693536],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-rainbow",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "1e3639008b63cb2ff2a8e9b3c3014c6ce60d8b23135f3ef824d5f259eed35388",
+    "rgbPopulationStddev": [0.1589135577192978, 0.21374741156213165, 0.2551472035260447],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-wood-blocks",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "39926f9034ccc62cd64cf7d585114c52e2abac115b9cde5d6b6b8d7957c0ff1d",
+    "rgbPopulationStddev": [0.1730130560691716, 0.23337039729512346, 0.2791811417561455],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-teapot",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "35e5ed54950918fd07a464bcccd5824341414b811aa0d4a9bd78169e53edb722",
+    "rgbPopulationStddev": [0.1799202846103738, 0.28021019291825155, 0.31911790684401137],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-lotus",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "3ab82a5ad10cf4829997dd0c9bd9d84eab190cfb9e7dd3164adf27cb57345fc2",
+    "rgbPopulationStddev": [0.2056012606611908, 0.2031241978786781, 0.2366303689065308],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-scallop",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "adbdf716483ac68728f5ac35480dc3005fd6bb84c02d1d1aaea5238d1251d776",
+    "rgbPopulationStddev": [0.12429564879046945, 0.16555302449851667, 0.20508930870503939],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-pumpkin",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "7e1badeb6acf11690ea050071dad3612f7b4bc51ba25c9e18f8e165b300a001d",
+    "rgbPopulationStddev": [0.16791215743404678, 0.27912642766002177, 0.3546546761805754],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-blue-vase",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "88999227531f4b4886bceb7a49c6f5f7cb9522e35a87f37c6e87997d7126a3ed",
+    "rgbPopulationStddev": [0.2865452734382946, 0.22838681053148824, 0.17212566727647394],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-ginkgo",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "686c1c5ae973916cab59973c610d84cb4f595ea9e7d4deb54d60b0f60edf8d27",
+    "rgbPopulationStddev": [0.09072094167704578, 0.1507137284766113, 0.2992928883417162],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-squash",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "0aa5c6b1c23e1d9d2e2dd3dce873cde995eb21761f9511c10357c14e375064aa",
+    "rgbPopulationStddev": [0.17443513249016263, 0.24549435097813296, 0.3338117203424997],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-qr-ai-pebbles",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "45a111c6936d723cd66e309c080b01cee5408629e97b32a7d13a960f4f5c04b1",
+    "rgbPopulationStddev": [0.24929302631717384, 0.2406259338110584, 0.23349639707410316],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-theme-seasons-2-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "0944f5473596dba3e58dd59173fde56a783dd6f466ad393aff760bc3845a4ae9",
+    "rgbPopulationStddev": [0.03310541341883072, 0.03596183367427503, 0.06645017353707204],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-seasons-3-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "844bfe5f2735409f360354599b75b6441370ca5240f25f40526a8b4601bb31dc",
+    "rgbPopulationStddev": [0.025872665194193768, 0.03365984127968527, 0.0727060395873128],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-seasons-4-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "245577fd90104edf5bb6b3e60062c7b2d1e636ef0eaa5a7bfd2badfcd57c3bab",
+    "rgbPopulationStddev": [0.1414553258878445, 0.04762294683867053, 0.015232671890181843],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-theme-seasons-8-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "59b4a516b1368282960abf10e1fe185f03f1c6da28f9024b76a2c3ec4c463132",
+    "rgbPopulationStddev": [0.0441826423033025, 0.05596729159829602, 0.058834345970082705],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-seasons-9-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "902eb3cc7ac9003725dfd8d68adfeaade5dbba47917114ddfa1f416d05e2f516",
+    "rgbPopulationStddev": [0.058748500305430704, 0.04613867299428032, 0.08088615324093124],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-seasons-10-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "ee175f4d97c1859e877fc8567fad22e73d5dfcd58f9d147b3e585e7ca035913d",
+    "rgbPopulationStddev": [0.05723476786982872, 0.047332081134304406, 0.052195644534960464],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-seasons-11-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "b3007d5152c99766790e270d0751b1754b280bb3161ee1f3432d1eb56c20eb7e",
+    "rgbPopulationStddev": [0.030234950124712924, 0.06278256208864334, 0.033268769775628745],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-seasons-12-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "eb2b8cac57e30d705934cfb55cb4f0e4b9121088b39d0f1bfd0d6417170b5981",
+    "rgbPopulationStddev": [0.05229107985446509, 0.03747894982915187, 0.07699046440104933],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-ocean-1-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "d41cf46cf91c5a5e0d7ef1d63f308f385e7813730b5837799dbc07f6159f92a6",
+    "rgbPopulationStddev": [0.09412948549989979, 0.03937539328929392, 0.02718554054428307],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-ocean-3-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "95a99e4597da8635918307b6be53fa7ead4f7f56b93e635e56686c1fa5f5ba6b",
+    "rgbPopulationStddev": [0.09324993446699963, 0.04485864749554871, 0.023948314461185352],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-ocean-4-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "3a83dc6413c3f41038c9f97a80cdaf05084b06a61d3bfc4c89ad20f8f69a5220",
+    "rgbPopulationStddev": [0.056151737346843394, 0.022681131943234633, 0.03675776571661601],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-ocean-5-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "384633c16a6d0fc3ca1992e78d5d4e50c0d1af621e7adf527bff80d1b98a46ac",
+    "rgbPopulationStddev": [0.08059103296072301, 0.044898189149729935, 0.02952905976308908],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-ocean-6-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "9299ef7973f74b2073462752fdb030471f6587c6724d4b8cf344fe93327e3869",
+    "rgbPopulationStddev": [0.022574417975583655, 0.0690778557559973, 0.0496200264328956],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-ocean-8-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "34b7ac3649919228d889d01c8429a02bfef4b409afb2a8641faa821fe5de3283",
+    "rgbPopulationStddev": [0.10339378558514399, 0.03748332889727211, 0.022413352058646745],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "cdx-theme-ocean-9-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "08e3514597da22b3435989ee74bac6b4be75266f67038472e4dc8c6af38254fc",
+    "rgbPopulationStddev": [0.07149052253750939, 0.04131444354284291, 0.032881591505101886],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-ocean-10-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "95d33ebf599ff113e7c4a086f1868667504575eb0cf8ba3a6e5fb3a79bd9fc25",
+    "rgbPopulationStddev": [0.08708030509327344, 0.042936737149184695, 0.018377229326577267],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-forest-1-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "91e69ced030a4aebe3a89ab4a8df0cb42f0c40981b552f562b5c5a31d40c08ca",
+    "rgbPopulationStddev": [0.06036404798697959, 0.057655073033118294, 0.07020664231595625],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-forest-2-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "399d998bd1a17f0613c96849ed5cc11ed6b9d7eb8b87e1647b411ed5ec5d001d",
+    "rgbPopulationStddev": [0.04386830573100366, 0.043132906841192614, 0.09037378564186938],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-forest-3-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "b17653f426a1dbec6708de567979c7062ac3b9932a28b30612c2598cf87dc2cc",
+    "rgbPopulationStddev": [0.030538848063054177, 0.042176566973674855, 0.08913445312542789],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-forest-5-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "10970f5eec9b33199c460addc0c94ed76736f79a0680543716ebe1e17df79b48",
+    "rgbPopulationStddev": [0.059060513309801846, 0.060633529681859664, 0.0700694678367035],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-forest-6-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "4a33f168886cd6204b88de291e6781fb8d399a80bbe65d6add9fa148b9dc5533",
+    "rgbPopulationStddev": [0.051597687093416396, 0.04270844714853425, 0.09539280186306977],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-forest-9-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "59d2cd60d6dec198212b99da9986eb561c495a3d07db995b751973071f40f4b8",
+    "rgbPopulationStddev": [0.06190450207203573, 0.05243953783344483, 0.06848037892280887],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-forest-10-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "07b9b1742b42ef91ee7bad289368f84bf77adee62d2d3d594b0135aa9d012a87",
+    "rgbPopulationStddev": [0.05914775051132676, 0.05185245400133861, 0.07513618185976888],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-forest-12-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "e3792c5895a81843ad03c540743b2b9f7d8ab72e98053f21e0902e039173904b",
+    "rgbPopulationStddev": [0.049731382185251825, 0.046961191162687654, 0.07333026030300176],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-space-art-1-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "beb7d99fc8719a643f860d6d6345062f8dc83fa4fcc178d91ab0f26f538d85f5",
+    "rgbPopulationStddev": [0.05100173459142993, 0.04142316560826177, 0.046075231310343016],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-space-art-2-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "ea7e59efffa774f83a07e679f40d26a86acee109922f96cb6c801a3b98a9d26d",
+    "rgbPopulationStddev": [0.04493936901551771, 0.03962211681616783, 0.0068489628692196556],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-space-art-4-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "38b59d131b47198dd23602c903244b29bf7016013dfd698e974ae352b5a315b6",
+    "rgbPopulationStddev": [0.05447560603931726, 0.039368197329605795, 0.010129041920365648],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-space-art-5-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "841019f84fecb8a7aa58711178810b02e81fd157dce48c87ea4861a7d48c39db",
+    "rgbPopulationStddev": [0.038825154900137764, 0.038698269367035285, 0.023750472193675303],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-space-art-6-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "3857778fc93eb0c841e6b1f2d75af7e63a89cc3058e62813156a178f7bd7c53c",
+    "rgbPopulationStddev": [0.028679128808703602, 0.03182890766946567, 0.022745769381175257],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-space-art-8-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "00f7e955be0dfc57cc21c60af08704741f0db8be851e4ef4df277d2734487ed2",
+    "rgbPopulationStddev": [0.04137637476720224, 0.04680943962670681, 0.0263643221588128],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-space-art-9-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "e281db2a22e769dff668bd8837f1ad8709f62e41aa074cb1b22fffab19353dca",
+    "rgbPopulationStddev": [0.05907791556509822, 0.03629432331696888, 0.04936309616904581],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-space-art-10-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "3fbd0d5c9c59b46b4f6a494438aa3c6b8b642c4061fe5c0d84314aefd48b1fdc",
+    "rgbPopulationStddev": [0.019204088671525274, 0.019317385824949598, 0.024953664755917603],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-patterns-2-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "d0c8212d9b7e2e91afd7524caede5592edeb1edfc9824bc7a688b50b415470d2",
+    "rgbPopulationStddev": [0.04791003262542696, 0.035180448978332175, 0.0367979804455898],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-patterns-4-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "651a4bafcebcf466fc29e18ba829342ca71c899f63661b0754addec2b0446644",
+    "rgbPopulationStddev": [0.08981971985324567, 0.046105980558601344, 0.024038891539848128],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-patterns-6-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "29c94855cd3969cfe53fe6f75befc2f4ae60f95c32c92095862c29a3d03cf7b6",
+    "rgbPopulationStddev": [0.05956670843272293, 0.026412006604569792, 0.010725033613147682],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-patterns-7-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "8ea1c121ef4e744609d19c143cbdc8a8e35cd8012525436a0e7f034b6659acc4",
+    "rgbPopulationStddev": [0.05490869278324148, 0.058015650790281925, 0.04732939126318658],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-patterns-8-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "0a4cf21b2a84ef4819e36ba05b09404ad8b21f6242823255e58d36017af5e788",
+    "rgbPopulationStddev": [0.051026377195056836, 0.05530080064325437, 0.047250448315748025],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-patterns-9-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "297cc03751b5487b7c6940f24084e9a9de4a35ce79453e74190736bdfa1c59d2",
+    "rgbPopulationStddev": [0.04165521425345493, 0.04026049619501553, 0.04130837238629233],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-patterns-10-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "6ddbb8e5cfbb271e97c5fbf60f8976b05773971680f2c68e8ca76e86e0b93980",
+    "rgbPopulationStddev": [0.08409214025333003, 0.04257177971983808, 0.019629305112907707],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-patterns-11-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "c202887e74f123a3b4d8b8663452b0a199d4637dd54fa39cad90208014edfd28",
+    "rgbPopulationStddev": [0.044267492248609264, 0.0440010713479279, 0.04216778516647377],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-celebrations-1-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "093ecbb2a1c081e7d9bf23ebb5e3c107236afabda640123d53815c11963e368c",
+    "rgbPopulationStddev": [0.050544452643455924, 0.03845223442999352, 0.04823167085530298],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-celebrations-3-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "60fbbb76cdee12b25a421d314a474641ddd97f80a2a47e1166d7d1296712076f",
+    "rgbPopulationStddev": [0.05413407349538082, 0.03776046651514154, 0.05464688222723222],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-celebrations-4-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "2a2f6c1b9598b362e7bec642f477694009c92db2018dcc75b1c74305034bb343",
+    "rgbPopulationStddev": [0.03723837520113455, 0.02829708871751621, 0.03498286035090185],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-celebrations-5-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "68866495ca1f80a33dc62289f2acc51e348f4ea7ee43ed9ceb17f26fa43636f0",
+    "rgbPopulationStddev": [0.03720830299274322, 0.02724305426844854, 0.037310088872596514],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-celebrations-6-2",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "437b816583a08c7b81d98ed61e36f4336c752e3848e49aca5ee66a055ff82919",
+    "rgbPopulationStddev": [0.03612278005919323, 0.035052023791334666, 0.060661099490831316],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-celebrations-7-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "94d3a82abef2283b7e04740095ea2936fe8fb35d36d4013e0caa220164303694",
+    "rgbPopulationStddev": [0.04492295387142893, 0.03559459305956911, 0.03941486976678752],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-celebrations-8-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "05a1a5aea9ba3d9bf7238cb8e362602c89c1a504e09f08d9f59e9fe170ee982e",
+    "rgbPopulationStddev": [0.0675980609424303, 0.03581581886657977, 0.042500417205473685],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "cdx-theme-celebrations-10-1",
+    "width": 640,
+    "height": 640,
+    "sourceRGBA8Sha256": "77e17016e43d85e800a2b2d44a22df2cde1fca707748ee296dad1958a67d8902",
+    "rgbPopulationStddev": [0.057027900792768337, 0.03728909813877858, 0.055392402466082534],
+    "lowContrastSquare": true
+  },
+  {
+    "picture": "met-436305",
+    "width": 600,
+    "height": 468,
+    "sourceRGBA8Sha256": "ee7ba71f82b754b13e90998a608952dd6faffd94e981abfaa43f8108aee27ca7",
+    "rgbPopulationStddev": [0.18117156949359706, 0.16926942275985613, 0.14532871097281322],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-10181",
+    "width": 599,
+    "height": 428,
+    "sourceRGBA8Sha256": "e7993c275258b45edbfe7e6d1175124321a5598158ea66e3f7265431e8d6defe",
+    "rgbPopulationStddev": [0.2206143048361455, 0.2290094972474617, 0.22558268029502254],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-459968",
+    "width": 600,
+    "height": 441,
+    "sourceRGBA8Sha256": "ef74e8aa7b3f3b4502dd046bd7d1b3d8b3b1b423f6fb60d97f163b06dbd2ac5d",
+    "rgbPopulationStddev": [0.13882358825155938, 0.16860144662093496, 0.20465326444697665],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-9284",
+    "width": 480,
+    "height": 625,
+    "sourceRGBA8Sha256": "59956325a082c0501b8d02d52e20527cc6a3f0b496aed13fb664abb134b31171",
+    "rgbPopulationStddev": [0.14986207038599397, 0.14986207038599397, 0.14986207038599397],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-9549",
+    "width": 600,
+    "height": 481,
+    "sourceRGBA8Sha256": "a5f7427fbe41c5dd070b4042ef4fcb6a088fe0667b95e41a1833e7fd13124a65",
+    "rgbPopulationStddev": [0.2382818478858984, 0.2382818478858984, 0.2382818478858984],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-9283",
+    "width": 451,
+    "height": 624,
+    "sourceRGBA8Sha256": "1134612dc1b6b7a20e117e5b63d1b93d52d6bc6a6b13b8feba2cc9dd50467e34",
+    "rgbPopulationStddev": [0.13623069161110077, 0.13623069161110077, 0.13623069161110077],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-249072",
+    "width": 600,
+    "height": 533,
+    "sourceRGBA8Sha256": "8e49f5adb942cc527daa0cea4ba360de4243cf587c5875ce597e00b9c07ac9f9",
+    "rgbPopulationStddev": [0.11463329573489892, 0.13215366942246914, 0.1462738639364962],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-312624",
+    "width": 599,
+    "height": 540,
+    "sourceRGBA8Sha256": "ce485dfcb11e24b209a0c21471f609647b8ee30bfc989e5d8bdfe58a18e48693",
+    "rgbPopulationStddev": [0.2408892269681288, 0.2639021253416671, 0.26591701219293984],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-478467",
+    "width": 600,
+    "height": 450,
+    "sourceRGBA8Sha256": "97ff56a80014bf30dc97167b1bddb3c3a60e3f0f604b593a992326d13549bfe3",
+    "rgbPopulationStddev": [0.12072042644460597, 0.10249153022674908, 0.1257249440236706],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-42138",
+    "width": 600,
+    "height": 450,
+    "sourceRGBA8Sha256": "b06124480e544feeda8932224bfe642087ecfd8e2f8b30c8ad3baebe5dae9b25",
+    "rgbPopulationStddev": [0.26860546087462334, 0.2684572603376055, 0.26622586997846637],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-556849",
+    "width": 600,
+    "height": 480,
+    "sourceRGBA8Sha256": "604fc8f1c5e7ef7944a7e8980b413d93fd112f28c75aa7b9adbab6ff3bac9ec8",
+    "rgbPopulationStddev": [0.3167578298811927, 0.3219378722639109, 0.33276693553488873],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-244130",
+    "width": 577,
+    "height": 624,
+    "sourceRGBA8Sha256": "a4d5011edf4a34cc849a09e03d583ab8952383030767d30ffc03f452805f8979",
+    "rgbPopulationStddev": [0.17248758542578654, 0.1697073463509358, 0.18867681342226866],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-325462",
+    "width": 599,
+    "height": 531,
+    "sourceRGBA8Sha256": "83ad967ad54e6d56960e44a911f29abc516843e4ff986be63a09e76f4f8f6ea3",
+    "rgbPopulationStddev": [0.20265153560513033, 0.15879752056131746, 0.13253686286388222],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-13181",
+    "width": 508,
+    "height": 590,
+    "sourceRGBA8Sha256": "7c9a5c83c536892c9cef6fe1b445975176de6d25a008df12aa448cf93a2ddc10",
+    "rgbPopulationStddev": [0.18197119857068128, 0.16683189390573835, 0.16272854110287863],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-203455",
+    "width": 500,
+    "height": 625,
+    "sourceRGBA8Sha256": "fa5c43df38792769e963eeb3d66048a992e61c57524d99c1ca29bb2b2d6a8bc6",
+    "rgbPopulationStddev": [0.12792462848201694, 0.1378426591125634, 0.14473595815653215],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-438031",
+    "width": 599,
+    "height": 401,
+    "sourceRGBA8Sha256": "e53e442e1f2f6a0986d4bcd196d70f276267b032bc2a5f15092286b6fd2de1a4",
+    "rgbPopulationStddev": [0.20360734439596273, 0.19225991248055413, 0.1479582467965605],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-196651",
+    "width": 600,
+    "height": 600,
+    "sourceRGBA8Sha256": "a46728afc73f21a47fcca50dff63ebcfe7ff55543c9fbad9f0d19ca95fffc48a",
+    "rgbPopulationStddev": [0.15571876043880636, 0.15492727126434017, 0.15414360085974563],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-3845",
+    "width": 599,
+    "height": 446,
+    "sourceRGBA8Sha256": "1afe66b2c9eb85674599d1d20d2dbb3d2ae577f8114218eeb146954450e9542e",
+    "rgbPopulationStddev": [0.23574399906376287, 0.23574399906376287, 0.23574399906376287],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-570235",
+    "width": 600,
+    "height": 480,
+    "sourceRGBA8Sha256": "5cb5678ea2cc08fc70201d6ac406a35c94b596dab84c762be7a18d7aa6a988f8",
+    "rgbPopulationStddev": [0.08954607683360243, 0.09837136943549381, 0.12067958251946433],
+    "lowContrastSquare": false
+  },
+  {
+    "picture": "met-244131",
+    "width": 572,
+    "height": 625,
+    "sourceRGBA8Sha256": "457bc4857c491338f3daf8c7019b24b9c615219524702d6b6388755744488457",
+    "rgbPopulationStddev": [0.14827682382230253, 0.1516836460881724, 0.16692456755060128],
+    "lowContrastSquare": false
+  }
+]

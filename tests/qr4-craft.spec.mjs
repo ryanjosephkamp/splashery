@@ -140,8 +140,6 @@ test.describe("Other barcodes", () => {
   });
 
   test("the QR code toy builds the very same splats from the shared builder", () => {
-    // The hash of buildCode's output for these codes before the move
-    // (main at 8a53aa5c; src/qr/crisp.js came out of src/qr/build.js).
     const h = crypto.createHash("sha256");
     for (const text of ["https://ryanjosephkamp.github.io/splashery/", "Hi"])
       for (const style of ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon"])
@@ -168,7 +166,6 @@ test.describe("Other barcodes", () => {
   });
 });
 
-// Recorded from main before the move (see the test above).
 const BUILD_HASH = "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144";
 // Recorded from main c00e1cb8 with the same Node 22 runtime.
 const CIRCLE_BUILD_HASH = "51848ddea445d56959c8558a2dd4682e8d688bae3fde5f232e7c1b51448a95fb";

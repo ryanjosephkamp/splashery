@@ -1,0 +1,23 @@
+{
+  "baseline": "cb8a83157bc502feb2dda18ece6cfa39621abb61",
+  "originalRun": "review-full",
+  "remainingRun": "review-remaining",
+  "recheckRun": "review-edge-recheck",
+  "originalSource": "50d19091",
+  "originalCounts": {
+    "main": 669,
+    "detail": 668
+  },
+  "remainingCases": 1332,
+  "remeasuredCircleCases": 24,
+  "retainedDetailCases": 644,
+  "expectedCodesPerMode": 2000,
+  "sourceGuard": {
+    "originalPictureSha256": "4992b0c15bffc44d4a7266ce5e9684036e8a5a4f55b6c225717e735debd5e9c8",
+    "candidatePictureSha256": "a2ada1596df81779b6fa24055e6500eab40209a353c3472949b3d88fabba0234",
+    "insertionSha256": "e19e346c9ec62717fcd9ccb21b1449983cd67c9b3b70219d6d1a82a28c881710",
+    "outsideInsertionByteIdentical": true
+  },
+  "retentionRule": "Square is outside the new branch. Retained Circle rows use capture validation and finish in their first two candidates; remeasure every other completed Circle row, including all prior fallbacks.",
+  "timing": "Full-corpus segmented series: original balanced partial run, balanced continuation, and isolated changed-path detail rechecks. Retain cold starts, interruptions, failures, and duplicate main observations; use the original baseline for already-completed main keys."
+}

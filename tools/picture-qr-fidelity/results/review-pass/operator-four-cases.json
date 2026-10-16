@@ -1,0 +1,1692 @@
+[
+  {
+    "key": "ai-farm/0/square",
+    "explanation": "This was the pilot's first detail selection, including lazy kernel and reader loading. Its initial candidate passed: preparation took 667 ms and the final captured reader matrix took 295 ms. The 13 ms total excess is retained; that single sample does not isolate the cold-load contribution.",
+    "pilot": {
+      "main": {
+        "repeat": 0,
+        "pair": "ai-farm/0/square/0",
+        "order": "main,detail",
+        "inactiveFrames": 0,
+        "mode": "main",
+        "picture": "ai-farm",
+        "link": 0,
+        "shape": "square",
+        "ms": 2478.4030599999987,
+        "check": {
+          "ok": true,
+          "sizes": [
+            {
+              "id": "phone",
+              "label": "phone size",
+              "ppm": 8,
+              "blur": 0.2,
+              "text": "https://example.org/a/1",
+              "ok": true
+            },
+            {
+              "id": "small",
+              "label": "smaller",
+              "ppm": 4,
+              "blur": 0.2,
+              "text": "https://example.org/a/1",
+              "ok": true
+            }
+          ],
+          "measure": {
+            "module": 3.8668293729651415,
+            "center": 18.375705646557403,
+            "darkGray": 0.28658119354602346,
+            "lightGray": 0.667220040750154,
+            "gap": -0.8743151487572118
+          },
+          "stage": [
+            {
+              "ppm": 8,
+              "text": "https://example.org/a/1",
+              "ok": true
+            },
+            {
+              "ppm": 4,
+              "text": "https://example.org/a/1",
+              "ok": true
+            }
+          ],
+          "text": "https://example.org/a/1"
+        },
+        "codeSize": 45,
+        "mask": 1,
+        "rotation": 0,
+        "fidelity": "standard",
+        "modules": 55,
+        "error": "",
+        "notice": "",
+        "fallback": null,
+        "version": 7,
+        "margin": 0.1,
+        "kitCount": 120000
+      },
+      "detail": {
+        "repeat": 0,
+        "pair": "ai-farm/0/square/0",
+        "order": "main,detail",
+        "inactiveFrames": 0,
+        "mode": "detail",
+        "picture": "ai-farm",
+        "link": 0,
+        "shape": "square",
+        "ms": 2491.6451849999994,
+        "check": {
+          "ok": true,
+          "sizes": [
+            {
+              "id": "phone",
+              "label": "phone size",
+              "ppm": 8,
+              "blur": 0.2,
+              "text": "https://example.org/a/1",
+              "ok": true
+            },
+            {
+              "id": "small",
+              "label": "smaller",
+              "ppm": 4,
+              "blur": 0.2,
+              "text": "https://example.org/a/1",
+              "ok": true
+            }
+          ],
+          "detail": {
+            "ok": true,
+            "layoutChecked": true,
+            "cameraDeferred": true,
+            "tried": 1,
+            "candidates": 1,
+            "preparationMs": 667.3999999910593
+          },
+          "measure": {
+            "module": 7.153119172968333,
+            "center": 10.513084575841333,
+            "darkGray": 0.22117189742972942,
+            "lightGray": 0.8016598579287927,
+            "gap": -0.6866777278589086
+          },
+          "stage": [
+            {
+              "ppm": 8,
+              "text": "https://example.org/a/1",
+              "ok": true
+            },
+            {
+              "ppm": 4,
+              "text": "https://example.org/a/1",
+              "ok": true
+            }
+          ],
+          "text": "https://example.org/a/1",
+          "stress": {
+            "ok": true,
+            "readers": ["jsqr", "zxingcpp"],
+            "workers": 4,
+            "ms": 295.20000000298023,
+            "parts": [293.5, 227.5, 260.09999999403954, 293.5]
+          }
+        },
+        "codeSize": 45,
+        "mask": 1,
+        "rotation": 0,
+        "rendering": {
+          "method": "correction",
+          "sigma": 0.36,
+          "edge": 0.24,
+          "core": 0.08,
+          "channel": "weighted",
+          "finderGuard": 3,
+          "texture": "tiles",
+          "textureBlur": 0,
+          "textureGuard": 0,
+          "validation": "capture",
+          "fraction": 0.4
+        },
+        "correction": {
+          "fraction": 0.4,
+          "maxErrors": 13,
+          "limit": 5,
+          "usedByBlock": [5, 5, 5, 5, 5],
+          "flipped": 98
+        },
+        "fidelity": "detail",
+        "modules": 55,
+        "error": "",
+        "notice": "",
+        "fallback": null,
+        "version": 7,
+        "margin": 0.16,
+        "method": "correction",
+        "rejected": [],
+        "kitCount": 7910
+      }
+    },
+    "final": {
+      "key": "ai-farm/0/square/0",
+      "picture": "ai-farm",
+      "shape": "square",
+      "link": 0,
+      "main": 1970.8883879999994,
+      "detail": 2637.894968999999,
+      "difference": 667.0065809999996,
+      "ratio": 1.3384294032382313,
+      "order": "main,detail",
+      "mainMeasurementRun": "review-full",
+      "detailMeasurementRun": "review-third-recheck",
+      "detailOrder": "detail",
+      "lastPreparationMs": 625.2000000029802,
+      "lastPreparationCandidates": 1,
+      "acceptedCaptureMatrixMs": 266.70000000298023
+    },
+    "finalCapture": {
+      "key": "ai-farm/0/square",
+      "picture": "ai-farm",
+      "link": 0,
+      "text": "https://example.org/a/1",
+      "shape": "square",
+      "profile": "low",
+      "ms": 2637.894968999999,
+      "appearanceMs": 2637.894968999999,
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/a/1",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/a/1",
+            "ok": true
+          }
+        ],
+        "detail": {
+          "ok": true,
+          "layoutChecked": true,
+          "cameraDeferred": true,
+          "tried": 1,
+          "candidates": 1,
+          "preparationMs": 625.2000000029802
+        },
+        "measure": {
+          "module": 7.153119172968333,
+          "center": 10.513084575841333,
+          "darkGray": 0.22117189742972942,
+          "lightGray": 0.8016598579287927,
+          "gap": -0.6866777278589086
+        },
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/a/1",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/a/1",
+            "ok": true
+          }
+        ],
+        "text": "https://example.org/a/1",
+        "stress": {
+          "ok": true,
+          "readers": ["jsqr", "zxingcpp"],
+          "workers": 4,
+          "ms": 266.70000000298023,
+          "parts": [250.8999999910593, 244.29999999701977, 261.1000000089407, 241.90000000596046]
+        }
+      },
+      "codeSize": 45,
+      "mask": 1,
+      "rotation": 0,
+      "rendering": {
+        "method": "correction",
+        "sigma": 0.36,
+        "edge": 0.24,
+        "core": 0.08,
+        "channel": "weighted",
+        "finderGuard": 3,
+        "texture": "tiles",
+        "textureBlur": 0,
+        "textureGuard": 0,
+        "validation": "capture",
+        "fraction": 0.4
+      },
+      "correction": {
+        "fraction": 0.4,
+        "maxErrors": 13,
+        "limit": 5,
+        "usedByBlock": [5, 5, 5, 5, 5],
+        "flipped": 98
+      },
+      "fidelity": "detail",
+      "modules": 55,
+      "error": "",
+      "notice": "",
+      "fallback": null,
+      "version": 7,
+      "margin": 0.16,
+      "method": "correction",
+      "rejected": [],
+      "kitCount": 7910,
+      "captureRGBA8Sha256": "742073ffafbd00e1d902899e2215b9f5b4b31b423f749f94a8bbbeb09c7e5403",
+      "scores": {
+        "phone": {
+          "ssim": 0.43884769611574614,
+          "rmse": 0.24731688882142433
+        },
+        "print": {
+          "ssim": 0.4338535458127074,
+          "rmse": 0.2563481070821332
+        }
+      },
+      "stickerScores": null,
+      "scans": [
+        {
+          "condition": "8px-blur0.2-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        }
+      ],
+      "measurementRun": "review-third-recheck"
+    }
+  },
+  {
+    "key": "cdx-qr-ai-rainbow/9/circle",
+    "explanation": "The version-13 Circle passed its first candidate. Preparation took 840 ms and the final two-reader matrix took 713 ms. Standard does not run that added matrix. Its pilot excess was 323 ms; the later full-corpus observation is reported independently.",
+    "pilot": {
+      "main": {
+        "repeat": 0,
+        "pair": "cdx-qr-ai-rainbow/9/circle/0",
+        "order": "main,detail",
+        "inactiveFrames": 0,
+        "mode": "main",
+        "picture": "cdx-qr-ai-rainbow",
+        "link": 9,
+        "shape": "circle",
+        "ms": 3117.949537999986,
+        "check": {
+          "ok": true,
+          "sizes": [
+            {
+              "id": "phone",
+              "label": "phone size",
+              "ppm": 8,
+              "blur": 0.2,
+              "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+              "ok": true
+            },
+            {
+              "id": "small",
+              "label": "smaller",
+              "ppm": 4,
+              "blur": 0.2,
+              "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+              "ok": true
+            }
+          ],
+          "measure": {
+            "module": 2.4786467514695913,
+            "center": 18.375705646557403,
+            "darkGray": 0.4586522861519417,
+            "lightGray": 0.7460834762107853,
+            "gap": -0.8420733202900738
+          },
+          "stage": [
+            {
+              "ppm": 8,
+              "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+              "ok": true
+            },
+            {
+              "ppm": 4,
+              "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+              "ok": true
+            }
+          ],
+          "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9"
+        },
+        "codeSize": 69,
+        "mask": 1,
+        "rotation": 0,
+        "fidelity": "standard",
+        "modules": 117,
+        "error": "",
+        "notice": "",
+        "fallback": null,
+        "version": 13,
+        "margin": 0.1,
+        "kitCount": 120000
+      },
+      "detail": {
+        "repeat": 0,
+        "pair": "cdx-qr-ai-rainbow/9/circle/0",
+        "order": "main,detail",
+        "inactiveFrames": 0,
+        "mode": "detail",
+        "picture": "cdx-qr-ai-rainbow",
+        "link": 9,
+        "shape": "circle",
+        "ms": 3440.5346750000026,
+        "check": {
+          "ok": true,
+          "sizes": [
+            {
+              "id": "phone",
+              "label": "phone size",
+              "ppm": 8,
+              "blur": 0.2,
+              "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+              "ok": true
+            },
+            {
+              "id": "small",
+              "label": "smaller",
+              "ppm": 4,
+              "blur": 0.2,
+              "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+              "ok": true
+            }
+          ],
+          "detail": {
+            "ok": true,
+            "layoutChecked": true,
+            "cameraDeferred": true,
+            "tried": 1,
+            "candidates": 1,
+            "preparationMs": 840.0999999940395
+          },
+          "measure": {
+            "module": 5.329767931082198,
+            "center": 8.38647448512935,
+            "darkGray": 0.27491294529621074,
+            "lightGray": 0.8076160835357359,
+            "gap": -0.4461428132787347
+          },
+          "stage": [
+            {
+              "ppm": 8,
+              "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+              "ok": true
+            },
+            {
+              "ppm": 4,
+              "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+              "ok": true
+            }
+          ],
+          "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+          "stress": {
+            "ok": true,
+            "readers": ["jsqr", "zxingcpp"],
+            "workers": 4,
+            "ms": 713.2999999970198,
+            "parts": [711.6000000089407, 680.9000000059605, 651.7999999970198, 612.7999999970198]
+          }
+        },
+        "codeSize": 69,
+        "mask": 1,
+        "rotation": 0,
+        "rendering": {
+          "method": "correction",
+          "sigma": 0.36,
+          "edge": 0.24,
+          "core": 0.08,
+          "channel": "weighted",
+          "finderGuard": 3,
+          "texture": "tiles",
+          "textureBlur": 0,
+          "textureGuard": 0,
+          "validation": "capture",
+          "fraction": 0.4
+        },
+        "correction": {
+          "fraction": 0.4,
+          "maxErrors": 11,
+          "limit": 4,
+          "usedByBlock": [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+          "flipped": 290
+        },
+        "fidelity": "detail",
+        "modules": 117,
+        "error": "",
+        "notice": "",
+        "fallback": null,
+        "version": 13,
+        "margin": 0.16,
+        "method": "correction",
+        "rejected": [],
+        "kitCount": 35982
+      }
+    },
+    "final": {
+      "key": "cdx-qr-ai-rainbow/9/circle/0",
+      "picture": "cdx-qr-ai-rainbow",
+      "shape": "circle",
+      "link": 9,
+      "main": 3162.0475050001405,
+      "detail": 2996.249228000175,
+      "difference": -165.7982769999653,
+      "ratio": 0.9475661650440771,
+      "order": "main,detail",
+      "mainMeasurementRun": "review-full",
+      "detailMeasurementRun": "review-full",
+      "detailOrder": "main,detail",
+      "lastPreparationMs": 854.7000000029802,
+      "lastPreparationCandidates": 1,
+      "acceptedCaptureMatrixMs": 661.0999999940395
+    },
+    "finalCapture": {
+      "key": "cdx-qr-ai-rainbow/9/circle",
+      "picture": "cdx-qr-ai-rainbow",
+      "link": 9,
+      "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+      "shape": "circle",
+      "profile": "low",
+      "ms": 2996.249228000175,
+      "appearanceMs": 2996.249228000175,
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+            "ok": true
+          }
+        ],
+        "detail": {
+          "ok": true,
+          "layoutChecked": true,
+          "cameraDeferred": true,
+          "tried": 1,
+          "candidates": 1,
+          "preparationMs": 854.7000000029802
+        },
+        "measure": {
+          "module": 5.329767931082198,
+          "center": 8.38647448512935,
+          "darkGray": 0.27491294529621074,
+          "lightGray": 0.8076160835357359,
+          "gap": -0.4461428132787347
+        },
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+            "ok": true
+          }
+        ],
+        "text": "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9",
+        "stress": {
+          "ok": true,
+          "readers": ["jsqr", "zxingcpp"],
+          "workers": 4,
+          "ms": 661.0999999940395,
+          "parts": [660.2000000029802, 596.5, 576.4000000059605, 490.70000000298023]
+        }
+      },
+      "codeSize": 69,
+      "mask": 1,
+      "rotation": 0,
+      "rendering": {
+        "method": "correction",
+        "sigma": 0.36,
+        "edge": 0.24,
+        "core": 0.08,
+        "channel": "weighted",
+        "finderGuard": 3,
+        "texture": "tiles",
+        "textureBlur": 0,
+        "textureGuard": 0,
+        "validation": "capture",
+        "fraction": 0.4
+      },
+      "correction": {
+        "fraction": 0.4,
+        "maxErrors": 11,
+        "limit": 4,
+        "usedByBlock": [4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+        "flipped": 290
+      },
+      "fidelity": "detail",
+      "modules": 117,
+      "error": "",
+      "notice": "",
+      "fallback": null,
+      "version": 13,
+      "margin": 0.16,
+      "method": "correction",
+      "rejected": [],
+      "kitCount": 35982,
+      "captureRGBA8Sha256": "7de88b8b1793b580f028043c837f752f78cc54182ff548d8350992745cda3238",
+      "scores": {
+        "phone": {
+          "ssim": 0.4288120521076152,
+          "rmse": 0.1636619499089847
+        },
+        "print": {
+          "ssim": 0.38635926149093075,
+          "rmse": 0.19960783788934103
+        }
+      },
+      "stickerScores": {
+        "phone": {
+          "ssim": 0.610040381214004,
+          "rmse": 0.15499131412094067
+        },
+        "print": {
+          "ssim": 0.6072672306897554,
+          "rmse": 0.1567806936804948
+        }
+      },
+      "scans": [
+        {
+          "condition": "8px-blur0.2-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        }
+      ],
+      "measurementRun": "review-full"
+    }
+  },
+  {
+    "key": "cdx-qr-ai-lotus/1/square",
+    "explanation": "The initial edge-0.24 candidate was rejected on the actual capture. The accepted edge-0.32 repair then ran the full predicted matrix (198 ms) and actual matrix (235 ms). Earlier opposite-orientation repair now avoids that actual rejection on the retained full-corpus capture; its accepted rotation is 180 degrees.",
+    "pilot": {
+      "main": {
+        "repeat": 0,
+        "pair": "cdx-qr-ai-lotus/1/square/0",
+        "order": "main,detail",
+        "inactiveFrames": 0,
+        "mode": "main",
+        "picture": "cdx-qr-ai-lotus",
+        "link": 1,
+        "shape": "square",
+        "ms": 2747.4664059999923,
+        "check": {
+          "ok": true,
+          "sizes": [
+            {
+              "id": "phone",
+              "label": "phone size",
+              "ppm": 8,
+              "blur": 0.2,
+              "text": "https://example.org/gallery/2?q=circle&page=1",
+              "ok": true
+            },
+            {
+              "id": "small",
+              "label": "smaller",
+              "ppm": 4,
+              "blur": 0.2,
+              "text": "https://example.org/gallery/2?q=circle&page=1",
+              "ok": true
+            }
+          ],
+          "measure": {
+            "module": 3.117771669426392,
+            "center": 18.375705646557403,
+            "darkGray": 0.46361713826437506,
+            "lightGray": 0.8411418097607559,
+            "gap": -0.8662193221790716
+          },
+          "stage": [
+            {
+              "ppm": 8,
+              "text": "https://example.org/gallery/2?q=circle&page=1",
+              "ok": true
+            },
+            {
+              "ppm": 4,
+              "text": "https://example.org/gallery/2?q=circle&page=1",
+              "ok": true
+            }
+          ],
+          "text": "https://example.org/gallery/2?q=circle&page=1"
+        },
+        "codeSize": 57,
+        "mask": 5,
+        "rotation": 0,
+        "fidelity": "standard",
+        "modules": 67,
+        "error": "",
+        "notice": "",
+        "fallback": null,
+        "version": 10,
+        "margin": 0.1,
+        "kitCount": 120000
+      },
+      "detail": {
+        "repeat": 0,
+        "pair": "cdx-qr-ai-lotus/1/square/0",
+        "order": "main,detail",
+        "inactiveFrames": 0,
+        "mode": "detail",
+        "picture": "cdx-qr-ai-lotus",
+        "link": 1,
+        "shape": "square",
+        "ms": 3805.501501999999,
+        "check": {
+          "ok": true,
+          "sizes": [
+            {
+              "id": "phone",
+              "label": "phone size",
+              "ppm": 8,
+              "blur": 0.2,
+              "text": "https://example.org/gallery/2?q=circle&page=1",
+              "ok": true
+            },
+            {
+              "id": "small",
+              "label": "smaller",
+              "ppm": 4,
+              "blur": 0.2,
+              "text": "https://example.org/gallery/2?q=circle&page=1",
+              "ok": true
+            }
+          ],
+          "detail": {
+            "ok": true,
+            "readers": ["jsqr", "zxingcpp"],
+            "workers": 4,
+            "ms": 198.3999999910593,
+            "parts": [152.8999999910593, 172, 197.59999999403954, 185.5],
+            "layoutChecked": true,
+            "tried": 1,
+            "candidates": 1,
+            "preparationMs": 407.20000000298023
+          },
+          "measure": {
+            "module": 6.072363764871928,
+            "center": 8.478193298342589,
+            "darkGray": 0.27444751712635385,
+            "lightGray": 0.8826598582245424,
+            "gap": -0.4445490421101451
+          },
+          "stage": [
+            {
+              "ppm": 8,
+              "text": "https://example.org/gallery/2?q=circle&page=1",
+              "ok": true
+            },
+            {
+              "ppm": 4,
+              "text": "https://example.org/gallery/2?q=circle&page=1",
+              "ok": true
+            }
+          ],
+          "text": "https://example.org/gallery/2?q=circle&page=1",
+          "stress": {
+            "ok": true,
+            "readers": ["jsqr", "zxingcpp"],
+            "workers": 4,
+            "ms": 234.70000000298023,
+            "parts": [
+              187.20000000298023, 219.80000001192093, 233.20000000298023, 176.19999998807907
+            ]
+          }
+        },
+        "codeSize": 57,
+        "mask": 5,
+        "rotation": 0,
+        "rendering": {
+          "method": "correction",
+          "sigma": 0.36,
+          "edge": 0.32,
+          "core": 0.08,
+          "channel": "weighted",
+          "finderGuard": 3,
+          "texture": "tiles",
+          "textureBlur": 0,
+          "textureGuard": 0,
+          "validation": "model",
+          "fraction": 0.4
+        },
+        "correction": {
+          "fraction": 0.4,
+          "maxErrors": 14,
+          "limit": 5,
+          "usedByBlock": [5, 5, 5, 5, 5, 5, 5, 5],
+          "flipped": 210
+        },
+        "fidelity": "detail",
+        "modules": 67,
+        "error": "",
+        "notice": "",
+        "fallback": null,
+        "version": 10,
+        "margin": 0.16,
+        "method": "correction",
+        "rejected": ["[\"correction\",10,\"H\",5,3,1,0.16,0.16,0,0.24,0.08,0.4,\"weighted\",3]"],
+        "kitCount": 11578
+      }
+    },
+    "final": {
+      "key": "cdx-qr-ai-lotus/1/square/0",
+      "picture": "cdx-qr-ai-lotus",
+      "shape": "square",
+      "link": 1,
+      "main": 2368.557470000349,
+      "detail": 2120.003239999991,
+      "difference": -248.55423000035807,
+      "ratio": 0.8950609249940127,
+      "order": "detail,main",
+      "mainMeasurementRun": "review-full",
+      "detailMeasurementRun": "review-full",
+      "detailOrder": "detail,main",
+      "lastPreparationMs": 679.4000000059605,
+      "lastPreparationCandidates": 2,
+      "acceptedCaptureMatrixMs": 212
+    },
+    "finalCapture": {
+      "key": "cdx-qr-ai-lotus/1/square",
+      "picture": "cdx-qr-ai-lotus",
+      "link": 1,
+      "text": "https://example.org/gallery/2?q=circle&page=1",
+      "shape": "square",
+      "profile": "low",
+      "ms": 2120.003239999991,
+      "appearanceMs": 2120.003239999991,
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/gallery/2?q=circle&page=1",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/gallery/2?q=circle&page=1",
+            "ok": true
+          }
+        ],
+        "detail": {
+          "ok": true,
+          "layoutChecked": true,
+          "cameraDeferred": true,
+          "tried": 1,
+          "candidates": 2,
+          "preparationMs": 679.4000000059605
+        },
+        "measure": {
+          "module": 5.939292148026485,
+          "center": 8.384379664729872,
+          "darkGray": 0.27142302120207706,
+          "lightGray": 0.8846466240966233,
+          "gap": -0.3907453260570764
+        },
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/gallery/2?q=circle&page=1",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/gallery/2?q=circle&page=1",
+            "ok": true
+          }
+        ],
+        "text": "https://example.org/gallery/2?q=circle&page=1",
+        "stress": {
+          "ok": true,
+          "readers": ["jsqr", "zxingcpp"],
+          "workers": 4,
+          "ms": 212,
+          "parts": [178, 178.09999999403954, 211.59999999403954, 173.70000000298023]
+        }
+      },
+      "codeSize": 57,
+      "mask": 5,
+      "rotation": 2,
+      "rendering": {
+        "method": "continuous",
+        "sigma": 0.36,
+        "edge": 0.24,
+        "core": 0.08,
+        "channel": "weighted",
+        "finderGuard": 3,
+        "texture": "tiles",
+        "textureBlur": 0,
+        "textureGuard": 0,
+        "validation": "capture"
+      },
+      "fidelity": "detail",
+      "modules": 67,
+      "error": "",
+      "notice": "",
+      "fallback": null,
+      "version": 10,
+      "margin": 0.16,
+      "method": "continuous",
+      "rejected": [],
+      "kitCount": 11578,
+      "captureRGBA8Sha256": "f8c11cfd52c992bc0d786827696c1ca1edbc31b19dc408e1efbffa5d95cba2b3",
+      "scores": {
+        "phone": {
+          "ssim": 0.3239317840806936,
+          "rmse": 0.2725675879106144
+        },
+        "print": {
+          "ssim": 0.3163704260938352,
+          "rmse": 0.2794840969663509
+        }
+      },
+      "stickerScores": null,
+      "scans": [
+        {
+          "condition": "8px-blur0.2-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        }
+      ],
+      "measurementRun": "review-full"
+    }
+  },
+  {
+    "key": "met-459968/8/circle",
+    "explanation": "The initial edge-0.24 candidate was rejected on the actual capture. The accepted version-12 edge-0.32 repair used 1,167 ms of preparation, including a 717 ms predicted matrix, and a further 687 ms actual matrix. This records two accepted-repair reader passes plus the earlier failed capture; it does not infer retry counts from stale rejection lists.",
+    "pilot": {
+      "main": {
+        "repeat": 0,
+        "pair": "met-459968/8/circle/0",
+        "order": "main,detail",
+        "inactiveFrames": 0,
+        "mode": "main",
+        "picture": "met-459968",
+        "link": 8,
+        "shape": "circle",
+        "ms": 3482.583744000003,
+        "check": {
+          "ok": true,
+          "sizes": [
+            {
+              "id": "phone",
+              "label": "phone size",
+              "ppm": 8,
+              "blur": 0.2,
+              "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+              "ok": true
+            },
+            {
+              "id": "small",
+              "label": "smaller",
+              "ppm": 4,
+              "blur": 0.2,
+              "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+              "ok": true
+            }
+          ],
+          "measure": {
+            "module": 2.6212454687007405,
+            "center": 18.375705646557403,
+            "darkGray": 0.40894548076100823,
+            "lightGray": 0.702913759701831,
+            "gap": -0.7718035190001129
+          },
+          "stage": [
+            {
+              "ppm": 8,
+              "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+              "ok": true
+            },
+            {
+              "ppm": 4,
+              "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+              "ok": true
+            }
+          ],
+          "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8"
+        },
+        "codeSize": 65,
+        "mask": 2,
+        "rotation": 0,
+        "fidelity": "standard",
+        "modules": 111,
+        "error": "",
+        "notice": "",
+        "fallback": null,
+        "version": 12,
+        "margin": 0.1,
+        "kitCount": 120000
+      },
+      "detail": {
+        "repeat": 0,
+        "pair": "met-459968/8/circle/0",
+        "order": "main,detail",
+        "inactiveFrames": 0,
+        "mode": "detail",
+        "picture": "met-459968",
+        "link": 8,
+        "shape": "circle",
+        "ms": 6425.9156440000515,
+        "check": {
+          "ok": true,
+          "sizes": [
+            {
+              "id": "phone",
+              "label": "phone size",
+              "ppm": 8,
+              "blur": 0.2,
+              "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+              "ok": true
+            },
+            {
+              "id": "small",
+              "label": "smaller",
+              "ppm": 4,
+              "blur": 0.2,
+              "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+              "ok": true
+            }
+          ],
+          "detail": {
+            "ok": true,
+            "readers": ["jsqr", "zxingcpp"],
+            "workers": 4,
+            "ms": 717,
+            "parts": [716.4000000059605, 619, 697.2999999970198, 686.2000000029802],
+            "layoutChecked": true,
+            "tried": 1,
+            "candidates": 1,
+            "preparationMs": 1166.6000000089407
+          },
+          "measure": {
+            "module": 5.041676848957584,
+            "center": 7.861352906734542,
+            "darkGray": 0.2668605061387401,
+            "lightGray": 0.7823464230906343,
+            "gap": -0.29550034618973736
+          },
+          "stage": [
+            {
+              "ppm": 8,
+              "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+              "ok": true
+            },
+            {
+              "ppm": 4,
+              "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+              "ok": true
+            }
+          ],
+          "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+          "stress": {
+            "ok": true,
+            "readers": ["jsqr", "zxingcpp"],
+            "workers": 4,
+            "ms": 687.1000000089407,
+            "parts": [685.2999999970198, 626.9000000059605, 681.2000000029802, 608.6000000089407]
+          }
+        },
+        "codeSize": 65,
+        "mask": 2,
+        "rotation": 0,
+        "rendering": {
+          "method": "correction",
+          "sigma": 0.36,
+          "edge": 0.32,
+          "core": 0.08,
+          "channel": "weighted",
+          "finderGuard": 3,
+          "texture": "tiles",
+          "textureBlur": 0,
+          "textureGuard": 0,
+          "validation": "model",
+          "fraction": 0.4
+        },
+        "correction": {
+          "fraction": 0.4,
+          "maxErrors": 14,
+          "limit": 5,
+          "usedByBlock": [5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+          "flipped": 264
+        },
+        "fidelity": "detail",
+        "modules": 111,
+        "error": "",
+        "notice": "",
+        "fallback": null,
+        "version": 12,
+        "margin": 0.16,
+        "method": "correction",
+        "rejected": ["[\"correction\",12,\"H\",2,3,1,0.16,0.16,0,0.24,0.08,0.4,\"weighted\",3]"],
+        "kitCount": 32310
+      }
+    },
+    "final": {
+      "key": "met-459968/8/circle/0",
+      "picture": "met-459968",
+      "shape": "circle",
+      "link": 8,
+      "main": 3225.8253550003283,
+      "detail": 3449.250963000115,
+      "difference": 223.42560799978673,
+      "ratio": 1.0692615326038828,
+      "order": "main,detail",
+      "mainMeasurementRun": "review-third-remaining",
+      "detailMeasurementRun": "review-third-remaining",
+      "detailOrder": "main,detail",
+      "lastPreparationMs": 1596.4000000059605,
+      "lastPreparationCandidates": 2,
+      "acceptedCaptureMatrixMs": 469.5
+    },
+    "finalCapture": {
+      "key": "met-459968/8/circle",
+      "picture": "met-459968",
+      "link": 8,
+      "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+      "shape": "circle",
+      "profile": "low",
+      "ms": 3449.250963000115,
+      "appearanceMs": 3449.250963000115,
+      "check": {
+        "ok": true,
+        "sizes": [
+          {
+            "id": "phone",
+            "label": "phone size",
+            "ppm": 8,
+            "blur": 0.2,
+            "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+            "ok": true
+          },
+          {
+            "id": "small",
+            "label": "smaller",
+            "ppm": 4,
+            "blur": 0.2,
+            "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+            "ok": true
+          }
+        ],
+        "detail": {
+          "ok": true,
+          "layoutChecked": true,
+          "cameraDeferred": true,
+          "tried": 1,
+          "candidates": 2,
+          "preparationMs": 1596.4000000059605
+        },
+        "measure": {
+          "module": 4.96567111346022,
+          "center": 7.808487952479907,
+          "darkGray": 0.2656698759290398,
+          "lightGray": 0.7810515769104655,
+          "gap": -0.25295743988752356
+        },
+        "stage": [
+          {
+            "ppm": 8,
+            "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+            "ok": true
+          },
+          {
+            "ppm": 4,
+            "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+            "ok": true
+          }
+        ],
+        "text": "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+        "stress": {
+          "ok": true,
+          "readers": ["jsqr", "zxingcpp"],
+          "workers": 4,
+          "ms": 469.5,
+          "parts": [469, 454.5, 466.59999999403954, 455.09999999403954]
+        }
+      },
+      "codeSize": 65,
+      "mask": 2,
+      "rotation": 2,
+      "rendering": {
+        "method": "continuous",
+        "sigma": 0.36,
+        "edge": 0.24,
+        "core": 0.08,
+        "channel": "weighted",
+        "finderGuard": 3,
+        "texture": "tiles",
+        "textureBlur": 0,
+        "textureGuard": 0,
+        "validation": "capture"
+      },
+      "fidelity": "detail",
+      "modules": 111,
+      "error": "",
+      "notice": "",
+      "fallback": null,
+      "version": 12,
+      "margin": 0.16,
+      "method": "continuous",
+      "rejected": [],
+      "kitCount": 32310,
+      "captureRGBA8Sha256": "f60d529021c7d5342997b01839a8b4ac76d9fe6abc3554405df8f26e35260535",
+      "scores": {
+        "phone": {
+          "ssim": 0.3941204006263944,
+          "rmse": 0.16951410694215877
+        },
+        "print": {
+          "ssim": 0.35212541779345835,
+          "rmse": 0.20836593137904008
+        }
+      },
+      "stickerScores": {
+        "phone": {
+          "ssim": 0.5516094959815253,
+          "rmse": 0.16201236571925418
+        },
+        "print": {
+          "ssim": 0.5476469827435816,
+          "rmse": 0.1639223859418437
+        }
+      },
+      "scans": [
+        {
+          "condition": "8px-blur0.2-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.2-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "8px-blur0.3-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.2-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-front",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-yaw10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-pitch10",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-dim",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-bright",
+          "jsqr": true,
+          "zxingcpp": true
+        },
+        {
+          "condition": "4px-blur0.3-combined",
+          "jsqr": true,
+          "zxingcpp": true
+        }
+      ],
+      "measurementRun": "review-third-remaining"
+    }
+  }
+]

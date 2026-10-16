@@ -1,0 +1,26 @@
+{
+  "independentCSVCheck": "passed",
+  "checkerSHA256": "5a804ab3852b57edc6435af3a3fadf2710fcc58336c83e8276ac59d5463848b4",
+  "codesPerMode": 2000,
+  "groups": 200,
+  "readerPasses": 96000,
+  "readerAttempts": 96000,
+  "scanRegressions": 0,
+  "failedCodes": 0,
+  "failedGates": 0,
+  "fallbacks": 0,
+  "nonImprovingMeans": {
+    "phone": 0,
+    "print": 0
+  },
+  "meanGain": {
+    "phone": 0.15204171062796085,
+    "print": 0.16035614589124017
+  },
+  "minGain": {
+    "phone": 0.013336910475400126,
+    "print": 0.005899164996365636
+  },
+  "slower": 350,
+  "nativePhoneImages": 400
+}

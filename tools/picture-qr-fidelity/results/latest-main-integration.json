@@ -1,0 +1,17 @@
+{
+  "head": "7f4b06437d35f08e8a4f011aefe0ac01527b3a1f",
+  "integratedMain": "0f1f0f78",
+  "previousIntegratedMain": "ea35f3de",
+  "checks": {
+    "boundsAndQrTileEngine": 14,
+    "webgpuStartup": 1,
+    "failed": 0,
+    "skipped": 0
+  },
+  "hashes": {
+    "src/stage.js": "e4ba0f2467c5b1bb9039956460839b1bf4b2e48dfbed21b7a3924b2b3d032d34",
+    "src/token-bounds.js": "533ac421b6c2c0e555d1245cd5070bff6135b20a068e904bdbee3d9ff5e382b4",
+    "src/packs/qr-craft.js": "46e70fc1dcedaba35868dccfdd2adef4a1a4f323ed1e7107128bf1114c47b5af"
+  },
+  "qualificationLimits": "The complete 191-test suite precedes this latest main integration. Its Stage addition calls token bounds only for WebGPU kit objects without a custom modifier. All primary corpus measurements use WebGL2, where this path is inactive; Most detail uses a custom modifier. QR construction, camera checks, geometry, and shaders are unchanged. The primary pixel/timing rows retain their original recorded heads and hashes; this is not a newly captured 1040-code run of this head. Focused tests verify all device/custom-field branches and actual QR tile renders after integration. Asset registries preserve all incoming fixtures and all 20 QR fixtures."
+}

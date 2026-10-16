@@ -1,0 +1,12 @@
+Started 2026-10-15T07:06:20.525134+00:00 ['npx', 'playwright', 'test', 'tests/smoke.spec.mjs', '--grep', 'auto picks WebGPU']
+
+Running 1 test using 1 worker
+
+(node:156018) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:156018) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/smoke.spec.mjs:2015:3 › Splashery on WebGPU › auto picks WebGPU when an adapter exists and effects render (23.2s)
+
+  1 passed (24.7s)
+Finished 2026-10-15T07:06:46.111771+00:00 0

@@ -1,0 +1,215 @@
+{
+  "note": "Diagnostic pilots, not the final 100-picture qualification. Raw bytes are retained, including slower cases and the guard-one Standard fallback. Tail-before and tail-memory have CPU profiling enabled. Correction-first precedes the two added pitch predictions; correction-six/five include them. Source and protocol hashes in each paired provenance identify the exact run.",
+  "files": [
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-correction-first-detail-low-0.jsonl",
+      "archive": "browser-review-correction-first-detail-low-0.jsonl.gz",
+      "uncompressedSha256": "c83bec1b5c064159fe38349b90927f485228ed1b88799a9a33eb51be471e258c"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-correction-first-main-low-0.jsonl",
+      "archive": "browser-review-correction-first-main-low-0.jsonl.gz",
+      "uncompressedSha256": "76235a2f3d2888a2aaf81423c107f884d690fa96005c7c27d1324a339973b515"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-correction-five-detail-low-0.jsonl",
+      "archive": "browser-review-correction-five-detail-low-0.jsonl.gz",
+      "uncompressedSha256": "0271bead597f35c44268d305e0b7ae5b58be12d1ad23ae1413e7bf562047e871"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-correction-five-main-low-0.jsonl",
+      "archive": "browser-review-correction-five-main-low-0.jsonl.gz",
+      "uncompressedSha256": "6e97a1d97e1c923fd28c69f134bdaf05a905804a1045db2a036398cbeb09ca4c"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-correction-six-detail-low-0.jsonl",
+      "archive": "browser-review-correction-six-detail-low-0.jsonl.gz",
+      "uncompressedSha256": "637bba801b539af04c1e731132436d3a9d32737024e2dd474a33bcd91426bf55"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-correction-six-main-low-0.jsonl",
+      "archive": "browser-review-correction-six-main-low-0.jsonl.gz",
+      "uncompressedSha256": "860739b692068efa8b59187c2d87a1377a9825db21e2f92d47c172e1bf9da8de"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-guard-one-detail-low-0.jsonl",
+      "archive": "browser-review-guard-one-detail-low-0.jsonl.gz",
+      "uncompressedSha256": "21a31009bac61523362d8c6ba09458cf289345c32f10f5e0d43fda43bd992f30"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-guard-one-main-low-0.jsonl",
+      "archive": "browser-review-guard-one-main-low-0.jsonl.gz",
+      "uncompressedSha256": "da5ba24b46392a61402b1d4342b45353fe39356dde6d57e02df6ebf9cc3edae1"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-locked-four-three-detail-low-0.jsonl",
+      "archive": "browser-review-locked-four-three-detail-low-0.jsonl.gz",
+      "uncompressedSha256": "dea58d4cc024bd88072669cdf1a20595eb908fb4fcd398e374291f88a3d5a755"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-locked-three-detail-low-0.jsonl",
+      "archive": "browser-review-locked-three-detail-low-0.jsonl.gz",
+      "uncompressedSha256": "01ae73f873293ed96ad312f361a63ccef346fed4505f0c2460b6e0e208d7e8dd"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-tail-before-detail-low-0.jsonl",
+      "archive": "browser-review-tail-before-detail-low-0.jsonl.gz",
+      "uncompressedSha256": "e61306f85870d58aefcc027355c06b107a1661d523e13171b816f53a92e6c461"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-tail-before-main-low-0.jsonl",
+      "archive": "browser-review-tail-before-main-low-0.jsonl.gz",
+      "uncompressedSha256": "52e61a8599e953ad6ba6db837d1cb780e73c1f9b841bbf9887e1d164d471d6d8"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-tail-memory-detail-low-0.jsonl",
+      "archive": "browser-review-tail-memory-detail-low-0.jsonl.gz",
+      "uncompressedSha256": "44cee6977abb4c9b42ef5e1cadadf7a5714ebec696d124b5f3f37df99c3d9fe6"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/browser-review-tail-memory-main-low-0.jsonl",
+      "archive": "browser-review-tail-memory-main-low-0.jsonl.gz",
+      "uncompressedSha256": "3a10307a0c42f54fa46d27c925c67b2b01afc278852fc22bbf9e0e737a3c7b50"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-correction-first-provenance.json",
+      "archive": "paired-review-correction-first-provenance.json.gz",
+      "uncompressedSha256": "c6df58a25a0cf377ce4c5917926fce30db6758ebcf5cc4be3ae8ce3c3fe9192c"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-correction-first.jsonl",
+      "archive": "paired-review-correction-first.jsonl.gz",
+      "uncompressedSha256": "9f36cd6df85754a360299dfd5434e47e97bf334259deb995144ff9e15031b902"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-correction-five-provenance.json",
+      "archive": "paired-review-correction-five-provenance.json.gz",
+      "uncompressedSha256": "e2dcbb742abaa5dd7a4471d935b2c3c4a97138d3c8de5c77c7105d434ff759c3"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-correction-five.jsonl",
+      "archive": "paired-review-correction-five.jsonl.gz",
+      "uncompressedSha256": "a768eb323a733f003fee141d3f8e0b6eb399c105a02306fcbb091469afc0e1cd"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-correction-six-provenance.json",
+      "archive": "paired-review-correction-six-provenance.json.gz",
+      "uncompressedSha256": "be5e97b2c096676f61b1a57a645c6eeed35ad0aa87d19d0dce6942335839de3c"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-correction-six.jsonl",
+      "archive": "paired-review-correction-six.jsonl.gz",
+      "uncompressedSha256": "38b31486ac0558f7732cb716d40e663f3fed97f62a0aa1070734e71ae3aa0422"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-guard-one-provenance.json",
+      "archive": "paired-review-guard-one-provenance.json.gz",
+      "uncompressedSha256": "12ea0f654ee44526641441519dc38fbe6e91122de82afeee1541a25ea59f5b2a"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-guard-one.jsonl",
+      "archive": "paired-review-guard-one.jsonl.gz",
+      "uncompressedSha256": "1de9c0dcf10da620da9cf0ba84140035d3666e5e352703e4096260b4f52d7149"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-locked-four-three-provenance.json",
+      "archive": "paired-review-locked-four-three-provenance.json.gz",
+      "uncompressedSha256": "88f65879546bb18f66f94324fc39ea0f7232afbcf63ddb94b92d4880f7774ede"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-locked-four-three.jsonl",
+      "archive": "paired-review-locked-four-three.jsonl.gz",
+      "uncompressedSha256": "e523dcd7e67da006a6af94f8c330c382964e64a84debbd0983c444c244d1f64d"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-locked-three-provenance.json",
+      "archive": "paired-review-locked-three-provenance.json.gz",
+      "uncompressedSha256": "8d7b42bf9619aff02783eb88f36e6cbad538e5ac4fb5ba7eb5e302f87e6dc8c6"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-locked-three.jsonl",
+      "archive": "paired-review-locked-three.jsonl.gz",
+      "uncompressedSha256": "cd4b71a6da9887707db849a9d18a51ac246e7fa04b1e85eb1098b08e41e4b733"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-tail-before-provenance.json",
+      "archive": "paired-review-tail-before-provenance.json.gz",
+      "uncompressedSha256": "8a79a240b91b328d418638702ab0ca51deb5e3b2dc9c0f2cf6feda1c8214acd4"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-tail-before.jsonl",
+      "archive": "paired-review-tail-before.jsonl.gz",
+      "uncompressedSha256": "0c49e45aaa889651a314abb693a302022e923e7eb675bcd6a593ae28626a74ba"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-tail-memory-provenance.json",
+      "archive": "paired-review-tail-memory-provenance.json.gz",
+      "uncompressedSha256": "682160d02f39010824b26d82b3f923e3f581f812cd07e8bcc0f70b94a63c0f4d"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/paired-review-tail-memory.jsonl",
+      "archive": "paired-review-tail-memory.jsonl.gz",
+      "uncompressedSha256": "ebb837b73ac039618b4e7e542d89a88061a488251a445ce7e47797092d5fd805"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/color-probe.jsonl",
+      "archive": "color-probe.jsonl.gz",
+      "uncompressedSha256": "33681a295d0d976b1c5da21f59d7d5fd7a726724e1e4cb202adc88ac279939c1"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/correction-comparison.json",
+      "archive": "correction-comparison.json.gz",
+      "uncompressedSha256": "37aec04edac40bebf761246b4ae7699a964aa1980c9e9ac76ea073acddaa9dd6"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/frame-benchmark-after.log",
+      "archive": "frame-benchmark-after.log.gz",
+      "uncompressedSha256": "3f45a96b215e152e0fb90260d48533ec8723914747eba6b780ec00762a4492d1"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/frame-benchmark-before.log",
+      "archive": "frame-benchmark-before.log.gz",
+      "uncompressedSha256": "4486d9ce78e974001e3693bb926bfe0afe7e31bafaaaf7562de7c476ec49d33f"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/gray-probe.log",
+      "archive": "gray-probe.log.gz",
+      "uncompressedSha256": "6bd93ef3bde6a5dba5301effc97f1a7be99e51ad0b44d899957216a3ba210157"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/guard-cases.json",
+      "archive": "guard-cases.json.gz",
+      "uncompressedSha256": "addc8c34073e513f642dc2afc643d8470c469273cd300ce3f58e9147164b5aac"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/guard-probe-ready.jsonl",
+      "archive": "guard-probe-ready.jsonl.gz",
+      "uncompressedSha256": "ed1de259938c92d9c563394e77da12216c53a3cf39e5cda0cf9f4b38d139d177"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/locked-cases.json",
+      "archive": "locked-cases.json.gz",
+      "uncompressedSha256": "c128a80c9bda324815c55906e44b2c96ac5aa2554ddcca75b4d472132d537a65"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/retry-memory-decision.json",
+      "archive": "retry-memory-decision.json.gz",
+      "uncompressedSha256": "7d3a96f6c7d89283b9bfb5a3db9d22f5ef30ceb860164f1162cbcdbe382d081a"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/strategy-probe.jsonl",
+      "archive": "strategy-probe.jsonl.gz",
+      "uncompressedSha256": "cada06d5bfe6d05cbaa28bd707406dc1ee4a47c6c267a4833508e0149af0697f"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/strategy-provenance.json",
+      "archive": "strategy-provenance.json.gz",
+      "uncompressedSha256": "af9be1921a644455e9c9ddab3ee83a6ca312c27c8a9b8bc6b4476f6ca24e43f1"
+    },
+    {
+      "source": ".cache/picture-qr-fidelity/review-pass/tail-cases.json",
+      "archive": "tail-cases.json.gz",
+      "uncompressedSha256": "7c52e58c9c2229f787096d8f507710d6bebd3fe209b0df6a4371acfc15e4aaf2"
+    }
+  ]
+}

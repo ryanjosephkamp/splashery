@@ -1,0 +1,12 @@
+[
+  "https://example.org/a/1",
+  "https://example.org/gallery/2?q=circle&page=1",
+  "https://example.org/notes/3?q=circlecircle&page=2",
+  "https://example.org/workshop/4?q=circlecirclecircle&page=3",
+  "https://example.org/a/5?q=circlecirclecirclecircle&page=4",
+  "https://example.org/gallery/6?q=circlecirclecirclecirclecircle&page=5",
+  "https://example.org/notes/7?q=circlecirclecirclecirclecirclecircle&page=6",
+  "https://example.org/workshop/8?q=circlecirclecirclecirclecirclecirclecircle&page=7",
+  "https://example.org/a/9?q=circlecirclecirclecirclecirclecirclecirclecircle&page=8",
+  "https://example.org/gallery/10?q=circlecirclecirclecirclecirclecirclecirclecirclecircle&page=9"
+]

@@ -1,0 +1,52 @@
+{
+  "created": "2026-10-15T23:07:53.731307+00:00",
+  "baseline": "cb8a83157bc502feb2dda18ece6cfa39621abb61",
+  "mergedMain": "d4df5998675c5b31ae4dae1240a7e2d73a1fface",
+  "parentRuntime": "8abc68ff",
+  "runtime": "ed3ff719",
+  "baseComposite": "review-pre-third",
+  "baseCounts": {
+    "main": 1182,
+    "detail": 1183
+  },
+  "recheckRun": "review-third-recheck",
+  "remainingRun": "review-third-remaining",
+  "recheckCases": 15,
+  "remainingCases": 818,
+  "expectedCodesPerMode": 2000,
+  "pixelControls": [
+    "ai-farm/0/square",
+    "cdx-theme-space-art-2-1/0/circle",
+    "cdx-theme-seasons-11-2/0/square"
+  ],
+  "veryLowContrastPictures": [
+    "cdx-theme-space-art-2-1",
+    "cdx-theme-space-art-5-1",
+    "cdx-theme-space-art-6-1",
+    "cdx-theme-space-art-8-2",
+    "cdx-theme-space-art-10-1",
+    "cdx-theme-patterns-2-1",
+    "cdx-theme-patterns-9-1",
+    "cdx-theme-patterns-11-2",
+    "cdx-theme-celebrations-4-1",
+    "cdx-theme-celebrations-5-1",
+    "cdx-theme-celebrations-7-1"
+  ],
+  "policy": {
+    "shape": "square",
+    "condition": "Every source RGB population standard deviation is at most 0.05",
+    "fraction": 0.65,
+    "otherLowContrastSquareFraction": 0.6,
+    "otherSquareAndCircleFraction": 0.4
+  },
+  "selectionHistory": "The cutoff was selected after the Crescent moon print-SSIM loss and inspection of the already frozen contrast features. It was not selected on held-out pictures. The 0.32 finder trial did not close the loss; the first requested 65% trial remained internally clamped to 60%. The corrected 65% trial passed 480 reads and gained +0.0133369 phone / +0.00589916 print mean SSIM.",
+  "retentionRule": "Recheck every completed very-low-contrast Square and three unchanged-domain pixel controls. Other paths keep their prior correction share and all defaults. Measure every key with either mode missing; preserve any duplicate fresh detail observation, with recheck priority fixed before timing.",
+  "timing": "Segmented series; retain original per-mode observations except predeclared affected rechecks and controls. Keep all superseded rows, cold starts, and interruptions.",
+  "postCaptureQualification": {
+    "workers": 4,
+    "scope": "All original conditions partitioned across local Node workers after the appearance clock ends. The parent awaits every condition before the next measurement.",
+    "verification": "qualification-equivalence.json",
+    "implementationProof": "The default serial assessment remains unchanged after removing an optional condition-list parameter; the paired clock body is unchanged after removing the scheduler import and provenance entries."
+  },
+  "ordinaryRequestFix": "The repeated suite caught an oversized request selecting 65% on flat input. The existing regression remains unchanged. Only the exact 65% opt-in and selected source domain now permit that share; oversized requests retain the original 60% cap."
+}

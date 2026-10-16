@@ -1,0 +1,20 @@
+{
+  "head": "ebff95508ede439db62dbcf875e0a33b8c21d48a",
+  "time": "2026-10-15T06:47:56.904944+00:00",
+  "reason": "Deadline-bounded run resumes in repository-supported two-lane mode. QR files are not in suite.json solo list. Completed zero-failure reports retained without rerunning; in-progress qr5 canceled and its log retained, then rerun in full. No performance measurement runs beside tests.",
+  "retainedReports": [
+    {
+      "file": "smoke.json",
+      "sha256": "88b2cc4222e1001848d82c1c2e945e042a96756c04fa1338687dcf319cac38b5",
+      "passed": 50
+    },
+    {
+      "file": "qr.json",
+      "sha256": "ccb591f5bb07b2c53fbf85f8d072e26a036a960b48c29cbbc090b23882faf191",
+      "passed": 12
+    }
+  ],
+  "jobsBefore": 1,
+  "jobsAfter": 2,
+  "backend": "llvmpipe"
+}

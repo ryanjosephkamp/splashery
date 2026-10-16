@@ -1,0 +1,13 @@
+{
+  "baseline": "41b21e74",
+  "beforeIntegration": "6236cc80",
+  "integratedMain": "ea35f3de4ebef10f63ead8eecbae971ef65feecd",
+  "integrationHead": "c96c28660f8e2331492ab0e29f32c4244c4f7434",
+  "geometryComparisons": 36,
+  "allGeometryHashesIdentical": true,
+  "runtimeHash": {
+    "src/packs/qr-craft.js": "46e70fc1dcedaba35868dccfdd2adef4a1a4f323ed1e7107128bf1114c47b5af",
+    "src/stage.js": "b2cb4155e7bade694cfe4c233ab655ba80d3eaa5d1e6b68fbd0f07161fac9df6"
+  },
+  "notes": "Main no-picture Circle fallback replaces the earlier no-picture fallback. All measured picture branches keep identical calculations; 36 Standard/Most detail geometry controls match. Stage retains both hold APIs and real-draw retirement. No photo preview hold is requested by Picture QR. Stable capture geometry/shaders are unchanged; final model rows are reevaluated after integration. Earlier capture-only qualification is reused with these controls and explicit provenance; it is not a fresh full 1040-code capture of this head."
+}

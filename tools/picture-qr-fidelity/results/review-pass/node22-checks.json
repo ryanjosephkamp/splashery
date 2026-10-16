@@ -1,0 +1,271 @@
+{
+  "node": "v22.23.3",
+  "sourceRevision": "cd34aeabf57de53bf5adead06658b3a3825910cc",
+  "files": 31,
+  "totals": {
+    "expected": 276,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0
+  },
+  "bundle": "node22-checks.json.gz",
+  "sha256": "8c1bc9cf699f0a16f8217bee0fe6ee5394564581fdf71e6da3d8347d7c74d3a8",
+  "commands": [
+    "node tools/suite.mjs --gl=llvmpipe --jobs=2 --files=cdx-circle-qr,cdx-qr-color-projection,cdx-qr-export-gate,cdx-qr-fidelity,cdx-qr-finder-guard,cdx-qr-picture-errors,cdx-qr-picture-padding,cdx-qr-second-reader,cdx-qr-texture-frame,cdx-qr-themes,cdx-qr-tile-engine,help,kit,qr,qr3,qr4-2,qr4-2-engine,qr4-craft,qr4-flash,qr4-scan,qr5,qrc-barcodes,qrc-build,qrc-picture,qrl,qrs-heal,qrs-steps,qrs-study,qrs-toys,smoke --out=.cache/picture-qr-fidelity/review-pass/qr-suite",
+    "node tools/suite.mjs --gl=swiftshader --jobs=1 --files=cdx-qr-detail-budget --out=.cache/picture-qr-fidelity/review-pass/budget-suite"
+  ],
+  "profiles": {
+    "qr-suite": "llvmpipe WebGL2; SwiftShader WebGPU; two files at once",
+    "budget-suite": "SwiftShader; seven wall-clock tests alone"
+  },
+  "suites": {
+    "cdx-circle-qr": {
+      "startTime": "2026-10-15T16:56:23.073Z",
+      "duration": 100218.706,
+      "expected": 15,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-color-projection": {
+      "startTime": "2026-10-15T16:52:34.226Z",
+      "duration": 2422.88,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-export-gate": {
+      "startTime": "2026-10-15T16:52:37.903Z",
+      "duration": 25219.561999999998,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-fidelity": {
+      "startTime": "2026-10-15T16:53:04.273Z",
+      "duration": 113758.7,
+      "expected": 28,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-finder-guard": {
+      "startTime": "2026-10-15T16:54:59.277Z",
+      "duration": 6910.454,
+      "expected": 6,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-picture-errors": {
+      "startTime": "2026-10-15T16:55:07.350Z",
+      "duration": 11409.868999999999,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-picture-padding": {
+      "startTime": "2026-10-15T16:55:19.880Z",
+      "duration": 12370.758,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-second-reader": {
+      "startTime": "2026-10-15T16:55:22.884Z",
+      "duration": 9848.951,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-texture-frame": {
+      "startTime": "2026-10-15T16:55:33.413Z",
+      "duration": 5911.248,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-themes": {
+      "startTime": "2026-10-15T16:55:33.660Z",
+      "duration": 1088827.907,
+      "expected": 59,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-tile-engine": {
+      "startTime": "2026-10-15T16:55:40.298Z",
+      "duration": 41729.955,
+      "expected": 7,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "help": {
+      "startTime": "2026-10-15T16:52:23.035Z",
+      "duration": 178891.235,
+      "expected": 14,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "kit": {
+      "startTime": "2026-10-15T16:45:23.812Z",
+      "duration": 417800.03300000005,
+      "expected": 10,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qr": {
+      "startTime": "2026-10-15T16:30:29.685Z",
+      "duration": 432305.799,
+      "expected": 12,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qr3": {
+      "startTime": "2026-10-15T16:49:43.029Z",
+      "duration": 169829.021,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qr4-2-engine": {
+      "startTime": "2026-10-15T17:04:23.531Z",
+      "duration": 11511.242,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qr4-2": {
+      "startTime": "2026-10-15T17:03:53.976Z",
+      "duration": 28401.829999999998,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qr4-craft": {
+      "startTime": "2026-10-15T16:58:04.366Z",
+      "duration": 57837.805,
+      "expected": 8,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qr4-flash": {
+      "startTime": "2026-10-15T17:01:07.341Z",
+      "duration": 59640.402,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qr4-scan": {
+      "startTime": "2026-10-15T17:02:55.683Z",
+      "duration": 29421.957000000002,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qr5": {
+      "startTime": "2026-10-15T16:37:43.094Z",
+      "duration": 340386.222,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qrc-barcodes": {
+      "startTime": "2026-10-15T17:03:26.521Z",
+      "duration": 26464.729000000003,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qrc-build": {
+      "startTime": "2026-10-15T17:00:04.555Z",
+      "duration": 61567.907,
+      "expected": 2,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qrc-picture": {
+      "startTime": "2026-10-15T17:02:08.081Z",
+      "duration": 46440.765,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qrl": {
+      "startTime": "2026-10-15T16:59:03.443Z",
+      "duration": 59826.916,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qrs-heal": {
+      "startTime": "2026-10-15T17:04:50.824Z",
+      "duration": 1656.118,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qrs-steps": {
+      "startTime": "2026-10-15T17:04:36.161Z",
+      "duration": 8186.29,
+      "expected": 5,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qrs-study": {
+      "startTime": "2026-10-15T17:04:45.469Z",
+      "duration": 4194.465,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "qrs-toys": {
+      "startTime": "2026-10-15T16:43:24.583Z",
+      "duration": 377380.382,
+      "expected": 4,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "smoke": {
+      "startTime": "2026-10-15T16:30:29.688Z",
+      "duration": 892817.1100000001,
+      "expected": 50,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cdx-qr-detail-budget": {
+      "startTime": "2026-10-15T17:13:50.993Z",
+      "duration": 103177.356,
+      "expected": 7,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
+}

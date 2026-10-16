@@ -1,0 +1,4 @@
+{
+  "time": "2026-10-15T01:32:43.844342+00:00",
+  "reason": "Preliminary run stopped to verify a generation-scoped render-tail hold around capture. Rows retained; not final qualification."
+}

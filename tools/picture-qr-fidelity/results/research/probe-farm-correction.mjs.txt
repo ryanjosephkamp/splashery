@@ -1,0 +1,20 @@
+import { LINKS } from '../../tools/cdx-circle-study.mjs';
+import { loadBrowserSource } from '../../tools/picture-qr-fidelity/sources.mjs';
+import { fitMask } from '../../src/qr-craft/picture.js';
+import { fitPadding } from '../../src/qr/picture-padding.js';
+import { weaveDetail } from '../../src/qr-craft/detail.js';
+import { textureFrame } from '../../src/qr-craft/frame.js';
+import { cameraFrames,resizeFrame,checkPreparedFrames,checkPreparedFramesBoth } from '../../src/qr-craft/views.js';
+import { read } from '../../tools/qrc-picture.mjs';
+import { readZxingCpp } from '../../tools/qrs-study/readers.mjs';
+import { shapeHalf } from '../../src/qr/circle.js';
+import { loadBlurKernel } from '../../src/qr-craft/fast-blur.js';
+import fs from 'node:fs';import { fitPictureErrors } from '../../src/qr/picture-errors.js';
+await loadBlurKernel(fs.readFileSync('src/qr-craft/blur.wasm'));
+const pic=loadBrowserSource('ai-farm'),text=LINKS[6],code=fitPadding(fitMask(text,'H',pic,{min:12}),pic);
+for(const margin of [.16,.18,.20])for(const fraction of [0,.6,.4,.25]){
+ const w=weaveDetail(fraction?fitPictureErrors(code,pic,fraction):code,pic,{center:'small',margin,channel:'weighted',finderEdge:.24,finderCore:.08});w.rendering.texture='tiles';
+ const image=textureFrame(w,pic,'square'),modules=2*(shapeHalf(code,'square')+1),frames=cameraFrames(ppm=>resizeFrame(image,Math.round(modules*ppm)));
+ const failures=[];for(const f of frames){const v=await checkPreparedFramesBoth([f],read,text,readZxingCpp);if(!v.ok)failures.push(v);}
+ console.log(JSON.stringify({margin,fraction,mask:code.mask,failures}));
+}

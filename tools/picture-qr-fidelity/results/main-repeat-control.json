@@ -1,0 +1,10 @@
+{
+  "baseline": "41b21e74",
+  "originalCaptures": 1040,
+  "repeatedCaptures": 362,
+  "maxAbsoluteScoreError": 0,
+  "scoreMismatchKeys": [],
+  "readerMismatchKeys": [],
+  "scoreTolerance": 1e-12,
+  "notes": "Original complete baseline supplies scores/readers, not CPU-contended timing. Frozen-main repeats are byte-source verified by paired provenance. No capture-time hash sidecar was recorded for the original browser matrix; these exact-score and reader controls cross-check it."
+}

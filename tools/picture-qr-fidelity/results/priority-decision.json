@@ -1,0 +1,35 @@
+{
+  "kept": true,
+  "codes": 58,
+  "originalModelMs": 330986.5158519992,
+  "priorityModelMs": 319027.1683499999,
+  "unchangedOutputFields": [
+    "codeSize",
+    "mask",
+    "rotation",
+    "version",
+    "margin",
+    "rendering",
+    "modules",
+    "method",
+    "kitCount"
+  ],
+  "diagnosticPixels": [
+    {
+      "picture": "cdx-qr-ai-fern",
+      "link": 8,
+      "shape": "square",
+      "rgbaSha256": "0c4930ce9285513bde3b3cba3deea2edbfef6f5f4e583fe19997fac6cb2b7575"
+    },
+    {
+      "picture": "met-459968",
+      "link": 8,
+      "shape": "circle",
+      "rgbaSha256": "415ed5cb1cafd6890b9c09e1b9b7aee24cad883259847d207386df1c080468cd"
+    }
+  ],
+  "maxScoreError": 0,
+  "allReaderAttemptsPassed": 2784,
+  "notes": "Every model-path final row reevaluated; all capture-only rows never enter the changed branch. Last failed model frame is an exact subset of the full matrix. Accepted models still run all 24 conditions with both readers. No stored pixels or payloads in priority memory. Separate isolated series with limited repeats.",
+  "currentMainIntegration": "Merged ea35f3de. The QR pack adds only main’s no-picture fallback; the measured picture branches retain the same calculations. Stage keeps both hold APIs and retires textures after real draws. Stable capture draws retain the same geometry and shaders. All final model rows were freshly checked for identical output parameters, captured scores, and both readers; unchanged capture-only rows retain their earlier evidence. The final requested suite includes both hold APIs, actual tile draws, current-main Circle scans, and ordinary scene retirement."
+}
