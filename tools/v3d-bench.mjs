@@ -59,7 +59,7 @@ export const BENCHMARK_PROTOCOL_FILES = [
 
 export function benchmarkProtocolFingerprint() {
   return fingerprint({
-    version: 5,
+    version: 6,
     files: BENCHMARK_PROTOCOL_FILES.map((file) => ({
       file,
       sha256: sha256(fs.readFileSync(path.join(import.meta.dirname, file))),

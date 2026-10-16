@@ -22,8 +22,9 @@ export async function sourceFrameReceipts({ base64, sourceTimes, times, training
   const capture = async (index) => {
     if (cache.has(index)) return cache.get(index);
     const time = sourceTimes[index];
-    // A fresh independent decoder cannot inherit an old queued presentation. Start a few
-    // frames earlier and watch real playback reach the exact requested source timestamp.
+    // A fresh independent decoder first checks the paused source picture's own timestamp.
+    // Unsupported or stale decoded-picture access falls back to actual playback from an
+    // earlier source frame, within the same original presentation deadline.
     const video = document.createElement("video");
     video.muted = true;
     video.playsInline = true;
@@ -36,6 +37,7 @@ export async function sourceFrameReceipts({ base64, sourceTimes, times, training
         let ready = false;
         let seekedAt = null;
         let done = false;
+        let directSeek = false;
         const finish = (error, value) => {
           if (done) return;
           done = true;
@@ -68,19 +70,7 @@ export async function sourceFrameReceipts({ base64, sourceTimes, times, training
             /* The original presentation deadline still requires an actual callback. */
           }
         };
-        const settled = () => {
-          if (done || video.seeking || video.readyState < 2) return;
-          ready = true;
-          seekedAt = performance.now();
-          play();
-        };
-        const loaded = () => {
-          if (done) return;
-          clearTimeout(timer);
-          timer = setTimeout(
-            () => finish(new Error(`No presented source frame at ${time}.`)),
-            4000,
-          );
+        const preroll = () => {
           let from = Math.max(0, index - 4);
           while (from < index - 1 && time - sourceTimes[from] > 0.2) from++;
           video.playbackRate = Math.max(0.125, Math.min(1, (time - sourceTimes[from]) / 1.5));
@@ -92,6 +82,44 @@ export async function sourceFrameReceipts({ base64, sourceTimes, times, training
             const gap = sourceTimes[from + 1] - sourceTimes[from];
             video.currentTime = sourceTimes[from] + Math.min(0.005, gap / 4);
           }
+        };
+        const settled = () => {
+          if (done || video.seeking || video.readyState < 2) return;
+          if (directSeek) {
+            directSeek = false;
+            let frame;
+            try {
+              video.pause();
+              frame = new VideoFrame(video);
+              const actual = frame.timestamp / 1e6;
+              if (Number.isFinite(actual) && Math.abs(actual - time) <= 0.000001) {
+                finish(null, actual);
+                return;
+              }
+            } catch {
+              // Unsupported decoded-picture access retains actual callback verification.
+            } finally {
+              frame?.close();
+            }
+            preroll();
+            return;
+          }
+          ready = true;
+          seekedAt = performance.now();
+          play();
+        };
+        const loaded = () => {
+          if (done) return;
+          clearTimeout(timer);
+          timer = setTimeout(
+            () => finish(new Error(`No presented source frame at ${time}.`)),
+            4000,
+          );
+          if (typeof VideoFrame === "function") {
+            directSeek = true;
+            const gap = sourceTimes[index + 1] - time || time - sourceTimes[index - 1] || 0.01;
+            video.currentTime = time + Math.min(0.001, gap / 8);
+          } else preroll();
         };
         const failed = () => finish(new Error("Source video cannot be decoded."));
         let timer = setTimeout(() => finish(new Error("Source video metadata timed out.")), 10000);
@@ -155,7 +183,7 @@ export async function sourceFrameReceipts({ base64, sourceTimes, times, training
     }
     return {
       method:
-        "Fresh independent source decoders, actual presentation timestamps, identical extraction canvas and JPEG encoder; every training JPEG matched, held-out JPEGs disjoint.",
+        "Fresh independent source decoders, exact actual decoded-frame timestamps or actual presentation callbacks; identical extraction canvas and JPEG encoder, every training JPEG matched, and held-out JPEGs disjoint.",
       matchedTraining,
       views,
       decodedFrames: cache.size,
