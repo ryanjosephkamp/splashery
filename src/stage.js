@@ -523,7 +523,10 @@ export class Stage {
     this.toy = null;
     t.entity.enabled = false;
     if (t.addon) t.addon.entity.enabled = false;
-    for (const sh of t.sheets || []) sh.entity.enabled = false; // Pictures
+    for (const sh of t.sheets || []) {
+      sh.entity.enabled = false;
+      sh.surface?.show(false);
+    } // Pictures
     for (const l of t.layers || []) l.entity.enabled = false; // Fluids
     t.frames = 3;
     this.graveyard.push(t);
@@ -567,6 +570,7 @@ export class Stage {
     for (const sh of this.toy.sheets || []) {
       const sg = sh.entity.gsplat;
       for (const k in u) sg.setParameter(k, u[k]);
+      sh.surface?.setUniforms(u);
     }
     // Lane Fluids: a toy's fluid layers read the same uniforms.
     for (const l of this.toy.layers || []) {
@@ -695,6 +699,7 @@ export class Stage {
   }
 
   destroySheet(sheet) {
+    sheet.surface?.destroy();
     sheet.entity.destroy();
     sheet.container.destroy?.();
     sheet.screen?.destroy();
