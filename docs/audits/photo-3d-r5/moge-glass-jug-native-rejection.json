@@ -1,0 +1,60 @@
+{
+  "kind": "Bounded native field-substitution diagnostic; source-coded data adapter is not a production or cost candidate.",
+  "completedProfiles": 1,
+  "requestedProfiles": 2,
+  "completeCorpus": false,
+  "decision": "Cut: texture loss, boundary color error, registration, and lost transitions regress. Better field warnings do not qualify this model result.",
+  "sourceSha256": "0455ae5f0f440cd3620cd6a1d71c4354c3cc1ecbddc454199e0700df32846766",
+  "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+  "methods": {
+    "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+    "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+    "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+    "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+    "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+  },
+  "fieldSha256": "5e589a06d45dda8874b98757b4e209edb61ec371855cf26ca874920364f2efa3",
+  "modelFieldMatchesCompletePureScreen": true,
+  "dataProvenance": {
+    "kind": "Research-only source-coded baked-depth substitution; not a production or cost candidate",
+    "id": "cdx-hard-glass-jug",
+    "packedDepthSha256": "5592ad2b9ad62596d62de170e0d3f0656bced3b72319892c37bed00d71ce57b0",
+    "width": 518,
+    "height": 350,
+    "model": "MoGe-2, 1200 tokens; existing pinned study",
+    "quantization": "Original unsigned-16-bit pack/unpack; exact Float32 values embedded only for a bounded native quality screen"
+  },
+  "stoppedEarly": {
+    "id": "cdx-hard-glass-jug",
+    "profile": "phone",
+    "tolerance": 0,
+    "failures": [
+      {
+        "metric": "textureLoss",
+        "before": 0.6555487494847801,
+        "after": 0.7832534332457772
+      },
+      {
+        "metric": "halos",
+        "before": 0.14280787132511696,
+        "after": 0.14712909708648034
+      },
+      {
+        "metric": "edgeDisplacement",
+        "before": 2.4232761907990255,
+        "after": 2.5874275065708083
+      },
+      {
+        "metric": "lostTransitions",
+        "before": 9,
+        "after": 11
+      }
+    ]
+  },
+  "sharpWorking": true,
+  "native": [585, 1266],
+  "poseCount": 9,
+  "browserErrors": [],
+  "externalRequests": [],
+  "costUse": "Excluded: the research-only JavaScript data adapter and concurrent capture timings cannot establish deployment cost."
+}

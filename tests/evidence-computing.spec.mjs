@@ -971,7 +971,7 @@ test("browser: production half-adder output agrees with the arithmetic", async (
 test("evidence: exact schema, complete shelf inventory, source and test locations resolve", async () => {
   const { TOYS } = await import("../src/toys.js");
   const toys = TOYS.filter((t) => ["computing", "lab"].includes(t.category));
-  expect(toys).toHaveLength(21);
+  expect(toys).toHaveLength(22);
   for (const toy of toys) {
     const evidence = JSON.parse(await read(`docs/evidence/${toy.id}.json`));
     expect(Object.keys(evidence).sort()).toEqual(
