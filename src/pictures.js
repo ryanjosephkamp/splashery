@@ -459,11 +459,6 @@ export class Pictures {
     else cap = Math.sqrt((method === "screen" ? b.screen : b.pixels) * aspect);
     if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width * share); // prettier-ignore
     const target = Math.min(cap, Math.max(64, px * (this.solid && method === "ink" ? 1.5 : 1)));
-    // A face's supersampling should not pay for the next large Gaussian
-    // ladder step as well. Small texture steps retain the requested detail
-    // without keeping almost twice the projected resolution in memory.
-    if (this.solid && method === "ink")
-      return Math.max(32, Math.min(Math.floor(cap), Math.ceil(target / 32) * 32));
     let level = LADDER.find((w) => w >= target) ?? LADDER[LADDER.length - 1];
     level = Math.min(level, Math.floor(cap));
     return Math.max(32, level);
@@ -685,6 +680,7 @@ export class Pictures {
         sparse,
         ...geom,
       });
+      if (solid && backing !== canvas) backing.width = backing.height = 1;
       if (solid) {
         const face = this.geometry(sheet, media.aspect(want.page), w, h);
         face.lift = (sparse ? Math.hypot(...geom.right) * 6 : 0) + Math.hypot(...face.right) * 0.3;
@@ -703,7 +699,11 @@ export class Pictures {
         w = w2;
         h = h2;
       }
-      if (this.destroyed || media !== this.media) return null;
+      await this.freezeSurface(data);
+      if (this.destroyed || media !== this.media) {
+        data.surface?.source?.close?.();
+        return null;
+      }
       data.w = w;
       data.h = h;
       data.drawMs = t1 - t0;
@@ -722,6 +722,24 @@ export class Pictures {
     } finally {
       this.busy = false;
       this.stage.requestRender();
+    }
+  }
+
+  // Retain immutable pixels, without retaining a page's mutable drawing
+  // context and its staging buffers. Canvas remains the compatibility path.
+  async freezeSurface(data) {
+    const face = data.surface;
+    if (!face || typeof createImageBitmap !== "function") return;
+    const canvas = face.source;
+    try {
+      face.source = await createImageBitmap(canvas, {
+        imageOrientation: "none",
+        premultiplyAlpha: "none",
+        colorSpaceConversion: "none",
+      });
+      canvas.width = canvas.height = 1;
+    } catch {
+      // The existing canvas path also works where bitmap conversion does not.
     }
   }
 
@@ -758,7 +776,11 @@ export class Pictures {
     const relief = rel ? { w: rel.w, h: rel.h, d: Float32Array.from(rel.d), amount: (rel.depth || 0) * this.fitScale, nearest: !!rel.nearest, keep: Array.isArray(rel.keep) ? rel.keep.slice(0, 2) : null } : null; // prettier-ignore
     const data = await buildOffThread({ pixels, w, h, method: want.method, relief, backingOnly: this.solid, ...geom }); // prettier-ignore
     if (this.solid) data.surface = { source: canvas, geom, w, h, relief };
-    if (this.destroyed || media !== this.media) return null;
+    await this.freezeSurface(data);
+    if (this.destroyed || media !== this.media) {
+      data.surface?.source?.close?.();
+      return null;
+    }
     data.w = w;
     data.h = h;
     data.drawMs = t1 - t0;
