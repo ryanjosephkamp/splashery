@@ -67,6 +67,16 @@ test.describe("phone", () => {
   }) => {
     const errors = watchErrors(page);
     await open(page);
+    // Compare the same bar-free toy before and after. The stage starts below its caption now;
+    // the default cactus's two-line caption leaves less height than the donut's one-line caption.
+    await pick(page, "donut");
+    await expect
+      .poll(async () => {
+        const stage = await box(page, "#stage");
+        const caption = await box(page, "#toy-status");
+        return stage.y - Math.ceil(caption.y + caption.height + 8);
+      })
+      .toBe(0);
     const plain = (await box(page, "#stage")).height;
     for (const id of [
       "grand-piano",

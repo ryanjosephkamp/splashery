@@ -108,7 +108,9 @@ test.describe("off the keys", () => {
     ]) {
       await page.mouse.move(x, y);
       await page.mouse.down();
-      await page.waitForTimeout(1500); // the press looks for the toy first
+      // A GPU pick decides whether this press is off the keys. Wait for that decision before
+      // moving; a software GPU can take longer than a fixed pause to read the pick buffer.
+      await page.waitForFunction(() => window.__splashery.app.gestures.gesture === "orbit");
       await page.mouse.move(x + 160, y, { steps: 8 });
       await page.mouse.up();
       await page.waitForTimeout(300);

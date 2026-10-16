@@ -262,8 +262,10 @@ test.describe("Splashery app (WebGL2)", () => {
     const drag = async (dx) => {
       await page.mouse.move(cx + dx, cy - 30);
       await page.mouse.down();
+      await page.waitForFunction(() => window.__splashery.app.toolState?.started);
       for (let i = 1; i <= 6; i++) {
         await page.mouse.move(cx + dx + i * 8, cy - 30 + i * 6);
+        await page.waitForFunction(() => !window.__splashery.app.toolState?.busy);
         await page.waitForTimeout(160);
       }
       await page.mouse.up();
@@ -902,6 +904,7 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     const y0 = box.y + box.height * 0.52;
     await page.mouse.move(x0, y0);
     await page.mouse.down();
+    await expect.poll(() => page.evaluate(() => window.__splashery.player.driver.grab.held)).toBe(true); // prettier-ignore
     for (let i = 1; i <= 8; i++) await page.mouse.move(x0 + i * 20, y0 - i * 8);
     await expect.poll(() => page.evaluate(() => window.__splashery.player.driver.grab.held)).toBe(true); // prettier-ignore
     await page.waitForTimeout(400);
@@ -926,6 +929,7 @@ test.describe("Splashery v3 engine (WebGL2)", () => {
     // A drag that starts beside the toy still orbits.
     await page.mouse.move(box.x + 30, box.y + box.height - 60);
     await page.mouse.down();
+    await page.waitForFunction(() => window.__splashery.app.gestures.gesture === "orbit");
     for (let i = 1; i <= 8; i++)
       await page.mouse.move(box.x + 30 + i * 25, box.y + box.height - 60);
     await page.mouse.up();

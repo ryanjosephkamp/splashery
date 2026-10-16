@@ -82,9 +82,77 @@ Short-landscape search and settings after the follow-up:
 [932 × 430](screenshots/after-search-932x430.png). The settings pane remains 112 pixels tall with
 search open at both sizes.
 
-## Verification
+## Second Operator follow-up
 
-The final per-file results verify **363 tests across 20 files, with zero unresolved failures or
+Main `94216d772` was merged with merge commit `1670209fa`; the generated site conflicts were
+resolved by rebuilding the catalog and service worker. This follow-up changes test fixtures and the
+suite runner. It does not change the production stage layout or any toy.
+
+- `ui5-engine`: the local failure was the final height-restoration comparison, with a 19-pixel
+  difference. All five song/game bars already passed the non-overlap, stage-height reduction, and
+  drawing-buffer aspect checks. The test compared the initial Cactus with the final Donut; their
+  captions wrap to different heights, which now affect the stage's top. Compare Donut before and
+  after, wait for its eight-pixel caption gap, and retain every existing bar and restoration check.
+- `phf-engine`: the WebGPU fixture fit the text photo by width, making it about 556 pixels tall in a
+  467-pixel stage. Its projected top was -44 pixels and its bottom was 511 pixels in canvas
+  coordinates, cropping the registration target. The original whole-page correlation was 0.034. Fit
+  both dimensions before comparing the same page, retaining the 0.8 correlation threshold, WebGPU
+  device check, and console checks. The corrected correlation is 0.958, with the page projecting
+  from 12 to 455 pixels inside the same stage. First-toy selection was not the cause.
+- `ui4`, clay, and stretchy-toy smoke checks: GPU picking is asynchronous. An off-key press must
+  finish classifying as an orbit before the orbit moves; a clay press must start before its stroke,
+  and a stretch must be held before its moves. Wait on those states and on each clay pick's busy
+  flag instead of sending moves during an unfinished pick. Page coordinates already include the
+  canvas offset, so they need no further correction. Keep all pixel, clay add/erase, JSON replay,
+  held-state, spring-back, camera, and note assertions. These three checks passed in the initial
+  local focused run; their Actions timing failures did not reproduce here.
+- Pointer capture and runtime: supersede the earlier headless workaround below. `smoke` and `ui4`
+  use llvmpipe again. Give each concurrent suite worker its own Xvfb display, including when CI
+  supplies a shared `DISPLAY`. Reuse that display for successive files, record it in each JSON
+  report, and shut down the displays at the end. A controlled real-mouse glissando with a rival
+  window on the same display lost capture and produced three notes; with the rival on a separate
+  display, it completed all 15 notes up and back. Real browser mouse input and the production input
+  handlers are retained.
+
+The rendered-frame measurements in this follow-up are diagnostics. The approved five-size evidence
+above remains applicable because these fixes do not change the app UI.
+
+## Current verification
+
+The fresh requested five-file run passed **89 tests, zero failed, zero skipped, and zero retries**.
+Chromium 151.0.7922.173 runs on Debian 13 here. The GL setting and final exception list match the
+Actions setup: `SPLASHERY_GL=llvmpipe`, two jobs, and WebGPU's configured SwiftShader adapter. All
+five files use headed llvmpipe for WebGL2. The parent supplied a shared `DISPLAY`; worker reports
+confirm separate displays. Smoke took **875 seconds (14 minutes, 35 seconds)**, within 25 minutes,
+so it needs no split for a SwiftShader exception.
+
+```sh
+SPLASHERY_CHROMIUM=/usr/bin/chromium SPLASHERY_GL=llvmpipe node tools/suite.mjs --jobs=2 --files=ui5-engine,phf-engine,ui4,smoke,cdx-a11y-layout --out=/tmp/playground-671-followup-final
+```
+
+| Spec              | Passed | Seconds | Display |
+| ----------------- | -----: | ------: | ------- |
+| `ui5-engine`      |      7 |     107 | `:93`   |
+| `phf-engine`      |      5 |      70 | `:90`   |
+| `ui4`             |      4 |      64 | `:93`   |
+| `smoke`           |     62 |     875 | `:90`   |
+| `cdx-a11y-layout` |     11 |     110 | `:93`   |
+
+The requested clay and stretchy-toy checks each passed all three repetitions. The same two-job run
+also repeated wide-screen resizing and the three browser keyboard-drag cases three times: **18
+passed, zero failed, zero skipped, and zero retries** (nine smoke cases and nine UI4 cases).
+
+```sh
+SPLASHERY_CHROMIUM=/usr/bin/chromium SPLASHERY_GL=llvmpipe node tools/suite.mjs --jobs=2 --files=smoke,ui4 --out=/tmp/playground-671-followup-repeat -- --grep 'clay adds and erases|stretchy toy stretches|the panel and the shelf can be made bigger on a wide screen|a drag along the keys plays|a drag that starts off the keys' --repeat-each=3
+```
+
+`node tools/site-build.mjs --check` confirms the rebuilt site is current. The previous 363-test and
+25-repeat results below are historical; that complete 20-file list was not rerun in this follow-up.
+`tests/taps.spec.mjs` remains untouched.
+
+## Previous verification (commit b9fee423)
+
+The previous per-file results verify **363 tests across 20 files, with zero unresolved failures or
 skips**. The complete run had 362 passes and one desktop `ui4` capture failure. After adding its
 headless driver selection, the same full-list command reused the 19 unaffected passing reports and
 verified all four `ui4` checks with a competing headed window repeatedly taking focus. The final
@@ -131,7 +199,7 @@ resizing), plus the immediate post-swipe phone tap. Earlier runs exposed the Mol
 assumption, the native handle fling, and the competing headed windows described below. The final run
 includes their corrections and the existing headless-renderer exception mechanism.
 
-## Operator follow-up
+## First Operator follow-up (commit b9fee423)
 
 The three commits from `claude/operator-fixes-671` were merged with merge commit `5eae3501`. They
 retain module and data lazy-load assertions while excluding shelf thumbnails, convert the Hands-on

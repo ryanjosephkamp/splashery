@@ -18,7 +18,7 @@
     "wd:210",
     "wdr3:133"
   ],
-  "swiftshader": ["hh3-engine2", "phy", "smoke", "sndc-engine", "ui2", "ui3", "ui4"],
+  "swiftshader": ["hh3-engine2", "phy", "sndc-engine", "ui2", "ui3"],
   "seconds": {
     "abb": 39,
     "ai": 83,
