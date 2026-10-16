@@ -1516,7 +1516,10 @@ test.describe("Splashery on a phone", () => {
     await swipe(handle.x + handle.width / 2, handle.y + handle.height / 2, handle.y + 140);
     await expect(page.locator("body")).not.toHaveClass(/shelf-grid/);
     // With the panel open, swiping the handle down closes it.
-    await page.tap("#sheet-toggle");
+    // Tap immediately after the swipe: a native fling must not swallow it.
+    const more = await page.locator("#sheet-toggle").boundingBox();
+    expect(more.height).toBeGreaterThanOrEqual(44);
+    await page.touchscreen.tap(more.x + more.width / 2, more.y + more.height / 2);
     await expect(page.locator("#panel-body")).toBeVisible();
     handle = await page.locator("#sheet-handle").boundingBox();
     await swipe(handle.x + handle.width / 2, handle.y + handle.height / 2, handle.y + 140);

@@ -2706,6 +2706,15 @@ export function createUI(app) {
     () => (mode === "panel" ? "panel" : "grid"),
     () => (mode === "row" ? "grid" : "row"),
   );
+  // This handle owns the drag. Stop a native fling from swallowing the next
+  // button tap; pointer events still drive the handle's swipes and taps.
+  els.sheetHandle.addEventListener(
+    "touchstart",
+    (e) => {
+      if (narrow.matches) e.preventDefault();
+    },
+    { passive: false },
+  );
   bindSwipe(els.tabs, () => "panel", null);
 
   // Dragging the shelf row up opens the grid; dragging down from the top of

@@ -3786,7 +3786,7 @@ body.focus .stage-zoom {
 }
 
 /* Short wide screens: the gallery must leave room for scrollable settings.
-   Keep the full-height stage beside the panel, including after rotation. */
+   The stage stays beside the panel, framed below its view controls. */
 @media (min-width: 761px) and (max-height: 500px) {
   body.app:not(.panel-folded):not(.focus):not(.gallery-page) #stage {
     width: calc(
@@ -3815,7 +3815,7 @@ body.focus .stage-zoom {
     flex-direction: column;
     flex: 0 1 auto;
     min-height: 0;
-    max-height: calc(100% - 120px);
+    max-height: calc(100% - 160px);
     overflow: hidden;
     overscroll-behavior: contain;
   }
@@ -3831,7 +3831,50 @@ body.focus .stage-zoom {
   }
 
   body:not(.gallery-page) .panel-body {
-    flex: 1 0 120px;
+    flex: 1 0 160px;
+  }
+
+  /* Search opens on demand so the shelf and a usable settings pane both fit.
+     The gallery button shares the chip row while the search field is closed. */
+  body.app:not(.gallery-page) .shelf-find {
+    position: relative;
+    height: 0;
+    margin-bottom: 0;
+  }
+
+  body.app:not(.gallery-page) .shelf-find input {
+    display: none;
+  }
+
+  body.app:not(.gallery-page) .shelf-find #gallery-open {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  body.app:not(.gallery-page) .chips {
+    margin-right: 52px;
+  }
+
+  body.app:not(.gallery-page) .chip-icon {
+    display: inline-flex;
+  }
+
+  body.app:not(.gallery-page) .dock.searching .shelf-find {
+    height: auto;
+    margin-bottom: 8px;
+  }
+
+  body.app:not(.gallery-page) .dock.searching .shelf-find input {
+    display: block;
+  }
+
+  body.app:not(.gallery-page) .dock.searching .shelf-find #gallery-open {
+    position: static;
+  }
+
+  body.app:not(.gallery-page) .dock.searching .chips {
+    margin-right: -12px;
   }
 
   body:not(.gallery-page) .grip-shelf {
