@@ -205,3 +205,22 @@ test("a face stays on its sheet plane and a raised crop retains its full depth",
   expect(flat.positions.every((x, i) => i % 3 !== 2 || Math.abs(x - 0.012) < 1e-6)).toBe(true);
   expect(raised.positions.every((x, i) => i % 3 !== 2 || Math.abs(x - 0.212) < 1e-6)).toBe(true);
 });
+
+test("a continuous page keeps its soft paper inside the sharp face's perimeter", () => {
+  const input = { ...job(), method: "ink", backingOnly: true };
+  const data = buildSheet(input);
+  expect(data.count).toBeGreaterThan(0);
+  // Three standard deviations of the coarse paper stay inside the face,
+  // including its corners. The face supplies the exact rectangular edge.
+  const sx = (3 * 3.6 * 2) / input.w;
+  const sy = (3 * 3.6 * 2) / input.h;
+  for (let i = 0; i < data.count; i++) {
+    expect(data.centers[i * 3] - sx).toBeGreaterThanOrEqual(-1);
+    expect(data.centers[i * 3] + sx).toBeLessThanOrEqual(1);
+    expect(data.centers[i * 3 + 1] - sy).toBeGreaterThanOrEqual(-1);
+    expect(data.centers[i * 3 + 1] + sy).toBeLessThanOrEqual(1);
+  }
+  expect(data.center.length).toBeLessThan(
+    buildSheet({ ...input, backingOnly: false }).center.length,
+  );
+});
