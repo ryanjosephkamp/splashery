@@ -104,6 +104,7 @@ export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
 // Older browsers without this API return null: a requested time is not presentation evidence.
 const presentedFrames = new WeakMap();
 const presentationOwners = new WeakMap();
+const recoveryRates = new WeakMap();
 export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = {}) {
   if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
   // Keep ownership after completion: play() can settle after its presentation callback,
@@ -111,6 +112,19 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
   const owner = {};
   presentationOwners.set(video, owner);
   const ownsVideo = () => presentationOwners.get(video) === owner;
+  // A new seek takes over any older recovery without inheriting its temporary speed.
+  const priorRate = recoveryRates.get(video);
+  if (priorRate) {
+    recoveryRates.delete(video);
+    video.pause();
+    if (video.playbackRate === priorRate.applied) {
+      try {
+        video.playbackRate = priorRate.before;
+      } catch {
+        /* The browser owns its rate limits. */
+      }
+    }
+  }
   if (!video.requestVideoFrameCallback) {
     await seek(video, time, { signal, timeoutMs });
     return null;
@@ -133,6 +147,19 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
     let advanced = false;
     let done = false;
     let seekedAt = null;
+    const pauseRecovery = () => {
+      video.pause();
+      const rate = recoveryRates.get(video);
+      if (rate?.owner !== owner) return;
+      recoveryRates.delete(video);
+      if (video.playbackRate === rate.applied) {
+        try {
+          video.playbackRate = rate.before;
+        } catch {
+          /* A host rate change stays authoritative. */
+        }
+      }
+    };
     const finish = (error, mediaTime) => {
       if (done) return;
       done = true;
@@ -142,7 +169,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
       video.removeEventListener("seeking", arm);
       video.removeEventListener("seeked", settled);
       if (callback !== undefined) video.cancelVideoFrameCallback(callback);
-      if (advanced && ownsVideo()) video.pause();
+      if (advanced && ownsVideo()) pauseRecovery();
       error ? reject(error) : resolve(mediaTime);
     };
     const abort = () => finish(new DOMException("Stopped", "AbortError"));
@@ -180,6 +207,18 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
       recovery = setTimeout(() => {
         if (done || !ownsVideo()) return;
         advanced = true;
+        // At normal speed a busy callback can arrive after drawImage's picture has already
+        // advanced beyond its mediaTime. Slow only this recovery, then restore the caller's
+        // rate after pausing. The returned time still comes from an actual presentation.
+        const before = video.playbackRate;
+        if (Number.isFinite(before) && before > 0) {
+          try {
+            video.playbackRate = Math.min(before, 0.125);
+            recoveryRates.set(video, { owner, before, applied: video.playbackRate });
+          } catch {
+            // Browsers with narrower rate limits retain the existing bounded recovery.
+          }
+        }
         let playback;
         try {
           playback = video.play();
@@ -188,7 +227,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
         }
         Promise.resolve(playback).then(
           () => {
-            if (done && ownsVideo()) video.pause();
+            if (done && ownsVideo()) pauseRecovery();
           },
           () => {
             /* The original presentation deadline still supplies retry advice. */
