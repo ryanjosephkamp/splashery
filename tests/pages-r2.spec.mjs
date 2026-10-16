@@ -238,6 +238,41 @@ test.describe("sharp pages in the real renderer", () => {
     });
     expect(ink).toBeGreaterThan(3);
     await page.screenshot({ path: "tests/screenshots/pages-r2-webgpu-mono-390x844.png" });
+    await page.evaluate(async () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = canvas.height = 64;
+      const g = canvas.getContext("2d");
+      g.fillStyle = "#2378c6";
+      g.fillRect(0, 0, 64, 64);
+      const blob = await new Promise((resolve) => canvas.toBlob(resolve));
+      await window.__splashery.app.openMedia(new File([blob], "color.png", { type: "image/png" }));
+    });
+    await ready(page);
+    const color = await page.evaluate(async () => {
+      const p = window.__splashery.player;
+      for (let i = 0; i < 3; i++) await p.stage.captureFrame();
+      const s = p.pictures.sheets.find((s) => s.slot?.surface?.instance.visible);
+      const face = s.shown.data.surface;
+      const point = p.stage.toScreen(p.pictures.rect(s, p.pictures.media.aspect(0)).c);
+      const frame = await p.stage.captureFrame();
+      const ratio = frame.width / p.canvas.clientWidth;
+      return {
+        channels: face.channels,
+        bytes: face.pixels.byteLength,
+        expected: face.w * face.h * 4,
+        pixel: Array.from(
+          frame
+            .getContext("2d")
+            .getImageData(Math.floor(point[0] * ratio), Math.floor(point[1] * ratio), 1, 1).data,
+        ),
+        errors: window.__pagesR2GpuErrors,
+      };
+    });
+    expect(color.channels).toBe(4);
+    expect(color.bytes).toBe(color.expected);
+    for (let i = 0; i < 3; i++)
+      expect(Math.abs(color.pixel[i] - [35, 120, 198][i])).toBeLessThanOrEqual(2);
+    expect(color.errors).toEqual([]);
   });
 
   test("still pages own continuous faces, moving media and the neighboring frame retain their splats", async ({
@@ -267,7 +302,7 @@ test.describe("sharp pages in the real renderer", () => {
         const d = window.__splashery.player.pictures.sheets[0].shown.data;
         const f = d.surface;
         return f.pixels
-          ? f.pixels.byteLength === d.w * d.h
+          ? f.pixels.byteLength === d.w * d.h * (f.channels || 1)
           : f.source.width === d.w && f.source.height === d.h;
       }),
     ).toBe(true);

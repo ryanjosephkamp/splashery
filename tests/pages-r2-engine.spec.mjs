@@ -46,6 +46,32 @@ test("two-color coverage checks every color, including equal-brightness outliers
   expect(rampPixels(new Uint8ClampedArray())).toBe(null);
 });
 
+test("native color pixels keep every RGBA byte while releasing their staging canvas", () => {
+  const rgba = new Uint8ClampedArray([35, 120, 198, 255, 180, 27, 60, 143]);
+  const canvas = {
+    width: 2,
+    height: 1,
+    getContext: () => ({ getImageData: () => ({ data: rgba }) }),
+  };
+  const surface = { source: canvas, w: 2, h: 1 };
+  Pictures.prototype.compactSurface({ surface }, false, true);
+  expect([...surface.pixels]).toEqual([...rgba]);
+  expect(surface.channels).toBe(4);
+  expect(surface.sourceBytes).toBe(8);
+  expect(surface.source).toBe(null);
+  expect([canvas.width, canvas.height]).toEqual([1, 1]);
+});
+
+test("native-image caching keeps the latest resolution for each page", () => {
+  const p = Object.create(Pictures.prototype);
+  Object.assign(p, { budget: { ink: 220000 }, cache: new Map(), sheets: [] });
+  const data = (page) => ({ count: 1, resolutionKey: `0|${page}|pixels|0|` });
+  p.remember("page0-small", data(0));
+  p.remember("page1", data(1));
+  p.remember("page0-large", data(0));
+  expect([...p.cache.keys()]).toEqual(["page1", "page0-large"]);
+});
+
 test("an immediately evicted prefetch is not rebuilt on every frame", () => {
   const p = Object.create(Pictures.prototype);
   const want = { sheet: 0, page: 0, level: 128, method: "ink", key: "0|128|ink|0" };
