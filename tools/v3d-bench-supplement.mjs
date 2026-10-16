@@ -20,6 +20,8 @@ import {
   servedSourceFingerprint,
   withHostDeadline,
   closeBrowserBounded,
+  BENCHMARK_PROTOCOL_FILES,
+  benchmarkProtocolFingerprint,
 } from "./v3d-bench.mjs";
 import { sourceFrameReceipts, assertPixelDisjointness } from "./v3d-bench-pixels.mjs";
 import {
@@ -38,29 +40,9 @@ const write = (file, data) =>
 const validHash = (value) => /^[a-f0-9]{64}$/.test(value || "");
 const safeId = (value) => /^[a-z0-9][a-z0-9-]*$/.test(value || "");
 const inside = (file, dir) => file === dir || file.startsWith(dir + path.sep);
-const protocolFiles = [
-  "v3d-bench.mjs",
-  "v3d-bench-metrics.mjs",
-  "v3d-bench-samples.mjs",
-  "v3d-bench-pixels.mjs",
-  "cdx-v3d-clarity-metrics.mjs",
-];
+const protocolFiles = BENCHMARK_PROTOCOL_FILES;
 export function originalProtocolFingerprint() {
-  return fingerprint({
-    version: 3,
-    files: protocolFiles.map((file) => ({
-      file,
-      sha256: hash(fs.readFileSync(path.join(import.meta.dirname, file))),
-    })),
-    wrappers: {
-      observer: sessionObserver.toString(),
-      SESSION_NEEDLE: "return new Session(opts);",
-      SESSION_REPLACEMENT:
-        "const s = new Session(opts); globalThis.__v3dBenchObserve(s); return s;",
-      FRAME_NEEDLE: "  return out;",
-      FRAME_REPLACEMENT,
-    },
-  });
+  return benchmarkProtocolFingerprint();
 }
 function toolIdentity() {
   return ["v3d-bench-supplement.mjs", "v3d-review.mjs", ...protocolFiles].map((file) => ({

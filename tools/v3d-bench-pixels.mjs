@@ -2,15 +2,11 @@
 // This function is serialized into Playwright's page. Keep it self-contained.
 export async function sourceFrameReceipts({ base64, sourceTimes, times, trainingFrames, crop }) {
   const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
-  const url = URL.createObjectURL(new Blob([bytes], { type: "video/mp4" }));
-  const video = document.createElement("video");
-  video.muted = true;
-  video.playsInline = true;
-  video.preload = "auto";
   const width = trainingFrames[0]?.width,
     height = trainingFrames[0]?.height;
   if (!width || !height || trainingFrames.some((f) => f.width !== width || f.height !== height))
     throw new Error("Training photograph geometry is absent or inconsistent.");
+  const url = URL.createObjectURL(new Blob([bytes], { type: "video/mp4" }));
   const canvas = document.createElement("canvas");
   canvas.width = width;
   canvas.height = height;
@@ -22,52 +18,105 @@ export async function sourceFrameReceipts({ base64, sourceTimes, times, training
     ).join("");
   const jpeg = () => new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.92));
   const cache = new Map();
+  let releaseRendering;
   const capture = async (index) => {
     if (cache.has(index)) return cache.get(index);
-    const time = sourceTimes[index],
-      next = sourceTimes[index + 1];
-    // Seek inside the selected source frame, rather than on a floating-point frame boundary.
-    const target = time + Math.min(0.005, (next == null ? 1 / 120 : next - time) / 4);
-    const mediaTime = await new Promise((resolve, reject) => {
-      let callback;
-      const finish = (error, value) => {
-        clearTimeout(timer);
-        if (callback !== undefined) video.cancelVideoFrameCallback(callback);
-        error ? reject(error) : resolve(value);
-      };
-      const frame = (_, metadata) => {
-        if (Math.abs(metadata.mediaTime - time) < 0.0001) finish(null, metadata.mediaTime);
-        else callback = video.requestVideoFrameCallback(frame);
-      };
-      const timer = setTimeout(
-        () => finish(new Error(`No presented source frame at ${time}.`)),
-        4000,
-      );
-      callback = video.requestVideoFrameCallback(frame);
-      video.currentTime = target;
-    });
-    context.drawImage(video, crop.sx, 0, crop.sw, video.videoHeight, 0, 0, width, height);
-    const sha256 = await hash(await jpeg()),
-      repeatedSha256 = await hash(await jpeg());
-    const result = { index, time, mediaTime, width, height, sha256, repeatedSha256 };
-    cache.set(index, result);
-    return result;
-  };
-  try {
+    const time = sourceTimes[index];
+    // A fresh independent decoder cannot inherit an old queued presentation. Start a few
+    // frames earlier and watch real playback reach the exact requested source timestamp.
+    const video = document.createElement("video");
+    video.muted = true;
+    video.playsInline = true;
+    video.preload = "auto";
     if (!video.requestVideoFrameCallback)
       throw new Error("Independent source-frame presentation is unavailable.");
-    await new Promise((resolve, reject) => {
-      const timer = setTimeout(() => reject(new Error("Source video metadata timed out.")), 10000);
-      video.onloadedmetadata = () => {
-        clearTimeout(timer);
-        resolve();
-      };
-      video.onerror = () => {
-        clearTimeout(timer);
-        reject(new Error("Source video cannot be decoded."));
-      };
-      video.src = url;
-    });
+    try {
+      const mediaTime = await new Promise((resolve, reject) => {
+        let callback;
+        let ready = false;
+        let seekedAt = null;
+        let done = false;
+        const finish = (error, value) => {
+          if (done) return;
+          done = true;
+          clearTimeout(timer);
+          if (callback !== undefined) video.cancelVideoFrameCallback(callback);
+          video.removeEventListener("loadedmetadata", loaded);
+          video.removeEventListener("seeked", settled);
+          video.removeEventListener("error", failed);
+          video.pause();
+          error ? reject(error) : resolve(value);
+        };
+        const frame = (_, metadata) => {
+          callback = undefined;
+          if (done) return;
+          const current =
+            index === 0 ||
+            (ready &&
+              !video.seeking &&
+              (!Number.isFinite(metadata.presentationTime) ||
+                metadata.presentationTime >= seekedAt));
+          if (current && video.readyState >= 2 && Math.abs(metadata.mediaTime - time) < 0.0001)
+            finish(null, metadata.mediaTime);
+          else callback = video.requestVideoFrameCallback(frame);
+        };
+        const play = () => {
+          try {
+            const playback = video.play();
+            Promise.resolve(playback).catch(() => {});
+          } catch {
+            /* The original presentation deadline still requires an actual callback. */
+          }
+        };
+        const settled = () => {
+          if (done || video.seeking || video.readyState < 2) return;
+          ready = true;
+          seekedAt = performance.now();
+          play();
+        };
+        const loaded = () => {
+          if (done) return;
+          clearTimeout(timer);
+          timer = setTimeout(
+            () => finish(new Error(`No presented source frame at ${time}.`)),
+            4000,
+          );
+          let from = Math.max(0, index - 4);
+          while (from < index - 1 && time - sourceTimes[from] > 0.2) from++;
+          video.playbackRate = Math.max(0.125, Math.min(1, (time - sourceTimes[from]) / 1.5));
+          if (index === 0) {
+            ready = true;
+            seekedAt = performance.now();
+            play();
+          } else {
+            const gap = sourceTimes[from + 1] - sourceTimes[from];
+            video.currentTime = sourceTimes[from] + Math.min(0.005, gap / 4);
+          }
+        };
+        const failed = () => finish(new Error("Source video cannot be decoded."));
+        let timer = setTimeout(() => finish(new Error("Source video metadata timed out.")), 10000);
+        video.addEventListener("loadedmetadata", loaded, { once: true });
+        video.addEventListener("seeked", settled);
+        video.addEventListener("error", failed, { once: true });
+        callback = video.requestVideoFrameCallback(frame);
+        video.src = url;
+      });
+      context.drawImage(video, crop.sx, 0, crop.sw, video.videoHeight, 0, 0, width, height);
+      const sha256 = await hash(await jpeg()),
+        repeatedSha256 = await hash(await jpeg());
+      const result = { index, time, mediaTime, width, height, sha256, repeatedSha256 };
+      cache.set(index, result);
+      return result;
+    } finally {
+      video.pause();
+      video.removeAttribute("src");
+      video.load();
+    }
+  };
+  try {
+    // The native bake has already finished. Its viewer must not compete with the independent
+    // video decoder; release the hold before any model-view evaluation or review capture.
+    releaseRendering = globalThis.__splashery?.player?.stage?.holdRendering?.();
     const views = [];
     for (const time of times) {
       const index = sourceTimes.findIndex((t) => Math.abs(t - time) < 0.000001);
@@ -106,15 +155,14 @@ export async function sourceFrameReceipts({ base64, sourceTimes, times, training
     }
     return {
       method:
-        "Independent presented source frames, identical extraction canvas and JPEG encoder; every training JPEG matched, held-out JPEGs disjoint.",
+        "Fresh independent source decoders, actual presentation timestamps, identical extraction canvas and JPEG encoder; every training JPEG matched, held-out JPEGs disjoint.",
       matchedTraining,
       views,
       decodedFrames: cache.size,
     };
   } finally {
-    video.removeAttribute("src");
-    video.load();
     URL.revokeObjectURL(url);
+    releaseRendering?.();
   }
 }
 

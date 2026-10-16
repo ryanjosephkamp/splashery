@@ -48,6 +48,32 @@ export const FRAME_REPLACEMENT = `  globalThis.__v3dBench.trainingFrames = await
   return out;`;
 const sha256 = (bytes) => createHash("sha256").update(bytes).digest("hex");
 
+export const BENCHMARK_PROTOCOL_FILES = [
+  "v3d-bench.mjs",
+  "v3d-bench-metrics.mjs",
+  "v3d-bench-samples.mjs",
+  "v3d-bench-pixels.mjs",
+  "v3d-affinity.py",
+  "cdx-v3d-clarity-metrics.mjs",
+];
+
+export function benchmarkProtocolFingerprint() {
+  return fingerprint({
+    version: 5,
+    files: BENCHMARK_PROTOCOL_FILES.map((file) => ({
+      file,
+      sha256: sha256(fs.readFileSync(path.join(import.meta.dirname, file))),
+    })),
+    wrappers: {
+      observer: sessionObserver.toString(),
+      SESSION_NEEDLE,
+      SESSION_REPLACEMENT,
+      FRAME_NEEDLE,
+      FRAME_REPLACEMENT,
+    },
+  });
+}
+
 export function benchmarkLaunchArgs(gpu = "native") {
   const common = ["--ignore-gpu-blocklist", "--enable-webgl", "--enable-unsafe-webgpu"];
   if (gpu === "native") return common;
@@ -321,28 +347,7 @@ export async function main(cli = process.argv.slice(2)) {
     retry !== "all" ? previous?.provenance?.servedSource?.files?.map((f) => f.file) : undefined;
   const served = await servedSourceFingerprint(url, priorFiles);
   const servedFiles = served.files.map((f) => f.file);
-  const protocolFiles = [
-    "v3d-bench.mjs",
-    "v3d-bench-metrics.mjs",
-    "v3d-bench-samples.mjs",
-    "v3d-bench-pixels.mjs",
-    "v3d-affinity.py",
-    "cdx-v3d-clarity-metrics.mjs",
-  ];
-  const protocolSha256 = fingerprint({
-    version: 4,
-    files: protocolFiles.map((f) => ({
-      file: f,
-      sha256: hash(fs.readFileSync(path.join(import.meta.dirname, f))),
-    })),
-    wrappers: {
-      observer: sessionObserver.toString(),
-      SESSION_NEEDLE,
-      SESSION_REPLACEMENT,
-      FRAME_NEEDLE,
-      FRAME_REPLACEMENT,
-    },
-  });
+  const protocolSha256 = benchmarkProtocolFingerprint();
   const referenceRun = reference ? read(path.join(reference, "run.json")) : null;
   if (
     referenceRun &&
