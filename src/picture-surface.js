@@ -163,7 +163,7 @@ export function grayPixels(rgba) {
 // transparency retain their full raster. Repeated colors share work.
 export function rampPixels(rgba, pack = true) {
   if (!rgba?.length || rgba.byteOffset % 4 || rgba.length % 4) return null;
-  const words = new Uint32Array(rgba.buffer, rgba.byteOffset, rgba.length / 4);
+  const words = new Int32Array(rgba.buffer, rgba.byteOffset, rgba.length / 4);
   let lo = 0,
     hi = 0,
     min = Infinity,
@@ -185,13 +185,16 @@ export function rampPixels(rgba, pack = true) {
   const d = high.map((v, i) => v - low[i]);
   const norm = d.reduce((n, v) => n + v * v, 0);
   const pixels = pack ? new Uint8Array(words.length) : null;
+  const lowWord = words[lo / 4],
+    highWord = words[hi / 4],
+    highCode = norm ? 255 : 0;
   const codes = new Map([
-    [words[lo / 4], 0],
-    [words[hi / 4], norm ? 255 : 0],
+    [lowWord, 0],
+    [highWord, highCode],
   ]);
   for (let i = 0; i < words.length; i++) {
     const word = words[i];
-    let code = codes.get(word);
+    let code = word === lowWord ? 0 : word === highWord ? highCode : codes.get(word);
     if (code === undefined) {
       if (!norm) return null;
       const at = i * 4;
