@@ -288,10 +288,13 @@ export function processSource(src, srcW, srcH, name, trainCap, opts = {}, preRes
  *  @returns {Promise<Frame[]>} */
 export async function decodeFrames(files, opts = {}) {
   const log = opts.log || (() => {});
+  const checkAbort = () => { if (opts.signal?.aborted) throw new DOMException('Frame decode aborted', 'AbortError'); };
   const out = [];
   let trainCap = 0;
   let saidResize = false;
   for (const file of files) {
+    checkAbort();
+    let bmp = null, mbmp = null;
     const source = file.source || file;
     const name = file.name || 'frame';
     try {
@@ -302,9 +305,9 @@ export async function decodeFrames(files, opts = {}) {
       // filtered draw still gets a >=2x supersampled source, so quality is
       // the same as the full halving chain). resizeWidth ALONE keeps the
       // scale uniform whatever EXIF orientation does to the axes.
-      let bmp = null;
       let resized = false;
       const dims = source instanceof Blob ? await probeImageSize(source) : null;
+      checkAbort();
       if (!trainCap && dims) {
         trainCap = adaptiveTrainCap(files.length, dims.w, dims.h, opts);
         log(`training resolution: ${trainCap}px max dim (${files.length} images)`);
@@ -321,28 +324,35 @@ export async function decodeFrames(files, opts = {}) {
           } catch { bmp = null; /* resize options unsupported: decode native */ }
         }
       }
+      checkAbort();
       if (!bmp) bmp = await createImageBitmap(source);
+      checkAbort();
       if (!trainCap) {
         trainCap = adaptiveTrainCap(files.length, bmp.width, bmp.height, opts);
         log(`training resolution: ${trainCap}px max dim (${files.length} images)`);
       }
       // per-file subject mask (grayscale; white = subject). Decoded at its own
       // native size — processSource scales it to the training grid.
-      let mbmp = null;
       if (file.mask) mbmp = await createImageBitmap(file.mask);
+      checkAbort();
       const frame = processSource(bmp, bmp.width, bmp.height, name, trainCap,
         mbmp ? { ...opts, mask: mbmp } : opts, resized);
-      bmp.close();
-      if (mbmp) mbmp.close();
+      bmp.close(); bmp = null;
+      if (mbmp) { mbmp.close(); mbmp = null; }
       // the photo's focal length, when the file carries it (JPEG / HEIC EXIF):
       // the solver turns an agreeing set into a focal prior and skips its
       // four-candidate focal search (session.solve)
       // a caller-supplied exif ({ f35, lens, video }) wins: video frames carry the container's lens data
       if (file.exif) frame.exif = file.exif;
       else if (source instanceof Blob && opts.exif !== false) frame.exif = await readExifFocal(source);
+      checkAbort();
       out.push(frame);
     } catch (e) {
+      if (e?.name === 'AbortError') throw e;
       log(`skipped ${name}: ${e.message}`);
+    } finally {
+      bmp?.close();
+      mbmp?.close();
     }
   }
   return out;

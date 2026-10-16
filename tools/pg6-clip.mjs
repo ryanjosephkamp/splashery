@@ -15,12 +15,19 @@
 // layers (P1: an album photo raised as pop-up layers, then tilted),
 // album (an album photo rising, then turned).
 // --dpr=1 renders at one device pixel per CSS pixel (default 2). Writes
+// Task 95 adds r2-book, r2-lab, r2-album, r2-text, r2-chart, and r2-diagram: turns,
+// Pop out with layers off and on, and the original text/diagram inputs.
+// --profile=low and --width=390 match a phone; preparation waits are omitted.
+// --frames=1 also saves full-color PNG frames and their variable-duration concat list.
+// --draws=1 uses two animation-frame waits per draw, before and after sheet readiness.
+// New scenes use 8 steps/s and canvas views; --fps and --capture=page override these. Legacy defaults stay 12.
 // <out-dir>/pg6-<scene>.gif and a strip of six frames. The test PDF is made
 // by tests/fixtures/pg6/make-pdf.mjs.
 
 import { chromium } from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+import { createHash } from "node:crypto";
 import { PNG } from "pngjs";
 import { GIFEncoder, quantize, applyPalette } from "../vendor/gifenc/gifenc.esm.js";
 
@@ -35,12 +42,26 @@ if (!outDir) throw new Error("Usage: node tools/pg6-clip.mjs <out-dir> [scene ..
 const ALL = ["two-up", "turn", "tilt", "lab", "terrain", "layers", "album"];
 const list = scenes.length ? scenes : ALL;
 fs.mkdirSync(outDir, { recursive: true });
-const STEP = 1 / 12;
+const RECORDER_SHA256 = createHash("sha256")
+  .update(fs.readFileSync(new URL(import.meta.url)))
+  .digest("hex");
 
 const browser = await chromium.launch({
   executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
-  args: ["--use-angle=swiftshader", "--enable-unsafe-swiftshader", "--ignore-gpu-blocklist"],
+  ...(process.env.SPLASHERY_GL === "llvmpipe" ? { headless: false } : {}),
+  args: [
+    ...(process.env.SPLASHERY_GL === "llvmpipe"
+      ? ["--use-gl=angle", "--use-angle=gl", "--hide-scrollbars"]
+      : ["--use-angle=swiftshader"]),
+    "--enable-unsafe-swiftshader",
+    "--ignore-gpu-blocklist",
+  ],
 });
+for (const signal of ["SIGINT", "SIGTERM"])
+  process.once(signal, async () => {
+    await browser.close();
+    process.exit(130);
+  });
 
 // Scales an RGBA image down by box filtering to `w` wide.
 function shrink(png, w) {
@@ -69,11 +90,18 @@ function shrink(png, w) {
 }
 
 async function record(scene) {
+  // Match each revision at the same scene cadence. Legacy scenes retain
+  // 12; round-2 scenes use 8 to keep capture bounded.
+  const stepFPS = Number(opt("fps", scene.startsWith("r2-") ? 8 : 12));
+  if (!(stepFPS >= 1 && stepFPS <= 60)) throw new Error("fps must be between 1 and 60.");
+  const STEP = 1 / stepFPS;
+  const canvasReview = scene.startsWith("r2-") && opt("capture", "canvas") === "canvas";
   const width = Number(opt("width", 360));
   const page = await browser.newPage({ viewport: { width: 390, height: 844 }, deviceScaleFactor: Number(opt("dpr", 2)) }); // prettier-ignore
-  await page.goto(`${base}?renderer=webgl2&adapt=off&profile=mid&labs=1`);
+  await page.goto(`${base}?renderer=webgl2&adapt=off&profile=${opt("profile", "mid")}&labs=1`);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
   const frames = [];
+  const observations = [];
   const intro = opt("intro", "");
   if (intro)
     frames.push({ img: shrink(PNG.sync.read(fs.readFileSync(intro)), width), delay: Number(opt("hold", 3000)) }); // prettier-ignore
@@ -90,7 +118,12 @@ async function record(scene) {
     );
   // A couple of real frames, so the stage draws the stepped moment.
   const draw = async () => {
-    for (let i = 0; i < 3; i++)
+    if (canvasReview) {
+      for (let i = 0; i < Number(opt("draws", 3)); i++)
+        await run(() => window.__splashery.player.stage.captureFrame().then(() => {}));
+      return;
+    }
+    for (let i = 0; i < Number(opt("draws", 3)); i++)
       await run(() => new Promise((r) => {
         window.__splashery.player.stage.requestRender();
         requestAnimationFrame(() => requestAnimationFrame(r));
@@ -107,10 +140,49 @@ async function record(scene) {
           ),
         ),
       );
-    const png = PNG.sync.read(await page.screenshot({ timeout: 180_000 }));
+    let bytes;
+    if (canvasReview) {
+      const data = await run(
+        async ({ width, scene, stepFPS }) => {
+          const p = window.__splashery.player;
+          const frame = await p.stage.captureFrame();
+          const c = document.createElement("canvas");
+          c.width = width;
+          c.height = Math.round((width * 844) / 390);
+          const g = c.getContext("2d");
+          g.fillStyle = "white";
+          g.fillRect(0, 0, c.width, c.height);
+          const scale = width / 390;
+          const h = (frame.height * width) / frame.width;
+          if (h > c.height - 64 * scale) throw new Error("The canvas exceeds the review frame.");
+          g.drawImage(frame, 0, 44 * scale, width, h);
+          const toy = p.scene.toy.id.replaceAll("-", " ");
+          const input = ["r2-text", "r2-chart", "r2-diagram"].includes(scene)
+            ? ` / ${scene.slice(3)}`
+            : "";
+          g.fillStyle = "#17202a";
+          g.font = `${14 * scale}px sans-serif`;
+          g.fillText(
+            `${toy}${input} · Layers ${p.motion?.state?.layers ? "on" : "off"}`,
+            8 * scale,
+            24 * scale,
+          );
+          g.font = `${11 * scale}px sans-serif`;
+          g.fillText(
+            `Actual canvas · stepped ${stepFPS} fps · UI omitted`,
+            8 * scale,
+            c.height - 12 * scale,
+          );
+          return c.toDataURL("image/png");
+        },
+        { width, scene, stepFPS },
+      );
+      bytes = Buffer.from(data.split(",")[1], "base64");
+    } else bytes = await page.screenshot({ timeout: 180_000 });
+    const png = PNG.sync.read(bytes);
     frames.push({ img: shrink(png, width), delay: holdMs });
   };
-  // Steps the clock `seconds` on, a frame each 1/12 s.
+  // Steps the clock `seconds` on, at the scene's recorded cadence.
   const play = async (seconds) => {
     for (let t = 0; t < seconds - 1e-6; t += STEP) {
       await run((dt) => {
@@ -212,16 +284,19 @@ async function record(scene) {
     }, [key, v]); // prettier-ignore
     await play(0.25);
   };
-  const popOn = () => run(() => { const app = window.__splashery.app; if (!app.popOut) app.togglePopOut(); }); // prettier-ignore
-  const pops = () => run(async () => (await import("/src/packs/pictures.js")).BOOKS_R5.PG.pops.map((F) => ({ phase: F.phase, relief: F.relief?.key || "", kind: F.kind, at: F.at, id: F.id }))); // prettier-ignore
+  const popOn = () => run(() => { const {app,player} = window.__splashery; if (!app.popOut) app.togglePopOut(); player.motion.state.pop=1; }); // prettier-ignore
+  const pops = () => run(async () => (await import("/src/packs/pictures.js")).BOOKS_R5.PG.pops.map((F) => ({ phase: F.phase, relief: F.relief?.key || "", kind: F.kind, at: F.at, id: F.id, failed:!!F.failed }))); // prettier-ignore
   // Steps the clock (unrecorded) until the figure raised last starts to
   // rise: while it waits it lies exactly where it was. For a photo, waits in
   // real time at rest until its depth is worked out, so it rises with it.
   const ready = async () => {
+    const started = Date.now();
     for (let i = 0; i < 3000; i++) {
+      if (Date.now() - started > Number(opt("prep-ms", 750000)))
+        throw new Error("The figure's preparation timed out.");
       const s = (await pops()).at(-1);
       if (!s || s.phase === "rise" || s.phase === "up") return;
-      if (s.kind === "photo" && s.phase === "rest" && !s.relief.startsWith("d")) {
+      if (s.kind === "photo" && !s.failed && s.phase === "rest" && !s.relief.startsWith("d")) {
         await draw();
         await page.waitForTimeout(250);
         continue;
@@ -251,7 +326,16 @@ async function record(scene) {
   // The book open on page 2 of the test PDF (one page at a time, as on a phone), Pop out on.
   const dbg = (m) =>
     process.env.PG6_DEBUG && console.log(new Date().toISOString().slice(11, 19), m);
-  const bookTwo = async () => {
+  const prepareStep = async () => {
+    await run((dt) => {
+      const pl = window.__splashery.player;
+      pl.time += dt;
+      pl.stage.requestRender();
+    }, STEP);
+    await draw();
+    await settle();
+  };
+  const bookTwo = async (omitPreparation = false) => {
     await warm();
     dbg("warm");
     await open("your-book", { reading: "one" });
@@ -264,7 +348,9 @@ async function record(scene) {
     await popOn();
     await play(0.5);
     dbg("pop on");
-    for (let i = 0; i < 60 && (await figs(1)).length < 2; i++) await play(STEP);
+    for (let i = 0; i < 60 && (await figs(1)).length < 2; i++)
+      if (omitPreparation) await prepareStep();
+      else await play(STEP);
     return figs(1);
   };
   const raise = async (n, box) => {
@@ -275,7 +361,110 @@ async function record(scene) {
     await play(2.2);
   };
 
-  if (scene === "two-up") {
+  const r2Cycle = async (n, box) => {
+    for (const layered of [0, 1]) {
+      await control("layers", layered);
+      await popOn();
+      await play(0.25);
+      await hold(650);
+      await raise(n, box);
+      observations.push({ frame: frames.length, layers: !!layered, figures: await pops() });
+      // Keep the book's moving view. Other review scenes retain the
+      // oblique view after the first rise, cutting camera-only frames.
+      if (scene === "r2-book") await turn(0.45, 0.3, 0.65);
+      else if (!layered) await turn(0.45, 0.3, STEP);
+      await hold(650);
+      if (scene === "r2-book") await turn(0, 0, 0.5);
+      await run(() => {
+        const { app, player } = window.__splashery;
+        if (app.popOut) app.togglePopOut();
+        player.motion.state.pop = 0;
+      });
+      await play(1.4);
+      await hold(450);
+    }
+  };
+
+  if (scene === "r2-book") {
+    const [a] = await bookTwo(true);
+    await hold(650);
+    await r2Cycle(1, a);
+    await tapAt(await at(1, [0.9, 0.96]));
+    await play(2);
+    await hold(650);
+  } else if (scene === "r2-album") {
+    await warm();
+    await open("photo-album", { reading: "one" });
+    await run(() => window.__splashery.app.pictureStep(1));
+    await play(2);
+    const n = await run(() => window.__splashery.player.pictures.page);
+    await hold(650);
+    await r2Cycle(n, [0, 0, 1, 1]);
+    await run(() => window.__splashery.app.pictureStep(1));
+    await play(2);
+    await hold(650);
+  } else if (scene === "r2-lab") {
+    await open("picture-lab", {});
+    await play(0.6);
+    for (let i = 0; i < 60 && !(await figs(0)).length; i++) await prepareStep();
+    await hold(650);
+    await r2Cycle(0, (await figs(0))[0]);
+    await run(() => window.__splashery.app.pictureStep(1));
+    await play(1.2);
+    await hold(650);
+  } else if (["r2-text", "r2-chart", "r2-diagram"].includes(scene)) {
+    await warm();
+    await open("picture-lab", {});
+    await run(() => (window.__splashery.player.frozen = false));
+    await run(
+      async ({ scene, base }) => {
+        const { app } = window.__splashery;
+        if (scene === "r2-text" || scene === "r2-chart")
+          await app.openMedia(new URL(`work/pages-r2/fixtures/${scene.slice(3)}.png`, base).href);
+        else {
+          // Original CC0 diagram, made by Ryan with Codex (GPT-6).
+          const c = document.createElement("canvas");
+          c.width = 612;
+          c.height = 792;
+          const g = c.getContext("2d");
+          g.fillStyle = "white";
+          g.fillRect(0, 0, c.width, c.height);
+          g.fillStyle = "#17202a";
+          g.font = "bold 34px sans-serif";
+          g.fillText("A page in three steps", 48, 80);
+          for (const [i, label] of ["Source", "Page", "Layer cards"].entries()) {
+            const y = 150 + i * 185;
+            g.fillStyle = ["#dbeafe", "#dcfce7", "#ffedd5"][i];
+            g.fillRect(100, y, 412, 105);
+            g.strokeStyle = "#20364c";
+            g.lineWidth = 3;
+            g.strokeRect(100, y, 412, 105);
+            g.fillStyle = "#17202a";
+            g.font = "28px sans-serif";
+            g.fillText(label, 132, y + 63);
+            if (i < 2) {
+              g.beginPath();
+              g.moveTo(306, y + 115);
+              g.lineTo(306, y + 165);
+              g.moveTo(292, y + 151);
+              g.lineTo(306, y + 165);
+              g.lineTo(320, y + 151);
+              g.stroke();
+            }
+          }
+          const blob = await new Promise((r) => c.toBlob(r, "image/png"));
+          await app.openMedia(new File([blob], "diagram.png", { type: "image/png" }));
+        }
+      },
+      { scene, base },
+    );
+    await settle();
+    await run(() => (window.__splashery.player.frozen = true));
+    await play(0.8);
+    await hold(650);
+    await r2Cycle(0, [0, 0, 1, 1]);
+    await hold(650);
+  } else if (scene === "two-up") {
     const [a, b] = await bookTwo();
     await hold(1000);
     await raise(1, a);
@@ -382,6 +571,50 @@ async function record(scene) {
     await hold(1400);
   }
   await page.close();
+  if (opt("frames", "0") === "1") {
+    const dir = path.join(outDir, `frames-${scene}`);
+    fs.mkdirSync(dir, { recursive: true });
+    const lines = ["ffconcat version 1.0"];
+    frames.forEach((f, i) => {
+      const name = `${String(i).padStart(5, "0")}.png`;
+      fs.writeFileSync(
+        path.join(dir, name),
+        PNG.sync.write({ width: f.img.w, height: f.img.h, data: f.img.data }),
+      );
+      lines.push(`file '${name}'`, `duration ${f.delay / 1000}`);
+    });
+    lines.push(`file '${String(frames.length - 1).padStart(5, "0")}.png'`);
+    fs.writeFileSync(path.join(dir, "frames.ffconcat"), lines.join("\n") + "\n");
+  }
+  if (scene.startsWith("r2-"))
+    fs.writeFileSync(
+      path.join(outDir, `pg6-${scene}.json`),
+      JSON.stringify(
+        {
+          scene,
+          base,
+          viewport: [390, 844],
+          dpr: Number(opt("dpr", 2)),
+          profile: opt("profile", "mid"),
+          drawWaits: Number(opt("draws", 3)),
+          renderer: process.env.SPLASHERY_GL || "swiftshader",
+          stepFPS,
+          capture: canvasReview
+            ? "actual canvas at CSS scale; labeled, with UI omitted"
+            : "full browser page",
+          reviewView:
+            scene === "r2-book" ? "moving view" : "front rise, then a retained oblique view",
+          executedRecorderSha256: RECORDER_SHA256,
+          clock: `stepped at ${stepFPS} fps; preparation waits omitted; not throughput`,
+          frames: frames.length,
+          durationMs: frames.reduce((n, f) => n + f.delay, 0),
+          observations,
+          author: "made by Ryan with Codex (GPT-6)",
+        },
+        null,
+        2,
+      ) + "\n",
+    );
   // One palette for the whole clip, from a sample of its frames.
   const step = Math.max(1, Math.floor(frames.length / 12));
   const sample = frames.filter((f, i) => i % step === 0).map((f) => f.img.data);
@@ -405,5 +638,8 @@ async function record(scene) {
   console.log(`${file}: ${frames.length} frames, ${Math.round(gif.bytes().length / 1024)} KB`);
 }
 
-for (const s of list) await record(s);
-await browser.close();
+try {
+  for (const s of list) await record(s);
+} finally {
+  await browser.close();
+}

@@ -52,11 +52,11 @@ Splashery v1, a planet you could paint, lives on the `checkpoint/v1-planet-paint
 | 16 landmarks                  | Pack (Landmarks)      | Eiffel Tower, Washington Monument, Pyramids of Giza, a twisting supertall, lighthouse, Statue of Liberty, White House, Leaning Tower of Pisa, Colosseum, Parthenon, Stonehenge, Big Ben, Taj Mahal, a castle, a pagoda and a windmill.                                                                                                                                                                         |
 | 26 photoreal toys             | Captured (Photoreal)  | Twelve CC BY scans from SuperSplat and fourteen CC0 Poly Haven models turned into splats; see below and [CREDITS.md](CREDITS.md).                                                                                                                                                                                                                                                                              |
 
-Captured toys are SOG files of up to 450,000 splats (about 5 MB each) with a lighter copy for
-phones. The **Photoreal** shelf adds twelve more CC BY scans from SuperSplat (bugs, berries, a
-grape, a star cookie, tomatoes, a basket and a fractal) and fourteen CC0 Poly Haven models turned
-into splats (a rubber duck, a garden gnome, a ukulele, a boombox, a croissant and more). Full
-credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**.
+Captured toys are SOG files of up to 1,000,000 splats (most about 5 MB, the largest about 15 MB)
+with a lighter copy for phones. The **Photoreal** shelf adds twelve more CC BY scans from SuperSplat
+(bugs, berries, a grape, a star cookie, tomatoes, a basket and a fractal) and fourteen CC0 Poly
+Haven models turned into splats (a rubber duck, a garden gnome, a ukulele, a boombox, a croissant
+and more). Full credits are in [CREDITS.md](CREDITS.md) and in the app under **About & credits**.
 
 **Make a toy** builds a new one in the browser: pick a shape (sphere, noise blob, torus, capsule,
 knot), a palette, a seed, the number of splats (up to 300,000 on desktops, 240,000 on phones; see
@@ -348,10 +348,11 @@ node tools/prepare-assets.mjs bee        # one toy
 ```
 
 For each toy it rotates the capture upright, drops spherical harmonics, measures robust bounds,
-recentres and scales it, crops floaters, decimates to 450,000 splats and writes
-`assets/toys/<id>/<id>.sog` plus a 120,000-splat `<id>-lite.sog`. The SuperSplat sources are fetched
-from their public URLs; the cactus comes from the Steam Studio sample zip (see `sourceNote` in the
-manifest). Thumbnails are rendered by the app itself:
+recentres and scales it, crops floaters, decimates to the toy's `splats` budget in
+`tools/assets.json` (up to 1,000,000) and writes `assets/toys/<id>/<id>.sog` plus a 120,000-splat
+`<id>-lite.sog`. The SuperSplat sources are fetched from their public URLs; the cactus comes from
+the Steam Studio sample zip (see `sourceNote` in the manifest). Thumbnails are rendered by the app
+itself:
 
 ```sh
 SPLASHERY_CHROMIUM=/path/to/chrome node tools/make-thumbs.mjs
