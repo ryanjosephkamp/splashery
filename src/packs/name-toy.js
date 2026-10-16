@@ -450,9 +450,9 @@ function stepSim(sim, dt, time) {
       const dy = c[1] - g.at[1];
       const e = Math.exp(-(dx * dx + dy * dy) / 0.9) * (g.strength ?? 1);
       const tw = Math.sin(time * 11 + k * 1.7) * 0.5;
-      f[0] += (dx * 2.4 + tw) * 9 * e;
-      f[1] += (dy * 2.4 + tw * 0.6) * 9 * e;
-      f[2] -= 4 * e;
+      f[0] += (dx * 2.4 + tw) * 22 * e;
+      f[1] += (dy * 2.4 + tw * 0.6) * 22 * e;
+      f[2] -= 8 * e;
     }
     return f;
   };

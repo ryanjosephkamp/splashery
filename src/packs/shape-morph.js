@@ -310,6 +310,7 @@ uniform vec4 uSpClock;
 uniform vec4 uSpMorph;
 uniform vec4 uSpTokens[96];
 const float SM_S = ${scale};
+float smLeft = 0.0;
 float smHash(uint i) {
   uint h = i * 747796405u + 2891336453u;
   h = ((h >> ((h >> 28u) + 4u)) ^ h) * 277803737u;
@@ -329,6 +330,7 @@ void modifySplatCenter(inout vec3 center) {
     left = 1.0 - u * u * (3.0 - 2.0 * u);
   }
   center += off * left;
+  smLeft = length(off) > 1e-4 ? left : 0.0;
   vec3 p = center / SM_S;
   uint i = splat.index;
   p += (vec3(smHash(i+7u), smHash(i+11u), smHash(i+13u)) * 2.0 - 1.0) * uSpMorph.y * 0.22;
@@ -340,6 +342,11 @@ void modifySplatRotationScale(vec3 originalCenter, vec3 modifiedCenter, inout ve
   scale *= uSpClock.y;
 }
 void modifySplatColor(vec3 center, inout vec4 color) {
+  // In flight, every splat wears the cloud's own teal-to-pink ink, and its
+  // new form's colors come in as it lands.
+  float u = clamp(center.x / SM_S / 1.64 + 0.5, 0.0, 1.0);
+  vec3 ink = vec3(0.12 + 0.74 * u, 0.62 - 0.36 * u, 0.78 - 0.15 * u);
+  color.rgb = mix(color.rgb, ink, smoothstep(0.0, 0.35, smLeft));
   color.rgb *= uSpClock.z;
 }`;
   const wgsl = `
@@ -347,6 +354,7 @@ uniform uSpClock: vec4f;
 uniform uSpMorph: vec4f;
 uniform uSpTokens: array<vec4f, 96>;
 const SM_S: f32 = ${scale};
+var<private> smLeft: f32 = 0.0;
 fn smHash(i: u32) -> f32 {
   var h = i * 747796405u + 2891336453u;
   h = ((h >> ((h >> 28u) + 4u)) ^ h) * 277803737u;
@@ -365,6 +373,7 @@ fn modifySplatCenter(center: ptr<function, vec3f>) {
     left = 1.0 - u * u * (3.0 - 2.0 * u);
   }
   *center += off * left;
+  smLeft = select(0.0, left, length(off) > 1e-4);
   var p = *center / SM_S;
   let i = splat.index;
   p += (vec3f(smHash(i+7u), smHash(i+11u), smHash(i+13u)) * 2.0 - vec3f(1.0)) * uniform.uSpMorph.y * 0.22;
@@ -376,7 +385,10 @@ fn modifySplatRotationScale(originalCenter: vec3f, modifiedCenter: vec3f, rotati
   *scale *= uniform.uSpClock.y;
 }
 fn modifySplatColor(center: vec3f, color: ptr<function, vec4f>) {
-  *color = vec4f((*color).rgb * uniform.uSpClock.z, (*color).a);
+  let u = clamp(center.x / SM_S / 1.64 + 0.5, 0.0, 1.0);
+  let ink = vec3f(0.12 + 0.74 * u, 0.62 - 0.36 * u, 0.78 - 0.15 * u);
+  let rgb = mix((*color).rgb, ink, smoothstep(0.0, 0.35, smLeft));
+  *color = vec4f(rgb * uniform.uSpClock.z, (*color).a);
 }`;
   return { glsl, wgsl };
 }
