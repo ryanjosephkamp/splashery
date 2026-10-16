@@ -51,3 +51,7 @@
 {"v":1,"t":"2026-10-16T21:35:38.927Z","harness":"claude-code","event":"tool","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","tool":"mcp__085e0134-733f-4755-8624-b4ed2eb306bd__read_file_content","cwd":"splashery"}
 {"v":1,"t":"2026-10-16T21:35:50.380Z","harness":"claude-code","event":"tool","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","tool":"mcp__claude-code-remote__send_later","cwd":"splashery"}
 {"v":1,"t":"2026-10-16T21:35:57.017Z","harness":"claude-code","event":"turn-end","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T21:36:03.366Z","harness":"claude-code","event":"subagent-stop","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","agent":"ab37b1a1f72e38302"}
+{"v":1,"t":"2026-10-16T21:40:34.323Z","harness":"claude-code","event":"session-end","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:21:26.562Z","harness":"claude-code","event":"session-start","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T22:21:26.669Z","harness":"claude-code","event":"turn-start","session":"4dc6b4a8-b6da-57e2-9a3b-5c99ea9eda0f","cwd":"splashery"}
