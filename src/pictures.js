@@ -763,7 +763,11 @@ export class Pictures {
     const limit = Math.max(600e3, this.budget.ink);
     let total = 0;
     let bytes = 0;
-    const cost = (d) => d.count * 68 + (d.surface ? d.w * d.h * 4 : 0);
+    const cost = (d) =>
+      Object.values(d)
+        .filter(ArrayBuffer.isView)
+        .reduce((n, a) => n + a.byteLength, 0) +
+      (d.surface ? d.w * d.h * 4 + (d.surface.relief?.d?.byteLength || 0) : 0);
     for (const d of this.cache.values()) {
       total += d.count;
       bytes += cost(d);

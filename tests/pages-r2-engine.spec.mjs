@@ -38,6 +38,21 @@ test("an immediately evicted prefetch is not rebuilt on every frame", () => {
   expect(builds).toHaveLength(2);
 });
 
+test("cached source canvases and relief maps share the original memory allowance", () => {
+  const p = Object.create(Pictures.prototype);
+  Object.assign(p, { budget: { ink: 220000 }, cache: new Map(), sheets: [] });
+  for (let i = 0; i < 3; i++)
+    p.remember(String(i), {
+      count: 1,
+      center: new Float32Array(1),
+      w: 1000,
+      h: 1000,
+      surface: { relief: { d: new Float32Array(3000000) } },
+    });
+  expect(p.cache.size).toBe(2);
+  expect([...p.cache.keys()]).toEqual(["1", "2"]);
+});
+
 test("continuous faces retain a Gaussian backing without allocating a hidden full raster of splats", () => {
   const j = job();
   const full = buildSheet(j),
