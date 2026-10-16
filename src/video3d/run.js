@@ -219,7 +219,7 @@ export async function videoTo3D(file, opts = {}) {
     const solveOnce = async (extra, signal) => {
       try {
         if (signal.aborted) throw new DOMException("Stopped", "AbortError");
-        const r = await s.solve({ signal, ...extra });
+        const r = await s.solve({ signal, minCameras: 3, ...extra });
         if (r?.cams?.length >= 3) return { recon: r };
         return { error: `only ${r?.cams?.length ?? 0} cameras placed (too few frames matched)` };
       } catch (e) {
