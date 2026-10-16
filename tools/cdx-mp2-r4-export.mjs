@@ -114,6 +114,9 @@ const ledgers = [
   "r4-final-quality.json",
   "r4-r3-final-quality.json",
   "r4-final-source.json",
+  "r4-published-source.json",
+  "r4-before-active-capture-source.json",
+  "r4-active-capture-guard.json",
   "r4-quality-source.json",
   "r4-source-validation-map.json",
   "r4-input-transform-flags.json",
@@ -122,9 +125,22 @@ const ledgers = [
   "r4-rotated-container-probe.json",
   "r4-node22-runtime.json",
   "r4-publication.json",
+  "r4-public-input-verification.json",
+  "r4-final-isolation-drain-note.json",
+  "r4-final-isolation.json",
+  "r4-prior-phone-main-drain-bug.json",
+  "r4-before-cache-source.json",
+  "r4-phone-r4-before-cache-fix.json",
+  "r4-cache-deadline-trials.json",
+  "r4-cache-deadline-pilot.json",
+  "r4-cache-two-pilot.json",
+  "r4-cache-retained-pilot.json",
   "r4-measurements.md",
   "r4-test-ledger.json",
   "r4-test-ledger.md",
+  "r4-node-tests.json",
+  "r4-node-tests.tap",
+  "r4-gallery-check.json",
   "r4-phone-main.json",
   "r4-phone-r3.json",
   "r4-phone-r4.json",
@@ -161,6 +177,26 @@ for (const file of await fs.readdir("work")) {
     uncompressedSha256: sha(bytes),
   });
 }
+manifest.testReports = [];
+const testLedger = JSON.parse(await fs.readFile("work/r4-test-ledger.json", "utf8"));
+for (const run of testLedger.runs) {
+  const bytes = await fs.readFile(path.join("work", run.report)),
+    sha = (value) => createHash("sha256").update(value).digest("hex");
+  if (sha(bytes) !== run.sha256) throw Error(`Test report changed: ${run.report}`);
+  const compressed = gzipSync(bytes),
+    file = `test-reports/${run.report}.gz`,
+    target = path.join(out, "ledgers", file);
+  await fs.mkdir(path.dirname(target), { recursive: true });
+  await fs.writeFile(target, compressed);
+  manifest.testReports.push({
+    file,
+    bytes: compressed.length,
+    sha256: sha(compressed),
+    uncompressedBytes: bytes.length,
+    uncompressedSha256: run.sha256,
+    startedAt: run.startedAt,
+  });
+}
 await fs.writeFile(path.join(out, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
 await fs.writeFile(
   path.join(out, "index.html"),
@@ -193,6 +229,10 @@ ${sections.join("\n")}
 Native traces and CPU profiles are gzip-compressed, with both compressed and original hashes in
 the root manifest. Decompress them before loading them in a trace or CPU-profile viewer.
 ${manifest.traces.map((row) => `- [${row.file}](ledgers/${row.file})`).join("\n")}
+
+Every original Playwright JSON report, including failures and superseded runs, is retained under
+\`ledgers/test-reports/\` as a gzip file. The root manifest records its original and compressed
+hashes; the test ledger identifies which complete file run supplies each latest result.
 
 Incomplete measurements remain explicitly incomplete. Earlier failures are preserved in the test
 ledger; latest whole-file reruns do not erase them. These are Chromium software-rendered phone

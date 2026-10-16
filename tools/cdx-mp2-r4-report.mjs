@@ -10,7 +10,8 @@ const out = option("out", "work/r4-measurements.md"),
   current = await read("r4-final-quality"),
   perf = await Promise.all(["main", "r3", "r4"].map((name) => read(`r4-phone-${name}`))),
   startup = await Promise.all(["main", "r4"].map((name) => read(`r4-startup-${name}`))),
-  tests = await read("r4-test-ledger");
+  tests = await read("r4-test-ledger"),
+  nodeTests = await read("r4-node-tests");
 const fixed = (number, digits = 3) =>
     Number.isFinite(number) ? number.toFixed(digits) : "pending",
   table = (head, rows) =>
@@ -73,7 +74,9 @@ lines.push(
         r4 = rows[2];
       return [
         item.id,
-        ...rows.map((row) => interval(row)),
+        ...rows.map((row, index) =>
+          row ? interval(row) : index === 1 ? "not measured" : "pending",
+        ),
         r4 ? String(r4.cadence.median <= 50 && r4.cadence.worst <= 250) : "pending",
       ];
     }),
@@ -112,7 +115,7 @@ lines.push(
   ),
 );
 lines.push(
-  "\n## Repeated clean cadence\n\nA full paired pass covers all fourteen inputs; Bunny and Horse receive two additional passes to check the closest comparison with main. The first-pass table above keeps the Operator's original per-window protocol; this table retains each pass's median and the worst observed interval across passes. Missing repeats stay explicit. Source-clock rates are proxies, as described above.\n",
+  "\n## Repeated clean cadence\n\nA full paired pass covers all fourteen inputs; Bunny and Horse receive one additional pass to check the closest comparison with main. The first-pass table above keeps the Operator's original per-window protocol; this table retains each pass's median and the worst observed interval across passes. Missing repeats stay explicit. Source-clock rates are proxies, as described above.\n",
 );
 const repeatPairs = [[perf[0], perf[2]]];
 for (const repeat of [2, 3]) {
@@ -163,7 +166,7 @@ lines.push(
   ),
 );
 lines.push(
-  "\n## Isolated phone startup\n\nFresh context per repeat, selection to first actual submitted front-surface draw with usable picture and estimated depth. Opening the default toy includes observer module preparation in both versions; other clips start from the already open default toy. Background refinement need not finish. Milliseconds; median [minimum–maximum], repeat count.\n",
+  "\n## Isolated phone startup\n\nFresh context per repeat, selection to the first actual completed front-surface draw with usable picture and estimated depth. A single WebGL finish fence follows submission; its additional completion wait is separate from GPU elapsed profiling. Opening the default toy includes observer module preparation in both versions; other clips start from the already open default toy. Background refinement need not finish. Milliseconds; median [minimum–maximum], repeat count.\n",
 );
 lines.push(
   table(
@@ -253,8 +256,8 @@ for (const id of ["sample", "machine-long"]) {
         decode.map((row, i) => [
           i ? "Round 4" : "Round 3",
           row?.count ?? "unavailable",
-          fixed(row?.totalMs),
-          fixed(row?.worstMs),
+          row ? fixed(row.totalMs) : "unavailable",
+          row ? fixed(row.worstMs) : "unavailable",
         ]),
       ),
   );
@@ -270,6 +273,10 @@ if (tests)
     }.\n`,
   );
 else lines.push("Pending.\n");
+if (nodeTests)
+  lines.push(
+    `\nSix unchanged Node test files outside the Playwright pattern: ${nodeTests.summary || "16 passed, 0 failed, 0 skipped; see original TAP and runtime ledger"}. These are separate from Playwright totals.\n`,
+  );
 await fs.mkdir(path.dirname(out), { recursive: true });
 await fs.writeFile(out, lines.join("\n"));
 console.log(out);

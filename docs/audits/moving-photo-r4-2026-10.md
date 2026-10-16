@@ -7,19 +7,19 @@ native pictures, softened frame, and upload refinement forward. The task is
 [the Operator's last comment](https://github.com/ryanjosephkamp/splashery/pull/560#issuecomment-6182624749).
 
 This audit is being completed during the authorized twelve-hour run, October 16, 2026, 01:26–13:26
-UTC. Final quality, isolated cadence, startup, and complete-suite results replace the pending
-entries below before handback. An incomplete target is not a pass.
+UTC. Quality, isolated cadence, and startup are complete. The final test status is recorded below;
+an incomplete target is not a pass. The complete Goal is not met.
 
 ## Goal status
 
-| Target                                                                           | Result                                                                                                                                                                                                             |
-| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| Sharp shows the chosen sample and local file                                     | All 81 ordered pairs of nine samples, five local formats, and Sharp/Splats transitions passed on the emulated phone.                                                                                               |
-| Phone cadence at least main; Operator median ≤50 ms and worst ≤250 ms            | Final isolated measurements pending.                                                                                                                                                                               |
-| Sharper and steadier on all nine samples and five original inputs, both profiles | Complete 28-case sweep: 7,102 original source frames, zero holes, edge specks, depth mismatches, or browser errors. Universal sharpness and stability gains are not established; some temporal measures are worse. |
-| First 3D frame no slower than main on phone                                      | Final isolated measurements pending.                                                                                                                                                                               |
-| Photo checkpoint and every existing test                                         | Full suite running; 51 Photo scan tests passed. Initial failures and whole-file reruns are preserved in the ledger.                                                                                                |
-| Phone comparisons                                                                | Final source-clock films pending on `codex/moving-photo-r4-clips`, which is never merged.                                                                                                                          |
+| Target                                                                           | Result                                                                                                                                                                                                                                                      |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sharp shows the chosen sample and local file                                     | All 81 ordered pairs of nine samples, five local formats, and Sharp/Splats transitions passed on the emulated phone.                                                                                                                                        |
+| Phone cadence at least main; Operator median ≤50 ms and worst ≤250 ms            | First clean pass: all fourteen update medians are no worse than main; twelve meet the stricter 50 ms / 250 ms ceiling. Bound-picture clocks remain slower on Bridge and long Bunny. Closest-input repeats and startup are measured separately.              |
+| Sharper and steadier on all nine samples and five original inputs, both profiles | Complete 28-case sweep: 7,102 original source frames, zero holes, edge specks, depth mismatches, or browser errors. Universal sharpness and stability gains are not established; one long-film jitter result and six long-film edge-flip results are worse. |
+| First 3D frame no slower than main on phone                                      | All fourteen medians are faster across three fresh-context repeats per input and version (84 launches), with zero observer errors. The first usable front-surface draw completes a WebGL finish fence.                                                      |
+| Photo checkpoint and every existing test                                         | Full suite running; 51 Photo scan tests passed. Initial failures and whole-file reruns are preserved in the ledger.                                                                                                                                         |
+| Phone comparisons                                                                | Fourteen main/R4 pairs, two R3/R4 pairs, four actual live recordings, and two live pairs are complete. The separate clips branch is never merged.                                                                                                           |
 
 ## Baselines and scope
 
@@ -98,10 +98,12 @@ not CPU-throttled by CDP. This is software-rendered emulation, not a physical An
   unchanged kit suite exposed this previously unhandled long-sample path.
 
 The inherited-dispatch fix retains upload observers installed after a clip mesh is created. The
-per-mesh revision counter had captured an old prototype function, so the existing paused-seek test
-could not observe actual uploads. Its unchanged regression passes after the dispatch fix; shader,
-field, reconstruction, and scheduling arithmetic are unchanged. The complete quality sweep is
-repeated against this quality-capture source pin.
+per-mesh revision counter had captured an old prototype function, hiding actual uploads from a late
+observer. The complete quality sweep is repeated against this quality-capture source pin. A later
+whole-file rerun exposed a second paused-capture race: the right picture can upload before the
+explicit capture request starts. Explicit captures now refresh the active clip picture even at the
+same paused clock, including when no ordinary clip update is due. The unchanged focused regression
+passes. This capture-only fix changes neither construction nor ordinary playback scheduling.
 
 An additional real-browser check found that raw `VideoFrame.copyTo()` pixels ignore display rotation
 and flips. A square rotated frame passes a size-only shortcut, so the old native worker returned the
@@ -118,16 +120,23 @@ differs from the advancing media element; that snapshot is not accepted as a liv
 cadence proof.
 
 The complete quality sweep is pinned to public `bf58e8c4` (application hash
-`2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4`). The final runtime adds only
-those two transform guards, their comment, the corrected public generator credit URL, and a
-Splats-only guard retaining bundled short samples' tier-sized textures. The unchanged fidelity test
-exposed the shared-video path selecting the native size in Splats; its sample, GIF, and short-video
-assertions pass after the guard. Native Sharp pictures remain unchanged. All nine native video
-inputs in the fourteen-case corpus explicitly report zero rotation and no flip; the other inputs use
-retained GIF or sheet pictures. Their existing pixel paths are unchanged. Reversing only these small
-changes reproduces all ten captured application files byte for byte. The exact proof, input hashes,
-and before/after worker results accompany the ledgers. Cadence, startup, and live recordings use the
-final runtime hash `f26ec66e827c53b668c68a18598be50c4e8b2e2d6766717e41ef184e16e1833a`.
+`2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4`). The measured runtime adds those
+two transform guards, their comment, the corrected public generator credit URL, and a Splats-only
+guard retaining bundled short samples' tier-sized textures. The unchanged fidelity test exposed the
+shared-video path selecting the native size in Splats; its sample, GIF, and short-video assertions
+pass after the guard. Native Sharp pictures remain unchanged. The retained-picture request/eviction
+scheduling change is described below; construction outside the cache function is byte-identical. All
+nine native video inputs in the fourteen-case corpus explicitly report zero rotation and no flip;
+the other inputs use retained GIF or sheet pictures. Their existing pixel paths are unchanged.
+Reversing only these small changes reproduces all ten captured application files byte for byte. The
+exact proof, input hashes, and before/after worker results accompany the ledgers. Cadence, startup,
+and live recordings use the measured runtime hash
+`79ff139b207d8ca57abdddfbd8a59f9c1908cdc81e24737bb36d64cdc18e2109`. The published application hash
+is `0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7` (public `0e15561da`): its sole
+difference from the measured runtime is the explicit-capture refresh above. Nine of the ten
+application files are byte-identical, and the exact final Sharp diff is retained in
+`r4-source-validation-map.json`. No capture request occurs in the clean cadence, startup-observer,
+or CDP live windows; their raw measurements keep their original hash.
 
 The candidate long-film caches were rebuilt from verified interior source times, using the existing
 upload refinement's symmetric, color-gated half-second window, one clip-wide depth range, and the
@@ -151,6 +160,15 @@ continued motion under heavy load. It does not pair a fresh picture with old geo
 decoder, reduce source resolution, or change reconstruction arithmetic. The current regression adds
 a controlled 160 ms numeric-worker delay, disables camera idle motion, ignores initial draws, and
 requires continued real front-surface draws for a short video, an MP3 sample, and a long film.
+
+The first complete clean timing pass exposed a retained-picture cache defect on Bridge: its update
+callbacks were fast, but its bound picture clock advanced about 9 times per second, against
+main's 15. FIFO eviction discarded nearer geometry while filling farther lookahead. The
+retained-picture path now keeps nearer display deadlines, prioritizes the next picture, and defers
+rejected far packets until the playhead or cache capacity changes. Native video retains its previous
+freshness policy. One numeric worker and the 24 MiB target remain. The new controlled-transport
+regression overfills that target and requires the nearer packets to remain available without
+repeatedly rebuilding the rejected far packet.
 
 ## Picture protocol
 
@@ -182,18 +200,22 @@ application hash is `2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54
 equivalence and Splats-only change are documented above. Against main, both coverage proxies improve
 in all 28 cases. Average depth jitter improves in 27 cases and worsens in one; large edge flips
 improve in 22 cases and worsen in six. This is not a universal temporal-stability win. The detailed
-measurement tables are linked after the isolated runs finish.
+[measurement tables](moving-photo-r4-measurements-2026-10.md) retain every case and source pin.
 
 ## Playback and startup protocol
 
 The clean speed run uses one browser with no competing tests, model-baking jobs, quality sweeps, or
-encoders. It keeps round 3's two-second warmup, twelve-second short windows, and thirty-second long
-windows. A full clean pass covers all fourteen inputs, with two additional Bunny/Horse passes to
-assess the closest comparison with main. It reports frameend update intervals, actual postrender
-intervals, and bound-picture-clock submission intervals separately. A fast update callback alone
-does not establish fast visible playback; a 10 fps source also cannot supply 20 distinct pictures
-per second. Native bitmap clocks are their frozen presentation timestamps; a directly bound video
-uses its media-element clock, and a retained source uses its frame index. Clock changes are not an
+encoders. A rejected first attempt exposed an unavailable kernel child-process file: two existing
+test files were still finishing when its first timing browser launched. The entire partial attempt
+is retained separately and excluded. The corrected process-parent graph drains the test children and
+explicitly requires zero active Chromium processes before launching the first timing browser. It
+keeps round 3's two-second warmup, twelve-second short windows, and thirty-second long windows. A
+full clean pass covers all fourteen inputs, with one additional Bunny/Horse pass to assess the
+closest comparison with main. It reports frameend update intervals, actual postrender intervals, and
+bound-picture-clock submission intervals separately. A fast update callback alone does not establish
+fast visible playback; a 10 fps source also cannot supply 20 distinct pictures per second. Native
+bitmap clocks are their frozen presentation timestamps; a directly bound video uses its
+media-element clock, and a retained source uses its frame index. Clock changes are not an
 independent pixel-uniqueness measurement. Browser decoder counters and live presentation recordings
 are reported separately.
 
@@ -214,29 +236,33 @@ already open. Startup repeats each input three times; the median and range, plus
 reported. Startup observer validation passed on a sample and a local MP4, but its concurrent timings
 support no speed claim.
 
-The isolated diagnostic below predates the final still-camera scheduling fix. It identifies the
-round 3 bottleneck; final complete timing tables supersede it for the Goal.
+The final clean pass improves all fourteen update medians against main. Twelve meet both the
+Operator's 50 ms median and 250 ms worst ceilings; Bunny's 54.3 ms and Bridge's 60.0 ms medians miss
+the first ceiling. Bridge's bound-picture clock advances at 13.92/s against main's 15.08/s, and long
+Bunny at 9.93/s against 10.60/s. Fast callbacks therefore do not establish universal playback
+parity. One additional paired Bunny/Horse run is retained without replacing the first-pass results.
 
-| Input                | Main median / worst, ms | Round 3 median / worst, ms | Earlier round 4 median / worst, ms |
-| -------------------- | ----------------------: | -------------------------: | ---------------------------------: |
-| Bunny short          |            70.8 / 117.7 |              154.3 / 195.4 |                       70.1 / 122.7 |
-| Elephants Dream long |            86.7 / 149.3 |              267.4 / 420.2 |                       44.0 / 210.0 |
+All fourteen startup medians improve over three fresh contexts per version, with 84 launches and
+zero observer errors. Default Bunny falls from 9,726 ms to 1,060 ms; the five original local files
+fall from 7.3–15.3 seconds to 1.6–1.9 seconds. These are first usable completed front surfaces, not
+completion of every background refinement step.
 
-The instrumented Bunny run spent about 150 ms per update in round 3's clip geometry rebuild, versus
-about 1.5 ms on the page in the earlier round 4 run. The long round 3 path additionally spent about
-138 ms per update in `longFrame`, including about 96 ms in its canvas draw. These inclusive
-measurements overlap and must not be summed. Round 4 moves picture readback, guidance, and field
-construction to the bounded workers. Their recent long-frame sample averaged about 71 ms per
-completed worker packet, separate from page costs.
+The fresh instrumented traces show Bunny's inclusive page geometry at 150.41 ms/update in round 3
+and 1.28 ms/update here. Long Elephants Dream spends 146.82 ms/update in round 3's `longFrame`,
+including 104.70 ms in canvas drawing, and another overlapping 92.48 ms in geometry construction.
+Here its page geometry costs 0.93 ms/update; posting worker requests still costs 20.62 ms/update.
+The most recent 120 long-worker packets average 77.04 ms each, separately from page costs. Their
+accepted matching pictures have a median media-clock age of 200.65 ms and a worst of 382.64 ms.
+Those ages are not physical speaker-to-screen latency. Inclusive rows overlap and must not be
+summed.
 
-Across the matched long trace, native VP9 decode events fell from 1,549 to 772 when video and sound
-shared one element. Their recorded total wall durations were 1,512.9 and 1,267.4 ms, respectively;
-these are trace-function wall durations, not additive decoder CPU costs. H.264 decode-function
-durations were not exposed in that short-film trace. GPU elapsed timer queries are unavailable in
-this Chromium/llvmpipe setup; draw-submission costs are reported separately, and no zero GPU cost is
-inferred. Unvalidated raw PlayCanvas timing fields are excluded from the CPU breakdown.
+The matched long trace exposes 1,548 native VP9 decode calls in round 3 and 765 here, with total
+function wall durations of 1,618.77 and 1,388.33 ms. These overlapping wall durations are not
+additive decoder CPU costs. H.264 function durations are not exposed. GPU elapsed queries are
+unavailable; no zero GPU cost is inferred. Unvalidated raw PlayCanvas timing fields are excluded.
 
-Final playback, CPU breakdown, and startup tables: pending.
+[Complete quality, cadence, startup, page, worker, and native-media tables](moving-photo-r4-measurements-2026-10.md)
+accompany the raw ledgers and compressed native traces on the clips branch.
 
 ## Verification
 
@@ -246,8 +272,11 @@ unchanged. Initial failures are preserved; isolated reruns are separately labele
 erased.
 
 The initial full run uses Node 24.19.0. Two unchanged QR hash assertions fail there but pass under
-CI's Node 22 major version (verified official Node 22.14.0 archive). Final whole-file rechecks use
-Node 22.14.0. Both runtime versions and the original failures remain recorded.
+CI's Node 22 major version (verified official Node 22.14.0 archive). The drained scheduler resumes
+its remaining files under Node 22.14.0, and final whole-file rechecks use that version. All original
+reports remain. Six existing Node test files outside Playwright's spec pattern also run unchanged
+under Node 22: sixteen tests pass, with zero failures or skips. Their file hashes match main, and
+their original TAP and runtime record are retained.
 
 Focused checks already completed:
 
@@ -269,11 +298,21 @@ Focused checks already completed:
 - The unchanged complete kit file: **10/10 passed** after the DOM-free long-sample preparation fix.
   The three newly merged test files and the comparison-engine file also passed.
 
-The original new round 4 files passed **18/18**. The added eight-transform regression also passed;
-the expanded six-test raster file is queued for its complete final rerun. The unchanged decode,
-mobile, actual-texture, and round 3 files also passed **7/7**, **2/2**, **7/7**, and **16/16**,
-respectively. The legacy Moving photo file initially passed 13/14; its observer-dispatch failure
-passes unchanged in the focused recheck, with the whole-file rerun still planned.
+The original new round 4 files passed **18/18**. The added eight-transform regression and controlled
+cache-deadline regression also passed; the expanded seven-test raster file passes its complete final
+rerun at the measured runtime hash. Together with the thirteen-test moving-photo file, the final two
+new files contain twenty regressions. The unchanged decode, mobile, actual-texture, and round 3
+files also passed **7/7**, **2/2**, **7/7**, and **16/16**, respectively. The legacy Moving photo
+file initially passed 13/14; its late-observer and explicit-capture regressions are fixed without
+changing the test. Its complete rerun passes **14/14** at the first explicit-capture pin
+`b931bb7b456e8bd45cfa02ab389a54b8564b11ac6de973845855f298331138f1`. The later active-view guard
+passes the same unchanged paused-seek assertion at the published pin; it excludes hidden clip meshes
+from other toys' captures. The final thirteen-test selection-file rerun is recorded in the ledger.
+
+All short samples and all five original uploads improve both reported temporal measures on both
+profiles. The unresolved jitter result is long Elephants Dream on phone. The six worse edge-flip
+results are all four long films on phone, plus Sintel and Elephants Dream on desktop. These
+exceptions remain explicit in the per-case table.
 
 The full run supersedes focused results where source pins differ. The final test ledger lists each
 file's counts and all reruns.
@@ -316,6 +355,14 @@ reduced jitter to 0.002325 and large flips to 0.3510 per 1,000 still pixels, wit
 specks after the support-cell fix. Its large-flip count remains above main's zero. Full final
 per-case results decide which caches remain.
 
+A general deadline policy worsened Bunny's update median to 78.5 ms; a two-worker trial was also
+slower. Both are cut. The retained-picture pilot measured Bunny at 63.7 ms and Bridge at 64.3 ms,
+with Bridge's source-clock submissions rising to 12.9 per second. That pilot still falls short of
+main's Bridge clock rate, and is not substituted for the final fourteen-input pass. All three exact
+trial patches reproduce their recorded application hashes. Only cache request and retention behavior
+changed; the geometry module before and after the cache function is byte-identical to the
+quality-capture pin. Full pixel regressions are rerun on the final runtime hash.
+
 An isolated single-texture-lookup wall-shader trial showed no reliable speed gain and was discarded.
 No production shader change from that trial remains.
 
@@ -341,6 +388,16 @@ Individual PR images stay below 1 MB. The final fourteen comparison posters were
 contact sheets: all show the intended subjects, and the solid borders retain the source picture.
 Contact-frame review and timestamp validation do not amount to watching every film continuously.
 
-Final clips branch, manifest, full per-frame ledgers, and test reports: pending.
+All 94 measured input-hash records match accessible public commits, including bundled depth assets.
+Main lacks the four long-film shelf inputs and the five original local files; those unchanged native
+inputs are identified from the public runtime commit instead. The input verification ledger records
+each exact revision and SHA-256.
+
+The separate
+[clips branch](https://github.com/ryanjosephkamp/splashery/tree/codex/moving-photo-r4-clips)
+contains the phone films, responsive gallery, original per-frame JSON ledgers, source and input
+hashes, compressed native traces, and original compressed Playwright reports. Each compressed report
+records both compressed and original SHA-256. Earlier failures and rejected trials remain available.
+The primary branch has no gallery movies or test-report bulk.
 
 Rule check: none.
