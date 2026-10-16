@@ -118,7 +118,12 @@ const isCode = (f) => /\.(js|mjs|html)$/.test(f);
 
 // The text of a line worth checking: string literals in code, everything else in prose.
 function textOf(file, line) {
+  // TOY-PLAN.md's shelf headings come from the shelf labels in src/toys.js; a new toy only
+  // changes the count beside a label the one-time sweep will rename.
+  if (file === "docs/TOY-PLAN.md" && /^## .* \(\d+\)$/.test(line)) return "";
   if (!isCode(file)) return line.replace(/`[^`]*`/g, " "); // inline code is code
+  // Module paths are file names (import … from "./maths.js", import("./maths.js")).
+  line = line.replace(/\b(from|import)\s*\(?\s*(["'`])[^"'`]*\2/g, "$1");
   const parts = [];
   for (const m of line.matchAll(/"((?:[^"\\]|\\.)*)"|'((?:[^'\\]|\\.)*)'|`((?:[^`\\]|\\.)*)`/g))
     parts.push(m[1] ?? m[2] ?? m[3] ?? "");

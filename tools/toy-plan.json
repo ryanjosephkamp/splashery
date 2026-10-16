@@ -1593,6 +1593,13 @@
       "sound": "A quiet, short rustle as the cloud scatters and re-forms.",
       "improved": "Codex task 78c: Word, Lorenz attractor, Klein bottle, gyroid, loop, and QR forms in one cloud, with a smaller Auto budget on phones. The Form picker morphs from the last rendered positions, including an unfinished flight. The QR generator loads only for the QR form. Optional teal and orange inks, editable word and QR text, and spring-back drag interaction. Made by Ryan with Codex (GPT-6)."
     },
+    "one-splat": {
+      "v": "keep",
+      "owner": "Codex task 78a: port Ryan Kamp's One Splat concept to the math shelf behind labs.",
+      "effect": "Tap a Gaussian to replace it with its two pixel-tree children, moving from the parent's center to their own centers over 1.8 seconds. Hold to inspect its moments.",
+      "sound": "A quiet glide while the children separate.",
+      "improved": "Exact principal-axis median pixel tree, levels from 1 to 16,384 splats, custom words, local pictures with mean color, individual refinements, and a hold readout. Existing Kit clouds, morphs, options, and drag hooks; no engine changes."
+    },
     "splat-equation": {
       "v": "keep",
       "owner": "The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that explains the language.",
@@ -3146,6 +3153,13 @@
       "effect": "Turns over to show its other side, and back.",
       "sound": "A short, quiet sound that suits the object.",
       "improved": "Photoreal r3 (October 8, 2026): Turns over to show its other side, and back."
+    },
+    "name-toy": {
+      "v": "keep",
+      "interactive": true,
+      "effect": "The typed name becomes solid splat letters. Spin, poke, paint, drop, and blow move each letter as one piece, then settle home. Paint colors remain in scene links.",
+      "sound": "Each letter plays its own quiet bar note.",
+      "improved": "Codex task 78d: reuses Your words paths, with rigid letter tokens, five actions, saved names and whole-letter paint, and five device-capped detail steps. From a concept by Ryan Kamp."
     }
   }
 }

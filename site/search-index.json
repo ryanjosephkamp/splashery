@@ -2681,6 +2681,16 @@
     "l": 1
   },
   {
+    "t": "One splat, many splats",
+    "u": "toys/one-splat/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Turn the dial from 1 to 16,384 splats. Tap a splat to split it; hold to read its numbers.",
+    "w": "one splat, many splats math math gaussian pixels word picture tree mean covariance eigenvector split portfolio one-splat",
+    "i": "../assets/toys/one-splat/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Splat equation",
     "u": "toys/splat-equation/",
     "k": "toy",
@@ -3619,6 +3629,16 @@
     "d": "Tap it to search for the Enigma setting. Type a message to break in the Toy tab.",
     "w": "bombe ai and computing ai and computing bombe bletchley park alan turing gordon welchman codebreaking enigma drums crib menu history bombe",
     "i": "../assets/toys/bombe/thumb.webp"
+  },
+  {
+    "t": "Your name in splats",
+    "u": "toys/name-toy/",
+    "k": "toy",
+    "s": "Pictures and pages",
+    "d": "Type a name in Toy. Pick an action, then tap a letter; turn on sound to hear its note.",
+    "w": "your name in splats pictures and pages pictures and pages name words letters text spin poke paint drop blow portfolio toybox name-toy",
+    "i": "../assets/toys/name-toy/thumb.webp",
+    "l": 1
   },
   {
     "t": "Picture lab",

@@ -235,7 +235,245 @@
             is MIT; the original procedural forms and sound are CC0.
           </p>
         </section>
-
+        <section class="toy-section evidence" aria-labelledby="h-right">
+          <h2 id="h-right">Is it right?</h2>
+          <p>
+            Six sampled forms share one cloud of splats. The Lorenz equations, figure-eight
+            Klein-bottle parametrization, gyroid approximation, and QR encoder have reference
+            sources. The word and loop are graphic designs; flights, pushes, colors, and the two-ink
+            treatment are animation choices. <span class="note">Checked October 16, 2026.</span>
+          </p>
+          <ol class="claims">
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The word form samples the
+                site's five-by-seven bitmap glyphs.
+              </p>
+              <p>
+                Set bits in the existing glyph table become filled cells sampled by splats. Text is
+                uppercased, limited to 24 characters, and wrapped after eight characters per line;
+                unsupported characters become question marks.
+              </p>
+              <p class="note">
+                The test checks finite, deterministic builds; the glyph design comes from the
+                published source table. This is stylized bitmap lettering.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://raw.githubusercontent.com/ryanjosephkamp/splashery/89cd1c2665c26bf5381a3e228773040f403024ce/src/font.js"
+                    target="_blank"
+                    rel="noopener"
+                    >Splashery's bitmap font</a
+                  >, Splashery:
+                  <q
+                    >The font defines seven rows of five bits per glyph and exports them as the
+                    BITMAP table.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The Lorenz form uses dx/dt =
+                10(y - x), dy/dt = x(28 - z) - y, and dz/dt = xy - (8/3)z.
+              </p>
+              <p>
+                The derivative uses sigma = 10, rho = 28, and beta = 8/3. A fixed-step RK4 path uses
+                step 0.007, discards 800 warm-up steps, and stores 18,000 points before display
+                sampling, axis reordering, centering, and scaling.
+              </p>
+              <p class="note">
+                The test checks two independent derivative values and all three equilibria. This is
+                a finite numerical trajectory, not weather data or a forecast.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://mathworld.wolfram.com/LorenzAttractor.html"
+                    target="_blank"
+                    rel="noopener"
+                    >Lorenz attractor</a
+                  >, Wolfram MathWorld:
+                  <q
+                    >The Lorenz equations are X' = sigma(Y - X), Y' = -XZ + rX - Y, and Z' = XY -
+                    bZ.</q
+                  >
+                </li>
+                <li>
+                  <a
+                    href="https://en.wikipedia.org/wiki/Lorenz_system"
+                    target="_blank"
+                    rel="noopener"
+                    >Lorenz system</a
+                  >, Wikipedia:
+                  <q
+                    >The commonly illustrated attractor uses rho = 28, sigma = 10, and beta =
+                    8/3.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The Klein form depicts a
+                figure-eight Klein bottle with the expected self-intersections of a
+                three-dimensional view.
+              </p>
+              <p>
+                The existing Splat equation preset at time zero evaluates R = 2 + cos(u/2)sin(v) -
+                sin(u/2)sin(2v), x = R cos(u), y = sin(u/2)sin(v) + cos(u/2)sin(2v), and z = R
+                sin(u), for u and v from 0 to 2pi. The published figure-eight formula's y and z axes
+                are exchanged; a display rotation and uniform fit follow.
+              </p>
+              <p class="note">
+                The reference states a &gt; 2; the existing preset chooses radius parameter 2 for
+                its graphic depiction. Tests check four reference points, not a proof of regularity
+                or topology.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://mathworld.wolfram.com/KleinBottle.html"
+                    target="_blank"
+                    rel="noopener"
+                    >Klein bottle</a
+                  >, Wolfram MathWorld:
+                  <q
+                    >The figure-eight parametrization rotates and twists a figure eight, with radial
+                    factor a + cos(u/2)sin(v) - sin(u/2)sin(2v). A three-dimensional Klein-bottle
+                    picture is an immersion, rather than a self-intersection-free embedding.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The gyroid form samples
+                the trigonometric approximation sin(x)cos(y) + sin(y)cos(z) + sin(z)cos(x) = 0.
+              </p>
+              <p>
+                Projected samples are accepted only when the implicit-field residual is at most
+                0.0001, then clipped to a ball of radius 2pi and fitted for display. The test undoes
+                the display fit and checks sampled Float32 residuals within 0.00011.
+              </p>
+              <p class="note">
+                A small residual verifies the chosen trigonometric field, not exact minimal
+                curvature. The display is a finite patch, not the infinite mathematical surface.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a href="https://en.wikipedia.org/wiki/Gyroid" target="_blank" rel="noopener"
+                    >Gyroid</a
+                  >, Wikipedia:
+                  <q
+                    >The gyroid minimal surface can be trigonometrically approximated by
+                    sin(x)cos(y) + sin(y)cos(z) + sin(z)cos(x) = 0.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://mathworld.wolfram.com/Gyroid.html" target="_blank" rel="noopener"
+                    >Gyroid</a
+                  >, Wolfram MathWorld:
+                  <q
+                    >The gyroid is an infinitely connected periodic minimal surface discovered by
+                    Schoen in 1970.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-simplified">Simplified</span> The loop form is a
+                decorative, flat three-node diagram, not a simulated orbit or a computed attractor.
+              </p>
+              <p>
+                The sampler places a filled disk, two rings, straight connectors, and an upper arc
+                at fixed two-dimensional coordinates. Splats move between this drawing and the other
+                forms only through the shared animation.
+              </p>
+              <p class="note">
+                Its geometry and colors are graphic choices with no physical interpretation.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://raw.githubusercontent.com/ryanjosephkamp/splashery/89cd1c2665c26bf5381a3e228773040f403024ce/src/packs/shape-morph.js"
+                    target="_blank"
+                    rel="noopener"
+                    >Shape morph's loop sampler</a
+                  >, Splashery:
+                  <q
+                    >The loop sampler draws disks, rings, connectors, and an arc with z fixed to
+                    zero; it does not integrate a dynamical system.</q
+                  >
+                </li>
+              </ul>
+            </li>
+            <li class="claim">
+              <p class="claim-head">
+                <span class="verdict verdict-correct">Correct</span> The QR form uses the vendored
+                QR Code Model 2 encoder at error-correction level M and includes a four-module quiet
+                zone.
+              </p>
+              <p>
+                Selecting QR imports the shared encoder, calls it with level M and boosting
+                disabled, and samples its dark and light modules with four blank modules on every
+                side. The editable input accepts up to 42 UTF-8 bytes; a browser test submits 21
+                accented letters, exactly 42 bytes, and checks the resulting encoded text and level.
+              </p>
+              <p class="note">
+                The 42-byte limit is a display-budget choice, not the QR standard's capacity limit.
+                The form's render tests also decode shorter messages; readability during a flight or
+                from an oblique view is not guaranteed.
+              </p>
+              <ul class="sources">
+                <li>
+                  <a
+                    href="https://www.nayuki.io/page/qr-code-generator-library"
+                    target="_blank"
+                    rel="noopener"
+                    >QR Code generator library</a
+                  >, Project Nayuki:
+                  <q
+                    >The library generates raw QR Code Model 2 modules, supports all four
+                    error-correction levels, and allows the caller to disable error-correction
+                    boosting.</q
+                  >
+                </li>
+                <li>
+                  <a href="https://www.qrcode.com/en/howto/code.html" target="_blank" rel="noopener"
+                    >Point for determining the code area</a
+                  >, DENSO WAVE: <q>A QR Code requires a clear four-module margin on all sides.</q>
+                </li>
+              </ul>
+            </li>
+          </ol>
+          <h3>Where it simplifies</h3>
+          <ul>
+            <li>
+              Every form is a finite splat sample, centered and scaled for the same camera; the
+              splats are not a surface mesh.
+            </li>
+            <li>
+              The Lorenz trajectory is sampled from one fixed-step numerical path. Flights between
+              forms and the spring-back push are animation choices, not Lorenz dynamics or material
+              physics.
+            </li>
+            <li>
+              The Klein bottle is shown with self-intersections in three dimensions. Its radius,
+              orientation, and colored bands are display choices.
+            </li>
+            <li>
+              The gyroid uses a trigonometric approximation to the minimal surface and clips it to a
+              finite ball.
+            </li>
+            <li>
+              The word and loop are graphic designs. The two-ink treatment changes colors, without
+              simulating ink or printing.
+            </li>
+          </ul>
+        </section>
         <section class="toy-section" aria-labelledby="h-credits">
           <h2 id="h-credits">Sources and credits</h2>
           <p>

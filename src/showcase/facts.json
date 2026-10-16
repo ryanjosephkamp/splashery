@@ -1,9 +1,9 @@
 {
   "note": "Measured by tools/shw-facts.mjs; regenerate after a toy or its pack changes.",
   "shelf": {
-    "toys": 462,
+    "toys": 465,
     "public": 319,
-    "kit": 394
+    "kit": 397
   },
   "depthModelMB": 27.3,
   "toys": {
@@ -115,8 +115,8 @@
     "your-book": {
       "kind": "kit",
       "recipeFile": "src/packs/pictures.js",
-      "recipeKB": 140.1,
-      "recipeGzipKB": 45.5,
+      "recipeKB": 140.2,
+      "recipeGzipKB": 45.6,
       "sharedBy": 5
     },
     "model-splats": {

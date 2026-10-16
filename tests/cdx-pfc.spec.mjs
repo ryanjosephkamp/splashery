@@ -8,7 +8,14 @@ import { applyClay } from "../src/generators.js";
 import { resolveOptions } from "../src/player.js";
 import { createScene, normalizeScene } from "../src/state.js";
 import { encodeSceneHash, decodeSceneHash } from "../src/codec.js";
-import { RECIPES, FORMS, makeForm, gyroidField, kleinPoint } from "../src/packs/shape-morph.js";
+import {
+  RECIPES,
+  FORMS,
+  makeForm,
+  gyroidField,
+  kleinPoint,
+  lorenzDerivative,
+} from "../src/packs/shape-morph.js";
 
 const recipe = RECIPES["shape-morph"];
 const build = (count, options) => {
@@ -44,10 +51,14 @@ test("all six forms are finite, deterministic, and fit at the phone and desktop 
 });
 
 test("the surfaces use the reference math, and QR input is bounded", async () => {
-  const p = kleinPoint(0, Math.PI / 2);
-  expect(p[0]).toBeCloseTo(3, 8);
-  expect(p[1]).toBeCloseTo(0, 8);
-  expect(p[2]).toBeCloseTo(0, 8);
+  const root = Math.SQRT1_2;
+  for (const [u, v, expected] of [
+    [0, Math.PI / 2, [3, 0, 0]],
+    [Math.PI, Math.PI / 2, [-2, 1, 0]],
+    [Math.PI, Math.PI / 4, [-1, root, 0]],
+    [Math.PI / 2, Math.PI / 2, [0, root, 2 + root]],
+  ])
+    kleinPoint(u, v).forEach((value, axis) => expect(value).toBeCloseTo(expected[axis], 8));
   const g = makeForm("gyroid", 7200);
   for (let i = 0; i < 7200; i += 29) {
     const raw = Array.from(g.pos.subarray(i * 3, i * 3 + 3)).map(
@@ -59,6 +70,16 @@ test("the surfaces use the reference math, and QR input is bounded", async () =>
   expect(l.ink.some((x) => x === 0)).toBe(true);
   expect(l.ink.some((x) => x === 1)).toBe(true);
   await expect(recipe.prepare({ form: "qr", qrText: "é".repeat(22) })).rejects.toThrow(/42 bytes/);
+});
+
+test("Lorenz derivatives use sigma 10, rho 28, and beta 8/3", () => {
+  expect(lorenzDerivative([1, 2, 3])).toEqual([10, 23, -6]);
+  expect(lorenzDerivative([-3, 4, 6])).toEqual([70, -70, -28]);
+  // The origin and both nonzero equilibria are independent reference values.
+  for (const x of [0, Math.sqrt(72), -Math.sqrt(72)]) {
+    for (const value of lorenzDerivative([x, x, x === 0 ? 0 : 27]))
+      expect(value).toBeCloseTo(0, 12);
+  }
 });
 
 test("Shape morph options survive scene JSON and share links without changing v2/v3", async () => {

@@ -227,6 +227,21 @@ QR generator listed in LICENSES.md, loaded only when that form is selected.
 Made by Ryan with Codex (GPT-6), October 14, 2026. The new pack code is MIT; the original procedural
 forms, thumbnail, and synthesized rustle are CC0 1.0. They use no outside assets.
 
+### One splat, many splats (Codex task 78a)
+
+From a concept by Ryan Kamp. The pixel-tree math was ported from the owner's read-only
+`claude/portfolio-ref` branch onto Splashery's Kit; its renderer and fonts are not shipped. Made by
+Ryan with Codex (GPT-6), October 14, 2026. The port's code is MIT, and its procedural splats and
+thumbnail are CC0. Text uses the device's system font (the existing bitmap font in Node tools).
+Visitor pictures are processed locally and are not shipped assets.
+
+### Your name in splats (Codex task 78d)
+
+From a concept by Ryan Kamp. The procedural letters, paint colors, and synthesized notes are made by
+Ryan with Codex (GPT-6), CC0 1.0; the recipe code is MIT. It reuses the Fourier circles toy's Your
+words paths, rendered through Splashery's kit and PlayCanvas. No concept fonts, renderers, or
+external assets ship with the toy. Checked October 14, 2026.
+
 ### Baked assets (lane Baked engine)
 
 The Baked chest (labs) is original: built with Splashery's kit by `tools/bkd-bake-chest.mjs`, baked

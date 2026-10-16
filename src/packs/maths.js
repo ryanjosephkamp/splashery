@@ -4618,7 +4618,7 @@ const STROKES = {
 };
 // Typed text as it is kept: capitals, digits and spaces; hearts are "#" and
 // stars "*" (so the text stays plain ASCII in links).
-function fourierWord(text) {
+export function fourierWord(text) {
   const t = String(text ?? "")
     .normalize("NFKC")
     .replace(/[❤♥💖💗💕💘💝💓💞🧡💛💚💙💜🤍🖤🤎❣]️?/gu, "#")
@@ -4631,7 +4631,7 @@ function fourierWord(text) {
 }
 // The closed path a character's chain draws (points in letter units, about
 // 4 wide and 6 tall), or null for a character it can't draw.
-function charPath(ch, M) {
+export function charPath(ch, M) {
   if (ch === "#")
     return fourierPath("heart", M).map(([x, y]) => [2 + x * 2.6, 3 + (y - 0.1) * 2.6]);
   if (ch === "*") return fourierPath("star", M).map(([x, y]) => [2 + x * 2.4, 3 + y * 2.4]);
