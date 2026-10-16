@@ -186,6 +186,7 @@ export const RECIPES = {
   "name-toy": {
     alive: true,
     turntable: false,
+    tiltLock: true,
     seed: 1999,
     options: [
       { key: "name", label: "Your name", type: "text", default: "RYAN KAMP", hidden: true },

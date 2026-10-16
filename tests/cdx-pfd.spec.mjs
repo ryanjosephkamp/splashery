@@ -22,13 +22,19 @@ async function build(given = {}, count = 60000) {
   return { recipe, options, ctx: r.value };
 }
 
-test("part d is registered on the Pictures and pages shelf behind labs", () => {
+test("part d is registered on the Pictures and pages shelf behind labs", async () => {
   expect(TOYS.find((t) => t.id === ID)).toMatchObject({
     kind: "kit",
     pack: "name-toy",
     category: "pictures",
     labs: true,
   });
+  const [{ RECIPES }, { RECIPES: pictures }] = await Promise.all([
+    load(),
+    import("../src/packs/pictures.js"),
+  ]);
+  expect(RECIPES[ID].tiltLock).toBe(true);
+  expect(pictures[ID]).toBe(RECIPES[ID]);
 });
 
 test("names use the existing word paths, preserve spaces, and reject unsupported or oversized input", async () => {
@@ -136,6 +142,8 @@ async function open(page, profile = "low") {
   await page.waitForSelector("body[data-ready='true']");
   await page.evaluate((id) => window.__splashery.app.chooseToy(id), ID);
   await expect(page.locator("#toy-status")).toHaveText(/^Your name in splats/);
+  await expect(page.locator("#tilt-toggle")).toHaveAttribute("aria-pressed", "true");
+  expect(await page.evaluate(() => window.__splashery.player.camera.tiltLock)).toBe(true);
 }
 
 test("phone input, error recovery, paint, and the actual #s= link reload the name", async ({
