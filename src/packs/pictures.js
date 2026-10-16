@@ -3270,8 +3270,7 @@ for (const [id, label] of [
     {
       label,
       title: "Sharp hybrid picture faces",
-      source:
-        "https://github.com/ryanjosephkamp/splashery/blob/codex/book-picture-lab-r2/src/picture-surface.js",
+      source: "https://github.com/ryanjosephkamp/splashery/blob/main/src/picture-surface.js",
       author: "Ryan with Codex (GPT-6)",
       license: "MIT",
       licenseUrl: "https://github.com/ryanjosephkamp/splashery/blob/main/LICENSE",

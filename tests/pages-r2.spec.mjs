@@ -1,6 +1,28 @@
 // Task 95: real renderer checks for face ownership, motion, and lifetime.
 import { test, expect } from "@playwright/test";
 
+// Original CC0 PDF fixture, made by Ryan with Codex (GPT-6).
+function redPagePDF() {
+  const ink = "1 0 0 rg 0 0 612 792 re f";
+  const objects = [
+    "<< /Type /Catalog /Pages 2 0 R >>",
+    "<< /Type /Pages /Kids [3 0 R] /Count 1 >>",
+    "<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << >> /Contents 4 0 R >>",
+    `<< /Length ${ink.length} >>\nstream\n${ink}\nendstream`,
+  ];
+  let pdf = "%PDF-1.4\n";
+  const offsets = objects.map((body, i) => {
+    const offset = pdf.length;
+    pdf += `${i + 1} 0 obj\n${body}\nendobj\n`;
+    return offset;
+  });
+  const xref = pdf.length;
+  pdf += `xref\n0 5\n0000000000 65535 f \n`;
+  for (const offset of offsets) pdf += `${String(offset).padStart(10, "0")} 00000 n \n`;
+  pdf += `trailer\n<< /Size 5 /Root 1 0 R >>\nstartxref\n${xref}\n%%EOF\n`;
+  return Array.from(pdf, (c) => c.charCodeAt(0));
+}
+
 async function layeredLab(pics) {
   const { buildRecipe } = await import("../src/kit.js");
   const { RECIPES, BOOKS_R5 } = await import("../src/packs/pictures.js");
@@ -599,6 +621,12 @@ for (const renderer of ["webgl2", "webgpu"])
     await page.goto(`/?renderer=${renderer}&profile=low&adapt=off&labs=1`);
     await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
     await page.evaluate(() => window.__splashery.app.chooseToy("picture-lab"));
+    // Color the source, rather than a live material that a detail upgrade can retire.
+    await page.evaluate(async (bytes) => {
+      await window.__splashery.app.openMedia(
+        new File([new Uint8Array(bytes)], "red.pdf", { type: "application/pdf" }),
+      );
+    }, redPagePDF());
     await ready(page);
     const views = await page.evaluate(async () => {
       const p = window.__splashery.player;
@@ -606,9 +634,6 @@ for (const renderer of ["webgl2", "webgpu"])
       p.glide = null;
       p.stage.toy.entity.gsplat.enabled = false;
       const face = p.pictures.sheets.find((s) => !s.hidden && s.slot?.surface).slot.surface;
-      face.material.setParameter("uColorFlags", [1, 0, 0, 0]);
-      face.material.setParameter("uColorLow", [1, 0, 0, 0]);
-      face.material.setParameter("uColorHigh", [1, 0, 0, 0]);
       const g = face.geom;
       const center = g.origin.map(
         (v, k) =>
@@ -617,6 +642,10 @@ for (const renderer of ["webgl2", "webgpu"])
           (g.down[k] * face.color.height) / 2 +
           g.normal[k] * (g.lift || 0),
       );
+      // Exercise a real surface replacement between test setup and drawing.
+      const sheet = p.pictures.sheets.find((s) => s.slot?.surface === face);
+      p.pictures.show(sheet, sheet.shown, sheet.shown.data);
+      if (sheet.slot.surface === face) throw new Error("The printed face must be replaced.");
       const views = [];
       for (const yaw of [0, Math.PI]) {
         p.camera.cur.yaw = p.camera.tgt.yaw = yaw;
