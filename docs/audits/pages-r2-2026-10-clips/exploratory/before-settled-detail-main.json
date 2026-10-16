@@ -1,0 +1,1882 @@
+{
+  "browser": "151.0.7922.173",
+  "renderer": "llvmpipe",
+  "isolation": "fresh Chromium process per case and repeat",
+  "memoryPoint": "settled page before reference raster and screenshots",
+  "inputPreparation": "custom input starts after closing the default sample and drawing the home view",
+  "toolSha256": "b3cbe997ce8dc1099fe801e54d3f3e19e0d2e701389ea015875a6c0e0d023c5a",
+  "protocolSha256": "6d3ed68ca56d8f8fbf0610fa64530349846d6bece9b942f0ba50430090144c41",
+  "fixtures": {
+    "text.pdf": {
+      "sha256": "e0d4783669dcca7d5c7bd9d406430019312349cb899f323ffa533bb7740a06a9",
+      "bytes": 12279
+    },
+    "text.png": {
+      "sha256": "5390faa0cc74ce636b6f60ccb54aba24428a5a0c4c11f73fb1a46fee29324b5c",
+      "bytes": 85656
+    },
+    "photo.pdf": {
+      "sha256": "a6b508ddfe0b9c1f719567d615090aec8c45b114a20683af10d23ee8393c5146",
+      "bytes": 583190
+    },
+    "photo.png": {
+      "sha256": "5518cf31aa6e532c60e3e2c95b6dc6c771c6ab75fb60aa66a020fce5cf1031c9",
+      "bytes": 378039
+    },
+    "chart.pdf": {
+      "sha256": "a5c3e2fb8a8949432db53acd949d3b9bf9ce07094c3451d4564b144e82a85d93",
+      "bytes": 29189
+    },
+    "chart.png": {
+      "sha256": "806a8407ec12e3f8c1e6a01a11cea73167774721299ab0e2735894c4e3b61d5f",
+      "bytes": 21655
+    }
+  },
+  "base": "http://127.0.0.1:4180/",
+  "profiles": {
+    "phone": {
+      "width": 390,
+      "height": 844,
+      "deviceScaleFactor": 2,
+      "tier": "low"
+    },
+    "desktop": {
+      "width": 1440,
+      "height": 900,
+      "deviceScaleFactor": 1,
+      "tier": "mid"
+    }
+  },
+  "created": "2026-10-16T11:35:55.951Z",
+  "records": [
+    {
+      "toy": "picture-lab",
+      "input": "photo",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "photo.png",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 759.8000000007451,
+      "installedPageMs": 464,
+      "visibleSceneMs": 771.0999999977648,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 101292,
+      "kitSplats": 18045,
+      "sheetBytes": 6919272,
+      "gpuBytes": 59521324,
+      "builds": 1,
+      "jsHeap": 50994263,
+      "processMemory": {
+        "pssBytes": 666082304,
+        "rssBytes": 923619328,
+        "processes": 7
+      },
+      "cdpHeap": 15990316,
+      "quality": {
+        "ssim": 0.9592844585283855,
+        "sharpness": 0.0006920666790191399,
+        "sourceSharpness": 0.003012902935849005,
+        "width": 403,
+        "height": 138
+      },
+      "motion": {
+        "frames": 124,
+        "seconds": 15.077900000002234,
+        "fps": 8.223956917076093,
+        "p95Ms": 141.5
+      },
+      "registration": {
+        "pts": [
+          [17.982483163515848, 167.2368552515109],
+          [372.01751683648416, 167.2368552515109],
+          [17.982483163515848, 432.76314474848914],
+          [372.01751683648416, 432.76314474848914]
+        ],
+        "W": 531,
+        "H": 398,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/picture-lab/photo/1-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "photo",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "photo.png",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 637.3999999985099,
+      "installedPageMs": 445.29999999701977,
+      "visibleSceneMs": 644.1999999992549,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 101292,
+      "kitSplats": 18045,
+      "sheetBytes": 6919272,
+      "gpuBytes": 59521324,
+      "builds": 1,
+      "jsHeap": 51020539,
+      "processMemory": {
+        "pssBytes": 670889984,
+        "rssBytes": 928276480,
+        "processes": 7
+      },
+      "cdpHeap": 16027508,
+      "quality": {
+        "ssim": 0.9592844585283855,
+        "sharpness": 0.0006920666790191399,
+        "sourceSharpness": 0.003012902935849005,
+        "width": 403,
+        "height": 138
+      },
+      "motion": {
+        "frames": 126,
+        "seconds": 15.04910000000149,
+        "fps": 8.372593709922024,
+        "p95Ms": 129
+      },
+      "registration": {
+        "pts": [
+          [17.982483163515848, 167.2368552515109],
+          [372.01751683648416, 167.2368552515109],
+          [17.982483163515848, 432.76314474848914],
+          [372.01751683648416, 432.76314474848914]
+        ],
+        "W": 531,
+        "H": 398,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/picture-lab/photo/2-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "photo",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "photo.png",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 620.4000000022352,
+      "installedPageMs": 443.69999999925494,
+      "visibleSceneMs": 725.1999999992549,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 101292,
+      "kitSplats": 18045,
+      "sheetBytes": 6919272,
+      "gpuBytes": 59521324,
+      "builds": 1,
+      "jsHeap": 51166059,
+      "processMemory": {
+        "pssBytes": 654607360,
+        "rssBytes": 911429632,
+        "processes": 7
+      },
+      "cdpHeap": 16128340,
+      "quality": {
+        "ssim": 0.9592844585283855,
+        "sharpness": 0.0006920666790191399,
+        "sourceSharpness": 0.003012902935849005,
+        "width": 403,
+        "height": 138
+      },
+      "motion": {
+        "frames": 123,
+        "seconds": 15.03810000000149,
+        "fps": 8.17922476908571,
+        "p95Ms": 139
+      },
+      "registration": {
+        "pts": [
+          [17.982483163515848, 167.2368552515109],
+          [372.01751683648416, 167.2368552515109],
+          [17.982483163515848, 432.76314474848914],
+          [372.01751683648416, 432.76314474848914]
+        ],
+        "W": 531,
+        "H": 398,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/picture-lab/photo/3-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "chart",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "chart.png",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 516.5999999977648,
+      "installedPageMs": 450.5,
+      "visibleSceneMs": 532,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 163974,
+      "kitSplats": 18075,
+      "sheetBytes": 11191032,
+      "gpuBytes": 65156284,
+      "builds": 1,
+      "jsHeap": 61739803,
+      "processMemory": {
+        "pssBytes": 698073088,
+        "rssBytes": 956878848,
+        "processes": 7
+      },
+      "cdpHeap": 16086524,
+      "quality": {
+        "ssim": 0.9708994728188258,
+        "sharpness": 0.0010451213374046882,
+        "sourceSharpness": 0.0037475917217061135,
+        "width": 403,
+        "height": 239
+      },
+      "motion": {
+        "frames": 87,
+        "seconds": 15.163199999999255,
+        "fps": 5.737575182019908,
+        "p95Ms": 210.90000000223517
+      },
+      "registration": {
+        "pts": [
+          [17.924972478956626, 70.84409015300554],
+          [372.07502752104335, 70.84409015300554],
+          [17.924972478956626, 529.1559098469944],
+          [372.07502752104335, 529.1559098469944]
+        ],
+        "W": 531,
+        "H": 687,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/picture-lab/chart/1-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "chart",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "chart.png",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 710.8999999985099,
+      "installedPageMs": 489,
+      "visibleSceneMs": 867.5,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 163974,
+      "kitSplats": 18075,
+      "sheetBytes": 11191032,
+      "gpuBytes": 65156284,
+      "builds": 1,
+      "jsHeap": 61724291,
+      "processMemory": {
+        "pssBytes": 683277312,
+        "rssBytes": 940154880,
+        "processes": 7
+      },
+      "cdpHeap": 16071272,
+      "quality": {
+        "ssim": 0.9708994728188258,
+        "sharpness": 0.0010451213374046882,
+        "sourceSharpness": 0.0037475917217061135,
+        "width": 403,
+        "height": 239
+      },
+      "motion": {
+        "frames": 78,
+        "seconds": 15.376300000000745,
+        "fps": 5.072741816951817,
+        "p95Ms": 400.30000000074506
+      },
+      "registration": {
+        "pts": [
+          [17.924972478956626, 70.84409015300554],
+          [372.07502752104335, 70.84409015300554],
+          [17.924972478956626, 529.1559098469944],
+          [372.07502752104335, 529.1559098469944]
+        ],
+        "W": 531,
+        "H": 687,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/picture-lab/chart/2-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "chart",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "chart.png",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 1071.2999999970198,
+      "installedPageMs": 806.7999999970198,
+      "visibleSceneMs": 1118.7999999970198,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 163974,
+      "kitSplats": 18075,
+      "sheetBytes": 11191032,
+      "gpuBytes": 65156284,
+      "builds": 1,
+      "jsHeap": 61718319,
+      "processMemory": {
+        "pssBytes": 701638656,
+        "rssBytes": 958746624,
+        "processes": 7
+      },
+      "cdpHeap": 16053736,
+      "quality": {
+        "ssim": 0.9708994728188258,
+        "sharpness": 0.0010451213374046882,
+        "sourceSharpness": 0.0037475917217061135,
+        "width": 403,
+        "height": 239
+      },
+      "motion": {
+        "frames": 55,
+        "seconds": 15.211300000000746,
+        "fps": 3.6157330405683474,
+        "p95Ms": 479.9000000022352
+      },
+      "registration": {
+        "pts": [
+          [17.924972478956626, 70.84409015300554],
+          [372.07502752104335, 70.84409015300554],
+          [17.924972478956626, 529.1559098469944],
+          [372.07502752104335, 529.1559098469944]
+        ],
+        "W": 531,
+        "H": 687,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/picture-lab/chart/3-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "text",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "text.pdf",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 1491,
+      "installedPageMs": 820.4000000022352,
+      "visibleSceneMs": 1751.2000000029802,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 73719,
+      "kitSplats": 17945,
+      "sheetBytes": 9674428,
+      "gpuBytes": 57048664,
+      "builds": 3,
+      "jsHeap": 51374066,
+      "processMemory": {
+        "pssBytes": 650740736,
+        "rssBytes": 910802944,
+        "processes": 7
+      },
+      "cdpHeap": 16384884,
+      "quality": {
+        "ssim": 0.9086253248357343,
+        "sharpness": 0.08002199927922837,
+        "sourceSharpness": 0.18450455214717876,
+        "width": 443,
+        "height": 273
+      },
+      "motion": {
+        "frames": 95,
+        "seconds": 15.061099999997765,
+        "fps": 6.307640212203232,
+        "p95Ms": 341.4000000022352
+      },
+      "registration": {
+        "pts": [
+          [18.8948338185115, 72.0396069335248],
+          [371.10516618148847, 72.0396069335248],
+          [18.8948338185115, 527.9603930664751],
+          [371.10516618148847, 527.9603930664751]
+        ],
+        "W": 528,
+        "H": 684,
+        "box": [0.08, 0.2, 0.92, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-text/1-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "text",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "text.pdf",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 1906.2000000029802,
+      "installedPageMs": 1527.9000000022352,
+      "visibleSceneMs": 1912.5,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 73719,
+      "kitSplats": 17945,
+      "sheetBytes": 6763892,
+      "gpuBytes": 57048664,
+      "builds": 2,
+      "jsHeap": 48375390,
+      "processMemory": {
+        "pssBytes": 687212544,
+        "rssBytes": 947081216,
+        "processes": 7
+      },
+      "cdpHeap": 16327084,
+      "quality": {
+        "ssim": 0.9086253248357343,
+        "sharpness": 0.08002199927922837,
+        "sourceSharpness": 0.18450455214717876,
+        "width": 443,
+        "height": 273
+      },
+      "motion": {
+        "frames": 106,
+        "seconds": 15.179800000000744,
+        "fps": 6.982964202426567,
+        "p95Ms": 274.69999999925494
+      },
+      "registration": {
+        "pts": [
+          [18.8948338185115, 72.0396069335248],
+          [371.10516618148847, 72.0396069335248],
+          [18.8948338185115, 527.9603930664751],
+          [371.10516618148847, 527.9603930664751]
+        ],
+        "W": 528,
+        "H": 684,
+        "box": [0.08, 0.2, 0.92, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-text/2-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "text",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "text.pdf",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 1168.9000000022352,
+      "installedPageMs": 943.8000000007451,
+      "visibleSceneMs": 1256.7000000029802,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 73719,
+      "kitSplats": 17945,
+      "sheetBytes": 6763892,
+      "gpuBytes": 57048664,
+      "builds": 2,
+      "jsHeap": 48378850,
+      "processMemory": {
+        "pssBytes": 682987520,
+        "rssBytes": 940158976,
+        "processes": 7
+      },
+      "cdpHeap": 16344052,
+      "quality": {
+        "ssim": 0.9086253248357343,
+        "sharpness": 0.08002199927922837,
+        "sourceSharpness": 0.18450455214717876,
+        "width": 443,
+        "height": 273
+      },
+      "motion": {
+        "frames": 84,
+        "seconds": 15.091599999997765,
+        "fps": 5.566010230857724,
+        "p95Ms": 432.30000000074506
+      },
+      "registration": {
+        "pts": [
+          [18.8948338185115, 72.0396069335248],
+          [371.10516618148847, 72.0396069335248],
+          [18.8948338185115, 527.9603930664751],
+          [371.10516618148847, 527.9603930664751]
+        ],
+        "W": 528,
+        "H": 684,
+        "box": [0.08, 0.2, 0.92, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-text/3-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "sample",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "article.pdf",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 4774.300000000745,
+      "installedPageMs": 4438.5,
+      "visibleSceneMs": 4814.699999999255,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 95307,
+      "kitSplats": 17945,
+      "sheetBytes": 11801128,
+      "gpuBytes": 58991044,
+      "builds": 4,
+      "jsHeap": 55483968,
+      "processMemory": {
+        "pssBytes": 683555840,
+        "rssBytes": 941092864,
+        "processes": 7
+      },
+      "cdpHeap": 16208280,
+      "quality": {
+        "ssim": 0.8618867614056934,
+        "sharpness": 0.10283006945891797,
+        "sourceSharpness": 0.2838517201206023,
+        "width": 401,
+        "height": 238
+      },
+      "motion": {
+        "frames": 87,
+        "seconds": 15.100300000000745,
+        "fps": 5.7614749375837375,
+        "p95Ms": 310.20000000298023
+      },
+      "registration": {
+        "pts": [
+          [18.894836973514014, 72.09920886618593],
+          [371.10516302648597, 72.09920886618593],
+          [18.894836973514014, 527.9007911338141],
+          [371.10516302648597, 527.9007911338141]
+        ],
+        "W": 528,
+        "H": 684,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/picture-lab/sample/1-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "sample",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "article.pdf",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 3593.199999999255,
+      "installedPageMs": 3325.199999999255,
+      "visibleSceneMs": 4164.60000000149,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 95307,
+      "kitSplats": 17945,
+      "sheetBytes": 12243196,
+      "gpuBytes": 58991044,
+      "builds": 4,
+      "jsHeap": 56081420,
+      "processMemory": {
+        "pssBytes": 660525056,
+        "rssBytes": 917360640,
+        "processes": 7
+      },
+      "cdpHeap": 16320820,
+      "quality": {
+        "ssim": 0.8619108951194308,
+        "sharpness": 0.10283006945891797,
+        "sourceSharpness": 0.2837941599069161,
+        "width": 401,
+        "height": 238
+      },
+      "motion": {
+        "frames": 86,
+        "seconds": 15.057400000002236,
+        "fps": 5.7114774130983585,
+        "p95Ms": 341.9000000022352
+      },
+      "registration": {
+        "pts": [
+          [18.894836973514014, 72.09920886618593],
+          [371.10516302648597, 72.09920886618593],
+          [18.894836973514014, 527.9007911338141],
+          [371.10516302648597, 527.9007911338141]
+        ],
+        "W": 528,
+        "H": 684,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/picture-lab/sample/2-main"
+    },
+    {
+      "toy": "picture-lab",
+      "input": "sample",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "article.pdf",
+      "initialView": {
+        "yaw": 0,
+        "pitch": 0,
+        "roll": 0,
+        "distance": 3.2
+      },
+      "firstPageMs": 4659.300000000745,
+      "installedPageMs": 4337.5,
+      "visibleSceneMs": 4703.199999999255,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 95307,
+      "kitSplats": 17945,
+      "sheetBytes": 11801128,
+      "gpuBytes": 58991044,
+      "builds": 4,
+      "jsHeap": 55613572,
+      "processMemory": {
+        "pssBytes": 671675392,
+        "rssBytes": 928563200,
+        "processes": 7
+      },
+      "cdpHeap": 16295156,
+      "quality": {
+        "ssim": 0.8619108951194308,
+        "sharpness": 0.10283006945891797,
+        "sourceSharpness": 0.2837941599069161,
+        "width": 401,
+        "height": 238
+      },
+      "motion": {
+        "frames": 86,
+        "seconds": 15.0135,
+        "fps": 5.728177973157491,
+        "p95Ms": 335.6000000014901
+      },
+      "registration": {
+        "pts": [
+          [18.894836973514014, 72.09920886618593],
+          [371.10516302648597, 72.09920886618593],
+          [18.894836973514014, 527.9007911338141],
+          [371.10516302648597, 527.9007911338141]
+        ],
+        "W": 528,
+        "H": 684,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/picture-lab/sample/3-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "sample",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "tinkerers-manual-9dff70c3c725e9fc.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 6868.60000000149,
+      "installedPageMs": 6208.10000000149,
+      "visibleSceneMs": 14552.900000002235,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 119839,
+      "kitSplats": 55572,
+      "sheetBytes": 30137328,
+      "gpuBytes": 87689104,
+      "builds": 7,
+      "jsHeap": 109257909,
+      "processMemory": {
+        "pssBytes": 817671168,
+        "rssBytes": 1091678208,
+        "processes": 7
+      },
+      "cdpHeap": 21013160,
+      "quality": {
+        "ssim": 0.7662608287087804,
+        "sharpness": 0.023124252324261626,
+        "sourceSharpness": 0.26167793598073374,
+        "width": 273,
+        "height": 162
+      },
+      "motion": {
+        "frames": 54,
+        "seconds": 15.009,
+        "fps": 3.597841295222866,
+        "p95Ms": 723.8000000007451
+      },
+      "registration": {
+        "pts": [
+          [89.09853381081648, 125.85091857621968],
+          [329.1418620449281, 125.85091857621968],
+          [89.09853381081648, 436.4952293633336],
+          [329.1418620449281, 436.4952293633336]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/sample/1-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "sample",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "tinkerers-manual-9dff70c3c725e9fc.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 4729.39999999851,
+      "installedPageMs": 4268.099999997765,
+      "visibleSceneMs": 13643,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 119839,
+      "kitSplats": 55572,
+      "sheetBytes": 30137328,
+      "gpuBytes": 87689104,
+      "builds": 7,
+      "jsHeap": 116127745,
+      "processMemory": {
+        "pssBytes": 792494080,
+        "rssBytes": 1064304640,
+        "processes": 7
+      },
+      "cdpHeap": 21034672,
+      "quality": {
+        "ssim": 0.7662608287087804,
+        "sharpness": 0.023124252324261626,
+        "sourceSharpness": 0.26167793598073374,
+        "width": 273,
+        "height": 162
+      },
+      "motion": {
+        "frames": 51,
+        "seconds": 15.096300000000745,
+        "fps": 3.378311241827301,
+        "p95Ms": 663.1000000014901
+      },
+      "registration": {
+        "pts": [
+          [89.09853381081648, 125.85091857621968],
+          [329.1418620449281, 125.85091857621968],
+          [89.09853381081648, 436.4952293633336],
+          [329.1418620449281, 436.4952293633336]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/sample/2-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "sample",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "tinkerers-manual-9dff70c3c725e9fc.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 7574,
+      "installedPageMs": 6836.400000002235,
+      "visibleSceneMs": 14725.5,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 119839,
+      "kitSplats": 55572,
+      "sheetBytes": 30136988,
+      "gpuBytes": 87689104,
+      "builds": 7,
+      "jsHeap": 122860471,
+      "processMemory": {
+        "pssBytes": 827389952,
+        "rssBytes": 1102475264,
+        "processes": 7
+      },
+      "cdpHeap": 20915596,
+      "quality": {
+        "ssim": 0.7662608287087804,
+        "sharpness": 0.023124252324261626,
+        "sourceSharpness": 0.26167793598073374,
+        "width": 273,
+        "height": 162
+      },
+      "motion": {
+        "frames": 59,
+        "seconds": 15.44710000000149,
+        "fps": 3.819487152928013,
+        "p95Ms": 689.3000000007451
+      },
+      "registration": {
+        "pts": [
+          [89.09853381081648, 125.85091857621968],
+          [329.1418620449281, 125.85091857621968],
+          [89.09853381081648, 436.4952293633336],
+          [329.1418620449281, 436.4952293633336]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/sample/3-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "text",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "text.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 2902.699999999255,
+      "installedPageMs": 2218.5,
+      "visibleSceneMs": 2914.89999999851,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 66325,
+      "kitSplats": 55572,
+      "sheetBytes": 6585120,
+      "gpuBytes": 59912352,
+      "builds": 4,
+      "jsHeap": 65336147,
+      "processMemory": {
+        "pssBytes": 722235392,
+        "rssBytes": 980037632,
+        "processes": 7
+      },
+      "cdpHeap": 20434908,
+      "quality": {
+        "ssim": 0.8211853830843181,
+        "sharpness": 0.05122922927786361,
+        "sourceSharpness": 0.21710851310024334,
+        "width": 301,
+        "height": 186
+      },
+      "motion": {
+        "frames": 65,
+        "seconds": 15.02760000000149,
+        "fps": 4.325374643987966,
+        "p95Ms": 459.5
+      },
+      "registration": {
+        "pts": [
+          [89.1029977043566, 125.80664934299452],
+          [329.1445718479956, 125.80664934299452],
+          [89.1029977043566, 436.52991776331476],
+          [329.1445718479956, 436.52991776331476]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.08, 0.2, 0.92, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/text/1-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "text",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "text.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 2887.60000000149,
+      "installedPageMs": 2143.10000000149,
+      "visibleSceneMs": 2912.60000000149,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 66325,
+      "kitSplats": 55572,
+      "sheetBytes": 8294436,
+      "gpuBytes": 58710968,
+      "builds": 5,
+      "jsHeap": 60565885,
+      "processMemory": {
+        "pssBytes": 695059456,
+        "rssBytes": 953675776,
+        "processes": 7
+      },
+      "cdpHeap": 20663536,
+      "quality": {
+        "ssim": 0.8211853830843181,
+        "sharpness": 0.05122922927786361,
+        "sourceSharpness": 0.21710851310024334,
+        "width": 301,
+        "height": 186
+      },
+      "motion": {
+        "frames": 63,
+        "seconds": 15.2385,
+        "fps": 4.134265183581061,
+        "p95Ms": 448.5999999977648
+      },
+      "registration": {
+        "pts": [
+          [89.1029977043566, 125.80664934299452],
+          [329.1445718479956, 125.80664934299452],
+          [89.1029977043566, 436.52991776331476],
+          [329.1445718479956, 436.52991776331476]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.08, 0.2, 0.92, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/text/2-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "text",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "text.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 4127.39999999851,
+      "installedPageMs": 3252.699999999255,
+      "visibleSceneMs": 5082.39999999851,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 66325,
+      "kitSplats": 55572,
+      "sheetBytes": 7326252,
+      "gpuBytes": 58710968,
+      "builds": 4,
+      "jsHeap": 64928901,
+      "processMemory": {
+        "pssBytes": 680851456,
+        "rssBytes": 942276608,
+        "processes": 7
+      },
+      "cdpHeap": 20576800,
+      "quality": {
+        "ssim": 0.8211853830843181,
+        "sharpness": 0.05122922927786361,
+        "sourceSharpness": 0.21710851310024334,
+        "width": 301,
+        "height": 186
+      },
+      "motion": {
+        "frames": 66,
+        "seconds": 15.1245,
+        "fps": 4.3637806208469705,
+        "p95Ms": 476.29999999701977
+      },
+      "registration": {
+        "pts": [
+          [89.1029977043566, 125.80664934299452],
+          [329.1445718479956, 125.80664934299452],
+          [89.1029977043566, 436.52991776331476],
+          [329.1445718479956, 436.52991776331476]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.08, 0.2, 0.92, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/text/3-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "photo",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "photo.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 2997.199999999255,
+      "installedPageMs": 1970.199999999255,
+      "visibleSceneMs": 6865.699999999255,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 106564,
+      "kitSplats": 55572,
+      "sheetBytes": 11287796,
+      "gpuBytes": 62319428,
+      "builds": 4,
+      "jsHeap": 67848862,
+      "processMemory": {
+        "pssBytes": 711558144,
+        "rssBytes": 973955072,
+        "processes": 7
+      },
+      "cdpHeap": 20687544,
+      "quality": {
+        "ssim": 0.8776319734055651,
+        "sharpness": 0.0012066514462444969,
+        "sourceSharpness": 0.013016424629620951,
+        "width": 273,
+        "height": 162
+      },
+      "motion": {
+        "frames": 57,
+        "seconds": 15.335199999999254,
+        "fps": 3.7169388074497087,
+        "p95Ms": 631.2999999970198
+      },
+      "registration": {
+        "pts": [
+          [89.1029977043566, 125.80664934299452],
+          [329.1445718479956, 125.80664934299452],
+          [89.1029977043566, 436.52991776331476],
+          [329.1445718479956, 436.52991776331476]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/photo/1-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "photo",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "photo.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 1921.5,
+      "installedPageMs": 1477.5,
+      "visibleSceneMs": 1926,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 106564,
+      "kitSplats": 55572,
+      "sheetBytes": 10807852,
+      "gpuBytes": 63099252,
+      "builds": 4,
+      "jsHeap": 66446898,
+      "processMemory": {
+        "pssBytes": 805377024,
+        "rssBytes": 1067593728,
+        "processes": 7
+      },
+      "cdpHeap": 20490792,
+      "quality": {
+        "ssim": 0.8776319734055651,
+        "sharpness": 0.0012066514462444969,
+        "sourceSharpness": 0.013016424629620951,
+        "width": 273,
+        "height": 162
+      },
+      "motion": {
+        "frames": 88,
+        "seconds": 15.015300000000746,
+        "fps": 5.860688764126966,
+        "p95Ms": 282.3999999985099
+      },
+      "registration": {
+        "pts": [
+          [89.1029977043566, 125.80664934299452],
+          [329.1445718479956, 125.80664934299452],
+          [89.1029977043566, 436.52991776331476],
+          [329.1445718479956, 436.52991776331476]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/photo/2-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "photo",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "photo.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 2765.699999999255,
+      "installedPageMs": 1584,
+      "visibleSceneMs": 3950.89999999851,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 106564,
+      "kitSplats": 55572,
+      "sheetBytes": 11287796,
+      "gpuBytes": 62319428,
+      "builds": 4,
+      "jsHeap": 66021934,
+      "processMemory": {
+        "pssBytes": 768410624,
+        "rssBytes": 1033543680,
+        "processes": 7
+      },
+      "cdpHeap": 20523040,
+      "quality": {
+        "ssim": 0.8776319734055651,
+        "sharpness": 0.0012066514462444969,
+        "sourceSharpness": 0.013016424629620951,
+        "width": 273,
+        "height": 162
+      },
+      "motion": {
+        "frames": 92,
+        "seconds": 15.009099999997765,
+        "fps": 6.129614700415994,
+        "p95Ms": 262.0999999977648
+      },
+      "registration": {
+        "pts": [
+          [89.1029977043566, 125.80664934299452],
+          [329.1445718479956, 125.80664934299452],
+          [89.1029977043566, 436.52991776331476],
+          [329.1445718479956, 436.52991776331476]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/photo/3-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "chart",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "chart.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 2910.699999999255,
+      "installedPageMs": 2225.599999997765,
+      "visibleSceneMs": 3116.099999997765,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 60422,
+      "kitSplats": 55572,
+      "sheetBytes": 5460808,
+      "gpuBytes": 58171868,
+      "builds": 3,
+      "jsHeap": 55387242,
+      "processMemory": {
+        "pssBytes": 711839744,
+        "rssBytes": 978661376,
+        "processes": 7
+      },
+      "cdpHeap": 20416968,
+      "quality": {
+        "ssim": 0.9553776243085662,
+        "sharpness": 0.0027329028535127433,
+        "sourceSharpness": 0.01238477330907359,
+        "width": 273,
+        "height": 162
+      },
+      "motion": {
+        "frames": 102,
+        "seconds": 15.1815,
+        "fps": 6.718703685406581,
+        "p95Ms": 239.70000000298023
+      },
+      "registration": {
+        "pts": [
+          [89.1029977043566, 125.80664934299452],
+          [329.1445718479956, 125.80664934299452],
+          [89.1029977043566, 436.52991776331476],
+          [329.1445718479956, 436.52991776331476]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/chart/1-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "chart",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "chart.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 1996.5,
+      "installedPageMs": 1420.199999999255,
+      "visibleSceneMs": 2129.39999999851,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 60422,
+      "kitSplats": 55572,
+      "sheetBytes": 6106944,
+      "gpuBytes": 60459076,
+      "builds": 4,
+      "jsHeap": 58795286,
+      "processMemory": {
+        "pssBytes": 759537664,
+        "rssBytes": 1024217088,
+        "processes": 7
+      },
+      "cdpHeap": 20556252,
+      "quality": {
+        "ssim": 0.9553776243085662,
+        "sharpness": 0.0027329028535127433,
+        "sourceSharpness": 0.01238477330907359,
+        "width": 273,
+        "height": 162
+      },
+      "motion": {
+        "frames": 99,
+        "seconds": 15.0065,
+        "fps": 6.597141238796521,
+        "p95Ms": 248
+      },
+      "registration": {
+        "pts": [
+          [89.1029977043566, 125.80664934299452],
+          [329.1445718479956, 125.80664934299452],
+          [89.1029977043566, 436.52991776331476],
+          [329.1445718479956, 436.52991776331476]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/chart/2-main"
+    },
+    {
+      "toy": "your-book",
+      "input": "chart",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "chart.pdf",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 1830.1000000014901,
+      "installedPageMs": 1389.3000000044703,
+      "visibleSceneMs": 1954.6000000014901,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 60422,
+      "kitSplats": 55572,
+      "sheetBytes": 6106944,
+      "gpuBytes": 60459076,
+      "builds": 4,
+      "jsHeap": 58809102,
+      "processMemory": {
+        "pssBytes": 743016448,
+        "rssBytes": 1008128000,
+        "processes": 7
+      },
+      "cdpHeap": 20567352,
+      "quality": {
+        "ssim": 0.9553776243085662,
+        "sharpness": 0.0027329028535127433,
+        "sourceSharpness": 0.01238477330907359,
+        "width": 273,
+        "height": 162
+      },
+      "motion": {
+        "frames": 92,
+        "seconds": 15.12189999999851,
+        "fps": 6.083891574472061,
+        "p95Ms": 264.70000000298023
+      },
+      "registration": {
+        "pts": [
+          [89.1029977043566, 125.80664934299452],
+          [329.1445718479956, 125.80664934299452],
+          [89.1029977043566, 436.52991776331476],
+          [329.1445718479956, 436.52991776331476]
+        ],
+        "W": 360,
+        "H": 466,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/your-book/chart/3-main"
+    },
+    {
+      "toy": "photo-album",
+      "input": "sample",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "6 pictures",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 2866.3000000044703,
+      "installedPageMs": 2196.3000000044703,
+      "visibleSceneMs": 17122.70000000298,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 265999,
+      "kitSplats": 55308,
+      "sheetBytes": 62996152,
+      "gpuBytes": 131945492,
+      "builds": 16,
+      "jsHeap": 206711316,
+      "processMemory": {
+        "pssBytes": 1016935424,
+        "rssBytes": 1280782336,
+        "processes": 7
+      },
+      "cdpHeap": 19707392,
+      "quality": {
+        "ssim": 0.8395492773315871,
+        "sharpness": 0.005806940549266255,
+        "sourceSharpness": 0.02777663413134112,
+        "width": 283,
+        "height": 86
+      },
+      "motion": {
+        "frames": 35,
+        "seconds": 15.1845,
+        "fps": 2.3049820540682933,
+        "p95Ms": 1300.5
+      },
+      "registration": {
+        "pts": [
+          [70.6909664464042, 131.4185400514497],
+          [319.3090230307725, 131.4185400514497],
+          [70.6909664464042, 296.33518556144196],
+          [319.3090230307725, 296.33518556144196]
+        ],
+        "W": 373,
+        "H": 247,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/photo-album/sample/1-main"
+    },
+    {
+      "toy": "photo-album",
+      "input": "sample",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "6 pictures",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 3286.6999999955297,
+      "installedPageMs": 2305.5,
+      "visibleSceneMs": 5125.79999999702,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 265999,
+      "kitSplats": 55308,
+      "sheetBytes": 66372012,
+      "gpuBytes": 136088596,
+      "builds": 14,
+      "jsHeap": 221974976,
+      "processMemory": {
+        "pssBytes": 1067541504,
+        "rssBytes": 1330925568,
+        "processes": 7
+      },
+      "cdpHeap": 19732624,
+      "quality": {
+        "ssim": 0.8395492773315871,
+        "sharpness": 0.005806940549266255,
+        "sourceSharpness": 0.02777663413134112,
+        "width": 283,
+        "height": 86
+      },
+      "motion": {
+        "frames": 34,
+        "seconds": 15.04179999999702,
+        "fps": 2.260367775133743,
+        "p95Ms": 1390.2999999970198
+      },
+      "registration": {
+        "pts": [
+          [70.6909664464042, 131.4185400514497],
+          [319.3090230307725, 131.4185400514497],
+          [70.6909664464042, 296.33518556144196],
+          [319.3090230307725, 296.33518556144196]
+        ],
+        "W": 373,
+        "H": 247,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/photo-album/sample/2-main"
+    },
+    {
+      "toy": "photo-album",
+      "input": "sample",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "6 pictures",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 3476,
+      "installedPageMs": 2579.7000000029802,
+      "visibleSceneMs": 14981.5,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 265999,
+      "kitSplats": 55308,
+      "sheetBytes": 66076144,
+      "gpuBytes": 131945492,
+      "builds": 14,
+      "jsHeap": 209801956,
+      "processMemory": {
+        "pssBytes": 1003196416,
+        "rssBytes": 1267253248,
+        "processes": 7
+      },
+      "cdpHeap": 19713576,
+      "quality": {
+        "ssim": 0.8395492773315871,
+        "sharpness": 0.005806940549266255,
+        "sourceSharpness": 0.02777663413134112,
+        "width": 283,
+        "height": 86
+      },
+      "motion": {
+        "frames": 39,
+        "seconds": 16.08469999999553,
+        "fps": 2.424664432660282,
+        "p95Ms": 1141.3999999985099
+      },
+      "registration": {
+        "pts": [
+          [70.6909664464042, 131.4185400514497],
+          [319.3090230307725, 131.4185400514497],
+          [70.6909664464042, 296.33518556144196],
+          [319.3090230307725, 296.33518556144196]
+        ],
+        "W": 373,
+        "H": 247,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/photo-album/sample/3-main"
+    },
+    {
+      "toy": "photo-album",
+      "input": "text",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "2 pictures",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 1926.1000000014901,
+      "installedPageMs": 1723.8999999985099,
+      "visibleSceneMs": 2935.5,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 174292,
+      "kitSplats": 55308,
+      "sheetBytes": 17872576,
+      "gpuBytes": 68447828,
+      "builds": 4,
+      "jsHeap": 78224822,
+      "processMemory": {
+        "pssBytes": 805543936,
+        "rssBytes": 1065435136,
+        "processes": 7
+      },
+      "cdpHeap": 19684120,
+      "quality": {
+        "ssim": 0.6479829572706196,
+        "sharpness": 0.02036026723749811,
+        "sourceSharpness": 0.2894429394851427,
+        "width": 187,
+        "height": 114
+      },
+      "motion": {
+        "frames": 61,
+        "seconds": 15.00870000000298,
+        "fps": 4.064309367232864,
+        "p95Ms": 519.8999999985099
+      },
+      "registration": {
+        "pts": [
+          [42.350187471124556, 203.37383506564058],
+          [191.68152762669214, 203.37383506564058],
+          [42.350187471124556, 396.62616493435945],
+          [191.68152762669214, 396.62616493435945]
+        ],
+        "W": 224,
+        "H": 290,
+        "box": [0.08, 0.2, 0.92, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/photo-album/text/1-main"
+    },
+    {
+      "toy": "photo-album",
+      "input": "text",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "2 pictures",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 2567.6999999955297,
+      "installedPageMs": 2258.6999999955297,
+      "visibleSceneMs": 2572.89999999851,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 174292,
+      "kitSplats": 55308,
+      "sheetBytes": 17872576,
+      "gpuBytes": 68447828,
+      "builds": 4,
+      "jsHeap": 89605954,
+      "processMemory": {
+        "pssBytes": 805903360,
+        "rssBytes": 1065902080,
+        "processes": 7
+      },
+      "cdpHeap": 19620560,
+      "quality": {
+        "ssim": 0.6479829572706196,
+        "sharpness": 0.02036026723749811,
+        "sourceSharpness": 0.2894429394851427,
+        "width": 187,
+        "height": 114
+      },
+      "motion": {
+        "frames": 64,
+        "seconds": 15.016,
+        "fps": 4.262120404901438,
+        "p95Ms": 515.8000000044703
+      },
+      "registration": {
+        "pts": [
+          [42.350187471124556, 203.37383506564058],
+          [191.68152762669214, 203.37383506564058],
+          [42.350187471124556, 396.62616493435945],
+          [191.68152762669214, 396.62616493435945]
+        ],
+        "W": 224,
+        "H": 290,
+        "box": [0.08, 0.2, 0.92, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 2,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/photo-album/text/2-main"
+    },
+    {
+      "toy": "photo-album",
+      "input": "text",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "2 pictures",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 2305.2999999970198,
+      "installedPageMs": 1906.6000000014901,
+      "visibleSceneMs": 2312.7999999970198,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 174292,
+      "kitSplats": 55308,
+      "sheetBytes": 17872576,
+      "gpuBytes": 72364692,
+      "builds": 4,
+      "jsHeap": 89315628,
+      "processMemory": {
+        "pssBytes": 842558464,
+        "rssBytes": 1100435456,
+        "processes": 7
+      },
+      "cdpHeap": 19543224,
+      "quality": {
+        "ssim": 0.6479829572706196,
+        "sharpness": 0.02036026723749811,
+        "sourceSharpness": 0.2894429394851427,
+        "width": 187,
+        "height": 114
+      },
+      "motion": {
+        "frames": 62,
+        "seconds": 15.0085,
+        "fps": 4.130992437618683,
+        "p95Ms": 518.6000000014901
+      },
+      "registration": {
+        "pts": [
+          [42.350187471124556, 203.37383506564058],
+          [191.68152762669214, 203.37383506564058],
+          [42.350187471124556, 396.62616493435945],
+          [191.68152762669214, 396.62616493435945]
+        ],
+        "W": 224,
+        "H": 290,
+        "box": [0.08, 0.2, 0.92, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 3,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/photo-album/text/3-main"
+    },
+    {
+      "toy": "photo-album",
+      "input": "photo",
+      "profile": "phone",
+      "repeat": 1,
+      "name": "2 pictures",
+      "initialView": {
+        "yaw": 0.12,
+        "pitch": 0.12,
+        "roll": 0,
+        "distance": 2.6
+      },
+      "firstPageMs": 2785.7999999970198,
+      "installedPageMs": 2280.5,
+      "visibleSceneMs": 2792.89999999851,
+      "graphicsBackend": "webgl2",
+      "graphicsRenderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "splats": 202584,
+      "kitSplats": 55308,
+      "sheetBytes": 20747616,
+      "gpuBytes": 75528612,
+      "builds": 4,
+      "jsHeap": 95921212,
+      "processMemory": {
+        "pssBytes": 831922176,
+        "rssBytes": 1092349952,
+        "processes": 7
+      },
+      "cdpHeap": 19551400,
+      "quality": {
+        "ssim": 0.9184729962543301,
+        "sharpness": 0.002580793789981337,
+        "sourceSharpness": 0.014476024036278783,
+        "width": 249,
+        "height": 86
+      },
+      "motion": {
+        "frames": 60,
+        "seconds": 15.2915,
+        "fps": 3.9237484877219373,
+        "p95Ms": 750.2999999970198
+      },
+      "registration": {
+        "pts": [
+          [84.93770472145155, 131.2378154181092],
+          [305.0622974333862, 131.2378154181092],
+          [84.93770472145155, 296.33125676496655],
+          [305.0622974333862, 296.33125676496655]
+        ],
+        "W": 330,
+        "H": 248,
+        "box": [0.12, 0.25, 0.88, 0.6],
+        "method": "framebuffer"
+      },
+      "errors": [],
+      "comparisonRepeat": 1,
+      "artifactDirectory": "work/pages-r2/paired-final/phone/photo-album/photo/1-main"
+    }
+  ],
+  "pairing": "Adjacent main/candidate runs per input and repeat; repeat 2 reverses order",
+  "groupOrder": [
+    ["phone", "picture-lab", "photo"],
+    ["phone", "picture-lab", "chart"],
+    ["phone", "picture-lab", "text"],
+    ["phone", "picture-lab", "sample"],
+    ["phone", "your-book", "sample"],
+    ["phone", "your-book", "text"],
+    ["phone", "your-book", "photo"],
+    ["phone", "your-book", "chart"],
+    ["phone", "photo-album", "sample"],
+    ["phone", "photo-album", "text"],
+    ["phone", "photo-album", "photo"],
+    ["phone", "photo-album", "chart"],
+    ["desktop", "picture-lab", "sample"],
+    ["desktop", "picture-lab", "text"],
+    ["desktop", "picture-lab", "photo"],
+    ["desktop", "picture-lab", "chart"],
+    ["desktop", "your-book", "sample"],
+    ["desktop", "your-book", "text"],
+    ["desktop", "your-book", "photo"],
+    ["desktop", "your-book", "chart"],
+    ["desktop", "photo-album", "sample"],
+    ["desktop", "photo-album", "text"],
+    ["desktop", "photo-album", "photo"],
+    ["desktop", "photo-album", "chart"]
+  ],
+  "candidateCommit": "36edbeb30b0d55f27a7f44a75ec6961d8674e002",
+  "candidateRuntimeSha256": "70841772d5e95e701650e97ed3755846cf63211971de98bc63456ed9f9625c03",
+  "baselineCommit": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
+  "expectedRecords": 72
+}

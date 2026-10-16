@@ -1,0 +1,26 @@
+{
+  "text.pdf": {
+    "sha256": "e0d4783669dcca7d5c7bd9d406430019312349cb899f323ffa533bb7740a06a9",
+    "bytes": 12279
+  },
+  "text.png": {
+    "sha256": "5390faa0cc74ce636b6f60ccb54aba24428a5a0c4c11f73fb1a46fee29324b5c",
+    "bytes": 85656
+  },
+  "photo.pdf": {
+    "sha256": "a6b508ddfe0b9c1f719567d615090aec8c45b114a20683af10d23ee8393c5146",
+    "bytes": 583190
+  },
+  "photo.png": {
+    "sha256": "5518cf31aa6e532c60e3e2c95b6dc6c771c6ab75fb60aa66a020fce5cf1031c9",
+    "bytes": 378039
+  },
+  "chart.pdf": {
+    "sha256": "a5c3e2fb8a8949432db53acd949d3b9bf9ce07094c3451d4564b144e82a85d93",
+    "bytes": 29189
+  },
+  "chart.png": {
+    "sha256": "806a8407ec12e3f8c1e6a01a11cea73167774721299ab0e2735894c4e3b61d5f",
+    "bytes": 21655
+  }
+}

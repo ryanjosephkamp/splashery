@@ -1,0 +1,110 @@
+{
+  "run": 38909967302,
+  "productionCommit": "f5f8cef9099f953f9acdad1ecd612a9b33afd8d3",
+  "checkedAtUTC": "2026-10-16 14:35 UTC",
+  "note": "Clean reruns were pending near the Goal deadline; the first attempt and all isolated rechecks are archived.",
+  "jobs": [
+    {
+      "id": 117022194070,
+      "name": "Suite 6/16",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 117022194099,
+      "name": "Suite 1/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022194433,
+      "name": "Suite 12/16",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 117022194475,
+      "name": "Suite 3/16",
+      "status": "in_progress",
+      "conclusion": null
+    },
+    {
+      "id": 117022194718,
+      "name": "Suite 2/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022195211,
+      "name": "Suite 10/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022195260,
+      "name": "Suite 7/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022195833,
+      "name": "Suite 11/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022195854,
+      "name": "Suite 5/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022195976,
+      "name": "Suite 9/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022196503,
+      "name": "Suite 13/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022196601,
+      "name": "Suite 15/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022196636,
+      "name": "Suite 14/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022196664,
+      "name": "Suite 16/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022240734,
+      "name": "Checks",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022262218,
+      "name": "Suite 8/16",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    {
+      "id": 117022266043,
+      "name": "Suite 4/16",
+      "status": "completed",
+      "conclusion": "success"
+    }
+  ]
+}

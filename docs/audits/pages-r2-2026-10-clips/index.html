@@ -1,0 +1,54 @@
+<!doctype html><meta charset="utf-8" /><meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+/><title>Book and Picture lab round 2: effect review</title
+><style>
+  body {
+    font:
+      16px/1.5 system-ui,
+      sans-serif;
+    max-width: 1000px;
+    margin: auto;
+    padding: 24px;
+    background: #f4f4f4;
+    color: #17202a;
+  }
+  video {
+    display: block;
+    max-width: 100%;
+    width: 780px;
+    background: white;
+  }
+  article {
+    margin: 40px 0;
+  }
+  a {
+    color: #064a91;
+  }
+</style>
+<h1>Phone motion comparisons</h1>
+<p>
+  Main is on the left; round 2 is on the right. These recordings use a stepped animation clock at
+  the per-scene cadence recorded in the metadata, with preparation waits omitted. They show motion
+  and edge quality; the separate real-clock benchmark measures performance.
+</p>
+<p>
+  390×844 CSS pixels per view, device scale 2, and low detail. See
+  <a href="README.md">the methods, source commits, and limitations</a>. Evidence-only branch: never
+  merge.
+</p>
+<article>
+  <h2>Your Book</h2>
+  <video controls muted loop playsinline preload="metadata" src="your-book.mp4"></video>
+  <p><a href="your-book-strip.jpg">Six-frame contact sheet</a></p>
+</article>
+<article>
+  <h2>Picture Lab</h2>
+  <video controls muted loop playsinline preload="metadata" src="picture-lab.mp4"></video>
+  <p><a href="picture-lab-strip.jpg">Six-frame contact sheet</a></p>
+</article>
+<article>
+  <h2>Photo Album</h2>
+  <video controls muted loop playsinline preload="metadata" src="photo-album.mp4"></video>
+  <p><a href="photo-album-strip.jpg">Six-frame contact sheet</a></p>
+</article>

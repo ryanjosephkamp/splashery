@@ -1,0 +1,380 @@
+{
+  "your-book": {
+    "main": {
+      "scene": "r2-book",
+      "base": "http://127.0.0.1:4180/",
+      "viewport": [390, 844],
+      "dpr": 2,
+      "profile": "low",
+      "drawWaits": 1,
+      "renderer": "llvmpipe",
+      "stepFPS": 8,
+      "capture": "actual canvas at CSS scale; labeled, with UI omitted",
+      "reviewView": "moving view",
+      "executedRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "clock": "stepped at 8 fps; preparation waits omitted; not throughput",
+      "frames": 132,
+      "durationMs": 20300,
+      "observations": [
+        {
+          "frame": 45,
+          "layers": false,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "d1",
+              "kind": "photo",
+              "at": {
+                "cx": 0.3293560606060606,
+                "cy": 0.07247474747474747,
+                "hw": 0.1524621212121212,
+                "hh": 0.11616161616161615
+              },
+              "id": 1,
+              "failed": false
+            }
+          ]
+        },
+        {
+          "frame": 92,
+          "layers": true,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "d2",
+              "kind": "photo",
+              "at": {
+                "cx": 0.3293560606060606,
+                "cy": 0.07247474747474747,
+                "hw": 0.1524621212121212,
+                "hh": 0.11616161616161615
+              },
+              "id": 2,
+              "failed": false
+            }
+          ]
+        }
+      ],
+      "author": "made by Ryan with Codex (GPT-6)",
+      "sourceCommit": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
+      "sourceRuntimeSha256": "6abffda73998b46a3fabfc490bd06d78cb3f718a9038784929dc5866dcb91807",
+      "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
+    },
+    "round2": {
+      "scene": "r2-book",
+      "base": "http://127.0.0.1:4173/",
+      "viewport": [390, 844],
+      "dpr": 2,
+      "profile": "low",
+      "drawWaits": 1,
+      "renderer": "llvmpipe",
+      "stepFPS": 8,
+      "capture": "actual canvas at CSS scale; labeled, with UI omitted",
+      "reviewView": "moving view",
+      "executedRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "clock": "stepped at 8 fps; preparation waits omitted; not throughput",
+      "frames": 132,
+      "durationMs": 20300,
+      "observations": [
+        {
+          "frame": 45,
+          "layers": false,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "d1",
+              "kind": "photo",
+              "at": {
+                "cx": 0.3293560606060606,
+                "cy": 0.07247474747474747,
+                "hw": 0.1524621212121212,
+                "hh": 0.11616161616161615
+              },
+              "id": 1,
+              "failed": false
+            }
+          ]
+        },
+        {
+          "frame": 92,
+          "layers": true,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "d2",
+              "kind": "photo",
+              "at": {
+                "cx": 0.3293560606060606,
+                "cy": 0.07247474747474747,
+                "hw": 0.1524621212121212,
+                "hh": 0.11616161616161615
+              },
+              "id": 2,
+              "failed": false
+            }
+          ]
+        }
+      ],
+      "author": "made by Ryan with Codex (GPT-6)",
+      "sourceCommit": "f5f8cef9099f953f9acdad1ecd612a9b33afd8d3",
+      "sourceRuntimeSha256": "d5aa7f633c96fdada9fb93e18fcd5543f5e655c7589137dc49435b98d7900557",
+      "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
+    },
+    "videoBytes": 857751,
+    "stripBytes": 218245
+  },
+  "picture-lab": {
+    "main": {
+      "scene": "r2-lab",
+      "base": "http://127.0.0.1:4180/",
+      "viewport": [390, 844],
+      "dpr": 2,
+      "profile": "low",
+      "drawWaits": 1,
+      "renderer": "llvmpipe",
+      "stepFPS": 8,
+      "capture": "actual canvas at CSS scale; labeled, with UI omitted",
+      "reviewView": "front rise, then a retained oblique view",
+      "executedRecorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e",
+      "clock": "stepped at 8 fps; preparation waits omitted; not throughput",
+      "frames": 94,
+      "durationMs": 15550,
+      "observations": [
+        {
+          "frame": 30,
+          "layers": false,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "l1",
+              "kind": "graphic",
+              "at": {
+                "cx": 0.11487480333854921,
+                "cy": 0.021445179750390828,
+                "hw": 0.3365734446664066,
+                "hh": 0.17099723164824493
+              },
+              "id": 1,
+              "failed": false
+            }
+          ]
+        },
+        {
+          "frame": 69,
+          "layers": true,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "l2",
+              "kind": "graphic",
+              "at": {
+                "cx": 0.11487480333854921,
+                "cy": 0.021445179750390828,
+                "hw": 0.3365734446664066,
+                "hh": 0.17099723164824493
+              },
+              "id": 2,
+              "failed": false
+            }
+          ]
+        }
+      ],
+      "author": "made by Ryan with Codex (GPT-6)",
+      "sourceCommit": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
+      "sourceRuntimeSha256": "6abffda73998b46a3fabfc490bd06d78cb3f718a9038784929dc5866dcb91807",
+      "recorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e",
+      "orchestratorInitialRecorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e"
+    },
+    "round2": {
+      "scene": "r2-lab",
+      "base": "http://127.0.0.1:4173/",
+      "viewport": [390, 844],
+      "dpr": 2,
+      "profile": "low",
+      "drawWaits": 1,
+      "renderer": "llvmpipe",
+      "stepFPS": 8,
+      "capture": "actual canvas at CSS scale; labeled, with UI omitted",
+      "reviewView": "front rise, then a retained oblique view",
+      "executedRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "clock": "stepped at 8 fps; preparation waits omitted; not throughput",
+      "frames": 94,
+      "durationMs": 15550,
+      "observations": [
+        {
+          "frame": 30,
+          "layers": false,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "l1",
+              "kind": "graphic",
+              "at": {
+                "cx": 0.11487480333854921,
+                "cy": 0.021445179750390828,
+                "hw": 0.3365734446664066,
+                "hh": 0.17099723164824493
+              },
+              "id": 1,
+              "failed": false
+            }
+          ]
+        },
+        {
+          "frame": 69,
+          "layers": true,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "l2",
+              "kind": "graphic",
+              "at": {
+                "cx": 0.11487480333854921,
+                "cy": 0.021445179750390828,
+                "hw": 0.3365734446664066,
+                "hh": 0.17099723164824493
+              },
+              "id": 2,
+              "failed": false
+            }
+          ]
+        }
+      ],
+      "author": "made by Ryan with Codex (GPT-6)",
+      "sourceCommit": "f5f8cef9099f953f9acdad1ecd612a9b33afd8d3",
+      "sourceRuntimeSha256": "d5aa7f633c96fdada9fb93e18fcd5543f5e655c7589137dc49435b98d7900557",
+      "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
+    },
+    "videoBytes": 965442,
+    "stripBytes": 573424
+  },
+  "photo-album": {
+    "main": {
+      "scene": "r2-album",
+      "base": "http://127.0.0.1:4180/",
+      "viewport": [390, 844],
+      "dpr": 2,
+      "profile": "low",
+      "drawWaits": 1,
+      "renderer": "llvmpipe",
+      "stepFPS": 8,
+      "capture": "actual canvas at CSS scale; labeled, with UI omitted",
+      "reviewView": "front rise, then a retained oblique view",
+      "executedRecorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e",
+      "clock": "stepped at 8 fps; preparation waits omitted; not throughput",
+      "frames": 111,
+      "durationMs": 17675,
+      "observations": [
+        {
+          "frame": 41,
+          "layers": false,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "d1",
+              "kind": "photo",
+              "at": {
+                "cx": 0.475,
+                "cy": 0.16647749999999994,
+                "hw": 0.3153759422110553,
+                "hh": 0.209199375
+              },
+              "id": 1,
+              "failed": false
+            }
+          ]
+        },
+        {
+          "frame": 80,
+          "layers": true,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "d2",
+              "kind": "photo",
+              "at": {
+                "cx": 0.475,
+                "cy": 0.16647749999999994,
+                "hw": 0.3153759422110553,
+                "hh": 0.209199375
+              },
+              "id": 2,
+              "failed": false
+            }
+          ]
+        }
+      ],
+      "author": "made by Ryan with Codex (GPT-6)",
+      "sourceCommit": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
+      "sourceRuntimeSha256": "6abffda73998b46a3fabfc490bd06d78cb3f718a9038784929dc5866dcb91807",
+      "recorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e",
+      "orchestratorInitialRecorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e"
+    },
+    "round2": {
+      "scene": "r2-album",
+      "base": "http://127.0.0.1:4173/",
+      "viewport": [390, 844],
+      "dpr": 2,
+      "profile": "low",
+      "drawWaits": 1,
+      "renderer": "llvmpipe",
+      "stepFPS": 8,
+      "capture": "actual canvas at CSS scale; labeled, with UI omitted",
+      "reviewView": "front rise, then a retained oblique view",
+      "executedRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "clock": "stepped at 8 fps; preparation waits omitted; not throughput",
+      "frames": 111,
+      "durationMs": 17675,
+      "observations": [
+        {
+          "frame": 41,
+          "layers": false,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "d1",
+              "kind": "photo",
+              "at": {
+                "cx": 0.475,
+                "cy": 0.16647749999999994,
+                "hw": 0.3153759422110553,
+                "hh": 0.209199375
+              },
+              "id": 1,
+              "failed": false
+            }
+          ]
+        },
+        {
+          "frame": 80,
+          "layers": true,
+          "figures": [
+            {
+              "phase": "up",
+              "relief": "d2",
+              "kind": "photo",
+              "at": {
+                "cx": 0.475,
+                "cy": 0.16647749999999994,
+                "hw": 0.3153759422110553,
+                "hh": 0.209199375
+              },
+              "id": 2,
+              "failed": false
+            }
+          ]
+        }
+      ],
+      "author": "made by Ryan with Codex (GPT-6)",
+      "sourceCommit": "f5f8cef9099f953f9acdad1ecd612a9b33afd8d3",
+      "sourceRuntimeSha256": "d5aa7f633c96fdada9fb93e18fcd5543f5e655c7589137dc49435b98d7900557",
+      "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
+    },
+    "videoBytes": 976658,
+    "stripBytes": 299023
+  }
+}
