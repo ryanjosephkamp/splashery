@@ -100,3 +100,29 @@ All three focused help/About metadata checks passed again after this merge.
 `node tools/site-build.mjs --check`, `node tools/check-packs.mjs one-splat`, and
 `npx prettier --check .` passed. The English diff still reports only the inherited generated
 heading documented above. Test-generated screenshot changes were restored for this text fix.
+
+## Operator follow-up: task 66 audit scope, October 15, 2026
+
+Addressed the Operator's [audit-scope review](https://github.com/ryanjosephkamp/splashery/pull/616#issuecomment-6204497171).
+Merged main at `5a55f5cc` and reproduced the task 66 count failure (66 instead of 65).
+Added `one-splat` to `EXCLUDED` in `tools/cdx-t2-data.mjs`: task 66 measures a fixed baseline,
+and its existing comment excludes later prototype branches. One splat remains labs-gated and
+covered by its own Part A checks. The 65-toy expectation and `tests/taps.spec.mjs` are unchanged.
+
+Took main's generated service worker before rebuilding the site, and regenerated TOY-PLAN with
+main's unchanged generator. No generated file was merged by hand.
+
+`npx prettier --check .`, `node tools/site-build.mjs --check`, and
+`node tools/check-packs.mjs one-splat` passed. The English diff still reports only the
+inherited generated `Maths` heading described above; the Operator's decision to retain
+main's generator is preserved.
+
+The requested full Playwright run passed: **159 tests in 5.7 minutes**:
+
+- `tests/cdx-t2.spec.mjs`: 74 passed, including the fixed 65-toy count and all four Auto tiers.
+- `tests/math.spec.mjs`: 22 passed, including real browser interactions and phone/desktop captures.
+- `tests/taps.spec.mjs`: 63 passed.
+
+Chromium used headless SwiftShader WebGL2 (`/usr/bin/chromium`); no physical GPU performance
+claim is made. The 14 math capture screenshots were restored after the run to keep this fix
+scoped to the audit set.
