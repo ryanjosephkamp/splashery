@@ -1,7 +1,7 @@
 // Task 95: opt-in hybrid sheets retain the original splat path and bounded backing.
 import { test, expect } from "@playwright/test";
 import { buildSheet } from "../src/picture-splats.js";
-import { surfaceGrid, grayPixels } from "../src/picture-surface.js";
+import { surfaceGrid, grayPixels, rampPixels } from "../src/picture-surface.js";
 import { Pictures } from "../src/pictures.js";
 
 const job = (w = 128, h = 160) => ({
@@ -24,6 +24,26 @@ test("monochrome storage preserves every opaque gray value and rejects color or 
   rgba[1] = 0;
   rgba[3] = 254;
   expect(grayPixels(rgba)).toBe(null);
+});
+
+test("two-color coverage checks every color, including equal-brightness outliers", () => {
+  const rgba = new Uint8ClampedArray(256 * 4);
+  for (let i = 0; i < 256; i++)
+    rgba.set([23, 32, 42].map((v) => Math.round(v + ((255 - v) * i) / 255)).concat(255), i * 4);
+  const r = rampPixels(rgba);
+  expect(r.pixels).toHaveLength(256);
+  for (let i = 0; i < 256; i++)
+    for (let k = 0; k < 3; k++)
+      expect(
+        Math.abs(
+          Math.round(255 * (r.low[k] + ((r.high[k] - r.low[k]) * r.pixels[i]) / 255)) -
+            rgba[i * 4 + k],
+        ),
+      ).toBeLessThanOrEqual(1);
+  rgba.set([200, 10, 40, 255], 64);
+  expect(rampPixels(rgba)).toBe(null);
+  expect(rampPixels(new Uint8ClampedArray([255, 0, 0, 255, 0, 255, 0, 255]))).toBe(null);
+  expect(rampPixels(new Uint8ClampedArray())).toBe(null);
 });
 
 test("an immediately evicted prefetch is not rebuilt on every frame", () => {

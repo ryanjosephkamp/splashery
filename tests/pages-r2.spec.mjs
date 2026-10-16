@@ -225,6 +225,18 @@ test.describe("sharp pages in the real renderer", () => {
     expect(mono.bytes).toBe(mono.expected);
     expect(mono.white.slice(0, 3).every((x) => x > 240)).toBe(true);
     expect(mono.errors).toEqual([]);
+    const ink = await page.evaluate(async () => {
+      const p = window.__splashery.player;
+      const s = p.pictures.sheets.find((s) => s.slot?.surface?.instance.visible);
+      s.slot.surface.material.setParameter("uColorLow", [23 / 255, 32 / 255, 42 / 255, 0]);
+      const frame = await p.stage.captureFrame();
+      const d = frame.getContext("2d").getImageData(0, 0, frame.width, frame.height).data;
+      let n = 0;
+      for (let i = 0; i < d.length; i += 4)
+        if (d[i] + 5 < d[i + 1] && d[i + 1] + 5 < d[i + 2] && d[i + 2] < 100) n++;
+      return n;
+    });
+    expect(ink).toBeGreaterThan(3);
     await page.screenshot({ path: "tests/screenshots/pages-r2-webgpu-mono-390x844.png" });
   });
 
