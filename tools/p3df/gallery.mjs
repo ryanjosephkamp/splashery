@@ -1,0 +1,80 @@
+// MIT. Self-contained file:// gallery with local images; no external resources, analytics, or uploads.
+export function galleryHtml(data) {
+  const range = (values) => {
+    const valid = values.filter(Number.isFinite);
+    return valid.length ? [Math.min(...valid), Math.max(...valid)] : null;
+  };
+  const compact = {
+    ...data,
+    thresholds: { ...data.thresholds, depthFlat: 0.2 },
+    source: { head: data.source.head, sha256: data.source.sha256 },
+    attempts: undefined,
+    inputs: data.inputs.map((e) => ({
+      ...e,
+      profiles: Object.fromEntries(
+        Object.entries(e.profiles || {}).map(([k, p]) => [
+          k,
+          {
+            ...p,
+            rows: undefined,
+            values: { ...p.values, depthFlat: p.rows?.[0]?.depth?.flattenedFraction ?? null },
+            support: {
+              thinProfilesPerPose: range((p.rows || []).map((r) => r.fringe?.evaluated)),
+              uncertainThinBackgrounds: range(
+                (p.rows || []).map((r) => r.fringe?.backgroundUncertain),
+              ),
+              edgeProfilesPerPose: range((p.rows || []).map((r) => r.halo?.anchoredProfiles)),
+              edgeDiagnostics: (p.rows || []).map((r) => ({
+                pose: [r.yaw, r.pitch],
+                outOfPaletteExcess: r.halo?.anchoredExcess ?? null,
+                edgeDisplacementP95: r.halo?.edgeDisplacementP95 ?? null,
+                transitionWidthExcessP95: r.halo?.transitionWidthExcessP95 ?? null,
+                distanceUnits: "drawing-buffer pixels",
+              })),
+              revealedTexturedPixels: range(
+                (p.rows || []).map((r) => r.streak?.revealed?.texturedPixels),
+              ),
+              visibleControlTexturedPixels: range(
+                (p.rows || []).map((r) => r.streak?.visible?.texturedPixels),
+              ),
+              holeCandidatePixels: range(
+                (p.rows || []).map((r) => r.holes?.candidateRevealedPixels),
+              ),
+              depth: p.rows?.[0]?.depth,
+              memorySamples: p.memory?.samples?.length,
+            },
+            memoryAccounting:
+              p.memory?.peakPssBytes != null ? "Process-tree PSS" : "Process-tree RSS",
+            memory: undefined,
+          },
+        ]),
+      ),
+    })),
+  };
+  const json = JSON.stringify(compact)
+    .replace(/</g, "\\u003c")
+    .replace(/\u2028/g, "\\u2028")
+    .replace(/\u2029/g, "\\u2029");
+  return `<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><link rel="icon" href="data:,"><title>Photo to 3D · Failure atlas</title>
+<style>
+:root{color-scheme:dark;--bg:#101719;--panel:#192326;--line:#344348;--text:#edf4f2;--muted:#a2b4b5;--accent:#d2ef8a;--hot:#ffb298}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 system-ui,sans-serif}main{max-width:1480px;margin:auto;padding:32px}header{padding:14px 0 26px;border-bottom:1px solid var(--line)}.eyebrow{color:var(--accent);letter-spacing:.12em;text-transform:uppercase;font-size:12px}h1{font-size:clamp(32px,5vw,64px);font-weight:550;letter-spacing:-.045em;margin:8px 0}h2{font-size:22px;margin:0}.lede{max-width:850px;color:var(--muted)}.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:end;padding:22px 0;position:sticky;top:0;background:var(--bg);z-index:2}label{display:grid;gap:4px;font-size:12px;color:var(--muted)}select,input,button{font:inherit;color:var(--text);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:9px 12px}input{width:240px}button{cursor:pointer}button:focus-visible,select:focus-visible,input:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:3px}#count{margin-left:auto;color:var(--muted)}article{scroll-margin-top:110px;border-top:1px solid var(--line);padding:25px 0 30px}.row-head{display:flex;align-items:start;gap:18px;margin-bottom:16px}.rank{color:var(--accent);font-size:24px;min-width:40px}.subtitle{color:var(--muted);font-size:13px}.badges{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.badge{font:12px ui-monospace,monospace;padding:5px 8px;background:var(--panel);border:1px solid var(--line);border-radius:4px}.bad{color:var(--hot);border-color:#825b4e}.unknown{color:var(--muted)}.images{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}figure{margin:0;background:var(--panel);border:1px solid var(--line);border-radius:8px;overflow:hidden}.frame{display:flex;align-items:center;justify-content:center;min-height:240px;max-height:620px;background:#0d1214}.frame img{display:block;width:100%;height:auto;max-height:620px;object-fit:contain}figcaption{padding:10px 12px;color:var(--muted);font-size:12px}a{color:var(--accent)}details{margin-top:14px;color:var(--muted)}summary{cursor:pointer}.details{display:grid;grid-template-columns:minmax(140px,240px) 1fr;gap:20px;margin:16px 0}.details img{width:100%}.error{color:var(--hot)}#empty{padding:70px 0;color:var(--muted)}footer{border-top:1px solid var(--line);padding:20px 0;color:var(--muted);font-size:12px}pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}small{color:var(--muted)}@media(max-width:700px){main{padding:18px}article{scroll-margin-top:18px}.toolbar{position:static}#count{width:100%;margin:0}.images{grid-template-columns:1fr}.frame,.frame img{max-height:none}.details{grid-template-columns:1fr}input{width:100%}.row-head{gap:8px}}
+</style><main><header><div class="eyebrow">Splashery / Research · October 2026</div><h1>Where the picture breaks.</h1><p class="lede">Photo to 3D, from the real toy. Compare the source, front view, and worst turn. Badges are review flags, not failure rates. Default order takes the largest value-to-threshold ratio across unlike metrics; unknowns are not passes.</p><p id="method" class="subtitle"></p></header>
+<div class="toolbar"><label>Render profile<select id="profile"><option value="phone">Phone · 390 × 844, DPR 3</option><option value="desktop">Desktop · 1440 × 900</option></select></label><label>Failure type<select id="failure"><option value="all">All measured inputs</option><option value="streaks">Revealed-area streaks</option><option value="textureLoss">Fill texture loss</option><option value="holes">Uncovered reveals</option><option value="halos">Edge halos</option><option value="fringes">Thin-part fringes</option><option value="missing">Missing thin samples</option><option value="depth">Depth order / cue warnings</option><option value="depthFlat">Flattened depth warnings</option><option value="depthAbsRel">Reference depth error</option><option value="speed">Slow first 3D</option><option value="memory">High process memory</option><option value="errors">Measurement errors</option></select></label><label>Find a picture<input id="search" type="search" placeholder="Name, ID, category, or author"></label><button id="reset" type="button">Reset</button><span id="count" role="status" aria-live="polite"></span></div>
+<div id="rows"></div><p id="empty" hidden>No pictures match these filters.</p><footer>Made by Ryan with Codex (GPT-6). Gallery code: MIT. Images keep the licenses beside each row. Local runs make no external requests. Relative artifact thresholds guide review; they are not universal perceptual cutoffs.</footer></main>
+<script type="application/json" id="data">${json}</script><script>
+const data=JSON.parse(document.getElementById('data').textContent),$=id=>document.getElementById(id),esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const labels={streaks:'Streak excess',textureLoss:'Fill texture loss',holes:'Holes',halos:'Edge / halo error',fringes:'Fringe p95',missing:'Thin samples lost',depth:'Depth order warning',depthFlat:'Flat depth pairs / cues',depthAbsRel:'Reference AbsRel',speed:'First 3D',memory:'Peak process PSS/RSS'};
+const lossy=!!data.publication?.lossy;
+const poseImage=(e,r,p,pose)=>r?.reviewFiles?.poses?.[pose.join(',')]||'renders/'+e.id+'-'+p+'-'+pose[0]+'-'+pose[1]+'.png';
+const fmt=(k,v)=>!Number.isFinite(v)?'Unknown':k==='streaks'?(100*v).toFixed(1)+' pp':k==='fringes'?v.toFixed(2)+' CSS px':k==='speed'?(v/1000).toFixed(2)+' s':k==='memory'?(v/1048576).toFixed(0)+' MiB':(100*v).toFixed(1)+'%';
+const url=v=>/^(https?:)/.test(v||'')?esc(v):null;
+function render(){const p=$('profile').value,f=$('failure').value,q=$('search').value.trim().toLowerCase();let rows=data.inputs.map(e=>({e,r:e.profiles?.[p]})).filter(({e,r})=>(e.id+' '+e.label+' '+(e.category||'')+' '+(e.author||'')).toLowerCase().includes(q)&&(f==='all'||f==='errors'?f!=='errors'||e.error:r&&Number.isFinite(r.values[f])&&r.values[f]>=(data.thresholds[f]??0)));
+rows.sort((a,b)=>(f==='all'?b.r?.severity-a.r?.severity:(b.r?.values[f]??-1)-(a.r?.values[f]??-1))||a.e.id.localeCompare(b.e.id));
+$('count').textContent=rows.length+' of '+data.inputs.length+' inputs';$('empty').hidden=rows.length>0;
+$('rows').innerHTML=rows.map(({e,r},i)=>{const credit=url(e.source)?'<a href="'+url(e.source)+'" target="_blank" rel="noopener">Source</a>':'Private local file';const license=url(e.licenseUrl)?'<a href="'+url(e.licenseUrl)+'" target="_blank" rel="noopener">'+esc(e.license)+'</a>':esc(e.license);const image=(src,title,alt,preview)=>'<figure><div class="frame"><a href="'+esc(src)+'"><img loading="lazy" src="'+esc(preview||src)+'" alt="'+esc(alt)+'"></a></div><figcaption>'+esc(title)+'</figcaption></figure>';const metricPose=f!=='all'?r?.summary?.[f]?.worstPose:null;const metricLink=metricPose?'<p class="subtitle"><a href="'+esc(poseImage(e,r,p,metricPose))+'">'+(lossy?'Open this failure’s phone-size WebP':'Open this failure’s worst native frame')+'</a> · yaw '+metricPose[0]+'°, pitch '+metricPose[1]+'°</p>':'';return '<article id="case-'+esc(e.id)+'" data-id="'+esc(e.id)+'"><div class="row-head"><span class="rank">'+String(i+1).padStart(2,'0')+'</span><div><h2>'+esc(e.label)+'</h2><div class="subtitle">'+esc(e.kind)+(e.ai?' · AI-made sample':'')+' · '+esc(e.category||'')+'</div><div class="badges">'+Object.keys(labels).map(k=>{let v=r?.values[k];return '<span class="badge '+(!Number.isFinite(v)?'unknown':v>=(data.thresholds[k]??Infinity)?'bad':'')+'">'+(k==='memory'?(r?.memoryAccounting||labels[k]):labels[k])+': '+fmt(k,v)+'</span>'}).join('')+'</div>'+metricLink+'</div></div>'+(e.error?'<p class="error">Measurement failed: '+esc(e.error)+'</p>':'')+(r?'<div class="images">'+image(e.photo,'Source picture',e.label+' original',e.photoPreview)+image(r.front,'Front · '+(lossy?'phone-size WebP; capture '+r.native.join(' × '):'photo crop; click for '+r.native.join(' × ')+' native frame'),e.label+' front 3D view',r.frontPreview)+image(r.worst,'Worst turn: yaw '+r.worstPose[0]+'°, pitch '+r.worstPose[1]+'° · '+(lossy?'phone-size WebP':'photo crop'),e.label+' worst measured 3D view',r.worstPreview)+'</div>':'')+'<details><summary>Depth, support, method, and credit</summary><div class="details">'+(r?'<figure><img loading="lazy" src="'+esc(r.depthImage)+'" alt="Relative depth: light is near"><figcaption>Relative depth · light is near</figcaption></figure>':'')+'<div><p>'+credit+' · '+esc(e.author)+' · '+license+'</p><p>'+esc(e.changes||'Unchanged repository source.')+'</p><p>'+esc(r?.depthKind||'')+'</p><p>Scores show each metric’s worst supported pose; the preview shows the largest threshold-normalized artifact. These can be different angles. T-junction warnings are hypotheses, not truth. Directionality cannot establish that hidden content is believable. Edge RGB error mixes bleed and misregistration. Separate out-of-palette, displacement, and width diagnostics below are not independently validated bleed rates.</p><pre>'+esc(JSON.stringify({scores:r?.summary,support:r?.support},null,2))+'</pre><a href="'+esc(e.record)+'">Raw per-pose record</a>'+(r?' · <a href="'+esc(r.reviewFiles?.depthDiagnostics||'renders/'+e.id+'-'+p+'-depth-diagnostic.json')+'">Depth-region diagnostics</a> · <a href="'+esc(r.reviewFiles?.anchors||'renders/'+e.id+'-'+p+'-anchors.json')+'">Edge and thin source anchors</a>':'')+'</div></div></details></article>'}).join('');}
+$('method').textContent=(data.complete?'Complete matrix':'Partial run — see coverage')+' · '+data.inputs.length+' inputs · '+(data.source.head||'unversioned').slice(0,12)+' · Sharp picture, default depth '+data.settings.depth+' · '+data.settings.poses.length+' poses/profile · '+data.environment+(lossy?' · Review: lossy WebP resized to phone size; scores use original lossless frames.':'');
+for(const option of $('profile').options)option.disabled=!data.settings.profiles.includes(option.value);const params=new URLSearchParams(location.search),initialProfile=data.settings.profiles.includes(params.get('profile'))?params.get('profile'):data.settings.profiles[0]||'phone';$('profile').value=initialProfile;
+if([...$('failure').options].some(o=>o.value===params.get('failure')))$('failure').value=params.get('failure');$('search').value=params.get('q')||'';
+for(const id of ['profile','failure'])$(id).addEventListener('change',render);$('search').addEventListener('input',render);$('reset').addEventListener('click',()=>{$('profile').value=data.settings.profiles[0]||'phone';$('failure').value='all';$('search').value='';render()});render();
+</script></html>`;
+}

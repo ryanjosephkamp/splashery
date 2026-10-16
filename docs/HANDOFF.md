@@ -4,6 +4,15 @@ Where Splashery stands, in short. The Operator session keeps this file; each lan
 in [handoff/](handoff/). The ground rules are in [CLAUDE.md](../CLAUDE.md); how the parallel lanes
 work is in [OPERATING.md](OPERATING.md).
 
+## Now (October 16, 2026, about 00:30 UTC)
+
+The Operator is `session_01R85mwsFf138ohESofkyPJu` (Opus 5.5), since October 15, 2026, 18:00 UTC,
+one session deep. Main is `d4df5998` (Ops #666: #664, #658, #641, and the manual's PDF edition
+`9dff70c3`; `man5:201` is off the known list). Ops #668 (Fix13 #665 and Codex 71 #601) is in its
+full suite. Codex task files 91 to 97 are in this PR; the October 15 walkthrough's triage is in
+[reviews/2026-10-15-walkthrough/triage.md](reviews/2026-10-15-walkthrough/triage.md). No Claude lane
+runs once Fix13 merges. The section below is the October 15 morning state.
+
 ## Now (October 15, 2026, about 14:00 UTC)
 
 The Operator is `session_01UFMfX9RBAFMSqMHSrisZuo` (Opus 5.5), since October 14, 2026, 07:33 UTC.

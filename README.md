@@ -267,8 +267,8 @@ In the **Share** tab:
 
 - **Copy link**: the whole scene, deflate-compressed into `#s=` in the URL. For your own file the
   link carries the settings only and says so.
-- **Save JSON / Load JSON**: the scene as a file (you can also drop it on the page). The format is
-  documented in [docs/SCENE-SCHEMA.md](docs/SCENE-SCHEMA.md).
+- **Save scene / Open a scene**: the scene as a file (you can also drop it on the page). The format
+  is documented in [docs/SCENE-SCHEMA.md](docs/SCENE-SCHEMA.md).
 - **Save picture**: a PNG of the current view (transparent if the background is).
 - **Save GIF**: a turntable or a short effect loop, 48 frames at 512 px by default, encoded in the
   browser with gifenc.

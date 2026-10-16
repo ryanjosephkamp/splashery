@@ -3,7 +3,7 @@
 // the browser: Share → QR code shows a code that reads back (the saved PNG,
 // with jsQR and zxing-cpp, straight and as a camera sees it: tilted and a
 // little soft, with zxing-cpp), and opening what it holds lands on the same scene; a scene
-// too long for one code says so and offers Save JSON.
+// too long for one code says so and offers Save scene.
 
 import { test, expect } from "@playwright/test";
 import fs from "node:fs";
@@ -120,7 +120,7 @@ test("Share → QR code: the code reads back, as a camera sees it too, and opens
   expect(errors).toEqual([]);
 });
 
-test("a scene too long for one QR code says so and offers Save JSON", async ({ page }) => {
+test("a scene too long for one QR code says so and offers Save scene", async ({ page }) => {
   test.setTimeout(240_000);
   await page.goto(APP);
   await page.waitForSelector("body[data-ready='true']", { timeout: 180_000 });
@@ -134,5 +134,7 @@ test("a scene too long for one QR code says so and offers Save JSON", async ({ p
   await page.waitForSelector("#sqr[open]");
   expect(await page.locator("#sqr-long").textContent()).toMatch(/more than one QR code can hold/);
   expect(await page.locator("#sqr-json").count()).toBe(1);
+  await expect(page.locator("#sqr-json")).toHaveText("Save scene");
+  expect(await page.locator("#sqr-long").textContent()).toMatch(/open it with Open a scene\./);
   expect(await page.locator("#sqr-canvas").count()).toBe(0);
 });

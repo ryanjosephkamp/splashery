@@ -253,6 +253,15 @@ the private page.
 - Keep the owner's messages short: what changed, what he needs to do, step by step.
 - Keep trigger prompts short: every create or update echoes the whole prompt back into the
   Operator's context.
+- Run `tools/op-merge.mjs` with its tests, in the Bash tool's background mode with a long timeout
+  (October 15, 2026): `--no-tests` is refused by the session's permission check as a CI bypass, and
+  a foreground call that times out moves to the background and is stopped at 30 minutes, before the
+  specs report.
+- `git stash -u` in a merge worktree also stashes the `node_modules` link; relink it before the next
+  op-merge (`site-build.mjs` imports prettier).
+- Check a new toy against the shelf-wide data checks before batching it (`cdx-t2`'s toy count,
+  `st3`'s toy dates, `vw`'s tilt lock): three Codex labs toys written before those landed each
+  failed one in the October 15 batch.
 - Keep blind reviews blind everywhere the owner can read: messages, check-in prompts (they show in
   the transcript when they fire) and first prompts. A key goes only in the handover page's `sealed/`
   folder and the Operator's scratchpad.

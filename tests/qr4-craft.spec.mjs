@@ -152,10 +152,26 @@ test.describe("Other barcodes", () => {
         }
     expect(h.digest("hex")).toBe(BUILD_HASH);
   });
+
+  test("raw legacy Circle builds retain main's splats without resolved option defaults", () => {
+    // Captured from main c00e1cb8 under Node 22, the CI runtime. Omit
+    // eyeShape and circleBorder to exercise the raw shared-builder API.
+    const h = crypto.createHash("sha256");
+    for (const text of ["https://ryanjosephkamp.github.io/splashery/", "Hi"])
+      for (const style of ["classic", "dots", "rounded", "bricks", "gems", "bubbles", "neon"])
+        for (const plate of ["paper", "metal"]) {
+          const code = encodeQR(text, "M");
+          const r = buildCode(code, { shape: "circle", style, plate, gradient: "linear", fg: "#112233", fg2: "#3355aa", bg: "#ffffff", eyes: "own", eye: "#aa1144" }, 120000); // prettier-ignore
+          h.update(JSON.stringify(r));
+        }
+    expect(h.digest("hex")).toBe(CIRCLE_BUILD_HASH);
+  });
 });
 
 // Recorded from main before the move (see the test above).
 const BUILD_HASH = "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144";
+// Recorded from main c00e1cb8 with the same Node 22 runtime.
+const CIRCLE_BUILD_HASH = "51848ddea445d56959c8558a2dd4682e8d688bae3fde5f232e7c1b51448a95fb";
 
 test.describe("Picture QR: the halftone", () => {
   test("every module's center and the plain patterns keep their bits (centers in the photo's hue in color), and the free cells are a halftone", () => {
