@@ -707,7 +707,12 @@ export function createUI(app) {
       if (item.color) {
         b.classList.add("swatch-tool");
         b.style.setProperty("--tool-color", item.color);
+      } else if (item.tint) {
+        // Lane PT1 (engine r2): a chip in its own color (Toy Box's tools).
+        b.classList.add("tinted-tool");
+        b.style.setProperty("--tool-tint", item.tint);
       }
+      if (item.key) b.setAttribute("aria-keyshortcuts", item.key);
       b.addEventListener("click", () => app.player.playTool(item.id));
       toolRow.append(b);
     }
