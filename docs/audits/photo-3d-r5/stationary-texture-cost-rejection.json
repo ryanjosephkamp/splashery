@@ -1,0 +1,283 @@
+{
+  "complete": true,
+  "fullCorpus": false,
+  "costPassed": false,
+  "aggregateCostPassed": false,
+  "perInputCostPassed": false,
+  "statistics": {
+    "main": {
+      "first3dMs": {
+        "count": 5,
+        "median": 1665.5,
+        "worst": 2581
+      },
+      "peakPssBytes": {
+        "count": 5,
+        "median": 854218752,
+        "worst": 888816640
+      }
+    },
+    "candidate": {
+      "first3dMs": {
+        "count": 5,
+        "median": 2136.7000000029802,
+        "worst": 2820.099999997765
+      },
+      "peakPssBytes": {
+        "count": 5,
+        "median": 874617856,
+        "worst": 927577088
+      }
+    }
+  },
+  "perInput": [
+    {
+      "id": "forest",
+      "main": {
+        "first3dMs": {
+          "count": 5,
+          "median": 1665.5,
+          "worst": 2581
+        },
+        "peakPssBytes": {
+          "count": 5,
+          "median": 854218752,
+          "worst": 888816640
+        }
+      },
+      "candidate": {
+        "first3dMs": {
+          "count": 5,
+          "median": 2136.7000000029802,
+          "worst": 2820.099999997765
+        },
+        "peakPssBytes": {
+          "count": 5,
+          "median": 874617856,
+          "worst": 927577088
+        }
+      }
+    }
+  ],
+  "methods": {
+    "tool": "beb1a386eb85787316ca8c5ec6ee3b88e19d1e3b41092ae525d8b37b28ac830a",
+    "originalBrowser": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9",
+    "adaptedBrowser": "7e2b1b9b864f1952378de1c718ae52e21ef42a6afc5e53cc74f9efed2e5e47a3",
+    "memory": "fa67b5f55b988cca78f03032ea99a8b6506acc39e8a3523cc7031b67a74b240f",
+    "config": "ec96e1fa326a44e517d3c536ef795bb972ad9a06ea6afabf24eb55c4fea53b2f"
+  },
+  "hardwareScope": "Chromium software phone profile; this is not a physical-phone measurement.",
+  "costPolicy": "Median and worst first-view time and PSS must not increase in aggregate or for any individual input. No unmeasured cost tolerance is granted.",
+  "kind": "One isolated phone-profile input, five fresh browser observations per build; not full-corpus, physical-phone, or causal slowdown evidence.",
+  "decision": "Cut: observed median and worst first-view time and peak PSS all increased. No repeated-until-pass retest.",
+  "source": {
+    "baseline": "58307232c89018087aaf1b4c516407c8d6bb37666e5b00c154ce1c0f32a96728",
+    "candidate": "87884ffaec2643dbbdfacdc1ae7b797a161863ede1bef9e8b02ccde3a0a58f0a"
+  },
+  "baselineHead": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
+  "settings": {
+    "depth": 0.5,
+    "profile": "phone",
+    "repetitions": 5,
+    "isolated": true,
+    "order": "Input order per repetition; main/candidate order alternates by input index plus repetition.",
+    "serving": "Both builds use the same direct-file server, unchanged base files, and byte snapshots for the same override paths.",
+    "inputs": [
+      {
+        "id": "forest",
+        "sha256": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+        "depth": "adc3d64fbe0d83aefcd5a9efe620f9d55d8b15739ff9aa6366c11c2e2a4b86f2",
+        "truth": null
+      }
+    ]
+  },
+  "isolationWitness": [],
+  "rawStudySha256": "ed5f90cf9e02139fe62aa5789338124c759eb0f3a168a0517c169cf6e13bc792",
+  "observations": [
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 0,
+      "beganUTC": "2026-10-16T09:17:58.676Z",
+      "finishedUTC": "2026-10-16T09:18:04.293Z",
+      "first3dMs": 2820.099999997765,
+      "peakPssBytes": 874617856,
+      "pssSamples": 18,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "2e97d02c68c025145aec9678eee4bea2d4f1decb727b90cd90b6f24add8b52c7"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 0,
+      "beganUTC": "2026-10-16T09:17:52.554Z",
+      "finishedUTC": "2026-10-16T09:17:58.604Z",
+      "first3dMs": 2581,
+      "peakPssBytes": 826604544,
+      "pssSamples": 16,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "ff8525505e3703ee4c6f3d9726e41933b947d295c1194cc800ca7704f9f658a3"
+    },
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 1,
+      "beganUTC": "2026-10-16T09:18:04.368Z",
+      "finishedUTC": "2026-10-16T09:18:09.403Z",
+      "first3dMs": 1710.300000000745,
+      "peakPssBytes": 906930176,
+      "pssSamples": 13,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "227337688c7e09cfdd969d8991a3fa67ec024c11259664d38a732138009d765e"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 1,
+      "beganUTC": "2026-10-16T09:18:09.473Z",
+      "finishedUTC": "2026-10-16T09:18:14.239Z",
+      "first3dMs": 1665.5,
+      "peakPssBytes": 888816640,
+      "pssSamples": 11,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "e9537d03f7f5c602567560588be09e470fccdbf7658be4e95dcd0194c33d8ad6"
+    },
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 2,
+      "beganUTC": "2026-10-16T09:18:18.926Z",
+      "finishedUTC": "2026-10-16T09:18:24.400Z",
+      "first3dMs": 2117.300000000745,
+      "peakPssBytes": 849164288,
+      "pssSamples": 14,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "4d68102cc3dead74128103918acc38b52e95da1144333c5abbf03dba01a9a239"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 2,
+      "beganUTC": "2026-10-16T09:18:14.309Z",
+      "finishedUTC": "2026-10-16T09:18:18.855Z",
+      "first3dMs": 1599.199999999255,
+      "peakPssBytes": 854218752,
+      "pssSamples": 11,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "4f7626ccb8b028bafef57d64db4f7589967468895b8baaecf28192790ec15798"
+    },
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 3,
+      "beganUTC": "2026-10-16T09:18:24.472Z",
+      "finishedUTC": "2026-10-16T09:18:29.822Z",
+      "first3dMs": 2136.7000000029802,
+      "peakPssBytes": 823092224,
+      "pssSamples": 14,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "a6694d44d2ba02564d67b73abb587a067184526a2a73e5ad85093b79ed7c4c47"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 3,
+      "beganUTC": "2026-10-16T09:18:29.893Z",
+      "finishedUTC": "2026-10-16T09:18:34.475Z",
+      "first3dMs": 1467,
+      "peakPssBytes": 861438976,
+      "pssSamples": 10,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "c372ae04e2fea8eecf5860a3335f2ce9ba65af5da3e16886df489248d64f12e3"
+    },
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 4,
+      "beganUTC": "2026-10-16T09:18:39.456Z",
+      "finishedUTC": "2026-10-16T09:18:44.937Z",
+      "first3dMs": 2216.5,
+      "peakPssBytes": 927577088,
+      "pssSamples": 15,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "613e1929547d344f0f7a24a53fba08df1bc5c3bed157fd832ba8badde8fe1e0d"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 4,
+      "beganUTC": "2026-10-16T09:18:34.546Z",
+      "finishedUTC": "2026-10-16T09:18:39.383Z",
+      "first3dMs": 1887.5,
+      "peakPssBytes": 852403200,
+      "pssSamples": 12,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "3c279bf20f7a28e137197c1a2e1661ddb8c9c83925fddb2733f0ca5e7317c164"
+    }
+  ],
+  "boundedQualityStudy": {
+    "profiles": 6,
+    "inputs": 3,
+    "bothProfiles": true,
+    "noSupportedRegressions": true,
+    "scope": "Forest, street, and library only; not all 118 inputs. Small desktop ribbon and texture gains do not qualify a runtime cost increase."
+  },
+  "inputs": [
+    {
+      "id": "forest",
+      "sha256": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+      "depth": "adc3d64fbe0d83aefcd5a9efe620f9d55d8b15739ff9aa6366c11c2e2a4b86f2",
+      "truth": null
+    }
+  ]
+}

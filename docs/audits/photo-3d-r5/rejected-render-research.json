@@ -671,7 +671,176 @@
           "qualityDifferences": []
         }
       ]
+    },
+    {
+      "name": "fill-resolution-512",
+      "kind": "Bounded native background-resolution screen; original depth field and finder unchanged, no phone-cost acceptance.",
+      "completedProfiles": 1,
+      "sourceSha256": "ecc5b80dd4baa3cc20e08fe9b5f7d29aa15fd61409ff78c9eddafa8f6ac1fc66",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input texture loss and other quality regressions.",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.5424212701455193,
+            "after": 0.612718849689011
+          },
+          {
+            "metric": "transitionWidth",
+            "before": 3.4302521661950673,
+            "after": 6.5026847005141155
+          },
+          {
+            "metric": "fringeMaximum",
+            "before": 0.933622938336588,
+            "after": 0.9369994090074417
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.5743608711366746,
+              "after": 0.5447579851864189
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.5424212701455193,
+              "after": 0.612718849689011
+            },
+            {
+              "metric": "halos",
+              "before": 0.103067897700517,
+              "after": 0.07724187503941923
+            },
+            {
+              "metric": "fringes",
+              "before": 0.7532050788339201,
+              "after": 0.7518607716988839
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.010966693098519671,
+              "after": 0.0016043250054279896
+            },
+            {
+              "metric": "edgeDisplacement",
+              "before": 2.3703928832525314,
+              "after": 2.157186667712267
+            },
+            {
+              "metric": "transitionWidth",
+              "before": 3.4302521661950673,
+              "after": 6.5026847005141155
+            },
+            {
+              "metric": "fringeMaximum",
+              "before": 0.933622938336588,
+              "after": 0.9369994090074417
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fill-resolution-512-area",
+      "kind": "Bounded native background-resolution screen; original depth field and finder unchanged, no phone-cost acceptance.",
+      "completedProfiles": 1,
+      "sourceSha256": "937215ac35149b5787a041978a063b3f16e0db25cabffc9159d52cb22c066f4b",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input texture loss and other quality regressions.",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.5424212701455193,
+            "after": 0.8848048775212741
+          },
+          {
+            "metric": "fringeMaximum",
+            "before": 0.933622938336588,
+            "after": 0.9365194477668876
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.5743608711366746,
+              "after": 0.5517761543669769
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.5424212701455193,
+              "after": 0.8848048775212741
+            },
+            {
+              "metric": "halos",
+              "before": 0.103067897700517,
+              "after": 0.0767028329223192
+            },
+            {
+              "metric": "fringes",
+              "before": 0.7532050788339201,
+              "after": 0.7461288045436665
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.010966693098519671,
+              "after": 0.001435396883735456
+            },
+            {
+              "metric": "edgeDisplacement",
+              "before": 2.3703928832525314,
+              "after": 2.2475583282708618
+            },
+            {
+              "metric": "transitionWidth",
+              "before": 3.4302521661950673,
+              "after": 3.230270933253772
+            },
+            {
+              "metric": "fringeMaximum",
+              "before": 0.933622938336588,
+              "after": 0.9365194477668876
+            }
+          ]
+        }
+      ]
     }
   ],
-  "updatedUTC": "2026-10-16T08:48:52.664Z"
+  "updatedUTC": "2026-10-16T09:08:05.702Z"
 }
