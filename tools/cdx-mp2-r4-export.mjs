@@ -141,6 +141,11 @@ const ledgers = [
   "r4-test-ledger.md",
   "r4-node-tests.json",
   "r4-photo-equivalence.json",
+  "r4-font-environment.json",
+  "r4-final-test-summary.json",
+  "r4-test-immutability.json",
+  "r4-photo-scope.json",
+  "r4-checkpoint-refs.json",
   "r4-node-tests.tap",
   "r4-gallery-check.json",
   "r4-archive-verification.json",
@@ -200,6 +205,48 @@ for (const run of testLedger.runs) {
     startedAt: run.startedAt,
   });
 }
+// Focused checks remain separate, so they cannot replace a complete-file failure.
+manifest.focusedTestReports = [];
+const activeCapture = JSON.parse(await fs.readFile("work/r4-active-capture-guard.json", "utf8")),
+  priorCapture = JSON.parse(await fs.readFile("work/r4-before-active-capture-source.json", "utf8")),
+  knownFocusedPins = {
+    "r4-focused-tests/paused-active-capture-fix.json": {
+      sourceHash: activeCapture.publishedSourceHash,
+      sourceRevision: activeCapture.publishedRevision,
+    },
+    "r4-focused-tests/paused-capture-fix.json": {
+      sourceHash: priorCapture.sourceHash,
+      sourceRevision: priorCapture.revision,
+    },
+  };
+const auxiliary = [
+  ...(await fs.readdir("work/r4-focused-tests").catch(() => []))
+    .filter((file) => file.endsWith(".json"))
+    .map((file) => `r4-focused-tests/${file}`),
+  ...(await fs.readdir("work")).filter((file) => /^r4-.*\.json$/.test(file)),
+];
+for (const name of auxiliary) {
+  const bytes = await fs.readFile(path.join("work", name));
+  if (!/"config"\s*:\s*\{/.test(bytes.subarray(0, 4096).toString())) continue;
+  const report = JSON.parse(bytes);
+  if (!report.stats || !Array.isArray(report.suites)) continue;
+  const compressed = gzipSync(bytes),
+    file = `focused-test-reports/${name}.gz`,
+    target = path.join(out, "ledgers", file),
+    sha = (value) => createHash("sha256").update(value).digest("hex");
+  await fs.mkdir(path.dirname(target), { recursive: true });
+  await fs.writeFile(target, compressed);
+  manifest.focusedTestReports.push({
+    file,
+    bytes: compressed.length,
+    sha256: sha(compressed),
+    uncompressedBytes: bytes.length,
+    uncompressedSha256: sha(bytes),
+    startedAt: report.stats.startTime,
+    source: knownFocusedPins[name] || null,
+    note: "Focused or auxiliary invocation; excluded from latest whole-file totals. Original source pin is preserved when present; unknown pins are not assigned retroactively.",
+  });
+}
 await fs.writeFile(path.join(out, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
 await fs.writeFile(
   path.join(out, "index.html"),
@@ -234,9 +281,11 @@ Native traces and CPU profiles are gzip-compressed, with both compressed and ori
 the root manifest. Decompress them before loading them in a trace or CPU-profile viewer.
 ${manifest.traces.map((row) => `- [${row.file}](ledgers/${row.file})`).join("\n")}
 
-Every original Playwright JSON report, including failures and superseded runs, is retained under
-\`ledgers/test-reports/\` as a gzip file. The root manifest records its original and compressed
-hashes; the test ledger identifies which complete file run supplies each latest result.
+Every complete-file Playwright JSON report, including failures and superseded runs, is retained
+under \`ledgers/test-reports/\` as a gzip file. Focused and auxiliary invocations are separately
+retained under \`ledgers/focused-test-reports/\` and never replace a complete-file result. The root
+manifest records original and compressed hashes; the test ledger identifies each latest whole-file
+result. Unknown historical source pins remain unknown.
 
 Incomplete measurements remain explicitly incomplete. Earlier failures are preserved in the test
 ledger; latest whole-file reruns do not erase them. These are Chromium software-rendered phone

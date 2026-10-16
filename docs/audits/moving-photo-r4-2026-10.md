@@ -6,19 +6,19 @@ native pictures, softened frame, and upload refinement forward. The task is
 [92](../codex/92-moving-photo-r4.md); the performance review is
 [the Operator's last comment](https://github.com/ryanjosephkamp/splashery/pull/560#issuecomment-6182624749).
 
-This audit is being completed during the authorized twelve-hour run, October 16, 2026, 01:26–13:26
-UTC. Quality, isolated cadence, and startup are complete. The final test status is recorded below;
-an incomplete target is not a pass. The complete Goal is not met.
+This audit records the authorized twelve-hour run, October 16, 2026, 01:26–13:26 UTC. Quality,
+isolated cadence, and startup are complete. The final test status is recorded below; an incomplete
+target is not a pass. The complete Goal is not met.
 
 ## Goal status
 
 | Target                                                                           | Result                                                                                                                                                                                                                                                      |
 | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Sharp shows the chosen sample and local file                                     | All 81 ordered pairs of nine samples, five local formats, and Sharp/Splats transitions passed on the emulated phone.                                                                                                                                        |
-| Phone cadence at least main; Operator median ≤50 ms and worst ≤250 ms            | First clean pass: all fourteen update medians are no worse than main; twelve meet the stricter 50 ms / 250 ms ceiling. Bound-picture clocks remain slower on Bridge and long Bunny. Closest-input repeats and startup are measured separately.              |
+| Phone cadence at least main; Operator median ≤50 ms and worst ≤250 ms            | First clean pass: all fourteen update medians are no worse than main; twelve meet the stricter 50 ms / 250 ms ceiling. Bound-picture clocks remain slower on Bridge and long Bunny. The additional Bunny/Horse repeat and startup are measured separately.  |
 | Sharper and steadier on all nine samples and five original inputs, both profiles | Complete 28-case sweep: 7,102 original source frames, zero holes, edge specks, depth mismatches, or browser errors. Universal sharpness and stability gains are not established; one long-film jitter result and six long-film edge-flip results are worse. |
 | First 3D frame no slower than main on phone                                      | All fourteen medians are faster across three fresh-context repeats per input and version (84 launches), with zero observer errors. The first usable front-surface draw completes a WebGL finish fence.                                                      |
-| Photo checkpoint and every existing test                                         | Full suite running; 51 Photo scan tests passed. Initial failures and whole-file reruns are preserved in the ledger.                                                                                                                                         |
+| Photo checkpoint and every existing test                                         | Photo checkpoint families: 25/25 files, 187 passed, 0 failed, and 0 skipped. 331/331 complete whole-file reports: 2888 passed, 15 failed, 1 skipped, and 0 flaky. Six separate Node files pass 16/16. The universal test target is unmet.                   |
 | Phone comparisons                                                                | Fourteen main/R4 pairs, two R3/R4 pairs, four actual live recordings, and two live pairs are complete. The separate clips branch is never merged.                                                                                                           |
 
 ## Baselines and scope
@@ -278,6 +278,29 @@ reports remain. Six existing Node test files outside Playwright's spec pattern a
 under Node 22: sixteen tests pass, with zero failures or skips. Their file hashes match main, and
 their original TAP and runtime record are retained.
 
+<!-- r4-final-tests:start -->
+
+Final snapshot, 2026-10-16T13:16:15.830530+00:00: **331/331 complete whole-file reports: 2888
+passed, 15 failed, 1 skipped, and 0 flaky. Six separate Node files pass 16/16. The universal test
+target is unmet.** The existing Video to 3D calibration case skips because its private
+counterexample clips are outside the repository. This round adds no skip and lowers no threshold. 0
+files remain without a complete report.
+
+Existing files, excluding the two new round 4 files: 329/329, 2868 passed, 15 failed, and 1 skipped.
+The two new files have 20 passing tests, 0 failures, and 0 skips. Photo checkpoint families: 25/25
+files, 187 passed, 0 failed, and 0 skipped. The checkpoint refs still match their published source
+and clips commits.
+
+Latest failed files: `cdx-mir.spec.mjs`, `fx4-engine.spec.mjs`, `hh5-animals.spec.mjs`,
+`live-engine.spec.mjs`, `live2.spec.mjs`, `man4.spec.mjs`, `man5.spec.mjs`, `qrl.spec.mjs`,
+`smoke.spec.mjs`, `st5.spec.mjs`, `tp2.spec.mjs`, `vol.spec.mjs`. The complete same-suite main
+control was not run; these failures are not attributed to main. Every earlier failed report remains
+in the archive, with its original hash. The final timing scheduler and recheck budget are recorded
+in the isolation ledger. Reports from earlier application pins retain those pins; a later
+source-equivalence proof does not relabel their measured results.
+
+<!-- r4-final-tests:end -->
+
 Focused checks already completed:
 
 - Six initial round 4 tests: five local formats on the phone, all 81 sample pairs, scalar/WASM pixel
@@ -307,7 +330,8 @@ file initially passed 13/14; its late-observer and explicit-capture regressions 
 changing the test. Its complete rerun passes **14/14** at the first explicit-capture pin
 `b931bb7b456e8bd45cfa02ab389a54b8564b11ac6de973845855f298331138f1`. The later active-view guard
 passes the same unchanged paused-seek assertion at the published pin; it excludes hidden clip meshes
-from other toys' captures. The final thirteen-test selection-file rerun is recorded in the ledger.
+from other toys' captures. The complete thirteen-test selection file is rerun on the published
+application: 13 passed, 0 failed, and 0 skipped.
 
 All short samples and all five original uploads improve both reported temporal measures on both
 profiles. The unresolved jitter result is long Elephants Dream on phone. The six worse edge-flip
@@ -322,12 +346,20 @@ as an octet stream. Its standard `application/manifest+json` MIME type fixes tha
 the complete unchanged file then passed **9/9**. This is a test-server fix, not a change to the PDF
 product path.
 
+The unchanged manual PDF test reports a font-environment failure: its output embeds Noto Sans where
+the existing guard requires static Inter. The default host font is OpenAI Sans. Static Inter
+downloads from the author, GitHub, and npm fail with upstream HTTP 503 responses; direct access also
+fails. A bundled local Inter Variable font has a different PostScript family and is unsuitable for
+the existing guard. No font was renamed, alias changed, or guard disabled. The font-environment
+record preserves the observed failure and attempted sources. Its
+[original font license](https://github.com/rsms/inter/blob/master/LICENSE.txt) was opened.
+
 ### Photo to 3D
 
 Eleven core Photo functions in the shared Sharp module are byte-identical to current main, and
 Photo/depth/relief files are unchanged by round 4. The full run includes `psv*`, `p3d*`,
 `cdx-p3d2-*`, `phf*`, `pdp*`, `cdx-pics*`, and main's newer Photo regression families. The 51-test
-Photo scan file passed. Complete family counts are pending.
+Photo scan file passed. Photo checkpoint families: 25/25 files, 187 passed, 0 failed, and 0 skipped.
 
 Main already differs from the October 14 Photo checkpoint in ten Photo/depth files. This branch
 carries those upstream changes; it does not claim the whole current Photo implementation is
@@ -402,5 +434,11 @@ contains the phone films, responsive gallery, original per-frame JSON ledgers, s
 hashes, compressed native traces, and original compressed Playwright reports. Each compressed report
 records both compressed and original SHA-256. Earlier failures and rejected trials remain available.
 The primary branch has no gallery movies or test-report bulk.
+
+The next performance work is to profile native picture transfer and cap/texture work with supported
+GPU timers, then test bounded matching picture/depth packets for short clips. A temporal depth prior
+needs independent acuity and reference checks while retaining the current coverage and stability
+measures. The remaining long-film temporal regressions, two phone presentation-clock gaps, and
+unchanged failing specs must be resolved before claiming the complete Goal.
 
 Rule check: none.

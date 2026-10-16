@@ -1,6 +1,6 @@
 # Round 4 measurement tables
 
-Generated 2026-10-16T12:21:32.757Z. Missing cases are pending, never passes.
+Generated 2026-10-16T13:16:16.037Z. Missing cases are pending, never passes.
 
 ## Picture coverage and stability
 
@@ -95,8 +95,8 @@ cannot supply 20 distinct source pictures per second.
 
 ## Repeated clean cadence
 
-A full paired pass covers all fourteen inputs; Bunny and Horse receive one additional pass to check
-the closest comparison with main. The first-pass table above keeps the Operator's original
+A full paired pass covers all fourteen inputs; Bunny and Horse receive one additional pass to
+revisit the Operator's original comparison. The first-pass table above keeps the Operator's original
 per-window protocol; this table retains each pass's median and the worst observed interval across
 passes. Missing repeats stay explicit. Source-clock rates are proxies, as described above.
 
@@ -224,14 +224,14 @@ media-clock age at acceptance, not physical audio-to-display latency.
 
 ## Test ledger
 
-223/331 complete whole-file reports. Latest totals:
-{"passed":2243,"failed":15,"skipped":1,"flaky":0,"expectedFailures":0}. Every earlier failure
+331/331 complete whole-file reports. Latest totals:
+{"passed":2888,"failed":15,"skipped":1,"flaky":0,"expectedFailures":0}. Every earlier failure
 remains in the ledger. Individual run revisions were not recorded by Playwright; the full suite
 spans implementation and upstream merges, with affected files rerun.
 
-Latest failed files: cdx-mir.spec.mjs, fx4-engine.spec.mjs, hh3-holidays.spec.mjs,
-hh5-animals.spec.mjs, live-engine.spec.mjs, live2.spec.mjs, man4.spec.mjs, phf.spec.mjs,
-qr4-craft.spec.mjs, qrl.spec.mjs, smoke.spec.mjs, tp2.spec.mjs.
+Latest failed files: cdx-mir.spec.mjs, fx4-engine.spec.mjs, hh5-animals.spec.mjs,
+live-engine.spec.mjs, live2.spec.mjs, man4.spec.mjs, man5.spec.mjs, qrl.spec.mjs, smoke.spec.mjs,
+st5.spec.mjs, tp2.spec.mjs, vol.spec.mjs.
 
 Six unchanged Node test files outside the Playwright pattern: 16 passed, 0 failed, 0 skipped; see
 original TAP and runtime ledger. These are separate from Playwright totals.
