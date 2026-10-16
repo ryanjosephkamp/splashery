@@ -10,6 +10,11 @@ The actual repeat studies cover 72 input/profile pairs across 36 inputs, with on
 measured quality differences are zero. The remaining 164 profiles have zero tolerance. The three
 bounded repeat records keep their incomplete-corpus flags; no missing capture is invented.
 
+An [independent check of the initial repeats](initial-repeat-integrity.json) decoded all 648 native
+color poses and rehashed all 3,240 artifacts across those 72 profiles. Every repeated native color
+pixel and quality value matches the baseline. Each of the three original bounded capture records
+retains its incomplete-corpus flag.
+
 The gzip files preserve the exact original JSON bytes. Their compressed and decompressed hashes are
 listed in [evidence.json](evidence.json). Relative image paths describe the original capture layout;
 native PNGs are retained locally and are not included in this numeric mirror. Original source photos

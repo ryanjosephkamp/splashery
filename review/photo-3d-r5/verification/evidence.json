@@ -90,6 +90,10 @@
     {
       "file": "verify-checkpoint-roster.py.txt",
       "sha256": "d908fcf64b8721560d8531144dda8f6c47b582debacbe3b62692712f5488b468"
+    },
+    {
+      "file": "verify-initial-repeats.mjs.txt",
+      "sha256": "3bfceafc60bf09ea0cbca9d040b0d152b7693fe9b3372632712758baaded1fe3"
     }
   ],
   "repeatPolicy": "72 actual paired profiles across 36 inputs; one repeat each. All measured quality differences are zero. The remaining 164 profiles have zero acceptance tolerance. This is not complete-corpus repeat-noise coverage.",
@@ -125,5 +129,16 @@
     "uncompressedSha256": "33ac9aa97ecb84d0d4b0b276d27645a7619a69cdc3c5df0877b456e3cd3a628f",
     "bytes": 48354,
     "formattedCopy": "current-comparison.json"
+  },
+  "initialRepeatIntegrity": {
+    "file": "initial-repeat-integrity-original.json.gz",
+    "sha256": "ef3bd9be14a9ded90e7f2b9fc152c6e593d218eb88c27482492b2dc5f2e2f5ab",
+    "uncompressedSha256": "edd474b251189c02fc0722272c1c25be8651e57b7bbf3caa1bb1818fcc782db0",
+    "formattedCopy": "initial-repeat-integrity.json",
+    "profiles": 72,
+    "colorPosesDecoded": 648,
+    "artifactHashesChecked": 3240,
+    "nativeColorDifferences": 0,
+    "qualityDifferences": 0
   }
 }
