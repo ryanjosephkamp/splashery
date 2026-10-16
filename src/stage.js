@@ -678,6 +678,17 @@ export class Stage {
 
   setSheetFaceLayer(sheet, hasFace) {
     if (sheet.faceBacked === hasFace) return;
+    const toy = this.toy;
+    if (hasFace && toy && !toy.pictureSortBounds) {
+      // Gaussian sheets supplied this motion volume to the unified sorter.
+      // Without them, its distance range uses the kit's thin, closed-book
+      // bounds, leaving turning covers and leaves outside its sortable range.
+      // Keep the same volume on the kit without drawing hidden paper.
+      const bounds = toy.entity.gsplat.customAabb.clone();
+      bounds.add(new pc.BoundingBox(new pc.Vec3(), new pc.Vec3(1.2, 1.2, 1.2)));
+      toy.entity.gsplat.customAabb = bounds;
+      toy.pictureSortBounds = true;
+    }
     // The opaque face supplies both its printed front and white reverse.
     // Do not allocate a second splat work buffer for hidden paper.
     sheet.entity.gsplat.enabled = !hasFace;
