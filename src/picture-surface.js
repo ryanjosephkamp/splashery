@@ -45,9 +45,11 @@ const FS = `
 uniform sampler2D uColor;
 uniform sampler2D uMask;
 uniform vec4 uKeep;
+uniform vec4 uColorFlags;
 varying vec2 vUv;
 void main(void) {
   vec4 color = texture2D(uColor, vUv, -1.0);
+  if (uColorFlags.x > 0.5) color = vec4(color.rrr, 1.0);
   if (uKeep.z > 0.5) {
     float d = texture2D(uMask, vUv).r;
     if (d < uKeep.x || d > uKeep.y) discard;
@@ -102,10 +104,12 @@ var uColorSampler: sampler;
 var uMask: texture_2d<f32>;
 var uMaskSampler: sampler;
 uniform uKeep: vec4f;
+uniform uColorFlags: vec4f;
 varying vUv: vec2f;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
-  let color = textureSampleBias(uColor,uColorSampler,input.vUv,-1.0);
+  var color = textureSampleBias(uColor,uColorSampler,input.vUv,-1.0);
+  if (uniform.uColorFlags.x > 0.5) { color = vec4f(color.rrr,1.0); }
   if (uniform.uKeep.z > 0.5) {
     let d = textureSample(uMask,uMaskSampler,input.vUv).r;
     if (d < uniform.uKeep.x || d > uniform.uKeep.y) { discard; }
@@ -116,6 +120,20 @@ varying vUv: vec2f;
 
 // Pure geometry is also used by the page-surface regression checks. Relief is
 // sampled at the same normalized source coordinates as the splat builder.
+export function opaqueGray(rgba) {
+  if (!rgba || rgba.length % 4) return false;
+  for (let i = 0; i < rgba.length; i += 4)
+    if (rgba[i] !== rgba[i + 1] || rgba[i] !== rgba[i + 2] || rgba[i + 3] !== 255) return false;
+  return true;
+}
+
+export function grayPixels(rgba) {
+  if (!opaqueGray(rgba)) return null;
+  const pixels = new Uint8Array(rgba.length / 4);
+  for (let i = 0; i < pixels.length; i++) pixels[i] = rgba[i * 4];
+  return pixels;
+}
+
 export function surfaceGrid(geom, w, h, relief = null) {
   const flat = geom.leaf ? 32 : 1;
   const cols = relief?.amount ? Math.min(128, Math.max(32, relief.w)) : flat;
@@ -189,7 +207,8 @@ export class PictureSurface {
       name: "picture-face",
       width: data.w,
       height: data.h,
-      format: pc.PIXELFORMAT_RGBA8,
+      format: data.pixels ? pc.PIXELFORMAT_R8 : pc.PIXELFORMAT_RGBA8,
+      ...(data.pixels ? { levels: [data.pixels] } : {}),
       mipmaps: true,
       minFilter: pc.FILTER_LINEAR_MIPMAP_LINEAR,
       magFilter: pc.FILTER_LINEAR,
@@ -197,9 +216,10 @@ export class PictureSurface {
       addressU: pc.ADDRESS_CLAMP_TO_EDGE,
       addressV: pc.ADDRESS_CLAMP_TO_EDGE,
     });
-    this.color.setSource(data.source);
+    if (!data.pixels) this.color.setSource(data.source);
     this.color.upload();
     this.material.setParameter("uColor", this.color);
+    this.material.setParameter("uColorFlags", [data.pixels ? 1 : 0, 0, 0, 0]);
     this.mask = null;
     const r = data.relief;
     if (r?.keep) {

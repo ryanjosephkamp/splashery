@@ -34,7 +34,7 @@
 import * as pc from "./pc.js";
 import { buildSheet } from "./picture-splats.js";
 import { safeLinkURL, clampRegion } from "./media.js";
-import { PictureSurface } from "./picture-surface.js";
+import { PictureSurface, grayPixels, opaqueGray } from "./picture-surface.js";
 
 // Per device tier, for one sheet: the most splats a photo or a frame gets
 // ("pixels", and "screen" for video, whose texture uploads every frame),
@@ -670,6 +670,7 @@ export class Pictures {
       const pixels = backing
         ? backing.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, bw, bh).data
         : null;
+      const monochrome = solid && opaqueGray(pixels);
       const geom = this.geometry(sheet, media.aspect(want.page), bw, bh);
       let data = await buildOffThread({
         pixels,
@@ -699,6 +700,7 @@ export class Pictures {
         w = w2;
         h = h2;
       }
+      this.compactSurface(data, monochrome);
       if (this.destroyed || media !== this.media) return null;
       data.w = w;
       data.h = h;
@@ -719,6 +721,22 @@ export class Pictures {
       this.busy = false;
       this.stage.requestRender();
     }
+  }
+
+  // Opaque grayscale pages retain every source value in one channel. Check
+  // the full raster before compacting; a reduced backing can miss a tiny
+  // colored mark. Colored and transparent inputs keep their original pixels.
+  compactSurface(data, candidate) {
+    const face = data.surface;
+    if (!face || !candidate) return;
+    const c = face.source;
+    const rgba = c.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, c.width, c.height).data; // prettier-ignore
+    const mono = grayPixels(rgba);
+    if (!mono) return;
+    face.pixels = mono;
+    face.sourceBytes = mono.byteLength;
+    face.source = null;
+    c.width = c.height = 1;
   }
 
   // Lane Books: the recipe's pictures.decorate(canvas, { page, name, sheet,
@@ -749,11 +767,13 @@ export class Pictures {
     if (this.destroyed || media !== this.media) return null;
     const t1 = performance.now();
     const pixels = canvas.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w, h).data; // prettier-ignore
+    const monochrome = this.solid && opaqueGray(pixels);
     const geom = this.geometry(sheet, media.aspect(want.page), w, h, r);
     const rel = want.relief;
     const relief = rel ? { w: rel.w, h: rel.h, d: Float32Array.from(rel.d), amount: (rel.depth || 0) * this.fitScale, nearest: !!rel.nearest, keep: Array.isArray(rel.keep) ? rel.keep.slice(0, 2) : null } : null; // prettier-ignore
     const data = await buildOffThread({ pixels, w, h, method: want.method, relief, backingOnly: this.solid, ...geom }); // prettier-ignore
     if (this.solid) data.surface = { source: canvas, geom, w, h, relief };
+    this.compactSurface(data, monochrome);
     if (this.destroyed || media !== this.media) return null;
     data.w = w;
     data.h = h;
@@ -778,7 +798,9 @@ export class Pictures {
       Object.values(d)
         .filter(ArrayBuffer.isView)
         .reduce((n, a) => n + a.byteLength, 0) +
-      (d.surface ? d.w * d.h * 4 + (d.surface.relief?.d?.byteLength || 0) : 0);
+      (d.surface
+        ? (d.surface.sourceBytes ?? d.w * d.h * 4) + (d.surface.relief?.d?.byteLength || 0)
+        : 0);
     for (const d of this.cache.values()) {
       total += d.count;
       bytes += cost(d);
