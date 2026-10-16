@@ -37,18 +37,20 @@ test("part d is registered on the Pictures and pages shelf behind labs", async (
   expect(pictures[ID]).toBe(RECIPES[ID]);
 });
 
-test("names use the existing word paths, preserve spaces, and reject unsupported or oversized input", async () => {
+// Lane PT1 rebuilt the toy to match Toy Box (October 16, 2026): any text,
+// emoji included, through src/text-splats.js; tools on a stage row; drop
+// pieces; the site's paint. Its own tests are in tests/pt1.spec.mjs; these
+// keep Codex task 78d's checks that still hold, brought up to date.
+test("names keep what was typed, any script or emoji, and reject empty or oversized input", async () => {
   const { RECIPES, nameLayout } = await load();
   const input = RECIPES[ID].input;
-  expect(await input.read("  Ryan   Kamp  ")).toMatchObject({ name: "RYAN KAMP", paints: "" });
-  expect(await input.read("ann-marie")).toMatchObject({ name: "ANN-MARIE" });
-  const { charPath } = await import("../src/packs/maths.js");
+  expect(await input.read("  Ryan   Kamp  ")).toMatchObject({ name: "Ryan Kamp", paints: "" });
+  expect(await input.read("ann-marie")).toMatchObject({ name: "ann-marie" });
+  expect(await input.read("💩")).toMatchObject({ name: "💩" });
   const layout = nameLayout("RYAN KAMP");
   expect(layout.letters.map((l) => l.char).join("")).toBe("RYANKAMP");
-  expect(layout.letters[0].path).toEqual(charPath("R", 192));
   expect(layout.letters[0].center[1]).toBeGreaterThan(layout.letters[4].center[1]);
-  for (const text of ["", "   ", "<script>", "A".repeat(25), "💩"])
-    await expect(input.read(text)).rejects.toThrow();
+  for (const text of ["", "   ", "A".repeat(49)]) await expect(input.read(text)).rejects.toThrow();
 });
 
 test("five detail steps honor the device budget and build finite, deterministic solid letters", async () => {
@@ -60,10 +62,10 @@ test("five detail steps honor the device budget and build finite, deterministic 
   expect(nameBudget(8000, "auto")).toBe(8000);
   for (const detail of ["12000", "24000", "48000", "96000", "192000"]) {
     const { ctx } = await build({ name: "ADA", detail }, 200000);
-    // Kit shares are rounded separately for each surface.
-    expect(Math.abs(ctx.buf.count - Number(detail))).toBeLessThanOrEqual(4);
+    expect(ctx.buf.count).toBe(Number(detail));
     expect(Array.from(ctx.buf.pos).every(Number.isFinite)).toBe(true);
-    expect(ctx.buf.anim.filter((_, i) => i % 4 === 2).reduce((a, b) => Math.max(a, b), 0)).toBe(2);
+    // Three letters of four pieces each: tokens 0 to 11.
+    expect(ctx.buf.anim.filter((_, i) => i % 4 === 2).reduce((a, b) => Math.max(a, b), 0)).toBe(11); // prettier-ignore
     expect(ctx.kit.data.layout.letters).toHaveLength(3);
   }
   const a = (await build()).ctx.buf;
@@ -77,53 +79,57 @@ test("five detail steps honor the device budget and build finite, deterministic 
   ).toBe(true);
 });
 
-test("all five verbs move entire letters rigidly and return them exactly home, including a second tap", async () => {
+test("every old verb's Play moves whole pieces rigidly and returns them exactly home, twice", async () => {
   for (const verb of ["spin", "poke", "paint", "drop", "blow"]) {
     const { recipe, ctx } = await build({ name: "ADA", verb });
     const data = ctx.kit.data;
     const rest = blank();
-    recipe.drive(0, { play: 0 }, rest, { data });
+    recipe.drive(0, { play: 0 }, rest, { data, time: 0 });
     let travel = 0;
+    let t = 0;
     for (const n of [1, 2]) {
       for (let j = 0; j <= 100; j++) {
         const out = blank();
-        recipe.drive(j / 30, { play: 1 - j / 100 }, out, {
+        t += 1 / 30;
+        recipe.drive(t, { play: 1 - j / 100 }, out, {
           data,
-          tap: { key: "play", pick: null, n },
+          time: t,
+          tap: { key: "play", point: null, pick: null, n },
         });
-        expect(out.tokens).toHaveLength(3);
+        expect(out.tokens).toHaveLength(12);
         for (const token of out.tokens) {
           expect([...token.offset, ...token.quat].every(Number.isFinite)).toBe(true);
           expect(Math.hypot(...token.quat)).toBeCloseTo(1, 10);
-          // Two points on the same letter keep their distance under its transform.
+          // Two points on the same piece keep their distance under its transform.
           const p = quatRotate(token.quat, [0.1, 0.2, 0.03]);
           const q = quatRotate(token.quat, [-0.2, 0.05, -0.02]);
           expect(Math.hypot(...p.map((v, i) => v - q[i]))).toBeCloseTo(
             Math.hypot(0.3, 0.15, 0.05),
             10,
           );
-          travel = Math.max(travel, Math.hypot(...token.offset), Math.abs(token.quat[2]));
+          travel = Math.max(travel, Math.hypot(...token.offset));
         }
-        if (j === 100) expect(out.tokens).toEqual(rest.tokens);
+        if (j === 100)
+          for (const token of out.tokens) {
+            expect(token.offset).toEqual([0, 0, 0]);
+            expect(token.quat).toEqual([0, 0, 0, 1]);
+          }
       }
     }
     expect(travel, verb).toBeGreaterThan(0.12);
   }
 });
 
-test("tapping a letter chooses its own note, and paint survives detail changes and scene links", async () => {
-  const { recipe, ctx } = await build({ name: "ADA", verb: "paint", color: "violet" });
-  const hit = recipe.action.at(ctx.kit.data.layout.letters[1].center);
-  expect(hit).toMatchObject({ key: "play", pick: 1 });
-  expect(hit.options.paints).toBe(".4.");
-  const painted = await build({ name: "ADA", ...hit.options, detail: "12000" });
-  const finer = await build({ name: "ADA", ...hit.options, detail: "48000" });
+test("each letter has its own note, and old painted letters survive detail changes and links", async () => {
+  const { notesFor } = await load();
+  const painted = await build({ name: "ADA", paints: ".4.", detail: "12000" });
+  const finer = await build({ name: "ADA", paints: ".4.", detail: "48000" });
   expect(painted.ctx.kit.data.colors).toEqual(finer.ctx.kit.data.colors);
-  expect(painted.ctx.kit.data.colors[1]).toBe("#6a2cff");
-  const notes = parseNotes(TOY_SOUNDS[ID].notes).flat();
-  expect(notes).toHaveLength(24);
-  expect(new Set(notes).size).toBe(24);
-  expect(parseNotes(recipe.toySound({ name: "ADA" }).notes)).toHaveLength(3);
+  expect(painted.ctx.kit.data.colors[1].map((v) => Math.round(v * 255))).toEqual([106, 44, 255]);
+  const notes = notesFor(painted.ctx.kit.data.layout);
+  expect(new Set(notes).size).toBe(3);
+  expect(parseNotes(notes.join(" "))).toHaveLength(3);
+  expect(TOY_SOUNDS[ID]).toMatchObject({ voice: "bar" });
   const scene = normalizeScene({
     version: 3,
     toy: { kind: "builtin", id: ID, options: painted.options },
@@ -158,43 +164,34 @@ test("phone input, error recovery, paint, and the actual #s= link reload the nam
   await page.locator("#toy-input-text").fill("Ada Lovelace");
   await page.locator("#toy-input-go").click();
   const options = () => page.evaluate(() => window.__splashery.player.scene.toy.options);
-  await expect.poll(options).toMatchObject({ name: "ADA LOVELACE" });
-  await page.locator("#toy-input-text").fill("<script>");
+  await expect.poll(options).toMatchObject({ name: "Ada Lovelace" });
+  await page.locator("#toy-input-text").fill("   ");
   await page.locator("#toy-input-go").click();
   await expect(page.locator("#toy-input .warning")).toBeVisible();
-  expect(await options()).toMatchObject({ name: "ADA LOVELACE" });
-  await page
-    .locator("#toy-options label")
-    .filter({ hasText: /^Action/ })
-    .locator("select")
-    .selectOption("paint");
-  await page
-    .locator("#toy-options label")
-    .filter({ hasText: /^Paint color/ })
-    .locator("select")
-    .selectOption("violet");
-  // Each option change rebuilds the toy; tap a letter only once the last rebuild (violet paint) is up.
-  await page.waitForFunction(() => {
+  expect(await options()).toMatchObject({ name: "Ada Lovelace" });
+  await page.evaluate(() => window.__splashery.app.ui.collapseSheet());
+  await page.locator('#toy-toolbar [data-toy-tool="paint"]').click();
+  await page.locator('#toy-toolbar [data-toy-tool="paint-violet"]').click();
+  await page.waitForFunction(() => !!window.__splashery.player.motion.ctx?.kit?.data?.sim);
+  const stamps = await page.evaluate(() => {
     const p = window.__splashery.player;
-    const o = p.toyInfo?.options;
-    return o?.verb === "paint" && o.color === "violet" && !!p.motion.ctx?.kit?.data;
+    const c = p.motion.ctx.kit.data.layout.letters[0].center;
+    const at = [c[0], c[1], 0.17];
+    p.grabStart(p.fromRecipe(at), ...p.screenPoint(at));
+    p.grabEnd();
+    return p.scene.paint.stamps;
   });
-  await page.evaluate(() => {
-    const p = window.__splashery.player;
-    const data = p.motion.ctx.kit.data;
-    return p.switchTo(p.toyInfo.recipe.action.at(data.layout.letters[0].center));
-  });
-  await expect.poll(options).toMatchObject({ paints: expect.stringMatching(/^4/) });
+  expect(stamps).toHaveLength(1);
+  expect(stamps[0][4]).toBe("#6a2cff");
   await page.evaluate(() => window.__splashery.app.copyLink());
   const url = page.url();
   expect(url).toContain("#s=");
+  await page.goto("about:blank");
   await page.goto(url);
   await page.waitForSelector("body[data-ready='true']");
   await expect(page.locator("#toy-status")).toHaveText(/^Your name in splats/);
-  expect(await options()).toMatchObject({
-    name: "ADA LOVELACE",
-    paints: expect.stringMatching(/^4/),
-  });
+  expect(await options()).toMatchObject({ name: "Ada Lovelace" });
+  expect(await page.evaluate(() => window.__splashery.player.scene.paint.stamps)).toEqual(stamps);
   expect(errors).toEqual([]);
 });
 
@@ -202,7 +199,7 @@ for (const [width, height] of [
   [390, 844],
   [1440, 900],
 ]) {
-  test(`real GPU renders all five actions and a screenshot at ${width}×${height}`, async ({
+  test(`real GPU renders all five tools and a screenshot at ${width}×${height}`, async ({
     page,
   }) => {
     const errors = [];
@@ -213,22 +210,38 @@ for (const [width, height] of [
       const p = window.__splashery.player;
       p.opts.idleDelay = 1e9;
       p.idle.weight = 0;
-      p.frozen = true;
     });
     await page.screenshot({ path: `tests/screenshots/cdx-pfd-name-toy-${width}x${height}.png` });
-    for (const verb of ["spin", "poke", "paint", "drop", "blow"]) {
-      const diff = await page.evaluate(async (verb) => {
+    for (const tool of ["spin", "poke", "paint", "drop", "blow"]) {
+      const diff = await page.evaluate(async (tool) => {
         const { app, player: p } = window.__splashery;
-        await app.setToyOption("verb", verb);
-        if (verb === "blow") app.setLook({ background: "#111111" });
+        const data = p.motion.ctx.kit.data;
+        const c = data.layout.letters[1].center;
+        const at = [c[0], c[1], 0.17];
         return app.withCapture([390, 390], async (base) => {
-          const frame = async (v) => {
-            p.motion.setControl("play", v, { snap: true });
-            const c = await p.renderAt(p.time, base.cam);
-            return c.getContext("2d").getImageData(0, 0, 390, 390).data;
+          const frame = async () => {
+            const cv = await p.renderAt(p.time, base.cam);
+            return cv.getContext("2d").getImageData(0, 0, 390, 390).data;
           };
-          const rest = await frame(0);
-          const action = await frame(0.65);
+          const rest = await frame();
+          if (tool === "drop") p.playTool("drop");
+          else if (tool !== "spin") p.playTool(tool);
+          if (tool === "paint") p.playTool("paint-ink");
+          if (tool === "spin" || tool === "poke") p.act(p.fromRecipe(at));
+          if (tool === "paint" || tool === "blow") p.grabStart(p.fromRecipe(at), ...p.screenPoint(at)); // prettier-ignore
+          if (tool === "paint")
+            for (const l of data.layout.letters.slice(0, 4)) {
+              const q = [l.center[0], l.center[1], 0.17];
+              p.grabAt(...p.screenPoint(q));
+              p.grabAt(...p.screenPoint([q[0], q[1] - 0.2, 0.17]));
+            }
+          let action;
+          for (let k = 0; k < 6; k++) action = await (async () => {
+            p.time += 0.08;
+            return frame();
+          })(); // prettier-ignore
+          if (tool === "paint" || tool === "blow") p.grabEnd();
+          if (tool === "drop") p.playTool("drop");
           let changed = 0;
           for (let i = 0; i < rest.length; i += 4)
             if (
@@ -238,30 +251,11 @@ for (const [width, height] of [
               30
             )
               changed++;
-          let edgePixels = 0;
-          if (verb === "blow") {
-            // Reserve visible room for the whole gust, not only its rest pose.
-            for (let step = 0; step <= 10; step++) {
-              const pixels = await frame(step / 10);
-              for (let y = 0; y < 390; y++)
-                for (let x = 0; x < 390; x++) {
-                  if (x >= 6 && x < 384 && y >= 6 && y < 384) continue;
-                  const i = (y * 390 + x) * 4;
-                  if (
-                    Math.abs(pixels[i] - 17) +
-                      Math.abs(pixels[i + 1] - 17) +
-                      Math.abs(pixels[i + 2] - 17) >
-                    30
-                  )
-                    edgePixels++;
-                }
-            }
-          }
-          return { changed, edgePixels };
+          return changed;
         });
-      }, verb);
-      expect(diff.changed, verb).toBeGreaterThan(400);
-      expect(diff.edgePixels, `${verb} stays inside the capture`).toBe(0);
+      }, tool);
+      expect(diff, tool).toBeGreaterThan(400);
+      await page.evaluate(() => window.__splashery.player.clearPaint());
     }
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(
       true,
