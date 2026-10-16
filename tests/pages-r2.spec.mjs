@@ -200,6 +200,9 @@ test.describe("sharp pages in the real renderer", () => {
   test("still pages own continuous faces, moving media and the neighboring frame retain their splats", async ({
     page,
   }) => {
+    // Open small, then enlarge the same viewer: the backing really must
+    // grow, rather than fitting inside an earlier full-size allocation.
+    await page.setViewportSize({ width: 130, height: 282 });
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     page.on("console", (m) => {
@@ -235,6 +238,14 @@ test.describe("sharp pages in the real renderer", () => {
           });
         return result;
       };
+    });
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.evaluate(() => {
+      window.__splashery.player.camera.zoomBy(0.04);
+      window.__splashery.player.stage.requestRender();
+    });
+    await page.waitForFunction(() => window.__pagesR2Replacements.length > 0, null, {
+      timeout: 120000,
     });
     for (const file of ["photo.jpg", "anim.gif", "photo.jpg", "clip.webm"]) {
       await page.evaluate(
