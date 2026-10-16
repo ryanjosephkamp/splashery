@@ -73,9 +73,10 @@ test.describe("Chapter 3: the grid-to-torus figure moves", () => {
     await expect(fig).toHaveClass(/live/);
     const ring = () =>
       page.locator("#uv-ring").evaluate((r) => `${r.getAttribute("cx")},${r.getAttribute("cy")}`);
-    const a = await ring();
-    await page.waitForTimeout(1500);
-    expect(await ring()).not.toBe(a);
+    // The ring walks a cell every 0.19 s once the figure is on screen. A busy runner can start the
+    // animation late, so watch until it has stood on three different cells.
+    const seen = new Set([await ring()]);
+    await expect.poll(async () => seen.add(await ring()).size, { timeout: 15_000 }).toBeGreaterThanOrEqual(3); // prettier-ignore
     await expect(fig.locator("canvas")).toHaveAttribute("aria-label", /torus/);
     await expect(fig.locator("image.fig-still")).toHaveAttribute("href", "img/gallery-torus.jpg"); // the PDF's still
   });

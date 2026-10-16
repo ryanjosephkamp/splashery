@@ -3891,6 +3891,16 @@
     "l": 1
   },
   {
+    "t": "Shape morph",
+    "u": "toys/shape-morph/",
+    "k": "toy",
+    "s": "Lab",
+    "d": "Pick a form in the Toy tab. Drag to push the splats; tap to scatter and re-form.",
+    "w": "shape morph lab lab overprint word lorenz attractor klein bottle gyroid loop qr code splat cloud morph ink drag shape-morph",
+    "i": "../assets/toys/shape-morph/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Splat field",
     "u": "toys/splat-field/",
     "k": "toy",
