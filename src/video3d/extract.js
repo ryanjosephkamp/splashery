@@ -233,7 +233,7 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
             /* The original presentation deadline still supplies retry advice. */
           },
         );
-      }, 100);
+      }, 16);
     };
     const settled = () => {
       if (video.seeking || video.readyState < 2) return;

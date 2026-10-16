@@ -112,3 +112,17 @@ test("a canceled older recovery cannot change the newer seek's speed or playback
   expect(video.paused).toBe(true);
   expect(video.callbacks.size).toBe(0);
 });
+
+test("a promptly available recovery picture can finish inside a short caller deadline", async () => {
+  const { seekPresented } = await import("../src/video3d/extract.js");
+  const video = new Video();
+  video.play = async () => {
+    video.rates.push(video.playbackRate);
+    video.paused = false;
+    queueMicrotask(() => video.present(0.4));
+  };
+  expect(await seekPresented(video, 0.333, { timeoutMs: 80 })).toBe(0.4);
+  expect(video.rates).toEqual([0.125]);
+  expect(video.playbackRate).toBe(1.5);
+  expect(video.paused).toBe(true);
+});
