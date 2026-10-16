@@ -1867,7 +1867,7 @@ test.describe("Playground release UI", () => {
     });
 
     test(`a fresh visit opens a Featured toy with labs=${labs}`, async ({ page }) => {
-      await loadApp(page, `/?renderer=webgl2&profile=weak&labs=${labs}`);
+      await loadApp(page, `/?renderer=webgl2&profile=weak&labs=${labs}&first-toy=featured`);
       const id = await page.evaluate(() => window.__splashery.player.scene.toy.id);
       expect(FEATURED_IDS).toContain(id);
       if (!labs) expect(TOYS.find((t) => t.id === id).labs).not.toBe(true);
