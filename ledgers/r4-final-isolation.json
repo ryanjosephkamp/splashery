@@ -254,6 +254,70 @@
       "pid": 172821,
       "exit": 0,
       "finishedAt": 1792152368.0443547
+    },
+    {
+      "name": "whole-file-phf",
+      "startedAt": 1792155781.124422,
+      "budgetSeconds": 120,
+      "pid": 209578,
+      "exit": 0,
+      "finishedAt": 1792155837.8830023
+    },
+    {
+      "name": "whole-file-qr4-craft",
+      "startedAt": 1792155837.8837543,
+      "budgetSeconds": 120,
+      "pid": 210035,
+      "exit": 0,
+      "finishedAt": 1792155930.8198678
+    },
+    {
+      "name": "whole-file-cdx-mp2-r4",
+      "startedAt": 1792155930.8209684,
+      "budgetSeconds": 420,
+      "pid": 210207,
+      "exit": 0,
+      "finishedAt": 1792156422.2363698
+    },
+    {
+      "name": "whole-file-man7a",
+      "startedAt": 1792156422.2376556,
+      "budgetSeconds": 90,
+      "pid": 211356,
+      "exit": 0,
+      "finishedAt": 1792156452.8617935
+    },
+    {
+      "name": "whole-file-hh3-holidays",
+      "startedAt": 1792156452.8625336,
+      "budgetSeconds": 90,
+      "pid": 212030,
+      "exit": 0,
+      "finishedAt": 1792156506.3283744
+    },
+    {
+      "name": "whole-file-man5",
+      "startedAt": 1792156506.332649,
+      "budgetSeconds": 59,
+      "pid": 212356,
+      "exit": 1,
+      "finishedAt": 1792156537.1874998
+    },
+    {
+      "name": "whole-file-st5",
+      "startedAt": 1792156537.188607,
+      "budgetSeconds": 47,
+      "pid": 213008,
+      "exit": 1,
+      "finishedAt": 1792156547.4663463
+    },
+    {
+      "name": "whole-file-tp2-engine",
+      "startedAt": 1792156547.467224,
+      "budgetSeconds": 57,
+      "pid": 213364,
+      "exit": 0,
+      "finishedAt": 1792156574.3181095
     }
   ],
   "waitingFor": [110091, 110092, 99743, 96288],
@@ -270,5 +334,84 @@
   "timingsEndedAt": 1792151146.6633031,
   "testOrderDecision": "Resume unchanged full-suite remaining files under CI Node 22 before remaining isolated failure rechecks, to maximize complete existing-test coverage within the 12-hour deadline. No measurements overlap tests.",
   "schedulerReplacementAt": 1792152368.0453815,
-  "replacementSuitePid": 173743
+  "replacementSuitePid": 173743,
+  "adaptiveRecheckControllerPid": 209249,
+  "recheckBudgetDecision": "Complete the existing suite first; then unchanged whole-file rechecks that fit before 13:17 UTC. Fidelity and CI-runtime hash regressions take priority. Preserve every superseded report.",
+  "replacementSuiteFinishedAt": 1792155780.8502471,
+  "replacementSuiteExitEncoded": 256,
+  "replacementSuiteExit": 1,
+  "adaptiveRecheckQueue": [
+    "phf",
+    "qr4-craft",
+    "cdx-mp2-r4",
+    "cdx-mir",
+    "man7a",
+    "hh3-holidays",
+    "hh5-animals",
+    "qrl",
+    "tp2",
+    "live-engine",
+    "live2",
+    "man4",
+    "fx4-engine",
+    "smoke",
+    "man5",
+    "st5",
+    "tp2-engine",
+    "vol"
+  ],
+  "adaptiveRecheckCutoff": 1792156620,
+  "notStartedRechecks": [
+    {
+      "file": "cdx-mir",
+      "estimatedSeconds": 270,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "hh5-animals",
+      "estimatedSeconds": 150,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "qrl",
+      "estimatedSeconds": 120,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "tp2",
+      "estimatedSeconds": 210,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "live-engine",
+      "estimatedSeconds": 180,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "live2",
+      "estimatedSeconds": 210,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "man4",
+      "estimatedSeconds": 240,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "fx4-engine",
+      "estimatedSeconds": 330,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "smoke",
+      "estimatedSeconds": 840,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "vol",
+      "estimatedSeconds": 58,
+      "reason": "Does not fit before final-publication cutoff"
+    }
+  ],
+  "allScheduledTestsEndedAt": 1792156574.611796
 }

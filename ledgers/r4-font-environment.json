@@ -1,0 +1,30 @@
+{
+  "checkedAt": "2026-10-16T12:35:27.136756+00:00",
+  "status": "unavailable",
+  "test": "man5.spec.mjs: the same input and the same Chromium print the same bytes",
+  "observed": "PDF embeds NotoSans where shipped font set expects Inter; initial guard failure retained",
+  "currentSansFamily": "OpenAI Sans",
+  "interInstalled": false,
+  "source": "https://github.com/rsms/inter/tree/master/docs/font-files",
+  "license": "https://github.com/rsms/inter/blob/master/LICENSE.txt",
+  "licenseOpened": true,
+  "attempts": [
+    "raw.githubusercontent.com:503",
+    "rsms.me:503",
+    "cdn.jsdelivr.net:503",
+    "git clone rsms/inter:503",
+    "registry.npmjs.org @fontsource/inter:E503",
+    "direct raw.githubusercontent.com TCP:connection failed",
+    "GitHub app binary blob fetch:only UTF-8 text accepted"
+  ],
+  "changes": "No fonts installed, no font aliases changed, no manual-PDF guard disabled, no measured environment altered",
+  "localCandidate": {
+    "file": "/usr/share/blender/datafiles/fonts/Inter.woff2",
+    "bytes": 344964,
+    "sha256": "d04c232dbb165c373f53ee5a997da11e27939a97b0991a3f135ed5c27778fa24",
+    "family": "Inter Variable",
+    "postscriptName": "InterVariable",
+    "rejectedReason": "The unchanged PDF guard requires the static Inter font name. The bundled variable font does not satisfy that guard, and no font names or aliases were changed."
+  },
+  "networkPolicyObserved": "unrestricted, enforced, connected; upstream downloads still return 503"
+}

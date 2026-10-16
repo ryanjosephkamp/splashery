@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-10-16 12:38:12 UTC",
+  "method": "Read-only GitHub refs; compare with the published Photo checkpoint document",
+  "refs": [
+    {
+      "branch": "claude/checkpoint-photo-3d-2026-10-14",
+      "expected": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
+      "actual": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
+      "matches": true
+    },
+    {
+      "branch": "claude/checkpoint-photo-3d-2026-10-14-clips",
+      "expected": "004e10f3ae4003616fe3e1aea54189984b52f91e",
+      "actual": "004e10f3ae4003616fe3e1aea54189984b52f91e",
+      "matches": true
+    }
+  ]
+}

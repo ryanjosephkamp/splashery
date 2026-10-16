@@ -1,127 +1,18 @@
 {
-  "collectedAt": "2026-10-16T12:21:32.548Z",
-  "sourceRevisionAtCollection": "c9208db848e7c8d29ab48b9743777aa4bc5f04f3",
+  "collectedAt": "2026-10-16T13:16:15.807Z",
+  "sourceRevisionAtCollection": "58e97908f53210b85e6778a56888872547cf0012",
   "note": "Individual test-run revisions were not recorded by Playwright. The full run spans branch implementation and upstream merges; affected files are rerun. Latest full-file reports supersede earlier ones, including failures; every earlier report and failure remains below",
   "expectedFiles": 331,
-  "complete": false,
+  "complete": true,
   "allLatestExpected": false,
   "totals": {
-    "passed": 2243,
+    "passed": 2888,
     "failed": 15,
     "skipped": 1,
     "flaky": 0,
     "expectedFailures": 0
   },
-  "missing": [
-    "ai-engine.spec.mjs",
-    "an-engine.spec.mjs",
-    "arc2-engine.spec.mjs",
-    "asc-core.spec.mjs",
-    "asc-engine.spec.mjs",
-    "asc-unit.spec.mjs",
-    "asc2.spec.mjs",
-    "bk.spec.mjs",
-    "bkd-format.spec.mjs",
-    "bld.spec.mjs",
-    "cdx-depth.spec.mjs",
-    "cdx-gallery.spec.mjs",
-    "cdx-p3d2-core.spec.mjs",
-    "cdx-p3d2-input.spec.mjs",
-    "cdx-p3d2-r3-anchored.spec.mjs",
-    "cdx-p3d2-r3-background-interior.spec.mjs",
-    "cdx-p3d2-r3-background.spec.mjs",
-    "cdx-p3d2-r3-compact.spec.mjs",
-    "cdx-p3d2-r3-depth.spec.mjs",
-    "cdx-p3d2-r3-footprint.spec.mjs",
-    "cdx-p3d2-r3-input-race.spec.mjs",
-    "cdx-p3d2-r3-metrics.spec.mjs",
-    "cdx-p3d2-r3-surface.spec.mjs",
-    "cdx-v3d-clarity-register.spec.mjs",
-    "cdx-v3d-clarity.spec.mjs",
-    "cdx-v3d-cpu.spec.mjs",
-    "cdx-v3d-handoff.spec.mjs",
-    "cdx-v3d-review.spec.mjs",
-    "chem.spec.mjs",
-    "chs-engine.spec.mjs",
-    "cmp2-enigma.spec.mjs",
-    "cmp2-sort.spec.mjs",
-    "e4f.spec.mjs",
-    "e6b.spec.mjs",
-    "evidence-computing.spec.mjs",
-    "f.spec.mjs",
-    "fid.spec.mjs",
-    "fl7.spec.mjs",
-    "fx10.spec.mjs",
-    "fx9-engine.spec.mjs",
-    "heb-engine.spec.mjs",
-    "heb.spec.mjs",
-    "hec-engine.spec.mjs",
-    "hec.spec.mjs",
-    "hh1-shapes.spec.mjs",
-    "hh3-crossbow.spec.mjs",
-    "hh3-level1-engine.spec.mjs",
-    "hh3-music.spec.mjs",
-    "hh3-pictures.spec.mjs",
-    "hh3-storybook.spec.mjs",
-    "hh5-engine.spec.mjs",
-    "hta.spec.mjs",
-    "img.spec.mjs",
-    "klab.spec.mjs",
-    "lat.spec.mjs",
-    "live2-engine.spec.mjs",
-    "ln.spec.mjs",
-    "lv7-engine.spec.mjs",
-    "lv7-long.spec.mjs",
-    "lv8-dial.spec.mjs",
-    "man2.spec.mjs",
-    "man5.spec.mjs",
-    "man7a.spec.mjs",
-    "man7b.spec.mjs",
-    "math.spec.mjs",
-    "mol-engine.spec.mjs",
-    "opm.spec.mjs",
-    "ops-media.spec.mjs",
-    "pdf-engine.spec.mjs",
-    "phf-engine.spec.mjs",
-    "phf2.spec.mjs",
-    "phy.spec.mjs",
-    "pose-engine.spec.mjs",
-    "pr2.spec.mjs",
-    "qr4-2-engine.spec.mjs",
-    "qr4-2.spec.mjs",
-    "qr4-scan.spec.mjs",
-    "qrc-barcodes.spec.mjs",
-    "qrc-picture.spec.mjs",
-    "qrs-heal.spec.mjs",
-    "qrs-steps.spec.mjs",
-    "qrs-study.spec.mjs",
-    "rel-engine.spec.mjs",
-    "sci-engine.spec.mjs",
-    "sci3-engine.spec.mjs",
-    "scr-engine.spec.mjs",
-    "scr2-engine.spec.mjs",
-    "sha-book.spec.mjs",
-    "shb-engine.spec.mjs",
-    "shb.spec.mjs",
-    "sky-engine.spec.mjs",
-    "smd-moving.spec.mjs",
-    "smd-photo.spec.mjs",
-    "snda-engine.spec.mjs",
-    "sndd.spec.mjs",
-    "sp4.spec.mjs",
-    "spg.spec.mjs",
-    "st3.spec.mjs",
-    "st4-engine.spec.mjs",
-    "st5.spec.mjs",
-    "stm-engine.spec.mjs",
-    "sts-engine.spec.mjs",
-    "tp2-engine.spec.mjs",
-    "tpg-engine.spec.mjs",
-    "tw2-dna.spec.mjs",
-    "ui4-engine.spec.mjs",
-    "unit.spec.mjs",
-    "vol.spec.mjs"
-  ],
+  "missing": [],
   "files": [
     {
       "file": "abb.spec.mjs",
@@ -135,6 +26,17 @@
       "startedAt": "2026-10-16T12:13:48.915Z"
     },
     {
+      "file": "ai-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/ai-engine.json",
+      "startedAt": "2026-10-16T12:33:18.015Z"
+    },
+    {
       "file": "ai.spec.mjs",
       "passed": 47,
       "failed": 0,
@@ -144,6 +46,17 @@
       "failures": [],
       "report": "r4-suite/ai.json",
       "startedAt": "2026-10-16T09:57:38.336Z"
+    },
+    {
+      "file": "an-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/an-engine.json",
+      "startedAt": "2026-10-16T12:31:05.210Z"
     },
     {
       "file": "an.spec.mjs",
@@ -179,6 +92,17 @@
       "startedAt": "2026-10-16T09:58:33.915Z"
     },
     {
+      "file": "arc2-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/arc2-engine.json",
+      "startedAt": "2026-10-16T12:31:31.768Z"
+    },
+    {
       "file": "arc2.spec.mjs",
       "passed": 7,
       "failed": 0,
@@ -201,6 +125,28 @@
       "startedAt": "2026-10-16T09:56:17.808Z"
     },
     {
+      "file": "asc-core.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/asc-core.json",
+      "startedAt": "2026-10-16T12:33:53.899Z"
+    },
+    {
+      "file": "asc-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/asc-engine.json",
+      "startedAt": "2026-10-16T12:32:50.260Z"
+    },
+    {
       "file": "asc-repeat.spec.mjs",
       "passed": 1,
       "failed": 0,
@@ -212,6 +158,17 @@
       "startedAt": "2026-10-16T06:12:55.797Z"
     },
     {
+      "file": "asc-unit.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/asc-unit.json",
+      "startedAt": "2026-10-16T12:34:43.640Z"
+    },
+    {
       "file": "asc.spec.mjs",
       "passed": 5,
       "failed": 0,
@@ -221,6 +178,28 @@
       "failures": [],
       "report": "r4-suite/asc.json",
       "startedAt": "2026-10-16T07:03:57.719Z"
+    },
+    {
+      "file": "asc2.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/asc2.json",
+      "startedAt": "2026-10-16T12:27:47.128Z"
+    },
+    {
+      "file": "bk.spec.mjs",
+      "passed": 36,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/bk.json",
+      "startedAt": "2026-10-16T12:35:13.435Z"
     },
     {
       "file": "bk5-engine.spec.mjs",
@@ -245,6 +224,17 @@
       "startedAt": "2026-10-16T05:55:57.233Z"
     },
     {
+      "file": "bkd-format.spec.mjs",
+      "passed": 14,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/bkd-format.json",
+      "startedAt": "2026-10-16T12:34:19.450Z"
+    },
+    {
       "file": "bkd.spec.mjs",
       "passed": 2,
       "failed": 0,
@@ -254,6 +244,17 @@
       "failures": [],
       "report": "r4-suite/bkd.json",
       "startedAt": "2026-10-16T10:27:12.284Z"
+    },
+    {
+      "file": "bld.spec.mjs",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/bld.json",
+      "startedAt": "2026-10-16T12:34:21.926Z"
     },
     {
       "file": "cdx-a11y-layout.spec.mjs",
@@ -342,6 +343,28 @@
       "failures": [],
       "report": "r4-suite/cdx-depth-ui.json",
       "startedAt": "2026-10-16T12:19:25.628Z"
+    },
+    {
+      "file": "cdx-depth.spec.mjs",
+      "passed": 10,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-depth.json",
+      "startedAt": "2026-10-16T12:25:50.062Z"
+    },
+    {
+      "file": "cdx-gallery.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-gallery.json",
+      "startedAt": "2026-10-16T12:33:20.381Z"
     },
     {
       "file": "cdx-keys.spec.mjs",
@@ -458,8 +481,8 @@
       "flaky": 0,
       "expectedFailures": 0,
       "failures": [],
-      "report": "r4-suite/cdx-mp2-r4.json",
-      "startedAt": "2026-10-16T08:46:21.050Z"
+      "report": "r4-isolated-tests/cdx-mp2-r4.json",
+      "startedAt": "2026-10-16T13:05:31.480Z"
     },
     {
       "file": "cdx-mp2.spec.mjs",
@@ -484,6 +507,83 @@
       "startedAt": "2026-10-16T08:58:33.259Z"
     },
     {
+      "file": "cdx-p3d2-core.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-core.json",
+      "startedAt": "2026-10-16T12:31:17.319Z"
+    },
+    {
+      "file": "cdx-p3d2-input.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-input.json",
+      "startedAt": "2026-10-16T12:29:31.163Z"
+    },
+    {
+      "file": "cdx-p3d2-r3-anchored.spec.mjs",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-r3-anchored.json",
+      "startedAt": "2026-10-16T12:34:34.897Z"
+    },
+    {
+      "file": "cdx-p3d2-r3-background-interior.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-r3-background-interior.json",
+      "startedAt": "2026-10-16T12:31:44.551Z"
+    },
+    {
+      "file": "cdx-p3d2-r3-background.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-r3-background.json",
+      "startedAt": "2026-10-16T12:34:44.107Z"
+    },
+    {
+      "file": "cdx-p3d2-r3-compact.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-r3-compact.json",
+      "startedAt": "2026-10-16T12:33:55.272Z"
+    },
+    {
+      "file": "cdx-p3d2-r3-depth.spec.mjs",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-r3-depth.json",
+      "startedAt": "2026-10-16T12:34:24.380Z"
+    },
+    {
       "file": "cdx-p3d2-r3-edges.spec.mjs",
       "passed": 3,
       "failed": 0,
@@ -493,6 +593,50 @@
       "failures": [],
       "report": "r4-suite/cdx-p3d2-r3-edges.json",
       "startedAt": "2026-10-16T12:11:09.738Z"
+    },
+    {
+      "file": "cdx-p3d2-r3-footprint.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-r3-footprint.json",
+      "startedAt": "2026-10-16T12:33:59.315Z"
+    },
+    {
+      "file": "cdx-p3d2-r3-input-race.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-r3-input-race.json",
+      "startedAt": "2026-10-16T12:29:58.920Z"
+    },
+    {
+      "file": "cdx-p3d2-r3-metrics.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-r3-metrics.json",
+      "startedAt": "2026-10-16T12:34:25.116Z"
+    },
+    {
+      "file": "cdx-p3d2-r3-surface.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-p3d2-r3-surface.json",
+      "startedAt": "2026-10-16T12:34:46.270Z"
     },
     {
       "file": "cdx-p3d2-render.spec.mjs",
@@ -847,6 +991,50 @@
       "startedAt": "2026-10-16T12:17:18.848Z"
     },
     {
+      "file": "cdx-v3d-clarity-register.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-v3d-clarity-register.json",
+      "startedAt": "2026-10-16T12:25:30.641Z"
+    },
+    {
+      "file": "cdx-v3d-clarity.spec.mjs",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-v3d-clarity.json",
+      "startedAt": "2026-10-16T12:30:37.080Z"
+    },
+    {
+      "file": "cdx-v3d-cpu.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-v3d-cpu.json",
+      "startedAt": "2026-10-16T12:34:26.844Z"
+    },
+    {
+      "file": "cdx-v3d-handoff.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-v3d-handoff.json",
+      "startedAt": "2026-10-16T12:34:48.682Z"
+    },
+    {
       "file": "cdx-v3d-render-engine.spec.mjs",
       "passed": 6,
       "failed": 0,
@@ -856,6 +1044,17 @@
       "failures": [],
       "report": "r4-suite/cdx-v3d-render-engine.json",
       "startedAt": "2026-10-16T12:13:04.584Z"
+    },
+    {
+      "file": "cdx-v3d-review.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cdx-v3d-review.json",
+      "startedAt": "2026-10-16T12:23:09.611Z"
     },
     {
       "file": "cdx-v3d-samples.spec.mjs",
@@ -880,6 +1079,17 @@
       "startedAt": "2026-10-16T10:21:10.140Z"
     },
     {
+      "file": "chem.spec.mjs",
+      "passed": 24,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/chem.json",
+      "startedAt": "2026-10-16T12:34:27.734Z"
+    },
+    {
       "file": "chr.spec.mjs",
       "passed": 7,
       "failed": 0,
@@ -889,6 +1099,17 @@
       "failures": [],
       "report": "r4-suite/chr.json",
       "startedAt": "2026-10-16T06:18:25.138Z"
+    },
+    {
+      "file": "chs-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/chs-engine.json",
+      "startedAt": "2026-10-16T12:33:28.204Z"
     },
     {
       "file": "chs.spec.mjs",
@@ -909,8 +1130,19 @@
       "flaky": 0,
       "expectedFailures": 0,
       "failures": [],
-      "report": "r4-extra-tests/cmp2-engine.json",
-      "startedAt": "2026-10-16T08:02:45.421Z"
+      "report": "r4-suite/cmp2-engine.json",
+      "startedAt": "2026-10-16T12:33:31.018Z"
+    },
+    {
+      "file": "cmp2-enigma.spec.mjs",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cmp2-enigma.json",
+      "startedAt": "2026-10-16T12:34:48.771Z"
     },
     {
       "file": "cmp2-shots.spec.mjs",
@@ -922,6 +1154,17 @@
       "failures": [],
       "report": "r4-suite/cmp2-shots.json",
       "startedAt": "2026-10-16T08:18:25.451Z"
+    },
+    {
+      "file": "cmp2-sort.spec.mjs",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/cmp2-sort.json",
+      "startedAt": "2026-10-16T12:34:04.138Z"
     },
     {
       "file": "dcl.spec.mjs",
@@ -946,6 +1189,17 @@
       "startedAt": "2026-10-16T12:18:55.313Z"
     },
     {
+      "file": "e4f.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/e4f.json",
+      "startedAt": "2026-10-16T12:32:59.878Z"
+    },
+    {
       "file": "e5.spec.mjs",
       "passed": 7,
       "failed": 0,
@@ -968,6 +1222,39 @@
       "startedAt": "2026-10-16T09:45:26.153Z"
     },
     {
+      "file": "e6b.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/e6b.json",
+      "startedAt": "2026-10-16T12:34:59.512Z"
+    },
+    {
+      "file": "evidence-computing.spec.mjs",
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/evidence-computing.json",
+      "startedAt": "2026-10-16T12:22:37.531Z"
+    },
+    {
+      "file": "f.spec.mjs",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/f.json",
+      "startedAt": "2026-10-16T12:45:58.632Z"
+    },
+    {
       "file": "fb.spec.mjs",
       "passed": 6,
       "failed": 0,
@@ -977,6 +1264,17 @@
       "failures": [],
       "report": "r4-suite/fb.json",
       "startedAt": "2026-10-16T09:27:38.726Z"
+    },
+    {
+      "file": "fid.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/fid.json",
+      "startedAt": "2026-10-16T12:33:37.772Z"
     },
     {
       "file": "fix3.spec.mjs",
@@ -999,6 +1297,28 @@
       "failures": [],
       "report": "r4-suite/fl.json",
       "startedAt": "2026-10-16T07:31:10.650Z"
+    },
+    {
+      "file": "fl7.spec.mjs",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/fl7.json",
+      "startedAt": "2026-10-16T12:53:59.020Z"
+    },
+    {
+      "file": "fx10.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/fx10.json",
+      "startedAt": "2026-10-16T12:34:30.951Z"
     },
     {
       "file": "fx12-qr-circle-budget.spec.mjs",
@@ -1120,6 +1440,17 @@
       "startedAt": "2026-10-16T09:44:00.462Z"
     },
     {
+      "file": "fx9-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/fx9-engine.json",
+      "startedAt": "2026-10-16T12:33:00.359Z"
+    },
+    {
       "file": "fx9.spec.mjs",
       "passed": 5,
       "failed": 0,
@@ -1175,6 +1506,50 @@
       "startedAt": "2026-10-16T10:08:13.635Z"
     },
     {
+      "file": "heb-engine.spec.mjs",
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/heb-engine.json",
+      "startedAt": "2026-10-16T12:35:02.653Z"
+    },
+    {
+      "file": "heb.spec.mjs",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/heb.json",
+      "startedAt": "2026-10-16T12:51:02.351Z"
+    },
+    {
+      "file": "hec-engine.spec.mjs",
+      "passed": 12,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hec-engine.json",
+      "startedAt": "2026-10-16T12:34:51.075Z"
+    },
+    {
+      "file": "hec.spec.mjs",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hec.json",
+      "startedAt": "2026-10-16T12:49:05.725Z"
+    },
+    {
       "file": "help.spec.mjs",
       "passed": 14,
       "failed": 0,
@@ -1217,6 +1592,17 @@
       "failures": [],
       "report": "r4-suite/hh1-engine.json",
       "startedAt": "2026-10-16T09:35:08.114Z"
+    },
+    {
+      "file": "hh1-shapes.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hh1-shapes.json",
+      "startedAt": "2026-10-16T12:33:09.457Z"
     },
     {
       "file": "hh1-toys.spec.mjs",
@@ -1263,6 +1649,17 @@
       "startedAt": "2026-10-16T09:29:53.746Z"
     },
     {
+      "file": "hh3-crossbow.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hh3-crossbow.json",
+      "startedAt": "2026-10-16T12:31:18.042Z"
+    },
+    {
       "file": "hh3-engine.spec.mjs",
       "passed": 7,
       "failed": 0,
@@ -1286,22 +1683,25 @@
     },
     {
       "file": "hh3-holidays.spec.mjs",
-      "passed": 4,
-      "failed": 1,
+      "passed": 5,
+      "failed": 0,
       "skipped": 0,
       "flaky": 0,
       "expectedFailures": 0,
-      "failures": [
-        {
-          "title": "snowman: the head lifts off with its face and hat, and stacks back up",
-          "line": 227,
-          "errors": [
-            "Error: expect(received).toBeCloseTo(expected, precision)\n\nExpected: 0.85\nReceived: -0.7800713870928146\n\nExpected precision:    2\nExpected difference: < 0.005\nReceived difference:   1.6300713870928147\n\n  270 |   await tick(page, 2);\n  271 |   b = await balls();\n> 272 |   expect(b[2][1]).toBeCloseTo(0.85, 2);\n      |                   ^\n  273 |   expect(Math.hypot(b[2][0], b[2][2])).toBeLessThan(0.3);\n  274 | });\n  275 |\n    at /workspace/splashery/tests/hh3-holidays.spec.mjs:272:19"
-          ]
-        }
-      ],
-      "report": "r4-suite/hh3-holidays.json",
-      "startedAt": "2026-10-16T10:16:07.241Z"
+      "failures": [],
+      "report": "r4-isolated-tests/hh3-holidays.json",
+      "startedAt": "2026-10-16T13:14:13.526Z"
+    },
+    {
+      "file": "hh3-level1-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hh3-level1-engine.json",
+      "startedAt": "2026-10-16T12:30:11.915Z"
     },
     {
       "file": "hh3-level1.spec.mjs",
@@ -1326,6 +1726,17 @@
       "startedAt": "2026-10-16T12:15:35.770Z"
     },
     {
+      "file": "hh3-music.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hh3-music.json",
+      "startedAt": "2026-10-16T12:23:41.365Z"
+    },
+    {
       "file": "hh3-open-me.spec.mjs",
       "passed": 9,
       "failed": 0,
@@ -1337,6 +1748,17 @@
       "startedAt": "2026-10-16T09:45:19.703Z"
     },
     {
+      "file": "hh3-pictures.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hh3-pictures.json",
+      "startedAt": "2026-10-16T12:20:59.574Z"
+    },
+    {
       "file": "hh3-sort.spec.mjs",
       "passed": 2,
       "failed": 0,
@@ -1346,6 +1768,17 @@
       "failures": [],
       "report": "r4-suite/hh3-sort.json",
       "startedAt": "2026-10-16T12:16:01.051Z"
+    },
+    {
+      "file": "hh3-storybook.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hh3-storybook.json",
+      "startedAt": "2026-10-16T12:30:42.823Z"
     },
     {
       "file": "hh4-engine.spec.mjs",
@@ -1466,6 +1899,17 @@
       "startedAt": "2026-10-16T10:30:19.296Z"
     },
     {
+      "file": "hh5-engine.spec.mjs",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hh5-engine.json",
+      "startedAt": "2026-10-16T12:34:32.873Z"
+    },
+    {
       "file": "hh5-gems.spec.mjs",
       "passed": 5,
       "failed": 0,
@@ -1499,6 +1943,17 @@
       "startedAt": "2026-10-16T08:02:21.616Z"
     },
     {
+      "file": "hta.spec.mjs",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/hta.json",
+      "startedAt": "2026-10-16T12:29:40.202Z"
+    },
+    {
       "file": "img-engine.spec.mjs",
       "passed": 4,
       "failed": 0,
@@ -1508,6 +1963,17 @@
       "failures": [],
       "report": "r4-suite/img-engine.json",
       "startedAt": "2026-10-16T06:22:13.257Z"
+    },
+    {
+      "file": "img.spec.mjs",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/img.json",
+      "startedAt": "2026-10-16T12:34:11.111Z"
     },
     {
       "file": "kit.spec.mjs",
@@ -1532,6 +1998,17 @@
       "startedAt": "2026-10-16T10:25:38.429Z"
     },
     {
+      "file": "klab.spec.mjs",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/klab.json",
+      "startedAt": "2026-10-16T12:33:11.871Z"
+    },
+    {
       "file": "lab-engine.spec.mjs",
       "passed": 7,
       "failed": 0,
@@ -1552,6 +2029,17 @@
       "failures": [],
       "report": "r4-suite/lab.json",
       "startedAt": "2026-10-16T07:46:48.433Z"
+    },
+    {
+      "file": "lat.spec.mjs",
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/lat.json",
+      "startedAt": "2026-10-16T12:22:14.853Z"
     },
     {
       "file": "live-engine.spec.mjs",
@@ -1582,6 +2070,17 @@
       "failures": [],
       "report": "r4-suite/live.json",
       "startedAt": "2026-10-16T06:56:27.912Z"
+    },
+    {
+      "file": "live2-engine.spec.mjs",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/live2-engine.json",
+      "startedAt": "2026-10-16T12:29:48.265Z"
     },
     {
       "file": "live2.spec.mjs",
@@ -1658,6 +2157,17 @@
       "startedAt": "2026-10-16T12:09:41.493Z"
     },
     {
+      "file": "ln.spec.mjs",
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/ln.json",
+      "startedAt": "2026-10-16T12:31:48.015Z"
+    },
+    {
       "file": "lv10.spec.mjs",
       "passed": 11,
       "failed": 0,
@@ -1669,6 +2179,28 @@
       "startedAt": "2026-10-16T10:22:26.158Z"
     },
     {
+      "file": "lv7-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/lv7-engine.json",
+      "startedAt": "2026-10-16T12:35:04.915Z"
+    },
+    {
+      "file": "lv7-long.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/lv7-long.json",
+      "startedAt": "2026-10-16T12:25:53.883Z"
+    },
+    {
       "file": "lv7.spec.mjs",
       "passed": 11,
       "failed": 0,
@@ -1678,6 +2210,17 @@
       "failures": [],
       "report": "r4-suite/lv7.json",
       "startedAt": "2026-10-16T05:35:35.937Z"
+    },
+    {
+      "file": "lv8-dial.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/lv8-dial.json",
+      "startedAt": "2026-10-16T12:24:52.922Z"
     },
     {
       "file": "lv8.spec.mjs",
@@ -1722,6 +2265,17 @@
       "failures": [],
       "report": "r4-suite/man.json",
       "startedAt": "2026-10-16T12:16:32.967Z"
+    },
+    {
+      "file": "man2.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/man2.json",
+      "startedAt": "2026-10-16T12:34:52.802Z"
     },
     {
       "file": "man3-2.spec.mjs",
@@ -1776,6 +2330,25 @@
       "startedAt": "2026-10-16T07:36:17.057Z"
     },
     {
+      "file": "man5.spec.mjs",
+      "passed": 18,
+      "failed": 1,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [
+        {
+          "title": "the same input and the same Chromium print the same bytes",
+          "line": 201,
+          "errors": [
+            "Error: Command failed: node tools/manual-pdf.mjs /tmp/man5-pdf-GK0Dus/a.pdf --allow-other-browser\n(node:212623) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\nThe PDF embeds DejaVuSans, DejaVuSansMono, LiberationSans, LiberationSerif, NotoColorEmoji, NotoSans; the shipped one embeds DejaVuSans, DejaVuSansMono, Inter, LiberationSans, LiberationSerif, NotoColorEmoji. Print on a machine with those fonts, or pass --allow-other-fonts.\n\n\n  207 |     if (!env.SPLASHERY_CHROMIUM) delete env.SPLASHERY_CHROMIUM;\n  208 |     for (const out of [a, b])\n> 209 |       execFileSync(\"node\", [\"tools/manual-pdf.mjs\", out, \"--allow-other-browser\"], { env, stdio: \"pipe\" }); // prettier-ignore\n      |       ^\n  210 |     const A = fs.readFileSync(a);\n  211 |     expect(A.equals(fs.readFileSync(b))).toBe(true);\n  212 |     // The shipped PDF is that print of this input (when the pinned Chromium made it).\n "
+          ]
+        }
+      ],
+      "report": "r4-isolated-tests/man5.json",
+      "startedAt": "2026-10-16T13:15:07.055Z"
+    },
+    {
       "file": "man6.spec.mjs",
       "passed": 18,
       "failed": 0,
@@ -1785,6 +2358,28 @@
       "failures": [],
       "report": "r4-suite/man6.json",
       "startedAt": "2026-10-16T10:26:46.815Z"
+    },
+    {
+      "file": "man7a.spec.mjs",
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-isolated-tests/man7a.json",
+      "startedAt": "2026-10-16T13:13:42.945Z"
+    },
+    {
+      "file": "man7b.spec.mjs",
+      "passed": 24,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/man7b.json",
+      "startedAt": "2026-10-16T12:30:29.790Z"
     },
     {
       "file": "man9.spec.mjs",
@@ -1798,6 +2393,17 @@
       "startedAt": "2026-10-16T10:19:36.153Z"
     },
     {
+      "file": "math.spec.mjs",
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/math.json",
+      "startedAt": "2026-10-16T12:56:01.455Z"
+    },
+    {
       "file": "mca.spec.mjs",
       "passed": 20,
       "failed": 0,
@@ -1807,6 +2413,17 @@
       "failures": [],
       "report": "r4-suite/mca.json",
       "startedAt": "2026-10-16T09:43:08.011Z"
+    },
+    {
+      "file": "mol-engine.spec.mjs",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/mol-engine.json",
+      "startedAt": "2026-10-16T12:26:53.456Z"
     },
     {
       "file": "mol.spec.mjs",
@@ -1829,6 +2446,28 @@
       "failures": [],
       "report": "r4-suite/mt2.json",
       "startedAt": "2026-10-16T09:38:40.311Z"
+    },
+    {
+      "file": "opm.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/opm.json",
+      "startedAt": "2026-10-16T12:33:40.947Z"
+    },
+    {
+      "file": "ops-media.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/ops-media.json",
+      "startedAt": "2026-10-16T12:24:18.394Z"
     },
     {
       "file": "ops-text.spec.mjs",
@@ -1862,6 +2501,17 @@
       "failures": [],
       "report": "r4-suite/p3d.json",
       "startedAt": "2026-10-16T10:07:36.847Z"
+    },
+    {
+      "file": "pdf-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/pdf-engine.json",
+      "startedAt": "2026-10-16T12:30:50.798Z"
     },
     {
       "file": "pdf.spec.mjs",
@@ -1919,23 +2569,37 @@
       "startedAt": "2026-10-16T06:54:57.962Z"
     },
     {
-      "file": "phf.spec.mjs",
-      "passed": 6,
-      "failed": 1,
+      "file": "phf-engine.spec.mjs",
+      "passed": 5,
+      "failed": 0,
       "skipped": 0,
       "flaky": 0,
       "expectedFailures": 0,
-      "failures": [
-        {
-          "title": "Moving photo to 3D: the sample, a GIF and a short video show their own pixels",
-          "line": 106,
-          "errors": [
-            "Error: expect(received).toEqual(expected) // deep equality\n\n- Expected  - 2\n+ Received  + 2\n\n  Array [\n-   480,\n-   270,\n+   640,\n+   360,\n  ]\n\n   95 |     const s = await stage(page);\n   96 |     expect(s.toy).toBe(true);\n>  97 |     expect(s.tex).toEqual([480, 270]); // the sample's frames, as the low tier keeps them\n      |                   ^\n   98 |     // A GIF: its frames at its own size.\n   99 |     await page.setInputFiles(\"#toy-input-file\", \"assets/toys/screen/horse.gif\");\n  100 |     await until(page, async (m) => (await import(m)).MOVING.clip?.name === \"horse\", mp, 300_000);\n    at /workspace/splashery/tests/phf.spec.mjs:97:19"
-          ]
-        }
-      ],
-      "report": "r4-suite/phf.json",
-      "startedAt": "2026-10-16T10:13:04.235Z"
+      "failures": [],
+      "report": "r4-suite/phf-engine.json",
+      "startedAt": "2026-10-16T13:02:04.389Z"
+    },
+    {
+      "file": "phf.spec.mjs",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-isolated-tests/phf.json",
+      "startedAt": "2026-10-16T13:03:01.805Z"
+    },
+    {
+      "file": "phf2.spec.mjs",
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/phf2.json",
+      "startedAt": "2026-10-16T12:21:42.379Z"
     },
     {
       "file": "phy-engine.spec.mjs",
@@ -1947,6 +2611,17 @@
       "failures": [],
       "report": "r4-suite/phy-engine.json",
       "startedAt": "2026-10-16T09:42:04.984Z"
+    },
+    {
+      "file": "phy.spec.mjs",
+      "passed": 6,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/phy.json",
+      "startedAt": "2026-10-16T12:58:33.397Z"
     },
     {
       "file": "pic.spec.mjs",
@@ -2015,6 +2690,17 @@
       "startedAt": "2026-10-16T09:14:03.950Z"
     },
     {
+      "file": "pose-engine.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/pose-engine.json",
+      "startedAt": "2026-10-16T12:32:07.912Z"
+    },
+    {
       "file": "pose.spec.mjs",
       "passed": 3,
       "failed": 0,
@@ -2046,6 +2732,17 @@
       "failures": [],
       "report": "r4-suite/pot.json",
       "startedAt": "2026-10-16T09:20:43.627Z"
+    },
+    {
+      "file": "pr2.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/pr2.json",
+      "startedAt": "2026-10-16T12:35:07.471Z"
     },
     {
       "file": "psv.spec.mjs",
@@ -2103,30 +2800,37 @@
       "startedAt": "2026-10-16T07:18:40.555Z"
     },
     {
-      "file": "qr4-craft.spec.mjs",
-      "passed": 7,
-      "failed": 2,
+      "file": "qr4-2-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
       "skipped": 0,
       "flaky": 0,
       "expectedFailures": 0,
-      "failures": [
-        {
-          "title": "the QR code toy builds the very same splats from the shared builder",
-          "line": 151,
-          "errors": [
-            "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144\"\nReceived: \"d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6\"\n\n  151 |           h.update(JSON.stringify(r));\n  152 |         }\n> 153 |     expect(h.digest(\"hex\")).toBe(BUILD_HASH);\n      |                             ^\n  154 |   });\n  155 |\n  156 |   test(\"raw legacy Circle builds retain main's splats without resolved option defaults\", () => {\n    at /workspace/splashery/tests/qr4-craft.spec.mjs:153:29"
-          ]
-        },
-        {
-          "title": "raw legacy Circle builds retain main's splats without resolved option defaults",
-          "line": 171,
-          "errors": [
-            "Error: expect(received).toBe(expected) // Object.is equality\n\nExpected: \"51848ddea445d56959c8558a2dd4682e8d688bae3fde5f232e7c1b51448a95fb\"\nReceived: \"3d7e0ad8fd43c822e5a7bff8efcad22c8893313f86818d01cbd3b07b6096d563\"\n\n  165 |           h.update(JSON.stringify(r));\n  166 |         }\n> 167 |     expect(h.digest(\"hex\")).toBe(CIRCLE_BUILD_HASH);\n      |                             ^\n  168 |   });\n  169 | });\n  170 |\n    at /workspace/splashery/tests/qr4-craft.spec.mjs:167:29"
-          ]
-        }
-      ],
-      "report": "r4-suite/qr4-craft.json",
-      "startedAt": "2026-10-16T10:04:45.634Z"
+      "failures": [],
+      "report": "r4-suite/qr4-2-engine.json",
+      "startedAt": "2026-10-16T12:31:51.984Z"
+    },
+    {
+      "file": "qr4-2.spec.mjs",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/qr4-2.json",
+      "startedAt": "2026-10-16T12:27:12.667Z"
+    },
+    {
+      "file": "qr4-craft.spec.mjs",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-isolated-tests/qr4-craft.json",
+      "startedAt": "2026-10-16T13:03:58.551Z"
     },
     {
       "file": "qr4-flash.spec.mjs",
@@ -2140,6 +2844,17 @@
       "startedAt": "2026-10-16T10:17:08.026Z"
     },
     {
+      "file": "qr4-scan.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/qr4-scan.json",
+      "startedAt": "2026-10-16T12:23:23.855Z"
+    },
+    {
       "file": "qr5.spec.mjs",
       "passed": 5,
       "failed": 0,
@@ -2151,6 +2866,17 @@
       "startedAt": "2026-10-16T06:04:39.852Z"
     },
     {
+      "file": "qrc-barcodes.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/qrc-barcodes.json",
+      "startedAt": "2026-10-16T12:26:18.475Z"
+    },
+    {
       "file": "qrc-build.spec.mjs",
       "passed": 2,
       "failed": 0,
@@ -2160,6 +2886,17 @@
       "failures": [],
       "report": "r4-suite/qrc-build.json",
       "startedAt": "2026-10-16T10:10:51.371Z"
+    },
+    {
+      "file": "qrc-picture.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/qrc-picture.json",
+      "startedAt": "2026-10-16T12:21:42.318Z"
     },
     {
       "file": "qrl.spec.mjs",
@@ -2181,6 +2918,39 @@
       "startedAt": "2026-10-16T10:09:07.936Z"
     },
     {
+      "file": "qrs-heal.spec.mjs",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/qrs-heal.json",
+      "startedAt": "2026-10-16T12:35:08.241Z"
+    },
+    {
+      "file": "qrs-steps.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/qrs-steps.json",
+      "startedAt": "2026-10-16T12:33:45.398Z"
+    },
+    {
+      "file": "qrs-study.spec.mjs",
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/qrs-study.json",
+      "startedAt": "2026-10-16T12:34:38.096Z"
+    },
+    {
       "file": "qrs-toys.spec.mjs",
       "passed": 4,
       "failed": 0,
@@ -2190,6 +2960,17 @@
       "failures": [],
       "report": "r4-suite/qrs-toys.json",
       "startedAt": "2026-10-16T06:30:32.067Z"
+    },
+    {
+      "file": "rel-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/rel-engine.json",
+      "startedAt": "2026-10-16T12:35:10.841Z"
     },
     {
       "file": "rel.spec.mjs",
@@ -2214,6 +2995,17 @@
       "startedAt": "2026-10-16T09:32:00.041Z"
     },
     {
+      "file": "sci-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/sci-engine.json",
+      "startedAt": "2026-10-16T12:25:32.352Z"
+    },
+    {
       "file": "sci.spec.mjs",
       "passed": 23,
       "failed": 0,
@@ -2223,6 +3015,17 @@
       "failures": [],
       "report": "r4-suite/sci.json",
       "startedAt": "2026-10-16T09:49:27.222Z"
+    },
+    {
+      "file": "sci3-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/sci3-engine.json",
+      "startedAt": "2026-10-16T12:28:08.031Z"
     },
     {
       "file": "sci3.spec.mjs",
@@ -2236,6 +3039,17 @@
       "startedAt": "2026-10-16T12:18:16.803Z"
     },
     {
+      "file": "scr-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/scr-engine.json",
+      "startedAt": "2026-10-16T12:32:19.747Z"
+    },
+    {
       "file": "scr.spec.mjs",
       "passed": 6,
       "failed": 0,
@@ -2245,6 +3059,17 @@
       "failures": [],
       "report": "r4-suite/scr.json",
       "startedAt": "2026-10-16T09:25:33.675Z"
+    },
+    {
+      "file": "scr2-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/scr2-engine.json",
+      "startedAt": "2026-10-16T12:26:19.118Z"
     },
     {
       "file": "scr2.spec.mjs",
@@ -2258,6 +3083,17 @@
       "startedAt": "2026-10-16T05:03:31.764Z"
     },
     {
+      "file": "sha-book.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/sha-book.json",
+      "startedAt": "2026-10-16T12:30:09.871Z"
+    },
+    {
       "file": "sha.spec.mjs",
       "passed": 5,
       "failed": 0,
@@ -2267,6 +3103,28 @@
       "failures": [],
       "report": "r4-suite/sha.json",
       "startedAt": "2026-10-16T12:14:43.748Z"
+    },
+    {
+      "file": "shb-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/shb-engine.json",
+      "startedAt": "2026-10-16T12:34:02.243Z"
+    },
+    {
+      "file": "shb.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/shb.json",
+      "startedAt": "2026-10-16T12:24:55.697Z"
     },
     {
       "file": "shp.spec.mjs",
@@ -2324,6 +3182,17 @@
       "startedAt": "2026-10-16T07:18:40.764Z"
     },
     {
+      "file": "sky-engine.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/sky-engine.json",
+      "startedAt": "2026-10-16T12:31:02.088Z"
+    },
+    {
       "file": "sky.spec.mjs",
       "passed": 10,
       "failed": 0,
@@ -2368,6 +3237,28 @@
       "startedAt": "2026-10-16T12:18:48.510Z"
     },
     {
+      "file": "smd-moving.spec.mjs",
+      "passed": 16,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/smd-moving.json",
+      "startedAt": "2026-10-16T12:43:14.985Z"
+    },
+    {
+      "file": "smd-photo.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/smd-photo.json",
+      "startedAt": "2026-10-16T12:20:47.398Z"
+    },
+    {
       "file": "smoke.spec.mjs",
       "passed": 47,
       "failed": 3,
@@ -2399,6 +3290,17 @@
       ],
       "report": "r4-extra-tests/smoke.json",
       "startedAt": "2026-10-16T08:03:06.363Z"
+    },
+    {
+      "file": "snda-engine.spec.mjs",
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/snda-engine.json",
+      "startedAt": "2026-10-16T12:27:13.579Z"
     },
     {
       "file": "snda.spec.mjs",
@@ -2445,6 +3347,17 @@
       "startedAt": "2026-10-16T07:51:06.526Z"
     },
     {
+      "file": "sndd.spec.mjs",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/sndd.json",
+      "startedAt": "2026-10-16T12:35:11.015Z"
+    },
+    {
       "file": "sng.spec.mjs",
       "passed": 6,
       "failed": 0,
@@ -2478,6 +3391,28 @@
       "startedAt": "2026-10-16T07:54:07.943Z"
     },
     {
+      "file": "sp4.spec.mjs",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/sp4.json",
+      "startedAt": "2026-10-16T12:32:30.811Z"
+    },
+    {
+      "file": "spg.spec.mjs",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/spg.json",
+      "startedAt": "2026-10-16T13:01:17.431Z"
+    },
+    {
       "file": "st2.spec.mjs",
       "passed": 21,
       "failed": 0,
@@ -2487,6 +3422,28 @@
       "failures": [],
       "report": "r4-suite/st2.json",
       "startedAt": "2026-10-16T10:29:21.711Z"
+    },
+    {
+      "file": "st3.spec.mjs",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/st3.json",
+      "startedAt": "2026-10-16T12:34:11.222Z"
+    },
+    {
+      "file": "st4-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/st4-engine.json",
+      "startedAt": "2026-10-16T12:34:33.704Z"
     },
     {
       "file": "st4.spec.mjs",
@@ -2500,6 +3457,43 @@
       "startedAt": "2026-10-16T07:03:57.472Z"
     },
     {
+      "file": "st5.spec.mjs",
+      "passed": 3,
+      "failed": 2,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [
+        {
+          "title": "on the live layout each card is one link; it opens the toy in a new tab; the toy tiles still open the toy's page",
+          "line": 77,
+          "errors": [
+            "TypeError: Invalid URL\n\n   98 |       const fix = page.locator(\".news-fix\").first();\n   99 |       const [popup] = await Promise.all([context.waitForEvent(\"page\"), tapOn(page, fix.locator(\"p\").last())]); // prettier-ignore\n> 100 |       expect(new URL(popup.url()).pathname).toBe(\"/\");\n      |              ^\n  101 |       expect(toyOf(popup.url())).toBe(NEWS.fixes.slice().sort((a, b) => b.date.localeCompare(a.date))[0].toy); // prettier-ignore\n  102 |       await popup.close();\n  103 |       expect(page.url()).toContain(\"/site/new/\");\n    at /workspace/splashery/tests/st5.spec.mjs:100:14"
+          ]
+        },
+        {
+          "title": "in the staged front door the cards open the Playground at playground/",
+          "line": 119,
+          "errors": [
+            "TypeError: Invalid URL\n\n  137 |       const [popup] = await Promise.all([context.waitForEvent(\"page\"), tapOn(page, page.locator(\".news-feature\").first().locator(\"li\").first())]); // prettier-ignore\n  138 |       await popup.waitForLoadState(\"domcontentloaded\");\n> 139 |       expect(new URL(popup.url()).pathname).toBe(\"/playground/\");\n      |              ^\n  140 |       expect(popup.url()).toContain(\"#s=j.\");\n  141 |       await expect(popup.locator(\"#canvas, canvas\").first()).toBeAttached();\n  142 |       await popup.close();\n    at /workspace/splashery/tests/st5.spec.mjs:139:14"
+          ]
+        }
+      ],
+      "report": "r4-isolated-tests/st5.json",
+      "startedAt": "2026-10-16T13:15:37.905Z"
+    },
+    {
+      "file": "stm-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/stm-engine.json",
+      "startedAt": "2026-10-16T12:32:40.020Z"
+    },
+    {
       "file": "stm.spec.mjs",
       "passed": 20,
       "failed": 0,
@@ -2509,6 +3503,17 @@
       "failures": [],
       "report": "r4-suite/stm.json",
       "startedAt": "2026-10-16T08:10:31.468Z"
+    },
+    {
+      "file": "sts-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/sts-engine.json",
+      "startedAt": "2026-10-16T12:28:19.008Z"
     },
     {
       "file": "sts.spec.mjs",
@@ -2533,6 +3538,17 @@
       "startedAt": "2026-10-16T12:15:11.819Z"
     },
     {
+      "file": "tp2-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-isolated-tests/tp2-engine.json",
+      "startedAt": "2026-10-16T13:15:48.163Z"
+    },
+    {
       "file": "tp2.spec.mjs",
       "passed": 5,
       "failed": 1,
@@ -2550,6 +3566,17 @@
       ],
       "report": "r4-suite/tp2.json",
       "startedAt": "2026-10-16T07:51:35.523Z"
+    },
+    {
+      "file": "tpg-engine.spec.mjs",
+      "passed": 1,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/tpg-engine.json",
+      "startedAt": "2026-10-16T12:32:46.939Z"
     },
     {
       "file": "tpg.spec.mjs",
@@ -2574,6 +3601,17 @@
       "startedAt": "2026-10-16T08:14:46.931Z"
     },
     {
+      "file": "tw2-dna.spec.mjs",
+      "passed": 8,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/tw2-dna.json",
+      "startedAt": "2026-10-16T12:34:54.551Z"
+    },
+    {
       "file": "ui2.spec.mjs",
       "passed": 11,
       "failed": 0,
@@ -2594,6 +3632,17 @@
       "failures": [],
       "report": "r4-suite/ui3.json",
       "startedAt": "2026-10-16T09:54:43.103Z"
+    },
+    {
+      "file": "ui4-engine.spec.mjs",
+      "passed": 2,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/ui4-engine.json",
+      "startedAt": "2026-10-16T12:27:36.163Z"
     },
     {
       "file": "ui4.spec.mjs",
@@ -2629,6 +3678,17 @@
       "startedAt": "2026-10-16T12:16:26.544Z"
     },
     {
+      "file": "unit.spec.mjs",
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [],
+      "report": "r4-suite/unit.json",
+      "startedAt": "2026-10-16T12:33:47.122Z"
+    },
+    {
       "file": "v3d.spec.mjs",
       "passed": 14,
       "failed": 0,
@@ -2638,6 +3698,25 @@
       "failures": [],
       "report": "r4-suite/v3d.json",
       "startedAt": "2026-10-16T09:37:41.685Z"
+    },
+    {
+      "file": "vol.spec.mjs",
+      "passed": 23,
+      "failed": 1,
+      "skipped": 0,
+      "flaky": 0,
+      "expectedFailures": 0,
+      "failures": [
+        {
+          "title": "in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why",
+          "line": 283,
+          "errors": [
+            "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.\n\n  297 |     expect(first.dicom).toBe(\"undefined\");\n  298 |     const shown = async (re) => {\n> 299 |       await page.waitForFunction((re) => new RegExp(re).test(document.querySelector(\"#vol-stats\")?.textContent || \"\"), re.source, { timeout: 60000 }); // prettier-ignore\n      |                  ^\n  300 |       return page.evaluate(() => document.querySelector(\"#vol-stats\").textContent);\n  301 |     };\n  302 |     await page.setInputFiles(\"#toy-input-file\", fs.readdirSync(path.join(FIX, \"dicom-series\")).map((f) => path.join(FIX, \"dicom-series\", f))); // prettier-ignore\n    at shown (/workspace/splashery/tests/vol.spec.mjs:299:18)\n    at /workspace/splashery/tests/vol.spec.mjs:303:21"
+          ]
+        }
+      ],
+      "report": "r4-suite/vol.json",
+      "startedAt": "2026-10-16T12:28:28.748Z"
     },
     {
       "file": "vw.spec.mjs",
@@ -7282,6 +8361,2355 @@
         {
           "file": "fx9.spec.mjs",
           "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/smd-photo.json",
+      "sha256": "de5edc7646efbe4df0ab00e377b48e9996791fe06ae134aadd98d6cd2d001a97",
+      "startedAt": "2026-10-16T12:20:47.398Z",
+      "durationMs": 37788.35,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "smd-photo.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hh3-pictures.json",
+      "sha256": "2c3ed840eac72b2714cb4e93fc135647de29965981e06774d8be715d3496ce8b",
+      "startedAt": "2026-10-16T12:20:59.574Z",
+      "durationMs": 31415.192000000003,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hh3-pictures.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/qrc-picture.json",
+      "sha256": "917185466b83ead2afffa039c954749fcf635d20e630a1c5e710b13c842d1482",
+      "startedAt": "2026-10-16T12:21:42.318Z",
+      "durationMs": 53699.3,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "qrc-picture.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/phf2.json",
+      "sha256": "617c2fd83fabd7f0ed1b59733c8d55f1133a0c152607f9824f174459fef4c925",
+      "startedAt": "2026-10-16T12:21:42.379Z",
+      "durationMs": 30991.151,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "phf2.spec.mjs",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/lat.json",
+      "sha256": "ccca0ea6be11298205aa8f2c960d2d4a3fdc4e79ff8c497b797186eeffec7fc0",
+      "startedAt": "2026-10-16T12:22:14.853Z",
+      "durationMs": 53114.911,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "lat.spec.mjs",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/evidence-computing.json",
+      "sha256": "594df9a24eddf38b893b221362b6953943977a570df6798e34d68522f83da15f",
+      "startedAt": "2026-10-16T12:22:37.531Z",
+      "durationMs": 44846.804000000004,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "evidence-computing.spec.mjs",
+          "passed": 25,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-v3d-review.json",
+      "sha256": "98a884aefdd5674d2f96e180dd46fb152c2c4d1c85b65305bc7a05e53a131c4a",
+      "startedAt": "2026-10-16T12:23:09.611Z",
+      "durationMs": 30539.109,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-v3d-review.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/qr4-scan.json",
+      "sha256": "e51c89d76979b43eede58c7f725e704df6a71269f56350e46651c060dcbd4114",
+      "startedAt": "2026-10-16T12:23:23.855Z",
+      "durationMs": 41663.206,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "qr4-scan.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hh3-music.json",
+      "sha256": "929d07fd1797f9550f3d63c27318ece2acc7368c5c8685408acbd06df2b3f0b9",
+      "startedAt": "2026-10-16T12:23:41.365Z",
+      "durationMs": 35672.797,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hh3-music.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/man7a.json",
+      "sha256": "51cf9fc3ea8d8e19dea2b470cdbdd407bb0d5682cf24c112a955fd13bb426f15",
+      "startedAt": "2026-10-16T12:24:07.321Z",
+      "durationMs": 47135.051,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "man7a.spec.mjs",
+          "passed": 15,
+          "failed": 1,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": [
+            {
+              "title": "a live canvas walks a ring across the grid; reduced motion keeps it still",
+              "line": 67,
+              "errors": [
+                "Error: expect(received).not.toBe(expected) // Object.is equality\n\nExpected: not \"49.4,160.6\"\n\n  76 |     const a = await ring();\n  77 |     await page.waitForTimeout(1500);\n> 78 |     expect(await ring()).not.toBe(a);\n     |                              ^\n  79 |     await expect(fig.locator(\"canvas\")).toHaveAttribute(\"aria-label\", /torus/);\n  80 |     await expect(fig.locator(\"image.fig-still\")).toHaveAttribute(\"href\", \"img/gallery-torus.jpg\"); // the PDF's still\n  81 |   });\n    at /workspace/splashery/tests/man7a.spec.mjs:78:30"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/ops-media.json",
+      "sha256": "0a5ec027ddc4514ce758072e31563972c0b75c6e3c366b80613635db26abccaf",
+      "startedAt": "2026-10-16T12:24:18.394Z",
+      "durationMs": 33170.041,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "ops-media.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/lv8-dial.json",
+      "sha256": "5475ace06aced030a0679c295849c1b59623c193684574c854db8a90e1acb502",
+      "startedAt": "2026-10-16T12:24:52.922Z",
+      "durationMs": 38477.738,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "lv8-dial.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/shb.json",
+      "sha256": "788de8feca070d30453deeac61f51c9968ea268c4bbdeab29ad5e025189681b8",
+      "startedAt": "2026-10-16T12:24:55.697Z",
+      "durationMs": 33738.246999999996,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "shb.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-v3d-clarity-register.json",
+      "sha256": "57fc8132587af04259d200183d7b3bedb127990c2d5fefb3ae3ea1093a095d51",
+      "startedAt": "2026-10-16T12:25:30.641Z",
+      "durationMs": 18165.227,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-v3d-clarity-register.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/sci-engine.json",
+      "sha256": "48ba2acf16d31db6ae3d06757d9a69d6bfb2cf0c8038e44cd70b79574c6261c1",
+      "startedAt": "2026-10-16T12:25:32.352Z",
+      "durationMs": 19830.232,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "sci-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-depth.json",
+      "sha256": "98866f96d0c255ffaaa23fc050fe01960d6afddd90a944f4db234ec9643e9907",
+      "startedAt": "2026-10-16T12:25:50.062Z",
+      "durationMs": 28139.649999999998,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-depth.spec.mjs",
+          "passed": 10,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/lv7-long.json",
+      "sha256": "88a6fa4e6bc1954d9a5104757579219429fc8d441d6380d2462615ab3a461b3c",
+      "startedAt": "2026-10-16T12:25:53.883Z",
+      "durationMs": 23291.054,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "lv7-long.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/qrc-barcodes.json",
+      "sha256": "56bfb19566d4db9959c548002bb7811bfeac16c6daa9584d840d2b32ebfba4e7",
+      "startedAt": "2026-10-16T12:26:18.475Z",
+      "durationMs": 33755.867999999995,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "qrc-barcodes.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/scr2-engine.json",
+      "sha256": "74dbb2ca2bcea87f8e89cb74d269b4c39be53a7cc366e604b2bea13b6e18aa04",
+      "startedAt": "2026-10-16T12:26:19.118Z",
+      "durationMs": 11674.234,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "scr2-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/man5.json",
+      "sha256": "a8f40ab400bc85a24ed1d65656757a0ad310557e7a3822e34fd85df357c3b92a",
+      "startedAt": "2026-10-16T12:26:32.039Z",
+      "durationMs": 39634.662,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "man5.spec.mjs",
+          "passed": 18,
+          "failed": 1,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": [
+            {
+              "title": "the same input and the same Chromium print the same bytes",
+              "line": 201,
+              "errors": [
+                "Error: Command failed: node tools/manual-pdf.mjs /tmp/man5-pdf-f8KqDr/a.pdf --allow-other-browser\n(node:190447) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\nThe PDF embeds DejaVuSans, DejaVuSansMono, LiberationSans, LiberationSerif, NotoColorEmoji, NotoSans; the shipped one embeds DejaVuSans, DejaVuSansMono, Inter, LiberationSans, LiberationSerif, NotoColorEmoji. Print on a machine with those fonts, or pass --allow-other-fonts.\n\n\n  207 |     if (!env.SPLASHERY_CHROMIUM) delete env.SPLASHERY_CHROMIUM;\n  208 |     for (const out of [a, b])\n> 209 |       execFileSync(\"node\", [\"tools/manual-pdf.mjs\", out, \"--allow-other-browser\"], { env, stdio: \"pipe\" }); // prettier-ignore\n      |       ^\n  210 |     const A = fs.readFileSync(a);\n  211 |     expect(A.equals(fs.readFileSync(b))).toBe(true);\n  212 |     // The shipped PDF is that print of this input (when the pinned Chromium made it).\n "
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/mol-engine.json",
+      "sha256": "83d42f83602bc64481a255a82844a4083e301fc437bac26ec92050665479fcc1",
+      "startedAt": "2026-10-16T12:26:53.456Z",
+      "durationMs": 19135.272,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "mol-engine.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/qr4-2.json",
+      "sha256": "3df2973aa7b06a2a5b750d401d7bf0387033a33b4040d98879d9ed17090cc0c9",
+      "startedAt": "2026-10-16T12:27:12.667Z",
+      "durationMs": 33380.999,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "qr4-2.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/snda-engine.json",
+      "sha256": "7940437f2ba9dce6b11f052763af5d744486d22173445db661a3f83d87a29ca1",
+      "startedAt": "2026-10-16T12:27:13.579Z",
+      "durationMs": 21522.645999999997,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "snda-engine.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/ui4-engine.json",
+      "sha256": "c7bdef5f91b41d871459636f9df93f1841c6dc08b16009915a4c31221bcc3afe",
+      "startedAt": "2026-10-16T12:27:36.163Z",
+      "durationMs": 30937.806,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "ui4-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/asc2.json",
+      "sha256": "2a19c86ad0b0ee6c5df57a57bd32adc87a3496e44057f181f935711f118fe42c",
+      "startedAt": "2026-10-16T12:27:47.128Z",
+      "durationMs": 30612.172000000002,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "asc2.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/sci3-engine.json",
+      "sha256": "8eca67d4ac99b54508a49d97ae9dda0ec55bfca2582fc47bb0afd184d3fda08d",
+      "startedAt": "2026-10-16T12:28:08.031Z",
+      "durationMs": 19652.028,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "sci3-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/sts-engine.json",
+      "sha256": "c82aee4c057de3eb1efe379e60981f1db89869d997dcd6660ef2f7889f41228c",
+      "startedAt": "2026-10-16T12:28:19.008Z",
+      "durationMs": 16870.284,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "sts-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/vol.json",
+      "sha256": "625a820ec3517609c6f8a99a4355e920e693d3ae17289283f604fafbb1f81a8c",
+      "startedAt": "2026-10-16T12:28:28.748Z",
+      "durationMs": 78229.808,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "vol.spec.mjs",
+          "passed": 23,
+          "failed": 1,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": [
+            {
+              "title": "in the page: a DICOM series and a NIfTI open from the Toy tab; a bad file says why",
+              "line": 283,
+              "errors": [
+                "TimeoutError: page.waitForFunction: Timeout 60000ms exceeded.\n\n  297 |     expect(first.dicom).toBe(\"undefined\");\n  298 |     const shown = async (re) => {\n> 299 |       await page.waitForFunction((re) => new RegExp(re).test(document.querySelector(\"#vol-stats\")?.textContent || \"\"), re.source, { timeout: 60000 }); // prettier-ignore\n      |                  ^\n  300 |       return page.evaluate(() => document.querySelector(\"#vol-stats\").textContent);\n  301 |     };\n  302 |     await page.setInputFiles(\"#toy-input-file\", fs.readdirSync(path.join(FIX, \"dicom-series\")).map((f) => path.join(FIX, \"dicom-series\", f))); // prettier-ignore\n    at shown (/workspace/splashery/tests/vol.spec.mjs:299:18)\n    at /workspace/splashery/tests/vol.spec.mjs:303:21"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/tp2-engine.json",
+      "sha256": "3bb1dd9b1baccf15698df4af36848c8ce47909736c9669a538d54b54e1c2c06f",
+      "startedAt": "2026-10-16T12:28:36.935Z",
+      "durationMs": 53340.83,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "tp2-engine.spec.mjs",
+          "passed": 1,
+          "failed": 1,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": [
+            {
+              "title": "?sound=on plays the tap sound and the button mutes it",
+              "line": 18,
+              "errors": [
+                "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 0\nReceived:   0\n\nCall Log:\n- Timeout 30000ms exceeded while waiting on the predicate\n\n  23 |   await tapMiddle(page);\n  24 |   // A first pick is slow without a GPU: wait for the tap to land.\n> 25 |   await expect.poll(() => scheduled(page), { timeout: 30_000 }).toBeGreaterThan(0);\n     |   ^\n  26 |   // A long tune keeps scheduling notes while it plays, so read the count once the mute has\n  27 |   // stopped it, then tap again and wait for that tap to land: nothing more may sound.\n  28 |   await button.click();\n    at /workspace/splashery/tests/tp2-engine.spec.mjs:25:3"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-input.json",
+      "sha256": "c65da89230e2dcc7b29cb0705c5c7bca932a065893026c747e34b5590a1d2846",
+      "startedAt": "2026-10-16T12:29:31.163Z",
+      "durationMs": 8140.982000000001,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-input.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hta.json",
+      "sha256": "9c99d8d52ebaa33d01778106e1af5016dc672a8570c95a4ea8e05b09336789b9",
+      "startedAt": "2026-10-16T12:29:40.202Z",
+      "durationMs": 17684.697,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hta.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/live2-engine.json",
+      "sha256": "b6a07f02cda6b4c3d5f3ef67f8a1af10a9c3c3be55b7566addc98388885d42b1",
+      "startedAt": "2026-10-16T12:29:48.265Z",
+      "durationMs": 20481.887000000002,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "live2-engine.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-r3-input-race.json",
+      "sha256": "47cd4a9f555d9f4d3d717a0609198b27b2ccfbb2e406144d4ce7d4821af9624e",
+      "startedAt": "2026-10-16T12:29:58.920Z",
+      "durationMs": 11992.189,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-r3-input-race.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/sha-book.json",
+      "sha256": "498cb9617a2a366b525b62869445ceb0ff0456767813b32deb219abec12332e5",
+      "startedAt": "2026-10-16T12:30:09.871Z",
+      "durationMs": 25879.832000000002,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "sha-book.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hh3-level1-engine.json",
+      "sha256": "1f8e70f60eec43b5dbe8eadcc87d1d5e31866bd0a5e541456abc3dc4ad0c43a0",
+      "startedAt": "2026-10-16T12:30:11.915Z",
+      "durationMs": 16849.707,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hh3-level1-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/man7b.json",
+      "sha256": "f81277a3d3ed10b6e48521dbcd79e209d0786a98e58386176c3477bd12f4eb9b",
+      "startedAt": "2026-10-16T12:30:29.790Z",
+      "durationMs": 12108.682,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "man7b.spec.mjs",
+          "passed": 24,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-v3d-clarity.json",
+      "sha256": "55ce3343d5fe42b1974502a2cdfcfa06978c2806f4213d520e6b395a374877d1",
+      "startedAt": "2026-10-16T12:30:37.080Z",
+      "durationMs": 12454.563,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-v3d-clarity.spec.mjs",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hh3-storybook.json",
+      "sha256": "bcf613d31f7afc27bedbf909406fd9328e20871074de274854c3bc59a2994040",
+      "startedAt": "2026-10-16T12:30:42.823Z",
+      "durationMs": 18119.942000000003,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hh3-storybook.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/pdf-engine.json",
+      "sha256": "85dbf1bcc47aa999953aca4689ab3d62a643ebed75097c4d586355550eed3192",
+      "startedAt": "2026-10-16T12:30:50.798Z",
+      "durationMs": 13269.539999999999,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "pdf-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/sky-engine.json",
+      "sha256": "e757ddf2b4263f23b122a3954065347583a663ace061e074621f3d964a8b61b6",
+      "startedAt": "2026-10-16T12:31:02.088Z",
+      "durationMs": 14973.797,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "sky-engine.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/an-engine.json",
+      "sha256": "44b6aae73183741c61b19f1c7d5878bc90938e84bcf11b7b349cadaade0cd9c1",
+      "startedAt": "2026-10-16T12:31:05.210Z",
+      "durationMs": 11136.095000000001,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "an-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-core.json",
+      "sha256": "9cf675f086c80c7ac7effc1d71efa10189d765dab49629ca53e355008c3fd4a4",
+      "startedAt": "2026-10-16T12:31:17.319Z",
+      "durationMs": 10123.491999999998,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-core.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hh3-crossbow.json",
+      "sha256": "9763f6232e485c34b6724675adf8a830cc99a048db3563389bc9583ffa061599",
+      "startedAt": "2026-10-16T12:31:18.042Z",
+      "durationMs": 12458.005,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hh3-crossbow.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/st5.json",
+      "sha256": "ff77e8a0440fc7d022e6eea284109ec02d39dea7debf67dc922e5475ee2b36ee",
+      "startedAt": "2026-10-16T12:31:28.674Z",
+      "durationMs": 18189.955,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "st5.spec.mjs",
+          "passed": 3,
+          "failed": 2,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": [
+            {
+              "title": "on the live layout each card is one link; it opens the toy in a new tab; the toy tiles still open the toy's page",
+              "line": 77,
+              "errors": [
+                "TypeError: Invalid URL\n\n   98 |       const fix = page.locator(\".news-fix\").first();\n   99 |       const [popup] = await Promise.all([context.waitForEvent(\"page\"), tapOn(page, fix.locator(\"p\").last())]); // prettier-ignore\n> 100 |       expect(new URL(popup.url()).pathname).toBe(\"/\");\n      |              ^\n  101 |       expect(toyOf(popup.url())).toBe(NEWS.fixes.slice().sort((a, b) => b.date.localeCompare(a.date))[0].toy); // prettier-ignore\n  102 |       await popup.close();\n  103 |       expect(page.url()).toContain(\"/site/new/\");\n    at /workspace/splashery/tests/st5.spec.mjs:100:14"
+              ]
+            },
+            {
+              "title": "in the staged front door the cards open the Playground at playground/",
+              "line": 119,
+              "errors": [
+                "TypeError: Invalid URL\n\n  137 |       const [popup] = await Promise.all([context.waitForEvent(\"page\"), tapOn(page, page.locator(\".news-feature\").first().locator(\"li\").first())]); // prettier-ignore\n  138 |       await popup.waitForLoadState(\"domcontentloaded\");\n> 139 |       expect(new URL(popup.url()).pathname).toBe(\"/playground/\");\n      |              ^\n  140 |       expect(popup.url()).toContain(\"#s=j.\");\n  141 |       await expect(popup.locator(\"#canvas, canvas\").first()).toBeAttached();\n  142 |       await popup.close();\n    at /workspace/splashery/tests/st5.spec.mjs:139:14"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/arc2-engine.json",
+      "sha256": "4592f3285f039c519d79b8c73e345d9273f135231ae3d69cc8622d21a9d837ed",
+      "startedAt": "2026-10-16T12:31:31.768Z",
+      "durationMs": 11352.667,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "arc2-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-r3-background-interior.json",
+      "sha256": "4fea57e63a8a2b9ee1cc62589c7bd87aae0561c12336b7f4c93c6a92fc2b6b02",
+      "startedAt": "2026-10-16T12:31:44.551Z",
+      "durationMs": 6496.642,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-r3-background-interior.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/ln.json",
+      "sha256": "5d159517bca7666a60d411fd23d5a296ae16d5895faa9669d0856254a1ab2e35",
+      "startedAt": "2026-10-16T12:31:48.015Z",
+      "durationMs": 50950.969000000005,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "ln.spec.mjs",
+          "passed": 19,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/qr4-2-engine.json",
+      "sha256": "395493fe9f27ba50b82eace58d6af9dfc4b03b2012cb1dbabb1de6fea8664b6d",
+      "startedAt": "2026-10-16T12:31:51.984Z",
+      "durationMs": 14659.405,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "qr4-2-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/pose-engine.json",
+      "sha256": "747615d16d239da6e84d1b217b4b673a813eb4d37f99e9fba780e0c84051d4a2",
+      "startedAt": "2026-10-16T12:32:07.912Z",
+      "durationMs": 10494.377,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "pose-engine.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/scr-engine.json",
+      "sha256": "af46837cb498b0469702a7bee38110e369ca25fd2eb8cdb4c0483918a11379e7",
+      "startedAt": "2026-10-16T12:32:19.747Z",
+      "durationMs": 9751.485,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "scr-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/sp4.json",
+      "sha256": "5dc4296acded79ee447369708ff23b75a51e77a2f330c0a7607511851f786570",
+      "startedAt": "2026-10-16T12:32:30.811Z",
+      "durationMs": 15042.655,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "sp4.spec.mjs",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/stm-engine.json",
+      "sha256": "f7c55df5832f577a5d5d10e2e0a58020078fbac6ee84fcf19ceedbcf64af5cb4",
+      "startedAt": "2026-10-16T12:32:40.020Z",
+      "durationMs": 9006.697,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "stm-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/tpg-engine.json",
+      "sha256": "e916f1b0f6d78fe47dabd44d52b784883ac6da1fc8ddf74f44496664c096dca3",
+      "startedAt": "2026-10-16T12:32:46.939Z",
+      "durationMs": 12389.935,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "tpg-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/asc-engine.json",
+      "sha256": "b7af29b2037afe7c1482709e4ec6f23a561f20eb2c0df766e8a56b853e006e8e",
+      "startedAt": "2026-10-16T12:32:50.260Z",
+      "durationMs": 8628.352,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "asc-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/e4f.json",
+      "sha256": "9e21197ebb00d569b2662f3da8deff404c7612554bdb86c125931f2cfc944ed7",
+      "startedAt": "2026-10-16T12:32:59.878Z",
+      "durationMs": 8511.265,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "e4f.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/fx9-engine.json",
+      "sha256": "f5bd9d4c141cd4fc9228de531885598dea16e0b9cf967354c75e702809b15e16",
+      "startedAt": "2026-10-16T12:33:00.359Z",
+      "durationMs": 10265.214,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "fx9-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hh1-shapes.json",
+      "sha256": "3e2761472930a0ecd31bf656d39641657b9cce8dfd11a53e9681436f11ddefb8",
+      "startedAt": "2026-10-16T12:33:09.457Z",
+      "durationMs": 9612.635999999999,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hh1-shapes.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/klab.json",
+      "sha256": "48fbf0297a5267e271c8ea556e3df0f97851015538ce8016bb9222969e10c1da",
+      "startedAt": "2026-10-16T12:33:11.871Z",
+      "durationMs": 5123.281,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "klab.spec.mjs",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/ai-engine.json",
+      "sha256": "2ed1ba6bca37ecb1a5f11bf41bf82a40b8795c864c6c523fe2f59e6be5066422",
+      "startedAt": "2026-10-16T12:33:18.015Z",
+      "durationMs": 8940.421,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "ai-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-gallery.json",
+      "sha256": "d234c18522a00f9c56ec898e6643e5ebec2a6d57fcfb07d5075a59340d5db8e2",
+      "startedAt": "2026-10-16T12:33:20.381Z",
+      "durationMs": 9291.809,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-gallery.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/chs-engine.json",
+      "sha256": "6783fcc0c21cbc0e73da7aee2cb681b22cd033acdf2cc96bd98e60dbebc21056",
+      "startedAt": "2026-10-16T12:33:28.204Z",
+      "durationMs": 8398.94,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "chs-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cmp2-engine.json",
+      "sha256": "880a8f3ee0fe096c2bdde4b1e19e00ab3b58f1d0722eb0f62054c0d7e51c2376",
+      "startedAt": "2026-10-16T12:33:31.018Z",
+      "durationMs": 8848.414,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cmp2-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/fid.json",
+      "sha256": "fb442051ef9ecea74c60a0bbd644ced25fea318ab47d2c90528cdfb1ce75283a",
+      "startedAt": "2026-10-16T12:33:37.772Z",
+      "durationMs": 6671.93,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "fid.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/opm.json",
+      "sha256": "a99ac9ae44f863ad17bc19998c59c81a89ca2e12934bb28c5025578467f7ed57",
+      "startedAt": "2026-10-16T12:33:40.947Z",
+      "durationMs": 5103.3099999999995,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "opm.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/qrs-steps.json",
+      "sha256": "314aa71f266a0cc58b1d9520652385c20798682e730a308eeec090639c608646",
+      "startedAt": "2026-10-16T12:33:45.398Z",
+      "durationMs": 7512.433999999999,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "qrs-steps.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/unit.json",
+      "sha256": "94d84d5911bef24be974e6d3548dcc1ed448c3117a6671d07c1ed1a2e650c3d6",
+      "startedAt": "2026-10-16T12:33:47.122Z",
+      "durationMs": 7111.473,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "unit.spec.mjs",
+          "passed": 20,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/asc-core.json",
+      "sha256": "6a9a1b2e474b692626dcf62ba0fb10bb5d324a0b4cff37b6e3d7dbd032be2a46",
+      "startedAt": "2026-10-16T12:33:53.899Z",
+      "durationMs": 4279.209,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "asc-core.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-r3-compact.json",
+      "sha256": "6039b57ed8f610cb91cf8f594942a0c7676968ccd5a62c2accfe2de6e54b8c77",
+      "startedAt": "2026-10-16T12:33:55.272Z",
+      "durationMs": 7656.356,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-r3-compact.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-r3-footprint.json",
+      "sha256": "787c1fa85eaa3bde5fe67110e0a3ca3708fa2baaa386204f830728b0049800bd",
+      "startedAt": "2026-10-16T12:33:59.315Z",
+      "durationMs": 1871.038,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-r3-footprint.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/shb-engine.json",
+      "sha256": "14f367f5a6f7020d15c8d9ac4af6a97248b16ac77d1198331c4ce58fd6e32142",
+      "startedAt": "2026-10-16T12:34:02.243Z",
+      "durationMs": 7780.826000000001,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "shb-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cmp2-sort.json",
+      "sha256": "daf6a7b2355cb85388634bb9bd753657d6647c698fa96ec646c1fddb2c124824",
+      "startedAt": "2026-10-16T12:34:04.138Z",
+      "durationMs": 5957.488,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cmp2-sort.spec.mjs",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/img.json",
+      "sha256": "6546511d3cb6f8fda66bc5fc083fbdda37d25f487a18d87f5e5d6001ff10fd6c",
+      "startedAt": "2026-10-16T12:34:11.111Z",
+      "durationMs": 6792.566,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "img.spec.mjs",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/st3.json",
+      "sha256": "107fd386c69b4bbd7d9df9cd65979aa92f960f86d32d00c4a523137c4aa5ce4e",
+      "startedAt": "2026-10-16T12:34:11.222Z",
+      "durationMs": 9593.901,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "st3.spec.mjs",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/bkd-format.json",
+      "sha256": "7e41c87da4b3f227b217e6c16dbe21b2c3d5f42665414a82563c67fac182ad34",
+      "startedAt": "2026-10-16T12:34:19.450Z",
+      "durationMs": 3807.71,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "bkd-format.spec.mjs",
+          "passed": 14,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/bld.json",
+      "sha256": "686a86e9197cab5aa94b5f3b8617f0d9dd70f12ab6293d28bf071be7a801edf0",
+      "startedAt": "2026-10-16T12:34:21.926Z",
+      "durationMs": 2100.004,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "bld.spec.mjs",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-r3-depth.json",
+      "sha256": "168267a36b5bd9559df4b2e95f9fdb794c476da8997e6f3d9a51325fc17df015",
+      "startedAt": "2026-10-16T12:34:24.380Z",
+      "durationMs": 1426.882,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-r3-depth.spec.mjs",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-r3-metrics.json",
+      "sha256": "f4fc19d194522c1b75903814675a04fbb593d62e55ff5f437057146e53276d6d",
+      "startedAt": "2026-10-16T12:34:25.116Z",
+      "durationMs": 1518.899,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-r3-metrics.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-v3d-cpu.json",
+      "sha256": "c1f3e59f881dd3b41c8c08c6d433c8fdcd5c647ad0f5e421d3e1bbd353a02a92",
+      "startedAt": "2026-10-16T12:34:26.844Z",
+      "durationMs": 3103.739,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-v3d-cpu.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/chem.json",
+      "sha256": "9f3bcd4f5949fa50ad858770ac02600c6480576315d4da0ddbc1cc234cdc8465",
+      "startedAt": "2026-10-16T12:34:27.734Z",
+      "durationMs": 4134.359,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "chem.spec.mjs",
+          "passed": 24,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/fx10.json",
+      "sha256": "3b521e8ef9ee68097a8a2857d6b7ac8633d9d2db74bfe901055dace9ff90f728",
+      "startedAt": "2026-10-16T12:34:30.951Z",
+      "durationMs": 1768.328,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "fx10.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hh5-engine.json",
+      "sha256": "a8a04bc19a0c3600436e3dc1587a81bd647e964efca598f2f99ca7dc25d131f0",
+      "startedAt": "2026-10-16T12:34:32.873Z",
+      "durationMs": 1024.6529999999998,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hh5-engine.spec.mjs",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/st4-engine.json",
+      "sha256": "331cc845772bd7edd98b4494290984fe1392cbaaf19934e9b93558bd63df81e3",
+      "startedAt": "2026-10-16T12:34:33.704Z",
+      "durationMs": 8602.663,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "st4-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-r3-anchored.json",
+      "sha256": "29096e211510ee5799ec7676eef2f19923707d7878f93c9e03c42fc49a08cf70",
+      "startedAt": "2026-10-16T12:34:34.897Z",
+      "durationMs": 1459.547,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-r3-anchored.spec.mjs",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/qrs-study.json",
+      "sha256": "5ffe27c58234d2d529f18700eaef0aac8dc58199bc882a01fb09250297472801",
+      "startedAt": "2026-10-16T12:34:38.096Z",
+      "durationMs": 4818.222,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "qrs-study.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/asc-unit.json",
+      "sha256": "76763db46eac7e9d6aea61344b250af0bbbb50f4d9e049fc148c80d99991c310",
+      "startedAt": "2026-10-16T12:34:43.640Z",
+      "durationMs": 4085.1139999999996,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "asc-unit.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-r3-background.json",
+      "sha256": "c4b0dd58159a1c4dfd3fb35a4a0d0c9681e7bc36539c5908f124ba4b9236100b",
+      "startedAt": "2026-10-16T12:34:44.107Z",
+      "durationMs": 872.292,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-r3-background.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-p3d2-r3-surface.json",
+      "sha256": "24e975cb2076bbf7ef28f270474824307196be913f1b3f1678000e078390ed59",
+      "startedAt": "2026-10-16T12:34:46.270Z",
+      "durationMs": 1342.674,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-p3d2-r3-surface.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cdx-v3d-handoff.json",
+      "sha256": "ce81c70246dd2113e3f4fa14fcc318c75c8a2f7cb9a7187aa49e006ccf50b80f",
+      "startedAt": "2026-10-16T12:34:48.682Z",
+      "durationMs": 1203.788,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-v3d-handoff.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/cmp2-enigma.json",
+      "sha256": "a200a2bb233dd77416f56106b406593dbc7c9833167fcd6a89a924b634683593",
+      "startedAt": "2026-10-16T12:34:48.771Z",
+      "durationMs": 2949.3030000000003,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cmp2-enigma.spec.mjs",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hec-engine.json",
+      "sha256": "58d841cb9967d093b3e1f9a143f0495aa3477d030c5a922412d708f67ed5d0d5",
+      "startedAt": "2026-10-16T12:34:51.075Z",
+      "durationMs": 2170.33,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hec-engine.spec.mjs",
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/man2.json",
+      "sha256": "1c8bc9aa4857eb958b200232a16f28be8f82fe0c46deac7ab67dcb60c17c3f43",
+      "startedAt": "2026-10-16T12:34:52.802Z",
+      "durationMs": 14353.452000000001,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "man2.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/tw2-dna.json",
+      "sha256": "8e38017d0d7df3e1616faf59173ba34d542966bbc389743232b1f35e6426a7cf",
+      "startedAt": "2026-10-16T12:34:54.551Z",
+      "durationMs": 3603.4399999999996,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "tw2-dna.spec.mjs",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/e6b.json",
+      "sha256": "034ca59edc18464b3916e37c77837c9d908824d9b654a2bed09e7d57e116a09c",
+      "startedAt": "2026-10-16T12:34:59.512Z",
+      "durationMs": 2162.618,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "e6b.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/heb-engine.json",
+      "sha256": "7073493e3cf73bd62c89d48b37c960afed21e787994d94ebb9e585bb1dcfa4ff",
+      "startedAt": "2026-10-16T12:35:02.653Z",
+      "durationMs": 1262.343,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "heb-engine.spec.mjs",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/lv7-engine.json",
+      "sha256": "d06fc56347d323bf96a82388888ad7b9cdceb2591568c48aa39cafc071532ef8",
+      "startedAt": "2026-10-16T12:35:04.915Z",
+      "durationMs": 1395.794,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "lv7-engine.spec.mjs",
+          "passed": 2,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/pr2.json",
+      "sha256": "afb44b2aa0c29c8723abd464ecf4aa38710ad8b3e33b5496c53f4b6c17b54fae",
+      "startedAt": "2026-10-16T12:35:07.471Z",
+      "durationMs": 2273.6620000000003,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "pr2.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/qrs-heal.json",
+      "sha256": "0704d75246b59892a9a2ed3986e966863683b9b1c7406dcf6b08576055d545f2",
+      "startedAt": "2026-10-16T12:35:08.241Z",
+      "durationMs": 1610.745,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "qrs-heal.spec.mjs",
+          "passed": 3,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/rel-engine.json",
+      "sha256": "0e013e60b44a94cb2cd7bfa1dc46dff37ec8003adf0fcf3b8f59b80cd6cf0a3c",
+      "startedAt": "2026-10-16T12:35:10.841Z",
+      "durationMs": 1257.027,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "rel-engine.spec.mjs",
+          "passed": 1,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/sndd.json",
+      "sha256": "e28759ca2046ff3d895eaf4c20ad3d24ac97ef816c0bcaafe1b12f7ae9736743",
+      "startedAt": "2026-10-16T12:35:11.015Z",
+      "durationMs": 1499.504,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "sndd.spec.mjs",
+          "passed": 4,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/bk.json",
+      "sha256": "21ae45c7a3b07aa3f8b5dc75ea6ac017865c851dc870b6921fdea4732de20a7e",
+      "startedAt": "2026-10-16T12:35:13.435Z",
+      "durationMs": 480520.152,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "bk.spec.mjs",
+          "passed": 36,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/smd-moving.json",
+      "sha256": "59a0ded7d465cc6b98f50927ace010d44c17cae8991633b1068ecfcc27757fca",
+      "startedAt": "2026-10-16T12:43:14.985Z",
+      "durationMs": 162760.825,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "smd-moving.spec.mjs",
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/f.json",
+      "sha256": "cda57509f798e6d641e14f2d42ec8947b6b80acfc97995ee58138ce8b8f7c86c",
+      "startedAt": "2026-10-16T12:45:58.632Z",
+      "durationMs": 186125.842,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "f.spec.mjs",
+          "passed": 8,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/hec.json",
+      "sha256": "0af6d50878c401432c9ce428c739f44698eaa02b6613003ff0aa8d5c1635754d",
+      "startedAt": "2026-10-16T12:49:05.725Z",
+      "durationMs": 115713.20999999999,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hec.spec.mjs",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/heb.json",
+      "sha256": "cfe41ebed981ab1d231d66ff848316c04d13667e285ac58615ade3db999e4ca5",
+      "startedAt": "2026-10-16T12:51:02.351Z",
+      "durationMs": 175721.85700000002,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "heb.spec.mjs",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/fl7.json",
+      "sha256": "5dcd91ea8e57884c096b2c0f17487160c1048a2202e9b55e3bbc08fa093bf8f9",
+      "startedAt": "2026-10-16T12:53:59.020Z",
+      "durationMs": 121492.987,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "fl7.spec.mjs",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/math.json",
+      "sha256": "3dd9f9559d8cb4b93d1ba701d105bea674bde61b74f49bdeae89cd5cae5ad924",
+      "startedAt": "2026-10-16T12:56:01.455Z",
+      "durationMs": 151001.02599999998,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "math.spec.mjs",
+          "passed": 22,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/phy.json",
+      "sha256": "b0f7ae22c1cd84ceb03a1792062ff865b54811fe27ef7e364b4311c2950b6648",
+      "startedAt": "2026-10-16T12:58:33.397Z",
+      "durationMs": 162960.913,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "phy.spec.mjs",
+          "passed": 6,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/spg.json",
+      "sha256": "6e611bb8ee101d553141feaaf57f2f2a7a5391fea171d8615fe9fc6397005a51",
+      "startedAt": "2026-10-16T13:01:17.431Z",
+      "durationMs": 46043.292,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "spg.spec.mjs",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-suite/phf-engine.json",
+      "sha256": "be8a6d4e59251e76b36f6d0f49c3014a1cb525fc1accb77c3c469f7ca5c1925e",
+      "startedAt": "2026-10-16T13:02:04.389Z",
+      "durationMs": 55528.332,
+      "source": null,
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "phf-engine.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-isolated-tests/phf.json",
+      "sha256": "966c5fda48f5617643fb87739df03189363ee8ae5c615fe4f8495e857df52fba",
+      "startedAt": "2026-10-16T13:03:01.805Z",
+      "durationMs": 56053.053,
+      "source": {
+        "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+        "sourceRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+        "isolated": true,
+        "startedAt": 1792155781.124422,
+        "graphics": "llvmpipe",
+        "nodeVersion": "22.14.0"
+      },
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "phf.spec.mjs",
+          "passed": 7,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-isolated-tests/qr4-craft.json",
+      "sha256": "1162c2c0128a178a47709841571dfe0605c29fa9e29fa8735aff5ab0a6acc541",
+      "startedAt": "2026-10-16T13:03:58.551Z",
+      "durationMs": 92190.44499999999,
+      "source": {
+        "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+        "sourceRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+        "isolated": true,
+        "startedAt": 1792155837.8837543,
+        "graphics": "llvmpipe",
+        "nodeVersion": "22.14.0"
+      },
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "qr4-craft.spec.mjs",
+          "passed": 9,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-isolated-tests/cdx-mp2-r4.json",
+      "sha256": "17d4095aae03474926ef09bc14d02002f89132fc2f35d25b2620fcdfe75e1a0e",
+      "startedAt": "2026-10-16T13:05:31.480Z",
+      "durationMs": 490734.377,
+      "source": {
+        "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+        "sourceRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+        "isolated": true,
+        "startedAt": 1792155930.8209684,
+        "graphics": "llvmpipe",
+        "nodeVersion": "22.14.0"
+      },
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "cdx-mp2-r4.spec.mjs",
+          "passed": 13,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-isolated-tests/man7a.json",
+      "sha256": "341e634acfc67b46bed6e6ef1ac6447d87c593d22aad6509b1086f7de56854fc",
+      "startedAt": "2026-10-16T13:13:42.945Z",
+      "durationMs": 29902.689,
+      "source": {
+        "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+        "sourceRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+        "isolated": true,
+        "startedAt": 1792156422.2376556,
+        "graphics": "llvmpipe",
+        "nodeVersion": "22.14.0"
+      },
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "man7a.spec.mjs",
+          "passed": 16,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-isolated-tests/hh3-holidays.json",
+      "sha256": "2e11714f07e23cd6956edd4e39bd814a1c4ab546e4e2ead129f7d2d4aa99a8b7",
+      "startedAt": "2026-10-16T13:14:13.526Z",
+      "durationMs": 52790.24,
+      "source": {
+        "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+        "sourceRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+        "isolated": true,
+        "startedAt": 1792156452.8625336,
+        "graphics": "llvmpipe",
+        "nodeVersion": "22.14.0"
+      },
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "hh3-holidays.spec.mjs",
+          "passed": 5,
+          "failed": 0,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "report": "r4-isolated-tests/man5.json",
+      "sha256": "80f090051129d7b19e641f7b1fa48ec17ba4d2df3b171327a7ee64fa65afe610",
+      "startedAt": "2026-10-16T13:15:07.055Z",
+      "durationMs": 30114.142,
+      "source": {
+        "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+        "sourceRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+        "isolated": true,
+        "startedAt": 1792156506.332649,
+        "graphics": "llvmpipe",
+        "nodeVersion": "22.14.0"
+      },
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "man5.spec.mjs",
+          "passed": 18,
+          "failed": 1,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": [
+            {
+              "title": "the same input and the same Chromium print the same bytes",
+              "line": 201,
+              "errors": [
+                "Error: Command failed: node tools/manual-pdf.mjs /tmp/man5-pdf-GK0Dus/a.pdf --allow-other-browser\n(node:212623) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.\n(Use `node --trace-warnings ...` to show where the warning was created)\nThe PDF embeds DejaVuSans, DejaVuSansMono, LiberationSans, LiberationSerif, NotoColorEmoji, NotoSans; the shipped one embeds DejaVuSans, DejaVuSansMono, Inter, LiberationSans, LiberationSerif, NotoColorEmoji. Print on a machine with those fonts, or pass --allow-other-fonts.\n\n\n  207 |     if (!env.SPLASHERY_CHROMIUM) delete env.SPLASHERY_CHROMIUM;\n  208 |     for (const out of [a, b])\n> 209 |       execFileSync(\"node\", [\"tools/manual-pdf.mjs\", out, \"--allow-other-browser\"], { env, stdio: \"pipe\" }); // prettier-ignore\n      |       ^\n  210 |     const A = fs.readFileSync(a);\n  211 |     expect(A.equals(fs.readFileSync(b))).toBe(true);\n  212 |     // The shipped PDF is that print of this input (when the pinned Chromium made it).\n "
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "r4-isolated-tests/st5.json",
+      "sha256": "7386816acba4b728dbd41f2fd97f59d3095bf01c000471fd91184282e1abf9b7",
+      "startedAt": "2026-10-16T13:15:37.905Z",
+      "durationMs": 9538.631,
+      "source": {
+        "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+        "sourceRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+        "isolated": true,
+        "startedAt": 1792156537.188607,
+        "graphics": "llvmpipe",
+        "nodeVersion": "22.14.0"
+      },
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "st5.spec.mjs",
+          "passed": 3,
+          "failed": 2,
+          "skipped": 0,
+          "flaky": 0,
+          "expectedFailures": 0,
+          "failures": [
+            {
+              "title": "on the live layout each card is one link; it opens the toy in a new tab; the toy tiles still open the toy's page",
+              "line": 77,
+              "errors": [
+                "TypeError: Invalid URL\n\n   98 |       const fix = page.locator(\".news-fix\").first();\n   99 |       const [popup] = await Promise.all([context.waitForEvent(\"page\"), tapOn(page, fix.locator(\"p\").last())]); // prettier-ignore\n> 100 |       expect(new URL(popup.url()).pathname).toBe(\"/\");\n      |              ^\n  101 |       expect(toyOf(popup.url())).toBe(NEWS.fixes.slice().sort((a, b) => b.date.localeCompare(a.date))[0].toy); // prettier-ignore\n  102 |       await popup.close();\n  103 |       expect(page.url()).toContain(\"/site/new/\");\n    at /workspace/splashery/tests/st5.spec.mjs:100:14"
+              ]
+            },
+            {
+              "title": "in the staged front door the cards open the Playground at playground/",
+              "line": 119,
+              "errors": [
+                "TypeError: Invalid URL\n\n  137 |       const [popup] = await Promise.all([context.waitForEvent(\"page\"), tapOn(page, page.locator(\".news-feature\").first().locator(\"li\").first())]); // prettier-ignore\n  138 |       await popup.waitForLoadState(\"domcontentloaded\");\n> 139 |       expect(new URL(popup.url()).pathname).toBe(\"/playground/\");\n      |              ^\n  140 |       expect(popup.url()).toContain(\"#s=j.\");\n  141 |       await expect(popup.locator(\"#canvas, canvas\").first()).toBeAttached();\n  142 |       await popup.close();\n    at /workspace/splashery/tests/st5.spec.mjs:139:14"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "report": "r4-isolated-tests/tp2-engine.json",
+      "sha256": "d3946f6b42045ccd36dd234b11e1239a8e3fa8d903bc7200b85ee09c24292a06",
+      "startedAt": "2026-10-16T13:15:48.163Z",
+      "durationMs": 26142.248,
+      "source": {
+        "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+        "sourceRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
+        "isolated": true,
+        "startedAt": 1792156547.467224,
+        "graphics": "llvmpipe",
+        "nodeVersion": "22.14.0"
+      },
+      "globalErrors": [],
+      "files": [
+        {
+          "file": "tp2-engine.spec.mjs",
+          "passed": 2,
           "failed": 0,
           "skipped": 0,
           "flaky": 0,

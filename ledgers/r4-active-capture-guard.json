@@ -6,5 +6,8 @@
   "publishedSourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
   "publishedRevision": "cc4f8fa36a7dc08d443d09aa94ff830a48f1064c",
   "publicTip": "0e15561da5c7d0ddadf2a22587eb800be40c83bc",
-  "finishedAt": 1792152668.845953
+  "finishedAt": 1792152668.845953,
+  "focusedReport": "r4-focused-tests/paused-active-capture-fix.json",
+  "focusedReportSha256": "5cd5fa12419cc26d35970d09c903f9b8c6341c9c88a010ceafe47facdd3659d3",
+  "focusedReportStartedAt": "2026-10-16T12:11:00.857Z"
 }

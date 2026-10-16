@@ -213,6 +213,11 @@ clean natural-camera cadence benchmark
 - [r4-test-ledger.md](ledgers/r4-test-ledger.md)
 - [r4-node-tests.json](ledgers/r4-node-tests.json)
 - [r4-photo-equivalence.json](ledgers/r4-photo-equivalence.json)
+- [r4-font-environment.json](ledgers/r4-font-environment.json)
+- [r4-final-test-summary.json](ledgers/r4-final-test-summary.json)
+- [r4-test-immutability.json](ledgers/r4-test-immutability.json)
+- [r4-photo-scope.json](ledgers/r4-photo-scope.json)
+- [r4-checkpoint-refs.json](ledgers/r4-checkpoint-refs.json)
 - [r4-node-tests.tap](ledgers/r4-node-tests.tap)
 - [r4-gallery-check.json](ledgers/r4-gallery-check.json)
 - [r4-archive-verification.json](ledgers/r4-archive-verification.json)
@@ -238,9 +243,11 @@ root manifest. Decompress them before loading them in a trace or CPU-profile vie
 - [r4-final-r4-cpu.json.sample.cpuprofile.gz](ledgers/r4-final-r4-cpu.json.sample.cpuprofile.gz)
 - [r4-final-r4-cpu.json.sample.trace.json.gz](ledgers/r4-final-r4-cpu.json.sample.trace.json.gz)
 
-Every original Playwright JSON report, including failures and superseded runs, is retained under
-`ledgers/test-reports/` as a gzip file. The root manifest records its original and compressed
-hashes; the test ledger identifies which complete file run supplies each latest result.
+Every complete-file Playwright JSON report, including failures and superseded runs, is retained
+under `ledgers/test-reports/` as a gzip file. Focused and auxiliary invocations are separately
+retained under `ledgers/focused-test-reports/` and never replace a complete-file result. The root
+manifest records original and compressed hashes; the test ledger identifies each latest whole-file
+result. Unknown historical source pins remain unknown.
 
 Incomplete measurements remain explicitly incomplete. Earlier failures are preserved in the test
 ledger; latest whole-file reruns do not erase them. These are Chromium software-rendered phone

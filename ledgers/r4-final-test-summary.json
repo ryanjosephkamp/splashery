@@ -1,0 +1,112 @@
+{
+  "collectedAt": "2026-10-16T13:16:15.830530+00:00",
+  "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+  "expectedFiles": 331,
+  "files": 331,
+  "totals": {
+    "passed": 2888,
+    "failed": 15,
+    "skipped": 1,
+    "flaky": 0,
+    "expectedFailures": 0
+  },
+  "existing": {
+    "files": 329,
+    "passed": 2868,
+    "failed": 15,
+    "skipped": 1,
+    "flaky": 0,
+    "expectedFiles": 329
+  },
+  "new": {
+    "files": 2,
+    "passed": 20,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0
+  },
+  "photoCheckpointFamilies": {
+    "files": 25,
+    "passed": 187,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "expectedFiles": 25,
+    "missing": []
+  },
+  "node": {
+    "tests": 16,
+    "pass": 16,
+    "fail": 0,
+    "skipped": 0,
+    "cancelled": 0
+  },
+  "failedFiles": [
+    "cdx-mir.spec.mjs",
+    "fx4-engine.spec.mjs",
+    "hh5-animals.spec.mjs",
+    "live-engine.spec.mjs",
+    "live2.spec.mjs",
+    "man4.spec.mjs",
+    "man5.spec.mjs",
+    "qrl.spec.mjs",
+    "smoke.spec.mjs",
+    "st5.spec.mjs",
+    "tp2.spec.mjs",
+    "vol.spec.mjs"
+  ],
+  "missingFiles": [],
+  "unmetRechecks": [
+    {
+      "file": "cdx-mir",
+      "estimatedSeconds": 270,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "hh5-animals",
+      "estimatedSeconds": 150,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "qrl",
+      "estimatedSeconds": 120,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "tp2",
+      "estimatedSeconds": 210,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "live-engine",
+      "estimatedSeconds": 180,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "live2",
+      "estimatedSeconds": 210,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "man4",
+      "estimatedSeconds": 240,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "fx4-engine",
+      "estimatedSeconds": 330,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "smoke",
+      "estimatedSeconds": 840,
+      "reason": "Does not fit before final-publication cutoff"
+    },
+    {
+      "file": "vol",
+      "estimatedSeconds": 58,
+      "reason": "Does not fit before final-publication cutoff"
+    }
+  ],
+  "allExistingPassed": false
+}

@@ -1,0 +1,172 @@
+{
+  "checkedAt": "2026-10-16T13:16:16.717347+00:00",
+  "sourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+  "files": [
+    {
+      "file": "src/packs/photo-3d.js",
+      "sha256": "6e8247dbdf01f007dbd745298ffdd794107cd61e1a266dd5c66471b51a7a6607",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": false
+    },
+    {
+      "file": "src/packs/photo-3d-core.js",
+      "sha256": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": false
+    },
+    {
+      "file": "src/photo3d/build-worker.js",
+      "sha256": "7ed4768c7b3a9440ad75461922aa1f33484342c1bb4ae9dd54458435869bb175",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": false
+    },
+    {
+      "file": "src/photo3d/preview.js",
+      "sha256": "0935f439061b84c0b81f2f727e14514aba75422c373613ebaa6940267c559d86",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": false
+    },
+    {
+      "file": "src/photo-splats.js",
+      "sha256": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": true
+    },
+    {
+      "file": "src/live/relief-mesh.js",
+      "sha256": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": true
+    },
+    {
+      "file": "src/live/relief-height.js",
+      "sha256": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": true
+    },
+    {
+      "file": "src/live/relief.js",
+      "sha256": "4f80c05ee310dc95be32ea7cb0f7fdd7a3b1bb4927070fe1d039973de9ebe866",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": false
+    },
+    {
+      "file": "src/depth/client.js",
+      "sha256": "cd1951ee564cf8a1ba7d655497cea0fc6cfe80ac72b4d382782fb2b998845a9e",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": true
+    },
+    {
+      "file": "src/depth/engine.js",
+      "sha256": "2f59ffb7755ee1c96af95de2c93483c80dafc8c7f71007f2fc0bfb89cb332faf",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": false
+    },
+    {
+      "file": "src/depth/clip.js",
+      "sha256": "9ab5111438dcee5c0f293ec4bf80d6c083baa3b15d6d6467120b58a72654a295",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": true
+    },
+    {
+      "file": "src/packs/dot-samples.js",
+      "sha256": "2164b7092aee10e46cc840f2fc19a9f6fd66d468307d34ecc9a134791c7c8643",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": true
+    },
+    {
+      "file": "src/packs/hard-case-samples.js",
+      "sha256": "bb51d75006ff7c9a91f7330df2e0d3953b4e5143e7efa15c0268a31a16683a2d",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": true
+    },
+    {
+      "file": "src/packs/hard-case-pictures.js",
+      "sha256": "b43b8e3a26e8bd08f45dabcc0cd151b1025a03a025b14fd1e3267f2f86afd9e3",
+      "matchesMergedMain": true,
+      "matchesInheritedR3": true
+    }
+  ],
+  "sharpCoreFunctions": {
+    "baseline": "cc297c89",
+    "functions": [
+      {
+        "name": "sharpPhoto",
+        "identical": true,
+        "sha256": "ce3b4efd16560922bda98af6feb4e73843a2281cb3103528ee457f5f526ba328"
+      },
+      {
+        "name": "prepareSharpPhoto",
+        "identical": true,
+        "sha256": "4e74b7dfa12da95e91773902339d6a8e369c36411d483eec1a6b596bdf311881"
+      },
+      {
+        "name": "sharpEntry",
+        "identical": true,
+        "sha256": "cc1b46cf6e0f5da6a4ea048577a4f4dc067de6cd7274d95544fc8afc9df7fa18"
+      },
+      {
+        "name": "fromScene",
+        "identical": true,
+        "sha256": "76ca01b29d0835c295217cc98b3cffea0922c6c94d4fe901e6b7fa0c773542f4"
+      },
+      {
+        "name": "fillPhoto",
+        "identical": true,
+        "sha256": "8e101776368ae58ee306956924407d4bcfb51df93c4c37a4916d33962398b1db"
+      },
+      {
+        "name": "grid",
+        "identical": true,
+        "sha256": "e1fc4debbdebc57a0b76aecfe825d62d2c1212bfa80e48935fd9b910e5ab2ee9"
+      },
+      {
+        "name": "splatsNeeded",
+        "identical": true,
+        "sha256": "d57c2156aadac1012a81f2e28214fe511460caa539b47cbc4d7f5ae8ce6d741f"
+      },
+      {
+        "name": "splats",
+        "identical": true,
+        "sha256": "a7a770877a634a2def6c4a305ff7f3005b81c4b729c79f7dbd8c09b61f6c5d04"
+      },
+      {
+        "name": "wake",
+        "identical": true,
+        "sha256": "b41c0a904ae311cf17f421f70575ec3d0b7abc527f3cbd06c7f89d968a8f46c7"
+      },
+      {
+        "name": "tapBox",
+        "identical": true,
+        "sha256": "3af3f0d88f4cc85dc000bbe3b85d5e38c487eb39197096cae3152efe2cffccda"
+      },
+      {
+        "name": "status",
+        "identical": true,
+        "sha256": "5b6ebe4b2eea7e2d07f38544ac2864dd0d24da14e16bdc2fa5980215ebe7b82b"
+      }
+    ],
+    "checkedAt": "2026-10-16T12:12:30.867470+00:00",
+    "applicationSourceHash": "0fad1dd6e97fd0486ea876115f80607925b61509c6a9c6caf965cc7cd99ebfb7",
+    "sharpModuleSha256": "8f6e2f1f231f4b061e383a41c9af76d777308651189481f0af6e8ed1ddbde2f4",
+    "allIdentical": true
+  },
+  "checkpointRefs": {
+    "checkedAt": "2026-10-16 12:38:12 UTC",
+    "method": "Read-only GitHub refs; compare with the published Photo checkpoint document",
+    "refs": [
+      {
+        "branch": "claude/checkpoint-photo-3d-2026-10-14",
+        "expected": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
+        "actual": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
+        "matches": true
+      },
+      {
+        "branch": "claude/checkpoint-photo-3d-2026-10-14-clips",
+        "expected": "004e10f3ae4003616fe3e1aea54189984b52f91e",
+        "actual": "004e10f3ae4003616fe3e1aea54189984b52f91e",
+        "matches": true
+      }
+    ]
+  }
+}

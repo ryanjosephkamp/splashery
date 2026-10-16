@@ -3,18 +3,18 @@
   "publicBranch": "codex/moving-photo-r4-public",
   "base": "319378dc9d3a727e9ddbc78aad304f18db64e4c2",
   "main": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
-  "privateTip": "c9208db848e7c8d29ab48b9743777aa4bc5f04f3",
+  "privateTip": "dc9498b7fc0a0db7b5d1eb29e10ff237d87d4e27",
   "reason": "GitHub GH007 rejected the initial push. Original local history is retained; new public commits use the noreply address. No existing branch is rebased, amended, reset, or force-pushed.",
-  "publicTip": "055c167d468f27402bb35b41eb1b24deef8f552c",
+  "publicTip": "421ec876df380684aa480afa293024b3a8a21503",
   "engineCommit": "df6f69bdb4b664d050505fe76f1cf6c93b3d2add",
   "merge1": "24ec5c14ef7225e2fb2033c7110ca3b8bfcbe51c",
   "merge2": "3a4e64753c575f6124c79df51a169f6104c4e33d",
-  "tree": "e80ba9c75b3cc9cdc6cab1f2a8e6a8cff5a00922",
+  "tree": "8acd206a94dc41a7240769910acb8615f4b22b0e",
   "validationTip": "bf58e8c4ac92295f67b8240ad715fe6c096077ab",
   "validationTree": "d68455db841c0660a504e9828ba964c4fb3b97ac",
   "validationSourceHash": "2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4",
   "internalValidationRevision": "187b33936754a6dbd1f86f6ac53d6375635dc153",
-  "localPublicTip": "055c167d468f27402bb35b41eb1b24deef8f552c",
+  "localPublicTip": "421ec876df380684aa480afa293024b3a8a21503",
   "validationFiles": [
     {
       "file": "src/packs/moving-photo.js",
@@ -182,7 +182,10 @@
   "priorRuntimePublishedAt": "2026-10-16T10:34:40.611331+00:00",
   "priorRuntimePublicRevision": "b56f5c51353dd7bbb6a6e9415d6e6317d9d3d9b1",
   "priorRuntimeSourceHash": "f26ec66e827c53b668c68a18598be50c4e8b2e2d6766717e41ef184e16e1833a",
-  "status": "Application and completed measurements pushed; full-suite final report remains in progress.",
+  "status": "Final source revision is included with this archive in the combined publication push. Clip branch records its own revision.",
   "runtimePublishedAt": "2026-10-16T12:14:09.318230+00:00",
-  "publishedAt": "2026-10-16T12:14:09.318230+00:00"
+  "publishedAt": "2026-10-16T12:24:17.697983+00:00",
+  "clipsPublishedAt": "2026-10-16T12:24:17.697983+00:00",
+  "preparedAt": "2026-10-16T13:17:47.264013+00:00",
+  "previousClipsTip": "20f666ca8e8450beb2d675ef24a079de4ced65ed"
 }
