@@ -667,11 +667,29 @@ export class Stage {
     if (!this.pictureLayer) {
       const layers = this.app.scene.layers;
       const world = layers.getLayerByName("World");
+      // Paper belongs behind its opaque ink; kit covers belong in front
+      // when their depth hides that ink. Keep those three passes separate.
+      this.picturePaperLayer = new pc.Layer({ name: "Picture paper" });
       this.pictureLayer = new pc.Layer({ name: "Picture faces" });
-      layers.insertOpaque(this.pictureLayer, layers.getTransparentIndex(world) + 1);
-      this.cameraEntity.camera.layers = [...this.cameraEntity.camera.layers, this.pictureLayer.id];
+      const at = layers.getOpaqueIndex(world);
+      layers.insertTransparent(this.picturePaperLayer, at);
+      layers.insertOpaque(this.pictureLayer, at + 1);
+      this.cameraEntity.camera.layers = [
+        ...this.cameraEntity.camera.layers,
+        this.picturePaperLayer.id,
+        this.pictureLayer.id,
+      ];
     }
     return this.pictureLayer;
+  }
+
+  setSheetFaceLayer(sheet, hasFace) {
+    if (sheet.faceBacked === hasFace) return;
+    if (hasFace) this.pictureFaceLayer();
+    sheet.entity.gsplat.layers = [
+      (hasFace ? this.picturePaperLayer : this.app.scene.layers.getLayerByName("World")).id,
+    ];
+    sheet.faceBacked = hasFace;
   }
 
   addSheet(container) {

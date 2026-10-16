@@ -745,18 +745,16 @@ export class Pictures {
         const face = this.geometry(sheet, media.aspect(want.page), w, h);
         // Preserve the original image plane even when only coarse paper
         // remains beneath it. The sampled path must also clear its detail.
-        const original = native
-          ? this.levelFor(
-              sheet,
-              aspect,
-              this.screenWidth(sheet, aspect),
-              want.page,
-              1,
-              "pixels",
-              false,
-            )
-          : w;
-        const imagePitch = native ? (Math.hypot(...face.right) * w) / original : 0;
+        const original = this.levelFor(
+          sheet,
+          aspect,
+          this.screenWidth(sheet, aspect),
+          want.page,
+          1,
+          want.method,
+          false,
+        );
+        const imagePitch = (Math.hypot(...face.right) * w) / original;
         face.lift =
           Math.max(sparse ? Math.hypot(...geom.right) * 6 : 0, imagePitch * 6) +
           Math.hypot(...face.right) * 0.3;
@@ -959,6 +957,7 @@ export class Pictures {
       if (!slot) return;
       sheet.slot = slot;
     }
+    st.setSheetFaceLayer?.(slot, !!data.surface);
     const ct = slot.container;
     const put = (name, arr) => {
       const t = ct.getTexture(name);
