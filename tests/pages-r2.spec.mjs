@@ -548,6 +548,8 @@ for (const renderer of ["webgl2", "webgpu"])
       p.frozen = true;
       p.glide = null;
       p.camera.interact();
+      const { WORKBUFFER_UPDATE_ONCE } = await import("/src/pc.js");
+      p.stage.toy.entity.gsplat.workBufferUpdate = WORKBUFFER_UPDATE_ONCE;
       for (let i = 0; i < 4; i++) await p.stage.captureFrame();
       const frame = await p.stage.captureFrame();
       const a = frame.getContext("2d").getImageData(0, 0, frame.width, frame.height).data;
@@ -585,4 +587,57 @@ for (const renderer of ["webgl2", "webgpu"])
     expect(difference.angle).toBe(0);
     expect(difference.faces).toBeGreaterThan(0);
     expect(difference.mean - difference.noise).toBeLessThan(0.5);
+  });
+
+for (const renderer of ["webgl2", "webgpu"])
+  test(`a connected page has a printed front and pickable white reverse (${renderer})`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    await page.goto(`/?renderer=${renderer}&profile=low&adapt=off&labs=1`);
+    await page.waitForSelector("body[data-ready='true']", { timeout: 180000 });
+    await page.evaluate(() => window.__splashery.app.chooseToy("picture-lab"));
+    await ready(page);
+    const views = await page.evaluate(async () => {
+      const p = window.__splashery.player;
+      p.frozen = true;
+      p.glide = null;
+      p.stage.toy.entity.gsplat.enabled = false;
+      const face = p.pictures.sheets.find((s) => !s.hidden && s.slot?.surface).slot.surface;
+      face.material.setParameter("uColorFlags", [1, 0, 0, 0]);
+      face.material.setParameter("uColorLow", [1, 0, 0, 0]);
+      face.material.setParameter("uColorHigh", [1, 0, 0, 0]);
+      const g = face.geom;
+      const center = g.origin.map(
+        (v, k) =>
+          v +
+          (g.right[k] * face.color.width) / 2 +
+          (g.down[k] * face.color.height) / 2 +
+          g.normal[k] * (g.lift || 0),
+      );
+      const views = [];
+      for (const yaw of [0, Math.PI]) {
+        p.camera.cur.yaw = p.camera.tgt.yaw = yaw;
+        p.camera.cur.pitch = p.camera.tgt.pitch = 0;
+        p.camera.cur.roll = p.camera.tgt.roll = 0;
+        p.camera.interact();
+        let frame;
+        for (let i = 0; i < 4; i++) frame = await p.stage.captureFrame();
+        const point = p.stage.toScreen(center);
+        const ratio = frame.width / p.canvas.clientWidth;
+        const pixel = Array.from(
+          frame
+            .getContext("2d")
+            .getImageData(Math.round(point[0] * ratio), Math.round(point[1] * ratio), 1, 1).data,
+        );
+        p.stage.preparePick();
+        views.push({ pixel, pick: await p.stage.pick(point[0], point[1]) });
+      }
+      return views;
+    });
+    expect(views[0].pixel[0]).toBeGreaterThan(240);
+    expect(views[0].pixel[1]).toBeLessThan(10);
+    expect(views[0].pixel[2]).toBeLessThan(10);
+    expect(views[1].pixel.slice(0, 3).every((v) => v > 240)).toBe(true);
+    expect(views.every((v) => v.pick !== null)).toBe(true);
   });

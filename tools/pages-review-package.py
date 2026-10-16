@@ -4,6 +4,7 @@
 python3 tools/pages-review-package.py [work/pages-r2]
 Requires the existing Python/Pillow and ffmpeg build tools. Inputs stay in work/;
 outputs go only to the separate, never-merged evidence worktree.
+Use --motion-only --scenes=r2-book,r2-lab,r2-album to package the required toy pairs first.
 Code: MIT, made by Ryan with Codex (GPT-6). Recording contributions: CC0.
 """
 from pathlib import Path
@@ -24,6 +25,9 @@ benchmark_only = '--benchmark-only' in sys.argv[1:]
 out = work / 'clips-tree/docs/audits/pages-r2-2026-10-clips'
 out.mkdir(parents=True, exist_ok=True)
 scenes = {'r2-book': 'your-book', 'r2-lab': 'picture-lab', 'r2-album': 'photo-album', 'r2-text': 'text', 'r2-chart': 'chart', 'r2-diagram': 'diagram'}
+selected = next((a.split('=', 1)[1].split(',') for a in sys.argv[1:] if a.startswith('--scenes=')), list(scenes))
+if any(scene not in scenes for scene in selected):
+    raise ValueError('Unknown review scene')
 font_path = '/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf'
 font = ImageFont.truetype(font_path, 22)
 
@@ -149,8 +153,11 @@ if not motion_only:
 if benchmark_only:
     sys.exit(0)
 
-all_metadata = {}
+metadata_path = out / 'recordings.json'
+all_metadata = json.loads(metadata_path.read_text()) if metadata_path.exists() else {}
 for scene, name in scenes.items():
+    if scene not in selected:
+        continue
     main, raw_main, frames_main, meta_main = encode('main', scene)
     candidate, raw_candidate, frames_candidate, meta_candidate = encode('round2', scene)
     filters = []
@@ -180,5 +187,5 @@ for scene, name in scenes.items():
     all_metadata[name] = {'main': meta_main, 'round2': meta_candidate, 'videoBytes': target.stat().st_size, 'stripBytes': strip.stat().st_size}
     print(name, target.stat().st_size, strip.stat().st_size, flush=True)
 (out / 'recordings.json').write_text(json.dumps(all_metadata, indent=2) + '\n')
-links = '\n'.join(f'<article><h2>{name.replace("-", " ").title()}</h2><video controls muted loop playsinline preload="metadata" src="{name}.mp4"></video><p><a href="{name}-main.mp4">Main at full phone width</a> · <a href="{name}-round2.mp4">Round 2 at full phone width</a> · <a href="{name}-strip.jpg">Six-frame contact sheet</a></p></article>' for name in scenes.values())
+links = '\n'.join(f'<article><h2>{name.replace("-", " ").title()}</h2><video controls muted loop playsinline preload="metadata" src="{name}.mp4"></video><p><a href="{name}-main.mp4">Main at full phone width</a> · <a href="{name}-round2.mp4">Round 2 at full phone width</a> · <a href="{name}-strip.jpg">Six-frame contact sheet</a></p></article>' for name in all_metadata)
 (out / 'index.html').write_text('''<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Book and Picture lab round 2: effect review</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:1000px;margin:auto;padding:24px;background:#f4f4f4;color:#17202a}video{display:block;max-width:100%;width:780px;background:white}article{margin:40px 0}a{color:#064a91}</style><h1>Phone motion comparisons</h1><p>Main is on the left; round 2 is on the right. These recordings use a stepped animation clock at the per-scene cadence recorded in the metadata, with preparation waits omitted. They show motion and edge quality; the separate real-clock benchmark measures performance.</p><p>390×844 CSS pixels per view, device scale 2, and low detail. See <a href="README.md">the methods, source commits, and limitations</a>. Evidence-only branch: never merge.</p>''' + links + '\n')
