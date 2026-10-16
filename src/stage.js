@@ -663,6 +663,17 @@ export class Stage {
   // They are freed with the toy, or on their own a few frames after
   // removeSheet (the work-buffer manager still references them until then).
 
+  pictureFaceLayer() {
+    if (!this.pictureLayer) {
+      const layers = this.app.scene.layers;
+      const world = layers.getLayerByName("World");
+      this.pictureLayer = new pc.Layer({ name: "Picture faces" });
+      layers.insertOpaque(this.pictureLayer, layers.getTransparentIndex(world) + 1);
+      this.cameraEntity.camera.layers = [...this.cameraEntity.camera.layers, this.pictureLayer.id];
+    }
+    return this.pictureLayer;
+  }
+
   addSheet(container) {
     const t = this.toy;
     if (!t) return null;
@@ -980,7 +991,10 @@ export class Stage {
     const h = Math.max(1, Math.floor(this.canvas.height / 2));
     this.picker.resize(w, h);
     const layer = this.app.scene.layers.getLayerByName("World");
-    this.picker.prepare(this.cameraEntity.camera, this.app.scene, [layer]);
+    this.picker.prepare(this.cameraEntity.camera, this.app.scene, [
+      layer,
+      ...(this.pictureLayer ? [this.pictureLayer] : []),
+    ]);
     this.pickScale = [w / this.canvas.clientWidth, h / this.canvas.clientHeight];
   }
 

@@ -335,7 +335,7 @@ export class PictureSurface {
     this.instance = new pc.MeshInstance(this.mesh, this.material, slot.entity);
     this.instance.pick = !data.warmup;
     this.instance.cull = false;
-    this.layer = data.layer || stage.app.scene.layers.getLayerByName("World");
+    this.layer = data.layer || stage.pictureFaceLayer();
     this.layer.addMeshInstances([this.instance]);
     this.setUniforms(stage.sheetUniforms || {});
   }
