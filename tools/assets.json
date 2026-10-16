@@ -3810,11 +3810,216 @@
       "path": "assets/toys/moving-photo-3d/elephants.depth",
       "toy": "moving-photo-3d",
       "name": "Elephants Dream (5:29.7 to 5:35.7)",
-      "author": "Blender Foundation",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
       "page": "https://orange.blender.org/",
       "license": "CC BY 2.5",
-      "checked": "October 5, 2026",
+      "checked": "October 12, 2026",
       "note": "From the 1024 by 576 download on download.blender.org/ED, 640 by 360, 16 frames a second (96 frames), seven JPEG sheets, with its sound as a 56 kbps mono MP3 (elephants.mp3); each frame's depth by tools/live3-depth.mjs."
+    },
+    {
+      "id": "sample-long",
+      "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+      "path": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
+      "toy": "moving-photo-3d",
+      "name": "Big Buck Bunny (1:44.5 to 2:14.5)",
+      "author": "Blender Foundation",
+      "page": "https://archive.org/details/BigBuckBunny_328",
+      "license": "CC BY 3.0 US",
+      "checked": "October 16, 2026",
+      "files": [
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-long.webm",
+          "bytes": 1411629,
+          "sha256": "bbc30a02b8ecbf1714ceb113da01bf83b7ac9759e85270d6e33b94440f3c324e"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/bunny-long.mp2depth",
+          "bytes": 4451116,
+          "sha256": "bcface9934e79b0a39554db8ca03fbe20d694630f4a1121c1fc302534e5d58c8",
+          "decodedBytes": 15805452,
+          "decodedSha256": "35a28dad3862207772d1af8dc153bb7782c3ba7e3dd1bb506ad06f028ca30038"
+        }
+      ],
+      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
+      "depthFrames": 720,
+      "distinctDepthFrames": 720
+    },
+    {
+      "id": "dragon-long",
+      "file": "assets/toys/moving-photo-3d/sintel-long.webm",
+      "path": "assets/toys/moving-photo-3d/sintel-long.mp2depth",
+      "toy": "moving-photo-3d",
+      "name": "Sintel (2:15 to 2:45)",
+      "author": "Blender Foundation",
+      "page": "https://archive.org/details/Sintel",
+      "license": "CC BY 3.0",
+      "checked": "October 16, 2026",
+      "files": [
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-long.webm",
+          "bytes": 975594,
+          "sha256": "c3d4432e8adb1f9c33bef5656c9a6ff2289b49e448fb6c4b67ed2400a54f3269"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/sintel-long.mp2depth",
+          "bytes": 2521449,
+          "sha256": "32cfeb53a9e9467176427fe81f96f74090864dcdf1396223489868fdcce7be43",
+          "decodedBytes": 11854092,
+          "decodedSha256": "8416f05db894338d612cffe70a15fb304331e18f6855460cb090f7febf5b1844"
+        }
+      ],
+      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Archive live record declares CC BY; original Blender pages returned HTTP 403 in this environment. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
+      "depthFrames": 720,
+      "distinctDepthFrames": 708
+    },
+    {
+      "id": "machine-long",
+      "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+      "path": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+      "toy": "moving-photo-3d",
+      "name": "Elephants Dream (5:29.7 to 5:59.7)",
+      "author": "Blender Foundation / Netherlands Media Art Institute (2006), www.elephantsdream.org",
+      "page": "https://orange.blender.org/blog/creative-commons-license-2/",
+      "license": "CC BY 2.5",
+      "checked": "October 16, 2026",
+      "files": [
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.webm",
+          "bytes": 1951701,
+          "sha256": "ccaace69c7899f5ee97c97010d2820dc4ec04da9d2e18b355c074a5506aaf367"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/elephants-long.mp2depth",
+          "bytes": 6871822,
+          "sha256": "815ee09ad385e69c89ee5da88fcd052b45f86838d5491b3d02f534ff8441f894",
+          "decodedBytes": 15805452,
+          "decodedSha256": "af8fbc9a87ee119ecaed3d16dafaed0acdde2ccd7fdd29e72b8ad14e5933d64f"
+        }
+      ],
+      "note": "30-second cut at 24 frames per second with its own sound. Depth Anything V2 Small estimated depth on all 720 frames at a 196-pixel model side; offline alignment, filtering, and edge stabilization are baked into the MP2D byte cache. tools/cdx-mp2-samples.mjs makes the files. Explicitly picked; neither file loads with the default sample. Downloaded from https://archive.org/details/ElephantsDream. The film’s own copyright page, checked October 12, 2026, declares CC BY 2.5; this agrees with the short sample and supersedes the archive’s 3.0 US descriptor. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film; the film and its derived depth keep CC BY. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
+      "depthFrames": 720,
+      "distinctDepthFrames": 720
+    },
+    {
+      "id": "cdx-mp2-fast-60",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-fast-60.webm",
+      "toy": "moving-photo-3d",
+      "name": "60 fps motion measurement fixture",
+      "author": "made by Ryan with Codex (GPT-6)",
+      "page": "https://github.com/ryanjosephkamp/splashery/blob/ad8727c02a18c4f6529451b7dbaa6ff7b8f191b6/tools/cdx-mp2-measure.mjs",
+      "license": "CC0 1.0",
+      "checked": "October 12, 2026",
+      "sha256": "662f4411328b3612a543c5cf68460fb994ec002dacf5474e847b96b51ecbe68f",
+      "bytes": 539881,
+      "note": "Original procedural test pattern, 320 by 180, two seconds at 60 frames per second, encoded with FFmpeg testsrc2 and lossless VP9. Used by the regression tests, with no automatic fetch or shelf entry."
+    },
+    {
+      "id": "bridge-long",
+      "file": "assets/toys/moving-photo-3d/tears-long.webm",
+      "path": "assets/toys/moving-photo-3d/tears-long.mp2depth",
+      "toy": "moving-photo-3d",
+      "name": "Tears of Steel (27-second city montage)",
+      "author": "Blender Foundation",
+      "page": "https://archive.org/details/Tears-of-Steel",
+      "license": "CC BY 3.0",
+      "checked": "October 16, 2026",
+      "note": "27-second montage of selected city and robot shots: 1:10-1:16, 1:30-1:32, 1:36-1:38, 1:43-1:45, 8:41-8:48, and 9:40-9:48. Identifiable live-action faces and modern firearms are excluded. VP9 and Opus at 24 fps; depth on all 648 frames, aligned, filtered, and stabilized offline. Made by Ryan with Codex (GPT-6), derived from the Blender Foundation film under CC BY. Generated by tools/cdx-mp2-samples.mjs; neither file is fetched by default. Round 4 depth-only rebuild on October 16, 2026: tools/cdx-mp2-r4-bake.mjs seeks inside every original source frame, uses one clip-wide depth range and the existing upload refinement’s symmetric, color-gated half-second window (radius 12), and keeps the original video bytes. Baked key times are i / 24. The derived cache retains the film’s CC BY license. Losslessly gzip-compressed by tools/cdx-mp2-r4-compress.mjs; unpacking restores every original MP2D byte, with unchanged depth resolution, precision, frame count, and license.",
+      "files": [
+        {
+          "file": "assets/toys/moving-photo-3d/tears-long.webm",
+          "bytes": 2176133,
+          "sha256": "5d16d59945f20504f0998b220fa35d5a78bf6d8d82d874cc338c23634477236b"
+        },
+        {
+          "file": "assets/toys/moving-photo-3d/tears-long.mp2depth",
+          "bytes": 4070112,
+          "sha256": "4524c581380c305ac154d513f62a94152389610753e6c3b631d22bbecf422b00",
+          "decodedBytes": 10668684,
+          "decodedSha256": "c9151c3b37f5eb8bb4550d3fe9d74099cea1135234bdfb4b7494aacf2273f834"
+        }
+      ],
+      "depthFrames": 648,
+      "distinctDepthFrames": 648
+    },
+    {
+      "id": "own-blocks",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-blocks.mp4",
+      "toy": "moving-photo-3d",
+      "name": "Original rigid-motion blocks measurement clip",
+      "author": "made by Ryan with Codex (GPT-6)",
+      "page": "https://github.com/ryanjosephkamp/splashery/blob/b442876fa4ceb61202da77633eb91b6cc20e676e/tools/cdx-mp2-r4-inputs.mjs",
+      "license": "CC0 1.0",
+      "checked": "October 15, 2026",
+      "sha256": "c15f11bf4d7323a3f4d7c91debbd99d66916d5cde475dc1d1d5ca23cd053913c",
+      "bytes": 21496,
+      "dimensions": [256, 144],
+      "fps": 24,
+      "frames": 48,
+      "note": "Original procedural geometry and sound, rendered and encoded by tools/cdx-mp2-r4-inputs.mjs. No external footage, people, marks, or generated images. Used only by tests and measurements; no automatic fetch or shelf entry."
+    },
+    {
+      "id": "own-gate",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-gate.webm",
+      "toy": "moving-photo-3d",
+      "name": "Original rigid-motion gate measurement clip",
+      "author": "made by Ryan with Codex (GPT-6)",
+      "page": "https://github.com/ryanjosephkamp/splashery/blob/b442876fa4ceb61202da77633eb91b6cc20e676e/tools/cdx-mp2-r4-inputs.mjs",
+      "license": "CC0 1.0",
+      "checked": "October 15, 2026",
+      "sha256": "25a01d34d0017cf6aac5a0e05a5565bd31bf7c3b01c97ff8480edc2f02a83f0f",
+      "bytes": 8757,
+      "dimensions": [256, 144],
+      "fps": 24,
+      "frames": 48,
+      "note": "Original procedural geometry and sound, rendered and encoded by tools/cdx-mp2-r4-inputs.mjs. No external footage, people, marks, or generated images. Used only by tests and measurements; no automatic fetch or shelf entry."
+    },
+    {
+      "id": "own-wheel",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-wheel.mov",
+      "toy": "moving-photo-3d",
+      "name": "Original rigid-motion wheel measurement clip",
+      "author": "made by Ryan with Codex (GPT-6)",
+      "page": "https://github.com/ryanjosephkamp/splashery/blob/b442876fa4ceb61202da77633eb91b6cc20e676e/tools/cdx-mp2-r4-inputs.mjs",
+      "license": "CC0 1.0",
+      "checked": "October 15, 2026",
+      "sha256": "6c528fdc8f5e7fd62975fcc7059eea82077fba412a176a1175de4c7511871d36",
+      "bytes": 31555,
+      "dimensions": [256, 144],
+      "fps": 24,
+      "frames": 48,
+      "note": "Original procedural geometry and sound, rendered and encoded by tools/cdx-mp2-r4-inputs.mjs. No external footage, people, marks, or generated images. Used only by tests and measurements; no automatic fetch or shelf entry."
+    },
+    {
+      "id": "own-orbit",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-orbit.gif",
+      "toy": "moving-photo-3d",
+      "name": "Original rigid-motion orbit measurement clip",
+      "author": "made by Ryan with Codex (GPT-6)",
+      "page": "https://github.com/ryanjosephkamp/splashery/blob/b442876fa4ceb61202da77633eb91b6cc20e676e/tools/cdx-mp2-r4-inputs.mjs",
+      "license": "CC0 1.0",
+      "checked": "October 15, 2026",
+      "sha256": "044d3995937eeb3cbe591896a0f28f67a10ab02fdf5dedccf270586077d91914",
+      "bytes": 20968,
+      "dimensions": [256, 144],
+      "fps": 16,
+      "frames": 32,
+      "note": "Original procedural geometry and sound, rendered and encoded by tools/cdx-mp2-r4-inputs.mjs. No external footage, people, marks, or generated images. Used only by tests and measurements; no automatic fetch or shelf entry."
+    },
+    {
+      "id": "own-fast",
+      "file": "assets/toys/moving-photo-3d/cdx-mp2-r4-fast.webm",
+      "toy": "moving-photo-3d",
+      "name": "Original rigid-motion fast measurement clip",
+      "author": "made by Ryan with Codex (GPT-6)",
+      "page": "https://github.com/ryanjosephkamp/splashery/blob/b442876fa4ceb61202da77633eb91b6cc20e676e/tools/cdx-mp2-r4-inputs.mjs",
+      "license": "CC0 1.0",
+      "checked": "October 15, 2026",
+      "sha256": "b248f1f23ae95d2167714203ec5703959999f225af94996650a9fe8e64b2d82a",
+      "bytes": 41578,
+      "dimensions": [256, 144],
+      "fps": 60,
+      "frames": 120,
+      "note": "Original procedural geometry and sound, rendered and encoded by tools/cdx-mp2-r4-inputs.mjs. No external footage, people, marks, or generated images. Used only by tests and measurements; no automatic fetch or shelf entry."
     }
   ],
   "splatTrainer": {

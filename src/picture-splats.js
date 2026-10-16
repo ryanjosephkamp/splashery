@@ -297,6 +297,9 @@ export function sheetCount(w, h, method, inkPixels = w * h) {
 //     [x, y, z] (unit, from the spine along the page) } for a page that
 //     bends (kind "leaf"),
 //   opacity (default 0.99),
+//   backingOnly (optional): emit just the base and paper edges for a
+//     continuous picture face; masked cutouts need no soft backing,
+//   sparse (optional, pixels only): retain alternating color samples,
 //   relief: null, or { w, h, d (w * h values, 0 at the sheet to 1 at the
 //     most raised), amount (toy units at 1) } to raise the picture off the
 //     sheet toward its facing (lane Books r5: a figure that pops out). The
@@ -328,9 +331,9 @@ export function buildSheet(job) {
   // Base colors, and which pixels get a detail splat.
   let blocks = null;
   let inkMask = null;
-  let inkCount = w * h;
+  let inkCount = job.backingOnly ? 0 : job.sparse ? Math.ceil((w * h) / 2) : w * h;
   if (!screen) {
-    if (method === "ink") {
+    if (method === "ink" && !job.backingOnly) {
       blocks = paperBlocks(px, w, h);
       inkMask = new Uint8Array(w * h);
       inkCount = 0;
@@ -353,7 +356,13 @@ export function buildSheet(job) {
     } else blocks = meanBlocks(px, w, h);
   }
 
-  const cap = sheetCount(w, h, method, inkCount);
+  const finePaperEdge = job.backingOnly && method === "pixels" && !job.relief?.keep;
+  const cap =
+    (job.backingOnly
+      ? sheetCount(w, h, "pixels") - w * h
+      : sheetCount(w, h, method, inkCount) -
+        (job.sparse && method !== "ink" ? Math.floor((w * h) / 2) : 0)) +
+    (finePaperEdge ? 2 * (Math.ceil(w / EDGE_STEP) + Math.ceil(h / EDGE_STEP) + 2) : 0);
   const center = new Float32Array(cap * 4);
   const centers = new Float32Array(cap * 3);
   const color = new Uint16Array(cap * 4);
@@ -446,14 +455,16 @@ export function buildSheet(job) {
     const off = pass * BLOCK * 0.5;
     for (let y = inset + off; y <= h - inset; y += BLOCK)
       for (let x = inset + off; x <= w - inset; x += BLOCK) {
-        if (!keptBlock(x, y)) continue;
+        if ((job.backingOnly && kr) || !keptBlock(x, y)) continue;
         if (!screen) blockColor(blocks, x, y, c);
         emit(x, y, 0, BASE_SIGMA, BASE_SIGMA, c[0], c[1], c[2]);
       }
   }
 
-  // The paper's edge rows ("ink" only).
-  if (method === "ink") {
+  // The continuous face supplies its hard perimeter. Coarse edge strips
+  // otherwise protrude beyond that face at the corners. Legacy ink keeps
+  // its fine rows; connected pages retain only the inset paper lattice.
+  if (method === "ink" && !job.backingOnly) {
     const edges = [
       // start, direction along, direction inwards, length
       [[0, 0], [1, 0], [0, 1], w],
@@ -477,11 +488,30 @@ export function buildSheet(job) {
       }
   }
 
+  // An opaque crop still has physical paper all the way to its perimeter.
+  // Keep a fine edge under the connected face; masked cutouts have none.
+  if (finePaperEdge) {
+    const edge = (x, y, horizontal) => {
+      blockColor(blocks, x, y, c);
+      emit(x, y, 0, horizontal ? EDGE_ALONG : 0.6, horizontal ? 0.6 : EDGE_ALONG, c[0], c[1], c[2]);
+    };
+    for (let k = 0; k <= Math.ceil(w / EDGE_STEP); k++) {
+      const x = Math.min(w - 0.5, 0.5 + k * EDGE_STEP);
+      edge(x, 0.5, true);
+      edge(x, h - 0.5, true);
+    }
+    for (let k = 0; k <= Math.ceil(h / EDGE_STEP); k++) {
+      const y = Math.min(h - 0.5, 0.5 + k * EDGE_STEP);
+      edge(0.5, y, false);
+      edge(w - 0.5, y, false);
+    }
+  }
+
   // The detail: one splat per pixel (every pixel, or the ink).
-  for (let y = 0; y < h; y++)
+  for (let y = 0; y < (job.backingOnly ? 0 : h); y++)
     for (let x = 0; x < w; x++) {
       const i = y * w + x;
-      if (inkMask && !inkMask[i]) continue;
+      if ((job.sparse && (x + y) % 2) || (inkMask && !inkMask[i])) continue;
       if (kr && !kept(x + 0.5, y + 0.5)) continue;
       const o = i * 4;
       if (screen) emit(x + 0.5, y + 0.5, lift, DETAIL_SIGMA, DETAIL_SIGMA, 1, 1, 1);

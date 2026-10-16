@@ -535,12 +535,17 @@ export class Stage {
   // The old toy is switched off now and freed a few frames later: the
   // engine's work-buffer manager still references it until it reconciles.
   clearToy() {
+    this.pictureWarmup?.destroy();
+    this.pictureWarmup = null;
     const t = this.toy;
     if (!t) return;
     this.toy = null;
     t.entity.enabled = false;
     if (t.addon) t.addon.entity.enabled = false;
-    for (const sh of t.sheets || []) sh.entity.enabled = false; // Pictures
+    for (const sh of t.sheets || []) {
+      sh.entity.enabled = false;
+      sh.surface?.show(false);
+    } // Pictures
     for (const l of t.layers || []) l.entity.enabled = false; // Fluids
     t.frames = 3;
     this.graveyard.push(t);
@@ -575,6 +580,7 @@ export class Stage {
   setUniforms(u) {
     const g = this.toy?.entity.gsplat;
     if (!g) return;
+    this.sheetUniforms = u;
     // Custom GPU fields may use the token uniform for data other than poses.
     if (this.device.isWebGPU && this.toy.kit && !this.toy.customModifier) {
       updateTokenBounds(this.toy.resource, u["uSpTokens[0]"], g);
@@ -584,6 +590,7 @@ export class Stage {
     for (const sh of this.toy.sheets || []) {
       const sg = sh.entity.gsplat;
       for (const k in u) sg.setParameter(k, u[k]);
+      sh.surface?.setUniforms(u);
     }
     // Lane Fluids: a toy's fluid layers read the same uniforms.
     for (const l of this.toy.layers || []) {
@@ -673,6 +680,38 @@ export class Stage {
   // They are freed with the toy, or on their own a few frames after
   // removeSheet (the work-buffer manager still references them until then).
 
+  pictureFaceLayer() {
+    if (!this.pictureLayer) {
+      const layers = this.app.scene.layers;
+      const world = layers.getLayerByName("World");
+      // Kit covers draw after the connected pages, retaining occlusion.
+      this.pictureLayer = new pc.Layer({ name: "Picture faces" });
+      const at = layers.getOpaqueIndex(world);
+      layers.insertOpaque(this.pictureLayer, at);
+      this.cameraEntity.camera.layers = [...this.cameraEntity.camera.layers, this.pictureLayer.id];
+    }
+    return this.pictureLayer;
+  }
+
+  setSheetFaceLayer(sheet, hasFace) {
+    if (sheet.faceBacked === hasFace) return;
+    const toy = this.toy;
+    if (hasFace && toy && !toy.pictureSortBounds) {
+      // Gaussian sheets supplied this motion volume to the unified sorter.
+      // Without them, its distance range uses the kit's thin, closed-book
+      // bounds, leaving turning covers and leaves outside its sortable range.
+      // Keep the same volume on the kit without drawing hidden paper.
+      const bounds = toy.entity.gsplat.customAabb.clone();
+      bounds.add(new pc.BoundingBox(new pc.Vec3(), new pc.Vec3(1.2, 1.2, 1.2)));
+      toy.entity.gsplat.customAabb = bounds;
+      toy.pictureSortBounds = true;
+    }
+    // The opaque face supplies both its printed front and white reverse.
+    // Do not allocate a second splat work buffer for hidden paper.
+    sheet.entity.gsplat.enabled = !hasFace;
+    sheet.faceBacked = hasFace;
+  }
+
   addSheet(container) {
     const t = this.toy;
     if (!t) return null;
@@ -706,12 +745,14 @@ export class Stage {
     if (i < 0) return;
     t.sheets.splice(i, 1);
     sheet.entity.enabled = false;
+    sheet.surface?.show(false);
     // Buried like a toy: a few frames later.
     this.graveyard.push({ frames: 3, entity: { destroy: () => this.destroySheet(sheet) } });
     this.requestRender();
   }
 
   destroySheet(sheet) {
+    sheet.surface?.destroy();
     sheet.entity.destroy();
     sheet.container.destroy?.();
     sheet.screen?.destroy();
@@ -988,7 +1029,10 @@ export class Stage {
     const h = Math.max(1, Math.floor(this.canvas.height / 2));
     this.picker.resize(w, h);
     const layer = this.app.scene.layers.getLayerByName("World");
-    this.picker.prepare(this.cameraEntity.camera, this.app.scene, [layer]);
+    this.picker.prepare(this.cameraEntity.camera, this.app.scene, [
+      layer,
+      ...(this.pictureLayer ? [this.pictureLayer] : []),
+    ]);
     this.pickScale = [w / this.canvas.clientWidth, h / this.canvas.clientHeight];
   }
 

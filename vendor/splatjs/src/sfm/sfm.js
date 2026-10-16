@@ -15,7 +15,8 @@
 // several focal-length guesses are tried (relative to f = 1.2 * max(w, h)).
 
 import { detectAndDescribe, detectAndDescribeMS } from './features.js';
-import { detectSift, matchSift } from './sift.js';
+import { runWorkerPool } from './worker-pool.js';
+import { detectSift, matchSift, matchSiftAsync } from './sift.js';
 import { gpuMatchAll } from './gpumatch.js';
 import { matchDescriptors } from './matching.js';
 import {
@@ -350,6 +351,7 @@ async function runSfMOnce(images, log, sampleColor, opts = {}) {
   const checkAbort = () => {
     if (signal && signal.aborted) throw new DOMException('SfM aborted', 'AbortError');
   };
+  checkAbort();
   // structured progress alongside log(): { stage, done, total, detail }
   // stages: 'features' | 'matching' | 'focal' | 'register' | 'ba'
   const ev = opts.onEvent || (() => {});
@@ -381,39 +383,25 @@ async function runSfMOnce(images, log, sampleColor, opts = {}) {
     // SIFT extraction is ~1s/image of pure CPU — run it on a worker pool
     const t0f = performance.now();
     const nW = Math.min(opts.workers || 8, Math.max(2, (navigator.hardwareConcurrency || 4) - 2));
-    const workers = Array.from({ length: nW },
-      () => new Worker(new URL('./featworker.js', import.meta.url), { type: 'module' }));
     const results = new Array(n);
     let doneF = 0;
-    await new Promise((resolve, reject) => {
-      let next = 0;
-      const feed = (wk) => {
-        if (next >= n) return;
-        const id = next++;
-        wk.onmessage = (e) => {
-          results[e.data.id] = e.data;
-          doneF++;
-          // detail carries the REAL keypoints (references, feature scale) so a
-          // UI can draw them as they arrive
-          ev({ stage: 'features', done: doneF, total: n,
-               detail: { image: e.data.id, n: e.data.n, x: e.data.x, y: e.data.y } });
-          if (doneF % 16 === 0) log(`  features: ${doneF}/${n}`);
-          if (doneF === n) resolve();
-          else feed(wk);
-        };
-        wk.onerror = (err) => reject(new Error('feature worker: ' + (err.message || err)));
-        // fine-scale defaults: firstOctave -1 (upsampled octave) flooded the
-        // contrast-sorted cap with poorly-localized features and warped truck
-        // to 8.5% ATE; firstOctave 0 + 1800 feats = 0.04% on truck AND train
-        wk.postMessage({
-          id, gray: images[id].gray, w: images[id].fw, h: images[id].fh,
-          maxFeats: opts.siftFeats || 3900, firstOctave: opts.siftFirstOctave ?? 0,
-          peakScale: opts.siftPeak ?? 1,
-        });
-      };
-      workers.forEach(feed);
+    await runWorkerPool({
+      url: new URL('./featworker.js', import.meta.url), size: nW,
+      jobs: Array.from({ length: n }, (_, i) => i), signal, label: 'feature worker',
+      message: (id) => ({
+        id, gray: images[id].gray, w: images[id].fw, h: images[id].fh,
+        maxFeats: opts.siftFeats || 3900, firstOctave: opts.siftFirstOctave ?? 0,
+        peakScale: opts.siftPeak ?? 1,
+      }),
+      onResult: (data) => {
+        results[data.id] = data;
+        doneF++;
+        ev({ stage: 'features', done: doneF, total: n,
+             detail: { image: data.id, n: data.n, x: data.x, y: data.y } });
+        if (doneF % 16 === 0) log(`  features: ${doneF}/${n}`);
+      },
     });
-    workers.forEach((w) => w.terminate());
+    checkAbort();
     for (let i = 0; i < n; i++) {
       const f = results[i];
       f.sift = true;
@@ -477,32 +465,23 @@ async function runSfMOnce(images, log, sampleColor, opts = {}) {
       };
       if (typeof Worker !== 'undefined' && opts.workers !== false) {
         const nW = Math.min(opts.workers || 8, Math.max(2, (navigator.hardwareConcurrency || 4) - 2));
-        const workers = Array.from({ length: nW },
-          () => new Worker(new URL('./featworker.js', import.meta.url), { type: 'module' }));
         let doneR = 0;
-        await new Promise((resolve, reject) => {
-          let next = 0;
-          const feed = (wk) => {
-            if (next >= starved.length) return;
-            const id = starved[next++];
-            wk.onmessage = (e) => {
-              adopt(e.data);
-              doneR++;
-              ev({ stage: 'features', done: doneR, total: starved.length,
-                   detail: { image: e.data.id, n: e.data.n, x: e.data.x, y: e.data.y } });
-              if (doneR === starved.length) resolve();
-              else feed(wk);
-            };
-            wk.onerror = (err) => reject(new Error('feature worker: ' + (err.message || err)));
-            wk.postMessage({
-              id, gray: images[id].gray, w: images[id].fw, h: images[id].fh,
-              maxFeats: opts.siftFeats || 3900, firstOctave: -1,
-              peakScale: opts.siftPeak ?? 1,
-            });
-          };
-          workers.forEach(feed);
+        await runWorkerPool({
+          url: new URL('./featworker.js', import.meta.url), size: nW,
+          jobs: starved, signal, label: 'feature worker',
+          message: (id) => ({
+            id, gray: images[id].gray, w: images[id].fw, h: images[id].fh,
+            maxFeats: opts.siftFeats || 3900, firstOctave: -1,
+            peakScale: opts.siftPeak ?? 1,
+          }),
+          onResult: (data) => {
+            adopt(data);
+            doneR++;
+            ev({ stage: 'features', done: doneR, total: starved.length,
+                 detail: { image: data.id, n: data.n, x: data.x, y: data.y } });
+          },
         });
-        workers.forEach((w) => w.terminate());
+        checkAbort();
       } else {
         for (const id of starved) {
           const f = detectSift(images[id].gray, images[id].fw, images[id].fh,
@@ -554,11 +533,24 @@ async function runSfMOnce(images, log, sampleColor, opts = {}) {
   // cost of a SIFT run: ~350s of 484s on train-84; the GPU does the whole
   // graph in ~1s of compute)
   let gpuAll = null;
-  if (useSift && typeof navigator !== 'undefined' && navigator.gpu) {
+  if (useSift && opts.cpuMatching === true) {
+    log('  cooperative CPU SIFT matching; all image pairs and descriptors retained');
+    gpuAll = [];
+    for (let pi = 0; pi < pairs.length; pi++) {
+      checkAbort();
+      const [i, j] = pairs[pi];
+      gpuAll.push(await matchSiftAsync(feats[i].desc, feats[i].n, feats[j].desc, feats[j].n, 0.8, { signal }));
+      ev({ stage: 'matching', done: pi + 1, total: pairs.length, detail: { usable: 0, pair: null, gpu: false, cpu: true } });
+    }
+    checkAbort();
+  } else if (useSift && typeof navigator !== 'undefined' && navigator.gpu) {
     try {
       gpuAll = await gpuMatchAll(feats, pairs, 0.8, log, opts.gpu && opts.gpu.device,
-        (d, t) => ev({ stage: 'matching', done: d, total: t, detail: { usable: 0, pair: null, gpu: true } }));
+        (d, t) => ev({ stage: 'matching', done: d, total: t, detail: { usable: 0, pair: null, gpu: true } }),
+        { signal, maxPairsPerChunk: opts.maxPairsPerChunk });
+      checkAbort();
     } catch (e) {
+      checkAbort();
       log(`  GPU matcher unavailable (${e.message}) — CPU fallback`);
     }
   }
@@ -597,30 +589,22 @@ async function runSfMOnce(images, log, sampleColor, opts = {}) {
   const useWorkers = typeof Worker !== 'undefined' && opts.workers !== false && opts.pairWorkers !== false && jobs.length > 32;
   if (useWorkers) {
     const nW = Math.min(opts.workers || 8, Math.max(2, (navigator.hardwareConcurrency || 4) - 2));
-    const workers = Array.from({ length: nW },
-      () => new Worker(new URL('./pairworker.js', import.meta.url), { type: 'module' }));
     const BATCH = 24;
-    let next = 0, doneJobs = 0;
+    let doneJobs = 0;
     const seedOf = (pi) => 24680 + pi * 7919;
-    await new Promise((resolve, reject) => {
-      const feed = (wk) => {
-        if (next >= jobs.length) return;
-        const slice = jobs.slice(next, next + BATCH);
-        next += slice.length;
-        wk.onmessage = (e) => {
-          for (const r of e.data.out) { inliersOf[r.idx] = r.inliers; if (r.stats) statsOf[r.idx] = r.stats; }
-          doneJobs += e.data.out.length;
-          ev({ stage: 'matching', done: Math.round(pairs.length * doneJobs / jobs.length), total: pairs.length,
-               detail: { usable: 0, pair: null } });
-          if (doneJobs >= jobs.length) resolve();
-          else feed(wk);
-        };
-        wk.onerror = (err) => reject(new Error('pair worker: ' + (err.message || err)));
-        wk.postMessage({ batch: slice.map((jb) => ({ idx: jb.pi, x1: jb.x1, x2: jb.x2, thresh: jb.thresh, seed: seedOf(jb.pi), maxIters: opts.pairIters || 600, debug: !!opts.pairDebug })) });
-      };
-      workers.forEach(feed);
+    await runWorkerPool({
+      url: new URL('./pairworker.js', import.meta.url), size: nW,
+      jobs: Array.from({ length: Math.ceil(jobs.length / BATCH) }, (_, i) => jobs.slice(i * BATCH, (i + 1) * BATCH)),
+      signal, label: 'pair worker',
+      message: (slice) => ({ batch: slice.map((jb) => ({ idx: jb.pi, x1: jb.x1, x2: jb.x2, thresh: jb.thresh, seed: seedOf(jb.pi), maxIters: opts.pairIters || 600, debug: !!opts.pairDebug })) }),
+      onResult: (data) => {
+        for (const r of data.out) { inliersOf[r.idx] = r.inliers; if (r.stats) statsOf[r.idx] = r.stats; }
+        doneJobs += data.out.length;
+        ev({ stage: 'matching', done: Math.round(pairs.length * doneJobs / jobs.length), total: pairs.length,
+             detail: { usable: 0, pair: null } });
+      },
     });
-    workers.forEach((w) => w.terminate());
+    checkAbort();
   } else {
     for (let q = 0; q < jobs.length; q++) {
       const jb = jobs[q];
@@ -2129,7 +2113,7 @@ async function runSfMOnce(images, log, sampleColor, opts = {}) {
     for (const sc of scales.slice(1)) {
       const t0v = performance.now();
       let alt = null;
-      try { alt = await finalRun(sc); } catch (e) { log(`final trial ${(sc * 1.2).toFixed(2)}x: failed (${e.message || e})`); }
+      try { alt = await finalRun(sc); } catch (e) { if (e?.name === 'AbortError') throw e; log(`final trial ${(sc * 1.2).toFixed(2)}x: failed (${e.message || e})`); }
       if (!alt) continue;
       const keepAlt = alt.cams.length > final.cams.length || (alt.cams.length === final.cams.length && rms(alt) < rms(final));
       log(`final trial ${(sc * 1.2).toFixed(2)}x: ${alt.cams.length}/${n} cams, rms ${rms(alt).toFixed(2)}px against ${final.cams.length}/${n} at ${rms(final).toFixed(2)}px in ${((performance.now() - t0v) / 1000).toFixed(1)}s — ${keepAlt ? 'keeping it' : 'keeping the first'}`);
@@ -2173,7 +2157,7 @@ export async function runSfM(images, log, sampleColor, opts = {}) {
   let second = null;
   try {
     second = await runSfMOnce(images, log, sampleColor, { ...opts, pairMinInliers: 100, pairMinInliersAdj: 15, _feats: first._feats });
-  } catch (e) { log(`retry failed: ${e.message}`); }
+  } catch (e) { if (e?.name === 'AbortError') throw e; log(`retry failed: ${e.message}`); }
   if (second && second.cams.length > first.cams.length) {
     log(`retry registered ${second.cams.length}/${n} (first pass ${first.cams.length}) — keeping the retry`);
     return second;

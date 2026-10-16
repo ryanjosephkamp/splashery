@@ -121,7 +121,7 @@ OR OTHER DEALINGS IN THE SOFTWARE.
 
 - Source: https://github.com/arrival-space/splat.js, commit
   `88efe9aaf32279b0b9bcb781ea0deb4d60c49dff` (September 23, 2026; package version 0.1.0). Files in
-  `vendor/splatjs/src/`: the 20 modules that `session.js` and its two workers reach (structure from
+  `vendor/splatjs/src/`: the modules that `session.js` and its two workers reach (structure from
   motion, the WebGPU trainer, frame decoding and the PLY writer), unchanged except for the local
   changes below; the list and what was left out are in `vendor/splatjs/VERSION.md`. The library's
   own video reader (`src/io/video.js`, which loads Mediabunny, MPL-2.0) is not vendored: Splashery
@@ -134,14 +134,22 @@ OR OTHER DEALINGS IN THE SOFTWARE.
   opt-in first-refinement threshold for short offline build-tool passes. It replaces the hardcoded
   `trainer.iter > 1500` check with `trainer.iter > (this.opts.refineStart ?? 1500)` so a build tool
   can refine a short run explicitly. Omitted or null values retain the original 1,500-step
-  threshold; `src/video3d/run.js` does not pass this option, so browser training keeps the upstream
-  schedule. The vendor edit is isolated in commit `ffcc71cc`. The MIT notice is retained.
+  threshold. Task 88's browser integration now passes a threshold that fits each tier's budget. The
+  original vendor edit is isolated in commit `ffcc71cc`. The MIT notice is retained.
 - Local change by Codex for task 55 (October 13, 2026): `src/gs/trainer.js` binds the existing
   camera-gradient buffer at binding 8 in the optional D-SSIM backward pass. Its shader requires that
   buffer even when camera optimization is off; the missing binding invalidated every command buffer
   while the iteration counter continued advancing. The offline tool requests the nine storage
   bindings this pass needs and rejects GPU validation errors. The browser toy still uses the
   original MSE training default. The MIT notice is retained.
+- Local changes by Codex for task 88 (October 15, 2026): a session owns its outstanding worker,
+  frame-decoder, and GPU resources through disposal. An abort-safe worker queue terminates both
+  feature and pair workers on cancellation or error. The optional `seedLimit` reserves room for
+  appended surface samples without increasing the requested seed count or changing default Gaussian
+  parameters. Trainer buffers are released separately from a host-owned GPU device. The last
+  training batch is limited to the remaining iteration budget. `vendor/splatjs/VERSION.md` records
+  the patched files. The upstream MIT notice is retained; original task 88 code is offered under
+  this repository's MIT license.
 
 ## Codex CPU Gaussian fitter (task 55, build only)
 
@@ -471,3 +479,41 @@ These tool versions are retained with the public review evidence.
   https://ffmpeg.org/legal.html: H.264 video encoding with libx264 and checks of frame counts,
   duration, and dimensions. No executable is served. These are build tools allowed by Rules v1; the
   original rendered output is CC0.
+
+## Video to 3D real-clip benchmark tools (task 88, not shipped)
+
+The benchmark reuses the Playwright, PNG.js, Chromium, FFmpeg, and Xvfb test tools listed above. No
+executable, test font, or browser distribution is copied into the site or review media. The corpus
+manifest records each source's own license; trained models and review clips retain it.
+
+- Node.js 22.15.0 (MIT and the bundled third-party notices),
+  https://raw.githubusercontent.com/nodejs/node/v22.15.0/LICENSE: a temporary pinned runtime for the
+  existing regression suite. The benchmark itself records its actual Node.js version.
+- Chrome for Testing 141.0.7390.37, https://developer.chrome.com/blog/chrome-for-testing: a
+  temporary browser pin for existing regression tests. Its `ABOUT` notice identifies Google Chrome,
+  Copyright 2025 Google LLC, and the Chromium project and third-party credits. Its distribution's
+  terms are https://www.google.com/chrome/terms/; it is not redistributed here.
+- Inter 4.1 (SIL Open Font License 1.1),
+  https://raw.githubusercontent.com/rsms/inter/v4.1/LICENSE.txt: an environment-only font pin for
+  the existing PDF and code-scanning checks. The font and its notices stay in the test workspace.
+
+The linked notices were opened on October 15, 2026, and retained with the test evidence. The
+original surface initializer, benchmark, and resource tests are offered under this repository's MIT
+license. No new third-party browser library was added.
+
+# Moving photo round 4 build and verification tools (not shipped)
+
+- Node.js 22.14.0 ([MIT and bundled notices](https://github.com/nodejs/node/blob/v22.14.0/LICENSE)):
+  the temporary test runtime matches CI's Node 22 major version. The official Linux archive was
+  checked against its published SHA-256. The initial full run used the environment's Node 24.19.0;
+  final isolated whole-file rechecks use Node 22. No Node executable is served.
+- Zig 0.14.1 ([MIT](https://raw.githubusercontent.com/ziglang/zig/0.14.1/LICENSE)) and its bundled
+  Clang compiler ([LLVM license](https://llvm.org/LICENSE.txt)): compile the original
+  `tools/cdx-mp2-geometry.c` to a freestanding WebAssembly module. The module imports no runtime or
+  library. The compiler is not served.
+  [Build documentation](https://ziglang.org/documentation/0.14.1/).
+- FFmpeg / ffprobe 7.1.5-0+deb13u1: the existing build tool listed above encodes the five original
+  test clips and review films. No executable is served.
+- Xvfb 21.1.16 ([X.Org licenses](https://www.x.org/releases/current/doc/xorg-docs/License.html)): a
+  virtual display for real Chromium verification with Mesa's software renderer. The installed X.Org
+  copyright file identifies the canonical X11/MIT form. No X server is served with the site.
