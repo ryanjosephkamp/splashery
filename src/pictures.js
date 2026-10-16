@@ -699,11 +699,7 @@ export class Pictures {
         w = w2;
         h = h2;
       }
-      await this.freezeSurface(data);
-      if (this.destroyed || media !== this.media) {
-        data.surface?.source?.close?.();
-        return null;
-      }
+      if (this.destroyed || media !== this.media) return null;
       data.w = w;
       data.h = h;
       data.drawMs = t1 - t0;
@@ -722,24 +718,6 @@ export class Pictures {
     } finally {
       this.busy = false;
       this.stage.requestRender();
-    }
-  }
-
-  // Retain immutable pixels, without retaining a page's mutable drawing
-  // context and its staging buffers. Canvas remains the compatibility path.
-  async freezeSurface(data) {
-    const face = data.surface;
-    if (!face || typeof createImageBitmap !== "function") return;
-    const canvas = face.source;
-    try {
-      face.source = await createImageBitmap(canvas, {
-        imageOrientation: "none",
-        premultiplyAlpha: "none",
-        colorSpaceConversion: "none",
-      });
-      canvas.width = canvas.height = 1;
-    } catch {
-      // The existing canvas path also works where bitmap conversion does not.
     }
   }
 
@@ -776,11 +754,7 @@ export class Pictures {
     const relief = rel ? { w: rel.w, h: rel.h, d: Float32Array.from(rel.d), amount: (rel.depth || 0) * this.fitScale, nearest: !!rel.nearest, keep: Array.isArray(rel.keep) ? rel.keep.slice(0, 2) : null } : null; // prettier-ignore
     const data = await buildOffThread({ pixels, w, h, method: want.method, relief, backingOnly: this.solid, ...geom }); // prettier-ignore
     if (this.solid) data.surface = { source: canvas, geom, w, h, relief };
-    await this.freezeSurface(data);
-    if (this.destroyed || media !== this.media) {
-      data.surface?.source?.close?.();
-      return null;
-    }
+    if (this.destroyed || media !== this.media) return null;
     data.w = w;
     data.h = h;
     data.drawMs = t1 - t0;
