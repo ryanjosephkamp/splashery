@@ -498,7 +498,7 @@ export class Pictures {
     if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width * share); // prettier-ignore
     const target = Math.min(
       cap,
-      Math.max(64, px * (solid && method === "ink" && sheet.shown ? 1.5 : 1)),
+      Math.max(64, px * (solid && method !== "screen" && sheet.shown ? 1.5 : 1)),
     );
     let level = LADDER.find((w) => w >= target) ?? LADDER[LADDER.length - 1];
     level = Math.min(level, Math.floor(cap));
@@ -774,7 +774,7 @@ export class Pictures {
           sparse,
           ...geom,
         }),
-        Promise.resolve().then(() => this.compactSurface({ surface }, monochrome, native)),
+        Promise.resolve().then(() => this.compactSurface({ surface }, monochrome, solid)),
       ]);
       if (solid && backing !== canvas) backing.width = backing.height = 1;
       if (surface) data.surface = surface;
