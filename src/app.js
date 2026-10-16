@@ -1,8 +1,9 @@
 // Splashery app: the shelf, the tools, making toys, look, bring-your-own
 // files and sharing, on top of the shared Player runtime.
 
-import { Player, NoGPUError, Gestures, ui2On } from "./player.js";
+import { Player, Gestures, ui2On } from "./player.js";
 import { createUI } from "./ui.js";
+import { showRendererDetails } from "./renderer-fallback.js";
 import { canPlay } from "./physics/hands-on.js"; // lane Physics
 import {
   createScene,
@@ -44,14 +45,15 @@ import {
 
 const canvas = document.getElementById("stage");
 
-function showFallback(reason) {
+function showFallback(error, diagnostics) {
   const fb = document.getElementById("fallback");
-  if (reason) document.getElementById("fallback-reason").textContent += ` (${reason})`;
+  showRendererDetails(fb, error, diagnostics);
   fb.hidden = false;
   canvas.hidden = true;
   document.getElementById("stage-zoom").hidden = true;
   document.getElementById("panel").hidden = true;
   document.body.dataset.ready = "true";
+  document.body.dataset.pageSettled = "true";
 }
 
 // How a toy likes flag colors laid on (recipe.patternProjection,
@@ -158,7 +160,7 @@ class App {
       await this.player.init();
     } catch (err) {
       console.info("Splashery could not start a renderer:", err?.message || err);
-      showFallback(err instanceof NoGPUError ? "" : err?.message);
+      showFallback(err, this.player.rendererDiagnostics);
       return;
     }
     const player = this.player;
@@ -245,6 +247,7 @@ class App {
       await this.applyScene(createScene({ toy: { kind: "builtin", id: TOYS[0].id } }));
     }
     document.body.dataset.ready = "true";
+    document.body.dataset.pageSettled = "true";
   }
 
   // ---- Scenes -------------------------------------------------------------------
