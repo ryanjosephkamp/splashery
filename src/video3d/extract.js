@@ -105,14 +105,9 @@ export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
 const presentedFrames = new WeakMap();
 const presentationOwners = new WeakMap();
 const recoveryRates = new WeakMap();
-export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = {}) {
-  if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
-  // Keep ownership after completion: play() can settle after its presentation callback,
-  // and an older continuation must not pause a later seek on this same local video.
+function claimPresentation(video) {
   const owner = {};
   presentationOwners.set(video, owner);
-  const ownsVideo = () => presentationOwners.get(video) === owner;
-  // A new seek takes over any older recovery without inheriting its temporary speed.
   const priorRate = recoveryRates.get(video);
   if (priorRate) {
     recoveryRates.delete(video);
@@ -125,6 +120,13 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
       }
     }
   }
+  return owner;
+}
+export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = {}) {
+  if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
+  // Keep ownership after completion: a late play() must not pause a newer picture request.
+  const owner = claimPresentation(video);
+  const ownsVideo = () => presentationOwners.get(video) === owner;
   if (!video.requestVideoFrameCallback) {
     await seek(video, time, { signal, timeoutMs });
     return null;
@@ -178,18 +180,35 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
         finish(new Error("The decoded video frame took too long. Try a shorter MP4 (H.264) clip.")),
       timeoutMs,
     );
-    // Initial/old RVFCs can arrive after seeking starts but before seeked: accepting one and then
-    // waiting for seeked pairs its old mediaTime with the new drawImage picture. Require a fresh
-    // presentation after seeked; presentationTime also rejects an older queued callback delivered
-    // after that event. Frame duration can vary, so mediaTime proximity is never a test.
+    // A queued RVFC can describe an older picture than drawImage now sees. Where available,
+    // VideoFrame exposes that current decoded picture's own timestamp, independently of the
+    // requested seek position. A matching callback can therefore keep a correct paused picture
+    // even when its presentation preceded seeked. Otherwise require a fresh presentation after
+    // seeked. Frame duration can vary, so proximity to the requested time is never a test.
     const arm = () => {
       callback = video.requestVideoFrameCallback((_, metadata) => {
         callback = undefined;
         if (done) return;
+        let decodedMatch = null;
+        if (!video.seeking && video.readyState >= 2 && typeof VideoFrame === "function") {
+          let frame;
+          try {
+            frame = new VideoFrame(video);
+            decodedMatch =
+              Number.isFinite(frame.timestamp) &&
+              Math.abs(frame.timestamp / 1e6 - metadata.mediaTime) <= 0.000001;
+          } catch {
+            // Older implementations keep the original fresh-presentation guard below.
+          } finally {
+            frame?.close();
+          }
+        }
         if (
-          seekedAt === null ||
           video.seeking ||
-          (Number.isFinite(metadata.presentationTime) && metadata.presentationTime < seekedAt)
+          decodedMatch === false ||
+          (decodedMatch !== true &&
+            (seekedAt === null ||
+              (Number.isFinite(metadata.presentationTime) && metadata.presentationTime < seekedAt)))
         ) {
           arm();
           return;
@@ -263,6 +282,48 @@ export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = 
   }
 }
 
+// Capture the currently decoded paused picture without advancing it when the browser can
+// identify its own source interval. presentedTime is the captured source picture's timestamp;
+// decodedTime additionally identifies this direct path rather than an RVFC receipt.
+// Unsupported formats retain the bounded presentation path. No time comes from currentTime.
+export async function seekPicture(video, time, { signal, timeoutMs = 4000 } = {}) {
+  if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
+  const started = performance.now();
+  const owner = claimPresentation(video);
+  presentedFrames.delete(video);
+  await seek(video, time, { signal, timeoutMs });
+  if (signal?.aborted || presentationOwners.get(video) !== owner)
+    throw new DOMException("Stopped", "AbortError");
+  if (video.paused && !video.seeking && video.readyState >= 2 && typeof VideoFrame === "function") {
+    let frame;
+    try {
+      frame = new VideoFrame(video);
+      const timestamp = frame.timestamp,
+        duration = frame.duration,
+        wanted = time * 1e6;
+      if (
+        Number.isFinite(timestamp) &&
+        Number.isFinite(duration) &&
+        duration > 0 &&
+        wanted >= timestamp &&
+        wanted < timestamp + duration
+      ) {
+        const decodedTime = timestamp / 1e6;
+        return { time: decodedTime, decodedTime, presentedTime: decodedTime };
+      }
+    } catch {
+      // An unsupported source or timestamp retains the original presentation proof.
+    } finally {
+      frame?.close();
+    }
+  }
+  const presentedTime = await seekPresented(video, time, {
+    signal,
+    timeoutMs: Math.max(1, timeoutMs - (performance.now() - started)),
+  });
+  return { time: presentedTime ?? time, decodedTime: null, presentedTime };
+}
+
 // Grabs the planned frames. opened: openVideo's result; plan: planFrames's; side: the long side
 // of each photograph; tries: frames looked at per window. onFrame(i, n, blob) reports progress.
 // Resolves [{ blob, time, sharpness, width, height }].
@@ -286,7 +347,7 @@ export async function grabFrames(opened, plan, { side = 960, tries = 3, onFrame,
     if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
     let best = null;
     for (const t of windowTimes(plan.windows[i], tries)) {
-      const presentedTime = await seekPresented(video, t, { signal });
+      const picture = await seekPicture(video, t, { signal });
       gs.drawImage(video, crop.sx, 0, crop.sw, opened.height, 0, 0, sw, sh);
       const px = gs.getImageData(0, 0, sw, sh).data;
       for (let k = 0; k < gray.length; k++)
@@ -294,7 +355,13 @@ export async function grabFrames(opened, plan, { side = 960, tries = 3, onFrame,
       const s = sharpness(gray, sw, sh);
       if (!best || s > best.sharpness) {
         g.drawImage(video, crop.sx, 0, crop.sw, opened.height, 0, 0, w, h);
-        best = { time: presentedTime ?? t, requestedTime: t, presentedTime, sharpness: s };
+        best = {
+          time: picture.time,
+          requestedTime: t,
+          presentedTime: picture.presentedTime,
+          decodedTime: picture.decodedTime,
+          sharpness: s,
+        };
         best.blob = await new Promise((r) => canvas.toBlob(r, "image/jpeg", 0.92));
       }
     }
