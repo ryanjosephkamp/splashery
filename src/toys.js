@@ -3697,7 +3697,7 @@ export const TOYS = [
     kind: "kit",
     pack: "name-toy",
     labs: true,
-    tags: "name words letters text spin poke paint drop blow portfolio toybox",
+    tags: "name words letters text emoji spin poke paint drop blow portfolio toybox",
     camera: { yaw: 0.08, pitch: 0.06, roll: 0, distance: 3.2 },
   },
   // ---- Pack: pictures ----
@@ -3977,7 +3977,7 @@ export const TOYS = [
     kind: "kit",
     pack: "shape-morph",
     labs: true,
-    tags: "overprint word lorenz attractor klein bottle gyroid loop qr code splat cloud morph ink drag",
+    tags: "overprint word emoji list lorenz attractor klein bottle gyroid loop qr code splat cloud morph ink drag",
     camera: { yaw: 0, pitch: 0, roll: 0, distance: 2.5 },
   },
 

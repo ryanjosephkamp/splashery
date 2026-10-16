@@ -318,7 +318,7 @@ function touch(sim, time) {
 
 // A poke at point p (recipe units): a ring runs out from it (Toy Box's 3.4
 // units a second), kicking each letter as it passes; the touched letter rings.
-function poke(sim, p, time) {
+export function poke(sim, p, time) {
   if (sim.pokes.length > 5) sim.pokes.shift();
   const { index } = nearestLetter(sim, sim.layout, p);
   sim.pokes.push({ at: p.slice(), t0: time, hit: new Set(), first: index });
@@ -373,7 +373,7 @@ function paintHop(sim, i, time) {
   touch(sim, time);
 }
 
-function setDrop(sim, on, time) {
+export function setDrop(sim, on, time) {
   if (on === sim.dropped) return;
   const layout = sim.layout;
   sim.dropped = on;
@@ -472,6 +472,17 @@ function stepSim(sim, dt, time) {
         b.w[0] += f[2] * 0.4 * dt;
       }
     });
+    // Once everything is all but still, it is exactly home.
+    if (!winds.length && !sim.pokes.length) {
+      const still = sim.letters.every((b) => [b.d, b.v, b.r, b.w].every((x) => Math.hypot(...x) < 1e-3)); // prettier-ignore
+      if (still)
+        for (const b of sim.letters) {
+          b.d = [0, 0, 0];
+          b.v = [0, 0, 0];
+          b.r = [0, 0, 0];
+          b.w = [0, 0, 0];
+        }
+    }
     return;
   }
   // Loose pieces: falling and lying, or springing home.

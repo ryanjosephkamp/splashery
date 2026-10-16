@@ -49,7 +49,7 @@ export function cleanText(text, maxLength = 400) {
     .replace(/[ \u00a0]+/g, " ")
     .split("\n")
     .map((line) => line.trim())
-    .filter((line, i, all) => line || (i > 0 && i < all.length - 1 && all[i - 1]))
+    .filter(Boolean)
     .join("\n")
     .trim();
 }
