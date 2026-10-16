@@ -2681,6 +2681,16 @@
     "l": 1
   },
   {
+    "t": "One splat, many splats",
+    "u": "toys/one-splat/",
+    "k": "toy",
+    "s": "Math",
+    "d": "Turn the dial from 1 to 16,384 splats. Tap a splat to split it; hold to read its numbers.",
+    "w": "one splat, many splats math math gaussian pixels word picture tree mean covariance eigenvector split portfolio one-splat",
+    "i": "../assets/toys/one-splat/thumb.webp",
+    "l": 1
+  },
+  {
     "t": "Splat equation",
     "u": "toys/splat-equation/",
     "k": "toy",

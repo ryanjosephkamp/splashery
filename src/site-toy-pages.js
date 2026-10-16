@@ -244,6 +244,7 @@ export const SITE_TOY_IDS = [
   "ocean-liner",
   "ocean-wave",
   "octopus",
+  "one-splat",
   "opal",
   "orange",
   "orange-photo",

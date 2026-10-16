@@ -1602,6 +1602,12 @@ export const TOY_HELP = {
     about:
       "Circles turning on circles can draw almost any closed shape, given enough of them. Each circle spins a whole number of times per loop while riding on the rim of the one before, and the tip of the last one traces the drawing. This is a Fourier series, named after Joseph Fourier, who showed in the early 1800s that repeating patterns can be built by adding up simple waves.\n\nTap to spin them and watch the shape drawn again. Few circles draw a wobbly shape and many draw a crisp one: set how many in the Toy tab, pick a heart, a star or a square wave, stack them in 3D, or type words (up to 40 letters) and each letter gets its own chain of circles, five letters at a time.",
   },
+  "one-splat": {
+    howTo:
+      "Turn the dial from 1 to 16,384 splats. Tap a splat to split it; hold to read its numbers.",
+    about:
+      "A word or picture becomes a tree of Gaussian splats. Each splat has the exact center and covariance of the raster pixels beneath it, including the spread within a square pixel. Each split divides those pixels at the median along their principal axis. The two children conserve their parent's pixel count, center, and covariance when their separation is included.\n\nType a word or open a picture in the Toy tab. Tap a splat to split it; hold to see its center, size, angle, and covariance. Replay the last split with the play button. Pictures stay on this device; shared scenes fall back to their word. From a concept by Ryan Kamp. Made by Ryan with Codex (GPT-6). Code: MIT. Procedural splats: CC0.",
+  },
   "splat-equation": {
     howTo: "Tap to play time t. Pick a program, or type your own equations, in the Toy tab.",
     about:

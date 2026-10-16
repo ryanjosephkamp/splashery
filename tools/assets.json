@@ -12548,5 +12548,18 @@
       "sourceId": "j-clutter-source",
       "note": "Fixed-source Studio variant; not measured geometry. Same decoded source JPEG for all levels; linear-sRGB exposure gain 2^stops, clipping, then Canvas blur with replicated edges, then JPEG quality 0.78. Neutral variant follows the same encoding path. Labeled AI-made in the manifest, README, and contact sheet."
     }
+  ],
+  "portfolioSamples": [
+    {
+      "id": "one-splat",
+      "label": "One splat, many splats",
+      "file": "assets/toys/one-splat/thumb.webp",
+      "author": "Made by Ryan with Codex (GPT-6)",
+      "license": "CC0-1.0",
+      "source": "Procedural pixel-tree splats from src/packs/one-splat.js; from a concept by Ryan Kamp.",
+      "checked": "2026-10-14",
+      "sha256": "524818f36ea76563e1f30e8b545b763373dbc52b2f7f4534d859514bcb8406a2",
+      "changes": "Generated the default word with the shared Kit and rendered the thumbnail with tools/make-thumbs.mjs."
+    }
   ]
 }
