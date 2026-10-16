@@ -2709,14 +2709,22 @@ Proposals below are suggestions; the owner may change them.
     through the fourth dimension (about 5 s) and home. Seven color themes.
   - Sound: Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low
     chord in its own key.
-- **One splat, many splats** (`one-splat`). Now: tap: Replay the last split. Plan: keep.
+- **One splat, many splats** (`one-splat`). Now: tap: Replay the last split or merge. Plan: keep.
   - Owner: Codex task 78a: port Ryan Kamp's One Splat concept to the math shelf behind labs.
-  - Effect: Tap a Gaussian to replace it with its two pixel-tree children, moving from the parent's
-    center to their own centers over 1.8 seconds. Hold to inspect its moments.
+  - Effect: A tap splits the splat under the finger into its two pixel-tree children, which slide
+    apart from the parent's center as the parent fades (1.8 s); a second tap there goes a level
+    finer. A hold, or a tap at the finest level, merges a piece back: its halves slide together into
+    the parent. The readout shows the touched node's count, center, spread, and how its halves add
+    back up.
   - Improved: Exact principal-axis median pixel tree, levels from 1 to 16,384 splats, custom words,
     local pictures with mean color, individual refinements, and a hold readout. Existing Kit clouds,
-    morphs, options, and drag hooks; no engine changes.
-  - Sound: A quiet glide while the children separate.
+    morphs, options, and drag hooks; no engine changes. Lane PT2 (the owner's review of October 16,
+    2026: an awful sound, and a tap that did nothing meaningful where it landed): opens at 16
+    splats, a tap splits the touched splat finer each time, a hold or a tap at the finest level
+    merges it back, the readout on every tap, and a new soft sine pitched by level. Built by Opus
+    5.5.
+  - Sound: One soft, clean sine per split or merge, pitched by the level it lands on (finer is
+    higher).
 - **Splat equation** (`splat-equation`). Now: tap: Play t. Plan: keep.
   - Owner: The owner's notes and the Pages into Splats plan (accepted September 28, 2026): people
     type their own Gaussian splat equations and play with them, with a Tinkerer's Manual that

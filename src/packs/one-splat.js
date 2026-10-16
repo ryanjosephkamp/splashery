@@ -270,18 +270,80 @@ function refineRaster(pixels) {
 }
 
 const CACHE = new Map();
+const HOLD_MS = 420;
+const READOUT_MS = 6000;
 let picture = null;
 let current = null;
 let press = null;
 let holdTimer = null;
 let readout = null;
+let readoutKind = "";
+let readoutTimer = null;
+
+// Lane PT2: one soft, clean sine per split or merge, pitched by the level the
+// touched part lands on (finer is higher), on a pentatonic scale that stays
+// below about 1.3 kHz. The app plays it as a cue when the animation starts.
+export const LEVEL_NOTES = "G3 A3 C4 D4 E4 G4 A4 C5 D5 E5 G5 A5 C6 D6 E6".split(" ");
+export const levelSound = (level, merge = false) => ({
+  voice: "tone",
+  f: LEVEL_NOTES[Math.max(0, Math.min(LEVEL_NOTES.length - 1, level))],
+  decay: merge ? 1.6 : 2,
+  vol: merge ? 0.4 : 0.45,
+});
+let lastTap = null;
+
+// A node's level in the tree: the root is level 0, its children level 1.
+export const depth = (i) => 31 - Math.clz32(i);
 
 function release() {
   clearTimeout(holdTimer);
   holdTimer = null;
   press = null;
+}
+
+function hideReadout() {
+  clearInterval(readoutTimer);
+  readoutTimer = null;
   readout?.remove();
   readout = null;
+  readoutKind = "";
+}
+
+// The touched splat's numbers, as the reference's probe shows them. A tap's
+// readout stays for a few seconds (or until the next press, or another toy);
+// a hold's stays while the finger is down.
+function showReadout(text, kind) {
+  if (typeof document === "undefined") return;
+  hideReadout();
+  readout = document.createElement("output");
+  readout.id = "one-splat-readout";
+  readout.setAttribute("role", "status");
+  readout.textContent = text;
+  // Inside the stage's top-left corner, clear of the level dial.
+  const box = document.querySelector("#stage")?.getBoundingClientRect();
+  Object.assign(readout.style, {
+    position: "fixed",
+    left: `${(box?.left ?? 0) + 8}px`,
+    top: `${(box?.top ?? 64) + 8}px`,
+    zIndex: "20",
+    maxWidth: `${Math.max(200, (box?.width ?? 300) - 80)}px`,
+    padding: "8px 10px",
+    borderRadius: "10px",
+    background: "#16232ee6",
+    color: "#fff",
+    font: "11px/1.5 monospace",
+    whiteSpace: "pre-wrap",
+    pointerEvents: "none",
+  });
+  document.body.append(readout);
+  readoutKind = kind;
+  const shown = readout,
+    since = Date.now();
+  readoutTimer = setInterval(() => {
+    const id = globalThis.__splashery?.player?.toyInfo?.id;
+    const gone = (kind !== "hold" && Date.now() - since > READOUT_MS) || (id && id !== "one-splat");
+    if (gone && readout === shown) hideReadout();
+  }, 250);
 }
 
 function prepareWord(o) {
@@ -314,17 +376,62 @@ function nearest(point) {
   return best;
 }
 
-function describe(i) {
-  const m = node(current.tree, i),
-    e = eig(m.a, m.b, m.c);
-  return `Splat ${i} · ${m.n.toLocaleString("en-US")} pixels\nCenter: (${m.mx.toFixed(2)}, ${m.my.toFixed(2)}) px (Y up)\nSize (σ): ${Math.sqrt(e.l1).toFixed(2)} × ${Math.sqrt(e.l2).toFixed(2)} px\nAngle: ${((e.theta * 180) / Math.PI).toFixed(2)}°\nCovariance: [${m.a.toFixed(2)}, ${m.b.toFixed(2)}; ${m.b.toFixed(2)}, ${m.c.toFixed(2)}] px²`;
+const fmt = (n) => n.toLocaleString("en-US");
+
+function describe(i, change = "") {
+  const tree = current.tree,
+    m = node(tree, i),
+    e = eig(m.a, m.b, m.c),
+    d = depth(i);
+  const lines = [
+    `Level ${d} · splat ${fmt(i - 2 ** d + 1)} of ${fmt(2 ** d)} · ${fmt(m.n)} px`,
+    `Center: (${m.mx.toFixed(2)}, ${m.my.toFixed(2)}) px (Y up)`,
+    `Size (σ): ${Math.sqrt(e.l1).toFixed(2)} × ${Math.sqrt(e.l2).toFixed(2)} px`,
+    `Angle: ${((e.theta * 180) / Math.PI).toFixed(2)}°`,
+    `Covariance: [${m.a.toFixed(1)}, ${m.b.toFixed(1)}; ${m.b.toFixed(1)}, ${m.c.toFixed(1)}] px²`,
+  ];
+  if (change && i * 2 + 1 < tree.size) {
+    const halves = `${fmt(tree.n[i * 2])} + ${fmt(tree.n[i * 2 + 1])} pixels`;
+    const { residual } = checkSplit(m, node(tree, i * 2), node(tree, i * 2 + 1));
+    lines.unshift(
+      change === "split"
+        ? `Split into its two halves: ${halves}`
+        : `Merged its two halves back: ${halves}`,
+    );
+    lines.push(`The halves add back up to within ${residual.toExponential(1)}.`);
+  }
+  return lines.join("\n");
+}
+
+// The options that merge node p back: it and every refinement inside it.
+function mergeOptions(p) {
+  const inside = (j) => {
+    while (j > p) j >>= 1;
+    return j === p;
+  };
+  return {
+    splits: current.splits.filter((j) => !inside(j)).join(","),
+    splitSource: current.label,
+    splitLevel: current.level,
+    lastSplit: 0,
+    lastMerge: p,
+  };
+}
+
+// The refined node a touched splat can merge back into (its parent, when
+// that parent was split by a tap rather than by the level dial).
+function mergeable(i) {
+  const p = i >> 1;
+  return i > 1 && current.splits.includes(p) ? p : 0;
 }
 
 export const RECIPES = {
   "one-splat": {
     turntable: false,
     handsOn: false,
-    controls: [{ key: "split", label: "Replay the last split", type: "pulse", ease: SECONDS }],
+    controls: [
+      { key: "split", label: "Replay the last split or merge", type: "pulse", ease: SECONDS },
+    ],
     options: [
       { key: "word", label: "Word", type: "text", default: "Splashery", maxLength: 32 },
       {
@@ -334,13 +441,16 @@ export const RECIPES = {
         min: 0,
         max: 14,
         step: 1,
-        default: 13,
+        // Lane PT2: a coarse start (16 splats), so a tap visibly splits
+        // the part it lands on.
+        default: 4,
         stage: true,
       },
       { key: "splits", type: "text", default: "", hidden: true },
       { key: "splitSource", type: "text", default: "", hidden: true },
       { key: "splitLevel", type: "slider", min: -1, max: 14, default: -1, hidden: true },
       { key: "lastSplit", type: "slider", min: 0, max: 32767, default: 0, hidden: true },
+      { key: "lastMerge", type: "slider", min: 0, max: 32767, default: 0, hidden: true },
       { key: "picture", type: "text", default: "", hidden: true },
     ],
     input: {
@@ -350,9 +460,10 @@ export const RECIPES = {
       fileButton: "Open a picture…",
       binary: true,
       accept: "image/png,image/jpeg,image/webp,image/gif",
-      note: "The level dial runs from 1 to 16,384 splats. Tap a splat to split it; hold to see its numbers. Pictures stay on this device. A picture link falls back to your word when reopened.",
+      note: "The level dial runs from 1 to 16,384 splats. Tap a splat to split it into its two halves, and tap again to go finer there. Hold a piece to merge it back. Pictures stay on this device. A picture link falls back to your word when reopened.",
       async read(text, name, file) {
         release();
+        hideReadout();
         if (file) {
           const bitmap = await createImageBitmap(file);
           try {
@@ -369,86 +480,107 @@ export const RECIPES = {
           } finally {
             bitmap.close();
           }
-          return { picture: name, splits: "", splitLevel: -1, lastSplit: 0 };
+          return { picture: name, splits: "", splitLevel: -1, lastSplit: 0, lastMerge: 0 };
         }
         const word = text.trim();
         if (!word) throw new Error("Type a word first.");
         if (Array.from(word).length > 32) throw new Error("Use up to 32 characters.");
-        return { word, picture: "", splits: "", splitLevel: -1, lastSplit: 0 };
+        return { word, picture: "", splits: "", splitLevel: -1, lastSplit: 0, lastMerge: 0 };
       },
       shown: () =>
         current
           ? `${current.label} · ${current.ids.length.toLocaleString("en-US")} splats · ${current.tree.total.toLocaleString("en-US")} pixels${current.fallback ? " · Picture unavailable; showing your word." : ""}`
           : "",
     },
+    // Lane PT2: a tap works on the splat under the finger. It splits into
+    // its two children (the sound's pitch is the new level: finer is
+    // higher); at the finest level, a tap merges it back into its parent.
     action: {
       key: "split",
-      label: "Replay the last split",
+      label: "Replay the last split or merge",
+      quiet: ["split"],
       at(point) {
         const i = nearest(point);
-        if (!i || i * 2 + 1 >= current.tree.size)
+        if (!i) return null;
+        if (i * 2 + 1 < current.tree.size) {
+          showReadout(describe(i, "split"), "tap");
           return {
             key: "split",
-            say: "This splat is at the finest level. Move the level dial down to split larger splats.",
+            options: {
+              splits: [...current.splits, i].join(","),
+              splitSource: current.label,
+              splitLevel: current.level,
+              lastSplit: i,
+              lastMerge: 0,
+            },
+            pick: depth(i) + 1,
           };
-        const split = [...current.splits, i];
+        }
+        const p = mergeable(i);
+        if (p) {
+          showReadout(describe(p, "merge"), "tap");
+          return { key: "split", options: mergeOptions(p), pick: depth(p) };
+        }
+        showReadout(describe(i), "tap");
         return {
           key: "split",
-          options: {
-            splits: split.join(","),
-            splitSource: current.label,
-            splitLevel: current.level,
-            lastSplit: i,
-          },
-          pick: i,
+          say: "This splat is at the finest level. Move the level dial down to split larger splats.",
         };
       },
     },
+    // A hold reads the touched splat's numbers, and merges a split piece
+    // back into its parent.
     drag: {
       plane: [0, 0, 1],
       at: (point) => nearest(point) !== null,
       start(point) {
         release();
+        hideReadout();
         press = { point: point.slice(), id: nearest(point), source: current };
         const held = press;
         holdTimer = setTimeout(() => {
           if (press !== held || current !== held.source || typeof document === "undefined") return;
-          readout = document.createElement("output");
-          readout.id = "one-splat-readout";
-          readout.setAttribute("role", "status");
-          readout.textContent = describe(held.id);
-          Object.assign(readout.style, {
-            position: "fixed",
-            left: "12px",
-            top: "72px",
-            zIndex: "20",
-            maxWidth: "calc(100vw - 24px)",
-            padding: "12px",
-            borderRadius: "12px",
-            background: "#16232ef2",
-            color: "#fff",
-            font: "12px/1.6 monospace",
-            whiteSpace: "pre-wrap",
-            pointerEvents: "none",
-          });
-          document.body.append(readout);
-        }, 420);
+          const p = mergeable(held.id);
+          const player = globalThis.__splashery?.player;
+          if (!p || !player?.switchTo) {
+            showReadout(describe(held.id), "hold");
+            return;
+          }
+          held.merged = true;
+          showReadout(describe(p, "merge"), "merge");
+          // The press is not also a tap; the merge sounds and plays as a
+          // tap that changes the toy does.
+          player.dragFired = true;
+          player.switchTo({ key: "split", value: 1, pick: depth(p), options: mergeOptions(p) });
+        }, HOLD_MS);
       },
       move(point) {
-        if (press && Math.hypot(point[0] - press.point[0], point[1] - press.point[1]) > 4)
+        if (press && Math.hypot(point[0] - press.point[0], point[1] - press.point[1]) > 4) {
           release();
+          if (readoutKind === "hold") hideReadout();
+        }
       },
-      end: release,
+      end() {
+        release();
+        if (readoutKind === "hold") hideReadout();
+      },
     },
     prepare(o) {
       release();
       prepareWord(o);
     },
-    drive(t, c, out) {
-      // The children are built in their final pose. Their morph target is
-      // the parent's center: the pulse releases them smoothly from there.
-      const v = Math.min(1, Math.max(0, c.split || 0));
-      out.morph = [v * v * (3 - 2 * v)];
+    drive(t, c, out, about) {
+      const tap = about?.tap;
+      if (tap && tap !== lastTap) {
+        lastTap = tap;
+        if (tap.key === "split" && about.time - tap.time < 0.5 && current?.cue)
+          out.cues.push(current.cue);
+      }
+      // Channel 0 releases a split's children from their parent's center
+      // while the parent fades; channel 1 runs the other way for a merge.
+      const v = Math.min(1, Math.max(0, c.split || 0)),
+        s = v * v * (3 - 2 * v);
+      out.morph = [s, 1 - s];
     },
     build(k, o) {
       const source = o.picture && picture?.label === o.picture ? picture : prepareWord(o);
@@ -456,48 +588,76 @@ export const RECIPES = {
       const sameLevel = Number(o.splitLevel) === level && o.splitSource === source.label;
       const refinements = sameLevel ? String(o.splits || "") : "";
       const ids = frontier(source.tree, level, refinements);
-      const last = sameLevel ? Number(o.lastSplit) : 0;
+      const last = sameLevel ? Number(o.lastSplit) || 0 : 0;
+      const merged = sameLevel ? Number(o.lastMerge) || 0 : 0;
       current = {
         ...source,
         ids,
         level,
         splits: refinements.split(",").map(Number).filter(Boolean),
         fallback: !!o.picture && source !== picture,
+        cue: null,
       };
       k.data ||= {};
       k.data.tree = source.tree;
       k.data.ids = ids;
       k.data.level = level;
-      const position = (i) => [
+      k.data.width = source.width;
+      k.data.height = source.height;
+      const position = (i, z = 0) => [
         source.tree.mx[i] - source.width / 2,
         source.tree.my[i] + source.height / 2,
-        0,
+        z,
       ];
+      const colorOf = (i) => {
+        if (!source.colors) return [1, 0.38, 0.13];
+        const color = [0, 0, 0],
+          n = source.tree.n[i];
+        for (let j = source.tree.lo[i]; j < source.tree.hi[i]; j++)
+          for (let ch = 0; ch < 3; ch++)
+            color[ch] += source.colors[source.tree.idx[j] * 3 + ch] / n;
+        return color;
+      };
+      // The splats drawn: the frontier, plus the pieces a split or merge
+      // animates. A split's parent fades as its children leave its center;
+      // a merge's two children slide together and shrink into their parent,
+      // drawn just behind it, as the parent fades in.
+      const shown = new Set(ids);
+      const list = ids.map((i) => ({ i }));
+      const split = last && shown.has(last * 2) && shown.has(last * 2 + 1);
+      if (split) list.push({ i: last, ghost: "parent" });
+      const merge = merged && shown.has(merged) && merged * 2 + 1 < source.tree.size;
+      if (merge)
+        list.push({ i: merged * 2, ghost: "child" }, { i: merged * 2 + 1, ghost: "child" });
+      if (split) current.cue = levelSound(depth(last) + 1);
+      else if (merge) current.cue = levelSound(depth(merged), true);
+      const back = -0.01 * Math.max(source.width, source.height);
       k.reach([-source.width / 2, -source.height / 2, 0]);
       k.reach([source.width / 2, source.height / 2, 0]);
       // Kit counts are tier-relative; cancel that factor so one node really
       // is one Gaussian on every tier, including the 1-splat level.
-      k.cloud({ count: (ids.length * 160000) / k.count, pattern: false, jitter: 0 }, (_, index) => {
-        const i = ids[index],
-          m = node(source.tree, i),
-          e = eig(m.a, m.b, m.c);
-        let color = [1, 0.38, 0.13];
-        if (source.colors) {
-          color = [0, 0, 0];
-          for (let j = source.tree.lo[i]; j < source.tree.hi[i]; j++)
-            for (let ch = 0; ch < 3; ch++)
-              color[ch] += source.colors[source.tree.idx[j] * 3 + ch] / m.n;
-        }
-        return {
-          p: position(i),
-          scales: [Math.sqrt(e.l1 + DILATE), Math.sqrt(e.l2 + DILATE), 0.12],
-          quat: [0, 0, Math.sin(e.theta / 2), Math.cos(e.theta / 2)],
-          color,
-          opacity: 0.95,
-          to: last && (i === last * 2 || i === last * 2 + 1) ? position(last) : undefined,
-          channel: 0,
-        };
-      });
+      k.cloud(
+        { count: (list.length * 160000) / k.count, pattern: false, jitter: 0 },
+        (_, index) => {
+          const { i, ghost } = list[index],
+            e = eig(source.tree.a[i], source.tree.b[i], source.tree.c[i]);
+          const splat = {
+            p: position(i),
+            scales: [Math.sqrt(e.l1 + DILATE), Math.sqrt(e.l2 + DILATE), 0.12],
+            quat: [0, 0, Math.sin(e.theta / 2), Math.cos(e.theta / 2)],
+            color: colorOf(i),
+            opacity: 0.95,
+            channel: 0,
+          };
+          if (ghost === "parent") return { ...splat, kind: "fade", params: [0.3, -0.55] };
+          if (ghost === "child") return { ...splat, to: position(merged, back), channel: 5 };
+          if (split && (i === last * 2 || i === last * 2 + 1))
+            return { ...splat, to: position(last) };
+          if (merge && i === merged)
+            return { ...splat, kind: "fade", params: [0.25, -0.6], channel: 1 };
+          return splat;
+        },
+      );
     },
   },
 };
