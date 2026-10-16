@@ -1910,6 +1910,7 @@ export const TOY_SOUNDS = {
   // Lane Manual, Sound B (his note: too robotic and loud, change entirely):
   // the quiet scratch of chalk as t plays (4 s).
   "splat-equation": { voice: "rustle", f: 2600, n: 30, decay: 2.6, bright: 0.3, vol: 0.3 },
+  "shape-morph": { voice: "rustle", f: 1400, n: 18, decay: 2.4, bright: 0.16, vol: 0.18 },
   "one-splat": { voice: "glide", f: 420, to: 0.7, decay: 0.6, vol: 0.18 },
   // Three hushing waves, each at its loudest as a swell reaches the mouth
   // (0.7, 1.8, 2.9 s).

@@ -344,6 +344,7 @@ export const SITE_TOY_IDS = [
   "sea-urchin",
   "seashell-spiral",
   "seeded-loaf",
+  "shape-morph",
   "shardball",
   "shield",
   "shuttlecock",
