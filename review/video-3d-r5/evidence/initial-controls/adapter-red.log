@@ -1,0 +1,88 @@
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:37:50] "GET / HTTP/1.1" 200 -
+
+Running 3 tests using 1 worker
+
+(node:4736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4736) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-v3d-adapter.spec.mjs:18:1 › an unresponsive graphics adapter gives bounded, actionable feedback (423ms)
+(node:4749) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4749) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [chromium] › tests/cdx-v3d-adapter.spec.mjs:36:1 › canceling adapter discovery releases its caller and does not start a canceled request (5.0s)
+(node:4762) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4762) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  3 [chromium] › tests/cdx-v3d-adapter.spec.mjs:68:1 › a late adapter response cannot replace the timeout or another discovery (231ms)
+
+
+  1) [chromium] › tests/cdx-v3d-adapter.spec.mjs:18:1 › an unresponsive graphics adapter gives bounded, actionable feedback 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBeUndefined[2m()[22m
+
+    Received: [31mtrue[39m
+
+      20 |       new Promise((resolve) => setTimeout(() => resolve({ pending: true }), 200)),
+      21 |     ]);
+    > 22 |     expect(result.pending).toBeUndefined();
+         |                            ^
+      23 |     expect(result.ok).toBe(false);
+      24 |     expect(result.reason).toMatch(/graphics card.*time/i);
+      25 |     expect(result.reason).toMatch(/try|reopen/i);
+        at /workspace/splashery/tests/cdx-v3d-adapter.spec.mjs:22:28
+        at withGpu (/workspace/splashery/tests/cdx-v3d-adapter.spec.mjs:8:12)
+        at /workspace/splashery/tests/cdx-v3d-adapter.spec.mjs:17:3
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-adapter-an-unrespo-864c4-bounded-actionable-feedback-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-adapter-an-unrespo-864c4-bounded-actionable-feedback-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-v3d-adapter.spec.mjs:36:1 › canceling adapter discovery releases its caller and does not start a canceled request 
+
+    [31mTest timeout of 5000ms exceeded.[39m
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-adapter-canceling--22d9c-ot-start-a-canceled-request-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-adapter-canceling--22d9c-ot-start-a-canceled-request-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3) [chromium] › tests/cdx-v3d-adapter.spec.mjs:68:1 › a late adapter response cannot replace the timeout or another discovery 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32mfalse[39m
+    Received: [31mundefined[39m
+
+      64 |         new Promise((resolve) => setTimeout(() => resolve({ pending: true }), 200)),
+      65 |       ]);
+    > 66 |       expect(first.ok).toBe(false);
+         |                        ^
+      67 |       const second = await webgpuStatus();
+      68 |       expect(second).toEqual({ ok: true, adapter: "test available adapter", reason: "" });
+      69 |       resolveAdapter({ info: { description: "late adapter" } });
+        at /workspace/splashery/tests/cdx-v3d-adapter.spec.mjs:66:24
+        at withGpu (/workspace/splashery/tests/cdx-v3d-adapter.spec.mjs:8:12)
+        at /workspace/splashery/tests/cdx-v3d-adapter.spec.mjs:55:3
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-adapter-a-late-ada-432c4-imeout-or-another-discovery-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-adapter-a-late-ada-432c4-imeout-or-another-discovery-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  3 failed
+    [chromium] › tests/cdx-v3d-adapter.spec.mjs:18:1 › an unresponsive graphics adapter gives bounded, actionable feedback 
+    [chromium] › tests/cdx-v3d-adapter.spec.mjs:36:1 › canceling adapter discovery releases its caller and does not start a canceled request 
+    [chromium] › tests/cdx-v3d-adapter.spec.mjs:68:1 › a late adapter response cannot replace the timeout or another discovery 

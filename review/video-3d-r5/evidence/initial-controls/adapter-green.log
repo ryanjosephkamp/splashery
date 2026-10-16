@@ -1,0 +1,13 @@
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:38:11] "GET / HTTP/1.1" 200 -
+
+Running 3 tests using 1 worker
+
+(node:4835) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:4835) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-v3d-adapter.spec.mjs:18:1 › an unresponsive graphics adapter gives bounded, actionable feedback (225ms)
+  ✓  2 [chromium] › tests/cdx-v3d-adapter.spec.mjs:36:1 › canceling adapter discovery releases its caller and does not start a canceled request (10ms)
+  ✓  3 [chromium] › tests/cdx-v3d-adapter.spec.mjs:68:1 › a late adapter response cannot replace the timeout or another discovery (34ms)
+
+  3 passed (1.5s)

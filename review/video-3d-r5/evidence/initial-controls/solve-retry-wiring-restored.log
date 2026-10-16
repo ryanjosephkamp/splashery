@@ -1,0 +1,29 @@
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:26] "GET / HTTP/1.1" 200 -
+
+Running 1 test using 1 worker
+
+(node:9902) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:9902) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /src/video3d/run.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /src/video3d/deadline.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /src/video3d/surface-seed.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /src/video3d/scene.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:47:27] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✓  1 [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:161:1 › the video pipeline retries short solves with intact pictures before seeding (466ms)
+
+  1 passed (1.4s)

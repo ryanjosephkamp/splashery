@@ -1,0 +1,14 @@
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:40:47] "GET / HTTP/1.1" 200 -
+
+Running 4 tests using 1 worker
+
+(node:5295) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5295) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-v3d-surface-neighbors.spec.mjs:2:1 › bounded surface neighbors match a full stable distance sort, including ties (358ms)
+  ✓  2 [chromium] › tests/cdx-v3d-surface-neighbors.spec.mjs:35:1 › coincident surface neighbors preserve encounter order and leave inputs unchanged (3ms)
+  ✓  3 [chromium] › tests/cdx-v3d-surface-seed.spec.mjs:56:1 › surface seeding fills only supported 3D surfaces within the seed budget (407ms)
+  ✓  4 [chromium] › tests/cdx-v3d-surface-seed.spec.mjs:84:1 › inconsistent views and unsupported geometry never invent a dense surface (15ms)
+
+  4 passed (2.0s)

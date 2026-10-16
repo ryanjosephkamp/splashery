@@ -1,0 +1,120 @@
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:44] "GET / HTTP/1.1" 200 -
+
+Running 3 tests using 1 worker
+
+(node:5844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:46] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✘  1 [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:24:1 › a rejected two-camera solve preserves original pictures for the relaxed retry (617ms)
+(node:5996) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5996) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:48] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✓  2 [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:95:1 › omitting the camera minimum preserves the existing two-view session contract (614ms)
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:44:49] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✘  3 [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:126:1 › invalid camera minima fail before starting the solver (740ms)
+
+
+  1) [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:24:1 › a rejected two-camera solve preserves original pictures for the relaxed retry 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoMatch[2m([22m[32mexpected[39m[2m)[22m
+
+    Expected pattern: [32m/only 2.*3.*camera/i[39m
+    Received string:  [31m""[39m
+
+      53 |       retryError, releasedAfterAcceptance: frames.every(f => f.gray === null) };
+      54 |   });
+    > 55 |   expect(result.rejected).toMatch(/only 2.*3.*camera/i);
+         |                           ^
+      56 |   expect(result.retained).toBe(true);
+      57 |   expect(result.noRejectedRecon).toBe(true);
+      58 |   expect(result.retryError).toBeUndefined();
+        at /workspace/splashery/tests/cdx-v3d-solve-retry.spec.mjs:55:27
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-v3d-solve-retry-a-reje-46d65-tures-for-the-relaxed-retry-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-v3d-solve-retry-a-reje-46d65-tures-for-the-relaxed-retry-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-solve-retry-a-reje-46d65-tures-for-the-relaxed-retry-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-solve-retry-a-reje-46d65-tures-for-the-relaxed-retry-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:126:1 › invalid camera minima fail before starting the solver 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m0[39m
+    Received: [31m7[39m
+
+      89 |     return { errors, calls: globalThis.solvedCalls || 0 };
+      90 |   });
+    > 91 |   expect(result.calls).toBe(0);
+         |                        ^
+      92 |   expect(result.errors).toHaveLength(7);
+      93 |   for (const error of result.errors) expect(error).toMatch(/minCameras/);
+      94 | });
+        at /workspace/splashery/tests/cdx-v3d-solve-retry.spec.mjs:91:24
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-v3d-solve-retry-invali-b91f4--before-starting-the-solver-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-v3d-solve-retry-invali-b91f4--before-starting-the-solver-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-solve-retry-invali-b91f4--before-starting-the-solver-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-solve-retry-invali-b91f4--before-starting-the-solver-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:24:1 › a rejected two-camera solve preserves original pictures for the relaxed retry 
+    [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:126:1 › invalid camera minima fail before starting the solver 
+  1 passed (5.1s)

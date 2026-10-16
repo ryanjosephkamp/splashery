@@ -1,0 +1,71 @@
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:28] "GET / HTTP/1.1" 200 -
+
+Running 1 test using 1 worker
+
+(node:7339) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:7339) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /src/video3d/run.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /src/video3d/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /src/video3d/deadline.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /src/video3d/surface-seed.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /src/video3d/scene.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:46:29] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✘  1 [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:161:1 › the video pipeline retries short solves with intact pictures before seeding (744ms)
+
+
+  1) [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:161:1 › the video pipeline retries short solves with intact pictures before seeding 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoEqual[2m([22m[32mexpected[39m[2m) // deep equality[22m
+
+    [32m- Expected  - 3[39m
+    [31m+ Received  + 3[39m
+
+    [2m  Object {[22m
+    [32m-   "accepted": 3,[39m
+    [32m-   "calls": 2,[39m
+    [32m-   "error": "observed accepted seed",[39m
+    [31m+   "accepted": 2,[39m
+    [31m+   "calls": 1,[39m
+    [31m+   "error": "The camera path could not be worked out (retry lost its feature pictures). Try a slower, steadier stretch of a scene with more texture.",[39m
+    [2m    "released": true,[22m
+    [2m  }[22m
+
+      171 |     };
+      172 |   });
+    > 173 |   expect(result).toEqual({
+          |                  ^
+      174 |     error: "observed accepted seed",
+      175 |     calls: 2,
+      176 |     accepted: 3,
+        at /workspace/splashery/tests/cdx-v3d-solve-retry.spec.mjs:173:18
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/cdx-v3d-solve-retry-the-vi-3f769-act-pictures-before-seeding-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/cdx-v3d-solve-retry-the-vi-3f769-act-pictures-before-seeding-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-solve-retry-the-vi-3f769-act-pictures-before-seeding-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-solve-retry-the-vi-3f769-act-pictures-before-seeding-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:161:1 › the video pipeline retries short solves with intact pictures before seeding 

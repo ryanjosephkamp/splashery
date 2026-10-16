@@ -1,0 +1,185 @@
+{
+  "notice": "Exact copied bytes; no native corpus acceptance claim.",
+  "files": [
+    {
+      "file": "README.md",
+      "bytes": 9020,
+      "sha256": "63e76f20c61c02601194278654602d361283117e6dc7f7f6fb827510aec83b00"
+    },
+    {
+      "file": "corpus/buddha.mp4",
+      "bytes": 2457576,
+      "sha256": "765070736b87205ff07211410a25b23b02e5e8e0092282a742e3c70f3e02f388"
+    },
+    {
+      "file": "corpus/cat-plays.mp4",
+      "bytes": 616920,
+      "sha256": "c0c2e5ccff0f6c97246965d971ffd61fde2b420cbe350160f23d36cc543dd085"
+    },
+    {
+      "file": "corpus/cat-track.mp4",
+      "bytes": 370191,
+      "sha256": "598c0f8095943d2e007f8a30cf715576092f50d78743d29fce17141c806d8430"
+    },
+    {
+      "file": "corpus/chameleon-flowers.mp4",
+      "bytes": 736318,
+      "sha256": "01edbc37ea69d99f8995f503195b52d71b0d3d369491105bce8a7cfe6cbf907e"
+    },
+    {
+      "file": "corpus/dianthus.mp4",
+      "bytes": 1443894,
+      "sha256": "10b989a9eafe9e767e78b7186d64f0a148f57a99f07f37f6c001ad9cab42b5e5"
+    },
+    {
+      "file": "corpus/fjoloy.mp4",
+      "bytes": 2397749,
+      "sha256": "2e01259d5d6dce77a46d98e43af9def48429d184b9422e0833957d82a1f9f210"
+    },
+    {
+      "file": "corpus/fremantle-orbit.mp4",
+      "bytes": 1146265,
+      "sha256": "cbd6fdf90ae94b5a1e4bfdbcb4770a94d45edf801109fced79683b62c72c3747"
+    },
+    {
+      "file": "corpus/fresnel-lens.mp4",
+      "bytes": 467080,
+      "sha256": "5077ed211aa51513aed51683b96d77c845e1fd0985ddef4923118e384b31d0d8"
+    },
+    {
+      "file": "corpus/horse-statue.mp4",
+      "bytes": 1546297,
+      "sha256": "42d48f798f62285cb5e12047afad76b0fede6311c5ea61b334a678bef2c30045"
+    },
+    {
+      "file": "corpus/ihasalu-orbit.mp4",
+      "bytes": 1464394,
+      "sha256": "12abd320e3f5d4cee804359545b660bcc1e3d7e40c8bc741cd21ab3d2096653d"
+    },
+    {
+      "file": "corpus/kakerdi-bog.mp4",
+      "bytes": 1077596,
+      "sha256": "5ff19f985878f5c2a6f7ba7ebb39fc34ffb350aaf673cb27d0e6d6f86c4e63a8"
+    },
+    {
+      "file": "corpus/oa-street.mp4",
+      "bytes": 1476179,
+      "sha256": "f3dea7e021a8fd92347e6507ca87e43356114a6ee700b2af8eb34a694e6e5341"
+    },
+    {
+      "file": "corpus/palace-statue.mp4",
+      "bytes": 700939,
+      "sha256": "b2ac52443fbb0a70dadee811f521c296c144d2bdd38674a247cd877dd39356de"
+    },
+    {
+      "file": "corpus/pisac.mp4",
+      "bytes": 403116,
+      "sha256": "410bfa27b1d0501e7038c72c9fd6a2a3cbf3979adcbbacf540aed48d5ab8010d"
+    },
+    {
+      "file": "corpus/royal-sovereign.mp4",
+      "bytes": 811967,
+      "sha256": "8eb1bd31aef6bb5132a7df7c5e7d668ab12e539becd791ae46a949f1ac4bfcf6"
+    },
+    {
+      "file": "corpus/saint-denis.mp4",
+      "bytes": 2240728,
+      "sha256": "231358f2f7f9a1ad04e78c782106ad13e56bf0fcd88f665d86497365117fd405"
+    },
+    {
+      "file": "corpus/sleeping-dog.mp4",
+      "bytes": 2460226,
+      "sha256": "c371e8be118a8a79a647671e7d0fb538e086cdee37ac9ff95e276fb3a30cbfb9"
+    },
+    {
+      "file": "corpus/snaefell.mp4",
+      "bytes": 1224471,
+      "sha256": "cc3cafc40515831e8b6a209322b47a10744190caeb2cab637adfb7cd45e7f6c6"
+    },
+    {
+      "file": "corpus/ullard.mp4",
+      "bytes": 2074008,
+      "sha256": "a08e5b34e22f2c43e9741146bec42bea9ce9dde4b8cbf4761684d88bfe94294b"
+    },
+    {
+      "file": "corpus/viljandi-ruins.mp4",
+      "bytes": 1691636,
+      "sha256": "d8c69186d35269f6d5f9c23cec21b46fa053659e97988098863d06ceaa7e508d"
+    },
+    {
+      "file": "evidence/initial-controls/adapter-green.log",
+      "bytes": 899,
+      "sha256": "c3de117d17be4ec7a4bf00e015952495c89554669eb137da29e21c67b6b7630d"
+    },
+    {
+      "file": "evidence/initial-controls/adapter-red.log",
+      "bytes": 6198,
+      "sha256": "62fb945a110dbeff2c772c1cbb2d2bf10bff635966a39f0ffebeab70f9d3ef89"
+    },
+    {
+      "file": "evidence/initial-controls/calibration-baseline.log",
+      "bytes": 6215,
+      "sha256": "7db9f279970f000d674926633977a65c039e07fd8b3f8e16731112978b1d9a78"
+    },
+    {
+      "file": "evidence/initial-controls/check-surface.mjs.gz",
+      "bytes": 975,
+      "sha256": "5b3f0e922d2417ceb343a4e882f1d3598f4ca760ba1f26f5df9b3a8ee461a2cf"
+    },
+    {
+      "file": "evidence/initial-controls/r4-seed-attribution.txt",
+      "bytes": 772,
+      "sha256": "651af93f9dd50c010e0c123901faf1c9f9586709c938b8ec410968de10e9e6dc"
+    },
+    {
+      "file": "evidence/initial-controls/r4-seed-probe.json.gz",
+      "bytes": 21019664,
+      "sha256": "352c44c8dc2afa4c089ded68b4269d4b5efadf428e584edc8446a6ecf2270eea"
+    },
+    {
+      "file": "evidence/initial-controls/solve-retry-green.log",
+      "bytes": 12944,
+      "sha256": "0c1f3d6a56dc9c017fa35b1fce463fc963280032f827fb54044dcef5de3b5c3e"
+    },
+    {
+      "file": "evidence/initial-controls/solve-retry-red-r2.log",
+      "bytes": 10273,
+      "sha256": "6c223cee6d4c967de22bb7826a74b2deabd841b3bfa6c2fa6f045162d3840f43"
+    },
+    {
+      "file": "evidence/initial-controls/solve-retry-wiring-red.log",
+      "bytes": 5220,
+      "sha256": "aaba1919539c8930ac6508f47b55d92ee1c94b01eefbd0a4f2fb2b12f6a8be23"
+    },
+    {
+      "file": "evidence/initial-controls/solve-retry-wiring-restored.log",
+      "bytes": 2571,
+      "sha256": "ac949f03cfb7ede933a6c148477050cd5c1c4aca1c425b8542b5c180b50ca624"
+    },
+    {
+      "file": "evidence/initial-controls/surface-before.js",
+      "bytes": 8351,
+      "sha256": "331d39131bc210adb71c24c976cb50c6eb537e950ab51a4f269cffa3d44e247c"
+    },
+    {
+      "file": "evidence/initial-controls/surface-green.log",
+      "bytes": 1075,
+      "sha256": "d1b04cc5eac953b11552650e0f12378d502d19d209285d230ca4f9cdd731c83d"
+    },
+    {
+      "file": "evidence/initial-controls/surface-parity.json.gz",
+      "bytes": 915,
+      "sha256": "c3d6c4775bf03336c69e0502d0b297dbeac2402b9378fcdeac7d54e0d5ab49f7"
+    },
+    {
+      "file": "evidence/initial-controls/surface-red.log",
+      "bytes": 4783,
+      "sha256": "cb9f8fc5ba918ef0b36cc13f6dac9b9706d613347b3e909cb08506d65da3f055"
+    },
+    {
+      "file": "manifest.json",
+      "bytes": 40102,
+      "sha256": "bf0fcb849988aedc5ac20965d567e304adec88129b4f6e47fea21bcb0395dbca"
+    }
+  ]
+}

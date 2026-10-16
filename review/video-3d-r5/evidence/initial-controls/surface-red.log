@@ -1,0 +1,67 @@
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:40:35] "GET / HTTP/1.1" 200 -
+
+Running 2 tests using 1 worker
+
+(node:5208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5208) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/cdx-v3d-surface-neighbors.spec.mjs:2:1 › bounded surface neighbors match a full stable distance sort, including ties (11ms)
+(node:5221) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:5221) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [chromium] › tests/cdx-v3d-surface-neighbors.spec.mjs:35:1 › coincident surface neighbors preserve encounter order and leave inputs unchanged (35ms)
+
+
+  1) [chromium] › tests/cdx-v3d-surface-neighbors.spec.mjs:2:1 › bounded surface neighbors match a full stable distance sort, including ties 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"[7mf[27mun[7mction[27m"[39m
+    Received: [31m"un[7mdefined[27m"[39m
+
+      3 | test("bounded surface neighbors match a full stable distance sort, including ties", async () => {
+      4 |   const { nearestSurfacePoints } = await import("../src/video3d/surface-seed.js");
+    > 5 |   expect(typeof nearestSurfacePoints).toBe("function");
+        |                                       ^
+      6 |   let state = 94;
+      7 |   const random = () => (state = (1664525 * state + 1013904223) >>> 0) / 4294967296;
+      8 |   const grid = new Map();
+        at /workspace/splashery/tests/cdx-v3d-surface-neighbors.spec.mjs:5:39
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-surface-neighbors--08c85-istance-sort-including-ties-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-surface-neighbors--08c85-istance-sort-including-ties-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/cdx-v3d-surface-neighbors.spec.mjs:35:1 › coincident surface neighbors preserve encounter order and leave inputs unchanged 
+
+    Error: [2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m
+
+    Expected: [32m"[7mf[27mun[7mction[27m"[39m
+    Received: [31m"un[7mdefined[27m"[39m
+
+      30 | test("coincident surface neighbors preserve encounter order and leave inputs unchanged", async () => {
+      31 |   const { nearestSurfacePoints } = await import("../src/video3d/surface-seed.js");
+    > 32 |   expect(typeof nearestSurfacePoints).toBe("function");
+         |                                       ^
+      33 |   const points = Array.from({ length: 30 }, (_, id) => ({ u: 4, v: 4, id }));
+      34 |   const before = structuredClone(points);
+      35 |   const grid = new Map([["0,0", points]]);
+        at /workspace/splashery/tests/cdx-v3d-surface-neighbors.spec.mjs:32:39
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/cdx-v3d-surface-neighbors--8af40--and-leave-inputs-unchanged-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/cdx-v3d-surface-neighbors--8af40--and-leave-inputs-unchanged-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/cdx-v3d-surface-neighbors.spec.mjs:2:1 › bounded surface neighbors match a full stable distance sort, including ties 
+    [chromium] › tests/cdx-v3d-surface-neighbors.spec.mjs:35:1 › coincident surface neighbors preserve encounter order and leave inputs unchanged 

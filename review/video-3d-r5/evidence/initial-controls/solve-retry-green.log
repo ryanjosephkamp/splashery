@@ -1,0 +1,113 @@
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:07] "GET / HTTP/1.1" 200 -
+
+Running 29 tests using 1 worker
+
+(node:6256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6256) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:211:1 › exact pair chunks preserve default raw integer tables, match order, and unchanged shader (179ms)
+  ✓   2 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:236:1 › chunk bounds and pre-abort reject before GPU allocation; no pairs allocates nothing (12ms)
+  ✓   3 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:261:1 › every partial GPU allocation is released on allocation, submission, mapping, or readback errors (24ms)
+  ✓   4 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:275:1 › abort during pending map settles promptly, removes its listener, and never dispatches later chunks (5ms)
+  ✓   5 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:312:1 › temporary device is destroyed on success and on a late requestDevice after abort (36ms)
+  ✓   6 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:349:1 › deadline timers can abort between exact chunks even with immediately resolved maps (3ms)
+  ✓   7 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:368:1 › pending adapter cancellation and owned-device readback errors release their ownership (7ms)
+  ✓   8 [chromium] › tests/cdx-v3d-matcher-lifecycle.spec.mjs:404:1 › SfM forwards cancellation and exact chunk size without CPU fallback after abort (11ms)
+  ✓   9 [chromium] › tests/cdx-v3d-resources.spec.mjs:117:1 › a readLoss completing after disposal cannot emit metrics or submit more GPU work (9ms)
+  ✓  10 [chromium] › tests/cdx-v3d-resources.spec.mjs:152:1 › a readLoss completing after recovery cannot contaminate the replacement trainer's fence ring (14ms)
+  ✓  11 [chromium] › tests/cdx-v3d-resources.spec.mjs:226:1 › phone pause and resume never overlap a pending GPU frame, and Finish joins it (10ms)
+  ✓  12 [chromium] › tests/cdx-v3d-resources.spec.mjs:295:1 › a resume request starts one next frame after its pending GPU fence settles (26ms)
+  ✓  13 [chromium] › tests/cdx-v3d-resources.spec.mjs:345:1 › Finish joins automatic completion without a second final readback or completion event (5ms)
+  ✓  14 [chromium] › tests/cdx-v3d-resources.spec.mjs:395:1 › SfM pool abort stops queued jobs and terminates all active workers (29ms)
+  ✓  15 [chromium] › tests/cdx-v3d-resources.spec.mjs:430:1 › SfM pool errors, handler errors, and constructor failures release every worker (8ms)
+  ✓  16 [chromium] › tests/cdx-v3d-resources.spec.mjs:466:1 › SfM pool preserves result/job association and closes workers after success (5ms)
+  ✓  17 [chromium] › tests/cdx-v3d-resources.spec.mjs:482:1 › a disposed session destroys a device that arrives after GPU creation (26ms)
+  ✓  18 [chromium] › tests/cdx-v3d-resources.spec.mjs:528:1 › late trainer completion cannot revive a disposed seed or continuation (16ms)
+  ✓  19 [chromium] › tests/cdx-v3d-resources.spec.mjs:575:1 › canceling load closes a late bitmap and prevents frame publication (4ms)
+  ✓  20 [chromium] › tests/cdx-v3d-resources.spec.mjs:616:1 › trainer disposal frees its buffers without destroying a host-owned device (3ms)
+  ✓  21 [chromium] › tests/cdx-v3d-resources.spec.mjs:722:1 › seedLimit reserves appended rows before the real trainer cap and covers the sparse cloud (17ms)
+  ✓  22 [chromium] › tests/cdx-v3d-resources.spec.mjs:786:1 › omitting seedLimit preserves the existing Gaussian parameter bytes (55ms)
+  ✓  23 [chromium] › tests/cdx-v3d-resources.spec.mjs:798:1 › disposing a session aborts its actual SfM worker pool (4ms)
+  ✓  24 [chromium] › tests/cdx-v3d-resources.spec.mjs:837:1 › seedLimit remains a ceiling on weak solves and empty solves fail clearly (18ms)
+  ✓  25 [chromium] › tests/cdx-v3d-resources.spec.mjs:874:1 › a captured device-loss callback stays quiet after session disposal (2ms)
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] code 404, message File not found
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /favicon.ico HTTP/1.1" 404 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/sfm/sfm.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/sfm/sift.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/sfm/features.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/sfm/worker-pool.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/sfm/gpumatch.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/sfm/matching.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/sfm/ba.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/splatjs/src/sfm/global.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /src/video3d/surface-seed.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /src/video3d/scene.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /src/video3d/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /src/loaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /src/pc.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /src/noise.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /vendor/playcanvas/playcanvas.min.mjs HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:12] "GET /src/renderer-diagnostics.js HTTP/1.1" 200 -
+  ✓  26 [chromium] › tests/cdx-v3d-resources.spec.mjs:897:1 › surface rows survive the seed ceiling and train on actual WebGPU (5.3s)
+(node:6429) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:6429) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✓  27 [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:24:1 › a rejected two-camera solve preserves original pictures for the relaxed retry (687ms)
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✓  28 [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:95:1 › omitting the camera minimum preserves the existing two-view session contract (382ms)
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:19] "GET /tests/fixtures/v3d/ HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/session.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/io/frames.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/io/exif.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/io/pano.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/gs/init.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/gs/hull.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/gpu/context.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/gs/trainer.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/io/ply.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/sfm/geometry.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/gs/shaders.js HTTP/1.1" 200 -
+[2m[WebServer] [22m127.0.0.1 - - [16/Oct/2026 01:45:20] "GET /vendor/splatjs/src/gs/background-fit.js HTTP/1.1" 200 -
+  ✓  29 [chromium] › tests/cdx-v3d-solve-retry.spec.mjs:126:1 › invalid camera minima fail before starting the solver (513ms)
+
+  29 passed (12.8s)
