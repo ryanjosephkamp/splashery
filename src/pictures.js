@@ -182,7 +182,7 @@ export class Pictures {
     this.gifLost = 0;
     this.cache.clear();
     this.prefetchKey = null;
-    for (const sh of this.sheets) sh.shown = null;
+    for (const sh of this.sheets) sh.shown = sh.want = null;
     if (media?.kind === "video") {
       media.setMuted(!this.sound);
       this.unwatch = media.onFrame(() => {
@@ -536,6 +536,22 @@ export class Pictures {
         if (r > 1.3 || r < 0.6 || atCap) useLevel = level;
       }
       if (!same) useLevel = level;
+      // Show the first face instead of discarding it whenever an opening
+      // camera glide crosses another detail step. Once installed, ordinary
+      // settled-view upgrades replace it with the full requested detail.
+      if (
+        this.solid &&
+        !shown &&
+        sh.want?.page === page &&
+        sh.want.method === method &&
+        sh.want.variant === variant &&
+        !sh.want.crop &&
+        !crop &&
+        !sh.want.relief &&
+        !relief &&
+        sh.failed !== sh.want.key
+      )
+        useLevel = sh.want.level;
       // Frames keep coming while a new level waits to settle.
       if (level !== (shown?.level ?? 0) && same) this.stage.requestRender(300);
       // (The key is unchanged for a plain sheet.)
