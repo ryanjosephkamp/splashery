@@ -318,12 +318,14 @@ test.describe("sharp pages in the real renderer", () => {
       };
     });
     expect(drawing).toEqual({ canvas: true, promise: true, same: true });
-    const old = await page.evaluateHandle(
-      () => window.__splashery.player.pictures.sheets[0].slot.surface,
-    );
-    expect(await old.evaluate((s) => !!s && s.instance.visible && s.material.depthWrite)).toBe(
-      true,
-    );
+    const old = await page.evaluateHandle(() => {
+      const face = window.__splashery.player.pictures.sheets[0].slot.surface;
+      // A normal detail upgrade can retire a handle between browser calls.
+      // Select and verify the currently owned face in the same turn.
+      if (!face || !face.instance.visible || !face.material.depthWrite)
+        throw new Error("The current printed face must be visible and write depth.");
+      return face;
+    });
     const picked = await page.evaluate(async () => {
       const p = window.__splashery.player;
       const sheet = p.pictures.sheets[0];

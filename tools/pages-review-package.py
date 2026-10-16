@@ -5,6 +5,7 @@ python3 tools/pages-review-package.py [work/pages-r2]
 Requires the existing Python/Pillow and ffmpeg build tools. Inputs stay in work/;
 outputs go only to the separate, never-merged evidence worktree.
 Use --motion-only --scenes=r2-book,r2-lab,r2-album to package the required toy pairs first.
+Paired videos are the default; --full-width-solos also encodes each revision separately.
 Code: MIT, made by Ryan with Codex (GPT-6). Recording contributions: CC0.
 """
 from pathlib import Path
@@ -22,6 +23,8 @@ arguments = [a for a in sys.argv[1:] if not a.startswith('--')]
 work = (root / (arguments[0] if arguments else 'work/pages-r2')).resolve()
 motion_only = '--motion-only' in sys.argv[1:]
 benchmark_only = '--benchmark-only' in sys.argv[1:]
+paired_only = '--full-width-solos' not in sys.argv[1:]
+allow_partial = '--allow-partial' in sys.argv[1:]
 out = work / 'clips-tree/docs/audits/pages-r2-2026-10-clips'
 out.mkdir(parents=True, exist_ok=True)
 scenes = {'r2-book': 'your-book', 'r2-lab': 'picture-lab', 'r2-album': 'photo-album', 'r2-text': 'text', 'r2-chart': 'chart', 'r2-diagram': 'diagram'}
@@ -55,8 +58,9 @@ def encode(label, scene):
         os.link(raw / entries[n][0], target)
     movie = work / f'{label}-{scene}.mkv'
     ffmpeg(['-framerate', '24', '-i', str(seq / '%06d.png'), '-c:v', 'ffv1', '-level', '3', '-pix_fmt', 'bgr0', '-threads', '2', str(movie)])
-    solo = out / f'{scenes[scene]}-{label}.mp4'
-    ffmpeg(['-i', str(movie), '-vf', f"pad=iw:ih+44:0:44:color=white,drawtext=fontfile={font_path}:text='{label}':x=8:y=3:fontsize=17:fontcolor=black,drawtext=fontfile={font_path}:text='Stepped animation - preparation waits omitted':x=8:y=26:fontsize=10:fontcolor=black", '-c:v', 'libx264', '-crf', '16', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-threads', '2', '-movflags', '+faststart', str(solo)])
+    if not paired_only:
+        solo = out / f'{scenes[scene]}-{label}.mp4'
+        ffmpeg(['-i', str(movie), '-vf', f"pad=iw:ih+44:0:44:color=white,drawtext=fontfile={font_path}:text='{label}':x=8:y=3:fontsize=17:fontcolor=black,drawtext=fontfile={font_path}:text='Stepped animation - preparation waits omitted':x=8:y=26:fontsize=10:fontcolor=black", '-c:v', 'libx264', '-crf', '16', '-preset', 'medium', '-pix_fmt', 'yuv420p', '-threads', '2', '-movflags', '+faststart', str(solo)])
     meta = json.loads((work / f'clips-{label}' / f'pg6-{scene}.json').read_text())
     # Keep the launcher's initial tool hash separately when the recorder
     # itself reports the exact version executed for this scene.
@@ -82,7 +86,7 @@ if not motion_only:
     artifacts = {}
     for revision in ['main', 'round2']:
         data[revision] = json.loads((work / f'paired-{revision}.json').read_text())
-        if len(data[revision]['records']) != 72:
+        if len(data[revision]['records']) != 72 and not allow_partial:
             raise ValueError('A final matrix needs 72 records per revision')
         shutil.copyfile(work / f'paired-{revision}.json', bench / f'{revision}.json')
         for record in data[revision]['records']:
@@ -133,6 +137,10 @@ if not motion_only:
         sheet.save(target, optimize=True)
         if target.stat().st_size > 1_000_000:
             raise ValueError('A body-text comparison exceeds 1 MB')
+    def whole_link(profile, toy):
+        name = f'{profile}-{toy}.jpg'
+        return f'[JPEG]({name})' if (stills / name).exists() else 'Not captured'
+
     (stills / 'README.md').write_text('''# Still comparisons
 
     These body-text images retain their native framebuffer crop pixels without resizing. All use repeat 1, rather than selecting the best run. Caption scores are three-repeat medians. The independent reference was rendered at width 2,048 and sampled at the displayed pixel grid. The separate main and round 2 reference crops are in the benchmark archive.
@@ -141,14 +149,16 @@ if not motion_only:
 
     | Toy | Body text | Phone sample | Desktop sample |
     | --- | --- | --- | --- |
-    ''' + '\n'.join(f'| {toy} | [PNG](phone-{toy}-text.png) | [JPEG](phone-{toy}.jpg) | [JPEG](desktop-{toy}.jpg) |' for toy in ['your-book', 'picture-lab', 'photo-album']) + '\n')
-    (bench / 'README.md').write_text('''# Matched benchmark evidence
+    '''.replace('\n    ', '\n') + '\n'.join(f'| {toy} | [PNG](phone-{toy}-text.png) | {whole_link("phone", toy)} | {whole_link("desktop", toy)} |' for toy in ['your-book', 'picture-lab', 'photo-album']) + '\n')
+    count = sum(len(d['records']) for d in data.values())
+    coverage = f'{count}/144 planned fresh-browser cases; {len(comparison["rows"])}/24 groups have all three pairs.'
+    (bench / 'README.md').write_text(f'''# Matched benchmark evidence
 
-    The raw [main records](main.json), [round 2 records](round2.json), [comparison table](comparison.md), and [comparison checks](comparison.json) contain the final three-repeat measurements for all 24 input/toy/profile groups. Renderer, fixture, tool, protocol, source commit, and runtime hashes are retained. The [artifact manifest](artifacts.json) maps each case and repeat to its exact source and rendered crop and their SHA-256 hashes.
+    {coverage} The raw [main records](main.json) and [round 2 records](round2.json) retain every completed case. The [comparison table](comparison.md) and [comparison checks](comparison.json) score only groups with all three pairs. Renderer, fixture, tool, protocol, source commit, and runtime hashes are retained. The [artifact manifest](artifacts.json) maps each case and repeat to its exact source and rendered crop and their SHA-256 hashes.
 
     See the implementation branch's [audit](https://github.com/ryanjosephkamp/splashery/blob/codex/book-picture-lab-r2/docs/audits/pages-r2-2026-10.md) for definitions, commands, exploratory exclusions, and limits. Copy the archived fixtures into work/pages-r2/fixtures before reproducing the matrix. These are software-renderer browser measurements, not physical-phone measurements. Stepped clips are separate motion evidence.
-    ''')
-    print('Archived 144 raw records, 288 exact crops, and nine still comparisons.', flush=True)
+    '''.replace('\n    ', '\n'))
+    print(f'Archived {count} raw records and {count * 2} exact crops.', flush=True)
 
 if benchmark_only:
     sys.exit(0)
@@ -187,5 +197,5 @@ for scene, name in scenes.items():
     all_metadata[name] = {'main': meta_main, 'round2': meta_candidate, 'videoBytes': target.stat().st_size, 'stripBytes': strip.stat().st_size}
     print(name, target.stat().st_size, strip.stat().st_size, flush=True)
 (out / 'recordings.json').write_text(json.dumps(all_metadata, indent=2) + '\n')
-links = '\n'.join(f'<article><h2>{name.replace("-", " ").title()}</h2><video controls muted loop playsinline preload="metadata" src="{name}.mp4"></video><p><a href="{name}-main.mp4">Main at full phone width</a> · <a href="{name}-round2.mp4">Round 2 at full phone width</a> · <a href="{name}-strip.jpg">Six-frame contact sheet</a></p></article>' for name in all_metadata)
+links = '\n'.join(f'<article><h2>{name.replace("-", " ").title()}</h2><video controls muted loop playsinline preload="metadata" src="{name}.mp4"></video><p>' + ('' if paired_only else f'<a href="{name}-main.mp4">Main at full phone width</a> · <a href="{name}-round2.mp4">Round 2 at full phone width</a> · ') + f'<a href="{name}-strip.jpg">Six-frame contact sheet</a></p></article>' for name in all_metadata)
 (out / 'index.html').write_text('''<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Book and Picture lab round 2: effect review</title><style>body{font:16px/1.5 system-ui,sans-serif;max-width:1000px;margin:auto;padding:24px;background:#f4f4f4;color:#17202a}video{display:block;max-width:100%;width:780px;background:white}article{margin:40px 0}a{color:#064a91}</style><h1>Phone motion comparisons</h1><p>Main is on the left; round 2 is on the right. These recordings use a stepped animation clock at the per-scene cadence recorded in the metadata, with preparation waits omitted. They show motion and edge quality; the separate real-clock benchmark measures performance.</p><p>390×844 CSS pixels per view, device scale 2, and low detail. See <a href="README.md">the methods, source commits, and limitations</a>. Evidence-only branch: never merge.</p>''' + links + '\n')
