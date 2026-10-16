@@ -186,7 +186,9 @@ export async function videoTo3D(file, opts = {}) {
     // the scene. Keep every point, with robust bounds for initial scales and learning rates.
     robustSeedBounds: true,
     evalHoldEvery: 1e9,
-    sfm: { uiYield: true, ...(software ? { maxPairsPerChunk: 4 } : {}), ...(gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}) }, // prettier-ignore
+    // A software adapter executes the same SIFT distances faster on the CPU. Keep every
+    // descriptor and pair, and yield between short row groups so deadline and cancel work runs.
+    sfm: { uiYield: true, ...(software ? { maxPairsPerChunk: 4, cpuMatching: true } : {}), ...(gentle || tier === "low" || tier === "mid" ? { siftFeats: 3000, siftFirstOctave: 0, refineAspect: false } : {}) }, // prettier-ignore
     // Both sorts use the same unsigned depth/id order. A software adapter avoids emulating
     // the parallel bitonic network's barriers; hardware keeps the established parallel path.
     // Smaller software raster tiles are enabled only when the engine can reserve every
