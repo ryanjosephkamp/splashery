@@ -139,8 +139,12 @@ test("native images install within the old raster allowance before upgrading", (
   Object.assign(p, { solid: true, budget: { width: 1100, pixels: 90000 } });
   const sheet = { shown: null };
   expect(p.levelFor(sheet, 1, Infinity, 0, 1, "pixels")).toBe(300);
+  expect(p.levelFor(sheet, 1, 200, 0, 1, "pixels")).toBe(256);
   sheet.shown = { level: 300 };
+  expect(p.levelFor(sheet, 1, 200, 0, 1, "pixels")).toBe(362);
   expect(p.levelFor(sheet, 1, Infinity, 0, 1, "pixels")).toBe(600);
+  p.media = { size: () => ({ width: 400 }) };
+  expect(p.levelFor(sheet, 1, Infinity, 0, 1, "pixels")).toBe(400);
 });
 
 test("cached source canvases and relief maps share the original memory allowance", () => {
