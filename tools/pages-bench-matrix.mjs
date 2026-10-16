@@ -24,6 +24,7 @@ const digest = (b) => crypto.createHash("sha256").update(b).digest("hex");
 const runtimeFiles = [
   "src/packs/pictures.js",
   "src/pictures.js",
+  "src/media.js",
   "src/picture-splats.js",
   "src/picture-surface.js",
   "src/player.js",

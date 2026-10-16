@@ -302,6 +302,22 @@ test.describe("sharp pages in the real renderer", () => {
       ),
     );
     await ready(page);
+    const drawing = await page.evaluate(async () => {
+      const media = window.__splashery.player.pictures.media;
+      const immediate = media.drawNow(0, 48, 36, [0.1, 0.2, 0.8, 0.7]);
+      const pending = media.draw(0, 48, 36, [0.1, 0.2, 0.8, 0.7]);
+      const promise = typeof pending.then === "function";
+      const ordinary = await pending;
+      const pixels = (c) => c.getContext("2d").getImageData(0, 0, 48, 36).data;
+      const a = pixels(immediate),
+        b = pixels(ordinary);
+      return {
+        canvas: immediate instanceof HTMLCanvasElement,
+        promise,
+        same: a.every((v, i) => v === b[i]),
+      };
+    });
+    expect(drawing).toEqual({ canvas: true, promise: true, same: true });
     const old = await page.evaluateHandle(
       () => window.__splashery.player.pictures.sheets[0].slot.surface,
     );
