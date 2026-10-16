@@ -301,6 +301,60 @@ export function createUI(app) {
     cards.set(toy.id, b);
   }
 
+  // One Tab stop per collection; arrow keys move focus without choosing a toy
+  // or category. Reconcile the stop whenever filtering replaces the cards.
+  function roving(container, selector, grid = false) {
+    let current = null;
+    const items = () =>
+      [...container.querySelectorAll(selector)].filter(
+        (b) => !b.hidden && !b.disabled && getComputedStyle(b).display !== "none",
+      );
+    const sync = (preferred = null) => {
+      const list = items();
+      current = list.includes(document.activeElement)
+        ? document.activeElement
+        : list.includes(preferred)
+          ? preferred
+          : list.includes(current)
+            ? current
+            : list[0];
+      for (const b of container.querySelectorAll(selector)) b.tabIndex = b === current ? 0 : -1;
+      return current;
+    };
+    container.addEventListener("focusin", (e) => {
+      if (e.target.matches(selector)) sync(e.target);
+    });
+    container.addEventListener("keydown", (e) => {
+      if (e.altKey || e.ctrlKey || e.metaKey || !e.target.matches(selector)) return;
+      const list = items();
+      const i = list.indexOf(e.target);
+      let next;
+      if (e.key === "Home") next = list[0];
+      else if (e.key === "End") next = list.at(-1);
+      else if (e.key === "ArrowLeft" || e.key === "ArrowRight")
+        next = list[(i + (e.key === "ArrowLeft" ? -1 : 1) + list.length) % list.length];
+      else if (grid && (e.key === "ArrowUp" || e.key === "ArrowDown")) {
+        const from = e.target.getBoundingClientRect();
+        const sign = e.key === "ArrowDown" ? 1 : -1;
+        const rows = list
+          .map((b) => ({ b, rect: b.getBoundingClientRect() }))
+          .filter(({ rect }) => (rect.top - from.top) * sign > 1)
+          .sort(
+            (a, b) =>
+              Math.abs(a.rect.top - from.top) - Math.abs(b.rect.top - from.top) ||
+              Math.abs(a.rect.left - from.left) - Math.abs(b.rect.left - from.left),
+          );
+        next = rows[0]?.b || e.target;
+      } else return;
+      e.preventDefault();
+      e.stopPropagation();
+      // focusin selects the new stop before revealing it.
+      next?.focus({ preventScroll: true });
+      next?.scrollIntoView({ block: "nearest", inline: "nearest" });
+    });
+    return sync;
+  }
+
   const categories = shelfCategories();
   const order = new Map(categories.map((c, i) => [c.id, i]));
   const allToys = TOYS.filter(onShelf)
@@ -332,6 +386,9 @@ export function createUI(app) {
     els.shelfChips.appendChild(b);
     chips.set(c.id, b);
   }
+  const syncChips = roving(els.shelfChips, "button");
+  const syncCards = roving(els.shelf, ".toy-card", true);
+  syncChips(chips.get("all"));
 
   // The notice stays outside the folded Toy tab, while its button uses the same local picker.
   let missingFileKey = null;
@@ -380,6 +437,7 @@ export function createUI(app) {
           : allToys.filter((t) => t.category === shelf.category);
     shelf.list = list;
     els.shelf.replaceChildren(...list.map((t) => cards.get(t.id)));
+    syncCards();
     els.shelf.scrollLeft = 0;
     els.shelf.scrollTop = 0;
     els.shelfEmpty.textContent = list.length ? "" : `No toys match “${q}”.`;
@@ -2189,10 +2247,12 @@ export function createUI(app) {
   els.genCount.max = String(profile.maxCount);
   const genInput = () => app.setGenerator(readGenerator());
   function readGenerator() {
+    const seed = Math.round(Math.min(4294967295, Math.max(0, Number(els.genSeed.value) || 0)));
+    els.genSeed.value = String(seed);
     return {
       shape: els.genShape.value,
       palette: els.genPalette.value,
-      seed: Number(els.genSeed.value) >>> 0,
+      seed,
       count: Number(els.genCount.value),
       sizeJitter: Number(els.genJitter.value) / 100,
       roughness: Number(els.genRough.value) / 100,
@@ -2666,6 +2726,7 @@ export function createUI(app) {
   // UI r2: the maximize button fills the screen with the grid or the panel.
   els.sheetMax.addEventListener("click", () => setMode(mode, !full));
   narrow.addEventListener("change", applySheet);
+  narrow.addEventListener("change", () => syncChips());
   document.querySelector(".skip-link").addEventListener("click", (e) => {
     e.preventDefault();
     if (focusOn) setFocus(false);
@@ -2673,6 +2734,20 @@ export function createUI(app) {
     setFolded(false);
     if (narrow.matches) setMode("panel");
     tabs.find((t) => t.getAttribute("aria-selected") === "true").focus();
+  });
+  const skipShelf = document.createElement("a");
+  skipShelf.className = "skip-link";
+  skipShelf.href = "#shelf";
+  skipShelf.textContent = "Skip to toy shelf";
+  document.querySelector(".skip-link").after(skipShelf);
+  els.shelf.tabIndex = -1;
+  skipShelf.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (focusOn) setFocus(false);
+    if (galleryOn) setGallery(false);
+    setFolded(false);
+    if (narrow.matches) setMode("row");
+    (syncCards() || els.shelf).focus();
   });
 
   // The handle: swipe up for the grid, down for the row, tap to toggle. The
@@ -3452,6 +3527,7 @@ export function createUI(app) {
     setShelf(id) {
       shelf.current = id;
       for (const [tid, b] of cards) b.setAttribute("aria-pressed", String(tid === id));
+      syncCards(cards.get(id));
       revealCurrent();
     },
     setEffects(fx) {
@@ -3703,7 +3779,10 @@ export function createUI(app) {
       els.toast.textContent = message;
       els.toast.classList.add("show");
       clearTimeout(toastTimer);
-      toastTimer = setTimeout(() => els.toast.classList.remove("show"), ms);
+      toastTimer = setTimeout(() => {
+        els.toast.classList.remove("show");
+        els.toast.textContent = "";
+      }, ms);
     },
     // Lane Books r5: a link in a page asks before it opens. The address
     // shows in full; Open is a real link (a new tab, with no access back to

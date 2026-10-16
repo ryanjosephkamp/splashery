@@ -281,7 +281,8 @@ await page.addStyleTag({
   *, ::before, ::after { font-feature-settings: "calt" 0 !important; }
 }
 .toc li.pdf-toc-entry { position:relative; padding-right:4em; }
-.pdf-page-number { position:absolute; right:0; top:0; white-space:nowrap; font-family:sans-serif; }`,
+.toc li li.pdf-toc-entry { position:static; }
+.pdf-page-number { position:absolute; right:0; white-space:nowrap; font-family:sans-serif; }`,
 });
 const print = () =>
   page.pdf({

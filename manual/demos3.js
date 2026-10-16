@@ -112,7 +112,7 @@ function shareDemo() {
       $("sh-qr-note").textContent = `As a QR code: version ${made.code.version}, error correction ${made.level}, for ${made.bytes} bytes. It is the same code the Share tab would make for this link.`; // prettier-ignore
     } else {
       $("sh-qr").hidden = true;
-      $("sh-qr-note").textContent = `This link is ${made.bytes} bytes, more than one QR code holds (2,953). The Share tab would say so and offer Save JSON.`; // prettier-ignore
+      $("sh-qr-note").textContent = `This link is ${made.bytes} bytes, more than one QR code holds (2,953). The Share tab would say so and offer Save scene.`; // prettier-ignore
     }
     await readBack();
   }
