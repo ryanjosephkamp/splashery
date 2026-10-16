@@ -1,0 +1,748 @@
+{
+  "node": "v22.23.3",
+  "headWhenBundled": "d4afaf919163c9ada6a844eb72f3780a3c58865e",
+  "runtimeRevision": "ed3ff719",
+  "broadSuiteInitialRuntimeRevision": "c696317e",
+  "focusedGuardAndPolicyRevision": "ed3ff719",
+  "note": "The third suite repeats every required QR file after the very-flat Square change: 302 of 305 cases passed initially, with three failures and no skips. The oversized-request guard failed on c696317e, was restored on ed3ff719 without changing its test, and the complete guard/policy files passed all 13 cases in the focused rerun. The two general smoke gestures passed their exact isolated rerun without test or UI changes. Its 11 wall-clock budget tests run alone on SwiftShader; the broad suite uses four files at once on llvmpipe. These cover 316 distinct cases with the initial failures and recoveries retained, not one clean 316-case run. Earlier suites and the initial smoke phone-sheet failure and isolated recovery remain historical evidence. The earlier qr file started before the Color-return fix and was repeated afterward. Reports retain every attempt; reruns do not add distinct cases.",
+  "requiredFiles": [
+    "cdx-circle-qr",
+    "cdx-qr-color-projection",
+    "cdx-qr-detail-policy",
+    "cdx-qr-export-gate",
+    "cdx-qr-fidelity",
+    "cdx-qr-finder-guard",
+    "cdx-qr-fit",
+    "cdx-qr-fit-study",
+    "cdx-qr-picture-errors",
+    "cdx-qr-picture-padding",
+    "cdx-qr-second-reader",
+    "cdx-qr-texture-frame",
+    "cdx-qr-themes",
+    "cdx-qr-tile-engine",
+    "help",
+    "kit",
+    "qr",
+    "qr3",
+    "qr4-2",
+    "qr4-2-engine",
+    "qr4-craft",
+    "qr4-flash",
+    "qr4-scan",
+    "qr5",
+    "qrc-barcodes",
+    "qrc-build",
+    "qrc-picture",
+    "qrl",
+    "qrs-heal",
+    "qrs-steps",
+    "qrs-study",
+    "qrs-toys",
+    "smoke"
+  ],
+  "driver": {
+    "state": "finished",
+    "results": [
+      {
+        "command": [
+          "tools/suite.mjs",
+          "--gl=llvmpipe",
+          "--jobs=2",
+          "--files=cdx-qr-detail-policy,cdx-qr-picture-errors",
+          "--out=.cache/picture-qr-fidelity/review-pass/third-focused-suite",
+          "--",
+          "--grep=Low-contrast Square|larger picture budget"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "tools/suite.mjs",
+          "--gl=swiftshader",
+          "--jobs=1",
+          "--files=cdx-qr-detail-budget",
+          "--out=.cache/picture-qr-fidelity/review-pass/third-budget-suite"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "tools/suite.mjs",
+          "--gl=llvmpipe",
+          "--jobs=4",
+          "--files=cdx-circle-qr,cdx-qr-color-projection,cdx-qr-detail-policy,cdx-qr-export-gate,cdx-qr-fidelity,cdx-qr-finder-guard,cdx-qr-fit,cdx-qr-fit-study,cdx-qr-picture-errors,cdx-qr-picture-padding,cdx-qr-second-reader,cdx-qr-texture-frame,cdx-qr-themes,cdx-qr-tile-engine,help,kit,qr,qr3,qr4-2,qr4-2-engine,qr4-craft,qr4-flash,qr4-scan,qr5,qrc-barcodes,qrc-build,qrc-picture,qrl,qrs-heal,qrs-steps,qrs-study,qrs-toys,smoke",
+          "--out=.cache/picture-qr-fidelity/review-pass/third-qr-suite"
+        ],
+        "exitCode": 1
+      }
+    ],
+    "utc": "2026-10-15T23:48:20.365321+00:00"
+  },
+  "previousDriver": {
+    "state": "finished",
+    "results": [
+      {
+        "command": [
+          "tools/suite.mjs",
+          "--gl=swiftshader",
+          "--jobs=1",
+          "--files=cdx-qr-detail-budget",
+          "--out=.cache/picture-qr-fidelity/review-pass/final-budget-suite"
+        ],
+        "exitCode": 0
+      },
+      {
+        "command": [
+          "tools/suite.mjs",
+          "--gl=llvmpipe",
+          "--jobs=2",
+          "--files=cdx-circle-qr,cdx-qr-color-projection,cdx-qr-detail-policy,cdx-qr-export-gate,cdx-qr-fidelity,cdx-qr-finder-guard,cdx-qr-fit,cdx-qr-fit-study,cdx-qr-picture-errors,cdx-qr-picture-padding,cdx-qr-second-reader,cdx-qr-texture-frame,cdx-qr-themes,cdx-qr-tile-engine,help,kit,qr,qr3,qr4-2,qr4-2-engine,qr4-craft,qr4-flash,qr4-scan,qr5,qrc-barcodes,qrc-build,qrc-picture,qrl,qrs-heal,qrs-steps,qrs-study,qrs-toys,smoke",
+          "--out=.cache/picture-qr-fidelity/review-pass/final-qr-suite"
+        ],
+        "exitCode": 1
+      }
+    ],
+    "utc": "2026-10-15T21:45:34.257726+00:00"
+  },
+  "reports": {
+    "final-qr-suite": {
+      "cdx-circle-qr": {
+        "startTime": "2026-10-15T21:31:09.611Z",
+        "duration": 81107.41500000001,
+        "expected": 15,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-color-projection": {
+        "startTime": "2026-10-15T21:25:26.017Z",
+        "duration": 2164.0860000000002,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-detail-policy": {
+        "startTime": "2026-10-15T21:25:29.236Z",
+        "duration": 56424.386,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-export-gate": {
+        "startTime": "2026-10-15T21:26:26.866Z",
+        "duration": 13937.542,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-fidelity": {
+        "startTime": "2026-10-15T21:26:41.769Z",
+        "duration": 146498.088,
+        "expected": 32,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-finder-guard": {
+        "startTime": "2026-10-15T21:27:58.954Z",
+        "duration": 6662.745,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-fit-study": {
+        "startTime": "2026-10-15T21:29:09.549Z",
+        "duration": 1619.013,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-fit": {
+        "startTime": "2026-10-15T21:28:06.886Z",
+        "duration": 146883.103,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-picture-errors": {
+        "startTime": "2026-10-15T21:29:12.383Z",
+        "duration": 10381.891,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-picture-padding": {
+        "startTime": "2026-10-15T21:29:24.104Z",
+        "duration": 10701.936,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-second-reader": {
+        "startTime": "2026-10-15T21:29:36.003Z",
+        "duration": 12882.874,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-texture-frame": {
+        "startTime": "2026-10-15T21:29:50.114Z",
+        "duration": 6826.583,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-themes": {
+        "startTime": "2026-10-15T21:29:58.220Z",
+        "duration": 935999.918,
+        "expected": 59,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-tile-engine": {
+        "startTime": "2026-10-15T21:30:34.670Z",
+        "duration": 34063.582,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "help": {
+        "startTime": "2026-10-15T21:25:02.689Z",
+        "duration": 174920.16199999998,
+        "expected": 14,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "kit": {
+        "startTime": "2026-10-15T21:18:56.897Z",
+        "duration": 387983.15900000004,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr": {
+        "startTime": "2026-10-15T21:04:15.163Z",
+        "duration": 403345.242,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr3": {
+        "startTime": "2026-10-15T21:22:22.110Z",
+        "duration": 159579.768,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-2-engine": {
+        "startTime": "2026-10-15T21:39:08.310Z",
+        "duration": 12999.931,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-2": {
+        "startTime": "2026-10-15T21:38:39.345Z",
+        "duration": 27920.048,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-craft": {
+        "startTime": "2026-10-15T21:32:31.704Z",
+        "duration": 79381.27399999999,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-flash": {
+        "startTime": "2026-10-15T21:35:59.189Z",
+        "duration": 62919.528,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-scan": {
+        "startTime": "2026-10-15T21:37:42.381Z",
+        "duration": 29019.149,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr5": {
+        "startTime": "2026-10-15T21:10:59.713Z",
+        "duration": 322001.621,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrc-barcodes": {
+        "startTime": "2026-10-15T21:38:12.517Z",
+        "duration": 25643.571,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrc-build": {
+        "startTime": "2026-10-15T21:34:53.309Z",
+        "duration": 64409.236000000004,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrc-picture": {
+        "startTime": "2026-10-15T21:37:03.256Z",
+        "duration": 37948.227,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrl": {
+        "startTime": "2026-10-15T21:33:52.104Z",
+        "duration": 60276.528999999995,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrs-heal": {
+        "startTime": "2026-10-15T21:39:37.019Z",
+        "duration": 1396.9129999999998,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrs-steps": {
+        "startTime": "2026-10-15T21:39:22.454Z",
+        "duration": 8084.16,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrs-study": {
+        "startTime": "2026-10-15T21:39:31.752Z",
+        "duration": 4207.563,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrs-toys": {
+        "startTime": "2026-10-15T21:16:22.810Z",
+        "duration": 358325.695,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "smoke": {
+        "startTime": "2026-10-15T21:04:15.182Z",
+        "duration": 880337.755,
+        "expected": 49,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    },
+    "final-budget-suite": {
+      "cdx-qr-detail-budget": {
+        "startTime": "2026-10-15T21:02:28.108Z",
+        "duration": 105072.71299999999,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "final-smoke-phone-suite": {
+      "smoke": {
+        "startTime": "2026-10-15T21:45:42.965Z",
+        "duration": 22907.242000000002,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "final-runtime-qr-suite": {
+      "qr": {
+        "startTime": "2026-10-15T21:46:07.849Z",
+        "duration": 271002.48199999996,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "final-budget-style-suite": {
+      "cdx-qr-detail-budget": {
+        "startTime": "2026-10-15T21:50:39.833Z",
+        "duration": 108724.936,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "third-focused-suite": {
+      "cdx-qr-detail-policy": {
+        "startTime": "2026-10-15T23:06:35.244Z",
+        "duration": 1679.575,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-picture-errors": {
+        "startTime": "2026-10-15T23:06:35.155Z",
+        "duration": 1691.1870000000001,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "third-budget-suite": {
+      "cdx-qr-detail-budget": {
+        "startTime": "2026-10-15T23:06:37.845Z",
+        "duration": 109474.90699999999,
+        "expected": 11,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "third-qr-suite": {
+      "cdx-circle-qr": {
+        "startTime": "2026-10-15T23:32:13.128Z",
+        "duration": 204065.10799999998,
+        "expected": 15,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-color-projection": {
+        "startTime": "2026-10-15T23:25:32.479Z",
+        "duration": 4599.823,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-detail-policy": {
+        "startTime": "2026-10-15T23:25:39.265Z",
+        "duration": 105291.63100000001,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-export-gate": {
+        "startTime": "2026-10-15T23:26:15.699Z",
+        "duration": 33895.729,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-fidelity": {
+        "startTime": "2026-10-15T23:26:52.073Z",
+        "duration": 261619.39,
+        "expected": 32,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-finder-guard": {
+        "startTime": "2026-10-15T23:27:26.453Z",
+        "duration": 13346.437,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      },
+      "cdx-qr-fit-study": {
+        "startTime": "2026-10-15T23:31:11.521Z",
+        "duration": 2299.9129999999996,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-fit": {
+        "startTime": "2026-10-15T23:27:41.845Z",
+        "duration": 268363.178,
+        "expected": 21,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-picture-errors": {
+        "startTime": "2026-10-15T23:31:15.711Z",
+        "duration": 17846.534,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-picture-padding": {
+        "startTime": "2026-10-15T23:31:15.821Z",
+        "duration": 19003.615,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-second-reader": {
+        "startTime": "2026-10-15T23:31:35.411Z",
+        "duration": 17757.258,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-texture-frame": {
+        "startTime": "2026-10-15T23:31:36.769Z",
+        "duration": 12822.317,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-themes": {
+        "startTime": "2026-10-15T23:31:52.508Z",
+        "duration": 987812.814,
+        "expected": 59,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-tile-engine": {
+        "startTime": "2026-10-15T23:31:55.186Z",
+        "duration": 84309.89300000001,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "help": {
+        "startTime": "2026-10-15T23:21:35.906Z",
+        "duration": 276865.036,
+        "expected": 14,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "kit": {
+        "startTime": "2026-10-15T23:18:16.241Z",
+        "duration": 772831.326,
+        "expected": 10,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr": {
+        "startTime": "2026-10-15T23:08:29.687Z",
+        "duration": 784496.73,
+        "expected": 12,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr3": {
+        "startTime": "2026-10-15T23:20:30.089Z",
+        "duration": 299379.714,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-2-engine": {
+        "startTime": "2026-10-15T23:37:41.264Z",
+        "duration": 17328.113,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-2": {
+        "startTime": "2026-10-15T23:37:20.762Z",
+        "duration": 47961.350999999995,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-craft": {
+        "startTime": "2026-10-15T23:33:04.317Z",
+        "duration": 189940.222,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-flash": {
+        "startTime": "2026-10-15T23:35:40.098Z",
+        "duration": 75629.487,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr4-scan": {
+        "startTime": "2026-10-15T23:36:56.490Z",
+        "duration": 43340.498,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qr5": {
+        "startTime": "2026-10-15T23:08:29.653Z",
+        "duration": 583111.519,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrc-barcodes": {
+        "startTime": "2026-10-15T23:36:57.262Z",
+        "duration": 43213.865,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrc-build": {
+        "startTime": "2026-10-15T23:35:18.431Z",
+        "duration": 96723.53700000001,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrc-picture": {
+        "startTime": "2026-10-15T23:36:16.056Z",
+        "duration": 62604.085999999996,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrl": {
+        "startTime": "2026-10-15T23:33:21.709Z",
+        "duration": 112889.634,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrs-heal": {
+        "startTime": "2026-10-15T23:38:00.375Z",
+        "duration": 2851.866,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrs-steps": {
+        "startTime": "2026-10-15T23:37:41.908Z",
+        "duration": 13584.309,
+        "expected": 5,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrs-study": {
+        "startTime": "2026-10-15T23:37:57.320Z",
+        "duration": 5862.239,
+        "expected": 3,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "qrs-toys": {
+        "startTime": "2026-10-15T23:08:29.564Z",
+        "duration": 718429.768,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "smoke": {
+        "startTime": "2026-10-15T23:08:29.606Z",
+        "duration": 1472557.172,
+        "expected": 48,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      }
+    },
+    "third-smoke-recheck-suite": {
+      "smoke": {
+        "startTime": "2026-10-15T23:48:27.388Z",
+        "duration": 24848.271,
+        "expected": 2,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "third-policy-constructor-suite": {
+      "cdx-qr-detail-policy": {
+        "startTime": "2026-10-15T23:14:51.911Z",
+        "duration": 3620.1609999999996,
+        "expected": 1,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    },
+    "third-guard-recheck-suite": {
+      "cdx-qr-detail-policy": {
+        "startTime": "2026-10-15T23:33:37.511Z",
+        "duration": 126566.345,
+        "expected": 7,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "cdx-qr-finder-guard": {
+        "startTime": "2026-10-15T23:33:37.965Z",
+        "duration": 19767.15,
+        "expected": 6,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  },
+  "evidenceManifest": "repair-evidence/manifest.json"
+}

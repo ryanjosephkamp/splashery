@@ -27,7 +27,7 @@ for (const name of fs.readdirSync(local))
   if (
     /^theme-.*probe\.(mjs|json)$/.test(name) ||
     /^moon-.*\.(mjs|js|json|log)$/.test(name) ||
-    /^(third-checks|third-smoke-phone|third-policy-constructor|third-guard-recheck|qualification-equivalence|review-third-recheck|review-third-remaining)\.log$/.test(
+    /^(third-checks|third-smoke-recheck|third-policy-constructor|third-guard-recheck|qualification-equivalence|review-third-recheck|review-third-remaining)\.log$/.test(
       name,
     ) ||
     /^(finder-edge.*|sun-regression.*|theme-.*|edge-recheck|remaining|full|winterfir-six|near-limit-.*|plain-.*|detail-policy-red|detail-repair-green|merged-focused|repair-focused|review-repair-recheck|review-repaired|final-checks|final-smoke-phone|final-runtime-qr|final-budget-style)\.log$/.test(
@@ -49,6 +49,37 @@ for (const name of fs.readdirSync(local))
 const reports = {};
 const diagnosticDirectory = path.join(root, "review-export", "diagnostics", "review-pass");
 fs.mkdirSync(diagnosticDirectory, { recursive: true });
+const equivalence = JSON.parse(
+  fs.readFileSync("tools/picture-qr-fidelity/results/review-pass/qualification-equivalence.json"),
+);
+const equivalenceDirectory = path.join(diagnosticDirectory, "qualification-equivalence");
+fs.mkdirSync(equivalenceDirectory, { recursive: true });
+const equivalenceInputs = equivalence.cases.map((item) => {
+  const bytes = fs.readFileSync(item.file),
+    file = `${item.mode}-${path.basename(item.file)}`;
+  assert.equal(createHash("sha256").update(bytes).digest("hex"), item.pngSha256);
+  fs.writeFileSync(path.join(equivalenceDirectory, file), bytes);
+  return { ...item, originalPath: item.file, file };
+});
+fs.writeFileSync(
+  path.join(equivalenceDirectory, "inputs.json"),
+  JSON.stringify(equivalenceInputs, null, 2) + "\n",
+);
+fs.writeFileSync(
+  path.join(equivalenceDirectory, "README.md"),
+  [
+    "# Serial and parallel assessment inputs",
+    "",
+    "These are the 12 original stage PNGs used by the recorded equivalence check. Each PNG is copied without alteration and checked against its recorded SHA-256. The record compares every score, raw capture hash, and all 576 reader outcomes.",
+    "",
+    "[Verification record](../../../../results/review-pass/qualification-equivalence.json) · [Input paths and hashes](inputs.json) · [All diagnostics](../README.md)",
+    "",
+    "To repeat the check from the repository root, restore each PNG to its originalPath in inputs.json. Restore the two browser-review-pre-third JSONL files from the compressed repair-evidence manifest, and copy the gallery's source PNGs into .cache/picture-qr-fidelity/review/sources/. Then run tools/picture-qr-fidelity/verify-qualification.mjs under Node 22. The verification record identifies the exact assessment-source hashes. The script rewrites that record only after every comparison passes.",
+    "",
+    "Source picture credits remain in CREDITS. Captures made by Ryan with Codex (GPT-6).",
+    "",
+  ].join("\n"),
+);
 const diagnosticImages = [];
 function preserveLongLinkImages(suite) {
   for (const spec of suite.specs || []) {
@@ -77,7 +108,7 @@ for (const suite of [
   "third-focused-suite",
   "third-budget-suite",
   "third-qr-suite",
-  "third-smoke-phone-suite",
+  "third-smoke-recheck-suite",
   "third-policy-constructor-suite",
   "third-guard-recheck-suite",
 ]) {
@@ -124,6 +155,8 @@ fs.writeFileSync(
     "# October 15–16 review diagnostics",
     "",
     "[All review diagnostics](../README.md)",
+    "",
+    "[Original serial/parallel verification PNGs](qualification-equivalence/README.md)",
     "",
     "These actual 720-pixel PNG exports use a 299-character synthetic link, one character below the input limit. Most detail selects its checked black-and-white Standard fallback within the 20-second decision bound. Both codes decode with jsQR and zxing-cpp at 8 and 4 pixels per module, with blur of 0, 0.2, and 0.3 modules: 24 reader attempts across the two codes. These long-link tests use a front view; the separate fixed ten-payload corpus supplies the perspective and brightness matrix.",
     "",
@@ -193,8 +226,9 @@ fs.writeFileSync(
       node: process.version,
       headWhenBundled: execFileSync("git", ["rev-parse", "HEAD"], { encoding: "utf8" }).trim(),
       runtimeRevision: "ed3ff719",
-      testRevision: "ed3ff719",
-      note: "The third suite repeats every required QR file after the very-flat Square change. The oversized-request guard failed on c696317e, was restored on ed3ff719 without changing its test, and the complete guard/policy files passed in the focused rerun. Its wall-clock budget tests run alone on SwiftShader; the broad suite uses four files at once on llvmpipe. Earlier suites and the initial smoke phone-sheet failure and isolated recovery remain historical evidence. The earlier qr file started before the Color-return fix and was repeated afterward. Reports retain every attempt; reruns do not add distinct cases.",
+      broadSuiteInitialRuntimeRevision: "c696317e",
+      focusedGuardAndPolicyRevision: "ed3ff719",
+      note: "The third suite repeats every required QR file after the very-flat Square change: 302 of 305 cases passed initially, with three failures and no skips. The oversized-request guard failed on c696317e, was restored on ed3ff719 without changing its test, and the complete guard/policy files passed all 13 cases in the focused rerun. The two general smoke gestures passed their exact isolated rerun without test or UI changes. Its 11 wall-clock budget tests run alone on SwiftShader; the broad suite uses four files at once on llvmpipe. These cover 316 distinct cases with the initial failures and recoveries retained, not one clean 316-case run. Earlier suites and the initial smoke phone-sheet failure and isolated recovery remain historical evidence. The earlier qr file started before the Color-return fix and was repeated afterward. Reports retain every attempt; reruns do not add distinct cases.",
       requiredFiles: JSON.parse(fs.readFileSync(path.join(local, "final-required-files.json"))),
       driver: JSON.parse(fs.readFileSync(path.join(local, "third-check-status.json"))),
       previousDriver: JSON.parse(fs.readFileSync(path.join(local, "final-check-status.json"))),

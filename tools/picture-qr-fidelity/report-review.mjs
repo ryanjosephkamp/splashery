@@ -74,6 +74,8 @@ text.push(
     return `| ${shape} | ${seconds(t.main)} | ${seconds(t.detail)} | ${seconds(t.p95Main)} | ${seconds(t.p95Detail)} | ${t.slowerCases}/${t.pairs} | ${t.over5sMain} | ${t.over5sDetail} |`;
   }),
   "",
+  `Of the ${timing.all.slowerCases} slower observations, ${timing.pairs.filter((p) => p.difference > 100).length} exceed 100 ms, ${timing.pairs.filter((p) => p.difference > 500).length} exceed 500 ms, and ${timing.pairs.filter((p) => p.difference > 1000).length} exceed one second. These are nested counts; every positive difference remains in the strict slower-case total.`,
+  "",
   "The [timing CSV](timing.csv) contains all 2,000 paired keys, their source runs, and recorded preparation and reader-matrix costs. Those costs overlap and describe the last accepted preparation; its candidate counter is not a total retry count. Any positive appearance-time difference counts as a slower observation; a single observation does not establish statistical significance. Cold starts are included. CPU profiling is disabled during this final timing series.",
   "",
   "## The Operator's four slower pilot cases",
@@ -113,6 +115,19 @@ for (const [key, explanation] of Object.entries(explanations)) {
   });
 }
 text.push("", ...details.flatMap((d) => [`**${d.key}:** ${d.explanation}`, ""]));
+text.push(
+  `In the final comparison, ${details.filter((d) => d.final.difference > 0).length} of these four cases remain slower than Standard. These primary observations are retained independently of the earlier pilot and include their recorded cold starts.`,
+  "",
+  "The final corpus observations have their own recorded costs below. Preparation includes any predicted matrix it ran; these values overlap and must not be added as a complete accounting. A dash means that diagnostic was not recorded. The candidate counter belongs to the last preparation, not the complete retry history.",
+  "",
+  "| Key | Final last preparation (ms) | Candidates in that preparation | Final accepted predicted matrix (ms) | Final captured matrix (ms) |",
+  "| --- | ---: | ---: | ---: | ---: |",
+  ...details.map(({ key, final: p }) => {
+    const cost = (value) => (value == null ? "—" : fixed(value, 1));
+    return `| ${key} | ${cost(p.lastPreparationMs)} | ${p.lastPreparationCandidates ?? "—"} | ${cost(p.acceptedModelMatrixMs)} | ${cost(p.acceptedCaptureMatrixMs)} |`;
+  }),
+  "",
+);
 text.push(
   "These observations explain measured costs; they do not prove that strict speed parity is impossible. Reusing a failed capture, omitting the second reader or stronger-blur views, or revealing the code before checks finish would reduce work but would violate the scan gate. Those changes were not made. The remaining slower cases therefore keep goal item 4 open, and Standard remains the default.",
   "",

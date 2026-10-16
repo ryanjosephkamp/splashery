@@ -1,8 +1,10 @@
 # Picture QR fidelity: review pass (October 15–16, 2026)
 
-The full goal is **not yet established**. The fixed corpus now contains 100 pictures, with 2,000
-codes per mode and 96,000 independent reader attempts per mode. Full qualification is pending.
-Standard remains the default, and old links retain Standard. Most detail remains optional.
+The full goal is **not fully met** because 350 of 2,000 codes are slower than Standard. The fixed
+100-picture corpus is complete: all 200 picture/shape mean SSIM values improve at phone and print
+sizes, and Most detail passes all 96,000 independent reader attempts with no lost baseline reads,
+failed runtime gates, or fallbacks. Mean SSIM gains are 0.1520 at phone size and 0.1604 at print
+size. Standard remains the default, and old links retain Standard. Most detail remains optional.
 
 Codex (GPT-6) started this review pass at 14:17:55 UTC on October 15, with a hard stop at 02:17:55
 UTC on October 16. The comparison freezes merged main `cb8a8315`. PR #641 landed first. This branch
@@ -246,10 +248,14 @@ fresh detail replicate has predeclared recheck priority. The
 classification, unchanged inputs and assessment code, formatted source equivalence outside the
 explicit budget changes, source epochs, and control pixels. Earlier failed means, trials, and
 observations remain. The focused policy and two-reader budget regression pass, as do all 11
-wall-clock fallback tests; the complete named QR suite is being repeated on this runtime. The
-repeated suite caught an oversized request selecting 65% on flat input. The existing regression was
-left unchanged, and the constructor was corrected to require the exact 65% opt-in; oversized
-requests still cap at 60%. The failed attempt and focused guard/policy rerun are retained.
+wall-clock fallback tests. The repeated broad suite completed all 305 cases with 302 passes, three
+unexpected failures, and no skips. It caught an oversized request selecting 65% on flat input. The
+existing regression was left unchanged, and the constructor was corrected to require the exact 65%
+opt-in; oversized requests still cap at 60%. Both complete guard and policy files then passed all 13
+cases. The other two failures were general smoke gestures (stretching a toy and resizing the panel);
+both exact tests passed together in an isolated 26-second run, with no test or UI change. All 316
+distinct required cases are covered by the broad and isolated budget suites, with the three failures
+and their recoveries retained. This is not a claim of one clean 316-case run.
 
 Independent post-capture assessment now partitions the original 24 conditions across four local Node
 workers. The worker jobs finish before another appearance measurement starts. This changes study
@@ -262,19 +268,48 @@ and formatted source proof preserve that comparison. Retained timings remain ear
 
 ## Full captured results
 
-Pending the locked-source run. The final table will include all 200 picture/shape means, every
-individual loss, each reader and condition, all main regressions, and every slower timing case.
+The [complete findings](../../tools/picture-qr-fidelity/results/review-pass/findings.md) include all
+200 picture/shape means, both readers in all 24 conditions, every individual loss, and every slower
+timing. The [per-code CSV](../../tools/picture-qr-fidelity/results/review-pass/per-code.csv) and
+[timing CSV](../../tools/picture-qr-fidelity/results/review-pass/timing.csv) each contain all 2,000
+fixed keys. The independent Python check recomputes the CSV differences and means, checks their key
+sets and scan totals, and verifies all 400 native 390×844 screenshots; its
+[result](../../tools/picture-qr-fidelity/results/review-pass/independent-checks.json) and
+[source](../../tools/picture-qr-fidelity/verify-results.py) are included.
+
+| Shape  | Mean Standard → detail (s) | P95 Standard → detail (s) | Slower codes | Over 5 s, Standard → detail |
+| ------ | -------------------------: | ------------------------: | -----------: | --------------------------: |
+| All    |              4.204 → 2.414 |             9.121 → 3.912 |    350/2,000 |                    503 → 27 |
+| Square |              5.491 → 2.056 |             9.302 → 2.907 |     29/1,000 |                    500 → 16 |
+| Circle |              2.918 → 2.772 |             3.590 → 4.034 |    321/1,000 |                      3 → 11 |
+
+The Circle tail still misses main: its P95 is 0.444 seconds slower, and eleven codes exceed five
+seconds against three on main. Of all 350 slower observations, 287 exceed 100 ms, 179 exceed 500 ms,
+and 67 exceed one second. No positive difference is discarded as noise. These are single primary
+observations with retained cold starts and source epochs, not repeated estimates of a speed change.
+
+The Operator's four pilot cases have full-corpus measurements and recorded preparation/capture costs
+in the findings. Rainbow and Lotus are now 0.166 and 0.249 seconds faster; Farm remains 0.667
+seconds slower, and the museum Circle remains 0.223 seconds slower (against 2.943 seconds in the
+pilot). Removing checks or displaying an unchecked candidate would reduce work but violate the scan
+gate. These measurements do not establish that parity is impossible; further optimization and a
+complete fresh qualification remain necessary to close goal item 4.
+
+The smallest picture/shape mean gains are 0.013337 phone and 0.005899 print. Crescent moon, Square,
+is the one print mean below 0.01. Individual codes still lose SSIM: 289 phone and 291 print. RGB
+RMSE is worse for 48/1,000 Square and 269/1,000 Circle codes at phone size, and 35/1,000 Square and
+134/1,000 Circle codes at print size. The report retains those losses separately from decoding.
 
 ## Recommendation and remaining limits
 
-Keep Standard as the default. The pilots show a useful optional improvement, but strict no-slowdown
-is not established. The final report must retain slower codes, cold starts, failures, and all
-color-error regressions. The recipe retains the 40% start for higher-contrast Squares and all
-Circles, while low-contrast Squares start at 60%, and the very flat subset starts at 65%. The report
-separates structural fidelity from RGB error and scan margin.
+Keep Standard as the default. The complete corpus supports an optional improvement, but strict
+no-slowdown is not met. Slower codes, cold starts, failures, and all color-error regressions remain
+in the report. The recipe retains the 40% start for higher-contrast Squares and all Circles, while
+low-contrast Squares start at 60%, and the very flat subset starts at 65%. The report separates
+structural fidelity from RGB error and scan margin.
 
-PR #641 is merged. The remaining qualification uses explicit Original settings so the fixed source
-crops and encoded-square measure match the earlier observations. The final evidence labels retained
+PR #641 is merged. The qualification used explicit Original settings so the fixed source crops and
+encoded-square measure match the earlier observations. The final evidence labels retained
 observations and fresh affected-path captures separately; retained timings are not fresh
 measurements of the merged UI. All required qrc/qrs and QR-prefix checks have been rerun after the
 merge. The initial concurrent run's phone-sheet gesture failure and its successful isolated rerun

@@ -197,3 +197,9 @@ Every original condition runs with both readers, and all jobs finish before anot
 starts. Run `node tools/picture-qr-fidelity/verify-qualification.mjs` before a fresh study to
 regenerate the exact serial/parallel comparison recorded in `qualification-equivalence.json`. The
 paired harness hashes the worker source and verification file. This speeds study throughput only.
+
+After assembly, independently check every CSV key, SSIM difference, picture mean, reader total,
+timing difference, and native phone screenshot with
+`python3 tools/picture-qr-fidelity/verify-results.py --out=tools/picture-qr-fidelity/results/review-pass/independent-checks.json`.
+Use `--gallery=tools/picture-qr-fidelity/review` when checking the published clips branch. The check
+uses Python's standard library and does not run the renderer or alter any primary observation.
