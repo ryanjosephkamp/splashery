@@ -69,6 +69,12 @@ for (const a of left.cases) {
     "yuv420p",
     "-movflags",
     "+faststart",
+    "-metadata",
+    `artist=${a.author}`,
+    "-metadata",
+    `copyright=${a.license}; ${a.licenseUrl}`,
+    "-metadata",
+    `comment=Source: ${a.sourcePage}; two silent live 3D presentations placed side by side; held pictures duplicated at 60 fps without interpolation; made by Ryan with Codex (GPT-6)`,
     target,
   ]);
   const probe = JSON.parse(

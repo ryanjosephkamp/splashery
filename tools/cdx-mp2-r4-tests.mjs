@@ -55,6 +55,10 @@ for (const root of roots) {
       sha256: createHash("sha256").update(bytes).digest("hex"),
       startedAt: report.stats.startTime,
       durationMs: report.stats.duration,
+      source: await fs
+        .readFile(path.join(root, file.replace(/\.json$/, ".meta.json")), "utf8")
+        .then(JSON.parse)
+        .catch(() => null),
       globalErrors: report.errors || [],
       files: [...files.values()],
     };

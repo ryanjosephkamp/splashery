@@ -112,7 +112,58 @@ lines.push(
   ),
 );
 lines.push(
-  "\n## Isolated phone startup\n\nFresh context per repeat, selection to first actual submitted front-surface draw with usable picture and estimated depth. Background refinement need not finish. Milliseconds; median [minimum–maximum], repeat count.\n",
+  "\n## Repeated clean cadence\n\nThree serial passes are planned for all fourteen inputs. The first-pass table above keeps the Operator's original per-window protocol; this table retains each pass's median and the worst observed interval across passes. Missing repeats stay explicit. Source-clock rates are proxies, as described above.\n",
+);
+const repeatPairs = [[perf[0], perf[2]]];
+for (const repeat of [2, 3]) {
+  const pair = await Promise.all(
+    ["main", "r4"].map((name) => read(`r4-phone-${name}-repeat${repeat}`)),
+  );
+  pair.forEach((report, i) => {
+    if (report && repeatPairs[0][i] && report.sourceHash !== repeatPairs[0][i].sourceHash)
+      throw Error("Repeated cadence source pins differ");
+  });
+  repeatPairs.push(pair);
+}
+lines.push(
+  table(
+    [
+      "Input",
+      "Main median ms, each pass",
+      "R4 median ms, each pass",
+      "Worst ms, main / R4",
+      "Mean source clocks/s, main / R4",
+      "Runs, main / R4",
+    ],
+    R4_CASES.map((item) => {
+      const versions = [0, 1].map((version) =>
+          repeatPairs
+            .map((pair) => pair[version]?.cases.find((row) => row.id === item.id))
+            .filter(Boolean),
+        ),
+        medians = versions.map((rows) =>
+          rows.length ? rows.map((row) => fixed(row.cadence.median, 1)).join(", ") : "pending",
+        ),
+        worst = versions.map((rows) =>
+          rows.length ? fixed(Math.max(...rows.map((row) => row.cadence.worst)), 1) : "pending",
+        ),
+        fps = versions.map((rows) =>
+          rows.length
+            ? fixed(rows.reduce((sum, row) => sum + row.pictureSubmissionFps, 0) / rows.length, 2)
+            : "pending",
+        );
+      return [
+        item.id,
+        ...medians,
+        worst.join(" / "),
+        fps.join(" / "),
+        versions.map((rows) => rows.length).join(" / "),
+      ];
+    }),
+  ),
+);
+lines.push(
+  "\n## Isolated phone startup\n\nFresh context per repeat, selection to first actual submitted front-surface draw with usable picture and estimated depth. Opening the default toy includes observer module preparation in both versions; other clips start from the already open default toy. Background refinement need not finish. Milliseconds; median [minimum–maximum], repeat count.\n",
 );
 lines.push(
   table(
@@ -136,6 +187,78 @@ lines.push(
     }),
   ),
 );
+lines.push(
+  "\n## Instrumented pipeline costs\n\nInclusive mean milliseconds per frameend update. Rows overlap and must not be summed. Instrumented runs are separate from the clean cadence table. Native media tracing includes the two-second warmup; its function durations are overlapping wall time, not additive decoder CPU. GPU elapsed queries may be unavailable.\n",
+);
+const cpu = await Promise.all(["r3", "r4"].map((name) => read(`r4-final-${name}-cpu`))),
+  phases = [
+    "longFrame",
+    "canvasDraw",
+    "canvasRead",
+    "freezeVideoFrame",
+    "workerPost",
+    "videoFrameCallback",
+    "clipCellDepth",
+    "fillClip",
+    "texImage2D",
+    "texSubImage2D",
+    "generateMipmap",
+    "bufferData",
+    "bufferSubData",
+    "sortVisible",
+    "drawElements",
+    "drawElementsInstanced",
+  ];
+for (const id of ["sample", "machine-long"]) {
+  const rows = cpu.map((report) => report?.cases.find((row) => row.id === id));
+  lines.push(`### ${id}\n\n`);
+  lines.push(
+    table(
+      ["Inclusive page operation", "Round 3 ms/update", "Round 4 ms/update"],
+      phases.map((phase) => [
+        phase,
+        ...rows.map((row) =>
+          row
+            ? row.costs[phase]
+              ? fixed(row.costs[phase].total / (row.cadence.n + 1))
+              : "not observed"
+            : "pending",
+        ),
+      ]),
+    ),
+  );
+  const r4 = rows[1];
+  lines.push(
+    `\nGPU timers: round 3 ${rows[0] ? (rows[0].gpuDraw?.supported ? "available" : "unavailable") : "pending"}; round 4 ${r4 ? (r4.gpuDraw?.supported ? "available" : "unavailable") : "pending"}.\n`,
+  );
+  if (r4?.stream) {
+    lines.push(
+      `\nParallel worker phases, mean ms/completed packet over the recent ${r4.stream.recentWorkerFrames} frames; may include warmup. Do not add to inclusive page costs.\n`,
+    );
+    lines.push(
+      table(
+        ["Worker phase", "Round 4 ms/packet"],
+        Object.entries(r4.stream.meanPhases).map(([phase, value]) => [phase, fixed(value)]),
+      ),
+    );
+    lines.push(
+      `\nAccepted frozen-picture age, recent ${r4.stream.presentationAgeMs.n} packets: median ${fixed(r4.stream.presentationAgeMs.median, 1)} ms; worst ${fixed(r4.stream.presentationAgeMs.worst, 1)} ms. This is media-clock age at acceptance, not physical audio-to-display latency.\n`,
+    );
+  }
+  const decode = rows.map((row) => row?.nativeMediaTrace?.durations?.vpx_codec_decode);
+  lines.push(
+    "\n" +
+      table(
+        ["Native VP9 function wall time", "Calls", "Total ms", "Worst ms"],
+        decode.map((row, i) => [
+          i ? "Round 4" : "Round 3",
+          row?.count ?? "unavailable",
+          fixed(row?.totalMs),
+          fixed(row?.worstMs),
+        ]),
+      ),
+  );
+}
 lines.push("\n## Test ledger\n\n");
 if (tests)
   lines.push(

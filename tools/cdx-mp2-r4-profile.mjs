@@ -419,6 +419,9 @@ try {
                 recentWorkerFrames: workerMs.length,
                 workerSampleScope:
                   "Most recent 120 completed frames, bounded by production; may include warmup when fewer than 120 frames completed",
+                presentationAgeMs: stats(window.__r4Mesh.clipStream.stats.frameAgesMs || []),
+                presentationAgeScope:
+                  "Age relative to the clip media clock when each matching frozen packet was accepted, for the most recent 120 accepted packets; not physical speaker-to-screen latency",
                 meanPhases: Object.fromEntries(
                   Object.keys(phases[0] || {}).map((k) => [
                     k,

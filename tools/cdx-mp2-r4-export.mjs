@@ -1,6 +1,8 @@
 // Copy only review deliverables to the separate, never-merged clips worktree.
 import fs from "node:fs/promises";
 import path from "node:path";
+import { gzipSync } from "node:zlib";
+import { createHash } from "node:crypto";
 import { option } from "./cdx-mp2-r4-harness.mjs";
 
 const out = option("out", "work/r4-clips");
@@ -68,11 +70,17 @@ const ledgers = [
   "r4-final-quality.json",
   "r4-r3-final-quality.json",
   "r4-final-source.json",
+  "r4-publication.json",
+  "r4-measurements.md",
   "r4-test-ledger.json",
   "r4-test-ledger.md",
   "r4-phone-main.json",
   "r4-phone-r3.json",
   "r4-phone-r4.json",
+  "r4-phone-main-repeat2.json",
+  "r4-phone-r4-repeat2.json",
+  "r4-phone-main-repeat3.json",
+  "r4-phone-r4-repeat3.json",
   "r4-startup-main.json",
   "r4-startup-r4.json",
   "r4-final-r3-cpu.json",
@@ -85,6 +93,23 @@ for (const file of ledgers) {
   await fs.writeFile(path.join(out, "ledgers", file), bytes);
   manifest.ledgers.push(file);
 }
+manifest.traces = [];
+for (const file of await fs.readdir("work")) {
+  if (!/^r4-final-r[34]-cpu\.json\.(sample|machine-long)\.(trace\.json|cpuprofile)$/.test(file))
+    continue;
+  const bytes = await fs.readFile(path.join("work", file)),
+    compressed = gzipSync(bytes),
+    target = file + ".gz";
+  await fs.writeFile(path.join(out, "ledgers", target), compressed);
+  const sha = (value) => createHash("sha256").update(value).digest("hex");
+  manifest.traces.push({
+    file: target,
+    bytes: compressed.length,
+    sha256: sha(compressed),
+    uncompressedBytes: bytes.length,
+    uncompressedSha256: sha(bytes),
+  });
+}
 await fs.writeFile(path.join(out, "manifest.json"), JSON.stringify(manifest, null, 2) + "\n");
 await fs.writeFile(
   path.join(out, "README.md"),
@@ -92,8 +117,8 @@ await fs.writeFile(
 Made by Ryan with Codex (GPT-6), October 16, 2026. This is the separate
 \`codex/moving-photo-r4-clips\` branch. **Never merge it into main.**
 
-The implementation and honest Goal status are in the draft PR replacing
-[round 3, PR #560](https://github.com/ryanjosephkamp/splashery/pull/560).
+The implementation and honest Goal status are in [draft PR #677](https://github.com/ryanjosephkamp/splashery/pull/677),
+which replaces [round 3, PR #560](https://github.com/ryanjosephkamp/splashery/pull/560).
 
 Source-clock films use every original source frame and its original hold duration. They show
 picture quality, not live frame rate. Individual phone cards are 390 × 844; paired films are
@@ -107,6 +132,10 @@ the film content is intended. Export code is MIT. All supplied poster images are
 
 ${sections.join("\n")}
 ## Measurement ledgers\n\n${manifest.ledgers.map((file) => `- [${file}](ledgers/${file})`).join("\n")}
+
+Native traces and CPU profiles are gzip-compressed, with both compressed and original hashes in
+the root manifest. Decompress them before loading them in a trace or CPU-profile viewer.
+${manifest.traces.map((row) => `- [${row.file}](ledgers/${row.file})`).join("\n")}
 
 Incomplete measurements remain explicitly incomplete. Earlier failures are preserved in the test
 ledger; latest whole-file reruns do not erase them. These are Chromium software-rendered phone

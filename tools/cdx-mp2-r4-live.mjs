@@ -113,6 +113,9 @@ try {
             time: moving.t,
             frame: moving.frame,
             sample: moving.clip.sample,
+            pictureTime: window.__r4LiveMesh?.colorSrc?.currentTime ?? moving.frame,
+            pictureKind: window.__r4LiveMesh?.colorSrc?.constructor.name,
+            revision: window.__r4LiveMesh?.clipRevision,
           });
       });
       const stage = await page.locator("#stage").boundingBox();
@@ -189,7 +192,12 @@ try {
         path.join(folder, "capture.json"),
         JSON.stringify({ ...observed, stage, frames: accepted, errors }, null, 2) + "\n",
       );
-      if (accepted.length < 3 || new Set(draws.map((row) => row.frame)).size < 2 || errors.length)
+      if (
+        accepted.length < 3 ||
+        new Set(accepted.map((row) => row.sha256)).size < 2 ||
+        new Set(draws.map((row) => row.pictureTime)).size < 2 ||
+        errors.length
+      )
         throw Error(`Invalid live recording: ${accepted.length} captures; ${errors.join("; ")}`);
       if (accepted.at(-1).at - accepted[0].at < seconds - Math.max(0.5, seconds * 0.1))
         throw Error(
@@ -248,6 +256,12 @@ try {
         "fps=60:force-cfr=0",
         "-movflags",
         "+faststart",
+        "-metadata",
+        `artist=${credit.author}`,
+        "-metadata",
+        `copyright=${credit.license}; ${credit.licenseUrl}`,
+        "-metadata",
+        `comment=Source: ${credit.source}; silent live 3D presentation with capture overhead; made by Ryan with Codex (GPT-6)`,
         file,
       ]);
       const info = JSON.parse(

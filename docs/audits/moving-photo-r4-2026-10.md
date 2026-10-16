@@ -12,14 +12,14 @@ entries below before handback. An incomplete target is not a pass.
 
 ## Goal status
 
-| Target                                                                           | Result                                                                                                                                                                     |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sharp shows the chosen sample and local file                                     | All 81 ordered pairs of nine samples, five local formats, and Sharp/Splats transitions passed on the emulated phone.                                                       |
-| Phone cadence at least main; Operator median ≤50 ms and worst ≤250 ms            | Final isolated measurements pending.                                                                                                                                       |
-| Sharper and steadier on all nine samples and five original inputs, both profiles | Final sweep pending. Earlier sweep has zero holes and edge specks on every phone sample, but steadiness is worse on some long films. The complete Goal is not established. |
-| First 3D frame no slower than main on phone                                      | Final isolated measurements pending.                                                                                                                                       |
-| Photo checkpoint and every existing test                                         | Full suite running; 51 Photo scan tests passed. Initial failures and whole-file reruns are preserved in the ledger.                                                        |
-| Phone comparisons                                                                | Final source-clock films pending on `codex/moving-photo-r4-clips`, which is never merged.                                                                                  |
+| Target                                                                           | Result                                                                                                                                                                                  |
+| -------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sharp shows the chosen sample and local file                                     | All 81 ordered pairs of nine samples, five local formats, and Sharp/Splats transitions passed on the emulated phone.                                                                    |
+| Phone cadence at least main; Operator median ≤50 ms and worst ≤250 ms            | Final isolated measurements pending.                                                                                                                                                    |
+| Sharper and steadier on all nine samples and five original inputs, both profiles | Final sweep pending. The completed prior short sweep has zero holes and edge specks in all 20 cases; long-film steadiness is worse on some films. The complete Goal is not established. |
+| First 3D frame no slower than main on phone                                      | Final isolated measurements pending.                                                                                                                                                    |
+| Photo checkpoint and every existing test                                         | Full suite running; 51 Photo scan tests passed. Initial failures and whole-file reruns are preserved in the ledger.                                                                     |
+| Phone comparisons                                                                | Final source-clock films pending on `codex/moving-photo-r4-clips`, which is never merged.                                                                                               |
 
 ## Baselines and scope
 
@@ -32,10 +32,20 @@ exactly as merged. Generated screenshots are restored before handback.
 The four clip modules pinned for main's comparisons are byte-identical between those two main
 revisions. The later merge does not change the baseline clip implementation.
 
+GitHub rejected the first push with GH007 email-privacy protection. The original local
+`codex/moving-photo-r4` history is preserved. The public draft is
+[PR #677](https://github.com/ryanjosephkamp/splashery/pull/677), on the fresh
+`codex/moving-photo-r4-public` branch from the same round 3 base. New public commits use GitHub's
+noreply identity. The initial public tree is byte-identical to the checked local tip. No original
+branch is rebased, amended, reset, or force-pushed. Validation source hashes and the publication
+record map the internal run revisions to the identical public files. The clips branch keeps its
+requested name.
+
 The shared `Track` change is isolated in **Engine: let clip sound reuse its decoded video element**
-(`d28286c8`). A supplied, already loaded video can be the track's media element; ordinary audio
-tracks retain their existing path. No shared relief or depth-engine file is changed in round 4.
-Changes in `photo-sharp.js` are guarded clip paths and helpers.
+(`df6f69bd` on the public branch; originally `d28286c8` locally). A supplied, already loaded video
+can be the track's media element; ordinary audio tracks retain their existing path. No shared relief
+or depth-engine file is changed in round 4. Changes in `photo-sharp.js` are guarded clip paths and
+helpers.
 
 Main has five short samples and no long-sample shelf. For the four long comparisons, main opens the
 identical film through its real local-file path. The baseline receives the exact selected native
@@ -86,6 +96,12 @@ not CPU-throttled by CDP. This is software-rendered emulation, not a physical An
   times fall inside one retained frame.
 - Node recipe builders use the actual baked long-sample depth without requiring a DOM decoder. The
   unchanged kit suite exposed this previously unhandled long-sample path.
+
+The final inherited-dispatch fix retains upload observers installed after a clip mesh is created.
+The per-mesh revision counter had captured an old prototype function, so the existing paused-seek
+test could not observe actual uploads. Its unchanged regression passes after the dispatch fix;
+shader, field, reconstruction, and scheduling arithmetic are unchanged. The complete quality sweep
+is repeated against this final source pin.
 
 The candidate long-film caches were rebuilt from verified interior source times, using the existing
 upload refinement's symmetric, color-gated half-second window, one clip-wide depth range, and the
@@ -140,12 +156,13 @@ Final per-case tables and exact source pins: pending.
 
 The clean speed run uses one browser with no competing tests, model-baking jobs, quality sweeps, or
 encoders. It keeps round 3's two-second warmup, twelve-second short windows, and thirty-second long
-windows. It reports frameend update intervals, actual postrender intervals, and bound-picture-clock
-submission intervals separately. A fast update callback alone does not establish fast visible
-playback; a 10 fps source also cannot supply 20 distinct pictures per second. Native bitmap clocks
-are their frozen presentation timestamps; a directly bound video uses its media-element clock, and a
-retained source uses its frame index. Clock changes are not an independent pixel-uniqueness
-measurement. Browser decoder counters and live presentation recordings are reported separately.
+windows. Three clean passes are planned for all fourteen inputs. It reports frameend update
+intervals, actual postrender intervals, and bound-picture-clock submission intervals separately. A
+fast update callback alone does not establish fast visible playback; a 10 fps source also cannot
+supply 20 distinct pictures per second. Native bitmap clocks are their frozen presentation
+timestamps; a directly bound video uses its media-element clock, and a retained source uses its
+frame index. Clock changes are not an independent pixel-uniqueness measurement. Browser decoder
+counters and live presentation recordings are reported separately.
 
 Instrumented runs add inclusive JavaScript costs for the clip pipeline, buffer and texture uploads,
 mip work, sorting, and draw submission. Parallel worker phases are reported separately and cannot be
@@ -156,9 +173,11 @@ invented decoder CPU costs. These instrumented runs are separate from the clean 
 Startup uses a fresh page and worker per case and records the first actual postrender whose mesh
 owns the requested clip and a usable picture. Its device-draw observer also requires a valid shader
 and a nonempty submitted front-surface index buffer belonging to that mesh. It does not wait for all
-background refinement to finish. Three repeats per input are planned; the median and range, plus
-errors, are reported. Startup observer validation passed on a sample and a local MP4, but its
-concurrent timings support no speed claim.
+background refinement to finish. Opening the default toy starts the clock before observer module
+preparation, including that overhead in both versions; other clips start with the default toy
+already open. Three repeats per input are planned; the median and range, plus errors, are reported.
+Startup observer validation passed on a sample and a local MP4, but its concurrent timings support
+no speed claim.
 
 The isolated diagnostic below predates the final still-camera scheduling fix. It identifies the
 round 3 bottleneck; final complete timing tables supersede it for the Goal.
@@ -210,6 +229,11 @@ Focused checks already completed:
   worker delay, not a clean playback benchmark.
 - The unchanged complete kit file: **10/10 passed** after the DOM-free long-sample preparation fix.
   The three newly merged test files and the comparison-engine file also passed.
+
+The complete new round 4 files have now passed **18/18**. The unchanged decode, mobile,
+actual-texture, and round 3 files also passed **7/7**, **2/2**, **7/7**, and **16/16**,
+respectively. The legacy Moving photo file initially passed 13/14; its observer-dispatch failure
+passes unchanged in the focused recheck, with the whole-file rerun still planned.
 
 The full run supersedes focused results where source pins differ. The final test ledger lists each
 file's counts and all reruns.
@@ -271,7 +295,9 @@ No new exception is requested.
 The review films are silent phone-size exports of verified source frames. They preserve source times
 to within one millisecond; they demonstrate picture quality, not live frame rate. Separate live
 timing ledgers measure speed. Every film keeps its source author, license, source page, input hash,
-and transformation record. Individual PR images stay below 1 MB.
+and transformation record. Author, license, and source links are also embedded in the MP4 metadata;
+a short export pilot verified those tags without changing frame counts, timestamps, or holds.
+Individual PR images stay below 1 MB.
 
 Final clips branch, manifest, full per-frame ledgers, and test reports: pending.
 

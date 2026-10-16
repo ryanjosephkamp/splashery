@@ -32,6 +32,8 @@ const report = {
   cpuRate: 4,
   phone: PHONE,
   workerThrottled: false,
+  protocol:
+    "Selection to first actual submitted 3D front surface. Opening the toy starts before observer module imports, including their preparation overhead in both versions; other clips start from the already open default toy. Fresh browser context per repeat",
   results: [],
 };
 await fs.mkdir(path.dirname(out), { recursive: true });
@@ -57,6 +59,7 @@ try {
         );
         await page.waitForSelector("body[data-ready='true']");
         await page.evaluate(async () => {
+          window.__r4ColdSelectionStart = performance.now();
           window.__r4Moving = await import("/src/packs/moving-photo.js");
           window.__r4Owners = new WeakMap();
           const { ReliefMesh } = await import("/src/live/relief-mesh.js"),
@@ -94,7 +97,8 @@ try {
         await page.evaluate(
           ({ item, upload }) => {
             const { player } = window.__splashery;
-            window.__r4Start = performance.now();
+            window.__r4Start =
+              item.id === "sample" ? window.__r4ColdSelectionStart : performance.now();
             window.__r4First = null;
             window.__r4Submitted = null;
             const draw = () => {

@@ -22,7 +22,7 @@ const roots = [
 const font = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf";
 await fs.mkdir(out, { recursive: true });
 const manifest = {
-  reviewVersion: "phone-original-pts-v6",
+  reviewVersion: "phone-original-pts-v7",
   labels: [beforeLabel, "Round 4"],
   revisions: [
     before.codeRevision || before.revision || before.baseline,
@@ -81,7 +81,7 @@ async function verifyFilm(file, row, duration) {
         "v:0",
         "-show_frames",
         "-show_entries",
-        "frame=best_effort_timestamp_time:format=duration",
+        "frame=best_effort_timestamp_time:format=duration:format_tags=artist,copyright,comment",
         "-of",
         "json",
         file,
@@ -90,6 +90,8 @@ async function verifyFilm(file, row, duration) {
     ),
   );
   const encodedDuration = Number(info.format.duration);
+  if (!info.format.tags?.artist || !info.format.tags?.copyright || !info.format.tags?.comment)
+    throw Error(`Missing embedded credit: ${file}`);
   if (Math.abs(encodedDuration - duration) > 0.001)
     throw Error(`Encoded duration changed: ${file}: ${encodedDuration} vs ${duration}`);
   const expected = sourceClock(row),
@@ -106,6 +108,7 @@ async function verifyFilm(file, row, duration) {
     frames: actual.length,
     duration,
     encodedDuration,
+    embeddedCredit: info.format.tags,
   };
 }
 const cardFilter = (input, labelPath, output) =>
@@ -175,7 +178,15 @@ for (const item of R4_CASES) {
   };
   // The generator source is a committed input, not an external film.
   if (item.upload)
-    credit.source = `https://github.com/ryanjosephkamp/splashery/blob/${execFileSync("git", ["rev-parse", "892ed8ea"], { encoding: "utf8" }).trim()}/tools/cdx-mp2-r4-inputs.mjs`;
+    credit.source = `https://github.com/ryanjosephkamp/splashery/blob/b442876fa4ceb61202da77633eb91b6cc20e676e/tools/cdx-mp2-r4-inputs.mjs`;
+  const creditArgs = [
+    "-metadata",
+    `artist=${credit.author}`,
+    "-metadata",
+    `copyright=${credit.license}; ${credit.licenseUrl}`,
+    "-metadata",
+    `comment=Source: ${credit.source}; silent 3D rendering and phone comparison; made by Ryan with Codex (GPT-6)`,
+  ];
   const duration = rows[0].sourceDelays
     ? rows[0].sourceDelays.reduce((a, b) => a + b, 0)
     : rows[0].delays
@@ -248,6 +259,7 @@ for (const item of R4_CASES) {
       "yuv420p",
       "-movflags",
       "+faststart",
+      ...creditArgs,
       file,
     ]);
     outputs.push(await verifyFilm(file, row, duration));
@@ -292,6 +304,7 @@ for (const item of R4_CASES) {
     "yuv420p",
     "-movflags",
     "+faststart",
+    ...creditArgs,
     paired,
   ]);
   const poster = path.join(out, `${item.id}-poster.jpg`);

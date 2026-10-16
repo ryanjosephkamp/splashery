@@ -641,11 +641,12 @@ function clipBorder(m, src) {
   m.clipPreview = !!src.moving.opening;
   if (m.clipOnly) return;
   m.clipOnly = true;
+  // Retain inherited dispatch, including upload observers installed later.
+  const methods = Object.getPrototypeOf(m);
   for (const name of ["setColor", "setDepth"]) {
-    const original = m[name];
     m[name] = function (...args) {
       this.clipRevision = (this.clipRevision || 0) + 1;
-      return original.apply(this, args);
+      return methods[name].apply(this, args);
     };
   }
   // The border's geometry already uses softened depth. Cutting it from
