@@ -41,5 +41,9 @@
   `src/sfm/sfm.js` uses it for both feature-extraction passes and pair matching, and propagates
   cancellation through retry paths. The matching jobs, options, and per-pair seeds are retained.
 
+- Task 94 adds the opt-in `solve({ minCameras })` acceptance check before image undistortion or
+  low-memory frame release. Rejected short solves retain the original pictures for a retry;
+  callers that omit the option keep the existing two-view contract.
+
 The upstream MIT license remains in `LICENSE`. No external runtime library was added by these
 patches.

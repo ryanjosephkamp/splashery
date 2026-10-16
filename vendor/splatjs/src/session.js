@@ -265,7 +265,9 @@ export class Session {
   /** Use frames prepared elsewhere (e.g. processSource on fetched bitmaps). */
   useFrames(frames) { this._assertActive(); this.frames = frames; return frames; }
 
-  /** Structure from motion: camera poses + sparse points from the frames. */
+  /** Structure from motion: camera poses + sparse points from the frames.
+   *  extra.minCameras optionally rejects an undersized solve before mutating
+   *  training pictures or releasing feature frames, so the caller can retry. */
   async solve(extra = {}) {
     this._assertActive();
     const controller = new AbortController();
@@ -281,6 +283,8 @@ export class Session {
 
   async _solve(extra = {}) {
     const opts = { ...this.opts.sfm, ...extra };
+    if (opts.minCameras != null && (!Number.isSafeInteger(opts.minCameras) || opts.minCameras < 2))
+      throw new RangeError('minCameras must be a safe integer of at least 2');
     if (this.rigInfo && !opts.rigs) {
       opts.rigs = this.rigInfo;
       opts.focalPx = opts.focalPx ?? this.rigFocalPx;
@@ -346,6 +350,8 @@ export class Session {
       });
     this._assertActive();
     if (opts.signal?.aborted) throw new DOMException('SfM aborted', 'AbortError');
+    if (opts.minCameras != null && recon.cams.length < opts.minCameras)
+      throw new Error(`only ${recon.cams.length} cameras placed; at least ${opts.minCameras} cameras are required`);
     this.recon = recon;
     if (undistortFrames(this.frames, this.recon)) {
       this._log(`undistorted training images (k1 ${this.recon.k1.toFixed(4)}, k2 ${this.recon.k2.toFixed(4)})`);
