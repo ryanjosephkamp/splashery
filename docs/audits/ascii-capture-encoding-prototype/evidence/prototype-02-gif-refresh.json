@@ -1,0 +1,44 @@
+[
+  {
+    "toy": "grapes",
+    "mode": "mono",
+    "width": 593,
+    "height": 620,
+    "durationMs": 4000
+  },
+  {
+    "toy": "grapes",
+    "mode": "color",
+    "width": 593,
+    "height": 620,
+    "durationMs": 4000
+  },
+  {
+    "toy": "orange",
+    "mode": "mono",
+    "width": 593,
+    "height": 620,
+    "durationMs": 4000
+  },
+  {
+    "toy": "orange",
+    "mode": "color",
+    "width": 593,
+    "height": 620,
+    "durationMs": 4000
+  },
+  {
+    "toy": "strawberry",
+    "mode": "mono",
+    "width": 593,
+    "height": 676,
+    "durationMs": 4000
+  },
+  {
+    "toy": "strawberry",
+    "mode": "color",
+    "width": 593,
+    "height": 676,
+    "durationMs": 4000
+  }
+]

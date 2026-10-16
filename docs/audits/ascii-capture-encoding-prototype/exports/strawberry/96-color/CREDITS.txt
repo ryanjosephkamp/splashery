@@ -1,0 +1,9 @@
+{
+  "title": "Strawberry",
+  "author": "Dany Bittel",
+  "source": "https://superspl.at/scene/84df8849",
+  "license": "CC BY 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+  "changes": "Converted, decimated, spherical harmonics removed, recentred and scaled."
+}
+Fresh fixed-view capture; PNG source downsampled for the portable demo; converted to ASCII and encoded from these settings.

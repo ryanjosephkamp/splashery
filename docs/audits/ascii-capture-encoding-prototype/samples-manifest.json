@@ -1,0 +1,127 @@
+{
+  "origin": "accepted local prototype-02; no sample pixels/media changed",
+  "files": [
+    {
+      "path": "exports/grapes/96-color/CREDITS.txt",
+      "bytes": 198,
+      "sha256": "16b34301de0e843a57f612db564355b940ec91feb9a23beee3a99698c966addd"
+    },
+    {
+      "path": "exports/grapes/96-color/animation.gif",
+      "bytes": 537002,
+      "sha256": "bd6d0ddd03f4c895580e0f505ddc7545f427a06f52d855005086000437864d47"
+    },
+    {
+      "path": "exports/grapes/96-color/animation.mp4",
+      "bytes": 70954,
+      "sha256": "5b399509a7ca65f268bc22817c36a5811dc0c882e3a28885d338ed5179c8c69c"
+    },
+    {
+      "path": "exports/grapes/96-color/browser.mp4",
+      "bytes": 123129,
+      "sha256": "e29d1e8b7ecfb1b53ad1f6c2c155316fea8b77de536b0024f6c5483fcf843ff8"
+    },
+    {
+      "path": "exports/grapes/96-mono/CREDITS.txt",
+      "bytes": 198,
+      "sha256": "16b34301de0e843a57f612db564355b940ec91feb9a23beee3a99698c966addd"
+    },
+    {
+      "path": "exports/grapes/96-mono/animation.gif",
+      "bytes": 356445,
+      "sha256": "8e9a99bda117e655b1f8118c0a6b52d449b70aa478e66dc0d948b71722eea7ce"
+    },
+    {
+      "path": "exports/grapes/96-mono/animation.mp4",
+      "bytes": 85968,
+      "sha256": "6e0fa133847b7eaec4611f54a2dceb321dd20b62e00fd8b291d2f1aa488d2ee4"
+    },
+    {
+      "path": "exports/grapes/96-mono/browser.mp4",
+      "bytes": 177313,
+      "sha256": "40e03cc6e2060392c73c0ae754fe181cb603918988253cd14494688d0ca1a6b5"
+    },
+    {
+      "path": "exports/orange/96-color/CREDITS.txt",
+      "bytes": 198,
+      "sha256": "98095c8f8e10b66f40181bbccf7fd3e78121811be85f23980ec3a517ebefe286"
+    },
+    {
+      "path": "exports/orange/96-color/animation.gif",
+      "bytes": 1973188,
+      "sha256": "e05be9c0d57b367737a589a60df76e6e4789aacce666390e7d283c9e653e9d94"
+    },
+    {
+      "path": "exports/orange/96-color/animation.mp4",
+      "bytes": 457309,
+      "sha256": "50f15e006b83213c671a7def3b9f17794e15fb2c91ef27a0382d3184ee137b47"
+    },
+    {
+      "path": "exports/orange/96-color/browser.mp4",
+      "bytes": 457922,
+      "sha256": "39cf7d6816ca454a9fd53c4dac3e6a75f71d07086764dca9a525930553989c04"
+    },
+    {
+      "path": "exports/orange/96-mono/CREDITS.txt",
+      "bytes": 198,
+      "sha256": "98095c8f8e10b66f40181bbccf7fd3e78121811be85f23980ec3a517ebefe286"
+    },
+    {
+      "path": "exports/orange/96-mono/animation.gif",
+      "bytes": 742341,
+      "sha256": "4e25f03d8a52716bdcfd73ea325f28bab31acf5b60e8e99dd6516997279ebe1f"
+    },
+    {
+      "path": "exports/orange/96-mono/animation.mp4",
+      "bytes": 349470,
+      "sha256": "c683e487eb0682db461dc53a5d27bc06a420e535de820c0b5e915853b5ac4fb4"
+    },
+    {
+      "path": "exports/orange/96-mono/browser.mp4",
+      "bytes": 445978,
+      "sha256": "ecec34fe1adfc7eadf9b6ffc3050bf72bb4d5e59ca3e1a6b25bff2b37ad2b606"
+    },
+    {
+      "path": "exports/strawberry/96-color/CREDITS.txt",
+      "bytes": 408,
+      "sha256": "eb1eb8cbfdab76a188398b1ea251421eb2d4548f6f1c28d59df4f6aa438b10ca"
+    },
+    {
+      "path": "exports/strawberry/96-color/animation.gif",
+      "bytes": 1089492,
+      "sha256": "f23e2aec1543613111ec62bfd70609ecde8edb1d5e5532d9f0bfae868efa2b01"
+    },
+    {
+      "path": "exports/strawberry/96-color/animation.mp4",
+      "bytes": 160128,
+      "sha256": "43c8529176613b9a229c3346d51802901aac62fe367c92014bf5fb8eb41d5894"
+    },
+    {
+      "path": "exports/strawberry/96-color/browser.mp4",
+      "bytes": 220486,
+      "sha256": "b62e49b425d06a703b5fe2582412c422c34de4966d40365d46531eb198846db8"
+    },
+    {
+      "path": "exports/strawberry/96-mono/CREDITS.txt",
+      "bytes": 408,
+      "sha256": "eb1eb8cbfdab76a188398b1ea251421eb2d4548f6f1c28d59df4f6aa438b10ca"
+    },
+    {
+      "path": "exports/strawberry/96-mono/animation.gif",
+      "bytes": 590603,
+      "sha256": "3d5f9c4a353922b133ff711a9e917e5c11716b0eeecee9c479e2b9df40c52266"
+    },
+    {
+      "path": "exports/strawberry/96-mono/animation.mp4",
+      "bytes": 126621,
+      "sha256": "3e7a2bf7be7f6ca88141a4736b3f6ba9d2634781b3e93f003a57248de82a84c5"
+    },
+    {
+      "path": "exports/strawberry/96-mono/browser.mp4",
+      "bytes": 197637,
+      "sha256": "16a31ed6d7164640bdc8ecf3a784b236c86a5b014421abd6a24274355244ff48"
+    }
+  ],
+  "sourceInputsSemanticEquality": true,
+  "asciiCoreSha256": "04e436ddca7b011cc33f0233178b5048b6a369c7d2504faa74664f4487209950"
+}
