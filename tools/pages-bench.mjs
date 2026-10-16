@@ -246,10 +246,21 @@ async function run(toy, input, profile, repeat) {
       const p = window.__splashery.player,
         c = p.camera;
       p.stage.requestRender();
-      return (
+      const calm =
+        !p.motion.recipe?.alive?.() &&
         !p.glide &&
-        ["yaw", "pitch", "roll", "distance"].every((k) => Math.abs(c.tgt[k] - c.cur[k]) < 1e-4)
-      );
+        ["yaw", "pitch", "roll", "distance"].every((k) => Math.abs(c.tgt[k] - c.cur[k]) < 1e-4) &&
+        p.pictures.sheets.every((s) => !s.want || s.shown?.key === s.want.key);
+      // The camera can stop before the album's opening turn lands. Require
+      // the recipe to finish and the requested page keys to remain stable,
+      // including the detail rebuild that follows a reading-view glide.
+      const key = JSON.stringify(p.pictures.sheets.map((s) => s.want?.key || ""));
+      if (!calm || key !== window.__benchStableKey) {
+        window.__benchStableKey = key;
+        window.__benchStableSince = performance.now();
+        return false;
+      }
+      return performance.now() - window.__benchStableSince >= 600;
     },
     null,
     { timeout: 120000 },
