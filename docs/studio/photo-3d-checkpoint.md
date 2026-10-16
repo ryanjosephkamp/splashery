@@ -4,6 +4,25 @@ The owner called Photo to 3D "practically perfect" on October 13, 2026, after Co
 (PR #566, merged through Ops #590) and the hard-case samples (task 57, #585). This page says how to
 get exactly that version back if later work makes it worse.
 
+## Classic v1, frozen October 16, 2026
+
+After round 5 (task 93), the owner froze today's Photo to 3D as "classic" (October 16, 2026). New
+methods are built beside it, behind the labs switch (Codex task 99, `src/photo3d/next/`), and
+classic itself doesn't change.
+
+- **The golden test,** `tests/p3d-golden.spec.mjs`, rebuilds all 76 built-in samples (56 samples and
+  20 hard cases) at the phone and desktop budgets in plain Node, from their shipped photos and
+  depth. Everything the build worker returns must be byte-identical to `tests/p3d-golden.json`: the
+  splats, the background layer, the Sharp view's surface and backing sheet, and the build's stats.
+  It needs no GPU and no depth model, so every machine gets the same bytes. A change to the classic
+  path fails it (checked on October 16 by widening the background fill by one pixel). Re-pinning,
+  with `node tools/p3d-golden.mjs --write`, needs the owner's yes.
+- **What it doesn't cover:** the depth model's output for a new photo (the depth specs check that),
+  the splat shader and the Sharp view's drawing on a GPU (`tests/p3d*`, `tests/psv*`, and the
+  clips), and the toy's controls.
+- **The frozen commit:** branch `claude/checkpoint-photo-3d-v1`, and the owner's tag
+  `photo-3d-classic-v1` at the same commit.
+
 ## Where the checkpoint lives
 
 | What                                   | Where                                                | Commit                                     |
@@ -47,5 +66,6 @@ model.
 
 ## Every later Photo to 3D task
 
-Compares itself against this checkpoint, sample by sample, with clips side by side, and keeps a
-change only if it is at least as good on every measure.
+Leaves classic byte-identical (the golden test) and builds its idea beside it. Anything meant to
+replace classic compares itself against it, sample by sample, with clips side by side, and replaces
+it only with the owner's yes after a blind review.
