@@ -1586,6 +1586,13 @@
       "sound": "Like the hypercube: a slow rush as it rolls out and again as it rolls home, over a low chord in its own key.",
       "improved": "Math r2: new toy (labs), the duoprism (3,4 by default; each polygon 3 to 6 sides). The corners are true 4D points turned in the planes of x and w and of y and w and seen in perspective from 4D; the edges stay straight between them. A tap rolls the shape one whole turn through the fourth dimension (about 5 s) and home. Seven color themes."
     },
+    "shape-morph": {
+      "v": "keep",
+      "owner": "Codex task 78c: port Ryan Kamp's Overprint concept as a labs toy.",
+      "effect": "Every splat flies to its place in one of six forms. Drags push nearby splats, which settle back; a tap scatters and re-forms the cloud.",
+      "sound": "A quiet, short rustle as the cloud scatters and re-forms.",
+      "improved": "Codex task 78c: Word, Lorenz attractor, Klein bottle, gyroid, loop, and QR forms in one cloud, with a smaller Auto budget on phones. The Form picker morphs from the last rendered positions, including an unfinished flight. The QR generator loads only for the QR form. Optional teal and orange inks, editable word and QR text, and spring-back drag interaction. Made by Ryan with Codex (GPT-6)."
+    },
     "one-splat": {
       "v": "keep",
       "owner": "Codex task 78a: port Ryan Kamp's One Splat concept to the math shelf behind labs.",

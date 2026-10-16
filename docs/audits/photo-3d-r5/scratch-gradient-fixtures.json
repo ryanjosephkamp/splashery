@@ -1,0 +1,18 @@
+{
+  "kind": "Independent pinned-original refiner byte comparison, with normal, blurred, random, subnormal, and edited-preparation fixtures. A private exposed and counter-instrumented copy records cache-path coverage; production candidate bytes remain unchanged.",
+  "createdUTC": "2026-10-16T10:29:14.412Z",
+  "methodSha256": "5f5be65849d7af989b7118d62aed07c07f6229036bd54d76442d451e80a79461",
+  "candidateSha256": "4f4b094ad3d5deeb5648ea81f6ebadcd7dd9fe932866b90ea583e378b2b2cee9",
+  "instrumentedModuleSha256": "222ea6c072999227776451f74f8dfaec8545ed8a4635c7a18fb495f7f1028c20",
+  "originalHelperSha256": "5ddf367278f8988f0c75bb75968be5235586839f7690cd2feea27668e1d815e9",
+  "cases": 1296,
+  "seed": 83191,
+  "allOutputBytesSha256": "cdfcc2f471a17ee75e8475b4b504d58e4071bad58732439905e2d33c03f822e0",
+  "coverage": {
+    "hits": 11165,
+    "stores": 15319,
+    "precisionFallbacks": 4849,
+    "nonInteriorFallbacks": 4504
+  },
+  "complete": true
+}

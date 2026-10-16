@@ -107,6 +107,7 @@ merges.
 | 96-playtest-small-fixes.md        | Small fixes from the October 15 playtest and walkthrough, and the manual's contents                       | small UI and export fixes, the manual                                    | no            |
 | 97-math-pickers.md                | One toy for the 4D shapes, one for the attractors; old links keep working (after #197)                    | the Math pack, an alias map, tests                                       | no            |
 | 98-release-v1.md                  | Splashery v1.0: a readiness audit of every labs toy, the fixes, then all of them public (after 91 and 96) | an audit tool and report, the toys that need fixes, tests, release notes | no            |
+| 99-photo-3d-next.md               | Photo to 3D: freeze classic, a truer yardstick, a depth bake-off, a Layered labs variant                  | a golden spec, `src/photo3d/next/`, tools, tests                         | yes           |
 
 The Codex cloud environment is set up with `tools/codex-setup.sh`; [SETUP.md](SETUP.md) has the
 steps for creating it and fixing a failed setup.

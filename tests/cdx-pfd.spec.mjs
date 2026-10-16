@@ -173,6 +173,12 @@ test("phone input, error recovery, paint, and the actual #s= link reload the nam
     .filter({ hasText: /^Paint color/ })
     .locator("select")
     .selectOption("violet");
+  // Each option change rebuilds the toy; tap a letter only once the last rebuild (violet paint) is up.
+  await page.waitForFunction(() => {
+    const p = window.__splashery.player;
+    const o = p.toyInfo?.options;
+    return o?.verb === "paint" && o.color === "violet" && !!p.motion.ctx?.kit?.data;
+  });
   await page.evaluate(() => {
     const p = window.__splashery.player;
     const data = p.motion.ctx.kit.data;

@@ -19,5 +19,12 @@ docs/codex/01-about-audit.md in this repository and do it."
   anything under `src/`, also run the Playwright tests the task names
   (`SPLASHERY_CHROMIUM=<path to Chromium> npx playwright test <files>`), and say in the PR which
   ones you ran and which you couldn't.
+- Last, before you say the task is done: merge `main` into your branch
+  (`git fetch origin main && git merge origin/main`, never rebase), then run
+  `SPLASHERY_CHROMIUM=<path to Chromium> node tools/preflight.mjs`. It runs CI's checks, a file-size
+  check, and the shelf-wide specs that new toys and layout changes break (toy counts, toy dates,
+  text options, the tilt lock, credits, the shelf, help, and taps). Fix every failure at its cause;
+  never loosen or skip a test. Say in the PR that preflight passed, or which step you couldn't run
+  and why.
 - The pull request has five sections: Summary, Verification, Deviations, Known issues, What was cut.
   Say in the Summary that Codex built it.

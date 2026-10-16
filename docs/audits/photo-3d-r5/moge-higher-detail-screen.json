@@ -1,0 +1,418 @@
+{
+  "kind": "Offline public-sample depth rebake screen and reference-depth diagnostic. No shipping asset, runtime model, rendered quality, or phone-cost change.",
+  "createdUTC": "2026-10-16T07:03:33.474Z",
+  "methodSha256": "f0fcd4e284b93af74820ee3df6e585b1f772cf6688bf47cd553125ab0827f27d",
+  "originalCoreSha256": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57",
+  "rows": [
+    {
+      "id": "truth-still-life",
+      "kind": "truth",
+      "profile": "phone",
+      "baselineExact": true,
+      "candidateSha256": "dd2717d172546f21575cd628667cea72cc7b12bf745973d97a1368785a30474c",
+      "packedCandidateSha256": "68e502cc51ff1fa11dfc83a1ed255310109006907730ae3eca7dbcf03c84dfeb",
+      "validDepthFraction": 0.7254807949066162,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 81,
+          "flipped": 13,
+          "flattened": 54,
+          "flippedFraction": 0.16049382716049382,
+          "flattenedFraction": 0.6666666666666666,
+          "fieldSha256": "07b0f338dde3701128e7457ac880b010e8cc09b7bdeafbc92155ebae30c53520"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 81,
+          "flipped": 13,
+          "flattened": 59,
+          "flippedFraction": 0.16049382716049382,
+          "flattenedFraction": 0.7283950617283951,
+          "fieldSha256": "518d77d8bff062e553c1ca776ef648d1daca91f674833b88444dcacbe33e09d8"
+        }
+      }
+    },
+    {
+      "id": "truth-still-life",
+      "kind": "truth",
+      "profile": "desktop",
+      "baselineExact": true,
+      "candidateSha256": "dd2717d172546f21575cd628667cea72cc7b12bf745973d97a1368785a30474c",
+      "packedCandidateSha256": "68e502cc51ff1fa11dfc83a1ed255310109006907730ae3eca7dbcf03c84dfeb",
+      "validDepthFraction": 0.7254807949066162,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 179,
+          "flipped": 13,
+          "flattened": 142,
+          "flippedFraction": 0.07262569832402235,
+          "flattenedFraction": 0.7932960893854749,
+          "fieldSha256": "14a45b4387841347520b5e112dcceb8af39e906ebabadd766f3153367b11bf4b"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 179,
+          "flipped": 13,
+          "flattened": 142,
+          "flippedFraction": 0.07262569832402235,
+          "flattenedFraction": 0.7932960893854749,
+          "fieldSha256": "33375602efa6917d37b6d0d9f97ad1bfdcc31b29d61b51fce86a3fc5a4623037"
+        }
+      }
+    },
+    {
+      "id": "truth-fur",
+      "kind": "truth",
+      "profile": "phone",
+      "baselineExact": true,
+      "candidateSha256": "fbee671b5d0e48e37d050748eb145fd929d8f918d83289d5201f288931707882",
+      "packedCandidateSha256": "431e86622f29fb0674bd6b1f680d4f00bad1e8d6ae1b08ab1122e506ecfc99eb",
+      "validDepthFraction": 0.7069091796875,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 272,
+          "flipped": 53,
+          "flattened": 169,
+          "flippedFraction": 0.1948529411764706,
+          "flattenedFraction": 0.6213235294117647,
+          "fieldSha256": "17003234de2ef2e898ad15ed36106a1038a9add83487acda4d53871731603668"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 272,
+          "flipped": 78,
+          "flattened": 139,
+          "flippedFraction": 0.2867647058823529,
+          "flattenedFraction": 0.5110294117647058,
+          "fieldSha256": "468179194da10b4de25e0c650c38dd6476addd225f9008b199c9bd06469ea552"
+        }
+      }
+    },
+    {
+      "id": "truth-fur",
+      "kind": "truth",
+      "profile": "desktop",
+      "baselineExact": true,
+      "candidateSha256": "fbee671b5d0e48e37d050748eb145fd929d8f918d83289d5201f288931707882",
+      "packedCandidateSha256": "431e86622f29fb0674bd6b1f680d4f00bad1e8d6ae1b08ab1122e506ecfc99eb",
+      "validDepthFraction": 0.7069091796875,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 451,
+          "flipped": 81,
+          "flattened": 303,
+          "flippedFraction": 0.17960088691796008,
+          "flattenedFraction": 0.6718403547671841,
+          "fieldSha256": "dbc8a1505f5d01c69f13355ef48fdc940d6b5d9aa07fd293201dae662a425b6b"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 451,
+          "flipped": 121,
+          "flattened": 258,
+          "flippedFraction": 0.2682926829268293,
+          "flattenedFraction": 0.5720620842572062,
+          "fieldSha256": "5de3907a035a966b5380d13872a9183fa57f3ff309971363e0f6ee0484a58ace"
+        }
+      }
+    },
+    {
+      "id": "forest",
+      "kind": "builtin",
+      "profile": "phone",
+      "baselineExact": true,
+      "candidateSha256": "6cf2e55ceca14f635298432a928aa555bd9036aa8a81b8fd02e1a66220df95fc",
+      "packedCandidateSha256": "cc858209c9754567f59b2cfd879560d8014dfad926217083d7e66b0d6370e2ee",
+      "validDepthFraction": 1,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 303,
+          "flipped": 46,
+          "flattened": 187,
+          "flippedFraction": 0.15181518151815182,
+          "flattenedFraction": 0.6171617161716172,
+          "fieldSha256": "cfd0c5ccacbce3cb395060869ba229242300fa18ee26f4c70a03b613e3b7c119"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 303,
+          "flipped": 58,
+          "flattened": 197,
+          "flippedFraction": 0.19141914191419143,
+          "flattenedFraction": 0.6501650165016502,
+          "fieldSha256": "76797bdedb920c120e7bd5c773dbb1af64fd19287733229da5b15f02a2586715"
+        }
+      }
+    },
+    {
+      "id": "forest",
+      "kind": "builtin",
+      "profile": "desktop",
+      "baselineExact": true,
+      "candidateSha256": "6cf2e55ceca14f635298432a928aa555bd9036aa8a81b8fd02e1a66220df95fc",
+      "packedCandidateSha256": "cc858209c9754567f59b2cfd879560d8014dfad926217083d7e66b0d6370e2ee",
+      "validDepthFraction": 1,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 453,
+          "flipped": 63,
+          "flattened": 314,
+          "flippedFraction": 0.1390728476821192,
+          "flattenedFraction": 0.6931567328918322,
+          "fieldSha256": "6db2e34f67bcb3d026839fd55600e10630bb6c79e2fdad451bb3d7c8b0ec9523"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 453,
+          "flipped": 85,
+          "flattened": 304,
+          "flippedFraction": 0.18763796909492272,
+          "flattenedFraction": 0.6710816777041942,
+          "fieldSha256": "935a37f1bb07b226b29159d8b19ef85309429607fa9add670f77059e43a95873"
+        }
+      }
+    },
+    {
+      "id": "wildflowers",
+      "kind": "builtin",
+      "profile": "phone",
+      "baselineExact": true,
+      "candidateSha256": "bef4cefaf56aa96a1b332b943ed1308ad047bedfcfdaa45905a74a2070ef1389",
+      "packedCandidateSha256": "885428a19883025c05df636cb6bd6c9f44971e3cc8318da84225eb0e76b89109",
+      "validDepthFraction": 0.944006621837616,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 541,
+          "flipped": 170,
+          "flattened": 244,
+          "flippedFraction": 0.3142329020332717,
+          "flattenedFraction": 0.4510166358595194,
+          "fieldSha256": "56e95a368dfda6295b1e37dd893e93a8a5e6c867cde883e9e2e2614355ae8d28"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 541,
+          "flipped": 221,
+          "flattened": 156,
+          "flippedFraction": 0.40850277264325324,
+          "flattenedFraction": 0.28835489833641403,
+          "fieldSha256": "1660670269f2dc722d7aee03461b7428e0bd7b814151bc24e6b17230f55ff1e6"
+        }
+      }
+    },
+    {
+      "id": "wildflowers",
+      "kind": "builtin",
+      "profile": "desktop",
+      "baselineExact": true,
+      "candidateSha256": "bef4cefaf56aa96a1b332b943ed1308ad047bedfcfdaa45905a74a2070ef1389",
+      "packedCandidateSha256": "885428a19883025c05df636cb6bd6c9f44971e3cc8318da84225eb0e76b89109",
+      "validDepthFraction": 0.944006621837616,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 218,
+          "flattened": 351,
+          "flippedFraction": 0.2831168831168831,
+          "flattenedFraction": 0.45584415584415583,
+          "fieldSha256": "8318bb5c6f56fe4d06740c5986b54fdd96eab344e4c382de8ebda4e18df2f312"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 299,
+          "flattened": 232,
+          "flippedFraction": 0.38831168831168833,
+          "flattenedFraction": 0.3012987012987013,
+          "fieldSha256": "78af7052517a63962ae8c1acaba22bde80e08c3735972394d56b483d94918869"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "kind": "builtin",
+      "profile": "phone",
+      "baselineExact": true,
+      "candidateSha256": "5a5ee3d3340a1f02648d131b9da039cbdc1b918fb01989b4be61550da329fc23",
+      "packedCandidateSha256": "85819903bbf9e151277fe3421f943d613b8a7500dcf5714660e53435349c1ed4",
+      "validDepthFraction": 0.9112144112586975,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 711,
+          "flipped": 246,
+          "flattened": 306,
+          "flippedFraction": 0.3459915611814346,
+          "flattenedFraction": 0.43037974683544306,
+          "fieldSha256": "26b4d9e0c598fddf31bc54d24df5449e5dda2904edab898acac1318a136ffaa9"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 711,
+          "flipped": 263,
+          "flattened": 291,
+          "flippedFraction": 0.369901547116737,
+          "flattenedFraction": 0.4092827004219409,
+          "fieldSha256": "3a9919775875b40ac1a48ef0c98816b33f78affe5328ab2425e376551dac3851"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "kind": "builtin",
+      "profile": "desktop",
+      "baselineExact": true,
+      "candidateSha256": "5a5ee3d3340a1f02648d131b9da039cbdc1b918fb01989b4be61550da329fc23",
+      "packedCandidateSha256": "85819903bbf9e151277fe3421f943d613b8a7500dcf5714660e53435349c1ed4",
+      "validDepthFraction": 0.9112144112586975,
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 967,
+          "flipped": 329,
+          "flattened": 409,
+          "flippedFraction": 0.34022750775594623,
+          "flattenedFraction": 0.42295760082730094,
+          "fieldSha256": "4fcb08f593d7489c36c26ac4db94a8b76317ee962b2509063267ea9849475ec3"
+        },
+        "moge": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 967,
+          "flipped": 339,
+          "flattened": 411,
+          "flippedFraction": 0.3505687693898656,
+          "flattenedFraction": 0.4250258531540848,
+          "fieldSha256": "0a6ba93645edc3c6cd4ee372eaafc0733fb0a137dae43a5a74ea940137223441"
+        }
+      }
+    }
+  ],
+  "references": [
+    {
+      "id": "truth-still-life",
+      "kind": "Raw model inverse-depth fit to fixed eligible optical-axis reference pixels",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.017862327568203704,
+          "shift": 0.0387217980972172,
+          "calibrationPixels": 13007,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 91050,
+        "scoredPixels": 91050,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.019206885726314064,
+        "rmseMeters": 0.3365831195305428,
+        "p95Meters": 0.5609477891399504,
+        "pairs": 2993,
+        "reversedFraction": 0.0023387905111927833,
+        "flattenedFraction": 0.0010023387905111927
+      },
+      "moge": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.36768361158054,
+          "shift": 0.0017526833907638647,
+          "calibrationPixels": 13007,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 91050,
+        "scoredPixels": 91050,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.008159193992022636,
+        "rmseMeters": 2.996811708623972,
+        "p95Meters": 0.20872253986590295,
+        "pairs": 2993,
+        "reversedFraction": 0,
+        "flattenedFraction": 0
+      },
+      "candidateSha256": "dd2717d172546f21575cd628667cea72cc7b12bf745973d97a1368785a30474c"
+    },
+    {
+      "id": "truth-fur",
+      "kind": "Raw model inverse-depth fit to fixed eligible optical-axis reference pixels",
+      "baseline": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.035219728484419836,
+          "shift": 0.061187759964882,
+          "calibrationPixels": 13423,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 94073,
+        "scoredPixels": 94073,
+        "holePixels": 0,
+        "holeFraction": 0,
+        "absRel": 0.06397036016998235,
+        "rmseMeters": 1.1290823461410937,
+        "p95Meters": 2.4580272200004476,
+        "pairs": 3426,
+        "reversedFraction": 0.01634559252772913,
+        "flattenedFraction": 0.0043782837127845885
+      },
+      "moge": {
+        "kind": "reference optical-axis depth; appearance-ambiguous pixels excluded",
+        "fit": {
+          "scale": 0.735582465441036,
+          "shift": -0.013701538777589697,
+          "calibrationPixels": 13423,
+          "split": "index % 8 == 0"
+        },
+        "fitError": null,
+        "pixels": 94073,
+        "scoredPixels": 94050,
+        "holePixels": 23,
+        "holeFraction": 0.0002444909804088314,
+        "absRel": 0.03910605308032004,
+        "rmseMeters": 2.1075767731805413,
+        "p95Meters": 1.212671212111589,
+        "pairs": 3426,
+        "reversedFraction": 0.0043782837127845885,
+        "flattenedFraction": 0.0049620548744892
+      },
+      "candidateSha256": "fbee671b5d0e48e37d050748eb145fd929d8f918d83289d5201f288931707882"
+    }
+  ],
+  "finishedUTC": "2026-10-16T07:10:26.565Z",
+  "complete": true,
+  "scope": "Bounded five-input follow-up: three built-in samples and two reference scenes, both profiles. Not a full-corpus study.",
+  "model": {
+    "name": "MoGe-2 ViT-L",
+    "codeRevision": "74fbce054ebed49800de42d0ad0e83495065719a",
+    "utilsRevision": "62f09d58509485564e24d5d9f6aac9ee9ebc0c37",
+    "weightRevision": "39c4d5e957afe587e04eec59dc2bcc3be5ecd968",
+    "weightsSha256": "3eefd4abb2102f38f12b2d1992e5ff15e4923e5431c67dd494afe157e0111cd5",
+    "weightBytes": 1305030700,
+    "weightLicense": "MIT, verified on the live model card on October 16, 2026.",
+    "source": "https://github.com/microsoft/MoGe/blob/main/README.md",
+    "codeLicense": "https://github.com/microsoft/MoGe/blob/main/LICENSE",
+    "modelCard": "https://huggingface.co/Ruicheng/moge-2-vitl/raw/main/README.md",
+    "settings": {
+      "version": 2,
+      "device": "CPU",
+      "threads": 1,
+      "tokens": 3600,
+      "precision": "FP32",
+      "maximumImageSide": 1024,
+      "seed": 0,
+      "input": "Original browser-decoded RGB, resized with Lanczos. Official masked inverse depth; invalid depth maps to zero. Bilinear resize to original model dimensions. Built-ins are packed and unpacked with the existing unsigned-16-bit format before the field screen."
+    }
+  },
+  "decision": "Cut: all six built-in input/profile rows increase order warnings, and two also increase flat warnings. Both reference RMSEs increase, with 23 newly unscored fur pixels. No model or depth asset ships.",
+  "sampleFlatRegressions": 2,
+  "sampleOrderRegressions": 6
+}

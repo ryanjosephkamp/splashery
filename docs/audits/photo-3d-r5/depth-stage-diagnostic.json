@@ -1,0 +1,45 @@
+{
+  "kind": "Complete Node per-stage diagnostic; no render/phone claim. Frozen flagged nonreference membership. Baseline builder fields reproduced exactly.",
+  "profiles": 236,
+  "flagged": 209,
+  "sourceSha256": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57",
+  "methodSha256": "808bd8e7916300058d4089f03173a6828f6ec30f3f8732e8dcb974a68aa70128",
+  "stages": {
+    "upsampled": {
+      "mean": 0.5442473921281259,
+      "reductionVsDisplayed": 0.028774221712830284,
+      "flatRegressions": 20,
+      "orderRegressions": 143
+    },
+    "edgeRefined": {
+      "mean": 0.5440012224363777,
+      "reductionVsDisplayed": 0.029213518903624336,
+      "flatRegressions": 21,
+      "orderRegressions": 145
+    },
+    "firstSmooth": {
+      "mean": 0.5453775303949543,
+      "reductionVsDisplayed": 0.02675745611386149,
+      "flatRegressions": 17,
+      "orderRegressions": 140
+    },
+    "joined": {
+      "mean": 0.5584449094701982,
+      "reductionVsDisplayed": 0.003438326622213883,
+      "flatRegressions": 48,
+      "orderRegressions": 75
+    },
+    "secondSmooth": {
+      "mean": 0.5603716502335301,
+      "reductionVsDisplayed": 0.0,
+      "flatRegressions": 0,
+      "orderRegressions": 0
+    },
+    "displayed": {
+      "mean": 0.5603716502335301,
+      "reductionVsDisplayed": 0.0,
+      "flatRegressions": 0,
+      "orderRegressions": 0
+    }
+  }
+}
