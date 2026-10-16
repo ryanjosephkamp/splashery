@@ -21,13 +21,13 @@ has hit diminishing returns, for three reasons.
 So the toy we have is frozen as "classic," and this task builds a new method beside it, in labs,
 with a better yardstick.
 
-## Part 0: freeze classic (first, small, its own commit)
+## Before you start: classic is already frozen
 
-`tests/p3d-golden.spec.mjs` (new): build the six samples at two budgets and compare SHA-256 hashes
-of the reconstruction buffers and two native Sharp frames against pinned values from the commit you
-start from. `tools/cdx-p3d4-equivalence.mjs` already computes these. From then on, any change to the
-classic path fails loudly, and re-pinning needs the owner's yes. Don't edit the classic files named
-in the checkpoint doc.
+The Operator froze classic before this task (October 16, 2026): `tests/p3d-golden.spec.mjs` rebuilds
+all 76 built-in samples and checks that everything classic's build returns is byte-identical to
+`tests/p3d-golden.json` (`docs/studio/photo-3d-checkpoint.md`, "Classic v1"). Run it first and keep
+it passing. Never edit the classic files or re-pin; if your change makes it fail, that change
+belongs in `src/photo3d/next/` instead.
 
 ## Part 1: fix the yardstick (2 hours at most)
 
@@ -82,7 +82,7 @@ Gates, all measurable:
 5. **Cost:** phone-profile median time to the first 3D view at most 25% over classic, and peak
    memory at most 150 MiB over. Software-GL differences under 10% are noise. A page the owner can
    open on his phone records one real-device run.
-6. **Classic is byte-identical** (the golden spec), every existing spec passes, and Moving photo and
+6. **Classic is byte-identical** (the golden test), every existing spec passes, and Moving photo and
    the Splat mirror are untouched.
 
 **Done** means the Layered option merged behind labs with its report and the bake-off table, or a
