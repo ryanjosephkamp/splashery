@@ -185,8 +185,8 @@
     "qr-code": {
       "kind": "kit",
       "recipeFile": "src/packs/qr.js",
-      "recipeKB": 50.8,
-      "recipeGzipKB": 16.2,
+      "recipeKB": 51.5,
+      "recipeGzipKB": 16.5,
       "sharedBy": 1
     },
     "splat-field": {

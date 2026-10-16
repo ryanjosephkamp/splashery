@@ -156,7 +156,7 @@ async function pickFile(name) {
     });
   } catch (err) {
     if (err?.name === "AbortError") return false;
-    return null;
+    throw err;
   }
 }
 
@@ -234,6 +234,7 @@ export function openPdfDialog(app) {
   );
   const save1 = el("button", { type: "submit", class: "primary", id: "pdfx-save", text: "Save PDF" }); // prettier-ignore
   const cancel = el("button", { type: "button", id: "pdfx-cancel", text: "Cancel" });
+  const status = el("p", { id: "pdfx-status", role: "status" });
   const form = el(
     "form",
     { method: "dialog" },
@@ -242,10 +243,12 @@ export function openPdfDialog(app) {
     el("label", { class: "opt" }, moving, el("b", { text: "Moving recording (desktop Firefox and Acrobat)" }), el("span", { class: "small", text: "Adds a page that plays one tap, picture by picture, with play and step buttons. It plays in desktop Firefox and Adobe Acrobat; phones and other apps show its first picture. It is a recording, not the toy: you can't turn it or tap it there." }), opts), // prettier-ignore
     el("p", {}, el("a", { href: EXPLAINER, target: "_blank", rel: "noopener", text: "Can a toy move in a PDF?" }), " What we found, with samples to try."), // prettier-ignore
     el("div", { class: "buttons" }, cancel, save1),
+    status,
   );
   dialog = el("dialog", { class: "pdfx", id: "pdfx", "aria-labelledby": "pdfx-title" }, form);
   form.querySelector("h2").id = "pdfx-title";
   document.body.append(dialog);
+  const sheet = dialog;
   const values = () => ({
     mode: moving.checked ? "moving" : "still",
     size: Number(form.querySelector("#pdfx-size").value),
@@ -276,14 +279,33 @@ export function openPdfDialog(app) {
     e.preventDefault();
     const v = values();
     const name = `splashery-${String(app.player.toyInfo?.id || "toy").replace(/[^a-z0-9-]+/gi, "-")}.pdf`; // prettier-ignore
-    const handle = await pickFile(name);
-    if (handle === false) return; // canceled in the file picker
-    dialog.close();
+    save1.disabled = cancel.disabled = true;
+    status.textContent = "Waiting for the save dialog…";
+    let handle;
+    let pickerFailed = false;
+    try {
+      handle = await pickFile(name);
+      if (handle === false) {
+        status.textContent = "Save canceled. No PDF was saved. Choose Save PDF to try again.";
+        return;
+      }
+    } catch {
+      pickerFailed = true;
+      handle = null;
+      app.ui.toast("The save dialog could not open. The PDF will download instead.", 6000);
+    } finally {
+      save1.disabled = cancel.disabled = false;
+    }
+    if (!sheet.open || !sheet.isConnected) return;
+    sheet.close();
     await app.withBusy("Making a PDF…", async (progress) => {
       const out = await makeToyPDF(app, { ...v, onProgress: progress });
       await save(out.bytes, fileName(out.entry), handle);
       const extra = out.recording ? ` with ${out.recording.frames.length} pictures` : "";
-      app.ui.toast(`PDF saved (${formatBytes(out.bytes.length)}${extra}).`);
+      const note = pickerFailed
+        ? "The save dialog could not open, so the PDF was downloaded instead. "
+        : "";
+      app.ui.toast(`${note}PDF saved (${formatBytes(out.bytes.length)}${extra}).`);
     });
   });
   dialog.addEventListener("close", () => (estToken += 1));
