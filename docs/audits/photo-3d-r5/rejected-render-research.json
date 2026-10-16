@@ -420,6 +420,258 @@
         "exactBruteForceSquaredDistances": true,
         "everyDonorEligible": true
       }
+    },
+    {
+      "name": "mask-fill-one-pixel",
+      "kind": "Bounded native WebGL-only foreground-mask research; no production, all-input, or phone-cost acceptance.",
+      "completedProfiles": 1,
+      "sourceSha256": "89281d3517301921a2fccc7a447ea95b8997a48a654ccfe58da156502bd3d06b",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input quality regressed.",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "paletteExcess",
+            "before": 0.010966693098519671,
+            "after": 0.018282867058099367
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 9,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.5743608711366746,
+              "after": 0.3844573402129342
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.5424212701455193,
+              "after": 0.024613240186019514
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.010966693098519671,
+              "after": 0.018282867058099367
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mask-fill-two-pixel",
+      "kind": "Bounded native WebGL-only foreground-mask research; no production, all-input, or phone-cost acceptance.",
+      "completedProfiles": 3,
+      "sourceSha256": "93bfacd33ebbcced92536f1ae79e6f954ce2de50bdec7ffc47c21fd7f2faff51",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input quality regressed.",
+      "stoppedEarly": {
+        "id": "dot-library",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.1848049575857746,
+            "after": 0.18740622956298816
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 7,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.5743608711366746,
+              "after": 0.5326778788809412
+            }
+          ]
+        },
+        {
+          "id": "street",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 6,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.4830079927193839,
+              "after": 0.2717855804077196
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.6343239912774521,
+              "after": 0.38386102779750164
+            }
+          ]
+        },
+        {
+          "id": "dot-library",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 7,
+          "qualityDifferences": [
+            {
+              "metric": "halos",
+              "before": 0.1848049575857746,
+              "after": 0.18740622956298816
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.05568689151419512,
+              "after": 0.055171909875983596
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mask-fill-three-pixel",
+      "kind": "Bounded native WebGL-only foreground-mask research; no production, all-input, or phone-cost acceptance.",
+      "completedProfiles": 3,
+      "sourceSha256": "cc56fb722c72b6c6e8a5ab4126aebd1a525ba0ed8fab05bc660d566d2f221a9f",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input quality regressed.",
+      "stoppedEarly": {
+        "id": "dot-library",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.1848049575857746,
+            "after": 0.1853238737510221
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 5,
+          "qualityDifferences": []
+        },
+        {
+          "id": "street",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 4,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.4830079927193839,
+              "after": 0.35966268165239984
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.6343239912774521,
+              "after": 0.5457925775662216
+            }
+          ]
+        },
+        {
+          "id": "dot-library",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 7,
+          "qualityDifferences": [
+            {
+              "metric": "halos",
+              "before": 0.1848049575857746,
+              "after": 0.1853238737510221
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.05568689151419512,
+              "after": 0.055659039467857815
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mask-fill-four-pixel",
+      "kind": "Bounded native WebGL-only foreground-mask research; no production, all-input, or phone-cost acceptance.",
+      "completedProfiles": 3,
+      "sourceSha256": "fcbd56cef4f0ba9f9068a0e751b09591bd4cd1aa577b09670f93b19f89df500a",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: no selected worst-pose quality score improved on the bounded three-input set; an extra camera, target, and texture are not qualified.",
+      "stoppedEarly": null,
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 1,
+          "qualityDifferences": []
+        },
+        {
+          "id": "street",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 1,
+          "qualityDifferences": []
+        },
+        {
+          "id": "dot-library",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 5,
+          "qualityDifferences": []
+        }
+      ]
     }
-  ]
+  ],
+  "updatedUTC": "2026-10-16T08:48:52.664Z"
 }
