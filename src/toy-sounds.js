@@ -12,14 +12,9 @@
 const TOY_PIANO_SONG = "C5 C5 G5 G5 A5 A5 G5 - F5 F5 E5 E5 D5 D5 C5";
 
 export const TOY_SOUNDS = {
-  "name-toy": {
-    voice: "bar",
-    notes: "C4 C#4 D4 D#4 E4 F4 F#4 G4 G#4 A4 A#4 B4 C5 C#5 D5 D#5 E5 F5 F#5 G5 G#5 A5 A#5 B5",
-    step: 0.041,
-    decay: 0.55,
-    vol: 0.28,
-    pickAt: 0,
-  },
+  // Lane PT1: Toy Box's xylophone bar; each letter has its own note up a
+  // major scale (src/packs/name-toy.js), and the drive plays every sound.
+  "name-toy": { voice: "bar", f: "C5", decay: 0.55, vol: 0.28 },
   // ---- Photoreal r2 (lane Photoreal r2) ----
   "heart-donut": { voice: "squish", pitch: 1.3, bright: 0.5, decay: 0.5 },
   // Photoreal r3 (the owner's review of October 3, 2026): the first sound only, as the boat rocks.
@@ -1910,7 +1905,8 @@ export const TOY_SOUNDS = {
   // Lane Manual, Sound B (his note: too robotic and loud, change entirely):
   // the quiet scratch of chalk as t plays (4 s).
   "splat-equation": { voice: "rustle", f: 2600, n: 30, decay: 2.6, bright: 0.3, vol: 0.3 },
-  "shape-morph": { voice: "rustle", f: 1400, n: 18, decay: 2.4, bright: 0.16, vol: 0.18 },
+  // Lane PT1: a clean, soft swell for the flight (no noise), easing down as the form lands.
+  "shape-morph": { voice: "pad", f: "E4", to: 0.94, decay: 0.95, vol: 0.9 },
   "one-splat": { voice: "glide", f: 420, to: 0.7, decay: 0.6, vol: 0.18 },
   // Three hushing waves, each at its loudest as a swell reaches the mouth
   // (0.7, 1.8, 2.9 s).
