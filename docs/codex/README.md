@@ -12,6 +12,12 @@ Each task works on its own `codex/<name>` branch and opens one draft pull reques
 (`AGENTS.md` has the rules). The Operator and the Claude lanes check every point before anything
 merges.
 
+**What goes to Codex** (the Operator's routing, backed by the owner on October 16, 2026): audits,
+evidence, tests, docs, and measured work on a feature that already exists, with a clear yardstick.
+New toy designs and new effects built from scratch go to Claude lanes. Over three weeks, Codex code
+PRs drew follow-up asks about 69% of the time against about 4% for the Claude lanes, and three of
+task 78's portfolio toys had to be rebuilt in Claude lanes PT1 and PT2.
+
 | File                              | Task                                                                                                      | Changes                                                                  | Needs the web |
 | --------------------------------- | --------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------- |
 | 01-about-audit.md                 | Check every toy's how-to and About text; element facts                                                    | `src/toy-help.js`, reports                                               | yes           |

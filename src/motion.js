@@ -192,8 +192,10 @@ export class MotionDriver {
     if (forced) {
       key = forced.key ?? key;
       pick = forced.pick ?? null;
-    } else if (a?.at && point) {
-      const r = a.at(point, this.state);
+    } else if ((a?.at && point) || (a?.play && !point)) {
+      // Lane PT1 (engine): action.play(c) answers the Play button (no point)
+      // the way action.at answers a tap, so Play may switch the toy too.
+      const r = point ? a.at(point, this.state) : a.play(this.state);
       if (r && typeof r === "object" && r.say) this.said = String(r.say);
       if (typeof r === "string") key = r;
       else if (r?.options) {

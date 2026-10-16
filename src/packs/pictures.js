@@ -1048,13 +1048,32 @@ function pgReset() {
 function bk5Start(F, pics) {
   const T = F.target;
   const live = () => PG.pops.includes(F) && F.phase !== "idle";
+  // Native pictures already have a usable flat card. Keep that immediate
+  // contract while classification prepares graphic cuts or photo relief.
+  if (T.photo) Object.assign(F, { kind: "photo", known: true });
   (async () => {
     let photo = T.photo;
-    if (!photo) {
-      const c = await pics.crop(T.page, T.box, 160);
-      if (!live() || !c) return;
-      photo = bk5IsPhoto(c);
-      if (!photo) F.relief = bk5Layers(c, T, F.id);
+    let detail = null;
+    if (!photo || (isLab() && pics.kind === "image")) {
+      const image = pics.kind === "image";
+      const c = await pics.crop(T.page, T.box, image ? 518 : 160);
+      if (!live()) return;
+      if (!c && !photo) {
+        Object.assign(F, { kind: "graphic", known: true, failed: true });
+        return;
+      }
+      if (image) detail = c;
+      if (c) photo = bk5IsPhoto(c);
+      if (!photo && c) {
+        // Classify cheaply, then trace graphic cutouts at the same detail as
+        // a raised photo. A tiny classification raster makes small letters
+        // and chart edges visibly blocky when the card stands up.
+        detail ||= await pics.crop(T.page, T.box, 518);
+        if (!live()) return;
+        F.relief = bk5Layers(detail || c, T, F.id);
+        F.base = 1;
+        if (!F.saved) F.depth = 1;
+      }
     }
     F.kind = photo ? "photo" : "graphic";
     // (Lane Polish: a photo found in the lab's PDF opens deeper too.)
@@ -1064,8 +1083,12 @@ function bk5Start(F, pics) {
     }
     F.known = true;
     if (!photo) return;
-    const c = await pics.crop(T.page, T.box, 518);
-    if (!live() || !c) return;
+    const c = detail || (await pics.crop(T.page, T.box, 518));
+    if (!live()) return;
+    if (!c) {
+      F.failed = true;
+      return;
+    }
     const img = c.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, c.width, c.height); // prettier-ignore
     const [{ estimateDepth }, { normalizeDepth }] = await Promise.all([import("./photo-3d-depth.js"), import("./photo-3d-core.js")]); // prettier-ignore
     const dep = await estimateDepth({ w: img.width, h: img.height, data: img.data });
@@ -1082,7 +1105,10 @@ function bk5Start(F, pics) {
     };
   })().catch((err) => {
     console.warn("Pop out:", err?.message || err);
-    if (live()) F.known = true;
+    if (live()) {
+      F.known = F.failed = true;
+      F.kind ||= T.photo ? "photo" : "graphic";
+    }
   });
 }
 
@@ -1281,7 +1307,7 @@ function pgLayer(F, i) {
   const short = (2 * Math.min(T.rect.hw, T.rect.hh)) / T.g0;
   const gap = 0.07 * short * F.depth;
   if (i === 0) return { relief: null, ready: true, gap };
-  if (!r) return { relief: null, ready: false, gap };
+  if (!r) return F.failed ? null : { relief: null, ready: false, gap };
   F.cuts ||= pgCuts(r, F.kind);
   const lo = F.cuts[i - 1];
   if (lo === undefined) return null;
@@ -1876,6 +1902,7 @@ const BOOK_RECIPE = {
   focus: bookFocus,
   drag: bk5Drag(bookDrag(BOOK_PULL)),
   pictures: {
+    solid: true,
     // The current edition of the Tinkerer's Manual (lane Manual).
     sample: () => `manual/${MANUAL_PDF}`,
     accept: ["pdf"],
@@ -1884,7 +1911,7 @@ const BOOK_RECIPE = {
   input: {
     title: "Your own book",
     media: { accept: ["pdf"] },
-    note: "Open a PDF of any length, or paste a web address to one, and page through it with a tap or the buttons. Your file stays on this device; nothing is uploaded.",
+    note: "Open a PDF of any length, or paste a web address to one, and page through it with a tap or the buttons. Hybrid pages combine sharp picture faces with splat paper. Your file stays on this device; nothing is uploaded.",
   },
   drive(t, c, out, info) {
     const st = BOOK.style;
@@ -2576,7 +2603,11 @@ const ALBUM_BOXES = (W, H) => ({
 const STORY_RECIPE = {
   ...BOOK_RECIPE,
   tiltLock: false, // (the Storybook's own default: it opens with the tilt free, UI r5)
-  pictures: { ...BOOK_RECIPE.pictures, sample: () => "assets/toys/storybook/storybook.pdf" },
+  pictures: {
+    ...BOOK_RECIPE.pictures,
+    solid: false,
+    sample: () => "assets/toys/storybook/storybook.pdf",
+  },
   input: undefined,
   polish: false, // lane Polish: none of its book changes (POL), and Pop out's pictures alone, as before
 };
@@ -2613,6 +2644,10 @@ const ALBUM_RECIPE = {
   // readily.
   drag: bk5Drag(bookDrag(ALBUM_PULL)),
   pictures: {
+    solid: true,
+    // Mounted prints already have a sharp opaque face. Their paper needs
+    // no second set of color samples behind that face during a turn.
+    backing: "paper",
     sample: () => ALBUM_SAMPLE.map((n) => `assets/toys/photo-album/${n}.jpg`),
     accept: ["image"],
     decorate: albumDecorate,
@@ -2635,7 +2670,7 @@ const ALBUM_RECIPE = {
   input: {
     title: "Your own photos",
     media: { accept: ["image"], multiple: true, button: "Open photos…" },
-    note: "Pick several photos at once (a folder's worth) and turn through them in the album. Your photos stay on this device; nothing is uploaded.",
+    note: "Pick several photos at once (a folder's worth) and turn through them in the album. Hybrid pages combine sharp picture faces with splat paper. Your photos stay on this device; nothing is uploaded.",
   },
   drive: (t, c, out, info) => BOOK_RECIPE.drive(t, c, out, info),
   build(k, o) {
@@ -3136,6 +3171,8 @@ export const RECIPES = {
     // What the toy opens before you open something of your own, and what
     // it accepts.
     pictures: {
+      solid: true,
+      prefetch: false,
       sample: (o) =>
         o.sample === "photo" ? "assets/toys/picture-lab/photo.jpg" : "assets/toys/picture-lab/article.pdf", // prettier-ignore
       accept: ["pdf", "image", "gif", "video"],
@@ -3154,7 +3191,7 @@ export const RECIPES = {
     input: {
       title: "Your own picture",
       media: { accept: ["pdf", "image", "gif", "video"] },
-      note: "Open a PDF, a photo, a GIF or a video, or paste a web address. Files stay on this device; nothing is uploaded.",
+      note: "Open a PDF, a photo, a GIF, or a video, or paste a web address. Hybrid pages combine sharp picture faces with splat paper. Files stay on this device; nothing is uploaded.",
     },
     drive(t, c, out, info) {
       const pics = info.data?.pictures;
@@ -3220,3 +3257,23 @@ export const RECIPES = {
   "photo-album": ALBUM_RECIPE,
   "picture-frame": FRAME_RECIPE,
 };
+
+// Credit this opt-in rendering contribution in the same drawer as each toy's
+// existing sample records. The neighboring frame and Storybook keep theirs.
+for (const [id, label] of [
+  ["your-book", "Your book"],
+  ["picture-lab", "Picture lab"],
+  ["photo-album", "Photo album"],
+]) {
+  RECIPES[id].credits = [
+    ...(RECIPES[id].credits || []),
+    {
+      label,
+      title: "Sharp hybrid picture faces",
+      source: "https://github.com/ryanjosephkamp/splashery/blob/main/src/picture-surface.js",
+      author: "Ryan with Codex (GPT-6)",
+      license: "MIT",
+      licenseUrl: "https://github.com/ryanjosephkamp/splashery/blob/main/LICENSE",
+    },
+  ];
+}

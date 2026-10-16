@@ -34,6 +34,13 @@
 import * as pc from "./pc.js";
 import { buildSheet } from "./picture-splats.js";
 import { safeLinkURL, clampRegion } from "./media.js";
+import {
+  PictureSurface,
+  grayPixels,
+  opaqueGray,
+  rampPixels,
+  warmPictureShaders,
+} from "./picture-surface.js";
 
 // Per device tier, for one sheet: the most splats a photo or a frame gets
 // ("pixels", and "screen" for video, whose texture uploads every frame),
@@ -64,8 +71,7 @@ let workerFailed = false;
 let nextJob = 1;
 const waiting = new Map();
 
-// Builds a sheet in the worker (or here, if workers are unavailable).
-function buildOffThread(job) {
+function pictureWorker() {
   if (!worker && !workerFailed) {
     try {
       worker = new Worker(new URL("./pictures-worker.js", import.meta.url), { type: "module" });
@@ -86,6 +92,12 @@ function buildOffThread(job) {
       workerFailed = true;
     }
   }
+  return worker;
+}
+
+// Builds a sheet in the worker (or here, if workers are unavailable).
+function buildOffThread(job) {
+  pictureWorker();
   if (!worker) return Promise.resolve(buildSheet(job));
   const id = nextJob++;
   return new Promise((resolve, reject) => {
@@ -97,10 +109,34 @@ function buildOffThread(job) {
 export class Pictures {
   // defs: the recipe's sheets (k.sheets), transform: the kit's fit
   // ({ center, scale }), spine: k.spineDef or null.
-  constructor(player, { defs, transform, spine, profile, decorate = null }) {
+  constructor(
+    player,
+    {
+      defs,
+      transform,
+      spine,
+      profile,
+      decorate = null,
+      solid = false,
+      backing = "sampled",
+      prefetch = true,
+    },
+  ) {
     this.player = player;
+    this.solid = solid;
+    this.backing = backing;
+    this.prefetch = prefetch;
     this.decorate = decorate;
     this.stage = player.stage;
+    if (solid) {
+      // Start the shared worker while the source decodes, rather than
+      // putting its module startup after the first page's rasterization.
+      pictureWorker();
+      warmPictureShaders(
+        this.stage,
+        defs.some((d) => d.leaf != null),
+      );
+    }
     this.profile = profile;
     this.budget = PICTURE_BUDGETS[profile] || PICTURE_BUDGETS.mid;
     const c = transform?.center || [0, 0, 0];
@@ -165,7 +201,8 @@ export class Pictures {
     this.gifHeldAt = null;
     this.gifLost = 0;
     this.cache.clear();
-    for (const sh of this.sheets) sh.shown = null;
+    this.prefetchKey = null;
+    for (const sh of this.sheets) sh.shown = sh.want = null;
     if (media?.kind === "video") {
       media.setMuted(!this.sound);
       this.unwatch = media.onFrame(() => {
@@ -443,13 +480,26 @@ export class Pictures {
 
   // The picture width to build at for a sheet shown `px` pixels wide.
   // (`share`: the share of the picture's width a cropped sheet shows.)
-  levelFor(sheet, aspect, px, page = 0, share = 1, method = this.methodFor(sheet)) {
+  levelFor(
+    sheet,
+    aspect,
+    px,
+    page = 0,
+    share = 1,
+    method = this.methodFor(sheet),
+    solid = this.solid,
+  ) {
     const b = this.budget;
     let cap;
     if (method === "ink") cap = b.width;
+    else if (solid && method !== "screen")
+      cap = Math.min(b.width, Math.sqrt((sheet.shown ? 4 : 1) * b.pixels * aspect));
     else cap = Math.sqrt((method === "screen" ? b.screen : b.pixels) * aspect);
     if (method !== "ink" && this.media?.size) cap = Math.min(cap, this.media.size(page).width * share); // prettier-ignore
-    const target = Math.min(cap, Math.max(64, px));
+    const target = Math.min(
+      cap,
+      Math.max(64, px * (solid && method !== "screen" && sheet.shown ? 1.5 : 1)),
+    );
     let level = LADDER.find((w) => w >= target) ?? LADDER[LADDER.length - 1];
     level = Math.min(level, Math.floor(cap));
     return Math.max(32, level);
@@ -467,6 +517,8 @@ export class Pictures {
     if (this.retiring.length) this.stage.requestRender(200);
     const m = this.media;
     const now = performance.now();
+    const covered =
+      this.solid && this.player?.toyInfo?.id === "photo-album" && out?.parts?.cover?.angle === 0;
     for (const sh of this.sheets) {
       const o = out?.sheets?.[sh.def.id];
       const page = o?.page ?? this.page;
@@ -475,8 +527,10 @@ export class Pictures {
       // A hidden sheet asked for `ahead` is built all the same (after the
       // ones on show) and stays hidden, ready for when it shows (lane Books).
       sh.hidden = !(vis > 0);
+      sh.occluded = covered;
       const has = m && page >= 0 && page < count && (vis > 0 || !!o?.ahead);
       if (sh.slot) sh.slot.entity.enabled = !!has && !!sh.shown && !sh.hidden;
+      sh.slot?.surface?.show(!!has && !!sh.shown && !sh.hidden && !sh.occluded);
       if (!has) {
         sh.want = null;
         continue;
@@ -508,10 +562,30 @@ export class Pictures {
       if (same && settled) {
         const r = level / shown.level;
         // Rebuild when the view is much closer (sharper) or much further
-        // (splats would fall under a pixel).
-        if (r > 1.3 || r < 0.6) useLevel = level;
+        // (splats would fall under a pixel). A supersampled solid page can
+        // reach its final cap in a smaller step; keep that detail available
+        // when zooming instead of waiting for an impossible larger step.
+        const atCap =
+          this.solid && r > 1 && level === this.levelFor(sh, aspect, Infinity, page, cw, method);
+        if (r > 1.3 || r < 0.6 || atCap) useLevel = level;
       }
       if (!same) useLevel = level;
+      // Show the first face instead of discarding it whenever an opening
+      // camera glide crosses another detail step. Once installed, ordinary
+      // settled-view upgrades replace it with the full requested detail.
+      if (
+        this.solid &&
+        !shown &&
+        sh.want?.page === page &&
+        sh.want.method === method &&
+        sh.want.variant === variant &&
+        !sh.want.crop &&
+        !crop &&
+        !sh.want.relief &&
+        !relief &&
+        sh.failed !== sh.want.key
+      )
+        useLevel = sh.want.level;
       // Frames keep coming while a new level waits to settle.
       if (level !== (shown?.level ?? 0) && same) this.stage.requestRender(300);
       // (The key is unchanged for a plain sheet.)
@@ -589,6 +663,7 @@ export class Pictures {
     // Prefetch the page after the first sheet's (PDFs only).
     const first = this.sheets[0];
     if (
+      this.prefetch !== false &&
       this.media.kind === "pdf" &&
       first?.want &&
       !first.want.crop &&
@@ -599,7 +674,13 @@ export class Pictures {
       const p = first.want.page + this.sheets.length;
       if (p < this.media.count) {
         const w = { ...first.want, page: p, key: `${p}|${first.want.level}|${first.want.method}|${this.order}` }; // prettier-ignore
-        if (!this.cache.has(this.cacheKey(w))) this.build(first, w);
+        const key = this.cacheKey(w);
+        // A prefetch can be evicted immediately while installed leaves fill
+        // the cache. Do not render that same discarded page on every frame.
+        if (!this.cache.has(key) && this.prefetchKey !== key) {
+          this.prefetchKey = key;
+          this.build(first, w);
+        }
       }
     }
   }
@@ -618,7 +699,15 @@ export class Pictures {
       let w = want.level;
       let h = Math.max(8, Math.round(w / aspect));
       const t0 = performance.now();
-      let canvas = want.method === "screen" ? null : await media.draw(want.page, w, h);
+      // A decoded still is synchronous. Start its paper worker before
+      // this frame submits GPU work, rather than yielding the entire
+      // render frame before posting an already available raster.
+      let canvas =
+        want.method === "screen"
+          ? null
+          : this.solid && media.drawNow
+            ? media.drawNow(want.page, w, h)
+            : await media.draw(want.page, w, h);
       if (this.destroyed || media !== this.media) return null;
       // The page may have turned out another shape once reached.
       const a2 = media.aspect(want.page);
@@ -630,11 +719,66 @@ export class Pictures {
       if (this.destroyed || media !== this.media) return null;
       this.decorateCanvas(canvas, sheet, want.page, media, want.variant, links);
       const t1 = performance.now();
-      const pixels = canvas
-        ? canvas.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w, h).data
+      const solid = this.solid && want.method !== "screen";
+      const native = solid && want.method === "pixels";
+      const sparse = native && this.backing !== "paper" && this.profile !== "low";
+      // The sharp face can use more source pixels without increasing the
+      // Gaussian backing's original pixel budget.
+      const bw = sparse
+        ? Math.min(w, Math.floor(Math.sqrt(this.budget.pixels * 0.5 * media.aspect(want.page))))
+        : solid
+          ? 128
+          : w;
+      const bh = bw === w ? h : Math.max(8, Math.round(bw / media.aspect(want.page)));
+      let backing = canvas;
+      if (canvas && bw !== w) {
+        backing = document.createElement("canvas");
+        backing.width = bw;
+        backing.height = bh;
+        backing.getContext("2d", { willReadFrequently: true }).drawImage(canvas, 0, 0, bw, bh);
+      }
+      const pixels = backing
+        ? backing.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, bw, bh).data
         : null;
-      const geom = this.geometry(sheet, media.aspect(want.page), w, h);
-      let data = await buildOffThread({ pixels, w, h, method: want.method, ...geom });
+      const monochrome =
+        solid && (opaqueGray(pixels) || (want.method === "ink" && !!rampPixels(pixels, false)));
+      const geom = this.geometry(sheet, media.aspect(want.page), bw, bh);
+      let surface = null;
+      if (solid) {
+        const face = this.geometry(sheet, media.aspect(want.page), w, h);
+        // Preserve the original image plane even when only coarse paper
+        // remains beneath it. The sampled path must also clear its detail.
+        const original = this.levelFor(
+          sheet,
+          aspect,
+          this.screenWidth(sheet, aspect),
+          want.page,
+          1,
+          want.method,
+          false,
+        );
+        const imagePitch = (Math.hypot(...face.right) * w) / original;
+        face.lift =
+          Math.max(sparse ? Math.hypot(...geom.right) * 6 : 0, imagePitch * 6) +
+          Math.hypot(...face.right) * 0.3;
+        surface = { source: canvas, geom: face, w, h };
+      }
+      // The worker owns a separate pixel buffer. Compact the face while it
+      // builds the paper, rather than putting both jobs on the loading path.
+      let [data] = await Promise.all([
+        buildOffThread({
+          pixels,
+          w: bw,
+          h: bh,
+          method: want.method,
+          backingOnly: solid && !sparse,
+          sparse,
+          ...geom,
+        }),
+        Promise.resolve().then(() => this.compactSurface({ surface }, monochrome, solid)),
+      ]);
+      if (solid && backing !== canvas) backing.width = backing.height = 1;
+      if (surface) data.surface = surface;
       // A page with more ink than the budget is built again, smaller.
       if (want.method === "ink" && data.count > this.budget.ink && canvas) {
         const f = Math.sqrt(this.budget.ink / data.count) * 0.95;
@@ -653,6 +797,8 @@ export class Pictures {
       data.h = h;
       data.drawMs = t1 - t0;
       data.totalMs = performance.now() - t0;
+      if (native)
+        data.resolutionKey = `${sheet.i}|${want.page}|${want.method}|${this.order}|${want.variant || ""}`;
       this.stats.builds++;
       this.stats.lastMs = data.totalMs;
       this.stats.lastCount = data.count;
@@ -668,6 +814,29 @@ export class Pictures {
       this.busy = false;
       this.stage.requestRender();
     }
+  }
+
+  // Check the full raster before compacting; a reduced backing can miss a
+  // tiny colored mark. Grayscale is exact; a color ramp must reproduce every
+  // source channel within one 8-bit step. Other pixels keep their full raster.
+  compactSurface(data, candidate, rawColor = false) {
+    const face = data.surface;
+    if (!face || (!candidate && !rawColor)) return;
+    const c = face.source;
+    const rgba = c.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, c.width, c.height).data; // prettier-ignore
+    const mono = candidate ? grayPixels(rgba) : null;
+    const ramp = candidate && !mono ? rampPixels(rgba) : null;
+    if (!mono && !ramp && !rawColor) return;
+    face.pixels =
+      mono || ramp?.pixels || new Uint8Array(rgba.buffer, rgba.byteOffset, rgba.byteLength);
+    face.channels = mono || ramp ? 1 : 4;
+    if (ramp) {
+      face.low = ramp.low;
+      face.high = ramp.high;
+    }
+    face.sourceBytes = face.pixels.byteLength;
+    face.source = null;
+    c.width = c.height = 1;
   }
 
   // Lane Books: the recipe's pictures.decorate(canvas, { page, name, sheet,
@@ -698,11 +867,14 @@ export class Pictures {
     if (this.destroyed || media !== this.media) return null;
     const t1 = performance.now();
     const pixels = canvas.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, w, h).data; // prettier-ignore
+    const monochrome = this.solid && opaqueGray(pixels);
     const geom = this.geometry(sheet, media.aspect(want.page), w, h, r);
     const rel = want.relief;
     const relief = rel ? { w: rel.w, h: rel.h, d: Float32Array.from(rel.d), amount: (rel.depth || 0) * this.fitScale, nearest: !!rel.nearest, keep: Array.isArray(rel.keep) ? rel.keep.slice(0, 2) : null } : null; // prettier-ignore
-    const data = await buildOffThread({ pixels, w, h, method: want.method, relief, ...geom }); // prettier-ignore
+    const data = await buildOffThread({ pixels, w, h, method: want.method, relief, backingOnly: this.solid, ...geom }); // prettier-ignore
+    if (this.solid) data.surface = { source: canvas, geom, w, h, relief };
     if (this.destroyed || media !== this.media) return null;
+    this.compactSurface(data, monochrome);
     data.w = w;
     data.h = h;
     data.drawMs = t1 - t0;
@@ -717,16 +889,33 @@ export class Pictures {
   // Keeps built pages up to about 600,000 splats (68 bytes each, about
   // 40 MB), or one sheet's budget if that is more; the oldest go first.
   remember(key, data) {
+    // A single native image needs its latest detail, rather than duplicate
+    // Gaussian buffers for every step crossed during the opening glide.
+    if (data.resolutionKey)
+      for (const [oldKey, old] of this.cache)
+        if (old.resolutionKey === data.resolutionKey) this.cache.delete(oldKey);
     this.cache.delete(key);
     this.cache.set(key, data);
     const limit = Math.max(600e3, this.budget.ink);
     let total = 0;
-    for (const d of this.cache.values()) total += d.count;
+    let bytes = 0;
+    const cost = (d) =>
+      Object.values(d)
+        .filter(ArrayBuffer.isView)
+        .reduce((n, a) => n + a.byteLength, 0) +
+      (d.surface
+        ? (d.surface.sourceBytes ?? d.w * d.h * 4) + (d.surface.relief?.d?.byteLength || 0)
+        : 0);
+    for (const d of this.cache.values()) {
+      total += d.count;
+      bytes += cost(d);
+    }
     for (const [k, d] of this.cache) {
-      if (total <= limit || this.cache.size <= 1) break;
+      if ((total <= limit && bytes <= limit * 68) || this.cache.size <= 1) break;
       if (this.sheets.some((sh) => sh.shown?.data === d)) continue;
       this.cache.delete(k);
       total -= d.count;
+      bytes -= cost(d);
     }
   }
 
@@ -759,17 +948,19 @@ export class Pictures {
     const st = this.stage;
     if (!st.toy) return;
     let slot = sheet.slot;
+    const previous = slot;
     if (!slot || slot.container.maxSplats < data.count) {
       // The old sheet stays on show for a few frames: a new container
       // draws nothing until the engine has sorted it.
       if (slot) this.retiring.push({ slot, frames: 6 });
       // Room for pages with more ink than this one (text pages vary by
       // about a quarter), so paging through a book keeps one container.
-      const cap = Math.ceil(data.count * 1.5);
+      const cap = Math.max(1, Math.ceil(data.count * 1.5));
       slot = st.addSheet(this.player.pictureContainer(cap));
       if (!slot) return;
       sheet.slot = slot;
     }
+    st.setSheetFaceLayer?.(slot, !!data.surface);
     const ct = slot.container;
     const put = (name, arr) => {
       const t = ct.getTexture(name);
@@ -791,6 +982,15 @@ export class Pictures {
     ct.update(data.count, true);
     sheet.shown = { ...want, data, w: data.w, h: data.h };
     slot.entity.enabled = !sheet.hidden;
+    slot.surface?.destroy();
+    slot.surface = data.surface ? new PictureSurface(st, slot, data.surface) : null;
+    slot.surface?.show(!sheet.hidden && !sheet.occluded);
+    // A continuous face is ready without the splat sort. Retire its old
+    // picture immediately, so two resolutions or pages never overlap.
+    if (data.surface && previous && previous !== slot) {
+      previous.entity.enabled = false;
+      previous.surface?.show(false);
+    }
     // A page on a leaf or a part arrives sorted in its built pose: sort it
     // where it stands (Player.resortPose, lane Books).
     if (sheet.def.leaf !== null || sheet.def.part) this.player.poseStale = true;

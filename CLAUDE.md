@@ -60,7 +60,9 @@ with a hand-back rule. These ground rules are the full set for Claude sessions; 
 - Fonts (the owner's "fonts OK" of October 15, 2026): the Pitch page (`site/about/splashery/`) may
   use a web font under the SIL Open Font License or another open license: subset woff2 files
   vendored beside the page, loaded only by it with a system-font fallback, and listed in
-  `LICENSES.md` and `CREDITS.md`. The rest of the site keeps system fonts.
+  `LICENSES.md` and `CREDITS.md`. The "Your name in splats" toy may use Fredoka (SIL OFL) on the
+  same terms, loaded only when that toy opens (the owner's OK of October 16, 2026). The rest of the
+  site keeps system fonts.
 - Live input (approved September 30, 2026): a toy asks for the microphone, the camera or screen
   capture only when the person taps to start it. Nothing is requested or loaded before that, and
   nothing is recorded, stored or sent anywhere. One exception (the owner's request of October 4,
@@ -160,7 +162,9 @@ new or changed effect against them before calling it done.
   - Run `node tools/check-packs.mjs <pack>`.
   - Review a contact sheet made with `tools/contact-sheet.mjs`.
   - Re-render thumbnails with `tools/make-thumbs.mjs`.
-  - The tools expect `python3 -m http.server 4173 --bind 127.0.0.1` to be running.
+  - The tools expect a static server on 4173: `node tools/cdx-mp2-server.mjs 4173`, the one
+    Playwright starts. It serves byte ranges, which the Moving photo specs need and
+    `python3 -m http.server` lacks.
 - Take screenshots at 390×844 and 1440×900 and save them in `tests/screenshots/`. A lane names its
   own `<prefix>-<name>-390x844.png` and `…-1440x900.png`, and after the full test run puts the
   standard screenshots back with `node tools/upkeep.mjs --restore-shots` (the Operator refreshes

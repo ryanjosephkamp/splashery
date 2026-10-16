@@ -290,6 +290,11 @@
                   >Photo to 3D round 3 test tools (not shipped)</a
                 >
               </li>
+              <li>
+                <a href="#video-to-3d-real-clip-benchmark-tools-task-88-not-shipped"
+                  >Video to 3D real-clip benchmark tools (task 88, not shipped)</a
+                >
+              </li>
             </ul>
           </li>
         </ul>
@@ -3248,6 +3253,17 @@
             never uploaded.
           </p>
           <p>
+            The sharp hybrid page faces, shared book and album rendering, and task 95 benchmark
+            tools are made by Ryan with Codex (GPT-6), October 15, 2026. The code is MIT. Original
+            benchmark text, charts, diagrams, and comparison recording contributions are CC0. The
+            photo input reuses the credited Picture frame sample. These pages retain splat paper and
+            bindings beneath continuous picture surfaces.
+          </p>
+          <p>
+            The red PDF regression fixture is original CC0, made by Ryan with Codex (GPT-6), October
+            16, 2026.
+          </p>
+          <p>
             The Storybook is &quot;The Little Lamp Who Wanted to See the Sea&quot;
             (<code>assets/toys/storybook/storybook.pdf</code>, lane Hands-on H3): our own story and
             drawings, written for Splashery and printed with Chromium by
@@ -3406,7 +3422,8 @@
               >).
             </li>
             <li>
-              &quot;Elephants Dream&quot; (5:29.7 to 5:35.7), © Blender Foundation,
+              &quot;Elephants Dream&quot; (5:29.7 to 5:35.7), © 2006 Blender Foundation /
+              Netherlands Media Art Institute / www.elephantsdream.org,
               <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noopener"
                 >CC BY 2.5</a
               >, from the download on download.blender.org (<a
@@ -3417,6 +3434,85 @@
               >).
             </li>
           </ul>
+          <p>
+            Task 38 adds explicitly picked longer films at 24 frames per second, with their own
+            sound:
+          </p>
+          <ul>
+            <li>
+              Big Buck Bunny, 1:44.5 to 2:14.5, © Blender Foundation (<a
+                href="https://archive.org/details/BigBuckBunny_328"
+                target="_blank"
+                rel="noopener"
+                >Internet Archive source</a
+              >,
+              <a
+                href="https://creativecommons.org/licenses/by/3.0/us/"
+                target="_blank"
+                rel="noopener"
+                >CC BY 3.0 US</a
+              >).
+            </li>
+            <li>
+              Sintel, 2:15 to 2:45, © Blender Foundation (<a
+                href="https://archive.org/details/Sintel"
+                target="_blank"
+                rel="noopener"
+                >Internet Archive source</a
+              >,
+              <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener"
+                >CC BY 3.0</a
+              >).
+            </li>
+            <li>
+              Elephants Dream, 5:29.7 to 5:59.7, © 2006 Blender Foundation / Netherlands Media Art
+              Institute / www.elephantsdream.org (<a
+                href="https://orange.blender.org/blog/creative-commons-license-2/"
+                target="_blank"
+                rel="noopener"
+                >film's copyright notice</a
+              >,
+              <a href="https://creativecommons.org/licenses/by/2.5/" target="_blank" rel="noopener"
+                >CC BY 2.5</a
+              >,
+              <a href="https://archive.org/details/ElephantsDream" target="_blank" rel="noopener"
+                >Internet Archive download</a
+              >). This matches the short sample's license; the film's own notice takes precedence
+              over the archive's 3.0 US descriptor.
+            </li>
+            <li>
+              Tears of Steel, a 27-second city and robot montage, © Blender Foundation (<a
+                href="https://archive.org/details/Tears-of-Steel"
+                target="_blank"
+                rel="noopener"
+                >Internet Archive source</a
+              >,
+              <a href="https://creativecommons.org/licenses/by/3.0/" target="_blank" rel="noopener"
+                >CC BY 3.0</a
+              >). The selected spans are 1:10 to 1:16, 1:30 to 1:32, 1:36 to 1:38, 1:43 to 1:45,
+              8:41 to 8:48, and 9:40 to 9:48; identifiable live-action faces and modern firearms are
+              excluded.
+            </li>
+          </ul>
+          <p>
+            The live archive pages' declared licenses were checked on October 12, 2026. The original
+            Blender project pages initially returned HTTP 403 here; Elephants Dream's own copyright
+            page was reachable on recheck and confirms CC BY 2.5 for the film, including its sound.
+            Each cut and its derived depth retain its source's CC BY license. The files are
+            <code>assets/toys/moving-photo-3d/{bunny,sintel,elephants,tears}-long.webm</code> and
+            <code>-long.mp2depth</code>: VP9 and Opus video, and a depth byte cache, estimated on
+            all 720 playback frames (648 for Tears of Steel), aligned, filtered, and stabilized
+            offline with the vendored depth model. <code>tools/cdx-mp2-samples.mjs</code> makes
+            them; byte counts, individual SHA-256 hashes, sources, and modifications are in
+            <code>tools/assets.json</code>.
+          </p>
+          <p>
+            The original procedural 60 fps measurement fixture (<code>cdx-mp2-fast-60.webm</code>,
+            two seconds at 320 by 180, generated by FFmpeg's testsrc2 filter) is CC0, made by Ryan
+            with Codex (GPT-6). It is used by tests and has no shelf entry or automatic fetch. The
+            code and build tools for tasks 38 and 48 are made by Ryan with Codex (GPT-6), offered
+            under Splashery's MIT license.
+          </p>
           <p>
             The Gaussian splatting toy (a labs toy, lane Screens) learns the photo &quot;Strawberry
             on white background&quot; by Joselodos (<a
@@ -4233,6 +4329,13 @@
             <code>codex/video-3d-r3-clips</code> branch; earlier task 40 media remains on
             <code>codex/video-3d-r2-clips</code>. Their source licenses and hashes are recorded
             beside them; the audit links to that evidence.
+          </p>
+          <p>
+            Video to 3D real-clip work for task 88 was made by Ryan with Codex (GPT-6), under MIT.
+            Its 20-source manifest is <code>tools/v3d-corpus.json</code>; footage, derived models,
+            screenshots, license receipts, and comparison clips live only on
+            <code>codex/video-3d-r4-clips</code>. Each derivative retains its source's license and
+            attribution beside the asset. The task-88 audit records measurements.
           </p>
           <p>
             The camera path and the splats are worked out on the device by
@@ -8762,6 +8865,34 @@
             The crop controls, finder geometry, and scan-study tools are made by Ryan with Codex
             (GPT-6) under Splashery's MIT license.
           </p>
+          <p>
+            The clip playback, geometry accelerator, and measurement code are made by Ryan with
+            Codex (GPT-6), under Splashery's MIT license. The original C source and its build
+            command accompany the small compiled geometry module; no compiler or third-party runtime
+            is served with it.
+          </p>
+          <p>
+            The four long-film depth caches were rebuilt with the original film frames by
+            <code>tools/cdx-mp2-r4-bake.mjs</code> on October 16, 2026. The rebuild uses the
+            existing upload refinement's color-gated half-second depth window. The original video
+            files are unchanged, and these derived depth caches keep each film's CC BY license and
+            Blender Foundation attribution listed above.
+          </p>
+          <p>
+            The five <code>cdx-mp2-r4-*</code> measurement clips (blocks, gate, wheel, orbit, and
+            fast motion) are original CC0 1.0 assets, made by Ryan with Codex (GPT-6). They contain
+            procedural rigid geometry and an original test tone, with no external footage, people,
+            or marks. Each is two seconds at 256 by 144; the fast clip runs at 60 frames per second.
+            MP4, WebM, MOV, and GIF files exercise the local-file path.
+            <a
+              href="https://github.com/ryanjosephkamp/splashery/blob/main/tools/cdx-mp2-r4-inputs.mjs"
+              target="_blank"
+              rel="noopener"
+              >The generator</a
+            >
+            is MIT, and each file's hash, size, and source record is in
+            <code>tools/assets.json</code>. These fixtures have no shelf entry or automatic fetch.
+          </p>
         </div>
       </section>
       <section class="md-file" aria-label="Third-party licenses">
@@ -8982,7 +9113,7 @@ OR OTHER DEALINGS IN THE SOFTWARE.</code></pre>
               <a href="https://github.com/arrival-space/splat.js" target="_blank" rel="noopener"
                 >https://github.com/arrival-space/splat.js</a
               >, commit <code>88efe9aaf32279b0b9bcb781ea0deb4d60c49dff</code> (September 23, 2026;
-              package version 0.1.0). Files in <code>vendor/splatjs/src/</code>: the 20 modules that
+              package version 0.1.0). Files in <code>vendor/splatjs/src/</code>: the modules that
               <code>session.js</code> and its two workers reach (structure from motion, the WebGPU
               trainer, frame decoding and the PLY writer), unchanged except for the local changes
               below; the list and what was left out are in <code>vendor/splatjs/VERSION.md</code>.
@@ -9005,9 +9136,9 @@ OR OTHER DEALINGS IN THE SOFTWARE.</code></pre>
               hardcoded <code>trainer.iter &gt; 1500</code> check with
               <code>trainer.iter &gt; (this.opts.refineStart ?? 1500)</code> so a build tool can
               refine a short run explicitly. Omitted or null values retain the original 1,500-step
-              threshold; <code>src/video3d/run.js</code> does not pass this option, so browser
-              training keeps the upstream schedule. The vendor edit is isolated in commit
-              <code>ffcc71cc</code>. The MIT notice is retained.
+              threshold. Task 88's browser integration now passes a threshold that fits each tier's
+              budget. The original vendor edit is isolated in commit <code>ffcc71cc</code>. The MIT
+              notice is retained.
             </li>
             <li>
               Local change by Codex for task 55 (October 13, 2026):
@@ -9017,6 +9148,17 @@ OR OTHER DEALINGS IN THE SOFTWARE.</code></pre>
               iteration counter continued advancing. The offline tool requests the nine storage
               bindings this pass needs and rejects GPU validation errors. The browser toy still uses
               the original MSE training default. The MIT notice is retained.
+            </li>
+            <li>
+              Local changes by Codex for task 88 (October 15, 2026): a session owns its outstanding
+              worker, frame-decoder, and GPU resources through disposal. An abort-safe worker queue
+              terminates both feature and pair workers on cancellation or error. The optional
+              <code>seedLimit</code> reserves room for appended surface samples without increasing
+              the requested seed count or changing default Gaussian parameters. Trainer buffers are
+              released separately from a host-owned GPU device. The last training batch is limited
+              to the remaining iteration budget. <code>vendor/splatjs/VERSION.md</code> records the
+              patched files. The upstream MIT notice is retained; original task 88 code is offered
+              under this repository's MIT license.
             </li>
           </ul>
           <h3 id="codex-cpu-gaussian-fitter-task-55-build-only">
@@ -9759,6 +9901,101 @@ subject to the following conditions:
               >: H.264 video encoding with libx264 and checks of frame counts, duration, and
               dimensions. No executable is served. These are build tools allowed by Rules v1; the
               original rendered output is CC0.
+            </li>
+          </ul>
+          <h3 id="video-to-3d-real-clip-benchmark-tools-task-88-not-shipped">
+            Video to 3D real-clip benchmark tools (task 88, not shipped)
+          </h3>
+          <p>
+            The benchmark reuses the Playwright, PNG.js, Chromium, FFmpeg, and Xvfb test tools
+            listed above. No executable, test font, or browser distribution is copied into the site
+            or review media. The corpus manifest records each source's own license; trained models
+            and review clips retain it.
+          </p>
+          <ul>
+            <li>
+              Node.js 22.15.0 (MIT and the bundled third-party notices),
+              <a
+                href="https://raw.githubusercontent.com/nodejs/node/v22.15.0/LICENSE"
+                target="_blank"
+                rel="noopener"
+                >https://raw.githubusercontent.com/nodejs/node/v22.15.0/LICENSE</a
+              >: a temporary pinned runtime for the existing regression suite. The benchmark itself
+              records its actual Node.js version.
+            </li>
+            <li>
+              Chrome for Testing 141.0.7390.37,
+              <a
+                href="https://developer.chrome.com/blog/chrome-for-testing"
+                target="_blank"
+                rel="noopener"
+                >https://developer.chrome.com/blog/chrome-for-testing</a
+              >: a temporary browser pin for existing regression tests. Its
+              <code>ABOUT</code> notice identifies Google Chrome, Copyright 2025 Google LLC, and the
+              Chromium project and third-party credits. Its distribution's terms are
+              <a href="https://www.google.com/chrome/terms/" target="_blank" rel="noopener"
+                >https://www.google.com/chrome/terms/</a
+              >; it is not redistributed here.
+            </li>
+            <li>
+              Inter 4.1 (SIL Open Font License 1.1),
+              <a
+                href="https://raw.githubusercontent.com/rsms/inter/v4.1/LICENSE.txt"
+                target="_blank"
+                rel="noopener"
+                >https://raw.githubusercontent.com/rsms/inter/v4.1/LICENSE.txt</a
+              >: an environment-only font pin for the existing PDF and code-scanning checks. The
+              font and its notices stay in the test workspace.
+            </li>
+          </ul>
+          <p>
+            The linked notices were opened on October 15, 2026, and retained with the test evidence.
+            The original surface initializer, benchmark, and resource tests are offered under this
+            repository's MIT license. No new third-party browser library was added.
+          </p>
+          <ul>
+            <li>
+              Node.js 22.14.0 (<a
+                href="https://github.com/nodejs/node/blob/v22.14.0/LICENSE"
+                target="_blank"
+                rel="noopener"
+                >MIT and bundled notices</a
+              >): the temporary test runtime matches CI's Node 22 major version. The official Linux
+              archive was checked against its published SHA-256. The initial full run used the
+              environment's Node 24.19.0; final isolated whole-file rechecks use Node 22. No Node
+              executable is served.
+            </li>
+            <li>
+              Zig 0.14.1 (<a
+                href="https://raw.githubusercontent.com/ziglang/zig/0.14.1/LICENSE"
+                target="_blank"
+                rel="noopener"
+                >MIT</a
+              >) and its bundled Clang compiler (<a
+                href="https://llvm.org/LICENSE.txt"
+                target="_blank"
+                rel="noopener"
+                >LLVM license</a
+              >): compile the original <code>tools/cdx-mp2-geometry.c</code> to a freestanding
+              WebAssembly module. The module imports no runtime or library. The compiler is not
+              served.
+              <a href="https://ziglang.org/documentation/0.14.1/" target="_blank" rel="noopener"
+                >Build documentation</a
+              >.
+            </li>
+            <li>
+              FFmpeg / ffprobe 7.1.5-0+deb13u1: the existing build tool listed above encodes the
+              five original test clips and review films. No executable is served.
+            </li>
+            <li>
+              Xvfb 21.1.16 (<a
+                href="https://www.x.org/releases/current/doc/xorg-docs/License.html"
+                target="_blank"
+                rel="noopener"
+                >X.Org licenses</a
+              >): a virtual display for real Chromium verification with Mesa's software renderer.
+              The installed X.Org copyright file identifies the canonical X11/MIT form. No X server
+              is served with the site.
             </li>
           </ul>
         </div>
