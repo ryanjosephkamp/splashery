@@ -1,0 +1,110 @@
+[
+  {
+    "input": "session/heldout-real-case.mjs",
+    "file": "session/heldout-real-case.mjs.gz",
+    "originalSha256": "54017f14910091046668aaf08d1f4a6a1cc5f4331909e433a59c963ba053734b",
+    "storedSha256": "fe610be473b5c849f1a276de15d9f3035759403d986896c3e062b003e332b15d"
+  },
+  {
+    "input": "session/heldout-real-case.json",
+    "file": "session/heldout-real-case.json.gz",
+    "originalSha256": "97d0d98637c8c8805dd5ac8aeee2021f5a1665d31d32640560c60217dfbe1b9b",
+    "storedSha256": "c79ae98094c12d1dfcaedbe02a62866dcf06138a566689aca753eeb8d2ed87cc"
+  },
+  {
+    "input": "session/r4-failed-cat-track-model.json.gz",
+    "file": "session/r4-failed-cat-track-model.json.gz",
+    "originalSha256": "7814dbc71901a6df1b1b719dd8dfa6b103defa55c22c7a7609704d6effe16ff8",
+    "storedSha256": "7814dbc71901a6df1b1b719dd8dfa6b103defa55c22c7a7609704d6effe16ff8"
+  },
+  {
+    "input": "session/locked-affinity-proof.mjs",
+    "file": "session/locked-affinity-proof.mjs.gz",
+    "originalSha256": "4412ebae7503f6c84484957a30b58bc84760b0ab56123db7dc0127188c0fa782",
+    "storedSha256": "cef3aba7ed86438275b228fa00dfc3c928d6f4757ef9c5309e1d7427649c92df"
+  },
+  {
+    "input": "session/locked-affinity-proof.json",
+    "file": "session/locked-affinity-proof.json.gz",
+    "originalSha256": "4f5433d5203c6cd6e34f5121593521219e262f877438a8c9751d132903081485",
+    "storedSha256": "f71a0d16e1c4f57e152c28168f6368fda3534071f1ee1827675804ab0b863e78"
+  },
+  {
+    "input": "session/locked-affinity-proof.log",
+    "file": "session/locked-affinity-proof.log.gz",
+    "originalSha256": "a39c985084a17f48ca4f5df7cc2078e871e4b6d360ae1c24c08d495bfc6786ad",
+    "storedSha256": "0bea37032ab5e90493b69ad46517cf13efa9f1df7e84c8d3fb4fa1f43187dad6"
+  },
+  {
+    "input": "session/affinity-negative-control.json",
+    "file": "session/affinity-negative-control.json.gz",
+    "originalSha256": "c4fb12c4233a9736b303a6942fe3df33cb26674c19a964723e4be7305d004e75",
+    "storedSha256": "f5fac654f9f8425a2213e7aa64becf57f3106e6aac055225ffcfab511fabda10"
+  },
+  {
+    "input": "session/locked-chromium-capability.log",
+    "file": "session/locked-chromium-capability.log.gz",
+    "originalSha256": "9fb6b211996717ec074bd2b79845e44f1b01e1d22900c1a7ecf1f4aea0888926",
+    "storedSha256": "b3d0bdcc8a676b9feaad8e07cfdbab8264d561df98f98dd6a680f5788b2e31e2"
+  },
+  {
+    "input": "session/decoder-rate-repeats.log",
+    "file": "session/decoder-rate-repeats.log.gz",
+    "originalSha256": "42c8b5d696287ebddf17ee9abfb03bd6a09e56988a361d5b87b20fbbe9139588",
+    "storedSha256": "dd0fb0a5c476e9cd7e6eac71b03df0f5466188a1f3ca805baeb6f46fe7fc535f"
+  },
+  {
+    "input": "session/bench-integration-v4.log",
+    "file": "session/bench-integration-v4.log.gz",
+    "originalSha256": "e2ef806131a935d4aef56723f99da988a5b123a82e2a7670e4b84f15dd17b83d",
+    "storedSha256": "1dbe61f641daacfa26483b47ad1f8201bbe81d392a0bd39180743ebc3a1900f8"
+  },
+  {
+    "input": "session/prettier-v4-freeze.log",
+    "file": "session/prettier-v4-freeze.log.gz",
+    "originalSha256": "17aa973d3f004560237d9a95171210b0671deff23d61628eecf7322ff5938f20",
+    "storedSha256": "6cd316ae8e81df0ff79776205007450fac3d62e1ba8e884e169e326d7955ebe5"
+  },
+  {
+    "input": "session/english-v4-freeze.log",
+    "file": "session/english-v4-freeze.log.gz",
+    "originalSha256": "38612f157baf6f8ead6d43ed039c4e598ab5f1db63b7331cc69db54c1683586a",
+    "storedSha256": "35aea67878dc920980cc7ea47d3b77b1b171064aa0dc79ed781a2dc17ed3d394"
+  },
+  {
+    "input": "session/v3-closed.json",
+    "file": "session/v3-closed.json.gz",
+    "originalSha256": "ac4b4451e76411d1193496c67fb72ea9748716af8c1705bb9a4c4ba0896fc508",
+    "storedSha256": "147a9c8402a2e624ffb78b5a04e129d54f13736a2ef4688b98b6958720244ca4"
+  },
+  {
+    "input": "session/collection-pause.json",
+    "file": "session/collection-pause.json.gz",
+    "originalSha256": "b81b5970a2c32a78f09917a95a4b68891c424c458db0c3696a216c7715227fe7",
+    "storedSha256": "6fa50d6baa7f9e41e152abe9a1b3c615729b0123b9d7b20cbf0fcb3dfde60892"
+  },
+  {
+    "input": "session/desktop-inherited-affinity.json",
+    "file": "session/desktop-inherited-affinity.json.gz",
+    "originalSha256": "8f06816547a9f70164e28ecbb72a79294e5cbb48ae6c34a6d2de2e19ca1c8b7e",
+    "storedSha256": "01698df6cad76149029429ab1dedc3b28824cfa3ede38ff1228728d35558c00a"
+  },
+  {
+    "input": "v4/session/collect.py",
+    "file": "v4/session/collect.py.gz",
+    "originalSha256": "d5c2093be9bbf1acb5ce93356006ef93c5c8bbd8f1b7f6d509295c55e3cb3414",
+    "storedSha256": "f159da46c3b0ffa0e54212976a70cd458417d98ae611072deab3300f77bd093b"
+  },
+  {
+    "input": "v4/session/cpu-lanes.json",
+    "file": "v4/session/cpu-lanes.json.gz",
+    "originalSha256": "1ef2747aa05fdd589b7d07a6c58f3a499d4b13b078d43a7eb22a34cd1e7174da",
+    "storedSha256": "1fab1757186521f6f1668df51272aaf1c426bf19de07b3602093437b51707f94"
+  },
+  {
+    "input": "v4/session/freeze.json",
+    "file": "v4/session/freeze.json.gz",
+    "originalSha256": "b9fc2778b4e4f826f0c2d4bdc24bef5748ef17698584a180bf7707290b70a412",
+    "storedSha256": "bd4bd300040e4bcc14f9b1c323f8179ec29c12cf8933ecd37717f360c460a1ad"
+  }
+]
