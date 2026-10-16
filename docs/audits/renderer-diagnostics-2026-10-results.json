@@ -1,0 +1,1955 @@
+{
+  "task": 71,
+  "branch": "codex/renderer-diagnostics",
+  "date": "2026-10-14",
+  "implementation": "reconstructed from the repository brief",
+  "environment": {
+    "platform": "Linux x86_64",
+    "execution": "selected cloud environment",
+    "browser": "Chromium 151.0.7922.173",
+    "browser_workers": 1,
+    "chromium_sandbox": true,
+    "graphics_override_arguments": [],
+    "phone_hardware_tested": false,
+    "native_webgpu_rendering_tested": false
+  },
+  "verified_source_sha256": {
+    "src/pc.js": "328df9b7cb43d3cccb4c37cfd046a526f3b030c91518218f388cf29e0f93e14d",
+    "src/player.js": "9ec9aa0da965da33278a174fc6813efd3678803852ff55b0e92b03bf6337e5c7",
+    "src/renderer-diagnostics.js": "a75136971ba171fc495bc3f734666750c892aea31602ef27c30972df866d3d20",
+    "src/renderer-fallback.js": "da9dafe6536faa4c2d643beab7ea537974e6b74b2167dfdaf24998f9ed9894ff",
+    "src/app.js": "4fd4b8a3a0c494341132541a1fbd46ada9fdcf0b412423d00d38d1bf239627ae",
+    "src/embed.js": "d0f42449138a4c5ab36d0d8aa153e36ac09b51b901bf9c0aba33a99e2cc5d631",
+    "tests/cdx-renderer-diag.config.mjs": "e76194ad087cc36e3acc2292296f4943ecf6e2161728b5e8794811b2e4153172",
+    "tests/cdx-renderer-diag.spec.mjs": "dd2f55d2548e1b1acc32daddcd7e586f37692702fecb9bf05d13f121c0b0028c"
+  },
+  "runs": [
+    {
+      "name": "initial diagnostics",
+      "passed": 13,
+      "failed": 1,
+      "duration": "15.3s",
+      "failure": "new test accessed embed console hook before it was published"
+    },
+    {
+      "name": "corrected diagnostics before security-default cleanup",
+      "passed": 14,
+      "failed": 0,
+      "duration": "19.5s"
+    },
+    {
+      "name": "interrupted regression before security-default cleanup",
+      "passed": 3,
+      "failed": 2,
+      "interrupted": 1,
+      "did_not_run": 153,
+      "duration": "1.6m"
+    },
+    {
+      "name": "diagnostics after security-default cleanup",
+      "passed": 14,
+      "failed": 0,
+      "duration": "16.0s"
+    },
+    {
+      "name": "bounded regression",
+      "source_checkpoint": "33e6164678c588442a13a9e3d57046fad0606e62",
+      "passed": 22,
+      "failed": 10,
+      "interrupted": 1,
+      "did_not_run": 126,
+      "duration": "13.8m",
+      "stopped_reason": "ten failures; preserve failures and continue independent checks",
+      "failure_categories": {
+        "console warnings": 9,
+        "null bounding box in desktop help capture": 1
+      }
+    },
+    {
+      "name": "expanded diagnostics",
+      "passed": 16,
+      "failed": 0,
+      "duration": "24.8s"
+    },
+    {
+      "name": "unit, taps, and transfer",
+      "passed": 83,
+      "failed": 0,
+      "duration": "1.3m",
+      "by_spec": {
+        "unit": 20,
+        "taps": 62,
+        "smoke_transfer": 1
+      },
+      "embed_transfer_mib_rounded": 9.2
+    },
+    {
+      "name": "final diagnostics with direct canvas bitmap assertions",
+      "passed": 16,
+      "failed": 0,
+      "duration": "25.2s"
+    },
+    {
+      "name": "review diagnostics",
+      "source_checkpoint": "d36a656819cbde9b470f4a164ea23a0473cd24c7",
+      "passed": 18,
+      "failed": 0,
+      "duration_seconds": 34.32200999999999
+    },
+    {
+      "name": "review initial smoke and help attempt",
+      "source_checkpoint": "d36a656819cbde9b470f4a164ea23a0473cd24c7",
+      "passed": 13,
+      "failed": 29,
+      "not_completed": 22,
+      "final_summary_available": false,
+      "note": "Execution session ended without its final reporter summary. Outcomes were recovered from per-case list output and preserved traces. Continuation batches completed all remaining cases."
+    },
+    {
+      "name": "review selection setup",
+      "matched_cases": 0,
+      "cli_exit_code": 1,
+      "note": "Full titles used the display separator, which did not match the runner grep format. Leaf-title selection corrected; no assertion changed."
+    },
+    {
+      "name": "review smoke-batch1",
+      "passed": 7,
+      "failed": 4,
+      "skipped": 0,
+      "flaky": 0,
+      "duration_seconds": 418.09466,
+      "source_checkpoint": "d36a656819cbde9b470f4a164ea23a0473cd24c7"
+    },
+    {
+      "name": "review smoke-batch2",
+      "passed": 7,
+      "failed": 3,
+      "skipped": 1,
+      "flaky": 0,
+      "duration_seconds": 497.920162,
+      "source_checkpoint": "d36a656819cbde9b470f4a164ea23a0473cd24c7"
+    },
+    {
+      "name": "review unit-taps",
+      "passed": 82,
+      "failed": 0,
+      "skipped": 0,
+      "flaky": 0,
+      "duration_seconds": 61.161364999999996,
+      "source_checkpoint": "d36a656819cbde9b470f4a164ea23a0473cd24c7"
+    },
+    {
+      "name": "review main-current",
+      "passed": 1,
+      "failed": 8,
+      "skipped": 1,
+      "flaky": 0,
+      "duration_seconds": 463.24057700000003,
+      "source_checkpoint": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e"
+    },
+    {
+      "name": "review main-original",
+      "passed": 0,
+      "failed": 2,
+      "skipped": 0,
+      "flaky": 0,
+      "duration_seconds": 50.342974000000005,
+      "source_checkpoint": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492"
+    },
+    {
+      "name": "review help-alone",
+      "passed": 0,
+      "failed": 3,
+      "skipped": 0,
+      "flaky": 0,
+      "duration_seconds": 79.978265,
+      "source_checkpoint": "d36a656819cbde9b470f4a164ea23a0473cd24c7"
+    }
+  ],
+  "coverage": {
+    "diagnostics": {
+      "passed": 18,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0,
+      "did_not_run": 0
+    },
+    "unit": {
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0,
+      "did_not_run": 0
+    },
+    "taps": {
+      "passed": 62,
+      "failed": 0,
+      "skipped": 0,
+      "interrupted": 0,
+      "did_not_run": 0
+    },
+    "help": {
+      "passed": 9,
+      "failed": 5,
+      "skipped": 0,
+      "interrupted": 0,
+      "did_not_run": 0
+    },
+    "smoke": {
+      "passed": 18,
+      "failed": 31,
+      "skipped": 1,
+      "interrupted": 0,
+      "did_not_run": 0
+    }
+  },
+  "total_distinct_cases": {
+    "passed": 127,
+    "failed": 36,
+    "skipped": 1,
+    "interrupted": 0,
+    "did_not_run": 0
+  },
+  "limitations": [
+    "The full repository suite is unrun.",
+    "Native WebGPU rendering and phone hardware are unverified; the WebGPU smoke case skipped for no adapter.",
+    "The five-pixel help-line/status overlap was not reproduced in the task viewport; its origin remains unresolved.",
+    "The stale color text after reset was observed on the task branch; the main control stopped earlier at its transient confirmation label.",
+    "Performance, memory, and frame rate were not measured."
+  ],
+  "artifact_storage": "Failure logs, traces, and screenshots are preserved in the ignored .cache/renderer-diagnostics directory.",
+  "rule_check": "none",
+  "failures": [
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a shows on a pick, fades, and '?' brings it back",
+      "status": "failed",
+      "duration": "47.0s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a shows after a refresh and from a link, old links included",
+      "status": "failed",
+      "duration": "2.3m",
+      "category": "help-line visibility timeout",
+      "error_summary": "Error: expect(locator).toBeVisible() failed\n\nLocator:  locator('#help-line')\nExpected: visible\nReceived: hidden\nTimeout:  60000ms"
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a a saved scene (JSON) still loads and shows its toy's line",
+      "status": "failed",
+      "duration": "19.8s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "the line stays clear of the toy at 390x844",
+      "status": "failed",
+      "duration": "1.3m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "the line stays clear of the toy at 1440x900",
+      "status": "failed",
+      "duration": "1.2m",
+      "category": "help-line visibility timeout",
+      "error_summary": "Error: expect(locator).toBeVisible() failed\n\nLocator:  locator('#help-line')\nExpected: visible\nReceived: hidden\nTimeout:  60000ms"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a loads with no console errors and shows the shelf",
+      "status": "failed",
+      "duration": "1.5m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the shelf filters by category and search, and Surprise me picks a toy",
+      "status": "failed",
+      "duration": "44.1s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a generating a procedural toy changes canvas pixels",
+      "status": "failed",
+      "duration": "30.5s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a toggling an effect changes canvas pixels",
+      "status": "failed",
+      "duration": "52.2s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a paint and poke tools change the toy where it is touched",
+      "status": "failed",
+      "duration": "56.0s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a clay adds and erases blobs on a generated toy and survives a JSON round trip",
+      "status": "failed",
+      "duration": "1.9m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a JSON export then import round-trips the scene",
+      "status": "failed",
+      "duration": "47.2s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the embed page loads a scene from the hash",
+      "status": "failed",
+      "duration": "1.6m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the <splashery-toy> element renders without an iframe",
+      "status": "failed",
+      "duration": "39.3s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a bring-your-own PLY, SPLAT, SPZ and SOG files load in the browser",
+      "status": "failed",
+      "duration": "1.5m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a PNG, GIF and WebM exports produce files",
+      "status": "failed",
+      "duration": "42.9s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a desktop screenshot at 1440x900",
+      "status": "failed",
+      "duration": "32.5s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a kit toy loads from its pack, and its action and a tap open and close it",
+      "status": "failed",
+      "duration": "40.3s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a kit toy can change shape: the red blood cell curls into a sickle (morph)",
+      "status": "failed",
+      "duration": "30.8s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a toys move by themselves once motion is on, and any toy can bounce",
+      "status": "failed",
+      "duration": "1.2m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a patterns and flags recolour any toy and travel in the link",
+      "status": "failed",
+      "duration": "1.3m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a an old version 2 share link still opens",
+      "status": "failed",
+      "duration": "5.7s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a tap plays the toy's own sound, and a toggle plays its on and off halves",
+      "status": "failed",
+      "duration": "50.6s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a scan rig moves a part of a captured toy: the cat statue turns its head",
+      "status": "failed",
+      "duration": "23.6s",
+      "category": "pixel-change assertion",
+      "error_summary": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 1500\nReceived:   0"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+      "status": "failed",
+      "duration": "38.4s",
+      "category": "pixel-change assertion",
+      "error_summary": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 3000\nReceived:   0"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a the chess set plays the Opera Game, and the laptop types what you type",
+      "status": "failed",
+      "duration": "1.1m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a stretchy toy stretches when dragged and springs back; a drag off it orbits",
+      "status": "failed",
+      "duration": "1.2m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a v3 screenshots at 1440x900 and 390x844",
+      "status": "failed",
+      "duration": "21.6s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a an embedded kit toy opens when tapped",
+      "status": "failed",
+      "duration": "22.4s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a the Toy tab has the essentials, and Reset everything takes a toy back to how it started",
+      "status": "failed",
+      "duration_ms": 131976,
+      "category": "reset text assertion",
+      "error_summary": "Error: expect(locator).not.toContainText(expected) failed\n\nLocator: locator('#toy-status')\nExpected substring: not \"colors of\"\nReceived string: \"Jelly blob \u00b7 60k splats \u00b7 in the colors of France\"\nTimeout: 60000ms"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a flag colours lie gently over the chess board, and stay with the toy they were chosen on",
+      "status": "failed",
+      "duration_ms": 36879,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a the chess game bar plays, pauses, steps and jumps, and a tap after the end starts again",
+      "status": "failed",
+      "duration_ms": 70704,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sports balls (WebGL2) \u203a a ball in a country's colours keeps its seams",
+      "status": "failed",
+      "duration_ms": 69074,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a has no horizontal overflow at 390px and the sheet opens",
+      "status": "failed",
+      "duration_ms": 111703,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a dragging the shelf up opens a grid, and picking a toy folds it back",
+      "status": "failed",
+      "duration_ms": 156905,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a a panel opened while a toy from the grid is still loading stays open",
+      "status": "failed",
+      "duration_ms": 47651,
+      "category": "software WebGL/readback console warnings"
+    }
+  ],
+  "unrun_smoke_titles": [],
+  "interrupted_smoke_title": null,
+  "initial_reconstruction_checkpoint": {
+    "base_sha": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
+    "verified_source_sha256": {
+      "src/pc.js": "328df9b7cb43d3cccb4c37cfd046a526f3b030c91518218f388cf29e0f93e14d",
+      "src/player.js": "9ec9aa0da965da33278a174fc6813efd3678803852ff55b0e92b03bf6337e5c7",
+      "src/renderer-diagnostics.js": "d12f65c7194e2bdd91b97e098f89ac0dc2ae327ac3e457d1a917f908a14c4901",
+      "src/app.js": "c386093e5901bab0cff6bbcfa884cd92b828aaa07e149d85802447ef2f3c693b",
+      "src/embed.js": "1f15602548704a6884cf003e1c16f3c713cdde9635eda897e8afff2b2cbd5742",
+      "tests/cdx-renderer-diag.config.mjs": "e76194ad087cc36e3acc2292296f4943ecf6e2161728b5e8794811b2e4153172",
+      "tests/cdx-renderer-diag.spec.mjs": "c1b5d208e145ab2e150588852e208b915ca4e4fb4b1b1eff38f729b954c82854"
+    },
+    "coverage": {
+      "diagnostics": {
+        "passed": 16
+      },
+      "unit": {
+        "passed": 20
+      },
+      "taps": {
+        "passed": 62
+      },
+      "kit": {
+        "passed": 10
+      },
+      "hta": {
+        "passed": 3
+      },
+      "help": {
+        "passed": 9,
+        "failed": 5
+      },
+      "smoke": {
+        "passed": 1,
+        "failed": 5,
+        "interrupted": 1,
+        "did_not_run": 43
+      }
+    },
+    "total_distinct_cases": {
+      "passed": 121,
+      "failed": 10,
+      "interrupted": 1,
+      "did_not_run": 43
+    },
+    "limitations": [
+      "43 smoke cases and the full repository suite are unrun.",
+      "One smoke case was interrupted.",
+      "Native WebGPU rendering and phone hardware are unverified.",
+      "The five-pixel help-line/status overlap was not reproduced at 390x844 in this cloud viewport; its origin remains unresolved.",
+      "Performance, memory, and frame rate were not measured."
+    ],
+    "failures": [
+      {
+        "spec": "help.spec.mjs",
+        "title": "toy help: the line \u203a shows on a pick, fades, and '?' brings it back",
+        "category": "console warnings from software WebGL/readback"
+      },
+      {
+        "spec": "help.spec.mjs",
+        "title": "toy help: the line \u203a shows after a refresh and from a link, old links included",
+        "category": "console warnings from software WebGL/readback"
+      },
+      {
+        "spec": "help.spec.mjs",
+        "title": "toy help: the line \u203a a saved scene (JSON) still loads and shows its toy's line",
+        "category": "console warnings from software WebGL/readback"
+      },
+      {
+        "spec": "help.spec.mjs",
+        "title": "the line stays clear of the toy at 390x844",
+        "category": "console warnings from software WebGL/readback"
+      },
+      {
+        "spec": "help.spec.mjs",
+        "title": "the line stays clear of the toy at 1440x900",
+        "category": "null bounding box in desktop help capture"
+      },
+      {
+        "spec": "smoke.spec.mjs",
+        "title": "Splashery app (WebGL2) \u203a loads with no console errors and shows the shelf",
+        "category": "console warnings from software WebGL/readback"
+      },
+      {
+        "spec": "smoke.spec.mjs",
+        "title": "Splashery app (WebGL2) \u203a the shelf filters by category and search, and Surprise me picks a toy",
+        "category": "console warnings from software WebGL/readback"
+      },
+      {
+        "spec": "smoke.spec.mjs",
+        "title": "Splashery app (WebGL2) \u203a generating a procedural toy changes canvas pixels",
+        "category": "console warnings from software WebGL/readback"
+      },
+      {
+        "spec": "smoke.spec.mjs",
+        "title": "Splashery app (WebGL2) \u203a toggling an effect changes canvas pixels",
+        "category": "console warnings from software WebGL/readback"
+      },
+      {
+        "spec": "smoke.spec.mjs",
+        "title": "Splashery app (WebGL2) \u203a paint and poke tools change the toy where it is touched",
+        "category": "console warnings from software WebGL/readback"
+      }
+    ],
+    "unrun_smoke_titles": [
+      "Settings panel (WebGL2) \u203a flag colours lie gently over the chess board, and stay with the toy they were chosen on",
+      "Settings panel (WebGL2) \u203a the Toy tab has the essentials, and Reset everything takes a toy back to how it started",
+      "Settings panel (WebGL2) \u203a the chess game bar plays, pauses, steps and jumps, and a tap after the end starts again",
+      "Settings panel (WebGL2) \u203a the panel and the shelf can be made bigger on a wide screen",
+      "Sharpness and embeds (WebGL2) \u203a Detail: High raises the tier, stays in this browser and stays out of links",
+      "Sharpness and embeds (WebGL2) \u203a a shelf thumbnail that fails is fetched once more, then shows a plain tile",
+      "Sharpness and embeds (WebGL2) \u203a a transparent embed stays transparent on a dark-mode page",
+      "Sharpness and embeds (WebGL2) \u203a embeds frame the toy closer, take ?zoom= and zoom with buttons and the wheel",
+      "Sharpness and embeds (WebGL2) \u203a the canvas renders at 1.5x on a 3x screen at the low tier",
+      "Sharpness and embeds (WebGL2) \u203a the canvas renders at 2x on a 2x screen at the high tier",
+      "Sharpness and embeds (WebGL2) \u203a the canvas renders at 2x on a 3x screen at the mid tier with ?sharp=0",
+      "Sharpness and embeds (WebGL2) \u203a the canvas renders at 3x on a 3x screen at the max tier",
+      "Sharpness and embeds (WebGL2) \u203a the canvas renders at 3x on a 3x screen at the mid tier",
+      "Sharpness and embeds (WebGL2) \u203a the embed snippet is responsive and has a size picker",
+      "Splashery app (WebGL2) \u203a JSON export then import round-trips the scene",
+      "Splashery app (WebGL2) \u203a PNG, GIF and WebM exports produce files",
+      "Splashery app (WebGL2) \u203a bring-your-own PLY, SPLAT, SPZ and SOG files load in the browser",
+      "Splashery app (WebGL2) \u203a desktop screenshot at 1440x900",
+      "Splashery app (WebGL2) \u203a shows a friendly poster when no GPU renderer is available",
+      "Splashery app (WebGL2) \u203a the <splashery-toy> element renders without an iframe",
+      "Splashery app (WebGL2) \u203a the embed page loads a scene from the hash",
+      "Splashery on WebGPU \u203a auto picks WebGPU when an adapter exists and effects render",
+      "Splashery on a phone \u203a a panel opened while a toy from the grid is still loading stays open",
+      "Splashery on a phone \u203a dragging the shelf up opens a grid, and picking a toy folds it back",
+      "Splashery on a phone \u203a has no horizontal overflow at 360px",
+      "Splashery on a phone \u203a has no horizontal overflow at 390px and the sheet opens",
+      "Splashery on a phone \u203a the Make pane explains where to find your own splat",
+      "Splashery v3 engine (WebGL2) \u203a a kit toy can change shape: the red blood cell curls into a sickle (morph)",
+      "Splashery v3 engine (WebGL2) \u203a a kit toy loads from its pack, and its action and a tap open and close it",
+      "Splashery v3 engine (WebGL2) \u203a a scan rig moves a part of a captured toy: the cat statue turns its head",
+      "Splashery v3 engine (WebGL2) \u203a a stretchy toy stretches when dragged and springs back; a drag off it orbits",
+      "Splashery v3 engine (WebGL2) \u203a a tap plays the toy's own sound, and a toggle plays its on and off halves",
+      "Splashery v3 engine (WebGL2) \u203a an embedded kit toy opens when tapped",
+      "Splashery v3 engine (WebGL2) \u203a an old version 2 share link still opens",
+      "Splashery v3 engine (WebGL2) \u203a every toy's sound renders: audible, not clipping, under five seconds",
+      "Splashery v3 engine (WebGL2) \u203a patterns and flags recolour any toy and travel in the link",
+      "Splashery v3 engine (WebGL2) \u203a rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+      "Splashery v3 engine (WebGL2) \u203a the chess set plays the Opera Game, and the laptop types what you type",
+      "Splashery v3 engine (WebGL2) \u203a the sound switch remembers its choice",
+      "Splashery v3 engine (WebGL2) \u203a toys move by themselves once motion is on, and any toy can bounce",
+      "Splashery v3 engine (WebGL2) \u203a v3 screenshots at 1440x900 and 390x844",
+      "Sports balls (WebGL2) \u203a a ball in a country's colours keeps its seams",
+      "Sports balls (WebGL2) \u203a ball screenshots at 1440x900 and 390x844"
+    ],
+    "interrupted_smoke_title": "Splashery app (WebGL2) \u203a clay adds and erases blobs on a generated toy and survives a JSON round trip"
+  },
+  "review_source_checkpoint": "d36a656819cbde9b470f4a164ea23a0473cd24c7",
+  "review_main_base_sha": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e",
+  "review_completed_cases": [
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "an unobserved device call preserves promises, absent devices, and synchronous errors (unit)",
+      "status": "passed",
+      "duration_ms": 21,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "normal Worlds and toy Stage starts pass through pc.js without diagnostics",
+      "status": "passed",
+      "duration_ms": 1148,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "the device boundary preserves options, error identity, and nested causes (unit)",
+      "status": "passed",
+      "duration_ms": 8,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "observation adds no probes and overlapping players restore shared methods (unit)",
+      "status": "passed",
+      "duration_ms": 10,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "locked APIs and circular causes are reported without changing capabilities (unit)",
+      "status": "passed",
+      "duration_ms": 5,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "ticks, empty renders, and data loading cannot announce a first toy frame (unit)",
+      "status": "passed",
+      "duration_ms": 5,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "forced-off fallback has a poster and a readable local report at 390x844",
+      "status": "passed",
+      "duration_ms": 1591,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "forced-off fallback has a poster and a readable local report at 1440x900",
+      "status": "passed",
+      "duration_ms": 1596,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "no WebGPU API and no WebGL2 context retain the actual device error",
+      "status": "passed",
+      "duration_ms": 1210,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "an exposed WebGPU API returning no adapter is not described as working",
+      "status": "passed",
+      "duration_ms": 1283,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "an adapter rejection retains its cause while WebGL2 is tried",
+      "status": "passed",
+      "duration_ms": 1280,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "a thrown context error keeps both exception layers and renders as text",
+      "status": "passed",
+      "duration_ms": 1273,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "a rejected WebGPU device retains its cause when real WebGL2 succeeds",
+      "status": "passed",
+      "duration_ms": 5074,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "a non-GPU initialization error stays distinct from device capability",
+      "status": "passed",
+      "duration_ms": 1703,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "the embed fallback has separate states and its own report",
+      "status": "passed",
+      "duration_ms": 1131,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "copying a report stays local, and clipboard denial selects it for manual copy",
+      "status": "passed",
+      "duration_ms": 1775,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "app smoke requires an initialized backend and an actual toy frame with pixels",
+      "status": "passed",
+      "duration_ms": 6936,
+      "category": null
+    },
+    {
+      "file": "cdx-renderer-diag.spec.mjs",
+      "title": "embed smoke requires an initialized backend and an actual toy frame with pixels",
+      "status": "passed",
+      "duration_ms": 5553,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every finished kit toy has its own tap: a pulse or a toggle",
+      "status": "passed",
+      "duration_ms": 1705,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every exception names a kit toy and a check, with a reason",
+      "status": "passed",
+      "duration_ms": 34,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every shapes-torus toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 67,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every photoreal-r3 toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 2323,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every balls toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 569,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every anatomy toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 361,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every elements toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 384,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every objects toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 542,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every space toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 794,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every space-r2 toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 7400,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every powers-of-ten toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 22,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every space-r4 toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 270,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every tiny toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 918,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every tiny-r2 toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 360,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every atoms toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 220,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every lattices toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 180,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every molecule-viewer toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 57,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every chemistry toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 92,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every real-elements toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 185,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every gems toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 321,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every anatomy-atlas toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 354,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every nature toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 1114,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every food toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 1955,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every playthings toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 556,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every games toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 67,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every maths toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 1282,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every splat-equation toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 134,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every pictures toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 119,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every real-objects toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 969,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every medieval toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 590,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every animals toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 498,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every holidays toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 301,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every music toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 347,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every pianos toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 402,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every vehicles toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 638,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every landmarks toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 636,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every computing toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 781,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every splatting toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 92,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every computing-history toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 415,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every studio toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 1309,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every live toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 6184,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every studio-models toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 142,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every qr toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 300,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every qr-lab toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 805,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every qr-craft toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 1400,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every photo-3d toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 654,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every video3d toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 301,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every sound-lab toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 381,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every viewers toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 3838,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every volume-viewer toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 259,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every lab toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 17,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every light-lab toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 20,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every baked-demo toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 97,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every science toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 1251,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every optics toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 427,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every fluid-lab toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 31,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every geo toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 2667,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every imaging toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 689,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every screens toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 170,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every arcade toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 338,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every night-sky toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 174,
+      "category": null
+    },
+    {
+      "file": "taps.spec.mjs",
+      "title": "every data-climate toy's tap ends where the toy rests",
+      "status": "passed",
+      "duration_ms": 202,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "a default scene normalises to itself",
+      "status": "passed",
+      "duration_ms": 6,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "normalizeScene clamps garbage and refuses non-scenes",
+      "status": "passed",
+      "duration_ms": 18,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "the link codec round-trips a scene through deflate and base64url",
+      "status": "passed",
+      "duration_ms": 6,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "generators are deterministic, finite and stay inside the unit ball",
+      "status": "passed",
+      "duration_ms": 1711,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "the low tier stays bounded and the tiers grow in order",
+      "status": "passed",
+      "duration_ms": 9,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "every shelf toy has its own sound, and no two share the exact same spec",
+      "status": "passed",
+      "duration_ms": 14,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "twins sound different: they use different voices",
+      "status": "passed",
+      "duration_ms": 4,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "old sound names still work, and specs are checked",
+      "status": "passed",
+      "duration_ms": 15,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "embeds never load the sound code",
+      "status": "passed",
+      "duration_ms": 7,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "a tap knows where it landed: a xylophone bar strikes that bar",
+      "status": "passed",
+      "duration_ms": 10,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "every rig fits the rig limits and names real parts, keys and effects",
+      "status": "passed",
+      "duration_ms": 85,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "a rig's effects and part glow reach the modifier's uniforms",
+      "status": "passed",
+      "duration_ms": 11,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "the chess set plays the real Opera Game (Paris, 1858) to its final position",
+      "status": "passed",
+      "duration_ms": 5,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "the chess rules count every legal move (perft) from tricky positions",
+      "status": "passed",
+      "duration_ms": 579,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "a PGN game is read move by move: tags, comments, variations, castling, en passant, promotion",
+      "status": "passed",
+      "duration_ms": 32,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "the chess set plays a loaded game: spares rise for a promotion, the en passant pawn leaves",
+      "status": "passed",
+      "duration_ms": 15,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "a turning planet shows only the copy within a quarter turn of how it was built",
+      "status": "passed",
+      "duration_ms": 357,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "a heated molecule moves each atom on its own, along its bonds",
+      "status": "passed",
+      "duration_ms": 28,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "the Moon landing is hidden at rest, lands, and leaves nothing behind",
+      "status": "passed",
+      "duration_ms": 13,
+      "category": null
+    },
+    {
+      "file": "unit.spec.mjs",
+      "title": "a morph splat packs the offset to its target; band, fade and skin pack their channel",
+      "status": "passed",
+      "duration_ms": 4149,
+      "category": null
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the list \u203a every toy gets a non-empty how-to line and a short one",
+      "status": "passed",
+      "duration": "14.4s",
+      "category": null
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the list \u203a every entry names a shelf toy and has plain, checked text",
+      "status": "passed",
+      "duration": "1.8s",
+      "category": null
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the list \u203a toy-help.js is never a static import of the page",
+      "status": "passed",
+      "duration": "76ms",
+      "category": null
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a shows on a pick, fades, and '?' brings it back",
+      "status": "failed",
+      "duration": "47.0s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a shows after a refresh and from a link, old links included",
+      "status": "failed",
+      "duration": "2.3m",
+      "category": "help-line visibility timeout",
+      "error_summary": "Error: expect(locator).toBeVisible() failed\n\nLocator:  locator('#help-line')\nExpected: visible\nReceived: hidden\nTimeout:  60000ms"
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a a saved scene (JSON) still loads and shows its toy's line",
+      "status": "failed",
+      "duration": "19.8s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a an automated browser without ?help=show gets only the '?' button",
+      "status": "passed",
+      "duration": "4.5s",
+      "category": null
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a loads its text after the first paint",
+      "status": "passed",
+      "duration": "4.2s",
+      "category": null
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a respects reduced motion: no fade, still shown and hidden",
+      "status": "passed",
+      "duration": "10.6s",
+      "category": null
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: the line \u203a the embed shows no line",
+      "status": "passed",
+      "duration": "15.6s",
+      "category": null
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "the line stays clear of the toy at 390x844",
+      "status": "failed",
+      "duration": "1.3m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "the line stays clear of the toy at 1440x900",
+      "status": "failed",
+      "duration": "1.2m",
+      "category": "help-line visibility timeout",
+      "error_summary": "Error: expect(locator).toBeVisible() failed\n\nLocator:  locator('#help-line')\nExpected: visible\nReceived: hidden\nTimeout:  60000ms"
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: About this toy \u203a shows the toy's text, or the default, at 390x844",
+      "status": "passed",
+      "duration": "21.8s",
+      "category": null
+    },
+    {
+      "file": "help.spec.mjs",
+      "title": "toy help: About this toy \u203a shows the toy's text, or the default, at 1440x900",
+      "status": "passed",
+      "duration": "22.7s",
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a loads with no console errors and shows the shelf",
+      "status": "failed",
+      "duration": "1.5m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the shelf filters by category and search, and Surprise me picks a toy",
+      "status": "failed",
+      "duration": "44.1s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a generating a procedural toy changes canvas pixels",
+      "status": "failed",
+      "duration": "30.5s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a toggling an effect changes canvas pixels",
+      "status": "failed",
+      "duration": "52.2s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a paint and poke tools change the toy where it is touched",
+      "status": "failed",
+      "duration": "56.0s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a clay adds and erases blobs on a generated toy and survives a JSON round trip",
+      "status": "failed",
+      "duration": "1.9m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a shows a friendly poster when no GPU renderer is available",
+      "status": "passed",
+      "duration": "1.0s",
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a JSON export then import round-trips the scene",
+      "status": "failed",
+      "duration": "47.2s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the embed page loads a scene from the hash",
+      "status": "failed",
+      "duration": "1.6m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a an embedded captured toy stays under 30 MB of transfer",
+      "status": "passed",
+      "duration": "14.2s",
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a the <splashery-toy> element renders without an iframe",
+      "status": "failed",
+      "duration": "39.3s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a bring-your-own PLY, SPLAT, SPZ and SOG files load in the browser",
+      "status": "failed",
+      "duration": "1.5m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a PNG, GIF and WebM exports produce files",
+      "status": "failed",
+      "duration": "42.9s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery app (WebGL2) \u203a desktop screenshot at 1440x900",
+      "status": "failed",
+      "duration": "32.5s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a kit toy loads from its pack, and its action and a tap open and close it",
+      "status": "failed",
+      "duration": "40.3s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a kit toy can change shape: the red blood cell curls into a sickle (morph)",
+      "status": "failed",
+      "duration": "30.8s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a toys move by themselves once motion is on, and any toy can bounce",
+      "status": "failed",
+      "duration": "1.2m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a patterns and flags recolour any toy and travel in the link",
+      "status": "failed",
+      "duration": "1.3m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a an old version 2 share link still opens",
+      "status": "failed",
+      "duration": "5.7s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a the sound switch remembers its choice",
+      "status": "passed",
+      "duration": "11.8s",
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a tap plays the toy's own sound, and a toggle plays its on and off halves",
+      "status": "failed",
+      "duration": "50.6s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a scan rig moves a part of a captured toy: the cat statue turns its head",
+      "status": "failed",
+      "duration": "23.6s",
+      "category": "pixel-change assertion",
+      "error_summary": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 1500\nReceived:   0"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+      "status": "failed",
+      "duration": "38.4s",
+      "category": "pixel-change assertion",
+      "error_summary": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 3000\nReceived:   0"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a the chess set plays the Opera Game, and the laptop types what you type",
+      "status": "failed",
+      "duration": "1.1m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a a stretchy toy stretches when dragged and springs back; a drag off it orbits",
+      "status": "failed",
+      "duration": "1.2m",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a every toy's sound renders: audible, not clipping, under five seconds",
+      "status": "passed",
+      "duration": "9.7s",
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a v3 screenshots at 1440x900 and 390x844",
+      "status": "failed",
+      "duration": "21.6s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery v3 engine (WebGL2) \u203a an embedded kit toy opens when tapped",
+      "status": "failed",
+      "duration": "22.4s",
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a the Toy tab has the essentials, and Reset everything takes a toy back to how it started",
+      "status": "failed",
+      "duration_ms": 131976,
+      "category": "reset text assertion",
+      "error_summary": "Error: expect(locator).not.toContainText(expected) failed\n\nLocator: locator('#toy-status')\nExpected substring: not \"colors of\"\nReceived string: \"Jelly blob \u00b7 60k splats \u00b7 in the colors of France\"\nTimeout: 60000ms"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a the panel and the shelf can be made bigger on a wide screen",
+      "status": "passed",
+      "duration_ms": 25328,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a flag colours lie gently over the chess board, and stay with the toy they were chosen on",
+      "status": "failed",
+      "duration_ms": 36879,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Settings panel (WebGL2) \u203a the chess game bar plays, pauses, steps and jumps, and a tap after the end starts again",
+      "status": "failed",
+      "duration_ms": 70704,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sports balls (WebGL2) \u203a a ball in a country's colours keeps its seams",
+      "status": "failed",
+      "duration_ms": 69074,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sports balls (WebGL2) \u203a ball screenshots at 1440x900 and 390x844",
+      "status": "passed",
+      "duration_ms": 37656,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 2x on a 2x screen at the high tier",
+      "status": "passed",
+      "duration_ms": 4441,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 3x on a 3x screen at the mid tier",
+      "status": "passed",
+      "duration_ms": 7887,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 2x on a 3x screen at the mid tier with ?sharp=0",
+      "status": "passed",
+      "duration_ms": 6371,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 3x on a 3x screen at the max tier",
+      "status": "passed",
+      "duration_ms": 6860,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the canvas renders at 1.5x on a 3x screen at the low tier",
+      "status": "passed",
+      "duration_ms": 3317,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a Detail: High raises the tier, stays in this browser and stays out of links",
+      "status": "passed",
+      "duration_ms": 25993,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a a transparent embed stays transparent on a dark-mode page",
+      "status": "passed",
+      "duration_ms": 15041,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a embeds frame the toy closer, take ?zoom= and zoom with buttons and the wheel",
+      "status": "passed",
+      "duration_ms": 31812,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a the embed snippet is responsive and has a size picker",
+      "status": "passed",
+      "duration_ms": 47343,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Sharpness and embeds (WebGL2) \u203a a shelf thumbnail that fails is fetched once more, then shows a plain tile",
+      "status": "passed",
+      "duration_ms": 11284,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a has no horizontal overflow at 390px and the sheet opens",
+      "status": "failed",
+      "duration_ms": 111703,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a dragging the shelf up opens a grid, and picking a toy folds it back",
+      "status": "failed",
+      "duration_ms": 156905,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a a panel opened while a toy from the grid is still loading stays open",
+      "status": "failed",
+      "duration_ms": 47651,
+      "category": "software WebGL/readback console warnings"
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a the Make pane explains where to find your own splat",
+      "status": "passed",
+      "duration_ms": 23525,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery on a phone \u203a has no horizontal overflow at 360px",
+      "status": "passed",
+      "duration_ms": 10981,
+      "category": null
+    },
+    {
+      "file": "smoke.spec.mjs",
+      "title": "Splashery on WebGPU \u203a auto picks WebGPU when an adapter exists and effects render",
+      "status": "skipped",
+      "duration_ms": 372,
+      "category": null
+    }
+  ],
+  "plain_main_comparisons": [
+    {
+      "sha": "6c3764ff9a1aa3fbba202af12d6764ac23ed2d6e",
+      "production_changes": false,
+      "cases": [
+        {
+          "file": "help.spec.mjs",
+          "title": "the line stays clear of the toy at 390x844",
+          "status": "failed",
+          "duration_ms": 16793,
+          "category": "null help-line bounding box",
+          "error_summary": "TypeError: Cannot read properties of null (reading 'y')"
+        },
+        {
+          "file": "help.spec.mjs",
+          "title": "the line stays clear of the toy at 1440x900",
+          "status": "failed",
+          "duration_ms": 19578,
+          "category": "null help-line bounding box",
+          "error_summary": "TypeError: Cannot read properties of null (reading 'x')"
+        },
+        {
+          "file": "help.spec.mjs",
+          "title": "toy help: the line \u203a shows after a refresh and from a link, old links included",
+          "status": "failed",
+          "duration_ms": 20527,
+          "category": "software WebGL/readback console warnings"
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "Splashery app (WebGL2) \u203a loads with no console errors and shows the shelf",
+          "status": "failed",
+          "duration_ms": 40116,
+          "category": "software WebGL/readback console warnings"
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "Splashery app (WebGL2) \u203a clay adds and erases blobs on a generated toy and survives a JSON round trip",
+          "status": "failed",
+          "duration_ms": 136405,
+          "category": "software WebGL/readback console warnings"
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "Splashery app (WebGL2) \u203a shows a friendly poster when no GPU renderer is available",
+          "status": "passed",
+          "duration_ms": 1134,
+          "category": null
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "Splashery v3 engine (WebGL2) \u203a a scan rig moves a part of a captured toy: the cat statue turns its head",
+          "status": "failed",
+          "duration_ms": 23504,
+          "category": "pixel-change assertion",
+          "error_summary": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 1500\nReceived:   0"
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "Splashery v3 engine (WebGL2) \u203a rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs",
+          "status": "failed",
+          "duration_ms": 31153,
+          "category": "pixel-change assertion",
+          "error_summary": "Error: expect(received).toBeGreaterThan(expected)\n\nExpected: > 3000\nReceived:   0"
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "Settings panel (WebGL2) \u203a the Toy tab has the essentials, and Reset everything takes a toy back to how it started",
+          "status": "failed",
+          "duration_ms": 140037,
+          "category": "reset text assertion",
+          "error_summary": "Error: expect(locator).toHaveText(expected) failed\n\nLocator:  locator('#reset-all')\nExpected: \"Tap again to reset\"\nReceived: \"Reset everything\"\nTimeout:  60000ms"
+        },
+        {
+          "file": "smoke.spec.mjs",
+          "title": "Splashery on WebGPU \u203a auto picks WebGPU when an adapter exists and effects render",
+          "status": "skipped",
+          "duration_ms": 653,
+          "category": null
+        }
+      ],
+      "stats": {
+        "startTime": "2026-10-14T16:35:17.799Z",
+        "duration": 463240.57700000005,
+        "expected": 1,
+        "skipped": 1,
+        "unexpected": 8,
+        "flaky": 0
+      }
+    },
+    {
+      "sha": "58f3d8ede13714bf4b3d1f99fbf3b29d7f60e492",
+      "production_changes": false,
+      "cases": [
+        {
+          "file": "help.spec.mjs",
+          "title": "the line stays clear of the toy at 390x844",
+          "status": "failed",
+          "duration_ms": 15875,
+          "category": "null help-line bounding box",
+          "error_summary": "TypeError: Cannot read properties of null (reading 'y')"
+        },
+        {
+          "file": "help.spec.mjs",
+          "title": "the line stays clear of the toy at 1440x900",
+          "status": "failed",
+          "duration_ms": 19559,
+          "category": "null help-line bounding box",
+          "error_summary": "TypeError: Cannot read properties of null (reading 'x')"
+        }
+      ],
+      "stats": {
+        "startTime": "2026-10-14T16:47:25.634Z",
+        "duration": 50342.974,
+        "expected": 0,
+        "skipped": 0,
+        "unexpected": 2,
+        "flaky": 0
+      }
+    }
+  ],
+  "isolated_help_rerun": {
+    "source_checkpoint": "d36a656819cbde9b470f4a164ea23a0473cd24c7",
+    "cases": [
+      {
+        "file": "help.spec.mjs",
+        "title": "the line stays clear of the toy at 390x844",
+        "status": "failed",
+        "duration_ms": 14432,
+        "category": "null help-line bounding box",
+        "error_summary": "TypeError: Cannot read properties of null (reading 'y')"
+      },
+      {
+        "file": "help.spec.mjs",
+        "title": "the line stays clear of the toy at 1440x900",
+        "status": "failed",
+        "duration_ms": 28534,
+        "category": "null help-line bounding box",
+        "error_summary": "TypeError: Cannot read properties of null (reading 'x')"
+      },
+      {
+        "file": "help.spec.mjs",
+        "title": "toy help: the line \u203a shows after a refresh and from a link, old links included",
+        "status": "failed",
+        "duration_ms": 21554,
+        "category": "software WebGL/readback console warnings"
+      }
+    ],
+    "note": "All three cases failed. The refresh case reached its console assertion; both clearance cases failed on null bounds, matching the current-main signatures."
+  },
+  "protected_source_sha256": {
+    "src/stage.js": "9ad7d34e49fd5ffa77aab43dd1b6fb1c01a14d989629a1fb342a83f7d675700b",
+    "src/sharpness.js": "02d183ede63a21be5c022658a1d76f956b07c6eb721b14c4ee922499e3edb74a",
+    "tests/smoke.spec.mjs": "69bf1ea0f8829ccc24e6afff27437a0095cd910f57f5bf37ee92e97c42ffa049",
+    "tests/help.spec.mjs": "51aa885bb4dde88a11ba52b7ed44977d150bfc5362fc0d6a3d0c171cb9f6c437"
+  },
+  "source_partition": {
+    "engine_commit": "040feaec965dfb5496cef3100a976d7bf4d407fc",
+    "fallback_commit": "d36a656819cbde9b470f4a164ea23a0473cd24c7",
+    "published_history_rewritten": false,
+    "details_styles": "inline in src/renderer-fallback.js; styles.css is protected by the task"
+  },
+  "generated_standard_screenshots_preserved": 13,
+  "integrated_main_sha": "4907a003a43be0be97ce25403d94f6f1e9208600",
+  "post_verification_main_update": "Documentation, depth lab image inputs, and generators only; production source and the task test files are unchanged."
+}

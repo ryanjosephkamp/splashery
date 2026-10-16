@@ -11,17 +11,17 @@ const PREFER = "M";
 const PREFER_UP_TO = 30;
 
 // The code for a link: { ok, code, level, bytes } or { ok: false, bytes }.
-export function shareCode(url) {
+export function shareCode(url, { mask = -1 } = {}) {
   const bytes = new TextEncoder().encode(url).length;
   if (bytes > MAX_BYTES) return { ok: false, bytes };
   try {
-    const m = encodeQR(url, PREFER, { boost: false });
+    const m = encodeQR(url, PREFER, { boost: false, mask });
     if (m.version <= PREFER_UP_TO) return { ok: true, code: m, level: PREFER, bytes };
   } catch {
     // Too long at M: try L.
   }
   try {
-    const l = encodeQR(url, "L", { boost: false });
+    const l = encodeQR(url, "L", { boost: false, mask });
     return { ok: true, code: l, level: "L", bytes };
   } catch {
     return { ok: false, bytes };

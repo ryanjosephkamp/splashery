@@ -207,7 +207,7 @@ export function toyCamera(frame, cam) {
 // The kit's splats in the toy's frame. `outer` marks the far ones, pulled in beyond the unit
 // sphere (the pack builds them apart, outside the kit's fit).
 // Returns { count, pos, scales, quat, color, opacity } like readSplatPly.
-export function splatsInFrame(frame, s) {
+export function splatsInFrame(frame, s, { contract = true } = {}) {
   const q0 = frameQuat(frame.M);
   const n = s.count;
   const out = {
@@ -219,19 +219,20 @@ export function splatsInFrame(frame, s) {
     opacity: new Float32Array(n),
     outer: new Uint8Array(n),
   };
-  // Far things (water, the skyline, the sky) are pulled in onto a shell between the unit sphere
-  // and radius 2, nearer the farther they are, and shrink to match (the way Mip-NeRF 360 contracts
-  // distant space): seen from the cameras inside they keep their place and size in the picture.
+  // Turn-and-zoom keeps the legacy compact shell. Captured camera views use the affine frame:
+  // contracting splats without contracting cameras changes their perspective projections.
   const inner = 0.995;
   for (let i = 0; i < n; i++) {
     let p = toToy(frame, [s.pos[i * 3], s.pos[i * 3 + 1], s.pos[i * 3 + 2]]);
     let size = frame.scale;
     const r = Math.hypot(p[0], p[1], p[2]);
     if (r > inner) {
-      const r2 = inner + (1 - inner / r) * inner;
-      p = [(p[0] * r2) / r, (p[1] * r2) / r, (p[2] * r2) / r];
-      size *= r2 / r;
-      out.outer[i] = 1;
+      if (contract) {
+        const r2 = inner + (1 - inner / r) * inner;
+        p = [(p[0] * r2) / r, (p[1] * r2) / r, (p[2] * r2) / r];
+        size *= r2 / r;
+      }
+      if (contract) out.outer[i] = 1;
     }
     out.pos.set(p, i * 3);
     for (let k = 0; k < 3; k++) out.scales[i * 3 + k] = s.scales[i * 3 + k] * size;
@@ -246,7 +247,7 @@ export function splatsInFrame(frame, s) {
 // matter, big faint ones (the smears beside the subject), any giant, and floaters at the cameras
 // (`cams`: the camera path's positions in the toy's frame). Sizes are in the toy's frame (the unit sphere).
 // Returns { scene, removed: { faint, smear, giant } }.
-export const PRUNE = { faint: 0.008, smearSize: 0.03, smearOpacity: 0.25, giant: 0.12 };
+export const PRUNE = { faint: 0.008, smearSize: 0.03, smearOpacity: 0.4, giant: 0.12 };
 
 export function pruneSplats(s, rules = PRUNE, cams = []) {
   const removed = { faint: 0, smear: 0, giant: 0, atCamera: 0 };
@@ -258,9 +259,12 @@ export function pruneSplats(s, rules = PRUNE, cams = []) {
   steps.sort((a, b) => a - b);
   const near = steps.length ? Math.max(0.03, 1.2 * steps[steps.length >> 1]) : 0;
   const atCamera = (i) => {
-    for (const c of cams)
-      if (Math.hypot(s.pos[i * 3] - c[0], s.pos[i * 3 + 1] - c[1], s.pos[i * 3 + 2] - c[2]) < near)
-        return true;
+    for (const c of cams) {
+      const x = s.pos[i * 3] - c[0];
+      const y = s.pos[i * 3 + 1] - c[1];
+      const z = s.pos[i * 3 + 2] - c[2];
+      if (x * x + y * y + z * z < near * near) return true;
+    }
     return false;
   };
   const keep = [];

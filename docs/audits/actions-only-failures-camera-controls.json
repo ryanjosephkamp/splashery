@@ -1,0 +1,118 @@
+{
+  "kind": "Diagnostic benchmark controls, not final Actions results",
+  "productionSourceCommit": "6e769e273f4d61ccd24adf6f1c28a8bc73e0e92a",
+  "browser": "Chromium 141.0.7390.37, Playwright build 1194",
+  "rendererMode": "Headed Mesa/llvmpipe on extracted Xvfb; Debian 13",
+  "input": "Existing recorded 320x240 RGBA clips and native depth replies; 423x317 filtering grid",
+  "work": {
+    "preconditioningFrames": 12,
+    "drawsPerPreconditioningFrame": 7,
+    "warmupDraws": 24,
+    "timedBatches": 8,
+    "drawsPerBatch": 12,
+    "order": "alternates",
+    "costBound": 1.1
+  },
+  "sameSourceWithAsymmetricHistory": {
+    "referenceSourceSha256": "4f80c05ee310dc95be32ea7cb0f7fdd7a3b1bb4927070fe1d039973de9ebe866",
+    "currentSourceSha256": "4f80c05ee310dc95be32ea7cb0f7fdd7a3b1bb4927070fe1d039973de9ebe866",
+    "referenceHistory": "Fresh timing module; canvas input only",
+    "currentHistory": "Live application module; native video and canvas input",
+    "measurements": [
+      {
+        "inputHash": "a7b241280ca6ed291d16f64c7393fc22e622fd5523d82871cacdee3d04775993",
+        "drawMs": 18.166666666666668,
+        "referenceDrawMs": 13.525000000062088,
+        "drawBatches": [
+          17.90000000006209, 17.433333333271246, 18.166666666666668, 19.26666666660458,
+          18.73333333339542, 18.76666666660458, 15.541666666666666, 15.575000000186265
+        ],
+        "referenceDrawBatches": [
+          13.525000000062088, 13.400000000062088, 12.608333333395422, 16.091666666790843,
+          14.033333333209157, 14.233333333395422, 12.299999999813735, 11.533333333209157
+        ],
+        "clip": "still",
+        "ratio": 1.3431916204497798,
+        "passesUnchangedCostBound": false
+      },
+      {
+        "inputHash": "01505c3c1daf0fe05e7461939f7f6488059b5d24f4116498fd2c1906a89deeae",
+        "drawMs": 18.200000000186265,
+        "referenceDrawMs": 14.283333333519598,
+        "drawBatches": [
+          19.824999999875825, 18.908333333209157, 18.316666666418314, 18.200000000186265,
+          17.425000000124175, 17.341666666480403, 17.324999999875825, 16.716666666790843
+        ],
+        "referenceDrawBatches": [
+          16.75833333345751, 15.100000000248352, 14.283333333519598, 14.841666666480402,
+          13.433333333271245, 13.475000000248352, 13.224999999937912, 13.775000000062088
+        ],
+        "clip": "low-light",
+        "ratio": 1.2742123687245455,
+        "passesUnchangedCostBound": false
+      }
+    ]
+  },
+  "originalVersionsWithSymmetricHistory": {
+    "referenceSourceCommit": "ec4aaa37",
+    "referenceSourceSha256": "f02083fc5b4f3ae559cf5d95e4aa67d4b133a2a108b122ab8a12cdb8774a9e5b",
+    "currentSourceSha256": "4f80c05ee310dc95be32ea7cb0f7fdd7a3b1bb4927070fe1d039973de9ebe866",
+    "history": "Fresh timing-only modules on both sides; canvas input only",
+    "measurements": [
+      {
+        "inputHash": "a7b241280ca6ed291d16f64c7393fc22e622fd5523d82871cacdee3d04775993",
+        "drawMs": 13.441666666728755,
+        "referenceDrawMs": 18.466666666480403,
+        "drawBatches": [
+          16.61666666654249, 15.916666666666666, 15.75833333314707, 13.108333333395422,
+          13.408333333209157, 12.816666666728755, 13.441666666728755, 12.016666666604578
+        ],
+        "referenceDrawBatches": [
+          18.51666666660458, 19.61666666654249, 18.475000000248354, 18.466666666480403,
+          17.408333333519597, 16.35833333339542, 16.49166666654249, 16.683333333271246
+        ],
+        "clip": "still",
+        "ratio": 0.7278880866533033,
+        "passesUnchangedCostBound": true
+      },
+      {
+        "inputHash": "01505c3c1daf0fe05e7461939f7f6488059b5d24f4116498fd2c1906a89deeae",
+        "drawMs": 15.341666666790843,
+        "referenceDrawMs": 17.90000000006209,
+        "drawBatches": [
+          16.649999999751646, 16, 15.741666666542491, 14.974999999937912, 14.408333333519598,
+          14.391666666604578, 15.341666666790843, 14.041666666666666
+        ],
+        "referenceDrawBatches": [
+          17.866666666852932, 17.90000000006209, 17.841666666790843, 17.85833333339542,
+          17.72499999993791, 18.299999999813735, 18.316666666728754, 18.816666666728754
+        ],
+        "clip": "low-light",
+        "ratio": 0.8570763500970742,
+        "passesUnchangedCostBound": true
+      }
+    ]
+  },
+  "intentionalCostRegression": {
+    "addedMillisecondsPerCurrentDraw": 20,
+    "history": "Fresh timing-only modules on both sides",
+    "measurements": [
+      {
+        "inputHash": "01505c3c1daf0fe05e7461939f7f6488059b5d24f4116498fd2c1906a89deeae",
+        "drawMs": 34.96666666679084,
+        "referenceDrawMs": 18.283333333209157,
+        "drawBatches": [
+          36.041666666666664, 35.32499999987582, 36.924999999813735, 34.96666666679084,
+          34.31666666672876, 33.650000000062086, 34.01666666660458, 32.98333333339542
+        ],
+        "referenceDrawBatches": [
+          17.38333333345751, 18.283333333209157, 19.600000000248354, 19.341666666480403,
+          17.899999999751646, 17.61666666654249, 17.616666666852932, 19.075000000186265
+        ],
+        "clip": "low-light",
+        "ratio": 1.9124886053069277,
+        "passesUnchangedCostBound": false
+      }
+    ]
+  }
+}

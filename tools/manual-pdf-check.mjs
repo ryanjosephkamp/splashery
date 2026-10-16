@@ -16,6 +16,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 const manual = new URL("../manual/", import.meta.url);
 const plain = (s) => s.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").replace(/\s+/g, " ").trim(); // prettier-ignore
 const key = (s) => s.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
+const whitespace = (s) => s.replace(/\s+/g, " ").trim();
 export const editionName = (bytes) =>
   `tinkerers-manual-${createHash("sha256").update(bytes).digest("hex").slice(0, 16)}.pdf`;
 
@@ -107,6 +108,48 @@ export async function checkNavigation(bytes, entries = contentsEntries()) {
     };
     await walk(outline);
     const firstChapter = await resolve(await doc.getDestination(entries[0].id), "First chapter");
+    const titles = new Map();
+    const titlesOn = async (n) => {
+      if (titles.has(n)) return titles.get(n);
+      const page = await doc.getPage(n);
+      const tagged = await page.getTextContent({
+        includeMarkedContent: true,
+        disableNormalization: true,
+      });
+      const runs = new Map();
+      const stack = [];
+      for (const item of tagged.items) {
+        if (item.type === "beginMarkedContent" || item.type === "beginMarkedContentProps")
+          stack.push(item.id);
+        else if (item.type === "endMarkedContent") stack.pop();
+        else if (typeof item.str === "string")
+          for (const id of new Set(stack.filter(Boolean)))
+            runs.set(id, (runs.get(id) || "") + item.str + (item.hasEOL ? "\n" : ""));
+      }
+      const pageTitles = new Map();
+      // A wrapped link can have several annotations and font runs. Its tagged content gives
+      // the complete visible title without the adjacent printed page number or alternate text.
+      const walk = (node) => {
+        if (node.role === "Link") {
+          const content = [];
+          const ids = [];
+          const collect = (child) => {
+            if (child.type === "content") content.push(child.id);
+            if (child.type === "annotation") ids.push(child.id);
+            for (const c of child.children || []) collect(c);
+          };
+          collect(node);
+          const title = whitespace([...new Set(content)].map((id) => runs.get(id) || "").join(""));
+          for (const id of ids) pageTitles.set(id, title);
+        }
+        for (const child of node.children || []) walk(child);
+      };
+      const tree = await page.getStructTree();
+      if (!tree) throw new Error(`Contents page ${n} has no tagged text.`);
+      walk(tree);
+      titles.set(n, pageTitles);
+      return pageTitles;
+    };
     const contents = [];
     for (const entry of entries) {
       const target = await resolve(await doc.getDestination(entry.id), `Contents #${entry.id}`);
@@ -126,7 +169,14 @@ export async function checkNavigation(bytes, entries = contentsEntries()) {
             )
             .map((i) => i.str)
             .join(" ");
-          if (new RegExp(`^p\\.\\s*${target.page}$`).test(number.trim())) found = true;
+          if (new RegExp(`^p\\.\\s*${target.page}$`).test(number.trim())) {
+            const title = (await titlesOn(n)).get(`pdfjs_internal_id_${link.id}`);
+            if (title !== whitespace(entry.title))
+              throw new Error(
+                `Contents #${entry.id}: PDF title ${JSON.stringify(title)} does not match web title ${JSON.stringify(entry.title)}.`,
+              );
+            found = true;
+          }
         }
       }
       if (!found)
@@ -135,7 +185,37 @@ export async function checkNavigation(bytes, entries = contentsEntries()) {
         );
       contents.push({ ...entry, page: target.page });
     }
-    return { pages: doc.numPages, internalLinks: links, bookmarks, contents };
+    const privateUse = { count: 0, pages: [] };
+    let colons = 0;
+    for (let n = 1; n <= doc.numPages; n++) {
+      const glyphs = new Map();
+      let count = 0;
+      const pageItems = await items(n);
+      for (const [index, item] of pageItems.entries()) {
+        colons += (item.str?.match(/:/g) || []).length;
+        for (const char of item.str?.match(/\p{Co}/gu) || []) {
+          count++;
+          const codePoint = `U+${char.codePointAt(0).toString(16).toUpperCase()}`;
+          if (!glyphs.has(codePoint)) glyphs.set(codePoint, { codePoint, count: 0, examples: [] });
+          const glyph = glyphs.get(codePoint);
+          glyph.count++;
+          if (glyph.examples.length < 3 && !glyph.examples.some((e) => e.text === item.str))
+            glyph.examples.push({
+              text: item.str,
+              font: item.fontName,
+              context: whitespace(
+                pageItems
+                  .slice(Math.max(0, index - 5), index + 6)
+                  .map((i) => i.str)
+                  .join(""),
+              ),
+            });
+        }
+      }
+      if (count) privateUse.pages.push({ page: n, count, glyphs: [...glyphs.values()] });
+      privateUse.count += count;
+    }
+    return { pages: doc.numPages, internalLinks: links, bookmarks, contents, privateUse, colons };
   });
 }
 
@@ -153,6 +233,6 @@ if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.me
   const json = args.find((a) => a.startsWith("--json="))?.slice(7);
   if (json) fs.writeFileSync(json, JSON.stringify(report, null, 2) + "\n");
   console.log(
-    `${report.pages} pages; ${report.internalLinks} internal links; ${report.bookmarks.length} bookmarks on their headings; ${report.contents.length} printed contents numbers checked.`,
+    `${report.pages} pages; ${report.internalLinks} internal links; ${report.bookmarks.length} bookmarks on their headings; ${report.contents.length} exact contents titles and printed numbers checked; ${report.privateUse.count} private-use characters; ${report.colons} colons.`,
   );
 }

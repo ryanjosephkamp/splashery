@@ -1,0 +1,18 @@
+# Test output; HTTP server request lines and ANSI color escapes omitted.
+# Complete original output is in fixed-green.raw.log.gz.
+
+
+Running 6 tests using 1 worker
+
+(node:668959) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:668959) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-p3d-status.spec.mjs:71:3 › dark loading cover follows the camera color on open and rebuild (8.2s)
+  ✓  2 [chromium] › tests/cdx-p3d-status.spec.mjs:71:3 › light loading cover follows the camera color on open and rebuild (7.1s)
+  ✓  3 [chromium] › tests/cdx-p3d-status.spec.mjs:129:1 › Splats with the hybrid background uses the ordinary splat label (18.4s)
+  ✓  4 [chromium] › tests/cdx-p3d4-render-hold.spec.mjs:2:1 › an opaque preview can hold covered draws while updates and explicit captures still work (7.0s)
+  ✓  5 [chromium] › tests/cdx-p3d4-render-hold.spec.mjs:57:1 › the photo preview releases its covered frame on handoff and when another toy opens (13.1s)
+  ✓  6 [chromium] › tests/cdx-p3d4-render-hold.spec.mjs:128:1 › covered updates retain retired GPU resources until actual draws reconcile the work buffer (4.3s)
+
+  6 passed (59.5s)

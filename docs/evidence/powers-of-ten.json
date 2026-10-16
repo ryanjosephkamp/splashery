@@ -194,39 +194,42 @@
     {
       "id": "city",
       "power": 4.6,
-      "label": "Washington, D.C., on the Potomac River, about 16 km across.",
+      "label": "Washington, D.C., on the Potomac River: the original District was a square about 16 km on each side.",
       "size_m": 16000,
       "sizeInLabel": "16 km",
-      "how": "Sentinel-2 cloudless (2016) cut 100 km to 10 km square round the garden.",
+      "how": "Checked October 14, 2026: D.C. OCTO's historic boundary layer describes the original ten-mile square and four surveyed ten-mile sides. Ten miles is 16.09344 km, rounded to about 16 km per side; the ideal square's diagonal is about 22.8 km. The imagery remains Sentinel-2 cloudless (2016), cut 100 km to 10 km square around the garden.",
       "where": "tools/pot-maps.mjs",
       "verdict": "correct",
       "sources": [
         {
-          "title": "Washington, D.C.",
-          "publisher": "Wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Washington,_D.C.",
-          "says": "The initial shape of the federal district was a square measuring 10 miles (16 km) on each side."
+          "title": "District Boundary as defined by boundary Stones (layer 13)",
+          "publisher": "District of Columbia, Office of the Chief Technology Officer",
+          "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries/MapServer/13",
+          "says": "Describes the original ten-mile square and four ten-mile survey lines; warns that the historic stones do not form a perfect square or define the modern administrative boundary."
         }
       ],
-      "note": "The District's side across the Potomac (Arlington) was returned to Virginia in 1846; the label gives the original square's side."
+      "note": "The label names a side of the original District's square, not the width or diagonal of today's District. The portion in Virginia was returned in 1846–1847; the historic boundary layer documents that retrocession.",
+      "checked": "2026-10-14"
     },
     {
       "id": "mall",
       "power": 3.3,
-      "label": "The National Mall, about 3.2 km from the Capitol to the Lincoln Memorial.",
-      "size_m": 3200,
-      "sizeInLabel": "3.2 km",
-      "how": "USGS's NAIP mosaic (3 km) and D.C.'s 2023 aerial photo (1 km) round the garden.",
+      "label": "The National Mall, about 3.6 km in a straight line from the center of the Capitol to the center of the Lincoln Memorial.",
+      "size_m": 3600,
+      "sizeInLabel": "3.6 km",
+      "how": "Measured October 14, 2026 from OpenStreetMap building footprints via Overpass API (data timestamp 2026-10-14T19:24:21Z). Area centroids: Capitol way 66418809, 38.889813424, -77.009001432; Lincoln Memorial way 398769543, 38.889272115, -77.050171895. A local equirectangular projection and polygon area centroids, followed by a haversine distance with radius 6,371,008.8 m, give 3,563.8 m, rounded to about 3.6 km. The aerial imagery remains USGS NAIP and D.C.'s 2023 aerial photo around the garden.",
       "where": "tools/pot-maps.mjs",
       "verdict": "correct",
       "sources": [
         {
-          "title": "National Mall and Memorial Parks",
-          "publisher": "National Park Service",
-          "url": "https://www.nps.gov/nama/index.htm",
-          "says": "A 2 mile stretch view of the National Mall from Lincoln Memorial to US Capitol."
+          "title": "Capitol and Lincoln Memorial building footprints (Overpass query)",
+          "publisher": "OpenStreetMap contributors, ODbL 1.0; retrieved through Overpass API",
+          "url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A15%5D%3Bway%5B%22building%22%5D%2838.888%2C-77.011%2C38.891%2C-77.007%29%3Bout+geom%3Bway%5B%22building%22%5D%2838.888%2C-77.052%2C38.890%2C-77.049%29%3Bout+geom%3B",
+          "says": "Building polygons for United States Capitol (way 66418809) and Lincoln Memorial (way 398769543); the distance is calculated from their area centroids, not stated by the API."
         }
-      ]
+      ],
+      "note": "A straight-line, footprint-center distance, not a walking route or a definition of the Mall's boundaries. NPS's previous two-mile photo caption does not specify these endpoints precisely enough for this label. The polygon centers and spherical distance are approximate; the label rounds to 0.1 km.",
+      "checked": "2026-10-14"
     },
     {
       "id": "garden",
@@ -344,7 +347,7 @@
       "id": "chloroplast",
       "power": -5.6,
       "label": "A chloroplast, where a leaf turns light into food, about 3.5 µm long: an electron micrograph (false color).",
-      "size_m": 0.0000035,
+      "size_m": 3.5e-6,
       "sizeInLabel": "3.5 µm",
       "how": "Wellcome's electron micrograph, cut into squares 3.16 and 1 µm wide inside the chloroplast; its length, about 620 of the picture's 800 columns of a 4.5 µm width, is about 3.5 µm.",
       "where": "tools/pot-micro.mjs; src/powers/stops.js (MICRO)",
@@ -549,36 +552,38 @@
       "note": ""
     },
     {
-      "claim": "Washington, D.C., on the Potomac River, about 16 km across.",
-      "how": "Sentinel-2 cloudless (2016) cut 100 km to 10 km square round the garden.",
+      "claim": "Washington, D.C., on the Potomac River: the original District was a square about 16 km on each side.",
+      "how": "Checked October 14, 2026: D.C. OCTO's historic boundary layer describes the original ten-mile square and four surveyed ten-mile sides. Ten miles is 16.09344 km, rounded to about 16 km per side; the ideal square's diagonal is about 22.8 km. The imagery remains Sentinel-2 cloudless (2016), cut 100 km to 10 km square around the garden.",
       "where": "tools/pot-maps.mjs",
       "sources": [
         {
-          "title": "Washington, D.C.",
-          "publisher": "Wikipedia",
-          "url": "https://en.wikipedia.org/wiki/Washington,_D.C.",
-          "says": "The initial shape of the federal district was a square measuring 10 miles (16 km) on each side."
+          "title": "District Boundary as defined by boundary Stones (layer 13)",
+          "publisher": "District of Columbia, Office of the Chief Technology Officer",
+          "url": "https://maps2.dcgis.dc.gov/dcgis/rest/services/DCGIS_DATA/Administrative_Other_Boundaries/MapServer/13",
+          "says": "Describes the original ten-mile square and four ten-mile survey lines; warns that the historic stones do not form a perfect square or define the modern administrative boundary."
         }
       ],
       "verdict": "correct",
       "test": "tests/pot.spec.mjs",
-      "note": "The District's side across the Potomac (Arlington) was returned to Virginia in 1846; the label gives the original square's side."
+      "note": "The label names a side of the original District's square, not the width or diagonal of today's District. The portion in Virginia was returned in 1846–1847; the historic boundary layer documents that retrocession.",
+      "checked": "2026-10-14"
     },
     {
-      "claim": "The National Mall, about 3.2 km from the Capitol to the Lincoln Memorial.",
-      "how": "USGS's NAIP mosaic (3 km) and D.C.'s 2023 aerial photo (1 km) round the garden.",
+      "claim": "The National Mall, about 3.6 km in a straight line from the center of the Capitol to the center of the Lincoln Memorial.",
+      "how": "Measured October 14, 2026 from OpenStreetMap building footprints via Overpass API (data timestamp 2026-10-14T19:24:21Z). Area centroids: Capitol way 66418809, 38.889813424, -77.009001432; Lincoln Memorial way 398769543, 38.889272115, -77.050171895. A local equirectangular projection and polygon area centroids, followed by a haversine distance with radius 6,371,008.8 m, give 3,563.8 m, rounded to about 3.6 km. The aerial imagery remains USGS NAIP and D.C.'s 2023 aerial photo around the garden.",
       "where": "tools/pot-maps.mjs",
       "sources": [
         {
-          "title": "National Mall and Memorial Parks",
-          "publisher": "National Park Service",
-          "url": "https://www.nps.gov/nama/index.htm",
-          "says": "A 2 mile stretch view of the National Mall from Lincoln Memorial to US Capitol."
+          "title": "Capitol and Lincoln Memorial building footprints (Overpass query)",
+          "publisher": "OpenStreetMap contributors, ODbL 1.0; retrieved through Overpass API",
+          "url": "https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A15%5D%3Bway%5B%22building%22%5D%2838.888%2C-77.011%2C38.891%2C-77.007%29%3Bout+geom%3Bway%5B%22building%22%5D%2838.888%2C-77.052%2C38.890%2C-77.049%29%3Bout+geom%3B",
+          "says": "Building polygons for United States Capitol (way 66418809) and Lincoln Memorial (way 398769543); the distance is calculated from their area centroids, not stated by the API."
         }
       ],
       "verdict": "correct",
       "test": "tests/pot.spec.mjs",
-      "note": ""
+      "note": "A straight-line, footprint-center distance, not a walking route or a definition of the Mall's boundaries. NPS's previous two-mile photo caption does not specify these endpoints precisely enough for this label. The polygon centers and spherical distance are approximate; the label rounds to 0.1 km.",
+      "checked": "2026-10-14"
     },
     {
       "claim": "The Enid A. Haupt Garden beside the Smithsonian Castle, about 130 m across (4.2 acres).",

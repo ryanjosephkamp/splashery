@@ -294,20 +294,20 @@ export async function buildShareHash(scene) {
     payload = { ...payload, paint: { stamps: [] } };
     hash = await encodeSceneHash(payload);
     notes.push(
-      "The paint is too detailed for a link, so the link leaves it out. Save JSON to keep it.",
+      "The paint is too detailed for a link, so the link leaves it out. Use Save scene to keep it.",
     );
   }
   if (hash.length > LINK_LIMIT && payload.toy.clay?.length) {
     payload = { ...payload, toy: { ...payload.toy, clay: [] } };
     if (payload.toy.kind === "builtin") delete payload.toy.clay;
     hash = await encodeSceneHash(payload);
-    notes.push("The clay edits are too long for a link as well; save JSON to keep them.");
+    notes.push("The clay edits are too long for a link as well; use Save scene to keep them.");
   }
   if (hash.length > LINK_LIMIT) {
     return {
       ok: false,
       hash: null,
-      notes: [`The scene is ${formatBytes(hash.length)} as a link. Save JSON instead.`],
+      notes: [`The scene is ${formatBytes(hash.length)} as a link. Use Save scene instead.`],
     };
   }
   return { ok: true, hash, notes, bytes: hash.length };

@@ -3,7 +3,7 @@ import { test, expect } from "@playwright/test";
 import fs from "node:fs";
 import { MANUAL_PDF } from "../manual/pdf-edition.js";
 import { PAGES, label } from "../manual/pages.mjs";
-import { checkNavigation, editionName } from "../tools/manual-pdf-check.mjs";
+import { checkNavigation, contentsEntries, editionName } from "../tools/manual-pdf-check.mjs";
 import { PDFDocument, PDFName, PDFArray, PDFDict } from "../vendor/pdf-lib/pdf-lib.esm.min.js"; // prettier-ignore
 
 const bytes = () => fs.readFileSync(`manual/${MANUAL_PDF}`);
@@ -46,6 +46,15 @@ test("the checker rejects an internal link to a nonexistent page", async () => {
     .find((a) => a.has(N("Dest")));
   link.set(N("Dest"), doc.context.obj([99999, N("XYZ"), 0, 792, 0]));
   await expect(checkNavigation(await doc.save())).rejects.toThrow(/not a real page/);
+});
+
+test("the checker rejects contents punctuation that differs from the web title", async () => {
+  const entries = contentsEntries();
+  expect(entries[0].title).toContain(":");
+  entries[0].title = entries[0].title.replace(":", ";");
+  await expect(checkNavigation(bytes(), entries)).rejects.toThrow(
+    /PDF title .* does not match web title/,
+  );
 });
 
 test("the checker rejects a bookmark on a real page away from its heading", async () => {
@@ -113,6 +122,17 @@ for (const [width, height] of [
   test(`PDF.js follows contents links, bookmarks, and printed page numbers at ${width}x${height}`, async ({
     page,
   }) => {
+    // Editions can paginate differently. Use the numbers checked against the printed contents,
+    // then independently verify that the viewer reaches the named heading by each route.
+    const { contents } = await checkNavigation(bytes());
+    const printedPage = (id) => {
+      const entry = contents.find((e) => e.id === id);
+      expect(entry, `printed contents entry #${id}`).toBeTruthy();
+      return entry.page;
+    };
+    const chapterPage = printedPage("splat");
+    const glossaryPage = printedPage("glossary");
+    const referencePage = printedPage("card");
     const errors = [];
     page.on("pageerror", (e) => errors.push(e.message));
     await page.setViewportSize({ width, height });
@@ -145,8 +165,8 @@ window.review = { pdf, links, viewer };
     const firstLink = page.locator('.page[data-page-number="1"] [data-internal-link] a').first();
     await expect(firstLink).toHaveAttribute("title", "Chapter 1: What a splat is");
     await firstLink.click();
-    await page.waitForFunction(() => window.review.viewer.currentPageNumber === 5);
-    await expect(page.locator('.page[data-page-number="5"] .textLayer')).toContainText(
+    await page.waitForFunction((n) => window.review.viewer.currentPageNumber === n, chapterPage);
+    await expect(page.locator(`.page[data-page-number="${chapterPage}"] .textLayer`)).toContainText(
       "What a splat is",
     );
     await page.evaluate(async () => {
@@ -154,17 +174,17 @@ window.review = { pdf, links, viewer };
       const mark = (await pdf.getOutline()).find((m) => m.title === "Glossary");
       await links.goToDestination(mark.dest);
     });
-    await page.waitForFunction(() => window.review.viewer.currentPageNumber === 138);
-    await expect(page.locator('.page[data-page-number="138"] .textLayer')).toContainText(
-      "Glossary",
-    );
+    await page.waitForFunction((n) => window.review.viewer.currentPageNumber === n, glossaryPage);
+    await expect(
+      page.locator(`.page[data-page-number="${glossaryPage}"] .textLayer`),
+    ).toContainText("Glossary");
     // Type the printed contents number as a reader can do when their viewer ignores links.
-    await page.fill("#page-number", "150");
+    await page.fill("#page-number", String(referencePage));
     await page.locator("#jump button").click();
-    await page.waitForFunction(() => window.review.viewer.currentPageNumber === 150);
-    await expect(page.locator('.page[data-page-number="150"] .textLayer')).toContainText(
-      "Quick reference",
-    );
+    await page.waitForFunction((n) => window.review.viewer.currentPageNumber === n, referencePage);
+    await expect(
+      page.locator(`.page[data-page-number="${referencePage}"] .textLayer`),
+    ).toContainText("Quick reference");
     await page.screenshot({
       path: `tests/screenshots/cdx-manual-pdf-viewer-${width}x${height}.png`,
     });

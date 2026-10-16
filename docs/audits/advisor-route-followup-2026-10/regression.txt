@@ -1,0 +1,71 @@
+Command: SPLASHERY_CHROMIUM=/usr/bin/chromium npx playwright test tests/cdx-adv.spec.mjs tests/cdx-adv-files.spec.mjs tests/cdx-adv-qr.spec.mjs --workers=2
+Verified source tree committed as: 7805082258dafdf0acd3e84b5f5c0170e2ce71af
+Spec blobs: {"tests/cdx-adv.spec.mjs":"b710c64df6296c0be950ec3b6ce13d7df836d6c1","tests/cdx-adv-files.spec.mjs":"f8e95e9790288226959d4a10e668b6659ce6b32d","tests/cdx-adv-qr.spec.mjs":"9ff682a6e13079e2dde513bf88c642c55abbf752"}
+
+
+Running 21 tests using 2 workers
+
+(node:75791) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:75792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:75791) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:75792) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓   1 [chromium] › tests/cdx-adv-files.spec.mjs:64:5 › photo-3d: recipient notice at 390 names the file and offers keyboard actions (10.1s)
+  ✓   2 [chromium] › tests/cdx-adv-qr.spec.mjs:30:1 › saved share pixels decode exactly with declared export geometry at native and 390 pixels (23.1s)
+  ✓   3 [chromium] › tests/cdx-adv-files.spec.mjs:64:5 › photo-3d: recipient notice at 1440 names the file and offers keyboard actions (14.6s)
+  ✓   5 [chromium] › tests/cdx-adv-files.spec.mjs:128:3 › photo-3d: a recipient opens the file through the notice and retains the scene settings (16.6s)
+  ✓   4 [chromium] › tests/cdx-adv-qr.spec.mjs:55:1 › declared export geometry rejects wrong dimensions, blank pixels, and corrupted data (21.8s)
+  ✓   6 [chromium] › tests/cdx-adv-files.spec.mjs:177:3 › photo-3d: a picker error stays visible in the notice with the controls folded (6.0s)
+  ✓   7 [chromium] › tests/cdx-adv.spec.mjs:11:3 › photo-3d opens without console or page errors (14.2s)
+  ✓   8 [chromium] › tests/cdx-adv-files.spec.mjs:212:3 › photo-3d: v2 and v3 scene files and old links retain their loading behavior (18.5s)
+  ✓   9 [chromium] › tests/cdx-adv.spec.mjs:11:3 › moving-photo-3d opens without console or page errors (21.3s)
+  ✓  10 [chromium] › tests/cdx-adv-files.spec.mjs:64:5 › moving-photo-3d: recipient notice at 390 names the file and offers keyboard actions (16.3s)
+  ✓  12 [chromium] › tests/cdx-adv-files.spec.mjs:64:5 › moving-photo-3d: recipient notice at 1440 names the file and offers keyboard actions (19.7s)
+  ✓  11 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-code opens without console or page errors (23.5s)
+  ✓  14 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-picture opens without console or page errors (21.0s)
+  ✓  15 [chromium] › tests/cdx-adv.spec.mjs:11:3 › qr-three opens without console or page errors (15.6s)
+  ✓  13 [chromium] › tests/cdx-adv-files.spec.mjs:128:3 › moving-photo-3d: a recipient opens the file through the notice and retains the scene settings (1.2m)
+  ✓  16 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-code exports a PNG that both readers decode exactly (39.0s)
+  ✓  17 [chromium] › tests/cdx-adv-files.spec.mjs:177:3 › moving-photo-3d: a picker error stays visible in the notice with the controls folded (12.3s)
+  ✓  19 [chromium] › tests/cdx-adv-files.spec.mjs:212:3 › moving-photo-3d: v2 and v3 scene files and old links retain their loading behavior (18.3s)
+  ✓  18 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-picture exports a PNG that both readers decode exactly (36.7s)
+  ✓  20 [chromium] › tests/cdx-adv.spec.mjs:24:3 › qr-three exports a PNG that both readers decode exactly (12.7s)
+  ✓  21 [chromium] › tests/cdx-adv.spec.mjs:24:3 › share-qr exports a PNG that both readers decode exactly (19.6s)
+
+  21 passed (4.2m)
+
+Separate repeated/load check:
+
+Running 6 tests using 2 workers
+
+(node:63588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:63587) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:63588) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:63587) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  2 [chromium] › tests/cdx-adv-qr.spec.mjs:30:1 › saved share pixels decode exactly with declared export geometry at native and 390 pixels (21.1s)
+(node:64202) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:64202) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/cdx-adv.spec.mjs:24:3 › share-qr exports a PNG that both readers decode exactly (35.8s)
+(node:64544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:64544) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [chromium] › tests/cdx-adv-qr.spec.mjs:30:1 › saved share pixels decode exactly with declared export geometry at native and 390 pixels (25.7s)
+(node:65194) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:65194) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 [chromium] › tests/cdx-adv-qr.spec.mjs:30:1 › saved share pixels decode exactly with declared export geometry at native and 390 pixels (28.8s)
+  ✓  4 [chromium] › tests/cdx-adv.spec.mjs:24:3 › share-qr exports a PNG that both readers decode exactly (49.6s)
+  ✓  6 [chromium] › tests/cdx-adv.spec.mjs:24:3 › share-qr exports a PNG that both readers decode exactly (34.7s)
+
+  6 passed (1.9m)

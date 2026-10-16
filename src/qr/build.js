@@ -19,6 +19,8 @@
 import { QUIET } from "./encode.js";
 import { TUNE, painter, moduleGrid } from "./crisp.js";
 import { circleLayout, circleSplats, appendSplats } from "./circle.js";
+import { EYE_SHAPES, paintEyes } from "./eyes.js";
+import { borderSettings, fitDecoration } from "./fit-options.js";
 
 export { TUNE };
 
@@ -191,14 +193,23 @@ export function buildCode(code, o, budget = 120000) {
 function buildOnce(code, o, budget, scale) {
   const style = STYLES.some((s) => s.id === o.style) ? o.style : "classic";
   const N = code.size;
-  const circle = o.shape === "circle" ? circleLayout(code) : null;
+  const border = borderSettings(o);
+  const circle = o.shape === "circle" ? circleLayout(code, border.quiet) : null;
   const H = circle?.half ?? N / 2 + QUIET; // circular or square backing
   const lo = circle ? Math.floor(N / 2 - H) : 0;
   const hi = circle ? N - lo : N;
   const real = (r, c) => r >= 0 && c >= 0 && r < N && c < N;
   const pal = palette(o);
   const out = [];
-  const dark = (r, c) => (real(r, c) ? code.dark[r * N + c] === 1 : !!circle?.dark(r, c));
+  const overrideEye = EYE_SHAPES.includes(o.eyeShape);
+  const finder = (r, c) => {
+    const p = real(r, c) ? code.pieces[code.piece[r * N + c]] : null;
+    return p?.kind === "finder";
+  };
+  const dark = (r, c) =>
+    real(r, c)
+      ? !(overrideEye && finder(r, c)) && code.dark[r * N + c] === 1
+      : !border.pale && !!circle?.dark(r, c);
   let nDark = 0;
   for (let i = 0; i < N * N; i++) nDark += code.dark[i];
   // Splats per module edge: as many as the budget allows, 3 to 5 (more,
@@ -378,6 +389,7 @@ function buildOnce(code, o, budget, scale) {
           crisp({ x0: x - 0.44, y0: y - 0.44, x1: x + 0.44, y1: y + 0.44, rad: [0.44, 0.44, 0.44, 0.44], z: 0.14, color: (px, py) => codeColor(px, py, false), params: pieceOf(r, c) }); // prettier-ignore
         }
       for (const p of code.pieces) {
+        if (overrideEye && p.kind === "finder") continue;
         const h = (p.n - 1) / 2;
         const x = cx(p.col + h);
         const y = cy(p.row + h);
@@ -636,6 +648,8 @@ function buildOnce(code, o, budget, scale) {
     },
   };
   shapes[style]();
+  if (overrideEye)
+    paintEyes(code, o.eyeShape, crisp, codeColor, (p) => pieceOf(p.row + 3, p.col + 3));
   // The sheet: the light modules and the quiet zone, in splats as fine as
   // the modules', with the flat styles' modules standing 0.14 of a module in
   // front of it. Seen at an angle, a sheet splat that reached out from under
@@ -665,8 +679,15 @@ function buildOnce(code, o, budget, scale) {
   if (circle)
     appendSplats(
       out,
-      circleSplats(code, { fg: pal.fg, bg: pal.bg, scale: scale || 0.8, sheet: false, dots: false })
-        .splats,
+      circleSplats(code, {
+        quiet: border.quiet,
+        fg: pal.fg,
+        colorAt: border.pale ? (x, y) => fitDecoration(pal.fg, N, x, y, border.quiet) : null,
+        bg: pal.bg,
+        scale: scale || 0.8,
+        sheet: false,
+        dots: border.pale,
+      }).splats,
     );
   if (scale) flat(-H, -H, H, H, sheetZ - 0.06, 0.6, inside, pal.bg, [0, 0], { sigma: 0.6 });
   // params [0, 20]: the sheet (it folds with the code in the Fold motion).

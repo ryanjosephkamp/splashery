@@ -137,9 +137,27 @@ test.describe("site pages", () => {
 
   test("the embed guide builds the snippets and shows a live toy", async ({ page }) => {
     await page.goto("/site/share/");
+    // Each input navigates the iframe. Only the final navigation needs to build
+    // a real player; intermediate snippets do not need their own GPU contexts.
+    const live = async (query) => {
+      const element = await page.locator("#embed-frame iframe").elementHandle();
+      const frame = await element.contentFrame();
+      await frame.waitForURL((url) =>
+        query.every(([key, value]) => url.searchParams.get(key) === value),
+      );
+      await frame.waitForFunction(
+        () => window.__splashery?.ready && window.__splashery.player?.toyInfo?.id === "strawberry",
+      );
+      await element.dispose();
+    };
     await expect(page.locator("#snip-iframe")).toContainText("embed/?toy=strawberry");
     await page.selectOption("#embed-form [name=theme]", "dark");
     await page.selectOption("#embed-form [name=autoplay]", "breeze");
+    await live([
+      ["toy", "strawberry"],
+      ["theme", "dark"],
+      ["autoplay", "breeze"],
+    ]);
     await expect(page.locator("#snip-iframe")).toContainText("theme=dark&autoplay=breeze");
     await expect(page.locator("#snip-element")).toContainText('theme="dark" autoplay="breeze"');
     await expect(page.locator("#embed-frame iframe")).toHaveAttribute(
@@ -150,5 +168,68 @@ test.describe("site pages", () => {
     expect(await page.locator("#lk-toy option").count()).toBeGreaterThan(100);
     await page.setViewportSize({ width: 390, height: 844 });
     await page.screenshot({ path: `${SHOTS}/spg-share-390x844.png` });
+  });
+
+  test("a live WebGPU embed bounds queued frames and captures a new draw after they finish", async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width: 320, height: 240 });
+    await page.goto("/site/play/?toy=strawberry&renderer=webgpu&autoplay=breeze");
+    await page.waitForFunction(() => window.__splashery?.ready);
+    expect(await page.evaluate(() => __splashery.player.stage.deviceType)).toBe("webgpu");
+    await page.evaluate(async () => {
+      const stage = __splashery.player.stage;
+      const release = stage.holdRendering();
+      const queue = stage.device.wgpu.queue;
+      const completed = queue.onSubmittedWorkDone.bind(queue);
+      await completed();
+      // Native GPU work still runs. Delay only delivery of its completion signal,
+      // so even a fast adapter exercises the queue pressure of a slow renderer.
+      const probe = (window.queueProbe = {
+        draws: 0,
+        completions: [],
+        hold: true,
+        stage,
+        queue,
+        completed,
+      });
+      queue.onSubmittedWorkDone = () =>
+        completed().then(() =>
+          probe.hold ? new Promise((resolve) => probe.completions.push(resolve)) : undefined,
+        );
+      probe.onDraw = () => probe.draws++;
+      stage.app.on("postrender", probe.onDraw);
+      // Later update listeners and input handlers can also request a draw.
+      probe.request = () => stage.requestRender();
+      stage.app.on("update", probe.request);
+      probe.start = stage.frames;
+      release();
+    });
+    try {
+      await page.waitForFunction(() => queueProbe.stage.frames >= queueProbe.start + 12);
+      expect(await page.evaluate(() => queueProbe.draws)).toBe(2);
+      await page.evaluate(() => {
+        queueProbe.captured = false;
+        queueProbe.stage.captureFrame().then(() => (queueProbe.captured = true));
+        queueProbe.start = queueProbe.stage.frames;
+      });
+      await page.waitForFunction(() => queueProbe.stage.frames >= queueProbe.start + 6);
+      expect(await page.evaluate(() => queueProbe.captured)).toBe(false);
+      await page.waitForFunction(() => queueProbe.completions.length === 2);
+      await page.evaluate(() => {
+        queueProbe.hold = false;
+        queueProbe.queue.onSubmittedWorkDone = queueProbe.completed;
+        queueProbe.completions.forEach((resolve) => resolve());
+      });
+      await page.waitForFunction(() => queueProbe.captured && queueProbe.draws > 2);
+    } finally {
+      await page.evaluate(() => {
+        queueProbe.hold = false;
+        queueProbe.queue.onSubmittedWorkDone = queueProbe.completed;
+        queueProbe.completions.forEach((resolve) => resolve());
+        queueProbe.stage.app.off("update", queueProbe.request);
+        queueProbe.stage.app.off("postrender", queueProbe.onDraw);
+      });
+    }
   });
 });

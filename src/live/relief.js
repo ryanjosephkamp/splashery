@@ -659,7 +659,8 @@ export class CameraDepth {
         m += moved[k];
       }
       this.moving = m / n;
-      const near = grow(moved, cols, rows, 1);
+      // An empty motion mask is already its own dilation.
+      const near = m === 0 ? moved : grow(moved, cols, rows, 1);
       for (let k = 0; k < n; k++) still[k] = near[k] ? 0 : Math.min(60, still[k] + dt);
       // Once the color average reaches its two-second cap, every held
       // cell has the same weight. Compute that exponential once per draw.
@@ -688,6 +689,25 @@ export class CameraDepth {
         cp[i + 2] = last[i + 2];
       }
     }
+    // Sharpening depends only on each cell's 3 by 3 RGB neighborhood.
+    // Reuse its previous result only where that entire input is unchanged.
+    let sharpDirty = null;
+    if (
+      this.sharpColors?.length === cp.length &&
+      this.lastColors?.length === cp.length &&
+      this.sharpCols === cols &&
+      this.sharpRows === rows
+    ) {
+      if (this.sharpChanged?.length !== cols * rows)
+        this.sharpChanged = new Uint8Array(cols * rows);
+      const changed = this.sharpChanged;
+      let count = 0;
+      for (let k = 0, i = 0; k < changed.length; k++, i += 4) {
+        changed[k] = cp[i] !== this.lastColors[i] || cp[i + 1] !== this.lastColors[i + 1] || cp[i + 2] !== this.lastColors[i + 2] ? 1 : 0; // prettier-ignore
+        count += changed[k];
+      }
+      sharpDirty = count ? grow(changed, cols, rows, 1) : changed;
+    }
     if (!this.lastColors || this.lastColors.length !== cp.length)
       this.lastColors = new Uint8ClampedArray(cp.length);
     this.lastColors.set(cp);
@@ -714,7 +734,21 @@ export class CameraDepth {
     // 5): 1.2, held to 28 levels (sharpen); was 0.5.
     // Noise has already averaged out. Keep weak eye and mouth edges crisp
     // with a smaller coring threshold; other callers retain their old one.
-    sharpen(cp, cols, rows, 1.35, (this.blurBuf ||= new Float32Array(cols * rows * 3)), 28, 2);
+    sharpen(
+      cp,
+      cols,
+      rows,
+      1.35,
+      (this.blurBuf ||= new Float32Array(cols * rows * 3)),
+      28,
+      2,
+      sharpDirty,
+      this.sharpColors,
+    );
+    if (this.sharpColors?.length !== cp.length) this.sharpColors = new Uint8ClampedArray(cp.length);
+    this.sharpColors.set(cp);
+    this.sharpCols = cols;
+    this.sharpRows = rows;
     g.putImageData(cur, 0, 0);
     // Heights ease toward the newest depth (about a fifth of a second).
     const k = 1 - Math.exp(-dt / 0.12);
@@ -769,6 +803,8 @@ export class CameraDepth {
       this.depthGuide =
       this.heightImage =
       this.lastColors =
+      this.sharpColors =
+      this.sharpChanged =
       this.lastSmooth =
         null;
   }
@@ -1370,9 +1406,21 @@ export function tidyBand(band, d) {
 // Live r7: an unsharp mask on RGBA pixels (w x h) in place: c + amount (c -
 // the 3 by 3 box mean), by rows then columns.
 const CORE = 4; // levels (sharpen)
-export function sharpen(px, w, h, amount, tmp, limit = 28, core = CORE) {
+export function sharpen(
+  px,
+  w,
+  h,
+  amount,
+  tmp,
+  limit = 28,
+  core = CORE,
+  dirty = null,
+  previous = null,
+) {
   // Walk the packed RGB cells together. The old channel-at-a-time pass
   // recalculated the same neighbors three times; the arithmetic is identical.
+  // Recompute all horizontal Float32 means, including cached output cells,
+  // so neighboring changed cells use the same rounded input as before.
   for (let y = 0; y < h; y++)
     for (let x = 0; x < w; x++) {
       const k = y * w + x;
@@ -1392,18 +1440,28 @@ export function sharpen(px, w, h, amount, tmp, limit = 28, core = CORE) {
       const b = (y * w + x) * 3;
       const c = (y1 * w + x) * 3;
       const q = (y * w + x) * 4;
-      for (let ch = 0; ch < 3; ch++) {
-        const m = (tmp[a + ch] + tmp[b + ch] + tmp[c + ch]) / 3;
-        const o = q + ch;
-        // (Live r7 polish: the push is held to 28 levels, so a strong edge
-        // (an eye's rim) gets no halo while fine detail still sharpens; and a
-        // difference within the camera's leftover noise, a few levels, gets
-        // little of it (coring), so the picture is no less steady.)
-        const d = px[o] - m;
-        const ad = d < 0 ? -d : d;
-        const push = amount * (ad < core ? (d * ad) / core : d);
-        px[o] = px[o] + (push > limit ? limit : push < -limit ? -limit : push);
+      if (dirty && !dirty[y * w + x]) {
+        // Only RGB is filtered; alpha always belongs to the current frame.
+        px[q] = previous[q];
+        px[q + 1] = previous[q + 1];
+        px[q + 2] = previous[q + 2];
+        continue;
       }
+      // These are always three channels. Keep the same operations and
+      // write order, without an inner channel loop on every camera cell.
+      // The push stays limited and cored, so edges keep their old pixels.
+      let d = px[q] - (tmp[a] + tmp[b] + tmp[c]) / 3;
+      let ad = d < 0 ? -d : d;
+      let push = amount * (ad < core ? (d * ad) / core : d);
+      px[q] = px[q] + (push > limit ? limit : push < -limit ? -limit : push);
+      d = px[q + 1] - (tmp[a + 1] + tmp[b + 1] + tmp[c + 1]) / 3;
+      ad = d < 0 ? -d : d;
+      push = amount * (ad < core ? (d * ad) / core : d);
+      px[q + 1] = px[q + 1] + (push > limit ? limit : push < -limit ? -limit : push);
+      d = px[q + 2] - (tmp[a + 2] + tmp[b + 2] + tmp[c + 2]) / 3;
+      ad = d < 0 ? -d : d;
+      push = amount * (ad < core ? (d * ad) / core : d);
+      px[q + 2] = px[q + 2] + (push > limit ? limit : push < -limit ? -limit : push);
     }
   }
 }

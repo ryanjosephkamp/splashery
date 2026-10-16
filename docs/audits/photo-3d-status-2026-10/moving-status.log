@@ -1,0 +1,13 @@
+# Test output; HTTP server request lines and ANSI color escapes omitted.
+# Complete original output is in moving-status.raw.log.gz.
+
+
+Running 1 test using 1 worker
+
+(node:670933) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:670933) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/psv.spec.mjs:187:3 › Moving photo to 3D › Sharp picture takes its color straight from the video, and follows pause and scrubbing (16.5s)
+
+  1 passed (22.1s)

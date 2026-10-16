@@ -20,7 +20,7 @@ async function nativeDetector() {
 }
 
 // jsQR is a classic script (it sets window.jsQR): a script tag, once.
-function loadJsQR() {
+export function loadJsQR() {
   if (jsqr) return Promise.resolve(jsqr);
   // The bundle hands back its module: the reader is its default export.
   const pick = (m) => (typeof m === "function" ? m : m?.default);

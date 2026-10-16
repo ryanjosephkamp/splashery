@@ -29,13 +29,16 @@ const SWATCHES = [
 ];
 const TOOL_HINTS = {
   orbit: "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll.",
-  // UI r2 (the labs switch): moving the toy.
+  // UI r2 (on for everyone): moving the toy.
   orbit2:
     "Drag to turn the toy, scroll or pinch to zoom, twist two fingers to roll. Shift-drag or two fingers move it.",
   // The Orbit tool on a stretchy toy (a recipe with `grab`).
   stretch: "Drag the toy to stretch it; drag beside it to turn it. Scroll or pinch to zoom.",
   clay: "Drag on a generated toy to add lumps of clay, or switch to Erase to carve it away.",
 };
+
+// Share lane: m:ss, for Record's pill and its preview sheet.
+const mmss = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
 
 function pct(v) {
   return `${Math.round(v * 100)}%`;
@@ -67,6 +70,11 @@ export function createUI(app) {
     toySliderInput: $("toy-slider-input"),
     stageDial: $("stage-dial"), // Live r8
     stage: $("stage"), // (lane Photo depth: the slider is placed over it)
+    missingFileNotice: $("missing-file-notice"),
+    missingFileMessage: $("missing-file-message"),
+    missingFileError: $("missing-file-error"),
+    missingFileOpen: $("missing-file-open"),
+    missingFileKeep: $("missing-file-keep"),
     stageDialInput: $("stage-dial-input"),
     stageDialLabel: $("stage-dial-label"),
     stageDialHide: $("stage-dial-hide"),
@@ -197,12 +205,27 @@ export function createUI(app) {
     recordRow: $("record-row"), // UI r5
     recordStart: $("record-start"),
     recordUnavailable: $("record-unavailable"),
+    recordNote: $("record-note"), // Share lane
     recPill: $("rec-pill"),
     recTime: $("rec-time"),
     recStop: $("rec-stop"),
     recSave: $("rec-save"),
     recShare: $("rec-share"),
     recClose: $("rec-close"),
+    // Share lane: the clip switch and the preview sheet after Record.
+    clipKind: $("clip-kind"),
+    webmBlock: $("webm-block"),
+    gifBlock: $("gif-block"),
+    recPreview: $("rec-preview"),
+    recVideo: $("rec-video"),
+    recMeta: $("rec-meta"),
+    recActions: $("rec-actions"),
+    recAgain: $("rec-again"),
+    recDiscard: $("rec-discard"),
+    recConfirm: $("rec-confirm"),
+    recConfirmText: $("rec-confirm-text"),
+    recConfirmYes: $("rec-confirm-yes"),
+    recConfirmNo: $("rec-confirm-no"),
     embedTransparent: $("embed-transparent"),
     embedSize: $("embed-size"),
     embedCopy: $("embed-copy"),
@@ -262,7 +285,11 @@ export function createUI(app) {
       }
     });
     const label = document.createElement("span");
-    label.textContent = toy.label;
+    label.className = "toy-card-label";
+    const name = document.createElement("span");
+    name.className = "toy-card-name";
+    name.textContent = toy.label;
+    label.append(name);
     b.append(img, label);
     b.addEventListener("click", () => {
       // Picking from the phone grid folds it back to the row at once.
@@ -299,6 +326,42 @@ export function createUI(app) {
     chips.set(c.id, b);
   }
 
+  // The notice stays outside the folded Toy tab, while its button uses the same local picker.
+  let missingFileKey = null;
+  let dismissedMissingFile = null;
+  const setMissingFileError = (message = "") => {
+    if (els.missingFileNotice.hidden) return;
+    els.missingFileError.textContent = message;
+    els.missingFileError.hidden = !message;
+  };
+  const hideMissingFile = () => {
+    const focused = els.missingFileNotice.contains(document.activeElement);
+    els.missingFileNotice.hidden = true;
+    els.missingFileError.textContent = "";
+    els.missingFileError.hidden = true;
+    if (focused) els.stage.focus({ preventScroll: true });
+  };
+  const showMissingFile = (info) => {
+    const name = info.recipe?.input?.missingFile?.(info.options);
+    missingFileKey = name ? `${app.player.scene.toy.id}:${name}` : null;
+    if (!name || missingFileKey === dismissedMissingFile) {
+      hideMissingFile();
+      return;
+    }
+    els.missingFileNotice.hidden = false;
+    const message = `“${name}” wasn't included in this scene. The original file stays on the sender's device. Open the same file on your device to use these settings. The sample is shown meanwhile.`;
+    if (els.missingFileMessage.textContent !== message)
+      els.missingFileMessage.textContent = message;
+  };
+  els.missingFileOpen.addEventListener("click", () => {
+    setMissingFileError();
+    $("toy-input-file")?.click();
+  });
+  els.missingFileKeep.addEventListener("click", () => {
+    dismissedMissingFile = missingFileKey;
+    hideMissingFile();
+  });
+
   function renderShelf() {
     const q = shelf.query.trim();
     const list = q
@@ -310,30 +373,10 @@ export function createUI(app) {
     els.shelf.replaceChildren(...list.map((t) => cards.get(t.id)));
     els.shelf.scrollLeft = 0;
     els.shelf.scrollTop = 0;
-    els.shelfEmpty.hidden = list.length > 0;
     els.shelfEmpty.textContent = list.length ? "" : `No toys match “${q}”.`;
     for (const [id, b] of chips)
       b.setAttribute("aria-pressed", String(!q && id === shelf.category));
     revealCurrent();
-    requestAnimationFrame(fitLabels);
-  }
-
-  // Fix11: on a phone a name wraps onto two lines (styles.css); one that still needs a third with
-  // this device's font ("Leaning Tower of Pisa") steps its letters down a little, to 9 px at the
-  // least, so no name is cut. The card keeps its size. Measured again for the row and the grid
-  // (whose cards are wider).
-  function fitLabels() {
-    const spans = [...els.shelf.children].map((b) => b.querySelector("span")).filter(Boolean);
-    for (const s of spans) if (s.style.fontSize) s.style.fontSize = s.style.minHeight = "";
-    if (!narrow.matches) return;
-    const over = (s) => s.clientHeight > 0 && s.scrollHeight > s.clientHeight + 1;
-    let todo = spans.filter(over);
-    for (const s of todo) s.style.minHeight = getComputedStyle(s).minHeight;
-    for (const px of [10, 9.5, 9]) {
-      for (const s of todo) s.style.fontSize = `${px}px`;
-      todo = todo.filter(over);
-      if (!todo.length) break;
-    }
   }
 
   function revealCurrent() {
@@ -540,10 +583,65 @@ export function createUI(app) {
   );
   els.toyAlive.addEventListener("change", () => app.setMotion({ alive: els.toyAlive.checked }));
   els.toyAction.addEventListener("click", () => app.act());
+  for (const [id, factor] of [
+    ["stage-zoom-in", 0.85],
+    ["stage-zoom-out", 1 / 0.85],
+  ])
+    $(id).addEventListener("click", () => {
+      app.player.camera.zoomBy(factor);
+      app.player.interact();
+      app.player.stage.requestRender();
+    });
   const controlInputs = new Map(); // key -> { input, output, def }
+  let partKeyboard = null;
+  let partButtons = [];
+  const partPanel = $("toy-keyboard");
+  const partContent = $("toy-keyboard-controls");
+  const partStatus = document.createElement("p");
+  partStatus.className = "note";
+  partStatus.setAttribute("role", "status");
+  function refreshPartKeyboard() {
+    if (!partKeyboard || !partContent.checkVisibility()) return;
+    for (const [i, item] of partKeyboard.items().entries()) {
+      const b = partButtons[i];
+      if (b.getAttribute("aria-label") !== item.label) b.setAttribute("aria-label", item.label);
+      if (item.pressed !== undefined && b.getAttribute("aria-pressed") !== String(item.pressed))
+        b.setAttribute("aria-pressed", String(item.pressed));
+      const disabled = String(!!item.disabled);
+      if (b.getAttribute("aria-disabled") !== disabled) b.setAttribute("aria-disabled", disabled);
+    }
+    const status = partKeyboard.status?.() || "";
+    if (partStatus.textContent !== status) partStatus.textContent = status;
+  }
+  app.player.on("frame", refreshPartKeyboard);
+  partPanel.addEventListener("toggle", refreshPartKeyboard);
 
   function renderToyPanel(info) {
     const recipe = info?.recipe || null;
+    partKeyboard = recipe?.keyboard || null;
+    partButtons = [];
+    partContent.replaceChildren();
+    partPanel.open = false;
+    partPanel.hidden = !partKeyboard;
+    if (partKeyboard) {
+      const title = document.createElement("h3");
+      title.textContent = partKeyboard.label;
+      const group = document.createElement("div");
+      group.className = "part-buttons";
+      group.setAttribute("role", "group");
+      group.setAttribute("aria-label", partKeyboard.label);
+      partButtons = partKeyboard.items().map((item) => {
+        const b = document.createElement("button");
+        b.type = "button";
+        b.textContent = item.text;
+        b.setAttribute("aria-label", item.label);
+        b.addEventListener("click", () => app.player.playPart(item.id));
+        group.append(b);
+        return b;
+      });
+      partContent.append(title, partStatus, group);
+      refreshPartKeyboard();
+    }
     if (app.tool === "orbit")
       els.toolHint.textContent =
         TOOL_HINTS[recipe?.grab ? "stretch" : ui2On() ? "orbit2" : "orbit"]; // UI r2
@@ -1543,6 +1641,9 @@ export function createUI(app) {
     const box = document.createElement("div");
     box.className = "input-box";
     box.id = "toy-input";
+    const noticeError = (message) => {
+      if (box.isConnected) setMissingFileError(message);
+    };
     const title = document.createElement("p");
     title.className = "input-title";
     title.textContent = input.title;
@@ -1569,6 +1670,7 @@ export function createUI(app) {
     };
     const apply = async (text, fileName = "", file = null, files = file ? [file] : []) => {
       error.hidden = true;
+      noticeError();
       try {
         const options = await input.read(text, fileName, file, files, progress);
         progress("");
@@ -1577,6 +1679,7 @@ export function createUI(app) {
         progress("");
         error.textContent = err.message;
         error.hidden = false;
+        noticeError(err.message);
       }
     };
     box.append(title);
@@ -1634,6 +1737,7 @@ export function createUI(app) {
       if (files.reduce((sum, x) => sum + x.size, 0) > cap) {
         error.textContent = input.tooBig?.(cap) || `That file is too big (over ${Math.round(cap / 1e6)} MB).`; // prettier-ignore
         error.hidden = false;
+        noticeError(error.textContent);
         return;
       }
       if (input.binary) apply("", f.name, f, files);
@@ -1973,13 +2077,16 @@ export function createUI(app) {
   });
   // UI r3: the top bar's flag button, flag colors for every toy.
   function showFlagPop(on) {
+    const hadFocus = els.flagPop.contains(document.activeElement);
     els.flagPop.hidden = !on;
     els.flagToggle.setAttribute("aria-expanded", String(on));
     if (on) listFlags().then(() => els.flagGlobal.focus({ preventScroll: true }));
+    else if (hadFocus) els.flagToggle.focus({ preventScroll: true });
   }
   els.flagToggle.addEventListener("click", () => showFlagPop(els.flagPop.hidden));
   els.flagPop.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
+    e.preventDefault();
     showFlagPop(false);
     els.flagToggle.focus();
   });
@@ -2202,12 +2309,141 @@ export function createUI(app) {
   // Lane PDF lab: Save as PDF (labs).
   els.pdfRow.hidden = !labsOn();
   els.exportPdf.addEventListener("click", () => app.openPdfExport());
-  // UI r5: Record (the Share tab starts it; the pill on the stage stops and saves it).
+  // Share lane: Video or GIF, one block at a time (each keeps its own settings).
+  const clipButtons = [...els.clipKind.querySelectorAll("[data-clip]")];
+  const showClip = (kind) => {
+    for (const b of clipButtons) b.setAttribute("aria-pressed", String(b.dataset.clip === kind));
+    els.webmBlock.hidden = kind !== "video";
+    els.gifBlock.hidden = kind !== "gif";
+  };
+  for (const b of clipButtons) b.addEventListener("click", () => showClip(b.dataset.clip));
+  // UI r5: Record (the Share tab starts it; the pill on the stage shows the time and stops it).
   els.recordStart.addEventListener("click", () => (app.recording ? app.stopRecord() : app.startRecord())); // prettier-ignore
   els.recStop.addEventListener("click", () => app.stopRecord());
-  els.recSave.addEventListener("click", () => app.saveRecord());
-  els.recShare.addEventListener("click", () => app.shareRecord());
-  els.recClose.addEventListener("click", () => app.closeRecord());
+
+  // ---- Share lane: the preview sheet after Record -------------------------------------
+  // When a take stops, the sheet plays it back (play, pause and scrub) before
+  // it is saved. Closing the sheet, by any way, lets go of the recording: the
+  // player lets go of its blob URL, which is revoked, and app.closeRecord()
+  // drops the Blob. Discard, Close, and Record again ask first while the take
+  // hasn't been saved or shared.
+  const preview = { url: null, saved: false, onMeta: null, open: false };
+  function openPreview({ bytes, share }) {
+    const r = app.recorded;
+    if (!r?.blob) return;
+    releasePreview();
+    preview.url = URL.createObjectURL(r.blob);
+    preview.saved = false;
+    const v = els.recVideo;
+    // A MediaRecorder WebM has no length in its header, so Chrome reports an
+    // endless one and the scrub bar can't move. Seeking far past the end once
+    // makes it read the real length; then back to the start.
+    // The listener is kept so a sheet closed before the length loads takes it
+    // off (releasePreview), and it never runs on the next take.
+    preview.onMeta = () => {
+      v.removeEventListener("loadedmetadata", preview.onMeta);
+      preview.onMeta = null;
+      if (v.duration !== Infinity) return;
+      const back = () => {
+        v.removeEventListener("timeupdate", back);
+        v.currentTime = 0;
+      };
+      v.addEventListener("timeupdate", back);
+      v.currentTime = 1e101;
+    };
+    v.addEventListener("loadedmetadata", preview.onMeta);
+    // "#t=0.001" shows the first frame instead of a black box (iOS Safari).
+    v.src = `${preview.url}#t=0.001`;
+    // The player shows the length; this line says what the file is.
+    const kind = /\.mp4$/.test(r.name || "") ? "MP4" : "WebM";
+    els.recMeta.textContent = `${kind} video · ${formatBytes(bytes)}`;
+    els.recShare.hidden = !share;
+    hideConfirm();
+    preview.open = true;
+    if (!els.recPreview.open) els.recPreview.showModal();
+    els.recSave.focus();
+  }
+  function releasePreview() {
+    const v = els.recVideo;
+    if (preview.onMeta) v.removeEventListener("loadedmetadata", preview.onMeta);
+    preview.onMeta = null;
+    v.pause();
+    v.removeAttribute("src");
+    v.load();
+    if (preview.url) URL.revokeObjectURL(preview.url);
+    preview.url = null;
+  }
+  // Every way the sheet closes (Close, Escape, Discard, Record again) ends here,
+  // right away, and again on the dialog's own "close" event for any other way.
+  // Focus goes back to Record when it shows (Record again starts a take instead).
+  let refocus = true;
+  function letGo() {
+    if (!preview.open) return;
+    preview.open = false;
+    hideConfirm();
+    releasePreview();
+    if (app.recorded) app.closeRecord();
+    if (refocus && els.recordStart.offsetParent) els.recordStart.focus();
+  }
+  els.recPreview.addEventListener("close", letGo);
+  let confirmed = null;
+  function ask(text, yes, then) {
+    if (preview.saved) return then();
+    confirmed = then;
+    els.recConfirmText.textContent = text;
+    els.recConfirmYes.textContent = yes;
+    els.recActions.hidden = true;
+    els.recConfirm.hidden = false;
+    els.recConfirmNo.focus();
+  }
+  function hideConfirm() {
+    const was = !els.recConfirm.hidden;
+    confirmed = null;
+    els.recConfirm.hidden = true;
+    els.recActions.hidden = false;
+    return was;
+  }
+  const closePreview = () => {
+    if (els.recPreview.open) els.recPreview.close();
+    letGo();
+  };
+  const askClose = () =>
+    ask("Close and discard this recording? It hasn't been saved.", "Discard", closePreview);
+  els.recSave.addEventListener("click", () => {
+    app.saveRecord();
+    preview.saved = true;
+  });
+  // Saved only when it was shared (or saved instead); a canceled share sheet isn't.
+  els.recShare.addEventListener("click", async () => {
+    if (await app.shareRecord()) preview.saved = true;
+  });
+  els.recAgain.addEventListener("click", () =>
+    ask("Record again? This recording hasn't been saved, so it goes.", "Record again", () => {
+      refocus = false;
+      closePreview();
+      refocus = true;
+      app.startRecord();
+    }),
+  );
+  els.recDiscard.addEventListener("click", () =>
+    ask("Discard this recording? It hasn't been saved.", "Discard", closePreview),
+  );
+  els.recClose.addEventListener("click", askClose);
+  els.recConfirmYes.addEventListener("click", () => {
+    const then = confirmed;
+    hideConfirm();
+    then?.();
+  });
+  els.recConfirmNo.addEventListener("click", () => {
+    hideConfirm();
+    els.recSave.focus();
+  });
+  // Escape: back out of the question first, else ask before closing.
+  els.recPreview.addEventListener("cancel", (e) => {
+    e.preventDefault();
+    if (hideConfirm()) els.recSave.focus();
+    else askClose();
+  });
   els.embedTransparent.addEventListener("change", () => app.updateEmbed());
   els.embedSize.addEventListener("change", () => app.updateEmbed());
   els.embedCopy.addEventListener("click", () =>
@@ -2382,12 +2618,12 @@ export function createUI(app) {
     if (narrow.matches)
       els.galleryOpen?.setAttribute("aria-expanded", String(mode === "grid" && full)); // UI r5
     els.sheetMax.title = full ? "Make it smaller" : "Fill the screen";
+    els.sheetMax.setAttribute("aria-label", els.sheetMax.title);
     els.sheetToggle.setAttribute("aria-expanded", String(mode === "panel"));
     // From the grid, More goes straight to the settings (one tap); the
     // handle, a swipe down, a pick or a tap on the toy closes the grid.
     els.sheetToggle.textContent = m === "panel" ? "Done" : "More";
     refreshDock();
-    requestAnimationFrame(fitLabels); // Fix11: the row's and the grid's cards differ in width
   };
   function setMode(m, fill = false) {
     if (m === "grid" && !SHELF_GRID) m = "panel";
@@ -2396,7 +2632,10 @@ export function createUI(app) {
     if (mode === m && full === f) return;
     mode = m;
     full = f;
+    const focused = document.activeElement;
     applySheet();
+    if (narrow.matches && els.panel.contains(focused) && !focused.checkVisibility())
+      (m === "hidden" ? els.galleryOpen : els.sheetToggle).focus({ preventScroll: true });
     if (m !== "panel") revealCurrent();
   }
   new ResizeObserver(refreshDock).observe(els.panel);
@@ -2406,7 +2645,14 @@ export function createUI(app) {
   // UI r2: the maximize button fills the screen with the grid or the panel.
   els.sheetMax.addEventListener("click", () => setMode(mode, !full));
   narrow.addEventListener("change", applySheet);
-  document.fonts?.ready.then(() => requestAnimationFrame(fitLabels));
+  document.querySelector(".skip-link").addEventListener("click", (e) => {
+    e.preventDefault();
+    if (focusOn) setFocus(false);
+    if (galleryOn) setGallery(false);
+    setFolded(false);
+    if (narrow.matches) setMode("panel");
+    tabs.find((t) => t.getAttribute("aria-selected") === "true").focus();
+  });
 
   // The handle: swipe up for the grid, down for the row, tap to toggle. The
   // tab bar takes the same swipes but keeps the panel open when swiped up.
@@ -2966,11 +3212,34 @@ export function createUI(app) {
   let helpModule = null;
   let helpKey = null;
   let helpInfo = null;
+  let helpReady = Promise.resolve();
   let helpTimer = 0;
+  const dismissHelp = () => {
+    if (!help.line.contains(document.activeElement)) hideHelpLine();
+  };
+  function armHelpTimer() {
+    if (!help.line.classList.contains("show")) return;
+    clearTimeout(helpTimer);
+    // Loading time is not reading time. Start the dismissal clock once the
+    // app is ready and the toy has finished loading.
+    helpTimer =
+      document.body.dataset.ready === "true" && !app.busy
+        ? setTimeout(dismissHelp, HELP_MS)
+        : setTimeout(armHelpTimer, 100);
+  }
+  help.line.addEventListener("focusin", () => {
+    clearTimeout(helpTimer);
+    help.line.classList.add("show");
+    help.toggle.setAttribute("aria-expanded", "true");
+  });
+  help.line.addEventListener("focusout", () => {
+    armHelpTimer();
+  });
   function hideHelpLine() {
     clearTimeout(helpTimer);
     help.line.classList.remove("show");
     help.toggle.setAttribute("aria-expanded", "false");
+    if (help.line.contains(document.activeElement)) help.toggle.focus({ preventScroll: true });
     // Hidden once faded (the fade is off under reduced motion).
     helpTimer = setTimeout(() => (help.line.hidden = true), 500);
   }
@@ -2978,28 +3247,37 @@ export function createUI(app) {
   // lines for a scan's credit.
   function placeHelpLine() {
     const r = els.toyStatus.getBoundingClientRect();
-    help.line.style.top = narrow.matches && r.height ? `${Math.round(r.bottom + 6)}px` : "";
+    help.line.style.top = narrow.matches && r.height ? `${Math.ceil(r.bottom)}px` : "";
     help.line.style.bottom = "";
     // UI r3: on a computer a toy that holds still, facing you (a chart, a
     // page), can reach up under the line; then the line sits at the bottom
     // left instead, above the toy's name, when the toy is clear of it there.
     const toy = app.player?.scene?.toy;
     const still = toy?.kind === "builtin" && holdsStill(TOYS.find((t) => t.id === toy.id));
-    if (narrow.matches || !still) return;
+    if (!narrow.matches && !still) return;
     const box = toyScreenBox();
     if (!box) return;
     const line = help.line.getBoundingClientRect();
     const h = line.height || 60;
+    if (narrow.matches) {
+      const top = r.bottom;
+      const lowBottom = $("stage-zoom").getBoundingClientRect().top - 8;
+      if (box.top < top + h + 4 && box.bottom - (lowBottom - h - 4) < top + h + 4 - box.top) {
+        help.line.style.top = "auto";
+        help.line.style.bottom = `${Math.round(window.innerHeight - lowBottom)}px`;
+      }
+      return;
+    }
     if (box.left > 18 + (line.width || 440) + 4) return;
     // How far the toy's box reaches under the line at the top and at the
     // bottom (the box is a little larger than the toy): the side it reaches
     // less far wins.
-    const lowTop = r.top - h - 8;
+    const lowTop = r.top - h - 4;
     const atTop = 62 + h + 4 - box.top;
     const atBottom = box.bottom - (lowTop - 4);
     if (atTop > 0 && atBottom < atTop) {
       help.line.style.top = "auto";
-      help.line.style.bottom = `${Math.round(window.innerHeight - r.top + 8)}px`;
+      help.line.style.bottom = `${Math.round(window.innerHeight - r.top + 4)}px`;
     }
   }
   // UI r3: where the toy's bounding box falls on the stage (CSS pixels).
@@ -3039,7 +3317,7 @@ export function createUI(app) {
     void help.line.offsetWidth; // start the fade from the hidden state
     help.line.classList.add("show");
     help.toggle.setAttribute("aria-expanded", "true");
-    helpTimer = setTimeout(hideHelpLine, HELP_MS);
+    armHelpTimer();
     // UI r3: placed again once the new toy's view is set (it may move).
     for (const ms of [250, 800]) setTimeout(() => !help.line.hidden && placeHelpLine(), ms);
   }
@@ -3101,8 +3379,8 @@ export function createUI(app) {
   );
   help.about.addEventListener("click", () => {
     hideHelpLine();
-    showTab("about");
     if (narrow.matches) setMode("panel");
+    showTab("about", { focus: true });
     els.panes.scrollTop = 0;
   });
   // /Toy help
@@ -3172,8 +3450,19 @@ export function createUI(app) {
     },
     setToyPanel(info) {
       renderToyPanel(info);
-      setToyHelp(info); // Toy help (lane Help)
+      showMissingFile(info);
+      helpReady = setToyHelp(info); // Toy help (lane Help)
       showMotion(app.player.effectiveMotion(), app.player.scene.motion.controls);
+    },
+    resetMissingFileNotice() {
+      dismissedMissingFile = null;
+      missingFileKey = null;
+      hideMissingFile();
+    },
+    async showToyHelp() {
+      const info = helpInfo;
+      await helpReady;
+      if (helpAuto && info === helpInfo) showHelpLine();
     },
     // Shows motion as it runs (under reduced motion, off until asked).
     setMotion(m, controls) {
@@ -3318,34 +3607,50 @@ export function createUI(app) {
     },
     // UI r5: Record's state: "off", "rec" (with seconds and the limit),
     // "ready" (with seconds, bytes and whether the phone can share it) or "busy".
+    // Share lane: "ready" opens the preview sheet; the pill is only for the take.
     setRecord({ state, seconds = 0, limit = 60, bytes = 0, share = false }) {
-      const clock = (t) => `${Math.floor(t / 60)}:${String(Math.floor(t % 60)).padStart(2, "0")}`;
+      const hadFocus = els.recPill.contains(document.activeElement);
       const rec = state === "rec";
       const ready = state === "ready";
-      els.recPill.hidden = state === "off";
+      els.recPill.hidden = state === "off" || ready;
       els.recPill.classList.toggle("recording", rec);
       els.recStop.hidden = !rec;
-      els.recSave.hidden = !ready;
-      els.recShare.hidden = !ready || !share;
-      els.recClose.hidden = !ready;
-      els.recTime.textContent = rec
-        ? `${clock(seconds)} / ${clock(limit)}`
-        : ready
-          ? `${clock(seconds)} · ${formatBytes(bytes)}`
-          : "Saving…";
-      els.recordStart.textContent = rec ? "Stop" : "Record";
-      els.recordStart.classList.toggle("primary", rec);
+      els.recTime.textContent = rec ? `${mmss(seconds)} / ${mmss(limit)}` : "Saving…";
+      els.recordStart.querySelector(".record-label").textContent = rec ? "Stop" : "Record";
+      els.recordStart.classList.toggle("recording", rec);
       els.recordStart.disabled = state === "busy";
+      // Share lane: a finished take opens the preview sheet, which takes focus itself.
+      if (ready) return openPreview({ bytes, share });
+      // Task 52: keep keyboard focus through saving, but respect a visitor who moves away.
+      if (hadFocus) {
+        const target = rec
+          ? els.recStop
+          : state === "busy"
+            ? els.recPill
+            : els.recordStart.checkVisibility()
+              ? els.recordStart
+              : els.sheetToggle.checkVisibility()
+                ? els.sheetToggle
+                : els.stage;
+        target.focus({ preventScroll: true });
+      }
     },
     setRecordUnavailable(reason) {
       els.recordRow.hidden = !!reason;
+      els.recordNote.hidden = !!reason;
       els.recordUnavailable.hidden = !reason;
       els.recordUnavailable.textContent = reason ? `Recording is unavailable: ${reason}` : "";
     },
     setWebmUnavailable(reason) {
       els.webmRow.hidden = !!reason;
+      els.exportWebm.hidden = !!reason; // Share lane: the button sits under the settings now
       els.webmUnavailable.hidden = !reason;
       els.webmUnavailable.textContent = reason ? `Video export is unavailable: ${reason}` : "";
+      // Share lane: no video here, so Save a clip opens on GIF and the Video side is off.
+      const video = els.clipKind.querySelector("[data-clip=video]");
+      video.disabled = !!reason;
+      video.title = reason ? "Video export is unavailable in this browser" : "";
+      if (reason) showClip("gif");
     },
     setEmbed({ iframe, element, note }) {
       els.embedSnippet.value = iframe || "";
@@ -3404,11 +3709,18 @@ export function createUI(app) {
         cancel.type = "button";
         cancel.id = "link-confirm-cancel";
         cancel.textContent = "Cancel";
-        const close = () => (bar.hidden = true);
+        const close = () => {
+          bar.hidden = true;
+          const opener = bar.returnFocus;
+          (opener?.checkVisibility() ? opener : $("stage")).focus({ preventScroll: true });
+        };
         open.addEventListener("click", () => setTimeout(close, 0));
         cancel.addEventListener("click", close);
         bar.addEventListener("keydown", (e) => {
-          if (e.key === "Escape") close();
+          if (e.key === "Escape") {
+            e.preventDefault();
+            close();
+          }
         });
         row.append(open, cancel);
         bar.append(text, addr, row);
@@ -3420,6 +3732,7 @@ export function createUI(app) {
       const open = bar.querySelector("#link-confirm-open");
       open.href = u.href;
       open.target = u.protocol === "mailto:" ? "_self" : "_blank";
+      bar.returnFocus = document.activeElement;
       bar.hidden = false;
       open.focus({ preventScroll: true });
     },
@@ -3488,8 +3801,10 @@ export function createUI(app) {
     toggleGallery, // UI r5
     // Escape: leave focus mode or the gallery page first (true when it did).
     escape() {
-      if (!els.flagPop.hidden)
-        els.flagPop.hidden = true; // UI r3
+      const linkDialog = $("link-confirm");
+      if (linkDialog && !linkDialog.hidden) $("link-confirm-cancel").click();
+      else if (!els.flagPop.hidden)
+        (showFlagPop(false), els.flagToggle.focus()); // UI r3
       else if (focusOn) setFocus(false);
       else if (galleryOn) setGallery(false);
       else return false;
@@ -3503,6 +3818,8 @@ export function createUI(app) {
     isTyping(target) {
       if (!target || target === document.body) return false;
       const tag = target.tagName;
+      // Share lane: keys in an open dialog (the recording's preview, the QR code) stay there.
+      if (target.closest?.("dialog[open]")) return true;
       return tag === "INPUT" || tag === "SELECT" || tag === "TEXTAREA" || target.isContentEditable;
     },
   };
