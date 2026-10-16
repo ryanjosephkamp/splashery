@@ -23,7 +23,8 @@ Built and tested; draft PR open, clips on Effect review page 2 under lane `PT2` 
   picture (when it misses a faint splat, it falls back to the toy's tap box), which is why taps used
   to miss. The recipe now keeps the pointer's last screen place (a capture-phase listener) and casts
   the camera's ray (`player.recipeRay`) through it onto the picture's plane. Taps made in code
-  (clips, tests) keep their point. An engine fix to the pick would let this go.
+  (clips, tests) keep their point. A tap uses the pointer once, only presses on the canvas count,
+  and a canceled pointer is forgotten. An engine fix to the pick would let this go.
 - **The hold** (`drag.start`, 420 ms): on a tapped piece, merges its parent back (it and every
   refinement inside it) through `player.switchTo`, the same path a tap that changes the toy takes,
   and sets `player.dragFired` so the press is not also a tap. The two halves slide together and

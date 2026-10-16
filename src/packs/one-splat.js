@@ -364,30 +364,39 @@ function prepareWord(o) {
 // x and y miss the finger; a pick can take most of a second on a slow
 // device. The recipe keeps the pointer's last place on the screen, and a
 // tap or a hold casts the camera's ray through it onto the picture (z = 0),
-// so it acts on the splat under the finger. Taps made in code (clips,
-// tests) keep their point.
+// so it acts on the splat under the finger. A tap uses the pointer once
+// (a later tap made without it, in code, keeps its own point), and a
+// canceled pointer is forgotten. (Not on pointerleave: on a touch screen
+// it comes right after pointerup, before the tap's pick has finished.)
 let pointer = null;
 function watchPointer() {
   if (typeof document === "undefined" || watchPointer.on) return;
   watchPointer.on = true;
-  const keep = (e) => (pointer = { x: e.clientX, y: e.clientY, time: performance.now() });
+  // Only presses on the toy's canvas (the stage's buttons are not taps).
+  const keep = (e) => {
+    if (e.target && e.target === globalThis.__splashery?.player?.canvas)
+      pointer = { x: e.clientX, y: e.clientY, time: performance.now() };
+  };
   document.addEventListener("pointerdown", keep, true);
   document.addEventListener("pointerup", keep, true);
+  document.addEventListener("pointercancel", () => (pointer = null), true);
 }
 
-function onPicture(point) {
+function onPicture(point, take) {
   const player = globalThis.__splashery?.player;
-  if (!pointer || !player?.recipeRay || performance.now() - pointer.time > 4000) return point;
-  const [x, y] = player.canvasPoint({ clientX: pointer.x, clientY: pointer.y });
+  const at = pointer;
+  if (take) pointer = null;
+  if (!at || !player?.recipeRay || performance.now() - at.time > 4000) return point;
+  const [x, y] = player.canvasPoint({ clientX: at.x, clientY: at.y });
   const ray = player.recipeRay(x, y);
   const t = -ray.origin[2] / ray.dir[2];
   if (!Number.isFinite(t) || t <= 0) return point;
   return [0, 1, 2].map((k) => ray.origin[k] + ray.dir[k] * t);
 }
 
-function nearest(point) {
+function nearest(point, take = false) {
   if (!current) return null;
-  point = onPicture(point);
+  point = onPicture(point, take);
   let best = null,
     score = Infinity;
   for (const i of current.ids) {
@@ -527,7 +536,7 @@ export const RECIPES = {
       label: "Replay the last split or merge",
       quiet: ["split"],
       at(point) {
-        const i = nearest(point);
+        const i = nearest(point, true);
         if (!i) return null;
         if (i * 2 + 1 < current.tree.size) {
           showReadout(describe(i, "split"), "tap");
@@ -601,7 +610,10 @@ export const RECIPES = {
       const tap = about?.tap;
       if (tap && tap !== lastTap) {
         lastTap = tap;
-        if (tap.key === "split" && about.time - tap.time < 0.5 && current?.cue)
+        // A tap that changes the toy fires twice: once as it lands (with its
+        // point, on the old build) and once on the new build (no point), as
+        // the Play button does. Only the second sounds, once per change.
+        if (tap.key === "split" && !tap.point && about.time - tap.time < 0.5 && current?.cue)
           out.cues.push(current.cue);
       }
       // Channel 0 releases a split's children from their parent's center

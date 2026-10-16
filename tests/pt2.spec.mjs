@@ -173,6 +173,37 @@ for (const size of [
   });
 }
 
+test("a tap uses the pointer once: Play and taps made in code don't aim at an old click", async ({
+  page,
+}) => {
+  await open(page, { width: 390, height: 844 });
+  await page.waitForFunction(() => {
+    const p = window.__splashery.player.stage.cameraEntity.getPosition();
+    return Math.hypot(p.x, p.y) < 1e-3;
+  });
+  const [a, b] = await page.evaluate(() => {
+    const { ids, tree, width } = window.__splashery.player.motion.ctx.kit.data;
+    const byX = [...ids].sort((p, q) => tree.mx[p] - tree.mx[q]);
+    return [byX[Math.floor(byX.length / 2)], byX[3]];
+  });
+  const at = await screenOf(page, a);
+  await page.mouse.click(at.x, at.y);
+  await expect.poll(() => ids(page)).toContain(a * 2);
+  await settled(page);
+  // Play replays the last split; it splits nothing new.
+  await page.evaluate(() => window.__splashery.app.act()); // what the Play button does
+  await page.waitForTimeout(400);
+  expect(await ids(page)).toHaveLength(65);
+  // A tap made in code with its own point acts there, not at the click.
+  await page.evaluate((b) => {
+    const { player } = window.__splashery;
+    const { tree, width, height } = player.motion.ctx.kit.data;
+    player.act(player.fromRecipe([tree.mx[b] - width / 2, tree.my[b] + height / 2, 0]));
+  }, b);
+  await expect.poll(() => ids(page)).toContain(b * 2);
+  expect(await ids(page)).toContain(a * 2);
+});
+
 test("scenes saved before the new tap keep loading", async ({ page }) => {
   const errors = [];
   page.on("pageerror", (e) => errors.push(e.message));
