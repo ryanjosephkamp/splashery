@@ -17,10 +17,12 @@ import { makeFeatures, FIELDS } from "./song-analysis.js";
 import { mp3Frames } from "./song-mp3.js";
 
 export class Track {
-  constructor(url) {
-    const el = new Audio();
+  constructor(url, media = null) {
+    // Moving photo can route its already decoded video through the same
+    // speaker controls and clock, without opening a second media pipeline.
+    const el = media || new Audio();
     el.preload = "auto";
-    el.src = url;
+    if (!media || (el.src !== url && el.getAttribute("src") !== url)) el.src = url;
     this.el = el;
     this.src = null;
     this.ctx = null;
@@ -32,10 +34,13 @@ export class Track {
     // available. The bounded poll also follows programmatic toggles and
     // paused tracks, without changing the shared Sound instance or its API.
     this.soundGesture = () => this.syncSound();
-    this.ready = new Promise((resolve, reject) => {
-      el.addEventListener("loadedmetadata", () => resolve(el.duration), { once: true });
-      el.addEventListener("error", () => reject(new Error("This browser cannot read that sound file. Try an MP3, WAV, OGG or M4A.")), { once: true }); // prettier-ignore
-    });
+    this.ready =
+      el.readyState >= 1
+        ? Promise.resolve(el.duration)
+        : new Promise((resolve, reject) => {
+            el.addEventListener("loadedmetadata", () => resolve(el.duration), { once: true });
+            el.addEventListener("error", () => reject(new Error("This browser cannot read that sound file. Try an MP3, WAV, OGG or M4A.")), { once: true }); // prettier-ignore
+          });
   }
 
   get duration() {
