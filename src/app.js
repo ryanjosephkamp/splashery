@@ -24,7 +24,8 @@ import { toySound } from "./toy-sounds.js";
 import { SOUND_CREDITS } from "./sound-credits.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
 import { decodeSceneHash, parseHash } from "./codec.js";
-import { TOYS, findToy, holdsStill } from "./toys.js";
+import { TOYS, findToy, holdsStill, onShelf } from "./toys.js";
+import { featuredToys } from "./featured.js";
 import { extOf, readPlyHeader, decimatePly, resourceFromProps, LIMITS } from "./loaders.js";
 import {
   downloadBlob,
@@ -236,6 +237,16 @@ class App {
         ui.toast(`Could not read the shared scene: ${err.message}`, 5000);
       }
     }
+    if (!scene && !s) {
+      // ?first-toy=cactus pins smoke tests and screenshots. It only affects
+      // this app's default; shared scenes, saved scenes, and embeds keep theirs.
+      const pinned = findToy(new URLSearchParams(location.search).get("first-toy"));
+      const pool = featuredToys();
+      const first =
+        pinned && onShelf(pinned) ? pinned : pool[Math.floor(Math.random() * pool.length)];
+      scene = createScene({ toy: { kind: "builtin", id: first.id } });
+    }
+    // An unreadable shared scene keeps the same fallback as before.
     if (!scene) scene = createScene({ toy: { kind: "builtin", id: TOYS[0].id } });
     try {
       await this.applyScene(scene);
