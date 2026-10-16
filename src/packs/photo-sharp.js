@@ -1696,12 +1696,7 @@ function watchClipDraws(stage) {
     ]);
   };
   stage.app.on("framerender", () => {
-    if (
-      stage.captureWaiters.length &&
-      S.stage === stage &&
-      S.mesh?.clipOnly &&
-      S.src?.kind === "clip"
-    )
+    if (stage.captureWaiters.length && S.stage === stage && sharpClipOnly(S.src?.clip))
       fillClip(S.mesh, S.src);
     if (
       S.mesh?.clipWaitingDepth &&
