@@ -806,6 +806,11 @@ Video to 3D clarity review images and clips live only on the separate `codex/vid
 branch; earlier task 40 media remains on `codex/video-3d-r2-clips`. Their source licenses and hashes
 are recorded beside them; the audit links to that evidence.
 
+Video to 3D real-clip work for task 88 was made by Ryan with Codex (GPT-6), under MIT. Its 20-source
+manifest is `tools/v3d-corpus.json`; footage, derived models, screenshots, license receipts, and
+comparison clips live only on `codex/video-3d-r4-clips`. Each derivative retains its source's
+license and attribution beside the asset. The task-88 audit records measurements.
+
 The camera path and the splats are worked out on the device by
 [Splat.js](https://github.com/arrival-space/splat.js) (Stratum1 GmbH, MIT). Videos people open are
 read in their browser and never uploaded.

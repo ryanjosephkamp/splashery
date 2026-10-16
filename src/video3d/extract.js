@@ -57,19 +57,25 @@ export async function openVideo(file, { signal, timeoutMs = 20000 } = {}) {
 
 export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
   return new Promise((resolve, reject) => {
+    const sameTime = video.currentTime === t;
     let done = false;
     const finish = (error) => {
       if (done) return;
       done = true;
       clearTimeout(timer);
       video.removeEventListener("seeked", ready);
-      video.removeEventListener("loadeddata", ready);
+      video.removeEventListener("loadeddata", loaded);
       video.removeEventListener("error", failed);
       signal?.removeEventListener("abort", abort);
       error ? reject(error) : resolve();
     };
     const ready = () => {
       if (!video.seeking && video.readyState >= 2) finish();
+    };
+    // Some browsers defer setting seeking until a queued task. Their old readyState and
+    // initial loadeddata cannot complete a changed seek; wait for its seeked event.
+    const loaded = () => {
+      if (sameTime) ready();
     };
     const abort = () => finish(new DOMException("Stopped", "AbortError"));
     const failed = () => {
@@ -84,7 +90,7 @@ export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
       timeoutMs,
     );
     video.addEventListener("seeked", ready);
-    video.addEventListener("loadeddata", ready);
+    video.addEventListener("loadeddata", loaded);
     video.addEventListener("error", failed);
     signal?.addEventListener("abort", abort, { once: true });
     try {
@@ -95,8 +101,233 @@ export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
     }
     if (signal?.aborted) abort();
     else if (video.error) failed();
-    else ready();
+    else if (sameTime) ready();
   });
+}
+
+// seeked can precede the decoded picture reaching drawImage. Wait for presentation before
+// judging sharpness or making a training photograph, and retain the actual source-frame time.
+// Older browsers without this API return null: a requested time is not presentation evidence.
+const presentedFrames = new WeakMap();
+const presentationOwners = new WeakMap();
+const recoveryRates = new WeakMap();
+function claimPresentation(video) {
+  const owner = {};
+  presentationOwners.set(video, owner);
+  const priorRate = recoveryRates.get(video);
+  if (priorRate) {
+    recoveryRates.delete(video);
+    video.pause();
+    if (video.playbackRate === priorRate.applied) {
+      try {
+        video.playbackRate = priorRate.before;
+      } catch {
+        /* The browser owns its rate limits. */
+      }
+    }
+  }
+  return owner;
+}
+export async function seekPresented(video, time, { signal, timeoutMs = 4000 } = {}) {
+  if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
+  // Keep ownership after completion: a late play() must not pause a newer picture request.
+  const owner = claimPresentation(video);
+  const ownsVideo = () => presentationOwners.get(video) === owner;
+  if (!video.requestVideoFrameCallback) {
+    await seek(video, time, { signal, timeoutMs });
+    return null;
+  }
+  const source = video.currentSrc || video.src;
+  const previous = presentedFrames.get(video);
+  if (
+    previous &&
+    previous.source === source &&
+    previous.requestedTime === time &&
+    video.currentTime === previous.position &&
+    !video.seeking &&
+    video.readyState >= 2
+  )
+    return previous.mediaTime;
+  let cleanup;
+  const presented = new Promise((resolve, reject) => {
+    let callback;
+    let recovery;
+    let advanced = false;
+    let done = false;
+    let seekedAt = null;
+    const pauseRecovery = () => {
+      video.pause();
+      const rate = recoveryRates.get(video);
+      if (rate?.owner !== owner) return;
+      recoveryRates.delete(video);
+      if (video.playbackRate === rate.applied) {
+        try {
+          video.playbackRate = rate.before;
+        } catch {
+          /* A host rate change stays authoritative. */
+        }
+      }
+    };
+    const finish = (error, mediaTime) => {
+      if (done) return;
+      done = true;
+      clearTimeout(timer);
+      clearTimeout(recovery);
+      signal?.removeEventListener("abort", abort);
+      video.removeEventListener("seeking", arm);
+      video.removeEventListener("seeked", settled);
+      if (callback !== undefined) video.cancelVideoFrameCallback(callback);
+      if (advanced && ownsVideo()) pauseRecovery();
+      error ? reject(error) : resolve(mediaTime);
+    };
+    const abort = () => finish(new DOMException("Stopped", "AbortError"));
+    const timer = setTimeout(
+      () =>
+        finish(new Error("The decoded video frame took too long. Try a shorter MP4 (H.264) clip.")),
+      timeoutMs,
+    );
+    // A queued RVFC can describe an older picture than drawImage now sees. Where available,
+    // VideoFrame exposes that current decoded picture's own timestamp, independently of the
+    // requested seek position. A matching callback can therefore keep a correct paused picture
+    // even when its presentation preceded seeked. Otherwise require a fresh presentation after
+    // seeked. Frame duration can vary, so proximity to the requested time is never a test.
+    const arm = () => {
+      callback = video.requestVideoFrameCallback((_, metadata) => {
+        callback = undefined;
+        if (done) return;
+        let decodedMatch = null;
+        if (!video.seeking && video.readyState >= 2 && typeof VideoFrame === "function") {
+          let frame;
+          try {
+            frame = new VideoFrame(video);
+            decodedMatch =
+              Number.isFinite(frame.timestamp) &&
+              Math.abs(frame.timestamp / 1e6 - metadata.mediaTime) <= 0.000001;
+          } catch {
+            // Older implementations keep the original fresh-presentation guard below.
+          } finally {
+            frame?.close();
+          }
+        }
+        if (
+          video.seeking ||
+          decodedMatch === false ||
+          (decodedMatch !== true &&
+            (seekedAt === null ||
+              (Number.isFinite(metadata.presentationTime) && metadata.presentationTime < seekedAt)))
+        ) {
+          arm();
+          return;
+        }
+        finish(null, metadata.mediaTime);
+      });
+    };
+    // A paused seek can remain inside the already-presented frame. Chromium then sends seeked
+    // without another presentation callback. Briefly advancing the muted local video requests a
+    // real new picture; pause inside its callback and keep that picture's actual mediaTime.
+    // Never infer a timestamp from currentTime or from identical image content.
+    const recover = () => {
+      if (done || !video.paused || typeof video.play !== "function") return;
+      clearTimeout(recovery);
+      recovery = setTimeout(() => {
+        if (done || !ownsVideo()) return;
+        advanced = true;
+        // At normal speed a busy callback can arrive after drawImage's picture has already
+        // advanced beyond its mediaTime. Slow only this recovery, then restore the caller's
+        // rate after pausing. The returned time still comes from an actual presentation.
+        const before = video.playbackRate;
+        if (Number.isFinite(before) && before > 0) {
+          try {
+            video.playbackRate = Math.min(before, 0.125);
+            recoveryRates.set(video, { owner, before, applied: video.playbackRate });
+          } catch {
+            // Browsers with narrower rate limits retain the existing bounded recovery.
+          }
+        }
+        let playback;
+        try {
+          playback = video.play();
+        } catch {
+          return; // Keep the original deadline if this browser refuses playback synchronously.
+        }
+        Promise.resolve(playback).then(
+          () => {
+            if (done && ownsVideo()) pauseRecovery();
+          },
+          () => {
+            /* The original presentation deadline still supplies retry advice. */
+          },
+        );
+      }, 16);
+    };
+    const settled = () => {
+      if (video.seeking || video.readyState < 2) return;
+      seekedAt = performance.now();
+      recover();
+    };
+    cleanup = finish;
+    video.addEventListener("seeking", arm, { once: true });
+    video.addEventListener("seeked", settled);
+    signal?.addEventListener("abort", abort, { once: true });
+    if (signal?.aborted) abort();
+  });
+  try {
+    const [, mediaTime] = await Promise.all([seek(video, time, { signal, timeoutMs }), presented]);
+    // Browsers can round the seek position (for example, 2.01 becomes 2.009999).
+    // Reuse only that exact confirmed position for an identical request and source.
+    if (ownsVideo())
+      presentedFrames.set(video, {
+        source,
+        requestedTime: time,
+        position: video.currentTime,
+        mediaTime,
+      });
+    return mediaTime;
+  } finally {
+    cleanup();
+  }
+}
+
+// Capture the currently decoded paused picture without advancing it when the browser can
+// identify its own source interval. presentedTime is the captured source picture's timestamp;
+// decodedTime additionally identifies this direct path rather than an RVFC receipt.
+// Unsupported formats retain the bounded presentation path. No time comes from currentTime.
+export async function seekPicture(video, time, { signal, timeoutMs = 4000 } = {}) {
+  if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
+  const started = performance.now();
+  const owner = claimPresentation(video);
+  presentedFrames.delete(video);
+  await seek(video, time, { signal, timeoutMs });
+  if (signal?.aborted || presentationOwners.get(video) !== owner)
+    throw new DOMException("Stopped", "AbortError");
+  if (video.paused && !video.seeking && video.readyState >= 2 && typeof VideoFrame === "function") {
+    let frame;
+    try {
+      frame = new VideoFrame(video);
+      const timestamp = frame.timestamp,
+        duration = frame.duration,
+        wanted = time * 1e6;
+      if (
+        Number.isFinite(timestamp) &&
+        Number.isFinite(duration) &&
+        duration > 0 &&
+        wanted >= timestamp &&
+        wanted < timestamp + duration
+      ) {
+        const decodedTime = timestamp / 1e6;
+        return { time: decodedTime, decodedTime, presentedTime: decodedTime };
+      }
+    } catch {
+      // An unsupported source or timestamp retains the original presentation proof.
+    } finally {
+      frame?.close();
+    }
+  }
+  const presentedTime = await seekPresented(video, time, {
+    signal,
+    timeoutMs: Math.max(1, timeoutMs - (performance.now() - started)),
+  });
+  return { time: presentedTime ?? time, decodedTime: null, presentedTime };
 }
 
 // Grabs the planned frames. opened: openVideo's result; plan: planFrames's; side: the long side
@@ -122,7 +353,7 @@ export async function grabFrames(opened, plan, { side = 960, tries = 3, onFrame,
     if (signal?.aborted) throw new DOMException("Stopped", "AbortError");
     let best = null;
     for (const t of windowTimes(plan.windows[i], tries)) {
-      await seek(video, t, { signal });
+      const picture = await seekPicture(video, t, { signal });
       gs.drawImage(video, crop.sx, 0, crop.sw, opened.height, 0, 0, sw, sh);
       const px = gs.getImageData(0, 0, sw, sh).data;
       for (let k = 0; k < gray.length; k++)
@@ -130,7 +361,13 @@ export async function grabFrames(opened, plan, { side = 960, tries = 3, onFrame,
       const s = sharpness(gray, sw, sh);
       if (!best || s > best.sharpness) {
         g.drawImage(video, crop.sx, 0, crop.sw, opened.height, 0, 0, w, h);
-        best = { time: t, sharpness: s };
+        best = {
+          time: picture.time,
+          requestedTime: t,
+          presentedTime: picture.presentedTime,
+          decodedTime: picture.decodedTime,
+          sharpness: s,
+        };
         best.blob = await new Promise((r) => canvas.toBlob(r, "image/jpeg", 0.92));
       }
     }

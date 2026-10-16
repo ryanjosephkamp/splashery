@@ -1,13 +1,14 @@
 // trainer.js — WebGPU 3DGS optimizer (anisotropic, sorted; see shaders.js).
 
 import {
-  STRIDE, TILE, ENTRIES_CAP, makeProjectSrc, makeRenderSrc, makeChainSrc,
-  SCAN_SRC, SCATTER_SRC, SORT_SRC, ADAM_SRC, SH_ADAM_SRC, BLIT_SRC, shRestCoefs,
+  STRIDE, TILE, tileShaderSource, ENTRIES_CAP, makeProjectSrc, makeRenderSrc, makeChainSrc,
+  SCAN_SRC, SCATTER_SRC, SORT_SRC, SERIAL_SORT_SRC, ADAM_SRC, SH_ADAM_SRC, BLIT_SRC, shRestCoefs,
   VIS_COUNT_SRC, VIS_SCAN_SRC, VIS_SCATTER_SRC, makeAdamSrc, makeSHAdamSrc, makeShapeClampSrc,
   GATHER_SRC, REFINE_APPLY_SRC, REFINE_PATCH_SRC, SSIM_SRC, makeSsaaLossSrc,
 } from './shaders.js';
 import { rodrigues, m3mul, makeRng } from '../sfm/geometry.js';
 import { createGpu } from '../gpu/context.js';
+import { backgroundFitMoments, accumulateBackgroundFit, solveBackgroundFit, backgroundFitSse, constrainBackgroundFit } from './background-fit.js';
 
 export class GSTrainer {
   /** opts.gpu: a GpuContext from createGpu() — share ONE device between the
@@ -15,6 +16,22 @@ export class GSTrainer {
   static async create(opts = {}) {
     const gpu = opts.gpu || await createGpu(opts);
     return new GSTrainer(gpu.device, opts, gpu.info || {});
+  }
+
+  // Buffers belong to this trainer even when its GPU device belongs to the host.
+  dispose() {
+    if (this._disposed) return;
+    this._disposed = true;
+    const destroyed = new Set();
+    for (const [name, value] of Object.entries(this)) {
+      if (!/^(buf|uni)/.test(name)) continue;
+      for (const buffer of Array.isArray(value) ? value : [value]) {
+        if (!buffer || typeof buffer.destroy !== 'function' || destroyed.has(buffer)) continue;
+        destroyed.add(buffer);
+        try { buffer.destroy(); } catch { /* a lost device may already have released it */ }
+      }
+    }
+    this.n = 0;
   }
 
   constructor(device, opts = {}, gpuInfo = {}) {
@@ -26,6 +43,36 @@ export class GSTrainer {
     // FASTER on desktop NVIDIA too (+11% synthetic it/s) — default ON
     // everywhere; opts.tileGrad = false restores the direct path.
     this.tileGrad = opts.tileGrad ?? true;
+    this.tileSize = opts.tileSize ?? TILE;
+    if (this.tileSize !== TILE && this.tileSize !== 8)
+      throw new RangeError('Raster tile size must be 8 or 16');
+    if (this.tileSize !== TILE && this.tileGrad !== false)
+      throw new Error('Tile8 requires direct gradients (tileGrad: false)');
+    // An 8-pixel tile grid needs a proven worst-case entry budget. Each tile
+    // holds at most maxSplats, padded to the next power of two by the scan.
+    // Select the old renderer when that complete budget cannot fit this device.
+    this.tileEntryBound = 0;
+    if (this.tileSize === 8) {
+      for (const key of ['maxRasterTiles', 'maxSplats']) {
+        if (opts[key] != null && (!Number.isSafeInteger(opts[key]) || opts[key] <= 0))
+          throw new RangeError(`Tile8 ${key} must be a positive safe integer`);
+      }
+      const tiles = opts.maxRasterTiles, splats = opts.maxSplats;
+      const padded = splats ? 2 ** Math.ceil(Math.log2(splats)) : 0;
+      const required = tiles * padded;
+      const limit = Math.floor(Math.min(device.limits.maxStorageBufferBindingSize,
+        device.limits.maxBufferSize ?? device.limits.maxStorageBufferBindingSize) / 8);
+      if (tiles <= 16384 && padded > 0 && Number.isSafeInteger(required) && required <= limit) {
+        this.tileEntryBound = required;
+        this.tileMaxSplats = splats;
+        this.tileMaxRasterTiles = tiles;
+      } else {
+        this.tileSize = TILE;
+      }
+    }
+    // Explicit opt-in: software adapters can avoid the parallel sort barriers.
+    // Hardware/default behavior continues to use the unchanged bitonic sorter.
+    this.serialSort = opts.serialSort === true;
     // opts.compact: chain / Adam / SH-Adam over VISIBLE splats only (indirect
     // dispatch from a GPU-built list); invisible rows keep regs + noise via a
     // slot-limited pass. Per-splat kernels are ~1/3 of a 1M-splat step.
@@ -47,7 +94,7 @@ export class GSTrainer {
 
   _buildPipelines() {
     const d = this.device;
-    const mk = (code, label) => d.createShaderModule({ code, label });
+    const mk = (code, label) => d.createShaderModule({ code: tileShaderSource(code, this.tileSize, label.startsWith('render')), label });
     // screen-space AA dilation (px^2 added to the 2D covariance diagonal).
     // 0.3 = the classic 3DGS constant; with Mip opacity comp it is ALSO the
     // floor on how thin a splat can render (thinner axes fatten AND fade),
@@ -91,6 +138,13 @@ export class GSTrainer {
     this.v2 = this.opts.engine === 'v2';
     this.dcMode = this.v2 ? 'sh' : 'sigmoid';
     if (this.ssaa >= 2 && !this.opts.entriesCap) this.entriesCap *= 2;
+    if (this.tileSize === 8) {
+      const limit = Math.floor(Math.min(this.bindLimit,
+        d.limits.maxBufferSize ?? this.bindLimit) / 8);
+      this.entriesCap = Math.min(limit, Math.max(this.entriesCap, this.tileEntryBound));
+      if (!Number.isSafeInteger(this.entriesCap) || this.entriesCap < this.tileEntryBound)
+        throw new RangeError('Tile8 entry allocation cannot preserve all splat contributions');
+    }
     this.pipeScan = d.createComputePipeline({
       label: 'tile-scan', layout: 'auto',
       compute: {
@@ -102,9 +156,10 @@ export class GSTrainer {
       label: 'tile-scatter', layout: 'auto',
       compute: { module: mk(SCATTER_SRC, 'tile-scatter'), entryPoint: 'main' },
     });
+    const sortLabel = this.serialSort ? 'tile-sort-serial' : 'tile-sort';
     this.pipeSort = d.createComputePipeline({
-      label: 'tile-sort', layout: 'auto',
-      compute: { module: mk(SORT_SRC, 'tile-sort'), entryPoint: 'main' },
+      label: sortLabel, layout: 'auto',
+      compute: { module: mk(this.serialSort ? SERIAL_SORT_SRC : SORT_SRC, sortLabel), entryPoint: 'main' },
     });
     // subgroup-aggregated gradient atomics — DEFAULT OFF (2026-08-25):
     // Tint only allows subgroup builtins in fully-uniform flow, and the
@@ -225,6 +280,16 @@ export class GSTrainer {
    */
   setup(gaussians, cams, images, maxViewW, maxViewH, sceneRadius) {
     const d = this.device;
+    if (this.tileSize === 8 && (!Number.isSafeInteger(gaussians.n) ||
+        gaussians.n < 1 || gaussians.n > this.tileMaxSplats))
+      throw new RangeError('Tile8 seed exceeds its declared splat bound');
+    if (this.tileSize === 8) {
+      const dimensions = [[maxViewW, maxViewH], ...cams.map(c => [images[c.imgIdx].tw, images[c.imgIdx].th])];
+      for (const [w, h] of dimensions) {
+        if (!Number.isSafeInteger(w) || !Number.isSafeInteger(h) || w < 1 || h < 1)
+          throw new RangeError('Tile8 view dimensions must be positive safe integers');
+      }
+    }
     this.n = gaussians.n;
     // DC color convention bridge: seeds/imports tagged 'sh' carry standard
     // SH-DC (engine v2's native format); untagged/'sigmoid' carry the v1
@@ -252,7 +317,7 @@ export class GSTrainer {
     // count (MCMC-style) without reallocating
     this.cap = Math.min(
       Math.max(Math.floor(gaussians.n * (this.opts.capMult ?? 4)), gaussians.n),
-      this.opts.maxSplats ?? 600000);
+      this.tileSize === 8 ? this.tileMaxSplats : (this.opts.maxSplats ?? 600000));
     // the same binding ceiling as entriesCap, now against the per-splat buffers:
     // the widest is one SH buffer (shK x 3 floats), then proj (params + its tail).
     // A 128 MiB adapter tops out near 745k splats at degree 3; a 2 GB desktop one
@@ -325,11 +390,16 @@ export class GSTrainer {
     const maxPix = Math.max(maxViewW * maxViewH,
       ...this.camMeta.map((m) => m.w * m.h));
     const maxTiles = Math.max(
-      Math.ceil(maxViewW / TILE) * Math.ceil(maxViewH / TILE),
-      ...this.camMeta.map((m) => Math.ceil(m.w / TILE) * Math.ceil(m.h / TILE)));
+      Math.ceil(maxViewW / this.tileSize) * Math.ceil(maxViewH / this.tileSize),
+      ...this.camMeta.map((m) => Math.ceil(m.w / this.tileSize) * Math.ceil(m.h / this.tileSize)));
     // SSAA raster covers ssaa^2 x the pixels/tiles of the loss resolution
     const ssq = this.ssaa >= 2 ? this.ssaa * this.ssaa : 1;
     this.maxTiles = maxTiles * ssq;
+    this.maxPixels = maxPix * ssq;
+    if (this.tileSize === 8 && (!Number.isSafeInteger(this.maxTiles) ||
+        this.maxTiles < 1 || this.maxTiles > this.tileMaxRasterTiles ||
+        !Number.isSafeInteger(this.maxPixels) || this.maxPixels < 1))
+      throw new RangeError('Tile8 view exceeds its declared raster bound');
     this.tileZero = new Uint32Array(this.maxTiles);
 
     const B = GPUBufferUsage;
@@ -358,7 +428,8 @@ export class GSTrainer {
     this.bufTileCursor = buf(this.maxTiles * 4, B.STORAGE | B.COPY_SRC, 'tileCursor');
     this.bufEntries = buf(this.entriesCap * 2 * 4, B.STORAGE | B.COPY_SRC, 'entries');
     this.bufOut = buf(maxPix * ssq * 4 * 4, B.STORAGE | B.COPY_SRC, 'outImg');
-    this.bufTarget = buf(Math.max(16, total * 4), B.STORAGE | B.COPY_DST, 'targets');
+    this.bufTarget = buf(Math.max(16, total * 4), B.STORAGE | B.COPY_DST |
+      (this.opts.fitBackground === true ? B.COPY_SRC : 0), 'targets');
     d.queue.writeBuffer(this.bufTarget, 0, targetData);
     this.bufStats = buf(16, B.STORAGE | B.COPY_DST | B.COPY_SRC, 'stats');
     d.queue.writeBuffer(this.bufStats, 0, new Uint32Array(4));
@@ -503,7 +574,9 @@ export class GSTrainer {
           { binding: 4, resource: { buffer: this.bufTarget } },
           { binding: 5, resource: { buffer: this.bufOut } },
           { binding: 6, resource: { buffer: this.bufGradP } },
-          { binding: 8, resource: { buffer: this.bufCamGrad } },
+          // With camera gradients disabled, the SSIM backward needs exactly eight storage
+          // bindings. An artificial camera reference would exceed WebGPU's default limit.
+          ...(this.camGrads ? [{ binding: 8, resource: { buffer: this.bufCamGrad } }] : []),
           { binding: 9, resource: { buffer: this.bufEnd } },
           { binding: 10, resource: { buffer: this.bufGssim } },
         ],
@@ -559,6 +632,8 @@ export class GSTrainer {
           { binding: 3, resource: { buffer: this.bufEntries } },
           { binding: 5, resource: { buffer: this.bufOut } },
           { binding: 6, resource: { buffer: this.bufGradP } },
+          // The SSAA shader retains its camera-gradient binding even when disabled.
+          { binding: 8, resource: { buffer: this.bufCamGrad } },
           { binding: 9, resource: { buffer: this.bufEnd } },
           { binding: 10, resource: { buffer: this.bufGssim } },
         ],
@@ -769,7 +844,16 @@ export class GSTrainer {
     ];
   }
 
+  _checkRasterBounds(w, h) {
+    if (this.tileSize !== 8) return;
+    if (!Number.isSafeInteger(w) || !Number.isSafeInteger(h) || w < 1 || h < 1 ||
+        !Number.isSafeInteger(this.n) || this.n < 1 || this.n > this.tileMaxSplats ||
+        Math.ceil(w / 8) * Math.ceil(h / 8) > this.maxTiles || w * h > this.maxPixels)
+      throw new RangeError('Tile8 draw exceeds its allocated raster or splat bound');
+  }
+
   _camUniform({ R, t, f, fy, cx, cy, w, h, g = 0, b = 0, bg = null }, trainMode, offset, camIdx = 0) {
+    this._checkRasterBounds(w, h);
     const u = new Float32Array(40);
     // shup: horizontal-only SH (opts.shUp = the scene's up axis, unit)
     if (this.opts.shUp) { u[36] = this.opts.shUp[0]; u[37] = this.opts.shUp[1]; u[38] = this.opts.shUp[2]; u[39] = 1; }
@@ -778,7 +862,7 @@ export class GSTrainer {
     u.set([R[6], R[7], R[8], 0], 8);
     u.set([t[0], t[1], t[2], 0.05], 12);          // near plane
     u.set([f, cx, cy, Math.exp(g)], 16);          // .w = exposure gain
-    u.set([w, h, Math.ceil(w / TILE), this.n], 20);
+    u.set([w, h, Math.ceil(w / this.tileSize), this.n], 20);
     // Background. Black is the training convention (an empty pixel IS black,
     // which is what lets a masked run supervise empty space). A view render may
     // pass its own: rendering the same camera on black and on white recovers
@@ -809,7 +893,7 @@ export class GSTrainer {
       u2[16] *= s; u2[17] *= s; u2[18] *= s;              // f, cx, cy
       u2[34] *= s;                                         // fy
       u2[20] *= s; u2[21] *= s;                            // w, h
-      u2[22] = Math.ceil(u2[20] / TILE);                   // tilesX
+      u2[22] = Math.ceil(u2[20] / this.tileSize);                   // tilesX
       u2[28] = 0; // fwd pass: render + walk-end only
       d.queue.writeBuffer(this.uniTrain2f, 0, u2);
       u2[28] = 1;
@@ -820,12 +904,14 @@ export class GSTrainer {
   /** Encode the full raster sequence (project -> scan -> scatter -> sort ->
    *  render) into an open compute pass for the given camera dims. */
   encodeRaster(p, meta, train) {
+    const scale = train && this.ssaa >= 2 ? this.ssaa : 1;
+    this._checkRasterBounds(meta.w * scale, meta.h * scale);
     if (train && this.ssaa >= 2) {
       // supersampled training: raster at ssaa x, then box-downsample + loss
       // at the native target resolution, then the backward at ssaa x with
       // the per-1x-pixel gradients. PSNR/loss stats stay 1x-comparable.
       const s = this.ssaa;
-      const gx2 = Math.ceil((meta.w * s) / TILE), gy2 = Math.ceil((meta.h * s) / TILE);
+      const gx2 = Math.ceil((meta.w * s) / this.tileSize), gy2 = Math.ceil((meta.h * s) / this.tileSize);
       p.setPipeline(this.pipeProject);
       p.setBindGroup(0, this.bgProject2);
       p.dispatchWorkgroups(Math.ceil(this.n / 256));
@@ -849,7 +935,7 @@ export class GSTrainer {
       p.dispatchWorkgroups(gx2, gy2);
       return;
     }
-    const numTiles = Math.ceil(meta.w / TILE) * Math.ceil(meta.h / TILE);
+    const numTiles = Math.ceil(meta.w / this.tileSize) * Math.ceil(meta.h / this.tileSize);
     p.setPipeline(this.pipeProject);
     p.setBindGroup(0, train ? this.bgProjectTrain : this.bgProjectView);
     p.dispatchWorkgroups(Math.ceil(this.n / 256));
@@ -862,19 +948,20 @@ export class GSTrainer {
     p.setPipeline(this.pipeSort);
     p.setBindGroup(0, this.bgSort);
     p.dispatchWorkgroups(numTiles);
-    const gx = Math.ceil(meta.w / TILE), gy = Math.ceil(meta.h / TILE);
+    const gx = Math.ceil(meta.w / this.tileSize), gy = Math.ceil(meta.h / this.tileSize);
     if (train && this.ssimW > 0) {
       // split renderer with the D-SSIM image passes in between; dispatch
       // ordering within one pass makes each stage's writes visible to the next
-      const run = (pipe, bg) => { p.setPipeline(pipe); p.setBindGroup(0, bg); p.dispatchWorkgroups(gx, gy); };
-      run(this.pipeRenderFwd, this.bgRenderFwd);
+      const ix = Math.ceil(meta.w / TILE), iy = Math.ceil(meta.h / TILE);
+      const run = (pipe, bg, x = ix, y = iy) => { p.setPipeline(pipe); p.setBindGroup(0, bg); p.dispatchWorkgroups(x, y); };
+      run(this.pipeRenderFwd, this.bgRenderFwd, gx, gy);
       run(this.pipeSsimPrep, this.bgSsimPrep);
       run(this.pipeSsimBH15, this.bgSsimBH15);
       run(this.pipeSsimBV15, this.bgSsimBV15);
       run(this.pipeSsimCoeff, this.bgSsimCoeff);
       run(this.pipeSsimBH9, this.bgSsimBH9);
       run(this.pipeSsimFinal, this.bgSsimFinal);
-      run(this.pipeRenderBwd, this.bgRenderBwd);
+      run(this.pipeRenderBwd, this.bgRenderBwd, gx, gy);
       return;
     }
     p.setPipeline(this.pipeRender);
@@ -941,7 +1028,7 @@ export class GSTrainer {
       this._adamBias();
       d.queue.writeBuffer(this.uniAdam, 0, this._warmed(this.adamData, 0, 14));
       if (this.shK) { this.shAdamData[3] = this.iter + 1; this.shAdamData[5] = this.n * this.shK * 3; this._shAdamBias(); d.queue.writeBuffer(this.uniSHAdam, 0, this._warmed(this.shAdamData, 4, 5)); }
-      const gx = Math.ceil(meta.w / TILE), gy = Math.ceil(meta.h / TILE);
+      const gx = Math.ceil(meta.w / this.tileSize), gy = Math.ceil(meta.h / this.tileSize);
       const nGroups = Math.ceil(this.n / 256);
       const d1 = (pass, total) => { const g = Math.ceil(total / 256); if (g <= 65535) pass.dispatchWorkgroups(g); else pass.dispatchWorkgroups(65535, Math.ceil(g / 65535)); };
       // forward-only estimate: the fused kernel with trainMode 0 (misc2.x)
@@ -1010,7 +1097,7 @@ export class GSTrainer {
       rbT.unmap(); rbT.destroy();
       const start = a.subarray(0, nt + 1), cursor = a.subarray(nt + 1);
       const hist = { le256: 0, le512: 0, le1024: 0, le2048: 0, gt2048: 0, entries: 0, maxTile: 0, tiles: 0 };
-      const ntUsed = Math.ceil(this.camMeta[0].w / TILE) * Math.ceil(this.camMeta[0].h / TILE);
+      const ntUsed = Math.ceil(this.camMeta[0].w / this.tileSize) * Math.ceil(this.camMeta[0].h / this.tileSize);
       for (let t = 0; t < Math.min(nt, ntUsed); t++) {
         const c = cursor[t] >= start[t] ? cursor[t] - start[t] : 0;
         if (start[t + 1] < start[t]) break;
@@ -1422,6 +1509,114 @@ export class GSTrainer {
   renderTrainCam(ci, ctx) {
     const meta = this.camMeta[ci];
     this.renderView(meta, ctx, 0, meta.offset);
+  }
+
+  /** Fit only three constant environment-color parameters to the completed model.
+   *  Uses the actual packed, undistorted training targets, including on lowMem sessions.
+   *  No splat/optimizer parameter changes; validation cameras do not set the color direction.
+   *  Optional shrinkage constrains its magnitude to the same per-camera error guard. */
+  async fitBackground({ validationCams = [], signal, isCurrent = () => !this._disposed } = {}) {
+    if (this.opts.fitBackground !== true) throw new Error('Background fitting was not enabled at setup');
+    if (this.ssaa >= 2) return { accepted: false, reason: 'supersampled-render' };
+    const check = () => {
+      if (signal?.aborted || this._disposed || !isCurrent())
+        throw new DOMException('Background fitting stopped', 'AbortError');
+    };
+    check();
+    const validation = [...new Set(validationCams)].filter(i =>
+      Number.isInteger(i) && i >= 0 && i < this.camMeta.length);
+    if (!validation.length) return { accepted: false, reason: 'no-validation-camera' };
+    const held = new Set(validation), train = [];
+    for (let i = 0; i < this.camMeta.length; i++)
+      if (!held.has(i) && i !== this.holdout && !this.excluded?.has(i)) train.push(i);
+    const d = this.device, pooled = backgroundFitMoments(), checks = [];
+    const readCamera = async (ci, moments) => {
+      check();
+      const meta = this.camMeta[ci], pixels = meta.w * meta.h, imageBytes = pixels * 16;
+      const rb = d.createBuffer({ size: pixels * 20,
+        usage: GPUBufferUsage.COPY_DST | GPUBufferUsage.MAP_READ, label: 'background-fit-read' });
+      let abort;
+      try {
+        const uniform = this._camUniform({ ...meta, bg: [0, 0, 0] }, 0, meta.offset, ci);
+        d.queue.writeBuffer(this.uniView, 0, uniform);
+        d.queue.writeBuffer(this.bufTileCnt, 0, this.tileZero);
+        const enc = d.createCommandEncoder(), pass = enc.beginComputePass();
+        this.encodeRaster(pass, meta, false);
+        pass.end();
+        enc.copyBufferToBuffer(this.bufOut, 0, rb, 0, imageBytes);
+        enc.copyBufferToBuffer(this.bufTarget, meta.offset * 4, rb, imageBytes, pixels * 4);
+        d.queue.submit([enc.finish()]);
+        const mapped = rb.mapAsync(GPUMapMode.READ);
+        if (signal) {
+          const stopped = new Promise((_, reject) => {
+            abort = () => reject(new DOMException('Background fitting stopped', 'AbortError'));
+            signal.addEventListener('abort', abort, { once: true });
+            if (signal.aborted) abort();
+          });
+          await Promise.race([mapped, stopped]);
+        } else await mapped;
+        check();
+        const data = rb.getMappedRange();
+        accumulateBackgroundFit(moments, new Float32Array(data, 0, pixels * 4),
+          new Uint32Array(data, imageBytes, pixels), { gain: uniform[19], bias: uniform[31] });
+      } finally {
+        if (abort) signal.removeEventListener('abort', abort);
+        try { rb.unmap(); } catch { /* cancellation can destroy a pending map */ }
+        rb.destroy();
+      }
+      // Give cancellation and the host UI a turn between bounded per-camera readbacks.
+      await new Promise(resolve => setTimeout(resolve, 0));
+      check();
+    };
+    for (const ci of train) await readCamera(ci, pooled);
+    const rgb = solveBackgroundFit(pooled);
+    if (!rgb) return { accepted: false, reason: 'no-background-signal', trainCams: train, pixels: pooled.pixels };
+    const fittedSse = backgroundFitSse(pooled, rgb), improvement =
+      pooled.baseSse > 0 ? 1 - fittedSse / pooled.baseSse : 0;
+    const result = { accepted: false, reason: 'insufficient-training-gain', rgb,
+      trainCams: train, validationCams: validation, pixels: pooled.pixels,
+      invalidPixels: pooled.invalidPixels, improvement,
+      baseMse: pooled.baseSse / Math.max(1, pooled.pixels * 3),
+      fittedMse: fittedSse / Math.max(1, pooled.pixels * 3), validation: checks };
+    if (improvement < 0.01) return result;
+    const validationMoments = [];
+    let regressed = false;
+    for (const ci of validation) {
+      const moments = backgroundFitMoments();
+      await readCamera(ci, moments);
+      validationMoments.push(moments);
+      const sse = backgroundFitSse(moments, rgb);
+      checks.push({ ci, pixels: moments.pixels,
+        baseMse: moments.baseSse / Math.max(1, moments.pixels * 3),
+        fittedMse: sse / Math.max(1, moments.pixels * 3) });
+      if (!moments.pixels || sse > moments.baseSse) {
+        result.reason = 'validation-regression';
+        regressed = true;
+        if (this.opts.backgroundFitShrink !== true) return result;
+      }
+    }
+    if (regressed) {
+      const bounded = constrainBackgroundFit(rgb, validationMoments);
+      if (!bounded) return result;
+      const sse = backgroundFitSse(pooled, bounded.rgb);
+      result.proposedRgb = rgb;
+      result.rgb = bounded.rgb;
+      result.validationScale = bounded.scale;
+      result.improvement = pooled.baseSse > 0 ? 1 - sse / pooled.baseSse : 0;
+      result.fittedMse = sse / Math.max(1, pooled.pixels * 3);
+      result.validation = validationMoments.map((moments, i) => ({
+        ci: validation[i], pixels: moments.pixels,
+        baseMse: moments.baseSse / Math.max(1, moments.pixels * 3),
+        fittedMse: backgroundFitSse(moments, bounded.rgb) / Math.max(1, moments.pixels * 3),
+      }));
+      if (result.improvement < 0.01) {
+        result.reason = 'insufficient-training-gain';
+        return result;
+      }
+    }
+    result.accepted = true;
+    result.reason = 'training-and-validation-improved';
+    return result;
   }
 
   /** Phase-2 MCMC refine (default): dead splats relocate as EXACT copies of

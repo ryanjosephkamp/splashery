@@ -8,6 +8,7 @@ const logit = (p) => Math.log(p / (1 - p));
 /**
  * points: [{ X: [3], rgb: [3] }]
  * clones: extra jittered copies per point (increases capacity without densification)
+ * conv.robustBounds === true: use coordinate medians for bounds, retaining every point
  * Returns { data, n, center, radius }
  */
 export function initGaussians(points, clones = 2, maxGaussians = 600000, conv = {}) {
@@ -19,10 +20,21 @@ export function initGaussians(points, clones = 2, maxGaussians = 600000, conv = 
 
   // scene bounds (robust-ish: median absolute extent)
   const center = [0, 0, 0];
-  for (const p of points) {
-    center[0] += p.X[0]; center[1] += p.X[1]; center[2] += p.X[2];
+  if (conv.robustBounds === true) {
+    // A far triangulated point can move the mean outside the actual scene and inflate
+    // its P90 radius. Change only the bounds center: all input points still seed rows.
+    const middle = Math.floor(np / 2);
+    for (let axis = 0; axis < 3; axis++) {
+      const values = Float64Array.from(points, (p) => p.X[axis]).sort();
+      center[axis] = np % 2 ? values[middle] : (values[middle - 1] + values[middle]) / 2;
+    }
+  } else {
+    // Preserve the established floating-point order and default parameter bytes.
+    for (const p of points) {
+      center[0] += p.X[0]; center[1] += p.X[1]; center[2] += p.X[2];
+    }
+    center[0] /= np; center[1] /= np; center[2] /= np;
   }
-  center[0] /= np; center[1] /= np; center[2] /= np;
   const dists = points.map((p) => Math.hypot(
     p.X[0] - center[0], p.X[1] - center[1], p.X[2] - center[2]));
   const sorted = Float64Array.from(dists).sort();
