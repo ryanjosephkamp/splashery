@@ -18,6 +18,7 @@
 // Task 95 adds r2-book, r2-lab, r2-album, r2-text, and r2-diagram: turns,
 // Pop out with layers off and on, and the original text/diagram inputs.
 // --profile=low and --width=390 match a phone; preparation waits are omitted.
+// --frames=1 also saves full-color PNG frames and their variable-duration concat list.
 // <out-dir>/pg6-<scene>.gif and a strip of six frames. The test PDF is made
 // by tests/fixtures/pg6/make-pdf.mjs.
 
@@ -301,7 +302,7 @@ async function record(scene) {
       await play(0.25);
       await hold(650);
       await raise(n, box);
-      observations.push({ layers: !!layered, figures: await pops() });
+      observations.push({ frame: frames.length, layers: !!layered, figures: await pops() });
       await turn(0.45, 0.3, 0.65);
       await hold(650);
       await turn(0, 0, 0.5);
@@ -501,6 +502,21 @@ async function record(scene) {
     await hold(1400);
   }
   await page.close();
+  if (opt("frames", "0") === "1") {
+    const dir = path.join(outDir, `frames-${scene}`);
+    fs.mkdirSync(dir, { recursive: true });
+    const lines = ["ffconcat version 1.0"];
+    frames.forEach((f, i) => {
+      const name = `${String(i).padStart(5, "0")}.png`;
+      fs.writeFileSync(
+        path.join(dir, name),
+        PNG.sync.write({ width: f.img.w, height: f.img.h, data: f.img.data }),
+      );
+      lines.push(`file '${name}'`, `duration ${f.delay / 1000}`);
+    });
+    lines.push(`file '${String(frames.length - 1).padStart(5, "0")}.png'`);
+    fs.writeFileSync(path.join(dir, "frames.ffconcat"), lines.join("\n") + "\n");
+  }
   if (scene.startsWith("r2-"))
     fs.writeFileSync(
       path.join(outDir, `pg6-${scene}.json`),
