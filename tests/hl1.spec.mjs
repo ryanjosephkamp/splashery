@@ -140,15 +140,18 @@ test("Hands-on: lift, toss, land, settle and Reset", async ({ page }, testInfo) 
             if (!h.on) return { capability, issues: ["unavailable"] };
             if (!h.canGrab()) return { capability, issues: ["own-controls"] };
 
-            // Use the GPU pick at the projected center, as phy-engine does.
-            // A center miss is a pickup failure. Continue diagnostically
-            // with a center press, as phy-engine's grab test does, so the
-            // floor and Reset measurements are still available.
-            const c = player.stage.toScreen(info.center);
+            // Use a real GPU pick. The tower's bounds center lies between
+            // lattice struts at the release phone canvas size; pick its solid
+            // second-floor deck (recipe y=1.15) instead. Every other toy keeps
+            // its center pick. A miss still fails; continue diagnostically so
+            // the floor and Reset measurements remain available.
+            const target =
+              info.id === "eiffel-tower" ? player.fromRecipe([0, 1.15, 0]) : info.center;
+            const c = player.stage.toScreen(target);
             player.pickDirty = true;
             const picked = await player.pickAt(c[0], c[1]);
-            if (!picked) issues.push("center-miss");
-            const hit = picked || info.center.slice();
+            if (!picked) issues.push("pick-miss");
+            const hit = picked || target.slice();
             player.setPaused(true); // no render-loop time between manual steps
             const tick = () => h.step(1 / 60);
             const advance = (n) => {

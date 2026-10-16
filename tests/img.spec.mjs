@@ -38,9 +38,10 @@ async function build(id, options = {}, count = 40000) {
   return { r, kit: b.value.kit, o };
 }
 
-test("the Imaging shelf: labs toys after Science, each with a sound, help and a plan entry", () => {
+test("the Imaging shelf: labs toys between Balls and Earth and maps, each with a sound, help, and a plan entry", () => {
   const ids = CATEGORIES.map((c) => c.id);
-  expect(ids.indexOf("imaging")).toBe(ids.indexOf("science") + 1);
+  expect(ids.indexOf("imaging")).toBe(ids.indexOf("balls") + 1);
+  expect(ids.indexOf("geo")).toBe(ids.indexOf("imaging") + 1);
   for (const id of IDS) {
     const t = TOYS.find((x) => x.id === id);
     expect(t, id).toBeTruthy();
