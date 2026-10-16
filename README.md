@@ -1,5 +1,10 @@
 # Moving photo to 3D: round 4 evidence
 
+The [Operator review follow-up](ledgers/operator-review/manifest.json) retains the compressed-cache
+hashes, twelve new startup launches, clip regression reports before and after the release UI merge,
+browser capability probes, and original CI failures. The existing movies retain their original
+source pins.
+
 Made by Ryan with Codex (GPT-6), October 16, 2026. This is the separate
 `codex/moving-photo-r4-clips` branch. **Never merge it into main.**
 
