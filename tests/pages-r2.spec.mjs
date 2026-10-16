@@ -221,6 +221,21 @@ test.describe("sharp pages in the real renderer", () => {
         window.__splashery.player.stage.app.scene.layers.getLayerByName("World").meshInstances
           .length,
     );
+    await page.evaluate(() => {
+      const p = window.__splashery.player.pictures,
+        show = p.show;
+      window.__pagesR2Replacements = [];
+      p.show = function (...args) {
+        const previous = args[0].slot;
+        const result = show.apply(this, args);
+        if (args[2].surface && previous?.surface && previous !== args[0].slot)
+          window.__pagesR2Replacements.push({
+            backing: previous.entity.enabled,
+            face: previous.surface.instance.visible,
+          });
+        return result;
+      };
+    });
     for (const file of ["photo.jpg", "anim.gif", "photo.jpg", "clip.webm"]) {
       await page.evaluate(
         (file) =>
@@ -235,6 +250,9 @@ test.describe("sharp pages in the real renderer", () => {
         await page.evaluate(() => !!window.__splashery.player.pictures.sheets[0].slot.surface),
       ).toBe(image);
     }
+    const replacements = await page.evaluate(() => window.__pagesR2Replacements);
+    expect(replacements.length).toBeGreaterThan(0);
+    expect(replacements.every((r) => !r.backing && !r.face)).toBe(true);
     expect(await old.evaluate((s) => s.layer.meshInstances.includes(s.instance))).toBe(false);
     await old.dispose();
     await page.evaluate(() => window.__splashery.app.chooseToy("picture-frame"));
