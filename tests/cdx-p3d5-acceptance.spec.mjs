@@ -15,6 +15,10 @@ function atlas(values = {}) {
       pitch,
       halo: { anchoredProfiles: 4 },
       fringe: { evaluated: 3 },
+      depth: {
+        kind: "T-junction hypothesis; not reference depth",
+        flattenedFraction: values.flatDepth ?? values.streaks ?? 0.4,
+      },
     })),
     values: { halos: 0.12, streaks: 0.4, textureLoss: 0.8, holes: 0, fringes: 0.5, ...values },
   });
@@ -25,7 +29,12 @@ function atlas(values = {}) {
     inputs: [{ id: "one", sha256: "source", profiles: { phone: profile(), desktop: profile() } }],
   };
 }
-const compare = (a, b, options) => compareAtlases(a, b, { expectedInputs: 1, ...options });
+const compare = (a, b, options) =>
+  compareAtlases(a, b, {
+    expectedInputs: 1,
+    noise: repeatNoise(a, [structuredClone(a)]),
+    ...options,
+  });
 
 test("an improved class mean cannot hide one worse input/profile", () => {
   const a = atlas(),
@@ -76,4 +85,29 @@ test("ranking uses each class's count times severity at the existing review leve
   expect(
     compare(atlas(), atlas({ halos: 0.06, streaks: 0.2, textureLoss: 0.4 })).qualityPassed,
   ).toBe(true);
+});
+
+test("unmeasured noise and changed metric methods block acceptance", () => {
+  const a = atlas(),
+    b = atlas({ halos: 0.06, streaks: 0.2, textureLoss: 0.4 });
+  expect(compare(a, b, { noise: undefined }).errors).toContain(
+    "Repeat noise has not been measured.",
+  );
+  a.source.files = { "tools/p3df/scoring.mjs": "original" };
+  b.source.files = { "tools/p3df/scoring.mjs": "changed" };
+  expect(
+    compare(a, b).errors.some((e) => e.startsWith("Calibration or camera helper changed")),
+  ).toBe(true);
+});
+
+test("a lower RGB average cannot hide wider edges or a missing transition", () => {
+  const a = atlas(),
+    b = atlas({ halos: 0.06, streaks: 0.2, textureLoss: 0.4 });
+  for (const row of a.inputs[0].profiles.phone.rows)
+    Object.assign(row.halo, { transitionWidthExcessP95: 1, missingTransitionProfiles: 0 });
+  for (const row of b.inputs[0].profiles.phone.rows)
+    Object.assign(row.halo, { transitionWidthExcessP95: 1.1, missingTransitionProfiles: 1 });
+  const result = compare(a, b);
+  expect(result.regressions.map((r) => r.metric)).toEqual(["transitionWidth", "lostTransitions"]);
+  expect(result.qualityPassed).toBe(false);
 });

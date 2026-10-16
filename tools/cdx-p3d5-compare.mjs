@@ -5,18 +5,60 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { THRESHOLDS, POSES } from "./p3df/scoring.mjs";
 
-export const TARGETS = ["halos", "streaks", "textureLoss"];
+export const TARGETS = ["halos", "flatDepth", "streaks"];
+export const RANK_LEVELS = Object.freeze({
+  ...THRESHOLDS,
+  flatDepth: 0.2,
+  speed: 5000,
+  memory: 1024 ** 3,
+});
 const average = (a) => (a.length ? a.reduce((s, x) => s + x, 0) / a.length : null);
 const finite = Number.isFinite;
 const keyOf = (id, profile, metric) => JSON.stringify([id, profile, metric]);
+const calibrationFiles = [
+  "tools/p3df/scoring.mjs",
+  "tools/p3df/artifacts.mjs",
+  "tools/p3df/cohorts.mjs",
+  "tools/cdx-p3d2-r3-common.mjs",
+  "tools/cdx-p3d2-r3-anchored.mjs",
+  "tools/studio-truth/metrics.mjs",
+  "tools/studio-truth/sampling.mjs",
+];
+
+function qualityValues(profile) {
+  const maximum = (read) => {
+    const values = profile.rows.map(read).filter(finite);
+    return values.length ? Math.max(...values) : null;
+  };
+  return {
+    ...Object.fromEntries(Object.keys(THRESHOLDS).map((k) => [k, profile.values[k]])),
+    paletteExcess: maximum((r) => r.halo?.anchoredExcess),
+    edgeDisplacement: maximum((r) => r.halo?.edgeDisplacementP95),
+    transitionWidth: maximum((r) => r.halo?.transitionWidthExcessP95),
+    lostTransitions: maximum((r) => r.halo?.missingTransitionProfiles),
+    fringeMaximum: maximum((r) => r.fringe?.fringeMax),
+    thinWidthError: maximum((r) => r.fringe?.widthErrorMean),
+    flatDepth: maximum((r) =>
+      r.depth?.kind?.startsWith("T-junction") ? r.depth.flattenedFraction : null,
+    ),
+    referenceFlatDepth: maximum((r) =>
+      r.depth?.kind?.startsWith("reference") ? r.depth.flattenedFraction : null,
+    ),
+  };
+}
 
 export function rankClasses(atlas) {
-  return Object.entries(THRESHOLDS)
+  return Object.entries(RANK_LEVELS)
     .map(([metric, threshold]) => {
       const supported = atlas.inputs.flatMap((input) =>
-        Object.entries(input.profiles).flatMap(([profile, row]) =>
-          finite(row.values[metric]) ? [{ id: input.id, profile, value: row.values[metric] }] : [],
-        ),
+        Object.entries(input.profiles).flatMap(([profile, row]) => {
+          const values = {
+            ...qualityValues(row),
+            speed: row.values.speed,
+            memory: row.values.memory,
+          };
+          return finite(values[metric]) ? [{ id: input.id, profile, value: values[metric] }] : [];
+        }),
       );
       const flagged = supported.filter((r) => r.value >= threshold);
       return {
@@ -56,9 +98,11 @@ export function repeatNoise(baseline, repeats) {
         const b = after.profiles[profile];
         if (!b || a.renderer !== b.renderer || a.browser !== b.browser)
           throw new Error("Noise requires identical browser and renderer.");
-        for (const metric of Object.keys(THRESHOLDS)) {
-          const x = a.values[metric],
-            y = b.values[metric];
+        const oldValues = qualityValues(a),
+          newValues = qualityValues(b);
+        for (const metric of Object.keys(oldValues)) {
+          const x = oldValues[metric],
+            y = newValues[metric];
           if (finite(x) !== finite(y)) throw new Error("Repeat support changed.");
           if (!finite(x)) continue;
           const k = keyOf(before.id, profile, metric);
@@ -77,6 +121,10 @@ export function compareAtlases(baseline, candidate, { noise, expectedInputs = 11
     regressions = [],
     observations = [];
   if (!baseline.complete || !candidate.complete) errors.push("An atlas is incomplete.");
+  if (!(noise?.repetitions > 0)) errors.push("Repeat noise has not been measured.");
+  for (const file of calibrationFiles)
+    if (baseline.source.files?.[file] !== candidate.source.files?.[file])
+      errors.push("Calibration or camera helper changed: " + file);
   if (before.size !== expectedInputs || after.size !== expectedInputs)
     errors.push("The required input count is not complete.");
   if (JSON.stringify(baseline.settings) !== JSON.stringify(candidate.settings))
@@ -126,9 +174,11 @@ export function compareAtlases(baseline, candidate, { noise, expectedInputs = 11
               "Lost probe support: " + JSON.stringify([id, profile, group, p.yaw, p.pitch]),
             );
       }
-      for (const metric of Object.keys(THRESHOLDS)) {
-        const oldValue = x.values[metric],
-          newValue = y.values[metric],
+      const oldValues = qualityValues(x),
+        newValues = qualityValues(y);
+      for (const metric of Object.keys(oldValues)) {
+        const oldValue = oldValues[metric],
+          newValue = newValues[metric],
           tolerance = noise?.tolerance[keyOf(id, profile, metric)] || 0;
         if (finite(oldValue) && !finite(newValue)) {
           errors.push("Lost metric support: " + JSON.stringify([id, profile, metric]));
@@ -145,12 +195,13 @@ export function compareAtlases(baseline, candidate, { noise, expectedInputs = 11
     // Freeze membership from the baseline. A missing candidate is a failure,
     // never a smaller denominator that makes the class average look better.
     const members = observations.filter(
-      (r) => r.metric === metric && r.before >= THRESHOLDS[metric],
+      (r) => r.metric === metric && r.before >= RANK_LEVELS[metric],
     );
     const required = baseline.inputs.reduce(
       (sum, r) =>
         sum +
-        Object.values(r.profiles).filter((p) => p.values[metric] >= THRESHOLDS[metric]).length,
+        Object.values(r.profiles).filter((p) => qualityValues(p)[metric] >= RANK_LEVELS[metric])
+          .length,
       0,
     );
     const oldMean = average(members.map((r) => r.before)),
