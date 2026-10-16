@@ -422,3 +422,13 @@
 {"v":1,"t":"2026-10-16T23:55:19.220Z","harness":"claude-code","event":"turn-start","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","cwd":"clips"}
 {"v":1,"t":"2026-10-16T23:55:20.437Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"Read","cwd":"clips"}
 {"v":1,"t":"2026-10-16T23:55:20.805Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"Read","cwd":"clips"}
+{"v":1,"t":"2026-10-16T23:55:29.477Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"Artifact","cwd":"clips"}
+{"v":1,"t":"2026-10-16T23:55:31.954Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"ArtifactData","cwd":"clips"}
+{"v":1,"t":"2026-10-16T23:55:36.974Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"ArtifactData","cwd":"clips"}
+{"v":1,"t":"2026-10-16T23:55:45.523Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"ArtifactData","cwd":"clips"}
+{"v":1,"t":"2026-10-16T23:56:00.562Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"Bash","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T23:56:04.011Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"mcp__github__pull_request_read","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T23:56:04.529Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"mcp__github__pull_request_read","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T23:56:14.446Z","harness":"claude-code","event":"tool","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","tool":"mcp__claude-code-remote__send_message","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T23:56:24.110Z","harness":"claude-code","event":"turn-end","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T23:56:25.412Z","harness":"claude-code","event":"subagent-stop","session":"6ff912e9-79ec-5a5a-b847-8f2d41b01d57","agent":"ab97a9e9f10e8a121"}
