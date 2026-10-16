@@ -69,6 +69,34 @@ test("an immediately evicted prefetch is not rebuilt on every frame", () => {
   expect(builds).toHaveLength(2);
 });
 
+test("an opening view installs its first face before upgrading to settled detail", () => {
+  const p = Object.create(Pictures.prototype);
+  const sheet = { i: 0, def: { id: "face" }, shown: null, want: null };
+  let width = 128;
+  Object.assign(p, {
+    solid: true,
+    media: { kind: "pdf", count: 1, aspect: () => 1 },
+    sheets: [sheet],
+    retiring: [],
+    page: 0,
+    order: 0,
+    stage: { requestRender() {} },
+    screenWidth: () => width,
+    levelFor: (_sheet, _aspect, pixels) => pixels,
+    pump() {},
+  });
+  p.update({}, 0);
+  const first = sheet.want.key;
+  width = 512;
+  p.update({}, 1);
+  expect(sheet.want.key).toBe(first);
+  sheet.shown = { ...sheet.want };
+  sheet.levelSince = performance.now() - 1000;
+  p.update({}, 2);
+  expect(sheet.want.level).toBe(512);
+  expect(sheet.want.key).not.toBe(first);
+});
+
 test("cached source canvases and relief maps share the original memory allowance", () => {
   const p = Object.create(Pictures.prototype);
   Object.assign(p, { budget: { ink: 220000 }, cache: new Map(), sheets: [] });
