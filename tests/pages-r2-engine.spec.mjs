@@ -123,6 +123,17 @@ test("an opening view installs its first face before upgrading to settled detail
   expect(sheet.want.key).not.toBe(first);
 });
 
+test("the initial ink raster matches display detail and keeps its supersampled upgrade and cap", () => {
+  const p = Object.create(Pictures.prototype);
+  Object.assign(p, { solid: true, budget: { width: 1100 } });
+  const sheet = { shown: null };
+  const first = p.levelFor(sheet, 0.75, 400, 0, 1, "ink");
+  expect(first).toBe(512);
+  sheet.shown = { level: first };
+  expect(p.levelFor(sheet, 0.75, 400, 0, 1, "ink")).toBe(724);
+  expect(p.levelFor(sheet, 0.75, Infinity, 0, 1, "ink")).toBe(1100);
+});
+
 test("cached source canvases and relief maps share the original memory allowance", () => {
   const p = Object.create(Pictures.prototype);
   Object.assign(p, { budget: { ink: 220000 }, cache: new Map(), sheets: [] });
