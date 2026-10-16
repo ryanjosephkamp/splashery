@@ -279,15 +279,32 @@ export class Stage {
   settle() {
     this.frameAvg = 0;
     this.slowFrames = 0;
+    this.longFrames = 0;
     this.skipFrames = 8;
   }
 
-  // Frames closer than 100 ms apart were drawn back to back, so their gap is
-  // the frame time. Over about 24 ms while moving drops the ratio; still
-  // over 40 ms at the lowest ratio for 30 frames asks for a lower tier.
+  // Ignore isolated long gaps, but count a sustained rate below 10 fps too.
+  // Cap their contribution so a pause cannot swamp the moving average.
+  // Over 24 ms while moving drops the ratio; still over 40 ms at the lowest
+  // ratio for 30 frames asks for a lower tier.
   timeFrame(ms) {
-    if (!this.adaptive || this.sharp?.adapt === "off" || this.fixedSize || ms > 100 || !this.busy)
+    if (
+      !this.adaptive ||
+      this.sharp?.adapt === "off" ||
+      this.fixedSize ||
+      !this.busy ||
+      document.hidden ||
+      !Number.isFinite(ms) ||
+      ms <= 0
+    ) {
+      this.longFrames = 0;
       return;
+    }
+    if (ms > 100) {
+      this.longFrames = (this.longFrames || 0) + 1;
+      if (this.longFrames < 4) return;
+      ms = Math.min(ms, 250);
+    } else this.longFrames = 0;
     if (this.skipFrames > 0) {
       this.skipFrames--;
       return;
