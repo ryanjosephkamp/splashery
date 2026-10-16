@@ -1,0 +1,57 @@
+{
+  "kind": "Independent verification of three explicitly rejected prototype review videos; separate from the retained 54-video comparison and never an acceptance claim.",
+  "createdUTC": "2026-10-16T09:23:02.445315+00:00",
+  "rawManifestSha256": "9e33af49a4a216dd215ded0d29d7f09413a94fc5d32f72a766b45e498fae80a6",
+  "sourceBuildHashesVerified": true,
+  "rows": [
+    {
+      "id": "forest",
+      "file": "forest-sharp-before-after.mp4",
+      "sha256": "885684c45e49f6dcee4bf6764de13ac0997330206e8ea095c6276db5462edf36",
+      "ffprobe": {
+        "width": 780,
+        "height": 844,
+        "r_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativeFramePairs": 72,
+      "changedFramePairs": 72,
+      "maximumChangedPixels": 1435
+    },
+    {
+      "id": "street",
+      "file": "street-sharp-before-after.mp4",
+      "sha256": "df83833ec44da4deade66366bfb3bf40de7a0c9a9324491fb327a3f52b02be7f",
+      "ffprobe": {
+        "width": 780,
+        "height": 844,
+        "r_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativeFramePairs": 72,
+      "changedFramePairs": 50,
+      "maximumChangedPixels": 5760
+    },
+    {
+      "id": "dot-library",
+      "file": "dot-library-sharp-before-after.mp4",
+      "sha256": "35baeb3203099662cd2b2bf32ecf78026fde073ec680dfd764e48fd2007a63d2",
+      "ffprobe": {
+        "width": 780,
+        "height": 844,
+        "r_frame_rate": "12/1",
+        "duration": "6.000000",
+        "nb_read_frames": "72"
+      },
+      "nativeFramePairs": 72,
+      "changedFramePairs": 72,
+      "maximumChangedPixels": 6124
+    }
+  ],
+  "complete": true,
+  "methodSnapshotsVerified": true,
+  "methodHash": "82a362464a07b4c94d47b3153656d15fa12ef1c6a1bd838d76dc1124f368e9f8",
+  "prototypeSnapshotsVerified": true
+}

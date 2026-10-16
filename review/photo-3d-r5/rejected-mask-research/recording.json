@@ -1,0 +1,2755 @@
+{
+  "kind": "REJECTED foreground-mask research; not the retained round 5 runtime or a quality/cost pass.",
+  "rejection": "Two-pixel mask improves forest and street ribbons at the atlas settings, but increases library boundary color error. These clips show the same rejected prototype at Depth 0.5.",
+  "browser": "151.0.7922.173",
+  "methodHash": "82a362464a07b4c94d47b3153656d15fa12ef1c6a1bd838d76dc1124f368e9f8",
+  "methodSource": "method-source/",
+  "capturePolicy": {
+    "first": 2,
+    "sharpRest": 1,
+    "splats": 2,
+    "pairedWindow": true
+  },
+  "capture": "Two visible phone iframes; completed frames captured concurrently, with lossless raw-RGBA handoff to the video encoder. Camera poses and native drawing-buffer resolution remain unchanged.",
+  "builds": {
+    "before": {
+      "files": {
+        "src/packs/photo-3d.js": "bd1eba55b416860ecbdb41f1c442b83281f9e9f2f9ba8b2888f04edb85ec127b",
+        "src/packs/photo-3d-core.js": "01fc758b2af3198fd94f922a3195d313d8f598cdbed8a88e6caa4128567a586c",
+        "src/packs/photo-sharp.js": "df95e37b9252f0b0421b7cad99ba194efa98ba39f0e61d51265829e3618f797a",
+        "src/photo3d/build-worker.js": "b75fa5aafb3516eb2d09542cb295ce9577920458cae5fa565946394888f94ea5",
+        "src/photo3d/prepare.js": "0259963e210e325403da3f32b24156b60ea9083c1d34525878f40503325c9ee8",
+        "src/photo3d/background.js": "d856a45bb5e5ca6de2794a9967d703515ccc1aceb19b91366c354635a065e5fa",
+        "src/photo3d/depth-edges.js": "b14f137a829eadcac5235dcb9ef28c89f224129c19fc137959683ce76e4a4f70",
+        "src/photo3d/surface.js": "10fcd61d2bea397a292c19d0654dad8b0cb169f8015a6f8e81512ed820391433",
+        "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+        "src/live/relief-mesh.js": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971",
+        "src/live/relief-height.js": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+        "src/stage.js": "13f9da86865495adfc7863fd105ab759d0dbbd5f1812ddabc2ec1b9506e9ea5c",
+        "src/photo3d/preview.js": "287df71ea977f77a98e1fa756ebc3a939116c6fc7e9cfe8c2b4d8f784e163fce",
+        "src/photo3d/decode.js": "73e1e4ce8b87ec57aac3031c816e0ff600b5fb7d2076fef0f9eaf7aeb0073510",
+        "src/photo3d/decode-worker.js": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103",
+        "src/photo3d/border.js": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b",
+        "src/depth/engine.js": "953ad7094ed535a059f196e32eddbda4e7bbce0286f55baf2cb00eed4a7cbe89",
+        "src/packs/photo-3d-depth.js": "5afd7e5e88a4326add90604fc82c4b20e7f3dd31a1cec340ba7a61196cbe0a68"
+      },
+      "hash": "da709465e9e8df4b35fbde98eff65d9cf278de819b64b576309e9ac0bf6f45f9"
+    },
+    "after": {
+      "files": {
+        "src/packs/photo-3d.js": "6e8247dbdf01f007dbd745298ffdd794107cd61e1a266dd5c66471b51a7a6607",
+        "src/packs/photo-3d-core.js": "c157144504eda5bc9ca47c9173e7738cdf8c5e82a553e9800d4127e694525487",
+        "src/packs/photo-sharp.js": "86d1049b31b9278389857b406d4c18e68eada2f454927c6fb1e5cc9ccb58b1ab",
+        "src/photo3d/build-worker.js": "7ed4768c7b3a9440ad75461922aa1f33484342c1bb4ae9dd54458435869bb175",
+        "src/photo3d/prepare.js": "325e06171a1bed49cd242d515946906435e9845212e632a58f44b1539734b014",
+        "src/photo3d/background.js": "92b5950c792f10feeaaba024ae0751273564172279917f0e6c0ca415a254a279",
+        "src/photo3d/depth-edges.js": "5ddf367278f8988f0c75bb75968be5235586839f7690cd2feea27668e1d815e9",
+        "src/photo3d/surface.js": "cfa72273ea86c58635c5f6b12b9da2648fdd1a6e008502a36bf0d25912f41c15",
+        "src/photo-splats.js": "227cd345c3a8654e98cfd8f4d9adba5521a9db186e5f969838f6a8bb219c71b3",
+        "src/live/relief-mesh.js": "850e5d0d393853039df2e3a68e0e6c65f4dfae60c9c76758fbe1f90e1b48f9b4",
+        "src/live/relief-height.js": "a48a308186d67daf2935bac7e5ed30502a263a4a47c749cea4f13bf05729190c",
+        "src/stage.js": "9182ed245aff2195c52a865883dcc97ab61f4fbbf83105ae63f55ce39f08bf6c",
+        "src/photo3d/preview.js": "0935f439061b84c0b81f2f727e14514aba75422c373613ebaa6940267c559d86",
+        "src/photo3d/decode.js": "73e1e4ce8b87ec57aac3031c816e0ff600b5fb7d2076fef0f9eaf7aeb0073510",
+        "src/photo3d/decode-worker.js": "7f3ac7d7ddeaf1c0428249330c540ad0119bba97d5799acb53664892a375b103",
+        "src/photo3d/border.js": "57eecc152c1b2ecb5a9bb5fc452f39a5753f679fe175e6a7b2984a216b65378b",
+        "src/depth/engine.js": "2f59ffb7755ee1c96af95de2c93483c80dafc8c7f71007f2fc0bfb89cb332faf",
+        "src/packs/photo-3d-depth.js": "5afd7e5e88a4326add90604fc82c4b20e7f3dd31a1cec340ba7a61196cbe0a68"
+      },
+      "hash": "bddadf15baf2aab1e254c74d69d9707dbd3d1bb06de04656e260bfcb788e97f6"
+    }
+  },
+  "inputHashes": [
+    {
+      "id": "forest",
+      "photoSha256": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+      "depthSha256": "adc3d64fbe0d83aefcd5a9efe620f9d55d8b15739ff9aa6366c11c2e2a4b86f2",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "street",
+      "photoSha256": "b1475109359fdd1ff17e238a3b00f715c5778e05ec21e9b3a8e0b0c76ac0192e",
+      "depthSha256": "9ac184e3755a2986a07c63630396507ac204aeb0535ddf169425c87414a2249a",
+      "depthKind": "original baked depth"
+    },
+    {
+      "id": "dot-library",
+      "photoSha256": "159a7200841e2da569509e3d105f10221e62816f36ff044101a2ad48685383e7",
+      "depthSha256": "7734bc9435cd8d3fcee40f4d629d22e813114e65c93799f70aa66ee6ca8370ad",
+      "depthKind": "original baked depth"
+    }
+  ],
+  "depth": 0.5,
+  "costUse": "Review only; supplied model output is identical in both builds. Cold inference and first-view cost are measured separately.",
+  "urls": ["http://127.0.0.1:4174", "http://127.0.0.1:4181"],
+  "path": "Four continuous sine arcs: yaw -30,+30 then pitch -30,+30; no frame interpolation.",
+  "rows": [
+    {
+      "elapsedMs": 76985.993253,
+      "id": "forest",
+      "view": "sharp",
+      "file": "forest-sharp-before-after.mp4",
+      "sha256": "885684c45e49f6dcee4bf6764de13ac0997330206e8ea095c6276db5462edf36",
+      "frames": 72,
+      "fps": 12,
+      "deviceScaleFactor": 3,
+      "profile": "low",
+      "nativeBuffer": [585, 1266],
+      "pixelComparison": [
+        {
+          "frame": 0,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 208,
+          "maximumChannelError": 189,
+          "meanAbsoluteChannelError": 0.013432620857581363,
+          "hashes": [
+            "19b0db33b80b09f959e61becb42e1c549ebe74901cd0a714a3d872cd1fa38ea2",
+            "1d19bcd395110014cea46fc8cc3f6af2349713262ca2b60fd1c28d0491c6dda6"
+          ]
+        },
+        {
+          "frame": 1,
+          "yaw": -5.2094453300079095,
+          "pitch": 0,
+          "changedPixels": 75,
+          "maximumChannelError": 210,
+          "meanAbsoluteChannelError": 0.00595860169319885,
+          "hashes": [
+            "3aa26d06ed63cbe4d9c81f4fc68ba69d8417e2c0e702be0f6df3130a8d8965ab",
+            "5dd6f77ce42b49b665a76893e9ce255f7b963244650f6607f8bbc572b63e33b3"
+          ]
+        },
+        {
+          "frame": 2,
+          "yaw": -10.260604299770062,
+          "pitch": 0,
+          "changedPixels": 12,
+          "maximumChannelError": 108,
+          "meanAbsoluteChannelError": 0.0003555627568265799,
+          "hashes": [
+            "20ee2572bda3dabd9f6fd1b4f0300f2287feca389f817a59c04dc068f2525343",
+            "4655c6baa64cda43b35c0dd5206ddeea0e0f81d0193d47dcca93dffbc3630f3f"
+          ]
+        },
+        {
+          "frame": 3,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 4,
+          "maximumChannelError": 118,
+          "meanAbsoluteChannelError": 0.0003227069577780478,
+          "hashes": [
+            "e6054f0925f16e0cd9e9daca5c8cadde839e873b804391462115bc54cf54366a",
+            "1e2b774a87d2cadc6759c246c66fbd5eca484c723c689f62a430e2f859586842"
+          ]
+        },
+        {
+          "frame": 4,
+          "yaw": -19.283628290596177,
+          "pitch": 0,
+          "changedPixels": 14,
+          "maximumChannelError": 205,
+          "meanAbsoluteChannelError": 0.0023372625268359864,
+          "hashes": [
+            "7b183d6c13867778e1f9876b09282fd06be5419023edd110432adb2c8dea96e4",
+            "362477b7dee80f2bf499c6759aff700a614c8f1fd795e741defba233e24ee8ba"
+          ]
+        },
+        {
+          "frame": 5,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 80,
+          "maximumChannelError": 204,
+          "meanAbsoluteChannelError": 0.009038945373858485,
+          "hashes": [
+            "e4660a507a92eaa6aa6efc872fbdd705c7da5fc796ed5f926c3d1c39b5075d85",
+            "b838de7e30593a40b1033b6bfd741088a16914a236f4ad3a1cee20bc97230848"
+          ]
+        },
+        {
+          "frame": 6,
+          "yaw": -25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 140,
+          "maximumChannelError": 229,
+          "meanAbsoluteChannelError": 0.015083962319349366,
+          "hashes": [
+            "0994b6b933781b018a271d406e0fc343989cb54cafaf559e3d543738676e488a",
+            "ae42dc32af848194c7c89050dec5f5c256c5668d7756da10b343ca85d6e1340f"
+          ]
+        },
+        {
+          "frame": 7,
+          "yaw": -28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 229,
+          "maximumChannelError": 231,
+          "meanAbsoluteChannelError": 0.018131000121521447,
+          "hashes": [
+            "7735cd497bc42035274d07d65eed7577691512738eec29d2a1f3637da6dcc4ad",
+            "57f6f5ccb61b605dfe4b01e0b01ff8449533b604eb5a79178532cb1c0f66e708"
+          ]
+        },
+        {
+          "frame": 8,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 264,
+          "maximumChannelError": 236,
+          "meanAbsoluteChannelError": 0.019866056358947354,
+          "hashes": [
+            "fcf0c6c6568c9fb2f7f8044776932f61f585d4035d7ea44e537c36749d384712",
+            "24735cd275d86d0b349e61e8654dd04dd7dafcb943110bd78c9f30df50f0d164"
+          ]
+        },
+        {
+          "frame": 9,
+          "yaw": -30,
+          "pitch": 0,
+          "changedPixels": 228,
+          "maximumChannelError": 231,
+          "meanAbsoluteChannelError": 0.015650162253637766,
+          "hashes": [
+            "f5e02762631707d9e280beb00fba6a8bdee4df1e5d72184fcf0e2f37ff242ea4",
+            "1ddded36bfb7e231a454599f2300807fb20372bf7cc1cc25bc79bde706ff5cd9"
+          ]
+        },
+        {
+          "frame": 10,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 264,
+          "maximumChannelError": 236,
+          "meanAbsoluteChannelError": 0.019866056358947354,
+          "hashes": [
+            "fcf0c6c6568c9fb2f7f8044776932f61f585d4035d7ea44e537c36749d384712",
+            "24735cd275d86d0b349e61e8654dd04dd7dafcb943110bd78c9f30df50f0d164"
+          ]
+        },
+        {
+          "frame": 11,
+          "yaw": -28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 229,
+          "maximumChannelError": 231,
+          "meanAbsoluteChannelError": 0.018131000121521447,
+          "hashes": [
+            "7735cd497bc42035274d07d65eed7577691512738eec29d2a1f3637da6dcc4ad",
+            "57f6f5ccb61b605dfe4b01e0b01ff8449533b604eb5a79178532cb1c0f66e708"
+          ]
+        },
+        {
+          "frame": 12,
+          "yaw": -25.98076211353316,
+          "pitch": 0,
+          "changedPixels": 140,
+          "maximumChannelError": 229,
+          "meanAbsoluteChannelError": 0.015083962319349366,
+          "hashes": [
+            "0994b6b933781b018a271d406e0fc343989cb54cafaf559e3d543738676e488a",
+            "ae42dc32af848194c7c89050dec5f5c256c5668d7756da10b343ca85d6e1340f"
+          ]
+        },
+        {
+          "frame": 13,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 80,
+          "maximumChannelError": 204,
+          "meanAbsoluteChannelError": 0.009038945373858485,
+          "hashes": [
+            "e4660a507a92eaa6aa6efc872fbdd705c7da5fc796ed5f926c3d1c39b5075d85",
+            "b838de7e30593a40b1033b6bfd741088a16914a236f4ad3a1cee20bc97230848"
+          ]
+        },
+        {
+          "frame": 14,
+          "yaw": -19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 14,
+          "maximumChannelError": 205,
+          "meanAbsoluteChannelError": 0.0023372625268359864,
+          "hashes": [
+            "7b183d6c13867778e1f9876b09282fd06be5419023edd110432adb2c8dea96e4",
+            "362477b7dee80f2bf499c6759aff700a614c8f1fd795e741defba233e24ee8ba"
+          ]
+        },
+        {
+          "frame": 15,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 4,
+          "maximumChannelError": 118,
+          "meanAbsoluteChannelError": 0.0003227069577780478,
+          "hashes": [
+            "e6054f0925f16e0cd9e9daca5c8cadde839e873b804391462115bc54cf54366a",
+            "1e2b774a87d2cadc6759c246c66fbd5eca484c723c689f62a430e2f859586842"
+          ]
+        },
+        {
+          "frame": 16,
+          "yaw": -10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 12,
+          "maximumChannelError": 108,
+          "meanAbsoluteChannelError": 0.0003555627568265799,
+          "hashes": [
+            "20ee2572bda3dabd9f6fd1b4f0300f2287feca389f817a59c04dc068f2525343",
+            "4655c6baa64cda43b35c0dd5206ddeea0e0f81d0193d47dcca93dffbc3630f3f"
+          ]
+        },
+        {
+          "frame": 17,
+          "yaw": -5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 75,
+          "maximumChannelError": 210,
+          "meanAbsoluteChannelError": 0.00595860169319885,
+          "hashes": [
+            "3aa26d06ed63cbe4d9c81f4fc68ba69d8417e2c0e702be0f6df3130a8d8965ab",
+            "5dd6f77ce42b49b665a76893e9ce255f7b963244650f6607f8bbc572b63e33b3"
+          ]
+        },
+        {
+          "frame": 18,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 208,
+          "maximumChannelError": 189,
+          "meanAbsoluteChannelError": 0.013432620857581363,
+          "hashes": [
+            "19b0db33b80b09f959e61becb42e1c549ebe74901cd0a714a3d872cd1fa38ea2",
+            "1d19bcd395110014cea46fc8cc3f6af2349713262ca2b60fd1c28d0491c6dda6"
+          ]
+        },
+        {
+          "frame": 19,
+          "yaw": 5.209445330007912,
+          "pitch": 0,
+          "changedPixels": 313,
+          "maximumChannelError": 177,
+          "meanAbsoluteChannelError": 0.010076828560240883,
+          "hashes": [
+            "cdf94c79e99717889d671571a12c3114ee718aeb8cb5f4ae2f8b2eed252aa989",
+            "70a484c4c5c3e8de00450cee726b2c85653da2cb62e30f1e3df917b444e1c44f"
+          ]
+        },
+        {
+          "frame": 20,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 376,
+          "maximumChannelError": 159,
+          "meanAbsoluteChannelError": 0.009448517663367585,
+          "hashes": [
+            "ed6f6852b1d6907fc8211290adb599b5fc9ab8ad18862971d3577318a0345273",
+            "77799cbdf1e1e451db33603ec39c2513692f358b98aefe6cb752fdb1a851e4b0"
+          ]
+        },
+        {
+          "frame": 21,
+          "yaw": 15.000000000000004,
+          "pitch": 0,
+          "changedPixels": 435,
+          "maximumChannelError": 145,
+          "meanAbsoluteChannelError": 0.012810160993415337,
+          "hashes": [
+            "27043f9dc281978ffd372fa2973efe72c12c7526619bf8b444c0e9c40f56f46a",
+            "035e17c7185deb31bb57408c92148533c2d339ef22c88d03509286bb809349db"
+          ]
+        },
+        {
+          "frame": 22,
+          "yaw": 19.283628290596187,
+          "pitch": 0,
+          "changedPixels": 567,
+          "maximumChannelError": 186,
+          "meanAbsoluteChannelError": 0.016515665014875124,
+          "hashes": [
+            "1d0532f09ae36d1a6e4f4e56188980e8ab74df27750959c260693935548d94c1",
+            "647da0fe0d8a5cb4fd17ef5481d52e91063209e68abf7966d75250e8972a6ea8"
+          ]
+        },
+        {
+          "frame": 23,
+          "yaw": 22.981333293569335,
+          "pitch": 0,
+          "changedPixels": 556,
+          "maximumChannelError": 199,
+          "meanAbsoluteChannelError": 0.014409743319695927,
+          "hashes": [
+            "dddea63a1a5ed052a618f4e4e9e8da5cb7ef1219b8a5988003700d3b65d9cb7d",
+            "56ad5429edda1f500ff10c54ca73485d9b47aa7beed06771665f3378c8cebb05"
+          ]
+        },
+        {
+          "frame": 24,
+          "yaw": 25.980762113533153,
+          "pitch": 0,
+          "changedPixels": 551,
+          "maximumChannelError": 215,
+          "meanAbsoluteChannelError": 0.01690993460345751,
+          "hashes": [
+            "8bffcdfddc80821ca2456c28697b259a9ef3d702760045dedd7538a36113316b",
+            "9e7f59fd9fa5c40dd01bd3fe9771b0b197223466bb446ef2a834389d647a44dc"
+          ]
+        },
+        {
+          "frame": 25,
+          "yaw": 28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 578,
+          "maximumChannelError": 196,
+          "meanAbsoluteChannelError": 0.01968197386838777,
+          "hashes": [
+            "c907acc371ce3efac564e4d2425096d0aadd20d01fae74dc95a35ef08d839e4b",
+            "889027a0aa729790125e35fed3110069e3f0e7de50c9de123ec47ab83bca4780"
+          ]
+        },
+        {
+          "frame": 26,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 612,
+          "maximumChannelError": 202,
+          "meanAbsoluteChannelError": 0.023213747226385455,
+          "hashes": [
+            "cddcdecbbbf12a2eb7b8f802dc9fe50b0fe58560590536e901947d9f46b02a42",
+            "089822ac450ce3c23de8821fde16400fbee34d9bba8934f50ab9893dd5d9e095"
+          ]
+        },
+        {
+          "frame": 27,
+          "yaw": 30,
+          "pitch": 0,
+          "changedPixels": 623,
+          "maximumChannelError": 208,
+          "meanAbsoluteChannelError": 0.02559556761768452,
+          "hashes": [
+            "cd9568dd06acdec594476e0cb143f9b0219fb2e98a4696caee87a3c3382f5af2",
+            "74c24a1abdc3f530f4ac24d7a41c8f353a9063d87f6bb43f5f94d511fdc787f3"
+          ]
+        },
+        {
+          "frame": 28,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 612,
+          "maximumChannelError": 202,
+          "meanAbsoluteChannelError": 0.023213747226385455,
+          "hashes": [
+            "cddcdecbbbf12a2eb7b8f802dc9fe50b0fe58560590536e901947d9f46b02a42",
+            "089822ac450ce3c23de8821fde16400fbee34d9bba8934f50ab9893dd5d9e095"
+          ]
+        },
+        {
+          "frame": 29,
+          "yaw": 28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 578,
+          "maximumChannelError": 196,
+          "meanAbsoluteChannelError": 0.01968197386838777,
+          "hashes": [
+            "c907acc371ce3efac564e4d2425096d0aadd20d01fae74dc95a35ef08d839e4b",
+            "889027a0aa729790125e35fed3110069e3f0e7de50c9de123ec47ab83bca4780"
+          ]
+        },
+        {
+          "frame": 30,
+          "yaw": 25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 551,
+          "maximumChannelError": 215,
+          "meanAbsoluteChannelError": 0.01690993460345751,
+          "hashes": [
+            "8bffcdfddc80821ca2456c28697b259a9ef3d702760045dedd7538a36113316b",
+            "9e7f59fd9fa5c40dd01bd3fe9771b0b197223466bb446ef2a834389d647a44dc"
+          ]
+        },
+        {
+          "frame": 31,
+          "yaw": 22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 556,
+          "maximumChannelError": 199,
+          "meanAbsoluteChannelError": 0.014409743319695927,
+          "hashes": [
+            "dddea63a1a5ed052a618f4e4e9e8da5cb7ef1219b8a5988003700d3b65d9cb7d",
+            "56ad5429edda1f500ff10c54ca73485d9b47aa7beed06771665f3378c8cebb05"
+          ]
+        },
+        {
+          "frame": 32,
+          "yaw": 19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 567,
+          "maximumChannelError": 186,
+          "meanAbsoluteChannelError": 0.016515665014875124,
+          "hashes": [
+            "1d0532f09ae36d1a6e4f4e56188980e8ab74df27750959c260693935548d94c1",
+            "647da0fe0d8a5cb4fd17ef5481d52e91063209e68abf7966d75250e8972a6ea8"
+          ]
+        },
+        {
+          "frame": 33,
+          "yaw": 15.00000000000001,
+          "pitch": 0,
+          "changedPixels": 435,
+          "maximumChannelError": 145,
+          "meanAbsoluteChannelError": 0.012810160993415337,
+          "hashes": [
+            "27043f9dc281978ffd372fa2973efe72c12c7526619bf8b444c0e9c40f56f46a",
+            "035e17c7185deb31bb57408c92148533c2d339ef22c88d03509286bb809349db"
+          ]
+        },
+        {
+          "frame": 34,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 376,
+          "maximumChannelError": 159,
+          "meanAbsoluteChannelError": 0.009448517663367585,
+          "hashes": [
+            "ed6f6852b1d6907fc8211290adb599b5fc9ab8ad18862971d3577318a0345273",
+            "77799cbdf1e1e451db33603ec39c2513692f358b98aefe6cb752fdb1a851e4b0"
+          ]
+        },
+        {
+          "frame": 35,
+          "yaw": 5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 313,
+          "maximumChannelError": 177,
+          "meanAbsoluteChannelError": 0.010076828560240883,
+          "hashes": [
+            "cdf94c79e99717889d671571a12c3114ee718aeb8cb5f4ae2f8b2eed252aa989",
+            "70a484c4c5c3e8de00450cee726b2c85653da2cb62e30f1e3df917b444e1c44f"
+          ]
+        },
+        {
+          "frame": 36,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 208,
+          "maximumChannelError": 189,
+          "meanAbsoluteChannelError": 0.013432620857581363,
+          "hashes": [
+            "19b0db33b80b09f959e61becb42e1c549ebe74901cd0a714a3d872cd1fa38ea2",
+            "1d19bcd395110014cea46fc8cc3f6af2349713262ca2b60fd1c28d0491c6dda6"
+          ]
+        },
+        {
+          "frame": 37,
+          "yaw": 0,
+          "pitch": -5.209445330007893,
+          "changedPixels": 136,
+          "maximumChannelError": 178,
+          "meanAbsoluteChannelError": 0.01022580485455683,
+          "hashes": [
+            "91a76e19a0367d2d48331765d691fcba116775528ac30522a488eddde6d61d96",
+            "742a0e17aaebc0f36560af3e6055455c02e3f8b56c1f5fcfed52bae75379a91e"
+          ]
+        },
+        {
+          "frame": 38,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 80,
+          "maximumChannelError": 139,
+          "meanAbsoluteChannelError": 0.0049603254974503,
+          "hashes": [
+            "57ab022f44df3788c896fb9c1567631409659adad5babed0ec68c4afb1203f2f",
+            "fb369d16e0a772e42a3f6faec571ba6f7f95b0bffed05dd25f4b1ff0119e2727"
+          ]
+        },
+        {
+          "frame": 39,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 52,
+          "maximumChannelError": 152,
+          "meanAbsoluteChannelError": 0.0022485968773488523,
+          "hashes": [
+            "34ad3d41e2900708b749eec4e201f907bc1e1d4bf2b0ce8d57bf8beb1067f2db",
+            "9fdb2accd7ff341c0063cf3d9333431780bde1167d01bd81ddc718a0b8d02dad"
+          ]
+        },
+        {
+          "frame": 40,
+          "yaw": 0,
+          "pitch": -19.283628290596187,
+          "changedPixels": 40,
+          "maximumChannelError": 143,
+          "meanAbsoluteChannelError": 0.0013326852189411431,
+          "hashes": [
+            "f10a23fb20b7a8a859dfebe18a1f140368fdaf7d526fce2f86fddfed7462f946",
+            "12e09a2be63005c603a8c098815b7c127877208b8bebed0fdf5015df03786a1e"
+          ]
+        },
+        {
+          "frame": 41,
+          "yaw": 0,
+          "pitch": -22.981333293569335,
+          "changedPixels": 44,
+          "maximumChannelError": 71,
+          "meanAbsoluteChannelError": 0.0010608372377724669,
+          "hashes": [
+            "4e04316a1d18c6cd2a884d4be0abb6ba616c680021a17bda0a138d3cf3dde3a7",
+            "92083dfca6278735b0741da1390b581e8a40347d595a31f8b2e76bf5389daaae"
+          ]
+        },
+        {
+          "frame": 42,
+          "yaw": 0,
+          "pitch": -25.980762113533164,
+          "changedPixels": 45,
+          "maximumChannelError": 79,
+          "meanAbsoluteChannelError": 0.0009478672985781991,
+          "hashes": [
+            "a4c553c8ca2bb3d645c11d88a481354bf2ececfd86a4cba4a0384653d692cea4",
+            "a03f78f78e5508c7c9e570e3e7637aa7a2a80ffef05a5a7935cf196f985637dd"
+          ]
+        },
+        {
+          "frame": 43,
+          "yaw": 0,
+          "pitch": -28.19077862357725,
+          "changedPixels": 189,
+          "maximumChannelError": 224,
+          "meanAbsoluteChannelError": 0.015558346048077485,
+          "hashes": [
+            "1ef2d742fba7d00a61bbffeeb1b422123ad0013a270aa9970e8eaa68779c511c",
+            "bfaabf705964b24c5446b443c095e6360e000ca9b5d4188838c5259500920731"
+          ]
+        },
+        {
+          "frame": 44,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 347,
+          "maximumChannelError": 233,
+          "meanAbsoluteChannelError": 0.029901477610798307,
+          "hashes": [
+            "2900cffe1188921be95f2f6cfd86a9e798405192256cdc6917dfc8473012eba4",
+            "56ba37b0003327f56b629d56b20e66dede8fbe1686a42287c5d10dcd6892c2c5"
+          ]
+        },
+        {
+          "frame": 45,
+          "yaw": 0,
+          "pitch": -30,
+          "changedPixels": 409,
+          "maximumChannelError": 239,
+          "meanAbsoluteChannelError": 0.036488390200870455,
+          "hashes": [
+            "cb272c4085639ecd82d0dc6fd05220899f336359b6944652798a5e7211b8c193",
+            "af42a4ae8811ffde84a6be143d0e15c120037ec47e1f597d2b43d689d6ad5209"
+          ]
+        },
+        {
+          "frame": 46,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 347,
+          "maximumChannelError": 233,
+          "meanAbsoluteChannelError": 0.029901477610798307,
+          "hashes": [
+            "2900cffe1188921be95f2f6cfd86a9e798405192256cdc6917dfc8473012eba4",
+            "56ba37b0003327f56b629d56b20e66dede8fbe1686a42287c5d10dcd6892c2c5"
+          ]
+        },
+        {
+          "frame": 47,
+          "yaw": 0,
+          "pitch": -28.190778623577252,
+          "changedPixels": 189,
+          "maximumChannelError": 224,
+          "meanAbsoluteChannelError": 0.015558346048077485,
+          "hashes": [
+            "1ef2d742fba7d00a61bbffeeb1b422123ad0013a270aa9970e8eaa68779c511c",
+            "bfaabf705964b24c5446b443c095e6360e000ca9b5d4188838c5259500920731"
+          ]
+        },
+        {
+          "frame": 48,
+          "yaw": 0,
+          "pitch": -25.98076211353317,
+          "changedPixels": 45,
+          "maximumChannelError": 79,
+          "meanAbsoluteChannelError": 0.0009478672985781991,
+          "hashes": [
+            "a4c553c8ca2bb3d645c11d88a481354bf2ececfd86a4cba4a0384653d692cea4",
+            "a03f78f78e5508c7c9e570e3e7637aa7a2a80ffef05a5a7935cf196f985637dd"
+          ]
+        },
+        {
+          "frame": 49,
+          "yaw": 0,
+          "pitch": -22.98133329356934,
+          "changedPixels": 44,
+          "maximumChannelError": 71,
+          "meanAbsoluteChannelError": 0.0010608372377724669,
+          "hashes": [
+            "4e04316a1d18c6cd2a884d4be0abb6ba616c680021a17bda0a138d3cf3dde3a7",
+            "92083dfca6278735b0741da1390b581e8a40347d595a31f8b2e76bf5389daaae"
+          ]
+        },
+        {
+          "frame": 50,
+          "yaw": 0,
+          "pitch": -19.283628290596184,
+          "changedPixels": 40,
+          "maximumChannelError": 143,
+          "meanAbsoluteChannelError": 0.0013326852189411431,
+          "hashes": [
+            "f10a23fb20b7a8a859dfebe18a1f140368fdaf7d526fce2f86fddfed7462f946",
+            "12e09a2be63005c603a8c098815b7c127877208b8bebed0fdf5015df03786a1e"
+          ]
+        },
+        {
+          "frame": 51,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 52,
+          "maximumChannelError": 152,
+          "meanAbsoluteChannelError": 0.0022485968773488523,
+          "hashes": [
+            "34ad3d41e2900708b749eec4e201f907bc1e1d4bf2b0ce8d57bf8beb1067f2db",
+            "9fdb2accd7ff341c0063cf3d9333431780bde1167d01bd81ddc718a0b8d02dad"
+          ]
+        },
+        {
+          "frame": 52,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 80,
+          "maximumChannelError": 139,
+          "meanAbsoluteChannelError": 0.0049603254974503,
+          "hashes": [
+            "57ab022f44df3788c896fb9c1567631409659adad5babed0ec68c4afb1203f2f",
+            "fb369d16e0a772e42a3f6faec571ba6f7f95b0bffed05dd25f4b1ff0119e2727"
+          ]
+        },
+        {
+          "frame": 53,
+          "yaw": 0,
+          "pitch": -5.209445330007895,
+          "changedPixels": 136,
+          "maximumChannelError": 178,
+          "meanAbsoluteChannelError": 0.01022580485455683,
+          "hashes": [
+            "91a76e19a0367d2d48331765d691fcba116775528ac30522a488eddde6d61d96",
+            "742a0e17aaebc0f36560af3e6055455c02e3f8b56c1f5fcfed52bae75379a91e"
+          ]
+        },
+        {
+          "frame": 54,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 208,
+          "maximumChannelError": 189,
+          "meanAbsoluteChannelError": 0.013432620857581363,
+          "hashes": [
+            "19b0db33b80b09f959e61becb42e1c549ebe74901cd0a714a3d872cd1fa38ea2",
+            "1d19bcd395110014cea46fc8cc3f6af2349713262ca2b60fd1c28d0491c6dda6"
+          ]
+        },
+        {
+          "frame": 55,
+          "yaw": 0,
+          "pitch": 5.209445330007893,
+          "changedPixels": 442,
+          "maximumChannelError": 203,
+          "meanAbsoluteChannelError": 0.018958696209881044,
+          "hashes": [
+            "ba294149ef5429daaadc238ad597eb7caff457bd8be1e0f02cac21f5e4bfbff0",
+            "9bc35d447a232b99556d3ad495386123682576df3728b08c853764127ed52cd3"
+          ]
+        },
+        {
+          "frame": 56,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 637,
+          "maximumChannelError": 194,
+          "meanAbsoluteChannelError": 0.022123204745637604,
+          "hashes": [
+            "c390d93ae4de0847e05edac6031d05ed00e53f9115237e9267a103dbec63f621",
+            "4dec6614692a4bd3a096357ee2e400921afec4723403d1f08bd70ba77d84309f"
+          ]
+        },
+        {
+          "frame": 57,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 873,
+          "maximumChannelError": 213,
+          "meanAbsoluteChannelError": 0.030767880530913706,
+          "hashes": [
+            "2a922a71f1525445f2b86b6e6ab6531b46ec697dae2fde17650fc29e2b53b524",
+            "c2faf5cdbc8ec166bca0b560d8283f3c4e3dd7412a41964e4daa007ba6c31c23"
+          ]
+        },
+        {
+          "frame": 58,
+          "yaw": 0,
+          "pitch": 19.283628290596187,
+          "changedPixels": 1059,
+          "maximumChannelError": 223,
+          "meanAbsoluteChannelError": 0.03802181084961496,
+          "hashes": [
+            "0b9abd7a74df24bad88369f6aacfda319d2c9ea3f8070ded27449daa0ab6c3c7",
+            "50c63c2bab1644074ac8ce11c2e0c35623890942d073d4f1bac6d8883e8c612b"
+          ]
+        },
+        {
+          "frame": 59,
+          "yaw": 0,
+          "pitch": 22.981333293569335,
+          "changedPixels": 1210,
+          "maximumChannelError": 205,
+          "meanAbsoluteChannelError": 0.04064532389966829,
+          "hashes": [
+            "c09f50be99f9d66989c4c0d074d390e9e275aacc3fb8ca217d1ae789c0489fc2",
+            "258929dca5335f3e64e2be2d36b5100d7111ed00e38387bfeb474178ffb5aa42"
+          ]
+        },
+        {
+          "frame": 60,
+          "yaw": 0,
+          "pitch": 25.980762113533164,
+          "changedPixels": 1347,
+          "maximumChannelError": 228,
+          "meanAbsoluteChannelError": 0.048680592124509973,
+          "hashes": [
+            "43e2e06e367102b1361f0ad47bed147601a65d6869d25f2f311e5d12806134ce",
+            "9cfbfa207343cdde7611e691ef11278deceac5bf069dbe5ebb5b641638a19717"
+          ]
+        },
+        {
+          "frame": 61,
+          "yaw": 0,
+          "pitch": 28.19077862357725,
+          "changedPixels": 1426,
+          "maximumChannelError": 239,
+          "meanAbsoluteChannelError": 0.05065284022629994,
+          "hashes": [
+            "5358b412a7b442651b2ec3ed08a8ffb7695ee966440dac0e81e3243f7ca0c49b",
+            "ed08e0bb4735886222a5fd095cd81bd5f847b95684f688f6e7ac11b08ed4b725"
+          ]
+        },
+        {
+          "frame": 62,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 1402,
+          "maximumChannelError": 231,
+          "meanAbsoluteChannelError": 0.049168928315847744,
+          "hashes": [
+            "2447dc682b7c7efba77f67002eab17de5493c6d471f9aa4f11173ca0b46047c5",
+            "538b1711a4c9e52e0b8b310b4cde958b9fff6c742450efbeedd12140c3969f07"
+          ]
+        },
+        {
+          "frame": 63,
+          "yaw": 0,
+          "pitch": 30,
+          "changedPixels": 1435,
+          "maximumChannelError": 237,
+          "meanAbsoluteChannelError": 0.05046425694135015,
+          "hashes": [
+            "d3ece34a6114ad2bb25ab13e2ff315de16295bf0f90c752b727456247cd8a80b",
+            "b279d4c8e56e302d4781486ddef1182dfef3b3d01ea44cfd4731394358c869f7"
+          ]
+        },
+        {
+          "frame": 64,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 1402,
+          "maximumChannelError": 231,
+          "meanAbsoluteChannelError": 0.049168928315847744,
+          "hashes": [
+            "2447dc682b7c7efba77f67002eab17de5493c6d471f9aa4f11173ca0b46047c5",
+            "538b1711a4c9e52e0b8b310b4cde958b9fff6c742450efbeedd12140c3969f07"
+          ]
+        },
+        {
+          "frame": 65,
+          "yaw": 0,
+          "pitch": 28.190778623577252,
+          "changedPixels": 1426,
+          "maximumChannelError": 239,
+          "meanAbsoluteChannelError": 0.05065284022629994,
+          "hashes": [
+            "5358b412a7b442651b2ec3ed08a8ffb7695ee966440dac0e81e3243f7ca0c49b",
+            "ed08e0bb4735886222a5fd095cd81bd5f847b95684f688f6e7ac11b08ed4b725"
+          ]
+        },
+        {
+          "frame": 66,
+          "yaw": 0,
+          "pitch": 25.98076211353317,
+          "changedPixels": 1347,
+          "maximumChannelError": 228,
+          "meanAbsoluteChannelError": 0.048680592124509973,
+          "hashes": [
+            "43e2e06e367102b1361f0ad47bed147601a65d6869d25f2f311e5d12806134ce",
+            "9cfbfa207343cdde7611e691ef11278deceac5bf069dbe5ebb5b641638a19717"
+          ]
+        },
+        {
+          "frame": 67,
+          "yaw": 0,
+          "pitch": 22.98133329356934,
+          "changedPixels": 1210,
+          "maximumChannelError": 205,
+          "meanAbsoluteChannelError": 0.04064532389966829,
+          "hashes": [
+            "c09f50be99f9d66989c4c0d074d390e9e275aacc3fb8ca217d1ae789c0489fc2",
+            "258929dca5335f3e64e2be2d36b5100d7111ed00e38387bfeb474178ffb5aa42"
+          ]
+        },
+        {
+          "frame": 68,
+          "yaw": 0,
+          "pitch": 19.283628290596184,
+          "changedPixels": 1059,
+          "maximumChannelError": 223,
+          "meanAbsoluteChannelError": 0.03802181084961496,
+          "hashes": [
+            "0b9abd7a74df24bad88369f6aacfda319d2c9ea3f8070ded27449daa0ab6c3c7",
+            "50c63c2bab1644074ac8ce11c2e0c35623890942d073d4f1bac6d8883e8c612b"
+          ]
+        },
+        {
+          "frame": 69,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 873,
+          "maximumChannelError": 213,
+          "meanAbsoluteChannelError": 0.030767880530913706,
+          "hashes": [
+            "2a922a71f1525445f2b86b6e6ab6531b46ec697dae2fde17650fc29e2b53b524",
+            "c2faf5cdbc8ec166bca0b560d8283f3c4e3dd7412a41964e4daa007ba6c31c23"
+          ]
+        },
+        {
+          "frame": 70,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 637,
+          "maximumChannelError": 194,
+          "meanAbsoluteChannelError": 0.022123204745637604,
+          "hashes": [
+            "c390d93ae4de0847e05edac6031d05ed00e53f9115237e9267a103dbec63f621",
+            "4dec6614692a4bd3a096357ee2e400921afec4723403d1f08bd70ba77d84309f"
+          ]
+        },
+        {
+          "frame": 71,
+          "yaw": 0,
+          "pitch": 5.209445330007895,
+          "changedPixels": 442,
+          "maximumChannelError": 203,
+          "meanAbsoluteChannelError": 0.018958696209881044,
+          "hashes": [
+            "ba294149ef5429daaadc238ad597eb7caff457bd8be1e0f02cac21f5e4bfbff0",
+            "9bc35d447a232b99556d3ad495386123682576df3728b08c853764127ed52cd3"
+          ]
+        }
+      ],
+      "size": [780, 844],
+      "label": "forest | CC0 photo | Sharp | Depth 0.5",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "source": {
+        "author": "Seaq68 (from Pixabay, marked CC0 on Wikimedia Commons)",
+        "url": "https://commons.wikimedia.org/wiki/File:Forest_Away_Path.jpg",
+        "license": "CC0 1.0",
+        "label": "CC0 photo"
+      },
+      "recordingLicense": "CC0 1.0, subject to the source image license"
+    },
+    {
+      "elapsedMs": 82595.66257599999,
+      "id": "street",
+      "view": "sharp",
+      "file": "street-sharp-before-after.mp4",
+      "sha256": "df83833ec44da4deade66366bfb3bf40de7a0c9a9324491fb327a3f52b02be7f",
+      "frames": 72,
+      "fps": 12,
+      "deviceScaleFactor": 3,
+      "profile": "low",
+      "nativeBuffer": [585, 1266],
+      "pixelComparison": [
+        {
+          "frame": 0,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e5b457234ed113243f949db02d5f97d2899e56c0ea84821ddcf224b3d5d09f5f",
+            "e5b457234ed113243f949db02d5f97d2899e56c0ea84821ddcf224b3d5d09f5f"
+          ]
+        },
+        {
+          "frame": 1,
+          "yaw": -5.2094453300079095,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a044287fb1f20b17142eacff18ccaa2e5b471683916c292af618161f6401cbd5",
+            "a044287fb1f20b17142eacff18ccaa2e5b471683916c292af618161f6401cbd5"
+          ]
+        },
+        {
+          "frame": 2,
+          "yaw": -10.260604299770062,
+          "pitch": 0,
+          "changedPixels": 8,
+          "maximumChannelError": 17,
+          "meanAbsoluteChannelError": 9.631699995049126e-5,
+          "hashes": [
+            "89cb90be3e4caf7c150b8d9e45fd19367b93db09769b0df84cffc163c44ccc2d",
+            "8aa9bdfc3ab3ef7a8b0bb687a5574826f44645e2e51340155ef56051872f6e42"
+          ]
+        },
+        {
+          "frame": 3,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 178,
+          "maximumChannelError": 38,
+          "meanAbsoluteChannelError": 0.001620285980475554,
+          "hashes": [
+            "9cd28bb1047e834281b522e3608928e37d635fed035a3f246d85ce0139eba736",
+            "d4c7c9959ee9db7c9a68c90069f063dd87f15d47a8d6338561729b202a4ec114"
+          ]
+        },
+        {
+          "frame": 4,
+          "yaw": -19.283628290596177,
+          "pitch": 0,
+          "changedPixels": 364,
+          "maximumChannelError": 119,
+          "meanAbsoluteChannelError": 0.0036649968719478987,
+          "hashes": [
+            "ce46d430445e476d18942e2386636e8b979190b80036134a7047ea461886b63b",
+            "a0984163c2bfaf2dc36efd9326aa208b28c57f0919ac4daf55417417f2fe57d0"
+          ]
+        },
+        {
+          "frame": 5,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 505,
+          "maximumChannelError": 46,
+          "meanAbsoluteChannelError": 0.004967526768474635,
+          "hashes": [
+            "8c852871087f82fededa1e224c8691451ae46a1f2aacdda4edf647c559bb07fb",
+            "e377d59dff8078e26f34ad92ad69ec11e4989de7f854acd799c6e83968ff50ce"
+          ]
+        },
+        {
+          "frame": 6,
+          "yaw": -25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 645,
+          "maximumChannelError": 47,
+          "meanAbsoluteChannelError": 0.006531102739633545,
+          "hashes": [
+            "d396720d2ded0d5ce01e9375e83e412f0ad9ad566df086914b4c6c4a486b0db6",
+            "6acf566d63c3e638ac9b2c762b5f2b1b5dcd92db292b528cbf8e9ac3fd028063"
+          ]
+        },
+        {
+          "frame": 7,
+          "yaw": -28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 730,
+          "maximumChannelError": 47,
+          "meanAbsoluteChannelError": 0.007262031748603628,
+          "hashes": [
+            "ba7d16c465de1d2b74961fb4b7fc71bb447a7366a918d6df34f4ac991e0a64b0",
+            "de87900433e2b89cdeda53755cfef60eba328dba9cfa9d8568ef8c08c6b07e8d"
+          ]
+        },
+        {
+          "frame": 8,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 821,
+          "maximumChannelError": 48,
+          "meanAbsoluteChannelError": 0.008069024182768258,
+          "hashes": [
+            "966918b434c7ede2b54836b7c32ac753d314b52c16e8f2e713b686866a2dbde7",
+            "698fb4a0348f1b91a0add5e382cc7a2dfeab74c5d1d12c986d18b8714494e994"
+          ]
+        },
+        {
+          "frame": 9,
+          "yaw": -30,
+          "pitch": 0,
+          "changedPixels": 789,
+          "maximumChannelError": 48,
+          "meanAbsoluteChannelError": 0.007717512140892868,
+          "hashes": [
+            "2a6a8a4ba9922656b36d7eef8964ead87363fb17e921d4e2a7703db93fdb4c34",
+            "28614d2dd8898506cfc7dced800700985461c4c399a7a46d5037b84c0492e4e4"
+          ]
+        },
+        {
+          "frame": 10,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 821,
+          "maximumChannelError": 48,
+          "meanAbsoluteChannelError": 0.008069024182768258,
+          "hashes": [
+            "966918b434c7ede2b54836b7c32ac753d314b52c16e8f2e713b686866a2dbde7",
+            "698fb4a0348f1b91a0add5e382cc7a2dfeab74c5d1d12c986d18b8714494e994"
+          ]
+        },
+        {
+          "frame": 11,
+          "yaw": -28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 730,
+          "maximumChannelError": 47,
+          "meanAbsoluteChannelError": 0.007262031748603628,
+          "hashes": [
+            "ba7d16c465de1d2b74961fb4b7fc71bb447a7366a918d6df34f4ac991e0a64b0",
+            "de87900433e2b89cdeda53755cfef60eba328dba9cfa9d8568ef8c08c6b07e8d"
+          ]
+        },
+        {
+          "frame": 12,
+          "yaw": -25.98076211353316,
+          "pitch": 0,
+          "changedPixels": 645,
+          "maximumChannelError": 47,
+          "meanAbsoluteChannelError": 0.006531102739633545,
+          "hashes": [
+            "d396720d2ded0d5ce01e9375e83e412f0ad9ad566df086914b4c6c4a486b0db6",
+            "6acf566d63c3e638ac9b2c762b5f2b1b5dcd92db292b528cbf8e9ac3fd028063"
+          ]
+        },
+        {
+          "frame": 13,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 505,
+          "maximumChannelError": 46,
+          "meanAbsoluteChannelError": 0.004967526768474635,
+          "hashes": [
+            "8c852871087f82fededa1e224c8691451ae46a1f2aacdda4edf647c559bb07fb",
+            "e377d59dff8078e26f34ad92ad69ec11e4989de7f854acd799c6e83968ff50ce"
+          ]
+        },
+        {
+          "frame": 14,
+          "yaw": -19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 364,
+          "maximumChannelError": 119,
+          "meanAbsoluteChannelError": 0.0036649968719478987,
+          "hashes": [
+            "ce46d430445e476d18942e2386636e8b979190b80036134a7047ea461886b63b",
+            "a0984163c2bfaf2dc36efd9326aa208b28c57f0919ac4daf55417417f2fe57d0"
+          ]
+        },
+        {
+          "frame": 15,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 178,
+          "maximumChannelError": 38,
+          "meanAbsoluteChannelError": 0.001620285980475554,
+          "hashes": [
+            "9cd28bb1047e834281b522e3608928e37d635fed035a3f246d85ce0139eba736",
+            "d4c7c9959ee9db7c9a68c90069f063dd87f15d47a8d6338561729b202a4ec114"
+          ]
+        },
+        {
+          "frame": 16,
+          "yaw": -10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 8,
+          "maximumChannelError": 17,
+          "meanAbsoluteChannelError": 9.631699995049126e-5,
+          "hashes": [
+            "89cb90be3e4caf7c150b8d9e45fd19367b93db09769b0df84cffc163c44ccc2d",
+            "8aa9bdfc3ab3ef7a8b0bb687a5574826f44645e2e51340155ef56051872f6e42"
+          ]
+        },
+        {
+          "frame": 17,
+          "yaw": -5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a044287fb1f20b17142eacff18ccaa2e5b471683916c292af618161f6401cbd5",
+            "a044287fb1f20b17142eacff18ccaa2e5b471683916c292af618161f6401cbd5"
+          ]
+        },
+        {
+          "frame": 18,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e5b457234ed113243f949db02d5f97d2899e56c0ea84821ddcf224b3d5d09f5f",
+            "e5b457234ed113243f949db02d5f97d2899e56c0ea84821ddcf224b3d5d09f5f"
+          ]
+        },
+        {
+          "frame": 19,
+          "yaw": 5.209445330007912,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a5d7b7352c2d26cdf8eab54624027383d8825f1e1ccaff6a331fcd8aeaf836d2",
+            "a5d7b7352c2d26cdf8eab54624027383d8825f1e1ccaff6a331fcd8aeaf836d2"
+          ]
+        },
+        {
+          "frame": 20,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 4,
+          "maximumChannelError": 13,
+          "meanAbsoluteChannelError": 2.6104607463217257e-5,
+          "hashes": [
+            "40a9f3ef945fad474c338218375597d8e3b5e2f76721e57cde47d8633674434f",
+            "efbb8893a63a9daf62030ee4167ca853b58cbbff7aecbf270dad37369edd93e2"
+          ]
+        },
+        {
+          "frame": 21,
+          "yaw": 15.000000000000004,
+          "pitch": 0,
+          "changedPixels": 24,
+          "maximumChannelError": 13,
+          "meanAbsoluteChannelError": 9.811731770657521e-5,
+          "hashes": [
+            "d8cfcd704f697d0d5739530ae8d0d37500b6498572c74e6d88e7ed5b7336e092",
+            "e93695b170ed60b9945fbb4a110ec9dec532f8253b85738722711c6a0ac27707"
+          ]
+        },
+        {
+          "frame": 22,
+          "yaw": 19.283628290596187,
+          "pitch": 0,
+          "changedPixels": 32,
+          "maximumChannelError": 12,
+          "meanAbsoluteChannelError": 0.00013952462609650602,
+          "hashes": [
+            "0f8c01e9bbbb02dd1b31332c572b347d00447d414409ed3ec7ead3c8d08076cf",
+            "8917b4adab93b4e7538de4cffd7fe38c3d46e1346d2dde391134c4308eda7bfa"
+          ]
+        },
+        {
+          "frame": 23,
+          "yaw": 22.981333293569335,
+          "pitch": 0,
+          "changedPixels": 31,
+          "maximumChannelError": 13,
+          "meanAbsoluteChannelError": 0.00011702065414545668,
+          "hashes": [
+            "28023b9377ae1528f3dafa99c61a75a198227962f4f812ec03b211fa18ede799",
+            "3bb59c96b7fc7c3f9d6fb5f7a47482528e8e0affd032ab514827bfc90659d2e7"
+          ]
+        },
+        {
+          "frame": 24,
+          "yaw": 25.980762113533153,
+          "pitch": 0,
+          "changedPixels": 60,
+          "maximumChannelError": 15,
+          "meanAbsoluteChannelError": 0.0002493440092176269,
+          "hashes": [
+            "e2ba8c2d91680362c33a4418f705fabf730f53f3fe3ed83a763566941dc42538",
+            "531d40d6fa8def05a65fd783f23afcee0393d5c1ab04499bb4ce7dd294c8d69b"
+          ]
+        },
+        {
+          "frame": 25,
+          "yaw": 28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 64,
+          "maximumChannelError": 14,
+          "meanAbsoluteChannelError": 0.00027634877555888615,
+          "hashes": [
+            "88e070cbd076f69ffcbca54c07cb89edb4f17d0226d0a13f776c1b4b2ff2449a",
+            "dc59c2f1cd470ddcd8666bf8ea6b6210475456e8aac5587229750fbccf91bbb7"
+          ]
+        },
+        {
+          "frame": 26,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 66,
+          "maximumChannelError": 13,
+          "meanAbsoluteChannelError": 0.00026644702790042444,
+          "hashes": [
+            "5858aac006b14c6417bf1c8cf7950ffd5303fd6095c5de7a19b0ee09d7a6de9c",
+            "9a0697342f71c1f8bf86cd1dc0ac6de772fc2c5c9217c32536f5e19324c7c34b"
+          ]
+        },
+        {
+          "frame": 27,
+          "yaw": 30,
+          "pitch": 0,
+          "changedPixels": 70,
+          "maximumChannelError": 13,
+          "meanAbsoluteChannelError": 0.00027724893443692813,
+          "hashes": [
+            "332213c4078b413ceb7f40e0f15f8ff869b9b8c48cf8932811b8d1fb5162571a",
+            "c1ee2bbe01a01267eb8c6208c803f9dc6465cbe7cf58ad2b22ebc211de061faf"
+          ]
+        },
+        {
+          "frame": 28,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 66,
+          "maximumChannelError": 13,
+          "meanAbsoluteChannelError": 0.00026644702790042444,
+          "hashes": [
+            "5858aac006b14c6417bf1c8cf7950ffd5303fd6095c5de7a19b0ee09d7a6de9c",
+            "9a0697342f71c1f8bf86cd1dc0ac6de772fc2c5c9217c32536f5e19324c7c34b"
+          ]
+        },
+        {
+          "frame": 29,
+          "yaw": 28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 64,
+          "maximumChannelError": 14,
+          "meanAbsoluteChannelError": 0.00027634877555888615,
+          "hashes": [
+            "88e070cbd076f69ffcbca54c07cb89edb4f17d0226d0a13f776c1b4b2ff2449a",
+            "dc59c2f1cd470ddcd8666bf8ea6b6210475456e8aac5587229750fbccf91bbb7"
+          ]
+        },
+        {
+          "frame": 30,
+          "yaw": 25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 60,
+          "maximumChannelError": 15,
+          "meanAbsoluteChannelError": 0.0002493440092176269,
+          "hashes": [
+            "e2ba8c2d91680362c33a4418f705fabf730f53f3fe3ed83a763566941dc42538",
+            "531d40d6fa8def05a65fd783f23afcee0393d5c1ab04499bb4ce7dd294c8d69b"
+          ]
+        },
+        {
+          "frame": 31,
+          "yaw": 22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 31,
+          "maximumChannelError": 13,
+          "meanAbsoluteChannelError": 0.00011702065414545668,
+          "hashes": [
+            "28023b9377ae1528f3dafa99c61a75a198227962f4f812ec03b211fa18ede799",
+            "3bb59c96b7fc7c3f9d6fb5f7a47482528e8e0affd032ab514827bfc90659d2e7"
+          ]
+        },
+        {
+          "frame": 32,
+          "yaw": 19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 32,
+          "maximumChannelError": 12,
+          "meanAbsoluteChannelError": 0.00013952462609650602,
+          "hashes": [
+            "0f8c01e9bbbb02dd1b31332c572b347d00447d414409ed3ec7ead3c8d08076cf",
+            "8917b4adab93b4e7538de4cffd7fe38c3d46e1346d2dde391134c4308eda7bfa"
+          ]
+        },
+        {
+          "frame": 33,
+          "yaw": 15.00000000000001,
+          "pitch": 0,
+          "changedPixels": 24,
+          "maximumChannelError": 13,
+          "meanAbsoluteChannelError": 9.811731770657521e-5,
+          "hashes": [
+            "d8cfcd704f697d0d5739530ae8d0d37500b6498572c74e6d88e7ed5b7336e092",
+            "e93695b170ed60b9945fbb4a110ec9dec532f8253b85738722711c6a0ac27707"
+          ]
+        },
+        {
+          "frame": 34,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 4,
+          "maximumChannelError": 13,
+          "meanAbsoluteChannelError": 2.6104607463217257e-5,
+          "hashes": [
+            "40a9f3ef945fad474c338218375597d8e3b5e2f76721e57cde47d8633674434f",
+            "efbb8893a63a9daf62030ee4167ca853b58cbbff7aecbf270dad37369edd93e2"
+          ]
+        },
+        {
+          "frame": 35,
+          "yaw": 5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a5d7b7352c2d26cdf8eab54624027383d8825f1e1ccaff6a331fcd8aeaf836d2",
+            "a5d7b7352c2d26cdf8eab54624027383d8825f1e1ccaff6a331fcd8aeaf836d2"
+          ]
+        },
+        {
+          "frame": 36,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e5b457234ed113243f949db02d5f97d2899e56c0ea84821ddcf224b3d5d09f5f",
+            "e5b457234ed113243f949db02d5f97d2899e56c0ea84821ddcf224b3d5d09f5f"
+          ]
+        },
+        {
+          "frame": 37,
+          "yaw": 0,
+          "pitch": -5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b3cae2ac76650959fc7cec4a048455e295b380bcffad4ea5836591514fe453d9",
+            "b3cae2ac76650959fc7cec4a048455e295b380bcffad4ea5836591514fe453d9"
+          ]
+        },
+        {
+          "frame": 38,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d45ae4b9610ee17697df34f92fec59b0f5dbdc45b2ea165e783853a952fea4e0",
+            "d45ae4b9610ee17697df34f92fec59b0f5dbdc45b2ea165e783853a952fea4e0"
+          ]
+        },
+        {
+          "frame": 39,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a405647eb11ef8f205a70ce188411a7f4f916a72dc92191e5368e16a7ce0feda",
+            "a405647eb11ef8f205a70ce188411a7f4f916a72dc92191e5368e16a7ce0feda"
+          ]
+        },
+        {
+          "frame": 40,
+          "yaw": 0,
+          "pitch": -19.283628290596187,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "66e7fb932c4749be50be7492caf1072d86e4794b1f29354417d98e6f1e777b2b",
+            "66e7fb932c4749be50be7492caf1072d86e4794b1f29354417d98e6f1e777b2b"
+          ]
+        },
+        {
+          "frame": 41,
+          "yaw": 0,
+          "pitch": -22.981333293569335,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6b3caa031827c58fb9d4f02430a3a293ffab5192e0fe9f18801537edd2fd6f7e",
+            "6b3caa031827c58fb9d4f02430a3a293ffab5192e0fe9f18801537edd2fd6f7e"
+          ]
+        },
+        {
+          "frame": 42,
+          "yaw": 0,
+          "pitch": -25.980762113533164,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b597fb09bd28beae19a4bc57a38746a657b9bae4a5f67b1a3b928342fcd6cc96",
+            "b597fb09bd28beae19a4bc57a38746a657b9bae4a5f67b1a3b928342fcd6cc96"
+          ]
+        },
+        {
+          "frame": 43,
+          "yaw": 0,
+          "pitch": -28.19077862357725,
+          "changedPixels": 2873,
+          "maximumChannelError": 239,
+          "meanAbsoluteChannelError": 0.2177718367291827,
+          "hashes": [
+            "51bab13b1a1b54d1d3af08d86f3dac207a4079f9f624dede6b371d6124c74364",
+            "1efdbb6126ec183273492fd3868d68c693c06dcdfa4503fcc8e235563083af24"
+          ]
+        },
+        {
+          "frame": 44,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 4825,
+          "maximumChannelError": 237,
+          "meanAbsoluteChannelError": 0.36577640953628315,
+          "hashes": [
+            "f1bea6b63d0dde330f869c4e69e8f4823a72f03d6a3292daf0bb11b3ce7b191d",
+            "04516602ccd727c4d6217a8ea60dad05cc705a78b2e7471ace606cb98968b578"
+          ]
+        },
+        {
+          "frame": 45,
+          "yaw": 0,
+          "pitch": -30,
+          "changedPixels": 5760,
+          "maximumChannelError": 245,
+          "meanAbsoluteChannelError": 0.44201311531485304,
+          "hashes": [
+            "8f15049a55961d085bb43eb38d399e372cc21e6af000f6b51941fcf4b73d88e5",
+            "31bf5deb33366ed56bd01a225b096246797827c19564f172a250ac020ebc7d6c"
+          ]
+        },
+        {
+          "frame": 46,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 4825,
+          "maximumChannelError": 237,
+          "meanAbsoluteChannelError": 0.36577640953628315,
+          "hashes": [
+            "f1bea6b63d0dde330f869c4e69e8f4823a72f03d6a3292daf0bb11b3ce7b191d",
+            "04516602ccd727c4d6217a8ea60dad05cc705a78b2e7471ace606cb98968b578"
+          ]
+        },
+        {
+          "frame": 47,
+          "yaw": 0,
+          "pitch": -28.190778623577252,
+          "changedPixels": 2873,
+          "maximumChannelError": 239,
+          "meanAbsoluteChannelError": 0.2177718367291827,
+          "hashes": [
+            "51bab13b1a1b54d1d3af08d86f3dac207a4079f9f624dede6b371d6124c74364",
+            "1efdbb6126ec183273492fd3868d68c693c06dcdfa4503fcc8e235563083af24"
+          ]
+        },
+        {
+          "frame": 48,
+          "yaw": 0,
+          "pitch": -25.98076211353317,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b597fb09bd28beae19a4bc57a38746a657b9bae4a5f67b1a3b928342fcd6cc96",
+            "b597fb09bd28beae19a4bc57a38746a657b9bae4a5f67b1a3b928342fcd6cc96"
+          ]
+        },
+        {
+          "frame": 49,
+          "yaw": 0,
+          "pitch": -22.98133329356934,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "6b3caa031827c58fb9d4f02430a3a293ffab5192e0fe9f18801537edd2fd6f7e",
+            "6b3caa031827c58fb9d4f02430a3a293ffab5192e0fe9f18801537edd2fd6f7e"
+          ]
+        },
+        {
+          "frame": 50,
+          "yaw": 0,
+          "pitch": -19.283628290596184,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "66e7fb932c4749be50be7492caf1072d86e4794b1f29354417d98e6f1e777b2b",
+            "66e7fb932c4749be50be7492caf1072d86e4794b1f29354417d98e6f1e777b2b"
+          ]
+        },
+        {
+          "frame": 51,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "a405647eb11ef8f205a70ce188411a7f4f916a72dc92191e5368e16a7ce0feda",
+            "a405647eb11ef8f205a70ce188411a7f4f916a72dc92191e5368e16a7ce0feda"
+          ]
+        },
+        {
+          "frame": 52,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "d45ae4b9610ee17697df34f92fec59b0f5dbdc45b2ea165e783853a952fea4e0",
+            "d45ae4b9610ee17697df34f92fec59b0f5dbdc45b2ea165e783853a952fea4e0"
+          ]
+        },
+        {
+          "frame": 53,
+          "yaw": 0,
+          "pitch": -5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "b3cae2ac76650959fc7cec4a048455e295b380bcffad4ea5836591514fe453d9",
+            "b3cae2ac76650959fc7cec4a048455e295b380bcffad4ea5836591514fe453d9"
+          ]
+        },
+        {
+          "frame": 54,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "e5b457234ed113243f949db02d5f97d2899e56c0ea84821ddcf224b3d5d09f5f",
+            "e5b457234ed113243f949db02d5f97d2899e56c0ea84821ddcf224b3d5d09f5f"
+          ]
+        },
+        {
+          "frame": 55,
+          "yaw": 0,
+          "pitch": 5.209445330007893,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "71e3c366a3a819f25d8d0f9734aaa4dec2a1c866e7c56fbdd88f1a40da448a7b",
+            "71e3c366a3a819f25d8d0f9734aaa4dec2a1c866e7c56fbdd88f1a40da448a7b"
+          ]
+        },
+        {
+          "frame": 56,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 4,
+          "maximumChannelError": 5,
+          "meanAbsoluteChannelError": 1.125198597552468e-5,
+          "hashes": [
+            "1876a84c8e827cf83a645de331f91a10e86e20600ae21306d23274beaa55cbe8",
+            "f2ec8683c1466fa905efabad8de1501fe262c12ce8c06a99c7fa1ee56cba9451"
+          ]
+        },
+        {
+          "frame": 57,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 96,
+          "maximumChannelError": 42,
+          "meanAbsoluteChannelError": 0.0010410337424555435,
+          "hashes": [
+            "f809370e60d901796f1eef64aac722434a8dc16919bfc5bca76c9b3288e014ce",
+            "9d9a9e4282fb13cd55e7ac0f42995bd82da460f44324cf9c6f924a05d94774af"
+          ]
+        },
+        {
+          "frame": 58,
+          "yaw": 0,
+          "pitch": 19.283628290596187,
+          "changedPixels": 233,
+          "maximumChannelError": 38,
+          "meanAbsoluteChannelError": 0.002280552517519342,
+          "hashes": [
+            "c442d254282b90896169f3c2205af952a887fd763634cef14d38e656a8d4208f",
+            "3d304b269d3abe5786efb9a19a2b46b2f38dffe94ea5e2f1664574ae17b4c896"
+          ]
+        },
+        {
+          "frame": 59,
+          "yaw": 0,
+          "pitch": 22.981333293569335,
+          "changedPixels": 447,
+          "maximumChannelError": 45,
+          "meanAbsoluteChannelError": 0.0045561541612094535,
+          "hashes": [
+            "8333511c7ad15cbc593ad963b51bedbabebb2814ef5f54a98353eca423f701a2",
+            "aaaee6d245f5e8d93dc57ed18c55fffda766e39a88a64737c5f22f8b800afd35"
+          ]
+        },
+        {
+          "frame": 60,
+          "yaw": 0,
+          "pitch": 25.980762113533164,
+          "changedPixels": 633,
+          "maximumChannelError": 47,
+          "meanAbsoluteChannelError": 0.006509949005999559,
+          "hashes": [
+            "eab7348665f39d5ffef676edb2ed575391bb6887d4d9c7c11e574078110ef937",
+            "9761f2e928feca0651a05b74ad4473fd48ae4d0fe8925db86681aa51abd91bc8"
+          ]
+        },
+        {
+          "frame": 61,
+          "yaw": 0,
+          "pitch": 28.19077862357725,
+          "changedPixels": 810,
+          "maximumChannelError": 46,
+          "meanAbsoluteChannelError": 0.00877654906090925,
+          "hashes": [
+            "facf0384b4a8f157dd837bbccf47f03888ec3d2d793551893d5f5ff54198fc0f",
+            "407b7c2a36e3866c3aeee254018534806a3b1f0a1c1666f03ccac9d80646c486"
+          ]
+        },
+        {
+          "frame": 62,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 923,
+          "maximumChannelError": 47,
+          "meanAbsoluteChannelError": 0.009800479784681996,
+          "hashes": [
+            "b9058fadb37d41eedfa37af325b2632ba9ce59644ec100432bafd5cc740fcba3",
+            "7b3e240127e7ef2831b7825b2abe446d7b46b7eb498e534248e9db849958fc02"
+          ]
+        },
+        {
+          "frame": 63,
+          "yaw": 0,
+          "pitch": 30,
+          "changedPixels": 992,
+          "maximumChannelError": 48,
+          "meanAbsoluteChannelError": 0.010446343779677113,
+          "hashes": [
+            "61c66f5de5dff96259e9fecf5d9ecaba64af8256e95c143f9935bd47d913447c",
+            "8ab5bff027d81f15ad9b6ad555cf85e6a192bfc9fd958ba2a110290670840b25"
+          ]
+        },
+        {
+          "frame": 64,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 923,
+          "maximumChannelError": 47,
+          "meanAbsoluteChannelError": 0.009800479784681996,
+          "hashes": [
+            "b9058fadb37d41eedfa37af325b2632ba9ce59644ec100432bafd5cc740fcba3",
+            "7b3e240127e7ef2831b7825b2abe446d7b46b7eb498e534248e9db849958fc02"
+          ]
+        },
+        {
+          "frame": 65,
+          "yaw": 0,
+          "pitch": 28.190778623577252,
+          "changedPixels": 810,
+          "maximumChannelError": 46,
+          "meanAbsoluteChannelError": 0.00877654906090925,
+          "hashes": [
+            "facf0384b4a8f157dd837bbccf47f03888ec3d2d793551893d5f5ff54198fc0f",
+            "407b7c2a36e3866c3aeee254018534806a3b1f0a1c1666f03ccac9d80646c486"
+          ]
+        },
+        {
+          "frame": 66,
+          "yaw": 0,
+          "pitch": 25.98076211353317,
+          "changedPixels": 633,
+          "maximumChannelError": 47,
+          "meanAbsoluteChannelError": 0.006509949005999559,
+          "hashes": [
+            "eab7348665f39d5ffef676edb2ed575391bb6887d4d9c7c11e574078110ef937",
+            "9761f2e928feca0651a05b74ad4473fd48ae4d0fe8925db86681aa51abd91bc8"
+          ]
+        },
+        {
+          "frame": 67,
+          "yaw": 0,
+          "pitch": 22.98133329356934,
+          "changedPixels": 447,
+          "maximumChannelError": 45,
+          "meanAbsoluteChannelError": 0.0045561541612094535,
+          "hashes": [
+            "8333511c7ad15cbc593ad963b51bedbabebb2814ef5f54a98353eca423f701a2",
+            "aaaee6d245f5e8d93dc57ed18c55fffda766e39a88a64737c5f22f8b800afd35"
+          ]
+        },
+        {
+          "frame": 68,
+          "yaw": 0,
+          "pitch": 19.283628290596184,
+          "changedPixels": 233,
+          "maximumChannelError": 38,
+          "meanAbsoluteChannelError": 0.002280552517519342,
+          "hashes": [
+            "c442d254282b90896169f3c2205af952a887fd763634cef14d38e656a8d4208f",
+            "3d304b269d3abe5786efb9a19a2b46b2f38dffe94ea5e2f1664574ae17b4c896"
+          ]
+        },
+        {
+          "frame": 69,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 96,
+          "maximumChannelError": 42,
+          "meanAbsoluteChannelError": 0.0010410337424555435,
+          "hashes": [
+            "f809370e60d901796f1eef64aac722434a8dc16919bfc5bca76c9b3288e014ce",
+            "9d9a9e4282fb13cd55e7ac0f42995bd82da460f44324cf9c6f924a05d94774af"
+          ]
+        },
+        {
+          "frame": 70,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 4,
+          "maximumChannelError": 5,
+          "meanAbsoluteChannelError": 1.125198597552468e-5,
+          "hashes": [
+            "1876a84c8e827cf83a645de331f91a10e86e20600ae21306d23274beaa55cbe8",
+            "f2ec8683c1466fa905efabad8de1501fe262c12ce8c06a99c7fa1ee56cba9451"
+          ]
+        },
+        {
+          "frame": 71,
+          "yaw": 0,
+          "pitch": 5.209445330007895,
+          "changedPixels": 0,
+          "maximumChannelError": 0,
+          "meanAbsoluteChannelError": 0,
+          "hashes": [
+            "71e3c366a3a819f25d8d0f9734aaa4dec2a1c866e7c56fbdd88f1a40da448a7b",
+            "71e3c366a3a819f25d8d0f9734aaa4dec2a1c866e7c56fbdd88f1a40da448a7b"
+          ]
+        }
+      ],
+      "size": [780, 844],
+      "label": "street | CC0 photo | Sharp | Depth 0.5",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "source": {
+        "author": "Malcolmxl5",
+        "url": "https://commons.wikimedia.org/wiki/File:Carleton_Street_off_Leeman_Road_York_Jul25.jpg",
+        "license": "CC0 1.0",
+        "label": "CC0 photo"
+      },
+      "recordingLicense": "CC0 1.0, subject to the source image license"
+    },
+    {
+      "elapsedMs": 85455.60542899999,
+      "id": "dot-library",
+      "view": "sharp",
+      "file": "dot-library-sharp-before-after.mp4",
+      "sha256": "35baeb3203099662cd2b2bf32ecf78026fde073ec680dfd764e48fd2007a63d2",
+      "frames": 72,
+      "fps": 12,
+      "deviceScaleFactor": 3,
+      "profile": "low",
+      "nativeBuffer": [585, 1266],
+      "pixelComparison": [
+        {
+          "frame": 0,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 92,
+          "maximumChannelError": 214,
+          "meanAbsoluteChannelError": 0.006060769725856614,
+          "hashes": [
+            "85ae1e978af7bcbc25c054101f551cc8629dfa8aaf827bbad25b61050addbfd1",
+            "3e732539ab60a9fc8d5cae9e8b288a6932a4fd5862e835c7209b982ef928918a"
+          ]
+        },
+        {
+          "frame": 1,
+          "yaw": -5.2094453300079095,
+          "pitch": 0,
+          "changedPixels": 290,
+          "maximumChannelError": 211,
+          "meanAbsoluteChannelError": 0.021521898615105565,
+          "hashes": [
+            "06d6c5d25bb360ea46da86d96cb24bbe70607dcb7951a7b73849a5b833578837",
+            "ca0117c367d78422bc6a010623cf664dc7428c0aea4af354a3635992bacab379"
+          ]
+        },
+        {
+          "frame": 2,
+          "yaw": -10.260604299770062,
+          "pitch": 0,
+          "changedPixels": 734,
+          "maximumChannelError": 215,
+          "meanAbsoluteChannelError": 0.06872217946467551,
+          "hashes": [
+            "3f6d2cc7c11721621540a84c771eb40f3b4df76ae8f1722502635b90c17d9a9d",
+            "0cb056fd0fd00f221dc7c8c5f83998a65f4f0085df7f83b47664faa0ca1dee51"
+          ]
+        },
+        {
+          "frame": 3,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 1396,
+          "maximumChannelError": 214,
+          "meanAbsoluteChannelError": 0.13011301494713817,
+          "hashes": [
+            "8eef7f0ff0a18856597499504fe5e7abdc16bad2b3889a33418d7f8e99eaf371",
+            "64961ad759c8976f8235bf4d02c285f74b41e2b54809622d027d0c31f241087b"
+          ]
+        },
+        {
+          "frame": 4,
+          "yaw": -19.283628290596177,
+          "pitch": 0,
+          "changedPixels": 2097,
+          "maximumChannelError": 214,
+          "meanAbsoluteChannelError": 0.15556005634994577,
+          "hashes": [
+            "f104c94773d5e5349c4140c9192e239f54c9ef0e1087cd5f0b21deac76d30c52",
+            "27d93973b1190d25f7f720f7789b89638c258ba284755bf44dad08d131441a06"
+          ]
+        },
+        {
+          "frame": 5,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 2410,
+          "maximumChannelError": 215,
+          "meanAbsoluteChannelError": 0.16720541175517478,
+          "hashes": [
+            "f9103a1aff721ae8d9206bfdef8919d023b8dbed9f91e7c3db49599bd6d9341b",
+            "2da7965703f0474db3ca8f80db500b7c0e19859c9bb8d6066d5472644470f60e"
+          ]
+        },
+        {
+          "frame": 6,
+          "yaw": -25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 2848,
+          "maximumChannelError": 222,
+          "meanAbsoluteChannelError": 0.20604141630997871,
+          "hashes": [
+            "0f10af3394076c6eb1bd497877d41154be91f571eb739e1b50f40b76067a7570",
+            "38d1e7de8351ec5414646bf9488bf647e2c56d82db6ead837ae47ac5f7dbaf45"
+          ]
+        },
+        {
+          "frame": 7,
+          "yaw": -28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 3196,
+          "maximumChannelError": 233,
+          "meanAbsoluteChannelError": 0.23235576079177975,
+          "hashes": [
+            "e4671edeb4fdcd3d8165ac8a38263a435961b85a7944aec1df1a61a409f42978",
+            "682fa68bb1a7e4edc8969058c97fcff4165dcd391f14449f3535fbe189914ca9"
+          ]
+        },
+        {
+          "frame": 8,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 3341,
+          "maximumChannelError": 244,
+          "meanAbsoluteChannelError": 0.24949613606801602,
+          "hashes": [
+            "efe77d92d28d133b231eacb57a18c2be62e06a2b16b806ac7913b9d5eeb8cbd6",
+            "0e794fe60327dbca7b531f3ac99ee5ee021b5d590b5b4b9c501a996e452b972e"
+          ]
+        },
+        {
+          "frame": 9,
+          "yaw": -30,
+          "pitch": 0,
+          "changedPixels": 3403,
+          "maximumChannelError": 243,
+          "meanAbsoluteChannelError": 0.2582780860821935,
+          "hashes": [
+            "2851dc3983efdfa1098f6a08508530d4dbed9b3cde8fc938df5c9f0c37c14774",
+            "96af0aa420947dbeeebfb47c207728e721a485bf334cd52c4c2861216ccd7506"
+          ]
+        },
+        {
+          "frame": 10,
+          "yaw": -29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 3341,
+          "maximumChannelError": 244,
+          "meanAbsoluteChannelError": 0.24949613606801602,
+          "hashes": [
+            "efe77d92d28d133b231eacb57a18c2be62e06a2b16b806ac7913b9d5eeb8cbd6",
+            "0e794fe60327dbca7b531f3ac99ee5ee021b5d590b5b4b9c501a996e452b972e"
+          ]
+        },
+        {
+          "frame": 11,
+          "yaw": -28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 3196,
+          "maximumChannelError": 233,
+          "meanAbsoluteChannelError": 0.23235576079177975,
+          "hashes": [
+            "e4671edeb4fdcd3d8165ac8a38263a435961b85a7944aec1df1a61a409f42978",
+            "682fa68bb1a7e4edc8969058c97fcff4165dcd391f14449f3535fbe189914ca9"
+          ]
+        },
+        {
+          "frame": 12,
+          "yaw": -25.98076211353316,
+          "pitch": 0,
+          "changedPixels": 2848,
+          "maximumChannelError": 222,
+          "meanAbsoluteChannelError": 0.20604141630997871,
+          "hashes": [
+            "0f10af3394076c6eb1bd497877d41154be91f571eb739e1b50f40b76067a7570",
+            "38d1e7de8351ec5414646bf9488bf647e2c56d82db6ead837ae47ac5f7dbaf45"
+          ]
+        },
+        {
+          "frame": 13,
+          "yaw": -22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 2410,
+          "maximumChannelError": 215,
+          "meanAbsoluteChannelError": 0.16720541175517478,
+          "hashes": [
+            "f9103a1aff721ae8d9206bfdef8919d023b8dbed9f91e7c3db49599bd6d9341b",
+            "2da7965703f0474db3ca8f80db500b7c0e19859c9bb8d6066d5472644470f60e"
+          ]
+        },
+        {
+          "frame": 14,
+          "yaw": -19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 2097,
+          "maximumChannelError": 214,
+          "meanAbsoluteChannelError": 0.15556005634994577,
+          "hashes": [
+            "f104c94773d5e5349c4140c9192e239f54c9ef0e1087cd5f0b21deac76d30c52",
+            "27d93973b1190d25f7f720f7789b89638c258ba284755bf44dad08d131441a06"
+          ]
+        },
+        {
+          "frame": 15,
+          "yaw": -14.999999999999998,
+          "pitch": 0,
+          "changedPixels": 1396,
+          "maximumChannelError": 214,
+          "meanAbsoluteChannelError": 0.13011301494713817,
+          "hashes": [
+            "8eef7f0ff0a18856597499504fe5e7abdc16bad2b3889a33418d7f8e99eaf371",
+            "64961ad759c8976f8235bf4d02c285f74b41e2b54809622d027d0c31f241087b"
+          ]
+        },
+        {
+          "frame": 16,
+          "yaw": -10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 734,
+          "maximumChannelError": 215,
+          "meanAbsoluteChannelError": 0.06872217946467551,
+          "hashes": [
+            "3f6d2cc7c11721621540a84c771eb40f3b4df76ae8f1722502635b90c17d9a9d",
+            "0cb056fd0fd00f221dc7c8c5f83998a65f4f0085df7f83b47664faa0ca1dee51"
+          ]
+        },
+        {
+          "frame": 17,
+          "yaw": -5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 290,
+          "maximumChannelError": 211,
+          "meanAbsoluteChannelError": 0.021521898615105565,
+          "hashes": [
+            "06d6c5d25bb360ea46da86d96cb24bbe70607dcb7951a7b73849a5b833578837",
+            "ca0117c367d78422bc6a010623cf664dc7428c0aea4af354a3635992bacab379"
+          ]
+        },
+        {
+          "frame": 18,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 92,
+          "maximumChannelError": 214,
+          "meanAbsoluteChannelError": 0.006060769725856614,
+          "hashes": [
+            "85ae1e978af7bcbc25c054101f551cc8629dfa8aaf827bbad25b61050addbfd1",
+            "3e732539ab60a9fc8d5cae9e8b288a6932a4fd5862e835c7209b982ef928918a"
+          ]
+        },
+        {
+          "frame": 19,
+          "yaw": 5.209445330007912,
+          "pitch": 0,
+          "changedPixels": 16,
+          "maximumChannelError": 92,
+          "meanAbsoluteChannelError": 0.0009393157892368003,
+          "hashes": [
+            "e81956ad4ed653a20c880aa257e13c0cf2a6eff25ab42d33b36e0f761e35d4ab",
+            "27ffdb9d6e67365bde55daa0bcd86763283b1d113c85099f648c9357749c8789"
+          ]
+        },
+        {
+          "frame": 20,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 20,
+          "maximumChannelError": 91,
+          "meanAbsoluteChannelError": 0.0011396011396011395,
+          "hashes": [
+            "b955ad9708eec678a0aa0b4fa76f20141a9e7c077b590a974d333ce7e0cccf16",
+            "8593a9ad4cd2be7d8687a2b7aaf169a50b09b215d7ae46fd43903f7eb4fd30cc"
+          ]
+        },
+        {
+          "frame": 21,
+          "yaw": 15.000000000000004,
+          "pitch": 0,
+          "changedPixels": 40,
+          "maximumChannelError": 223,
+          "meanAbsoluteChannelError": 0.0034588604888762865,
+          "hashes": [
+            "f07928d7ac2424ea7c2489bb641232fc1d5ec5be2ae05e9c422b3a8c3ccc9072",
+            "674ddb995b7a570d4ee86cc5bfed3f2e173710dfb382293e6ab7e8d141148482"
+          ]
+        },
+        {
+          "frame": 22,
+          "yaw": 19.283628290596187,
+          "pitch": 0,
+          "changedPixels": 112,
+          "maximumChannelError": 228,
+          "meanAbsoluteChannelError": 0.014796361557814955,
+          "hashes": [
+            "7a00e17ab856dfb590594ca263ce7542995feb5650d2868e2c0ad4e6ae95af90",
+            "e3b77a85e00cd801fa9bdbad48b06927c2815655086f6d6e47f6a3a80e7261d3"
+          ]
+        },
+        {
+          "frame": 23,
+          "yaw": 22.981333293569335,
+          "pitch": 0,
+          "changedPixels": 221,
+          "maximumChannelError": 227,
+          "meanAbsoluteChannelError": 0.026789178289968178,
+          "hashes": [
+            "80aed06df2c1d6c4d70339ba6526a877841569dd9db328bbe8619d3aba21c882",
+            "474cf249c723eec60aa3e97004adbe09caf58e7173272f151d09c4f847d13233"
+          ]
+        },
+        {
+          "frame": 24,
+          "yaw": 25.980762113533153,
+          "pitch": 0,
+          "changedPixels": 351,
+          "maximumChannelError": 227,
+          "meanAbsoluteChannelError": 0.03053248898430573,
+          "hashes": [
+            "059ea3bc27ce99ba9ee7459ef64f5b638d951860421d39a330aa14fc43b4baf6",
+            "07a6569f1676836d27d659d79f0031c6f649485557fc890cf8b52a38aeda0ee1"
+          ]
+        },
+        {
+          "frame": 25,
+          "yaw": 28.19077862357725,
+          "pitch": 0,
+          "changedPixels": 491,
+          "maximumChannelError": 213,
+          "meanAbsoluteChannelError": 0.034004851856352644,
+          "hashes": [
+            "602287dbd3a6ce2f8af586e3354ab1d80de3c1f8b01fe76a475eed2b7d06e600",
+            "f5da9ef56a6714a09f49603ae3b2990c5283ab0b765753cb7d7d28f8dcf05ed8"
+          ]
+        },
+        {
+          "frame": 26,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 550,
+          "maximumChannelError": 224,
+          "meanAbsoluteChannelError": 0.03427985039359447,
+          "hashes": [
+            "eedf7ef0962ad49a5cdbe53bda939db1d4e5ad35f61d07aa2b065cd821151b07",
+            "402e7ceffc2bb5f28698dd723d1ef8c122a141bce277fe806b98d573b3de16c1"
+          ]
+        },
+        {
+          "frame": 27,
+          "yaw": 30,
+          "pitch": 0,
+          "changedPixels": 609,
+          "maximumChannelError": 213,
+          "meanAbsoluteChannelError": 0.03977397010572366,
+          "hashes": [
+            "a6323c2c31568e10d446d5b757e87c7872267fdb1d0ddad61c47854d399c9fc9",
+            "d9dfdfadb4b7260fed62827aa09279a08c018420f842eb643f0f90bf32f577ea"
+          ]
+        },
+        {
+          "frame": 28,
+          "yaw": 29.544232590366242,
+          "pitch": 0,
+          "changedPixels": 550,
+          "maximumChannelError": 224,
+          "meanAbsoluteChannelError": 0.03427985039359447,
+          "hashes": [
+            "eedf7ef0962ad49a5cdbe53bda939db1d4e5ad35f61d07aa2b065cd821151b07",
+            "402e7ceffc2bb5f28698dd723d1ef8c122a141bce277fe806b98d573b3de16c1"
+          ]
+        },
+        {
+          "frame": 29,
+          "yaw": 28.190778623577252,
+          "pitch": 0,
+          "changedPixels": 491,
+          "maximumChannelError": 213,
+          "meanAbsoluteChannelError": 0.034004851856352644,
+          "hashes": [
+            "602287dbd3a6ce2f8af586e3354ab1d80de3c1f8b01fe76a475eed2b7d06e600",
+            "f5da9ef56a6714a09f49603ae3b2990c5283ab0b765753cb7d7d28f8dcf05ed8"
+          ]
+        },
+        {
+          "frame": 30,
+          "yaw": 25.980762113533157,
+          "pitch": 0,
+          "changedPixels": 351,
+          "maximumChannelError": 227,
+          "meanAbsoluteChannelError": 0.03053248898430573,
+          "hashes": [
+            "059ea3bc27ce99ba9ee7459ef64f5b638d951860421d39a330aa14fc43b4baf6",
+            "07a6569f1676836d27d659d79f0031c6f649485557fc890cf8b52a38aeda0ee1"
+          ]
+        },
+        {
+          "frame": 31,
+          "yaw": 22.98133329356934,
+          "pitch": 0,
+          "changedPixels": 221,
+          "maximumChannelError": 227,
+          "meanAbsoluteChannelError": 0.026789178289968178,
+          "hashes": [
+            "80aed06df2c1d6c4d70339ba6526a877841569dd9db328bbe8619d3aba21c882",
+            "474cf249c723eec60aa3e97004adbe09caf58e7173272f151d09c4f847d13233"
+          ]
+        },
+        {
+          "frame": 32,
+          "yaw": 19.283628290596184,
+          "pitch": 0,
+          "changedPixels": 112,
+          "maximumChannelError": 228,
+          "meanAbsoluteChannelError": 0.014796361557814955,
+          "hashes": [
+            "7a00e17ab856dfb590594ca263ce7542995feb5650d2868e2c0ad4e6ae95af90",
+            "e3b77a85e00cd801fa9bdbad48b06927c2815655086f6d6e47f6a3a80e7261d3"
+          ]
+        },
+        {
+          "frame": 33,
+          "yaw": 15.00000000000001,
+          "pitch": 0,
+          "changedPixels": 40,
+          "maximumChannelError": 223,
+          "meanAbsoluteChannelError": 0.0034588604888762865,
+          "hashes": [
+            "f07928d7ac2424ea7c2489bb641232fc1d5ec5be2ae05e9c422b3a8c3ccc9072",
+            "674ddb995b7a570d4ee86cc5bfed3f2e173710dfb382293e6ab7e8d141148482"
+          ]
+        },
+        {
+          "frame": 34,
+          "yaw": 10.260604299770065,
+          "pitch": 0,
+          "changedPixels": 20,
+          "maximumChannelError": 91,
+          "meanAbsoluteChannelError": 0.0011396011396011395,
+          "hashes": [
+            "b955ad9708eec678a0aa0b4fa76f20141a9e7c077b590a974d333ce7e0cccf16",
+            "8593a9ad4cd2be7d8687a2b7aaf169a50b09b215d7ae46fd43903f7eb4fd30cc"
+          ]
+        },
+        {
+          "frame": 35,
+          "yaw": 5.209445330007922,
+          "pitch": 0,
+          "changedPixels": 16,
+          "maximumChannelError": 92,
+          "meanAbsoluteChannelError": 0.0009393157892368003,
+          "hashes": [
+            "e81956ad4ed653a20c880aa257e13c0cf2a6eff25ab42d33b36e0f761e35d4ab",
+            "27ffdb9d6e67365bde55daa0bcd86763283b1d113c85099f648c9357749c8789"
+          ]
+        },
+        {
+          "frame": 36,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 92,
+          "maximumChannelError": 214,
+          "meanAbsoluteChannelError": 0.006060769725856614,
+          "hashes": [
+            "85ae1e978af7bcbc25c054101f551cc8629dfa8aaf827bbad25b61050addbfd1",
+            "3e732539ab60a9fc8d5cae9e8b288a6932a4fd5862e835c7209b982ef928918a"
+          ]
+        },
+        {
+          "frame": 37,
+          "yaw": 0,
+          "pitch": -5.209445330007893,
+          "changedPixels": 32,
+          "maximumChannelError": 122,
+          "meanAbsoluteChannelError": 0.0019074366625709438,
+          "hashes": [
+            "a87962c5fbc90ed29c785a7ad53a69158948371e9166d325fc5acbee32ab50df",
+            "09510a72550a960e7d7ebd924e857078ff67f3246803b0ccc237d685c74e10e1"
+          ]
+        },
+        {
+          "frame": 38,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 44,
+          "maximumChannelError": 133,
+          "meanAbsoluteChannelError": 0.0024898394566641013,
+          "hashes": [
+            "56fffa4a5e24794f7f35af910547cb8f158658bd0c395063e4d8b75c51e4dc06",
+            "43036f65eed97a64d2a5cb611f59c668ef89ff74775b3b4b1c90fd4675fb3df1"
+          ]
+        },
+        {
+          "frame": 39,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 144,
+          "maximumChannelError": 189,
+          "meanAbsoluteChannelError": 0.01041753869557977,
+          "hashes": [
+            "9b4127c10b118654505329ff5a42f952c24a30b8574f7e555d1af34d5fd1caab",
+            "bc0619c8c1b7d95b8f79738f712f81efdcec99c4e4567ab306b633f3727c7eb5"
+          ]
+        },
+        {
+          "frame": 40,
+          "yaw": 0,
+          "pitch": -19.283628290596187,
+          "changedPixels": 328,
+          "maximumChannelError": 201,
+          "meanAbsoluteChannelError": 0.035362741523878964,
+          "hashes": [
+            "0325a7dd310293f1f9d8e7fe14f32f1ac31b0d6a31592e2940609844cbe6d9ee",
+            "544f974f9b3b1234f3b1fa0b89a3ea4883fc2c1aa04ea95f033b25f3865d306b"
+          ]
+        },
+        {
+          "frame": 41,
+          "yaw": 0,
+          "pitch": -22.981333293569335,
+          "changedPixels": 490,
+          "maximumChannelError": 230,
+          "meanAbsoluteChannelError": 0.05240229900577452,
+          "hashes": [
+            "bdc34202d67982692807a96961b01a19b7c0dfbf95e0af3efa45c5fb6d9656fd",
+            "39b2bed5ee61015a0301938dbb68491df81e1b34dc46c45220ddb6f9786585ac"
+          ]
+        },
+        {
+          "frame": 42,
+          "yaw": 0,
+          "pitch": -25.980762113533164,
+          "changedPixels": 550,
+          "maximumChannelError": 254,
+          "meanAbsoluteChannelError": 0.05878577568940918,
+          "hashes": [
+            "01b34209fdefb319ba1dcd1a05fa3542480320a432cdc8d61e3472d924631a4f",
+            "5e176e447b6526286a6ccdc50b58144bc153cf5266b58b8303e521f67aa2973a"
+          ]
+        },
+        {
+          "frame": 43,
+          "yaw": 0,
+          "pitch": -28.19077862357725,
+          "changedPixels": 1096,
+          "maximumChannelError": 255,
+          "meanAbsoluteChannelError": 0.08374628121863509,
+          "hashes": [
+            "0637cb4f312108447ef741b41381612a2314244c4088454e86d771362be28601",
+            "42254bdae93ba0535d690c07b91d85574da8b5975115e1639f9d96fc512c5c41"
+          ]
+        },
+        {
+          "frame": 44,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 1674,
+          "maximumChannelError": 255,
+          "meanAbsoluteChannelError": 0.10998996322850983,
+          "hashes": [
+            "c0568f775d51f5238356bbde47bbdc0307ae2278010d1e15ee5a7af3f1211b3c",
+            "5186d2159a908764bb9b70ac9e865e0653cae8e4a114e8c4bff5e805c3ed9f03"
+          ]
+        },
+        {
+          "frame": 45,
+          "yaw": 0,
+          "pitch": -30,
+          "changedPixels": 1954,
+          "maximumChannelError": 255,
+          "meanAbsoluteChannelError": 0.12223617468483187,
+          "hashes": [
+            "428a86438a4adc37f66cfdd0fa5fc9b7ac9fe7f4a4614675a371a323ceaa3518",
+            "0aa9b67f8ded849b402776c195dabe1b550c8632d52d72aa222571d046e87719"
+          ]
+        },
+        {
+          "frame": 46,
+          "yaw": 0,
+          "pitch": -29.544232590366242,
+          "changedPixels": 1674,
+          "maximumChannelError": 255,
+          "meanAbsoluteChannelError": 0.10998996322850983,
+          "hashes": [
+            "c0568f775d51f5238356bbde47bbdc0307ae2278010d1e15ee5a7af3f1211b3c",
+            "5186d2159a908764bb9b70ac9e865e0653cae8e4a114e8c4bff5e805c3ed9f03"
+          ]
+        },
+        {
+          "frame": 47,
+          "yaw": 0,
+          "pitch": -28.190778623577252,
+          "changedPixels": 1096,
+          "maximumChannelError": 255,
+          "meanAbsoluteChannelError": 0.08374628121863509,
+          "hashes": [
+            "0637cb4f312108447ef741b41381612a2314244c4088454e86d771362be28601",
+            "42254bdae93ba0535d690c07b91d85574da8b5975115e1639f9d96fc512c5c41"
+          ]
+        },
+        {
+          "frame": 48,
+          "yaw": 0,
+          "pitch": -25.98076211353317,
+          "changedPixels": 550,
+          "maximumChannelError": 254,
+          "meanAbsoluteChannelError": 0.05878577568940918,
+          "hashes": [
+            "01b34209fdefb319ba1dcd1a05fa3542480320a432cdc8d61e3472d924631a4f",
+            "5e176e447b6526286a6ccdc50b58144bc153cf5266b58b8303e521f67aa2973a"
+          ]
+        },
+        {
+          "frame": 49,
+          "yaw": 0,
+          "pitch": -22.98133329356934,
+          "changedPixels": 490,
+          "maximumChannelError": 230,
+          "meanAbsoluteChannelError": 0.05240229900577452,
+          "hashes": [
+            "bdc34202d67982692807a96961b01a19b7c0dfbf95e0af3efa45c5fb6d9656fd",
+            "39b2bed5ee61015a0301938dbb68491df81e1b34dc46c45220ddb6f9786585ac"
+          ]
+        },
+        {
+          "frame": 50,
+          "yaw": 0,
+          "pitch": -19.283628290596184,
+          "changedPixels": 328,
+          "maximumChannelError": 201,
+          "meanAbsoluteChannelError": 0.035362741523878964,
+          "hashes": [
+            "0325a7dd310293f1f9d8e7fe14f32f1ac31b0d6a31592e2940609844cbe6d9ee",
+            "544f974f9b3b1234f3b1fa0b89a3ea4883fc2c1aa04ea95f033b25f3865d306b"
+          ]
+        },
+        {
+          "frame": 51,
+          "yaw": 0,
+          "pitch": -14.999999999999986,
+          "changedPixels": 144,
+          "maximumChannelError": 189,
+          "meanAbsoluteChannelError": 0.01041753869557977,
+          "hashes": [
+            "9b4127c10b118654505329ff5a42f952c24a30b8574f7e555d1af34d5fd1caab",
+            "bc0619c8c1b7d95b8f79738f712f81efdcec99c4e4567ab306b633f3727c7eb5"
+          ]
+        },
+        {
+          "frame": 52,
+          "yaw": 0,
+          "pitch": -10.260604299770065,
+          "changedPixels": 44,
+          "maximumChannelError": 133,
+          "meanAbsoluteChannelError": 0.0024898394566641013,
+          "hashes": [
+            "56fffa4a5e24794f7f35af910547cb8f158658bd0c395063e4d8b75c51e4dc06",
+            "43036f65eed97a64d2a5cb611f59c668ef89ff74775b3b4b1c90fd4675fb3df1"
+          ]
+        },
+        {
+          "frame": 53,
+          "yaw": 0,
+          "pitch": -5.209445330007895,
+          "changedPixels": 32,
+          "maximumChannelError": 122,
+          "meanAbsoluteChannelError": 0.0019074366625709438,
+          "hashes": [
+            "a87962c5fbc90ed29c785a7ad53a69158948371e9166d325fc5acbee32ab50df",
+            "09510a72550a960e7d7ebd924e857078ff67f3246803b0ccc237d685c74e10e1"
+          ]
+        },
+        {
+          "frame": 54,
+          "yaw": 0,
+          "pitch": 0,
+          "changedPixels": 92,
+          "maximumChannelError": 214,
+          "meanAbsoluteChannelError": 0.006060769725856614,
+          "hashes": [
+            "85ae1e978af7bcbc25c054101f551cc8629dfa8aaf827bbad25b61050addbfd1",
+            "3e732539ab60a9fc8d5cae9e8b288a6932a4fd5862e835c7209b982ef928918a"
+          ]
+        },
+        {
+          "frame": 55,
+          "yaw": 0,
+          "pitch": 5.209445330007893,
+          "changedPixels": 668,
+          "maximumChannelError": 217,
+          "meanAbsoluteChannelError": 0.04884442104031361,
+          "hashes": [
+            "e0d5a10b1e120c72271e069dafdf1e222f0e9e3bc99393db028d1326ac489679",
+            "31483adaa60afde0e7bb57e4c79a57ba81d59181efa741d091479e6c19033f2a"
+          ]
+        },
+        {
+          "frame": 56,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 1823,
+          "maximumChannelError": 230,
+          "meanAbsoluteChannelError": 0.1380164098963467,
+          "hashes": [
+            "09bd128b171f631ebe04a719557840bf2783723c7601d9af2f051d5828fb7f10",
+            "06763b9047dc6e747ed69ae3ebb02b5c89268f3362096f6629f3e0bb3cb320b4"
+          ]
+        },
+        {
+          "frame": 57,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 2956,
+          "maximumChannelError": 236,
+          "meanAbsoluteChannelError": 0.23521016459405086,
+          "hashes": [
+            "5a5c3fd18efcbe1fef219e33e4dd107afedc4397887efe3de4ba8692addbee19",
+            "0665efe433361c77d81768f296a5b748cc48d584f9e88990668a79de1d149a1c"
+          ]
+        },
+        {
+          "frame": 58,
+          "yaw": 0,
+          "pitch": 19.283628290596187,
+          "changedPixels": 3994,
+          "maximumChannelError": 241,
+          "meanAbsoluteChannelError": 0.31739467015928313,
+          "hashes": [
+            "4c6b75b94328a7fc4660f9896e76eb58db4a27a05bc7727f6506a3ba48807060",
+            "27f22a9d595c637e1cd095a4057626a3a78545224185f85fb004ca721a9a49d4"
+          ]
+        },
+        {
+          "frame": 59,
+          "yaw": 0,
+          "pitch": 22.981333293569335,
+          "changedPixels": 4768,
+          "maximumChannelError": 241,
+          "meanAbsoluteChannelError": 0.38772093274462943,
+          "hashes": [
+            "9965b231d2b8cc98bbc855128938a791a065287bb33e1a25f4db889b1e56f489",
+            "37670de978d5819fcac75a9448c55af395b4da1952793fb86b9b4a71618fa552"
+          ]
+        },
+        {
+          "frame": 60,
+          "yaw": 0,
+          "pitch": 25.980762113533164,
+          "changedPixels": 5445,
+          "maximumChannelError": 240,
+          "meanAbsoluteChannelError": 0.4509413411467124,
+          "hashes": [
+            "aebf7045f64d849a7e28addf334b0d1d8ce3ece76057c7dd80f69de6a4a62380",
+            "48fd0d0ef4fe7478788881f03ab0dcd2fbad4acc44c70bac860d96d99314b8cb"
+          ]
+        },
+        {
+          "frame": 61,
+          "yaw": 0,
+          "pitch": 28.19077862357725,
+          "changedPixels": 5793,
+          "maximumChannelError": 241,
+          "meanAbsoluteChannelError": 0.47733084889482996,
+          "hashes": [
+            "7edeac628bf3f64161e39e71f75c1e763b543ad4738e6fe802cbe190a8873de5",
+            "a3c9f5f471caf2105c99bee3416fc10de285b8cc093cf304788449762164ee74"
+          ]
+        },
+        {
+          "frame": 62,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 5994,
+          "maximumChannelError": 241,
+          "meanAbsoluteChannelError": 0.4828591746443247,
+          "hashes": [
+            "064b1890d657995555e8987e053664ac54d66b4912191758ce724ae26b977460",
+            "1f24aff5ae46319fb2f450ec5f4f194fe4dc697af3d614ab0cfb8ccb016a06a3"
+          ]
+        },
+        {
+          "frame": 63,
+          "yaw": 0,
+          "pitch": 30,
+          "changedPixels": 6124,
+          "maximumChannelError": 240,
+          "meanAbsoluteChannelError": 0.5034287051664619,
+          "hashes": [
+            "0d79a68d2baa64cb2624ab5e2e72168c1c2d463c7ce26100b560ec71cd7955ef",
+            "23464d496c1758cfc397d7250ba6c8cc64b09fed6b86bc8b89d3231118d529fa"
+          ]
+        },
+        {
+          "frame": 64,
+          "yaw": 0,
+          "pitch": 29.544232590366242,
+          "changedPixels": 5994,
+          "maximumChannelError": 241,
+          "meanAbsoluteChannelError": 0.4828591746443247,
+          "hashes": [
+            "064b1890d657995555e8987e053664ac54d66b4912191758ce724ae26b977460",
+            "1f24aff5ae46319fb2f450ec5f4f194fe4dc697af3d614ab0cfb8ccb016a06a3"
+          ]
+        },
+        {
+          "frame": 65,
+          "yaw": 0,
+          "pitch": 28.190778623577252,
+          "changedPixels": 5793,
+          "maximumChannelError": 241,
+          "meanAbsoluteChannelError": 0.47733084889482996,
+          "hashes": [
+            "7edeac628bf3f64161e39e71f75c1e763b543ad4738e6fe802cbe190a8873de5",
+            "a3c9f5f471caf2105c99bee3416fc10de285b8cc093cf304788449762164ee74"
+          ]
+        },
+        {
+          "frame": 66,
+          "yaw": 0,
+          "pitch": 25.98076211353317,
+          "changedPixels": 5445,
+          "maximumChannelError": 240,
+          "meanAbsoluteChannelError": 0.4509413411467124,
+          "hashes": [
+            "aebf7045f64d849a7e28addf334b0d1d8ce3ece76057c7dd80f69de6a4a62380",
+            "48fd0d0ef4fe7478788881f03ab0dcd2fbad4acc44c70bac860d96d99314b8cb"
+          ]
+        },
+        {
+          "frame": 67,
+          "yaw": 0,
+          "pitch": 22.98133329356934,
+          "changedPixels": 4768,
+          "maximumChannelError": 241,
+          "meanAbsoluteChannelError": 0.38772093274462943,
+          "hashes": [
+            "9965b231d2b8cc98bbc855128938a791a065287bb33e1a25f4db889b1e56f489",
+            "37670de978d5819fcac75a9448c55af395b4da1952793fb86b9b4a71618fa552"
+          ]
+        },
+        {
+          "frame": 68,
+          "yaw": 0,
+          "pitch": 19.283628290596184,
+          "changedPixels": 3994,
+          "maximumChannelError": 241,
+          "meanAbsoluteChannelError": 0.31739467015928313,
+          "hashes": [
+            "4c6b75b94328a7fc4660f9896e76eb58db4a27a05bc7727f6506a3ba48807060",
+            "27f22a9d595c637e1cd095a4057626a3a78545224185f85fb004ca721a9a49d4"
+          ]
+        },
+        {
+          "frame": 69,
+          "yaw": 0,
+          "pitch": 14.999999999999986,
+          "changedPixels": 2956,
+          "maximumChannelError": 236,
+          "meanAbsoluteChannelError": 0.23521016459405086,
+          "hashes": [
+            "5a5c3fd18efcbe1fef219e33e4dd107afedc4397887efe3de4ba8692addbee19",
+            "0665efe433361c77d81768f296a5b748cc48d584f9e88990668a79de1d149a1c"
+          ]
+        },
+        {
+          "frame": 70,
+          "yaw": 0,
+          "pitch": 10.260604299770065,
+          "changedPixels": 1823,
+          "maximumChannelError": 230,
+          "meanAbsoluteChannelError": 0.1380164098963467,
+          "hashes": [
+            "09bd128b171f631ebe04a719557840bf2783723c7601d9af2f051d5828fb7f10",
+            "06763b9047dc6e747ed69ae3ebb02b5c89268f3362096f6629f3e0bb3cb320b4"
+          ]
+        },
+        {
+          "frame": 71,
+          "yaw": 0,
+          "pitch": 5.209445330007895,
+          "changedPixels": 668,
+          "maximumChannelError": 217,
+          "meanAbsoluteChannelError": 0.04884442104031361,
+          "hashes": [
+            "e0d5a10b1e120c72271e069dafdf1e222f0e9e3bc99393db028d1326ac489679",
+            "31483adaa60afde0e7bb57e4c79a57ba81d59181efa741d091479e6c19033f2a"
+          ]
+        }
+      ],
+      "size": [780, 844],
+      "label": "dot-library | AI-made | Sharp | Depth 0.5",
+      "madeBy": "Ryan with Codex (GPT-6)",
+      "source": {
+        "author": "Ryan, the owner of Splashery (made with an AI image tool)",
+        "url": "https://github.com/ryanjosephkamp/splashery/blob/main/CREDITS.md",
+        "license": "AI-made by the owner",
+        "label": "AI-made"
+      },
+      "recordingLicense": "CC0 1.0, subject to the source image license"
+    }
+  ],
+  "publicationScope": "Explicitly rejected prototype research, separate from the retained 54 videos; not a claimed improvement or cost pass.",
+  "rawRecordingSha256": "9e33af49a4a216dd215ded0d29d7f09413a94fc5d32f72a766b45e498fae80a6",
+  "publishedMethodSources": "method-source/*.mjs.txt preserve the original captured method bytes."
+}

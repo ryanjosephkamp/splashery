@@ -102,3 +102,9 @@ quantitative ranking is pending. [Selection metadata](selection.json) preserves 
 - [waterfall-gif | CC0 GIF, first frame | Sharp | Depth 1](checkpoint/waterfall-gif-sharp-before-after.mp4)
 
 This review branch is never merged. Source images, labels, and licenses are preserved.
+
+## Rejected research
+
+[Three labeled prototype comparisons](rejected-mask-research/README.md) show the forest and street
+ribbon gains beside the library boundary regression that cut the two-pixel mask. They are separate
+from the 54 retained-runtime videos above and are not accepted changes.
