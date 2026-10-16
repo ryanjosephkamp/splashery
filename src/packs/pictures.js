@@ -2641,6 +2641,9 @@ const ALBUM_RECIPE = {
   drag: bk5Drag(bookDrag(ALBUM_PULL)),
   pictures: {
     solid: true,
+    // Mounted prints already have a sharp opaque face. Their paper needs
+    // no second set of color samples behind that face during a turn.
+    backing: "paper",
     sample: () => ALBUM_SAMPLE.map((n) => `assets/toys/photo-album/${n}.jpg`),
     accept: ["image"],
     decorate: albumDecorate,
