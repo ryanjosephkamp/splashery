@@ -1,0 +1,6110 @@
+[
+  {
+    "metric": "halos",
+    "threshold": 0.04,
+    "supported": 227,
+    "count": 227,
+    "mean": 0.13466119466848941,
+    "cost": 764.2022797436775,
+    "inputs": [
+      {
+        "id": "forest",
+        "profile": "phone",
+        "value": 0.103067897700517
+      },
+      {
+        "id": "forest",
+        "profile": "desktop",
+        "value": 0.10104782695665791
+      },
+      {
+        "id": "street",
+        "profile": "phone",
+        "value": 0.07126997488088535
+      },
+      {
+        "id": "street",
+        "profile": "desktop",
+        "value": 0.07138960121967497
+      },
+      {
+        "id": "still-life",
+        "profile": "phone",
+        "value": 0.12341780015609168
+      },
+      {
+        "id": "still-life",
+        "profile": "desktop",
+        "value": 0.10672344054162938
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "phone",
+        "value": 0.11450124110856619
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "desktop",
+        "value": 0.10686756238293284
+      },
+      {
+        "id": "palace-stairs",
+        "profile": "phone",
+        "value": 0.18887963046402262
+      },
+      {
+        "id": "palace-stairs",
+        "profile": "desktop",
+        "value": 0.17824318603182115
+      },
+      {
+        "id": "wildflowers",
+        "profile": "phone",
+        "value": 0.1334799596024109
+      },
+      {
+        "id": "wildflowers",
+        "profile": "desktop",
+        "value": 0.1136603269286173
+      },
+      {
+        "id": "dot-train",
+        "profile": "phone",
+        "value": 0.11444865266082678
+      },
+      {
+        "id": "dot-train",
+        "profile": "desktop",
+        "value": 0.13534019094233007
+      },
+      {
+        "id": "dot-oasis",
+        "profile": "phone",
+        "value": 0.14702533835147322
+      },
+      {
+        "id": "dot-oasis",
+        "profile": "desktop",
+        "value": 0.15496523421207195
+      },
+      {
+        "id": "dot-castle",
+        "profile": "phone",
+        "value": 0.14716147466765953
+      },
+      {
+        "id": "dot-castle",
+        "profile": "desktop",
+        "value": 0.1400033440391316
+      },
+      {
+        "id": "dot-cove",
+        "profile": "phone",
+        "value": 0.0638142845362163
+      },
+      {
+        "id": "dot-cove",
+        "profile": "desktop",
+        "value": 0.061067281488223206
+      },
+      {
+        "id": "dot-harbor",
+        "profile": "phone",
+        "value": 0.09890837029080517
+      },
+      {
+        "id": "dot-harbor",
+        "profile": "desktop",
+        "value": 0.08826936257133455
+      },
+      {
+        "id": "dot-paper-valley",
+        "profile": "phone",
+        "value": 0.12211935138838624
+      },
+      {
+        "id": "dot-paper-valley",
+        "profile": "desktop",
+        "value": 0.12488357174190585
+      },
+      {
+        "id": "dot-farm",
+        "profile": "phone",
+        "value": 0.09594106316793044
+      },
+      {
+        "id": "dot-farm",
+        "profile": "desktop",
+        "value": 0.08999991640986513
+      },
+      {
+        "id": "dot-treehouses",
+        "profile": "desktop",
+        "value": 0.25348340233019223
+      },
+      {
+        "id": "dot-library",
+        "profile": "phone",
+        "value": 0.1848049575857746
+      },
+      {
+        "id": "dot-library",
+        "profile": "desktop",
+        "value": 0.19579462468609038
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "phone",
+        "value": 0.11576972732344748
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "desktop",
+        "value": 0.1165615895155971
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "phone",
+        "value": 0.18998841712715472
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "desktop",
+        "value": 0.14506249734434742
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "phone",
+        "value": 0.16723892048060596
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "desktop",
+        "value": 0.19849531162867864
+      },
+      {
+        "id": "dot-attic",
+        "profile": "phone",
+        "value": 0.11072041738257242
+      },
+      {
+        "id": "dot-attic",
+        "profile": "desktop",
+        "value": 0.09311796465714947
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "phone",
+        "value": 0.15997252429326955
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "desktop",
+        "value": 0.18103519416026095
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "phone",
+        "value": 0.08887055231298523
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "desktop",
+        "value": 0.0802045677868403
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "phone",
+        "value": 0.132209561793448
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "desktop",
+        "value": 0.10075964652678604
+      },
+      {
+        "id": "dot-arch",
+        "profile": "phone",
+        "value": 0.06288724909085806
+      },
+      {
+        "id": "dot-arch",
+        "profile": "desktop",
+        "value": 0.0543010372678373
+      },
+      {
+        "id": "dot-fallen-log",
+        "profile": "phone",
+        "value": 0.04912176219745531
+      },
+      {
+        "id": "dot-fallen-log",
+        "profile": "desktop",
+        "value": 0.057086203677354785
+      },
+      {
+        "id": "dot-alpine-lake",
+        "profile": "phone",
+        "value": 0.06751323877662713
+      },
+      {
+        "id": "dot-alpine-lake",
+        "profile": "desktop",
+        "value": 0.11360606440454846
+      },
+      {
+        "id": "dot-ice-falls",
+        "profile": "phone",
+        "value": 0.09977341744447239
+      },
+      {
+        "id": "dot-ice-falls",
+        "profile": "desktop",
+        "value": 0.10224458854609873
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "phone",
+        "value": 0.10880327043298497
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "desktop",
+        "value": 0.1277489260719929
+      },
+      {
+        "id": "dot-wave",
+        "profile": "phone",
+        "value": 0.06004787796546768
+      },
+      {
+        "id": "dot-wave",
+        "profile": "desktop",
+        "value": 0.049909789555614405
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "phone",
+        "value": 0.12981439050609664
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "desktop",
+        "value": 0.1368526372700059
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "phone",
+        "value": 0.13220355824214125
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "desktop",
+        "value": 0.15181438339528552
+      },
+      {
+        "id": "dot-dragonfly",
+        "profile": "phone",
+        "value": 0.23799247846254876
+      },
+      {
+        "id": "dot-dragonfly",
+        "profile": "desktop",
+        "value": 0.2280467309901096
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "phone",
+        "value": 0.11671991641412353
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "desktop",
+        "value": 0.1183145897632008
+      },
+      {
+        "id": "dot-market",
+        "profile": "phone",
+        "value": 0.08334556480264572
+      },
+      {
+        "id": "dot-market",
+        "profile": "desktop",
+        "value": 0.10460938870091353
+      },
+      {
+        "id": "dot-gears",
+        "profile": "phone",
+        "value": 0.08784959546071992
+      },
+      {
+        "id": "dot-gears",
+        "profile": "desktop",
+        "value": 0.09326056537513205
+      },
+      {
+        "id": "dot-chess",
+        "profile": "phone",
+        "value": 0.16403240506997804
+      },
+      {
+        "id": "dot-chess",
+        "profile": "desktop",
+        "value": 0.1455596109592612
+      },
+      {
+        "id": "dot-book-city",
+        "profile": "phone",
+        "value": 0.10917993930505754
+      },
+      {
+        "id": "dot-book-city",
+        "profile": "desktop",
+        "value": 0.10681112093556983
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "phone",
+        "value": 0.1215480194518005
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "desktop",
+        "value": 0.10875794211920606
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "phone",
+        "value": 0.06588481704316948
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "desktop",
+        "value": 0.0909371414475396
+      },
+      {
+        "id": "dot-cdx-wooden-toys",
+        "profile": "phone",
+        "value": 0.1257535178034271
+      },
+      {
+        "id": "dot-cdx-wooden-toys",
+        "profile": "desktop",
+        "value": 0.11183618209227018
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "phone",
+        "value": 0.14587749629515692
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "desktop",
+        "value": 0.1370034744511067
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "phone",
+        "value": 0.10569868088789372
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "desktop",
+        "value": 0.10715267783027513
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "phone",
+        "value": 0.10877027699475933
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "desktop",
+        "value": 0.11108890387765251
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "phone",
+        "value": 0.1278428455358411
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "desktop",
+        "value": 0.12302921680129476
+      },
+      {
+        "id": "dot-cdx-moss-stream",
+        "profile": "phone",
+        "value": 0.12960385310472003
+      },
+      {
+        "id": "dot-cdx-moss-stream",
+        "profile": "desktop",
+        "value": 0.12121802663724535
+      },
+      {
+        "id": "dot-cdx-dune-grass",
+        "profile": "phone",
+        "value": 0.07995429643098986
+      },
+      {
+        "id": "dot-cdx-dune-grass",
+        "profile": "desktop",
+        "value": 0.0627608006092162
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "phone",
+        "value": 0.10022200273245119
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "desktop",
+        "value": 0.10701200490675236
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "phone",
+        "value": 0.1075987910977974
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "desktop",
+        "value": 0.10430639968296586
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "phone",
+        "value": 0.14289766530110679
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "desktop",
+        "value": 0.1406799838435586
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "phone",
+        "value": 0.1447317041876602
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "phone",
+        "value": 0.11492239247572426
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "desktop",
+        "value": 0.11487816749803782
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "phone",
+        "value": 0.08308776778947906
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "desktop",
+        "value": 0.08605519823539327
+      },
+      {
+        "id": "dot-cdx-crystal-court",
+        "profile": "phone",
+        "value": 0.07035958486859059
+      },
+      {
+        "id": "dot-cdx-crystal-court",
+        "profile": "desktop",
+        "value": 0.06306731293214164
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "phone",
+        "value": 0.13570638197692952
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "desktop",
+        "value": 0.14070517479965725
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "phone",
+        "value": 0.10330363060228073
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "desktop",
+        "value": 0.10114050247889741
+      },
+      {
+        "id": "dot-cdx-paper-canyon",
+        "profile": "phone",
+        "value": 0.07266041604922038
+      },
+      {
+        "id": "dot-cdx-paper-canyon",
+        "profile": "desktop",
+        "value": 0.06867709446103196
+      },
+      {
+        "id": "dot-cdx-wood-valley",
+        "profile": "phone",
+        "value": 0.1146989419469249
+      },
+      {
+        "id": "dot-cdx-wood-valley",
+        "profile": "desktop",
+        "value": 0.11529347379054845
+      },
+      {
+        "id": "cdx-hard-glass-jug",
+        "profile": "phone",
+        "value": 0.14280787132511696
+      },
+      {
+        "id": "cdx-hard-glass-jug",
+        "profile": "desktop",
+        "value": 0.15284743779610432
+      },
+      {
+        "id": "cdx-hard-submerged-stones",
+        "profile": "phone",
+        "value": 0.07806268197101218
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "phone",
+        "value": 0.07924449225624093
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "desktop",
+        "value": 0.08159658660084364
+      },
+      {
+        "id": "cdx-hard-wool-fleece",
+        "profile": "phone",
+        "value": 0.1467826872531371
+      },
+      {
+        "id": "cdx-hard-wool-fleece",
+        "profile": "desktop",
+        "value": 0.1374038629563408
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "desktop",
+        "value": 0.20291269262661943
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "phone",
+        "value": 0.16908350009045917
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "desktop",
+        "value": 0.16378843480798572
+      },
+      {
+        "id": "cdx-hard-puddle-reflection",
+        "profile": "phone",
+        "value": 0.22398798705273074
+      },
+      {
+        "id": "cdx-hard-puddle-reflection",
+        "profile": "desktop",
+        "value": 0.17588280646533738
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "phone",
+        "value": 0.09750155231333653
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "desktop",
+        "value": 0.10271259361966412
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "phone",
+        "value": 0.15095494651321564
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "desktop",
+        "value": 0.2265059432468165
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "phone",
+        "value": 0.08302227633368085
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "desktop",
+        "value": 0.13648525858081265
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "phone",
+        "value": 0.06106866775774181
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "desktop",
+        "value": 0.07200755810257378
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "phone",
+        "value": 0.09854364518746908
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "desktop",
+        "value": 0.08691567457110765
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "phone",
+        "value": 0.08499031107022215
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "desktop",
+        "value": 0.09177724472082832
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "phone",
+        "value": 0.06724519940860103
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "desktop",
+        "value": 0.07010052704598034
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "phone",
+        "value": 0.07500597077456032
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "desktop",
+        "value": 0.08939818747438727
+      },
+      {
+        "id": "cdx-hard-snail-shell",
+        "profile": "phone",
+        "value": 0.07620956842035066
+      },
+      {
+        "id": "cdx-hard-snail-shell",
+        "profile": "desktop",
+        "value": 0.08986523141399026
+      },
+      {
+        "id": "cdx-hard-feather-lichen",
+        "profile": "desktop",
+        "value": 0.11268534199894914
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "phone",
+        "value": 0.12019865221017603
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "desktop",
+        "value": 0.1288439565847352
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "phone",
+        "value": 0.1786176305762507
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "desktop",
+        "value": 0.11770010040042359
+      },
+      {
+        "id": "cdx-hard-ceramic-shelf",
+        "profile": "phone",
+        "value": 0.11062987311115602
+      },
+      {
+        "id": "cdx-hard-ceramic-shelf",
+        "profile": "desktop",
+        "value": 0.11634284640316837
+      },
+      {
+        "id": "truth-still-life",
+        "profile": "phone",
+        "value": 0.16261177793909978
+      },
+      {
+        "id": "truth-still-life",
+        "profile": "desktop",
+        "value": 0.15260964683687364
+      },
+      {
+        "id": "truth-room",
+        "profile": "phone",
+        "value": 0.13406495391767162
+      },
+      {
+        "id": "truth-room",
+        "profile": "desktop",
+        "value": 0.1264254109309362
+      },
+      {
+        "id": "truth-forest",
+        "profile": "phone",
+        "value": 0.11501989804554942
+      },
+      {
+        "id": "truth-forest",
+        "profile": "desktop",
+        "value": 0.0785636846309791
+      },
+      {
+        "id": "truth-stairs",
+        "profile": "phone",
+        "value": 0.14944914010306837
+      },
+      {
+        "id": "truth-stairs",
+        "profile": "desktop",
+        "value": 0.1550289659375379
+      },
+      {
+        "id": "truth-coast",
+        "profile": "phone",
+        "value": 0.18453306569210412
+      },
+      {
+        "id": "truth-coast",
+        "profile": "desktop",
+        "value": 0.19328479521391959
+      },
+      {
+        "id": "truth-desk",
+        "profile": "phone",
+        "value": 0.12114443674026008
+      },
+      {
+        "id": "truth-desk",
+        "profile": "desktop",
+        "value": 0.13104666998724834
+      },
+      {
+        "id": "truth-fur",
+        "profile": "phone",
+        "value": 0.15126366768163613
+      },
+      {
+        "id": "truth-fur",
+        "profile": "desktop",
+        "value": 0.23757968500426224
+      },
+      {
+        "id": "truth-night",
+        "profile": "phone",
+        "value": 0.21353140909426266
+      },
+      {
+        "id": "truth-night",
+        "profile": "desktop",
+        "value": 0.17572708331868378
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "phone",
+        "value": 0.21520656166786448
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "desktop",
+        "value": 0.22546278740050807
+      },
+      {
+        "id": "truth-arches",
+        "profile": "phone",
+        "value": 0.12825724751134526
+      },
+      {
+        "id": "truth-arches",
+        "profile": "desktop",
+        "value": 0.12748110526558087
+      },
+      {
+        "id": "truth-leaves",
+        "profile": "phone",
+        "value": 0.11981390352881184
+      },
+      {
+        "id": "truth-leaves",
+        "profile": "desktop",
+        "value": 0.13106916407155367
+      },
+      {
+        "id": "truth-steps",
+        "profile": "phone",
+        "value": 0.1261249621012491
+      },
+      {
+        "id": "truth-steps",
+        "profile": "desktop",
+        "value": 0.1584288491303494
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "phone",
+        "value": 0.11026606528561694
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "desktop",
+        "value": 0.10799329636319514
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "phone",
+        "value": 0.35449762662715617
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "desktop",
+        "value": 0.33577082897613286
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "phone",
+        "value": 0.31142998268061023
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "desktop",
+        "value": 0.28565120493312873
+      },
+      {
+        "id": "new-02-88494704",
+        "profile": "phone",
+        "value": 0.1202002577751141
+      },
+      {
+        "id": "new-02-88494704",
+        "profile": "desktop",
+        "value": 0.11939478728037102
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "phone",
+        "value": 0.09459472862730738
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "desktop",
+        "value": 0.08952336396364192
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "phone",
+        "value": 0.10447633005737167
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "desktop",
+        "value": 0.10602570562024936
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "phone",
+        "value": 0.12986595750805766
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "desktop",
+        "value": 0.13258374286865665
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "phone",
+        "value": 0.15763418750613467
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "desktop",
+        "value": 0.14141846489348714
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "phone",
+        "value": 0.11570121045175896
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "desktop",
+        "value": 0.13182384212326986
+      },
+      {
+        "id": "new-07-131897774",
+        "profile": "phone",
+        "value": 0.4422904451509634
+      },
+      {
+        "id": "new-07-131897774",
+        "profile": "desktop",
+        "value": 0.408192163501267
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "phone",
+        "value": 0.19713112293704654
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "desktop",
+        "value": 0.1956229324202363
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "phone",
+        "value": 0.2589939510739993
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "desktop",
+        "value": 0.2627962111435094
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "phone",
+        "value": 0.22807815474894177
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "desktop",
+        "value": 0.20298135017212482
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "phone",
+        "value": 0.29192343217744837
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "desktop",
+        "value": 0.32832897998129157
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "phone",
+        "value": 0.0964794267328591
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "desktop",
+        "value": 0.11500821646937663
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "phone",
+        "value": 0.16831412813227373
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "desktop",
+        "value": 0.13677630799888918
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "phone",
+        "value": 0.17741047116786873
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "phone",
+        "value": 0.06702092805344037
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "desktop",
+        "value": 0.1519793734601529
+      },
+      {
+        "id": "new-12-201484048",
+        "profile": "phone",
+        "value": 0.18759353719089222
+      },
+      {
+        "id": "new-12-201484048",
+        "profile": "desktop",
+        "value": 0.1706922280826101
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "phone",
+        "value": 0.17261936947374967
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "desktop",
+        "value": 0.15309068106802456
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "phone",
+        "value": 0.09193873158881138
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "desktop",
+        "value": 0.07637130038706126
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "phone",
+        "value": 0.14400387172239193
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "desktop",
+        "value": 0.13700302062437572
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "phone",
+        "value": 0.17635866063529737
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "desktop",
+        "value": 0.17824973727560295
+      },
+      {
+        "id": "new-14-76271548",
+        "profile": "phone",
+        "value": 0.1144106957417109
+      },
+      {
+        "id": "new-14-76271548",
+        "profile": "desktop",
+        "value": 0.1104629993286815
+      },
+      {
+        "id": "new-14-16503745",
+        "profile": "phone",
+        "value": 0.1993472221854231
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "phone",
+        "value": 0.06406213866742035
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "desktop",
+        "value": 0.04629521966134932
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "phone",
+        "value": 0.15952490696487562
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "desktop",
+        "value": 0.15199828813076247
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "phone",
+        "value": 0.20505739102635695
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "desktop",
+        "value": 0.1814950892173043
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "phone",
+        "value": 0.11409235143311948
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "desktop",
+        "value": 0.115027076152828
+      }
+    ]
+  },
+  {
+    "metric": "flatDepth",
+    "threshold": 0.2,
+    "supported": 212,
+    "count": 209,
+    "mean": 0.5603716502335301,
+    "cost": 585.5883744940392,
+    "inputs": [
+      {
+        "id": "forest",
+        "profile": "phone",
+        "value": 0.6171617161716172
+      },
+      {
+        "id": "forest",
+        "profile": "desktop",
+        "value": 0.6931567328918322
+      },
+      {
+        "id": "street",
+        "profile": "phone",
+        "value": 0.6348195329087049
+      },
+      {
+        "id": "street",
+        "profile": "desktop",
+        "value": 0.6733001658374793
+      },
+      {
+        "id": "still-life",
+        "profile": "phone",
+        "value": 0.5316455696202531
+      },
+      {
+        "id": "still-life",
+        "profile": "desktop",
+        "value": 0.5569620253164557
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "phone",
+        "value": 0.5193050193050193
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "desktop",
+        "value": 0.5193050193050193
+      },
+      {
+        "id": "palace-stairs",
+        "profile": "phone",
+        "value": 0.5475285171102662
+      },
+      {
+        "id": "palace-stairs",
+        "profile": "desktop",
+        "value": 0.5991561181434599
+      },
+      {
+        "id": "wildflowers",
+        "profile": "phone",
+        "value": 0.4510166358595194
+      },
+      {
+        "id": "wildflowers",
+        "profile": "desktop",
+        "value": 0.45584415584415583
+      },
+      {
+        "id": "dot-train",
+        "profile": "phone",
+        "value": 0.7010050251256281
+      },
+      {
+        "id": "dot-train",
+        "profile": "desktop",
+        "value": 0.7457943925233644
+      },
+      {
+        "id": "dot-oasis",
+        "profile": "phone",
+        "value": 0.5528255528255528
+      },
+      {
+        "id": "dot-oasis",
+        "profile": "desktop",
+        "value": 0.6068376068376068
+      },
+      {
+        "id": "dot-castle",
+        "profile": "phone",
+        "value": 0.6298342541436464
+      },
+      {
+        "id": "dot-castle",
+        "profile": "desktop",
+        "value": 0.6621621621621622
+      },
+      {
+        "id": "dot-cove",
+        "profile": "phone",
+        "value": 0.7456521739130435
+      },
+      {
+        "id": "dot-cove",
+        "profile": "desktop",
+        "value": 0.8164794007490637
+      },
+      {
+        "id": "dot-harbor",
+        "profile": "phone",
+        "value": 0.573170731707317
+      },
+      {
+        "id": "dot-harbor",
+        "profile": "desktop",
+        "value": 0.5612998522895125
+      },
+      {
+        "id": "dot-paper-valley",
+        "profile": "phone",
+        "value": 0.6770334928229665
+      },
+      {
+        "id": "dot-paper-valley",
+        "profile": "desktop",
+        "value": 0.6642512077294686
+      },
+      {
+        "id": "dot-farm",
+        "profile": "phone",
+        "value": 0.5673469387755102
+      },
+      {
+        "id": "dot-farm",
+        "profile": "desktop",
+        "value": 0.6160267111853088
+      },
+      {
+        "id": "dot-treehouses",
+        "profile": "phone",
+        "value": 0.6169354838709677
+      },
+      {
+        "id": "dot-treehouses",
+        "profile": "desktop",
+        "value": 0.6763888888888889
+      },
+      {
+        "id": "dot-library",
+        "profile": "phone",
+        "value": 0.7802197802197802
+      },
+      {
+        "id": "dot-library",
+        "profile": "desktop",
+        "value": 0.7719298245614035
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "phone",
+        "value": 0.6037735849056604
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "desktop",
+        "value": 0.6415584415584416
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "phone",
+        "value": 0.4684385382059801
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "desktop",
+        "value": 0.5367847411444142
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "phone",
+        "value": 0.4928909952606635
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "desktop",
+        "value": 0.5854978354978355
+      },
+      {
+        "id": "dot-attic",
+        "profile": "phone",
+        "value": 0.3836477987421384
+      },
+      {
+        "id": "dot-attic",
+        "profile": "desktop",
+        "value": 0.4908616187989556
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "phone",
+        "value": 0.33281972265023113
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "desktop",
+        "value": 0.3890020366598778
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "phone",
+        "value": 0.5178571428571429
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "desktop",
+        "value": 0.5803108808290155
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "phone",
+        "value": 0.481981981981982
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "desktop",
+        "value": 0.5
+      },
+      {
+        "id": "dot-arch",
+        "profile": "phone",
+        "value": 0.5549132947976878
+      },
+      {
+        "id": "dot-arch",
+        "profile": "desktop",
+        "value": 0.6413502109704642
+      },
+      {
+        "id": "dot-fallen-log",
+        "profile": "phone",
+        "value": 0.4450704225352113
+      },
+      {
+        "id": "dot-fallen-log",
+        "profile": "desktop",
+        "value": 0.5364963503649635
+      },
+      {
+        "id": "dot-alpine-lake",
+        "profile": "phone",
+        "value": 0.6985559566787004
+      },
+      {
+        "id": "dot-alpine-lake",
+        "profile": "desktop",
+        "value": 0.7544117647058823
+      },
+      {
+        "id": "dot-ice-falls",
+        "profile": "phone",
+        "value": 0.7936842105263158
+      },
+      {
+        "id": "dot-ice-falls",
+        "profile": "desktop",
+        "value": 0.8663522012578616
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "phone",
+        "value": 0.5161290322580645
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "desktop",
+        "value": 0.5265017667844523
+      },
+      {
+        "id": "dot-wave",
+        "profile": "phone",
+        "value": 0.46255506607929514
+      },
+      {
+        "id": "dot-wave",
+        "profile": "desktop",
+        "value": 0.4915254237288136
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "phone",
+        "value": 0.47474747474747475
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "desktop",
+        "value": 0.4952978056426332
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "phone",
+        "value": 0.49786324786324787
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "desktop",
+        "value": 0.5096899224806202
+      },
+      {
+        "id": "dot-dragonfly",
+        "profile": "phone",
+        "value": 0.3821656050955414
+      },
+      {
+        "id": "dot-dragonfly",
+        "profile": "desktop",
+        "value": 0.4020618556701031
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "phone",
+        "value": 0.4959677419354839
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "desktop",
+        "value": 0.52
+      },
+      {
+        "id": "dot-market",
+        "profile": "phone",
+        "value": 0.5884615384615385
+      },
+      {
+        "id": "dot-market",
+        "profile": "desktop",
+        "value": 0.6293604651162791
+      },
+      {
+        "id": "dot-gears",
+        "profile": "phone",
+        "value": 0.5246913580246914
+      },
+      {
+        "id": "dot-gears",
+        "profile": "desktop",
+        "value": 0.6194225721784777
+      },
+      {
+        "id": "dot-chess",
+        "profile": "phone",
+        "value": 0.5101351351351351
+      },
+      {
+        "id": "dot-chess",
+        "profile": "desktop",
+        "value": 0.5294117647058824
+      },
+      {
+        "id": "dot-book-city",
+        "profile": "phone",
+        "value": 0.5063063063063064
+      },
+      {
+        "id": "dot-book-city",
+        "profile": "desktop",
+        "value": 0.5073260073260073
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "phone",
+        "value": 0.30201342281879195
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "desktop",
+        "value": 0.25862068965517243
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "phone",
+        "value": 0.4799054373522459
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "desktop",
+        "value": 0.5123674911660777
+      },
+      {
+        "id": "dot-cdx-wooden-toys",
+        "profile": "phone",
+        "value": 0.24770642201834864
+      },
+      {
+        "id": "dot-cdx-wooden-toys",
+        "profile": "desktop",
+        "value": 0.31092436974789917
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "phone",
+        "value": 0.5890909090909091
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "desktop",
+        "value": 0.6071428571428571
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "phone",
+        "value": 0.3641025641025641
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "desktop",
+        "value": 0.42857142857142855
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "phone",
+        "value": 0.41605839416058393
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "desktop",
+        "value": 0.45962732919254656
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "phone",
+        "value": 0.2911694510739857
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "desktop",
+        "value": 0.2789115646258503
+      },
+      {
+        "id": "dot-cdx-moss-stream",
+        "profile": "phone",
+        "value": 0.6152019002375297
+      },
+      {
+        "id": "dot-cdx-moss-stream",
+        "profile": "desktop",
+        "value": 0.7032967032967034
+      },
+      {
+        "id": "dot-cdx-dune-grass",
+        "profile": "phone",
+        "value": 0.6290322580645161
+      },
+      {
+        "id": "dot-cdx-dune-grass",
+        "profile": "desktop",
+        "value": 0.6496350364963503
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "phone",
+        "value": 0.570281124497992
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "desktop",
+        "value": 0.6888260254596889
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "phone",
+        "value": 0.5411392405063291
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "desktop",
+        "value": 0.6212121212121212
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "phone",
+        "value": 0.6619718309859155
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "desktop",
+        "value": 0.6948356807511737
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "phone",
+        "value": 0.5658362989323843
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "desktop",
+        "value": 0.5209790209790209
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "phone",
+        "value": 0.4968152866242038
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "desktop",
+        "value": 0.5433526011560693
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "phone",
+        "value": 0.33653846153846156
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "desktop",
+        "value": 0.41796200345423146
+      },
+      {
+        "id": "dot-cdx-crystal-court",
+        "profile": "phone",
+        "value": 0.5333333333333333
+      },
+      {
+        "id": "dot-cdx-crystal-court",
+        "profile": "desktop",
+        "value": 0.44155844155844154
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "phone",
+        "value": 0.7013698630136986
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "desktop",
+        "value": 0.7448559670781894
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "phone",
+        "value": 0.6092436974789915
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "desktop",
+        "value": 0.629746835443038
+      },
+      {
+        "id": "dot-cdx-paper-canyon",
+        "profile": "phone",
+        "value": 0.6859504132231405
+      },
+      {
+        "id": "dot-cdx-paper-canyon",
+        "profile": "desktop",
+        "value": 0.6640625
+      },
+      {
+        "id": "dot-cdx-wood-valley",
+        "profile": "phone",
+        "value": 0.618421052631579
+      },
+      {
+        "id": "dot-cdx-wood-valley",
+        "profile": "desktop",
+        "value": 0.5950413223140496
+      },
+      {
+        "id": "cdx-hard-glass-jug",
+        "profile": "phone",
+        "value": 0.5319548872180451
+      },
+      {
+        "id": "cdx-hard-glass-jug",
+        "profile": "desktop",
+        "value": 0.5806938159879337
+      },
+      {
+        "id": "cdx-hard-submerged-stones",
+        "profile": "phone",
+        "value": 0.802610114192496
+      },
+      {
+        "id": "cdx-hard-submerged-stones",
+        "profile": "desktop",
+        "value": 0.8690228690228691
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "phone",
+        "value": 0.5845824411134903
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "desktop",
+        "value": 0.6255707762557078
+      },
+      {
+        "id": "cdx-hard-wool-fleece",
+        "profile": "phone",
+        "value": 0.5428571428571428
+      },
+      {
+        "id": "cdx-hard-wool-fleece",
+        "profile": "desktop",
+        "value": 0.5431754874651811
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "phone",
+        "value": 0.5149863760217984
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "desktop",
+        "value": 0.5150250417362271
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "phone",
+        "value": 0.43037974683544306
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "desktop",
+        "value": 0.42295760082730094
+      },
+      {
+        "id": "cdx-hard-puddle-reflection",
+        "profile": "phone",
+        "value": 0.7503828483920367
+      },
+      {
+        "id": "cdx-hard-puddle-reflection",
+        "profile": "desktop",
+        "value": 0.8545081967213115
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "phone",
+        "value": 0.5728643216080402
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "desktop",
+        "value": 0.624113475177305
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "phone",
+        "value": 0.6852589641434262
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "desktop",
+        "value": 0.7985611510791367
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "phone",
+        "value": 0.42857142857142855
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "desktop",
+        "value": 0.5107296137339056
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "phone",
+        "value": 0.387434554973822
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "desktop",
+        "value": 0.546875
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "desktop",
+        "value": 0.28
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "phone",
+        "value": 0.48046875
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "desktop",
+        "value": 0.4634146341463415
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "phone",
+        "value": 0.36492890995260663
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "desktop",
+        "value": 0.32857142857142857
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "phone",
+        "value": 0.3789954337899543
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "desktop",
+        "value": 0.45864661654135336
+      },
+      {
+        "id": "cdx-hard-snail-shell",
+        "profile": "phone",
+        "value": 0.6113989637305699
+      },
+      {
+        "id": "cdx-hard-snail-shell",
+        "profile": "desktop",
+        "value": 0.7336683417085427
+      },
+      {
+        "id": "cdx-hard-feather-lichen",
+        "profile": "phone",
+        "value": 0.7647058823529411
+      },
+      {
+        "id": "cdx-hard-feather-lichen",
+        "profile": "desktop",
+        "value": 0.7859424920127795
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "phone",
+        "value": 0.46421663442940037
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "desktop",
+        "value": 0.5058236272878536
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "phone",
+        "value": 0.4970414201183432
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "desktop",
+        "value": 0.6068965517241379
+      },
+      {
+        "id": "cdx-hard-ceramic-shelf",
+        "profile": "phone",
+        "value": 0.4783950617283951
+      },
+      {
+        "id": "cdx-hard-ceramic-shelf",
+        "profile": "desktop",
+        "value": 0.4540059347181009
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "phone",
+        "value": 0.6438356164383562
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "desktop",
+        "value": 0.6417910447761194
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "phone",
+        "value": 0.24074074074074073
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "desktop",
+        "value": 0.22857142857142856
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "phone",
+        "value": 0.6460176991150443
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "desktop",
+        "value": 0.6431535269709544
+      },
+      {
+        "id": "new-02-88494704",
+        "profile": "phone",
+        "value": 0.6538461538461539
+      },
+      {
+        "id": "new-02-88494704",
+        "profile": "desktop",
+        "value": 0.6195652173913043
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "phone",
+        "value": 0.41935483870967744
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "desktop",
+        "value": 0.47150259067357514
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "phone",
+        "value": 0.9405940594059405
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "desktop",
+        "value": 0.9484536082474226
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "phone",
+        "value": 0.6303448275862069
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "desktop",
+        "value": 0.644474034620506
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "phone",
+        "value": 0.8522167487684729
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "desktop",
+        "value": 0.8407960199004975
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "phone",
+        "value": 0.5277777777777778
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "desktop",
+        "value": 0.5471698113207547
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "phone",
+        "value": 0.4880952380952381
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "desktop",
+        "value": 0.45121951219512196
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "phone",
+        "value": 0.56
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "desktop",
+        "value": 0.63125
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "phone",
+        "value": 0.5157680569684638
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "desktop",
+        "value": 0.6258158085569253
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "phone",
+        "value": 0.35
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "desktop",
+        "value": 0.5669291338582677
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "phone",
+        "value": 0.39805825242718446
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "desktop",
+        "value": 0.5300546448087432
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "phone",
+        "value": 0.8865671641791045
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "desktop",
+        "value": 0.89
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "phone",
+        "value": 0.4555765595463138
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "desktop",
+        "value": 0.46826625386996906
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "phone",
+        "value": 0.35294117647058826
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "desktop",
+        "value": 0.43478260869565216
+      },
+      {
+        "id": "new-12-201484048",
+        "profile": "phone",
+        "value": 0.717391304347826
+      },
+      {
+        "id": "new-12-201484048",
+        "profile": "desktop",
+        "value": 0.7681159420289855
+      },
+      {
+        "id": "new-12-201342968",
+        "profile": "phone",
+        "value": 0.46078431372549017
+      },
+      {
+        "id": "new-12-201342968",
+        "profile": "desktop",
+        "value": 0.4444444444444444
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "phone",
+        "value": 0.34328358208955223
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "desktop",
+        "value": 0.4444444444444444
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "phone",
+        "value": 0.2517482517482518
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "desktop",
+        "value": 0.30039525691699603
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "phone",
+        "value": 0.5471698113207547
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "desktop",
+        "value": 0.5471698113207547
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "phone",
+        "value": 0.711864406779661
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "desktop",
+        "value": 0.6602564102564102
+      },
+      {
+        "id": "new-14-76271548",
+        "profile": "phone",
+        "value": 0.6774193548387096
+      },
+      {
+        "id": "new-14-76271548",
+        "profile": "desktop",
+        "value": 0.7697841726618705
+      },
+      {
+        "id": "new-14-16503745",
+        "profile": "phone",
+        "value": 0.7524509803921569
+      },
+      {
+        "id": "new-14-16503745",
+        "profile": "desktop",
+        "value": 0.7897526501766784
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "phone",
+        "value": 0.8214285714285714
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "desktop",
+        "value": 0.84
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "phone",
+        "value": 0.49624060150375937
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "desktop",
+        "value": 0.5345454545454545
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "phone",
+        "value": 0.32796780684104626
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "desktop",
+        "value": 0.3711111111111111
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "phone",
+        "value": 0.3377926421404682
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "desktop",
+        "value": 0.3993610223642173
+      }
+    ]
+  },
+  {
+    "metric": "streaks",
+    "threshold": 0.15,
+    "supported": 223,
+    "count": 211,
+    "mean": 0.40304755944414505,
+    "cost": 566.9535669514303,
+    "inputs": [
+      {
+        "id": "forest",
+        "profile": "phone",
+        "value": 0.5743608711366746
+      },
+      {
+        "id": "forest",
+        "profile": "desktop",
+        "value": 0.54926932837961
+      },
+      {
+        "id": "street",
+        "profile": "phone",
+        "value": 0.4830079927193839
+      },
+      {
+        "id": "street",
+        "profile": "desktop",
+        "value": 0.4225586509982463
+      },
+      {
+        "id": "still-life",
+        "profile": "phone",
+        "value": 0.6067031910761116
+      },
+      {
+        "id": "still-life",
+        "profile": "desktop",
+        "value": 0.618954252485435
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "phone",
+        "value": 0.45597027468162477
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "desktop",
+        "value": 0.4094722718464058
+      },
+      {
+        "id": "palace-stairs",
+        "profile": "phone",
+        "value": 0.4209571138742423
+      },
+      {
+        "id": "palace-stairs",
+        "profile": "desktop",
+        "value": 0.44861264411050306
+      },
+      {
+        "id": "wildflowers",
+        "profile": "phone",
+        "value": 0.3389637843131553
+      },
+      {
+        "id": "wildflowers",
+        "profile": "desktop",
+        "value": 0.3284146334953847
+      },
+      {
+        "id": "dot-train",
+        "profile": "phone",
+        "value": 0.3575041732153
+      },
+      {
+        "id": "dot-train",
+        "profile": "desktop",
+        "value": 0.3586154780479722
+      },
+      {
+        "id": "dot-castle",
+        "profile": "phone",
+        "value": 0.26076360951750255
+      },
+      {
+        "id": "dot-castle",
+        "profile": "desktop",
+        "value": 0.24405799859619381
+      },
+      {
+        "id": "dot-cove",
+        "profile": "phone",
+        "value": 0.3395967901317427
+      },
+      {
+        "id": "dot-cove",
+        "profile": "desktop",
+        "value": 0.3145615484740013
+      },
+      {
+        "id": "dot-harbor",
+        "profile": "phone",
+        "value": 0.27023842505345885
+      },
+      {
+        "id": "dot-harbor",
+        "profile": "desktop",
+        "value": 0.3130970046309979
+      },
+      {
+        "id": "dot-paper-valley",
+        "profile": "phone",
+        "value": 0.22281763085905382
+      },
+      {
+        "id": "dot-paper-valley",
+        "profile": "desktop",
+        "value": 0.35498775629910273
+      },
+      {
+        "id": "dot-farm",
+        "profile": "phone",
+        "value": 0.25530448918611026
+      },
+      {
+        "id": "dot-farm",
+        "profile": "desktop",
+        "value": 0.2988019741122627
+      },
+      {
+        "id": "dot-treehouses",
+        "profile": "phone",
+        "value": 0.5133497916644888
+      },
+      {
+        "id": "dot-treehouses",
+        "profile": "desktop",
+        "value": 0.45563544889358515
+      },
+      {
+        "id": "dot-library",
+        "profile": "phone",
+        "value": 0.38507384085525
+      },
+      {
+        "id": "dot-library",
+        "profile": "desktop",
+        "value": 0.3353448299992854
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "phone",
+        "value": 0.4955065735907377
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "desktop",
+        "value": 0.5207658904531542
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "phone",
+        "value": 0.35212987936095297
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "desktop",
+        "value": 0.36214562803323047
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "phone",
+        "value": 0.46853346373170623
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "desktop",
+        "value": 0.4729653991765306
+      },
+      {
+        "id": "dot-attic",
+        "profile": "phone",
+        "value": 0.4064419638858968
+      },
+      {
+        "id": "dot-attic",
+        "profile": "desktop",
+        "value": 0.35823654747578515
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "phone",
+        "value": 0.5770004785803504
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "desktop",
+        "value": 0.5454298100076411
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "phone",
+        "value": 0.2429375529702359
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "desktop",
+        "value": 0.33080185018116204
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "phone",
+        "value": 0.21217615524480216
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "desktop",
+        "value": 0.6524817052438394
+      },
+      {
+        "id": "dot-arch",
+        "profile": "phone",
+        "value": 0.2795113944444938
+      },
+      {
+        "id": "dot-arch",
+        "profile": "desktop",
+        "value": 0.32264260647961407
+      },
+      {
+        "id": "dot-fallen-log",
+        "profile": "phone",
+        "value": 0.41454272063901143
+      },
+      {
+        "id": "dot-fallen-log",
+        "profile": "desktop",
+        "value": 0.5237482298694087
+      },
+      {
+        "id": "dot-alpine-lake",
+        "profile": "phone",
+        "value": 0.2546924681287568
+      },
+      {
+        "id": "dot-alpine-lake",
+        "profile": "desktop",
+        "value": 0.3399091522173985
+      },
+      {
+        "id": "dot-ice-falls",
+        "profile": "phone",
+        "value": 0.46008378994444443
+      },
+      {
+        "id": "dot-ice-falls",
+        "profile": "desktop",
+        "value": 0.39966917654959844
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "phone",
+        "value": 0.299465778207907
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "desktop",
+        "value": 0.3759691895951782
+      },
+      {
+        "id": "dot-wave",
+        "profile": "phone",
+        "value": 0.40699888793510475
+      },
+      {
+        "id": "dot-wave",
+        "profile": "desktop",
+        "value": 0.39068724810968214
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "phone",
+        "value": 0.32015263109829395
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "desktop",
+        "value": 0.31151048528215874
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "phone",
+        "value": 0.329365878710154
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "desktop",
+        "value": 0.27966360521658573
+      },
+      {
+        "id": "dot-dragonfly",
+        "profile": "phone",
+        "value": 0.3125378791642449
+      },
+      {
+        "id": "dot-dragonfly",
+        "profile": "desktop",
+        "value": 0.3119738022708125
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "phone",
+        "value": 0.35985022039115255
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "desktop",
+        "value": 0.3850023008053576
+      },
+      {
+        "id": "dot-market",
+        "profile": "phone",
+        "value": 0.4824558217448268
+      },
+      {
+        "id": "dot-market",
+        "profile": "desktop",
+        "value": 0.46337320656967623
+      },
+      {
+        "id": "dot-gears",
+        "profile": "phone",
+        "value": 0.5232620213659172
+      },
+      {
+        "id": "dot-gears",
+        "profile": "desktop",
+        "value": 0.5101437280377719
+      },
+      {
+        "id": "dot-chess",
+        "profile": "phone",
+        "value": 0.42002888524752713
+      },
+      {
+        "id": "dot-chess",
+        "profile": "desktop",
+        "value": 0.327218564511892
+      },
+      {
+        "id": "dot-book-city",
+        "profile": "phone",
+        "value": 0.4666965760019622
+      },
+      {
+        "id": "dot-book-city",
+        "profile": "desktop",
+        "value": 0.41837435517335575
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "phone",
+        "value": 0.16669645193045302
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "desktop",
+        "value": 0.21638201901641707
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "phone",
+        "value": 0.40168506703777856
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "desktop",
+        "value": 0.46576933941626486
+      },
+      {
+        "id": "dot-cdx-wooden-toys",
+        "profile": "phone",
+        "value": 0.3836409618849538
+      },
+      {
+        "id": "dot-cdx-wooden-toys",
+        "profile": "desktop",
+        "value": 0.25759964940414737
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "phone",
+        "value": 0.43164322011928624
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "desktop",
+        "value": 0.28450492167909736
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "phone",
+        "value": 0.3974091188700275
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "desktop",
+        "value": 0.37899926883018475
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "phone",
+        "value": 0.4618181605760465
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "desktop",
+        "value": 0.47564112480279797
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "phone",
+        "value": 0.4882000848209675
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "desktop",
+        "value": 0.39247868814688724
+      },
+      {
+        "id": "dot-cdx-moss-stream",
+        "profile": "phone",
+        "value": 0.5663521220422081
+      },
+      {
+        "id": "dot-cdx-moss-stream",
+        "profile": "desktop",
+        "value": 0.5296025610645636
+      },
+      {
+        "id": "dot-cdx-dune-grass",
+        "profile": "phone",
+        "value": 0.21713420113678095
+      },
+      {
+        "id": "dot-cdx-dune-grass",
+        "profile": "desktop",
+        "value": 0.2946039459313873
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "phone",
+        "value": 0.5345214459811517
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "desktop",
+        "value": 0.5918515995997204
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "phone",
+        "value": 0.5434470335651996
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "desktop",
+        "value": 0.5276443777484554
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "phone",
+        "value": 0.5227888283464428
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "desktop",
+        "value": 0.46196822277782157
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "phone",
+        "value": 0.5311709896230126
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "desktop",
+        "value": 0.4663441614731588
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "phone",
+        "value": 0.3117837021683293
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "desktop",
+        "value": 0.36144425495580723
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "phone",
+        "value": 0.539830194162328
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "desktop",
+        "value": 0.4183580541568631
+      },
+      {
+        "id": "dot-cdx-crystal-court",
+        "profile": "phone",
+        "value": 0.36842236483581936
+      },
+      {
+        "id": "dot-cdx-crystal-court",
+        "profile": "desktop",
+        "value": 0.38684723283057465
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "phone",
+        "value": 0.5423007811642401
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "desktop",
+        "value": 0.5496465632805566
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "phone",
+        "value": 0.37917287808272765
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "desktop",
+        "value": 0.4194027514840968
+      },
+      {
+        "id": "dot-cdx-paper-canyon",
+        "profile": "desktop",
+        "value": 0.21708783877787607
+      },
+      {
+        "id": "dot-cdx-wood-valley",
+        "profile": "phone",
+        "value": 0.30743953594433404
+      },
+      {
+        "id": "dot-cdx-wood-valley",
+        "profile": "desktop",
+        "value": 0.35850801458262305
+      },
+      {
+        "id": "cdx-hard-glass-jug",
+        "profile": "phone",
+        "value": 0.5641871299102454
+      },
+      {
+        "id": "cdx-hard-glass-jug",
+        "profile": "desktop",
+        "value": 0.5432767613827224
+      },
+      {
+        "id": "cdx-hard-submerged-stones",
+        "profile": "phone",
+        "value": 0.4372451784636962
+      },
+      {
+        "id": "cdx-hard-submerged-stones",
+        "profile": "desktop",
+        "value": 0.414180726981757
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "phone",
+        "value": 0.4170354145785121
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "desktop",
+        "value": 0.3661377406096058
+      },
+      {
+        "id": "cdx-hard-wool-fleece",
+        "profile": "phone",
+        "value": 0.3658517155969536
+      },
+      {
+        "id": "cdx-hard-wool-fleece",
+        "profile": "desktop",
+        "value": 0.4137132177233215
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "phone",
+        "value": 0.5675776419295975
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "desktop",
+        "value": 0.5701746012650912
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "phone",
+        "value": 0.5529418482993277
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "desktop",
+        "value": 0.37880145769899265
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "phone",
+        "value": 0.5980356905781905
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "desktop",
+        "value": 0.63060555622957
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "phone",
+        "value": 0.40205925995108444
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "desktop",
+        "value": 0.45184974929759636
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "phone",
+        "value": 0.4285288715657086
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "desktop",
+        "value": 0.35165117327877815
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "phone",
+        "value": 0.5393692702908707
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "desktop",
+        "value": 0.4831039375746352
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "phone",
+        "value": 0.3729803782589326
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "desktop",
+        "value": 0.3294078066007369
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "phone",
+        "value": 0.5032292802017049
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "desktop",
+        "value": 0.49710870675663016
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "phone",
+        "value": 0.3309471867839143
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "desktop",
+        "value": 0.30786534550699074
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "phone",
+        "value": 0.515523421317682
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "desktop",
+        "value": 0.5369446925336088
+      },
+      {
+        "id": "cdx-hard-snail-shell",
+        "profile": "phone",
+        "value": 0.3408432132448844
+      },
+      {
+        "id": "cdx-hard-snail-shell",
+        "profile": "desktop",
+        "value": 0.2649992896685103
+      },
+      {
+        "id": "cdx-hard-feather-lichen",
+        "profile": "phone",
+        "value": 0.349947953484099
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "phone",
+        "value": 0.31408696089516375
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "desktop",
+        "value": 0.29415384469245787
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "phone",
+        "value": 0.6395993142420995
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "desktop",
+        "value": 0.6518875674969971
+      },
+      {
+        "id": "cdx-hard-ceramic-shelf",
+        "profile": "phone",
+        "value": 0.32859416599966285
+      },
+      {
+        "id": "cdx-hard-ceramic-shelf",
+        "profile": "desktop",
+        "value": 0.33003153518699435
+      },
+      {
+        "id": "truth-still-life",
+        "profile": "desktop",
+        "value": 0.3684094268195679
+      },
+      {
+        "id": "truth-room",
+        "profile": "phone",
+        "value": 0.7081197582080332
+      },
+      {
+        "id": "truth-room",
+        "profile": "desktop",
+        "value": 0.7750639598511773
+      },
+      {
+        "id": "truth-forest",
+        "profile": "desktop",
+        "value": 0.26419301872703893
+      },
+      {
+        "id": "truth-stairs",
+        "profile": "phone",
+        "value": 0.18151128572538766
+      },
+      {
+        "id": "truth-stairs",
+        "profile": "desktop",
+        "value": 0.23702106177617022
+      },
+      {
+        "id": "truth-coast",
+        "profile": "phone",
+        "value": 0.21069411727926168
+      },
+      {
+        "id": "truth-coast",
+        "profile": "desktop",
+        "value": 0.26934526410858206
+      },
+      {
+        "id": "truth-fur",
+        "profile": "phone",
+        "value": 0.27250305245530726
+      },
+      {
+        "id": "truth-fur",
+        "profile": "desktop",
+        "value": 0.33997032592646537
+      },
+      {
+        "id": "truth-night",
+        "profile": "phone",
+        "value": 0.20049424550695727
+      },
+      {
+        "id": "truth-night",
+        "profile": "desktop",
+        "value": 0.3249917514277777
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "phone",
+        "value": 0.25622274577054094
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "desktop",
+        "value": 0.18488662885505625
+      },
+      {
+        "id": "truth-arches",
+        "profile": "phone",
+        "value": 0.15412939019409155
+      },
+      {
+        "id": "truth-arches",
+        "profile": "desktop",
+        "value": 0.3264054996818966
+      },
+      {
+        "id": "truth-leaves",
+        "profile": "phone",
+        "value": 0.18673173135925858
+      },
+      {
+        "id": "truth-leaves",
+        "profile": "desktop",
+        "value": 0.23276902572833436
+      },
+      {
+        "id": "truth-steps",
+        "profile": "desktop",
+        "value": 0.18135839580652602
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "phone",
+        "value": 0.4369915161161836
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "desktop",
+        "value": 0.5315093320039493
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "phone",
+        "value": 0.21478285238110417
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "desktop",
+        "value": 0.4691046267799521
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "desktop",
+        "value": 0.224629625971853
+      },
+      {
+        "id": "new-02-88494704",
+        "profile": "phone",
+        "value": 0.17223232942179
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "phone",
+        "value": 0.6753785144357592
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "desktop",
+        "value": 0.708267870875941
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "phone",
+        "value": 0.5043583056571899
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "desktop",
+        "value": 0.6256106807167647
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "phone",
+        "value": 0.33129902226987995
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "desktop",
+        "value": 0.31149982439646473
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "phone",
+        "value": 0.23571791362415961
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "desktop",
+        "value": 0.17163053401513484
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "phone",
+        "value": 0.5447475582361259
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "desktop",
+        "value": 0.6464063627296575
+      },
+      {
+        "id": "new-07-131897774",
+        "profile": "phone",
+        "value": 0.15829155363599312
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "phone",
+        "value": 0.4576707161367465
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "desktop",
+        "value": 0.5217615471017124
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "phone",
+        "value": 0.26501696977495404
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "desktop",
+        "value": 0.3124476577492259
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "phone",
+        "value": 0.39238982087131713
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "desktop",
+        "value": 0.43056989364432097
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "phone",
+        "value": 0.1874275473890602
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "desktop",
+        "value": 0.2793049086844377
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "phone",
+        "value": 0.32223732825429063
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "phone",
+        "value": 0.2020518491568154
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "phone",
+        "value": 0.5440959109955807
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "desktop",
+        "value": 0.5248839826721916
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "phone",
+        "value": 0.3092343595046738
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "desktop",
+        "value": 0.3150771312315289
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "phone",
+        "value": 0.4016012266287785
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "phone",
+        "value": 0.49397402681729163
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "desktop",
+        "value": 0.6070485931092926
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "phone",
+        "value": 0.7197099653469895
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "desktop",
+        "value": 0.6906812830269868
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "phone",
+        "value": 0.2887041627889828
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "desktop",
+        "value": 0.45704503063730884
+      },
+      {
+        "id": "new-14-16503745",
+        "profile": "phone",
+        "value": 0.47306376797207345
+      },
+      {
+        "id": "new-14-16503745",
+        "profile": "desktop",
+        "value": 0.4295489777501311
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "phone",
+        "value": 0.39758098873846204
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "desktop",
+        "value": 0.5318932771050783
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "phone",
+        "value": 0.4900406048387569
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "desktop",
+        "value": 0.5654010732317165
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "phone",
+        "value": 0.24946102326145447
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "desktop",
+        "value": 0.3871336711889608
+      }
+    ]
+  },
+  {
+    "metric": "textureLoss",
+    "threshold": 0.5,
+    "supported": 223,
+    "count": 142,
+    "mean": 0.81726037425294,
+    "cost": 232.10194628783495,
+    "inputs": [
+      {
+        "id": "forest",
+        "profile": "phone",
+        "value": 0.5424212701455193
+      },
+      {
+        "id": "street",
+        "profile": "phone",
+        "value": 0.6343239912774521
+      },
+      {
+        "id": "still-life",
+        "profile": "phone",
+        "value": 0.9868731662345462
+      },
+      {
+        "id": "still-life",
+        "profile": "desktop",
+        "value": 0.9996942079955455
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "phone",
+        "value": 0.8315121276112875
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "desktop",
+        "value": 0.8744476118459545
+      },
+      {
+        "id": "palace-stairs",
+        "profile": "phone",
+        "value": 0.99993904076991
+      },
+      {
+        "id": "palace-stairs",
+        "profile": "desktop",
+        "value": 0.9923743322725909
+      },
+      {
+        "id": "dot-cove",
+        "profile": "desktop",
+        "value": 0.926540523973967
+      },
+      {
+        "id": "dot-farm",
+        "profile": "phone",
+        "value": 0.5775414283908937
+      },
+      {
+        "id": "dot-library",
+        "profile": "phone",
+        "value": 0.9027571112600515
+      },
+      {
+        "id": "dot-library",
+        "profile": "desktop",
+        "value": 0.9330153305621454
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "phone",
+        "value": 0.8009959032763991
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "phone",
+        "value": 0.897132694528267
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "desktop",
+        "value": 0.632292211206269
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "phone",
+        "value": 0.6468526278800173
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "desktop",
+        "value": 0.7936504774814146
+      },
+      {
+        "id": "dot-attic",
+        "profile": "phone",
+        "value": 0.9960397226514782
+      },
+      {
+        "id": "dot-attic",
+        "profile": "desktop",
+        "value": 0.9874922022375172
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "phone",
+        "value": 0.8497219385454585
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "desktop",
+        "value": 0.8205336235008678
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "phone",
+        "value": 0.5331124285189481
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "phone",
+        "value": 0.8261138827228333
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "desktop",
+        "value": 0.7083299886892293
+      },
+      {
+        "id": "dot-arch",
+        "profile": "phone",
+        "value": 0.7387188856361258
+      },
+      {
+        "id": "dot-arch",
+        "profile": "desktop",
+        "value": 0.636431664035465
+      },
+      {
+        "id": "dot-ice-falls",
+        "profile": "phone",
+        "value": 0.8805731437430722
+      },
+      {
+        "id": "dot-wave",
+        "profile": "phone",
+        "value": 0.72857956288361
+      },
+      {
+        "id": "dot-wave",
+        "profile": "desktop",
+        "value": 0.5419118361052724
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "phone",
+        "value": 0.9193716288715649
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "desktop",
+        "value": 0.6962814347703701
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "phone",
+        "value": 0.6607371614841402
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "phone",
+        "value": 0.8522902261107336
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "desktop",
+        "value": 0.581093077050372
+      },
+      {
+        "id": "dot-market",
+        "profile": "phone",
+        "value": 0.860651925285609
+      },
+      {
+        "id": "dot-market",
+        "profile": "desktop",
+        "value": 0.8970607145654419
+      },
+      {
+        "id": "dot-gears",
+        "profile": "phone",
+        "value": 0.7239634653155247
+      },
+      {
+        "id": "dot-gears",
+        "profile": "desktop",
+        "value": 0.9106704970640663
+      },
+      {
+        "id": "dot-chess",
+        "profile": "phone",
+        "value": 0.8936607048727035
+      },
+      {
+        "id": "dot-chess",
+        "profile": "desktop",
+        "value": 0.8732261290004775
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "phone",
+        "value": 0.580171408747915
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "desktop",
+        "value": 0.7772802494250001
+      },
+      {
+        "id": "dot-cdx-wooden-toys",
+        "profile": "phone",
+        "value": 0.9996622672912304
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "phone",
+        "value": 0.9108051314740379
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "desktop",
+        "value": 0.7826577407470471
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "desktop",
+        "value": 0.5922409892683578
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "phone",
+        "value": 0.9014180139467769
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "desktop",
+        "value": 0.8240786755316646
+      },
+      {
+        "id": "dot-cdx-moss-stream",
+        "profile": "phone",
+        "value": 0.8532330550260531
+      },
+      {
+        "id": "dot-cdx-moss-stream",
+        "profile": "desktop",
+        "value": 0.7485461042847946
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "phone",
+        "value": 0.8844221130591486
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "desktop",
+        "value": 0.7988099268279669
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "phone",
+        "value": 0.968175593929365
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "desktop",
+        "value": 0.9997837386450074
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "phone",
+        "value": 0.7764101518809319
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "desktop",
+        "value": 0.8445944658358921
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "phone",
+        "value": 0.6866216895173405
+      },
+      {
+        "id": "dot-cdx-crystal-court",
+        "profile": "phone",
+        "value": 0.724890999334173
+      },
+      {
+        "id": "dot-cdx-crystal-court",
+        "profile": "desktop",
+        "value": 0.7719633310883866
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "phone",
+        "value": 0.6868296822846356
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "desktop",
+        "value": 0.7445232952062839
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "phone",
+        "value": 0.924071689991033
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "desktop",
+        "value": 0.5331004816634255
+      },
+      {
+        "id": "dot-cdx-wood-valley",
+        "profile": "phone",
+        "value": 0.9251471074437752
+      },
+      {
+        "id": "dot-cdx-wood-valley",
+        "profile": "desktop",
+        "value": 0.6016998248549901
+      },
+      {
+        "id": "cdx-hard-glass-jug",
+        "profile": "phone",
+        "value": 0.6555487494847801
+      },
+      {
+        "id": "cdx-hard-glass-jug",
+        "profile": "desktop",
+        "value": 0.6229107549858218
+      },
+      {
+        "id": "cdx-hard-submerged-stones",
+        "profile": "phone",
+        "value": 0.8972069039228437
+      },
+      {
+        "id": "cdx-hard-submerged-stones",
+        "profile": "desktop",
+        "value": 0.6625921429790258
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "desktop",
+        "value": 0.753942963524888
+      },
+      {
+        "id": "cdx-hard-wool-fleece",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "cdx-hard-wool-fleece",
+        "profile": "desktop",
+        "value": 0.9907552233998601
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "phone",
+        "value": 0.8813670878605776
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "desktop",
+        "value": 0.7911263329497352
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "phone",
+        "value": 0.9348715928498119
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "desktop",
+        "value": 0.699628629612083
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "desktop",
+        "value": 0.8279881341484301
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "phone",
+        "value": 0.523856170816394
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "desktop",
+        "value": 0.7618225498178005
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "phone",
+        "value": 0.8859869377494097
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "desktop",
+        "value": 0.656562707866996
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "phone",
+        "value": 0.85172365762642
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "desktop",
+        "value": 0.999380250070956
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "phone",
+        "value": 0.5369645458605318
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "phone",
+        "value": 0.9608621212895039
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "desktop",
+        "value": 0.9443465964282001
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "phone",
+        "value": 0.807367612422516
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "desktop",
+        "value": 0.7013733260784254
+      },
+      {
+        "id": "cdx-hard-feather-lichen",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "phone",
+        "value": 0.6758614628977092
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "desktop",
+        "value": 0.9604289879503936
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "phone",
+        "value": 0.8676845278313025
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "desktop",
+        "value": 0.9794054549715688
+      },
+      {
+        "id": "truth-still-life",
+        "profile": "phone",
+        "value": 0.70853187321031
+      },
+      {
+        "id": "truth-still-life",
+        "profile": "desktop",
+        "value": 0.6711477638855976
+      },
+      {
+        "id": "truth-room",
+        "profile": "desktop",
+        "value": 0.8430920719231478
+      },
+      {
+        "id": "truth-forest",
+        "profile": "phone",
+        "value": 0.8516633462244099
+      },
+      {
+        "id": "truth-coast",
+        "profile": "phone",
+        "value": 0.5784715840355354
+      },
+      {
+        "id": "truth-coast",
+        "profile": "desktop",
+        "value": 0.9384214007953942
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "phone",
+        "value": 0.9542819730544246
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "desktop",
+        "value": 0.9347657980131762
+      },
+      {
+        "id": "truth-arches",
+        "profile": "phone",
+        "value": 0.8387398846251962
+      },
+      {
+        "id": "truth-arches",
+        "profile": "desktop",
+        "value": 0.9156622007050629
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "desktop",
+        "value": 0.671236986306357
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "phone",
+        "value": 0.7570178395267348
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "desktop",
+        "value": 0.733890126572767
+      },
+      {
+        "id": "new-02-88494704",
+        "profile": "phone",
+        "value": 0.557577099373151
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "phone",
+        "value": 0.9990011297748436
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "desktop",
+        "value": 0.8750969550473812
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "phone",
+        "value": 0.9989900115241612
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "desktop",
+        "value": 0.8164455590504224
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "phone",
+        "value": 0.7433692362291304
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "desktop",
+        "value": 0.7875199065519211
+      },
+      {
+        "id": "new-07-131897774",
+        "profile": "desktop",
+        "value": 0.9740886668729641
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "desktop",
+        "value": 0.7295581857587659
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "desktop",
+        "value": 0.6631580432673341
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "phone",
+        "value": 0.5597845930145486
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "desktop",
+        "value": 0.5881106947821878
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "phone",
+        "value": 0.9778879094490767
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "desktop",
+        "value": 0.9889880981257788
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "phone",
+        "value": 0.7432989253505491
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "desktop",
+        "value": 0.519805126987271
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "phone",
+        "value": 0.9634775753006561
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "desktop",
+        "value": 0.9804825957209551
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "desktop",
+        "value": 0.9993496293861546
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "desktop",
+        "value": 0.9183215658496185
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "phone",
+        "value": 0.5768941190036927
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "desktop",
+        "value": 0.9321093325462693
+      },
+      {
+        "id": "new-14-76271548",
+        "profile": "phone",
+        "value": 0.9952736723435331
+      },
+      {
+        "id": "new-14-16503745",
+        "profile": "phone",
+        "value": 0.7238179508986
+      },
+      {
+        "id": "new-14-16503745",
+        "profile": "desktop",
+        "value": 0.910865042885328
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "phone",
+        "value": 0.7437590011160349
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "phone",
+        "value": 0.6253866157547556
+      }
+    ]
+  },
+  {
+    "metric": "fringes",
+    "threshold": 0.75,
+    "supported": 138,
+    "count": 106,
+    "mean": 1.3831475226450152,
+    "cost": 195.48484986716213,
+    "inputs": [
+      {
+        "id": "forest",
+        "profile": "phone",
+        "value": 0.7532050788339201
+      },
+      {
+        "id": "forest",
+        "profile": "desktop",
+        "value": 1.5387962075977633
+      },
+      {
+        "id": "street",
+        "profile": "phone",
+        "value": 0.8696120741059794
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "desktop",
+        "value": 1.2643519289035339
+      },
+      {
+        "id": "wildflowers",
+        "profile": "desktop",
+        "value": 1.393266020061732
+      },
+      {
+        "id": "dot-train",
+        "profile": "desktop",
+        "value": 1.4434157868974806
+      },
+      {
+        "id": "dot-oasis",
+        "profile": "phone",
+        "value": 0.8442060573197995
+      },
+      {
+        "id": "dot-oasis",
+        "profile": "desktop",
+        "value": 2.1973875140086827
+      },
+      {
+        "id": "dot-harbor",
+        "profile": "desktop",
+        "value": 1.068326377278889
+      },
+      {
+        "id": "dot-farm",
+        "profile": "phone",
+        "value": 0.8534182406935724
+      },
+      {
+        "id": "dot-farm",
+        "profile": "desktop",
+        "value": 1.8718652226822816
+      },
+      {
+        "id": "dot-treehouses",
+        "profile": "phone",
+        "value": 0.8001228097317418
+      },
+      {
+        "id": "dot-treehouses",
+        "profile": "desktop",
+        "value": 1.769169469875239
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "phone",
+        "value": 0.8235190684042446
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "desktop",
+        "value": 1.701926783525215
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "desktop",
+        "value": 1.7342890194343261
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "desktop",
+        "value": 1.0318890577120785
+      },
+      {
+        "id": "dot-attic",
+        "profile": "desktop",
+        "value": 2.1178956230991774
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "phone",
+        "value": 0.8830825656706157
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "desktop",
+        "value": 1.3764654549525437
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "phone",
+        "value": 0.976668407398916
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "desktop",
+        "value": 1.905456720417098
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "desktop",
+        "value": 1.5428113529442011
+      },
+      {
+        "id": "dot-fallen-log",
+        "profile": "desktop",
+        "value": 1.6044567581761615
+      },
+      {
+        "id": "dot-ice-falls",
+        "profile": "phone",
+        "value": 0.8821763841196226
+      },
+      {
+        "id": "dot-ice-falls",
+        "profile": "desktop",
+        "value": 1.6909217600044828
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "phone",
+        "value": 0.8130104964223847
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "desktop",
+        "value": 1.4460164132724083
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "phone",
+        "value": 0.7644807968876252
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "desktop",
+        "value": 0.9642208708342266
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "phone",
+        "value": 0.99885574955252
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "desktop",
+        "value": 1.350545788318228
+      },
+      {
+        "id": "dot-gears",
+        "profile": "desktop",
+        "value": 1.5706528707748382
+      },
+      {
+        "id": "dot-chess",
+        "profile": "desktop",
+        "value": 1.6837855189905182
+      },
+      {
+        "id": "dot-book-city",
+        "profile": "desktop",
+        "value": 2.1234322663163105
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "phone",
+        "value": 0.8299981710521128
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "desktop",
+        "value": 1.5537241965394908
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "phone",
+        "value": 0.7625917621489487
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "desktop",
+        "value": 1.325230350745494
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "phone",
+        "value": 0.9005236697038214
+      },
+      {
+        "id": "dot-cdx-clay-tools",
+        "profile": "desktop",
+        "value": 1.7841049800114874
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "phone",
+        "value": 0.9070706759954874
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "desktop",
+        "value": 1.888245020809874
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "phone",
+        "value": 1.1254941731936605
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "desktop",
+        "value": 2.2447760908297867
+      },
+      {
+        "id": "dot-cdx-moss-stream",
+        "profile": "desktop",
+        "value": 1.4090398252508614
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "desktop",
+        "value": 1.1714780756633292
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "desktop",
+        "value": 1.320176173936763
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "desktop",
+        "value": 1.5807615642152713
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "desktop",
+        "value": 1.224944958393937
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "desktop",
+        "value": 2.437301865693062
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "phone",
+        "value": 1.0480132002796987
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "desktop",
+        "value": 1.1934325391061495
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "desktop",
+        "value": 1.4663954994616937
+      },
+      {
+        "id": "dot-cdx-paper-canyon",
+        "profile": "desktop",
+        "value": 1.1796171733206082
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "desktop",
+        "value": 1.369673033351578
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "phone",
+        "value": 0.7928977996783131
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "desktop",
+        "value": 1.19569326531896
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "phone",
+        "value": 0.9195029668477894
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "desktop",
+        "value": 2.0829514509630096
+      },
+      {
+        "id": "cdx-hard-puddle-reflection",
+        "profile": "desktop",
+        "value": 1.1625110729484083
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "phone",
+        "value": 1.0720088435420305
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "desktop",
+        "value": 2.582100846174516
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "phone",
+        "value": 1.0078808826535233
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "desktop",
+        "value": 1.852594269307324
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "phone",
+        "value": 0.9546822830767803
+      },
+      {
+        "id": "cdx-hard-campfire",
+        "profile": "desktop",
+        "value": 1.5590985467357472
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "desktop",
+        "value": 1.098497577970887
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "phone",
+        "value": 0.9230929618778013
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "desktop",
+        "value": 2.028326476063154
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "desktop",
+        "value": 0.8771332432384459
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "desktop",
+        "value": 1.070679402465516
+      },
+      {
+        "id": "cdx-hard-snail-shell",
+        "profile": "phone",
+        "value": 0.7659372055788962
+      },
+      {
+        "id": "cdx-hard-snail-shell",
+        "profile": "desktop",
+        "value": 1.2245437277879763
+      },
+      {
+        "id": "cdx-hard-feather-lichen",
+        "profile": "desktop",
+        "value": 1.2391729669382778
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "desktop",
+        "value": 1.7127926903795683
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "phone",
+        "value": 1.0911191253185073
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "desktop",
+        "value": 1.6374664778439867
+      },
+      {
+        "id": "truth-stairs",
+        "profile": "phone",
+        "value": 1.184353167170364
+      },
+      {
+        "id": "truth-stairs",
+        "profile": "desktop",
+        "value": 2.176015529802186
+      },
+      {
+        "id": "truth-fur",
+        "profile": "phone",
+        "value": 1.2319991868307913
+      },
+      {
+        "id": "truth-fur",
+        "profile": "desktop",
+        "value": 3.063395719625439
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "phone",
+        "value": 1.3704494004074204
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "desktop",
+        "value": 2.426534468902184
+      },
+      {
+        "id": "truth-leaves",
+        "profile": "phone",
+        "value": 1.2559484445774773
+      },
+      {
+        "id": "truth-leaves",
+        "profile": "desktop",
+        "value": 2.523054788210677
+      },
+      {
+        "id": "truth-steps",
+        "profile": "phone",
+        "value": 0.9253344112213434
+      },
+      {
+        "id": "truth-steps",
+        "profile": "desktop",
+        "value": 1.6201910784506155
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "phone",
+        "value": 0.826403494363504
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "desktop",
+        "value": 1.5212480088246139
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "phone",
+        "value": 0.8402435620664003
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "desktop",
+        "value": 1.6620874122813523
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "phone",
+        "value": 0.8553895596105766
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "desktop",
+        "value": 2.373930745252553
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "phone",
+        "value": 0.9228499495689412
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "desktop",
+        "value": 1.0808374348767082
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "desktop",
+        "value": 0.7798850318119432
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "phone",
+        "value": 0.8946501905012957
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "desktop",
+        "value": 2.183047560577704
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "phone",
+        "value": 0.9877817871646223
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "desktop",
+        "value": 1.795932613788009
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "desktop",
+        "value": 1.506849556636556
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "desktop",
+        "value": 1.0299630976427951
+      },
+      {
+        "id": "new-12-201342968",
+        "profile": "desktop",
+        "value": 1.7700230084403037
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "desktop",
+        "value": 1.9835356240270834
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "desktop",
+        "value": 1.5947229701072534
+      }
+    ]
+  },
+  {
+    "metric": "missing",
+    "threshold": 0.2,
+    "supported": 138,
+    "count": 56,
+    "mean": 0.6199817482341939,
+    "cost": 173.59488950557434,
+    "inputs": [
+      {
+        "id": "forest",
+        "profile": "phone",
+        "value": 0.4
+      },
+      {
+        "id": "forest",
+        "profile": "desktop",
+        "value": 0.4444444444444444
+      },
+      {
+        "id": "street",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "wildflowers",
+        "profile": "desktop",
+        "value": 0.5
+      },
+      {
+        "id": "dot-train",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "dot-train",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "dot-treehouses",
+        "profile": "phone",
+        "value": 0.36363636363636365
+      },
+      {
+        "id": "dot-treehouses",
+        "profile": "desktop",
+        "value": 0.4666666666666667
+      },
+      {
+        "id": "dot-workshop",
+        "profile": "phone",
+        "value": 0.24705882352941178
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "phone",
+        "value": 0.5
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "phone",
+        "value": 0.5
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "desktop",
+        "value": 0.3333333333333333
+      },
+      {
+        "id": "dot-attic",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "phone",
+        "value": 0.25
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "phone",
+        "value": 0.25
+      },
+      {
+        "id": "dot-chess",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "phone",
+        "value": 0.75
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "phone",
+        "value": 0.5555555555555556
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "desktop",
+        "value": 0.2
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "phone",
+        "value": 0.2916666666666667
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "phone",
+        "value": 0.3333333333333333
+      },
+      {
+        "id": "dot-cdx-acorns",
+        "profile": "desktop",
+        "value": 0.2222222222222222
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "desktop",
+        "value": 0.2857142857142857
+      },
+      {
+        "id": "dot-cdx-deer-grove",
+        "profile": "phone",
+        "value": 0.25
+      },
+      {
+        "id": "dot-cdx-paper-canyon",
+        "profile": "phone",
+        "value": 0.6666666666666666
+      },
+      {
+        "id": "cdx-hard-polished-floor",
+        "profile": "phone",
+        "value": 0.43478260869565216
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "phone",
+        "value": 0.2727272727272727
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "desktop",
+        "value": 0.6
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "desktop",
+        "value": 0.3333333333333333
+      },
+      {
+        "id": "cdx-hard-snail-shell",
+        "profile": "phone",
+        "value": 0.2
+      },
+      {
+        "id": "cdx-hard-feather-lichen",
+        "profile": "phone",
+        "value": 0.5
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "truth-fur",
+        "profile": "phone",
+        "value": 0.875
+      },
+      {
+        "id": "truth-fur",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "phone",
+        "value": 0.4716981132075472
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "desktop",
+        "value": 0.4878048780487805
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "phone",
+        "value": 0.5
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "desktop",
+        "value": 0.3333333333333333
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "desktop",
+        "value": 0.5
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "phone",
+        "value": 0.4
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "desktop",
+        "value": 0.6
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "phone",
+        "value": 1
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "desktop",
+        "value": 1
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "phone",
+        "value": 0.75
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "desktop",
+        "value": 0.75
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "phone",
+        "value": 0.5
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "desktop",
+        "value": 0.4
+      }
+    ]
+  },
+  {
+    "metric": "memory",
+    "threshold": 1073741824,
+    "supported": 236,
+    "count": 116,
+    "mean": 1285250012.689655,
+    "cost": 138.8499526977539,
+    "inputs": [
+      {
+        "id": "street",
+        "profile": "desktop",
+        "value": 1085255680
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "desktop",
+        "value": 1073785856
+      },
+      {
+        "id": "palace-stairs",
+        "profile": "desktop",
+        "value": 1096790016
+      },
+      {
+        "id": "wildflowers",
+        "profile": "desktop",
+        "value": 1090981888
+      },
+      {
+        "id": "dot-castle",
+        "profile": "desktop",
+        "value": 1083895808
+      },
+      {
+        "id": "dot-cove",
+        "profile": "desktop",
+        "value": 1123407872
+      },
+      {
+        "id": "dot-harbor",
+        "profile": "desktop",
+        "value": 1118228480
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "desktop",
+        "value": 1088409600
+      },
+      {
+        "id": "dot-greenhouse",
+        "profile": "desktop",
+        "value": 1088349184
+      },
+      {
+        "id": "dot-bamboo",
+        "profile": "desktop",
+        "value": 1114406912
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "desktop",
+        "value": 1101216768
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "desktop",
+        "value": 1075515392
+      },
+      {
+        "id": "dot-fallen-log",
+        "profile": "desktop",
+        "value": 1078027264
+      },
+      {
+        "id": "dot-alpine-lake",
+        "profile": "desktop",
+        "value": 1078159360
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "desktop",
+        "value": 1109540864
+      },
+      {
+        "id": "dot-market",
+        "profile": "desktop",
+        "value": 1074737152
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "desktop",
+        "value": 1084977152
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "desktop",
+        "value": 1098047488
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "desktop",
+        "value": 1180834816
+      },
+      {
+        "id": "dot-cdx-redwood-path",
+        "profile": "desktop",
+        "value": 1203462144
+      },
+      {
+        "id": "dot-cdx-pinecone",
+        "profile": "desktop",
+        "value": 1108414464
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "desktop",
+        "value": 1091873792
+      },
+      {
+        "id": "dot-cdx-crystal-court",
+        "profile": "desktop",
+        "value": 1096949760
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "desktop",
+        "value": 1139026944
+      },
+      {
+        "id": "dot-cdx-paper-canyon",
+        "profile": "desktop",
+        "value": 1131544576
+      },
+      {
+        "id": "cdx-hard-backlit-dog",
+        "profile": "desktop",
+        "value": 1077010432
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "desktop",
+        "value": 1089973248
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "desktop",
+        "value": 1079927808
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "desktop",
+        "value": 1149239296
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "desktop",
+        "value": 1119802368
+      },
+      {
+        "id": "cdx-hard-workshop-bench",
+        "profile": "desktop",
+        "value": 1107808256
+      },
+      {
+        "id": "cdx-hard-potting-bench",
+        "profile": "desktop",
+        "value": 1080993792
+      },
+      {
+        "id": "truth-still-life",
+        "profile": "phone",
+        "value": 1147210752
+      },
+      {
+        "id": "truth-still-life",
+        "profile": "desktop",
+        "value": 1468895232
+      },
+      {
+        "id": "truth-room",
+        "profile": "phone",
+        "value": 1174689792
+      },
+      {
+        "id": "truth-room",
+        "profile": "desktop",
+        "value": 1424784384
+      },
+      {
+        "id": "truth-forest",
+        "profile": "phone",
+        "value": 1213733888
+      },
+      {
+        "id": "truth-forest",
+        "profile": "desktop",
+        "value": 1447636992
+      },
+      {
+        "id": "truth-stairs",
+        "profile": "phone",
+        "value": 1184521216
+      },
+      {
+        "id": "truth-stairs",
+        "profile": "desktop",
+        "value": 1373250560
+      },
+      {
+        "id": "truth-coast",
+        "profile": "phone",
+        "value": 1188969472
+      },
+      {
+        "id": "truth-coast",
+        "profile": "desktop",
+        "value": 1426209792
+      },
+      {
+        "id": "truth-desk",
+        "profile": "phone",
+        "value": 1126792192
+      },
+      {
+        "id": "truth-desk",
+        "profile": "desktop",
+        "value": 1399316480
+      },
+      {
+        "id": "truth-fur",
+        "profile": "phone",
+        "value": 1218247680
+      },
+      {
+        "id": "truth-fur",
+        "profile": "desktop",
+        "value": 1388479488
+      },
+      {
+        "id": "truth-night",
+        "profile": "phone",
+        "value": 1134898176
+      },
+      {
+        "id": "truth-night",
+        "profile": "desktop",
+        "value": 1358355456
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "phone",
+        "value": 1164958720
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "desktop",
+        "value": 1396987904
+      },
+      {
+        "id": "truth-arches",
+        "profile": "phone",
+        "value": 1143772160
+      },
+      {
+        "id": "truth-arches",
+        "profile": "desktop",
+        "value": 1382941696
+      },
+      {
+        "id": "truth-leaves",
+        "profile": "phone",
+        "value": 1136235520
+      },
+      {
+        "id": "truth-leaves",
+        "profile": "desktop",
+        "value": 1470516224
+      },
+      {
+        "id": "truth-steps",
+        "profile": "phone",
+        "value": 1231267840
+      },
+      {
+        "id": "truth-steps",
+        "profile": "desktop",
+        "value": 1393726464
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "phone",
+        "value": 1282193408
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "desktop",
+        "value": 1547575296
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "phone",
+        "value": 1176655872
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "desktop",
+        "value": 1460126720
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "phone",
+        "value": 1229931520
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "desktop",
+        "value": 1514116096
+      },
+      {
+        "id": "new-02-88494704",
+        "profile": "phone",
+        "value": 1279527936
+      },
+      {
+        "id": "new-02-88494704",
+        "profile": "desktop",
+        "value": 1518690304
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "phone",
+        "value": 1263633408
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "desktop",
+        "value": 1498587136
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "phone",
+        "value": 1347329024
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "desktop",
+        "value": 1517382656
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "phone",
+        "value": 1274866688
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "desktop",
+        "value": 1506967552
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "phone",
+        "value": 1122930688
+      },
+      {
+        "id": "new-20-160820542",
+        "profile": "desktop",
+        "value": 1442762752
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "phone",
+        "value": 1297107968
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "desktop",
+        "value": 1520566272
+      },
+      {
+        "id": "new-07-131897774",
+        "profile": "phone",
+        "value": 1315027968
+      },
+      {
+        "id": "new-07-131897774",
+        "profile": "desktop",
+        "value": 1522266112
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "phone",
+        "value": 1183239168
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "desktop",
+        "value": 1542355968
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "phone",
+        "value": 1231897600
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "desktop",
+        "value": 1559502848
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "phone",
+        "value": 1319361536
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "desktop",
+        "value": 1644475392
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "phone",
+        "value": 1135307776
+      },
+      {
+        "id": "new-19-62150806",
+        "profile": "desktop",
+        "value": 1424801792
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "phone",
+        "value": 1246664704
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "desktop",
+        "value": 1531364352
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "phone",
+        "value": 1262636032
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "desktop",
+        "value": 1521534976
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "phone",
+        "value": 1302647808
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "desktop",
+        "value": 1509381120
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "phone",
+        "value": 1335200768
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "desktop",
+        "value": 1568852992
+      },
+      {
+        "id": "new-12-201484048",
+        "profile": "phone",
+        "value": 1301061632
+      },
+      {
+        "id": "new-12-201484048",
+        "profile": "desktop",
+        "value": 1478474752
+      },
+      {
+        "id": "new-12-201342968",
+        "profile": "phone",
+        "value": 1303433216
+      },
+      {
+        "id": "new-12-201342968",
+        "profile": "desktop",
+        "value": 1451660288
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "phone",
+        "value": 1221172224
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "desktop",
+        "value": 1492089856
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "phone",
+        "value": 1379588096
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "desktop",
+        "value": 1545860096
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "phone",
+        "value": 1208114176
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "desktop",
+        "value": 1411475456
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "phone",
+        "value": 1265587200
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "desktop",
+        "value": 1465428992
+      },
+      {
+        "id": "new-14-76271548",
+        "profile": "phone",
+        "value": 1249876992
+      },
+      {
+        "id": "new-14-76271548",
+        "profile": "desktop",
+        "value": 1436028928
+      },
+      {
+        "id": "new-14-16503745",
+        "profile": "phone",
+        "value": 1199086592
+      },
+      {
+        "id": "new-14-16503745",
+        "profile": "desktop",
+        "value": 1422830592
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "phone",
+        "value": 1166315520
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "desktop",
+        "value": 1444575232
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "phone",
+        "value": 1271009280
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "desktop",
+        "value": 1451483136
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "phone",
+        "value": 1336432640
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "desktop",
+        "value": 1547064320
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "phone",
+        "value": 1241570304
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "desktop",
+        "value": 1524319232
+      }
+    ]
+  },
+  {
+    "metric": "depth",
+    "threshold": 0.2,
+    "supported": 236,
+    "count": 88,
+    "mean": 0.28206362070662033,
+    "cost": 124.10799311091294,
+    "inputs": [
+      {
+        "id": "still-life",
+        "profile": "phone",
+        "value": 0.21518987341772153
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "phone",
+        "value": 0.23938223938223938
+      },
+      {
+        "id": "spiral-stairs",
+        "profile": "desktop",
+        "value": 0.23938223938223938
+      },
+      {
+        "id": "wildflowers",
+        "profile": "phone",
+        "value": 0.3142329020332717
+      },
+      {
+        "id": "wildflowers",
+        "profile": "desktop",
+        "value": 0.2831168831168831
+      },
+      {
+        "id": "dot-oasis",
+        "profile": "phone",
+        "value": 0.21375921375921375
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "phone",
+        "value": 0.27906976744186046
+      },
+      {
+        "id": "dot-cloister",
+        "profile": "desktop",
+        "value": 0.23433242506811988
+      },
+      {
+        "id": "dot-attic",
+        "profile": "phone",
+        "value": 0.24213836477987422
+      },
+      {
+        "id": "dot-terraces",
+        "profile": "phone",
+        "value": 0.20833333333333334
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "phone",
+        "value": 0.22072072072072071
+      },
+      {
+        "id": "dot-canyon",
+        "profile": "desktop",
+        "value": 0.2672413793103448
+      },
+      {
+        "id": "dot-arch",
+        "profile": "phone",
+        "value": 0.2543352601156069
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "phone",
+        "value": 0.27880184331797236
+      },
+      {
+        "id": "dot-floating-isles",
+        "profile": "desktop",
+        "value": 0.26501766784452296
+      },
+      {
+        "id": "dot-wave",
+        "profile": "phone",
+        "value": 0.32158590308370044
+      },
+      {
+        "id": "dot-wave",
+        "profile": "desktop",
+        "value": 0.3220338983050847
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "phone",
+        "value": 0.2356902356902357
+      },
+      {
+        "id": "dot-explorer-desk",
+        "profile": "desktop",
+        "value": 0.23824451410658307
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "phone",
+        "value": 0.2264957264957265
+      },
+      {
+        "id": "dot-watchmaker",
+        "profile": "desktop",
+        "value": 0.22868217054263565
+      },
+      {
+        "id": "dot-dragonfly",
+        "profile": "phone",
+        "value": 0.4745222929936306
+      },
+      {
+        "id": "dot-dragonfly",
+        "profile": "desktop",
+        "value": 0.46735395189003437
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "phone",
+        "value": 0.2782258064516129
+      },
+      {
+        "id": "dot-mushrooms",
+        "profile": "desktop",
+        "value": 0.2909090909090909
+      },
+      {
+        "id": "dot-chess",
+        "profile": "phone",
+        "value": 0.20945945945945946
+      },
+      {
+        "id": "dot-chess",
+        "profile": "desktop",
+        "value": 0.20743034055727555
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "phone",
+        "value": 0.4161073825503356
+      },
+      {
+        "id": "dot-cdx-stoneware",
+        "profile": "desktop",
+        "value": 0.49137931034482757
+      },
+      {
+        "id": "dot-cdx-autumn-squash",
+        "profile": "phone",
+        "value": 0.23404255319148937
+      },
+      {
+        "id": "dot-cdx-wooden-toys",
+        "profile": "phone",
+        "value": 0.25688073394495414
+      },
+      {
+        "id": "dot-cdx-wooden-toys",
+        "profile": "desktop",
+        "value": 0.3025210084033613
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "phone",
+        "value": 0.27692307692307694
+      },
+      {
+        "id": "dot-cdx-tea-tray",
+        "profile": "desktop",
+        "value": 0.2087912087912088
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "phone",
+        "value": 0.29927007299270075
+      },
+      {
+        "id": "dot-cdx-arched-room",
+        "profile": "desktop",
+        "value": 0.2484472049689441
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "phone",
+        "value": 0.26014319809069214
+      },
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "desktop",
+        "value": 0.2766439909297052
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "phone",
+        "value": 0.22419928825622776
+      },
+      {
+        "id": "dot-cdx-fern-curl",
+        "profile": "desktop",
+        "value": 0.22727272727272727
+      },
+      {
+        "id": "dot-cdx-cliff-terrace",
+        "profile": "phone",
+        "value": 0.2197452229299363
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "phone",
+        "value": 0.35
+      },
+      {
+        "id": "dot-cdx-mushroom-house",
+        "profile": "desktop",
+        "value": 0.21243523316062177
+      },
+      {
+        "id": "cdx-hard-wool-fleece",
+        "profile": "desktop",
+        "value": 0.22841225626740946
+      },
+      {
+        "id": "cdx-hard-bicycle-spokes",
+        "profile": "phone",
+        "value": 0.21798365122615804
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "phone",
+        "value": 0.3459915611814346
+      },
+      {
+        "id": "cdx-hard-bare-branches",
+        "profile": "desktop",
+        "value": 0.34022750775594623
+      },
+      {
+        "id": "cdx-hard-lanterns",
+        "profile": "phone",
+        "value": 0.2119815668202765
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "phone",
+        "value": 0.3673469387755102
+      },
+      {
+        "id": "cdx-hard-candle-still-life",
+        "profile": "desktop",
+        "value": 0.3
+      },
+      {
+        "id": "cdx-hard-moonlit-greenhouse",
+        "profile": "desktop",
+        "value": 0.2073170731707317
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "phone",
+        "value": 0.2559241706161137
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "desktop",
+        "value": 0.2619047619047619
+      },
+      {
+        "id": "cdx-hard-fire-bowl",
+        "profile": "phone",
+        "value": 0.2146118721461187
+      },
+      {
+        "id": "cdx-hard-ceramic-shelf",
+        "profile": "phone",
+        "value": 0.20987654320987653
+      },
+      {
+        "id": "cdx-hard-ceramic-shelf",
+        "profile": "desktop",
+        "value": 0.2403560830860534
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "desktop",
+        "value": 0.23880597014925373
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "phone",
+        "value": 0.25925925925925924
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "desktop",
+        "value": 0.2857142857142857
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "phone",
+        "value": 0.20967741935483872
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "desktop",
+        "value": 0.22641509433962265
+      },
+      {
+        "id": "new-07-131897774",
+        "profile": "phone",
+        "value": 0.3170731707317073
+      },
+      {
+        "id": "new-07-131897774",
+        "profile": "desktop",
+        "value": 0.2972972972972973
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "phone",
+        "value": 0.2261904761904762
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "desktop",
+        "value": 0.2804878048780488
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "phone",
+        "value": 0.3028571428571429
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "desktop",
+        "value": 0.275
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "phone",
+        "value": 0.22330097087378642
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "phone",
+        "value": 0.2674858223062382
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "desktop",
+        "value": 0.26857585139318885
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "phone",
+        "value": 0.3088235294117647
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "desktop",
+        "value": 0.30434782608695654
+      },
+      {
+        "id": "new-12-201342968",
+        "profile": "phone",
+        "value": 0.28431372549019607
+      },
+      {
+        "id": "new-12-201342968",
+        "profile": "desktop",
+        "value": 0.23232323232323232
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "phone",
+        "value": 0.44776119402985076
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "desktop",
+        "value": 0.4074074074074074
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "phone",
+        "value": 0.5034965034965035
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "desktop",
+        "value": 0.4901185770750988
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "phone",
+        "value": 0.36477987421383645
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "desktop",
+        "value": 0.36477987421383645
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "phone",
+        "value": 0.2288135593220339
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "desktop",
+        "value": 0.26282051282051283
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "phone",
+        "value": 0.29699248120300753
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "desktop",
+        "value": 0.23272727272727273
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "phone",
+        "value": 0.27364185110663986
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "desktop",
+        "value": 0.2688888888888889
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "phone",
+        "value": 0.3511705685618729
+      },
+      {
+        "id": "new-18-51440683",
+        "profile": "desktop",
+        "value": 0.35782747603833864
+      }
+    ]
+  },
+  {
+    "metric": "speed",
+    "threshold": 5000,
+    "supported": 236,
+    "count": 45,
+    "mean": 5926.233333333334,
+    "cost": 53.33609999999999,
+    "inputs": [
+      {
+        "id": "dot-cdx-plant-studio",
+        "profile": "desktop",
+        "value": 6434.9000000059605
+      },
+      {
+        "id": "dot-cdx-tortoise",
+        "profile": "desktop",
+        "value": 6250.0999999940395
+      },
+      {
+        "id": "cdx-hard-reflecting-pool",
+        "profile": "desktop",
+        "value": 7446.0999999940395
+      },
+      {
+        "id": "cdx-hard-shed-lamps",
+        "profile": "desktop",
+        "value": 13055.199999988079
+      },
+      {
+        "id": "truth-still-life",
+        "profile": "phone",
+        "value": 5063.29999999702
+      },
+      {
+        "id": "truth-still-life",
+        "profile": "desktop",
+        "value": 5111.79999999702
+      },
+      {
+        "id": "truth-desk",
+        "profile": "desktop",
+        "value": 5161.20000000298
+      },
+      {
+        "id": "truth-lattice",
+        "profile": "desktop",
+        "value": 5096.4000000059605
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "phone",
+        "value": 5204.100000008941
+      },
+      {
+        "id": "new-00-147167228",
+        "profile": "desktop",
+        "value": 6337.5
+      },
+      {
+        "id": "new-01-131641833",
+        "profile": "desktop",
+        "value": 5500.29999999702
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "phone",
+        "value": 5930.29999999702
+      },
+      {
+        "id": "new-02-104101424",
+        "profile": "desktop",
+        "value": 5729.70000000298
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "phone",
+        "value": 5838.20000000298
+      },
+      {
+        "id": "new-03-25399041",
+        "profile": "desktop",
+        "value": 7460.4000000059605
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "phone",
+        "value": 5953.0999999940395
+      },
+      {
+        "id": "new-03-35525184",
+        "profile": "desktop",
+        "value": 5263.5
+      },
+      {
+        "id": "new-19-159668739",
+        "profile": "desktop",
+        "value": 6198.199999988079
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "phone",
+        "value": 6025.4000000059605
+      },
+      {
+        "id": "new-07-198117086",
+        "profile": "desktop",
+        "value": 6002.79999999702
+      },
+      {
+        "id": "new-07-131897774",
+        "profile": "desktop",
+        "value": 5259.29999999702
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "phone",
+        "value": 5037.5
+      },
+      {
+        "id": "new-07-27184681",
+        "profile": "desktop",
+        "value": 5562.0999999940395
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "phone",
+        "value": 6783.600000008941
+      },
+      {
+        "id": "new-08-151156803",
+        "profile": "desktop",
+        "value": 5155.20000000298
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "phone",
+        "value": 5341.5
+      },
+      {
+        "id": "new-08-185005362",
+        "profile": "desktop",
+        "value": 5876.5
+      },
+      {
+        "id": "new-09-66685155",
+        "profile": "desktop",
+        "value": 5785.100000008941
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "phone",
+        "value": 6556.100000008941
+      },
+      {
+        "id": "new-11-159259312",
+        "profile": "desktop",
+        "value": 5146.29999999702
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "phone",
+        "value": 5029.699999988079
+      },
+      {
+        "id": "new-11-71852781",
+        "profile": "desktop",
+        "value": 5527.100000008941
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "phone",
+        "value": 5257.79999999702
+      },
+      {
+        "id": "new-11-89189482",
+        "profile": "desktop",
+        "value": 5813.100000008941
+      },
+      {
+        "id": "new-12-201385356",
+        "profile": "desktop",
+        "value": 5285.0999999940395
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "phone",
+        "value": 6976.79999999702
+      },
+      {
+        "id": "new-13-61309178",
+        "profile": "desktop",
+        "value": 7091.70000000298
+      },
+      {
+        "id": "new-13-60172881",
+        "profile": "desktop",
+        "value": 5025.70000000298
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "phone",
+        "value": 5212.5
+      },
+      {
+        "id": "new-13-105399732",
+        "profile": "desktop",
+        "value": 6476.899999991059
+      },
+      {
+        "id": "new-15-152970382",
+        "profile": "desktop",
+        "value": 5118.79999999702
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "phone",
+        "value": 5025.300000011921
+      },
+      {
+        "id": "new-17-199401836",
+        "profile": "desktop",
+        "value": 5355.5
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "phone",
+        "value": 5948.899999991059
+      },
+      {
+        "id": "new-17-27586242",
+        "profile": "desktop",
+        "value": 5969.9000000059605
+      }
+    ]
+  },
+  {
+    "metric": "holes",
+    "threshold": 0.01,
+    "supported": 236,
+    "count": 0,
+    "mean": null,
+    "cost": 0,
+    "inputs": []
+  },
+  {
+    "metric": "depthAbsRel",
+    "threshold": 0.2,
+    "supported": 24,
+    "count": 0,
+    "mean": null,
+    "cost": 0,
+    "inputs": []
+  }
+]

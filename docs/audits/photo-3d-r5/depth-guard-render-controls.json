@@ -1,0 +1,28 @@
+{
+  "kind": "Native render controls with a post-foreground pass that uses exactly the original background RGBA bytes. Compare all actual native RGBA hashes, not only quality scores. Determine whether zero-alpha discard or pass ordering changes the original image. No texture, cost, or quality improvement is claimed.",
+  "methodSha256": "e598ce9041152a7043721d3fc8bd4f8044db9685cb85138a5a7a1a96937e4c48",
+  "createdUTC": "2026-10-16T11:10:51.654021+00:00",
+  "rows": [
+    {
+      "name": "depth-guard-noop",
+      "exitCode": 0,
+      "sourceSha256": "0ce7b56a31fb02969b3bc479a79aa6b2ca8190d0c2ae0396e00705f9ab31acc1",
+      "rawStudySha256": "d534d7fc5eb8a815837bf03090cbff52297f35dae6821b4eeeccd6a9bf7532ad",
+      "actualPoses": 18,
+      "differentNativeColorPoses": [],
+      "stoppedEarly": null,
+      "finishedUTC": "2026-10-16T11:12:27.491378+00:00"
+    },
+    {
+      "name": "depth-guard-original-color-pass-noop",
+      "exitCode": 0,
+      "sourceSha256": "d7bbdab3bde0675c5b4837d5424526579a9ab9ef5d12f4cea2f7f1c1e9d542d8",
+      "rawStudySha256": "980d41b7ebc682e5fedb388762ef62ab78975623c3c8e1b3fb30f2cd840170eb",
+      "actualPoses": 18,
+      "differentNativeColorPoses": [],
+      "stoppedEarly": null,
+      "finishedUTC": "2026-10-16T11:14:05.060532+00:00"
+    }
+  ],
+  "complete": true
+}

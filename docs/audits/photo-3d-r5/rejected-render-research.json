@@ -1,0 +1,1041 @@
+{
+  "createdUTC": "2026-10-16T05:22:15.257226+00:00",
+  "scope": "Selected public-corpus research rejections. Calibration, source membership, and thresholds stay fixed. No quality or cost acceptance is implied by these bounded screens.",
+  "records": [
+    {
+      "name": "fine-clip",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "7ac31c7d7ea3012002344850f1ad5c3ad529290da551d70fac0220fc58cefed6",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7710860122315996
+          }
+        ]
+      }
+    },
+    {
+      "name": "fine-clip-halfaa",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "61494b177850e394e11e1cb1431dce85640f4c5e7906479cae5659a2423e9ff0",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7539139776046586
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.8238882773742713
+          }
+        ]
+      }
+    },
+    {
+      "name": "fine-clip-raw-halfaa-discard",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "fa9e9165fbaf80ace6ca16b2ae8cac738f05ecfbd94577395cf091cccb8a6944",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7578276198932515
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 3.1306055134151602
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.830625006927538
+          }
+        ]
+      }
+    },
+    {
+      "name": "continuation-fine-clip",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "c2e3ce461b1a16fcbe1c3d7fe08d1ca02264606eab075abd1f833b40b8db555f",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7580723620235069
+          }
+        ]
+      }
+    },
+    {
+      "name": "continuation-fine-clip-halfaa",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "37b6b0071227aed864f39c6add649161f7e2f87b457dbed08be92461614a6086",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.8238882773742713
+          }
+        ]
+      }
+    },
+    {
+      "name": "continuation-fine-clip-raw-halfaa-discard",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "77032684c65badba9082862ab11905a76017bbe67b28877f4b14b649406d1cf4",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringes",
+            "before": 0.7532050788339201,
+            "after": 0.7578276198932515
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 3.1306055134151602
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.830625006927538
+          }
+        ]
+      }
+    },
+    {
+      "name": "nearest-surface-color-1",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 2,
+      "sourceSha256": "9b73017886204385d768c923c2aea53c04dcf9adce644c0a4f4d401998321ed6",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.6343239912774521,
+            "after": 0.6455952674880601
+          },
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07242594815142066
+          }
+        ]
+      }
+    },
+    {
+      "name": "nearest-surface-color-2",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 2,
+      "sourceSha256": "04a5446a8ba58e08c7f0507bc41e56b0ee58048088b8987015fdce9420d03e64",
+      "controllerSha256": "847d1dbc79ab1dc308077d71dc6eac8489955a256e1cd2896588b1cdfac6b4f5",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.6343239912774521,
+            "after": 0.645426068141522
+          },
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07242594815142066
+          },
+          {
+            "metric": "paletteExcess",
+            "before": 0.00853645188567508,
+            "after": 0.008867721239471441
+          }
+        ]
+      }
+    },
+    {
+      "name": "thin-source-clip-1",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "c7935ea4627350d32ee8b78f01f5593ce5f3e0825165672fbd55860a8e79c50e",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "streaks",
+            "before": 0.5743608711366746,
+            "after": 0.5759487276114867
+          },
+          {
+            "metric": "textureLoss",
+            "before": 0.5424212701455193,
+            "after": 0.5490376375228064
+          }
+        ]
+      }
+    },
+    {
+      "name": "thin-source-clip-2",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 2,
+      "sourceSha256": "e0e6bd9b9bf4556b21af552247d3a5835f331e57f095d4130a3eff6c0e3f675d",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.6343239912774521,
+            "after": 0.6351357576626557
+          }
+        ]
+      }
+    },
+    {
+      "name": "thin-source-raw-clip",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "5c949aced634e2c05f59b93644c31b268f9d6f63af2e260e36bf7a732aa51c9a",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "e822e645ac59b9384da9af559cfcb331ac9cf97221bac5c25f926c6fba37e706",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "streaks",
+            "before": 0.5743608711366746,
+            "after": 0.5759487276114867
+          },
+          {
+            "metric": "textureLoss",
+            "before": 0.5424212701455193,
+            "after": 0.5490376375228064
+          }
+        ]
+      }
+    },
+    {
+      "name": "aspect-grid-scout",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "77d5219134c5c83ebc26fcc95996ae95cc4a47c920dce6b24ed022f25f66c7dc",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "streaks",
+            "before": 0.5743608711366746,
+            "after": 0.5874119486350453
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 3.5473617224726857
+          },
+          {
+            "metric": "transitionWidth",
+            "before": 3.4302521661950673,
+            "after": 5.474347896667992
+          }
+        ]
+      }
+    },
+    {
+      "name": "euclidean-donor-scout",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "aa78f21dff44fcc6bf3493b6590da8eea35dc2bbdb9c9b22deab75e13648b995",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.103067897700517,
+            "after": 0.10962493882243192
+          },
+          {
+            "metric": "paletteExcess",
+            "before": 0.010966693098519671,
+            "after": 0.0229380382685141
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 2.3711372728114215
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.8255671351965326
+          }
+        ]
+      },
+      "distanceTransformProof": {
+        "cases": 960,
+        "seed": 71387,
+        "exactBruteForceSquaredDistances": true,
+        "everyDonorEligible": true
+      }
+    },
+    {
+      "name": "mask-fill-one-pixel",
+      "kind": "Bounded native WebGL-only foreground-mask research; no production, all-input, or phone-cost acceptance.",
+      "completedProfiles": 1,
+      "sourceSha256": "89281d3517301921a2fccc7a447ea95b8997a48a654ccfe58da156502bd3d06b",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input quality regressed.",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "paletteExcess",
+            "before": 0.010966693098519671,
+            "after": 0.018282867058099367
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 9,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.5743608711366746,
+              "after": 0.3844573402129342
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.5424212701455193,
+              "after": 0.024613240186019514
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.010966693098519671,
+              "after": 0.018282867058099367
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mask-fill-two-pixel",
+      "kind": "Bounded native WebGL-only foreground-mask research; no production, all-input, or phone-cost acceptance.",
+      "completedProfiles": 3,
+      "sourceSha256": "93bfacd33ebbcced92536f1ae79e6f954ce2de50bdec7ffc47c21fd7f2faff51",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input quality regressed.",
+      "stoppedEarly": {
+        "id": "dot-library",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.1848049575857746,
+            "after": 0.18740622956298816
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 7,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.5743608711366746,
+              "after": 0.5326778788809412
+            }
+          ]
+        },
+        {
+          "id": "street",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 6,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.4830079927193839,
+              "after": 0.2717855804077196
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.6343239912774521,
+              "after": 0.38386102779750164
+            }
+          ]
+        },
+        {
+          "id": "dot-library",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 7,
+          "qualityDifferences": [
+            {
+              "metric": "halos",
+              "before": 0.1848049575857746,
+              "after": 0.18740622956298816
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.05568689151419512,
+              "after": 0.055171909875983596
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mask-fill-three-pixel",
+      "kind": "Bounded native WebGL-only foreground-mask research; no production, all-input, or phone-cost acceptance.",
+      "completedProfiles": 3,
+      "sourceSha256": "cc56fb722c72b6c6e8a5ab4126aebd1a525ba0ed8fab05bc660d566d2f221a9f",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input quality regressed.",
+      "stoppedEarly": {
+        "id": "dot-library",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.1848049575857746,
+            "after": 0.1853238737510221
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 5,
+          "qualityDifferences": []
+        },
+        {
+          "id": "street",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 4,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.4830079927193839,
+              "after": 0.35966268165239984
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.6343239912774521,
+              "after": 0.5457925775662216
+            }
+          ]
+        },
+        {
+          "id": "dot-library",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 7,
+          "qualityDifferences": [
+            {
+              "metric": "halos",
+              "before": 0.1848049575857746,
+              "after": 0.1853238737510221
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.05568689151419512,
+              "after": 0.055659039467857815
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mask-fill-four-pixel",
+      "kind": "Bounded native WebGL-only foreground-mask research; no production, all-input, or phone-cost acceptance.",
+      "completedProfiles": 3,
+      "sourceSha256": "fcbd56cef4f0ba9f9068a0e751b09591bd4cd1aa577b09670f93b19f89df500a",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: no selected worst-pose quality score improved on the bounded three-input set; an extra camera, target, and texture are not qualified.",
+      "stoppedEarly": null,
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 1,
+          "qualityDifferences": []
+        },
+        {
+          "id": "street",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 1,
+          "qualityDifferences": []
+        },
+        {
+          "id": "dot-library",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "changedNativeFrames": 5,
+          "qualityDifferences": []
+        }
+      ]
+    },
+    {
+      "name": "fill-resolution-512",
+      "kind": "Bounded native background-resolution screen; original depth field and finder unchanged, no phone-cost acceptance.",
+      "completedProfiles": 1,
+      "sourceSha256": "ecc5b80dd4baa3cc20e08fe9b5f7d29aa15fd61409ff78c9eddafa8f6ac1fc66",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input texture loss and other quality regressions.",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.5424212701455193,
+            "after": 0.612718849689011
+          },
+          {
+            "metric": "transitionWidth",
+            "before": 3.4302521661950673,
+            "after": 6.5026847005141155
+          },
+          {
+            "metric": "fringeMaximum",
+            "before": 0.933622938336588,
+            "after": 0.9369994090074417
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.5743608711366746,
+              "after": 0.5447579851864189
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.5424212701455193,
+              "after": 0.612718849689011
+            },
+            {
+              "metric": "halos",
+              "before": 0.103067897700517,
+              "after": 0.07724187503941923
+            },
+            {
+              "metric": "fringes",
+              "before": 0.7532050788339201,
+              "after": 0.7518607716988839
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.010966693098519671,
+              "after": 0.0016043250054279896
+            },
+            {
+              "metric": "edgeDisplacement",
+              "before": 2.3703928832525314,
+              "after": 2.157186667712267
+            },
+            {
+              "metric": "transitionWidth",
+              "before": 3.4302521661950673,
+              "after": 6.5026847005141155
+            },
+            {
+              "metric": "fringeMaximum",
+              "before": 0.933622938336588,
+              "after": 0.9369994090074417
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fill-resolution-512-area",
+      "kind": "Bounded native background-resolution screen; original depth field and finder unchanged, no phone-cost acceptance.",
+      "completedProfiles": 1,
+      "sourceSha256": "937215ac35149b5787a041978a063b3f16e0db25cabffc9159d52cb22c066f4b",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "decision": "Cut: supported individual-input texture loss and other quality regressions.",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "textureLoss",
+            "before": 0.5424212701455193,
+            "after": 0.8848048775212741
+          },
+          {
+            "metric": "fringeMaximum",
+            "before": 0.933622938336588,
+            "after": 0.9365194477668876
+          }
+        ]
+      },
+      "observations": [
+        {
+          "id": "forest",
+          "profile": "phone",
+          "sharpWorking": true,
+          "poseCount": 9,
+          "qualityDifferences": [
+            {
+              "metric": "streaks",
+              "before": 0.5743608711366746,
+              "after": 0.5517761543669769
+            },
+            {
+              "metric": "textureLoss",
+              "before": 0.5424212701455193,
+              "after": 0.8848048775212741
+            },
+            {
+              "metric": "halos",
+              "before": 0.103067897700517,
+              "after": 0.0767028329223192
+            },
+            {
+              "metric": "fringes",
+              "before": 0.7532050788339201,
+              "after": 0.7461288045436665
+            },
+            {
+              "metric": "paletteExcess",
+              "before": 0.010966693098519671,
+              "after": 0.001435396883735456
+            },
+            {
+              "metric": "edgeDisplacement",
+              "before": 2.3703928832525314,
+              "after": 2.2475583282708618
+            },
+            {
+              "metric": "transitionWidth",
+              "before": 3.4302521661950673,
+              "after": 3.230270933253772
+            },
+            {
+              "metric": "fringeMaximum",
+              "before": 0.933622938336588,
+              "after": 0.9365194477668876
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "nearest-depth-ownership",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result. Only color interpolation ownership sampling changes; geometry and original R8 fields stay unchanged.",
+      "completedProfiles": 1,
+      "sourceSha256": "63b1f444a3121b82a43890374bc0785fb116938da57cb30febb0fb5554ee0b17",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "ca2092cf15fe7cd5f028f50274ebaeb3192095386431a7bee0d9e136f9223c3f",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringeMaximum",
+            "before": 0.933622938336588,
+            "after": 0.9358030306582924
+          }
+        ]
+      }
+    },
+    {
+      "name": "nearest-depth-band-ownership",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result. Only color interpolation ownership sampling changes; geometry and original R8 fields stay unchanged.",
+      "completedProfiles": 1,
+      "sourceSha256": "bb9a14c1eda543c0a61b48a89697d7ab22dedabd9ebb4c83161cc3e9c9f22d46",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "98006f24f7549785a8099ceb2856750679ae41ced4faaf1be5fb381ce2a156c5",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "fringeMaximum",
+            "before": 0.933622938336588,
+            "after": 0.9358030306582924
+          }
+        ]
+      }
+    },
+    {
+      "name": "depth-protected-fill-world",
+      "kind": "Bounded native-rendered rejection of a post-foreground reflected fill using the existing depth buffer; not full-corpus, memory, or phone-cost acceptance. All color-bearing materials use the original World-layer finder path.",
+      "completedProfiles": 1,
+      "sourceSha256": "a5956f8ff4644cc80fad469287259b125eeb1c4baf2fa0cfa500b4358a5af541",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "c357d5690959cf358c0a0969f754c4a5ea50b17e6452b99ac758565fc67a9388",
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.103067897700517,
+            "after": 0.1143655406635074
+          },
+          {
+            "metric": "paletteExcess",
+            "before": 0.010966693098519671,
+            "after": 0.028124047719201444
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 2.4400665896853244
+          },
+          {
+            "metric": "transitionWidth",
+            "before": 3.4302521661950673,
+            "after": 3.578541257162145
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.9560975846892459
+          }
+        ]
+      },
+      "backendScope": "Both shader-language source paths changed, but only WebGL measured."
+    },
+    {
+      "name": "depth-guard-fill",
+      "kind": "Bounded native-rendered rejection of a post-foreground reflected fill using the existing depth buffer; not full-corpus, memory, or phone-cost acceptance. All color-bearing materials use the original World-layer finder path.",
+      "completedProfiles": 2,
+      "sourceSha256": "c8309b701cfb06ee679a35d1278bca179f4291579a9bee6287d567d0869941c4",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "b59bc3dcf25e0f873ac1358d57c3911ce9a44f10b59b803dbd36c0f7ebabe78e",
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133433556239935
+          }
+        ]
+      },
+      "backendScope": "Both shader-language source paths changed, but only WebGL measured."
+    },
+    {
+      "name": "depth-guard-palette",
+      "kind": "Bounded native-rendered rejection of a post-foreground reflected fill using the existing depth buffer; not full-corpus, memory, or phone-cost acceptance. All color-bearing materials use the original World-layer finder path.",
+      "completedProfiles": 3,
+      "sourceSha256": "913c23959dc837bd40418f2243122a37819546a615489686b6d0a3b9ed3aa7a2",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "9edb3980eceb4eac2bf44c8fbad974bb479e0bb0d8e43e278520ca0a16d44d52",
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133433556239935
+          }
+        ]
+      },
+      "backendScope": "Both shader-language source paths changed, but only WebGL measured."
+    },
+    {
+      "name": "projected-edge-guard",
+      "kind": "Bounded native-rendered rejection of a post-foreground reflected fill using the existing depth buffer; not full-corpus, memory, or phone-cost acceptance. All color-bearing materials use the original World-layer finder path.",
+      "completedProfiles": 2,
+      "sourceSha256": "a36fd5b66a22d7d6284eec067ecc371b141952b81f3918e30419c645f8dd719d",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "rawStudySha256": "59d49b72a29ffd88a114febd207524fb92809394f48e10456054cd40c37fc488",
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133005121645489
+          }
+        ]
+      },
+      "backendScope": "Only WebGL measured; projected-edge-guard is a GLSL-only research prototype."
+    }
+  ],
+  "updatedUTC": "2026-10-16T09:08:05.702Z",
+  "incompatibleAttempts": [
+    {
+      "kind": "Invalid diagnostic integration, not a calibrated algorithm counterexample. Extra continuation material was outside the World layer inspected and patched by the unchanged finder. Raw first attempt retained; no quality, hole, or cost result accepted.",
+      "createdUTC": "2026-10-16T11:03:00.940855+00:00",
+      "prototypeSha256": "ac16950bf0f443c8e1bf4cee7e742dc59ea12a1784b7595c864eb9873b31fa2c",
+      "rawAttemptSha256": "b458250dd807fabd918926f87a67f4ab659a40b911ab1ad28bb2a97d40dc4d09",
+      "correctedPrototypeSha256": "ce77d0fea3fabaf0bcb618c17b4134c63c45e71dafbb8dea048f1679ffe0f7bb"
+    }
+  ]
+}

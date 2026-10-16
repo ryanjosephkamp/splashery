@@ -90,6 +90,9 @@ test.describe("pause and resume", () => {
     // Second tap: it pauses, and no new sound is scheduled while it waits.
     expect(paused.state).toBe("paused");
     await page.waitForTimeout(1500);
+    // The label follows the effect on the next frame; a busy software renderer can leave 1.5 s
+    // without one, so let two frames pass before reading it.
+    await page.evaluate(() => new Promise((ok) => requestAnimationFrame(() => requestAnimationFrame(ok)))); // prettier-ignore
     const still = await look(page);
     expect(still.v).toBe(paused.v);
     expect(still.sched).toBe(paused.sched);

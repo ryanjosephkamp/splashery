@@ -1,0 +1,1427 @@
+{
+  "kind": "Complete pure builder result equivalence with separable source-index gathers before any legacy index-table access; no browser-cost claim",
+  "createdUTC": "2026-10-16T03:25:41.779Z",
+  "sources": {
+    "photo-3d-core.original": "35d8b5212237321ed712d3f197b1ebe023bcb5d28b02bb10d7bc1fe4008b6b57",
+    "index-core": "1a13ec1bd77546589018f013f2585fa785c890f130ef28d7957ba8b680e235ab"
+  },
+  "rows": [
+    {
+      "id": "forest",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "forest",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "street",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "street",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "still-life",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "still-life",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "spiral-stairs",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "spiral-stairs",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "palace-stairs",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "palace-stairs",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "wildflowers",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "wildflowers",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-train",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-train",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-oasis",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-oasis",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-castle",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-castle",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cove",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cove",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-harbor",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-harbor",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-paper-valley",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-paper-valley",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-farm",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-farm",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-treehouses",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-treehouses",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-library",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-library",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-workshop",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-workshop",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cloister",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cloister",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-greenhouse",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-greenhouse",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-attic",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-attic",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-bamboo",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-bamboo",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-terraces",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-terraces",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-canyon",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-canyon",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-arch",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-arch",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-fallen-log",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-fallen-log",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-alpine-lake",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-alpine-lake",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-ice-falls",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-ice-falls",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-floating-isles",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-floating-isles",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-wave",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-wave",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-explorer-desk",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-explorer-desk",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-watchmaker",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-watchmaker",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-dragonfly",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-dragonfly",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-mushrooms",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-mushrooms",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-market",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-market",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-gears",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-gears",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-chess",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-chess",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-book-city",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-book-city",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-still-life",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-still-life",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-room",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-room",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-forest",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-forest",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-stairs",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-stairs",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-coast",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-coast",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-desk",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-desk",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-fur",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-fur",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-night",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-night",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-lattice",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-lattice",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-arches",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-arches",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-leaves",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-leaves",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-steps",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "truth-steps",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-00-147167228",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-00-147167228",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-01-131641833",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-01-131641833",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-02-104101424",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-02-104101424",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-02-88494704",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-02-88494704",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-03-25399041",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-03-25399041",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-03-35525184",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-03-35525184",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-19-159668739",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-19-159668739",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-20-160820542",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-20-160820542",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-07-198117086",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-07-198117086",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-07-131897774",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-07-131897774",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-07-27184681",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-07-27184681",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-08-151156803",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-08-151156803",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-08-185005362",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "new-08-185005362",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-19-62150806",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-19-62150806",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-09-66685155",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-09-66685155",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-11-159259312",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-11-159259312",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-11-71852781",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-11-71852781",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-11-89189482",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-11-89189482",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-12-201484048",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-12-201484048",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-12-201342968",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-12-201342968",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-12-201385356",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-12-201385356",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-13-61309178",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-13-61309178",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-13-60172881",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-13-60172881",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-13-105399732",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-13-105399732",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-14-76271548",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-14-76271548",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-14-16503745",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": true
+    },
+    {
+      "id": "new-14-16503745",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-15-152970382",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-15-152970382",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-17-199401836",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-17-199401836",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-17-27586242",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-17-27586242",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-18-51440683",
+      "profile": "phone",
+      "exact": true,
+      "hadWeights": false
+    },
+    {
+      "id": "new-18-51440683",
+      "profile": "desktop",
+      "exact": true,
+      "hadWeights": false
+    }
+  ],
+  "finishedUTC": "2026-10-16T03:37:33.832Z"
+}

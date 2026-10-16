@@ -1,0 +1,269 @@
+{
+  "complete": true,
+  "fullCorpus": false,
+  "costPassed": false,
+  "aggregateCostPassed": false,
+  "perInputCostPassed": false,
+  "costPolicy": "Median and worst first-view time and PSS must not increase in aggregate or for any individual input. No unmeasured cost tolerance is granted.",
+  "statistics": {
+    "main": {
+      "first3dMs": {
+        "count": 5,
+        "median": 2016.300000000745,
+        "worst": 2267.2999999970198
+      },
+      "peakPssBytes": {
+        "count": 5,
+        "median": 861926400,
+        "worst": 882320384
+      }
+    },
+    "candidate": {
+      "first3dMs": {
+        "count": 5,
+        "median": 2343.599999997765,
+        "worst": 2547.5
+      },
+      "peakPssBytes": {
+        "count": 5,
+        "median": 841197568,
+        "worst": 906085376
+      }
+    }
+  },
+  "perInput": [
+    {
+      "id": "forest",
+      "main": {
+        "first3dMs": {
+          "count": 5,
+          "median": 2016.300000000745,
+          "worst": 2267.2999999970198
+        },
+        "peakPssBytes": {
+          "count": 5,
+          "median": 861926400,
+          "worst": 882320384
+        }
+      },
+      "candidate": {
+        "first3dMs": {
+          "count": 5,
+          "median": 2343.599999997765,
+          "worst": 2547.5
+        },
+        "peakPssBytes": {
+          "count": 5,
+          "median": 841197568,
+          "worst": 906085376
+        }
+      }
+    }
+  ],
+  "inputCount": 1,
+  "repetitions": 5,
+  "hardwareScope": "Chromium software phone profile; this is not a physical-phone measurement.",
+  "methods": {
+    "tool": "beb1a386eb85787316ca8c5ec6ee3b88e19d1e3b41092ae525d8b37b28ac830a",
+    "originalBrowser": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9",
+    "adaptedBrowser": "7e2b1b9b864f1952378de1c718ae52e21ef42a6afc5e53cc74f9efed2e5e47a3",
+    "memory": "fa67b5f55b988cca78f03032ea99a8b6506acc39e8a3523cc7031b67a74b240f",
+    "config": "ec96e1fa326a44e517d3c536ef795bb972ad9a06ea6afabf24eb55c4fea53b2f"
+  },
+  "kind": "canvas-fallback isolated cold-cost rejection; one forest phone input, five fresh browsers per build. Not a full-corpus or physical-phone result, and no causal slowdown claim. Candidate cut without benchmark retry.",
+  "packagingMethodSha256": "035ef9af896096c7f09f1d8da44b9f16a6df2892f8e6fc8d466982d398e44064",
+  "rawStudySha256": "424c17db294e00aac9795cd2d81f953c1a4f15ee56ed07b8a00dee8fc8a7bc53",
+  "baselineSourceSha256": "58307232c89018087aaf1b4c516407c8d6bb37666e5b00c154ce1c0f32a96728",
+  "candidateSourceSha256": "bc1b7081a2364d8cb1939a734f1b04aadcfbccbc6bccb6b644ff865073307b84",
+  "settings": {
+    "depth": 0.5,
+    "profile": "phone",
+    "repetitions": 5,
+    "isolated": true,
+    "order": "Input order per repetition; main/candidate order alternates by input index plus repetition.",
+    "serving": "Both builds use the same direct-file server, unchanged base files, and byte snapshots for the same override paths.",
+    "inputs": [
+      {
+        "id": "forest",
+        "sha256": "3fd97b7fe4653bc05c7f0c5b097dbffc5ae39230899f6e5b3007bf5a91ed62af",
+        "depth": "adc3d64fbe0d83aefcd5a9efe620f9d55d8b15739ff9aa6366c11c2e2a4b86f2",
+        "truth": null
+      }
+    ]
+  },
+  "isolationWitness": [],
+  "observations": [
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 0,
+      "beganUTC": "2026-10-16T10:38:50.371Z",
+      "finishedUTC": "2026-10-16T10:38:55.897Z",
+      "first3dMs": 2547.5,
+      "peakPssBytes": 810562560,
+      "pssSamples": 16,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "496ceca4a2edd416bb100e53d7f7dd27ff6ce7fac79f690edfa86fd93825eda3"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 0,
+      "beganUTC": "2026-10-16T10:38:40.449Z",
+      "finishedUTC": "2026-10-16T10:38:50.285Z",
+      "first3dMs": 2111.099999997765,
+      "peakPssBytes": 878471168,
+      "pssSamples": 14,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "142a060d8c31795b1b76aa8a461f8a5ae563a017d16b2b5a1ce09eac051d5ffa"
+    },
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 1,
+      "beganUTC": "2026-10-16T10:38:55.983Z",
+      "finishedUTC": "2026-10-16T10:39:01.492Z",
+      "first3dMs": 2072.60000000149,
+      "peakPssBytes": 906085376,
+      "pssSamples": 13,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "779a7e6b5e4e283d029c1bc0fac3c3bd80402b54eab5020484b0f886bb187f25"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 1,
+      "beganUTC": "2026-10-16T10:39:01.595Z",
+      "finishedUTC": "2026-10-16T10:39:07.334Z",
+      "first3dMs": 2016.300000000745,
+      "peakPssBytes": 882320384,
+      "pssSamples": 13,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "517703945dbe1c7f7964dd02223369718c51128850c3cbc21055c43694415e2f"
+    },
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 2,
+      "beganUTC": "2026-10-16T10:39:13.220Z",
+      "finishedUTC": "2026-10-16T10:39:18.943Z",
+      "first3dMs": 2343.599999997765,
+      "peakPssBytes": 816278528,
+      "pssSamples": 15,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "ece9d5bd8a43d0bcf525ba99bc24d093c37721759d51f1102ef94bdb893b3c62"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 2,
+      "beganUTC": "2026-10-16T10:39:07.426Z",
+      "finishedUTC": "2026-10-16T10:39:13.134Z",
+      "first3dMs": 1890,
+      "peakPssBytes": 840976384,
+      "pssSamples": 13,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "7bad3b5534a97d246559c595c9cade4eb15d72e83c693c3c2042f1653b1a668a"
+    },
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 3,
+      "beganUTC": "2026-10-16T10:39:19.047Z",
+      "finishedUTC": "2026-10-16T10:39:25.271Z",
+      "first3dMs": 2490.89999999851,
+      "peakPssBytes": 841197568,
+      "pssSamples": 15,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "f9f58c3c00d9f08aea115861fa481c908e6186f877e51079de2a86aafff97276"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 3,
+      "beganUTC": "2026-10-16T10:39:25.356Z",
+      "finishedUTC": "2026-10-16T10:39:30.025Z",
+      "first3dMs": 1650,
+      "peakPssBytes": 861926400,
+      "pssSamples": 11,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "87ffbf4d0f561a5a728a3010aebf7419c417580688ab1c370df9860aa852b79a"
+    },
+    {
+      "id": "forest",
+      "build": "candidate",
+      "repetition": 4,
+      "beganUTC": "2026-10-16T10:39:35.701Z",
+      "finishedUTC": "2026-10-16T10:39:40.628Z",
+      "first3dMs": 1653.199999999255,
+      "peakPssBytes": 873649152,
+      "pssSamples": 12,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "82734f6f6879523a4774269105e6ca8524f4c5c5e971163ed116a8bcf099e699"
+    },
+    {
+      "id": "forest",
+      "build": "main",
+      "repetition": 4,
+      "beganUTC": "2026-10-16T10:39:30.104Z",
+      "finishedUTC": "2026-10-16T10:39:35.615Z",
+      "first3dMs": 2267.2999999970198,
+      "peakPssBytes": 833915904,
+      "pssSamples": 15,
+      "native": [585, 1266],
+      "browser": "151.0.7922.173",
+      "renderer": "ANGLE (Mesa, llvmpipe (LLVM 19.1.7 256 bits), OpenGL 4.5)",
+      "sharp": true,
+      "errors": [],
+      "externalRequests": [],
+      "retainedFullObservationSha256": "29bb686129058cea82cee808fd6523e982fb8399040a31d766548abcc87350a8"
+    }
+  ],
+  "retainedSource": false,
+  "change": "Use the existing HTMLCanvas texture fallback instead of requesting the optional worker bitmap. The two-profile, eighteen-pose native forest scout matched baseline pixels and all quality values exactly."
+}
