@@ -1,11 +1,11 @@
 # Splashery scene files (schema version 3)
 
-A Splashery scene is one JSON document. **Save JSON** downloads it, **Load JSON** (or dropping the
-file on the page) restores it, and share links carry the same document compressed into the URL hash.
-Validation lives in `src/state.js` (`normalizeScene`): unknown keys are dropped, numbers are clamped
-to the ranges below, and anything missing falls back to its default, so hand-edited files are safe
-to load. Files from Splashery v1 (the planet painter, `version: 1`) are refused with a message
-pointing at the v1 branch.
+A Splashery scene is one JSON document. **Save scene** downloads it, **Open a scene** (or dropping
+the file on the page) restores it, and share links carry the same document compressed into the URL
+hash. Validation lives in `src/state.js` (`normalizeScene`): unknown keys are dropped, numbers are
+clamped to the ranges below, and anything missing falls back to its default, so hand-edited files
+are safe to load. Files from Splashery v1 (the planet painter, `version: 1`) are refused with a
+message pointing at the v1 branch.
 
 Version 3 added `pattern`, `motion`, and `options` and `clay` on shelf toys. Version 2 files and
 links load unchanged: they are version 3 scenes with no pattern, the default motion, and no options.

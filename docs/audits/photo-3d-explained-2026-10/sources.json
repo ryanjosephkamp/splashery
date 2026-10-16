@@ -1,0 +1,619 @@
+{
+  "checkedOn": "October 14, 2026",
+  "recordedAt": "2026-10-14T03:57:59.570196+00:00",
+  "method": "Primary-source HTTP GET; returned text was read. Failed requests are not used to support external factual claims. No source images or dataset downloads were imported from these pages.",
+  "requests": [
+    {
+      "id": "immersity-for-web",
+      "url": "https://immersity.ai/for-web",
+      "finalUrl": "https://immersity.ai/for-web",
+      "status": 200,
+      "bytes": 119767,
+      "sha256": "b8de95ed636223f2412a74899a59ed8b503ab049bc1ac109fb8b164635cb18e1"
+    },
+    {
+      "id": "immersity-terms",
+      "url": "https://immersity.ai/terms-conditions",
+      "finalUrl": "https://immersity.ai/terms-conditions",
+      "status": 200,
+      "bytes": 80755,
+      "sha256": "c0aabf48fc61f40e4b841ba58caff5ef8ee0d570ae492d5c0e6c40f8e27e8763"
+    },
+    {
+      "id": "meshy",
+      "url": "https://www.meshy.ai/features/image-to-3d",
+      "finalUrl": "https://www.meshy.ai/features/image-to-3d",
+      "status": 200,
+      "bytes": 883061,
+      "sha256": "153e8ad7bded12dbe1a44910eeac87f6cc3237a06ae0b2c658f85243d0038057"
+    },
+    {
+      "id": "meshy-pricing",
+      "url": "https://www.meshy.ai/pricing",
+      "finalUrl": "https://www.meshy.ai/pricing",
+      "status": 200,
+      "bytes": 1331048,
+      "sha256": "4ad6348e791b091c065f5af1d18c2da3f93d1e0a0fcc1d317df732139f0d5125"
+    },
+    {
+      "id": "tripo-product",
+      "url": "https://www.tripo3d.ai/",
+      "finalUrl": "https://www.tripo3d.ai/",
+      "status": 200,
+      "bytes": 670811,
+      "sha256": "fd4a5f2c781d80a9ba65ea2985484cfdfecc2adbe91534481e10472d602087b4"
+    },
+    {
+      "id": "depthflow-license-fixed",
+      "url": "https://raw.githubusercontent.com/BrokenSource/DepthFlow/main/license.txt",
+      "finalUrl": "https://raw.githubusercontent.com/BrokenSource/DepthFlow/main/license.txt",
+      "status": 200,
+      "bytes": 34523,
+      "sha256": "8486a10c4393cee1c25392769ddd3b2d6c242d6ec7928e1414efff7dfb2f07ef"
+    },
+    {
+      "id": "marigold-code-license",
+      "url": "https://raw.githubusercontent.com/prs-eth/Marigold/main/LICENSE.txt",
+      "finalUrl": "https://raw.githubusercontent.com/prs-eth/Marigold/main/LICENSE.txt",
+      "status": 200,
+      "bytes": 10173,
+      "sha256": "0cec06e0e55fbc3dc5cee4fca9b607f66cb8f4e4dbcf3b3c013594dd156732e9"
+    },
+    {
+      "id": "marigold-model-license",
+      "url": "https://raw.githubusercontent.com/prs-eth/Marigold/main/LICENSE-MODEL.txt",
+      "finalUrl": "https://raw.githubusercontent.com/prs-eth/Marigold/main/LICENSE-MODEL.txt",
+      "status": 200,
+      "bytes": 10977,
+      "sha256": "c6eb688db91701503e4378447f33a0bb23b05b9d7eae7e26bfe8153d49327b3e"
+    },
+    {
+      "id": "sf3d-license-fixed",
+      "url": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/LICENSE.md",
+      "finalUrl": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/LICENSE.md",
+      "status": 200,
+      "bytes": 11727,
+      "sha256": "a0f992849ce25def8e531884edd7adf3c00cb8d2d4c59e49f0cb02597c29066e"
+    },
+    {
+      "id": "zoe-license",
+      "url": "https://raw.githubusercontent.com/isl-org/ZoeDepth/main/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/isl-org/ZoeDepth/main/LICENSE",
+      "status": 200,
+      "bytes": 1084,
+      "sha256": "98858116d985dd880cdc688973ca69c58af2b44857390cbe882f0834b6a49aa0"
+    },
+    {
+      "id": "midas-license",
+      "url": "https://raw.githubusercontent.com/isl-org/MiDaS/master/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/isl-org/MiDaS/master/LICENSE",
+      "status": 200,
+      "bytes": 1098,
+      "sha256": "99ec0b9f9bcc9234b649787b8f03b07dbece95764b7879e1e72fb76cb0f96876"
+    },
+    {
+      "id": "marigold-code",
+      "url": "https://raw.githubusercontent.com/prs-eth/Marigold/main/LICENSE",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "id": "marigold-weights",
+      "url": "https://huggingface.co/stabilityai/stable-diffusion-2/raw/main/LICENSE-MODEL",
+      "error": "HTTP Error 401: Unauthorized"
+    },
+    {
+      "id": "marigold-tree",
+      "url": "https://huggingface.co/api/models/prs-eth/marigold-depth-v1-1/tree/main?recursive=true",
+      "finalUrl": "https://huggingface.co/api/models/prs-eth/marigold-depth-v1-1/tree/main?recursive=true",
+      "status": 200,
+      "bytes": 5210,
+      "sha256": "3ab9f9e36312d2dc83a17c0ce9bffbb6efa7d8992e5291e4f761eb50148b27d8"
+    },
+    {
+      "id": "zoe-tree",
+      "url": "https://huggingface.co/api/models/isl-org/ZoeDepth/tree/main?recursive=true",
+      "error": "HTTP Error 401: Unauthorized"
+    },
+    {
+      "id": "sharp-model-license",
+      "url": "https://raw.githubusercontent.com/apple/ml-sharp/main/LICENSE_MODEL",
+      "finalUrl": "https://raw.githubusercontent.com/apple/ml-sharp/main/LICENSE_MODEL",
+      "status": 200,
+      "bytes": 5815,
+      "sha256": "e177a921ef25a523c429c6916e819c769bb4942619aadd16afe0108105a2baaf"
+    },
+    {
+      "id": "flash",
+      "url": "https://raw.githubusercontent.com/eldar/flash3d/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/eldar/flash3d/main/README.md",
+      "status": 200,
+      "bytes": 4049,
+      "sha256": "2ff16433e13684f15648ea6e93d74be8b2b67392363f6f4a7d994b0c376fc4bf"
+    },
+    {
+      "id": "flash-license",
+      "url": "https://raw.githubusercontent.com/eldar/flash3d/main/LICENSE",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "id": "splatter-license",
+      "url": "https://raw.githubusercontent.com/szymanowiczs/splatter-image/main/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/szymanowiczs/splatter-image/main/LICENSE",
+      "status": 200,
+      "bytes": 1507,
+      "sha256": "1b5167543b1f798a2f78a4eef576aaba4726fb8c59e26cda9232e914c9cd7c9d"
+    },
+    {
+      "id": "tripo-license",
+      "url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSR/main/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSR/main/LICENSE",
+      "status": 200,
+      "bytes": 1080,
+      "sha256": "ade0a66629bdd7e01e46b3296b3851cff0fd27989bca53da470ad6e96ed620fb"
+    },
+    {
+      "id": "stablefast-license",
+      "url": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/LICENSE",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "id": "depthflow-license",
+      "url": "https://raw.githubusercontent.com/BrokenSource/DepthFlow/main/license",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "id": "depthy",
+      "url": "https://raw.githubusercontent.com/panrafal/depthy/master/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/panrafal/depthy/master/README.md",
+      "status": 200,
+      "bytes": 2332,
+      "sha256": "afa0b316c715714bfd0f2831332cc69c98c84a0db3f73d53d0722843f942e2d0"
+    },
+    {
+      "id": "depthy-license",
+      "url": "https://raw.githubusercontent.com/panrafal/depthy/master/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/panrafal/depthy/master/LICENSE",
+      "status": 200,
+      "bytes": 1113,
+      "sha256": "ec03feb10f1362bd48ffd1db5f571ae4026b8c56c27a777d378db4fa6b283724"
+    },
+    {
+      "id": "depthy-filter",
+      "url": "https://raw.githubusercontent.com/panrafal/depthy/master/app/scripts/pixi/DepthPerspectiveFilter.js",
+      "finalUrl": "https://raw.githubusercontent.com/panrafal/depthy/master/app/scripts/pixi/DepthPerspectiveFilter.js",
+      "status": 200,
+      "bytes": 12152,
+      "sha256": "80b27736c5c4d4471612bc4577f95fa43d237351b6af57db79076c0eb71adc4e"
+    },
+    {
+      "id": "depthy-viewer",
+      "url": "https://raw.githubusercontent.com/panrafal/depthy/master/app/scripts/classes/DepthyViewer.js",
+      "finalUrl": "https://raw.githubusercontent.com/panrafal/depthy/master/app/scripts/classes/DepthyViewer.js",
+      "status": 200,
+      "bytes": 36703,
+      "sha256": "b1da792e75060f8f961fb9c887c07a6554dab69652c0566914dafa47e2514663"
+    },
+    {
+      "id": "immersity-web",
+      "url": "https://www.immersity.ai/web",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "id": "immersity-pricing",
+      "url": "https://www.immersity.ai/pricing",
+      "finalUrl": "https://immersity.ai/pricing",
+      "status": 200,
+      "bytes": 110544,
+      "sha256": "7db27d5a40ad6869f9a1373eaa0e8a67384c7a41e76e13bec5e5b0d5abe0e269"
+    },
+    {
+      "id": "immersity-privacy",
+      "url": "https://www.immersity.ai/privacy-policy",
+      "finalUrl": "https://immersity.ai/privacy-policy",
+      "status": 200,
+      "bytes": 56649,
+      "sha256": "191983eaa9f4f218875219a330fa87c3cc48de078065c1553e82ed16a727a341"
+    },
+    {
+      "id": "lume-3d",
+      "url": "https://www.lume.com/tools/3d-photo",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "id": "leiapix-convert",
+      "url": "https://convert.leiapix.com/",
+      "finalUrl": "https://app.immersity.ai/",
+      "status": 200,
+      "bytes": 23944,
+      "sha256": "379103868827b119a03e1546d40bdb2d6800e95de983bd3041c10450a70fb207"
+    },
+    {
+      "id": "v2-paper",
+      "url": "https://arxiv.org/html/2406.09414v2",
+      "finalUrl": "https://arxiv.org/html/2406.09414v2",
+      "status": 200,
+      "bytes": 469488,
+      "sha256": "ceebb67216a102bc7add6017a837190b1414bfbbfda9b1f413dffcd9a424ae53"
+    },
+    {
+      "id": "zoe-paper",
+      "url": "https://arxiv.org/html/2302.12288v1",
+      "finalUrl": "https://arxiv.org/html/2302.12288v1",
+      "status": 200,
+      "bytes": 532888,
+      "sha256": "fabf434c44449a2b62528b05c04b22dcf51f937bc72dfe389e77a48aa3d7ae8a"
+    },
+    {
+      "id": "pro-paper",
+      "url": "https://arxiv.org/html/2410.02073v2",
+      "finalUrl": "https://arxiv.org/html/2410.02073v2",
+      "status": 200,
+      "bytes": 741592,
+      "sha256": "5ae836a8b185ef555bb73e0cc890ba3a5ece47cf0b58ef2a78bb79a4f3376b37"
+    },
+    {
+      "id": "sharp-paper",
+      "url": "https://arxiv.org/html/2512.10685v1",
+      "finalUrl": "https://arxiv.org/html/2512.10685v1",
+      "status": 200,
+      "bytes": 667958,
+      "sha256": "a153a425d6f79ac59c01d76118114173d969336757a62692b2357dab588986ad"
+    },
+    {
+      "id": "v3-onnx",
+      "url": "https://huggingface.co/onnx-community/depth-anything-v3-small/raw/main/README.md",
+      "finalUrl": "https://huggingface.co/onnx-community/depth-anything-v3-small/raw/main/README.md",
+      "status": 200,
+      "bytes": 31,
+      "sha256": "4bcf87ecfbbb8e07a01b21415a970c8b53a5283bf6872b657040d3f45c9241f7"
+    },
+    {
+      "id": "v3-onnx-tree",
+      "url": "https://huggingface.co/api/models/onnx-community/depth-anything-v3-small/tree/main?recursive=true",
+      "finalUrl": "https://huggingface.co/api/models/onnx-community/depth-anything-v3-small/tree/main?recursive=true",
+      "status": 200,
+      "bytes": 985,
+      "sha256": "309e274a2b576da8e1d0c7032c4d81b9e1522bc6529234ef2c594a79ced603b5"
+    },
+    {
+      "id": "v2-tree",
+      "url": "https://huggingface.co/api/models/onnx-community/depth-anything-v2-small/tree/main?recursive=true",
+      "finalUrl": "https://huggingface.co/api/models/onnx-community/depth-anything-v2-small/tree/main?recursive=true",
+      "status": 200,
+      "bytes": 3028,
+      "sha256": "b9ce46acc91355587062689a899c26e7356ce5fdd564df238c1f1dafd04c6e60"
+    },
+    {
+      "id": "v2-license",
+      "url": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/LICENSE",
+      "status": 200,
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "id": "v1-license",
+      "url": "https://raw.githubusercontent.com/LiheYoung/Depth-Anything/main/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/LiheYoung/Depth-Anything/main/LICENSE",
+      "status": 200,
+      "bytes": 11357,
+      "sha256": "c71d239df91726fc519c6eb72d318ec65820627232b2f796219e87dcf35d0ab4"
+    },
+    {
+      "id": "nyu-license",
+      "url": "https://cs.nyu.edu/~fergus/datasets/nyu_depth_v2.html",
+      "finalUrl": "https://cs.nyu.edu/~fergus/datasets/nyu_depth_v2.html",
+      "status": 200,
+      "bytes": 19525,
+      "sha256": "7564ac07aea77e7701c42ef3b93e5866ab513884307ed3ca8a605eaa97ed50ac"
+    },
+    {
+      "id": "diode-license",
+      "url": "https://diode-dataset.org/",
+      "finalUrl": "https://diode-dataset.org/",
+      "status": 200,
+      "bytes": 21346,
+      "sha256": "676ab5cd87b8ab18787f8c907b43161a3d49ceff6e4983d8525a0130bb1fc93e"
+    },
+    {
+      "id": "kitti-license",
+      "url": "https://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_prediction",
+      "finalUrl": "https://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_prediction",
+      "status": 200,
+      "bytes": 72328,
+      "sha256": "530fc4a2251d416e5330a1308a6de9b5321b5384646b89bace09e548d0bbf508"
+    },
+    {
+      "id": "ldi-paper",
+      "url": "https://arxiv.org/html/2004.04727v1",
+      "finalUrl": "https://arxiv.org/html/2004.04727v1",
+      "status": 200,
+      "bytes": 329322,
+      "sha256": "9cb2f08b13469942188368e576c00498d8277dda7586a208682b38e500a64260"
+    },
+    {
+      "id": "flash-paper",
+      "url": "https://arxiv.org/html/2406.04343v1",
+      "finalUrl": "https://arxiv.org/html/2406.04343v1",
+      "status": 200,
+      "bytes": 322848,
+      "sha256": "6e39cd9e9e246fb210ee8d977161e43e42163c144c2268f0c99c3dfb65dda168"
+    },
+    {
+      "id": "splatter-paper",
+      "url": "https://arxiv.org/html/2312.13150v1",
+      "finalUrl": "https://arxiv.org/html/2312.13150v1",
+      "status": 200,
+      "bytes": 265480,
+      "sha256": "3171ec5d2265d105fc2e52e074f502b9ac61955cbf5ea770f7642212733fcb1f"
+    },
+    {
+      "id": "tripo-paper",
+      "url": "https://arxiv.org/html/2403.02151v1",
+      "finalUrl": "https://arxiv.org/html/2403.02151v1",
+      "status": 200,
+      "bytes": 123034,
+      "sha256": "219fb7842eba19095b02e3e1aaee0b8d106b5c3385b1ef637c5d889575fd631d"
+    },
+    {
+      "id": "sf3d-paper",
+      "url": "https://arxiv.org/html/2408.00653v1",
+      "finalUrl": "https://arxiv.org/html/2408.00653v1",
+      "status": 200,
+      "bytes": 549832,
+      "sha256": "6ea0d3db9d1fb17d82b770d6cdee5d7263fd94bedc12e55f871760091f91540d"
+    },
+    {
+      "id": "marigold-paper",
+      "url": "https://arxiv.org/html/2505.09358v1",
+      "finalUrl": "https://arxiv.org/html/2505.09358v1",
+      "status": 200,
+      "bytes": 477936,
+      "sha256": "5ebb97c60fc7c1970802b42c4bf80d42611a3e85cba0587d7ee0cb59d05c475a"
+    },
+    {
+      "id": "depthy-pixi",
+      "url": "https://raw.githubusercontent.com/panrafal/pixi.js/69f7015c2540d821f2dfcb8a7972630c80bd9180/bin/pixi.dev.js",
+      "finalUrl": "https://raw.githubusercontent.com/panrafal/pixi.js/69f7015c2540d821f2dfcb8a7972630c80bd9180/bin/pixi.dev.js",
+      "status": 200,
+      "bytes": 264957,
+      "sha256": "91c71bdcd9ec0d358e70a32a5320e278c18c5278f4df414b1d96e2f57ffa38ea"
+    },
+    {
+      "id": "depthy-lodash",
+      "url": "https://raw.githubusercontent.com/lodash/lodash/2.4.1/dist/lodash.js",
+      "finalUrl": "https://raw.githubusercontent.com/lodash/lodash/2.4.1/dist/lodash.js",
+      "status": 200,
+      "bytes": 229855,
+      "sha256": "14fd5488cd35a65a9c8d98f0ac5e97fca338d1a3532179ee3dc92d7e4667c4ce"
+    },
+    {
+      "id": "v2",
+      "url": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/DepthAnything/Depth-Anything-V2/main/README.md",
+      "status": 200,
+      "bytes": 9904,
+      "sha256": "987d1ab991c1b149276a0426bec7d8f3472d85c29ec976d96ea657aa960fad50"
+    },
+    {
+      "id": "v2card",
+      "url": "https://huggingface.co/depth-anything/Depth-Anything-V2-Small/raw/main/README.md",
+      "finalUrl": "https://huggingface.co/depth-anything/Depth-Anything-V2-Small/raw/main/README.md",
+      "status": 200,
+      "bytes": 1958,
+      "sha256": "d96b19c959007126110b199a7c2e9c24530b61796a26f1af035420625a10f916"
+    },
+    {
+      "id": "onnxcard",
+      "url": "https://huggingface.co/onnx-community/depth-anything-v2-small/raw/main/README.md",
+      "finalUrl": "https://huggingface.co/onnx-community/depth-anything-v2-small/raw/main/README.md",
+      "status": 200,
+      "bytes": 1578,
+      "sha256": "2fdd0db4eb5d7725fe0f1522e03a63f0b3c7dc93c805669f3322f665fb3b4c86"
+    },
+    {
+      "id": "v1",
+      "url": "https://raw.githubusercontent.com/LiheYoung/Depth-Anything/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/LiheYoung/Depth-Anything/main/README.md",
+      "status": 200,
+      "bytes": 14821,
+      "sha256": "d097dcf1318266f3b75cd22d31453fc88bbd3231ec88984b92c7ca9361c4701b"
+    },
+    {
+      "id": "v3",
+      "url": "https://raw.githubusercontent.com/ByteDance-Seed/Depth-Anything-3/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/ByteDance-Seed/Depth-Anything-3/main/README.md",
+      "status": 200,
+      "bytes": 18759,
+      "sha256": "91679cf6df290b6af439c85f29a2440ce10353a1063ae4f599e9c734ec3096a8"
+    },
+    {
+      "id": "v3card",
+      "url": "https://huggingface.co/depth-anything/DA3-SMALL/raw/main/README.md",
+      "finalUrl": "https://huggingface.co/depth-anything/DA3-SMALL/raw/main/README.md",
+      "status": 200,
+      "bytes": 4694,
+      "sha256": "0a711be055e4eb5293e31586e3176c09ce12eb2e79593f6b96a41f7fe5b415d0"
+    },
+    {
+      "id": "marigold",
+      "url": "https://huggingface.co/prs-eth/marigold-depth-lcm-v1-0/raw/main/README.md",
+      "finalUrl": "https://huggingface.co/prs-eth/marigold-depth-lcm-v1-0/raw/main/README.md",
+      "status": 200,
+      "bytes": 5845,
+      "sha256": "dc19f8309576aff2ff0016f44c3437c2b08912d3367838a7802a160e58a520df"
+    },
+    {
+      "id": "marigold11",
+      "url": "https://huggingface.co/prs-eth/marigold-depth-v1-1/raw/main/README.md",
+      "finalUrl": "https://huggingface.co/prs-eth/marigold-depth-v1-1/raw/main/README.md",
+      "status": 200,
+      "bytes": 5539,
+      "sha256": "fed8fa37993dcb3df6f3e426b1b6d9f1a0d14038fae902d122834004bda6b5af"
+    },
+    {
+      "id": "zoe",
+      "url": "https://raw.githubusercontent.com/isl-org/ZoeDepth/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/isl-org/ZoeDepth/main/README.md",
+      "status": 200,
+      "bytes": 8385,
+      "sha256": "abf6b1320789123c95b6e0a283273aae9d934df4cdbb2e258e4db297cbfc3850"
+    },
+    {
+      "id": "midas",
+      "url": "https://raw.githubusercontent.com/isl-org/MiDaS/master/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/isl-org/MiDaS/master/README.md",
+      "status": 200,
+      "bytes": 23471,
+      "sha256": "192db6b9a0ed634c9db2bed80dcb2836c674e8ffae846660ccb9db46ccabc94b"
+    },
+    {
+      "id": "depthpro",
+      "url": "https://raw.githubusercontent.com/apple/ml-depth-pro/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/apple/ml-depth-pro/main/README.md",
+      "status": 200,
+      "bytes": 3776,
+      "sha256": "5a10be5d4c040e382a82ffc356ce06f1f73a8f7ff4250e53efea98680b4ea1e0"
+    },
+    {
+      "id": "depthpro-license",
+      "url": "https://raw.githubusercontent.com/apple/ml-depth-pro/main/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/apple/ml-depth-pro/main/LICENSE",
+      "status": 200,
+      "bytes": 2672,
+      "sha256": "21a6551d1f8f851d2d10b5c6cc56535956b983c3cb997d25f3db4dd6f59ef99f"
+    },
+    {
+      "id": "sharp",
+      "url": "https://raw.githubusercontent.com/apple/ml-sharp/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/apple/ml-sharp/main/README.md",
+      "status": 200,
+      "bytes": 4204,
+      "sha256": "988c298e23e8ea133bf01bd2f3ef0418c0961d1b94020304e96c247f82b17cbb"
+    },
+    {
+      "id": "sharp-license",
+      "url": "https://raw.githubusercontent.com/apple/ml-sharp/main/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/apple/ml-sharp/main/LICENSE",
+      "status": 200,
+      "bytes": 2672,
+      "sha256": "cf9fd1ebe78d3effd9f782d053ffbed7f69b033e5260e706c0f216e0bd4675fa"
+    },
+    {
+      "id": "ldi",
+      "url": "https://raw.githubusercontent.com/vt-vl-lab/3d-photo-inpainting/master/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/vt-vl-lab/3d-photo-inpainting/master/README.md",
+      "status": 200,
+      "bytes": 5475,
+      "sha256": "9355509c15ee611eab40b6579f1b95bdedf553c0981930da1dab42b3ae9439ce"
+    },
+    {
+      "id": "ldi-license",
+      "url": "https://raw.githubusercontent.com/vt-vl-lab/3d-photo-inpainting/master/LICENSE",
+      "finalUrl": "https://raw.githubusercontent.com/vt-vl-lab/3d-photo-inpainting/master/LICENSE",
+      "status": 200,
+      "bytes": 2383,
+      "sha256": "abd8529eb6082f5285ebb4daad125bf5b2b35439ca9902599eb727bf1d80e437"
+    },
+    {
+      "id": "flash",
+      "url": "https://raw.githubusercontent.com/TencentARC/Flash3D/main/README.md",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "id": "splatter",
+      "url": "https://raw.githubusercontent.com/szymanowiczs/splatter-image/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/szymanowiczs/splatter-image/main/README.md",
+      "status": 200,
+      "bytes": 10657,
+      "sha256": "7ca2ff994ba05d49dfe4adde3e82e8837cc78a2a49cc61c5cf97ec5084cf401e"
+    },
+    {
+      "id": "tripo",
+      "url": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSR/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/VAST-AI-Research/TripoSR/main/README.md",
+      "status": 200,
+      "bytes": 5419,
+      "sha256": "ed40f078c5e451c58eae716187e0128f0ce8575e467aab2440b4ed9c75e490b9"
+    },
+    {
+      "id": "stablefast",
+      "url": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/README.md",
+      "finalUrl": "https://raw.githubusercontent.com/Stability-AI/stable-fast-3d/main/README.md",
+      "status": 200,
+      "bytes": 6083,
+      "sha256": "830acf3c0c9776f2ccf8d3edc41c1e85972e993b38b65eee06e6663a91ebaa7b"
+    },
+    {
+      "id": "depthflow",
+      "url": "https://raw.githubusercontent.com/BrokenSource/DepthFlow/main/readme.md",
+      "finalUrl": "https://raw.githubusercontent.com/BrokenSource/DepthFlow/main/readme.md",
+      "status": 200,
+      "bytes": 2489,
+      "sha256": "49520ec92c5515100a4b48b3cbfa667a54078123df1e38e0c788307c2e9a8eb9"
+    },
+    {
+      "id": "immersity",
+      "url": "https://www.immersity.ai/",
+      "finalUrl": "https://immersity.ai/",
+      "status": 200,
+      "bytes": 86865,
+      "sha256": "56dda01849251af273e765b59f3323d4498ead169a7c3aad94595fe6fd94baf6"
+    },
+    {
+      "id": "leiapix",
+      "url": "https://github.com/Immersity-AI",
+      "error": "HTTP Error 404: Not Found"
+    },
+    {
+      "id": "lume",
+      "url": "https://www.lume.com/",
+      "finalUrl": "https://www.lume.com/",
+      "status": 200,
+      "bytes": 379753,
+      "sha256": "2f41788832c746c42154bc05868873ed858877f822fe71a61a802c9050e0e506"
+    },
+    {
+      "id": "ort",
+      "url": "https://onnxruntime.ai/docs/tutorials/web/ep-webgpu.html",
+      "finalUrl": "https://onnxruntime.ai/docs/tutorials/web/ep-webgpu.html",
+      "status": 200,
+      "bytes": 57764,
+      "sha256": "09311327edd7c6715e147b0213e4fa10cd678f17008169b426c7bef4d084c201"
+    },
+    {
+      "id": "nyu",
+      "url": "https://cs.nyu.edu/~fergus/datasets/nyu_depth_v2.html",
+      "finalUrl": "https://cs.nyu.edu/~fergus/datasets/nyu_depth_v2.html",
+      "status": 200,
+      "bytes": 19525,
+      "sha256": "7564ac07aea77e7701c42ef3b93e5866ab513884307ed3ca8a605eaa97ed50ac"
+    },
+    {
+      "id": "kitti",
+      "url": "https://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_prediction",
+      "finalUrl": "https://www.cvlibs.net/datasets/kitti/eval_depth.php?benchmark=depth_prediction",
+      "status": 200,
+      "bytes": 72328,
+      "sha256": "530fc4a2251d416e5330a1308a6de9b5321b5384646b89bace09e548d0bbf508"
+    },
+    {
+      "id": "diode",
+      "url": "https://diode-dataset.org/",
+      "finalUrl": "https://diode-dataset.org/",
+      "status": 200,
+      "bytes": 21346,
+      "sha256": "676ab5cd87b8ab18787f8c907b43161a3d49ceff6e4983d8525a0130bb1fc93e"
+    },
+    {
+      "id": "eth3d",
+      "url": "https://www.eth3d.net/datasets",
+      "error": "HTTP Error 503: Service Unavailable"
+    },
+    {
+      "id": "ibims",
+      "url": "https://www.tnt.uni-hannover.de/project/monodepth/IBims/",
+      "error": "HTTP Error 404: Not Found"
+    }
+  ]
+}

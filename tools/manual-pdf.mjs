@@ -275,7 +275,12 @@ const entries = await page.evaluate(() =>
   }),
 );
 await page.addStyleTag({
-  content: `.toc li.pdf-toc-entry { position:relative; padding-right:4em; }
+  // Inter's contextual punctuation alternates can lack Unicode mappings in Chromium's PDF.
+  // Keep printed, copied, and searched text literal across the installed Inter versions.
+  content: `@media print {
+  *, ::before, ::after { font-feature-settings: "calt" 0 !important; }
+}
+.toc li.pdf-toc-entry { position:relative; padding-right:4em; }
 .pdf-page-number { position:absolute; right:0; top:0; white-space:nowrap; font-family:sans-serif; }`,
 });
 const print = () =>

@@ -18,6 +18,7 @@
 
 import { encodeQR, ECC_RECOVERY, QUIET } from "../qr/encode.js";
 import { buildCode, STYLES, PLATES, PRESETS, palette, codeContrast } from "../qr/build.js";
+import { FIT_OPTIONS, borderSettings, fitControls } from "../qr/fit-options.js";
 import { shapeChoices, shapeHalf } from "../qr/circle.js";
 import { qrModifier, MOTION_SECS, MOTION_IDS, PATTERNS, PHASE_RATE } from "../qr/field.js";
 import { readCode } from "../qr/scan.js";
@@ -98,20 +99,21 @@ const missingSecret = (o) =>
 
 function codeFor(o) {
   const text = textFor(o);
+  const encoding = borderSettings(o).pale ? { mask: 0 } : {};
   try {
-    return { code: encodeQR(text, eccFor(o)), error: "" };
+    return { code: encodeQR(text, eccFor(o), encoding), error: "" };
   } catch (err) {
     // Too long: show the start of it, and say so.
     let cut = text;
     while (cut.length > 1) {
       cut = cut.slice(0, Math.floor(cut.length * 0.9));
       try {
-        return { code: encodeQR(cut, eccFor(o)), error: err.message };
+        return { code: encodeQR(cut, eccFor(o), encoding), error: err.message };
       } catch {
         // shorter still
       }
     }
-    return { code: encodeQR("", eccFor(o)), error: err.message };
+    return { code: encodeQR("", eccFor(o), encoding), error: err.message };
   }
 }
 
@@ -183,7 +185,8 @@ export function scanPose(margin = 1) {
   const cam = app?.player?.camera;
   const fit = fitNow();
   if (!cam || !fit || !QR.code) return { yaw: 0, pitch: 0, roll: 0, distance: 3 };
-  const half = (shapeHalf(QR.code, QR.options?.shape) + margin) * fit.scale; // toy units
+  const half =
+    (shapeHalf(QR.code, QR.options?.shape, borderSettings(QR.options).quiet) + margin) * fit.scale; // toy units
   // The camera aims at the toy's center: the middle of the reach (z from
   // -1.2 to 0.6), 0.3 modules behind the code's face.
   const d = half / Math.tan((19 * Math.PI) / 180) + 0.3 * fit.scale;
@@ -244,7 +247,7 @@ export async function checkScan() {
     if (kit === QR.kit) return r;
   }
   const kit = QR.kit;
-  const promise = runCheck().finally(() => (QR.running = null));
+  const promise = runCheck(kit).finally(() => (QR.running = null));
   QR.running = { promise, kit };
   return promise;
 }
@@ -252,21 +255,40 @@ export async function checkScan() {
 // True once the code built last is the one on the stage (the player swaps
 // the toy in after the build, so a check started in between would read the
 // code before it).
-const showing = (app) => !!QR.kit && app?.player?.proc?.ctx?.kit === QR.kit;
+const showing = (app, kit = QR.kit) => !!kit && app?.player?.proc?.ctx?.kit === kit;
 
 // Lane QR r4 (the owner's note of October 9, 2026): the code is scanned
 // before it is shown. From the build until its automatic check is done, a
 // still of the stage stays up (the old view) with "Please wait. Scanning
 // code…" on it (Stage.cover); the new code shows once it has been read.
-// Twenty seconds at most, whatever happens.
+// A failed or delayed check keeps the previous frame covered until a retry passes.
 export const SCANNING = "Please wait. Scanning code…";
+const coverPlayers = new WeakSet();
 function hold() {
-  const stage = globalThis.__splashery?.app?.player?.stage;
+  const player = globalThis.__splashery?.app?.player;
+  const stage = player?.stage;
   if (typeof window === "undefined" || QR.noAuto || !stage?.cover || QR.holding) return;
+  if (!coverPlayers.has(player) && player.on) {
+    coverPlayers.add(player);
+    player.on("toy", (info) => {
+      if (QR.holding === stage && info.id !== "qr-code") release();
+    });
+  }
   QR.holding = stage;
   stage.cover({ label: SCANNING });
   clearTimeout(QR.holdTimer);
-  QR.holdTimer = setTimeout(release, 20000);
+  QR.holdTimer = setTimeout(() => {
+    if (globalThis.__splashery?.app?.player?.toyInfo?.id === "qr-code")
+      blockCode("Still checking. Try more contrast or a shorter text.");
+    else release();
+  }, 20000);
+}
+function blockCode(message) {
+  clearTimeout(QR.holdTimer);
+  if (QR.holding) {
+    QR.holding.coverLabel = message;
+    QR.holding.labelCover();
+  }
 }
 function release() {
   clearTimeout(QR.holdTimer);
@@ -275,30 +297,41 @@ function release() {
   stage?.uncover();
 }
 
-async function runCheck() {
+async function runCheck(kit) {
   const app = globalThis.__splashery?.app;
   if (!app?.player || !QR.code) return QR.check;
-  for (let i = 0; i < 120 && !showing(app); i++) await new Promise((r) => setTimeout(r, 50));
-  if (!showing(app)) {
-    release();
+  for (let i = 0; i < 120 && kit === QR.kit && !showing(app, kit); i++)
+    await new Promise((r) => setTimeout(r, 50));
+  if (kit !== QR.kit) return QR.check;
+  if (!showing(app, kit)) {
+    if (!QR.noAuto) blockCode("Still checking. Try more contrast or a shorter text.");
+    else release();
     return (QR.check = { ok: false, read: null, text: QR.code.text, error: "The code wasn't on the stage yet." }); // prettier-ignore
   }
   await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  if (kit !== QR.kit) return QR.check;
   QR.checking = true;
   refreshPanel();
   try {
     const canvas = await renderScan(app, 720, SCANNING);
+    if (kit !== QR.kit) return QR.check;
     QR.lastShot = canvas; // for the hook (the lab can see what was read)
     const r = await readCode(canvas);
+    if (kit !== QR.kit) return QR.check;
     const want = QR.code.text;
     QR.check = r
       ? { ok: r.text === want, read: r.text, reader: r.reader, inverted: r.inverted, text: want }
       : { ok: false, read: null, text: want };
   } catch (err) {
+    if (kit !== QR.kit) return QR.check;
     QR.check = { ok: false, read: null, text: QR.code?.text, error: err.message, stack: err.stack };
   } finally {
     QR.checking = false;
-    release();
+    if (kit === QR.kit) {
+      if (!QR.noAuto && !QR.check?.ok)
+        blockCode("This code did not scan. Try more contrast or a shorter text.");
+      else release();
+    }
   }
   refreshPanel();
   return QR.check;
@@ -315,6 +348,7 @@ function scheduleCheck() {
     const ready = app?.player?.toyInfo?.id === "qr-code" && document.body.dataset.ready === "true";
     if (ready && showing(app) && idle(app) && !app.busy) return checkScan();
     if (++tries < 40) QR.timer = setTimeout(go, 250);
+    else if (ready) blockCode("Still checking. Try more contrast or a shorter text.");
     else release();
   };
   // Behind the still, the code needs no time to settle on screen.
@@ -346,6 +380,10 @@ if (typeof document !== "undefined")
 async function savePNG(size = 1600) {
   const app = globalThis.__splashery?.app;
   if (!app) return null;
+  if (!QR.noAuto && !(QR.check?.ok || (await checkScan())?.ok)) {
+    app.ui.toast("Try more contrast or a shorter text before saving.");
+    return null;
+  }
   return app.withBusy("Making the picture…", async () => {
     const { canvasToBlob, downloadBlob, timestampName } = await exportsJS();
     const canvas = await renderScan(app, size);
@@ -369,6 +407,10 @@ export async function makeGIF({
 } = {}) {
   const app = globalThis.__splashery?.app;
   if (!app?.player) return null;
+  if (!QR.noAuto && !(QR.check?.ok || (await checkScan())?.ok)) {
+    app.ui.toast("Try more contrast or a shorter text before saving.");
+    return null;
+  }
   const player = app.player;
   if (motion !== "alive" && !MOTION_SECS[motion]) motion = "burst";
   // Alive: one whole loop of the pattern (it repeats when its phase grows by
@@ -433,6 +475,10 @@ function modulePx() {
 export async function showFullScreen() {
   const app = globalThis.__splashery?.app;
   if (!app?.player || document.getElementById("qr-fullscreen")) return;
+  if (!QR.noAuto && !(QR.check?.ok || (await checkScan())?.ok)) {
+    app.ui.toast("Try more contrast or a shorter text before opening full screen.");
+    return;
+  }
   const side = Math.min(window.innerWidth, window.innerHeight);
   const px = Math.min(2048, Math.round(side * Math.min(2, window.devicePixelRatio || 1)));
   const shot = await renderScan(app, px);
@@ -703,6 +749,8 @@ function renderPanel() {
   const themeNote = document.createElement("p");
   themeNote.className = "note";
   themeNote.id = "qr-theme-note";
+  const fit = fitControls({ options: () => QR.options || {}, apply: (o) => app?.setToyOptions(o) });
+  box.append(fit.element);
   const note = document.createElement("p");
   note.className = "note";
   note.textContent = "What the code holds stays on this device: nothing is sent anywhere, and no link shortener is used. But a #s= link to this toy, and a saved scene, carry what the code holds (the link, the text, the contact), so whoever you send them to can read it. A Wi-Fi password is left out of them: after opening a link, type it again. The PNG and the GIF end in scan view, with the quiet zone. Record (Share tab) makes a video, and Save splats keeps the splats."; // prettier-ignore
@@ -732,6 +780,7 @@ function renderPanel() {
   );
   panel = {
     refresh() {
+      fit.refresh();
       const o = QR.options || {};
       for (const [id, b] of styleButtons) {
         b.setAttribute("aria-pressed", String(id === (o.style || "classic")));
@@ -820,6 +869,7 @@ export const RECIPES = {
       { key: "kind", label: "What it holds", type: "select", default: "link", hidden: true, choices: KINDS.map((k) => ({ id: k.id, label: k.label })) }, // prettier-ignore
       { key: "fields", label: "Its details", type: "text", default: "", hidden: true },
       // Picked in the panel's style row, which also sets the style's colors.
+      ...FIT_OPTIONS,
       { key: "shape", label: "Shape", type: "select", default: "square", choices: shapeChoices },
       { key: "style", label: "Style", type: "select", default: "classic", choices: choices(STYLES), hidden: true }, // prettier-ignore
       {
@@ -851,7 +901,7 @@ export const RECIPES = {
       { key: "fg2", label: "Gradient to", type: "color", default: "#1d4f9c" },
       {
         key: "eyes",
-        label: "Eyes",
+        label: "Eye colors",
         type: "select",
         default: "same",
         choices: [

@@ -1,0 +1,1106 @@
+[
+  {
+    "id": "cdx-theme-seasons-1-1",
+    "theme": "seasons",
+    "name": "Spring blossom",
+    "score": 45.58990046903598,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-1-2",
+    "theme": "seasons",
+    "name": "Spring blossom · soft",
+    "score": 44.941596032363194,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-2-1",
+    "theme": "seasons",
+    "name": "Summer sun",
+    "score": 46.47958080008049,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-2-2",
+    "theme": "seasons",
+    "name": "Summer sun · soft",
+    "score": 45.700207501492024,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-seasons-3-1",
+    "theme": "seasons",
+    "name": "Autumn maple",
+    "score": 45.750117947440316,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-seasons-3-2",
+    "theme": "seasons",
+    "name": "Autumn maple · soft",
+    "score": 45.2089414109151,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-seasons-3-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-seasons-4-1",
+    "theme": "seasons",
+    "name": "Winter snowflake",
+    "score": 48.80691243709892,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-seasons-4-2",
+    "theme": "seasons",
+    "name": "Winter snowflake · soft",
+    "score": 48.058957364008414,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-seasons-4-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-seasons-5-1",
+    "theme": "seasons",
+    "name": "Tulip",
+    "score": 47.03144550689093,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-5-2",
+    "theme": "seasons",
+    "name": "Tulip · soft",
+    "score": 46.406302535116026,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-6-1",
+    "theme": "seasons",
+    "name": "Pumpkin",
+    "score": 46.78360272427648,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-6-2",
+    "theme": "seasons",
+    "name": "Pumpkin · soft",
+    "score": 46.078985759667425,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-7-1",
+    "theme": "seasons",
+    "name": "Rain umbrella",
+    "score": 44.73540668258025,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-7-2",
+    "theme": "seasons",
+    "name": "Rain umbrella · soft",
+    "score": 44.358616493956404,
+    "kept": false,
+    "reason": "Passed scanning, but lower worst-link detail or another variant of the same subject retained."
+  },
+  {
+    "id": "cdx-theme-seasons-8-1",
+    "theme": "seasons",
+    "name": "Winter mittens",
+    "score": 45.26240343764348,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-8-2",
+    "theme": "seasons",
+    "name": "Winter mittens · soft",
+    "score": 44.40288223650074,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-seasons-9-1",
+    "theme": "seasons",
+    "name": "Apple",
+    "score": 46.685876663546374,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-seasons-9-2",
+    "theme": "seasons",
+    "name": "Apple · soft",
+    "score": 46.164592397750845,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-seasons-9-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-seasons-10-1",
+    "theme": "seasons",
+    "name": "Spring buds",
+    "score": 47.55447350607108,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-seasons-10-2",
+    "theme": "seasons",
+    "name": "Spring buds · soft",
+    "score": 46.85333063453733,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-seasons-10-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-seasons-1-3",
+    "theme": "seasons",
+    "name": "Spring blossom · warm",
+    "score": 45.573825104407916,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-1-4",
+    "theme": "seasons",
+    "name": "Spring blossom · dusk",
+    "score": 45.3009389599981,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-5-3",
+    "theme": "seasons",
+    "name": "Tulip · warm",
+    "score": 46.79542114654963,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-5-4",
+    "theme": "seasons",
+    "name": "Tulip · dusk",
+    "score": 47.5620886262768,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-6-3",
+    "theme": "seasons",
+    "name": "Pumpkin · warm",
+    "score": 46.66583944919259,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-6-4",
+    "theme": "seasons",
+    "name": "Pumpkin · dusk",
+    "score": 47.88540778260008,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-11-1",
+    "theme": "seasons",
+    "name": "Winter fir",
+    "score": 45.103088974722674,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-seasons-11-2",
+    "theme": "seasons",
+    "name": "Winter fir · soft",
+    "score": 44.73784273763894,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-seasons-12-1",
+    "theme": "seasons",
+    "name": "Autumn acorn",
+    "score": 45.33069906623975,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-seasons-12-2",
+    "theme": "seasons",
+    "name": "Autumn acorn · soft",
+    "score": 44.95766038754609,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-seasons-12-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-ocean-1-1",
+    "theme": "ocean",
+    "name": "Scallop shell",
+    "score": 47.84483894536812,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-ocean-1-2",
+    "theme": "ocean",
+    "name": "Scallop shell · soft",
+    "score": 46.995654940159035,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-ocean-2-1",
+    "theme": "ocean",
+    "name": "Spiral shell",
+    "score": 48.221660592791146,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-ocean-2-2",
+    "theme": "ocean",
+    "name": "Spiral shell · soft",
+    "score": 47.36458211065657,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-ocean-3-1",
+    "theme": "ocean",
+    "name": "Rolling wave",
+    "score": 45.453135154735904,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-ocean-3-2",
+    "theme": "ocean",
+    "name": "Rolling wave · soft",
+    "score": 45.0112122818158,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-ocean-3-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-ocean-4-1",
+    "theme": "ocean",
+    "name": "Starfish",
+    "score": 46.628645179963,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-ocean-4-2",
+    "theme": "ocean",
+    "name": "Starfish · soft",
+    "score": 45.875232990420216,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-ocean-4-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-ocean-5-1",
+    "theme": "ocean",
+    "name": "Reef fish",
+    "score": 45.86361176597597,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-ocean-5-2",
+    "theme": "ocean",
+    "name": "Reef fish · soft",
+    "score": 45.429182776742415,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-ocean-6-1",
+    "theme": "ocean",
+    "name": "Coral fan",
+    "score": 46.02556638804854,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-ocean-6-2",
+    "theme": "ocean",
+    "name": "Coral fan · soft",
+    "score": 45.21532197511628,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-ocean-7-1",
+    "theme": "ocean",
+    "name": "Seaweed",
+    "score": 46.92452409546226,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-ocean-7-2",
+    "theme": "ocean",
+    "name": "Seaweed · soft",
+    "score": 46.056471350631625,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-ocean-8-1",
+    "theme": "ocean",
+    "name": "Pearl shell",
+    "score": 47.999372161616265,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-ocean-8-2",
+    "theme": "ocean",
+    "name": "Pearl shell · soft",
+    "score": 47.101152969177015,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-ocean-8-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-ocean-9-1",
+    "theme": "ocean",
+    "name": "Sea turtle",
+    "score": 46.91158127588605,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-ocean-9-2",
+    "theme": "ocean",
+    "name": "Sea turtle · soft",
+    "score": 46.02871285233091,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-ocean-10-1",
+    "theme": "ocean",
+    "name": "Jellyfish",
+    "score": 46.1389876001836,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-ocean-10-2",
+    "theme": "ocean",
+    "name": "Jellyfish · soft",
+    "score": 45.0810007900167,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-forest-1-1",
+    "theme": "forest",
+    "name": "Fern frond",
+    "score": 46.980487040456694,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-forest-1-2",
+    "theme": "forest",
+    "name": "Fern frond · soft",
+    "score": 46.35991134221672,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-forest-1-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-forest-2-1",
+    "theme": "forest",
+    "name": "Woodland mushroom",
+    "score": 45.87978618653767,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-2-2",
+    "theme": "forest",
+    "name": "Woodland mushroom · soft",
+    "score": 45.10922340363967,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-forest-3-1",
+    "theme": "forest",
+    "name": "Pinecone",
+    "score": 46.133772354744785,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-3-2",
+    "theme": "forest",
+    "name": "Pinecone · soft",
+    "score": 45.32968069343601,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-forest-4-1",
+    "theme": "forest",
+    "name": "Fir tree",
+    "score": 45.68571073800545,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-4-2",
+    "theme": "forest",
+    "name": "Fir tree · soft",
+    "score": 45.01837984182778,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-5-1",
+    "theme": "forest",
+    "name": "Oak leaf",
+    "score": 46.189100411741606,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-5-2",
+    "theme": "forest",
+    "name": "Oak leaf · soft",
+    "score": 45.45721801132059,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-forest-6-1",
+    "theme": "forest",
+    "name": "Acorn",
+    "score": 45.80713256229288,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-forest-6-2",
+    "theme": "forest",
+    "name": "Acorn · soft",
+    "score": 45.323017620019975,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-forest-6-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-forest-7-1",
+    "theme": "forest",
+    "name": "Butterfly",
+    "score": 47.18381573215779,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-7-2",
+    "theme": "forest",
+    "name": "Butterfly · soft",
+    "score": 46.476463148327554,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-8-1",
+    "theme": "forest",
+    "name": "Woodland logs",
+    "score": 46.041983159073716,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-8-2",
+    "theme": "forest",
+    "name": "Woodland logs · soft",
+    "score": 45.02535413815388,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-9-1",
+    "theme": "forest",
+    "name": "Berry branch",
+    "score": 46.35847890535261,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-forest-9-2",
+    "theme": "forest",
+    "name": "Berry branch · soft",
+    "score": 45.53941891103232,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-forest-9-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-forest-10-1",
+    "theme": "forest",
+    "name": "Pond leaves",
+    "score": 45.650457374270694,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-forest-10-2",
+    "theme": "forest",
+    "name": "Pond leaves · soft",
+    "score": 44.75507158207853,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-forest-10-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-forest-11-1",
+    "theme": "forest",
+    "name": "Ginkgo fan",
+    "score": 46.80884705681132,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-11-2",
+    "theme": "forest",
+    "name": "Ginkgo fan · soft",
+    "score": 45.92067506870677,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-forest-12-1",
+    "theme": "forest",
+    "name": "Birch branch",
+    "score": 45.798721904596846,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-forest-12-2",
+    "theme": "forest",
+    "name": "Birch branch · soft",
+    "score": 45.097315975985865,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-forest-12-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-space-art-1-1",
+    "theme": "space-art",
+    "name": "Ringed planet (imaginary art)",
+    "score": 47.757833231770256,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-space-art-1-2",
+    "theme": "space-art",
+    "name": "Ringed planet · soft (imaginary art)",
+    "score": 46.90085318180999,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-space-art-2-1",
+    "theme": "space-art",
+    "name": "Crescent moon (imaginary art)",
+    "score": 45.53412798153382,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-space-art-2-2",
+    "theme": "space-art",
+    "name": "Crescent moon · soft (imaginary art)",
+    "score": 44.82699318017693,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-space-art-2-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-space-art-3-1",
+    "theme": "space-art",
+    "name": "Comet (imaginary art)",
+    "score": 44.77997899290418,
+    "kept": false,
+    "reason": "Not rendered: eight higher-ranked distinct subjects already passed."
+  },
+  {
+    "id": "cdx-theme-space-art-3-2",
+    "theme": "space-art",
+    "name": "Comet · soft (imaginary art)",
+    "score": 44.44037827306012,
+    "kept": false,
+    "reason": "Not rendered: eight higher-ranked distinct subjects already passed."
+  },
+  {
+    "id": "cdx-theme-space-art-4-1",
+    "theme": "space-art",
+    "name": "Spiral galaxy (imaginary art)",
+    "score": 45.9113248642553,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-space-art-4-2",
+    "theme": "space-art",
+    "name": "Spiral galaxy · soft (imaginary art)",
+    "score": 44.861085509384424,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-space-art-5-1",
+    "theme": "space-art",
+    "name": "Paper rocket (imaginary art)",
+    "score": 45.62844605182582,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-space-art-5-2",
+    "theme": "space-art",
+    "name": "Paper rocket · soft (imaginary art)",
+    "score": 45.06579312787707,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-space-art-5-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-space-art-6-1",
+    "theme": "space-art",
+    "name": "Orbital rings (imaginary art)",
+    "score": 45.88576618341042,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-space-art-6-2",
+    "theme": "space-art",
+    "name": "Orbital rings · soft (imaginary art)",
+    "score": 44.35355815245352,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-space-art-6-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-space-art-7-1",
+    "theme": "space-art",
+    "name": "Starburst (imaginary art)",
+    "score": 44.554194186434536,
+    "kept": false,
+    "reason": "Not rendered: eight higher-ranked distinct subjects already passed."
+  },
+  {
+    "id": "cdx-theme-space-art-7-2",
+    "theme": "space-art",
+    "name": "Starburst · soft (imaginary art)",
+    "score": 44.25729021734791,
+    "kept": false,
+    "reason": "Not rendered: eight higher-ranked distinct subjects already passed."
+  },
+  {
+    "id": "cdx-theme-space-art-8-1",
+    "theme": "space-art",
+    "name": "Imaginary nebula (imaginary art)",
+    "score": 45.58759569195282,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-space-art-8-2",
+    "theme": "space-art",
+    "name": "Imaginary nebula · soft (imaginary art)",
+    "score": 44.95967255143197,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-space-art-9-1",
+    "theme": "space-art",
+    "name": "Twin planets (imaginary art)",
+    "score": 47.43084993823741,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-space-art-9-2",
+    "theme": "space-art",
+    "name": "Twin planets · soft (imaginary art)",
+    "score": 46.515790750932126,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-space-art-9-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-space-art-10-1",
+    "theme": "space-art",
+    "name": "Meteor shower (imaginary art)",
+    "score": 44.90517169128345,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-space-art-10-2",
+    "theme": "space-art",
+    "name": "Meteor shower · soft (imaginary art)",
+    "score": 44.07196380369363,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-space-art-10-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-patterns-1-1",
+    "theme": "patterns",
+    "name": "Scalloped fans",
+    "score": 47.77362793940137,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-1-2",
+    "theme": "patterns",
+    "name": "Scalloped fans · soft",
+    "score": 47.229399759440824,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-2-1",
+    "theme": "patterns",
+    "name": "Woven bands",
+    "score": 46.55809901611849,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-patterns-2-2",
+    "theme": "patterns",
+    "name": "Woven bands · soft",
+    "score": 45.61206743668475,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-patterns-2-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-patterns-3-1",
+    "theme": "patterns",
+    "name": "Folded ribbons",
+    "score": 46.03732795122358,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-3-2",
+    "theme": "patterns",
+    "name": "Folded ribbons · soft",
+    "score": 45.53773860112179,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-4-1",
+    "theme": "patterns",
+    "name": "Spiral tiles",
+    "score": 47.73922880869655,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-patterns-4-2",
+    "theme": "patterns",
+    "name": "Spiral tiles · soft",
+    "score": 46.70170451708039,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-patterns-4-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-patterns-5-1",
+    "theme": "patterns",
+    "name": "Petal rosette",
+    "score": 45.68148301098085,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-5-2",
+    "theme": "patterns",
+    "name": "Petal rosette · soft",
+    "score": 44.98493283133302,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-6-1",
+    "theme": "patterns",
+    "name": "Ripple rings",
+    "score": 46.78985382024574,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-patterns-6-2",
+    "theme": "patterns",
+    "name": "Ripple rings · soft",
+    "score": 45.777485760000886,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-patterns-6-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-patterns-7-1",
+    "theme": "patterns",
+    "name": "Mosaic diamonds",
+    "score": 47.22304790703784,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-7-2",
+    "theme": "patterns",
+    "name": "Mosaic diamonds · soft",
+    "score": 46.15203645031343,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-patterns-8-1",
+    "theme": "patterns",
+    "name": "Arc quilt",
+    "score": 46.605874941778964,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-8-2",
+    "theme": "patterns",
+    "name": "Arc quilt · soft",
+    "score": 46.04485258623022,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-patterns-9-1",
+    "theme": "patterns",
+    "name": "Paper folds",
+    "score": 46.1639477531438,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-patterns-9-2",
+    "theme": "patterns",
+    "name": "Paper folds · soft",
+    "score": 45.51836845624513,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-patterns-9-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-patterns-10-1",
+    "theme": "patterns",
+    "name": "Wavy stripes",
+    "score": 47.44841989303279,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-patterns-10-2",
+    "theme": "patterns",
+    "name": "Wavy stripes · soft",
+    "score": 46.385798897658134,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-patterns-10-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-patterns-11-1",
+    "theme": "patterns",
+    "name": "Large chevrons",
+    "score": 45.939995819823196,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-11-2",
+    "theme": "patterns",
+    "name": "Large chevrons · soft",
+    "score": 44.922251906026084,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-patterns-12-1",
+    "theme": "patterns",
+    "name": "Nested squares",
+    "score": 46.874466401775386,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-patterns-12-2",
+    "theme": "patterns",
+    "name": "Nested squares · soft",
+    "score": 45.787213855762644,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-celebrations-1-1",
+    "theme": "celebrations",
+    "name": "Balloons",
+    "score": 45.24800344307114,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-celebrations-1-2",
+    "theme": "celebrations",
+    "name": "Balloons · soft",
+    "score": 44.39701295755582,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-celebrations-1-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-celebrations-2-1",
+    "theme": "celebrations",
+    "name": "Wrapped gift",
+    "score": 46.45494442163993,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-celebrations-2-2",
+    "theme": "celebrations",
+    "name": "Wrapped gift · soft",
+    "score": 45.41297206643823,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-celebrations-3-1",
+    "theme": "celebrations",
+    "name": "Party cake",
+    "score": 45.44692626747312,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-celebrations-3-2",
+    "theme": "celebrations",
+    "name": "Party cake · soft",
+    "score": 44.748651897547084,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-celebrations-3-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-celebrations-4-1",
+    "theme": "celebrations",
+    "name": "Paper bunting",
+    "score": 45.65571745381809,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-celebrations-4-2",
+    "theme": "celebrations",
+    "name": "Paper bunting · soft",
+    "score": 44.69071288594494,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-celebrations-4-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-celebrations-5-1",
+    "theme": "celebrations",
+    "name": "Confetti",
+    "score": 46.087526572219716,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-celebrations-5-2",
+    "theme": "celebrations",
+    "name": "Confetti · soft",
+    "score": 45.20796711559764,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-celebrations-5-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-celebrations-6-1",
+    "theme": "celebrations",
+    "name": "Festival lantern",
+    "score": 46.58011373958637,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-celebrations-6-2",
+    "theme": "celebrations",
+    "name": "Festival lantern · soft",
+    "score": 45.6439115829457,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-celebrations-7-1",
+    "theme": "celebrations",
+    "name": "Ribbon bow",
+    "score": 46.11837830207608,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-celebrations-7-2",
+    "theme": "celebrations",
+    "name": "Ribbon bow · soft",
+    "score": 45.39087780959412,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-celebrations-7-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-celebrations-8-1",
+    "theme": "celebrations",
+    "name": "Flower bouquet",
+    "score": 46.67823573535382,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-celebrations-8-2",
+    "theme": "celebrations",
+    "name": "Flower bouquet · soft",
+    "score": 45.89622974473805,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-celebrations-8-1 of this subject already passed."
+  },
+  {
+    "id": "cdx-theme-celebrations-9-1",
+    "theme": "celebrations",
+    "name": "Celebration wreath",
+    "score": 45.601339403868415,
+    "kept": false,
+    "reason": "Rendered scan failed."
+  },
+  {
+    "id": "cdx-theme-celebrations-9-2",
+    "theme": "celebrations",
+    "name": "Celebration wreath · soft",
+    "score": 44.59013152021608,
+    "kept": false,
+    "reason": "Not rendered: eight higher-ranked distinct subjects already passed."
+  },
+  {
+    "id": "cdx-theme-celebrations-10-1",
+    "theme": "celebrations",
+    "name": "Paper pinwheel",
+    "score": 47.258498420193085,
+    "kept": true,
+    "reason": "Passed every qualifying scan; highest worst-link detail among distinct subjects."
+  },
+  {
+    "id": "cdx-theme-celebrations-10-2",
+    "theme": "celebrations",
+    "name": "Paper pinwheel · soft",
+    "score": 46.28590429435751,
+    "kept": false,
+    "reason": "Not rendered: higher-ranked variant cdx-theme-celebrations-10-1 of this subject already passed."
+  }
+]

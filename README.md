@@ -172,17 +172,25 @@ panel, as before.
 
 ## Controls
 
-| Input                                 | Does                                             |
-| ------------------------------------- | ------------------------------------------------ |
-| Drag, one finger                      | Turn the toy (or use the picked tool on the toy) |
-| Right-drag, Space + drag, two fingers | Always turn the toy                              |
-| Wheel, pinch                          | Zoom, within limits around the toy               |
-| A clear two-finger twist              | Roll (not when the tilt is locked)               |
-| Double-click, double-tap              | Reset the view                                   |
-| Top-bar buttons                       | Reset view, Tilt lock and Turntable              |
-| 1 to 5                                | Orbit, Poke, Paint, Magnet, Clay                 |
-| P / R                                 | Poke a random spot / reset the view              |
-| Arrows, + and −                       | Turn and zoom from the keyboard (canvas focused) |
+| Input                                 | Does                                                                                                |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| Drag, one finger                      | Turn the toy (or use the picked tool on the toy)                                                    |
+| Right-drag, Space + drag, two fingers | Always turn the toy                                                                                 |
+| Wheel, pinch                          | Zoom, within limits around the toy                                                                  |
+| A clear two-finger twist              | Roll (not when the tilt is locked)                                                                  |
+| Double-click, double-tap              | Reset the view                                                                                      |
+| Top-bar buttons                       | Reset view, Tilt lock and Turntable                                                                 |
+| 1 to 5                                | Orbit, Poke, Paint, Magnet, Clay                                                                    |
+| P / R                                 | Poke a random spot / reset the view                                                                 |
+| F                                     | Hide the controls to focus on the toy; press again to bring them back (full screen where available) |
+| [                                     | Fold the panel away or show it again on a computer                                                  |
+| G                                     | Open or close the toy gallery (the full toy grid on a phone)                                        |
+| Arrows                                | Turn the toy when the 3D view has keyboard focus                                                    |
+| + / − (also = / \_)                   | Zoom from the keyboard, including when a button has focus                                           |
+
+Keyboard shortcuts stay off while typing in a field or using another input control (including a
+slider), or while Command, Control, or Option is held. A toy that accepts typing gets the keys it
+recognizes first.
 
 The camera eases in and out, coasts after a flick, and turns slowly when you leave it alone (never
 when your system asks for reduced motion).
@@ -259,8 +267,8 @@ In the **Share** tab:
 
 - **Copy link**: the whole scene, deflate-compressed into `#s=` in the URL. For your own file the
   link carries the settings only and says so.
-- **Save JSON / Load JSON**: the scene as a file (you can also drop it on the page). The format is
-  documented in [docs/SCENE-SCHEMA.md](docs/SCENE-SCHEMA.md).
+- **Save scene / Open a scene**: the scene as a file (you can also drop it on the page). The format
+  is documented in [docs/SCENE-SCHEMA.md](docs/SCENE-SCHEMA.md).
 - **Save picture**: a PNG of the current view (transparent if the background is).
 - **Save GIF**: a turntable or a short effect loop, 48 frames at 512 px by default, encoded in the
   browser with gifenc.

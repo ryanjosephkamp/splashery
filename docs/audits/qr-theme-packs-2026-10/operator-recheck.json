@@ -1,0 +1,76 @@
+{
+  "mainCommit": "6c3764ff",
+  "method": "Exact unchanged browser cases served from an isolated archive of current main on port 4176; Chromium 151.0.7922.173, WebGL2/ANGLE/Mesa llvmpipe, DISPLAY :88, LP_NUM_THREADS=1, one worker, no retries.",
+  "mainBrowserRecheck": [
+    {
+      "file": "tests/qrc-picture.spec.mjs",
+      "line": 119,
+      "test": "Picture QR in the browser: the splats read back, the PNG reads back, and a tap ends on a code that reads",
+      "result": "passed",
+      "seconds": 38.7
+    },
+    {
+      "file": "tests/smoke.spec.mjs",
+      "line": 978,
+      "test": "the Toy tab has the essentials, and Reset everything takes a toy back to how it started",
+      "result": "passed",
+      "seconds": 26.8
+    }
+  ],
+  "interpretation": "Both browser cases now pass on current main and the updated PR branch. The earlier failures’ cause remains undetermined; these cases are not classified as known flakes. No additional runtime fix was made.",
+  "mainCpuRecheck": [
+    {
+      "file": "tests/kit.spec.mjs",
+      "line": 87,
+      "method": "Narrow Node reproduction of buildRecipe with the unchanged default picture ID, shape circle, seed 3, and count 8000; not a rerun of the full broad kit case.",
+      "result": "guard reproduced",
+      "picture": "ai-farm",
+      "error": "This code has too much detail for a circular picture on this device. Choose less detail, a smaller center dot, or a shorter text."
+    },
+    {
+      "file": "tests/qr4-craft.spec.mjs",
+      "line": 142,
+      "test": "the QR code toy builds the very same splats from the shared builder",
+      "method": "Exact unchanged Playwright case on isolated current-main sources; Node 24.19.0, no browser.",
+      "result": "failed",
+      "seconds": 8.4,
+      "expectedSha256": "b3918a78fddc50518d2fef2cecb12cee1cf3b16b05a450e61a166fb39b482144",
+      "actualSha256": "d98ad9f651252c2f37ce6d6530dc7aa8c45fca762319a496421846fec9788eb6"
+    }
+  ],
+  "featureSourceCommit": "a4430602bbd2d9501b95d4a35f9b2f821e2fff0e",
+  "featureRecheck": {
+    "method": "Exact unchanged four original failing cases, plus theme metadata, cache validation, original-artwork, and two viewport checks; Chromium 151.0.7922.173, WebGL2/ANGLE/Mesa llvmpipe, DISPLAY :88, LP_NUM_THREADS=1, one worker, no retries.",
+    "passed": 7,
+    "failed": 2,
+    "duration": "5.8 minutes",
+    "cases": [
+      {
+        "file": "tests/kit.spec.mjs",
+        "line": 87,
+        "result": "failed",
+        "reason": "Same circular Picture QR guard at the 8,000-splat budget."
+      },
+      {
+        "file": "tests/qr4-craft.spec.mjs",
+        "line": 142,
+        "result": "failed",
+        "seconds": 7.4,
+        "reason": "Same shared-builder hash mismatch as current main."
+      },
+      {
+        "file": "tests/qrc-picture.spec.mjs",
+        "line": 119,
+        "result": "passed",
+        "seconds": 44.5
+      },
+      {
+        "file": "tests/smoke.spec.mjs",
+        "line": 978,
+        "result": "passed",
+        "seconds": 24.7
+      }
+    ],
+    "additionalChecks": "Five passed: complete CC0 records and ten-link evidence, cached-matrix validation, deterministic original artwork, and picker screenshots at 390×844 and 1440×900."
+  }
+}

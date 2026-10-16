@@ -3,6 +3,7 @@
 // the engine directly lives here or in paint.js / loaders.js.
 
 import * as pc from "./pc.js";
+import { updateTokenBounds } from "./token-bounds.js";
 import {
   MODIFIER,
   MODIFIER_KIT,
@@ -116,21 +117,54 @@ export class Stage {
     this.frames = 0;
     this.lastFrameMs = [];
     this.lastRender = performance.now();
+    this.destroyed = false;
 
     // Rendering is on demand, but splat sorting finishes on a worker a few
     // frames after a change, so every request keeps frames coming briefly.
     this.aliveUntil = 0;
+    this.renderHolds = new Set();
+    let gpuFrames = 0;
+    let gpuRenderPending = false;
     app.on("update", (dt) => {
       for (const fn of this.updateHandlers) fn(dt);
-      if (performance.now() < this.aliveUntil) app.renderNextFrame = true;
+      if (this.renderHolds.size && !this.captureWaiters.length) app.renderNextFrame = false;
+      else if (performance.now() < this.aliveUntil) app.renderNextFrame = true;
+    });
+    app.on("framerender", () => {
+      // A WebGPU submission returns before the GPU finishes. An offscreen
+      // iframe can keep ticking at 60 Hz while a software GPU draws much more
+      // slowly, building a queue that browser shutdown must drain. Keep at
+      // most two frames in flight while updates continue on their real clock.
+      // Gate after all update/input listeners have requested their draws.
+      if (gpuFrames >= 2) {
+        gpuRenderPending ||= app.renderNextFrame;
+        app.renderNextFrame = false;
+      }
     });
     this.graveyard = [];
     this.projectorTries = 0; // Fluids r7 (hookProjector)
+    let rendered = false;
+    app.on("postrender", () => {
+      rendered = true;
+    });
     app.on("frameend", () => {
+      if (rendered && device.isWebGPU) {
+        gpuFrames++;
+        const finished = () => {
+          gpuFrames--;
+          if (!this.destroyed && gpuRenderPending) {
+            gpuRenderPending = false;
+            app.renderNextFrame = true;
+          }
+        };
+        device.wgpu.queue.onSubmittedWorkDone().then(finished, finished);
+      }
       this.frames++;
       if (this.projectorTries < 600) this.hookProjector(); // Fluids r7
       if (this.graveyard.length) {
-        this.buryToys();
+        // frameend also fires for an update whose covered draw was skipped.
+        // The work-buffer manager can release old textures only after real draws.
+        if (rendered) this.buryToys();
         this.requestRender();
       }
       const now = performance.now();
@@ -139,11 +173,12 @@ export class Stage {
       if (this.lastFrameMs.length > 60) this.lastFrameMs.shift();
       this.lastRender = now;
       this.timeFrame(ms);
-      if (this.captureWaiters.length) {
+      if (rendered && this.captureWaiters.length) {
         const waiters = this.captureWaiters;
         this.captureWaiters = [];
         for (const w of waiters) w(w.bare ? null : this.copyCanvas(w.width, w.height));
       }
+      rendered = false;
     });
 
     this.resizeObserver = new ResizeObserver(() => this.resize());
@@ -281,6 +316,18 @@ export class Stage {
     this.aliveUntil = Math.max(this.aliveUntil, performance.now() + keepAliveMs);
   }
 
+  // An opaque loading cover can spare the GPU while a worker prepares the next
+  // scene. Keep updates, input, and explicitly requested captures alive. Each
+  // cover releases its own hold, so a stale cleanup cannot resume another one.
+  holdRendering() {
+    const hold = {};
+    this.renderHolds.add(hold);
+    this.app.renderNextFrame = false;
+    return () => {
+      if (this.renderHolds.delete(hold) && !this.renderHolds.size) this.requestRender();
+    };
+  }
+
   // The canvas size comes from CSS. app.resizeCanvas() would pin it with
   // inline pixel sizes (and then CSS changes, such as the phone sheet opening
   // or the window resizing, would never reach it), so only the drawing-buffer
@@ -396,6 +443,7 @@ export class Stage {
     if (kit) entity.gsplat.setParameter("uSpScreen", this.blankTexture());
     this.app.root.addChild(entity);
     this.toy = { entity, resource, asset, owned, kit, rig, photo: photoOn, gloss: glossOn };
+    this.toy.customModifier = !!modifier;
     this.requestRender();
     return this.toy;
   }
@@ -510,6 +558,10 @@ export class Stage {
   setUniforms(u) {
     const g = this.toy?.entity.gsplat;
     if (!g) return;
+    // Custom GPU fields may use the token uniform for data other than poses.
+    if (this.device.isWebGPU && this.toy.kit && !this.toy.customModifier) {
+      updateTokenBounds(this.toy.resource, u["uSpTokens[0]"], g);
+    }
     for (const k in u) g.setParameter(k, u[k]);
     // Pictures: a kit toy's picture sheets move with it.
     for (const sh of this.toy.sheets || []) {
@@ -1053,6 +1105,7 @@ export class Stage {
   }
 
   destroy() {
+    this.destroyed = true;
     clearTimeout(this.restoreTimer);
     this.coverEl?.remove();
     this.resizeObserver.disconnect();

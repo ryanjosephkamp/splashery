@@ -1,8 +1,9 @@
 // Splashery app: the shelf, the tools, making toys, look, bring-your-own
 // files and sharing, on top of the shared Player runtime.
 
-import { Player, NoGPUError, Gestures, ui2On } from "./player.js";
+import { Player, Gestures, ui2On } from "./player.js";
 import { createUI } from "./ui.js";
+import { showRendererDetails } from "./renderer-fallback.js";
 import { canPlay } from "./physics/hands-on.js"; // lane Physics
 import {
   createScene,
@@ -44,13 +45,15 @@ import {
 
 const canvas = document.getElementById("stage");
 
-function showFallback(reason) {
+function showFallback(error, diagnostics) {
   const fb = document.getElementById("fallback");
-  if (reason) document.getElementById("fallback-reason").textContent += ` (${reason})`;
+  showRendererDetails(fb, error, diagnostics);
   fb.hidden = false;
   canvas.hidden = true;
+  document.getElementById("stage-zoom").hidden = true;
   document.getElementById("panel").hidden = true;
   document.body.dataset.ready = "true";
+  document.body.dataset.pageSettled = "true";
 }
 
 // How a toy likes flag colors laid on (recipe.patternProjection,
@@ -157,7 +160,7 @@ class App {
       await this.player.init();
     } catch (err) {
       console.info("Splashery could not start a renderer:", err?.message || err);
-      showFallback(err instanceof NoGPUError ? "" : err?.message);
+      showFallback(err, this.player.rendererDiagnostics);
       return;
     }
     const player = this.player;
@@ -176,6 +179,10 @@ class App {
     player.on("action", (r) => this.onAction(r));
     // A toy's slider dragged on the toy itself: the panel's slider follows.
     player.on("controls", (targets) => ui.setMotion(player.scene.motion, targets));
+    player.on("motion-preference", (reduced) => {
+      ui.setAutoplay(player.scene.autoplay, reduced);
+      ui.setMotion(player.scene.motion, player.scene.motion.controls);
+    });
     player.on("tilt", (locked) => ui.setTiltLock(locked)); // lane Pages r6: a tilt the toy freed
     // A tap that switches the toy's options rebuilds it the way the Toy tab does.
     // A toy's own tap that switches its options (a periodic table tile) rebuilds it with no
@@ -237,6 +244,7 @@ class App {
       await this.applyScene(createScene({ toy: { kind: "builtin", id: TOYS[0].id } }));
     }
     document.body.dataset.ready = "true";
+    document.body.dataset.pageSettled = "true";
   }
 
   // ---- Scenes -------------------------------------------------------------------
@@ -244,6 +252,7 @@ class App {
   async applyScene(scene, { file = null } = {}) {
     const player = this.player;
     const ui = this.ui;
+    ui.resetMissingFileNotice?.();
     // The device's turntable choice holds for links too (lane Viewer).
     if (turntablePref() === false) scene.autoplay = { ...scene.autoplay, turntable: false };
     player.scene = scene;
@@ -587,6 +596,7 @@ class App {
       this.holdStill(toy); // UI r3
       player.syncDrop();
       this.ui.setMotion(scene.motion);
+      await this.ui.showToyHelp();
     } catch (err) {
       this.ui.toast(err.message, 5000);
     }
@@ -1102,7 +1112,7 @@ class App {
 
   // A page by its number (from 0), for the words box's search results.
   pictureGo(n) {
-    this.player.pictures?.go(n);
+    this.player.pictures?.go(n, { exact: true });
   }
 
   // A video's place, from the Toy tab's scrub bar (lane Books).
@@ -1332,6 +1342,14 @@ class App {
     const player = this.player;
     const cam = player.camera;
     addEventListener("keydown", (e) => {
+      if (e.defaultPrevented) return;
+      if (e.key === "Escape") {
+        // Share lane: an open dialog (the recording's preview) handles its own Escape.
+        if (e.target?.closest?.("dialog[open]")) return;
+        this.ui.escape() || this.ui.collapseSheet();
+        e.preventDefault();
+        return;
+      }
       // A toy that takes typing (the laptop) gets the keys it knows first.
       const typing = this.ui.isTyping(e.target) || e.metaKey || e.ctrlKey || e.altKey;
       if (!typing && player.toyInfo?.recipe?.typeKey && player.typeKey(e.key)) {
@@ -1352,7 +1370,6 @@ class App {
       if (/^[1-5]$/.test(e.key)) this.setTool(tools[Number(e.key) - 1]);
       else if (e.key === "p" || e.key === "P") this.pokeRandom();
       else if (e.key === "r" || e.key === "R") this.resetCamera();
-      else if (e.key === "Escape") this.ui.escape() || this.ui.collapseSheet();
       else if (ui2On() && (e.key === "f" || e.key === "F"))
         this.ui.toggleFocus(); // UI r2
       else if (ui2On() && e.key === "[")
@@ -1602,7 +1619,7 @@ class App {
     const res = await buildShareHash(this.exportScene());
     if (!res.ok) {
       this.ui.setLinkNote(res.notes.join(" "));
-      this.ui.toast("The scene is too big for a link. Save JSON instead.", 5000);
+      this.ui.toast("The scene is too big for a link. Save the scene as a file instead.", 5000);
       return;
     }
     const url = shareURL(res.hash);
@@ -1838,6 +1855,7 @@ class App {
     this.recording = rec;
     this.recorded = null;
     this.ui.setRecord({ state: "rec", seconds: 0, limit: RECORD_LIMIT });
+    document.getElementById("rec-stop").focus({ preventScroll: true });
     stage.requestRender();
     rec.done
       .then(({ blob, ext, seconds }) => {
@@ -1869,14 +1887,20 @@ class App {
   }
 
   // The phone's share sheet (Save Video on an iPhone); saving is the fallback.
+  // Share lane: true when the video was shared or saved, false when the person
+  // canceled the share sheet (the preview then still asks before discarding).
   async shareRecord() {
     const r = this.recorded;
-    const file = r && canShareFile(r.blob, r.name);
-    if (!file) return this.saveRecord();
+    if (!r) return false;
+    const file = canShareFile(r.blob, r.name);
+    if (!file) return (this.saveRecord(), true);
     try {
       await navigator.share({ files: [file], title: "Splashery" });
+      return true;
     } catch (err) {
-      if (err?.name !== "AbortError") this.saveRecord();
+      if (err?.name === "AbortError") return false;
+      this.saveRecord();
+      return true;
     }
   }
 
