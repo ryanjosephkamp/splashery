@@ -266,3 +266,6 @@
 {"v":1,"t":"2026-10-16T23:01:29.481Z","harness":"claude-code","event":"tool","session":"4a848d6a-3251-59d1-9701-f3220f28a724","tool":"mcp__github__add_issue_comment","cwd":"splashery"}
 {"v":1,"t":"2026-10-16T23:01:32.769Z","harness":"claude-code","event":"tool","session":"4a848d6a-3251-59d1-9701-f3220f28a724","tool":"mcp__claude-code-remote__send_message","cwd":"splashery"}
 {"v":1,"t":"2026-10-16T23:01:38.157Z","harness":"claude-code","event":"turn-end","session":"4a848d6a-3251-59d1-9701-f3220f28a724","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T23:01:40.356Z","harness":"claude-code","event":"subagent-stop","session":"4a848d6a-3251-59d1-9701-f3220f28a724","agent":"a63e62f7b65134ae0"}
+{"v":1,"t":"2026-10-16T23:04:30.285Z","harness":"claude-code","event":"turn-start","session":"4a848d6a-3251-59d1-9701-f3220f28a724","cwd":"splashery"}
+{"v":1,"t":"2026-10-16T23:04:32.298Z","harness":"claude-code","event":"tool","session":"4a848d6a-3251-59d1-9701-f3220f28a724","tool":"ReadNotifications","cwd":"splashery"}
