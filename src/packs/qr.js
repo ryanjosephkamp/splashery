@@ -263,6 +263,16 @@ const showing = (app, kit = QR.kit) => !!kit && app?.player?.proc?.ctx?.kit === 
 // code…" on it (Stage.cover); the new code shows once it has been read.
 // A failed or delayed check keeps the previous frame covered until a retry passes.
 export const SCANNING = "Please wait. Scanning code…";
+const LOW_BUDGET =
+  "The splat budget is too low for this code to scan. Set Splats to 400k in Look, and try again. If it still does not scan, use a shorter text.";
+const budgetMessage = () =>
+  globalThis.__splashery?.app?.player?.splats >= 400000
+    ? "This code is too dense to scan at the highest Splats budget. Use a shorter text."
+    : LOW_BUDGET;
+const failedScanMessage = () =>
+  QR.budgetLimited
+    ? budgetMessage()
+    : "This code did not scan. Try more contrast or a shorter text.";
 const coverPlayers = new WeakSet();
 function hold() {
   const player = globalThis.__splashery?.app?.player;
@@ -279,7 +289,9 @@ function hold() {
   clearTimeout(QR.holdTimer);
   QR.holdTimer = setTimeout(() => {
     if (globalThis.__splashery?.app?.player?.toyInfo?.id === "qr-code")
-      blockCode("Still checking. Try more contrast or a shorter text.");
+      blockCode(
+        QR.budgetLimited ? budgetMessage() : "Still checking. Try more contrast or a shorter text.",
+      );
     else release();
   }, 20000);
 }
@@ -328,8 +340,7 @@ async function runCheck(kit) {
   } finally {
     QR.checking = false;
     if (kit === QR.kit) {
-      if (!QR.noAuto && !QR.check?.ok)
-        blockCode("This code did not scan. Try more contrast or a shorter text.");
+      if (!QR.noAuto && !QR.check?.ok) blockCode(failedScanMessage());
       else release();
     }
   }
@@ -827,7 +838,8 @@ function renderPanel() {
         result.textContent = `✓ Scans: it reads back “${short(c.read)}” (${c.reader}${c.inverted ? ", as an inverted code" : ""}).`; // prettier-ignore
       else if (c.read)
         result.textContent = `✗ It reads “${short(c.read)}”, not your text. Try a higher error correction.`; // prettier-ignore
-      else result.textContent = `✗ Doesn't scan yet. ${advice(o)}`;
+      else
+        result.textContent = `✗ Doesn't scan yet. ${QR.budgetLimited ? budgetMessage() : advice(o)}`;
       result.style.color = c ? (c.ok ? "var(--ok, #1d8a4a)" : "var(--warn, #b3261e)") : "";
     },
     box,
@@ -1002,6 +1014,9 @@ export const RECIPES = {
     build(k, o) {
       const { code, error } = codeFor(o);
       const { splats, half, depth, perModule } = buildCode(code, o, k.count * 0.95);
+      // Even the coarsened layout can exceed the requested budget. If it
+      // fails to scan, suggest more detail before changing its colors.
+      QR.budgetLimited = splats.length > k.count;
       QR.code = code;
       QR.error = error;
       QR.options = { ...o };

@@ -30,6 +30,32 @@ export function extOf(name) {
   return m ? m[1] : "";
 }
 
+// Keep parser and engine details out of the file-opening message. The name
+// is added here once, whether the failure came from reading or decoding.
+export function fileOpenError(file, err) {
+  const ext = extOf(file.name);
+  const detail = typeof err === "string" ? err : err?.message || "";
+  let why;
+  if (["NotReadableError", "NotFoundError", "SecurityError"].includes(err?.name))
+    why = "The file could not be read. Choose it again, and check that it is still available.";
+  else if (ext === "json" || file.type === "application/json")
+    why =
+      err instanceof SyntaxError
+        ? "The scene file is not valid JSON."
+        : detail || "The file does not contain a supported scene.";
+  else if (ext === "ksplat")
+    why = "KSPLAT files are not supported yet. Convert them to PLY or SOG first.";
+  else if (
+    Object.values(UNSUPPORTED).includes(detail) ||
+    /^SPZ version \d+ is not supported/.test(detail)
+  )
+    why = detail;
+  else if (ext === "ply" && /header/i.test(detail)) why = "The PLY header is missing or invalid.";
+  else if (file.size === 0 || /empty/i.test(detail)) why = "The file is empty.";
+  else why = `The ${ext.toUpperCase()} data is incomplete, damaged, or not supported.`;
+  return `Could not open “${file.name}”. ${why}`;
+}
+
 // Fetches a URL, reporting progress (0..1) as it streams.
 export async function fetchBytes(url, onProgress) {
   const res = await fetch(url);

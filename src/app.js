@@ -25,7 +25,14 @@ import { SOUND_CREDITS } from "./sound-credits.js";
 import { normalizeGenerator, PROFILES } from "./generators.js";
 import { decodeSceneHash, parseHash } from "./codec.js";
 import { TOYS, findToy, holdsStill } from "./toys.js";
-import { extOf, readPlyHeader, decimatePly, resourceFromProps, LIMITS } from "./loaders.js";
+import {
+  extOf,
+  fileOpenError,
+  readPlyHeader,
+  decimatePly,
+  resourceFromProps,
+  LIMITS,
+} from "./loaders.js";
 import {
   downloadBlob,
   timestampName,
@@ -1482,12 +1489,12 @@ class App {
     const ext = extOf(file.name);
     if (ext === "json" || file.type === "application/json") return this.importJSONFile(file);
     if (ext === "ksplat") {
-      this.ui.toast("KSPLAT files are not supported yet. Convert them to PLY or SOG first.", 6000);
+      this.ui.toast(fileOpenError(file), 6000);
       return;
     }
     if (!["ply", "sog", "splat", "spz"].includes(ext)) {
       this.ui.toast(
-        `Splashery cannot read .${ext || "?"} files. It loads PLY, SOG, SPLAT, SPZ and JSON scenes.`,
+        `Could not open “${file.name}”. This file type is not supported. Choose a PLY, SOG, SPLAT, SPZ, or JSON scene file.`,
         6000,
       );
       return;
@@ -1496,7 +1503,12 @@ class App {
     let count = 0;
     let header = null;
     if (ext === "ply") {
-      header = readPlyHeader(new Uint8Array(await file.slice(0, 65536).arrayBuffer()));
+      try {
+        header = readPlyHeader(new Uint8Array(await file.slice(0, 65536).arrayBuffer()));
+      } catch (err) {
+        this.ui.toast(fileOpenError(file, err), 6000);
+        return;
+      }
       count = header?.count || 0;
     } else if (ext === "splat") {
       count = Math.floor(file.size / 32);
@@ -1536,7 +1548,7 @@ class App {
       await this.loadUserFile(pending.file, { resource });
       this.ui.toast(`Loaded a lighter copy with ${formatCount(props.count)} splats.`);
     } catch (err) {
-      this.ui.toast(err.message, 6000);
+      this.ui.toast(fileOpenError(pending.file, err), 6000);
     } finally {
       this.ui.progress.hide();
     }
@@ -1545,21 +1557,21 @@ class App {
   async loadUserFile(file, { resource = null } = {}) {
     const player = this.player;
     const ext = extOf(file.name);
-    const bytes = resource ? null : new Uint8Array(await file.arrayBuffer());
-    this.file = { name: file.name, size: file.size, bytes, resource };
-    const pending =
-      this.pendingFileScene && this.pendingFileScene.toy.file.name === file.name
-        ? this.pendingFileScene
-        : null;
-    this.pendingFileScene = null;
-    const scene = pending || player.scene;
-    scene.toy = {
-      kind: "file",
-      file: { name: file.name, bytes: file.size },
-      flip: pending ? pending.toy.flip : ext === "ply" || ext === "splat",
-    };
-    if (!pending) scene.paint.stamps = [];
     try {
+      const bytes = resource ? null : new Uint8Array(await file.arrayBuffer());
+      this.file = { name: file.name, size: file.size, bytes, resource };
+      const pending =
+        this.pendingFileScene && this.pendingFileScene.toy.file.name === file.name
+          ? this.pendingFileScene
+          : null;
+      this.pendingFileScene = null;
+      const scene = pending || player.scene;
+      scene.toy = {
+        kind: "file",
+        file: { name: file.name, bytes: file.size },
+        flip: pending ? pending.toy.flip : ext === "ply" || ext === "splat",
+      };
+      if (!pending) scene.paint.stamps = [];
       if (pending) await this.applyScene(scene, { file: this.file });
       else {
         await this.loadToy(scene.toy, { file: this.file });
@@ -1568,7 +1580,7 @@ class App {
       }
       this.ui.toast(`${file.name} loaded. It stays in your browser.`);
     } catch (err) {
-      this.ui.toast(err.message, 6000);
+      this.ui.toast(fileOpenError(file, err), 6000);
     }
   }
 
@@ -1589,7 +1601,7 @@ class App {
       await this.applyScene(scene, { file: fileMatch ? this.file : null });
       this.ui.toast(`Loaded ${file.name}.`);
     } catch (err) {
-      this.ui.toast(`Could not load that file: ${err.message}`, 6000);
+      this.ui.toast(fileOpenError(file, err), 6000);
     }
   }
 
