@@ -142,7 +142,7 @@ export function grayPixels(rgba) {
 // Validate every source color within one 8-bit step; unrelated colors and
 // transparency retain their full raster. Repeated colors share work.
 export function rampPixels(rgba, pack = true) {
-  if (!rgba || rgba.byteOffset % 4 || rgba.length % 4) return null;
+  if (!rgba?.length || rgba.byteOffset % 4 || rgba.length % 4) return null;
   const words = new Uint32Array(rgba.buffer, rgba.byteOffset, rgba.length / 4);
   let lo = 0,
     hi = 0,
@@ -173,6 +173,7 @@ export function rampPixels(rgba, pack = true) {
     const word = words[i];
     let code = codes.get(word);
     if (code === undefined) {
+      if (!norm) return null;
       const at = i * 4;
       code = Math.max(
         0,

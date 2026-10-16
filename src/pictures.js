@@ -735,9 +735,9 @@ export class Pictures {
     }
   }
 
-  // Opaque grayscale pages retain every source value in one channel. Check
-  // the full raster before compacting; a reduced backing can miss a tiny
-  // colored mark. Colored and transparent inputs keep their original pixels.
+  // Check the full raster before compacting; a reduced backing can miss a
+  // tiny colored mark. Grayscale is exact; a color ramp must reproduce every
+  // source channel within one 8-bit step. Other pixels keep their full raster.
   compactSurface(data, candidate) {
     const face = data.surface;
     if (!face || !candidate) return;
