@@ -254,8 +254,8 @@ the private page.
 - Keep trigger prompts short: every create or update echoes the whole prompt back into the
   Operator's context.
 - Run `tools/op-merge.mjs` with its tests, in the Bash tool's background mode with a long timeout
-  (October 15, 2026): `--no-tests` is refused by the session's permission check as a CI bypass, and a
-  foreground call that times out moves to the background and is stopped at 30 minutes, before the
+  (October 15, 2026): `--no-tests` is refused by the session's permission check as a CI bypass, and
+  a foreground call that times out moves to the background and is stopped at 30 minutes, before the
   specs report.
 - `git stash -u` in a merge worktree also stashes the `node_modules` link; relink it before the next
   op-merge (`site-build.mjs` imports prettier).
