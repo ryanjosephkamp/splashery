@@ -2,7 +2,9 @@
 // also cancels cooperative work. A late resolution or rejection cannot replace the visible result.
 export function runWithDeadline(work, { signal, timeoutMs, message }) {
   const controller = new AbortController();
-  const expiresAt = performance.now() + timeoutMs;
+  // null preserves an uncapped desktop stage while retaining caller cancellation and
+  // rejection handling. Do not pass Infinity to setTimeout: browsers clamp it to 1 ms.
+  const expiresAt = timeoutMs == null ? Infinity : performance.now() + timeoutMs;
   return new Promise((resolve, reject) => {
     let settled = false;
     const finish = (value, error = false) => {
@@ -20,7 +22,7 @@ export function runWithDeadline(work, { signal, timeoutMs, message }) {
       finish(new Error(message), true);
       controller.abort();
     };
-    const timer = setTimeout(expire, timeoutMs);
+    const timer = timeoutMs == null ? null : setTimeout(expire, timeoutMs);
     signal?.addEventListener("abort", cancel, { once: true });
     if (signal?.aborted) cancel();
     else

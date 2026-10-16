@@ -5,6 +5,29 @@ import { fitSide, sharpness } from "./frames.js";
 const median = (a) => a.slice().sort((x, y) => x - y)[Math.floor(a.length / 2)] || 0;
 const mean = (a) => a.reduce((s, v) => s + v, 0) / Math.max(1, a.length);
 
+// A seek can finish before its decoded picture reaches the canvas. Wait through one paint on
+// every browser, without depending on VideoFrame or requestVideoFrameCallback. Cancellation
+// also releases the wait in a hidden tab, where animation callbacks may stop altogether.
+function waitForPaint(signal) {
+  return new Promise((resolve, reject) => {
+    const abort = () => {
+      cancelAnimationFrame(frame);
+      signal.removeEventListener("abort", abort);
+      reject(new DOMException("Stopped", "AbortError"));
+    };
+    let frame = requestAnimationFrame(() => {
+      if (signal.aborted) return;
+      // Animation callbacks precede painting. The next callback observes the completed paint.
+      frame = requestAnimationFrame(() => {
+        signal.removeEventListener("abort", abort);
+        resolve();
+      });
+    });
+    signal.addEventListener("abort", abort, { once: true });
+    if (signal.aborted) abort();
+  });
+}
+
 function frameStats({ gray, width, height }) {
   const brightness = mean(gray);
   const contrast = Math.sqrt(mean(Array.from(gray, (v) => (v - brightness) ** 2)));
@@ -212,13 +235,14 @@ export async function checkVideo(file, { start = 0, length = 10, signal } = {}) 
     const delta = Math.min(0.25, span * 0.025);
     for (const [group, fraction] of fractions.entries()) {
       for (const offset of [-delta, 0, delta]) {
-        // This quick survey retains the seeked-frame sampling its feedback thresholds were
-        // calibrated on. Exact presentation timestamps are required by training extraction;
-        // waiting for compositor callbacks here can exhaust the survey's 4.5-second budget.
+        // Keep the calibrated seek times, then give the decoded picture a paint before
+        // reading it. This works without the newer frame APIs and stays inside the survey's
+        // existing 4.5-second budget; training extraction separately records source times.
         await seek(opened.video, from + span * fraction + offset, {
           signal: ctrl.signal,
           timeoutMs: 1000,
         });
+        await waitForPaint(ctrl.signal);
         g.drawImage(opened.video, 0, 0, width, height);
         const rgba = g.getImageData(0, 0, width, height).data;
         const gray = Float32Array.from(

@@ -57,19 +57,25 @@ export async function openVideo(file, { signal, timeoutMs = 20000 } = {}) {
 
 export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
   return new Promise((resolve, reject) => {
+    const sameTime = video.currentTime === t;
     let done = false;
     const finish = (error) => {
       if (done) return;
       done = true;
       clearTimeout(timer);
       video.removeEventListener("seeked", ready);
-      video.removeEventListener("loadeddata", ready);
+      video.removeEventListener("loadeddata", loaded);
       video.removeEventListener("error", failed);
       signal?.removeEventListener("abort", abort);
       error ? reject(error) : resolve();
     };
     const ready = () => {
       if (!video.seeking && video.readyState >= 2) finish();
+    };
+    // Some browsers defer setting seeking until a queued task. Their old readyState and
+    // initial loadeddata cannot complete a changed seek; wait for its seeked event.
+    const loaded = () => {
+      if (sameTime) ready();
     };
     const abort = () => finish(new DOMException("Stopped", "AbortError"));
     const failed = () => {
@@ -84,7 +90,7 @@ export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
       timeoutMs,
     );
     video.addEventListener("seeked", ready);
-    video.addEventListener("loadeddata", ready);
+    video.addEventListener("loadeddata", loaded);
     video.addEventListener("error", failed);
     signal?.addEventListener("abort", abort, { once: true });
     try {
@@ -95,7 +101,7 @@ export function seek(video, t, { signal, timeoutMs = 4000 } = {}) {
     }
     if (signal?.aborted) abort();
     else if (video.error) failed();
-    else ready();
+    else if (sameTime) ready();
   });
 }
 

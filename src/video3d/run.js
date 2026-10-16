@@ -119,7 +119,10 @@ export async function videoTo3D(file, opts = {}) {
   const gentle = tier === "phone";
   // opts.settings overrides the tier's (tools/v3d-sample.mjs trains the samples with it).
   const set = { ...tierSettings(tier), ...(opts.settings || {}) };
-  const timeLimitMinutes = set.maxMinutes ?? 15;
+  // Desktop settings retain their uncapped training and stage behavior. Only Phone-safe
+  // opts into wall-time limits; iteration and splat budgets still apply to every tier.
+  const timeLimitMinutes = gentle ? (set.maxMinutes ?? 8) : null;
+  const stageTimeout = (ms) => (gentle ? ms : null);
   const progress = (e) => opts.onProgress?.(e.stage === "train" ? { ...e, timeLimitMinutes } : e);
   const timings = {};
   const t0 = performance.now();
@@ -211,7 +214,7 @@ export async function videoTo3D(file, opts = {}) {
   try {
     await runWithDeadline(() => s.load(files), {
       signal: opts.signal,
-      timeoutMs: 60000,
+      timeoutMs: stageTimeout(60000),
       message:
         "This device could not decode the training pictures in time. Try a shorter MP4 (H.264) clip.",
     });
@@ -249,7 +252,7 @@ export async function videoTo3D(file, opts = {}) {
       },
       {
         signal: opts.signal,
-        timeoutMs: (gentle ? 3 : 6) * 60000,
+        timeoutMs: stageTimeout(3 * 60000),
         message:
           "This device could not solve the camera path in time. Try a shorter, steadier stretch, or the Phone-safe setting.",
       },
@@ -275,7 +278,7 @@ export async function videoTo3D(file, opts = {}) {
         }),
       {
         signal: opts.signal,
-        timeoutMs: 90000,
+        timeoutMs: stageTimeout(90000),
         message:
           "The graphics card could not prepare training in time. Try the Phone-safe setting, or a shorter stretch.",
       },
@@ -321,7 +324,9 @@ export async function videoTo3D(file, opts = {}) {
           );
           end();
         }
-        if (e.kind === "train-complete" || e.kind === "device-lost") end();
+        // A finishing session emits completion before its finish() promise settles. The
+        // finish deadline must still validate that promise, including a late completion.
+        if ((e.kind === "train-complete" && !halt) || e.kind === "device-lost") end();
       });
       // Stop keeps what has been trained so far: training finishes early and the splats export.
       const abortTraining = () => {
@@ -329,7 +334,7 @@ export async function videoTo3D(file, opts = {}) {
         halt = true;
         progress({ stage: "train", done: s.trainer?.iter ?? 0, total: set.iters, finishing: true });
         runWithDeadline(() => s.finish(), {
-          timeoutMs: 60000,
+          timeoutMs: stageTimeout(60000),
           message:
             "The graphics card stopped answering while finishing. Try a shorter stretch, or the Phone-safe setting.",
         }).then(end, (error) => {
@@ -366,11 +371,12 @@ export async function videoTo3D(file, opts = {}) {
           }
         }, 1000);
       }
-      limit = setTimeout(() => {
-        if (halt || over) return;
-        timedOut = true;
-        abortTraining();
-      }, timeLimitMinutes * 60000);
+      if (gentle)
+        limit = setTimeout(() => {
+          if (halt || over) return;
+          timedOut = true;
+          abortTraining();
+        }, timeLimitMinutes * 60000);
       globalThis.document?.addEventListener?.("visibilitychange", onVisible);
       s.start();
     });
@@ -403,7 +409,7 @@ export async function videoTo3D(file, opts = {}) {
         "The graphics card could not finish this scene. Try the Phone-safe setting, or a shorter stretch.",
       );
     const blob = await runWithDeadline(() => s.exportPlyBlob(), {
-      timeoutMs: 60000,
+      timeoutMs: stageTimeout(60000),
       message:
         "The graphics card stopped answering while saving the scene. Try the Phone-safe setting, or a shorter stretch.",
     });
