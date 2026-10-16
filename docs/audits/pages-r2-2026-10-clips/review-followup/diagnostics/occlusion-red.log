@@ -1,0 +1,78 @@
+
+Running 2 tests using 1 worker
+
+(node:357196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:357196) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Cover occlusion: your-book webgl2 {"mean":0.8038942607403871,"noise":0,"count":175917,"angle":0.25627100840925937}
+  ✘  1 [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › your-book: the turning cover occludes its pages (webgl2) (10.9s)
+(node:357472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:357472) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+Cover occlusion: photo-album webgl2 {"mean":3.445645261167177,"noise":0,"count":159336,"angle":0.25627100840925937}
+  ✘  2 [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › photo-album: the turning cover occludes its pages (webgl2) (15.5s)
+
+
+  1) [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › your-book: the turning cover occludes its pages (webgl2)
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 0.5
+    Received:   0.8038942607403871
+
+      146 |       expect(result.angle).toBeLessThan(0.5);
+      147 |       expect(result.count).toBeGreaterThan(1000);
+    > 148 |       expect(result.mean - result.noise).toBeLessThan(0.5);
+          |                                          ^
+      149 |     });
+      150 |
+        at /workspace/splashery/tests/pages-r2-occlusion.spec.mjs:148:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-r2-occlusion-your-bo-5ff3e--occludes-its-pages-webgl2--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/pages-r2-occlusion-your-bo-5ff3e--occludes-its-pages-webgl2--chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/pages-r2-occlusion-your-bo-5ff3e--occludes-its-pages-webgl2--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/pages-r2-occlusion-your-bo-5ff3e--occludes-its-pages-webgl2--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › photo-album: the turning cover occludes its pages (webgl2)
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 0.5
+    Received:   3.445645261167177
+
+      146 |       expect(result.angle).toBeLessThan(0.5);
+      147 |       expect(result.count).toBeGreaterThan(1000);
+    > 148 |       expect(result.mean - result.noise).toBeLessThan(0.5);
+          |                                          ^
+      149 |     });
+      150 |
+        at /workspace/splashery/tests/pages-r2-occlusion.spec.mjs:148:42
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-r2-occlusion-photo-a-bab45--occludes-its-pages-webgl2--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/pages-r2-occlusion-photo-a-bab45--occludes-its-pages-webgl2--chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/pages-r2-occlusion-photo-a-bab45--occludes-its-pages-webgl2--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/pages-r2-occlusion-photo-a-bab45--occludes-its-pages-webgl2--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › your-book: the turning cover occludes its pages (webgl2)
+    [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › photo-album: the turning cover occludes its pages (webgl2)

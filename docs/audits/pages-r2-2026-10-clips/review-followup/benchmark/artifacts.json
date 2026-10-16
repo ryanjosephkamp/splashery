@@ -1,0 +1,722 @@
+{
+  "phone-your-book-sample-1-main": {
+    "source": {
+      "file": "crops/phone-your-book-sample-1-main-source.png",
+      "sha256": "2d404044da7f79d8d8fb4a4c975042b1f72c5a58f95976ca22d25d27e2b5b812"
+    },
+    "render": {
+      "file": "crops/phone-your-book-sample-1-main-render.png",
+      "sha256": "5f963452c28966e330668ee6214b6ceca9e25798c723eb3de13b0b3f09018c20"
+    }
+  },
+  "phone-your-book-sample-2-main": {
+    "source": {
+      "file": "crops/phone-your-book-sample-2-main-source.png",
+      "sha256": "2d404044da7f79d8d8fb4a4c975042b1f72c5a58f95976ca22d25d27e2b5b812"
+    },
+    "render": {
+      "file": "crops/phone-your-book-sample-2-main-render.png",
+      "sha256": "5f963452c28966e330668ee6214b6ceca9e25798c723eb3de13b0b3f09018c20"
+    }
+  },
+  "phone-your-book-sample-3-main": {
+    "source": {
+      "file": "crops/phone-your-book-sample-3-main-source.png",
+      "sha256": "2d404044da7f79d8d8fb4a4c975042b1f72c5a58f95976ca22d25d27e2b5b812"
+    },
+    "render": {
+      "file": "crops/phone-your-book-sample-3-main-render.png",
+      "sha256": "5f963452c28966e330668ee6214b6ceca9e25798c723eb3de13b0b3f09018c20"
+    }
+  },
+  "phone-photo-album-sample-1-main": {
+    "source": {
+      "file": "crops/phone-photo-album-sample-1-main-source.png",
+      "sha256": "b13fbafa86780636f1847e744fd617efe658861fcc88765e7e9ec22eee916c7d"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-sample-1-main-render.png",
+      "sha256": "60fa00451c931172acc5c14dea684b34704137fb429a2a2f5e84e400afc1be2e"
+    }
+  },
+  "phone-photo-album-sample-2-main": {
+    "source": {
+      "file": "crops/phone-photo-album-sample-2-main-source.png",
+      "sha256": "b13fbafa86780636f1847e744fd617efe658861fcc88765e7e9ec22eee916c7d"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-sample-2-main-render.png",
+      "sha256": "60fa00451c931172acc5c14dea684b34704137fb429a2a2f5e84e400afc1be2e"
+    }
+  },
+  "phone-photo-album-sample-3-main": {
+    "source": {
+      "file": "crops/phone-photo-album-sample-3-main-source.png",
+      "sha256": "b13fbafa86780636f1847e744fd617efe658861fcc88765e7e9ec22eee916c7d"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-sample-3-main-render.png",
+      "sha256": "60fa00451c931172acc5c14dea684b34704137fb429a2a2f5e84e400afc1be2e"
+    }
+  },
+  "phone-picture-lab-text-1-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-text-1-main-source.png",
+      "sha256": "883ca29a79dcb7c52699aad302057508f52cacf34dd3071002eb0c61edca824a"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-text-1-main-render.png",
+      "sha256": "d827604c4e94a2211126fb8f071b57559f0a869836b9d9d2fea068894bfcda34"
+    }
+  },
+  "phone-picture-lab-text-2-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-text-2-main-source.png",
+      "sha256": "883ca29a79dcb7c52699aad302057508f52cacf34dd3071002eb0c61edca824a"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-text-2-main-render.png",
+      "sha256": "d827604c4e94a2211126fb8f071b57559f0a869836b9d9d2fea068894bfcda34"
+    }
+  },
+  "phone-picture-lab-text-3-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-text-3-main-source.png",
+      "sha256": "883ca29a79dcb7c52699aad302057508f52cacf34dd3071002eb0c61edca824a"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-text-3-main-render.png",
+      "sha256": "d827604c4e94a2211126fb8f071b57559f0a869836b9d9d2fea068894bfcda34"
+    }
+  },
+  "phone-picture-lab-sample-1-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-sample-1-main-source.png",
+      "sha256": "94e3e4f41006d9bf2dc38b45113f65f11c4b3332e001c8c5a5844bdc2251ce3b"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-sample-1-main-render.png",
+      "sha256": "e51df7778b5424843cf8e8cc44fb29dd4c8474c7fbcbf7888e725730c4e7307e"
+    }
+  },
+  "phone-picture-lab-sample-2-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-sample-2-main-source.png",
+      "sha256": "94e3e4f41006d9bf2dc38b45113f65f11c4b3332e001c8c5a5844bdc2251ce3b"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-sample-2-main-render.png",
+      "sha256": "e51df7778b5424843cf8e8cc44fb29dd4c8474c7fbcbf7888e725730c4e7307e"
+    }
+  },
+  "phone-picture-lab-sample-3-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-sample-3-main-source.png",
+      "sha256": "979be5387a20d3a37fed0dcc413e5401391ff86d027df3410fae46ecd20cf3d3"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-sample-3-main-render.png",
+      "sha256": "e51df7778b5424843cf8e8cc44fb29dd4c8474c7fbcbf7888e725730c4e7307e"
+    }
+  },
+  "phone-picture-lab-photo-1-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-photo-1-main-source.png",
+      "sha256": "bbe0ce2682609773985570a248fcfa61ce15da15fdb7c7cb70a838520c6e5c5d"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-photo-1-main-render.png",
+      "sha256": "8a0698186e7612f47b634dbd1b17e484cb2a5ea0f48e1565e3d4edc063bc0f33"
+    }
+  },
+  "phone-picture-lab-photo-2-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-photo-2-main-source.png",
+      "sha256": "bbe0ce2682609773985570a248fcfa61ce15da15fdb7c7cb70a838520c6e5c5d"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-photo-2-main-render.png",
+      "sha256": "8a0698186e7612f47b634dbd1b17e484cb2a5ea0f48e1565e3d4edc063bc0f33"
+    }
+  },
+  "phone-picture-lab-photo-3-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-photo-3-main-source.png",
+      "sha256": "bbe0ce2682609773985570a248fcfa61ce15da15fdb7c7cb70a838520c6e5c5d"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-photo-3-main-render.png",
+      "sha256": "8a0698186e7612f47b634dbd1b17e484cb2a5ea0f48e1565e3d4edc063bc0f33"
+    }
+  },
+  "phone-picture-lab-chart-1-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-chart-1-main-source.png",
+      "sha256": "7a7d8ed9d607c0e9b496313e6c82932841554b4154944fb74d2d8709689ac075"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-chart-1-main-render.png",
+      "sha256": "dec120dcc044d7eed4b9c48fe8bbefb4fcb1409982085abf3c13124a9d9860a3"
+    }
+  },
+  "phone-picture-lab-chart-2-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-chart-2-main-source.png",
+      "sha256": "7a7d8ed9d607c0e9b496313e6c82932841554b4154944fb74d2d8709689ac075"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-chart-2-main-render.png",
+      "sha256": "dec120dcc044d7eed4b9c48fe8bbefb4fcb1409982085abf3c13124a9d9860a3"
+    }
+  },
+  "phone-picture-lab-chart-3-main": {
+    "source": {
+      "file": "crops/phone-picture-lab-chart-3-main-source.png",
+      "sha256": "7a7d8ed9d607c0e9b496313e6c82932841554b4154944fb74d2d8709689ac075"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-chart-3-main-render.png",
+      "sha256": "dec120dcc044d7eed4b9c48fe8bbefb4fcb1409982085abf3c13124a9d9860a3"
+    }
+  },
+  "phone-your-book-text-1-main": {
+    "source": {
+      "file": "crops/phone-your-book-text-1-main-source.png",
+      "sha256": "95c4ab135fc05ac0dc1ff751bcc68719e25715a682ef17efc43aeda2986d69d7"
+    },
+    "render": {
+      "file": "crops/phone-your-book-text-1-main-render.png",
+      "sha256": "a25c29c11d1fd0934e598f32b6ea514798b7f1f64cdd3aca286bab094ad575ed"
+    }
+  },
+  "phone-your-book-text-2-main": {
+    "source": {
+      "file": "crops/phone-your-book-text-2-main-source.png",
+      "sha256": "95c4ab135fc05ac0dc1ff751bcc68719e25715a682ef17efc43aeda2986d69d7"
+    },
+    "render": {
+      "file": "crops/phone-your-book-text-2-main-render.png",
+      "sha256": "a25c29c11d1fd0934e598f32b6ea514798b7f1f64cdd3aca286bab094ad575ed"
+    }
+  },
+  "phone-your-book-text-3-main": {
+    "source": {
+      "file": "crops/phone-your-book-text-3-main-source.png",
+      "sha256": "95c4ab135fc05ac0dc1ff751bcc68719e25715a682ef17efc43aeda2986d69d7"
+    },
+    "render": {
+      "file": "crops/phone-your-book-text-3-main-render.png",
+      "sha256": "a25c29c11d1fd0934e598f32b6ea514798b7f1f64cdd3aca286bab094ad575ed"
+    }
+  },
+  "phone-your-book-photo-1-main": {
+    "source": {
+      "file": "crops/phone-your-book-photo-1-main-source.png",
+      "sha256": "a423bbc0c96c6cf69f5276d042d3f1a301ebefc80ce66149247cd859e66ec1e6"
+    },
+    "render": {
+      "file": "crops/phone-your-book-photo-1-main-render.png",
+      "sha256": "0f3c15214a5a87186ced7c8cecd6104c57a65c0447066a10d0e8c97fdd0b8408"
+    }
+  },
+  "phone-your-book-photo-2-main": {
+    "source": {
+      "file": "crops/phone-your-book-photo-2-main-source.png",
+      "sha256": "a423bbc0c96c6cf69f5276d042d3f1a301ebefc80ce66149247cd859e66ec1e6"
+    },
+    "render": {
+      "file": "crops/phone-your-book-photo-2-main-render.png",
+      "sha256": "0f3c15214a5a87186ced7c8cecd6104c57a65c0447066a10d0e8c97fdd0b8408"
+    }
+  },
+  "phone-your-book-photo-3-main": {
+    "source": {
+      "file": "crops/phone-your-book-photo-3-main-source.png",
+      "sha256": "a423bbc0c96c6cf69f5276d042d3f1a301ebefc80ce66149247cd859e66ec1e6"
+    },
+    "render": {
+      "file": "crops/phone-your-book-photo-3-main-render.png",
+      "sha256": "0f3c15214a5a87186ced7c8cecd6104c57a65c0447066a10d0e8c97fdd0b8408"
+    }
+  },
+  "phone-your-book-chart-1-main": {
+    "source": {
+      "file": "crops/phone-your-book-chart-1-main-source.png",
+      "sha256": "9d8a5c6cc8bba84780cf5b537ce3dfad730120aec5da653e642f3069a948a215"
+    },
+    "render": {
+      "file": "crops/phone-your-book-chart-1-main-render.png",
+      "sha256": "1bbe28c3bb3764b8e60fbf24193aa7b1e9a6b5871a420a474e902cd7e6a616d7"
+    }
+  },
+  "phone-your-book-chart-2-main": {
+    "source": {
+      "file": "crops/phone-your-book-chart-2-main-source.png",
+      "sha256": "9d8a5c6cc8bba84780cf5b537ce3dfad730120aec5da653e642f3069a948a215"
+    },
+    "render": {
+      "file": "crops/phone-your-book-chart-2-main-render.png",
+      "sha256": "1bbe28c3bb3764b8e60fbf24193aa7b1e9a6b5871a420a474e902cd7e6a616d7"
+    }
+  },
+  "phone-your-book-chart-3-main": {
+    "source": {
+      "file": "crops/phone-your-book-chart-3-main-source.png",
+      "sha256": "9d8a5c6cc8bba84780cf5b537ce3dfad730120aec5da653e642f3069a948a215"
+    },
+    "render": {
+      "file": "crops/phone-your-book-chart-3-main-render.png",
+      "sha256": "1bbe28c3bb3764b8e60fbf24193aa7b1e9a6b5871a420a474e902cd7e6a616d7"
+    }
+  },
+  "phone-photo-album-text-1-main": {
+    "source": {
+      "file": "crops/phone-photo-album-text-1-main-source.png",
+      "sha256": "fceb7915388254abb2dfdef2aaabd4fa310ed2a5d8228bd9921772383772b059"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-text-1-main-render.png",
+      "sha256": "fbae305899893d4af0cdcdf689c8569086a58f30db1f55a5d404fb3d594e426a"
+    }
+  },
+  "phone-photo-album-text-2-main": {
+    "source": {
+      "file": "crops/phone-photo-album-text-2-main-source.png",
+      "sha256": "fceb7915388254abb2dfdef2aaabd4fa310ed2a5d8228bd9921772383772b059"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-text-2-main-render.png",
+      "sha256": "fbae305899893d4af0cdcdf689c8569086a58f30db1f55a5d404fb3d594e426a"
+    }
+  },
+  "phone-photo-album-text-3-main": {
+    "source": {
+      "file": "crops/phone-photo-album-text-3-main-source.png",
+      "sha256": "fceb7915388254abb2dfdef2aaabd4fa310ed2a5d8228bd9921772383772b059"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-text-3-main-render.png",
+      "sha256": "fbae305899893d4af0cdcdf689c8569086a58f30db1f55a5d404fb3d594e426a"
+    }
+  },
+  "phone-photo-album-photo-1-main": {
+    "source": {
+      "file": "crops/phone-photo-album-photo-1-main-source.png",
+      "sha256": "cf3e04bb91b87d763b311d2877821a2443ed89a6064a1df7bb2bb8f54958095e"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-photo-1-main-render.png",
+      "sha256": "88a38584299c5a29b24d2e05721177da051dd9197d1767c925aa4eff40034602"
+    }
+  },
+  "phone-photo-album-photo-2-main": {
+    "source": {
+      "file": "crops/phone-photo-album-photo-2-main-source.png",
+      "sha256": "cf3e04bb91b87d763b311d2877821a2443ed89a6064a1df7bb2bb8f54958095e"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-photo-2-main-render.png",
+      "sha256": "88a38584299c5a29b24d2e05721177da051dd9197d1767c925aa4eff40034602"
+    }
+  },
+  "phone-photo-album-photo-3-main": {
+    "source": {
+      "file": "crops/phone-photo-album-photo-3-main-source.png",
+      "sha256": "cf3e04bb91b87d763b311d2877821a2443ed89a6064a1df7bb2bb8f54958095e"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-photo-3-main-render.png",
+      "sha256": "88a38584299c5a29b24d2e05721177da051dd9197d1767c925aa4eff40034602"
+    }
+  },
+  "phone-photo-album-chart-1-main": {
+    "source": {
+      "file": "crops/phone-photo-album-chart-1-main-source.png",
+      "sha256": "7aef5637e2b41398c53fbbc1466e4adb7842d5719938139cd88c9c29e8b0f03b"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-chart-1-main-render.png",
+      "sha256": "076c3271b149ca9fdcece3e46ce0bb66d22ed5211d0f194735b9b2c83c805437"
+    }
+  },
+  "phone-photo-album-chart-2-main": {
+    "source": {
+      "file": "crops/phone-photo-album-chart-2-main-source.png",
+      "sha256": "7aef5637e2b41398c53fbbc1466e4adb7842d5719938139cd88c9c29e8b0f03b"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-chart-2-main-render.png",
+      "sha256": "076c3271b149ca9fdcece3e46ce0bb66d22ed5211d0f194735b9b2c83c805437"
+    }
+  },
+  "phone-photo-album-chart-3-main": {
+    "source": {
+      "file": "crops/phone-photo-album-chart-3-main-source.png",
+      "sha256": "7aef5637e2b41398c53fbbc1466e4adb7842d5719938139cd88c9c29e8b0f03b"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-chart-3-main-render.png",
+      "sha256": "076c3271b149ca9fdcece3e46ce0bb66d22ed5211d0f194735b9b2c83c805437"
+    }
+  },
+  "phone-your-book-sample-1-round2": {
+    "source": {
+      "file": "crops/phone-your-book-sample-1-round2-source.png",
+      "sha256": "160e95ea834f7c4527e92c8f7d83f644495cf1a6fb93a7ee6ea1b9caed67a9c4"
+    },
+    "render": {
+      "file": "crops/phone-your-book-sample-1-round2-render.png",
+      "sha256": "e2131abd8efbfbe24b201bec97336dbd19ae9fb8f4ee357fa558a473807a8c81"
+    }
+  },
+  "phone-your-book-sample-2-round2": {
+    "source": {
+      "file": "crops/phone-your-book-sample-2-round2-source.png",
+      "sha256": "160e95ea834f7c4527e92c8f7d83f644495cf1a6fb93a7ee6ea1b9caed67a9c4"
+    },
+    "render": {
+      "file": "crops/phone-your-book-sample-2-round2-render.png",
+      "sha256": "e2131abd8efbfbe24b201bec97336dbd19ae9fb8f4ee357fa558a473807a8c81"
+    }
+  },
+  "phone-your-book-sample-3-round2": {
+    "source": {
+      "file": "crops/phone-your-book-sample-3-round2-source.png",
+      "sha256": "160e95ea834f7c4527e92c8f7d83f644495cf1a6fb93a7ee6ea1b9caed67a9c4"
+    },
+    "render": {
+      "file": "crops/phone-your-book-sample-3-round2-render.png",
+      "sha256": "e2131abd8efbfbe24b201bec97336dbd19ae9fb8f4ee357fa558a473807a8c81"
+    }
+  },
+  "phone-photo-album-sample-1-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-sample-1-round2-source.png",
+      "sha256": "b3a1d57abbde4e50c5973d5790cdfad939a5ebf7a8ac960ae02dc8dd0bcdd52a"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-sample-1-round2-render.png",
+      "sha256": "4032f2f4b55f9ae75c83c1faf115a5b2a1b7a54ddf37fc77ad8d5a141fdc70e2"
+    }
+  },
+  "phone-photo-album-sample-2-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-sample-2-round2-source.png",
+      "sha256": "b3a1d57abbde4e50c5973d5790cdfad939a5ebf7a8ac960ae02dc8dd0bcdd52a"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-sample-2-round2-render.png",
+      "sha256": "4032f2f4b55f9ae75c83c1faf115a5b2a1b7a54ddf37fc77ad8d5a141fdc70e2"
+    }
+  },
+  "phone-photo-album-sample-3-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-sample-3-round2-source.png",
+      "sha256": "b3a1d57abbde4e50c5973d5790cdfad939a5ebf7a8ac960ae02dc8dd0bcdd52a"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-sample-3-round2-render.png",
+      "sha256": "4032f2f4b55f9ae75c83c1faf115a5b2a1b7a54ddf37fc77ad8d5a141fdc70e2"
+    }
+  },
+  "phone-picture-lab-text-1-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-text-1-round2-source.png",
+      "sha256": "85af635ac5e6c9bac21f5f67b1d0990b404230a48f16bc441a52c6926e289359"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-text-1-round2-render.png",
+      "sha256": "92c4871125d5ec5902daec4e50985daf70bf2374dace88516a0ba56659c8af8e"
+    }
+  },
+  "phone-picture-lab-text-2-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-text-2-round2-source.png",
+      "sha256": "85af635ac5e6c9bac21f5f67b1d0990b404230a48f16bc441a52c6926e289359"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-text-2-round2-render.png",
+      "sha256": "92c4871125d5ec5902daec4e50985daf70bf2374dace88516a0ba56659c8af8e"
+    }
+  },
+  "phone-picture-lab-text-3-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-text-3-round2-source.png",
+      "sha256": "85af635ac5e6c9bac21f5f67b1d0990b404230a48f16bc441a52c6926e289359"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-text-3-round2-render.png",
+      "sha256": "92c4871125d5ec5902daec4e50985daf70bf2374dace88516a0ba56659c8af8e"
+    }
+  },
+  "phone-picture-lab-sample-1-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-sample-1-round2-source.png",
+      "sha256": "c5eeac3f24df3900b7fe1dfc449129993f8c9d8ee1445df230db3a9e6a3da2e8"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-sample-1-round2-render.png",
+      "sha256": "3271d02ef15c9090a3663e0fa85c6d833f67de079eeb54a87fd989f05a5e07d0"
+    }
+  },
+  "phone-picture-lab-sample-2-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-sample-2-round2-source.png",
+      "sha256": "854fc5d33b6d0a9c5e6e78f1eb828f3bfc2be9f8dd84af9f3d40daa9beeb7020"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-sample-2-round2-render.png",
+      "sha256": "3271d02ef15c9090a3663e0fa85c6d833f67de079eeb54a87fd989f05a5e07d0"
+    }
+  },
+  "phone-picture-lab-sample-3-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-sample-3-round2-source.png",
+      "sha256": "854fc5d33b6d0a9c5e6e78f1eb828f3bfc2be9f8dd84af9f3d40daa9beeb7020"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-sample-3-round2-render.png",
+      "sha256": "3271d02ef15c9090a3663e0fa85c6d833f67de079eeb54a87fd989f05a5e07d0"
+    }
+  },
+  "phone-picture-lab-photo-1-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-photo-1-round2-source.png",
+      "sha256": "ceb53dd5d96fcc8e0d3870cfb633b2fcd613e2fb1a6ba8dadc02511992a233d9"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-photo-1-round2-render.png",
+      "sha256": "65607f47a74e58d5ea4d24caad336bccb6a7da1990b5a6f183e4fc768111e80f"
+    }
+  },
+  "phone-picture-lab-photo-2-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-photo-2-round2-source.png",
+      "sha256": "ceb53dd5d96fcc8e0d3870cfb633b2fcd613e2fb1a6ba8dadc02511992a233d9"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-photo-2-round2-render.png",
+      "sha256": "65607f47a74e58d5ea4d24caad336bccb6a7da1990b5a6f183e4fc768111e80f"
+    }
+  },
+  "phone-picture-lab-photo-3-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-photo-3-round2-source.png",
+      "sha256": "ceb53dd5d96fcc8e0d3870cfb633b2fcd613e2fb1a6ba8dadc02511992a233d9"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-photo-3-round2-render.png",
+      "sha256": "65607f47a74e58d5ea4d24caad336bccb6a7da1990b5a6f183e4fc768111e80f"
+    }
+  },
+  "phone-picture-lab-chart-1-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-chart-1-round2-source.png",
+      "sha256": "7d0ef39941b98b4ad9c7a408208b37ebbef46235eb3b8c8c574fe05ef61631ac"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-chart-1-round2-render.png",
+      "sha256": "fce7f9d6e73d449e26b502823af06dd467a060a1f3e986d15484bffd95d030d7"
+    }
+  },
+  "phone-picture-lab-chart-2-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-chart-2-round2-source.png",
+      "sha256": "7d0ef39941b98b4ad9c7a408208b37ebbef46235eb3b8c8c574fe05ef61631ac"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-chart-2-round2-render.png",
+      "sha256": "fce7f9d6e73d449e26b502823af06dd467a060a1f3e986d15484bffd95d030d7"
+    }
+  },
+  "phone-picture-lab-chart-3-round2": {
+    "source": {
+      "file": "crops/phone-picture-lab-chart-3-round2-source.png",
+      "sha256": "7d0ef39941b98b4ad9c7a408208b37ebbef46235eb3b8c8c574fe05ef61631ac"
+    },
+    "render": {
+      "file": "crops/phone-picture-lab-chart-3-round2-render.png",
+      "sha256": "fce7f9d6e73d449e26b502823af06dd467a060a1f3e986d15484bffd95d030d7"
+    }
+  },
+  "phone-your-book-text-1-round2": {
+    "source": {
+      "file": "crops/phone-your-book-text-1-round2-source.png",
+      "sha256": "53413e2b9c18e3a37f37a505fe5d979f847b9cbe5404e746e868d61f15a8e9ac"
+    },
+    "render": {
+      "file": "crops/phone-your-book-text-1-round2-render.png",
+      "sha256": "ba64cff7a5fc9e3a28e6b30d14578e7b633897059ab55069e80a962c5bb8b9be"
+    }
+  },
+  "phone-your-book-text-2-round2": {
+    "source": {
+      "file": "crops/phone-your-book-text-2-round2-source.png",
+      "sha256": "53413e2b9c18e3a37f37a505fe5d979f847b9cbe5404e746e868d61f15a8e9ac"
+    },
+    "render": {
+      "file": "crops/phone-your-book-text-2-round2-render.png",
+      "sha256": "ba64cff7a5fc9e3a28e6b30d14578e7b633897059ab55069e80a962c5bb8b9be"
+    }
+  },
+  "phone-your-book-text-3-round2": {
+    "source": {
+      "file": "crops/phone-your-book-text-3-round2-source.png",
+      "sha256": "53413e2b9c18e3a37f37a505fe5d979f847b9cbe5404e746e868d61f15a8e9ac"
+    },
+    "render": {
+      "file": "crops/phone-your-book-text-3-round2-render.png",
+      "sha256": "ba64cff7a5fc9e3a28e6b30d14578e7b633897059ab55069e80a962c5bb8b9be"
+    }
+  },
+  "phone-your-book-photo-1-round2": {
+    "source": {
+      "file": "crops/phone-your-book-photo-1-round2-source.png",
+      "sha256": "385e59be68572885e65fb3ec5d58381b012df18ea1bf89cf7628559fbd2a348e"
+    },
+    "render": {
+      "file": "crops/phone-your-book-photo-1-round2-render.png",
+      "sha256": "3b875642397b4342e414725e1fd1090661e8be4533d67622fb02dd1c6224bccc"
+    }
+  },
+  "phone-your-book-photo-2-round2": {
+    "source": {
+      "file": "crops/phone-your-book-photo-2-round2-source.png",
+      "sha256": "385e59be68572885e65fb3ec5d58381b012df18ea1bf89cf7628559fbd2a348e"
+    },
+    "render": {
+      "file": "crops/phone-your-book-photo-2-round2-render.png",
+      "sha256": "3b875642397b4342e414725e1fd1090661e8be4533d67622fb02dd1c6224bccc"
+    }
+  },
+  "phone-your-book-photo-3-round2": {
+    "source": {
+      "file": "crops/phone-your-book-photo-3-round2-source.png",
+      "sha256": "385e59be68572885e65fb3ec5d58381b012df18ea1bf89cf7628559fbd2a348e"
+    },
+    "render": {
+      "file": "crops/phone-your-book-photo-3-round2-render.png",
+      "sha256": "3b875642397b4342e414725e1fd1090661e8be4533d67622fb02dd1c6224bccc"
+    }
+  },
+  "phone-your-book-chart-1-round2": {
+    "source": {
+      "file": "crops/phone-your-book-chart-1-round2-source.png",
+      "sha256": "f550b1e6864394e411376df191094b6ac42bbe6df7f1bca13f180c79cf4c5165"
+    },
+    "render": {
+      "file": "crops/phone-your-book-chart-1-round2-render.png",
+      "sha256": "0134eff25cad942364bd68d96a6f617186386fa37eda6b4f27f42fd318627368"
+    }
+  },
+  "phone-your-book-chart-2-round2": {
+    "source": {
+      "file": "crops/phone-your-book-chart-2-round2-source.png",
+      "sha256": "f550b1e6864394e411376df191094b6ac42bbe6df7f1bca13f180c79cf4c5165"
+    },
+    "render": {
+      "file": "crops/phone-your-book-chart-2-round2-render.png",
+      "sha256": "0134eff25cad942364bd68d96a6f617186386fa37eda6b4f27f42fd318627368"
+    }
+  },
+  "phone-your-book-chart-3-round2": {
+    "source": {
+      "file": "crops/phone-your-book-chart-3-round2-source.png",
+      "sha256": "f550b1e6864394e411376df191094b6ac42bbe6df7f1bca13f180c79cf4c5165"
+    },
+    "render": {
+      "file": "crops/phone-your-book-chart-3-round2-render.png",
+      "sha256": "0134eff25cad942364bd68d96a6f617186386fa37eda6b4f27f42fd318627368"
+    }
+  },
+  "phone-photo-album-text-1-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-text-1-round2-source.png",
+      "sha256": "2a54b7aaecd842db53523913ebd5751c90a5cbbc3ca81026096d0eb064009a59"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-text-1-round2-render.png",
+      "sha256": "1c601fbee25dc4d291dbf45bd43618133f816662bd8409bfcb05d24173e3c24a"
+    }
+  },
+  "phone-photo-album-text-2-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-text-2-round2-source.png",
+      "sha256": "2a54b7aaecd842db53523913ebd5751c90a5cbbc3ca81026096d0eb064009a59"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-text-2-round2-render.png",
+      "sha256": "1c601fbee25dc4d291dbf45bd43618133f816662bd8409bfcb05d24173e3c24a"
+    }
+  },
+  "phone-photo-album-text-3-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-text-3-round2-source.png",
+      "sha256": "2a54b7aaecd842db53523913ebd5751c90a5cbbc3ca81026096d0eb064009a59"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-text-3-round2-render.png",
+      "sha256": "1c601fbee25dc4d291dbf45bd43618133f816662bd8409bfcb05d24173e3c24a"
+    }
+  },
+  "phone-photo-album-photo-1-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-photo-1-round2-source.png",
+      "sha256": "78c7b71de2eda627e19de4a6c33041cd311ac0958e43bdf640616f841917ad74"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-photo-1-round2-render.png",
+      "sha256": "d1beb7204381eed393924336699d2319f3ad0f41cf5b0a2fcc874880b33a631b"
+    }
+  },
+  "phone-photo-album-photo-2-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-photo-2-round2-source.png",
+      "sha256": "78c7b71de2eda627e19de4a6c33041cd311ac0958e43bdf640616f841917ad74"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-photo-2-round2-render.png",
+      "sha256": "d1beb7204381eed393924336699d2319f3ad0f41cf5b0a2fcc874880b33a631b"
+    }
+  },
+  "phone-photo-album-photo-3-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-photo-3-round2-source.png",
+      "sha256": "78c7b71de2eda627e19de4a6c33041cd311ac0958e43bdf640616f841917ad74"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-photo-3-round2-render.png",
+      "sha256": "d1beb7204381eed393924336699d2319f3ad0f41cf5b0a2fcc874880b33a631b"
+    }
+  },
+  "phone-photo-album-chart-1-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-chart-1-round2-source.png",
+      "sha256": "d4c83832694385d631da05578a03560dd31ed11493d2ce17e6869500e34a13ac"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-chart-1-round2-render.png",
+      "sha256": "6b4b8d38cba79b47575f3a7f722f8da74d9a8a21e32ab531ec5fde394f16e68f"
+    }
+  },
+  "phone-photo-album-chart-2-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-chart-2-round2-source.png",
+      "sha256": "d4c83832694385d631da05578a03560dd31ed11493d2ce17e6869500e34a13ac"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-chart-2-round2-render.png",
+      "sha256": "6b4b8d38cba79b47575f3a7f722f8da74d9a8a21e32ab531ec5fde394f16e68f"
+    }
+  },
+  "phone-photo-album-chart-3-round2": {
+    "source": {
+      "file": "crops/phone-photo-album-chart-3-round2-source.png",
+      "sha256": "d4c83832694385d631da05578a03560dd31ed11493d2ce17e6869500e34a13ac"
+    },
+    "render": {
+      "file": "crops/phone-photo-album-chart-3-round2-render.png",
+      "sha256": "6b4b8d38cba79b47575f3a7f722f8da74d9a8a21e32ab531ec5fde394f16e68f"
+    }
+  }
+}

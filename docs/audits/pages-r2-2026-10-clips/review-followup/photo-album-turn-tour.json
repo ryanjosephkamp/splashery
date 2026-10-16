@@ -1,0 +1,743 @@
+{
+  "sourceCommit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+  "runtimeSha256": "b0a1770a72504f46abe748c19ff18ec84389b67ca2a2812247dd5ef9a7ecaf22",
+  "stepFPS": 8,
+  "captureDrawsPerStep": 3,
+  "viewport": {
+    "width": 390,
+    "height": 844
+  },
+  "deviceScaleFactor": 2,
+  "profile": "low",
+  "backend": "webgl2",
+  "destinations": [1, 2, 5, 2, 0, "close"],
+  "observations": [
+    {
+      "frame": 0,
+      "page": 0,
+      "destination": 0,
+      "cover": 0
+    },
+    {
+      "frame": 1,
+      "page": 0,
+      "destination": 1,
+      "cover": 0
+    },
+    {
+      "frame": 2,
+      "page": 0,
+      "destination": 1,
+      "cover": 0
+    },
+    {
+      "frame": 3,
+      "page": 0,
+      "destination": 1,
+      "cover": 0
+    },
+    {
+      "frame": 4,
+      "page": 0,
+      "destination": 1,
+      "cover": 0
+    },
+    {
+      "frame": 5,
+      "page": 0,
+      "destination": 1,
+      "cover": 0.32879558158785704
+    },
+    {
+      "frame": 6,
+      "page": 0,
+      "destination": 1,
+      "cover": 0.7364903280187498
+    },
+    {
+      "frame": 7,
+      "page": 0,
+      "destination": 1,
+      "cover": 1.2015491507060416
+    },
+    {
+      "frame": 8,
+      "page": 0,
+      "destination": 1,
+      "cover": 1.6911107930351685
+    },
+    {
+      "frame": 9,
+      "page": 0,
+      "destination": 1,
+      "cover": 2.165131652896441
+    },
+    {
+      "frame": 10,
+      "page": 0,
+      "destination": 1,
+      "cover": 2.5814353029350787
+    },
+    {
+      "frame": 11,
+      "page": 0,
+      "destination": 1,
+      "cover": 2.901030961237701
+    },
+    {
+      "frame": 12,
+      "page": 0,
+      "destination": 1,
+      "cover": 3.093030250376553
+    },
+    {
+      "frame": 13,
+      "page": 0,
+      "destination": 1,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 14,
+      "page": 0,
+      "destination": 1,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 15,
+      "page": 0,
+      "destination": 1,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 16,
+      "page": 0,
+      "destination": 1,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 17,
+      "page": 0,
+      "destination": 1,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 18,
+      "page": 0,
+      "destination": 1,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 19,
+      "page": 0,
+      "destination": 1,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 20,
+      "page": 0,
+      "destination": 1,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 21,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 22,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 23,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 24,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 25,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 26,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 27,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 28,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 29,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 30,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 31,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 32,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 33,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 34,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 35,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 36,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 37,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 38,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 39,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 40,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 41,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 42,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 43,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 44,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 45,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 46,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 47,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 48,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 49,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 50,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 51,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 52,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 53,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 54,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 55,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 56,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 57,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 58,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 59,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 60,
+      "page": 5,
+      "destination": 5,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 61,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 62,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 63,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 64,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 65,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 66,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 67,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 68,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 69,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 70,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 71,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 72,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 73,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 74,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 75,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 76,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 77,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 78,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 79,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 80,
+      "page": 3,
+      "destination": 2,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 81,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 82,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 83,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 84,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 85,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 86,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 87,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 88,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 89,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 90,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 91,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 92,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 93,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 94,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 95,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 96,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 97,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 98,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 99,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 100,
+      "page": 0,
+      "destination": 0,
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 101,
+      "page": 0,
+      "destination": "close",
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 102,
+      "page": 0,
+      "destination": "close",
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 103,
+      "page": 0,
+      "destination": "close",
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 104,
+      "page": 0,
+      "destination": "close",
+      "cover": 3.141592653589793
+    },
+    {
+      "frame": 105,
+      "page": 0,
+      "destination": "close",
+      "cover": 2.8127970720019357
+    },
+    {
+      "frame": 106,
+      "page": 0,
+      "destination": "close",
+      "cover": 2.4051023255710433
+    },
+    {
+      "frame": 107,
+      "page": 0,
+      "destination": "close",
+      "cover": 1.9400435028837515
+    },
+    {
+      "frame": 108,
+      "page": 0,
+      "destination": "close",
+      "cover": 1.4504818605546246
+    },
+    {
+      "frame": 109,
+      "page": 0,
+      "destination": "close",
+      "cover": 0.9764610006933518
+    },
+    {
+      "frame": 110,
+      "page": 0,
+      "destination": "close",
+      "cover": 0.5601573506547145
+    },
+    {
+      "frame": 111,
+      "page": 0,
+      "destination": "close",
+      "cover": 0.24056169235209224
+    },
+    {
+      "frame": 112,
+      "page": 0,
+      "destination": "close",
+      "cover": 0.04856240321323993
+    },
+    {
+      "frame": 113,
+      "page": 0,
+      "destination": "close",
+      "cover": 0
+    },
+    {
+      "frame": 114,
+      "page": 0,
+      "destination": "close",
+      "cover": 0
+    },
+    {
+      "frame": 115,
+      "page": 0,
+      "destination": "close",
+      "cover": 0
+    },
+    {
+      "frame": 116,
+      "page": 0,
+      "destination": "close",
+      "cover": 0
+    },
+    {
+      "frame": 117,
+      "page": 0,
+      "destination": "close",
+      "cover": 0
+    },
+    {
+      "frame": 118,
+      "page": 0,
+      "destination": "close",
+      "cover": 0
+    },
+    {
+      "frame": 119,
+      "page": 0,
+      "destination": "close",
+      "cover": 0
+    },
+    {
+      "frame": 120,
+      "page": 0,
+      "destination": "close",
+      "cover": 0
+    }
+  ],
+  "errors": []
+}

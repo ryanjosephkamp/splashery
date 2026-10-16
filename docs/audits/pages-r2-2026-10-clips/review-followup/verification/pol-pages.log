@@ -1,0 +1,23 @@
+
+Running 11 tests using 1 worker
+
+(node:369329) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:369329) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/11] [chromium] › tests/pol-pages.spec.mjs:213:3 › the Storybook keeps main's book (no browser) › its views and timings are main's; Your book's are the new ones
+[2/11] [chromium] › tests/pol-pages.spec.mjs:230:3 › the Storybook keeps main's book (no browser) › its links keep their slack and their tint; its figures are asked for plainly
+[3/11] [chromium] › tests/pol-pages.spec.mjs:256:3 › Picture lab (no browser) › on a phone held upright it opens close on the page itself; otherwise on the whole lab
+[4/11] [chromium] › tests/pol-pages.spec.mjs:273:3 › Picture lab (no browser) › a page change slides the page off and the next one in, in about a quarter of a second
+[5/11] [chromium] › tests/pol-pages.spec.mjs:296:3 › Picture lab (no browser) › a photo's card takes the photo's shape, and the photo rises at depth 2
+[6/11] [chromium] › tests/pol-pages.spec.mjs:330:3 › Your book and the album (no browser) › one page at a time: the whole book stays in view while the cover or a page turns, then the view glides in
+[7/11] [chromium] › tests/pol-pages.spec.mjs:355:3 › Your book and the album (no browser) › a link is followed only for a tap right on it, never in the strip at the page's outer edge
+[8/11] [chromium] › tests/pol-pages.spec.mjs:389:3 › Your book and the album (no browser) › with Pop out on, a closed book's cover figure rises; a tap off it opens the book
+[9/11] [chromium] › tests/pol-pages.spec.mjs:419:3 › Your book and the album (no browser) › with Pop out on, a book's links show a moment, then its pages are drawn bare
+[10/11] [chromium] › tests/pol-pages.spec.mjs:435:3 › Your book and the album (no browser) › album captions read as words; a lifted photo opens at depth 2
+[11/11] [chromium] › tests/pol-pages.spec.mjs:466:3 › Pop out's drawn figures › Your book, the album and the lab ask for drawn figures; the Storybook doesn't
+  11 passed (4.0s)

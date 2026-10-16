@@ -1,0 +1,24 @@
+{
+  "candidate": {
+    "exitCode": 0,
+    "stats": {
+      "startTime": "2026-10-16T19:00:56.822Z",
+      "duration": 48006.284,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  },
+  "main": {
+    "exitCode": 0,
+    "stats": {
+      "startTime": "2026-10-16T19:01:45.986Z",
+      "duration": 50702.687,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    }
+  }
+}

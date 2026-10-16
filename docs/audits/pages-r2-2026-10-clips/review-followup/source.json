@@ -1,0 +1,34 @@
+{
+  "capturedAtUTC": "2026-10-16T17:43:16.462977+00:00",
+  "candidateCommit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+  "baselineCommit": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
+  "candidateRuntimeSha256": "b0a1770a72504f46abe748c19ff18ec84389b67ca2a2812247dd5ef9a7ecaf22",
+  "candidateRenderingFiles": {
+    "src/packs/pictures.js": "6cf9a86b8e25adf38507fd4721ad21fcbca0b3f20d7000d95877437c0e2920af",
+    "src/pictures.js": "5e360ee000b3a4688b8f0938b86eb7db829d2b1a258ab056b80fed3d6ce889c1",
+    "src/media.js": "c6a512de8c61dd1b1cc95fd8230cdf380cd8a0f24911f7528f44f92130322fed",
+    "src/picture-splats.js": "ed3324aa56789a26f68c25bfce45cded2b06834f757854cd72f43c2a2c85f33d",
+    "src/picture-surface.js": "b1b8a89b091a5e5809c5c0716031ff25bea862ce144d525276e0df82b03b72af",
+    "src/player.js": "42c31134a19371a0ece8d4c4bbfdce3fe21c3dfcd953f5bae59d5121a384bb80",
+    "src/stage.js": "0b2271b27a7c25676736feda59cc1e6522f81736991eeaa030464fc895ae1a34"
+  },
+  "baselineRenderingFiles": {
+    "src/packs/pictures.js": "866410bb49d29ea73547e1285d5029f8f11236d5212d1260d35c917f285d0175",
+    "src/pictures.js": "fc98ca4cc827d26bef92d1ce1d554f04b8a868bfb6c47ec13483e2a6d1034500",
+    "src/media.js": "d04b4ab7295ff06edc3a0841a585c2ca1b082309ac15ff7aac334d5c2343d166",
+    "src/picture-splats.js": "a2fd895db8ef873704bbc48c7a24841ed20497cce5918d2ff6b22d5eb18c6831",
+    "src/picture-surface.js": null,
+    "src/player.js": "e6f4a45b36c7a8db694204d2ca9f084fe0a491287f8eeb04affd326638535431",
+    "src/stage.js": "9182ed245aff2195c52a865883dcc97ab61f4fbbf83105ae63f55ce39f08bf6c"
+  },
+  "identicalUIFiles": {
+    "src/app.js": "af8c670d8ce7f06db68c736a36c7cc2e602fd62da65077a3efecd0b151f7c761",
+    "src/ui.js": "9258bc2f8c5a994a32dc4ba6b1ab19a67dc5a8377a809ba4258565e2529b19ae",
+    "src/toys.js": "b678190ba5026e3716c70281029e1db3b497f84eeec01c914d8c663ec7e0ac1a",
+    "src/featured.js": "cb872fca8aa4adcc968cfb8847d57974c9e9f664f3bfad5e4c2b15b0d0dbc8bd",
+    "styles.css": "6734eb4745e990c9c361b08f06bcb24ccdb9bc9982401ee2228ff8d9f0ef7669"
+  },
+  "measurementToolSha256": "d324b958eef3e41b3413fdc7d9209c1bdc00c28a33789a5441c05e45bf9e6e68",
+  "cpuQuota": "400000 100000",
+  "memoryLimitBytes": 17179869184
+}

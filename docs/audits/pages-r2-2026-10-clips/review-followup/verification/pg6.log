@@ -1,0 +1,28 @@
+
+Running 16 tests using 1 worker
+
+(node:406568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:406568) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/16] [chromium] › tests/pg6.spec.mjs:208:3 › Pop out in Your book (no browser) › with Pop out on nothing rises by itself; taps raise two figures; a tap on one lays it back
+[2/16] [chromium] › tests/pg6.spec.mjs:254:3 › Pop out in Your book (no browser) › a tap off the figures turns the page, and every risen figure lays back first
+[3/16] [chromium] › tests/pg6.spec.mjs:284:3 › Pop out in Your book (no browser) › a drag turn lays the figures back before the page follows, and plays the page sound once
+[4/16] [chromium] › tests/pg6.spec.mjs:318:3 › Pop out in Your book (no browser) › a drag that falls back makes no page sound, only a soft settle
+[5/16] [chromium] › tests/pg6.spec.mjs:339:3 › Pop out in Your book (no browser) › three figures at most: a fourth lays the oldest back
+[6/16] [chromium] › tests/pg6.spec.mjs:374:3 › Pop out in Your book (no browser) › Pop out off lays the tapped figures back; a drawn box stays
+[7/16] [chromium] › tests/pg6.spec.mjs:399:3 › Pop out in Your book (no browser) › the depth slider deepens the figure raised last and keeps it in the scene; it comes back
+[8/16] [chromium] › tests/pg6.spec.mjs:448:3 › deeper photos (no browser) › a photo read as one slope (top-down land) gains its ridges, not a steeper slope; others go deeper
+[9/16] [chromium] › tests/pg6.spec.mjs:488:3 › Pop-up layers (P1, no browser) › a figure in layers splits into flat cutout cards that part as it rises; other figures lie back
+[10/16] [chromium] › tests/pg6.spec.mjs:545:3 › Pop out in the Photo album and the Picture lab (no browser) › the album raises two photos in turn; a tap on one lays it back
+[11/16] [chromium] › tests/pg6.spec.mjs:573:3 › Pop out in the Photo album and the Picture lab (no browser) › the Picture lab raises a PDF figure and a drawn box, and a page step waits for them
+[12/16] [chromium] › tests/pg6.spec.mjs:611:3 › Pop out in the Photo album and the Picture lab (no browser) › a picture in the lab is one figure, the whole of it
+[13/16] [chromium] › tests/pg6.spec.mjs:740:3 › Pop out (in the app) › Your book: two figures up at once, one laid back; the switch holds across a page turn and a toy switch
+[14/16] [chromium] › tests/pg6.spec.mjs:796:3 › Pop out (in the app) › the Picture lab pops a PDF figure and a drawn box
+[15/16] [chromium] › tests/pg6.spec.mjs:828:3 › Pop out (in the app) › a depth saved in a scene comes back when the figure is raised
+[16/16] [chromium] › tests/pg6.spec.mjs:885:3 › Pop out (in the app) › old links and saved scenes (v2 and v3) still load; one with Pop out on turns it on
+  16 passed (4.6m)

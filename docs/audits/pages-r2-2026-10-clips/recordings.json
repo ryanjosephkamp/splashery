@@ -56,7 +56,7 @@
         }
       ],
       "author": "made by Ryan with Codex (GPT-6)",
-      "sourceCommit": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
+      "sourceCommit": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
       "sourceRuntimeSha256": "6abffda73998b46a3fabfc490bd06d78cb3f718a9038784929dc5866dcb91807",
       "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
       "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
@@ -117,13 +117,13 @@
         }
       ],
       "author": "made by Ryan with Codex (GPT-6)",
-      "sourceCommit": "f5f8cef9099f953f9acdad1ecd612a9b33afd8d3",
-      "sourceRuntimeSha256": "d5aa7f633c96fdada9fb93e18fcd5543f5e655c7589137dc49435b98d7900557",
+      "sourceCommit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+      "sourceRuntimeSha256": "b0a1770a72504f46abe748c19ff18ec84389b67ca2a2812247dd5ef9a7ecaf22",
       "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
       "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
     },
-    "videoBytes": 857751,
-    "stripBytes": 218245
+    "videoBytes": 818854,
+    "stripBytes": 214245
   },
   "picture-lab": {
     "main": {
@@ -137,7 +137,7 @@
       "stepFPS": 8,
       "capture": "actual canvas at CSS scale; labeled, with UI omitted",
       "reviewView": "front rise, then a retained oblique view",
-      "executedRecorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e",
+      "executedRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
       "clock": "stepped at 8 fps; preparation waits omitted; not throughput",
       "frames": 94,
       "durationMs": 15550,
@@ -182,10 +182,10 @@
         }
       ],
       "author": "made by Ryan with Codex (GPT-6)",
-      "sourceCommit": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
+      "sourceCommit": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
       "sourceRuntimeSha256": "6abffda73998b46a3fabfc490bd06d78cb3f718a9038784929dc5866dcb91807",
-      "recorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e",
-      "orchestratorInitialRecorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e"
+      "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
     },
     "round2": {
       "scene": "r2-lab",
@@ -243,13 +243,13 @@
         }
       ],
       "author": "made by Ryan with Codex (GPT-6)",
-      "sourceCommit": "f5f8cef9099f953f9acdad1ecd612a9b33afd8d3",
-      "sourceRuntimeSha256": "d5aa7f633c96fdada9fb93e18fcd5543f5e655c7589137dc49435b98d7900557",
+      "sourceCommit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+      "sourceRuntimeSha256": "b0a1770a72504f46abe748c19ff18ec84389b67ca2a2812247dd5ef9a7ecaf22",
       "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
       "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
     },
-    "videoBytes": 965442,
-    "stripBytes": 573424
+    "videoBytes": 859238,
+    "stripBytes": 477244
   },
   "photo-album": {
     "main": {
@@ -263,7 +263,7 @@
       "stepFPS": 8,
       "capture": "actual canvas at CSS scale; labeled, with UI omitted",
       "reviewView": "front rise, then a retained oblique view",
-      "executedRecorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e",
+      "executedRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
       "clock": "stepped at 8 fps; preparation waits omitted; not throughput",
       "frames": 111,
       "durationMs": 17675,
@@ -308,10 +308,10 @@
         }
       ],
       "author": "made by Ryan with Codex (GPT-6)",
-      "sourceCommit": "cc297c89ef4fa4bf04e43196ca3b37e39c97a372",
+      "sourceCommit": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
       "sourceRuntimeSha256": "6abffda73998b46a3fabfc490bd06d78cb3f718a9038784929dc5866dcb91807",
-      "recorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e",
-      "orchestratorInitialRecorderSha256": "5d96d9da55b913aa209b8b99feb6c574c620afa9763c3803636a98c0848d371e"
+      "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
+      "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
     },
     "round2": {
       "scene": "r2-album",
@@ -369,12 +369,12 @@
         }
       ],
       "author": "made by Ryan with Codex (GPT-6)",
-      "sourceCommit": "f5f8cef9099f953f9acdad1ecd612a9b33afd8d3",
-      "sourceRuntimeSha256": "d5aa7f633c96fdada9fb93e18fcd5543f5e655c7589137dc49435b98d7900557",
+      "sourceCommit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+      "sourceRuntimeSha256": "b0a1770a72504f46abe748c19ff18ec84389b67ca2a2812247dd5ef9a7ecaf22",
       "recorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851",
       "orchestratorInitialRecorderSha256": "d0e778c5fb5e56840e5c42459ba11f573e094f137da229de6aae9c3577318851"
     },
-    "videoBytes": 976658,
-    "stripBytes": 299023
+    "videoBytes": 987852,
+    "stripBytes": 301112
   }
 }

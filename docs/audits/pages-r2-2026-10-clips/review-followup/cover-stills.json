@@ -1,0 +1,29 @@
+{
+  "sourceCommit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+  "runtimeSha256": "b0a1770a72504f46abe748c19ff18ec84389b67ca2a2812247dd5ef9a7ecaf22",
+  "backend": "webgl2",
+  "coverAngle": 0.25627100840925937,
+  "views": [
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 2,
+      "profile": "low"
+    },
+    {
+      "width": 1440,
+      "height": 900,
+      "dpr": 1,
+      "profile": "mid"
+    }
+  ],
+  "toys": ["your-book", "photo-album"],
+  "files": "tests/screenshots/pages-r2-*-cover-*.png on the implementation branch",
+  "note": "Actual UI captures after the upstream UI merge.",
+  "sha256": {
+    "pages-r2-your-book-cover-390x844.png": "a940f34ebdb81c4ee1f05f322e37c69708e1d4aa89ca0a0bd7e43ce1f03431d1",
+    "pages-r2-photo-album-cover-390x844.png": "f8d6dccad38fd0b3a761d2d0be706df0fe275bd4448c457157070bd648eb57f9",
+    "pages-r2-your-book-cover-1440x900.png": "5b99fb90154529b40f01723860930f192cadd29fed3fe44d5931b75f6756aa63",
+    "pages-r2-photo-album-cover-1440x900.png": "44c0d64041b38b96348006d77e81d4c7f292db109749227b18d6bde41e560da0"
+  }
+}

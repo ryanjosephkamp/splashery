@@ -1,0 +1,196 @@
+{
+  "sourceCommit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+  "testSha256": "1d9f26bd186d2b60b71232941cfa479b65d43fa59e01c3300571394eaece5beb",
+  "stats": {
+    "startTime": "2026-10-16T17:32:23.117Z",
+    "duration": 821625.425,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "poses": 1880,
+  "completedGPUDraws": 470,
+  "volumes": {
+    "webgl2": [
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "hardcover",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "paperback",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "magazine",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "spiral",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "stapled",
+        "failures": [],
+        "moving": 16,
+        "inspected": 100,
+        "captureDraws": 25,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "photo-album",
+        "key": "cover",
+        "value": "leather",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [1, 2]
+      },
+      {
+        "toy": "photo-album",
+        "key": "cover",
+        "value": "linen",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [1, 2]
+      },
+      {
+        "toy": "photo-album",
+        "key": "cover",
+        "value": "scrapbook",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [1, 2]
+      }
+    ],
+    "webgpu": [
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "hardcover",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "paperback",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "magazine",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "spiral",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "your-book",
+        "key": "style",
+        "value": "stapled",
+        "failures": [],
+        "moving": 16,
+        "inspected": 100,
+        "captureDraws": 25,
+        "cover": 0,
+        "leafSlots": [0, 1, 2, 3]
+      },
+      {
+        "toy": "photo-album",
+        "key": "cover",
+        "value": "leather",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [1, 2]
+      },
+      {
+        "toy": "photo-album",
+        "key": "cover",
+        "value": "linen",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [1, 2]
+      },
+      {
+        "toy": "photo-album",
+        "key": "cover",
+        "value": "scrapbook",
+        "failures": [],
+        "moving": 38,
+        "inspected": 120,
+        "captureDraws": 30,
+        "cover": 0,
+        "leafSlots": [1, 2]
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+
+Running 8 tests using 1 worker
+
+(node:431033) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:431033) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/8] [chromium] › tests/pg6-engine.spec.mjs:51:3 › figure depths (no browser) › figures are checked, clamped and kept in a scene
+[2/8] [chromium] › tests/pg6-engine.spec.mjs:109:3 › stepped relief (no browser) › a relief sampled nearest keeps flat steps: every splat sits on a step
+[3/8] [chromium] › tests/pg6-engine.spec.mjs:159:3 › stepped relief (no browser) › a relief's keep range builds only that part of the picture, with clean edges
+[4/8] [chromium] › tests/pg6-engine.spec.mjs:197:3 › Pop out, tilt, slider and figures (in the app) › the top bar's Pop out: shown for a toy that has it, remembered, set on the toy
+[5/8] [chromium] › tests/pg6-engine.spec.mjs:236:3 › Pop out, tilt, slider and figures (in the app) › a scene with Pop out on turns it on for the visit
+[6/8] [chromium] › tests/pg6-engine.spec.mjs:265:3 › Pop out, tilt, slider and figures (in the app) › out.tiltFree frees a locked tilt; when it ends the view comes back level
+[7/8] [chromium] › tests/pg6-engine.spec.mjs:297:3 › Pop out, tilt, slider and figures (in the app) › the slider over the stage shows while set and hands its value back
+[8/8] [chromium] › tests/pg6-engine.spec.mjs:325:3 › Pop out, tilt, slider and figures (in the app) › a drive's figure depths go into the scene and come back to it
+  8 passed (1.4m)

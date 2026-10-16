@@ -18,3 +18,14 @@ they remain failures in that attempt. [Timing data](38909967302-a1-times.json) a
 pending at the Goal deadline; follow
 [the run](https://github.com/ryanjosephkamp/splashery/actions/runs/38909967302) for results that
 arrive afterward. archived here too.
+
+## Attempt 2 reviewed on October 16
+
+The completed
+[run 38909967302](https://github.com/ryanjosephkamp/splashery/actions/runs/38909967302) on
+`f5f8cef90` reports 2,849 passed, two failed, and one existing conditional skip across 325 files and
+2,852 tests. The printed-front/white-reverse WebGPU check failed both in the shard and alone. The
+Settings-panel sizing check failed in the shard and passed alone; it still counts as a failure. The
+archived [attempt-2 summary](38909967302-a2-summary.md) and [timings](38909967302-a2-times.json)
+supersede the incomplete status recorded at the original Goal handback. Fresh head full-suite
+validation is pending the Operator's label after the follow-up push.

@@ -1,0 +1,29 @@
+
+Running 8 tests using 1 worker
+
+(node:347048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:347048) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  1 [chromium] › tests/pages-r2.spec.mjs:616:46 › a connected page has a printed front and pickable white reverse (webgl2) (10.3s)
+  ✓  2 [chromium] › tests/pages-r2.spec.mjs:616:46 › a connected page has a printed front and pickable white reverse (webgpu) (24.1s)
+(node:347811) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:347811) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  3 [chromium] › tests/pages-r2.spec.mjs:616:46 › a connected page has a printed front and pickable white reverse (webgl2) (32.0s)
+  ✓  4 [chromium] › tests/pages-r2.spec.mjs:616:46 › a connected page has a printed front and pickable white reverse (webgpu) (38.1s)
+(node:350080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:350080) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  5 [chromium] › tests/pages-r2.spec.mjs:616:46 › a connected page has a printed front and pickable white reverse (webgl2) (16.5s)
+  ✓  6 [chromium] › tests/pages-r2.spec.mjs:616:46 › a connected page has a printed front and pickable white reverse (webgpu) (27.6s)
+(node:351229) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:351229) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✓  7 [chromium] › tests/pages-r2.spec.mjs:616:46 › a connected page has a printed front and pickable white reverse (webgl2) (18.6s)
+  ✓  8 [chromium] › tests/pages-r2.spec.mjs:616:46 › a connected page has a printed front and pickable white reverse (webgpu) (23.5s)
+
+  8 passed (3.4m)

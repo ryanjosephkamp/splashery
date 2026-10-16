@@ -1,5 +1,9 @@
 # Motion review frames
 
+These contact sheets were refreshed for corrected source `4871ef735`. Earlier versions are retained
+in branch history. Denser opening and closing reviews appear in
+[the follow-up archive](../review-followup/README.md).
+
 Dense paired contact sheets sample every eighth recorded frame and the last frame, in order. Each
 tile labels its frame index, with main on the left and round 2 on the right. These sheets reduce
 each phone frame for scanning; the MP4 files retain full phone width. The rise, held pose, camera

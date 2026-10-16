@@ -1,0 +1,15 @@
+
+Running 3 tests using 1 worker
+
+(node:429492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:429492) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/3] [chromium] › tests/fx13.spec.mjs:201:5 › Pop out with Pop-up layers on (no browser) › picture-lab: a chart in layers rises as with layers off, as the card and its shapes
+[2/3] [chromium] › tests/fx13.spec.mjs:201:5 › Pop out with Pop-up layers on (no browser) › your-book: a chart in layers rises as with layers off, as the card and its shapes
+[3/3] [chromium] › tests/fx13.spec.mjs:269:3 › Pop out with Pop-up layers on (in the app) › the Picture lab's chart rises with Pop-up layers on
+  3 passed (26.2s)

@@ -1,0 +1,19 @@
+
+Running 7 tests using 1 worker
+
+(node:433376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:433376) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/7] [chromium] › tests/bk5-engine.spec.mjs:43:3 › links and figure boxes (no browser) › only http, https and mailto addresses may open
+[2/7] [chromium] › tests/bk5-engine.spec.mjs:51:3 › links and figure boxes (no browser) › boxes that touch are joined; a region stays on the page
+[3/7] [chromium] › tests/bk5-engine.spec.mjs:56:3 › links and figure boxes (no browser) › relief raises each splat toward the sheet's facing; the base stays behind the detail
+[4/7] [chromium] › tests/bk5-engine.spec.mjs:114:3 › links and figure boxes (in the app) › a PDF page's links and picture boxes; unsafe links are left out
+[5/7] [chromium] › tests/bk5-engine.spec.mjs:150:3 › links and figure boxes (in the app) › a crop draws that part of the page; a cropped, raised sheet lies where the part is
+[6/7] [chromium] › tests/bk5-engine.spec.mjs:245:3 › links and figure boxes (in the app) › a variant redraws the page through decorate, with the page's links
+[7/7] [chromium] › tests/bk5-engine.spec.mjs:295:3 › links and figure boxes (in the app) › a web link asks first, opens in a new tab without access back; javascript: never asks
+  7 passed (1.2m)

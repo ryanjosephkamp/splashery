@@ -1,0 +1,78 @@
+
+Running 2 tests using 1 worker
+
+(node:346185) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:346185) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 [chromium] › tests/pages-r2.spec.mjs:599:46 › a connected page has a printed front and pickable white reverse (webgl2) (11.8s)
+(node:346564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:346564) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  2 [chromium] › tests/pages-r2.spec.mjs:599:46 › a connected page has a printed front and pickable white reverse (webgpu) (18.6s)
+
+
+  1) [chromium] › tests/pages-r2.spec.mjs:599:46 › a connected page has a printed front and pickable white reverse (webgl2)
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 10
+    Received:   255
+
+      642 |     });
+      643 |     expect(views[0].pixel[0]).toBeGreaterThan(240);
+    > 644 |     expect(views[0].pixel[1]).toBeLessThan(10);
+          |                               ^
+      645 |     expect(views[0].pixel[2]).toBeLessThan(10);
+      646 |     expect(views[1].pixel.slice(0, 3).every((v) => v > 240)).toBe(true);
+      647 |     expect(views.every((v) => v.pick !== null)).toBe(true);
+        at /workspace/splashery/tests/pages-r2.spec.mjs:644:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-r2-a-connected-page--e70af-kable-white-reverse-webgl2--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/pages-r2-a-connected-page--e70af-kable-white-reverse-webgl2--chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/pages-r2-a-connected-page--e70af-kable-white-reverse-webgl2--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/pages-r2-a-connected-page--e70af-kable-white-reverse-webgl2--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2) [chromium] › tests/pages-r2.spec.mjs:599:46 › a connected page has a printed front and pickable white reverse (webgpu)
+
+    Error: expect(received).toBeLessThan(expected)
+
+    Expected: < 10
+    Received:   255
+
+      642 |           (g.down[k] * face.color.height) / 2 +
+      643 |           g.normal[k] * (g.lift || 0),
+    > 644 |       );
+          |         ^
+      645 |       // Exercise a real surface replacement between test setup and drawing.
+      646 |       const sheet = p.pictures.sheets.find((s) => s.slot?.surface === face);
+      647 |       p.pictures.show(sheet, sheet.shown, sheet.shown.data);
+        at /workspace/splashery/tests/pages-r2.spec.mjs:644:31
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/pages-r2-a-connected-page--fa971-kable-white-reverse-webgpu--chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/pages-r2-a-connected-page--fa971-kable-white-reverse-webgpu--chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/pages-r2-a-connected-page--fa971-kable-white-reverse-webgpu--chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/pages-r2-a-connected-page--fa971-kable-white-reverse-webgpu--chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  2 failed
+    [chromium] › tests/pages-r2.spec.mjs:599:46 › a connected page has a printed front and pickable white reverse (webgl2)
+    [chromium] › tests/pages-r2.spec.mjs:599:46 › a connected page has a printed front and pickable white reverse (webgpu)

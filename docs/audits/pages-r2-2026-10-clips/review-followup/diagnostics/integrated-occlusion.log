@@ -1,0 +1,38 @@
+
+Running 6 tests using 1 worker
+
+(node:370923) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:370923) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/6] [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › your-book: the turning cover occludes its pages (webgl2)
+[chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › your-book: the turning cover occludes its pages (webgl2)
+Cover occlusion: your-book webgl2 {"mean":0.0000024064956129584977,"noise":0,"count":138514,"angle":0.25627100840925937}
+
+[2/6] [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › photo-album: the turning cover occludes its pages (webgl2)
+[chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › photo-album: the turning cover occludes its pages (webgl2)
+Cover occlusion: photo-album webgl2 {"mean":0.000002153942252808202,"noise":0,"count":154755,"angle":0.25627100840925937}
+
+[3/6] [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › your-book: the turning cover occludes its pages (webgpu)
+[chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › your-book: the turning cover occludes its pages (webgpu)
+Cover occlusion: your-book webgpu {"mean":0,"noise":0,"count":138514,"angle":0.25627100840925937}
+
+[4/6] [chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › photo-album: the turning cover occludes its pages (webgpu)
+[chromium] › tests/pages-r2-occlusion.spec.mjs:3:94 › photo-album: the turning cover occludes its pages (webgpu)
+Cover occlusion: photo-album webgpu {"mean":0.004676208630846607,"noise":0.05947249954228727,"count":154755,"angle":0.25627100840925937}
+
+[5/6] [chromium] › tests/pages-r2-occlusion.spec.mjs:137:46 › all bindings and album covers keep full turns inside the sortable volume (webgl2)
+[chromium] › tests/pages-r2-occlusion.spec.mjs:137:46 › all bindings and album covers keep full turns inside the sortable volume (webgl2)
+Complete book turn volumes: webgl2 [{"toy":"your-book","key":"style","value":"hardcover","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"your-book","key":"style","value":"paperback","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"your-book","key":"style","value":"magazine","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"your-book","key":"style","value":"spiral","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"your-book","key":"style","value":"stapled","failures":[],"moving":16,"inspected":100,"captureDraws":25,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"photo-album","key":"cover","value":"leather","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[1,2]},{"toy":"photo-album","key":"cover","value":"linen","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[1,2]},{"toy":"photo-album","key":"cover","value":"scrapbook","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[1,2]}]
+
+[6/6] [chromium] › tests/pages-r2-occlusion.spec.mjs:137:46 › all bindings and album covers keep full turns inside the sortable volume (webgpu)
+[chromium] › tests/pages-r2-occlusion.spec.mjs:137:46 › all bindings and album covers keep full turns inside the sortable volume (webgpu)
+Complete book turn volumes: webgpu [{"toy":"your-book","key":"style","value":"hardcover","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"your-book","key":"style","value":"paperback","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"your-book","key":"style","value":"magazine","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"your-book","key":"style","value":"spiral","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"your-book","key":"style","value":"stapled","failures":[],"moving":16,"inspected":100,"captureDraws":25,"cover":0,"leafSlots":[0,1,2,3]},{"toy":"photo-album","key":"cover","value":"leather","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[1,2]},{"toy":"photo-album","key":"cover","value":"linen","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[1,2]},{"toy":"photo-album","key":"cover","value":"scrapbook","failures":[],"moving":38,"inspected":120,"captureDraws":30,"cover":0,"leafSlots":[1,2]}]
+
+  Slow test file: [chromium] › tests/pages-r2-occlusion.spec.mjs (13.6m)
+  Consider running tests from slow files in parallel. See: https://playwright.dev/docs/test-parallel
+  6 passed (13.7m)

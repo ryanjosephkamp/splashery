@@ -1,0 +1,369 @@
+
+== main is merged in
+ok
+
+== prettier
+Checking formatting...
+All matched files use Prettier code style!
+ok
+
+== American English on added lines
+No British spellings found.
+ok
+
+== site/ is current
+site/ is current.
+ok
+
+== shared lists parse
+ok
+
+== file sizes
+ok
+
+== shelf-wide specs (cdx-t2, evidence-computing, st2, st3, cmp2-engine, vw, bld, spg, shb, help, hta, taps, unit)
+
+Running 270 tests using 2 workers
+
+(node:446089) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:446089) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:446088) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/270] [chromium] › tests/cdx-t2.spec.mjs:13:3 › graph-plotter: every glyph stays complete at every Auto tier
+(node:446088) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[2/270] [chromium] › tests/bld.spec.mjs:20:1 › every relative link in builders/ resolves
+[3/270] [chromium] › tests/bld.spec.mjs:36:1 › the folder has every document the brief lists
+[4/270] [chromium] › tests/bld.spec.mjs:41:1 › REPO-MAP.md names every top-level folder
+  1) [chromium] › tests/bld.spec.mjs:41:1 › REPO-MAP.md names every top-level folder ───────────────
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "work",
+    + ]
+
+      64 |     .filter((n) => !["test-results", "playwright-report"].includes(n));
+      65 |   const missing = dirs.filter((d) => !map.includes(`\`${d}/\``));
+    > 66 |   expect(missing).toEqual([]);
+         |                   ^
+      67 | });
+      68 |
+      69 | test("builders/ holds no private page link", () => {
+        at /workspace/splashery/tests/bld.spec.mjs:66:19
+
+    attachment #1: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/bld-REPO-MAP-md-names-every-top-level-folder-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace test-results/bld-REPO-MAP-md-names-every-top-level-folder-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:446114) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:446114) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[5/270] [chromium] › tests/cdx-t2.spec.mjs:13:3 › surface-plotter: every glyph stays complete at every Auto tier
+[6/270] [chromium] › tests/bld.spec.mjs:51:1 › builders/ holds no private page link
+[7/270] [chromium] › tests/bld.spec.mjs:84:1 › builders-pack.mjs builds the ZIP of the real repo
+[chromium] › tests/bld.spec.mjs:84:1 › builders-pack.mjs builds the ZIP of the real repo
+
+
+[8/270] [chromium] › tests/bld.spec.mjs:103:1 › builders-pack.mjs builds from a small checkout and refuses a planted token
+[9/270] [chromium] › tests/bld.spec.mjs:133:1 › builders-pack.mjs says what is missing
+[10/270] [chromium] › tests/cmp2-engine.spec.mjs:9:1 › every text option shipped before this change stays hidden
+[11/270] [chromium] › tests/cmp2-engine.spec.mjs:30:1 › a shown text option is a text box that sets the option
+[12/270] [chromium] › tests/cdx-t2.spec.mjs:13:3 › unit-circle: every glyph stays complete at every Auto tier
+[13/270] [chromium] › tests/cdx-t2.spec.mjs:13:3 › pythagoras-proof: every glyph stays complete at every Auto tier
+[14/270] [chromium] › tests/cdx-t2.spec.mjs:35:3 › graph-plotter: glyph stroke size is independent of the Auto tier
+[15/270] [chromium] › tests/cdx-t2.spec.mjs:35:3 › surface-plotter: glyph stroke size is independent of the Auto tier
+[16/270] [chromium] › tests/cdx-t2.spec.mjs:35:3 › unit-circle: glyph stroke size is independent of the Auto tier
+[17/270] [chromium] › tests/cdx-t2.spec.mjs:35:3 › pythagoras-proof: glyph stroke size is independent of the Auto tier
+[18/270] [chromium] › tests/cdx-t2.spec.mjs:49:1 › task 66 covers 65 toys and leaves task 44's seven worlds alone
+[19/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › sun: all Auto tiers build finite splats with the same parts
+[20/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › solar-system: all Auto tiers build finite splats with the same parts
+[21/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › mercury: all Auto tiers build finite splats with the same parts
+[22/270] [chromium] › tests/cmp2-engine.spec.mjs:76:3 › a shown text option is a text box that sets Shape morph's word
+[23/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › venus: all Auto tiers build finite splats with the same parts
+[24/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › earth: all Auto tiers build finite splats with the same parts
+[25/270] [chromium] › tests/cmp2-engine.spec.mjs:76:3 › a shown text option is a text box that sets Shape morph's qrText
+[26/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › moon: all Auto tiers build finite splats with the same parts
+[27/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › mars: all Auto tiers build finite splats with the same parts
+[28/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › jupiter: all Auto tiers build finite splats with the same parts
+[29/270] [chromium] › tests/evidence-computing.spec.mjs:151:1 › sorting: eight independent traces, 384 edge, exhaustive and random inputs
+[30/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › saturn: all Auto tiers build finite splats with the same parts
+[31/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › uranus: all Auto tiers build finite splats with the same parts
+[32/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › neptune: all Auto tiers build finite splats with the same parts
+[33/270] [chromium] › tests/evidence-computing.spec.mjs:198:1 › sorting: the actual display counts every recorded swap or merge move
+[34/270] [chromium] › tests/evidence-computing.spec.mjs:268:1 › Enigma: published vectors and museum double-step sequence
+[35/270] [chromium] › tests/evidence-computing.spec.mjs:283:1 › Enigma: all rotor orders, nonzero rings, plugboards, 384 independent messages
+[36/270] [chromium] › tests/evidence-computing.spec.mjs:308:1 › Enigma: published historical-message procedure, proposed IV/V extension only
+[37/270] [chromium] › tests/evidence-computing.spec.mjs:325:1 › Turing: all 4096 supported integers add one; busy beavers match independent rule traces
+[38/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › aurora-planet: all Auto tiers build finite splats with the same parts
+[39/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › asteroid: all Auto tiers build finite splats with the same parts
+[40/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › comet: all Auto tiers build finite splats with the same parts
+[41/270] [chromium] › tests/evidence-computing.spec.mjs:353:1 › difference engine: 128 polynomials, wrap and every decimal carry
+[42/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › meteor: all Auto tiers build finite splats with the same parts
+[43/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › star: all Auto tiers build finite splats with the same parts
+[44/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › pulsar: all Auto tiers build finite splats with the same parts
+[45/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › black-hole: all Auto tiers build finite splats with the same parts
+[46/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › star-cluster: all Auto tiers build finite splats with the same parts
+[47/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › planetary-nebula: all Auto tiers build finite splats with the same parts
+[48/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › nebula: all Auto tiers build finite splats with the same parts
+[49/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › supernova: all Auto tiers build finite splats with the same parts
+[50/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › spiral-galaxy: all Auto tiers build finite splats with the same parts
+[51/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › nearby-stars: all Auto tiers build finite splats with the same parts
+[52/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › star-systems: all Auto tiers build finite splats with the same parts
+[53/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › real-galaxies: all Auto tiers build finite splats with the same parts
+[54/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › powers-of-ten: all Auto tiers build finite splats with the same parts
+[55/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › saturn-v: all Auto tiers build finite splats with the same parts
+[56/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › sls: all Auto tiers build finite splats with the same parts
+[57/270] [chromium] › tests/evidence-computing.spec.mjs:383:1 › Bombe: known-plugboard search and first matching setting, including ambiguous cribs
+[58/270] [chromium] › tests/evidence-computing.spec.mjs:415:1 › perceptron and multilayer perceptron: threshold sums, learning example and XOR
+[59/270] [chromium] › tests/evidence-computing.spec.mjs:428:1 › neural network: every supported size has the independent sigmoid forward pass
+[60/270] [chromium] › tests/evidence-computing.spec.mjs:479:1 › CNN: actual drawing inference agrees at every layer for samples and 64 random drawings
+[61/270] [chromium] › tests/evidence-computing.spec.mjs:517:1 › CNN: reproduce the displayed 97.0 percent on all 1797 UCI test digits
+[62/270] [chromium] › tests/evidence-computing.spec.mjs:526:1 › RNN, transformer and looped transformer: diagram outputs are prepared, not learned
+[63/270] [chromium] › tests/evidence-computing.spec.mjs:537:1 › diffusion: ten prepared morph stages count from 50 to zero in fives
+[64/270] [chromium] › tests/evidence-computing.spec.mjs:554:1 › gradient descent: paths match analytic gradients, momentum and boundary clipping
+[65/270] [chromium] › tests/evidence-computing.spec.mjs:584:1 › word vectors: real 50-dimensional data, independent analogy rankings and 3D parallelogram
+[66/270] [chromium] › tests/evidence-computing.spec.mjs:627:1 › Gaussian fit: independently rendered pixel loss and finite-difference gradients
+[67/270] [chromium] › tests/evidence-computing.spec.mjs:685:1 › Gaussian one-splat view: parameter-error decay and forced final snap
+[68/270] [chromium] › tests/evidence-computing.spec.mjs:690:1 › Gaussian sorting view: distance ordering can disagree with camera depth
+[69/270] [chromium] › tests/evidence-computing.spec.mjs:705:1 › splat fields: four-wave formula and closed torus-knot flow
+[70/270] [chromium] › tests/evidence-computing.spec.mjs:738:1 › Fluid lab: presets, collider distances, curl divergence and actual tap controls
+[71/270] [chromium] › tests/evidence-computing.spec.mjs:786:1 › Fluid lab: kernel constants, isolated gravity and independent neighbor smoothing
+[72/270] [chromium] › tests/evidence-computing.spec.mjs:819:1 › half adder: actual fixed animation gives carry 1, sum 0, then resets
+[73/270] [chromium] › tests/evidence-computing.spec.mjs:833:1 › browser: production half-adder output agrees with the arithmetic
+[74/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › space-shuttle: all Auto tiers build finite splats with the same parts
+[75/270] [chromium] › tests/evidence-computing.spec.mjs:859:1 › evidence: exact schema, complete shelf inventory, source and test locations resolve
+[76/270] [chromium] › tests/help.spec.mjs:72:3 › toy help: the list › every toy gets a non-empty how-to line and a short one
+[77/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › solar-orbits: all Auto tiers build finite splats with the same parts
+[78/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › lorenz: all Auto tiers build finite splats with the same parts
+[79/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › mobius: all Auto tiers build finite splats with the same parts
+[80/270] [chromium] › tests/help.spec.mjs:94:3 › toy help: the list › every entry names a shelf toy and has plain, checked text
+[81/270] [chromium] › tests/help.spec.mjs:107:3 › toy help: the list › toy-help.js is never a static import of the page
+[82/270] [chromium] › tests/help.spec.mjs:117:3 › toy help: the line › shows on a pick, fades, and '?' brings it back
+[83/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › klein-bottle: all Auto tiers build finite splats with the same parts
+[84/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › menger-sponge: all Auto tiers build finite splats with the same parts
+[85/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › hypercube: all Auto tiers build finite splats with the same parts
+[86/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › torus-knot: all Auto tiers build finite splats with the same parts
+[87/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › gyroid: all Auto tiers build finite splats with the same parts
+[88/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › mandelbulb: all Auto tiers build finite splats with the same parts
+[89/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › sierpinski: all Auto tiers build finite splats with the same parts
+[90/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › platonic: all Auto tiers build finite splats with the same parts
+[91/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › seashell-spiral: all Auto tiers build finite splats with the same parts
+[92/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › graph-plotter: all Auto tiers build finite splats with the same parts
+[93/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › surface-plotter: all Auto tiers build finite splats with the same parts
+[94/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › unit-circle: all Auto tiers build finite splats with the same parts
+[95/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › fourier-circles: all Auto tiers build finite splats with the same parts
+[96/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › pythagoras-proof: all Auto tiers build finite splats with the same parts
+[97/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › rossler-attractor: all Auto tiers build finite splats with the same parts
+[98/270] [chromium] › tests/help.spec.mjs:160:3 › toy help: the line › shows after a refresh and from a link, old links included
+[99/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › thomas-attractor: all Auto tiers build finite splats with the same parts
+[100/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › aizawa-attractor: all Auto tiers build finite splats with the same parts
+[101/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › five-cell: all Auto tiers build finite splats with the same parts
+[102/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › sixteen-cell: all Auto tiers build finite splats with the same parts
+[103/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › twenty-four-cell: all Auto tiers build finite splats with the same parts
+[104/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › duoprism: all Auto tiers build finite splats with the same parts
+[105/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › splat-equation: all Auto tiers build finite splats with the same parts
+[106/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › thermal-ellipsoids: all Auto tiers build finite splats with the same parts
+[107/270] [chromium] › tests/help.spec.mjs:213:3 › toy help: the line › a saved scene (JSON) still loads and shows its toy's line
+[108/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › smlm-microscope: all Auto tiers build finite splats with the same parts
+[109/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › galaxy-box: all Auto tiers build finite splats with the same parts
+[110/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › cryoem-map: all Auto tiers build finite splats with the same parts
+[111/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › contour-lab: all Auto tiers build finite splats with the same parts
+[112/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › terrain-box: all Auto tiers build finite splats with the same parts
+[113/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › ripple-tank: all Auto tiers build finite splats with the same parts
+[114/270] [chromium] › tests/help.spec.mjs:231:3 › toy help: the line › an automated browser without ?help=show gets only the '?' button
+[115/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › light-bench: all Auto tiers build finite splats with the same parts
+[116/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › night-sky: all Auto tiers build finite splats with the same parts
+[117/270] [chromium] › tests/cdx-t2.spec.mjs:55:3 › climate-records: all Auto tiers build finite splats with the same parts
+[118/270] [chromium] › tests/hta.spec.mjs:13:1 › every toy on these shelves has a how-to line and an About text
+[119/270] [chromium] › tests/help.spec.mjs:241:3 › toy help: the line › loads its text after the first paint
+[120/270] [chromium] › tests/hta.spec.mjs:32:3 › a long About text shows whole at 390x844
+[121/270] [chromium] › tests/help.spec.mjs:258:3 › toy help: the line › respects reduced motion: no fade, still shown and hidden
+[122/270] [chromium] › tests/hta.spec.mjs:32:3 › a long About text shows whole at 1440x900
+[123/270] [chromium] › tests/help.spec.mjs:274:3 › toy help: the line › the embed shows no line
+[124/270] [chromium] › tests/help.spec.mjs:327:3 › the line stays clear of the toy at 390x844
+[125/270] [chromium] › tests/shb.spec.mjs:36:1 › every toy the lane made sharper builds at the phone tier, within its budget
+[126/270] [chromium] › tests/shb.spec.mjs:56:1 › the solids laid out evenly are mostly fully opaque splats
+[127/270] [chromium] › tests/shb.spec.mjs:86:1 › the coral's rock and the cake stand's foot are closed underneath
+[128/270] [chromium] › tests/shb.spec.mjs:97:3 › graph-plotter: the a slider's knob drags along its track
+[129/270] [chromium] › tests/shb.spec.mjs:97:3 › surface-plotter: the a slider's knob drags along its track
+[130/270] [chromium] › tests/spg.spec.mjs:21:3 › site pages › each page loads, lights its menu item and has no horizontal scroll
+[131/270] [chromium] › tests/help.spec.mjs:327:3 › the line stays clear of the toy at 1440x900
+[132/270] [chromium] › tests/spg.spec.mjs:41:3 › site pages › the credits page lists every entry in CREDITS.md and every library in LICENSES.md
+[133/270] [chromium] › tests/spg.spec.mjs:59:3 › site pages › the tools hub groups its tools and every link opens a toy
+[134/270] [chromium] › tests/spg.spec.mjs:87:3 › site pages › the science hub lists each dataset with its source and license
+[135/270] [chromium] › tests/spg.spec.mjs:113:3 › site pages › the learn hub, the explainer and the notebook
+[136/270] [chromium] › tests/spg.spec.mjs:142:3 › site pages › About, terms and privacy say what they must
+[137/270] [chromium] › tests/spg.spec.mjs:158:3 › site pages › What's new has a plain card per feature and no operational wording
+[138/270] [chromium] › tests/spg.spec.mjs:166:3 › site pages › the embed guide builds the snippets and shows a live toy
+[139/270] [chromium] › tests/help.spec.mjs:380:5 › toy help: About this toy › shows the toy's text, or the default, at 390x844
+[140/270] [chromium] › tests/spg.spec.mjs:196:3 › site pages › a live WebGPU embed bounds queued frames and captures a new draw after they finish
+[141/270] [chromium] › tests/help.spec.mjs:380:5 › toy help: About this toy › shows the toy's text, or the default, at 1440x900
+[142/270] [chromium] › tests/st2.spec.mjs:27:3 › contact and the footer › every page's footer says who made it and links to Contact, with no AI line
+[143/270] [chromium] › tests/st2.spec.mjs:35:3 › contact and the footer › the Contact page lists the owner's links, with no email, all in new tabs
+[144/270] [chromium] › tests/st3.spec.mjs:28:3 › description tags › every page has a description and a matching og:description, none empty, long or shared
+[145/270] [chromium] › tests/st3.spec.mjs:44:3 › description tags › a toy page's description is its About line
+[146/270] [chromium] › tests/st2.spec.mjs:52:3 › contact and the footer › the Credits page links to Contact, and About links his name to his site
+[147/270] [chromium] › tests/st3.spec.mjs:51:3 › toy dates › every toy has a date in tools/toy-dates.json, and its page shows it
+[148/270] [chromium] › tests/st3.spec.mjs:59:3 › toy dates › the toy lists switch to Newest first, newest day on top, and back to By shelf
+[149/270] [chromium] › tests/st2.spec.mjs:66:3 › new tabs and toy pages › every link to the app or to another site opens in a new tab
+[150/270] [chromium] › tests/st2.spec.mjs:81:3 › new tabs and toy pages › the Tinkerer's Manual opens a link that leaves it in a new tab, and one inside it in the same tab
+[151/270] [chromium] › tests/st2.spec.mjs:93:3 › new tabs and toy pages › the Tools hub's cards go to the toy's page, and Open in Splashery opens the app in a new tab
+[152/270] [chromium] › tests/st3.spec.mjs:82:3 › what's new › is a gallery of toys, features and before-and-after fixes, with nothing operational
+[153/270] [chromium] › tests/st3.spec.mjs:102:3 › what's new › reads well on a phone and a computer, with no sideways scrolling
+[154/270] [chromium] › tests/st2.spec.mjs:111:3 › new tabs and toy pages › the Science table's toy names lead to the toy's page
+[155/270] [chromium] › tests/st3.spec.mjs:121:3 › Playground › the app's button is the Playground; its id and key are unchanged
+[156/270] [chromium] › tests/st3.spec.mjs:127:3 › Playground › the site says Playground where it used to say gallery
+[157/270] [chromium] › tests/taps.spec.mjs:89:1 › every finished kit toy has its own tap: a pulse or a toggle
+[158/270] [chromium] › tests/st2.spec.mjs:123:3 › new tabs and toy pages › Science shows the toys first, then the data table and Is it right?
+[159/270] [chromium] › tests/taps.spec.mjs:102:1 › every exception names a kit toy and a check, with a reason
+[160/270] [chromium] › tests/taps.spec.mjs:112:3 › every shapes-torus toy's tap ends where the toy rests
+[161/270] [chromium] › tests/taps.spec.mjs:112:3 › every photoreal-r3 toy's tap ends where the toy rests
+[162/270] [chromium] › tests/st2.spec.mjs:148:3 › the menu after Back › the menu is closed when you come back to a page
+[163/270] [chromium] › tests/taps.spec.mjs:112:3 › every balls toy's tap ends where the toy rests
+[164/270] [chromium] › tests/taps.spec.mjs:112:3 › every anatomy toy's tap ends where the toy rests
+[165/270] [chromium] › tests/taps.spec.mjs:112:3 › every elements toy's tap ends where the toy rests
+[166/270] [chromium] › tests/taps.spec.mjs:112:3 › every objects toy's tap ends where the toy rests
+[167/270] [chromium] › tests/taps.spec.mjs:112:3 › every space toy's tap ends where the toy rests
+[168/270] [chromium] › tests/taps.spec.mjs:112:3 › every space-r2 toy's tap ends where the toy rests
+[169/270] [chromium] › tests/st2.spec.mjs:166:3 › the menu after Back › a page restored from the back/forward cache shows the menu closed
+[170/270] [chromium] › tests/st2.spec.mjs:197:3 › guides as pages › each guide has a page built from its Markdown, with a link to its GitHub source
+[171/270] [chromium] › tests/taps.spec.mjs:112:3 › every powers-of-ten toy's tap ends where the toy rests
+[172/270] [chromium] › tests/taps.spec.mjs:112:3 › every space-r4 toy's tap ends where the toy rests
+[173/270] [chromium] › tests/taps.spec.mjs:112:3 › every tiny toy's tap ends where the toy rests
+[174/270] [chromium] › tests/taps.spec.mjs:112:3 › every tiny-r2 toy's tap ends where the toy rests
+[175/270] [chromium] › tests/taps.spec.mjs:112:3 › every atoms toy's tap ends where the toy rests
+[176/270] [chromium] › tests/taps.spec.mjs:112:3 › every lattices toy's tap ends where the toy rests
+[177/270] [chromium] › tests/taps.spec.mjs:112:3 › every molecule-viewer toy's tap ends where the toy rests
+[178/270] [chromium] › tests/taps.spec.mjs:112:3 › every chemistry toy's tap ends where the toy rests
+[179/270] [chromium] › tests/taps.spec.mjs:112:3 › every real-elements toy's tap ends where the toy rests
+[180/270] [chromium] › tests/taps.spec.mjs:112:3 › every gems toy's tap ends where the toy rests
+[181/270] [chromium] › tests/taps.spec.mjs:112:3 › every anatomy-atlas toy's tap ends where the toy rests
+[182/270] [chromium] › tests/taps.spec.mjs:112:3 › every nature toy's tap ends where the toy rests
+[183/270] [chromium] › tests/taps.spec.mjs:112:3 › every food toy's tap ends where the toy rests
+[184/270] [chromium] › tests/st2.spec.mjs:218:3 › guides as pages › the Learn page and the other pages link to the site's guides, not to GitHub's copies
+[185/270] [chromium] › tests/taps.spec.mjs:112:3 › every playthings toy's tap ends where the toy rests
+[186/270] [chromium] › tests/taps.spec.mjs:112:3 › every games toy's tap ends where the toy rests
+[187/270] [chromium] › tests/taps.spec.mjs:112:3 › every maths toy's tap ends where the toy rests
+[188/270] [chromium] › tests/st2.spec.mjs:236:3 › guides as pages › the lab notebook's lane links lead to pages on the site
+[189/270] [chromium] › tests/taps.spec.mjs:112:3 › every one-splat toy's tap ends where the toy rests
+[190/270] [chromium] › tests/taps.spec.mjs:112:3 › every splat-equation toy's tap ends where the toy rests
+[191/270] [chromium] › tests/taps.spec.mjs:112:3 › every pictures toy's tap ends where the toy rests
+[192/270] [chromium] › tests/st2.spec.mjs:249:3 › the quick outline › long pages get an outline bar; pages without a long text do not
+[193/270] [chromium] › tests/taps.spec.mjs:112:3 › every real-objects toy's tap ends where the toy rests
+[194/270] [chromium] › tests/taps.spec.mjs:112:3 › every medieval toy's tap ends where the toy rests
+[195/270] [chromium] › tests/taps.spec.mjs:112:3 › every animals toy's tap ends where the toy rests
+[196/270] [chromium] › tests/taps.spec.mjs:112:3 › every holidays toy's tap ends where the toy rests
+[197/270] [chromium] › tests/taps.spec.mjs:112:3 › every music toy's tap ends where the toy rests
+[198/270] [chromium] › tests/taps.spec.mjs:112:3 › every pianos toy's tap ends where the toy rests
+[199/270] [chromium] › tests/taps.spec.mjs:112:3 › every vehicles toy's tap ends where the toy rests
+[200/270] [chromium] › tests/taps.spec.mjs:112:3 › every landmarks toy's tap ends where the toy rests
+[201/270] [chromium] › tests/st2.spec.mjs:262:5 › the quick outline › it opens, jumps and closes at 390px without covering the text or moving the page
+[202/270] [chromium] › tests/taps.spec.mjs:112:3 › every computing toy's tap ends where the toy rests
+[203/270] [chromium] › tests/taps.spec.mjs:112:3 › every splatting toy's tap ends where the toy rests
+[204/270] [chromium] › tests/taps.spec.mjs:112:3 › every computing-history toy's tap ends where the toy rests
+[205/270] [chromium] › tests/taps.spec.mjs:112:3 › every name-toy toy's tap ends where the toy rests
+[206/270] [chromium] › tests/taps.spec.mjs:112:3 › every studio toy's tap ends where the toy rests
+[207/270] [chromium] › tests/st2.spec.mjs:262:5 › the quick outline › it opens, jumps and closes at 1440px without covering the text or moving the page
+[208/270] [chromium] › tests/taps.spec.mjs:112:3 › every live toy's tap ends where the toy rests
+[209/270] [chromium] › tests/st2.spec.mjs:310:3 › the quick outline › a tap outside closes the list, and the outline works from the keyboard
+[210/270] [chromium] › tests/st2.spec.mjs:330:3 › the quick outline › the Tinkerer's Manual has the same outline, and one link back at the bottom
+[211/270] [chromium] › tests/taps.spec.mjs:112:3 › every studio-models toy's tap ends where the toy rests
+[212/270] [chromium] › tests/taps.spec.mjs:112:3 › every qr toy's tap ends where the toy rests
+[213/270] [chromium] › tests/taps.spec.mjs:112:3 › every qr-lab toy's tap ends where the toy rests
+[214/270] [chromium] › tests/taps.spec.mjs:112:3 › every qr-craft toy's tap ends where the toy rests
+[215/270] [chromium] › tests/taps.spec.mjs:112:3 › every photo-3d toy's tap ends where the toy rests
+[216/270] [chromium] › tests/taps.spec.mjs:112:3 › every video3d toy's tap ends where the toy rests
+[217/270] [chromium] › tests/taps.spec.mjs:112:3 › every sound-lab toy's tap ends where the toy rests
+[218/270] [chromium] › tests/taps.spec.mjs:112:3 › every viewers toy's tap ends where the toy rests
+[219/270] [chromium] › tests/st2.spec.mjs:363:3 › the quick outline › the outline is left out of print
+[220/270] [chromium] › tests/st2.spec.mjs:375:5 › screenshots › pages at 390x844
+[221/270] [chromium] › tests/taps.spec.mjs:112:3 › every volume-viewer toy's tap ends where the toy rests
+[222/270] [chromium] › tests/taps.spec.mjs:112:3 › every shape-morph toy's tap ends where the toy rests
+[223/270] [chromium] › tests/taps.spec.mjs:112:3 › every lab toy's tap ends where the toy rests
+[224/270] [chromium] › tests/taps.spec.mjs:112:3 › every light-lab toy's tap ends where the toy rests
+[225/270] [chromium] › tests/taps.spec.mjs:112:3 › every baked-demo toy's tap ends where the toy rests
+[226/270] [chromium] › tests/taps.spec.mjs:112:3 › every science toy's tap ends where the toy rests
+[227/270] [chromium] › tests/taps.spec.mjs:112:3 › every optics toy's tap ends where the toy rests
+[228/270] [chromium] › tests/taps.spec.mjs:112:3 › every fluid-lab toy's tap ends where the toy rests
+[229/270] [chromium] › tests/taps.spec.mjs:112:3 › every geo toy's tap ends where the toy rests
+[230/270] [chromium] › tests/st2.spec.mjs:375:5 › screenshots › pages at 1440x900
+[231/270] [chromium] › tests/taps.spec.mjs:112:3 › every imaging toy's tap ends where the toy rests
+[232/270] [chromium] › tests/taps.spec.mjs:112:3 › every screens toy's tap ends where the toy rests
+[233/270] [chromium] › tests/taps.spec.mjs:112:3 › every arcade toy's tap ends where the toy rests
+[234/270] [chromium] › tests/taps.spec.mjs:112:3 › every night-sky toy's tap ends where the toy rests
+[235/270] [chromium] › tests/taps.spec.mjs:112:3 › every data-climate toy's tap ends where the toy rests
+[236/270] [chromium] › tests/unit.spec.mjs:13:1 › a default scene normalises to itself
+[237/270] [chromium] › tests/unit.spec.mjs:20:1 › normalizeScene clamps garbage and refuses non-scenes
+[238/270] [chromium] › tests/unit.spec.mjs:85:1 › the link codec round-trips a scene through deflate and base64url
+[239/270] [chromium] › tests/unit.spec.mjs:94:1 › generators are deterministic, finite and stay inside the unit ball
+[240/270] [chromium] › tests/unit.spec.mjs:133:1 › the low tier stays bounded and the tiers grow in order
+[241/270] [chromium] › tests/unit.spec.mjs:160:1 › every shelf toy has its own sound, and no two share the exact same spec
+[242/270] [chromium] › tests/unit.spec.mjs:183:1 › twins sound different: they use different voices
+[243/270] [chromium] › tests/unit.spec.mjs:188:1 › old sound names still work, and specs are checked
+[244/270] [chromium] › tests/unit.spec.mjs:224:1 › embeds never load the sound code
+[245/270] [chromium] › tests/unit.spec.mjs:238:1 › a tap knows where it landed: a xylophone bar strikes that bar
+[246/270] [chromium] › tests/unit.spec.mjs:290:1 › every rig fits the rig limits and names real parts, keys and effects
+[247/270] [chromium] › tests/unit.spec.mjs:342:1 › a rig's effects and part glow reach the modifier's uniforms
+[248/270] [chromium] › tests/unit.spec.mjs:424:1 › the chess set plays the real Opera Game (Paris, 1858) to its final position
+[249/270] [chromium] › tests/unit.spec.mjs:441:1 › the chess rules count every legal move (perft) from tricky positions
+[250/270] [chromium] › tests/unit.spec.mjs:462:1 › a PGN game is read move by move: tags, comments, variations, castling, en passant, promotion
+[251/270] [chromium] › tests/unit.spec.mjs:527:1 › the chess set plays a loaded game: spares rise for a promotion, the en passant pawn leaves
+[252/270] [chromium] › tests/unit.spec.mjs:579:1 › a turning planet shows only the copy within a quarter turn of how it was built
+[253/270] [chromium] › tests/unit.spec.mjs:611:1 › a heated molecule moves each atom on its own, along its bonds
+[254/270] [chromium] › tests/unit.spec.mjs:654:1 › the Moon landing is hidden at rest, lands, and leaves nothing behind
+[255/270] [chromium] › tests/unit.spec.mjs:689:1 › a morph splat packs the offset to its target; band, fade and skin pack their channel
+[256/270] [chromium] › tests/vw.spec.mjs:39:3 › whole PDF figures › a flat-colored block never turns the paper NaN (the black boxes)
+[257/270] [chromium] › tests/vw.spec.mjs:64:3 › whole PDF figures › every kind of embedded picture builds whole splats at every detail width
+[258/270] [chromium] › tests/vw.spec.mjs:116:3 › whole PDF figures › the Picture lab shows each figure page with no black on screen
+[259/270] [chromium] › tests/vw.spec.mjs:180:3 › pinch zooms, not turns › a pinch with a little natural twist and drift only zooms
+[260/270] [chromium] › tests/vw.spec.mjs:206:3 › pinch zooms, not turns › a clear twist rolls, from past its dead zone, with no jump
+[261/270] [chromium] › tests/vw.spec.mjs:215:3 › pinch zooms, not turns › two fingers moving together still turn the toy (mode drag)
+[262/270] [chromium] › tests/vw.spec.mjs:223:3 › the tilt lock › every toy on the Pictures and pages shelf starts locked; others stay free
+[263/270] [chromium] › tests/vw.spec.mjs:234:3 › the tilt lock › locked, a drag only spins the toy; pitch and roll stay home
+[264/270] [chromium] › tests/vw.spec.mjs:260:3 › the tilt lock › the Picture lab starts locked, other toys free; a choice stays with its toy
+[265/270] [chromium] › tests/vw.spec.mjs:295:3 › the tilt lock › a link's saved pose wins over the lock, and Reset view goes home
+[266/270] [chromium] › tests/vw.spec.mjs:340:3 › the top-bar settings › the turntable button is one setting for every toy, remembered on this device
+[267/270] [chromium] › tests/vw.spec.mjs:382:3 › the top-bar settings › every round button has a label, a tooltip and fits the phone header
+[268/270] [chromium] › tests/vw.spec.mjs:428:3 › flags per toy › a flag stays with its toy; the next toy shows its own look
+[269/270] [chromium] › tests/vw.spec.mjs:461:3 › flags per toy › a link that carries a flag still loads with it
+[270/270] [chromium] › tests/vw.spec.mjs:484:3 › terms of use › the About tab and the README carry the terms
+  1 failed
+    [chromium] › tests/bld.spec.mjs:41:1 › REPO-MAP.md names every top-level folder ────────────────
+  269 passed (9.7m)
+FAIL: a failing test above; fix the cause (never loosen or skip a test)
+
+== Preflight summary
+ok    main is merged in
+ok    prettier
+ok    American English on added lines
+ok    site/ is current
+ok    shared lists parse
+ok    file sizes
+FAIL  shelf-wide specs (cdx-t2, evidence-computing, st2, st3, cmp2-engine, vw, bld, spg, shb, help, hta, taps, unit): a failing test above; fix the cause (never loosen or skip a test)
+
+1 step(s) failed.

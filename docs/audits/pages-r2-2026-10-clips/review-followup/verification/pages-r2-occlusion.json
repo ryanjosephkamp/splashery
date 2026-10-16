@@ -1,0 +1,292 @@
+{
+  "config": {
+    "configFile": "/workspace/splashery/playwright.config.mjs",
+    "rootDir": "/workspace/splashery/tests",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": { "actualWorkers": 1 },
+    "preserveOutput": "always",
+    "reporter": [["json"]],
+    "reportSlowTests": { "max": 5, "threshold": 300000 },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/workspace/splashery/work/pages-r2/review-regression/results/pages-r2-occlusion",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": { "actualWorkers": 1 },
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "/workspace/splashery/tests",
+        "testIgnore": [],
+        "testMatch": ["/.*\\.spec\\.mjs$/"],
+        "timeout": 240000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.56.1",
+    "workers": 1,
+    "webServer": {
+      "command": "python3 -m http.server 4173 --bind 127.0.0.1",
+      "url": "http://127.0.0.1:4173/",
+      "reuseExistingServer": true,
+      "timeout": 60000
+    }
+  },
+  "suites": [
+    {
+      "title": "pages-r2-occlusion.spec.mjs",
+      "file": "pages-r2-occlusion.spec.mjs",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "your-book: the turning cover occludes its pages (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 360000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 27390,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Cover occlusion: your-book webgl2 {\"mean\":0.0000024064956129584977,\"noise\":0,\"count\":138514,\"angle\":0.25627100840925937}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T17:32:25.478Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "02ef6a302e3543ef3ff0-fa8f11bed763b76f01e7",
+          "file": "pages-r2-occlusion.spec.mjs",
+          "line": 3,
+          "column": 94
+        },
+        {
+          "title": "photo-album: the turning cover occludes its pages (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 360000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28344,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Cover occlusion: photo-album webgl2 {\"mean\":0.000002153942252808202,\"noise\":0,\"count\":154755,\"angle\":0.25627100840925937}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T17:32:54.126Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "02ef6a302e3543ef3ff0-b46e11658e8372c48160",
+          "file": "pages-r2-occlusion.spec.mjs",
+          "line": 3,
+          "column": 94
+        },
+        {
+          "title": "your-book: the turning cover occludes its pages (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 360000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 63987,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Cover occlusion: your-book webgpu {\"mean\":0,\"noise\":0,\"count\":138514,\"angle\":0.25627100840925937}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T17:33:22.524Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "02ef6a302e3543ef3ff0-6e86d7d1e0709160d3d9",
+          "file": "pages-r2-occlusion.spec.mjs",
+          "line": 3,
+          "column": 94
+        },
+        {
+          "title": "photo-album: the turning cover occludes its pages (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 360000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 109848,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Cover occlusion: photo-album webgpu {\"mean\":0.004676208630846607,\"noise\":0.05947249954228727,\"count\":154755,\"angle\":0.25627100840925937}\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T17:34:26.583Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "02ef6a302e3543ef3ff0-2b96f47e58b26bde2105",
+          "file": "pages-r2-occlusion.spec.mjs",
+          "line": 3,
+          "column": 94
+        },
+        {
+          "title": "all bindings and album covers keep full turns inside the sortable volume (webgl2)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 208301,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Complete book turn volumes: webgl2 [{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"hardcover\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"paperback\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"magazine\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"spiral\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"stapled\",\"failures\":[],\"moving\":16,\"inspected\":100,\"captureDraws\":25,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"photo-album\",\"key\":\"cover\",\"value\":\"leather\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[1,2]},{\"toy\":\"photo-album\",\"key\":\"cover\",\"value\":\"linen\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[1,2]},{\"toy\":\"photo-album\",\"key\":\"cover\",\"value\":\"scrapbook\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[1,2]}]\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T17:36:16.503Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "02ef6a302e3543ef3ff0-3d228dea58b307aecb89",
+          "file": "pages-r2-occlusion.spec.mjs",
+          "line": 137,
+          "column": 46
+        },
+        {
+          "title": "all bindings and album covers keep full turns inside the sortable volume (webgpu)",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 600000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "chromium",
+              "projectName": "chromium",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 378406,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Complete book turn volumes: webgpu [{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"hardcover\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"paperback\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"magazine\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"spiral\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"your-book\",\"key\":\"style\",\"value\":\"stapled\",\"failures\":[],\"moving\":16,\"inspected\":100,\"captureDraws\":25,\"cover\":0,\"leafSlots\":[0,1,2,3]},{\"toy\":\"photo-album\",\"key\":\"cover\",\"value\":\"leather\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[1,2]},{\"toy\":\"photo-album\",\"key\":\"cover\",\"value\":\"linen\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[1,2]},{\"toy\":\"photo-album\",\"key\":\"cover\",\"value\":\"scrapbook\",\"failures\":[],\"moving\":38,\"inspected\":120,\"captureDraws\":30,\"cover\":0,\"leafSlots\":[1,2]}]\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-16T17:39:44.947Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "02ef6a302e3543ef3ff0-a9e48d59c8170ecafdf2",
+          "file": "pages-r2-occlusion.spec.mjs",
+          "line": 137,
+          "column": 46
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-16T17:32:23.117Z",
+    "duration": 821625.425,
+    "expected": 6,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "suiteRun": { "wall": 824.974, "code": 0, "display": ":92" }
+}

@@ -1,0 +1,123 @@
+
+Running 62 tests using 1 worker
+
+(node:401796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:401796) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/62] [chromium] › tests/smoke.spec.mjs:111:3 › Splashery app (WebGL2) › loads with no console errors and shows the shelf
+[2/62] [chromium] › tests/smoke.spec.mjs:137:3 › Splashery app (WebGL2) › the shelf filters by category and search, and Surprise me picks a toy
+[3/62] [chromium] › tests/smoke.spec.mjs:162:3 › Splashery app (WebGL2) › generating a procedural toy changes canvas pixels
+[4/62] [chromium] › tests/smoke.spec.mjs:191:3 › Splashery app (WebGL2) › toggling an effect changes canvas pixels
+[5/62] [chromium] › tests/smoke.spec.mjs:222:3 › Splashery app (WebGL2) › paint and poke tools change the toy where it is touched
+[6/62] [chromium] › tests/smoke.spec.mjs:254:3 › Splashery app (WebGL2) › clay adds and erases blobs on a generated toy and survives a JSON round trip
+[7/62] [chromium] › tests/smoke.spec.mjs:311:3 › Splashery app (WebGL2) › shows a friendly poster when no GPU renderer is available
+[8/62] [chromium] › tests/smoke.spec.mjs:322:3 › Splashery app (WebGL2) › JSON export then import round-trips the scene
+[9/62] [chromium] › tests/smoke.spec.mjs:395:3 › Splashery app (WebGL2) › the embed page loads a scene from the hash
+[10/62] [chromium] › tests/smoke.spec.mjs:454:3 › Splashery app (WebGL2) › an embedded captured toy stays under 30 MB of transfer
+[chromium] › tests/smoke.spec.mjs:454:3 › Splashery app (WebGL2) › an embedded captured toy stays under 30 MB of transfer
+embed transfer, bee at the strong profile: 9.2 MB
+
+[11/62] [chromium] › tests/smoke.spec.mjs:477:3 › Splashery app (WebGL2) › the <splashery-toy> element renders without an iframe
+[12/62] [chromium] › tests/smoke.spec.mjs:497:3 › Splashery app (WebGL2) › bring-your-own PLY, SPLAT, SPZ and SOG files load in the browser
+[13/62] [chromium] › tests/smoke.spec.mjs:536:3 › Splashery app (WebGL2) › PNG, GIF and WebM exports produce files
+[14/62] [chromium] › tests/smoke.spec.mjs:577:3 › Splashery app (WebGL2) › desktop screenshot at 1440x900
+[15/62] [chromium] › tests/smoke.spec.mjs:640:3 › Splashery v3 engine (WebGL2) › a kit toy loads from its pack, and its action and a tap open and close it
+[16/62] [chromium] › tests/smoke.spec.mjs:665:3 › Splashery v3 engine (WebGL2) › a kit toy can change shape: the red blood cell curls into a sickle (morph)
+[17/62] [chromium] › tests/smoke.spec.mjs:685:3 › Splashery v3 engine (WebGL2) › toys move by themselves once motion is on, and any toy can bounce
+[18/62] [chromium] › tests/smoke.spec.mjs:722:3 › Splashery v3 engine (WebGL2) › patterns and flags recolour any toy and travel in the link
+[19/62] [chromium] › tests/smoke.spec.mjs:763:3 › Splashery v3 engine (WebGL2) › an old version 2 share link still opens
+[20/62] [chromium] › tests/smoke.spec.mjs:802:3 › Splashery v3 engine (WebGL2) › the sound switch remembers its choice
+[21/62] [chromium] › tests/smoke.spec.mjs:816:3 › Splashery v3 engine (WebGL2) › a tap plays the toy's own sound, and a toggle plays its on and off halves
+[22/62] [chromium] › tests/smoke.spec.mjs:856:3 › Splashery v3 engine (WebGL2) › a scan rig moves a part of a captured toy: the cat statue turns its head
+  1) [chromium] › tests/smoke.spec.mjs:856:3 › Splashery v3 engine (WebGL2) › a scan rig moves a part of a captured toy: the cat statue turns its head
+
+    Error: expect(received).toEqual(expected) // deep equality
+
+    - Expected  - 1
+    + Received  + 3
+
+    - Array []
+    + Array [
+    +   "warning: [.WebGL-0x346403bdcc00] GL_INVALID_OPERATION: glDrawElementsInstanced: Mismatch between texture format and sampler type (signed/unsigned/float/shadow).",
+    + ]
+
+      756 |     // Only the head and tail move, and they come back.
+      757 |     expect(await countDifferentPixels(page, rest, back)).toBeLessThan(moved / 4);
+    > 758 |     expect(problems).toEqual([]);
+          |                      ^
+      759 |   });
+      760 |
+      761 |   test("rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs", async ({
+        at /workspace/splashery/tests/smoke.spec.mjs:758:22
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    work/pages-r2/review-regression/results/smoke/smoke-Splashery-v3-engine--e88de-e-cat-statue-turns-its-head-chromium/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: work/pages-r2/review-regression/results/smoke/smoke-Splashery-v3-engine--e88de-e-cat-statue-turns-its-head-chromium/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    work/pages-r2/review-regression/results/smoke/smoke-Splashery-v3-engine--e88de-e-cat-statue-turns-its-head-chromium/trace.zip
+    Usage:
+
+        npx playwright show-trace work/pages-r2/review-regression/results/smoke/smoke-Splashery-v3-engine--e88de-e-cat-statue-turns-its-head-chromium/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+
+(node:411844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:411844) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[23/62] [chromium] › tests/smoke.spec.mjs:893:3 › Splashery v3 engine (WebGL2) › rigs pick splats by colour, run effects and show add-ons; shelf shapes have rigs
+[24/62] [chromium] › tests/smoke.spec.mjs:968:3 › Splashery v3 engine (WebGL2) › the chess set plays the Opera Game, and the laptop types what you type
+[25/62] [chromium] › tests/smoke.spec.mjs:1032:3 › Splashery v3 engine (WebGL2) › a stretchy toy stretches when dragged and springs back; a drag off it orbits
+[26/62] [chromium] › tests/smoke.spec.mjs:1083:3 › Splashery v3 engine (WebGL2) › every toy's sound renders: audible, not clipping, under five seconds
+[27/62] [chromium] › tests/smoke.spec.mjs:1121:3 › Splashery v3 engine (WebGL2) › v3 screenshots at 1440x900 and 390x844
+[28/62] [chromium] › tests/smoke.spec.mjs:1170:3 › Splashery v3 engine (WebGL2) › an embedded kit toy opens when tapped
+[29/62] [chromium] › tests/smoke.spec.mjs:1197:3 › Settings panel (WebGL2) › the Toy tab has the essentials, and Reset everything takes a toy back to how it started
+[30/62] [chromium] › tests/smoke.spec.mjs:1244:3 › Settings panel (WebGL2) › the panel and the shelf can be made bigger on a wide screen
+[31/62] [chromium] › tests/smoke.spec.mjs:1276:3 › Settings panel (WebGL2) › flag colours lie gently over the chess board, and stay with the toy they were chosen on
+[32/62] [chromium] › tests/smoke.spec.mjs:1322:3 › Settings panel (WebGL2) › the chess game bar plays, pauses, steps and jumps, and a tap after the end starts again
+[33/62] [chromium] › tests/smoke.spec.mjs:1421:3 › Sports balls (WebGL2) › a ball in a country's colours keeps its seams
+[34/62] [chromium] › tests/smoke.spec.mjs:1453:3 › Sports balls (WebGL2) › ball screenshots at 1440x900 and 390x844
+[35/62] [chromium] › tests/smoke.spec.mjs:1514:5 › Sharpness and embeds (WebGL2) › the canvas renders at 2x on a 2x screen at the high tier
+[36/62] [chromium] › tests/smoke.spec.mjs:1514:5 › Sharpness and embeds (WebGL2) › the canvas renders at 3x on a 3x screen at the mid tier
+[37/62] [chromium] › tests/smoke.spec.mjs:1514:5 › Sharpness and embeds (WebGL2) › the canvas renders at 2x on a 3x screen at the mid tier with ?sharp=0
+[38/62] [chromium] › tests/smoke.spec.mjs:1514:5 › Sharpness and embeds (WebGL2) › the canvas renders at 3x on a 3x screen at the max tier
+[39/62] [chromium] › tests/smoke.spec.mjs:1514:5 › Sharpness and embeds (WebGL2) › the canvas renders at 1.5x on a 3x screen at the low tier
+[40/62] [chromium] › tests/smoke.spec.mjs:1557:3 › Sharpness and embeds (WebGL2) › Detail: High raises the tier, stays in this browser and stays out of links
+[41/62] [chromium] › tests/smoke.spec.mjs:1578:3 › Sharpness and embeds (WebGL2) › a transparent embed stays transparent on a dark-mode page
+[42/62] [chromium] › tests/smoke.spec.mjs:1619:3 › Sharpness and embeds (WebGL2) › embeds frame the toy closer, take ?zoom= and zoom with buttons and the wheel
+[43/62] [chromium] › tests/smoke.spec.mjs:1668:3 › Sharpness and embeds (WebGL2) › the embed snippet is responsive and has a size picker
+[44/62] [chromium] › tests/smoke.spec.mjs:1685:3 › Sharpness and embeds (WebGL2) › a shelf thumbnail that fails is fetched once more, then shows a plain tile
+[45/62] [chromium] › tests/smoke.spec.mjs:1716:3 › Splashery on a phone › has no horizontal overflow at 390px and the sheet opens
+[46/62] [chromium] › tests/smoke.spec.mjs:1818:3 › Splashery on a phone › dragging the shelf up opens a grid, and picking a toy folds it back
+[47/62] [chromium] › tests/smoke.spec.mjs:1927:3 › Splashery on a phone › a panel opened while a toy from the grid is still loading stays open
+[48/62] [chromium] › tests/smoke.spec.mjs:1952:3 › Splashery on a phone › the Make pane explains where to find your own splat
+[49/62] [chromium] › tests/smoke.spec.mjs:1982:3 › Splashery on a phone › has no horizontal overflow at 360px
+[50/62] [chromium] › tests/smoke.spec.mjs:2032:3 › Splashery on WebGPU › auto picks WebGPU when an adapter exists and effects render
+[51/62] [chromium] › tests/smoke.spec.mjs:2095:3 › Playground release UI › a shared scene wins over the first-toy pin
+[52/62] [chromium] › tests/smoke.spec.mjs:2115:3 › Playground release UI › an embed without a toy keeps the cactus default
+[53/62] [chromium] › tests/smoke.spec.mjs:2124:3 › Playground release UI › search counts only toys on the public shelf
+[54/62] [chromium] › tests/smoke.spec.mjs:2142:5 › Playground release UI › Featured and All keep the owner's order with labs=0
+[55/62] [chromium] › tests/smoke.spec.mjs:2163:5 › Playground release UI › a fresh visit opens a Featured toy with labs=0
+[56/62] [chromium] › tests/smoke.spec.mjs:2142:5 › Playground release UI › Featured and All keep the owner's order with labs=1
+[57/62] [chromium] › tests/smoke.spec.mjs:2163:5 › Playground release UI › a fresh visit opens a Featured toy with labs=1
+[58/62] [chromium] › tests/smoke.spec.mjs:2173:5 › Playground release UI › controls and shelf cards fit at 390x844
+[59/62] [chromium] › tests/smoke.spec.mjs:2173:5 › Playground release UI › controls and shelf cards fit at 1440x900
+[60/62] [chromium] › tests/smoke.spec.mjs:2173:5 › Playground release UI › controls and shelf cards fit at 320x568
+[61/62] [chromium] › tests/smoke.spec.mjs:2173:5 › Playground release UI › controls and shelf cards fit at 844x390
+[62/62] [chromium] › tests/smoke.spec.mjs:2173:5 › Playground release UI › controls and shelf cards fit at 1280x742
+  1 failed
+    [chromium] › tests/smoke.spec.mjs:856:3 › Splashery v3 engine (WebGL2) › a scan rig moves a part of a captured toy: the cat statue turns its head
+  61 passed (23.2m)

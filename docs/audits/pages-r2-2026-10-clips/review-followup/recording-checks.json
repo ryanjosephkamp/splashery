@@ -1,0 +1,44 @@
+[
+  {
+    "scene": "r2-book",
+    "revision": "main",
+    "commit": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
+    "frames": 132,
+    "bothLayerModesPassed": true
+  },
+  {
+    "scene": "r2-book",
+    "revision": "round2",
+    "commit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+    "frames": 132,
+    "bothLayerModesPassed": true
+  },
+  {
+    "scene": "r2-lab",
+    "revision": "main",
+    "commit": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
+    "frames": 94,
+    "bothLayerModesPassed": true
+  },
+  {
+    "scene": "r2-lab",
+    "revision": "round2",
+    "commit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+    "frames": 94,
+    "bothLayerModesPassed": true
+  },
+  {
+    "scene": "r2-album",
+    "revision": "main",
+    "commit": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
+    "frames": 111,
+    "bothLayerModesPassed": true
+  },
+  {
+    "scene": "r2-album",
+    "revision": "round2",
+    "commit": "9b9d30d3732b0ba38af34bc79ee383afe65e2788",
+    "frames": 111,
+    "bothLayerModesPassed": true
+  }
+]

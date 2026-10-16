@@ -1,0 +1,9 @@
+{
+  "plannedAtUTC": "2026-10-16T17:12:15.913653+00:00",
+  "purpose": "Prospective follow-up: all 12 phone toy/input groups, three adjacent AB/BA/AB pairs, unchanged strict gates and measurement tool. Every completed case retained; no favorable reruns.",
+  "candidateRuntimeSha256": "b0a1770a72504f46abe748c19ff18ec84389b67ca2a2812247dd5ef9a7ecaf22",
+  "runnerSha256": "231d36b21f88bb03b46a84fcc77b6eeedc783d194e1cdb542d8884aac90f762c",
+  "baselineCommit": "6c38b4f690e6cd9e8cdff7e85f14176e08aebf40",
+  "plannedCases": 72,
+  "baselineUpdateReason": "Main advanced before measurement; merge the shared UI changes and compare both integrated revisions against this same main."
+}

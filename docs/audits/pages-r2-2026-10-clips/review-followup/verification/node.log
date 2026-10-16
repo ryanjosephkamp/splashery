@@ -1,0 +1,24 @@
+✔ camera-gauge alignment recovers a known scale, rotation, and translation (2.604972ms)
+✔ stationary or collinear camera paths cannot claim an unambiguous similarity calibration (0.64993ms)
+✔ all 12 committed stills have complete calibrated depth, masks, and verified asset records (2140.501039ms)
+✔ the evidence server serves video ranges and denies private paths and symlinks (120.790262ms)
+✔ median-plane camera calibration preserves the source pinhole projection (2.736508ms)
+✔ known world camera motion maps to recipe coordinates without fitting held-out images (0.235918ms)
+✔ camera calibration rejects missing or nonpositive depth scale (0.922427ms)
+✔ reference color averages source pixel areas so render sharpness is not compared with aliased noise (2.845903ms)
+✔ lossless browser byte transport preserves every quantized prediction across chunk boundaries (56.266324ms)
+✔ affine inverse-depth calibration is evaluated on held-out pixels (2.129767ms)
+✔ invalid and appearance-ambiguous truth cannot improve a depth score (1.692164ms)
+✔ invalid predictions count as holes and a wrong depth ordering is rejected (0.969719ms)
+✔ identical images have zero color error, unit SSIM, and unit sharpness (1.942692ms)
+✔ a blurred render loses sharpness without being scored as a hole (2.915477ms)
+✔ camera motion is removed before temporal depth jitter is counted (0.966052ms)
+✔ temporal scoring handles a full frame without an argument-stack overflow (905.534922ms)
+ℹ tests 16
+ℹ suites 0
+ℹ pass 16
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2820.87008

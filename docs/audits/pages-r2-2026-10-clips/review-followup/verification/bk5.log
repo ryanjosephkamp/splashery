@@ -1,0 +1,21 @@
+
+Running 9 tests using 1 worker
+
+(node:401787) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+(node:401787) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1/9] [chromium] › tests/bk5.spec.mjs:167:3 › links and pop-out (no browser) › a tap on a web link asks to open it; a page link turns there; elsewhere turns the page
+[2/9] [chromium] › tests/bk5.spec.mjs:199:3 › links and pop-out (no browser) › seen a page at a time, a page link lands on that page
+[3/9] [chromium] › tests/bk5.spec.mjs:218:3 › links and pop-out (no browser) › Pop out lifts the page's figure as one piece and lays it back; the page shows its place empty
+[4/9] [chromium] › tests/bk5.spec.mjs:273:3 › links and pop-out (no browser) › a box drawn on the page rises; a page turn puts it back at once
+[5/9] [chromium] › tests/bk5.spec.mjs:315:3 › links and pop-out (no browser) › the album lifts a photo tapped, and a tap on the other photo lifts that one too
+[6/9] [chromium] › tests/bk5.spec.mjs:454:3 › links and pop-out (in the app) › Your book: a web link asks first, javascript: is refused, a page link turns there
+[7/9] [chromium] › tests/bk5.spec.mjs:512:3 › links and pop-out (in the app) › Your book: the PDF's picture pops out with its depth and lies back
+[8/9] [chromium] › tests/bk5.spec.mjs:564:3 › links and pop-out (in the app) › Photo album: a photo pops out with its depth and lies back (phone size)
+[9/9] [chromium] › tests/bk5.spec.mjs:588:3 › links and pop-out (in the app) › old links and saved scenes of the book and the album still load
+  9 passed (5.0m)

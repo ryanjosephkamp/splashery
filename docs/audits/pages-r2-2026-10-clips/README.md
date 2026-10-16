@@ -5,12 +5,18 @@ Task 95. Made by Ryan with Codex (GPT-6), October 15–16, 2026. Rule check: non
 This is an evidence-only branch, `codex/book-picture-lab-r2-clips`. **Never merge this branch.** The
 implementation belongs to `codex/book-picture-lab-r2` and its draft pull request.
 
-The comparisons use a 390×844 CSS-pixel viewport, device scale 2, low detail, and adaptation off.
-Main is the unchanged `cc297c89e`, including Fix13 (#665). The frozen implementation is `f5f8cef90`;
-its engine changes end at `bec7999a4`. Main later advanced to `94216d772` only in five documentation
-files, which were merged into the implementation as `5361db4cb`. Rendering source remains unchanged
-by that merge. Both checkouts run in Chromium on the same Linux software renderer, one at a time.
-These are browser recordings, not physical-phone measurements.
+The current paired motion recordings use a 390×844 CSS-pixel viewport, device scale 2, low detail,
+and adaptation off. They compare main at `6c38b4f69` with integrated source `9b9d30d37`, including
+engine fix `dcfe13e84` and the same upstream playground UI on both sides. Full commits, runtime
+hashes, and recorder hashes are in `recordings.json`. The paired recorder captures the two revisions
+sequentially on the same Linux software renderer. These are browser recordings, not physical-phone
+measurements.
+
+The original Goal benchmark and still crops remain measurements of `f5f8cef90` against `cc297c89e`.
+The separate [review follow-up](review-followup/README.md) records the new validation, phone
+benchmark cohort, and supplemental turn tours. All current motion recordings and the four cover
+stills use the integrated source; exact metadata is retained for each. The original Goal stills
+remain a separate historical archive.
 
 Every recorded scene uses an 8-step-per-second animation clock. Each main/candidate pair uses the
 same cadence and capture method, recorded in its metadata. The three toy scenes show completed
@@ -31,8 +37,9 @@ is MIT.
 
 ## Recordings
 
-Recordings are captured from the final source after the isolated quantitative matrix, then inspected
-before publication. The paired files use main on the left and round 2 on the right.
+The current paired recordings were captured from the corrected source and inspected before
+publication. They supersede the earlier recordings, retained in this branch's history. The paired
+files use main on the left and round 2 on the right.
 
 | Scene       | Paired recording       | Contact sheet                 |
 | ----------- | ---------------------- | ----------------------------- |
@@ -40,18 +47,17 @@ before publication. The paired files use main on the left and round 2 on the rig
 | Picture lab | [MP4](picture-lab.mp4) | [JPEG](picture-lab-strip.jpg) |
 | Photo album | [MP4](photo-album.mp4) | [JPEG](photo-album-strip.jpg) |
 
-The [local video gallery](index.html) includes all three paired toy clips and separate main and
-round 2 recordings at full phone width. The [quantitative archive](benchmark/README.md) retains the
-matched raw records, comparison checks, exact crops, and SHA-256 manifest.
-[Still comparisons](stills/README.md) show body text at native framebuffer pixels and each toy at
-phone and desktop sizes. The [fixtures](fixtures/README.md) preserve the exact input bytes;
-[CI records](ci/README.md) preserve full-suite summaries beyond Actions artifact retention.
-[Dense frame reviews](review/README.md) sample each sequence in order.
-[Earlier trials](exploratory/README.md) retain strict misses outside the final comparison.
-[Recording metadata](recordings.json) retains the scene observations, renderer, viewport, duration,
-frame count, and clock description. Photo source authors, source pages, licenses, and the
-repository's original checks remain in [CREDITS.md](../../../CREDITS.md). No visitor files appear in
-these recordings.
+The [local video gallery](index.html) includes all three paired toy clips and both supplemental
+full-turn tours. The [quantitative archive](benchmark/README.md) retains the matched raw records,
+comparison checks, exact crops, and SHA-256 manifest. [Still comparisons](stills/README.md) show
+body text at native framebuffer pixels and each toy at phone and desktop sizes. The
+[fixtures](fixtures/README.md) preserve the exact input bytes; [CI records](ci/README.md) preserve
+full-suite summaries beyond Actions artifact retention. [Dense frame reviews](review/README.md)
+sample each sequence in order. [Earlier trials](exploratory/README.md) retain strict misses outside
+the final comparison. [Recording metadata](recordings.json) retains the scene observations,
+renderer, viewport, duration, frame count, and clock description. Photo source authors, source
+pages, licenses, and the repository's original checks remain in [CREDITS.md](../../../CREDITS.md).
+No visitor files appear in these recordings.
 
 ## Reproduction
 
