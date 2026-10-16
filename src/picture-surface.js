@@ -46,10 +46,12 @@ uniform sampler2D uColor;
 uniform sampler2D uMask;
 uniform vec4 uKeep;
 uniform vec4 uColorFlags;
+uniform vec4 uColorLow;
+uniform vec4 uColorHigh;
 varying vec2 vUv;
 void main(void) {
   vec4 color = texture2D(uColor, vUv, -1.0);
-  if (uColorFlags.x > 0.5) color = vec4(color.rrr, 1.0);
+  if (uColorFlags.x > 0.5) color = vec4(mix(uColorLow.xyz, uColorHigh.xyz, color.rrr), 1.0);
   if (uKeep.z > 0.5) {
     float d = texture2D(uMask, vUv).r;
     if (d < uKeep.x || d > uKeep.y) discard;
@@ -105,11 +107,13 @@ var uMask: texture_2d<f32>;
 var uMaskSampler: sampler;
 uniform uKeep: vec4f;
 uniform uColorFlags: vec4f;
+uniform uColorLow: vec4f;
+uniform uColorHigh: vec4f;
 varying vUv: vec2f;
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   var color = textureSampleBias(uColor,uColorSampler,input.vUv,-1.0);
-  if (uniform.uColorFlags.x > 0.5) { color = vec4f(color.rrr,1.0); }
+  if (uniform.uColorFlags.x > 0.5) { color = vec4f(mix(uniform.uColorLow.xyz,uniform.uColorHigh.xyz,vec3f(color.r)),1.0); }
   if (uniform.uKeep.z > 0.5) {
     let d = textureSample(uMask,uMaskSampler,input.vUv).r;
     if (d < uniform.uKeep.x || d > uniform.uKeep.y) { discard; }
@@ -132,6 +136,58 @@ export function grayPixels(rgba) {
   const pixels = new Uint8Array(rgba.length / 4);
   for (let i = 0; i < pixels.length; i++) pixels[i] = rgba[i * 4];
   return pixels;
+}
+
+// A single ink color over a background can use a coverage channel too.
+// Validate every source color within one 8-bit step; unrelated colors and
+// transparency retain their full raster. Repeated colors share work.
+export function rampPixels(rgba, pack = true) {
+  if (!rgba || rgba.byteOffset % 4 || rgba.length % 4) return null;
+  const words = new Uint32Array(rgba.buffer, rgba.byteOffset, rgba.length / 4);
+  let lo = 0,
+    hi = 0,
+    min = Infinity,
+    max = -Infinity;
+  for (let i = 0; i < rgba.length; i += 4) {
+    if (rgba[i + 3] !== 255) return null;
+    const sum = rgba[i] + rgba[i + 1] + rgba[i + 2];
+    if (sum < min) {
+      min = sum;
+      lo = i;
+    }
+    if (sum > max) {
+      max = sum;
+      hi = i;
+    }
+  }
+  const low = Array.from(rgba.slice(lo, lo + 3));
+  const high = Array.from(rgba.slice(hi, hi + 3));
+  const d = high.map((v, i) => v - low[i]);
+  const norm = d.reduce((n, v) => n + v * v, 0);
+  const pixels = pack ? new Uint8Array(words.length) : null;
+  const codes = new Map([
+    [words[lo / 4], 0],
+    [words[hi / 4], norm ? 255 : 0],
+  ]);
+  for (let i = 0; i < words.length; i++) {
+    const word = words[i];
+    let code = codes.get(word);
+    if (code === undefined) {
+      const at = i * 4;
+      code = Math.max(
+        0,
+        Math.min(
+          255,
+          Math.round((255 * d.reduce((s, v, k) => s + (rgba[at + k] - low[k]) * v, 0)) / norm),
+        ),
+      );
+      for (let k = 0; k < 3; k++)
+        if (Math.abs(Math.round(low[k] + (d[k] * code) / 255) - rgba[at + k]) > 1) return null;
+      codes.set(word, code);
+    }
+    if (pixels) pixels[i] = code;
+  }
+  return { pixels, low: low.map((v) => v / 255), high: high.map((v) => v / 255) };
 }
 
 export function surfaceGrid(geom, w, h, relief = null) {
@@ -220,6 +276,8 @@ export class PictureSurface {
     this.color.upload();
     this.material.setParameter("uColor", this.color);
     this.material.setParameter("uColorFlags", [data.pixels ? 1 : 0, 0, 0, 0]);
+    this.material.setParameter("uColorLow", [...(data.low || [0, 0, 0]), 0]);
+    this.material.setParameter("uColorHigh", [...(data.high || [1, 1, 1]), 0]);
     this.mask = null;
     const r = data.relief;
     if (r?.keep) {

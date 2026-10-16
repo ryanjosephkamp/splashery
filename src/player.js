@@ -969,6 +969,7 @@ export class Player {
       profile: this.profile,
       solid: !!recipe.pictures?.solid,
       backing: recipe.pictures?.backing,
+      prefetch: recipe.pictures?.prefetch,
       // Lane Books: the recipe may draw on each page or picture before it
       // becomes splats (a photo album's photo corners and captions).
       decorate: recipe.pictures?.decorate

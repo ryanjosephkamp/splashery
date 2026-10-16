@@ -34,7 +34,7 @@
 import * as pc from "./pc.js";
 import { buildSheet } from "./picture-splats.js";
 import { safeLinkURL, clampRegion } from "./media.js";
-import { PictureSurface, grayPixels, opaqueGray } from "./picture-surface.js";
+import { PictureSurface, grayPixels, opaqueGray, rampPixels } from "./picture-surface.js";
 
 // Per device tier, for one sheet: the most splats a photo or a frame gets
 // ("pixels", and "screen" for video, whose texture uploads every frame),
@@ -100,11 +100,21 @@ export class Pictures {
   // ({ center, scale }), spine: k.spineDef or null.
   constructor(
     player,
-    { defs, transform, spine, profile, decorate = null, solid = false, backing = "sampled" },
+    {
+      defs,
+      transform,
+      spine,
+      profile,
+      decorate = null,
+      solid = false,
+      backing = "sampled",
+      prefetch = true,
+    },
   ) {
     this.player = player;
     this.solid = solid;
     this.backing = backing;
+    this.prefetch = prefetch;
     this.decorate = decorate;
     this.stage = player.stage;
     this.profile = profile;
@@ -603,6 +613,7 @@ export class Pictures {
     // Prefetch the page after the first sheet's (PDFs only).
     const first = this.sheets[0];
     if (
+      this.prefetch !== false &&
       this.media.kind === "pdf" &&
       first?.want &&
       !first.want.crop &&
@@ -657,7 +668,7 @@ export class Pictures {
       const bw = sparse
         ? Math.min(w, Math.floor(Math.sqrt(this.budget.pixels * media.aspect(want.page))))
         : solid
-          ? Math.max(64, Math.ceil(w / 2))
+          ? Math.max(64, Math.ceil(w / 4))
           : w;
       const bh = bw === w ? h : Math.max(8, Math.round(bw / media.aspect(want.page)));
       let backing = canvas;
@@ -670,7 +681,8 @@ export class Pictures {
       const pixels = backing
         ? backing.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, bw, bh).data
         : null;
-      const monochrome = solid && opaqueGray(pixels);
+      const monochrome =
+        solid && (opaqueGray(pixels) || (want.method === "ink" && !!rampPixels(pixels, false)));
       const geom = this.geometry(sheet, media.aspect(want.page), bw, bh);
       let data = await buildOffThread({
         pixels,
@@ -700,8 +712,8 @@ export class Pictures {
         w = w2;
         h = h2;
       }
-      this.compactSurface(data, monochrome);
       if (this.destroyed || media !== this.media) return null;
+      this.compactSurface(data, monochrome);
       data.w = w;
       data.h = h;
       data.drawMs = t1 - t0;
@@ -732,9 +744,14 @@ export class Pictures {
     const c = face.source;
     const rgba = c.getContext("2d", { willReadFrequently: true }).getImageData(0, 0, c.width, c.height).data; // prettier-ignore
     const mono = grayPixels(rgba);
-    if (!mono) return;
-    face.pixels = mono;
-    face.sourceBytes = mono.byteLength;
+    const ramp = mono ? null : rampPixels(rgba);
+    if (!mono && !ramp) return;
+    face.pixels = mono || ramp.pixels;
+    if (ramp) {
+      face.low = ramp.low;
+      face.high = ramp.high;
+    }
+    face.sourceBytes = face.pixels.byteLength;
     face.source = null;
     c.width = c.height = 1;
   }
@@ -773,8 +790,8 @@ export class Pictures {
     const relief = rel ? { w: rel.w, h: rel.h, d: Float32Array.from(rel.d), amount: (rel.depth || 0) * this.fitScale, nearest: !!rel.nearest, keep: Array.isArray(rel.keep) ? rel.keep.slice(0, 2) : null } : null; // prettier-ignore
     const data = await buildOffThread({ pixels, w, h, method: want.method, relief, backingOnly: this.solid, ...geom }); // prettier-ignore
     if (this.solid) data.surface = { source: canvas, geom, w, h, relief };
-    this.compactSurface(data, monochrome);
     if (this.destroyed || media !== this.media) return null;
+    this.compactSurface(data, monochrome);
     data.w = w;
     data.h = h;
     data.drawMs = t1 - t0;
