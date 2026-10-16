@@ -3656,6 +3656,17 @@ export const TOYS = [
     camera: { yaw: 0.3, pitch: 0.12, roll: 0, distance: 3.5 },
   },
   // ---- End of pack: computing-history ----
+  // ---- Pack: name-toy (Codex task 78d; labs) ----
+  {
+    id: "name-toy",
+    label: "Your name in splats",
+    category: "pictures",
+    kind: "kit",
+    pack: "name-toy",
+    labs: true,
+    tags: "name words letters text spin poke paint drop blow portfolio toybox",
+    camera: { yaw: 0.08, pitch: 0.06, roll: 0, distance: 3.2 },
+  },
   // ---- Pack: pictures ----
   {
     id: "picture-lab",

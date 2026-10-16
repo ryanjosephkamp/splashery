@@ -21,6 +21,11 @@
 // the toy's recipe and against a real source for every fact.
 
 export const TOY_HELP = {
+  "name-toy": {
+    howTo: "Type a name in Toy. Pick an action, then tap a letter; turn on sound to hear its note.",
+    about:
+      "From a concept by Ryan Kamp. Your name becomes a toy made of solid splat letters, using the same letter paths as the Fourier circles toy's Your words choice. Each letter stays in one piece as you spin, poke, paint, drop, or blow it. Turn on sound and each letter plays its own note. Paint colors the whole letter; the other actions settle back into place.\n\nType up to 24 letters, digits, or symbols. The name and its paint travel in a scene link or saved JSON. Auto detail uses fewer splats on smaller device profiles, and the five detail steps stay within the device's budget. Blow uses a tap and does not need your microphone. Made by Ryan with Codex (GPT-6); code is MIT, and procedural shapes are CC0.",
+  },
   // ---- Photoreal r3 (lane Photoreal r3) ----
   "triceratops-skull": {
     howTo: "Tap it to make it look at you; drag to turn it.",

@@ -3146,6 +3146,13 @@
       "effect": "Turns over to show its other side, and back.",
       "sound": "A short, quiet sound that suits the object.",
       "improved": "Photoreal r3 (October 8, 2026): Turns over to show its other side, and back."
+    },
+    "name-toy": {
+      "v": "keep",
+      "interactive": true,
+      "effect": "The typed name becomes solid splat letters. Spin, poke, paint, drop, and blow move each letter as one piece, then settle home. Paint colors remain in scene links.",
+      "sound": "Each letter plays its own quiet bar note.",
+      "improved": "Codex task 78d: reuses Your words paths, with rigid letter tokens, five actions, saved names and whole-letter paint, and five device-capped detail steps. From a concept by Ryan Kamp."
     }
   }
 }

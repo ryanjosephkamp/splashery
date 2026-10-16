@@ -12561,5 +12561,19 @@
       "sha256": "524818f36ea76563e1f30e8b545b763373dbc52b2f7f4534d859514bcb8406a2",
       "changes": "Generated the default word with the shared Kit and rendered the thumbnail with tools/make-thumbs.mjs."
     }
+  ],
+  "proceduralToys": [
+    {
+      "id": "name-toy",
+      "toy": "name-toy",
+      "label": "Your name in splats",
+      "source": "src/packs/name-toy.js",
+      "author": "Made by Ryan with Codex (GPT-6)",
+      "license": "CC0 1.0",
+      "checked": "October 14, 2026",
+      "thumbnail": "assets/toys/name-toy/thumb.webp",
+      "sha256": "66715b03758b4ff22129c8bb901ca65cf40877990ce7f377e6904beacb6a55c1",
+      "sourceNote": "From a concept by Ryan Kamp. Original procedural splat letters rendered by Splashery, reusing the Fourier circles Your words paths. Code is MIT; shapes and the thumbnail are CC0. No reference fonts, files, or renderer are shipped."
+    }
   ]
 }
