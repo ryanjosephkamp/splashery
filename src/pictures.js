@@ -682,7 +682,14 @@ export class Pictures {
       // The sharp face can use more source pixels without increasing the
       // Gaussian backing's original pixel budget.
       const bw = sparse
-        ? Math.min(w, Math.floor(Math.sqrt(this.budget.pixels * media.aspect(want.page))))
+        ? Math.min(
+            w,
+            Math.floor(
+              Math.sqrt(
+                this.budget.pixels * (this.profile === "low" ? 0.5 : 1) * media.aspect(want.page),
+              ),
+            ),
+          )
         : solid
           ? Math.max(64, Math.ceil(w / 4))
           : w;
