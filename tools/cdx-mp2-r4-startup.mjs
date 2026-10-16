@@ -5,7 +5,14 @@ import fs from "node:fs/promises";
 import path from "node:path";
 import { GRAPHICS_LAUNCH } from "./cdx-mp2-render.mjs";
 import { R4_CASES } from "./cdx-mp2-r4-cases.mjs";
-import { PHONE, option, snapshot, routeCode, caseInputHashes } from "./cdx-mp2-r4-harness.mjs";
+import {
+  PHONE,
+  option,
+  snapshot,
+  routeCode,
+  caseInputHashes,
+  graphicsInfo,
+} from "./cdx-mp2-r4-harness.mjs";
 
 const baseline = option("baseline"),
   out = option("out", "work/r4-startup.json");
@@ -33,7 +40,7 @@ const report = {
   phone: PHONE,
   workerThrottled: false,
   protocol:
-    "Selection to first actual submitted 3D front surface. Opening the toy starts before observer module imports, including their preparation overhead in both versions; other clips start from the already open default toy. Fresh browser context per repeat",
+    "Selection to first completed 3D front-surface draw, with a single WebGL finish fence; submission time and completion wait are separate. Opening the toy starts before observer module imports, including their preparation overhead in both versions; other clips start from the already open default toy. Fresh browser context per repeat",
   results: [],
 };
 await fs.mkdir(path.dirname(out), { recursive: true });
@@ -58,6 +65,7 @@ try {
           `${process.env.SPLASHERY_URL || "http://127.0.0.1:4173/"}?renderer=webgl2&adapt=off&profile=low&labs=1`,
         );
         await page.waitForSelector("body[data-ready='true']");
+        report.graphics ||= await graphicsInfo(page);
         await page.evaluate(async () => {
           window.__r4ColdSelectionStart = performance.now();
           window.__r4Moving = await import("/src/packs/moving-photo.js");
@@ -127,8 +135,12 @@ try {
                 submitted?.mesh === mesh &&
                 submitted.clip === c
               ) {
+                const completionStarted = performance.now();
+                player.stage.device.gl.finish();
+                const completedAt = performance.now();
                 window.__r4First = {
-                  ms: performance.now() - window.__r4Start,
+                  ms: completedAt - window.__r4Start,
+                  gpuCompletionWaitMs: completedAt - completionStarted,
                   clip: c.name,
                   sample: c.sample,
                   picture: [mesh.color.width, mesh.color.height],

@@ -15,6 +15,23 @@ export const PHONE = {
 export const DESKTOP = { viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 };
 export const option = (key, fallback = "") =>
   process.argv.find((arg) => arg.startsWith(`--${key}=`))?.slice(key.length + 3) || fallback;
+export async function graphicsInfo(page) {
+  return page.evaluate(() => {
+    const device = window.__splashery.player.stage.device,
+      gl = device.gl,
+      debug = gl?.getExtension("WEBGL_debug_renderer_info");
+    return {
+      version: gl?.getParameter(gl.VERSION),
+      renderer: gl?.getParameter(gl.RENDERER),
+      unmaskedRenderer: debug ? gl.getParameter(debug.UNMASKED_RENDERER_WEBGL) : null,
+      subpixelBits: gl?.getParameter(gl.SUBPIXEL_BITS),
+      maxTextureSize: gl?.getParameter(gl.MAX_TEXTURE_SIZE),
+      hardwareConcurrency: navigator.hardwareConcurrency,
+      devicePixelRatio,
+      drawingBuffer: [device.width, device.height],
+    };
+  });
+}
 export async function caseInputHashes(item, selectedPath, code) {
   const files = new Set(item.source ? [item.source] : []),
     sample = SAMPLES.find((sample) => sample.id === item.id),

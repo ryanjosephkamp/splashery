@@ -2137,7 +2137,10 @@ function showOriginal(clip) {
 function photoSource() {
   const clip = MOVING.clip;
   if (!clip || typeof document === "undefined") return null;
-  if (clip.video) return clip.video.readyState >= 2 ? clip.video : null;
+  // Bundled short samples keep the tier's retained picture in Splats. Their
+  // shared native video still supplies Sharp and sound without another decoder.
+  if (clip.video && (!clip.sample || clip.long))
+    return clip.video.readyState >= 2 ? clip.video : null;
   const P = (MOVING.photoCanvas ||= document.createElement("canvas"));
   if (P.width !== clip.w || P.height !== clip.h) {
     P.width = clip.w;

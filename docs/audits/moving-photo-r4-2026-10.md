@@ -97,11 +97,31 @@ not CPU-throttled by CDP. This is software-rendered emulation, not a physical An
 - Node recipe builders use the actual baked long-sample depth without requiring a DOM decoder. The
   unchanged kit suite exposed this previously unhandled long-sample path.
 
-The final inherited-dispatch fix retains upload observers installed after a clip mesh is created.
-The per-mesh revision counter had captured an old prototype function, so the existing paused-seek
-test could not observe actual uploads. Its unchanged regression passes after the dispatch fix;
-shader, field, reconstruction, and scheduling arithmetic are unchanged. The complete quality sweep
-is repeated against this final source pin.
+The inherited-dispatch fix retains upload observers installed after a clip mesh is created. The
+per-mesh revision counter had captured an old prototype function, so the existing paused-seek test
+could not observe actual uploads. Its unchanged regression passes after the dispatch fix; shader,
+field, reconstruction, and scheduling arithmetic are unchanged. The complete quality sweep is
+repeated against this quality-capture source pin.
+
+An additional real-browser check found that raw `VideoFrame.copyTo()` pixels ignore display rotation
+and flips. A square rotated frame passes a size-only shortcut, so the old native worker returned the
+wrong picture on seven of eight rotation/flip combinations. Both native shortcuts now require
+explicit zero rotation and no flip; transformed or unspecified frames use the existing native
+display canvas. The new semantic regression sends all eight real transformed frames through the
+actual worker, compares every returned bitmap byte with the browser's transform-aware canvas, and
+checks resource closure and the source clock. It passes all eight. A separately routed before/after
+check reproduces the old mismatches and the fixed zero-difference results without altering an
+existing threshold.
+
+The complete quality sweep is pinned to public `bf58e8c4` (application hash
+`2b23383b800065b10385c77c0da6245053c5bbd60a5ba35c105fba87f54347e4`). The final runtime adds only
+those two transform guards, their comment, and the corrected public generator credit URL. All nine
+native video inputs in the fourteen-case corpus explicitly report zero rotation and no flip; the
+other inputs use retained GIF or sheet pictures. Their existing pixel paths are unchanged. Reversing
+only these small changes reproduces all ten captured application files byte for byte. The exact
+proof, input hashes, and before/after worker results accompany the ledgers. Cadence, startup, and
+live recordings use the final runtime hash
+`5258e5824f3c47013c2fa9c182ff6cc2a8b8b7935546e451e45b7c1e1bdc4f43`.
 
 The candidate long-film caches were rebuilt from verified interior source times, using the existing
 upload refinement's symmetric, color-gated half-second window, one clip-wide depth range, and the
@@ -156,13 +176,14 @@ Final per-case tables and exact source pins: pending.
 
 The clean speed run uses one browser with no competing tests, model-baking jobs, quality sweeps, or
 encoders. It keeps round 3's two-second warmup, twelve-second short windows, and thirty-second long
-windows. Three clean passes are planned for all fourteen inputs. It reports frameend update
-intervals, actual postrender intervals, and bound-picture-clock submission intervals separately. A
-fast update callback alone does not establish fast visible playback; a 10 fps source also cannot
-supply 20 distinct pictures per second. Native bitmap clocks are their frozen presentation
-timestamps; a directly bound video uses its media-element clock, and a retained source uses its
-frame index. Clock changes are not an independent pixel-uniqueness measurement. Browser decoder
-counters and live presentation recordings are reported separately.
+windows. A full clean pass covers all fourteen inputs, with two additional Bunny/Horse passes to
+assess the closest comparison with main. It reports frameend update intervals, actual postrender
+intervals, and bound-picture-clock submission intervals separately. A fast update callback alone
+does not establish fast visible playback; a 10 fps source also cannot supply 20 distinct pictures
+per second. Native bitmap clocks are their frozen presentation timestamps; a directly bound video
+uses its media-element clock, and a retained source uses its frame index. Clock changes are not an
+independent pixel-uniqueness measurement. Browser decoder counters and live presentation recordings
+are reported separately.
 
 Instrumented runs add inclusive JavaScript costs for the clip pipeline, buffer and texture uploads,
 mip work, sorting, and draw submission. Parallel worker phases are reported separately and cannot be
@@ -172,7 +193,9 @@ invented decoder CPU costs. These instrumented runs are separate from the clean 
 
 Startup uses a fresh page and worker per case and records the first actual postrender whose mesh
 owns the requested clip and a usable picture. Its device-draw observer also requires a valid shader
-and a nonempty submitted front-surface index buffer belonging to that mesh. It does not wait for all
+and a nonempty submitted front-surface index buffer belonging to that mesh. A single WebGL finish
+fence waits for that first draw to complete; submission time and the additional completion wait are
+retained separately. That wait is not an elapsed GPU profiling measurement. It does not wait for all
 background refinement to finish. Opening the default toy starts the clock before observer module
 preparation, including that overhead in both versions; other clips start with the default toy
 already open. Three repeats per input are planned; the median and range, plus errors, are reported.
@@ -230,8 +253,9 @@ Focused checks already completed:
 - The unchanged complete kit file: **10/10 passed** after the DOM-free long-sample preparation fix.
   The three newly merged test files and the comparison-engine file also passed.
 
-The complete new round 4 files have now passed **18/18**. The unchanged decode, mobile,
-actual-texture, and round 3 files also passed **7/7**, **2/2**, **7/7**, and **16/16**,
+The original new round 4 files passed **18/18**. The added eight-transform regression also passed;
+the expanded six-test raster file is queued for its complete final rerun. The unchanged decode,
+mobile, actual-texture, and round 3 files also passed **7/7**, **2/2**, **7/7**, and **16/16**,
 respectively. The legacy Moving photo file initially passed 13/14; its observer-dispatch failure
 passes unchanged in the focused recheck, with the whole-file rerun still planned.
 

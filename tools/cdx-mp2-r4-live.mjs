@@ -13,6 +13,7 @@ import {
   routeCode,
   selectCase,
   caseInputHashes,
+  graphicsInfo,
 } from "./cdx-mp2-r4-harness.mjs";
 import { R4_CASES } from "./cdx-mp2-r4-cases.mjs";
 import { SAMPLES, LONG_SAMPLES } from "../src/packs/moving-photo.js";
@@ -68,6 +69,7 @@ try {
         `${process.env.SPLASHERY_URL || "http://127.0.0.1:4173/"}?renderer=webgl2&adapt=off&profile=low&labs=1`,
       );
       await page.waitForSelector("body[data-ready='true']");
+      report.graphics ||= await graphicsInfo(page);
       await page.evaluate(async () => {
         window.__r4Moving = await import("/src/packs/moving-photo.js");
         const { ReliefMesh } = await import("/src/live/relief-mesh.js"),

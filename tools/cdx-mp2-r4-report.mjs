@@ -112,7 +112,7 @@ lines.push(
   ),
 );
 lines.push(
-  "\n## Repeated clean cadence\n\nThree serial passes are planned for all fourteen inputs. The first-pass table above keeps the Operator's original per-window protocol; this table retains each pass's median and the worst observed interval across passes. Missing repeats stay explicit. Source-clock rates are proxies, as described above.\n",
+  "\n## Repeated clean cadence\n\nA full paired pass covers all fourteen inputs; Bunny and Horse receive two additional passes to check the closest comparison with main. The first-pass table above keeps the Operator's original per-window protocol; this table retains each pass's median and the worst observed interval across passes. Missing repeats stay explicit. Source-clock rates are proxies, as described above.\n",
 );
 const repeatPairs = [[perf[0], perf[2]]];
 for (const repeat of [2, 3]) {

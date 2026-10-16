@@ -12,6 +12,7 @@ import {
   routeCode,
   selectCase,
   caseInputHashes,
+  graphicsInfo,
 } from "./cdx-mp2-r4-harness.mjs";
 import { GRAPHICS_LAUNCH } from "./cdx-mp2-render.mjs";
 
@@ -136,6 +137,7 @@ try {
   report.cpuRate = cpuRate;
   await page.goto(`${url}/?renderer=webgl2&adapt=off&profile=${phone ? "low" : "mid"}&labs=1`);
   await page.waitForSelector("body[data-ready='true']");
+  report.graphics ||= await graphicsInfo(page);
   await page.evaluate(
     async ({ instrument }) => {
       window.__r4Moving = await import("/src/packs/moving-photo.js");
