@@ -682,13 +682,65 @@ export function createUI(app) {
   }
   app.player.on("frame", refreshPartKeyboard);
   partPanel.addEventListener("toggle", refreshPartKeyboard);
+  let partRecipe = null;
+
+  // Lane PT1 (engine): a toy's own tool row over the stage (recipe.toolbar).
+  // The buttons follow the items each frame (pressed, hidden, disabled), and
+  // are made again when the list of items changes.
+  const toolRow = $("toy-toolbar");
+  let toolBar = null;
+  let toolIds = "";
+  function renderToolbar() {
+    const items = toolBar ? toolBar.items() : [];
+    toolIds = items.map((item) => `${item.id}\u0000${item.text}`).join("\u0001");
+    toolRow.replaceChildren();
+    toolRow.hidden = !toolBar;
+    document.body.classList.toggle("has-toy-toolbar", !!toolBar);
+    if (!toolBar) return;
+    toolRow.setAttribute("aria-label", toolBar.label || "Tools for this toy");
+    for (const item of items) {
+      const b = document.createElement("button");
+      b.type = "button";
+      b.dataset.toyTool = item.id;
+      b.textContent = item.text;
+      if (item.label) b.setAttribute("aria-label", item.label);
+      if (item.color) {
+        b.classList.add("swatch-tool");
+        b.style.setProperty("--tool-color", item.color);
+      }
+      b.addEventListener("click", () => app.player.playTool(item.id));
+      toolRow.append(b);
+    }
+    refreshToolbar(items);
+  }
+  function refreshToolbar(given) {
+    if (!toolBar) return;
+    const items = given || toolBar.items();
+    const ids = items.map((item) => `${item.id}\u0000${item.text}`).join("\u0001");
+    if (ids !== toolIds) return renderToolbar();
+    items.forEach((item, i) => {
+      const b = toolRow.children[i];
+      if (!b) return;
+      const pressed = item.pressed === undefined ? null : String(!!item.pressed);
+      if (pressed !== null && b.getAttribute("aria-pressed") !== pressed)
+        b.setAttribute("aria-pressed", pressed);
+      if (b.hidden !== !!item.hidden) b.hidden = !!item.hidden;
+      const disabled = String(!!item.disabled);
+      if (b.getAttribute("aria-disabled") !== disabled) b.setAttribute("aria-disabled", disabled);
+    });
+  }
+  app.player.on("frame", () => refreshToolbar());
 
   function renderToyPanel(info) {
     const recipe = info?.recipe || null;
+    // Lane PT1 (engine): the panel stays open while the same toy rebuilds
+    // (a list edited from its buttons rebuilds the toy on each press).
+    const keepOpen = partPanel.open && !!recipe?.keyboard && recipe === partRecipe;
+    partRecipe = recipe;
     partKeyboard = recipe?.keyboard || null;
     partButtons = [];
     partContent.replaceChildren();
-    partPanel.open = false;
+    partPanel.open = keepOpen;
     partPanel.hidden = !partKeyboard;
     if (partKeyboard) {
       const title = document.createElement("h3");
@@ -709,6 +761,8 @@ export function createUI(app) {
       partContent.append(title, partStatus, group);
       refreshPartKeyboard();
     }
+    toolBar = recipe?.toolbar || null;
+    renderToolbar();
     if (app.tool === "orbit")
       els.toolHint.textContent =
         TOOL_HINTS[recipe?.grab ? "stretch" : ui2On() ? "orbit2" : "orbit"]; // UI r2
