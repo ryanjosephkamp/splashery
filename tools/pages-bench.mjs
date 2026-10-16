@@ -27,17 +27,27 @@ const profiles = {
 };
 fs.mkdirSync(out, { recursive: true });
 fs.mkdirSync(fixtures, { recursive: true });
-const browser = await chromium.launch({
-  executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
-  args: [
-    "--use-angle=swiftshader",
-    "--enable-unsafe-swiftshader",
-    "--ignore-gpu-blocklist",
-    "--enable-webgl",
-  ],
-});
+let startingBrowser = null;
+async function launchBrowser() {
+  startingBrowser = chromium.launch({
+    executablePath: process.env.SPLASHERY_CHROMIUM || undefined,
+    args: [
+      "--use-angle=swiftshader",
+      "--enable-unsafe-swiftshader",
+      "--ignore-gpu-blocklist",
+      "--enable-webgl",
+    ],
+  });
+  try {
+    return await startingBrowser;
+  } finally {
+    startingBrowser = null;
+  }
+}
+let browser = await launchBrowser();
 for (const signal of ["SIGINT", "SIGTERM"])
   process.once(signal, async () => {
+    await startingBrowser?.then((b) => b.close()).catch(() => {});
     await browser.close();
     process.exit(130);
   });
@@ -569,11 +579,15 @@ async function run(toy, input, profile, repeat) {
 
 try {
   await makeFixtures();
+  await browser.close();
   const records = [];
   for (const profile of arg("profiles", "phone,desktop").split(","))
     for (const toy of arg("toys", "picture-lab,your-book,photo-album").split(","))
       for (const input of arg("cases", "sample,text,photo,chart").split(","))
         for (let repeat = 1; repeat <= Number(arg("repeats", 1)); repeat++) {
+          // A new context does not clear the browser's native GPU caches.
+          // Isolate every case and repeat in a new Chromium process as well.
+          browser = await launchBrowser();
           const r = await run(toy, input, profile, repeat);
           records.push(r);
           console.log(JSON.stringify(r));
@@ -582,6 +596,7 @@ try {
             JSON.stringify(
               {
                 browser: browser.version(),
+                isolation: "fresh Chromium process per case and repeat",
                 toolSha256,
                 fixtures: Object.fromEntries(
                   fixtureFiles.map((name) => [
@@ -601,6 +616,7 @@ try {
               2,
             ) + "\n",
           );
+          await browser.close();
         }
 } finally {
   await browser.close();
