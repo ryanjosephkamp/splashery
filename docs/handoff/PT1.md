@@ -1,7 +1,7 @@
 # Lane PT1: Your name in splats and Shape morph, rebuilt
 
 Built by Opus 5.5 at high effort. Prefix `pt1`. Branch `claude/pt1`; engine branch
-`claude/pt1-engine` (PR #684, to merge first).
+`claude/pt1-engine` (PR #684, merged) and `claude/pt1-engine-2` (PR #691, to merge first).
 
 ## The brief (the Operator's, October 16, 2026)
 
@@ -26,7 +26,8 @@ The owner reviewed two of the new portfolio toys (Codex task 78, labs) and rejec
 
 ## State
 
-Ready for review (see the PR). Both toys are rebuilt; the engine PR is open.
+Ready for review (see the PR). Both toys are rebuilt, with the Operator's review fixed. Engine PR
+#691 merges before #686.
 
 ### What was built
 
@@ -64,9 +65,10 @@ Ready for review (see the PR). Both toys are rebuilt; the engine PR is open.
 
 ### Tests
 
-- `tests/pt1.spec.mjs` (14): the text module, names, builds, poke and drop physics, old links, the
-  form list, the editor, and the browser at both sizes.
-- `tests/pt1-engine.spec.mjs` (6, on the engine branch).
+- `tests/pt1.spec.mjs` (18): the text module (RTL and joined scripts, text that draws nothing),
+  names, builds, poke and drop physics, old links, the form list, the editor, tool colors and keys,
+  the census, the fly-in and tick, and the browser at both sizes.
+- `tests/pt1-engine.spec.mjs` (7, on the engine branches).
 - `tests/cdx-pfd.spec.mjs` is brought up to date. It no longer requires that emoji are rejected or
   that names are uppercased, and the paint test uses the tool row. `cdx-pfc` and `cmp2-engine` pass
   unchanged.
@@ -74,7 +76,8 @@ Ready for review (see the PR). Both toys are rebuilt; the engine PR is open.
 ### Clips
 
 Effect review page 2, lane `PT1` (MP4s, 360 px): `pt1-name-toy-poke`, `pt1-name-toy-paint`,
-`pt1-name-toy-drop`, `pt1-name-toy-blow`, `pt1-name-toy-emoji`, and `pt1-shape-morph`.
+`pt1-name-toy-drop`, `pt1-name-toy-blow`, `pt1-name-toy-emoji`, `pt1-name-toy-open`, and
+`pt1-shape-morph`.
 
 ### The Operator's review (October 16, 2026)
 
@@ -93,9 +96,8 @@ Effect review page 2, lane `PT1` (MP4s, 360 px): `pt1-name-toy-poke`, `pt1-name-
 
 ## Known issues
 
-- Letters follow the device's fonts: rounded on a Mac or iPhone (`ui-rounded`), and the system's
-  bold sans elsewhere (rounded off by the outline). Toy Box's Fredoka is the owner's call (asked of
-  the Operator).
+- The name toy's letters use Fredoka (Latin subset); other scripts and emoji use the device's fonts.
+  Shape morph keeps the system's rounded fonts.
 - Dragging off the toy turns the view (the site's orbit), so Blow starts on the letters, not beside
   them as in Toy Box.
 - Pieces dropped in a pile overlap a little; they do not collide with each other (neither do Toy
