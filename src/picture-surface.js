@@ -386,12 +386,17 @@ export function warmPictureShaders(stage, curved = false) {
   const entity = new pc.Entity("Picture shader preparation");
   stage.app.root.addChild(entity);
   const faces = [];
-  stage.pictureWarmup = {
+  let live = true;
+  const warmup = {
     destroy() {
+      if (!live) return;
+      live = false;
       for (const face of faces) face.destroy();
       entity.destroy();
+      if (stage.pictureWarmup === warmup) stage.pictureWarmup = null;
     },
   };
+  stage.pictureWarmup = warmup;
   for (const bend of needed) {
     faces.push(
       new PictureSurface(
@@ -415,5 +420,8 @@ export function warmPictureShaders(stage, curved = false) {
     );
     stage.pictureProgramsWarmed.add(bend);
   }
+  // Run after the frame finishes submitting, including for moving media
+  // and failed inputs that never create a continuous face.
+  stage.app.once("postrender", () => setTimeout(() => warmup.destroy(), 0));
   stage.requestRender();
 }
