@@ -667,28 +667,20 @@ export class Stage {
     if (!this.pictureLayer) {
       const layers = this.app.scene.layers;
       const world = layers.getLayerByName("World");
-      // Paper belongs behind its opaque ink; kit covers belong in front
-      // when their depth hides that ink. Keep those three passes separate.
-      this.picturePaperLayer = new pc.Layer({ name: "Picture paper" });
+      // Kit covers draw after the connected pages, retaining occlusion.
       this.pictureLayer = new pc.Layer({ name: "Picture faces" });
       const at = layers.getOpaqueIndex(world);
-      layers.insertTransparent(this.picturePaperLayer, at);
-      layers.insertOpaque(this.pictureLayer, at + 1);
-      this.cameraEntity.camera.layers = [
-        ...this.cameraEntity.camera.layers,
-        this.picturePaperLayer.id,
-        this.pictureLayer.id,
-      ];
+      layers.insertOpaque(this.pictureLayer, at);
+      this.cameraEntity.camera.layers = [...this.cameraEntity.camera.layers, this.pictureLayer.id];
     }
     return this.pictureLayer;
   }
 
   setSheetFaceLayer(sheet, hasFace) {
     if (sheet.faceBacked === hasFace) return;
-    if (hasFace) this.pictureFaceLayer();
-    sheet.entity.gsplat.layers = [
-      (hasFace ? this.picturePaperLayer : this.app.scene.layers.getLayerByName("World")).id,
-    ];
+    // The opaque face supplies both its printed front and white reverse.
+    // Do not allocate a second splat work buffer for hidden paper.
+    sheet.entity.gsplat.enabled = !hasFace;
     sheet.faceBacked = hasFace;
   }
 

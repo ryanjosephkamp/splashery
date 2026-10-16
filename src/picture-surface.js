@@ -65,7 +65,7 @@ void main(void) {
       pcFragColor1 = getPickDepth();
     #endif
   #else
-    gl_FragColor = color;
+    gl_FragColor = gl_FrontFacing ? color : vec4(1.0);
   #endif
 }`;
 const VSW = (bend) => `
@@ -137,7 +137,7 @@ varying vUv: vec2f;
       output.color1 = getPickDepth();
     #endif
   #else
-    output.color = color;
+    output.color = select(vec4f(1.0), color, pcFrontFacing);
   #endif
   return output;
 }`;
@@ -283,7 +283,7 @@ export class PictureSurface {
       vertexWGSL: VSW(!!data.geom.leaf),
       fragmentWGSL: FSW,
     });
-    this.material.cull = pc.CULLFACE_BACK;
+    this.material.cull = pc.CULLFACE_NONE;
     this.material.depthWrite = true;
     this.material.depthTest = true;
     this.material.update();
