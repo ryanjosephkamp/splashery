@@ -4,6 +4,7 @@ import { compareAtlases, repeatNoise, rankClasses } from "../tools/cdx-p3d5-comp
 
 function atlas(values = {}) {
   const profile = () => ({
+    sharp: { on: true },
     renderer: "fixture",
     browser: "fixture",
     native: [585, 1266],
@@ -124,4 +125,44 @@ test("a lower RGB average cannot hide wider edges or a missing transition", () =
   const result = compare(a, b);
   expect(result.regressions.map((r) => r.metric)).toEqual(["transitionWidth", "lostTransitions"]);
   expect(result.qualityPassed).toBe(false);
+});
+
+test("a lower reference mean cannot hide lost pixels, depth holes, or larger outliers", () => {
+  const a = atlas(),
+    b = atlas({ halos: 0.06, streaks: 0.2, textureLoss: 0.4 });
+  const reference = {
+    kind: "reference optical-axis depth",
+    pixels: 100,
+    scoredPixels: 100,
+    pairs: 20,
+    fit: { calibrationPixels: 13 },
+    holeFraction: 0,
+    rmseMeters: 1,
+    p95Meters: 2,
+  };
+  a.inputs[0].profiles.phone.rows[0].depth = structuredClone(reference);
+  b.inputs[0].profiles.phone.rows[0].depth = {
+    ...structuredClone(reference),
+    scoredPixels: 99,
+    holeFraction: 0.01,
+    rmseMeters: 1.1,
+    p95Meters: 2.1,
+  };
+  a.inputs[0].profiles.phone.values.depthAbsRel = 0.1;
+  b.inputs[0].profiles.phone.values.depthAbsRel = 0.05;
+  const result = compare(a, b);
+  expect(result.errors.some((e) => e.startsWith("Lost reference support"))).toBe(true);
+  expect(result.regressions.map((r) => r.metric)).toEqual([
+    "referenceHoleFraction",
+    "referenceRmse",
+    "referenceP95",
+  ]);
+  expect(result.qualityPassed).toBe(false);
+});
+
+test("disabled Sharp rendering fails acceptance even with otherwise improved scores", () => {
+  const a = atlas(),
+    b = atlas({ halos: 0.06, streaks: 0.2, textureLoss: 0.4 });
+  b.inputs[0].profiles.phone.sharp.on = false;
+  expect(compare(a, b).errors).toContain("Sharp view is not working: one/phone");
 });

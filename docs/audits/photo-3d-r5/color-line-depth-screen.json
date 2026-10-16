@@ -1,0 +1,4114 @@
+{
+  "kind": "Bounded offline source-color-line depth continuation. Fixed original model dimensions, depth container, RGB, probes, and scoring. No asset or runtime change.",
+  "createdUTC": "2026-10-16T06:44:47.288Z",
+  "methodSha256": "300f58c2e13c9aece039d56d77ba1e1c962c5d82d67a3127ad3db22dd913fdd9",
+  "rows": [
+    {
+      "id": "forest",
+      "profile": "phone",
+      "changedModelCells": 7,
+      "totalModelCells": 181300,
+      "packedSha256": "a8f591be62693a753451ad8b542fbb87bba2326825679558fed7d5e45b3b228f",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 303,
+          "flipped": 46,
+          "flattened": 187,
+          "flippedFraction": 0.15181518151815182,
+          "flattenedFraction": 0.6171617161716172,
+          "fieldSha256": "cfd0c5ccacbce3cb395060869ba229242300fa18ee26f4c70a03b613e3b7c119"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 303,
+          "flipped": 46,
+          "flattened": 187,
+          "flippedFraction": 0.15181518151815182,
+          "flattenedFraction": 0.6171617161716172,
+          "fieldSha256": "0b3fc5e744883fbeda608ca4b5c91d36b8ab4152550821bd9e721ec93ecdd972"
+        }
+      }
+    },
+    {
+      "id": "forest",
+      "profile": "desktop",
+      "changedModelCells": 7,
+      "totalModelCells": 181300,
+      "packedSha256": "a8f591be62693a753451ad8b542fbb87bba2326825679558fed7d5e45b3b228f",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 453,
+          "flipped": 63,
+          "flattened": 314,
+          "flippedFraction": 0.1390728476821192,
+          "flattenedFraction": 0.6931567328918322,
+          "fieldSha256": "6db2e34f67bcb3d026839fd55600e10630bb6c79e2fdad451bb3d7c8b0ec9523"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 453,
+          "flipped": 63,
+          "flattened": 314,
+          "flippedFraction": 0.1390728476821192,
+          "flattenedFraction": 0.6931567328918322,
+          "fieldSha256": "8a1a6ab88a30eb876af53cd281bb61da3c70db3dafa8a9b74ad23a4f26d49a9d"
+        }
+      }
+    },
+    {
+      "id": "street",
+      "profile": "phone",
+      "changedModelCells": 0,
+      "totalModelCells": 203056,
+      "packedSha256": "9ac184e3755a2986a07c63630396507ac204aeb0535ddf169425c87414a2249a",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 942,
+          "flipped": 127,
+          "flattened": 598,
+          "flippedFraction": 0.13481953290870488,
+          "flattenedFraction": 0.6348195329087049,
+          "fieldSha256": "9d7784881aabb17414dac48480e316751febf98ce7aa82230cf594cf466a5738"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 942,
+          "flipped": 127,
+          "flattened": 598,
+          "flippedFraction": 0.13481953290870488,
+          "flattenedFraction": 0.6348195329087049,
+          "fieldSha256": "9d7784881aabb17414dac48480e316751febf98ce7aa82230cf594cf466a5738"
+        }
+      }
+    },
+    {
+      "id": "street",
+      "profile": "desktop",
+      "changedModelCells": 0,
+      "totalModelCells": 203056,
+      "packedSha256": "9ac184e3755a2986a07c63630396507ac204aeb0535ddf169425c87414a2249a",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 1206,
+          "flipped": 140,
+          "flattened": 812,
+          "flippedFraction": 0.11608623548922056,
+          "flattenedFraction": 0.6733001658374793,
+          "fieldSha256": "1859b97f7a42dcc334f759eae67d7e4053efd36bcc664c76197d1cbfc775ae9e"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 1206,
+          "flipped": 140,
+          "flattened": 812,
+          "flippedFraction": 0.11608623548922056,
+          "flattenedFraction": 0.6733001658374793,
+          "fieldSha256": "1859b97f7a42dcc334f759eae67d7e4053efd36bcc664c76197d1cbfc775ae9e"
+        }
+      }
+    },
+    {
+      "id": "still-life",
+      "profile": "phone",
+      "changedModelCells": 495,
+      "totalModelCells": 253820,
+      "packedSha256": "59b7aa3a3eea7dcfc802643dfe0226dff15f7677317b6b00dcfcd9035849a35e",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 158,
+          "flipped": 34,
+          "flattened": 84,
+          "flippedFraction": 0.21518987341772153,
+          "flattenedFraction": 0.5316455696202531,
+          "fieldSha256": "6b9118746006d671b1fe8f8df87a03fc55ff4f7060eb78f3c7124aeec4a5b668"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 158,
+          "flipped": 34,
+          "flattened": 84,
+          "flippedFraction": 0.21518987341772153,
+          "flattenedFraction": 0.5316455696202531,
+          "fieldSha256": "3bef6fe9d4191658109318d0cc89d786b6d4362f81f3723aa366b646ad024a6b"
+        }
+      }
+    },
+    {
+      "id": "still-life",
+      "profile": "desktop",
+      "changedModelCells": 495,
+      "totalModelCells": 253820,
+      "packedSha256": "59b7aa3a3eea7dcfc802643dfe0226dff15f7677317b6b00dcfcd9035849a35e",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 158,
+          "flipped": 31,
+          "flattened": 88,
+          "flippedFraction": 0.1962025316455696,
+          "flattenedFraction": 0.5569620253164557,
+          "fieldSha256": "6bb7bab20461d58fe9e5ed3365508067c74893ffb9437f4d38f1fb13e7242c2d"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 158,
+          "flipped": 31,
+          "flattened": 88,
+          "flippedFraction": 0.1962025316455696,
+          "flattenedFraction": 0.5569620253164557,
+          "fieldSha256": "f46dc399bb49e8a4897d6d6e89cdbb98e38886254010ebd7e842de9f784c45ff"
+        }
+      }
+    },
+    {
+      "id": "spiral-stairs",
+      "profile": "phone",
+      "changedModelCells": 293,
+      "totalModelCells": 181300,
+      "packedSha256": "f79fffa39fd6531b719a06b2d368e91c6357090c3df919883c7ebbb3d4af05a4",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 518,
+          "flipped": 124,
+          "flattened": 269,
+          "flippedFraction": 0.23938223938223938,
+          "flattenedFraction": 0.5193050193050193,
+          "fieldSha256": "fadf4681daa9c96793d14218d08c1ee5d0491d61e85f47621a60acde8accc087"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 518,
+          "flipped": 124,
+          "flattened": 269,
+          "flippedFraction": 0.23938223938223938,
+          "flattenedFraction": 0.5193050193050193,
+          "fieldSha256": "6acb747a039cfa78d8c2bae23fef8732de4af22fd67be5717b4bccfdb7112e24"
+        }
+      }
+    },
+    {
+      "id": "spiral-stairs",
+      "profile": "desktop",
+      "changedModelCells": 293,
+      "totalModelCells": 181300,
+      "packedSha256": "f79fffa39fd6531b719a06b2d368e91c6357090c3df919883c7ebbb3d4af05a4",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 518,
+          "flipped": 124,
+          "flattened": 269,
+          "flippedFraction": 0.23938223938223938,
+          "flattenedFraction": 0.5193050193050193,
+          "fieldSha256": "fadf4681daa9c96793d14218d08c1ee5d0491d61e85f47621a60acde8accc087"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 518,
+          "flipped": 124,
+          "flattened": 269,
+          "flippedFraction": 0.23938223938223938,
+          "flattenedFraction": 0.5193050193050193,
+          "fieldSha256": "6acb747a039cfa78d8c2bae23fef8732de4af22fd67be5717b4bccfdb7112e24"
+        }
+      }
+    },
+    {
+      "id": "palace-stairs",
+      "profile": "phone",
+      "changedModelCells": 136,
+      "totalModelCells": 181300,
+      "packedSha256": "b56fa273cbc561f6d046ea4991d1fdf4a586195a62a09e605aaf92b7eb256ad5",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 263,
+          "flipped": 33,
+          "flattened": 144,
+          "flippedFraction": 0.12547528517110265,
+          "flattenedFraction": 0.5475285171102662,
+          "fieldSha256": "ab08c1aff4c6300e3da0c5e4a703423b41dfbb1bba5ed290cbbe8a93c773ec84"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 263,
+          "flipped": 33,
+          "flattened": 144,
+          "flippedFraction": 0.12547528517110265,
+          "flattenedFraction": 0.5475285171102662,
+          "fieldSha256": "7f0790f14d70584cefd9601ba8ba988b343578cf7f012a764c6ee2b77928435d"
+        }
+      }
+    },
+    {
+      "id": "palace-stairs",
+      "profile": "desktop",
+      "changedModelCells": 136,
+      "totalModelCells": 181300,
+      "packedSha256": "b56fa273cbc561f6d046ea4991d1fdf4a586195a62a09e605aaf92b7eb256ad5",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 237,
+          "flipped": 31,
+          "flattened": 142,
+          "flippedFraction": 0.1308016877637131,
+          "flattenedFraction": 0.5991561181434599,
+          "fieldSha256": "d89c1ab27b47f32453ceaa6565a7e0a848d0423931c6408d726b387debb6c268"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 237,
+          "flipped": 31,
+          "flattened": 142,
+          "flippedFraction": 0.1308016877637131,
+          "flattenedFraction": 0.5991561181434599,
+          "fieldSha256": "eeba44b07c2464e3a85bc2cff51e8862e1295355dd21501a26940116210c8417"
+        }
+      }
+    },
+    {
+      "id": "wildflowers",
+      "profile": "phone",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "d9c8b1af5c8c9f42a12f9b5424904bd835780f38bb93f8ec7268c58f3538e6e2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 541,
+          "flipped": 170,
+          "flattened": 244,
+          "flippedFraction": 0.3142329020332717,
+          "flattenedFraction": 0.4510166358595194,
+          "fieldSha256": "56e95a368dfda6295b1e37dd893e93a8a5e6c867cde883e9e2e2614355ae8d28"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 541,
+          "flipped": 170,
+          "flattened": 244,
+          "flippedFraction": 0.3142329020332717,
+          "flattenedFraction": 0.4510166358595194,
+          "fieldSha256": "2a4efd87f96916ce9350b61dfa7ca0e33d51cc5981c35c0c4546cce1d6d05574"
+        }
+      }
+    },
+    {
+      "id": "wildflowers",
+      "profile": "desktop",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "d9c8b1af5c8c9f42a12f9b5424904bd835780f38bb93f8ec7268c58f3538e6e2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 218,
+          "flattened": 351,
+          "flippedFraction": 0.2831168831168831,
+          "flattenedFraction": 0.45584415584415583,
+          "fieldSha256": "8318bb5c6f56fe4d06740c5986b54fdd96eab344e4c382de8ebda4e18df2f312"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 218,
+          "flattened": 351,
+          "flippedFraction": 0.2831168831168831,
+          "flattenedFraction": 0.45584415584415583,
+          "fieldSha256": "502fff4953288abd0ab444d7dc9e6e943e04fcbc041a556f3c6b1d44b5df8d97"
+        }
+      }
+    },
+    {
+      "id": "dot-train",
+      "profile": "phone",
+      "changedModelCells": 4,
+      "totalModelCells": 181300,
+      "packedSha256": "3c9cdd4ca05f07feadb5cbc0fabc07d201ea927b050f4a2c7a26f4c87acd96b9",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 398,
+          "flipped": 42,
+          "flattened": 279,
+          "flippedFraction": 0.10552763819095477,
+          "flattenedFraction": 0.7010050251256281,
+          "fieldSha256": "2b5e0bab5767956b5fb46808675bfab32c8e376d0588570af21d1ecafbe57552"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 398,
+          "flipped": 42,
+          "flattened": 279,
+          "flippedFraction": 0.10552763819095477,
+          "flattenedFraction": 0.7010050251256281,
+          "fieldSha256": "e7f02fe13ed671d9cac097a6e5049c71e33e889f6ccec8b1fd7296f561c1d899"
+        }
+      }
+    },
+    {
+      "id": "dot-train",
+      "profile": "desktop",
+      "changedModelCells": 4,
+      "totalModelCells": 181300,
+      "packedSha256": "3c9cdd4ca05f07feadb5cbc0fabc07d201ea927b050f4a2c7a26f4c87acd96b9",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 535,
+          "flipped": 33,
+          "flattened": 399,
+          "flippedFraction": 0.0616822429906542,
+          "flattenedFraction": 0.7457943925233644,
+          "fieldSha256": "341f63c373df7d2cca7f2a3bf54d50f40a6c89ce69296c25fcbb4dd1e5e8be01"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 535,
+          "flipped": 33,
+          "flattened": 399,
+          "flippedFraction": 0.0616822429906542,
+          "flattenedFraction": 0.7457943925233644,
+          "fieldSha256": "f8e2e879b390c9e51aab48372b507fe2ae30c410a8f2dc984f61790e3603c86c"
+        }
+      }
+    },
+    {
+      "id": "dot-oasis",
+      "profile": "phone",
+      "changedModelCells": 8,
+      "totalModelCells": 181300,
+      "packedSha256": "6b14c71b59488ad60585ef92c68536982d2e4f9d65705ae2763639896093ba14",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 407,
+          "flipped": 87,
+          "flattened": 225,
+          "flippedFraction": 0.21375921375921375,
+          "flattenedFraction": 0.5528255528255528,
+          "fieldSha256": "c0224d4c5a8fb30e633f3d7cbd122dbdf1270f0ec1cd46a323ecf8c7bc6b6bcd"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 407,
+          "flipped": 87,
+          "flattened": 225,
+          "flippedFraction": 0.21375921375921375,
+          "flattenedFraction": 0.5528255528255528,
+          "fieldSha256": "b34595842f96a7e48a8a9caadd54358c900248342e69b6bff89b471695c3d47d"
+        }
+      }
+    },
+    {
+      "id": "dot-oasis",
+      "profile": "desktop",
+      "changedModelCells": 8,
+      "totalModelCells": 181300,
+      "packedSha256": "6b14c71b59488ad60585ef92c68536982d2e4f9d65705ae2763639896093ba14",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 468,
+          "flipped": 70,
+          "flattened": 284,
+          "flippedFraction": 0.14957264957264957,
+          "flattenedFraction": 0.6068376068376068,
+          "fieldSha256": "d752f7ff6c196111a1214b75ac628c7397e9392ff5ee2d35dfa5398e1153c5a0"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 468,
+          "flipped": 70,
+          "flattened": 284,
+          "flippedFraction": 0.14957264957264957,
+          "flattenedFraction": 0.6068376068376068,
+          "fieldSha256": "99f56900beedfbab8fd8526423ab7f28507f6e59c2da3c5c99b90f4205a36695"
+        }
+      }
+    },
+    {
+      "id": "dot-castle",
+      "profile": "phone",
+      "changedModelCells": 29,
+      "totalModelCells": 181300,
+      "packedSha256": "3c6624f8da791c91894026694fdedbd4a3b4a7fb1aa2a951fe9f2a4006cf227b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 362,
+          "flipped": 46,
+          "flattened": 228,
+          "flippedFraction": 0.1270718232044199,
+          "flattenedFraction": 0.6298342541436464,
+          "fieldSha256": "4b42b75bc39684527838b369d03102b8b50294fea877f6da373d09a04f34cd6b"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 362,
+          "flipped": 46,
+          "flattened": 228,
+          "flippedFraction": 0.1270718232044199,
+          "flattenedFraction": 0.6298342541436464,
+          "fieldSha256": "2b83665544888641bb49d1f3214c862648f346ebff1076963a987f8dcc42a4e5"
+        }
+      }
+    },
+    {
+      "id": "dot-castle",
+      "profile": "desktop",
+      "changedModelCells": 29,
+      "totalModelCells": 181300,
+      "packedSha256": "3c6624f8da791c91894026694fdedbd4a3b4a7fb1aa2a951fe9f2a4006cf227b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 444,
+          "flipped": 54,
+          "flattened": 294,
+          "flippedFraction": 0.12162162162162163,
+          "flattenedFraction": 0.6621621621621622,
+          "fieldSha256": "6e9748470acb113cdbad3d7091ad114b293f20eb6711d93d4eb420db7ceab53f"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 444,
+          "flipped": 54,
+          "flattened": 294,
+          "flippedFraction": 0.12162162162162163,
+          "flattenedFraction": 0.6621621621621622,
+          "fieldSha256": "8170dfdac5a8c336e469c4eb2e960accabbbef572b29f6139a44caf16d47d273"
+        }
+      }
+    },
+    {
+      "id": "dot-cove",
+      "profile": "phone",
+      "changedModelCells": 33,
+      "totalModelCells": 181300,
+      "packedSha256": "2b886e20f90646c7ff2727fdd89475c5a32403554b6388e119047be9fbb1d99a",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 460,
+          "flipped": 49,
+          "flattened": 343,
+          "flippedFraction": 0.10652173913043478,
+          "flattenedFraction": 0.7456521739130435,
+          "fieldSha256": "55231cc34974e2e315d5bc82e90bfb41c55a2066dbd242db8024b9c3588645f7"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 460,
+          "flipped": 49,
+          "flattened": 343,
+          "flippedFraction": 0.10652173913043478,
+          "flattenedFraction": 0.7456521739130435,
+          "fieldSha256": "cb41540ff683728d343233c5172403e2bec46c56407cf0238cd0e7edc6841348"
+        }
+      }
+    },
+    {
+      "id": "dot-cove",
+      "profile": "desktop",
+      "changedModelCells": 33,
+      "totalModelCells": 181300,
+      "packedSha256": "2b886e20f90646c7ff2727fdd89475c5a32403554b6388e119047be9fbb1d99a",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 534,
+          "flipped": 48,
+          "flattened": 436,
+          "flippedFraction": 0.0898876404494382,
+          "flattenedFraction": 0.8164794007490637,
+          "fieldSha256": "e20e7f6921f5cd044f8a73d326a327fe24bda4008f3859e03985347879feb863"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 534,
+          "flipped": 48,
+          "flattened": 436,
+          "flippedFraction": 0.0898876404494382,
+          "flattenedFraction": 0.8164794007490637,
+          "fieldSha256": "76c96d98cbf99ca5dac1216e92dc63bcc5f4d4f41e48db06698fe07c3acb5ec7"
+        }
+      }
+    },
+    {
+      "id": "dot-harbor",
+      "profile": "phone",
+      "changedModelCells": 6,
+      "totalModelCells": 181300,
+      "packedSha256": "5632f91f8b60db51ad4a8e06fcfd188fe314b58e765d974eb56256404ca3e4fa",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 656,
+          "flipped": 116,
+          "flattened": 376,
+          "flippedFraction": 0.17682926829268292,
+          "flattenedFraction": 0.573170731707317,
+          "fieldSha256": "7313282a635d42393ebc01df199da7fdc113821cde14c0a2197a094dd27be8b0"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 656,
+          "flipped": 116,
+          "flattened": 376,
+          "flippedFraction": 0.17682926829268292,
+          "flattenedFraction": 0.573170731707317,
+          "fieldSha256": "cf675d67c27180d26a688c93ada9ba28c3d7924a37873013115d56b23af90036"
+        }
+      }
+    },
+    {
+      "id": "dot-harbor",
+      "profile": "desktop",
+      "changedModelCells": 6,
+      "totalModelCells": 181300,
+      "packedSha256": "5632f91f8b60db51ad4a8e06fcfd188fe314b58e765d974eb56256404ca3e4fa",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 677,
+          "flipped": 117,
+          "flattened": 380,
+          "flippedFraction": 0.172821270310192,
+          "flattenedFraction": 0.5612998522895125,
+          "fieldSha256": "884ae0e30736ccad44ecc4d97670a36748dde13d89e3d5107f9e0084337cbbfb"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 677,
+          "flipped": 117,
+          "flattened": 380,
+          "flippedFraction": 0.172821270310192,
+          "flattenedFraction": 0.5612998522895125,
+          "fieldSha256": "b215dc18efc710bd492ed45f7e50e307485d58fd5fe0884ed4966e626b0b0ef5"
+        }
+      }
+    },
+    {
+      "id": "dot-paper-valley",
+      "profile": "phone",
+      "changedModelCells": 88,
+      "totalModelCells": 181300,
+      "packedSha256": "0bbcbbb7148a659732b8cf324fbcfca256596dc95d58855824abc0ed97b92f6b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 418,
+          "flipped": 37,
+          "flattened": 283,
+          "flippedFraction": 0.08851674641148326,
+          "flattenedFraction": 0.6770334928229665,
+          "fieldSha256": "fdb40016d19f6a5b46d41868b44ae23fd4011d82e3b3a8213124a890e18fcc9a"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 418,
+          "flipped": 37,
+          "flattened": 283,
+          "flippedFraction": 0.08851674641148326,
+          "flattenedFraction": 0.6770334928229665,
+          "fieldSha256": "0ce91476606e004505a191c55c4bfae276ccbc9e06b43a6f97ec65a6d73c0806"
+        }
+      }
+    },
+    {
+      "id": "dot-paper-valley",
+      "profile": "desktop",
+      "changedModelCells": 88,
+      "totalModelCells": 181300,
+      "packedSha256": "0bbcbbb7148a659732b8cf324fbcfca256596dc95d58855824abc0ed97b92f6b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 414,
+          "flipped": 38,
+          "flattened": 275,
+          "flippedFraction": 0.09178743961352658,
+          "flattenedFraction": 0.6642512077294686,
+          "fieldSha256": "cbf1f09015485413fce2d1476ada417a016ee74f68c04fd4d4416c2a7aafae68"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 414,
+          "flipped": 38,
+          "flattened": 275,
+          "flippedFraction": 0.09178743961352658,
+          "flattenedFraction": 0.6642512077294686,
+          "fieldSha256": "0171ca1c638c458ff7170a90cb2d577f9d799f7b68c603ff0e7f43ccb0394618"
+        }
+      }
+    },
+    {
+      "id": "dot-farm",
+      "profile": "phone",
+      "changedModelCells": 16,
+      "totalModelCells": 181300,
+      "packedSha256": "8debe8a92a86c7fc05670153e55daf9f71be94cf9ac67f6716766e8cfd334020",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 490,
+          "flipped": 60,
+          "flattened": 278,
+          "flippedFraction": 0.12244897959183673,
+          "flattenedFraction": 0.5673469387755102,
+          "fieldSha256": "0f559718fd72238090c128b7245cfce990473d018f4b10438f52038c3f8d4d08"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 490,
+          "flipped": 60,
+          "flattened": 278,
+          "flippedFraction": 0.12244897959183673,
+          "flattenedFraction": 0.5673469387755102,
+          "fieldSha256": "ed543043070401677aa026cca2aad5e2243cb8a5cce4b48c836fe7654a2ff308"
+        }
+      }
+    },
+    {
+      "id": "dot-farm",
+      "profile": "desktop",
+      "changedModelCells": 16,
+      "totalModelCells": 181300,
+      "packedSha256": "8debe8a92a86c7fc05670153e55daf9f71be94cf9ac67f6716766e8cfd334020",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 599,
+          "flipped": 76,
+          "flattened": 369,
+          "flippedFraction": 0.12687813021702837,
+          "flattenedFraction": 0.6160267111853088,
+          "fieldSha256": "171a48b39d1fa1e28faf38e65ef80c0c8481ebe3b8d7f974430c42e12ffb6be6"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 599,
+          "flipped": 76,
+          "flattened": 369,
+          "flippedFraction": 0.12687813021702837,
+          "flattenedFraction": 0.6160267111853088,
+          "fieldSha256": "f12e4229c7bba8cd79198b87a5dac068aab2f75a7491fbebeed05bedd69ee298"
+        }
+      }
+    },
+    {
+      "id": "dot-treehouses",
+      "profile": "phone",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "1f77945eea354d253e873e933c576b33199d38362232c99482df21e9ae40b132",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 496,
+          "flipped": 97,
+          "flattened": 306,
+          "flippedFraction": 0.19556451612903225,
+          "flattenedFraction": 0.6169354838709677,
+          "fieldSha256": "6b41c7b0e5188bbd393e86fd27a1d8d6b815b349851cc31a03775cd8773d20e0"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 496,
+          "flipped": 97,
+          "flattened": 306,
+          "flippedFraction": 0.19556451612903225,
+          "flattenedFraction": 0.6169354838709677,
+          "fieldSha256": "2cfaa717b6a3924b510b32589e681f7c5cc1eb87fe4d24ac78977a24d0a93e1e"
+        }
+      }
+    },
+    {
+      "id": "dot-treehouses",
+      "profile": "desktop",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "1f77945eea354d253e873e933c576b33199d38362232c99482df21e9ae40b132",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 720,
+          "flipped": 124,
+          "flattened": 487,
+          "flippedFraction": 0.17222222222222222,
+          "flattenedFraction": 0.6763888888888889,
+          "fieldSha256": "3faaa65125003109319f7efddb0fc547f60238021b6a30b2b2661892ddf67691"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 720,
+          "flipped": 124,
+          "flattened": 487,
+          "flippedFraction": 0.17222222222222222,
+          "flattenedFraction": 0.6763888888888889,
+          "fieldSha256": "a0ab5ff475a23ee8a37b1e19f5068de710c4c3da28c5af1d687544a5c91a0f98"
+        }
+      }
+    },
+    {
+      "id": "dot-library",
+      "profile": "phone",
+      "changedModelCells": 213,
+      "totalModelCells": 181300,
+      "packedSha256": "1151942cc6d81c8b4459359f8e1453d3d3531d535563e941b70e0a311014adb0",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 728,
+          "flipped": 35,
+          "flattened": 568,
+          "flippedFraction": 0.04807692307692308,
+          "flattenedFraction": 0.7802197802197802,
+          "fieldSha256": "5375c571826a685d5c70482089f01be5273efa60c5dc94ab0c15ce11bd7bd8b0"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 728,
+          "flipped": 35,
+          "flattened": 568,
+          "flippedFraction": 0.04807692307692308,
+          "flattenedFraction": 0.7802197802197802,
+          "fieldSha256": "02af49f91d1385dfa63e45fd8a85afd0b2096a65d77c1d6e91d5ea80ff2c2d7a"
+        }
+      }
+    },
+    {
+      "id": "dot-library",
+      "profile": "desktop",
+      "changedModelCells": 213,
+      "totalModelCells": 181300,
+      "packedSha256": "1151942cc6d81c8b4459359f8e1453d3d3531d535563e941b70e0a311014adb0",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 855,
+          "flipped": 53,
+          "flattened": 660,
+          "flippedFraction": 0.06198830409356725,
+          "flattenedFraction": 0.7719298245614035,
+          "fieldSha256": "b694da75794158f52e80c2fab4b05f64347b979b0c0cf7c6ca0e48afbecf4581"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 855,
+          "flipped": 53,
+          "flattened": 660,
+          "flippedFraction": 0.06198830409356725,
+          "flattenedFraction": 0.7719298245614035,
+          "fieldSha256": "42babeb270633dcffc2a228166f04dd4d859fce345c721e6e185e24cec9c1f4a"
+        }
+      }
+    },
+    {
+      "id": "dot-workshop",
+      "profile": "phone",
+      "changedModelCells": 16,
+      "totalModelCells": 181300,
+      "packedSha256": "f99e35a5898d30925907f74c17834d42983d72402b15badc73758e8c8f24b26c",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 583,
+          "flipped": 48,
+          "flattened": 352,
+          "flippedFraction": 0.0823327615780446,
+          "flattenedFraction": 0.6037735849056604,
+          "fieldSha256": "1fd485fbea6fe8a0941c23134ee44860dc354741a668b3caf884de6d0a07c20d"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 583,
+          "flipped": 48,
+          "flattened": 352,
+          "flippedFraction": 0.0823327615780446,
+          "flattenedFraction": 0.6037735849056604,
+          "fieldSha256": "6c6622f302392a9605f8d39035e42221cbd546ef85ebb6457f40e5fd47d547f6"
+        }
+      }
+    },
+    {
+      "id": "dot-workshop",
+      "profile": "desktop",
+      "changedModelCells": 16,
+      "totalModelCells": 181300,
+      "packedSha256": "f99e35a5898d30925907f74c17834d42983d72402b15badc73758e8c8f24b26c",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 65,
+          "flattened": 494,
+          "flippedFraction": 0.08441558441558442,
+          "flattenedFraction": 0.6415584415584416,
+          "fieldSha256": "21f8f7f0888173e52f49ea2178e04511c1d0aff971749e488413b8d04413dd0e"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 770,
+          "flipped": 65,
+          "flattened": 494,
+          "flippedFraction": 0.08441558441558442,
+          "flattenedFraction": 0.6415584415584416,
+          "fieldSha256": "91ab6d19c7a0cc933b0d00dd696cf2573c3f26fb5295a8bfa52ec3cdd78b42aa"
+        }
+      }
+    },
+    {
+      "id": "dot-cloister",
+      "profile": "phone",
+      "changedModelCells": 17,
+      "totalModelCells": 181300,
+      "packedSha256": "73a2b372c8d15814b123bb50f95467c2e4799392bb5643f3e04523f1332ed40c",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 301,
+          "flipped": 84,
+          "flattened": 141,
+          "flippedFraction": 0.27906976744186046,
+          "flattenedFraction": 0.4684385382059801,
+          "fieldSha256": "659921c40d00b5ed697f4b98646a22ebc1d11cbed7ad7f9f2e968c78184d6c04"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 301,
+          "flipped": 84,
+          "flattened": 141,
+          "flippedFraction": 0.27906976744186046,
+          "flattenedFraction": 0.4684385382059801,
+          "fieldSha256": "2a92c895242554cf2ac8f94dbfe50335be094c00684bc7463f6ae61207ebb3c2"
+        }
+      }
+    },
+    {
+      "id": "dot-cloister",
+      "profile": "desktop",
+      "changedModelCells": 17,
+      "totalModelCells": 181300,
+      "packedSha256": "73a2b372c8d15814b123bb50f95467c2e4799392bb5643f3e04523f1332ed40c",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 367,
+          "flipped": 86,
+          "flattened": 197,
+          "flippedFraction": 0.23433242506811988,
+          "flattenedFraction": 0.5367847411444142,
+          "fieldSha256": "cb1152f4aebd5918caecd8f34f60a1accb59e7cb2aebf43ceabf819f56243003"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 367,
+          "flipped": 86,
+          "flattened": 197,
+          "flippedFraction": 0.23433242506811988,
+          "flattenedFraction": 0.5367847411444142,
+          "fieldSha256": "c56116e07f8ec4607d47f8e332f004690d0702ea8608c2c495ae15459b9959ae"
+        }
+      }
+    },
+    {
+      "id": "dot-greenhouse",
+      "profile": "phone",
+      "changedModelCells": 22,
+      "totalModelCells": 181300,
+      "packedSha256": "c8a33479fa7d9cd81f4b71f21a4e3234d446b7749c2d709a34d83057b27c840b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 633,
+          "flipped": 109,
+          "flattened": 312,
+          "flippedFraction": 0.1721958925750395,
+          "flattenedFraction": 0.4928909952606635,
+          "fieldSha256": "7d5911d683754fb1af9b55a022bcf55dcc8d9e280c21d666d69c93a9acde4ca6"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 633,
+          "flipped": 109,
+          "flattened": 312,
+          "flippedFraction": 0.1721958925750395,
+          "flattenedFraction": 0.4928909952606635,
+          "fieldSha256": "fcf88b3d7df60f61842d52d7d5bd90f951399dd1a1a48c3deeedaf06774331ac"
+        }
+      }
+    },
+    {
+      "id": "dot-greenhouse",
+      "profile": "desktop",
+      "changedModelCells": 22,
+      "totalModelCells": 181300,
+      "packedSha256": "c8a33479fa7d9cd81f4b71f21a4e3234d446b7749c2d709a34d83057b27c840b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 924,
+          "flipped": 128,
+          "flattened": 541,
+          "flippedFraction": 0.13852813852813853,
+          "flattenedFraction": 0.5854978354978355,
+          "fieldSha256": "59a018bab82ace031f239a2105a324729844794f2a7814d48d8dc94cdc3c1c3d"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 924,
+          "flipped": 128,
+          "flattened": 541,
+          "flippedFraction": 0.13852813852813853,
+          "flattenedFraction": 0.5854978354978355,
+          "fieldSha256": "99bce013b1561554ac8490cd36d99bd62b2ddff42113758e6c09e60d6cc6d253"
+        }
+      }
+    },
+    {
+      "id": "dot-attic",
+      "profile": "phone",
+      "changedModelCells": 57,
+      "totalModelCells": 181300,
+      "packedSha256": "92b6b63e64418692b18da259a965b0b8c873f41f0a5364a4a648cd8c5a030059",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 318,
+          "flipped": 77,
+          "flattened": 122,
+          "flippedFraction": 0.24213836477987422,
+          "flattenedFraction": 0.3836477987421384,
+          "fieldSha256": "814dada1dfb067443df57a326f5e5ff5e74935f384c83a75d83a62880be1ab49"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 318,
+          "flipped": 77,
+          "flattened": 122,
+          "flippedFraction": 0.24213836477987422,
+          "flattenedFraction": 0.3836477987421384,
+          "fieldSha256": "6caeff9881779d3787f903cc1fc1aa443c1aba1eae7108fc90879314c000d9ea"
+        }
+      }
+    },
+    {
+      "id": "dot-attic",
+      "profile": "desktop",
+      "changedModelCells": 57,
+      "totalModelCells": 181300,
+      "packedSha256": "92b6b63e64418692b18da259a965b0b8c873f41f0a5364a4a648cd8c5a030059",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 383,
+          "flipped": 70,
+          "flattened": 188,
+          "flippedFraction": 0.18276762402088773,
+          "flattenedFraction": 0.4908616187989556,
+          "fieldSha256": "73751adf16b76a1e940b3f7818b82630a1bad7bd820b5b7338f83234832ec0e7"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 383,
+          "flipped": 70,
+          "flattened": 188,
+          "flippedFraction": 0.18276762402088773,
+          "flattenedFraction": 0.4908616187989556,
+          "fieldSha256": "011bd3814d9140460d225f07c3a61ef23bf9bc3db8c85c490b2c8e4e97bbed42"
+        }
+      }
+    },
+    {
+      "id": "dot-bamboo",
+      "profile": "phone",
+      "changedModelCells": 9,
+      "totalModelCells": 181300,
+      "packedSha256": "3c5f2f0be8ab6e9e60d3643f1b85afb19faa5e6d8b3d6dbaef4c543bcd536f9b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 649,
+          "flipped": 96,
+          "flattened": 216,
+          "flippedFraction": 0.14791987673343607,
+          "flattenedFraction": 0.33281972265023113,
+          "fieldSha256": "89a98811d3522c07124e36d692e35ac2254ab59bd43f53b1f568d9fb952c800f"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 649,
+          "flipped": 96,
+          "flattened": 216,
+          "flippedFraction": 0.14791987673343607,
+          "flattenedFraction": 0.33281972265023113,
+          "fieldSha256": "2506a0513718e11213d6f125d9e50dce3d43a0829d5e117565e4aa376b8e9888"
+        }
+      }
+    },
+    {
+      "id": "dot-bamboo",
+      "profile": "desktop",
+      "changedModelCells": 9,
+      "totalModelCells": 181300,
+      "packedSha256": "3c5f2f0be8ab6e9e60d3643f1b85afb19faa5e6d8b3d6dbaef4c543bcd536f9b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 982,
+          "flipped": 106,
+          "flattened": 382,
+          "flippedFraction": 0.1079429735234216,
+          "flattenedFraction": 0.3890020366598778,
+          "fieldSha256": "f1a37ec878fb7dc6074e0890b5d35d91896ca565b7bbd15c8dda13f58b93f8c6"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 982,
+          "flipped": 106,
+          "flattened": 382,
+          "flippedFraction": 0.1079429735234216,
+          "flattenedFraction": 0.3890020366598778,
+          "fieldSha256": "798405ca1d1669b2e5e8558370c00a05f6ceea3e714a1c16abbd31bd5c470180"
+        }
+      }
+    },
+    {
+      "id": "dot-terraces",
+      "profile": "phone",
+      "changedModelCells": 8,
+      "totalModelCells": 181300,
+      "packedSha256": "f300bcf543546ffacf06ac4e90108fa9ff26e9794d9a8ed5e3ad8249723bdf96",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 168,
+          "flipped": 35,
+          "flattened": 87,
+          "flippedFraction": 0.20833333333333334,
+          "flattenedFraction": 0.5178571428571429,
+          "fieldSha256": "58ef90773ac12e6710a175a00b67d31e995fc7c170727a70d2259f4df17b1427"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 168,
+          "flipped": 35,
+          "flattened": 87,
+          "flippedFraction": 0.20833333333333334,
+          "flattenedFraction": 0.5178571428571429,
+          "fieldSha256": "019bee40d22ee235ceab9556c321b67b5bb416ae1eacd76a9624bbb36bb7f622"
+        }
+      }
+    },
+    {
+      "id": "dot-terraces",
+      "profile": "desktop",
+      "changedModelCells": 8,
+      "totalModelCells": 181300,
+      "packedSha256": "f300bcf543546ffacf06ac4e90108fa9ff26e9794d9a8ed5e3ad8249723bdf96",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 193,
+          "flipped": 35,
+          "flattened": 112,
+          "flippedFraction": 0.18134715025906736,
+          "flattenedFraction": 0.5803108808290155,
+          "fieldSha256": "c9b30f8dc21b814c69775303f6580c61d8c021936adcbe418c259a0298ba4fa7"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 193,
+          "flipped": 35,
+          "flattened": 112,
+          "flippedFraction": 0.18134715025906736,
+          "flattenedFraction": 0.5803108808290155,
+          "fieldSha256": "4cf076a64f05dfef1d2cf26a4cbefb71f2bf866f5ab74327658c13c4fc5a2411"
+        }
+      }
+    },
+    {
+      "id": "dot-canyon",
+      "profile": "phone",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "d18a1296da8d336b509fcb068e2de858c83d82267289f573baf9e598900a9782",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 222,
+          "flipped": 49,
+          "flattened": 107,
+          "flippedFraction": 0.22072072072072071,
+          "flattenedFraction": 0.481981981981982,
+          "fieldSha256": "845cb12fcbc8defe36b6aef6553f2a5a48eac54ed8ba9be503bd1cf401a69fe8"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 222,
+          "flipped": 49,
+          "flattened": 107,
+          "flippedFraction": 0.22072072072072071,
+          "flattenedFraction": 0.481981981981982,
+          "fieldSha256": "845cb12fcbc8defe36b6aef6553f2a5a48eac54ed8ba9be503bd1cf401a69fe8"
+        }
+      }
+    },
+    {
+      "id": "dot-canyon",
+      "profile": "desktop",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "d18a1296da8d336b509fcb068e2de858c83d82267289f573baf9e598900a9782",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 232,
+          "flipped": 62,
+          "flattened": 116,
+          "flippedFraction": 0.2672413793103448,
+          "flattenedFraction": 0.5,
+          "fieldSha256": "f0672e5c5265551a6bffda20239389e4da8268ea404e15b27cac9897d218fb18"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 232,
+          "flipped": 62,
+          "flattened": 116,
+          "flippedFraction": 0.2672413793103448,
+          "flattenedFraction": 0.5,
+          "fieldSha256": "f0672e5c5265551a6bffda20239389e4da8268ea404e15b27cac9897d218fb18"
+        }
+      }
+    },
+    {
+      "id": "dot-arch",
+      "profile": "phone",
+      "changedModelCells": 6,
+      "totalModelCells": 181300,
+      "packedSha256": "d5e9c0f5c2e2dc8ae4f53e84ac42f19ca6c9b272d7ace19f46022b192c51c775",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 173,
+          "flipped": 44,
+          "flattened": 96,
+          "flippedFraction": 0.2543352601156069,
+          "flattenedFraction": 0.5549132947976878,
+          "fieldSha256": "329e5961d40b8cbf59aea76f78d7428ec371b67554ecd99252ca88b85c83f533"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 173,
+          "flipped": 44,
+          "flattened": 96,
+          "flippedFraction": 0.2543352601156069,
+          "flattenedFraction": 0.5549132947976878,
+          "fieldSha256": "3b84f13bcc8a5cfdd218c81c3cede991b5f193b0ef5ab2fbe66eb3746cc3f661"
+        }
+      }
+    },
+    {
+      "id": "dot-arch",
+      "profile": "desktop",
+      "changedModelCells": 6,
+      "totalModelCells": 181300,
+      "packedSha256": "d5e9c0f5c2e2dc8ae4f53e84ac42f19ca6c9b272d7ace19f46022b192c51c775",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 237,
+          "flipped": 45,
+          "flattened": 152,
+          "flippedFraction": 0.189873417721519,
+          "flattenedFraction": 0.6413502109704642,
+          "fieldSha256": "a0a3522952fa2c8d3371ce779577bf070719899430fee21a83c92a3da0ac3166"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 237,
+          "flipped": 45,
+          "flattened": 152,
+          "flippedFraction": 0.189873417721519,
+          "flattenedFraction": 0.6413502109704642,
+          "fieldSha256": "623564569402d0ff78b0c2d1441cb627a9a9002f6088a7511f6155bda7c5667c"
+        }
+      }
+    },
+    {
+      "id": "dot-fallen-log",
+      "profile": "phone",
+      "changedModelCells": 12,
+      "totalModelCells": 181300,
+      "packedSha256": "db427fcb79d47a9e6d7e162f4547f85c095c8aa6969b0426ec1196deaba35938",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 355,
+          "flipped": 60,
+          "flattened": 158,
+          "flippedFraction": 0.16901408450704225,
+          "flattenedFraction": 0.4450704225352113,
+          "fieldSha256": "17da64bf0b52f51efed5432d2d0df8ab1b7017e52c32f7ba845c69db7b6f929e"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 355,
+          "flipped": 60,
+          "flattened": 158,
+          "flippedFraction": 0.16901408450704225,
+          "flattenedFraction": 0.4450704225352113,
+          "fieldSha256": "f42e9f51599ea8fb00ece0545294477e3ec800862d76795e0699ecbee6d50123"
+        }
+      }
+    },
+    {
+      "id": "dot-fallen-log",
+      "profile": "desktop",
+      "changedModelCells": 12,
+      "totalModelCells": 181300,
+      "packedSha256": "db427fcb79d47a9e6d7e162f4547f85c095c8aa6969b0426ec1196deaba35938",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 548,
+          "flipped": 76,
+          "flattened": 294,
+          "flippedFraction": 0.1386861313868613,
+          "flattenedFraction": 0.5364963503649635,
+          "fieldSha256": "045d07cd01a35bf5fcf988937a97f14a0eb699873b58bcbf62593fdc18e34d08"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 548,
+          "flipped": 76,
+          "flattened": 294,
+          "flippedFraction": 0.1386861313868613,
+          "flattenedFraction": 0.5364963503649635,
+          "fieldSha256": "21d35776d0baceb209ca8f8aa89d6d12dbc72d925eb6c2a629a4b281e4bb0fc7"
+        }
+      }
+    },
+    {
+      "id": "dot-alpine-lake",
+      "profile": "phone",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "b37a9ff2f835de1484aa01d8ec79bf764c86f5db3a20e10c6a1ca91d7109d8f2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 554,
+          "flipped": 70,
+          "flattened": 387,
+          "flippedFraction": 0.1263537906137184,
+          "flattenedFraction": 0.6985559566787004,
+          "fieldSha256": "b1b73d2a4163347b87a0fed5fac3285d776e090a540659276bee4873fcf755de"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 554,
+          "flipped": 70,
+          "flattened": 387,
+          "flippedFraction": 0.1263537906137184,
+          "flattenedFraction": 0.6985559566787004,
+          "fieldSha256": "93f696e7ff98220228af78077da194c4a960afaa6f1b4a0442c9f1393d76a68a"
+        }
+      }
+    },
+    {
+      "id": "dot-alpine-lake",
+      "profile": "desktop",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "b37a9ff2f835de1484aa01d8ec79bf764c86f5db3a20e10c6a1ca91d7109d8f2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 680,
+          "flipped": 72,
+          "flattened": 513,
+          "flippedFraction": 0.10588235294117647,
+          "flattenedFraction": 0.7544117647058823,
+          "fieldSha256": "58e467381c67b7092a24b0a47a67182731387e613b10dea67b92654d6f90e555"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 680,
+          "flipped": 72,
+          "flattened": 513,
+          "flippedFraction": 0.10588235294117647,
+          "flattenedFraction": 0.7544117647058823,
+          "fieldSha256": "bf53b0fc051627b090bea1692d2a5b1b31cd28f13974d8141ff71c1e7abbba3e"
+        }
+      }
+    },
+    {
+      "id": "dot-ice-falls",
+      "profile": "phone",
+      "changedModelCells": 7,
+      "totalModelCells": 181300,
+      "packedSha256": "126b453e364ce5e610cc66a68c561be64a754d77c27121e45ab94e53d843d886",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 475,
+          "flipped": 41,
+          "flattened": 377,
+          "flippedFraction": 0.0863157894736842,
+          "flattenedFraction": 0.7936842105263158,
+          "fieldSha256": "7f4f94eca8af9d4abb728034aebd8072904828eadd6c45e47700992250635c0a"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 475,
+          "flipped": 41,
+          "flattened": 377,
+          "flippedFraction": 0.0863157894736842,
+          "flattenedFraction": 0.7936842105263158,
+          "fieldSha256": "0c0d3c161c29ea26346b17a7aa3a37b1f26e8fb96f5d4552c4f3f395a6a320b5"
+        }
+      }
+    },
+    {
+      "id": "dot-ice-falls",
+      "profile": "desktop",
+      "changedModelCells": 7,
+      "totalModelCells": 181300,
+      "packedSha256": "126b453e364ce5e610cc66a68c561be64a754d77c27121e45ab94e53d843d886",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 636,
+          "flipped": 33,
+          "flattened": 551,
+          "flippedFraction": 0.05188679245283019,
+          "flattenedFraction": 0.8663522012578616,
+          "fieldSha256": "eeceb7cd8e17aa72303eb2f8bf0b483245f663ea6cc8f42ff6fd54a4b27b8b6b"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 636,
+          "flipped": 33,
+          "flattened": 551,
+          "flippedFraction": 0.05188679245283019,
+          "flattenedFraction": 0.8663522012578616,
+          "fieldSha256": "5b7e3f0ed6250972f4093465224a1b0133b1c03f00dd704060927231db592dc1"
+        }
+      }
+    },
+    {
+      "id": "dot-floating-isles",
+      "profile": "phone",
+      "changedModelCells": 18,
+      "totalModelCells": 181300,
+      "packedSha256": "2d0bcc5bcdf5a6a33e49ea28e964a2329b09d138d09dbf29be8776526ce8cb55",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 434,
+          "flipped": 121,
+          "flattened": 224,
+          "flippedFraction": 0.27880184331797236,
+          "flattenedFraction": 0.5161290322580645,
+          "fieldSha256": "87a2353b2822c38e309c5333168d538ca50f87292a025a10bfbe3a960b65fdd6"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 434,
+          "flipped": 121,
+          "flattened": 224,
+          "flippedFraction": 0.27880184331797236,
+          "flattenedFraction": 0.5161290322580645,
+          "fieldSha256": "1801758dfe35f18c0c97852fd435939559c28ff83f65f72a9e5f30273e89187c"
+        }
+      }
+    },
+    {
+      "id": "dot-floating-isles",
+      "profile": "desktop",
+      "changedModelCells": 18,
+      "totalModelCells": 181300,
+      "packedSha256": "2d0bcc5bcdf5a6a33e49ea28e964a2329b09d138d09dbf29be8776526ce8cb55",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 566,
+          "flipped": 150,
+          "flattened": 298,
+          "flippedFraction": 0.26501766784452296,
+          "flattenedFraction": 0.5265017667844523,
+          "fieldSha256": "7abbde0fa661a35c4b5489a5b72bf9fb286b8837d7e6f7bdaf8f78114e871a77"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 566,
+          "flipped": 150,
+          "flattened": 298,
+          "flippedFraction": 0.26501766784452296,
+          "flattenedFraction": 0.5265017667844523,
+          "fieldSha256": "1acef757d8a6fd7f72904f9405978e2391da733489ba9958c494f2056f3a1949"
+        }
+      }
+    },
+    {
+      "id": "dot-wave",
+      "profile": "phone",
+      "changedModelCells": 31,
+      "totalModelCells": 181300,
+      "packedSha256": "1fe2aaea0c468f80c9f742966e03790ab43cbc983a04d30ad5699dc260cbcf3a",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 227,
+          "flipped": 73,
+          "flattened": 105,
+          "flippedFraction": 0.32158590308370044,
+          "flattenedFraction": 0.46255506607929514,
+          "fieldSha256": "caba8bbd38ae96fb7e141a0bc0c58120236e4d3406fdda9622c7f23c8d9d0da2"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 227,
+          "flipped": 73,
+          "flattened": 105,
+          "flippedFraction": 0.32158590308370044,
+          "flattenedFraction": 0.46255506607929514,
+          "fieldSha256": "9009b9fc4729df3e35e3b42aacc813de4b8ad8ec53b4fd01a9fc16670d84bc20"
+        }
+      }
+    },
+    {
+      "id": "dot-wave",
+      "profile": "desktop",
+      "changedModelCells": 31,
+      "totalModelCells": 181300,
+      "packedSha256": "1fe2aaea0c468f80c9f742966e03790ab43cbc983a04d30ad5699dc260cbcf3a",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 236,
+          "flipped": 76,
+          "flattened": 116,
+          "flippedFraction": 0.3220338983050847,
+          "flattenedFraction": 0.4915254237288136,
+          "fieldSha256": "67d0bd8dde9e17a2ed600c3ffc1ec20d94818c82d4b89670c4bd37dceb95485f"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 236,
+          "flipped": 76,
+          "flattened": 116,
+          "flippedFraction": 0.3220338983050847,
+          "flattenedFraction": 0.4915254237288136,
+          "fieldSha256": "10699afec64b12d1e523606994e3841403b5f0211493723d7d8bf69771086ccd"
+        }
+      }
+    },
+    {
+      "id": "dot-explorer-desk",
+      "profile": "phone",
+      "changedModelCells": 67,
+      "totalModelCells": 181300,
+      "packedSha256": "71935c3921cfc15229783aa9324f7fa4c748677fd1a8e0261a4c0bfa36941879",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 297,
+          "flipped": 70,
+          "flattened": 141,
+          "flippedFraction": 0.2356902356902357,
+          "flattenedFraction": 0.47474747474747475,
+          "fieldSha256": "12d828d3cb151176d161ba594b738df3d1edb6e39da3fa15fc9e2d224b97d3e9"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 297,
+          "flipped": 70,
+          "flattened": 141,
+          "flippedFraction": 0.2356902356902357,
+          "flattenedFraction": 0.47474747474747475,
+          "fieldSha256": "03c58b213dddb37e3a7f8f041ccfce3d5cb5d3836b37cf3ab33af817f07b3bfe"
+        }
+      }
+    },
+    {
+      "id": "dot-explorer-desk",
+      "profile": "desktop",
+      "changedModelCells": 67,
+      "totalModelCells": 181300,
+      "packedSha256": "71935c3921cfc15229783aa9324f7fa4c748677fd1a8e0261a4c0bfa36941879",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 319,
+          "flipped": 76,
+          "flattened": 158,
+          "flippedFraction": 0.23824451410658307,
+          "flattenedFraction": 0.4952978056426332,
+          "fieldSha256": "722a572f208160dfeaec18b6ab1b1df2d8f95115d00e5fef5e7acc00cb088c90"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 319,
+          "flipped": 76,
+          "flattened": 158,
+          "flippedFraction": 0.23824451410658307,
+          "flattenedFraction": 0.4952978056426332,
+          "fieldSha256": "212cc35c23ec50da4395f9c505f35a0fa47dc8f52c2f0a31b5b58db220502dae"
+        }
+      }
+    },
+    {
+      "id": "dot-watchmaker",
+      "profile": "phone",
+      "changedModelCells": 77,
+      "totalModelCells": 181300,
+      "packedSha256": "d2bb540f277d1d8f6c0028d00b75c3b2465b87ed04d6f6dd90352b233b5ebf83",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 468,
+          "flipped": 106,
+          "flattened": 233,
+          "flippedFraction": 0.2264957264957265,
+          "flattenedFraction": 0.49786324786324787,
+          "fieldSha256": "0e88d1104f33beea2d519244fa8f37bea78296f113b3124f88452974e7dbb21b"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 468,
+          "flipped": 106,
+          "flattened": 233,
+          "flippedFraction": 0.2264957264957265,
+          "flattenedFraction": 0.49786324786324787,
+          "fieldSha256": "2c651cbe0fe6ca1f6ef065a163f64b476332a4378c348707942038d3fc0ce6b9"
+        }
+      }
+    },
+    {
+      "id": "dot-watchmaker",
+      "profile": "desktop",
+      "changedModelCells": 77,
+      "totalModelCells": 181300,
+      "packedSha256": "d2bb540f277d1d8f6c0028d00b75c3b2465b87ed04d6f6dd90352b233b5ebf83",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 516,
+          "flipped": 118,
+          "flattened": 263,
+          "flippedFraction": 0.22868217054263565,
+          "flattenedFraction": 0.5096899224806202,
+          "fieldSha256": "585437b52cd8e1fa151bc2ca1ecc023b4d92087b04820a86c62d7cfef5567ad2"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 516,
+          "flipped": 118,
+          "flattened": 263,
+          "flippedFraction": 0.22868217054263565,
+          "flattenedFraction": 0.5096899224806202,
+          "fieldSha256": "a66ba84ebc248211efaca3ad9693c79c81bd9a081e06a74b8547ca0f565fda7e"
+        }
+      }
+    },
+    {
+      "id": "dot-dragonfly",
+      "profile": "phone",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "bdecd08490b971000bcc6920bdcc88bfd3e5f26f433403e1c8e932ad5d4c8848",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 314,
+          "flipped": 149,
+          "flattened": 120,
+          "flippedFraction": 0.4745222929936306,
+          "flattenedFraction": 0.3821656050955414,
+          "fieldSha256": "76cf06c477cb10f07cb81ed706f612ad6124aa4d2256c61123a2ae5f0b850541"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 314,
+          "flipped": 149,
+          "flattened": 120,
+          "flippedFraction": 0.4745222929936306,
+          "flattenedFraction": 0.3821656050955414,
+          "fieldSha256": "76cf06c477cb10f07cb81ed706f612ad6124aa4d2256c61123a2ae5f0b850541"
+        }
+      }
+    },
+    {
+      "id": "dot-dragonfly",
+      "profile": "desktop",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "bdecd08490b971000bcc6920bdcc88bfd3e5f26f433403e1c8e932ad5d4c8848",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 291,
+          "flipped": 136,
+          "flattened": 117,
+          "flippedFraction": 0.46735395189003437,
+          "flattenedFraction": 0.4020618556701031,
+          "fieldSha256": "233e76d422d2fbb8926b4545a767557acbe51f0efdc3e20f9f6ec9c777da1a9a"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 291,
+          "flipped": 136,
+          "flattened": 117,
+          "flippedFraction": 0.46735395189003437,
+          "flattenedFraction": 0.4020618556701031,
+          "fieldSha256": "233e76d422d2fbb8926b4545a767557acbe51f0efdc3e20f9f6ec9c777da1a9a"
+        }
+      }
+    },
+    {
+      "id": "dot-mushrooms",
+      "profile": "phone",
+      "changedModelCells": 87,
+      "totalModelCells": 181300,
+      "packedSha256": "de490fb48957624c356fad9598e9dfb336545f32d9cc1e1bd9b65b652cff9f19",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 248,
+          "flipped": 69,
+          "flattened": 123,
+          "flippedFraction": 0.2782258064516129,
+          "flattenedFraction": 0.4959677419354839,
+          "fieldSha256": "0db177bb29d0f4c74a871915e2e9e3f591372609aadf9c842d7d1e0eb4811a6e"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 248,
+          "flipped": 69,
+          "flattened": 123,
+          "flippedFraction": 0.2782258064516129,
+          "flattenedFraction": 0.4959677419354839,
+          "fieldSha256": "f85a04a44b47567970c791199f551397ff60e319b48f4d1a937e9169610a24cd"
+        }
+      }
+    },
+    {
+      "id": "dot-mushrooms",
+      "profile": "desktop",
+      "changedModelCells": 87,
+      "totalModelCells": 181300,
+      "packedSha256": "de490fb48957624c356fad9598e9dfb336545f32d9cc1e1bd9b65b652cff9f19",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 275,
+          "flipped": 80,
+          "flattened": 143,
+          "flippedFraction": 0.2909090909090909,
+          "flattenedFraction": 0.52,
+          "fieldSha256": "3593bdf41f3d0bdeda60b5c9dc1577b72c916289851edcdbcc05ca0cf3be14e7"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 275,
+          "flipped": 80,
+          "flattened": 143,
+          "flippedFraction": 0.2909090909090909,
+          "flattenedFraction": 0.52,
+          "fieldSha256": "bc375a7bd7623c8b2f25a923fcb71b23c02b1c3181161fdcabd3cc14d00f1ec1"
+        }
+      }
+    },
+    {
+      "id": "dot-market",
+      "profile": "phone",
+      "changedModelCells": 11,
+      "totalModelCells": 181300,
+      "packedSha256": "be0505f6dc80db4820284a5406fd50526033fb174d5682168c31a8c3a3145be3",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 520,
+          "flipped": 75,
+          "flattened": 306,
+          "flippedFraction": 0.14423076923076922,
+          "flattenedFraction": 0.5884615384615385,
+          "fieldSha256": "4226fb4567c7a7eb92e9e63295563ddb9f17744dee988b1f9958d199c797edd4"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 520,
+          "flipped": 75,
+          "flattened": 306,
+          "flippedFraction": 0.14423076923076922,
+          "flattenedFraction": 0.5884615384615385,
+          "fieldSha256": "fa62d5eb0b6648d0074d503e3eb58bb37b427e44fe146d9f12edb6508c2faae5"
+        }
+      }
+    },
+    {
+      "id": "dot-market",
+      "profile": "desktop",
+      "changedModelCells": 11,
+      "totalModelCells": 181300,
+      "packedSha256": "be0505f6dc80db4820284a5406fd50526033fb174d5682168c31a8c3a3145be3",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 688,
+          "flipped": 87,
+          "flattened": 433,
+          "flippedFraction": 0.12645348837209303,
+          "flattenedFraction": 0.6293604651162791,
+          "fieldSha256": "ecfe6e6fabc68e0da536ac1ab720d01d68c05c6bc0e4475199589098b76d6785"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 688,
+          "flipped": 87,
+          "flattened": 433,
+          "flippedFraction": 0.12645348837209303,
+          "flattenedFraction": 0.6293604651162791,
+          "fieldSha256": "f0b4d038882b3d42a5fbac25af6bc98f14ce67e7a1a2c3b7f2aa404cd7fad969"
+        }
+      }
+    },
+    {
+      "id": "dot-gears",
+      "profile": "phone",
+      "changedModelCells": 88,
+      "totalModelCells": 181300,
+      "packedSha256": "f21aa583062f4a4ef897468180dd309c7797c3cbf66a3ea379987aaa5f8f9c64",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 324,
+          "flipped": 56,
+          "flattened": 170,
+          "flippedFraction": 0.1728395061728395,
+          "flattenedFraction": 0.5246913580246914,
+          "fieldSha256": "1d10235b9d6e474724c563dea2f38bdf18607532471db9df83bc15c0d6153449"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 324,
+          "flipped": 56,
+          "flattened": 170,
+          "flippedFraction": 0.1728395061728395,
+          "flattenedFraction": 0.5246913580246914,
+          "fieldSha256": "9201ef0ee82d7b5268049c2b075c8db22895424f7f1a2caf56bfdf27c0ceebac"
+        }
+      }
+    },
+    {
+      "id": "dot-gears",
+      "profile": "desktop",
+      "changedModelCells": 88,
+      "totalModelCells": 181300,
+      "packedSha256": "f21aa583062f4a4ef897468180dd309c7797c3cbf66a3ea379987aaa5f8f9c64",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 381,
+          "flipped": 59,
+          "flattened": 236,
+          "flippedFraction": 0.15485564304461943,
+          "flattenedFraction": 0.6194225721784777,
+          "fieldSha256": "9f7e517f2d11afb700f62ffac91bb0993e037629ec84ba811533418f781f1fe7"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 381,
+          "flipped": 59,
+          "flattened": 236,
+          "flippedFraction": 0.15485564304461943,
+          "flattenedFraction": 0.6194225721784777,
+          "fieldSha256": "e9320a35fc20d6366a5cb9eda3839d45a86505918bd05189ac7a7528c9c55eab"
+        }
+      }
+    },
+    {
+      "id": "dot-chess",
+      "profile": "phone",
+      "changedModelCells": 14,
+      "totalModelCells": 181300,
+      "packedSha256": "7707a5931fd8a701f2950854bd822f1c291740842e5bc5d5c97d9f3b40dd6d44",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 296,
+          "flipped": 62,
+          "flattened": 151,
+          "flippedFraction": 0.20945945945945946,
+          "flattenedFraction": 0.5101351351351351,
+          "fieldSha256": "fd400e79d88eccfd3a796a51f32f8ac3483adf4087c5575bef43754ab3ffdbe9"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 296,
+          "flipped": 62,
+          "flattened": 151,
+          "flippedFraction": 0.20945945945945946,
+          "flattenedFraction": 0.5101351351351351,
+          "fieldSha256": "5dea51685e1e66fb8caac98e530c2932289dba2379513e5d2d25137c09b500db"
+        }
+      }
+    },
+    {
+      "id": "dot-chess",
+      "profile": "desktop",
+      "changedModelCells": 14,
+      "totalModelCells": 181300,
+      "packedSha256": "7707a5931fd8a701f2950854bd822f1c291740842e5bc5d5c97d9f3b40dd6d44",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 323,
+          "flipped": 67,
+          "flattened": 171,
+          "flippedFraction": 0.20743034055727555,
+          "flattenedFraction": 0.5294117647058824,
+          "fieldSha256": "9d2aba8f883047a547164d2e9aad95564e5e112924548e92bae907a6d5742ca2"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 323,
+          "flipped": 67,
+          "flattened": 171,
+          "flippedFraction": 0.20743034055727555,
+          "flattenedFraction": 0.5294117647058824,
+          "fieldSha256": "d2dbca237d9a2df54f7d86f60ba359f619d245c4e1e075435b0c6ecf1fbaec7f"
+        }
+      }
+    },
+    {
+      "id": "dot-book-city",
+      "profile": "phone",
+      "changedModelCells": 93,
+      "totalModelCells": 181300,
+      "packedSha256": "f366f64de629d8df7f4f4260eab00146407c6c2d001242f006efa955903fc6e4",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 555,
+          "flipped": 97,
+          "flattened": 281,
+          "flippedFraction": 0.17477477477477477,
+          "flattenedFraction": 0.5063063063063064,
+          "fieldSha256": "b7a19962ac5c4a64f7db53c561862373a73ecdc557087702cb8169307b47561b"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 555,
+          "flipped": 97,
+          "flattened": 281,
+          "flippedFraction": 0.17477477477477477,
+          "flattenedFraction": 0.5063063063063064,
+          "fieldSha256": "e001a42e59190ae31e64289aae4d6a3bbeef1eeabf0d37b16dfe3f4b9131f93b"
+        }
+      }
+    },
+    {
+      "id": "dot-book-city",
+      "profile": "desktop",
+      "changedModelCells": 93,
+      "totalModelCells": 181300,
+      "packedSha256": "f366f64de629d8df7f4f4260eab00146407c6c2d001242f006efa955903fc6e4",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 546,
+          "flipped": 81,
+          "flattened": 277,
+          "flippedFraction": 0.14835164835164835,
+          "flattenedFraction": 0.5073260073260073,
+          "fieldSha256": "a35c10cb0972376fb0cf8d523e60011eea09b7a23349b361e4d1797b5dcd886f"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 546,
+          "flipped": 81,
+          "flattened": 277,
+          "flippedFraction": 0.14835164835164835,
+          "flattenedFraction": 0.5073260073260073,
+          "fieldSha256": "533d18fd27495af12290dd4421adeee119e179b747a02d4e0c05c1d1f7f1960d"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "profile": "phone",
+      "changedModelCells": 397,
+      "totalModelCells": 181300,
+      "packedSha256": "a0dcb98f260a453a3cefc524c5343ed0e7bdf44dc44bcfb076e5913c2db79f91",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 149,
+          "flipped": 62,
+          "flattened": 45,
+          "flippedFraction": 0.4161073825503356,
+          "flattenedFraction": 0.30201342281879195,
+          "fieldSha256": "43b4fa6fb52d2b65a80eb2ed0ba7d9b0fc8a086889292d9ea39e1cf604bfd0a0"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 149,
+          "flipped": 62,
+          "flattened": 45,
+          "flippedFraction": 0.4161073825503356,
+          "flattenedFraction": 0.30201342281879195,
+          "fieldSha256": "7f2325ec1633db8275ae6a9a59cc2437ae54320e2905ea8c1c468387da3858d4"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-stoneware",
+      "profile": "desktop",
+      "changedModelCells": 397,
+      "totalModelCells": 181300,
+      "packedSha256": "a0dcb98f260a453a3cefc524c5343ed0e7bdf44dc44bcfb076e5913c2db79f91",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 116,
+          "flipped": 57,
+          "flattened": 30,
+          "flippedFraction": 0.49137931034482757,
+          "flattenedFraction": 0.25862068965517243,
+          "fieldSha256": "cb4ae5c4b7b4c3e550e040e5e2a784a8634354ea733977ccada8b750ec6ffae7"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 116,
+          "flipped": 57,
+          "flattened": 30,
+          "flippedFraction": 0.49137931034482757,
+          "flattenedFraction": 0.25862068965517243,
+          "fieldSha256": "1560a4f3a85697b58b0ace1596fa9bda2124a7b54820f185538f0ae19fb8e361"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "profile": "phone",
+      "changedModelCells": 3,
+      "totalModelCells": 181300,
+      "packedSha256": "45651835f154acbdb8467da054d1aed5385788d26613f314ad6b03b9fc1aa116",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 423,
+          "flipped": 99,
+          "flattened": 203,
+          "flippedFraction": 0.23404255319148937,
+          "flattenedFraction": 0.4799054373522459,
+          "fieldSha256": "b6be2e6dd73071340a6df938317fb0f93335861eea81a5efcdefeb1b46f9f547"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 423,
+          "flipped": 99,
+          "flattened": 203,
+          "flippedFraction": 0.23404255319148937,
+          "flattenedFraction": 0.4799054373522459,
+          "fieldSha256": "9b3c22c4f2caf0a6b2f62cd02f763f4525f984a93858651c6467aed468404b8e"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-autumn-squash",
+      "profile": "desktop",
+      "changedModelCells": 3,
+      "totalModelCells": 181300,
+      "packedSha256": "45651835f154acbdb8467da054d1aed5385788d26613f314ad6b03b9fc1aa116",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 566,
+          "flipped": 63,
+          "flattened": 290,
+          "flippedFraction": 0.11130742049469965,
+          "flattenedFraction": 0.5123674911660777,
+          "fieldSha256": "3417f983c5d33ca294f7a76144e6c8c26aebf98310c7cd08fd47c4632468a64a"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 566,
+          "flipped": 63,
+          "flattened": 290,
+          "flippedFraction": 0.11130742049469965,
+          "flattenedFraction": 0.5123674911660777,
+          "fieldSha256": "fbc7ae4651426871cc063190436512c05fb02e0fe844059a6f49c6952f06c399"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "profile": "phone",
+      "changedModelCells": 283,
+      "totalModelCells": 152292,
+      "packedSha256": "8490ae9dfb92d89e0c15f406d72797ab134c7ee22bb1c509cef9de23fb9936a5",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 109,
+          "flipped": 28,
+          "flattened": 27,
+          "flippedFraction": 0.25688073394495414,
+          "flattenedFraction": 0.24770642201834864,
+          "fieldSha256": "1a3e855ff88974379637638587158a9a0a103e18a9c822f90a033e0fa8844411"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 109,
+          "flipped": 28,
+          "flattened": 27,
+          "flippedFraction": 0.25688073394495414,
+          "flattenedFraction": 0.24770642201834864,
+          "fieldSha256": "7937babaf0c5da4dcadaaed3f4162e0a2ee010c73c604d1b6c6f08c199f9ba70"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-wooden-toys",
+      "profile": "desktop",
+      "changedModelCells": 283,
+      "totalModelCells": 152292,
+      "packedSha256": "8490ae9dfb92d89e0c15f406d72797ab134c7ee22bb1c509cef9de23fb9936a5",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 119,
+          "flipped": 36,
+          "flattened": 37,
+          "flippedFraction": 0.3025210084033613,
+          "flattenedFraction": 0.31092436974789917,
+          "fieldSha256": "0dbfa077090b2c0455511f89886f1f5ca76a214f653b30551b10ba4a79c0d70f"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 119,
+          "flipped": 36,
+          "flattened": 37,
+          "flippedFraction": 0.3025210084033613,
+          "flattenedFraction": 0.31092436974789917,
+          "fieldSha256": "549fea913a66cb31364a9d79027d386ed8537e2a91e5b24c821ab0b12e9ae3ee"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "profile": "phone",
+      "changedModelCells": 84,
+      "totalModelCells": 181300,
+      "packedSha256": "721b9d3e7d2dadbfb1cbb48cb078d9e8682fdf7396962055b256cec7f4b331ab",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 275,
+          "flipped": 35,
+          "flattened": 162,
+          "flippedFraction": 0.12727272727272726,
+          "flattenedFraction": 0.5890909090909091,
+          "fieldSha256": "a0b89bcaa4868400f5bf685c934e7bab304a2c02c486515e9fa6344eaeef991c"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 275,
+          "flipped": 35,
+          "flattened": 162,
+          "flippedFraction": 0.12727272727272726,
+          "flattenedFraction": 0.5890909090909091,
+          "fieldSha256": "97d4dbb1468211e746da0e1b875716ab7a3e889b8a2e8029772f5d617247e170"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-clay-tools",
+      "profile": "desktop",
+      "changedModelCells": 84,
+      "totalModelCells": 181300,
+      "packedSha256": "721b9d3e7d2dadbfb1cbb48cb078d9e8682fdf7396962055b256cec7f4b331ab",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 308,
+          "flipped": 46,
+          "flattened": 187,
+          "flippedFraction": 0.14935064935064934,
+          "flattenedFraction": 0.6071428571428571,
+          "fieldSha256": "67dfefcbfc46279e4e285191a7a06e99d35264941d21ec8f63631c79ae15be11"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 308,
+          "flipped": 46,
+          "flattened": 187,
+          "flippedFraction": 0.14935064935064934,
+          "flattenedFraction": 0.6071428571428571,
+          "fieldSha256": "b93785b44b0b92dde0bc1b81da8bcc82edf5763b0322dd4041a6d4bbcce3fa13"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "profile": "phone",
+      "changedModelCells": 63,
+      "totalModelCells": 181300,
+      "packedSha256": "ef9c0a25eb7a3840bc1f5d58a7ff04d1c4aa7ae2ac762cf03f29b00fd3fa9ad6",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 195,
+          "flipped": 54,
+          "flattened": 71,
+          "flippedFraction": 0.27692307692307694,
+          "flattenedFraction": 0.3641025641025641,
+          "fieldSha256": "29507cdafbde78b197269f0856a7cce10d5f2f58e7e3cc7707081241eacc7534"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 195,
+          "flipped": 54,
+          "flattened": 71,
+          "flippedFraction": 0.27692307692307694,
+          "flattenedFraction": 0.3641025641025641,
+          "fieldSha256": "afbc55dbe1fadcfd7d1df73b739f050798a73d664c3f4d7a923b9ba6647ae631"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-tea-tray",
+      "profile": "desktop",
+      "changedModelCells": 63,
+      "totalModelCells": 181300,
+      "packedSha256": "ef9c0a25eb7a3840bc1f5d58a7ff04d1c4aa7ae2ac762cf03f29b00fd3fa9ad6",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 182,
+          "flipped": 38,
+          "flattened": 78,
+          "flippedFraction": 0.2087912087912088,
+          "flattenedFraction": 0.42857142857142855,
+          "fieldSha256": "77ae0db85b37a0bc9204dfb8909cb7e164fce7580df052f639046240662778b3"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 182,
+          "flipped": 38,
+          "flattened": 78,
+          "flippedFraction": 0.2087912087912088,
+          "flattenedFraction": 0.42857142857142855,
+          "fieldSha256": "43b075ceaea77edc96f292ba53ab0e08b25286cba666851ed90eaa2594592d0b"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "profile": "phone",
+      "changedModelCells": 346,
+      "totalModelCells": 181300,
+      "packedSha256": "88b3f053bd1e0f1726ad3d155f6df1707be1d7e42023eb974f463008cb97f948",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 137,
+          "flipped": 41,
+          "flattened": 57,
+          "flippedFraction": 0.29927007299270075,
+          "flattenedFraction": 0.41605839416058393,
+          "fieldSha256": "5afcc70df354daca20d482021d7a75c4efdfda8392658b4bce413a9341672b47"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 137,
+          "flipped": 41,
+          "flattened": 57,
+          "flippedFraction": 0.29927007299270075,
+          "flattenedFraction": 0.41605839416058393,
+          "fieldSha256": "1c75a4dccd807baa138ac08cfba24164d6fe802956b73b01ff090b7243dac447"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-arched-room",
+      "profile": "desktop",
+      "changedModelCells": 346,
+      "totalModelCells": 181300,
+      "packedSha256": "88b3f053bd1e0f1726ad3d155f6df1707be1d7e42023eb974f463008cb97f948",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 161,
+          "flipped": 40,
+          "flattened": 74,
+          "flippedFraction": 0.2484472049689441,
+          "flattenedFraction": 0.45962732919254656,
+          "fieldSha256": "efde94632d9eb0339fb32d85d4cab2d9ced3b30b2602e19a4bcac5a195d24828"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 161,
+          "flipped": 40,
+          "flattened": 74,
+          "flippedFraction": 0.2484472049689441,
+          "flattenedFraction": 0.45962732919254656,
+          "fieldSha256": "b89875476c76373f8938c54331205fce293820bc7dac8f6067dcc565d4c49d4e"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "profile": "phone",
+      "changedModelCells": 71,
+      "totalModelCells": 181300,
+      "packedSha256": "ff4bde5e5078f8ecee3091ff90442e0a2d2b6920b689a020cc24fcfd02103c1d",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 419,
+          "flipped": 109,
+          "flattened": 122,
+          "flippedFraction": 0.26014319809069214,
+          "flattenedFraction": 0.2911694510739857,
+          "fieldSha256": "86ef9efba44972ba52ec973fd67f94e9e04188c03f1bc5ecee321cdb8d8325ec"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 419,
+          "flipped": 109,
+          "flattened": 122,
+          "flippedFraction": 0.26014319809069214,
+          "flattenedFraction": 0.2911694510739857,
+          "fieldSha256": "22a912599aac71cf0f64759152e7b414d61e4c64f1ae3fe32273cbf8e416c927"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-plant-studio",
+      "profile": "desktop",
+      "changedModelCells": 71,
+      "totalModelCells": 181300,
+      "packedSha256": "ff4bde5e5078f8ecee3091ff90442e0a2d2b6920b689a020cc24fcfd02103c1d",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 441,
+          "flipped": 122,
+          "flattened": 123,
+          "flippedFraction": 0.2766439909297052,
+          "flattenedFraction": 0.2789115646258503,
+          "fieldSha256": "201ce9f901fbf4033dad15393674ee07dff4d24ee61668c9fb740bd4d0c13666"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 441,
+          "flipped": 122,
+          "flattened": 123,
+          "flippedFraction": 0.2766439909297052,
+          "flattenedFraction": 0.2789115646258503,
+          "fieldSha256": "801712419c4ad75de520ce304601790a2d66afeadd8da8eb2d3625c97c792a00"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "profile": "phone",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "2d74835cbcd76723c56b37390db521606c57f5fc2a07d9fe560920aab68669af",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 421,
+          "flipped": 60,
+          "flattened": 259,
+          "flippedFraction": 0.14251781472684086,
+          "flattenedFraction": 0.6152019002375297,
+          "fieldSha256": "999f5f7b604f6c7829b486ffb5c84f65ad1dc4e598c5f544e6af01928f8d341c"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 421,
+          "flipped": 60,
+          "flattened": 259,
+          "flippedFraction": 0.14251781472684086,
+          "flattenedFraction": 0.6152019002375297,
+          "fieldSha256": "854a6006c164f991881124fabab402e54d9c2dd82dd14edd721fb38835182673"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-moss-stream",
+      "profile": "desktop",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "2d74835cbcd76723c56b37390db521606c57f5fc2a07d9fe560920aab68669af",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 728,
+          "flipped": 70,
+          "flattened": 512,
+          "flippedFraction": 0.09615384615384616,
+          "flattenedFraction": 0.7032967032967034,
+          "fieldSha256": "8ab2e3fcc43efb0746ae23fd078e5bba893c29b188142767bf97edebeb72436f"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 728,
+          "flipped": 70,
+          "flattened": 512,
+          "flippedFraction": 0.09615384615384616,
+          "flattenedFraction": 0.7032967032967034,
+          "fieldSha256": "a4a9dbb398a63c29fdf2be131ed59b8ea3a849179307bd5fab3b8ebc8d1ef526"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "profile": "phone",
+      "changedModelCells": 4,
+      "totalModelCells": 181300,
+      "packedSha256": "5d0dafd4a60c6c4a7a6165727e3be9f7672ad9f30f9ee1b8079b6a6c36cb97d2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 124,
+          "flipped": 14,
+          "flattened": 78,
+          "flippedFraction": 0.11290322580645161,
+          "flattenedFraction": 0.6290322580645161,
+          "fieldSha256": "c5f49d4a9fe948562be887096b96ed6a1d8bea555130af9429a3e9e277f80d1f"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 124,
+          "flipped": 14,
+          "flattened": 78,
+          "flippedFraction": 0.11290322580645161,
+          "flattenedFraction": 0.6290322580645161,
+          "fieldSha256": "92263bd36f2ac523378e16e85ccecb6b7b6563724c83ab29c987c500aa706acd"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-dune-grass",
+      "profile": "desktop",
+      "changedModelCells": 4,
+      "totalModelCells": 181300,
+      "packedSha256": "5d0dafd4a60c6c4a7a6165727e3be9f7672ad9f30f9ee1b8079b6a6c36cb97d2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 137,
+          "flipped": 13,
+          "flattened": 89,
+          "flippedFraction": 0.0948905109489051,
+          "flattenedFraction": 0.6496350364963503,
+          "fieldSha256": "fb094ef47ceaa5652c0c1d2729bbe91f89f4a18fe4aef818fdb6626ac6f24a6b"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 137,
+          "flipped": 13,
+          "flattened": 89,
+          "flippedFraction": 0.0948905109489051,
+          "flattenedFraction": 0.6496350364963503,
+          "fieldSha256": "17eb6da9e109725d41cd84740f9b6e3e60b38649ffd1abe7d1e34e716225092f"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "profile": "phone",
+      "changedModelCells": 8,
+      "totalModelCells": 181300,
+      "packedSha256": "523a6652bc882b120d1b4e46a2f7fe95b74df50ef42cbb0d14c8c0b2ff9c06a2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 498,
+          "flipped": 63,
+          "flattened": 284,
+          "flippedFraction": 0.12650602409638553,
+          "flattenedFraction": 0.570281124497992,
+          "fieldSha256": "53b2f1b8ae1e2f362366877b9316a051bb69396512cc68d7665afbd90f115706"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 498,
+          "flipped": 63,
+          "flattened": 284,
+          "flippedFraction": 0.12650602409638553,
+          "flattenedFraction": 0.570281124497992,
+          "fieldSha256": "6aabc62dee44bbbd0d602df1265d879da5ec649495a3f78af249c7f166f564d9"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-redwood-path",
+      "profile": "desktop",
+      "changedModelCells": 8,
+      "totalModelCells": 181300,
+      "packedSha256": "523a6652bc882b120d1b4e46a2f7fe95b74df50ef42cbb0d14c8c0b2ff9c06a2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 707,
+          "flipped": 65,
+          "flattened": 487,
+          "flippedFraction": 0.09193776520509193,
+          "flattenedFraction": 0.6888260254596889,
+          "fieldSha256": "cd7b563b3b2b517d77900ffc4e6c8b6c7d9cc0df045e7fd54109b578cf325a7b"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 707,
+          "flipped": 65,
+          "flattened": 487,
+          "flippedFraction": 0.09193776520509193,
+          "flattenedFraction": 0.6888260254596889,
+          "fieldSha256": "a1165e4eb50161cc7398e8ae75a56c68130a231dfd5d78f36f685bcee586cb48"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "profile": "phone",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "c4d3825561025f818a5a63277faa47a28c31087ea5618dca78c80bbfdea0c135",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 316,
+          "flipped": 60,
+          "flattened": 171,
+          "flippedFraction": 0.189873417721519,
+          "flattenedFraction": 0.5411392405063291,
+          "fieldSha256": "3c4dfaf823925f76052682a6e34d6347f32f34cf057a03bea0ffaef21d6ce908"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 316,
+          "flipped": 60,
+          "flattened": 171,
+          "flippedFraction": 0.189873417721519,
+          "flattenedFraction": 0.5411392405063291,
+          "fieldSha256": "bc4713f83df42c83446542b242713d6804c07d754b2ab3e284daf30adf25d3f4"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-pinecone",
+      "profile": "desktop",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "c4d3825561025f818a5a63277faa47a28c31087ea5618dca78c80bbfdea0c135",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 462,
+          "flipped": 57,
+          "flattened": 287,
+          "flippedFraction": 0.12337662337662338,
+          "flattenedFraction": 0.6212121212121212,
+          "fieldSha256": "a22cbadd13488919d3ccecfee8fffd360baab913545fea27718ae4c92d08961c"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 462,
+          "flipped": 57,
+          "flattened": 287,
+          "flippedFraction": 0.12337662337662338,
+          "flattenedFraction": 0.6212121212121212,
+          "fieldSha256": "9d318f4a10f666416cbd3bad41aa49701fb9abb9c618ded5ffeba294c2b7276e"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "profile": "phone",
+      "changedModelCells": 4,
+      "totalModelCells": 181300,
+      "packedSha256": "d771811ed30935103ac598ae8066b5b6ff4ce956ea1cfdcd7b8e8dae80a0f9b6",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 355,
+          "flipped": 34,
+          "flattened": 235,
+          "flippedFraction": 0.09577464788732394,
+          "flattenedFraction": 0.6619718309859155,
+          "fieldSha256": "449d80bcf804d581f0437d984c7f9360156896cbcf0759676b7944cce4a1d10d"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 355,
+          "flipped": 34,
+          "flattened": 235,
+          "flippedFraction": 0.09577464788732394,
+          "flattenedFraction": 0.6619718309859155,
+          "fieldSha256": "3e16f96a63e5eb6eb583183eb251ffeb41a9505b52a0f10854f49a63f34686ed"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-acorns",
+      "profile": "desktop",
+      "changedModelCells": 4,
+      "totalModelCells": 181300,
+      "packedSha256": "d771811ed30935103ac598ae8066b5b6ff4ce956ea1cfdcd7b8e8dae80a0f9b6",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 426,
+          "flipped": 43,
+          "flattened": 296,
+          "flippedFraction": 0.10093896713615023,
+          "flattenedFraction": 0.6948356807511737,
+          "fieldSha256": "519ca5d3ee8e239502c6fcea1df08d1e31c7323abd1fe299ebc80828700534c5"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 426,
+          "flipped": 43,
+          "flattened": 296,
+          "flippedFraction": 0.10093896713615023,
+          "flattenedFraction": 0.6948356807511737,
+          "fieldSha256": "91f301b7bf71996c8483c9df99fdd682a46ea47946f0bb2076e2f210c32c02dc"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "profile": "phone",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "c7f9f3e28483395083a2bd1ccdac392ebba4808a29c8111b93ec17c27567d932",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 281,
+          "flipped": 63,
+          "flattened": 159,
+          "flippedFraction": 0.22419928825622776,
+          "flattenedFraction": 0.5658362989323843,
+          "fieldSha256": "f08cee20779eb27e097cbf4cdbae53580d172a1db7b26283fa77f5815eca95c2"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 281,
+          "flipped": 63,
+          "flattened": 159,
+          "flippedFraction": 0.22419928825622776,
+          "flattenedFraction": 0.5658362989323843,
+          "fieldSha256": "f08cee20779eb27e097cbf4cdbae53580d172a1db7b26283fa77f5815eca95c2"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-fern-curl",
+      "profile": "desktop",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "c7f9f3e28483395083a2bd1ccdac392ebba4808a29c8111b93ec17c27567d932",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 286,
+          "flipped": 65,
+          "flattened": 149,
+          "flippedFraction": 0.22727272727272727,
+          "flattenedFraction": 0.5209790209790209,
+          "fieldSha256": "8b565a6183698de0c2623483271c35a70578f24b2d4cedf4585e80ca300bc38c"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 286,
+          "flipped": 65,
+          "flattened": 149,
+          "flippedFraction": 0.22727272727272727,
+          "flattenedFraction": 0.5209790209790209,
+          "fieldSha256": "8b565a6183698de0c2623483271c35a70578f24b2d4cedf4585e80ca300bc38c"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "profile": "phone",
+      "changedModelCells": 13,
+      "totalModelCells": 181300,
+      "packedSha256": "5a9dc887a99d1849a6c7e02b72f5806a2f1db45836b1723f37fcc1092995db67",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 314,
+          "flipped": 69,
+          "flattened": 156,
+          "flippedFraction": 0.2197452229299363,
+          "flattenedFraction": 0.4968152866242038,
+          "fieldSha256": "9fbb35ab8ab56edc3411696b8946f726e5a225c1aa8ef3c5372ff393d6322381"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 314,
+          "flipped": 69,
+          "flattened": 156,
+          "flippedFraction": 0.2197452229299363,
+          "flattenedFraction": 0.4968152866242038,
+          "fieldSha256": "ee10cd2ed3b39b809fafb9c3f9656fe935ced2209ddfd6e8beeab7b663a6ae41"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-cliff-terrace",
+      "profile": "desktop",
+      "changedModelCells": 13,
+      "totalModelCells": 181300,
+      "packedSha256": "5a9dc887a99d1849a6c7e02b72f5806a2f1db45836b1723f37fcc1092995db67",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 346,
+          "flipped": 69,
+          "flattened": 188,
+          "flippedFraction": 0.1994219653179191,
+          "flattenedFraction": 0.5433526011560693,
+          "fieldSha256": "4b930d061c00184c998423484570499debc3eedddae36d76c3c262366d94d323"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 346,
+          "flipped": 69,
+          "flattened": 188,
+          "flippedFraction": 0.1994219653179191,
+          "flattenedFraction": 0.5433526011560693,
+          "fieldSha256": "a7f824c259aa2828ba7529ef967dc5548fea2dc1c9b506c4624002f6e549b2aa"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "profile": "phone",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "9f654dc1918c545688b5f4bc2a22e2e3ba79d59a6048dce8bff73f25c88bf1f1",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 520,
+          "flipped": 182,
+          "flattened": 175,
+          "flippedFraction": 0.35,
+          "flattenedFraction": 0.33653846153846156,
+          "fieldSha256": "33b28860639ef224bb518d239a6c83d37a1ccc00e5972e1e89d665d56df52144"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 520,
+          "flipped": 182,
+          "flattened": 175,
+          "flippedFraction": 0.35,
+          "flattenedFraction": 0.33653846153846156,
+          "fieldSha256": "10861da216af18decbd2dd39df9d2a55b82d9aa9acb477adb6ae485154bbfbd9"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-mushroom-house",
+      "profile": "desktop",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "9f654dc1918c545688b5f4bc2a22e2e3ba79d59a6048dce8bff73f25c88bf1f1",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 579,
+          "flipped": 123,
+          "flattened": 242,
+          "flippedFraction": 0.21243523316062177,
+          "flattenedFraction": 0.41796200345423146,
+          "fieldSha256": "5a66e059c473ff6befafa8d27438734c378e37571ed6a7ac225e51643e863ff5"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 579,
+          "flipped": 123,
+          "flattened": 242,
+          "flippedFraction": 0.21243523316062177,
+          "flattenedFraction": 0.41796200345423146,
+          "fieldSha256": "00d082f33de9736640497481b52229cc7126d56bc66aedbc572e83c51194e3a1"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "profile": "phone",
+      "changedModelCells": 72,
+      "totalModelCells": 181300,
+      "packedSha256": "c376b3c20cf19e01e93161e91758871e19ad6498dd494e679f087ddd7915615e",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 150,
+          "flipped": 20,
+          "flattened": 80,
+          "flippedFraction": 0.13333333333333333,
+          "flattenedFraction": 0.5333333333333333,
+          "fieldSha256": "d876ba4f5e64eed8a13446fd04c78a4429ba0c288ed1a0a8ce1f253b7dde186a"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 150,
+          "flipped": 20,
+          "flattened": 80,
+          "flippedFraction": 0.13333333333333333,
+          "flattenedFraction": 0.5333333333333333,
+          "fieldSha256": "24831478f199fbe97d8186e83feaca0d862d17481756eec3981f61939cc22a1e"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-crystal-court",
+      "profile": "desktop",
+      "changedModelCells": 72,
+      "totalModelCells": 181300,
+      "packedSha256": "c376b3c20cf19e01e93161e91758871e19ad6498dd494e679f087ddd7915615e",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 154,
+          "flipped": 21,
+          "flattened": 68,
+          "flippedFraction": 0.13636363636363635,
+          "flattenedFraction": 0.44155844155844154,
+          "fieldSha256": "ffcbb8e31b60db8b117417159a74079ad01c37de2b68541187c30364f39bbab1"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 154,
+          "flipped": 21,
+          "flattened": 68,
+          "flippedFraction": 0.13636363636363635,
+          "flattenedFraction": 0.44155844155844154,
+          "fieldSha256": "4a3d2125a27a81c2b70b7f1b566dad1f75575279d9e4ed63d72bab4c3e58db08"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "profile": "phone",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "68479d45df5e63edf52039ba1d2af94f090f3f9e484ebc05425ec9e1b77bd3bb",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 365,
+          "flipped": 26,
+          "flattened": 256,
+          "flippedFraction": 0.07123287671232877,
+          "flattenedFraction": 0.7013698630136986,
+          "fieldSha256": "9e405f834e1b8e9c70e36754cfb028c08430858a529fc7d4bf063759ade424d7"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 365,
+          "flipped": 26,
+          "flattened": 256,
+          "flippedFraction": 0.07123287671232877,
+          "flattenedFraction": 0.7013698630136986,
+          "fieldSha256": "e78212dad65c6c9e1b6b5747f590bb77783f297445cfbe27badc76edfe97f3c4"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-tortoise",
+      "profile": "desktop",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "68479d45df5e63edf52039ba1d2af94f090f3f9e484ebc05425ec9e1b77bd3bb",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 486,
+          "flipped": 34,
+          "flattened": 362,
+          "flippedFraction": 0.06995884773662552,
+          "flattenedFraction": 0.7448559670781894,
+          "fieldSha256": "622a823d22243c0266b32a2ff2a3c9fef21d124a332cebe982a61ec29cf8f655"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 486,
+          "flipped": 34,
+          "flattened": 362,
+          "flippedFraction": 0.06995884773662552,
+          "flattenedFraction": 0.7448559670781894,
+          "fieldSha256": "585b0d5c86389fd1ae86cda35aa2d81f032ab0ec5f8d7a02fd4778b865c3515f"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "profile": "phone",
+      "changedModelCells": 17,
+      "totalModelCells": 181300,
+      "packedSha256": "102c4b6ac82ea0e3e291d9aadef288f48f70174cc80e7b319e90579b9921f254",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 476,
+          "flipped": 78,
+          "flattened": 290,
+          "flippedFraction": 0.1638655462184874,
+          "flattenedFraction": 0.6092436974789915,
+          "fieldSha256": "c4440b7985604bc4125a825283e4e9003e945ce9d997223fa221c943c00b85b2"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 476,
+          "flipped": 78,
+          "flattened": 290,
+          "flippedFraction": 0.1638655462184874,
+          "flattenedFraction": 0.6092436974789915,
+          "fieldSha256": "ee0da64a44476d1c1fcd63ea9c8b8cccdb6fab521fb6cf00dc553e42cbdcc05b"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-deer-grove",
+      "profile": "desktop",
+      "changedModelCells": 17,
+      "totalModelCells": 181300,
+      "packedSha256": "102c4b6ac82ea0e3e291d9aadef288f48f70174cc80e7b319e90579b9921f254",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 632,
+          "flipped": 92,
+          "flattened": 398,
+          "flippedFraction": 0.14556962025316456,
+          "flattenedFraction": 0.629746835443038,
+          "fieldSha256": "2f7d4d739cc1a91007f996b345d9baf65175aeba313ca2029b513ccd64562d61"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 632,
+          "flipped": 92,
+          "flattened": 398,
+          "flippedFraction": 0.14556962025316456,
+          "flattenedFraction": 0.629746835443038,
+          "fieldSha256": "a0d6deafb67635d8953a0acd8a5afc4322d57ae59b159ac1b11c9451347d2b27"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "profile": "phone",
+      "changedModelCells": 120,
+      "totalModelCells": 181300,
+      "packedSha256": "2bd9bdfc73414202542bca4c25e41da27838c95b5b77e27211eb18fba89149be",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 242,
+          "flipped": 28,
+          "flattened": 166,
+          "flippedFraction": 0.11570247933884298,
+          "flattenedFraction": 0.6859504132231405,
+          "fieldSha256": "860ae2d8a48b94eca0e75f55c4da52331da28eadec9c69c633ab9fafeeead988"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 242,
+          "flipped": 28,
+          "flattened": 166,
+          "flippedFraction": 0.11570247933884298,
+          "flattenedFraction": 0.6859504132231405,
+          "fieldSha256": "32a622dda16cfbbaeee128728e2667655f58bfec6565cb3f08eeb95f1b883d95"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-paper-canyon",
+      "profile": "desktop",
+      "changedModelCells": 120,
+      "totalModelCells": 181300,
+      "packedSha256": "2bd9bdfc73414202542bca4c25e41da27838c95b5b77e27211eb18fba89149be",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 256,
+          "flipped": 34,
+          "flattened": 170,
+          "flippedFraction": 0.1328125,
+          "flattenedFraction": 0.6640625,
+          "fieldSha256": "ce97e0b778d83524630ea1c991731e755d1a51427d0fd801df323a8a3b52a6fc"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 256,
+          "flipped": 34,
+          "flattened": 170,
+          "flippedFraction": 0.1328125,
+          "flattenedFraction": 0.6640625,
+          "fieldSha256": "b81098422a9777d7b1b24cbacd038b354e31bd7f976dcc217b189380034d835b"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "profile": "phone",
+      "changedModelCells": 46,
+      "totalModelCells": 181300,
+      "packedSha256": "01d56e7db14b0d81a5634c56d9d1c3ac7ece3b208ec5e98b7c6122b6f19b150b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 228,
+          "flipped": 27,
+          "flattened": 141,
+          "flippedFraction": 0.11842105263157894,
+          "flattenedFraction": 0.618421052631579,
+          "fieldSha256": "4a111b148b9839472afee45ee3a3aeb7cbdfbadeb6e5c995adbf875d43d5f098"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 228,
+          "flipped": 27,
+          "flattened": 141,
+          "flippedFraction": 0.11842105263157894,
+          "flattenedFraction": 0.618421052631579,
+          "fieldSha256": "d130f2acfe15f80770323892379f3cb77a6c9b4c5de608f0baf625bf65e30aea"
+        }
+      }
+    },
+    {
+      "id": "dot-cdx-wood-valley",
+      "profile": "desktop",
+      "changedModelCells": 46,
+      "totalModelCells": 181300,
+      "packedSha256": "01d56e7db14b0d81a5634c56d9d1c3ac7ece3b208ec5e98b7c6122b6f19b150b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 242,
+          "flipped": 29,
+          "flattened": 144,
+          "flippedFraction": 0.11983471074380166,
+          "flattenedFraction": 0.5950413223140496,
+          "fieldSha256": "50f97406968b9f920f5b05dfd26c57fdd26fdcb788a64736aa04ce7b09e7c60e"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 242,
+          "flipped": 29,
+          "flattened": 144,
+          "flippedFraction": 0.11983471074380166,
+          "flattenedFraction": 0.5950413223140496,
+          "fieldSha256": "71a7e59efa01f84182828d4553a6f05a1b4074d26c4b78cbe287f0515671646d"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "profile": "phone",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "3c9d7f7b55007008ae963f2bc12bcedb5e9bd06cc6257a5c4e0e011a70c79ece",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 532,
+          "flipped": 102,
+          "flattened": 283,
+          "flippedFraction": 0.19172932330827067,
+          "flattenedFraction": 0.5319548872180451,
+          "fieldSha256": "5b458ef14fd8cb7e023e014f04474af8f2f20d95eced0bc936ecafbbd0884735"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 532,
+          "flipped": 102,
+          "flattened": 283,
+          "flippedFraction": 0.19172932330827067,
+          "flattenedFraction": 0.5319548872180451,
+          "fieldSha256": "4a9311593bae33ce1f8cf2f4f51a9eeb3f7a1b0fe18d79375417c38e48e112c6"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-glass-jug",
+      "profile": "desktop",
+      "changedModelCells": 2,
+      "totalModelCells": 181300,
+      "packedSha256": "3c9d7f7b55007008ae963f2bc12bcedb5e9bd06cc6257a5c4e0e011a70c79ece",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 663,
+          "flipped": 79,
+          "flattened": 385,
+          "flippedFraction": 0.1191553544494721,
+          "flattenedFraction": 0.5806938159879337,
+          "fieldSha256": "172048bf1daa5d03044ecd7078d26d060d468cf24c008e9a341a73d028833160"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 663,
+          "flipped": 79,
+          "flattened": 385,
+          "flippedFraction": 0.1191553544494721,
+          "flattenedFraction": 0.5806938159879337,
+          "fieldSha256": "e600b9c9e95569b2251232ad1077a920f19073968b99325a978cf51a3001d17f"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "profile": "phone",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "672dd60fe6134b81e34fbd9dbc722fe07b889da1185c3199f3b4133bf5efbc62",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 613,
+          "flipped": 52,
+          "flattened": 492,
+          "flippedFraction": 0.08482871125611746,
+          "flattenedFraction": 0.802610114192496,
+          "fieldSha256": "478152f148159c8f878c16d9eb40bf60757ec9e9048edbb4d6dc93d3c94a6149"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 613,
+          "flipped": 52,
+          "flattened": 492,
+          "flippedFraction": 0.08482871125611746,
+          "flattenedFraction": 0.802610114192496,
+          "fieldSha256": "478152f148159c8f878c16d9eb40bf60757ec9e9048edbb4d6dc93d3c94a6149"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-submerged-stones",
+      "profile": "desktop",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "672dd60fe6134b81e34fbd9dbc722fe07b889da1185c3199f3b4133bf5efbc62",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 962,
+          "flipped": 48,
+          "flattened": 836,
+          "flippedFraction": 0.0498960498960499,
+          "flattenedFraction": 0.8690228690228691,
+          "fieldSha256": "d4172ba78dfebfcd179b76f4853c925b78254a96e46550630ceea245f5a34b01"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 962,
+          "flipped": 48,
+          "flattened": 836,
+          "flippedFraction": 0.0498960498960499,
+          "flattenedFraction": 0.8690228690228691,
+          "fieldSha256": "d4172ba78dfebfcd179b76f4853c925b78254a96e46550630ceea245f5a34b01"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "profile": "phone",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "94d2f1044d0e3acdcd2184bfe91785f08b576c59817b5545f05c327d5bd59db1",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 467,
+          "flipped": 84,
+          "flattened": 273,
+          "flippedFraction": 0.17987152034261242,
+          "flattenedFraction": 0.5845824411134903,
+          "fieldSha256": "0514b2311ac44c7192d40c1a3882a8ca364b99ef95574632b77810dcc94a6cc2"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 467,
+          "flipped": 84,
+          "flattened": 273,
+          "flippedFraction": 0.17987152034261242,
+          "flattenedFraction": 0.5845824411134903,
+          "fieldSha256": "0514b2311ac44c7192d40c1a3882a8ca364b99ef95574632b77810dcc94a6cc2"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-backlit-dog",
+      "profile": "desktop",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "94d2f1044d0e3acdcd2184bfe91785f08b576c59817b5545f05c327d5bd59db1",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 657,
+          "flipped": 114,
+          "flattened": 411,
+          "flippedFraction": 0.1735159817351598,
+          "flattenedFraction": 0.6255707762557078,
+          "fieldSha256": "c55f3f5aa286d7948db907a881e61abfd1be99ec23ba60b88dd7246fbcaad897"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 657,
+          "flipped": 114,
+          "flattened": 411,
+          "flippedFraction": 0.1735159817351598,
+          "flattenedFraction": 0.6255707762557078,
+          "fieldSha256": "c55f3f5aa286d7948db907a881e61abfd1be99ec23ba60b88dd7246fbcaad897"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "profile": "phone",
+      "changedModelCells": 28,
+      "totalModelCells": 181300,
+      "packedSha256": "3f935734eeffa0a7830be5ceec0b5be29578d13ce33087bc0444ae0f5a264a34",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 280,
+          "flipped": 55,
+          "flattened": 152,
+          "flippedFraction": 0.19642857142857142,
+          "flattenedFraction": 0.5428571428571428,
+          "fieldSha256": "edb2b33eb487a377131d7a1217a767a275806631887fbff48fae4b9495c0a7cb"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 280,
+          "flipped": 55,
+          "flattened": 152,
+          "flippedFraction": 0.19642857142857142,
+          "flattenedFraction": 0.5428571428571428,
+          "fieldSha256": "52a60d4d14bb6d76960855bc5477fc1fc62ae9d2ab7605037cf6daf6c9c767e5"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-wool-fleece",
+      "profile": "desktop",
+      "changedModelCells": 28,
+      "totalModelCells": 181300,
+      "packedSha256": "3f935734eeffa0a7830be5ceec0b5be29578d13ce33087bc0444ae0f5a264a34",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 359,
+          "flipped": 82,
+          "flattened": 195,
+          "flippedFraction": 0.22841225626740946,
+          "flattenedFraction": 0.5431754874651811,
+          "fieldSha256": "cc52b0ff5e9a93ebe5b9a51248b1f4605e83a0ef3fb0e08881f112b56b144fd3"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 359,
+          "flipped": 82,
+          "flattened": 195,
+          "flippedFraction": 0.22841225626740946,
+          "flattenedFraction": 0.5431754874651811,
+          "fieldSha256": "fb89a242267322b27c9ac670b852b8fed60b7da5a04ceb2d7721be75c113a19e"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "profile": "phone",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "be24cd837a18800cbff37a20bd9a8939b57c956078287ba11a8dc6565be09dd5",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 734,
+          "flipped": 160,
+          "flattened": 378,
+          "flippedFraction": 0.21798365122615804,
+          "flattenedFraction": 0.5149863760217984,
+          "fieldSha256": "dbfa85b1db6bc5551c8368bff1829133b6be80123f66bcf5147a67b674a18e72"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 734,
+          "flipped": 160,
+          "flattened": 378,
+          "flippedFraction": 0.21798365122615804,
+          "flattenedFraction": 0.5149863760217984,
+          "fieldSha256": "dbfa85b1db6bc5551c8368bff1829133b6be80123f66bcf5147a67b674a18e72"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-bicycle-spokes",
+      "profile": "desktop",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "be24cd837a18800cbff37a20bd9a8939b57c956078287ba11a8dc6565be09dd5",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 1198,
+          "flipped": 153,
+          "flattened": 617,
+          "flippedFraction": 0.12771285475792987,
+          "flattenedFraction": 0.5150250417362271,
+          "fieldSha256": "c7113128519638da8d2820b4b012554b64941cce95b438c16b9afb3e067ee295"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 1198,
+          "flipped": 153,
+          "flattened": 617,
+          "flippedFraction": 0.12771285475792987,
+          "flattenedFraction": 0.5150250417362271,
+          "fieldSha256": "c7113128519638da8d2820b4b012554b64941cce95b438c16b9afb3e067ee295"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "profile": "phone",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "5560ea99ce3bb9407ea185bef3a492c55af62abb433b083552b666c67d24e40b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 711,
+          "flipped": 246,
+          "flattened": 306,
+          "flippedFraction": 0.3459915611814346,
+          "flattenedFraction": 0.43037974683544306,
+          "fieldSha256": "26b4d9e0c598fddf31bc54d24df5449e5dda2904edab898acac1318a136ffaa9"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 711,
+          "flipped": 246,
+          "flattened": 306,
+          "flippedFraction": 0.3459915611814346,
+          "flattenedFraction": 0.43037974683544306,
+          "fieldSha256": "f0e5a0538cc5f2412213a53fa33b0a1a21dd74b04de7d30d4a473989e1d10383"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-bare-branches",
+      "profile": "desktop",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "5560ea99ce3bb9407ea185bef3a492c55af62abb433b083552b666c67d24e40b",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 967,
+          "flipped": 329,
+          "flattened": 409,
+          "flippedFraction": 0.34022750775594623,
+          "flattenedFraction": 0.42295760082730094,
+          "fieldSha256": "4fcb08f593d7489c36c26ac4db94a8b76317ee962b2509063267ea9849475ec3"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 967,
+          "flipped": 329,
+          "flattened": 409,
+          "flippedFraction": 0.34022750775594623,
+          "flattenedFraction": 0.42295760082730094,
+          "fieldSha256": "1f21276f4e786523d586d1a6cae782867c134542d0a5cf645ce631615e31adde"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "profile": "phone",
+      "changedModelCells": 5,
+      "totalModelCells": 181300,
+      "packedSha256": "1b3c1527618f02cc4c68e66d0c73ea4dca40fcc0eb2cd62bce7eef0925a34fdf",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 653,
+          "flipped": 48,
+          "flattened": 490,
+          "flippedFraction": 0.07350689127105667,
+          "flattenedFraction": 0.7503828483920367,
+          "fieldSha256": "10146f6de48eff03e13068a2ce587a7789788f438aa535cd4ead94efc8803b96"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 653,
+          "flipped": 48,
+          "flattened": 490,
+          "flippedFraction": 0.07350689127105667,
+          "flattenedFraction": 0.7503828483920367,
+          "fieldSha256": "4cb770c6915c6e3e4fb2e3670b3ace853acbc342320951c72306717b9186e953"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-puddle-reflection",
+      "profile": "desktop",
+      "changedModelCells": 5,
+      "totalModelCells": 181300,
+      "packedSha256": "1b3c1527618f02cc4c68e66d0c73ea4dca40fcc0eb2cd62bce7eef0925a34fdf",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 976,
+          "flipped": 37,
+          "flattened": 834,
+          "flippedFraction": 0.03790983606557377,
+          "flattenedFraction": 0.8545081967213115,
+          "fieldSha256": "6d12ad9d9acd52f010fb38e02b3a056b88634032c040b91cae7086fa3abcf524"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 976,
+          "flipped": 37,
+          "flattened": 834,
+          "flippedFraction": 0.03790983606557377,
+          "flattenedFraction": 0.8545081967213115,
+          "fieldSha256": "11d0589dc201717b6bbd3fb790c54e474cd34455cdda7c062ceca4b2fbd8e181"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "profile": "phone",
+      "changedModelCells": 30,
+      "totalModelCells": 181300,
+      "packedSha256": "64e82b042deeeb1cf75b7724aeac84e63e969f6b3412897a42ab7c5cde0b8ce0",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 796,
+          "flipped": 53,
+          "flattened": 456,
+          "flippedFraction": 0.06658291457286432,
+          "flattenedFraction": 0.5728643216080402,
+          "fieldSha256": "49b700ad76ab2da28ffd003c4058bc4e23b5c72d9a1abedd5132b8b8593f5829"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 796,
+          "flipped": 53,
+          "flattened": 456,
+          "flippedFraction": 0.06658291457286432,
+          "flattenedFraction": 0.5728643216080402,
+          "fieldSha256": "9005a2ebb649924ae9cb395a070697f2254c95ac478850a967e0d57646e5df2d"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-polished-floor",
+      "profile": "desktop",
+      "changedModelCells": 30,
+      "totalModelCells": 181300,
+      "packedSha256": "64e82b042deeeb1cf75b7724aeac84e63e969f6b3412897a42ab7c5cde0b8ce0",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 846,
+          "flipped": 42,
+          "flattened": 528,
+          "flippedFraction": 0.04964539007092199,
+          "flattenedFraction": 0.624113475177305,
+          "fieldSha256": "006846bc2f49175fbf10e3905ceb2d1106cb4abaca02007ff0dc3827402b1f12"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 846,
+          "flipped": 42,
+          "flattened": 528,
+          "flippedFraction": 0.04964539007092199,
+          "flattenedFraction": 0.624113475177305,
+          "fieldSha256": "2bfe5567da39bb5ef9e268cfe2b3c03f2b0f7d9f2194401c4b77cd5cbba41609"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "profile": "phone",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "e9e795204f27b3d3bb3b174ce7c704e1629b8946063d6f67a2c294c1d58c0709",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 502,
+          "flipped": 42,
+          "flattened": 344,
+          "flippedFraction": 0.08366533864541832,
+          "flattenedFraction": 0.6852589641434262,
+          "fieldSha256": "8541d8c7d9c1bfce8182306c9056c1973787a03840dc4112db4ab52258fc415f"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 502,
+          "flipped": 42,
+          "flattened": 344,
+          "flippedFraction": 0.08366533864541832,
+          "flattenedFraction": 0.6852589641434262,
+          "fieldSha256": "8541d8c7d9c1bfce8182306c9056c1973787a03840dc4112db4ab52258fc415f"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-reflecting-pool",
+      "profile": "desktop",
+      "changedModelCells": 0,
+      "totalModelCells": 181300,
+      "packedSha256": "e9e795204f27b3d3bb3b174ce7c704e1629b8946063d6f67a2c294c1d58c0709",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 695,
+          "flipped": 21,
+          "flattened": 555,
+          "flippedFraction": 0.030215827338129497,
+          "flattenedFraction": 0.7985611510791367,
+          "fieldSha256": "1a7b05ea69a3aaf50daa6f8b661224558abe53815d989f4018ef357810853f34"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 695,
+          "flipped": 21,
+          "flattened": 555,
+          "flippedFraction": 0.030215827338129497,
+          "flattenedFraction": 0.7985611510791367,
+          "fieldSha256": "1a7b05ea69a3aaf50daa6f8b661224558abe53815d989f4018ef357810853f34"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "profile": "phone",
+      "changedModelCells": 80,
+      "totalModelCells": 181300,
+      "packedSha256": "9b1e1e3c03f21d310089d7d0e09d63b9aa2339802ad2c34854b3e33af2186181",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 217,
+          "flipped": 46,
+          "flattened": 93,
+          "flippedFraction": 0.2119815668202765,
+          "flattenedFraction": 0.42857142857142855,
+          "fieldSha256": "a0353ce25154dcbc91c81a17a47c5455b4f78b669e2a5e67643378fc5f0b1d4b"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 217,
+          "flipped": 46,
+          "flattened": 93,
+          "flippedFraction": 0.2119815668202765,
+          "flattenedFraction": 0.42857142857142855,
+          "fieldSha256": "5c0a990a24af4e839e0304a67ab9bd9789df3ba8d986ae878f7ee6474c9d9aeb"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-lanterns",
+      "profile": "desktop",
+      "changedModelCells": 80,
+      "totalModelCells": 181300,
+      "packedSha256": "9b1e1e3c03f21d310089d7d0e09d63b9aa2339802ad2c34854b3e33af2186181",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 233,
+          "flipped": 41,
+          "flattened": 119,
+          "flippedFraction": 0.1759656652360515,
+          "flattenedFraction": 0.5107296137339056,
+          "fieldSha256": "b7136803124563c3447519c01cc15ac1fb17fda5f4558a49d23f9533a704e20b"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 233,
+          "flipped": 41,
+          "flattened": 119,
+          "flippedFraction": 0.1759656652360515,
+          "flattenedFraction": 0.5107296137339056,
+          "fieldSha256": "9a032a2eb6d4a5a591f76d10ba58d5121c30633df51ae7aeaf40058254275b00"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "profile": "phone",
+      "changedModelCells": 36,
+      "totalModelCells": 181300,
+      "packedSha256": "3b514351d69c4c380a58097f58027dbf3ee5cbeb0444773dc3e3468b3158502f",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 191,
+          "flipped": 34,
+          "flattened": 74,
+          "flippedFraction": 0.17801047120418848,
+          "flattenedFraction": 0.387434554973822,
+          "fieldSha256": "8139e92e6a670085f90fa24f7ab48e5741b401ccacdb2153d51b63051e01f783"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 191,
+          "flipped": 34,
+          "flattened": 74,
+          "flippedFraction": 0.17801047120418848,
+          "flattenedFraction": 0.387434554973822,
+          "fieldSha256": "0704d11cf612d6b9b6294b60d8a22278bdd635a55a3dce32a3367665a0ad02c8"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-campfire",
+      "profile": "desktop",
+      "changedModelCells": 36,
+      "totalModelCells": 181300,
+      "packedSha256": "3b514351d69c4c380a58097f58027dbf3ee5cbeb0444773dc3e3468b3158502f",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 256,
+          "flipped": 34,
+          "flattened": 140,
+          "flippedFraction": 0.1328125,
+          "flattenedFraction": 0.546875,
+          "fieldSha256": "f1a99ab994f53d0cc32667e8b48f2d016133f4debdbd0ff5a9ca0231e90fb64a"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 256,
+          "flipped": 34,
+          "flattened": 140,
+          "flippedFraction": 0.1328125,
+          "flattenedFraction": 0.546875,
+          "fieldSha256": "820eb322db11d0173047bd94e8c93c2acdb5f72220b2acfdcb90fee4cc903219"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "profile": "phone",
+      "changedModelCells": 108,
+      "totalModelCells": 181300,
+      "packedSha256": "281ead87d0c7a8985748aec3573e7b5c9310666286a53108047471577b726e51",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 49,
+          "flipped": 18,
+          "flattened": 9,
+          "flippedFraction": 0.3673469387755102,
+          "flattenedFraction": 0.1836734693877551,
+          "fieldSha256": "69cf4c4d9fb062fa7931bcc55db8a1529cbf6aaecd06c5165a360319aee70957"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 49,
+          "flipped": 18,
+          "flattened": 9,
+          "flippedFraction": 0.3673469387755102,
+          "flattenedFraction": 0.1836734693877551,
+          "fieldSha256": "0ea9f395c3cc5bb6bdae8937afbe9b892637362b06df139c565c069436f280b1"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-candle-still-life",
+      "profile": "desktop",
+      "changedModelCells": 108,
+      "totalModelCells": 181300,
+      "packedSha256": "281ead87d0c7a8985748aec3573e7b5c9310666286a53108047471577b726e51",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 50,
+          "flipped": 15,
+          "flattened": 14,
+          "flippedFraction": 0.3,
+          "flattenedFraction": 0.28,
+          "fieldSha256": "1379afdd6b9cffbe94a1641e42f99e888e69e60e5ec120fd2d86b55e43fea9ea"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 50,
+          "flipped": 15,
+          "flattened": 14,
+          "flippedFraction": 0.3,
+          "flattenedFraction": 0.28,
+          "fieldSha256": "96ba0edd70b616e5dc95072e71185347ed3b412eb51e482b36961695daf506a8"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "profile": "phone",
+      "changedModelCells": 207,
+      "totalModelCells": 181300,
+      "packedSha256": "a1e1d9ac0dd348c1cc9aba558aa0c1a912c8aa9f02f2b2f4ee04e5b896e9c1b3",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 256,
+          "flipped": 42,
+          "flattened": 123,
+          "flippedFraction": 0.1640625,
+          "flattenedFraction": 0.48046875,
+          "fieldSha256": "c634b169431e34543934dadf520f596f322294d6f42eddd63efea95b701a1963"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 256,
+          "flipped": 42,
+          "flattened": 123,
+          "flippedFraction": 0.1640625,
+          "flattenedFraction": 0.48046875,
+          "fieldSha256": "3e5a758d74facf0c639892bb8d5a4a008c9d8a7676b009d8b1e15fe2e6b02bf9"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-moonlit-greenhouse",
+      "profile": "desktop",
+      "changedModelCells": 207,
+      "totalModelCells": 181300,
+      "packedSha256": "a1e1d9ac0dd348c1cc9aba558aa0c1a912c8aa9f02f2b2f4ee04e5b896e9c1b3",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 246,
+          "flipped": 51,
+          "flattened": 114,
+          "flippedFraction": 0.2073170731707317,
+          "flattenedFraction": 0.4634146341463415,
+          "fieldSha256": "e918f2e2c7da8ecd41ae5e13a92609593e0341edd0b2e9d442ba81669cdae7ed"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 246,
+          "flipped": 51,
+          "flattened": 114,
+          "flippedFraction": 0.2073170731707317,
+          "flattenedFraction": 0.4634146341463415,
+          "fieldSha256": "cc6c0805ecff76948a2470770907a57e29eb24b1c670fa03b64f673dfde88831"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "profile": "phone",
+      "changedModelCells": 114,
+      "totalModelCells": 181300,
+      "packedSha256": "d54df8fee859991c932df18316457a71a6ad3b85d5e2e6d2cbcbe248f854b4c2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 211,
+          "flipped": 54,
+          "flattened": 77,
+          "flippedFraction": 0.2559241706161137,
+          "flattenedFraction": 0.36492890995260663,
+          "fieldSha256": "7670e20cb7eccd1900a7b0280bedd632a8dc6ab1e81b51f18d92eb65b978709c"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 211,
+          "flipped": 54,
+          "flattened": 77,
+          "flippedFraction": 0.2559241706161137,
+          "flattenedFraction": 0.36492890995260663,
+          "fieldSha256": "29ac34565e6ca3379c6434fd17f88ba6a1b043b4bc76bc926279f1640388ffd2"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-shed-lamps",
+      "profile": "desktop",
+      "changedModelCells": 114,
+      "totalModelCells": 181300,
+      "packedSha256": "d54df8fee859991c932df18316457a71a6ad3b85d5e2e6d2cbcbe248f854b4c2",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 210,
+          "flipped": 55,
+          "flattened": 69,
+          "flippedFraction": 0.2619047619047619,
+          "flattenedFraction": 0.32857142857142857,
+          "fieldSha256": "2e99c6170b489febff0ace5b68c0f3e8016c8c9a28bc9d9cced8377a620482df"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 210,
+          "flipped": 55,
+          "flattened": 69,
+          "flippedFraction": 0.2619047619047619,
+          "flattenedFraction": 0.32857142857142857,
+          "fieldSha256": "8130e14fea78097ed6d4c7a3058079347c1bafdadc48ce6eb1c84561f46d4842"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "profile": "phone",
+      "changedModelCells": 52,
+      "totalModelCells": 181300,
+      "packedSha256": "4a41befb49a00f7777f91c396dd30afb8df2f1be8e7a27f7a4b8ad5a5be9e867",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 219,
+          "flipped": 47,
+          "flattened": 83,
+          "flippedFraction": 0.2146118721461187,
+          "flattenedFraction": 0.3789954337899543,
+          "fieldSha256": "99d339c99b6e72715e292fa7e2ac48827c145197e9b2aeae0d5f55aa52c86570"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 219,
+          "flipped": 47,
+          "flattened": 83,
+          "flippedFraction": 0.2146118721461187,
+          "flattenedFraction": 0.3789954337899543,
+          "fieldSha256": "65ea32fb967b66d23f3bc42584170656bc169123f99ba758e5fbdff9e3d236e8"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-fire-bowl",
+      "profile": "desktop",
+      "changedModelCells": 52,
+      "totalModelCells": 181300,
+      "packedSha256": "4a41befb49a00f7777f91c396dd30afb8df2f1be8e7a27f7a4b8ad5a5be9e867",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 266,
+          "flipped": 30,
+          "flattened": 122,
+          "flippedFraction": 0.11278195488721804,
+          "flattenedFraction": 0.45864661654135336,
+          "fieldSha256": "fe41abb2de899196c006b438f88c4e12917b6e252014e95c810e6405de5cf6ac"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 266,
+          "flipped": 30,
+          "flattened": 122,
+          "flippedFraction": 0.11278195488721804,
+          "flattenedFraction": 0.45864661654135336,
+          "fieldSha256": "46dbd88e0017e9e851f4f528d1c71c3f9ccdd8c76114860e4f67c2ad211b7272"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "profile": "phone",
+      "changedModelCells": 9,
+      "totalModelCells": 181300,
+      "packedSha256": "c5fdc0bfbebfc08b00c02dd9601c84be7484fb66806fc72e3f7f947dc39bbdb5",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 193,
+          "flipped": 30,
+          "flattened": 118,
+          "flippedFraction": 0.15544041450777202,
+          "flattenedFraction": 0.6113989637305699,
+          "fieldSha256": "903dce74768742d037d73b264d56fd5b6b020180b560d4fea8be380ae075ab36"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 193,
+          "flipped": 30,
+          "flattened": 118,
+          "flippedFraction": 0.15544041450777202,
+          "flattenedFraction": 0.6113989637305699,
+          "fieldSha256": "ff8ce6fa5c038ce2a0ea1327b9afa30a1368cb1760b93dc4f7e347b15653bc23"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-snail-shell",
+      "profile": "desktop",
+      "changedModelCells": 9,
+      "totalModelCells": 181300,
+      "packedSha256": "c5fdc0bfbebfc08b00c02dd9601c84be7484fb66806fc72e3f7f947dc39bbdb5",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 199,
+          "flipped": 24,
+          "flattened": 146,
+          "flippedFraction": 0.12060301507537688,
+          "flattenedFraction": 0.7336683417085427,
+          "fieldSha256": "b749edd7f4d7c84ebe1574068e110d4e598db9785cba26a97fbb9e3ee24ca96f"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 199,
+          "flipped": 24,
+          "flattened": 146,
+          "flippedFraction": 0.12060301507537688,
+          "flattenedFraction": 0.7336683417085427,
+          "fieldSha256": "4652feaf9fcd946a10d0cf75fc6058f41628117c93d85f959a3a97acb2c77f8b"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "profile": "phone",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "768e5400ed891e228d543506c9df8454699580f5021359da9e6f307c25238253",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 510,
+          "flipped": 57,
+          "flattened": 390,
+          "flippedFraction": 0.11176470588235295,
+          "flattenedFraction": 0.7647058823529411,
+          "fieldSha256": "cc8a6f2b417c0077492b8003e398417623cb0bad4f6ed445ea0aa145e44e92f0"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 510,
+          "flipped": 57,
+          "flattened": 390,
+          "flippedFraction": 0.11176470588235295,
+          "flattenedFraction": 0.7647058823529411,
+          "fieldSha256": "cc8a6f2b417c0077492b8003e398417623cb0bad4f6ed445ea0aa145e44e92f0"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-feather-lichen",
+      "profile": "desktop",
+      "changedModelCells": 1,
+      "totalModelCells": 181300,
+      "packedSha256": "768e5400ed891e228d543506c9df8454699580f5021359da9e6f307c25238253",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 626,
+          "flipped": 44,
+          "flattened": 492,
+          "flippedFraction": 0.07028753993610223,
+          "flattenedFraction": 0.7859424920127795,
+          "fieldSha256": "9dcf2048864ed24b5f6989789f65ba48b8aafef617912a6202960b60d64176b8"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 626,
+          "flipped": 44,
+          "flattened": 492,
+          "flippedFraction": 0.07028753993610223,
+          "flattenedFraction": 0.7859424920127795,
+          "fieldSha256": "9019949bf71adf7571965f713a7fcfd31289e6032cf3c9ff1f31be8082ea078f"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "profile": "phone",
+      "changedModelCells": 53,
+      "totalModelCells": 181300,
+      "packedSha256": "f32ee3902d20b70850b4dfffa3fe4ba77ad8699c1da6d7765a6913d917c78d59",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 517,
+          "flipped": 83,
+          "flattened": 240,
+          "flippedFraction": 0.16054158607350097,
+          "flattenedFraction": 0.46421663442940037,
+          "fieldSha256": "47ac2c5e062309b4ca379cfa1d5a8311262e16b6ef433d3fd8624cd4d0c7ac64"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 517,
+          "flipped": 83,
+          "flattened": 240,
+          "flippedFraction": 0.16054158607350097,
+          "flattenedFraction": 0.46421663442940037,
+          "fieldSha256": "3e4f3216a8e4ce374f8a99ce9447a754e0f8b7bbb174ead149f45ae887bffa56"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-workshop-bench",
+      "profile": "desktop",
+      "changedModelCells": 53,
+      "totalModelCells": 181300,
+      "packedSha256": "f32ee3902d20b70850b4dfffa3fe4ba77ad8699c1da6d7765a6913d917c78d59",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 601,
+          "flipped": 78,
+          "flattened": 304,
+          "flippedFraction": 0.129783693843594,
+          "flattenedFraction": 0.5058236272878536,
+          "fieldSha256": "3e768e5944e534faa7d5a3e70a68cfa660c804f717168374fa23e41ff06b47e7"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 601,
+          "flipped": 78,
+          "flattened": 304,
+          "flippedFraction": 0.129783693843594,
+          "flattenedFraction": 0.5058236272878536,
+          "fieldSha256": "8b3f83bf4a45e35baf178bec3b9910cd3586fb522a31aceeaaea1d9a8290f70f"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "profile": "phone",
+      "changedModelCells": 4,
+      "totalModelCells": 181300,
+      "packedSha256": "f9ff201aa88113c1903f30957d95aa58e5d146835eb13ecd7508e944a0ba8e99",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 676,
+          "flipped": 112,
+          "flattened": 336,
+          "flippedFraction": 0.16568047337278108,
+          "flattenedFraction": 0.4970414201183432,
+          "fieldSha256": "7236bed0dfe67ea0347259296168d34161c7d2bf48a0b79bf0a8e1f366816f1c"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 676,
+          "flipped": 112,
+          "flattened": 336,
+          "flippedFraction": 0.16568047337278108,
+          "flattenedFraction": 0.4970414201183432,
+          "fieldSha256": "1749fe7817a5dd4c7287e384822b108d649c94a95b01a3f38e7d26bddfe78a7d"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-potting-bench",
+      "profile": "desktop",
+      "changedModelCells": 4,
+      "totalModelCells": 181300,
+      "packedSha256": "f9ff201aa88113c1903f30957d95aa58e5d146835eb13ecd7508e944a0ba8e99",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 870,
+          "flipped": 109,
+          "flattened": 528,
+          "flippedFraction": 0.12528735632183907,
+          "flattenedFraction": 0.6068965517241379,
+          "fieldSha256": "a823d1877053dd452a24225155dbe1d2076dd77a472cc975c007a07d4e3dbfb7"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 870,
+          "flipped": 109,
+          "flattened": 528,
+          "flippedFraction": 0.12528735632183907,
+          "flattenedFraction": 0.6068965517241379,
+          "fieldSha256": "7b73b802138911d00ec8287d684e633e41108b05e8f126205cd079fb4ccbc323"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "profile": "phone",
+      "changedModelCells": 203,
+      "totalModelCells": 181300,
+      "packedSha256": "45633126f92745fbab3c240aeacf7174b06191328367ec1a58c6204bc72aefdc",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 324,
+          "flipped": 68,
+          "flattened": 155,
+          "flippedFraction": 0.20987654320987653,
+          "flattenedFraction": 0.4783950617283951,
+          "fieldSha256": "c2ba3152acf0d54ad8284f7f89791d5a448f25a90b6833e1ee87c50be5347b68"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 324,
+          "flipped": 68,
+          "flattened": 155,
+          "flippedFraction": 0.20987654320987653,
+          "flattenedFraction": 0.4783950617283951,
+          "fieldSha256": "1d308bdebb8fcd604e5517b089e8be94050999b95f60e7476d23479072c1d56b"
+        }
+      }
+    },
+    {
+      "id": "cdx-hard-ceramic-shelf",
+      "profile": "desktop",
+      "changedModelCells": 203,
+      "totalModelCells": 181300,
+      "packedSha256": "45633126f92745fbab3c240aeacf7174b06191328367ec1a58c6204bc72aefdc",
+      "variants": {
+        "baseline": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 337,
+          "flipped": 81,
+          "flattened": 153,
+          "flippedFraction": 0.2403560830860534,
+          "flattenedFraction": 0.4540059347181009,
+          "fieldSha256": "1bec2b6214998dcc3c00f878845736ed5c032784698ed1e046c9abc8321bcef9"
+        },
+        "colorLine": {
+          "kind": "T-junction hypothesis; not reference depth",
+          "candidates": 337,
+          "flipped": 81,
+          "flattened": 153,
+          "flippedFraction": 0.2403560830860534,
+          "flattenedFraction": 0.4540059347181009,
+          "fieldSha256": "9e15c89035d121437a60f39d5c7704c9357a7186774e28db93a91dab103e41c1"
+        }
+      }
+    }
+  ],
+  "finishedUTC": "2026-10-16T06:47:49.608Z",
+  "complete": true,
+  "decision": "Cut: no flat-depth or order warning count improved across 152 built-in input/profile combinations. Native rendering and phone cost were not measured."
+}

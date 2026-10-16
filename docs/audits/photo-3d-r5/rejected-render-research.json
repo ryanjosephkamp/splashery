@@ -337,6 +337,89 @@
           }
         ]
       }
+    },
+    {
+      "name": "aspect-grid-scout",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "77d5219134c5c83ebc26fcc95996ae95cc4a47c920dce6b24ed022f25f66c7dc",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "streaks",
+            "before": 0.5743608711366746,
+            "after": 0.5874119486350453
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 3.5473617224726857
+          },
+          {
+            "metric": "transitionWidth",
+            "before": 3.4302521661950673,
+            "after": 5.474347896667992
+          }
+        ]
+      }
+    },
+    {
+      "name": "euclidean-donor-scout",
+      "kind": "Bounded native-browser research rejection; not a full-corpus result",
+      "completedProfiles": 1,
+      "sourceSha256": "aa78f21dff44fcc6bf3493b6590da8eea35dc2bbdb9c9b22deab75e13648b995",
+      "controllerSha256": "d4689264175a091e82543bd4a1ff97d1ab98eaee43df1247ee0957da6ea05957",
+      "captureMethods": {
+        "tools/cdx-p3d5-browser.mjs": "ffbfb7203d65b4cf5849fe144a8491d942da80c2028aa0d865c588ab938d668c",
+        "tools/cdx-p3d5-projection.mjs": "c03b36c2287d451e18dd86bd5da25b4cbbc9845a7a5bb8bd94a274763df53f31",
+        "tools/cdx-p3d5-fast-metrics.mjs": "083c6f5e5ee646e52717532a6ca704b54d6f59b2474e7345a86b2a43adcea76d",
+        "tools/cdx-p3d5-compare.mjs": "db18e779315919ae60698a10e00290815c5e8c7b1a51f22b1b80ccdf3d35641a",
+        "tools/p3df/browser.mjs": "2926b848de8ec501c67a94e2cfe0fe2b20b871b2486ca7ce3c7249a2fda019b9"
+      },
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.103067897700517,
+            "after": 0.10962493882243192
+          },
+          {
+            "metric": "paletteExcess",
+            "before": 0.010966693098519671,
+            "after": 0.0229380382685141
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 2.3711372728114215
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.8255671351965326
+          }
+        ]
+      },
+      "distanceTransformProof": {
+        "cases": 960,
+        "seed": 71387,
+        "exactBruteForceSquaredDistances": true,
+        "everyDonorEligible": true
+      }
     }
   ]
 }

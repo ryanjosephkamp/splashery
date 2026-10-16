@@ -46,6 +46,15 @@ export function qualityValues(profile) {
     referenceFlatDepth: maximum((r) =>
       r.depth?.kind?.startsWith("reference") ? r.depth.flattenedFraction : null,
     ),
+    referenceHoleFraction: maximum((r) =>
+      r.depth?.kind?.startsWith("reference") ? r.depth.holeFraction : null,
+    ),
+    referenceRmse: maximum((r) =>
+      r.depth?.kind?.startsWith("reference") ? r.depth.rmseMeters : null,
+    ),
+    referenceP95: maximum((r) =>
+      r.depth?.kind?.startsWith("reference") ? r.depth.p95Meters : null,
+    ),
   };
 }
 
@@ -152,6 +161,8 @@ export function compareAtlases(baseline, candidate, { noise, expectedInputs = 11
         errors.push("Browser or renderer changed: " + id + "/" + profile);
       if (JSON.stringify(x.native) !== JSON.stringify(y.native) || x.ratio !== y.ratio)
         errors.push("Native render size changed: " + id + "/" + profile);
+      if (!x.sharp?.on || !y.sharp?.on)
+        errors.push("Sharp view is not working: " + id + "/" + profile);
       if (
         x.errors.length ||
         y.errors.length ||
@@ -175,6 +186,16 @@ export function compareAtlases(baseline, candidate, { noise, expectedInputs = 11
             errors.push(
               "Lost probe support: " + JSON.stringify([id, profile, group, p.yaw, p.pitch]),
             );
+        if (p.depth?.kind?.startsWith("reference")) {
+          for (const count of ["pixels", "scoredPixels", "pairs"])
+            if (finite(p.depth[count]) && !(q.depth?.[count] >= p.depth[count]))
+              errors.push(
+                "Lost reference support: " + JSON.stringify([id, profile, count, p.yaw, p.pitch]),
+              );
+          const calibration = p.depth.fit?.calibrationPixels;
+          if (finite(calibration) && !(q.depth?.fit?.calibrationPixels >= calibration))
+            errors.push("Lost reference calibration support: " + id + "/" + profile);
+        }
       }
       const oldValues = qualityValues(x),
         newValues = qualityValues(y);

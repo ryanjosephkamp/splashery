@@ -359,17 +359,21 @@ const perInput = entries.map((entry) => {
   }
   return { id: entry.id, ...builds };
 });
+const noWorse = (main, candidate) =>
+  Object.keys(main).every(
+    (key) =>
+      main[key] &&
+      candidate[key] &&
+      candidate[key].count === main[key].count &&
+      candidate[key].median <= main[key].median &&
+      candidate[key].worst <= main[key].worst,
+  );
+const aggregateCostPassed = noWorse(statistics.main, statistics.candidate),
+  perInputCostPassed = perInput.every((row) => noWorse(row.main, row.candidate));
 const complete =
     observations.length === entries.length * repetitions * 2 && observations.every((r) => r.result),
   fullCorpus = complete && entries.length === 118 && all.length === 118 && repetitions >= 5,
-  costPassed =
-    fullCorpus &&
-    settings.isolated &&
-    Object.keys(statistics.main).every(
-      (k) =>
-        statistics.candidate[k].median <= statistics.main[k].median &&
-        statistics.candidate[k].worst <= statistics.main[k].worst,
-    );
+  costPassed = fullCorpus && settings.isolated && aggregateCostPassed && perInputCostPassed;
 fs.writeFileSync(
   path.join(out, "summary.json"),
   JSON.stringify(
@@ -377,6 +381,10 @@ fs.writeFileSync(
       complete,
       fullCorpus,
       costPassed,
+      aggregateCostPassed,
+      perInputCostPassed,
+      costPolicy:
+        "Median and worst first-view time and PSS must not increase in aggregate or for any individual input. No unmeasured cost tolerance is granted.",
       statistics,
       perInput,
       inputCount: entries.length,
