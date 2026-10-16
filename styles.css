@@ -888,6 +888,7 @@ textarea {
 .shelf {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+  grid-auto-rows: max-content;
   align-content: start;
   gap: 8px;
   max-height: var(--shelf-h);
@@ -3524,8 +3525,8 @@ body.app .hands-button {
 
 .stage-zoom {
   position: fixed;
-  bottom: 116px;
-  right: calc(var(--panel-w) + 36px);
+  bottom: 40px;
+  right: calc(var(--panel-w) + 92px);
   z-index: 4;
   display: flex;
   gap: 6px;
@@ -3598,6 +3599,52 @@ body.focus .stage-zoom {
 }
 
 @media (max-width: 760px) {
+  /* Frame the toy below the controls and caption, including on short phones. */
+  body.app {
+    --stage-top: var(--stage-chrome-h, 136px);
+  }
+
+  body.app #stage {
+    top: var(--stage-top);
+    height: max(1px, calc(100% - var(--dock-h, 200px) - var(--stage-top)));
+  }
+
+  body.app.bar-up:not(.sheet-open):not(.shelf-grid):not(.focus) #stage {
+    height: max(
+      1px,
+      calc(100% - var(--dock-h, 200px) - var(--stage-top) - var(--bar-h, 0px) - 8px)
+    );
+  }
+
+  body.app.sheet-open,
+  body.app.shelf-grid,
+  body.app.focus {
+    --stage-top: 0px;
+  }
+
+  body.app.focus #stage {
+    height: 100%;
+  }
+
+  body.app.sheet-open .view-button,
+  body.app.sheet-open .sound-toggle,
+  body.app.sheet-open .help-toggle,
+  body.app.shelf-grid .view-button,
+  body.app.shelf-grid .sound-toggle,
+  body.app.shelf-grid .help-toggle {
+    display: none;
+  }
+
+  body.app .toolbar {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  body.app .tools {
+    /* Five 44 px targets, gaps, padding, and a border. Wrap the other controls. */
+    min-width: 238px;
+  }
+
   body.app .brand {
     display: block;
   }
@@ -3697,6 +3744,14 @@ body.focus .stage-zoom {
 }
 
 @media (max-width: 388px) {
+  body.app {
+    --stage-top: var(--stage-chrome-h, 186px);
+  }
+
+  .hands-bar {
+    flex-direction: row;
+  }
+
   body.app #view-reset {
     right: 8px;
     top: 89px;
@@ -3724,8 +3779,15 @@ body.focus .stage-zoom {
   }
 }
 
+@media (max-width: 760px) and (max-height: 650px) {
+  /* The compact settings drawer leaves the shelf in the row and grid views. */
+  body.app.sheet-open .dock > :not(.sheet-handle):not(.toolbar) {
+    display: none;
+  }
+}
+
 /* Short wide screens: the gallery must leave room for scrollable settings.
-   Keep the full-height stage beside the panel, including after rotation. */
+   The stage stays beside the panel, framed below its view controls. */
 @media (min-width: 761px) and (max-height: 500px) {
   body.app:not(.panel-folded):not(.focus):not(.gallery-page) #stage {
     width: calc(
@@ -3750,23 +3812,86 @@ body.focus .stage-zoom {
   }
 
   body:not(.gallery-page) .dock {
+    display: flex;
+    flex-direction: column;
     flex: 0 1 auto;
     min-height: 0;
-    max-height: 55%;
-    overflow-y: auto;
+    max-height: calc(100% - 160px);
+    overflow: hidden;
     overscroll-behavior: contain;
   }
 
+  body:not(.gallery-page) .dock > * {
+    flex: none;
+  }
+
   body:not(.gallery-page) .shelf {
+    flex: 1 1 auto;
+    min-height: 0;
     max-height: min(var(--shelf-h), 72px);
   }
 
   body:not(.gallery-page) .panel-body {
-    flex: 1 0 45%;
+    flex: 1 0 160px;
+  }
+
+  /* Search opens on demand so the shelf and a usable settings pane both fit.
+     The gallery button shares the chip row while the search field is closed. */
+  body.app:not(.gallery-page) .shelf-find {
+    position: relative;
+    height: 0;
+    margin-bottom: 0;
+  }
+
+  body.app:not(.gallery-page) .shelf-find input {
+    display: none;
+  }
+
+  body.app:not(.gallery-page) .shelf-find #gallery-open {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  body.app:not(.gallery-page) .chips {
+    margin-right: 52px;
+  }
+
+  body.app:not(.gallery-page) .chip-icon {
+    display: inline-flex;
+  }
+
+  body.app:not(.gallery-page) .dock.searching .shelf-find {
+    height: auto;
+    margin-bottom: 8px;
+  }
+
+  body.app:not(.gallery-page) .dock.searching .shelf-find input {
+    display: block;
+  }
+
+  body.app:not(.gallery-page) .dock.searching .shelf-find #gallery-open {
+    position: static;
+  }
+
+  body.app:not(.gallery-page) .dock.searching .chips {
+    margin-right: -12px;
   }
 
   body:not(.gallery-page) .grip-shelf {
     display: none;
+  }
+
+  /* Keep the tagline above the full-size view buttons on a narrow stage. */
+  body.app .view-button:not(#gallery-open),
+  body.app .sound-toggle,
+  body.app .help-toggle {
+    top: calc(64px + var(--playground-safe-top, env(safe-area-inset-top, 0px)));
+  }
+
+  body.app:not(.focus) #stage {
+    top: calc(116px + var(--playground-safe-top, env(safe-area-inset-top, 0px)));
+    height: calc(100% - 180px - var(--playground-safe-top, env(safe-area-inset-top, 0px)));
   }
 
   .brand,

@@ -35,8 +35,8 @@ test("only the photo variant of the kit's program writes the photo stream", () =
   expect(ps.glsl.match(/void modifySplatColor\(/g)).toHaveLength(1);
 });
 
-// A page of text (a synthetic photo, drawn here) shown flat in Photo to 3D, zoomed until it fills
-// the width. Returns how closely the render matches the page (normalized correlation of the
+// A page of text (a synthetic photo, drawn here) shown flat in Photo to 3D, zoomed until the whole
+// page fits the stage. Returns how closely the render matches the page (normalized correlation of the
 // luminance over the middle of the page, the page resampled to the render's pixels) and what the
 // stage had on.
 // `fixed`: render at a fixed 390 by 600 (WebGL). On WebGPU the capture stays at the page's own size:
@@ -124,9 +124,15 @@ async function textMatch(page, detail, fixed = true) {
         await st.captureFrame();
         const l = player.screenPoint([-a / 2, 0, 0]);
         const r = player.screenPoint([a / 2, 0, 0]);
+        const top = player.screenPoint([0, 0.5, 0]);
+        const bottom = player.screenPoint([0, -0.5, 0]);
         const cam = player.camera;
         const cw = fixed ? 390 : st.canvas.getBoundingClientRect().width;
-        cam.cur = { ...cam.cur, distance: Math.max(cam.minDistance, (cam.cur.distance * (r[0] - l[0])) / (0.95 * cw)) }; // prettier-ignore
+        const ch = fixed ? 600 : st.canvas.getBoundingClientRect().height;
+        // Keep the whole text page in the stage. Its phone height now excludes the toolbar and
+        // caption; fitting only its width would crop lines and invalidate the ink registration.
+        const fit = Math.max((r[0] - l[0]) / cw, (bottom[1] - top[1]) / ch) / 0.95;
+        cam.cur = { ...cam.cur, distance: Math.max(cam.minDistance, cam.cur.distance * fit) };
         cam.tgt = { ...cam.cur };
       }
       await st.captureFrame();
@@ -210,7 +216,7 @@ test.describe(() => {
     expect(sharp.n).toBeGreaterThan(5000);
     // (measured October 8, 2026: 0.86 with the photo, 0.35 without; round 2's adaptive grid and
     // smaller small splats brought One color per splat up to 0.89, the photo's own pixels 0.93)
-    expect(sharp.ncc).toBeGreaterThan(0.8);
+    expect(sharp.ncc, JSON.stringify(sharp)).toBeGreaterThan(0.8);
     expect(plain.ncc).toBeGreaterThan(0.75);
     expect(sharp.ncc).toBeGreaterThan(plain.ncc);
     expect(errors).toEqual([]);
@@ -264,7 +270,7 @@ test.describe(() => {
     test.skip(dev !== "webgpu", "No WebGPU adapter in this browser.");
     const sharp = await textMatch(page, "photo", false);
     expect(sharp.device).toBe("webgpu");
-    expect(sharp.ncc).toBeGreaterThan(0.8);
+    expect(sharp.ncc, JSON.stringify(sharp)).toBeGreaterThan(0.8);
     expect(errors).toEqual([]);
   });
 });

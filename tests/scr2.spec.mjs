@@ -50,7 +50,12 @@ async function settle(page, s) {
 // A tap on the toy at a point in the recipe's coordinates, as a real
 // pointer tap on the canvas.
 async function tapAt(page, point) {
-  const [x, y] = await page.evaluate((p) => window.__splashery.player.screenPoint(p), point);
+  const [x, y] = await page.evaluate((p) => {
+    const { player } = window.__splashery;
+    const [x, y] = player.screenPoint(p);
+    const box = player.stage.canvas.getBoundingClientRect();
+    return [box.left + x, box.top + y];
+  }, point);
   await page.evaluate(() => (window.__splashery.player.pickDirty = true));
   const n = await page.evaluate(() => window.__splashery.player.motion.tap?.n ?? 0);
   await page.mouse.click(x, y);
