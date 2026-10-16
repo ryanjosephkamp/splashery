@@ -1,0 +1,40 @@
+from pathlib import Path
+import json,hashlib
+w=Path('/workspace/work/p3d-r5');s=(w/'depth-guard-original-color-pass-relief.js').read_text()
+old='''    vec4 centerClip = psvPlace(vec3((center.x - 0.5) * uGrid.x, (0.5 - center.y) * uGrid.y, z));
+    gl_Position.xy += sign(gl_Position.xy / gl_Position.w - centerClip.xy / centerClip.w) * uFillGuard * gl_Position.w;''';assert s.count(old)==1
+new='''    float cd = p3dCenter(center);
+    float cb = floor(textureLod(uBand, center, 0.0).r * 3.0 + 0.5);
+    vec4 centerClip = depthGuardClip(center, center, cd, cb);
+    vec4 xClip = depthGuardClip(vec2(2.0 * center.x - uv.x, uv.y), center, cd, cb);
+    vec4 yClip = depthGuardClip(vec2(uv.x, 2.0 * center.y - uv.y), center, cd, cb);
+    vec2 p = gl_Position.xy / gl_Position.w / uFillGuard;
+    vec2 c = centerClip.xy / centerClip.w / uFillGuard;
+    vec2 px = xClip.xy / xClip.w / uFillGuard;
+    vec2 py = yClip.xy / yClip.w / uFillGuard;
+    vec2 ex = p - px, ey = p - py;
+    if (dot(ex, ex) > 1e-8 && dot(ey, ey) > 1e-8) {
+      vec2 nx = normalize(vec2(-ex.y, ex.x));
+      vec2 ny = normalize(vec2(-ey.y, ey.x));
+      if (dot(nx, p - c) < 0.0) nx = -nx;
+      if (dot(ny, p - c) < 0.0) ny = -ny;
+      vec2 miter = (nx + ny) / max(0.1, 1.0 + dot(nx, ny));
+      gl_Position.xy += miter * uFillGuard * gl_Position.w;
+    }''';s=s.replace(old,new)
+helper='''
+vec4 depthGuardClip(vec2 uv, vec2 center, float cd, float cb) {
+  float d = textureLod(uDepth, uv, 0.0).r;
+  float vb = floor(textureLod(uBand, uv, 0.0).r * 3.0 + 0.5);
+  if (abs(d - cd) > uLayer.y || abs(cb - vb) > 0.5) d = cd;
+  float dz = psvRim(uv, d);
+  float b = mix(clamp(dz * 4.0 - 0.5, 0.0, 3.0), cb, pdpDeep(uv));
+  float i0 = min(floor(b), 2.0), f = b - i0;
+  float m0 = i0 < 0.5 ? uMorph.x : (i0 < 1.5 ? uMorph.y : uMorph.z);
+  float m1 = i0 < 0.5 ? uMorph.y : (i0 < 1.5 ? uMorph.z : uMorph.w);
+  float z = mix(uLift.x * (dz - uLift.y), 0.0, mix(m0, m1, f)) + (b - 1.5) * uLayer.x;
+  return psvPlace(vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, z));
+}
+'''
+anchor='''      this.fillGuardMaterial = new pc.ShaderMaterial(guard);''';assert s.count(anchor)==1;s=s.replace(anchor,'''      guard.vertexGLSL = guard.vertexGLSL.replace("void main(void) {", `'''+helper+'''\\nvoid main(void) {`);
+'''+anchor)
+p=w/'projected-edge-guard-relief.js';p.write_text(s);(w/'projected-edge-guard.json').write_text(json.dumps({'src/packs/photo-3d-core.js':str(w/'mask-fill-core.js'),'src/live/relief-mesh.js':str(p)}));print(json.dumps({'candidateSha256':hashlib.sha256(p.read_bytes()).hexdigest(),'methodSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'scope':'Private GLSL-only quality prototype; two-native-pixel guard offsets projected cell edges using adjacent edge normals and actual center/corner relief heights. Original foreground color pass and finder unchanged. No WebGPU, full-corpus, phone-cost, or memory acceptance.'}))

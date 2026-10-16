@@ -1,0 +1,47 @@
+from pathlib import Path
+import json,hashlib
+w=Path('/workspace/work/p3d-r5');s=(w/'depth-protected-fill-world-relief.js').read_text()
+anchor='''      this.fillInstance.drawOrder = 2;
+      this.layer.addMeshInstances([this.fillInstance]);''';assert anchor in s
+replace='''      this.fillInstance.drawOrder = 3;
+      const guard = shaderDescription(true, 0);
+      guard.uniqueName += "-depth-guard";
+      guard.vertexGLSL = "uniform vec2 uFillGuard;\\n" + guard.vertexGLSL.replace(
+        "  gl_Position = psvPlace(vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, z));",
+        `  gl_Position = psvPlace(vec3((uv.x - 0.5) * uGrid.x, (0.5 - uv.y) * uGrid.y, z));
+  if (aPosition.z > 0.5) {
+    vec4 centerClip = psvPlace(vec3((center.x - 0.5) * uGrid.x, (0.5 - center.y) * uGrid.y, z));
+    gl_Position.xy += sign(gl_Position.xy / gl_Position.w - centerClip.xy / centerClip.w) * uFillGuard * gl_Position.w;
+  }`);
+      guard.fragmentGLSL = discardInvisibleFilledSurface(guard.fragmentGLSL, true, false).replace(/gl_FragColor = [^;]+;/, "gl_FragColor = vec4(0.0);");
+      guard.vertexWGSL = "uniform uFillGuard: vec2f;\\n" + guard.vertexWGSL.replace(
+        "  output.position = psvPlace(vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, z));",
+        `  output.position = psvPlace(vec3f((uv.x - 0.5) * uniform.uGrid.x, (0.5 - uv.y) * uniform.uGrid.y, z));
+  if (input.aPosition.z > 0.5) {
+    let centerClip = psvPlace(vec3f((center.x - 0.5) * uniform.uGrid.x, (0.5 - center.y) * uniform.uGrid.y, z));
+    output.position = vec4f(output.position.xy + sign(output.position.xy / output.position.w - centerClip.xy / centerClip.w) * uniform.uFillGuard * output.position.w, output.position.zw);
+  }`);
+      guard.fragmentWGSL = discardInvisibleFilledSurface(guard.fragmentWGSL, true, true).replace(/output.color = [^;]+;/, "output.color = vec4f(0.0);");
+      this.fillGuardMaterial = new pc.ShaderMaterial(guard);
+      this.fillGuardMaterial.cull = pc.CULLFACE_NONE;
+      this.fillGuardMaterial.depthWrite = this.fillGuardMaterial.depthTest = true;
+      this.fillGuardMaterial.blendType = pc.BLEND_NORMAL;
+      this.fillGuardMaterial.redWrite = this.fillGuardMaterial.greenWrite = this.fillGuardMaterial.blueWrite = this.fillGuardMaterial.alphaWrite = false;
+      this.fillGuardMaterial.update();
+      this.fillGuardInstance = new pc.MeshInstance(this.miS.mesh, this.fillGuardMaterial, this.node);
+      this.fillGuardInstance.cull = false;
+      this.fillGuardInstance.drawOrder = 2;
+      this.layer.addMeshInstances([this.fillInstance, this.fillGuardInstance]);'''
+s=s.replace(anchor,replace)
+anchor='''        this.fillInstance.visible = this.miB.visible && this.miS.visible;
+        for (const [name, parameter] of Object.entries(this.matB.parameters))''';assert anchor in s;s=s.replace(anchor,'''        this.fillInstance.visible = this.miB.visible && this.miS.visible;
+        this.fillGuardInstance.visible = this.fillInstance.visible;
+        this.fillGuardInstance.mesh = this.miS.mesh;
+        for (const [name, parameter] of Object.entries(this.matS.parameters)) this.fillGuardMaterial.setParameter(name, parameter.data);
+        this.fillGuardMaterial.setParameter("uFillGuard", [4 / this.device.width, 4 / this.device.height]);
+        for (const [name, parameter] of Object.entries(this.matB.parameters))''')
+s=s.replace('''    if (this.fillInstance) this.layer.removeMeshInstances([this.fillInstance]);''','''    if (this.fillInstance) this.layer.removeMeshInstances([this.fillInstance, this.fillGuardInstance]);
+    this.fillGuardMaterial?.destroy();''')
+s=s.replace('''if (!this.fillTexture) { this.fillInstance.visible = false; return; }''','''if (!this.fillTexture) { this.fillInstance.visible = this.fillGuardInstance.visible = false; return; }''')
+s=s.replace('''if (this.fillInstance) this.fillInstance.visible = false;''','''if (this.fillInstance) this.fillInstance.visible = this.fillGuardInstance.visible = false;''')
+p=w/'depth-guard-fill-relief.js';p.write_text(s);(w/'depth-guard-fill.json').write_text(json.dumps({'src/packs/photo-3d-core.js':str(w/'mask-fill-core.js'),'src/live/relief-mesh.js':str(p)}));print(json.dumps({'candidateSha256':hashlib.sha256(p.read_bytes()).hexdigest(),'methodSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'scope':'Private two-pixel depth-only foreground guard plus post-foreground continuation; same meshes, same camera and depth buffer, no additional render target. Extra reflected RGB texture is counted, so no memory/cost acceptance.'}))

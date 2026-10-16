@@ -1,0 +1,19 @@
+from pathlib import Path
+import json,subprocess,os,hashlib,datetime
+w=Path('/workspace/work/p3d-r5');root=Path('/workspace/splashery');h=lambda b:hashlib.sha256(b).hexdigest();core=(w/'mask-fill-core.js').read_text();assert core.count('return { ...background, reflected: rgba };')==1;core=core.replace('return { ...background, reflected: rgba };','return { ...background, reflected: background.rgba };');(w/'depth-guard-noop-core.js').write_text(core)
+original=(w/'depth-guard-fill-relief.js').read_text();preserved=original
+for a,b in [('fragmentGLSL: discardInvisibleFilledSurface(specialize(FS, false), surface, false),','fragmentGLSL: specialize(FS, false),'),('fragmentWGSL: discardInvisibleFilledSurface(specialize(FS_W, true), surface, true),','fragmentWGSL: specialize(FS_W, true),')]:assert preserved.count(a)==1;preserved=preserved.replace(a,b)
+(w/'depth-guard-original-color-pass-relief.js').write_text(preserved)
+variants=[('depth-guard-noop',w/'depth-guard-fill-relief.js'),('depth-guard-original-color-pass-noop',w/'depth-guard-original-color-pass-relief.js')];results=[];report={'kind':'Native render controls with a post-foreground pass that uses exactly the original background RGBA bytes. Compare all actual native RGBA hashes, not only quality scores. Determine whether zero-alpha discard or pass ordering changes the original image. No texture, cost, or quality improvement is claimed.','methodSha256':h(Path(__file__).read_bytes()),'createdUTC':datetime.datetime.now(datetime.timezone.utc).isoformat(),'rows':results};base=json.loads((w/'baseline/atlas.json').read_text());env=os.environ.copy();env.update(DISPLAY=':99',SPLASHERY_GL='llvmpipe',SPLASHERY_CHROMIUM='/usr/bin/chromium')
+for name,relief in variants:
+ override=w/(name+'.json');override.write_text(json.dumps({'src/packs/photo-3d-core.js':str(w/'depth-guard-noop-core.js'),'src/live/relief-mesh.js':str(relief)}));args=['node','tools/cdx-p3d5-frozen-study.mjs','--manifest',str(w/'manifest.json'),'--probe-root',str(w/'review/photo-3d-failures'),'--out',str(w/(name+'-scout')),'--samples','forest,street','--profiles','phone','--override',str(override),'--reject-against',str(w/'baseline/atlas.json')]
+ with (w/(name+'-scout.log')).open('ab',buffering=0) as log:p=subprocess.Popen(args,cwd=root,env=env,stdout=log,stderr=subprocess.STDOUT);code=p.wait()
+ a=json.loads((w/(name+'-scout/atlas.json')).read_text());differences=[];poses=0
+ for e in a['inputs']:
+  old=next(x for x in base['inputs'] if x['id']==e['id'])
+  for profile,p in e['profiles'].items():
+   for row in p['rows']:
+    previous=next(x for x in old['profiles'][profile]['rows'] if x['yaw']==row['yaw'] and x['pitch']==row['pitch']);poses+=1
+    if row['rgbaSha256']!=previous['rgbaSha256']:differences.append({'id':e['id'],'profile':profile,'yaw':row['yaw'],'pitch':row['pitch']})
+ results.append({'name':name,'exitCode':code,'sourceSha256':a['source']['sha256'],'rawStudySha256':h((w/(name+'-scout/atlas.json')).read_bytes()),'actualPoses':poses,'differentNativeColorPoses':differences,'stoppedEarly':a.get('stoppedEarly'),'finishedUTC':datetime.datetime.now(datetime.timezone.utc).isoformat()});(w/'depth-guard-controls.json').write_text(json.dumps(report,indent=2)+'\n')
+assert h(Path(__file__).read_bytes())==report['methodSha256'];report['complete']=True;(w/'depth-guard-controls.json').write_text(json.dumps(report,indent=2)+'\n')

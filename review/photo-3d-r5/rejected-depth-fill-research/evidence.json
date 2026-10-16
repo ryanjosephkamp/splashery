@@ -1,0 +1,278 @@
+{
+  "kind": "Exact private-prototype and method bytes for rejected depth-buffer fill research. Original finder, probes, scores, and thresholds unchanged. No application, memory, full-corpus, or phone-cost acceptance.",
+  "createdUTC": "2026-10-16T11:25:33.694Z",
+  "methodSha256": "8898b4dea44ec8b0b7f79cd30d9726dda1f98461ad5b0225b716283734b471f5",
+  "files": [
+    {
+      "file": "relief-mesh.original.js.txt",
+      "sha256": "f37912019e9cb72a10dfc459c6afcf575116bea860ec7001e825bbfb58593971"
+    },
+    {
+      "file": "mask-fill-core.js.txt",
+      "sha256": "c157144504eda5bc9ca47c9173e7738cdf8c5e82a553e9800d4127e694525487"
+    },
+    {
+      "file": "depth-protected-fill-relief.js.txt",
+      "sha256": "ac16950bf0f443c8e1bf4cee7e742dc59ea12a1784b7595c864eb9873b31fa2c"
+    },
+    {
+      "file": "depth-protected-fill-world-relief.js.txt",
+      "sha256": "ce77d0fea3fabaf0bcb618c17b4134c63c45e71dafbb8dea048f1679ffe0f7bb"
+    },
+    {
+      "file": "depth-guard-fill-relief.js.txt",
+      "sha256": "5461243909a109c39954df31f00605266d594246c104200a129a402cdf633a6f"
+    },
+    {
+      "file": "depth-guard-original-color-pass-relief.js.txt",
+      "sha256": "f73dd65c9185f664a7963d2ac2fa34a8fe948c6bf11854c129df1ec670af1c9f"
+    },
+    {
+      "file": "depth-guard-palette-core.js.txt",
+      "sha256": "d2c03072e62ad85a80d669162aa4da9174b0d1888555c022316c1b4664109588"
+    },
+    {
+      "file": "projected-edge-guard-relief.js.txt",
+      "sha256": "cf24d7d440b584fdb71d467954c2436a7ed21ab6c57bc337b7b806a211c16021"
+    },
+    {
+      "file": "depth-guard-noop-core.js.txt",
+      "sha256": "119f7372b9256183deae0c12730797aa15b509f3759b24ba572ac5edfb5e638c"
+    },
+    {
+      "file": "make-depth-protected-fill.py.txt",
+      "sha256": "06cceadaaf3d210c5fadc5a1df4e99f91016755d0cccb5ed441302ad3dc88206"
+    },
+    {
+      "file": "make-depth-guard-fill.py.txt",
+      "sha256": "fa4ce798cdd66eb11e63976ca713e2c68eae6d7c98435df7f1134d30247840a2"
+    },
+    {
+      "file": "make-projected-edge-guard.py.txt",
+      "sha256": "f052d06992a86a82e10e0821c3535836b548a5119f957aa103757d6e7c69a343"
+    },
+    {
+      "file": "queue-depth-guard-controls.py.txt",
+      "sha256": "e598ce9041152a7043721d3fc8bd4f8044db9685cb85138a5a7a1a96937e4c48"
+    },
+    {
+      "file": "package-late-render.mjs.txt",
+      "sha256": "8898b4dea44ec8b0b7f79cd30d9726dda1f98461ad5b0225b716283734b471f5"
+    },
+    {
+      "file": "depth-protected-fill-incompatible-attempt.json.gz",
+      "sha256": "63c886a85b208787536e1bb4ae4e50cebc609acd1e6bfa2b7f73947153f50b6c",
+      "uncompressedSha256": "c7efd3c5990ca97999cdba8bd6d3723a13f33696e07d3653b71a088859b6c732"
+    },
+    {
+      "file": "depth-guard-controls.json.gz",
+      "sha256": "0193de827a2e73ad4e09caa4ce011659fc5e6c43c0fdc30c85e535d3a839d74b",
+      "uncompressedSha256": "fbe43503e8be24da92ba79845cc4bb962e66a0fbdd3c1316b907cbc528b10ec0"
+    },
+    {
+      "file": "depth-protected-fill-atlas.json.gz",
+      "sha256": "1c1cc64a156504edf608592fabeba9fde347f2b19a9a1677aded9a727069f599",
+      "uncompressedSha256": "b458250dd807fabd918926f87a67f4ab659a40b911ab1ad28bb2a97d40dc4d09"
+    },
+    {
+      "file": "depth-protected-fill-world-atlas.json.gz",
+      "sha256": "bc256b347bbf1221bcb719a3beb3612f4f490776ebf043bca4d42d4f3e6a0760",
+      "uncompressedSha256": "c357d5690959cf358c0a0969f754c4a5ea50b17e6452b99ac758565fc67a9388"
+    },
+    {
+      "file": "depth-guard-fill-atlas.json.gz",
+      "sha256": "bca2153b1298c683d059e01ecca996cca5b951d08dd0414729ff6b240174247c",
+      "uncompressedSha256": "b59bc3dcf25e0f873ac1358d57c3911ce9a44f10b59b803dbd36c0f7ebabe78e"
+    },
+    {
+      "file": "depth-guard-palette-atlas.json.gz",
+      "sha256": "f39eed2bcb57259c37a6f49226d647083f8bfc9db43cf7d370ce70e71d2817ec",
+      "uncompressedSha256": "9edb3980eceb4eac2bf44c8fbad974bb479e0bb0d8e43e278520ca0a16d44d52"
+    },
+    {
+      "file": "projected-edge-guard-atlas.json.gz",
+      "sha256": "db6fdbf1d6f617c58ba69ffc049a9988138ede3cd2e30fb5fee3301ccc935ddc",
+      "uncompressedSha256": "59d49b72a29ffd88a114febd207524fb92809394f48e10456054cd40c37fc488"
+    },
+    {
+      "file": "depth-guard-noop-atlas.json.gz",
+      "sha256": "f853f9bdbe2a39fbdcf0ec4d8c602479c21ca7c587a9be27d8e50bd1dcbad2a7",
+      "uncompressedSha256": "d534d7fc5eb8a815837bf03090cbff52297f35dae6821b4eeeccd6a9bf7532ad"
+    },
+    {
+      "file": "depth-guard-original-color-pass-noop-atlas.json.gz",
+      "sha256": "0bcfc796c727060e2ea22fbad63e566f9b99d5da0dab77636e9e20f626641440",
+      "uncompressedSha256": "980d41b7ebc682e5fedb388762ef62ab78975623c3c8e1b3fb30f2cd840170eb"
+    },
+    {
+      "file": "integrity-original.json.gz",
+      "sha256": "2eee88d1173f1158636d0c0a866bbdc55f31f5efef2d86a0fd5205b7ae93ca6d",
+      "uncompressedSha256": "23994d2d738d6997e237d0c1645c2ad3466f7c71bd99a2e805c39fc815afaceb",
+      "formattedCopy": "integrity.json"
+    }
+  ],
+  "studies": [
+    {
+      "name": "depth-protected-fill",
+      "validQualityMeasurement": false,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 1,
+      "posesDecoded": 9,
+      "artifactHashesChecked": 45,
+      "stoppedEarly": null,
+      "coreSource": "mask-fill-core.js.txt",
+      "reliefSource": "depth-protected-fill-relief.js.txt",
+      "sourceSha256": "8669a1ffe9e1937f32b4199a2205b2c9260ce3a0ef9df071c621c615e4722cf7",
+      "file": "depth-protected-fill-atlas.json.gz"
+    },
+    {
+      "name": "depth-protected-fill-world",
+      "validQualityMeasurement": true,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 1,
+      "posesDecoded": 9,
+      "artifactHashesChecked": 45,
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.103067897700517,
+            "after": 0.1143655406635074
+          },
+          {
+            "metric": "paletteExcess",
+            "before": 0.010966693098519671,
+            "after": 0.028124047719201444
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 2.4400665896853244
+          },
+          {
+            "metric": "transitionWidth",
+            "before": 3.4302521661950673,
+            "after": 3.578541257162145
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.9560975846892459
+          }
+        ]
+      },
+      "coreSource": "mask-fill-core.js.txt",
+      "reliefSource": "depth-protected-fill-world-relief.js.txt",
+      "sourceSha256": "a5956f8ff4644cc80fad469287259b125eeb1c4baf2fa0cfa500b4358a5af541",
+      "file": "depth-protected-fill-world-atlas.json.gz"
+    },
+    {
+      "name": "depth-guard-fill",
+      "validQualityMeasurement": true,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 2,
+      "posesDecoded": 18,
+      "artifactHashesChecked": 90,
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133433556239935
+          }
+        ]
+      },
+      "coreSource": "mask-fill-core.js.txt",
+      "reliefSource": "depth-guard-fill-relief.js.txt",
+      "sourceSha256": "c8309b701cfb06ee679a35d1278bca179f4291579a9bee6287d567d0869941c4",
+      "file": "depth-guard-fill-atlas.json.gz"
+    },
+    {
+      "name": "depth-guard-palette",
+      "validQualityMeasurement": true,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 3,
+      "posesDecoded": 27,
+      "artifactHashesChecked": 135,
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133433556239935
+          }
+        ]
+      },
+      "coreSource": "depth-guard-palette-core.js.txt",
+      "reliefSource": "depth-guard-original-color-pass-relief.js.txt",
+      "sourceSha256": "913c23959dc837bd40418f2243122a37819546a615489686b6d0a3b9ed3aa7a2",
+      "file": "depth-guard-palette-atlas.json.gz"
+    },
+    {
+      "name": "projected-edge-guard",
+      "validQualityMeasurement": true,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 2,
+      "posesDecoded": 18,
+      "artifactHashesChecked": 90,
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133005121645489
+          }
+        ]
+      },
+      "coreSource": "mask-fill-core.js.txt",
+      "reliefSource": "projected-edge-guard-relief.js.txt",
+      "sourceSha256": "a36fd5b66a22d7d6284eec067ecc371b141952b81f3918e30419c645f8dd719d",
+      "file": "projected-edge-guard-atlas.json.gz"
+    },
+    {
+      "name": "depth-guard-noop",
+      "validQualityMeasurement": true,
+      "scopeComplete": true,
+      "completeCorpus": false,
+      "profiles": 2,
+      "posesDecoded": 18,
+      "artifactHashesChecked": 90,
+      "stoppedEarly": null,
+      "coreSource": "depth-guard-noop-core.js.txt",
+      "reliefSource": "depth-guard-fill-relief.js.txt",
+      "sourceSha256": "0ce7b56a31fb02969b3bc479a79aa6b2ca8190d0c2ae0396e00705f9ab31acc1",
+      "file": "depth-guard-noop-atlas.json.gz"
+    },
+    {
+      "name": "depth-guard-original-color-pass-noop",
+      "validQualityMeasurement": true,
+      "scopeComplete": true,
+      "completeCorpus": false,
+      "profiles": 2,
+      "posesDecoded": 18,
+      "artifactHashesChecked": 90,
+      "stoppedEarly": null,
+      "coreSource": "depth-guard-noop-core.js.txt",
+      "reliefSource": "depth-guard-original-color-pass-relief.js.txt",
+      "sourceSha256": "d7bbdab3bde0675c5b4837d5424526579a9ab9ef5d12f4cea2f7f1c1e9d542d8",
+      "file": "depth-guard-original-color-pass-noop-atlas.json.gz"
+    }
+  ]
+}

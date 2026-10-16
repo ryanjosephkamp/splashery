@@ -1,0 +1,68 @@
+from pathlib import Path
+import json,hashlib
+w=Path('/workspace/work/p3d-r5');s=(w/'relief-mesh.original.js').read_text()
+helper='''
+function discardInvisibleFilledSurface(code, enabled, wgsl) {
+  if (!enabled) return code;
+  return wgsl ? code.replace('  output.color = vec4f(', '  if (coverage <= 0.0) { discard; }\\n  output.color = vec4f(') : code.replace('  gl_FragColor = vec4(', '  if (coverage <= 0.0) discard;\\n  gl_FragColor = vec4(');
+}
+'''
+s=s.replace('function shaderDescription(filled = false, back = 0) {',helper+'\nfunction shaderDescription(filled = false, back = 0) {');s=s.replace('fragmentGLSL: specialize(FS, false),','fragmentGLSL: discardInvisibleFilledSurface(specialize(FS, false), surface, false),').replace('fragmentWGSL: specialize(FS_W, true),','fragmentWGSL: discardInvisibleFilledSurface(specialize(FS_W, true), surface, true),')
+anchor='''    this.matS.update();
+  }
+
+  // The picture:''';assert anchor in s;s=s.replace(anchor,'''    this.matS.update();
+    this.setDepthProtectedFill(b);
+  }
+
+  setDepthProtectedFill(b) {
+    this.fillTexture?.destroy();
+    this.fillTexture = null;
+    if (!b?.reflected) {
+      if (this.fillInstance) this.fillInstance.visible = false;
+      return;
+    }
+    this.fillTexture = this.byteTexture("p3d-depth-protected-continuation", b.w, b.h, pc.PIXELFORMAT_RGBA8, b.reflected);
+    this.fillTexture.minFilter = this.fillTexture.magFilter = pc.FILTER_LINEAR;
+    this.backgroundBytes += b.reflected.byteLength;
+    if (!this.fillLayer) {
+      this.fillMaterial = material(true, 1);
+      this.fillMaterial.blendType = pc.BLEND_NORMAL;
+      this.fillMaterial.depthWrite = false;
+      this.fillMaterial.update();
+      this.fillInstance = new pc.MeshInstance(this.backing.mesh, this.fillMaterial, this.node);
+      this.fillInstance.cull = false;
+      this.fillLayer = new pc.Layer({name:"p3d-depth-protected-continuation"});
+      this.stage.app.scene.layers.pushTransparent(this.fillLayer);
+      this.fillLayer.addMeshInstances([this.fillInstance]);
+      const camera = this.stage.cameraEntity.camera;
+      camera.layers = [...camera.layers, this.fillLayer.id];
+      this.fillSync = () => {
+        if (!this.fillTexture) { this.fillInstance.visible = false; return; }
+        this.fillInstance.visible = this.miB.visible && this.miS.visible;
+        for (const [name, parameter] of Object.entries(this.matB.parameters)) this.fillMaterial.setParameter(name, parameter.data);
+        this.fillMaterial.setParameter("uColor", this.fillTexture);
+      };
+      this.stage.app.on("prerender", this.fillSync);
+    }
+    this.fillSync();
+  }
+
+  destroyDepthProtectedFill() {
+    if (this.fillSync) this.stage.app.off("prerender", this.fillSync);
+    if (this.fillLayer) {
+      this.fillLayer.removeMeshInstances([this.fillInstance]);
+      this.stage.app.scene.layers.remove(this.fillLayer);
+      const camera = this.stage.cameraEntity?.camera;
+      if (camera) camera.layers = camera.layers.filter(id => id !== this.fillLayer.id);
+    }
+    this.fillMaterial?.destroy();
+    this.fillTexture?.destroy();
+  }
+
+  // The picture:''')
+anchor='''  destroy() {
+    this.layer.removeMeshInstances''';assert s.count(anchor)==1;s=s.replace(anchor,'''  destroy() {
+    this.destroyDepthProtectedFill();
+    this.layer.removeMeshInstances''')
+p=w/'depth-protected-fill-relief.js';p.write_text(s);(w/'depth-protected-fill.json').write_text(json.dumps({'src/packs/photo-3d-core.js':str(w/'mask-fill-core.js'),'src/live/relief-mesh.js':str(p)}));print(json.dumps({'prototypeSha256':hashlib.sha256(p.read_bytes()).hexdigest(),'methodSha256':hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),'scope':'Private bounded quality prototype. Same-depth post-foreground fill pass, existing depth buffer, no separate render target or camera. Extra RGB texture still counted; no phone-cost or memory acceptance.'}))

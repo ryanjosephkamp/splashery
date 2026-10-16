@@ -111,3 +111,7 @@ from the 54 retained-runtime videos above and are not accepted changes.
 
 [Rejected exact-output performance research](rejected-code-research/README.md) preserves both fixed
 forest cost screens, all original observations, and the exact candidate and proof-method bytes.
+
+[Rejected depth-buffer fill research](rejected-depth-fill-research/README.md) preserves the newer
+rendering variants, their original-finder counterexamples, the separately labeled incompatible
+attempt, and both pixel-exact controls.

@@ -1,0 +1,169 @@
+{
+  "kind": "Independent raw-file and native-PNG integrity verification, including separately labeled incompatible diagnostics and two no-texture-change controls. Repeated samples across prototype studies are not distinct corpus inputs.",
+  "methodSha256": "8898b4dea44ec8b0b7f79cd30d9726dda1f98461ad5b0225b716283734b471f5",
+  "profiles": 13,
+  "posesDecoded": 117,
+  "artifactHashesChecked": 585,
+  "validQualityProfiles": 12,
+  "invalidDiagnosticProfiles": 1,
+  "actualPhotosChecked": 12,
+  "studies": [
+    {
+      "name": "depth-protected-fill",
+      "validQualityMeasurement": false,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 1,
+      "posesDecoded": 9,
+      "artifactHashesChecked": 45,
+      "stoppedEarly": null,
+      "coreSource": "mask-fill-core.js.txt",
+      "reliefSource": "depth-protected-fill-relief.js.txt",
+      "sourceSha256": "8669a1ffe9e1937f32b4199a2205b2c9260ce3a0ef9df071c621c615e4722cf7"
+    },
+    {
+      "name": "depth-protected-fill-world",
+      "validQualityMeasurement": true,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 1,
+      "posesDecoded": 9,
+      "artifactHashesChecked": 45,
+      "stoppedEarly": {
+        "id": "forest",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.103067897700517,
+            "after": 0.1143655406635074
+          },
+          {
+            "metric": "paletteExcess",
+            "before": 0.010966693098519671,
+            "after": 0.028124047719201444
+          },
+          {
+            "metric": "edgeDisplacement",
+            "before": 2.3703928832525314,
+            "after": 2.4400665896853244
+          },
+          {
+            "metric": "transitionWidth",
+            "before": 3.4302521661950673,
+            "after": 3.578541257162145
+          },
+          {
+            "metric": "thinWidthError",
+            "before": 0.821786937035308,
+            "after": 0.9560975846892459
+          }
+        ]
+      },
+      "coreSource": "mask-fill-core.js.txt",
+      "reliefSource": "depth-protected-fill-world-relief.js.txt",
+      "sourceSha256": "a5956f8ff4644cc80fad469287259b125eeb1c4baf2fa0cfa500b4358a5af541"
+    },
+    {
+      "name": "depth-guard-fill",
+      "validQualityMeasurement": true,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 2,
+      "posesDecoded": 18,
+      "artifactHashesChecked": 90,
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133433556239935
+          }
+        ]
+      },
+      "coreSource": "mask-fill-core.js.txt",
+      "reliefSource": "depth-guard-fill-relief.js.txt",
+      "sourceSha256": "c8309b701cfb06ee679a35d1278bca179f4291579a9bee6287d567d0869941c4"
+    },
+    {
+      "name": "depth-guard-palette",
+      "validQualityMeasurement": true,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 3,
+      "posesDecoded": 27,
+      "artifactHashesChecked": 135,
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133433556239935
+          }
+        ]
+      },
+      "coreSource": "depth-guard-palette-core.js.txt",
+      "reliefSource": "depth-guard-original-color-pass-relief.js.txt",
+      "sourceSha256": "913c23959dc837bd40418f2243122a37819546a615489686b6d0a3b9ed3aa7a2"
+    },
+    {
+      "name": "projected-edge-guard",
+      "validQualityMeasurement": true,
+      "scopeComplete": false,
+      "completeCorpus": false,
+      "profiles": 2,
+      "posesDecoded": 18,
+      "artifactHashesChecked": 90,
+      "stoppedEarly": {
+        "id": "street",
+        "profile": "phone",
+        "tolerance": 0,
+        "failures": [
+          {
+            "metric": "halos",
+            "before": 0.07126997488088535,
+            "after": 0.07133005121645489
+          }
+        ]
+      },
+      "coreSource": "mask-fill-core.js.txt",
+      "reliefSource": "projected-edge-guard-relief.js.txt",
+      "sourceSha256": "a36fd5b66a22d7d6284eec067ecc371b141952b81f3918e30419c645f8dd719d"
+    },
+    {
+      "name": "depth-guard-noop",
+      "validQualityMeasurement": true,
+      "scopeComplete": true,
+      "completeCorpus": false,
+      "profiles": 2,
+      "posesDecoded": 18,
+      "artifactHashesChecked": 90,
+      "stoppedEarly": null,
+      "coreSource": "depth-guard-noop-core.js.txt",
+      "reliefSource": "depth-guard-fill-relief.js.txt",
+      "sourceSha256": "0ce7b56a31fb02969b3bc479a79aa6b2ca8190d0c2ae0396e00705f9ab31acc1"
+    },
+    {
+      "name": "depth-guard-original-color-pass-noop",
+      "validQualityMeasurement": true,
+      "scopeComplete": true,
+      "completeCorpus": false,
+      "profiles": 2,
+      "posesDecoded": 18,
+      "artifactHashesChecked": 90,
+      "stoppedEarly": null,
+      "coreSource": "depth-guard-noop-core.js.txt",
+      "reliefSource": "depth-guard-original-color-pass-relief.js.txt",
+      "sourceSha256": "d7bbdab3bde0675c5b4837d5424526579a9ab9ef5d12f4cea2f7f1c1e9d542d8"
+    }
+  ],
+  "complete": true,
+  "finishedUTC": "2026-10-16T11:25:36.918Z"
+}
