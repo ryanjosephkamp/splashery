@@ -250,7 +250,7 @@ async function run(toy, input, profile, repeat) {
       return (
         p?.media &&
         p.splats() > 0 &&
-        p.sheets.filter((s) => !s.hidden).every((s) => !s.want || s.shown?.key === s.want.key)
+        p.sheets.some((s) => !s.hidden && s.want && s.shown?.page === s.want.page)
       );
     },
     null,
@@ -272,6 +272,7 @@ async function run(toy, input, profile, repeat) {
     null,
     { timeout: 180000 },
   );
+  const visibleSceneMs = await page.evaluate(() => performance.now() - window.__benchStart);
   await page.evaluate(() => {
     const pl = window.__splashery.player;
     pl.stage.requestRender(2000);
@@ -303,7 +304,12 @@ async function run(toy, input, profile, repeat) {
   await page.evaluate(() => {
     const p = window.__splashery.player;
     p.frozen = true;
+    p.glide = null;
     for (const k of ["yaw", "pitch", "roll"]) p.camera.cur[k] = p.camera.tgt[k] = 0;
+    // Use the same explicit reading pose in every repeat. The recipe can
+    // request a second one-page focus after its opening animation lands.
+    p.camera.cur.distance = p.camera.tgt.distance = 3.2;
+    p.camera.setPan(null, true);
     p.stage.requestRender(2000);
   });
   await page.waitForTimeout(2000);
@@ -600,6 +606,7 @@ async function run(toy, input, profile, repeat) {
     ...loaded,
     firstPageMs,
     installedPageMs,
+    visibleSceneMs,
     ...state,
     processMemory,
     cdpHeap: mem.find((x) => x.name === "JSHeapUsedSize")?.value || null,
