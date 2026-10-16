@@ -282,6 +282,62 @@ async function run(toy, input, profile, repeat) {
     p.stage.requestRender(2000);
   });
   await page.waitForTimeout(2000);
+  // Measure the app before the independent reference raster and screenshots
+  // allocate their own large canvases and image encoders.
+  await page.evaluate(async () => {
+    await window.__splashery.player.stage.captureFrame();
+  });
+  const cdp = await page.context().newCDPSession(page);
+  await cdp.send("Performance.enable");
+  await cdp.send("HeapProfiler.collectGarbage");
+  const mem = (await cdp.send("Performance.getMetrics")).metrics || [];
+  // Linux's proportional resident size includes native and software-GPU
+  // allocations without counting shared pages once for every process.
+  let processMemory = null;
+  try {
+    const session = await browser.newBrowserCDPSession();
+    const { processInfo } = await session.send("SystemInfo.getProcessInfo");
+    let pss = 0,
+      rss = 0,
+      n = 0;
+    for (const p of processInfo) {
+      try {
+        const s = fs.readFileSync(`/proc/${p.id}/smaps_rollup`, "utf8");
+        pss += Number(s.match(/^Pss:\s+(\d+)/m)?.[1] || 0) * 1024;
+        rss += Number(s.match(/^Rss:\s+(\d+)/m)?.[1] || 0) * 1024;
+        n++;
+      } catch {}
+    }
+    await session.detach();
+    if (n) processMemory = { pssBytes: pss, rssBytes: rss, processes: n };
+  } catch {}
+  const state = await page.evaluate(() => {
+    const pl = window.__splashery.player,
+      p = pl.pictures;
+    const unique = new Set([
+      ...p.cache.values(),
+      ...p.sheets.map((s) => s.shown?.data).filter(Boolean),
+    ]);
+    return {
+      splats: p.splats(),
+      kitSplats: pl.proc.ctx.buf.count,
+      sheetBytes: [...unique].reduce(
+        (n, d) =>
+          n +
+          Object.values(d)
+            .filter((x) => ArrayBuffer.isView(x))
+            .reduce((s, x) => s + x.byteLength, 0) +
+          (d.surface ? d.w * d.h * 4 + (d.surface.relief?.d?.byteLength || 0) : 0),
+        0,
+      ),
+      gpuBytes: Object.values(pl.stage.device._vram || {}).reduce(
+        (n, x) => n + (typeof x === "number" ? x : 0),
+        0,
+      ),
+      builds: p.stats.builds,
+      jsHeap: performance.memory?.usedJSHeapSize || null,
+    };
+  });
   // Pose-aware source registration, followed by sampling at the displayed pixel grid.
   const crop = await page.evaluate(
     async ({ input }) => {
@@ -468,57 +524,7 @@ async function run(toy, input, profile, repeat) {
       fs.writeFileSync(`${out}/${stem}-${key}.png`, Buffer.from(v.split(",")[1], "base64"));
   }
   await page.screenshot({ path: `${out}/${stem}.png` });
-  const cdp = await page.context().newCDPSession(page);
-  await cdp.send("Performance.enable");
   await cdp.send("HeapProfiler.collectGarbage");
-  const mem = (await cdp.send("Performance.getMetrics")).metrics || [];
-  // Linux's proportional resident size includes native and software-GPU
-  // allocations without counting shared pages once for every process.
-  let processMemory = null;
-  try {
-    const session = await browser.newBrowserCDPSession();
-    const { processInfo } = await session.send("SystemInfo.getProcessInfo");
-    let pss = 0,
-      rss = 0,
-      n = 0;
-    for (const p of processInfo) {
-      try {
-        const s = fs.readFileSync(`/proc/${p.id}/smaps_rollup`, "utf8");
-        pss += Number(s.match(/^Pss:\s+(\d+)/m)?.[1] || 0) * 1024;
-        rss += Number(s.match(/^Rss:\s+(\d+)/m)?.[1] || 0) * 1024;
-        n++;
-      } catch {}
-    }
-    await session.detach();
-    if (n) processMemory = { pssBytes: pss, rssBytes: rss, processes: n };
-  } catch {}
-  const state = await page.evaluate(() => {
-    const pl = window.__splashery.player,
-      p = pl.pictures;
-    const unique = new Set([
-      ...p.cache.values(),
-      ...p.sheets.map((s) => s.shown?.data).filter(Boolean),
-    ]);
-    return {
-      splats: p.splats(),
-      kitSplats: pl.proc.ctx.buf.count,
-      sheetBytes: [...unique].reduce(
-        (n, d) =>
-          n +
-          Object.values(d)
-            .filter((x) => ArrayBuffer.isView(x))
-            .reduce((s, x) => s + x.byteLength, 0) +
-          (d.surface ? d.w * d.h * 4 + (d.surface.relief?.d?.byteLength || 0) : 0),
-        0,
-      ),
-      gpuBytes: Object.values(pl.stage.device._vram || {}).reduce(
-        (n, x) => n + (typeof x === "number" ? x : 0),
-        0,
-      ),
-      builds: p.stats.builds,
-      jsHeap: performance.memory?.usedJSHeapSize || null,
-    };
-  });
   const motion = await page.evaluate(
     async ({ seconds, toy }) => {
       const pl = window.__splashery.player;
@@ -597,6 +603,7 @@ try {
               {
                 browser: browser.version(),
                 isolation: "fresh Chromium process per case and repeat",
+                memoryPoint: "settled page before reference raster and screenshots",
                 toolSha256,
                 fixtures: Object.fromEntries(
                   fixtureFiles.map((name) => [

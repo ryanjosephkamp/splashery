@@ -220,11 +220,10 @@ test.describe("sharp pages in the real renderer", () => {
       true,
     );
     expect(
-      await page.evaluate(
-        () =>
-          window.__splashery.player.pictures.sheets[0].shown.data.surface.source instanceof
-          ImageBitmap,
-      ),
+      await page.evaluate(() => {
+        const d = window.__splashery.player.pictures.sheets[0].shown.data;
+        return d.surface.source.width === d.w && d.surface.source.height === d.h;
+      }),
     ).toBe(true);
     const before = await page.evaluate(
       () =>
