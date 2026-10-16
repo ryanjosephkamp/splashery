@@ -16,7 +16,7 @@
 
 import { detectAndDescribe, detectAndDescribeMS } from './features.js';
 import { runWorkerPool } from './worker-pool.js';
-import { detectSift, matchSift } from './sift.js';
+import { detectSift, matchSift, matchSiftAsync } from './sift.js';
 import { gpuMatchAll } from './gpumatch.js';
 import { matchDescriptors } from './matching.js';
 import {
@@ -533,7 +533,17 @@ async function runSfMOnce(images, log, sampleColor, opts = {}) {
   // cost of a SIFT run: ~350s of 484s on train-84; the GPU does the whole
   // graph in ~1s of compute)
   let gpuAll = null;
-  if (useSift && typeof navigator !== 'undefined' && navigator.gpu) {
+  if (useSift && opts.cpuMatching === true) {
+    log('  cooperative CPU SIFT matching; all image pairs and descriptors retained');
+    gpuAll = [];
+    for (let pi = 0; pi < pairs.length; pi++) {
+      checkAbort();
+      const [i, j] = pairs[pi];
+      gpuAll.push(await matchSiftAsync(feats[i].desc, feats[i].n, feats[j].desc, feats[j].n, 0.8, { signal }));
+      ev({ stage: 'matching', done: pi + 1, total: pairs.length, detail: { usable: 0, pair: null, gpu: false, cpu: true } });
+    }
+    checkAbort();
+  } else if (useSift && typeof navigator !== 'undefined' && navigator.gpu) {
     try {
       gpuAll = await gpuMatchAll(feats, pairs, 0.8, log, opts.gpu && opts.gpu.device,
         (d, t) => ev({ stage: 'matching', done: d, total: t, detail: { usable: 0, pair: null, gpu: true } }),

@@ -358,3 +358,50 @@ export function matchSift(dA, nA, dB, nB, ratio = 0.8) {
   }
   return res;
 }
+
+/** Exact CPU SIFT matching with bounded event-loop work for a software adapter.
+ *  Keep the established nearest/second-nearest tie order, ratio, and mutual check.
+ *  MIT, made by Ryan with Codex (GPT-6). */
+export async function matchSiftAsync(dA, nA, dB, nB, ratio = 0.8, { signal } = {}) {
+  const checkAbort = () => { if (signal?.aborted) throw new DOMException('SfM aborted', 'AbortError'); };
+  checkAbort();
+  let nextYield = performance.now() + 32;
+  const best = async (dX, nX, dY, nY) => {
+    const out = new Int32Array(nX).fill(-1);
+    for (let a = 0; a < nX; a++) {
+      checkAbort();
+      const oa = a * 128;
+      let b1 = Infinity, b2 = Infinity, bi = -1;
+      for (let b = 0; b < nY; b++) {
+        const ob = b * 128;
+        let s = 0;
+        for (let k = 0; k < 128; k++) {
+          const d = dX[oa + k] - dY[ob + k];
+          s += d * d;
+          if (s >= b2) break;
+        }
+        if (s < b1) { b2 = b1; b1 = s; bi = b; }
+        else if (s < b2) b2 = s;
+      }
+      if (bi >= 0 && b1 < ratio * ratio * b2) out[a] = bi;
+      // Check between query rows, never inside the distance arithmetic. Timer tasks let
+      // cancel/deadline timers run too; prioritized scheduler continuations can starve them.
+      // A 32 ms slice amortizes the browser's nested-timer clamp without a long UI stall.
+      if (performance.now() >= nextYield) {
+        await new Promise(resolve => setTimeout(resolve, 0));
+        checkAbort();
+        nextYield = performance.now() + 32;
+      }
+    }
+    return out;
+  };
+  const ab = await best(dA, nA, dB, nB);
+  const ba = await best(dB, nB, dA, nA);
+  checkAbort();
+  const res = [];
+  for (let a = 0; a < nA; a++) {
+    const b = ab[a];
+    if (b >= 0 && ba[b] === a) res.push(a, b);
+  }
+  return res;
+}
