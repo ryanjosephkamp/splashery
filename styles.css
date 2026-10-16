@@ -3389,8 +3389,12 @@ body.focus #pop-toggle {
 }
 
 .toy-toolbar button.swatch-tool {
+  box-sizing: border-box;
+  flex: none;
   width: 32px;
-  min-height: 32px;
+  min-width: 0;
+  height: 32px;
+  min-height: 0;
   padding: 0;
   font-size: 0;
   background: var(--tool-color);
@@ -3406,12 +3410,13 @@ body.focus #pop-toggle {
 }
 
 @media (max-width: 760px) {
-  /* Clear of the stage's right-hand column (Play, Hands-on, Reset view). */
+  /* At the top of the stage, under the status line, where it covers
+     neither the toy nor the buttons along the stage's lower edge. */
   .toy-toolbar {
-    left: 10px;
-    bottom: calc(var(--dock-h, 200px) + 64px);
-    width: calc(100vw - 76px);
-    transform: none;
+    left: 50%;
+    top: 118px;
+    bottom: auto;
+    width: calc(100vw - 20px);
     gap: 5px;
   }
 
@@ -3422,9 +3427,8 @@ body.focus #pop-toggle {
   }
 
   .toy-toolbar button.swatch-tool {
-    width: 30px;
-    min-height: 30px;
-    padding: 0;
+    width: 28px;
+    height: 28px;
   }
 
   body.sheet-open .toy-toolbar,
