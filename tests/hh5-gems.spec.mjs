@@ -123,9 +123,16 @@ test("crystal ball: lifted off its stand, it rolls off the stand's base onto the
   const home = (await piece(page, 0)).home;
   await finger(page, [home, [0.3, 1.2, 0.3], [1.0, 0.4, 0.5]], { steps: 10 });
   await tick(page, 0.2);
-  let p = await parts(page);
-  // The mist and the cap under the glass go with it.
-  const at = await piece(page, 0);
+  // The mist and the cap under the glass go with it. (Read in one frame, lane
+  // Fix13: the app's own frames keep running while the ball rolls, so under
+  // load one could land between two reads and move it 0.33 on.)
+  const [p0, at] = await page.evaluate(() => {
+    const { player } = window.__splashery;
+    const pc = player.handsOn.pieces[0];
+    const parts = JSON.parse(JSON.stringify(player.motion.out.parts));
+    return [parts, { pos: pc.body.pos.slice(), home: pc.home.pos.slice() }];
+  });
+  let p = p0;
   const off = at.pos.map((v, i) => v - at.home[i]);
   expect(Math.hypot(...p.mist.offset.map((v, i) => v - off[i]))).toBeLessThan(1e-6);
   expect(p.cap.visible).toBe(1);

@@ -364,10 +364,10 @@ function line(k, pts, width, color, { closed = false, opacity = 0.9, per = 1 } =
 
 // A round glowing dot (a star or a planet's marker): a bright core in a
 // faint halo.
-function dot(k, p, size, color, { halo = 0.35 } = {}) {
+function dot(k, p, size, color, { halo = 0.35, spread = 2.6 } = {}) {
   k.cloud({ count: (2 * 160000) / k.count, jitter: 0, pattern: false }, (_r, i) => ({
     p: [p[0], p[1], p[2] + (i ? 0 : 1e-5)],
-    scales: i ? [size * 2.6, size * 2.6, size * 2.6] : [size, size, size],
+    scales: i ? [size * spread, size * spread, size * spread] : [size, size, size],
     quat: [0, 0, 0, 1],
     color,
     opacity: i ? halo : 1,
@@ -418,9 +418,12 @@ function buildPlanets(k, layer, list) {
   const w = layer.line;
   for (const p of list) {
     const col = p.id === "earth" ? [0.45, 0.65, 1] : [0.62, 0.62, 0.66];
-    line(k, SKY.orbitPath(p, 720).map((v) => toUnits(v, ku)), w, col, { closed: true, opacity: p.id === "earth" ? 0.8 : 0.5 }); // prettier-ignore
+    // Lane Polish: the orbits a little brighter, and each planet a crisp
+    // dot with a small glow (its glow was over twice its size, and the inner
+    // planets ran together into a soft smudge once the view moved out).
+    line(k, SKY.orbitPath(p, 720).map((v) => toUnits(v, ku)), w, col, { closed: true, opacity: p.id === "earth" ? 0.85 : 0.65 }); // prettier-ignore
     const c = { mercury: [0.75, 0.7, 0.65], venus: [1, 0.92, 0.75], earth: [0.5, 0.75, 1], mars: [1, 0.55, 0.35], jupiter: [0.95, 0.85, 0.7], saturn: [0.95, 0.88, 0.65], uranus: [0.7, 0.9, 0.95], neptune: [0.5, 0.65, 1] }[p.id]; // prettier-ignore
-    dot(k, toUnits(SKY.planetAt(p), ku), w * 2.2, c);
+    dot(k, toUnits(SKY.planetAt(p), ku), w * 2.2, c, { halo: 0.25, spread: 1.7 });
   }
   dot(k, toUnits(SKY.SUN, ku), w * 4, [1, 0.93, 0.75], { halo: 0.5 });
 }
@@ -706,7 +709,10 @@ export const LAYERS = [
   { id: "stars-near", e: 18, cover: false, fadeIn: [0.02, 0.06], fadeOut: [3, 6], build: buildNearStars }, // prettier-ignore
   { id: "sun-alone", e: 16, cover: false, fadeIn: [0.002, 0.005], fadeOut: [8, 16], build: buildSunAlone }, // prettier-ignore
   { id: "outer", e: 13.3, line: 0.0045, cover: false, fadeIn: [0.004, 0.012], fadeOut: [6, 10], build: (k, l) => buildPlanets(k, l, SKY.PLANETS) }, // prettier-ignore
-  { id: "inner", e: 11.9, line: 0.0042, cover: false, fadeIn: [0.01, 0.03], fadeOut: [6, 12], build: (k, l) => buildPlanets(k, l, SKY.PLANETS.slice(0, 4)) }, // prettier-ignore
+  // (Lane Polish: the inner planets' own layer fades in later, as it grows from 0.06 to 0.15 of
+  // the view (was 0.01 to 0.03): smaller, its four orbits ran together with the outer layer's
+  // into a smudge.)
+  { id: "inner", e: 11.9, line: 0.0042, cover: false, fadeIn: [0.06, 0.15], fadeOut: [6, 12], build: (k, l) => buildPlanets(k, l, SKY.PLANETS.slice(0, 4)) }, // prettier-ignore
   { id: "moon", e: 9, cover: false, fadeIn: [0.008, 0.02], fadeOut: [3, 5], build: buildMoon },
   { id: "earth", e: 7.3, cover: false, fadeIn: [0.04, 0.08], fadeOut: [24, 30], build: buildGlobe }, // prettier-ignore
   ...AERIAL.map((a) => ({

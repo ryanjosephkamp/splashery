@@ -30,6 +30,29 @@ export function drawCode(code, ppm) {
   return c;
 }
 
+// Only Save PNG pays for mask trials and the second reader. Keep the same
+// URL, version, correction level, quiet zone, and native export dimensions.
+export async function shareExport(url, made = shareCode(url)) {
+  const attempts = [];
+  if (!made.ok) return { ok: false, attempts };
+  const { readExportCode } = await import("./export-check.js");
+  const masks = [made.code.mask, ...Array.from({ length: 8 }, (_, i) => i).filter((i) => i !== made.code.mask)]; // prettier-ignore
+  const exact = (read) => read.jsqr === url && read.zxing === url;
+  for (const mask of masks) {
+    const code = mask === made.code.mask ? made.code : shareCode(url, { mask }).code;
+    const canvas = drawCode(code, 10);
+    const phone = document.createElement("canvas");
+    phone.width = phone.height = Math.min(390, canvas.width);
+    phone.getContext("2d").drawImage(canvas, 0, 0, phone.width, phone.height);
+    const phoneRead = await readExportCode(phone);
+    const nativeRead = exact(phoneRead) ? await readExportCode(canvas) : null;
+    attempts.push({ mask, phone: phoneRead, native: nativeRead });
+    if (exact(phoneRead) && nativeRead && exact(nativeRead))
+      return { ok: true, canvas, mask, attempts };
+  }
+  return { ok: false, attempts };
+}
+
 const CSS = `
 .sqr{border:1px solid var(--line);border-radius:var(--radius);padding:0;max-width:min(26rem,calc(100vw - 32px));width:100%;background:var(--page);color:var(--ink);box-shadow:var(--shadow);font:inherit}
 .sqr::backdrop{background:rgba(0,0,0,.45)}
@@ -69,6 +92,7 @@ export async function openShareQR(app) {
   const body = [];
   const buttons = [];
   SHARE.last = { url, ok: made.ok, bytes: made.bytes, check: null };
+  const last = SHARE.last;
   if (made.ok) {
     const { code, level } = made;
     SHARE.last.version = code.version;
@@ -89,10 +113,37 @@ export async function openShareQR(app) {
       el("p", { id: "sqr-info", text: `Version ${code.version} (${code.size} × ${code.size} modules), error correction ${level}. The link is ${made.bytes.toLocaleString("en-US")} characters.` }), // prettier-ignore
     );
     const save = el("button", { type: "button", class: "primary", id: "sqr-save", text: "Save PNG" }); // prettier-ignore
+    const json = el("button", { type: "button", id: "sqr-json", text: "Save scene", hidden: true }); // prettier-ignore
+    json.addEventListener("click", () => {
+      dialog.close();
+      app.exportJSON();
+    });
+    let saving = false;
     save.addEventListener("click", async () => {
-      const blob = await canvasToBlob(drawCode(code, 10));
-      downloadBlob(blob, timestampName("png", "splashery-scene-qr"));
-      app.ui?.toast?.("QR code saved.");
+      if (saving) return;
+      saving = true;
+      save.disabled = true;
+      check.textContent = "Checking the PNG at phone size…";
+      try {
+        const result = await shareExport(url, made);
+        last.export = { ok: result.ok, mask: result.mask ?? null, attempts: result.attempts };
+        if (!result.ok) {
+          check.textContent = "This link's QR code couldn't be read reliably at phone size. Use Save scene instead."; // prettier-ignore
+          json.hidden = false;
+          return;
+        }
+        const blob = await canvasToBlob(result.canvas);
+        downloadBlob(blob, timestampName("png", "splashery-scene-qr"));
+        check.textContent = "✓ The saved PNG reads back at phone size.";
+        app.ui?.toast?.("QR code saved.");
+      } catch {
+        last.export = { ok: false, error: "QR reader or PNG export failed." };
+        check.textContent = "The QR readers couldn't finish. Try again, or use Save scene.";
+        json.hidden = false;
+      } finally {
+        saving = false;
+        save.disabled = false;
+      }
     });
     const splats = el("button", { type: "button", id: "sqr-splats", text: "Show as splats" }); // prettier-ignore
     splats.addEventListener("click", async () => {
@@ -100,25 +151,28 @@ export async function openShareQR(app) {
       await app.chooseToy("qr-code");
       await app.player.switchTo({ options: { text: url, ecc: level } });
     });
-    buttons.push(splats, save);
+    buttons.push(splats, json, save);
     // Read it back, as a phone would (src/qr/scan.js: the browser's own
     // reader, or jsQR).
     import("./scan.js")
       .then(({ readCode }) => readCode(drawCode(code, 4)))
       .then((r) => {
         const ok = r?.text === url;
-        SHARE.last.check = ok;
-        check.textContent = ok
-          ? "✓ It scans."
-          : "This code didn't read back here. Save JSON to keep the scene.";
+        last.check = ok;
+        if (!saving && !last.export)
+          check.textContent = ok
+            ? "✓ It scans."
+            : "This code didn't read back here. Use Save scene to keep the scene.";
       })
-      .catch(() => (check.textContent = ""));
+      .catch(() => {
+        if (!saving && !last.export) check.textContent = "";
+      });
   } else {
     const n = (made.bytes || res.bytes || 0).toLocaleString("en-US");
     body.push(
-      el("p", { id: "sqr-long", text: res.ok ? `This scene's link is ${n} characters, more than one QR code can hold (about 2,900). Save the scene as a file instead, and open it with Load JSON.` : "This scene is too big for a link, so it can't be a QR code either. Save the scene as a file instead, and open it with Load JSON." }), // prettier-ignore
+      el("p", { id: "sqr-long", text: res.ok ? `This scene's link is ${n} characters, more than one QR code can hold (about 2,900). Save the scene as a file instead, and open it with Open a scene.` : "This scene is too big for a link, so it can't be a QR code either. Save the scene as a file instead, and open it with Open a scene." }), // prettier-ignore
     );
-    const json = el("button", { type: "button", class: "primary", id: "sqr-json", text: "Save JSON" }); // prettier-ignore
+    const json = el("button", { type: "button", class: "primary", id: "sqr-json", text: "Save scene" }); // prettier-ignore
     json.addEventListener("click", () => {
       dialog.close();
       app.exportJSON();
