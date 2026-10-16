@@ -351,9 +351,7 @@ async function record(scene) {
       async ({ scene, base }) => {
         const { app } = window.__splashery;
         if (scene === "r2-text" || scene === "r2-chart")
-          await app.openMedia(
-            new URL(`work/pages-r2/fixtures/${scene.slice(3)}.png`, base).href,
-          );
+          await app.openMedia(new URL(`work/pages-r2/fixtures/${scene.slice(3)}.png`, base).href);
         else {
           // Original CC0 diagram, made by Ryan with Codex (GPT-6).
           const c = document.createElement("canvas");

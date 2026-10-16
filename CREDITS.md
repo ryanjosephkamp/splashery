@@ -568,8 +568,8 @@ The Picture lab (a labs toy) opens with two samples:
 Files and web addresses people open in the Picture lab are read in their browser and never uploaded.
 
 The sharp hybrid page faces, shared book and album rendering, and task 95 benchmark tools are made
-by Ryan with Codex (GPT-6), October 15, 2026. The code is MIT; the benchmark's original text and
-chart, diagram, and comparison recording contributions are CC0. The photo input reuses the credited
+by Ryan with Codex (GPT-6), October 15, 2026. The code is MIT. Original benchmark text, charts,
+diagrams, and comparison recording contributions are CC0. The photo input reuses the credited
 Picture frame sample. These pages retain splat paper and bindings beneath continuous picture
 surfaces.
 
