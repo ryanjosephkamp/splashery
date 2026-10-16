@@ -14,6 +14,39 @@
 import { PHOTOREAL_R2_TOYS } from "./packs/photoreal-r2.js";
 import { PHOTOREAL_R3_TOYS } from "./packs/photoreal-r3.js"; // lane Photoreal r3
 
+// Display order is separate from the category IDs stored in links and scenes.
+const CATEGORY_ORDER = [
+  "Studio",
+  "Pictures and pages",
+  "AI and computing",
+  "Science",
+  "Space",
+  "Math",
+  "Atoms",
+  "Photoreal",
+  "Lab",
+  "Shapes",
+  "Arcade",
+  "Toys",
+  "Balls",
+  "Imaging",
+  "Earth and maps",
+  "Music",
+  "Open me",
+  "Nature",
+  "Weather & fire",
+  "Food",
+  "Gems",
+  "Body",
+  "Tiny world",
+  "Clothing",
+  "Medieval",
+  "Animals",
+  "Holidays",
+  "Vehicles",
+  "Landmarks",
+];
+
 export const CATEGORIES = [
   { id: "scans", label: "Photoreal" },
   { id: "shapes", label: "Shapes" },
@@ -44,7 +77,7 @@ export const CATEGORIES = [
   { id: "music", label: "Music" },
   { id: "vehicles", label: "Vehicles" },
   { id: "landmarks", label: "Landmarks" },
-];
+].sort((a, b) => CATEGORY_ORDER.indexOf(a.label) - CATEGORY_ORDER.indexOf(b.label));
 
 export const TOYS = [
   {
