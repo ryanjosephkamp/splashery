@@ -49,6 +49,9 @@ uniform vec4 uColorFlags;
 uniform vec4 uColorLow;
 uniform vec4 uColorHigh;
 varying vec2 vUv;
+#ifdef PICK_PASS
+  #include "pickPS"
+#endif
 void main(void) {
   vec4 color = texture2D(uColor, vUv, -1.0);
   if (uColorFlags.x > 0.5) color = vec4(mix(uColorLow.xyz, uColorHigh.xyz, color.rrr), 1.0);
@@ -56,7 +59,14 @@ void main(void) {
     float d = texture2D(uMask, vUv).r;
     if (d < uKeep.x || d > uKeep.y) discard;
   }
-  gl_FragColor = color;
+  #ifdef PICK_PASS
+    pcFragColor0 = getPickOutput();
+    #ifdef DEPTH_PICK_PASS
+      pcFragColor1 = getPickDepth();
+    #endif
+  #else
+    gl_FragColor = color;
+  #endif
 }`;
 const VSW = (bend) => `
 attribute aPosition: vec3f;
@@ -110,6 +120,9 @@ uniform uColorFlags: vec4f;
 uniform uColorLow: vec4f;
 uniform uColorHigh: vec4f;
 varying vUv: vec2f;
+#ifdef PICK_PASS
+  #include "pickPS"
+#endif
 @fragment fn fragmentMain(input: FragmentInput) -> FragmentOutput {
   var output: FragmentOutput;
   var color = textureSampleBias(uColor,uColorSampler,input.vUv,-1.0);
@@ -118,7 +131,14 @@ varying vUv: vec2f;
     let d = textureSample(uMask,uMaskSampler,input.vUv).r;
     if (d < uniform.uKeep.x || d > uniform.uKeep.y) { discard; }
   }
-  output.color = color;
+  #ifdef PICK_PASS
+    output.color = getPickOutput();
+    #ifdef DEPTH_PICK_PASS
+      output.color1 = getPickDepth();
+    #endif
+  #else
+    output.color = color;
+  #endif
   return output;
 }`;
 
@@ -310,6 +330,7 @@ export class PictureSurface {
     this.material.setParameter("uMask", this.mask || stage.blankTexture());
     this.material.setParameter("uKeep", r?.keep ? [0.5, 1, 1, 0] : [0, 1, 0, 0]);
     this.instance = new pc.MeshInstance(this.mesh, this.material, slot.entity);
+    this.instance.pick = !data.warmup;
     this.instance.cull = false;
     this.layer = stage.app.scene.layers.getLayerByName("World");
     this.layer.addMeshInstances([this.instance]);
